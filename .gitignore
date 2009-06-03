@@ -1,0 +1,11 @@
+.DS_Store
+buildtools
+log
+public
+tmp
+.git2svn/
+*.swp
+*.swo
+sc-integrate
+frameworks/sproutcore
+TODO
