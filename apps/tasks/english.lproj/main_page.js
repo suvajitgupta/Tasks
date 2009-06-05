@@ -37,7 +37,7 @@ Tasks.mainPage = SC.Page.design({
       layout: { top: 42, bottom: 42, left: 0, right: 0 },
       backgroundColor: 'white',
 
-      contentView: SC.ListView.design({
+      contentView: SC.SourceListGroupView.design({
         contentBinding: 'Tasks.tasksController.arrangedObjects',
         selectionBinding: 'Tasks.tasksController.selection',
         contentCheckboxKey: "isDone",

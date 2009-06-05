@@ -26,18 +26,8 @@ Tasks.tasksController = SC.ArrayController.create(
     var listView = Tasks.getPath('mainPage.mainPane.middleView.contentView');
     listView.select(listView.length - 1); //FIXME: don't hard code the index    
 
-/*
-    // Now, we need to get the item view for the new task from the list view.
-    // Since the the task list has not yet had a chance to update with the new
-    // content, we do this the next runloop.
-
-    // Find the list view from the page.
-    var listView = Tasks.getPath('mainPage.mainPane.middleView.contentView');
-    var itemView = listView.itemViewForContent(task);
-
-    // Begin editing on the found itemView.
-    itemView.beginEditing();
-*/
+    //FIXME: Begin editing newly created item.
+    //itemView.beginEditing();
 	},
 	
 	delTask: function() {

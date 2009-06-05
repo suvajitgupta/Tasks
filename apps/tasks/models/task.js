@@ -20,13 +20,11 @@ Tasks.Task = SC.Record.extend(
   estimate: SC.Record.attr(String),
 
   task: function() {
-    var description = this.get('description');
-    var assignee = this.get('assignee');
-		var estimate = this.get('estimate');
+    var description = this.get('summary');
+		var effort = this.get('effort');
 		var ret = description;
-    if (assignee) ret += " [" + assignee + "]";
-    if (estimate) ret += " {" + estimate + "}";
+    if (effort) ret += " {" + effort + "}";
 	  return ret;
-  }.property('description', 'assignee').cacheable()
+  }.property('summary', 'effort').cacheable()
 
 }) ;
