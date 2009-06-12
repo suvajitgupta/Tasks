@@ -1,30 +1,55 @@
 // ==========================================================================
-// Project:   Tasks.Task
-// Copyright: ©2009 My Company, Inc.
+// Project:   Tasks
+// Copyright: ©2009 Eloqua
 // ==========================================================================
 /*globals Tasks */
 
 /** @class
 
-  A single task on the todo list
+  A single task 
 
-  @extends SC.Record
+  @extends Tasks.Record
   @version 0.1
 */
-Tasks.Task = SC.Record.extend(
+
+// Task types
+Tasks.Task.FEATURE = "Feature";
+Tasks.Task.BUG = "Bug";
+Tasks.Task.OTHER = "Other";
+
+// Task priorities
+Tasks.Task.HIGH = "High";
+Tasks.Task.MEDIUM = "Medium";
+Tasks.Task.LOW = "Low";
+
+
+Tasks.Task.PLANNED = "Planned";
+Tasks.Task.ACTIVE = "Active";
+Tasks.Task.DONE = "Done";
+Tasks.Task.AT_RISK = "AtRisk";
+
+Tasks.Task.NOT_TESTED = "NotTested";
+Tasks.Task.PASSED = "Passed";
+Tasks.Task.FAILED = "Failed";
+
+
+Tasks.Task = Tasks.Record.extend(
 /** @scope Tasks.Task.prototype */ {
 
-  isDone: SC.Record.attr(Boolean),
+  type: SC.Record.attr(String),
   description: SC.Record.attr(String),
+  effort: SC.Record.attr(Number),
+  priority: SC.Record.attr(String),
+  validation: SC.Record.attr(String),
+  submitter: SC.Record.attr(String),
   assignee: SC.Record.attr(String),
-  estimate: SC.Record.attr(String),
 
   task: function() {
-    var description = this.get('summary');
+    var name = this.get('name');
 		var effort = this.get('effort');
-		var ret = description;
+		var ret = name;
     if (effort) ret += " {" + effort + "}";
 	  return ret;
-  }.property('summary', 'effort').cacheable()
+  }.property('name', 'effort').cacheable()
 
 }) ;
