@@ -2,7 +2,7 @@
 // Project:   Tasks
 // Copyright: ©2009 Eloqua
 // ==========================================================================
-/*globals Tasks */
+/*globals Tasks sc_require */
 
 sc_require('models/record');
 

@@ -37,21 +37,15 @@ Tasks.mainPage = SC.Page.design({
       borderStyle: SC.BORDER_GRAY,
       backgroundColor: 'blue',
 
-      contentView: SC.ListView.design({
+      contentView: SC.SourceListView.design({
         contentValueKey: 'title',
         contentBinding: 'Tasks.tasksController.arrangedObjects',
-        
-        _contentChanged: function() {
-          var content = this.get('content');
-          console.log('');
-        }.observes('content')
-
-        //selectionBinding: 'Tasks.tasksController.selection',
-        //contentCheckboxKey: "isDone",
-        //contentValueEditable: true,
-        //canReorderContent: true,
-        //canDeleteContent: true,
-        //destroyOnRemoval: YES
+        selectionBinding: 'Tasks.tasksController.selection',
+        contentCheckboxKey: "isDone",
+        contentValueEditable: true,
+        canReorderContent: true,
+        canDeleteContent: true,
+        destroyOnRemoval: YES
       })
     }),
     
