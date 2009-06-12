@@ -10,7 +10,8 @@
 
   @extends SC.ArrayController
 */
-Tasks.tasksController = SC.ArrayController.create(
+//Tasks.tasksController = SC.ArrayController.create(
+Tasks.tasksController = SC.TreeController.create(
 /** @scope Tasks.tasksController.prototype */ {
 
 	addTask: function() {
