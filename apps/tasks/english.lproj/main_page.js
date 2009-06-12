@@ -29,23 +29,29 @@ Tasks.mainPage = SC.Page.design({
         
         valueBinding: "Tasks.tasksController.summary"
       })
-
     }),
     
     middleView: SC.ScrollView.design({
       hasHorizontalScroller: NO,
       layout: { top: 42, bottom: 42, left: 0, right: 0 },
-      backgroundColor: 'white',
+      borderStyle: SC.BORDER_GRAY,
+      backgroundColor: 'blue',
 
-      contentView: SC.SourceListGroupView.design({
+      contentView: SC.ListView.design({
+        contentValueKey: 'title',
         contentBinding: 'Tasks.tasksController.arrangedObjects',
-        selectionBinding: 'Tasks.tasksController.selection',
-        contentCheckboxKey: "isDone",
-        contentValueKey: "task",
-        contentValueEditable: true,
-        canReorderContent: true,
-        canDeleteContent: true,
-				destroyOnRemoval: YES
+        
+        _contentChanged: function() {
+          var content = this.get('content');
+          console.log('');
+        }.observes('content')
+
+        //selectionBinding: 'Tasks.tasksController.selection',
+        //contentCheckboxKey: "isDone",
+        //contentValueEditable: true,
+        //canReorderContent: true,
+        //canDeleteContent: true,
+        //destroyOnRemoval: YES
       })
     }),
     

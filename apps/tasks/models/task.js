@@ -4,6 +4,8 @@
 // ==========================================================================
 /*globals Tasks */
 
+sc_require('models/record');
+
 /** @class
 
   A single task 
@@ -11,27 +13,6 @@
   @extends Tasks.Record
   @version 0.1
 */
-
-// Task types
-Tasks.Task.FEATURE = "Feature";
-Tasks.Task.BUG = "Bug";
-Tasks.Task.OTHER = "Other";
-
-// Task priorities
-Tasks.Task.HIGH = "High";
-Tasks.Task.MEDIUM = "Medium";
-Tasks.Task.LOW = "Low";
-
-
-Tasks.Task.PLANNED = "Planned";
-Tasks.Task.ACTIVE = "Active";
-Tasks.Task.DONE = "Done";
-Tasks.Task.AT_RISK = "AtRisk";
-
-Tasks.Task.NOT_TESTED = "NotTested";
-Tasks.Task.PASSED = "Passed";
-Tasks.Task.FAILED = "Failed";
-
 
 Tasks.Task = Tasks.Record.extend(
 /** @scope Tasks.Task.prototype */ {
@@ -52,4 +33,27 @@ Tasks.Task = Tasks.Record.extend(
 	  return ret;
   }.property('name', 'effort').cacheable()
 
-}) ;
+});
+
+Tasks.Task.mixin({
+  
+  // Task types
+  FEATURE: "Feature",
+  BUG: "Bug",
+  OTHER: "Other",
+
+  // Task priorities
+  HIGH: "High",
+  MEDIUM: "Medium",
+  LOW: "Low",
+
+  PLANNED: "Planned",
+  ACTIVE: "Active",
+  DONE: "Done",
+  AT_RISK: "AtRisk",
+
+  NOT_TESTED: "NotTested",
+  PASSED: "Passed",
+  FAILED: "Failed"
+  
+});
