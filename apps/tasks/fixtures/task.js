@@ -2,9 +2,9 @@
 // Project:   Tasks.Task Fixtures
 // Copyright: ©2009 My Company, Inc.
 // ==========================================================================
-/*globals Tasks */
+/*globals Tasks sc_require */
 
-require('models/task');
+sc_require('models/task');
 
 Tasks.Task.FIXTURES = [
 
@@ -122,3 +122,5 @@ Tasks.Task.FIXTURES = [
 	submitter: "Manager1" }
 
 ];
+
+alert('Hi');
