@@ -17,14 +17,18 @@ sc_require('models/record');
 Tasks.User = Tasks.Record.extend(
 /** @scope Tasks.User.prototype */ {
 
-  loginName: SC.Record.attr(String),
-  role: SC.Record.attr(String), // valid values below
+  name: SC.Record.attr(String, { isRequired: YES, defaultValue: Tasks.User.NEW_USER }),
+  loginName: SC.Record.attr(String, { isRequired: YES, defaultValue: Tasks.User.NEW_LOGIN }),
+  role: SC.Record.attr(String, { isRequired: YES, defaultValue: Tasks.User.DEVELOPER }), 
   preferences: SC.Record.attr(Object), // key:value pairs
   authToken: SC.Record.attr(String)
 
 });
 
-// TODO: use these for enums or a mixin?
+Tasks.User.NEW_USER = "First Last";
+Tasks.User.NEW_LOGIN = "first.last";
+
+// roles:
 Tasks.User.MANAGER = "Manager";
-Tasks.User.DEVELOPER = "Developer";
+Tasks.User.DEVELOPER = "Developer"; // default
 Tasks.User.TESTER = "Tester";

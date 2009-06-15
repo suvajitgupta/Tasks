@@ -17,15 +17,15 @@ sc_require('models/record');
 Tasks.Task = Tasks.Record.extend(
 /** @scope Tasks.Task.prototype */ {
 
-  type: SC.Record.attr(String),
+  name: SC.Record.attr(String, { isRequired: YES, defaultValue: Tasks.Task.NEW_TASK }),
+  type: SC.Record.attr(String, { isRequired: YES, defaultValue: Tasks.Task.FEATURE }),
   description: SC.Record.attr(String),
-  priority: SC.Record.attr(String),
-  status: SC.Record.attr(String),
-  validation: SC.Record.attr(String),
+  priority: SC.Record.attr(String, { isRequired: YES, defaultValue: Tasks.Task.MEDIUM }),
+  status: SC.Record.attr(String, { isRequired: YES, defaultValue: Tasks.Task.PLANNED }),
+  validation: SC.Record.attr(String, { isRequired: YES, defaultValue: Tasks.Task.NOT_TESTED }),
   effort: SC.Record.attr(Number),
   submitter: SC.Record.attr(String),
   assignee: SC.Record.attr(String),
-	// TODO: how to set default values?
 
   task: function() {
     var name = this.get('name');
@@ -38,24 +38,26 @@ Tasks.Task = Tasks.Record.extend(
 });
 
 Tasks.Task.mixin({ // valid values & defaults
+	
+	NEW_TASK: "New Task",
   
-  // types
+  // types:
   FEATURE: "Feature", // default
   BUG: "Bug",
   OTHER: "Other",
 
-  // priorities
+  // priorities:
   HIGH: "High",
   MEDIUM: "Medium", // default
   LOW: "Low",
 
-  // development status
+  // development status:
 	PLANNED: "Planned", // default
   ACTIVE: "Active",
   DONE: "Done",
   AT_RISK: "AtRisk",
 
-  // validation status
+  // validation status:
   NOT_TESTED: "NotTested", // default
   PASSED: "Passed",
   FAILED: "Failed"
