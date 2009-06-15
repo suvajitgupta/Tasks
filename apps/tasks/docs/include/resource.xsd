@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:annotation>
+        <xsd:documentation xml:lang="en">
+            Eloqua Project Orion API Resource
+        </xsd:documentation>
+    </xsd:annotation>    
+
+    <!-- Common elements -->
+    <xsd:element name="description">
+        <xsd:complexType>
+            <xsd:simpleContent>
+                <xsd:extension base="xsd:string">
+                    <xsd:attribute name="type">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value="short"/>
+                                <xsd:enumeration value="long"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:attribute>
+                </xsd:extension>
+            </xsd:simpleContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="tool">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="rule" minOccurs="0" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:attribute name="type">
+                            <xsd:simpleType>
+                                <xsd:restriction base="xsd:string">
+                                    <xsd:enumeration value="built-in"/>
+                                    <xsd:enumeration value="custom"/>
+                                </xsd:restriction>
+                            </xsd:simpleType>
+                        </xsd:attribute>
+                        <xsd:attribute name="id" type="xsd:string"/>
+                        <xsd:attribute name="name" type="xsd:string"/>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+            <xsd:attribute name="name" type="xsd:string" use="required"/>
+            <xsd:attribute name="type" type="xsd:string"/>
+            <xsd:attribute name="url" type="xsd:anyURI"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <!-- Standard element -->
+    <xsd:element name="standard">
+        <xsd:complexType>
+            <xsd:sequence>
+
+                <!-- Risk exposure -->
+                <xsd:element name="exposure" minOccurs="0" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:attribute name="name" type="xsd:string"
+                            use="required"/>
+                    </xsd:complexType>
+                </xsd:element>
+
+                <!-- Description (short and long) -->
+                <xsd:element ref="description" minOccurs="0" maxOccurs="2"/>
+
+                <!-- Code samples -->
+                <xsd:element name="sample" minOccurs="0" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element ref="description" minOccurs="1"
+                                maxOccurs="1"/>
+                            <xsd:element name="snippet" minOccurs="1"
+                                maxOccurs="1"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+
+                <!-- Run-time behavioral patterns -->
+                <xsd:element name="patterns" type="xsd:string" minOccurs="0"
+                    maxOccurs="1"/>
+
+                <!-- Testing enforcement -->
+                <xsd:element name="enforcement" minOccurs="0" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element ref="description" minOccurs="0"
+                                maxOccurs="1"/>
+                            <xsd:element name="automated" minOccurs="0"
+                                maxOccurs="1">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element ref="tool" minOccurs="1"
+                                            maxOccurs="unbounded"/>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element name="manual" minOccurs="0"
+                                maxOccurs="1">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element ref="tool" minOccurs="1"
+                                            maxOccurs="unbounded"/>
+                                    </xsd:sequence>
+                                </xsd:complexType> 
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+
+                <!-- Sample requirements -->
+                <xsd:element name="requirement" type="xsd:string" minOccurs="0"
+                    maxOccurs="unbounded"/>
+
+                <!-- Approved technologies -->
+                <xsd:element name="tech" minOccurs="0" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:attribute name="name" type="xsd:string"
+                            use="required"/>
+                        <xsd:attribute name="url" type="xsd:anyURI"/>
+                    </xsd:complexType>
+                </xsd:element>
+
+                <!-- References -->
+                <xsd:element name="references" minOccurs="0" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="related" minOccurs="0"
+                                maxOccurs="unbounded">
+                                <xsd:complexType>
+                                    <xsd:attribute name="id" use="required"
+                                        type="xsd:string"/>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element name="external" minOccurs="0"
+                                maxOccurs="unbounded">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element ref="description"
+                                            minOccurs="0" maxOccurs="1"/>
+                                    </xsd:sequence>
+                                    <xsd:attribute name="url" use="required"
+                                        type="xsd:anyURI"/>
+                                </xsd:complexType>
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+
+            </xsd:sequence>
+            <xsd:attribute name="title" type="xsd:string" use="required"/>
+            <xsd:attribute name="id" type="xsd:string" use="required"/>
+            <xsd:attribute name="category" type="xsd:string" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

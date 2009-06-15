@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:annotation>
+        <xsd:documentation xml:lang="en">
+            Eloqua Project Orion API Index
+        </xsd:documentation>
+    </xsd:annotation>    
+
+    <!-- index element -->
+    <xsd:element name="index">
+        <xsd:complexType>
+            <xsd:sequence>
+
+                <!-- resource element -->
+                <xsd:element name="resource" minOccurs="0"
+                  maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:attribute name="name" type="xsd:string"
+                            use="required"/>
+                        <xsd:attribute name="file" type="xsd:string"
+                            use="required"/>
+                    </xsd:complexType>
+                </xsd:element>
+
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

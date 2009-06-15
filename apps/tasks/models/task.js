@@ -37,21 +37,23 @@ Tasks.Task = Tasks.Record.extend(
 
 Tasks.Task.mixin({
   
-  // Task types
+  // types
   FEATURE: "Feature",
   BUG: "Bug",
   OTHER: "Other",
 
-  // Task priorities
+  // priorities
   HIGH: "High",
   MEDIUM: "Medium",
   LOW: "Low",
 
-  PLANNED: "Planned",
+  // development status
+	PLANNED: "Planned",
   ACTIVE: "Active",
   DONE: "Done",
   AT_RISK: "AtRisk",
 
+  // validation status
   NOT_TESTED: "NotTested",
   PASSED: "Passed",
   FAILED: "Failed"

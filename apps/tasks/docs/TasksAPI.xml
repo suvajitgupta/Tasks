@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="include/resource.xsl"?>
+
+<resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="include/resource.xsd"
+    name="Tasks">
+
+    <description>
+	Tasks Application: REST API Definitions,
+	Need full CRUD on each resource (task | project | user)
+    </description>
+
+    <endpoint method="GET" uri="/API/REST/Service.svc/resource">
+        Retrieve all entities.
+    </endpoint>
+    <endpoint method="GET" uri="/API/REST/Service.svc/resource/{id}">
+        Retrieve a specific resource.
+    </endpoint>
+    <endpoint method="POST" uri="/API/REST/Service.svc/resource">
+        Create a new resource.
+    </endpoint>
+    <endpoint method="PUT" uri="/API/REST/Service.svc/resource/{id}">
+        Update an existing resource.
+    </endpoint>
+    <endpoint method="DELETE" uri="/API/REST/Service.svc/resource/{id}">
+        Delete an existing resource.
+    </endpoint>
+
+    <element name="id" type="non-negative integer" required="yes">
+        The ID of the resource object in the database.
+    </element>
+
+    <parameter name="format" type="string" required="no" default="json">
+        The format of the response object.
+        <valid>json</valid>
+        <valid>xml</valid>
+    </parameter>
+
+    <header name="Eloqua-Method" type="string" required="yes">
+        The actual method to perform on the resource object when issuing a POST
+        request. This is a temporary hack that will go away once PUT/DELETE is
+        working on IIS.
+        <valid>POST</valid>
+        <valid>UPDATE</valid>
+        <valid>DELETE</valid>
+        <method>POST</method>
+    </header>
+
+    <header name="Content-Type" type="string" required="yes">
+        The format of the resource object that a client sends to the
+        server in the body of a PUT or POST request.
+        <valid>application/json</valid>
+        <method>POST</method>
+        <method>PUT</method>
+    </header>
+
+    <attribute name="id" type="string">
+        The ID of the resource object in the database.
+    </attribute>
+
+    <code number="200">
+        Successful operation.
+        <method>GET</method>
+        <method>PUT</method>
+    </code>
+    <code number="201">
+        resource created successfully.
+        <method>POST</method>
+    </code>
+    <code number="204">
+        resource deleted successfully.
+        <method>DELETE</method>
+    </code>
+    <code number="400">
+        Bad request to resource resource.
+        <method>all</method>
+    </code>
+    <code number="403">
+        Unauthorized request to resource resource.
+        <method>all</method>
+    </code>
+    <code number="404">
+        Specified resource not found.
+        <method>GET</method>
+        <method>PUT</method>
+        <method>DELETE</method>
+    </code>
+    <code number="500">
+        Unknown internal error.
+        <method>all</method>
+    </code>
+</resource>
+

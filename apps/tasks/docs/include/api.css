@@ -1,0 +1,141 @@
+body {
+    font-size: 12px;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    color: #393733
+}
+
+table.header {
+    border-style: hidden;
+    width: 100%;
+}
+
+table.subHeader {
+    border-style: hidden;
+    padding: 0px 0px 0px 0px;
+}
+
+table.nav {
+    border: 1px solid #393733;
+    background-color: #a80321;
+    font-size: 12px;
+    color: white;
+    width: 100%;
+}
+
+td.header {
+    vertical-align: top;
+}
+
+td.subHeader {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: left;
+    vertical-align: middle;
+}
+
+td.subSubHeader {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: left;
+    vertical-align: middle;
+}
+
+td.collapse {
+    font-family: monospace;
+    font-size: 10px;
+    text-align: left;
+    vertical-align: middle;
+    padding: 0px 0px 0px 2px;
+}
+
+td.logo {
+    vertical-align: top;
+    text-align: right;
+    padding: 0px 6px 0px 0px;
+}
+
+div.pageLinks {
+    margin-left: 24px;
+    margin-right: 24px;
+    text-align: center;
+}
+
+div.para {
+    font-size: 12px;
+    margin-left: 24px;
+    margin-right: 24px;
+}
+
+div.list {
+    margin-right: 24px;
+}
+
+div.indent {
+    margin-left: 24px;
+}
+
+span.indent {
+    margin-left: 24px;
+}
+
+span.code {
+    font-family: monospace;
+}
+
+h1 {
+    font-size: 20px;
+}
+
+h3 {
+    font-size: 12px;
+}
+
+hr {
+    color: black;
+    height: 1px;
+}
+
+li.sub {
+    font-size: 11px;
+}
+
+pre {
+    background: #faf9f3;
+    border: 1px solid #e9e2c5;
+    padding: 0.5em;
+    overflow: auto;
+    width: auto;
+}
+
+a.collapse:link {
+    font-family: monospace;
+    font-size: 12px;
+    color: #393733;
+    text-decoration: none;
+}
+
+a.collapse:visited {
+    font-family: monospace;
+    font-size: 12px;
+    color: #393733;
+    text-decoration: none;
+}
+
+a.collapse:active {
+    font-family: monospace;
+    font-size: 12px;
+    color: #393733;
+    text-decoration: none;
+}
+
+a.nav:link {
+    color: white;
+}
+
+a.nav:visited {
+    color: white;
+}
+
+a.nav:active {
+    color: white;
+}
