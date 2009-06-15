@@ -19,11 +19,13 @@ Tasks.Task = Tasks.Record.extend(
 
   type: SC.Record.attr(String),
   description: SC.Record.attr(String),
-  effort: SC.Record.attr(Number),
   priority: SC.Record.attr(String),
+  status: SC.Record.attr(String),
   validation: SC.Record.attr(String),
+  effort: SC.Record.attr(Number),
   submitter: SC.Record.attr(String),
   assignee: SC.Record.attr(String),
+	// TODO: how to set default values?
 
   task: function() {
     var name = this.get('name');
@@ -35,26 +37,26 @@ Tasks.Task = Tasks.Record.extend(
 
 });
 
-Tasks.Task.mixin({
+Tasks.Task.mixin({ // valid values & defaults
   
   // types
-  FEATURE: "Feature",
+  FEATURE: "Feature", // default
   BUG: "Bug",
   OTHER: "Other",
 
   // priorities
   HIGH: "High",
-  MEDIUM: "Medium",
+  MEDIUM: "Medium", // default
   LOW: "Low",
 
   // development status
-	PLANNED: "Planned",
+	PLANNED: "Planned", // default
   ACTIVE: "Active",
   DONE: "Done",
   AT_RISK: "AtRisk",
 
   // validation status
-  NOT_TESTED: "NotTested",
+  NOT_TESTED: "NotTested", // default
   PASSED: "Passed",
   FAILED: "Failed"
   
