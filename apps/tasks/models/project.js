@@ -8,19 +8,19 @@ sc_require('models/record');
 
 /** @class
 
-  A Project with Tasks 
+  A Tasks project 
 
   @extends Tasks.Record
   @version 0.1
 */
 
+Tasks.NEW_PROJECT_NAME = "New Project";
+
 Tasks.Project = Tasks.Record.extend(
 /** @scope Tasks.Project.prototype */ {
 
-  name: SC.Record.attr(String, { isRequired: YES, defaultValue: Tasks.Project.NEW_PROJECT }),
+  name: SC.Record.attr(String, { isRequired: YES, defaultValue: Tasks.NEW_PROJECT_NAME }),
   timeLeft: SC.Record.attr(Number), // the amount of time left before Project completion, used for load balancing
   tasks: SC.Record.attr(Array) // an array of Task ids in the Project
 
 });
-
-Tasks.Project.NEW_PROJECT = "New Project";

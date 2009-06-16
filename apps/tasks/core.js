@@ -47,4 +47,4 @@ Tasks = SC.Object.create(
     
   })
 
-}) ;
+});

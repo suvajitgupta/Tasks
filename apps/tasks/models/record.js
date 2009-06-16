@@ -6,7 +6,7 @@
 
 /** @class
 
-  A base record for Tasks
+  A Tasks base record
 
   @extends SC.Record
   @version 0.1
