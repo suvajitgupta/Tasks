@@ -23,8 +23,8 @@ Tasks = SC.Object.create(
   // to any fixtures you define.
   store: SC.Store.create().from(SC.Record.fixtures),
   
-  // TODO: Add global constants or singleton objects needed by your app here.
-
+	consts: {},
+	
   Content: SC.Object.extend({
     
     treeItemIsExpanded: YES,
@@ -49,5 +49,3 @@ Tasks = SC.Object.create(
   })
 
 });
-
-Tasks.consts = {};

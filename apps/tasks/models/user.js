@@ -15,13 +15,13 @@ sc_require('models/record');
 	@author Suvajit Gupta
 */
 
-Tasks.consts.NEW_USER_NAME = "First Last";
-Tasks.consts.NEW_USER_LOGIN = "first.last";
+Tasks.consts.NEW_USER_NAME = '_FirstLast'.loc();
+Tasks.consts.NEW_USER_LOGIN = '_first.last'.loc();
 
 // roles:
-Tasks.consts.USER_ROLE_MANAGER = "Manager";
-Tasks.consts.USER_ROLE_DEVELOPER = "Developer"; // default
-Tasks.consts.USER_ROLE_TESTER = "Tester";
+Tasks.consts.USER_ROLE_MANAGER = '_Manager'.loc();
+Tasks.consts.USER_ROLE_DEVELOPER = '_Developer'.loc(); // default
+Tasks.consts.USER_ROLE_TESTER = '_Tester'.loc();
 
 Tasks.User = Tasks.Record.extend(
 /** @scope Tasks.User.prototype */ {
