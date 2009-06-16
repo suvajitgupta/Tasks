@@ -6,9 +6,10 @@
 
 /** @namespace
 
-  My cool new app.  Describe your application.
+  "Tasks" - an agile project management tool
   
   @extends SC.Object
+	@author Suvajit Gupta
 */
 Tasks = SC.Object.create(
   /** @scope Tasks.prototype */ {

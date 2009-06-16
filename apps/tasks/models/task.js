@@ -12,6 +12,7 @@ sc_require('models/record');
 
   @extends Tasks.Record
   @version 0.1
+	@author Suvajit Gupta
 */
 
 Tasks.NEW_TASK_NAME = "New Task";

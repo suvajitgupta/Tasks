@@ -6,9 +6,8 @@
 
 /** @class
 
-  (Document Your Controller Here)
-
-  @extends SC.ArrayController
+  @extends SC.TreeController
+	@author Suvajit Gupta
 */
 Tasks.tasksController = SC.TreeController.create(
 /** @scope Tasks.tasksController.prototype */ {

@@ -4,6 +4,12 @@
 // ==========================================================================
 /*globals Tasks sc_require */
 
+/** @class
+
+  @version 0.1
+	@author Suvajit Gupta
+*/
+
 sc_require('models/task');
 
 Tasks.Task.FIXTURES = [

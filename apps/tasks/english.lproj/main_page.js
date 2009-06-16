@@ -4,7 +4,14 @@
 // ==========================================================================
 /*globals Tasks */
 
-// This page describes the main user interface for your application.  
+/** @namespace
+
+	This page describes the main user interface for the Tasks application.
+	
+  @extends SC.Object
+	@author Suvajit Gupta
+*/
+
 Tasks.mainPage = SC.Page.design({
 
   mainPane: SC.MainPane.design({
