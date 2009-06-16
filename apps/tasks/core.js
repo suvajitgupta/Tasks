@@ -49,3 +49,5 @@ Tasks = SC.Object.create(
   })
 
 });
+
+Tasks.consts = {};
