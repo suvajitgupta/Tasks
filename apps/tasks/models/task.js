@@ -15,28 +15,28 @@ sc_require('models/record');
 	@author Suvajit Gupta
 */
 
-Tasks.consts.NEW_TASK_NAME = '_NewTask'.loc();
+Tasks.consts.NEW_TASK_NAME = "_NewTask".loc();
 
 // types:
-Tasks.consts.TASK_TYPE_FEATURE = '_Feature'.loc(); // default
-Tasks.consts.TASK_TYPE_BUG = '_Bug'.loc();
-Tasks.consts.TASK_TYPE_OTHER = '_Other'.loc();
+Tasks.consts.TASK_TYPE_FEATURE = "_Feature".loc(); // default
+Tasks.consts.TASK_TYPE_BUG = "_Bug".loc();
+Tasks.consts.TASK_TYPE_OTHER = "_Other".loc();
 
 // priorities:
-Tasks.consts.TASK_PRIORITY_HIGH = '_High'.loc();
-Tasks.consts.TASK_PRIORITY_MEDIUM = '_Medium'.loc(); // default
-Tasks.consts.TASK_PRIORITY_LOW = '_Low'.loc();
+Tasks.consts.TASK_PRIORITY_HIGH = "_High".loc();
+Tasks.consts.TASK_PRIORITY_MEDIUM = "_Medium".loc(); // default
+Tasks.consts.TASK_PRIORITY_LOW = "_Low".loc();
 
 // development status:
-Tasks.consts.TASK_STATUS_PLANNED = '_Planned'.loc(); // default
-Tasks.consts.TASK_STATUS_TASK_STATUS_ACTIVE = '_Active'.loc();
-Tasks.consts.TASK_STATUS_DONE = '_Done'.loc();
-Tasks.consts.TASK_STATUS_AT_RISK = '_AtRisk'.loc();
+Tasks.consts.TASK_STATUS_PLANNED = "_Planned".loc(); // default
+Tasks.consts.TASK_STATUS_TASK_STATUS_ACTIVE = "_Active".loc();
+Tasks.consts.TASK_STATUS_DONE = "_Done".loc();
+Tasks.consts.TASK_STATUS_AT_RISK = "_AtRisk".loc();
 
 // validation status:
-Tasks.consts.TASK_VALIDATION_NOT_TESTED = '_NotTested'.loc(); // default
-Tasks.consts.TASK_VALIDATION_PASSED = '_Passed'.loc();
-Tasks.consts.TASK_VALIDATION_FAILED = '_Failed'.loc();
+Tasks.consts.TASK_VALIDATION_NOT_TESTED = "_NotTested".loc(); // default
+Tasks.consts.TASK_VALIDATION_PASSED = "_Passed".loc();
+Tasks.consts.TASK_VALIDATION_FAILED = "_Failed".loc();
 
 Tasks.Task = Tasks.Record.extend(
 /** @scope Tasks.Task.prototype */ {
