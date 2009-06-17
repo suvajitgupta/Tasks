@@ -16,7 +16,7 @@ sc_require('models/record');
 	@author Joshua Holt
 */
 
-Tasks.consts.NEW_PROJECT_NAME = '_NewProject'.loc();
+Tasks.consts.NEW_PROJECT_NAME = "_NewProject".loc();
 
 Tasks.Project = Tasks.Record.extend(
 /** @scope Tasks.Project.prototype */ {
