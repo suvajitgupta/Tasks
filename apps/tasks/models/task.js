@@ -50,7 +50,7 @@ Tasks.Task = Tasks.Record.extend(
   effort: SC.Record.attr(String),
   submitter: SC.Record.attr(Number),
   assignee: SC.Record.attr(Number),
-  //projectID : SC.Record.attr(Number),
+  projectID : SC.Record.attr(Number),
 
   task: function() {
     var name = this.get('name');
