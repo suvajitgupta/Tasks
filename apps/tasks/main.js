@@ -23,7 +23,9 @@ Tasks.main = function main() {
   // This will make your app come alive!
   var tasks = Tasks.store.findAll(Tasks.Task);
   //Tasks.tasksController.set('content', tasks);
-  Tasks.tasksController.set('content', Tasks.Content.create());
+  //Tasks.tasksController.set('content', Tasks.Content.create());
+  var projects = Tasks.store.findAll(Tasks.Project);
+  Tasks.projectsController.set('content',projects);
 } ;
 
 function main() { Tasks.main(); }

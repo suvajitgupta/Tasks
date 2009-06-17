@@ -47,9 +47,10 @@ Tasks.Task = Tasks.Record.extend(
   priority: SC.Record.attr(String, { isRequired: YES, defaultValue: Tasks.consts.TASK_PRIORITY_MEDIUM }),
   status: SC.Record.attr(String, { isRequired: YES, defaultValue: Tasks.consts.TASK_STATUS_PLANNED }),
   validation: SC.Record.attr(String, { isRequired: YES, defaultValue: Tasks.consts.TASK_VALIDATION_NOT_TESTED }),
-  effort: SC.Record.attr(Number),
-  submitter: SC.Record.attr(String),
-  assignee: SC.Record.attr(String),
+  effort: SC.Record.attr(String),
+  submitter: SC.Record.attr(Number),
+  assignee: SC.Record.attr(Number),
+  //projectID : SC.Record.attr(Number),
 
   task: function() {
     var name = this.get('name');

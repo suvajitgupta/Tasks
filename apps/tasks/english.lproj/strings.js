@@ -39,4 +39,4 @@ SC.stringsFor('English', {
 	'_Tester': "Tester"
 	
 
-});
+}) ,

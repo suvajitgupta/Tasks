@@ -38,21 +38,46 @@ Tasks.mainPage = SC.Page.design({
       })
     }),
     
-    middleView: SC.ScrollView.design({
-      hasHorizontalScroller: NO,
+    middleView: SC.SplitView.design({
       layout: { top: 42, bottom: 42, left: 0, right: 0 },
-      borderStyle: SC.BORDER_GRAY,
-      backgroundColor: 'blue',
+      defaultThickness: 225,
+      topLeftMaxThickness: 250,
+      topLeftMinThickness: 200,
+      
+      topLeftView: SC.ScrollView.design({
+        hasHorizontalScroller: NO,
+        borderStyle: SC.BORDER_GRAY,
+        backgroundColor: 'blue',
 
-      contentView: SC.SourceListView.design({
-        contentValueKey: 'title',
-        contentBinding: 'Tasks.tasksController.arrangedObjects',
-        selectionBinding: 'Tasks.tasksController.selection',
-        contentCheckboxKey: "isDone",
-        contentValueEditable: true,
-        canReorderContent: true,
-        canDeleteContent: true,
-        destroyOnRemoval: YES
+        contentView: SC.SourceListView.design({
+          contentValueKey: 'title',
+          contentBinding: 'Tasks.projectsTreeController.arrangedObjects',
+          selectionBinding: 'Tasks.projectsTreeController.selection',
+          //contentCheckboxKey: "isDone",
+          hasContentIcon: YES,
+          contentIconKey:  "projectIcon",
+          contentValueEditable: true,
+          canReorderContent: true,
+          canDeleteContent: true,
+          destroyOnRemoval: YES
+        })
+      }),
+      
+      bottomRightView: SC.ScrollView.design({
+        hasHorizontalScroller: NO,
+        borderStyle: SC.BORDER_GRAY,
+        backgroundColor: 'blue',
+
+        contentView: SC.SourceListView.design({
+          contentValueKey: 'name',
+          contentBinding: 'Tasks.tasksController.arrangedObjects',
+          selectionBinding: 'Tasks.tasksController.selection',
+          contentCheckboxKey: "isDone",
+          contentValueEditable: true,
+          canReorderContent: true,
+          canDeleteContent: true,
+          destroyOnRemoval: YES
+        })
       })
     }),
     

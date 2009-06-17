@@ -12,7 +12,7 @@
 
 sc_require('models/task');
 
-Tasks.consts.FIXTURES = [
+Tasks.Task.FIXTURES = [
 
 	{ id: 1,
 	name: "Summary for task one",
@@ -21,7 +21,9 @@ Tasks.consts.FIXTURES = [
 	status: Tasks.consts.TASK_STATUS_DONE,
 	effort: "1",
 	submitter: 1,
-	assignee: 2 },
+	assignee: 2,
+	projectID: 1
+	},
 
 	{ id: 2,
 	name: "Summary for task two",
@@ -30,7 +32,8 @@ Tasks.consts.FIXTURES = [
 	status: Tasks.consts.TASK_STATUS_ACTIVE,
 	effort: "0.25",
 	submitter: 1,
-	assignee: 2 },
+	assignee: 2,
+	projectID: 1 },
 
 	{ id: 3,
 	name: "Summary for task three",
@@ -38,7 +41,8 @@ Tasks.consts.FIXTURES = [
 	priority: Tasks.consts.TASK_PRIORITY_HIGH,
 	status: Tasks.consts.TASK_STATUS_AT_RISK,
 	submitter: 1,
-	assignee: 2 },
+	assignee: 2,
+	projectID: 1 },
 
 	{ id: 4,
 	name: "Summary for task four",
@@ -47,7 +51,8 @@ Tasks.consts.FIXTURES = [
 	status: Tasks.consts.TASK_STATUS_ACTIVE,
 	effort: "3-5",
 	submitter: 4,
-	assignee: 3 },
+	assignee: 3,
+	projectID: 2 },
 
 	{ id: 5,
 	name: "Summary for task five",
@@ -56,7 +61,8 @@ Tasks.consts.FIXTURES = [
 	status: Tasks.consts.TASK_STATUS_PLANNED,
 	effort: "5",
 	submitter: 4,
-	assignee: 3 },
+	assignee: 3,
+	projectID: 2 },
 
 	{ id: 6,
 	name: "Summary for task six",
@@ -65,7 +71,8 @@ Tasks.consts.FIXTURES = [
 	status: Tasks.consts.TASK_STATUS_PLANNED,
 	effort: "1-2",
 	submitter: 4,
-	assignee: 3 },
+	assignee: 3,
+	projectID: 2 },
 
 	{ id: 7,
 	name: "Summary for task seven",
@@ -74,7 +81,8 @@ Tasks.consts.FIXTURES = [
 	status: Tasks.consts.TASK_STATUS_PLANNED,
 	effort: "2",
 	submitter: 2,
-	assignee: 3 },
+	assignee: 3,
+	projectID: 3 },
 
 	{ id: 8,
 	name: "Summary for task eight",
@@ -83,7 +91,8 @@ Tasks.consts.FIXTURES = [
 	status: Tasks.consts.TASK_STATUS_PLANNED,
 	effort: "5",
 	submitter: 2,
-	assignee: 3 },
+	assignee: 3,
+	projectID: 3 },
 
 	{ id: 9,
 	name: "Summary for task nine",
@@ -91,7 +100,8 @@ Tasks.consts.FIXTURES = [
 	priority: Tasks.consts.TASK_PRIORITY_HIGH,
 	status: Tasks.consts.TASK_STATUS_PLANNED,
 	submitter: 1,
-	assignee: 3 },
+	assignee: 3,
+	projectID: 3 },
 
 	{ id: 10,
 	name: "Summary for task ten",
@@ -100,7 +110,8 @@ Tasks.consts.FIXTURES = [
 	status: Tasks.consts.TASK_VALIDATION_PASSED,
 	effort: "1",
 	submitter: 4,
-	assignee: 2 },
+	assignee: 2,
+	projectID: 4 },
 
 	{ id: 11,
 	name: "Summary for task eleven",
@@ -109,7 +120,8 @@ Tasks.consts.FIXTURES = [
 	status: Tasks.consts.TASK_PRIORITY_MEDIUM,
 	effort: "0.5",
 	submitter: 1,
-	assignee: 2 },
+	assignee: 2,
+	projectID: 4 },
 
 	{ id: 12,
 	name: "Summary for task twelve",
@@ -118,27 +130,34 @@ Tasks.consts.FIXTURES = [
 	status: Tasks.consts.TASK_STATUS_AT_RISK,
 	effort: "10",
 	submitter: 1,
-	assignee: 2 },
+	assignee: 2,
+	projectID: 4 },
 
 	{ id: 13,
 	name: "Summary for task thirteen",
 	priority: Tasks.consts.TASK_PRIORITY_LOW,
 	status: Tasks.consts.TASK_STATUS_PLANNED,
 	effort: "1",
-	submitter: 3 },
+	submitter: 3,
+	assignee: 2,
+	projectID: 4 },
 
 	{ id: 14,
 	name: "Summary for task fourteen",
 	description: "A long paragraph describing what this task is about and capturing any release notes that need to be conveyed to Testers",
 	priority: Tasks.consts.TASK_PRIORITY_MEDIUM,
 	status: Tasks.consts.TASK_STATUS_ACTIVE,
-	submitter: 1 },
+	submitter: 1,
+	assignee: 2,
+	projectID: 4 },
 
 	{ id: 15,
 	name: "Summary for task fifteen",
 	description: "A long paragraph describing what this task is about and capturing any release notes that need to be conveyed to Testers",
 	priority: Tasks.consts.TASK_PRIORITY_MEDIUM,
 	status: Tasks.consts.TASK_STATUS_PLANNED,
-	submitter: 1 }
+	submitter: 1,
+	assignee: 2,
+	projectID: 4 }
 
 ];

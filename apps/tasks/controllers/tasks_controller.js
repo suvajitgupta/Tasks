@@ -12,7 +12,8 @@
 Tasks.tasksController = SC.TreeController.create(
 /** @scope Tasks.tasksController.prototype */ {
 
-  content: null,
+  //content: null,
+  contentBinding: 'Tasks.assignmentsController.nodes',
   treeItemIsGrouped: YES,
 
 	addTask: function() {
