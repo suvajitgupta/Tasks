@@ -9,7 +9,7 @@
   "Tasks" - an agile project management tool
   
   @extends SC.Object
-	@author Suvajit Gupta
+  @author Suvajit Gupta
 */
 Tasks = SC.Object.create(
   /** @scope Tasks.prototype */ {
@@ -23,8 +23,8 @@ Tasks = SC.Object.create(
   // to any fixtures you define.
   store: SC.Store.create().from(SC.Record.fixtures),
   
-	consts: {},
-	
+  consts: {},
+  
   Content: SC.Object.extend({
     
     treeItemIsExpanded: YES,
