@@ -18,7 +18,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     var assignees = {}, assignee, tasks, ret;
     this.forEach(
       function(rec){
-        if(assignee = rec.get('assignee')){
+        if(assignee = rec.get('assignee').get('name')){
           tasks = assignees[assignee];
           if(!tasks) assignees[assignee] = tasks = [];
           tasks.push(rec);
@@ -28,12 +28,14 @@ Tasks.assignmentsController = SC.ArrayController.create(
     );
     
     ret = [];
+
+		var store = Tasks.get('store');
     
     for(assignee in assignees){
-      if(!assignees.hasOwnProperty(assignee)) continue;
+      //if(!assignees.hasOwnProperty(assignee)) continue;
       tasks = assignees[assignee];
       ret.push(SC.Object.create({
-        name: "%@".fmt(Tasks.User.find(Tasks.store,assignee).get('name')),
+				name: assignee,
         treeItemIsExpanded: YES,
         treeItemChildren: tasks.sortProperty('assignee', 'name')
       }));

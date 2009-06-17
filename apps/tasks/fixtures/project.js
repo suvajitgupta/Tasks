@@ -8,16 +8,12 @@ sc_require('models/project');
 
 Tasks.Project.FIXTURES = [];
 
-function generateProjectFixtures() {
-	var fixtures = Tasks.Project.FIXTURES;
-	for (var i = 0; i < 5; i++) {
-		var project = new Tasks.Project();
-		project.id = i+1;
-		project.name = "Project" + project.id;
-		var t = 3*i;
-		project.tasks = [ t+1, t+2, t+3 ];
-		fixtures[i] = project;
-	}
-}
 
-generateProjectFixtures();
+for (var i = 0; i < 5; i++) {
+	var projectHash = {};
+	projectHash.id = i+1;
+	projectHash.name = "Project" + projectHash.id;
+	var t = 3*i;
+	projectHash.tasks = [ t+1, t+2, t+3 ];
+	Tasks.Project.FIXTURES[i] = projectHash;
+}

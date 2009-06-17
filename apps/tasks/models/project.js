@@ -23,20 +23,10 @@ Tasks.Project = Tasks.Record.extend(
 
   name: SC.Record.attr(String, { isRequired: YES, defaultValue: Tasks.consts.NEW_PROJECT_NAME }),
   timeLeft: SC.Record.attr(Number), // the amount of time left before Project completion, used for load balancing
+	tasks: SC.Record.toMany('Tasks.Task'),
   
-  projectIcon: function() {
+  icon: function() {
     return 'sc-icon-folder-16';
-  }.property().cacheable(),
-  
-  tasks: function() {
-    var q = SC.Query.create({ conditions: "projectID = %@".fmt(this.get('id')), recordType: Tasks.Task});
-    var collection = Tasks.store.findAll(q);
-    return collection;
-  }.property('tasks').cacheable(),
-  
-  user: function(){
-    var user = Tasks.User.find(Tasks.store, this.get('assignee'));
-    return user.get('name');
-  }.property('assignee').cacheable()
+  }.property().cacheable()
   
 });

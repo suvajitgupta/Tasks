@@ -21,8 +21,7 @@ Tasks.Task.FIXTURES = [
 	status: Tasks.consts.TASK_STATUS_DONE,
 	effort: "1",
 	submitter: 1,
-	assignee: 2,
-	projectID: 1
+	assignee: 1
 	},
 
 	{ id: 2,
@@ -32,8 +31,8 @@ Tasks.Task.FIXTURES = [
 	status: Tasks.consts.TASK_STATUS_ACTIVE,
 	effort: "0.25",
 	submitter: 1,
-	assignee: 2,
-	projectID: 1 },
+	assignee: 2
+	},
 
 	{ id: 3,
 	name: "Summary for task three",
@@ -41,8 +40,8 @@ Tasks.Task.FIXTURES = [
 	priority: Tasks.consts.TASK_PRIORITY_HIGH,
 	status: Tasks.consts.TASK_STATUS_AT_RISK,
 	submitter: 1,
-	assignee: 2,
-	projectID: 1 },
+	assignee: 2
+	},
 
 	{ id: 4,
 	name: "Summary for task four",
@@ -51,8 +50,8 @@ Tasks.Task.FIXTURES = [
 	status: Tasks.consts.TASK_STATUS_ACTIVE,
 	effort: "3-5",
 	submitter: 4,
-	assignee: 3,
-	projectID: 2 },
+	assignee: 3
+	},
 
 	{ id: 5,
 	name: "Summary for task five",
@@ -61,8 +60,8 @@ Tasks.Task.FIXTURES = [
 	status: Tasks.consts.TASK_STATUS_PLANNED,
 	effort: "5",
 	submitter: 4,
-	assignee: 3,
-	projectID: 2 },
+	assignee: 3
+	},
 
 	{ id: 6,
 	name: "Summary for task six",
@@ -71,8 +70,8 @@ Tasks.Task.FIXTURES = [
 	status: Tasks.consts.TASK_STATUS_PLANNED,
 	effort: "1-2",
 	submitter: 4,
-	assignee: 3,
-	projectID: 2 },
+	assignee: 3
+	},
 
 	{ id: 7,
 	name: "Summary for task seven",
@@ -81,8 +80,8 @@ Tasks.Task.FIXTURES = [
 	status: Tasks.consts.TASK_STATUS_PLANNED,
 	effort: "2",
 	submitter: 2,
-	assignee: 3,
-	projectID: 3 },
+	assignee: 3
+	},
 
 	{ id: 8,
 	name: "Summary for task eight",
@@ -91,8 +90,8 @@ Tasks.Task.FIXTURES = [
 	status: Tasks.consts.TASK_STATUS_PLANNED,
 	effort: "5",
 	submitter: 2,
-	assignee: 3,
-	projectID: 3 },
+	assignee: 3
+	},
 
 	{ id: 9,
 	name: "Summary for task nine",
@@ -100,8 +99,8 @@ Tasks.Task.FIXTURES = [
 	priority: Tasks.consts.TASK_PRIORITY_HIGH,
 	status: Tasks.consts.TASK_STATUS_PLANNED,
 	submitter: 1,
-	assignee: 3,
-	projectID: 3 },
+	assignee: 3
+	},
 
 	{ id: 10,
 	name: "Summary for task ten",
@@ -110,8 +109,8 @@ Tasks.Task.FIXTURES = [
 	status: Tasks.consts.TASK_VALIDATION_PASSED,
 	effort: "1",
 	submitter: 4,
-	assignee: 2,
-	projectID: 4 },
+	assignee: 2
+	},
 
 	{ id: 11,
 	name: "Summary for task eleven",
@@ -120,8 +119,8 @@ Tasks.Task.FIXTURES = [
 	status: Tasks.consts.TASK_PRIORITY_MEDIUM,
 	effort: "0.5",
 	submitter: 1,
-	assignee: 2,
-	projectID: 4 },
+	assignee: 2
+	},
 
 	{ id: 12,
 	name: "Summary for task twelve",
@@ -130,8 +129,8 @@ Tasks.Task.FIXTURES = [
 	status: Tasks.consts.TASK_STATUS_AT_RISK,
 	effort: "10",
 	submitter: 1,
-	assignee: 2,
-	projectID: 4 },
+	assignee: 2
+	},
 
 	{ id: 13,
 	name: "Summary for task thirteen",
@@ -139,8 +138,8 @@ Tasks.Task.FIXTURES = [
 	status: Tasks.consts.TASK_STATUS_PLANNED,
 	effort: "1",
 	submitter: 3,
-	assignee: 2,
-	projectID: 4 },
+	assignee: 2
+	},
 
 	{ id: 14,
 	name: "Summary for task fourteen",
@@ -148,8 +147,8 @@ Tasks.Task.FIXTURES = [
 	priority: Tasks.consts.TASK_PRIORITY_MEDIUM,
 	status: Tasks.consts.TASK_STATUS_ACTIVE,
 	submitter: 1,
-	assignee: 2,
-	projectID: 4 },
+	assignee: 2
+	},
 
 	{ id: 15,
 	name: "Summary for task fifteen",
@@ -157,7 +156,7 @@ Tasks.Task.FIXTURES = [
 	priority: Tasks.consts.TASK_PRIORITY_MEDIUM,
 	status: Tasks.consts.TASK_STATUS_PLANNED,
 	submitter: 1,
-	assignee: 2,
-	projectID: 4 }
+	assignee: 2
+	}
 
 ];

@@ -33,14 +33,13 @@ Tasks.mainPage = SC.Page.design({
       summaryView: SC.LabelView.design({
         layout: { centerY: 0, height: 18, left: 20, right: 20 },
         textAlign: SC.ALIGN_RIGHT,
-        
         valueBinding: "Tasks.tasksController.summary"
       })
     }),
     
     middleView: SC.SplitView.design({
       layout: { top: 42, bottom: 42, left: 0, right: 0 },
-      defaultThickness: 225,
+      defaultThickness: 100,
       topLeftMaxThickness: 250,
       topLeftMinThickness: 200,
       
@@ -50,12 +49,11 @@ Tasks.mainPage = SC.Page.design({
         backgroundColor: 'blue',
 
         contentView: SC.SourceListView.design({
-          contentValueKey: 'title',
+          contentValueKey: 'name',
           contentBinding: 'Tasks.projectsTreeController.arrangedObjects',
           selectionBinding: 'Tasks.projectsTreeController.selection',
-          //contentCheckboxKey: "isDone",
           hasContentIcon: YES,
-          contentIconKey:  "projectIcon",
+          contentIconKey:  'icon',
           contentValueEditable: true,
           canReorderContent: true,
           canDeleteContent: true,

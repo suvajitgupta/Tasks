@@ -21,11 +21,8 @@ Tasks.main = function main() {
 
   // Step 2. Set the content property on your primary controller.
   // This will make your app come alive!
-  var tasks = Tasks.store.findAll(Tasks.Task);
-  //Tasks.tasksController.set('content', tasks);
-  //Tasks.tasksController.set('content', Tasks.Content.create());
   var projects = Tasks.store.findAll(Tasks.Project);
-  Tasks.projectsController.set('content',projects);
+  Tasks.projectsController.set('content', projects);
 } ;
 
 function main() { Tasks.main(); }

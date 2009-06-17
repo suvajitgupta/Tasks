@@ -16,7 +16,6 @@
 Tasks.Record = SC.Record.extend(
 /** @scope Tasks.Record.prototype */ {
 
-	primaryKey: 'id',
-  name: SC.Record.attr(String) // for display
+	primaryKey: 'id'
 
 }) ;

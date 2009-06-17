@@ -23,29 +23,6 @@ Tasks = SC.Object.create(
   // to any fixtures you define.
   store: SC.Store.create().from(SC.Record.fixtures),
   
-  consts: {},
-  
-  Content: SC.Object.extend({
-    
-    treeItemIsExpanded: YES,
-    
-    title: "Root",
-    
-    count: 10,
-    
-    treeItemChildren: function() {
-      var idx, count = this.get('count'), ret = [];
-      
-      for(idx=0;idx<count;idx++) {
-        ret.push(Tasks.Content.create({
-          title: "%@.%@".fmt(this.get('title'), idx),
-          treeItemIsExpanded: NO
-        }));
-      }
-      
-      return ret ;
-    }.property().cacheable()
-    
-  })
+  consts: {}
 
 });

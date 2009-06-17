@@ -48,9 +48,8 @@ Tasks.Task = Tasks.Record.extend(
   status: SC.Record.attr(String, { isRequired: YES, defaultValue: Tasks.consts.TASK_STATUS_PLANNED }),
   validation: SC.Record.attr(String, { isRequired: YES, defaultValue: Tasks.consts.TASK_VALIDATION_NOT_TESTED }),
   effort: SC.Record.attr(String),
-  submitter: SC.Record.attr(Number),
-  assignee: SC.Record.attr(Number),
-  projectID : SC.Record.attr(Number),
+  submitter: SC.Record.attr('Tasks.User'),
+  assignee: SC.Record.attr('Tasks.User'),
 
   task: function() {
     var name = this.get('name');
