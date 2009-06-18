@@ -51,7 +51,7 @@ Tasks.Task = Tasks.Record.extend(
   submitter: SC.Record.attr('Tasks.User'),
   assignee: SC.Record.attr('Tasks.User'),
 
-  task: function() {
+  displayName: function() {
     var name = this.get('name');
 		var effort = this.get('effort');
 		var ret = name;

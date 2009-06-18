@@ -21,7 +21,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     this.forEach(
       function(rec){
 				var user = rec.get('assignee');
-				assignee = user? user.get('name') : Tasks.consts.USER_UNASSIGNED;
+				assignee = user ? user.get('displayName') : Tasks.consts.USER_UNASSIGNED;
         tasks = assignees[assignee];
         if(!tasks) assignees[assignee] = tasks = [];
         tasks.push(rec);
@@ -34,11 +34,8 @@ Tasks.assignmentsController = SC.ArrayController.create(
     for(assignee in assignees){
       if(!assignees.hasOwnProperty(assignee)) continue; // to speed up by avoiding walking up the inheritance chain
       tasks = assignees[assignee];
-      for(var i = 0; i < tasks.get('length') -1; i += 1){
-          tasks[i].set('name', tasks[i].get('task')); //TODO: almost works but it repeats the effort everytime you select the same item after selecting some other item.
-      }
       ret.push(SC.Object.create({
-				name: assignee,
+				displayName: assignee,
         treeItemIsExpanded: YES,
         treeItemChildren: tasks.sortProperty('name')
       }));

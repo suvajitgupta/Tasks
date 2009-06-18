@@ -49,8 +49,8 @@ Tasks.mainPage = SC.Page.design({
         borderStyle: SC.BORDER_GRAY,
         backgroundColor: 'blue',
 
-        contentView: SC.SourceListView.design({
-          contentValueKey: 'name',
+        contentView: SC.ListView.design({
+          contentValueKey: 'displayName',
           contentBinding: 'Tasks.projectsTreeController.arrangedObjects',
           selectionBinding: 'Tasks.projectsTreeController.selection',
           hasContentIcon: YES,
@@ -68,7 +68,7 @@ Tasks.mainPage = SC.Page.design({
         backgroundColor: 'blue',
 
         contentView: SC.SourceListView.design({
-          contentValueKey: 'name', // TODO: want to call 'task' instead
+          contentValueKey: 'displayName', // TODO: want to call 'task' instead
           contentBinding: 'Tasks.tasksController.arrangedObjects',
           selectionBinding: 'Tasks.tasksController.selection',
           contentValueEditable: true,

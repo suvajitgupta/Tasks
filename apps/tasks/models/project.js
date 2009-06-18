@@ -26,6 +26,16 @@ Tasks.Project = Tasks.Record.extend(
   
   icon: function() {
     return 'sc-icon-folder-16';
-  }.property().cacheable()
+  }.property().cacheable(),
+  
+  displayName: function() {
+    var name = this.get('name');
+		var timeLeft = this.get('timeLeft');
+		var ret = name;
+    if (timeLeft) ret += ' {' + timeLeft + '}';
+	  return ret;
+  }.property('name', 'timeLeft').cacheable()
+  
+  
   
 });

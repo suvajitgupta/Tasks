@@ -15,7 +15,7 @@
 Tasks.projectsTreeController = SC.TreeController.create(
 /** @scope Tasks.projectsController.prototype */ {
   
-  contentBinding: 'Tasks.projectsController.nodes',
-  treeItemIsGrouped: YES
+  contentBinding: 'Tasks.projectsController.nodes'
+  //treeItemIsGrouped: YES
   
 });

@@ -31,6 +31,14 @@ Tasks.User = Tasks.Record.extend(
   loginName: SC.Record.attr(String, { isRequired: YES, defaultValue: Tasks.consts.NEW_USER_LOGIN }),
   role: SC.Record.attr(String, { isRequired: YES, defaultValue: Tasks.consts.USER_ROLE_DEVELOPER }), 
   preferences: SC.Record.attr(Object), // key:value pairs
-  authToken: SC.Record.attr(String)
+  authToken: SC.Record.attr(String),
+  
+  displayName: function() {
+    var name = this.get('name');
+		var role = this.get('role');
+		var ret = name;
+    if (role) ret += ': ' + role;
+	  return ret;
+  }.property('name', 'role').cacheable()
 
 });

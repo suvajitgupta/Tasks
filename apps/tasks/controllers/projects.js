@@ -21,12 +21,12 @@ Tasks.projectsController = SC.ArrayController.create(
   nodes: function() {
     var ret = [];
     this.forEach(function(rec){
-        ret.push(SC.Object.create({ name: rec.get('name'), icon: rec.get('icon'), tasks: rec.get('tasks') }));
+        ret.push(SC.Object.create({ displayName: rec.get('displayName'), icon: rec.get('icon'), tasks: rec.get('tasks') }));
       }, this);
     return SC.Object.create({ treeItemChildren: [
-      SC.Object.create({ name: 'Inbox', treeItemChildren: [], treeItemIsExpanded: NO}),
-      SC.Object.create({ name: 'Projects', treeItemChildren: ret, treeItemIsExpanded: YES}),
-      SC.Object.create({ name: 'Futures', treeItemChildren: [], treeItemIsExpanded: NO})
+      SC.Object.create({ displayName: 'Inbox', treeItemChildren: [], treeItemIsExpanded: NO}),
+      SC.Object.create({ displayName: 'Projects', treeItemChildren: ret, treeItemIsExpanded: YES}),
+      SC.Object.create({ displayName: 'Futures', treeItemChildren: [], treeItemIsExpanded: NO})
       ], treeItemIsExpanded: YES });
     
   }.property('[]').cacheable()
