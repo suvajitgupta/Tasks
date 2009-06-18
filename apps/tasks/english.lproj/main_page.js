@@ -10,6 +10,7 @@
 	
   @extends SC.Object
 	@author Suvajit Gupta
+	@author Joshua Holt
 */
 
 Tasks.mainPage = SC.Page.design({
@@ -67,10 +68,9 @@ Tasks.mainPage = SC.Page.design({
         backgroundColor: 'blue',
 
         contentView: SC.SourceListView.design({
-          contentValueKey: 'name',
+          contentValueKey: 'name', // TODO: want to call 'task' instead
           contentBinding: 'Tasks.tasksController.arrangedObjects',
           selectionBinding: 'Tasks.tasksController.selection',
-          contentCheckboxKey: "isDone",
           contentValueEditable: true,
           canReorderContent: true,
           canDeleteContent: true,

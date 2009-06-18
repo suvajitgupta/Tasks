@@ -7,6 +7,7 @@
 /** @class
 
   @extends SC.TreeController
+	@author Joshua Holt
 	@author Suvajit Gupta
 */
 Tasks.tasksController = SC.TreeController.create(
@@ -66,4 +67,4 @@ Tasks.tasksController = SC.TreeController.create(
     return ret ;
   }.property('length', 'selection').cacheable()
 
-}) ;
+});

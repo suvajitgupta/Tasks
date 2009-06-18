@@ -10,6 +10,12 @@
 // how your UI will look and you'll notice right away when something needs a
 // localized string added to this file!
 //
+/** @class
+
+  @version 0.1
+	@author Suvajit Gupta
+*/
+
 SC.stringsFor('English', {
 
 	'_Tasks': "Tasks",
@@ -34,6 +40,7 @@ SC.stringsFor('English', {
 	
 	'_FirstLast': "First Last",
 	'_first.last': "first.last",
+	'_Unassigned': "Unassigned",
 	'_Manager': "Manager",
 	'_Developer': "Developer",
 	'_Tester': "Tester"

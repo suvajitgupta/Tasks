@@ -4,10 +4,15 @@
 // ==========================================================================
 /*globals Tasks sc_require */
 
+/** @class
+
+  @version 0.1
+	@author Suvajit Gupta
+*/
+
 sc_require('models/project');
 
 Tasks.Project.FIXTURES = [];
-
 
 for (var i = 0; i < 5; i++) {
 	var projectHash = {};

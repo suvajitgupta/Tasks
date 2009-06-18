@@ -9,6 +9,8 @@
   (Document Your Controller Here)
 
   @extends SC.ArrayController
+	@author Joshua Holt
+	@author Suvajit Gupta
 */
 Tasks.assignmentsController = SC.ArrayController.create(
 /** @scope Tasks.assignmentsController.prototype */ {
@@ -18,30 +20,28 @@ Tasks.assignmentsController = SC.ArrayController.create(
     var assignees = {}, assignee, tasks, ret;
     this.forEach(
       function(rec){
-        if(assignee = rec.get('assignee').get('name')){
-          tasks = assignees[assignee];
-          if(!tasks) assignees[assignee] = tasks = [];
-          tasks.push(rec);
-        }
+				var user = rec.get('assignee');
+				assignee = user? user.get('name') : Tasks.consts.USER_UNASSIGNED;
+        tasks = assignees[assignee];
+        if(!tasks) assignees[assignee] = tasks = [];
+        tasks.push(rec);
+				// console.log("debug: %@".fmt(rec.get('name')));
       }, 
       this
     );
     
     ret = [];
-
-		var store = Tasks.get('store');
-    
     for(assignee in assignees){
-      //if(!assignees.hasOwnProperty(assignee)) continue;
+      if(!assignees.hasOwnProperty(assignee)) continue; // to speed up by avoiding walking up the inheritance chain
       tasks = assignees[assignee];
       ret.push(SC.Object.create({
 				name: assignee,
         treeItemIsExpanded: YES,
-        treeItemChildren: tasks.sortProperty('assignee', 'name')
+        treeItemChildren: tasks.sortProperty('name')
       }));
     }
       
     return SC.Object.create({ treeItemChildren: ret, treeItemIsExpanded: YES });
     
   }.property('[]').cacheable()
-}) ;
+});

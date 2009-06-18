@@ -8,7 +8,7 @@ sc_require('models/record');
 
 /** @class
 
-  A Tasks user 
+  A Tasks user record
 
   @extends Tasks.Record
   @version 0.1
@@ -17,6 +17,7 @@ sc_require('models/record');
 
 Tasks.consts.NEW_USER_NAME = "_FirstLast".loc();
 Tasks.consts.NEW_USER_LOGIN = "_first.last".loc();
+Tasks.consts.USER_UNASSIGNED = "_Unassigned".loc();
 
 // roles:
 Tasks.consts.USER_ROLE_MANAGER = "_Manager".loc();

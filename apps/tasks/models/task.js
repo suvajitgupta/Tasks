@@ -8,7 +8,7 @@ sc_require('models/record');
 
 /** @class
 
-  A Tasks task 
+  A Tasks task record
 
   @extends Tasks.Record
   @version 0.1

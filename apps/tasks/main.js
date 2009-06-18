@@ -11,6 +11,12 @@
 // As you develop your application you will probably want to override this.
 // See comments for some pointers on what to do next.
 //
+/** @class
+
+  @version 0.1
+	@author Suvajit Gupta
+*/
+
 Tasks.main = function main() {
 
   // Step 1: Instantiate Your Views

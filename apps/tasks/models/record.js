@@ -18,4 +18,4 @@ Tasks.Record = SC.Record.extend(
 
 	primaryKey: 'id'
 
-}) ;
+});

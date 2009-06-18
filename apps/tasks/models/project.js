@@ -8,12 +8,11 @@ sc_require('models/record');
 
 /** @class
 
-  A Tasks project 
+  A Tasks project record
 
   @extends Tasks.Record
   @version 0.1
 	@author Suvajit Gupta
-	@author Joshua Holt
 */
 
 Tasks.consts.NEW_PROJECT_NAME = "_NewProject".loc();
