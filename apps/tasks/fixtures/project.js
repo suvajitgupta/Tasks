@@ -20,5 +20,6 @@ for (var i = 0; i < 5; i++) {
 	projectHash.name = "Project" + projectHash.id;
 	var t = 3*i;
 	projectHash.tasks = [ t+1, t+2, t+3 ];
+	if (i < 3) projectHash.timeLeft = t*t;
 	Tasks.Project.FIXTURES[i] = projectHash;
 }
