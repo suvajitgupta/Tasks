@@ -35,10 +35,10 @@ Tasks.User = Tasks.Record.extend(
   
   displayName: function() {
     var name = this.get('name');
-		var role = this.get('role');
+		var loginName = this.get('loginName');
 		var ret = name;
-    if (role) ret += ': ' + role;
+    if (loginName) ret += ' (' + loginName + ')';
 	  return ret;
-  }.property('name', 'role').cacheable()
+  }.property('name', 'loginName').cacheable()
 
 });
