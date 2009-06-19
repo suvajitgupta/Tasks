@@ -1,0 +1,84 @@
+# Tasks Plan
+
+Design/Planning:
+- Review comparable applications for ideas: Mac Things/TaskPaper, Jira [SG] <MB> @Done
+^ Define Models/JSON: Task, Project, User [SG] <SE> @Done
+- Define Personas (Roles) & User Stories/Use Cases [SG] <JL> @Done
+Manager - add/edit/delete Users/Projects/Tasks, assign Tasks to Projects, load balance Tasks across Developers, view Task status
+Developer - add/edit/delete personal Tasks, reorder personal Tasks, view/split personal Tasks & update effort (estimates=>actual)/status,?reassign personal Tasks to other Developers or move to other Projects, add Task Release Notes in description field
+Tester - view Tasks that are done (read Release Notes in description field), validate Tasks (mark as Passed | Failed), submit bugs as Tasks
+^ Create GUI Wireframes using Balsamiq [SG] <CS> @Active
+- Design REST API supporting CRUD operations [SG] <SE> @Done
+^ Create GUI Statecharts using Omnigraffle [SG] <EG> @Active
+- Design Server & choose persistence components [SE] <SG>  @Active
+v Create GUI Mockups using Photoshop? [MG] <SG>
+
+Infrastructure:
+- Develop Model/Fixtures [SG] 
+
+"Task" Features:
+- Show Task summary & effort in curly braces (if specified), group Tasks by User [SG] <JH2> @Done
+- Add "+" & "-"  & Status/Priority/Validation buttons to bottom Toolbar: add item after selection if any, del not clearing empty line in list
+- Set bottom Toolbar button enablement based on having a selection: hasSelection() not being called
+- Allow drag-n-drop reordering: items not dropping
+- Show priority (using fonts) & status (using color & appending check/cross), differentiate Task types via icons
+- Show range-based subtotals (exclude Low items) in curly braces to assist in load balancing, append ‘?’ for subtotals including unknown efforts
+- Add double-click modal popup Form or in-cell editing
+- Add hover Tooltip showing Description
+- Add context menu to Edit/Cut/Copy/Paste/Delete/Duplicate items
+- Add Cut/Copy/Paste/Duplicate/Delete buttons in top Toolbar & hotkeys
+
+"Project" Features:
+- Show Project name & time left in curly braces (if specified)
+- Add Master/Detail Explorer view with click selection of Projects showing corresponding Tasks
+- Add Inbox/Futures Projects by default
+- Add "+" & "-" buttons in bottom Toolbar
+- Set bottom Toolbar button enablement based on having a selection
+- Add drag-n-drop of Tasks to Projects
+- Add double-click/in-cell editing
+- Add context menu: Delete
+- Add hover Tooltip to project name showing number of Tasks
+- Add warning Alert box about deleting Project with Tasks
+
+"User" Features:
+- Add login screen (User authentication)
+- Add access control based on Role (User authorization)
+- Add User selection combo box in top Toolbar ("All" is default choice)
+- Add User management button/modal popup with "+" & "-" buttons in bottom Toolbar & in-cell editing and "X" button to exit
+- Add hover Tooltip to dialog title showing number of Users
+- Add change password dialog
+- Add user preferences: TBD
+
+Global Features:
+- Add hover Tooltip to application title showing number of Projects
+- Add Search box in top Toolbar: support type-ahead, wildcards, cancel/reset
+- Add "Save" button in top Toolbar
+- Add "X" button to exit  in top Toolbar with corresponding confirmation dialog
+- Restore application settings/state from last login
+- Add File Import/Export buttons in top Toolbar (define simple TaskPaper-style format)
+- Add Undo/Redo hotkeys & buttons in top Toolbar (till last Save)
+- Add Show/Hide toggle button for bottom Toolbar
+- Add About dialog (click on Application title)
+- Add Online Help button in top Toolbar & modal Help dialog
+- Add Print button in top Toolbar?
+
+Server Functionality:
+- Implement REST API & Mock Server [SE]
+- Add Server-side data validation checks [SE]
+- Add local persistence for single user mode [SE]
+- Build persistence server (CouchDB) [JH2]
+- Support multi-user mode using Transaction Time [JH2, EO]
+- Add Server-side authorization [SE]
+
+Hardening/Styling:
+- Perform I18N and L10N (Canadian "-eh" version) [JH2]
+- Extend Fixtures to add a large set of randomized data, test scrolling [SE]
+- Develop Model & View unit tests [SE & MB]
+- Implement CSS,  embed sprited images [MG]
+- Provide SproutCore doctool-style comments [EO]
+
+Testing/Delivery:
+- Create Release Notes (features, limitations/bugs, list external components)
+- Manually test & note/fix showstoppers
+- Conduct usability tests, collect feedback, fix bugs
+- Create automated test scripts using Selenium [BM]
