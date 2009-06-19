@@ -2,6 +2,8 @@
 // Project: Tasks
 // Copyright: 2009 Eloqua Limited
 // ==========================================================================
+/*globals Tasks sc_require */
+
 sc_require('models/record');
 
 Tasks.consts.NEW_USER_NAME = "_FirstLast".loc();
@@ -24,9 +26,19 @@ Tasks.consts.USER_ROLE_TESTER = "_Tester".loc();
  */
 Tasks.User = Tasks.Record.extend({
 
+  /**
+   * The full name of the user (ex. "John Doe").
+   */
   name: SC.Record.attr(String, { isRequired: YES, defaultValue: Tasks.consts.NEW_USER_NAME }),
+
+  /**
+   * The login name of the user (ex. "jdoe").
+   */
   loginName: SC.Record.attr(String, { isRequired: YES, defaultValue: Tasks.consts.NEW_USER_LOGIN }),
 
+  /**
+   * The role of the user (see below for allowed values).
+   */
   role: SC.Record.attr(String, {
     isRequired: YES,
     defaultValue: Tasks.consts.USER_ROLE_DEVELOPER,
@@ -37,9 +49,19 @@ Tasks.User = Tasks.Record.extend({
     ]
   }), 
 
-  preferences: SC.Record.attr(Object), // key:value pairs
+  /**
+   * key:value pairs storing the user's preferences.
+   */
+  preferences: SC.Record.attr(Object),
+ 
+  /**
+   * A string token to store the authentication token after successful login.
+   */
   authToken: SC.Record.attr(String),
   
+  /**
+   * A string summarizing key facets of the Task for display.
+   */
   displayName: function() {
     var name = this.get('name');
     var loginName = this.get('loginName');

@@ -2,6 +2,7 @@
 // Project: Tasks
 // Copyright: 2009 Eloqua Limited
 // ==========================================================================
+/*globals Tasks sc_require */
 
 sc_require('models/record');
 
@@ -31,7 +32,7 @@ Tasks.consts.TASK_VALIDATION_FAILED = "_Failed".loc();
 /**
  * The task model.
  *
- * TODO: Add more descriptive docs.
+ * A task represent an atomic unit of work to be done by someone.  They are grouped in projects.
  *
  * @extends Tasks.Record
  * @author Suvajit Gupta
@@ -39,9 +40,19 @@ Tasks.consts.TASK_VALIDATION_FAILED = "_Failed".loc();
  */
 Tasks.Task = Tasks.Record.extend({
 
+  /**
+   * A one-line summary of the task (ex. "Widget: Add a nifty feature").
+   */
   name: SC.Record.attr(String, { isRequired: YES, defaultValue: Tasks.consts.NEW_TASK_NAME }),
+
+  /**
+   * Multi-line comments about the task (may be release notes for a feature or steps to reproduce a bug)
+   */
   description: SC.Record.attr(String),
 
+  /**
+   * The type of the task (see below for possible values).
+   */
   type: SC.Record.attr(String, {
     isRequired: YES,
     defaultValue: Tasks.consts.TASK_TYPE_FEATURE,
@@ -52,6 +63,9 @@ Tasks.Task = Tasks.Record.extend({
     ]
   }),
 
+  /**
+   * The proiority of the task (HIGH indicates task must be completed, LOW ones are not used for effort subtotals).
+   */
   priority: SC.Record.attr(String, {
     isRequired: YES,
     defaultValue: Tasks.consts.TASK_PRIORITY_MEDIUM,
@@ -62,6 +76,9 @@ Tasks.Task = Tasks.Record.extend({
     ]
   }),
 
+  /**
+   * The development status of the task (see below for allowed values).
+   */
   status: SC.Record.attr(String, {
     isRequired: YES,
     defaultValue: Tasks.consts.TASK_STATUS_PLANNED,
@@ -73,6 +90,9 @@ Tasks.Task = Tasks.Record.extend({
     ]
    }),
 
+  /**
+   * The validation status of the task (see below for allowed values).
+   */
   validation: SC.Record.attr(String, {
     isRequired: YES,
     defaultValue: Tasks.consts.TASK_VALIDATION_NOT_TESTED,
@@ -83,10 +103,24 @@ Tasks.Task = Tasks.Record.extend({
     ]
   }),
 
+  /**
+   * The effort of the task (can start with an estimate and end with the actual).
+   */
   effort: SC.Record.attr(String),
+
+  /**
+   * The user who creates the task.
+   */
   submitter: SC.Record.attr('Tasks.User'),
+
+  /**
+  * The user who is assigned to complete the task.
+   */
   assignee: SC.Record.attr('Tasks.User'),
 
+  /**
+   * A string summarizing key facets of the Task for display.
+   */
   displayName: function() {
     var name = this.get('name');
     var effort = this.get('effort');

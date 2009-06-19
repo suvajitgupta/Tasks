@@ -2,6 +2,7 @@
 // Project: Tasks
 // Copyright: 2009 Eloqua Limited 
 // ==========================================================================
+/*globals Tasks sc_require */
 
 sc_require('models/record');
 
@@ -10,7 +11,7 @@ Tasks.consts.NEW_PROJECT_NAME = "_NewProject".loc();
 /**
  * The project model.
  *
- * TODO: Add more descriptive docs.
+ * A project is a container for tasks
  *
  * @extends Tasks.Record
  * @author Suvajit Gupta
@@ -42,7 +43,7 @@ Tasks.Project = Tasks.Record.extend(/** @scope Tasks.Project.prototype */ {
   }.property().cacheable(),
 
   /**
-   * The full name of the project including time left (ex. "FR1 {4.5}").
+   * A string summarizing key facets of the Project for display.
    */
   displayName: function() {
     var name = this.get('name');

@@ -1,8 +1,8 @@
 //:=========================================================================
-// Project:   Todos Strings
+// Project: Tasks
 // Copyright: ©2009 My Company, Inc.
 //:=========================================================================
-/*globals Todos */
+/*globals Tasks */
 
 // Place strings you want to localize here.  In your app, use the key and
 // localize it using "key string": "text".  HINT: For your key names, use the

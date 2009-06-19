@@ -1,5 +1,3 @@
-sc_require('core');
-
 /**
  * An extension of the SC.RecordAttribute class that provides validation against a defined list of
  * allowed values.
@@ -7,6 +5,10 @@ sc_require('core');
  * @extends SC.RecordAttribute
  * @author Sean Eidemiller
  */
+/*globals Tasks sc_require */
+
+sc_require('core');
+
 Tasks.RecordAttribute = SC.RecordAttribute.extend({
 
   /**
