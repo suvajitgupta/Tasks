@@ -36,13 +36,12 @@ Tasks.assignmentsController = SC.ArrayController.create(
       tasks = assignees[assignee];
       ret.push(SC.Object.create({
 				displayName: assignee,
-				icon: 'sc-mini-icon.document',
 				treeItemChildren: tasks.sortProperty('name'),
         treeItemIsExpanded: YES
       }));
     }
       
-    return SC.Object.create({ treeItemChildren: ret, icon: 'sc-icon-user-16', treeItemIsExpanded: YES });
+    return SC.Object.create({ treeItemChildren: ret, treeItemIsExpanded: YES });
     
   }.property('[]').cacheable()
 });

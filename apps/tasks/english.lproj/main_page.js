@@ -68,9 +68,11 @@ Tasks.mainPage = SC.Page.design({
         backgroundColor: 'blue',
 
         contentView: SC.SourceListView.design({
-          contentValueKey: 'displayName', // TODO: want to call 'task' instead
+          contentValueKey: 'displayName',
           contentBinding: 'Tasks.tasksController.arrangedObjects',
           selectionBinding: 'Tasks.tasksController.selection',
+          hasContentIcon: YES,   // This works and it pulls from the model... It have not found a way to get the group header to display an Icon.
+          contentIconKey:  'icon',
           contentValueEditable: true,
           canReorderContent: true,
           canDeleteContent: true,

@@ -122,7 +122,7 @@ Tasks.Task = Tasks.Record.extend({
    * The path to the icon associated with a task.
    */
   icon: function() {
-    return 'sc-mini-icon.document';
+    return 'sc-icon-options-16';
   }.property().cacheable(),
 
   /**
