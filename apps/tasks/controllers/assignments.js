@@ -17,11 +17,11 @@ Tasks.assignmentsController = SC.ArrayController.create(
   contentBinding: 'Tasks.projectController.tasks',
   
   nodes: function() {
-    var assignees = {}, assignee, tasks, ret;
+    var assignees = {}, user, assignee, tasks, ret;
     this.forEach(
       function(rec){
-				var user = rec.get('assignee');
-				assignee = user ? user.get('displayName') : Tasks.consts.USER_UNASSIGNED;
+				user = rec.get('assignee');
+				assignee = user? user.get('displayName') : Tasks.consts.USER_UNASSIGNED;
         tasks = assignees[assignee];
         if(!tasks) assignees[assignee] = tasks = [];
         tasks.push(rec);
@@ -36,12 +36,13 @@ Tasks.assignmentsController = SC.ArrayController.create(
       tasks = assignees[assignee];
       ret.push(SC.Object.create({
 				displayName: assignee,
-        treeItemIsExpanded: YES,
-        treeItemChildren: tasks.sortProperty('name')
+				icon: 'sc-mini-icon.document',
+				treeItemChildren: tasks.sortProperty('name'),
+        treeItemIsExpanded: YES
       }));
     }
       
-    return SC.Object.create({ treeItemChildren: ret, treeItemIsExpanded: YES });
+    return SC.Object.create({ treeItemChildren: ret, icon: 'sc-icon-user-16', treeItemIsExpanded: YES });
     
   }.property('[]').cacheable()
 });

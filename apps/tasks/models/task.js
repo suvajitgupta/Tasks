@@ -119,6 +119,13 @@ Tasks.Task = Tasks.Record.extend({
   assignee: SC.Record.attr('Tasks.User'),
 
   /**
+   * The path to the icon associated with a task.
+   */
+  icon: function() {
+    return 'sc-mini-icon.document';
+  }.property().cacheable(),
+
+  /**
    * A string summarizing key facets of the Task for display.
    */
   displayName: function() {

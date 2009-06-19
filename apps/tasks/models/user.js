@@ -60,6 +60,13 @@ Tasks.User = Tasks.Record.extend({
   authToken: SC.Record.attr(String),
   
   /**
+   * The path to the icon associated with a user.
+   */
+  icon: function() {
+    return 'sc-icon-user-16';
+  }.property().cacheable(),
+
+  /**
    * A string summarizing key facets of the Task for display.
    */
   displayName: function() {

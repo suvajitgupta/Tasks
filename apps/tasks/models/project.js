@@ -36,7 +36,7 @@ Tasks.Project = Tasks.Record.extend(/** @scope Tasks.Project.prototype */ {
   tasks: SC.Record.toMany('Tasks.Task'),
 
   /**
-   * The path to the icon associated with this project.
+   * The path to the icon associated with a project.
    */
   icon: function() {
     return 'sc-icon-folder-16';
