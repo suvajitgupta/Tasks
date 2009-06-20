@@ -58,7 +58,7 @@ Tasks.Task.FIXTURES = [
 	{ id: 5,
 	name: "Summary for task five",
 	description: "Description for task 5" ,
-	type: Tasks.consts.TASK_TYPE_BUG,
+	type: Tasks.consts.TASK_TYPE_OTHER,
 	priority: Tasks.consts.TASK_PRIORITY_HIGH,
 	status: Tasks.consts.TASK_STATUS_PLANNED,
 	effort: "5",
