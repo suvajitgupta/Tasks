@@ -1,5 +1,5 @@
 # Tasks Application: JSON Definitions
-# indicates required field, angle brackets enclose type
+# appended asterisk indicates required field, angle brackets enclose type
 # parentheses enclose valid values, _Value_ indicates default
 
 ##################################################

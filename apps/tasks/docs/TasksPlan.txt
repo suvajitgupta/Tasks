@@ -1,4 +1,4 @@
-# Tasks Plan
+# Tasks Plan - please see below for items you can work on & mark their status as you start/finish them
 
 Design/Planning:
 - Review comparable applications for ideas: Mac Things/TaskPaper, Jira [SG] <MB> @Done
@@ -9,6 +9,7 @@ Developer - add/edit/delete personal Tasks, reorder personal Tasks, view/split p
 Tester - view Tasks that are done (read Release Notes in description field), validate Tasks (mark as Passed | Failed), submit bugs as Tasks
 ^ Create GUI Wireframes using Balsamiq [SG] <CS> @Active
 - Design REST API supporting CRUD operations [SG] <SE> @Done
+- Define Tasks TXT file format [SG] <SE> @Done
 ^ Create GUI Statecharts using Omnigraffle [SG] <EG> @Active
 - Design Server & choose persistence components [SE] <SG>  @Active
 v Create GUI Mockups using Photoshop? [MG] <SG>
@@ -18,67 +19,68 @@ Infrastructure:
 
 "Task" Features:
 - Show Task summary & effort in curly braces (if specified), group Tasks by User [SG] <JH2> @Done
-- Add "+" & "-"  & Status/Priority/Validation buttons to bottom Toolbar: add item after selection if any, del not clearing empty line in list
-- Set bottom Toolbar button enablement based on having a selection: hasSelection() not being called
-- Allow drag-n-drop reordering: items not dropping
-- Show priority (using fonts) & status (using color & appending check/cross), differentiate Task types via icons
-- Show range-based subtotals (exclude Low items) in curly braces to assist in load balancing, append ‘?’ for subtotals including unknown efforts
-- Add double-click modal popup Form or in-cell editing
-- Add hover Tooltip showing Description
-- Add context menu to Edit/Cut/Copy/Paste/Delete/Duplicate items
-- Add Cut/Copy/Paste/Duplicate/Delete buttons in top Toolbar & hotkeys
+- Add "+" & "-"  & Status/Priority/Validation buttons to bottom Toolbar [SG] <JH2> @Active
+- Show Task type via different icons [SG] <JH2> @Active
+- Set bottom Toolbar button enablement based on having a selection [SG] <JH2>
+- Allow drag-n-drop reordering [SG] <EO>
+- Show priority (using fonts) & status (using color & appending check/cross) [SG] <JH2>
+- Show range-based subtotals (exclude Low items) in curly braces to assist in load balancing, append ‘?’ for subtotals including unknown efforts [SG] <SE>
+- Add double-click modal popup Form or in-cell editing [SG] <JH2>
+- Add hover Tooltip showing Description [SG] <EG>
+- Add context menu to Edit/Cut/Copy/Paste/Delete/Duplicate items [SG] <JH2>
+- Add Cut/Copy/Paste/Duplicate/Delete buttons in top Toolbar & hotkeys [SG] <JH2>
 
 "Project" Features:
-- Show Project name & time left in curly braces (if specified)
-- Add Master/Detail Explorer view with click selection of Projects showing corresponding Tasks
-- Add Inbox/Futures Projects by default
-- Add "+" & "-" buttons in bottom Toolbar
-- Set bottom Toolbar button enablement based on having a selection
-- Add drag-n-drop of Tasks to Projects
-- Add double-click/in-cell editing
-- Add context menu: Delete
-- Add hover Tooltip to project name showing number of Tasks
-- Add warning Alert box about deleting Project with Tasks
+- Show Project name & time left in curly braces (if specified) [SG] <JH2> @Done
+- Add Master/Detail Explorer view with click selection of Projects showing corresponding Tasks [JH2] <SG> @Done
+- Add Inbox/Futures Projects by default [SG] <JH2> @Active
+- Add "+" & "-" buttons in bottom Toolbar [SG] <JH2>
+- Set bottom Toolbar button enablement based on having a selection [SG] <JH2>
+- Add drag-n-drop of Tasks to Projects [SG] <EO>
+- Add double-click/in-cell editing [SG] <JH2>
+- Add context menu: Delete [SG] <JL>
+- Add hover Tooltip to project name showing number of Tasks [SG] <EG>
+- Add warning Alert box about deleting Project with Tasks [SG] <JH2>
 
 "User" Features:
-- Add login screen (User authentication)
-- Add access control based on Role (User authorization)
-- Add User selection combo box in top Toolbar ("All" is default choice)
-- Add User management button/modal popup with "+" & "-" buttons in bottom Toolbar & in-cell editing and "X" button to exit
-- Add hover Tooltip to dialog title showing number of Users
-- Add change password dialog
-- Add user preferences: TBD
+- Add login screen (User authentication) [SG] <SE>
+- Add access control based on Role (User authorization) [SG] <SE>
+- Add User selection combo box in top Toolbar ("All" is default choice) [SG] <JL>
+- Add User management button/modal popup with "+" & "-" buttons in bottom Toolbar & in-cell editing and "X" button to exit [SG] <JH2>
+- Add hover Tooltip to dialog title showing number of Users [SG] <EG>
+- Add change password dialog? [SG] <SE>
+- Add user preferences? [SG] <JH2>
 
 Global Features:
-- Add hover Tooltip to application title showing number of Projects
-- Add Search box in top Toolbar: support type-ahead, wildcards, cancel/reset
-- Add "Save" button in top Toolbar
-- Add "X" button to exit  in top Toolbar with corresponding confirmation dialog
-- Restore application settings/state from last login
-- Add File Import/Export buttons in top Toolbar (define simple TaskPaper-style format)
-- Add Undo/Redo hotkeys & buttons in top Toolbar (till last Save)
-- Add Show/Hide toggle button for bottom Toolbar
-- Add About dialog (click on Application title)
-- Add Online Help button in top Toolbar & modal Help dialog
-- Add Print button in top Toolbar?
+- Add hover Tooltip to application title showing number of Projects [SG] <EG>
+- Add Search box in top Toolbar: support type-ahead, wildcards, cancel/reset [SG] <DC>
+- Add "Save" button in top Toolbar [SG] <SE>
+- Add "X" button to exit  in top Toolbar with corresponding confirmation dialog [SG] <JH2>
+- Restore application settings/state from last login [SG] <MB>
+- Add Import button in top Toolbar (using TXT file format) [SG] <SE>
+- Add Undo/Redo hotkeys & buttons in top Toolbar (till last Save) [SG] <SE>
+- Add Show/Hide toggle button for bottom Toolbar [SG] <JH2>
+- Add About dialog (click on Application title) [SG] <JH2>
+- Add Online Help button in top Toolbar & modal Help dialog [SG] <JH2>
+- Add Print button in top Toolbar? [SG] <JH2>
 
 Server Functionality:
-- Implement REST API & Mock Server [SE]
-- Add Server-side data validation checks [SE]
-- Add local persistence for single user mode [SE]
-- Build persistence server (CouchDB) [JH2]
-- Support multi-user mode using Transaction Time [JH2, EO]
-- Add Server-side authorization [SE]
+- Implement REST API & Mock Server [SE] <SG>
+- Add Server-side data validation checks [SE] <SG>
+- Add local persistence for single user mode [SE] <MB>
+- Build persistence server (CouchDB?) [JH2] <JH2>
+- Support multi-user mode using Transaction Time [SE] <EO>
+- Add Server-side authorization [SE] <SG>
 
 Hardening/Styling:
-- Perform I18N and L10N (Canadian "-eh" version) [JH2]
-- Extend Fixtures to add a large set of randomized data, test scrolling [SE]
-- Develop Model & View unit tests [SE & MB]
-- Implement CSS,  embed sprited images [MG]
-- Provide SproutCore doctool-style comments [EO]
+- Perform I18N and L10N (Canadian "-eh" version) [SG] <JH2>
+- Extend Fixtures to add a large set of randomized data, test scrolling [SG] <SE>
+- Develop Model & View unit tests [SG] <SE>
+- Implement CSS,  embed sprited images [SG] <MG>
+- Provide SproutCore doctool-style comments [SG] <EO>
 
 Testing/Delivery:
-- Create Release Notes (features, limitations/bugs, list external components)
-- Manually test & note/fix showstoppers
-- Conduct usability tests, collect feedback, fix bugs
+- Create Release Notes (features, limitations/bugs, list external components) [SG]
+- Manually test & note/fix showstoppers [BM] <SG>
 - Create automated test scripts using Selenium [BM]
+- Conduct usability tests, collect feedback, fix bugs [SG] <MG>
