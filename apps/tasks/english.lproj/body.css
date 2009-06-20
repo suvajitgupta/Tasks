@@ -1,0 +1,7 @@
+.task-icon-feature {
+  background: static_url('images/feature.jpg');
+}
+
+.task-icon-bug {
+  background: static_url('images/bug.jpg');
+}

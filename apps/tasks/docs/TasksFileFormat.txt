@@ -6,5 +6,5 @@
 # Lines starting without a bullet but ending in a : indicate Projects
 
 ProjectName* {timeLeft}:
-- TaskName* $Type <Submitter> [Assignee] {Effort} @Status %Validation
+- TaskName* {Effort} <Submitter> [Assignee] $Type @Status %Validation
 Description (1 or more lines)

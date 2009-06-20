@@ -55,7 +55,7 @@ Tasks.Task = Tasks.Record.extend({
    */
   type: SC.Record.attr(String, {
     isRequired: YES,
-    defaultValue: Tasks.consts.TASK_TYPE_FEATURE,
+    defaultValue: Tasks.consts.TASK_TYPE_OTHER,
     allowed: [
       Tasks.consts.TASK_TYPE_FEATURE,
       Tasks.consts.TASK_TYPE_BUG,
