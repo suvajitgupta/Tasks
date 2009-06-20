@@ -25,7 +25,6 @@ Tasks.assignmentsController = SC.ArrayController.create(
         tasks = assignees[assignee];
         if(!tasks) assignees[assignee] = tasks = [];
         tasks.push(rec);
-				// console.log("debug: %@".fmt(rec.get('name')));
       }, 
       this
     );

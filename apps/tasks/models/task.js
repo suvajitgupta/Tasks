@@ -121,8 +121,15 @@ Tasks.Task = Tasks.Record.extend({
   /**
    * The path to the icon associated with a task.
    */
-  icon: function() {
-    return 'sc-icon-options-16';
+  icon: function() { // TODO: get better icons
+		switch (this.get('type')){
+			case Tasks.consts.TASK_TYPE_FEATURE:
+	    	return 'sc-icon-options-16';
+      case Tasks.consts.TASK_TYPE_BUG:
+    		return 'sc-icon-alert-16';
+      case Tasks.consts.TASK_TYPE_OTHER:
+    		return 'sc-icon-document-16';
+		}
   }.property().cacheable(),
 
   /**

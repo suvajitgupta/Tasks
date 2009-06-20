@@ -71,8 +71,8 @@ Tasks.mainPage = SC.Page.design({
           contentValueKey: 'displayName',
           contentBinding: 'Tasks.tasksController.arrangedObjects',
           selectionBinding: 'Tasks.tasksController.selection',
-          hasContentIcon: YES,   // This works and it pulls from the model... It have not found a way to get the group header to display an Icon.
-          contentIconKey:  'icon',
+          hasContentIcon: YES,   // TODO: figure out how to display icons for Assignee (User).
+          contentIconKey: 'icon',
           contentValueEditable: true,
           canReorderContent: true,
           canDeleteContent: true,

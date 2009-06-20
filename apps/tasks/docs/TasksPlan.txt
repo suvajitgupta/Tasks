@@ -15,19 +15,19 @@ Tester - view Tasks that are done (read Release Notes in description field), val
 v Create GUI Mockups using Photoshop? [MG] <SG>
 
 Infrastructure:
-- Develop Model/Fixtures [SG] 
+- Develop Model/Fixtures [SG] @Done
 
 "Task" Features:
 - Show Task summary & effort in curly braces (if specified), group Tasks by User [SG] <JH2> @Done
+- Show Task type via different icons [SG] <JH2> @Done
 - Add "+" & "-"  & Status/Priority/Validation buttons to bottom Toolbar [SG] <JH2> @Active
-- Show Task type via different icons [SG] <JH2> @Active
-- Set bottom Toolbar button enablement based on having a selection [SG] <JH2>
-- Allow drag-n-drop reordering [SG] <EO>
+- Set bottom Toolbar button enablement based on having a selection [SG] <JH2> @AtRisk
+- Allow drag-n-drop reordering [SG] <EO> @AtRisk
 - Show priority (using fonts) & status (using color & appending check/cross) [SG] <JH2>
-- Show range-based subtotals (exclude Low items) in curly braces to assist in load balancing, append ‘?’ for subtotals including unknown efforts [SG] <SE>
-- Add double-click modal popup Form or in-cell editing [SG] <JH2>
+- Show range-based subtotals (exclude Low items) in curly braces to assist in load balancing, append "?" for subtotals including unknown efforts [SG] <SE>
 - Add hover Tooltip showing Description [SG] <EG>
 - Add context menu to Edit/Cut/Copy/Paste/Delete/Duplicate items [SG] <JH2>
+- Add double-click modal popup Form or in-cell editing [SG] <JH2>
 - Add Cut/Copy/Paste/Duplicate/Delete buttons in top Toolbar & hotkeys [SG] <JH2>
 
 "Project" Features:
@@ -36,10 +36,10 @@ Infrastructure:
 - Add Inbox/Futures Projects by default [SG] <JH2> @Active
 - Add "+" & "-" buttons in bottom Toolbar [SG] <JH2>
 - Set bottom Toolbar button enablement based on having a selection [SG] <JH2>
-- Add drag-n-drop of Tasks to Projects [SG] <EO>
+- Add drag-n-drop of Tasks to Projects [SG] <EO> @AtRisk
+- Add hover Tooltip to project name showing number of Tasks [SG] <EG>
 - Add double-click/in-cell editing [SG] <JH2>
 - Add context menu: Delete [SG] <JL>
-- Add hover Tooltip to project name showing number of Tasks [SG] <EG>
 - Add warning Alert box about deleting Project with Tasks [SG] <JH2>
 
 "User" Features:
