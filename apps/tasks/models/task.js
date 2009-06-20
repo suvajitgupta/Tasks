@@ -124,11 +124,11 @@ Tasks.Task = Tasks.Record.extend({
   icon: function() { // TODO: get better icons
 		switch (this.get('type')){
 			case Tasks.consts.TASK_TYPE_FEATURE:
-	    	return 'sc-icon-options-16';
+	    	return 'sc-icon-favorite-16';
       case Tasks.consts.TASK_TYPE_BUG:
     		return 'sc-icon-alert-16';
       case Tasks.consts.TASK_TYPE_OTHER:
-    		return 'sc-icon-document-16';
+    		return 'sc-icon-info-16';
 		}
   }.property().cacheable(),
 
