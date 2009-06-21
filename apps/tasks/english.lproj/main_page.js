@@ -87,21 +87,21 @@ Tasks.mainPage = SC.Page.design({
       borderStyle: SC.BORDER_TOP,
       
       exportButton: SC.ButtonView.design({
-        layout: { centerY: 0, height: 21, left: 8, width: 80 },
+        layout: { centerY: 0, height: 21, left: 8, width: 75 },
         title:  "Export",
 				target: 'Tasks.projectsController',
 				action: 'exportData'
       }),
 
       addButton: SC.ButtonView.design({
-        layout: { centerY: 0, height: 21, left: 250, width: 80 },
+        layout: { centerY: 0, height: 21, left: 250, width: 75 },
         title:  "Add",
 				target: 'Tasks.tasksController',
 				action: 'addTask'
       }),
 
       delButton: SC.ButtonView.design({
-        layout: { centerY: 0, height: 21, left: 350, width: 80 },
+        layout: { centerY: 0, height: 21, left: 330, width: 75 },
         title:  "Delete",
 				isEnabled: 'Tasks.tasksController.hasSelection',
 				target: 'Tasks.tasksController',
