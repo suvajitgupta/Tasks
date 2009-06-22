@@ -1,7 +1,7 @@
 body {
     font-size: 12px;
     font-family: Verdana, Arial, Helvetica, sans-serif;
-    color: #393733
+    color: #393733;
 }
 
 table.header {
@@ -16,7 +16,7 @@ table.subHeader {
 
 table.nav {
     border: 1px solid #393733;
-    background-color: #a80321;
+    background-color: green;
     font-size: 12px;
     color: white;
     width: 100%;
