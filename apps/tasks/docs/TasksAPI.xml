@@ -30,22 +30,6 @@
         The ID of the resource object in the database.
     </element>
 
-    <parameter name="format" type="string" required="no" default="json">
-        The format of the response object.
-        <valid>json</valid>
-        <valid>xml</valid>
-    </parameter>
-
-    <header name="Tasks-Method" type="string" required="yes">
-        The actual method to perform on the resource object when issuing a POST
-        request. This is a temporary hack that will go away once PUT/DELETE is
-        working on IIS.
-        <valid>POST</valid>
-        <valid>UPDATE</valid>
-        <valid>DELETE</valid>
-        <method>POST</method>
-    </header>
-
     <header name="Content-Type" type="string" required="yes">
         The format of the resource object that a client sends to the
         server in the body of a PUT or POST request.
