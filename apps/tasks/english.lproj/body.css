@@ -1,7 +1,7 @@
-.task-icon-feature {
-  background: static_url('images/feature.jpg');
+.tasks-icon-feature {
+  background: static_url('images/feature.gif');
 }
 
-.task-icon-bug {
-  background: static_url('images/bug.jpg');
+.tasks-icon-bug {
+  background: static_url('images/bug.gif');
 }

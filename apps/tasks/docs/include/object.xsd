@@ -3,7 +3,7 @@
 
     <xsd:annotation>
         <xsd:documentation xml:lang="en">
-            Eloqua Project Orion API Supporting Object
+            Tasks API Supporting Object
         </xsd:documentation>
     </xsd:annotation>    
 

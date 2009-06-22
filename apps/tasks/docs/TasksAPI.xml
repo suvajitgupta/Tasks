@@ -36,7 +36,7 @@
         <valid>xml</valid>
     </parameter>
 
-    <header name="Eloqua-Method" type="string" required="yes">
+    <header name="Tasks-Method" type="string" required="yes">
         The actual method to perform on the resource object when issuing a POST
         request. This is a temporary hack that will go away once PUT/DELETE is
         working on IIS.
