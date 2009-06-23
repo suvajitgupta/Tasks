@@ -3,7 +3,9 @@
 // ==========================================================================
 /*globals Tasks */
 
-/** @class
+/** 
+
+  This controller tracks the selected Project in the master list
 
   @extends SC.ObjectController
 	@author Joshua Holt

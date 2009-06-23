@@ -3,8 +3,10 @@
 // ==========================================================================
 /*globals Tasks */
 
-/** @class
+/** 
 
+	This is the controller for the Tasks detail list, driven by the selected Project
+	
   @extends SC.TreeController
 	@author Joshua Holt
 	@author Suvajit Gupta
@@ -12,8 +14,7 @@
 Tasks.tasksController = SC.TreeController.create(
 /** @scope Tasks.tasksController.prototype */ {
 
-  //content: null,
-  contentBinding: 'Tasks.assignmentsController.nodes',
+  contentBinding: 'Tasks.assignmentsController.assignments',
   treeItemIsGrouped: YES,
 
 	addTask: function() {

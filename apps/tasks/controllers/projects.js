@@ -3,10 +3,11 @@
 // ==========================================================================
 /*globals Tasks */
 
-/** @class
+/** 
+
+	This is the controller for the Projects master list
 
   @extends SC.ArrayController
-	@author Joshua Holt
 	@author Suvajit Gupta
 */
 Tasks.projectsController = SC.ArrayController.create(

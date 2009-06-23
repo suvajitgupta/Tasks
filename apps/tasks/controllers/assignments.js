@@ -3,8 +3,10 @@
 // ==========================================================================
 /*globals Tasks */
 
-/** @class
+/** 
 
+	This controller extracts the assigned Tasks for the selected Project
+	
   @extends SC.ArrayController
 	@author Joshua Holt
 	@author Suvajit Gupta
@@ -14,7 +16,8 @@ Tasks.assignmentsController = SC.ArrayController.create(
 	
   contentBinding: 'Tasks.projectController.tasks',
   
-  nodes: function() {
+  assignments: function() {
+	
     var assignees = {}, user, assignee, tasks, ret;
     this.forEach(
       function(rec){
