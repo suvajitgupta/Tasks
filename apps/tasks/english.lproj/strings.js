@@ -17,7 +17,7 @@
 
 SC.stringsFor('English', {
 
-	'_Tasks': "Tasks",
+	'_Tasks': "TASKS",
 	
 	'_NewTask': "New Task",
 	'_Feature': "Feature",

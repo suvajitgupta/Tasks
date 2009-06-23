@@ -28,7 +28,7 @@ Tasks.main = function main() {
   // This will make your app come alive!
   var projects = Tasks.store.findAll(Tasks.Project);
   Tasks.projectsController.set('content', projects);
-	console.log("Starting at: %@".fmt(new Date()));
+	// console.log("Starting at: %@".fmt(new Date()));
 
 };
 

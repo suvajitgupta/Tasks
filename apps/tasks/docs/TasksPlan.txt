@@ -7,7 +7,7 @@ Design/Planning:
 Manager - add/edit/delete Users/Projects/Tasks, assign Tasks to Projects, load balance Tasks across Developers, view Task status
 Developer - add/edit/delete personal Tasks, reorder personal Tasks, view/split personal Tasks & update effort (estimates=>actual)/status,?reassign personal Tasks to other Developers or move to other Projects, add Task Release Notes in description field
 Tester - view Tasks that are done (read Release Notes in description field), validate Tasks (mark as Passed | Failed), submit bugs as Tasks
-^ Create GUI Wireframes using Balsamiq [SG] <CS> @Active
+^ Create GUI Wireframes using Balsamiq [SG] <CS> @Done
 - Design REST API supporting CRUD operations [SG] <SE> @Done
 - Define Tasks TXT file format [SG] <SE> @Done
 ^ Create GUI Statecharts using Omnigraffle [SG] <EG> @Active
@@ -20,14 +20,14 @@ Infrastructure:
 "Task" Features:
 - Show Task summary & effort in curly braces (if specified), group Tasks by User [SG] <JH2> @Done
 - Show Task type via different icons [SG] <JH2> @Done
-- Add "+" & "-"  & Status/Priority/Validation buttons to bottom Toolbar [SG] <JH2> @Active
+- Add "+" & "-" & Status/Priority/Validation buttons to bottom Toolbar [SG] <JH2> @Active
 - Set bottom Toolbar button enablement based on having a selection [SG] <JH2> @AtRisk
 - Allow drag-n-drop reordering [SG] <EO> @AtRisk
 - Show priority (using fonts) & status (using color & appending check/cross) [SG] <JH2>
 - Show range-based subtotals (exclude Low items) in curly braces to assist in load balancing, append "?" for subtotals including unknown efforts [SG] <SE>
 - Add hover Tooltip showing Description [SG] <EG>
 - Add context menu to Edit/Cut/Copy/Paste/Delete/Duplicate items [SG] <JH2>
-- Add double-click modal popup Form or in-cell editing [SG] <JH2>
+- Add double-click modal popup form or in-cell editing [SG] <JH2>
 - Add Cut/Copy/Paste/Duplicate/Delete buttons in top Toolbar & hotkeys [SG] <JH2>
 
 "Project" Features:
@@ -35,12 +35,11 @@ Infrastructure:
 - Add Master/Detail Explorer view with click selection of Projects showing corresponding Tasks [JH2] <SG> @Done
 - Add Inbox/Futures Projects by default [SG] <JH2>
 - Add "+" & "-" buttons in bottom Toolbar [SG] <JH2>
-- Set bottom Toolbar button enablement based on having a selection [SG] <JH2>
 - Add drag-n-drop of Tasks to Projects [SG] <EO> @AtRisk
 - Add hover Tooltip to project name showing number of Tasks [SG] <EG>
 - Add double-click/in-cell editing [SG] <JH2>
 - Add context menu: Delete [SG] <JL>
-- Add warning Alert box about deleting Project with Tasks [SG] <JH2>
+- Add warning Alert box about deleting Project with Tasks [SG] <SE>
 
 "User" Features:
 - Add login screen (User authentication) [SG] <SE>
@@ -55,17 +54,18 @@ Global Features:
 - Add hover Tooltip to application title showing number of Projects [SG] <EG>
 - Add Search box in top Toolbar: support type-ahead, wildcards, cancel/reset [SG] <DC>
 - Add "Save" button in top Toolbar [SG] <SE>
-- Add "X" button to exit  in top Toolbar with corresponding confirmation dialog [SG] <JH2>
+- Add "X" button to exit  in top Toolbar with confirmation dialog for unsaved changes [SG] <SE>
 - Restore application settings/state from last login [SG] <MB>
-- Add Import button in top Toolbar (using TXT file format) [SG] <SE>
+- Add "Export" button in bottom Toolbar (using TXT file format) [SG] @Done
+- Add "Import" button in bottom Toolbar (using TXT file format) [SG] <SE>
 - Add Undo/Redo hotkeys & buttons in top Toolbar (till last Save) [SG] <SE>
-- Add Show/Hide toggle button for bottom Toolbar [SG] <JH2>
+- Add Show/Hide toggle button for bottom Toolbar? [SG] <JH2>
 - Add About dialog (click on Application title) [SG] <JH2>
 - Add Online Help button in top Toolbar & modal Help dialog [SG] <JH2>
 - Add Print button in top Toolbar? [SG] <JH2>
 
 Server Functionality:
-- Implement REST API & Mock Server [SE] <SG>
+- Implement REST API via Mock Server [SE] <SG>
 - Add Server-side data validation checks [SE] <SG>
 - Add local persistence for single user mode [SE] <MB>
 - Build persistence server (CouchDB?) [JH2] <JH2>
@@ -73,14 +73,14 @@ Server Functionality:
 - Add Server-side authorization [SE] <SG>
 
 Hardening/Styling:
-- Perform I18N and L10N (Canadian "-eh" version) [SG] <JH2>
-- Extend Fixtures to add a large set of randomized data, test scrolling [SG] <SE>
-- Develop Model & View unit tests [SG] <SE>
-- Implement CSS,  embed sprited images [SG] <MG>
-- Provide SproutCore doctool-style comments [SG] <EO>
+- Perform I18N and L10N (Canadian "-eh" version) [SG] <JH2> @Active
+- Extend Fixtures to add a randomized/large datasets, test view scrolling [SG] <SE> @Active
+- Develop Model & View unit tests [SG] <SE> @Active
+- Implement CSS,  embed sprited images [SG] <MG> @Active
+- Provide SproutCore doctool-style comments [SG] <EO> @AtRisk
 
 Testing/Delivery:
-- Create Release Notes (features, limitations/bugs, list external components) [SG]
-- Manually test & note/fix showstoppers [BM] <SG>
+- Manually test & note/fix showstoppers [BM] <SG> @Active
 - Create automated test scripts using Selenium [BM]
 - Conduct usability tests, collect feedback, fix bugs [SG] <MG>
+- Create Release Notes (features, limitations/bugs, list external components) [SG]

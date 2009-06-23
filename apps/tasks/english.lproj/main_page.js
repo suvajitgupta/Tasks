@@ -29,14 +29,14 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       labelView: SC.LabelView.design({
-        layout: { centerY: 0, height: 40, left: 60, width: 200 },
+        layout: { top: 10, height: 40, left: 60, width: 200 },
         controlSize: SC.LARGE_CONTROL_SIZE,
         fontWeight: SC.BOLD_WEIGHT,
-        value: "_Tasks".loc()
+        value: "_Tasks".loc() + " v" + Tasks.VERSION
       }),
       
-      summaryView: SC.LabelView.design({
-        layout: { centerY: 0, height: 40, right: 10, width: 200 },
+      summaryView: SC.LabelView.design({ // TODO: make this a hover over on Tasks label
+        layout: { top: 10, height: 40, right: 10, width: 200 },
         textAlign: SC.ALIGN_RIGHT,
 				valueBinding: 'Tasks.tasksController.summary'
       })
@@ -92,22 +92,22 @@ Tasks.mainPage = SC.Page.design({
       
       exportButton: SC.ButtonView.design({
         layout: { centerY: 0, height: 21, left: 8, width: 75 },
-        title:  "Export",
+        title:  "Export", // TODO: I18N string
 				target: 'Tasks.projectsController',
 				action: 'exportData'
       }),
 
       addButton: SC.ButtonView.design({
-        layout: { centerY: 0, height: 21, left: 250, width: 75 },
+        layout: { centerY: 0, height: 21, left: 250, width: 75 }, // TODO: switch to "+" & make button small
         title:  "Add",
 				target: 'Tasks.tasksController',
 				action: 'addTask'
       }),
 
       delButton: SC.ButtonView.design({
-        layout: { centerY: 0, height: 21, left: 330, width: 75 },
+        layout: { centerY: 0, height: 21, left: 330, width: 75 }, // TODO: switch to "+" & make button small
         title:  "Delete",
-				isEnabled: 'Tasks.tasksController.hasSelection',
+				isEnabled: 'Tasks.tasksController.hasSelection', // TODO: kill this since a Project will always be selected in master list?
 				target: 'Tasks.tasksController',
 				action: 'delTask'
       })

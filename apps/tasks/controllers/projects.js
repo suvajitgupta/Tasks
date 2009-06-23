@@ -51,5 +51,7 @@ Tasks.projectsController = SC.ArrayController.create(
 		
 		console.log(data);
 	}
+	
+	// TODO: add corresponding importData() function
   
 });

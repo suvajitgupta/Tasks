@@ -17,7 +17,7 @@ Tasks.tasksController = SC.TreeController.create(
   contentBinding: 'Tasks.assignmentsController.assignments',
   treeItemIsGrouped: YES,
 
-	addTask: function() {
+	addTask: function() { // TODO: make this work
 
     // Create a new task, with a default title.  
 		var store = Tasks.get('store');
@@ -34,7 +34,7 @@ Tasks.tasksController = SC.TreeController.create(
     //itemView.beginEditing();
 	},
 	
-	delTask: function() {
+	delTask: function() { // TODO: make this work
 	
 		//get the selected tasks
 		var sel = this.get('selection');
@@ -49,14 +49,16 @@ Tasks.tasksController = SC.TreeController.create(
     }
 	},
 	
-	hasSelection: function() {
+	hasSelection: function() { // TODO: kill this since a Project will always be selected in master list?
 		var sel = this.get('selection');
 		return (sel !== null) && (sel.get('length') > 0);
 	}.property('selection'),
 	
-  summary: function() { // TODO: I18N strings
+  summary: function() { // TODO: make this work
+	
     var len = this.get('length'), sel = this.get('selection'), ret ;
 
+		// TODO: I18N hardcoded strings below
     if (len && len > 0) {
       ret = len === 1 ? "1 task" : "%@ tasks".fmt(len);
     } else ret = "No tasks";
