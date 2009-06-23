@@ -17,6 +17,8 @@ Tasks.tasksController = SC.TreeController.create(
   contentBinding: 'Tasks.assignmentsController.assignments',
   treeItemIsGrouped: YES,
 
+  // TODO: set selection to first item intially, later switching to selection from "last session"
+
 	addTask: function() { // TODO: make this work
 
     // Create a new task, with a default title.  
@@ -58,7 +60,7 @@ Tasks.tasksController = SC.TreeController.create(
 	
     var len = this.get('length'), sel = this.get('selection'), ret ;
 
-		// TODO: I18N hardcoded strings below
+		// TODO: switch to a hover over
     if (len && len > 0) {
       ret = len === 1 ? "1 task" : "%@ tasks".fmt(len);
     } else ret = "No tasks";

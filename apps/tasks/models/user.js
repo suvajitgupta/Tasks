@@ -17,8 +17,6 @@ Tasks.consts.USER_ROLE_TESTER = "_Tester".loc();
 /**
  * The user model.
  *
- * TODO: Add more descriptive docs.
- *
  * @extends Tasks.Record
  * @author Suvajit Gupta
  * @author Sean Eidemiller

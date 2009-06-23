@@ -92,7 +92,7 @@ Tasks.mainPage = SC.Page.design({
       
       exportButton: SC.ButtonView.design({
         layout: { centerY: 0, height: 21, left: 8, width: 75 },
-        title:  "Export", // TODO: I18N string
+        title:  "_Export".loc(),
 				target: 'Tasks.projectsController',
 				action: 'exportData'
       }),
@@ -105,7 +105,7 @@ Tasks.mainPage = SC.Page.design({
       }),
 
       delButton: SC.ButtonView.design({
-        layout: { centerY: 0, height: 21, left: 330, width: 75 }, // TODO: switch to "+" & make button small
+        layout: { centerY: 0, height: 21, left: 330, width: 75 }, // TODO: switch to "-" & make button small
         title:  "Delete",
 				isEnabled: 'Tasks.tasksController.hasSelection', // TODO: kill this since a Project will always be selected in master list?
 				target: 'Tasks.tasksController',
