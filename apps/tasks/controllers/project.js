@@ -1,11 +1,9 @@
 // ==========================================================================
-// Project:   Tasks.projectController
+// Project: Tasks
 // ==========================================================================
 /*globals Tasks */
 
 /** @class
-
-  (Document Your Controller Here)
 
   @extends SC.ObjectController
 	@author Joshua Holt
@@ -14,6 +12,6 @@
 Tasks.projectController = SC.ObjectController.create(
 /** @scope Tasks.projectController.prototype */ {
   
-  contentBinding: 'Tasks.projectsTreeController.selection'
+  contentBinding: 'Tasks.projectsController.selection'
 
 });

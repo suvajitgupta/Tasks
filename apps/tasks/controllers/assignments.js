@@ -1,11 +1,9 @@
 // ==========================================================================
-// Project:   Tasks.assignmentsController
+// Project: Tasks
 // ==========================================================================
 /*globals Tasks */
 
 /** @class
-
-  (Document Your Controller Here)
 
   @extends SC.ArrayController
 	@author Joshua Holt
@@ -13,6 +11,7 @@
 */
 Tasks.assignmentsController = SC.ArrayController.create(
 /** @scope Tasks.assignmentsController.prototype */ {
+	
   contentBinding: 'Tasks.projectController.tasks',
   
   nodes: function() {
@@ -42,4 +41,5 @@ Tasks.assignmentsController = SC.ArrayController.create(
     return SC.Object.create({ treeItemChildren: ret, treeItemIsExpanded: YES });
     
   }.property('[]').cacheable()
+
 });

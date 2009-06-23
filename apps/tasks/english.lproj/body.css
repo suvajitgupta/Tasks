@@ -1,3 +1,7 @@
+.tasks-logo {
+	background: static_url('images/tasks.jpg') no-repeat;
+}
+
 .tasks-icon-feature {
   background: static_url('images/feature.gif');
 }

@@ -1,5 +1,5 @@
 // ==========================================================================
-// Project:   Tasks.tasksController
+// Project: Tasks
 // ==========================================================================
 /*globals Tasks */
 
@@ -53,7 +53,7 @@ Tasks.tasksController = SC.TreeController.create(
 		return (sel !== null) && (sel.get('length') > 0);
 	}.property('selection'),
 	
-  summary: function() {
+  summary: function() { // TODO: I18N strings
     var len = this.get('length'), sel = this.get('selection'), ret ;
 
     if (len && len > 0) {

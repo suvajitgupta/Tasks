@@ -20,20 +20,25 @@ Tasks.mainPage = SC.Page.design({
     
     topView: SC.View.design(SC.Border, {
       layout: { top: 0, left: 0, right: 0, height: 41 },
-      childViews: 'labelView summaryView'.w(),
+      childViews: 'iconView labelView summaryView'.w(),
       borderStyle: SC.BORDER_BOTTOM,
       
+      iconView: SC.LabelView.design({
+        layout: { centerY: 0, height: 40, left: 8, width: 200 },
+        classNames: ['tasks-logo']
+      }),
+      
       labelView: SC.LabelView.design({
-        layout: { centerY: 0, height: 24, left: 8, width: 200 },
+        layout: { centerY: 0, height: 40, left: 60, width: 200 },
         controlSize: SC.LARGE_CONTROL_SIZE,
         fontWeight: SC.BOLD_WEIGHT,
         value: "_Tasks".loc()
       }),
       
       summaryView: SC.LabelView.design({
-        layout: { centerY: 0, height: 18, left: 20, right: 20 },
+        layout: { centerY: 0, height: 40, right: 10, width: 200 },
         textAlign: SC.ALIGN_RIGHT,
-        valueBinding: "Tasks.tasksController.summary"
+				valueBinding: 'Tasks.tasksController.summary'
       })
     }),
     
@@ -50,8 +55,8 @@ Tasks.mainPage = SC.Page.design({
 
         contentView: SC.ListView.design({
           contentValueKey: 'displayName',
-          contentBinding: 'Tasks.projectsTreeController.arrangedObjects',
-          selectionBinding: 'Tasks.projectsTreeController.selection',
+          contentBinding: 'Tasks.projectsController.arrangedObjects',
+          selectionBinding: 'Tasks.projectsController.selection',
           hasContentIcon: YES,
           contentIconKey:  'icon',
           contentValueEditable: true,

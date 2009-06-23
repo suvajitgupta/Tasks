@@ -1,13 +1,11 @@
 // ==========================================================================
-// Project:   Tasks.projectsController
+// Project: Tasks
 // ==========================================================================
 /*globals Tasks */
 
 /** @class
 
-  (Document Your Controller Here)
-
-  @extends SC.TreeController
+  @extends SC.ArrayController
 	@author Joshua Holt
 	@author Suvajit Gupta
 */
