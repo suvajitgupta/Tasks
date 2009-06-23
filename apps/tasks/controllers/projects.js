@@ -15,17 +15,6 @@ Tasks.projectsController = SC.ArrayController.create(
   allowsMultipleSelection: NO,
   allowsEmptySelection: NO,
   
-  nodes: function() {
-    var projects = [];
-    this.forEach(function(rec){
-        projects.push(SC.Object.create({ displayName: rec.get('displayName'), icon: rec.get('icon'), tasks: rec.get('tasks') }));
-      }, this);
-    return SC.Object.create({ treeItemChildren:
-      	[SC.Object.create({ displayName: 'Projects', treeItemChildren: projects, treeItemIsExpanded: YES})],
-				treeItemIsExpanded: YES });
-    
-  }.property('[]').cacheable(),
-  
   exportData: function() {
 		var val, task, user, data = "# Tasks data export at " + new Date().format('MMM dd, yyyy hh:mm:ssa') + '\n\n';
 		
