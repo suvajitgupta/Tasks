@@ -33,7 +33,7 @@ Infrastructure:
 "Project" Features:
 - Show Project name & time left in curly braces (if specified) [SG] <JH2> @Done
 - Add Master/Detail Explorer view with click selection of Projects showing corresponding Tasks [JH2] <SG> @Done
-- Add Inbox/Futures Projects by default [SG] <JH2> @Active
+- Add Inbox/Futures Projects by default [SG] <JH2>
 - Add "+" & "-" buttons in bottom Toolbar [SG] <JH2>
 - Set bottom Toolbar button enablement based on having a selection [SG] <JH2>
 - Add drag-n-drop of Tasks to Projects [SG] <EO> @AtRisk

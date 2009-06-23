@@ -20,11 +20,9 @@ Tasks.projectsController = SC.ArrayController.create(
     this.forEach(function(rec){
         projects.push(SC.Object.create({ displayName: rec.get('displayName'), icon: rec.get('icon'), tasks: rec.get('tasks') }));
       }, this);
-    return SC.Object.create({ treeItemChildren: [
-      SC.Object.create({ displayName: 'Inbox', treeItemChildren: [], treeItemIsExpanded: NO}),
-      SC.Object.create({ displayName: 'Projects', treeItemChildren: projects, treeItemIsExpanded: YES}),
-      SC.Object.create({ displayName: 'Futures', treeItemChildren: [], treeItemIsExpanded: NO})
-      ], treeItemIsExpanded: YES });
+    return SC.Object.create({ treeItemChildren:
+      	[SC.Object.create({ displayName: 'Projects', treeItemChildren: projects, treeItemIsExpanded: YES})],
+				treeItemIsExpanded: YES });
     
   }.property('[]').cacheable(),
   
