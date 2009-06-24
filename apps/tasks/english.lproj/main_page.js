@@ -87,7 +87,7 @@ Tasks.mainPage = SC.Page.design({
     
     bottomView: SC.View.design(SC.Border, {
       layout: { bottom: 0, left: 0, right: 0, height: 41 },
-      childViews: 'exportButton addButton delButton'.w(),
+      childViews: 'exportButton addProjectButton delProjectButton addTaskButton delTaskButton'.w(),
       borderStyle: SC.BORDER_TOP,
       
       exportButton: SC.ButtonView.design({
@@ -96,18 +96,36 @@ Tasks.mainPage = SC.Page.design({
 				target: 'Tasks.projectsController',
 				action: 'exportData'
       }),
-
-      addButton: SC.ButtonView.design({
-        layout: { centerY: 0, height: 21, left: 250, width: 75 }, // TODO: switch to "+" & make button small
-        title:  "Add",
+      
+      addProjectButton: SC.ButtonView.design({
+        layout: { centerY: 0, left: 88, height: 21, width: 75 },
+        title: "+",
+        controlSize: SC.SMALL_CONTROL_SIZE,
+        target: 'Tasks.projectsController',
+        action: '' //TODO: Wire up action to add a project to the list
+      }),
+      
+      delProjectButton: SC.ButtonView.design({
+        layout: { centerY: 0, left: 168, height: 21, width: 75 },
+        title: "-",
+        controlSize: SC.SMALL_CONTROL_SIZE,
+        target: 'Tasks.projectsController',
+        action: '' //TODO: Wire up action to delete a project from the list
+      }),
+      
+      addTaskButton: SC.ButtonView.design({
+        layout: { centerY: 0, height: 21, left: 250, width: 75 }, // TODO: make button small
+        title:  "+",
+        controlSize: SC.SMALL_CONTROL_SIZE, 
 				target: 'Tasks.tasksController',
 				action: 'addTask'
       }),
 
-      delButton: SC.ButtonView.design({
-        layout: { centerY: 0, height: 21, left: 330, width: 75 }, // TODO: switch to "-" & make button small
-        title:  "Delete",
+      delTaskButton: SC.ButtonView.design({
+        layout: { centerY: 0, height: 21, left: 330, width: 75 }, // make button small
+        title:  "-",
 				isEnabled: 'Tasks.tasksController.hasSelection', // TODO: kill this since a Project will always be selected in master list?
+				controlSize: SC.SMALL_CONTROL_SIZE,
 				target: 'Tasks.tasksController',
 				action: 'delTask'
       })
