@@ -8,4 +8,5 @@ tmp
 *.swo
 sc-integrate
 frameworks/sproutcore
+frameworks/sproutcore-statechart
 TODO
