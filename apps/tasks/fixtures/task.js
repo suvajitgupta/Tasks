@@ -166,6 +166,36 @@ Tasks.Task.FIXTURES = [
 	validation: Tasks.consts.TASK_VALIDATION_FAILED,
 	submitter: 1,
 	assignee: 2
+	},
+
+	{ id: 16,
+	name: "Summary for task sixteen",
+	type: Tasks.consts.TASK_TYPE_FEATURE,
+	priority: Tasks.consts.TASK_PRIORITY_MEDIUM,
+	status: Tasks.consts.TASK_STATUS_FAILED,
+	validation: Tasks.consts.TASK_VALIDATION_NOT_TESTED,
+	submitter: 2,
+	assignee: 3
+	},
+
+	{ id: 17,
+	name: "Summary for task seventeen",
+	description: "Short decription for task sixteen" ,
+	type: Tasks.consts.TASK_TYPE_OTHER,
+	priority: Tasks.consts.TASK_PRIORITY_LOW,
+	status: Tasks.consts.TASK_STATUS_FAILED,
+	validation: Tasks.consts.TASK_VALIDATION_NOT_TESTED,
+	submitter: 1,
+	assignee: 2
+	},
+
+	{ id: 18,
+	name: "Summary for task eightteen",
+	priority: Tasks.consts.TASK_PRIORITY_HIGH,
+	status: Tasks.consts.TASK_STATUS_FAILED,
+	validation: Tasks.consts.TASK_VALIDATION_NOT_TESTED,
+	submitter: 4,
+	assignee: 3
 	}
 
 ];
