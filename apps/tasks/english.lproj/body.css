@@ -1,11 +1,17 @@
 .tasks-logo {
 	background: static_url('images/tasks.jpg') no-repeat;
+	height:16px;
+  width:16px;
 }
 
 .tasks-icon-feature {
   background: static_url('images/feature.gif');
+  height:16px;
+  width:16px;
 }
 
 .tasks-icon-bug {
   background: static_url('images/bug.gif');
+  height:16px;
+  width:16px;
 }
