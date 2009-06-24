@@ -93,39 +93,44 @@ Tasks.mainPage = SC.Page.design({
       exportButton: SC.ButtonView.design({
         layout: { centerY: 0, height: 21, left: 8, width: 75 },
         title:  "_Export".loc(),
+        titleMinWidth: 0,
 				target: 'Tasks.projectsController',
 				action: 'exportData'
       }),
       
       addProjectButton: SC.ButtonView.design({
-        layout: { centerY: 0, left: 88, height: 21, width: 75 },
+        layout: { centerY: 0, left: 160, height: 21, width: 30 },
         title: "+",
-        controlSize: SC.SMALL_CONTROL_SIZE,
+        titleMinWidth: 0,
+        fontSize: 10,
         target: 'Tasks.projectsController',
         action: '' //TODO: Wire up action to add a project to the list
       }),
       
       delProjectButton: SC.ButtonView.design({
-        layout: { centerY: 0, left: 168, height: 21, width: 75 },
+        layout: { centerY: 0, left: 195, height: 21, width: 30 },
         title: "-",
-        controlSize: SC.SMALL_CONTROL_SIZE,
+        titleMinWidth: 0,
+        fontSize: 10,
         target: 'Tasks.projectsController',
         action: '' //TODO: Wire up action to delete a project from the list
       }),
       
       addTaskButton: SC.ButtonView.design({
-        layout: { centerY: 0, height: 21, left: 250, width: 75 }, // TODO: make button small
+        layout: { centerY: 0, height: 21, left: 250, width: 30 },
         title:  "+",
-        controlSize: SC.SMALL_CONTROL_SIZE, 
+        titleMinWidth: 0,
+        fontSize: 10,
 				target: 'Tasks.tasksController',
 				action: 'addTask'
       }),
 
       delTaskButton: SC.ButtonView.design({
-        layout: { centerY: 0, height: 21, left: 330, width: 75 }, // make button small
+        layout: { centerY: 0, height: 21, left: 285, width: 30 },
         title:  "-",
+        titleMinWidth: 0,
 				isEnabled: 'Tasks.tasksController.hasSelection', // TODO: kill this since a Project will always be selected in master list?
-				controlSize: SC.SMALL_CONTROL_SIZE,
+				fontSize: 10,
 				target: 'Tasks.tasksController',
 				action: 'delTask'
       })
