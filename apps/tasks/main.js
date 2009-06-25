@@ -18,17 +18,11 @@
 
 Tasks.main = function main() {
 
-  // Step 1: Instantiate Your Views
-  // The default code here will make the mainPane for your application visible
-  // on screen.  If you app gets any level of complexity, you will probably 
-  // create multiple pages and panes.  
-  Tasks.getPath('mainPage.mainPane').append();
-
-  // Step 2. Set the content property on your primary controller.
-  // This will make your app come alive!
-  var projects = Tasks.store.findAll(Tasks.Project);
-  Tasks.projectsController.set('content', projects);
-	// console.log("Starting at: %@".fmt(new Date()));
+	console.log("Tasks started at: %@".fmt(new Date()));
+	
+	// Enter the statechart.
+	// TODO: branch on Tasks "mode" (single-user/local, multi-user/Tasks server or other server)
+  Tasks.goState('a', 1);
 
 };
 

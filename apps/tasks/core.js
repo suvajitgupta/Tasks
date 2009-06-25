@@ -1,8 +1,6 @@
 // ==========================================================================
 // Project:   Tasks
 // ==========================================================================
-/*globals Tasks */
-
 /** @namespace
 
   "Tasks" - an agile project management tool
@@ -10,7 +8,9 @@
   @extends SC.Object
   @author Suvajit Gupta
 */
-Tasks = SC.Object.create(
+/*globals Tasks */
+
+Tasks = SC.Object.create(SC.Statechart,
   /** @scope Tasks.prototype */ {
 
   consts: {},
