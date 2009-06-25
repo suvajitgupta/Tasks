@@ -1,5 +1,5 @@
 // ==========================================================================
-// Project:   Tasks - mainPage
+// Project: Tasks
 // ==========================================================================
 /*globals Tasks */
 
@@ -87,37 +87,45 @@ Tasks.mainPage = SC.Page.design({
     
     bottomView: SC.View.design(SC.Border, {
       layout: { bottom: 0, left: 0, right: 0, height: 41 },
-      childViews: 'exportButton addProjectButton delProjectButton addTaskButton delTaskButton'.w(),
+      childViews: 'addProjectButton delProjectButton importButton exportButton addTaskButton delTaskButton'.w(),
       borderStyle: SC.BORDER_TOP,
       
+      addProjectButton: SC.ButtonView.design({
+        layout: { centerY: 0, left: 8, height: 21, width: 30 },
+        title: "+",
+        titleMinWidth: 0,
+        fontSize: 10,
+        target: 'Tasks.projectsController',
+        action: 'addProject'
+      }),
+      
+      delProjectButton: SC.ButtonView.design({
+        layout: { centerY: 0, left: 43, height: 21, width: 30 },
+        title: "-",
+        titleMinWidth: 0,
+        fontSize: 10,
+        target: 'Tasks.projectsController',
+        action: 'delProject'
+      }),
+      
+      importButton: SC.ButtonView.design({
+        layout: { centerY: 0, height: 21, left: 88, width: 50 },
+        title:  "_Import".loc(),
+        titleMinWidth: 0,
+				target: 'Tasks.projectsController',
+				action: 'importData'
+      }),
+      
       exportButton: SC.ButtonView.design({
-        layout: { centerY: 0, height: 21, left: 8, width: 75 },
+        layout: { centerY: 0, height: 21, left: 148, width: 50 },
         title:  "_Export".loc(),
         titleMinWidth: 0,
 				target: 'Tasks.projectsController',
 				action: 'exportData'
       }),
       
-      addProjectButton: SC.ButtonView.design({
-        layout: { centerY: 0, left: 160, height: 21, width: 30 },
-        title: "+",
-        titleMinWidth: 0,
-        fontSize: 10,
-        target: 'Tasks.projectsController',
-        action: '' //TODO: Wire up action to add a project to the list
-      }),
-      
-      delProjectButton: SC.ButtonView.design({
-        layout: { centerY: 0, left: 195, height: 21, width: 30 },
-        title: "-",
-        titleMinWidth: 0,
-        fontSize: 10,
-        target: 'Tasks.projectsController',
-        action: '' //TODO: Wire up action to delete a project from the list
-      }),
-      
       addTaskButton: SC.ButtonView.design({
-        layout: { centerY: 0, height: 21, left: 250, width: 30 },
+        layout: { centerY: 0, height: 21, left: 253, width: 30 },
         title:  "+",
         titleMinWidth: 0,
         fontSize: 10,
@@ -126,7 +134,7 @@ Tasks.mainPage = SC.Page.design({
       }),
 
       delTaskButton: SC.ButtonView.design({
-        layout: { centerY: 0, height: 21, left: 285, width: 30 },
+        layout: { centerY: 0, height: 21, left: 288, width: 30 },
         title:  "-",
         titleMinWidth: 0,
 				isEnabled: 'Tasks.tasksController.hasSelection', // TODO: kill this since a Project will always be selected in master list?

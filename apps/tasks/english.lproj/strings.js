@@ -18,6 +18,7 @@
 SC.stringsFor('English', {
 
 	'_Tasks': "TASKS",
+	'_Import': "Import",
 	'_Export': "Export",
 	
 	'_NewTask': "New Task",
