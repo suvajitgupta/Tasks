@@ -10,38 +10,40 @@ Tester - view Tasks that are done (read Release Notes in description field), val
 ^ Create GUI Wireframes using Balsamiq [SG] <CS> @Done
 - Design REST API supporting CRUD operations [SG] <SE> @Done
 - Define Tasks TXT file format [SG] <SE> @Done
-^ Create GUI Statecharts using Omnigraffle [SG] <EG> @Active
+^ Create GUI Statecharts using Omnigraffle [SG] <SE> @Done
 - Design Server & choose persistence components [SE] <SG>  @Active
 v Create GUI Mockups using Photoshop? [MG] <SG>
 
 Infrastructure:
-- Develop Model/Fixtures [SG] @Done
+- Develop Model/Fixtures [SG] <SE> @Done
+- Develop actions/states corresponding to GUI Statecharts [SG] <SE> @Active
 
-"Task" Features:
+"Task" Manager:
 - Show Task summary & effort in curly braces (if specified), group Tasks by User [SG] <JH2> @Done
 - Show Task type via different icons [SG] <JH2> @Done
 - Add "+" & "-" & Status/Priority/Validation buttons to bottom Toolbar [SG] <JH2> @Active
-- Set bottom Toolbar button enablement based on having a selection [SG] <JH2> @AtRisk
+- Set bottom Toolbar button enablement based on having a selection [SG] <EO> @AtRisk
 - Allow drag-n-drop reordering [SG] <EO> @AtRisk
 - Show priority (using fonts) & status (using color & appending check/cross) [SG] <JH2>
-- Show range-based subtotals (exclude Low items) in curly braces to assist in load balancing, append "?" for subtotals including unknown efforts [SG] <SE>
+- Show range-based subtotals (exclude Low items) in curly braces for load balancing, append "?" for subtotals including unknown efforts [SG] <SE>
 - Add hover Tooltip showing Description [SG] <EG>
 - Add context menu to Edit/Cut/Copy/Paste/Delete/Duplicate items [SG] <JH2>
 - Add double-click modal popup form or in-cell editing [SG] <JH2>
 - Add Cut/Copy/Paste/Duplicate/Delete buttons in top Toolbar & hotkeys [SG] <JH2>
 
-"Project" Features:
+"Project" Manager:
 - Show Project name & time left in curly braces (if specified) [SG] <JH2> @Done
 - Add Master/Detail Explorer view with click selection of Projects showing corresponding Tasks [JH2] <SG> @Done
 - Add Inbox/Futures Projects by default [SG] <SE>
 - Add "+" & "-" buttons in bottom Toolbar [SG] <JH2>
 - Add drag-n-drop of Tasks to Projects [SG] <EO> @AtRisk
 - Add hover Tooltip to project name showing number of Tasks [SG] <EG>
-- Add double-click/in-cell editing [SG] <JH2>
+- Add double-click/in-cell editing [SG] <EO> @AtRisk
+- Make Master list of Projects collapsible [SG] <EG>
 - Add context menu: Delete [SG] <JL>
 - Add warning Alert box about deleting Project with Tasks [SG] <SE>
 
-"User" Features:
+"User" Manager:
 - Add login screen (User authentication) [SG] <SE>
 - Add access control based on Role (User authorization) [SG] <SE>
 - Add User selection combo box in top Toolbar ("All" is default choice) [SG] <JL>
@@ -50,7 +52,7 @@ Infrastructure:
 - Add change password dialog? [SG] <SE>
 - Add user preferences? [SG] <JH2>
 
-Global Features:
+"App" Manager:
 - Add hover Tooltip to application title showing number of Projects [SG] <EG>
 - Add Search box in top Toolbar: support type-ahead, wildcards, cancel/reset [SG] <DC>
 - Add "Save" button in top Toolbar [SG] <SE>
@@ -64,7 +66,7 @@ Global Features:
 - Add Online Help button in top Toolbar & modal Help dialog [SG] <JH2>
 - Add Print button in top Toolbar? [SG] <JH2>
 
-Server Functionality:
+Server:
 - Implement REST API via Mock Server [SE] <SG>
 - Add Server-side data validation checks [SE] <SG>
 - Add local persistence for single user mode [SE] <MB>
