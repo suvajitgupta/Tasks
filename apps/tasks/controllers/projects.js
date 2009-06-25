@@ -16,8 +16,20 @@ Tasks.projectsController = SC.ArrayController.create(
   allowsMultipleSelection: NO,
   allowsEmptySelection: NO,
   
-  exportData: function() {
+  addProject: function() { // TODO: implement
+		alert ('Not implemented!');
+	},
 	
+  delProject: function() { // TODO: implement
+		alert ('Not implemented!');
+	},
+	
+  importData: function() { // TODO: implement
+		alert ('Not implemented!');
+	},
+	
+	exportData: function() {
+
 	  // TODO: refactor this code to Tasks model?  can this be done given that the Task is being accessed as a "rec"?
 	
 		var val, task, user, data = "# Tasks data export at " + new Date().format('MMM dd, yyyy hh:mm:ssa') + '\n\n';
