@@ -1,1 +1,1 @@
-config :all, :required => [:sproutcore, :'onitunes-statechart']
+config :all, :required => [:sproutcore, :'sproutcore-statechart']
