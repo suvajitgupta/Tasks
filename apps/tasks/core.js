@@ -7,6 +7,7 @@
   
   @extends SC.Object
   @author Suvajit Gupta
+  @version 0.1
 */
 /*globals Tasks */
 
