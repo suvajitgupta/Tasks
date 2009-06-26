@@ -22,7 +22,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     this.forEach(
       function(rec){
 				user = rec.get('assignee');
-				assignee = user? user.get('displayName') : Tasks.consts.USER_UNASSIGNED;
+				assignee = user? user.get('displayName') : Tasks.USER_UNASSIGNED;
         tasks = assignees[assignee];
         if(!tasks) assignees[assignee] = tasks = [];
         tasks.push(rec);

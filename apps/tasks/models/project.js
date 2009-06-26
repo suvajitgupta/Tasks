@@ -5,7 +5,7 @@
 
 sc_require('models/record');
 
-Tasks.consts.NEW_PROJECT_NAME = "_NewProject".loc();
+Tasks.NEW_PROJECT_NAME = "_NewProject".loc();
 
 /**
  * The project model.
@@ -20,7 +20,7 @@ Tasks.Project = Tasks.Record.extend(/** @scope Tasks.Project.prototype */ {
   /**
    * The name of the project (ex. "FR1").
    */
-  name: SC.Record.attr(String, { isRequired: YES, defaultValue: Tasks.consts.NEW_PROJECT_NAME }),
+  name: SC.Record.attr(String, { isRequired: YES, defaultValue: Tasks.NEW_PROJECT_NAME }),
 
   /**
    * The amount of time remaining before project completion, expressed in days.

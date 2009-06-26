@@ -5,14 +5,14 @@
 
 sc_require('models/record');
 
-Tasks.consts.NEW_USER_NAME = "_FirstLast".loc();
-Tasks.consts.NEW_USER_LOGIN = "_first.last".loc();
-Tasks.consts.USER_UNASSIGNED = "_Unassigned".loc();
+Tasks.NEW_USER_NAME = "_FirstLast".loc();
+Tasks.NEW_USER_LOGIN = "_first.last".loc();
+Tasks.USER_UNASSIGNED = "_Unassigned".loc();
 
 // Roles:
-Tasks.consts.USER_ROLE_MANAGER = "_Manager".loc();
-Tasks.consts.USER_ROLE_DEVELOPER = "_Developer".loc(); // default
-Tasks.consts.USER_ROLE_TESTER = "_Tester".loc();
+Tasks.USER_ROLE_MANAGER = "_Manager".loc();
+Tasks.USER_ROLE_DEVELOPER = "_Developer".loc(); // default
+Tasks.USER_ROLE_TESTER = "_Tester".loc();
 
 /**
  * The user model.
@@ -26,23 +26,23 @@ Tasks.User = Tasks.Record.extend({
   /**
    * The full name of the user (ex. "John Doe").
    */
-  name: SC.Record.attr(String, { isRequired: YES, defaultValue: Tasks.consts.NEW_USER_NAME }),
+  name: SC.Record.attr(String, { isRequired: YES, defaultValue: Tasks.NEW_USER_NAME }),
 
   /**
    * The login name of the user (ex. "jdoe").
    */
-  loginName: SC.Record.attr(String, { isRequired: YES, defaultValue: Tasks.consts.NEW_USER_LOGIN }),
+  loginName: SC.Record.attr(String, { isRequired: YES, defaultValue: Tasks.NEW_USER_LOGIN }),
 
   /**
    * The role of the user (see below for allowed values).
    */
   role: SC.Record.attr(String, {
     isRequired: YES,
-    defaultValue: Tasks.consts.USER_ROLE_DEVELOPER,
+    defaultValue: Tasks.USER_ROLE_DEVELOPER,
     allowed: [
-      Tasks.consts.USER_ROLE_MANAGER, 
-      Tasks.consts.USER_ROLE_DEVELOPER,
-      Tasks.consts.USER_ROLE_TESTER
+      Tasks.USER_ROLE_MANAGER, 
+      Tasks.USER_ROLE_DEVELOPER,
+      Tasks.USER_ROLE_TESTER
     ]
   }), 
 

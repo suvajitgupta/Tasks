@@ -5,28 +5,28 @@
 
 sc_require('models/record');
 
-Tasks.consts.NEW_TASK_NAME = "_NewTask".loc();
+Tasks.NEW_TASK_NAME = "_NewTask".loc();
 
 // Types:
-Tasks.consts.TASK_TYPE_FEATURE = "_Feature".loc(); // default
-Tasks.consts.TASK_TYPE_BUG = "_Bug".loc();
-Tasks.consts.TASK_TYPE_OTHER = "_Other".loc();
+Tasks.TASK_TYPE_FEATURE = "_Feature".loc(); // default
+Tasks.TASK_TYPE_BUG = "_Bug".loc();
+Tasks.TASK_TYPE_OTHER = "_Other".loc();
 
 // Priorities:
-Tasks.consts.TASK_PRIORITY_HIGH = "_High".loc();
-Tasks.consts.TASK_PRIORITY_MEDIUM = "_Medium".loc(); // default
-Tasks.consts.TASK_PRIORITY_LOW = "_Low".loc();
+Tasks.TASK_PRIORITY_HIGH = "_High".loc();
+Tasks.TASK_PRIORITY_MEDIUM = "_Medium".loc(); // default
+Tasks.TASK_PRIORITY_LOW = "_Low".loc();
 
 // Development status:
-Tasks.consts.TASK_STATUS_PLANNED = "_Planned".loc(); // default
-Tasks.consts.TASK_STATUS_ACTIVE = "_Active".loc();
-Tasks.consts.TASK_STATUS_DONE = "_Done".loc();
-Tasks.consts.TASK_STATUS_AT_RISK = "_AtRisk".loc();
+Tasks.TASK_STATUS_PLANNED = "_Planned".loc(); // default
+Tasks.TASK_STATUS_ACTIVE = "_Active".loc();
+Tasks.TASK_STATUS_DONE = "_Done".loc();
+Tasks.TASK_STATUS_AT_RISK = "_AtRisk".loc();
 
 // Validation status:
-Tasks.consts.TASK_VALIDATION_NOT_TESTED = "_NotTested".loc(); // default
-Tasks.consts.TASK_VALIDATION_PASSED = "_Passed".loc();
-Tasks.consts.TASK_VALIDATION_FAILED = "_Failed".loc();
+Tasks.TASK_VALIDATION_NOT_TESTED = "_NotTested".loc(); // default
+Tasks.TASK_VALIDATION_PASSED = "_Passed".loc();
+Tasks.TASK_VALIDATION_FAILED = "_Failed".loc();
 
 /**
  * The task model.
@@ -42,7 +42,7 @@ Tasks.Task = Tasks.Record.extend({
   /**
    * A one-line summary of the task (ex. "Widget: Add a nifty feature").
    */
-  name: SC.Record.attr(String, { isRequired: YES, defaultValue: Tasks.consts.NEW_TASK_NAME }),
+  name: SC.Record.attr(String, { isRequired: YES, defaultValue: Tasks.NEW_TASK_NAME }),
 
   /**
    * Multi-line comments about the task (may be release notes for a feature or steps to reproduce a bug)
@@ -54,11 +54,11 @@ Tasks.Task = Tasks.Record.extend({
    */
   type: SC.Record.attr(String, {
     isRequired: YES,
-    defaultValue: Tasks.consts.TASK_TYPE_OTHER,
+    defaultValue: Tasks.TASK_TYPE_OTHER,
     allowed: [
-      Tasks.consts.TASK_TYPE_FEATURE,
-      Tasks.consts.TASK_TYPE_BUG,
-      Tasks.consts.TASK_TYPE_OTHER
+      Tasks.TASK_TYPE_FEATURE,
+      Tasks.TASK_TYPE_BUG,
+      Tasks.TASK_TYPE_OTHER
     ]
   }),
 
@@ -67,11 +67,11 @@ Tasks.Task = Tasks.Record.extend({
    */
   priority: SC.Record.attr(String, {
     isRequired: YES,
-    defaultValue: Tasks.consts.TASK_PRIORITY_MEDIUM,
+    defaultValue: Tasks.TASK_PRIORITY_MEDIUM,
     allowed: [
-      Tasks.consts.TASK_PRIORITY_HIGH,
-      Tasks.consts.TASK_PRIORITY_MEDIUM,
-      Tasks.consts.TASK_PRIORITY_LOW
+      Tasks.TASK_PRIORITY_HIGH,
+      Tasks.TASK_PRIORITY_MEDIUM,
+      Tasks.TASK_PRIORITY_LOW
     ]
   }),
 
@@ -80,12 +80,12 @@ Tasks.Task = Tasks.Record.extend({
    */
   status: SC.Record.attr(String, {
     isRequired: YES,
-    defaultValue: Tasks.consts.TASK_STATUS_PLANNED,
+    defaultValue: Tasks.TASK_STATUS_PLANNED,
     allowed: [
-      Tasks.consts.TASK_STATUS_PLANNED,
-      Tasks.consts.TASK_STATUS_ACTIVE,
-      Tasks.consts.TASK_STATUS_DONE,
-      Tasks.consts.TASK_STATUS_AT_RISK
+      Tasks.TASK_STATUS_PLANNED,
+      Tasks.TASK_STATUS_ACTIVE,
+      Tasks.TASK_STATUS_DONE,
+      Tasks.TASK_STATUS_AT_RISK
     ]
    }),
 
@@ -94,11 +94,11 @@ Tasks.Task = Tasks.Record.extend({
    */
   validation: SC.Record.attr(String, {
     isRequired: YES,
-    defaultValue: Tasks.consts.TASK_VALIDATION_NOT_TESTED,
+    defaultValue: Tasks.TASK_VALIDATION_NOT_TESTED,
     allowed: [
-      Tasks.consts.TASK_VALIDATION_NOT_TESTED,
-      Tasks.consts.TASK_VALIDATION_PASSED,
-      Tasks.consts.TASK_VALIDATION_FAILED
+      Tasks.TASK_VALIDATION_NOT_TESTED,
+      Tasks.TASK_VALIDATION_PASSED,
+      Tasks.TASK_VALIDATION_FAILED
     ]
   }),
 
@@ -122,11 +122,11 @@ Tasks.Task = Tasks.Record.extend({
    */
   icon: function() { // TODO: get better icons
 		switch (this.get('type')){
-			case Tasks.consts.TASK_TYPE_FEATURE:
+			case Tasks.TASK_TYPE_FEATURE:
 	    	return 'tasks-icon-feature';
-      case Tasks.consts.TASK_TYPE_BUG:
+      case Tasks.TASK_TYPE_BUG:
     		return 'tasks-icon-bug';
-      case Tasks.consts.TASK_TYPE_OTHER:
+      case Tasks.TASK_TYPE_OTHER:
     		return 'sc-icon-options-16';
 		}
   }.property('type').cacheable(),

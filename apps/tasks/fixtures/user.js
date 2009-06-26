@@ -15,22 +15,22 @@ Tasks.User.FIXTURES = [
 
 	{ id: 1,
 	name: "Pointy-Haired Boss",
-	role: Tasks.consts.USER_ROLE_MANAGER,
+	role: Tasks.USER_ROLE_MANAGER,
 	loginName: "bigboss" },
 
 	{ id: 2,
 	name: "Dilbert",
-	role: Tasks.consts.USER_ROLE_DEVELOPER,
+	role: Tasks.USER_ROLE_DEVELOPER,
 	loginName: "cyberpunk" },
 
 	{ id: 3,
 	name: "Asok",
-	role: Tasks.consts.USER_ROLE_DEVELOPER,
+	role: Tasks.USER_ROLE_DEVELOPER,
 	loginName: "hacker" },
 
 	{ id: 4,
 	name: "Larry",
-	role: Tasks.consts.USER_ROLE_TESTER,
+	role: Tasks.USER_ROLE_TESTER,
 	loginName: "tst1" }
 
 ];

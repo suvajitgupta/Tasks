@@ -33,7 +33,7 @@ Tasks.projectsController = SC.ArrayController.create(
 
 		var store = Tasks.get('store');
     var task = store.createRecord(Tasks.Project, {
-      name: Tasks.consts.NEW_PROJECT_NAME
+      name: Tasks.NEW_PROJECT_NAME
     });
     store.commitRecords();
     this.addObject(task); // TODO: Why do we have to manually add to the controller instead of store notifying?
@@ -80,9 +80,9 @@ Tasks.projectsController = SC.ArrayController.create(
 					for (var i = 0; i < len; i++) {
 						task = tasks.objectAt(i);
 						switch(task.get('priority')) {
-							case Tasks.consts.TASK_PRIORITY_HIGH: val = '^'; break;
-							case Tasks.consts.TASK_PRIORITY_MEDIUM: val = '-'; break;
-							case Tasks.consts.TASK_PRIORITY_LOW: val = 'v'; break;
+							case Tasks.TASK_PRIORITY_HIGH: val = '^'; break;
+							case Tasks.TASK_PRIORITY_MEDIUM: val = '-'; break;
+							case Tasks.TASK_PRIORITY_LOW: val = 'v'; break;
 						}
 						data += val + ' ';
 						data += task.get('displayName');
@@ -91,11 +91,11 @@ Tasks.projectsController = SC.ArrayController.create(
 						user = task.get('assignee');
 						if (user) data += ' [' + user.get('name') + ']';
 						val = task.get('type');
-						if(val != Tasks.consts.TASK_TYPE_OTHER)	data += ' $' + val;
+						if(val != Tasks.TASK_TYPE_OTHER)	data += ' $' + val;
 						val = task.get('status');
-						if(val != Tasks.consts.TASK_STATUS_PLANNED)	data += ' @' + val;
+						if(val != Tasks.TASK_STATUS_PLANNED)	data += ' @' + val;
 						val = task.get('validation');
-						if(val != Tasks.consts.TASK_VALIDATION_NOT_TESTED)	data += ' %' + val;
+						if(val != Tasks.TASK_VALIDATION_NOT_TESTED)	data += ' %' + val;
 						val = task.get('description');
 						if(val) data += '\n' + val;
 						data += '\n';

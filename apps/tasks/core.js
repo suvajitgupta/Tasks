@@ -13,7 +13,6 @@
 Tasks = SC.Object.create(SC.Statechart,
   /** @scope Tasks.prototype */ {
 
-  consts: {},
   NAMESPACE: 'Tasks',
   VERSION: '0.1',
 
