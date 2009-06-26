@@ -12,17 +12,6 @@ Tasks.projectsController = SC.ArrayController.create(
   allowsMultipleSelection: NO,
   allowsEmptySelection: NO,
   
-  summary: function() { // TODO: switch to a hover over
-  
-    var len = this.get('length'), ret;
-
-    if (len && len > 0) {
-      ret = len === 1? "1 project" : "%@ projects".fmt(len);
-    } else ret = "No projects";
-    
-    return '(' + ret + ')';
-  }.property('length').cacheable(),
-
   addProject: function() {
     // Create a new project with a default name
     // TODO: add new project right after selected item    
@@ -40,6 +29,7 @@ Tasks.projectsController = SC.ArrayController.create(
     listView.select(idx);
 
     // Begin editing newly created item.
+    debugger;
     var itemView = listView.itemViewForContentIndex(idx);
     itemView.beginEditing(); // TODO: make this work
   },

@@ -2,6 +2,7 @@
 // Project: Tasks
 // ==========================================================================
 /*globals Tasks */
+require('views/summary');
 
 /** @namespace
 
@@ -35,9 +36,9 @@ Tasks.mainPage = SC.Page.design({
         value: "_Tasks".loc() + " v" + Tasks.VERSION
       }),
       
-      summaryView: SC.LabelView.design({ // TODO: make this a hover over on Tasks label
-        layout: { top: 10, height: 40, left: 165, width: 100 },
-        valueBinding: 'Tasks.projectsController.summary'
+      summaryView: Tasks.SummaryView.design({ // TODO: make this a hover over on Tasks label?
+        layout: { top: 10, height: 40, left: 185, width: 100 },
+        valueBinding: 'Tasks.projectController.length'
       })
     }),
     
@@ -144,18 +145,6 @@ Tasks.mainPage = SC.Page.design({
       })
 
     })
-  }),
-  
-  projectsCount: function() { // TODO: switch to a hover over
- 
-    var len = Tasks.projectController.get('length'), ret;
- 
-    if (len && len > 0) {
-      ret = len === 1? "1 Project" : "%@ Projects".fmt(len);
-    } else ret = "No Projects";
- 
-    return '(' + ret + ')';
-  }//.property('length').cacheable()
-  
+  })
 
 });
