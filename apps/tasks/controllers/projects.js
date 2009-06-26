@@ -16,12 +16,51 @@ Tasks.projectsController = SC.ArrayController.create(
   allowsMultipleSelection: NO,
   allowsEmptySelection: NO,
   
-  addProject: function() { // TODO: implement
-		alert ('Not implemented!');
+  summary: function() { // TODO: switch to a hover over
+	
+    var len = this.get('length'), ret;
+
+    if (len && len > 0) {
+      ret = len === 1? "1 project" : "%@ projects".fmt(len);
+    } else ret = "No projects";
+    
+    return '(' + ret + ')';
+  }.property('length').cacheable(),
+
+  addProject: function() {
+    // Create a new project with a default name
+		// TODO: add new project right after selected item    
+
+		var store = Tasks.get('store');
+    var task = store.createRecord(Tasks.Project, {
+      name: Tasks.consts.NEW_PROJECT_NAME
+    });
+    store.commitRecords();
+    this.addObject(task); // TODO: Why do we have to manually add to the controller instead of store notifying?
+
+    var listView = Tasks.getPath('mainPage.mainPane.middleView.topLeftView.contentView');
+		var idx = listView.length - 1; // get index of new project in list
+		// TODO: get index of new project whereever it is in the list, don't assume it is at the end
+		listView.select(idx);
+
+    // Begin editing newly created item.
+    var itemView = listView.itemViewForContentIndex(idx);
+		itemView.beginEditing(); // TODO: make this work
 	},
 	
-  delProject: function() { // TODO: implement
-		alert ('Not implemented!');
+  delProject: function() {
+		//get the selected tasks
+		var sel = this.get('selection');
+    if (sel && sel.length > 0) {
+  		var store = Tasks.get('store');
+
+  		//pass the guids to be destroyed
+      var keys = sel.firstObject().get('guid');
+  		store.destroyRecords(Tasks.Project, [keys]);
+  		//commit the operation to send the request to the server
+  		store.commitRecords();
+			// TODO: what to do to remove the project from the ListView and clear the selection?
+    }
 	},
 	
   importData: function() { // TODO: implement
@@ -37,7 +76,7 @@ Tasks.projectsController = SC.ArrayController.create(
     this.forEach(function(rec){
 					var tasks = rec.get('tasks');
 					var len = tasks.get('length');
-				 	data += rec.get('displayName') + ': #' + len + ' tasks\n';
+				 	data += rec.get('displayName') + ': # ' + len + ' tasks\n';
 					for (var i = 0; i < len; i++) {
 						task = tasks.objectAt(i);
 						switch(task.get('priority')) {
@@ -66,7 +105,5 @@ Tasks.projectsController = SC.ArrayController.create(
 		
 		console.log(data);
 	}
-	
-	// TODO: add corresponding importData() function
   
 });

@@ -12,7 +12,7 @@ Tasks.mixin({
   // Login
   goStateA1: function(){
 		// TODO: switch to SC View/Controller for login page
-		var user = prompt('Login name:');
+		var user = 'dummy'; // prompt('Login name:');
 		if (user !== null && user !== '') {
 			Tasks.login(user);
 		}

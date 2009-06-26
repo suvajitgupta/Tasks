@@ -7,7 +7,7 @@ Task:
 {
 	id*: <Number>, # primary key
 	name*: <String>, # one-line summary
-	type*: Enum<String>, ("_Feature_" | "Bug" | "Other") # kind of Task to support testing workflow
+	type*: Enum<String>, ("Feature" | "Bug" | "_Other_") # kind of Task to support testing workflow
 	description: <String>, # multi-line additional information such as Feature details, Bug reproduction steps, or Release Notes
 	priority*: Enum<String> ("High" | "_Medium_" | "Low"), # High ones must be completed, Low ones not included in effort subtotals, may highlight dicate using fonts
 	status*: Enum<String> ("_Planned_" | "Active" | "Done" | "AtRisk"), # development status, may show via color coding

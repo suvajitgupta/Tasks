@@ -19,26 +19,25 @@ Tasks.mainPage = SC.Page.design({
 		childViews: 'topView middleView bottomView'.w(),
     
     topView: SC.View.design(SC.Border, {
-      layout: { top: 0, left: 0, right: 0, height: 41 },
+      layout: { top: 0, left: 10, right: 0, height: 42 },
       childViews: 'iconView labelView summaryView'.w(),
       borderStyle: SC.BORDER_BOTTOM,
       
       iconView: SC.LabelView.design({
-        layout: { centerY: 0, height: 40, left: 8, width: 200 },
+        layout: { centerY: 0, height: 40, left: 2, width: 200 },
         classNames: ['tasks-logo']
       }),
       
       labelView: SC.LabelView.design({
-        layout: { top: 10, height: 40, left: 60, width: 200 },
+        layout: { top: 8, height: 40, left: 55, width: 200 },
         controlSize: SC.LARGE_CONTROL_SIZE,
         fontWeight: SC.BOLD_WEIGHT,
         value: "_Tasks".loc() + " v" + Tasks.VERSION
       }),
       
       summaryView: SC.LabelView.design({ // TODO: make this a hover over on Tasks label
-        layout: { top: 10, height: 40, right: 10, width: 200 },
-        textAlign: SC.ALIGN_RIGHT,
-				valueBinding: 'Tasks.tasksController.summary'
+        layout: { top: 10, height: 40, left: 165, width: 100 },
+				valueBinding: 'Tasks.projectsController.summary'
       })
     }),
     
@@ -103,6 +102,7 @@ Tasks.mainPage = SC.Page.design({
         layout: { centerY: 0, left: 43, height: 21, width: 30 },
         title: "-",
         titleMinWidth: 0,
+				isEnabledBinding: 'Tasks.projectsController.hasSelection',
         fontSize: 10,
         target: 'Tasks.projectsController',
         action: 'delProject'
@@ -137,7 +137,7 @@ Tasks.mainPage = SC.Page.design({
         layout: { centerY: 0, height: 21, left: 288, width: 30 },
         title:  "-",
         titleMinWidth: 0,
-				isEnabled: 'Tasks.tasksController.hasSelection', // TODO: kill this since a Project will always be selected in master list?
+				isEnabledBinding: 'Tasks.tasksController.hasSelection',
 				fontSize: 10,
 				target: 'Tasks.tasksController',
 				action: 'delTask'

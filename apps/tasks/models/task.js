@@ -129,7 +129,7 @@ Tasks.Task = Tasks.Record.extend({
       case Tasks.consts.TASK_TYPE_OTHER:
     		return 'sc-icon-options-16';
 		}
-  }.property().cacheable(),
+  }.property('type').cacheable(),
 
   /**
    * A string summarizing key facets of the Task for display.
