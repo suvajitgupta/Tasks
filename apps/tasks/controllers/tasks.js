@@ -23,7 +23,7 @@ Tasks.tasksController = SC.TreeController.create(
 		alert ('Not implemented!');
 	},
 	
-	delTask: function() { // TODO: implement
+	deleteTask: function() { // TODO: implement
 		alert ('Not implemented!');
 	}
 	

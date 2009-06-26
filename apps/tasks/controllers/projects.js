@@ -48,7 +48,7 @@ Tasks.projectsController = SC.ArrayController.create(
 		itemView.beginEditing(); // TODO: make this work
 	},
 	
-  delProject: function() {
+  deleteProject: function() {
 		//get the selected tasks
 		var sel = this.get('selection');
     if (sel && sel.length > 0) {
