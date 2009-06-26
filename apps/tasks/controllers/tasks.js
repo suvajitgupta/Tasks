@@ -1,15 +1,11 @@
-// ==========================================================================
-// Project: Tasks 
-// ==========================================================================
 /*globals Tasks */
 
 /** 
-
-	This is the controller for the Tasks detail list, driven by the selected Project
-	
+  This is the controller for the Tasks detail list, driven by the selected Project
+  
   @extends SC.TreeController
-	@author Joshua Holt
-	@author Suvajit Gupta
+  @author Joshua Holt
+  @author Suvajit Gupta
 */
 Tasks.tasksController = SC.TreeController.create(
 /** @scope Tasks.tasksController.prototype */ {
@@ -19,12 +15,12 @@ Tasks.tasksController = SC.TreeController.create(
 
   // TODO: set selection to first item intially, later switching to selection from "last session"
 
-	addTask: function() { // TODO: implement
-		alert ('Not implemented!');
-	},
-	
-	deleteTask: function() { // TODO: implement
-		alert ('Not implemented!');
-	}
-	
+  addTask: function() { // TODO: implement
+    alert ('Not implemented!');
+  },
+  
+  deleteTask: function() { // TODO: implement
+    alert ('Not implemented!');
+  }
+  
 });

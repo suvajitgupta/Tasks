@@ -5,18 +5,18 @@
 
 /** @namespace
 
-	This page describes the main user interface for the Tasks application.
-	
+  This page describes the main user interface for the Tasks application.
+  
   @extends SC.Object
-	@author Suvajit Gupta
-	@author Joshua Holt
+  @author Suvajit Gupta
+  @author Joshua Holt
 */
 
 Tasks.mainPage = SC.Page.design({
 
   mainPane: SC.MainPane.design({
-		
-		childViews: 'topView middleView bottomView'.w(),
+    
+    childViews: 'topView middleView bottomView'.w(),
     
     topView: SC.View.design(SC.Border, {
       layout: { top: 0, left: 10, right: 0, height: 42 },
@@ -37,7 +37,7 @@ Tasks.mainPage = SC.Page.design({
       
       summaryView: SC.LabelView.design({ // TODO: make this a hover over on Tasks label
         layout: { top: 10, height: 40, left: 165, width: 100 },
-				valueBinding: 'Tasks.projectsController.summary'
+        valueBinding: 'Tasks.projectsController.summary'
       })
     }),
     
@@ -102,7 +102,7 @@ Tasks.mainPage = SC.Page.design({
         layout: { centerY: 0, left: 43, height: 21, width: 30 },
         title: "-",
         titleMinWidth: 0,
-				isEnabledBinding: 'Tasks.projectsController.hasSelection',
+        isEnabledBinding: 'Tasks.projectsController.hasSelection',
         fontSize: 10,
         target: 'Tasks.projectsController',
         action: 'deleteProject'
@@ -112,16 +112,16 @@ Tasks.mainPage = SC.Page.design({
         layout: { centerY: 0, height: 21, left: 88, width: 50 },
         title:  "_Import".loc(),
         titleMinWidth: 0,
-				target: 'Tasks.projectsController',
-				action: 'importData'
+        target: 'Tasks.projectsController',
+        action: 'importData'
       }),
       
       exportButton: SC.ButtonView.design({
         layout: { centerY: 0, height: 21, left: 148, width: 50 },
         title:  "_Export".loc(),
         titleMinWidth: 0,
-				target: 'Tasks.projectsController',
-				action: 'exportData'
+        target: 'Tasks.projectsController',
+        action: 'exportData'
       }),
       
       addTaskButton: SC.ButtonView.design({
@@ -129,18 +129,18 @@ Tasks.mainPage = SC.Page.design({
         title:  "+",
         titleMinWidth: 0,
         fontSize: 10,
-				target: 'Tasks.tasksController',
-				action: 'addTask'
+        target: 'Tasks.tasksController',
+        action: 'addTask'
       }),
 
       deleteTaskButton: SC.ButtonView.design({
         layout: { centerY: 0, height: 21, left: 288, width: 30 },
         title:  "-",
         titleMinWidth: 0,
-				isEnabledBinding: 'Tasks.tasksController.hasSelection',
-				fontSize: 10,
-				target: 'Tasks.tasksController',
-				action: 'deleteTask'
+        isEnabledBinding: 'Tasks.tasksController.hasSelection',
+        fontSize: 10,
+        target: 'Tasks.tasksController',
+        action: 'deleteTask'
       })
 
     })
