@@ -1,9 +1,12 @@
-// ========================================================================
-// Tasks.SummaryView Tests
-// ========================================================================
+/*globals Tasks sc_require module test ok equals */
 
+/**
+ * Tasks Summary View unit tests.
+ *
+ * @author Mike Ball
+ * @author Suvajit Gupta
+ */
 
-/* Test Tasks.SummaryView */
 
 
 var pane = SC.ControlTestPane.design()
