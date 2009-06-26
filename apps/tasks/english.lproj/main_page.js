@@ -37,7 +37,7 @@ Tasks.mainPage = SC.Page.design({
       
       summaryView: SC.LabelView.design({ // TODO: make this a hover over on Tasks label
         layout: { top: 10, height: 40, left: 165, width: 100 },
-        valueBinding: 'Tasks.projectsController.summary'
+        valueBinding: 'Tasks.projectsController.summary' //
       })
     }),
     
