@@ -26,10 +26,10 @@ Infrastructure:
 - Allow drag-n-drop reordering [SG] <EO> @Active
 - Show priority (using fonts) & status/validation (using color & appending check/cross) [SG] <JH2>
 - Add hover Tooltip showing Description [SG] <EG>
+- Add modal popup form for editing [SG] <JH2>
 - Show range-based subtotals (exclude Low items) in curly braces for load balancing, append "?" for subtotals including unknown efforts [SG] <SE>
 - Add double-click in-cell editing [SG] <EO> @AtRisk
-- Add context menu to Edit/Cut/Copy/Paste/Delete/Duplicate items [SG] <JH2>
-- Add modal popup form for editing [SG] <JH2>
+- Add context menu to Edit/Cut/Copy/Paste/Delete/Duplicate items [SG] <JL>
 - Add Cut/Copy/Paste/Duplicate/Delete buttons in top Toolbar & hotkeys [SG] <JH2>
 
 "Project" Manager:
@@ -41,10 +41,10 @@ Infrastructure:
 - Add Inbox project by default [SG] <SE> @Active
 - Make Master list of Projects collapsible [SG] <EG>
 - Add hover Tooltip to project name showing number of Tasks [SG] <EG>
-- Add drag-n-drop of Tasks to Projects [SG] <EO> @AtRisk
 - Add double-click in-cell editing [SG] <EO> @AtRisk
 - Add context menu: Delete [SG] <JL>
 - Add warning Alert box about deleting Project with Tasks [SG] <SE>
+- Add drag-n-drop of Tasks to Projects [SG] <MB> @AtRisk
 
 "User" Manager:
 - Add login screen (User authentication) [SG] <SE>
