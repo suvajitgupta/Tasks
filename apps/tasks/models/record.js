@@ -1,3 +1,7 @@
+/*globals Tasks sc_require */
+sc_require('core');
+sc_require('models/record_attribute');
+
 /**
  * The base record from which all models in the Tasks framework will derive.
  *

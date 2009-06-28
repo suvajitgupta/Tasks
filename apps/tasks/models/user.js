@@ -1,5 +1,4 @@
 /*globals Tasks sc_require */
-
 sc_require('models/record');
 
 Tasks.NEW_USER_NAME = "_FirstLast".loc();
