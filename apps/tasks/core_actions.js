@@ -10,17 +10,32 @@ sc_require('core');
 Tasks.mixin({
   
   // TODO: Should we be using parameters in any of these action functions?
-  login: function(loginName) {
+  login: function(loginName, password) {
     switch (this.state.a) {
       case 1:
         this.goState('a', 2);
-        var success = true; // TODO: lookup user in Fixtures, eventually implement server-based login
-        if (success) this.authenticationSuccess();
-        else this.authenticationFailure();
+        if (this.authenticateUser (loginName, password)) {
+          this.authenticationSuccess();
+        } 
+        else {
+          this.authenticationFailure();
+        }
         break;
       default:
         this._logActionNotHandled('login', 'a', this.state.a);  
     }
+  },
+  
+  authenticateUser: function(loginName, password) { // TODO: implement server-based authentication
+    var store = Tasks.get('store');
+    var users = Tasks.store.findAll(Tasks.User);
+    var len = users.get('length');
+    for (var i = 0; i < len; i++) {
+      if (loginName === users.objectAt(i).get('loginName')) {
+        return true;
+      }
+    }
+    return false;
   },
   
   authenticationSuccess: function() {

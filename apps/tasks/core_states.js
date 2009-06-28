@@ -12,9 +12,9 @@ Tasks.mixin({
   // Login
   goStateA1: function(){
     // TODO: switch to SC View/Controller for login page
-    var user = 'dummy'; // prompt('Login name:');
+    var user = prompt('Login name:'); // TODO: replace with proper Login dialog
     if (user !== null && user !== '') {
-      Tasks.login(user);
+      Tasks.login(user, 'password'); // TODO: pass actual password input by user
     }
   },
 
@@ -35,10 +35,7 @@ Tasks.mixin({
     var projects = Tasks.store.findAll(Tasks.Project);
     Tasks.projectsController.set('content', projects);
 
-    // Instantiate Your Views
-    // The default code here will make the mainPane for your application visible
-    // on screen.  If you app gets any level of complexity, you will probably 
-    // create multiple pages and panes.  
+    // Instantiate Views
     Tasks.getPath('mainPage.mainPane').append();
   }
 
