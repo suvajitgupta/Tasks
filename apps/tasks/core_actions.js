@@ -14,7 +14,7 @@ Tasks.mixin({
     switch (this.state.a) {
       case 1:
         this.goState('a', 2);
-        if (this.authenticateUser (loginName, password)) {
+        if (this._authenticateUser (loginName, password)) {
           this.authenticationSuccess();
         } 
         else {
@@ -26,7 +26,7 @@ Tasks.mixin({
     }
   },
   
-  authenticateUser: function(loginName, password) { // TODO: implement server-based authentication
+  _authenticateUser: function(loginName, password) { // TODO: implement server-based authentication
     var store = Tasks.get('store');
     var users = Tasks.store.findAll(Tasks.User);
     var len = users.get('length');
