@@ -21,7 +21,7 @@ Tasks.TASK_STATUS_DONE = "_Done".loc();
 Tasks.TASK_STATUS_RISKY = "_AtRisk".loc();
 
 // Validation status:
-Tasks.TASK_VALIDATION_UNTESTED = "_NotTested".loc(); // default
+Tasks.TASK_VALIDATION_UNTESTED = "_Untested".loc(); // default
 Tasks.TASK_VALIDATION_PASSED = "_Passed".loc();
 Tasks.TASK_VALIDATION_FAILED = "_Failed".loc();
 
