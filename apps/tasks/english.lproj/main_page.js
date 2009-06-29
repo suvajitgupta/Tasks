@@ -3,7 +3,7 @@
 // ==========================================================================
 /*globals Tasks */
 require('views/summary');
-
+require('views/task');
 /** @namespace
 
   This page describes the main user interface for the Tasks application.
@@ -80,7 +80,8 @@ Tasks.mainPage = SC.Page.design({
           contentValueEditable: true,
           canReorderContent: true,
           canDeleteContent: true,
-          destroyOnRemoval: YES
+          destroyOnRemoval: YES,
+          exampleView: Tasks.TaskView
         })
       })
     }),
