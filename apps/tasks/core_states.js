@@ -11,8 +11,8 @@ Tasks.mixin({
   
   // Login
   goStateA1: function(){
-    // TODO: switch to SC View/Controller for login page
-    var user = prompt('Login name:'); // TODO: replace with proper Login dialog
+    // var user = prompt('Login name:'); // TODO: replace with proper Login dialog
+    var user = 'bigboss';
     if (user !== null && user !== '') {
       Tasks.login(user, 'password'); // TODO: pass actual password input by user
     }
