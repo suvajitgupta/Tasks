@@ -29,23 +29,24 @@ Tasks.projectsController = SC.ArrayController.create(
     listView.select(idx);
 
     // Begin editing newly created item.
-    debugger;
     var itemView = listView.itemViewForContentIndex(idx);
-    itemView.beginEditing(); // TODO: make this work
+    itemView.beginEditing.invokeLater(itemView);  // you must wait for run loop to complete before this is called
   },
   
   deleteProject: function() {
     //get the selected tasks
     var sel = this.get('selection');
-    if (sel && sel.length > 0) {
+    
+    if (sel && sel.length() > 0) {
       var store = Tasks.get('store');
 
-      //pass the guids to be destroyed
-      var keys = sel.firstObject().get('guid');
+      //pass the record to be deleted
+      var keys = sel.firstObject().get('id');
       store.destroyRecords(Tasks.Project, [keys]);
+
       //commit the operation to send the request to the server
       store.commitRecords();
-      // TODO: what to do to remove the project from the ListView and clear the selection?
+      // TODO: what to do to remove the "New Project" from the ListView and clear the selection?
     }
   },
   
