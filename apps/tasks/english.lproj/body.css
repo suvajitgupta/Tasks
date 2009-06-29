@@ -16,13 +16,32 @@
   width:16px;
 }
 
-.tasks-priority-high{
+
+.tasks-priority-high {
 	font-weight: bold;
 }
-.tasks-priority-medium{
+
+.tasks-priority-medium {
   font-weight: none;
 }
-.tasks-priority-low{
+
+.tasks-priority-low {
   font-style: italic;
-	
+}
+
+
+.tasks-status-planned {
+	color: black;
+}
+
+.tasks-status-active {
+  color: blue;
+}
+
+.tasks-status-done {
+  color: green;
+}
+
+.tasks-status-risky {
+  color: red;
 }

@@ -28,8 +28,8 @@ SC.stringsFor('English', {
   '_Planned': "Planned",
   '_Active': "Active",
   '_Done': "Done",
-  '_AtRisk': "AtRisk",
-  '_NotTested': "NotTested",
+  '_Risky': "Risky",
+  '_Untested': "Untested",
   '_Passed': "Passed",
   '_Failed': "Failed",
   

@@ -39,7 +39,7 @@
     </control>
     <control controlID="10" controlTypeID="com.balsamiq.mockups::ButtonBar" x="729" y="729" w="-1" h="-1" measuredW="279" measuredH="31" zOrder="10" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>Planned%2C%20Active%2C%20Done%2C%20AtRisk</text>
+        <text>Planned%2C%20Active%2C%20Done%2C%20Risky</text>
       </controlProperties>
     </control>
     <control controlID="11" controlTypeID="com.balsamiq.mockups::ButtonBar" x="533" y="729" w="-1" h="-1" measuredW="188" measuredH="31" zOrder="11" locked="false" isInGroup="-1">
@@ -103,7 +103,7 @@
     </control>
     <control controlID="21" controlTypeID="com.balsamiq.mockups::Menu" x="782" y="252" w="-1" h="-1" measuredW="150" measuredH="425" zOrder="21" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>Edit...%0ACut%0ACopy%0APaste%0ADuplicate%0ADelete%0A---%0AHigh%0AMedium%0ALow%0A---%0APlanned%0AActive%0ADone%0AAtRisk%0A---%0ANotTested%0APassed%0AFailed</text>
+        <text>Edit...%0ACut%0ACopy%0APaste%0ADuplicate%0ADelete%0A---%0AHigh%0AMedium%0ALow%0A---%0APlanned%0AActive%0ADone%0ARisky%0A---%0ANotTested%0APassed%0AFailed</text>
       </controlProperties>
     </control>
     <control controlID="22" controlTypeID="com.balsamiq.mockups::Button" x="976" y="44" w="-1" h="-1" measuredW="32" measuredH="28" zOrder="22" locked="false" isInGroup="-1">
@@ -245,7 +245,7 @@
     </control>
     <control controlID="48" controlTypeID="com.balsamiq.mockups::StickyNote" x="995" y="692" w="151" h="245" measuredW="109" measuredH="123" zOrder="47" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>Developers%20set%20status%3A%0A*%20Planned%20%3D%20black%0A*%20Active%20%3D%20blue%0A*%20Done%20%3D%20green%0A*%20AtRisk%20%3D%20red%0ATesters%20set%20validation%3A%0A*%20NotTested%0A*%20Passed%20%3D%20add%20check%0A*%20Failed%20%3D%20add%20cross</text>
+        <text>Developers%20set%20status%3A%0A*%20Planned%20%3D%20black%0A*%20Active%20%3D%20blue%0A*%20Done%20%3D%20green%0A*%20Risky%20%3D%20red%0ATesters%20set%20validation%3A%0A*%20NotTested%0A*%20Passed%20%3D%20add%20check%0A*%20Failed%20%3D%20add%20cross</text>
         <size>12</size>
         <bold>false</bold>
       </controlProperties>

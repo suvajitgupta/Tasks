@@ -18,10 +18,10 @@ Tasks.TASK_PRIORITY_LOW = "_Low".loc();
 Tasks.TASK_STATUS_PLANNED = "_Planned".loc(); // default
 Tasks.TASK_STATUS_ACTIVE = "_Active".loc();
 Tasks.TASK_STATUS_DONE = "_Done".loc();
-Tasks.TASK_STATUS_AT_RISK = "_AtRisk".loc();
+Tasks.TASK_STATUS_RISKY = "_AtRisk".loc();
 
 // Validation status:
-Tasks.TASK_VALIDATION_NOT_TESTED = "_NotTested".loc(); // default
+Tasks.TASK_VALIDATION_UNTESTED = "_NotTested".loc(); // default
 Tasks.TASK_VALIDATION_PASSED = "_Passed".loc();
 Tasks.TASK_VALIDATION_FAILED = "_Failed".loc();
 
@@ -82,7 +82,7 @@ Tasks.Task = Tasks.Record.extend({
       Tasks.TASK_STATUS_PLANNED,
       Tasks.TASK_STATUS_ACTIVE,
       Tasks.TASK_STATUS_DONE,
-      Tasks.TASK_STATUS_AT_RISK
+      Tasks.TASK_STATUS_RISKY
     ]
    }),
 
@@ -91,9 +91,9 @@ Tasks.Task = Tasks.Record.extend({
    */
   validation: SC.Record.attr(String, {
     isRequired: YES,
-    defaultValue: Tasks.TASK_VALIDATION_NOT_TESTED,
+    defaultValue: Tasks.TASK_VALIDATION_UNTESTED,
     allowed: [
-      Tasks.TASK_VALIDATION_NOT_TESTED,
+      Tasks.TASK_VALIDATION_UNTESTED,
       Tasks.TASK_VALIDATION_PASSED,
       Tasks.TASK_VALIDATION_FAILED
     ]

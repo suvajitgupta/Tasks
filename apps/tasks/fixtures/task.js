@@ -31,7 +31,7 @@ Tasks.Task.FIXTURES = [
   description: "Description for task 3" ,
   type: Tasks.TASK_TYPE_OTHER,
   priority: Tasks.TASK_PRIORITY_LOW,
-  status: Tasks.TASK_STATUS_AT_RISK,
+  status: Tasks.TASK_STATUS_RISKY,
   submitter: 1,
   assignee: 2
   },
@@ -104,7 +104,7 @@ Tasks.Task.FIXTURES = [
   type: Tasks.TASK_TYPE_BUG,
   priority: Tasks.TASK_PRIORITY_HIGH,
   status: Tasks.TASK_STATUS_DONE,
-  validation: Tasks.TASK_VALIDATION_NOT_TESTED,
+  validation: Tasks.TASK_VALIDATION_UNTESTED,
   effort: "1",
   submitter: 4,
   assignee: 2
@@ -124,7 +124,7 @@ Tasks.Task.FIXTURES = [
   name: "Summary for task twelve",
   description: "Description for task 12" ,
   priority: Tasks.TASK_PRIORITY_LOW,
-  status: Tasks.TASK_STATUS_AT_RISK,
+  status: Tasks.TASK_STATUS_RISKY,
   effort: "10",
   submitter: 1,
   assignee: 2
@@ -164,7 +164,7 @@ Tasks.Task.FIXTURES = [
   type: Tasks.TASK_TYPE_FEATURE,
   priority: Tasks.TASK_PRIORITY_MEDIUM,
   status: Tasks.TASK_STATUS_FAILED,
-  validation: Tasks.TASK_VALIDATION_NOT_TESTED,
+  validation: Tasks.TASK_VALIDATION_UNTESTED,
   submitter: 2,
   assignee: 3
   },
@@ -175,7 +175,7 @@ Tasks.Task.FIXTURES = [
   type: Tasks.TASK_TYPE_OTHER,
   priority: Tasks.TASK_PRIORITY_LOW,
   status: Tasks.TASK_STATUS_FAILED,
-  validation: Tasks.TASK_VALIDATION_NOT_TESTED,
+  validation: Tasks.TASK_VALIDATION_UNTESTED,
   submitter: 1,
   assignee: 2
   },
@@ -184,7 +184,7 @@ Tasks.Task.FIXTURES = [
   name: "Summary for task eightteen",
   priority: Tasks.TASK_PRIORITY_HIGH,
   status: Tasks.TASK_STATUS_FAILED,
-  validation: Tasks.TASK_VALIDATION_NOT_TESTED,
+  validation: Tasks.TASK_VALIDATION_UNTESTED,
   submitter: 4,
   assignee: 3
   }

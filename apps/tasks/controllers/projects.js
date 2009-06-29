@@ -82,7 +82,7 @@ Tasks.projectsController = SC.ArrayController.create(
             val = task.get('status');
             if(val != Tasks.TASK_STATUS_PLANNED)  data += ' @' + val;
             val = task.get('validation');
-            if(val != Tasks.TASK_VALIDATION_NOT_TESTED)  data += ' %' + val;
+            if(val != Tasks.TASK_VALIDATION_UNTESTED)  data += ' %' + val;
             val = task.get('description');
             if(val) data += '\n' + val;
             data += '\n';

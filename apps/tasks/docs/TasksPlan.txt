@@ -24,11 +24,11 @@ Infrastructure:
 - Add "+" & "-" & Status/Priority/Validation buttons to bottom Toolbar [SG] <JH2> @Active
 - Set bottom Toolbar button enablement based on having a selection [SG] <EO> @Active
 - Allow drag-n-drop reordering [SG] <EO> @Active
-- Show priority (using fonts) & status/validation (using color & appending check/cross) [SG] <JH2>
+- Show priority (using fonts) & status/validation (using color & appending check/cross) [SG] <MB> @Active
 - Add hover Tooltip showing Description [SG] <EG>
 - Add modal popup form for editing [SG] <JH2>
 - Show range-based subtotals (exclude Low items) in curly braces for load balancing, append "?" for subtotals including unknown efforts [SG] <SE>
-- Add double-click in-cell editing [SG] <EO> @AtRisk
+- Add double-click in-cell editing [SG] <EO> @Risky
 - Add context menu to Edit/Cut/Copy/Paste/Delete/Duplicate items [SG] <JL>
 - Add Cut/Copy/Paste/Duplicate/Delete buttons in top Toolbar & hotkeys [SG] <JH2>
 
@@ -41,10 +41,10 @@ Infrastructure:
 - Add Inbox project by default [SG] <SE> @Active
 - Make Master list of Projects collapsible [SG] <EG>
 - Add hover Tooltip to project name showing number of Tasks [SG] <EG>
-- Add double-click in-cell editing [SG] <EO> @AtRisk
+- Add double-click in-cell editing [SG] <EO> @Risky
 - Add context menu: Delete [SG] <JL>
 - Add warning Alert box about deleting Project with Tasks [SG] <SE>
-- Add drag-n-drop of Tasks to Projects [SG] <MB> @AtRisk
+- Add drag-n-drop of Tasks to Projects [SG] <MB> @Risky
 
 "User" Manager:
 - Add login screen (User authentication) [SG] <SE>
@@ -82,7 +82,7 @@ Hardening/Styling:
 - Extend Fixtures to add a randomized/large datasets, test view scrolling [SG] <SE> @Active
 - Develop Model & View unit tests [SG] <SE> @Active
 - Implement CSS, embed sprited images [SG] <MG> @Active
-- Provide SproutCore doctool-style comments [SG] <EO> @AtRisk
+- Provide SproutCore doctool-style comments [SG] <EO> @Risky
 
 Testing/Delivery:
 - Manually test & note/fix showstoppers [BM] <SG> @Active
