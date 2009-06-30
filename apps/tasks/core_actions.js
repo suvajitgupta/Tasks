@@ -53,16 +53,11 @@ Tasks.mixin({
   },
 
   _loadData: function() {
-    var store = Tasks.get('store');
-
     // Load all of the tasks from the data source (via the store)
-    var projects = store.findAll(Tasks.Project);
+    var projects = Tasks.get('store').findAll(Tasks.Project);
     
-    // Create the special "Inbox" project that will contain all unassigned tasks.
-    var inbox = store.createRecord(Tasks.Project, { name: "_InboxProject".loc(), id: 0 });
-    Tasks.set('inbox', inbox);
-
-    projects.insertAt(0, inbox);
+    // Create and populate the special "Inbox" project that will contain all unassigned tasks.
+    projects.insertAt(0, this._initializeInbox());
 
     // TODO: Implement callbacks in the data source.
     /*
@@ -73,6 +68,24 @@ Tasks.mixin({
     */
 
     Tasks.projectsController.set('content', projects);
+  },
+
+  _initializeInbox: function() {
+    var store = Tasks.get('store');
+
+    // Populate the inbox with all unassigned tasks.
+    var tasks = store.findAll(Tasks.Task);
+    var projects = store.findAll(Tasks.Project);
+
+    for (var project in projects) {
+
+    }
+
+    // TODO: This doesn't actually appear to get persisted in the fixtures data source.
+    var inbox = store.createRecord(Tasks.Project, { name: "_InboxProject".loc(), id: 0 });
+    Tasks.set('inbox', inbox);
+
+    return inbox;
   },
   
   authenticationFailure: function() {
