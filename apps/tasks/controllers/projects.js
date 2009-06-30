@@ -31,6 +31,7 @@ Tasks.projectsController = SC.ArrayController.create(
     // Begin editing newly created item.
     var itemView = listView.itemViewForContentIndex(idx);
     itemView.beginEditing.invokeLater(itemView);  // you must wait for run loop to complete before this is called
+    // TODO: when user changes name of New Project it doesn't change in ListView
   },
   
   deleteProject: function() {
