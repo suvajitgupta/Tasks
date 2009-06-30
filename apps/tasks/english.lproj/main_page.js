@@ -154,7 +154,8 @@ Tasks.mainPage = SC.Page.design({
       
       rightView: SC.View.design({
         layout: { top: 0, bottom: 0, right: 0, left: 361 }//,
-        //childViews: 'statusButton priorityView validationView'.w(), TODO: Actually implement these buttons.
+        //childViews: 'statusButton priorityView validationView'.w(), 
+        //TODO: Actually implement these buttons.
       })
       
     })
