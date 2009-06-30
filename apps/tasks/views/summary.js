@@ -20,7 +20,7 @@ Tasks.SummaryView = SC.View.extend(
   
   render: function(context, firstTime) {
 
-    var len = this.get('value'), ret;
+    var len = this.get('value') - 1, ret;
 
     switch(len) {
       case 0: 

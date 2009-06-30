@@ -36,11 +36,11 @@ Infrastructure/Modes:
 "Project" Manager:
 - Show Project name & time left in curly braces (if specified) [SG] <JH2> @Done
 - Add Master/Detail Explorer view with click selection of Projects showing corresponding Tasks [JH2] <SG> @Done
-- Add "+" & "-" buttons in bottom Toolbar [SG] <EO> @Risky
+- Add "+" & "-" buttons in bottom Toolbar, don't allow "Inbox" to be deleted [SG] <EO> @Risky
 - Set bottom Toolbar button enablement based on having a selection [SG] <EO> @Done
 - Allow drag-n-drop reordering [SG] <EO> @Done
 - Add double-click in-cell editing [SG] <EO> @Risky
-- Add Inbox project by default [SG] <SE> @Active
+- Add Inbox project by default [SG] <SE> @Done
 - Make Master list of Projects collapsible [SG] <EG>
 - Add hover Tooltip showing number of Tasks in project [SG] <EG>
 - Add context menu to Delete a project [SG] <JL>

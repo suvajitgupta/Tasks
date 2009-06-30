@@ -64,7 +64,9 @@ Tasks.projectsController = SC.ArrayController.create(
     this.forEach(function(rec){
           var tasks = rec.get('tasks');
           var len = tasks.get('length');
-          data += rec.get('displayName') + ': # ' + len + ' tasks\n';
+          if(rec.get('name') !== Tasks.INBOX_PROJECT_NAME) {
+            data += rec.get('displayName') + ': # ' + len + ' tasks\n';
+          }
           for (var i = 0; i < len; i++) {
             task = tasks.objectAt(i);
             switch(task.get('priority')) {

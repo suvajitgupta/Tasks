@@ -56,12 +56,12 @@ Tasks.mixin({
     // Load all of the tasks from the data source (via the store)
     var projects = Tasks.get('store').findAll(Tasks.Project);
     
-    // Create and populate the special "Inbox" project that will contain all unassigned tasks.
-    projects.insertAt(0, this._initializeInbox());
+    // Prepend and populate the special "Inbox" project that will contain all unassigned tasks.
+    projects.insertAt(0, this._createInbox());
 
     // TODO: Implement callbacks in the data source.
     /*
-    {
+    , {
       successCallback: Tasks.dataLoadSuccess().bind(this),
       failureCallback: Tasks.dataLoadFailure().bind(this)
     });
@@ -70,21 +70,33 @@ Tasks.mixin({
     Tasks.projectsController.set('content', projects);
   },
 
-  _initializeInbox: function() {
+  _createInbox: function() {
     var store = Tasks.get('store');
 
-    // Populate the inbox with all unassigned tasks.
-    var tasks = store.findAll(Tasks.Task);
-    var projects = store.findAll(Tasks.Project);
-
-    for (var project in projects) {
-
+    // Extract all unassigned tasks for the Inbox
+    var tasks = store.findAll(Tasks.Task), task, unassigned = [];
+    var taskCount = tasks.get('length');
+    for (var i = 0; i < taskCount; i++) {
+      task = tasks.objectAt(i);
+      unassigned.push(task.get('id')); // add in all tasks
+    }
+    
+    var projects = store.findAll(Tasks.Project), project;
+    var projectCount = projects.get('length');
+    for (i = 0; i < projectCount; i++) {
+      project = projects.objectAt(i);
+      tasks = project.get('tasks');
+      taskCount = tasks.get('length');
+      for (var j = 0; j < taskCount; j++) {
+        task = tasks.objectAt(j);
+        var idx = unassigned.indexOf(task.get('id'));
+        unassigned.splice(idx, 1); // remove assigned tasks
+      }
     }
 
-    // TODO: This doesn't actually appear to get persisted in the fixtures data source.
-    var inbox = store.createRecord(Tasks.Project, { name: "_InboxProject".loc(), id: 0 });
+    // FIXME: This doesn't actually appear to get persisted in the fixtures data source.
+    var inbox = store.createRecord(Tasks.Project, { id: 0, name: Tasks.INBOX_PROJECT_NAME, tasks: unassigned });
     Tasks.set('inbox', inbox);
-
     return inbox;
   },
   

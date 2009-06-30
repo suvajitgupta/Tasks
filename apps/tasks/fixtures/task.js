@@ -212,7 +212,7 @@ Tasks.Task.FIXTURES = [
   priority: Tasks.TASK_PRIORITY_MEDIUM,
   status: Tasks.TASK_STATUS_ACTIVE,
   submitter: 4,
-  assignee: 3
+  assignee: 2
   },
 
   { id: 22,

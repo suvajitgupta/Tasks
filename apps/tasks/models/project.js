@@ -3,6 +3,7 @@
 sc_require('models/record');
 
 Tasks.NEW_PROJECT_NAME = "_NewProject".loc();
+Tasks.INBOX_PROJECT_NAME = "_InboxProject".loc();
 
 /**
  * The project model.
