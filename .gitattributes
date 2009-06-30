@@ -1,0 +1,1 @@
+.graffle -crlf -diff -merge .pdf -crlf -diff -merge
