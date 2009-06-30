@@ -205,6 +205,23 @@ Tasks.Task.FIXTURES = [
   status: Tasks.TASK_STATUS_ACTIVE,
   submitter: 4,
   assignee: 3
+  },
+
+  { id: 21,
+  name: "Summary for task twenty-one",
+  priority: Tasks.TASK_PRIORITY_MEDIUM,
+  status: Tasks.TASK_STATUS_ACTIVE,
+  submitter: 4,
+  assignee: 3
+  },
+
+  { id: 22,
+  name: "Summary for task twenty-two",
+  description: "Short decription for task twenty-two" ,
+  priority: Tasks.TASK_PRIORITY_LOW,
+  status: Tasks.TASK_STATUS_DONE,
+  submitter: 4,
+  assignee: 3
   }
 
 ];

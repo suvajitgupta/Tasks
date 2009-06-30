@@ -30,11 +30,6 @@ Tasks.mixin({
 
   // Project/Task Management
   goStateA4: function(){
-    // Set the content property on your primary controller.
-    // This will make your app come alive!
-    var projects = Tasks.store.findAll(Tasks.Project);
-    Tasks.projectsController.set('content', projects);
-
     // Instantiate Views
     Tasks.getPath('mainPage.mainPane').append();
   }

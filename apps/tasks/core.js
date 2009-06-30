@@ -21,8 +21,55 @@ Tasks = SC.Object.create(SC.Statechart,
   // of your model data.  You can also set a data source on this store to
   // connect to a backend server.  The default setup below connects the store
   // to any fixtures you define.
-  store: SC.Store.create().from(SC.Record.fixtures)
+  store: SC.Store.create().from(SC.FixturesDataSource.create()),
+  // store: SC.Store.create().from(SC.Record.fixtures)
+
+  /**
+   * The special 'inbox' project where all of the unassigned tasks are stored.
+   *
+   * This project exists outside of the store because we don't want it to be persisted to the
+   * database.
+   */
+  inbox: null
   
+});
+
+SC.mixin(Function.prototype, {
+
+  /**
+   * This bind method was ported from the prototype for use in the AJAX callbacks.
+   *
+   * Function#bind(object[, args...]) -> Function
+   * - object (Object): The object to bind to.
+   *
+   * Wraps the function in another, locking its execution scope to an object
+   * specified by `object`.
+   *
+   * TODO: It seems as though this should be included with the SC framework -- we use it a lot.
+   */
+  bind: function (context) {
+    var slice = Array.prototype.slice;
+
+    var update = function(array, args) {
+      var arrayLength = array.length, length = args.length;
+      while (length--) array[arrayLength + length] = args[length];
+      return array;
+    };
+
+    var merge = function(array, args) {
+      array = slice.call(array, 0);
+      return update(array, args);
+    };
+
+    if (arguments.length < 2 && SC.none(arguments[0])) return this;
+    var __method = this, args = slice.call(arguments, 1);
+
+    return function() {
+      var a = merge(args, arguments);
+      // var a = args.concat(arguments);
+      return __method.apply(context, a);
+    };
+  }
 });
 
 // ============================================================================

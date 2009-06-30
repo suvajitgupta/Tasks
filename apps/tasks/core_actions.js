@@ -42,13 +42,37 @@ Tasks.mixin({
     switch (this.state.a) {
       case 2:
         this.goState('a', 3);
-        var success = true; // TODO: load persisted data
-        if (success) this.dataLoadSuccess();
-        else this.dataLoadFailure();
+        this._loadData();
+
+        // TODO: Use callbacks for this instead.
+        this.dataLoadSuccess();
         break;
       default:
         this._logActionNotHandled('authenticationSuccess', 'a', this.state.a);  
     }
+  },
+
+  _loadData: function() {
+    var store = Tasks.get('store');
+
+    // Load all of the tasks from the data source (via the store)
+    var projects = store.findAll(Tasks.Project);
+    
+    // Create the special "Inbox" project that will contain all unassigned tasks.
+    var inbox = store.createRecord(Tasks.Project, { name: "_InboxProject".loc(), id: 0 });
+    Tasks.set('inbox', inbox);
+
+    projects.insertAt(0, inbox);
+
+    // TODO: Implement callbacks in the data source.
+    /*
+    {
+      successCallback: Tasks.dataLoadSuccess().bind(this),
+      failureCallback: Tasks.dataLoadFailure().bind(this)
+    });
+    */
+
+    Tasks.projectsController.set('content', projects);
   },
   
   authenticationFailure: function() {

@@ -34,6 +34,7 @@ SC.stringsFor('English', {
   '_Failed': "Failed",
   
   '_NewProject': "New Project",
+  '_InboxProject': "Inbox",
   
   '_FirstLast': "First Last",
   '_first.last': "first.last",
