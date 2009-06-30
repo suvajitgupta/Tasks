@@ -88,64 +88,75 @@ Tasks.mainPage = SC.Page.design({
     
     bottomView: SC.View.design(SC.Border, {
       layout: { bottom: 0, left: 0, right: 0, height: 41 },
-      childViews: 'addProjectButton deleteProjectButton importButton exportButton addTaskButton deleteTaskButton'.w(),
+      childViews: 'leftView rightView'.w(),
       borderStyle: SC.BORDER_TOP,
       
-      addProjectButton: SC.ButtonView.design({
-        layout: { centerY: 0, left: 8, height: 21, width: 30 },
-        title: "+",
-        titleMinWidth: 0,
-        fontSize: 10,
-        target: 'Tasks.projectsController',
-        action: 'addProject'
-      }),
-      
-      deleteProjectButton: SC.ButtonView.design({
-        layout: { centerY: 0, left: 43, height: 21, width: 30 },
-        title: "-",
-        titleMinWidth: 0,
-        isEnabledBinding: 'Tasks.projectsController.hasSelection',
-        fontSize: 10,
-        target: 'Tasks.projectsController',
-        action: 'deleteProject'
-      }),
-      
-      importButton: SC.ButtonView.design({
-        layout: { centerY: 0, height: 21, left: 88, width: 50 },
-        title:  "_Import".loc(),
-        titleMinWidth: 0,
-        target: 'Tasks.projectsController',
-        action: 'importData'
-      }),
-      
-      exportButton: SC.ButtonView.design({
-        layout: { centerY: 0, height: 21, left: 148, width: 50 },
-        title:  "_Export".loc(),
-        titleMinWidth: 0,
-        target: 'Tasks.projectsController',
-        action: 'exportData'
-      }),
-      
-      addTaskButton: SC.ButtonView.design({
-        layout: { centerY: 0, height: 21, left: 253, width: 30 },
-        title:  "+",
-        titleMinWidth: 0,
-        fontSize: 10,
-        target: 'Tasks.tasksController',
-        action: 'addTask'
-      }),
+      leftView: SC.View.design({
+        layout: { top: 0, left: 0, bottom: 0, width: 360 },
+        childViews: 'addProjectButton deleteProjectButton importButton exportButton addTaskButton deleteTaskButton'.w(),
+        
+        addProjectButton: SC.ButtonView.design({
+          layout: { centerY: 0, left: 8, height: 21, width: 30 },
+          title: "+",
+          titleMinWidth: 0,
+          fontSize: 10,
+          target: 'Tasks.projectsController',
+          action: 'addProject'
+        }),
 
-      deleteTaskButton: SC.ButtonView.design({
-        layout: { centerY: 0, height: 21, left: 288, width: 30 },
-        title:  "-",
-        titleMinWidth: 0,
-        isEnabledBinding: 'Tasks.tasksController.hasSelection',
-        fontSize: 10,
-        target: 'Tasks.tasksController',
-        action: 'deleteTask'
+        deleteProjectButton: SC.ButtonView.design({
+          layout: { centerY: 0, left: 43, height: 21, width: 30 },
+          title: "-",
+          titleMinWidth: 0,
+          isEnabledBinding: 'Tasks.projectsController.hasSelection',
+          fontSize: 10,
+          target: 'Tasks.projectsController',
+          action: 'deleteProject'
+        }),
+
+        importButton: SC.ButtonView.design({
+          layout: { centerY: 0, height: 21, left: 88, width: 55 },
+          title:  "_Import".loc(),
+          titleMinWidth: 0,
+          fontSize: 10,
+          target: 'Tasks.projectsController',
+          action: 'importData'
+        }),
+
+        exportButton: SC.ButtonView.design({
+          layout: { centerY: 0, height: 21, left: 148, width: 55 },
+          title:  "_Export".loc(),
+          titleMinWidth: 0,
+          fontSize: 10,
+          target: 'Tasks.projectsController',
+          action: 'exportData'
+        }),
+
+        addTaskButton: SC.ButtonView.design({
+          layout: { centerY: 0, height: 21, left: 253, width: 30 },
+          title:  "+",
+          titleMinWidth: 0,
+          fontSize: 10,
+          target: 'Tasks.tasksController',
+          action: 'addTask'
+        }),
+
+        deleteTaskButton: SC.ButtonView.design({
+          layout: { centerY: 0, height: 21, left: 288, width: 30 },
+          title:  "-",
+          titleMinWidth: 0,
+          isEnabledBinding: 'Tasks.tasksController.hasSelection',
+          fontSize: 10,
+          target: 'Tasks.tasksController',
+          action: 'deleteTask'
+        })
+      }),
+      
+      rightView: SC.View.design({
+        layout: { top: 0, bottom: 0, right: 0, left: 361 }//,
+        //childViews: 'statusButton priorityView validationView'.w(), TODO: Actually implement these buttons.
       })
-
+      
     })
   })
-
 });
