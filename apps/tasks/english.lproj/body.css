@@ -45,3 +45,15 @@
 .tasks-status-risky {
   color: red;
 }
+
+
+.tasks-validation-untested {
+}
+
+.tasks-validation-passed {
+  background:#93DB70 none repeat scroll 0 0;
+}
+
+.tasks-validation-failed {
+  background:#EAADEA none repeat scroll 0 0;
+}

@@ -41,12 +41,25 @@ Tasks.TaskView = SC.ListItemView.extend(
         case Tasks.TASK_STATUS_ACTIVE:
           context.addClass('tasks-status-active');
           break;
-          case Tasks.TASK_STATUS_DONE:
-            context.addClass('tasks-status-done');
-            break;          
-          case Tasks.TASK_STATUS_RISKY:
-            context.addClass('tasks-status-risky');
-            break;          
+        case Tasks.TASK_STATUS_DONE:
+          context.addClass('tasks-status-done');
+          break;          
+        case Tasks.TASK_STATUS_RISKY:
+          context.addClass('tasks-status-risky');
+          break;          
+      }
+      
+      var validation = content.get('validation');
+      switch(validation){
+        case Tasks.TASK_VALIDATION_UNTESTED:
+          context.addClass('tasks-validation-untested');
+          break;
+        case Tasks.TASK_VALIDATION_PASSED:
+          context.addClass('tasks-validation-passed');
+          break;
+        case Tasks.TASK_VALIDATION_FAILED:
+          context.addClass('tasks-validation-failed');
+          break;          
       }
       
     }
