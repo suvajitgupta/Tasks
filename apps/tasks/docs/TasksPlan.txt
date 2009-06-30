@@ -19,36 +19,35 @@ Infrastructure:
 - Develop actions/states corresponding to GUI Statecharts [SG] <SE> @Active
 
 "Task" Manager:
-- Show Task summary & effort in curly braces (if specified), group Tasks by User [SG] <JH2> @Done
+- Group Tasks by User and display Task summary & effort (if specified) in curly braces [SG] <JH2> @Done
 - Show Task type via different icons [SG] <JH2> @Done
+- Show priority (using fonts) & status/validation (using font/background color) [SG] <MB> @Done
+- Allow drag-n-drop reordering [SG] <EO> @Risky
+- Add double-click in-cell editing [SG] <EO> @Risky
 - Add "+" & "-" & Status/Priority/Validation buttons to bottom Toolbar [SG] <JH2> @Active
 - Set bottom Toolbar button enablement based on having a selection [SG] <EO> @Active
-- Allow drag-n-drop reordering [SG] <EO> @Active
-- Show priority (using fonts) & status/validation (using color & appending check/cross) [SG] <MB> @Active
+- Add context menu & hotkeys to Edit/Cut/Copy/Paste/Delete/Duplicate a task [SG] <JL>
 - Add hover Tooltip showing Description [SG] <EG>
 - Add modal popup form for editing [SG] <JH2>
 - Show range-based subtotals (exclude Low items) in curly braces for load balancing, append "?" for subtotals including unknown efforts [SG] <SE>
-- Add double-click in-cell editing [SG] <EO> @Risky
-- Add context menu to Edit/Cut/Copy/Paste/Delete/Duplicate items [SG] <JL>
-- Add Cut/Copy/Paste/Duplicate/Delete buttons in top Toolbar & hotkeys [SG] <JH2>
 
 "Project" Manager:
 - Show Project name & time left in curly braces (if specified) [SG] <JH2> @Done
 - Add Master/Detail Explorer view with click selection of Projects showing corresponding Tasks [JH2] <SG> @Done
-- Add "+" & "-" buttons in bottom Toolbar [SG] <EO> @Active
+- Add "+" & "-" buttons in bottom Toolbar [SG] <EO> @Risky
 - Set bottom Toolbar button enablement based on having a selection [SG] <EO> @Done
 - Allow drag-n-drop reordering [SG] <EO> @Done
+- Add double-click in-cell editing [SG] <EO> @Risky
 - Add Inbox project by default [SG] <SE> @Active
 - Make Master list of Projects collapsible [SG] <EG>
-- Add hover Tooltip to project name showing number of Tasks [SG] <EG>
-- Add double-click in-cell editing [SG] <EO> @Risky
-- Add context menu: Delete [SG] <JL>
+- Add hover Tooltip showing number of Tasks in project [SG] <EG>
+- Add context menu to Delete a project [SG] <JL>
 - Add warning Alert box about deleting Project with Tasks [SG] <SE>
-- Add drag-n-drop of Tasks to Projects [SG] <MB> @Risky
+- Add drag-n-drop of Tasks to Projects [SG] <MB>
 
 "User" Manager:
-- Add login screen (User authentication) [SG] <SE>
-- Add access control based on Role (User authorization) [SG] <SE>
+- Add login screen (User authentication) [SG] <SE> @Active
+- Add access control based on Role (User authorization) [SG] <SE> @Active
 - Add User selection combo box in top Toolbar ("All" is default choice) [SG] <JL>
 - Add User management button/modal popup with "+" & "-" buttons in bottom Toolbar & in-cell editing and "X" button to exit [SG] <JH2>
 - Add hover Tooltip to dialog title showing number of Users [SG] <EG>
@@ -58,7 +57,7 @@ Infrastructure:
 "App" Manager:
 - Add "Export" button in bottom Toolbar (using TXT file format) [SG] @Done
 - Add "Import" button in bottom Toolbar (using TXT file format) [SG] <SE> @Active
-- Add summary next to application title showing number of Projects, move this to a tooltip? [SG] <EG>
+- Add summary next to application title showing number of Projects, move this to a tooltip? [SG] <MB> @Active
 - Add Search box in top Toolbar: support type-ahead, wildcards, cancel/reset [SG] <DC>
 - Add "Save" button in top Toolbar [SG] <SE>
 - Add "X" button to exit  in top Toolbar [SG] <SE>
@@ -66,14 +65,14 @@ Infrastructure:
 - Add Undo/Redo hotkeys & buttons in top Toolbar (till last Save) [SG] <SE>
 - Add About dialog (click on Application title) [SG] <JH2>
 - Add Online Help button in top Toolbar & modal Help dialog [SG] <JH2>
-- Add Print button in top Toolbar? [SG] <JH2>
+- Add Print button in top Toolbar? [SG] <MB>
 - Restore application settings/state from last login [SG] <MB>
 
 Server:
 - Implement REST API via Mock Server [SE] <SG>
 - Add Server-side data validation checks [SE] <SG>
 - Add local persistence for single user mode [SE] <MB>
-- Build persistence server (CouchDB?) [JH2] <JH2>
+- Build persistence server (using CouchDB?) [JH2] <JH2>
 - Support multi-user mode using Transaction Time [SE] <EO>
 - Add Server-side authorization [SE] <SG>
 
