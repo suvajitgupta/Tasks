@@ -62,7 +62,7 @@ Tasks.Task.FIXTURES = [
   name: "Summary for task six",
   description: "Description for task 6" ,
   type: Tasks.TASK_TYPE_FEATURE,
-  priority: Tasks.TASK_PRIORITY_HIGH,
+  priority: Tasks.TASK_PRIORITY_MEDIUM,
   status: Tasks.TASK_STATUS_PLANNED,
   effort: "1-2",
   submitter: 4
