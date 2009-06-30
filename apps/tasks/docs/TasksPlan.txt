@@ -14,9 +14,11 @@ Tester - view Tasks that are done (read Release Notes in description field), val
 - Design Server & choose persistence components [SE] <SG>  @Active
 v Create GUI Mockups using Photoshop? [MG] <SG>
 
-Infrastructure:
+Infrastructure/Modes:
 - Develop Model/Fixtures [SG] <SE> @Done
 - Develop actions/states corresponding to GUI Statecharts [SG] <SE> @Active
+- Develop Desktop client (using Webkit) [SG] <EO>
+- Develop Mobile client (using PhoneGap) [SG] <MB>
 
 "Task" Manager:
 - Group Tasks by User and display Task summary & effort (if specified) in curly braces [SG] <JH2> @Done
@@ -57,6 +59,7 @@ Infrastructure:
 "App" Manager:
 - Add "Export" button in bottom Toolbar (using TXT file format) [SG] @Done
 - Add "Import" button in bottom Toolbar (using TXT file format) [SG] <SE> @Active
+- Add drag-n-drop of a TXT file into App for data importing (using Google Gears) [MB] <SG> @Active
 - Add summary next to application title showing number of Projects, move this to a tooltip? [SG] <MB> @Active
 - Add Search box in top Toolbar: support type-ahead, wildcards, cancel/reset [SG] <DC>
 - Add "Save" button in top Toolbar [SG] <SE>
