@@ -5,8 +5,6 @@ sc_require('core');
  * An extension of the SC.RecordAttribute class that provides validation against a defined list of
  * allowed values.
  *
- * FIXME: [SE] It doesn't appear as though the call method is being invoked.
- *
  * @extends SC.RecordAttribute
  * @author Sean Eidemiller
  */
