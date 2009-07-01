@@ -96,38 +96,34 @@ Tasks.mainPage = SC.Page.design({
         childViews: 'addProjectButtonView deleteProjectButtonView importButtonView exportButtonView'.w(),
         
         addProjectButtonView: SC.ButtonView.design({
-          layout: { centerY: 0, left: 8, height: 21, width: 30 },
+          layout: { centerY: 0, left: 15, height: 21, width: 30 },
           title: "+",
           titleMinWidth: 0,
-          fontSize: 10,
           target: 'Tasks',
           action: 'addProject'
         }),
 
         deleteProjectButtonView: SC.ButtonView.design({
-          layout: { centerY: 0, left: 43, height: 21, width: 30 },
+          layout: { centerY: 0, left: 50, height: 21, width: 30 },
           title: "-",
           titleMinWidth: 0,
           isEnabledBinding: 'Tasks.projectsController.hasSelection',
-          fontSize: 10,
           target: 'Tasks',
           action: 'deleteProject'
         }),
 
         importButtonView: SC.ButtonView.design({
-          layout: { centerY: 0, height: 21, left: 88, width: 55 },
+          layout: { centerY: 0, height: 21, left: 100, width: 55 },
           title:  "_Import".loc(),
           titleMinWidth: 0,
-          fontSize: 10,
           target: 'Tasks',
           action: 'importData'
         }),
 
         exportButtonView: SC.ButtonView.design({
-          layout: { centerY: 0, height: 21, left: 148, width: 55 },
+          layout: { centerY: 0, height: 21, left: 160, width: 55 },
           title:  "_Export".loc(),
           titleMinWidth: 0,
-          fontSize: 10,
           target: 'Tasks',
           action: 'exportData'
         })
@@ -139,20 +135,18 @@ Tasks.mainPage = SC.Page.design({
         childViews: 'addTaskButtonView deleteTaskButtonView taskPriorityView taskStatusView taskValidationView'.w(), 
 
         addTaskButtonView: SC.ButtonView.design({
-          layout: { centerY: 0, height: 21, left: 0, width: 30 },
+          layout: { centerY: 0, height: 21, left: 7, width: 30 },
           title:  "+",
           titleMinWidth: 0,
-          fontSize: 10,
           target: 'Tasks',
           action: 'addTask'
         }),
 
         deleteTaskButtonView: SC.ButtonView.design({
-          layout: { centerY: 0, height: 21, left: 35, width: 30 },
+          layout: { centerY: 0, height: 21, left: 42, width: 30 },
           title:  "-",
           titleMinWidth: 0,
           isEnabledBinding: 'Tasks.tasksController.hasSelection',
-          fontSize: 10,
           target: 'Tasks',
           action: 'deleteTask'
         }),
@@ -166,7 +160,6 @@ Tasks.mainPage = SC.Page.design({
           ],
           itemTitleKey: 'title',
           valueBinding: 'Tasks.tasksController.selection.priority', // TODO: how to get the binding to work
-          fontSize: 10,
           isEnabledBinding: 'Tasks.tasksController.hasSelection',
           layoutDirection: SC.LAYOUT_HORIZONTAL
         }),
@@ -175,7 +168,6 @@ Tasks.mainPage = SC.Page.design({
           layout: { centerY: 0, height: 21, left: 360, width: 240 },
           items: [Tasks.TASK_STATUS_PLANNED, Tasks.TASK_STATUS_ACTIVE, Tasks.TASK_STATUS_DONE, Tasks.TASK_STATUS_RISKY],
           valueBinding: 'Tasks.tasksController.selection.status',
-          fontSize: 10,
           isEnabledBinding: 'Tasks.tasksController.hasSelection',
           layoutDirection: SC.LAYOUT_HORIZONTAL
         }),
@@ -184,7 +176,6 @@ Tasks.mainPage = SC.Page.design({
           layout: { centerY: 0, height: 21, left: 660, width: 200 },
           items: [Tasks.TASK_VALIDATION_UNTESTED, Tasks.TASK_VALIDATION_PASSED, Tasks.TASK_VALIDATION_FAILED],
           valueBinding: 'Tasks.tasksController.selection.validation',
-          fontSize: 10,
           isEnabledBinding: 'Tasks.tasksController.hasSelection',
           layoutDirection: SC.LAYOUT_HORIZONTAL
         })
