@@ -31,18 +31,28 @@ Tasks.assignmentsController = SC.ArrayController.create(
     );
     
     ret = [];
-    for(assignee in assignees){
-      if(!assignees.hasOwnProperty(assignee)) continue; // to speed up by avoiding walking up the inheritance chain
-      tasks = assignees[assignee];
-      ret.push(SC.Object.create({
-        displayName: assignee,
-        treeItemChildren: tasks.sortProperty('name'),
-        treeItemIsExpanded: YES
-      }));
+    for(assignee in assignees){ // list unassigned tasks first
+      if(assignees.hasOwnProperty(assignee) && assignee === Tasks.USER_UNASSIGNED) {
+        ret.push(this._createNodeHash(assignee, assignees[assignee]));
+      }
+    }
+      
+    for(assignee in assignees){ // list all assi
+      if(assignees.hasOwnProperty(assignee) && assignee !== Tasks.USER_UNASSIGNED) {
+        ret.push(this._createNodeHash(assignee, assignees[assignee]));
+      }
     }
       
     return SC.Object.create({ treeItemChildren: ret, treeItemIsExpanded: YES });
     
-  }.property('[]').cacheable()
+  }.property('[]').cacheable(),
+  
+  _createNodeHash: function(assignee, tasks) {
+    return SC.Object.create({
+      displayName: assignee,
+      treeItemChildren: tasks,
+      treeItemIsExpanded: YES
+    });
+  }
 
 });
