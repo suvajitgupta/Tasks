@@ -72,6 +72,7 @@ Tasks.mainPage = SC.Page.design({
         backgroundColor: 'blue',
 
         contentView: SC.SourceListView.design({
+          classNames: 'task-source-list'.w(),
           contentValueKey: 'displayName',
           contentBinding: 'Tasks.tasksController.arrangedObjects',
           selectionBinding: 'Tasks.tasksController.selection',
@@ -85,6 +86,9 @@ Tasks.mainPage = SC.Page.design({
         })
       })
     }),
+    
+    projectsList: SC.outlet('middleView.topLeftView.childViews.0.contentView'),
+    tasksList: SC.outlet('middleView.bottomRightView.childViews.0.contentView'),
     
     bottomView: SC.View.design(SC.Border, {
       layout: { bottom: 0, left: 0, right: 0, height: 41 },

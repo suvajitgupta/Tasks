@@ -57,3 +57,16 @@
 .tasks-validation-failed {
   background:#EAADEA none repeat scroll 0 0;
 }
+
+
+/* 
+  Styling for the Tasks SourceListView 
+*/
+
+.task-source-list {
+  background: transparent;
+}
+
+.task-source-list.sel {
+  background:transparent;
+}

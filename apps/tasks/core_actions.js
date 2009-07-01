@@ -213,11 +213,11 @@ Tasks.mixin({
             user = task.get('assignee');
             if (user) data += ' [' + user.get('name') + ']';
             val = task.get('type');
-            if(val != Tasks.TASK_TYPE_OTHER)  data += ' $' + val;
+            if(val !== Tasks.TASK_TYPE_OTHER)  data += ' $' + val;
             val = task.get('status');
-            if(val != Tasks.TASK_STATUS_PLANNED)  data += ' @' + val;
+            if(val !== Tasks.TASK_STATUS_PLANNED)  data += ' @' + val;
             val = task.get('validation');
-            if(val != Tasks.TASK_VALIDATION_UNTESTED)  data += ' %' + val;
+            if(val !== Tasks.TASK_VALIDATION_UNTESTED)  data += ' %' + val;
             val = task.get('description');
             if(val) data += '\n' + val;
             data += '\n';
@@ -234,6 +234,10 @@ Tasks.mixin({
   
   deleteTask: function() { // TODO: implement
     alert ('Not implemented!');
+  },
+  
+  makeProjectSelection: function(){
+    Tasks.getPath('mainPage.mainPane').get('projectsList').select(1);
   }
 
 });
