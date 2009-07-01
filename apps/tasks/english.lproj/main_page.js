@@ -153,7 +153,14 @@ Tasks.mainPage = SC.Page.design({
         
         taskPriorityView: SC.RadioView.design({
           layout: { centerY: 0, height: 21, left: 150, width: 180 },
-          items: [Tasks.TASK_PRIORITY_HIGH, Tasks.TASK_PRIORITY_MEDIUM, Tasks.TASK_PRIORITY_LOW],
+          escapeHTML: NO,
+          items: [
+            { title: '<span class=tasks-priority-high>' + Tasks.TASK_PRIORITY_HIGH + '</span>', value: Tasks.TASK_PRIORITY_HIGH },
+            { title: '<span class=tasks-priority-medium>' + Tasks.TASK_PRIORITY_MEDIUM + '</span>', value: Tasks.TASK_PRIORITY_MEDIUM },
+            { title: '<span class=tasks-priority-low>' + Tasks.TASK_PRIORITY_LOW + '</span>', value: Tasks.TASK_PRIORITY_LOW }
+          ],
+          itemTitleKey: 'title',
+          itemValueKey: 'value',
           valueBinding: 'Tasks.taskController.priority',
           isEnabledBinding: 'Tasks.tasksController.hasSelection',
           layoutDirection: SC.LAYOUT_HORIZONTAL
@@ -161,7 +168,15 @@ Tasks.mainPage = SC.Page.design({
         
         taskStatusView: SC.RadioView.design({
           layout: { centerY: 0, height: 21, left: 360, width: 240 },
-          items: [Tasks.TASK_STATUS_PLANNED, Tasks.TASK_STATUS_ACTIVE, Tasks.TASK_STATUS_DONE, Tasks.TASK_STATUS_RISKY],
+          escapeHTML: NO,
+          items: [
+            { title: '<span class=tasks-status-planned>' + Tasks.TASK_STATUS_PLANNED + '</span>', value: Tasks.TASK_STATUS_PLANNED },
+            { title: '<span class=tasks-status-active>' + Tasks.TASK_STATUS_ACTIVE + '</span>', value: Tasks.TASK_STATUS_ACTIVE },
+            { title: '<span class=tasks-status-done>' + Tasks.TASK_STATUS_DONE + '</span>', value: Tasks.TASK_STATUS_DONE },
+            { title: '<span class=tasks-status-risky>' + Tasks.TASK_STATUS_RISKY + '</span>', value: Tasks.TASK_STATUS_RISKY }
+          ],
+          itemTitleKey: 'title',
+          itemValueKey: 'value',
           valueBinding: 'Tasks.taskController.status',
           isEnabledBinding: 'Tasks.tasksController.hasSelection',
           layoutDirection: SC.LAYOUT_HORIZONTAL
@@ -169,7 +184,14 @@ Tasks.mainPage = SC.Page.design({
         
         taskValidationView: SC.RadioView.design({
           layout: { centerY: 0, height: 21, left: 660, width: 200 },
-          items: [Tasks.TASK_VALIDATION_UNTESTED, Tasks.TASK_VALIDATION_PASSED, Tasks.TASK_VALIDATION_FAILED],
+          escapeHTML: NO,
+          items: [
+            { title: '<span class=tasks-validation-untested>' + Tasks.TASK_VALIDATION_UNTESTED + '</span>', value: Tasks.TASK_VALIDATION_UNTESTED },
+            { title: '<span class=tasks-validation-passed>' + Tasks.TASK_VALIDATION_PASSED + '</span>', value: Tasks.TASK_VALIDATION_PASSED },
+            { title: '<span class=tasks-validation-failed>' + Tasks.TASK_VALIDATION_FAILED + '</span>', value: Tasks.TASK_VALIDATION_FAILED }
+          ],
+          itemTitleKey: 'title',
+          itemValueKey: 'value',
           valueBinding: 'Tasks.taskController.validation',
           isEnabledBinding: 'Tasks.tasksController.hasSelection',
           layoutDirection: SC.LAYOUT_HORIZONTAL
