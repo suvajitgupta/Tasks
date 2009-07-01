@@ -136,7 +136,7 @@ Tasks.mainPage = SC.Page.design({
       
       tasksToolbarView: SC.View.design({
         layout: { top: 0, left: 265, bottom: 0, right: 0 },
-        childViews: 'addTaskButtonView deleteTaskButtonView'.w(), 
+        childViews: 'addTaskButtonView deleteTaskButtonView taskPriorityView taskStatusView taskValidationView'.w(), 
 
         addTaskButtonView: SC.ButtonView.design({
           layout: { centerY: 0, height: 21, left: 0, width: 30 },
@@ -155,7 +155,35 @@ Tasks.mainPage = SC.Page.design({
           fontSize: 10,
           target: 'Tasks',
           action: 'deleteTask'
+        }),
+        
+        taskPriorityView: SC.RadioView.design({
+          layout: { centerY: 0, height: 21, left: 150, width: 180 },
+          items: [Tasks.TASK_PRIORITY_HIGH, Tasks.TASK_PRIORITY_MEDIUM, Tasks.TASK_PRIORITY_LOW],
+          valueBinding: 'Tasks.tasksController.selection.priority',
+          fontSize: 10,
+          isEnabledBinding: 'Tasks.tasksController.hasSelection',
+          layoutDirection: SC.LAYOUT_HORIZONTAL
+        }),
+        
+        taskStatusView: SC.RadioView.design({
+          layout: { centerY: 0, height: 21, left: 360, width: 240 },
+          items: [Tasks.TASK_STATUS_PLANNED, Tasks.TASK_STATUS_ACTIVE, Tasks.TASK_STATUS_DONE, Tasks.TASK_STATUS_RISKY],
+          valueBinding: 'Tasks.tasksController.selection.status',
+          fontSize: 10,
+          isEnabledBinding: 'Tasks.tasksController.hasSelection',
+          layoutDirection: SC.LAYOUT_HORIZONTAL
+        }),
+        
+        taskValidationView: SC.RadioView.design({
+          layout: { centerY: 0, height: 21, left: 660, width: 200 },
+          items: [Tasks.TASK_VALIDATION_UNTESTED, Tasks.TASK_VALIDATION_PASSED, Tasks.TASK_VALIDATION_FAILED],
+          valueBinding: 'Tasks.tasksController.selection.validation',
+          fontSize: 10,
+          isEnabledBinding: 'Tasks.tasksController.hasSelection',
+          layoutDirection: SC.LAYOUT_HORIZONTAL
         })
+        
       })
       
     })

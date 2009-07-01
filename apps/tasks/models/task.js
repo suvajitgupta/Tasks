@@ -18,7 +18,7 @@ Tasks.TASK_PRIORITY_LOW = "_Low".loc();
 Tasks.TASK_STATUS_PLANNED = "_Planned".loc(); // default
 Tasks.TASK_STATUS_ACTIVE = "_Active".loc();
 Tasks.TASK_STATUS_DONE = "_Done".loc();
-Tasks.TASK_STATUS_RISKY = "_AtRisk".loc();
+Tasks.TASK_STATUS_RISKY = "_Risky".loc();
 
 // Validation status:
 Tasks.TASK_VALIDATION_UNTESTED = "_Untested".loc(); // default
