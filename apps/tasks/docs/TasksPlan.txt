@@ -23,7 +23,7 @@ Infrastructure/Modes:
 "Task" Manager:
 - Group Tasks by User and display Task summary & effort (if specified) in curly braces [SG] <JH2> @Done
 - Show Task type via different icons [SG] <JH2> @Done
-- Show priority (using fonts) & status/validation (using font/background color) [SG] <MB> @Done
+- Show/allow changing priority (using fonts) & status/validation (using font/background color) [SG] <MB> @Active
 - Allow drag-n-drop reordering [SG] <EO> @Risky
 - Add double-click in-cell editing [SG] <EO> @Risky
 - Add "+" & "-" & Status/Priority/Validation buttons to bottom Toolbar [SG] <JH2> @Active
