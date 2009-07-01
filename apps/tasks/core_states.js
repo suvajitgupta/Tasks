@@ -14,7 +14,7 @@ Tasks.mixin({
     // var user = prompt('Login name:'); // TODO: replace with proper Login dialog
     var user = 'bigboss';
     if (user !== null && user !== '') {
-      Tasks.login(user, 'password'); // TODO: pass actual password input by user
+      Tasks.authenticate(user, 'password'); // TODO: pass actual password input by user
     }
   },
 
@@ -31,7 +31,7 @@ Tasks.mixin({
 
   // Project/Task Management
   goStateA4: function(){
-    // Select first project at startupi 
+    // Select first project at startup
     Tasks.getPath('mainPage.mainPane').get('projectsList').select(0);
   }
 

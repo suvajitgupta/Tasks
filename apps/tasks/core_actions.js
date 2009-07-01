@@ -10,7 +10,7 @@ sc_require('core');
 Tasks.mixin({
   
   // TODO: Should we be using parameters in any of these action functions?
-  login: function(loginName, password) {
+  authenticate: function(loginName, password) {
     switch (this.state.a) {
       case 1:
         this.goState('a', 2);
@@ -51,6 +51,17 @@ Tasks.mixin({
     }
   },
 
+  authenticationFailure: function() {
+    switch (this.state.a) {
+      case 2:
+        alert('Authentication failed');
+        this.goState('a', 1);
+        break;
+      default:
+        this._logActionNotHandled('authenticationFailure', 'a', this.state.a);  
+    }
+  },
+  
   _loadData: function() {
     // Load all of the tasks from the data source (via the store)
     var projects = Tasks.get('store').findAll(Tasks.Project);
@@ -93,20 +104,10 @@ Tasks.mixin({
       }
     }
 
+    // FIXME: investigate why projects added to the store don't show up in findAll()
     var inbox = store.createRecord(Tasks.Project, { id: 0, name: Tasks.INBOX_PROJECT_NAME, tasks: unassigned });
     Tasks.set('inbox', inbox);
     return inbox;
-  },
-  
-  authenticationFailure: function() {
-    switch (this.state.a) {
-      case 2:
-        alert('Authentication failed');
-        this.goState('a', 1);
-        break;
-      default:
-        this._logActionNotHandled('authenticationFailure', 'a', this.state.a);  
-    }
   },
   
   dataLoadSuccess: function() {
