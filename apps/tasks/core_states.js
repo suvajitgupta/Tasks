@@ -33,7 +33,7 @@ Tasks.mixin({
     // Instantiate Views
     Tasks.getPath('mainPage.mainPane').append();
     
-    // Select first project at startup
+    // Select first project at startupi 
     Tasks.getPath('mainPage.mainPane').get('projectsList').select(0);
   }
 
