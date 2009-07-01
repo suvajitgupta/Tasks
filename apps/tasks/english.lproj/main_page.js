@@ -154,7 +154,7 @@ Tasks.mainPage = SC.Page.design({
         taskPriorityView: SC.RadioView.design({
           layout: { centerY: 0, height: 21, left: 150, width: 180 },
           items: [Tasks.TASK_PRIORITY_HIGH, Tasks.TASK_PRIORITY_MEDIUM, Tasks.TASK_PRIORITY_LOW],
-          valueBinding: 'Tasks.taskController.priority',
+Ï          valueBinding: 'Tasks.taskController.priority',
           isEnabledBinding: 'Tasks.tasksController.hasSelection',
           layoutDirection: SC.LAYOUT_HORIZONTAL
         }),

@@ -26,7 +26,7 @@ Infrastructure/Modes:
 - Show/allow changing priority (using fonts) & status/validation (using font/background color) [SG] <MB> @Active
 - Allow drag-n-drop reordering [SG] <EO> @Risky
 - Add double-click in-cell editing [SG] <EO> @Risky
-- Add "+" & "-" & Status/Priority/Validation buttons to bottom Toolbar [SG] <JH2> @Active
+- Add "+" & "-" & Status/Priority/Validation buttons to bottom Toolbar [SG] <JH2> @Done
 - Set tasks toolbar button enablement based on having a selection [SG] <EO> @Done
 - Add context menu & hotkeys to Edit/Cut/Copy/Paste/Delete/Duplicate a task [SG] <JL>
 - Add hover Tooltip showing Description [SG] <EG>
