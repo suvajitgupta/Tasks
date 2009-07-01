@@ -75,7 +75,7 @@ Server:
 - Implement REST API via Mock Server [SE] <SG>
 - Add Server-side data validation checks [SE] <SG>
 - Add local persistence for single user mode [SE] <MB>
-- Build persistence server (using CouchDB?) [JH2] <JH2>
+- Build persistence server (using Django or CouchDB?) [EO] <SE>
 - Support multi-user mode using Transaction Time [SE] <EO>
 - Add Server-side authorization [SE] <SG>
 
