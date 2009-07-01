@@ -187,7 +187,7 @@ Tasks.mainPage = SC.Page.design({
         }),
         
         taskValidationView: SC.RadioView.design({
-          layout: { centerY: 0, height: 21, left: 660, width: 200 },
+          layout: { centerY: 0, height: 21, left: 660, width: 220 },
           escapeHTML: NO,
           items: [
             { title: '<span class=tasks-validation-untested>' + Tasks.TASK_VALIDATION_UNTESTED + '</span>', value: Tasks.TASK_VALIDATION_UNTESTED },
