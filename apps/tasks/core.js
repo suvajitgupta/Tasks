@@ -25,10 +25,9 @@ Tasks = SC.Object.create(SC.Statechart,
   // store: SC.Store.create().from(SC.Record.fixtures)
 
   /**
-   * The special 'inbox' project where all of the unassigned tasks are stored.
+   * A special 'inbox' project where all unassigned tasks are grouped.
    *
-   * This project exists outside of the store because we don't want it to be persisted to the
-   * database.
+   * This project exists outside of the store because we don't want it to be persisted.
    */
   inbox: null
   

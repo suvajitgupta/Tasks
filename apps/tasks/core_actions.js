@@ -43,8 +43,7 @@ Tasks.mixin({
       case 2:
         this.goState('a', 3);
         this._loadData();
-
-        // TODO: Use callbacks for this instead.
+        // TODO: install succsss/failure callbacks for this instead.
         this.dataLoadSuccess();
         break;
       default:
@@ -67,7 +66,7 @@ Tasks.mixin({
     });
     */
 
-    Tasks.projectsController.set('content', projects);
+    Tasks.get('projectsController').set('content', projects);
   },
 
   _createInbox: function() {
@@ -140,6 +139,101 @@ Tasks.mixin({
    */
   _logActionNotHandled: function(action, stateName, stateNum) {
     console.log('Action not handled in state %@[%@]: %@'.fmt(stateName, stateNum, action));
+  },
+  
+  addProject: function() {
+    
+    var pc = Tasks.get('projectsController');
+    // Create a new project with a default name
+    // TODO: add new project right after selected item    
+
+    var store = Tasks.get('store');
+    var task = store.createRecord(Tasks.Project, {
+      name: Tasks.NEW_PROJECT_NAME
+    });
+    store.commitRecords();
+    pc.addObject(task); // TODO: Why do we have to manually add to the controller instead of store notifying?
+
+    var listView = Tasks.getPath('mainPage.mainPane.middleView.topLeftView.contentView');
+    var idx = listView.length - 1; // get index of new project in list
+    // TODO: get index of new project whereever it is in the list, don't assume it is at the end
+    listView.select(idx);
+
+    // Begin editing newly created item.
+    var itemView = listView.itemViewForContentIndex(idx);
+    itemView.beginEditing.invokeLater(itemView);  // you must wait for run loop to complete before method is called
+    // TODO: when user changes name of New Project it doesn't change in ListView
+  },
+  
+  deleteProject: function() {
+    
+    var pc = Tasks.get('projectsController');
+    //get the selected tasks
+    var sel = pc.get('selection');
+    
+    if (sel && sel.length() > 0) {
+      var store = Tasks.get('store');
+
+      //pass the record to be deleted
+      var keys = sel.firstObject().get('id');
+      store.destroyRecords(Tasks.Project, [keys]);
+
+      //commit the operation to send the request to the server
+      store.commitRecords();
+      // TODO: what to do to remove the "New Project" from the ListView and clear the selection?
+    }
+  },
+  
+  importData: function() { // TODO: implement
+    alert ('Not implemented!');
+  },
+  
+  exportData: function() {
+
+    var val, task, user, data = "# Tasks data export at " + new Date().format('MMM dd, yyyy hh:mm:ssa') + '\n\n';
+    
+    var pc = Tasks.get('projectsController');
+    pc.forEach(function(rec){
+          var tasks = rec.get('tasks');
+          var len = tasks.get('length');
+          if(rec.get('name') !== Tasks.INBOX_PROJECT_NAME) {
+            data += rec.get('displayName') + ': # ' + len + ' tasks\n';
+          }
+          for (var i = 0; i < len; i++) {
+            task = tasks.objectAt(i);
+            switch(task.get('priority')) {
+              case Tasks.TASK_PRIORITY_HIGH: val = '^'; break;
+              case Tasks.TASK_PRIORITY_MEDIUM: val = '-'; break;
+              case Tasks.TASK_PRIORITY_LOW: val = 'v'; break;
+            }
+            data += val + ' ';
+            data += task.get('displayName');
+            user = task.get('submitter');
+            if (user) data += ' <' + user.get('name') + '>';
+            user = task.get('assignee');
+            if (user) data += ' [' + user.get('name') + ']';
+            val = task.get('type');
+            if(val != Tasks.TASK_TYPE_OTHER)  data += ' $' + val;
+            val = task.get('status');
+            if(val != Tasks.TASK_STATUS_PLANNED)  data += ' @' + val;
+            val = task.get('validation');
+            if(val != Tasks.TASK_VALIDATION_UNTESTED)  data += ' %' + val;
+            val = task.get('description');
+            if(val) data += '\n' + val;
+            data += '\n';
+          }
+          data += '\n';
+      }, pc);
+    
+    console.log(data);
+  },
+  
+  addTask: function() { // TODO: implement
+    alert ('Not implemented!');
+  },
+  
+  deleteTask: function() { // TODO: implement
+    alert ('Not implemented!');
   }
 
 });

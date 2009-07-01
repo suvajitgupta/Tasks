@@ -32,6 +32,7 @@ Tasks.mixin({
   goStateA4: function(){
     // Instantiate Views
     Tasks.getPath('mainPage.mainPane').append();
+    // TODO: set selection to first item intially, later switching to selection from "last session"
   }
 
 });
