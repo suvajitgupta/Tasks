@@ -68,7 +68,8 @@ Tasks.mixin({
     
     // Prepend and populate the special "Inbox" project that will contain all unassigned tasks.
     projects.insertAt(0, this._createInbox());
-
+    var moreProjects = Tasks.get('store').findAll(Tasks.Project);
+ 
     // TODO: Implement callbacks in the data source.
     /*
     , {
@@ -185,7 +186,39 @@ Tasks.mixin({
   },
   
   importData: function() { // TODO: implement
-    alert ('Not implemented!');
+    var data = 
+    'My Project:\n' +
+    '# a comment\n' +
+    '- My first task\n' +
+    '- My second task\n' +
+    '- My third task';
+    this._parseAndLoadData(data);
+  },
+  
+  _parseAndLoadData: function(data) {
+    var lines = data.split('\n'); // TODO: browser portability?
+    var store = Tasks.get('store');
+    
+    var currentProject = Tasks.get('inbox');
+    for (var i = 0; i < lines.length; i++) {
+      
+      var line = lines[i];
+      
+      if (line.indexOf('- ') === 0) { // a task TODO: parse other bullets
+        var taskLine = line.substr(2); // TODO: trim trailing whitespace
+        var taskKey = store.createRecord(Tasks.Task, {  name: taskLine, priority: Tasks.TASK_PRIORITY_MEDIUM });
+        currentProject.get('tasks').pushObject(store.materializeRecord(taskKey));
+      }
+      else if (line.search(':[ ]*$') !== -1) { // a project
+        // alert ('Project: ' + line);
+        // var projectLine = line.match('^.*:[ ]*$');
+      }
+      else if (line.indexOf('#') === 0) { // a comment
+        // alert ('Commment: ' + line);
+      }
+      else { // TODO: a description line?
+      }
+     }
   },
   
   exportData: function() {
@@ -197,7 +230,7 @@ Tasks.mixin({
           var tasks = rec.get('tasks');
           var len = tasks.get('length');
           if(rec.get('name') !== Tasks.INBOX_PROJECT_NAME) {
-            data += rec.get('displayName') + ': # ' + len + ' tasks\n';
+            data += rec.get('displayName') + ':\n';
           }
           for (var i = 0; i < len; i++) {
             task = tasks.objectAt(i);
