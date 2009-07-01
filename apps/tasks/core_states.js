@@ -25,15 +25,12 @@ Tasks.mixin({
 
   // Data Loading
   goStateA3: function(){
-    // TODO: implement
+    // Instantiate Views
     Tasks.getPath('mainPage.mainPane').append();
   },
 
   // Project/Task Management
   goStateA4: function(){
-    // Instantiate Views
-   // 
-    
     // Select first project at startupi 
     Tasks.getPath('mainPage.mainPane').get('projectsList').select(0);
   }

@@ -95,8 +95,7 @@ Tasks.Task.FIXTURES = [
   priority: Tasks.TASK_PRIORITY_HIGH,
   status: Tasks.TASK_STATUS_DONE,
   validation: Tasks.TASK_VALIDATION_PASSED,
-  submitter: 1,
-  assignee: 3
+  submitter: 1
   },
 
   { id: 10,
@@ -166,8 +165,7 @@ Tasks.Task.FIXTURES = [
   type: Tasks.TASK_TYPE_FEATURE,
   priority: Tasks.TASK_PRIORITY_MEDIUM,
   status: Tasks.TASK_STATUS_PLANNED,
-  submitter: 2,
-  assignee: 3
+  submitter: 2
   },
 
   { id: 17,
@@ -205,11 +203,11 @@ Tasks.Task.FIXTURES = [
   status: Tasks.TASK_STATUS_ACTIVE,
   submitter: 4,
   assignee: 3
-  }/*,
+  },
 
   { id: 21,
   name: "Summary for task twenty-one",
-  priority: Tasks.TASK_PRIORITY_MEDIUM,
+  priority: Tasks.TASK_PRIORITY_HIGH,
   status: Tasks.TASK_STATUS_ACTIVE,
   submitter: 4,
   assignee: 2
@@ -222,6 +220,6 @@ Tasks.Task.FIXTURES = [
   status: Tasks.TASK_STATUS_DONE,
   submitter: 4,
   assignee: 3
-  }*/
+  }
 
 ];
