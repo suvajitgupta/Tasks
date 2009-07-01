@@ -93,7 +93,6 @@ Tasks.mixin({
       }
     }
 
-    // FIXME: This doesn't actually appear to get persisted in the fixtures data source.
     var inbox = store.createRecord(Tasks.Project, { id: 0, name: Tasks.INBOX_PROJECT_NAME, tasks: unassigned });
     Tasks.set('inbox', inbox);
     return inbox;
