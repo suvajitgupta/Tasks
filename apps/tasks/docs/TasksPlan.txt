@@ -57,6 +57,7 @@ Infrastructure/Modes:
 - Add user preferences? [SG] <JH2>
 
 "App" Manager:
+- Select first project at startup [JH2] <SG> @Done
 - Add "Export" button in bottom Toolbar (using TXT file format) [SG] @Done
 - Add "Import" button in bottom Toolbar (using TXT file format) [SG] <SE> @Active
 - Add drag-n-drop of a TXT file into App for data importing (using Google Gears) [MB] <SG> @Active

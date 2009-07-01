@@ -205,7 +205,7 @@ Tasks.Task.FIXTURES = [
   status: Tasks.TASK_STATUS_ACTIVE,
   submitter: 4,
   assignee: 3
-  },
+  }/*,
 
   { id: 21,
   name: "Summary for task twenty-one",
@@ -222,6 +222,6 @@ Tasks.Task.FIXTURES = [
   status: Tasks.TASK_STATUS_DONE,
   submitter: 4,
   assignee: 3
-  }
+  }*/
 
 ];

@@ -33,24 +33,8 @@ Tasks.mixin({
     // Instantiate Views
     Tasks.getPath('mainPage.mainPane').append();
     
-    // ..........................................................
-    //  These Timers are nasty.. I don't like doing it this way.
-    //  We should probably create another state that get used for 
-    // setting the initial state of the views.
-    // ...........................................................
-    SC.Timer.schedule({
-      interval: 100, // This is miliseconds
-      action: function() {
-        Tasks.getPath('mainPage.mainPane').get('projectsList').select(0);
-      }
-    });
-    SC.Timer.schedule({
-      interval: 175, // This is miliseconds
-      action: function() {
-        Tasks.getPath('mainPage.mainPane').get('tasksList').select(1);
-      }
-    });
-    
+    // Select first project at startup
+    Tasks.getPath('mainPage.mainPane').get('projectsList').select(0);
   }
 
 });
