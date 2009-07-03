@@ -185,7 +185,8 @@ Tasks.mixin({
     }
   },
   
-  importData: function() { // TODO: implement
+  importData: function() {
+    // TODO: implement view to prompt user for data to import (sample data hardcoded below for testing)
     var data = 
     '#A comment\n' +
     'Existing Project\n' +
@@ -199,8 +200,8 @@ Tasks.mixin({
     this._parseAndLoadData(data);
   },
   
-  _parseAndLoadData: function(data) {
-    var lines = data.split('\n'); // TODO: browser portability?
+  _parseAndLoadData: function(data) { // TODO: create objects in store
+    var lines = data.split('\n'); // TODO: make portable across browsers?
     var store = Tasks.get('store');
     
     var currentProject = Tasks.get('inbox');
@@ -271,7 +272,7 @@ Tasks.mixin({
             if(val !== Tasks.TASK_VALIDATION_UNTESTED)  data += ' %' + val;
             val = task.get('description');
             if(val) {
-              var lines = val.split('\n'); // TODO: browser portability?
+              var lines = val.split('\n'); // TODO: make portable across browsers?
               for (var j = 0; j < lines.length; j++) {
                 data += '\n| ' + lines[j];
               }
