@@ -189,13 +189,13 @@ Tasks.mixin({
     var data = 
     '#A comment\n' +
     'Existing Project\n' +
-    '^ My first task\n' +
+    '^ My first task {2}\n' +
     '| description line1\n' +
     '| description line2\n' +
     '- My second task\n' +
-    'v My third task\n' +
+    'v My third task {3-4}\n' +
     ' \t \n' +
-    'New Project\n';
+    'New Project {12}\n';
     this._parseAndLoadData(data);
   },
   
@@ -211,25 +211,30 @@ Tasks.mixin({
       
       if (line.indexOf('#') === 0) { // a Comment
         var commentLine = line.slice(1);
-        console.log ('Commment: ' + commentLine);
+        console.log ('Commment:\t' + commentLine);
       }
       else if (line.indexOf('^ ') === 0 || line.indexOf('- ') === 0 || line.indexOf('v ') === 0) { // a Task
-        // TODO: extract priority based on bullet
+        // extract priority based on bullet
         var priority = Tasks.TASK_PRIORITY_MEDIUM;
+        if (line.charAt(0) === '^') {
+          priority = Tasks.TASK_PRIORITY_HIGH;
+        } else if (line.charAt(0) === 'v') {
+          priority = Tasks.TASK_PRIORITY_LOW;
+        }
         var taskLine = line.slice(2); // TODO: trim trailing whitespace
-        console.log ('Task: ' + taskLine);
+        console.log ('Task:\t\t' + taskLine + ' of Priority: ' + priority);
         // var taskKey = store.createRecord(Tasks.Task, {  name: taskLine, priority: priority });
         // currentProject.get('tasks').pushObject(store.materializeRecord(taskKey));
       }
       else if (line.indexOf('| ') === 0) { // a Description
         var descriptionLine = line.slice(2);
-        console.log ('Description: ' + descriptionLine);
+        console.log ('Description:\t' + descriptionLine);
       }
       else if (line.search(/^[ \t]*$/) === 0) { // a blank line
-        console.log ('Blank line');
+        console.log ('Blank Line:');
       }
       else { // a Project
-        console.log ('Project: ' + line);
+        console.log ('Project:\t\t' + line);
       }
      }
   },
