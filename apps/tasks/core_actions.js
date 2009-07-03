@@ -200,7 +200,7 @@ Tasks.mixin({
     this._parseAndLoadData(data);
   },
   
-  _parseAndLoadData: function(data) { // TODO: create objects in store
+  _parseAndLoadData: function(data) { // TODOÏ: create objects in store
     var lines = data.split('\n'); // TODO: make portable across browsers?
     var store = Tasks.get('store');
     
@@ -291,10 +291,6 @@ Tasks.mixin({
   
   deleteTask: function() { // TODO: implement
     alert ('Not implemented!');
-  },
-  
-  makeProjectSelection: function(){
-    Tasks.getPath('mainPage.mainPane').get('projectsList').select(1);
   }
 
 });
