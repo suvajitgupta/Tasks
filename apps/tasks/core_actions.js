@@ -221,9 +221,9 @@ Tasks.mixin({
         } else if (line.charAt(0) === 'v') {
           priority = Tasks.TASK_PRIORITY_LOW;
         }
-        var taskLine = line.slice(2); // TODO: trim trailing whitespace
+        var taskLine = line.slice(2); // TODO: extract other task fields if provided
         console.log ('Task:\t\t' + taskLine + ' of Priority: ' + priority);
-        // var taskKey = store.createRecord(Tasks.Task, {  name: taskLine, priority: priority });
+        // var taskKey = store.createRecord(Tasks.Task, { name: taskLine, priority: priority });
         // currentProject.get('tasks').pushObject(store.materializeRecord(taskKey));
       }
       else if (line.indexOf('| ') === 0) { // a Description
@@ -234,7 +234,7 @@ Tasks.mixin({
         console.log ('Blank Line:');
       }
       else { // a Project
-        console.log ('Project:\t\t' + line);
+        console.log ('Project:\t\t' + line); // TODO: extract timeLeft if provided
       }
      }
   },
