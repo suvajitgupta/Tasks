@@ -58,15 +58,11 @@
   background:#EAADEA none repeat scroll 0 0;
 }
 
+/* override SC style
 
-/* 
-  Styling for the Tasks SourceListView 
+.sc-theme.focus .sc-list-view.sc-source-list .sc-collection-item.sel {
+  background: white;
+	border: red;
+}
 */
 
-.task-source-list {
-  background: transparent;
-}
-
-.task-source-list.sel {
-  background:transparent;
-}
