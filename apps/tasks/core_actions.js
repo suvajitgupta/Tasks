@@ -187,11 +187,14 @@ Tasks.mixin({
   
   importData: function() { // TODO: implement
     var data = 
-    'My Project:\n' +
     '# a comment\n' +
-    '- My first task\n' +
+    'My Project:\n' +
+    '^ My first task\n' +
+    '| description line1\n' +
+    '| description line2\n' +
     '- My second task\n' +
-    '- My third task';
+    '\n' +
+    'v My third task';
     this._parseAndLoadData(data);
   },
   
@@ -204,19 +207,26 @@ Tasks.mixin({
       
       var line = lines[i];
       
-      if (line.indexOf('- ') === 0) { // a task TODO: parse other bullets
-        var taskLine = line.substr(2); // TODO: trim trailing whitespace
-        var taskKey = store.createRecord(Tasks.Task, {  name: taskLine, priority: Tasks.TASK_PRIORITY_MEDIUM });
-        currentProject.get('tasks').pushObject(store.materializeRecord(taskKey));
+      if (line.indexOf('^ ') === 0 || line.indexOf('- ') === 0 || line.indexOf('v ') === 0) { // a task
+        var taskLine = line.slice(2); // TODO: trim trailing whitespace
+        console.log ('Task: ' + taskLine);
+        // var taskKey = store.createRecord(Tasks.Task, {  name: taskLine, priority: Tasks.TASK_PRIORITY_MEDIUM });
+        // currentProject.get('tasks').pushObject(store.materializeRecord(taskKey));
       }
-      else if (line.search(':[ ]*$') !== -1) { // a project
-        // alert ('Project: ' + line);
-        // var projectLine = line.match('^.*:[ ]*$');
+      else if (line.indexOf('| ') === 0) { // a description
+        var descriptionLine = line.slice(2);
+        console.log ('Description: ' + descriptionLine);
+      }
+      else if (line.search(':$') !== -1) { // a project
+        var projectLine = line.slice(0, line.length-1);
+        console.log ('Project: ' + projectLine);
       }
       else if (line.indexOf('#') === 0) { // a comment
-        // alert ('Commment: ' + line);
+        var commentLine = line.slice(1);
+        console.log ('Commment: ' + commentLine);
       }
-      else { // TODO: a description line?
+      else { // blank line?
+        console.log ('Blank line');
       }
      }
   },
@@ -252,7 +262,12 @@ Tasks.mixin({
             val = task.get('validation');
             if(val !== Tasks.TASK_VALIDATION_UNTESTED)  data += ' %' + val;
             val = task.get('description');
-            if(val) data += '\n' + val;
+            if(val) {
+              var lines = val.split('\n'); // TODO: browser portability?
+              for (var j = 0; j < lines.length; j++) {
+                data += '\n| ' + lines[j];
+              }
+            }
             data += '\n';
           }
           data += '\n';
