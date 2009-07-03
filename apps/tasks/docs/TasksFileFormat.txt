@@ -1,10 +1,14 @@
-# Lines starting with a # indicate a Comment (these are ignored when imported)
-# appended asterisk indicates a required field
-# Lines starting with any of the following bullets are Tasks (Priority: ^ indicates High, - indicated Medium, V indicates Low)
-# Recommend convention of prepending Task Name with the Component name followed by a colon and a space
-# Lines starting with a '|' indicate a (potential multiline) Description for the last Task above them
-# Lines starting without a bullet but ending in a : indicate Projects
+A line starting with a "#" is a Comment (these are ignored when imported)
+A line starting with a "^ " or "- " or "v " is a Task (priority: "^" indicates High, "-" indicated Medium, "v" indicates Low)
+A line starting with a "| " is a (potentially multiline) Description for the last Task above it
+Any other line is a Project
+Blank lines are allowed but ignored
 
-ProjectName* {timeLeft}:
+In format sample snippet below:
+	appended asterisk indicates a required field
+	recommend convention of prepending Task Name with the Component name followed by a colon and a space
+
+#Comment
+ProjectName* {TimeLeft}
 - TaskName* {Effort} <Submitter> [Assignee] $Type @Status %Validation
 | Description (1 or more lines)

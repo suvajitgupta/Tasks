@@ -187,14 +187,15 @@ Tasks.mixin({
   
   importData: function() { // TODO: implement
     var data = 
-    '# a comment\n' +
-    'My Project:\n' +
+    '#A comment\n' +
+    'Existing Project\n' +
     '^ My first task\n' +
     '| description line1\n' +
     '| description line2\n' +
     '- My second task\n' +
-    '\n' +
-    'v My third task';
+    'v My third task\n' +
+    ' \t \n' +
+    'New Project\n';
     this._parseAndLoadData(data);
   },
   
@@ -206,27 +207,29 @@ Tasks.mixin({
     for (var i = 0; i < lines.length; i++) {
       
       var line = lines[i];
+      // console.log("Parsing line '" + line + "'\n");
       
-      if (line.indexOf('^ ') === 0 || line.indexOf('- ') === 0 || line.indexOf('v ') === 0) { // a task
-        var taskLine = line.slice(2); // TODO: trim trailing whitespace
-        console.log ('Task: ' + taskLine);
-        // var taskKey = store.createRecord(Tasks.Task, {  name: taskLine, priority: Tasks.TASK_PRIORITY_MEDIUM });
-        // currentProject.get('tasks').pushObject(store.materializeRecord(taskKey));
-      }
-      else if (line.indexOf('| ') === 0) { // a description
-        var descriptionLine = line.slice(2);
-        console.log ('Description: ' + descriptionLine);
-      }
-      else if (line.search(':$') !== -1) { // a project
-        var projectLine = line.slice(0, line.length-1);
-        console.log ('Project: ' + projectLine);
-      }
-      else if (line.indexOf('#') === 0) { // a comment
+      if (line.indexOf('#') === 0) { // a Comment
         var commentLine = line.slice(1);
         console.log ('Commment: ' + commentLine);
       }
-      else { // blank line?
+      else if (line.indexOf('^ ') === 0 || line.indexOf('- ') === 0 || line.indexOf('v ') === 0) { // a Task
+        // TODO: extract priority based on bullet
+        var priority = Tasks.TASK_PRIORITY_MEDIUM;
+        var taskLine = line.slice(2); // TODO: trim trailing whitespace
+        console.log ('Task: ' + taskLine);
+        // var taskKey = store.createRecord(Tasks.Task, {  name: taskLine, priority: priority });
+        // currentProject.get('tasks').pushObject(store.materializeRecord(taskKey));
+      }
+      else if (line.indexOf('| ') === 0) { // a Description
+        var descriptionLine = line.slice(2);
+        console.log ('Description: ' + descriptionLine);
+      }
+      else if (line.search(/^[ \t]*$/) === 0) { // a blank line
         console.log ('Blank line');
+      }
+      else { // a Project
+        console.log ('Project: ' + line);
       }
      }
   },
@@ -240,7 +243,7 @@ Tasks.mixin({
           var tasks = rec.get('tasks');
           var len = tasks.get('length');
           if(rec.get('name') !== Tasks.INBOX_PROJECT_NAME) {
-            data += rec.get('displayName') + ':\n';
+            data += rec.get('displayName') + '\n';
           }
           for (var i = 0; i < len; i++) {
             task = tasks.objectAt(i);
