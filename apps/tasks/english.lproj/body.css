@@ -18,51 +18,49 @@
 
 
 .tasks-priority-high {
-	text-decoration: underline;
+	text-decoration: underline !important;
 }
 
 .tasks-priority-medium {
-  font-weight: none;
+  font-weight: none !important;
 }
 
 .tasks-priority-low {
-  font-style: italic;
+  font-style: italic !important;
 }
 
 
 .tasks-status-planned {
-	color: black;
+	color: black !important;
 }
 
 .tasks-status-active {
-  color: blue;
+  color: blue !important;
 }
 
 .tasks-status-done {
-  color: green;
+  color: green !important;
 }
 
 .tasks-status-risky {
-  color: red;
+  color: red !important;
 }
 
 
 .tasks-validation-untested {
+  background: white none repeat scroll 0 0 !important;
 }
 
 .tasks-validation-passed {
-  background:#93DB70 none repeat scroll 0 0;
+  background: #93DB70 none repeat scroll 0 0 !important;
 }
 
 .tasks-validation-failed {
-  background:#EAADEA none repeat scroll 0 0;
+  background: #EAADEA none repeat scroll 0 0 !important;
 }
-
-/* override SC style
 
 .sc-theme.focus .sc-list-view.sc-source-list .sc-collection-item.sel {
-  background: white;
-	border: red;
+	border-style: solid;
+	border-size: 2px;
+	border-color: black;
 }
-*/
-
