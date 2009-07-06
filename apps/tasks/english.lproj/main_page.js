@@ -96,9 +96,9 @@ Tasks.mainPage = SC.Page.design({
       
       projectsToolbarView: SC.View.design({
         layout: { top: 0, left: 0, bottom: 0, width: 250 },
-        childViews: 'addProjectButtonView deleteProjectButtonView importButtonView exportButtonView'.w(),
+        childViews: [
         
-        addProjectButtonView: SC.ButtonView.design({
+        SC.ButtonView.design({
           layout: { centerY: 0, left: 15, height: 21, width: 30 },
           title: "+",
           titleMinWidth: 0,
@@ -106,7 +106,7 @@ Tasks.mainPage = SC.Page.design({
           action: 'addProject'
         }),
 
-        deleteProjectButtonView: SC.ButtonView.design({
+        SC.ButtonView.design({
           layout: { centerY: 0, left: 50, height: 21, width: 30 },
           title: "-",
           titleMinWidth: 0,
@@ -115,7 +115,7 @@ Tasks.mainPage = SC.Page.design({
           action: 'deleteProject'
         }),
 
-        importButtonView: SC.ButtonView.design({
+        SC.ButtonView.design({
           layout: { centerY: 0, height: 21, left: 100, width: 55 },
           title:  "_Import".loc(),
           titleMinWidth: 0,
@@ -123,7 +123,7 @@ Tasks.mainPage = SC.Page.design({
           action: 'importData'
         }),
 
-        exportButtonView: SC.ButtonView.design({
+        SC.ButtonView.design({
           layout: { centerY: 0, height: 21, left: 160, width: 55 },
           title:  "_Export".loc(),
           titleMinWidth: 0,
@@ -131,13 +131,15 @@ Tasks.mainPage = SC.Page.design({
           action: 'exportData'
         })
         
+        ]
+        
       }),
       
       tasksToolbarView: SC.View.design({
         layout: { top: 0, left: 265, bottom: 0, right: 0 },
-        childViews: 'addTaskButtonView deleteTaskButtonView taskPriorityView taskStatusView taskValidationView'.w(), 
+        childViews: [
 
-        addTaskButtonView: SC.ButtonView.design({
+        SC.ButtonView.design({
           layout: { centerY: 0, height: 21, left: 7, width: 30 },
           title:  "+",
           titleMinWidth: 0,
@@ -145,7 +147,7 @@ Tasks.mainPage = SC.Page.design({
           action: 'addTask'
         }),
 
-        deleteTaskButtonView: SC.ButtonView.design({
+        SC.ButtonView.design({
           layout: { centerY: 0, height: 21, left: 42, width: 30 },
           title:  "-",
           titleMinWidth: 0,
@@ -154,13 +156,16 @@ Tasks.mainPage = SC.Page.design({
           action: 'deleteTask'
         }),
         
-        taskPriorityView: SC.RadioView.design({
-          layout: { centerY: 0, height: 21, left: 150, width: 180 },
+        SC.RadioView.design({
+          layout: { centerY: 0, height: 21, left: 120, width: 180 },
           escapeHTML: NO,
           items: [
-            { title: '<span class=tasks-priority-high>' + Tasks.TASK_PRIORITY_HIGH + '</span>', value: Tasks.TASK_PRIORITY_HIGH },
-            { title: '<span class=tasks-priority-medium>' + Tasks.TASK_PRIORITY_MEDIUM + '</span>', value: Tasks.TASK_PRIORITY_MEDIUM },
-            { title: '<span class=tasks-priority-low>' + Tasks.TASK_PRIORITY_LOW + '</span>', value: Tasks.TASK_PRIORITY_LOW }
+            { title: '<span class=tasks-priority-high>' + Tasks.TASK_PRIORITY_HIGH + '</span>',
+              value: Tasks.TASK_PRIORITY_HIGH },
+            { title: '<span class=tasks-priority-medium>' + Tasks.TASK_PRIORITY_MEDIUM + '</span>',
+              value: Tasks.TASK_PRIORITY_MEDIUM },
+            { title: '<span class=tasks-priority-low>' + Tasks.TASK_PRIORITY_LOW + '</span>',
+              value: Tasks.TASK_PRIORITY_LOW }
           ],
           itemTitleKey: 'title',
           itemValueKey: 'value',
@@ -169,14 +174,23 @@ Tasks.mainPage = SC.Page.design({
           layoutDirection: SC.LAYOUT_HORIZONTAL
         }),
         
-        taskStatusView: SC.RadioView.design({
-          layout: { centerY: 0, height: 21, left: 360, width: 240 },
+        SC.SeparatorView.design({
+          layoutDirection: SC.LAYOUT_VERTICAL,
+          layout: { top: 5, bottom: 5, left: 290, width: 4 }
+        }),
+
+        SC.RadioView.design({
+          layout: { centerY: 0, height: 21, left: 310, width: 240 },
           escapeHTML: NO,
           items: [
-            { title: '<span class=tasks-status-planned>' + Tasks.TASK_STATUS_PLANNED + '</span>', value: Tasks.TASK_STATUS_PLANNED },
-            { title: '<span class=tasks-status-active>' + Tasks.TASK_STATUS_ACTIVE + '</span>', value: Tasks.TASK_STATUS_ACTIVE },
-            { title: '<span class=tasks-status-done>' + Tasks.TASK_STATUS_DONE + '</span>', value: Tasks.TASK_STATUS_DONE },
-            { title: '<span class=tasks-status-risky>' + Tasks.TASK_STATUS_RISKY + '</span>', value: Tasks.TASK_STATUS_RISKY }
+            { title: '<span class=tasks-status-planned>' + Tasks.TASK_STATUS_PLANNED + '</span>',
+              value: Tasks.TASK_STATUS_PLANNED },
+            { title: '<span class=tasks-status-active>' + Tasks.TASK_STATUS_ACTIVE + '</span>',
+              value: Tasks.TASK_STATUS_ACTIVE },
+            { title: '<span class=tasks-status-done>' + Tasks.TASK_STATUS_DONE + '</span>',
+              value: Tasks.TASK_STATUS_DONE },
+            { title: '<span class=tasks-status-risky>' + Tasks.TASK_STATUS_RISKY + '</span>',
+              value: Tasks.TASK_STATUS_RISKY }
           ],
           itemTitleKey: 'title',
           itemValueKey: 'value',
@@ -185,13 +199,21 @@ Tasks.mainPage = SC.Page.design({
           layoutDirection: SC.LAYOUT_HORIZONTAL
         }),
         
-        taskValidationView: SC.RadioView.design({
-          layout: { centerY: 0, height: 21, left: 660, width: 220 },
+        SC.SeparatorView.design({
+          layoutDirection: SC.LAYOUT_VERTICAL,
+          layout: { top: 5, bottom: 5, left: 550, width: 4 }
+        }),
+
+        SC.RadioView.design({
+          layout: { centerY: 0, height: 21, left: 570, width: 220 },
           escapeHTML: NO,
           items: [
-            { title: '<span class=tasks-validation-untested>' + Tasks.TASK_VALIDATION_UNTESTED + '</span>', value: Tasks.TASK_VALIDATION_UNTESTED },
-            { title: '<span class=tasks-validation-passed>' + Tasks.TASK_VALIDATION_PASSED + '</span>', value: Tasks.TASK_VALIDATION_PASSED },
-            { title: '<span class=tasks-validation-failed>' + Tasks.TASK_VALIDATION_FAILED + '</span>', value: Tasks.TASK_VALIDATION_FAILED }
+            { title: '<span class=tasks-validation-untested>' + Tasks.TASK_VALIDATION_UNTESTED + '</span>',
+              value: Tasks.TASK_VALIDATION_UNTESTED },
+            { title: '<span class=tasks-validation-passed>' + Tasks.TASK_VALIDATION_PASSED + '</span>',
+              value: Tasks.TASK_VALIDATION_PASSED },
+            { title: '<span class=tasks-validation-failed>' + Tasks.TASK_VALIDATION_FAILED + '</span>',
+              value: Tasks.TASK_VALIDATION_FAILED }
           ],
           itemTitleKey: 'title',
           itemValueKey: 'value',
@@ -199,6 +221,8 @@ Tasks.mainPage = SC.Page.design({
           isEnabledBinding: 'Tasks.tasksController.hasSelection',
           layoutDirection: SC.LAYOUT_HORIZONTAL
         })
+        
+        ]
         
       })
       
