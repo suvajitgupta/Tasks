@@ -105,7 +105,7 @@ Tasks.mixin({
       }
     }
 
-    // FIXME: [SC] investigate why projects added to the store don't show up in findAll()
+    // FIXME: [SE] investigate why projects added to the store don't show up in findAll()
     var inbox = store.createRecord(Tasks.Project, { id: 0, name: Tasks.INBOX_PROJECT_NAME, tasks: unassigned });
     Tasks.set('inbox', inbox);
     return inbox;
