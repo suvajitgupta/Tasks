@@ -37,7 +37,7 @@ Infrastructure/Modes:
 
 "Project" Manager:
 - Show Project name & time left in curly braces (if specified) [SG] <JH2> @Done
-- Allow drag-n-drop reordering [SC] @Done
+- Allow drag-n-drop reordering [SG] @Done
 - Add double-click in-cell editing [SC] @Risky
 - Add Master/Detail Explorer view with click selection of Projects showing corresponding Tasks [JH2] <SG> @Done
 - Add "+" & "-" buttons in bottom Toolbar [SG] <SC> @Risky
