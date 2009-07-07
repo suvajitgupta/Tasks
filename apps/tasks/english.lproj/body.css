@@ -18,14 +18,17 @@
 
 
 .tasks-priority-high {
+	font-weight: normal !important;
 	text-decoration: underline !important;
 }
 
 .tasks-priority-medium {
-  font-weight: none !important;
+	font-weight: normal !important;
+	font-style: normal !important;
 }
 
 .tasks-priority-low {
+	font-weight: normal !important;
   font-style: italic !important;
 }
 
