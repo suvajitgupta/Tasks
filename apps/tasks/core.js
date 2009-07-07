@@ -44,7 +44,7 @@ SC.mixin(Function.prototype, {
    * Wraps the function in another, locking its execution scope to an object
    * specified by `object`.
    *
-   * FIXME: [SC] It seems as though this should be included with the SC framework -- we use it a lot.
+   * FIXME: [SC] It seems as though bind() should be included with the SC framework -- we use it a lot.
    */
   bind: function (context) {
     var slice = Array.prototype.slice;

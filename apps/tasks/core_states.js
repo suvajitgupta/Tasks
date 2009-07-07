@@ -20,7 +20,7 @@ Tasks.mixin({
 
   // Authentication
   goStateA2: function(){
-    // TODO: [SG] implement
+    // TODO: [SG] implement user authentication
   },
 
   // Data Loading

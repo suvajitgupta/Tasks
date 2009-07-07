@@ -13,6 +13,7 @@ Tasks.INBOX_PROJECT_NAME = "_InboxProject".loc();
  * @extends Tasks.Record
  * @author Suvajit Gupta
  */
+// TODO: [SE] refactor all model objects to core framework across all Task GUIs
 Tasks.Project = Tasks.Record.extend(/** @scope Tasks.Project.prototype */ {
 
   /**

@@ -9,7 +9,7 @@ sc_require('core');
 
 Tasks.mixin({
   
-  // TODO: [SG] Should we be using parameters in any of these action functions?
+  // TODO: [SG] Should we be using parameters in any action functions?
   authenticate: function(loginName, password) {
     switch (this.state.a) {
       case 1:
@@ -70,7 +70,7 @@ Tasks.mixin({
     projects.insertAt(0, this._createInbox());
     var moreProjects = Tasks.get('store').findAll(Tasks.Project);
  
-    // TODO: [SE] Implement callbacks in the data source.
+    // TODO: [SE] Implement succsss/failure callbacks in the data source.
     /*
     , {
       successCallback: Tasks.dataLoadSuccess().bind(this),
@@ -124,7 +124,7 @@ Tasks.mixin({
   dataLoadFailure: function() {
     switch (this.state.a) {
       case 3:
-        // TODO: [SG] implement state transition & actions
+        // TODO: [SG] implement data load failure state transition & actions
         break;
       default:
         this._logActionNotHandled('dataLoadSuccess', 'a', this.state.a);  
@@ -157,7 +157,7 @@ Tasks.mixin({
 
     var listView = Tasks.getPath('mainPage.mainPane.middleView.topLeftView.contentView');
     var idx = listView.length - 1; // get index of new project in list
-    // TODO: [SG] get index of new project whereever it is in the list, don't assume it is at the end
+    // TODO: [SG] get index of new project wherever it is in the list, don't assume it is at the end
     listView.select(idx);
 
     // Begin editing newly created item.
@@ -200,7 +200,7 @@ Tasks.mixin({
     this._parseAndLoadData(data);
   },
   
-  _parseAndLoadData: function(data) { // TODO: [SE] create objects in store
+  _parseAndLoadData: function(data) { // TODO: [SE] create objects in store during data import
     var lines = data.split('\n'); // TODO: [SG] make portable across browsers?
     var store = Tasks.get('store');
     
@@ -285,11 +285,11 @@ Tasks.mixin({
     console.log(data);
   },
   
-  addTask: function() { // TODO: [SG] implement
+  addTask: function() { // TODO: [SG] implement task addition
     alert ('Not implemented!');
   },
   
-  deleteTask: function() { // TODO: [SG] implement
+  deleteTask: function() { // TODO: [SG] implement task deletion
     alert ('Not implemented!');
   }
 
