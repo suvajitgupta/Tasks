@@ -36,7 +36,7 @@ Tasks.mainPage = SC.Page.design({
         value: "_Tasks".loc() + " v" + Tasks.VERSION
       }),
       
-      summaryView: Tasks.SummaryView.design({ // TODO: make this a hover over on Tasks label?
+      summaryView: Tasks.SummaryView.design({ // TODO: [SG] make this a hover over on Tasks label
         layout: { top: 12, height: 40, left: 185, width: 100 },
         valueBinding: 'Tasks.projectsController.length'
       })
@@ -73,7 +73,7 @@ Tasks.mainPage = SC.Page.design({
           contentValueKey: 'displayName',
           contentBinding: 'Tasks.tasksController.arrangedObjects',
           selectionBinding: 'Tasks.tasksController.selection',
-          hasContentIcon: YES,   // TODO: figure out how to display icons for Assignee (User).
+          hasContentIcon: YES,
           contentIconKey: 'icon',
           contentValueEditable: true,
           canReorderContent: true,

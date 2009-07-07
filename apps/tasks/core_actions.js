@@ -9,7 +9,7 @@ sc_require('core');
 
 Tasks.mixin({
   
-  // TODO: Should we be using parameters in any of these action functions?
+  // TODO: [SG] Should we be using parameters in any of these action functions?
   authenticate: function(loginName, password) {
     switch (this.state.a) {
       case 1:
@@ -26,7 +26,7 @@ Tasks.mixin({
     }
   },
   
-  _authenticateUser: function(loginName, password) { // TODO: implement server-based authentication
+  _authenticateUser: function(loginName, password) { // TODO: [SG] implement server-based authentication
     var store = Tasks.get('store');
     var users = Tasks.store.findAll(Tasks.User);
     var len = users.get('length');
@@ -43,7 +43,7 @@ Tasks.mixin({
       case 2:
         this.goState('a', 3);
         this._loadData();
-        // TODO: install succsss/failure callbacks for this instead.
+        // TODO: [SE] install succsss/failure callbacks for this instead.
         this.dataLoadSuccess();
         break;
       default:
@@ -70,7 +70,7 @@ Tasks.mixin({
     projects.insertAt(0, this._createInbox());
     var moreProjects = Tasks.get('store').findAll(Tasks.Project);
  
-    // TODO: Implement callbacks in the data source.
+    // TODO: [SE] Implement callbacks in the data source.
     /*
     , {
       successCallback: Tasks.dataLoadSuccess().bind(this),
@@ -105,7 +105,7 @@ Tasks.mixin({
       }
     }
 
-    // FIXME: investigate why projects added to the store don't show up in findAll()
+    // FIXME: [SC] investigate why projects added to the store don't show up in findAll()
     var inbox = store.createRecord(Tasks.Project, { id: 0, name: Tasks.INBOX_PROJECT_NAME, tasks: unassigned });
     Tasks.set('inbox', inbox);
     return inbox;
@@ -124,7 +124,7 @@ Tasks.mixin({
   dataLoadFailure: function() {
     switch (this.state.a) {
       case 3:
-        // TODO: implement state transition & actions
+        // TODO: [SG] implement state transition & actions
         break;
       default:
         this._logActionNotHandled('dataLoadSuccess', 'a', this.state.a);  
@@ -146,24 +146,24 @@ Tasks.mixin({
     
     var pc = Tasks.get('projectsController');
     // Create a new project with a default name
-    // TODO: add new project right after selected item    
+    // TODO: [SG] add new project right after selected item    
 
     var store = Tasks.get('store');
     var task = store.createRecord(Tasks.Project, {
       name: Tasks.NEW_PROJECT_NAME
     });
     store.commitRecords();
-    pc.addObject(task); // TODO: Why do we have to manually add to the controller instead of store notifying?
+    pc.addObject(task); // TODO: [SC] Why do we have to manually add to the controller instead of store notifying?
 
     var listView = Tasks.getPath('mainPage.mainPane.middleView.topLeftView.contentView');
     var idx = listView.length - 1; // get index of new project in list
-    // TODO: get index of new project whereever it is in the list, don't assume it is at the end
+    // TODO: [SG] get index of new project whereever it is in the list, don't assume it is at the end
     listView.select(idx);
 
     // Begin editing newly created item.
     var itemView = listView.itemViewForContentIndex(idx);
     itemView.beginEditing.invokeLater(itemView);  // you must wait for run loop to complete before method is called
-    // TODO: when user changes name of New Project it doesn't change in ListView
+    // TODO: [SC] when user changes name of New Project it doesn't change in ListView
   },
   
   deleteProject: function() {
@@ -181,12 +181,12 @@ Tasks.mixin({
 
       //commit the operation to send the request to the server
       store.commitRecords();
-      // TODO: what to do to remove the "New Project" from the ListView and clear the selection?
+      // TODO: [SC] what to do to remove the "New Project" from the ListView and clear the selection?
     }
   },
   
   importData: function() {
-    // TODO: implement view to prompt user for data to import (sample data hardcoded below for testing)
+    // TODO: [SG] implement view to prompt user for data to import (sample data hardcoded below for testing)
     var data = 
     '#A comment\n' +
     'Existing Project\n' +
@@ -200,8 +200,8 @@ Tasks.mixin({
     this._parseAndLoadData(data);
   },
   
-  _parseAndLoadData: function(data) { // TODOÏ: create objects in store
-    var lines = data.split('\n'); // TODO: make portable across browsers?
+  _parseAndLoadData: function(data) { // TODO: [SE] create objects in store
+    var lines = data.split('\n'); // TODO: [SG] make portable across browsers?
     var store = Tasks.get('store');
     
     var currentProject = Tasks.get('inbox');
@@ -222,7 +222,7 @@ Tasks.mixin({
         } else if (line.charAt(0) === 'v') {
           priority = Tasks.TASK_PRIORITY_LOW;
         }
-        var taskLine = line.slice(2); // TODO: extract other task fields if provided
+        var taskLine = line.slice(2); // TODO: [SG] extract other task fields if provided
         console.log ('Task:\t\t' + taskLine + ' of Priority: ' + priority);
         // var taskKey = store.createRecord(Tasks.Task, { name: taskLine, priority: priority });
         // currentProject.get('tasks').pushObject(store.materializeRecord(taskKey));
@@ -235,7 +235,7 @@ Tasks.mixin({
         console.log ('Blank Line:');
       }
       else { // a Project
-        console.log ('Project:\t\t' + line); // TODO: extract timeLeft if provided
+        console.log ('Project:\t\t' + line); // TODO: [SG] extract timeLeft if provided
       }
      }
   },
@@ -272,7 +272,7 @@ Tasks.mixin({
             if(val !== Tasks.TASK_VALIDATION_UNTESTED)  data += ' %' + val;
             val = task.get('description');
             if(val) {
-              var lines = val.split('\n'); // TODO: make portable across browsers?
+              var lines = val.split('\n'); // TODO: [SG] make portable across browsers?
               for (var j = 0; j < lines.length; j++) {
                 data += '\n| ' + lines[j];
               }
@@ -285,11 +285,11 @@ Tasks.mixin({
     console.log(data);
   },
   
-  addTask: function() { // TODO: implement
+  addTask: function() { // TODO: [SG] implement
     alert ('Not implemented!');
   },
   
-  deleteTask: function() { // TODO: implement
+  deleteTask: function() { // TODO: [SG] implement
     alert ('Not implemented!');
   }
 

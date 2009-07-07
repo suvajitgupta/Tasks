@@ -11,16 +11,16 @@ Tasks.mixin({
   
   // Login
   goStateA1: function(){
-    // var user = prompt('Login name:'); // TODO: replace with proper Login dialog
+    // var user = prompt('Login name:'); // TODO: [SG] replace with proper Login dialog
     var user = 'bigboss';
     if (user !== null && user !== '') {
-      Tasks.authenticate(user, 'password'); // TODO: pass actual password input by user
+      Tasks.authenticate(user, 'password'); // TODO: [SG] pass actual password input by user
     }
   },
 
   // Authentication
   goStateA2: function(){
-    // TODO: implement
+    // TODO: [SG] implement
   },
 
   // Data Loading

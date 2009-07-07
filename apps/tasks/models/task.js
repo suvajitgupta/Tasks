@@ -117,7 +117,7 @@ Tasks.Task = Tasks.Record.extend({
   /**
    * The path to the icon associated with a task.
    */
-  icon: function() { // TODO: get better icons
+  icon: function() { // TODO: [MG] get better icons
 		switch (this.get('type')){
 			case Tasks.TASK_TYPE_FEATURE:
 	    	return 'tasks-icon-feature';
