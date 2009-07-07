@@ -201,7 +201,7 @@ Tasks.mixin({
   },
   
   _parseAndLoadData: function(data) { // TODO: [SE] create objects in store during data import
-    var lines = data.split('\n'); // TODO: [SG] make portable across browsers?
+    var lines = data.split('\n');
     var store = Tasks.get('store');
     
     var currentProject = Tasks.get('inbox');
@@ -272,7 +272,7 @@ Tasks.mixin({
             if(val !== Tasks.TASK_VALIDATION_UNTESTED)  data += ' %' + val;
             val = task.get('description');
             if(val) {
-              var lines = val.split('\n'); // TODO: [SG] make portable across browsers?
+              var lines = val.split('\n');
               for (var j = 0; j < lines.length; j++) {
                 data += '\n| ' + lines[j];
               }
