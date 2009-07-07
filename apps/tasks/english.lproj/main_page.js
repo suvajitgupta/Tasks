@@ -155,7 +155,7 @@ Tasks.mainPage = SC.Page.design({
         }),
         
         SC.RadioView.design({
-          layout: { centerY: 0, height: 21, left: 120, width: 180 },
+          layout: { centerY: 0, height: 21, left: 110, width: 180 },
           escapeHTML: NO,
           items: [
             { title: '<span class=tasks-priority-high>' + Tasks.TASK_PRIORITY_HIGH + '</span>',
@@ -174,11 +174,11 @@ Tasks.mainPage = SC.Page.design({
         
         SC.SeparatorView.design({
           layoutDirection: SC.LAYOUT_VERTICAL,
-          layout: { top: 5, bottom: 5, left: 290, width: 4 }
+          layout: { top: 5, bottom: 5, left: 280, width: 4 }
         }),
 
         SC.RadioView.design({
-          layout: { centerY: 0, height: 21, left: 310, width: 240 },
+          layout: { centerY: 0, height: 21, left: 300, width: 240 },
           escapeHTML: NO,
           items: [
             { title: '<span class=tasks-status-planned>' + Tasks.TASK_STATUS_PLANNED + '</span>',
@@ -199,11 +199,11 @@ Tasks.mainPage = SC.Page.design({
         
         SC.SeparatorView.design({
           layoutDirection: SC.LAYOUT_VERTICAL,
-          layout: { top: 5, bottom: 5, left: 550, width: 4 }
+          layout: { top: 5, bottom: 5, left: 540, width: 4 }
         }),
 
         SC.RadioView.design({
-          layout: { centerY: 0, height: 21, left: 570, width: 220 },
+          layout: { centerY: 0, height: 21, left: 560, width: 220 },
           escapeHTML: NO,
           items: [
             { title: '<span class=tasks-validation-untested>' + Tasks.TASK_VALIDATION_UNTESTED + '</span>',
