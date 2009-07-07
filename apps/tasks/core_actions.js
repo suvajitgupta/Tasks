@@ -224,8 +224,13 @@ Tasks.mixin({
         }
         var taskLine = line.slice(2); // TODO: [SG] extract other task fields if provided
         console.log ('Task:\t\t' + taskLine + ' of Priority: ' + priority);
-        // var taskKey = store.createRecord(Tasks.Task, { name: taskLine, priority: priority });
-        // currentProject.get('tasks').pushObject(store.materializeRecord(taskKey));
+        var taskKey = store.createRecord(Tasks.Task, { name: taskLine, priority: priority });
+        var taskRecord = store.materializeRecord(taskKey); // FIXME: [SC] need to fix record creation in SC.Store
+        if(!taskRecord) {
+          console.log('ERROR: task creation failed!');
+          continue;
+        }
+        currentProject.get('tasks').pushObject(taskRecord);
       }
       else if (line.indexOf('| ') === 0) { // a Description
         var descriptionLine = line.slice(2);
@@ -235,7 +240,17 @@ Tasks.mixin({
         console.log ('Blank Line:');
       }
       else { // a Project
-        console.log ('Project:\t\t' + line); // TODO: [SG] extract timeLeft if provided
+        // extract timeLeft if provided
+        var projectName = line, timeLeft = null;
+        var match = line.match(/([\w\s]*)[\s*]\{(\d+)\}/);
+        if(match) {
+          projectName = match[1];
+          timeLeft = match[2];
+        }
+        console.log ('Project:\t\t' + projectName);
+        if (timeLeft) {
+          console.log (' with TimeLeft: ' + timeLeft);
+        }
       }
      }
   },
