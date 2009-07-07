@@ -1,9 +1,9 @@
 // ==========================================================================
 // Project: Tasks
 // ==========================================================================
-/*globals Tasks */
-require('views/summary');
-require('views/task');
+/*globals Tasks sc_require */
+sc_require('views/summary');
+sc_require('views/task');
 /** @namespace
 
   This page describes the main user interface for the Tasks application.
@@ -51,7 +51,6 @@ Tasks.mainPage = SC.Page.design({
       topLeftView: SC.ScrollView.design({
         hasHorizontalScroller: NO,
         borderStyle: SC.BORDER_GRAY,
-        backgroundColor: 'blue',
 
         contentView: SC.ListView.design({
           contentValueKey: 'displayName',
@@ -69,7 +68,6 @@ Tasks.mainPage = SC.Page.design({
       bottomRightView: SC.ScrollView.design({
         hasHorizontalScroller: NO,
         borderStyle: SC.BORDER_GRAY,
-        backgroundColor: 'blue',
 
         contentView: SC.SourceListView.design({
           contentValueKey: 'displayName',

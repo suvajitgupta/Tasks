@@ -48,7 +48,7 @@
 
 
 .tasks-validation-untested {
-  background: white none repeat scroll 0 0 !important;
+  background: #CCC none repeat scroll 0 0 !important;
 }
 
 .tasks-validation-passed {
@@ -61,6 +61,6 @@
 
 .sc-theme.focus .sc-list-view.sc-source-list .sc-collection-item.sel {
 	border-style: solid;
-	border-size: 2px;
+	border-size: 1px;
 	border-color: black;
 }
