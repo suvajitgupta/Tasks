@@ -188,7 +188,7 @@ Tasks.mixin({
   importData: function() {
     // TODO: [SG] implement view to prompt user for data to import (sample data hardcoded below for testing)
     var data = 
-    '#A comment\n' +
+    '#A comment\n     \n' +
     'Existing Project\n' +
     '^ My first task {2}\n' +
     '| description line1\n' +
@@ -214,7 +214,7 @@ Tasks.mixin({
         var commentLine = line.slice(1);
         console.log ('Commment:\t' + commentLine);
       }
-      else if (line.indexOf('^ ') === 0 || line.indexOf('- ') === 0 || line.indexOf('v ') === 0) { // a Task
+      else if (line.match(/^[\^\-v][ ]/)) { // a Task
         // extract priority based on bullet
         var priority = Tasks.TASK_PRIORITY_MEDIUM;
         if (line.charAt(0) === '^') {
@@ -236,16 +236,16 @@ Tasks.mixin({
         var descriptionLine = line.slice(2);
         console.log ('Description:\t' + descriptionLine);
       }
-      else if (line.search(/^[ \t]*$/) === 0) { // a blank line
+      else if (line.search(/^\s*$/) === 0) { // a blank line
         console.log ('Blank Line:');
       }
       else { // a Project
         // extract timeLeft if provided
         var projectName = line, timeLeft = null;
-        var match = line.match(/([\w\s]*)[\s*]\{(\d+)\}/);
-        if(match) {
-          projectName = match[1];
-          timeLeft = match[2];
+        var res = line.match(/([\w\s]*)[\s*]\{(\d+)\}/);
+        if(res) {
+          projectName = res[1];
+          timeLeft = res[2];
         }
         console.log ('Project:\t\t' + projectName);
         if (timeLeft) {
