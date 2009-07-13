@@ -9,7 +9,8 @@
   @author Suvajit Gupta
   @version 0.1
 */
-/*globals Tasks */
+/*globals Tasks sc_require */
+sc_require('statechart');
 
 Tasks = SC.Object.create(SC.Statechart,
   /** @scope Tasks.prototype */ {
@@ -70,7 +71,7 @@ SC.mixin(Function.prototype, {
     };
   }
 });
-
+// TODO: [SG] switch to MIT license
 // ============================================================================
 // Tasks -- A simplified task manager built with the SproutCore framework
 // Copyright (C) 2009 Suvajit Gupta

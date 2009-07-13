@@ -190,11 +190,11 @@ Tasks.mixin({
     var data = 
     '#A comment\n     \n' +
     'Existing Project\n' +
-    '^ My first task {2}\n' +
+    '^ My first task {2} @Done\n' +
     '| description line1\n' +
     '| description line2\n' +
-    '- My second task\n' +
-    'v My third task {3-4}\n' +
+    '- My second task $Bug [SG] <EO> @Risky #Failed\n' +
+    'v My third task {12-14}\n' +
     ' \t \n' +
     'New Project {12}\n';
     this._parseAndLoadData(data);
@@ -203,6 +203,8 @@ Tasks.mixin({
   _parseAndLoadData: function(data) { // TODO: [SE] create objects in store during data import
     var lines = data.split('\n');
     var store = Tasks.get('store');
+    var taskPattern = new RegExp('(.+)\\s*[\\{<\\[\\$@%].+');
+    var taskEffortPattern = new RegExp('\{(\\d+)\}|\{(\\d+-\\d+)\}');
     
     var currentProject = Tasks.get('inbox');
     for (var i = 0; i < lines.length; i++) {
@@ -223,7 +225,17 @@ Tasks.mixin({
           priority = Tasks.TASK_PRIORITY_LOW;
         }
         var taskLine = line.slice(2); // TODO: [SG] extract other task fields if provided
-        console.log ('Task:\t\t' + taskLine + ' of Priority: ' + priority);
+        var taskMatches = taskPattern.exec(taskLine);
+        if (taskMatches) {
+          taskLine = taskMatches[1];
+        }
+        var output = 'Task:\t\t' + taskLine + ' of Priority: ' + priority;
+        var taskEffortMatches = taskEffortPattern.exec(taskLine);
+        if(taskEffortMatches) {
+          var taskEffort = taskEffortMatches[1]? taskEffortMatches[1] : taskEffortMatches[2];
+          output += ' of Effort: ' + taskEffort;
+        }
+        console.log (output);
         var taskKey = store.createRecord(Tasks.Task, { name: taskLine, priority: priority });
         var taskRecord = store.materializeRecord(taskKey); // FIXME: [SC] need to fix record creation in SC.Store
         if(!taskRecord) {
