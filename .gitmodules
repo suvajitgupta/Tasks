@@ -1,6 +1,3 @@
-[submodule "frameworks/sproutcore-statechart"]
-	path = frameworks/sproutcore-statechart
-	url = git://github.com/erichocean/sproutcore-statechart.git
 [submodule "frameworks/sproutcore"]
 	path = frameworks/sproutcore
 	url = git://github.com/sproutit/sproutcore.git
