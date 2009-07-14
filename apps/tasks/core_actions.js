@@ -149,9 +149,7 @@ Tasks.mixin({
     // TODO: [SG] add new project right after selected item    
 
     var store = Tasks.get('store');
-    var task = store.createRecord(Tasks.Project, {
-      name: Tasks.NEW_PROJECT_NAME
-    });
+    var task = store.createRecord(Tasks.Project, { name: Tasks.NEW_PROJECT_NAME });
     store.commitRecords();
     pc.addObject(task); // TODO: [SC] Why do we have to manually add to the controller instead of store notifying?
 
@@ -236,9 +234,8 @@ Tasks.mixin({
           output += ' of Effort: ' + taskEffort;
         }
         console.log (output);
-        var taskKey = store.createRecord(Tasks.Task, { name: taskLine, priority: priority });
-        store.commitRecords(); // FIXME: {SC] This is a workaround - shouldn't need to call this, CJ investigating a proper fix
-        var taskRecord = store.materializeRecord(taskKey);
+        var taskRecord = store.createRecord(Tasks.Task, { name: taskLine, priority: priority });
+        console.log('DEBUG: ' + taskRecord);
         if(!taskRecord) {
           console.log('ERROR: task creation failed!');
           continue;
