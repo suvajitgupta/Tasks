@@ -237,7 +237,8 @@ Tasks.mixin({
         }
         console.log (output);
         var taskKey = store.createRecord(Tasks.Task, { name: taskLine, priority: priority });
-        var taskRecord = store.materializeRecord(taskKey); // FIXME: [SC] need to fix record creation in SC.Store
+        store.commitRecords(); // FIXME: {SC] This is a workaround - shouldn't need to call this, CJ investigating a proper fix
+        var taskRecord = store.materializeRecord(taskKey);
         if(!taskRecord) {
           console.log('ERROR: task creation failed!');
           continue;
