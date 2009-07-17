@@ -152,7 +152,7 @@
         </control>
         <control controlID="29" controlTypeID="com.balsamiq.mockups::StickyNote" x="343" y="219" w="72" h="63" measuredW="109" measuredH="123" zOrder="29" locked="false" isInGroup="82">
           <controlProperties>
-            <text>Postpone</text>
+            <text>Reallocate</text>
             <size>12</size>
             <bold>false</bold>
           </controlProperties>

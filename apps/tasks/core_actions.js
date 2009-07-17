@@ -310,14 +310,26 @@ Tasks.mixin({
     console.log(data);
   },
   
+  saveData: function() { // TODO: [SG] implement project data saving
+    this._notImplemented ('saveData');
+  },
+  
   addTask: function() { // TODO: [SG] implement task addition
-    alert ('Not implemented!');
+    this._notImplemented ('addTask');
   },
   
   deleteTask: function() { // TODO: [SG] implement task deletion
-    alert ('Not implemented!');
+    this._notImplemented ('deleteTask');
+  },
+  
+  _notImplemented: function(functionName) {
+    var prefix = '';
+    if(functionName) {
+      prefix = functionName + '(): ';
+    }
+    alert (prefix + 'Not yet implemented');
   }
-
+  
 });
 
 // ============================================================================

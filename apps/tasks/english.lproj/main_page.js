@@ -20,26 +20,38 @@ Tasks.mainPage = SC.Page.design({
     childViews: 'topView middleView bottomView'.w(),
     
     topView: SC.View.design(SC.Border, {
-      layout: { top: 0, left: 10, right: 0, height: 42 },
-      childViews: 'appIconView appTitleView summaryView'.w(),
+      layout: { top: 0, left: 0, right: 0, height: 42 },
       borderStyle: SC.BORDER_BOTTOM,
+      childViews: [
       
-      appIconView: SC.LabelView.design({
-        layout: { centerY: 0, height: 40, left: 2, width: 200 },
+      SC.LabelView.design({
+        layout: { centerY: 0, height: 35, left: 2, width: 40 },
         classNames: ['tasks-logo']
       }),
       
-      appTitleView: SC.LabelView.design({
-        layout: { top: 8, height: 40, left: 55, width: 200 },
+      SC.LabelView.design({
+        layout: { centerY: 0, height: 30, left: 55, width: 150 },
         controlSize: SC.LARGE_CONTROL_SIZE,
         fontWeight: SC.BOLD_WEIGHT,
         value: "_Tasks".loc() + " v" + Tasks.VERSION
       }),
       
-      summaryView: Tasks.SummaryView.design({ // TODO: [SG] make this a hover over on Tasks label
-        layout: { top: 12, height: 40, left: 185, width: 100 },
+      Tasks.SummaryView.design({ // TODO: [SG] make this a hover over on Tasks label
+        layout: { centerY: 0, height: 20, left: 185, width: 100 },
         valueBinding: 'Tasks.projectsController.length'
+      }),
+
+      SC.ButtonView.design({
+        layout: { centerY: 0, height: 21, right: 10, width: 55 },
+        title: "Save",
+        titleMinWidth: 0,
+        // TODO: add isEnabledBinding to track changes,
+        target: 'Tasks',
+        action: 'saveData'
       })
+      
+      ]
+      
     }),
     
     middleView: SC.SplitView.design({
