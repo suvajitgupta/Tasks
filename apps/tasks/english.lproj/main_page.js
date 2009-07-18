@@ -42,7 +42,7 @@ Tasks.mainPage = SC.Page.design({
       }),
 
       SC.ButtonView.design({
-        layout: { centerY: 0, height: 21, left: 265, width: 45 },
+        layout: { centerY: 0, height: 18, left: 280, width: 45 },
         title: "_User:".loc(),
         titleMinWidth: 0,
         target: 'Tasks',
@@ -50,10 +50,16 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       SC.SelectFieldView.design({
-        layout: { centerY: 2, height: 25, left: 315, width: 150 },
+        layout: { centerY: 2, height: 25, left: 330, width: 150 },
         nameKey: 'name',
         objects: Tasks.User.FIXTURES // TODO: [SG] populate from store, not fixtures
         // TODO: [SG] assign a valueBinding
+      }),
+      
+      SC.TextFieldView.design({
+        layout: { centerY: 0, height: 16, left: 540, width: 250 },
+        hint: "_SearchHint".loc()
+        // TODO: implement type-ahead searching capability
       }),
       
       SC.ButtonView.design({
