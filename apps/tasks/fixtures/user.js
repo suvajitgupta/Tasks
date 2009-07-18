@@ -5,22 +5,22 @@ sc_require('models/user');
 Tasks.User.FIXTURES = [
 
   { id: 1,
-  name: "Pointy-Haired Boss",
+  name: "Pointy Haired Boss",
   role: Tasks.USER_ROLE_MANAGER,
   loginName: "bigboss" },
 
   { id: 2,
-  name: "Dilbert",
+  name: "Antimatter Dilbert",
   role: Tasks.USER_ROLE_DEVELOPER,
   loginName: "cyberpunk" },
 
   { id: 3,
-  name: "Asok",
+  name: "Amber Dextrous",
   role: Tasks.USER_ROLE_DEVELOPER,
   loginName: "hacker" },
 
   { id: 4,
-  name: "Larry",
+  name: "Larry A. Dinosaur",
   role: Tasks.USER_ROLE_TESTER,
   loginName: "tst1" }
 

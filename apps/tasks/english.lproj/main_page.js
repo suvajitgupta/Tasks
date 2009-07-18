@@ -30,14 +30,14 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       SC.LabelView.design({
-        layout: { centerY: 0, height: 30, left: 55, width: 150 },
+        layout: { centerY: 2, height: 30, left: 55, width: 150 },
         controlSize: SC.LARGE_CONTROL_SIZE,
         fontWeight: SC.BOLD_WEIGHT,
         value: "_Tasks".loc() + " v" + Tasks.VERSION
       }),
       
       Tasks.SummaryView.design({
-        layout: { centerY: 0, height: 20, left: 190, width: 100 },
+        layout: { centerY: 2, height: 20, left: 190, width: 100 },
         valueBinding: 'Tasks.assignmentsController.length'
       }),
 
@@ -49,11 +49,18 @@ Tasks.mainPage = SC.Page.design({
         action: 'manageUsers'
       }),
       
+      SC.SelectFieldView.design({
+        layout: { centerY: 2, height: 25, left: 315, width: 150 },
+        nameKey: 'name',
+        objects: Tasks.User.FIXTURES // TODO: [SG] populate from store, not fixtures
+        // TODO: [SG] assign a valueBinding
+      }),
+      
       SC.ButtonView.design({
         layout: { centerY: 0, height: 21, right: 80, width: 40 },
         title: "_Save".loc(),
         titleMinWidth: 0,
-        // TODO: add isEnabledBinding to track changes,
+        // TODO: [SG] add isEnabledBinding to track changes,
         target: 'Tasks',
         action: 'saveData'
       }),
