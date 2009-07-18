@@ -36,18 +36,42 @@ Tasks.mainPage = SC.Page.design({
         value: "_Tasks".loc() + " v" + Tasks.VERSION
       }),
       
-      Tasks.SummaryView.design({ // TODO: [SG] make this a hover over on Tasks label
-        layout: { centerY: 0, height: 20, left: 185, width: 100 },
-        valueBinding: 'Tasks.projectsController.length'
+      Tasks.SummaryView.design({
+        layout: { centerY: 0, height: 20, left: 190, width: 100 },
+        valueBinding: 'Tasks.assignmentsController.length'
       }),
 
       SC.ButtonView.design({
-        layout: { centerY: 0, height: 21, right: 10, width: 55 },
-        title: "Save",
+        layout: { centerY: 0, height: 21, left: 265, width: 45 },
+        title: "_User:".loc(),
+        titleMinWidth: 0,
+        target: 'Tasks',
+        action: 'manageUsers'
+      }),
+      
+      SC.ButtonView.design({
+        layout: { centerY: 0, height: 21, right: 80, width: 40 },
+        title: "_Save".loc(),
         titleMinWidth: 0,
         // TODO: add isEnabledBinding to track changes,
         target: 'Tasks',
         action: 'saveData'
+      }),
+      
+      SC.ButtonView.design({
+        layout: { centerY: 0, height: 21, right: 45, width: 25 },
+        title: "?",
+        titleMinWidth: 0,
+        target: 'Tasks',
+        action: 'help'
+      }),
+      
+      SC.ButtonView.design({
+        layout: { centerY: 0, height: 21, right: 10, width: 25 },
+        title: "X",
+        titleMinWidth: 0,
+        target: 'Tasks',
+        action: 'exit'
       })
       
       ]
@@ -109,7 +133,7 @@ Tasks.mainPage = SC.Page.design({
         childViews: [
         
         SC.ButtonView.design({
-          layout: { centerY: 0, left: 15, height: 21, width: 30 },
+          layout: { centerY: 0, left: 15, height: 21, width: 25 },
           title: "+",
           titleMinWidth: 0,
           target: 'Tasks',
@@ -117,7 +141,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         SC.ButtonView.design({
-          layout: { centerY: 0, left: 50, height: 21, width: 30 },
+          layout: { centerY: 0, left: 45, height: 21, width: 25 },
           title: "-",
           titleMinWidth: 0,
           isEnabledBinding: 'Tasks.projectsController.hasSelection',
@@ -150,7 +174,7 @@ Tasks.mainPage = SC.Page.design({
         childViews: [
 
         SC.ButtonView.design({
-          layout: { centerY: 0, height: 21, left: 7, width: 30 },
+          layout: { centerY: 0, height: 21, left: 7, width: 25 },
           title:  "+",
           titleMinWidth: 0,
           target: 'Tasks',
@@ -158,7 +182,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         SC.ButtonView.design({
-          layout: { centerY: 0, height: 21, left: 42, width: 30 },
+          layout: { centerY: 0, height: 21, left: 37, width: 25 },
           title:  "-",
           titleMinWidth: 0,
           isEnabledBinding: 'Tasks.tasksController.hasSelection',

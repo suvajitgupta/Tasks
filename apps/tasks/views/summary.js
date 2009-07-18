@@ -20,17 +20,18 @@ Tasks.SummaryView = SC.View.extend(
   
   render: function(context, firstTime) {
 
-    var len = this.get('value') - 1, ret;
+    var len = this.get('value'), ret;
+    console.log('#Tasks: ' + len);
 
     switch(len) {
       case 0: 
-        ret = "No projects";
+        ret = "No tasks";
         break;
       case 1:
-        ret = "1 project";
+        ret = "1 task";
         break;
       default:
-        ret = "%@ projects".fmt(len);
+        ret = "%@ tasks".fmt(len);
         break;
     }
     

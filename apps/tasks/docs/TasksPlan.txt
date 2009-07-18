@@ -18,84 +18,85 @@ v Design single/multi-user modes & access via Desktop/Web/Mobile clients [SG] <S
 Infrastructure/Modes
 ^ Develop Model/Fixtures [SG] <SE> @Done
 - Develop States/Actions corresponding to GUI Statecharts [SG] <SE> @Active
-v Add drag-n-drop of a TXT file into App for data importing (using Google Gears) [MB] <SG> @Active
+v Add drag-n-drop of a TXT file into App for data importing (using Google Gears) [MB] @Active
 
 "Task" Manager
 ^ Group Tasks by User and display Task summary & effort (if specified) in curly braces [SG] <JH2> @Done
 - Allow Tasks under a User to be hidden/shown (disclosure control) [SC] $Bug
-^ Allow drag-n-drop reordering [SC] $Bug
-^ Allow drag-n-drop reassignment [SG] <MB>
-^ Add double-click in-cell editing [SC] $Bug
 - Show type via different icons [SG] <JH2> @Done
 - Show priority (font style), status (font color), validation (background color) [SG] <MB> @Done
-^ Add "+" & "-" buttons in bottom toolbar [SG] <JH2> @Active
 - Add Status/Priority/Validation radio buttons in bottom toolbar [SG] <JH2> @Done
 v Set bottom toolbar button enablement based on having a selection [SG] <EO> @Done
-v Add context menu & hotkeys to Edit/Cut/Copy/Paste/Delete/Duplicate a task [SG] <JL>
+^ Add double-click in-cell editing [SC] $Bug
+^ Add "+" & "-" buttons in bottom toolbar [SG] <JH2> @Active
+- Allow "+" button to be pressed a second time to keep in data entry mode, Esc will exit mode [SG] <JH2>
 ^ Add modal popup form for editing [SG] <MB>
 ^ Show effort subtotals (exclude Low items) in curly braces for load balancing [SG] <SE>
 ^ Append "?" for range-based subtotals including unknown efforts [SG] <SE>
+^ Allow drag-n-drop reordering [SC] $Bug
+^ Allow drag-n-drop reassignment [SG] <MB>
+v Add context menu & hotkeys to Edit/Cut/Copy/Paste/Delete/Duplicate a task [SG] <JL>
+v Add hover tooltip showing Description [SG] <EG>
 - Add Search box in top toolbar: support type-ahead, wildcards, cancel/reset [SG] <DC>
-v Add hover Tooltip showing Description [SG] <EG>
 
 "Project" Manager
-^ Show Project name & time left in curly braces (if specified) [SG] <JH2> @Done
-^ Allow drag-n-drop reallocation [SG] @Done
-^ Add double-click in-cell editing [SC] $Bug
 ^ Add Master/Detail Explorer view with click selection of Projects showing corresponding Tasks [JH2] <SG> @Done
+^ Show Project name & time left in curly braces (if specified) [SG] <JH2> @Done
+^ Add double-click in-cell editing [SC] $Bug
 ^ Add "+" & "-" buttons in bottom Toolbar [SG] <SC> @Bug
+v Set bottom toolbar button enablement based on having a selection [SG] <EO> @Done
+^ Add drag-n-drop reordering [SC] @Done
+- Select first project at startup [JH2] <SG> @Done
 ^ Add Inbox project by default [SG] <SE> @Done
 - Disallow "Inbox" from being deleted [SG] <SE>
-^ Add drag-n-drop of Tasks to Projects [SG] <MB>
-v Set bottom toolbar button enablement based on having a selection [SG] <EO> @Done
+^ Allow drag-n-drop Task reallocation to Projects [MB] <SG>
 - Add "Export" button in bottom Toolbar (using TXT file format) [SG] <SE> @Done
 - Add "Import" button in bottom Toolbar (using TXT file format) [SG] <SE> @Active
-v Make Master list of Projects collapsible [SG] <EG>
 v Add context menu to Delete a project [SG] <JL>
 - Add warning Alert box about deleting Project with Tasks [SG] <SE>
-v Add hover Tooltip showing number of Tasks in project [SG] <EG>
+v Add hover tooltip showing number of Tasks in project [SG] <EG>
+v Make Master list of Projects collapsible [SG] <EG>
 
 "User" Manager
-^ Add User selection combo box in top Toolbar ("All" is default choice) [SG] <MB>
+^ Add User selection combo box in top Toolbar ("All" is default choice) [SG] <EG>
 - Add login screen (User authentication) [SG] <SE> @Active
-- Add access control based on Role (User authorization) [SG] <SE> @Active
-- Add User management button/modal popup showing existing Users [SG] <SE>
-- Add "+" & "-" buttons in bottom toolbar and "X" button in top toolbar to return [SG] <JH2>
-v Add hover Tooltip to dialog title showing number of Users [SG] <EG>
+- Add access control based on Role (User authorization) [SG] <SE>
 v Add user preferences/restore to them at startup [SG] <JH2>
 v Add change password dialog? [SG] <SE>
+- Add User management button/modal popup showing existing Users [SG] <SE>
+- Add "+" & "-" buttons in bottom toolbar and "X" button in top toolbar to return [SG] <JH2>
+v Add hover tooltip on dialog title showing number of Users [SG] <EG>
 
 "App" Manager
-v Add summary next to application title showing number of Projects, move this to a tooltip? [SG] <MB> @Active
-- Add "Save" button in top toolbar [SG] <SE> @Active
 - Restore application settings/state from last login [SG] <SE>
-- Select first project at startup [JH2] <SG> @Done
-v Add "X" button to exit in top toolbar [SG] <SE>
+v Add hover tooltip on application title showing number of Projects [SG] <EG>
+v Add summary next to application title showing number of tasks for selected Project [SG] <MB> @Done
+- Add "Save" button in top toolbar [SG] <SE> @Active
+v Add "X" button to exit in top toolbar [SG] <SE> @Active
 v Prompt user to save changes before exiting [SG] <SE>
 - Add Undo/Redo hotkeys & buttons in top toolbar (till last Save) [SG] <SE>
-v Add About dialog (click on Application title) [SG] <MB>
-v Add Online Help button in top Toolbar & modal Help dialog [SG] <MB>
-v Add Print button in top Toolbar? [SG] <MB>
+v Add Online Help button in top Toolbar & modal Help dialog [SG] @Active
 
 Server
 - Implement REST API via Mock Server [SE] <SG>
 - Add Server-side data validation checks [SE] <SG>
 - Add local persistence for single user mode [SE] <MB>
-- Build persistence server (using Ruby or Django or CouchDB) [MB] <SG>
+- Build persistence server (using Ruby) [MB] <SG>
+- Build persistence server (using Django or CouchDB) [EO] <SG>
 - Support multi-user mode using Transaction Time [SE] <EO>
 - Add Server-side authorization [SE] <SG>
 
 Hardening/Styling
 - Perform I18N and L10N (test with reversed strings) [SG] <JH2> @Active
 - Extend Fixtures to add a randomized/large datasets, test view scrolling [SG] <SE> @Active
-- Develop Model unit tests [SG] <SE> @Active
+- Develop Model unit tests [SG] <BB> @Active
 - Develop View unit tests [SG] <MB> @Active
 v Style via CSS, embed sprited images [SG] <MG> @Active
 
 Packaging/Delivery
 ^ Develop Web client (ported to Firefox, Internet Explorer, Safari, Chrome) [SG] <MT> @Active
 - Develop Desktop client (using Webkit) [SG] <EO>
-v Develop Mobile client (using PhoneGap) [SG] <MB>
+v Develop Mobile client (using PhoneGap) [SG] <CJ>
 
 Testing/Rollout
 - Manually test & note/fix showstoppers [BM] <SG> @Active

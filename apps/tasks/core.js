@@ -16,7 +16,7 @@ Tasks = SC.Object.create(SC.Statechart,
   /** @scope Tasks.prototype */ {
 
   NAMESPACE: 'Tasks',
-  VERSION: '0.1',
+  VERSION: '0.3',
 
   // This is your application store.  You will use this store to access all
   // of your model data.  You can also set a data source on this store to

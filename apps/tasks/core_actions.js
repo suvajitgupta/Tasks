@@ -131,17 +131,6 @@ Tasks.mixin({
     }
   },
   
-  /**
-   * Logs a message indicating that the given state isn't handled in the given action.
-   *
-   * @param {String} action The name of the action (ex. "logout").
-   * @param {String} stateName The name of the state (ex. "a").
-   * @param {Integer} stateNum The number of the sate (ex. "4").
-   */
-  _logActionNotHandled: function(action, stateName, stateNum) {
-    console.log('Action not handled in state %@[%@]: %@'.fmt(stateName, stateNum, action));
-  },
-  
   addProject: function() {
     
     var pc = Tasks.get('projectsController');
@@ -320,6 +309,53 @@ Tasks.mixin({
   
   deleteTask: function() { // TODO: [SG] implement task deletion
     this._notImplemented ('deleteTask');
+  },
+  
+  openTaskEditor: function() { // TODO: [SG] implement open Task editor
+    this._notImplemented ('openTaskEditor');
+  },
+  
+  closeTaskEditor: function() { // TODO: [SG] implement close Task editor
+    this._notImplemented ('closeTaskEditor');
+  },
+  
+  openUserManager: function() { // TODO: [SG] implement open user manager
+    this._notImplemented ('openUserManager');
+  },
+  
+  closeUserManager: function() { // TODO: [SG] implement close user manager
+    this._notImplemented ('closeUserManager');
+  },
+  
+  selectUser: function() { // TODO: [SG] implement user selection
+    this._notImplemented ('selectUser');
+  },
+  
+  showHelp: function() { // TODO: [SG] implement online help
+    this._notImplemented ('showHelp');
+  },
+  
+  exit: function() { // TODO: [SG] implement logout
+    this._notImplemented ('exit');
+  },
+  
+  saveAndExit: function() { // TODO: [SG] implement save & exit
+    this._notImplemented ('saveAndExit');
+  },
+  
+  exitNoSave: function() { // TODO: [SG] implement exit w/o save
+    this._notImplemented ('exitNoSave');
+  },
+  
+  /**
+   * Logs a message indicating that the given state isn't handled in the given action.
+   *
+   * @param {String} action The name of the action (ex. "logout").
+   * @param {String} stateName The name of the state (ex. "a").
+   * @param {Integer} stateNum The number of the sate (ex. "4").
+   */
+  _logActionNotHandled: function(action, stateName, stateNum) {
+    console.log('Action not handled in state %@[%@]: %@'.fmt(stateName, stateNum, action));
   },
   
   _notImplemented: function(functionName) {

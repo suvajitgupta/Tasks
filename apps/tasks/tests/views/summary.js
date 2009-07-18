@@ -27,18 +27,18 @@ module("Tasks.SummaryView tests", pane.standardSetup());
 test("no items", function(){
   var view = pane.view('none');
   ok(view, 'view should render');
-  equals(view.$().get(0).innerHTML, 'No projects', 'displays the correct test');
+  equals(view.$().get(0).innerHTML, 'No tasks', 'displays the correct test');
 });
 
 test("one item", function(){
   var view = pane.view('one');
-  equals(view.$().get(0).innerHTML, '1 project', 'displays the correct test');
+  equals(view.$().get(0).innerHTML, '1 task', 'displays the correct test');
   
 });
 
 test("many items", function(){
   var view = pane.view('many');
-  equals(view.$().get(0).innerHTML, '15 projects', 'displays the correct test');
+  equals(view.$().get(0).innerHTML, '15 tasks', 'displays the correct test');
   
   
 });
