@@ -187,7 +187,7 @@ Tasks.mainPage = SC.Page.design({
         childViews: [
 
         SC.ButtonView.design({
-          layout: { centerY: 0, height: 21, left: 7, width: 25 },
+          layout: { centerY: 0, height: 21, left: 10, width: 25 },
           title:  "+",
           titleMinWidth: 0,
           target: 'Tasks',
@@ -195,7 +195,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         SC.ButtonView.design({
-          layout: { centerY: 0, height: 21, left: 37, width: 25 },
+          layout: { centerY: 0, height: 21, left: 40, width: 25 },
           title:  "-",
           titleMinWidth: 0,
           isEnabledBinding: 'Tasks.tasksController.hasSelection',
@@ -203,6 +203,11 @@ Tasks.mainPage = SC.Page.design({
           action: 'deleteTask'
         }),
         
+        SC.SeparatorView.design({
+          layoutDirection: SC.LAYOUT_VERTICAL,
+          layout: { top: 5, bottom: 5, left: 90, width: 4 }
+        }),
+
         SC.RadioView.design({
           layout: { centerY: 0, height: 21, left: 110, width: 180 },
           escapeHTML: NO,
