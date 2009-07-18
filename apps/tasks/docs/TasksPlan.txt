@@ -35,9 +35,9 @@ v Set bottom toolbar button enablement based on having a selection [SG] <EO> @Do
 ^ Append "?" for range-based subtotals including unknown efforts [SG] <SE>
 ^ Allow drag-n-drop reordering [SC] $Bug
 ^ Allow drag-n-drop reassignment [SG] <MB>
+- Add Search box in top toolbar: support type-ahead, wildcards, cancel/reset [SG] <DC> @Active
 v Add context menu & hotkeys to Edit/Cut/Copy/Paste/Delete/Duplicate a task [SG] <JL>
 v Add hover tooltip showing Description [SG] <EG>
-- Add Search box in top toolbar: support type-ahead, wildcards, cancel/reset [SG] <DC>
 
 "Project" Manager
 ^ Add Master/Detail Explorer view with click selection of Projects showing corresponding Tasks [JH2] <SG> @Done
@@ -58,7 +58,7 @@ v Add hover tooltip showing number of Tasks in project [SG] <EG>
 v Make Master list of Projects collapsible [SG] <EG>
 
 "User" Manager
-^ Add User selection combo box in top Toolbar ("All" is default choice) [SG] <EG>
+^ Add User selection combo box in top Toolbar ("All" is default choice) [SG] <MB> @Active
 - Add login screen (User authentication) [SG] <SE> @Active
 - Add access control based on Role (User authorization) [SG] <SE>
 v Add user preferences/restore to them at startup [SG] <JH2>
@@ -68,14 +68,14 @@ v Add change password dialog? [SG] <SE>
 v Add hover tooltip on dialog title showing number of Users [SG] <EG>
 
 "App" Manager
-- Restore application settings/state from last login [SG] <SE>
-v Add hover tooltip on application title showing number of Projects [SG] <EG>
 v Add summary next to application title showing number of tasks for selected Project [SG] <MB> @Done
+v Add hover tooltip on application title showing number of Projects [SG] <EG>
 - Add "Save" button in top toolbar [SG] <SE> @Active
 v Add "X" button to exit in top toolbar [SG] <SE> @Active
 v Prompt user to save changes before exiting [SG] <SE>
 - Add Undo/Redo hotkeys & buttons in top toolbar (till last Save) [SG] <SE>
 v Add Online Help button in top Toolbar & modal Help dialog [SG] @Active
+- Restore application settings/state from last login [SG] <SE>
 
 Server
 - Implement REST API via Mock Server [SE] <SG>
