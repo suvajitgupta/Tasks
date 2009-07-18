@@ -16,7 +16,7 @@ v Design single/multi-user modes & access via Desktop/Web/Mobile clients [SG] <S
 - Design Server & choose persistence components [SE] <SG> @Active
 
 Infrastructure/Modes
-^ Develop Model/Fixtures [SG] <SE> @Done
+^ Develop Model and Fixtures (hardcoded & generated) [SG] <SE> @Done
 - Develop States/Actions corresponding to GUI Statecharts [SG] <SE> @Active
 v Add drag-n-drop of a TXT file into App for data importing (using Google Gears) [MB] @Active
 
@@ -88,7 +88,6 @@ Server
 
 Hardening/Styling
 - Perform I18N and L10N (test with reversed strings) [SG] <JH2> @Active
-- Extend Fixtures to add a randomized/large datasets, test view scrolling [SG] <SE> @Active
 - Develop Model unit tests [SG] <BB> @Active
 - Develop View unit tests [SG] <MB> @Active
 v Style via CSS, embed sprited images [SG] <MG> @Active

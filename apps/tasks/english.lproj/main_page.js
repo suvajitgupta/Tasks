@@ -52,7 +52,7 @@ Tasks.mainPage = SC.Page.design({
       SC.SelectFieldView.design({
         layout: { centerY: 2, height: 25, left: 330, width: 150 },
         nameKey: 'name',
-        objects: Tasks.User.FIXTURES // TODO: [SG] populate from store, not fixtures
+        objects: Tasks.User.FIXTURES // TODO: [SG] Add "All" - the default, and populate from store/not fixtures
         // TODO: [SG] assign a valueBinding
       }),
       
