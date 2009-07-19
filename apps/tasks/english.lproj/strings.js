@@ -15,6 +15,7 @@
 SC.stringsFor('English', {
 
   '_Tasks': "TASKS",
+  '_Welcome': "Welcome",
   '_User:': "User:",
   '_SearchHint': "Type here to search for tasks...",
   '_Save': "Save",

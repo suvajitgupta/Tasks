@@ -5,7 +5,7 @@
 
 /** 
 
-  A textual summary of what is displayed in the Tasks application.
+  Display number of Tasks in selected Project.
   
   @extends SC.View
   @author Suvajit Gupta

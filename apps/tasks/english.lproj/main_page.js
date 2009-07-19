@@ -2,7 +2,7 @@
 // Project: Tasks
 // ==========================================================================
 /*globals Tasks sc_require */
-sc_require('views/summary');
+sc_require('views/welcome');
 sc_require('views/task');
 /** @namespace
 
@@ -30,16 +30,23 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       SC.LabelView.design({
-        layout: { centerY: 2, height: 30, left: 55, width: 150 },
+        layout: { centerY: 2, height: 30, left: 55, width: 120 },
         controlSize: SC.LARGE_CONTROL_SIZE,
         fontWeight: SC.BOLD_WEIGHT,
         value: "_Tasks".loc() + " v" + Tasks.VERSION
       }),
       
-      Tasks.SummaryView.design({
-        layout: { centerY: 2, height: 20, left: 190, width: 100 },
-        valueBinding: 'Tasks.assignmentsController.length'
+      Tasks.WelcomeView.design({
+        layout: { centerY: 7, height: 40, left: 180, width: 80 },
+        textAlign: SC.ALIGN_CENTER,
+        controlSize: SC.TINY_CONTROL_SIZE,
+        valueBinding: 'Tasks.user'
       }),
+      
+      // Tasks.SummaryView.design({
+      //   layout: { centerY: 2, height: 40, left: 190, width: 100 },
+      //   valueBinding: 'Tasks.assignmentsController.length'
+      // }),
 
       SC.ButtonView.design({
         layout: { centerY: 0, height: 18, left: 280, width: 45 },

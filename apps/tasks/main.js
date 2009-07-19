@@ -1,4 +1,6 @@
 /*globals Tasks */
+Tasks.user = '';
+
 Tasks.main = function main() {
 
   console.log("Tasks started at: %@".fmt(new Date()));
