@@ -131,47 +131,6 @@ Tasks.mixin({
     }
   },
   
-  addProject: function() {
-    
-    var pc = Tasks.get('projectsController');
-    // Create a new project with a default name
-    // TODO: [SG] add new project right after selected item    
-
-    var store = Tasks.get('store');
-    var task = store.createRecord(Tasks.Project, { name: Tasks.NEW_PROJECT_NAME });
-    store.commitRecords();
-    pc.addObject(task); // TODO: [SC] Why do we have to manually add to the controller instead of store notifying?
-
-    var listView = Tasks.getPath('mainPage.mainPane.middleView.topLeftView.contentView');
-    var idx = listView.length - 1; // get index of new project in list
-    // TODO: [SG] get index of new project wherever it is in the list, don't assume it is at the end
-    listView.select(idx);
-
-    // Begin editing newly created item.
-    var itemView = listView.itemViewForContentIndex(idx);
-    itemView.beginEditing.invokeLater(itemView);  // you must wait for run loop to complete before method is called
-    // TODO: [SC] when user changes name of New Project it doesn't change in ListView
-  },
-  
-  deleteProject: function() {
-    
-    var pc = Tasks.get('projectsController');
-    //get the selected tasks
-    var sel = pc.get('selection');
-    
-    if (sel && sel.length() > 0) {
-      var store = Tasks.get('store');
-
-      //pass the record to be deleted
-      var keys = sel.firstObject().get('id');
-      store.destroyRecords(Tasks.Project, [keys]);
-
-      //commit the operation to send the request to the server
-      store.commitRecords();
-      // TODO: [SC] what to do to remove the "New Project" from the ListView and clear the selection?
-    }
-  },
-  
   importData: function() {
     // TODO: [SG] implement view to prompt user for data to import (sample data hardcoded below for testing)
     var data = 
@@ -303,22 +262,6 @@ Tasks.mixin({
     this._notImplemented ('saveData');
   },
   
-  addTask: function() { // TODO: [SG] implement task addition
-    this._notImplemented ('addTask');
-  },
-  
-  deleteTask: function() { // TODO: [SG] implement task deletion
-    this._notImplemented ('deleteTask');
-  },
-  
-  openTaskEditor: function() { // TODO: [SG] implement open Task editor
-    this._notImplemented ('openTaskEditor');
-  },
-  
-  closeTaskEditor: function() { // TODO: [SG] implement close Task editor
-    this._notImplemented ('closeTaskEditor');
-  },
-  
   openUserManager: function() { // TODO: [SG] implement open user manager
     this._notImplemented ('openUserManager');
   },
@@ -345,6 +288,63 @@ Tasks.mixin({
   
   exitNoSave: function() { // TODO: [SG] implement exit w/o save
     this._notImplemented ('exitNoSave');
+  },
+  
+  addProject: function() {
+    
+    var pc = Tasks.get('projectsController');
+    // Create a new project with a default name
+    // TODO: [SG] add new project right after selected item    
+
+    var store = Tasks.get('store');
+    var task = store.createRecord(Tasks.Project, { name: Tasks.NEW_PROJECT_NAME });
+    store.commitRecords();
+    pc.addObject(task); // TODO: [SC] Why do we have to manually add to the controller instead of store notifying?
+
+    var listView = Tasks.getPath('mainPage.mainPane.middleView.topLeftView.contentView');
+    var idx = listView.length - 1; // get index of new project in list
+    // TODO: [SG] get index of new project wherever it is in the list, don't assume it is at the end
+    listView.select(idx);
+
+    // Begin editing newly created item.
+    var itemView = listView.itemViewForContentIndex(idx);
+    itemView.beginEditing.invokeLater(itemView);  // you must wait for run loop to complete before method is called
+    // TODO: [SC] when user changes name of New Project it doesn't change in ListView
+  },
+  
+  deleteProject: function() {
+    
+    var pc = Tasks.get('projectsController');
+    //get the selected tasks
+    var sel = pc.get('selection');
+    
+    if (sel && sel.length() > 0) {
+      var store = Tasks.get('store');
+
+      //pass the record to be deleted
+      var keys = sel.firstObject().get('id');
+      store.destroyRecords(Tasks.Project, [keys]);
+
+      //commit the operation to send the request to the server
+      store.commitRecords();
+      // TODO: [SC] what to do to remove the "New Project" from the ListView and clear the selection?
+    }
+  },
+  
+  addTask: function() { // TODO: [SG] implement task addition
+    this._notImplemented ('addTask');
+  },
+  
+  deleteTask: function() { // TODO: [SG] implement task deletion
+    this._notImplemented ('deleteTask');
+  },
+  
+  openTaskEditor: function() { // TODO: [SG] implement open Task editor
+    this._notImplemented ('openTaskEditor');
+  },
+  
+  closeTaskEditor: function() { // TODO: [SG] implement close Task editor
+    this._notImplemented ('closeTaskEditor');
   },
   
   /**

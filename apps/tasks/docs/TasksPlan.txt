@@ -50,15 +50,12 @@ v Set bottom toolbar button enablement based on having a selection [SG] <EO> @Do
 ^ Add Inbox project by default [SG] <SE> @Done
 - Disallow "Inbox" from being deleted [SG] <SE>
 ^ Allow drag-n-drop Task reallocation to Projects [MB] <SG>
-- Add "Export" button in bottom Toolbar (using TXT file format) [SG] <SE> @Done
-- Add "Import" button in bottom Toolbar (using TXT file format) [SG] <SE> @Active
 v Add context menu to Delete a project [SG] <JL>
 - Add warning Alert box about deleting Project with Tasks [SG] <SE>
 v Add hover tooltip showing number of Tasks in project [SG] <EG>
 v Make Master list of Projects collapsible [SG] <EG>
 
 "User" Manager
-^ Add User selection combo box in top Toolbar ("All" is default choice) [SG] <MB> @Active
 - Add login screen (User authentication) [SG] <SE> @Active
 - Add access control based on Role (User authorization) [SG] <SE>
 v Add user preferences/restore to them at startup [SG] <JH2>
@@ -70,6 +67,9 @@ v Add hover tooltip on dialog title showing number of Users [SG] <EG>
 "App" Manager
 v Add summary next to application title showing number of tasks for selected Project [SG] <MB> @Done
 v Add hover tooltip on application title showing number of Projects [SG] <EG>
+^ Add User selection combo box in top Toolbar ("All" is default choice) [SG] <MB> @Active
+- Add "Export" button in top Toolbar (using TXT file format) [SG] <SE> @Done
+- Add "Import" button in top Toolbar (using TXT file format) [SG] <SE> @Active
 - Add "Save" button in top toolbar [SG] <SE> @Active
 v Add "X" button to exit in top toolbar [SG] <SE> @Active
 v Prompt user to save changes before exiting [SG] <SE>

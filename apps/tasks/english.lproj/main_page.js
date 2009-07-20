@@ -3,6 +3,7 @@
 // ==========================================================================
 /*globals Tasks sc_require */
 sc_require('views/welcome');
+sc_require('views/summary');
 sc_require('views/task');
 /** @namespace
 
@@ -30,26 +31,21 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       SC.LabelView.design({
-        layout: { centerY: 2, height: 30, left: 55, width: 120 },
+        layout: { centerY: 2, height: 30, left: 50, width: 120 },
         controlSize: SC.LARGE_CONTROL_SIZE,
         fontWeight: SC.BOLD_WEIGHT,
         value: "_Tasks".loc() + " v" + Tasks.VERSION
       }),
       
       Tasks.WelcomeView.design({
-        layout: { centerY: 7, height: 40, left: 180, width: 80 },
+        layout: { centerY: 0, height: 30, left: 175, width: 80 },
         textAlign: SC.ALIGN_CENTER,
-        controlSize: SC.TINY_CONTROL_SIZE,
+        controlSize: SC.SMALL_CONTROL_SIZE,
         valueBinding: 'Tasks.user'
       }),
       
-      // Tasks.SummaryView.design({
-      //   layout: { centerY: 2, height: 40, left: 190, width: 100 },
-      //   valueBinding: 'Tasks.assignmentsController.length'
-      // }),
-
       SC.ButtonView.design({
-        layout: { centerY: 0, height: 18, left: 280, width: 45 },
+        layout: { centerY: 0, height: 18, left: 265, width: 50 },
         title: "_User:".loc(),
         titleMinWidth: 0,
         target: 'Tasks',
@@ -57,16 +53,32 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       SC.SelectFieldView.design({
-        layout: { centerY: 2, height: 25, left: 330, width: 150 },
+        layout: { centerY: 2, height: 25, left: 320, width: 150 },
         nameKey: 'name',
         objects: Tasks.User.FIXTURES // TODO: [SG] Add "All" - the default, and populate from store/not fixtures
         // TODO: [SG] assign a valueBinding
       }),
       
       SC.TextFieldView.design({
-        layout: { centerY: 0, height: 16, left: 540, width: 250 },
+        layout: { centerY: 0, height: 16, left: 500, width: 250 },
         hint: "_SearchHint".loc()
         // TODO: implement type-ahead searching capability
+      }),
+      
+      SC.ButtonView.design({
+        layout: { centerY: 0, height: 21, right: 180, width: 50 },
+        title:  "_Import".loc(),
+        titleMinWidth: 0,
+        target: 'Tasks',
+        action: 'importData'
+      }),
+
+      SC.ButtonView.design({
+        layout: { centerY: 0, height: 21, right: 125, width: 50 },
+        title:  "_Export".loc(),
+        titleMinWidth: 0,
+        target: 'Tasks',
+        action: 'exportData'
       }),
       
       SC.ButtonView.design({
@@ -79,7 +91,7 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       SC.ButtonView.design({
-        layout: { centerY: 0, height: 21, right: 45, width: 25 },
+        layout: { centerY: 0, height: 21, right: 38, width: 25 },
         title: "?",
         titleMinWidth: 0,
         target: 'Tasks',
@@ -87,7 +99,7 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       SC.ButtonView.design({
-        layout: { centerY: 0, height: 21, right: 10, width: 25 },
+        layout: { centerY: 0, height: 21, right: 5, width: 25 },
         title: "X",
         titleMinWidth: 0,
         target: 'Tasks',
@@ -144,7 +156,7 @@ Tasks.mainPage = SC.Page.design({
     projectsList: SC.outlet('middleView.topLeftView.childViews.0.contentView'),
     
     bottomView: SC.View.design(SC.Border, {
-      layout: { bottom: 0, left: 0, right: 0, height: 41 },
+      layout: { bottom: 0, left: 0, right: 0, height: 35 },
       childViews: 'projectsToolbarView tasksToolbarView'.w(),
       borderStyle: SC.BORDER_TOP,
       
@@ -153,7 +165,7 @@ Tasks.mainPage = SC.Page.design({
         childViews: [
         
         SC.ButtonView.design({
-          layout: { centerY: 0, left: 15, height: 21, width: 25 },
+          layout: { centerY: 0, left: 5, height: 21, width: 25 },
           title: "+",
           titleMinWidth: 0,
           target: 'Tasks',
@@ -161,28 +173,17 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         SC.ButtonView.design({
-          layout: { centerY: 0, left: 45, height: 21, width: 25 },
+          layout: { centerY: 0, left: 35, height: 21, width: 25 },
           title: "-",
           titleMinWidth: 0,
           isEnabledBinding: 'Tasks.projectsController.hasSelection',
           target: 'Tasks',
           action: 'deleteProject'
         }),
-
-        SC.ButtonView.design({
-          layout: { centerY: 0, height: 21, left: 100, width: 55 },
-          title:  "_Import".loc(),
-          titleMinWidth: 0,
-          target: 'Tasks',
-          action: 'importData'
-        }),
-
-        SC.ButtonView.design({
-          layout: { centerY: 0, height: 21, left: 160, width: 55 },
-          title:  "_Export".loc(),
-          titleMinWidth: 0,
-          target: 'Tasks',
-          action: 'exportData'
+        
+        Tasks.SummaryView.design({
+          layout: { centerY: 2, left: 110, height: 21, width: 90 },
+          valueBinding: 'Tasks.assignmentsController.length'
         })
         
         ]
@@ -190,11 +191,11 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       tasksToolbarView: SC.View.design({
-        layout: { top: 0, left: 265, bottom: 0, right: 0 },
+        layout: { top: 0, left: 260, bottom: 0, right: 0 },
         childViews: [
 
         SC.ButtonView.design({
-          layout: { centerY: 0, height: 21, left: 10, width: 25 },
+          layout: { centerY: 0, height: 21, left: 5, width: 25 },
           title:  "+",
           titleMinWidth: 0,
           target: 'Tasks',
@@ -202,7 +203,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         SC.ButtonView.design({
-          layout: { centerY: 0, height: 21, left: 40, width: 25 },
+          layout: { centerY: 0, height: 21, left: 35, width: 25 },
           title:  "-",
           titleMinWidth: 0,
           isEnabledBinding: 'Tasks.tasksController.hasSelection',
@@ -212,11 +213,11 @@ Tasks.mainPage = SC.Page.design({
         
         SC.SeparatorView.design({
           layoutDirection: SC.LAYOUT_VERTICAL,
-          layout: { top: 5, bottom: 5, left: 90, width: 4 }
+          layout: { top: 5, bottom: 5, left: 85, width: 4 }
         }),
 
         SC.RadioView.design({
-          layout: { centerY: 0, height: 21, left: 110, width: 180 },
+          layout: { centerY: 2, height: 21, left: 105, width: 180 },
           escapeHTML: NO,
           items: [
             { title: '<span class=tasks-priority-high>' + Tasks.TASK_PRIORITY_HIGH + '</span>',
@@ -235,11 +236,11 @@ Tasks.mainPage = SC.Page.design({
         
         SC.SeparatorView.design({
           layoutDirection: SC.LAYOUT_VERTICAL,
-          layout: { top: 5, bottom: 5, left: 280, width: 4 }
+          layout: { top: 5, bottom: 5, left: 275, width: 4 }
         }),
 
         SC.RadioView.design({
-          layout: { centerY: 0, height: 21, left: 300, width: 240 },
+          layout: { centerY: 2, height: 21, left: 295, width: 240 },
           escapeHTML: NO,
           items: [
             { title: '<span class=tasks-status-planned>' + Tasks.TASK_STATUS_PLANNED + '</span>',
@@ -260,11 +261,11 @@ Tasks.mainPage = SC.Page.design({
         
         SC.SeparatorView.design({
           layoutDirection: SC.LAYOUT_VERTICAL,
-          layout: { top: 5, bottom: 5, left: 540, width: 4 }
+          layout: { top: 5, bottom: 5, left: 535, width: 4 }
         }),
 
         SC.RadioView.design({
-          layout: { centerY: 0, height: 21, left: 560, width: 220 },
+          layout: { centerY: 2, height: 21, left: 555, width: 220 },
           escapeHTML: NO,
           items: [
             { title: '<span class=tasks-validation-untested>' + Tasks.TASK_VALIDATION_UNTESTED + '</span>',
