@@ -21,7 +21,7 @@ Tasks.SummaryView = SC.View.extend(
   render: function(context, firstTime) {
 
     var len = this.get('value'), ret;
-    console.log('#Tasks: ' + len);
+    // console.log('#Tasks: ' + len); // TODO: [SG] see why this is being called so many times at startup
 
     switch(len) {
       case 0: 
