@@ -27,7 +27,7 @@ Tasks.mixin({
   },
   
   _authenticateUser: function(loginName, password) { // TODO: [SG] implement server-based authentication
-    var store = Tasks.get('store');
+    var store = this.get('store');
     var users = Tasks.store.findAll(Tasks.User);
     var len = users.get('length');
     for (var i = 0; i < len; i++) {
@@ -65,12 +65,14 @@ Tasks.mixin({
   },
   
   _loadData: function() {
+    
+    var store = this.get('store');
     // Load all of the tasks from the data source (via the store)
-    var projects = Tasks.get('store').findAll(Tasks.Project);
+    var projects = store.findAll(Tasks.Project);
     
     // Prepend and populate the special "Inbox" project that will contain all unassigned tasks.
     projects.insertAt(0, this._createInbox());
-    var moreProjects = Tasks.get('store').findAll(Tasks.Project);
+    var moreProjects = store.findAll(Tasks.Project);
  
     // TODO: [SE] Implement succsss/failure callbacks in the data source.
     /*
@@ -80,11 +82,11 @@ Tasks.mixin({
     });
     */
 
-    Tasks.get('projectsController').set('content', projects);
+    this.get('projectsController').set('content', projects);
   },
 
   _createInbox: function() {
-    var store = Tasks.get('store');
+    var store = this.get('store');
 
     // Extract all unassigned tasks for the Inbox
     var tasks = store.findAll(Tasks.Task), task, unassigned = [];
@@ -151,11 +153,11 @@ Tasks.mixin({
   
   _parseAndLoadData: function(data) { // TODO: [SE] create objects in store during data import
     var lines = data.split('\n');
-    var store = Tasks.get('store');
+    var store = this.get('store');
     var taskPattern = new RegExp('(.+)\\s*[\\{<\\[\\$@%].+');
     var taskEffortPattern = new RegExp('\{(\\d+)\}|\{(\\d+-\\d+)\}');
     
-    var currentProject = Tasks.get('inbox');
+    var currentProject = this.get('inbox');
     for (var i = 0; i < lines.length; i++) {
       
       var line = lines[i];
@@ -220,7 +222,7 @@ Tasks.mixin({
 
     var val, task, user, data = "# Tasks data export at " + new Date().format('MMM dd, yyyy hh:mm:ssa') + '\n\n';
     
-    var pc = Tasks.get('projectsController');
+    var pc = this.get('projectsController');
     pc.forEach(function(rec){
           var tasks = rec.get('tasks');
           var len = tasks.get('length');
@@ -295,14 +297,14 @@ Tasks.mixin({
   
   addProject: function() {
     
-    var pc = Tasks.get('projectsController');
+    var pc = this.get('projectsController');
     // Create a new project with a default name
     // TODO: [SG] add new project right after selected item    
 
-    var store = Tasks.get('store');
+    var store = this.get('store');
     var task = store.createRecord(Tasks.Project, { name: Tasks.NEW_PROJECT_NAME });
     store.commitRecords();
-    pc.addObject(task); // TODO: [SC] Why do we have to manually add to the controller instead of store notifying?
+    pc.addObject(task); // FIXME: [SC] Why do we have to manually add to the controller instead of store notifying?
 
     var listView = Tasks.getPath('mainPage.mainPane').get('projectsList');
     var idx = listView.length - 1; // get index of new project in list
@@ -317,25 +319,35 @@ Tasks.mixin({
   
   deleteProject: function() {
     
-    var pc = Tasks.get('projectsController');
+    var pc = this.get('projectsController');
     //get the selected tasks
     var sel = pc.get('selection');
     
     if (sel && sel.length() > 0) {
-      var store = Tasks.get('store');
+      var store = this.get('store');
 
       //pass the record to be deleted
       var project = sel.firstObject();
       var id = project.get('id');
       store.destroyRecord(Tasks.Project, id);
       store.commitRecords();
-      pc.removeObject(project); // TODO: [SC] Why do we have to manually remove from the controller instead of store notifying?
+      pc.removeObject(project); // FIXME: [SC] Why do we have to manually remove from the controller instead of store notifying?
       Tasks.getPath('mainPage.mainPane').get('projectsList').select(0);
     }
   },
   
-  addTask: function() { // TODO: [SG] implement task addition
-    this._notImplemented ('addTask');
+  addTask: function() {
+
+    // Create a new task with a default name
+    // TODO: [SG] add new project right after selected item    
+
+    var store = this.get('store');
+    var task = store.createRecord(Tasks.Task, { name: Tasks.NEW_TASK_NAME });
+    store.commitRecords();
+    
+    var ac = this.get('assignmentsController');
+    ac.addObject(task); // FIXME: [SC] Why do we have to manually add to the controller instead of store notifying?
+
   },
   
   deleteTask: function() { // TODO: [SG] implement task deletion

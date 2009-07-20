@@ -37,7 +37,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
       }
     }
       
-    for(assignee in assignees){ // list all assi
+    for(assignee in assignees){ // list all assigned tasks
       if(assignees.hasOwnProperty(assignee) && assignee !== Tasks.USER_UNASSIGNED) {
         ret.push(this._createNodeHash(assignee, assignees[assignee]));
       }

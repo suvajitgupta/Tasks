@@ -152,8 +152,8 @@ Tasks.mainPage = SC.Page.design({
       })
     }),
     
-    // for use in selecting first project at starup
     projectsList: SC.outlet('middleView.topLeftView.childViews.0.contentView'),
+    tasksList: SC.outlet('middleView.bottomRightView.childViews.0.contentView'),
     
     bottomView: SC.View.design(SC.Border, {
       layout: { bottom: 0, left: 0, right: 0, height: 35 },
