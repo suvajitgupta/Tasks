@@ -49,7 +49,7 @@ Tasks.mainPage = SC.Page.design({
         title: "_User:".loc(),
         titleMinWidth: 0,
         target: 'Tasks',
-        action: 'manageUsers'
+        action: 'openUserManager'
       }),
       
       SC.SelectFieldView.design({
@@ -95,7 +95,7 @@ Tasks.mainPage = SC.Page.design({
         title: "?",
         titleMinWidth: 0,
         target: 'Tasks',
-        action: 'help'
+        action: 'showHelp'
       }),
       
       SC.ButtonView.design({
