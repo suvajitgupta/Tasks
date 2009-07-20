@@ -109,6 +109,7 @@ Tasks.mixin({
 
     // FIXME: [SE] investigate why projects added to the store don't show up in findAll()
     var inbox = store.createRecord(Tasks.Project, { id: 0, name: Tasks.INBOX_PROJECT_NAME, tasks: unassigned });
+    store.commitRecords();
     Tasks.set('inbox', inbox);
     return inbox;
   },
@@ -303,7 +304,7 @@ Tasks.mixin({
     store.commitRecords();
     pc.addObject(task); // TODO: [SC] Why do we have to manually add to the controller instead of store notifying?
 
-    var listView = Tasks.getPath('mainPage.mainPane.middleView.topLeftView.contentView');
+    var listView = Tasks.getPath('mainPage.mainPane').get('projectsList');
     var idx = listView.length - 1; // get index of new project in list
     // TODO: [SG] get index of new project wherever it is in the list, don't assume it is at the end
     listView.select(idx);
@@ -324,12 +325,12 @@ Tasks.mixin({
       var store = Tasks.get('store');
 
       //pass the record to be deleted
-      var keys = sel.firstObject().get('id');
-      store.destroyRecords(Tasks.Project, [keys]);
-
-      //commit the operation to send the request to the server
+      var project = sel.firstObject();
+      var id = project.get('id');
+      store.destroyRecord(Tasks.Project, id);
       store.commitRecords();
-      // TODO: [SC] what to do to remove the "New Project" from the ListView and clear the selection?
+      pc.removeObject(project); // TODO: [SC] Why do we have to manually remove from the controller instead of store notifying?
+      Tasks.getPath('mainPage.mainPane').get('projectsList').select(0);
     }
   },
   
