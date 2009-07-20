@@ -11,10 +11,10 @@ Tasks.mixin({
   
   // Login
   goStateA1: function(){
-    Tasks.set('user', "bigboss");
-    // Tasks.set('user', prompt("Login name:")); // TODO: [SG] replace with proper Login dialog
-    if (this.user !== null && this.user !== '') {
-      Tasks.authenticate(this.user, 'password'); // TODO: [SG] pass actual password input by user
+    var loginName = "bigboss";
+    // var loginName = prompt("Login name:"); // TODO: [SG] replace with real Login dialog
+    if (loginName !== null && loginName !== '') {
+      Tasks.authenticate(loginName, 'password'); // TODO: [SG] pass actual password input by user
     }
   },
 

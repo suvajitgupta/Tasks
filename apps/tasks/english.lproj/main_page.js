@@ -26,26 +26,26 @@ Tasks.mainPage = SC.Page.design({
       childViews: [
       
       SC.LabelView.design({
-        layout: { centerY: 0, height: 35, left: 2, width: 40 },
+        layout: { centerY: 0, height: 35, left: 2, width: 35 },
         classNames: ['tasks-logo']
       }),
       
       SC.LabelView.design({
-        layout: { centerY: 2, height: 30, left: 50, width: 120 },
-        controlSize: SC.LARGE_CONTROL_SIZE,
+        layout: { centerY: 5, height: 30, left: 45, width: 110 },
         fontWeight: SC.BOLD_WEIGHT,
+        controlSize: SC.LARGE_CONTROL_SIZE,
         value: "_Tasks".loc() + " v" + Tasks.VERSION
       }),
       
       Tasks.WelcomeView.design({
-        layout: { centerY: 0, height: 30, left: 175, width: 80 },
-        textAlign: SC.ALIGN_CENTER,
-        controlSize: SC.SMALL_CONTROL_SIZE,
+        layout: { centerY: 2, height: 30, left: 155, width: 110 },
+        textAlign: SC.ALIGN_RIGHT,
+        controlSize: SC.TINY_CONTROL_SIZE,
         valueBinding: 'Tasks.user'
       }),
       
       SC.ButtonView.design({
-        layout: { centerY: 0, height: 18, left: 265, width: 50 },
+        layout: { centerY: 0, height: 18, left: 265, width: 55 },
         title: "_User:".loc(),
         titleMinWidth: 0,
         target: 'Tasks',
@@ -53,7 +53,7 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       SC.SelectFieldView.design({
-        layout: { centerY: 2, height: 25, left: 320, width: 150 },
+        layout: { centerY: 2, height: 25, left: 325, width: 150 },
         nameKey: 'name',
         objects: Tasks.User.FIXTURES // TODO: [SG] Add "All" - the default, and populate from store/not fixtures
         // TODO: [SG] assign a valueBinding

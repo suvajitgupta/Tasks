@@ -31,7 +31,9 @@ Tasks.mixin({
     var users = Tasks.store.findAll(Tasks.User);
     var len = users.get('length');
     for (var i = 0; i < len; i++) {
-      if (loginName === users.objectAt(i).get('loginName')) {
+      var user = users.objectAt(i);
+      if (loginName === user.get('loginName')) {
+        Tasks.set('user', user.get('name'));
         return true;
       }
     }
