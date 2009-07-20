@@ -298,17 +298,16 @@ Tasks.mixin({
   addProject: function() {
     
     var pc = this.get('projectsController');
-    // Create a new project with a default name
-    // TODO: [SG] add new project right after selected item    
-
+    var sel = pc.get('selection');
+ 
     var store = this.get('store');
     var task = store.createRecord(Tasks.Project, { name: Tasks.NEW_PROJECT_NAME });
     store.commitRecords();
     pc.addObject(task); // FIXME: [SC] Why do we have to manually add to the controller instead of store notifying?
 
+    // TODO: [SG] add new project right after currently selected project, if one
     var listView = Tasks.getPath('mainPage.mainPane').get('projectsList');
-    var idx = listView.length - 1; // get index of new project in list
-    // TODO: [SG] get index of new project wherever it is in the list, don't assume it is at the end
+    var idx = listView.length - 1;
     listView.select(idx);
 
     // Begin editing newly created item.
@@ -320,7 +319,6 @@ Tasks.mixin({
   deleteProject: function() {
     
     var pc = this.get('projectsController');
-    //get the selected tasks
     var sel = pc.get('selection');
     
     if (sel && sel.length() > 0) {
