@@ -2,7 +2,7 @@
  * A mixin that defines all of the "actions" that trigger state transitions.
  *
  * @author Sean Eidemiller
- * @author Suvajit Gupta
+ * @author Suvajit GÏupta
  */
 /*globals Tasks sc_require */
 sc_require('core');
@@ -109,9 +109,8 @@ Tasks.mixin({
       }
     }
 
-    // FIXME: [SE] investigate why projects added to the store don't show up in findAll()
     var inbox = store.createRecord(Tasks.Project, { id: 0, name: Tasks.INBOX_PROJECT_NAME, tasks: unassigned });
-    store.commitRecords();
+    store.commitRecords(); // FIXME: [SC] Shouldn't have to call this - CJ investigating an API change to fix this
     Tasks.set('inbox', inbox);
     return inbox;
   },
@@ -302,7 +301,7 @@ Tasks.mixin({
  
     var store = this.get('store');
     var task = store.createRecord(Tasks.Project, { name: Tasks.NEW_PROJECT_NAME });
-    store.commitRecords();
+    store.commitRecords(); // FIXME: [SC] Shouldn't have to call this - CJ investigating an API change to fix this
     pc.addObject(task); // FIXME: [SC] Why do we have to manually add to the controller instead of store notifying?
 
     // TODO: [SG] add new project right after currently selected project, if one
@@ -312,8 +311,11 @@ Tasks.mixin({
 
     // Begin editing newly created item.
     var itemView = listView.itemViewForContentIndex(idx);
-    itemView.beginEditing.invokeLater(itemView);  // you must wait for run loop to complete before method is called
-    // TODO: [SC] when user changes name of New Project it doesn't change in ListView
+    
+    // wait for run loop to complete before method is called
+    itemView.beginEditing.invokeLater(itemView);
+    
+    // FIXME: [SC] when user changes name of New Project it doesn't change in ListView
   },
   
   deleteProject: function() {
@@ -324,11 +326,11 @@ Tasks.mixin({
     if (sel && sel.length() > 0) {
       var store = this.get('store');
 
-      //pass the record to be deleted
+      // extract the project to be deleted
       var project = sel.firstObject();
       var id = project.get('id');
       store.destroyRecord(Tasks.Project, id);
-      store.commitRecords();
+      store.commitRecords(); // FIXME: [SC] Shouldn't have to call this - CJ investigating an API change to fix this
       pc.removeObject(project); // FIXME: [SC] Why do we have to manually remove from the controller instead of store notifying?
       Tasks.getPath('mainPage.mainPane').get('projectsList').select(0);
     }
@@ -341,24 +343,14 @@ Tasks.mixin({
 
     var store = this.get('store');
     var task = store.createRecord(Tasks.Task, { name: Tasks.NEW_TASK_NAME });
-    store.commitRecords();
+    store.commitRecords(); // FIXME: [SC] Shouldn't have to call this - CJ investigating an API change to fix this
     
     var ac = this.get('assignmentsController');
     ac.addObject(task); // FIXME: [SC] Why do we have to manually add to the controller instead of store notifying?
 
     // TODO: [SG] Get selected task and get its assignee, then create new task with same assignee
 
-    /*
-    var sourceListView = Tasks.getPath('mainPage.mainPane').get('tasksList');
-    var idx = listView.length - 1; // get index of new project in list
-    // TODO: [SG] get index of new project wherever it is in the list, don't assume it is at the end
-    sourceListView.select(idx);
-
-    // Begin editing newly created item.
-    var itemView = sourceListView.itemViewForContentIndex(idx);
-    itemView.beginEditing.invokeLater(itemView);  // you must wait for run loop to complete before method is called
-    // TODO: [SC] when user changes name of New Project it doesn't change in ListView
-    */
+    // TODO: [SG] Begin editing newly created item.
 
   },
   
@@ -374,7 +366,7 @@ Tasks.mixin({
       var task = sel.firstObject();
       var id = task.get('id');
       store.destroyRecord(Tasks.Task, id);
-      store.commitRecords();
+      store.commitRecords(); // FIXME: [SC] Shouldn't have to call this - CJ investigating an API change to fix this
 
       tc.set('selection', null);
       var ac = this.get('assignmentsController');      

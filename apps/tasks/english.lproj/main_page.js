@@ -56,7 +56,7 @@ Tasks.mainPage = SC.Page.design({
         layout: { centerY: 2, height: 25, left: 325, width: 150 },
         nameKey: 'name',
         objects: Tasks.User.FIXTURES // TODO: [SG] Add "All" - the default, and populate from store/not fixtures
-        // TODO: [SG] assign a valueBinding
+        // TODO: [SG] assign a valueBinding & implement code to only show tasks for selected user
       }),
       
       SC.TextFieldView.design({

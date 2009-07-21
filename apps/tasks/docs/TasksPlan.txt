@@ -28,9 +28,9 @@ v Add drag-n-drop of a TXT file into App for data importing (using Google Gears)
 - Add Status/Priority/Validation radio buttons in bottom toolbar [SG] <JH2> @Done
 v Set bottom toolbar button enablement based on having a selection [SG] <EO> @Done
 ^ Add double-click in-cell editing [SC] $Bug
-^ Add "+" & "-" buttons in bottom toolbar [SG] <JH2> @Active
-- Allow "+" button to be pressed a second time to keep in data entry mode, Esc will exit mode [SG] <JH2>
-^ Add modal popup form for editing [SG] <MB>
+^ Add "+" & "-" buttons in bottom toolbar [SG] <SE> @Active
+- Allow "+" button to be pressed a second time to keep in data entry mode, Esc will exit mode [SG] <SE>
+^ Add modal popup form for editing [SG] <SE>
 ^ Show effort subtotals (exclude Low items) in curly braces for load balancing [SG] <SE>
 ^ Append "?" for range-based subtotals including unknown efforts [SG] <SE>
 ^ Allow drag-n-drop reordering [SC] $Bug
@@ -43,7 +43,7 @@ v Add hover tooltip showing Description [SG] <EG>
 ^ Add Master/Detail Explorer view with click selection of Projects showing corresponding Tasks [JH2] <SG> @Done
 ^ Show Project name & time left in curly braces (if specified) [SG] <JH2> @Done
 ^ Add double-click in-cell editing [SC] $Bug
-^ Add "+" & "-" buttons in bottom Toolbar [SG] <SC> @Bug
+^ Add "+" & "-" buttons in bottom Toolbar [SG] <SC> @Active
 v Set bottom toolbar button enablement based on having a selection [SG] <EO> @Done
 ^ Add drag-n-drop reordering [SC] @Done
 - Select first project at startup [JH2] <SG> @Done
@@ -58,10 +58,10 @@ v Make Master list of Projects collapsible [SG] <EG>
 "User" Manager
 - Add login screen (User authentication) [SG] <SE> @Active
 - Add access control based on Role (User authorization) [SG] <SE>
-v Add user preferences/restore to them at startup [SG] <JH2>
+v Add user preferences/restore to them at startup [SG] <SE>
 v Add change password dialog? [SG] <SE>
 - Add User management button/modal popup showing existing Users [SG] <SE>
-- Add "+" & "-" buttons in bottom toolbar and "X" button in top toolbar to return [SG] <JH2>
+- Add "+" & "-" buttons in bottom toolbar and "X" button in top toolbar to return [SG] <SE>
 v Add hover tooltip on dialog title showing number of Users [SG] <EG>
 
 "App" Manager
@@ -78,11 +78,9 @@ v Add Online Help button in top Toolbar & modal Help dialog [SG] @Active
 - Restore application settings/state from last login [SG] <SE>
 
 Server
-- Implement REST API via Mock Server [SE] <SG>
-- Add Server-side data validation checks [SE] <SG>
-- Add local persistence for single user mode [SE] <MB>
+- Implement REST API & server-side data validation checks [SE] <SG>
 - Build persistence server (using Ruby) [MB] <SG>
-- Build persistence server (using Django or CouchDB) [EO] <SG>
+- Add local persistence for single user mode [SE] <MB>
 - Support multi-user mode using Transaction Time [SE] <EO>
 - Add Server-side authorization [SE] <SG>
 
@@ -90,7 +88,7 @@ Hardening/Styling
 - Perform I18N and L10N (test with reversed strings) [SG] <JH2> @Active
 - Develop Model unit tests [SG] <BB> @Active
 - Develop View unit tests [SG] <MB> @Active
-v Style via CSS, embed sprited images [SG] <MG> @Active
+v Style via CSS, embed sprited images [MG] <SG> @Active
 
 Packaging/Delivery
 ^ Develop Web client (ported to Firefox, Internet Explorer, Safari, Chrome) [SG] <MT> @Active
@@ -98,8 +96,8 @@ Packaging/Delivery
 v Develop Mobile client (using PhoneGap) [SG] <CJ>
 
 Testing/Rollout
-- Manually test & note/fix showstoppers [BM] <SG> @Active
-- Create automated test scripts using Selenium [BM]
+- Manually test & note/fix showstoppers [SG] <BM> @Active
+- Create automated test scripts using Selenium [BM] <SG>
 v Conduct usability tests, collect feedback, fix bugs [SG] <MG>
-- Create Release Notes (features, limitations/bugs, list external components) [SG]
-- Provide SproutCore doctool-style comments [SG] <EO>
+- Create Release Notes (features, limitations/bugs, list external components) [SG] <SE>
+- Provide SproutCore doctool-style comments [SG] <SE>
