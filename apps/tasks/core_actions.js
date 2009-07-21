@@ -346,10 +346,40 @@ Tasks.mixin({
     var ac = this.get('assignmentsController');
     ac.addObject(task); // FIXME: [SC] Why do we have to manually add to the controller instead of store notifying?
 
+    // TODO: [SG] Get selected task and get its assignee, then create new task with same assignee
+
+    /*
+    var sourceListView = Tasks.getPath('mainPage.mainPane').get('tasksList');
+    var idx = listView.length - 1; // get index of new project in list
+    // TODO: [SG] get index of new project wherever it is in the list, don't assume it is at the end
+    sourceListView.select(idx);
+
+    // Begin editing newly created item.
+    var itemView = sourceListView.itemViewForContentIndex(idx);
+    itemView.beginEditing.invokeLater(itemView);  // you must wait for run loop to complete before method is called
+    // TODO: [SC] when user changes name of New Project it doesn't change in ListView
+    */
+
   },
   
-  deleteTask: function() { // TODO: [SG] implement task deletion
-    this._notImplemented ('deleteTask');
+  deleteTask: function() {
+    
+    var tc = this.get('tasksController');
+    var sel = tc.get('selection');
+    
+    if (sel && sel.length() > 0) {
+      var store = this.get('store');
+
+      //pass the record to be deleted
+      var task = sel.firstObject();
+      var id = task.get('id');
+      store.destroyRecord(Tasks.Task, id);
+      store.commitRecords();
+
+      tc.set('selection', null);
+      var ac = this.get('assignmentsController');      
+      ac.removeObject(task); // FIXME: [SC] Why do we have to manually remove from the controller instead of store notifying?
+    }
   },
   
   openTaskEditor: function() { // TODO: [SG] implement open Task editor
