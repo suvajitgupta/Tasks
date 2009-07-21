@@ -31,29 +31,30 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       SC.LabelView.design({
-        layout: { centerY: 5, height: 30, left: 45, width: 110 },
+        layout: { centerY: 5, height: 30, left: 45, width: 115 },
         fontWeight: SC.BOLD_WEIGHT,
         controlSize: SC.LARGE_CONTROL_SIZE,
         value: "_Tasks".loc() + " v" + Tasks.VERSION
       }),
       
       Tasks.WelcomeView.design({
-        layout: { centerY: 2, height: 30, left: 155, width: 110 },
+        layout: { centerY: 2, height: 30, left: 160, width: 110 },
         textAlign: SC.ALIGN_RIGHT,
         controlSize: SC.TINY_CONTROL_SIZE,
         valueBinding: 'Tasks.user'
       }),
       
       SC.ButtonView.design({
-        layout: { centerY: 0, height: 18, left: 265, width: 55 },
+        layout: { centerY: 0, height: 18, left: 270, width: 55 },
         title: "_User:".loc(),
         titleMinWidth: 0,
+        toolTip: 'Manage Users',
         target: 'Tasks',
         action: 'openUserManager'
       }),
       
       SC.SelectFieldView.design({
-        layout: { centerY: 2, height: 25, left: 325, width: 150 },
+        layout: { centerY: 2, height: 25, left: 330, width: 150 },
         nameKey: 'name',
         objects: Tasks.User.FIXTURES // TODO: [SG] Add "All" - the default, and populate from store/not fixtures
         // TODO: [SG] assign a valueBinding & implement code to only show tasks for selected user
@@ -69,6 +70,7 @@ Tasks.mainPage = SC.Page.design({
         layout: { centerY: 0, height: 21, right: 180, width: 50 },
         title:  "_Import".loc(),
         titleMinWidth: 0,
+        toolTip: 'Import Projects/Tasks from a file',
         target: 'Tasks',
         action: 'importData'
       }),
@@ -77,6 +79,7 @@ Tasks.mainPage = SC.Page.design({
         layout: { centerY: 0, height: 21, right: 125, width: 50 },
         title:  "_Export".loc(),
         titleMinWidth: 0,
+        toolTip: 'Export Projects/Tasks to a file',
         target: 'Tasks',
         action: 'exportData'
       }),
@@ -86,6 +89,7 @@ Tasks.mainPage = SC.Page.design({
         title: "_Save".loc(),
         titleMinWidth: 0,
         // TODO: [SG] add isEnabledBinding to track changes,
+        toolTip: 'Save Projects/Tasks',
         target: 'Tasks',
         action: 'saveData'
       }),
@@ -94,6 +98,7 @@ Tasks.mainPage = SC.Page.design({
         layout: { centerY: 0, height: 21, right: 38, width: 25 },
         title: "?",
         titleMinWidth: 0,
+        toolTip: 'Help',
         target: 'Tasks',
         action: 'showHelp'
       }),
@@ -102,6 +107,7 @@ Tasks.mainPage = SC.Page.design({
         layout: { centerY: 0, height: 21, right: 5, width: 25 },
         title: "X",
         titleMinWidth: 0,
+        toolTip: 'Exit',
         target: 'Tasks',
         action: 'exit'
       })
@@ -168,6 +174,7 @@ Tasks.mainPage = SC.Page.design({
           layout: { centerY: 0, left: 5, height: 21, width: 25 },
           title: "+",
           titleMinWidth: 0,
+          toolTip: 'Add Project',
           target: 'Tasks',
           action: 'addProject'
         }),
@@ -177,6 +184,7 @@ Tasks.mainPage = SC.Page.design({
           title: "-",
           titleMinWidth: 0,
           isEnabledBinding: 'Tasks.projectsController.hasSelection',
+          toolTip: 'Delete Project',
           target: 'Tasks',
           action: 'deleteProject'
         }),
@@ -198,6 +206,7 @@ Tasks.mainPage = SC.Page.design({
           layout: { centerY: 0, height: 21, left: 5, width: 25 },
           title:  "+",
           titleMinWidth: 0,
+          toolTip: 'Add Task',
           target: 'Tasks',
           action: 'addTask'
         }),
@@ -207,6 +216,7 @@ Tasks.mainPage = SC.Page.design({
           title:  "-",
           titleMinWidth: 0,
           isEnabledBinding: 'Tasks.tasksController.hasSelection',
+          toolTip: 'Delete Task',
           target: 'Tasks',
           action: 'deleteTask'
         }),
