@@ -187,6 +187,7 @@ Tasks.mixin({
         }
         console.log (output);
         var taskRecord = store.createRecord(Tasks.Task, { name: taskLine, priority: priority });
+        store.commitRecords();
         console.log('DEBUG: ' + taskRecord);
         if(!taskRecord) {
           console.log('ERROR: task creation failed!');
@@ -213,6 +214,9 @@ Tasks.mixin({
         if (timeLeft) {
           console.log (' with TimeLeft: ' + timeLeft);
         }
+        var projectRecord = store.createRecord(Tasks.Project, { name: projectName, timeLeft: timeLeft });
+        store.commitRecords();
+        this.get('projectsController').addObject(projectRecord);
       }
      }
   },
