@@ -139,14 +139,15 @@ Tasks.mixin({
     // TODO: [SG] implement view to prompt user for data to import (sample data hardcoded below for testing)
     var data = 
     '#A comment\n     \n' +
-    'Existing Project\n' +
+    'My Project\n' +
     '^ My first task {2} @Done\n' +
     '| description line1\n' +
     '| description line2\n' +
     '- My second task $Bug [SG] <EO> @Risky #Failed\n' +
     'v My third task {12-14}\n' +
     ' \t \n' +
-    'New Project {12}\n';
+    'Your Project {12}\n' +
+    '- Your first task {2} @AtRisk\n';
     this._parseAndLoadData(data);
   },
   
@@ -213,14 +214,14 @@ Tasks.mixin({
         if (timeLeft) {
           console.log (' with TimeLeft: ' + timeLeft);
         }
-        var projectRecord = store.createRecord(Tasks.Project, { name: projectName, timeLeft: timeLeft });
+        var projectRecord = store.createRecord(Tasks.Project, { name: projectName, timeLeft: timeLeft, tasks: [] });
         if(!projectRecord) {
           console.log('ERROR: project creation failed!');
           continue;
         }
         store.commitRecords();
-        this.get('projectsController').addObject(projectRecord);
         currentProject = projectRecord;
+        this.get('projectsController').addObject(projectRecord);
       }
      }
   },
