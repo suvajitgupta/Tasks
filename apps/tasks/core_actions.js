@@ -109,10 +109,10 @@ Tasks.mixin({
       }
     }
 
-    var inbox = store.createRecord(Tasks.Project, { id: 0, name: Tasks.INBOX_PROJECT_NAME, tasks: unassigned });
+    var inboxProject = store.createRecord(Tasks.Project, { id: 0, name: Tasks.INBOX_PROJECT_NAME, tasks: unassigned });
     store.commitRecords(); // FIXME: [SC] Shouldn't have to call this - CJ investigating an API change to fix this
-    Tasks.set('inbox', inbox);
-    return inbox;
+    Tasks.set('inbox', inboxProject);
+    return inboxProject;
   },
   
   dataLoadSuccess: function() {
@@ -187,12 +187,11 @@ Tasks.mixin({
         }
         console.log (output);
         var taskRecord = store.createRecord(Tasks.Task, { name: taskLine, priority: priority });
-        store.commitRecords();
-        console.log('DEBUG: ' + taskRecord);
         if(!taskRecord) {
           console.log('ERROR: task creation failed!');
           continue;
         }
+        store.commitRecords();
         currentProject.get('tasks').pushObject(taskRecord);
       }
       else if (line.indexOf('| ') === 0) { // a Description
@@ -215,8 +214,13 @@ Tasks.mixin({
           console.log (' with TimeLeft: ' + timeLeft);
         }
         var projectRecord = store.createRecord(Tasks.Project, { name: projectName, timeLeft: timeLeft });
+        if(!projectRecord) {
+          console.log('ERROR: project creation failed!');
+          continue;
+        }
         store.commitRecords();
         this.get('projectsController').addObject(projectRecord);
+        currentProject = projectRecord;
       }
      }
   },
