@@ -1,6 +1,5 @@
 sc_require('core');
 sc_require('core_callbacks');
-sc_require('models/user');
 
 /**
  * An extension of the SC.DataSource class that acts as a proxy between the data store and the
