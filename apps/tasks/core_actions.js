@@ -140,22 +140,23 @@ Tasks.mixin({
     var data = 
     '#A comment\n     \n' +
     'My Project\n' +
-    '^ My first task {2} @Done\n' +
+    '^ My first task {2} @Risky\n' +
     '| description line1\n' +
     '| description line2\n' +
-    '- My second task $Bug [SG] <EO> @Risky #Failed\n' +
-    'v My third task {12-14}\n' +
+    '- My second task $Bug [SG] <EO> #Failed\n' +
+    'v My third task @Active $Feature {12-14} %Passed\n' +
     ' \t \n' +
     'Your Project {12}\n' +
-    '- Your first task {2} @AtRisk\n';
+    '- Your first task {2} @Risky\n';
     this._parseAndLoadData(data);
   },
   
   _parseAndLoadData: function(data) { // TODO: [SE] create objects in store during data import
     var lines = data.split('\n');
     var store = this.get('store');
-    var taskPattern = new RegExp('(.+)\\s*[\\{<\\[\\$@%].+');
+    var taskNamePattern = new RegExp('([\\w\\s]+)[\\s]*[\\{<\\[\\$@%]');
     var taskEffortPattern = new RegExp('\{(\\d+)\}|\{(\\d+-\\d+)\}');
+    var taskStatusPattern = new RegExp('@([\\w\\s]+)');
     
     var currentProject = this.get('inbox');
     for (var i = 0; i < lines.length; i++) {
@@ -168,32 +169,54 @@ Tasks.mixin({
         console.log ('Commment:\t' + commentLine);
       }
       else if (line.match(/^[\^\-v][ ]/)) { // a Task
+        
         // extract priority based on bullet
-        var priority = Tasks.TASK_PRIORITY_MEDIUM;
+        var taskPriority = Tasks.TASK_PRIORITY_MEDIUM;
         if (line.charAt(0) === '^') {
-          priority = Tasks.TASK_PRIORITY_HIGH;
+          taskPriority = Tasks.TASK_PRIORITY_HIGH;
         } else if (line.charAt(0) === 'v') {
-          priority = Tasks.TASK_PRIORITY_LOW;
+          taskPriority = Tasks.TASK_PRIORITY_LOW;
         }
-        var taskLine = line.slice(2); // TODO: [SG] extract other task fields if provided
-        var taskMatches = taskPattern.exec(taskLine);
-        if (taskMatches) {
-          taskLine = taskMatches[1];
+        var taskLine = line.slice(2);
+        
+        // extract task name
+        var taskNameMatches = taskNamePattern.exec(taskLine);
+        var taskName = taskLine;
+        if (taskNameMatches) {
+          taskName = taskNameMatches[1];
         }
-        var output = 'Task:\t\t' + taskLine + ' of Priority: ' + priority;
+        var output = 'Task:\t\t' + taskName + ' of Priority: ' + taskPriority;
+        
+        // extract task effort
         var taskEffortMatches = taskEffortPattern.exec(taskLine);
+        var taskEffort = null;
         if(taskEffortMatches) {
-          var taskEffort = taskEffortMatches[1]? taskEffortMatches[1] : taskEffortMatches[2];
+          taskEffort = taskEffortMatches[1]? taskEffortMatches[1] : taskEffortMatches[2];
           output += ' of Effort: ' + taskEffort;
         }
+        
+        // extract task status
+        var taskStatusMatches = taskStatusPattern.exec(taskLine);
+        var taskStatus = Tasks.TASK_STATUS_PLANNED;
+        if(taskStatusMatches) {
+          taskStatus = taskStatusMatches[1];
+          output += ' of Status: ' + taskStatus;
+        }
+        
         console.log (output);
-        var taskRecord = store.createRecord(Tasks.Task, { name: taskLine, priority: priority });
+        var taskRecord = store.createRecord(Tasks.Task, {
+          name: taskName,
+          priority: taskPriority,
+          effort: taskEffort,
+          status: taskStatus
+        });
         if(!taskRecord) {
           console.log('ERROR: task creation failed!');
           continue;
         }
         store.commitRecords();
         currentProject.get('tasks').pushObject(taskRecord);
+        
       }
       else if (line.indexOf('| ') === 0) { // a Description
         var descriptionLine = line.slice(2);
@@ -205,7 +228,7 @@ Tasks.mixin({
       else { // a Project
         // extract timeLeft if provided
         var projectName = line, timeLeft = null;
-        var res = line.match(/([\w\s]*)[\s*]\{(\d+)\}/);
+        var res = line.match(/([\w\s]+)[\s*]\{(\d+)\}/);
         if(res) {
           projectName = res[1];
           timeLeft = res[2];
