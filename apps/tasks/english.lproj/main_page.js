@@ -22,6 +22,7 @@ Tasks.mainPage = SC.Page.design({
     
     topView: SC.View.design(SC.Border, {
       layout: { top: 0, left: 0, right: 0, height: 42 },
+      backgroundColor: '#DDD',
       borderStyle: SC.BORDER_BOTTOM,
       childViews: [
       
@@ -38,14 +39,14 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       Tasks.WelcomeView.design({
-        layout: { centerY: 2, height: 30, left: 160, width: 110 },
+        layout: { centerY: 0, height: 30, left: 160, width: 110 },
         textAlign: SC.ALIGN_RIGHT,
         controlSize: SC.TINY_CONTROL_SIZE,
         valueBinding: 'Tasks.user'
       }),
       
       SC.ButtonView.design({
-        layout: { centerY: 0, height: 18, left: 270, width: 55 },
+        layout: { centerY: 0, height: 24, left: 270, width: 55 },
         title: "_User:".loc(),
         titleMinWidth: 0,
         toolTip: 'Manage Users',
@@ -54,7 +55,7 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       SC.SelectFieldView.design({
-        layout: { centerY: 2, height: 25, left: 330, width: 150 },
+        layout: { centerY: 0, height: 24, left: 335, width: 150 },
         nameKey: 'name',
         objects: Tasks.User.FIXTURES // TODO: [SG] Add "All" - the default, and populate from store/not fixtures
         // TODO: [SG] assign a valueBinding & implement code to only show tasks for selected user
@@ -67,7 +68,7 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       SC.ButtonView.design({
-        layout: { centerY: 0, height: 21, right: 180, width: 50 },
+        layout: { centerY: 0, height: 24, right: 210, width: 60 },
         title:  "_Import".loc(),
         titleMinWidth: 0,
         toolTip: 'Import Projects/Tasks from a file',
@@ -76,7 +77,7 @@ Tasks.mainPage = SC.Page.design({
       }),
 
       SC.ButtonView.design({
-        layout: { centerY: 0, height: 21, right: 125, width: 50 },
+        layout: { centerY: 0, height: 24, right: 145, width: 60 },
         title:  "_Export".loc(),
         titleMinWidth: 0,
         toolTip: 'Export Projects/Tasks to a file',
@@ -85,7 +86,7 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       SC.ButtonView.design({
-        layout: { centerY: 0, height: 21, right: 80, width: 40 },
+        layout: { centerY: 0, height: 24, right: 80, width: 60 },
         title: "_Save".loc(),
         titleMinWidth: 0,
         // TODO: [SG] add isEnabledBinding to track changes,
@@ -95,7 +96,7 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       SC.ButtonView.design({
-        layout: { centerY: 0, height: 21, right: 38, width: 25 },
+        layout: { centerY: 0, height: 24, right: 40, width: 30 },
         title: "?",
         titleMinWidth: 0,
         toolTip: 'Help',
@@ -104,7 +105,7 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       SC.ButtonView.design({
-        layout: { centerY: 0, height: 21, right: 5, width: 25 },
+        layout: { centerY: 0, height: 24, right: 5, width: 30 },
         title: "X",
         titleMinWidth: 0,
         toolTip: 'Exit',
@@ -162,8 +163,9 @@ Tasks.mainPage = SC.Page.design({
     tasksList: SC.outlet('middleView.bottomRightView.childViews.0.contentView'),
     
     bottomView: SC.View.design(SC.Border, {
-      layout: { bottom: 0, left: 0, right: 0, height: 35 },
+      layout: { bottom: 0, left: 0, right: 0, height: 42 },
       childViews: 'projectsToolbarView tasksToolbarView'.w(),
+      backgroundColor: '#DDD',
       borderStyle: SC.BORDER_TOP,
       
       projectsToolbarView: SC.View.design({
@@ -171,7 +173,7 @@ Tasks.mainPage = SC.Page.design({
         childViews: [
         
         SC.ButtonView.design({
-          layout: { centerY: 0, left: 5, height: 21, width: 25 },
+          layout: { centerY: 0, left: 5, height: 24, width: 30 },
           title: "+",
           titleMinWidth: 0,
           toolTip: 'Add Project',
@@ -180,7 +182,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         SC.ButtonView.design({
-          layout: { centerY: 0, left: 35, height: 21, width: 25 },
+          layout: { centerY: 0, left: 40, height: 24, width: 30 },
           title: "-",
           titleMinWidth: 0,
           isEnabledBinding: 'Tasks.projectsController.hasSelection',
@@ -190,7 +192,7 @@ Tasks.mainPage = SC.Page.design({
         }),
         
         Tasks.SummaryView.design({
-          layout: { centerY: 2, left: 110, height: 21, width: 90 },
+          layout: { centerY: 2, left: 110, height: 24, width: 90 },
           valueBinding: 'Tasks.assignmentsController.length'
         })
         
@@ -203,7 +205,7 @@ Tasks.mainPage = SC.Page.design({
         childViews: [
 
         SC.ButtonView.design({
-          layout: { centerY: 0, height: 21, left: 5, width: 25 },
+          layout: { centerY: 0, height: 24, left: 5, width: 30 },
           title:  "+",
           titleMinWidth: 0,
           toolTip: 'Add Task',
@@ -212,7 +214,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         SC.ButtonView.design({
-          layout: { centerY: 0, height: 21, left: 35, width: 25 },
+          layout: { centerY: 0, height: 24, left: 40, width: 30 },
           title:  "-",
           titleMinWidth: 0,
           isEnabledBinding: 'Tasks.tasksController.hasSelection',
@@ -230,11 +232,11 @@ Tasks.mainPage = SC.Page.design({
           layout: { centerY: 2, height: 21, left: 105, width: 180 },
           escapeHTML: NO,
           items: [
-            { title: '<span class=tasks-priority-high>' + Tasks.TASK_PRIORITY_HIGH + '</span>',
+            { title: '<span class=tasks-priority-high>' + Tasks.TASK_PRIORITY_HIGH + '</span>&nbsp;',
               value: Tasks.TASK_PRIORITY_HIGH },
-            { title: '<span class=tasks-priority-medium>' + Tasks.TASK_PRIORITY_MEDIUM + '</span>',
+            { title: '<span class=tasks-priority-medium>' + Tasks.TASK_PRIORITY_MEDIUM + '</span>&nbsp;',
               value: Tasks.TASK_PRIORITY_MEDIUM },
-            { title: '<span class=tasks-priority-low>' + Tasks.TASK_PRIORITY_LOW + '</span>',
+            { title: '<span class=tasks-priority-low>' + Tasks.TASK_PRIORITY_LOW + '</span>&nbsp;',
               value: Tasks.TASK_PRIORITY_LOW }
           ],
           itemTitleKey: 'title',
@@ -253,13 +255,13 @@ Tasks.mainPage = SC.Page.design({
           layout: { centerY: 2, height: 21, left: 295, width: 240 },
           escapeHTML: NO,
           items: [
-            { title: '<span class=tasks-status-planned>' + Tasks.TASK_STATUS_PLANNED + '</span>',
+            { title: '<span class=tasks-status-planned>' + Tasks.TASK_STATUS_PLANNED + '</span>&nbsp;',
               value: Tasks.TASK_STATUS_PLANNED },
-            { title: '<span class=tasks-status-active>' + Tasks.TASK_STATUS_ACTIVE + '</span>',
+            { title: '<span class=tasks-status-active>' + Tasks.TASK_STATUS_ACTIVE + '</span>&nbsp;',
               value: Tasks.TASK_STATUS_ACTIVE },
-            { title: '<span class=tasks-status-done>' + Tasks.TASK_STATUS_DONE + '</span>',
+            { title: '<span class=tasks-status-done>' + Tasks.TASK_STATUS_DONE + '</span>&nbsp;',
               value: Tasks.TASK_STATUS_DONE },
-            { title: '<span class=tasks-status-risky>' + Tasks.TASK_STATUS_RISKY + '</span>',
+            { title: '<span class=tasks-status-risky>' + Tasks.TASK_STATUS_RISKY + '</span>&nbsp;',
               value: Tasks.TASK_STATUS_RISKY }
           ],
           itemTitleKey: 'title',
@@ -278,11 +280,11 @@ Tasks.mainPage = SC.Page.design({
           layout: { centerY: 2, height: 21, left: 555, width: 220 },
           escapeHTML: NO,
           items: [
-            { title: '<span class=tasks-validation-untested>' + Tasks.TASK_VALIDATION_UNTESTED + '</span>',
+            { title: '<span class=tasks-validation-untested>' + Tasks.TASK_VALIDATION_UNTESTED + '</span>&nbsp;',
               value: Tasks.TASK_VALIDATION_UNTESTED },
-            { title: '<span class=tasks-validation-passed>' + Tasks.TASK_VALIDATION_PASSED + '</span>',
+            { title: '<span class=tasks-validation-passed>' + Tasks.TASK_VALIDATION_PASSED + '</span>&nbsp;',
               value: Tasks.TASK_VALIDATION_PASSED },
-            { title: '<span class=tasks-validation-failed>' + Tasks.TASK_VALIDATION_FAILED + '</span>',
+            { title: '<span class=tasks-validation-failed>' + Tasks.TASK_VALIDATION_FAILED + '</span>&nbsp;',
               value: Tasks.TASK_VALIDATION_FAILED }
           ],
           itemTitleKey: 'title',
