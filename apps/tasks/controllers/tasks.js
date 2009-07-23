@@ -10,7 +10,7 @@
 Tasks.tasksController = SC.TreeController.create(
 /** @scope Tasks.tasksController.prototype */ {
 
-  contentBinding: 'Tasks.assignmentsController.assignments',
+  contentBinding: 'Tasks.assignmentsController.assignedTasks',
   treeItemIsGrouped: YES
 
 });

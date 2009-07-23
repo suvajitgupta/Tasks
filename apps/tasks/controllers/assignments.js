@@ -15,42 +15,83 @@ Tasks.assignmentsController = SC.ArrayController.create(
 /** @scope Tasks.assignmentsController.prototype */ {
   
   contentBinding: 'Tasks.projectController.tasks',
+  assignedTasks: null,
+  assigneeSelection: null,
   
-  /*
-    Property to bind UI constructs to filter results
-  */
-  search: null,  
-  
-  assignments: function() {
-  
+  _assignments: function() {
+    console.log('assigneeSelection is %@'.fmt(this.get('assigneeSelection')));
+    var selected = this.get('assigneeSelection');
+    var selectedObj;
     var assignees = {}, user, assignee, tasks, ret;
-    this.forEach(
-      function(rec){
-        user = rec.get('assignee');
-        assignee = user? user.get('displayName') : Tasks.USER_UNASSIGNED;
-        tasks = assignees[assignee];
-        if(!tasks) assignees[assignee] = tasks = [];
-        tasks.push(rec);
-      }, 
-      this
-    );
+    if(selected){
+      console.log('selected => %@'.fmt(selected.id));
+      selectedObj = Tasks.User.find(Tasks.store, selected.id);
+      console.log('%@'.fmt(selectedObj));
+      var q = SC.Query.create({
+        recordType: Tasks.Task, 
+        conditions: "assignee = %@",
+        parameters: [selectedObj]
+      });
+      var collection = Tasks.store.findAll(q);
+      
+      collection.forEach(
+        function(rec){
+          user = rec.get('assignee');
+          assignee = user? user.get('displayName') : Tasks.USER_UNASSIGNED;
+          tasks = assignees[assignee];
+          if(!tasks) assignees[assignee] = tasks = [];
+          tasks.push(rec);
+        },collection);
     
-    ret = [];
-    for(assignee in assignees){ // list unassigned tasks first
-      if(assignees.hasOwnProperty(assignee) && assignee === Tasks.USER_UNASSIGNED) {
-        ret.push(this._createNodeHash(assignee, assignees[assignee]));
+      ret = [];
+      for(assignee in assignees){ // list unassigned tasks first
+        if(assignees.hasOwnProperty(assignee) && assignee === Tasks.USER_UNASSIGNED) {
+          ret.push(this._createNodeHash(assignee, assignees[assignee]));
+        }
+      }
+      
+      for(assignee in assignees){ // list all assigned tasks
+        if(assignees.hasOwnProperty(assignee) && assignee !== Tasks.USER_UNASSIGNED) {
+          ret.push(this._createNodeHash(assignee, assignees[assignee]));
+        }
+      }
+    }else{
+      this.forEach(
+        function(rec){
+          user = rec.get('assignee');
+          assignee = user? user.get('displayName') : Tasks.USER_UNASSIGNED;
+          tasks = assignees[assignee];
+          if(!tasks) assignees[assignee] = tasks = [];
+          tasks.push(rec);
+        }, 
+        this
+      );
+    
+      ret = [];
+      for(assignee in assignees){ // list unassigned tasks first
+        if(assignees.hasOwnProperty(assignee) && assignee === Tasks.USER_UNASSIGNED) {
+          ret.push(this._createNodeHash(assignee, assignees[assignee]));
+        }
+      }
+      
+      for(assignee in assignees){ // list all assigned tasks
+        if(assignees.hasOwnProperty(assignee) && assignee !== Tasks.USER_UNASSIGNED) {
+          ret.push(this._createNodeHash(assignee, assignees[assignee]));
+        }
       }
     }
       
-    for(assignee in assignees){ // list all assigned tasks
-      if(assignees.hasOwnProperty(assignee) && assignee !== Tasks.USER_UNASSIGNED) {
-        ret.push(this._createNodeHash(assignee, assignees[assignee]));
-      }
-    }
-      
-    return SC.Object.create({ treeItemChildren: ret, treeItemIsExpanded: YES });
+    this.set('assignedTasks',SC.Object.create({ treeItemChildren: ret, treeItemIsExpanded: YES }));
     
-  }.property('[]').cacheable(),
+  },
+  
+  _contenHasChanged: function(){
+    this._assignments();
+  }.observes('content'),
+  
+  _assigneeDidChange: function(){
+    this._assignments();
+  }.observes('assigneeSelection'),
   
   _createNodeHash: function(assignee, tasks) {
     return SC.Object.create({

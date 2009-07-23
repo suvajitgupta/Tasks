@@ -57,7 +57,11 @@ Tasks.mainPage = SC.Page.design({
       SC.SelectFieldView.design({
         layout: { centerY: 0, height: 24, left: 335, width: 150 },
         nameKey: 'name',
-        objects: Tasks.User.FIXTURES // TODO: [SG] Add "All" - the default, and populate from store/not fixtures
+        //valueKey: 'id', // I set this to "id" but we can remove it if we want the entire object [JH2]
+        emptyName: "_All".loc(),
+        localize: YES,
+        objects: Tasks.User.FIXTURES,
+        valueBinding: 'Tasks.assignmentsController.assigneeSelection' // TODO: [SG] Add "All" - the default, and populate from store/not fixtures
         // TODO: [SG] assign a valueBinding & implement code to only show tasks for selected user
       }),
       

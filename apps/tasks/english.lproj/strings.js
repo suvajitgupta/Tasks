@@ -45,5 +45,6 @@ SC.stringsFor('English', {
   '_Unassigned': "Unassigned",
   '_Manager': "Manager",
   '_Developer': "Developer",
-  '_Tester': "Tester"
+  '_Tester': "Tester",
+  "_All": "All Users"
 });
