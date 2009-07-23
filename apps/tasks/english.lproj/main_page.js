@@ -62,8 +62,8 @@ Tasks.mainPage = SC.Page.design({
       
       SC.TextFieldView.design({
         layout: { centerY: 0, height: 16, left: 500, width: 250 },
-        hint: "_SearchHint".loc()
-        // TODO: implement type-ahead searching capability
+        hint: "_SearchHint".loc(),
+        valueBinding: 'Tasks.assignmentsController.search'
       }),
       
       SC.ButtonView.design({
