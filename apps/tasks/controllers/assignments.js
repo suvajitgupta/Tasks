@@ -24,37 +24,55 @@ Tasks.assignmentsController = SC.ArrayController.create(
     var selectedObj;
     var assignees = {}, user, assignee, tasks, ret;
     if(selected){
-      console.log('selected => %@'.fmt(selected.id));
+      // Find the user record
       selectedObj = Tasks.User.find(Tasks.store, selected.id);
-      console.log('%@'.fmt(selectedObj));
-      var q = SC.Query.create({
-        recordType: Tasks.Task, 
-        conditions: "assignee = %@",
-        parameters: [selectedObj]
-      });
-      var collection = Tasks.store.findAll(q);
       
-      collection.forEach(
+      // Then loop using selectedObj.displayName as the condition.
+      this.forEach(
         function(rec){
           user = rec.get('assignee');
           assignee = user? user.get('displayName') : Tasks.USER_UNASSIGNED;
           tasks = assignees[assignee];
           if(!tasks) assignees[assignee] = tasks = [];
           tasks.push(rec);
-        },collection);
+        },this);
     
       ret = [];
-      for(assignee in assignees){ // list unassigned tasks first
-        if(assignees.hasOwnProperty(assignee) && assignee === Tasks.USER_UNASSIGNED) {
+      
+      for(assignee in assignees){ // list all assigned tasks
+        if(assignees.hasOwnProperty(assignee) && assignee === selectedObj.get('displayName')) {
           ret.push(this._createNodeHash(assignee, assignees[assignee]));
         }
       }
       
-      for(assignee in assignees){ // list all assigned tasks
-        if(assignees.hasOwnProperty(assignee) && assignee !== Tasks.USER_UNASSIGNED) {
-          ret.push(this._createNodeHash(assignee, assignees[assignee]));
-        }
-      }
+      /***********************************************************************
+          I am leaving this here b/c it is a great way to find 
+          all tasks in all projects that belong to a specified 
+          user to make this work : uncomment it and 
+          change "this" to "collection" in both places on the foreach
+          loop. [JH2]
+      ***********************************************************************/
+      // var q = SC.Query.create({
+      //   recordType: Tasks.Task, 
+      //   conditions: "assignee = %@",
+      //   parameters: [selectedObj]
+      // });
+      // var collection = Tasks.store.findAll(q);
+      
+      /***********************************************************************
+         If you uncomment the SC.Query above uncomment this as well. [JH2]
+      ***********************************************************************/
+      
+      // for(assignee in assignees){ // list unassigned tasks first
+      //   if(assignees.hasOwnProperty(assignee) && assignee === Tasks.USER_UNASSIGNED) {
+      //     ret.push(this._createNodeHash(assignee, assignees[assignee]));
+      //   }
+      // }
+      // for(assignee in assignees){ // list all assigned tasks
+      //   if(assignees.hasOwnProperty(assignee) && assignee !== Tasks.USER_UNASSIGNED) {
+      //     ret.push(this._createNodeHash(assignee, assignees[assignee]));
+      //   }
+      // }
     }else{
       this.forEach(
         function(rec){
