@@ -16,7 +16,7 @@
                 <td><a class="nav" href="index.xml">API Index</a></td>
             </tr>
         </table>
-        <h1>Project Orion API Index</h1>
+        <h1>Tasks Project API Index</h1>
         <xsl:if test="resource">
             <h3>Resources</h3>
             <ul>

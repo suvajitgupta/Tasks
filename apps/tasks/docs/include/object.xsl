@@ -7,7 +7,7 @@
 <xsl:template match="object">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title>Project Orion API: <xsl:value-of select="@name"/></title>
+        <title>Tasks Project API: <xsl:value-of select="@name"/></title>
         <link href="include/api.css" rel="stylesheet" type="text/css"/>
         <script language="javascript" src="include/api.js"></script>
     </head>
