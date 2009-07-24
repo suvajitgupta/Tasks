@@ -35,7 +35,6 @@ v Set bottom toolbar button enablement based on having a selection [SG] <EO> @Do
 ^ Append "?" for range-based subtotals including unknown efforts [SG] <SE>
 ^ Allow drag-n-drop reordering [SC] $Bug
 ^ Allow drag-n-drop reassignment [SG] <MB>
-- Add Search box in top toolbar: support type-ahead, wildcards, cancel/reset [SG] <DC> @Active
 v Add context menu & hotkeys to Edit/Cut/Copy/Paste/Delete/Duplicate a task [SG] <JL>
 v Add hover tooltip showing Description [SG] <EG>
 
@@ -67,22 +66,24 @@ v Add hover tooltip on dialog title showing number of Users [SG] <EG>
 "App" Manager
 v Add summary next to application title showing number of tasks for selected Project [SG] <MB> @Done
 v Add hover tooltip on application title showing number of Projects [SG] <EG>
-^ Add User selection combo box in top Toolbar ("All" is default choice) [SG] <JH2> @Active
-- Add "Export" button in top Toolbar (using TXT file format) [SG] <SE> @Done
-- Add "Import" button in top Toolbar (using TXT file format) [SG] <SE> @Active
+^ Add User selection combo box in top toolbar ("All" is default choice) [SG] <JH2> @Active
+^ Add Search box in top toolbar: support type-ahead, wildcards, cancel/reset [SG] <DC> @Active
+- Add Undo/Redo hotkeys & buttons in top toolbar (till last Save) [SG] <SE>
+- Add "Import" button in top toolbar (using TXT file format) [SG] <SE> @Active
+- Add "Export" button in top toolbar (using TXT file format) [SG] <SE> @Done
 - Add "Save" button in top toolbar [SG] <SE> @Active
+v Add Online Help button in top Toolbar & modal Help dialog [SG] @Active
 v Add "X" button to exit in top toolbar [SG] <SE> @Active
 v Prompt user to save changes before exiting [SG] <SE>
-- Add Undo/Redo hotkeys & buttons in top toolbar (till last Save) [SG] <SE>
-v Add Online Help button in top Toolbar & modal Help dialog [SG] @Active
 - Restore application settings/state from last login [SG] <SE>
 
 Server
-- Implement REST API & server-side data validation checks [SE] <SG>
-- Build persistence server (using Ruby) [MB] <SG>
-- Add local persistence for single user mode [SE] <MB>
-- Support multi-user mode using Transaction Time [SE] <EO>
+^ Build persistence server (using Persevere) [SE] <SG>
+- Build persistence server (using Joyent) [MB] <SG>
 - Add Server-side authorization [SE] <SG>
+- Implement server-side data validation checks [SE] <SG>
+- Add local persistence for single user mode (suing Google Gears) [MB] <MB>
+v Facilitae multi-user mode using Transaction Time [SE] <EO>
 
 Hardening/Styling
 - Perform I18N and L10N (test with reversed strings) [SG] <JH2> @Active

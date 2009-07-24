@@ -61,8 +61,7 @@ Tasks.mainPage = SC.Page.design({
         emptyName: "_All".loc(),
         localize: YES,
         objects: Tasks.User.FIXTURES,
-        valueBinding: 'Tasks.assignmentsController.assigneeSelection' // TODO: [SG] Add "All" - the default, and populate from store/not fixtures
-        // TODO: [SG] assign a valueBinding & implement code to only show tasks for selected user
+        valueBinding: 'Tasks.assignmentsController.assigneeSelection'
       }),
       
       SC.TextFieldView.design({
