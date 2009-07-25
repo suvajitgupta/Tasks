@@ -17,6 +17,7 @@ SC.stringsFor('English', {
   '_Tasks': "TASKS",
   '_Welcome': "Welcome",
   '_User:': "User:",
+  "_All user": "All Users",
   '_SearchHint': "Type here to search for tasks...",
   '_Save': "Save",
   '_Import': "Import",
@@ -45,6 +46,6 @@ SC.stringsFor('English', {
   '_Unassigned': "Unassigned",
   '_Manager': "Manager",
   '_Developer': "Developer",
-  '_Tester': "Tester",
-  "_All": "All Users"
+  '_Tester': "Tester"
+
 });

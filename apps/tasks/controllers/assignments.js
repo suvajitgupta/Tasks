@@ -99,11 +99,11 @@ Tasks.assignmentsController = SC.ArrayController.create(
       }
     }
       
-    this.set('assignedTasks',SC.Object.create({ treeItemChildren: ret, treeItemIsExpanded: YES }));
+    this.set('assignedTasks', SC.Object.create({ treeItemChildren: ret, treeItemIsExpanded: YES }));
     
   },
   
-  _contenHasChanged: function(){
+  _contentHasChanged: function(){
     this._assignments();
   }.observes('content'),
   

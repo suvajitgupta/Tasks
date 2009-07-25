@@ -57,9 +57,8 @@ Tasks.mainPage = SC.Page.design({
       SC.SelectFieldView.design({
         layout: { centerY: 0, height: 24, left: 335, width: 150 },
         nameKey: 'name',
-        //valueKey: 'id', // I set this to "id" but we can remove it if we want the entire object [JH2]
-        emptyName: "_All".loc(),
         localize: YES,
+        emptyName: "_All Users".loc(),
         objects: Tasks.User.FIXTURES,
         valueBinding: 'Tasks.assignmentsController.assigneeSelection'
       }),
