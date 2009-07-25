@@ -19,31 +19,26 @@ Tasks.assignmentsController = SC.ArrayController.create(
   assigneeSelection: null,
   searchFilter: null,
   
-  /*_showAllAssignments: function() { // show all tasks for a selected user across all projects
+  _showAllAssignments: function() { // show all tasks for a selected user across all projects
     
-    var q = SC.Query.create({
+    var store = Tasks.get('store');
+    var selectedAssignee = Tasks.User.find(store, selectedAssignee.id);
+    var assignments = store.findAll(SC.Query.create({
       recordType: Tasks.Task, 
       conditions: "assignee = %@",
-      parameters: [selectedObj]
-    });
-    var collection = Tasks.store.findAll(q);
+      parameters: [selectedAssignee]
+    }));
     
-    for(assignee in assignees){ // list unassigned tasks first
-      if(assignees.hasOwnProperty(assignee) && assignee === Tasks.USER_UNASSIGNED) {
-        ret.push(this._createAssignmentNodeHash(assignee, assignees[assignee]));
-      }
-    }
-    for(assignee in assignees){ // list all assigned tasks
-      if(assignees.hasOwnProperty(assignee) && assignee !== Tasks.USER_UNASSIGNED) {
-        ret.push(this._createAssignmentNodeHash(assignee, assignees[assignee]));
-      }
-    }
+    var ret = [];
+    var selectedAssigneeName = selectedAssignee.get('displayName');
+    ret.push(this._createAssignmentNodeHash(selectedAssigneeName, assignments));
+    this.set('assignedTasks', SC.Object.create({ treeItemChildren: ret, treeItemIsExpanded: YES }));
     
-  },*/
+  },
   
   _showAssignments: function() { // show tasks for selected user that matches search filter
     
-    var assignees = {}, user, assignee, tasks, ret = [];
+    var assignees = {}, assignee, user, tasks, ret = [];
     this.forEach( // group tasks by user & separate unassigned tasks
       function(rec){
         user = rec.get('assignee');
@@ -56,7 +51,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     var selectedAssignee = this.get('assigneeSelection');
     if(selectedAssignee){ // only show tasks for selected user
       
-      var selectedUserName = Tasks.User.find(Tasks.store, selectedAssignee.id).get('displayName');
+      var selectedUserName = Tasks.User.find(Tasks.get('store'), selectedAssignee.id).get('displayName');
       for(assignee in assignees){ // list all assigned tasks
         if(assignees.hasOwnProperty(assignee) && assignee === selectedUserName) {
           ret.push(this._createAssignmentNodeHash(assignee, assignees[assignee]));
@@ -125,7 +120,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
       }
     });    
     this.set('content', finalContent);  
-  }.observes('search'),
+  }.observes('searchFilter'),
   
   /*
     Remove all crap that can mess up our RegEx
@@ -137,7 +132,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
   },
   
   _doesSearchValueMatch: function(value){
-    var s = this.get('search') || '';
+    var s = this.get('searchFilter') || '';
     s = this._sanitizeSearchString(s);
     var rx = new RegExp(s,'i');
     return value.match(rx);
