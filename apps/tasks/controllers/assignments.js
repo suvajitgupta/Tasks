@@ -82,6 +82,12 @@ Tasks.assignmentsController = SC.ArrayController.create(
     
   },
   
+  _sanitizeSearchFilter: function(str){
+    var metaCharacters = [ '/', '.', '*', '+', '?', '|', '(', ')', '[', ']', '{', '}', '\\' ];
+    var s = new RegExp('(\\' + metaCharacters.join('|\\') + ')', 'g');
+    return str? str.replace(s, '\\$1') : '';
+  },
+  
   _createAssignmentNodeHash: function(assignee, tasks) {
     return SC.Object.create({
       displayName: assignee,
@@ -98,30 +104,8 @@ Tasks.assignmentsController = SC.ArrayController.create(
     this._showAssignments();
   }.observes('assigneeSelection'),
   
-  
   _searchFilterHasChanged: function(){ // FIXME: [SG] restore after clearing search
-    
-    var sf = this.get('searchFilter');
-    sf = this._sanitizeSearchFilter(sf);
-    var rx = new RegExp(sf, 'i');
-    
-    var filteredTasks = [];
-    var pid = Tasks.projectController.get('id');
-    var projectTasks = Tasks.projectsController.getTasksByProjectId(pid);   
-    projectTasks.forEach(function(item){ 
-      var name = item.get('name') || '';
-      if(name.match(rx)) {
-        filteredTasks.pushObject(item);
-      }
-    });    
-    this.set('content', filteredTasks);
-    
-  }.observes('searchFilter'),
+    this._showAssignments();
+  }.observes('searchFilter')
   
-  _sanitizeSearchFilter: function(str){
-    var metaCharacters = [ '/', '.', '*', '+', '?', '|', '(', ')', '[', ']', '{', '}', '\\' ];
-    var s = new RegExp('(\\' + metaCharacters.join('|\\') + ')', 'g');
-    return str? str.replace(s, '\\$1') : '';
-  }
-
 });
