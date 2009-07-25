@@ -37,15 +37,20 @@ Tasks.assignmentsController = SC.ArrayController.create(
   
   _showAssignments: function() { // show tasks for selected user that matches search filter
     
-    var assignees = {}, assignee, user, tasks, ret = [];
+    var sf = this.get('searchFilter');
+    sf = this._sanitizeSearchFilter(sf);
+    var rx = new RegExp(sf, 'i');
+    
+    var assignees = {}, assignee, ret = [];
     this.forEach( // group tasks by user & separate unassigned tasks
       function(rec){
-        user = rec.get('assignee');
+        var user = rec.get('assignee');
         assignee = user? user.get('displayName') : Tasks.USER_UNASSIGNED;
-        tasks = assignees[assignee];
+        var tasks = assignees[assignee];
         if(!tasks) assignees[assignee] = tasks = [];
-        tasks.push(rec);
-      },this);
+        var name = rec.get('name');
+        if(name.match(rx)) tasks.push(rec);
+      }, this);
   
     var selectedAssignee = this.get('assigneeSelection');
     if(selectedAssignee){ // only show tasks for selected user
