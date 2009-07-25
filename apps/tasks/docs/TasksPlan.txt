@@ -66,8 +66,8 @@ v Add hover tooltip on dialog title showing number of Users [SG] <EG>
 "App" Manager
 v Add summary next to application title showing number of tasks for selected Project [SG] <MB> @Done
 v Add hover tooltip on application title showing number of Projects [SG] <EG>
-^ Add User selection combo box in top toolbar ("All" is default choice) [SG] <JH2> @Active
-^ Add Search box in top toolbar: support type-ahead, wildcards, cancel/reset [SG] <DC> @Active
+^ Add User selection combo box in top toolbar ("All" is default choice) [SG] <JH2> @Done
+^ Add Search box in top toolbar: support type-ahead searching [SG] <DC> @Done
 - Add Undo/Redo hotkeys & buttons in top toolbar (till last Save) [SG] <SE>
 - Add "Import" button in top toolbar (using TXT file format) [SG] <SE> @Active
 - Add "Export" button in top toolbar (using TXT file format) [SG] <SE> @Done
