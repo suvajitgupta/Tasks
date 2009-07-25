@@ -98,15 +98,15 @@ Tasks.assignmentsController = SC.ArrayController.create(
     });
   },
   
-  _contentHasChanged: function(){
+  _contentHasChanged: function() {
     this.showAssignments();
   }.observes('content'),
   
-  _assigneeHasChanged: function(){
+  _assigneeHasChanged: function() {
     this.showAssignments();
   }.observes('assigneeSelection'),
   
-  _searchFilterHasChanged: function(){ // FIXME: [SG] restore after clearing search
+  _searchFilterHasChanged: function() {
     this.showAssignments();
   }.observes('searchFilter')
   
