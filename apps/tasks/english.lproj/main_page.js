@@ -58,15 +58,15 @@ Tasks.mainPage = SC.Page.design({
         layout: { centerY: 0, height: 24, left: 335, width: 150 },
         nameKey: 'name',
         localize: YES,
-        emptyName: "_All Users".loc(),
-        objects: Tasks.User.FIXTURES,
+        emptyName: "_All Users".loc(), // FIXME: [JH2] fix empty line after this item in dropdown
+        objects: Tasks.User.FIXTURES, // TODO: [JH2] bind to a User Controller that pulls users from store
         valueBinding: 'Tasks.assignmentsController.assigneeSelection'
       }),
       
       SC.TextFieldView.design({
         layout: { centerY: 0, height: 16, left: 500, width: 250 },
         hint: "_SearchHint".loc(),
-        valueBinding: 'Tasks.assignmentsController.search'
+        valueBinding: 'Tasks.assignmentsController.searchFilter'
       }),
       
       SC.ButtonView.design({

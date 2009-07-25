@@ -17,107 +17,87 @@ Tasks.assignmentsController = SC.ArrayController.create(
   contentBinding: 'Tasks.projectController.tasks',
   assignedTasks: null,
   assigneeSelection: null,
+  searchFilter: null,
   
-  _assignments: function() {
-    console.log('assigneeSelection is %@'.fmt(this.get('assigneeSelection')));
-    var selected = this.get('assigneeSelection');
-    var selectedObj;
-    var assignees = {}, user, assignee, tasks, ret;
-    if(selected){
-      // Find the user record
-      selectedObj = Tasks.User.find(Tasks.store, selected.id);
-      
-      // Then loop using selectedObj.displayName as the condition.
-      this.forEach(
-        function(rec){
-          user = rec.get('assignee');
-          assignee = user? user.get('displayName') : Tasks.USER_UNASSIGNED;
-          tasks = assignees[assignee];
-          if(!tasks) assignees[assignee] = tasks = [];
-          tasks.push(rec);
-        },this);
+  /*_showAllAssignments: function() { // show all tasks for a selected user across all projects
     
-      ret = [];
+    var q = SC.Query.create({
+      recordType: Tasks.Task, 
+      conditions: "assignee = %@",
+      parameters: [selectedObj]
+    });
+    var collection = Tasks.store.findAll(q);
+    
+    for(assignee in assignees){ // list unassigned tasks first
+      if(assignees.hasOwnProperty(assignee) && assignee === Tasks.USER_UNASSIGNED) {
+        ret.push(this._createAssignmentNodeHash(assignee, assignees[assignee]));
+      }
+    }
+    for(assignee in assignees){ // list all assigned tasks
+      if(assignees.hasOwnProperty(assignee) && assignee !== Tasks.USER_UNASSIGNED) {
+        ret.push(this._createAssignmentNodeHash(assignee, assignees[assignee]));
+      }
+    }
+    
+  },*/
+  
+  _showAssignments: function() { // show tasks for selected user that matches search filter
+    
+    var assignees = {}, user, assignee, tasks, ret = [];
+    this.forEach( // group tasks by user & separate unassigned tasks
+      function(rec){
+        user = rec.get('assignee');
+        assignee = user? user.get('displayName') : Tasks.USER_UNASSIGNED;
+        tasks = assignees[assignee];
+        if(!tasks) assignees[assignee] = tasks = [];
+        tasks.push(rec);
+      },this);
+  
+    var selectedAssignee = this.get('assigneeSelection');
+    if(selectedAssignee){ // only show tasks for selected user
       
+      var selectedUserName = Tasks.User.find(Tasks.store, selectedAssignee.id).get('displayName');
       for(assignee in assignees){ // list all assigned tasks
-        if(assignees.hasOwnProperty(assignee) && assignee === selectedObj.get('displayName')) {
-          ret.push(this._createNodeHash(assignee, assignees[assignee]));
+        if(assignees.hasOwnProperty(assignee) && assignee === selectedUserName) {
+          ret.push(this._createAssignmentNodeHash(assignee, assignees[assignee]));
         }
       }
       
-      /***********************************************************************
-          I am leaving this here b/c it is a great way to find 
-          all tasks in all projects that belong to a specified 
-          user to make this work : uncomment it and 
-          change "this" to "collection" in both places on the foreach
-          loop. [JH2]
-      ***********************************************************************/
-      // var q = SC.Query.create({
-      //   recordType: Tasks.Task, 
-      //   conditions: "assignee = %@",
-      //   parameters: [selectedObj]
-      // });
-      // var collection = Tasks.store.findAll(q);
+    } else { // show tasks for all users
       
-      /***********************************************************************
-         If you uncomment the SC.Query above uncomment this as well. [JH2]
-      ***********************************************************************/
-      
-      // for(assignee in assignees){ // list unassigned tasks first
-      //   if(assignees.hasOwnProperty(assignee) && assignee === Tasks.USER_UNASSIGNED) {
-      //     ret.push(this._createNodeHash(assignee, assignees[assignee]));
-      //   }
-      // }
-      // for(assignee in assignees){ // list all assigned tasks
-      //   if(assignees.hasOwnProperty(assignee) && assignee !== Tasks.USER_UNASSIGNED) {
-      //     ret.push(this._createNodeHash(assignee, assignees[assignee]));
-      //   }
-      // }
-    }else{
-      this.forEach(
-        function(rec){
-          user = rec.get('assignee');
-          assignee = user? user.get('displayName') : Tasks.USER_UNASSIGNED;
-          tasks = assignees[assignee];
-          if(!tasks) assignees[assignee] = tasks = [];
-          tasks.push(rec);
-        }, 
-        this
-      );
-    
-      ret = [];
       for(assignee in assignees){ // list unassigned tasks first
         if(assignees.hasOwnProperty(assignee) && assignee === Tasks.USER_UNASSIGNED) {
-          ret.push(this._createNodeHash(assignee, assignees[assignee]));
+          ret.push(this._createAssignmentNodeHash(assignee, assignees[assignee]));
         }
       }
       
       for(assignee in assignees){ // list all assigned tasks
         if(assignees.hasOwnProperty(assignee) && assignee !== Tasks.USER_UNASSIGNED) {
-          ret.push(this._createNodeHash(assignee, assignees[assignee]));
+          ret.push(this._createAssignmentNodeHash(assignee, assignees[assignee]));
         }
       }
+      
     }
       
     this.set('assignedTasks', SC.Object.create({ treeItemChildren: ret, treeItemIsExpanded: YES }));
     
   },
   
-  _contentHasChanged: function(){
-    this._assignments();
-  }.observes('content'),
-  
-  _assigneeDidChange: function(){
-    this._assignments();
-  }.observes('assigneeSelection'),
-  
-  _createNodeHash: function(assignee, tasks) {
+  _createAssignmentNodeHash: function(assignee, tasks) {
     return SC.Object.create({
       displayName: assignee,
       treeItemChildren: tasks,
       treeItemIsExpanded: YES
     });
   },
+  
+  _contentHasChanged: function(){
+    this._showAssignments();
+  }.observes('content'),
+  
+  _assigneeDidChange: function(){
+    this._showAssignments();
+  }.observes('assigneeSelection'),
   
   
   /*
