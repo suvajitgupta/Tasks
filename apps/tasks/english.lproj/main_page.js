@@ -39,14 +39,14 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       Tasks.WelcomeView.design({
-        layout: { centerY: 0, height: 30, left: 160, width: 110 },
+        layout: { centerY: 2, height: 30, left: 160, width: 95 },
         textAlign: SC.ALIGN_RIGHT,
-        controlSize: SC.TINY_CONTROL_SIZE,
+        controlSize: SC.SMALL_CONTROL_SIZE,
         valueBinding: 'Tasks.user'
       }),
       
       SC.ButtonView.design({
-        layout: { centerY: 0, height: 24, left: 270, width: 50 },
+        layout: { centerY: 0, height: 24, left: 265, width: 50 },
         title: "_User:".loc(),
         titleMinWidth: 0,
         toolTip: 'Manage Users',
@@ -55,7 +55,7 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       SC.SelectFieldView.design({
-        layout: { centerY: 0, height: 24, left: 325, width: 150 },
+        layout: { centerY: 0, height: 24, left: 320, width: 150 },
         nameKey: 'name',
         localize: YES,
         emptyName: "_All Users".loc(), // FIXME: [JH2] fix empty line after this item in dropdown
@@ -64,7 +64,7 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       SC.TextFieldView.design({
-        layout: { centerY: 0, height: 16, left: 490, width: 250 },
+        layout: { centerY: 0, height: 16, left: 485, width: 250 },
         hint: "_SearchHint".loc(),
         valueBinding: 'Tasks.assignmentsController.searchFilter'
       }),

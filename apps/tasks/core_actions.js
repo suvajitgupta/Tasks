@@ -33,7 +33,7 @@ Tasks.mixin({
     for (var i = 0; i < len; i++) {
       var user = users.objectAt(i);
       if (loginName === user.get('loginName')) {
-        Tasks.set('user', user.get('name'));
+        Tasks.set('user', loginName);
         return true;
       }
     }
@@ -372,6 +372,7 @@ Tasks.mixin({
 
     // Create a new task with a default name
     // TODO: [SG] add new project right after selected item    
+    // TODO: [SG] Get selected task and get its assignee, then create new task with same assignee
 
     var store = this.get('store');
     var task = store.createRecord(Tasks.Task, { name: Tasks.NEW_TASK_NAME });
@@ -380,8 +381,6 @@ Tasks.mixin({
     var ac = this.get('assignmentsController');
     ac.addObject(task); // FIXME: [SC] Why do we have to manually add to the controller instead of store notifying?
     ac.showAssignments();
-
-    // TODO: [SG] Get selected task and get its assignee, then create new task with same assignee
 
     // TODO: [SG] Begin editing newly created item.
 
@@ -405,6 +404,8 @@ Tasks.mixin({
       var ac = this.get('assignmentsController');      
       ac.removeObject(task); // FIXME: [SC] Why do we have to manually remove from the controller instead of store notifying?
       ac.showAssignments();
+      
+      // TODO: [SG] Select task after deleted task, if any
       
     }
   },
