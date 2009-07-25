@@ -179,7 +179,7 @@ Tasks.Task.FIXTURES = [
   },
 
   { id: 18,
-  name: "Summary for task eightteen",
+  name: "Summary for task eighteen",
   priority: Tasks.TASK_PRIORITY_HIGH,
   status: Tasks.TASK_STATUS_DONE,
   validation: Tasks.TASK_VALIDATION_PASSED,
