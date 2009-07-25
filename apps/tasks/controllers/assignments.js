@@ -22,16 +22,15 @@ Tasks.assignmentsController = SC.ArrayController.create(
   _showAllAssignments: function() { // show all tasks for a selected user across all projects
     
     var store = Tasks.get('store');
-    var selectedAssignee = Tasks.User.find(store, selectedAssignee.id);
+    var selectedUser = Tasks.User.find(store, this.get('assigneeSelection').id);
     var assignments = store.findAll(SC.Query.create({
       recordType: Tasks.Task, 
       conditions: "assignee = %@",
-      parameters: [selectedAssignee]
+      parameters: [selectedUser]
     }));
     
     var ret = [];
-    var selectedAssigneeName = selectedAssignee.get('displayName');
-    ret.push(this._createAssignmentNodeHash(selectedAssigneeName, assignments));
+    ret.push(this._createAssignmentNodeHash(selectedUser.get('displayName'), assignments));
     this.set('assignedTasks', SC.Object.create({ treeItemChildren: ret, treeItemIsExpanded: YES }));
     
   },
@@ -90,51 +89,39 @@ Tasks.assignmentsController = SC.ArrayController.create(
     this._showAssignments();
   }.observes('content'),
   
-  _assigneeDidChange: function(){
+  _assigneeHasChanged: function(){
     this._showAssignments();
   }.observes('assigneeSelection'),
   
   
-  /*
-    Updates my content based on the search property
+  _searchFilterHasChanged: function(){ // FIXME: [SG] restore after clearing search
     
-    FIXME: [DC, SG, SE]
-    
-    BUG: How do we 'reset' the tasks back to their original state
-    without re-loading the entire Projects tree?
-    
-  */
-  _search_observer: function(){    
     var that = this;
     var finalContent = [];
     var pid = Tasks.projectController.get('id');
     
-    //TODO: this is bugged, we need a way to query the original array of tasks..
-    var originalTasks = Tasks.projectsController.getTasksByProjectId(pid); //many array    
-
+    // FIXME: [SG] this is buggy, we need a way to query the original array of tasks..
+    var originalTasks = Tasks.projectsController.getTasksByProjectId(pid); // many array    
     originalTasks.forEach(function(item){ 
-      //console.log(item); 
       var name = item.get('name') || '';
-      if(that._doesSearchValueMatch(name)){
+      if(that._matchSearchFilter(name)){
         finalContent.pushObject(item);
       }
     });    
-    this.set('content', finalContent);  
+    this.set('content', finalContent);
+    
   }.observes('searchFilter'),
   
-  /*
-    Remove all crap that can mess up our RegEx
-  */
   _sanitizeSearchString: function(str){
     var specials = [ '/', '.', '*', '+', '?', '|', '(', ')', '[', ']', '{', '}', '\\' ];
     var s = new RegExp('(\\' + specials.join('|\\') + ')', 'g');
-    return str ? str.replace(s, '\\$1') : '';
+    return str? str.replace(s, '\\$1') : '';
   },
   
-  _doesSearchValueMatch: function(value){
+  _matchSearchFilter: function(value){
     var s = this.get('searchFilter') || '';
     s = this._sanitizeSearchString(s);
-    var rx = new RegExp(s,'i');
+    var rx = new RegExp(s, 'i');
     return value.match(rx);
   }
 
