@@ -23,14 +23,14 @@ Tasks.assignmentsController = SC.ArrayController.create(
     
     var store = Tasks.get('store');
     var selectedUser = Tasks.User.find(store, this.get('assigneeSelection').id);
-    var assignments = store.findAll(SC.Query.create({
+    var tasks = store.findAll(SC.Query.create({
       recordType: Tasks.Task, 
       conditions: "assignee = %@",
       parameters: [selectedUser]
     }));
     
     var ret = [];
-    ret.push(this._createAssignmentNodeHash(selectedUser.get('displayName'), assignments));
+    ret.push(this._createAssignmentNodeHash(selectedUser.get('displayName'), tasks));
     this.set('assignedTasks', SC.Object.create({ treeItemChildren: ret, treeItemIsExpanded: YES }));
     
   },
