@@ -96,13 +96,16 @@ Tasks.assignmentsController = SC.ArrayController.create(
   
   _searchFilterHasChanged: function(){ // FIXME: [SG] restore after clearing search
     
-    var that = this;
+    var sf = this.get('searchFilter');
+    sf = this._sanitizeSearchFilter(sf);
+    var rx = new RegExp(sf, 'i');
+    
     var filteredTasks = [];
     var pid = Tasks.projectController.get('id');
     var projectTasks = Tasks.projectsController.getTasksByProjectId(pid);   
     projectTasks.forEach(function(item){ 
       var name = item.get('name') || '';
-      if(that._matchSearchFilter(name)){
+      if(name.match(rx)) {
         filteredTasks.pushObject(item);
       }
     });    
@@ -110,17 +113,10 @@ Tasks.assignmentsController = SC.ArrayController.create(
     
   }.observes('searchFilter'),
   
-  _sanitizeSearchString: function(str){
+  _sanitizeSearchFilter: function(str){
     var metaCharacters = [ '/', '.', '*', '+', '?', '|', '(', ')', '[', ']', '{', '}', '\\' ];
     var s = new RegExp('(\\' + metaCharacters.join('|\\') + ')', 'g');
     return str? str.replace(s, '\\$1') : '';
-  },
-  
-  _matchSearchFilter: function(value){
-    var s = this.get('searchFilter') || '';
-    s = this._sanitizeSearchString(s);
-    var rx = new RegExp(s, 'i');
-    return value.match(rx);
   }
 
 });
