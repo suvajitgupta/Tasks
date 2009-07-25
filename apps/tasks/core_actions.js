@@ -379,7 +379,7 @@ Tasks.mixin({
     
     var ac = this.get('assignmentsController');
     ac.addObject(task); // FIXME: [SC] Why do we have to manually add to the controller instead of store notifying?
-    // FIXME: [JH2] how to make assignments redraw after this change?
+    ac.showAssignments();
 
     // TODO: [SG] Get selected task and get its assignee, then create new task with same assignee
 
@@ -404,7 +404,8 @@ Tasks.mixin({
       tc.set('selection', null);
       var ac = this.get('assignmentsController');      
       ac.removeObject(task); // FIXME: [SC] Why do we have to manually remove from the controller instead of store notifying?
-      // FIXME: [JH2] how to make assignments redraw after this change?
+      ac.showAssignments();
+      
     }
   },
   

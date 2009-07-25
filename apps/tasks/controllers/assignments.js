@@ -19,7 +19,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
   assigneeSelection: null,
   searchFilter: null,
   
-  _showAllAssignments: function() { // show all tasks for a selected user across all projects
+  showAllAssignments: function() { // show all tasks for a selected user across all projects
     
     var store = Tasks.get('store');
     var selectedUser = Tasks.User.find(store, this.get('assigneeSelection').id);
@@ -35,7 +35,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     
   },
   
-  _showAssignments: function() { // show tasks for selected user that matches search filter
+  showAssignments: function() { // show tasks for selected user that matches search filter
     
     var sf = this.get('searchFilter');
     sf = this._escapeMetacharacters(sf);
@@ -99,15 +99,15 @@ Tasks.assignmentsController = SC.ArrayController.create(
   },
   
   _contentHasChanged: function(){
-    this._showAssignments();
+    this.showAssignments();
   }.observes('content'),
   
   _assigneeHasChanged: function(){
-    this._showAssignments();
+    this.showAssignments();
   }.observes('assigneeSelection'),
   
   _searchFilterHasChanged: function(){ // FIXME: [SG] restore after clearing search
-    this._showAssignments();
+    this.showAssignments();
   }.observes('searchFilter')
   
 });
