@@ -38,7 +38,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
   _showAssignments: function() { // show tasks for selected user that matches search filter
     
     var sf = this.get('searchFilter');
-    sf = this._sanitizeSearchFilter(sf);
+    sf = this._escapeMetacharacters(sf);
     var rx = new RegExp(sf, 'i');
     
     var assignees = {}, assignee, ret = [];
@@ -49,7 +49,9 @@ Tasks.assignmentsController = SC.ArrayController.create(
         var tasks = assignees[assignee];
         if(!tasks) assignees[assignee] = tasks = [];
         var name = rec.get('name');
-        if(name.match(rx)) tasks.push(rec);
+        if(name.match(rx)) { // filter tasks that match search filter
+          tasks.push(rec);
+        }
       }, this);
   
     var selectedAssignee = this.get('assigneeSelection');
@@ -82,7 +84,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     
   },
   
-  _sanitizeSearchFilter: function(str){
+  _escapeMetacharacters: function(str){
     var metaCharacters = [ '/', '.', '*', '+', '?', '|', '(', ')', '[', ']', '{', '}', '\\' ];
     var s = new RegExp('(\\' + metaCharacters.join('|\\') + ')', 'g');
     return str? str.replace(s, '\\$1') : '';
