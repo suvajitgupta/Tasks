@@ -46,7 +46,7 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       SC.ButtonView.design({
-        layout: { centerY: 0, height: 24, left: 270, width: 55 },
+        layout: { centerY: 0, height: 24, left: 270, width: 50 },
         title: "_User:".loc(),
         titleMinWidth: 0,
         toolTip: 'Manage Users',
@@ -55,7 +55,7 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       SC.SelectFieldView.design({
-        layout: { centerY: 0, height: 24, left: 335, width: 150 },
+        layout: { centerY: 0, height: 24, left: 325, width: 150 },
         nameKey: 'name',
         localize: YES,
         emptyName: "_All Users".loc(), // FIXME: [JH2] fix empty line after this item in dropdown
@@ -64,13 +64,13 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       SC.TextFieldView.design({
-        layout: { centerY: 0, height: 16, left: 500, width: 250 },
+        layout: { centerY: 0, height: 16, left: 490, width: 250 },
         hint: "_SearchHint".loc(),
         valueBinding: 'Tasks.assignmentsController.searchFilter'
       }),
       
       SC.ButtonView.design({
-        layout: { centerY: 0, height: 24, right: 210, width: 60 },
+        layout: { centerY: 0, height: 24, right: 195, width: 60 },
         title:  "_Import".loc(),
         titleMinWidth: 0,
         toolTip: 'Import Projects/Tasks from a file',
@@ -79,7 +79,7 @@ Tasks.mainPage = SC.Page.design({
       }),
 
       SC.ButtonView.design({
-        layout: { centerY: 0, height: 24, right: 145, width: 60 },
+        layout: { centerY: 0, height: 24, right: 130, width: 60 },
         title:  "_Export".loc(),
         titleMinWidth: 0,
         toolTip: 'Export Projects/Tasks to a file',
@@ -88,7 +88,7 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       SC.ButtonView.design({
-        layout: { centerY: 0, height: 24, right: 80, width: 60 },
+        layout: { centerY: 0, height: 24, right: 75, width: 50 },
         title: "_Save".loc(),
         titleMinWidth: 0,
         // TODO: [SG] add isEnabledBinding to track changes,
