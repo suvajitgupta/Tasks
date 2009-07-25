@@ -97,24 +97,22 @@ Tasks.assignmentsController = SC.ArrayController.create(
   _searchFilterHasChanged: function(){ // FIXME: [SG] restore after clearing search
     
     var that = this;
-    var finalContent = [];
+    var filteredTasks = [];
     var pid = Tasks.projectController.get('id');
-    
-    // FIXME: [SG] this is buggy, we need a way to query the original array of tasks..
-    var originalTasks = Tasks.projectsController.getTasksByProjectId(pid); // many array    
-    originalTasks.forEach(function(item){ 
+    var projectTasks = Tasks.projectsController.getTasksByProjectId(pid);   
+    projectTasks.forEach(function(item){ 
       var name = item.get('name') || '';
       if(that._matchSearchFilter(name)){
-        finalContent.pushObject(item);
+        filteredTasks.pushObject(item);
       }
     });    
-    this.set('content', finalContent);
+    this.set('content', filteredTasks);
     
   }.observes('searchFilter'),
   
   _sanitizeSearchString: function(str){
-    var specials = [ '/', '.', '*', '+', '?', '|', '(', ')', '[', ']', '{', '}', '\\' ];
-    var s = new RegExp('(\\' + specials.join('|\\') + ')', 'g');
+    var metaCharacters = [ '/', '.', '*', '+', '?', '|', '(', ')', '[', ']', '{', '}', '\\' ];
+    var s = new RegExp('(\\' + metaCharacters.join('|\\') + ')', 'g');
     return str? str.replace(s, '\\$1') : '';
   },
   
