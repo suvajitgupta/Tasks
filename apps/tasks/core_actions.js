@@ -9,8 +9,14 @@ sc_require('core');
 
 Tasks.mixin({
   
-  // TODO: [SG] Should we be using parameters in any action functions?
+  /**
+   * Authenticate user trying to log in to Tasks application.
+   *
+   * @param {String} user's login name.
+   * @param {String} user's password.
+   */
   authenticate: function(loginName, password) {
+  // TODO: [SG] Should we be using parameters in any action functions?
     switch (this.state.a) {
       case 1:
         this.goState('a', 2);
@@ -26,7 +32,14 @@ Tasks.mixin({
     }
   },
   
-  _authenticateUser: function(loginName, password) { // TODO: [SG] implement server-based authentication
+  /**
+   * Implements user authentication logic.
+   *
+   * @param {String} user's login name.
+   * @param {String} user's password.
+   */
+  _authenticateUser: function(loginName, password) {
+    // TODO: [SG] implement server-based authentication
     var store = this.get('store');
     var users = Tasks.store.findAll(Tasks.User);
     var len = users.get('length');
@@ -40,6 +53,9 @@ Tasks.mixin({
     return false;
   },
   
+  /**
+   * Called after successful login.
+   */
   authenticationSuccess: function() {
     switch (this.state.a) {
       case 2:
@@ -53,6 +69,9 @@ Tasks.mixin({
     }
   },
 
+  /**
+   * Called after failed login.
+   */
   authenticationFailure: function() {
     switch (this.state.a) {
       case 2:
@@ -64,6 +83,9 @@ Tasks.mixin({
     }
   },
   
+  /**
+   * Load all data used by Tasks views.
+   */
   _loadData: function() {
     
     var store = this.get('store');
@@ -107,6 +129,9 @@ Tasks.mixin({
 
   },
 
+  /**
+   * Called after successful data load.
+   */
   dataLoadSuccess: function() {
     switch (this.state.a) {
       case 3:
@@ -117,6 +142,9 @@ Tasks.mixin({
     }
   },
   
+  /**
+   * Called after failed data load.
+   */
   dataLoadFailure: function() {
     switch (this.state.a) {
       case 3:
@@ -127,6 +155,9 @@ Tasks.mixin({
     }
   },
   
+  /**
+   * Import data from external text file.
+   */
   importData: function() {
     // TODO: [SG] implement view to prompt user for data to import (sample data hardcoded below for testing)
     var data = 
@@ -145,6 +176,11 @@ Tasks.mixin({
     this.get('assignmentsController').showAssignments();
   },
   
+  /**
+   * Parse data and create/load objects.
+   *
+   * @param {String} data to be parsed.
+   */
   _parseAndLoadData: function(data) { // TODO: [SE] create objects in store during data import
     var lines = data.split('\n');
     var store = this.get('store');
@@ -243,6 +279,9 @@ Tasks.mixin({
      }
   },
   
+  /**
+   * Export data to external text file.
+   */
   exportData: function() {
 
     var val, task, user, data = "# Tasks data export at " + new Date().format('MMM dd, yyyy hh:mm:ssa') + '\n\n';
@@ -288,38 +327,65 @@ Tasks.mixin({
     console.log(data);
   },
   
-  saveData: function() { // TODO: [SG] implement project data saving
+  /**
+   * Save modified data to persistent store.
+   */
+  saveData: function() {
+    // TODO: [SG] implement project data saving
     this._notImplemented ('saveData');
   },
   
-  openUserManager: function() { // TODO: [SG] implement open user manager
+  /**
+   * Launch User Manager dialog.
+   */
+  openUserManager: function() {
+    // TODO: [SG] implement open user manager
     this._notImplemented ('openUserManager');
   },
   
-  closeUserManager: function() { // TODO: [SG] implement close user manager
+  /**
+   * Exit User Manager dialog.
+   */
+  closeUserManager: function() {
+    // TODO: [SG] implement close user manager
     this._notImplemented ('closeUserManager');
   },
   
-  selectUser: function() { // TODO: [SG] implement user selection
-    this._notImplemented ('selectUser');
-  },
-  
-  showHelp: function() { // TODO: [SG] implement online help
+  /**
+   * Launch new browser/tab to display online help.
+   */
+  showHelp: function() {
+    // TODO: [SG] implement online help
     this._notImplemented ('showHelp');
   },
   
-  exit: function() { // TODO: [SG] implement logout
+  /**
+   * Handle application exiting request.
+   */
+  exit: function() {
+    // TODO: [SG] implement logout
     this._notImplemented ('exit');
   },
   
-  saveAndExit: function() { // TODO: [SG] implement save & exit
+  /**
+   * Save all changes before exiting application.
+   */
+  saveAndExit: function() {
+    // TODO: [SG] implement save & exit
     this._notImplemented ('saveAndExit');
   },
   
-  exitNoSave: function() { // TODO: [SG] implement exit w/o save
+  /**
+   * Exit application without saving changes.
+   */
+  exitNoSave: function() {
+    // TODO: [SG] implement exit w/o save
     this._notImplemented ('exitNoSave');
   },
   
+  /**
+   * Add a new project and start editing it in projects master list.
+   */
   addProject: function() {
     
     var pc = this.get('projectsController');
@@ -344,6 +410,9 @@ Tasks.mixin({
     // FIXME: [SC] when user changes name of New Project it doesn't change in ListView
   },
   
+  /**
+   * Delete selected project in master projects list.
+   */
   deleteProject: function() {
     
     var pc = this.get('projectsController');
@@ -362,6 +431,9 @@ Tasks.mixin({
     }
   },
   
+  /**
+   * Add a new task to tasks detail list.
+   */
   addTask: function() {
 
     // Create a new task with a default name
@@ -380,6 +452,9 @@ Tasks.mixin({
 
   },
   
+  /**
+   * Delete selected task in tasks detail list.
+   */
   deleteTask: function() {
     
     var tc = this.get('tasksController');
@@ -404,11 +479,19 @@ Tasks.mixin({
     }
   },
   
-  openTaskEditor: function() { // TODO: [SG] implement open Task editor
+  /**
+   * Launch task editor dialog.
+   */
+  openTaskEditor: function() {
+    // TODO: [SG] implement open Task editor
     this._notImplemented ('openTaskEditor');
   },
   
-  closeTaskEditor: function() { // TODO: [SG] implement close Task editor
+  /**
+   * Exit task editor dialog.
+   */
+  closeTaskEditor: function() {
+    // TODO: [SG] implement close Task editor
     this._notImplemented ('closeTaskEditor');
   },
   
@@ -423,6 +506,11 @@ Tasks.mixin({
     console.log('Action not handled in state %@[%@]: %@'.fmt(stateName, stateNum, action));
   },
   
+  /**
+   * Temporary callback to handle missing functionality.
+   *
+   * @param (String) name of unimmplemented function
+   */
   _notImplemented: function(functionName) {
     var prefix = '';
     if(functionName) {
