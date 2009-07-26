@@ -5,7 +5,8 @@
 
 /** 
 
-  This controller extracts the assigned Tasks for the selected Project
+  This controller manages what is displayed in the Tasks detail screen.
+  This is affected by the selected Project/User and the search criteria.
   
   @extends SC.ArrayController
   @author Joshua Holt

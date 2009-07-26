@@ -72,7 +72,6 @@ Tasks.mixin({
     
     // Prepend and populate the special "Inbox" project that will contain all unassigned tasks.
     projects.insertAt(0, this._createInbox());
-    var moreProjects = store.findAll(Tasks.Project);
  
     // TODO: [SE] Implement succsss/failure callbacks in the data source.
     /*
