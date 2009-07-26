@@ -171,7 +171,7 @@ Tasks.mixin({
     'v My third task @Active $Feature {12-14} %Passed\n' +
     ' \t \n' +
     'Your Project {12}\n' +
-    '- Your first task {2} @Risky\n';
+    '- Your first task {2} @NoIdea\n';
     this._parseAndLoadData(data);
     this.get('assignmentsController').showAssignments();
   },
@@ -182,11 +182,9 @@ Tasks.mixin({
    * @param {String} data to be parsed.
    */
   _parseAndLoadData: function(data) {
+    
     var lines = data.split('\n');
     var store = this.get('store');
-    var taskNamePattern = new RegExp('([\\w\\s]+)[\\s]*[\\{<\\[\\$@%]');
-    var taskEffortPattern = new RegExp('\{(\\d+)\}|\{(\\d+-\\d+)\}');
-    var taskStatusPattern = new RegExp('@([\\w\\s]+)');
     
     var currentProject = this.get('inbox');
     for (var i = 0; i < lines.length; i++) {
@@ -210,7 +208,7 @@ Tasks.mixin({
         var taskLine = line.slice(2);
         
         // extract task name
-        var taskNameMatches = taskNamePattern.exec(taskLine);
+        var taskNameMatches = /([\w\s]+)[\s]*[\{<\[\$@%]/.exec(taskLine);
         var taskName = taskLine;
         if (taskNameMatches) {
           taskName = taskNameMatches[1];
@@ -218,7 +216,7 @@ Tasks.mixin({
         var output = 'Task:\t\t' + taskName + ' of Priority: ' + taskPriority;
         
         // extract task effort
-        var taskEffortMatches = taskEffortPattern.exec(taskLine);
+        var taskEffortMatches = /\{(\d+)\}|\{(\d+-\d+)\}/.exec(taskLine);
         var taskEffort = null;
         if(taskEffortMatches) {
           taskEffort = taskEffortMatches[1]? taskEffortMatches[1] : taskEffortMatches[2];
@@ -226,11 +224,11 @@ Tasks.mixin({
         }
         
         // extract task status
-        var taskStatusMatches = taskStatusPattern.exec(taskLine);
+        var taskStatusMatches = /@([\w]+)/.exec(taskLine);
         var taskStatus = Tasks.TASK_STATUS_PLANNED;
         if(taskStatusMatches) {
           taskStatus = taskStatusMatches[1];
-          output += ' of Status: ' + taskStatus;
+          output += ' of Status: \"' + taskStatus + '\"';
         }
         
         console.log (output);
