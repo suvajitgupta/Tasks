@@ -8,28 +8,48 @@ Design/Planning
 | Tester - view Tasks that are done (read Release Notes in description field), validate Tasks (mark as Passed | Failed), submit bugs as Tasks
 ^ Create GUI Wireframes using Balsamiq [SG] <CS> @Done
 ^ Create GUI Statecharts using Omnigraffle [SG] <SE> @Done
-v Create GUI Mockups using Photoshop? [MG] <SG>
+- Create GUI Mockups using Photoshop [MG] <SG> @Active
 ^ Define Models/JSON: Task, Project, User [SG] <SE> @Done
 - Define Tasks TXT file format for data import/export [SG] <SE> @Done
 - Design REST API supporting CRUD operations [SG] <SE> @Done
 v Design single/multi-user modes & access via Desktop/Web/Mobile clients [SG] <SE> @Active
-- Design Server & choose persistence components [SE] <SG> @Active
+- Design Tasks Server & evaluate persistence frameworks [SE] <SG> @Active
 
 Infrastructure/Modes
 ^ Develop Model and Fixtures (hardcoded & generated) [SG] <SE> @Done
 - Develop States/Actions corresponding to GUI Statecharts [SG] <SE> @Active
 v Add drag-n-drop of a TXT file into App for data importing (using Google Gears) [MB] @Active
+^ Allow double-click in-cell editing of ListView and SourceListView items [SC] $Bug
+^ Accept changes from ListView item editing after creation of new item [SC] $Bug
+- Allow SourceListView disclosures to be opened/closed [SC] $Bug
 
-"Task" Manager
+Project Manager GUI
+^ Add Master/Detail Explorer view with click selection of Projects showing corresponding Tasks [JH2] <SG> @Done
+^ Show Project name & time left in curly braces (if specified) [SG] <JH2> @Done
+^ Add double-click in-cell editing [SG]
+^ Add "+" & "-" buttons in projects Toolbar [SG] <SC> @Done
+v Add summary in projects toolbar showing number of Tasks for selected Project [SG] <MB> @Done
+v Set projects toolbar button enablement based on having a selection [SG] <EO> @Done
+^ Add drag-n-drop reordering [SC] @Done
+- Select first project at startup [JH2] <SG> @Done
+^ Add virtual Inbox project to group all unallocated tasks [SG] <SE> @Done
+- Disallow Inbox project from being deleted [SG] <SE>
+^ Allow drag-n-drop Task reallocation to Projects [MB] <SG>
+v Add context menu to Delete a project [SG] <JL>
+- Add warning Alert box about deleting Project with Tasks [SG] <SE>
+v Add hover tooltip showing number of Tasks in project [SG] <EG>
+v Make Master list of Projects collapsible [SG] <EG>
+
+Task Manager GUI
 ^ Group Tasks by User and display Task summary & effort (if specified) in curly braces [SG] <JH2> @Done
-- Allow Tasks under a User to be hidden/shown (disclosure control) [SC] $Bug
+- Allow Tasks under a User to be hidden/shown [SG] <JH2> @Done
 - Show type via different icons [SG] <JH2> @Done
 - Show priority (font style), status (font color), validation (background color) [SG] <MB> @Done
-- Add Status/Priority/Validation radio buttons in bottom toolbar [SG] <JH2> @Done
-v Set bottom toolbar button enablement based on having a selection [SG] <EO> @Done
-^ Add double-click in-cell editing [SC] $Bug
-^ Add "+" & "-" buttons in bottom toolbar [SG] <SE> @Active
-- Allow "+" button to be pressed a second time to keep in data entry mode, Esc will exit mode [SG] <SE>
+- Add Status/Priority/Validation radio buttons in tasks toolbar [SG] <EO> @Done
+v Set tasks toolbar button enablement based on having a selection [SG] <EO> @Done
+^ Add double-click in-cell editing and parse/extract effort if specified [SG]
+^ Add "+" & "-" buttons in tasks toolbar [SG] <SE> @Done
+- Allow "+" button to be pressed a second time to keep in data entry mode, Esc will exit mode [SG] <JH2>
 ^ Add modal popup form for editing [SG] <SE>
 ^ Show effort subtotals (exclude Low items) in curly braces for load balancing [SG] <SE>
 ^ Append "?" for range-based subtotals including unknown efforts [SG] <SE>
@@ -38,44 +58,27 @@ v Set bottom toolbar button enablement based on having a selection [SG] <EO> @Do
 v Add context menu & hotkeys to Edit/Cut/Copy/Paste/Delete/Duplicate a task [SG] <JL>
 v Add hover tooltip showing Description [SG] <EG>
 
-"Project" Manager
-^ Add Master/Detail Explorer view with click selection of Projects showing corresponding Tasks [JH2] <SG> @Done
-^ Show Project name & time left in curly braces (if specified) [SG] <JH2> @Done
-^ Add double-click in-cell editing [SC] $Bug
-^ Add "+" & "-" buttons in bottom Toolbar [SG] <SC> @Active
-v Set bottom toolbar button enablement based on having a selection [SG] <EO> @Done
-^ Add drag-n-drop reordering [SC] @Done
-- Select first project at startup [JH2] <SG> @Done
-^ Add Inbox project by default [SG] <SE> @Done
-- Disallow "Inbox" from being deleted [SG] <SE>
-^ Allow drag-n-drop Task reallocation to Projects [MB] <SG>
-v Add context menu to Delete a project [SG] <JL>
-- Add warning Alert box about deleting Project with Tasks [SG] <SE>
-v Add hover tooltip showing number of Tasks in project [SG] <EG>
-v Make Master list of Projects collapsible [SG] <EG>
-
-"User" Manager
+User Manager GUI
 - Add login screen (User authentication) [SG] <SE> @Active
 - Add access control based on Role (User authorization) [SG] <SE>
 v Add user preferences/restore to them at startup [SG] <SE>
 v Add change password dialog? [SG] <SE>
-- Add User management button/modal popup showing existing Users [SG] <SE>
-- Add "+" & "-" buttons in bottom toolbar and "X" button in top toolbar to return [SG] <SE>
+- Add User Management button/modal popup showing existing Users [SG] <SE>
+- Add "+" & "-" buttons in users toolbar and "X" button in top toolbar to return [SG] <SE>
 v Add hover tooltip on dialog title showing number of Users [SG] <EG>
 
-"App" Manager
-v Add summary next to application title showing number of tasks for selected Project [SG] <MB> @Done
-v Add hover tooltip on application title showing number of Projects [SG] <EG>
-^ Add User selection combo box in top toolbar ("All" is default choice) [SG] <JH2> @Done
+Application Manager GUI
+^ Add User selection combo box in top toolbar ("Everyone" is default choice) [SG] <JH2> @Done
 ^ Add Search box in top toolbar: support type-ahead searching [SG] <DC> @Done
-- Add Undo/Redo hotkeys & buttons in top toolbar (till last Save) [SG] <SE>
 - Add "Import" button in top toolbar (using TXT file format) [SG] <SE> @Active
-- Add "Export" button in top toolbar (using TXT file format) [SG] <SE> @Done
+- Add "Export" button in top toolbar (using TXT file format) [SG] <SE> @Active
 - Add "Save" button in top toolbar [SG] <SE> @Active
 v Add Online Help button in top Toolbar & modal Help dialog [SG] @Active
 v Add "X" button to exit in top toolbar [SG] <SE> @Active
 v Prompt user to save changes before exiting [SG] <SE>
+- Add Undo/Redo hotkeys & buttons in top toolbar (till last Save) [SG] <SE>
 - Restore application settings/state from last login [SG] <SE>
+v Add hover tooltip on application title showing number of Projects [SG] <EG>
 
 Server
 ^ Build persistence server (using Persevere) [SE] <SG>
@@ -89,7 +92,7 @@ Hardening/Styling
 - Perform I18N and L10N (test with reversed strings) [SG] <JH2> @Active
 - Develop Model unit tests [SG] <BB> @Active
 - Develop View unit tests [SG] <MB> @Active
-v Style via CSS, embed sprited images [MG] <SG> @Active
+v Style via CSS, embed catchy/sprited images [MG] <SG> @Active
 
 Packaging/Delivery
 ^ Develop Web client (ported to Firefox, Internet Explorer, Safari, Chrome) [SG] <MT> @Active
