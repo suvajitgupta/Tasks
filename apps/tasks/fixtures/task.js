@@ -2,6 +2,9 @@
 
 sc_require('models/task');
 
+/**
+ * Some task fixtures to provide good coverage of the various test scenarios.
+ */
 Tasks.Task.FIXTURES = [
 
   { id: 1,

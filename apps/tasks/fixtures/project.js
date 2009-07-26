@@ -4,6 +4,9 @@ sc_require('models/project');
 
 Tasks.Project.FIXTURES = [];
 
+/**
+ * Generate a few project fixtures referencing task fixtures.
+ */
 for (var i = 0; i < 5; i++) {
   var projectHash = {};
   projectHash.id = i+1;

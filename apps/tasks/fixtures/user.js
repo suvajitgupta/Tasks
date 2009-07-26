@@ -2,6 +2,9 @@
 
 sc_require('models/user');
 
+/**
+ * Creates a sampling of users covering all available roles.
+ */
 Tasks.User.FIXTURES = [
 
   { id: 1,

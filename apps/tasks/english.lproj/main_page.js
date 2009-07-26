@@ -7,7 +7,7 @@ sc_require('views/summary');
 sc_require('views/task');
 /** @namespace
 
-  This page describes the main user interface for the Tasks application.
+  This page lays out the Tasks application user interface.
   
   @extends SC.Object
   @author Suvajit Gupta

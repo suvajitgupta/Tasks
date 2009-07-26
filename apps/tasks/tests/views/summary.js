@@ -40,6 +40,5 @@ test("many items", function(){
   var view = pane.view('many');
   equals(view.$().get(0).innerHTML, '15 tasks', 'displays the correct test');
   
-  
 });
 

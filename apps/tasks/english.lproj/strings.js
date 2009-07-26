@@ -14,6 +14,7 @@
 */
 SC.stringsFor('English', {
 
+  // Application toolbar strings
   '_Tasks': "TASKS",
   '_Welcome': "Welcome",
   '_User:': "User:",
@@ -23,6 +24,7 @@ SC.stringsFor('English', {
   '_Import': "Import",
   '_Export': "Export",
   
+  // Task strings
   '_NewTask': "New Task",
   '_Feature': "Feature",
   '_Bug': "Bug",
@@ -38,9 +40,11 @@ SC.stringsFor('English', {
   '_Passed': "Passed",
   '_Failed': "Failed",
   
+  // Project strings
   '_NewProject': "New Project",
   '_InboxProject': "Inbox",
   
+  // User strings
   '_FirstLast': "First Last",
   '_first.last': "first.last",
   '_Unassigned': "Unassigned",

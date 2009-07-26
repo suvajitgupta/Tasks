@@ -1,8 +1,13 @@
+// Application toolbar styles
+
 .tasks-logo {
 	background: static_url('images/tasks.jpg') no-repeat;
 	height:16px;
   width:16px;
 }
+
+
+// Task type styles
 
 .tasks-icon-feature {
   background: static_url('images/feature.gif');
@@ -16,6 +21,8 @@
   width:16px;
 }
 
+
+// Task priority styles
 
 .tasks-priority-high {
 	font-weight: normal !important;
@@ -33,6 +40,8 @@
 }
 
 
+// Task status styles
+
 .tasks-status-planned {
 	color: black !important;
 }
@@ -49,6 +58,8 @@
   color: red !important;
 }
 
+
+// Task validation styles
 
 .tasks-validation-untested {
   background: #CCC none repeat scroll 0 0 !important;

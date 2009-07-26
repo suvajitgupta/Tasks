@@ -5,9 +5,9 @@
 
 /** 
 
-  A textual summary of what is displayed in the Tasks application.
+  Used as exampleView for task information display in the main workspace.
   
-  @extends SC.View
+  @extends SC.ListItemView
   @author Suvajit Gupta
 */
 
