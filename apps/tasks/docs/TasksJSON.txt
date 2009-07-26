@@ -9,9 +9,9 @@ Task:
 	name*: <String>, # one-line summary
 	type*: Enum<String>, ("Feature" | "Bug" | "_Other_") # kind of Task to support testing workflow
 	description: <String>, # multi-line additional information such as Feature details, Bug reproduction steps, or Release Notes
-	priority*: Enum<String> ("High" | "_Medium_" | "Low"), # High ones must be completed, Low ones not included in effort subtotals, may highlight dicate using fonts
-	status*: Enum<String> ("_Planned_" | "Active" | "Done" | "Risky"), # development status, may show via color coding
-	validation*: Enum<String> ("_Unested_" | "Passed" | "Failed"), # validation status, may be shown via traffic lighting
+	priority*: Enum<String> ("High" | "_Medium_" | "Low"), # High ones must be completed, Low ones not included in effort subtotals, show via fonts
+	status*: Enum<String> ("_Planned_" | "Active" | "Done" | "Risky"), # development status, show via font colors
+	validation*: Enum<String> ("_Untested_" | "Passed" | "Failed"), # validation status, show via background colors
 	effort: <Number> # effort estimate => actual, in days
 	submitter: <Number>, # id of User who submitted this Task
 	assignee: <Number> # id of User to whom this Task is assigned

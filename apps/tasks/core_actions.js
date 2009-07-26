@@ -167,11 +167,11 @@ Tasks.mixin({
     '^ My first task {2} @Risky\n' +
     '| description line1\n' +
     '| description line2\n' +
-    '- My second task $Bug [SG] <EO> #Failed\n' +
+    '- My second task $Bug [SG] <EO> %Failed\n' +
     'v My third task @Active $Feature {12-14} %Passed\n' +
     ' \t \n' +
     'Your Project {12}\n' +
-    '- Your first task {2} @NoIdea\n';
+    '- Your first task {2} @NoIdea\n'; // FIXME: [SE] why is this not throwing an exception since it is not a valid value
     this._parseAndLoadData(data);
     this.get('assignmentsController').showAssignments();
   },
@@ -222,13 +222,33 @@ Tasks.mixin({
           taskEffort = taskEffortMatches[1]? taskEffortMatches[1] : taskEffortMatches[2];
           output += ' of Effort: ' + taskEffort;
         }
+               
+        // TODO: [SG] extract task submitter
+        
+        // TODO: [SG] extract task assignee
+        
+        // extract task type
+        var taskTypeMatches = /\$([\w]+)/.exec(taskLine);
+        var taskType = Tasks.TASK_TYPE_OTHER;
+        if(taskTypeMatches) {
+          taskType = taskTypeMatches[1];
+          output += ' of Type: ' + taskType;
+        }
         
         // extract task status
         var taskStatusMatches = /@([\w]+)/.exec(taskLine);
         var taskStatus = Tasks.TASK_STATUS_PLANNED;
         if(taskStatusMatches) {
           taskStatus = taskStatusMatches[1];
-          output += ' of Status: \"' + taskStatus + '\"';
+          output += ' of Status: ' + taskStatus;
+        }
+        
+        // extract task validation
+        var taskValidationMatches = /%([\w]+)/.exec(taskLine);
+        var taskValidation = Tasks.TASK_VALIDATION_UNTESTED;
+        if(taskValidationMatches) {
+          taskValidation = taskValidationMatches[1];
+          output += ' of Validation: ' + taskValidation;
         }
         
         console.log (output);
@@ -236,7 +256,9 @@ Tasks.mixin({
           name: taskName,
           priority: taskPriority,
           effort: taskEffort,
-          status: taskStatus
+          type: taskType,
+          status: taskStatus,
+          validation: taskValidation
         });
         if(!taskRecord) {
           console.log('ERROR: task creation failed!');

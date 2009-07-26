@@ -1,4 +1,6 @@
-// Application toolbar styles
+/*-----------------------------------------------------------------
+ * Application toolbar styles
+ */
 
 .tasks-logo {
 	background: static_url('images/tasks.jpg') no-repeat;
@@ -7,22 +9,25 @@
 }
 
 
-// Task type styles
+/*-----------------------------------------------------------------
+ * Task type styles
+ */
 
 .tasks-icon-feature {
   background: static_url('images/feature.gif');
-  height:16px;
-  width:16px;
+  height: 16px;
+  width: 16px;
 }
 
 .tasks-icon-bug {
   background: static_url('images/bug.gif');
-  height:16px;
-  width:16px;
+  height: 16px;
+  width: 16px;
 }
 
-
-// Task priority styles
+/*-----------------------------------------------------------------
+ * Task priority styles
+ */
 
 .tasks-priority-high {
 	font-weight: normal !important;
@@ -40,7 +45,9 @@
 }
 
 
-// Task status styles
+/*-----------------------------------------------------------------
+ * Task status styles
+ */
 
 .tasks-status-planned {
 	color: black !important;
@@ -59,7 +66,9 @@
 }
 
 
-// Task validation styles
+/*-----------------------------------------------------------------
+ * Task validation styles
+ */
 
 .tasks-validation-untested {
   background: #CCC none repeat scroll 0 0 !important;
