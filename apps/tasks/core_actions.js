@@ -181,7 +181,7 @@ Tasks.mixin({
    *
    * @param {String} data to be parsed.
    */
-  _parseAndLoadData: function(data) { // TODO: [SE] create objects in store during data import
+  _parseAndLoadData: function(data) {
     var lines = data.split('\n');
     var store = this.get('store');
     var taskNamePattern = new RegExp('([\\w\\s]+)[\\s]*[\\{<\\[\\$@%]');
