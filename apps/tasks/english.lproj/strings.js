@@ -18,7 +18,7 @@ SC.stringsFor('English', {
   '_Tasks': "TASKS",
   '_Welcome': "Welcome",
   '_User:': "User:",
-  "_All Users": "All Users",
+  "_Everyone": "Everyone",
   '_SearchHint': "Enter search criteria",
   '_Save': "Save",
   '_Import': "Import",

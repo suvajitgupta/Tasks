@@ -25,6 +25,6 @@ Tasks.User.FIXTURES = [
   { id: 4,
   name: "Larry A. Dinosaur",
   role: Tasks.USER_ROLE_TESTER,
-  loginName: "tst1" }
+  loginName: "enemy1" }
 
 ];

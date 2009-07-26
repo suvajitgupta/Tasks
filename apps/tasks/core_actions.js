@@ -162,16 +162,16 @@ Tasks.mixin({
     // TODO: [SG] implement view to prompt user for data to import (sample data hardcoded below for testing)
     var data = 
     '#A comment\n     \n' +
-    '- An unallocated task @Done\n' +
+    '- An unallocated task [hacker] @Done\n' +
     'My Project\n' +
-    '^ My first task {2} @Risky\n' +
+    '^ My first task {2} <enemy1> @Risky\n' +
     '| description line1\n' +
     '| description line2\n' +
-    '- My second task $Bug [SG] <EO> %Failed\n' +
+    '- My second task $Bug [cyberpunk] <bigboss> %Failed\n' +
     'v My third task @Active $Feature {12-14} %Passed\n' +
     ' \t \n' +
     'Your Project {12}\n' +
-    '- Your first task {2} @NoIdea\n'; // FIXME: [SE] why is this not throwing an exception since it is not a valid value
+    '- Your first task {2} <enemy1> @NoIdea\n'; // FIXME: [SE] why is this not throwing an exception since it is not a valid value
     this._parseAndLoadData(data);
     this.get('assignmentsController').showAssignments();
   },
@@ -223,9 +223,21 @@ Tasks.mixin({
           output += ' of Effort: ' + taskEffort;
         }
                
-        // TODO: [SG] extract task submitter
-        
         // TODO: [SG] extract task assignee
+        var taskAssigneeMatches = /\[([\w]+)\]/.exec(taskLine);
+        var taskAssignee = null;
+        if(taskAssigneeMatches) {
+          taskAssignee = taskAssigneeMatches[1];
+          output += ' of Assignee: ' + taskAssignee;
+        }
+        
+        // TODO: [SG] extract task submitter
+        var taskSubmitterMatches = /\<([\w]+)\>/.exec(taskLine);
+        var taskSubmitter = null;
+        if(taskSubmitterMatches) {
+          taskSubmitter = taskSubmitterMatches[1];
+          output += ' of Submitter: ' + taskSubmitter;
+        }
         
         // extract task type
         var taskTypeMatches = /\$([\w]+)/.exec(taskLine);
@@ -256,6 +268,9 @@ Tasks.mixin({
           name: taskName,
           priority: taskPriority,
           effort: taskEffort,
+          // FIXME: [SE]  map the assignee/submitter to users in store
+          assignee: taskAssignee,
+          submitter: taskSubmitter,
           type: taskType,
           status: taskStatus,
           validation: taskValidation
