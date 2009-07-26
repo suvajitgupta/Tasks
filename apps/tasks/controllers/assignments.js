@@ -26,7 +26,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     var selectedUser = Tasks.User.find(store, this.get('assigneeSelection').id);
     var tasks = store.findAll(SC.Query.create({
       recordType: Tasks.Task, 
-      conditions: "assignee = %@",
+      conditions: 'assignee = %@',
       parameters: [selectedUser]
     }));
     

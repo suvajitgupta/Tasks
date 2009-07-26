@@ -37,6 +37,7 @@ Tasks.mixin({
    *
    * @param {String} user's login name.
    * @param {String} user's password.
+   * @returns (Boolean) true if authentication succeeds, false otherwise
    */
   _authenticateUser: function(loginName, password) {
     // TODO: [SG] implement server-based authentication
@@ -171,7 +172,7 @@ Tasks.mixin({
     'v My third task @Active $Feature {12-14} %Passed\n' +
     ' \t \n' +
     'Your Project {12}\n' +
-    '- Your first task {2} <enemy1> @NoIdea\n'; // FIXME: [SE] why is this not throwing an exception since it is not a valid value
+    '- Your first task {2} [boo] <enemy1> @NoIdea\n'; // FIXME: [SE] why is this not throwing an exception since it is not a valid value
     this._parseAndLoadData(data);
     this.get('assignmentsController').showAssignments();
   },
@@ -223,22 +224,36 @@ Tasks.mixin({
           output += ' of Effort: ' + taskEffort;
         }
                
-        // TODO: [SG] extract task assignee
+        // extract task assignee
         var taskAssigneeMatches = /\[([\w]+)\]/.exec(taskLine);
         var taskAssigneeId = null;
         if(taskAssigneeMatches) {
           var taskAssignee = taskAssigneeMatches[1];
           output += ' of Assignee: ' + taskAssignee;
-          // TODO: [SE] extract id from store, skip this task if no such user
+          var assigneeUser = this._getUser(taskAssignee);
+          if (assigneeUser) {
+            taskAssigneeId = assigneeUser.get('id');
+          }
+          else {
+            console.log('Import Error - no such assignee: ' + taskAssignee);
+            continue;
+          }
         }
         
-        // TODO: [SG] extract task submitter
+        // extract task submitter
         var taskSubmitterMatches = /\<([\w]+)\>/.exec(taskLine);
         var taskSubmitterId = null;
         if(taskSubmitterMatches) {
           var taskSubmitter = taskSubmitterMatches[1];
           output += ' of Submitter: ' + taskSubmitter;
-          // TODO: [SE] extract id from store, skip this task if no such user
+          var submitterUser = this._getUser(taskSubmitter);
+          if (taskSubmitter) {
+            taskSubmitterId = submitterUser.get('id');
+          }
+          else {
+            console.log('Import Error - no such submitter: ' + taskSubmitter);
+            continue;
+          }
         }
         
         // extract task type
@@ -277,7 +292,7 @@ Tasks.mixin({
           validation: taskValidation
         });
         if(!taskRecord) {
-          console.log('ERROR: task creation failed!');
+          console.log('Import Error - task creation failed');
           continue;
         }
         store.commitRecords();
@@ -313,6 +328,22 @@ Tasks.mixin({
         this.get('projectsController').addObject(projectRecord);
       }
      }
+  },
+  
+  /**
+   * Get user record corresponding to specified loginName.
+   *
+   * @param {String} user's login name.
+   * @returns {Object} user record, if macthing one exists, or null.
+   */
+  _getUser: function(loginName) {
+    var users = Tasks.get('store').findAll(SC.Query.create({
+      recordType: Tasks.User, 
+      conditions: 'loginName = %@',
+      parameters: [loginName]
+    }));
+    if(!users) return null;
+    return users.objectAt(0);
   },
   
   /**
