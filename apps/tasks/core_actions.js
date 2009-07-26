@@ -67,26 +67,8 @@ Tasks.mixin({
   _loadData: function() {
     
     var store = this.get('store');
-    // Load all of the tasks from the data source (via the store)
     var projects = store.findAll(Tasks.Project);
     
-    // Prepend and populate the special "Inbox" project that will contain all unassigned tasks.
-    projects.insertAt(0, this._createInbox());
- 
-    // TODO: [SE] Implement succsss/failure callbacks in the data source.
-    /*
-    , {
-      successCallback: Tasks.dataLoadSuccess().bind(this),
-      failureCallback: Tasks.dataLoadFailure().bind(this)
-    });
-    */
-
-    this.get('projectsController').set('content', projects);
-  },
-
-  _createInbox: function() {
-    var store = this.get('store');
-
     // Extract all unassigned tasks for the Inbox
     var tasks = store.findAll(Tasks.Task), task, unassigned = [];
     var taskCount = tasks.get('length');
@@ -95,10 +77,10 @@ Tasks.mixin({
       unassigned.push(task.get('id')); // add in all tasks
     }
     
-    var projects = store.findAll(Tasks.Project), project;
+    // Identify unassigned tasks to be stored in Inbox
     var projectCount = projects.get('length');
     for (i = 0; i < projectCount; i++) {
-      project = projects.objectAt(i);
+      var project = projects.objectAt(i);
       tasks = project.get('tasks');
       taskCount = tasks.get('length');
       for (var j = 0; j < taskCount; j++) {
@@ -108,12 +90,23 @@ Tasks.mixin({
       }
     }
 
+    // Create Inbox project to hold all unassigned tasks
     var inboxProject = store.createRecord(Tasks.Project, { id: 0, name: Tasks.INBOX_PROJECT_NAME, tasks: unassigned });
     store.commitRecords(); // FIXME: [SC] Shouldn't have to call this - CJ investigating an API change to fix this
     Tasks.set('inbox', inboxProject);
-    return inboxProject;
+    projects.insertAt(0, inboxProject);
+    this.get('projectsController').set('content', projects);
+ 
+    // TODO: [SE] Implement succsss/failure callbacks in the data source.
+    /*
+    , {
+      successCallback: Tasks.dataLoadSuccess().bind(this),
+      failureCallback: Tasks.dataLoadFailure().bind(this)
+    });
+    */
+
   },
-  
+
   dataLoadSuccess: function() {
     switch (this.state.a) {
       case 3:
@@ -138,6 +131,7 @@ Tasks.mixin({
     // TODO: [SG] implement view to prompt user for data to import (sample data hardcoded below for testing)
     var data = 
     '#A comment\n     \n' +
+    '- An unallocated task @Done\n' +
     'My Project\n' +
     '^ My first task {2} @Risky\n' +
     '| description line1\n' +
@@ -148,6 +142,7 @@ Tasks.mixin({
     'Your Project {12}\n' +
     '- Your first task {2} @Risky\n';
     this._parseAndLoadData(data);
+    this.get('assignmentsController').showAssignments();
   },
   
   _parseAndLoadData: function(data) { // TODO: [SE] create objects in store during data import
