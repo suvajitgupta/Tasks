@@ -225,18 +225,20 @@ Tasks.mixin({
                
         // TODO: [SG] extract task assignee
         var taskAssigneeMatches = /\[([\w]+)\]/.exec(taskLine);
-        var taskAssignee = null;
+        var taskAssigneeId = null;
         if(taskAssigneeMatches) {
-          taskAssignee = taskAssigneeMatches[1];
+          var taskAssignee = taskAssigneeMatches[1];
           output += ' of Assignee: ' + taskAssignee;
+          // TODO: [SE] extract id from store, skip this task if no such user
         }
         
         // TODO: [SG] extract task submitter
         var taskSubmitterMatches = /\<([\w]+)\>/.exec(taskLine);
-        var taskSubmitter = null;
+        var taskSubmitterId = null;
         if(taskSubmitterMatches) {
-          taskSubmitter = taskSubmitterMatches[1];
+          var taskSubmitter = taskSubmitterMatches[1];
           output += ' of Submitter: ' + taskSubmitter;
+          // TODO: [SE] extract id from store, skip this task if no such user
         }
         
         // extract task type
@@ -268,9 +270,8 @@ Tasks.mixin({
           name: taskName,
           priority: taskPriority,
           effort: taskEffort,
-          // FIXME: [SE]  map the assignee/submitter to users in store
-          assignee: taskAssignee,
-          submitter: taskSubmitter,
+          assignee: taskAssigneeId,
+          submitter: taskSubmitterId,
           type: taskType,
           status: taskStatus,
           validation: taskValidation
