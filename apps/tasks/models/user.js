@@ -2,7 +2,7 @@
 sc_require('models/record');
 
 Tasks.NEW_USER_NAME = "_FirstLast".loc();
-Tasks.NEW_USER_LOGIN = "_first.last".loc();
+Tasks.NEW_USER_LOGIN_NAME = "_first.last".loc();
 Tasks.USER_UNASSIGNED = "_Unassigned".loc();
 
 // Roles:
@@ -27,7 +27,7 @@ Tasks.User = Tasks.Record.extend({
   /**
    * The login name of the user (ex. "jdoe").
    */
-  loginName: SC.Record.attr(String, { isRequired: YES, defaultValue: Tasks.NEW_USER_LOGIN }),
+  loginName: SC.Record.attr(String, { isRequired: YES, defaultValue: Tasks.NEW_USER_LOGIN_NAME }),
 
   /**
    * The role of the user (see below for allowed values).
