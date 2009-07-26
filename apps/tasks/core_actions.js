@@ -172,7 +172,9 @@ Tasks.mixin({
     'v My third task @Active $Feature {12-14} %Passed\n' +
     ' \t \n' +
     'Your Project {12}\n' +
-    '- Your first task {2} [boo] <enemy1> @NoIdea\n'; // FIXME: [SE] why is this not throwing an exception since it is not a valid value
+    '- Your first task {2} [cyberpunk] <enemy1> @Done\n' +
+    // FIXME: [SE] why is this not throwing an exception since it is not a valid value
+    '- Your second task {4-5} [boo] <bigboss> @NoIdea\n';
     this._parseAndLoadData(data);
     this.get('assignmentsController').showAssignments();
   },
