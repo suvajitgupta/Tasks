@@ -118,4 +118,4 @@ SC.mixin(Function.prototype, {
 
 // Set the mode of operation.
 //CoreTasks.set('mode', Tasks.get('OFFLINE_MODE'));
-CoreTasks.set('mode', Tasks.get('ONLINE_MODE'));
+//CoreTasks.set('mode', Tasks.get('ONLINE_MODE'));
