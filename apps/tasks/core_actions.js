@@ -506,7 +506,6 @@ Tasks.mixin({
   addTask: function() {
 
     // Create a new task with a default name
-    // TODO: [SG] add new project right after selected item    
     // TODO: [SG] Get selected task and get its assignee, then create new task with same assignee
 
     var store = this.get('store');
