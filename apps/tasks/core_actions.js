@@ -338,7 +338,7 @@ Tasks.mixin({
    */
   _getUser: function(loginName) {
     var users = CoreTasks.get('store').findAll(SC.Query.create({
-      recordType: Tasks.User, 
+      recordType: CoreTasks.User, 
       conditions: 'loginName = %@',
       parameters: [loginName]
     }));
