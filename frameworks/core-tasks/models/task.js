@@ -1,45 +1,45 @@
-/*globals Tasks sc_require */
+/*globals CoreTasks sc_require */
 
 sc_require('models/record');
 
-Tasks.NEW_TASK_NAME = "_NewTask".loc();
+CoreTasks.NEW_TASK_NAME = "_NewTask".loc();
 
 // Types:
-Tasks.TASK_TYPE_FEATURE = "_Feature".loc(); // default
-Tasks.TASK_TYPE_BUG = "_Bug".loc();
-Tasks.TASK_TYPE_OTHER = "_Other".loc();
+CoreTasks.TASK_TYPE_FEATURE = "_Feature".loc(); // default
+CoreTasks.TASK_TYPE_BUG = "_Bug".loc();
+CoreTasks.TASK_TYPE_OTHER = "_Other".loc();
 
 // Priorities:
-Tasks.TASK_PRIORITY_HIGH = "_High".loc();
-Tasks.TASK_PRIORITY_MEDIUM = "_Medium".loc(); // default
-Tasks.TASK_PRIORITY_LOW = "_Low".loc();
+CoreTasks.TASK_PRIORITY_HIGH = "_High".loc();
+CoreTasks.TASK_PRIORITY_MEDIUM = "_Medium".loc(); // default
+CoreTasks.TASK_PRIORITY_LOW = "_Low".loc();
 
 // Development status:
-Tasks.TASK_STATUS_PLANNED = "_Planned".loc(); // default
-Tasks.TASK_STATUS_ACTIVE = "_Active".loc();
-Tasks.TASK_STATUS_DONE = "_Done".loc();
-Tasks.TASK_STATUS_RISKY = "_Risky".loc();
+CoreTasks.TASK_STATUS_PLANNED = "_Planned".loc(); // default
+CoreTasks.TASK_STATUS_ACTIVE = "_Active".loc();
+CoreTasks.TASK_STATUS_DONE = "_Done".loc();
+CoreTasks.TASK_STATUS_RISKY = "_Risky".loc();
 
 // Validation status:
-Tasks.TASK_VALIDATION_UNTESTED = "_Untested".loc(); // default
-Tasks.TASK_VALIDATION_PASSED = "_Passed".loc();
-Tasks.TASK_VALIDATION_FAILED = "_Failed".loc();
+CoreTasks.TASK_VALIDATION_UNTESTED = "_Untested".loc(); // default
+CoreTasks.TASK_VALIDATION_PASSED = "_Passed".loc();
+CoreTasks.TASK_VALIDATION_FAILED = "_Failed".loc();
 
 /**
  * The task model.
  *
  * A task represent an atomic unit of work to be done by someone.  They are grouped in projects.
  *
- * @extends Tasks.Record
+ * @extends CoreTasks.Record
  * @author Suvajit Gupta
  * @author Sean Eidemiller
  */
-Tasks.Task = Tasks.Record.extend({
+CoreTasks.Task = CoreTasks.Record.extend({
 
   /**
    * A one-line summary of the task (ex. "Widget: Add a nifty feature").
    */
-  name: SC.Record.attr(String, { isRequired: YES, defaultValue: Tasks.NEW_TASK_NAME }),
+  name: SC.Record.attr(String, { isRequired: YES, defaultValue: CoreTasks.NEW_TASK_NAME }),
 
   /**
    * Multi-line comments about the task (may be release notes for a feature or steps to reproduce a bug)
@@ -51,11 +51,11 @@ Tasks.Task = Tasks.Record.extend({
    */
   type: SC.Record.attr(String, {
     isRequired: YES,
-    defaultValue: Tasks.TASK_TYPE_OTHER,
+    defaultValue: CoreTasks.TASK_TYPE_OTHER,
     allowed: [
-      Tasks.TASK_TYPE_FEATURE,
-      Tasks.TASK_TYPE_BUG,
-      Tasks.TASK_TYPE_OTHER
+      CoreTasks.TASK_TYPE_FEATURE,
+      CoreTasks.TASK_TYPE_BUG,
+      CoreTasks.TASK_TYPE_OTHER
     ]
   }),
 
@@ -64,11 +64,11 @@ Tasks.Task = Tasks.Record.extend({
    */
   priority: SC.Record.attr(String, {
     isRequired: YES,
-    defaultValue: Tasks.TASK_PRIORITY_MEDIUM,
+    defaultValue: CoreTasks.TASK_PRIORITY_MEDIUM,
     allowed: [
-      Tasks.TASK_PRIORITY_HIGH,
-      Tasks.TASK_PRIORITY_MEDIUM,
-      Tasks.TASK_PRIORITY_LOW
+      CoreTasks.TASK_PRIORITY_HIGH,
+      CoreTasks.TASK_PRIORITY_MEDIUM,
+      CoreTasks.TASK_PRIORITY_LOW
     ]
   }),
 
@@ -77,12 +77,12 @@ Tasks.Task = Tasks.Record.extend({
    */
   status: SC.Record.attr(String, {
     isRequired: YES,
-    defaultValue: Tasks.TASK_STATUS_PLANNED,
+    defaultValue: CoreTasks.TASK_STATUS_PLANNED,
     allowed: [
-      Tasks.TASK_STATUS_PLANNED,
-      Tasks.TASK_STATUS_ACTIVE,
-      Tasks.TASK_STATUS_DONE,
-      Tasks.TASK_STATUS_RISKY
+      CoreTasks.TASK_STATUS_PLANNED,
+      CoreTasks.TASK_STATUS_ACTIVE,
+      CoreTasks.TASK_STATUS_DONE,
+      CoreTasks.TASK_STATUS_RISKY
     ]
    }),
 
@@ -91,11 +91,11 @@ Tasks.Task = Tasks.Record.extend({
    */
   validation: SC.Record.attr(String, {
     isRequired: YES,
-    defaultValue: Tasks.TASK_VALIDATION_UNTESTED,
+    defaultValue: CoreTasks.TASK_VALIDATION_UNTESTED,
     allowed: [
-      Tasks.TASK_VALIDATION_UNTESTED,
-      Tasks.TASK_VALIDATION_PASSED,
-      Tasks.TASK_VALIDATION_FAILED
+      CoreTasks.TASK_VALIDATION_UNTESTED,
+      CoreTasks.TASK_VALIDATION_PASSED,
+      CoreTasks.TASK_VALIDATION_FAILED
     ]
   }),
 
@@ -107,25 +107,25 @@ Tasks.Task = Tasks.Record.extend({
   /**
    * The user who creates the task.
    */
-  submitter: SC.Record.attr('Tasks.User'),
+  submitter: SC.Record.attr('CoreTasks.User'),
 
   /**
   * The user who is assigned to complete the task.
    */
-  assignee: SC.Record.attr('Tasks.User'),
+  assignee: SC.Record.attr('CoreTasks.User'),
 
   /**
    * The path to the icon associated with a task.
    */
   icon: function() { // TODO: [MG] get better icons
-		switch (this.get('type')){
-			case Tasks.TASK_TYPE_FEATURE:
-	    	return 'tasks-icon-feature';
-      case Tasks.TASK_TYPE_BUG:
-    		return 'tasks-icon-bug';
-      case Tasks.TASK_TYPE_OTHER:
-    		return 'sc-icon-options-16';
-		}
+    switch (this.get('type')){
+      case CoreTasks.TASK_TYPE_FEATURE:
+        return 'tasks-icon-feature';
+      case CoreTasks.TASK_TYPE_BUG:
+        return 'tasks-icon-bug';
+      case CoreTasks.TASK_TYPE_OTHER:
+        return 'sc-icon-options-16';
+    }
   }.property('type').cacheable(),
 
   /**
@@ -145,4 +145,9 @@ Tasks.Task = Tasks.Record.extend({
     }
   }.property('name', 'effort').cacheable()
 
+});
+
+CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
+  callbacks: SC.Object.create(),
+  resourcePath: 'task'
 });

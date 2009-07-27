@@ -1,5 +1,5 @@
 /*globals Tasks */
-Tasks.user = '';
+CoreTasks.user = '';
 
 /**
  * The main program - start off in first state.

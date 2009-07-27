@@ -410,14 +410,15 @@ CoreTasks.FixturesDataSource = SC.FixturesDataSource.extend({
     // Assume success.
     var recType = store.recordTypeFor(storeKey);
     var callback = CoreTasks.getCallback('get', 'success', recType, { status: 200 });
-    CoreTasks.invokeCallback(callback, recordHash);
+    CoreTasks.invokeCallback(callback, store.readDataHash(storeKey));
 
     return ret;
   },
 
   createRecord: function(store, storeKey) {
     // Notify the store that the data source completed.
-    store.dataSourceDidComplete(storeKey, store.readDataHash(storeKey), store.idFor(storeKey));
+    var recordHash = store.readDataHash(storeKey);
+    store.dataSourceDidComplete(storeKey, recordHash, store.idFor(storeKey));
 
     // Assume success.
     var recType = store.recordTypeFor(storeKey);
@@ -432,7 +433,7 @@ CoreTasks.FixturesDataSource = SC.FixturesDataSource.extend({
     // Assume success.
     var recType = store.recordTypeFor(storeKey);
     var callback = CoreTasks.getCallback('put', 'success', recType, { status: 200 });
-    CoreTasks.invokeCallback(callback, recordHash);
+    CoreTasks.invokeCallback(callback, store.readDataHash(storeKey));
   },
 
   destroyRecord: function(store, storeKey) {

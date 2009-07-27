@@ -1,44 +1,44 @@
-/*globals Tasks sc_require */
+/*globals CoreTasks sc_require */
 sc_require('models/record');
 
-Tasks.NEW_USER_NAME = "_FirstLast".loc();
-Tasks.NEW_USER_LOGIN_NAME = "_first.last".loc();
-Tasks.USER_UNASSIGNED = "_Unassigned".loc();
+CoreTasks.NEW_USER_NAME = "_FirstLast".loc();
+CoreTasks.NEW_USER_LOGIN = "_first.last".loc();
+CoreTasks.USER_UNASSIGNED = "_Unassigned".loc();
 
 // Roles:
-Tasks.USER_ROLE_MANAGER = "_Manager".loc();
-Tasks.USER_ROLE_DEVELOPER = "_Developer".loc(); // default
-Tasks.USER_ROLE_TESTER = "_Tester".loc();
+CoreTasks.USER_ROLE_MANAGER = "_Manager".loc();
+CoreTasks.USER_ROLE_DEVELOPER = "_Developer".loc(); // default
+CoreTasks.USER_ROLE_TESTER = "_Tester".loc();
 
 /**
  * The user model.
  *
- * @extends Tasks.Record
+ * @extends CoreTasks.Record
  * @author Suvajit Gupta
  * @author Sean Eidemiller
  */
-Tasks.User = Tasks.Record.extend({
+CoreTasks.User = CoreTasks.Record.extend({
 
   /**
    * The full name of the user (ex. "John Doe").
    */
-  name: SC.Record.attr(String, { isRequired: YES, defaultValue: Tasks.NEW_USER_NAME }),
+  name: SC.Record.attr(String, { isRequired: YES, defaultValue: CoreTasks.NEW_USER_NAME }),
 
   /**
    * The login name of the user (ex. "jdoe").
    */
-  loginName: SC.Record.attr(String, { isRequired: YES, defaultValue: Tasks.NEW_USER_LOGIN_NAME }),
+  loginName: SC.Record.attr(String, { isRequired: YES, defaultValue: CoreTasks.NEW_USER_LOGIN }),
 
   /**
    * The role of the user (see below for allowed values).
    */
   role: SC.Record.attr(String, {
     isRequired: YES,
-    defaultValue: Tasks.USER_ROLE_DEVELOPER,
+    defaultValue: CoreTasks.USER_ROLE_DEVELOPER,
     allowed: [
-      Tasks.USER_ROLE_MANAGER, 
-      Tasks.USER_ROLE_DEVELOPER,
-      Tasks.USER_ROLE_TESTER
+      CoreTasks.USER_ROLE_MANAGER, 
+      CoreTasks.USER_ROLE_DEVELOPER,
+      CoreTasks.USER_ROLE_TESTER
     ]
   }), 
 
@@ -65,7 +65,12 @@ Tasks.User = Tasks.Record.extend({
   displayName: function() {
     var name = this.get('name');
     var loginName = this.get('loginName');
-    return "%@ (%@)".fmt(loginName, name);
+    return "%@ (%@)".fmt(name, loginName);
   }.property('name', 'loginName').cacheable()
 
+});
+
+CoreTasks.User.mixin(/** @scope CoreTasks.User */ {
+  callbacks: SC.Object.create(),
+  resourcePath: 'user'
 });

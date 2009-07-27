@@ -22,10 +22,10 @@ Tasks.assignmentsController = SC.ArrayController.create(
   
   showAllAssignments: function() { // show all tasks for a selected user across all projects
     
-    var store = Tasks.get('store');
-    var selectedUser = Tasks.User.find(store, this.get('assigneeSelection').id);
+    var store = CoreTasks.get('store');
+    var selectedUser = store.find(CoreTasks.User, this.get('assigneeSelection').id);
     var tasks = store.findAll(SC.Query.create({
-      recordType: Tasks.Task, 
+      recordType: CoreTasks.Task, 
       conditions: 'assignee = %@',
       parameters: [selectedUser]
     }));
@@ -46,7 +46,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     this.forEach( // group tasks by user & separate unassigned tasks
       function(rec){
         var user = rec.get('assignee');
-        assignee = user? user.get('displayName') : Tasks.USER_UNASSIGNED;
+        assignee = user? user.get('displayName') : CoreTasks.USER_UNASSIGNED;
         var tasks = assignees[assignee];
         if(!tasks) assignees[assignee] = tasks = [];
         var name = rec.get('name');
@@ -58,7 +58,8 @@ Tasks.assignmentsController = SC.ArrayController.create(
     var selectedAssignee = this.get('assigneeSelection');
     if(selectedAssignee){ // only show tasks for selected user
       
-      var selectedUserName = Tasks.User.find(Tasks.get('store'), selectedAssignee.id).get('displayName');
+      var selectedUserName = CoreTasks.get('store').find(CoreTasks.User, selectedAssignee.id).get('displayName');
+
       for(assignee in assignees){ // list all assigned tasks
         if(assignees.hasOwnProperty(assignee) && assignee === selectedUserName) {
           ret.push(this._createAssignmentNodeHash(assignee, assignees[assignee]));
@@ -68,13 +69,13 @@ Tasks.assignmentsController = SC.ArrayController.create(
     } else { // show tasks for all users
       
       for(assignee in assignees){ // list unassigned tasks first
-        if(assignees.hasOwnProperty(assignee) && assignee === Tasks.USER_UNASSIGNED) {
+        if(assignees.hasOwnProperty(assignee) && assignee === CoreTasks.USER_UNASSIGNED) {
           ret.push(this._createAssignmentNodeHash(assignee, assignees[assignee]));
         }
       }
       
       for(assignee in assignees){ // list all assigned tasks
-        if(assignees.hasOwnProperty(assignee) && assignee !== Tasks.USER_UNASSIGNED) {
+        if(assignees.hasOwnProperty(assignee) && assignee !== CoreTasks.USER_UNASSIGNED) {
           ret.push(this._createAssignmentNodeHash(assignee, assignees[assignee]));
         }
       }

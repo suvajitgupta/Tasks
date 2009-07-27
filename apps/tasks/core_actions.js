@@ -41,13 +41,13 @@ Tasks.mixin({
    */
   _authenticateUser: function(loginName, password) {
     // TODO: [SG] implement server-based authentication
-    var store = this.get('store');
-    var users = Tasks.store.findAll(Tasks.User);
+    var store = CoreTasks.get('store');
+    var users = store.findAll(CoreTasks.User);
     var len = users.get('length');
     for (var i = 0; i < len; i++) {
       var user = users.objectAt(i);
       if (loginName === user.get('loginName')) {
-        Tasks.set('user', loginName);
+        CoreTasks.set('user', loginName);
         return true;
       }
     }
@@ -89,11 +89,11 @@ Tasks.mixin({
    */
   _loadData: function() {
     
-    var store = this.get('store');
-    var projects = store.findAll(Tasks.Project);
+    var store = CoreTasks.get('store');
+    var projects = store.findAll(CoreTasks.Project);
     
     // Extract all unassigned tasks for the Inbox
-    var tasks = store.findAll(Tasks.Task), task, unassigned = [];
+    var tasks = store.findAll(CoreTasks.Task), task, unassigned = [];
     var taskCount = tasks.get('length');
     for (var i = 0; i < taskCount; i++) {
       task = tasks.objectAt(i);
@@ -114,23 +114,18 @@ Tasks.mixin({
     }
 
     // Create Inbox project to hold all unassigned tasks
-    var inboxProject = store.createRecord(Tasks.Project, { id: 0, name: Tasks.INBOX_PROJECT_NAME, tasks: unassigned });
-    store.commitRecords(); // FIXME: [SC] Shouldn't have to call this - CJ investigating an API change to fix this
-    Tasks.set('inbox', inboxProject);
+    var inboxProject = store.createRecord(CoreTasks.Project,
+      { id: 0, name: CoreTasks.INBOX_PROJECT_NAME, tasks: unassigned });
+
+    // FIXME: [SC] Shouldn't have to call this - CJ investigating an API change to fix this.
+    store.commitRecords();
+
+    CoreTasks.set('inbox', inboxProject);
     projects.insertAt(0, inboxProject);
     this.get('projectsController').set('content', projects);
     
     var endUsers = store.findAll(Tasks.User);
     this.get('usersController').set('content',endUsers);
- 
-    // TODO: [SE] Implement succsss/failure callbacks in the data source.
-    /*
-    , {
-      successCallback: Tasks.dataLoadSuccess().bind(this),
-      failureCallback: Tasks.dataLoadFailure().bind(this)
-    });
-    */
-
   },
 
   /**
@@ -190,9 +185,9 @@ Tasks.mixin({
   _parseAndLoadData: function(data) {
     
     var lines = data.split('\n');
-    var store = this.get('store');
+    var store = CoreTasks.get('store');
     
-    var currentProject = this.get('inbox');
+    var currentProject = CoreTasks.get('inbox');
     for (var i = 0; i < lines.length; i++) {
       
       var line = lines[i];
@@ -205,11 +200,11 @@ Tasks.mixin({
       else if (line.match(/^[\^\-v][ ]/)) { // a Task
         
         // extract priority based on bullet
-        var taskPriority = Tasks.TASK_PRIORITY_MEDIUM;
+        var taskPriority = CoreTasks.TASK_PRIORITY_MEDIUM;
         if (line.charAt(0) === '^') {
-          taskPriority = Tasks.TASK_PRIORITY_HIGH;
+          taskPriority = CoreTasks.TASK_PRIORITY_HIGH;
         } else if (line.charAt(0) === 'v') {
-          taskPriority = Tasks.TASK_PRIORITY_LOW;
+          taskPriority = CoreTasks.TASK_PRIORITY_LOW;
         }
         var taskLine = line.slice(2);
         
@@ -263,7 +258,7 @@ Tasks.mixin({
         
         // extract task type
         var taskTypeMatches = /\$([\w]+)/.exec(taskLine);
-        var taskType = Tasks.TASK_TYPE_OTHER;
+        var taskType = CoreTasks.TASK_TYPE_OTHER;
         if(taskTypeMatches) {
           taskType = taskTypeMatches[1];
           output += ' of Type: ' + taskType;
@@ -271,7 +266,7 @@ Tasks.mixin({
         
         // extract task status
         var taskStatusMatches = /@([\w]+)/.exec(taskLine);
-        var taskStatus = Tasks.TASK_STATUS_PLANNED;
+        var taskStatus = CoreTasks.TASK_STATUS_PLANNED;
         if(taskStatusMatches) {
           taskStatus = taskStatusMatches[1];
           output += ' of Status: ' + taskStatus;
@@ -279,14 +274,14 @@ Tasks.mixin({
         
         // extract task validation
         var taskValidationMatches = /%([\w]+)/.exec(taskLine);
-        var taskValidation = Tasks.TASK_VALIDATION_UNTESTED;
+        var taskValidation = CoreTasks.TASK_VALIDATION_UNTESTED;
         if(taskValidationMatches) {
           taskValidation = taskValidationMatches[1];
           output += ' of Validation: ' + taskValidation;
         }
         
         console.log (output);
-        var taskRecord = store.createRecord(Tasks.Task, {
+        var taskRecord = store.createRecord(CoreTasks.Task, {
           name: taskName,
           priority: taskPriority,
           effort: taskEffort,
@@ -323,7 +318,7 @@ Tasks.mixin({
         if (timeLeft) {
           console.log (' with TimeLeft: ' + timeLeft);
         }
-        var projectRecord = store.createRecord(Tasks.Project, { name: projectName, timeLeft: timeLeft, tasks: [] });
+        var projectRecord = store.createRecord(CoreTasks.Project, { name: projectName, timeLeft: timeLeft, tasks: [] });
         if(!projectRecord) {
           console.log('ERROR: project creation failed!');
           continue;
@@ -342,7 +337,7 @@ Tasks.mixin({
    * @returns {Object} user record, if macthing one exists, or null.
    */
   _getUser: function(loginName) {
-    var users = Tasks.get('store').findAll(SC.Query.create({
+    var users = CoreTasks.get('store').findAll(SC.Query.create({
       recordType: Tasks.User, 
       conditions: 'loginName = %@',
       parameters: [loginName]
@@ -362,15 +357,15 @@ Tasks.mixin({
     pc.forEach(function(rec){
           var tasks = rec.get('tasks');
           var len = tasks.get('length');
-          if(rec.get('name') !== Tasks.INBOX_PROJECT_NAME) {
+          if(rec.get('name') !== CoreTasks.INBOX_PROJECT_NAME) {
             data += rec.get('displayName') + '\n';
           }
           for (var i = 0; i < len; i++) {
             task = tasks.objectAt(i);
             switch(task.get('priority')) {
-              case Tasks.TASK_PRIORITY_HIGH: val = '^'; break;
-              case Tasks.TASK_PRIORITY_MEDIUM: val = '-'; break;
-              case Tasks.TASK_PRIORITY_LOW: val = 'v'; break;
+              case CoreTasks.TASK_PRIORITY_HIGH: val = '^'; break;
+              case CoreTasks.TASK_PRIORITY_MEDIUM: val = '-'; break;
+              case CoreTasks.TASK_PRIORITY_LOW: val = 'v'; break;
             }
             data += val + ' ';
             data += task.get('displayName');
@@ -379,11 +374,11 @@ Tasks.mixin({
             user = task.get('assignee');
             if (user) data += ' [' + user.get('name') + ']';
             val = task.get('type');
-            if(val !== Tasks.TASK_TYPE_OTHER)  data += ' $' + val;
+            if(val !== CoreTasks.TASK_TYPE_OTHER)  data += ' $' + val;
             val = task.get('status');
-            if(val !== Tasks.TASK_STATUS_PLANNED)  data += ' @' + val;
+            if(val !== CoreTasks.TASK_STATUS_PLANNED)  data += ' @' + val;
             val = task.get('validation');
-            if(val !== Tasks.TASK_VALIDATION_UNTESTED)  data += ' %' + val;
+            if(val !== CoreTasks.TASK_VALIDATION_UNTESTED)  data += ' %' + val;
             val = task.get('description');
             if(val) {
               var lines = val.split('\n');
@@ -463,8 +458,8 @@ Tasks.mixin({
     var pc = this.get('projectsController');
     var sel = pc.get('selection');
  
-    var store = this.get('store');
-    var task = store.createRecord(Tasks.Project, { name: Tasks.NEW_PROJECT_NAME });
+    var store = CoreTasks.get('store');
+    var task = store.createRecord(CoreTasks.Project, { name: CoreTasks.NEW_PROJECT_NAME });
     store.commitRecords(); // FIXME: [SC] Shouldn't have to call this - CJ investigating an API change to fix this
     pc.addObject(task); // FIXME: [SC] Why do we have to manually add to the controller instead of store notifying?
 
@@ -490,12 +485,12 @@ Tasks.mixin({
     var sel = pc.get('selection');
     
     if (sel && sel.length() > 0) {
-      var store = this.get('store');
+      var store = CoreTasks.get('store');
 
       // extract the project to be deleted
       var project = sel.firstObject();
       var id = project.get('id');
-      store.destroyRecord(Tasks.Project, id);
+      store.destroyRecord(CoreTasks.Project, id);
       store.commitRecords(); // FIXME: [SC] Shouldn't have to call this - CJ investigating an API change to fix this
       pc.removeObject(project); // FIXME: [SC] Why do we have to manually remove from the controller instead of store notifying?
       Tasks.getPath('mainPage.mainPane').get('projectsList').select(0);
@@ -510,8 +505,8 @@ Tasks.mixin({
     // Create a new task with a default name
     // TODO: [SG] Get selected task and get its assignee, then create new task with same assignee
 
-    var store = this.get('store');
-    var task = store.createRecord(Tasks.Task, { name: Tasks.NEW_TASK_NAME });
+    var store = CoreTasks.get('store');
+    var task = store.createRecord(CoreTasks.Task, { name: CoreTasks.NEW_TASK_NAME });
     store.commitRecords(); // FIXME: [SC] Shouldn't have to call this - CJ investigating an API change to fix this
     
     var ac = this.get('assignmentsController');
@@ -531,12 +526,12 @@ Tasks.mixin({
     var sel = tc.get('selection');
     
     if (sel && sel.length() > 0) {
-      var store = this.get('store');
+      var store = CoreTasks.get('store');
 
       //pass the record to be deleted
       var task = sel.firstObject();
       var id = task.get('id');
-      store.destroyRecord(Tasks.Task, id);
+      store.destroyRecord(CoreTasks.Task, id);
       store.commitRecords(); // FIXME: [SC] Shouldn't have to call this - CJ investigating an API change to fix this
 
       tc.set('selection', null);

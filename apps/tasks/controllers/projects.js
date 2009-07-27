@@ -15,10 +15,10 @@ Tasks.projectsController = SC.ArrayController.create(
   getTasksByProjectId: function(projectId){
     if(!projectId) return;
     var q = SC.Query.create({
-      recordType: Tasks.Project,
+      recordType: CoreTasks.Project,
       conditions: "id = '%@'".fmt(projectId)      
     });
-    var project = Tasks.store.findAll(q).firstObject();
+    var project = CoreTasks.get('store').findAll(q).firstObject();
     var tasks = project.get('tasks');
     return tasks;
   }

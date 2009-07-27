@@ -60,11 +60,11 @@ CoreTasks.mixin({
 
         if (!callback) {
           // Check for specific HTTP status callback in default callbacks.
-          callback = CoreTasks.Record.defaultCallbacks['%@.%@'.fmt(method, request.status)];
+          // callback = CoreTasks.Record.defaultCallbacks['%@.%@'.fmt(method, request.status)];
 
           if (!callback) {
             // Check for generailzed status callback in default callbacks.
-            callback = CoreTasks.Record.defaultCallbacks['%@.%@'.fmt(method, status)];
+            // callback = CoreTasks.Record.defaultCallbacks['%@.%@'.fmt(method, status)];
           }
         }
       }

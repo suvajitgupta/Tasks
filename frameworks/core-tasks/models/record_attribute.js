@@ -1,4 +1,4 @@
-/*globals Tasks sc_require */
+/*globals CoreTasks sc_require */
 sc_require('core');
 
 /**
@@ -8,7 +8,7 @@ sc_require('core');
  * @extends SC.RecordAttribute
  * @author Sean Eidemiller
  */
-Tasks.RecordAttribute = SC.RecordAttribute.extend({
+CoreTasks.RecordAttribute = SC.RecordAttribute.extend({
 
   /**
    * An array of allowed values.
@@ -44,5 +44,5 @@ Tasks.RecordAttribute = SC.RecordAttribute.extend({
 // Override the attr() function on SC.Record to return to our own implementation of the
 // RecordAttribute class.
 SC.Record.attr = function(type, opts) {
-  return Tasks.RecordAttribute.attr(type, opts);
+  return CoreTasks.RecordAttribute.attr(type, opts);
 };

@@ -1,25 +1,24 @@
-/*globals Tasks sc_require */
+/*globals CoreTasks sc_require */
 
 sc_require('models/record');
 
-Tasks.NEW_PROJECT_NAME = "_NewProject".loc();
-Tasks.INBOX_PROJECT_NAME = "_InboxProject".loc();
+CoreTasks.NEW_PROJECT_NAME = "_NewProject".loc();
+CoreTasks.INBOX_PROJECT_NAME = "_InboxProject".loc();
 
 /**
  * The project model.
  *
  * A project is a container for tasks
  *
- * @extends Tasks.Record
+ * @extends CoreTasks.Record
  * @author Suvajit Gupta
  */
-// TODO: [SE] refactor all model objects to core framework across all Task GUIs
-Tasks.Project = Tasks.Record.extend(/** @scope Tasks.Project.prototype */ {
+CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototype */ {
 
   /**
    * The name of the project (ex. "FR1").
    */
-  name: SC.Record.attr(String, { isRequired: YES, defaultValue: Tasks.NEW_PROJECT_NAME }),
+  name: SC.Record.attr(String, { isRequired: YES, defaultValue: CoreTasks.NEW_PROJECT_NAME }),
 
   /**
    * The amount of time remaining before project completion, expressed in days.
@@ -31,7 +30,7 @@ Tasks.Project = Tasks.Record.extend(/** @scope Tasks.Project.prototype */ {
   /**
    * The list of tasks associated with this project.
    */
-  tasks: SC.Record.toMany('Tasks.Task'),
+  tasks: SC.Record.toMany('CoreTasks.Task'),
 
   /**
    * The path to the icon associated with a project.
@@ -57,4 +56,9 @@ Tasks.Project = Tasks.Record.extend(/** @scope Tasks.Project.prototype */ {
     }
   }.property('name', 'timeLeft').cacheable()
   
+});
+
+CoreTasks.Project.mixin(/** @scope CoreTasks.Project */ {
+  callbacks: SC.Object.create(),
+  resourcePath: 'project'
 });
