@@ -19,8 +19,8 @@ Infrastructure/Modes
 ^ Develop Model and Fixtures (hardcoded & generated) [SG] <SE> @Done
 - Develop States/Actions corresponding to GUI Statecharts [SG] <SE> @Active
 v Add drag-n-drop of a TXT file into App for data importing (using Google Gears) [MB] @Active
-^ Allow double-click in-cell editing of ListView and SourceListView items [SC] $Bug
-^ Accept changes from ListView item editing after creation of new item [SC] $Bug
+^ Allow double-click in-cell editing of ListView and SourceListView items [SC - BLOCKER] $Bug
+^ Accept changes from ListView item editing after creation of new item [SC - BLOCKER] $Bug
 - Allow SourceListView disclosures to be opened/closed [SC] $Bug
 
 Project Manager GUI
