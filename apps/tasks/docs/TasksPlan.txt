@@ -81,8 +81,8 @@ v Prompt user to save changes before exiting [SG] <SE>
 v Add hover tooltip on application title showing number of Projects [SG] <EG>
 
 Server
-^ Build persistence server (using Persevere) [SE] <SG>
-- Build persistence server (using Joyent) [MB] <SG>
+^ Build persistence server (using Persevere) [SE] <SG> @Active
+- Build persistence server (using Joyent) [MB] <SG> @Active
 - Add Server-side authorization [SE] <SG>
 - Implement server-side data validation checks [SE] <SG>
 - Add local persistence for single user mode (suing Google Gears) [MB] <MB>
