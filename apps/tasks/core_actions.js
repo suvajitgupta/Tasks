@@ -478,8 +478,7 @@ Tasks.mixin({
     
     // wait for run loop to complete before method is called
     itemView.beginEditing.invokeLater(itemView);
-    
-    // FIXME: [SC] when user changes name of New Project it doesn't change in ListView
+
   },
   
   /**

@@ -51,7 +51,7 @@ v Set tasks toolbar button enablement based on having a selection [SG] <EO> @Don
 ^ Add modal popup form for editing [SG] <SE>
 ^ Show effort subtotals (exclude Low items) in curly braces for load balancing [SG] <SE>
 ^ Append "?" for range-based subtotals including unknown efforts [SG] <SE>
-^ Allow drag-n-drop reordering [SC] $Bug
+^ Allow drag-n-drop reordering [SC]
 ^ Allow drag-n-drop reassignment [SG] <MB>
 v Add context menu & hotkeys to Edit/Cut/Copy/Paste/Delete/Duplicate a task [SG] <JL>
 v Add hover tooltip showing Description [SG] <EG>
