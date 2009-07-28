@@ -119,6 +119,9 @@ Tasks.mixin({
     Tasks.set('inbox', inboxProject);
     projects.insertAt(0, inboxProject);
     this.get('projectsController').set('content', projects);
+    
+    var endUsers = store.findAll(Tasks.User);
+    this.get('usersController').set('content',endUsers);
  
     // TODO: [SE] Implement succsss/failure callbacks in the data source.
     /*

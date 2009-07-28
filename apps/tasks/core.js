@@ -30,10 +30,7 @@ Tasks = SC.Object.create(SC.Statechart,
    *
    * This project exists outside of the store because we don't want it to be persisted.
    */
-  inbox: null,
-  
-  // The user selection from that selectField
-  userSelection: null
+  inbox: null
 });
 
 SC.mixin(Function.prototype, {
