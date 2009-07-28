@@ -19,7 +19,9 @@ Infrastructure/Modes
 ^ Develop Model and Fixtures (hardcoded & generated) [SG] <SE> @Done
 - Develop States/Actions corresponding to GUI Statecharts [SG] <SE> @Active
 v Add drag-n-drop of a TXT file into App for data importing (using Google Gears) [MB] @Active
-- Allow SourceListView disclosures to be opened/closed [SC] $Bug
+- Drag-n-drop in SourceListView is broken (Apple has on priority list) [SC] $Bug
+- Allow SourceListView disclosures to be opened/closed (Apple has on priority list) [SC] $Bug
+- Add missing 'localize' support back in CollectionView (regression from SC 0.9) [SC] $Bug
 
 Project Manager GUI
 ^ Add Master/Detail Explorer view with click selection of Projects showing corresponding Tasks [JH2] <SG> @Done
@@ -28,7 +30,7 @@ Project Manager GUI
 ^ Add "+" & "-" buttons in projects Toolbar [SG] <SC> @Done
 v Add summary in projects toolbar showing number of Tasks for selected Project [SG] <MB> @Done
 v Set projects toolbar button enablement based on having a selection [SG] <EO> @Done
-^ Add drag-n-drop reordering [SC] @Done
+^ Add drag-n-drop reordering [SG] @Done
 - Select first project at startup [JH2] <SG> @Done
 ^ Add virtual Inbox project to group all unallocated tasks [SG] <SE> @Done
 - Disallow Inbox project from being deleted [SG] <SE>
@@ -51,7 +53,7 @@ v Set tasks toolbar button enablement based on having a selection [SG] <EO> @Don
 ^ Add modal popup form for editing [SG] <SE>
 ^ Show effort subtotals (exclude Low items) in curly braces for load balancing [SG] <SE>
 ^ Append "?" for range-based subtotals including unknown efforts [SG] <SE>
-^ Allow drag-n-drop reordering [SC]
+^ Allow drag-n-drop reordering (preserve order when persisting) [SG] <SE>
 ^ Allow drag-n-drop reassignment [SG] <MB>
 v Add context menu & hotkeys to Edit/Cut/Copy/Paste/Delete/Duplicate a task [SG] <JL>
 v Add hover tooltip showing Description [SG] <EG>

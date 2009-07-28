@@ -4,8 +4,11 @@
  * @author Sean Eidemiller
  * @author Suvajit GÏupta
  */
-/*globals Tasks sc_require */
+/*globals CoreTasks Tasks sc_require */
 sc_require('core');
+
+// FIXME: [SC] Shouldn't have to Store.commitRecords() after createRecord for Fixtures Data Source.
+// FIXME: [SC] Shouldn't have to manually add/remove to/from controller instead of store notifying of changes
 
 Tasks.mixin({
   
@@ -116,8 +119,6 @@ Tasks.mixin({
     // Create Inbox project to hold all unassigned tasks
     var inboxProject = store.createRecord(CoreTasks.Project,
       { id: 0, name: CoreTasks.INBOX_PROJECT_NAME, tasks: unassigned });
-
-    // FIXME: [SC] Shouldn't have to call this - CJ investigating an API change to fix this.
     store.commitRecords();
 
     CoreTasks.set('inbox', inboxProject);
@@ -171,7 +172,6 @@ Tasks.mixin({
     ' \t \n' +
     'Your Project {12}\n' +
     '- Your first task {2} [cyberpunk] <enemy1> @Done\n' +
-    // FIXME: [SE] why is this not throwing an exception since it is not a valid value
     '- Your second task {4-5} [boo] <bigboss> @NoIdea\n';
     this._parseAndLoadData(data);
     this.get('assignmentsController').showAssignments();
@@ -255,6 +255,9 @@ Tasks.mixin({
             continue;
           }
         }
+        
+        // FIXME: [SE] enforce valid values during record creation & support valid value checking via Model objects
+        // FIXME: [SG] check for valid values during importing of task type/status/validation
         
         // extract task type
         var taskTypeMatches = /\$([\w]+)/.exec(taskLine);
@@ -460,8 +463,8 @@ Tasks.mixin({
  
     var store = CoreTasks.get('store');
     var task = store.createRecord(CoreTasks.Project, { name: CoreTasks.NEW_PROJECT_NAME });
-    store.commitRecords(); // FIXME: [SC] Shouldn't have to call this - CJ investigating an API change to fix this
-    pc.addObject(task); // FIXME: [SC] Why do we have to manually add to the controller instead of store notifying?
+    store.commitRecords();
+    pc.addObject(task);
 
     // TODO: [SG] add new project right after currently selected project, if one
     var listView = Tasks.getPath('mainPage.mainPane').get('projectsList');
@@ -491,8 +494,8 @@ Tasks.mixin({
       var project = sel.firstObject();
       var id = project.get('id');
       store.destroyRecord(CoreTasks.Project, id);
-      store.commitRecords(); // FIXME: [SC] Shouldn't have to call this - CJ investigating an API change to fix this
-      pc.removeObject(project); // FIXME: [SC] Why do we have to manually remove from the controller instead of store notifying?
+      store.commitRecords();
+      pc.removeObject(project);
       Tasks.getPath('mainPage.mainPane').get('projectsList').select(0);
     }
   },
@@ -507,10 +510,10 @@ Tasks.mixin({
 
     var store = CoreTasks.get('store');
     var task = store.createRecord(CoreTasks.Task, { name: CoreTasks.NEW_TASK_NAME });
-    store.commitRecords(); // FIXME: [SC] Shouldn't have to call this - CJ investigating an API change to fix this
+    store.commitRecords();
     
     var ac = this.get('assignmentsController');
-    ac.addObject(task); // FIXME: [SC] Why do we have to manually add to the controller instead of store notifying?
+    ac.addObject(task);
     ac.showAssignments();
 
     // TODO: [SG] Begin editing newly created item.
@@ -532,11 +535,11 @@ Tasks.mixin({
       var task = sel.firstObject();
       var id = task.get('id');
       store.destroyRecord(CoreTasks.Task, id);
-      store.commitRecords(); // FIXME: [SC] Shouldn't have to call this - CJ investigating an API change to fix this
+      store.commitRecords();
 
       tc.set('selection', null);
       var ac = this.get('assignmentsController');      
-      ac.removeObject(task); // FIXME: [SC] Why do we have to manually remove from the controller instead of store notifying?
+      ac.removeObject(task);
       ac.showAssignments();
       
       // TODO: [SG] Select task after deleted task, if any

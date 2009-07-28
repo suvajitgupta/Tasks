@@ -132,6 +132,7 @@ Tasks.mainPage = SC.Page.design({
           contentValueKey: 'displayName',
           contentBinding: 'Tasks.projectsController.arrangedObjects',
           selectionBinding: 'Tasks.projectsController.selection',
+          localize: YES,
           hasContentIcon: YES,
           contentIconKey:  'icon',
           isEditable: YES,
@@ -150,6 +151,7 @@ Tasks.mainPage = SC.Page.design({
           contentValueKey: 'displayName',
           contentBinding: 'Tasks.tasksController.arrangedObjects',
           selectionBinding: 'Tasks.tasksController.selection',
+          localize: YES,
           hasContentIcon: YES,
           contentIconKey: 'icon',
           isEditable: YES,
@@ -251,7 +253,7 @@ Tasks.mainPage = SC.Page.design({
         
         SC.SeparatorView.design({
           layoutDirection: SC.LAYOUT_VERTICAL,
-          layout: { top: 5, bottom: 5, left: 275, width: 4 }
+          layout: { top: 5, bottom: 5, left: 280, width: 4 }
         }),
 
         SC.RadioView.design({
@@ -276,7 +278,7 @@ Tasks.mainPage = SC.Page.design({
         
         SC.SeparatorView.design({
           layoutDirection: SC.LAYOUT_VERTICAL,
-          layout: { top: 5, bottom: 5, left: 535, width: 4 }
+          layout: { top: 5, bottom: 5, left: 540, width: 4 }
         }),
 
         SC.RadioView.design({
