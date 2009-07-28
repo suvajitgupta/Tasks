@@ -131,12 +131,18 @@ Tasks.Task = Tasks.Record.extend({
   /**
    * A string summarizing key facets of the Task for display.
    */
-  displayName: function() {
-    var name = this.get('name');
-    var effort = this.get('effort');
-    var ret = name;
-    if (effort) ret += ' {' + effort + '}';
-    return ret;
+  displayName: function(key, value) {
+    if (value !== undefined) {
+      this.propertyWillChange('name');
+      this.name = value ;
+      this.propertyDidChange('name');
+    } else {
+      var name = this.get('name');
+      var effort = this.get('effort');
+      var ret = name;
+      if (effort) ret += ' {' + effort + '}';
+      return ret;
+    }
   }.property('name', 'effort').cacheable()
 
 });

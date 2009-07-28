@@ -43,12 +43,18 @@ Tasks.Project = Tasks.Record.extend(/** @scope Tasks.Project.prototype */ {
   /**
    * A string summarizing key facets of the Project for display.
    */
-  displayName: function() {
-    var name = this.get('name');
-    var timeLeft = this.get('timeLeft');
-    var ret = name;
-    if (timeLeft) ret += ' {' + timeLeft + '}';
-    return ret;
+  displayName: function(key, value) {
+    if (value !== undefined) {
+      this.propertyWillChange('name');
+      this.name = value ;
+      this.propertyDidChange('name');
+    } else {
+      var name = this.get('name');
+      var timeLeft = this.get('timeLeft');
+      var ret = name;
+      if (timeLeft) ret += ' {' + timeLeft + '}';
+      return ret;
+    }
   }.property('name', 'timeLeft').cacheable()
   
 });
