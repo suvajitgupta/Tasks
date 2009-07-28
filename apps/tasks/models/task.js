@@ -134,7 +134,7 @@ Tasks.Task = Tasks.Record.extend({
   displayName: function(key, value) {
     if (value !== undefined) {
       this.propertyWillChange('name');
-      this.name = value ;
+      this.writeAttribute('name', value);
       this.propertyDidChange('name');
     } else {
       var name = this.get('name');
