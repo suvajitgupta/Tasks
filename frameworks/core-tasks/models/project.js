@@ -3,7 +3,7 @@
 sc_require('models/record');
 
 CoreTasks.NEW_PROJECT_NAME = '_NewProject';
-CoreTasks.INBOX_PROJECT_NAME = '_InboxProject';
+CoreTasks.INBOX_NAME = '_Inbox';
 
 /**
  * The project model.

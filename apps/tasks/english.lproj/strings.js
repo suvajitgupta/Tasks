@@ -42,7 +42,7 @@ SC.stringsFor('English', {
   
   // Project strings
   '_NewProject': "New Project",
-  '_InboxProject': "Inbox",
+  '_Inbox': "Inbox",
   
   // User strings
   '_FirstLast': "First Last",

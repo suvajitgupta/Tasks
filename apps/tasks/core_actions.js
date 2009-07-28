@@ -118,7 +118,7 @@ Tasks.mixin({
 
     // Create Inbox project to hold all unassigned tasks
     var inboxProject = store.createRecord(CoreTasks.Project,
-      { id: 0, name: CoreTasks.INBOX_PROJECT_NAME, tasks: unassigned });
+      { id: 0, name: CoreTasks.INBOX_NAME, tasks: unassigned });
     store.commitRecords();
 
     CoreTasks.set('inbox', inboxProject);
@@ -360,7 +360,7 @@ Tasks.mixin({
     pc.forEach(function(rec){
           var tasks = rec.get('tasks');
           var len = tasks.get('length');
-          if(rec.get('name') !== CoreTasks.INBOX_PROJECT_NAME) {
+          if(rec.get('name') !== CoreTasks.INBOX_NAME) {
             data += rec.get('displayName') + '\n';
           }
           for (var i = 0; i < len; i++) {
