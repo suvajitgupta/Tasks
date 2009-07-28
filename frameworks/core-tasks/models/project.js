@@ -2,8 +2,8 @@
 
 sc_require('models/record');
 
-CoreTasks.NEW_PROJECT_NAME = "_NewProject".loc();
-CoreTasks.INBOX_PROJECT_NAME = "_InboxProject".loc();
+CoreTasks.NEW_PROJECT_NAME = '_NewProject';
+CoreTasks.INBOX_PROJECT_NAME = '_InboxProject';
 
 /**
  * The project model.

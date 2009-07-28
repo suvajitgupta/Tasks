@@ -1,7 +1,7 @@
 // ==========================================================================
 // Project: Tasks
 // ==========================================================================
-/*globals Tasks sc_require */
+/*globals CoreTasks Tasks sc_require */
 sc_require('views/welcome');
 sc_require('views/summary');
 sc_require('views/task');
@@ -57,7 +57,6 @@ Tasks.mainPage = SC.Page.design({
       SC.SelectFieldView.design({
         layout: { centerY: 0, height: 24, left: 320, width: 150 },
         nameKey: 'loginName',
-        localize: YES,
         emptyName: "_Everyone".loc(), // FIXME: [JH2] fix empty line after this item in dropdown
         objects: CoreTasks.User.FIXTURES, // TODO: [JH2] bind to a User Controller that pulls users from store
         valueBinding: 'Tasks.assignmentsController.assigneeSelection'
@@ -236,11 +235,11 @@ Tasks.mainPage = SC.Page.design({
           layout: { centerY: 2, height: 21, left: 105, width: 180 },
           escapeHTML: NO,
           items: [
-            { title: '<span class=tasks-priority-high>' + CoreTasks.TASK_PRIORITY_HIGH + '</span>&nbsp;',
+            { title: '<span class=tasks-priority-high>' + CoreTasks.TASK_PRIORITY_HIGH.loc() + '</span>&nbsp;',
               value: CoreTasks.TASK_PRIORITY_HIGH },
-            { title: '<span class=tasks-priority-medium>' + CoreTasks.TASK_PRIORITY_MEDIUM + '</span>&nbsp;',
+            { title: '<span class=tasks-priority-medium>' + CoreTasks.TASK_PRIORITY_MEDIUM.loc() + '</span>&nbsp;',
               value: CoreTasks.TASK_PRIORITY_MEDIUM },
-            { title: '<span class=tasks-priority-low>' + CoreTasks.TASK_PRIORITY_LOW + '</span>&nbsp;',
+            { title: '<span class=tasks-priority-low>' + CoreTasks.TASK_PRIORITY_LOW.loc() + '</span>&nbsp;',
               value: CoreTasks.TASK_PRIORITY_LOW }
           ],
           itemTitleKey: 'title',
@@ -259,13 +258,13 @@ Tasks.mainPage = SC.Page.design({
           layout: { centerY: 2, height: 21, left: 295, width: 240 },
           escapeHTML: NO,
           items: [
-            { title: '<span class=tasks-status-planned>' + CoreTasks.TASK_STATUS_PLANNED + '</span>&nbsp;',
+            { title: '<span class=tasks-status-planned>' + CoreTasks.TASK_STATUS_PLANNED.loc() + '</span>&nbsp;',
               value: CoreTasks.TASK_STATUS_PLANNED },
-            { title: '<span class=tasks-status-active>' + CoreTasks.TASK_STATUS_ACTIVE + '</span>&nbsp;',
+            { title: '<span class=tasks-status-active>' + CoreTasks.TASK_STATUS_ACTIVE.loc() + '</span>&nbsp;',
               value: CoreTasks.TASK_STATUS_ACTIVE },
-            { title: '<span class=tasks-status-done>' + CoreTasks.TASK_STATUS_DONE + '</span>&nbsp;',
+            { title: '<span class=tasks-status-done>' + CoreTasks.TASK_STATUS_DONE.loc() + '</span>&nbsp;',
               value: CoreTasks.TASK_STATUS_DONE },
-            { title: '<span class=tasks-status-risky>' + CoreTasks.TASK_STATUS_RISKY + '</span>&nbsp;',
+            { title: '<span class=tasks-status-risky>' + CoreTasks.TASK_STATUS_RISKY.loc() + '</span>&nbsp;',
               value: CoreTasks.TASK_STATUS_RISKY }
           ],
           itemTitleKey: 'title',
@@ -284,11 +283,11 @@ Tasks.mainPage = SC.Page.design({
           layout: { centerY: 2, height: 21, left: 555, width: 220 },
           escapeHTML: NO,
           items: [
-            { title: '<span class=tasks-validation-untested>' + CoreTasks.TASK_VALIDATION_UNTESTED + '</span>&nbsp;',
+            { title: '<span class=tasks-validation-untested>' + CoreTasks.TASK_VALIDATION_UNTESTED.loc() + '</span>&nbsp;',
               value: CoreTasks.TASK_VALIDATION_UNTESTED },
-            { title: '<span class=tasks-validation-passed>' + CoreTasks.TASK_VALIDATION_PASSED + '</span>&nbsp;',
+            { title: '<span class=tasks-validation-passed>' + CoreTasks.TASK_VALIDATION_PASSED.loc() + '</span>&nbsp;',
               value: CoreTasks.TASK_VALIDATION_PASSED },
-            { title: '<span class=tasks-validation-failed>' + CoreTasks.TASK_VALIDATION_FAILED + '</span>&nbsp;',
+            { title: '<span class=tasks-validation-failed>' + CoreTasks.TASK_VALIDATION_FAILED.loc() + '</span>&nbsp;',
               value: CoreTasks.TASK_VALIDATION_FAILED }
           ],
           itemTitleKey: 'title',

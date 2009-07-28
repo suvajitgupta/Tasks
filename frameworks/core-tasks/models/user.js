@@ -1,14 +1,14 @@
 /*globals CoreTasks sc_require */
 sc_require('models/record');
 
-CoreTasks.NEW_USER_NAME = "_FirstLast".loc();
-CoreTasks.NEW_USER_LOGIN = "_first.last".loc();
-CoreTasks.USER_UNASSIGNED = "_Unassigned".loc();
+CoreTasks.NEW_USER_NAME = '_FirstLast';
+CoreTasks.NEW_USER_LOGIN = '_first.last';
+CoreTasks.USER_UNASSIGNED = '_Unassigned';
 
 // Roles:
-CoreTasks.USER_ROLE_MANAGER = "_Manager".loc();
-CoreTasks.USER_ROLE_DEVELOPER = "_Developer".loc(); // default
-CoreTasks.USER_ROLE_TESTER = "_Tester".loc();
+CoreTasks.USER_ROLE_MANAGER = '_Manager';
+CoreTasks.USER_ROLE_DEVELOPER = '_Developer'; // default
+CoreTasks.USER_ROLE_TESTER = '_Tester';
 
 /**
  * The user model.
@@ -20,12 +20,12 @@ CoreTasks.USER_ROLE_TESTER = "_Tester".loc();
 CoreTasks.User = CoreTasks.Record.extend({
 
   /**
-   * The full name of the user (ex. "John Doe").
+   * The full name of the user.
    */
   name: SC.Record.attr(String, { isRequired: YES, defaultValue: CoreTasks.NEW_USER_NAME }),
 
   /**
-   * The login name of the user (ex. "jdoe").
+   * The login name of the user.
    */
   loginName: SC.Record.attr(String, { isRequired: YES, defaultValue: CoreTasks.NEW_USER_LOGIN }),
 
@@ -65,7 +65,7 @@ CoreTasks.User = CoreTasks.Record.extend({
   displayName: function() {
     var name = this.get('name');
     var loginName = this.get('loginName');
-    return "%@ (%@)".fmt(name, loginName);
+    return '%@ (%@)'.fmt(name, loginName);
   }.property('name', 'loginName').cacheable()
 
 });

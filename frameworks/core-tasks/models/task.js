@@ -2,28 +2,28 @@
 
 sc_require('models/record');
 
-CoreTasks.NEW_TASK_NAME = "_NewTask".loc();
+CoreTasks.NEW_TASK_NAME = '_NewTask';
 
 // Types:
-CoreTasks.TASK_TYPE_FEATURE = "_Feature".loc(); // default
-CoreTasks.TASK_TYPE_BUG = "_Bug".loc();
-CoreTasks.TASK_TYPE_OTHER = "_Other".loc();
+CoreTasks.TASK_TYPE_FEATURE = '_Feature'; // default
+CoreTasks.TASK_TYPE_BUG = '_Bug';
+CoreTasks.TASK_TYPE_OTHER = '_Other';
 
 // Priorities:
-CoreTasks.TASK_PRIORITY_HIGH = "_High".loc();
-CoreTasks.TASK_PRIORITY_MEDIUM = "_Medium".loc(); // default
-CoreTasks.TASK_PRIORITY_LOW = "_Low".loc();
+CoreTasks.TASK_PRIORITY_HIGH = '_High';
+CoreTasks.TASK_PRIORITY_MEDIUM = '_Medium'; // default
+CoreTasks.TASK_PRIORITY_LOW = '_Low';
 
 // Development status:
-CoreTasks.TASK_STATUS_PLANNED = "_Planned".loc(); // default
-CoreTasks.TASK_STATUS_ACTIVE = "_Active".loc();
-CoreTasks.TASK_STATUS_DONE = "_Done".loc();
-CoreTasks.TASK_STATUS_RISKY = "_Risky".loc();
+CoreTasks.TASK_STATUS_PLANNED = '_Planned'; // default
+CoreTasks.TASK_STATUS_ACTIVE = '_Active';
+CoreTasks.TASK_STATUS_DONE = '_Done';
+CoreTasks.TASK_STATUS_RISKY = '_Risky';
 
 // Validation status:
-CoreTasks.TASK_VALIDATION_UNTESTED = "_Untested".loc(); // default
-CoreTasks.TASK_VALIDATION_PASSED = "_Passed".loc();
-CoreTasks.TASK_VALIDATION_FAILED = "_Failed".loc();
+CoreTasks.TASK_VALIDATION_UNTESTED = '_Untested'; // default
+CoreTasks.TASK_VALIDATION_PASSED = '_Passed';
+CoreTasks.TASK_VALIDATION_FAILED = '_Failed';
 
 /**
  * The task model.
@@ -37,7 +37,7 @@ CoreTasks.TASK_VALIDATION_FAILED = "_Failed".loc();
 CoreTasks.Task = CoreTasks.Record.extend({
 
   /**
-   * A one-line summary of the task (ex. "Widget: Add a nifty feature").
+   * A one-line summary of the task.
    */
   name: SC.Record.attr(String, { isRequired: YES, defaultValue: CoreTasks.NEW_TASK_NAME }),
 
