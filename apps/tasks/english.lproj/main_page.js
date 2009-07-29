@@ -58,7 +58,8 @@ Tasks.mainPage = SC.Page.design({
         layout: { centerY: 0, height: 24, left: 320, width: 150 },
         nameKey: 'loginName',
         emptyName: "_Everyone".loc(), // FIXME: [JH2] fix empty line after this item in dropdown
-        objects: CoreTasks.User.FIXTURES, // TODO: [JH2] bind to a User Controller that pulls users from store
+        objects: CoreTasks.User.FIXTURES, // TODO: [SG] bind to userController
+        // objects: 'Tasks.usersController.content',
         valueBinding: 'Tasks.assignmentsController.assigneeSelection'
       }),
       
@@ -90,7 +91,7 @@ Tasks.mainPage = SC.Page.design({
         layout: { centerY: 0, height: 24, right: 75, width: 50 },
         title: "_Save".loc(),
         titleMinWidth: 0,
-        // TODO: [SG] add isEnabledBinding to track changes,
+        // TODO: [SG] add isEnabledBinding to track changes
         toolTip: 'Save Projects/Tasks',
         target: 'Tasks',
         action: 'saveData'

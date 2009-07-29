@@ -106,15 +106,6 @@ Tasks.mixin({
       unassigned.push(taskId);
     }
     
-    /* TODO: [SG] See if it is possible to have AllProjects and another Project reference the same tasks
-    // Create 'All' project to hold all unassigned tasks
-    var allProjects = store.createRecord(CoreTasks.Project, {
-      name: CoreTasks.ALL_PROJECTS_NAME,
-      tasks: all
-    });
-    projects.insertAt(0, allProjects);
-    */
-    
     // Identify unassigned tasks to be stored in Inbox
     var projectCount = projects.get('length');
     for (i = 0; i < projectCount; i++) {
@@ -128,6 +119,13 @@ Tasks.mixin({
       }
     }
 
+    // Create 'All' project to hold all unassigned tasks
+    var allProjects = store.createRecord(CoreTasks.Project, {
+      name: CoreTasks.ALL_PROJECTS_NAME,
+      tasks: all
+    });
+    projects.insertAt(0, allProjects);
+    
     // Create 'Inbox' project to hold all unassigned tasks
     var inboxProject = store.createRecord(CoreTasks.Project, {
       name: CoreTasks.INBOX_NAME,
@@ -139,8 +137,11 @@ Tasks.mixin({
     
     this.get('projectsController').set('content', projects);
     
-    // var users = store.findAll(Tasks.User);
-    // this.get('usersController').set('content', users);
+    var users = store.findAll(SC.Query.create({
+      recordType: CoreTasks.User,
+      order: 'loginName ASC'
+    }));
+    this.get('usersController').set('content', users);
     
   },
 
