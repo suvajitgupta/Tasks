@@ -94,14 +94,26 @@ Tasks.mixin({
     
     var store = CoreTasks.get('store');
     var projects = store.findAll(CoreTasks.Project);
+    var tasks = store.findAll(CoreTasks.Task);
     
     // Extract all unassigned tasks for the Inbox
-    var tasks = store.findAll(CoreTasks.Task), task, unassigned = [];
-    var taskCount = tasks.get('length');
+    var task, taskCount = tasks.get('length');
+    var all = [], unassigned = [];
     for (var i = 0; i < taskCount; i++) {
       task = tasks.objectAt(i);
-      unassigned.push(task.get('id')); // add in all tasks
+      var taskId = task.get('id');
+      all.push(taskId);
+      unassigned.push(taskId);
     }
+    
+    /* TODO: [SG] See if it is possible to have AllProjects and another Project reference the same tasks
+    // Create 'All' project to hold all unassigned tasks
+    var allProjects = store.createRecord(CoreTasks.Project, {
+      name: CoreTasks.ALL_PROJECTS_NAME,
+      tasks: all
+    });
+    projects.insertAt(0, allProjects);
+    */
     
     // Identify unassigned tasks to be stored in Inbox
     var projectCount = projects.get('length');
@@ -112,21 +124,24 @@ Tasks.mixin({
       for (var j = 0; j < taskCount; j++) {
         task = tasks.objectAt(j);
         var idx = unassigned.indexOf(task.get('id'));
-        unassigned.splice(idx, 1); // remove assigned tasks
+        unassigned.splice(idx, 1);
       }
     }
 
-    // Create Inbox project to hold all unassigned tasks
-    var inboxProject = store.createRecord(CoreTasks.Project,
-      { id: 0, name: CoreTasks.INBOX_NAME, tasks: unassigned });
-    store.commitRecords();
-
+    // Create 'Inbox' project to hold all unassigned tasks
+    var inboxProject = store.createRecord(CoreTasks.Project, {
+      name: CoreTasks.INBOX_NAME,
+      tasks: unassigned
+    });
     CoreTasks.set('inbox', inboxProject);
+    store.commitRecords();
     projects.insertAt(0, inboxProject);
+    
     this.get('projectsController').set('content', projects);
     
-    var endUsers = store.findAll(Tasks.User);
-    this.get('usersController').set('content',endUsers);
+    // var users = store.findAll(Tasks.User);
+    // this.get('usersController').set('content', users);
+    
   },
 
   /**
@@ -321,7 +336,10 @@ Tasks.mixin({
         if (timeLeft) {
           console.log (' with TimeLeft: ' + timeLeft);
         }
-        var projectRecord = store.createRecord(CoreTasks.Project, { name: projectName, timeLeft: timeLeft, tasks: [] });
+        var projectRecord = store.createRecord(CoreTasks.Project, {
+          name: projectName, timeLeft:
+          timeLeft, tasks: []
+        });
         if(!projectRecord) {
           console.log('ERROR: project creation failed!');
           continue;

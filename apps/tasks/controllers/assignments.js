@@ -20,22 +20,6 @@ Tasks.assignmentsController = SC.ArrayController.create(
   assigneeSelection: null,
   searchFilter: null,
   
-  showAllAssignments: function() { // show all tasks for a selected user across all projects
-    
-    var store = CoreTasks.get('store');
-    var selectedUser = store.find(CoreTasks.User, this.get('assigneeSelection').id);
-    var tasks = store.findAll(SC.Query.create({
-      recordType: CoreTasks.Task, 
-      conditions: 'assignee = %@',
-      parameters: [selectedUser]
-    }));
-    
-    var ret = [];
-    ret.push(this._createAssignmentNodeHash(selectedUser.get('displayName'), tasks));
-    this.set('assignedTasks', SC.Object.create({ treeItemChildren: ret, treeItemIsExpanded: YES }));
-    
-  },
-  
   showAssignments: function() { // show tasks for selected user that matches search filter
     
     var sf = this.get('searchFilter');

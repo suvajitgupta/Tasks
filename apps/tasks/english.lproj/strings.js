@@ -24,6 +24,11 @@ SC.stringsFor('English', {
   '_Import': "Import",
   '_Export': "Export",
   
+  // Project strings
+  '_NewProject': "New Project",
+  '_Inbox': "Inbox",
+  '_AllProjects': "All Projects",
+  
   // Task strings
   '_NewTask': "New Task",
   '_Feature': "Feature",
@@ -39,10 +44,6 @@ SC.stringsFor('English', {
   '_Untested': "Untested",
   '_Passed': "Passed",
   '_Failed': "Failed",
-  
-  // Project strings
-  '_NewProject': "New Project",
-  '_Inbox': "Inbox",
   
   // User strings
   '_FirstLast': "First Last",
