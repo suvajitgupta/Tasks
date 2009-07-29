@@ -3,6 +3,8 @@
  *
  * @author Sean Eidemiller
  */
+/*globals CoreTasks */
+ 
 CoreTasks = SC.Object.create({
 
   // The main data store.
@@ -30,9 +32,6 @@ CoreTasks = SC.Object.create({
    * This project exists outside of the store because we don't want it to be persisted.
    */
   inbox: null,
-
-  // The user selection from that selectField
-  userSelection: null,
 
   /**
    * Creates a new record in the store.
