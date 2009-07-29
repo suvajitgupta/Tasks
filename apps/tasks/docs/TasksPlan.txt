@@ -18,7 +18,7 @@ v Design single/multi-user modes & access via Desktop/Web/Mobile clients [SG] <S
 Infrastructure/Modes
 ^ Develop Model and Fixtures (hardcoded & generated) [SG] <SE> @Done
 - Develop States/Actions corresponding to GUI Statecharts [SG] <SE> @Active
-v Add drag-n-drop of a TXT file into App for data importing (using Google Gears) [MB] @Active
+v Add drag-n-drop of a TXT file into App for data importing (using Google Gears) [MB] <SG> @Active
 - Drag-n-drop in SourceListView is broken (Apple has on priority list) [SC] $Bug
 - Allow SourceListView disclosures to be opened/closed (Apple has on priority list) [SC] $Bug
 - Add missing 'localize' support back in CollectionView (regression from SC 0.9) [SC] $Bug
@@ -34,7 +34,7 @@ v Set projects toolbar button enablement based on having a selection [SG] <EO> @
 - Select first project at startup [JH2] <SG> @Done
 ^ Add virtual Inbox project to group all unallocated tasks [SG] <SE> @Done
 - Disallow Inbox project from being deleted [SG] <SE>
-^ Allow drag-n-drop Task reallocation to Projects [MB] <SG>
+^ Allow drag-n-drop Task reallocation to Projects [SG] <MB>
 v Add context menu to Delete a project [SG] <JL>
 - Add warning Alert box about deleting Project with Tasks [SG] <SE>
 v Add hover tooltip showing number of Tasks in project [SG] <EG>
@@ -82,10 +82,10 @@ v Add hover tooltip on application title showing number of Projects [SG] <EG>
 
 Server
 ^ Build persistence server (using Persevere) [SE] <SG> @Active
-- Build persistence server (using Joyent) [MB] <SG> @Active
+- Build alternate persistence server (using Joyent) [MB] <SG> @Active
 - Add Server-side authorization [SE] <SG>
-- Implement server-side data validation checks [SE] <SG>
-- Add local persistence for single user mode (suing Google Gears) [MB] <MB>
+- Add server-side data validation checks/return appropriate error codes [SE] <SG>
+- Add local persistence for single user mode (using Google Gears) [MB] <SG>
 v Facilitae multi-user mode using Transaction Time [SE] <EO>
 
 Hardening/Styling
@@ -93,6 +93,7 @@ Hardening/Styling
 - Develop Model unit tests [SG] <BB> @Active
 - Develop View unit tests [SG] <MB> @Active
 v Style via CSS, embed catchy/sprited images [MG] <SG> @Active
+- Handle secondary scenarios/server error codes [SG] <SE>
 
 Packaging/Delivery
 ^ Develop Web client (ported to Firefox, Internet Explorer, Safari, Chrome) [SG] <MT> @Active
