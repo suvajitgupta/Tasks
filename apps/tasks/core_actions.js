@@ -279,7 +279,6 @@ Tasks.mixin({
    * @returns {Object} user record, if macthing one exists, or null.
    */
   _getUser: function(loginName) {
-    console.log('DEBUG: ' + loginName);
     var users = CoreTasks.get('store').findAll(SC.Query.create({
       recordType: CoreTasks.User, 
       conditions: 'loginName = %@',
