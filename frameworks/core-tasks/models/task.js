@@ -184,15 +184,15 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
     }
            
     // extract task assignee
-    var taskAssigneeMatches = /\[([\w]+)\]/.exec(taskLine);
     var taskAssignee = null;
+    var taskAssigneeMatches = /\[([\w]+)\]/.exec(taskLine);
     if(taskAssigneeMatches) {
       taskAssignee = taskAssigneeMatches[1];
     }
     
     // extract task submitter
-    var taskSubmitterMatches = /\<([\w]+)\>/.exec(taskLine);
     var taskSubmitter = null;
+    var taskSubmitterMatches = /\<([\w]+)\>/.exec(taskLine);
     if(taskSubmitterMatches) {
       taskSubmitter = taskSubmitterMatches[1];
     }

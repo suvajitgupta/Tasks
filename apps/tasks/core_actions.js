@@ -218,21 +218,26 @@ Tasks.mixin({
         var taskHash = CoreTasks.Task.parse(line);
         console.log ('Task:\t\t' + JSON.stringify(taskHash));
         
-        var assigneeUser = this._getUser(taskHash.taskAssignee);
-        if (assigneeUser) {
-          taskHash.taskAssignee = assigneeUser.get('id');
+        if(taskHash.assignee) {
+        var assigneeUser = this._getUser(taskHash.assignee);
+          if (assigneeUser) {
+            taskHash.assignee = assigneeUser.get('id');
+          }
+          else {
+            console.log('Task Import Error - no such assignee: ' + taskHash.assignee);
+            continue;
+          }
         }
-        else {
-          console.log('Task Parse Error - no such assignee: ' + taskHash.taskAssignee);
-          continue;
-        }
-        var submitterUser = this._getUser(taskHash.taskSubmitter);
-        if (submitterUser) {
-          taskHash.taskSubmitter = submitterUser.get('id');
-        }
-        else {
-          console.log('Task Parse Error - no such submitter: ' + taskHash.taskSubmitter);
-          continue;
+        
+        if(taskHash.submitter) {
+          var submitterUser = this._getUser(taskHash.submitter);
+          if (submitterUser) {
+            taskHash.submitter = submitterUser.get('id');
+          }
+          else {
+            console.log('Task Import Error - no such submitter: ' + taskHash.submitter);
+            continue;
+          }
         }
         
         var taskRecord = store.createRecord(CoreTasks.Task, taskHash);
@@ -256,7 +261,7 @@ Tasks.mixin({
         console.log ('Project:\t\t' + JSON.stringify(projectHash));
         var projectRecord = store.createRecord(CoreTasks.Project, projectHash);
         if(!projectRecord) {
-          console.log('Import Error: project creation failed!');
+          console.log('Project Import Error: project creation failed!');
           continue;
         }
         store.commitRecords();
@@ -274,6 +279,7 @@ Tasks.mixin({
    * @returns {Object} user record, if macthing one exists, or null.
    */
   _getUser: function(loginName) {
+    console.log('DEBUG: ' + loginName);
     var users = CoreTasks.get('store').findAll(SC.Query.create({
       recordType: CoreTasks.User, 
       conditions: 'loginName = %@',
