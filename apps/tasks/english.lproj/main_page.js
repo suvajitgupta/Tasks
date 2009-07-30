@@ -191,7 +191,7 @@ Tasks.mainPage = SC.Page.design({
           layout: { centerY: 0, left: 40, height: 24, width: 30 },
           title: "-",
           titleMinWidth: 0,
-          isEnabledBinding: 'Tasks.projectsController.hasSelection',
+          isEnabledBinding: 'Tasks.projectsController.isDeletable',
           toolTip: 'Delete Project',
           target: 'Tasks',
           action: 'deleteProject'
