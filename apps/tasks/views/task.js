@@ -17,7 +17,6 @@ Tasks.TaskView = SC.ListItemView.extend(
   render: function(context, firstTime) {
     
     var content = this.get('content');
-    
     if(content){
       
       var priority = content.get('priority');
