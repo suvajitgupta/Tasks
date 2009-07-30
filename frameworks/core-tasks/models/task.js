@@ -144,10 +144,93 @@ CoreTasks.Task = CoreTasks.Record.extend({
       return ret;
     }
   }.property('name', 'effort').cacheable()
-
+  
 });
 
 CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
+  
   callbacks: SC.Object.create(),
-  resourcePath: 'task'
+  resourcePath: 'task',
+
+  /**
+   * Parse a line of text and extract parameters from it.
+   *
+   * @param {String} string to extract parameters from.
+   * @returns {Object} Hash of parsed parameters.
+   */
+  parse: function(line) {
+
+    // extract priority based on bullet
+    var taskPriority = CoreTasks.TASK_PRIORITY_MEDIUM;
+    if (line.charAt(0) === '^') {
+      taskPriority = CoreTasks.TASK_PRIORITY_HIGH;
+    } else if (line.charAt(0) === 'v') {
+      taskPriority = CoreTasks.TASK_PRIORITY_LOW;
+    }
+    var taskLine = line.slice(2);
+    
+    // extract task name
+    var taskNameMatches = /([\w\s]+)[\s]*[\{<\[\$@%]/.exec(taskLine);
+    var taskName = taskLine;
+    if (taskNameMatches) {
+      taskName = taskNameMatches[1];
+    }
+    
+    // extract task effort
+    var taskEffortMatches = /\{(\d+)\}|\{(\d+-\d+)\}/.exec(taskLine);
+    var taskEffort = null;
+    if(taskEffortMatches) {
+      taskEffort = taskEffortMatches[1]? taskEffortMatches[1] : taskEffortMatches[2];
+    }
+           
+    // extract task assignee
+    var taskAssigneeMatches = /\[([\w]+)\]/.exec(taskLine);
+    var taskAssignee = null;
+    if(taskAssigneeMatches) {
+      taskAssignee = taskAssigneeMatches[1];
+    }
+    
+    // extract task submitter
+    var taskSubmitterMatches = /\<([\w]+)\>/.exec(taskLine);
+    var taskSubmitter = null;
+    if(taskSubmitterMatches) {
+      taskSubmitter = taskSubmitterMatches[1];
+    }
+    
+    // FIXME: [SG] check for valid values during importing of task type/status/validation
+    
+    // extract task type
+    var taskTypeMatches = /\$([\w]+)/.exec(taskLine);
+    var taskType = CoreTasks.TASK_TYPE_OTHER;
+    if(taskTypeMatches) {
+      taskType = taskTypeMatches[1];
+    }
+    
+    // extract task status
+    var taskStatusMatches = /@([\w]+)/.exec(taskLine);
+    var taskStatus = CoreTasks.TASK_STATUS_PLANNED;
+    if(taskStatusMatches) {
+      taskStatus = taskStatusMatches[1];
+    }
+    
+    // extract task validation
+    var taskValidationMatches = /%([\w]+)/.exec(taskLine);
+    var taskValidation = CoreTasks.TASK_VALIDATION_UNTESTED;
+    if(taskValidationMatches) {
+      taskValidation = taskValidationMatches[1];
+    }
+    
+    return {
+      name: taskName,
+      priority: taskPriority,
+      effort: taskEffort,
+      assignee: taskAssignee,
+      submitter: taskSubmitter,
+      type: taskType,
+      status: taskStatus,
+      validation: taskValidation
+    };
+        
+  }
+  
 });

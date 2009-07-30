@@ -215,103 +215,29 @@ Tasks.mixin({
       }
       else if (line.match(/^[\^\-v][ ]/)) { // a Task
         
-        // extract priority based on bullet
-        var taskPriority = CoreTasks.TASK_PRIORITY_MEDIUM;
-        if (line.charAt(0) === '^') {
-          taskPriority = CoreTasks.TASK_PRIORITY_HIGH;
-        } else if (line.charAt(0) === 'v') {
-          taskPriority = CoreTasks.TASK_PRIORITY_LOW;
-        }
-        var taskLine = line.slice(2);
+        var taskHash = CoreTasks.Task.parse(line);
+        console.log ('Task:\t\t' + JSON.stringify(taskHash));
         
-        // extract task name
-        var taskNameMatches = /([\w\s]+)[\s]*[\{<\[\$@%]/.exec(taskLine);
-        var taskName = taskLine;
-        if (taskNameMatches) {
-          taskName = taskNameMatches[1];
+        var assigneeUser = this._getUser(taskHash.taskAssignee);
+        if (assigneeUser) {
+          taskHash.taskAssignee = assigneeUser.get('id');
         }
-        var output = 'Task:\t\t' + taskName + ' of Priority: ' + taskPriority;
-        
-        // extract task effort
-        var taskEffortMatches = /\{(\d+)\}|\{(\d+-\d+)\}/.exec(taskLine);
-        var taskEffort = null;
-        if(taskEffortMatches) {
-          taskEffort = taskEffortMatches[1]? taskEffortMatches[1] : taskEffortMatches[2];
-          output += ' of Effort: ' + taskEffort;
+        else {
+          console.log('Task Parse Error - no such assignee: ' + taskHash.taskAssignee);
+          continue;
         }
-               
-        // extract task assignee
-        var taskAssigneeMatches = /\[([\w]+)\]/.exec(taskLine);
-        var taskAssigneeId = null;
-        if(taskAssigneeMatches) {
-          var taskAssignee = taskAssigneeMatches[1];
-          output += ' of Assignee: ' + taskAssignee;
-          var assigneeUser = this._getUser(taskAssignee);
-          if (assigneeUser) {
-            taskAssigneeId = assigneeUser.get('id');
-          }
-          else {
-            console.log('Import Error - no such assignee: ' + taskAssignee);
-            continue;
-          }
+        var submitterUser = this._getUser(taskHash.taskSubmitter);
+        if (submitterUser) {
+          taskHash.taskSubmitter = submitterUser.get('id');
+        }
+        else {
+          console.log('Task Parse Error - no such submitter: ' + taskHash.taskSubmitter);
+          continue;
         }
         
-        // extract task submitter
-        var taskSubmitterMatches = /\<([\w]+)\>/.exec(taskLine);
-        var taskSubmitterId = null;
-        if(taskSubmitterMatches) {
-          var taskSubmitter = taskSubmitterMatches[1];
-          output += ' of Submitter: ' + taskSubmitter;
-          var submitterUser = this._getUser(taskSubmitter);
-          if (taskSubmitter) {
-            taskSubmitterId = submitterUser.get('id');
-          }
-          else {
-            console.log('Import Error - no such submitter: ' + taskSubmitter);
-            continue;
-          }
-        }
-        
-        // FIXME: [SE] enforce valid values during record creation & support valid value checking via Model objects
-        // FIXME: [SG] check for valid values during importing of task type/status/validation
-        
-        // extract task type
-        var taskTypeMatches = /\$([\w]+)/.exec(taskLine);
-        var taskType = CoreTasks.TASK_TYPE_OTHER;
-        if(taskTypeMatches) {
-          taskType = taskTypeMatches[1];
-          output += ' of Type: ' + taskType;
-        }
-        
-        // extract task status
-        var taskStatusMatches = /@([\w]+)/.exec(taskLine);
-        var taskStatus = CoreTasks.TASK_STATUS_PLANNED;
-        if(taskStatusMatches) {
-          taskStatus = taskStatusMatches[1];
-          output += ' of Status: ' + taskStatus;
-        }
-        
-        // extract task validation
-        var taskValidationMatches = /%([\w]+)/.exec(taskLine);
-        var taskValidation = CoreTasks.TASK_VALIDATION_UNTESTED;
-        if(taskValidationMatches) {
-          taskValidation = taskValidationMatches[1];
-          output += ' of Validation: ' + taskValidation;
-        }
-        
-        console.log (output);
-        var taskRecord = store.createRecord(CoreTasks.Task, {
-          name: taskName,
-          priority: taskPriority,
-          effort: taskEffort,
-          assignee: taskAssigneeId,
-          submitter: taskSubmitterId,
-          type: taskType,
-          status: taskStatus,
-          validation: taskValidation
-        });
+        var taskRecord = store.createRecord(CoreTasks.Task, taskHash);
         if(!taskRecord) {
-          console.log('Import Error - task creation failed');
+          console.log('Import Error: task creation failed');
           continue;
         }
         store.commitRecords();
@@ -326,23 +252,11 @@ Tasks.mixin({
         console.log ('Blank Line:');
       }
       else { // a Project
-        // extract timeLeft if provided
-        var projectName = line, timeLeft = null;
-        var res = line.match(/([\w\s]+)[\s*]\{(\d+)\}/);
-        if(res) {
-          projectName = res[1];
-          timeLeft = res[2];
-        }
-        console.log ('Project:\t\t' + projectName);
-        if (timeLeft) {
-          console.log (' with TimeLeft: ' + timeLeft);
-        }
-        var projectRecord = store.createRecord(CoreTasks.Project, {
-          name: projectName, timeLeft:
-          timeLeft, tasks: []
-        });
+        var projectHash = CoreTasks.Project.parse(line);
+        console.log ('Project:\t\t' + JSON.stringify(projectHash));
+        var projectRecord = store.createRecord(CoreTasks.Project, projectHash);
         if(!projectRecord) {
-          console.log('ERROR: project creation failed!');
+          console.log('Import Error: project creation failed!');
           continue;
         }
         store.commitRecords();
@@ -350,6 +264,7 @@ Tasks.mixin({
         this.get('projectsController').addObject(projectRecord);
       }
      }
+     
   },
   
   /**

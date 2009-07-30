@@ -8,6 +8,9 @@ sc_require('core');
  * @extends SC.RecordAttribute
  * @author Sean Eidemiller
  */
+ 
+// FIXME: [SE] enforce valid values during record creation
+
 CoreTasks.RecordAttribute = SC.RecordAttribute.extend({
 
   /**

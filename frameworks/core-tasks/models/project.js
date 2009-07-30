@@ -4,7 +4,7 @@ sc_require('models/record');
 
 CoreTasks.NEW_PROJECT_NAME = '_NewProject';
 CoreTasks.INBOX_NAME = '_Inbox';
-CoreTasks.ALL_PROJECTS_NAME = '_AllProjects'
+CoreTasks.ALL_PROJECTS_NAME = '_AllProjects';
 
 /**
  * The project model.
@@ -60,6 +60,28 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
 });
 
 CoreTasks.Project.mixin(/** @scope CoreTasks.Project */ {
+  
   callbacks: SC.Object.create(),
-  resourcePath: 'project'
+  resourcePath: 'project',
+  
+  /**
+   * Parse a line of text and extract parameters from it.
+   *
+   * @param {String} string to extract parameters from.
+   * @returns {Object} Hash of parsed parameters.
+   */
+  parse: function(line) {
+    var projectName = line, projectTimeLeft = null;
+    var res = line.match(/([\w\s]+)[\s*]\{(\d+)\}/);
+    if(res) {
+      projectName = res[1];
+      projectTimeLeft = res[2];
+    }
+    return {
+      name: projectName,
+      timeLeft: projectTimeLeft,
+      tasks: []
+    };
+  }
+  
 });
