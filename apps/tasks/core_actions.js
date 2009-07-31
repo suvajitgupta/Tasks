@@ -121,7 +121,7 @@ Tasks.mixin({
 
     // Create 'All' project to hold all unassigned tasks
     var allProjects = store.createRecord(CoreTasks.Project, {
-      name: CoreTasks.ALL_PROJECTS_NAME,
+      name: CoreTasks.ALL_TASKS_NAME,
       tasks: all
     });
     projects.insertAt(0, allProjects);

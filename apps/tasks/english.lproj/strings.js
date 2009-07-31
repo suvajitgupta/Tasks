@@ -27,7 +27,7 @@ SC.stringsFor('English', {
   // Project strings
   '_NewProject': "New Project",
   '_Inbox': "Inbox",
-  '_AllProjects': "All Projects",
+  '_AllTasks': "All Tasks",
   
   // Task strings
   '_NewTask': "New Task",

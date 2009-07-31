@@ -32,8 +32,8 @@ v Add summary in projects toolbar showing number of Tasks for selected Project [
 v Set projects toolbar button enablement based on having a selection [SG] <EO> @Done
 ^ Add drag-n-drop reordering [SG] @Done
 - Select first project at startup [JH2] <SG> @Done
-^ Add virtual Inbox/ & AllProjects to group all unallocated & all tasks respectively [SG] <SE> @Done
-- Disallow Inbox/AllProjects projects from being deleted [SG] <SE> @Done
+^ Add virtual Inbox & AllTasks to group all unallocated & all tasks respectively [SG] <SE> @Done
+- Disallow Inbox/AllTasks projects from being deleted [SG] <EO> @Done
 ^ Allow drag-n-drop Task reallocation to Projects [SG] <MB>
 v Add context menu to Delete a project [SG] <JL>
 - Add warning Alert box about deleting Project with Tasks [SG] <SE>

@@ -4,7 +4,7 @@ sc_require('models/record');
 
 CoreTasks.NEW_PROJECT_NAME = '_NewProject';
 CoreTasks.INBOX_NAME = '_Inbox';
-CoreTasks.ALL_PROJECTS_NAME = '_AllProjects';
+CoreTasks.ALL_TASKS_NAME = '_AllTasks';
 
 /**
  * The project model.
