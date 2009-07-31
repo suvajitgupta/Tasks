@@ -132,15 +132,56 @@ CoreTasks.Task = CoreTasks.Record.extend({
    * A string summarizing key facets of the Task for display.
    */
   displayName: function(key, value) {
+    
     if (value !== undefined) {
-      var hash = CoreTasks.Task.parse(value);
+      
+      var hash = CoreTasks.Task.parse(value, false);
       console.log ('Value: "' + value + '", Parsed: ' + JSON.stringify(hash));
+      
+    	if(hash.priority) {
+        this.propertyWillChange('priority');
+        this.writeAttribute('priority', hash.priority);
+        this.propertyDidChange('priority');
+      }
+    	
       this.propertyWillChange('name');
       this.writeAttribute('name', hash.name);
       this.propertyDidChange('name');
+      
       this.propertyWillChange('effort');
       this.writeAttribute('effort', hash.effort);
       this.propertyDidChange('effort');
+      
+    	if(hash.submitter) {
+        this.propertyWillChange('submitter');
+        this.writeAttribute('submitter', hash.submitter);
+        this.propertyDidChange('submitter');
+      }
+    	
+    	if(hash.assignee) {
+        this.propertyWillChange('assignee');
+        this.writeAttribute('assignee', hash.assignee);
+        this.propertyDidChange('assignee');
+      }
+    	
+    	if(hash.type) {
+        this.propertyWillChange('type');
+        this.writeAttribute('type', hash.type);
+        this.propertyDidChange('type');
+      }
+    	
+    	if(hash.status) {
+        this.propertyWillChange('status');
+        this.writeAttribute('status', hash.status);
+        this.propertyDidChange('status');
+      }
+    	
+    	if(hash.validation) {
+        this.propertyWillChange('validation');
+        this.writeAttribute('validation', hash.validation);
+        this.propertyDidChange('validation');
+      }
+
     } else {
       var name = this.get('name');
       var effort = this.get('effort');
@@ -148,6 +189,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
       if (effort) ret += ' {' + effort + '}';
       return ret;
     }
+    
   }.property('name', 'effort').cacheable()
   
 });
@@ -161,13 +203,16 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
    * Parse a line of text and extract parameters from it.
    *
    * @param {String} string to extract parameters from.
+   * @param (Boolean) optional parameter to specify if defaults are to be filled in
    * @returns {Object} Hash of parsed parameters.
    */
-  parse: function(line) {
+  parse: function(line, fillDefaults) {
 
+    if (fillDefaults === undefined) filldefaults = true;
+    
     // extract priority based on bullet, if one
     var hasBullet = false;
-    var taskPriority = null;
+    var taskPriority = fillDefaults? CoreTasks.TASK_PRIORITY_MEDIUM : null;
     if (line.charAt(0) === '^') {
       taskPriority = CoreTasks.TASK_PRIORITY_HIGH;
       hasBullet = true;
@@ -181,10 +226,10 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
     var taskLine = hasBullet? line.slice(2) : line;
     
     // extract task name
-    var taskNameMatches = /(^[\w\s]+)[\s]*[\{<\[\$@%]/.exec(taskLine);
+    var taskNameMatches = /(^[^\{<\[\$@]+)/.exec(taskLine);
     var taskName = taskLine;
     if (taskNameMatches) {
-      taskName = taskNameMatches[1];
+      taskName = taskNameMatches[1].replace(/\s+$/, '');
     }
     
     // extract task effort
@@ -212,23 +257,23 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
     
     // extract task type
     var taskTypeMatches = /\$([\w]+)/.exec(taskLine);
-    var taskType = CoreTasks.TASK_TYPE_OTHER;
+    var taskType = fillDefaults? CoreTasks.TASK_TYPE_OTHER : null;
     if(taskTypeMatches) {
-      taskType = taskTypeMatches[1];
+      taskType = '_' + taskTypeMatches[1];
     }
     
     // extract task status
     var taskStatusMatches = /@([\w]+)/.exec(taskLine);
-    var taskStatus = CoreTasks.TASK_STATUS_PLANNED;
+    var taskStatus = fillDefaults? CoreTasks.TASK_STATUS_PLANNED : null;
     if(taskStatusMatches) {
-      taskStatus = taskStatusMatches[1];
+      taskStatus = '_' + taskStatusMatches[1];
     }
     
     // extract task validation
     var taskValidationMatches = /%([\w]+)/.exec(taskLine);
-    var taskValidation = CoreTasks.TASK_VALIDATION_UNTESTED;
+    var taskValidation = fillDefaults? CoreTasks.TASK_VALIDATION_UNTESTED : null;
     if(taskValidationMatches) {
-      taskValidation = taskValidationMatches[1];
+      taskValidation = '_' + taskValidationMatches[1];
     }
     
     return {

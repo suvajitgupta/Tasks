@@ -44,14 +44,19 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
    * A string summarizing key facets of the Project for display.
    */
   displayName: function(key, value) {
+    
     if (value !== undefined) {
+      
       var hash = CoreTasks.Project.parse(value);
+      
       this.propertyWillChange('name');
       this.writeAttribute('name', hash.name);
       this.propertyDidChange('name');
+      
       this.propertyWillChange('timeLeft');
       this.writeAttribute('timeLeft', hash.timeLeft);
       this.propertyDidChange('timeLeft');
+      
     } else {
       var name = this.get('name');
       var timeLeft = this.get('timeLeft');
@@ -59,6 +64,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
       if (timeLeft) ret += ' {' + timeLeft + '}';
       return ret;
     }
+    
   }.property('name', 'timeLeft').cacheable()
   
 });
