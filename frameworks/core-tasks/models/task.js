@@ -133,9 +133,14 @@ CoreTasks.Task = CoreTasks.Record.extend({
    */
   displayName: function(key, value) {
     if (value !== undefined) {
+      var hash = CoreTasks.Task.parse(value);
+      console.log ('Value: "' + value + '", Parsed: ' + JSON.stringify(hash));
       this.propertyWillChange('name');
-      this.writeAttribute('name', value);
+      this.writeAttribute('name', hash.name);
       this.propertyDidChange('name');
+      this.propertyWillChange('effort');
+      this.writeAttribute('effort', hash.effort);
+      this.propertyDidChange('effort');
     } else {
       var name = this.get('name');
       var effort = this.get('effort');
@@ -160,17 +165,23 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
    */
   parse: function(line) {
 
-    // extract priority based on bullet
-    var taskPriority = CoreTasks.TASK_PRIORITY_MEDIUM;
+    // extract priority based on bullet, if one
+    var hasBullet = false;
+    var taskPriority = null;
     if (line.charAt(0) === '^') {
       taskPriority = CoreTasks.TASK_PRIORITY_HIGH;
+      hasBullet = true;
+    } else if (line.charAt(0) === '-') {
+      taskPriority = CoreTasks.TASK_PRIORITY_MEDIUM;
+      hasBullet = true;
     } else if (line.charAt(0) === 'v') {
       taskPriority = CoreTasks.TASK_PRIORITY_LOW;
+      hasBullet = true;
     }
-    var taskLine = line.slice(2);
+    var taskLine = hasBullet? line.slice(2) : line;
     
     // extract task name
-    var taskNameMatches = /([\w\s]+)[\s]*[\{<\[\$@%]/.exec(taskLine);
+    var taskNameMatches = /(^[\w\s]+)[\s]*[\{<\[\$@%]/.exec(taskLine);
     var taskName = taskLine;
     if (taskNameMatches) {
       taskName = taskNameMatches[1];
