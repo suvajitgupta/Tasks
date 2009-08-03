@@ -26,7 +26,7 @@ v Add drag-n-drop of a TXT file into App for data importing (using Google Gears)
 Project Manager GUI
 ^ Add Master/Detail Explorer view with click selection of Projects showing corresponding Tasks [JH2] <SG> @Done
 ^ Show Project name & time left in curly braces (if specified) [SG] <JH2> @Done
-^ Add double-click in-cell editing [SG]
+^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done
 ^ Add "+" & "-" buttons in projects Toolbar [SG] <SC> @Done
 v Add summary in projects toolbar showing number of Tasks for selected Project [SG] <MB> @Done
 v Set projects toolbar button enablement based on having a selection [SG] <EO> @Done
@@ -47,7 +47,7 @@ Task Manager GUI
 - Show priority (font style), status (font color), validation (background color) [SG] <MB> @Done
 - Add Status/Priority/Validation radio buttons in tasks toolbar [SG] <EO> @Done
 v Set tasks toolbar button enablement based on having a selection [SG] <EO> @Done
-^ Add double-click in-cell editing and parse/extract effort if specified [SG]
+^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done
 ^ Add "+" & "-" buttons in tasks toolbar [SG] <SE> @Done
 - Allow "+" button to be pressed a second time to keep in data entry mode, Esc will exit mode [SG] <JH2>
 ^ Add modal popup form for editing [SG] <SE>
