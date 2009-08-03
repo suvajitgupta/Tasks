@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title>Persevere Cometd Test</title>
+	<style type="text/css">
+		@import "../jsclient/dojo/resources/dojo.css";
+	</style>
+
+	<script type="text/javascript" src="../jsclient/dojo/dojo.js" djConfig="isDebug:true"></script>
+	<script type="text/javascript">
+    dojo.require("dojox.cometd.longPollTransport");
+    dojo.addOnLoad(function(){
+		dojox.cometd.init("/cometd");
+		dojox.cometd.subscribe("/User/*",function(message){
+			console.log("received",message.data);
+			dojo.byId("messageLog").
+				appendChild(document.createElement("div")).
+				appendChild(document.createTextNode("Received message from " + message.channel + " :" + message.data));
+		});
+		dojo.connect(dojo.byId("send"),"onclick",function(){
+			dojox.cometd.publish("/User/1",dojo.byId("sendText").value);
+		});
+    });	
+</script>
+</head>
+<body class="tundra">
+	<h1>Cometd test</h1>
+    <div id="chatroom">
+    	<div><input id="sendText" type="text"><button id="send">Send Message</button></div>
+    	<div id="messageLog"></div>
+    </div>
+    Note: In order for this test to work, you must enable Jetty's Cometd implementation in web.xml 
+    (to use the JettyBayeux servlet). This demo also relies on a user being created in the system (User/1).
+</body>
+</html>

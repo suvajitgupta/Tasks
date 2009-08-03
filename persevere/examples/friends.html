@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<title>Persevere Demo of Friends</title>
+	
+	<script djConfig="isDebug:false, parseOnLoad: true" src="../jsclient/dojo/dojo.js"></script>
+	<script src="../jsclient/persevere/persevere.js"></script>
+	<script type="text/javascript">
+		// first get the current path
+		var path = location.pathname.match(/(.*\/)[^\/]*$/)[1];
+		if(location.toString().match(/file:/)){
+			alert("You can't run this demo from the file system, you must run it with Persevere"); 
+		}
+		if(path.lastIndexOf("examples/") > -1){
+			path = path.substring(0,path.lastIndexOf("examples/"));
+		}
+		onload = function(){
+			// load all the classes from Persevere
+			displayFriends = function(){
+				pjs.load(path + "Friend/", function(friends){
+					// now build a list of our friends
+					tableHTML = "<table border='1'><tr><td>Picture</td><td>Name</td></tr>";
+					for(var i = 0; i < friends.length; i++){
+						(function(friend){
+							var escapedName = friend.name.replace(/</,'');
+							tableHTML += "<tr><td><img src='" + pjs.getId(friend) + ".picture' style='height: 60px; width: 60px;' /></td><td>" + escapedName + "</td></tr>";
+						})(friends[i]); 
+					}
+					var list = document.getElementById("list");
+					// apply our generated HTML
+					list.innerHTML = tableHTML + "</table>";
+					var trs = list.getElementsByTagName("tr");
+					// now go through each tr and attach a click listener
+					for(var i = 1; i < trs.length; i++){
+						var tr = trs[i];
+						(function(friend){
+							var escapedName = friend.name.replace(/</,'');
+							tr.onclick = function(){
+								currentFriend = friend;
+								var pictureUpload = document.getElementById("pictureUpload");
+								pictureUpload.style.display="block";
+								pictureUpload.action = pjs.getId(friend);
+								document.getElementById("friendName").innerHTML = escapedName;
+							};
+						})(friends[i-1]); 
+					}
+				});
+			}
+			pjs.loadClasses(path, displayFriends);
+			document.getElementById("addFriend").onclick = function(){
+				var name = prompt("What is your friend's name?");
+				if(name){
+					new Friend({name:name});
+					pjs.commit(displayFriends);
+				}
+			};
+			document.getElementById("deleteFriend").onclick = function(){
+				if(!currentFriend){
+					alert("No friend selected");
+				}else{
+					pjs.remove(currentFriend);
+					pjs.commit(displayFriends);
+				}
+			};
+		}
+	</script>
+</head>
+<body>
+	Click on a friend to choose an image for them<br />
+	<button id="addFriend">Add Friend</button>
+	<form id="pictureUpload" method="POST" enctype="multipart/form-data" target="uploadTarget" style="display:none">
+	Choose an image for <span id="friendName"></span>
+	<input type="file" name="picture" size="40"/>
+	<input type="submit" value="Upload Image"/> 
+	</form>
+	<br />
+	<button id="deleteFriend">Delete Friend</button>
+	<div id="list" border="1"></div>
+	<iframe style="display:none" name="uploadTarget" id="uploadTarget" onload='if(frames[0].location.href.indexOf("Friend") > -1){displayFriends()}'></iframe>
+	
+</body>
+</html>

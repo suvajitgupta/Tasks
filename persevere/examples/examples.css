@@ -1,0 +1,22 @@
+body {
+	font-family: Arial;	
+}
+.comment {
+	background-color: #ddf;
+	width:400px;
+}
+.author {
+	font-size: small;
+	font-style: italic;
+	width:300px;
+	border-bottom:1px solid #bbb;
+}
+.post {
+	border: 1px solid #ccc;
+	width:640px;
+}
+label {
+	width:200px;
+	float:left;
+	display:block;
+}

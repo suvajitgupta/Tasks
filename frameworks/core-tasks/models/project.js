@@ -16,6 +16,13 @@ CoreTasks.ALL_TASKS_NAME = '_AllTasks';
  */
 CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototype */ {
 
+  /*
+  init: function() {
+    sc_super();
+    this.set('tasks', []);
+  },
+  */
+
   /**
    * The name of the project (ex. "FR1").
    */
@@ -31,7 +38,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
   /**
    * The list of tasks associated with this project.
    */
-  tasks: SC.Record.toMany('CoreTasks.Task'),
+  tasks: SC.Record.toMany('CoreTasks.Task', { defaultValue: [] }),
 
   /**
    * The path to the icon associated with a project.
@@ -44,7 +51,6 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
    * A string summarizing key facets of the Project for display.
    */
   displayName: function(key, value) {
-    
     if (value !== undefined) {
       
       var hash = CoreTasks.Project.parse(value);
@@ -65,7 +71,45 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
       return ret;
     }
     
-  }.property('name', 'timeLeft').cacheable()
+  }.property('name', 'timeLeft').cacheable(),
+
+  /**
+   * Adds a given task to the project.
+   */
+  addTask: function(task) {
+    var tasks = this.get('tasks'); 
+    tasks.pushObject(task);
+
+    // Not quite sure why this has to be executed in a new run loop, but it does (saw this in a
+    // unit test; didn't work before).
+    SC.RunLoop.begin();
+    this.set('tasks', tasks);
+    SC.RunLoop.end();
+
+    return tasks;
+  },
+
+  /**
+   * Removes a given task from the project.
+   */
+  removeTask: function(task) {
+    var key = task.get('storeKey');
+    var tasks = this.get('tasks');
+
+    for (var i = 0; i < tasks.length(); i++) {
+      if (key === tasks.objectAt(i).get('storeKey')) tasks.removeAt(i, 1);
+
+      // Not quite sure why this has to be executed in a new run loop, but it does (saw this in a
+      // unit test; didn't work before).
+      SC.RunLoop.begin();
+      this.set('tasks', tasks);
+      SC.RunLoop.end();
+
+      break;
+    }
+
+    return tasks;
+  }
   
 });
 

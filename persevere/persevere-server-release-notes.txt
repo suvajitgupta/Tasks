@@ -1,0 +1,269 @@
+Persevere Server 1.0 beta 2
+ServerJS API module system added
+
+Persevere Server 1.0 beta 1
+Security system updated for better extensibility
+Granular updates to the project can be found at:
+http://code.google.com/p/persevere-framework/updates/list
+Future server release notes will only include major updates
+
+Persevere Server 0.9.29
+Changed the "data" property to "instances"
+The new database explorer is the user interface
+Added support for Persevere application instances
+Added startup scripts
+Static/class methods signatures are defined in "staticMethods" ("methods" reserved for describing instance methods)
+Fixed console.log to use info-level log statements (#45)
+Fixed .htaccess file to be "smarter"
+Added recursive config/schema file loading (#44). Subdirectories of WEB-INF/config can now contain config files that will be loaded
+Added default value setting (setting values of a new object from defaults in the schema) (#49)
+Fixes adding empty objects (#48)
+Fixes supertype checking on new object creation (#42)
+Makes it possible to progressively enter multiple lines in the console
+Fixes schema loading to ensure superclasses are loaded before subclasses (#47)
+Fixed issue with array literal initialization from code
+Added support for sending updates from data sources
+Fixed issue with adding large binary files
+Added XMLHttpRequest
+
+Persevere Server 0.9.28
+Fixed an issue with updating access level at the root
+Fixed an issue with deleting and recreating a table with the same name
+Fixed an issue with the prototype of Classes
+
+Persevere Server 0.9.27
+Fixed regression in Comet data notifications
+Improved data notification logic to send notifications properly when a client initiated action caused an indirect data change
+
+Persevere Server 0.9.26
+Fixed warning on example onSet
+Fixed creation, deletion, creation of a same table name bug
+Fixed authentication from the console
+Added "User.getCurrentUser()" function for getting the current user
+Added "pjs.getUserName()" for getting the current user name
+Fixed union with null types
+Fixed saving class/schema changes with primitive classes
+Fixed changing schema issue
+Visual updates for documentation
+Fixed handling of fragment identifier references
+
+Persevere Server 0.9.25
+Important Change: Path-based object referencing now are serialized using fragment identifiers to follow RESTful URL patterns more closely
+Fixed regression with SMD
+Fixed content negotiation issue when modifying the Object.prototype representation handling
+Fixed regression with creating a new user
+
+Persevere Server 0.9.24
+Fixed updating of "data" property on classes
+Fixed handling of "id" on new Class creation
+Fixed handling of case-insensitive search with no wildcards
+Small updates to documentation and test cases
+ 
+Persevere Server 0.9.23
+IMPORTANT CHANGE: Schema/class is now accessible as an instance of "Class". Rather than accessing
+a schema at /Table, it should be accessed at /Class/Table.
+The validator attribute for schema property definitions has been removed in lieu of an onSet attribute 
+that if present will be called on property sets.
+Updated documentation/home page to match Dojo Foundation web site
+Fixed NullPointerException when missing Content-Type
+Fixed lock-up on concurrent object creation and query
+Misc code cleanup
+Fixed Content-Range (regression from the content-negotiation addition)
+Simplified internal tracking of parent and schemas. 
+Caching of table size for improved performance
+Various performance improvements
+Fixed failing new object creation for MySQL tables
+Removes references when an object is deleted
+
+Persevere Server 0.9.22
+Added support for storing files
+More extensive support for content negotiation
+Fixed sending UTF-8 when it shouldn't (plain files)
+Fixed Location header to be an absolute URL (per HTTP spec)
+Added support for storage of DontEnum properties
+Security fix for JSONPath/JSONQuery expressions
+Added support for single quote strings in JSON
+Fixed issue with single quote strings for property access in JSONQuery/JSONPath expressions
+Fixed transient schema property and added coerce property
+
+Persevere Server 0.9.21
+More unit tests
+Fixed NullPointerException in queries
+Fixed issue with creating a table with same name as previously deleted table
+Fixed UTF-8 handling on serialization and deserialization 
+
+Persevere Server 0.9.20
+Added "full" permission level for deleting and permission changing which is higher than write permission
+Upgrade note: upgrading from a previous version to 0.9.20 with a Persevere database with a 
+user setup will mean the superuser is no longer the true superuser because that user will only have 
+"write" permission instead of "full".  The superuser can be upgraded at the console:
+load("User/2").grantAccess(load("root"),"full")
+Modifying schemas now coerces instances instead of throwing errors
+Modified the security scheme so methods calls are checked for execute permission and then they are allowed to run without security constraints
+Fixed schema checking on adding new items
+Added hasAccessLevel function
+Added "observable" property to method definitions
+Added method definitions for basic REST methods
+Allow functions to be added to persistent objects as methods from the console
+Added console.* functions
+JSON parser can now handle NaN, Infinite, new Date(), and ref() 
+Added Cometd demo
+Correct handling of saving of arbitrary precision decimal numbers
+Reloading of data from config files when they change
+Fixed ConcurrentModificationException on multiple changes in one transaction
+Uses Java 1.6 console when available
+
+Persevere Server 0.9.19
+Fixed security check on deleting objects
+Schema validation errors are thrown as real JavaScript errors (they can be caught in JavaScript)
+Fixed transactions not being committed on servlet operations (causing permission setting not to work)
+Built-ins, prototypes, libraries, and the global object are now are frozen after initialization for security and thread-safety purposes
+Added a console
+Dojo updates for offline improvements
+
+Persevere Server 0.9.18
+Fixed problem with compression library causing Persevere to hang
+Removed ACL from data source/initializer API (capabilities handle this now)
+Fixed JSON parsing error making it impossible to sign out
+Fixed concurrent transactions from same browser issue
+Switched all logging statements to Apache commons logging
+Fixed examples problem from last build
+
+Persevere Server 0.9.17
+Fixed issue with error when Referer is a non-http protocol
+Changed JSON library to Stringtree-based implementation to avoid any licensing issues
+Changed logic for creating references, references are used (instead of full object serialization) when object's parent is not the containing object
+Changed datasource API so no booleans need to be returned
+
+Persevere Server 0.9.16
+Modifying subobjects keeps the objects in place (doesn't replace them with new objects)
+Fixed issue with parsing null values
+Fixed memory retention of ids for better scalability
+Added default cross-site HTTP reference handler
+Fixed JSONQuery query issues 
+Integration with Jetty's Cometd/Bayeux implementation
+When maxResults is exceeded an error is now returned rather than silent truncation
+Fixed caching issue of object permissions
+Fixed table and schema security separation (default item security should be now set on the table or the "data" of schema) 
+
+Persevere Server 0.9.15
+JSON Schema Interfaces (http://groups.google.com/group/json-schema/browse_thread/thread/7ac162c908d40b7d) 
+implemented with method parameter and return value type checking
+Improved data integrity: Schema changes are now disallowed if they invalidate existing object instances
+Fixed an issue with double notifications on Comet REST notifications
+Added support for "integer" type in Schemas
+Fixed connection memory leak
+
+Persevere Server 0.9.14
+Method runAt definition moved to methods definition in the schema
+X-Server-Methods header to control output of the server methods
+Upgraded the included Dojo build
+JSON based Comet notifications "REST Channels"
+prototype objects have correct Schema
+Fix to SMD outputter
+Fix to id by absolute path (starting with /)
+
+Persevere Server 0.9.13
+Fixed status codes and added Location header on POSTs for correct id assignment
+Fixed JSON parsing problem introduced in 0.9.12
+Transactions now include array operations and deletes
+Full access levels assignment
+Table deletion implemented
+Fix bug with large (>32K) strings being saved in object DB
+
+Persevere Server 0.9.12
+Fixed sorting on objects with absent property
+Fixed responses occuring in wrong transaction
+Add distinct() to queries
+Array.filter now can be translated to data source pass-through
+Performance improvements with adding new objects and modifying data  
+Fixed problem with dead-locks in concurrent access
+Whole numbers serialized without decimal point
+Fixed memory leaks
+Fixed issues with remote REST data sources
+Upgraded JSON library, removed source modifications, using jar instead with extension
+Fixed issue with referencing instead of including objects in JSON-RPC responses
+Upgraded Jetty to 6.1.11
+Fixed issue with database being in wrong auto-commit state
+
+Persevere Server 0.9.11
+Fixed problems in REST client data source
+Added Schema support for enum
+Added support for "X-If-Condition" header that can define a condition for actions that modify data
+Added support for creating multiple objects in single request by POSTing with an array
+JavaScript serializer serializes Dates to JavaScript Date objects (JSON serializer stills outputs dates as ISO strings)
+Fixed array methods running on lazy loaded arrays/properties
+Add numerous JsonPath improvements
+	Lenient parsing
+	Sorting
+	General expressions
+All object modifications and new object creations now trigger a put or post (respectively) method on the object (or first parent with a declared class)  
+Implemented setTimeout and clearTimeout
+Custom validator functions can be defined in schemas 
+
+Persevere Server 0.9.10
+Removed all MPL/LGPL/GPL JavaScript code from the server to ensure proper AFL licensing
+Added missing dojo/parser.js file
+Added window.name transport capability
+
+Persevere Server 0.9.9
+Fixed problem with configuration files loading in the wrong order (core.json must come first)
+Added a Content-Range header and 206 status on HTTP Range requests (per HTTP spec)
+Added "remove" function to the server side environment (deletes an object)
+Fixed Range to only apply to root of response
+JSON files can be exposed as a datasource, and changes can be persisted to the files
+Config files are exposed as persisted JSON files
+By default Table/Class schemas as stored in config files
+Lazy loading of lists from datastores fully implemented for proper paging
+RDBMS plugin implements lazy loading and efficient query loading
+Cross-table references are serialized as lazy references by default
+Moved the dojo client code to the root of the jsclient folder (instead of jsclient/dojo)
+
+Persevere Server 0.9.8
+Added content negotiation with multiple content handlers: JSON, JavaScript, JSPON, and FrameName handler
+Added load, commit, rollback, and HTTP request to the API in the server side environment
+Added support for multiple configuration files (they are now found WEB-INF/config)
+Fixed problem with persisting functions
+(Issue 25) Fixed problem with infinite loops in creating functions in the JSPON browser 
+JSON Schema updates per the latest in JSON Schema proposal
+Fixed a problem with saving changes to schema
+Internalizes the id ranges for dynamic sources to avoid confusion
+
+Persevere Server 0.9.7
+Moved the Persevere directory to the root of the package, with Jetty launching directly from the root
+Fixed an endless loop which occurred in certain Comet situations
+
+Persevere Server 0.9.6
+Removed Rhino codebase modifications
+Changed license to AFL and BSD
+Corrected corrupted database problem
+Changed security model to capability-based system for simpler and easier management
+Fixed Class inheritance so prototype chains properly following super types
+Added methods for user and security management on User
+
+Persevere Server 0.9.5
+Fixed user creation problems
+Fixed browser to properly show the "data" of a class
+Add extends support Table/classes
+
+Persevere Server 0.9.4
+Rearchitected the root data structure so that "tables" and "classes" are associated with each other
+Now supports two Comet protocols: Http Channels and Tunneling Http Channels (the latter supports streaming)
+
+
+Persevere Server 0.9.2
+Added support for XDomainRequest and cross-site XHR
+Fixed a bug with a timer dying
+Fixed a problem with cross-site proxy.
+
+Persevere Server 0.9.1
+Added resource monitoring with Comet Support via HTTP Channels
+Debranded from Xucia: refactored all code from com.xucia.persevere -> org.persvr
+Switched to Jetty for default J2EE container
+Added SMD support
+Corrected response code for correct HTTP status codes for certain operations
+Removed unnecessary dependencies (on Xerces) for smaller download size
+Added dojo.data implementation 
+Improved JSONPath performance (queries can be translated to SQL in many cases)
+Added Transaction support
+Upgraded to Rhino 1.7

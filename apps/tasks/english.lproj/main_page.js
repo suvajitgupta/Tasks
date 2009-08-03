@@ -53,16 +53,17 @@ Tasks.mainPage = SC.Page.design({
         target: 'Tasks',
         action: 'openUserManager'
       }),
-      
+
       SC.SelectFieldView.design({
         layout: { centerY: 0, height: 24, left: 320, width: 150 },
         nameKey: 'loginName',
-        emptyName: "_Everyone".loc(), // FIXME: [SC] fix empty line after first item in SelectFieldView
-        objects: CoreTasks.User.FIXTURES, // TODO: [SG] bind SelectFieldView to userController
-        // objects: 'Tasks.usersController.content', // FIXME: [SC] make SelectFieldView work with objects in a Controller
-        valueBinding: 'Tasks.assignmentsController.assigneeSelection'
+        emptyName: "_Everyone".loc(), // FIXME: [JH2] fix empty line after this item in dropdown
+        // TODO: [SG] Bind to user controller.
+        // objects: CoreTasks.User.FIXTURES,
+        valueBinding: 'Tasks.assignmentsController.assigneeSelection',
+        disableSort: YES
       }),
-      
+
       SC.TextFieldView.design({
         layout: { centerY: 0, height: 16, left: 485, width: 250 },
         hint: "_SearchHint".loc(),
@@ -164,7 +165,7 @@ Tasks.mainPage = SC.Page.design({
         })
       })
     }),
-    
+
     projectsList: SC.outlet('middleView.topLeftView.childViews.0.contentView'),
     tasksList: SC.outlet('middleView.bottomRightView.childViews.0.contentView'),
     

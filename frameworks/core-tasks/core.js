@@ -11,7 +11,7 @@ CoreTasks = SC.Object.create({
   store: SC.Store.create(),
 
   // The resource path format for the remote server.
-  _resourcePathFormat: 'tasks/%@%@%@',
+  _resourcePathFormat: 'tasks-server/%@%@%@',
 
   /*
    * The various modes of operation.
@@ -80,7 +80,7 @@ CoreTasks = SC.Object.create({
       }
     }
 
-    return this._resourcePathFormat.format(resourceName, id, params);
+    return this._resourcePathFormat.fmt(resourceName, id, params);
   }
 
 });
@@ -123,5 +123,5 @@ SC.mixin(Function.prototype, {
 });
 
 // Set the mode of operation.
-CoreTasks.set('mode', CoreTasks.get('OFFLINE_MODE'));
-//CoreTasks.set('mode', Tasks.get('ONLINE_MODE'));
+//CoreTasks.set('mode', CoreTasks.get('OFFLINE_MODE'));
+CoreTasks.set('mode', CoreTasks.get('ONLINE_MODE'));

@@ -1,0 +1,55 @@
+{"id":"mysql.json",
+"sources":[
+	{
+		"sourceClass":"org.persvr.datasource.DatabaseTableDataSource",
+		"schema":{
+			"data":{"$ref":"../Project/"},
+			"prototype":{
+				}
+			},
+		"connection":"jdbc:mysql://localhost/mysql?user=root&password=&useUnicode=true&characterEncoding=utf-8",
+		"dataColumns":[
+			"NAME",
+			{
+				"foreignObjectColumn":"project",
+				"relationshipType":"one-to-many",
+				"foreignSource":"Task",
+				"objectColumn":"tasks",
+				"foreignColumn":"PROJECT_ID"
+				}],
+		"name":"Project",
+		"driver":"com.mysql.jdbc.Driver",
+		"table":"PROJECT",
+		"starterStatements":[
+			"CREATE TABLE PROJECT (NAME VARCHAR(100), PROJECT_ID INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY)",
+			"INSERT INTO PROJECT (NAME) VALUES ('Home maintenance')"],
+		"idColumn":"PROJECT_ID"
+		},
+	{
+		"sourceClass":"org.persvr.datasource.DatabaseTableDataSource",
+		"schema":{
+			"data":{"$ref":"../Task/"},
+			"prototype":{
+				}
+			},
+		"connection":"jdbc:mysql://localhost/mysql?user=root&password=&useUnicode=true&characterEncoding=utf-8",
+		"dataColumns":[
+			"NAME",
+			{
+				"relationshipType":"many-to-one",
+				"foreignSource":"Project",
+				"databaseColumn":"PROJECT_ID",
+				"objectColumn":"project"
+				}],
+		"name":"Task",
+		"driver":"com.mysql.jdbc.Driver",
+		"table":"TASK",
+		"starterStatements":[
+			"CREATE TABLE TASK (NAME VARCHAR(100), TASK_ID INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY, PROJECT_ID INTEGER)",
+			"INSERT INTO TASK (NAME,PROJECT_ID) VALUES ('Mow the lawn',1)",
+			"INSERT INTO TASK (NAME,PROJECT_ID) VALUES ('Fix the toilet',1)"],
+		"idColumn":"TASK_ID"
+		}
+
+]
+}

@@ -1,0 +1,8 @@
+CACHE MANIFEST
+# v2
+# This is a comment.
+http://localhost:8080/example/trails.html
+http://localhost:8080/jsclient/dojo/dojo.js
+http://localhost:8080/jsclient/dojox/grid/resources/Grid.css
+http://localhost:8080/jsclient/dojo/resources/dojo.css
+http://localhost:8080/dojox/rpc/OfflineRest.js

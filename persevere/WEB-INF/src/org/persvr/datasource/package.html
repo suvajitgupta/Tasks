@@ -1,0 +1,25 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+</head>
+<body bgcolor="white">
+
+<p>Provides the various data source plugins that can be used with Persevere. Persevere
+is designed to work with various storage systems. Several data source implementations
+come with Persevere. The default data source
+used by Persevere is the JavaScriptDBSource (most of the implementation is in JavaScriptDB).
+There are data sources for working with SQL databases like MySQLDataSource and
+DatabaseTableDataSource. Persevere can also connect to other HTTP servers through the
+HttpJsonSource. The LocalJsonSource is used to read and write the config files used by
+Persevere.</p>
+
+<p>
+Custom sources can be created as well. A data source plugin should at least
+implement the DataSource interface for read access, and should also implement
+the WritableDataSource interface. There are a number of other interfaces that can be
+implemented for additional functionality.
+</p>
+
+<p>In the future, I would like to support a JavaScript API for data sources as well</p>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<html>
+<head><title>Persevere Upload Test</title>
+<body>
+<form action="/Customer/1" method="POST" enctype="multipart/form-data">
+<input type="text" name="prop" size="20"/>
+<input type="file" name="somename" size="40"/>
+<input type="submit"/> 
+</form>
+<script>
+onload=function(){
+	xhr = new XMLHttpRequest();
+	xhr.open("GET","/Class/",true);
+	clientId = Math.random();
+	document.forms[0].action += "?client_id=" + clientId;
+	xhr.setRequestHeader("X-Client-Id",clientId);
+	xhr.send(null);
+}
+</script>
+</body>
+</html>

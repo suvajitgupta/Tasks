@@ -1,0 +1,13 @@
+#controls {
+	margin-top: 207px;
+}
+#controls #buttons {
+	float: left;
+	position: absolute;
+	margin-left: 0;
+	margin-top: 17px;
+}
+
+#detail {
+	table-layout: fixed;
+}

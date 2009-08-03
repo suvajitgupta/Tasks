@@ -1,0 +1,1 @@
+java -DSTOP.PORT=8079 -DSTOP.KEY=secret -jar start.jar --stop

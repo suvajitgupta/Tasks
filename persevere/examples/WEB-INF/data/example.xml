@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<root id="0">
+	 <person id="1">
+		 <name>Kristopher Zyp</name>
+		 <age>30</age> 
+		 <spouse idref="2"/>
+	 </person>
+	 <person id="2">
+		  <name>Nikki Zyp</name>
+		  <age>28</age> 
+		 <spouse idref="1"/>
+	 </person> 
+	 <person id="3">
+		 <name>Jeff Patterson</name>
+		 <age>29</age> 
+		 <spouse idref="4"/>
+	 </person>
+	 <person id="4">
+		  <name>Kari Zyp</name>
+		  <age>27</age>  
+		 <spouse idref="3"/>
+		  
+	 </person> 
+</root>

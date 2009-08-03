@@ -36,6 +36,16 @@ CoreTasks.TASK_VALIDATION_FAILED = '_Failed';
  */
 CoreTasks.Task = CoreTasks.Record.extend({
 
+  init: function() {
+    // HACK: [SE] Setting default values here because the defaultValue property for each record
+    // attribute doesn't appear to be working.
+    this.set('name', CoreTasks.NEW_TASK_NAME);
+    this.set('type', CoreTasks.TASK_TYPE_OTHER);
+    this.set('priority', CoreTasks.TASK_PRIORITY_MEDIUM);
+    this.set('status', CoreTasks.TASK_STATUS_PLANNED);
+    this.set('validation', CoreTasks.TASK_VALIDATION_UNTESTED);
+  },
+
   /**
    * A one-line summary of the task.
    */

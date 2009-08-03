@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+</head>
+<body bgcolor="white">
+
+<p>Provides the main facilities for external interaction through the HTTP interface.
+PersevereFilter is the central request handler, and provides much of the logic for handling
+different types of HTTP requests and their various headers and formats. PersevereFitler
+delegates execution to appropriate systems based on the requests (for example, PUTs trigger
+JSON parsing, handling, and consequently property modifications). Eventually, we would
+like to implement much of this in JavaScript for greater control and handling of requests
+from the JavaScript environment.</p>
+
+<p>
+JSONSerializer is an important class for serializing objects to JSON and JavaScript form.
+JsonReceiver handles interpretation of parsed JSON and mapping the JSON to the proper
+objects in Persevere and making modifications to those objects based on the JSON received.
+RequestHelper is a helper class for PersevereFilter for handling authentication and leveraging
+JsonReceiver for handling JSON data from requests.</p>
+
+<p>The Client class holds much of the stateful interaction used by Persevere, maintaining
+transactions across requests, authentication users, client-side generated ids, and waiting RPC messages. It also
+extends EventStream to provide a channel for messages that need to be delivered to clients
+through the Comet notification system. The Client is similar to a session, but can be specific to a
+page/client-side JS environment (each page can have it's own Client).</p>
+
+</body>
+</html>

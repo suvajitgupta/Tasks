@@ -8,10 +8,10 @@
 sc_require('core');
 
 // FIXME: [SC] Shouldn't have to Store.commitRecords() after createRecord for Fixtures Data Source.
-// FIXME: [SC] Shouldn't have to manually add/remove to/from controller instead of store notifying of changes
+// FIXME: [SC] Shouldn't have to manually add/remove to/from controller instead of store notifying of changes.
 
 Tasks.mixin({
-  
+
   /**
    * Authenticate user trying to log in to Tasks application.
    *
@@ -19,136 +19,206 @@ Tasks.mixin({
    * @param {String} user's password.
    */
   authenticate: function(loginName, password) {
-  // TODO: [SG] Should we be using parameters in any action functions?
+    // TODO: [SG] Should we be using parameters in any action functions?
+    // [SE] We don't in Orion but that doesn't mean it's bad, necessarily.
     switch (this.state.a) {
       case 1:
         this.goState('a', 2);
-        if (this._authenticateUser (loginName, password)) {
-          this.authenticationSuccess();
-        } 
-        else {
-          this.authenticationFailure();
-        }
+
+        // We'll need the login name later on, in _userLoadSuccess().
+        CoreTasks.set('loginName', loginName);
+
+        // Retrieve all users from the data source.
+        CoreTasks.get('store').findAll(CoreTasks.User, {
+          successCallback: this._userLoadSuccess.bind(this),
+          failureCallback: this._userLoadFailure.bind(this)
+        });
+
         break;
+
       default:
-        this._logActionNotHandled('login', 'a', this.state.a);  
+        this._logActionNotHandled('authenticate', 'a', this.state.a);  
     }
   },
-  
+
   /**
-   * Implements user authentication logic.
+   * Called after all users have been loaded from the data source.
    *
-   * @param {String} user's login name.
-   * @param {String} user's password.
-   * @returns (Boolean) true if authentication succeeds, false otherwise
+   * Now we can "authenticate" the user by searching for a matching loginName attribute in the list
+   * of users in the store.
    */
-  _authenticateUser: function(loginName, password) {
-    // TODO: [SG] implement server-based authentication
-    var store = CoreTasks.get('store');
-    var users = store.findAll(CoreTasks.User);
-    var len = users.get('length');
-    for (var i = 0; i < len; i++) {
-      var user = users.objectAt(i);
+  _userLoadSuccess: function() {
+    console.log('All users loaded.');
+
+    var loginName = CoreTasks.get('loginName');
+
+    var users = CoreTasks.get('store').findAll(SC.Query.create({
+      recordType: CoreTasks.User,
+      conditions: "loginName = '" + loginName + "'"
+    }));
+
+    var authenticated = NO;
+
+    if (users && users.length() > 0) {
+      var user = users.objectAt(0);
       if (loginName === user.get('loginName')) {
         CoreTasks.set('user', loginName);
-        return true;
+        authenticated = YES;
       }
     }
-    return false;
+
+    if (authenticated) {
+      // Set the content of the users controller.
+      users = CoreTasks.get('store').findAll(SC.Query.create({
+        recordType: CoreTasks.User,
+        order: 'loginName ASC'
+      }));
+
+      // this.get('usersController').set('content', users);
+      // HACK: [SE] Set the objects array on the user drop down list (really ugly).
+      var selectField = this.getPath('mainPage.mainPane.topView.childViews.4');
+      selectField.set('objects', users);
+
+      this._authenticationSuccess();
+    } else {
+      this._authenticationFailure();
+    }
   },
-  
+
+  /**
+   * Called if the request to the data source to load all users failed for some reason.
+   */
+  _userLoadFailure: function() {
+    this._authenticationFailure();
+  },
+
   /**
    * Called after successful login.
    */
-  authenticationSuccess: function() {
+  _authenticationSuccess: function() {
     switch (this.state.a) {
       case 2:
         this.goState('a', 3);
+
+        // Load all data (projects and tasks) from the data source.
         this._loadData();
-        // TODO: [SE] install succsss/failure callbacks for this instead.
-        this.dataLoadSuccess();
         break;
+
       default:
-        this._logActionNotHandled('authenticationSuccess', 'a', this.state.a);  
+        this._logActionNotHandled('_authenticationSuccess', 'a', this.state.a);  
     }
   },
 
   /**
    * Called after failed login.
    */
-  authenticationFailure: function() {
+  _authenticationFailure: function() {
     switch (this.state.a) {
       case 2:
-        alert('Authentication failed');
+        alert('Authentication failed.');
         this.goState('a', 1);
         break;
       default:
-        this._logActionNotHandled('authenticationFailure', 'a', this.state.a);  
+        this._logActionNotHandled('_authenticationFailure', 'a', this.state.a);  
     }
   },
   
   /**
-   * Load all data used by Tasks views.
+   * Load all data (projects and tasks) used by Tasks views.
    */
   _loadData: function() {
-    
+    // Start by loading all tasks.
+    CoreTasks.get('store').findAll(CoreTasks.Task, {
+      successCallback: this._taskLoadSuccess.bind(this),
+      failureCallback: this._dataLoadFailure.bind(this)
+    });
+  },
+
+  /**
+   * Called after all tasks have been loaded from the data source.
+   */
+  _taskLoadSuccess: function() {
+    console.log('All tasks loaded.');
+
+    // Now load all of the projects.
+    CoreTasks.get('store').findAll(CoreTasks.Project, {
+      successCallback: this._projectLoadSuccess.bind(this),
+      failureCallback: this._dataLoadFailure.bind(this)
+    });
+  },
+
+  /**
+   * Called after all projects have been loaded from the data source.
+   */
+  _projectLoadSuccess: function(storeKeys) {
+    console.log('All projects loaded.');
+
     var store = CoreTasks.get('store');
-    var projects = store.findAll(CoreTasks.Project);
-    var tasks = store.findAll(CoreTasks.Task);
+    var projects = store.recordArrayFromStoreKeys(storeKeys, CoreTasks.Project, store);
     
-    // Extract all unallocated tasks for the Inbox
-    var task, taskCount = tasks.get('length');
-    var all = [], unallocated = [];
+    // Get all tasks from the store and push them into the unassigned array.
+    var tasks = store.findAll(SC.Query.create({ recordType: CoreTasks.Task }));
+    var taskCount = tasks.get('length');
+    var all = [];
+    var unassigned = [];
+    var unassignedIds = [];
+
     for (var i = 0; i < taskCount; i++) {
-      task = tasks.objectAt(i);
-      var taskId = task.get('id');
-      all.push(taskId);
-      unallocated.push(taskId);
+      var t = tasks.objectAt(i);
+      all.push(t);
+      unassigned.push(t);
+      unassignedIds.push(t.get('id'));
     }
-    
-    // Identify unallocated tasks to be stored in Inbox
+
+    // Create the All project to hold all tasks in the system.
+    var allProject = store.createRecord(CoreTasks.Project, {
+      name: CoreTasks.ALL_TASKS_NAME
+    });
+
+    allProject.set('tasks', all);
+    CoreTasks.set('allProject', allProject);
+
+    // Find tasks that belong to projects and remove from unassigned array.
     var projectCount = projects.get('length');
+
     for (i = 0; i < projectCount; i++) {
       var project = projects.objectAt(i);
       tasks = project.get('tasks');
       taskCount = tasks.get('length');
       for (var j = 0; j < taskCount; j++) {
-        task = tasks.objectAt(j);
-        var idx = unallocated.indexOf(task.get('id'));
-        unallocated.splice(idx, 1);
+        var idx = unassignedIds.indexOf(tasks.objectAt(j).get('id'));
+
+        // Remove task and task ID from corresponding arrays.
+        unassigned.splice(idx, 1);
+        unassignedIds.splice(idx, 1);
       }
     }
 
-    // Create 'All' project to hold all unallocated tasks
-    var allProjects = store.createRecord(CoreTasks.Project, {
-      name: CoreTasks.ALL_TASKS_NAME,
-      tasks: all
+    // Create the Inbox project with the unassigned tasks.
+    var inboxProject = CoreTasks.createRecord(CoreTasks.Project, {
+      id: 0,
+      name: CoreTasks.INBOX_NAME
     });
-    projects.insertAt(0, allProjects);
-    
-    // Create 'Inbox' project to hold all unallocated tasks
-    var inboxProject = store.createRecord(CoreTasks.Project, {
-      name: CoreTasks.INBOX_NAME,
-      tasks: unallocated
-    });
+
+    inboxProject.set('tasks', unassigned);
     CoreTasks.set('inbox', inboxProject);
-    store.commitRecords();
-    projects.insertAt(0, inboxProject);
-    
+
+    // Push the Inbox project to the beginning of the projects array.
+    projects.unshiftObject(inboxProject);
+
+    // Now push the All project to the beginning of the array.
+    projects.unshiftObject(allProject);
+
+    // Set the contnent of the projects controller.
     this.get('projectsController').set('content', projects);
-    
-    var users = store.findAll(SC.Query.create({
-      recordType: CoreTasks.User,
-      order: 'loginName ASC'
-    }));
-    this.get('usersController').set('content', users);
-    
+
+    this._dataLoadSuccess();
   },
 
   /**
    * Called after successful data load.
    */
-  dataLoadSuccess: function() {
+  _dataLoadSuccess: function() {
     switch (this.state.a) {
       case 3:
         this.goState('a', 4);
@@ -161,7 +231,7 @@ Tasks.mixin({
   /**
    * Called after failed data load.
    */
-  dataLoadFailure: function() {
+  _dataLoadFailure: function() {
     switch (this.state.a) {
       case 3:
         // TODO: [SG] implement data load failure state transition & actions
@@ -175,7 +245,6 @@ Tasks.mixin({
    * Import data from external text file.
    */
   importData: function() {
-    
     Tasks.importDataController.openPanel();
     
     // var data = 
@@ -201,11 +270,9 @@ Tasks.mixin({
    * @param {String} data to be parsed.
    */
   _parseAndLoadData: function(data) {
-    
     var lines = data.split('\n');
     var store = CoreTasks.get('store');
     
-    var currentProject = CoreTasks.get('inbox');
     for (var i = 0; i < lines.length; i++) {
       
       var line = lines[i];
@@ -213,7 +280,7 @@ Tasks.mixin({
       
       if (line.indexOf('#') === 0) { // a Comment
         var commentLine = line.slice(1);
-        console.log ('Commment:\t' + commentLine);
+        console.log('Commment:\t' + commentLine);
       }
       else if (line.match(/^[\^\-v][ ]/)) { // a Task
         
@@ -248,16 +315,21 @@ Tasks.mixin({
           console.log('Import Error: task creation failed');
           continue;
         }
-        store.commitRecords();
-        currentProject.get('tasks').pushObject(taskRecord);
-        
+
+        // Immediately try to commit the task so that we get an ID.
+        var params = {
+          successCallback: this._addTaskFromImportSuccess.bind(this),
+          failureCallback: this._addTaskFromImportFailure.bind(this)
+        };
+
+        taskRecord.commitRecord(params);
       }
       else if (line.indexOf('| ') === 0) { // a Description
         var descriptionLine = line.slice(2);
-        console.log ('Description:\t' + descriptionLine);
+        console.log('Description:\t' + descriptionLine);
       }
       else if (line.search(/^\s*$/) === 0) { // a blank line
-        console.log ('Blank Line:');
+        console.log('Blank Line:');
       }
       else { // a Project
         var projectHash = CoreTasks.Project.parse(line);
@@ -267,12 +339,24 @@ Tasks.mixin({
           console.log('Project Import Error: project creation failed!');
           continue;
         }
-        store.commitRecords();
-        currentProject = projectRecord;
+
+        this.set('currentProject', projectRecord);
         this.get('projectsController').addObject(projectRecord);
       }
-     }
-     
+    }
+  },
+
+  _addTaskFromImportSuccess: function(storeKey) {
+    var task = CoreTasks.get('store').materializeRecord(storeKey);
+    var project = this.get('currentProject');
+
+    if (!project) project = CoreTasks.get('inbox');
+
+    project.addTask(task);
+  },
+
+  _addTaskFromImportFailure: function(storeKey) {
+    // TODO: [SE, SG] Implement this.
   },
   
   /**
@@ -295,11 +379,12 @@ Tasks.mixin({
    * Export data to external text file.
    */
   exportData: function() {
-
-    var val, task, user, data = "# Tasks data export at " + new Date().format('MMM dd, yyyy hh:mm:ssa') + '\n\n';
-    
+    var val, task, user
+    var data = "# Tasks data export at " + new Date().format('MMM dd, yyyy hh:mm:ssa') + '\n\n';
     var pc = this.get('projectsController');
+
     pc.forEach(function(rec){
+          if (rec.get('name') === CoreTasks.ALL_TASKS_NAME) return;
           var tasks = rec.get('tasks');
           var len = tasks.get('length');
           if(rec.get('name') !== CoreTasks.INBOX_NAME) {
@@ -343,8 +428,21 @@ Tasks.mixin({
    * Save modified data to persistent store.
    */
   saveData: function() {
-    // TODO: [SG] implement project data saving
-    this._notImplemented ('saveData');
+    var store = CoreTasks.get('store');
+
+    // Remove the store keys of the Inbox and All project from the changelog so that they're not
+    // persisted to the server.
+    var inboxKey = CoreTasks.getPath('inbox.storeKey');
+    var allKey = CoreTasks.getPath('allProject.storeKey');
+    var cl = store.changelog;
+
+    if (cl) {
+      if (cl.contains(inboxKey)) cl.remove(inboxKey);
+      if (cl.contains(allKey)) cl.remove(allKey);
+    }
+
+    // Now commit all dirty records to the database.
+    store.commitRecords();
   },
   
   /**
@@ -352,7 +450,7 @@ Tasks.mixin({
    */
   openUserManager: function() {
     // TODO: [SG] implement open user manager
-    this._notImplemented ('openUserManager');
+    this._notImplemented('openUserManager');
   },
   
   /**
@@ -360,7 +458,7 @@ Tasks.mixin({
    */
   closeUserManager: function() {
     // TODO: [SG] implement close user manager
-    this._notImplemented ('closeUserManager');
+    this._notImplemented('closeUserManager');
   },
   
   /**
@@ -368,7 +466,7 @@ Tasks.mixin({
    */
   showHelp: function() {
     // TODO: [SG] implement online help
-    this._notImplemented ('showHelp');
+    this._notImplemented('showHelp');
   },
   
   /**
@@ -376,7 +474,7 @@ Tasks.mixin({
    */
   exit: function() {
     // TODO: [SG] implement logout
-    this._notImplemented ('exit');
+    this._notImplemented('exit');
   },
   
   /**
@@ -384,7 +482,7 @@ Tasks.mixin({
    */
   saveAndExit: function() {
     // TODO: [SG] implement save & exit
-    this._notImplemented ('saveAndExit');
+    this._notImplemented('saveAndExit');
   },
   
   /**
@@ -392,24 +490,20 @@ Tasks.mixin({
    */
   exitNoSave: function() {
     // TODO: [SG] implement exit w/o save
-    this._notImplemented ('exitNoSave');
+    this._notImplemented('exitNoSave');
   },
   
   /**
    * Add a new project and start editing it in projects master list.
    */
   addProject: function() {
-    
-    var pc = this.get('projectsController');
-    var sel = pc.get('selection');
- 
-    var store = CoreTasks.get('store');
-    var task = store.createRecord(CoreTasks.Project, { name: CoreTasks.NEW_PROJECT_NAME });
-    store.commitRecords();
-    pc.addObject(task);
+    project = CoreTasks.get('store').createRecord(
+      CoreTasks.Project, { name: CoreTasks.NEW_PROJECT_NAME });
+
+    this.getPath('projectsController.content').pushObject(project);
 
     // TODO: [SG] add new project right after currently selected project, if one
-    var listView = Tasks.getPath('mainPage.mainPane').get('projectsList');
+    var listView = Tasks.getPath('mainPage.mainPane.projectsList');
     var idx = listView.length - 1;
     listView.select(idx);
 
@@ -418,27 +512,21 @@ Tasks.mixin({
     
     // wait for run loop to complete before method is called
     itemView.beginEditing.invokeLater(itemView);
-
   },
   
   /**
    * Delete selected project in master projects list.
    */
   deleteProject: function() {
-    
+    // Get the selected project.
     var pc = this.get('projectsController');
     var sel = pc.get('selection');
     
     if (sel && sel.length() > 0) {
-      var store = CoreTasks.get('store');
-
-      // extract the project to be deleted
       var project = sel.firstObject();
-      var id = project.get('id');
-      store.destroyRecord(CoreTasks.Project, id);
-      store.commitRecords();
       pc.removeObject(project);
-      Tasks.getPath('mainPage.mainPane').get('projectsList').select(0);
+      Tasks.getPath('mainPage.mainPane.projectsList').select(0);
+      project.destroy();
     }
   },
   
@@ -446,61 +534,67 @@ Tasks.mixin({
    * Add a new task to tasks detail list.
    */
   addTask: function() {
-
-    // Get selected task and get its assignee, then create new task with same assignee
-    
-    var taskAssignee = null;
-    var tc = this.get('tasksController');
-    var sel = tc.get('selection');
-    if (sel && sel.length() > 0) {
-      var assigneeUser = sel.firstObject().get('assignee');
-      if(assigneeUser) {
-        taskAssignee = assigneeUser.get('id');
-      }
-    }
-    
     // Create a new task with a default name
+    // TODO: [SG] Get selected task and get its assignee, then create new task with same assignee
+    var task = CoreTasks.createRecord(CoreTasks.Task);
 
-    var store = CoreTasks.get('store');
-    var task = store.createRecord(CoreTasks.Task, {
-      //FIXME: Must add an id or it fails
-      id: this._generateId(),
-      name: CoreTasks.NEW_TASK_NAME,
-      assignee: taskAssignee
-    });
-    store.commitRecords();
+    // We have to commit the task immediately because we need the ID before we add the task to the
+    // selected project.
+    var params = {
+      successCallback: this._addTaskSuccess.bind(this),
+      failureCallback: this._addTaskFailure.bind(this)
+    };
+
+    task.commitRecord(params);
+  },
+
+  _addTaskSuccess: function(storeKey) {
+    // Get the task object from the store.
+    var task = CoreTasks.get('store').materializeRecord(storeKey);
+
+    // Add the new task to the currently-selected project.
+    var project = this.getPath('projectsController.selection').firstObject();
+    project.addTask(task);
+
+    // Add the task to the All Tasks project.
+    CoreTasks.get('allProject').addTask(task);
+
+    // Refresh the assignments controller.
+    CoreTasks.invokeLater(this.get('assignmentsController').showAssignments());
     
-    var ac = this.get('assignmentsController');
-    ac.addObject(task);
-    ac.showAssignments();
-
     // TODO: [SG] Begin editing newly created item.
+  },
 
+  _addTaskFailure: function(storeKey) {
+    // TODO: [SE] Implement this.
   },
   
   /**
    * Delete selected task in tasks detail list.
    */
   deleteTask: function() {
-    
     var tc = this.get('tasksController');
     var sel = tc.get('selection');
     if (sel && sel.length() > 0) {
-      var store = CoreTasks.get('store');
-
-      //pass the record to be deleted
+      // Get the task and remove it from the project.
       var task = sel.firstObject();
-      var id = task.get('id');
-      store.destroyRecord(CoreTasks.Task, id);
-      store.commitRecords();
+      var project = this.getPath('projectsController.selection').firstObject();
+      project.removeTask(task);
 
+      // Remove the task from the All Tasks project.
+      CoreTasks.get('allProject').removeTask(task);
+
+      // Now remove the task from the assignments controller.
       tc.set('selection', null);
       var ac = this.get('assignmentsController');      
       ac.removeObject(task);
-      ac.showAssignments();
-      
-      // TODO: [SG] Select task after deleted task, if any
-      
+
+      CoreTasks.invokeLater(ac.showAssignments());
+
+      // Finally, destroy the task.
+      task.destroy();
+
+      // TODO: [SG] Select task after deleted task, if any.
     }
   },
   
@@ -509,7 +603,7 @@ Tasks.mixin({
    */
   openTaskEditor: function() {
     // TODO: [SG] implement open Task editor
-    this._notImplemented ('openTaskEditor');
+    this._notImplemented('openTaskEditor');
   },
   
   /**
@@ -517,7 +611,7 @@ Tasks.mixin({
    */
   closeTaskEditor: function() {
     // TODO: [SG] implement close Task editor
-    this._notImplemented ('closeTaskEditor');
+    this._notImplemented('closeTaskEditor');
   },
   
   /**

@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	
+	<title>Persevere: The JSON database and JavaScript application server</title>
+	
+	<style type="text/css">
+		@import "jsclient/dojo/resources/dojo.css";
+		@Import "jsclient/dijit/themes/soria/soria.css";
+		@Import "jsclient/dijit/themes/soria/soria_rtl.css";
+		@import "jsclient/dojox/grid/resources/soriaGrid.css";
+		@import "res/common.css";
+	</style>
+    
+	<script type="text/javascript" src="jsclient/dojo/dojo.js" djConfig="parseOnLoad: true"></script>
+	<script type="text/javascript" src="jsclient/dojox/json/schema.js"></script>
+	<script type="text/javascript" src="jsclient/dojox/data/ClientFilter.js"></script>
+	<script type="text/javascript" src="jsclient/dojox/data/PersevereStore.js"></script>
+	<script type="text/javascript" src="jsclient/dojox/data/StoreExplorer.js"></script>
+	<script type="text/javascript" src="res/explorer.js"></script>
+	
+
+	
+<!-- Meta Tags -->
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="JSON, Persevere, REST, JavaScript, JSON-RPC, object, server, database" />
+<meta name="description" content="Persevere is the toolset for open RESTful JSON interaction" />
+<meta name="author" content="Kris Zyp" />
+<meta name="copyright" content="Dojo Foundation" />
+<meta name="company" content="Dojo Foundation" />
+
+
+
+<!-- Favicon -->
+<link rel="shortcut icon" href="" type="image/ico"  />
+
+
+</head>
+
+<body class="soria">
+	<div id="status">Processing</div>
+    
+    <div class="project" id="project" dojoType="dijit.layout.BorderContainer" gutters="false">
+        <div id="headerContainer" dojoType="dijit.layout.ContentPane" region="top">
+        	<ul id="mainNav">
+        		<li><a href="http://dojofoundation.org">a dojo foundation project</a></li>
+        	</ul>
+            <a href="/" alt="Persevere"><div id="logo"></div></a>
+            <ul id="subNav">
+                <li><a href="http://www.persvr.org/" class="navLink">about</a></li>
+            	<li><a href="index.htm" class="navLink">getting started</a></li>     
+                <li><a href="http://docs.persvr.org/" class="navLink">documentation</a></li>
+             	<li class="active"><a href="explorer.html" class="navLink">database explorer</a></li>    
+            </ul>
+        </div>
+        <div id="subContent" dojoType="dijit.layout.BorderContainer" gutters="false" region="center">
+            <div id="explorerSection" class="section" dojoType="dijit.layout.BorderContainer" gutters="false" region="center">
+            	<div dojoType="dijit.layout.ContentPane" region="top">
+            		<h1>Persevere Database Explorer</h1>
+            		Select a class/table: <select id="classes"></select><br />
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
