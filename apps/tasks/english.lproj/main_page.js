@@ -42,7 +42,7 @@ Tasks.mainPage = SC.Page.design({
         layout: { centerY: 2, height: 30, left: 160, width: 95 },
         textAlign: SC.ALIGN_RIGHT,
         controlSize: SC.SMALL_CONTROL_SIZE,
-        valueBinding: 'CoreTasks.user'
+        valueBinding: SC.Binding.oneWay('CoreTasks.user')
       }),
       
       SC.ButtonView.design({
@@ -191,7 +191,7 @@ Tasks.mainPage = SC.Page.design({
           layout: { centerY: 0, left: 40, height: 24, width: 30 },
           title: "-",
           titleMinWidth: 0,
-          isEnabledBinding: 'Tasks.projectsController.isDeletable',
+          isEnabledBinding: SC.Binding.oneWay('Tasks.projectsController.isDeletable'),
           toolTip: 'Delete Project',
           target: 'Tasks',
           action: 'deleteProject'
@@ -199,7 +199,7 @@ Tasks.mainPage = SC.Page.design({
         
         Tasks.SummaryView.design({
           layout: { centerY: 2, left: 110, height: 24, width: 90 },
-          valueBinding: 'Tasks.assignmentsController.length'
+          valueBinding: SC.Binding.oneWay('Tasks.assignmentsController.length')
         })
         
         ]
@@ -223,7 +223,7 @@ Tasks.mainPage = SC.Page.design({
           layout: { centerY: 0, height: 24, left: 40, width: 30 },
           title:  "-",
           titleMinWidth: 0,
-          isEnabledBinding: 'Tasks.tasksController.hasSelection',
+          isEnabledBinding: SC.Binding.oneWay('Tasks.tasksController.hasSelection'),
           toolTip: 'Delete Task',
           target: 'Tasks',
           action: 'deleteTask'
@@ -248,7 +248,7 @@ Tasks.mainPage = SC.Page.design({
           itemTitleKey: 'title',
           itemValueKey: 'value',
           valueBinding: 'Tasks.taskController.priority',
-          isEnabledBinding: 'Tasks.tasksController.hasSelection',
+          isEnabledBinding: SC.Binding.oneWay('Tasks.tasksController.hasSelection'),
           layoutDirection: SC.LAYOUT_HORIZONTAL
         }),
         
@@ -273,7 +273,7 @@ Tasks.mainPage = SC.Page.design({
           itemTitleKey: 'title',
           itemValueKey: 'value',
           valueBinding: 'Tasks.taskController.status',
-          isEnabledBinding: 'Tasks.tasksController.hasSelection',
+          isEnabledBinding: SC.Binding.oneWay('Tasks.tasksController.hasSelection'),
           layoutDirection: SC.LAYOUT_HORIZONTAL
         }),
         
@@ -296,7 +296,7 @@ Tasks.mainPage = SC.Page.design({
           itemTitleKey: 'title',
           itemValueKey: 'value',
           valueBinding: 'Tasks.taskController.validation',
-          isEnabledBinding: 'Tasks.tasksController.hasSelection',
+          isEnabledBinding: SC.Binding.oneWay('Tasks.tasksController.hasSelection'),
           layoutDirection: SC.LAYOUT_HORIZONTAL
         })
         
