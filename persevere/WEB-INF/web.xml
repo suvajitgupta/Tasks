@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--	Persevere Configuration
+Copyright (C) 2008 Kris Zyp SitePen
+-->
+<!-- This is web.xml file with filter definitions that you can use for Persevere server or copy into your web.xml file 
+add Persevere to an existing web application-->
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+  	<filter>
+	    <description>Jspon Data Requester</description>
+	    <filter-name>Persevere</filter-name>
+	    <filter-class>org.persvr.remote.PersevereFilter</filter-class>
+  	</filter>
+	
+	<!-- Caching/Compression Filters are from Resource Accelerate (http://www.xucia.com/page/Resource_Accelerate) -->	
+	<filter>
+        <filter-name>CacheFilter</filter-name>
+        <filter-class>com.xucia.resourceaccelerate.CacheHeadersFilter</filter-class>
+<!--		<init-param>
+			<param-name>cache-folder</param-name> <!- what folder to use for caching compressed file (relative the webapp root directory) ->
+			<param-value>ra-cache</param-value> <!- folder or path ->
+		</init-param> -->
+		<init-param>
+			<param-name>expiration-time</param-name> <!-- how long the resource should stay in the browser cache -->
+			<param-value>86400000</param-value> <!-- one day -->
+		</init-param>
+	</filter>
+    <filter>
+		<filter-name>CompressAndCacheFilter</filter-name>
+        <filter-class>com.xucia.resourceaccelerate.CompressAndCacheHeadersFilter</filter-class>
+        <init-param>
+        	<param-name>caching-headers-enabled</param-name> <!-- sets whether or not caching headers should be enabled-->
+        	<param-value>true</param-value> <!-- this is true by default, must be set to false to disable -->
+        </init-param>
+		<init-param>
+			<param-name>expiration-time</param-name> <!-- how long the resource should stay in the browser cache -->
+			<param-value>86400000</param-value> <!-- one day -->
+		</init-param>
+		<init-param>
+			<param-name>cached-compressed-data</param-name> <!-- Specifies if the compressed gzip files should be cached so they don't have to re-gzipped. This can be turned off for dynamic content, so it doesn't have to cache -->
+			<param-value>true</param-value> <!-- true is the default-->
+		</init-param>
+	</filter>
+	
+  	<filter-mapping>
+	    <filter-name>Persevere</filter-name>
+	    <url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	
+			<!-- These file types will only have caching headers applied -->   
+    <filter-mapping>
+        <filter-name>CacheFilter</filter-name>
+        <url-pattern>*.gif</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>CacheFilter</filter-name>
+        <url-pattern>*.jpg</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>CacheFilter</filter-name>
+        <url-pattern>*.png</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>CacheFilter</filter-name>
+        <url-pattern>*.jpeg</url-pattern>
+    </filter-mapping>
+
+		<!-- These file types will have caching headers and gzip applied -->
+    <filter-mapping>
+        <filter-name>CompressAndCacheFilter</filter-name>
+        <url-pattern>*.html</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>CompressAndCacheFilter</filter-name>
+        <url-pattern>*.css</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>CompressAndCacheFilter</filter-name>
+        <url-pattern>*.js</url-pattern>
+    </filter-mapping>
+	
+	<listener>
+		<listener-class>
+			org.persvr.remote.SessionListener
+		</listener-class>
+	</listener>
+	
+<!--  If you are using Tomcat, you should use this Channels definition instead of the one below for optimum Comet performance
+<servlet>
+    <servlet-name>Channels</servlet-name>
+    <servlet-class>org.persvr.servlet.TomcatChannels</servlet-class>
+  </servlet> -->
+  
+  <servlet>
+    <servlet-name>Channels</servlet-name>
+    <servlet-class>org.persvr.servlet.Channels</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Bayeux</servlet-name>
+    <servlet-class>org.persvr.servlet.Bayeux</servlet-class>
+  </servlet>
+  
+
+
+  <servlet-mapping>
+    <servlet-name>Channels</servlet-name>
+    <url-pattern>/channels</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Bayeux</servlet-name>
+    <url-pattern>/cometd</url-pattern>
+  </servlet-mapping>
+      <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+        <welcome-file>index.htm</welcome-file>
+    </welcome-file-list>
+
+</web-app>

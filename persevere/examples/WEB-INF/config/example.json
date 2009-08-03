@@ -1,0 +1,55 @@
+{"id":"example.json",
+"sources":[
+	{
+		"name":"Customer",
+		"schema":{
+			"extends":{"$ref":"../Class/Object"},
+			"instances":{"$ref":"../Customer/"},
+			"prototype":{
+				}
+			},
+		"extends":"Object"
+		},
+	{
+		"name":"Trail",
+		"extends":"Object",
+		"schema":{
+			"instances":{"$ref":"../Trail/"},
+			"extends":{"$ref":"../Class/Object"},
+			"description":"Example Trail table",
+			"properties":{
+				},
+			"prototype":{
+				}
+			}
+		},
+	{
+		"name":"Friend",
+		"extends":"Object",
+		"sourceClass":"org.persvr.datasource.InMemorySource",
+		"schema":{
+			"instances":{"$ref":"../Friend/"},
+			"extends":{"$ref":"../Class/Object"},
+			"description":"Example Friend table",
+			"properties":{
+				"name":{
+					"type":"string",
+					"description":"The name of the friend"
+					}
+				},
+			"prototype":{
+				}
+			}
+		},
+	{
+		"name":"ExampleXml",
+		"sourceClass":"org.persvr.datasource.XmlFileSource",
+		"url":"$DATA-DIR$/example.xml",
+		"schema":{
+			"instances":{"$ref":"../ExampleXml/"},
+			"prototype":{
+				}
+			}
+		}
+	]
+}

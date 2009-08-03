@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<title>dojox.grid.DataGrid with Persevere</title>
+	
+	<style type="text/css">
+		@import "../jsclient/dojo/resources/dojo.css";
+		@import "../jsclient/dojox/grid/resources/Grid.css";
+		@import "../jsclient/dojox/grid/resources/tundraGrid.css";
+		@import "../jsclient/dojox/off/resources/offline-widget.css";
+		@import "../jsclient/dijit/themes/tundra/tundra.css";
+		body {
+			padding:2em !important;
+			font-size: 0.9em;
+			font-family: Geneva, Arial, Helvetica, sans-serif;
+		}
+		.partsContainer {
+			background:#2e2e2e;	
+			padding:1em;
+			width:700px;
+			-webkit-box-shadow: 2px 8px 11px #888;
+			-moz-border-radius-topleft:8px;
+			-moz-border-radius-topright:8px;
+			-webkit-border-top-left-radius:8px;
+			-webkit-border-top-right-radius:8px;
+			-webkit-box-shadow: 2px 2px 11px #888;
+		}
+
+		.partsContainer .gridContainer {
+			background:#fff;
+			height:350px;
+			border-top:1px solid #000;
+			border-left:1px solid #000;
+		}
+
+		h1 {
+			font-family:"Century Gothic", Verdana,Arial,Helvetica,sans-serif;
+			padding:0.5em 0.5em 0 0.5em;
+			margin:0;
+			color:#fff;
+			background:#2e2e2e;
+			font-weight:normal;
+		}
+		#controls {
+			padding:1em;
+		}
+		p { padding:1em; color: #ccc; }
+
+		.dojoxGrid-row-odd td {
+			background:#e8f2ff;
+		}
+		
+		.heading {
+			font-weight: bold;
+			padding-bottom: 0.25em;
+		}
+		#grid, #grid2 {
+			height: 25em;
+			padding: 1px;
+		}
+		#status {
+			position:absolute;
+			top:0px;
+			left:0px;
+			z-index:10;
+			background:url('/res/spinner.gif') white no-repeat;
+			border:1px solid black;
+			padding:5px;
+			padding-left:25px;
+			font-family:arial;
+		}		
+	</style>
+	<script djConfig="isDebug:false, parseOnLoad: true" src="../jsclient/dojo/dojo.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		var path = location.pathname.match(/(.*\/)[^\/]*$/)[1];
+		if(location.toString().match(/file:/)){
+			alert("You can't run this demo from the file system, you must run it with Persevere"); 
+		}
+		//dojo.require("dojox.data.ClientFilter");
+		dojo.require("dojo.cookie");
+		dojo.require("dojox.data.PersevereStore");
+		dojo.require("dojox.cometd.RestChannels");
+		dojo.require("dojox.grid.DataGrid");
+		
+		if(path.lastIndexOf("examples/") > -1){
+			path = path.substring(0,path.lastIndexOf("examples/"));
+		}
+		dojox.rpc.Client.clientId += dojo.cookie("JSESSIONID");
+		dojox.cometd.RestChannels.defaultInstance.url = path + "channels";
+		var persevereStores = dojox.data.PersevereStore.getStores(path,true); // persevere stores are auto-generated
+			
+		customerStore = persevereStores.Customer;//new dojox.data.PersevereStore({target:"/Customer/"}); // and get the Customer store
+		if(!customerStore){
+			console.log("Customer table doesn't exist, creating it now");
+			dojo.xhr("POST",{url:"/Class/",sync: true, putData:'{"id":"Customer","extends":{"$ref":"Object"}}'},true); 
+			customerStore = new dojox.data.PersevereStore({target:"/Customer/"}); // and get the Customer store
+			// create a new item for starting data
+			customerStore.newItem({firstName:"John", lastName:"Doe"});
+			customerStore.save();
+		}
+
+		addItem = function() {
+			customerStore.newItem({firstName: "firstName", lastName: "lastName",created:dojo.date.stamp.toISOString(new Date,{zulu:true})});
+		}
+		remove = function() {
+			var items = grid.selection.getSelected();
+			for (var i = 0; i < items.length; i++){
+				customerStore.deleteItem(items[i]);
+			}
+		}
+
+</script>
+</head>
+<body class="tundra">
+
+	<div class="partsContainer">
+		<h1>DataGrid with Persevere live updates</h1>
+			<div id="controls">
+				<button onclick="customerStore.save()">Save</button>
+
+				<button onclick="customerStore.revert()">Revert</button>
+				<button onclick="addItem()">Add</button>
+				<button onclick="remove()">Remove</button>&nbsp;&nbsp;&nbsp;
+		<!--  		<button onclick="addProperty()">Add Property</button>
+				<button onclick="removeProperty()">Remove Property</button>
+		 Testing buttons (not so good for demos) <button onclick="removeItem()">Remove (Store)</button>
+				<button onclick="addItemToStore()">Add (Store)</button>&nbsp;&nbsp;&nbsp;
+				<button onclick="grid.edit.apply()">Apply</button>
+				<button onclick="grid.edit.cancel()">Cancel</button>&nbsp;&nbsp;&nbsp; -->		
+			</div>
+
+		<table rowSelector="20px" rowsPerPage="20" query="''" store="customerStore" id="grid" jsid="grid" dojoType="dojox.grid.DataGrid">
+			<thead>
+				<tr>
+					<th editable="true" width="300px" field="firstName">First Name</th>
+					<th editable="true" width="auto" field="lastName">Last Name</th>
+				</tr>
+			</thead>
+		</table>
+		<div id="dot-widget"></div>
+		
+		<p>
+		To experience the live updates, open this page into two different browsers and make 
+		changes in one of the browsers, save the change, and you should see the page in the 
+		other browser be automatically updated. Note that from www.persvr.org the delete
+		permission is disabled.
+		</p>
+
+	</div>
+	
+</body>
+</html>

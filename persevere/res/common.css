@@ -1,0 +1,421 @@
+/* ---------- reset ----------*/
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	list-style: none;
+	font-size: 100%;
+	font-family: inherit;
+	vertical-align: baseline;
+}
+
+html, body {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	font-family: "Trebuchet MS", Verdana, Helvetica, sans-serif;
+	color: #111;
+	background-color:#333333;
+}
+p{
+padding-top:5px;
+padding-bottom:5px;
+}
+
+h1 {
+	font-weight:bold;
+	font-size:1.2em;
+	margin-bottom:1em;
+}
+
+/* ---------- header ----------*/
+#headerContainer {
+	background: url("headerBg.png") repeat-x top left;
+	width: 100%;
+	height: 116px;
+	border-top: 1px solid #CFCFCF;
+	border-bottom: 1px solid #000;
+}
+
+#logo {
+	position:absolute;
+	background: url("persevere-glow.png") no-repeat top left;
+	width: 470px;
+	height: 55px;
+	left:0px;
+	margin-top:10px;
+	margin-left:126px;
+}
+
+/* ---------- navigation ----------*/
+#mainNav {
+	position: absolute;
+	right: 0px;
+	font-size: 14px;
+	margin: 35px 126px 0 0;
+}
+
+#headerContainer #subNav {
+	margin-top:76px;
+}
+
+#subNav {
+	font-size: 14px;
+}
+
+#mainNav li,
+#subNav li {
+	float: left;
+}
+
+#mainNav li a,
+#subNav li a {
+	float:left;
+	font-family: "Verdana","Arial","Helvetica",sans-serif;
+	margin-left: 34px;
+	padding-bottom: 23px;
+}
+
+.project{
+    height:100%;
+    width:100%;
+}
+
+.project #projectsLink, .contact #contactLink, .about #aboutLink {
+	background: url("navPointer.png") no-repeat left bottom;
+}
+
+.project #projectsLink {
+	background-position: 65% 24px;
+}
+
+.about #aboutLink {
+	background-position: 80% 24px;
+}
+
+.contact #contactLink {
+	background-position: 78% 24px;
+}
+
+.dj_ie6 .project #projectsLink, .dj_ie6 .contact #contactLink, .dj_ie6 .about #aboutLink {
+	background: url("navPointer.gif") no-repeat bottom center;
+}
+
+#mainNav a,
+#subNav a {
+	color: #EFEFEF;
+	text-decoration: none;
+}
+
+#mainNav a:hover,
+#subNav a:hover {
+	color: #FFF;
+}
+
+#subNav {
+	margin: 0 0 0 126px;
+	font-size: 12px;
+}
+
+#subNav li {
+	margin: 8px 31px 0 0;
+}
+
+#subNav li a {
+	margin: 0;
+}
+
+#subNav .active {
+	background: url("subNavR.png") no-repeat right top;
+	height: 25px;
+	padding-right: 10px;
+}
+
+#subNav .active  a {
+	background: url("subNavL.png") no-repeat left top;
+	color: #444;
+	margin-left: 0;
+	padding-left: 10px;
+	height: 25px;
+}
+
+#subNav li a {
+	padding: 4px 0 0 0;
+}
+
+/* ---------- content ----------*/
+#content {
+	background: #BBCED4 url("bodyBg.png") repeat-x top left;
+	width: 100%;
+	height: auto;
+	border-top: 1px solid #FFF;
+	border-bottom: 1px solid #CECECE;
+	font-size: 12px;
+}
+
+#contentOverlay {
+	background: url("bodyImg.png") no-repeat top left;
+	padding: 50px 0 50px 0;
+}
+
+/* ---------- sub content ----------*/
+#subContent {
+	background: #eef2f3 url("bodyBg.png") repeat-x top left;
+	width: 100%;
+	min-height: 250px;
+	height:auto !important;
+	height: 250px;
+	border-top: 1px solid #FFF;
+}
+
+#subContent #subContentOverlay {
+	margin: 36px 20px 20px;
+	padding-bottom: 50px;
+	padding-left: 105px;
+	font-size:80%;
+	width:800px;
+}
+
+#subContent #subContentL h2 {
+	margin-left: 141px;
+	margin-right: 10px;
+}
+
+#subContent h2 {
+	background: #E6E6FF;
+	height: 16px;
+	color: #7D3333;
+	font-size: 16px;
+	font-weight: normal;
+	padding: 8px;
+	font-family: "Myriad Pro", "Trebuchet MS", Verdana, Helvetica, sans-serif;
+	-moz-border-radius: 7px;
+	-webkit-border-radius: 7px;
+	border: 1px solid #E1E1E1;
+	
+	margin: 10px;
+	width:300px;
+	
+}
+
+#subContent h3 {
+	height: 16px;
+	margin: 15px;
+	color: #515152;
+	font-size: 14px;
+	font-weight: bold;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+}
+
+#subContent li, #mainContent ul li {
+	background: url("blueTriSmall.png") no-repeat 0px 7px;
+	display: block;
+	line-height: 20px;
+	margin-left: 1em;
+	padding-left: 1em;
+	font-size: 12px;
+}
+#explorerSection {
+	margin: 20px;
+	font-size: 80%;
+}
+
+#mainContent ol li {
+	list-style:decimal;
+	margin-left: 2em;
+	padding-left: 0.3em;
+}
+
+
+#mainContent {
+	overflow:hidden;
+	width:100%;
+}
+
+#mainScroller {
+	width:900%;
+}
+
+.contentBox {
+	margin-left:126px;
+	margin-right:2%;
+	width:11%;
+	float:left;
+}
+
+.contentBoxLogo {
+	float: left;
+	padding-right: 50px;
+	width: 170px;
+}
+
+.contentBoxContent {
+	float: left;
+	width: 60%;	
+}
+
+#subContent #subContentL #contributorPager {
+	float:right;
+	padding-top:3px;
+}
+
+#subContent #subContentL #contributorPager li {
+	background: url("dot.gif") no-repeat;
+	width:10px;
+	height:10px;
+	float:left;
+	padding:0px;
+	margin:0px;
+	cursor:pointer;
+}
+
+#subContent #subContentL #contributorPager li.active {
+	background:url("dotActive.gif") no-repeat;
+}
+
+#contributors {
+	position:relative;
+	margin-left:150px;
+	margin-top:40px;
+	height:90px;
+}
+
+.contributorBox {
+	position:absolute;
+	top:0;
+	vertical-align:top;
+}
+
+.contributorBox img {
+	vertical-align:middle;
+	margin:10px;
+}
+
+.contributorBoxSelected {
+	z-index:1;
+}
+
+.moreLink {
+	color:#0093C8;
+	display:block;
+	float:right;
+	font-size:12px;
+	margin-top: 10px;
+	margin-right: 20px;
+	text-decoration:none;
+	background:url("blueTriBig.gif") no-repeat 100% 70%;
+	padding-right: 14px;
+}
+
+.projectLink {
+	display:block;
+	width:143px;
+	background:url("linkSite.png") no-repeat;
+	height:25px;
+	margin-top:10px;
+	text-decoration:none;
+}
+
+#mainContent p {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+#mainContent h2 {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-weight: bold;
+}
+
+#mainContent a,
+#subContent a {
+	color:#0093C8;
+	text-decoration:none;
+}
+
+.boardMember {
+	width: 100%;
+	float: left;
+	margin-bottom: 30px;
+}
+
+.boardMember img {
+	float: left;
+	padding: 7px;
+	background: #FFF;
+	border: 1px solid #ABABAB;
+}
+
+#mainContent .boardMember h2 {
+	padding-top: 0;
+}
+
+.boardMember h2,
+.boardMember p {
+	float: left;
+	margin-left: 15px;
+	width: 60%;
+}
+	p {
+			line-height:1.2em;	
+	}
+	pre { 
+		border: 1px solid #ddd; 
+		padding: 1em;
+		font-family: Courier;
+		background-color:#eed;
+	}
+	#table-of-contents{
+		overflow: auto;
+		width:200px;
+		top:120px;
+		left:840px;
+		position:fixed;
+		bottom:1px;
+		background-color:#E6E6FF;		
+		border: 1px solid #555;
+	}
+	#table-of-contents ul{
+		padding-left:10px;
+		margin-left:1px;
+	}
+#aboutSection, #gettingStartedSection {
+	padding-left:105px;
+}
+.details{
+	width:100px;
+	height:40px;
+	background: url("../jsclient/dijit/themes/tundra/images/spriteArrows.gif") no-repeat top left;
+}
+.dojoxGridCell{
+	font-size: 1.19em;
+}
+.expandable {padding-left: 20px;background: url('expand.gif') no-repeat 3px 3px;cursor: pointer;}
+.expanded {background: url('down.gif') no-repeat 3px 3px;padding-bottom:1px;padding-right: 1px;}
+.simple {padding-left: 20px;}
+textarea {}
+.pngImg {width:16px;height:16px;}
+.dropDownOptions {width: 19px;height: 21px;background: url('arrowdown.gif'); background-repeat: no-repeat;}
+.selected, .selected .tree {border: 1px solid blue;} // background: url('selected.png') repeat-x
+.field {width: 30%;display: block;float: left;}
+.objecttab {padding-left: 5px;padding-right: 5px;background-color: #ccc;padding-bottom: 1px;}
+.children {border: 1px solid #ccc;}
+.tree{overflow:auto; border: 1px solid #aaa}
+#status {
+	position:absolute;
+	top:0px;
+	left:0px;
+	z-index:10;
+	background:url('spinner.gif') white no-repeat;
+	border:1px solid black;
+	padding:5px;
+	padding-left:25px;
+	font-family:arial;
+	font-size: 80%;
+}		
+

@@ -21,7 +21,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
   searchFilter: null,
   
   showAssignments: function() { // show tasks for selected user that matches search filter
-    
+
     var sf = this.get('searchFilter');
     sf = this._escapeMetacharacters(sf);
     var rx = new RegExp(sf, 'i');

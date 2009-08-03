@@ -8,4 +8,6 @@ tmp
 *.swo
 sc-integrate
 TODO
+server.out
 abbot/
+tasks-server/WEB-INF/data

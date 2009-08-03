@@ -1,0 +1,329 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html manifest="http://localhost:8080/examples/trails.cache-manifest">
+<head>
+	<title>A Database for the Outdoors</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+	<link href="/jsclient/dojo/resources/dojo.css" rel="stylesheet" type="text/css" />
+	<link href="/jsclient/dojox/grid/resources/Grid.css" rel="stylesheet" type="text/css" />
+	<style type="text/css">
+
+
+h1 {
+	color: #FFF;
+	font-size: 2.8em;
+	margin-left: 15px;
+	top: 140px;
+	position: absolute;
+}
+
+h3 {
+	color: #FFF;
+	font-size: 1.7em;
+	font-weight: normal;
+	position: absolute;
+	top: 190px;
+	margin-left: 15px;
+}
+
+#controls {
+	width: 662px;
+	margin-top: 189px;
+	background: url("img/filterBg.png") repeat-x top left;
+	height: 70px;
+}
+
+#controls select {
+	float: left;
+	height: 25px;
+	width: 194px;
+	margin: 25px 16px 0 16px;
+	padding: 3px;
+	border: 1px solid #868686;
+}
+
+#controls button {
+	float: left;
+	margin: 5px 30px 0 0;
+	padding-bottom: 4px;
+	height: 26px;
+	color: #313123;
+	border: none;
+}
+
+#controls #buttons {
+	float: left;
+	position: absolute;
+	margin-left: 232px;
+}
+
+#controls button.find {
+	background: url("img/findButton.png") no-repeat center left;
+	width: 96px;
+}
+
+#controls button.add {
+	background: url("img/addButton.png") no-repeat center left;
+	width: 96px;
+}
+
+#controls button.remove {
+	background: url("img/removeButton.png") no-repeat center left;
+	width: 162px;
+	margin-right: 0;
+}
+
+body {
+	width: 662px;
+	margin: 0 auto;
+	font-size: 12px;
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+	background: #363636 url("img/prusik.jpg") no-repeat top center;
+}
+
+.grid {
+	clear: left;
+	height: 214px;
+	min-width: 662px;
+	max-width: 662px;
+	background: #919193;
+	border-top: 1px solid #F6F6F6;
+}
+
+.dojoxGridHeader .dojoxGridCell,
+.dojoxGridHeader {
+	background: #919193;
+	border-color: #C6C6C6;
+}
+
+.dojoxGridMasterHeader {
+	color: #FFF;
+}
+
+.dojoxGrid table {
+	width: 626px;
+}
+
+.dj_ff3 .dojoxGrid table {
+	width: 641px;
+}
+
+.dojoxGridScrollbox {
+	background: #919193;
+	overflow-x: hidden;
+}
+
+.dojoxGridRowbar {
+	background: #919193;
+	border-color: #919193;
+	border-right-color: #919193;
+}
+
+.dojoxGridRowbarOver {
+	background: #C6C6C6;
+	border-top-color: #C6C6C6;
+	border-bottom-color: #C6C6C6;
+}
+
+.dojoxGridRowbarInner {
+	border-top: none;
+}
+
+.dojoxGridRowOdd {
+	background: #E6E6E6;
+}
+
+.dojoxGridRowSelected {
+	background-color: #D9E8F9;
+}
+
+.dojoxGridCell {
+	border: 1px solid #C6C6C6;
+}
+
+.dojoxGridRowOver {
+	border-color: #9BCFED;
+}
+
+#detail {
+	width:622px;
+	color: #3F3F3F;
+}
+
+#detail label {
+	float: left;
+	margin-left: 20px;
+	width: 75px;
+	height: 3.5em;
+}
+
+#detail input {
+	width: 180px;
+	float: left;
+	height: 15px;
+	padding: 3px;
+	background: url("img/wideFormBoxBg.png") top left;	
+	border: 1px solid #868686;	
+}
+
+#detail select {
+	width: 186px;
+}
+
+#detail textarea {
+	width: 490px;
+	padding: 3px;
+	background: url("img/wideFormBoxBg.png") top left;	
+	border: 1px solid #868686;
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+}
+
+form {
+	background: #EAEAEA url("img/saveBg.png") repeat-x top left;
+	min-height: 280px;
+	padding: 20px 20px 15px 20px;
+}
+
+form legend {
+	font-size: 1.5em;
+	color: #3F3F3F;
+	padding-bottom: 20px;
+}
+
+form button {
+	float: right;
+	background: url("img/saveButton.png") no-repeat top left;
+	width: 72px;
+	height: 26px;
+	margin: 15px 15px 0 0;
+	padding-bottom: 4px;
+	border: none;
+	color: #313123;
+}
+
+form a {
+	float: left;
+	background: url("img/sitepen.png") no-repeat top left;
+	height: 24px;
+	width: 24px;
+	margin-top: 24px;
+} 
+	</style>
+
+<!-- IE CSS Fixes -->
+	<!--[if IE 7]>
+	<link rel="stylesheet" href="ie7.css" type="text/css" media="screen" />		
+	<![endif]-->
+	
+	<script type="text/javascript" src="../jsclient/dojo/dojo.js" djConfig="isDebug:false, parseOnLoad: true"></script>
+	<script type="text/javascript">
+		dojo.require("dojox.rpc.OfflineRest");
+		dojo.require("dojox.data.PersevereStore");
+		dojo.require("dojox.grid.DataGrid");
+			var trailsLayout = [ 
+			{
+				noscroll: true,
+				cells: []
+			},
+			
+			[
+				[
+					{ name: 'Name', width: 30, field: 'name'},
+					{ name: 'Length', width: 10, field: 'length'},
+					{ name: 'Difficulty', width: 10, field: 'difficulty'}
+				]
+			]
+		];
+		
+		//var persevereStores = dojox.data.PersevereStore.getStores('/',true); // persevere stores are auto-generated
+		
+		trailStore = new dojox.data.PersevereStore({target:"/Trail"}); // and get the Trail store
+		if(!trailStore){
+			alert('This demo requires that a "Trail" class be created. See the documentation on "Creating New Tables/Classes" for more information.');
+		}
+		dojox.rpc.OfflineRest.addStore(trailStore,"");
+		addItem = function() {
+			trailStore.newItem({name: "Trail Name", rating: "medium", region: dojo.byId("searchInput").value});
+			grid.selection.clear();
+			grid.selection.addToSelection(grid.rowCount-1);
+			showSelectedTrail();
+		}
+		remove = function() {
+			var items = grid.selection.getSelected();
+			for (var i = 0; i < items.length; i++){
+				trailStore.deleteItem(items[i]);
+			}
+		}
+		function showSelectedTrail(){
+				//console.log("selected new row",e);
+				var item = grid.selection.getSelected()[0];
+				if(item){
+					var form = dojo.query("form")[0];
+					dojo.query("input, select, textarea",form).forEach(function(input){
+						try{
+							input.value = trailStore.getValue(item,input.name) || "";
+						}catch(e){ // IE can't handle setting the value on a textarea?!? 
+						}
+						input.onchange = function(){
+							trailStore.setValue(item,input.name,input.value);
+						};
+					});
+				}
+				
+			}
+		dojo.addOnLoad(function(){
+			dojo.connect(grid,"onRowClick",showSelectedTrail);
+		});
+		
+		doSearch = function(){
+			var value = dojo.byId("searchInput").value;
+			grid.filter({ region: value }, true);
+		}
+		
+	</script>
+</head>
+<body class="tundra">
+	<h1>An Outdoor Database</h1>
+	<h3>Get offline.  Get outside.</h3>
+	<br>
+	<br>
+	<br>
+	<br>
+	<div id="controls">
+		<select id="searchInput" value="*" onchange="doSearch()"><option value="*">All</option><option value="Utah">Utah</option><option value="Oregon">Oregon</option><option value="California">California</option><option value="Arizona">Arizona</option></select>&nbsp;&nbsp;
+		
+		<div id="buttons">
+			<button onclick="addItem()" class="add">Add Trail</button>
+			<button onclick="remove()" class="remove">Remove Selected Trail</button>		
+		</div>
+	</div>
+	
+	<div dojoType="dojox.grid.DataGrid" 
+		jsId="grid" class="grid" id="grid" 
+		autoWidth="true" structure="trailsLayout" 
+		store="trailStore" elasticView="1" 
+		rowSelector="20px">
+	</div>
+		
+	<form>
+		<fieldset>
+		<legend>Trail Information</legend>
+		<table id="detail">
+		
+		<tr><td><label for="name">Trail Name</label><input type="text" name="name" /></td>
+		<td><label for="region">Region</label><input type="text" name="region" /></td></tr>
+		<tr><td><label for="rating">Rating</label><select name="rating"><option value="Not Great">Not Great</option><option value="Good">Good</option><option value="Great">Great</option><option value="Spectacular">Spectacular</option></select></td>
+		<td><label for="length">Length</label><input type="text" name="length" /></td></tr>
+		<tr><td><label for="difficulty">Difficulty</label><select name="difficulty"><option value="Easy">Easy</option><option value="Medium">Medium</option><option value="Hard">Hard</option></select></td>
+		<td><label for="location">Location</label><input type="text" name="location" /></td></tr>
+		<tr><td colspan="2"><label for="comments">Comments</label><textarea name="comments"></textarea></td>
+		</tr>
+		</table>
+		</fieldset>
+		<a title="A demo by SitePen" href="http://sitepen.com/">
+			<img width="24" height="24" alt="A demo by SitePen" src="img/sitepen.png"/>
+		</a>
+		<button onclick="trailStore.save(); alert('Changes saved'); return false;">Save</button>	
+	</form>
+	</div>	
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+</head>
+<body bgcolor="white">
+
+<p>Provides the core functionality for Persevere's JavaScript integration and
+object behavior. PersistableObject is the primary class that provides the
+ability to track property changes, handle accessing properties and triggering
+lazy loading of references objects, and loading properties from the database
+into objects. All JavaScript objects that are created in Persevere's JS
+environment (through object literals or constructors) are instances of PersistableObject.
+This class works in conjunction with the Transaction class to
+facilitates transactions. The changes that are made to objects are stored in
+Transaction instances and delivered to the database on commits.
+
+<p>PersistableArray provides same type of functionality as PersistableObject, but for
+arrays. QueryArray is a special array that is used for query results, and is specifically
+designed for lazy loading, so that large query sets can be traversed without having
+to load the entire result set into memory. The QueryArray does not actually store
+any values inside of it, but rather connects to List implementators from data sources
+for memory efficient query result access.</p>
+
+<p>The Method class is used to wrap all functions that are stored on objects, so
+that method definitions can be used for type checking and enhanced method execution
+such as remote JSON-RPC calls. Observable methods are then tracked through ObservedCall
+instances that are stored on the Transaction for distribution to any subscribers</p>
+
+
+<p>The Indentification class is used to hold references to values. The ObjectId is
+a subclass that holds references to particular objects. Each persisted object has
+a single ObjectId and vice versa. The ObjectId class is important for Persevere's
+soft referencing memory management that ensures that only a single instance of an
+object is loaded into memory for a given id. The ObjectId holds a reference to the
+object if it is still in memory, and if not, it can trigger the loading of the object
+from the database. JsonPath is another subclass of Identification, which uses JSONQuery
+evaluation to retrieve it's target. Query is another subclass that is used to pass
+filters and sort operations to the data sources.
+</p>
+
+<p>The DataSourceManager is the bootstrap class that determines the file paths and
+loads the data source definitions and initializes their data sources.</p>
+
+<p>ConsoleLibrary, PjsLibrary, GlobalData, and RestMethod all provide native library
+functions for the JavaScript environment. GlobalData is frequently used for accessing
+the Persevere's single global scope object.</p>
+
+</body>
+</html>

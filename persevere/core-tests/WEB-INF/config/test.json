@@ -1,0 +1,195 @@
+{"id":"test.json",
+"sources":[
+	{
+		"name":"TestSchema",
+		"extends":"Object",
+		"schema":{
+			"description": "Class for testing core Persevere functionality with schemas",
+			"prototype":{
+			  initialize : function(mixin){
+			  	for(var i in mixin){
+			  		this[i] = mixin[i];
+			  	}
+			    this.ancestor = "initialized";
+			  }
+			},
+			"properties":{
+				"stringProp": {
+					"type":"string",
+					"optional": true
+				},
+				"stringLength": {
+					"type":"string",
+					"optional": true,
+					"maxLength":10,
+					"minLength":5
+				},
+				"stringPattern": {
+					"type":"string",
+					"optional": true,
+					"pattern":".*foo[0-9]+"
+				},
+				"enum":{
+					"type":"string",
+					"optional": true,
+					"enum":["male","female"]
+				},
+				"defaultNumberProp": {
+					"type":"number",
+					"default":3
+				},
+				"readonly": {
+					"type":"number",
+					"optional": true,
+					"readonly":true
+				},
+				"numberProp": {
+					"type":"number",
+					"optional": true
+				},
+				"numberMinMax": {
+					"type":"number",
+					"optional": true,
+					"minimum":1,
+					"maximum":100
+				},
+				"integerProp": {
+					"type":"integer",
+					"optional": true
+				},
+				"booleanProp": {
+					"type":"boolean",
+					"optional": true
+				},
+				"objectProp": {
+					"type":"object",
+					"optional": true
+				},
+				"arrayProp": {
+					"type":"array",
+					"optional": true,
+					"items":{type:"string"}
+				},
+				"unionProp": {
+					"type":["string","number"],
+					"optional": true
+				},
+				"unionPropWithNull": {
+					"type":["object","null"],
+					"optional": true
+				},
+				dateProp: {
+					type:"string",
+					format:"date-time",
+					optional: true
+				},
+				"ancestor":{"default":"",},
+			},
+			additionalProperties:{
+				"type":"string"
+			},
+			
+			"extends":{"$ref":"../Class/Object"}
+			}
+		},
+		{
+		"name":"TestSchemaRequired",
+		"extends":"TestSchema",
+		"schema":{
+			"description": "Class for testing core Persevere functionality with schemas with required properties",
+			"prototype":{
+			  initialize : function(mixin){
+			  	for(var i in mixin){
+			  		this[i] = mixin[i];
+			  	}
+			    this.child = "initialized";
+			  }
+			},
+			"properties":{
+				"numberProp": {
+					"type":"number"
+				},
+				"child":{"default":""},
+			},
+			additionalProperties:false,
+			"extends":{"$ref":"../Class/TestSchema"}
+			}
+		},
+		{
+		"name":"TestClass",
+		"extends":"Object",
+		"schema":{
+			"description": "Class for testing core Persevere functionality with schemas with required properties",
+			"classMethod":function(param){
+					var p = new TestClass();
+					commit();
+				},
+			"prototype":{
+				initialize: function(mixin, second){
+				  	for(var i in mixin){
+				  		this[i] = mixin[i];
+				  	}
+					this.arrayProp = [];
+					if(second){
+						this.second = second;
+						assertEqual(this.checkDefault, "foo");
+						this.checkDefault = "bar";
+					}else{
+						delete this.checkDefault;
+					}
+				},
+			
+				instanceMethod: function(param){
+					return param + this.stringProp;
+				}
+			},
+			"properties":{
+				"checkDefault":{
+					"default":"foo",
+					"optional":true
+				},
+			},
+			"extends":{"$ref":"../Class/Object"}
+			}
+		},
+		{
+		"name":"SerializationTest",
+		"extends":"Object",
+		"schema":{
+			"description": "For testing object serialization - any changes to this schema must be mirrored in serialization.js",
+			"classMethod":function(param){
+					var p = new TestClass();
+					commit();
+				},
+			"prototype":{
+				initialize: function(mixin, second){
+				  	for(var i in mixin){
+				  		this[i] = mixin[i];
+				  	}
+				
+					this.arrayProp = [];
+					if(second){
+						this.second = second;
+						assertEqual(this.checkDefault, "foo");
+						this.checkDefault = "bar";
+					}else{
+						delete this.checkDefault;
+					}
+				},
+				instanceMethod: function(param){
+					return param + this.stringProp;
+				}
+			},
+			"properties":{
+				"checkDefault":{
+					"default":"foo",
+					"optional":true
+				},
+			},
+			"extends":{"$ref":"../Class/Object"}
+			}
+		}
+		
+		]
+		
+}

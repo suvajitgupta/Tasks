@@ -1,0 +1,340 @@
+{"id":"core.json",
+"serializers":[
+	"org.persvr.remote.JSONSerializer",
+	"org.persvr.remote.JavaScriptSerializer"
+	],
+"defaultSourceClass":"org.persvr.datasource.JavaScriptDBSource",
+"sources":[
+	{
+		"name":"config",
+		"hidden":true,
+		"schema":{
+			"description":"Configuration files",
+			core:true
+			},
+		"sourceClass":"org.persvr.datasource.LocalJsonFileSource",
+		"objectsClass":"org.persvr.data.SchemaObject"
+		},
+	{
+		"name":"Class",
+		"schema":{
+			"instances":{"$ref":"../Class/"},
+			"description":"Classes in the system, every class has a table of the instances of the class",
+			core:true,
+			"properties":{
+				},
+			"prototype":{
+				"put":function(){
+					return pjs.putHandler.apply(this, arguments);
+				},
+				"type":[
+					"object",
+					"null"],
+				setIdSequence: function(id){
+					pjs._setIdSequence(this, id);
+				},
+				removeAll: function(){
+					var i = 0;
+					for(var instance in this.instances){
+						remove(instance);
+						if(i++%1000==0){
+							commit();
+						}
+					}
+				}
+			}
+		},
+		"sourceClass":"org.persvr.datasource.ClassDataSource",
+		"objectsClass":"org.persvr.data.PersistableClass"
+		},
+	{
+		"name":"Object",
+		"location":"$DATA-DIR$/jsdb",
+		"hidden":true,
+		"schema":{
+			"instances":{"$ref":"../Object/"},
+			"description":"Every persistable object",
+			core:true,
+			"methods":{
+				"put":{
+					"observable":true,
+					"runAt":"system",
+					"idempotent":true
+					},
+				"delete":{
+					"observable":true,
+					"runAt":"system",
+					"idempotent":true
+					},
+				"message":{
+					"parameters":{
+						},
+					"observable":true,
+					"runAt":"system"
+					},
+				"post":{
+					"observable":true,
+					"runAt":"system"
+					},
+				"get":{
+					"runAt":"system",
+					"idempotent":true,
+					"safe":true
+					}
+				}
+			}
+		},
+	{
+		"name":"Array",
+		"extends":"Object",
+		"hidden":true,
+		"schema":{
+			"extends":{"$ref":"../Class/Object"},
+			"instances":{"$ref":"../Array/"},
+			"description":"Every persistable array",
+			core: true,
+			"type":[
+				"array",
+				"null"]
+			}
+		},
+	{
+		"name":".Global.",
+		"core": true,
+		"hidden": true,
+		"sourceClass":"org.persvr.datasource.InMemorySource"
+	},
+	{
+		"name":"Capability",
+		"extends":"Object",
+		"schema":{
+			"instances":{"$ref":"../Capability/"},
+			"extends":{"$ref":"../Class/Object"},
+			core: true,
+			"description":"A Capability represents a set of privileges, containing a set of objects that can be accessed",
+			"prototype":{
+				"onSave":function(content, target, property){
+	return security._refresh(this);
+				},
+				"delete":function(content, target, property){
+	return security._refresh(this, true);
+				},
+				"initialize": function(properties){
+					for(var i in properties){
+						this[i] = properties[i];
+					}
+					if(!this.members){
+						this.members = [];
+					}
+				}
+			},
+			"properties":{
+				"members":{"type":"array","description":"This defines the members of the capability, specifying the users and other Capability objects that are granted the permissions defined in the Capability"},
+				"limited":{"type":"array","optional":true},
+				"read":{"type":"array","optional":true},
+				"execute":{"type":"array","optional":true},
+				"append":{"type":"array","optional":true},
+				"write":{"type":"array","optional":true},
+				"full":{"type":"array","optional":true}
+			},
+			"getCapabilities":function(user){
+				return security.getCapabilities(user);
+			},
+			"staticMethods":{
+				"getCapabilities":{
+					"safe":true,
+					"runAt":"server"
+				}
+			},
+			"methods":{
+				}
+			},
+		"objectsClass":"org.persvr.security.Capability"
+		},
+	{
+		"extends":"Object",
+		"schema":{
+			"createUser":function (username, password) {
+	return security.createUser(username,password);
+},
+			core: true,
+			"description":"A user represents an login entity, and includes the capabilities of the user",
+			"prototype":{
+				},
+			"instances":{"$ref":"../User/"},
+			"authenticate":function (username, password) {
+	var user = authenticate(username,password);
+	var requestResponse = org.persvr.remote.Client.getCurrentObjectResponse();
+	var request = requestResponse.getHttpRequest();
+	if(request != null && !request.getAttribute("cross-site")){
+		// allowing authentication from cross-site could allow login CSRF 
+		var session = request.getSession();
+		session.setAttribute("user",user);
+		requestResponse.getConnection().setAuthorizedUser(user);
+	}
+	return user;
+},
+			"grantAccess":function (username, resource, accessLevel) {
+	var user;
+	if(username == "public"){
+		user = null;
+	}else{
+		user = load("User[?name=$1]",username)[0];
+		if(!user){
+			throw new Error("Couldn't find user " + username);				
+		}
+	}
+	if(!hasAccessLevel(resource, accessLevel)){
+		throw new Error("Can not grant an access level to a resource that the current user doesn't have");
+	}
+	var newCapabilityProps = {members:[user]};
+	newCapabilityProps[accessLevel] = [resource];
+	new Capability(newCapabilityProps)
+},
+			"extends":{"$ref":"../Class/Object"},
+			"staticMethods":{
+				"createUser":{
+					"parameters":[
+						{
+							"type":"string",
+							"name":"username"
+							},
+						{
+							"type":"string",
+							"name":"password"
+							}],
+					"runAt":"server",
+					"returns":{
+						"type":"object"
+						}
+					},
+				"grantAccess":{
+					"parameters":[
+						{
+							"type":"string",
+							"name":"username"
+							},
+						{
+							"name":"resource"
+							},
+						{
+							"enum":[
+								"granted",
+								"none",
+								"limited",
+								"read",
+								"execute",
+								"append",
+								"write",
+								"full"],
+							"type":"string",
+							"optional":true,
+							"name":"accessLevel"
+							}],
+					"runAt":"server"
+					},
+				"authenticate":{
+					"parameters":[
+						{
+							"type":[
+								"string",
+								"null"],
+							"name":"username"
+							},
+						{
+							"type":[
+								"string",
+								"null"],
+							"name":"password"
+							}],
+					"runAt":"server"
+					},
+				"getCurrentUser":{
+					"parameters":[],
+					"runAt":"server",
+					"returns":{
+						"type":"object"
+						}
+					}
+				},
+			"getCurrentUser":function(){
+				return security.currentUser;
+			}
+			},
+		"name":"User",
+		"objectsClass":"org.persvr.security.CapabilityUser"
+		},
+	{
+		"hidden":true,
+		"schema":{
+			"instances":{"$ref":"http:/"},
+			core: true,
+			"description":"Represents remote server data",
+			"prototype":{
+				}
+			},
+		"sourceClass":"org.persvr.datasource.HttpJsonSource",
+		"name":"http:"
+	},
+	{
+		"hidden":true,
+		"schema":{
+			"instances":{"$ref":"https:/"},
+			core: true,
+			"description":"Represents remote server data accessed securely",
+			"prototype":{
+				}
+			},
+		"sourceClass":"org.persvr.datasource.HttpJsonSource",
+		"name":"https:"
+	},
+	{
+		"extends":"Object",
+		"schema":{
+			"extends":{"$ref":"../Class/Object"},
+			"instances":{"$ref":"../File/"},
+			core: true,
+			"description":"A File holds a binary representation of a resource and includes MIME type information",
+			"properties":{
+				},
+			"prototype":{
+				"quality":0.7,
+				"output":function(object){
+					// just writes the content, nothing dynamic based on the object
+					response.setContentType(this.contentType);
+					if(this.content.writeTo){
+						this.content.writeTo(response.getOutputStream());
+					}else{
+						response.getOutputStream().print(this.content);
+					}
+				},
+				"representation:*/*":{
+					"output":function(object){
+						// just writes the content, nothing dynamic based on the object
+						response.setContentType(object.contentType);
+						if(object.content.writeTo){
+							object.content.writeTo(response.getOutputStream());
+						}else{
+							response.getOutputStream().print(object.content);
+						}
+					},
+					"quality":1
+					}
+				}
+			},
+		"name":"File"
+		},
+		{
+			"name":"Transaction",
+			"extends":"Object",
+			schema:{
+				core: true
+			}
+		}
+		],
+"maxIterations":10000,
+"allowJavaScriptFrom":[
+	"localhost"],
+"serverScripts":[
+	"org/persvr/server.js"]
+}

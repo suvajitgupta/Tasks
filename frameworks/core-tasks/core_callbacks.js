@@ -76,7 +76,7 @@ CoreTasks.mixin({
 
       if (!callback) {
         // Check for generalized status callback in default callbacks.
-        callback = CoreTasks.Record.defaultCallbacks['%@.%@'.fmt(method, status)];
+        // callback = CoreTasks.Record.defaultCallbacks['%@.%@'.fmt(method, status)];
       }
     }
 

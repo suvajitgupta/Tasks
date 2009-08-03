@@ -1,0 +1,71 @@
+<html>
+<head><title>Persevere Tests</title>
+<link href="./testng.css" rel="stylesheet" type="text/css" />
+<script>
+function assert(cond){
+	if(!cond){
+		failed();
+	}
+}
+var tests = {};
+function test(func, dontRunByDefault){
+	tests[func.name] = func;
+	func.dontRunByDefault = dontRunByDefault;
+}
+function runTests(i) {
+	var rows = document.getElementsByTagName("tr");
+	if (i < rows.length)
+		(function(row) {
+			if (row.getElementsByTagName("input")[0].checked) {
+				passed = function() {
+					row.lastChild.innerHTML = "Passed";
+					runTests(i+1);
+				}
+				failed = function(message) {
+					row.lastChild.innerHTML = "Failed " + message;
+					setTimeout(function(){
+						runTests(i+1);
+					},0);
+					throw new Error("Failed test");
+				}
+				tests[row.firstChild.innerHTML]();
+			}
+			else
+				runTests(i+1);
+		})(rows[i || 0]);
+}
+function log(str){
+	document.getElementById("logArea").innerHTML += '<br>' + str;
+}
+window.onload = function(){
+	var testsElement = document.getElementById("tests");
+	var runAll = dojo.byId("runAll").checked;
+	for (var i in tests){
+		testsElement.innerHTML += "<tr><td>" + i + "</td><td><input type='checkbox'" + (tests[i].dontRunByDefault || !runAll ? '' : " checked='checked'") + "/></td><td>Not Tested Yet</td></tr>";
+	}
+};
+</script>
+<script type="text/javascript" src="../jsclient/dojo/dojo.js" ></script>
+<script type="text/javascript" src="../jsclient/dojo/AdapterRegistry.js" ></script>
+<script type="text/javascript" src="../jsclient/dojox/io/xhrWindowNamePlugin.js"></script>
+<script type="text/javascript" src="../jsclient/dojo/io/script.js"></script>
+<script type="text/javascript" src="../jsclient/dojox/json/ref.js"></script>
+<script type="text/javascript" src="../jsclient/dojox/data/JsonRestStore.js"></script>
+<script type="text/javascript" src="../jsclient/dojox/data/PersevereStore.js" ></script>
+<script type="text/javascript" src="../jsclient/dojox/cometd/HttpChannels.js" ></script>
+<script type="text/javascript" src="../jsclient/pjs/persevere.js" ></script>
+<script type="text/javascript" src="json-rest.js" ></script>
+<script type="text/javascript" src="persevere-test.js" ></script>
+<script type="text/javascript" src="channels.js" ></script>
+<script type="text/javascript" src="json-rpc.js" ></script>
+<script type="text/javascript" src="xd-json-rest.js" ></script>
+</head><body>
+<h2><p align='center'>Test results</p></h2>
+<input type="checkbox" id="runAll" checked='checked' />
+<button onclick="runTests(1)">Run Tests</button>
+<table border='1' width='100%'><thead><tr><th>Test</th><th>Check</th><th>Status</th></tr></thead>
+<tbody id="tests">
+</tbody>
+</table>
+<div id='logArea'></div>
+</body></html>

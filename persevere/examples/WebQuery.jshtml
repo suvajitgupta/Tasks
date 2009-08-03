@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Persevere : WebQuery</title>
+
+    <style type="text/css">
+      body {
+        margin: 25px 0 0 25px 0;
+      	padding: 0;
+      	font-family: Arial, Helvetica, sans-serif;
+      	font-size: 13px;
+      	color: #333;
+      	background-color: #777;
+      }
+      #content {
+        background-color: white;
+        width: 750px;
+        margin: 0;
+        padding: 10px 0 25px 10px;
+        margin-left: auto;
+        margin-right: auto;
+        border: 1px solid #000;
+      }
+    </style>
+
+</head>
+
+<body>
+
+<div id="content">
+<img src="../img/persevere_logo.png" width="377" height="86" >
+<h1>Web Query</h1>
+<table>
+<tr><td><a href="?action=create">[Create]</a> </td><td> Create a new Toot</td></tr>
+<tr><td><a href="?webQuery=/Class">"/Class"</a></td><td>Get class information for all classes</td></tr>
+<tr><td><a href="?webQuery=/Class/Toot">"/Class/Toot"</a></td><td>Get class information for Toot</td></tr>
+<tr><td><a href="?webQuery=/Toot">"/Toot"</a></td><td>Get all Toots</td></tr>
+<tr><td><a href="?webQuery=/Toot[5:10]">"/Toot[5:10]"</a></td><td>From all Toots, get those from position 5 - 10</td></tr>
+<tr><td><a href="?webQuery=/Toot.length">"/Toot.length"</a></td><td>Get the number of Toot instances</td></tr>
+<tr><td><a href="?webQuery=/Toot[?accesses>2]">"/Toot[?accesses>2]"</a></td><td>From all Toots, get those with greater than 2 accesses</td></tr>
+<tr><td><a href="?webQuery=/Toot/1">"/Toot/1"</a></td><td>Get the Toot instance with id "Toot/1"</td></tr>
+<tr><td><a href="?webQuery=/Toot/1.name">"/Toot/1.name"</a></td><td>Get the name of that "Toot/1" instance</td></tr>
+<tr><td><a href="?webQuery=/Toot/1.getAccesses()">"/Toot/1.getAccesses()"</a></td><td>Call the (safe) getAccesses() method on "Toot/1"</td></tr>
+</table>
+<br>
+<?js if ( history != null ) { ?>
+Recent:<?js for ( var h in history ) { ?>
+<?js if ( history.length - h < 4 ) { ?>
+<a href="?webQuery=${history[ h ]}">#{history[ h ]}</a>
+<?js } ?>
+<?js } ?>
+<a href="?action=clearHistory">[Clear]</a><br>
+<?js } ?>
+<br>
+
+<h2>
+Query
+</h2>
+
+<form id="webquery" name="webquery" method="get" action="">
+  <label>
+  <input name="webQuery" type="" id="testText" value="#{webQuery}" size="40" />
+  </label>
+  <label>
+  <input type="submit" name="submit" id="submitButton" value="submit" />
+  </label>
+</form>
+<br>
+
+<h2>
+Result
+</h2>
+<?js if ( webResult != null ) { ?>
+<?js for ( var i = 0; i < webResult.length; i++  ) { w = webResult[ i ]; ?>
+<pre>#{w}</pre><br>
+<?js } ?>
+<?js } else { ?>
+<h2>
+No Object Provided
+</h2>
+<?js } ?>
+</div>
+
+</body>
+</html>

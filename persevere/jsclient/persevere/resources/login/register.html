@@ -1,0 +1,39 @@
+<h2>Please Enter Your User Details:</h2>
+<table>
+    <tr>
+        <td align="right">
+            <label for="email">Username:</label>
+        </td>
+        <td>
+            <input dojoType="dijit.form.ValidationTextBox" type="text" 
+            name="newUsername" id="newUsername" trim="true" 
+            promptMessage="Enter at least 8 characters" 
+            required="true"
+            invalidMessage="Invalid username.">
+        </td>
+    </tr>
+    <tr>
+        <td align="right">
+            <label for="passwordNew">Password:</label>
+        </td>
+        <td>
+            <input dojoType="dijit.form.ValidationTextBox" type="password" 
+            name="newPassword" id="newPassword" 
+            promptMessage="Enter your password." 
+            required="true" trim="true" 
+            invalidMessage="Invalid password">
+        </td>
+    </tr>
+    <tr>
+        <td align="right">
+            <label for="passwordConf">Confirm:</label>
+        </td>
+        <td>
+            <input dojoType="dijit.form.ValidationTextBox" type="password" 
+                name="confirmPassword" id="confirmPassword" 
+                promptMessage="Confirm your password." 
+                required="true" 
+                invalidMessage="Invalid password">
+        </td>
+    </tr>
+</table>
