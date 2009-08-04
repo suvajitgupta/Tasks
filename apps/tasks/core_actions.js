@@ -534,9 +534,18 @@ Tasks.mixin({
    * Add a new task to tasks detail list.
    */
   addTask: function() {
-    // Create a new task with a default name
-    // TODO: [SG] Get selected task and get its assignee, then create new task with same assignee.
+    // Get selected task and get its assignee, then create new task with same assignee.
+    var taskAssignee = null;
+    var tc = this.get('tasksController');
+    var sel = tc.get('selection');
+
+    if (sel && sel.length() > 0) {
+      taskAssignee = sel.firstObject().get('assignee').get('id');
+      console.log('Assignee: ' + taskAssignee);
+    }
+
     var task = CoreTasks.createRecord(CoreTasks.Task, CoreTasks.Task.NEW_TASK_HASH);
+    task.set('assignee', taskAssignee);
 
     // We have to commit the task immediately because we need the ID before we add the task to the
     // selected project.
