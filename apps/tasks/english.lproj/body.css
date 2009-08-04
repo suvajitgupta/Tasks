@@ -83,6 +83,10 @@
   background: #EAADEA none repeat scroll 0 0 !important;
 }
 
+/*-----------------------------------------------------------------
+ * Task selection style
+ */
+
 .sc-theme.focus .sc-list-view.sc-source-list .sc-collection-item.sel {
 	border-style: solid;
 	border-size: 1px;

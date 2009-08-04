@@ -1,7 +1,8 @@
 // ==========================================================================
 // Project: Tasks
 // ==========================================================================
-/*globals Tasks */
+/*globals CoreTasks Tasks sc_require */
+sc_require('models/task');
 
 /** 
 
@@ -11,52 +12,52 @@
   @author Suvajit Gupta
 */
 
-Tasks.TaskView = SC.ListItemView.extend(
-/** @scope Tasks.ListItemView.prototype */ {
+Tasks.TaskItemView = SC.ListItemView.extend(
+/** @scope Tasks.TaskItemView.prototype */ {
   
   render: function(context, firstTime) {
     
     var content = this.get('content');
-    if(content){
+    if(content && content.get('name')){ // a task node, not an assignee node
       
       var priority = content.get('priority');
       switch(priority){
-        case Tasks.TASK_PRIORITY_HIGH:
+        case CoreTasks.TASK_PRIORITY_HIGH:
           context.addClass('tasks-priority-high');
           break;
-        case Tasks.TASK_PRIORITY_MEDIUM:
+        case CoreTasks.TASK_PRIORITY_MEDIUM:
           context.addClass('tasks-priority-medium');
           break;
-        case Tasks.TASK_PRIORITY_LOW:
+        case CoreTasks.TASK_PRIORITY_LOW:
           context.addClass('tasks-priority-low');
           break;          
       }
       
       var status = content.get('status');
       switch(status){
-        case Tasks.TASK_STATUS_PLANNED:
+        case CoreTasks.TASK_STATUS_PLANNED:
           context.addClass('tasks-status-planned');
           break;
-        case Tasks.TASK_STATUS_ACTIVE:
+        case CoreTasks.TASK_STATUS_ACTIVE:
           context.addClass('tasks-status-active');
           break;
-        case Tasks.TASK_STATUS_DONE:
+        case CoreTasks.TASK_STATUS_DONE:
           context.addClass('tasks-status-done');
           break;          
-        case Tasks.TASK_STATUS_RISKY:
+        case CoreTasks.TASK_STATUS_RISKY:
           context.addClass('tasks-status-risky');
           break;          
       }
       
       var validation = content.get('validation');
       switch(validation){
-        case Tasks.TASK_VALIDATION_UNTESTED:
+        case CoreTasks.TASK_VALIDATION_UNTESTED:
           context.addClass('tasks-validation-untested');
           break;
-        case Tasks.TASK_VALIDATION_PASSED:
+        case CoreTasks.TASK_VALIDATION_PASSED:
           context.addClass('tasks-validation-passed');
           break;
-        case Tasks.TASK_VALIDATION_FAILED:
+        case CoreTasks.TASK_VALIDATION_FAILED:
           context.addClass('tasks-validation-failed');
           break;          
       }

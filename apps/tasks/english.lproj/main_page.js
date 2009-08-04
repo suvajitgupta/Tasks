@@ -4,7 +4,7 @@
 /*globals CoreTasks Tasks sc_require */
 sc_require('views/welcome');
 sc_require('views/summary');
-sc_require('views/task');
+sc_require('views/task_item');
 /** @namespace
 
   This page lays out the Tasks application user interface.
@@ -160,7 +160,7 @@ Tasks.mainPage = SC.Page.design({
           canReorderContent: true,
           canDeleteContent: true,
           destroyOnRemoval: YES,
-          exampleView: Tasks.TaskView
+          exampleView: Tasks.TaskItemView
         })
       })
     }),
