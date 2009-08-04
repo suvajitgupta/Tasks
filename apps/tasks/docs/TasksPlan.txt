@@ -63,8 +63,8 @@ User Manager GUI
 - Add access control based on Role (User authorization) [SG] <SE>
 v Add user preferences/restore to them at startup [SG] <SE>
 v Add change password dialog? [SG] <SE>
-- Add User Management button/modal popup showing existing Users [SG] <SE>
-- Add "+" & "-" buttons in users toolbar and "X" button in top toolbar to return [SG] <SE>
+- Add User Management button/modal popup showing existing Users [BB] <SG>
+- Add "+" & "-" buttons in users toolbar and "X" button in top toolbar to return [BB] <SG>
 v Add hover tooltip on dialog title showing number of Users [SG] <EG>
 
 Application Manager GUI
