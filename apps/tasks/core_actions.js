@@ -444,11 +444,23 @@ Tasks.mixin({
    */
   addTask: function() {
 
+    // Get selected task and get its assignee, then create new task with same assignee
+    
+    var taskAssignee = null;
+    var tc = this.get('tasksController');
+    var sel = tc.get('selection');
+    if (sel && sel.length() > 0) {
+      taskAssignee = sel.firstObject().get('assignee').get('id');
+      console.log('Assignee: ' + taskAssignee);
+    }
+    
     // Create a new task with a default name
-    // TODO: [SG] Get selected task and get its assignee, then create new task with same assignee
 
     var store = CoreTasks.get('store');
-    var task = store.createRecord(CoreTasks.Task, { name: CoreTasks.NEW_TASK_NAME });
+    var task = store.createRecord(CoreTasks.Task, {
+      name: CoreTasks.NEW_TASK_NAME,
+      assignee: taskAssignee
+    });
     store.commitRecords();
     
     var ac = this.get('assignmentsController');
@@ -466,7 +478,6 @@ Tasks.mixin({
     
     var tc = this.get('tasksController');
     var sel = tc.get('selection');
-    
     if (sel && sel.length() > 0) {
       var store = CoreTasks.get('store');
 

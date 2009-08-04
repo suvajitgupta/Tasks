@@ -136,7 +136,6 @@ CoreTasks.Task = CoreTasks.Record.extend({
     if (value !== undefined) {
       
       var hash = CoreTasks.Task.parse(value, false);
-      console.log ('Value: "' + value + '", Parsed: ' + JSON.stringify(hash));
       
     	if(hash.priority) {
         this.propertyWillChange('priority');
