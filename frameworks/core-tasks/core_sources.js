@@ -366,6 +366,17 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
    * TODO: [SE] Document this.
    */
   _normalizeResponseArray: function(hashes) {
+    debugger;
+    // HACK: [SE] Browsers running in OS X get a string and not a hash, and they don't like the
+    // format of the string that Persevere sends over the wire. We have to do some <sigh>
+    // massagaing to get it to work.
+    if (SC.typeOf(hashes) === SC.T_STRING) {
+      // The first 4 characters of a JSON array returned by Persevere are "{}&&", which confuses the
+      // JSON.parse() function; strip them out.
+      var hashString = hashes.slice(4);
+      hashes = SC.json.decode(hashString);
+    }
+
     var ret = hashes ? hashes : [];
 
     var len = hashes.length;
