@@ -1,8 +1,7 @@
 // ==========================================================================
 // Project: Tasks
 // ==========================================================================
-/*globals CoreTasks Tasks sc_require */
-sc_require('models/task');
+/*globals CoreTasks Tasks */
 
 /** 
 
