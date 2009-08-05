@@ -462,6 +462,17 @@ Tasks.mixin({
       assignee: taskAssignee
     });
     store.commitRecords();
+
+    var pc = this.get('projectsController');
+    var psel = pc.get('selection');    
+    if (psel && psel.length() > 0) {
+      var project = psel.firstObject();
+      var tasks = project.get('tasks');
+      tasks.pushObject(task);
+      debugger;
+      project.set('tasks', tasks);
+      store.commitRecords();
+    }
     
     var ac = this.get('assignmentsController');
     ac.addObject(task);
