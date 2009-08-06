@@ -36,16 +36,6 @@ CoreTasks.TASK_VALIDATION_FAILED = '_Failed';
  */
 CoreTasks.Task = CoreTasks.Record.extend({
 
-  init: function() {
-    // HACK: [SE] Setting default values here because the defaultValue property for each record
-    // attribute doesn't appear to be working.
-    this.set('name', CoreTasks.NEW_TASK_NAME);
-    this.set('type', CoreTasks.TASK_TYPE_OTHER);
-    this.set('priority', CoreTasks.TASK_PRIORITY_MEDIUM);
-    this.set('status', CoreTasks.TASK_STATUS_PLANNED);
-    this.set('validation', CoreTasks.TASK_VALIDATION_UNTESTED);
-  },
-
   /**
    * A one-line summary of the task.
    */
@@ -142,18 +132,16 @@ CoreTasks.Task = CoreTasks.Record.extend({
    * A string summarizing key facets of the Task for display.
    */
   displayName: function(key, value) {
-    
     if (value !== undefined) {
-      
       var hash = CoreTasks.Task.parse(value, false);
       console.log ('Value: "' + value + '", Parsed: ' + JSON.stringify(hash));
       
-    	if(hash.priority) {
+      if(hash.priority) {
         this.propertyWillChange('priority');
         this.writeAttribute('priority', hash.priority);
         this.propertyDidChange('priority');
       }
-    	
+      
       this.propertyWillChange('name');
       this.writeAttribute('name', hash.name);
       this.propertyDidChange('name');
@@ -162,31 +150,31 @@ CoreTasks.Task = CoreTasks.Record.extend({
       this.writeAttribute('effort', hash.effort);
       this.propertyDidChange('effort');
       
-    	if(hash.submitter) {
+      if(hash.submitter) {
         this.propertyWillChange('submitter');
         this.writeAttribute('submitter', hash.submitter);
         this.propertyDidChange('submitter');
       }
-    	
-    	if(hash.assignee) {
+      
+      if(hash.assignee) {
         this.propertyWillChange('assignee');
         this.writeAttribute('assignee', hash.assignee);
         this.propertyDidChange('assignee');
       }
-    	
-    	if(hash.type) {
+      
+      if(hash.type) {
         this.propertyWillChange('type');
         this.writeAttribute('type', hash.type);
         this.propertyDidChange('type');
       }
-    	
-    	if(hash.status) {
+      
+      if(hash.status) {
         this.propertyWillChange('status');
         this.writeAttribute('status', hash.status);
         this.propertyDidChange('status');
       }
-    	
-    	if(hash.validation) {
+      
+      if(hash.validation) {
         this.propertyWillChange('validation');
         this.writeAttribute('validation', hash.validation);
         this.propertyDidChange('validation');
@@ -296,7 +284,13 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
       status: taskStatus,
       validation: taskValidation
     };
-        
   }
-  
 });
+
+CoreTasks.Task.NEW_TASK_HASH = {
+  name: CoreTasks.NEW_TASK_NAME,
+  type: CoreTasks.TASK_TYPE_OTHER,
+  priority: CoreTasks.TASK_PRIORITY_MEDIUM,
+  status: CoreTasks.TASK_STATUS_PLANNED,
+  validation: CoreTasks.TASK_VALIDATION_UNTESTED
+};

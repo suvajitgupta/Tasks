@@ -349,7 +349,6 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
   },
 
   cancel: function(store, storeKeys) {
-    // TODO: [SE] Implement cancel functionality, if/when necessary.
     return NO;
   },
 
@@ -357,6 +356,9 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
    * TODO: [SE] Document this.
    */
   _normalizeResponse: function(hash) {
+    // HACK: [SE] Browsers running in OS X get a string and not a hash, so we have to convert it.
+    if (SC.typeOf(hash) === SC.T_STRING) hash = SC.json.decode(hash);
+
     var id = hash.id;
     if (id && SC.typeOf(id) === SC.T_STRING) hash.id = id.replace(/^.*\//, '') * 1;
     return hash;
@@ -368,7 +370,7 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
   _normalizeResponseArray: function(hashes) {
     // HACK: [SE] Browsers running in OS X get a string and not a hash, and they don't like the
     // format of the string that Persevere sends over the wire. We have to do some <sigh>
-    // massagaing to get it to work.
+    // massaging to get it to work.
     if (SC.typeOf(hashes) === SC.T_STRING) {
       // The first 4 characters of a JSON array returned by Persevere are "{}&&", which confuses the
       // JSON.parse() function; strip them out.
