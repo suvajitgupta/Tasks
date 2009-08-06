@@ -239,6 +239,7 @@ Tasks.mixin({
             continue;
           }
         }
+        taskHash.id = this._generateId();
         
         var taskRecord = store.createRecord(CoreTasks.Task, taskHash);
         if(!taskRecord) {
