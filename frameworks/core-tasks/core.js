@@ -27,7 +27,7 @@ CoreTasks = SC.Object.create({
   mode: null,
 
   /**
-   * A special 'inbox' project where all unassigned tasks are grouped.
+   * A special 'inbox' project where all unallocated tasks are grouped.
    *
    * This project exists outside of the store because we don't want it to be persisted.
    */

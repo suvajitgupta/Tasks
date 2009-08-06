@@ -96,17 +96,17 @@ Tasks.mixin({
     var projects = store.findAll(CoreTasks.Project);
     var tasks = store.findAll(CoreTasks.Task);
     
-    // Extract all unassigned tasks for the Inbox
+    // Extract all unallocated tasks for the Inbox
     var task, taskCount = tasks.get('length');
-    var all = [], unassigned = [];
+    var all = [], unallocated = [];
     for (var i = 0; i < taskCount; i++) {
       task = tasks.objectAt(i);
       var taskId = task.get('id');
       all.push(taskId);
-      unassigned.push(taskId);
+      unallocated.push(taskId);
     }
     
-    // Identify unassigned tasks to be stored in Inbox
+    // Identify unallocated tasks to be stored in Inbox
     var projectCount = projects.get('length');
     for (i = 0; i < projectCount; i++) {
       var project = projects.objectAt(i);
@@ -114,22 +114,22 @@ Tasks.mixin({
       taskCount = tasks.get('length');
       for (var j = 0; j < taskCount; j++) {
         task = tasks.objectAt(j);
-        var idx = unassigned.indexOf(task.get('id'));
-        unassigned.splice(idx, 1);
+        var idx = unallocated.indexOf(task.get('id'));
+        unallocated.splice(idx, 1);
       }
     }
 
-    // Create 'All' project to hold all unassigned tasks
+    // Create 'All' project to hold all unallocated tasks
     var allProjects = store.createRecord(CoreTasks.Project, {
       name: CoreTasks.ALL_TASKS_NAME,
       tasks: all
     });
     projects.insertAt(0, allProjects);
     
-    // Create 'Inbox' project to hold all unassigned tasks
+    // Create 'Inbox' project to hold all unallocated tasks
     var inboxProject = store.createRecord(CoreTasks.Project, {
       name: CoreTasks.INBOX_NAME,
-      tasks: unassigned
+      tasks: unallocated
     });
     CoreTasks.set('inbox', inboxProject);
     store.commitRecords();
