@@ -497,21 +497,21 @@ Tasks.mixin({
    * Add a new project and start editing it in projects master list.
    */
   addProject: function() {
-    project = CoreTasks.get('store').createRecord(
+    var project = CoreTasks.get('store').createRecord(
       CoreTasks.Project, { name: CoreTasks.NEW_PROJECT_NAME });
 
     this.getPath('projectsController.content').pushObject(project);
 
-    // TODO: [SG] add new project right after currently selected project, if one
+    // TODO: [SG] add new project right after currently selected project.
     var listView = Tasks.getPath('mainPage.mainPane.projectsList');
     var idx = listView.length - 1;
     listView.select(idx);
 
     // Begin editing newly created item.
     var itemView = listView.itemViewForContentIndex(idx);
-    
-    // wait for run loop to complete before method is called
-    itemView.beginEditing.invokeLater(itemView);
+
+    // Wait for run loop to complete before method is called.
+    CoreTasks.invokeLater(itemView.beginEditing.bind(itemView));
   },
   
   /**
