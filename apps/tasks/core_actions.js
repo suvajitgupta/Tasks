@@ -458,22 +458,12 @@ Tasks.mixin({
 
     var store = CoreTasks.get('store');
     var task = store.createRecord(CoreTasks.Task, {
-      //FIXME: Must add an id or pushObject() fails
+      //FIXME: Must add an id or it fails
       id: this._generateId(),
       name: CoreTasks.NEW_TASK_NAME,
       assignee: taskAssignee
     });
     store.commitRecords();
-
-    var pc = this.get('projectsController');
-    var psel = pc.get('selection');    
-    if (psel && psel.length() > 0) {
-      var project = psel.firstObject();
-      var tasks = project.get('tasks');
-      tasks.pushObject(task);
-      project.set('tasks', tasks);
-      store.commitRecords();
-    }
     
     var ac = this.get('assignmentsController');
     ac.addObject(task);
