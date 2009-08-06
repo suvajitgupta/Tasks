@@ -34,6 +34,13 @@ CoreTasks = SC.Object.create({
   inbox: null,
 
   /**
+   * A special 'allTasks' project where all tasks for all projects are grouped.
+   *
+   * This project exists outside of the store because we don't want it to be persisted.
+   */
+  allTasks: null,
+
+  /**
    * Creates a new record in the store.
    *
    * @param {CoreTasks.Record} recordType The type of the record.
