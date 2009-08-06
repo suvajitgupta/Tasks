@@ -524,8 +524,15 @@ Tasks.mixin({
     
     if (sel && sel.length() > 0) {
       var project = sel.firstObject();
-      pc.removeObject(project);
+
+      // Selection has to occur in a separate run loop before calling removeObject() on the
+      // controller.
+      // FIXME: [SE, SG] Probably a better way to handle this.
+      SC.RunLoop.begin();
       Tasks.getPath('mainPage.mainPane.projectsList').select(0);
+      SC.RunLoop.end();
+
+      pc.removeObject(project);
       project.destroy();
     }
   },
@@ -534,18 +541,23 @@ Tasks.mixin({
    * Add a new task to tasks detail list.
    */
   addTask: function() {
-    // Get selected task and get its assignee, then create new task with same assignee.
-    var taskAssignee = null;
+    var task = CoreTasks.createRecord(CoreTasks.Task, CoreTasks.Task.NEW_TASK_HASH);
+
+    // Get selected task and get its assignee so that we can set the same assignee on the
+    // newly-created task.
     var tc = this.get('tasksController');
     var sel = tc.get('selection');
 
     if (sel && sel.length() > 0) {
-      taskAssignee = sel.firstObject().get('assignee').get('id');
-      console.log('Assignee: ' + taskAssignee);
+      var selectedObject = sel.firstObject();
+      if (SC.instanceOf(selectedObject, CoreTasks.Task)) {
+        var taskAssignee = selectedObject.get('assignee');
+        if (taskAssignee) {
+          task.set('assignee', taskAssignee);
+          console.log('Assignee: ' + taskAssignee.get('name'));
+        }
+      }
     }
-
-    var task = CoreTasks.createRecord(CoreTasks.Task, CoreTasks.Task.NEW_TASK_HASH);
-    task.set('assignee', taskAssignee);
 
     // We have to commit the task immediately because we need the ID before we add the task to the
     // selected project.
