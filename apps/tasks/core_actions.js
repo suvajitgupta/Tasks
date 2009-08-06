@@ -379,7 +379,7 @@ Tasks.mixin({
    * Export data to external text file.
    */
   exportData: function() {
-    var val, task, user
+    var val, task, user;
     var data = "# Tasks data export at " + new Date().format('MMM dd, yyyy hh:mm:ssa') + '\n\n';
     var pc = this.get('projectsController');
 
@@ -535,8 +535,8 @@ Tasks.mixin({
    */
   addTask: function() {
     // Create a new task with a default name
-    // TODO: [SG] Get selected task and get its assignee, then create new task with same assignee
-    var task = CoreTasks.createRecord(CoreTasks.Task);
+    // TODO: [SG] Get selected task and get its assignee, then create new task with same assignee.
+    var task = CoreTasks.createRecord(CoreTasks.Task, CoreTasks.Task.NEW_TASK_HASH);
 
     // We have to commit the task immediately because we need the ID before we add the task to the
     // selected project.
@@ -560,7 +560,8 @@ Tasks.mixin({
     CoreTasks.get('allProject').addTask(task);
 
     // Refresh the assignments controller.
-    CoreTasks.invokeLater(this.get('assignmentsController').showAssignments());
+    var ac = this.get('assignmentsController');
+    CoreTasks.invokeLater(ac.showAssignments.bind(ac));
     
     // TODO: [SG] Begin editing newly created item.
   },
