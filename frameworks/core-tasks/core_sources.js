@@ -366,7 +366,6 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
    * TODO: [SE] Document this.
    */
   _normalizeResponseArray: function(hashes) {
-    debugger;
     // HACK: [SE] Browsers running in OS X get a string and not a hash, and they don't like the
     // format of the string that Persevere sends over the wire. We have to do some <sigh>
     // massagaing to get it to work.
@@ -378,15 +377,10 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
     }
 
     var ret = hashes ? hashes : [];
-
     var len = hashes.length;
+
     for (var i = 0; i < len; i++) {
       this._normalizeResponse(hashes[i]);
-
-      /*
-      var id = hashes[i].id;
-      if (id) hashes[i].id = id.replace(/^.*\//, '');
-      */
     }
 
     return ret;
