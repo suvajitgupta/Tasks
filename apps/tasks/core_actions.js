@@ -458,6 +458,8 @@ Tasks.mixin({
 
     var store = CoreTasks.get('store');
     var task = store.createRecord(CoreTasks.Task, {
+      //FIXME: Must add an id or pushObject() fails
+      id: this._generateId(),
       name: CoreTasks.NEW_TASK_NAME,
       assignee: taskAssignee
     });
@@ -469,7 +471,6 @@ Tasks.mixin({
       var project = psel.firstObject();
       var tasks = project.get('tasks');
       tasks.pushObject(task);
-      debugger;
       project.set('tasks', tasks);
       store.commitRecords();
     }
@@ -546,7 +547,11 @@ Tasks.mixin({
       prefix = functionName + '(): ';
     }
     alert (prefix + 'Not yet implemented');
-  }
+  },
+  
+  _nextId: 1,
+  
+  _generateId: function() { return -(this._nextId++); }
   
 });
 
