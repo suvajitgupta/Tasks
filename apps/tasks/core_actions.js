@@ -451,8 +451,10 @@ Tasks.mixin({
     var tc = this.get('tasksController');
     var sel = tc.get('selection');
     if (sel && sel.length() > 0) {
-      taskAssignee = sel.firstObject().get('assignee').get('id');
-      console.log('Assignee: ' + taskAssignee);
+      var assigneeUser = sel.firstObject().get('assignee');
+      if(assigneeUser) {
+        taskAssignee = assigneeUser.get('id');
+      }
     }
     
     // Create a new task with a default name
