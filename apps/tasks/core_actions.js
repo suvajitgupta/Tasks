@@ -352,8 +352,9 @@ Tasks.mixin({
     var project = this.get('currentProject');
 
     if (!project) project = CoreTasks.get('inbox');
-
     project.addTask(task);
+    
+    CoreTasks.get('allProject').addTask(task);
   },
 
   _addTaskFromImportFailure: function(storeKey) {
@@ -543,6 +544,7 @@ Tasks.mixin({
    */
   addTask: function() {
     var task = CoreTasks.createRecord(CoreTasks.Task, CoreTasks.Task.NEW_TASK_HASH);
+    task.set('id', this._generateId());
 
     // Get selected task and get its assignee so that we can set the same assignee on the
     // newly-created task.
@@ -566,7 +568,6 @@ Tasks.mixin({
       successCallback: this._addTaskSuccess.bind(this),
       failureCallback: this._addTaskFailure.bind(this)
     };
-
     task.commitRecord(params);
   },
 
@@ -599,6 +600,7 @@ Tasks.mixin({
     var tc = this.get('tasksController');
     var sel = tc.get('selection');
     if (sel && sel.length() > 0) {
+      
       // Get the task and remove it from the project.
       var task = sel.firstObject();
       var project = this.getPath('projectsController.selection').firstObject();
@@ -609,6 +611,7 @@ Tasks.mixin({
 
       // Now remove the task from the assignments controller.
       tc.set('selection', null);
+      
       var ac = this.get('assignmentsController');      
       ac.removeObject(task);
 
