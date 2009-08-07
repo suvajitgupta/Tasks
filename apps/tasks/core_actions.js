@@ -309,7 +309,7 @@ Tasks.mixin({
           }
         }
 
-        taskHash.id = this._generateId();
+        // taskHash.id = this._generateId();
         
         var taskRecord = store.createRecord(CoreTasks.Task, taskHash);
         if(!taskRecord) {
@@ -544,7 +544,7 @@ Tasks.mixin({
    */
   addTask: function() {
     var task = CoreTasks.createRecord(CoreTasks.Task, CoreTasks.Task.NEW_TASK_HASH);
-    task.set('id', this._generateId());
+    // task.set('id', this._generateId());
 
     // Get selected task and get its assignee so that we can set the same assignee on the
     // newly-created task.
