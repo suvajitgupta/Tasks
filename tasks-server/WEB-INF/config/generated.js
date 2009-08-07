@@ -5,15 +5,15 @@
 		"schema":{
 			"properties":{
 				"name":{
-					"type":"string",
+					"type":"any",
 					"optional":false
 				},
 				"loginName":{
-					"type":"string",
+					"type":"any",
 					"optional":false
 				},
 				"role":{
-					"type":"string",
+					"type":"any",
 					"optional":false,
 					"enum":[
 						"Manager",
@@ -26,7 +26,7 @@
 					"optional":true
 				},
 				"authToken":{
-					"type":"string",
+					"type":"any",
 					"optional":true
 				}
 			},
@@ -40,7 +40,7 @@
 		"schema":{
 			"properties":{
 				"name":{
-					"type":"string",
+					"type":"any",
 					"optional":false
 				},
 				"timeLeft":{
@@ -62,28 +62,28 @@
 		"schema":{
 			"properties":{
 				"name":{
-					"type":"string",
+					"type":"any",
 					"optional":false
 				},
 				"description":{
-					"type":"string",
+					"type":"any",
 					"optional":true
 				},
 				"type":{
-					"type":"string",
-					"optional":false
+					"type":"any",
+					"optional":true
 				},
 				"priority":{
-					"type":"string",
-					"optional":false
+					"type":"any",
+					"optional":true
 				},
 				"status":{
-					"type":"string",
-					"optional":false
+					"type":"any",
+					"optional":true
 				},
 				"validation":{
-					"type":"string",
-					"optional":false
+					"type":"any",
+					"optional":true
 				},
 				"effort":{
 					"type":"any",

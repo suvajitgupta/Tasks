@@ -1,12 +1,12 @@
 Class({
   id: "task",
   properties: {
-    name: { type: "string", optional: false },
-    description: { type: "string", optional: true },
-    type: { type: "string", optional: false },
-    priority: { type: "string", optional: false },
-    status: { type: "string", optional: false, },
-    validation: { type: "string", optional: false, },
+    name: { type: "any", optional: false },
+    description: { type: "any", optional: true },
+    type: { type: "any", optional: true },
+    priority: { type: "any", optional: true },
+    status: { type: "any", optional: true, },
+    validation: { type: "any", optional: true, },
     effort: { type: "any", optional: true },
     submitter: { optional: true },
     assignee: { optional: true }
