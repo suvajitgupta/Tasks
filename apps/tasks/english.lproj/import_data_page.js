@@ -1,6 +1,7 @@
 // ==========================================================================
 // Tasks.importData
 // ==========================================================================
+/*globals Tasks sc_require */
 sc_require('core');
 
 /** @static
@@ -13,14 +14,13 @@ sc_require('core');
 */
 Tasks.importDataPage = SC.Page.create({  
   
-  panel: SC.PalettePane.create({
-    layout: { right: 305, top: 15, height: 250, width: 300 },
-    contentView: 
-    SC.View.design({
+  panel: SC.PanelPane.create({
+    layout: { centerX: 0, centerY: 0, height: 350, width: 400 },
+    contentView: SC.View.design({
       layout: { left: 0, right: 0, top: 0, bottom: 0},
       childViews: [
         SC.TextFieldView.design({
-          layout: { top: 10, left: 10, right: 10, height: 200 },
+          layout: { top: 10, left: 10, right: 10, bottom: 40 },
           valueBinding: 'Tasks.importDataController.data',
           isTextArea: YES
         }),

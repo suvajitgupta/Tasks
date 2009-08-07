@@ -81,7 +81,34 @@ CoreTasks = SC.Object.create({
     }
 
     return this._resourcePathFormat.fmt(resourceName, id, params);
-  }
+  },
+
+  /**
+   * Get user record corresponding to specified loginName.
+   *
+   * @param {String} user's login name.
+   * @returns {Object} user record, if macthing one exists, or null.
+   */
+  getUser: function(loginName) {
+    var users = CoreTasks.get('store').findAll(SC.Query.create({
+      recordType: CoreTasks.User, 
+      conditions: 'loginName = %@',
+      parameters: [loginName]
+    }));
+    if(!users) return null;
+    return users.objectAt(0);
+  },
+
+  /**
+   * Generate unique ID for store record creation.
+   *
+   * @param (String) name of unimmplemented function
+   */
+  // TODO: [SG] relocate this to model layer
+  generateId: function() {
+    return (this._nextId++);
+  },
+  _nextId: 1000
 
 });
 
@@ -120,6 +147,7 @@ SC.mixin(Function.prototype, {
       return __method.apply(context, a);
     };
   }
+    
 });
 
 // Set the mode of operation.

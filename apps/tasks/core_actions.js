@@ -170,13 +170,13 @@ Tasks.mixin({
       unassignedIds.push(t.get('id'));
     }
 
-    // Create the All project to hold all tasks in the system.
-    var allProject = store.createRecord(CoreTasks.Project, {
+    // Create the AllTasks project to hold all tasks in the system.
+    var allTasksProject = store.createRecord(CoreTasks.Project, {
       name: CoreTasks.ALL_TASKS_NAME
     });
 
-    allProject.set('tasks', all);
-    CoreTasks.set('allProject', allProject);
+    allTasksProject.set('tasks', all);
+    CoreTasks.set('allTasks', allTasksProject);
 
     // Find tasks that belong to projects and remove from unassigned array.
     var projectCount = projects.get('length');
@@ -203,11 +203,11 @@ Tasks.mixin({
     inboxProject.set('tasks', unassigned);
     CoreTasks.set('inbox', inboxProject);
 
+    // Now push the All project to the beginning of the array.
+    projects.unshiftObject(allTasksProject);
+
     // Push the Inbox project to the beginning of the projects array.
     projects.unshiftObject(inboxProject);
-
-    // Now push the All project to the beginning of the array.
-    projects.unshiftObject(allProject);
 
     // Set the contnent of the projects controller.
     this.get('projectsController').set('content', projects);
@@ -245,138 +245,9 @@ Tasks.mixin({
    * Import data from external text file.
    */
   importData: function() {
-    Tasks.importDataController.openPanel();
-    
-    // var data = 
-    //     '#A comment\n     \n' +
-    //     '- An unallocated task [hacker] @Done\n' +
-    //     'My Project\n' +
-    //     '^ My first task {2} <enemy1> @Risky\n' +
-    //     '| description line1\n' +
-    //     '| description line2\n' +
-    //     '- My second task $Bug [cyberpunk] <bigboss> %Failed\n' +
-    //     'v My third task @Active $Feature {12-14} %Passed\n' +
-    //     ' \t \n' +
-    //     'Your Project {12}\n' +
-    //     '- Your first task {2} [cyberpunk] <enemy1> @Done\n' +
-    //     '- Your second task {4-5} [boo] <bigboss> @NoIdea\n';
-    //     this._parseAndLoadData(data);
-    //     this.get('assignmentsController').showAssignments();
-  },
-  
-  /**
-   * Parse data and create/load objects.
-   *
-   * @param {String} data to be parsed.
-   */
-  _parseAndLoadData: function(data) {
-    var lines = data.split('\n');
-    var store = CoreTasks.get('store');
-    
-    for (var i = 0; i < lines.length; i++) {
-      
-      var line = lines[i];
-      // console.log("Parsing line '" + line + "'\n");
-      
-      if (line.indexOf('#') === 0) { // a Comment
-        var commentLine = line.slice(1);
-        console.log('Commment:\t' + commentLine);
-      }
-      else if (line.match(/^[\^\-v][ ]/)) { // a Task
-        
-        var taskHash = CoreTasks.Task.parse(line);
-        console.log ('Task:\t\t' + JSON.stringify(taskHash));
-        
-        if(taskHash.assignee) {
-        var assigneeUser = this._getUser(taskHash.assignee);
-          if (assigneeUser) {
-            taskHash.assignee = assigneeUser.get('id');
-          }
-          else {
-            console.log('Task Import Error - no such assignee: ' + taskHash.assignee);
-            continue;
-          }
-        }
-        
-        if(taskHash.submitter) {
-          var submitterUser = this._getUser(taskHash.submitter);
-          if (submitterUser) {
-            taskHash.submitter = submitterUser.get('id');
-          }
-          else {
-            console.log('Task Import Error - no such submitter: ' + taskHash.submitter);
-            continue;
-          }
-        }
-
-        // taskHash.id = this._generateId();
-        
-        var taskRecord = store.createRecord(CoreTasks.Task, taskHash);
-        if(!taskRecord) {
-          console.log('Import Error: task creation failed');
-          continue;
-        }
-
-        // Immediately try to commit the task so that we get an ID.
-        var params = {
-          successCallback: this._addTaskFromImportSuccess.bind(this),
-          failureCallback: this._addTaskFromImportFailure.bind(this)
-        };
-
-        taskRecord.commitRecord(params);
-      }
-      else if (line.indexOf('| ') === 0) { // a Description
-        var descriptionLine = line.slice(2);
-        console.log('Description:\t' + descriptionLine);
-      }
-      else if (line.search(/^\s*$/) === 0) { // a blank line
-        console.log('Blank Line:');
-      }
-      else { // a Project
-        var projectHash = CoreTasks.Project.parse(line);
-        console.log ('Project:\t\t' + JSON.stringify(projectHash));
-        var projectRecord = store.createRecord(CoreTasks.Project, projectHash);
-        if(!projectRecord) {
-          console.log('Project Import Error: project creation failed!');
-          continue;
-        }
-
-        this.set('currentProject', projectRecord);
-        this.get('projectsController').addObject(projectRecord);
-      }
-    }
+    Tasks.importDataController.openPanel();  
   },
 
-  _addTaskFromImportSuccess: function(storeKey) {
-    var task = CoreTasks.get('store').materializeRecord(storeKey);
-    var project = this.get('currentProject');
-
-    if (!project) project = CoreTasks.get('inbox');
-    project.addTask(task);
-    
-    CoreTasks.get('allProject').addTask(task);
-  },
-
-  _addTaskFromImportFailure: function(storeKey) {
-    // TODO: [SE, SG] Implement this.
-  },
-  
-  /**
-   * Get user record corresponding to specified loginName.
-   *
-   * @param {String} user's login name.
-   * @returns {Object} user record, if macthing one exists, or null.
-   */
-  _getUser: function(loginName) {
-    var users = CoreTasks.get('store').findAll(SC.Query.create({
-      recordType: CoreTasks.User, 
-      conditions: 'loginName = %@',
-      parameters: [loginName]
-    }));
-    if(!users) return null;
-    return users.objectAt(0);
-  },
-  
   /**
    * Export data to external text file.
    */
@@ -432,15 +303,15 @@ Tasks.mixin({
   saveData: function() {
     var store = CoreTasks.get('store');
 
-    // Remove the store keys of the Inbox and All project from the changelog so that they're not
+    // Remove the store keys of the Inbox and AllTasks projects from the changelog so that they're not
     // persisted to the server.
     var inboxKey = CoreTasks.getPath('inbox.storeKey');
-    var allKey = CoreTasks.getPath('allProject.storeKey');
+    var allTasksKey = CoreTasks.getPath('allTasks.storeKey');
     var cl = store.changelog;
 
     if (cl) {
       if (cl.contains(inboxKey)) cl.remove(inboxKey);
-      if (cl.contains(allKey)) cl.remove(allKey);
+      if (cl.contains(allTasksKey)) cl.remove(allTasksKey);
     }
 
     // Now commit all dirty records to the database.
@@ -544,7 +415,7 @@ Tasks.mixin({
    */
   addTask: function() {
     var task = CoreTasks.createRecord(CoreTasks.Task, CoreTasks.Task.NEW_TASK_HASH);
-    // task.set('id', this._generateId());
+    // task.id = CoreTasks.generateId(); // For FIXTUREs
 
     // Get selected task and get its assignee so that we can set the same assignee on the
     // newly-created task.
@@ -580,7 +451,7 @@ Tasks.mixin({
     project.addTask(task);
 
     // Add the task to the All Tasks project.
-    CoreTasks.get('allProject').addTask(task);
+    CoreTasks.get('allTasks').addTask(task);
 
     // Refresh the assignments controller.
     var ac = this.get('assignmentsController');
@@ -607,7 +478,7 @@ Tasks.mixin({
       project.removeTask(task);
 
       // Remove the task from the All Tasks project.
-      CoreTasks.get('allProject').removeTask(task);
+      CoreTasks.get('allTasks').removeTask(task);
 
       // Now remove the task from the assignments controller.
       tc.set('selection', null);
@@ -662,11 +533,7 @@ Tasks.mixin({
       prefix = functionName + '(): ';
     }
     alert (prefix + 'Not yet implemented');
-  },
-  
-  _nextId: 1,
-  
-  _generateId: function() { return -(this._nextId++); }
+  }  
   
 });
 
