@@ -1,0 +1,58 @@
+TODO: [SE] Make this nicer; go into more detail, etc.
+
+RUNNING PERSEVERE
+==============================================================================
+
+To start the persevere server...
+
+./server-start.sh
+
+To stop the persevere server...
+
+./server-stop.sh
+
+INITIAL PERSEVERE SETUP
+==============================================================================
+
+1) Start the Persevere server (see above).
+
+2) Navigate to the following URL...
+
+http://localhost:8080/tasks-server/explorer.html
+
+3) Select "user" (with a lowercase "u") from the "Select a class/table"
+   dropdown menu.
+
+4) Click on the "Create New User" button.
+
+5) In the dialog box, enter the following JSON snippet...
+
+{ name: '<full name>', loginName: '<initials>', role: '<role>' }
+
+...where role is ("Manager" | "Developer" | "Tester").
+
+For example...
+
+{ name: 'Sean Eidemiller', loginName: 'se', role: 'Developer' }
+
+6) Repeat as desired for multiple users.
+
+7) Click the "Save" button.
+
+RUNNING TASKS
+==============================================================================
+
+1) Star the SproutCore server...
+
+sc-server
+
+(This assumes that you have the SC build tools installed.)
+
+1) Navigate to the following URL...
+
+http://localhost:4020/tasks
+
+2) Enter your login name in the dialog box (corresponds to "loginName" in the
+   user JSON that you defined in the Persever setup).
+
+3) Enjoy!
