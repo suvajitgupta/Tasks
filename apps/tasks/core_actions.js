@@ -175,22 +175,24 @@ Tasks.mixin({
    * Import data from external text file.
    */
   importData: function() {
-    // TODO: [SG] implement view to prompt user for data to import (sample data hardcoded below for testing)
-    var data = 
-    '#A comment\n     \n' +
-    '- An unallocated task [hacker] @Done\n' +
-    'My Project\n' +
-    '^ My first task {2} <enemy1> @Risky\n' +
-    '| description line1\n' +
-    '| description line2\n' +
-    '- My second task $Bug [cyberpunk] <bigboss> %Failed\n' +
-    'v My third task @Active $Feature {12-14} %Passed\n' +
-    ' \t \n' +
-    'Your Project {12}\n' +
-    '- Your first task {2} [cyberpunk] <enemy1> @Done\n' +
-    '- Your second task {4-5} [boo] <bigboss> @NoIdea\n';
-    this._parseAndLoadData(data);
-    this.get('assignmentsController').showAssignments();
+    
+    Tasks.importDataController.openPanel();
+    
+    // var data = 
+    //     '#A comment\n     \n' +
+    //     '- An unallocated task [hacker] @Done\n' +
+    //     'My Project\n' +
+    //     '^ My first task {2} <enemy1> @Risky\n' +
+    //     '| description line1\n' +
+    //     '| description line2\n' +
+    //     '- My second task $Bug [cyberpunk] <bigboss> %Failed\n' +
+    //     'v My third task @Active $Feature {12-14} %Passed\n' +
+    //     ' \t \n' +
+    //     'Your Project {12}\n' +
+    //     '- Your first task {2} [cyberpunk] <enemy1> @Done\n' +
+    //     '- Your second task {4-5} [boo] <bigboss> @NoIdea\n';
+    //     this._parseAndLoadData(data);
+    //     this.get('assignmentsController').showAssignments();
   },
   
   /**

@@ -51,6 +51,8 @@ SC.stringsFor('English', {
   '_Unassigned': "Unassigned",
   '_Manager': "Manager",
   '_Developer': "Developer",
-  '_Tester': "Tester"
-
+  '_Tester': "Tester",
+  
+  // Import Panel strings
+  '_Cancel': "Cancel"
 });
