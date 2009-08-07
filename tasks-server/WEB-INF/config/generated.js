@@ -53,7 +53,8 @@
 				}
 			},
 			"prototype":{
-			}
+			},
+			"instances":{"$ref":"../project/"}
 		}
 	},
 	{"id":"generated.js?sources?2",
