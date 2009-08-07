@@ -308,6 +308,7 @@ Tasks.mixin({
             continue;
           }
         }
+
         taskHash.id = this._generateId();
         
         var taskRecord = store.createRecord(CoreTasks.Task, taskHash);
@@ -525,13 +526,13 @@ Tasks.mixin({
     if (sel && sel.length() > 0) {
       var project = sel.firstObject();
 
-      // Selection has to occur in a separate run loop before calling removeObject() on the
-      // controller.
-      // FIXME: [SE, SG] Probably a better way to handle this.
+      // Select the first project in the list.
+      // FIXME: [SE, SG] Do this without using SC.RunLoop.begin/end, if possible.
       SC.RunLoop.begin();
       Tasks.getPath('mainPage.mainPane.projectsList').select(0);
       SC.RunLoop.end();
 
+      // Remove the project from the list and destroy.
       pc.removeObject(project);
       project.destroy();
     }
