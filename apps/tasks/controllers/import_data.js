@@ -134,7 +134,7 @@ Tasks.importDataController = SC.ObjectController.create(
     },
 
     _addTaskFromImportFailure: function(storeKey) {
-      // TODO: [SE, SG] Implement this.
+      // TODO: [SE] Implement addTaskFromImportFailure
     }
     
 });
