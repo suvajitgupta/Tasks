@@ -432,6 +432,7 @@ Tasks.mixin({
         }
       }
     }
+    console.log('ADD TASK: ' + task);
 
     // We have to commit the task immediately because we need the ID before we add the task to the
     // selected project.
@@ -449,6 +450,7 @@ Tasks.mixin({
     // Add the new task to the currently-selected project.
     var project = this.getPath('projectsController.selection').firstObject();
     project.addTask(task);
+    console.log('ADD TASK SUCCESS: ' + project.get('name'));
 
     // Add the task to the All Tasks project.
     CoreTasks.get('allTasks').addTask(task);
