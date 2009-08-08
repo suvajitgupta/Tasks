@@ -91,6 +91,11 @@
   color: black;
 }
 
+.sc-radio-view.sc-small-size {
+font-size:10px;
+line-height:18px;
+}
+
 .sc-theme.focus .sc-list-view.sc-source-list .sc-collection-item.sel {
 	border-style: solid;
 	border-size: 1px;

@@ -231,12 +231,13 @@ Tasks.mainPage = SC.Page.design({
         
         SC.SeparatorView.design({
           layoutDirection: SC.LAYOUT_VERTICAL,
-          layout: { top: 5, bottom: 5, left: 85, width: 4 }
+          layout: { top: 5, bottom: 5, left: 80, width: 4 }
         }),
 
         SC.RadioView.design({
-          layout: { centerY: 2, height: 21, left: 105, width: 200 },
+          layout: { centerY: 3, height: 21, left: 95, width: 180 },
           escapeHTML: NO,
+          controlSize: SC.SMALL_CONTROL_SIZE,
           items: [
             { title: '<span class=tasks-priority-high>' + CoreTasks.TASK_PRIORITY_HIGH.loc() + '</span>&nbsp;',
               value: CoreTasks.TASK_PRIORITY_HIGH },
@@ -254,12 +255,13 @@ Tasks.mainPage = SC.Page.design({
         
         SC.SeparatorView.design({
           layoutDirection: SC.LAYOUT_VERTICAL,
-          layout: { top: 5, bottom: 5, left: 300, width: 4 }
+          layout: { top: 5, bottom: 5, left: 275, width: 4 }
         }),
 
         SC.RadioView.design({
-          layout: { centerY: 2, height: 21, left: 315, width: 270 },
+          layout: { centerY: 3, height: 21, left: 290, width: 250 },
           escapeHTML: NO,
+          controlSize: SC.SMALL_CONTROL_SIZE,
           items: [
             { title: '<span class=tasks-status-planned>' + CoreTasks.TASK_STATUS_PLANNED.loc() + '</span>&nbsp;',
               value: CoreTasks.TASK_STATUS_PLANNED },
@@ -279,12 +281,13 @@ Tasks.mainPage = SC.Page.design({
         
         SC.SeparatorView.design({
           layoutDirection: SC.LAYOUT_VERTICAL,
-          layout: { top: 5, bottom: 5, left: 580, width: 4 }
+          layout: { top: 5, bottom: 5, left: 535, width: 4 }
         }),
 
         SC.RadioView.design({
-          layout: { centerY: 2, height: 21, left: 595, width: 240 },
+          layout: { centerY: 3, height: 21, left: 550, width: 210 },
           escapeHTML: NO,
+          controlSize: SC.SMALL_CONTROL_SIZE,
           items: [
             { title: '<span class=tasks-validation-untested>' + CoreTasks.TASK_VALIDATION_UNTESTED.loc() + '</span>&nbsp;',
               value: CoreTasks.TASK_VALIDATION_UNTESTED },
