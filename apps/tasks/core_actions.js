@@ -463,7 +463,7 @@ Tasks.mixin({
   },
 
   _addTaskFailure: function(storeKey) {
-    // TODO: [SE] Implement this.
+    // TODO: [SE] Implement addTaskFailure
   },
   
   /**
