@@ -18,5 +18,3 @@ Tasks = SC.Object.create(SC.Statechart,
   NAMESPACE: 'Tasks',
   VERSION: '0.4'
 });
-
-// TODO: [SG] switch to MIT license
