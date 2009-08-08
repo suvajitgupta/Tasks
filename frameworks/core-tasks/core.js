@@ -104,11 +104,10 @@ CoreTasks = SC.Object.create({
    *
    * @param (String) name of unimmplemented function
    */
-  // TODO: [SG] relocate this to model layer
   generateId: function() {
-    return (this._nextId++);
+    return -(this._nextId++);
   },
-  _nextId: 1000
+  _nextId: 0
 
 });
 
