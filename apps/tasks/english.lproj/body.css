@@ -84,8 +84,12 @@
 }
 
 /*-----------------------------------------------------------------
- * Task selection style
+ * SC style overrides
  */
+ 
+.sc-theme .sc-view {
+  color: black;
+}
 
 .sc-theme.focus .sc-list-view.sc-source-list .sc-collection-item.sel {
 	border-style: solid;

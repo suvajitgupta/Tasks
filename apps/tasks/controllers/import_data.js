@@ -42,6 +42,7 @@ Tasks.importDataController = SC.ObjectController.create(
      * @param {String} data to be parsed.
      */
     _parseAndLoadData: function(data) {
+      
       var lines = data.split('\n');
       var store = CoreTasks.get('store');
 
@@ -52,12 +53,12 @@ Tasks.importDataController = SC.ObjectController.create(
 
         if (line.indexOf('#') === 0) { // a Comment
           var commentLine = line.slice(1);
-          console.log('Commment:\t' + commentLine);
+          // console.log('Commment:\t' + commentLine);
         }
         else if (line.match(/^[\^\-v][ ]/)) { // a Task
 
           var taskHash = CoreTasks.Task.parse(line);
-          console.log ('Task:\t\t' + JSON.stringify(taskHash));
+          // console.log ('Task:\t\t' + JSON.stringify(taskHash));
 
           if(taskHash.assignee) {
           var assigneeUser = CoreTasks.getUser(taskHash.assignee);
@@ -99,10 +100,11 @@ Tasks.importDataController = SC.ObjectController.create(
         }
         else if (line.indexOf('| ') === 0) { // a Description
           var descriptionLine = line.slice(2);
-          console.log('Description:\t' + descriptionLine);
+          // console.log('Description:\t' + descriptionLine);
+          // TODO: [SG] import multi-line task description
         }
         else if (line.search(/^\s*$/) === 0) { // a blank line
-          console.log('Blank Line:');
+          // console.log('Blank Line:');
         }
         else { // a Project
           var projectHash = CoreTasks.Project.parse(line);
@@ -120,13 +122,15 @@ Tasks.importDataController = SC.ObjectController.create(
     },
     
     _addTaskFromImportSuccess: function(storeKey) {
+      
       var task = CoreTasks.get('store').materializeRecord(storeKey);
+      
       var project = Tasks.get('currentProject');
-
       if (!project) project = CoreTasks.get('inbox');
       project.addTask(task);
 
       CoreTasks.get('allTasks').addTask(task);
+      
     },
 
     _addTaskFromImportFailure: function(storeKey) {

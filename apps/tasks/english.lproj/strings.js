@@ -19,9 +19,10 @@ SC.stringsFor('English', {
   '_Welcome': "Welcome",
   '_User:': "User:",
   "_Everyone": "Everyone",
-  '_SearchHint': "Enter search criteria",
+  '_SearchHint': "Search for tasks",
   '_Save': "Save",
   '_Import': "Import",
+  '_ImportHint': "Paste in text to be imported",
   '_Export': "Export",
   
   // Project strings
@@ -55,4 +56,5 @@ SC.stringsFor('English', {
   
   // Import Panel strings
   '_Cancel': "Cancel"
+  
 });
