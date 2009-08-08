@@ -156,18 +156,18 @@ Tasks.mixin({
     var store = CoreTasks.get('store');
     var projects = store.recordArrayFromStoreKeys(storeKeys, CoreTasks.Project, store);
     
-    // Get all tasks from the store and push them into the unassigned array.
+    // Get all tasks from the store and push them into the unallocated array.
     var tasks = store.findAll(SC.Query.create({ recordType: CoreTasks.Task }));
     var taskCount = tasks.get('length');
     var all = [];
-    var unassigned = [];
-    var unassignedIds = [];
+    var unallocated = [];
+    var unallocatedIds = [];
 
     for (var i = 0; i < taskCount; i++) {
       var t = tasks.objectAt(i);
       all.push(t);
-      unassigned.push(t);
-      unassignedIds.push(t.get('id'));
+      unallocated.push(t);
+      unallocatedIds.push(t.get('id'));
     }
 
     // Create the AllTasks project to hold all tasks in the system.
@@ -178,7 +178,7 @@ Tasks.mixin({
     allTasksProject.set('tasks', all);
     CoreTasks.set('allTasks', allTasksProject);
 
-    // Find tasks that belong to projects and remove from unassigned array.
+    // Find tasks that belong to projects and remove from unallocated array.
     var projectCount = projects.get('length');
 
     for (i = 0; i < projectCount; i++) {
@@ -186,21 +186,21 @@ Tasks.mixin({
       tasks = project.get('tasks');
       taskCount = tasks.get('length');
       for (var j = 0; j < taskCount; j++) {
-        var idx = unassignedIds.indexOf(tasks.objectAt(j).get('id'));
+        var idx = unallocatedIds.indexOf(tasks.objectAt(j).get('id'));
 
         // Remove task and task ID from corresponding arrays.
-        unassigned.splice(idx, 1);
-        unassignedIds.splice(idx, 1);
+        unallocated.splice(idx, 1);
+        unallocatedIds.splice(idx, 1);
       }
     }
 
-    // Create the Inbox project with the unassigned tasks.
+    // Create the Inbox project with the unallocated tasks.
     var inboxProject = CoreTasks.createRecord(CoreTasks.Project, {
       id: 0,
       name: CoreTasks.INBOX_NAME
     });
 
-    inboxProject.set('tasks', unassigned);
+    inboxProject.set('tasks', unallocated);
     CoreTasks.set('inbox', inboxProject);
 
     // Now push the All project to the beginning of the array.
