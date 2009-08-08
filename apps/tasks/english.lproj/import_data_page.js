@@ -8,6 +8,7 @@ sc_require('core');
     
   @extends SC.Page
   @author Brandon Blatnick
+  @author Suvajit Gupta
   
   Import Data Panel
   

@@ -18,10 +18,10 @@ v Design single/multi-user modes & access via Desktop/Web/Mobile clients [SG] <S
 Infrastructure/Modes
 ^ Develop Model and Fixtures (hardcoded & generated) [SG] <SE> @Done
 - Develop States/Actions corresponding to GUI Statecharts [SG] <SE> @Active
-v Add drag-n-drop of a TXT file into App for data importing (using Google Gears) [MB] <SG> @Active
 - Drag-n-drop in SourceListView is broken (Apple has on priority list) [SC] $Bug
 - Allow SourceListView disclosures to be opened/closed (Apple has on priority list) [SC] $Bug
 - Add missing 'localize' support back in CollectionView (regression from SC 0.9) [SC] $Bug
+v Add drag-n-drop of a TXT file into App for data importing (using Google Gears) [MB] <SG> @Active
 
 Project Manager GUI
 ^ Add Master/Detail Explorer view with click selection of Projects showing corresponding Tasks [JH2] <SG> @Done
@@ -34,9 +34,9 @@ v Set projects toolbar button enablement based on having a selection [SG] <EO> @
 - Select first project at startup [JH2] <SG> @Done
 ^ Add virtual Inbox & AllTasks to group all unallocated & all tasks respectively [SG] <SE> @Done
 - Disallow Inbox/AllTasks projects from being deleted [SG] <EO> @Done
-^ Allow drag-n-drop Task reallocation to Projects [SG] <MB>
+^ Allow drag-n-drop Task reallocation to Projects [SG] <BB>
 v Add context menu to Delete a project [SG] <EG>
-- Add warning Alert box about deleting Project with Tasks [SG] <SE>
+- Add warning Alert box about deleting Project with Tasks [SG] <BB>
 v Add hover tooltip showing number of Tasks in project [SG] <EG>
 v Make Master list of Projects collapsible [SG] <EG>
 
@@ -49,12 +49,12 @@ Task Manager GUI
 v Set tasks toolbar button enablement based on having a selection [SG] <EO> @Done
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done
 ^ Add "+" & "-" buttons in tasks toolbar [SG] <SE> @Done
-- Allow "+" button to be pressed a second time to keep in data entry mode, Esc will exit mode [SG] <JH2>
-^ Add modal popup form for editing [SG] <SE>
-^ Show effort subtotals (exclude Low items) in curly braces for load balancing [SG] <SE>
-^ Append "?" for range-based subtotals including unknown efforts [SG] <SE>
-^ Allow drag-n-drop reordering (preserve order when persisting) [SG] <SE>
-^ Allow drag-n-drop reassignment [SG] <MB>
+- Allow "+" button to be pressed a second time to keep in data entry mode, Esc will exit mode [SG] <BB>
+^ Add modal popup form for editing [SG] <BB>
+^ Show effort subtotals (exclude Low items) in curly braces for load balancing [SG] <BB>
+^ Append "?" for range-based subtotals including unknown efforts [SG] <BB>
+^ Allow drag-n-drop reordering (preserve order when persisting) [SG] @Done
+^ Allow drag-n-drop reassignment [SG] <BB>
 v Add context menu & hotkeys to Edit/Cut/Copy/Paste/Delete/Duplicate a task [SG] <EG>
 v Add hover tooltip showing Description [SG] <EG>
 
@@ -70,19 +70,19 @@ v Add hover tooltip on dialog title showing number of Users [SG] <EG>
 Application Manager GUI
 ^ Add User selection combo box in top toolbar ("Everyone" is default choice) [SG] <JH2> @Done
 ^ Add Search box in top toolbar: support type-ahead searching [SG] <DC> @Done
-- Add "Import" button in top toolbar (using TXT file format) [SG] <SE> @Active
-- Add "Export" button in top toolbar (using TXT file format) [SG] <SE> @Active
-- Add "Save" button in top toolbar [SG] <SE> @Active
+- Add "Import" button/panel in top toolbar (using TXT file format) [SG] <BB> @Active
+- Add "Export" button/panel in top toolbar (using TXT file format) [SG] @Active
+- Add "Save" button in top toolbar [SG] <SE> @Done
 v Add Online Help button in top Toolbar & modal Help dialog [SG] @Active
-v Add "X" button to exit in top toolbar [SG] <SE> @Active
-v Prompt user to save changes before exiting [SG] <SE>
+v Add "X" button to exit in top toolbar [SG] <BB> @Active
+v Prompt user to save changes before exiting [SG] <BB>
 - Add Undo/Redo hotkeys & buttons in top toolbar (till last Save) [SG] <SE>
 - Restore application settings/state from last login [SG] <SE>
 v Add hover tooltip on application title showing number of Projects [SG] <EG>
 
 Server
-^ Build persistence server (using Persevere) [SE] <SG> @Active
-- Build alternate persistence server (using Joyent) [MB] <SG> @Active
+^ Build persistence server (using Persevere) [SE] <SG> @Done
+- Build alternate persistence server (using Joyent)? [MB] <SG> @Active
 - Add Server-side authorization [SE] <SG>
 - Add server-side data validation checks/return appropriate error codes [SE] <SG>
 - Add local persistence for single user mode (using Google Gears) [MB] <SG>

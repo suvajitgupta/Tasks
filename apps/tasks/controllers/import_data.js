@@ -9,6 +9,7 @@ sc_require('core');
   
   @extends SC.ObjectController
   @author Brandon Blatnick
+  @author Suvajit Gupta
   
   Controller for the import data pane.
 */
