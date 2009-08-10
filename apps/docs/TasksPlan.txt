@@ -70,8 +70,8 @@ v Add hover tooltip on dialog title showing number of Users [SG] <EG>
 Application Manager GUI
 ^ Add User selection combo box in top toolbar ("Everyone" is default choice) [SG] <JH2> @Done
 ^ Add Search box in top toolbar: support type-ahead searching [SG] <DC> @Done
-- Add "Import" button/panel in top toolbar (using TXT file format) [SG] <BB> @Active
-- Add "Export" button/panel in top toolbar (using TXT file format) [SG] @Active
+- Add "Import" button in top toolbar with associated pop up panel [BB] <SG> @Done
+- Add "Export" button in top toolbar that copies to clipboard (using TXT file format) [SG] @Active
 - Add "Save" button in top toolbar [SG] <SE> @Done
 v Add Online Help button in top Toolbar & modal Help dialog [SG] @Active
 v Add "X" button to exit in top toolbar [SG] <BB> @Active
