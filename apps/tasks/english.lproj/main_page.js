@@ -65,7 +65,7 @@ Tasks.mainPage = SC.Page.design({
       SC.TextFieldView.design({
         layout: { centerY: 0, height: 16, left: 485, width: 250 },
         hint: "_SearchHint".loc(),
-        valueBinding: 'Tasks.assignmentsController.searchFilter'
+        valueBinding: 'Tasks.assignmentsController.searchFilter' // TODO: [SG] bind to searchController instead
       }),
       
       SC.ButtonView.design({
