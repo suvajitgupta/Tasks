@@ -76,7 +76,7 @@ Tasks.mixin({
         order: 'loginName ASC'
       }));
 
-      this.get('usersController').set('content', users);
+      this.get('assigneeController').set('content', users);
       // HACK: [SE] Set the objects array on the user drop down list (really ugly).
       // var selectField = this.getPath('mainPage.mainPane.topView.childViews.4');
       // selectField.set('objects', users);

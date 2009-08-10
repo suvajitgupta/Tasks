@@ -58,9 +58,8 @@ Tasks.mainPage = SC.Page.design({
         layout: { centerY: 0, height: 24, left: 320, width: 150 },
         nameKey: 'loginName',
         emptyName: "_Everyone".loc(), // FIXME: [SC] fix empty line after first item in SelectFieldView
-        objects: CoreTasks.User.FIXTURES, // TODO: [SG] bind to userController
-        // objects: 'Tasks.usersController.content', // FIXME: [SC] make SelectFieldView work with objects in a Controller
-        valueBinding: 'Tasks.assignmentsController.assigneeSelection'
+        objects: CoreTasks.User.FIXTURES, // FIXME: [SC] make SelectFieldView work with objects in controller:'Tasks.assigneeController.content',
+        valueBinding: 'Tasks.assignmentsController.assigneeSelection' // TODO: [SG] bind to assigneeController instead
       }),
 
       SC.TextFieldView.design({

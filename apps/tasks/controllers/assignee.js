@@ -6,7 +6,7 @@
   @extends SC.ArrayController
   @author Suvajit Gupta
 */
-Tasks.usersController = SC.ArrayController.create(
-/** @scope Tasks.usersController.prototype */ {
+Tasks.assigneeController = SC.ArrayController.create(
+/** @scope Tasks.assigneeController.prototype */ {
 
 });
