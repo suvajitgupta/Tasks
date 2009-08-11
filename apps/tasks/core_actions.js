@@ -434,7 +434,6 @@ Tasks.mixin({
         }
       }
     }
-    console.log('ADD TASK: ' + task);
 
     // We have to commit the task immediately because we need the ID before we add the task to the
     // selected project.
@@ -442,6 +441,7 @@ Tasks.mixin({
       successCallback: this._addTaskSuccess.bind(this),
       failureCallback: this._addTaskFailure.bind(this)
     };
+
     task.commitRecord(params);
   },
 
@@ -452,7 +452,6 @@ Tasks.mixin({
     // Add the new task to the currently-selected project.
     var project = this.getPath('projectsController.selection').firstObject();
     project.addTask(task);
-    console.log('ADD TASK SUCCESS: ' + project.get('name'));
 
     // Add the task to the All Tasks project.
     CoreTasks.get('allTasks').addTask(task);
@@ -482,6 +481,7 @@ Tasks.mixin({
       project.removeTask(task);
 
       // Remove the task from the All Tasks project.
+      // FIXME: [SE, SG] The task isn't removed from the list of tasks in the view.
       CoreTasks.get('allTasks').removeTask(task);
 
       // Now remove the task from the assignments controller.

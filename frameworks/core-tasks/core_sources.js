@@ -32,8 +32,8 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
     this._delRequest = SC.Request.create({ type: 'DELETE', isJSON: YES })
       .header(contentTypeHeader, contentType).header(acceptHeader, accept);
 
-    // Increase the max number of concurrent XHRs to 5 (default is 2).
-    SC.Request.manager.set('maxRequests', 5);
+    // Increase the max number of concurrent XHRs to 20 (default is 2).
+    SC.Request.manager.set('maxRequests', 20);
   },
 
   /**
@@ -357,7 +357,16 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
    */
   _normalizeResponse: function(hash) {
     // HACK: [SE] Browsers running in OS X get a string and not a hash, so we have to convert it.
-    if (SC.typeOf(hash) === SC.T_STRING) hash = SC.json.decode(hash);
+    if (SC.typeOf(hash) === SC.T_STRING) {
+      // HACK: [SE] Also, for some reason, JSON.parse() doesn't like the parentheses that Persevere
+      // uses to enclose its responses to POST requests, but only in browsers running on OS X.
+      if (hash.indexOf("(") === 0) {
+        var tempHash = hash;
+        hash = tempHash.slice(1, -1);
+      }
+
+      hash = SC.json.decode(hash);
+    }
 
     var id = hash.id;
     if (id && SC.typeOf(id) === SC.T_STRING) hash.id = id.replace(/^.*\//, '') * 1;
