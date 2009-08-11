@@ -2,18 +2,18 @@
 
 Design/Planning
 - Review comparable applications for ideas: Mac Things/TaskPaper, Jira [SG] <MB> @Done
-- Define Personas (Roles) & User Stories/Use Cases [SG] <SE> @Done
+- Define Personas (Roles) & User Stories/Use Cases [SG] <JL> @Done
 | Manager - add/edit/delete Users/Projects/Tasks, assign Tasks to Projects, load balance Tasks across Developers, view Task status
 | Developer - add/edit/delete personal Tasks, reorder personal Tasks, view/split personal Tasks & update effort (estimates=>actual)/status,?reassign personal Tasks to other Developers or move to other Projects, add Task Release Notes in description field
 | Tester - view Tasks that are done (read Release Notes in description field), validate Tasks (mark as Passed | Failed), submit bugs as Tasks
 ^ Create GUI Wireframes using Balsamiq [SG] @Done
 ^ Create GUI Statecharts using Omnigraffle [SG] <SE> @Done
-- Create GUI Mockups using Photoshop [MG] <SG> @Active
+- Create GUI Mockups using Photoshop [MG] <SG> @Done
 ^ Define Models/JSON: Task, Project, User [SG] <SE> @Done
 - Define Tasks TXT file format for data import/export [SG] <SE> @Done
 - Design REST API supporting CRUD operations [SG] <SE> @Done
+- Design Tasks Server & evaluate persistence frameworks [SE] <SG> @Done
 v Design single/multi-user modes & access via Desktop/Web/Mobile clients [SG] <SE> @Active
-- Design Tasks Server & evaluate persistence frameworks [SE] <SG> @Active
 
 Infrastructure/Modes
 ^ Develop Model and Fixtures (hardcoded & generated) [SG] <SE> @Done
@@ -34,7 +34,7 @@ v Set projects toolbar button enablement based on having a selection [SG] <EO> @
 - Select first project at startup [JH2] <SG> @Done
 ^ Add virtual Inbox & AllTasks to group all unallocated & all tasks respectively [SG] <SE> @Done
 - Disallow Inbox/AllTasks projects from being deleted [SG] <EO> @Done
-^ Allow drag-n-drop Task reallocation to Projects [SG] <BB>
+^ Allow drag-n-drop Task reallocation to Projects [BB] <SG>
 v Add context menu to Delete a project [SG] <EG>
 - Add warning Alert box about deleting Project with Tasks [SG] <BB>
 v Add hover tooltip showing number of Tasks in project [SG] <EG>
@@ -46,30 +46,30 @@ Task Manager GUI
 - Show type via different icons [SG] <JH2> @Done
 - Show priority (font style), status (font color), validation (background color) [SG] <MB> @Done
 - Add Status/Priority/Validation radio buttons in tasks toolbar [SG] <EO> @Done
+^ Add Search box in top toolbar: support type-ahead searching [SG] <DC> @Done
 v Set tasks toolbar button enablement based on having a selection [SG] <EO> @Done
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done
 ^ Add "+" & "-" buttons in tasks toolbar [SG] <SE> @Done
 - Allow "+" button to be pressed a second time to keep in data entry mode, Esc will exit mode [SG] <BB>
 ^ Add modal popup form for editing [SG] <BB>
-^ Show effort subtotals (exclude Low items) in curly braces for load balancing [SG] <BB>
+^ Show effort subtotals (exclude Low items) in curly braces for load balancing [SG] <SE>
 ^ Append "?" for range-based subtotals including unknown efforts [SG] <BB>
 ^ Allow drag-n-drop reordering (preserve order when persisting) [SG] @Done
-^ Allow drag-n-drop reassignment [SG] <BB>
+^ Allow drag-n-drop reassignment [BB] <SG>  @Active
 v Add context menu & hotkeys to Edit/Cut/Copy/Paste/Delete/Duplicate a task [SG] <EG>
 v Add hover tooltip showing Description [SG] <EG>
 
 User Manager GUI
+^ Add Assignee selection combo box in top toolbar ("Everyone" is default choice) [SG] <JH2> @Done
 - Add login screen (User authentication) [SG] <SE> @Active
 - Add access control based on Role (User authorization) [SG] <SE>
 v Add user preferences/restore to them at startup [SG] <SE>
-v Add change password dialog? [SG] <SE>
 - Add User Management button/modal popup showing existing Users [BB] <SG>
 - Add "+" & "-" buttons in users toolbar and "X" button in top toolbar to return [BB] <SG>
 v Add hover tooltip on dialog title showing number of Users [SG] <EG>
+v Add change password dialog? [SG] <SE>
 
 Application Manager GUI
-^ Add User selection combo box in top toolbar ("Everyone" is default choice) [SG] <JH2> @Done
-^ Add Search box in top toolbar: support type-ahead searching [SG] <DC> @Done
 - Add "Import" button in top toolbar with associated pop up panel [BB] <SG> @Done
 - Add "Export" button in top toolbar that copies to clipboard (using TXT file format) [SG] @Active
 - Add "Save" button in top toolbar [SG] <SE> @Done
@@ -86,14 +86,14 @@ Server
 - Add Server-side authorization [SE] <SG>
 - Add server-side data validation checks/return appropriate error codes [SE] <SG>
 - Add local persistence for single user mode (using Google Gears) [MB] <SG>
-v Facilitae multi-user mode using Transaction Time [SE] <EO>
+v Facilitae multi-user mode using Transaction Time [SG] <EO>
 
 Hardening/Styling
 - Perform I18N and L10N (test with reversed strings) [SG] <JH2> @Active
 - Develop Model unit tests [SG] <BB> @Active
 - Develop View unit tests [SG] <MB> @Active
 v Style via CSS, embed catchy/sprited images [MG] <SG> @Active
-- Handle secondary scenarios/server error codes [SG] <SE>
+- Handle secondary scenarios/provide good diagnostics [SG] <SE>
 
 Packaging/Delivery
 ^ Develop Web client (ported to Firefox, Internet Explorer, Safari, Chrome) [SG] <MT> @Active
