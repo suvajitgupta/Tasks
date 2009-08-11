@@ -22,7 +22,7 @@ Tasks.mainPage = SC.Page.design({
     
     dockView: SC.View.design(SC.Border, {
       layout: { top: 0, left: 0, right: 0, height: 42 },
-      backgroundColor: '#DDD',
+      backgroundColor: '#FFF',
       borderStyle: SC.BORDER_BOTTOM,
       childViews: [
       
