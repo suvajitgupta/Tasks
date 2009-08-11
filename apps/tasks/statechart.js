@@ -21,6 +21,8 @@
 //
 // ========================================================================
 
+// TODO: [SC] move this code into SproutCore framework
+
 /**
   @namespace
   
