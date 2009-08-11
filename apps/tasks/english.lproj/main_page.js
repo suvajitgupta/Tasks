@@ -178,7 +178,7 @@ Tasks.mainPage = SC.Page.design({
     tasksList: SC.outlet('workspaceView.bottomRightView.childViews.0.contentView'),
     
     toolbarsView: SC.View.design(SC.Border, {
-      layout: { bottom: 42, height: 42, left: 0, right: 0 },
+      layout: { bottom: 0, height: 42, left: 0, right: 0 },
       childViews: 'projectsToolbarView tasksToolbarView'.w(),
       backgroundColor: '#DDD',
       borderStyle: SC.BORDER_TOP,
