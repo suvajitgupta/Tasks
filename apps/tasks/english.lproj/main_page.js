@@ -18,9 +18,9 @@ Tasks.mainPage = SC.Page.design({
 
   mainPane: SC.MainPane.design({
     
-    childViews: 'topView middleView bottomView'.w(),
+    childViews: 'dockView workspaceView toolbarsView'.w(),
     
-    topView: SC.View.design(SC.Border, {
+    dockView: SC.View.design(SC.Border, {
       layout: { top: 0, left: 0, right: 0, height: 42 },
       backgroundColor: '#DDD',
       borderStyle: SC.BORDER_BOTTOM,
@@ -128,7 +128,7 @@ Tasks.mainPage = SC.Page.design({
       
     }),
     
-    middleView: SC.SplitView.design({
+    workspaceView: SC.SplitView.design({
       layout: { top: 42, bottom: 42, left: 0, right: 0 },
       defaultThickness: 100,
       topLeftMaxThickness: 250,
@@ -177,8 +177,8 @@ Tasks.mainPage = SC.Page.design({
     projectsList: SC.outlet('middleView.topLeftView.childViews.0.contentView'),
     tasksList: SC.outlet('middleView.bottomRightView.childViews.0.contentView'),
     
-    bottomView: SC.View.design(SC.Border, {
-      layout: { bottom: 0, left: 0, right: 0, height: 42 },
+    toolbarsView: SC.View.design(SC.Border, {
+      layout: { bottom: 42, height: 42, left: 0, right: 0 },
       childViews: 'projectsToolbarView tasksToolbarView'.w(),
       backgroundColor: '#DDD',
       borderStyle: SC.BORDER_TOP,
