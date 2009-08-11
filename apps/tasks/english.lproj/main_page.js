@@ -32,15 +32,25 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       SC.LabelView.design({
-        layout: { centerY: 5, height: 30, left: 45, width: 115 },
+        layout: { centerY: 5, height: 30, left: 45, width: 75 },
         fontWeight: SC.BOLD_WEIGHT,
         controlSize: SC.LARGE_CONTROL_SIZE,
-        value: "_Tasks".loc() + " v" + Tasks.VERSION
+        value: "_Tasks".loc()
       }),
       
+      SC.LabelView.design({
+        layout: { centerY: -4, height: 15, left: 110, width: 30 },
+        controlSize: SC.SMALL_CONTROL_SIZE,
+        value: "v" + Tasks.VERSION
+      }),
+      
+      SC.SeparatorView.design({
+        layoutDirection: SC.LAYOUT_VERTICAL,
+        layout: { centerY: 0, height: 30, left: 145, width: 4 }
+      }),
+
       Tasks.WelcomeView.design({
-        layout: { centerY: 2, height: 30, left: 160, width: 95 },
-        textAlign: SC.ALIGN_RIGHT,
+        layout: { centerY: 2, height: 30, left: 155, width: 95 },
         controlSize: SC.SMALL_CONTROL_SIZE,
         valueBinding: SC.Binding.oneWay('CoreTasks.user')
       }),

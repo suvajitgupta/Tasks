@@ -1,7 +1,7 @@
 // ==========================================================================
 // Project: Tasks
 // ==========================================================================
-/*globals Tasks */
+/*globals CoreTasks Tasks */
 
 /** 
 
@@ -15,7 +15,7 @@ Tasks.WelcomeView = SC.LabelView.extend(
 /** @scope Tasks.WelcomeView.prototype */ {
   
   render: function(context, firstTime) {
-    context.push("Welcome".loc() + '<br>' + CoreTasks.get('user') + '!');
+    context.push("<center>Welcome".loc() + '<br>' + CoreTasks.get('user') + '</center>');
   }
   
 });
