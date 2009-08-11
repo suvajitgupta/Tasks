@@ -3,6 +3,7 @@
  *
  * @author Sean Eidemiller
  * @author Suvajit Gupta
+ * License: Licened under MIT license (see license.js)
  */
 /*globals Tasks sc_require */
 sc_require('core');
