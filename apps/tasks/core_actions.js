@@ -22,8 +22,6 @@ Tasks.mixin({
    * @param {String} user's password.
    */
   authenticate: function(loginName, password) {
-    // TODO: [SG] Should we be using parameters in any action functions?
-    // [SE] We don't in Orion but that doesn't mean it's bad, necessarily.
     switch (this.state.a) {
       case 1:
         this.goState('a', 2);
@@ -167,10 +165,10 @@ Tasks.mixin({
     var unallocatedIds = [];
 
     for (var i = 0; i < taskCount; i++) {
-      var t = tasks.objectAt(i);
-      all.push(t);
-      unallocated.push(t);
-      unallocatedIds.push(t.get('id'));
+      var task = tasks.objectAt(i);
+      all.push(task);
+      unallocated.push(task);
+      unallocatedIds.push(task.get('id'));
     }
 
     // Create the AllTasks project to hold all tasks in the system.
@@ -394,6 +392,7 @@ Tasks.mixin({
    * Delete selected project in master projects list.
    */
   deleteProject: function() {
+    
     // Get the selected project.
     var pc = this.get('projectsController');
     var sel = pc.get('selection');
@@ -402,14 +401,24 @@ Tasks.mixin({
       var project = sel.firstObject();
 
       // Select the first project in the list.
-      // FIXME: [SE, SG] Do this without using SC.RunLoop.begin/end, if possible.
+      // FIXME: [SC] Do this without using SC.RunLoop.begin/end, if possible.
       SC.RunLoop.begin();
       Tasks.getPath('mainPage.mainPane.projectsList').select(0);
       SC.RunLoop.end();
 
+      // Move all tasks in project to Inbox since they are now unallocated
+      var projectTasks = project.get('tasks');
+      var taskCount = projectTasks.get('length');
+      var inboxProject = CoreTasks.get('inbox');
+      for (var i = 0; i < taskCount; i++) {
+        var task = projectTasks.objectAt(i);
+        inboxProject.addTask(task);
+      }
+
       // Remove the project from the list and destroy.
       pc.removeObject(project);
       project.destroy();
+      
     }
   },
   
