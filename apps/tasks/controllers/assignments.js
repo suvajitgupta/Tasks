@@ -26,16 +26,20 @@ Tasks.assignmentsController = SC.ArrayController.create(
     sf = this._escapeMetacharacters(sf);
     var rx = new RegExp(sf, 'i');
     
-    var assignees = {}, assignee, ret = [];
+    var assignees = {}, assigneeName, assignee, ret = [];
     this.forEach( // group tasks by user & separate unassigned tasks
       function(rec){
         var user = rec.get('assignee');
-        assignee = user? user.get('displayName') : CoreTasks.USER_UNASSIGNED;
-        var tasks = assignees[assignee];
-        if(!tasks) assignees[assignee] = tasks = [];
+        assigneeName = user? user.get('displayName') : CoreTasks.USER_UNASSIGNED;
+        assignee = user;
+        var assigneeObj = assignees[assigneeName];
+        if(!assigneeObj) {
+          assigneeObj = { assignee: assignee, tasks: [] };
+          assignees[assigneeName] = assigneeObj;
+        }
         var name = rec.get('name');
         if(name.match(rx)) { // filter tasks that match search filter
-          tasks.push(rec);
+          assigneeObj.tasks.push(rec);
         }
       }, this);
   
@@ -44,23 +48,23 @@ Tasks.assignmentsController = SC.ArrayController.create(
       
       var selectedUserName = CoreTasks.get('store').find(CoreTasks.User, selectedAssignee.id).get('displayName');
 
-      for(assignee in assignees){ // list all assigned tasks
-        if(assignees.hasOwnProperty(assignee) && assignee === selectedUserName) {
-          ret.push(this._createAssignmentNodeHash(assignee, assignees[assignee]));
+      for(assigneeName in assignees){ // list all assigned tasks
+        if(assignees.hasOwnProperty(assigneeName) && assigneeName === selectedUserName) {
+          ret.push(this._createAssignmentNodeHash(assigneeName, assignees[assigneeName]));
         }
       }
       
     } else { // show tasks for all users
       
-      for(assignee in assignees){ // list unassigned tasks first
-        if(assignees.hasOwnProperty(assignee) && assignee === CoreTasks.USER_UNASSIGNED) {
-          ret.push(this._createAssignmentNodeHash(assignee, assignees[assignee]));
+      for(assigneeName in assignees){ // list unassigned tasks first
+        if(assignees.hasOwnProperty(assigneeName) && assigneeName === CoreTasks.USER_UNASSIGNED) {
+          ret.push(this._createAssignmentNodeHash(assigneeName, assignees[assigneeName]));
         }
       }
       
-      for(assignee in assignees){ // list all assigned tasks
-        if(assignees.hasOwnProperty(assignee) && assignee !== CoreTasks.USER_UNASSIGNED) {
-          ret.push(this._createAssignmentNodeHash(assignee, assignees[assignee]));
+      for(assigneeName in assignees){ // list all assigned tasks
+        if(assignees.hasOwnProperty(assigneeName) && assigneeName !== CoreTasks.USER_UNASSIGNED) {
+          ret.push(this._createAssignmentNodeHash(assigneeName, assignees[assigneeName]));
         }
       }
       
@@ -76,10 +80,11 @@ Tasks.assignmentsController = SC.ArrayController.create(
     return str? str.replace(s, '\\$1') : '';
   },
   
-  _createAssignmentNodeHash: function(assignee, tasks) {
+  _createAssignmentNodeHash: function(assigneeName, assigneeObj) {
     return SC.Object.create({
-      displayName: assignee,
-      treeItemChildren: tasks,
+      displayName: assigneeName,
+      assignee: assigneeObj.assignee,
+      treeItemChildren: assigneeObj.tasks,
       treeItemIsExpanded: YES
     });
   },
