@@ -358,6 +358,13 @@ Tasks.mixin({
     if (sel && sel.length() > 0) {
       var project = sel.firstObject();
 
+      // Confirm deletion for projects that have tasks
+      var projectTasks = project.get('tasks');
+      var taskCount = projectTasks.get('length');
+      if(taskCount > 0) {
+        if(!confirm("This project has tasks, are you sure you want to delete it?")) return;
+      }
+      
       // Select the first project in the list.
       // FIXME: [SC] Do this without using SC.RunLoop.begin/end, if possible.
       SC.RunLoop.begin();
@@ -365,8 +372,6 @@ Tasks.mixin({
       SC.RunLoop.end();
 
       // Move all tasks in project to Inbox since they are now unallocated
-      var projectTasks = project.get('tasks');
-      var taskCount = projectTasks.get('length');
       var inboxProject = CoreTasks.get('inbox');
       for (var i = 0; i < taskCount; i++) {
         var task = projectTasks.objectAt(i);

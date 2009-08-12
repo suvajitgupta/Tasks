@@ -36,7 +36,8 @@ v Set projects toolbar button enablement based on having a selection [SG] <EO> @
 - Disallow Inbox/AllTasks projects from being deleted [SG] <EO> @Done
 ^ Allow drag-n-drop Task reallocation to Projects [BB] <SG>
 v Add context menu to Delete a project [SG] <EG>
-- Add warning Alert box about deleting Project with Tasks [SG] <BB>
+- Add warning Alert box about deleting Project with Tasks [SG] @Done
+- Don't create a project if it already exists during Import, disallow duplicates during "Add Project" [SG]
 v Add hover tooltip showing number of Tasks in project [SG] <EG>
 v Make Master list of Projects collapsible [SG] <EG>
 
