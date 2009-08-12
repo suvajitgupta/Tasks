@@ -16,7 +16,7 @@ sc_require('core');
 Tasks.importDataController = SC.ObjectController.create(
 /** @scope Orion.ImportDataController.prototype */ {
     data: '',
-    currentProject: CoreTasks.get('inbox'),
+    currentProject: null,
     
     openPanel: function(){
       var panel = Tasks.getPath('importDataPage.panel');
@@ -45,6 +45,7 @@ Tasks.importDataController = SC.ObjectController.create(
       
       var lines = data.split('\n');
       var store = CoreTasks.get('store');
+      this.currentProject = CoreTasks.get('inbox');
 
       for (var i = 0; i < lines.length; i++) {
 
@@ -108,14 +109,17 @@ Tasks.importDataController = SC.ObjectController.create(
         }
         else { // a Project
           var projectHash = CoreTasks.Project.parse(line);
-          console.log ('Project:\t\t' + JSON.stringify(projectHash));
+          // console.log ('Project:\t\t' + JSON.stringify(projectHash));
+          
+          if(CoreTasks.isExistingProject(projectHash.name)) continue;
+          
           var projectRecord = store.createRecord(CoreTasks.Project, projectHash);
           if(!projectRecord) {
             console.log('Project Import Error: project creation failed!');
             continue;
           }
 
-          Tasks.set('currentProject', projectRecord);
+          this.currentProject = projectRecord;
           Tasks.get('projectsController').addObject(projectRecord);
         }
       }
@@ -126,9 +130,8 @@ Tasks.importDataController = SC.ObjectController.create(
       var taskRecord = CoreTasks.get('store').materializeRecord(storeKey);
       
       // FIXME: [SG/SE] Owing to async calls all tasks are assigned to the last Project!
-      var currentProject = Tasks.get('currentProject');
-      console.log("DEBUG: adding to project " + currentProject.get('name'));
-      currentProject.addTask(taskRecord);
+      // console.log("DEBUG: adding to project " + this.currentProject.get('name'));
+      this.currentProject.addTask(taskRecord);
 
       CoreTasks.get('allTasks').addTask(taskRecord);
       

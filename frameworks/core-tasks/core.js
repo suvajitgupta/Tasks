@@ -100,6 +100,21 @@ CoreTasks = SC.Object.create({
   },
 
   /**
+   * Check if a project of a given name already exists.
+   *
+   * @param {String} project name.
+   * @returns {Boolean) return true if project of given name already exists, false otherwise.
+   */
+  isExistingProject: function(projectName) {
+    var projects = CoreTasks.get('store').findAll(SC.Query.create({
+      recordType: CoreTasks.Project, 
+      conditions: 'name = %@',
+      parameters: [projectName]
+    }));
+    return projects.length() > 0? true : false;
+  },
+
+  /**
    * Generate unique ID for store record creation.
    *
    * @param (String) name of unimmplemented function
