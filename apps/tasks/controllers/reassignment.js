@@ -1,5 +1,5 @@
 // ==========================================================================
-// Project:   Tasks.reassignController
+// Project:   Tasks.reassignmentController
 // ==========================================================================
 /*globals Tasks */
 
@@ -10,8 +10,8 @@
   @extends SC.Object
   @author Brandon Blatnick
 */
-Tasks.reassignController = SC.Object.create(SC.CollectionViewDelegate,
-/** @scope Tasks.reassignController.prototype */ {
+Tasks.reassignmentController = SC.Object.create(SC.CollectionViewDelegate,
+/** @scope Tasks.reassignmentController.prototype */ {
 
   // ..........................................................
   // DRAG SOURCE SUPPORT
@@ -55,7 +55,6 @@ Tasks.reassignController = SC.Object.create(SC.CollectionViewDelegate,
       var source = drag.get('source');
       if (source && source.delegate === this) return SC.DRAG_MOVE;
       else return SC.DRAG_COPY;
-
     } else return SC.DRAG_NONE;
   },
   
@@ -68,7 +67,7 @@ Tasks.reassignController = SC.Object.create(SC.CollectionViewDelegate,
   collectionViewPerformDragOperation: function(view, drag, dragOp, idx, dropOp) {
     
     // tells the CollectionView to do nothing
-    // TODO: Probably a better way to do this.  Shouldn't even allow the first position to be draggable.
+    // TODO: [BB] Probably a better way to do this.  Shouldn't even allow the first position to be draggable.
     if (idx === 0) {
       return SC.DRAG_MOVE; 
     }
@@ -96,4 +95,4 @@ Tasks.reassignController = SC.Object.create(SC.CollectionViewDelegate,
     
     return SC.DRAG_NONE;
   }
-}) ;
+});

@@ -1,11 +1,14 @@
 #A comment
-- An unallocated task [hacker] @Done
+
+- An unallocated task [SG] @Done
+
 My Project
-^ My first task {2} <enemy1> @Risky
+^ My first task {2} <BM> @Risky
 | description line1
 | description line2
-- My second task $Bug [cyberpunk] <bigboss> %Failed
-v My third task @Active $Feature {12-14} %Passed
+- My second task $Bug <SG> [SE] %Failed
+v My third task {12-14} $Feature @Active %Passed
+
 Your Project {12}
-- Your first task {2} [cyberpunk] <enemy1> @Done
-- Your second task {4-5} [boo] <bigboss> @NoIdea
+- Your first task {2} <BM> [MB] @Done
+- Your second task {4-5} <SG> [MB] $Feature @Active

@@ -40,15 +40,15 @@ Tasks.exportDataController = SC.ObjectController.create(
             data += val + ' ';
             data += task.get('displayName');
             user = task.get('submitter');
-            if (user) data += ' <' + user.get('name') + '>';
+            if (user) data += ' <' + user.get('loginName') + '>';
             user = task.get('assignee');
-            if (user) data += ' [' + user.get('name') + ']';
+            if (user) data += ' [' + user.get('loginName') + ']';
             val = task.get('type');
-            if(val !== CoreTasks.TASK_TYPE_OTHER)  data += ' $' + val;
+            if(val !== CoreTasks.TASK_TYPE_OTHER) data += ' $' + val.loc();
             val = task.get('status');
-            if(val !== CoreTasks.TASK_STATUS_PLANNED)  data += ' @' + val;
+            if(val !== CoreTasks.TASK_STATUS_PLANNED) data += ' @' + val.loc();
             val = task.get('validation');
-            if(val !== CoreTasks.TASK_VALIDATION_UNTESTED)  data += ' %' + val;
+            if(val !== CoreTasks.TASK_VALIDATION_UNTESTED)data += ' %' + val.loc();
             val = task.get('description');
             if(val) {
               var lines = val.split('\n');
