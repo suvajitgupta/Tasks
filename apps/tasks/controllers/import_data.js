@@ -16,7 +16,7 @@ sc_require('core');
 Tasks.importDataController = SC.ObjectController.create(
 /** @scope Orion.ImportDataController.prototype */ {
     data: '',
-    currentProject: null,
+    currentProject: CoreTasks.get('inbox'),
     
     openPanel: function(){
       var panel = Tasks.getPath('importDataPage.panel');
@@ -123,13 +123,14 @@ Tasks.importDataController = SC.ObjectController.create(
     
     _addTaskFromImportSuccess: function(storeKey) {
       
-      var task = CoreTasks.get('store').materializeRecord(storeKey);
+      var taskRecord = CoreTasks.get('store').materializeRecord(storeKey);
       
-      var project = Tasks.get('currentProject');
-      if (!project) project = CoreTasks.get('inbox');
-      project.addTask(task);
+      // FIXME: [SG/SE] Owing to async calls all tasks are assigned to the last Project!
+      var currentProject = Tasks.get('currentProject');
+      console.log("DEBUG: adding to project " + currentProject.get('name'));
+      currentProject.addTask(taskRecord);
 
-      CoreTasks.get('allTasks').addTask(task);
+      CoreTasks.get('allTasks').addTask(taskRecord);
       
     },
 

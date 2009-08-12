@@ -102,6 +102,7 @@ v Develop Mobile client (using PhoneGap) [SG] <MB>
 
 Testing/Rollout
 - Manually test & note/fix showstoppers [SG] <BM> @Active
+^ Click on AllTasks, scroll down, select a task, then click on another project - it will be blank! [SG] $Bug
 - Create automated test scripts using Selenium [BM] <SG>
 v Conduct usability tests, collect feedback, fix bugs [SG] <MG>
 - Create Release Notes (features, limitations/bugs, list external components) [SG] <SE>
