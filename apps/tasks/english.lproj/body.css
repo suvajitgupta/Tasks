@@ -102,7 +102,7 @@ line-height:18px;
 	border-color: black;
 }
 
-.clear-search-icon {
+.delete-search-filter-icon {
   background: static_url('images/delete.png');
 	height: 16px;
   width: 16px;

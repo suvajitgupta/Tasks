@@ -46,7 +46,7 @@ Task Manager GUI
 - Show type via different icons [SG] <JH2> @Done
 - Show priority (font style), status (font color), validation (background color) [SG] <MB> @Done
 - Add Status/Priority/Validation radio buttons in tasks toolbar [SG] <EO> @Done
-^ Add Search box in top toolbar: support type-ahead searching [SG] <DC> @Done
+^ Add Search Filter & corresponding delete button in top toolbar: support type-ahead searching [SG] <DC> @Done
 v Set tasks toolbar button enablement based on having a selection [SG] <EO> @Done
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done
 ^ Add "+" & "-" buttons in tasks toolbar [SG] <SE> @Done

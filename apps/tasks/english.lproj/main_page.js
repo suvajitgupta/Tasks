@@ -78,22 +78,17 @@ Tasks.mainPage = SC.Page.design({
         valueBinding: 'Tasks.assignmentsController.searchFilter' // TODO: [SG] bind to searchController instead
       }),
       
-      SC.View.design({
+      SC.View.design({ // Search Filter delete button
         layout: { left: 745, width: 16, centerY: 0, height: 16 },
         isVisible: NO,
-        classNames: ['clear-search-icon'],
+        classNames: ['delete-search-filter-icon'],
         
         mouseDown: function() {
           Tasks.assignmentsController.set('searchFilter', '');
         },
         
-        _search_observer: function() {
-          var searchFilter = Tasks.assignmentsController.get('searchFilter');
-          if (searchFilter === '') {
-            this.set('isVisible', NO);
-          } else {
-            this.set('isVisible', YES);
-          }
+        _deleteSearchFilterEnabler: function() {
+          this.set('isVisible', Tasks.assignmentsController.get('searchFilter') !== '');
         }.observes('Tasks.assignmentsController.searchFilter')
         
       }),
