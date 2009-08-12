@@ -78,6 +78,26 @@ Tasks.mainPage = SC.Page.design({
         valueBinding: 'Tasks.assignmentsController.searchFilter' // TODO: [SG] bind to searchController instead
       }),
       
+      SC.View.design({
+        layout: { left: 745, width: 16, centerY: 0, height: 16 },
+        isVisible: NO,
+        classNames: ['clear-search-icon'],
+        
+        mouseDown: function() {
+          Tasks.assignmentsController.set('searchFilter', '');
+        },
+        
+        _search_observer: function() {
+          var searchFilter = Tasks.assignmentsController.get('searchFilter');
+          if (searchFilter === '') {
+            this.set('isVisible', NO);
+          } else {
+            this.set('isVisible', YES);
+          }
+        }.observes('Tasks.assignmentsController.searchFilter')
+        
+      }),
+      
       SC.ButtonView.design({
         layout: { centerY: 0, height: 24, right: 195, width: 60 },
         title:  "_Import".loc(),

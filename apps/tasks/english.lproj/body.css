@@ -101,3 +101,9 @@ line-height:18px;
 	border-size: 1px;
 	border-color: black;
 }
+
+.clear-search-icon {
+  background: static_url('images/delete.png');
+	height: 16px;
+  width: 16px;
+}
