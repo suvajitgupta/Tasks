@@ -50,16 +50,15 @@ Tasks.importDataController = SC.ObjectController.create(
       for (var i = 0; i < lines.length; i++) {
 
         var line = lines[i];
-        // console.log("Parsing line '" + line + "'\n");
 
         if (line.indexOf('#') === 0) { // a Comment
           var commentLine = line.slice(1);
-          // console.log('Commment:\t' + commentLine);
+          console.log('Commment:\t' + commentLine);
         }
         else if (line.match(/^[\^\-v][ ]/)) { // a Task
 
           var taskHash = CoreTasks.Task.parse(line);
-          // console.log ('Task:\t\t' + JSON.stringify(taskHash));
+          console.log ('Task:\t\t' + JSON.stringify(taskHash));
 
           if(taskHash.assignee) {
           var assigneeUser = CoreTasks.getUser(taskHash.assignee);
@@ -101,15 +100,15 @@ Tasks.importDataController = SC.ObjectController.create(
         }
         else if (line.indexOf('| ') === 0) { // a Description
           var descriptionLine = line.slice(2);
-          // console.log('Description:\t' + descriptionLine);
-          // TODO: [SG] import multi-line task description
+          console.log('Description:\t' + descriptionLine);
+          // TODO: [SG] aggregate multi-line task description & assign to last task
         }
         else if (line.search(/^\s*$/) === 0) { // a blank line
-          // console.log('Blank Line:');
+          console.log('Blank Line:');
         }
         else { // a Project
           var projectHash = CoreTasks.Project.parse(line);
-          // console.log ('Project:\t\t' + JSON.stringify(projectHash));
+          console.log ('Project:\t\t' + JSON.stringify(projectHash));
           
           if(CoreTasks.isExistingProject(projectHash.name)) continue;
           
