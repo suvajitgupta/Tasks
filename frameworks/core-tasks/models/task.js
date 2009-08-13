@@ -133,49 +133,54 @@ CoreTasks.Task = CoreTasks.Record.extend({
    */
   displayName: function(key, value) {
     if (value !== undefined) {
-      var hash = CoreTasks.Task.parse(value, false);
+      var taskHash = CoreTasks.Task.parse(value, false);
+      // console.log("PARSED: " + JSON.stringify(taskHash));
       
-      if(hash.priority) {
+      if(taskHash.priority) {
         this.propertyWillChange('priority');
-        this.writeAttribute('priority', hash.priority);
+        this.writeAttribute('priority', taskHash.priority);
         this.propertyDidChange('priority');
       }
       
       this.propertyWillChange('name');
-      this.writeAttribute('name', hash.name);
+      this.writeAttribute('name', taskHash.name);
       this.propertyDidChange('name');
       
       this.propertyWillChange('effort');
-      this.writeAttribute('effort', hash.effort);
+      this.writeAttribute('effort', taskHash.effort);
       this.propertyDidChange('effort');
       
-      if(hash.submitter) {
+      if(taskHash.submitter) {
         this.propertyWillChange('submitter');
-        this.writeAttribute('submitter', hash.submitter);
+        var submitterUser = CoreTasks.getUser(taskHash.submitter);
+        if (!submitterUser) console.log('Task Editing Error - no such submitter: ' + taskHash.submitter);
+        else this.writeAttribute('submitter', submitterUser.get('id'));
         this.propertyDidChange('submitter');
       }
       
-      if(hash.assignee) {
+      if(taskHash.assignee) {
         this.propertyWillChange('assignee');
-        this.writeAttribute('assignee', hash.assignee);
+        var assigneeUser = CoreTasks.getUser(taskHash.assignee);
+        if (!assigneeUser) console.log('Task Editing Error - no such assignee: ' + taskHash.assignee);
+        else this.writeAttribute('assignee', assigneeUser.get('id'));
         this.propertyDidChange('assignee');
       }
       
-      if(hash.type) {
+      if(taskHash.type) {
         this.propertyWillChange('type');
-        this.writeAttribute('type', hash.type);
+        this.writeAttribute('type', taskHash.type);
         this.propertyDidChange('type');
       }
       
-      if(hash.status) {
+      if(taskHash.status) {
         this.propertyWillChange('status');
-        this.writeAttribute('status', hash.status);
+        this.writeAttribute('status', taskHash.status);
         this.propertyDidChange('status');
       }
       
-      if(hash.validation) {
+      if(taskHash.validation) {
         this.propertyWillChange('validation');
-        this.writeAttribute('validation', hash.validation);
+        this.writeAttribute('validation', taskHash.validation);
         this.propertyDidChange('validation');
       }
 

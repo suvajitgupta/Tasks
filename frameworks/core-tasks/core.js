@@ -26,6 +26,9 @@ CoreTasks = SC.Object.create({
   // TODO: [SE] Set the mode via URL.
   mode: null,
 
+  // The logged in user.
+  user: null,
+
   /**
    * A special 'inbox' project where all unallocated tasks are grouped.
    *

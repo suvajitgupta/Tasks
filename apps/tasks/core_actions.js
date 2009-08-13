@@ -63,7 +63,7 @@ Tasks.mixin({
     if (users && users.length() > 0) {
       var user = users.objectAt(0);
       if (loginName === user.get('loginName')) {
-        CoreTasks.set('user', loginName);
+        CoreTasks.set('user', user);
         authenticated = YES;
       }
     }
@@ -390,7 +390,9 @@ Tasks.mixin({
    * Add a new task to tasks detail list.
    */
   addTask: function() {
-    var task = CoreTasks.createRecord(CoreTasks.Task, CoreTasks.Task.NEW_TASK_HASH);
+    
+    var taskHash = SC.merge({'submitter': CoreTasks.getPath('user.id')}, CoreTasks.Task.NEW_TASK_HASH);
+    var task = CoreTasks.createRecord(CoreTasks.Task, taskHash);
     // task.id = CoreTasks.generateId(); // For FIXTUREs
 
     // Get selected task and get its assignee so that we can set the same assignee on the
@@ -404,7 +406,6 @@ Tasks.mixin({
         var taskAssignee = selectedObject.get('assignee');
         if (taskAssignee) {
           task.set('assignee', taskAssignee);
-          console.log('Assignee: ' + taskAssignee.get('name'));
         }
       }
     }
