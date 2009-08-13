@@ -91,18 +91,31 @@ Tasks.assignmentsController = SC.ArrayController.create(
     var displayName = assigneeName;
     
     // FIXME: [SG] need to trigger content changes after a task is in-cell edited or it's priority changed since these may affect the user's totalEffort
-    var effort, totalEffort = 0;
+    var effortString, totalEffortMin = 0, totalEffortMax = 0, effortMin, effortMax;
     var task, tasks = assigneeObj.tasks;
     var len = tasks.get('length');
     for (var i = 0; i < len; i++) {
       task = tasks.objectAt(i);
-      effort = task.get('effort');
-      if(effort && task.get('priority') !== CoreTasks.TASK_PRIORITY_LOW) {
+      effortString = task.get('effort');
+      if(effortString && task.get('priority') !== CoreTasks.TASK_PRIORITY_LOW) {
         // sum up effort for High/Medium priority tasks
-        totalEffort += parseInt(effort, 10);
+        effortMin = parseInt(effortString, 10);
+        var idx = effortString.indexOf('-'); // see if effort is a range
+        if(idx === -1) { // not a range
+          effortMax = effortMin;
+        }
+        else { // effort IS a range, extract max
+          effortMax = parseInt(effortString.slice(idx+1), 10);
+        }
+        totalEffortMin += effortMin;
+        totalEffortMax += effortMax;
       }
     }
-    if(totalEffort !== 0) {
+    if(totalEffortMin !== 0) {
+      var totalEffort = '' + totalEffortMin;
+      if (totalEffortMax !== totalEffortMin) {
+        totalEffort += '-' + totalEffortMax;
+      }
       displayName = displayName + ' {' + totalEffort + '}';
     }
     
