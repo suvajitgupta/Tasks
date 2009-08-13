@@ -28,6 +28,9 @@ Project Manager GUI
 ^ Show Project name & time left in curly braces (if specified) [SG] <JH2> @Done
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done
 ^ Add "+" & "-" buttons in projects Toolbar [SG] <SC> @Done
+- Add warning Alert box about deleting Project with Tasks [SG] @Done
+- Don't create a project if it already exists during Import [SG] @Done
+- Disallow duplicates during "Add Project" [SG]
 v Add summary in projects toolbar showing number of Tasks for selected Project [SG] <MB> @Done
 v Set projects toolbar button enablement based on having a selection [SG] <EO> @Done
 ^ Add drag-n-drop reordering [SG] @Done
@@ -36,8 +39,6 @@ v Set projects toolbar button enablement based on having a selection [SG] <EO> @
 - Disallow Inbox/AllTasks projects from being deleted [SG] <EO> @Done
 ^ Allow drag-n-drop Task reallocation to Projects [BB] <SG>
 v Add context menu to Delete a project [SG] <EG>
-- Add warning Alert box about deleting Project with Tasks [SG] @Done
-- Don't create a project if it already exists during Import, disallow duplicates during "Add Project" [SG]
 v Add hover tooltip showing number of Tasks in project [SG] <EG>
 v Make Master list of Projects collapsible [SG] <EG>
 
@@ -51,12 +52,12 @@ Task Manager GUI
 v Set tasks toolbar button enablement based on having a selection [SG] <EO> @Done
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done
 ^ Add "+" & "-" buttons in tasks toolbar [SG] <SE> @Done
-- Allow "+" button to be pressed a second time to keep in data entry mode, Esc will exit mode [SG] <BB>
-^ Add modal popup form for editing [SG] <BB>
-^ Show effort subtotals (exclude Low items) in curly braces for load balancing [SG] @Active
-^ Append "?" for range-based subtotals including unknown efforts [SG] <BB>
+v Allow "+" button to be pressed a second time to keep in data entry mode, Esc will exit mode [SG] <MB>
+^ Show effort subtotals (exclude Low items) in curly braces for load balancing [SG] @Done
+- Append "?" for range-based subtotals including unknown efforts [SG]
 ^ Allow drag-n-drop reordering (preserve order when persisting) [SG] @Done
 ^ Allow drag-n-drop reassignment [BB] <SG>  @Done
+^ Add modal popup form for editing [SG] <BB>
 v Add context menu & hotkeys to Edit/Cut/Copy/Paste/Delete/Duplicate a task [SG] <EG>
 v Add hover tooltip showing Description [SG] <EG>
 
