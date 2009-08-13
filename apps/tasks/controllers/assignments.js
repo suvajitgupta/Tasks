@@ -26,31 +26,30 @@ Tasks.assignmentsController = SC.ArrayController.create(
     sf = this._escapeMetacharacters(sf);
     var rx = new RegExp(sf, 'i');
     
-    var assignees = {}, assigneeName, assignee, ret = [];
+    var assignees = {}, assigneeName, assignee, assignmentNodes = [];
     this.forEach( // group tasks by user & separate unassigned tasks
-      function(rec){
-        var user = rec.get('assignee');
-        assigneeName = user? user.get('loginName') : CoreTasks.USER_UNASSIGNED;
-        assignee = user;
+      function(task){
+        assignee = task.get('assignee');
+        assigneeName = assignee? assignee.get('displayName') : CoreTasks.USER_UNASSIGNED;
         var assigneeObj = assignees[assigneeName];
         if(!assigneeObj) {
           assigneeObj = { assignee: assignee, tasks: [] };
           assignees[assigneeName] = assigneeObj;
         }
-        var name = rec.get('name');
-        if(name.match(rx)) { // filter tasks that match search filter
-          assigneeObj.tasks.push(rec);
+        var taskName = task.get('name');
+        if(taskName.match(rx)) { // filter tasks that match search filter
+          assigneeObj.tasks.push(task);
         }
       }, this);
   
     var selectedAssignee = this.get('assigneeSelection');
     if(selectedAssignee){ // only show tasks for selected user
       
-      var selectedUserName = CoreTasks.get('store').find(CoreTasks.User, selectedAssignee.id).get('loginName');
+      var selectedUserName = CoreTasks.get('store').find(CoreTasks.User, selectedAssignee.id).get('displayName');
 
       for(assigneeName in assignees){ // list all assigned tasks
         if(assignees.hasOwnProperty(assigneeName) && assigneeName === selectedUserName) {
-          ret.push(this._createAssignmentNodeHash(assigneeName, assignees[assigneeName]));
+          assignmentNodes.push(this._createAssignmentNode(assigneeName, assignees[assigneeName]));
         }
       }
       
@@ -58,19 +57,19 @@ Tasks.assignmentsController = SC.ArrayController.create(
       
       for(assigneeName in assignees){ // list unassigned tasks first
         if(assignees.hasOwnProperty(assigneeName) && assigneeName === CoreTasks.USER_UNASSIGNED) {
-          ret.push(this._createAssignmentNodeHash(assigneeName, assignees[assigneeName]));
+          assignmentNodes.push(this._createAssignmentNode(assigneeName, assignees[assigneeName]));
         }
       }
       
       for(assigneeName in assignees){ // list all assigned tasks
         if(assignees.hasOwnProperty(assigneeName) && assigneeName !== CoreTasks.USER_UNASSIGNED) {
-          ret.push(this._createAssignmentNodeHash(assigneeName, assignees[assigneeName]));
+          assignmentNodes.push(this._createAssignmentNode(assigneeName, assignees[assigneeName]));
         }
       }
       
     }
       
-    this.set('assignedTasks', SC.Object.create({ treeItemChildren: ret, treeItemIsExpanded: YES }));
+    this.set('assignedTasks', SC.Object.create({ treeItemChildren: assignmentNodes, treeItemIsExpanded: YES }));
     
   },
   
@@ -80,11 +79,37 @@ Tasks.assignmentsController = SC.ArrayController.create(
     return str? str.replace(s, '\\$1') : '';
   },
   
-  _createAssignmentNodeHash: function(assigneeName, assigneeObj) {
+  /**
+   * Create a node in the tree showing a user's tasks.
+   *
+   * @param {String} assignee name.
+   * @param {Object} a hash of assignee ID and tasks array.
+   * @returns {Object) return a node to be inserted into the tree view.
+   */
+  _createAssignmentNode: function(assigneeName, assigneeObj) {
+    
+    var displayName = assigneeName;
+    
+    // FIXME: [SG] need to trigger content changes after a task is in-cell edited or it's priority changed since these may affect the user's totalEffort
+    var effort, totalEffort = 0;
+    var task, tasks = assigneeObj.tasks;
+    var len = tasks.get('length');
+    for (var i = 0; i < len; i++) {
+      task = tasks.objectAt(i);
+      effort = task.get('effort');
+      if(effort && task.get('priority') !== CoreTasks.TASK_PRIORITY_LOW) {
+        // sum up effort for High/Medium priority tasks
+        totalEffort += parseInt(effort, 10);
+      }
+    }
+    if(totalEffort !== 0) {
+      displayName = displayName + ' {' + totalEffort + '}';
+    }
+    
     return SC.Object.create({
-      displayName: assigneeName,
+      displayName: displayName,
       assignee: assigneeObj.assignee,
-      treeItemChildren: assigneeObj.tasks,
+      treeItemChildren: tasks,
       treeItemIsExpanded: YES
     });
   },

@@ -53,7 +53,7 @@ v Set tasks toolbar button enablement based on having a selection [SG] <EO> @Don
 ^ Add "+" & "-" buttons in tasks toolbar [SG] <SE> @Done
 - Allow "+" button to be pressed a second time to keep in data entry mode, Esc will exit mode [SG] <BB>
 ^ Add modal popup form for editing [SG] <BB>
-^ Show effort subtotals (exclude Low items) in curly braces for load balancing [SG] <SE>
+^ Show effort subtotals (exclude Low items) in curly braces for load balancing [SG] @Active
 ^ Append "?" for range-based subtotals including unknown efforts [SG] <BB>
 ^ Allow drag-n-drop reordering (preserve order when persisting) [SG] @Done
 ^ Allow drag-n-drop reassignment [BB] <SG>  @Done
