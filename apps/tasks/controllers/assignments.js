@@ -21,6 +21,8 @@ Tasks.assignmentsController = SC.ArrayController.create(
   searchFilter: null,
   
   showAssignments: function() { // show tasks for selected user that matches search filter
+   
+    // TODO: [SG] redraw if task assignee changes after merging in JH2 code
 
     var sf = this.get('searchFilter');
     sf = this._escapeMetacharacters(sf);
