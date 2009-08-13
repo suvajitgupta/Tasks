@@ -1,5 +1,5 @@
 // ==========================================================================
-// Project: Tasks
+// Project: Tasks 
 // ==========================================================================
 /*globals CoreTasks Tasks */
 
@@ -19,6 +19,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
   assignedTasks: null,
   assigneeSelection: null,
   searchFilter: null,
+  
   
   showAssignments: function() { // show tasks for selected user that matches search filter
    
@@ -91,15 +92,21 @@ Tasks.assignmentsController = SC.ArrayController.create(
   _createAssignmentNode: function(assigneeName, assigneeObj) {
     
     var displayName = assigneeName;
-    
     // FIXME: [SG] need to trigger content changes after a task is in-cell edited or it's priority changed since these may affect the user's totalEffort
     var effortString, totalEffortMin = 0, totalEffortMax = 0, effortMin, effortMax;
     var task, tasks = assigneeObj.tasks;
     var len = tasks.get('length');
     for (var i = 0; i < len; i++) {
       task = tasks.objectAt(i);
-      effortString = task.get('effort');
-      if(effortString && task.get('priority') !== CoreTasks.TASK_PRIORITY_LOW) {
+      
+      // CHANGED: [JH2] I changed the way that this methods works so that it would add observers to the effort and priority properties of each task to fix the issue stated above.
+      task.removeObserver('effort',Tasks.assignmentsController,'_contentHasChanged');
+      task.removeObserver('priority',Tasks.assignmentsController,'_contentHasChanged');
+      task.addObserver('effort',Tasks.assignmentsController,'_contentHasChanged');
+      task.addObserver('priority',Tasks.assignmentsController,'_contentHasChanged');
+      
+      effort = task.get('effort');
+      if(effort && task.get('priority') !== CoreTasks.TASK_PRIORITY_LOW) {
         // sum up effort for High/Medium priority tasks
         effortMin = parseInt(effortString, 10);
         var idx = effortString.indexOf('-'); // see if effort is a range
