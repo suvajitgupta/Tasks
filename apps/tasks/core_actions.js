@@ -343,6 +343,7 @@ Tasks.mixin({
     var itemView = listView.itemViewForContentIndex(idx);
 
     // Wait for run loop to complete before method is called.
+    // FIXME: [SC] need to highlight entire item when starting to edit so that user can simply start typing
     CoreTasks.invokeLater(itemView.beginEditing.bind(itemView));
   },
   
