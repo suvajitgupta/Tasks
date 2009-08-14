@@ -96,15 +96,13 @@ Tasks.assignmentsController = SC.ArrayController.create(
     for (var i = 0; i < len; i++) {
       task = tasks.objectAt(i);
       
-      // Add observers to the effort and priority properties of each task to make the assignmentsController rebuild the nodes.
+      // Add observers to certain task properties that can require the assignmentsController to redraw.
       task.removeObserver('effort',Tasks.assignmentsController,'_contentHasChanged');
       task.removeObserver('priority',Tasks.assignmentsController,'_contentHasChanged');
       task.removeObserver('assignee',Tasks.assignmentsController,'_contentHasChanged');
       task.addObserver('effort',Tasks.assignmentsController,'_contentHasChanged');
       task.addObserver('priority',Tasks.assignmentsController,'_contentHasChanged');
       task.addObserver('assignee',Tasks.assignmentsController,'_contentHasChanged');
-      // TODO: [SG] redraw if task assignee changes after merging in JH2 code
-
       
       // Extract/total effort for each taek (simple number or a range)
       effortString = task.get('effort');
