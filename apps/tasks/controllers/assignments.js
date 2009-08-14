@@ -23,8 +23,6 @@ Tasks.assignmentsController = SC.ArrayController.create(
   
   showAssignments: function() { // show tasks for selected user that matches search filter
    
-    // TODO: [SG] redraw if task assignee changes after merging in JH2 code
-
     var sf = this.get('searchFilter');
     sf = this._escapeMetacharacters(sf);
     var rx = new RegExp(sf, 'i');
@@ -92,19 +90,23 @@ Tasks.assignmentsController = SC.ArrayController.create(
   _createAssignmentNode: function(assigneeName, assigneeObj) {
     
     var displayName = assigneeName;
-    // FIXME: [SG] need to trigger content changes after a task is in-cell edited or it's priority changed since these may affect the user's totalEffort
     var effortString, totalEffortMin = 0, totalEffortMax = 0, effortMin, effortMax;
     var task, tasks = assigneeObj.tasks;
     var len = tasks.get('length');
     for (var i = 0; i < len; i++) {
       task = tasks.objectAt(i);
       
-      // CHANGED: [JH2] I changed the way that this methods works so that it would add observers to the effort and priority properties of each task to fix the issue stated above.
+      // Add observers to the effort and priority properties of each task to make the assignmentsController rebuild the nodes.
       task.removeObserver('effort',Tasks.assignmentsController,'_contentHasChanged');
       task.removeObserver('priority',Tasks.assignmentsController,'_contentHasChanged');
+      task.removeObserver('assignee',Tasks.assignmentsController,'_contentHasChanged');
       task.addObserver('effort',Tasks.assignmentsController,'_contentHasChanged');
       task.addObserver('priority',Tasks.assignmentsController,'_contentHasChanged');
+      task.addObserver('assignee',Tasks.assignmentsController,'_contentHasChanged');
+      // TODO: [SG] redraw if task assignee changes after merging in JH2 code
+
       
+      // Extract/total effort for each taek (simple number or a range)
       effortString = task.get('effort');
       if(effortString && task.get('priority') !== CoreTasks.TASK_PRIORITY_LOW) {
         // sum up effort for High/Medium priority tasks
