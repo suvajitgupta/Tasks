@@ -103,7 +103,7 @@ Tasks.importDataController = SC.ObjectController.create(
             }
           };
 
-          taskRecord.commitRecord(params);
+          taskRecord.commitRecord(SC.clone(params));
         }
         else if (line.indexOf('| ') === 0) { // a Description
           var descriptionLine = line.slice(2);
