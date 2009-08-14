@@ -45,7 +45,7 @@ Tasks.importDataController = SC.ObjectController.create(
       
       var lines = data.split('\n');
       var store = CoreTasks.get('store');
-      this.currentProject = CoreTasks.get('inbox');
+      var project = CoreTasks.get('inbox');
 
       for (var i = 0; i < lines.length; i++) {
 
@@ -91,9 +91,17 @@ Tasks.importDataController = SC.ObjectController.create(
           }
 
           // Immediately try to commit the task so that we get an ID.
+          var that = this ;
           var params = {
-            successCallback: this._addTaskFromImportSuccess.bind(this),
-            failureCallback: this._addTaskFromImportFailure.bind(this)
+            successCallback: function(storeKey) {
+              var project = project ;
+              that._addTaskFromImportSuccess(storeKey, project) ;
+            },
+            
+            failureCallback: function(storeKey) {
+              var project = project ;
+              that._addTaskFromImportFailure(storeKey, project) ;
+            }
           };
 
           taskRecord.commitRecord(params);
@@ -112,31 +120,30 @@ Tasks.importDataController = SC.ObjectController.create(
           
           if(CoreTasks.isExistingProject(projectHash.name)) continue;
           
-          var projectRecord = store.createRecord(CoreTasks.Project, projectHash);
-          if(!projectRecord) {
+          project = store.createRecord(CoreTasks.Project, projectHash);
+          if(!project) {
             console.log('Project Import Error: project creation failed!');
             continue;
           }
 
-          this.currentProject = projectRecord;
-          Tasks.get('projectsController').addObject(projectRecord);
+          Tasks.get('projectsController').addObject(project);
         }
       }
     },
     
-    _addTaskFromImportSuccess: function(storeKey) {
+    _addTaskFromImportSuccess: function(storeKey, project) {
       
       var taskRecord = CoreTasks.get('store').materializeRecord(storeKey);
       
       // FIXME: [SG/SE] Owing to async calls all tasks are assigned to the last Project!
       // console.log("DEBUG: adding to project " + this.currentProject.get('name'));
-      this.currentProject.addTask(taskRecord);
+      project.addTask(taskRecord);
 
       CoreTasks.get('allTasks').addTask(taskRecord);
       
     },
 
-    _addTaskFromImportFailure: function(storeKey) {
+    _addTaskFromImportFailure: function(storeKey, project) {
       // TODO: [SE] Implement addTaskFromImportFailure
     }
     
