@@ -105,8 +105,8 @@ Tasks.assignmentsController = SC.ArrayController.create(
       task.addObserver('effort',Tasks.assignmentsController,'_contentHasChanged');
       task.addObserver('priority',Tasks.assignmentsController,'_contentHasChanged');
       
-      effort = task.get('effort');
-      if(effort && task.get('priority') !== CoreTasks.TASK_PRIORITY_LOW) {
+      effortString = task.get('effort');
+      if(effortString && task.get('priority') !== CoreTasks.TASK_PRIORITY_LOW) {
         // sum up effort for High/Medium priority tasks
         effortMin = parseInt(effortString, 10);
         var idx = effortString.indexOf('-'); // see if effort is a range
