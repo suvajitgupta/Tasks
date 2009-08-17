@@ -19,7 +19,7 @@ SC.stringsFor('English', {
   '_Welcome': "Welcome",
   '_User:': "User:",
   "_Everyone": "Everyone",
-  '_SearchHint': "Search for tasks",
+  '_SearchHint': "Search for tasks...",
   '_Save': "Save",
   '_Import': "Import",
   '_ImportHint': "Paste in text to be imported",

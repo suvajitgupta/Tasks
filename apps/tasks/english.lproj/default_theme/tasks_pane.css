@@ -1,0 +1,62 @@
+/* 
+
+Tasks Pane Styling 
+
+  @author Matt Grantham - grantham.matt@gmail.com
+  
+*/
+
+.tasks-pane {
+  background: #e2e4e7 !important;
+}
+
+.tasks-pane-inner {
+  background: #e2e4e7 !important;
+}
+
+.tasks-pane-inner .sc-collection-item.sc-group-item.sel {
+  background: none !important;
+}
+
+/*.task-bg-mid.sel,
+.task-bg-mid {
+  background: static_url('images/default-theme-repeat-x.png') repeat-x 0 -190px !important; 
+  border: 0 !important;
+} */
+
+.task-bg-mid .sc-outline {
+  left: 0px !important;
+  bottom: 4px;
+}
+
+.tasks-control {
+  background: static_url('images/default-theme-repeat-x.png') repeat-x 0 -106px; 
+}
+
+/* Icons */
+
+.task-add-icon {
+  width: 21px !important;
+  height: 21px !important;
+  margin-top: 3px !important;
+  margin-right: 2px !important;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -442px;
+}
+
+.task-del-icon {
+  width: 21px !important;
+  height: 21px !important;
+  margin-top: 3px !important;
+  margin-right: 2px !important;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -464px;
+}
+
+.task-del-icon.dis
+{
+  width: 21px !important;
+  height: 21px !important;
+  margin-top: 3px !important;
+  margin-right: 2px !important;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -565px;
+}
+

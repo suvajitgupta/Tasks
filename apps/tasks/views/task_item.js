@@ -22,12 +22,15 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       var priority = content.get('priority');
       switch(priority){
         case CoreTasks.TASK_PRIORITY_HIGH:
+          context.addClass('task-bg-mid');
           context.addClass('tasks-priority-high');
           break;
         case CoreTasks.TASK_PRIORITY_MEDIUM:
+          context.addClass('task-bg-mid');
           context.addClass('tasks-priority-medium');
           break;
         case CoreTasks.TASK_PRIORITY_LOW:
+          context.addClass('task-bg-mid');
           context.addClass('tasks-priority-low');
           break;          
       }

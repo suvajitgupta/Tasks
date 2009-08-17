@@ -1,0 +1,87 @@
+/* 
+
+Top Navigation Styling
+
+  @author Matt Grantham - grantham.matt@gmail.com
+  
+*/
+
+.top-bar {
+  background: static_url('images/default-theme-repeat-x.png') repeat-x 0 0;
+}
+
+.tasks-logo {
+  background: static_url('images/logo.png') no-repeat 0 0;
+}
+
+.tasks-version {
+  color: #fff !important;
+  font-weight: bold;
+}
+
+.dock-label {
+  font-size: 10px !important;
+  color: #fff !important;
+  font-weight: bold !important;
+}
+
+.top-bar-divider {
+  background: static_url('images/default-theme-static.png') no-repeat 0 -606px;
+}
+
+/* Search */
+
+.searchbar {
+  background: static_url('images/default-theme-search-bg.png') no-repeat;
+}
+
+.searchbar span {
+  padding: 0 0 0 24px !important;
+  font-size: 12px !important;
+  font-style: italic;
+  line-height: 26px !important;
+}
+
+.searchbar input {
+  padding: 7px 0 0 24px !important;
+  width: 160px !important;
+  border: 0;
+  background: none;
+  font-size: 12px !important;
+}
+
+.searchbar input:focus {
+  border: 0;
+}
+
+.searchbar-icon {
+  background: static_url('images/default-theme-static.png') no-repeat 0 -650px !important;
+  z-index: 101 !important;
+  cursor: pointer;
+}
+
+/* Icons */
+
+.import-icon {
+  background: static_url('images/default-theme-static.png') no-repeat 0 0;
+}
+
+.export-icon {
+  background: static_url('images/default-theme-static.png') no-repeat 0 -25px;
+}
+
+.save-icon {
+background: static_url('images/default-theme-static.png') no-repeat 0 -50px;
+}
+
+.settings-icon {
+  background: static_url('images/default-theme-static.png') no-repeat 0 -74px;
+}
+
+.help-icon {
+  background: static_url('images/default-theme-static.png') no-repeat 0 -98px;
+}
+
+.logout-icon {
+  background: static_url('images/default-theme-static.png') no-repeat 0 -121px;
+}

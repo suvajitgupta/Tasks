@@ -1,15 +1,4 @@
 /*-----------------------------------------------------------------
- * Application toolbar styles
- */
-
-.tasks-logo {
-	background: static_url('images/tasks.jpg') no-repeat;
-	height:16px;
-  width:16px;
-}
-
-
-/*-----------------------------------------------------------------
  * Task type styles
  */
 
@@ -89,6 +78,10 @@
  
 .sc-theme .sc-view {
   color: black;
+}
+
+.sc-theme .sc-gray-border {
+  border: 0 !important;
 }
 
 .sc-radio-view.sc-small-size {

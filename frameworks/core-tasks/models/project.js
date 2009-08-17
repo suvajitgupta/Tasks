@@ -44,7 +44,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
    * The path to the icon associated with a project.
    */
   icon: function() {
-    return 'sc-icon-folder-16';
+    return 'project-icon';
   }.property().cacheable(),
 
   /**

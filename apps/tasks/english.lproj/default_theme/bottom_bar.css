@@ -1,0 +1,11 @@
+/* 
+
+Bottom Bar Styling 
+
+  @author Matt Grantham - grantham.matt@gmail.com
+  
+*/
+
+.bottom-bar {
+  background: static_url('images/default-theme-repeat-x.png') repeat-x 0 -44px;
+}

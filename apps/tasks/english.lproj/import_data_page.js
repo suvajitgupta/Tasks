@@ -16,7 +16,7 @@ sc_require('core');
 Tasks.importDataPage = SC.Page.create({  
   
   panel: SC.PanelPane.create({
-    layout: { centerX: 0, centerY: 0, height: 500, width: 750 },
+    layout: { centerX: 0, centerY: -60, height: 500, width: 750 },
     contentView: SC.View.design({
       layout: { left: 0, right: 0, top: 0, bottom: 0},
       childViews: [
@@ -27,15 +27,18 @@ Tasks.importDataPage = SC.Page.create({
           isTextArea: YES
         }),
         SC.ButtonView.design({
-          layout: { width: 60, height: 30, right: 10, bottom: 10 },
+          layout: { width: 80, height: 30, right: 10, bottom: 8 },
           titleMinWidth: 0,
+          theme: 'capsule',
+          isDefault: YES,
           title: "_Import".loc(),
           target: 'Tasks.importDataController',
           action: 'importData'
         }),
         SC.ButtonView.design({
-          layout: { width: 60, height: 30, right: 75, bottom: 10 },
+          layout: { width: 80, height: 30, right: 96, bottom: 8 },
           titleMinWidth: 0,
+          theme: 'capsule',
           title: "_Cancel".loc(),
           target: 'Tasks.importDataController',
           action: 'closePanel'
