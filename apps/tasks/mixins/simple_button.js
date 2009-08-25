@@ -98,6 +98,13 @@ Tasks.SimpleButton = {
       var stateClass = this.get('stateClass');
       context.setClass(stateClass, this.inState); // addClass if YES, removeClass if NO
     }
+    // If there is a toolTip set, grab it and localize if necessary.
+    var toolTip = this.get('toolTip') ;
+    if (SC.typeOf(toolTip) === SC.T_STRING) {
+      if (this.get('localize')) toolTip = toolTip.loc() ;
+      context.attr('title', toolTip) ;
+      context.attr('alt', toolTip) ;
+    }
   },  
   
   /**
