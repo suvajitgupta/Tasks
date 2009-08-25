@@ -90,8 +90,9 @@ Tasks.reassignmentController = SC.Object.create(SC.CollectionViewDelegate,
     }, this);
     
     objects.forEach(function(task) {
-      task.set('assignee', newAssignee);
+      task.assignee = newAssignee; // avoid calling observers while in transition
     }, this);
+    Tasks.assignmentsController.showAssignments();
     
     return SC.DRAG_NONE;
   }
