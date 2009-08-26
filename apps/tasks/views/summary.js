@@ -25,13 +25,13 @@ Tasks.SummaryView = SC.View.extend(
 
     switch(len) {
       case 0: 
-        ret = "No tasks in this project";
+        ret = "Selected project has no tasks";
         break;
       case 1:
-        ret = "1 total task in this project";
+        ret = "Selected project has 1 task";
         break;
       default:
-        ret = "%@ total tasks in this project".fmt(len);
+        ret = "Selected project has %@ tasks".fmt(len);
         break;
     }
     

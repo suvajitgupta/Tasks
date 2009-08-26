@@ -18,229 +18,222 @@ Tasks.mainPage = SC.Page.design({
 
   mainPane: SC.MainPane.design({
     
-    childViews: 'dockView workspaceView toolbarsView'.w(),
+    childViews: 'dockView workspaceView bottomBarView'.w(),
     
     dockView: SC.View.design(SC.Border, {
       layout: { top: 0, left: 0, right: 0, height: 43 },
       classNames: ['top-bar'],
       childViews: [
       
-      SC.LabelView.design({
-        layout: { centerY: -2, height: 26, left: 6, width: 89 },
-        classNames: ['tasks-logo']
-      }),
+        SC.LabelView.design({
+          layout: { centerY: -2, height: 26, left: 6, width: 89 },
+          classNames: ['tasks-logo']
+        }),
       
-      SC.LabelView.design({
-        layout: { centerY: -4, height: 15, left: 100, width: 30 },
-        classNames: ['tasks-version'],
-        controlSize: SC.SMALL_CONTROL_SIZE,
-        value: "v" + Tasks.VERSION
-      }),
+        SC.LabelView.design({
+          layout: { centerY: -4, height: 15, left: 100, width: 30 },
+          classNames: ['tasks-version'],
+          controlSize: SC.SMALL_CONTROL_SIZE,
+          value: "v" + Tasks.VERSION
+        }),
 
-      Tasks.WelcomeView.design({
-        layout: { centerY: 2, height: 30, left: 145, width: 95 },
-        classNames: ['dock-small-label'],
-        valueBinding: SC.Binding.oneWay('CoreTasks.user')
-      }),
+        Tasks.WelcomeView.design({
+          layout: { centerY: 2, height: 30, left: 145, width: 95 },
+          classNames: ['dock-small-label'],
+          valueBinding: SC.Binding.oneWay('CoreTasks.user')
+        }),
       
-      SC.ButtonView.design({
-        layout: { centerY: 0, height: 24, left: 265, width: 50 },
-        title: "_User:".loc(),
-        titleMinWidth: 0,
-        toolTip: 'Manage Users',
-        target: 'Tasks',
-        action: 'manageUsers'
-      }),
+        SC.ButtonView.design({
+          layout: { centerY: 0, height: 24, left: 265, width: 50 },
+          title: "_User:".loc(),
+          titleMinWidth: 0,
+          toolTip: 'Manage Users',
+          target: 'Tasks',
+          action: 'manageUsers'
+        }),
 
-      SC.SelectFieldView.design({
-        layout: { centerY: 0, height: 24, left: 320, width: 150 },
-        nameKey: 'loginName',
-        emptyName: "_Everyone".loc(), // FIXME: [SC] fix empty line after first item in SelectFieldView
-        objects: CoreTasks.User.FIXTURES, // FIXME: [SC] make SelectFieldView work with objects in controller:'Tasks.assigneeController.content',
-        valueBinding: 'Tasks.assignmentsController.assigneeSelection' // TODO: [SG] bind to assigneeController instead
-      }),
+        SC.SelectFieldView.design({
+          layout: { centerY: 0, height: 24, left: 320, width: 150 },
+          nameKey: 'loginName',
+          emptyName: "_Everyone".loc(), // FIXME: [SC] fix empty line after first item in SelectFieldView
+          objects: CoreTasks.User.FIXTURES, // FIXME: [SC] make SelectFieldView work with objects in controller:'Tasks.assigneeController.content',
+          valueBinding: 'Tasks.assignmentsController.assigneeSelection' // TODO: [SG] bind to assigneeController instead
+        }),
 
-      SC.TextFieldView.design({
-        layout: { centerY: -1, height: 24, left: 485, width: 200 },
-        classNames: ['searchbar'],
-        hint: "_SearchHint".loc(),
-        valueBinding: 'Tasks.assignmentsController.searchFilter' // TODO: [SG] bind to searchController instead
-      }),
+        SC.TextFieldView.design({
+          layout: { centerY: -1, height: 24, left: 485, width: 200 },
+          classNames: ['searchbar'],
+          hint: "_SearchHint".loc(),
+          valueBinding: 'Tasks.assignmentsController.searchFilter' // TODO: [SG] bind to searchController instead
+        }),
       
-      SC.View.design({ // Search Filter delete button
-        layout: { left: 666, width: 12, centerY: 0, height: 12 },
-        isVisible: NO,
-        classNames: ['searchbar-icon'],
-        mouseDown: function() {
-          Tasks.assignmentsController.set('searchFilter', '');
-        },
+        SC.View.design({ // Search Filter delete button
+          layout: { left: 666, width: 12, centerY: 0, height: 12 },
+          isVisible: NO,
+          classNames: ['searchbar-cancel-icon'],
+          mouseDown: function() {
+            Tasks.assignmentsController.set('searchFilter', '');
+          },
         
-        _deleteSearchFilterEnabler: function() {
-          this.set('isVisible', Tasks.assignmentsController.get('searchFilter') !== '');
-        }.observes('Tasks.assignmentsController.searchFilter')
+          _deleteSearchFilterEnabler: function() {
+            this.set('isVisible', Tasks.assignmentsController.get('searchFilter') !== '');
+          }.observes('Tasks.assignmentsController.searchFilter')
         
-      }),
+        }),
       
-      SC.View.design({
-        layout: { top: 0, height: 43, left: 700, width: 40 },
-        childViews: [
-        
-      SC.View.design(Tasks.SimpleButton,{
-          layout: { centerX: -5, top: 2, width: 24, height: 24 },
-          classNames: ['import-icon'],
-          title:  "_Import".loc(),
-          toolTip: 'Import Projects/Tasks from a file',
-          target: 'Tasks',
-          action: 'importData'
-        }),
-        
-      SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerX: 0, width: 40, height: 19, top: 22 },
-          classNames: ['dock-label'],
-          title:  "_Import".loc(),
-          toolTip: 'Import Projects/Tasks from a file',
-          target: 'Tasks',
-          value: 'Import',
-          action: 'importData'
-        })
-      ]
-    }),
-    
-      SC.View.design({
-        layout: { top: 0, height: 43, left: 750, width: 40 },
-        childViews: [
-        
-      SC.View.design(Tasks.SimpleButton,{
-          layout: { centerX: -5, top: 2, width: 24, height: 24 },
-          classNames: ['export-icon'],
-          title:  "_Export".loc(),
-          toolTip: 'Export Projects/Tasks to a file',
-          target: 'Tasks',
-          action: 'exportData'
-        }),
-        
-      SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerX: 0, width: 40, height: 19, top: 22 },
-          classNames: ['dock-label'],
-          title:  "_Export".loc(),
-          toolTip: 'Export Projects/Tasks to a file',
-          target: 'Tasks',
-          value: 'Export',
-          action: 'exportData'
-        })
-      ]
-    }),
-    
-      SC.View.design({
-        layout: { top: 0, height: 43, left: 800, width: 40 },
-        childViews: [
-        
-      SC.View.design(Tasks.SimpleButton,{
-          layout: { centerX: -8, top: 2, width: 24, height: 24 },
-          classNames: ['save-icon'],
-          title:  "_Save".loc(),
-          // TODO: [SG] add isEnabledBinding to track changes
-          toolTip: 'Save Projects/Tasks',
-          target: 'Tasks',
-          action: 'saveData'
-        }),
-        
-      SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerX: 0, width: 40, height: 19, top: 22 },
-          classNames: ['dock-label'],
-          title:  "_Save".loc(),
-          // TODO: [SG] add isEnabledBinding to track changes
-          toolTip: 'Save Projects/Tasks',
-          target: 'Tasks',
-          value: 'Save',
-          action: 'saveData'
-        })
-      ]
-    }),
-    
-    SC.View.design({
-      layout: {  top: 0, height: 43, right: 176, width: 2 },
-      classNames: ['top-bar-divider']
-    }),
-    
-      SC.View.design({
-        layout: { top: 0, height: 43, right: 116,  width: 40 },
-        childViews: [
-        
-      SC.View.design(Tasks.SimpleButton,{
-          layout: { centerX: 0, top: 2, width: 24, height: 24 },
-          classNames: ['settings-icon'],
-          title:  "_Settings".loc(),
-          toolTip: 'Launch Tasks Settings',
-          target: 'Tasks',
-          action: 'launchSettings'
-        }),
-        
-      SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerX: 0, width: 40, height: 19, top: 22 },
-          classNames: ['dock-label'],
-          title:  "_Settings".loc(),
-          toolTip: 'Launch Tasks Settings',
-          target: 'Tasks',
-          value: 'Settings',
-          action: 'launchSettings'
-        })
-      ]
-    }),
-    
-      SC.View.design({
-        layout: { top: 0, height: 43, right: 60, width: 40 },
-        childViews: [
-        
-      SC.View.design(Tasks.SimpleButton,{
-          layout: { centerX: -3, top: 2, width: 24, height: 24 },
-          classNames: ['help-icon'],
-          title:  "_Help".loc(),
-          toolTip: 'Launch Tasks Help',
-          target: 'Tasks',
-          action: 'launchHelp'
-        }),
-        
-      SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerX: 0, width: 30, height: 19, top: 22 },
-          classNames: ['dock-label'],
-          title:  "_Help".loc(),
-          toolTip: 'Launch Tasks Help',
-          target: 'Tasks',
-          value: 'Help',
-          action: 'launchHelp'
-        })
-      ]
-    }),
-    
-      SC.View.design({
-        layout: { top: 0, height: 43, right: 10, width: 40 },
-        childViews: [
-        
-      SC.View.design(Tasks.SimpleButton,{
-          layout: { centerX: -2, top: 2, width: 24, height: 24 },
-          classNames: ['logout-icon'],
-          title:  "_Logout".loc(),
-          toolTip: 'Logout',
-          target: 'Tasks',
-          action: 'exit'
-        }),
-        
-      SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerX: 0, width: 40, height: 19, top: 22 },
-          classNames: ['dock-label'],
-          title:  "_Logout".loc(),
-          toolTip: 'Logout',
-          target: 'Tasks',
-          value: 'Logout',
-          action: 'exit'
-        })
-      ]
-    })
-  ]
-}),
-    
+        SC.View.design({
+          layout: { top: 0, height: 43, left: 700, width: 40 },
+          childViews: [
+            SC.View.design(Tasks.SimpleButton,{
+              layout: { centerX: -5, top: 2, width: 24, height: 24 },
+              classNames: ['import-icon'],
+              title:  "_Import".loc(),
+              toolTip: 'Import Projects/Tasks from a file',
+              target: 'Tasks',
+              action: 'importData'
+            }),
 
+            SC.LabelView.design(Tasks.SimpleButton,{
+              layout: { centerX: 0, width: 40, height: 19, top: 22 },
+              classNames: ['dock-label'],
+              title:  "_Import".loc(),
+              toolTip: 'Import Projects/Tasks from a file',
+              target: 'Tasks',
+              value: 'Import',
+              action: 'importData'
+            })
+          ]
+        }),
+    
+        SC.View.design({
+          layout: { top: 0, height: 43, left: 750, width: 40 },
+          childViews: [
+            SC.View.design(Tasks.SimpleButton,{
+              layout: { centerX: -5, top: 2, width: 24, height: 24 },
+              classNames: ['export-icon'],
+              title:  "_Export".loc(),
+              toolTip: 'Export Projects/Tasks to a file',
+              target: 'Tasks',
+              action: 'exportData'
+            }),
+
+            SC.LabelView.design(Tasks.SimpleButton,{
+              layout: { centerX: 0, width: 40, height: 19, top: 22 },
+              classNames: ['dock-label'],
+              title:  "_Export".loc(),
+              toolTip: 'Export Projects/Tasks to a file',
+              target: 'Tasks',
+              value: 'Export',
+              action: 'exportData'
+            })
+          ]
+        }),
+    
+        SC.View.design({
+          layout: { top: 0, height: 43, left: 800, width: 40 },
+          childViews: [
+            SC.View.design(Tasks.SimpleButton,{
+              layout: { centerX: -8, top: 2, width: 24, height: 24 },
+              classNames: ['save-icon'],
+              title:  "_Save".loc(),
+              // TODO: [SG] add isEnabledBinding to track changes
+              toolTip: 'Save Projects/Tasks',
+              target: 'Tasks',
+              action: 'saveData'
+            }),
+
+            SC.LabelView.design(Tasks.SimpleButton,{
+              layout: { centerX: 0, width: 40, height: 19, top: 22 },
+              classNames: ['dock-label'],
+              title:  "_Save".loc(),
+              // TODO: [SG] add isEnabledBinding to track changes
+              toolTip: 'Save Projects/Tasks',
+              target: 'Tasks',
+              value: 'Save',
+              action: 'saveData'
+            })
+          ]
+        }),
+    
+        SC.View.design({
+          layout: {  top: 0, height: 43, right: 176, width: 2 },
+          classNames: ['top-bar-divider']
+        }),
+    
+        SC.View.design({
+          layout: { top: 0, height: 43, right: 116,  width: 40 },
+          childViews: [
+            SC.View.design(Tasks.SimpleButton,{
+              layout: { centerX: 0, top: 2, width: 24, height: 24 },
+              classNames: ['settings-icon'],
+              title:  "_Settings".loc(),
+              toolTip: 'Launch Tasks Settings',
+              target: 'Tasks',
+              action: 'launchSettings'
+            }),
+
+            SC.LabelView.design(Tasks.SimpleButton,{
+              layout: { centerX: 0, width: 40, height: 19, top: 22 },
+              classNames: ['dock-label'],
+              title:  "_Settings".loc(),
+              toolTip: 'Launch Tasks Settings',
+              target: 'Tasks',
+              value: 'Settings',
+              action: 'launchSettings'
+            })
+          ]
+        }),
+    
+        SC.View.design({
+          layout: { top: 0, height: 43, right: 60, width: 40 },
+          childViews: [
+            SC.View.design(Tasks.SimpleButton,{
+              layout: { centerX: -3, top: 2, width: 24, height: 24 },
+              classNames: ['help-icon'],
+              title:  "_Help".loc(),
+              toolTip: 'Launch Tasks Help',
+              target: 'Tasks',
+              action: 'showHelp'
+            }),
+
+            SC.LabelView.design(Tasks.SimpleButton,{
+              layout: { centerX: 0, width: 30, height: 19, top: 22 },
+              classNames: ['dock-label'],
+              title:  "_Help".loc(),
+              toolTip: 'Launch Tasks Help',
+              target: 'Tasks',
+              value: 'Help',
+              action: 'showHelp'
+            })
+          ]
+        }),
+    
+        SC.View.design({
+          layout: { top: 0, height: 43, right: 10, width: 40 },
+          childViews: [
+          SC.View.design(Tasks.SimpleButton,{
+            layout: { centerX: -2, top: 2, width: 24, height: 24 },
+            classNames: ['logout-icon'],
+            title:  "_Logout".loc(),
+            toolTip: 'Logout',
+            target: 'Tasks',
+            action: 'exit'
+          }),
+
+          SC.LabelView.design(Tasks.SimpleButton,{
+            layout: { centerX: 0, width: 40, height: 19, top: 22 },
+            classNames: ['dock-label'],
+            title:  "_Logout".loc(),
+            toolTip: 'Logout',
+            target: 'Tasks',
+            value: 'Logout',
+            action: 'exit'
+          })
+        ]
+      })
+      
+      ]
+    }),
     
     workspaceView: SC.View.design({
       layout: { top: 42, bottom: 26, left: 0, right: 0 },
@@ -276,8 +269,7 @@ Tasks.mainPage = SC.Page.design({
         classNames: ['projects-control'],
         childViews: [
           
-        
-        SC.LabelView.design(Tasks.SimpleButton,{
+          SC.LabelView.design(Tasks.SimpleButton,{
             layout: { centerY: 3, left: 16, height: 21, width: 100 },
             icon: 'project-add-icon',
             fontWeight: SC.BOLD_WEIGHT,
@@ -286,7 +278,7 @@ Tasks.mainPage = SC.Page.design({
             target: 'Tasks',
             action: 'addProject'
           }),
-          
+        
           SC.LabelView.design(Tasks.SimpleButton,{
             layout: { centerY: 3, left: 126, height: 21, width: 100 },
             icon: 'project-del-icon',
@@ -295,7 +287,8 @@ Tasks.mainPage = SC.Page.design({
             toolTip: 'Delete Project',
             target: 'Tasks',
             action: 'deleteProject'
-          })      
+          })
+             
         ]
       }),
       
@@ -339,25 +332,25 @@ Tasks.mainPage = SC.Page.design({
           childViews: [
           
           SC.LabelView.design(Tasks.SimpleButton,{
-              layout: { centerY: 1, left: 16, height: 22, width: 90 },
-              icon: 'task-add-icon',
-              fontWeight: SC.BOLD_WEIGHT,
-              value: 'Add Task',
-              toolTip: 'Add Task',
-              target: 'Tasks',
-              action: 'addTask'
-            }),
+            layout: { centerY: 1, left: 16, height: 22, width: 90 },
+            icon: 'task-add-icon',
+            fontWeight: SC.BOLD_WEIGHT,
+            value: 'Add Task',
+            toolTip: 'Add Task',
+            target: 'Tasks',
+            action: 'addTask'
+          }),
 
-            SC.LabelView.design(Tasks.SimpleButton,{
-              layout: { centerY: 1, left: 106, height: 22, width: 90 },
-              icon: 'task-del-icon',
-              fontWeight: SC.BOLD_WEIGHT,
-              value: 'Del. Task',
-              toolTip: 'Delete Task',
-              target: 'Tasks',
-              action: 'deleteTask'
-            }),
-            
+          SC.LabelView.design(Tasks.SimpleButton,{
+            layout: { centerY: 1, left: 106, height: 22, width: 90 },
+            icon: 'task-del-icon',
+            fontWeight: SC.BOLD_WEIGHT,
+            value: 'Del. Task',
+            toolTip: 'Delete Task',
+            target: 'Tasks',
+            action: 'deleteTask'
+          }),
+          
           SC.View.design({
             layout: { left: 130, right: 0 },
             childViews: [
@@ -438,7 +431,7 @@ Tasks.mainPage = SC.Page.design({
          ]
        })
 
-          ]
+       ]
 
         })
         ]
@@ -448,16 +441,16 @@ Tasks.mainPage = SC.Page.design({
     projectsList: SC.outlet('workspaceView.topLeftView.childViews.0.contentView'),
     tasksList: SC.outlet('workspaceView.bottomRightView.childViews.0.contentView'),
     
-    toolbarsView: SC.View.design(SC.Border, {
+    bottomBarView: SC.View.design(SC.Border, {
       layout: { bottom: 0, height: 26, left: 0, right: 0 },
       classNames: ['bottom-bar'],
-      childViews: 'tasksSummaryView'.w(),
+      childViews: 'summaryView'.w(),
       borderStyle: SC.BORDER_TOP,
         
-        tasksSummaryView: Tasks.SummaryView.design({
-          layout: { centerY: 0, left: 6, height: 16, width: 800 },
-          valueBinding: SC.Binding.oneWay('Tasks.assignmentsController.length')
-        })    
+      summaryView: Tasks.SummaryView.design({
+        layout: { centerY: 0, left: 6, height: 16, width: 800 },
+        valueBinding: SC.Binding.oneWay('Tasks.assignmentsController.length')
+      })    
     })
   })
 });

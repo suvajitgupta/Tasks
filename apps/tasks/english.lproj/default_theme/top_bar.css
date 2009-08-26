@@ -61,7 +61,7 @@ Top Navigation Styling
   border: 0;
 }
 
-.searchbar-icon {
+.searchbar-cancel-icon {
   background: static_url('images/default-theme-static.png') no-repeat 0 -650px !important;
   z-index: 101 !important;
   cursor: pointer;
