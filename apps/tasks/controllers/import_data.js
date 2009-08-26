@@ -17,6 +17,7 @@ Tasks.importDataController = SC.ObjectController.create(
 /** @scope Orion.ImportDataController.prototype */ {
     data: '',
     currentProject: null,
+    projectTaskMappings: null,
     
     openPanel: function(){
       var panel = Tasks.getPath('importDataPage.panel');
@@ -43,6 +44,7 @@ Tasks.importDataController = SC.ObjectController.create(
      */
     _parseAndLoadData: function(data) {
       
+      this.projectTaskMappings = {};
       var lines = data.split('\n');
       var store = CoreTasks.get('store');
       var currentProject = CoreTasks.get('inbox');
@@ -89,21 +91,14 @@ Tasks.importDataController = SC.ObjectController.create(
             console.log('Import Error: task creation failed');
             continue;
           }
+          this.projectTaskMappings[taskRecord.get('name')] = currentProject.get('name');
 
           // Immediately try to commit the task so that we get an ID.
-          console.log("DEBUG: current project is: " + currentProject.get('name'));
-          var that = this;
           var params = {
-            successCallback: function(storeKey) {
-              that._addTaskFromImportSuccess(storeKey, currentProject);
-            },
-            
-            failureCallback: function(storeKey) {
-              that._addTaskFromImportFailure(storeKey, currentProject);
-            }
+            successCallback: this._addTaskFromImportSuccess.bind(this),
+            failureCallback: this._addTaskFromImportFailure.bind(this)
           };
-
-          taskRecord.commitRecord(SC.clone(params));
+          taskRecord.commitRecord(params);
         }
         else if (line.indexOf('| ') === 0) { // a Description
           var descriptionLine = line.slice(2);
@@ -117,29 +112,36 @@ Tasks.importDataController = SC.ObjectController.create(
           var projectHash = CoreTasks.Project.parse(line);
           console.log ('Project:\t\t' + JSON.stringify(projectHash));
           
-          if(CoreTasks.isExistingProject(projectHash.name)) continue;
-          
-          var project = store.createRecord(CoreTasks.Project, projectHash);
+          var project = CoreTasks.getProject(projectHash.name);
           if(project) {
             currentProject = project;
-            Tasks.get('projectsController').addObject(project);
           }
           else {
-            console.log('Project Import Error: project creation failed!');
+            project = store.createRecord(CoreTasks.Project, projectHash);
+            if(project) {
+              currentProject = project;
+              Tasks.get('projectsController').addObject(project);
+            }
+            else {
+              console.log('Project Import Error: project creation failed!');
+            }
           }
         }
       }
     },
     
-    _addTaskFromImportSuccess: function(storeKey, project) {
+    _addTaskFromImportSuccess: function(storeKey) {
       var taskRecord = CoreTasks.get('store').materializeRecord(storeKey);
-      console.log("DEBUG: adding to project " + project.get('name'));
-      project.addTask(taskRecord);
       CoreTasks.get('allTasks').addTask(taskRecord);
+      var projectName = this.projectTaskMappings[taskRecord.get('name')];
+      if(projectName) {
+        // console.log("DEBUG: task: " + taskRecord.get('name') + ", project: " + projectName);
+        var currentProject = CoreTasks.getProject(projectName);
+        if(currentProject) currentProject.addTask(taskRecord);
+      }
     },
 
-    _addTaskFromImportFailure: function(storeKey, project) {
-      // TODO: [SE] Implement addTaskFromImportFailure
+    _addTaskFromImportFailure: function(storeKey) {
     }
     
 });
