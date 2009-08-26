@@ -47,9 +47,9 @@ Tasks.mainPage = SC.Page.design({
           layout: { centerY: 0, height: 24, left: 265, width: 50 },
           title: "_User:".loc(),
           titleMinWidth: 0,
-          toolTip: 'Manage Users',
+          toolTip: 'Open user manager',
           target: 'Tasks',
-          action: 'manageUsers'
+          action: 'openUserManager'
         }),
 
         SC.SelectFieldView.design({
@@ -88,7 +88,7 @@ Tasks.mainPage = SC.Page.design({
               layout: { centerX: -5, top: 2, width: 24, height: 24 },
               classNames: ['import-icon'],
               title:  "_Import".loc(),
-              toolTip: 'Import Projects/Tasks from a file',
+              toolTip: 'Import projects/tasks from a file',
               target: 'Tasks',
               action: 'importData'
             }),
@@ -97,7 +97,7 @@ Tasks.mainPage = SC.Page.design({
               layout: { centerX: 0, width: 40, height: 19, top: 22 },
               classNames: ['dock-label'],
               title:  "_Import".loc(),
-              toolTip: 'Import Projects/Tasks from a file',
+              toolTip: 'Import projects/tasks from a file',
               target: 'Tasks',
               value: 'Import',
               action: 'importData'
@@ -112,7 +112,7 @@ Tasks.mainPage = SC.Page.design({
               layout: { centerX: -5, top: 2, width: 24, height: 24 },
               classNames: ['export-icon'],
               title:  "_Export".loc(),
-              toolTip: 'Export Projects/Tasks to a file',
+              toolTip: 'Export projects/pasks to a file',
               target: 'Tasks',
               action: 'exportData'
             }),
@@ -121,7 +121,7 @@ Tasks.mainPage = SC.Page.design({
               layout: { centerX: 0, width: 40, height: 19, top: 22 },
               classNames: ['dock-label'],
               title:  "_Export".loc(),
-              toolTip: 'Export Projects/Tasks to a file',
+              toolTip: 'Export projects/tasks to a file',
               target: 'Tasks',
               value: 'Export',
               action: 'exportData'
@@ -137,7 +137,7 @@ Tasks.mainPage = SC.Page.design({
               classNames: ['save-icon'],
               title:  "_Save".loc(),
               // TODO: [SG] add isEnabledBinding to track changes
-              toolTip: 'Save Projects/Tasks',
+              toolTip: 'Save projects/tasks to server',
               target: 'Tasks',
               action: 'saveData'
             }),
@@ -147,7 +147,7 @@ Tasks.mainPage = SC.Page.design({
               classNames: ['dock-label'],
               title:  "_Save".loc(),
               // TODO: [SG] add isEnabledBinding to track changes
-              toolTip: 'Save Projects/Tasks',
+              toolTip: 'Save projects/tasks to server',
               target: 'Tasks',
               value: 'Save',
               action: 'saveData'
@@ -167,7 +167,7 @@ Tasks.mainPage = SC.Page.design({
               layout: { centerX: 0, top: 2, width: 24, height: 24 },
               classNames: ['settings-icon'],
               title:  "_Settings".loc(),
-              toolTip: 'Launch Tasks Settings',
+              toolTip: 'Manage Tasks settings',
               target: 'Tasks',
               action: 'launchSettings'
             }),
@@ -176,7 +176,7 @@ Tasks.mainPage = SC.Page.design({
               layout: { centerX: 0, width: 40, height: 19, top: 22 },
               classNames: ['dock-label'],
               title:  "_Settings".loc(),
-              toolTip: 'Launch Tasks Settings',
+              toolTip: 'Manage Tasks settings',
               target: 'Tasks',
               value: 'Settings',
               action: 'launchSettings'
@@ -191,7 +191,7 @@ Tasks.mainPage = SC.Page.design({
               layout: { centerX: -3, top: 2, width: 24, height: 24 },
               classNames: ['help-icon'],
               title:  "_Help".loc(),
-              toolTip: 'Launch Tasks Help',
+              toolTip: 'Launch Tasks help',
               target: 'Tasks',
               action: 'showHelp'
             }),
@@ -200,7 +200,7 @@ Tasks.mainPage = SC.Page.design({
               layout: { centerX: 0, width: 30, height: 19, top: 22 },
               classNames: ['dock-label'],
               title:  "_Help".loc(),
-              toolTip: 'Launch Tasks Help',
+              toolTip: 'Launch Tasks help',
               target: 'Tasks',
               value: 'Help',
               action: 'showHelp'
@@ -215,7 +215,7 @@ Tasks.mainPage = SC.Page.design({
             layout: { centerX: -2, top: 2, width: 24, height: 24 },
             classNames: ['logout-icon'],
             title:  "_Logout".loc(),
-            toolTip: 'Logout',
+            toolTip: 'Logout from Tasks',
             target: 'Tasks',
             action: 'exit'
           }),
@@ -224,7 +224,7 @@ Tasks.mainPage = SC.Page.design({
             layout: { centerX: 0, width: 40, height: 19, top: 22 },
             classNames: ['dock-label'],
             title:  "_Logout".loc(),
-            toolTip: 'Logout',
+            toolTip: 'Logout from Tasks',
             target: 'Tasks',
             value: 'Logout',
             action: 'exit'
@@ -274,7 +274,7 @@ Tasks.mainPage = SC.Page.design({
             icon: 'project-add-icon',
             fontWeight: SC.BOLD_WEIGHT,
             value: 'Add Project',
-            toolTip: 'Add Project',
+            toolTip: 'Add a new project',
             target: 'Tasks',
             action: 'addProject'
           }),
@@ -284,7 +284,7 @@ Tasks.mainPage = SC.Page.design({
             icon: 'project-del-icon',
             fontWeight: SC.BOLD_WEIGHT,
             value: 'Del. Project',
-            toolTip: 'Delete Project',
+            toolTip: 'Delete selected project',
             target: 'Tasks',
             action: 'deleteProject'
           })
@@ -336,7 +336,7 @@ Tasks.mainPage = SC.Page.design({
             icon: 'task-add-icon',
             fontWeight: SC.BOLD_WEIGHT,
             value: 'Add Task',
-            toolTip: 'Add Task',
+            toolTip: 'Add a new task, to the same assignee if there is a selected task',
             target: 'Tasks',
             action: 'addTask'
           }),
@@ -346,7 +346,7 @@ Tasks.mainPage = SC.Page.design({
             icon: 'task-del-icon',
             fontWeight: SC.BOLD_WEIGHT,
             value: 'Del. Task',
-            toolTip: 'Delete Task',
+            toolTip: 'Delete selected task',
             target: 'Tasks',
             action: 'deleteTask'
           }),
