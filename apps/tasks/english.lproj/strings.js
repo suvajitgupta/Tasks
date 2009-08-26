@@ -28,20 +28,28 @@ SC.stringsFor('English', {
   '_ExportTooltip': "Export Tasks data to a file",
   '_Save': "Save",
   '_SaveTooltip': "Save Tasks data to the server",
+  '_SaveTooltip': "Save Tasks data to the server",
   '_Settings': "Settings",
+  '_SettingsTooltip': "Manage Tasks settings",
   '_Help': "Help",
+  '_HelpTooltip': "Launch Tasks help",
   '_Logout': "Logout",
+  '_LogoutTooltip': "Logout from Tasks",
   
   // Project strings
   '_AddProject': "Add Project",
+  '_AddProjectTooltip': "Add a new project",
   '_DelProject': "Del. Project",
+  '_DelProjectTooltip': "Delete selected project",
   '_NewProject': "New Project",
   '_Inbox': "Inbox",
   '_AllTasks': "All Tasks",
   
   // Task strings
   '_AddTask': "Add Task",
+  '_AddTaskTooltip': "Add a new task, to the same assignee if there is a selected task",
   '_DelTask': "Del. Task",
+  '_DelTaskTooltip': "Delete selected task",
   '_NewTask': "New Task",
   '_Feature': "Feature",
   '_Bug': "Bug",

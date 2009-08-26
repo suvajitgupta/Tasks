@@ -168,7 +168,7 @@ Tasks.mainPage = SC.Page.design({
               layout: { centerX: 0, top: 2, width: 24, height: 24 },
               classNames: ['settings-icon'],
               value:  "_Settings".loc(),
-              toolTip: 'Manage Tasks settings',
+              toolTip: "_SettingsTooltip".loc(),
               target: 'Tasks',
               action: 'launchSettings'
             }),
@@ -177,7 +177,7 @@ Tasks.mainPage = SC.Page.design({
               layout: { centerX: 0, width: 40, height: 19, top: 22 },
               classNames: ['dock-label'],
               value:  "_Settings".loc(),
-              toolTip: 'Manage Tasks settings',
+              toolTip: "_SettingsTooltip".loc(),
               target: 'Tasks',
               action: 'launchSettings'
             })
@@ -191,7 +191,7 @@ Tasks.mainPage = SC.Page.design({
               layout: { centerX: -3, top: 2, width: 24, height: 24 },
               classNames: ['help-icon'],
               title:  "_Help".loc(),
-              toolTip: 'Launch Tasks help',
+              toolTip: "_HelpTooltip".loc(),
               target: 'Tasks',
               action: 'showHelp'
             }),
@@ -200,7 +200,7 @@ Tasks.mainPage = SC.Page.design({
               layout: { centerX: 0, width: 30, height: 19, top: 22 },
               classNames: ['dock-label'],
               value:  "_Help".loc(),
-              toolTip: 'Launch Tasks help',
+              toolTip: "_HelpTooltip".loc(),
               target: 'Tasks',
               action: 'showHelp'
             })
@@ -214,7 +214,7 @@ Tasks.mainPage = SC.Page.design({
             layout: { centerX: -2, top: 2, width: 24, height: 24 },
             classNames: ['logout-icon'],
             title:  "_Logout".loc(),
-            toolTip: 'Logout from Tasks',
+            toolTip: "_LogoutTooltip".loc(),
             target: 'Tasks',
             action: 'exit'
           }),
@@ -223,7 +223,7 @@ Tasks.mainPage = SC.Page.design({
             layout: { centerX: 0, width: 40, height: 19, top: 22 },
             classNames: ['dock-label'],
             value:  "_Logout".loc(),
-            toolTip: 'Logout from Tasks',
+            toolTip: "_LogoutTooltip".loc(),
             target: 'Tasks',
             action: 'exit'
           })
@@ -272,7 +272,7 @@ Tasks.mainPage = SC.Page.design({
             icon: 'project-add-icon',
             fontWeight: SC.BOLD_WEIGHT,
             value: "_AddProject".loc(),
-            toolTip: 'Add a new project',
+            toolTip: "_AddProjectTooltip".loc(),
             target: 'Tasks',
             action: 'addProject'
           }),
@@ -282,7 +282,7 @@ Tasks.mainPage = SC.Page.design({
             icon: 'project-del-icon',
             fontWeight: SC.BOLD_WEIGHT,
             value: "_DelProject".loc(),
-            toolTip: 'Delete selected project',
+            toolTip: "_DelProjectTooltip".loc(),
             target: 'Tasks',
             action: 'deleteProject'
           })
@@ -334,7 +334,7 @@ Tasks.mainPage = SC.Page.design({
             icon: 'task-add-icon',
             fontWeight: SC.BOLD_WEIGHT,
             value: "_AddTask".loc(),
-            toolTip: 'Add a new task, to the same assignee if there is a selected task',
+            toolTip: "_AddTaskTooltip".loc(),
             target: 'Tasks',
             action: 'addTask'
           }),
@@ -344,7 +344,7 @@ Tasks.mainPage = SC.Page.design({
             icon: 'task-del-icon',
             fontWeight: SC.BOLD_WEIGHT,
             value: "_DelTask".loc(),
-            toolTip: 'Delete selected task',
+            toolTip: "_DelTaskTooltip".loc(),
             target: 'Tasks',
             action: 'deleteTask'
           }),
