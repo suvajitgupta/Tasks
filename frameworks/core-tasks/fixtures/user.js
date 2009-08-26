@@ -93,6 +93,16 @@ CoreTasks.User.FIXTURES = [
   loginName: "SH" },
 
   { id: 18,
+  name: "Michael Cohen",
+  role: CoreTasks.USER_ROLE_DEVELOPER,
+  loginName: "MC" },
+
+  { id: 19,
+  name: "Michael Harris",
+  role: CoreTasks.USER_ROLE_DEVELOPER,
+  loginName: "MH" },
+
+  { id: 20,
   name: "Bill Mosteller",
   role: CoreTasks.USER_ROLE_TESTER,
   loginName: "BM" }
