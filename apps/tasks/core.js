@@ -17,5 +17,5 @@ Tasks = SC.Object.create(SC.Statechart,
   /** @scope Tasks.prototype */ {
 
   NAMESPACE: 'Tasks',
-  VERSION: '0.4'
+  VERSION: 'Alpha'
 });

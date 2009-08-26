@@ -16,7 +16,8 @@ Top Navigation Styling
 
 .tasks-version {
   color: #fff !important;
-  font-weight: bold;
+  font-size: 9px !important;
+  font-style: italic;
 }
 
 .dock-label {
@@ -25,10 +26,10 @@ Top Navigation Styling
   font-weight: bold !important;
 }
 
-.dock-small-label {
-  font-size: 9px !important;
+.welcome-label {
+  font-size: 10px !important;
   line-height: 12px !important;
-  color: #fff !important;
+  color: #0f0 !important;
   font-weight: bold !important;
 }
 
