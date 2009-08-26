@@ -37,11 +37,11 @@ Tasks.mainPage = SC.Page.design({
         value: "v" + Tasks.VERSION
       }),
 
-      /*Tasks.WelcomeView.design({
-        layout: { centerY: 2, height: 30, left: 155, width: 95 },
-        controlSize: SC.SMALL_CONTROL_SIZE,
+      Tasks.WelcomeView.design({
+        layout: { centerY: 2, height: 30, left: 145, width: 95 },
+        classNames: ['dock-small-label'],
         valueBinding: SC.Binding.oneWay('CoreTasks.user')
-      }), */
+      }),
       
       SC.ButtonView.design({
         layout: { centerY: 0, height: 24, left: 265, width: 50 },
@@ -266,7 +266,8 @@ Tasks.mainPage = SC.Page.design({
           canEditContent: true,
           canReorderContent: true,
           canDeleteContent: true,
-          destroyOnRemoval: YES
+          destroyOnRemoval: YES,
+          delegate: Tasks.reallocationController
         })
       }),
       

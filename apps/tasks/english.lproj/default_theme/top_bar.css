@@ -25,6 +25,13 @@ Top Navigation Styling
   font-weight: bold !important;
 }
 
+.dock-small-label {
+  font-size: 9px !important;
+  line-height: 12px !important;
+  color: #fff !important;
+  font-weight: bold !important;
+}
+
 .top-bar-divider {
   background: static_url('images/default-theme-static.png') no-repeat 0 -606px;
 }
