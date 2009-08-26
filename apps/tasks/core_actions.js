@@ -435,7 +435,15 @@ Tasks.mixin({
     var ac = this.get('assignmentsController');
     CoreTasks.invokeLater(ac.showAssignments.bind(ac));
     
-    // TODO: [SG] Begin editing newly created item.
+    // Select new task.
+    Tasks.tasksController.selectObject(task);
+    
+    // Begin editing new task.
+    var listView = Tasks.getPath('mainPage.mainPane.tasksList');
+    var tasksList = listView.get('content');
+    var idx = tasksList.indexOf(task);
+    var itemView = listView.itemViewForContentIndex(idx);
+    itemView.beginEditing();
   },
 
   _addTaskFailure: function(storeKey) {
