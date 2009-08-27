@@ -6,7 +6,7 @@ My Project
 ^ My first task {2} <SG> @Risky
 | description line1
 | description line2
-- My second task $Bug [SG] %Failed
+- My second task [SG] $Bug %Failed
 v My third task {12-14} $Feature @Active %Passed
 
 Your Project {12}

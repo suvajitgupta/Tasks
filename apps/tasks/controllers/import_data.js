@@ -55,12 +55,12 @@ Tasks.importDataController = SC.ObjectController.create(
 
         if (line.indexOf('#') === 0) { // a Comment
           var commentLine = line.slice(1);
-          console.log('Commment:\t' + commentLine);
+          // console.log('Commment:\t' + commentLine);
         }
         else if (line.match(/^[\^\-v][ ]/)) { // a Task
 
           var taskHash = CoreTasks.Task.parse(line);
-          console.log ('Task:\t\t' + JSON.stringify(taskHash));
+          // console.log ('Task:\t\t' + JSON.stringify(taskHash));
 
           if(taskHash.assignee) {
           var assigneeUser = CoreTasks.getUser(taskHash.assignee);
@@ -84,6 +84,24 @@ Tasks.importDataController = SC.ObjectController.create(
             }
           }
 
+          // Peek ahead to the next line(s) to see if there is a Description and bring those in
+          var description = null;
+          while (i < (lines.length-1)) {
+            var nextLine = lines[++i];
+            if (nextLine.indexOf('| ') === 0) { // a Description line
+              var descriptionLine = nextLine.slice(2);
+              description = (description? (description + '\n') : '') + descriptionLine;
+            }
+            else {
+              i--;
+              break;
+            }
+          }
+          if(description) {
+            taskHash.description = description;
+            // console.log('Description:\t' + description);
+          }
+
           // taskHash.id = CoreTasks.generateId(); // For FIXTUREs
 
           var taskRecord = store.createRecord(CoreTasks.Task, taskHash);
@@ -100,17 +118,12 @@ Tasks.importDataController = SC.ObjectController.create(
           };
           taskRecord.commitRecord(params);
         }
-        else if (line.indexOf('| ') === 0) { // a Description
-          var descriptionLine = line.slice(2);
-          console.log('Description:\t' + descriptionLine);
-          // TODO: [SG] aggregate multi-line task description & assign to last task
-        }
         else if (line.search(/^\s*$/) === 0) { // a blank line
-          console.log('Blank Line:');
+          // console.log('Blank Line:');
         }
         else { // a Project
           var projectHash = CoreTasks.Project.parse(line);
-          console.log ('Project:\t\t' + JSON.stringify(projectHash));
+          // console.log ('Project:\t\t' + JSON.stringify(projectHash));
           
           var project = CoreTasks.getProject(projectHash.name);
           if(project) {
