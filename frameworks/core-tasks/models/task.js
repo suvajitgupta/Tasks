@@ -117,7 +117,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
   /**
    * The path to the icon associated with a task.
    */
-  icon: function() { // TODO: [MG] get better icons
+  icon: function() {
     switch (this.get('type')){
       case CoreTasks.TASK_TYPE_FEATURE:
         return 'tasks-icon-feature';

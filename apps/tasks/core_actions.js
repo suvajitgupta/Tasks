@@ -10,7 +10,7 @@ sc_require('core');
 
 // FIXME: [SC] Shouldn't have to Store.commitRecords() after createRecord for Fixtures Data Source.
 // FIXME: [SC] Shouldn't have to manually add/remove to/from controller instead of store notifying of changes.
-// TODO: [SE/SG] handle persistence consistently/when user Saves?
+// FIXME: [SE/SG] handle persistence consistently/when user Saves?
 // FIXME: [SG] don't allow add/delTasks when on allTasks project
 
 Tasks.mixin({
