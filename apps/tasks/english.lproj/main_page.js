@@ -324,7 +324,7 @@ Tasks.mainPage = SC.Page.design({
         })
       }),
       
-      tasksControlView: SC.View.design({
+      tasksControlView: SC.View.design({ // FIXME: [SG] not setting to disabled when switching to another project and no task is selected
         layout: { bottom: 0, height: 34, left: 259 },
         classNames: ['tasks-control'],
         childViews: [
