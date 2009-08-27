@@ -26,24 +26,24 @@ Tasks.mainPage = SC.Page.design({
       childViews: [
       
         SC.LabelView.design({
-          layout: { centerY: -2, height: 26, left: 6, width: 89 },
+          layout: { centerY: -4, height: 26, left: 6, width: 89 },
           classNames: ['tasks-logo']
         }),
       
         SC.LabelView.design({
-          layout: { centerY: -6, height: 15, left: 100, width: 30 },
+          layout: { centerY: -8, height: 15, left: 100, width: 30 },
           classNames: ['tasks-version'],
           value: Tasks.VERSION
         }),
 
         Tasks.WelcomeView.design({
-          layout: { centerY: 2, height: 30, left: 140, width: 95 },
+          layout: { centerY: 0, height: 30, left: 140, width: 95 },
           classNames: ['welcome-label'],
           valueBinding: SC.Binding.oneWay('CoreTasks.user')
         }),
       
         SC.ButtonView.design({
-          layout: { centerY: 0, height: 24, left: 265, width: 50 },
+          layout: { centerY: -6, height: 24, left: 265, width: 50 },
           title: "_User:".loc(),
           titleMinWidth: 0,
           toolTip: "_OpenUserManagerTooltip".loc(),
@@ -52,7 +52,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         SC.SelectFieldView.design({
-          layout: { centerY: 0, height: 24, left: 320, width: 100 },
+          layout: { centerY: -5, height: 24, left: 315, width: 100 },
           nameKey: 'loginName',
           emptyName: "_Everyone".loc(), // FIXME: [SC] fix empty line after first item in SelectFieldView
           // FIXME: [SC] make SelectFieldView work with objects in controller:'Tasks.assigneeController.content',
@@ -61,14 +61,14 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         SC.TextFieldView.design({
-          layout: { centerY: -1, height: 24, left: 485, width: 200 },
+          layout: { centerY: -4, height: 24, left: 485, width: 200 },
           classNames: ['searchbar'],
           hint: "_SearchHint".loc(),
           valueBinding: 'Tasks.assignmentsController.searchFilter' // TODO: [SG] bind to searchController instead
         }),
       
         SC.View.design({ // Search Filter delete button
-          layout: { left: 666, width: 12, centerY: 0, height: 12 },
+          layout: { centerY: -4, height: 12, left: 666, width: 12 },
           isVisible: NO,
           classNames: ['searchbar-cancel-icon'],
           mouseDown: function() {
