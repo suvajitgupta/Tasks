@@ -52,7 +52,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         SC.SelectFieldView.design({
-          layout: { centerY: 0, height: 24, left: 320, width: 150 },
+          layout: { centerY: 0, height: 24, left: 320, width: 100 },
           nameKey: 'loginName',
           emptyName: "_Everyone".loc(), // FIXME: [SC] fix empty line after first item in SelectFieldView
           // FIXME: [SC] make SelectFieldView work with objects in controller:'Tasks.assigneeController.content',
