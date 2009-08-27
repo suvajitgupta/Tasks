@@ -89,6 +89,10 @@
   line-height: 18px;
 }
 
+.sc-label-view.disabled {
+  color: #888;
+}
+
 .sc-theme.focus .sc-list-view.sc-source-list .sc-collection-item.sel {
 	border-style: solid;
 	border-size: 1px;

@@ -1,6 +1,7 @@
 // ==========================================================================
 // Tasks.SimpleButton
 // ==========================================================================
+/*globals Tasks sc_require */
 
 sc_require('core');
 
@@ -12,7 +13,7 @@ sc_require('core');
   @version 0.1
   @since 0.1
 */
-Tasks.SimpleButton = {
+Tasks.SimpleButton = { // FIXME: [SG] is isEnabled is false SimpleButton shouldn't accept clicks
 /* SimpleButton Mixin */
   target: null,
   action: null,
@@ -89,6 +90,7 @@ Tasks.SimpleButton = {
   },
   
   renderMixin: function(context, firstTime){
+    if (!this.get('isEnabled')) context.addClass('disabled') ;
     if (this.get('hasHover')){
       var hoverClass = this.get('hoverClass');
       context.setClass(hoverClass, this._hover); // addClass if YES, removeClass if NO
