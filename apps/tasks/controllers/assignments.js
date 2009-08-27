@@ -65,7 +65,10 @@ Tasks.assignmentsController = SC.ArrayController.create(
       }
     }
       
-    this.set('assignedTasks', SC.Object.create({ treeItemChildren: assignmentNodes, treeItemIsExpanded: YES }));
+    this.set('assignedTasks', SC.Object.create({ treeItemChildren: assignmentNodes.sort(function(a,b) {
+      if (a.displayName===b.displayName) return 0;
+      return (a.displayName > b.displayName) ? 1 : -1;
+    }), treeItemIsExpanded: YES }));
     
   },
   
