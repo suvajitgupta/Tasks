@@ -86,8 +86,31 @@ Tasks.mainPage = SC.Page.design({
           classNames: ['top-bar-divider']
         }),
     
-        SC.View.design({
+        SC.View.design({ // TODO: [SG] add isEnabledBinding to track changes
           layout: { top: 0, height: 43, right: 275, width: 40 },
+          childViews: [
+            SC.View.design(Tasks.SimpleButton,{
+              layout: { centerX: -8, top: 2, width: 24, height: 24 },
+              classNames: ['save-icon'],
+              value:  "_Save".loc(),
+              toolTip: "_SaveTooltip".loc(),
+              target: 'Tasks',
+              action: 'saveData'
+            }),
+
+            SC.LabelView.design(Tasks.SimpleButton,{
+              layout: { centerX: 0, width: 40, height: 19, top: 22 },
+              classNames: ['dock-label'],
+              value:  "_Save".loc(),
+              toolTip: "_SaveTooltip".loc(),
+              target: 'Tasks',
+              action: 'saveData'
+            })
+          ]
+        }),
+    
+        SC.View.design({
+          layout: { top: 0, height: 43, right: 225, width: 40 },
           childViews: [
             SC.View.design(Tasks.SimpleButton,{
               layout: { centerX: -5, top: 2, width: 24, height: 24 },
@@ -111,7 +134,7 @@ Tasks.mainPage = SC.Page.design({
         }),
     
         SC.View.design({
-          layout: { top: 0, height: 43, right: 225, width: 40 },
+          layout: { top: 0, height: 43, right: 175, width: 40 },
           childViews: [
             SC.View.design(Tasks.SimpleButton,{
               layout: { centerX: -5, top: 2, width: 24, height: 24 },
@@ -129,29 +152,6 @@ Tasks.mainPage = SC.Page.design({
               toolTip: "_ExportTooltip".loc(),
               target: 'Tasks',
               action: 'exportData'
-            })
-          ]
-        }),
-    
-        SC.View.design({ // TODO: [SG] add isEnabledBinding to track changes
-          layout: { top: 0, height: 43, right: 175, width: 40 },
-          childViews: [
-            SC.View.design(Tasks.SimpleButton,{
-              layout: { centerX: -8, top: 2, width: 24, height: 24 },
-              classNames: ['save-icon'],
-              value:  "_Save".loc(),
-              toolTip: "_SaveTooltip".loc(),
-              target: 'Tasks',
-              action: 'saveData'
-            }),
-
-            SC.LabelView.design(Tasks.SimpleButton,{
-              layout: { centerX: 0, width: 40, height: 19, top: 22 },
-              classNames: ['dock-label'],
-              value:  "_Save".loc(),
-              toolTip: "_SaveTooltip".loc(),
-              target: 'Tasks',
-              action: 'saveData'
             })
           ]
         }),
@@ -236,9 +236,9 @@ Tasks.mainPage = SC.Page.design({
     workspaceView: SC.View.design({
       layout: { top: 42, bottom: 26, left: 0, right: 0 },
       classNames: ['workspace'],
-      childViews: 'topLeftView projectsControlView controlDividerView bottomRightView tasksControlView'.w(),
+      childViews: 'projectsListView projectsControlView controlDividerView taskListView tasksControlView'.w(),
       
-      topLeftView: SC.ScrollView.design({
+      projectsListView: SC.ScrollView.design({
         layout: { top: 0, bottom: 35, left: 0, width: 268 },
         hasHorizontalScroller: NO,
         classNames: ['projects-pane'],
@@ -296,12 +296,12 @@ Tasks.mainPage = SC.Page.design({
         classNames: ['control-divider']
       }),
       
-      bottomRightView: SC.ScrollView.design({
+      taskListView: SC.ScrollView.design({
         layout: { top: 0, bottom: 35, left: 268 },
         hasHorizontalScroller: NO,
         classNames: ['tasks-pane'],
 
-        contentView: SC.SourceListView.design({
+        contentView: SC.SourceListView.design({ // FIXME: [SG] fix new task created after last row splilling onto tasks control view
           layout: { top: 0, bottom: 0, left: 6, right: 6 },
           contentValueKey: 'displayName',
           contentBinding: 'Tasks.tasksController.arrangedObjects',
@@ -436,8 +436,8 @@ Tasks.mainPage = SC.Page.design({
         })
     }),
 
-    projectsList: SC.outlet('workspaceView.topLeftView.childViews.0.contentView'),
-    tasksList: SC.outlet('workspaceView.bottomRightView.childViews.0.contentView'),
+    projectsList: SC.outlet('workspaceView.projectsListView.childViews.0.contentView'),
+    tasksList: SC.outlet('workspaceView.taskListView.childViews.0.contentView'),
     
     bottomBarView: SC.View.design(SC.Border, {
       layout: { bottom: 0, height: 26, left: 0, right: 0 },
