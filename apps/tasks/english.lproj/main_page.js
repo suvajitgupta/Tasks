@@ -51,6 +51,7 @@ Tasks.mainPage = SC.Page.design({
           action: 'openUserManager'
         }),
 
+        // TODO: [SG] Switch to text field view instead of select field view to fix bugs and allow multiple (comma-separated) assignee filtering?
         SC.SelectFieldView.design({
           layout: { centerY: -5, height: 24, left: 315, width: 100 },
           nameKey: 'loginName',

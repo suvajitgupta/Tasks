@@ -8,10 +8,10 @@
 /*globals CoreTasks Tasks sc_require */
 sc_require('core');
 
-// FIXME: [SC] Shouldn't have to Store.commitRecords() after createRecord for Fixtures Data Source.
-// FIXME: [SC] Shouldn't have to manually add/remove to/from controller instead of store notifying of changes.
 // FIXME: [SE/SG] handle persistence consistently/when user Saves?
-// FIXME: [SG] don't allow add/delTasks when on allTasks project
+// FIXME: [SG] don't enable add/delTasks when on allTasks project
+// FIXME: [SC] Shouldn't have to manually add/remove to/from controller instead of store notifying of changes.
+// FIXME: [SC] Shouldn't have to call Store.commitRecords() after createRecord for Fixtures Data Source.
 
 Tasks.mixin({
 
@@ -334,7 +334,7 @@ Tasks.mixin({
 
     this.getPath('projectsController.content').pushObject(project);
 
-    // TODO: [SG] add new project right after currently selected project.
+    // TODO: [SG] add new project right after currently selected project?
     var listView = Tasks.getPath('mainPage.mainPane.projectsList');
     var idx = listView.length - 1;
     listView.select(idx);
@@ -464,7 +464,7 @@ Tasks.mixin({
       project.removeTask(task);
 
       // Remove the task from the All Tasks project.
-      // FIXME: [SE, SG] The task isn't removed from the list of tasks in the view.
+      // FIXME: [SE/SG] Deleted task isn't removed from the list of tasks in the view.
       CoreTasks.get('allTasks').removeTask(task);
 
       // Now remove the task from the assignments controller.
