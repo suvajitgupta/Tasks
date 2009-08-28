@@ -475,15 +475,14 @@ Tasks.mixin({
         var ac = this.get('assignmentsController');      
         ac.removeObject(task);
 
-      // Remove the task from the All Tasks project.
-      // FIXME: [SE/SG] Deleted task isn't removed from the list of tasks in the view.
-      CoreTasks.get('allTasks').removeTask(task);
+        // Remove the task from the All Tasks project.
+        // FIXME: [SE/SG] Deleted task isn't removed from the list of tasks in the view.
+        CoreTasks.get('allTasks').removeTask(task);
 
         // Finally, destroy the task.
         task.destroy();
       }
 
-      // TODO: [SG] Select task after deleted task, if any.
     }
   },
   
