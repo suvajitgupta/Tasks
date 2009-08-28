@@ -457,26 +457,31 @@ Tasks.mixin({
     var tc = this.get('tasksController');
     var sel = tc.get('selection');
     if (sel && sel.length() > 0) {
+      var context = {};
+      for (var i = 0; i < sel.length(); i++) {
+        
+        // Get the task and remove it from the project.
+        var task = sel.nextObject(i, null, context);
+        var project = this.getPath('projectsController.selection').firstObject();
+        project.removeTask(task);
+
+        // Remove the task from the All Tasks project.
+        // FIXME: [SE, SG] The task isn't removed from the list of tasks in the view.
+        CoreTasks.get('allTasks').removeTask(task);
+
+        // Now remove the task from the assignments controller.
+        tc.set('selection', null);
       
-      // Get the task and remove it from the project.
-      var task = sel.firstObject();
-      var project = this.getPath('projectsController.selection').firstObject();
-      project.removeTask(task);
+        var ac = this.get('assignmentsController');      
+        ac.removeObject(task);
 
       // Remove the task from the All Tasks project.
       // FIXME: [SE/SG] Deleted task isn't removed from the list of tasks in the view.
       CoreTasks.get('allTasks').removeTask(task);
 
-      // Now remove the task from the assignments controller.
-      tc.set('selection', null);
-      
-      var ac = this.get('assignmentsController');      
-      ac.removeObject(task);
-
-      CoreTasks.invokeLater(ac.showAssignments());
-
-      // Finally, destroy the task.
-      task.destroy();
+        // Finally, destroy the task.
+        task.destroy();
+      }
 
       // TODO: [SG] Select task after deleted task, if any.
     }
