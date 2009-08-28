@@ -59,7 +59,7 @@ v Set tasks toolbar button enablement based on having a selection [SG] <EO> @Don
 ^ Add "+" & "-" buttons in tasks toolbar (logged in user is default Submitter for added tasks) [SG] <SE> @Done
 v Allow "+" button to be pressed a second time to keep in data entry mode, Esc will exit mode [SG] <MB>
 ^ Show effort subtotals (exclude Low items) in curly braces for load balancing [SG] @Done
-- Append "?" for range-based subtotals including unknown efforts [SG]
+- Append "?" for range-based subtotals including tasks with unspecified efforts [SG] @Done
 - Indicate overloaded assignees (with more effort total than timeLeft in project) by color-coding them red [SG]
 ^ Allow drag-n-drop reordering (preserve order when persisting) [SG] @Done
 ^ Allow drag-n-drop reassignment [BB] <SG>  @Done

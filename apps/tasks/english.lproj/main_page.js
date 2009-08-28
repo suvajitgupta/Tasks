@@ -302,7 +302,7 @@ Tasks.mainPage = SC.Page.design({
         hasHorizontalScroller: NO,
         classNames: ['tasks-pane'],
 
-        contentView: SC.SourceListView.design({ // FIXME: [SG] fix new task created after last row splilling onto tasks control view
+        contentView: SC.SourceListView.design({ // FIXME: [SG] fix new task created after last row spilling onto tasks control view
           layout: { top: 0, bottom: 0, left: 6, right: 6 },
           contentValueKey: 'displayName',
           contentBinding: 'Tasks.tasksController.arrangedObjects',

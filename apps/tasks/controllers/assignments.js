@@ -88,6 +88,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
    */
   _createAssignmentNode: function(assignmentNodes, assigneeName, assigneeObj) {
     
+    var taskWithUnspecifiedEffort = false;
     var displayName = assigneeName;
     var effortString, totalEffortMin = 0, totalEffortMax = 0, effortMin, effortMax;
     var task, tasks = assigneeObj.tasks;
@@ -107,6 +108,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
       
       // Extract/total effort for each taek (simple number or a range)
       effortString = task.get('effort');
+      if(!effortString) taskWithUnspecifiedEffort = true;
       if(effortString && task.get('priority') !== CoreTasks.TASK_PRIORITY_LOW) {
         // sum up effort for High/Medium priority tasks
         effortMin = parseInt(effortString, 10);
@@ -126,7 +128,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
       if (totalEffortMax !== totalEffortMin) {
         totalEffort += '-' + totalEffortMax;
       }
-      displayName = displayName + ' {' + totalEffort + '}';
+      displayName = displayName + ' {' + totalEffort + (taskWithUnspecifiedEffort? '?' : '') + '}';
     }
     
     assignmentNodes.push (SC.Object.create({
