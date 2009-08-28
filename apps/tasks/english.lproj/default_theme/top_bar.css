@@ -37,6 +37,12 @@ Top Navigation Styling
   background: static_url('images/default-theme-static.png') no-repeat 0 -606px;
 }
 
+.users-icon {
+  background: static_url('images/users.gif');
+  height: 20px;
+  width: 24px;
+}
+
 /* Search */
 
 .searchbar {

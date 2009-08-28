@@ -42,18 +42,18 @@ Tasks.mainPage = SC.Page.design({
           valueBinding: SC.Binding.oneWay('CoreTasks.user')
         }),
       
-        SC.ButtonView.design({
-          layout: { centerY: -6, height: 24, left: 265, width: 50 },
-          title: "_User:".loc(),
-          titleMinWidth: 0,
+        SC.View.design(Tasks.SimpleButton,{
+          layout: { left: 280, centerY: -2, height: 20, width: 24 },
+          classNames: ['users-icon'],
+          title:  "_User".loc(),
           toolTip: "_OpenUserManagerTooltip".loc(),
           target: 'Tasks',
           action: 'openUserManager'
         }),
-
+        
         // TODO: [SG] Switch to text field view instead of select field view to fix bugs and allow multiple (comma-separated) assignee filtering?
         SC.SelectFieldView.design({
-          layout: { centerY: -5, height: 24, left: 315, width: 100 },
+          layout: { centerY: -2, height: 24, left: 307, width: 100 },
           nameKey: 'loginName',
           emptyName: "_Everyone".loc(), // FIXME: [SC] fix empty line after first item in SelectFieldView
           // FIXME: [SC] make SelectFieldView work with objects in controller:'Tasks.assigneeController.content',
@@ -62,14 +62,14 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         SC.TextFieldView.design({
-          layout: { centerY: -4, height: 24, left: 485, width: 200 },
+          layout: { centerY: -2, height: 24, left: 485, width: 200 },
           classNames: ['searchbar'],
           hint: "_SearchHint".loc(),
           valueBinding: 'Tasks.assignmentsController.searchFilter' // TODO: [SG] bind to searchController instead
         }),
       
         SC.View.design({ // Search Filter delete button
-          layout: { centerY: -4, height: 12, left: 666, width: 12 },
+          layout: { centerY: -2, height: 12, left: 666, width: 12 },
           isVisible: NO,
           classNames: ['searchbar-cancel-icon'],
           mouseDown: function() {
