@@ -450,6 +450,7 @@ Tasks.mixin({
     // TODO: [SE] Implement addTaskFailure
   },
   
+  // FIXME: [SG] Fix when you delete all tasks form last assignee it throws an error
   /**
    * Delete selected task in tasks detail list.
    */

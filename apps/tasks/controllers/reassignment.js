@@ -10,6 +10,7 @@
   @extends SC.Object
   @author Brandon Blatnick
 */
+// FIXME: [BB] Fix spurious box-like ghost view with task while dragging
 Tasks.reassignmentController = SC.Object.create(SC.CollectionViewDelegate,
 /** @scope Tasks.reassignmentController.prototype */ {
 
