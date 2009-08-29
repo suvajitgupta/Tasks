@@ -450,7 +450,8 @@ Tasks.mixin({
     // TODO: [SE] Implement addTaskFailure
   },
   
-  // FIXME: [SG] Fix when you delete all tasks form last assignee it throws an error
+  // FIXME: [SG] Fix when you delete all tasks from last assignee it throws an error
+  // FIXME: [SC] Using the DEL key deletes tasks from the view but not the store
   /**
    * Delete selected task in tasks detail list.
    */
