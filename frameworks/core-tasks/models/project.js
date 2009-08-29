@@ -54,12 +54,15 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
     if (value !== undefined) {
       
       var projectHash = CoreTasks.Project.parse(value);
-      console.log("PARSED PROJECT: " + JSON.stringify(projectHash));
+      // console.log("PARSED PROJECT: " + JSON.stringify(projectHash));
       
+      // FIXME: [SG] Figure out how to disallow projects with the same name while allowing user to change timeLeft
+      /*
       if(CoreTasks.getProject(projectHash.name)) {
         console.log('Project Editing Error - a project with this name already exists: ' + projectHash.name);
         return;
       }
+      */
       
       this.propertyWillChange('name');
       this.writeAttribute('name', projectHash.name);
