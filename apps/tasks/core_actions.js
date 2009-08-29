@@ -10,8 +10,8 @@ sc_require('core');
 
 // FIXME: [SE/SG] handle persistence consistently/when user Saves?
 // FIXME: [SG] don't enable add/delTasks when on allTasks project
-// FIXME: [SC] Shouldn't have to manually add/remove to/from controller instead of store notifying of changes.
-// FIXME: [SC] Shouldn't have to call Store.commitRecords() after createRecord for Fixtures Data Source.
+// CHANGED: [SC] Shouldn't have to manually add/remove to/from controller instead of store notifying of changes.
+// CHANGED: [SC] Shouldn't have to call Store.commitRecords() after createRecord for Fixtures Data Source.
 
 Tasks.mixin({
 
@@ -343,7 +343,7 @@ Tasks.mixin({
     var itemView = listView.itemViewForContentIndex(idx);
 
     // Wait for run loop to complete before method is called.
-    // FIXME: [SC] need to highlight entire item when starting to edit so that user can simply start typing
+    // FIXME: [SC] need to highlight entire item when starting to edit
     CoreTasks.invokeLater(itemView.beginEditing.bind(itemView));
   },
   
@@ -367,7 +367,7 @@ Tasks.mixin({
       }
       
       // Select the first project in the list.
-      // FIXME: [SC] Do this without using SC.RunLoop.begin/end, if possible.
+      // CHANGE: [SC] Do this without using SC.RunLoop.begin/end, if possible.
       SC.RunLoop.begin();
       Tasks.getPath('mainPage.mainPane.projectsList').select(0);
       SC.RunLoop.end();
@@ -469,7 +469,7 @@ Tasks.mixin({
         project.removeTask(task);
 
         // Remove the task from the All Tasks project.
-        // FIXME: [SE, SG] The task isn't removed from the list of tasks in the view.
+        // FIXME: [SE/SG] Deleted task isn't removed from AllTasks project.
         CoreTasks.get('allTasks').removeTask(task);
 
         // Now remove the task from the assignments controller.
@@ -477,10 +477,6 @@ Tasks.mixin({
       
         var ac = this.get('assignmentsController');      
         ac.removeObject(task);
-
-        // Remove the task from the All Tasks project.
-        // FIXME: [SE/SG] Deleted task isn't removed from the list of tasks in the view.
-        CoreTasks.get('allTasks').removeTask(task);
 
         // Finally, destroy the task.
         task.destroy();
