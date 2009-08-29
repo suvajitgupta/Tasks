@@ -53,14 +53,18 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
   displayName: function(key, value) {
     if (value !== undefined) {
       
-      var hash = CoreTasks.Project.parse(value);
+      var projectHash = CoreTasks.Project.parse(value);
+      if(CoreTasks.getProject(projectHash.name)) {
+        console.log('Project Editing Error - a project with this name already exists: ' + projectHash.name);
+        return;
+      }
       
       this.propertyWillChange('name');
-      this.writeAttribute('name', hash.name);
+      this.writeAttribute('name', projectHash.name);
       this.propertyDidChange('name');
       
       this.propertyWillChange('timeLeft');
-      this.writeAttribute('timeLeft', hash.timeLeft);
+      this.writeAttribute('timeLeft', projectHash.timeLeft);
       this.propertyDidChange('timeLeft');
       
     } else {

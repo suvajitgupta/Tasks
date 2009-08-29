@@ -34,7 +34,7 @@ Project Manager GUI
 ^ Add "+" & "-" buttons in projects Toolbar [SG] <SC> @Done
 - Add warning Alert box about deleting Project with Tasks [SG] @Done
 - Don't create a project if it already exists during Import [SG] @Done
-- Disallow duplicates during "Add Project" [SG]
+- Disallow duplicate project names after editing [SG]
 v Add summary in projects toolbar showing number of Tasks for selected Project [SG] <MB> @Done
 v Set projects toolbar button enablement based on having a selection [SG] <EO> @Done
 - Select first project at startup [JH2] <SG> @Done
