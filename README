@@ -1,16 +1,16 @@
 INTRODUCTION
 ==============================================================================
-Welcome to "Tasks!" We created "Tasks" for a few reasons:
+Welcome to "Tasks!" I created "Tasks" for a few reasons:
 
 1. To become a "real" sample application that goes beyond the "hello world"
    examples (like "clock") and snippets showing off facets of SproutCore
-   (like "drag").  SproutCore is a fantastic and powerful framework and my
-   goal is to use Tasks to both learn it while showcasing its capabilities.
+   (like "drag").  SproutCore is very elegant and powerful framework and my
+   goal is to use Tasks to ramp up as well as showcase its capabilities.
 
 2. To illustrate how to engineer a non-trivial application using things like
-   a task plan (scope/assignments), wireframes/mockups (GUI design),
+   a task plan (scope/assignments), wireframes/mockups (vision/GUI design),
    statecharts/MVC structure (technical design), and integration with a remote
-   server via REST/JSON
+   server via REST/JSON.
 
 3. We all build software and "Tasks" can become your agile software management
    tool - you won't need the cumbersome task tracking & bean counting tools
@@ -22,7 +22,7 @@ Welcome to "Tasks!" We created "Tasks" for a few reasons:
    itself!
 
 Tasks is "in progress" - we plan to tinker with it in the coming months and
-grow it into the tool we use to manage the development of a very complex
+mature it into the tool we use to manage the development of a very complex
 commercial SproutCore application.  I hope you will find Tasks useful as
 you start your journey with SproutCore.  Please feel free to send me your
 feedback or code contributions!
