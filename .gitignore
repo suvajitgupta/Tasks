@@ -12,3 +12,4 @@ server.out
 abbot/
 tasks-server/WEB-INF/data
 tasks-server/WEB-INF/config/generated.js
+frameworks/sproutcore-statechart/

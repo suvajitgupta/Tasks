@@ -27,6 +27,7 @@ SproutCore Issues
 - Drag-n-drop in SourceListView is broken (Apple has on priority list) [SC] $Bug
 - Using the DEL key deletes tasks from the view but not the store [SC] $Bug
 - Add missing 'localize' support back in CollectionView (regression from SC 0.9) [SC] $Bug
+- SC.TextFieldView will Follow Your scroll and it seems that it's Z-Index is higher that everything else when it has focus (i.e. when the cursor is inside and ready for editing you can scroll and the textField follows scroll and lays overtop of all other object.)
 
 Project Manager GUI
 ^ Add Master/Detail Explorer view with click selection of Projects showing corresponding Tasks [JH2] <SG> @Done
