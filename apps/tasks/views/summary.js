@@ -15,24 +15,24 @@ Tasks.SummaryView = SC.View.extend( // TODO: [SG] I18N all strings
 /** @scope Tasks.SummaryView.prototype */ {
   
   projectsCount: '',
-  selectedProjectTaskCount: '',
+  tasksCount: '',
 
-  displayProperties: ['projectsCount', 'selectedProjectTaskCount'],
+  displayProperties: ['projectsCount', 'tasksCount'],
   
   render: function(context, firstTime) {
 
-    var summary = "There are %@ projects.  ".fmt(this.get('projectsCount')-2);
+    var summary = "%@ projects, ".fmt(this.get('projectsCount')-2);
 
-    var taskCount = this.get('selectedProjectTaskCount');
+    var taskCount = this.get('tasksCount');
     switch(taskCount) {
       case 0: 
-        summary += "Selected project has no tasks.";
+        summary += "selected project has no tasks.";
         break;
       case 1:
-        summary += "Selected project has 1 task.";
+        summary += "selected project has 1 task.";
         break;
       default:
-        summary += "Selected project has %@ tasks.".fmt(taskCount);
+        summary += "selected project has %@ tasks.".fmt(taskCount);
         break;
     }
     

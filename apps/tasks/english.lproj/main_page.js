@@ -449,7 +449,7 @@ Tasks.mainPage = SC.Page.design({
       summaryView: Tasks.SummaryView.design({
         layout: { centerY: 0, height: 16, left: 10, right: 0 },
         projectsCountBinding: SC.Binding.oneWay('Tasks.projectsController.length'),
-        selectedProjectTaskCountBinding: SC.Binding.oneWay('Tasks.assignmentsController.length')
+        tasksCountBinding: SC.Binding.oneWay('Tasks.assignmentsController.length')
       })    
     })
   })

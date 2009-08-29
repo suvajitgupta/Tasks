@@ -22,8 +22,7 @@ General Infrastructure
 v Add drag-n-drop of a TXT file into App for data importing (using Google Gears) [MB] <SG> @Active
 
 SproutCore Issues
-- Click on AllTasks, scroll down, select a task, then click on another project - it will be blank! [SC] $Bug
-- Fix unnecessary scrollbars appearing on tasks source list view at times [SC] $Bug
+- Fix ScrollView issue with unnecessary scrollbar (to reproduce: select AllTasks, scroll down, select a task, then select another project) [SC] $Bug
 - Allow SourceListView disclosures to be opened/closed (Apple has on priority list) [SC] $Bug
 - Drag-n-drop in SourceListView is broken (Apple has on priority list) [SC] $Bug
 - Add missing 'localize' support back in CollectionView (regression from SC 0.9) [SC] $Bug
