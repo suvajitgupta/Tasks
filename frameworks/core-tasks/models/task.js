@@ -134,7 +134,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
   displayName: function(key, value) {
     if (value !== undefined) {
       var taskHash = CoreTasks.Task.parse(value, false);
-      // console.log("PARSED: " + JSON.stringify(taskHash));
+      // console.log("PARSED TASK: " + JSON.stringify(taskHash));
       
       if(taskHash.priority) {
         this.propertyWillChange('priority');
@@ -235,7 +235,7 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
     }
     
     // extract task effort
-    var taskEffortMatches = /\{(\d+)\}|\{(\d+-\d+)\}/.exec(taskLine);
+    var taskEffortMatches = /\{(\d+\.\d+-\d+\.\d+|\d+\.\d+-\d+|\d+-\d+\.\d+|\d+-\d+|\d+\.\d+|\d+)\}/.exec(taskLine);
     var taskEffort = null;
     if(taskEffortMatches) {
       taskEffort = taskEffortMatches[1]? taskEffortMatches[1] : taskEffortMatches[2];

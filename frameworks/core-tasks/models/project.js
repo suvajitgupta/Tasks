@@ -54,6 +54,8 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
     if (value !== undefined) {
       
       var projectHash = CoreTasks.Project.parse(value);
+      console.log("PARSED PROJECT: " + JSON.stringify(projectHash));
+      
       if(CoreTasks.getProject(projectHash.name)) {
         console.log('Project Editing Error - a project with this name already exists: ' + projectHash.name);
         return;
@@ -130,13 +132,13 @@ CoreTasks.Project.mixin(/** @scope CoreTasks.Project */ {
    */
   parse: function(line) {
     var projectName = line, projectTimeLeft = null;
-    var res = line.match(/([\w\s]+)[\s*]\{(\d+)\}/);
+    var res = line.match(/([\w\s]+)\{(\d+\.\d+|\d+)\}/);
     if(res) {
       projectName = res[1];
       projectTimeLeft = res[2];
     }
     return {
-      name: projectName,
+      name: projectName.replace(/\s+$/, ''),
       timeLeft: projectTimeLeft,
       tasks: []
     };
