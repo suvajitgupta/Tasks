@@ -33,7 +33,7 @@ Tasks.mainPage = SC.Page.design({
         SC.LabelView.design({
           layout: { centerY: -10, height: 15, left: 100, width: 30 },
           classNames: ['tasks-version'],
-          value: Tasks.VERSION
+          value: "v" + Tasks.VERSION
         }),
 
         Tasks.WelcomeView.design({
@@ -269,7 +269,7 @@ Tasks.mainPage = SC.Page.design({
         childViews: [
           
           SC.LabelView.design(Tasks.SimpleButton,{
-            layout: { centerY: 3, left: 16, height: 21, width: 100 },
+            layout: { centerY: 3, left: 10, height: 21, width: 115 },
             icon: 'project-add-icon',
             value: "_AddProject".loc(),
             classNames: ['bottom-bar-label'],
@@ -279,7 +279,7 @@ Tasks.mainPage = SC.Page.design({
           }),
         
           SC.LabelView.design(Tasks.SimpleButton,{
-            layout: { centerY: 3, left: 126, height: 21, width: 100 },
+            layout: { centerY: 3, left: 125, height: 21, width: 115 },
             icon: 'project-del-icon',
             value: "_DelProject".loc(),
             classNames: ['bottom-bar-label'],
@@ -332,7 +332,7 @@ Tasks.mainPage = SC.Page.design({
             childViews: [
           
             SC.LabelView.design(Tasks.SimpleButton,{
-              layout: { centerY: 1, left: 16, height: 22, width: 90 },
+              layout: { centerY: 1, left: 15, height: 22, width: 90 },
               icon: 'task-add-icon',
               value: "_AddTask".loc(),
               classNames: ['bottom-bar-label'],
