@@ -84,11 +84,11 @@ Application Manager GUI
 - Add "Export" button in top toolbar that copies to clipboard (using TXT file format) [SG] @Active
 - Add "Save" button in top toolbar [SG] <SE> @Done
 - Add Online Help button in top Toolbar & modal Help dialog [SG] @Active
-v Add Logout button to exit in top toolbar [SG] <SE> @Active
-v Prompt user to save changes before exiting [SG] <SE>
-- Add Undo/Redo hotkeys & buttons in top toolbar (till last Save) [SG] <SE>
+- Add Logout button to exit in top toolbar [SG] <SE> @Active
+- Prompt user to save changes before exiting [SG] <SE>
+- Restore application settings/state from last login [SG] <MB>
 v Add hover tooltip on application title showing number of Projects [SG] <EG>
-- Restore application settings/state from last login [SG] <SE>
+- Add Undo/Redo hotkeys & buttons in top toolbar (till last Save) [SG] <SE>
 
 Server
 ^ Build persistence server (using Persevere) [SE] <SG> @Done
