@@ -369,7 +369,7 @@ Tasks.mixin({
       // Select the first project in the list.
       // CHANGE: [SC] Do this without using SC.RunLoop.begin/end, if possible.
       SC.RunLoop.begin();
-      Tasks.getPath('mainPage.mainPane.projectsList').select(0);
+      Tasks.getPath('mainPage.mainPane.projectsList').select(2);
       SC.RunLoop.end();
 
       // Move all tasks in project to Inbox since they are now unallocated

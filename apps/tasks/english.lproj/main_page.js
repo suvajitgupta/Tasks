@@ -31,7 +31,7 @@ Tasks.mainPage = SC.Page.design({
         }),
       
         SC.LabelView.design({
-          layout: { centerY: -8, height: 15, left: 100, width: 30 },
+          layout: { centerY: -10, height: 15, left: 100, width: 30 },
           classNames: ['tasks-version'],
           value: Tasks.VERSION
         }),
@@ -271,8 +271,8 @@ Tasks.mainPage = SC.Page.design({
           SC.LabelView.design(Tasks.SimpleButton,{
             layout: { centerY: 3, left: 16, height: 21, width: 100 },
             icon: 'project-add-icon',
-            fontWeight: SC.BOLD_WEIGHT,
             value: "_AddProject".loc(),
+            classNames: ['bottom-bar-label'],
             toolTip: "_AddProjectTooltip".loc(),
             target: 'Tasks',
             action: 'addProject'
@@ -281,8 +281,8 @@ Tasks.mainPage = SC.Page.design({
           SC.LabelView.design(Tasks.SimpleButton,{
             layout: { centerY: 3, left: 126, height: 21, width: 100 },
             icon: 'project-del-icon',
-            fontWeight: SC.BOLD_WEIGHT,
             value: "_DelProject".loc(),
+            classNames: ['bottom-bar-label'],
             toolTip: "_DelProjectTooltip".loc(),
             isEnabledBinding: SC.Binding.oneWay('Tasks.projectsController.isDeletable'),
             target: 'Tasks',
@@ -334,8 +334,8 @@ Tasks.mainPage = SC.Page.design({
             SC.LabelView.design(Tasks.SimpleButton,{
               layout: { centerY: 1, left: 16, height: 22, width: 90 },
               icon: 'task-add-icon',
-              fontWeight: SC.BOLD_WEIGHT,
               value: "_AddTask".loc(),
+              classNames: ['bottom-bar-label'],
               toolTip: "_AddTaskTooltip".loc(),
               target: 'Tasks',
               action: 'addTask'
@@ -344,8 +344,8 @@ Tasks.mainPage = SC.Page.design({
             SC.LabelView.design(Tasks.SimpleButton,{
               layout: { centerY: 1, left: 106, height: 22, width: 90 },
               icon: 'task-del-icon',
-              fontWeight: SC.BOLD_WEIGHT,
               value: "_DelTask".loc(),
+              classNames: ['bottom-bar-label'],
               toolTip: "_DelTaskTooltip".loc(),
               isEnabledBinding: SC.Binding.oneWay('Tasks.tasksController.hasSelection'),
               target: 'Tasks',
@@ -353,7 +353,7 @@ Tasks.mainPage = SC.Page.design({
             }),
           
             SC.View.design({
-              layout: { top: 0, left: 200, right: 0 },
+              layout: { top: 0, left: 190, right: 0 },
               childViews: [
             
               SC.SeparatorView.design({
@@ -362,7 +362,7 @@ Tasks.mainPage = SC.Page.design({
               }),
 
               SC.RadioView.design({
-                layout: { centerY: 3, height: 21, left: 15, width: 180 },
+                layout: { centerY: 3, height: 21, left: 15, width: 200 },
                 escapeHTML: NO,
                 controlSize: SC.SMALL_CONTROL_SIZE,
                 items: [
@@ -382,11 +382,11 @@ Tasks.mainPage = SC.Page.design({
 
               SC.SeparatorView.design({
                 layoutDirection: SC.LAYOUT_VERTICAL,
-                layout: { top: 5, bottom: 5, left: 195, width: 4 }
+                layout: { top: 5, bottom: 5, left: 205, width: 4 }
               }),
 
               SC.RadioView.design({
-                layout: { centerY: 3, height: 21, left: 210, width: 250 },
+                layout: { centerY: 3, height: 21, left: 230, width: 270 },
                 escapeHTML: NO,
                 controlSize: SC.SMALL_CONTROL_SIZE,
                 items: [
@@ -408,11 +408,11 @@ Tasks.mainPage = SC.Page.design({
 
               SC.SeparatorView.design({
                 layoutDirection: SC.LAYOUT_VERTICAL,
-                layout: { top: 5, bottom: 5, left: 455, width: 4 }
+                layout: { top: 5, bottom: 5, left: 485, width: 4 }
               }),
 
               SC.RadioView.design({
-                layout: { centerY: 3, height: 21, left: 470, width: 210 },
+                layout: { centerY: 3, height: 21, left: 510, width: 230 },
                 escapeHTML: NO,
                 controlSize: SC.SMALL_CONTROL_SIZE,
                 items: [

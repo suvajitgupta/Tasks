@@ -33,7 +33,7 @@ Tasks.mixin({
   // Project/Task Management
   goStateA4: function(){
     // Select first project at startup
-    Tasks.getPath('mainPage.mainPane').get('projectsList').select(0);
+    Tasks.getPath('mainPage.mainPane').get('projectsList').select(2);
   }
 
 });

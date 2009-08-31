@@ -9,3 +9,9 @@ Bottom Bar Styling
 .bottom-bar {
   background: static_url('images/default-theme-repeat-x.png') repeat-x 0 -44px;
 }
+
+.bottom-bar-label {
+  font-size: 9px !important;
+  color: #000 !important;
+  font-weight: bold !important;
+}
