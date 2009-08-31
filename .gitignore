@@ -9,6 +9,7 @@ tmp
 sc-integrate
 TODO
 server.out
+server.err
 abbot/
 tasks-server/WEB-INF/data
 tasks-server/WEB-INF/config/generated.js
