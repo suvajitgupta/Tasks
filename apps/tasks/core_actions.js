@@ -365,12 +365,6 @@ Tasks.mixin({
       if(taskCount > 0) {
         if(!confirm("This project has tasks, are you sure you want to delete it?")) return;
       }
-      
-      // Select the first project in the list.
-      // CHANGE: [SC] Do this without using SC.RunLoop.begin/end, if possible.
-      SC.RunLoop.begin();
-      Tasks.getPath('mainPage.mainPane.projectsList').select(2);
-      SC.RunLoop.end();
 
       // Move all tasks in project to Inbox since they are now unallocated
       var inboxProject = CoreTasks.get('inbox');
@@ -382,6 +376,14 @@ Tasks.mixin({
       // Remove the project from the list and destroy.
       pc.removeObject(project);
       project.destroy();
+      
+      // Select the first project in the list.
+      // CHANGE: [SC] Do this without using SC.RunLoop.begin/end, if possible.
+      SC.RunLoop.begin();
+      var projectsList = Tasks.getPath('mainPage.mainPane.projectsList');
+      console.log("DEBUG: project count = " + projectsList.get('length'));
+      projectsList.select(projectsList.get('length') > 2? 2 : 0);
+      SC.RunLoop.end();
       
     }
   },

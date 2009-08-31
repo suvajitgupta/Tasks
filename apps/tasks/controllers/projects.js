@@ -16,8 +16,10 @@ Tasks.projectsController = SC.ArrayController.create(
     var sel = this.get('selection');
     // TODO
     if(!sel) return false;
-    var selectedProject = sel.firstObject().get('name');
-    if (selectedProject === CoreTasks.INBOX_NAME || selectedProject === CoreTasks.ALL_TASKS_NAME) {
+    var selectedProject = sel.firstObject();
+    if(!selectedProject) return false;
+    var selectedProjectName = selectedProject.get('name');
+    if (selectedProjectName === CoreTasks.INBOX_NAME || selectedProjectName === CoreTasks.ALL_TASKS_NAME) {
       return false;
     }
     return this.hasSelection();
