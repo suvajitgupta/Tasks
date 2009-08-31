@@ -115,8 +115,8 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       }
       
     }
-
     sc_super();
+    context.begin('a').attr({style: 'position:absolute; top: 5, right: 5, width: 16, height: 16;'}).push('<img src="', SC.BLANK_IMAGE_URL, '" class="button sc-icon-document-16" alt="Description" />').end();
   }
   
 });
