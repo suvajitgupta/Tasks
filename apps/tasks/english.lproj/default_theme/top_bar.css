@@ -23,6 +23,7 @@ Top Navigation Styling
 .dock-label {
   font-size: 9px !important;
   color: #fff !important;
+  text-align: center !important;
   font-weight: bold !important;
 }
 

@@ -31,9 +31,9 @@ Tasks.mainPage = SC.Page.design({
         }),
       
         SC.LabelView.design({
-          layout: { centerY: -10, height: 15, left: 100, width: 30 },
+          layout: { centerY: -12, height: 15, left: 100, width: 30 },
           classNames: ['tasks-version'],
-          value: "v" + Tasks.VERSION
+          value: Tasks.VERSION
         }),
 
         Tasks.WelcomeView.design({
@@ -83,15 +83,15 @@ Tasks.mainPage = SC.Page.design({
         }),
       
         SC.View.design({
-          layout: {  top: 0, height: 43, right: 330, width: 2 },
+          layout: {  top: 0, height: 43, right: 355, width: 2 },
           classNames: ['top-bar-divider']
         }),
     
         SC.View.design({ // TODO: [SG] add isEnabledBinding to track changes
-          layout: { top: 0, height: 43, right: 275, width: 40 },
+          layout: { top: 0, height: 43, right: 300, width: 45 },
           childViews: [
             SC.View.design(Tasks.SimpleButton,{
-              layout: { centerX: -8, top: 2, width: 24, height: 24 },
+              layout: { centerX: 0, top: 2, width: 24, height: 24 },
               classNames: ['save-icon'],
               value:  "_Save".loc(),
               toolTip: "_SaveTooltip".loc(),
@@ -100,7 +100,7 @@ Tasks.mainPage = SC.Page.design({
             }),
 
             SC.LabelView.design(Tasks.SimpleButton,{
-              layout: { centerX: 0, width: 40, height: 19, top: 22 },
+              layout: { left: 0, right: 0, height: 19, top: 22 },
               classNames: ['dock-label'],
               value:  "_Save".loc(),
               toolTip: "_SaveTooltip".loc(),
@@ -111,10 +111,10 @@ Tasks.mainPage = SC.Page.design({
         }),
     
         SC.View.design({
-          layout: { top: 0, height: 43, right: 225, width: 40 },
+          layout: { top: 0, height: 43, right: 245, width: 45 },
           childViews: [
             SC.View.design(Tasks.SimpleButton,{
-              layout: { centerX: -5, top: 2, width: 24, height: 24 },
+              layout: { centerX: 0, top: 2, width: 24, height: 24 },
               classNames: ['import-icon'],
               title:  "_Import".loc(),
               toolTip: "_ImportTooltip".loc(),
@@ -123,7 +123,7 @@ Tasks.mainPage = SC.Page.design({
             }),
 
             SC.LabelView.design(Tasks.SimpleButton,{
-              layout: { centerX: 0, width: 40, height: 19, top: 22 },
+              layout: { left: 0, right: 0, height: 19, top: 22 },
               classNames: ['dock-label'],
               title:  "_Import".loc(),
               toolTip: "_ImportTooltip".loc(),
@@ -135,10 +135,10 @@ Tasks.mainPage = SC.Page.design({
         }),
     
         SC.View.design({
-          layout: { top: 0, height: 43, right: 175, width: 40 },
+          layout: { top: 0, height: 43, right: 185, width: 45 },
           childViews: [
             SC.View.design(Tasks.SimpleButton,{
-              layout: { centerX: -5, top: 2, width: 24, height: 24 },
+              layout: { centerX: 0, top: 2, width: 24, height: 24 },
               classNames: ['export-icon'],
               value:  "_Export".loc(),
               toolTip: "_ExportTooltip".loc(),
@@ -147,7 +147,7 @@ Tasks.mainPage = SC.Page.design({
             }),
 
             SC.LabelView.design(Tasks.SimpleButton,{
-              layout: { centerX: 0, width: 40, height: 19, top: 22 },
+              layout: { left: 0, right: 0, height: 19, top: 22 },
               classNames: ['dock-label'],
               value:  "_Export".loc(),
               toolTip: "_ExportTooltip".loc(),
@@ -158,12 +158,7 @@ Tasks.mainPage = SC.Page.design({
         }),
     
         SC.View.design({
-          layout: {  top: 0, height: 43, right: 170, width: 2 },
-          classNames: ['top-bar-divider']
-        }),
-    
-        SC.View.design({
-          layout: { top: 0, height: 43, right: 116,  width: 40 },
+          layout: { top: 0, height: 43, right: 125,  width: 45 },
           childViews: [
             SC.View.design(Tasks.SimpleButton,{
               layout: { centerX: 0, top: 2, width: 24, height: 24 },
@@ -175,7 +170,7 @@ Tasks.mainPage = SC.Page.design({
             }),
 
             SC.LabelView.design(Tasks.SimpleButton,{
-              layout: { centerX: 0, width: 40, height: 19, top: 22 },
+              layout: { left: 0, right: 0, height: 19, top: 22 },
               classNames: ['dock-label'],
               value:  "_Settings".loc(),
               toolTip: "_SettingsTooltip".loc(),
@@ -186,10 +181,10 @@ Tasks.mainPage = SC.Page.design({
         }),
     
         SC.View.design({
-          layout: { top: 0, height: 43, right: 60, width: 40 },
+          layout: { top: 0, height: 43, right: 65, width: 45 },
           childViews: [
             SC.View.design(Tasks.SimpleButton,{
-              layout: { centerX: -3, top: 2, width: 24, height: 24 },
+              layout: { centerX: 0, top: 2, width: 24, height: 24 },
               classNames: ['help-icon'],
               title:  "_Help".loc(),
               toolTip: "_HelpTooltip".loc(),
@@ -198,7 +193,7 @@ Tasks.mainPage = SC.Page.design({
             }),
 
             SC.LabelView.design(Tasks.SimpleButton,{
-              layout: { centerX: 0, width: 30, height: 19, top: 22 },
+              layout: { left: 0, right: 0, height: 19, top: 22 },
               classNames: ['dock-label'],
               value:  "_Help".loc(),
               toolTip: "_HelpTooltip".loc(),
@@ -209,10 +204,10 @@ Tasks.mainPage = SC.Page.design({
         }),
     
         SC.View.design({
-          layout: { top: 0, height: 43, right: 10, width: 40 },
+          layout: { top: 0, height: 43, right: 10, width: 45 },
           childViews: [
           SC.View.design(Tasks.SimpleButton,{
-            layout: { centerX: -2, top: 2, width: 24, height: 24 },
+            layout: { centerX: 0, top: 2, width: 24, height: 24 },
             classNames: ['logout-icon'],
             title:  "_Logout".loc(),
             toolTip: "_LogoutTooltip".loc(),
@@ -221,7 +216,7 @@ Tasks.mainPage = SC.Page.design({
           }),
 
           SC.LabelView.design(Tasks.SimpleButton,{
-            layout: { centerX: 0, width: 40, height: 19, top: 22 },
+            layout: { left: 0, right: 0, height: 19, top: 22 },
             classNames: ['dock-label'],
             value:  "_Logout".loc(),
             toolTip: "_LogoutTooltip".loc(),
@@ -353,7 +348,7 @@ Tasks.mainPage = SC.Page.design({
             }),
           
             SC.View.design({
-              layout: { top: 0, left: 190, right: 0 },
+              layout: { top: 0, left: 195, right: 0 },
               childViews: [
             
               SC.SeparatorView.design({
@@ -362,7 +357,7 @@ Tasks.mainPage = SC.Page.design({
               }),
 
               SC.RadioView.design({
-                layout: { centerY: 3, height: 21, left: 15, width: 200 },
+                layout: { centerY: 3, height: 21, left: 20, width: 200 },
                 escapeHTML: NO,
                 controlSize: SC.SMALL_CONTROL_SIZE,
                 items: [
@@ -408,7 +403,7 @@ Tasks.mainPage = SC.Page.design({
 
               SC.SeparatorView.design({
                 layoutDirection: SC.LAYOUT_VERTICAL,
-                layout: { top: 5, bottom: 5, left: 485, width: 4 }
+                layout: { top: 5, bottom: 5, left: 490, width: 4 }
               }),
 
               SC.RadioView.design({
