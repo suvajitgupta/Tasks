@@ -280,9 +280,15 @@ Tasks.mixin({
   /**
    * Launch User Manager dialog.
    */
-  openUserManager: function() {
+  openUserManager: function(button) {
     // TODO: [SG] implement open user manager
-    this._notImplemented('openUserManager');
+    //this._notImplemented('openUserManager');
+    var pane = SC.PickerPane.create({
+      layout: { width: 400, height: 200 },
+      contentView: SC.View.extend({
+        
+      })
+    }).popup(button, SC.PICKER_POINTER);
   },
   
   /**
