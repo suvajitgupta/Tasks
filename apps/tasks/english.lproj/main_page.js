@@ -239,7 +239,7 @@ Tasks.mainPage = SC.Page.design({
         hasHorizontalScroller: NO,
         classNames: ['projects-pane'],
 
-        contentView: SC.ListView.design({
+        contentView: Tasks.ProjectsListView.design({
           layout: { top: 5 },
           contentValueKey: 'displayName',
           contentBinding: 'Tasks.projectsController.arrangedObjects',

@@ -1,7 +1,7 @@
 // ==========================================================================
 // Project:   Tasks.reallocationController
 // ==========================================================================
-/*globals Tasks */
+/*globals CoreTasks Tasks sc_require */
 
 /** @class
 
@@ -13,39 +13,58 @@
 */
 Tasks.reallocationController = SC.Object.create(SC.CollectionViewDelegate,
 /** @scope Tasks.reallocationController.prototype */ {
+  
+  // ..........................................................
+  // DROP TARGET SUPPORT
+  // 
 
+  /**
+    If the drag data includes employees, then we can accept a move or copy
+    from most locations.  If the dragSource is another collection view sharing
+    the same delegate, then we know how to do a move, so allow that.  
+    Otherwise, just allow a copy.
+  */
+  collectionViewComputeDragOperations: function(view, drag, proposedDragOperations) {
+    if (drag.hasDataType(Tasks.Task)) {
+        return SC.DRAG_MOVE;
+    }
+    else {
+      return SC.DRAG_REORDER;
+    }
+  },
+  
   /**
     Called if the user actually drops on the view.
   */
   collectionViewPerformDragOperation: function(view, drag, dragOp, idx, dropOp) {
+    // TODO: [BB] Fix reorder
+    if (dragOp & SC.DRAG_REORDER) return SC.DRAG_MOVE; // allow reorder
     
-    alert('hi');
-    /*
-    // tells the CollectionView to do nothing
-    // TODO: [BB] Probably a better way to do this.  Shouldn't even allow the first position to be draggable.
-    if (idx === 0) return SC.DRAG_MOVE; 
-    var content = view.get('content');
-    var data = drag.dataForType(view.get('reorderDataType')) ;
+    var tasks = drag.dataForType(Tasks.Task),
+        content   = view.get('content'),
+        len       = view.get('length'),
+        source    = drag.get('source'),
+        ret       = SC.DRAG_NONE;
     
-    // get assignee of item before drag location
-    var newAssignee = content.objectAt(idx-1).get('assignee');
-
-    // get each object
-    var objects = [];
-    var shift = 0;
-    data.indexes.forEach(function(i) {  
-      objects.push(content.objectAt(i-shift));
-      shift++;
-      if (i < idx) idx--;
-      if (i === idx) idx--;
-    }, this);
-    
-    objects.forEach(function(task) {
-      task.assignee = newAssignee; // avoid calling observers while in transition
-    }, this);
-    Tasks.assignmentsController.showAssignments();
-    
-    return SC.DRAG_NONE;
-    */
+    // only if data is available from drag
+    if (!tasks) return ret;
+        
+    // if we can move, then remove tasks from the old project and add to the new project
+    if (!(dragOp & SC.DRAG_MOVE)) ret = SC.DRAG_COPY;
+    else {
+      var currentProject = Tasks.projectController.content.firstObject();
+      var newProject = content.objectAt(idx);
+      
+      tasks.forEach(function(task) {
+        if (currentProject !== CoreTasks.get('allTasks')) {
+          currentProject.removeTask(task);
+        }
+        newProject.addTask(task);
+      }, this);
+      
+      ret = SC.DRAG_MOVE;
+    }       
+  
+    return ret;
   }
 });

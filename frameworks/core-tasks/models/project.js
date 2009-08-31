@@ -100,20 +100,14 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
    * Removes a given task from the project.
    */
   removeTask: function(task) {
-    var key = task.get('storeKey');
-    var tasks = this.get('tasks');
+    var tasks = this.get('tasks'); 
+    tasks.removeObject(task);
 
-    for (var i = 0; i < tasks.length(); i++) {
-      if (key === tasks.objectAt(i).get('storeKey')) tasks.removeAt(i, 1);
-
-      // Not quite sure why this has to be executed in a new run loop, but it does (saw this in a
-      // unit test; didn't work before).
-      SC.RunLoop.begin();
-      this.set('tasks', tasks);
-      SC.RunLoop.end();
-
-      break;
-    }
+    // Not quite sure why this has to be executed in a new run loop, but it does (saw this in a
+    // unit test; didn't work before).
+    SC.RunLoop.begin();
+    this.set('tasks', tasks);
+    SC.RunLoop.end();
 
     return tasks;
   }
