@@ -116,7 +116,8 @@ Tasks.assignmentsController = SC.ArrayController.create(
       task.addObserver('priority',Tasks.assignmentsController,'_contentHasChanged');
       task.addObserver('assignee',Tasks.assignmentsController,'_contentHasChanged');
       
-      // Extract/total effort for each taek (simple number or a range)
+      // Extract/total effort for each incomplete taek (simple number or a range)
+      if(task.get('status') === CoreTasks.TASK_STATUS_DONE) continue;
       effortString = task.get('effort');
       if(!effortString) taskWithUnspecifiedEffort = true;
       if(effortString && task.get('priority') !== CoreTasks.TASK_PRIORITY_LOW) {
