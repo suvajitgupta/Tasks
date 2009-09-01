@@ -64,9 +64,8 @@ v Allow "+" button to be pressed a second time to keep in data entry mode, Esc w
 - Indicate overloaded assignees (with more effort total than timeLeft in project) by color-coding them red [SG]
 ^ Allow drag-n-drop reordering (preserve order when persisting) [SG] @Done
 ^ Allow drag-n-drop reassignment [BB] <SG>  @Done
-^ Add modal popup form for editing [SG] <BB>
+^ Add popup viewer/editor for Descriptions [JH2] <SG> @Done
 v Add context menu & hotkeys to Edit/Cut/Copy/Paste/Delete/Duplicate a task [SG] <EG>
-v Add hover tooltip showing Description [SG] <EG>
 
 User Manager GUI
 - Add login screen (User authentication) [SG] <SE> @Active
