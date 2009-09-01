@@ -18,11 +18,32 @@ Tasks Pane Styling
   background: none !important;
 }
 
+.task-description {
+  position:absolute;
+  top:0;
+  right:5px;
+  bottom:0;
+  width:24px;
+  padding-left: 25px;
+}
+
 /*.task-bg-mid.sel,
 .task-bg-mid {
   background: static_url('images/default-theme-repeat-x.png') repeat-x 0 -190px !important; 
   border: 0 !important;
 } */
+
+.task-no-description-icon-24 {
+  width:24px;
+  height:24px;
+  background: static_url('images/no_description.png');
+}
+
+.task-has-description-icon-24 {
+  width:24px;
+  height:24px;
+  background: static_url('images/has_description.png');
+}
 
 .task-bg-mid .sc-outline {
   left: 0px !important;

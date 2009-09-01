@@ -1,5 +1,5 @@
 // ==========================================================================
-// Project: Tasks
+// Project: Tasks 
 // ==========================================================================
 /*globals CoreTasks Tasks */
 
@@ -11,62 +11,44 @@
   @author Suvajit Gupta
 */
 
-// Tasks._decriptionPaneTimer = null;
-
 Tasks.TaskItemView = SC.ListItemView.extend(
 /** @scope Tasks.TaskItemView.prototype */ {
   
   content: null,
-  // _descriptionPane: null,
-  // _decriptionPaneTimer: null,
-  // 
-  // /** @private
-  //   Remove the active class on mouseOut if mouse is down.
-  // */  
-  // mouseExited: function(evt) {
-  //   if(Tasks._decriptionPaneTimer) {
-  //     Tasks._decriptionPaneTimer.invalidate();
-  //     Tasks._decriptionPaneTimer = null;
-  //     if(this._descriptionPane) this._descriptionPane.remove();
-  //   }
-  //   return YES;
-  // },
-  // 
-  // /** @private
-  //   If mouse was down and we renter the button area, set the active state again.
-  // */  
-  // mouseEntered: function(evt) {
-  //   Tasks._decriptionPaneTimer = SC.Timer.schedule({
-  //     target: this,
-  //     action: function() {
-  //       var layer = this.get('layer');
-  //       this._descriptionPane = SC.PickerPane.create({
-  //         layout: { width: 500, height: 200 },
-  //         contentView: SC.View.design({
-  //           layout: { left: 0, right: 0, top: 0, bottom: 0},
-  //           childViews: [
-  //             SC.LabelView.design({
-  //               layout: { top: 2, height: 17, left: 2, width: 100 },
-  //               value: "_Description:".loc()
-  //             }),
-  //             SC.TextFieldView.design({
-  //               layout: { top: 24, left: 5, right: 5, bottom: 5 },
-  //               isTextArea: YES,
-  //               valueBinding: SC.binding('.content.description', this)
-  //             })
-  //           ]
-  //         })
-  //       });
-  //       this._descriptionPane.popup(layer, SC.PICKER_POINTER);
-  //     },
-  //     interval: 1000
-  //   });
-  //   return YES;
-  // },
+  _descriptionPane: null,
 
+  /** @private
+    If mouse was down and we renter the button area, set the active state again.
+  */  
+  mouseDown: function(evt) {
+    if (evt.target.className.split(" ")[0] === 'description-editor') {
+      var layer = this.get('layer');
+      this._descriptionPane = SC.PickerPane.create({
+        layout: { width: 500, height: 200 },
+        contentView: SC.View.design({
+          layout: { left: 0, right: 0, top: 0, bottom: 0},
+          childViews: [
+            SC.LabelView.design({
+              layout: { top: 2, height: 17, left: 2, width: 100 },
+              value: "_Description:".loc()
+            }),
+            SC.TextFieldView.design({
+              layout: { top: 24, left: 5, right: 5, bottom: 5 },
+              isTextArea: YES,
+              valueBinding: SC.binding('.content.description', this)
+            })
+          ]
+        })
+      });
+      this._descriptionPane.popup(evt.target.parentNode, SC.PICKER_POINTER);
+    }
+    return NO;
+  },
+  
   render: function(context, firstTime) {
-    
+    sc_super();
     var content = this.get('content');
+    var hasDescription = NO;
     if(content && content.get('name')){ // a task node, not an assignee node
       
       var priority = content.get('priority');
@@ -113,10 +95,25 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           context.addClass('tasks-validation-failed');
           break;          
       }
-      
+      if (content.get('description')) {
+        hasDescription = YES;
+      }
+      context = context.begin('div').addClass('sc-view').addClass('task-description');
+      context = context.begin('img').attr({
+        src: SC.BLANK_IMAGE_URL,
+        title: 'Click to Enter a Description',
+        alt: ''
+      }).addClass('description-editor');
+      if (hasDescription) {
+        context.removeClass('sc-icon-document-24');
+        context.addClass('task-has-description-icon-24');
+      }else{
+        context.removeClass('task-has-description-icon-24');
+        context.addClass('sc-icon-document-24');
+      }
+      context = context.end();
+      context = context.end();
     }
-    sc_super();
-    context.begin('a').attr({style: 'position:absolute; top: 5, right: 5, width: 16, height: 16;'}).push('<img src="', SC.BLANK_IMAGE_URL, '" class="button sc-icon-document-16" alt="Description" />').end();
   }
   
 });
