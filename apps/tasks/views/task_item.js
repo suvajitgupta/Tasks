@@ -18,10 +18,11 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   _descriptionPane: null,
 
   /** @private
-    If mouse was down and we renter the button area, set the active state again.
+    If mouse was down over Description Icon open the editor.
   */  
   mouseDown: function(evt) {
-    if (evt.target.className.split(" ")[0] === 'description-editor') {
+    var clsNames = evt.target.className.split(' ');
+    if (clsNames.length > 0 && clsNames[0] === 'description-editor') {
       var layer = this.get('layer');
       this._descriptionPane = SC.PickerPane.create({
         layout: { width: 500, height: 200 },
@@ -101,7 +102,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       context = context.begin('div').addClass('sc-view').addClass('task-description');
       context = context.begin('img').attr({
         src: SC.BLANK_IMAGE_URL,
-        title: 'Click to Enter a Description',
+        title: "_edit description".loc(),
         alt: ''
       }).addClass('description-editor');
       if (hasDescription) {
