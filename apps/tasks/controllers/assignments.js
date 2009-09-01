@@ -50,7 +50,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     }
     
     if(selectedAssignee){ // only show tasks for selected user
-      var selectedUserName = CoreTasks.get('store').find(CoreTasks.User, selectedAssignee.id).get('displayName');
+      var selectedUserName = selectedAssignee.get('displayName');
       for(assigneeName in assignees){ // list all assigned tasks
         if(assignees.hasOwnProperty(assigneeName) && assigneeName === selectedUserName) {
           this._createAssignmentNode(assignmentNodes, assigneeName, assignees[assigneeName]);

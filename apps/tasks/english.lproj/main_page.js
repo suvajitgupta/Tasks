@@ -58,6 +58,20 @@ Tasks.mainPage = SC.Page.design({
           valueBinding: 'Tasks.assignmentsController.assigneeSelection'
         }),
 
+        SC.View.design({ // Assignee Selection cancel button
+          layout: { centerY: -2, height: 12, left: 430, width: 12 },
+          isVisible: NO,
+          classNames: ['search-bar-cancel-icon'],
+          mouseDown: function() {
+            Tasks.assignmentsController.set('assigneeSelection', '');
+          },
+        
+          _assigneeSelectionCancelButtonEnabler: function() {
+            this.set('isVisible', Tasks.assignmentsController.get('assigneeSelection') !== '');
+          }.observes('Tasks.assignmentsController.assigneeSelection')
+        
+        }),
+      
         SC.TextFieldView.design({
           layout: { centerY: -2, height: 24, left: 475, width: 200 },
           classNames: ['tasks-search-bar'],
@@ -65,15 +79,15 @@ Tasks.mainPage = SC.Page.design({
           valueBinding: 'Tasks.assignmentsController.searchFilter' // TODO: [SG] bind to searchController instead
         }),
       
-        SC.View.design({ // Search Filter delete button
-          layout: { centerY: -2, height: 12, left: 666, width: 12 },
+        SC.View.design({ // Tasks Search cancel button
+          layout: { centerY: -2, height: 12, left: 655, width: 12 },
           isVisible: NO,
-          classNames: ['searchbar-cancel-icon'],
+          classNames: ['search-bar-cancel-icon'],
           mouseDown: function() {
             Tasks.assignmentsController.set('searchFilter', '');
           },
         
-          _deleteSearchFilterEnabler: function() {
+          _tasksSearchCancelButtonEnabler: function() {
             this.set('isVisible', Tasks.assignmentsController.get('searchFilter') !== '');
           }.observes('Tasks.assignmentsController.searchFilter')
         
