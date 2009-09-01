@@ -43,17 +43,22 @@ Tasks.assignmentsController = SC.ArrayController.create(
         }
       }, this);
   
-    var selectedAssignee = null;
-    var selectedAssigneeLoginName = this.get('assigneeSelection');
-    if (selectedAssigneeLoginName) {
-      selectedAssignee = CoreTasks.getUser(selectedAssigneeLoginName);
+    var selectedAssigneeDisplayNames = [];
+    var selectedAssignees = this.get('assigneeSelection');
+    if (selectedAssignees) {
+      var selectedAssigneeLoginNames = selectedAssignees.split(" ");
+      for (var i = 0; i < selectedAssigneeLoginNames.length; i++) {
+        var selectedAssigneeUser = CoreTasks.getUser(selectedAssigneeLoginNames[i]);
+        if (selectedAssigneeUser) selectedAssigneeDisplayNames.push(selectedAssigneeUser.get('displayName'));
+      }
     }
     
-    if(selectedAssignee){ // only show tasks for selected user
-      var selectedUserName = selectedAssignee.get('displayName');
+    if(selectedAssigneeDisplayNames.length > 0){ // only show tasks for selected assignee(s)
       for(assigneeName in assignees){ // list all assigned tasks
-        if(assignees.hasOwnProperty(assigneeName) && assigneeName === selectedUserName) {
-          this._createAssignmentNode(assignmentNodes, assigneeName, assignees[assigneeName]);
+        if(assignees.hasOwnProperty(assigneeName)) {
+          if(selectedAssigneeDisplayNames.indexOf(assigneeName) !== -1) {
+            this._createAssignmentNode(assignmentNodes, assigneeName, assignees[assigneeName]);
+          }
         }
       }
       
