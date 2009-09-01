@@ -69,7 +69,7 @@ v Add context menu & hotkeys to Edit/Cut/Copy/Paste/Delete/Duplicate a task [SG]
 
 User Manager GUI
 - Add login screen (User authentication) [SG] <SE> @Active
-^ Add Assignee selection combo box in top toolbar ("Everyone" is default choice) [SG] <JH2> @Done
+^ Add Assignee selection filter in top toolbar [SG] <JH2> @Done
 - Add User Management button/modal popup showing existing Users [SG] <JH2>
 - Add "+" & "-" buttons in users toolbar and "X" button in top toolbar to return [SG] <JH2>
 v Add hover tooltip on dialog title showing number of Users [SG] <EG>

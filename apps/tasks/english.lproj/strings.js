@@ -65,7 +65,7 @@ SC.stringsFor('English', {
   '_Passed': "Passed",
   '_Failed': "Failed",
   '_Description:': "Description:",
-  '_edit description': "click to view/edit description",
+  '_DescriptionTooltip': "Click to view/edit description",
   
   // User strings
   '_FirstLast': "First Last",
