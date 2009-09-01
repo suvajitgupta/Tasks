@@ -121,16 +121,16 @@ Tasks.assignmentsController = SC.ArrayController.create(
       if(!effortString) taskWithUnspecifiedEffort = true;
       if(effortString && task.get('priority') !== CoreTasks.TASK_PRIORITY_LOW) {
         // sum up effort for High/Medium priority tasks
-        effortMin = parseFloat(effortString, 10);
+        effortMin = parseFloat(parseFloat(effortString, 10).toFixed(2));
         var idx = effortString.indexOf('-'); // see if effort is a range
         if(idx === -1) { // not a range
           effortMax = effortMin;
         }
         else { // effort IS a range, extract max
-          effortMax = parseFloat(effortString.slice(idx+1), 10);
+          effortMax = parseFloat(parseFloat(effortString.slice(idx+1), 10).toFixed(2));
         }
-        totalEffortMin += effortMin;
-        totalEffortMax += effortMax;
+        totalEffortMin = parseFloat((totalEffortMin + effortMin).toFixed(2));
+        totalEffortMax = parseFloat((totalEffortMax + effortMax).toFixed(2));
       }
     }
     if(totalEffortMin !== 0) {
