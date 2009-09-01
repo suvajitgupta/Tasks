@@ -37,13 +37,13 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         Tasks.WelcomeView.design({
-          layout: { centerY: 0, height: 30, left: 140, width: 95 },
+          layout: { centerY: 0, height: 30, left: 145, width: 95 },
           classNames: ['welcome-label'],
           valueBinding: SC.Binding.oneWay('CoreTasks.user')
         }),
       
         SC.View.design(Tasks.SimpleButton,{
-          layout: { left: 280, centerY: -2, height: 20, width: 24 },
+          layout: { left: 270, centerY: -2, height: 20, width: 20 },
           classNames: ['users-icon'],
           title:  "_User".loc(),
           toolTip: "_OpenUserManagerTooltip".loc(),
@@ -53,7 +53,7 @@ Tasks.mainPage = SC.Page.design({
         
         // TODO: [SG] Switch to text field view instead of select field view to fix bugs and allow multiple (comma-separated) assignee filtering?
         SC.SelectFieldView.design({
-          layout: { centerY: -2, height: 24, left: 307, width: 100 },
+          layout: { centerY: -2, height: 24, left: 290, width: 150 },
           nameKey: 'loginName',
           emptyName: "_Everyone".loc(), // FIXME: [SC] fix empty line after first item in SelectFieldView
           // FIXME: [SC] make SelectFieldView work with objects in controller:'Tasks.assigneeController.content',
@@ -62,7 +62,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         SC.TextFieldView.design({
-          layout: { centerY: -2, height: 24, left: 485, width: 200 },
+          layout: { centerY: -2, height: 24, left: 475, width: 200 },
           classNames: ['searchbar'],
           hint: "_SearchHint".loc(),
           valueBinding: 'Tasks.assignmentsController.searchFilter' // TODO: [SG] bind to searchController instead
@@ -166,7 +166,7 @@ Tasks.mainPage = SC.Page.design({
               value:  "_Settings".loc(),
               toolTip: "_SettingsTooltip".loc(),
               target: 'Tasks',
-              action: 'launchSettings'
+              action: 'openSettings'
             }),
 
             SC.LabelView.design(Tasks.SimpleButton,{
@@ -212,7 +212,7 @@ Tasks.mainPage = SC.Page.design({
             title:  "_Logout".loc(),
             toolTip: "_LogoutTooltip".loc(),
             target: 'Tasks',
-            action: 'exit'
+            action: 'logout'
           }),
 
           SC.LabelView.design(Tasks.SimpleButton,{
@@ -221,7 +221,7 @@ Tasks.mainPage = SC.Page.design({
             value:  "_Logout".loc(),
             toolTip: "_LogoutTooltip".loc(),
             target: 'Tasks',
-            action: 'exit'
+            action: 'logout'
           })
         ]
       })

@@ -243,17 +243,19 @@ Tasks.mixin({
   },
   
   /**
-   * Import data from external text file.
+   * Launch User Manager dialog.
    */
-  importData: function() {
-    Tasks.importDataController.openPanel();  
+  openUserManager: function(button) {
+    // TODO: [SG] implement open user manager
+    this._notImplemented('openUserManager');
   },
-
+  
   /**
-   * Export data to external text file.
+   * Exit User Manager dialog.
    */
-  exportData: function() {
-    Tasks.exportDataController.exportData();  
+  closeUserManager: function() {
+    // TODO: [SG] implement close user manager
+    this._notImplemented('closeUserManager');
   },
   
   /**
@@ -278,30 +280,38 @@ Tasks.mixin({
   },
   
   /**
-   * Launch User Manager dialog.
+   * Import data from external text file.
    */
-  openUserManager: function(button) {
-    // TODO: [SG] implement open user manager
-    //this._notImplemented('openUserManager');
-    var pane = SC.PickerPane.create({
-      layout: { width: 400, height: 200 },
-      contentView: SC.View.extend({
-        
-      })
-    }).popup(button, SC.PICKER_POINTER);
+  importData: function() {
+    Tasks.importDataController.openPanel();  
   },
-  
+
   /**
-   * Exit User Manager dialog.
+   * Export data to external text file.
    */
-  closeUserManager: function() {
-    // TODO: [SG] implement close user manager
-    this._notImplemented('closeUserManager');
+  exportData: function() {
+    Tasks.exportDataController.exportData();  
   },
   
   /**
    * Launch new browser/tab to display online help.
    */
+   /**
+    * Launch task editor dialog.
+    */
+   openSettings: function() {
+     // TODO: [SG] implement open settings
+     this._notImplemented('openSettings');
+   },
+
+   /**
+    * Exit task editor dialog.
+    */
+   closeSettings: function() {
+     // TODO: [SG] implement close settins
+     this._notImplemented('closeSettings');
+   },
+
   showHelp: function() {
     // TODO: [SG] implement online help
     this._notImplemented('showHelp');
@@ -310,9 +320,9 @@ Tasks.mixin({
   /**
    * Handle application exiting request.
    */
-  exit: function() {
+  logout: function() {
     // TODO: [SG] implement logout
-    this._notImplemented('exit');
+    this._notImplemented('logout');
   },
   
   /**
@@ -494,22 +504,6 @@ Tasks.mixin({
   },
   
   // TODO: [SE] implement deleteTaskSuccess/Failure
-  
-  /**
-   * Launch task editor dialog.
-   */
-  openTaskEditor: function() {
-    // TODO: [SG] implement open Task editor
-    this._notImplemented('openTaskEditor');
-  },
-  
-  /**
-   * Exit task editor dialog.
-   */
-  closeTaskEditor: function() {
-    // TODO: [SG] implement close Task editor
-    this._notImplemented('closeTaskEditor');
-  },
   
   /**
    * Logs a message indicating that the given state isn't handled in the given action.
