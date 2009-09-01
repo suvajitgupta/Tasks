@@ -69,17 +69,6 @@ Tasks.mixin({
     }
 
     if (authenticated) {
-      // Set the content of the users controller.
-      users = CoreTasks.get('store').findAll(SC.Query.create({
-        recordType: CoreTasks.User,
-        order: 'loginName ASC'
-      }));
-
-      this.get('assigneeController').set('content', users);
-      // HACK: [SE] Set the objects array on the user drop down list (really ugly).
-      // var selectField = this.getPath('mainPage.mainPane.topView.childViews.4');
-      // selectField.set('objects', users);
-
       this._authenticationSuccess();
     } else {
       this._authenticationFailure();

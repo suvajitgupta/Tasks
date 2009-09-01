@@ -51,20 +51,17 @@ Tasks.mainPage = SC.Page.design({
           action: 'openUserManager'
         }),
         
-        // TODO: [SG] Switch to text field view instead of select field view to fix bugs and allow multiple (comma-separated) assignee filtering?
-        SC.SelectFieldView.design({
-          layout: { centerY: -2, height: 24, left: 290, width: 150 },
-          nameKey: 'loginName',
-          emptyName: "_Everyone".loc(), // FIXME: [SC] fix empty line after first item in SelectFieldView
-          // FIXME: [SC] make SelectFieldView work with objects in controller:'Tasks.assigneeController.content',
-          objects: CoreTasks.User.FIXTURES,
-          valueBinding: 'Tasks.assignmentsController.assigneeSelection' // TODO: [SG] bind to assigneeController instead
+        SC.TextFieldView.design({
+          layout: { centerY: -4, height: 18, left: 295, width: 150 },
+          classNames: ['assignee-selection-bar'],
+          hint: "_AssigneeSelectionHint".loc(),
+          valueBinding: 'Tasks.assignmentsController.assigneeSelection'
         }),
 
         SC.TextFieldView.design({
           layout: { centerY: -2, height: 24, left: 475, width: 200 },
-          classNames: ['searchbar'],
-          hint: "_SearchHint".loc(),
+          classNames: ['tasks-search-bar'],
+          hint: "_TasksSearchHint".loc(),
           valueBinding: 'Tasks.assignmentsController.searchFilter' // TODO: [SG] bind to searchController instead
         }),
       

@@ -43,7 +43,12 @@ Tasks.assignmentsController = SC.ArrayController.create(
         }
       }, this);
   
-    var selectedAssignee = this.get('assigneeSelection');
+    var selectedAssignee = null;
+    var selectedAssigneeLoginName = this.get('assigneeSelection');
+    if (selectedAssigneeLoginName) {
+      selectedAssignee = CoreTasks.getUser(selectedAssigneeLoginName);
+    }
+    
     if(selectedAssignee){ // only show tasks for selected user
       var selectedUserName = CoreTasks.get('store').find(CoreTasks.User, selectedAssignee.id).get('displayName');
       for(assigneeName in assignees){ // list all assigned tasks

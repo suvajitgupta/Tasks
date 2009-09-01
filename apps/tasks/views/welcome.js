@@ -15,7 +15,7 @@ Tasks.WelcomeView = SC.LabelView.extend(
 /** @scope Tasks.WelcomeView.prototype */ {
   
   render: function(context, firstTime) {
-    context.push("<center>Welcome".loc() + '<br>' + CoreTasks.getPath('user.loginName') + '!</center>');
+    context.push("<center>Welcome".loc() + '<br>' + CoreTasks.getPath('user.loginName') + ' !</center>');
   }
   
 });
