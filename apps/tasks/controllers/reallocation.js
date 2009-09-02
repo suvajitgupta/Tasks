@@ -37,8 +37,8 @@ Tasks.reallocationController = SC.Object.create(SC.CollectionViewDelegate,
     Called if the user actually drops on the view.
   */
   collectionViewPerformDragOperation: function(view, drag, dragOp, idx, dropOp) {
-    // TODO: [BB] Fix reorder
-    if (dragOp & SC.DRAG_REORDER) return SC.DRAG_MOVE; // allow reorder
+    
+    if (dragOp & SC.DRAG_REORDER) return SC.DRAG_NONE; // allow reorder
     
     var tasks = drag.dataForType(Tasks.Task),
         content   = view.get('content'),
