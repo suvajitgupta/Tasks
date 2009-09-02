@@ -333,8 +333,10 @@ Tasks.mixin({
    */
   addProject: function() {
     var project = CoreTasks.get('store').createRecord(
-      CoreTasks.Project, { name: CoreTasks.NEW_PROJECT_NAME });
-
+      CoreTasks.Project, { name: CoreTasks.NEW_PROJECT_NAME } );
+    // HACK: [BB] Must set tasks array to empty because for some reason 
+    // SproutCore is not defaulting it to empty.
+    project.set('tasks', []);
     this.getPath('projectsController.content').pushObject(project);
 
     // TODO: [SG] add new project right after currently selected project?
@@ -344,7 +346,7 @@ Tasks.mixin({
 
     // Begin editing newly created item.
     var itemView = listView.itemViewForContentIndex(idx);
-
+    
     // Wait for run loop to complete before method is called.
     // FIXME: [SC] need to highlight entire item when starting to edit
     CoreTasks.invokeLater(itemView.beginEditing.bind(itemView));
