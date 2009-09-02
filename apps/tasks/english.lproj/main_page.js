@@ -319,12 +319,13 @@ Tasks.mainPage = SC.Page.design({
           hasContentIcon: YES,
           contentIconKey: 'icon',
           isEditable: YES,
-          canEditContent: true,
-          canReorderContent: true,
-          canDeleteContent: true,
+          canEditContent: YES,
+          canReorderContent: YES,
+          canDeleteContent: YES,
           destroyOnRemoval: YES,
           exampleView: Tasks.TaskItemView,
-          delegate: Tasks.reassignmentController
+          delegate: Tasks.reassignmentController,
+          selectOnMouseDown: YES
         })
       }),
       
