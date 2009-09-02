@@ -42,10 +42,9 @@ v Set projects toolbar button enablement based on having a selection [SG] <EO> @
 - Select first project at startup [JH2] <SG> @Done
 ^ Add virtual Inbox & AllTasks to group all unallocated & all tasks respectively [SG] <SE> @Done
 - Disallow Inbox/AllTasks projects from being deleted [SG] <EO> @Done
-^ Add drag-n-drop reordering [BB] <SG> @Active
-^ Allow drag-n-drop Task reallocation to Projects [BB] <SG> @Active
+^ Add multi-task drag-n-drop reordering [BB] <SG> @Active
+^ Allow multi-task drag-n-drop Task reallocation to Projects [BB] <SG> @Active
 v Add context menu to Delete a project [SG] <EG>
-v Add hover tooltip showing number of Tasks in project [SG] <EG>
 v Make list of Projects collapsible [SG] <EG>
 
 Task Manager GUI
@@ -59,43 +58,41 @@ v Set tasks toolbar button enablement based on having a selection [SG] <EO> @Don
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done
 ^ Add "+" & "-" buttons in tasks toolbar (logged in user is default Submitter for added tasks) [SG] <SE> @Done
 v Allow "+" button to be pressed a second time to keep in data entry mode, Esc will exit mode [SG] <MB>
-^ Show effort subtotals (exclude Low items) in curly braces for load balancing [SG] @Done
+^ Show effort subtotals (exclude Done or Low priority tasks) in curly braces for load balancing [SG] @Done
 - Append "?" for range-based subtotals including tasks with unspecified efforts [SG] @Done
 - Indicate overloaded assignees (with more effort total than timeLeft in project) by color-coding them red [SG]
 ^ Allow drag-n-drop reordering (preserve order when persisting) [SG] @Done
-^ Allow drag-n-drop reassignment [BB] <SG>  @Done
+^ Allow multi-task drag-n-drop reassignment [BB] <SG>  @Done
 ^ Add popup viewer/editor for Descriptions [JH2] <SG> @Done
 v Add context menu & hotkeys to Edit/Cut/Copy/Paste/Delete/Duplicate a task [SG] <EG>
 
 User Manager GUI
 - Add login screen (User authentication) [SG] <SE> @Active
 ^ Add Assignee selection filter in top toolbar [SG] <JH2> @Done
-- Add User Management button/modal popup showing existing Users [SG] <JH2>
+- Add User Management button/popup showing existing Users [SG] <JH2>
 - Add "+" & "-" buttons in users toolbar and "X" button in top toolbar to return [SG] <JH2>
-v Add hover tooltip on dialog title showing number of Users [SG] <EG>
 - Add access control based on Role (User authorization) [SG] <SE>
-v Add user preferences/restore to them at startup [SG] <SE>
+v Add user preferences/apply them after logon [SG] <SE>
 v Add change password dialog? [SG] <SE>
 
 Application Manager GUI
+- Add welcome message showing logged in user [SG] <MB> @Done
 - Add status bar at the bottom summarizing stats about Tasks data [SG] <MB> @Active
 - Add "Import" button in top toolbar with associated pop up panel [BB] <SG> @Done
-- Add "Export" button in top toolbar that copies to clipboard (using TXT file format) [SG] @Active
-- Add "Save" button in top toolbar [SG] <SE> @Done
-- Add Online Help button in top Toolbar & modal Help dialog [SG] @Active
+- Add "Export" button in top toolbar with associated pop up panel [SG] @Done
+- Add "Save" button in top toolbar, provide confirmation after save operation finishes [SG] <SE> @Active
+- Add Online Help button in top Toolbar & popup Help dialog [SG] @Active
 - Add Logout button to exit in top toolbar [SG] <SE> @Active
 - Prompt user to save changes before exiting [SG] <SE>
-- Restore application settings/state from last login [SG] <MB>
-v Add hover tooltip on application title showing number of Projects [SG] <EG>
-- Add Undo/Redo hotkeys & buttons in top toolbar (till last Save) [SG] <SE>
+- Restore application settings/state from last login (using cokies?) [SG] <MB>
+v Add Undo/Redo hotkeys & buttons in top toolbar (till last Save) [SG] <SE>
 
 Server
 ^ Build persistence server (using Persevere) [SE] <SG> @Done
-v Build alternate persistence server (using Joyent)? [MB] <SG> @Active
+^ Preserve order of projects/tasks via persistence [SG] <SE>
 - Add Server-side authorization [SE] <SG>
 - Add server-side data validation checks/return appropriate error codes [SE] <SG>
-v Add local persistence for single user mode (using Google Gears) [MB] <SG>
-v Facilitate multi-user mode using Transaction Time [SG] <EO>
+v Implement multi-user concurrent access using Transaction Time [SG] <EO>
 
 Styling/Hardening
 ^ Style via CSS, embed catchy/sprited images [MG] <SG> @Done
@@ -112,6 +109,6 @@ v Develop Desktop client (using Webkit) [SG] <EO>
 Testing/Rollout
 - Manually test & note/fix showstoppers [SG] <BM> @Active
 - Create automated test scripts using Selenium [BM] <SG>
-v Conduct usability tests, collect feedback, fix bugs [SG] <MB>
+- Conduct usability tests, collect feedback, fix bugs [SG] <MB>
 - Create Release Notes (features, limitations/bugs, list external components) [SG] <SE>
 - Provide SproutCore doctool-style comments [SG] <SE>

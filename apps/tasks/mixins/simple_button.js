@@ -103,9 +103,9 @@ Tasks.SimpleButton = { // FIXME: [SG] SimpleButton shouldn't accept clicks when 
     // If there is a toolTip set, grab it and localize if necessary.
     var toolTip = this.get('toolTip') ;
     if (SC.typeOf(toolTip) === SC.T_STRING) {
-      if (this.get('localize')) toolTip = toolTip.loc() ;
-      context.attr('title', toolTip) ;
-      context.attr('alt', toolTip) ;
+      if (this.get('localize')) toolTip = toolTip.loc();
+      context.attr('title', toolTip);
+      context.attr('alt', toolTip);
     }
   },  
   

@@ -279,7 +279,7 @@ Tasks.mixin({
    * Export data to external text file.
    */
   exportData: function() {
-    Tasks.exportDataController.exportData();  
+    Tasks.exportDataController.openPanel();  
   },
   
   /**
@@ -386,7 +386,6 @@ Tasks.mixin({
       // CHANGE: [SC] Do this without using SC.RunLoop.begin/end, if possible.
       SC.RunLoop.begin();
       var projectsList = Tasks.getPath('mainPage.mainPane.projectsList');
-      console.log("DEBUG: project count = " + projectsList.get('length'));
       projectsList.select(projectsList.get('length') > 2? 2 : 0);
       SC.RunLoop.end();
       

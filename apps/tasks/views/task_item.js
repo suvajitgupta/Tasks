@@ -103,7 +103,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       context = context.begin('img').attr({
         src: SC.BLANK_IMAGE_URL,
         title: "_DescriptionTooltip".loc(),
-        alt: ''
+        alt: "_DescriptionTooltip".loc()
       }).addClass('description-editor');
       if (hasDescription) {
         context.removeClass('sc-icon-document-24');

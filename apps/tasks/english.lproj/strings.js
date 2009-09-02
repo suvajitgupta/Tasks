@@ -75,7 +75,8 @@ SC.stringsFor('English', {
   '_Developer': "Developer",
   '_Tester': "Tester",
   
-  // Import Panel strings
-  '_Cancel': "Cancel"
+  // Import/Export Panel strings
+  '_Cancel': "Cancel",
+  '_Close': "Close"
   
 });

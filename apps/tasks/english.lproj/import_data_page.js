@@ -22,7 +22,7 @@ Tasks.importDataPage = SC.Page.create({
       childViews: [
         SC.TextFieldView.design({
           layout: { top: 10, left: 10, right: 10, bottom: 40 },
-          valueBinding: 'Tasks.importDataController.data',
+          valueBinding: 'Tasks.importDataController.importData',
           hint: "_ImportHint".loc(),
           isTextArea: YES
         }),
@@ -33,7 +33,7 @@ Tasks.importDataPage = SC.Page.create({
           isDefault: YES,
           title: "_Import".loc(),
           target: 'Tasks.importDataController',
-          action: 'importData'
+          action: 'parseAndLoadData'
         }),
         SC.ButtonView.design({
           layout: { width: 80, height: 30, right: 96, bottom: 8 },

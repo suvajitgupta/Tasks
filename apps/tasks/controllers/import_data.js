@@ -15,7 +15,8 @@ sc_require('core');
 */
 Tasks.importDataController = SC.ObjectController.create(
 /** @scope Orion.ImportDataController.prototype */ {
-    data: '',
+  
+    importData: '',
     currentProject: null,
     projectTaskMappings: null,
     
@@ -28,13 +29,7 @@ Tasks.importDataController = SC.ObjectController.create(
       var panel = Tasks.getPath('importDataPage.panel');
       panel.remove();
       panel.destroy();
-      this.set('data','');
-    },
-    
-    importData: function(){
-      this._parseAndLoadData(this.get('data'));
-      Tasks.assignmentsController.showAssignments();
-      this.closePanel();
+      this.set('importData','');
     },
     
     /**
@@ -42,8 +37,9 @@ Tasks.importDataController = SC.ObjectController.create(
      *
      * @param {String} data to be parsed.
      */
-    _parseAndLoadData: function(data) {
+    parseAndLoadData: function() {
       
+      var data = this.get('importData');
       this.projectTaskMappings = {};
       var lines = data.split('\n');
       var store = CoreTasks.get('store');
@@ -106,7 +102,7 @@ Tasks.importDataController = SC.ObjectController.create(
 
           var taskRecord = store.createRecord(CoreTasks.Task, taskHash);
           if(!taskRecord) {
-            console.log('Import Error: task creation failed');
+            console.log('Task Import Error: task creation failed');
             continue;
           }
           this.projectTaskMappings[taskRecord.get('name')] = currentProject.get('name');
@@ -141,6 +137,10 @@ Tasks.importDataController = SC.ObjectController.create(
           }
         }
       }
+      
+      Tasks.assignmentsController.showAssignments();
+      this.closePanel();
+      
     },
     
     _addTaskFromImportSuccess: function(storeKey) {
