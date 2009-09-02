@@ -193,11 +193,9 @@ Tasks.mixin({
     inboxProject.set('tasks', unallocated);
     CoreTasks.set('inbox', inboxProject);
 
-    // Now push the All project to the beginning of the array.
-    projects.unshiftObject(allTasksProject);
-
-    // Push the Inbox project to the beginning of the projects array.
+    // Add AllTasks and Inbox projects to the top of the list of projects
     projects.unshiftObject(inboxProject);
+    projects.unshiftObject(allTasksProject);
 
     // Set the contnent of the projects controller.
     this.get('projectsController').set('content', projects);
