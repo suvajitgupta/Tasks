@@ -23,6 +23,10 @@ Tasks Pane Styling
   top:4px;
   right:5px;
   width:16px;
+  /* This padding is here to keep the Description Editor from going off of 
+    the right side of the screen, so I put it back in. [JH2]
+  */
+  padding-left: 20px;
 }
 
 .task-no-description-icon-16 {

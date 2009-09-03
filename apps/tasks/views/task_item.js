@@ -9,6 +9,7 @@
   
   @extends SC.ListItemView
   @author Suvajit Gupta
+  @author Joshua Holt
 */
 
 Tasks.TaskItemView = SC.ListItemView.extend(
