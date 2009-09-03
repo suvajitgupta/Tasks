@@ -43,14 +43,14 @@ Tasks.mainPage = SC.Page.design({
         }),
       
         SC.TextFieldView.design({
-          layout: { centerY: -2, height: 24, left: 280, width: 200 },
+          layout: { centerY: -2, height: 24, left: 270, width: 200 },
           classNames: ['assignee-selection-bar'],
           hint: "_AssigneeSelectionHint".loc(),
           valueBinding: 'Tasks.assignmentsController.assigneeSelection'
         }),
 
         SC.View.design({ // Assignee Selection cancel button
-          layout: { centerY: -2, height: 12, left: 460, width: 12 },
+          layout: { centerY: -2, height: 12, left: 450, width: 12 },
           isVisible: NO,
           classNames: ['filter-cancel-icon'],
           mouseDown: function() {
@@ -64,14 +64,14 @@ Tasks.mainPage = SC.Page.design({
         }),
       
         SC.TextFieldView.design({
-          layout: { centerY: -2, height: 24, left: 540, width: 200 },
+          layout: { centerY: -2, height: 24, left: 510, width: 200 },
           classNames: ['tasks-search-bar'],
           hint: "_TasksSearchHint".loc(),
           valueBinding: 'Tasks.assignmentsController.searchFilter' // TODO: [SG] bind to searchController instead
         }),
       
         SC.View.design({ // Tasks Search cancel button
-          layout: { centerY: -2, height: 12, left: 720, width: 12 },
+          layout: { centerY: -2, height: 12, left: 690, width: 12 },
           isVisible: NO,
           classNames: ['filter-cancel-icon'],
           mouseDown: function() {

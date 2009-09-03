@@ -151,6 +151,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
   },
   
   _contentHasChanged: function() {
+    console.log("BOO!");
     this.showAssignments();
   }.observes('[]'),
   
