@@ -17,8 +17,6 @@ SC.stringsFor('English', {
   // Application toolbar strings
   '_Tasks': "TASKS",
   '_Welcome': "Welcome",
-  '_User:': "User:",
-  '_OpenUserManagerTooltip': "Manage Tasks users",
   "_AssigneeSelectionHint": "Select assignee(s)...",
   '_TasksSearchHint': "Search for tasks...",
   '_Import': "Import",

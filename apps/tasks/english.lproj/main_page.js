@@ -42,26 +42,17 @@ Tasks.mainPage = SC.Page.design({
           valueBinding: SC.Binding.oneWay('CoreTasks.user')
         }),
       
-        SC.View.design(Tasks.SimpleButton,{
-          layout: { left: 270, centerY: -2, height: 20, width: 20 },
-          classNames: ['users-icon'],
-          title:  "_User".loc(),
-          toolTip: "_OpenUserManagerTooltip".loc(),
-          target: 'Tasks',
-          action: 'openUserManager'
-        }),
-        
         SC.TextFieldView.design({
-          layout: { centerY: -4, height: 18, left: 295, width: 150 },
+          layout: { centerY: -2, height: 24, left: 280, width: 200 },
           classNames: ['assignee-selection-bar'],
           hint: "_AssigneeSelectionHint".loc(),
           valueBinding: 'Tasks.assignmentsController.assigneeSelection'
         }),
 
         SC.View.design({ // Assignee Selection cancel button
-          layout: { centerY: -2, height: 12, left: 430, width: 12 },
+          layout: { centerY: -2, height: 12, left: 460, width: 12 },
           isVisible: NO,
-          classNames: ['search-bar-cancel-icon'],
+          classNames: ['filter-cancel-icon'],
           mouseDown: function() {
             Tasks.assignmentsController.set('assigneeSelection', '');
           },
@@ -73,16 +64,16 @@ Tasks.mainPage = SC.Page.design({
         }),
       
         SC.TextFieldView.design({
-          layout: { centerY: -2, height: 24, left: 475, width: 200 },
+          layout: { centerY: -2, height: 24, left: 540, width: 200 },
           classNames: ['tasks-search-bar'],
           hint: "_TasksSearchHint".loc(),
           valueBinding: 'Tasks.assignmentsController.searchFilter' // TODO: [SG] bind to searchController instead
         }),
       
         SC.View.design({ // Tasks Search cancel button
-          layout: { centerY: -2, height: 12, left: 655, width: 12 },
+          layout: { centerY: -2, height: 12, left: 720, width: 12 },
           isVisible: NO,
-          classNames: ['search-bar-cancel-icon'],
+          classNames: ['filter-cancel-icon'],
           mouseDown: function() {
             Tasks.assignmentsController.set('searchFilter', '');
           },
@@ -94,12 +85,12 @@ Tasks.mainPage = SC.Page.design({
         }),
       
         SC.View.design({
-          layout: {  top: 0, height: 43, right: 355, width: 2 },
+          layout: {  top: 0, height: 43, right: 375, width: 2 },
           classNames: ['top-bar-divider']
         }),
     
         SC.View.design({ // TODO: [SG] add isEnabledBinding to track changes
-          layout: { top: 0, height: 43, right: 300, width: 45 },
+          layout: { top: 0, height: 43, right: 320, width: 45 },
           childViews: [
             SC.View.design(Tasks.SimpleButton,{
               layout: { centerX: 0, top: 2, width: 24, height: 24 },
@@ -122,7 +113,7 @@ Tasks.mainPage = SC.Page.design({
         }),
     
         SC.View.design({
-          layout: { top: 0, height: 43, right: 245, width: 45 },
+          layout: { top: 0, height: 43, right: 265, width: 45 },
           childViews: [
             SC.View.design(Tasks.SimpleButton,{
               layout: { centerX: 0, top: 2, width: 24, height: 24 },
@@ -146,7 +137,7 @@ Tasks.mainPage = SC.Page.design({
         }),
     
         SC.View.design({
-          layout: { top: 0, height: 43, right: 185, width: 45 },
+          layout: { top: 0, height: 43, right: 205, width: 45 },
           childViews: [
             SC.View.design(Tasks.SimpleButton,{
               layout: { centerX: 0, top: 2, width: 24, height: 24 },
@@ -166,6 +157,11 @@ Tasks.mainPage = SC.Page.design({
               action: 'exportData'
             })
           ]
+        }),
+    
+        SC.View.design({
+          layout: {  top: 0, height: 43, right: 185, width: 2 },
+          classNames: ['top-bar-divider']
         }),
     
         SC.View.design({

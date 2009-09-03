@@ -230,22 +230,6 @@ Tasks.mixin({
   },
   
   /**
-   * Launch User Manager dialog.
-   */
-  openUserManager: function(button) {
-    // TODO: [SG] implement open user manager
-    this._notImplemented('openUserManager');
-  },
-  
-  /**
-   * Exit User Manager dialog.
-   */
-  closeUserManager: function() {
-    // TODO: [SG] implement close user manager
-    this._notImplemented('closeUserManager');
-  },
-  
-  /**
    * Save modified data to persistent store.
    */
   saveData: function() {

@@ -38,19 +38,30 @@ Top Navigation Styling
   background: static_url('images/default-theme-static.png') no-repeat 0 -606px;
 }
 
-.users-icon {
-  background: static_url('images/users.png');
-  height: 20px;
-  width: 24px;
-}
+/* Assignee/task filtering */
 
-/* Filtering */
+.assignee-selection-bar {
+  background: static_url('images/default-theme-user-filter-bg.png') no-repeat;
+}
 
 .assignee-selection-bar span {
   padding: 0 0 0 24px !important;
+  left: 5px !important;
   font-size: 12px !important;
   font-style: italic;
   line-height: 26px !important;
+}
+
+.assignee-selection-bar input {
+  padding: 7px 0 0 29px !important;
+  width: 180px !important;
+  border: 0;
+  background: none;
+  font-size: 12px !important;
+}
+
+.assignee-selection-bar input:focus {
+  border: 0;
 }
 
 .tasks-search-bar {
@@ -66,7 +77,7 @@ Top Navigation Styling
 
 .tasks-search-bar input {
   padding: 7px 0 0 24px !important;
-  width: 160px !important;
+  width: 180px !important;
   border: 0;
   background: none;
   font-size: 12px !important;
@@ -76,13 +87,17 @@ Top Navigation Styling
   border: 0;
 }
 
-.search-bar-cancel-icon {
+.filter-cancel-icon {
   background: static_url('images/default-theme-static.png') no-repeat 0 -650px !important;
   z-index: 101 !important;
   cursor: pointer;
 }
 
-/* Icons */
+/* Application-level action icons */
+
+.save-icon {
+  background: static_url('images/default-theme-static.png') no-repeat 0 -50px;
+}
 
 .import-icon {
   background: static_url('images/default-theme-static.png') no-repeat 0 0;
@@ -90,10 +105,6 @@ Top Navigation Styling
 
 .export-icon {
   background: static_url('images/default-theme-static.png') no-repeat 0 -25px;
-}
-
-.save-icon {
-background: static_url('images/default-theme-static.png') no-repeat 0 -50px;
 }
 
 .settings-icon {
