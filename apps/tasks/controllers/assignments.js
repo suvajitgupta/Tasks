@@ -109,12 +109,14 @@ Tasks.assignmentsController = SC.ArrayController.create(
       task = tasks.objectAt(i);
       
       // Add observers to certain task properties that can require the assignmentsController to redraw.
-      task.removeObserver('effort',Tasks.assignmentsController,'_contentHasChanged');
-      task.removeObserver('priority',Tasks.assignmentsController,'_contentHasChanged');
       task.removeObserver('assignee',Tasks.assignmentsController,'_contentHasChanged');
-      task.addObserver('effort',Tasks.assignmentsController,'_contentHasChanged');
-      task.addObserver('priority',Tasks.assignmentsController,'_contentHasChanged');
+      task.removeObserver('priority',Tasks.assignmentsController,'_contentHasChanged');
+      task.removeObserver('status',Tasks.assignmentsController,'_contentHasChanged');
+      task.removeObserver('effort',Tasks.assignmentsController,'_contentHasChanged');
       task.addObserver('assignee',Tasks.assignmentsController,'_contentHasChanged');
+      task.addObserver('priority',Tasks.assignmentsController,'_contentHasChanged');
+      task.addObserver('status',Tasks.assignmentsController,'_contentHasChanged');
+      task.addObserver('effort',Tasks.assignmentsController,'_contentHasChanged');
       
       // Extract/total effort for each incomplete taek (simple number or a range)
       if(task.get('status') === CoreTasks.TASK_STATUS_DONE) continue;
@@ -151,7 +153,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
   },
   
   _contentHasChanged: function() {
-    console.log("BOO!");
+    // console.log("Called contentHasChanged() at " + new Date());
     this.showAssignments();
   }.observes('[]'),
   
