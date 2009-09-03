@@ -20,34 +20,25 @@ Tasks Pane Styling
 
 .task-description {
   position:absolute;
-  top:0;
+  top:4px;
   right:5px;
-  bottom:0;
-  width:24px;
-  padding-left: 25px;
+  width:16px;
 }
 
-/*.task-bg-mid.sel,
-.task-bg-mid {
-  background: static_url('images/default-theme-repeat-x.png') repeat-x 0 -190px !important; 
-  border: 0 !important;
-} */
-
-.task-no-description-icon-24 {
-  width:24px;
-  height:24px;
+.task-no-description-icon-16 {
+  width:16px;
+  height:16px;
   background: static_url('images/no_description.png');
 }
 
-.task-has-description-icon-24 {
-  width:24px;
-  height:24px;
+.task-has-description-icon-16 {
+  width:16px;
+  height:16px;
   background: static_url('images/has_description.png');
 }
 
-.task-bg-mid .sc-outline {
-  left: 0px !important;
-  bottom: 4px;
+.task-item .sc-outline {
+  left: 12px !important;
 }
 
 .tasks-control {

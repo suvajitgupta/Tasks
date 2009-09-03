@@ -53,17 +53,15 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     if(content && content.get('name')){ // a task node, not an assignee node
       
       var priority = content.get('priority');
+      context.addClass('task-item');
       switch(priority){
         case CoreTasks.TASK_PRIORITY_HIGH:
-          context.addClass('task-bg-mid');
           context.addClass('tasks-priority-high');
           break;
         case CoreTasks.TASK_PRIORITY_MEDIUM:
-          context.addClass('task-bg-mid');
           context.addClass('tasks-priority-medium');
           break;
         case CoreTasks.TASK_PRIORITY_LOW:
-          context.addClass('task-bg-mid');
           context.addClass('tasks-priority-low');
           break;          
       }
@@ -106,11 +104,9 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         alt: "_DescriptionTooltip".loc()
       }).addClass('description-editor');
       if (hasDescription) {
-        context.removeClass('sc-icon-document-24');
-        context.addClass('task-has-description-icon-24');
+        context.addClass('task-has-description-icon-16');
       }else{
-        context.removeClass('task-has-description-icon-24');
-        context.addClass('sc-icon-document-24');
+        context.addClass('task-no-description-icon-16');
       }
       context = context.end();
       context = context.end();
