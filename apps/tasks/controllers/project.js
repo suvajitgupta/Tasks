@@ -14,6 +14,9 @@
 Tasks.projectController = SC.ObjectController.create(
 /** @scope Tasks.projectController.prototype */ {
   
-  contentBinding: 'Tasks.projectsController.selection'
-
+  contentBinding: 'Tasks.projectsController.selection',
+  
+  _contentDidChange: function() {
+    Tasks.taskController.set('content', '');
+  }.observes('content')
 });
