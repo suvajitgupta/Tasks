@@ -72,6 +72,7 @@ v Add context menu & hotkeys to Edit/Cut/Copy/Paste/Delete/Duplicate a task [SG]
 User Manager GUI
 - Add login screen (User authentication) [SG] <SE> @Active
 ^ Add Assignee selection filter in top toolbar [SG] <JH2> @Done
+- Set assignee selection filter to logged in user if they are a Developer [SG] @Done
 - Add "+" & "-" buttons in users toolbar and "X" button in top toolbar to return [SG] <JH2>
 - Add access control based on Role (User authorization) [SG] <SE>
 v Add change password dialog? [SG] <SE>
