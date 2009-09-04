@@ -20,7 +20,7 @@
  */
 
 .tasks-priority-high {
-	font-weight: normal !important;
+	font-weight: bold !important;
 	text-decoration: underline !important;
 }
 
