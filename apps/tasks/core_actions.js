@@ -14,6 +14,8 @@ sc_require('core');
 // CHANGED: [SC] Shouldn't have to call Store.commitRecords() after createRecord for Fixtures Data Source.
 
 Tasks.mixin({
+  
+  loginName: null,
 
   /**
    * Authenticate user trying to log in to Tasks application.
@@ -27,7 +29,7 @@ Tasks.mixin({
         this.goState('a', 2);
 
         // We'll need the login name later on, in _userLoadSuccess().
-        CoreTasks.set('loginName', loginName);
+        this.loginName = loginName;
 
         // Retrieve all users from the data source.
         CoreTasks.get('store').findAll(CoreTasks.User, {
@@ -51,24 +53,12 @@ Tasks.mixin({
   _userLoadSuccess: function() {
     console.log('All users loaded.');
 
-    var loginName = CoreTasks.get('loginName');
-
-    var users = CoreTasks.get('store').findAll(SC.Query.create({
-      recordType: CoreTasks.User,
-      conditions: "loginName = '" + loginName + "'"
-    }));
-
-    var authenticated = NO;
-
-    if (users && users.length() > 0) {
-      var user = users.objectAt(0);
-      if (loginName === user.get('loginName')) {
-        CoreTasks.set('user', user);
-        authenticated = YES;
+    var user = CoreTasks.getUser(this.loginName);
+    if (user) { // existing user
+      CoreTasks.set('user', user);
+      if(user.get('role') === CoreTasks.USER_ROLE_DEVELOPER.loc()) {
+        Tasks.assignmentsController.set('assigneeSelection', this.loginName);
       }
-    }
-
-    if (authenticated) {
       this._authenticationSuccess();
     } else {
       this._authenticationFailure();

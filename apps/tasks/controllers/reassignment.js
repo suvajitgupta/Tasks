@@ -68,7 +68,7 @@ Tasks.reassignmentController = SC.Object.create(SC.CollectionViewDelegate,
     
     tasks.forEach(function(task) {
       if (task.assignee !== newAssignee) {
-        SC.RunLoop.begin();
+        SC.RunLoop.begin(); // FIXME: [SE] CoreTasks.Task.status collides with SC.Record.status
         task.assignee = newAssignee; // avoid calling observers while in transition
         task.recordDidChange();
         SC.RunLoop.end();
