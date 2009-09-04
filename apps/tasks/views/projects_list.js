@@ -5,7 +5,7 @@
 
 /** 
 
-  A workaround view so we can use SC.DROP_ON.
+  A workaround view so we can actually use SC.DROP_ON
   
   @extends SC.ListView
   @author Brandon Blatnick

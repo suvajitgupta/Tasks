@@ -56,35 +56,25 @@ Tasks.reassignmentController = SC.Object.create(SC.CollectionViewDelegate,
     // tells the CollectionView to do nothing
     // TODO: [BB] Probably a better way to do this.  Shouldn't even allow the first position to be draggable.
     if (idx === 0) return SC.DRAG_MOVE; 
-    var content = view.get('content');
-    var data = drag.dataForType(view.get('reorderDataType')) ;
-    
+
+    var tasks = drag.dataForType(Tasks.Task),
+    content   = view.get('content'),
+    len       = view.get('length'),
+    source    = drag.get('source'),
+    ret       = SC.DRAG_NONE;
+  
     // get assignee of item before drag location
     var newAssignee = content.objectAt(idx-1).get('assignee');
-
-    // get each object
-    var objects = [];
-    var shift = 0;
-    data.indexes.forEach(function(i) {  
-      objects.push(content.objectAt(i-shift));
-      shift++;
-      if (i < idx) idx--;
-      if (i === idx) idx--;
-    }, this);
     
-    objects.forEach(function(task) {
+    tasks.forEach(function(task) {
       if (task.assignee !== newAssignee) {
         SC.RunLoop.begin();
         task.assignee = newAssignee; // avoid calling observers while in transition
         task.recordDidChange();
         SC.RunLoop.end();
       }
-      else {
-        return SC.DRAG_NONE;
-      }
     }, this);
     Tasks.assignmentsController.showAssignments();
-    
     return SC.DRAG_NONE;
   }
 });
