@@ -3,26 +3,26 @@
 # parentheses enclose valid values, _Value_ indicates default
 
 ##################################################
-Task:
-{
-	id*: <Number>, # primary key
-	priority: Enum<String> ("High" | "_Medium_" | "Low"), # High ones must be completed, Low ones not included in effort subtotals, show via fonts
-	name*: <String>, # one-line summary
-	effort: <Number> # effort estimate => actual, in days
-	submitter: <Number>, # id of User who submitted this Task
-	assignee: <Number> # id of User to whom this Task is assigned
-	type: Enum<String>, ("Feature" | "Bug" | "_Other_") # kind of Task to support testing workflow
-	status: Enum<String> ("_Planned_" | "Active" | "Done" | "Risky"), # development status, show via font colors
-	validation: Enum<String> ("_Untested_" | "Passed" | "Failed"), # validation status, show via background colors
-	description: <String>, # multi-line additional information such as Feature details, Bug reproduction steps, or Release Notes
-}
-##################################################
 Project:
 {
 	id*: <Number>, # primary key
 	name*: <String>, # title
 	timeLeft: <Number>, # amount of time left in days
 	tasks: Array<Number> # array of Task ids
+##################################################
+Task:
+{
+	id*: <Number>, # primary key
+	priority: Enum<String> ("High" | "_Medium_" | "Low"), # High ones must be completed, Low ones not included in effort subtotals
+	name*: <String>, # one-line summary
+	effort: <Number> # effort estimate => actual, in days
+	submitter: <Number>, # id of User who submitted this Task
+	assignee: <Number> # id of User to whom this Task is assigned
+	type: Enum<String>, ("Feature" | "Bug" | "_Other_") # kind of Task to support testing workflow
+	status: Enum<String> ("_Planned_" | "Active" | "Done" | "Risky"), # development status
+	validation: Enum<String> ("_Untested_" | "Passed" | "Failed"), # validation status
+	description: <String>, # multi-line additional information such as Feature details, Bug reproduction steps, or Release Notes
+}
 ##################################################
 User:
 {
