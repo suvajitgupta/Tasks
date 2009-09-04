@@ -76,5 +76,37 @@ Tasks.reassignmentController = SC.Object.create(SC.CollectionViewDelegate,
     }, this);
     Tasks.assignmentsController.showAssignments();
     return SC.DRAG_NONE;
+  },
+  
+  /**
+    Called by the collection view to actually delete the selected items.
+    
+    The default behavior will use standard array operators to delete the 
+    indexes from the array.  You can implement this method to provide your own 
+    deletion method.
+    
+    If you simply want to control the items to be deleted, you should instead
+    implement collectionViewShouldDeleteItems().  This method will only be 
+    called if canDeleteContent is YES and collectionViewShouldDeleteIndexes()
+    returns a non-empty index set
+    
+    @param {SC.CollectionView} view collection view
+    @param {SC.IndexSet} indexes the items to delete
+    @returns {Boolean} YES if the deletion was a success.
+  */
+  collectionViewDeleteContent: function(view, content, indexes) {
+    if (!content) return NO ;
+    //TODO: refactor to call 
+    if (SC.typeOf(content.destroyAt) === SC.T_FUNCTION) {
+      Tasks.deleteTask();
+      content.destroyAt(indexes);
+      return YES ;
+      
+    } else if (SC.typeOf(content.removeAt) === SC.T_FUNCTION) {
+      Tasks.deleteTask();
+      content.removeAt(indexes);
+      return YES;
+      
+    } else return NO ;
   }
 });
