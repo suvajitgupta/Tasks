@@ -74,7 +74,10 @@ Tasks.reassignmentController = SC.Object.create(SC.CollectionViewDelegate,
     
     objects.forEach(function(task) {
       if (task.assignee !== newAssignee) {
+        SC.RunLoop.begin();
         task.assignee = newAssignee; // avoid calling observers while in transition
+        task.recordDidChange();
+        SC.RunLoop.end();
       }
       else {
         return SC.DRAG_NONE;
