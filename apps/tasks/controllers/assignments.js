@@ -31,7 +31,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     this.forEach( // group tasks by user & separate unassigned tasks
       function(task){
         assignee = task.get('assignee');
-        if (assignee && !assignee.get) {
+        if (assignee && !assignee.get) { // HACK: [BB] unclear why assigneee.get() is null
           return;
         }
         assigneeName = assignee ? assignee.get('displayName') : CoreTasks.USER_UNASSIGNED;

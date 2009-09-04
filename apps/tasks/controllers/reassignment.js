@@ -54,23 +54,24 @@ Tasks.reassignmentController = SC.Object.create(SC.CollectionViewDelegate,
   collectionViewPerformDragOperation: function(view, drag, dragOp, idx, dropOp) {
     
     // tells the CollectionView to do nothing
-    // TODO: [BB] Probably a better way to do this.  Shouldn't even allow the first position to be draggable.
-    if (idx === 0) return SC.DRAG_MOVE; 
+    // TODO: [BB] Shouldn't even allow the first position to be draggable.
+    if (idx === 0) return SC.DRAG_MOVE;
+    
+    // Extract tasks to drag
+    var tasks = drag.dataForType(Tasks.Task);
 
-    var tasks = drag.dataForType(Tasks.Task),
-    content   = view.get('content'),
-    len       = view.get('length'),
-    source    = drag.get('source'),
-    ret       = SC.DRAG_NONE;
-  
-    // get assignee of item before drag location
+    // Get assignee of item before drag location
+    var content   = view.get('content');
     var newAssignee = content.objectAt(idx-1).get('assignee');
     
+    // Set dragged tasks' assignee to new assignee
     tasks.forEach(function(task) {
       if (task.get('assignee') !== newAssignee) {
         task.set('assignee', newAssignee);
       }
     }, this);
+    
+    // Redraw tasks list after reassignments are complete
     Tasks.assignmentsController.showAssignments();
     return SC.DRAG_NONE;
   },

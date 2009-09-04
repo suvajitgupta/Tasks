@@ -44,8 +44,8 @@ v Set projects toolbar button enablement based on having a selection [SG] <EO> @
 - Select first project at startup [JH2] <SG> @Done
 ^ Add virtual Inbox & AllTasks to group all unallocated & all tasks respectively [SG] <SE> @Done
 - Disallow Inbox/AllTasks projects from being deleted [SG] <EO> @Done
-^ Add multi-task drag-n-drop reordering [BB] <SG> @Active
-^ Allow multi-task drag-n-drop Task reallocation to Projects [BB] <SG> @Active
+^ Add multi-task drag-n-drop reordering [BB] <SG>
+^ Allow multi-task drag-n-drop Task reallocation to Projects [BB] <SG> @Done
 v Add context menu to Delete a project [SG] <EG>
 v Make list of Projects collapsible [SG] <EG>
 
