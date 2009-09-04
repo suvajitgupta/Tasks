@@ -74,7 +74,7 @@ Tasks.mainPage = SC.Page.design({
             Tasks.assignmentsController.set('searchFilter', '');
           },
           isVisibleBinding: 'Tasks.assignmentsController.searchFilter'
-ß        }),
+        }),
       
         SC.View.design({
           layout: {  top: 0, height: 43, right: 375, width: 2 },
