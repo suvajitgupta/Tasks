@@ -438,14 +438,24 @@ Tasks.mainPage = SC.Page.design({
     bottomBarView: SC.View.design(SC.Border, {
       layout: { bottom: 0, height: 26, left: 0, right: 0 },
       classNames: ['bottom-bar'],
-      childViews: 'summaryView'.w(),
+      childViews: 'summaryView saveMessageView'.w(),
       borderStyle: SC.BORDER_TOP,
         
       summaryView: Tasks.SummaryView.design({
-        layout: { centerY: 0, height: 16, left: 10, right: 0 },
+        layout: { centerY: 0, height: 16, left: 10, right: 500 },
         projectsCountBinding: SC.Binding.oneWay('Tasks.projectsController.length'),
         tasksCountBinding: SC.Binding.oneWay('Tasks.assignmentsController.length')
-      })    
-    })
+      }),
+
+      saveMessageView: SC.LabelView.design({
+        layout: { centerY: 0, height: 16, width: 400, right: 10 },
+        textAlign: SC.ALIGN_RIGHT,
+        value: ''
+      })
+      
+    }),
+    
+    saveMessage: SC.outlet('bottomBarView.saveMessageView')
+    
   })
 });

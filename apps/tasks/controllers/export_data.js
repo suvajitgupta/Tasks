@@ -34,7 +34,7 @@ Tasks.exportDataController = SC.ObjectController.create(
   */
   _exportData: function() {
     var val, task, user;
-    var data = "# Tasks data export at " + new Date().format('MMM dd, yyyy hh:mm:ssa') + '\n\n';
+    var data = "# Tasks data export at " + new Date().format('MMM dd, yyyy hh:mm:ss a') + '\n\n';
     var pc = Tasks.get('projectsController');
 
     pc.forEach(function(rec){

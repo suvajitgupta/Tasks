@@ -26,7 +26,7 @@ SC.stringsFor('English', {
   '_ExportTooltip': "Export Tasks data to a file",
   '_Save': "Save",
   '_SaveTooltip': "Save Tasks data to the server",
-  '_SaveTooltip': "Save Tasks data to the server",
+  '_SaveMessage': "Last saved ",
   '_Settings': "Settings",
   '_SettingsTooltip': "Manage Tasks settings",
   '_Help': "Help",

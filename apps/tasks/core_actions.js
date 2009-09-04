@@ -238,6 +238,9 @@ Tasks.mixin({
 
     // Now commit all dirty records to the database.
     store.commitRecords();
+    var saveMessage = Tasks.getPath('mainPage.mainPane.saveMessage');
+    saveMessage.set('value', "_SaveMessage".loc() + new Date().format('hh:mm:ss a'));
+    
   },
   
   /**
