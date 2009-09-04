@@ -56,11 +56,7 @@ Tasks.mainPage = SC.Page.design({
           mouseDown: function() {
             Tasks.assignmentsController.set('assigneeSelection', '');
           },
-        
-          _assigneeSelectionCancelButtonEnabler: function() {
-            this.set('isVisible', Tasks.assignmentsController.get('assigneeSelection') !== '');
-          }.observes('Tasks.assignmentsController.assigneeSelection')
-        
+          isVisibleBinding: 'Tasks.assignmentsController.assigneeSelection'
         }),
       
         SC.TextFieldView.design({
@@ -77,12 +73,8 @@ Tasks.mainPage = SC.Page.design({
           mouseDown: function() {
             Tasks.assignmentsController.set('searchFilter', '');
           },
-        
-          _tasksSearchCancelButtonEnabler: function() {
-            this.set('isVisible', Tasks.assignmentsController.get('searchFilter') !== '');
-          }.observes('Tasks.assignmentsController.searchFilter')
-        
-        }),
+          isVisibleBinding: 'Tasks.assignmentsController.searchFilter'
+ß        }),
       
         SC.View.design({
           layout: {  top: 0, height: 43, right: 375, width: 2 },
