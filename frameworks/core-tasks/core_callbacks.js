@@ -1,3 +1,5 @@
+/*globals CoreTasks sc_require */
+
 sc_require('core');
 sc_require('models/record');
 
@@ -15,8 +17,7 @@ CoreTasks.mixin({
       throw 'Error invoking callback: Callback is not a function.';
     }
 
-    // TODO: [SE] Find some way to indicate which function is being invoked w/o displaying the
-    // source code in its entirety.
+    // TODO: [SE] indicate which function is being invoked w/o displaying the source code in its entirety.
 
     // There may be additional arguments that need to be passed along.
     if (arguments.length > 1) {

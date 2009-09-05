@@ -9,7 +9,7 @@ sc_require('core');
  * @author Sean Eidemiller
  */
  
-// FIXME: [SE] enforce valid values during record creation
+// TODO: [SE] enforce valid values during record creation
 
 CoreTasks.RecordAttribute = SC.RecordAttribute.extend({
 

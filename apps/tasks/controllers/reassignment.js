@@ -10,7 +10,6 @@
   @extends SC.Object
   @author Brandon Blatnick
 */
-// FIXME: [BB] Fix spurious box-like ghost view with task while dragging
 Tasks.reassignmentController = SC.Object.create(SC.CollectionViewDelegate,
 /** @scope Tasks.reassignmentController.prototype */ {
   
@@ -54,7 +53,7 @@ Tasks.reassignmentController = SC.Object.create(SC.CollectionViewDelegate,
   collectionViewPerformDragOperation: function(view, drag, dragOp, idx, dropOp) {
     
     // tells the CollectionView to do nothing
-    // TODO: [BB] Shouldn't even allow the first position to be draggable.
+    // TODO: [BB] shouldn't allow the first position to be draggable
     if (idx === 0) return SC.DRAG_MOVE;
     
     // Extract tasks to drag
@@ -94,7 +93,7 @@ Tasks.reassignmentController = SC.Object.create(SC.CollectionViewDelegate,
   */
   collectionViewDeleteContent: function(view, content, indexes) {
     if (!content) return NO ;
-    //TODO: refactor to call 
+    //TODO: [SG] refactor all this code to Tasks Controller 
     if (SC.typeOf(content.destroyAt) === SC.T_FUNCTION) {
       Tasks.deleteTask();
       content.destroyAt(indexes);

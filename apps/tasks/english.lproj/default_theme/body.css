@@ -21,7 +21,7 @@
 
 .tasks-priority-high {
 	font-weight: bold !important;
-	// text-decoration: underline !important;
+	text-decoration: underline !important;
 }
 
 .tasks-priority-medium {
@@ -84,13 +84,13 @@
 .normal-assignee label {
   color: white !important;
   background: #555 none repeat scroll 0 0 !important;
-  padding-left: 5px;
+  padding-left: 10px;
 }
 
 .overloaded-assignee label {
   color: white !important;
   background: #F33 none repeat scroll 0 0 !important;
-  padding-left: 5px;
+  padding-left: 10px;
 }
 
 /*-----------------------------------------------------------------

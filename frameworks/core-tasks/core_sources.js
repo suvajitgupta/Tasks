@@ -1,6 +1,3 @@
-sc_require('core');
-sc_require('core_callbacks');
-
 /**
  * An extension of the SC.DataSource class that acts as a proxy between the data store and the
  * remote server.
@@ -8,6 +5,10 @@ sc_require('core_callbacks');
  * @extends SC.DataSource
  * @author Sean Eidemiller
  */
+/*globals CoreTasks sc_require */
+sc_require('core');
+sc_require('core_callbacks');
+
 CoreTasks.RemoteDataSource = SC.DataSource.extend({
 
   init: function() {
@@ -353,7 +354,7 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
   },
 
   /**
-   * TODO: [SE] Document this.
+   * TODO: [SE] document how server response is normalized.
    */
   _normalizeResponse: function(hash) {
     // HACK: [SE] Browsers running in OS X get a string and not a hash, so we have to convert it.
@@ -374,7 +375,7 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
   },
 
   /**
-   * TODO: [SE] Document this.
+   * TODO: [SE] document how server reponse array is normalized.
    */
   _normalizeResponseArray: function(hashes) {
     // HACK: [SE] Browsers running in OS X get a string and not a hash, and they don't like the

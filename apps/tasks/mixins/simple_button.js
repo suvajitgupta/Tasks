@@ -13,7 +13,7 @@ sc_require('core');
   @version 0.1
   @since 0.1
 */
-Tasks.SimpleButton = { // FIXME: [SG] SimpleButton shouldn't accept clicks when isEnabled is false 
+Tasks.SimpleButton = { 
 /* SimpleButton Mixin */
   target: null,
   action: null,

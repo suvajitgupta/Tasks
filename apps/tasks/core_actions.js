@@ -8,8 +8,6 @@
 /*globals CoreTasks Tasks sc_require */
 sc_require('core');
 
-// FIXME: [SE/SG] handle persistence consistently/when user Saves?
-// FIXME: [SG] don't enable add/delTasks when on allTasks project
 // CHANGED: [SC] Shouldn't have to manually add/remove to/from controller instead of store notifying of changes.
 // CHANGED: [SC] Shouldn't have to call Store.commitRecords() after createRecord for Fixtures Data Source.
 
@@ -325,7 +323,6 @@ Tasks.mixin({
     var itemView = listView.itemViewForContentIndex(idx);
     
     // Wait for run loop to complete before method is called.
-    // FIXME: [SC] need to highlight entire item when starting to edit
     CoreTasks.invokeLater(itemView.beginEditing.bind(itemView));
   },
   
@@ -435,7 +432,6 @@ Tasks.mixin({
     // TODO: [SE] Implement addTaskFailure
   },
   
-  // FIXME: [SG] Fix when you delete all tasks from last assignee it throws an error
   /**
    * Delete selected task in tasks detail list.
    */
@@ -452,7 +448,6 @@ Tasks.mixin({
         project.removeTask(task);
 
         // Remove the task from the All Tasks project.
-        // FIXME: [SE/SG] Deleted task isn't removed from AllTasks project.
         CoreTasks.get('allTasks').removeTask(task);
 
         // Now remove the task from the assignments controller.
