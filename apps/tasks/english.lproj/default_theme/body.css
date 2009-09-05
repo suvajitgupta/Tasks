@@ -107,7 +107,13 @@
 }
 
 .sc-theme.focus .sc-list-view.sc-source-list .sc-collection-item.sel {
+  background: #DDD none repeat scroll 0 0 !important;
+	border-style: none;
+}
+
+.sc-theme.focus .sc-list-view.sc-source-list .sc-collection-item.sel label {
 	border-style: solid;
 	border-size: 1px;
-	border-color: black;
+	border-color: #333;
+	margin-top: -12px;
 }

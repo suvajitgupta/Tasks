@@ -302,7 +302,7 @@ Tasks.mainPage = SC.Page.design({
           contentBinding: 'Tasks.tasksController.arrangedObjects',
           selectionBinding: 'Tasks.tasksController.selection',
           localize: YES,
-          rowHeight: 22,
+          rowHeight: 24,
           classNames: ['tasks-pane-inner'],
           hasContentIcon: YES,
           contentIconKey: 'icon',
