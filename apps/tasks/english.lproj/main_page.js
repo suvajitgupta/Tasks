@@ -297,7 +297,7 @@ Tasks.mainPage = SC.Page.design({
         classNames: ['tasks-pane'],
 
         contentView: SC.SourceListView.design({
-          layout: { top: 0, bottom: 0, left: 6, right: 6 },
+          layout: { top: 0, bottom: 0, left: 0, right: 2 },
           contentValueKey: 'displayName',
           contentBinding: 'Tasks.tasksController.arrangedObjects',
           selectionBinding: 'Tasks.tasksController.selection',
