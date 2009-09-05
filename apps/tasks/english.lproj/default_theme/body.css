@@ -60,15 +60,15 @@
  * Task validation styles
  */
 
-.tasks-validation-untested {
+.tasks-validation-untested label {
   background: #DDD none repeat scroll 0 0 !important;
 }
 
-.tasks-validation-passed {
+.tasks-validation-passed label {
   background: #CCFFCC none repeat scroll 0 0 !important;
 }
 
-.tasks-validation-failed {
+.tasks-validation-failed label {
   background: #FFCCFF none repeat scroll 0 0 !important;
 }
 
@@ -78,12 +78,12 @@
 
 .normal-assignee {
   color: white !important;
-  background: black none repeat scroll 0 0 !important;
+  background: #444 none repeat scroll 0 0 !important;
 }
 
 .overloaded-assignee {
   color: white !important;
-  background: red none repeat scroll 0 0 !important;
+  background: #F33 none repeat scroll 0 0 !important;
 }
 
 /*-----------------------------------------------------------------
