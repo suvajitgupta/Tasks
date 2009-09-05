@@ -412,11 +412,11 @@ Tasks.mainPage = SC.Page.design({
                 escapeHTML: NO,
                 controlSize: SC.SMALL_CONTROL_SIZE,
                 items: [
-                  { title: '<span class=tasks-validation-untested>' + CoreTasks.TASK_VALIDATION_UNTESTED.loc() + '</span>&nbsp;',
+                  { title: '<span class=tasks-validation-untested><label>' + CoreTasks.TASK_VALIDATION_UNTESTED.loc() + '</label></span>&nbsp;',
                     value: CoreTasks.TASK_VALIDATION_UNTESTED },
-                  { title: '<span class=tasks-validation-passed>' + CoreTasks.TASK_VALIDATION_PASSED.loc() + '</span>&nbsp;',
+                  { title: '<span class=tasks-validation-passed><label>' + CoreTasks.TASK_VALIDATION_PASSED.loc() + '</label></span>&nbsp;',
                     value: CoreTasks.TASK_VALIDATION_PASSED },
-                  { title: '<span class=tasks-validation-failed>' + CoreTasks.TASK_VALIDATION_FAILED.loc() + '</span>&nbsp;',
+                  { title: '<span class=tasks-validation-failed><label>' + CoreTasks.TASK_VALIDATION_FAILED.loc() + '</label></span>&nbsp;',
                     value: CoreTasks.TASK_VALIDATION_FAILED }
                 ],
                 itemTitleKey: 'title',
