@@ -228,7 +228,7 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
     var taskLine = hasBullet? line.slice(2) : line;
     
     // extract task name
-    var taskNameMatches = /(^[^\{<\[\$@]+)/.exec(taskLine);
+    var taskNameMatches = /(^[^\{<\[\$@%]+)/.exec(taskLine);
     var taskName = taskLine;
     if (taskNameMatches) {
       taskName = taskNameMatches[1].replace(/\s+$/, '');
