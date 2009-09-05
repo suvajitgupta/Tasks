@@ -21,7 +21,7 @@
 
 .tasks-priority-high {
 	font-weight: bold !important;
-	text-decoration: underline !important;
+	// text-decoration: underline !important;
 }
 
 .tasks-priority-medium {
@@ -61,28 +61,36 @@
  */
 
 .tasks-validation-untested label {
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 .tasks-validation-passed label {
-  background: #CCFFCC none repeat scroll 0 0 !important;
+  background: #9F9 none repeat scroll 0 0 !important;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 .tasks-validation-failed label {
-  background: #FFCCFF none repeat scroll 0 0 !important;
+  background: #F99 none repeat scroll 0 0 !important;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 /*-----------------------------------------------------------------
  * Assignee loading styles
  */
 
-.normal-assignee {
+.normal-assignee label {
   color: white !important;
-  background: #444 none repeat scroll 0 0 !important;
+  background: #555 none repeat scroll 0 0 !important;
+  padding-left: 5px;
 }
 
-.overloaded-assignee {
+.overloaded-assignee label {
   color: white !important;
   background: #F33 none repeat scroll 0 0 !important;
+  padding-left: 5px;
 }
 
 /*-----------------------------------------------------------------
@@ -112,8 +120,6 @@
 }
 
 .sc-theme.focus .sc-list-view.sc-source-list .sc-collection-item.sel label {
-	border-style: solid;
-	border-size: 1px;
-	border-color: #333;
-	margin-top: -12px;
+	border: 2px solid #333;
+	margin-top: -10px;
 }
