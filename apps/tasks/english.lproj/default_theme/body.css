@@ -61,7 +61,7 @@
  */
 
 .tasks-validation-untested {
-  background: #CCC none repeat scroll 0 0 !important;
+  background: #DDD none repeat scroll 0 0 !important;
 }
 
 .tasks-validation-passed {
@@ -70,6 +70,20 @@
 
 .tasks-validation-failed {
   background: #EAADEA none repeat scroll 0 0 !important;
+}
+
+/*-----------------------------------------------------------------
+ * Assignee loading styles
+ */
+
+.normal-assignee {
+  color: white !important;
+  background: black none repeat scroll 0 0 !important;
+}
+
+.overloaded-assignee {
+  color: white !important;
+  background: red none repeat scroll 0 0 !important;
 }
 
 /*-----------------------------------------------------------------

@@ -63,7 +63,7 @@ v Allow "+" button to be pressed a second time to keep in data entry mode, Esc w
 ^ Show effort subtotals (exclude Done or Low priority tasks) in curly braces for load balancing [SG] @Done
 - Add checkbox to include Low priority tasks in subtotals [SG]
 - Append "?" for range-based subtotals including tasks with unspecified efforts [SG] @Done
-- Indicate overloaded assignees (with more effort total than timeLeft in project) by color-coding them red [SG]
+- Indicate overloaded assignees (with more effort total than timeLeft in project) by highlighting in red [SG] <MB> @Done
 ^ Allow drag-n-drop reordering (preserve order when persisting) [SG] @Done
 ^ Allow multi-task drag-n-drop reassignment [BB] <SG>  @Done
 ^ Add popup viewer/editor for Descriptions [JH2] <SG> @Done
@@ -82,7 +82,7 @@ Application Manager GUI
 - Add status bar at the bottom summarizing stats about Tasks data [SG] <MB> @Active
 - Add "Import" button in top toolbar with associated pop up panel [BB] <SG> @Done
 - Add "Export" button in top toolbar with associated pop up panel [SG] @Done
-- Add "Save" button in top toolbar, provide confirmation after save operation finishes [SG] <SE> @Active
+- Add "Save" button in top toolbar, note time of last save in status bar [SG] <BB> @Done
 - Add Settings button/popup to manage Users and preferences [SG] <JH2>
 - Add Online Help button in top Toolbar & popup Help dialog [SG] @Active
 - Add Logout button to exit in top toolbar [SG] <SE> @Active

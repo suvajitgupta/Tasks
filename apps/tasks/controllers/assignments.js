@@ -27,11 +27,20 @@ Tasks.assignmentsController = SC.ArrayController.create(
     sf = this._escapeMetacharacters(sf);
     var rx = new RegExp(sf, 'i');
     
+    // Get time left, if any specified, in selected project.
+    var projectTimeLeft = null;
+    var sel = Tasks.getPath('projectsController.selection');
+    if (sel && sel.length() > 0) {
+      var project = sel.firstObject();
+      projectTimeLeft = project.get('timeLeft');
+    }
+      
+    // Group tasks by user & separate unassigned tasks
     var assignees = {}, assigneeName, assignee, assignmentNodes = [];
-    this.forEach( // group tasks by user & separate unassigned tasks
+    this.forEach( 
       function(task){
         assignee = task.get('assignee');
-        if (assignee && !assignee.get) { // HACK: [BB] unclear why assigneee.get() is null
+        if (assignee && !assignee.get) { // HACK: [BB] unclear why assigneee.get() is null at times
           return;
         }
         assigneeName = assignee ? assignee.get('displayName') : CoreTasks.USER_UNASSIGNED;
@@ -60,7 +69,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
       for(assigneeName in assignees){ // list all assigned tasks
         if(assignees.hasOwnProperty(assigneeName)) {
           if(selectedAssigneeDisplayNames.indexOf(assigneeName) !== -1) {
-            this._createAssignmentNode(assignmentNodes, assigneeName, assignees[assigneeName]);
+            this._createAssignmentNode(assignmentNodes, assigneeName, assignees[assigneeName], projectTimeLeft);
           }
         }
       }
@@ -68,12 +77,12 @@ Tasks.assignmentsController = SC.ArrayController.create(
     } else { // show tasks for all users
       for(assigneeName in assignees){ // list unassigned tasks first
         if(assignees.hasOwnProperty(assigneeName) && assigneeName === CoreTasks.USER_UNASSIGNED) {
-          this._createAssignmentNode(assignmentNodes, assigneeName, assignees[assigneeName]);
+          this._createAssignmentNode(assignmentNodes, assigneeName, assignees[assigneeName], projectTimeLeft);
         }
       }
       for(assigneeName in assignees){ // list all assigned tasks
         if(assignees.hasOwnProperty(assigneeName) && assigneeName !== CoreTasks.USER_UNASSIGNED) {
-          this._createAssignmentNode(assignmentNodes, assigneeName, assignees[assigneeName]);
+          this._createAssignmentNode(assignmentNodes, assigneeName, assignees[assigneeName], projectTimeLeft);
         }
       }
     }
@@ -97,9 +106,10 @@ Tasks.assignmentsController = SC.ArrayController.create(
    * @param {Array} set of assignment nodes.
    * @param {String} assignee name.
    * @param {Object} a hash of assignee ID and tasks array.
+   * @param {Number} amount of time left in project.
    * @returns {Object) return a node to be inserted into the tree view.
    */
-  _createAssignmentNode: function(assignmentNodes, assigneeName, assigneeObj) {
+  _createAssignmentNode: function(assignmentNodes, assigneeName, assigneeObj, projectTimeLeft) {
     
     var taskWithUnspecifiedEffort = false;
     var displayName = assigneeName;
@@ -139,7 +149,10 @@ Tasks.assignmentsController = SC.ArrayController.create(
         totalEffortMax = parseFloat((totalEffortMax + effortMax).toFixed(2));
       }
     }
+    
+    var isOverloaded = false;
     if(totalEffortMin !== 0) {
+      if(projectTimeLeft && totalEffortMin > projectTimeLeft) isOverloaded = true;
       var totalEffort = '' + totalEffortMin;
       if (totalEffortMax !== totalEffortMin) {
         totalEffort += '-' + totalEffortMax;
@@ -149,6 +162,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     
     assignmentNodes.push (SC.Object.create({
       displayName: displayName,
+      isOverloaded: isOverloaded,
       assignee: assigneeObj.assignee,
       treeItemChildren: tasks,
       treeItemIsExpanded: YES

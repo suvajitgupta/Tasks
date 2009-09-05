@@ -312,6 +312,7 @@ Tasks.mainPage = SC.Page.design({
           canDeleteContent: YES,
           destroyOnRemoval: YES,
           exampleView: Tasks.TaskItemView,
+          groupExampleView: Tasks.AssigneeItemView,
           delegate: Tasks.reassignmentController,
           selectOnMouseDown: YES
         })
