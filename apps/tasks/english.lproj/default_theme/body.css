@@ -115,7 +115,7 @@
 }
 
 .sc-theme.focus .sc-list-view.sc-source-list .sc-collection-item.sel {
-  background: #DDD none repeat scroll 0 0 !important;
+  background: #e2e4e7;
 	border-style: none;
 }
 
