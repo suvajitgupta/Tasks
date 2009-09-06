@@ -179,7 +179,7 @@ Tasks.mainPage = SC.Page.design({
     workspaceView: SC.View.design({
       layout: { top: 42, bottom: 19, left: 0, right: 0 },
       classNames: ['workspace'],
-      childViews: 'projectsListView projectsControlView taskListView tasksControlView'.w(),
+      childViews: 'projectsListView projectsToolbarView tasksListView tasksToolbarView'.w(),
       
       projectsListView: SC.ScrollView.design({
         layout: { top: 0, bottom: 56, left: 0, width: 268 },
@@ -205,7 +205,7 @@ Tasks.mainPage = SC.Page.design({
         })
       }),
       
-      projectsControlView: SC.View.design({
+      projectsToolbarView: SC.View.design({
         layout: { bottom: 0, height: 55, width: 255 },
         classNames: ['projects-tool-bar'],
         childViews: [
@@ -281,7 +281,7 @@ Tasks.mainPage = SC.Page.design({
         ]
       }),
       
-      taskListView: SC.ScrollView.design({
+      tasksListView: SC.ScrollView.design({
         layout: { top: 0, bottom: 56, left: 268 },
         hasHorizontalScroller: NO,
         classNames: ['tasks-pane'],
@@ -308,144 +308,134 @@ Tasks.mainPage = SC.Page.design({
         })
       }),
       
-      tasksControlView: SC.View.design({
-        layout: { bottom: 0, height: 55, left: 250 },
+      tasksToolbarView: SC.View.design({
+        layout: { bottom: 0, height: 55, left: 252 },
         classNames: ['tasks-tool-bar'],
         childViews: [
         
-          SC.View.design({
-            layout: { top: 0, left: 0, bottom: 0, right: 0 },
-            childViews: [
-          
-            SC.LabelView.design(Tasks.SimpleButton,{
-              layout: { top: 2, left: 0, height: 24, width: 90 },
-              icon: 'task-add-icon',
-              value: "_AddTask".loc(),
-              classNames: ['tool-bar-button'],
-              toolTip: "_AddTaskTooltip".loc(),
-              target: 'Tasks',
-              action: 'addTask'
-            }),
+          SC.LabelView.design(Tasks.SimpleButton,{
+            layout: { top: 2, left: 0, height: 24, width: 90 },
+            icon: 'task-add-icon',
+            value: "_AddTask".loc(),
+            classNames: ['tool-bar-button'],
+            toolTip: "_AddTaskTooltip".loc(),
+            target: 'Tasks',
+            action: 'addTask'
+          }),
 
-            SC.LabelView.design(Tasks.SimpleButton,{
-              layout: { bottom: 2, left: 0, height: 24, width: 90 },
-              icon: 'task-del-icon',
-              value: "_DelTask".loc(),
-              classNames: ['tool-bar-button'],
-              toolTip: "_DelTaskTooltip".loc(),
-              isEnabledBinding: SC.Binding.oneWay('Tasks.tasksController.hasSelection'),
-              target: 'Tasks',
-              action: 'deleteTask'
-            }),
-          
-            SC.View.design({
-              layout: { top: 0, left: 70, right: 0 },
-              childViews: [
-            
-              SC.LabelView.design({
-                layout: { bottom: 2, height: 18, left: 12, width: 200 },
-                classNames: ['tool-bar-label'],
-                value: "_Priority".loc()
-              }),
-              
-              SC.SeparatorView.design({
-                layout: { bottom: 21, height: 3, left: 22, width: 170 },
-                layoutDirection: SC.LAYOUT_HORIZONTAL,
-                classNames: ['task-attribute-set']
-              }),
+          SC.LabelView.design(Tasks.SimpleButton,{
+            layout: { bottom: 2, left: 0, height: 24, width: 90 },
+            icon: 'task-del-icon',
+            value: "_DelTask".loc(),
+            classNames: ['tool-bar-button'],
+            toolTip: "_DelTaskTooltip".loc(),
+            isEnabledBinding: SC.Binding.oneWay('Tasks.tasksController.hasSelection'),
+            target: 'Tasks',
+            action: 'deleteTask'
+          }),
+    
+          SC.LabelView.design({
+            layout: { bottom: 2, height: 18, left: 82, width: 200 },
+            classNames: ['tool-bar-label'],
+            value: "_Priority".loc()
+          }),
+        
+          SC.SeparatorView.design({
+            layout: { bottom: 21, height: 3, left: 92, width: 170 },
+            layoutDirection: SC.LAYOUT_HORIZONTAL,
+            classNames: ['task-attribute-grouping']
+          }),
 
-              SC.RadioView.design({
-                layout: { bottom: 25, height: 21, left: 22, width: 200 },
-                escapeHTML: NO,
-                controlSize: SC.SMALL_CONTROL_SIZE,
-                items: [
-                  { title: '<span class=tasks-priority-high>' + CoreTasks.TASK_PRIORITY_HIGH.loc() + '</span>&nbsp;',
-                    value: CoreTasks.TASK_PRIORITY_HIGH },
-                  { title: '<span class=tasks-priority-medium>' + CoreTasks.TASK_PRIORITY_MEDIUM.loc() + '</span>&nbsp;',
-                    value: CoreTasks.TASK_PRIORITY_MEDIUM },
-                  { title: '<span class=tasks-priority-low>' + CoreTasks.TASK_PRIORITY_LOW.loc() + '</span>&nbsp;',
-                    value: CoreTasks.TASK_PRIORITY_LOW }
-                ],
-                itemTitleKey: 'title',
-                itemValueKey: 'value',
-                valueBinding: 'Tasks.taskController.priority',
-                isEnabledBinding: SC.Binding.oneWay('Tasks.tasksController.hasSelection'),
-                layoutDirection: SC.LAYOUT_HORIZONTAL
-              }),
+          SC.RadioView.design({
+            layout: { bottom: 25, height: 21, left: 92, width: 200 },
+            escapeHTML: NO,
+            classNames: ['task-attribute-set'],
+            items: [
+              { title: '<span class=tasks-priority-high>' + CoreTasks.TASK_PRIORITY_HIGH.loc() + '</span>&nbsp;',
+                value: CoreTasks.TASK_PRIORITY_HIGH },
+              { title: '<span class=tasks-priority-medium>' + CoreTasks.TASK_PRIORITY_MEDIUM.loc() + '</span>&nbsp;',
+                value: CoreTasks.TASK_PRIORITY_MEDIUM },
+              { title: '<span class=tasks-priority-low>' + CoreTasks.TASK_PRIORITY_LOW.loc() + '</span>&nbsp;',
+                value: CoreTasks.TASK_PRIORITY_LOW }
+            ],
+            itemTitleKey: 'title',
+            itemValueKey: 'value',
+            valueBinding: 'Tasks.taskController.priority',
+            isEnabledBinding: SC.Binding.oneWay('Tasks.tasksController.hasSelection'),
+            layoutDirection: SC.LAYOUT_HORIZONTAL
+          }),
 
-              SC.LabelView.design({
-                layout: { bottom: 2, height: 18, left: 200, width: 270 },
-                classNames: ['tool-bar-label'],
-                value: "_Status".loc()
-              }),
-              
-              SC.SeparatorView.design({
-                layout: { bottom: 21, height: 3, left: 210, width: 240 },
-                layoutDirection: SC.LAYOUT_HORIZONTAL,
-                classNames: ['task-attribute-set']
-              }),
+          SC.LabelView.design({
+            layout: { bottom: 2, height: 18, left: 270, width: 270 },
+            classNames: ['tool-bar-label'],
+            value: "_Status".loc()
+          }),
+        
+          SC.SeparatorView.design({
+            layout: { bottom: 21, height: 3, left: 280, width: 240 },
+            layoutDirection: SC.LAYOUT_HORIZONTAL,
+            classNames: ['task-attribute-grouping']
+          }),
 
-              SC.RadioView.design({
-                layout: { bottom: 25, height: 21, left: 210, width: 270 },
-                escapeHTML: NO,
-                controlSize: SC.SMALL_CONTROL_SIZE,
-                items: [
-                  { title: '<span class=tasks-status-planned>' + CoreTasks.TASK_STATUS_PLANNED.loc() + '</span>&nbsp;',
-                    value: CoreTasks.TASK_STATUS_PLANNED },
-                  { title: '<span class=tasks-status-active>' + CoreTasks.TASK_STATUS_ACTIVE.loc() + '</span>&nbsp;',
-                    value: CoreTasks.TASK_STATUS_ACTIVE },
-                  { title: '<span class=tasks-status-done>' + CoreTasks.TASK_STATUS_DONE.loc() + '</span>&nbsp;',
-                    value: CoreTasks.TASK_STATUS_DONE },
-                  { title: '<span class=tasks-status-risky>' + CoreTasks.TASK_STATUS_RISKY.loc() + '</span>&nbsp;',
-                    value: CoreTasks.TASK_STATUS_RISKY }
-                ],
-                itemTitleKey: 'title',
-                itemValueKey: 'value',
-                valueBinding: 'Tasks.taskController.status',
-                isEnabledBinding: SC.Binding.oneWay('Tasks.tasksController.hasSelection'),
-                layoutDirection: SC.LAYOUT_HORIZONTAL
-              }),
+          SC.RadioView.design({
+            layout: { bottom: 25, height: 21, left: 280, width: 270 },
+            escapeHTML: NO,
+            classNames: ['task-attribute-set'],
+            items: [
+              { title: '<span class=tasks-status-planned>' + CoreTasks.TASK_STATUS_PLANNED.loc() + '</span>&nbsp;',
+                value: CoreTasks.TASK_STATUS_PLANNED },
+              { title: '<span class=tasks-status-active>' + CoreTasks.TASK_STATUS_ACTIVE.loc() + '</span>&nbsp;',
+                value: CoreTasks.TASK_STATUS_ACTIVE },
+              { title: '<span class=tasks-status-done>' + CoreTasks.TASK_STATUS_DONE.loc() + '</span>&nbsp;',
+                value: CoreTasks.TASK_STATUS_DONE },
+              { title: '<span class=tasks-status-risky>' + CoreTasks.TASK_STATUS_RISKY.loc() + '</span>&nbsp;',
+                value: CoreTasks.TASK_STATUS_RISKY }
+            ],
+            itemTitleKey: 'title',
+            itemValueKey: 'value',
+            valueBinding: 'Tasks.taskController.status',
+            isEnabledBinding: SC.Binding.oneWay('Tasks.tasksController.hasSelection'),
+            layoutDirection: SC.LAYOUT_HORIZONTAL
+          }),
 
-              SC.LabelView.design({
-                layout: { bottom: 2, height: 18, left: 460, width: 230 },
-                classNames: ['tool-bar-label'],
-                value: "_Validation".loc()
-              }),
-              
-              SC.SeparatorView.design({
-                layout: { bottom: 21, height: 3, left: 470, width: 225 },
-                layoutDirection: SC.LAYOUT_HORIZONTAL,
-                classNames: ['task-attribute-set']
-              }),
+          SC.LabelView.design({
+            layout: { bottom: 2, height: 18, left: 530, width: 230 },
+            classNames: ['tool-bar-label'],
+            value: "_Validation".loc()
+          }),
+        
+          SC.SeparatorView.design({
+            layout: { bottom: 21, height: 3, left: 540, width: 225 },
+            layoutDirection: SC.LAYOUT_HORIZONTAL,
+            classNames: ['task-attribute-grouping']
+          }),
 
-              SC.RadioView.design({
-                layout: { bottom: 25, height: 21, left: 470, width: 230 },
-                escapeHTML: NO,
-                controlSize: SC.SMALL_CONTROL_SIZE,
-                items: [
-                  { title: '<span class=tasks-validation-untested><label>' + CoreTasks.TASK_VALIDATION_UNTESTED.loc() + '</label></span>&nbsp;',
-                    value: CoreTasks.TASK_VALIDATION_UNTESTED },
-                  { title: '<span class=tasks-validation-passed><label>' + CoreTasks.TASK_VALIDATION_PASSED.loc() + '</label></span>&nbsp;',
-                    value: CoreTasks.TASK_VALIDATION_PASSED },
-                  { title: '<span class=tasks-validation-failed><label>' + CoreTasks.TASK_VALIDATION_FAILED.loc() + '</label></span>&nbsp;',
-                    value: CoreTasks.TASK_VALIDATION_FAILED }
-                ],
-                itemTitleKey: 'title',
-                itemValueKey: 'value',
-                valueBinding: 'Tasks.taskController.validation',
-                isEnabledBinding: SC.Binding.oneWay('Tasks.tasksController.hasSelection'),
-                layoutDirection: SC.LAYOUT_HORIZONTAL
-              })
-            ]
-            })
-          ]
+          SC.RadioView.design({
+            layout: { bottom: 25, height: 21, left: 540, width: 230 },
+            escapeHTML: NO,
+            classNames: ['task-attribute-set'],
+            items: [
+              { title: '<span class=tasks-validation-untested><label>' + CoreTasks.TASK_VALIDATION_UNTESTED.loc() + '</label></span>&nbsp;',
+                value: CoreTasks.TASK_VALIDATION_UNTESTED },
+              { title: '<span class=tasks-validation-passed><label>' + CoreTasks.TASK_VALIDATION_PASSED.loc() + '</label></span>&nbsp;',
+                value: CoreTasks.TASK_VALIDATION_PASSED },
+              { title: '<span class=tasks-validation-failed><label>' + CoreTasks.TASK_VALIDATION_FAILED.loc() + '</label></span>&nbsp;',
+                value: CoreTasks.TASK_VALIDATION_FAILED }
+            ],
+            itemTitleKey: 'title',
+            itemValueKey: 'value',
+            valueBinding: 'Tasks.taskController.validation',
+            isEnabledBinding: SC.Binding.oneWay('Tasks.tasksController.hasSelection'),
+            layoutDirection: SC.LAYOUT_HORIZONTAL
           })
         ]
+        
         })
+        
     }),
 
     projectsList: SC.outlet('workspaceView.projectsListView.childViews.0.contentView'),
-    tasksList: SC.outlet('workspaceView.taskListView.childViews.0.contentView'),
+    tasksList: SC.outlet('workspaceView.tasksListView.childViews.0.contentView'),
     
     bottomBarView: SC.View.design(SC.Border, {
       layout: { bottom: 0, height: 18, left: 0, right: 0 },

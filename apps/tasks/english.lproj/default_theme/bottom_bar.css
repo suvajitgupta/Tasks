@@ -31,6 +31,10 @@ Bottom Bar Styling
 }
 
 .task-attribute-set {
+  font-size: 10px;
+}
+
+.task-attribute-grouping {
   background-color: #777 !important;
 }
 
