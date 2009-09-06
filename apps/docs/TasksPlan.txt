@@ -46,7 +46,7 @@ Project Manager GUI
 - Disallow duplicate project names after editing, provide warning to user for duplicates [SG] @Active $Feature
 v Add summary in projects toolbar showing number of projects & number of tasks for selected project [SG] <MB> @Done $Feature %Passed
 v Set projects toolbar button enablement based on having a selection [SG] <EO> @Done $Feature %Passed
-v Don't enable add/delTasks when on allTasks project [SG] <JH2> $Bug
+v Don't enable Add/Del. Tasks when on "All Tasks" project $Feature [SG] <JH2>
 - Select first project at startup [SG] <JH2> @Done $Feature %Passed
 ^ Add virtual Inbox & AllTasks to group all unallocated & all tasks respectively [SG] <SE> @Done $Feature %Passed
 - Disallow Inbox/AllTasks projects from being deleted [SG] <EO> @Done $Feature %Failed
@@ -112,7 +112,7 @@ v Add Undo/Redo hotkeys & buttons in top toolbar (till last Save) [SG] <SE> $Fea
 
 Server
 ^ Build persistence server (using Persevere) [SE] <SG> @Done %Passed
-^ Preserve order of projects/tasks via persistence [SG] <SE>
+^ Preserve order of projects/tasks via persistence [SE] <SG>
 - Add Server-side authorization [SE] <SG>
 - Add server-side data validation checks/return appropriate error codes [SE] <SG>
 v Implement multi-user concurrent access using Transaction Time [SG] <EO>
