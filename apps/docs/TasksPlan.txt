@@ -77,6 +77,7 @@ v Allow "Add Task" button to be pressed a second time to keep in data entry mode
 ^ Allow drag-n-drop task reordering [BB] <SG> $Feature
 ^ Allow multi-task drag-n-drop reassignment [BB] <SG>  @Done $Feature %Passed
 ^ Add popup viewer/editor for Task Type, Submitter, Assignee, and Description [JH2] <SG> @Active $Feature
+- Fix lag in responsiveness for Tasks Description entry (bindings issue) [SG] <JH2> $Bug
 v Add context menu & hotkeys to Edit/Cut/Copy/Paste/Delete/Duplicate a task [SG] <JH2> $Feature
 
 User Manager GUI
