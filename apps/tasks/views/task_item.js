@@ -111,6 +111,13 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       }
       context = context.end();
       context = context.end();
+      
+      var submitterUser = content.get('submitter');
+      if (submitterUser) {
+        var submitter = "_SubmitterHover".loc() + '%@ (%@)'.fmt(submitterUser.get('name'), submitterUser.get('loginName'));
+        context.attr('title', submitter);
+        context.attr('alt', submitter);
+      }
     }
   }
   
