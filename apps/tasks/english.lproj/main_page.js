@@ -37,7 +37,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         Tasks.WelcomeView.design({
-          layout: { centerY: 0, height: 30, left: 145, width: 95 },
+          layout: { centerY: 2, height: 30, left: 135, width: 125 },
           classNames: ['welcome-label'],
           valueBinding: SC.Binding.oneWay('CoreTasks.user')
         }),
@@ -77,12 +77,12 @@ Tasks.mainPage = SC.Page.design({
         }),
       
         SC.View.design({
-          layout: {  top: 0, height: 43, right: 310, width: 2 },
+          layout: {  top: 0, height: 43, right: 195, width: 2 },
           classNames: ['top-bar-divider']
         }),
     
         SC.View.design({ 
-          layout: { top: 0, height: 43, right: 260, width: 45 },
+          layout: { top: 0, height: 43, right: 145, width: 45 },
           childViews: [
             SC.View.design(Tasks.SimpleButton,{
               layout: { centerX: 0, top: 2, width: 24, height: 24 },
@@ -96,64 +96,13 @@ Tasks.mainPage = SC.Page.design({
             SC.LabelView.design(Tasks.SimpleButton,{
               layout: { left: 0, right: 0, height: 19, top: 22 },
               classNames: ['dock-label'],
+              textAlign: SC.ALIGN_CENTER,
               value:  "_Save".loc(),
               toolTip: "_SaveTooltip".loc(),
               target: 'Tasks',
               action: 'saveData'
             })
           ]
-        }),
-    
-        SC.View.design({
-          layout: { top: 0, height: 43, right: 205, width: 45 },
-          childViews: [
-            SC.View.design(Tasks.SimpleButton,{
-              layout: { centerX: 0, top: 2, width: 24, height: 24 },
-              classNames: ['import-icon'],
-              title:  "_Import".loc(),
-              toolTip: "_ImportTooltip".loc(),
-              target: 'Tasks',
-              action: 'importData'
-            }),
-
-            SC.LabelView.design(Tasks.SimpleButton,{
-              layout: { left: 0, right: 0, height: 19, top: 22 },
-              classNames: ['dock-label'],
-              title:  "_Import".loc(),
-              toolTip: "_ImportTooltip".loc(),
-              value:  "_Import".loc(),
-              target: 'Tasks',
-              action: 'importData'
-            })
-          ]
-        }),
-    
-        SC.View.design({
-          layout: { top: 0, height: 43, right: 160, width: 45 },
-          childViews: [
-            SC.View.design(Tasks.SimpleButton,{
-              layout: { centerX: 0, top: 2, width: 24, height: 24 },
-              classNames: ['export-icon'],
-              value:  "_Export".loc(),
-              toolTip: "_ExportTooltip".loc(),
-              target: 'Tasks',
-              action: 'exportData'
-            }),
-
-            SC.LabelView.design(Tasks.SimpleButton,{
-              layout: { left: 0, right: 0, height: 19, top: 22 },
-              classNames: ['dock-label'],
-              value:  "_Export".loc(),
-              toolTip: "_ExportTooltip".loc(),
-              target: 'Tasks',
-              action: 'exportData'
-            })
-          ]
-        }),
-    
-        SC.View.design({
-          layout: {  top: 0, height: 43, right: 150, width: 2 },
-          classNames: ['top-bar-divider']
         }),
     
         SC.View.design({
@@ -171,6 +120,7 @@ Tasks.mainPage = SC.Page.design({
             SC.LabelView.design(Tasks.SimpleButton,{
               layout: { left: 0, right: 0, height: 19, top: 22 },
               classNames: ['dock-label'],
+              textAlign: SC.ALIGN_CENTER,
               value:  "_Settings".loc(),
               toolTip: "_SettingsTooltip".loc(),
               target: 'Tasks',
@@ -194,6 +144,7 @@ Tasks.mainPage = SC.Page.design({
             SC.LabelView.design(Tasks.SimpleButton,{
               layout: { left: 0, right: 0, height: 19, top: 22 },
               classNames: ['dock-label'],
+              textAlign: SC.ALIGN_CENTER,
               value:  "_Help".loc(),
               toolTip: "_HelpTooltip".loc(),
               target: 'Tasks',
@@ -217,6 +168,7 @@ Tasks.mainPage = SC.Page.design({
             SC.LabelView.design(Tasks.SimpleButton,{
               layout: { left: 0, right: 0, height: 19, top: 22 },
               classNames: ['dock-label'],
+              textAlign: SC.ALIGN_CENTER,
               value:  "_Logout".loc(),
               toolTip: "_LogoutTooltip".loc(),
               target: 'Tasks',
@@ -281,6 +233,55 @@ Tasks.mainPage = SC.Page.design({
             isEnabledBinding: SC.Binding.oneWay('Tasks.projectsController.isDeletable'),
             target: 'Tasks',
             action: 'deleteProject'
+          }),
+          
+          SC.View.design({
+            layout: { centerY: 0, height: 43, left: 130, width: 45 },
+            childViews: [
+              SC.View.design(Tasks.SimpleButton,{
+                layout: { centerX: 0, top: 2, width: 24, height: 24 },
+                classNames: ['import-icon'],
+                title:  "_Import".loc(),
+                toolTip: "_ImportTooltip".loc(),
+                target: 'Tasks',
+                action: 'importData'
+              }),
+
+              SC.LabelView.design(Tasks.SimpleButton,{
+                layout: { left: 0, right: 0, height: 19, top: 22 },
+                classNames: ['tool-bar-label'],
+                textAlign: SC.ALIGN_CENTER,
+                title:  "_Import".loc(),
+                toolTip: "_ImportTooltip".loc(),
+                value:  "_Import".loc(),
+                target: 'Tasks',
+                action: 'importData'
+              })
+            ]
+          }),
+
+          SC.View.design({
+            layout: { centerY: 0, height: 43, left: 180, width: 45 },
+            childViews: [
+              SC.View.design(Tasks.SimpleButton,{
+                layout: { centerX: 0, top: 2, width: 24, height: 24 },
+                classNames: ['export-icon'],
+                value:  "_Export".loc(),
+                toolTip: "_ExportTooltip".loc(),
+                target: 'Tasks',
+                action: 'exportData'
+              }),
+
+              SC.LabelView.design(Tasks.SimpleButton,{
+                layout: { left: 0, right: 0, height: 19, top: 22 },
+                classNames: ['tool-bar-label'],
+                textAlign: SC.ALIGN_CENTER,
+                value:  "_Export".loc(),
+                toolTip: "_ExportTooltip".loc(),
+                target: 'Tasks',
+                action: 'exportData'
+              })
+            ]
           })
              
         ]

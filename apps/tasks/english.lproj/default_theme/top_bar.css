@@ -28,10 +28,9 @@ Top Navigation Styling
 }
 
 .welcome-label {
-  font-size: 10px !important;
-  line-height: 12px !important;
+  font-size: 9px !important;
+  line-height: 11px !important;
   color: #0f0 !important;
-  font-weight: bold !important;
 }
 
 .top-bar-divider {
