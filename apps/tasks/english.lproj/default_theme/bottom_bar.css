@@ -15,3 +15,7 @@ Bottom Bar Styling
   color: #000 !important;
   font-weight: bold !important;
 }
+
+.field-set-grouping {
+  background-color: #777 !important;
+}

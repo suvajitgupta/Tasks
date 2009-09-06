@@ -234,7 +234,7 @@ Tasks.mainPage = SC.Page.design({
       childViews: 'projectsListView projectsControlView controlDividerView taskListView tasksControlView'.w(),
       
       projectsListView: SC.ScrollView.design({
-        layout: { top: 0, bottom: 35, left: 0, width: 268 },
+        layout: { top: 0, bottom: 56, left: 0, width: 268 },
         hasHorizontalScroller: NO,
         classNames: ['projects-pane'],
 
@@ -258,12 +258,12 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       projectsControlView: SC.View.design({
-        layout: { bottom: 0, height: 34, width: 254 },
+        layout: { bottom: 0, height: 55, width: 254 },
         classNames: ['projects-control'],
         childViews: [
           
           SC.LabelView.design(Tasks.SimpleButton,{
-            layout: { centerY: 3, left: 10, height: 24, width: 115 },
+            layout: { bottom: 11, left: 10, height: 24, width: 115 },
             icon: 'project-add-icon',
             value: "_AddProject".loc(),
             classNames: ['bottom-bar-label'],
@@ -273,7 +273,7 @@ Tasks.mainPage = SC.Page.design({
           }),
         
           SC.LabelView.design(Tasks.SimpleButton,{
-            layout: { centerY: 3, left: 125, height: 24, width: 115 },
+            layout: { bottom: 11, left: 125, height: 24, width: 115 },
             icon: 'project-del-icon',
             value: "_DelProject".loc(),
             classNames: ['bottom-bar-label'],
@@ -287,12 +287,12 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       controlDividerView: SC.View.design({
-        layout: { bottom: 0, height: 34, width: 5, left: 254 },
+        layout: { bottom: 0, height: 55, width: 5, left: 254 },
         classNames: ['control-divider']
       }),
       
       taskListView: SC.ScrollView.design({
-        layout: { top: 0, bottom: 35, left: 268 },
+        layout: { top: 0, bottom: 56, left: 268 },
         hasHorizontalScroller: NO,
         classNames: ['tasks-pane'],
 
@@ -319,7 +319,7 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       tasksControlView: SC.View.design({
-        layout: { bottom: 0, height: 34, left: 259 },
+        layout: { bottom: 0, height: 55, left: 259 },
         classNames: ['tasks-control'],
         childViews: [
         
@@ -328,7 +328,7 @@ Tasks.mainPage = SC.Page.design({
             childViews: [
           
             SC.LabelView.design(Tasks.SimpleButton,{
-              layout: { centerY: 3, left: 15, height: 24, width: 90 },
+              layout: { bottom: 11, left: 15, height: 24, width: 90 },
               icon: 'task-add-icon',
               value: "_AddTask".loc(),
               classNames: ['bottom-bar-label'],
@@ -338,7 +338,7 @@ Tasks.mainPage = SC.Page.design({
             }),
 
             SC.LabelView.design(Tasks.SimpleButton,{
-              layout: { centerY: 3, left: 106, height: 24, width: 90 },
+              layout: { bottom: 11, left: 106, height: 24, width: 90 },
               icon: 'task-del-icon',
               value: "_DelTask".loc(),
               classNames: ['bottom-bar-label'],
@@ -352,13 +352,21 @@ Tasks.mainPage = SC.Page.design({
               layout: { top: 0, left: 195, right: 0 },
               childViews: [
             
+              SC.LabelView.design({
+                layout: { bottom: 2, height: 18, left: 10, width: 200 },
+                textAlign: SC.ALIGN_CENTER,
+                controlSize: SC.SMALL_CONTROL_SIZE,
+                value: "_Priority".loc()
+              }),
+              
               SC.SeparatorView.design({
-                layoutDirection: SC.LAYOUT_VERTICAL,
-                layout: { top: 5, bottom: 5, left: 0, width: 4 }
+                layout: { bottom: 21, height: 3, left: 20, width: 170 },
+                layoutDirection: SC.LAYOUT_HORIZONTAL,
+                classNames: ['field-set-grouping']
               }),
 
               SC.RadioView.design({
-                layout: { centerY: 3, height: 21, left: 20, width: 200 },
+                layout: { bottom: 25, height: 21, left: 20, width: 200 },
                 escapeHTML: NO,
                 controlSize: SC.SMALL_CONTROL_SIZE,
                 items: [
@@ -376,13 +384,21 @@ Tasks.mainPage = SC.Page.design({
                 layoutDirection: SC.LAYOUT_HORIZONTAL
               }),
 
+              SC.LabelView.design({
+                layout: { bottom: 2, height: 18, left: 220, width: 270 },
+                textAlign: SC.ALIGN_CENTER,
+                controlSize: SC.SMALL_CONTROL_SIZE,
+                value: "_Status".loc()
+              }),
+              
               SC.SeparatorView.design({
-                layoutDirection: SC.LAYOUT_VERTICAL,
-                layout: { top: 5, bottom: 5, left: 205, width: 4 }
+                layout: { bottom: 21, height: 3, left: 230, width: 240 },
+                layoutDirection: SC.LAYOUT_HORIZONTAL,
+                classNames: ['field-set-grouping']
               }),
 
               SC.RadioView.design({
-                layout: { centerY: 3, height: 21, left: 230, width: 270 },
+                layout: { bottom: 25, height: 21, left: 230, width: 270 },
                 escapeHTML: NO,
                 controlSize: SC.SMALL_CONTROL_SIZE,
                 items: [
@@ -402,13 +418,21 @@ Tasks.mainPage = SC.Page.design({
                 layoutDirection: SC.LAYOUT_HORIZONTAL
               }),
 
+              SC.LabelView.design({
+                layout: { bottom: 2, height: 18, left: 500, width: 230 },
+                textAlign: SC.ALIGN_CENTER,
+                controlSize: SC.SMALL_CONTROL_SIZE,
+                value: "_Validation".loc()
+              }),
+              
               SC.SeparatorView.design({
-                layoutDirection: SC.LAYOUT_VERTICAL,
-                layout: { top: 5, bottom: 5, left: 490, width: 4 }
+                layout: { bottom: 21, height: 3, left: 510, width: 225 },
+                layoutDirection: SC.LAYOUT_HORIZONTAL,
+                classNames: ['field-set-grouping']
               }),
 
               SC.RadioView.design({
-                layout: { centerY: 3, height: 21, left: 510, width: 230 },
+                layout: { bottom: 25, height: 21, left: 510, width: 230 },
                 escapeHTML: NO,
                 controlSize: SC.SMALL_CONTROL_SIZE,
                 items: [

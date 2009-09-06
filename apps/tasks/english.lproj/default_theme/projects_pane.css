@@ -29,11 +29,13 @@ Projects Pane Styling
 }
 
 .projects-control {
-  background: static_url('images/default-theme-repeat-x.png') repeat-x 0 -106px; 
+  background: #CCC;
+  // background: static_url('images/default-theme-repeat-x.png') repeat-x 0 -106px; 
 }
 
 .control-divider {
-  background: static_url('images/default-theme-repeat-y.png') repeat-y -254px 0;
+  background-color: #999 !important;
+  // background: static_url('images/default-theme-repeat-y.png') repeat-y -254px 0;
 }
 
 /* Icons */
