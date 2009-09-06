@@ -26,7 +26,6 @@ SC.stringsFor('English', {
   '_ExportTooltip': "Export Tasks data to a file",
   '_Save': "Save",
   '_SaveTooltip': "Save Tasks data to the server",
-  '_SaveMessage': "Last saved ",
   '_Settings': "Settings",
   '_SettingsTooltip': "Manage Tasks settings",
   '_Help': "Help",
@@ -80,6 +79,12 @@ SC.stringsFor('English', {
   
   // Import/Export Panel strings
   '_Cancel': "Cancel",
-  '_Close': "Close"
+  '_Close': "Close",
+  
+  // Status bar strings
+  '_NoTasksProject': "no tasks in selected project.",
+  '_OneTaskProject': "1 task in selected project.",
+  '_ManyTasksProject': " tasks in selected project.",
+  '_SaveMessage': "Last saved "
   
 });

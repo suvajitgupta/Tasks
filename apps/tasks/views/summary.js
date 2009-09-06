@@ -11,7 +11,7 @@
   @author Suvajit Gupta
 */
 
-Tasks.SummaryView = SC.View.extend( // TODO: [SG] I18N all strings
+Tasks.SummaryView = SC.View.extend(
 /** @scope Tasks.SummaryView.prototype */ {
   
   projectsCount: '',
@@ -26,13 +26,13 @@ Tasks.SummaryView = SC.View.extend( // TODO: [SG] I18N all strings
     var taskCount = this.get('tasksCount');
     switch(taskCount) {
       case 0: 
-        summary += "selected project has no tasks.";
+        summary += "_NoTasksProject".loc();
         break;
       case 1:
-        summary += "selected project has 1 task.";
+        summary += "_OneTaskProject".loc();
         break;
       default:
-        summary += "selected project has %@ tasks.".fmt(taskCount);
+        summary += (taskCount + "_ManyTasksProject".loc());
         break;
     }
     
