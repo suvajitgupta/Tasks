@@ -347,7 +347,7 @@ Tasks.mainPage = SC.Page.design({
           }),
 
           SC.RadioView.design({
-            layout: { bottom: 2, height: 24, left: 92, width: 180 },
+            layout: { bottom: 2, height: 24, left: 92, width: 190 },
             escapeHTML: NO,
             classNames: ['task-attribute-set'],
             items: [
@@ -378,7 +378,7 @@ Tasks.mainPage = SC.Page.design({
           }),
 
           SC.RadioView.design({
-            layout: { bottom: 2, height: 24, left: 280, width: 230 },
+            layout: { bottom: 2, height: 24, left: 280, width: 250 },
             escapeHTML: NO,
             classNames: ['task-attribute-set'],
             items: [
@@ -405,13 +405,13 @@ Tasks.mainPage = SC.Page.design({
           }),
 
           SC.SeparatorView.design({
-            layout: { centerY: -2, height: 4, left: 540, width: 220 },
+            layout: { centerY: -2, height: 4, left: 540, width: 215 },
             layoutDirection: SC.LAYOUT_HORIZONTAL,
             classNames: ['task-attribute-set-grouping']
           }),
 
           SC.RadioView.design({
-            layout: { bottom: 2, height: 24, left: 540, width: 230 },
+            layout: { bottom: 2, height: 24, left: 540, width: 240 },
             escapeHTML: NO,
             classNames: ['task-attribute-set'],
             items: [
