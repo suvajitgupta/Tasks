@@ -18,8 +18,10 @@ v Design single/multi-user modes & access via Desktop/Web/Mobile clients [SG] <S
 General Infrastructure
 ^ Develop Model and Fixtures (hardcoded & generated) [SG] <SE> @Done
 - Develop States/Actions corresponding to GUI Statecharts [SG] <SE> @Active
+- Support minimum resolution of 1024x768 [SG] @Active $Feature
 - Support decimal numbers for project time left [SG] Done
 - SimpleButton shouldn't accept clicks when isEnabled is false [SG] <JH2> $Bug
+- Optimize calls to assignments controller for redrawing tasks tree [SG] <BB>
 
 SproutCore Issues
 - Patch SproutCore to avoid overwhelming async calls for file imports with more than 20 tasks [SE] <EG> $Bug
@@ -51,7 +53,6 @@ v Don't enable add/delTasks when on allTasks project [SG] <JH2> $Bug
 ^ Add drag-n-drop project reordering [BB] <SG> $Feature
 ^ Allow multi-task drag-n-drop Task reallocation to Projects [BB] <SG> @Done $Feature %Passed
 v Add context menu to Delete a project [SG] <JH2> $Feature
-v Make list of Projects collapsible [SG] <EG> $Feature
 
 Task Manager GUI
 ^ Group Tasks by User and display Task summary & effort (if specified) in curly braces [SG] <JH2> @Done $Feature %Passed
@@ -94,6 +95,7 @@ Application Manager GUI
 - Add welcome message showing logged in user [SG] <MB> @Done $Feature %Passed
 - Add status bar at the bottom summarizing stats about Tasks data [SG] <MB> @Done $Feature %Passed
 - Add "Save" button in top toolbar, note time of last save in status bar [SG] <BB> @Done $Feature %Passed
+v Enable/disable Save button based on data modification [SG] <SE> $Feature
 - Handle persistence consistently (nothing should save unless user hits Save) [SE] <SG> $Bug
 - Add "Import" button in top toolbar with associated pop up panel [SG] <BB> @Done $Feature %Passed
 v Add drag-n-drop of a TXT file into App for data importing (using Google Gears) [MB] <SG> @Risky $Feature

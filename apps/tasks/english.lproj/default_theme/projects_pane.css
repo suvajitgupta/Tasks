@@ -28,11 +28,6 @@ Projects Pane Styling
   color: #fff;
 }
 
-.projects-control {
-  background: #CCC;
-  // background: static_url('images/default-theme-repeat-x.png') repeat-x 0 -106px; 
-}
-
 .control-divider {
   background-color: #999 !important;
   // background: static_url('images/default-theme-repeat-y.png') repeat-y -254px 0;

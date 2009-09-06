@@ -42,11 +42,6 @@ Tasks Pane Styling
   left: 12px !important;
 }
 
-.tasks-control {
-  background: #CCC;
-  //background: static_url('images/default-theme-repeat-x.png') repeat-x 0 -106px; 
-}
-
 /* Icons */
 
 .task-add-icon {
