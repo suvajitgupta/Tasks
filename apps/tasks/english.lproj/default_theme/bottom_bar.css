@@ -32,6 +32,7 @@ Bottom Bar Styling
 
 .task-attribute-set {
   font-size: 9px !important;
+  line-height: 2;
 }
 
 .task-attribute-set-title  {
@@ -41,7 +42,7 @@ Bottom Bar Styling
   font-weight: bold !important;
 }
 
-.bottom-bar-divider {
+.task-attribute-set-grouping {
   background-color: #777 !important;
 }
 

@@ -231,12 +231,6 @@ Tasks.mainPage = SC.Page.design({
             action: 'deleteProject'
           }),
           
-          SC.SeparatorView.design({
-            layout: { centerY: 0, height: 43, left: 100, width: 4 },
-            layoutDirection: SC.LAYOUT_VERTICAL,
-            classNames: ['bottom-bar-divider']
-          }),
-
           SC.View.design({
             layout: { centerY: 0, height: 43, left: 110, width: 45 },
             childViews: [
@@ -282,14 +276,8 @@ Tasks.mainPage = SC.Page.design({
                 action: 'exportData'
               })
             ]
-          }),
-          
-          SC.SeparatorView.design({
-            layout: { centerY: 0, height: 43, left: 220, width: 4 },
-            layoutDirection: SC.LAYOUT_VERTICAL,
-            classNames: ['bottom-bar-divider']
           })
-             
+                       
         ]
       }),
       
@@ -321,7 +309,7 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       tasksToolbarView: SC.View.design({
-        layout: { bottom: 0, height: 55, left: 240 },
+        layout: { bottom: 0, height: 55, left: 250 },
         classNames: ['tasks-tool-bar'],
         childViews: [
         
@@ -346,20 +334,20 @@ Tasks.mainPage = SC.Page.design({
             action: 'deleteTask'
           }),
     
-          SC.SeparatorView.design({
-            layout: { centerY: 0, height: 43, left: 80, width: 4 },
-            layoutDirection: SC.LAYOUT_VERTICAL,
-            classNames: ['bottom-bar-divider']
-          }),
-
           SC.LabelView.design({
-            layout: { top: 6, height: 18, left: 82, width: 200 },
+            layout: { top: 6, height: 18, left: 82, width: 180 },
             classNames: ['task-attribute-set-title'],
             value: "_Priority".loc()
           }),
         
+          SC.SeparatorView.design({
+            layout: { centerY: -2, height: 4, left: 92, width: 160 },
+            layoutDirection: SC.LAYOUT_HORIZONTAL,
+            classNames: ['task-attribute-set-grouping']
+          }),
+
           SC.RadioView.design({
-            layout: { bottom: 2, height: 24, left: 92, width: 200 },
+            layout: { bottom: 2, height: 24, left: 92, width: 180 },
             escapeHTML: NO,
             classNames: ['task-attribute-set'],
             items: [
@@ -377,20 +365,20 @@ Tasks.mainPage = SC.Page.design({
             layoutDirection: SC.LAYOUT_HORIZONTAL
           }),
 
-          SC.SeparatorView.design({
-            layout: { centerY: 0, height: 43, left: 263, width: 4 },
-            layoutDirection: SC.LAYOUT_VERTICAL,
-            classNames: ['bottom-bar-divider']
-          }),
-
           SC.LabelView.design({
-            layout: { top: 6, height: 18, left: 270, width: 270 },
+            layout: { top: 6, height: 18, left: 270, width: 230 },
             classNames: ['task-attribute-set-title'],
             value: "_Status".loc()
           }),
         
+          SC.SeparatorView.design({
+            layout: { centerY: -2, height: 4, left: 280, width: 230 },
+            layoutDirection: SC.LAYOUT_HORIZONTAL,
+            classNames: ['task-attribute-set-grouping']
+          }),
+
           SC.RadioView.design({
-            layout: { bottom: 2, height: 24, left: 280, width: 270 },
+            layout: { bottom: 2, height: 24, left: 280, width: 230 },
             escapeHTML: NO,
             classNames: ['task-attribute-set'],
             items: [
@@ -410,16 +398,16 @@ Tasks.mainPage = SC.Page.design({
             layoutDirection: SC.LAYOUT_HORIZONTAL
           }),
 
-          SC.SeparatorView.design({
-            layout: { centerY: 0, height: 43, left: 520, width: 4 },
-            layoutDirection: SC.LAYOUT_VERTICAL,
-            classNames: ['bottom-bar-divider']
-          }),
-
           SC.LabelView.design({
             layout: { top: 6, height: 18, left: 530, width: 230 },
             classNames: ['task-attribute-set-title'],
             value: "_Validation".loc()
+          }),
+
+          SC.SeparatorView.design({
+            layout: { centerY: -2, height: 4, left: 540, width: 220 },
+            layoutDirection: SC.LAYOUT_HORIZONTAL,
+            classNames: ['task-attribute-set-grouping']
           }),
 
           SC.RadioView.design({
@@ -439,12 +427,6 @@ Tasks.mainPage = SC.Page.design({
             valueBinding: 'Tasks.taskController.validation',
             isEnabledBinding: SC.Binding.oneWay('Tasks.tasksController.hasSelection'),
             layoutDirection: SC.LAYOUT_HORIZONTAL
-          }),
-          
-          SC.SeparatorView.design({
-            layout: { centerY: 0, height: 43, left: 770, width: 4 },
-            layoutDirection: SC.LAYOUT_VERTICAL,
-            classNames: ['bottom-bar-divider']
           })
           
         ]
