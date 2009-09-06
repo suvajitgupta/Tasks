@@ -20,6 +20,7 @@ General Infrastructure
 - Develop States/Actions corresponding to GUI Statecharts [SG] <SE> @Active
 - Support minimum resolution of 1024x768 [SG] @Done $Feature %Passed
 - Support decimal numbers for project time left [SG] @Done %Passed
+- Handle persistence consistently (nothing should save unless user hits Save) [SE] <SG>
 - SimpleButton shouldn't accept clicks when isEnabled is false [SG] <JH2> $Bug
 - Optimize calls to assignments controller for redrawing tasks tree [SG] <BB>
 
@@ -43,7 +44,7 @@ Project Manager GUI
 ^ Add "Add Project" & "Del. Project" buttons in projects toolbar [SG] <SC> @Done $Feature %Passed
 - Add warning Alert box about deleting Project with Tasks [SG] @Done $Feature %Passed
 - Don't create a project if it already exists during Import [SG] @Done $Feature %Passed
-- Disallow duplicate project names after editing, provide warning to user for duplicates [SG] @Active $Feature
+v Disallow duplicate project names after editing, provide warning to user for duplicates [SG] @Active $Feature
 v Add summary in projects toolbar showing number of projects & number of tasks for selected project [SG] <MB> @Done $Feature %Passed
 v Set projects toolbar button enablement based on having a selection [SG] <EO> @Done $Feature %Passed
 v Don't enable Add/Del. Tasks when on "All Tasks" project $Feature [SG] <JH2>
@@ -60,7 +61,7 @@ Task Manager GUI
 - Show Task Type via different icons [SG] <JH2> @Done $Feature %Passed
 - Show Task Priority (font style), Status (font color), Validation (background color) [SG] <MB> @Done $Feature %Passed
 - Add Task Status/Priority/Validation radio buttons in tasks toolbar [SG] <EO> @Done $Feature %Passed
-v Enable Task Validation radio buttons only when in Done status [SG] $Feature
+v Enable Task Validation radio buttons only when in Done status [SG] <JH2> $Feature
 - Allow multi-selected tasks to be set to new status/priority/validation [SG] <BB> $Feature
 ^ Add task search filter & corresponding delete button in top toolbar: support type-ahead searching [SG] <DC> @Done $Feature %Passed
 - Don't lose selection after changing task priority/status/validation [SG] <JH2> $Bug
@@ -85,7 +86,7 @@ User Manager GUI
 | Replace with real Login dialog (for IE portability)
 ^ Add Assignee selection filter & corresponding delete button in top toolbar [SG] <JH2> @Done $Feature %Passed
 - Set assignee selection filter to logged in user if they are a Developer [SG] @Done $Feature %Passed
-- Add "Add User" & "Del. User" buttons in users toolbar and "X" button in top toolbar to return [SG] <JH2> $Feature
+^ Add User Manager with "Add/Del. User"  and "Close" buttons in toolbar [SG] <JH2> $Active $Feature
 - Add access control based on Role (User authorization) [SG] <SE> $Feature
 - Add change password dialog [SG] <SE> $Feature
 - Add support for "Teams" (a user can belong to a team, a team can have a lead) [SG] <SE> $Feature
@@ -95,7 +96,6 @@ Application Manager GUI
 - Add status bar at the bottom summarizing stats about Tasks data [SG] <MB> @Done $Feature %Passed
 - Add "Save" button in top toolbar, note time of last save in status bar [SG] <BB> @Done $Feature %Passed
 v Enable/disable Save button based on data modification [SG] <SE> $Feature
-- Handle persistence consistently (nothing should save unless user hits Save) [SE] <SG> $Bug
 - Add "Import" button in top toolbar with associated pop up panel [SG] <BB> @Done $Feature %Passed
 v Add drag-n-drop of a TXT file into App for data importing (using Google Gears) [MB] <SG> @Risky $Feature
 | Gears needs to be ported to Snow Leopard
@@ -108,7 +108,7 @@ v Add drag-n-drop of a TXT file into App for data importing (using Google Gears)
 | See demo.sproutcore.com/user_defaults and lookup SproutCore blog for Charles' posting on this topic
 - Add hotkeys for common operations (like add/delete projects/tasks, changing task priority/status/validation, saving) [SG] <MB> $Feature
 - Add preference to include Low priority tasks in subtotals [SG] $Feature
-v Add Undo/Redo hotkeys & buttons in top toolbar (till last Save) [SG] <SE> $Feature
+- Add Undo/Redo hotkeys & buttons in top toolbar (till last Save) [SG] <SE> $Feature
 
 Server
 ^ Build persistence server (using Persevere) [SE] <SG> @Done %Passed
@@ -132,6 +132,6 @@ v Develop Desktop client (using Webkit) [SG] <EO>
 Testing/Rollout
 - Manually test & note/fix showstoppers [SG] <BM> @Active
 - Create automated test scripts using Selenium [BM] <SG>
-- Conduct usability tests, collect feedback, fix bugs [SG] <MB>
+- Conduct usability tests, collect/address feedback [SG] <MB>
 - Create Release Notes (features, limitations/bugs, list external components) [SG] <SE>
 - Provide SproutCore doctool-style comments [SG] <SE>
