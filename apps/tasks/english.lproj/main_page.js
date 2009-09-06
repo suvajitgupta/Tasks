@@ -96,7 +96,6 @@ Tasks.mainPage = SC.Page.design({
             SC.LabelView.design(Tasks.SimpleButton,{
               layout: { left: 0, right: 0, height: 19, top: 22 },
               classNames: ['dock-label'],
-              textAlign: SC.ALIGN_CENTER,
               value:  "_Save".loc(),
               toolTip: "_SaveTooltip".loc(),
               target: 'Tasks',
@@ -120,7 +119,6 @@ Tasks.mainPage = SC.Page.design({
             SC.LabelView.design(Tasks.SimpleButton,{
               layout: { left: 0, right: 0, height: 19, top: 22 },
               classNames: ['dock-label'],
-              textAlign: SC.ALIGN_CENTER,
               value:  "_Settings".loc(),
               toolTip: "_SettingsTooltip".loc(),
               target: 'Tasks',
@@ -144,7 +142,6 @@ Tasks.mainPage = SC.Page.design({
             SC.LabelView.design(Tasks.SimpleButton,{
               layout: { left: 0, right: 0, height: 19, top: 22 },
               classNames: ['dock-label'],
-              textAlign: SC.ALIGN_CENTER,
               value:  "_Help".loc(),
               toolTip: "_HelpTooltip".loc(),
               target: 'Tasks',
@@ -168,7 +165,6 @@ Tasks.mainPage = SC.Page.design({
             SC.LabelView.design(Tasks.SimpleButton,{
               layout: { left: 0, right: 0, height: 19, top: 22 },
               classNames: ['dock-label'],
-              textAlign: SC.ALIGN_CENTER,
               value:  "_Logout".loc(),
               toolTip: "_LogoutTooltip".loc(),
               target: 'Tasks',
@@ -210,25 +206,25 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       projectsControlView: SC.View.design({
-        layout: { bottom: 0, height: 55, width: 268 },
+        layout: { bottom: 0, height: 55, width: 255 },
         classNames: ['projects-tool-bar'],
         childViews: [
           
           SC.LabelView.design(Tasks.SimpleButton,{
-            layout: { top: 2, left: 10, height: 24, width: 115 },
+            layout: { top: 2, left: 5, height: 24, width: 115 },
             icon: 'project-add-icon',
             value: "_AddProject".loc(),
-            classNames: ['tool-bar-label'],
+            classNames: ['tool-bar-button'],
             toolTip: "_AddProjectTooltip".loc(),
             target: 'Tasks',
             action: 'addProject'
           }),
         
           SC.LabelView.design(Tasks.SimpleButton,{
-            layout: { bottom: 2, left: 10, height: 24, width: 115 },
+            layout: { bottom: 2, left: 5, height: 24, width: 115 },
             icon: 'project-del-icon',
             value: "_DelProject".loc(),
-            classNames: ['tool-bar-label'],
+            classNames: ['tool-bar-button'],
             toolTip: "_DelProjectTooltip".loc(),
             isEnabledBinding: SC.Binding.oneWay('Tasks.projectsController.isDeletable'),
             target: 'Tasks',
@@ -236,7 +232,7 @@ Tasks.mainPage = SC.Page.design({
           }),
           
           SC.View.design({
-            layout: { centerY: 0, height: 43, left: 130, width: 45 },
+            layout: { centerY: 0, height: 43, left: 120, width: 45 },
             childViews: [
               SC.View.design(Tasks.SimpleButton,{
                 layout: { centerX: 0, top: 2, width: 24, height: 24 },
@@ -250,7 +246,6 @@ Tasks.mainPage = SC.Page.design({
               SC.LabelView.design(Tasks.SimpleButton,{
                 layout: { left: 0, right: 0, height: 19, top: 22 },
                 classNames: ['tool-bar-label'],
-                textAlign: SC.ALIGN_CENTER,
                 title:  "_Import".loc(),
                 toolTip: "_ImportTooltip".loc(),
                 value:  "_Import".loc(),
@@ -261,7 +256,7 @@ Tasks.mainPage = SC.Page.design({
           }),
 
           SC.View.design({
-            layout: { centerY: 0, height: 43, left: 180, width: 45 },
+            layout: { centerY: 0, height: 43, left: 170, width: 45 },
             childViews: [
               SC.View.design(Tasks.SimpleButton,{
                 layout: { centerX: 0, top: 2, width: 24, height: 24 },
@@ -275,7 +270,6 @@ Tasks.mainPage = SC.Page.design({
               SC.LabelView.design(Tasks.SimpleButton,{
                 layout: { left: 0, right: 0, height: 19, top: 22 },
                 classNames: ['tool-bar-label'],
-                textAlign: SC.ALIGN_CENTER,
                 value:  "_Export".loc(),
                 toolTip: "_ExportTooltip".loc(),
                 target: 'Tasks',
@@ -315,7 +309,7 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       tasksControlView: SC.View.design({
-        layout: { bottom: 0, height: 55, left: 259 },
+        layout: { bottom: 0, height: 55, left: 250 },
         classNames: ['tasks-tool-bar'],
         childViews: [
         
@@ -327,7 +321,7 @@ Tasks.mainPage = SC.Page.design({
               layout: { top: 2, left: 0, height: 24, width: 90 },
               icon: 'task-add-icon',
               value: "_AddTask".loc(),
-              classNames: ['tool-bar-label'],
+              classNames: ['tool-bar-button'],
               toolTip: "_AddTaskTooltip".loc(),
               target: 'Tasks',
               action: 'addTask'
@@ -337,7 +331,7 @@ Tasks.mainPage = SC.Page.design({
               layout: { bottom: 2, left: 0, height: 24, width: 90 },
               icon: 'task-del-icon',
               value: "_DelTask".loc(),
-              classNames: ['tool-bar-label'],
+              classNames: ['tool-bar-button'],
               toolTip: "_DelTaskTooltip".loc(),
               isEnabledBinding: SC.Binding.oneWay('Tasks.tasksController.hasSelection'),
               target: 'Tasks',
@@ -345,13 +339,12 @@ Tasks.mainPage = SC.Page.design({
             }),
           
             SC.View.design({
-              layout: { top: 0, left: 65, right: 0 },
+              layout: { top: 0, left: 70, right: 0 },
               childViews: [
             
               SC.LabelView.design({
                 layout: { bottom: 2, height: 18, left: 12, width: 200 },
-                textAlign: SC.ALIGN_CENTER,
-                controlSize: SC.SMALL_CONTROL_SIZE,
+                classNames: ['tool-bar-label'],
                 value: "_Priority".loc()
               }),
               
@@ -382,8 +375,7 @@ Tasks.mainPage = SC.Page.design({
 
               SC.LabelView.design({
                 layout: { bottom: 2, height: 18, left: 200, width: 270 },
-                textAlign: SC.ALIGN_CENTER,
-                controlSize: SC.SMALL_CONTROL_SIZE,
+                classNames: ['tool-bar-label'],
                 value: "_Status".loc()
               }),
               
@@ -416,8 +408,7 @@ Tasks.mainPage = SC.Page.design({
 
               SC.LabelView.design({
                 layout: { bottom: 2, height: 18, left: 460, width: 230 },
-                textAlign: SC.ALIGN_CENTER,
-                controlSize: SC.SMALL_CONTROL_SIZE,
+                classNames: ['tool-bar-label'],
                 value: "_Validation".loc()
               }),
               
@@ -463,7 +454,7 @@ Tasks.mainPage = SC.Page.design({
       borderStyle: SC.BORDER_TOP,
         
       summaryView: Tasks.SummaryView.design({
-        layout: { centerY: 0, height: 16, left: 10, right: 500 },
+        layout: { centerY: 0, height: 16, left: 5, right: 500 },
         classNames: ['status-bar-label'],
         projectsCountBinding: SC.Binding.oneWay('Tasks.projectsController.length'),
         tasksCountBinding: SC.Binding.oneWay('Tasks.assignmentsController.length')

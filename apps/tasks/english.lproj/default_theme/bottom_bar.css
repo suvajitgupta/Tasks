@@ -19,6 +19,14 @@ Bottom Bar Styling
 .tool-bar-label {
   font-size: 9px !important;
   color: #000 !important;
+  text-align: center !important;
+  font-weight: bold !important;
+}
+
+.tool-bar-button {
+  font-size: 9px !important;
+  color: #000 !important;
+  text-align: left !important;
   font-weight: bold !important;
 }
 
