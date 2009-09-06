@@ -25,7 +25,7 @@ General Infrastructure
 
 SproutCore Issues
 - Patch SproutCore to avoid overwhelming async calls for file imports with more than 20 tasks [SE] <EG> $Bug
-^ Fix missing/flashing scrollbar on Firefox/Windows [SC] $Bug
+^ Fix missing/flashing scrollbar on Firefox/Windows [SC] $Bug @Active
 | To reproduce: search for a Task in search bar or select AllTasks, scroll down, select a task, then select another project)
 - Allow SourceListView disclosures to be opened/closed propperly (Apple has on priority list) [SC] @Active $Bug
 - Drag-n-drop in SourceListView is broken (Apple has on priority list) [SC] @Active $Bug
@@ -82,7 +82,7 @@ v Add context menu & hotkeys to Edit/Cut/Copy/Paste/Delete/Duplicate a task [SG]
 
 User Manager GUI
 ^ Add login screen (User authentication) [SG] <SE> @Active $Feature
-- Replace with real Login dialog (for IE portability) [SG]
+| Replace with real Login dialog (for IE portability)
 ^ Add Assignee selection filter & corresponding delete button in top toolbar [SG] <JH2> @Done $Feature %Passed
 - Set assignee selection filter to logged in user if they are a Developer [SG] @Done $Feature %Passed
 - Add "Add User" & "Del. User" buttons in users toolbar and "X" button in top toolbar to return [SG] <JH2> $Feature
