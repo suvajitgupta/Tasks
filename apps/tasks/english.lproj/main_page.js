@@ -38,11 +38,87 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         Tasks.WelcomeView.design({
-          layout: { centerY: 2, height: 30, left: 135, width: 125 },
+          layout: { centerY: 2, height: 30, left: 260, width: 150 },
           classNames: ['welcome-label'],
           valueBinding: SC.Binding.oneWay('CoreTasks.user')
         }),
       
+        SC.View.design({ 
+          layout: { top: 0, height: 43, right: 270, width: 45 },
+          childViews: [
+            SC.View.design(Tasks.SimpleButton,{
+              layout: { centerX: 0, top: 2, width: 24, height: 24 },
+              classNames: ['save-icon'],
+              value:  "_Save".loc(),
+              toolTip: "_SaveTooltip".loc(),
+              target: 'Tasks',
+              action: 'saveData'
+            }),
+
+            SC.LabelView.design(Tasks.SimpleButton,{
+              layout: { left: 0, right: 0, height: 19, top: 22 },
+              classNames: ['top-bar-label'],
+              value:  "_Save".loc(),
+              toolTip: "_SaveTooltip".loc(),
+              target: 'Tasks',
+              action: 'saveData'
+            })
+          ]
+        }),
+    
+        SC.View.design({
+          layout: { centerY: 0, height: 43, right: 220, width: 45 },
+          childViews: [
+            SC.View.design(Tasks.SimpleButton,{
+              layout: { centerX: 0, top: 2, width: 24, height: 24 },
+              classNames: ['import-icon'],
+              title:  "_Import".loc(),
+              toolTip: "_ImportTooltip".loc(),
+              target: 'Tasks',
+              action: 'importData'
+            }),
+
+            SC.LabelView.design(Tasks.SimpleButton,{
+              layout: { left: 0, right: 0, height: 19, top: 22 },
+              classNames: ['top-bar-label'],
+              title:  "_Import".loc(),
+              toolTip: "_ImportTooltip".loc(),
+              value:  "_Import".loc(),
+              target: 'Tasks',
+              action: 'importData'
+            })
+          ]
+        }),
+
+        SC.View.design({
+          layout: { centerY: 0, height: 43, right: 170, width: 45 },
+          childViews: [
+            SC.View.design(Tasks.SimpleButton,{
+              layout: { centerX: 0, top: 2, width: 24, height: 24 },
+              classNames: ['export-icon'],
+              value:  "_Export".loc(),
+              toolTip: "_ExportTooltip".loc(),
+              target: 'Tasks',
+              action: 'exportData'
+            }),
+
+            SC.LabelView.design(Tasks.SimpleButton,{
+              layout: { left: 0, right: 0, height: 19, top: 22 },
+              classNames: ['top-bar-label'],
+              value:  "_Export".loc(),
+              toolTip: "_ExportTooltip".loc(),
+              target: 'Tasks',
+              action: 'exportData'
+            })
+          ]
+        }),
+        
+        SC.SeparatorView.design({
+          layout: { top: 4, bottom: 4, right: 155,  width: 4 },
+          layoutDirection: SC.LAYOUT_VERTICAL,
+          //classNames: ['task-attribute-set-grouping']
+        }),
+
         SC.View.design({
           layout: { top: 0, height: 43, right: 95,  width: 50 },
           childViews: [
@@ -194,76 +270,6 @@ Tasks.mainPage = SC.Page.design({
             Tasks.assignmentsController.set('searchFilter', '');
           },
           isVisibleBinding: 'Tasks.assignmentsController.searchFilter'
-        }),
-      
-        SC.View.design({ 
-          layout: { top: 0, height: 43, right: 95, width: 45 },
-          childViews: [
-            SC.View.design(Tasks.SimpleButton,{
-              layout: { centerX: 0, top: 2, width: 24, height: 24 },
-              classNames: ['save-icon'],
-              value:  "_Save".loc(),
-              toolTip: "_SaveTooltip".loc(),
-              target: 'Tasks',
-              action: 'saveData'
-            }),
-
-            SC.LabelView.design(Tasks.SimpleButton,{
-              layout: { left: 0, right: 0, height: 19, top: 22 },
-              classNames: ['top-bar-label'],
-              value:  "_Save".loc(),
-              toolTip: "_SaveTooltip".loc(),
-              target: 'Tasks',
-              action: 'saveData'
-            })
-          ]
-        }),
-    
-        SC.View.design({
-          layout: { centerY: 0, height: 43, right: 50, width: 45 },
-          childViews: [
-            SC.View.design(Tasks.SimpleButton,{
-              layout: { centerX: 0, top: 2, width: 24, height: 24 },
-              classNames: ['import-icon'],
-              title:  "_Import".loc(),
-              toolTip: "_ImportTooltip".loc(),
-              target: 'Tasks',
-              action: 'importData'
-            }),
-
-            SC.LabelView.design(Tasks.SimpleButton,{
-              layout: { left: 0, right: 0, height: 19, top: 22 },
-              classNames: ['top-bar-label'],
-              title:  "_Import".loc(),
-              toolTip: "_ImportTooltip".loc(),
-              value:  "_Import".loc(),
-              target: 'Tasks',
-              action: 'importData'
-            })
-          ]
-        }),
-
-        SC.View.design({
-          layout: { centerY: 0, height: 43, right: 5, width: 45 },
-          childViews: [
-            SC.View.design(Tasks.SimpleButton,{
-              layout: { centerX: 0, top: 2, width: 24, height: 24 },
-              classNames: ['export-icon'],
-              value:  "_Export".loc(),
-              toolTip: "_ExportTooltip".loc(),
-              target: 'Tasks',
-              action: 'exportData'
-            }),
-
-            SC.LabelView.design(Tasks.SimpleButton,{
-              layout: { left: 0, right: 0, height: 19, top: 22 },
-              classNames: ['top-bar-label'],
-              value:  "_Export".loc(),
-              toolTip: "_ExportTooltip".loc(),
-              target: 'Tasks',
-              action: 'exportData'
-            })
-          ]
         })
                      
       ]
