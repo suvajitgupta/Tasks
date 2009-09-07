@@ -335,19 +335,19 @@ Tasks.mainPage = SC.Page.design({
           }),
     
           SC.LabelView.design({
-            layout: { top: 6, height: 18, left: 82, width: 180 },
+            layout: { top: 6, height: 18, left: 92, width: 180 },
             classNames: ['task-attribute-set-title'],
             value: "_Priority".loc()
           }),
         
           SC.SeparatorView.design({
-            layout: { centerY: -2, height: 4, left: 92, width: 160 },
+            layout: { centerY: -2, height: 4, left: 102, width: 160 },
             layoutDirection: SC.LAYOUT_HORIZONTAL,
             classNames: ['task-attribute-set-grouping']
           }),
 
           SC.RadioView.design({
-            layout: { bottom: 2, height: 24, left: 92, width: 190 },
+            layout: { bottom: 2, height: 24, left: 102, width: 190 },
             escapeHTML: NO,
             classNames: ['task-attribute-set'],
             items: [
@@ -366,19 +366,19 @@ Tasks.mainPage = SC.Page.design({
           }),
 
           SC.LabelView.design({
-            layout: { top: 6, height: 18, left: 270, width: 230 },
+            layout: { top: 6, height: 18, left: 280, width: 230 },
             classNames: ['task-attribute-set-title'],
             value: "_Status".loc()
           }),
         
           SC.SeparatorView.design({
-            layout: { centerY: -2, height: 4, left: 280, width: 230 },
+            layout: { centerY: -2, height: 4, left: 290, width: 230 },
             layoutDirection: SC.LAYOUT_HORIZONTAL,
             classNames: ['task-attribute-set-grouping']
           }),
 
           SC.RadioView.design({
-            layout: { bottom: 2, height: 24, left: 280, width: 250 },
+            layout: { bottom: 2, height: 24, left: 290, width: 250 },
             escapeHTML: NO,
             classNames: ['task-attribute-set'],
             items: [
@@ -399,19 +399,19 @@ Tasks.mainPage = SC.Page.design({
           }),
 
           SC.LabelView.design({
-            layout: { top: 6, height: 18, left: 530, width: 230 },
+            layout: { top: 6, height: 18, left: 540, width: 230 },
             classNames: ['task-attribute-set-title'],
             value: "_Validation".loc()
           }),
 
           SC.SeparatorView.design({
-            layout: { centerY: -2, height: 4, left: 540, width: 215 },
+            layout: { centerY: -2, height: 4, left: 550, width: 215 },
             layoutDirection: SC.LAYOUT_HORIZONTAL,
             classNames: ['task-attribute-set-grouping']
           }),
 
           SC.RadioView.design({
-            layout: { bottom: 2, height: 24, left: 540, width: 240 },
+            layout: { bottom: 2, height: 24, left: 550, width: 240 },
             escapeHTML: NO,
             classNames: ['task-attribute-set'],
             items: [
