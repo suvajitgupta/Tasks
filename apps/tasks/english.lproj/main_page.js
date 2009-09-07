@@ -18,6 +18,7 @@ Tasks.mainPage = SC.Page.design({
 
   mainPane: SC.MainPane.design({
     
+    layerId: 'mainPane',
     childViews: 'dockView toolbarView workspaceView bottomBarView'.w(),
     
     dockView: SC.View.design(SC.Border, {
@@ -151,7 +152,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerY: 0, left: 350, height: 24, width: 90 },
+          layout: { centerY: 0, left: 345, height: 24, width: 90 },
           icon: 'task-del-icon',
           value: "_DelTask".loc(),
           classNames: ['top-bar-label'],

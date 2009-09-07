@@ -6,6 +6,10 @@
   
 */
 
+#mainPane {
+  min-width: 1024px;
+  mid-height: 768px;
+}
  
 .sc-theme .sc-view {
   color: black;
