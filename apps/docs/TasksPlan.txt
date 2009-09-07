@@ -86,6 +86,7 @@ User Manager GUI
 | Replace with real Login dialog (for IE portability)
 ^ Add Assignee selection filter & corresponding delete button in top toolbar [SG] <JH2> @Done $Feature %Passed
 - Set assignee selection filter to logged in user if they are a Developer [SG] @Done $Feature %Passed
+- Allow assignee filtering by matching any part of name, not just loginName [SG] $Feature
 ^ Add User Manager with "Add/Del. User"  and "Close" buttons in toolbar [SG] <JH2> $Active $Feature
 - Add access control based on Role (User authorization) [SG] <SE> $Feature
 - Add change password dialog [SG] <SE> $Feature
@@ -96,6 +97,7 @@ Application Manager GUI
 - Add status bar at the bottom summarizing stats about Tasks data [SG] <MB> @Done $Feature %Passed
 - Add "Save" button in top toolbar, note time of last save in status bar [SG] <BB> @Done $Feature %Passed
 v Enable/disable Save button based on data modification [SG] <SE> $Feature
+- Add Refresh button to get most recent data from server [SG] <SE> $Feature
 - Add "Import" button in top toolbar with associated pop up panel [SG] <BB> @Done $Feature %Passed
 v Add drag-n-drop of a TXT file into App for data importing (using Google Gears) [MB] <SG> @Risky $Feature
 | Gears needs to be ported to Snow Leopard
