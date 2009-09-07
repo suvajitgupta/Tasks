@@ -69,6 +69,7 @@ Tasks.SimpleButton = {
     ON mouse up, trigger the action only if we are enabled and the mouse was released inside of the view.
   */  
   mouseUp: function(evt) {
+    if (!this.get('isEnabled')) return YES ; // handled event, but do nothing
     //console.log('SimpleButton#mouseUp()...');
     //if (this._isMouseDown) this.set('isActive', NO); // track independently in case isEnabled has changed
     this._isMouseDown = false;
