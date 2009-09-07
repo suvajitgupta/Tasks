@@ -371,7 +371,8 @@ Tasks.mixin({
    */
   addTask: function() {
     
-    var taskHash = SC.merge({'submitter': CoreTasks.getPath('user.id')}, CoreTasks.Task.NEW_TASK_HASH);
+    var user = CoreTasks.getPath('user.id');
+    var taskHash = SC.merge({ 'submitter': user, 'assignee': user }, CoreTasks.Task.NEW_TASK_HASH);
     var task = CoreTasks.createRecord(CoreTasks.Task, taskHash);
     // task.id = CoreTasks.generateId(); // For FIXTUREs
 
@@ -384,9 +385,7 @@ Tasks.mixin({
       var selectedObject = sel.firstObject();
       if (SC.instanceOf(selectedObject, CoreTasks.Task)) {
         var taskAssignee = selectedObject.get('assignee');
-        if (taskAssignee) {
-          task.set('assignee', taskAssignee);
-        }
+        if(taskAssignee) task.set('assignee', taskAssignee);
       }
     }
 

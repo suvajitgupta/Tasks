@@ -68,7 +68,8 @@ v Enable Task Validation radio buttons only when in Done status [SG] <JH2> $Feat
 - Allow task searching by type, priority, status, and validation fields [SG] <MB>
 v Set tasks toolbar button enablement based on having a selection [SG] <EO> @Done $Feature %Passed
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done $Feature %Passed
-^ Add "Add Task" & "Del. Task" buttons in tasks toolbar (logged in user is default Submitter for added tasks) [SG] <SE> @Done $Feature %Passed
+^ Add "Add Task" & "Del. Task" buttons in tasks toolbar [SG] <SE> @Done $Feature %Passed
+| Logged in user is default Submitter, Assignee is either set to the same as selected task (if one) or to logged in user
 - Fix task remaining in project after all tasks are deleted [SG] <BB> $Bug
 v Allow "Add Task" button to be pressed a second time to keep in data entry mode, Esc will exit mode [SG] <MB> $Feature
 - Deleted task isn't removed from AllTasks project [SG] <SE> $Bug
