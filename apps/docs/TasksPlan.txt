@@ -26,16 +26,16 @@ General Infrastructure
 
 SproutCore Issues
 - Patch SproutCore to avoid overwhelming async calls for file imports with more than 20 tasks [SE] <EG> $Bug
-^ Fix missing/flashing scrollbar on Firefox/Windows [SC] $Bug @Active
+^ Fix missing/flashing scrollbar on Firefox/Windows [SC] <SG> $Bug @Active
 | To reproduce: search for a Task in search bar or select AllTasks, scroll down, select a task, then select another project)
-- Allow SourceListView disclosures to be opened/closed propperly (Apple has on priority list) [SC] @Active $Bug
-- Drag-n-drop in SourceListView is broken (Apple has on priority list) [SC] @Active $Bug
-v On Firefox meed to highlight entire item & show cursor when starting to do in-cell editing [SC] $Bug
-- In Safari you can't click on assigneee selection filter and then the task filter [SC] $Bug
-- Add missing 'localize' support back in CollectionView (regression from SC 0.9) [SC] $Bug
-- SC.TextFieldView will follow your scroll and it seems that it's Z-Index is higher that everything else when it has focus [SC] $Bug
+- Allow SourceListView disclosures to be opened/closed propperly (Apple has on priority list) [SC] <SG> @Active $Bug
+- Drag-n-drop in SourceListView is broken (Apple has on priority list) [SC] <SG> @Active $Bug
+v On Firefox meed to highlight entire item & show cursor when starting to do in-cell editing [SC] <SG> $Bug
+- In Safari you can't click on assigneee selection filter and then the task filter [SC] <SG> $Bug
+- Add missing 'localize' support back in CollectionView (regression from SC 0.9) [SC] <SG> $Bug
+- SC.TextFieldView will follow your scroll and it seems that it's Z-Index is higher that everything else when it has focus [SC] <JH2> $Bug
 | When the cursor is inside and ready for editing you can scroll and the textField follows scroll and lays overtop of all other object
-v Fix spurious box-like ghost view with task while dragging [SC] $Bug
+v Fix spurious box-like ghost view with task while dragging [SC] <SG> $Bug
 
 Project Manager GUI
 ^ Add Master/Detail Explorer view with click selection of Projects showing corresponding Tasks [JH2] <SG> @Done $Feature %Passed
