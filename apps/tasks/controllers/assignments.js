@@ -170,15 +170,19 @@ Tasks.assignmentsController = SC.ArrayController.create(
   },
   
   _contentHasChanged: function() {
-    // console.log("Called contentHasChanged() at " + new Date());
+    // console.log("Tasks pane content change at " + new Date());
     this.showAssignments();
   }.observes('[]'),
   
-  _assigneeHasChanged: function() {
+  _assigneeSelectionHasChanged: function() {
+    // console.log("Assignee selection changed at " + new Date());
+    Tasks.deselectTasks();
     this.showAssignments();
   }.observes('assigneeSelection'),
   
   _searchFilterHasChanged: function() {
+    // console.log("Search filter changed at " + new Date());
+    Tasks.deselectTasks();
     this.showAssignments();
   }.observes('searchFilter')
   

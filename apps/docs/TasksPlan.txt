@@ -71,6 +71,8 @@ v Set tasks toolbar button enablement based on having a selection [SG] <EO> @Don
 ^ Add "Add Task" & "Del. Task" buttons in tasks toolbar [SG] <SE> @Done $Feature %Passed
 | Logged in user is default Submitter, Assignee is either set to the same as selected task (if one) or to logged in user
 - Fix task remaining in project after all tasks are deleted [SG] <BB> $Bug
+- Fix task editing cell floating at top under special circumstances [SG] <BB> $Bug
+| To reproduce, for Catch! project, login as RMG, cancel assignee selection, type "game" in search filter, then Add Task
 v Allow "Add Task" button to be pressed a second time to keep in data entry mode, Esc will exit mode [SG] <MB> $Feature
 - Deleted task isn't removed from AllTasks project [SG] <SE> $Bug
 ^ Show effort subtotals (exclude Done or Low priority tasks) in curly braces for load balancing [SG] @Done $Feature %Passed
