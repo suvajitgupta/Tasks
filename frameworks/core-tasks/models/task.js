@@ -120,9 +120,9 @@ CoreTasks.Task = CoreTasks.Record.extend({
   icon: function() {
     switch (this.get('type')){
       case CoreTasks.TASK_TYPE_FEATURE:
-        return 'tasks-icon-feature';
+        return 'task-icon-feature';
       case CoreTasks.TASK_TYPE_BUG:
-        return 'tasks-icon-bug';
+        return 'task-icon-bug';
       case CoreTasks.TASK_TYPE_OTHER:
         return 'sc-icon-options-16';
     }

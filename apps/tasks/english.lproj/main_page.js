@@ -351,11 +351,11 @@ Tasks.mainPage = SC.Page.design({
             escapeHTML: NO,
             classNames: ['task-attribute-set'],
             items: [
-              { title: '<span class=tasks-priority-high>' + CoreTasks.TASK_PRIORITY_HIGH.loc() + '</span>&nbsp;',
+              { title: '<span class=task-priority-high>' + CoreTasks.TASK_PRIORITY_HIGH.loc() + '</span>&nbsp;',
                 value: CoreTasks.TASK_PRIORITY_HIGH },
-              { title: '<span class=tasks-priority-medium>' + CoreTasks.TASK_PRIORITY_MEDIUM.loc() + '</span>&nbsp;',
+              { title: '<span class=task-priority-medium>' + CoreTasks.TASK_PRIORITY_MEDIUM.loc() + '</span>&nbsp;',
                 value: CoreTasks.TASK_PRIORITY_MEDIUM },
-              { title: '<span class=tasks-priority-low>' + CoreTasks.TASK_PRIORITY_LOW.loc() + '</span>&nbsp;',
+              { title: '<span class=task-priority-low>' + CoreTasks.TASK_PRIORITY_LOW.loc() + '</span>&nbsp;',
                 value: CoreTasks.TASK_PRIORITY_LOW }
             ],
             itemTitleKey: 'title',
@@ -382,13 +382,13 @@ Tasks.mainPage = SC.Page.design({
             escapeHTML: NO,
             classNames: ['task-attribute-set'],
             items: [
-              { title: '<span class=tasks-status-planned>' + CoreTasks.TASK_STATUS_PLANNED.loc() + '</span>&nbsp;',
+              { title: '<span class=task-status-planned>' + CoreTasks.TASK_STATUS_PLANNED.loc() + '</span>&nbsp;',
                 value: CoreTasks.TASK_STATUS_PLANNED },
-              { title: '<span class=tasks-status-active>' + CoreTasks.TASK_STATUS_ACTIVE.loc() + '</span>&nbsp;',
+              { title: '<span class=task-status-active>' + CoreTasks.TASK_STATUS_ACTIVE.loc() + '</span>&nbsp;',
                 value: CoreTasks.TASK_STATUS_ACTIVE },
-              { title: '<span class=tasks-status-done>' + CoreTasks.TASK_STATUS_DONE.loc() + '</span>&nbsp;',
+              { title: '<span class=task-status-done>' + CoreTasks.TASK_STATUS_DONE.loc() + '</span>&nbsp;',
                 value: CoreTasks.TASK_STATUS_DONE },
-              { title: '<span class=tasks-status-risky>' + CoreTasks.TASK_STATUS_RISKY.loc() + '</span>&nbsp;',
+              { title: '<span class=task-status-risky>' + CoreTasks.TASK_STATUS_RISKY.loc() + '</span>&nbsp;',
                 value: CoreTasks.TASK_STATUS_RISKY }
             ],
             itemTitleKey: 'title',
@@ -415,11 +415,11 @@ Tasks.mainPage = SC.Page.design({
             escapeHTML: NO,
             classNames: ['task-attribute-set'],
             items: [
-              { title: '<span class=tasks-validation-untested><label>' + CoreTasks.TASK_VALIDATION_UNTESTED.loc() + '</label></span>&nbsp;',
+              { title: '<span class=task-validation-untested><label>' + CoreTasks.TASK_VALIDATION_UNTESTED.loc() + '</label></span>&nbsp;',
                 value: CoreTasks.TASK_VALIDATION_UNTESTED },
-              { title: '<span class=tasks-validation-passed><label>' + CoreTasks.TASK_VALIDATION_PASSED.loc() + '</label></span>&nbsp;',
+              { title: '<span class=task-validation-passed><label>' + CoreTasks.TASK_VALIDATION_PASSED.loc() + '</label></span>&nbsp;',
                 value: CoreTasks.TASK_VALIDATION_PASSED },
-              { title: '<span class=tasks-validation-failed><label>' + CoreTasks.TASK_VALIDATION_FAILED.loc() + '</label></span>&nbsp;',
+              { title: '<span class=task-validation-failed><label>' + CoreTasks.TASK_VALIDATION_FAILED.loc() + '</label></span>&nbsp;',
                 value: CoreTasks.TASK_VALIDATION_FAILED }
             ],
             itemTitleKey: 'title',

@@ -57,42 +57,42 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       context.addClass('task-item');
       switch(priority){
         case CoreTasks.TASK_PRIORITY_HIGH:
-          context.addClass('tasks-priority-high');
+          context.addClass('task-priority-high');
           break;
         case CoreTasks.TASK_PRIORITY_MEDIUM:
-          context.addClass('tasks-priority-medium');
+          context.addClass('task-priority-medium');
           break;
         case CoreTasks.TASK_PRIORITY_LOW:
-          context.addClass('tasks-priority-low');
+          context.addClass('task-priority-low');
           break;          
       }
       
       var status = content.get('status');
       switch(status){
         case CoreTasks.TASK_STATUS_PLANNED:
-          context.addClass('tasks-status-planned');
+          context.addClass('task-status-planned');
           break;
         case CoreTasks.TASK_STATUS_ACTIVE:
-          context.addClass('tasks-status-active');
+          context.addClass('task-status-active');
           break;
         case CoreTasks.TASK_STATUS_DONE:
-          context.addClass('tasks-status-done');
+          context.addClass('task-status-done');
           break;          
         case CoreTasks.TASK_STATUS_RISKY:
-          context.addClass('tasks-status-risky');
+          context.addClass('task-status-risky');
           break;          
       }
       
       var validation = content.get('validation');
       switch(validation){
         case CoreTasks.TASK_VALIDATION_UNTESTED:
-          context.addClass('tasks-validation-untested');
+          context.addClass('task-validation-untested');
           break;
         case CoreTasks.TASK_VALIDATION_PASSED:
-          context.addClass('tasks-validation-passed');
+          context.addClass('task-validation-passed');
           break;
         case CoreTasks.TASK_VALIDATION_FAILED:
-          context.addClass('tasks-validation-failed');
+          context.addClass('task-validation-failed');
           break;          
       }
       if (content.get('description')) {

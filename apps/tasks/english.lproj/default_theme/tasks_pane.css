@@ -1,22 +1,94 @@
 /* 
 
-Tasks Pane Styling 
+  Tasks Pane Styling 
 
-  @author Matt Grantham - grantham.matt@gmail.com
+  @author Matt Grantham
+  @author Suvajit Gupta
   
 */
 
-.tasks-pane {
-  background: #e2e4e7 !important;
+/*-----------------------------------------------------------------
+ * Task type styles
+ */
+
+.task-icon-feature {
+  background: static_url('images/feature.gif');
+  height: 16px;
+  width: 16px;
 }
 
-.tasks-pane-inner {
-  background: #e2e4e7 !important;
+.task-icon-bug {
+  background: static_url('images/bug.gif');
+  height: 16px;
+  width: 16px;
 }
 
-.tasks-pane-inner .sc-collection-item.sc-group-item.sel {
-  background: none !important;
+
+/*-----------------------------------------------------------------
+ * Task priority styles
+ */
+
+.task-priority-high {
+	font-weight: bold !important;
+	text-decoration: underline !important;
 }
+
+.task-priority-medium {
+	font-weight: normal !important;
+	font-style: normal !important;
+}
+
+.task-priority-low {
+	font-weight: normal !important;
+  font-style: italic !important;
+}
+
+
+/*-----------------------------------------------------------------
+ * Task status styles
+ */
+
+.task-status-planned {
+	color: black !important;
+}
+
+.task-status-active {
+  color: blue !important;
+}
+
+.task-status-done {
+  color: green !important;
+}
+
+.task-status-risky {
+  color: red !important;
+}
+
+
+/*-----------------------------------------------------------------
+ * Task validation styles
+ */
+
+.task-validation-untested label {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.task-validation-passed label {
+  background: #9F9 none repeat scroll 0 0 !important;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.task-validation-failed label {
+  background: #F99 none repeat scroll 0 0 !important;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+/*-----------------------------------------------------------------
+ * Task description styles
+ */
 
 .task-description {
   position:absolute;
@@ -42,7 +114,39 @@ Tasks Pane Styling
   left: 15px !important;
 }
 
-/* Icons */
+/*-----------------------------------------------------------------
+ * Assignee loading styles
+ */
+
+.normal-assignee label {
+  color: white !important;
+  background: #555 none repeat scroll 0 0 !important;
+  padding-left: 10px;
+}
+
+.overloaded-assignee label {
+  color: white !important;
+  background: #F33 none repeat scroll 0 0 !important;
+  padding-left: 10px;
+}
+
+/*-----------------------------------------------------------------
+ * Task pane styles
+ */
+ 
+.tasks-pane {
+  background: #e2e4e7 !important;
+}
+
+.tasks-pane-inner {
+  background: #e2e4e7 !important;
+}
+
+.tasks-pane-inner .sc-collection-item.sc-group-item.sel {
+  background: none !important;
+}
+
+/* Task toolbar icons */
 
 .task-add-icon {
   width: 21px !important;
