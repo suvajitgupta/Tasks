@@ -6,24 +6,12 @@
   
 */
 
-.projects-tool-bar {
-  background: #BBB;
-  // background: static_url('images/default-theme-repeat-x.png') repeat-x 0 -106px; 
-}
-
-.tasks-tool-bar {
+.control-bar {
   background: #BBB;
   //background: static_url('images/default-theme-repeat-x.png') repeat-x 0 -106px; 
 }
 
-.tool-bar-label {
-  font-size: 9px !important;
-  color: #000 !important;
-  text-align: center !important;
-  font-weight: bold !important;
-}
-
-.tool-bar-button {
+.control-bar-button {
   font-size: 9px !important;
   color: #000 !important;
   text-align: left !important;

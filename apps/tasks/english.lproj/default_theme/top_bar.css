@@ -10,6 +10,13 @@
   background: static_url('images/default-theme-repeat-x.png') repeat-x 0 0;
 }
 
+.top-bar-label {
+  font-size: 9px !important;
+  color: #eee !important;
+  text-align: center !important;
+  font-weight: bold !important;
+}
+
 .tasks-logo {
   background: static_url('images/logo.png') no-repeat 0 0;
 }
@@ -20,21 +27,10 @@
   font-style: italic;
 }
 
-.dock-label {
-  font-size: 9px !important;
-  color: #fff !important;
-  text-align: center !important;
-  font-weight: bold !important;
-}
-
 .welcome-label {
   font-size: 9px !important;
   line-height: 11px !important;
   color: #0f0 !important;
-}
-
-.top-bar-divider {
-  background: static_url('images/default-theme-static.png') no-repeat 0 -606px;
 }
 
 /* Assignee/task filtering */

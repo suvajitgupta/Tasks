@@ -18,7 +18,7 @@ Tasks.mainPage = SC.Page.design({
 
   mainPane: SC.MainPane.design({
     
-    childViews: 'dockView workspaceView bottomBarView'.w(),
+    childViews: 'dockView toolbarView workspaceView bottomBarView'.w(),
     
     dockView: SC.View.design(SC.Border, {
       layout: { top: 0, left: 0, right: 0, height: 43 },
@@ -77,34 +77,6 @@ Tasks.mainPage = SC.Page.design({
         }),
       
         SC.View.design({
-          layout: {  top: 0, height: 43, right: 195, width: 2 },
-          classNames: ['top-bar-divider']
-        }),
-    
-        SC.View.design({ 
-          layout: { top: 0, height: 43, right: 145, width: 45 },
-          childViews: [
-            SC.View.design(Tasks.SimpleButton,{
-              layout: { centerX: 0, top: 2, width: 24, height: 24 },
-              classNames: ['save-icon'],
-              value:  "_Save".loc(),
-              toolTip: "_SaveTooltip".loc(),
-              target: 'Tasks',
-              action: 'saveData'
-            }),
-
-            SC.LabelView.design(Tasks.SimpleButton,{
-              layout: { left: 0, right: 0, height: 19, top: 22 },
-              classNames: ['dock-label'],
-              value:  "_Save".loc(),
-              toolTip: "_SaveTooltip".loc(),
-              target: 'Tasks',
-              action: 'saveData'
-            })
-          ]
-        }),
-    
-        SC.View.design({
           layout: { top: 0, height: 43, right: 95,  width: 50 },
           childViews: [
             SC.View.design(Tasks.SimpleButton,{
@@ -118,7 +90,7 @@ Tasks.mainPage = SC.Page.design({
 
             SC.LabelView.design(Tasks.SimpleButton,{
               layout: { left: 0, right: 0, height: 19, top: 22 },
-              classNames: ['dock-label'],
+              classNames: ['top-bar-label'],
               value:  "_Settings".loc(),
               toolTip: "_SettingsTooltip".loc(),
               target: 'Tasks',
@@ -141,7 +113,7 @@ Tasks.mainPage = SC.Page.design({
 
             SC.LabelView.design(Tasks.SimpleButton,{
               layout: { left: 0, right: 0, height: 19, top: 22 },
-              classNames: ['dock-label'],
+              classNames: ['top-bar-label'],
               value:  "_Help".loc(),
               toolTip: "_HelpTooltip".loc(),
               target: 'Tasks',
@@ -164,7 +136,7 @@ Tasks.mainPage = SC.Page.design({
 
             SC.LabelView.design(Tasks.SimpleButton,{
               layout: { left: 0, right: 0, height: 19, top: 22 },
-              classNames: ['dock-label'],
+              classNames: ['top-bar-label'],
               value:  "_Logout".loc(),
               toolTip: "_LogoutTooltip".loc(),
               target: 'Tasks',
@@ -176,10 +148,130 @@ Tasks.mainPage = SC.Page.design({
       ]
     }),
     
+    toolbarView: SC.View.design({
+      layout: { left: 0, right: 0, top: 44, height: 43 },
+      classNames: ['top-bar'],
+      childViews: [
+        
+        SC.LabelView.design(Tasks.SimpleButton,{
+          layout: { centerY: 0, left: 10, height: 24, width: 115 },
+          icon: 'project-add-icon',
+          value: "_AddProject".loc(),
+          classNames: ['top-bar-label'],
+          toolTip: "_AddProjectTooltip".loc(),
+          target: 'Tasks',
+          action: 'addProject'
+        }),
+      
+        SC.LabelView.design(Tasks.SimpleButton,{
+          layout: { centerY: 0, left: 110, height: 24, width: 115 },
+          icon: 'project-del-icon',
+          value: "_DelProject".loc(),
+          classNames: ['top-bar-label'],
+          toolTip: "_DelProjectTooltip".loc(),
+          isEnabledBinding: SC.Binding.oneWay('Tasks.projectsController.isDeletable'),
+          target: 'Tasks',
+          action: 'deleteProject'
+        }),
+        
+        SC.LabelView.design(Tasks.SimpleButton,{
+          layout: { centerY: 0, left: 390, height: 24, width: 90 },
+          icon: 'task-add-icon',
+          value: "_AddTask".loc(),
+          classNames: ['top-bar-label'],
+          toolTip: "_AddTaskTooltip".loc(),
+          target: 'Tasks',
+          action: 'addTask'
+        }),
+
+        SC.LabelView.design(Tasks.SimpleButton,{
+          layout: { centerY: 0, left: 480, height: 24, width: 90 },
+          icon: 'task-del-icon',
+          value: "_DelTask".loc(),
+          classNames: ['top-bar-label'],
+          toolTip: "_DelTaskTooltip".loc(),
+          isEnabledBinding: SC.Binding.oneWay('Tasks.tasksController.hasSelection'),
+          target: 'Tasks',
+          action: 'deleteTask'
+        }),
+        
+        SC.View.design({ 
+          layout: { top: 0, height: 43, right: 95, width: 45 },
+          childViews: [
+            SC.View.design(Tasks.SimpleButton,{
+              layout: { centerX: 0, top: 2, width: 24, height: 24 },
+              classNames: ['save-icon'],
+              value:  "_Save".loc(),
+              toolTip: "_SaveTooltip".loc(),
+              target: 'Tasks',
+              action: 'saveData'
+            }),
+
+            SC.LabelView.design(Tasks.SimpleButton,{
+              layout: { left: 0, right: 0, height: 19, top: 22 },
+              classNames: ['top-bar-label'],
+              value:  "_Save".loc(),
+              toolTip: "_SaveTooltip".loc(),
+              target: 'Tasks',
+              action: 'saveData'
+            })
+          ]
+        }),
+    
+        SC.View.design({
+          layout: { centerY: 0, height: 43, right: 50, width: 45 },
+          childViews: [
+            SC.View.design(Tasks.SimpleButton,{
+              layout: { centerX: 0, top: 2, width: 24, height: 24 },
+              classNames: ['import-icon'],
+              title:  "_Import".loc(),
+              toolTip: "_ImportTooltip".loc(),
+              target: 'Tasks',
+              action: 'importData'
+            }),
+
+            SC.LabelView.design(Tasks.SimpleButton,{
+              layout: { left: 0, right: 0, height: 19, top: 22 },
+              classNames: ['top-bar-label'],
+              title:  "_Import".loc(),
+              toolTip: "_ImportTooltip".loc(),
+              value:  "_Import".loc(),
+              target: 'Tasks',
+              action: 'importData'
+            })
+          ]
+        }),
+
+        SC.View.design({
+          layout: { centerY: 0, height: 43, right: 5, width: 45 },
+          childViews: [
+            SC.View.design(Tasks.SimpleButton,{
+              layout: { centerX: 0, top: 2, width: 24, height: 24 },
+              classNames: ['export-icon'],
+              value:  "_Export".loc(),
+              toolTip: "_ExportTooltip".loc(),
+              target: 'Tasks',
+              action: 'exportData'
+            }),
+
+            SC.LabelView.design(Tasks.SimpleButton,{
+              layout: { left: 0, right: 0, height: 19, top: 22 },
+              classNames: ['top-bar-label'],
+              value:  "_Export".loc(),
+              toolTip: "_ExportTooltip".loc(),
+              target: 'Tasks',
+              action: 'exportData'
+            })
+          ]
+        })
+                     
+      ]
+    }),
+
     workspaceView: SC.View.design({
-      layout: { top: 42, bottom: 19, left: 0, right: 0 },
+      layout: { top: 87, bottom: 19, left: 0, right: 0 },
       classNames: ['workspace'],
-      childViews: 'projectsListView projectsToolbarView tasksListView tasksToolbarView'.w(),
+      childViews: 'projectsListView tasksListView controlBarView'.w(),
       
       projectsListView: SC.ScrollView.design({
         layout: { top: 0, bottom: 56, left: 0, width: 268 },
@@ -203,82 +295,6 @@ Tasks.mainPage = SC.Page.design({
           destroyOnRemoval: YES,
           delegate: Tasks.reallocationController
         })
-      }),
-      
-      projectsToolbarView: SC.View.design({
-        layout: { bottom: 0, height: 55, width: 255 },
-        classNames: ['projects-tool-bar'],
-        childViews: [
-          
-          SC.LabelView.design(Tasks.SimpleButton,{
-            layout: { top: 2, left: 5, height: 24, width: 115 },
-            icon: 'project-add-icon',
-            value: "_AddProject".loc(),
-            classNames: ['tool-bar-button'],
-            toolTip: "_AddProjectTooltip".loc(),
-            target: 'Tasks',
-            action: 'addProject'
-          }),
-        
-          SC.LabelView.design(Tasks.SimpleButton,{
-            layout: { bottom: 2, left: 5, height: 24, width: 115 },
-            icon: 'project-del-icon',
-            value: "_DelProject".loc(),
-            classNames: ['tool-bar-button'],
-            toolTip: "_DelProjectTooltip".loc(),
-            isEnabledBinding: SC.Binding.oneWay('Tasks.projectsController.isDeletable'),
-            target: 'Tasks',
-            action: 'deleteProject'
-          }),
-          
-          SC.View.design({
-            layout: { centerY: 0, height: 43, left: 110, width: 45 },
-            childViews: [
-              SC.View.design(Tasks.SimpleButton,{
-                layout: { centerX: 0, top: 2, width: 24, height: 24 },
-                classNames: ['import-icon'],
-                title:  "_Import".loc(),
-                toolTip: "_ImportTooltip".loc(),
-                target: 'Tasks',
-                action: 'importData'
-              }),
-
-              SC.LabelView.design(Tasks.SimpleButton,{
-                layout: { left: 0, right: 0, height: 19, top: 22 },
-                classNames: ['tool-bar-label'],
-                title:  "_Import".loc(),
-                toolTip: "_ImportTooltip".loc(),
-                value:  "_Import".loc(),
-                target: 'Tasks',
-                action: 'importData'
-              })
-            ]
-          }),
-
-          SC.View.design({
-            layout: { centerY: 0, height: 43, left: 160, width: 45 },
-            childViews: [
-              SC.View.design(Tasks.SimpleButton,{
-                layout: { centerX: 0, top: 2, width: 24, height: 24 },
-                classNames: ['export-icon'],
-                value:  "_Export".loc(),
-                toolTip: "_ExportTooltip".loc(),
-                target: 'Tasks',
-                action: 'exportData'
-              }),
-
-              SC.LabelView.design(Tasks.SimpleButton,{
-                layout: { left: 0, right: 0, height: 19, top: 22 },
-                classNames: ['tool-bar-label'],
-                value:  "_Export".loc(),
-                toolTip: "_ExportTooltip".loc(),
-                target: 'Tasks',
-                action: 'exportData'
-              })
-            ]
-          })
-                       
-        ]
       }),
       
       tasksListView: SC.ScrollView.design({
@@ -308,32 +324,11 @@ Tasks.mainPage = SC.Page.design({
         })
       }),
       
-      tasksToolbarView: SC.View.design({
-        layout: { bottom: 0, height: 55, left: 250 },
-        classNames: ['tasks-tool-bar'],
+      controlBarView: SC.View.design({
+        layout: { bottom: 0, height: 55, left: 0 },
+        classNames: ['control-bar'],
         childViews: [
         
-          SC.LabelView.design(Tasks.SimpleButton,{
-            layout: { top: 2, left: 0, height: 24, width: 90 },
-            icon: 'task-add-icon',
-            value: "_AddTask".loc(),
-            classNames: ['tool-bar-button'],
-            toolTip: "_AddTaskTooltip".loc(),
-            target: 'Tasks',
-            action: 'addTask'
-          }),
-
-          SC.LabelView.design(Tasks.SimpleButton,{
-            layout: { bottom: 2, left: 0, height: 24, width: 90 },
-            icon: 'task-del-icon',
-            value: "_DelTask".loc(),
-            classNames: ['tool-bar-button'],
-            toolTip: "_DelTaskTooltip".loc(),
-            isEnabledBinding: SC.Binding.oneWay('Tasks.tasksController.hasSelection'),
-            target: 'Tasks',
-            action: 'deleteTask'
-          }),
-    
           SC.LabelView.design({
             layout: { top: 6, height: 18, left: 92, width: 180 },
             classNames: ['task-attribute-set-title'],
