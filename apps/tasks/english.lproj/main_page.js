@@ -42,40 +42,6 @@ Tasks.mainPage = SC.Page.design({
           valueBinding: SC.Binding.oneWay('CoreTasks.user')
         }),
       
-        SC.TextFieldView.design({
-          layout: { centerY: -2, height: 24, left: 270, width: 200 },
-          classNames: ['assignee-selection-bar'],
-          hint: "_AssigneeSelectionHint".loc(),
-          valueBinding: 'Tasks.assignmentsController.assigneeSelection'
-        }),
-
-        SC.View.design({ // Assignee Selection cancel button
-          layout: { centerY: -2, height: 12, left: 450, width: 12 },
-          isVisible: NO,
-          classNames: ['filter-cancel-icon'],
-          mouseDown: function() {
-            Tasks.assignmentsController.set('assigneeSelection', '');
-          },
-          isVisibleBinding: 'Tasks.assignmentsController.assigneeSelection'
-        }),
-      
-        SC.TextFieldView.design({
-          layout: { centerY: -2, height: 24, left: 490, width: 200 },
-          classNames: ['tasks-search-bar'],
-          hint: "_TasksSearchHint".loc(),
-          valueBinding: 'Tasks.assignmentsController.searchFilter' // TODO: [SG] bind to searchController instead
-        }),
-      
-        SC.View.design({ // Tasks Search cancel button
-          layout: { centerY: -2, height: 12, left: 670, width: 12 },
-          isVisible: NO,
-          classNames: ['filter-cancel-icon'],
-          mouseDown: function() {
-            Tasks.assignmentsController.set('searchFilter', '');
-          },
-          isVisibleBinding: 'Tasks.assignmentsController.searchFilter'
-        }),
-      
         SC.View.design({
           layout: { top: 0, height: 43, right: 95,  width: 50 },
           childViews: [
@@ -154,7 +120,7 @@ Tasks.mainPage = SC.Page.design({
       childViews: [
         
         SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerY: 0, left: 10, height: 24, width: 115 },
+          layout: { centerY: 0, left: 5, height: 24, width: 90 },
           icon: 'project-add-icon',
           value: "_AddProject".loc(),
           classNames: ['top-bar-label'],
@@ -164,7 +130,7 @@ Tasks.mainPage = SC.Page.design({
         }),
       
         SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerY: 0, left: 110, height: 24, width: 115 },
+          layout: { centerY: 0, left: 100, height: 24, width: 100 },
           icon: 'project-del-icon',
           value: "_DelProject".loc(),
           classNames: ['top-bar-label'],
@@ -175,7 +141,7 @@ Tasks.mainPage = SC.Page.design({
         }),
         
         SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerY: 0, left: 390, height: 24, width: 90 },
+          layout: { centerY: 0, left: 260, height: 24, width: 90 },
           icon: 'task-add-icon',
           value: "_AddTask".loc(),
           classNames: ['top-bar-label'],
@@ -185,7 +151,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerY: 0, left: 480, height: 24, width: 90 },
+          layout: { centerY: 0, left: 350, height: 24, width: 90 },
           icon: 'task-del-icon',
           value: "_DelTask".loc(),
           classNames: ['top-bar-label'],
@@ -195,6 +161,40 @@ Tasks.mainPage = SC.Page.design({
           action: 'deleteTask'
         }),
         
+        SC.TextFieldView.design({
+          layout: { centerY: -2, height: 24, left: 450, width: 200 },
+          classNames: ['assignee-selection-bar'],
+          hint: "_AssigneeSelectionHint".loc(),
+          valueBinding: 'Tasks.assignmentsController.assigneeSelection'
+        }),
+
+        SC.View.design({ // Assignee Selection cancel button
+          layout: { centerY: -2, height: 12, left: 630, width: 12 },
+          isVisible: NO,
+          classNames: ['filter-cancel-icon'],
+          mouseDown: function() {
+            Tasks.assignmentsController.set('assigneeSelection', '');
+          },
+          isVisibleBinding: 'Tasks.assignmentsController.assigneeSelection'
+        }),
+      
+        SC.TextFieldView.design({
+          layout: { centerY: -2, height: 24, left: 670, width: 200 },
+          classNames: ['tasks-search-bar'],
+          hint: "_TasksSearchHint".loc(),
+          valueBinding: 'Tasks.assignmentsController.searchFilter' // TODO: [SG] bind to searchController instead
+        }),
+      
+        SC.View.design({ // Tasks Search cancel button
+          layout: { centerY: -2, height: 12, left: 850, width: 12 },
+          isVisible: NO,
+          classNames: ['filter-cancel-icon'],
+          mouseDown: function() {
+            Tasks.assignmentsController.set('searchFilter', '');
+          },
+          isVisibleBinding: 'Tasks.assignmentsController.searchFilter'
+        }),
+      
         SC.View.design({ 
           layout: { top: 0, height: 43, right: 95, width: 45 },
           childViews: [
