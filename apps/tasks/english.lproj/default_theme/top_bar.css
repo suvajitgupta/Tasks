@@ -62,6 +62,7 @@
 .assignee-selection-bar input {
   padding: 7px 0 0 29px !important;
   width: 180px !important;
+  outline: 0;
   border: 0;
   background: none;
   font-size: 12px !important;
@@ -85,6 +86,7 @@
 .tasks-search-bar input {
   padding: 7px 0 0 24px !important;
   width: 180px !important;
+  outline: 0;
   border: 0;
   background: none;
   font-size: 12px !important;

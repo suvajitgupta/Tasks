@@ -19,7 +19,7 @@ General Infrastructure
 ^ Develop Model and Fixtures (hardcoded & generated) [SG] <SE> @Done
 - Develop States/Actions corresponding to GUI Statecharts [SG] <SE> @Active
 - Support minimum resolution of 1024x768 [SG] @Done $Feature %Passed
-- Support decimal numbers for project time left [SG] @Done %Passed
+- Support decimal numbers for task effort and assignee effort totals [SG] @Done %Passed $Feature
 - Handle persistence consistently (nothing should save unless user hits Save) [SE] <SG>
 - SimpleButton shouldn't accept clicks when isEnabled is false [SG] <JH2> $Bug
 - Optimize calls to assignments controller for redrawing tasks tree [SG] <BB>
