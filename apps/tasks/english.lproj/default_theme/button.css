@@ -2,7 +2,7 @@
 
   Button Styling 
 
-  @author Matt Grantham - grantham.matt@gmail.com
+  @author Matt Grantham
   
 */
 
@@ -59,13 +59,6 @@
   text-shadow: none;
 }
 
-/* 
-
-  Bottom Bar Styling 
-
-  @author Matt Grantham - grantham.matt@gmail.com
-  
-*/
 .sc-button-view.sc-regular-size.square.def .sc-button-label,
 .sc-button-view.sc-regular-size.square.sel .sc-button-label {
 	color: #fff;

@@ -28,35 +28,8 @@
   color: #fff;
 }
 
-/* Icons */
-
 .project-icon {
   width: 16px;
   height: 16px;
   background: static_url('images/default-theme-static.png') no-repeat 0 -486px;
 }
-
-.project-add-icon {
-  width: 21px !important;
-  height: 19px !important;
-  margin-top: 3px !important;
-  margin-right: 2px !important;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -526px;
-}
-
-.project-del-icon {
-  width: 21px !important;
-  height: 19px !important;
-  margin-top: 3px !important;
-  margin-right: 2px !important;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -547px;
-}
-
-.project-del-icon.dis {
-  width: 21px !important;
-  height: 19px !important;
-  margin-top: 3px !important;
-  margin-right: 2px !important;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -586px;
-}
-

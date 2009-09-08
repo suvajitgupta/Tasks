@@ -19,9 +19,9 @@ Tasks.mainPage = SC.Page.design({
   mainPane: SC.MainPane.design({
     
     layerId: 'mainPane',
-    childViews: 'dockView toolbarView workspaceView controlBarView statusBarView'.w(),
+    childViews: 'dockBarView toolbarView workspaceView controlBarView statusBarView'.w(),
     
-    dockView: SC.View.design(SC.Border, {
+    dockBarView: SC.View.design(SC.Border, {
       layout: { top: 0, left: 0, right: 0, height: 43 },
       classNames: ['top-bar'],
       childViews: [

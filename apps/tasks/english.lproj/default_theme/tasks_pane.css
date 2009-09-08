@@ -86,6 +86,7 @@
   padding-right: 5px;
 }
 
+
 /*-----------------------------------------------------------------
  * Task description styles
  */
@@ -112,6 +113,21 @@
 
 .task-item .sc-outline {
   left: 15px !important;
+}
+
+
+/*-----------------------------------------------------------------
+ * Task selection styles
+ */
+
+.sc-theme.focus .sc-list-view.sc-source-list .sc-collection-item.sel {
+  background: #e2e4e7;
+	border-style: none;
+}
+
+.sc-theme.focus .sc-list-view.sc-source-list .sc-collection-item.sel label {
+	border: 2px solid #333;
+	margin-top: -10px;
 }
 
 /*-----------------------------------------------------------------

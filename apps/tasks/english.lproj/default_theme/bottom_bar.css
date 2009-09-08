@@ -2,9 +2,14 @@
 
   Bottom Bar Styling 
 
-  @author Matt Grantham - grantham.matt@gmail.com
+  @author Matt Grantham
+	@author Suvajit Gupta
   
 */
+
+/*-----------------------------------------------------------------
+ * Control bar styles
+ */
 
 .control-bar {
   background: #BBB;
@@ -33,6 +38,11 @@
 .task-attribute-set-grouping {
   background-color: #777 !important;
 }
+
+
+/*-----------------------------------------------------------------
+ * Status bar styles
+ */
 
 .status-bar {
   background: static_url('images/default-theme-repeat-x.png') repeat-x 0 -44px;

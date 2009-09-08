@@ -18,22 +18,3 @@
 .sc-theme .sc-gray-border {
   border: 0 !important;
 }
-
-.sc-radio-view.sc-small-size {
-  font-size: 10px;
-  line-height: 18px;
-}
-
-.sc-label-view.disabled {
-  color: #888;
-}
-
-.sc-theme.focus .sc-list-view.sc-source-list .sc-collection-item.sel {
-  background: #e2e4e7;
-	border-style: none;
-}
-
-.sc-theme.focus .sc-list-view.sc-source-list .sc-collection-item.sel label {
-	border: 2px solid #333;
-	margin-top: -10px;
-}

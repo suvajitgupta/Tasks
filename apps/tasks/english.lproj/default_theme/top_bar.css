@@ -2,9 +2,13 @@
 
   Top Navigation Styling
 
-  @author Matt Grantham - grantham.matt@gmail.com
+  @author Matt Grantham
   
 */
+
+/*-----------------------------------------------------------------
+ * Top bar styles
+ */
 
 .top-bar {
   background: static_url('images/default-theme-repeat-x.png') repeat-x 0 0;
@@ -36,7 +40,10 @@
   color: #0f0 !important;
 }
 
-/* Assignee/task filtering */
+
+/*-----------------------------------------------------------------
+ * Toolbar styles
+ */
 
 .assignee-selection-bar {
   background: static_url('images/default-theme-user-filter-bg.png') no-repeat;
@@ -91,7 +98,34 @@
   cursor: pointer;
 }
 
-/* Application-level action icons */
+
+/*-----------------------------------------------------------------
+ * Icons
+ */
+
+.project-add-icon {
+  width: 21px !important;
+  height: 19px !important;
+  margin-top: 3px !important;
+  margin-right: 2px !important;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -526px;
+}
+
+.project-del-icon {
+  width: 21px !important;
+  height: 19px !important;
+  margin-top: 3px !important;
+  margin-right: 2px !important;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -547px;
+}
+
+.project-del-icon.dis {
+  width: 21px !important;
+  height: 19px !important;
+  margin-top: 3px !important;
+  margin-right: 2px !important;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -586px;
+}
 
 .save-icon {
   background: static_url('images/default-theme-static.png') no-repeat 0 -50px;
