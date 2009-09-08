@@ -16,7 +16,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
 /** @scope Tasks.TaskItemView.prototype */ {
   
   content: null,
-  _descriptionPane: null,
+  _editorPane: null,
 
   /** @private
     If mouse was down over Description Icon open the editor.
@@ -25,24 +25,44 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     var clsNames = evt.target.className.split(' ');
     if (clsNames.length > 0 && clsNames[0] === 'description-editor') {
       var layer = this.get('layer');
-      this._descriptionPane = SC.PickerPane.create({
-        layout: { width: 500, height: 200 },
+      this._editorPane = SC.PickerPane.create({
+        layout: { width: 500, height: 250 },
         contentView: SC.View.design({
           layout: { left: 0, right: 0, top: 0, bottom: 0},
           childViews: [
+          
             SC.LabelView.design({
-              layout: { top: 2, height: 17, left: 2, width: 100 },
+              layout: { top: 12, left: 10, height: 17, width: 80 },
+              value: "_Submitter:".loc()
+            }),
+            SC.TextFieldView.design({
+              layout: { top: 10, left: 85, width: 80, height: 20 },
+              valueBinding: SC.binding('.content.type', this)
+            }),
+
+            SC.LabelView.design({
+              layout: { top: 12, right: 80, height: 17, width: 80 },
+              value: "_Assignee:".loc()
+            }),
+            SC.TextFieldView.design({
+              layout: { top: 10, right: 15, width: 80, height: 20 },
+              valueBinding: 'Tasks.editorController.assignee'
+            }),
+
+            SC.LabelView.design({
+              layout: { top: 42, left: 10, height: 17, width: 100 },
               value: "_Description:".loc()
             }),
             SC.TextFieldView.design({
-              layout: { top: 24, left: 5, right: 5, bottom: 5 },
+              layout: { top: 64, left: 10, right: 10, bottom: 10 },
               isTextArea: YES,
               valueBinding: SC.binding('.content.description', this)
             })
+            
           ]
         })
       });
-      this._descriptionPane.popup(evt.target.parentNode, SC.PICKER_POINTER);
+      this._editorPane.popup(evt.target.parentNode, SC.PICKER_POINTER);
     }
     return NO;
   },

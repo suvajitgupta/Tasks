@@ -79,6 +79,8 @@ SC.stringsFor('English', {
   '_Developer': "Developer",
   '_Tester': "Tester",
   '_SubmitterHover': "Submitter: ",
+  '_Submitter:': "Submitter: ",
+  '_Assignee:': "Assignee: ",
   
   // Import/Export Panel strings
   '_Cancel': "Cancel",

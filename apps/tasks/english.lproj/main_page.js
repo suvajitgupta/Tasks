@@ -239,20 +239,20 @@ Tasks.mainPage = SC.Page.design({
         }),
         
         SC.TextFieldView.design({
-          layout: { centerY: -2, height: 24, right: 220, width: 200 },
+          layout: { centerY: -2, height: 24, right: 240, width: 200 },
           classNames: ['assignee-selection-bar'],
           hint: "_AssigneeSelectionHint".loc(),
           valueBinding: 'Tasks.assignmentsController.assigneeSelection'
         }),
 
         SC.View.design({ // Assignee Selection cancel button
-          layout: { centerY: -2, height: 12, right: 225, width: 12 },
+          layout: { centerY: -2, height: 12, right: 245, width: 12 },
           isVisible: NO,
           classNames: ['filter-cancel-icon'],
           mouseDown: function() {
             Tasks.assignmentsController.set('assigneeSelection', '');
           },
-          isVisibleBinding: 'Tasks.assignmentsController.assigneeSelection'
+          isVisibleBinding: SC.Binding.oneWay('Tasks.assignmentsController.assigneeSelection').bool()
         }),
       
         SC.TextFieldView.design({
@@ -269,7 +269,7 @@ Tasks.mainPage = SC.Page.design({
           mouseDown: function() {
             Tasks.assignmentsController.set('searchFilter', '');
           },
-          isVisibleBinding: 'Tasks.assignmentsController.searchFilter'
+          isVisibleBinding: SC.Binding.oneWay('Tasks.assignmentsController.searchFilter').bool()
         })
                      
       ]

@@ -29,13 +29,22 @@ Tasks.loginPage = SC.Page.create({
       
       loginEntry: SC.TextFieldView.design({
         layout: { top: 10, left: 95, right: 15, height: 20 },
-        valueBinding: 'Tasks.loginController.loginName'
+        valueBinding: 'Tasks.loginController.loginName',
+        keyDown: function(evt) {
+          
+          if('return' === SC.FUNCTION_KEYS[evt.which]){
+            var parentView = this.get('parentView');
+            parentView.loginButton.triggerAction(evt);
+          }
+          return sc_super();
+          
+        }        
       }),
       
       loginButton: SC.ButtonView.design({
         layout: { width: 80, height: 30, right: 10, bottom: 8 },
         titleMinWidth: 0,
-        isEnabledBinding: SC.Binding.oneWay('Tasks.loginController.loginName'),
+        isEnabledBinding: SC.Binding.oneWay('Tasks.loginController.loginName').bool(),
         theme: 'capsule',
         isDefault: YES,
         title: "_Login".loc(),
