@@ -28,8 +28,8 @@ Tasks.exportDataPage = SC.Page.create({
         SC.ButtonView.design({
           layout: { width: 80, height: 30, right: 10, bottom: 8 },
           titleMinWidth: 0,
-          keyEquivalent: 'escape',
-          isCancel: YES,
+          keyEquivalent: 'return',
+          isDefault: YES,
           theme: 'capsule',
           title: "_Close".loc(),
           target: 'Tasks.exportDataController',

@@ -25,7 +25,7 @@ General Infrastructure
 - Optimize calls to assignments controller for redrawing tasks tree [SG] <BB>
 
 SproutCore Issues
-- Patch SproutCore to avoid overwhelming async calls for file imports with more than 20 tasks [SE] <EG> $Bug
+- Patch SproutCore to avoid overwhelming async calls for file imports with more than 20 tasks [SE] <EG> @Active $Bug
 ^ Fix missing/flashing scrollbar on Firefox/Windows [SC] <SG> $Bug @Active
 | To reproduce: search for a Task in search bar or select AllTasks, scroll down, select a task, then select another project)
 - Allow SourceListView disclosures to be opened/closed propperly (Apple has on priority list) [SC] <SG> @Active $Bug
