@@ -17,7 +17,7 @@ Tasks = SC.Object.create(SC.Statechart,
   /** @scope Tasks.prototype */ {
 
   NAMESPACE: 'Tasks',
-  VERSION: 'Alpha',
+  VERSION: 'preBeta',
   
   deselectTasks: function() {
     Tasks.taskController.set('content', '');
