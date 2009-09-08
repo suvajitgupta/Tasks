@@ -348,13 +348,13 @@ Tasks.mainPage = SC.Page.design({
       }),
   
       SC.SeparatorView.design({
-        layout: { centerY: -2, height: 4, left: 15, width: 250 },
+        layout: { centerY: -2, height: 4, left: 15, width: 240 },
         layoutDirection: SC.LAYOUT_HORIZONTAL,
         classNames: ['task-attribute-set-grouping']
       }),
 
       SC.RadioView.design({
-        layout: { bottom: 2, height: 24, left: 20, width: 240 },
+        layout: { bottom: 2, height: 24, left: 20, width: 250 },
         escapeHTML: NO,
         classNames: ['task-attribute-set'],
         items: [
