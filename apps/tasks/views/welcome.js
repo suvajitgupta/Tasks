@@ -16,9 +16,9 @@ Tasks.WelcomeView = SC.LabelView.extend(
   
   render: function(context, firstTime) {
     context.push("_Welcome".loc() + CoreTasks.getPath('user.name') + ' (' + CoreTasks.getPath('user.loginName') + ')');
-    var name = CoreTasks.getPath('user.loginName');
-    context.attr('title', name);
-    context.attr('alt', name);
+    var loginTime = "_LoginSince".loc() + CoreTasks.get('loginTime').format('hh:mm:ss a MMM dd, yyyy');
+    context.attr('title', loginTime);
+    context.attr('alt', loginTime);
   }
   
 });

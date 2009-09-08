@@ -54,6 +54,7 @@ Tasks.mixin({
     var user = CoreTasks.getUser(this.loginName);
     if (user) { // existing user
       CoreTasks.set('user', user);
+      CoreTasks.set('loginTime', new Date());
       if(user.get('role') === CoreTasks.USER_ROLE_DEVELOPER.loc()) {
         Tasks.assignmentsController.set('assigneeSelection', this.loginName);
       }

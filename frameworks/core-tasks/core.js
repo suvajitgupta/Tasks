@@ -29,6 +29,9 @@ CoreTasks = SC.Object.create({
   // The logged in user.
   user: null,
 
+  // The login time of current user.
+  loginTime: null,
+
   /**
    * A special 'inbox' project where all unallocated tasks are grouped.
    *

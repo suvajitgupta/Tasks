@@ -17,6 +17,7 @@ SC.stringsFor('English', {
   // Dock strings
   '_Tasks': "TASKS",
   '_Welcome': "Welcome ",
+  '_LoginSince': "Logged in since ",
   '_Save': "Save",
   '_SaveTooltip': "Save Tasks data to the server",
   '_Import': "Import",
