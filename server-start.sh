@@ -2,7 +2,20 @@
 # A simple shell script that launches the Persevere server.
 # Author: Sean Eidemiller
 
-DIR=`pwd`
+START_DIR=`pwd`
+MODE=prod
+PORT=8088
+OUT_FILE="$START_DIR/server.out"
+ERR_FILE="$START_DIR/server.err"
+
+if [ "$1" = "-t" ]; then
+  MODE=test
+  PORT=8089
+  OUT_FILE="$START_DIR/server-test.out"
+  ERR_FILE="$START_DIR/server-test.err"
+fi
+
+SERVER_DIR="tasks-server/$MODE"
 
 if [ -f /bin/echo ]; then
   ECHO="/bin/echo"
@@ -10,30 +23,30 @@ else
   ECHO="echo"
 fi
 
-"$ECHO" -n "Starting Persevere server... "
+"$ECHO" -n "Starting Persevere [$MODE] server... "
 
-if [ ! -d tasks-server ]; then
+if [ ! -d "$SERVER_DIR" ]; then
   echo "FAILED"
-  echo "Unable to locate tasks-server directory."
+  echo "Unable to locate $SERVER_DIR directory."
   exit 1
 fi
 
-cd tasks-server
+cd "$SERVER_DIR"
 
-"$DIR"/persevere/bin/persvr -p 8088 --base-uri /tasks-server > "$DIR"/server.out 2> server.err &
+"$START_DIR"/persevere/bin/persvr -p "$PORT" --base-uri /tasks-server > "$OUT_FILE" 2> "$ERR_FILE" &
 
 if [ "$?" -eq 0 ]; then
   echo "OK"
   echo "Server PID: $!"
 else
   echo "FAILED"
-  cat server.err
-  rm server.err
+  cat "$ERR_FILE"
+  rm "$ERR_FILE"
   exit 1
 fi
 
-if [ -f server.err ]; then
-  rm server.err
+if [ -f "$ERR_FILE" ]; then
+  rm "$ERR_FILE"
 fi
 
-cd "$DIR"
+cd "$START_DIR"

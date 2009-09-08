@@ -9,8 +9,12 @@ tmp
 sc-integrate
 TODO
 server.out
+server-test.out
 server.err
+server-test.err
 abbot/
-tasks-server/WEB-INF/data
-tasks-server/WEB-INF/config/generated.js
+tasks-server/prod/WEB-INF/data
+tasks-server/prod/WEB-INF/config/generated.js
+tasks-server/test/WEB-INF/data
+tasks-server/test/WEB-INF/config/generated.js
 frameworks/sproutcore-statechart/

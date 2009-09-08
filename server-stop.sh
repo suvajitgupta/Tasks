@@ -2,15 +2,23 @@
 # A simple script for stopping the Persevere server.
 # Author: Sean Eidemiller
 
+MODE=prod
+PORT=8088
+
 if [ -f /bin/echo ]; then
   ECHO="/bin/echo"
 else
   ECHO="echo"
 fi
 
-"$ECHO" -n "Stopping Persevere server... "
+if [ "$1" = "-t" ]; then
+  MODE=test
+  PORT=8089
+fi
 
-PID=`ps aux | grep java | grep persevere | grep -v grep | awk '{print $2}'`
+"$ECHO" -n "Stopping Persevere [$MODE] server... "
+
+PID=`ps aux | grep java | grep persevere | grep "$PORT" | grep -v grep | awk '{print $2}'`
 
 if [ ! -z "$PID" ]; then
   kill "$PID"
