@@ -14,24 +14,24 @@
 */
 SC.stringsFor('English', {
 
-  // Application toolbar strings
+  // Dock strings
   '_Tasks': "TASKS",
-  '_Welcome': "Welcome",
-  "_AssigneeSelectionHint": "Select assignee(s)...",
-  '_TasksSearchHint': "Search for tasks...",
+  '_Welcome': "Welcome ",
+  '_Save': "Save",
+  '_SaveTooltip': "Save Tasks data to the server",
   '_Import': "Import",
   '_ImportTooltip': "Import Tasks data from a file",
   '_ImportHint': "Paste in text to be imported",
   '_Export': "Export",
   '_ExportTooltip': "Export Tasks data to a file",
-  '_Save': "Save",
-  '_SaveTooltip': "Save Tasks data to the server",
   '_Settings': "Settings",
   '_SettingsTooltip': "Manage Tasks settings",
   '_Help': "Help",
   '_HelpTooltip': "Launch Tasks help",
   '_Logout': "Logout",
   '_LogoutTooltip': "Logout from Tasks",
+  "_AssigneeSelectionHint": "Select assignee(s)...",
+  '_TasksSearchHint': "Search for tasks...",
   
   // Project strings
   '_AddProject': "Add Project",

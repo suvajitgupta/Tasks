@@ -15,7 +15,7 @@ Tasks.WelcomeView = SC.LabelView.extend(
 /** @scope Tasks.WelcomeView.prototype */ {
   
   render: function(context, firstTime) {
-    context.push('<center>' + "_Welcome".loc() + '<br>' + CoreTasks.getPath('user.name') + ' !</center>');
+    context.push("_Welcome".loc() + CoreTasks.getPath('user.name') + ' (' + CoreTasks.getPath('user.loginName') + ') !</center>');
     var name = CoreTasks.getPath('user.loginName');
     context.attr('title', name);
     context.attr('alt', name);

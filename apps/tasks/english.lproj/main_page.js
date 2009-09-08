@@ -38,7 +38,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         Tasks.WelcomeView.design({
-          layout: { centerY: 2, height: 30, left: 260, width: 150 },
+          layout: { centerY: 0, height: 20, left: 270, width: 200 },
           classNames: ['welcome-label'],
           valueBinding: SC.Binding.oneWay('CoreTasks.user')
         }),
@@ -114,9 +114,9 @@ Tasks.mainPage = SC.Page.design({
         }),
         
         SC.SeparatorView.design({
-          layout: { top: 4, bottom: 4, right: 155,  width: 4 },
+          layout: { top: 5, bottom: 5, right: 155,  width: 3 },
           layoutDirection: SC.LAYOUT_VERTICAL,
-          //classNames: ['task-attribute-set-grouping']
+          classNames: ['top-bar-divider']
         }),
 
         SC.View.design({
