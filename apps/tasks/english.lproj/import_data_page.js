@@ -38,6 +38,7 @@ Tasks.importDataPage = SC.Page.create({
         SC.ButtonView.design({
           layout: { width: 80, height: 30, right: 96, bottom: 8 },
           titleMinWidth: 0,
+          isCancel: YES,
           theme: 'capsule',
           title: "_Cancel".loc(),
           target: 'Tasks.importDataController',
