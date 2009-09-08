@@ -1,0 +1,60 @@
+<body>
+	<h1>Introduction</h1>
+		<p>This is a quick reference guide to Tasks.  This will help you understand the key concepts and learn how to the the application.</p>
+	<h1>Concepts</h1>
+	<h2>Project</h2>
+		<p>A <b>project</b> is an initiative with a <i>name</i> and <i>time left</i>.  A project contains zero or more <b>tasks</b></p>
+	<h2>Task</h2>
+		<p>A <b>task</b> is an atomic unit of work.  A task has several attributes:</p>
+		<ul>
+			<li><i>name</i>: one-line summary describing the task, you may want to name related tasks with a common prefix followed by a colon</li>
+			<li><i>priority</i>: High or Medium (default) or Low (High ones must be completed, Low ones not included in effort subtotals</li>
+			<li><i>effort</i>: estimate => actual, in days</li>
+			<li><i>submitter</i>: User who submitted this task</li>
+			<li><i>assignee</i>: User to whom this task is assigned</li>
+			<li><i>type</i>: kind of task to support testing workflow - Feature or Bug or Other (default)</li>
+			<li><i>status</i>: development status - Planned (default) or Active or Done or Risky</li>
+			<li><i>validation</i>: validation status - Untested (default) or Passed or Failed</li>
+			<li><i>description</i>: (multi-line) additional information such as Feature details, Bug reproduction steps, or Release Notes</li>
+		</ul>
+	<h2>User</h2>
+		<p>A team member with a <i>login name</i> and <i>full name</i> as well as a <i>role</i> (one of Manager, Developer, or Tester).  A user logs into the Tasks aplication and are task <i>assignees</i> and <i>submitters</i></p>
+	<h1>Basic Features</h1>
+		<p>To begin, click on "Add Project" to create your project and type in a name for it.  When you select a project in the list it shows its tasks on the right side.  You can remove a selected project by clicking on the "Del. Project" button.</p>
+		<p>Click "Add Task" to create your tasks.  Type in the task descriptions and periodically save your work.</p>
+		<pre>
+		^ Add virtual Inbox & AllTasks to group all unallocated & all tasks respectively [SG] <SE> @Done
+		- Allow Tasks under a User to be hidden/shown [SG] <JH2> @Done
+		- Show type via different icons [SG] <JH2> @Done
+		- Show priority (font style), status (font color), validation (background color) [SG] <MB> @Done
+		- Add Status/Priority/Validation radio buttons in tasks toolbar [SG] <EO> @Done
+		^ Add "+" & "-" buttons in tasks toolbar (logged in user is default Submitter for added tasks) [SG] <SE> @Done
+		^ Allow drag-n-drop reordering (preserve order when persisting) [SG] @Done
+		^ Allow multi-task drag-n-drop reassignment [BB] <SG>  @Done
+		^ Add popup viewer/editor for Descriptions [JH2] <SG> @Done
+		- Add status bar at the bottom summarizing stats about Tasks data [SG] <MB> @Active
+		- Add "Save" button in top toolbar, provide confirmation after save operation finishes [SG] <SE> @Active
+		- Add Logout button to exit in top toolbar [SG] <SE> @Active
+		</pre>
+	<h1>Advanced Features</h1>
+		<pre>
+		^ Show Project time left in curly braces (if specified) [SG] <JH2> @Done
+		^ Display Task summary & effort (if specified) in curly braces [SG] <JH2> @Done
+		^ Add multi-task drag-n-drop reordering [BB] <SG> @Active
+		^ Allow multi-task drag-n-drop Task reallocation to Projects [BB] <SG> @Active
+		^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done
+		v Add context menu to Delete a project [SG] <EG>
+		^ Add Search Filter & corresponding delete button in top toolbar: support type-ahead searching [SG] <DC> @Done
+		^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done
+		^ Show effort subtotals (exclude Done or Low priority tasks) in curly braces for load balancing [SG] @Done
+		- Append "?" for range-based subtotals including tasks with unspecified efforts [SG] @Done
+		- Indicate overloaded assignees (with more effort total than timeLeft in project) by color-coding them red [SG]
+		v Add context menu & hotkeys to Edit/Cut/Copy/Paste/Delete/Duplicate a task [SG] <EG>
+		^ Add Assignee selection filter in top toolbar [SG] <JH2> @Done
+		- Add "+" & "-" buttons in users toolbar and "X" button in top toolbar to return [SG] <JH2>
+		- Add access control based on Role (User authorization) [SG] <SE>
+		- Add "Import" button in top toolbar with associated pop up panel [BB] <SG> @Done
+		- Add "Export" button in top toolbar with associated pop up panel [SG] @Done
+		- Add Settings button/popup to manage Users and preferences [SG] <JH2>
+		</pre>
+</body>

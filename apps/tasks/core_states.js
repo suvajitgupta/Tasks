@@ -12,11 +12,8 @@ Tasks.mixin({
   
   // Login
   goStateA1: function(){
-    // var loginName = "bigboss";
-    var loginName = prompt("Login name:");
-    if (loginName !== null && loginName !== '') {
-      Tasks.authenticate(loginName, 'password'); // TODO: [SG] pass actual password input by user
-    }
+    // var loginName = prompt("Login name:");
+    Tasks.loginController.openPanel();
   },
 
   // Authentication

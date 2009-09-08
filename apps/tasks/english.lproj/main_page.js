@@ -32,7 +32,7 @@ Tasks.mainPage = SC.Page.design({
         }),
       
         SC.LabelView.design({
-          layout: { centerY: -12, height: 15, left: 100, width: 40 },
+          layout: { centerY: -12, height: 20, left: 100, width: 40 },
           classNames: ['tasks-version'],
           value: Tasks.VERSION
         }),
@@ -354,7 +354,7 @@ Tasks.mainPage = SC.Page.design({
       }),
 
       SC.RadioView.design({
-        layout: { bottom: 2, height: 24, left: 20, width: 250 },
+        layout: { bottom: 2, height: 24, left: 20, width: 260 },
         escapeHTML: NO,
         classNames: ['task-attribute-set'],
         items: [
@@ -386,7 +386,7 @@ Tasks.mainPage = SC.Page.design({
       }),
 
       SC.RadioView.design({
-        layout: { bottom: 2, height: 24, left: 292, width: 190 },
+        layout: { bottom: 2, height: 24, left: 292, width: 200 },
         escapeHTML: NO,
         classNames: ['task-attribute-set'],
         items: [
@@ -417,7 +417,7 @@ Tasks.mainPage = SC.Page.design({
       }),
 
       SC.RadioView.design({
-        layout: { bottom: 2, height: 24, left: 500, width: 260 },
+        layout: { bottom: 2, height: 24, left: 500, width: 270 },
         escapeHTML: NO,
         classNames: ['task-attribute-set'],
         items: [
@@ -450,7 +450,7 @@ Tasks.mainPage = SC.Page.design({
       }),
 
       SC.RadioView.design({
-        layout: { bottom: 2, height: 24, left: 780, width: 240 },
+        layout: { bottom: 2, height: 24, left: 780, width: 250 },
         escapeHTML: NO,
         classNames: ['task-attribute-set'],
         items: [
