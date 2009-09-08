@@ -50,7 +50,7 @@ v Set projects toolbar button enablement based on having a selection [SG] <EO> @
 v Don't enable Add/Del. Tasks when on "All Tasks" project $Feature [SG] <JH2>
 - Select first project at startup [SG] <JH2> @Done $Feature %Passed
 ^ Add virtual Inbox & AllTasks to group all unallocated & all tasks respectively [SG] <SE> @Done $Feature %Passed
-- Disallow Inbox/AllTasks projects from being deleted [SG] <EO> @Done $Feature %Failed
+- Disallow Inbox/AllTasks projects from being deleted [SG] <EO> @Done $Feature %Passed
 ^ Add drag-n-drop project reordering [BB] <SG> $Feature
 ^ Allow multi-task drag-n-drop Task reallocation to Projects [BB] <SG> @Done $Feature %Passed
 v Add context menu to Delete a project [SG] <JH2> $Feature
@@ -80,7 +80,8 @@ v Allow "Add Task" button to be pressed a second time to keep in data entry mode
 - Indicate overloaded assignees (with more effort total than timeLeft in project) by highlighting in red [SG] <MB> @Done $Feature %Passed
 ^ Allow drag-n-drop task reordering [BB] <SG> $Feature
 ^ Allow multi-task drag-n-drop reassignment [BB] <SG>  @Done $Feature %Passed
-^ Add popup viewer/editor for Task Type, Submitter, Assignee, and Description [[JH2] <SG>]SG] <JH2> @Active $Feature
+^ Add popup viewer/editor for Task Submitter, Assignee, and Description [[JH2] <SG>]SG] <JH2> @Active $Feature
+v Don't allow long task names to run over the description icon on right <SG> [SG] $Bug
 - Fix lag in responsiveness for Tasks Description entry (bindings issue) [SG] <JH2> $Bug
 v Add context menu & hotkeys to Edit/Cut/Copy/Paste/Delete/Duplicate a task [SG] <JH2> $Feature
 
