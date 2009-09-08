@@ -38,7 +38,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         Tasks.WelcomeView.design({
-          layout: { centerY: 0, height: 20, left: 270, width: 200 },
+          layout: { centerY: 0, height: 20, left: 270, width: 300 },
           classNames: ['welcome-label'],
           valueBinding: SC.Binding.oneWay('CoreTasks.user')
         }),
