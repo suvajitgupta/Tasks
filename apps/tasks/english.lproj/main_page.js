@@ -348,7 +348,7 @@ Tasks.mainPage = SC.Page.design({
       }),
   
       SC.SeparatorView.design({
-        layout: { centerY: -2, height: 4, left: 15, width: 240 },
+        layout: { centerY: -2, height: 4, left: 15, width: 250 },
         layoutDirection: SC.LAYOUT_HORIZONTAL,
         classNames: ['task-attribute-set-grouping']
       }),
