@@ -2,17 +2,17 @@
 # A simple shell script that launches the Persevere server.
 # Author: Sean Eidemiller
 
-START_DIR=`pwd`
+TASKS_DIR=`pwd`
 MODE=prod
 PORT=8088
-OUT_FILE="$START_DIR/server.out"
-ERR_FILE="$START_DIR/server.err"
+OUT_FILE="$TASKS_DIR/server.out"
+ERR_FILE="$TASKS_DIR/server.err"
 
 if [ "$1" = "-t" ]; then
   MODE=test
   PORT=8089
-  OUT_FILE="$START_DIR/server-test.out"
-  ERR_FILE="$START_DIR/server-test.err"
+  OUT_FILE="$TASKS_DIR/server-test.out"
+  ERR_FILE="$TASKS_DIR/server-test.err"
 fi
 
 SERVER_DIR="tasks-server/$MODE"
@@ -33,7 +33,7 @@ fi
 
 cd "$SERVER_DIR"
 
-"$START_DIR"/persevere/bin/persvr -p "$PORT" --base-uri /tasks-server > "$OUT_FILE" 2> "$ERR_FILE" &
+"$TASKS_DIR"/persevere/bin/persvr -p "$PORT" --base-uri /tasks-server > "$OUT_FILE" 2> "$ERR_FILE" &
 
 if [ "$?" -eq 0 ]; then
   echo "OK"
@@ -49,4 +49,4 @@ if [ -f "$ERR_FILE" ]; then
   rm "$ERR_FILE"
 fi
 
-cd "$START_DIR"
+cd "$TASKS_DIR"
