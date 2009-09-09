@@ -11,7 +11,7 @@ CoreTasks.USER_ROLE_DEVELOPER = '_Developer'; // default
 CoreTasks.USER_ROLE_TESTER = '_Tester';
 
 // Loading:
-CoreTasks.USER_UNDER_LOADED = 1;
+CoreTasks.USER_NOT_OR_UNDER_LOADED = 1;
 CoreTasks.USER_PROPERLY_LOADED = 2;
 CoreTasks.USER_OVER_LOADED = 3;
 

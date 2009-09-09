@@ -88,8 +88,18 @@
 
 
 /*-----------------------------------------------------------------
- * Task description styles
+ * Task item/description styles
  */
+
+.task-item {
+  left: 22px !important;
+  right: 5px !important;
+}
+
+.task-item .sc-outline {
+  left: 0px !important;
+  right: 30px !important;
+}
 
 .task-description {
   position:absolute;
@@ -111,16 +121,6 @@
   background: static_url('images/has_description.png');
 }
 
-.task-item {
-  left: 22px !important;
-  right: 5px !important;
-}
-
-.task-item .sc-outline {
-  left: 0px !important;
-  right: 30px !important;
-}
-
 
 /*-----------------------------------------------------------------
  * Task selection styles
@@ -140,21 +140,21 @@
  * Assignee loading styles
  */
  
-.assignee-under-loaded label {
+.assignee-not-or-under-loaded label {
  color: white !important;
- background: #060 none repeat scroll 0 0 !important;
+ background: #555 none repeat scroll 0 0 !important;
  padding-left: 10px;
 }
 
 .assignee-properly-loaded label {
  color: white !important;
- background: #444 none repeat scroll 0 0 !important;
+ background: #55F none repeat scroll 0 0 !important;
  padding-left: 10px;
 }
 
 .assignee-over-loaded label {
   color: white !important;
-  background: #F33 none repeat scroll 0 0 !important;
+  background: #F55 none repeat scroll 0 0 !important;
   padding-left: 10px;
 }
 
