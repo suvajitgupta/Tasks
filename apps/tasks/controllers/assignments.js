@@ -149,10 +149,14 @@ Tasks.assignmentsController = SC.ArrayController.create(
         totalEffortMax = parseFloat((totalEffortMax + effortMax).toFixed(2));
       }
     }
-    
-    var isOverloaded = false;
+  
+    var loading = CoreTasks.USER_PROPERLY_LOADED;
     if(totalEffortMin !== 0) {
-      if(projectTimeLeft && totalEffortMin > projectTimeLeft) isOverloaded = true;
+      if(projectTimeLeft) { // flag user loading
+        var overloading = totalEffortMin - projectTimeLeft;
+        if(overloading <= -2) loading = CoreTasks.USER_UNDER_LOADED;
+        else if(overloading >= 2) loading = CoreTasks.USER_OVER_LOADED;
+      }
       var totalEffort = '' + totalEffortMin;
       if (totalEffortMax !== totalEffortMin) {
         totalEffort += '-' + totalEffortMax;
@@ -162,7 +166,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     
     assignmentNodes.push (SC.Object.create({
       displayName: displayName,
-      isOverloaded: isOverloaded,
+      loading: loading,
       assignee: assigneeObj.assignee,
       treeItemChildren: tasks,
       treeItemIsExpanded: YES

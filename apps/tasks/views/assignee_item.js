@@ -18,8 +18,10 @@ Tasks.AssigneeItemView = SC.ListItemView.extend(
     sc_super();
     var content = this.get('content');
     if(content) {
-      if(content.get('isOverloaded')) context.addClass('overloaded-assignee');
-      else context.addClass('normal-assignee');
+      var loading = content.get('loading');
+      if(loading === CoreTasks.USER_UNDER_LOADED) context.addClass('assignee-under-loaded');
+      else if(loading === CoreTasks.USER_PROPERLY_LOADED) context.addClass('assignee-properly-loaded');
+      else if(loading === CoreTasks.USER_OVER_LOADED) context.addClass('assignee-over-loaded');
     }
   }
   

@@ -139,14 +139,20 @@
 /*-----------------------------------------------------------------
  * Assignee loading styles
  */
-
-.normal-assignee label {
-  color: white !important;
-  background: #555 none repeat scroll 0 0 !important;
-  padding-left: 10px;
+ 
+.assignee-under-loaded label {
+ color: white !important;
+ background: #060 none repeat scroll 0 0 !important;
+ padding-left: 10px;
 }
 
-.overloaded-assignee label {
+.assignee-properly-loaded label {
+ color: white !important;
+ background: #444 none repeat scroll 0 0 !important;
+ padding-left: 10px;
+}
+
+.assignee-over-loaded label {
   color: white !important;
   background: #F33 none repeat scroll 0 0 !important;
   padding-left: 10px;
