@@ -36,13 +36,10 @@ Tasks.loginPage = SC.Page.create({
         layout: { top: 18, left: 215, right: 15, height: 20 },
         valueBinding: 'Tasks.loginController.loginName',
         keyDown: function(evt) {
-          
-          if('return' === SC.FUNCTION_KEYS[evt.which]){
-            var parentView = this.get('parentView');
-            parentView.loginButton.triggerAction(evt);
+          if(SC.FUNCTION_KEYS[evt.which] === 'return'){
+            this.get('parentView').loginButton.triggerAction(evt);
           }
           return sc_super();
-          
         }        
       }),
       
