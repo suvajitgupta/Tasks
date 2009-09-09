@@ -26,17 +26,17 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     if (clsNames.length > 0 && clsNames[0] === 'task-editor') {
       var layer = this.get('layer');
       this._editorPane = SC.PickerPane.create({
-        layout: { width: 400, height: 250 },
+        layout: { width: 500, height: 250 },
         contentView: SC.View.design({
           layout: { left: 0, right: 0, top: 0, bottom: 0},
           childViews: [
           
             SC.LabelView.design({
-              layout: { top: 12, left: 10, height: 17, width: 80 },
+              layout: { top: 10, left: 10, height: 17, width: 80 },
               value: "_Submitter:".loc()
             }),
             SC.SelectFieldView.design({
-              layout: { top: 10, left: 85, width: 120, height: 22 },
+              layout: { top: 10, left: 80, width: 150, height: 22 },
               objectsBinding: SC.Binding.transform(function(value, binding) {
                  return value.toArray();
               }).from('Tasks.usersController.content'),
@@ -45,12 +45,16 @@ Tasks.TaskItemView = SC.ListItemView.extend(
             }),
 
             SC.LabelView.design({
-              layout: { top: 12, right: 80, height: 17, width: 80 },
+              layout: { top: 10, right: 145, height: 17, width: 80 },
               value: "_Assignee:".loc()
             }),
-            SC.TextFieldView.design({
-              layout: { top: 10, right: 15, width: 80, height: 20 },
-              valueBinding: SC.binding('.content.assignee.loginName',this)
+            SC.SelectFieldView.design({
+              layout: { top: 10, right: 10, width: 150, height: 20 },
+              objectsBinding: SC.Binding.transform(function(value, binding) {
+                 return value.toArray();
+              }).from('Tasks.usersController.content'),
+              nameKey: 'displayName',
+              valueBinding: SC.binding('.content.assignee',this)
             }),
 
             SC.LabelView.design({
@@ -58,7 +62,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
               value: "_Description:".loc()
             }),
             SC.TextFieldView.design({
-              layout: { top: 64, left: 10, right: 10, bottom: 10 },
+              layout: { top: 65, left: 10, right: 10, bottom: 10 },
               isTextArea: YES,
               valueBinding: SC.binding('.content.description', this)
             })

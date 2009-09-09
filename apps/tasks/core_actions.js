@@ -51,18 +51,12 @@ Tasks.mixin({
   _userLoadSuccess: function(storeKeys) {
     console.log('All users loaded.');
     
-    // ..........................................................
-    // Loading all users into the usersController. [JH2,SG]
-    // 
+    // Load all users into the usersController
     var store = CoreTasks.get('store');
     var users = store.recordArrayFromStoreKeys(storeKeys, CoreTasks.User, store);
-    // Set the contnent of the users controller.
     this.get('usersController').set('content', users);
     
-    // ..........................................................
-    // Original Implementation.
-    // 
-    
+    // Save user login session information
     var user = CoreTasks.getUser(this.loginName);
     if (user) { // existing user
       CoreTasks.set('user', user);
