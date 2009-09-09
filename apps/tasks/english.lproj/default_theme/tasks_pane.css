@@ -113,6 +113,7 @@
 
 .task-item {
   left: 22px !important;
+  right: 5px !important;
 }
 
 .task-item .sc-outline {
