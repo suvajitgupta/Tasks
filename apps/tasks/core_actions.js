@@ -48,9 +48,21 @@ Tasks.mixin({
    * Now we can "authenticate" the user by searching for a matching loginName attribute in the list
    * of users in the store.
    */
-  _userLoadSuccess: function() {
+  _userLoadSuccess: function(storeKeys) {
     console.log('All users loaded.');
-
+    
+    // ..........................................................
+    // Loading all users into the usersController. [JH2,SG]
+    // 
+    var store = CoreTasks.get('store');
+    var users = store.recordArrayFromStoreKeys(storeKeys, CoreTasks.User, store);
+    // Set the contnent of the users controller.
+    this.get('usersController').set('content', users);
+    
+    // ..........................................................
+    // Original Implementation.
+    // 
+    
     var user = CoreTasks.getUser(this.loginName);
     if (user) { // existing user
       CoreTasks.set('user', user);

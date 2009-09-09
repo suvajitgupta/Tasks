@@ -22,12 +22,11 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     If mouse was down over Description Icon open the editor.
   */  
   mouseDown: function(evt) {
-    debugger;
     var clsNames = evt.target.className.split(' ');
     if (clsNames.length > 0 && clsNames[0] === 'task-editor') {
       var layer = this.get('layer');
       this._editorPane = SC.PickerPane.create({
-        layout: { width: 500, height: 250 },
+        layout: { width: 400, height: 250 },
         contentView: SC.View.design({
           layout: { left: 0, right: 0, top: 0, bottom: 0},
           childViews: [
@@ -36,9 +35,13 @@ Tasks.TaskItemView = SC.ListItemView.extend(
               layout: { top: 12, left: 10, height: 17, width: 80 },
               value: "_Submitter:".loc()
             }),
-            SC.TextFieldView.design({
-              layout: { top: 10, left: 85, width: 80, height: 20 },
-              valueBinding: 'Tasks.editorController.submitter'
+            SC.SelectFieldView.design({
+              layout: { top: 10, left: 85, width: 120, height: 22 },
+              objectsBinding: SC.Binding.transform(function(value, binding) {
+                 return value.toArray();
+              }).from('Tasks.usersController.content'),
+              nameKey: 'displayName',
+              valueBinding: SC.binding('.content.submitter',this)
             }),
 
             SC.LabelView.design({
@@ -47,7 +50,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
             }),
             SC.TextFieldView.design({
               layout: { top: 10, right: 15, width: 80, height: 20 },
-              valueBinding: 'Tasks.editorController.assignee'
+              valueBinding: SC.binding('.content.assignee.loginName',this)
             }),
 
             SC.LabelView.design({
