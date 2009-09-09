@@ -22,8 +22,9 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     If mouse was down over Description Icon open the editor.
   */  
   mouseDown: function(evt) {
+    debugger;
     var clsNames = evt.target.className.split(' ');
-    if (clsNames.length > 0 && clsNames[0] === 'description-editor') {
+    if (clsNames.length > 0 && clsNames[0] === 'task-editor') {
       var layer = this.get('layer');
       this._editorPane = SC.PickerPane.create({
         layout: { width: 500, height: 250 },
@@ -37,7 +38,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
             }),
             SC.TextFieldView.design({
               layout: { top: 10, left: 85, width: 80, height: 20 },
-              valueBinding: SC.binding('.content.type', this)
+              valueBinding: 'Tasks.editorController.submitter'
             }),
 
             SC.LabelView.design({
@@ -121,9 +122,9 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       context = context.begin('div').addClass('sc-view').addClass('task-description');
       context = context.begin('img').attr({
         src: SC.BLANK_IMAGE_URL,
-        title: "_DescriptionTooltip".loc(),
-        alt: "_DescriptionTooltip".loc()
-      }).addClass('description-editor');
+        title: "_EditorTooltip".loc(),
+        alt: "_EditorTooltip".loc()
+      }).addClass('task-editor');
       if (hasDescription) {
         context.addClass('task-has-description-icon-16');
       }else{
