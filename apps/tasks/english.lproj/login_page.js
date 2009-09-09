@@ -16,19 +16,24 @@ Tasks.loginPage = SC.Page.create({
   
   panel: SC.PanelPane.create({
     
-    layout: { centerX: 0, centerY: 0, height: 90, width: 320 },
+    layout: { centerX: 0, centerY: 0, height: 100, width: 430 },
     
     contentView: SC.View.design({
       layout: { left: 0, right: 0, top: 0, bottom: 0},
-      childViews: 'loginPrompt loginEntry loginButton cancelButton'.w(),
+      childViews: 'tasksLogo loginPrompt loginEntry loginButton cancelButton'.w(),
       
+      tasksLogo: SC.LabelView.design({
+        layout: { top: 10,  left: 10, height: 26, width: 89 },
+        classNames: ['tasks-logo']
+      }),
+    
       loginPrompt: SC.LabelView.design({
-        layout: { top: 10, left: 10, width: 75, height: 24 },
+        layout: { top: 18, left: 130, width: 75, height: 24 },
         value: "_LoginName:".loc()
       }),
       
       loginEntry: SC.TextFieldView.design({
-        layout: { top: 10, left: 95, right: 15, height: 20 },
+        layout: { top: 18, left: 215, right: 15, height: 20 },
         valueBinding: 'Tasks.loginController.loginName',
         keyDown: function(evt) {
           
