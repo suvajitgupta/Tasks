@@ -111,8 +111,12 @@
   background: static_url('images/has_description.png');
 }
 
+.task-item {
+  left: 20px !important;
+}
+
 .task-item .sc-outline {
-  left: 15px !important;
+  left: 0px !important;
   right: 30px !important;
 }
 
