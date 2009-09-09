@@ -150,11 +150,12 @@ Tasks.assignmentsController = SC.ArrayController.create(
       }
     }
   
-    var loading = CoreTasks.USER_NOT_OR_UNDER_LOADED;
+    var loading = CoreTasks.USER_NOT_LOADED;
     if(totalEffortMin !== 0) {
       if(projectTimeLeft) { // flag user loading
         var effortGap = totalEffortMin - projectTimeLeft;
-        if(effortGap >= -2 && effortGap <= 2) loading = CoreTasks.USER_PROPERLY_LOADED;
+        if(effortGap < -2) loading = CoreTasks.USER_UNDER_LOADED;
+        else if(effortGap >= -2 && effortGap <= 2) loading = CoreTasks.USER_PROPERLY_LOADED;
         else if(effortGap > 2) loading = CoreTasks.USER_OVER_LOADED;
       }
       var totalEffort = '' + totalEffortMin;

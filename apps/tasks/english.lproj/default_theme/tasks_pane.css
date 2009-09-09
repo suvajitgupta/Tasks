@@ -140,10 +140,16 @@
  * Assignee loading styles
  */
  
-.assignee-not-or-under-loaded label {
- color: white !important;
- background: #555 none repeat scroll 0 0 !important;
- padding-left: 10px;
+.assignee-not-loaded label {
+  color: white !important;
+  background: #060 none repeat scroll 0 0 !important;
+  padding-left: 10px;
+}
+
+.assignee-under-loaded label {
+  color: white !important;
+  background: #555 none repeat scroll 0 0 !important;
+  padding-left: 10px;
 }
 
 .assignee-properly-loaded label {
