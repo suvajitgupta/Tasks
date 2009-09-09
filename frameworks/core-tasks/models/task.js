@@ -108,11 +108,29 @@ CoreTasks.Task = CoreTasks.Record.extend({
    * The user who creates the task.
    */
   submitter: SC.Record.attr('CoreTasks.User'),
+  
+  submitterID: function(key,value){
+    if (value) {
+      this.submitter = CoreTasks.User.find(CoreTasks.store,value);
+      return  this.getPath('submitter.id');
+    }else{
+      return this.getPath('submitter.id');
+    }
+  }.property('submitter').cacheable(),
 
   /**
   * The user who is assigned to complete the task.
    */
   assignee: SC.Record.attr('CoreTasks.User'),
+  
+  assigneeID: function(key,value){
+    if (value) {
+      this.assignee = CoreTasks.User.find(CoreTasks.store,value);
+      return  this.getPath('assignee.id');
+    }else{
+      return this.getPath('assignee.id');
+    }
+  }.property('assignee').cacheable(),
 
   /**
    * The path to the icon associated with a task.

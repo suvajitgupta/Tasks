@@ -26,7 +26,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     if (clsNames.length > 0 && clsNames[0] === 'task-editor') {
       var layer = this.get('layer');
       this._editorPane = SC.PickerPane.create({
-        layout: { width: 500, height: 250 },
+        layout: { width: 500, height: 150 },
         contentView: SC.View.design({
           layout: { left: 0, right: 0, top: 0, bottom: 0},
           childViews: [
@@ -41,7 +41,8 @@ Tasks.TaskItemView = SC.ListItemView.extend(
                  return value.toArray();
               }).from('Tasks.usersController.content'),
               nameKey: 'displayName',
-              valueBinding: SC.binding('.content.submitter',this)
+              valueKey: 'id',
+              valueBinding: SC.binding('.content.submitterID',this)
             }),
 
             SC.LabelView.design({
@@ -54,7 +55,8 @@ Tasks.TaskItemView = SC.ListItemView.extend(
                  return value.toArray();
               }).from('Tasks.usersController.content'),
               nameKey: 'displayName',
-              valueBinding: SC.binding('.content.assignee',this)
+              valueKey: 'id',
+              valueBinding: SC.binding('.content.assigneeID',this)
             }),
 
             SC.LabelView.design({
