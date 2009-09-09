@@ -128,7 +128,7 @@ Tasks.mainPage = SC.Page.design({
               value:  "_Settings".loc(),
               toolTip: "_SettingsTooltip".loc(),
               target: 'Tasks',
-              action: 'openSettings'
+              action: 'settings'
             }),
 
             SC.LabelView.design(Tasks.SimpleButton,{
@@ -137,7 +137,7 @@ Tasks.mainPage = SC.Page.design({
               value:  "_Settings".loc(),
               toolTip: "_SettingsTooltip".loc(),
               target: 'Tasks',
-              action: 'launchSettings'
+              action: 'settings'
             })
           ]
         }),
@@ -151,7 +151,7 @@ Tasks.mainPage = SC.Page.design({
               title:  "_Help".loc(),
               toolTip: "_HelpTooltip".loc(),
               target: 'Tasks',
-              action: 'showHelp'
+              action: 'help'
             }),
 
             SC.LabelView.design(Tasks.SimpleButton,{
@@ -160,7 +160,7 @@ Tasks.mainPage = SC.Page.design({
               value:  "_Help".loc(),
               toolTip: "_HelpTooltip".loc(),
               target: 'Tasks',
-              action: 'showHelp'
+              action: 'help'
             })
           ]
         }),

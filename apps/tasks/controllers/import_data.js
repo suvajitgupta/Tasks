@@ -1,5 +1,5 @@
 // ==========================================================================
-// Tasks.ImportDataController
+// Tasks.importDataController
 // ==========================================================================
 /*globals CoreTasks Tasks sc_require */
 

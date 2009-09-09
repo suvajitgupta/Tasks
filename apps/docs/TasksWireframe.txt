@@ -317,22 +317,17 @@
         <text>edit</text>
       </controlProperties>
     </control>
-    <control controlID="60" controlTypeID="com.balsamiq.mockups::Tooltip" x="480" y="407" w="138" h="54" measuredW="138" measuredH="43" zOrder="60" locked="false" isInGroup="-1">
+    <control controlID="60" controlTypeID="com.balsamiq.mockups::Tooltip" x="480" y="407" w="138" h="54" measuredW="138" measuredH="54" zOrder="60" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Submitter%20hover%0Aover%20tooltip</text>
       </controlProperties>
     </control>
-    <control controlID="62" controlTypeID="com.balsamiq.mockups::ComboBox" x="931" y="406" w="-1" h="-1" measuredW="63" measuredH="25" zOrder="61" locked="false" isInGroup="-1">
-      <controlProperties>
-        <text>Type</text>
-      </controlProperties>
-    </control>
-    <control controlID="63" controlTypeID="com.balsamiq.mockups::ComboBox" x="1029" y="406" w="-1" h="-1" measuredW="93" measuredH="25" zOrder="62" locked="false" isInGroup="-1">
+    <control controlID="62" controlTypeID="com.balsamiq.mockups::ComboBox" x="933" y="406" w="-1" h="-1" measuredW="93" measuredH="25" zOrder="61" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Submitter</text>
       </controlProperties>
     </control>
-    <control controlID="64" controlTypeID="com.balsamiq.mockups::ComboBox" x="1162" y="406" w="-1" h="-1" measuredW="86" measuredH="25" zOrder="63" locked="false" isInGroup="-1">
+    <control controlID="63" controlTypeID="com.balsamiq.mockups::ComboBox" x="1162" y="406" w="-1" h="-1" measuredW="86" measuredH="25" zOrder="62" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Assignee</text>
       </controlProperties>

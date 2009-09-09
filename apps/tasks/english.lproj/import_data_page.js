@@ -17,7 +17,7 @@ Tasks.importDataPage = SC.Page.create({
   
   panel: SC.PanelPane.create({
     
-    layout: { centerX: 0, centerY: -60, height: 450, width: 750 },
+    layout: { centerX: 0, centerY: 0, height: 450, width: 750 },
     
     contentView: SC.View.design({
       layout: { left: 0, right: 0, top: 0, bottom: 0},

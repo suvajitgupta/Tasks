@@ -1,5 +1,5 @@
 // ==========================================================================
-// Tasks.ExportDataController
+// Tasks.exportDataController
 // ==========================================================================
 /*globals CoreTasks Tasks sc_require */
 

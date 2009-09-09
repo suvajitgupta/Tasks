@@ -268,22 +268,12 @@ Tasks.mixin({
    /**
     * Launch task editor dialog.
     */
-   openSettings: function() {
-     // TODO: [SG] implement open settings
-     this._notImplemented('openSettings');
-   },
+  settings: function() {
+   Tasks.settingsController.openPanel();
+  },
 
-   /**
-    * Exit task editor dialog.
-    */
-   closeSettings: function() {
-     // TODO: [SG] implement close settins
-     this._notImplemented('closeSettings');
-   },
-
-  showHelp: function() {
-    // TODO: [SG] implement online help
-    this._notImplemented('showHelp');
+  help: function() {
+    Tasks.helpController.openPanel();
   },
   
   /**
