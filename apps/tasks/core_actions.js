@@ -433,6 +433,7 @@ Tasks.mixin({
    * Delete selected task in tasks detail list.
    */
   deleteTask: function() {
+    
     var tc = this.get('tasksController');
     var sel = tc.get('selection');
     if (sel && sel.length() > 0) {

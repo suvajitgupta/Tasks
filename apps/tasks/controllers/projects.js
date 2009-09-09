@@ -14,7 +14,6 @@ Tasks.projectsController = SC.ArrayController.create(
   
   isDeletable: function() {
     var sel = this.get('selection');
-    // TODO
     if(!sel) return false;
     var selectedProject = sel.firstObject();
     if(!selectedProject) return false;
