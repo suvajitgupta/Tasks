@@ -80,7 +80,7 @@ v Allow "Add Task" button to be pressed a second time to keep in data entry mode
 - Indicate overloaded assignees (with more effort total than timeLeft in project) by highlighting in red [SG] <MB> @Done $Feature %Passed
 ^ Allow drag-n-drop task reordering [BB] <SG> $Feature
 ^ Allow multi-task drag-n-drop reassignment [BB] <SG>  @Done $Feature %Passed
-^ Add popup viewer/editor for Task Submitter, Assignee, and Description [SG] <JH2> @Active $Feature
+^ Add popup viewer/editor for Task Submitter, Assignee, and Description [SG] <JH2> @Done %Passed $Feature
 - Fix bindings problem with flashing text area for long description entry [JH2] <SG> @Active $Bug
 - Fix task pop editor location problem where it is getting cropped at the window boundary [JH2] <SG> $Bug
 - Fix lag in responsiveness for Tasks Description entry (bindings issue) [SG] <JH2> $Bug
