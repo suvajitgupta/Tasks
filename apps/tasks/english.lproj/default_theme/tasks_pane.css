@@ -142,25 +142,25 @@
  
 .assignee-not-loaded label {
   color: white !important;
-  background: #060 none repeat scroll 0 0 !important;
+  background: #262 none repeat scroll 0 0 !important;
   padding-left: 10px;
 }
 
 .assignee-under-loaded label {
   color: white !important;
-  background: #555 none repeat scroll 0 0 !important;
+  background: #333 none repeat scroll 0 0 !important;
   padding-left: 10px;
 }
 
 .assignee-properly-loaded label {
  color: white !important;
- background: #55F none repeat scroll 0 0 !important;
+ background: #44F none repeat scroll 0 0 !important;
  padding-left: 10px;
 }
 
 .assignee-over-loaded label {
   color: white !important;
-  background: #F55 none repeat scroll 0 0 !important;
+  background: #F33 none repeat scroll 0 0 !important;
   padding-left: 10px;
 }
 

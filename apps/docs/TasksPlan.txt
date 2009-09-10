@@ -98,7 +98,7 @@ User Manager GUI
 - Add support for "Teams" (a user can belong to a team, a team can have a lead) [SG] <SE> $Feature
 
 Application Manager GUI
-- Add welcome message showing logged in user [SG] <MB> @Done $Feature %Passed
+- Add welcome message showing logged in user with hover over tooltip showing time of login [SG] <MB> @Done $Feature %Passed
 - Add status bar at the bottom summarizing stats about Tasks data [SG] <MB> @Done $Feature %Passed
 - Add "Save" button in top toolbar, note time of last save in status bar [SG] <BB> @Done $Feature %Passed
 v Enable/disable Save button based on data modification [SG] <SE> $Feature
