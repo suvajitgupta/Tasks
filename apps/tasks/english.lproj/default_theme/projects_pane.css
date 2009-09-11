@@ -6,16 +6,8 @@
   
 */
 
-.projects-pane {
-  background: static_url('images/default-theme-repeat-y.png') repeat-y 0 0; 
-}
-
-.projects-pane-inner {
-  background: static_url('images/default-theme-repeat-y.png') repeat-y 0 0;
-} 
-
 .sc-collection-view.projects-pane-inner {
-  background: #e1e7f0;
+  background: static_url('images/default-theme-projects-pane-repeat-y.png') repeat-y 0 0;
   border: 0 !important;
 }
 
@@ -24,7 +16,7 @@
 }
 
 .projects-pane-inner .sc-collection-item.has-icon.sel {
-  background: static_url('images/default-theme-task-sel.png') no-repeat 0 0 !important;
+  background: static_url('images/default-theme-project-sel.png') no-repeat 0 0 !important;
   font-weight: bold;
   color: #fff;
 }

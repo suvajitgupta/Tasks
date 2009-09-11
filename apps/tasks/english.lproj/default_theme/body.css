@@ -9,7 +9,6 @@
 #mainPane {
   min-width: 1024px;
   mid-height: 768px;
-  background: #888; 
 }
 
 .sc-theme .sc-view {
@@ -19,7 +18,3 @@
 .sc-theme .sc-gray-border {
   border: 0 !important;
 }
-
-.workspace {
-}
-

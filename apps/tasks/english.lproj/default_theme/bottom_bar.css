@@ -12,8 +12,7 @@
  */
 
 .control-bar {
-  background: #CCC;
-  // background: static_url('images/default-theme-repeat-x.png') repeat-x 0 -106px; 
+  background: static_url('images/default-theme-control-bar-bg.png') repeat-x 0 0; 
 }
 
 .control-bar-button {
@@ -30,9 +29,8 @@
 
 .task-attribute-set-title  {
   font-size: 11px !important;
-  color: #333 !important;
+  color: #222 !important;
   text-align: center !important;
-  // font-weight: bold !important;
 }
 
 .task-attribute-set-grouping {

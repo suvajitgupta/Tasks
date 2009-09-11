@@ -19,7 +19,7 @@ Tasks.mainPage = SC.Page.design({
   mainPane: SC.MainPane.design({
     
     layerId: 'mainPane',
-    childViews: 'titleBarView toolbarView workspaceView controlBarView statusBarView'.w(),
+    childViews: 'titleBarView toolbarView masterDetailView controlBarView statusBarView'.w(),
     
     titleBarView: SC.View.design(SC.Border, {
       layout: { top: 0, left: 0, right: 0, height: 43 },
@@ -276,13 +276,12 @@ Tasks.mainPage = SC.Page.design({
       ]
     }),
 
-    workspaceView: SC.View.design({
-      layout: { top: 86, bottom: 71, left: 0, right: 0 },
-      classNames: ['workspace'],
-      childViews: ['projectsListView', 'tasksListView'],
+    masterDetailView: SC.View.design({
+      layout: { top: 86, bottom: 69, left: 0, right: 0 },
+      childViews: ['projectsMasterView', 'tasksDetailView'],
       
-      projectsListView: SC.ScrollView.design({
-        layout: { top: 2, bottom: 0, left: 0, width: 268 },
+      projectsMasterView: SC.ScrollView.design({
+        layout: { top: 0, bottom: 0, left: 0, width: 238 },
         hasHorizontalScroller: NO,
         classNames: ['projects-pane'],
 
@@ -305,8 +304,8 @@ Tasks.mainPage = SC.Page.design({
         })
       }),
       
-      tasksListView: SC.ScrollView.design({
-        layout: { top: 2, bottom: 0, left: 270, right: 0 },
+      tasksDetailView: SC.ScrollView.design({
+        layout: { top: 0, bottom: 0, left: 238, right: 0 },
         hasHorizontalScroller: NO,
         classNames: ['tasks-pane'],
 
@@ -334,8 +333,8 @@ Tasks.mainPage = SC.Page.design({
         
     }),
 
-    projectsList: SC.outlet('workspaceView.projectsListView.childViews.0.contentView'),
-    tasksList: SC.outlet('workspaceView.tasksListView.childViews.0.contentView'),
+    projectsList: SC.outlet('masterDetailView.projectsMasterView.childViews.0.contentView'),
+    tasksList: SC.outlet('masterDetailView.tasksDetailView.childViews.0.contentView'),
     
     controlBarView: SC.View.design({
       layout: { left: 0, right: 0, bottom: 18, height: 51 },
@@ -343,7 +342,7 @@ Tasks.mainPage = SC.Page.design({
       childViews: [
       
       SC.LabelView.design({
-        layout: { top: 1, height: 18, left: 10, width: 235 },
+        layout: { top: 5, height: 18, left: 10, width: 235 },
         classNames: ['task-attribute-set-title'],
         value: "_Type".loc()
       }),
@@ -364,7 +363,7 @@ Tasks.mainPage = SC.Page.design({
           { title: '<span class=task-type-bug>' + CoreTasks.TASK_TYPE_BUG.loc() + '</span>&nbsp;',
             value: CoreTasks.TASK_TYPE_BUG, icon: 'task-icon-bug' },
           { title: '<span class=task-type-bug>' + CoreTasks.TASK_TYPE_OTHER.loc() + '</span>&nbsp;',
-            value: CoreTasks.TASK_TYPE_OTHER, icon: 'sc-icon-options-16' }
+            value: CoreTasks.TASK_TYPE_OTHER, icon: 'task-icon-other' }
         ],
         itemTitleKey: 'title',
         itemValueKey: 'value',
@@ -375,7 +374,7 @@ Tasks.mainPage = SC.Page.design({
       }),
 
       SC.LabelView.design({
-        layout: { top: 1, height: 18, left: 282, width: 180 },
+        layout: { top: 5, height: 18, left: 282, width: 180 },
         classNames: ['task-attribute-set-title'],
         value: "_Priority".loc()
       }),
@@ -406,7 +405,7 @@ Tasks.mainPage = SC.Page.design({
       }),
 
       SC.LabelView.design({
-        layout: { top: 1, height: 18, left: 490, width: 240 },
+        layout: { top: 5, height: 18, left: 490, width: 240 },
         classNames: ['task-attribute-set-title'],
         value: "_Status".loc()
       }),
@@ -439,7 +438,7 @@ Tasks.mainPage = SC.Page.design({
       }),
 
       SC.LabelView.design({
-        layout: { top: 1, height: 18, left: 770, width: 220 },
+        layout: { top: 5, height: 18, left: 770, width: 220 },
         classNames: ['task-attribute-set-title'],
         value: "_Validation".loc()
       }),

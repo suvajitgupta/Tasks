@@ -10,13 +10,9 @@
 /*-----------------------------------------------------------------
  * Task pane styles
  */
-
-.tasks-pane-inner {
-  background: #fafafa !important;
-}
-
-.tasks-pane-inner .sc-collection-item.sc-group-item.sel {
-  background: none !important;
+ 
+.sc-collection-view.sc-list-view.sc-source-list.tasks-pane-inner {
+  background: #e2e4e7 !important;
 }
 
 
@@ -25,7 +21,7 @@
  */
  
 .assignee-item {
-  background: #fafafa;
+  background: #e2e4e7;
   left: 0px !important;
   right: 0px !important;
 }
@@ -33,25 +29,41 @@
 .assignee-not-loaded label {
   color: white !important;
   background: #262 none repeat scroll 0 0 !important;
-  padding-left: 10px;
+  padding-left: 5px;
 }
 
 .assignee-under-loaded label {
   color: white !important;
   background: #333 none repeat scroll 0 0 !important;
-  padding-left: 10px;
+  padding-left: 5px;
 }
 
 .assignee-properly-loaded label {
  color: white !important;
  background: #44F none repeat scroll 0 0 !important;
- padding-left: 10px;
+ padding-left: 5px;
 }
 
 .assignee-over-loaded label {
   color: white !important;
   background: #F33 none repeat scroll 0 0 !important;
-  padding-left: 10px;
+  padding-left: 5px;
+}
+
+
+/*-----------------------------------------------------------------
+ * Task item styles
+ */
+
+.task-item {
+  background: #e2e4e7;
+  left: 23px !important;
+  right: 5px !important;
+}
+
+.task-item .sc-outline {
+  left: 0px !important;
+  right: 20px !important;
 }
 
 
@@ -60,17 +72,22 @@
  */
 
 .task-icon-feature {
-  background: static_url('images/feature.gif');
   height: 16px;
   width: 16px;
+  background: static_url('images/feature.gif') no-repeat 0 0;
 }
 
 .task-icon-bug {
-  background: static_url('images/bug.gif');
   height: 16px;
   width: 16px;
+  background: static_url('images/bug.gif') no-repeat 0 0;
 }
 
+.task-icon-other {
+  width: 16px;
+	height: 16px;
+	background: no-repeat sc_static('icons/shared') -0px -464px;
+}
 
 /*-----------------------------------------------------------------
  * Task priority styles
@@ -118,44 +135,33 @@
  */
 
 .task-validation-untested label {
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 2px;
+  padding-right: 2px;
 }
 
 .task-validation-passed label {
+  padding-left: 2px;
+  padding-right: 2px;
   background: #9F9 none repeat scroll 0 0 !important;
-  padding-left: 5px;
-  padding-right: 5px;
 }
 
 .task-validation-failed label {
+  padding-left: 2px;
+  padding-right: 2px;
   background: #FCF none repeat scroll 0 0 !important;
-  padding-left: 5px;
-  padding-right: 5px;
 }
 
 
 /*-----------------------------------------------------------------
- * Task item/description styles
+ * Task description styles
  */
 
-.task-item {
-  background: #fafafa;
-  left: 22px !important;
-  right: 5px !important;
-}
-
-.task-item .sc-outline {
-  left: 0px !important;
-  right: 30px !important;
-}
-
 .task-description {
-  position:absolute;
-  top: 5px;
-  right: 10px;
+  position: absolute;
+  top: 3px;
+  right: 3px;
   width: 16px;
-  padding-left: 20px;
+  padding-left: 15px;
 }
 
 .task-no-description-icon-16 {
@@ -176,11 +182,11 @@
  */
 
 .sc-theme.focus .sc-list-view.sc-source-list .sc-collection-item.sel {
+	border: 2px solid #333;
   background: #e2e4e7;
-	border-style: none;
+	//border-style: none;
 }
 
 .sc-theme.focus .sc-list-view.sc-source-list .sc-collection-item.sel label {
-	border: 2px solid #333;
-	margin-top: -10px;
+	// margin-top: -10px;
 }

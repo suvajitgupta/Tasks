@@ -142,7 +142,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
       case CoreTasks.TASK_TYPE_BUG:
         return 'task-icon-bug';
       case CoreTasks.TASK_TYPE_OTHER:
-        return 'sc-icon-options-16';
+        return 'task-icon-other';
     }
   }.property('type').cacheable(),
 
