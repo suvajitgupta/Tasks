@@ -126,7 +126,7 @@
 }
 
 .assignee-selection-bar {
-  background: static_url('images/default-theme-user-filter-bg.png') no-repeat;
+  background: static_url('images/default-theme-assignee-selection-bg.png') no-repeat;
 }
 
 .assignee-selection-bar span {
@@ -151,7 +151,7 @@
 }
 
 .tasks-search-bar {
-  background: static_url('images/default-theme-search-bg.png') no-repeat;
+  background: static_url('images/default-theme-search-filter-bg.png') no-repeat;
 }
 
 .tasks-search-bar span {
