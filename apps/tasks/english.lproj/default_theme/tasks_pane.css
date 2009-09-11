@@ -182,11 +182,6 @@
  */
 
 .sc-theme.focus .sc-list-view.sc-source-list .sc-collection-item.sel {
-	border: 2px solid #333;
+	border: 2px solid #444;
   background: #e2e4e7;
-	//border-style: none;
-}
-
-.sc-theme.focus .sc-list-view.sc-source-list .sc-collection-item.sel label {
-	// margin-top: -10px;
 }

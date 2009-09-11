@@ -14,7 +14,7 @@ window.pane = pane ;
 // ..........................................................
 // Summary View Tests
 // 
-module("Tasks.TaskView tests", pane.standardSetup());
+module("Tasks.TaskItemView tests", pane.standardSetup());
 //ok(view.$('div').hasClass(''), 'has correct class');
 
 

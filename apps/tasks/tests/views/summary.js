@@ -7,6 +7,8 @@
  * @author Suvajit Gupta
  */
 
+// TODO: [SG] update unit test - view has changed
+
 var pane = SC.ControlTestPane.design()
   .add("none", Tasks.SummaryView, {
     value: 0

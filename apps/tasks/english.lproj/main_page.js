@@ -192,7 +192,7 @@ Tasks.mainPage = SC.Page.design({
     }),
     
     toolbarView: SC.View.design({
-      layout: { left: 0, right: 0, top: 45, height: 34 },
+      layout: { left: 0, right: 0, top: 43, height: 36 },
       classNames: ['toolbar'],
       childViews: [
         
@@ -277,7 +277,7 @@ Tasks.mainPage = SC.Page.design({
     }),
 
     masterDetailView: SC.View.design({
-      layout: { top: 81, bottom: 73, left: 0, right: 0 },
+      layout: { top: 80, bottom: 71, left: 0, right: 0 },
       childViews: ['projectsMasterView', 'tasksDetailView'],
       
       projectsMasterView: SC.ScrollView.design({
@@ -337,7 +337,7 @@ Tasks.mainPage = SC.Page.design({
     tasksList: SC.outlet('masterDetailView.tasksDetailView.childViews.0.contentView'),
     
     controlBarView: SC.View.design({
-      layout: { left: 0, right: 0, bottom: 20, height: 51 },
+      layout: { left: 0, right: 0, bottom: 19, height: 51 },
       classNames: ['control-bar'],
       childViews: [
       
@@ -348,7 +348,7 @@ Tasks.mainPage = SC.Page.design({
       }),
   
       SC.SeparatorView.design({
-        layout: { centerY: -2, height: 4, left: 15, width: 240 },
+        layout: { centerY: -2, height: 4, left: 15, width: 245 },
         layoutDirection: SC.LAYOUT_HORIZONTAL,
         classNames: ['task-attribute-set-grouping']
       }),
@@ -380,7 +380,7 @@ Tasks.mainPage = SC.Page.design({
       }),
     
       SC.SeparatorView.design({
-        layout: { centerY: -2, height: 4, left: 287, width: 175 },
+        layout: { centerY: -2, height: 4, left: 287, width: 180 },
         layoutDirection: SC.LAYOUT_HORIZONTAL,
         classNames: ['task-attribute-set-grouping']
       }),
@@ -411,7 +411,7 @@ Tasks.mainPage = SC.Page.design({
       }),
     
       SC.SeparatorView.design({
-        layout: { centerY: -2, height: 4, left: 495, width: 245 },
+        layout: { centerY: -2, height: 4, left: 495, width: 250 },
         layoutDirection: SC.LAYOUT_HORIZONTAL,
         classNames: ['task-attribute-set-grouping']
       }),
@@ -474,7 +474,7 @@ Tasks.mainPage = SC.Page.design({
     statusBarView: SC.View.design(SC.Border, {
       layout: { bottom: 0, height: 18, left: 0, right: 0 },
       classNames: ['status-bar'],
-      childViews: ['summaryView', 'saveMessageView'],
+      childViews: ['summaryView', 'serverMessageView'],
       borderStyle: SC.BORDER_TOP,
         
       summaryView: Tasks.SummaryView.design({
@@ -484,7 +484,7 @@ Tasks.mainPage = SC.Page.design({
         tasksCountBinding: SC.Binding.oneWay('Tasks.assignmentsController.length')
       }),
 
-      saveMessageView: SC.LabelView.design({
+      serverMessageView: SC.LabelView.design({
         layout: { centerY: 0, height: 16, width: 400, right: 10 },
         classNames: ['status-bar-label'],
         textAlign: SC.ALIGN_RIGHT,
@@ -493,7 +493,7 @@ Tasks.mainPage = SC.Page.design({
       
     }),
     
-    saveMessage: SC.outlet('statusBarView.saveMessageView')
+    serverMessage: SC.outlet('statusBarView.serverMessageView')
     
   })
 });
