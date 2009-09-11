@@ -9,6 +9,7 @@
 #mainPane {
   min-width: 1024px;
   mid-height: 768px;
+  background: #666;
 }
 
 .sc-theme .sc-view {

@@ -7,7 +7,7 @@
 */
 
 .sc-collection-view.projects-pane-inner {
-  background: static_url('images/default-theme-projects-pane-repeat-y.png') repeat-y 0 0;
+  background: static_url('images/default-theme-projects-pane-bg.png') repeat-y 0 0;
   border: 0 !important;
 }
 
@@ -16,7 +16,7 @@
 }
 
 .projects-pane-inner .sc-collection-item.has-icon.sel {
-  background: static_url('images/default-theme-project-sel.png') no-repeat 0 0 !important;
+  background: static_url('images/default-theme-selected-project.png') no-repeat 0 0 !important;
   font-weight: bold;
   color: #fff;
 }

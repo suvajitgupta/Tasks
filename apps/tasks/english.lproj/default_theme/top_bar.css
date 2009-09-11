@@ -6,24 +6,23 @@
   
 */
 
-.top-bar-label {
+/*-----------------------------------------------------------------
+ * Title bar styles/icons
+ */
+
+.title-bar {
+  background: static_url('images/default-theme-bar-bg.png') repeat-x 0 0;
+}
+
+.title-bar-label {
   font-size: 9px !important;
   color: #eee !important;
   text-align: center !important;
   font-weight: bold !important;
 }
 
-.top-bar-divider {
+.title-bar-divider {
   background: static_url('images/default-theme-static.png') no-repeat 0 -606px;
-}
-
-
-/*-----------------------------------------------------------------
- * Title bar styles/icons
- */
-
-.title-bar {
-  background: static_url('images/default-theme-repeat-x.png') repeat-x 0 0;
 }
 
 .tasks-logo {
@@ -72,9 +71,16 @@
  * Toolbar styles/icons
  */
 
- .toolbar {
-   background: static_url('images/default-theme-toolbar-bg.png') repeat-x 0 0;
- }
+.toolbar {
+  background: static_url('images/default-theme-toolbar-bg.png') repeat-x 0 0; 
+}
+
+.toolbar-label {
+  font-size: 10px !important;
+  color: #222 !important;
+  text-align: center !important;
+  font-weight: bold !important;
+}
 
 .project-add-icon {
   width: 21px !important;

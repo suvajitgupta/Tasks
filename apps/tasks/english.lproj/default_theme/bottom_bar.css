@@ -12,29 +12,23 @@
  */
 
 .control-bar {
-  background: static_url('images/default-theme-control-bar-bg.png') repeat-x 0 0; 
+  background: static_url('images/default-theme-toolbar-bg.png') repeat-x 0 0; 
 }
 
-.control-bar-button {
-  font-size: 9px !important;
-  color: #000 !important;
-  text-align: left !important;
+.task-attribute-set-title  {
+  font-size: 10px !important;
+  color: #222 !important;
+  text-align: center !important;
   font-weight: bold !important;
+}
+
+.task-attribute-set-grouping {
+  background-color: #777 !important;
 }
 
 .task-attribute-set {
   font-size: 9px !important;
   line-height: 2;
-}
-
-.task-attribute-set-title  {
-  font-size: 11px !important;
-  color: #222 !important;
-  text-align: center !important;
-}
-
-.task-attribute-set-grouping {
-  background-color: #777 !important;
 }
 
 
@@ -43,7 +37,7 @@
  */
 
 .status-bar {
-  background: static_url('images/default-theme-repeat-x.png') repeat-x 0 -44px;
+  background: static_url('images/default-theme-bar-bg.png') repeat-x 0 -44px;
 }
 
 .status-bar-label {
