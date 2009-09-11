@@ -154,10 +154,11 @@ Tasks.assignmentsController = SC.ArrayController.create(
     if(totalEffortMin !== 0) {
       if(projectTimeLeft) { // flag user loading
         var totalEffortAve = (totalEffortMin + totalEffortMax)/2;
-        var effortGapPercent = 100*(totalEffortAve - projectTimeLeft)/projectTimeLeft;
-        if(effortGapPercent < -15) loading = CoreTasks.USER_UNDER_LOADED;
-        else if(effortGapPercent >= -15 && effortGapPercent <= 15) loading = CoreTasks.USER_PROPERLY_LOADED;
-        else if(effortGapPercent > 15) loading = CoreTasks.USER_OVER_LOADED;
+        var effortGap = totalEffortAve - projectTimeLeft;
+        var effortGapPercent = 100*effortGap/projectTimeLeft;
+        if(effortGap < 1 && effortGapPercent < -15) loading = CoreTasks.USER_UNDER_LOADED;
+        else if(effortGap > 1 && effortGapPercent > 15) loading = CoreTasks.USER_OVER_LOADED;
+        else loading = CoreTasks.USER_PROPERLY_LOADED;
       }
       var totalEffort = '' + totalEffortMin;
       if (totalEffortMax !== totalEffortMin) {
