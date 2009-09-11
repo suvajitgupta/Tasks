@@ -18,6 +18,7 @@ Tasks.AssigneeItemView = SC.ListItemView.extend(
     sc_super();
     var content = this.get('content');
     if(content) {
+      context.addClass('assignee-item');
       var loading = content.get('loading');
       if(loading === CoreTasks.USER_NOT_LOADED) context.addClass('assignee-not-loaded');
       else if(loading === CoreTasks.USER_UNDER_LOADED) context.addClass('assignee-under-loaded');

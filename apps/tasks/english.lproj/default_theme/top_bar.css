@@ -6,14 +6,6 @@
   
 */
 
-/*-----------------------------------------------------------------
- * Top bar styles
- */
-
-.top-bar {
-  background: static_url('images/default-theme-repeat-x.png') repeat-x 0 0;
-}
-
 .top-bar-label {
   font-size: 9px !important;
   color: #eee !important;
@@ -23,6 +15,15 @@
 
 .top-bar-divider {
   background: static_url('images/default-theme-static.png') no-repeat 0 -606px;
+}
+
+
+/*-----------------------------------------------------------------
+ * Title bar styles/icons
+ */
+
+.title-bar {
+  background: static_url('images/default-theme-repeat-x.png') repeat-x 0 0;
 }
 
 .tasks-logo {
@@ -42,10 +43,87 @@
   color: white !important;
 }
 
+.save-icon {
+  background: static_url('images/default-theme-static.png') no-repeat 0 -50px;
+}
+
+.import-icon {
+  background: static_url('images/default-theme-static.png') no-repeat 0 0;
+}
+
+.export-icon {
+  background: static_url('images/default-theme-static.png') no-repeat 0 -25px;
+}
+
+.settings-icon {
+  background: static_url('images/default-theme-static.png') no-repeat 0 -74px;
+}
+
+.help-icon {
+  background: static_url('images/default-theme-static.png') no-repeat 0 -98px;
+}
+
+.logout-icon {
+  background: static_url('images/default-theme-static.png') no-repeat 0 -121px;
+}
+
 
 /*-----------------------------------------------------------------
- * Toolbar styles
+ * Toolbar styles/icons
  */
+
+ .toolbar {
+   background: static_url('images/toolbar-bg.png') repeat-x 0 0;
+ }
+
+.project-add-icon {
+  width: 21px !important;
+  height: 19px !important;
+  margin-top: 3px !important;
+  margin-right: 2px !important;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -526px;
+}
+
+.project-del-icon {
+  width: 21px !important;
+  height: 19px !important;
+  margin-top: 3px !important;
+  margin-right: 2px !important;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -547px;
+}
+
+.project-del-icon.dis {
+  width: 21px !important;
+  height: 19px !important;
+  margin-top: 3px !important;
+  margin-right: 2px !important;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -586px;
+}
+
+.task-add-icon {
+  width: 21px !important;
+  height: 21px !important;
+  margin-top: 3px !important;
+  margin-right: 2px !important;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -442px;
+}
+
+.task-del-icon {
+  width: 21px !important;
+  height: 21px !important;
+  margin-top: 3px !important;
+  margin-right: 2px !important;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -464px;
+}
+
+.task-del-icon.dis
+{
+  width: 21px !important;
+  height: 21px !important;
+  margin-top: 3px !important;
+  margin-right: 2px !important;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -565px;
+}
 
 .assignee-selection-bar {
   background: static_url('images/default-theme-user-filter-bg.png') no-repeat;
@@ -100,57 +178,4 @@
   background: static_url('images/default-theme-static.png') no-repeat 0 -650px !important;
   z-index: 101 !important;
   cursor: pointer;
-}
-
-
-/*-----------------------------------------------------------------
- * Icons
- */
-
-.project-add-icon {
-  width: 21px !important;
-  height: 19px !important;
-  margin-top: 3px !important;
-  margin-right: 2px !important;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -526px;
-}
-
-.project-del-icon {
-  width: 21px !important;
-  height: 19px !important;
-  margin-top: 3px !important;
-  margin-right: 2px !important;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -547px;
-}
-
-.project-del-icon.dis {
-  width: 21px !important;
-  height: 19px !important;
-  margin-top: 3px !important;
-  margin-right: 2px !important;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -586px;
-}
-
-.save-icon {
-  background: static_url('images/default-theme-static.png') no-repeat 0 -50px;
-}
-
-.import-icon {
-  background: static_url('images/default-theme-static.png') no-repeat 0 0;
-}
-
-.export-icon {
-  background: static_url('images/default-theme-static.png') no-repeat 0 -25px;
-}
-
-.settings-icon {
-  background: static_url('images/default-theme-static.png') no-repeat 0 -74px;
-}
-
-.help-icon {
-  background: static_url('images/default-theme-static.png') no-repeat 0 -98px;
-}
-
-.logout-icon {
-  background: static_url('images/default-theme-static.png') no-repeat 0 -121px;
 }

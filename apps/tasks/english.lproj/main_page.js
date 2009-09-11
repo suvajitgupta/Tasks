@@ -19,11 +19,11 @@ Tasks.mainPage = SC.Page.design({
   mainPane: SC.MainPane.design({
     
     layerId: 'mainPane',
-    childViews: 'dockBarView toolbarView workspaceView controlBarView statusBarView'.w(),
+    childViews: 'titleBarView toolbarView workspaceView controlBarView statusBarView'.w(),
     
-    dockBarView: SC.View.design(SC.Border, {
+    titleBarView: SC.View.design(SC.Border, {
       layout: { top: 0, left: 0, right: 0, height: 43 },
-      classNames: ['top-bar'],
+      classNames: ['title-bar'],
       childViews: [
       
         SC.LabelView.design({
@@ -192,8 +192,8 @@ Tasks.mainPage = SC.Page.design({
     }),
     
     toolbarView: SC.View.design({
-      layout: { left: 0, right: 0, top: 44, height: 43 },
-      classNames: ['top-bar'],
+      layout: { left: 0, right: 0, top: 43, height: 43 },
+      classNames: ['toolbar'],
       childViews: [
         
         SC.LabelView.design(Tasks.SimpleButton,{
@@ -277,22 +277,22 @@ Tasks.mainPage = SC.Page.design({
     }),
 
     workspaceView: SC.View.design({
-      layout: { top: 87, bottom: 19, left: 0, right: 0 },
+      layout: { top: 86, bottom: 71, left: 0, right: 0 },
       classNames: ['workspace'],
       childViews: ['projectsListView', 'tasksListView'],
       
       projectsListView: SC.ScrollView.design({
-        layout: { top: 0, bottom: 56, left: 0, width: 268 },
+        layout: { top: 2, bottom: 0, left: 0, width: 268 },
         hasHorizontalScroller: NO,
         classNames: ['projects-pane'],
 
         contentView: Tasks.ProjectsListView.design({
-          layout: { top: 5 },
+          layout: { top: 0, left:0, bottom: 0, right: 0 },
           contentValueKey: 'displayName',
           contentBinding: 'Tasks.projectsController.arrangedObjects',
           selectionBinding: 'Tasks.projectsController.selection',
           localize: YES,
-          rowHeight: 23,
+          rowHeight: 22,
           classNames: ['projects-pane-inner'],
           hasContentIcon: YES,
           contentIconKey:  'icon',
@@ -306,17 +306,17 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       tasksListView: SC.ScrollView.design({
-        layout: { top: 0, bottom: 56, left: 268 },
+        layout: { top: 2, bottom: 0, left: 270, right: 0 },
         hasHorizontalScroller: NO,
         classNames: ['tasks-pane'],
 
         contentView: SC.SourceListView.design({
-          layout: { top: 0, bottom: 0, left: 0, right: 2 },
+          layout: { top: 0, bottom: 0, left: 0, right: 0 },
           contentValueKey: 'displayName',
           contentBinding: 'Tasks.tasksController.arrangedObjects',
           selectionBinding: 'Tasks.tasksController.selection',
           localize: YES,
-          rowHeight: 24,
+          rowHeight: 22,
           classNames: ['tasks-pane-inner'],
           hasContentIcon: YES,
           contentIconKey: 'icon',
@@ -338,12 +338,12 @@ Tasks.mainPage = SC.Page.design({
     tasksList: SC.outlet('workspaceView.tasksListView.childViews.0.contentView'),
     
     controlBarView: SC.View.design({
-      layout: { left: 0, right: 0, bottom: 19, height: 55 },
+      layout: { left: 0, right: 0, bottom: 18, height: 51 },
       classNames: ['control-bar'],
       childViews: [
       
       SC.LabelView.design({
-        layout: { top: 6, height: 18, left: 10, width: 235 },
+        layout: { top: 1, height: 18, left: 10, width: 235 },
         classNames: ['task-attribute-set-title'],
         value: "_Type".loc()
       }),
@@ -355,7 +355,7 @@ Tasks.mainPage = SC.Page.design({
       }),
 
       SC.RadioView.design({
-        layout: { bottom: 2, height: 24, left: 20, width: 260 },
+        layout: { bottom: 0, height: 24, left: 20, width: 260 },
         escapeHTML: NO,
         classNames: ['task-attribute-set'],
         items: [
@@ -375,7 +375,7 @@ Tasks.mainPage = SC.Page.design({
       }),
 
       SC.LabelView.design({
-        layout: { top: 6, height: 18, left: 282, width: 180 },
+        layout: { top: 1, height: 18, left: 282, width: 180 },
         classNames: ['task-attribute-set-title'],
         value: "_Priority".loc()
       }),
@@ -387,7 +387,7 @@ Tasks.mainPage = SC.Page.design({
       }),
 
       SC.RadioView.design({
-        layout: { bottom: 2, height: 24, left: 292, width: 200 },
+        layout: { bottom: 0, height: 24, left: 292, width: 200 },
         escapeHTML: NO,
         classNames: ['task-attribute-set'],
         items: [
@@ -406,7 +406,7 @@ Tasks.mainPage = SC.Page.design({
       }),
 
       SC.LabelView.design({
-        layout: { top: 6, height: 18, left: 490, width: 240 },
+        layout: { top: 1, height: 18, left: 490, width: 240 },
         classNames: ['task-attribute-set-title'],
         value: "_Status".loc()
       }),
@@ -418,7 +418,7 @@ Tasks.mainPage = SC.Page.design({
       }),
 
       SC.RadioView.design({
-        layout: { bottom: 2, height: 24, left: 500, width: 270 },
+        layout: { bottom: 0, height: 24, left: 500, width: 270 },
         escapeHTML: NO,
         classNames: ['task-attribute-set'],
         items: [
@@ -439,7 +439,7 @@ Tasks.mainPage = SC.Page.design({
       }),
 
       SC.LabelView.design({
-        layout: { top: 6, height: 18, left: 770, width: 220 },
+        layout: { top: 1, height: 18, left: 770, width: 220 },
         classNames: ['task-attribute-set-title'],
         value: "_Validation".loc()
       }),
@@ -451,7 +451,7 @@ Tasks.mainPage = SC.Page.design({
       }),
 
       SC.RadioView.design({
-        layout: { bottom: 2, height: 24, left: 780, width: 250 },
+        layout: { bottom: 0, height: 24, left: 780, width: 250 },
         escapeHTML: NO,
         classNames: ['task-attribute-set'],
         items: [
