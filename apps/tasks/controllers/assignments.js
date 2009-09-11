@@ -134,8 +134,9 @@ Tasks.assignmentsController = SC.ArrayController.create(
       // Extract/total effort for each incomplete taek (simple number or a range)
       if(task.get('status') === CoreTasks.TASK_STATUS_DONE) continue;
       effortString = task.get('effort');
-      if(!effortString) taskWithUnspecifiedEffort = true;
-      if(effortString && task.get('priority') !== CoreTasks.TASK_PRIORITY_LOW) {
+      var priority = task.get('priority');
+      if(!effortString && priority !== CoreTasks.TASK_PRIORITY_LOW) taskWithUnspecifiedEffort = true;
+      if(effortString && priority !== CoreTasks.TASK_PRIORITY_LOW) {
         // sum up effort for High/Medium priority tasks
         effortMin = parseFloat(parseFloat(effortString, 10).toFixed(2));
         var idx = effortString.indexOf('-'); // see if effort is a range
