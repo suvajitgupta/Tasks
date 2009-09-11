@@ -73,7 +73,7 @@
  */
 
  .toolbar {
-   background: static_url('images/toolbar-bg.png') repeat-x 0 0;
+   background: static_url('images/default-theme-toolbar-bg.png') repeat-x 0 0;
  }
 
 .project-add-icon {
