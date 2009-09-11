@@ -38,7 +38,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         Tasks.WelcomeView.design({
-          layout: { centerY: 0, height: 20, left: 250, width: 250 },
+          layout: { centerY: 0, height: 20, left: 215, width: 250 },
           classNames: ['welcome-label'],
           valueBinding: SC.Binding.oneWay('CoreTasks.user')
         }),
@@ -197,7 +197,7 @@ Tasks.mainPage = SC.Page.design({
       childViews: [
         
         SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerY: 0, left: 5, height: 24, width: 90 },
+          layout: { centerY: 0, left: 15, height: 24, width: 90 },
           icon: 'project-add-icon',
           value: "_AddProject".loc(),
           classNames: ['top-bar-label'],
@@ -207,7 +207,7 @@ Tasks.mainPage = SC.Page.design({
         }),
       
         SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerY: 0, left: 100, height: 24, width: 100 },
+          layout: { centerY: 0, left: 110, height: 24, width: 100 },
           icon: 'project-del-icon',
           value: "_DelProject".loc(),
           classNames: ['top-bar-label'],
@@ -218,7 +218,7 @@ Tasks.mainPage = SC.Page.design({
         }),
         
         SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerY: 0, left: 280, height: 24, width: 90 },
+          layout: { centerY: 0, left: 250, height: 24, width: 90 },
           icon: 'task-add-icon',
           value: "_AddTask".loc(),
           classNames: ['top-bar-label'],
@@ -229,7 +229,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerY: 0, left: 370, height: 24, width: 90 },
+          layout: { centerY: 0, left: 340, height: 24, width: 90 },
           icon: 'task-del-icon',
           value: "_DelTask".loc(),
           classNames: ['top-bar-label'],
