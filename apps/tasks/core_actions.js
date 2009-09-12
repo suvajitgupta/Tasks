@@ -179,17 +179,17 @@ Tasks.mixin({
       }
     }
 
-    // Create the Inbox project with the unallocated tasks.
-    var inboxProject = CoreTasks.createRecord(CoreTasks.Project, {
+    // Create the UnallocatedTasks project with the unallocated tasks.
+    var unallocatedTasksProject = CoreTasks.createRecord(CoreTasks.Project, {
       id: 0,
-      name: CoreTasks.INBOX_NAME
+      name: CoreTasks.UNALLOCATED_TASKS_NAME
     });
 
-    inboxProject.set('tasks', unallocated);
-    CoreTasks.set('inbox', inboxProject);
+    unallocatedTasksProject.set('tasks', unallocated);
+    CoreTasks.set('unallocatedTasks', unallocatedTasksProject);
 
-    // Add AllTasks and Inbox projects to the top of the list of projects
-    projects.unshiftObject(inboxProject);
+    // Add AllTasks and UnallocatedTasks projects to the top of the list of projects
+    projects.unshiftObject(unallocatedTasksProject);
     projects.unshiftObject(allTasksProject);
 
     // Set the contnent of the projects controller.
@@ -230,15 +230,14 @@ Tasks.mixin({
   saveData: function() {
     var store = CoreTasks.get('store');
 
-    // Remove the store keys of the Inbox and AllTasks projects from the changelog so that they're not
+    // Remove the store keys of the AllTasks & UnallocatedTasks projects from the changelog so that they're not
     // persisted to the server.
-    var inboxKey = CoreTasks.getPath('inbox.storeKey');
     var allTasksKey = CoreTasks.getPath('allTasks.storeKey');
+    var unallocatedTasksKey = CoreTasks.getPath('unallocatedTasks.storeKey');
     var cl = store.changelog;
-
     if (cl) {
-      if (cl.contains(inboxKey)) cl.remove(inboxKey);
       if (cl.contains(allTasksKey)) cl.remove(allTasksKey);
+      if (cl.contains(unallocatedTasksKey)) cl.remove(unallocatedTasksKey);
     }
 
     // Now commit all dirty records to the database.
@@ -342,11 +341,11 @@ Tasks.mixin({
         if(!confirm("This project has tasks, are you sure you want to delete it?")) return;
       }
 
-      // Move all tasks in project to Inbox since they are now unallocated
-      var inboxProject = CoreTasks.get('inbox');
+      // Move all tasks in project to UnallocatedTasks project since they are now orphaned
+      var unallocatedTasksProject = CoreTasks.get('unallocatedTasks');
       for (var i = 0; i < taskCount; i++) {
         var task = projectTasks.objectAt(i);
-        inboxProject.addTask(task);
+        unallocatedTasksProject.addTask(task);
       }
 
       // Remove the project from the list and destroy.

@@ -41,7 +41,7 @@ Tasks.exportDataController = SC.ObjectController.create(
       if (rec.get('name') === CoreTasks.ALL_TASKS_NAME) return;
       var tasks = rec.get('tasks');
       var len = tasks.get('length');
-      if(rec.get('name') !== CoreTasks.INBOX_NAME) {
+      if(rec.get('name') !== CoreTasks.UNALLOCATED_TASKS_NAME) {
         data += rec.get('displayName') + '\n';
       }
       for (var i = 0; i < len; i++) {

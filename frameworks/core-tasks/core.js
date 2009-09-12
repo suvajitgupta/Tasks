@@ -33,18 +33,18 @@ CoreTasks = SC.Object.create({
   loginTime: null,
 
   /**
-   * A special 'inbox' project where all unallocated tasks are grouped.
-   *
-   * This project exists outside of the store because we don't want it to be persisted.
-   */
-  inbox: null,
-
-  /**
    * A special 'allTasks' project where all tasks for all projects are grouped.
    *
    * This project exists outside of the store because we don't want it to be persisted.
    */
   allTasks: null,
+
+  /**
+   * A special 'unallocatedTasks' project where all unallocated tasks are grouped.
+   *
+   * This project exists outside of the store because we don't want it to be persisted.
+   */
+  unallocatedTasks: null,
 
   /**
    * Creates a new record in the store.

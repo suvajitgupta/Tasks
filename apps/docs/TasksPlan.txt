@@ -51,8 +51,8 @@ v Add summary in projects toolbar showing number of projects & number of tasks f
 v Set projects toolbar button enablement based on having a selection [SG] <EO> @Done $Feature %Passed
 v Don't enable Add/Del. Tasks when on "All Tasks" project [SG] <BB> @Done %Passed $Feature
 - Select first project at startup [SG] <JH2> @Done $Feature %Passed
-^ Add virtual Inbox & AllTasks to group all unallocated & all tasks respectively [SG] <SE> @Done $Feature %Passed
-- Disallow Inbox/AllTasks projects from being deleted [SG] <EO> @Done $Feature %Passed
+^ Add virtual "All Tasks" & "Unallocated Tasks" projects to group all & unallocated tasks respectively [SG] <SE> @Done
+- Disallow "All Tasks" & "Unallocated Tasks" projects from being deleted [SG] <EO> @Done $Feature %Passed
 ^ Add drag-n-drop project reordering [BB] <SG> @Active $Feature
 ^ Allow multi-task drag-n-drop Task reallocation to Projects [BB] <SG> @Done $Feature %Passed
 v Add context menu to Delete a project [SG] <JH2> $Feature

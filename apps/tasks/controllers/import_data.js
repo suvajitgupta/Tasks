@@ -46,7 +46,7 @@ Tasks.importDataController = SC.ObjectController.create(
       this.projectTaskMappings = {};
       var lines = data.split('\n');
       var store = CoreTasks.get('store');
-      var currentProject = CoreTasks.get('inbox');
+      var currentProject = CoreTasks.get('unallocatedTasks');
 
       for (var i = 0; i < lines.length; i++) {
 

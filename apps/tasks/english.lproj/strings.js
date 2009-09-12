@@ -43,7 +43,7 @@ SC.stringsFor('English', {
   '_DelProjectTooltip': "Delete selected project",
   '_NewProject': "New Project",
   '_AllTasks': "All Tasks",
-  '_Inbox': "Inbox",
+  '_UnallocatedTasks': "Unallocated Tasks",
   '_Tasks': " task(s)",
   
   // Task strings
