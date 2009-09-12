@@ -24,8 +24,6 @@ General Infrastructure
 - SimpleButton shouldn't accept clicks when isEnabled is false [SG] <JH2> $Bug
 v On Firefox need to highlight entire item & show cursor when starting to do in-cell editing [SC] <SG> $Bug
 v On Firefox dragging window to make it smaller leaves TextField entry text in the same place - they don't move [SC] <SG> $Bug
-- SC.TextFieldView will follow your scroll and it seems that it's Z-Index is higher that everything else when it has focus [SC] <JH2> $Bug
-| When the cursor is inside and ready for editing you can scroll and the textField follows scroll and lays over top of all other objects
 v In Safari you can't click on assigneee selection filter and then the task filter [SC] <SG> $Bug
 v Add missing 'localize' support back in CollectionView (regression from SC 0.9) [SC] <SG> $Bug
 v Fix spurious box-like ghost view with task while dragging [SC] <SG> $Bug
@@ -102,7 +100,7 @@ User Manager GUI
 Application Manager GUI
 - Add welcome message showing logged in user with hover over tooltip showing time of login [SG] <MB> @Done $Feature %Passed
 - Add server data loading message in status bar during startup [SG] $Feature @Done %Passed
-- Add status bar at the bottom summarizing stats about Tasks data [SG] <MB> @Done $Feature %Passed
+- Summarize number of projects/assignees/tasks being displayed in the status bar [SG] <MB> @Done $Feature %Passed
 - Add "Save" button in top toolbar, note time of last save in status bar [SG] <BB> @Done $Feature %Passed
 v Beta: Enable/disable Save button based on data modification [SG] <SE> $Feature
 - Add Refresh button to get most recent data from server [SG] <SE> $Feature

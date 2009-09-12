@@ -16,27 +16,25 @@ Tasks.SummaryView = SC.View.extend(
 /** @scope Tasks.SummaryView.prototype */ {
   
   projectsCount: '',
-  tasksCount: '',
+  tasksTree: '',
 
-  displayProperties: ['projectsCount', 'tasksCount'],
+  displayProperties: ['projectsCount', 'tasksTree'],
   
   render: function(context, firstTime) {
 
-    var summary = "%@ projects, ".fmt(this.get('projectsCount')-2);
+    var summary = "_Displaying".loc() + (this.get('projectsCount')-2) + "_Projects".loc();
 
-    var taskCount = this.get('tasksCount');
-    switch(taskCount) {
-      case 0: 
-        summary += "_NoTasksProject".loc();
-        break;
-      case 1:
-        summary += "_OneTaskProject".loc();
-        break;
-      default:
-        summary += (taskCount + "_ManyTasksProject".loc());
-        break;
-    }
+    var taskTree = this.get('tasksTree');
+    var assignmentNodes = this.tasksTree.get('treeItemChildren');
+    var assigneesCount = assignmentNodes.get('length');
+    summary += assigneesCount + "_Assignees".loc();
     
+    var tasksCount = 0;
+    for(var i=0; i < assigneesCount; i++) {
+      tasksCount += assignmentNodes.objectAt(i).get('treeItemChildren').get('length');
+    }
+    summary += tasksCount + "_Tasks".loc();
+        
     // display value
     context.push(summary);
     

@@ -92,9 +92,10 @@ SC.stringsFor('English', {
   '_Close': "Close",
   
   // Status bar strings
-  '_NoTasksProject': "no tasks in selected project.",
-  '_OneTaskProject': "1 task in selected project.",
-  '_ManyTasksProject': " tasks in selected project.",
+  '_Displaying': "Displaying ",
+  '_Projects': " project(s), ",
+  '_Assignees': " assignee(s), and ",
+  '_Tasks': " task(s).",
   '_Loading': "Loading...",
   '_UsersLoaded': "users, ",
   '_TasksLoaded': "tasks, ",

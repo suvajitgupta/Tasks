@@ -482,7 +482,7 @@ Tasks.mainPage = SC.Page.design({
         layout: { centerY: 0, height: 16, left: 5, right: 500 },
         classNames: ['status-bar-label'],
         projectsCountBinding: SC.Binding.oneWay('Tasks.projectsController.length'),
-        tasksCountBinding: SC.Binding.oneWay('Tasks.assignmentsController.length')
+        tasksTreeBinding: SC.Binding.oneWay('Tasks.tasksController.content')
       }),
 
       serverMessageView: SC.LabelView.design({
