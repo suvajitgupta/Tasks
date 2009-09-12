@@ -81,6 +81,10 @@ SC.stringsFor('English', {
   '_SubmitterHover': "Submitter: ",
   '_Submitter:': "Submitter: ",
   '_Assignee:': "Assignee: ",
+  '_AssigneeNotLoaded': "Assignee not loaded",
+  '_AssigneeUnderLoaded': "Assignee under loaded",
+  '_AssigneeProperlyLoaded': "Assignee properly loaded",
+  '_AssigneeOverloaded': "Assignee overloaded",
   
   // Import/Export Panel strings
   '_Cancel': "Cancel",
