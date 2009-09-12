@@ -43,7 +43,7 @@ v Add summary in projects toolbar showing number of projects & number of tasks f
 v Set projects toolbar button enablement based on having a selection [SG] <EO> @Done $Feature %Passed
 v Don't enable Add/Del. Tasks when on "All Tasks" project [SG] <BB> @Done %Passed $Feature
 - Select first project at startup [SG] <JH2> @Done $Feature %Passed
-^ Add virtual "All Tasks" & "Unallocated Tasks" projects to group all & unallocated tasks respectively [SG] <SE> @Done
+^ Add virtual "All Tasks" & "Unallocated Tasks" projects and display them grayed out in projects list [SG] <SE> @Done
 - Disallow "All Tasks" & "Unallocated Tasks" projects from being deleted [SG] <EO> @Done $Feature %Passed
 ^ Beta: Add drag-n-drop project reordering [BB] <SG> @Active $Feature
 ^ Allow multi-task drag-n-drop Task reallocation to Projects [BB] <SG> @Done $Feature %Passed
@@ -68,7 +68,7 @@ v Set tasks toolbar button enablement based on having a selection [SG] <EO> @Don
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done $Feature %Passed
 ^ Add "Add Task" & "Del. Task" buttons in tasks toolbar [SG] <SE> @Done $Feature %Passed
 | Logged in user is default Submitter, Assignee is either set to the same as selected task (if one) or to logged in user
-- Beta: Fix task remaining in project after all tasks are deleted [BB] <SG> $Bug
+- Beta: Fix task remaining in project after all tasks are deleted [SG] <BB> $Bug
 - Beta: Fix task editing cell floating at top under special circumstances [JH2] <SG> $Bug
 | To reproduce, for Catch! project, login as RMG, cancel assignee selection, type "game" in search filter, then Add Task
 v Allow "Add Task" button to be pressed a second time to keep in data entry mode, Esc will exit mode [SG] <MB> $Feature
@@ -82,7 +82,7 @@ v Explain assignee loading color codes via hover over tooltips [SG] @Done $Featu
 ^ Add popup viewer/editor for Task Submitter, Assignee, and Description [JH2] <SG> @Done %Passed $Feature
 - Beta: Need a way to clear assignee/submitter in Task popup editor [JH2] <SG> @Active $Bug
 - Beta: Fix bindings problem with flashing text area for long description entry [JH2] <SG> @Active $Bug
-- Beta: Fix task pop editor location problem where it is getting cropped at the window boundary [JH2] <SG> $Bug
+- Fix task pop editor location problem where it is getting cropped at the window boundary [SC] <SG> $Bug
 - Fix lag in responsiveness for Tasks Description entry (bindings issue) [SG] <JH2> $Bug
 v Add context menu & hotkeys to Delete/Duplicate & Cut/Copy/Paste a task [SG] <JH2> $Feature
 

@@ -17,12 +17,16 @@
 
 .projects-pane-inner .sc-collection-item.has-icon.sel {
   background: static_url('images/default-theme-selected-project.png') no-repeat 0 0 !important;
-  font-weight: bold;
   color: #fff;
 }
 
-.project-item {
-  font-size: 12px !important;
+.reserved-project-item {
+	color: #555 !important;
+}
+
+.regular-project-item {
+	color: black !important;
+  font-weight: bold;
 }
 
 .project-icon-with-tasks {

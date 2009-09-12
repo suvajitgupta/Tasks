@@ -52,6 +52,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
    * A string summarizing key facets of the Project for display.
    */
   displayName: function(key, value) {
+    // TODO: [SG] don't allow editing of Unallocated/AllTasks project names
     if (value !== undefined) {
       
       var currentName = this.get('name');
