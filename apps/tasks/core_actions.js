@@ -30,6 +30,8 @@ Tasks.mixin({
         this.loginName = loginName;
 
         // Retrieve all users from the data source.
+        var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
+        serverMessage.set('value', "_Loading".loc());
         CoreTasks.get('store').findAll(CoreTasks.User, {
           successCallback: this._userLoadSuccess.bind(this),
           failureCallback: this._userLoadFailure.bind(this)
@@ -49,7 +51,9 @@ Tasks.mixin({
    * of users in the store.
    */
   _userLoadSuccess: function(storeKeys) {
-    console.log('All users loaded.');
+    
+    var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
+    serverMessage.set('value', serverMessage.get('value') + "_UsersLoaded".loc());
     
     // Load all users into the usersController
     var store = CoreTasks.get('store');
@@ -123,7 +127,9 @@ Tasks.mixin({
    * Called after all tasks have been loaded from the data source.
    */
   _taskLoadSuccess: function() {
-    console.log('All tasks loaded.');
+
+    var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
+    serverMessage.set('value', serverMessage.get('value') + "_TasksLoaded".loc());
 
     // Now load all of the projects.
     CoreTasks.get('store').findAll(CoreTasks.Project, {
@@ -136,7 +142,9 @@ Tasks.mixin({
    * Called after all projects have been loaded from the data source.
    */
   _projectLoadSuccess: function(storeKeys) {
-    console.log('All projects loaded.');
+
+    var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
+    serverMessage.set('value', serverMessage.get('value') + "_ProjectsLoaded".loc());
 
     var store = CoreTasks.get('store');
     var projects = store.recordArrayFromStoreKeys(storeKeys, CoreTasks.Project, store);

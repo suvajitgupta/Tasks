@@ -95,6 +95,11 @@ SC.stringsFor('English', {
   '_NoTasksProject': "no tasks in selected project.",
   '_OneTaskProject': "1 task in selected project.",
   '_ManyTasksProject': " tasks in selected project.",
+  '_Loading': "Loading...",
+  '_UsersLoaded': "users, ",
+  '_TasksLoaded': "tasks, ",
+  '_ProjectsLoaded': "projects.",
   '_SaveMessage': "Last saved "
+  
   
 });

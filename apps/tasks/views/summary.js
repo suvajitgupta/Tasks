@@ -11,6 +11,7 @@
   @author Suvajit Gupta
 */
 
+// TODO: [SG] show number of tasks actually rendered after assignee/task search filtering (if any)
 Tasks.SummaryView = SC.View.extend(
 /** @scope Tasks.SummaryView.prototype */ {
   
