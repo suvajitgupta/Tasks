@@ -101,6 +101,7 @@ User Manager GUI
 
 Application Manager GUI
 - Add welcome message showing logged in user with hover over tooltip showing time of login [SG] <MB> @Done $Feature %Passed
+- Add server data loading message in status bar during startup [SG] $Feature @Done %Passed
 - Add status bar at the bottom summarizing stats about Tasks data [SG] <MB> @Done $Feature %Passed
 - Add "Save" button in top toolbar, note time of last save in status bar [SG] <BB> @Done $Feature %Passed
 v Beta: Enable/disable Save button based on data modification [SG] <SE> $Feature
