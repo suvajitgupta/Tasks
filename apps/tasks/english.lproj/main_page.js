@@ -300,6 +300,7 @@ Tasks.mainPage = SC.Page.design({
           canReorderContent: true,
           canDeleteContent: true,
           destroyOnRemoval: YES,
+          exampleView: Tasks.ProjectItemView,
           delegate: Tasks.reallocationController
         })
       }),

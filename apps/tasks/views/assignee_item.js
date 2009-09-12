@@ -14,8 +14,12 @@
 Tasks.AssigneeItemView = SC.ListItemView.extend(
 /** @scope Tasks.AssigneeItemView.prototype */ {
   
+  // FIXME: [SG] remove this after CollectionView localization is added back
+  renderLabel: function(context, label) {
+    context.push('<label>', label? label.loc() : '', '</label>') ;
+  },
+  
   render: function(context, firstTime) {
-    sc_super();
     var content = this.get('content');
     if(content) {
       context.addClass('assignee-item');
@@ -25,6 +29,7 @@ Tasks.AssigneeItemView = SC.ListItemView.extend(
       else if(loading === CoreTasks.USER_PROPERLY_LOADED) context.addClass('assignee-properly-loaded');
       else if(loading === CoreTasks.USER_OVER_LOADED) context.addClass('assignee-over-loaded');
     }
+    sc_super();
   }
   
 });

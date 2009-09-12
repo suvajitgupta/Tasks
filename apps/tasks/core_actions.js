@@ -8,8 +8,8 @@
 /*globals CoreTasks Tasks sc_require */
 sc_require('core');
 
-// CHANGED: [SC] Shouldn't have to manually add/remove to/from controller instead of store notifying of changes.
-// CHANGED: [SC] Shouldn't have to call Store.commitRecords() after createRecord for Fixtures Data Source.
+// FIXME: [SC] Shouldn't have to manually add/remove to/from controller instead of store notifying of changes.
+// FIXME: [SC] Shouldn't have to call Store.commitRecords() after createRecord for Fixtures Data Source.
 
 Tasks.mixin({
   
@@ -419,7 +419,7 @@ Tasks.mixin({
     var listView = Tasks.getPath('mainPage.mainPane.tasksList');
     var tasksList = listView.get('content');
     var idx = tasksList.indexOf(task);
-    // CHANGED: [JH2] I added the to make the TaskList scroll to the newly added item. There is a bug with SC.TextFieldView that will cause the textfield to follow your scroll if the TextField has the cursor (focus).
+    // FIXME: [JH2] I added the to make the TaskList scroll to the newly added item. There is a bug with SC.TextFieldView that will cause the textfield to follow your scroll if the TextField has the cursor (focus).
     listView.scrollToContentIndex(idx);
     var itemView = listView.itemViewForContentIndex(idx);
     itemView.beginEditing();
