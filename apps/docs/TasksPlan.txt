@@ -20,7 +20,7 @@ General Infrastructure
 - Develop States/Actions corresponding to GUI Statecharts [SG] <SE> @Active
 - Support minimum resolution of 1024x768 [SG] @Done $Feature %Passed
 - Support decimal numbers for task effort and assignee effort totals [SG] @Done %Passed $Feature
-- Beta: Handle persistence consistently (nothing should save unless user hits Save) [SE] <SG>
+- Beta: Handle persistence consistently (nothing should save unless user hits Save) [SE] <SG> @Risky
 - SimpleButton shouldn't accept clicks when isEnabled is false [SG] <JH2> $Bug
 v On Firefox meed to highlight entire item & show cursor when starting to do in-cell editing [SC] <SG> $Bug
 - SC.TextFieldView will follow your scroll and it seems that it's Z-Index is higher that everything else when it has focus [SC] <JH2> $Bug
@@ -81,7 +81,7 @@ v Explain assignee loading color codes via hover over tooltips [SG] @Done $Featu
 ^ Beta: Allow drag-n-drop task reordering [BB] <SG> @Active $Feature
 ^ Allow multi-task drag-n-drop reassignment [BB] <SG>  @Done $Feature %Passed
 ^ Add popup viewer/editor for Task Submitter, Assignee, and Description [JH2] <SG> @Done %Passed $Feature
-- Beta: Fdata modiNeed a way to clear assignee/submitter in Task popup editor [SG] <JH2> @Active $Bug
+- Beta: Need a way to clear assignee/submitter in Task popup editor [SG] <JH2> @Active $Bug
 - Beta: Fix bindings problem with flashing text area for long description entry [JH2] <SG> @Active $Bug
 - Beta: Fix task pop editor location problem where it is getting cropped at the window boundary [JH2] <SG> $Bug
 - Fix lag in responsiveness for Tasks Description entry (bindings issue) [SG] <JH2> $Bug

@@ -354,7 +354,7 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
   },
 
   /**
-   * TODO: [SE] document how server response is normalized.
+   * TODO: [SE] document how server response is normalized
    */
   _normalizeResponse: function(hash) {
     // HACK: [SE] Browsers running in OS X get a string and not a hash, so we have to convert it.
@@ -375,7 +375,7 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
   },
 
   /**
-   * TODO: [SE] document how server reponse array is normalized.
+   * TODO: [SE] document how server reponse array is normalized
    */
   _normalizeResponseArray: function(hashes) {
     // HACK: [SE] Browsers running in OS X get a string and not a hash, and they don't like the

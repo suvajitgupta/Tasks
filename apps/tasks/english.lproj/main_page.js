@@ -260,7 +260,7 @@ Tasks.mainPage = SC.Page.design({
           layout: { centerY: 0, height: 24, right: 10, width: 200 },
           classNames: ['tasks-search-bar'],
           hint: "_TasksSearchHint".loc(),
-          valueBinding: 'Tasks.assignmentsController.searchFilter' // TODO: [SG] bind to searchController instead
+          valueBinding: 'Tasks.assignmentsController.searchFilter'
         }),
       
         SC.View.design({ // Tasks Search cancel button

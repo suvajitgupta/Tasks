@@ -418,7 +418,7 @@ Tasks.mixin({
     var listView = Tasks.getPath('mainPage.mainPane.tasksList');
     var tasksList = listView.get('content');
     var idx = tasksList.indexOf(task);
-    // FIXME: [JH2] I added the to make the TaskList scroll to the newly added item. There is a bug with SC.TextFieldView that will cause the textfield to follow your scroll if the TextField has the cursor (focus).
+    // FIXME: [SC] Added the to make the TaskList scroll to the newly added item. There is a bug with SC.TextFieldView that will cause the textfield to follow your scroll if the TextField has the cursor (focus).
     listView.scrollToContentIndex(idx);
     var itemView = listView.itemViewForContentIndex(idx);
     itemView.beginEditing();

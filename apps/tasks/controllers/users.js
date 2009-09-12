@@ -1,10 +1,11 @@
 //============================================================================
 // Tasks.usersController
 //============================================================================
+/*globals Tasks */
 
 /**
 
-  This is the Users Controller... //TODO [JH2,SG] More docs here
+  This is the Users Controller to track all users loaded into Tasks
   
   @extends SC.ArrayController
   @author Joshua Holt
