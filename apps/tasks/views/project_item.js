@@ -17,6 +17,21 @@ Tasks.ProjectItemView = SC.ListItemView.extend(
   // FIXME: [SG] remove this after CollectionView localization is added back
   renderLabel: function(context, label) {
     context.push('<label>', label? label.loc() : '', '</label>') ;
+  },
+
+  render: function(context, firstTime) {
+
+    var content = this.get('content');
+    if(content) {
+
+      context.addClass('project-item');
+
+      var tasksCountTooltip = content.get('tasks').get('length') + "_Tasks".loc();
+      context.attr('title', tasksCountTooltip);
+      context.attr('alt', tasksCountTooltip);
+
+    }
+    sc_super();
   }
   
 });

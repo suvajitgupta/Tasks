@@ -21,6 +21,10 @@
   color: #fff;
 }
 
+.project-item {
+	font-weight: bold !important;
+}
+
 .project-icon-with-tasks {
   width: 16px;
   height: 16px;
