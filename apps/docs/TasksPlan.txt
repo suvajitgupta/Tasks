@@ -22,7 +22,8 @@ General Infrastructure
 - Support decimal numbers for task effort and assignee effort totals [SG] @Done %Passed $Feature
 - Beta: Handle persistence consistently (nothing should save unless user hits Save) [SE] <SG> @Risky
 - SimpleButton shouldn't accept clicks when isEnabled is false [SG] <JH2> $Bug
-v On Firefox meed to highlight entire item & show cursor when starting to do in-cell editing [SC] <SG> $Bug
+v On Firefox need to highlight entire item & show cursor when starting to do in-cell editing [SC] <SG> $Bug
+v On Firefox dragging window to make it smaller leaves TextField entry text in the same place - they don't move [SC] <SG> $Bug
 - SC.TextFieldView will follow your scroll and it seems that it's Z-Index is higher that everything else when it has focus [SC] <JH2> $Bug
 | When the cursor is inside and ready for editing you can scroll and the textField follows scroll and lays over top of all other objects
 v In Safari you can't click on assigneee selection filter and then the task filter [SC] <SG> $Bug

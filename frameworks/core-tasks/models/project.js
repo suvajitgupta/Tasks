@@ -128,7 +128,7 @@ CoreTasks.Project.mixin(/** @scope CoreTasks.Project */ {
    */
   parse: function(line) {
     var projectName = line, projectTimeLeft = null;
-    var res = line.match(/([\w\s]+)\{(\d+\.\d+|\d+)\}/);
+    var res = line.match(/([^\{]+)\{(\d+\.\d+|\d+)\}/);
     if(res) {
       projectName = res[1];
       projectTimeLeft = res[2];
