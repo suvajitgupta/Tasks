@@ -294,7 +294,7 @@ Tasks.mainPage = SC.Page.design({
           rowHeight: 22,
           classNames: ['projects-pane-inner'],
           hasContentIcon: YES,
-          contentIconKey:  'icon',
+          contentIconKey: 'icon',
           isEditable: YES,
           canEditContent: true,
           canReorderContent: true,

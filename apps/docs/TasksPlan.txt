@@ -40,6 +40,7 @@ v Fix spurious box-like ghost view with task while dragging [SC] <SG> $Bug
 Project Manager GUI
 ^ Add Master/Detail Explorer view with click selection of Projects showing corresponding Tasks [JH2] <SG> @Done $Feature %Passed
 ^ Show Project name & time left in curly braces (if specified) [SG] <JH2> @Done $Feature %Passed
+^ Use icon to indicate if Project has any tasks or not [SG] @Done $Feature %Passed
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done $Feature %Passed
 ^ Add "Add Project" & "Del. Project" buttons in projects toolbar [SG] <SC> @Done $Feature %Passed
 - Add warning Alert box about deleting Project with Tasks [SG] @Done $Feature %Passed

@@ -63,7 +63,7 @@
 
 .task-item .sc-outline {
   left: 0px !important;
-  right: 20px !important;
+  right: 22px !important;
 }
 
 
@@ -161,19 +161,19 @@
   top: 3px;
   right: 3px;
   width: 16px;
-  padding-left: 15px;
+  padding-left: 20px;
 }
 
-.task-no-description-icon-16 {
-  width:16px;
-  height:16px;
-  background: static_url('images/no_description.png');
-}
-
-.task-has-description-icon-16 {
+.task-icon-with-description {
   width:16px;
   height:16px;
   background: static_url('images/has_description.png');
+}
+
+.task-icon-no-description {
+  width:16px;
+  height:16px;
+  background: static_url('images/no_description.png');
 }
 
 

@@ -21,8 +21,14 @@
   color: #fff;
 }
 
-.project-icon {
+.project-icon-with-tasks {
   width: 16px;
   height: 16px;
   background: static_url('images/default-theme-static.png') no-repeat 0 -486px;
+}
+
+.project-icon-no-tasks {
+  width: 16px;
+  height: 16px;
+	background: no-repeat sc_static('icons/shared') -16px -464px;
 }
