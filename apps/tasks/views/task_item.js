@@ -27,13 +27,6 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       var layer = this.get('layer');
       this._editorPane = SC.PickerPane.create({
         
-        modalPaneDidClick: function(evt) {
-          var f = this.get("frame");
-          if(!this.clickInside(f, evt)) this.remove();
-          Tasks.assignmentsController.showAssignments();
-          return YES ;
-        },
-        
         layout: { width: 500, height: 150 },
         contentView: SC.View.design({
           layout: { left: 0, right: 0, top: 0, bottom: 0},

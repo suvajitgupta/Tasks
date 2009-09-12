@@ -80,7 +80,6 @@ v Explain assignee loading color codes via hover over tooltips [SG] @Done $Featu
 ^ Beta: Allow drag-n-drop task reordering [BB] <SG> @Active $Feature
 ^ Allow multi-task drag-n-drop reassignment [BB] <SG>  @Done $Feature %Passed
 ^ Add popup viewer/editor for Task Submitter, Assignee, and Description [JH2] <SG> @Done %Passed $Feature
-^ Beta: Changes made to aubmitter/assignee via the editor aren't being persisted (Store not aware) [JH2] <SG> $Bug
 - Beta: Need a way to clear assignee/submitter in Task popup editor [JH2] <SG> @Active $Bug
 - Beta: Fix bindings problem with flashing text area for long description entry [JH2] <SG> @Active $Bug
 - Fix task pop editor location problem where it is getting cropped at the window boundary [SC] <SG> $Bug

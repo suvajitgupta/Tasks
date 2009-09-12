@@ -111,10 +111,14 @@ CoreTasks.Task = CoreTasks.Record.extend({
   
   submitterID: function(key,value){
     if (value) {
-      this.submitter = CoreTasks.User.find(CoreTasks.store,value);
-      return  this.getPath('submitter.id');
-    }else{
-      return this.getPath('submitter.id');
+      this.set('submitter', CoreTasks.User.find(CoreTasks.store, value));
+    }
+    else {
+      var submitter = this.get('submitter');
+      if (submitter && submitter.get) {
+        var id = submitter.get('id');
+        return id;
+      }
     }
   }.property('submitter').cacheable(),
 
@@ -125,10 +129,14 @@ CoreTasks.Task = CoreTasks.Record.extend({
   
   assigneeID: function(key,value){
     if (value) {
-      this.assignee = CoreTasks.User.find(CoreTasks.store,value);
-      return  this.getPath('assignee.id');
-    }else{
-      return this.getPath('assignee.id');
+      this.set('assignee', CoreTasks.User.find(CoreTasks.store, value));
+    }
+    else {
+      var assignee = this.get('assignee');
+      if (assignee && assignee.get) {
+        var id = assignee.get('id');
+        return id;
+      }
     }
   }.property('assignee').cacheable(),
 
