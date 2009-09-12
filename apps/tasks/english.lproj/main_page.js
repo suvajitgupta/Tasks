@@ -465,7 +465,7 @@ Tasks.mainPage = SC.Page.design({
         itemTitleKey: 'title',
         itemValueKey: 'value',
         valueBinding: 'Tasks.taskController.validation',
-        isEnabledBinding: SC.Binding.oneWay('Tasks.tasksController.hasSelection'),
+        isEnabledBinding: SC.Binding.oneWay('Tasks.tasksController.isValidatable'),
         layoutDirection: SC.LAYOUT_HORIZONTAL
       })
       

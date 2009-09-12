@@ -60,7 +60,7 @@ Task Manager GUI
 - Show Task Type via different icons [SG] <JH2> @Done $Feature %Passed
 - Show Task Priority (font style), Status (font color), Validation (background color) [SG] <MB> @Done $Feature %Passed
 - Add Task Status/Priority/Validation radio buttons in tasks toolbar [SG] <EO> @Done $Feature %Passed
-v Beta: Enable Task Validation radio buttons only when in Done status [SG] <JH2> $Feature
+v Enable Task Validation radio buttons only when in Done status [SG] <JH2> $Feature
 - Beta: Allow multi-selected tasks to be set to new status/priority/validation [SG] <JH2> $Feature
 ^ Add task search filter & corresponding delete button in top toolbar: support type-ahead searching [SG] <DC> @Done $Feature %Passed
 - Beta: Don't lose selection after changing task priority/status/validation [JH2] <BB> $Bug

@@ -25,6 +25,14 @@ Tasks.tasksController = SC.TreeController.create(
     return this._isAllTasksProjectSelected();
   }.property('selection').cacheable(),
   
+  isValidatable: function() {
+    var sel = this.get('selection');
+    if(!sel) return false;
+    var selectedTask = sel.firstObject();
+    if(!selectedTask) return false;
+    return selectedTask.get('status') === CoreTasks.TASK_STATUS_DONE;
+  }.property('selection').cacheable(),
+  
   _isAllTasksProjectSelected: function() {
     var selectedProjectName = Tasks.projectController.getPath('content.firstObject.name');
     if (selectedProjectName === CoreTasks.ALL_TASKS_NAME) return false;
