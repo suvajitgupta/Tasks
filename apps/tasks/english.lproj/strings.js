@@ -14,7 +14,7 @@
 */
 SC.stringsFor('English', {
 
-  // Login/Dock strings
+  // Login/Top Bar strings
   '_LoginName:': "Login Name:",
   '_Login': "Login",
   '_LoginSince': "Logged in since ",
@@ -33,8 +33,8 @@ SC.stringsFor('English', {
   '_HelpTooltip': "Launch Tasks help",
   '_Logout': "Logout",
   '_LogoutTooltip': "Logout from Tasks",
-  "_AssigneeSelectionHint": "Select assignee(s)...",
-  '_TasksSearchHint': "Search for tasks...",
+  "_AssigneeSelectionHint": "Specify assignee(s)...",
+  '_TasksSearchHint': "Search for task(s)...",
   
   // Project strings
   '_AddProject': "Add Project",
@@ -91,7 +91,7 @@ SC.stringsFor('English', {
   '_Cancel': "Cancel",
   '_Close': "Close",
   
-  // Status bar strings
+  // Status Bar strings
   '_Displaying': "Displaying ",
   '_Projects': " project(s), ",
   '_Assignees': " assignee(s), and ",

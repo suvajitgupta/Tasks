@@ -119,6 +119,10 @@
   background: static_url('images/default-theme-static.png') no-repeat 0 -442px;
 }
 
+/*
+// TODO: [MG] add a task-add-icon.dis style
+*/
+
 .task-del-icon {
   width: 21px !important;
   height: 21px !important;
@@ -143,7 +147,7 @@
 .assignee-selection-bar span {
   padding: 0 0 0 24px !important;
   left: 5px !important;
-  font-size: 12px !important;
+  font-size: 11px !important;
   font-style: italic;
   line-height: 26px !important;
 }
@@ -154,7 +158,7 @@
   outline: 0;
   border: 0;
   background: none;
-  font-size: 12px !important;
+  font-size: 11px !important;
 }
 
 .assignee-selection-bar input:focus {
@@ -167,7 +171,7 @@
 
 .tasks-search-bar span {
   padding: 0 0 0 24px !important;
-  font-size: 12px !important;
+  font-size: 11px !important;
   font-style: italic;
   line-height: 26px !important;
 }
@@ -178,7 +182,7 @@
   outline: 0;
   border: 0;
   background: none;
-  font-size: 12px !important;
+  font-size: 11px !important;
 }
 
 .tasks-search-bar input:focus {
