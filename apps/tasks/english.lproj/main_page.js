@@ -114,13 +114,13 @@ Tasks.mainPage = SC.Page.design({
         }),
         
         SC.SeparatorView.design({
-          layout: { top: 5, bottom: 5, right: 155,  width: 4 },
+          layout: { top: 4, bottom: 4, right: 155, width: 3 },
           layoutDirection: SC.LAYOUT_VERTICAL,
-          classNames: ['title-bar-divider']
+          classNames: ['top-bar-divider']
         }),
 
         SC.View.design({
-          layout: { top: 0, height: 43, right: 95,  width: 50 },
+          layout: { top: 0, height: 43, right: 95, width: 50 },
           childViews: [
             SC.View.design(Tasks.SimpleButton,{
               layout: { centerX: 0, top: 2, width: 24, height: 24 },
@@ -197,7 +197,7 @@ Tasks.mainPage = SC.Page.design({
       childViews: [
         
         SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerY: 0, left: 15, height: 24, width: 90 },
+          layout: { centerY: 0, left: 10, height: 24, width: 90 },
           icon: 'project-add-icon',
           value: "_AddProject".loc(),
           classNames: ['toolbar-label'],
@@ -207,7 +207,7 @@ Tasks.mainPage = SC.Page.design({
         }),
       
         SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerY: 0, left: 110, height: 24, width: 100 },
+          layout: { centerY: 0, left: 105, height: 24, width: 100 },
           icon: 'project-del-icon',
           value: "_DelProject".loc(),
           classNames: ['toolbar-label'],
@@ -217,6 +217,12 @@ Tasks.mainPage = SC.Page.design({
           action: 'deleteProject'
         }),
         
+        SC.SeparatorView.design({
+          layout: { top: 4, bottom: 4, left: 226, width: 4 },
+          layoutDirection: SC.LAYOUT_VERTICAL,
+          classNames: ['to-bar-divider']
+        }),
+
         SC.LabelView.design(Tasks.SimpleButton,{
           layout: { centerY: 0, left: 255, height: 24, width: 90 },
           icon: 'task-add-icon',

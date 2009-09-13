@@ -7,6 +7,15 @@
 */
 
 /*-----------------------------------------------------------------
+ * Top bar styles
+ */
+
+.top-bar-divider {
+  background: static_url('images/default-theme-static.png') no-repeat 0 -606px;
+}
+
+
+/*-----------------------------------------------------------------
  * Title bar styles/icons
  */
 
@@ -19,10 +28,6 @@
   color: #eee !important;
   text-align: center !important;
   font-weight: bold !important;
-}
-
-.title-bar-divider {
-  background: static_url('images/default-theme-static.png') no-repeat 0 -606px;
 }
 
 .tasks-logo {
