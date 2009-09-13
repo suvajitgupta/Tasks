@@ -197,7 +197,7 @@ Tasks.mainPage = SC.Page.design({
       childViews: [
         
         SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerY: 0, left: 10, height: 24, width: 90 },
+          layout: { centerY: 2, left: 10, height: 24, width: 90 },
           icon: 'project-add-icon',
           value: "_AddProject".loc(),
           classNames: ['toolbar-label'],
@@ -207,7 +207,7 @@ Tasks.mainPage = SC.Page.design({
         }),
       
         SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerY: 0, left: 105, height: 24, width: 100 },
+          layout: { centerY: 2, left: 105, height: 24, width: 100 },
           icon: 'project-del-icon',
           value: "_DelProject".loc(),
           classNames: ['toolbar-label'],
@@ -224,7 +224,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerY: 0, left: 255, height: 24, width: 90 },
+          layout: { centerY: 2, left: 255, height: 24, width: 90 },
           icon: 'task-add-icon',
           value: "_AddTask".loc(),
           classNames: ['toolbar-label'],
@@ -235,7 +235,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerY: 0, left: 345, height: 24, width: 90 },
+          layout: { centerY: 2, left: 345, height: 24, width: 90 },
           icon: 'task-del-icon',
           value: "_DelTask".loc(),
           classNames: ['toolbar-label'],
