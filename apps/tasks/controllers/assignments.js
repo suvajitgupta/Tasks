@@ -20,6 +20,9 @@ Tasks.assignmentsController = SC.ArrayController.create(
   assigneeSelection: null,
   searchFilter: null,
   
+  hasFiltering: function() {
+    return this.assigneeSelection || this.searchFilter;
+  },
   
   showAssignments: function() { // show tasks for selected user that matches search filter
    

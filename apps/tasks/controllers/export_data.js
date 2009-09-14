@@ -30,50 +30,8 @@ Tasks.exportDataController = SC.ObjectController.create(
   },
   
   /**
-  * Export a project's attributes.
-  * @param {Object} Project to export.
-  */
-  _exportProject: function(project) {
-    if(project.get('name') === CoreTasks.UNALLOCATED_TASKS_NAME) return '';
-    else return project.get('displayName') + '\n';
-  },
-  
-  /**
-  * Export a task's attributes.
-  * @param {Object} Task to export.
-  */
-  _exportTask: function(task) {
-    var ret = '', val, user;
-    switch(task.get('priority')) {
-      case CoreTasks.TASK_PRIORITY_HIGH: val = '^'; break;
-      case CoreTasks.TASK_PRIORITY_MEDIUM: val = '-'; break;
-      case CoreTasks.TASK_PRIORITY_LOW: val = 'v'; break;
-    }
-    ret += val + ' ';
-    ret += task.get('displayName');
-    user = task.get('submitter');
-    if (user) ret += ' <' + user.get('loginName') + '>';
-    user = task.get('assignee');
-    if (user) ret += ' [' + user.get('loginName') + ']';
-    val = task.get('type');
-    if(val !== CoreTasks.TASK_TYPE_OTHER) ret += ' $' + val.loc();
-    val = task.get('status');
-    if(val !== CoreTasks.TASK_STATUS_PLANNED) ret += ' @' + val.loc();
-    val = task.get('validation');
-    if(val !== CoreTasks.TASK_VALIDATION_UNTESTED)ret += ' %' + val.loc();
-    val = task.get('description');
-    if(val) {
-      var lines = val.split('\n');
-      for (var j = 0; j < lines.length; j++) {
-        ret += '\n| ' + lines[j];
-      }
-    }
-    ret += '\n';
-    return ret;
-  },
-  
-  /**
   * Export data for all projects.
+  * @returns {String) return a string with all Tasks data exported in it.
   */
   _exportAllData: function() {
     var ret = '';
@@ -81,14 +39,14 @@ Tasks.exportDataController = SC.ObjectController.create(
     pc.forEach(function(project){
       
       if(project.get('name') === CoreTasks.ALL_TASKS_NAME) return; // skip AllTasks Project
-      ret += Tasks.exportDataController._exportProject(project);
+      ret += project.exportData();
       
       var tasks = project.get('tasks');
       var len = tasks.get('length');
       for (var i = 0; i < len; i++) {
-        ret += Tasks.exportDataController._exportTask(tasks.objectAt(i));
+        ret += tasks.objectAt(i).exportData();
       }
-      ret += '\n';
+      if (len > 0) ret += '\n';
       
     }, pc);
     return ret;
@@ -96,6 +54,7 @@ Tasks.exportDataController = SC.ObjectController.create(
   
   /**
   * Export displayed tasks.
+  * @returns {String) return a string with displayed Tasks data exported in it.
   */
   _exportDisplayedData: function() {
     var ret = '';
@@ -107,7 +66,7 @@ Tasks.exportDataController = SC.ObjectController.create(
       var tasks = assignmentNodes.objectAt(i).get('treeItemChildren');
       var tasksCount = tasks.get('length');
       for(var j=0; j < tasksCount; j++) {
-        ret += Tasks.exportDataController._exportTask(tasks.objectAt(j));
+        ret += tasks.objectAt(j).exportData();
       }
     }
     return ret;
@@ -125,11 +84,11 @@ Tasks.exportDataController = SC.ObjectController.create(
     
     var ret = "# Tasks data export at " + new Date().format('hh:mm:ss a MMM dd, yyyy') + '\n\n';
     var selectedProjectName = selectedProject.get('name');
-    if (selectedProjectName === CoreTasks.ALL_TASKS_NAME) {
+    if (selectedProjectName === CoreTasks.ALL_TASKS_NAME && !Tasks.assignmentsController.hasFiltering()) {
       ret += this._exportAllData();
     }
     else {
-      ret += this._exportProject(selectedProject);
+      ret += selectedProject.exportData();
       ret += this._exportDisplayedData();
     }
     

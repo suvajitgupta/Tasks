@@ -112,6 +112,16 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
     SC.RunLoop.end();
 
     return tasks;
+  },
+
+  /**
+  * Export a project's attributes.
+  * @returns {String) return a string with the project's data exported in it.
+  */
+  exportData: function() {
+    var projectName = this.get('name');
+    if(projectName === CoreTasks.ALL_TASKS_NAME || projectName === CoreTasks.UNALLOCATED_TASKS_NAME) return '';
+    else return this.get('displayName') + '\n';
   }
   
 });

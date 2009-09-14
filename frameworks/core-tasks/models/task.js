@@ -218,7 +218,41 @@ CoreTasks.Task = CoreTasks.Record.extend({
       return ret;
     }
     
-  }.property('name', 'effort').cacheable()
+  }.property('name', 'effort').cacheable()  ,
+
+  /**
+  * Export a task's attributes.
+  * @returns {String) return a string with the tasks' data exported in it.
+  */
+  exportData: function() {
+    var ret = '', val, user;
+    switch(this.get('priority')) {
+      case CoreTasks.TASK_PRIORITY_HIGH: val = '^'; break;
+      case CoreTasks.TASK_PRIORITY_MEDIUM: val = '-'; break;
+      case CoreTasks.TASK_PRIORITY_LOW: val = 'v'; break;
+    }
+    ret += val + ' ';
+    ret += this.get('displayName');
+    user = this.get('submitter');
+    if (user) ret += ' <' + user.get('loginName') + '>';
+    user = this.get('assignee');
+    if (user) ret += ' [' + user.get('loginName') + ']';
+    val = this.get('type');
+    if(val !== CoreTasks.TASK_TYPE_OTHER) ret += ' $' + val.loc();
+    val = this.get('status');
+    if(val !== CoreTasks.TASK_STATUS_PLANNED) ret += ' @' + val.loc();
+    val = this.get('validation');
+    if(val !== CoreTasks.TASK_VALIDATION_UNTESTED)ret += ' %' + val.loc();
+    val = this.get('description');
+    if(val) {
+      var lines = val.split('\n');
+      for (var j = 0; j < lines.length; j++) {
+        ret += '\n| ' + lines[j];
+      }
+    }
+    ret += '\n';
+    return ret;
+  }
   
 });
 
@@ -315,6 +349,7 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
       validation: taskValidation
     };
   }
+  
 });
 
 CoreTasks.Task.NEW_TASK_HASH = {

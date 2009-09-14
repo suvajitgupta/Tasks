@@ -12,7 +12,6 @@ Tasks.mixin({
   
   // Login
   goStateA1: function(){
-    // var loginName = prompt("Login name:");
     Tasks.loginController.openPanel();
   },
 
