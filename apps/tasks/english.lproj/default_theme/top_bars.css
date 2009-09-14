@@ -31,6 +31,13 @@
   font-weight: bold !important;
 }
 
+.title-bar-label.disabled {
+  font-size: 9px !important;
+  color: #777 !important;
+  text-align: center !important;
+  font-weight: bold !important;
+}
+
 .tasks-logo {
   background: static_url('images/logo.png') no-repeat 0 0;
 }
@@ -51,6 +58,10 @@
 .save-icon {
   background: static_url('images/default-theme-static.png') no-repeat 0 -50px;
 }
+
+/*
+// TODO: [MG] add a save-icon.disabled style
+*/
 
 .import-icon {
   background: static_url('images/default-theme-static.png') no-repeat 0 0;
@@ -88,6 +99,13 @@
   font-weight: bold !important;
 }
 
+.toolbar-label.disabled {
+  font-size: 10px !important;
+  color: #777 !important;
+  text-align: center !important;
+  font-weight: bold !important;
+}
+
 .project-add-icon {
   width: 21px !important;
   height: 19px !important;
@@ -104,7 +122,7 @@
   background: static_url('images/default-theme-static.png') no-repeat 0 -547px;
 }
 
-.project-del-icon.dis {
+.project-del-icon.disabled {
   width: 21px !important;
   height: 19px !important;
   margin-top: 3px !important;
@@ -121,7 +139,7 @@
 }
 
 /*
-// TODO: [MG] add a task-add-icon.dis style
+// TODO: [MG] add a task-add-icon.disabled style
 */
 
 .task-del-icon {
@@ -132,7 +150,7 @@
   background: static_url('images/default-theme-static.png') no-repeat 0 -464px;
 }
 
-.task-del-icon.dis
+.task-del-icon.disabled
 {
   width: 21px !important;
   height: 21px !important;

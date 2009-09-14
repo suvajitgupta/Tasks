@@ -195,6 +195,8 @@ Tasks.mainPage = SC.Page.design({
       layout: { left: 0, right: 0, top: 43, height: 36 },
       classNames: ['toolbar'],
       childViews: [
+      
+      // TODO: [SG] figure out how to get icons to be disabled for toolbar buttons
         
         SC.LabelView.design(Tasks.SimpleButton,{
           layout: { centerY: 2, left: 10, height: 24, width: 90 },
