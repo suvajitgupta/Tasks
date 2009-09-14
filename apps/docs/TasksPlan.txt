@@ -108,6 +108,7 @@ v Beta: Enable/disable Save button based on data modification [SG] <SE> $Feature
 v Add drag-n-drop of a TXT file into App for data importing (using Google Gears) [MB] <SG> @Risky $Feature
 | Gears needs to be ported to Snow Leopard
 - Add "Export" button in top toolbar with associated pop up panel [SG] @Done $Feature %Passed
+| When on "All Tasks" project all project data is exported, otherwise only displayed data is exported
 - Add Settings button/popup to manage Users and preferences <JH2> [SG] $Feature @Active
 | Preferences:
 | * include Low priority tasks in subtotals
