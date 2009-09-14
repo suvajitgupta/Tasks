@@ -45,7 +45,7 @@ v Don't enable Add/Del. Tasks when on "All Tasks" project [SG] <BB> @Done %Passe
 - Select first project at startup [SG] <JH2> @Done $Feature %Passed
 ^ Add virtual "All Tasks" & "Unallocated Tasks" projects and display them grayed out in projects list [SG] <SE> @Done
 - Disallow "All Tasks" & "Unallocated Tasks" projects from being deleted [SG] <EO> @Done $Feature %Passed
-^ Beta: Add drag-n-drop project reordering [BB] <SG> @Active $Feature
+^ Beta: Allow drag-n-drop project reordering [BB] <SG> @Active $Feature
 ^ Allow multi-task drag-n-drop Task reallocation to Projects [BB] <SG> @Done $Feature %Passed
 v Add context menu to Delete a project [SG] <JH2> $Feature
 
@@ -105,7 +105,7 @@ Application Manager GUI
 v Beta: Enable/disable Save button based on data modification [SG] <SE> $Feature
 - Add Refresh button to get most recent data from server [SG] <SE> $Feature
 - Add "Import" button in top toolbar with associated pop up panel [SG] <BB> @Done $Feature %Passed
-v Add drag-n-drop of a TXT file into App for data importing (using Google Gears) [MB] <SG> @Risky $Feature
+v Allow drag-n-drop of a TXT file into App for data importing (using Google Gears) [MB] <SG> @Risky $Feature
 | Gears needs to be ported to Snow Leopard
 - Add "Export" button in top toolbar with associated pop up panel [SG] @Done $Feature %Passed
 | When on "All Tasks" project all project data is exported, otherwise only displayed data is exported
