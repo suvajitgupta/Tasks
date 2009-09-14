@@ -218,13 +218,13 @@ Tasks.mainPage = SC.Page.design({
         }),
         
         SC.SeparatorView.design({
-          layout: { top: 4, bottom: 4, left: 226, width: 4 },
+          layout: { top: 2, bottom: 2, left: 227, width: 3 },
           layoutDirection: SC.LAYOUT_VERTICAL,
-          classNames: ['to-bar-divider']
+          classNames: ['top-bar-divider']
         }),
 
         SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerY: 2, left: 255, height: 24, width: 90 },
+          layout: { centerY: 2, left: 250, height: 24, width: 90 },
           icon: 'task-add-icon',
           value: "_AddTask".loc(),
           classNames: ['toolbar-label'],
