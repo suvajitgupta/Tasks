@@ -40,7 +40,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     this.forEach( 
       function(task){
         assignee = task.get('assignee');
-        if (assignee && !assignee.get) { // HACK: [BB] unclear why assigneee.get() is null at times
+        if (assignee && !assignee.get) { // FIXME: [BB] unclear why assigneee.get() is null at times
           return;
         }
         assigneeName = assignee ? assignee.get('displayName') : CoreTasks.USER_UNASSIGNED;

@@ -109,13 +109,13 @@ CoreTasks.Task = CoreTasks.Record.extend({
    */
   submitter: SC.Record.attr('CoreTasks.User'),
   
-  submitterID: function(key,value){
+  submitterID: function(key, value){
     if (value) {
       this.set('submitter', CoreTasks.User.find(CoreTasks.store, value));
     }
     else {
       var submitter = this.get('submitter');
-      if (submitter && submitter.get) {
+      if (submitter && submitter.get) { // FIXME: [SG] unclear why submitter.get() is null at times
         var id = submitter.get('id');
         return id;
       }
@@ -127,13 +127,13 @@ CoreTasks.Task = CoreTasks.Record.extend({
    */
   assignee: SC.Record.attr('CoreTasks.User'),
   
-  assigneeID: function(key,value){
+  assigneeID: function(key, value){
     if (value) {
       this.set('assignee', CoreTasks.User.find(CoreTasks.store, value));
     }
     else {
       var assignee = this.get('assignee');
-      if (assignee && assignee.get) {
+      if (assignee && assignee.get) { // FIXME: [SG] unclear why assigneee.get() is null at times
         var id = assignee.get('id');
         return id;
       }

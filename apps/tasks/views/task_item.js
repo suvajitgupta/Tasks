@@ -17,6 +17,13 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   
   content: null,
   _editorPane: null,
+  
+  _listUsers: function() {
+    var ret = SC.Binding.transform(function(value, binding) {
+       return value.toArray();
+    }).from('Tasks.usersController.content');
+    return ret;
+  },
 
   /** @private
     If mouse was down over Description Icon open the editor.
@@ -38,12 +45,10 @@ Tasks.TaskItemView = SC.ListItemView.extend(
             }),
             SC.SelectFieldView.design({
               layout: { top: 10, left: 80, width: 150, height: 22 },
-              objectsBinding: SC.Binding.transform(function(value, binding) {
-                 return value.toArray();
-              }).from('Tasks.usersController.content'),
+              objectsBinding: this._listUsers(),
               nameKey: 'displayName',
               valueKey: 'id',
-              valueBinding: SC.binding('.content.submitterID',this)
+              valueBinding: SC.binding('.content.submitterID', this)
             }),
 
             SC.LabelView.design({
@@ -52,12 +57,10 @@ Tasks.TaskItemView = SC.ListItemView.extend(
             }),
             SC.SelectFieldView.design({
               layout: { top: 10, right: 10, width: 150, height: 20 },
-              objectsBinding: SC.Binding.transform(function(value, binding) {
-                 return value.toArray();
-              }).from('Tasks.usersController.content'),
+              objectsBinding: this._listUsers(),
               nameKey: 'displayName',
               valueKey: 'id',
-              valueBinding: SC.binding('.content.assigneeID',this)
+              valueBinding: SC.binding('.content.assigneeID', this)
             }),
 
             SC.LabelView.design({
