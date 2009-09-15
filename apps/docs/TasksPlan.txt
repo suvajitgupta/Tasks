@@ -27,7 +27,7 @@ v On Firefox dragging window to make it smaller leaves TextField entry text in t
 v In Safari you can't click on assigneee selection filter and then the task filter [SC] <SG> $Bug
 v Add missing 'localize' support back in CollectionView (regression from SC 0.9) [SC] <SG> $Bug
 v Fix spurious box-like ghost view with task while dragging [SC] <SG> $Bug
-- Beta: Optimize calls to assignments controller for redrawing tasks tree [SG] <BB>
+- Beta: Track/optimize calls to assignments controller for redrawing tasks tree [SG] <BB>
 v Provide support for color-blind users (don't use color coding as only mechanism for status/validation) [SG] $Feature
 
 Project Manager GUI
@@ -73,7 +73,7 @@ v Set tasks toolbar button enablement based on having a selection [SG] <EO> @Don
 - Beta: Fix task editing cell floating at top under special circumstances [JH2] <SG> $Bug
 | To reproduce, for Catch! project, login as RMG, cancel assignee selection, type "game" in search filter, then Add Task
 v Allow "Add Task" button to be pressed a second time to keep in data entry mode, Esc will exit mode [SG] <MB> $Feature
-- Beta: Deleted task isn't removed from AllTasks project [SG] <SE> $Bug
+- Beta: Deleted task isn't removed from AllTasks project [SE] <SG> @Risky $Bug
 ^ Show effort subtotals (exclude Done or Low priority tasks) in curly braces for load balancing [SG] @Done $Feature %Passed
 - Append "?" for range-based subtotals including tasks with unspecified efforts [SG] @Done $Feature %Passed
 - Color code assignee non loading in green, under loading in gray, proper loading in blue, and over loading in red [SG] @Done $Feature %Passed

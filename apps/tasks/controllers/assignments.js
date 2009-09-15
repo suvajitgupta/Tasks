@@ -177,7 +177,6 @@ Tasks.assignmentsController = SC.ArrayController.create(
       loading: loading,
       assignee: assigneeObj.assignee,
       treeItemChildren: tasks.sort(function(a,b) { // sort by status, then by validation, then by priority
-        console.log("SORT:\n\t" + a.exportData() + "\t" + b.exportData());
         var aStatus = a.get('status');
         var bStatus = b.get('status');
         if(aStatus !== bStatus) return CoreTasks.taskStatusWeights[bStatus] - CoreTasks.taskStatusWeights[aStatus];
