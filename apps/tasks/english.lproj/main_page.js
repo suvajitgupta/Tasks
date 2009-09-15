@@ -43,7 +43,7 @@ Tasks.mainPage = SC.Page.design({
           valueBinding: SC.Binding.oneWay('CoreTasks.user')
         }),
       
-        SC.View.design({ 
+        SC.View.design({
           layout: { top: 0, height: 43, right: 270, width: 45 },
           childViews: [
             SC.View.design(Tasks.SimpleButton,{

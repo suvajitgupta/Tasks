@@ -22,16 +22,12 @@
   color: #fff !important;
 }
 
-/* MG - Commented out as this causes issues with the font colors of other tasks
-
 .reserved-project-item {
-	color: #555 !important;
+	color: #666 !important;
 } 
 
-*/
-
 .regular-project-item {
-  color: #000 !important;
+  color: #222 !important;
   font-weight: bold;
 }
 

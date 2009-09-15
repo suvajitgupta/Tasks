@@ -9,7 +9,8 @@
 
 #mainPane {
   min-width: 1024px;
-  min-height: 768px;
+  // TODO: [SC] figure out why setting min-height property causes unnecessary vertical scrollbars
+  // min-height: 768px;
   background: #444;
 }
 

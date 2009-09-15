@@ -26,7 +26,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
   
   showAssignments: function() { // show tasks for selected user that matches search filter
    
-    // console.log("DEBUG: showAssignments() called!");
+    console.log("DEBUG: showAssignments() called!");
     var sf = this.get('searchFilter');
     sf = this._escapeMetacharacters(sf);
     var rx = new RegExp(sf, 'i');
@@ -193,20 +193,20 @@ Tasks.assignmentsController = SC.ArrayController.create(
   },
   
   _contentHasChanged: function() {
-    // console.log("DEBUG: Tasks pane content changed!");
-    this.showAssignments();
+    console.log("DEBUG: Tasks pane content changed!");
+  	this.invokeOnce(this.showAssignments);
   }.observes('[]'),
   
   _assigneeSelectionHasChanged: function() {
-    // console.log("DEBUG: Assignee selection changed!");
+    console.log("DEBUG: Assignee selection changed!");
     Tasks.deselectTasks();
-    this.showAssignments();
+  	this.invokeOnce(this.showAssignments);
   }.observes('assigneeSelection'),
   
   _searchFilterHasChanged: function() {
-    // console.log("DEBUG: Search filter changed!");
+    console.log("DEBUG: Search filter changed!");
     Tasks.deselectTasks();
-    this.showAssignments();
+  	this.invokeOnce(this.showAssignments);
   }.observes('searchFilter')
   
 });
