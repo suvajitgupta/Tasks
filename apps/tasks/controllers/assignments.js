@@ -26,6 +26,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
   
   showAssignments: function() { // show tasks for selected user that matches search filter
    
+    // console.log("DEBUG: showAssignments() called!");
     var sf = this.get('searchFilter');
     sf = this._escapeMetacharacters(sf);
     var rx = new RegExp(sf, 'i');
@@ -175,29 +176,35 @@ Tasks.assignmentsController = SC.ArrayController.create(
       displayName: displayName,
       loading: loading,
       assignee: assigneeObj.assignee,
-      treeItemChildren: tasks.sort(function(a,b) {
+      treeItemChildren: tasks.sort(function(a,b) { // sort by status, then by validation, then by priority
+        console.log("SORT:\n\t" + a.exportData() + "\t" + b.exportData());
         var aStatus = a.get('status');
         var bStatus = b.get('status');
-        if(aStatus !== CoreTasks.TASK_STATUS_DONE || bStatus !== CoreTasks.TASK_STATUS_DONE) return CoreTasks.statusWeights[bStatus] - CoreTasks.statusWeights[aStatus];
-        else return CoreTasks.validationWeights[b.get('validation')] - CoreTasks.validationWeights[a.get('validation')]
+        if(aStatus !== bStatus) return CoreTasks.taskStatusWeights[bStatus] - CoreTasks.taskStatusWeights[aStatus];
+        if(aStatus === CoreTasks.TASK_STATUS_DONE) {
+          var aValidation = a.get('validation');
+          var bValidation = b.get('validation');
+          if(aValidation !== bValidation) return CoreTasks.taskValidationWeights[bValidation] - CoreTasks.taskValidationWeights[aValidation];
+        }
+        return CoreTasks.taskPriorityWeights[b.get('priority')] - CoreTasks.taskPriorityWeights[a.get('priority')];
       }),
       treeItemIsExpanded: YES
     }));
   },
   
   _contentHasChanged: function() {
-    // console.log("Tasks pane content change at " + new Date());
+    // console.log("DEBUG: Tasks pane content changed!");
     this.showAssignments();
   }.observes('[]'),
   
   _assigneeSelectionHasChanged: function() {
-    // console.log("Assignee selection changed at " + new Date());
+    // console.log("DEBUG: Assignee selection changed!");
     Tasks.deselectTasks();
     this.showAssignments();
   }.observes('assigneeSelection'),
   
   _searchFilterHasChanged: function() {
-    // console.log("Search filter changed at " + new Date());
+    // console.log("DEBUG: Search filter changed!");
     Tasks.deselectTasks();
     this.showAssignments();
   }.observes('searchFilter')
