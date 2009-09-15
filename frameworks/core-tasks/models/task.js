@@ -20,10 +20,22 @@ CoreTasks.TASK_STATUS_ACTIVE = '_Active';
 CoreTasks.TASK_STATUS_DONE = '_Done';
 CoreTasks.TASK_STATUS_RISKY = '_Risky';
 
+CoreTasks.statusWeights = {};
+CoreTasks.statusWeights[CoreTasks.TASK_STATUS_DONE] = 4;
+CoreTasks.statusWeights[CoreTasks.TASK_STATUS_ACTIVE] = 3;
+CoreTasks.statusWeights[CoreTasks.TASK_STATUS_PLANNED] = 2;
+CoreTasks.statusWeights[CoreTasks.TASK_STATUS_RISKY] = 1;
+
 // Validation status:
 CoreTasks.TASK_VALIDATION_UNTESTED = '_Untested'; // default
 CoreTasks.TASK_VALIDATION_PASSED = '_Passed';
 CoreTasks.TASK_VALIDATION_FAILED = '_Failed';
+
+CoreTasks.validationWeights = {};
+CoreTasks.validationWeights[CoreTasks.TASK_VALIDATION_PASSED] = 3;
+CoreTasks.validationWeights[CoreTasks.TASK_VALIDATION_FAILED] = 2;
+CoreTasks.validationWeights[CoreTasks.TASK_VALIDATION_UNTESTED] = 1;
+
 
 /**
  * The task model.

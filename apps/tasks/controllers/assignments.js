@@ -175,7 +175,12 @@ Tasks.assignmentsController = SC.ArrayController.create(
       displayName: displayName,
       loading: loading,
       assignee: assigneeObj.assignee,
-      treeItemChildren: tasks,
+      treeItemChildren: tasks.sort(function(a,b) {
+        var aStatus = a.get('status');
+        var bStatus = b.get('status');
+        if(aStatus !== CoreTasks.TASK_STATUS_DONE || bStatus !== CoreTasks.TASK_STATUS_DONE) return CoreTasks.statusWeights[bStatus] - CoreTasks.statusWeights[aStatus];
+        else return CoreTasks.validationWeights[b.get('validation')] - CoreTasks.validationWeights[a.get('validation')]
+      }),
       treeItemIsExpanded: YES
     }));
   },
