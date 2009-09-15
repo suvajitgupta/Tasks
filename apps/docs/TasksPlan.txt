@@ -2,7 +2,7 @@
 
 Design/Planning
 - Review comparable applications for ideas: Mac Things/TaskPaper, Jira [SG] <MB> @Done
-- Define Personas (Roles) & User Stories/Use Cases [SG] <JL> @Done
+- Define Personas (Roles) & User Stories/Use Cases [SG] <SE> @Done
 | Manager - add/edit/delete Users/Projects/Tasks, allocate Tasks to Projects, assign to/load balance Tasks across Developers, view Task status
 | Developer - add/edit/delete personal Tasks, reorder personal Tasks, view/split personal Tasks & update effort (estimates=>actual)/status, reassign personal Tasks to other Developers or reallocate to other Projects, add Task Release Notes in description field
 | Tester - view Tasks that are done (read Release Notes in description field), validate Tasks (mark as Passed | Failed), submit bugs as Tasks with details to reproduce problem in description field
@@ -41,11 +41,11 @@ v Add hover over tooltip for projects to show how many tasks they contain [SG] @
 - Don't create a project if it already exists during Import [SG] @Done $Feature %Passed
 v Disallow duplicate project names after editing, provide warning to user for duplicates [SG] @Active $Feature
 v Add summary in projects toolbar showing number of projects & number of tasks for selected project [SG] <MB> @Done $Feature %Passed
-v Set projects toolbar button enablement based on having a selection [SG] <EO> @Done $Feature %Passed
+v Set projects toolbar button enablement based on having a selection [SG] @Done $Feature %Passed
 v Don't enable Add/Del. Tasks when on "All Tasks" project [SG] <BB> @Done %Passed $Feature
 - Select first project at startup [SG] <JH2> @Done $Feature %Passed
 ^ Add virtual "All Tasks" & "Unallocated Tasks" projects and display them grayed out in projects list [SG] <SE> @Done
-- Disallow "All Tasks" & "Unallocated Tasks" projects from being deleted [SG] <EO> @Done $Feature %Passed
+- Disallow "All Tasks" & "Unallocated Tasks" projects from being deleted [SG] @Done $Feature %Passed
 ^ Beta: Allow drag-n-drop project reordering [BB] <SG> @Active $Feature
 ^ Allow multi-task drag-n-drop Task reallocation to Projects [BB] <SG> @Done $Feature %Passed
 v Add context menu to Delete a project [SG] <JH2> $Feature
@@ -59,13 +59,13 @@ Task Manager GUI
 - Drag-n-drop in SourceListView is broken (Apple has on priority list) [SC] <SG> @Active $Bug
 - Show Task Type via different icons [SG] <JH2> @Done $Feature %Passed
 - Show Task Priority (font style), Status (font color), Validation (background color) [SG] <MB> @Done $Feature %Passed
-- Add Task Status/Priority/Validation radio buttons in tasks toolbar [SG] <EO> @Done $Feature %Passed
+- Add Task Status/Priority/Validation radio buttons in tasks toolbar [SG] @Done $Feature %Passed
 v Enable Task Validation radio buttons only when in Done status [SG] <JH2> $Feature
 - Beta: Allow multi-selected tasks to be set to new status/priority/validation [JH2] <SG> $Feature
-^ Add task search filter & corresponding delete button in top toolbar: support type-ahead searching [SG] <DC> @Done $Feature %Passed
+^ Add task search filter & corresponding delete button in top toolbar: support type-ahead searching [SG] @Done $Feature %Passed
 - Beta: Don't lose selection after changing task priority/status/validation [JH2] <SG> $Bug
 - Allow task searching by type, priority, status, and validation fields [SG] <MB>
-v Set tasks toolbar button enablement based on having a selection [SG] <EO> @Done $Feature %Passed
+v Set tasks toolbar button enablement based on having a selection [SG] @Done $Feature %Passed
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done $Feature %Passed
 ^ Add "Add Task" & "Del. Task" buttons in tasks toolbar [SG] <SE> @Done $Feature %Passed
 | Logged in user is default Submitter, Assignee is either set to the same as selected task (if one) or to logged in user
@@ -124,10 +124,10 @@ v Allow drag-n-drop of a TXT file into App for data importing (using Google Gear
 Server
 ^ Build persistence server (using Persevere) [SE] <SG> @Done %Passed
 ^ Beta: Preserve order of projects/tasks via persistence [SE] <SG> @Activeß
-- Patch SproutCore to avoid overwhelming async calls for file imports with more than 20 tasks [SE] <EG> @Done %Passed $Bug
+- Patch SproutCore to avoid overwhelming async calls for file imports with more than 20 tasks [SE] <SG> @Done %Passed $Bug
 - Add Server-side authorization [SE] <SG>
 - Add server-side data validation checks/return appropriate error codes [SE] <SG>
-v Implement multi-user concurrent access using Transaction Time [SG] <EO>
+v Implement multi-user concurrent access using Transaction Time [SG] <SE>
 
 Styling/Hardening
 ^ Style via CSS, embed catchy/sprited images [MG] <SG> @Done %Passed
@@ -137,9 +137,9 @@ Styling/Hardening
 - Handle secondary scenarios/provide good diagnostics [SG] <SE>
 
 Packaging/Delivery
-^ Develop Web client (ported to Firefox, Internet Explorer, Safari, Chrome) [SG] <MT> @Done %Passed
+^ Develop Web client (ported to Firefox, Internet Explorer, Safari, Chrome) [SG] @Done %Passed
 - Develop Mobile client (using PhoneGap) [SG] <MB>
-v Develop Desktop client (using Webkit) [SG] <EO>
+v Develop Desktop client (using Webkit) [SG] <MB>
 
 Testing/Rollout
 - Manually test & note/fix showstoppers [SG] <BM> @Active
