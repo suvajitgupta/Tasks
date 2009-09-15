@@ -14,7 +14,7 @@
 Tasks.ProjectItemView = SC.ListItemView.extend(
 /** @scope Tasks.ProjectItemView.prototype */ {
   
-  // FIXME: [SG] remove this after CollectionView localization is added back
+  // FIXME: [SC] remove this after CollectionView localization is added back
   renderLabel: function(context, label) {
     context.push('<label>', label? label.loc() : '', '</label>') ;
   },

@@ -14,7 +14,7 @@
 Tasks.AssigneeItemView = SC.ListItemView.extend(
 /** @scope Tasks.AssigneeItemView.prototype */ {
   
-  // FIXME: [SG] remove this after CollectionView localization is added back
+  // TODO: [SG] remove this after CollectionView localization is added back
   renderLabel: function(context, label) {
     context.push('<label>', label? label.loc() : '', '</label>') ;
   },

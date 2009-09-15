@@ -133,7 +133,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
     }
     else {
       var submitter = this.get('submitter');
-      if (submitter && submitter.get) { // FIXME: [SG] unclear why submitter.get() is null at times
+      if (submitter && submitter.get) { // FIXME: [SC] unclear why submitter.get() is null at times
         var id = submitter.get('id');
         return id;
       }
@@ -151,7 +151,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
     }
     else {
       var assignee = this.get('assignee');
-      if (assignee && assignee.get) { // FIXME: [SG] unclear why assigneee.get() is null at times
+      if (assignee && assignee.get) { // FIXME: [SC] unclear why assigneee.get() is null at times
         var id = assignee.get('id');
         return id;
       }
