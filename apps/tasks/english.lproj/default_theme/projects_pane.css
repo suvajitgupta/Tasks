@@ -6,9 +6,9 @@
   @author Suvajit Guupta
   
 */
-
+.sc-scroll-view.projects-pane,
 .sc-collection-view.projects-pane-inner {
-  background: static_url('images/default-theme-projects-pane-bg.png') repeat-y 0 0;
+  background: static_url('images/default-theme-repeat-y.png') repeat-y 0 0;
   border: 0 !important;
 }
 
@@ -18,15 +18,20 @@
 
 .projects-pane-inner .sc-collection-item.has-icon.sel {
   background: static_url('images/default-theme-selected-project.png') no-repeat 0 0 !important;
-  color: #fff;
+  font-weight: bold;
+  color: #fff !important;
 }
+
+/* MG - Commented out as this causes issues with the font colors of other tasks
 
 .reserved-project-item {
 	color: #555 !important;
-}
+} 
+
+*/
 
 .regular-project-item {
-	color: black !important;
+  color: #000 !important;
   font-weight: bold;
 }
 

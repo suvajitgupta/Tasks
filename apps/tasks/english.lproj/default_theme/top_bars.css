@@ -12,7 +12,8 @@
  */
 
 .top-bar-divider {
-  background: static_url('images/default-theme-static.png') no-repeat 0 -606px;
+  background: static_url('images/default-theme-repeat-y.png') repeat-y -239px 0;
+  border: 0;
 }
 
 
@@ -89,19 +90,19 @@
  */
 
 .toolbar {
-  background: static_url('images/default-theme-toolbar-bg.png') repeat-x 0 0; 
+  background: static_url('images/default-theme-repeat-x.png') repeat-x 0 -122px; 
 }
 
 .toolbar-label {
   font-size: 10px !important;
-  color: #222 !important;
+  color: #fff !important;
   text-align: center !important;
   font-weight: bold !important;
 }
 
 .toolbar-label.disabled {
   font-size: 10px !important;
-  color: #777 !important;
+  color: #999 !important;
   text-align: center !important;
   font-weight: bold !important;
 }
@@ -122,12 +123,12 @@
   background: static_url('images/default-theme-static.png') no-repeat 0 -547px;
 }
 
-.project-del-icon.disabled {
+.disabled .project-del-icon {
   width: 21px !important;
   height: 19px !important;
   margin-top: 3px !important;
   margin-right: 2px !important;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -586px;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -587px;
 }
 
 .task-add-icon {
@@ -138,9 +139,13 @@
   background: static_url('images/default-theme-static.png') no-repeat 0 -442px;
 }
 
-/*
-// TODO: [MG] add a task-add-icon.disabled style
-*/
+.disabled .task-add-icon {
+  width: 21px !important;
+  height: 21px !important;
+  margin-top: 3px !important;
+  margin-right: 2px !important;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -605px;
+}
 
 .task-del-icon {
   width: 21px !important;
@@ -150,7 +155,7 @@
   background: static_url('images/default-theme-static.png') no-repeat 0 -464px;
 }
 
-.task-del-icon.disabled
+.disabled .task-del-icon
 {
   width: 21px !important;
   height: 21px !important;
@@ -173,7 +178,7 @@
 
 .assignee-selection-bar input {
   padding: 7px 0 0 29px !important;
-  width: 180px !important;
+  width: 156px !important;
   outline: 0;
   border: 0;
   background: none;
@@ -197,7 +202,7 @@
 
 .tasks-search-bar input {
   padding: 7px 0 0 24px !important;
-  width: 180px !important;
+  width: 156px !important;
   outline: 0;
   border: 0;
   background: none;

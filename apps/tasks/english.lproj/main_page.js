@@ -27,12 +27,12 @@ Tasks.mainPage = SC.Page.design({
       childViews: [
       
         SC.LabelView.design({
-          layout: { centerY: -4, height: 26, left: 6, width: 89 },
+          layout: { centerY: -2, height: 26, left: 6, width: 89 },
           classNames: ['tasks-logo']
         }),
       
         SC.LabelView.design({
-          layout: { centerY: -12, height: 20, left: 100, width: 40 },
+          layout: { centerY: -10, height: 20, left: 100, width: 40 },
           classNames: ['tasks-version'],
           value: Tasks.VERSION
         }),
@@ -113,9 +113,8 @@ Tasks.mainPage = SC.Page.design({
           ]
         }),
         
-        SC.SeparatorView.design({
-          layout: { top: 4, bottom: 4, right: 155, width: 3 },
-          layoutDirection: SC.LAYOUT_VERTICAL,
+        SC.View.design({
+          layout: { top: 0, bottom: 0, right: 155, width: 2 },
           classNames: ['top-bar-divider']
         }),
 
@@ -192,7 +191,7 @@ Tasks.mainPage = SC.Page.design({
     }),
     
     toolbarView: SC.View.design({
-      layout: { left: 0, right: 0, top: 43, height: 36 },
+      layout: { left: 0, right: 0, top: 42, height: 36 },
       classNames: ['toolbar'],
       childViews: [
       
@@ -219,9 +218,8 @@ Tasks.mainPage = SC.Page.design({
           action: 'deleteProject'
         }),
         
-        SC.SeparatorView.design({
-          layout: { top: 2, bottom: 2, left: 227, width: 3 },
-          layoutDirection: SC.LAYOUT_VERTICAL,
+        SC.View.design({
+          layout: { top: 0, bottom: 0, left: 228, width: 2 },
           classNames: ['top-bar-divider']
         }),
 
@@ -255,7 +253,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         SC.View.design({ // Assignee Selection cancel button
-          layout: { centerY: 0, height: 12, right: 245, width: 12 },
+          layout: { centerY: 1, height: 12, right: 245, width: 12 },
           isVisible: NO,
           classNames: ['filter-cancel-icon'],
           mouseDown: function() {
@@ -272,7 +270,7 @@ Tasks.mainPage = SC.Page.design({
         }),
       
         SC.View.design({ // Tasks Search cancel button
-          layout: { centerY: 0, height: 12, right: 15, width: 12 },
+          layout: { centerY: 1, height: 12, right: 15, width: 12 },
           isVisible: NO,
           classNames: ['filter-cancel-icon'],
           mouseDown: function() {
@@ -294,7 +292,7 @@ Tasks.mainPage = SC.Page.design({
         classNames: ['projects-pane'],
 
         contentView: Tasks.ProjectsListView.design({
-          layout: { top: 0, left:0, bottom: 0, right: 0 },
+          layout: { top: 4, left:0, bottom: 0, right: 0 },
           contentValueKey: 'displayName',
           contentBinding: 'Tasks.projectsController.arrangedObjects',
           selectionBinding: 'Tasks.projectsController.selection',
@@ -346,7 +344,7 @@ Tasks.mainPage = SC.Page.design({
     tasksList: SC.outlet('masterDetailView.tasksDetailView.childViews.0.contentView'),
     
     controlBarView: SC.View.design({
-      layout: { left: 0, right: 0, bottom: 19, height: 51 },
+      layout: { left: 0, right: 0, bottom: 20, height: 51 },
       classNames: ['control-bar'],
       childViews: [
       
@@ -481,7 +479,7 @@ Tasks.mainPage = SC.Page.design({
     }),
     
     statusBarView: SC.View.design(SC.Border, {
-      layout: { bottom: 0, height: 18, left: 0, right: 0 },
+      layout: { bottom: 0, height: 20, left: 0, right: 0 },
       classNames: ['status-bar'],
       childViews: ['summaryView', 'serverMessageView'],
       borderStyle: SC.BORDER_TOP,

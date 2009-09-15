@@ -9,7 +9,7 @@
 
 #mainPane {
   min-width: 1024px;
-  mid-height: 768px;
+  min-height: 768px;
   background: #444;
 }
 

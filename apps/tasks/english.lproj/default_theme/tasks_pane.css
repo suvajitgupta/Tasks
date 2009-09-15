@@ -12,7 +12,7 @@
  */
  
 .sc-collection-view.sc-list-view.sc-source-list.tasks-pane-inner {
-  background: #e2e4e7 !important;
+  background: #f2f2f2 !important;
 }
 
 
@@ -21,7 +21,7 @@
  */
  
 .assignee-item {
-  background: #e2e4e7;
+  background: #f2f2f2;
   left: 0px !important;
   right: 0px !important;
 }
@@ -56,7 +56,7 @@
  */
 
 .task-item {
-  background: #e2e4e7;
+  background: #f2f2f2;
   left: 23px !important;
   right: 5px !important;
 }
@@ -183,5 +183,5 @@
 
 .sc-theme.focus .sc-list-view.sc-source-list .sc-collection-item.sel {
 	border: 2px solid #444;
-  background: #e2e4e7;
+  background: #f2f2f2;
 }
