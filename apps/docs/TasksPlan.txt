@@ -69,7 +69,6 @@ v Set tasks toolbar button enablement based on having a selection [SG] <EO> @Don
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done $Feature %Passed
 ^ Add "Add Task" & "Del. Task" buttons in tasks toolbar [SG] <SE> @Done $Feature %Passed
 | Logged in user is default Submitter, Assignee is either set to the same as selected task (if one) or to logged in user
-- Beta: Fix task remaining in project after all tasks are deleted [SG] <BB> $Bug
 - Beta: Fix task editing cell floating at top under special circumstances [JH2] <SG> $Bug
 | To reproduce, for Catch! project, login as RMG, cancel assignee selection, type "game" in search filter, then Add Task
 v Allow "Add Task" button to be pressed a second time to keep in data entry mode, Esc will exit mode [SG] <MB> $Feature
