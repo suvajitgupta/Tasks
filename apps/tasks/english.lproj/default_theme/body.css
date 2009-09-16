@@ -15,9 +15,13 @@
 }
 
 .sc-theme .sc-view {
-  color: black;
+  color: #000;
 }
 
 .sc-theme .sc-gray-border {
   border: 0 !important;
+}
+
+.sc-view.sc-web-view .body {
+  background: yellow !important;
 }

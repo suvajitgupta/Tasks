@@ -313,8 +313,7 @@ Tasks.mixin({
   addProject: function() {
     var project = CoreTasks.get('store').createRecord(
       CoreTasks.Project, { name: CoreTasks.NEW_PROJECT_NAME } );
-    // HACK: [BB] Must set tasks array to empty because for some reason 
-    // SproutCore is not defaulting it to empty.
+    // FIXME: [SC] must set tasks array to empty because for some reason it is not defaulting it to empty.
     project.set('tasks', []);
     this.getPath('projectsController.content').pushObject(project);
 

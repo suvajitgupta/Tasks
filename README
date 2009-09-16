@@ -29,46 +29,29 @@ feedback or code contributions!
 
 -Suvajit Gupta (suvajit.gupta@eloqua.com)
 
-NAVIGATING TASKS ARTIFACTS/CODE
+
+GETTING TASKS CODE
 ==============================================================================
 
-To start getting oriented with Tasks, scan the following artifacts in the
-docs/ folder and then install/run the code (instructions in next few sections):
+Change to a directory where you would like to work on Tasks and type...
 
-1. TasksWireframe.png: shows the initial GUI design with callouts explaining
-   the key functionality.
+git clone <clone-id from github> tasks
+cd tasks
+git submodule init
+git submodule update
 
-2. TasksMockup*.png: shows the visual design concepts we used to style Tasks.
-
-3. TasksPlan.txt: shows the work breakdown and assignments - feel free to pick
-   up an item from here that is not "Done" and hack away at it!
-
-4. TasksStatecharts.pdf: shows the states/transitions within the GUI.
-
-5. TasksControllers.pdf: shows how the various controllers are wired together
-   and how the views relate to them (implementing thge root controller pattern).
-
-6. TasksAPI.xml: drag this file into your browser - the files in the "include"
-   folder render this specification in a nice format for you to understand the
-   REST API endpoints.
-
-7. TasksJSON.xml: documents the model object structure for what is sent to the
-   server via REST calls.
-
-8. TasksFileFormat.txt: Shows the simple/intuitive syntax for importing data
-   into and exporting data from Tasks.  In fact, the TasksPlan.txt is itself
-   written in this format and can be imported into Tasks!
 
 RUNNING PERSEVERE
 ==============================================================================
 
-To start the persevere server...
+To start the Persevere server...
 
 ./server-start.sh
 
-To stop the persevere server...
+To stop the Persevere server...
 
 ./server-stop.sh
+
 
 INITIAL PERSEVERE SETUP
 ==============================================================================
@@ -92,11 +75,14 @@ http://localhost:8088/tasks-server/explorer.html
 
 For example...
 
-{ name: 'Suvajit Gupta', loginName: 'SG', role: 'Developer' }
+{ name: 'Suvajit Gupta', loginName: 'SG', role: 'Manager' }
 
 6) Repeat as desired for multiple users.
 
 7) Click the "Save" button.
+
+// TODO: [SE] document steps for creating a team production deployment of Tasks
+
 
 RUNNING TASKS
 ==============================================================================
@@ -115,3 +101,34 @@ http://localhost:4020/tasks
    user JSON that you defined in the Persever setup).
 
 3) Enjoy!
+
+
+TASKS ARTIFACTS
+==============================================================================
+
+To start getting oriented with Tasks, scan the following artifacts in the
+docs/ folder:
+
+1. TasksPlan.txt: shows the work breakdown and assignments - feel free to pick
+   up an item that is not "Done" and hack away at it!
+
+2. TasksWireframe.png: shows the initial GUI design with callouts explaining
+   the key functionality.
+
+3. TasksMockup*.png: shows the visual design concepts we used to style Tasks.
+
+4. TasksStatecharts.pdf: shows the states/transitions within the GUI.
+
+5. TasksControllers.pdf: shows how the various controllers are wired together
+   and how the views relate to them (implementing thge root controller pattern).
+
+6. TasksAPI.xml: drag this file into your browser - the files in the "include"
+   folder render this specification in a nice format for you to understand the
+   REST API endpoints.
+
+7. TasksJSON.xml: documents the model object structure for what is sent to the
+   server via REST calls.
+
+8. TasksFileFormat.txt: Shows the simple/intuitive syntax for importing data
+   into and exporting data from Tasks.  In fact, the TasksPlan.txt is itself
+   written in this format and can be imported into Tasks!
