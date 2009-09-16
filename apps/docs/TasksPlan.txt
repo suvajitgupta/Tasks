@@ -65,7 +65,7 @@ Task Manager GUI
 v Enable Task Validation radio buttons only when in Done status [SG] <JH2> $Feature
 - Beta: Allow multi-selected tasks to be set to new status/priority/validation [JH2] <SG> $Feature
 ^ Add task search filter & corresponding delete button in top toolbar: support type-ahead searching [SG] @Done $Feature %Passed
-- Beta: Don't lose selection after changing task priority/status/validation [SC] <SG> $Bug
+- Don't lose selection after changing task priority/status/validation [SC] <SG> $Bug
 - Allow task searching by type, priority, status, and validation fields [SG] <MB>
 v Set tasks toolbar button enablement based on having a selection [SG] @Done $Feature %Passed
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done $Feature %Passed
