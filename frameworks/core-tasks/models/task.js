@@ -10,9 +10,9 @@ CoreTasks.TASK_TYPE_BUG = '_Bug';
 CoreTasks.TASK_TYPE_OTHER = '_Other';
 
 CoreTasks.taskTypeWeights = {};
-CoreTasks.taskTypeWeights[CoreTasks.TASK_TYPE_OTHER] = 3;
-CoreTasks.taskTypeWeights[CoreTasks.TASK_TYPE_FEATURE] = 2;
-CoreTasks.taskTypeWeights[CoreTasks.TASK_TYPE_BUG] = 1;
+CoreTasks.taskTypeWeights[CoreTasks.TASK_TYPE_FEATURE] = 3;
+CoreTasks.taskTypeWeights[CoreTasks.TASK_TYPE_BUG] = 2;
+CoreTasks.taskTypeWeights[CoreTasks.TASK_TYPE_OTHER] = 1;
 
 
 // Priorities:
