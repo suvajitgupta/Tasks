@@ -1,44 +1,14 @@
-INTRODUCTION
-==============================================================================
-Welcome to "Tasks!" I created "Tasks" for a few reasons:
-
-1. To become a "real" sample application that goes beyond the "hello world"
-   examples (like "clock") and snippets showing off facets of SproutCore
-   (like "drag").  SproutCore is very elegant and powerful framework and my
-   goal is to use Tasks to ramp up as well as showcase its capabilities.
-
-2. To illustrate how to engineer a non-trivial application using things like
-   a task plan (scope/assignments), wireframes/mockups (vision/GUI design),
-   statecharts/MVC structure (technical design), and integration with a remote
-   server via REST/JSON.
-
-3. We all build software and "Tasks" can become your agile software management
-   tool - you won't need the cumbersome task tracking & bean counting tools
-   overhead staff like to justify their existence with :-)
-
-4. SproutCore itself will go through an explosive launch and maturation in
-   2009.  During this metamorphosis, Tasks can become the feature/bug tracking
-   tool for SproutCore - what better that an application built with SproutCore
-   itself!
-
-Tasks is "in progress" - we plan to tinker with it in the coming months and
-mature it into the tool we use to manage the development of a very complex
-commercial SproutCore application.  I hope you will find Tasks useful as
-you start your journey with SproutCore.  Please feel free to send me your
-feedback or code contributions!
-
--Suvajit Gupta (suvajit.gupta@eloqua.com)
-
-
-GETTING TASKS CODE
+GETTING TASKS & SPROUTCORE CODE
 ==============================================================================
 
 Change to a directory where you would like to work on Tasks and type...
 
-git clone <clone-id from github> tasks
+git clone <Tasks clone-id from github> tasks
 cd tasks
 git submodule init
 git submodule update
+cd ..
+git clone <Abbot clone-id from sproutcore> abbot
 
 
 RUNNING PERSEVERE
@@ -89,7 +59,8 @@ RUNNING TASKS
 
 1) Start the SproutCore server...
 
-sc-server
+cd tasks
+../abbot/bin/sc-server
 
 (This assumes that you have the SC build tools installed.)
 
@@ -101,6 +72,39 @@ http://localhost:4020/tasks
    user JSON that you defined in the Persever setup).
 
 3) Enjoy!
+
+
+TASKS OVERVIEW
+==============================================================================
+
+Welcome to "Tasks!" I created "Tasks" for a few reasons:
+
+1. To become a "real" sample application that goes beyond the "hello world"
+   examples (like "clock") and snippets showing off facets of SproutCore
+   (like "drag").  SproutCore is very elegant and powerful framework and my
+   goal is to use Tasks to ramp up as well as showcase its capabilities.
+
+2. To illustrate how to engineer a non-trivial application using things like
+   a task plan (scope/assignments), wireframes/mockups (vision/GUI design),
+   statecharts/MVC structure (technical design), and integration with a remote
+   server via REST/JSON.
+
+3. We all build software and "Tasks" can become your agile software management
+   tool - you won't need the cumbersome task tracking & bean counting tools
+   overhead staff like to justify their existence with :-)
+
+4. SproutCore itself will go through an explosive launch and maturation in
+   2009.  During this metamorphosis, Tasks can become the feature/bug tracking
+   tool for SproutCore - what better that an application built with SproutCore
+   itself!
+
+Tasks is "in progress" - we plan to tinker with it in the coming months and
+mature it into the tool we use to manage the development of a very complex
+commercial SproutCore application.  I hope you will find Tasks useful as
+you start your journey with SproutCore.  Please feel free to send me your
+feedback or code contributions!
+
+-Suvajit Gupta (suvajit.gupta@eloqua.com)
 
 
 TASKS ARTIFACTS

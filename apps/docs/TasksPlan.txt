@@ -30,6 +30,8 @@ v Add missing 'localize' support back in CollectionView (regression from SC 0.9)
 v Beta: Make in-cell editors fit with collection view item size [SG] <SG> $Bug
 | Fix in CSS add class .ghost to list item view and set its background to none
 - Beta: Track/optimize calls to assignments controller for redrawing tasks tree [SG] <BB>
+- Show newly added tasks/projects with a badge [SG]
+- Add some simple metrics/reporting capabilities [SG]
 v Provide support for color-blind users (don't use color coding as only mechanism for status/validation) [SG] $Feature
 
 Project Manager GUI
