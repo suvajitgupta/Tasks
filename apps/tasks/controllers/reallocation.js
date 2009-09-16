@@ -18,12 +18,6 @@ Tasks.reallocationController = SC.Object.create(SC.CollectionViewDelegate,
   // DROP TARGET SUPPORT
   // 
 
-  /**
-    If the drag data includes employees, then we can accept a move or copy
-    from most locations.  If the dragSource is another collection view sharing
-    the same delegate, then we know how to do a move, so allow that.  
-    Otherwise, just allow a copy.
-  */
   collectionViewComputeDragOperations: function(view, drag, proposedDragOperations) {
     if (drag.hasDataType(Tasks.Task)) {
         return SC.DRAG_MOVE;
@@ -38,7 +32,7 @@ Tasks.reallocationController = SC.Object.create(SC.CollectionViewDelegate,
   */
   collectionViewPerformDragOperation: function(view, drag, dragOp, idx, dropOp) {
     
-    if (dragOp & SC.DRAG_REORDER) return SC.DRAG_NONE; // allow reorder
+    if (dragOp & SC.DRAG_REORDER) return SC.DRAG_MOVE; // disallow reorder
     
     var tasks = drag.dataForType(Tasks.Task),
         content   = view.get('content'),

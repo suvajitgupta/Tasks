@@ -179,16 +179,24 @@ Tasks.assignmentsController = SC.ArrayController.create(
       displayName: displayName,
       loading: loading,
       assignee: assigneeObj.assignee,
-      treeItemChildren: tasks.sort(function(a,b) { // sort by status, then by validation, then by priority
+      treeItemChildren: tasks.sort(function(a,b) { // sort by status, then by validation (if "Done"), then by priority, lastly by type
+        
         var aStatus = a.get('status');
         var bStatus = b.get('status');
         if(aStatus !== bStatus) return CoreTasks.taskStatusWeights[bStatus] - CoreTasks.taskStatusWeights[aStatus];
+        
         if(aStatus === CoreTasks.TASK_STATUS_DONE) {
           var aValidation = a.get('validation');
           var bValidation = b.get('validation');
           if(aValidation !== bValidation) return CoreTasks.taskValidationWeights[bValidation] - CoreTasks.taskValidationWeights[aValidation];
         }
-        return CoreTasks.taskPriorityWeights[b.get('priority')] - CoreTasks.taskPriorityWeights[a.get('priority')];
+        
+        var aPriority = a.get('priority');
+        var bPriority = b.get('priority');
+        if(aPriority !== bPriority) return CoreTasks.taskPriorityWeights[bPriority] - CoreTasks.taskPriorityWeights[aPriority];
+        
+        return CoreTasks.taskTypeWeights[b.get('type')] - CoreTasks.taskTypeWeights[a.get('type')];
+        
       }),
       treeItemIsExpanded: YES
     }));

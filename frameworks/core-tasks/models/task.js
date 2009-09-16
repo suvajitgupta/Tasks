@@ -9,6 +9,12 @@ CoreTasks.TASK_TYPE_FEATURE = '_Feature'; // default
 CoreTasks.TASK_TYPE_BUG = '_Bug';
 CoreTasks.TASK_TYPE_OTHER = '_Other';
 
+CoreTasks.taskTypeWeights = {};
+CoreTasks.taskTypeWeights[CoreTasks.TASK_TYPE_OTHER] = 3;
+CoreTasks.taskTypeWeights[CoreTasks.TASK_TYPE_FEATURE] = 2;
+CoreTasks.taskTypeWeights[CoreTasks.TASK_TYPE_BUG] = 1;
+
+
 // Priorities:
 CoreTasks.TASK_PRIORITY_HIGH = '_High';
 CoreTasks.TASK_PRIORITY_MEDIUM = '_Medium'; // default
@@ -31,6 +37,7 @@ CoreTasks.taskStatusWeights[CoreTasks.TASK_STATUS_DONE] = 4;
 CoreTasks.taskStatusWeights[CoreTasks.TASK_STATUS_ACTIVE] = 3;
 CoreTasks.taskStatusWeights[CoreTasks.TASK_STATUS_PLANNED] = 2;
 CoreTasks.taskStatusWeights[CoreTasks.TASK_STATUS_RISKY] = 1;
+
 
 // Validation status:
 CoreTasks.TASK_VALIDATION_UNTESTED = '_Untested'; // default
