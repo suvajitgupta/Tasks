@@ -21,7 +21,3 @@
 .sc-theme .sc-gray-border {
   border: 0 !important;
 }
-
-.sc-view.sc-web-view .body {
-  background: yellow !important;
-}
