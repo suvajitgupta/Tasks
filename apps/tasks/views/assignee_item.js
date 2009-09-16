@@ -26,6 +26,9 @@ Tasks.AssigneeItemView = SC.ListItemView.extend(
       
       context.addClass('assignee-item');
       
+      var tasksCount = content.get('treeItemChildren').get('length');
+      var tooltip = tasksCount + "_Tasks".loc();
+      
       var loadingTooltip = null;
       var loading = content.get('loading');
       if(loading === CoreTasks.USER_NOT_LOADED) {
@@ -45,8 +48,9 @@ Tasks.AssigneeItemView = SC.ListItemView.extend(
         context.addClass('assignee-over-loaded');
       }
       
-      context.attr('title', loadingTooltip);
-      context.attr('alt', loadingTooltip);
+      tooltip += loadingTooltip;
+      context.attr('title', tooltip);
+      context.attr('alt', tooltip);
       
     }
     sc_super();

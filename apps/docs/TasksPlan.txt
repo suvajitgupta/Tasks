@@ -78,7 +78,7 @@ v Allow "Add Task" button to be pressed a second time to keep in data entry mode
 ^ Show effort subtotals (exclude Done or Low priority tasks) in curly braces for load balancing [SG] @Done $Feature %Passed
 - Append "?" for range-based subtotals including tasks with unspecified efforts [SG] @Done $Feature %Passed
 - Color code assignee non loading in green, under loading in gray, proper loading in blue, and over loading in red [SG] @Done $Feature %Passed
-v Explain assignee loading color codes via hover over tooltips [SG] @Done $Feature %Passed
+v Add hover over tooltip for assignees to show how many tasks they have and to explain loading color codes [SG] @Done $Feature %Passed
 ^ Allow drag-n-drop task reordering [BB] <SG> @Active $Feature
 ^ Allow multi-task drag-n-drop reassignment [BB] <SG>  @Done $Feature %Passed
 ^ Add popup viewer/editor for Task Submitter, Assignee, and Description [JH2] <SG> @Done %Passed $Feature
