@@ -15,6 +15,10 @@
   background: #f2f2f2 !important;
 }
 
+.sc-view.sc-ghost-view .sc-collection-view.sc-list-view.sc-source-list.tasks-pane-inner {
+  background: none !important;
+}
+
 
 /*-----------------------------------------------------------------
  * Assignee loading styles
@@ -52,13 +56,17 @@
 
 
 /*-----------------------------------------------------------------
- * Task item styles
+ * Task list item styles
  */
 
 .task-item {
   background: #f2f2f2;
   left: 23px !important;
   right: 5px !important;
+}
+
+.sc-view.sc-ghost-view .task-item {
+  background: none !important;
 }
 
 .task-item .sc-outline {

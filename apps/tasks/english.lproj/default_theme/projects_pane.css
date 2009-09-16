@@ -6,11 +6,24 @@
   @author Suvajit Guupta
   
 */
-.sc-scroll-view.projects-pane,
-.sc-collection-view.projects-pane-inner {
+
+/*-----------------------------------------------------------------
+ * Project pane styles
+ */
+ 
+.sc-scroll-view.projects-pane, .sc-collection-view.projects-pane-inner {
   background: static_url('images/default-theme-repeat-y.png') repeat-y 0 0;
   border: 0 !important;
 }
+
+.sc-view.sc-ghost-view .sc-scroll-view.projects-pane, .sc-collection-view.projects-pane-inner {
+  background: none !important;
+}
+
+
+/*-----------------------------------------------------------------
+ * Project list item styles
+ */
 
 .projects-pane-inner .sc-collection-item {
   border: 0 !important;

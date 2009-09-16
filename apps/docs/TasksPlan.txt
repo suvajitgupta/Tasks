@@ -28,7 +28,6 @@ v On Firefox dragging window to make it smaller leaves TextField entry text in t
 v In Safari you can't click on assigneee selection filter and then the task filter [SC] <SG> $Bug
 v Add missing 'localize' support back in CollectionView (regression from SC 0.9) [SC] <SG> $Bug
 v Beta: Make in-cell editors fit with collection view item size [SG] <SG> $Bug
-v Beta: Fix spurious box-like ghost view with task while dragging [SG] <SG> $Bug
 | Fix in CSS add class .ghost to list item view and set its background to none
 - Beta: Track/optimize calls to assignments controller for redrawing tasks tree [SG] <BB>
 v Provide support for color-blind users (don't use color coding as only mechanism for status/validation) [SG] $Feature
@@ -108,6 +107,7 @@ Application Manager GUI
 v Beta: Enable/disable Save button based on data modification [SG] <SE> $Feature
 - Add Refresh button to get most recent data from server [SG] <SE> $Feature
 - Add "Import" button in top toolbar with associated pop up panel [SG] <BB> @Done $Feature %Passed
+- Allow import of large files (such as TasksPlan.txt) [SG] <SE> $Bug
 v Allow drag-n-drop of a TXT file into App for data importing (using Google Gears) [MB] <SG> @Risky $Feature
 | Gears needs to be ported to Snow Leopard
 - Add "Export" button in top toolbar with associated pop up panel [SG] @Done $Feature %Passed
