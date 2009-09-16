@@ -384,11 +384,13 @@ Tasks.mixin({
     var tc = this.get('tasksController');
     var sel = tc.get('selection');
 
-    if (sel && sel.length() > 0) {
+    if (sel && sel.length() > 0) { // Copy some attributes of selected task to new task
       var selectedObject = sel.firstObject();
       if (SC.instanceOf(selectedObject, CoreTasks.Task)) {
         var taskAssignee = selectedObject.get('assignee');
         if(taskAssignee) task.set('assignee', taskAssignee);
+        task.set('type', selectedObject.get('type'));
+        task.set('priority', selectedObject.get('priority'));
       }
     }
 
