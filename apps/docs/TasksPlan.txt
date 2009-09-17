@@ -41,7 +41,7 @@ Project Manager GUI
 - Use icon to indicate if Project has any tasks or not [SG] @Done $Feature %Passed
 v Add hover over tooltip for projects to show how many tasks they contain [SG] @Done $Feature %Passed
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done $Feature %Passed
-- Beta: Make All/Unallocated Tasks project names to be non-editable upom double clicking $Active $Bug [SG]
+- Beta: Make All/Unallocated Tasks project names to be non-editable upon double clicking $Active $Bug [SG]
 ^ Add "Add Project" & "Del. Project" buttons in projects toolbar [SG] <SC> @Done $Feature %Passed
 - Add warning Alert box about deleting Project with Tasks [SG] @Done $Feature %Passed
 - Don't create a project if it already exists during Import [SG] @Done $Feature %Passed

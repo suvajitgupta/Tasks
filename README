@@ -1,14 +1,13 @@
 GETTING TASKS & SPROUTCORE CODE
 ==============================================================================
 
-Change to a directory where you would like to work on Tasks and type...
+Change to the directory where you would like to work on Tasks and type...
 
-git clone <Tasks clone-id from github> tasks
+git clone git://github.com/sproutit/sproutcore-abbot.git abbot
+git clone git://github.com/suvajitgupta/Tasks.git tasks
 cd tasks
 git submodule init
 git submodule update
-cd ..
-git clone <Abbot clone-id from sproutcore> abbot
 
 
 RUNNING PERSEVERE
@@ -46,6 +45,7 @@ http://localhost:8088/tasks-server/explorer.html
 For example...
 
 { name: 'Suvajit Gupta', loginName: 'SG', role: 'Manager' }
+{ name: 'Sean Eidemiller', loginName: 'SE', role: 'Developer' }
 
 6) Repeat as desired for multiple users.
 
@@ -59,7 +59,6 @@ RUNNING TASKS
 
 1) Start the SproutCore server...
 
-cd tasks
 ../abbot/bin/sc-server
 
 (This assumes that you have the SC build tools installed.)
@@ -71,7 +70,7 @@ http://localhost:4020/tasks
 2) Enter your login name in the dialog box (corresponds to "loginName" in the
    user JSON that you defined in the Persever setup).
 
-3) Enjoy!
+3) Add a project, add tasks to it, hit Save periodically, have fun!
 
 
 TASKS OVERVIEW
