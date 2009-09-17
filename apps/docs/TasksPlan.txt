@@ -28,7 +28,7 @@ v On Firefox dragging window to make it smaller leaves TextField entry text in t
 v In Safari you can't click on assigneee selection filter and then the task filter [SC] <SG> $Bug
 v Add missing 'localize' support back in CollectionView (regression from SC 0.9) [SC] <SG> $Bug
 ^ Beta: Support default sorting of projects (alpha) and tasks (by status, validation, priority, type) [SG] <SG> @Active $Feature
-- Beta: Make in-cell editors fit with collection view item size [SG] <SG> @Active $Bug
+- Beta: Make task in-cell editors fit with collection view item size [SG] <SG> @Active $Bug
 | Fix in CSS add class .ghost to list item view and set its background to none
 - Beta: Track/optimize calls to assignments controller for redrawing tasks tree [SG] <BB>
 - Show newly added tasks/projects with a badge [SG]
@@ -41,14 +41,14 @@ Project Manager GUI
 - Use icon to indicate if Project has any tasks or not [SG] @Done $Feature %Passed
 v Add hover over tooltip for projects to show how many tasks they contain [SG] @Done $Feature %Passed
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done $Feature %Passed
-- Beta: Make All/Unallocated Tasks project names to be non-editable upom double clicking $Feature [SG]
+- Beta: Make All/Unallocated Tasks project names to be non-editable upom double clicking $Active $Bug [SG]
 ^ Add "Add Project" & "Del. Project" buttons in projects toolbar [SG] <SC> @Done $Feature %Passed
 - Add warning Alert box about deleting Project with Tasks [SG] @Done $Feature %Passed
 - Don't create a project if it already exists during Import [SG] @Done $Feature %Passed
 v Disallow duplicate project names after editing, provide warning to user for duplicates [SG] @Active $Feature
 v Add summary in projects toolbar showing number of projects & number of tasks for selected project [SG] <MB> @Done $Feature %Passed
 v Set projects toolbar button enablement based on having a selection [SG] @Done $Feature %Passed
-v Don't enable Add/Del. Tasks when on "All Tasks" project [SG] <BB> @Done %Passed $Feature
+v Disable Add/Del. Tasks buttons when on "All Tasks" project [SG] <BB> @Done %Passed $Feature
 - Select first project at startup [SG] <JH2> @Done $Feature %Passed
 ^ Add virtual "All Tasks" & "Unallocated Tasks" projects and display them grayed out in projects list [SG] <SE> @Done
 - Disallow "All Tasks" & "Unallocated Tasks" projects from being deleted [SG] @Done $Feature %Passed
@@ -70,7 +70,6 @@ v Enable Task Validation radio buttons only when in Done status [SG] <JH2> $Feat
 - Allow multi-selected tasks to be set to new type/status/priority/validation [SG] <JH2> $Feature
 ^ Add task search filter & corresponding delete button in top toolbar: support type-ahead searching [SG] @Done $Feature %Passed
 - Don't lose selection after changing task priority/status/validation [SC] <SG> $Bug
-- Beta: Localize _NewTask name so that it shows up properly when user starts editing it $Bug [SG]
 - Allow task searching by type, priority, status, and validation fields [SG] <MB>
 v Set tasks toolbar button enablement based on having a selection [SG] @Done $Feature %Passed
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done $Feature %Passed
