@@ -7,11 +7,25 @@
   
 */
 
-#mainPane {
+/*
+// TODO: [SC] see how to make this work instead of having min-width/height specified for mainPane
+body {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
   min-width: 1024px;
-  // FIXME: [SC] figure out why setting min-height property causes unnecessary vertical scrollbars
-  // min-height: 768px;
+  min-height: 768px;
+}
+*/
+
+#mainPane {
   background: #444;
+  min-width: 1024px;
 }
 
 .sc-theme .sc-view {

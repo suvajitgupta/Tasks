@@ -61,7 +61,7 @@
 
 .task-item {
   background: #f2f2f2;
-  left: 23px !important;
+  left: 25px !important;
   right: 5px !important;
 }
 
@@ -190,6 +190,6 @@
  */
 
 .sc-theme.focus .sc-list-view.sc-source-list .sc-collection-item.sel {
-	border: 2px solid #444;
+	outline: 1px solid #444;
   background: #f2f2f2;
 }
