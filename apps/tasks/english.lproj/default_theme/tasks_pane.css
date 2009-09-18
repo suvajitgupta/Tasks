@@ -29,7 +29,7 @@
  
 .assignee-item {
   background: #f2f2f2 !important;
-  left: 1px !important;
+  left: 0px !important;
   right: 0px !important;
 }
 
@@ -63,12 +63,12 @@
 
 .task-item {
   background: #f2f2f2;
-  left: 1px !important;
+  left: 20px !important;
   right: 5px !important;
 }
 
 .task-item .sc-outline {
-  left: 20px !important;
+  left: 0px !important;
   right: 22px !important;
 }
 

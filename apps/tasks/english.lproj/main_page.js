@@ -377,14 +377,14 @@ Tasks.mainPage = SC.Page.design({
             }),
 
             Tasks.TitleView.design({
-              layout: { top: 3, bottom: 30, left: 285, width: 200},
+              layout: { top: 3, bottom: 30, left: 285, width: 195},
               classNames: ['task-attribute-set-title'],
               value: "_Priority".loc(),
               toolTip: "_PriorityTooltip".loc()
             }),
 
             SC.RadioView.design({
-              layout: { top: 20, bottom: 6, left: 285, width: 200 },
+              layout: { top: 20, bottom: 6, left: 285, width: 195 },
               escapeHTML: NO,
               classNames: ['task-attribute-set'],
               items: [
@@ -403,14 +403,14 @@ Tasks.mainPage = SC.Page.design({
             }),
 
             Tasks.TitleView.design({
-              layout: { top: 3, bottom: 30, left: 500, width: 260},
+              layout: { top: 3, bottom: 30, left: 495, width: 265},
               classNames: ['task-attribute-set-title'],
               value: "_Status".loc(),
               toolTip: "_StatusTooltip".loc()
             }),
 
             SC.RadioView.design({
-              layout: { top: 20, bottom: 6, left: 500, width: 260 },
+              layout: { top: 20, bottom: 6, left: 495, width: 265 },
               escapeHTML: NO,
               classNames: ['task-attribute-set'],
               items: [
