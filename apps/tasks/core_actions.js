@@ -67,7 +67,7 @@ Tasks.mixin({
       CoreTasks.set('user', user);
       
       var welcomeMessage = Tasks.getPath('mainPage.mainPane.welcomeMessage');
-      welcomeMessage.set('value', "_Welcome".loc() + CoreTasks.getPath('user.name').toUpperCase() + ' !');
+      welcomeMessage.set('value', "_Welcome".loc() + CoreTasks.getPath('user.name').toUpperCase());
       welcomeMessage.set('toolTip', "_LoginSince".loc() + new Date().format('hh:mm:ss a MMM dd, yyyy'));
 
       if(user.get('role') === CoreTasks.USER_ROLE_DEVELOPER.loc()) {
@@ -170,7 +170,7 @@ Tasks.mixin({
 
     // Create the AllTasks project to hold all tasks in the system.
     var allTasksProject = store.createRecord(CoreTasks.Project, {
-      name: CoreTasks.ALL_TASKS_NAME
+      name: CoreTasks.ALL_TASKS_NAME.loc()
     });
 
     allTasksProject.set('tasks', all);
@@ -195,7 +195,7 @@ Tasks.mixin({
     // Create the UnallocatedTasks project with the unallocated tasks.
     var unallocatedTasksProject = CoreTasks.createRecord(CoreTasks.Project, {
       id: 0,
-      name: CoreTasks.UNALLOCATED_TASKS_NAME
+      name: CoreTasks.UNALLOCATED_TASKS_NAME.loc()
     });
 
     unallocatedTasksProject.set('tasks', unallocated);
@@ -317,7 +317,7 @@ Tasks.mixin({
    */
   addProject: function() {
     var project = CoreTasks.get('store').createRecord(
-      CoreTasks.Project, { name: CoreTasks.NEW_PROJECT_NAME } );
+      CoreTasks.Project, { name: CoreTasks.NEW_PROJECT_NAME.loc() } );
     // FIXME: [SC] must set tasks array to empty because for some reason it is not defaulting it to empty.
     project.set('tasks', []);
     this.getPath('projectsController.content').pushObject(project);

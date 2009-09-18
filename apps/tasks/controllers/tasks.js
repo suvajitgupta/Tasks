@@ -35,7 +35,7 @@ Tasks.tasksController = SC.TreeController.create(
   
   _isAllTasksProjectSelected: function() {
     var selectedProjectName = Tasks.projectController.getPath('content.firstObject.name');
-    if (selectedProjectName === CoreTasks.ALL_TASKS_NAME) return false;
+    if (selectedProjectName === CoreTasks.ALL_TASKS_NAME.loc()) return false;
     return true;
   }
 

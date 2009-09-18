@@ -38,7 +38,7 @@ Tasks.exportDataController = SC.ObjectController.create(
     var pc = Tasks.get('projectsController');
     pc.forEach(function(project){
       
-      if(project.get('name') === CoreTasks.ALL_TASKS_NAME) return; // skip AllTasks Project
+      if(project.get('name') === CoreTasks.ALL_TASKS_NAME.loc()) return; // skip AllTasks Project
       ret += project.exportData();
       
       var tasks = project.get('tasks');
@@ -84,7 +84,7 @@ Tasks.exportDataController = SC.ObjectController.create(
     
     var ret = "# Tasks data export at " + new Date().format('hh:mm:ss a MMM dd, yyyy') + '\n\n';
     var selectedProjectName = selectedProject.get('name');
-    if (selectedProjectName === CoreTasks.ALL_TASKS_NAME && !Tasks.assignmentsController.hasFiltering()) {
+    if (selectedProjectName === CoreTasks.ALL_TASKS_NAME.loc() && !Tasks.assignmentsController.hasFiltering()) {
       ret += this._exportAllData();
     }
     else {

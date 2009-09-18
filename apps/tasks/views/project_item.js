@@ -25,7 +25,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(
     if(content) {
 
       var projectName = content.get('name');
-      if (projectName === CoreTasks.ALL_TASKS_NAME || projectName === CoreTasks.UNALLOCATED_TASKS_NAME) context.addClass('reserved-project-item');
+      if (projectName === CoreTasks.ALL_TASKS_NAME.loc() || projectName === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) context.addClass('reserved-project-item');
       else context.addClass('regular-project-item');
 
       var tasksCountTooltip = content.get('tasks').get('length') + "_Tasks".loc();

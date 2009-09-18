@@ -35,7 +35,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         Tasks.TitleView.design({
-          layout: { centerY: 0, height: 20, centerX: -60, width: 250 },
+          layout: { centerY: 0, height: 20, centerX: -88, width: 250 },
           classNames: ['welcome-message']
         }),
       
@@ -196,7 +196,7 @@ Tasks.mainPage = SC.Page.design({
       // TODO: [SG] figure out how to get icons to be disabled for toolbar buttons
         
         SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerY: 2, left: 10, height: 24, width: 90 },
+          layout: { centerY: 2, left: 5, height: 24, width: 95 },
           icon: 'project-add-icon',
           value: "_AddProject".loc(),
           classNames: ['toolbar-label'],
@@ -206,7 +206,7 @@ Tasks.mainPage = SC.Page.design({
         }),
       
         SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerY: 2, left: 105, height: 24, width: 100 },
+          layout: { centerY: 2, left: 110, height: 24, width: 105 },
           icon: 'project-del-icon',
           value: "_DelProject".loc(),
           classNames: ['toolbar-label'],
