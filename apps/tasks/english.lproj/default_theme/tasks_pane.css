@@ -34,29 +34,26 @@
 }
 
 .assignee-item label {
+  color: white !important;
   padding-left: 10px;
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
 }
 
 .assignee-not-loaded label {
-  color: white !important;
-  background: #262 none repeat scroll 0 0 !important;
+  background: #444 none repeat scroll 0 0 !important;
 }
 
 .assignee-under-loaded label {
-  color: white !important;
-  background: #333 none repeat scroll 0 0 !important;
+  background: #363 none repeat scroll 0 0 !important;
 }
 
 .assignee-properly-loaded label {
- color: white !important;
- background: #44F none repeat scroll 0 0 !important;
+ background: #33C none repeat scroll 0 0 !important;
 }
 
 .assignee-over-loaded label {
-  color: white !important;
-  background: #F33 none repeat scroll 0 0 !important;
+  background: #C33 none repeat scroll 0 0 !important;
 }
 
 
