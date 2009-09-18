@@ -19,39 +19,44 @@
   background: none !important;
 }
 
+.sc-view.sc-list-item-view.sc-collection-item.sc-group-item {
+  //left: 0px !important;
+}
 
 /*-----------------------------------------------------------------
  * Assignee loading styles
  */
  
 .assignee-item {
-  background: #f2f2f2;
-  left: 0px !important;
+  background: #f2f2f2 !important;
+  left: 1px !important;
   right: 0px !important;
+}
+
+.assignee-item label {
+  padding-left: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
 }
 
 .assignee-not-loaded label {
   color: white !important;
   background: #262 none repeat scroll 0 0 !important;
-  padding-left: 5px;
 }
 
 .assignee-under-loaded label {
   color: white !important;
   background: #333 none repeat scroll 0 0 !important;
-  padding-left: 5px;
 }
 
 .assignee-properly-loaded label {
  color: white !important;
  background: #44F none repeat scroll 0 0 !important;
- padding-left: 5px;
 }
 
 .assignee-over-loaded label {
   color: white !important;
   background: #F33 none repeat scroll 0 0 !important;
-  padding-left: 5px;
 }
 
 
@@ -61,17 +66,17 @@
 
 .task-item {
   background: #f2f2f2;
-  left: 25px !important;
+  left: 1px !important;
   right: 5px !important;
+}
+
+.task-item .sc-outline {
+  left: 20px !important;
+  right: 22px !important;
 }
 
 .sc-view.sc-ghost-view .task-item {
   background: none !important;
-}
-
-.task-item .sc-outline {
-  left: 0px !important;
-  right: 22px !important;
 }
 
 
@@ -80,20 +85,20 @@
  */
 
 .task-icon-feature {
-  height: 16px;
-  width: 16px;
+  height: 16px !important;
+  width: 16px !important;
   background: static_url('images/feature.gif') no-repeat 0 0;
 }
 
 .task-icon-bug {
-  height: 16px;
-  width: 16px;
+  height: 16px !important;
+  width: 16px !important;
   background: static_url('images/bug.gif') no-repeat 0 0;
 }
 
 .task-icon-other {
-  width: 16px;
-	height: 16px;
+  width: 16px !important;
+	height: 16px !important;
 	background: no-repeat sc_static('icons/shared') -0px -464px;
 }
 
@@ -143,19 +148,19 @@
  */
 
 .task-validation-untested label {
-  padding-left: 2px;
-  padding-right: 2px;
+  padding-left: 2px !important;
+  padding-right: 2px !important;
 }
 
 .task-validation-passed label {
-  padding-left: 2px;
-  padding-right: 2px;
+  padding-left: 2px !important;
+  padding-right: 2px !important;
   background: #9F9 none repeat scroll 0 0 !important;
 }
 
 .task-validation-failed label {
-  padding-left: 2px;
-  padding-right: 2px;
+  padding-left: 2px !important;
+  padding-right: 2px !important;
   background: #FCF none repeat scroll 0 0 !important;
 }
 
@@ -165,22 +170,22 @@
  */
 
 .task-description {
-  position: absolute;
-  top: 3px;
-  right: 3px;
-  width: 16px;
-  padding-left: 20px;
+  position: absolute !important;
+  top: 3px !important;
+  right: 3px !important;
+  width: 16px !important;
+  padding-left: 20px; // FIXME: [SC] why is so much padding needed - otherwise get a scrollbar when the popup pane comes up!
 }
 
 .task-icon-with-description {
-  width:16px;
-  height:16px;
+  width:16px !important;
+  height:16px !important;
   background: static_url('images/has_description.png');
 }
 
 .task-icon-no-description {
-  width:16px;
-  height:16px;
+  width:16px !important;
+  height:16px !important;
   background: static_url('images/no_description.png');
 }
 
@@ -190,6 +195,6 @@
  */
 
 .sc-theme.focus .sc-list-view.sc-source-list .sc-collection-item.sel {
-	outline: 1px solid #444;
-  background: #f2f2f2;
+	outline: 1px solid #444 !important;
+  background: #f2f2f2 !important;
 }
