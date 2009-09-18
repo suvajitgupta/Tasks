@@ -73,6 +73,7 @@ SC.stringsFor('English', {
   '_Untested': "Untested",
   '_Passed': "Passed",
   '_Failed': "Failed",
+  '_Effort:': "Effort:",
   '_Description:': "Description:",
   '_EditorTooltip': "Click to view/edit Task submitter/assignee/description",
   

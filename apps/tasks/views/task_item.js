@@ -34,7 +34,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       var layer = this.get('layer');
       this._editorPane = SC.PickerPane.create({
         
-        layout: { width: 500, height: 150 },
+        layout: { width: 500, height: 175 },
         contentView: SC.View.design({
           layout: { left: 0, right: 0, top: 0, bottom: 0},
           childViews: [
@@ -65,10 +65,21 @@ Tasks.TaskItemView = SC.ListItemView.extend(
 
             SC.LabelView.design({
               layout: { top: 42, left: 10, height: 17, width: 100 },
+              value: "_Effort:".loc()
+            }),
+            SC.TextFieldView.design({
+              layout: { top: 42, left: 80, width: 80, height: 16 },
+              valueBinding: SC.binding('.content.effort', this)
+              // TODO: [SG] only allow valid values for effort
+              // TODO: [SG] add on-screen help to explain how effort can be specified (decimals, ranges)
+            }),
+
+            SC.LabelView.design({
+              layout: { top: 67, left: 10, height: 17, width: 100 },
               value: "_Description:".loc()
             }),
             SC.TextFieldView.design({
-              layout: { top: 65, left: 10, right: 10, bottom: 10 },
+              layout: { top: 90, left: 10, right: 10, bottom: 10 },
               isTextArea: YES,
               valueBinding: SC.binding('.content.description', this)
             })
