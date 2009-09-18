@@ -2,16 +2,17 @@
 
   Bottom Bar Styling 
 
-  @author Matt Grantham
 	@author Suvajit Gupta
+  @author Matt Grantham
   
 */
 
 /*-----------------------------------------------------------------
- * Control bar styles
- */
+* Control bar styles
+*/
 
 .control-bar {
+  // background-color: none !important;
   background: static_url('images/default-theme-toolbar-bg.png') repeat-x 0 0; 
 }
 
@@ -22,13 +23,14 @@
   font-weight: bold !important;
 }
 
-.task-attribute-set-grouping {
-  background-color: #777 !important;
-}
-
 .task-attribute-set {
   font-size: 10px !important;
-  line-height: 2;
+  text-align: center !important;
+  line-height: 2.5;
+	border: 1px solid #444;
+  background: #CCC !important;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
 }
 
 

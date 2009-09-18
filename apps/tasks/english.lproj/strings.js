@@ -28,7 +28,7 @@ SC.stringsFor('English', {
   '_Export': "Export",
   '_ExportTooltip': "Export Tasks data to a text format",
   '_Settings': "Settings",
-  '_SettingsTooltip': "Manage Tasks settings",
+  '_SettingsTooltip': "Manage Tasks users and settings",
   '_Help': "Help",
   '_HelpTooltip': "Launch Tasks help",
   '_Logout': "Logout",

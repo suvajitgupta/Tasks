@@ -50,7 +50,7 @@
 }
 
 .welcome-label {
-  font-size: 11px !important;
+  font-size: 12px !important;
   font-weight: bold !important;
   text-align: left !important;
   color: white !important;
@@ -102,7 +102,7 @@
 
 .toolbar-label.disabled {
   font-size: 10px !important;
-  color: #999 !important;
+  color: #AAA !important;
   text-align: center !important;
   font-weight: bold !important;
 }

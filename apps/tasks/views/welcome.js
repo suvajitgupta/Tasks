@@ -15,7 +15,7 @@ Tasks.WelcomeView = SC.LabelView.extend(
 /** @scope Tasks.WelcomeView.prototype */ {
   
   render: function(context, firstTime) {
-    context.push("_Welcome".loc() + CoreTasks.getPath('user.name').toUpperCase() + ' (' + CoreTasks.getPath('user.loginName') + ')');
+    context.push("_Welcome".loc() + CoreTasks.getPath('user.name').toUpperCase() + ' !');
     var loginTime = "_LoginSince".loc() + CoreTasks.get('loginTime').format('hh:mm:ss a MMM dd, yyyy');
     context.attr('title', loginTime);
     context.attr('alt', loginTime);
