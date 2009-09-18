@@ -42,7 +42,7 @@
   background: static_url('images/default-theme-bar-bg.png') repeat-x 0 -44px;
 }
 
-.status-bar-label {
+.status-bar-message {
   font-size: 10px !important;
   color: #000 !important;
   text-shadow: #fff 0 1px 1px;

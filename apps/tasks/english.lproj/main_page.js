@@ -2,9 +2,9 @@
 // Project: Tasks
 // ==========================================================================
 /*globals CoreTasks Tasks sc_require */
-sc_require('views/welcome');
-sc_require('views/summary');
-sc_require('views/task_item');
+// sc_require('views/title');
+// sc_require('views/summary');
+// sc_require('views/task_item');
 /** @namespace
 
   This page lays out the Tasks application user interface.
@@ -37,10 +37,9 @@ Tasks.mainPage = SC.Page.design({
           value: Tasks.VERSION
         }),
 
-        Tasks.WelcomeView.design({
+        Tasks.TitleView.design({
           layout: { centerY: 0, height: 20, centerX: -60, width: 250 },
-          classNames: ['welcome-label'],
-          valueBinding: SC.Binding.oneWay('CoreTasks.user')
+          classNames: ['welcome-message']
         }),
       
         SC.View.design({
@@ -189,6 +188,8 @@ Tasks.mainPage = SC.Page.design({
       
       ]
     }),
+    
+    welcomeMessage: SC.outlet('titleBarView.childViews.2'),
     
     toolbarView: SC.View.design({
       layout: { left: 0, right: 0, top: 42, height: 36 },
@@ -351,10 +352,11 @@ Tasks.mainPage = SC.Page.design({
           layout: { centerX: 0, width: 1030, top: 0, bottom: 0 },
           childViews: [
           
-            SC.LabelView.design({
+            Tasks.TitleView.design({
               layout: { top: 3, bottom: 30, left: 10, width: 260},
               classNames: ['task-attribute-set-title'],
-              value: "_Type".loc()
+              value: "_Type".loc(),
+              toolTip: "_TypeTooltip".loc()
             }),
 
             SC.RadioView.design({
@@ -377,10 +379,11 @@ Tasks.mainPage = SC.Page.design({
               layoutDirection: SC.LAYOUT_HORIZONTAL
             }),
 
-            SC.LabelView.design({
+            Tasks.TitleView.design({
               layout: { top: 3, bottom: 30, left: 285, width: 200},
               classNames: ['task-attribute-set-title'],
-              value: "_Priority".loc()
+              value: "_Priority".loc(),
+              toolTip: "_PriorityTooltip".loc()
             }),
 
             SC.RadioView.design({
@@ -402,10 +405,11 @@ Tasks.mainPage = SC.Page.design({
               layoutDirection: SC.LAYOUT_HORIZONTAL
             }),
 
-            SC.LabelView.design({
+            Tasks.TitleView.design({
               layout: { top: 3, bottom: 30, left: 500, width: 260},
               classNames: ['task-attribute-set-title'],
-              value: "_Status".loc()
+              value: "_Status".loc(),
+              toolTip: "_StatusTooltip".loc()
             }),
 
             SC.RadioView.design({
@@ -429,10 +433,11 @@ Tasks.mainPage = SC.Page.design({
               layoutDirection: SC.LAYOUT_HORIZONTAL
             }),
 
-            SC.LabelView.design({
+            Tasks.TitleView.design({
               layout: { top: 3, bottom: 30, left: 775, width: 245},
               classNames: ['task-attribute-set-title'],
-              value: "_Validation".loc()
+              value: "_Validation".loc(),
+              toolTip: "_ValidationTooltip".loc()
             }),
 
             SC.RadioView.design({
@@ -467,14 +472,14 @@ Tasks.mainPage = SC.Page.design({
         
       summaryView: Tasks.SummaryView.design({
         layout: { centerY: 0, height: 16, left: 5, right: 500 },
-        classNames: ['status-bar-label'],
+        classNames: ['status-bar-message'],
         projectsCountBinding: SC.Binding.oneWay('Tasks.projectsController.length'),
         tasksTreeBinding: SC.Binding.oneWay('Tasks.tasksController.content')
       }),
 
       serverMessageView: SC.LabelView.design({
         layout: { centerY: 0, height: 16, width: 400, right: 10 },
-        classNames: ['status-bar-label'],
+        classNames: ['status-bar-message'],
         textAlign: SC.ALIGN_RIGHT,
         value: ''
       })

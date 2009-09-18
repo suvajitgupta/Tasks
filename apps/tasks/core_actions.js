@@ -62,9 +62,14 @@ Tasks.mixin({
     
     // Save user login session information
     var user = CoreTasks.getUser(this.loginName);
-    if (user) { // existing user
+    if (user) { // valid user
+      
       CoreTasks.set('user', user);
-      CoreTasks.set('loginTime', new Date());
+      
+      var welcomeMessage = Tasks.getPath('mainPage.mainPane.welcomeMessage');
+      welcomeMessage.set('value', "_Welcome".loc() + CoreTasks.getPath('user.name').toUpperCase() + ' !');
+      welcomeMessage.set('toolTip', "_LoginSince".loc() + new Date().format('hh:mm:ss a MMM dd, yyyy'));
+
       if(user.get('role') === CoreTasks.USER_ROLE_DEVELOPER.loc()) {
         Tasks.assignmentsController.set('assigneeSelection', this.loginName);
       }

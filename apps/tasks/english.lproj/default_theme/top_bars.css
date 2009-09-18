@@ -49,10 +49,10 @@
   font-style: italic;
 }
 
-.welcome-label {
+.welcome-message {
   font-size: 12px !important;
   font-weight: bold !important;
-  text-align: left !important;
+  text-align: center !important;
   color: white !important;
 }
 
