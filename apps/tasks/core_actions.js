@@ -14,6 +14,7 @@ sc_require('core');
 Tasks.mixin({
   
   loginName: null,
+  _usersLoaded: false,
 
   /**
    * Authenticate user trying to log in to Tasks application.
@@ -25,18 +26,18 @@ Tasks.mixin({
     switch (this.state.a) {
       case 1:
         this.goState('a', 2);
-
-        // We'll need the login name later on, in _userLoadSuccess().
         this.loginName = loginName;
-
-        // Retrieve all users from the data source.
-        var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
-        serverMessage.set('value', "_Loading".loc());
-        CoreTasks.get('store').findAll(CoreTasks.User, {
-          successCallback: this._userLoadSuccess.bind(this),
-          failureCallback: this._userLoadFailure.bind(this)
-        });
-
+        
+        if(this._usersLoaded) {
+          this._loginUser();
+        }
+        else {
+          // Retrieve all users from the data source.
+          CoreTasks.get('store').findAll(CoreTasks.User, {
+            successCallback: this._usersLoadSuccess.bind(this),
+            failureCallback: this._usersLoadFailure.bind(this)
+          });
+        }
         break;
 
       default:
@@ -50,8 +51,9 @@ Tasks.mixin({
    * Now we can "authenticate" the user by searching for a matching loginName attribute in the list
    * of users in the store.
    */
-  _userLoadSuccess: function(storeKeys) {
+  _usersLoadSuccess: function(storeKeys) {
     
+    this._usersLoaded = true;
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', serverMessage.get('value') + "_UsersLoaded".loc());
     
@@ -60,40 +62,53 @@ Tasks.mixin({
     var users = store.recordArrayFromStoreKeys(storeKeys, CoreTasks.User, store);
     this.get('usersController').set('content', users);
     
-    // Save user login session information
-    var user = CoreTasks.getUser(this.loginName);
-    if (user) { // valid user
-      
-      CoreTasks.set('user', user);
-      
-      var welcomeMessage = Tasks.getPath('mainPage.mainPane.welcomeMessage');
-      welcomeMessage.set('value', "_Welcome".loc() + CoreTasks.getPath('user.name').toUpperCase());
-      welcomeMessage.set('toolTip', "_LoginSince".loc() + new Date().format('hh:mm:ss a MMM dd, yyyy'));
-
-      if(user.get('role') === CoreTasks.USER_ROLE_DEVELOPER.loc()) {
-        Tasks.assignmentsController.set('assigneeSelection', this.loginName);
-      }
-      this._authenticationSuccess();
-    } else {
-      this._authenticationFailure();
-    }
+    this._loginUser();
+    
   },
 
   /**
    * Called if the request to the data source to load all users failed for some reason.
    */
-  _userLoadFailure: function() {
-    this._authenticationFailure();
+  _usersLoadFailure: function() {
+    Tasks.loginController.closePanel();
+    alert('System Error: Unable to retrieve users from server');
+  },
+
+  /**
+   * Called to login user.
+   */
+  _loginUser: function() {
+
+    var user = CoreTasks.getUser(this.loginName);
+    if (user) { // See if a valid user
+      
+      // Welcome use and save login session information
+      CoreTasks.set('user', user);
+      var welcomeMessage = Tasks.getPath('mainPage.mainPane.welcomeMessage');
+      welcomeMessage.set('value', "_Welcome".loc() + CoreTasks.getPath('user.name').toUpperCase());
+      welcomeMessage.set('toolTip', "_LoginSince".loc() + new Date().format('hh:mm:ss a MMM dd, yyyy'));
+      
+      // Based on user's rolem set up appropriate task filter
+      if(user.get('role') === CoreTasks.USER_ROLE_DEVELOPER.loc()) {
+        Tasks.assignmentsController.set('assigneeSelection', this.loginName);
+      }
+      this._authenticationSuccess();
+      
+    } else {
+      this._authenticationFailure();
+    }
+    
   },
 
   /**
    * Called after successful login.
    */
   _authenticationSuccess: function() {
+    
     switch (this.state.a) {
       case 2:
         this.goState('a', 3);
-
+        Tasks.loginController.closePanel();
         // Load all data (projects and tasks) from the data source.
         this._loadData();
         break;
@@ -101,6 +116,7 @@ Tasks.mixin({
       default:
         this._logActionNotHandled('_authenticationSuccess', 'a', this.state.a);  
     }
+    
   },
 
   /**
@@ -109,7 +125,7 @@ Tasks.mixin({
   _authenticationFailure: function() {
     switch (this.state.a) {
       case 2:
-        alert('Authentication failed.');
+        Tasks.loginController.displayLoginError();
         this.goState('a', 1);
         break;
       default:
@@ -121,32 +137,35 @@ Tasks.mixin({
    * Load all data (projects and tasks) used by Tasks views.
    */
   _loadData: function() {
+
     // Start by loading all tasks.
     CoreTasks.get('store').findAll(CoreTasks.Task, {
-      successCallback: this._taskLoadSuccess.bind(this),
+      successCallback: this._tasksLoadSuccess.bind(this),
       failureCallback: this._dataLoadFailure.bind(this)
     });
+    
   },
 
   /**
    * Called after all tasks have been loaded from the data source.
    */
-  _taskLoadSuccess: function() {
+  _tasksLoadSuccess: function() {
 
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', serverMessage.get('value') + "_TasksLoaded".loc());
 
     // Now load all of the projects.
     CoreTasks.get('store').findAll(CoreTasks.Project, {
-      successCallback: this._projectLoadSuccess.bind(this),
+      successCallback: this._projectsLoadSuccess.bind(this),
       failureCallback: this._dataLoadFailure.bind(this)
     });
+    
   },
 
   /**
    * Called after all projects have been loaded from the data source.
    */
-  _projectLoadSuccess: function(storeKeys) {
+  _projectsLoadSuccess: function(storeKeys) {
 
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', serverMessage.get('value') + "_ProjectsLoaded".loc());
@@ -230,7 +249,7 @@ Tasks.mixin({
   _dataLoadFailure: function() {
     switch (this.state.a) {
       case 3:
-        // TODO: [SG] implement data load failure state transition & actions
+        alert('System Error: Unable to retrieve project/task data from server');
         break;
       default:
         this._logActionNotHandled('dataLoadSuccess', 'a', this.state.a);  
@@ -485,7 +504,7 @@ Tasks.mixin({
    * @param {Integer} stateNum The number of the sate (ex. "4").
    */
   _logActionNotHandled: function(action, stateName, stateNum) {
-    console.log('Action not handled in state %@[%@]: %@'.fmt(stateName, stateNum, action));
+    console.log('Error: action not handled in state %@[%@]: %@'.fmt(stateName, stateNum, action));
   },
   
   /**

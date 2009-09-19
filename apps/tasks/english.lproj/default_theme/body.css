@@ -34,3 +34,8 @@ body {
 .sc-theme .sc-gray-border {
   border: 0 !important;
 }
+
+.error-message {
+	color: red !important;
+	font-weight: bold !important;
+}

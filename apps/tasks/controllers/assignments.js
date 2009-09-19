@@ -28,7 +28,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
    
     // TODO: [SG] set a bit to not execute this method again while it is executing
     
-    console.log("DEBUG: showAssignments() called!");
+    // console.log("DEBUG: showAssignments() called!");
     var sf = this.get('searchFilter');
     sf = this._escapeMetacharacters(sf);
     var rx = new RegExp(sf, 'i');
@@ -203,18 +203,18 @@ Tasks.assignmentsController = SC.ArrayController.create(
   },
   
   _contentHasChanged: function() {
-    console.log("DEBUG: Tasks pane content changed!");
+    // console.log("DEBUG: Tasks pane content changed!");
   	this.invokeOnce(this.showAssignments);
   }.observes('[]'),
   
   _assigneeSelectionHasChanged: function() {
-    console.log("DEBUG: Assignee selection changed!");
+    // console.log("DEBUG: Assignee selection changed!");
     Tasks.deselectTasks();
   	this.invokeOnce(this.showAssignments);
   }.observes('assigneeSelection'),
   
   _searchFilterHasChanged: function() {
-    console.log("DEBUG: Search filter changed!");
+    // console.log("DEBUG: Search filter changed!");
     Tasks.deselectTasks();
   	this.invokeOnce(this.showAssignments);
   }.observes('searchFilter')

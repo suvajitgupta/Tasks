@@ -16,11 +16,11 @@ Tasks.loginPage = SC.Page.create({
   
   panel: SC.PanelPane.create({
     
-    layout: { centerX: 0, centerY: 0, height: 100, width: 430 },
+    layout: { centerX: 0, centerY: 0, height: 125, width: 430 },
     
     contentView: SC.View.design({
       layout: { left: 0, right: 0, top: 0, bottom: 0},
-      childViews: 'tasksLogo loginPrompt loginEntry loginButton cancelButton'.w(),
+      childViews: 'tasksLogo loginPrompt loginEntry loginErrorMessage loginButton cancelButton'.w(),
       
       tasksLogo: SC.LabelView.design({
         layout: { top: 10,  left: 10, height: 26, width: 89 },
@@ -40,7 +40,17 @@ Tasks.loginPage = SC.Page.create({
             this.get('parentView').loginButton.triggerAction(evt);
           }
           return sc_super();
-        }        
+        }
+      }),
+      
+      loginErrorMessage: SC.LabelView.design({
+        layout: { left: 215, top: 45, right: 15, height: 20 },
+        value: "_LoginError".loc(),
+        isVisibleBinding: SC.Binding.oneWay('Tasks.loginController.loginError').bool(),
+        classNames: ['error-message'],
+        _loginNameTyped: function() {
+          Tasks.loginController.set('loginError', false);
+        }.observes('Tasks.loginController.loginName')
       }),
       
       loginButton: SC.ButtonView.design({

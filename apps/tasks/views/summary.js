@@ -24,6 +24,8 @@ Tasks.SummaryView = SC.View.extend(
 
     var summary = "_Displaying".loc() + (this.get('projectsCount')-2) + "_Projects".loc();
 
+    if(!this.tasksTree) return;
+    
     var assignmentNodes = this.tasksTree.get('treeItemChildren');
     var assigneesCount = assignmentNodes.get('length');
     summary += assigneesCount + "_Assignees".loc();

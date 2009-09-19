@@ -17,6 +17,7 @@ SC.stringsFor('English', {
   // Login/Top Bar strings
   '_LoginName:': "Login Name:",
   '_Login': "Login",
+  '_LoginError': "Login failed, please try again",
   '_LoginSince': "Logged in since ",
   '_Tasks': "TASKS",
   '_Welcome': "Welcome ",
@@ -101,10 +102,9 @@ SC.stringsFor('English', {
   '_Projects': " project(s), ",
   '_Assignees': " assignee(s), and ",
   '_Tasks': " task(s)",
-  '_Loading': "Loaded ",
-  '_UsersLoaded': "users, ",
+  '_UsersLoaded': "Loaded users, ",
   '_TasksLoaded': "tasks, ",
-  '_ProjectsLoaded': "projects.",
+  '_ProjectsLoaded': " and projects.",
   '_SaveMessage': "Last saved "
   
   
