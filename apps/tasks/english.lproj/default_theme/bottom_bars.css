@@ -12,15 +12,14 @@
 */
 
 .control-bar {
-  // background-color: none !important;
   background: static_url('images/default-theme-toolbar-bg.png') repeat-x 0 0; 
 }
 
 .task-attribute-set-title  {
   font-size: 10px !important;
+  font-weight: bold !important;
   color: #222 !important;
   text-align: center !important;
-  font-weight: bold !important;
 }
 
 .task-attribute-set {
@@ -33,6 +32,9 @@
   -webkit-border-radius: 5px;
 }
 
+.sc-radio-view.sc-layout-horizontal .sc-radio-button {
+  padding-right: 4px;
+}
 
 /*-----------------------------------------------------------------
  * Status bar styles

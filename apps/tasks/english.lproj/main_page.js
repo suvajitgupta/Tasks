@@ -350,7 +350,7 @@ Tasks.mainPage = SC.Page.design({
           childViews: [
           
             Tasks.TitleView.design({
-              layout: { top: 3, bottom: 30, left: 10, width: 260},
+              layout: { top: 3, bottom: 30, left: 10, width: 260 },
               classNames: ['task-attribute-set-title'],
               value: "_Type".loc(),
               toolTip: "_TypeTooltip".loc()
@@ -377,7 +377,7 @@ Tasks.mainPage = SC.Page.design({
             }),
 
             Tasks.TitleView.design({
-              layout: { top: 3, bottom: 30, left: 285, width: 195},
+              layout: { top: 3, bottom: 30, left: 285, width: 195 },
               classNames: ['task-attribute-set-title'],
               value: "_Priority".loc(),
               toolTip: "_PriorityTooltip".loc()
@@ -403,7 +403,7 @@ Tasks.mainPage = SC.Page.design({
             }),
 
             Tasks.TitleView.design({
-              layout: { top: 3, bottom: 30, left: 495, width: 265},
+              layout: { top: 3, bottom: 30, left: 495, width: 265 },
               classNames: ['task-attribute-set-title'],
               value: "_Status".loc(),
               toolTip: "_StatusTooltip".loc()
@@ -431,7 +431,7 @@ Tasks.mainPage = SC.Page.design({
             }),
 
             Tasks.TitleView.design({
-              layout: { top: 3, bottom: 30, left: 775, width: 245},
+              layout: { top: 3, bottom: 30, left: 775, width: 245 },
               classNames: ['task-attribute-set-title'],
               value: "_Validation".loc(),
               toolTip: "_ValidationTooltip".loc()

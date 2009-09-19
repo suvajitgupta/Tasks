@@ -175,14 +175,14 @@
 }
 
 .task-icon-with-description {
-  width:16px !important;
-  height:16px !important;
+  width: 16px !important;
+  height: 16px !important;
   background: static_url('images/has_description.png');
 }
 
 .task-icon-no-description {
-  width:16px !important;
-  height:16px !important;
+  width: 16px !important;
+  height: 16px !important;
   background: static_url('images/no_description.png');
 }
 
