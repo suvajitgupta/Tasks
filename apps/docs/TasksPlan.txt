@@ -41,7 +41,8 @@ Project Manager GUI
 - Beta: Support alpha sorting of projects [SG] <JH2> @Active $Feature
 v Add hover over tooltip for projects to show how many tasks they contain [SG] @Done $Feature %Passed
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done $Feature %Passed
-- Beta: Make All/Unallocated Tasks project names to be non-editable upon double clicking $Active $Bug [SG]
+v Beta: Make All/Unallocated Tasks project names to be non-editable upon double clicking $Active $Bug <JH2> [SG]
+| Check via Inline Editor Delegate
 ^ Add "Add Project" & "Del. Project" buttons in projects toolbar [SG] <SC> @Done $Feature %Passed
 - Add warning Alert box about deleting Project with Tasks [SG] @Done $Feature %Passed
 - Don't create a project if it already exists during Import [SG] @Done $Feature %Passed
@@ -97,6 +98,7 @@ User Manager GUI
 ^ Add login screen to identify user who logs in [SG] <SE> @Done $Feature
 | Replace with real Login dialog (for IE portability)
 ^ Add Assignee selection filter & corresponding delete button in top toolbar [SG] <JH2> @Done $Feature %Passed
+- Beta: In Firefox assignee selection disappears <MB> [SG] $Bug
 - Set assignee selection filter to logged in user if they are a Developer [SG] @Done $Feature %Passed
 - Allow assignee filtering by matching any part of name, not just loginName [SG] $Feature
 ^ Beta: Add User Manager with "Add/Del. User"  and "Close" buttons in toolbar [SG] <JH2> $Active $Feature
@@ -134,6 +136,7 @@ Server
 ^ Build persistence server (using Persevere) [SE] <SG> @Done %Passed
 - Build persistence server (using Django/Google App Engine) [SC] @Active
 - Patch SproutCore to avoid overwhelming async calls for file imports with more than 20 tasks [SE] <SG> @Done %Passed $Bug
+- Beta: Switch to latest SproutCore postback and modified SC.Store APIs <SG> [SE] @Active
 - Add Server-side authorization [SE] <SG>
 - Add server-side data validation checks/return appropriate error codes [SE] <SG>
 v Implement multi-user concurrent access using Transaction Time [SG] <SE>
