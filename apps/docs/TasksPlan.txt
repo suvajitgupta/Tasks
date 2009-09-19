@@ -27,8 +27,7 @@ v On Firefox dragging window to make it smaller leaves TextField entry text in t
 - On Safari it is impossible to type more than one character at the start of a line via in-cell editing [SC] <SG> $Bug
 v In Safari you can't click on assigneee selection filter and then the task filter [SC] <SG> $Bug
 v Add missing 'localize' support back in CollectionView (regression from SC 0.9) [SC] <SG> $Bug
-^ Beta: Support default sorting of projects (alpha) and tasks (by status, validation, priority, type) [SG] <SG> @Active $Feature
-- Beta: Make task in-cell editors fit with collection view item size [SG] <SG> @Active $Bug
+v Beta: Make task in-cell editors fit with collection view item size [SG] <SG> @Active $Bug
 | Fix in CSS add class .ghost to list item view and set its background to none
 - Beta: Track/optimize calls to assignments controller for redrawing tasks tree [SG] <BB>
 - Show newly added tasks/projects with a badge [SG]
@@ -39,6 +38,7 @@ Project Manager GUI
 ^ Add Master/Detail Explorer view with click selection of Projects showing corresponding Tasks [JH2] <SG> @Done $Feature %Passed
 ^ Show Project name & time left in curly braces (if specified) [SG] <JH2> @Done $Feature %Passed
 - Use icon to indicate if Project has any tasks or not [SG] @Done $Feature %Passed
+- Beta: Support alpha sorting of projects [SG] <JH2> @Active $Feature
 v Add hover over tooltip for projects to show how many tasks they contain [SG] @Done $Feature %Passed
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done $Feature %Passed
 - Beta: Make All/Unallocated Tasks project names to be non-editable upon double clicking $Active $Bug [SG]
@@ -59,6 +59,7 @@ Task Manager GUI
 ^ Group Tasks by User and display Task summary & effort (if specified) in curly braces [SG] <JH2> @Done $Feature %Passed
 ^ Fix missing/flashing scrollbar on Firefox/Windows [SC] <SG> $Bug @Active
 | To reproduce: search for a Task in search bar or select AllTasks, scroll down, select a task, then select another project)
+^ Support smart sorting of tasks by status, validation, priority, and type (in order)[SG] <SG> @Done $Feature %Passed
 - Allow Tasks under an assignee to be hidden/disclosed [SG] <JH2> @Done $Feature %Passed
 - Allow SourceListView disclosures to be opened/closed propperly (Apple has on priority list) [SC] <SG> @Active $Bug
 - Drag-n-drop in SourceListView is broken (Apple has on priority list) [SC] <SG> @Active $Bug
@@ -138,7 +139,7 @@ Server
 v Implement multi-user concurrent access using Transaction Time [SG] <SE>
 
 Styling/Hardening
-^ Style via CSS, embed catchy/sprited images [MG] <SG> @Active
+^ Beta: Style via CSS, embed catchy/sprited images [MG] <SG> @Active
 - Perform I18N and L10N (test with reversed strings) [SG] <JH2> @Active
 - Develop Model unit tests [SG] <BB> @Active
 - Develop View unit tests [SG] <MB> @Active
