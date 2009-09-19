@@ -16,7 +16,7 @@ Tasks.loginPage = SC.Page.create({
   
   panel: SC.PanelPane.create({
     
-    layout: { centerX: 0, centerY: 0, height: 125, width: 430 },
+    layout: { centerX: 0, centerY: 0, height: 120, width: 430 },
     
     contentView: SC.View.design({
       layout: { left: 0, right: 0, top: 0, bottom: 0},
@@ -47,10 +47,7 @@ Tasks.loginPage = SC.Page.create({
         layout: { left: 215, top: 45, right: 15, height: 20 },
         value: "_LoginError".loc(),
         isVisibleBinding: SC.Binding.oneWay('Tasks.loginController.loginError').bool(),
-        classNames: ['error-message'],
-        _loginNameTyped: function() {
-          Tasks.loginController.set('loginError', false);
-        }.observes('Tasks.loginController.loginName')
+        classNames: ['error-message']
       }),
       
       loginButton: SC.ButtonView.design({

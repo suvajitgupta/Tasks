@@ -45,6 +45,10 @@ Tasks.loginController = SC.ObjectController.create(
     
     displayLoginError: function(){
       this.set('loginError', true);
-    }
+    },
+    
+    _loginNameHasChanged: function() {
+      this.set('loginError', false);
+    }.observes('loginName')
     
 });
