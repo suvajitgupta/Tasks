@@ -62,7 +62,6 @@ Tasks.exportDataController = SC.ObjectController.create(
     var assignmentNodes = tasksTree.get('treeItemChildren');
     var assigneesCount = assignmentNodes.get('length');
     for(var i=0; i < assigneesCount; i++) {
-      console.log("ASSIGNEE: " + assignmentNodes.objectAt(i).get('displayName'));
       var tasks = assignmentNodes.objectAt(i).get('treeItemChildren');
       var tasksCount = tasks.get('length');
       for(var j=0; j < tasksCount; j++) {
