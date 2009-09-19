@@ -88,7 +88,7 @@ v Add hover over tooltip for assignees to show how many tasks they have and to e
 ^ Add popup viewer/editor for Task Submitter, Assignee, Effort, and Description [JH2] <SG> @Done %Passed $Feature
 - Beta: Need a way to clear assignee/submitter in Task popup editor [SG] <JH2> @Active $Bug
 - Beta: Fix bindings problem with flashing text area for long description entry [SG] <JH2> @Active $Bug
-- Fix task pop editor location problem where it is getting cropped at the window boundary [SC] <SG> $Bug
+- Fix task pop editor location problem where it is getting cropped at the window boundary [SC] <SG> @Active $Bug
 - Fix lag in responsiveness for Tasks Description entry (bindings issue) [SG] <JH2> $Bug
 v Add context menu & hotkeys to Delete/Duplicate & Cut/Copy/Paste a task [SG] <JH2> $Feature
 
