@@ -75,7 +75,7 @@ SC.stringsFor('English', {
   '_Failed': "Failed",
   '_Effort:': "Effort:",
   '_Description:': "Description:",
-  '_EditorTooltip': "Click to view/edit Task submitter/assignee/description",
+  '_EditorTooltip': "Click to view/edit Task details (submitter, assignee, effort, and description)",
   
   // User strings
   '_FirstLast': "First Last",

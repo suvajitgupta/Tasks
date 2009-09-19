@@ -43,14 +43,16 @@
   font-weight: bold;
 }
 
-.project-icon-with-tasks {
+.project-icon-has-tasks {
   width: 16px;
   height: 16px;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -486px;
+  background: static_url('images/project_has_tasks.png') no-repeat 0 0;
+  //background: static_url('images/default-theme-static.png') no-repeat 0 -486px;
 }
 
 .project-icon-no-tasks {
   width: 16px;
   height: 16px;
-	background: no-repeat sc_static('icons/shared') -16px -464px;
+  background: static_url('images/project_no_tasks.png') no-repeat 0 0;
+	//background: no-repeat sc_static('icons/shared') -16px -464px;
 }

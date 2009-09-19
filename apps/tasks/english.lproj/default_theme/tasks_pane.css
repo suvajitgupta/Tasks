@@ -84,19 +84,19 @@
 .task-icon-feature {
   height: 16px !important;
   width: 16px !important;
-  background: static_url('images/feature.gif') no-repeat 0 0;
+  background: static_url('images/task_type_feature.png') no-repeat 0 0;
 }
 
 .task-icon-bug {
   height: 16px !important;
   width: 16px !important;
-  background: static_url('images/bug.gif') no-repeat 0 0;
+  background: static_url('images/task_type_bug.gif') no-repeat 0 0;
 }
 
 .task-icon-other {
   width: 16px !important;
 	height: 16px !important;
-	background: no-repeat sc_static('icons/shared') -0px -464px;
+  background: static_url('images/task_type_otherz.png') no-repeat 0 0;
 }
 
 /*-----------------------------------------------------------------
@@ -174,16 +174,16 @@
   padding-left: 20px; // FIXME: [SC] why is so much padding needed - otherwise get a scrollbar when the popup pane comes up!
 }
 
-.task-icon-with-description {
+.task-icon-has-description {
   width: 16px !important;
   height: 16px !important;
-  background: static_url('images/has_description.png');
+  background: static_url('images/task_has_description.png');
 }
 
 .task-icon-no-description {
   width: 16px !important;
   height: 16px !important;
-  background: static_url('images/no_description.png');
+  background: static_url('images/task_no_description.png');
 }
 
 

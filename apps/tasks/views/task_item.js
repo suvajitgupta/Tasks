@@ -150,7 +150,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         alt: "_EditorTooltip".loc()
       }).addClass('task-editor');
       if (hasDescription) {
-        context.addClass('task-icon-with-description');
+        context.addClass('task-icon-has-description');
       }else{
         context.addClass('task-icon-no-description');
       }
