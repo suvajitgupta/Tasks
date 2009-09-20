@@ -25,7 +25,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     return this.assigneeSelection || this.searchFilter;
   },
   
-  count: 0,
+  // count: 0, // used for tracking/tuning calls to redraw tasks pane below
   showAssignments: function() { // show tasks for selected user that matches search filter
    
     // console.log("DEBUG: showAssignments(" + this.count + ") entry at: " + new Date().format('hh:mm:ss a'));
@@ -131,7 +131,8 @@ Tasks.assignmentsController = SC.ArrayController.create(
     for (var i = 0; i < len; i++) {
       task = tasks.objectAt(i);
       
-      // Add observers to certain task properties that can require the assignmentsController to redraw.
+      // Add observers to certain task properties that can require the assignmentsController to redraw
+      // FIXME: [SC] see why these are firing multiple times when only one property is changed
       task.removeObserver('assignee',Tasks.assignmentsController,'_contentHasChanged');
       task.removeObserver('priority',Tasks.assignmentsController,'_contentHasChanged');
       task.removeObserver('status',Tasks.assignmentsController,'_contentHasChanged');
@@ -215,16 +216,19 @@ Tasks.assignmentsController = SC.ArrayController.create(
   	this.invokeOnce(this.showAssignments);
   }.observes('[]'),
   
-  _assigneeSelectionHasChanged: function() {
-    // console.log("DEBUG: Assignee selection changed: '" + this.assigneeSelection + "'");
+  _filteringHasChanged: function() { // allow users to change filters over a half second before redrawing tasks pane
     if (this._timer) this._timer.invalidate();
     this._timer = this.invokeLater(this._contentHasChanged, 500);
+  },
+  
+  _assigneeSelectionHasChanged: function() {
+    // console.log("DEBUG: Assignee selection changed: '" + this.assigneeSelection + "'");
+    this._filteringHasChanged();
   }.observes('assigneeSelection'),
   
   _searchFilterHasChanged: function() {
     // console.log("DEBUG: Search filter changed: '" + this.searchFilter + "'");
-    if (this._timer) this._timer.invalidate();
-    this._timer = this.invokeLater(this._contentHasChanged, 500);
+    this._filteringHasChanged();
   }.observes('searchFilter')
   
 });
