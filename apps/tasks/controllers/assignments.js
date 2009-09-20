@@ -25,11 +25,11 @@ Tasks.assignmentsController = SC.ArrayController.create(
     return this.assigneeSelection || this.searchFilter;
   },
   
+  count: 0,
   showAssignments: function() { // show tasks for selected user that matches search filter
    
-    // TODO: [SG] set a bit to not execute this method again while it is executing
+    // console.log("DEBUG: showAssignments(" + this.count + ") entry at: " + new Date().format('hh:mm:ss a'));
     
-    // console.log("DEBUG: showAssignments() called!");
     var sf = this.get('searchFilter');
     sf = this._escapeMetacharacters(sf);
     var rx = new RegExp(sf, 'i');
@@ -100,6 +100,8 @@ Tasks.assignmentsController = SC.ArrayController.create(
       return (a.displayName > b.displayName) ? 1 : -1;
     }), treeItemIsExpanded: YES }));
     
+    // console.log("DEBUG: showAssignments(" + this.count++ + ") exit  at: " + new Date().format('hh:mm:ss a'));
+
   },
   
   _escapeMetacharacters: function(str){
@@ -204,7 +206,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
   },
   
   _contentHasChanged: function() {
-    // console.log("DEBUG: Tasks content changed at: " + new Date().format('hh:mm:ss a MMM dd, yyyy'));
+    // console.log("DEBUG: Tasks content changed at: " + new Date().format('hh:mm:ss a'));
   	if (this._timer) { // called as a result of a timer set for assignee selection or search filter changes
       Tasks.deselectTasks();
       this._timer.invalidate();

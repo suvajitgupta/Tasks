@@ -27,9 +27,9 @@ v On Firefox dragging window to make it smaller leaves TextField entry text in t
 - On Safari it is impossible to type more than one character at the start of a line via in-cell editing [SC] <SG> $Bug
 v In Safari you can't click on assigneee selection filter and then the task filter [SC] <SG> $Bug
 v Add missing 'localize' support back in CollectionView (regression from SC 0.9) [SC] <SG> $Bug
-v Beta: Make task in-cell editors fit with collection view item size [SG] <SG> @Active $Bug
+v Beta: Make task in-cell editors fit with collection view item size [SG] <SC> @Active $Bug
 | Fix in CSS add class .ghost to list item view and set its background to none
-- Beta: Track/optimize calls to assignments controller for redrawing tasks tree [SG] <BB>
+- Beta: Track/optimize calls to assignments controller for redrawing tasks tree [SG] <SC> @Active
 - Show newly added tasks/projects with a badge [SG]
 - Add some simple metrics/reporting capabilities [SG]
 v Provide support for color-blind users (don't use color coding as only mechanism for status/validation) [SG] $Feature
@@ -95,13 +95,13 @@ v Add hover over tooltip for assignees to show how many tasks they have and to e
 v Add context menu & hotkeys to Delete/Duplicate & Cut/Copy/Paste a task [SG] <JH2> $Feature
 
 User Manager GUI
-^ Add login screen to identify user who logs in [SG] <SE> @Done $Feature
+^ Add login screen to identify user who logs in (and handle login failures properly) [SG] <SE> @Done $Feature
 | Replace with real Login dialog (for IE portability)
 ^ Add Assignee selection filter & corresponding delete button in top toolbar [SG] <JH2> @Done $Feature %Passed
-- Beta: In Firefox assignee selection disappears <MB> [SG] $Bug
+- Beta: In Firefox assignee selection disappears <SC> [SG] $Bug
 - Set assignee selection filter to logged in user if they are a Developer [SG] @Done $Feature %Passed
 - Allow assignee filtering by matching any part of name, not just loginName [SG] $Feature
-^ Beta: Add User Manager with "Add/Del. User"  and "Close" buttons in toolbar [SG] <JH2> $Active $Feature
+^ Beta: Add User Manager with "Add/Del. User"  and "Close" buttons in toolbar [SG] <BB> $Active $Feature
 - Add access control based on Role (User authorization) [SG] <SE> $Feature
 - Add password to login screen and change password dialog in User Manager [SG] <SE> $Feature
 - Add support for "Teams" (a user can belong to a team, a team can have a lead) [SG] <SE> $Feature
@@ -123,7 +123,7 @@ v Allow drag-n-drop of a TXT file into App for data importing (using Google Gear
 | Preferences:
 | * include Low priority tasks in subtotals
 | * percent and min days for Assignee loading determination
-- Beta: Add Online Help button in top Toolbar & popup Help dialog [SG] @Active $Feature
+- Beta: Add Online Help button in top Toolbar & popup Help dialog [SG] <MG> @Active $Feature
 - Add onscreen help (on blank workspace to assist new users, on panel fields that are complex) [SG] @Active $Feature
 - Beta: Add Logout button to exit in top toolbar [SG] <SE> @Active $Feature
 - Beta: Prompt user to save changes before exiting [SG] <SE> $Feature
