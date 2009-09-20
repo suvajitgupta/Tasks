@@ -17,6 +17,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
   
   contentBinding: 'Tasks.projectController.tasks',
   assignedTasks: null,
+  _timer: null,
   assigneeSelection: null,
   searchFilter: null,
   
@@ -203,20 +204,25 @@ Tasks.assignmentsController = SC.ArrayController.create(
   },
   
   _contentHasChanged: function() {
-    // console.log("DEBUG: Tasks pane content changed!");
+    // console.log("DEBUG: Tasks content changed at: " + new Date().format('hh:mm:ss a MMM dd, yyyy'));
+  	if (this._timer) { // called as a result of a timer set for assignee selection or search filter changes
+      Tasks.deselectTasks();
+      this._timer.invalidate();
+      this._timer = null;
+    }
   	this.invokeOnce(this.showAssignments);
   }.observes('[]'),
   
   _assigneeSelectionHasChanged: function() {
-    // console.log("DEBUG: Assignee selection changed!");
-    Tasks.deselectTasks();
-  	this.invokeOnce(this.showAssignments);
+    // console.log("DEBUG: Assignee selection changed: '" + this.assigneeSelection + "'");
+    if (this._timer) this._timer.invalidate();
+    this._timer = this.invokeLater(this._contentHasChanged, 500);
   }.observes('assigneeSelection'),
   
   _searchFilterHasChanged: function() {
-    // console.log("DEBUG: Search filter changed!");
-    Tasks.deselectTasks();
-  	this.invokeOnce(this.showAssignments);
+    // console.log("DEBUG: Search filter changed: '" + this.searchFilter + "'");
+    if (this._timer) this._timer.invalidate();
+    this._timer = this.invokeLater(this._contentHasChanged, 500);
   }.observes('searchFilter')
   
 });
