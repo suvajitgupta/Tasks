@@ -23,7 +23,7 @@ General Infrastructure
 - Beta: Handle persistence consistently (nothing should save unless user hits Save) [SE] <SG> @Risky
 - SimpleButton shouldn't accept clicks when isEnabled is false [SG] <JH2> $Bug
 v On Firefox need to highlight entire item & show cursor when starting to do in-cell editing [SC] <SG> $Bug
-v On Firefox dragging window to make it smaller leaves TextField entry text in the same place - they don't move [SC] <SG> $Bug
+v On Firefox dragging window to make it smaller leaves TextField entry text in the same place - they don't move [SC] <SG> $Bug @Active
 - On Safari it is impossible to type more than one character at the start of a line via in-cell editing [SC] <SG> $Bug
 v In Safari you can't click on assigneee selection filter and then the task filter [SC] <SG> $Bug
 v Add missing 'localize' support back in CollectionView (regression from SC 0.9) [SC] <SG> $Bug
@@ -70,7 +70,7 @@ Task Manager GUI
 v Enable Task Validation radio buttons only when in Done status [SG] <JH2> $Feature
 - Allow multi-selected tasks to be set to new type/status/priority/validation [SG] <JH2> $Feature
 ^ Add task search filter & corresponding delete button in top toolbar: support type-ahead searching [SG] @Done $Feature %Passed
-- Don't lose selection after changing task priority/status/validation [SC] <SG> $Bug
+- Beta: Don't lose selection after changing task assignee/priority/status/validation [SG] <SG> $Bug @Active
 - Allow task searching by type, priority, status, and validation fields [SG] <MB>
 v Set tasks toolbar button enablement based on having a selection [SG] @Done $Feature %Passed
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done $Feature %Passed
@@ -114,7 +114,7 @@ Application Manager GUI
 v Beta: Enable/disable Save button based on data modification [SG] <SE> $Feature
 - Add Refresh button to get most recent data from server [SG] <SE> $Feature
 - Add "Import" button in top toolbar with associated pop up panel [SG] <BB> @Done $Feature %Passed
-- Allow import of large files (such as TasksPlan.txt) [SG] <SE> $Bug
+- Allow import of large files (such as TasksPlan.txt) [SG] <SE> $Bug @Active
 v Allow drag-n-drop of a TXT file into App for data importing (using Google Gears) [MB] <SG> @Risky $Feature
 | Gears needs to be ported to Snow Leopard
 - Add "Export" button in top toolbar with associated pop up panel [SG] @Done $Feature %Passed
