@@ -38,7 +38,7 @@ Project Manager GUI
 ^ Add Master/Detail Explorer view with click selection of Projects showing corresponding Tasks [JH2] <SG> @Done $Feature %Passed
 ^ Show Project name & time left in curly braces (if specified) [SG] <JH2> @Done $Feature %Passed
 - Use icon to indicate if Project has any tasks or not [SG] @Done $Feature %Passed
-- Beta: Support alpha sorting of projects [SG] <JH2> @Active $Feature
+- Beta: Support alpha sorting of projects [SG] <JH2> @Risky $Feature
 v Add hover over tooltip for projects to show how many tasks they contain [SG] @Done $Feature %Passed
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done $Feature %Passed
 v Beta: Make All/Unallocated Tasks project names to be non-editable upon double clicking $Active $Bug <JH2> [SG]
@@ -89,7 +89,7 @@ v Add hover over tooltip for assignees to show how many tasks they have and to e
 ^ Allow multi-task drag-n-drop reassignment [BB] <SG>  @Done $Feature %Passed
 ^ Add popup viewer/editor for Task Submitter, Assignee, Effort, and Description [JH2] <SG> @Done %Passed $Feature
 - Beta: Need a way to clear assignee/submitter in Task popup editor [SG] <JH2> @Active $Bug
-- Beta: Fix bindings problem with flashing text area for long description entry [SG] <JH2> @Active $Bug
+- Beta: Fix bindings problem with flashing text area for long description entry [SG] <JH2> @Risky $Bug
 - Fix task pop editor location problem where it is getting cropped at the window boundary [SC] <SG> @Active $Bug
 - Fix lag in responsiveness for Tasks Description entry (bindings issue) [SG] <JH2> $Bug
 v Add context menu & hotkeys to Delete/Duplicate & Cut/Copy/Paste a task [SG] <JH2> $Feature
@@ -98,7 +98,7 @@ User Manager GUI
 ^ Add login screen to identify user who logs in (and handle login failures properly) [SG] <SE> @Done $Feature
 | Replace with real Login dialog (for IE portability)
 ^ Add Assignee selection filter & corresponding delete button in top toolbar [SG] <JH2> @Done $Feature %Passed
-- Beta: In Firefox assignee selection disappears <SC> [SG] $Bug
+- In Firefox assignee selection disappears <SG> [SC] $Bug
 - Set assignee selection filter to logged in user if they are a Developer [SG] @Done $Feature %Passed
 - Allow assignee filtering by matching any part of name, not just loginName [SG] $Feature
 ^ Beta: Add User Manager with "Add/Del. User"  and "Close" buttons in toolbar [SG] <BB> $Active $Feature

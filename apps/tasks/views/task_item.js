@@ -32,9 +32,25 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     var clsNames = evt.target.className.split(' ');
     if (clsNames.length > 0 && clsNames[0] === 'task-editor') {
       var layer = this.get('layer');
+      var that = this;
       this._editorPane = SC.PickerPane.create({
         
         layout: { width: 500, height: 175 },
+        
+        poppedUp: false,
+        // TODO: [JH2] make the begin/end property changes work
+        popup: function() {
+          if(this.poppedUp) return;
+          this.poppedUp = true;
+          sc_super();
+          that.get('content').beginPropertyChanges();
+        },
+        remove: function() {
+          this.poppedUp = false;
+          that.get('content').endPropertyChanges();
+          sc_super();
+        },
+        
         contentView: SC.View.design({
           layout: { left: 0, right: 0, top: 0, bottom: 0},
           childViews: [
