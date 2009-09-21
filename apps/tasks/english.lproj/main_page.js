@@ -110,12 +110,12 @@ Tasks.mainPage = SC.Page.design({
         }),
         
         SC.View.design({
-          layout: { top: 0, bottom: 0, right: 155, width: 2 },
+          layout: { top: 0, bottom: 0, right: 157, width: 2 },
           classNames: ['top-bar-divider']
         }),
 
         SC.View.design({
-          layout: { top: 0, height: 43, right: 95, width: 50 },
+          layout: { top: 0, height: 43, right: 97, width: 55 },
           childViews: [
             SC.View.design(Tasks.SimpleButton,{
               layout: { centerX: 0, top: 2, width: 24, height: 24 },
@@ -196,7 +196,7 @@ Tasks.mainPage = SC.Page.design({
       // TODO: [SG] figure out how to get icons to be disabled for toolbar buttons
         
         SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerY: 2, left: 5, height: 24, width: 95 },
+          layout: { centerY: 2, left: 5, height: 24, width: 100 },
           icon: 'project-add-icon',
           value: "_AddProject".loc(),
           classNames: ['toolbar-label'],
@@ -206,7 +206,7 @@ Tasks.mainPage = SC.Page.design({
         }),
       
         SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerY: 2, left: 110, height: 24, width: 105 },
+          layout: { centerY: 2, left: 115, height: 24, width: 105 },
           icon: 'project-del-icon',
           value: "_DelProject".loc(),
           classNames: ['toolbar-label'],
@@ -222,7 +222,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerY: 2, left: 250, height: 24, width: 90 },
+          layout: { centerY: 2, left: 250, height: 24, width: 95 },
           icon: 'task-add-icon',
           value: "_AddTask".loc(),
           classNames: ['toolbar-label'],
