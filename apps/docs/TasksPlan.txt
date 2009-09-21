@@ -77,9 +77,7 @@ v Set tasks toolbar button enablement based on having a selection [SG] @Done $Fe
 ^ Add "Add Task" & "Del. Task" buttons in tasks toolbar [SG] <SE> @Done $Feature %Passed
 | Logged in user is default Submitter, Assignee is either set to the same as selected task (if one) or to logged in user
 | Copy over type and priority of selected task to new task
-- Beta: Fix task editing cell floating at top under special circumstances [SG] <JH2> $Bug
 | To reproduce, add a new task with a filter on or add a task to a project with enough tasks that to get a scrollbar.
-| Or, for the Catch! project, login as RMG, cancel assignee selection, type "game" in search filter, then Add Task
 v Allow "Add Task" button to be pressed a second time to keep in data entry mode, Esc will exit mode [SG] <MB> $Feature
 - Beta: Make All/Unallocated Tasks queries instead of actual projects in the store [SG] <SE>
 ^ Show effort subtotals (exclude Done or Low priority tasks) in curly braces for load balancing [SG] @Done $Feature %Passed
