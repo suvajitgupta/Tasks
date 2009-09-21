@@ -311,8 +311,13 @@ Tasks.mixin({
    * Handle application exiting request.
    */
   logout: function() {
-    // TODO: [SG] implement logout
-    this._notImplemented('logout');
+    if(confirm("_LogoutConfirmation".loc())) {
+      Tasks.getPath('mainPage.mainPane.welcomeMessage').set('value', null);
+      this._usersLoaded = false;
+      this.get('projectsController').set('content', null);
+      CoreTasks.store.reset();
+      this.goState('a', 1);
+    }
   },
   
   /**

@@ -68,7 +68,7 @@ Tasks.loginPage = SC.Page.create({
         isCancel: YES,
         title: "_Cancel".loc(),
         target: 'Tasks.loginController',
-        action: 'closePanel'
+        action: 'cancel'
       })
       
     }),

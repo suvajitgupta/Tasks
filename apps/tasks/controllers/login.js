@@ -47,6 +47,11 @@ Tasks.loginController = SC.ObjectController.create(
       this.set('loginError', true);
     },
     
+    cancel: function() {
+      this.closePanel();
+      Tasks.mainPage.get('mainPane').removeAllChildren();
+    },
+    
     _loginNameHasChanged: function() {
       this.set('loginError', false);
     }.observes('loginName')

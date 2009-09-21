@@ -14,11 +14,14 @@
 */
 SC.stringsFor('English', {
 
-  // Login/Top Bar strings
+  // Authentication strings
   '_LoginName:': "Login Name:",
   '_Login': "Login",
   '_LoginError': "Login failed, please try again",
   '_LoginSince': "Logged in since ",
+  '_LogoutConfirmation': "Are you sure you want to log out?",
+
+  // Top Bar strings
   '_Tasks': "TASKS",
   '_Welcome': "Welcome ",
   '_Save': "Save",
