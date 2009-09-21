@@ -209,7 +209,6 @@ Tasks.assignmentsController = SC.ArrayController.create(
   _contentHasChanged: function() {
     // console.log("DEBUG: Tasks content changed at: " + new Date().format('hh:mm:ss a'));
   	if (this._timer) { // called as a result of a timer set for assignee selection or search filter changes
-      Tasks.deselectTasks();
       this._timer.invalidate();
       this._timer = null;
     }
