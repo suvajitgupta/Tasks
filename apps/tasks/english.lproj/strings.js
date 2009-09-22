@@ -94,9 +94,10 @@ SC.stringsFor('English', {
   '_Tester': "Tester",
   '_Submitter:': "Submitter: ",
   '_Assignee:': "Assignee: ",
-  '_AssigneeNotLoaded': ", assignee not loaded",
-  '_AssigneeUnderLoaded': ", assignee under loaded",
-  '_AssigneeProperlyLoaded': ", assignee properly loaded",
+  '_AssigneeTooltip': "Total remaning effort (in days) appended in curly braces, ",
+  '_AssigneeNotLoaded': "assignee not loaded, has ",
+  '_AssigneeUnderLoaded': "assignee under loaded, has ",
+  '_AssigneeProperlyLoaded': "assignee properly loaded, has ",
   '_AssigneeOverloaded': ", assignee overloaded",
   
   // Import/Export Panel strings

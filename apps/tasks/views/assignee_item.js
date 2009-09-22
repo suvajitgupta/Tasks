@@ -27,7 +27,7 @@ Tasks.AssigneeItemView = SC.ListItemView.extend(
       context.addClass('assignee-item');
       
       var tasksCount = content.get('treeItemChildren').get('length');
-      var tooltip = tasksCount + "_Tasks".loc();
+      var tooltip = "_AssigneeTooltip".loc();
       
       var loadingTooltip = null;
       var loading = content.get('loading');
@@ -48,7 +48,7 @@ Tasks.AssigneeItemView = SC.ListItemView.extend(
         context.addClass('assignee-over-loaded');
       }
       
-      tooltip += loadingTooltip;
+      tooltip += (loadingTooltip + tasksCount + "_Tasks".loc());
       context.attr('title', tooltip);
       context.attr('alt', tooltip);
       
