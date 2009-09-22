@@ -48,6 +48,7 @@ SC.stringsFor('English', {
   '_NewProject': "New Project",
   '_AllTasks': "All Tasks",
   '_UnallocatedTasks': "Unallocated Tasks",
+  '_ProjectTooltip': "Time left (in days) appended in curly braces, project has ",
   '_Tasks': " task(s)",
   
   // Task strings
