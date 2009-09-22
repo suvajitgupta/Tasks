@@ -48,7 +48,7 @@ SC.stringsFor('English', {
   '_NewProject': "New Project",
   '_AllTasks': "All Tasks",
   '_UnallocatedTasks': "Unallocated Tasks",
-  '_ProjectTooltip': "Time left (in days) appended in curly braces, project has ",
+  '_ProjectTooltip': "Time left (in days) shown in curly braces, project has ",
   '_Tasks': " task(s)",
   
   // Task strings
@@ -82,10 +82,10 @@ SC.stringsFor('English', {
   '_Failed': "Failed",
   '_Effort:': "Effort:",
   '_Description:': "Description:",
-  '_TaskTooltip': "Effort (in days) appended in curly braces, submitter is ",
+  '_TaskTooltip': "Effort (in days) shown in curly braces, submitter is ",
   '_EditorTooltip': "Click to view/edit Task submitter/assignee/effort/description",
   
-  // User strings
+  // User/Assignee strings
   '_FirstLast': "First Last",
   '_first.last': "first.last",
   '_Unassigned': "Unassigned",
@@ -94,7 +94,7 @@ SC.stringsFor('English', {
   '_Tester': "Tester",
   '_Submitter:': "Submitter: ",
   '_Assignee:': "Assignee: ",
-  '_AssigneeTooltip': "Total remaning effort (in days) appended in curly braces, ",
+  '_AssigneeTooltip': "Remaining effort (in days) shown in curly braces, ",
   '_AssigneeNotLoaded': "assignee not loaded, has ",
   '_AssigneeUnderLoaded': "assignee under loaded, has ",
   '_AssigneeProperlyLoaded': "assignee properly loaded, has ",
