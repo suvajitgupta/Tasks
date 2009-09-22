@@ -77,7 +77,7 @@ v Set tasks toolbar button enablement based on having a selection [SG] @Done $Fe
 ^ Add "Add Task" & "Del. Task" buttons in tasks toolbar [SG] <SE> @Done $Feature %Passed
 | Logged in user is default Submitter, Assignee is either set to the same as selected task (if one) or to logged in user
 | Copy over attributes of selected task to new task
-v Allow "Add Task" button to be pressed a second time to keep in data entry mode, Esc will exit mode [SG] <MB> $Feature
+- Beta: Clear task validation if status is changed from Done [SG] <JH2> $Feature
 - Beta: Make All/Unallocated Tasks queries instead of actual projects in the store [SG] <SE>
 ^ Show effort subtotals (exclude Done or Low priority tasks) in curly braces for load balancing [SG] @Done $Feature %Passed
 - Append "?" for range-based subtotals including tasks with unspecified efforts [SG] @Done $Feature %Passed

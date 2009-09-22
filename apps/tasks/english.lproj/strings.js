@@ -79,7 +79,7 @@ SC.stringsFor('English', {
   '_Failed': "Failed",
   '_Effort:': "Effort:",
   '_Description:': "Description:",
-  '_TaskTooltip': "Effort appended in curly braces, submitter is ",
+  '_TaskTooltip': "Effort (in days) appended in curly braces, submitter is ",
   '_EditorTooltip': "Click to view/edit Task submitter/assignee/effort/description",
   
   // User strings
