@@ -233,7 +233,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerY: 2, left: 345, height: 24, width: 90 },
+          layout: { centerY: 2, left: 350, height: 24, width: 90 },
           icon: 'task-del-icon',
           value: "_DelTask".loc(),
           classNames: ['toolbar-label'],
@@ -241,6 +241,16 @@ Tasks.mainPage = SC.Page.design({
           isEnabledBinding: SC.Binding.oneWay('Tasks.tasksController.isDeletable'),
           target: 'Tasks',
           action: 'deleteTask'
+        }),
+        
+        SC.LabelView.design(Tasks.SimpleButton,{
+          layout: { centerY: 3, right: 465, height: 24, width: 90 },
+          icon: 'filter-tasks-icon',
+          value: "_FilterTasks".loc(),
+          classNames: ['toolbar-label'],
+          toolTip: "_FilterTasksTooltip".loc(),
+          target: 'Tasks',
+          action: 'filterTasks'
         }),
         
         SC.TextFieldView.design({

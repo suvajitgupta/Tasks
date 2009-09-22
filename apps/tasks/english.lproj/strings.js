@@ -54,9 +54,11 @@ SC.stringsFor('English', {
   // Task strings
   '_AddTask': "Add Task",
   '_AddTaskTooltip': "Add a new task, to the same assignee if there is a selected task",
+  '_NewTask': "New Task",
   '_DelTask': "Del. Task",
   '_DelTaskTooltip': "Delete selected task",
-  '_NewTask': "New Task",
+  '_FilterTasks': "Filter Tasks",
+  '_FilterTasksTooltip': "Filter tasks using attributes",
   '_Type': "TYPE",
   '_TypeTooltip': "Specify the kind of the selected task",
   '_Feature': "Feature",

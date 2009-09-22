@@ -163,6 +163,14 @@
   background: static_url('images/default-theme-static.png') no-repeat 0 -565px;
 }
 
+.filter-tasks-icon {
+  width: 20px !important;
+  height: 16px !important;
+  margin-top: 3px !important;
+  margin-right: 2px !important;
+  background: static_url('images/filter-tasks.png') no-repeat 0 0;
+}
+
 .assignee-selection-bar {
   background: static_url('images/default-theme-assignee-selection-bg.png') no-repeat;
 }

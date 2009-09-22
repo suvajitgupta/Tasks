@@ -504,6 +504,14 @@ Tasks.mixin({
   // TODO: [SE] implement deleteTaskSuccess/Failure
   
   /**
+   * Filter tasks via attributes.
+   */
+  filterTasks: function() {
+    // TODO: [SG] implement tasks filtering
+    this._notImplemented('filterTasks');
+  },
+  
+  /**
    * Logs a message indicating that the given state isn't handled in the given action.
    *
    * @param {String} action The name of the action (ex. "logout").
