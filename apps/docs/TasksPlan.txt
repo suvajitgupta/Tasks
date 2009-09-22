@@ -71,13 +71,12 @@ v Enable Task Validation radio buttons only when in Done status [SG] <JH2> $Feat
 - Allow multi-selected tasks to be set to new type/status/priority/validation [SG] <JH2> $Feature
 ^ Add task search filter & corresponding delete button in top toolbar: support type-ahead searching [SG] @Done $Feature %Passed
 - Beta: Don't lose selection after changing task assignee/priority/status/validation [SG] <SG> $Bug @Active
-- Allow task searching by type, priority, status, and validation fields [SG] <MB>
+^ Beta: Allow task filtering by type, priority, status, and validation fields via a toolbar button/pop up panel [SG] $Feature
 v Set tasks toolbar button enablement based on having a selection [SG] @Done $Feature %Passed
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done $Feature %Passed
 ^ Add "Add Task" & "Del. Task" buttons in tasks toolbar [SG] <SE> @Done $Feature %Passed
 | Logged in user is default Submitter, Assignee is either set to the same as selected task (if one) or to logged in user
-| Copy over type and priority of selected task to new task
-| To reproduce, add a new task with a filter on or add a task to a project with enough tasks that to get a scrollbar.
+| Copy over attributes of selected task to new task
 v Allow "Add Task" button to be pressed a second time to keep in data entry mode, Esc will exit mode [SG] <MB> $Feature
 - Beta: Make All/Unallocated Tasks queries instead of actual projects in the store [SG] <SE>
 ^ Show effort subtotals (exclude Done or Low priority tasks) in curly braces for load balancing [SG] @Done $Feature %Passed

@@ -421,6 +421,8 @@ Tasks.mixin({
         if(taskAssignee) task.set('assignee', taskAssignee);
         task.set('type', selectedObject.get('type'));
         task.set('priority', selectedObject.get('priority'));
+        task.set('status', selectedObject.get('status'));
+        task.set('validation', selectedObject.get('validation'));
       }
     }
 
