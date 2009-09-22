@@ -30,8 +30,8 @@ v Add missing 'localize' support back in CollectionView (regression from SC 0.9)
 v Beta: Make task in-cell editors fit with collection view item size [SG] <SC> @Active $Bug
 | Fix in CSS add class .ghost to list item view and set its background to none
 - Beta: Track/optimize calls to assignments controller for redrawing tasks tree [SG] <SC> @Active
-- Show newly added tasks/projects with a badge [SG]
-- Add some simple metrics/reporting capabilities [SG]
+- Show newly added tasks/projects with a badge [SG] $Feature
+- Add some simple metrics/reporting capabilities [SG] $Feature
 v Provide support for color-blind users (don't use color coding as only mechanism for status/validation) [SG] $Feature
 
 Project Manager GUI
@@ -68,7 +68,7 @@ Task Manager GUI
 - Show Task Priority (font style), Status (font color), Validation (background color) [SG] <MB> @Done $Feature %Passed
 - Add Task Status/Priority/Validation radio buttons in tasks toolbar [SG] @Done $Feature %Passed
 v Enable Task Validation radio buttons only when in Done status [SG] <JH2> $Feature
-- Allow multi-selected tasks to be set to new type/status/priority/validation [SG] <JH2> $Feature
+- Allow multi-selected tasks to be set to new type/status/priority/validation [SG] <BB> $Feature
 ^ Add task search filter & corresponding delete button in top toolbar: support type-ahead searching [SG] @Done $Feature %Passed
 - Beta: Don't lose selection after changing task assignee/priority/status/validation [SG] <SG> $Bug @Active
 ^ Beta: Allow task filtering by type, priority, status, and validation fields via a toolbar button/pop up panel [SG] $Feature @Active
@@ -127,7 +127,7 @@ v Allow drag-n-drop of a TXT file into App for data importing (using Google Gear
 - Restore application settings/state from last login (using HTML5 storage) [SG] <MB> $Feature
 | See demo.sproutcore.com/user_defaults and lookup SproutCore blog for Charles' posting on this topic
 - Add hotkeys for common operations (like add/delete projects/tasks, changing task priority/status/validation, saving) [SG] <MB> $Feature
-- Add Undo/Redo hotkeys & buttons in top toolbar (till last Save) [SG] <SE> $Feature
+v Add Undo/Redo hotkeys & buttons in top toolbar (till last Save) [SG] <SE> $Feature
 
 Server
 ^ Build persistence server (using Persevere) [SE] <SG> @Done %Passed
