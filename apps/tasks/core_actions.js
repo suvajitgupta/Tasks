@@ -405,7 +405,9 @@ Tasks.mixin({
     
     var user = CoreTasks.getPath('user.id');
     var taskHash = SC.merge({ 'submitter': user, 'assignee': user }, CoreTasks.Task.NEW_TASK_HASH);
-    taskHash.name = CoreTasks.NEW_TASK_NAME.loc() + ' ' + Tasks.assignmentsController.get('searchFilter');
+    taskHash.name = CoreTasks.NEW_TASK_NAME.loc();
+    var searchFilter = Tasks.assignmentsController.get('searchFilter');
+    if (searchFilter) taskHash.name = searchFilter + ' ' + taskHash.name;
     var task = CoreTasks.createRecord(CoreTasks.Task, taskHash);
     // task.id = CoreTasks.generateId(); // For FIXTUREs
 
