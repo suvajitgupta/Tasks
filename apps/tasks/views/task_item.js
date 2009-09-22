@@ -175,7 +175,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       
       var submitterUser = content.get('submitter');
       if (submitterUser) {
-        var submitter = "_SubmitterHover".loc() + '%@ (%@)'.fmt(submitterUser.get('name'), submitterUser.get('loginName'));
+        var submitter = "_TaskTooltip".loc() + '%@ (%@)'.fmt(submitterUser.get('name'), submitterUser.get('loginName'));
         context.attr('title', submitter);
         context.attr('alt', submitter);
       }

@@ -79,7 +79,8 @@ SC.stringsFor('English', {
   '_Failed': "Failed",
   '_Effort:': "Effort:",
   '_Description:': "Description:",
-  '_EditorTooltip': "Click to view/edit Task details (submitter, assignee, effort, and description)",
+  '_TaskTooltip': "Effort appended in curly braces, submitter is ",
+  '_EditorTooltip': "Click to view/edit Task submitter/assignee/effort/description",
   
   // User strings
   '_FirstLast': "First Last",
@@ -88,7 +89,6 @@ SC.stringsFor('English', {
   '_Manager': "Manager",
   '_Developer': "Developer",
   '_Tester': "Tester",
-  '_SubmitterHover': "Submitter: ",
   '_Submitter:': "Submitter: ",
   '_Assignee:': "Assignee: ",
   '_AssigneeNotLoaded': ", assignee not loaded",
@@ -109,6 +109,5 @@ SC.stringsFor('English', {
   '_TasksLoaded': "tasks, ",
   '_ProjectsLoaded': " and projects.",
   '_SaveMessage': "Last saved "
-  
   
 });
