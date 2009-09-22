@@ -98,7 +98,7 @@ SC.stringsFor('English', {
   '_AssigneeNotLoaded': "assignee not loaded, has ",
   '_AssigneeUnderLoaded': "assignee under loaded, has ",
   '_AssigneeProperlyLoaded': "assignee properly loaded, has ",
-  '_AssigneeOverloaded': ", assignee overloaded",
+  '_AssigneeOverloaded': ", assignee overloaded, has ",
   
   // Import/Export Panel strings
   '_Cancel': "Cancel",
