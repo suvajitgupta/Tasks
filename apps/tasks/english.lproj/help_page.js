@@ -9,7 +9,7 @@ sc_require('core');
   @extends SC.Page
   @author Suvajit Gupta
   
-  Settings Panel
+  Help Panel
   
 */
 Tasks.helpPage = SC.Page.create({  

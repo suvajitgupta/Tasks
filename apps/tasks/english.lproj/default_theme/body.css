@@ -39,3 +39,7 @@ body {
 	color: red !important;
 	font-weight: bold !important;
 }
+
+.sc-view.sc-checkbox-view span {
+  font-size: 10px !important;
+}

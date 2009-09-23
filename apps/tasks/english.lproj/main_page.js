@@ -371,11 +371,11 @@ Tasks.mainPage = SC.Page.design({
               escapeHTML: NO,
               classNames: ['task-attribute-set'],
               items: [
-                { title: '<span class=task-type-feature>' + CoreTasks.TASK_TYPE_FEATURE.loc() + '</span>&nbsp;',
+                { title: CoreTasks.TASK_TYPE_FEATURE.loc() + '&nbsp;',
                   value: CoreTasks.TASK_TYPE_FEATURE, icon: 'task-icon-feature' },
-                { title: '<span class=task-type-bug>' + CoreTasks.TASK_TYPE_BUG.loc() + '</span>&nbsp;',
+                { title: CoreTasks.TASK_TYPE_BUG.loc() + '&nbsp;',
                   value: CoreTasks.TASK_TYPE_BUG, icon: 'task-icon-bug' },
-                { title: '<span class=task-type-bug>' + CoreTasks.TASK_TYPE_OTHER.loc() + '</span>&nbsp;',
+                { title: CoreTasks.TASK_TYPE_OTHER.loc() + '&nbsp;',
                   value: CoreTasks.TASK_TYPE_OTHER, icon: 'task-icon-other' }
               ],
               itemTitleKey: 'title',

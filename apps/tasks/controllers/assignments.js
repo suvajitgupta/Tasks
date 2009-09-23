@@ -20,6 +20,9 @@ Tasks.assignmentsController = SC.ArrayController.create(
   _timer: null,
   assigneeSelection: null,
   searchFilter: null,
+  attributeFilterFeature: YES,
+  attributeFilterBug: YES,
+  attributeFilterOther: YES,
   
   hasFiltering: function() {
     return this.assigneeSelection || this.searchFilter;

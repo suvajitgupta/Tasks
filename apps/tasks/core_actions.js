@@ -509,8 +509,7 @@ Tasks.mixin({
    * Filter tasks via attributes.
    */
   filterTasks: function() {
-    // TODO: [SG] implement tasks filtering
-    this._notImplemented('filterTasks');
+    Tasks.filterController.openPane();
   },
   
   /**
