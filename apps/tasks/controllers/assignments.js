@@ -76,23 +76,16 @@ Tasks.assignmentsController = SC.ArrayController.create(
       }
     }
     
-    if(selectedAssigneeDisplayNames.length > 0){ // only show tasks for selected assignee(s)
-      for(assigneeName in assignees){ // list all assigned tasks
-        if(assignees.hasOwnProperty(assigneeName)) {
-          if(selectedAssigneeDisplayNames.indexOf(assigneeName) !== -1) {
-            this._createAssignmentNode(assignmentNodes, assigneeName, assignees[assigneeName], projectTimeLeft);
-          }
-        }
-      }
-      
-    } else { // show tasks for all users
-      for(assigneeName in assignees){
-        if(assignees.hasOwnProperty(assigneeName)) {
+    // Show tasks for selected assignee(s)
+    for(assigneeName in assignees){ // list all assigned tasks
+      if(assignees.hasOwnProperty(assigneeName)) {
+        if(selectedAssigneeDisplayNames.length === 0 || selectedAssigneeDisplayNames.indexOf(assigneeName) !== -1) {
           this._createAssignmentNode(assignmentNodes, assigneeName, assignees[assigneeName], projectTimeLeft);
         }
       }
     }
       
+    // Sort grouped tasks by assignee
     this.set('assignedTasks', SC.Object.create({ treeItemChildren: assignmentNodes.sort(function(a,b) {
       if (a.displayName===b.displayName) return 0;
       return (a.displayName > b.displayName) ? 1 : -1;
