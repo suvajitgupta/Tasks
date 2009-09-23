@@ -86,13 +86,8 @@ Tasks.assignmentsController = SC.ArrayController.create(
       }
       
     } else { // show tasks for all users
-      for(assigneeName in assignees){ // list unassigned tasks first
-        if(assignees.hasOwnProperty(assigneeName) && assigneeName === CoreTasks.USER_UNASSIGNED) {
-          this._createAssignmentNode(assignmentNodes, assigneeName, assignees[assigneeName], projectTimeLeft);
-        }
-      }
-      for(assigneeName in assignees){ // list all assigned tasks
-        if(assignees.hasOwnProperty(assigneeName) && assigneeName !== CoreTasks.USER_UNASSIGNED) {
+      for(assigneeName in assignees){
+        if(assignees.hasOwnProperty(assigneeName)) {
           this._createAssignmentNode(assignmentNodes, assigneeName, assignees[assigneeName], projectTimeLeft);
         }
       }
