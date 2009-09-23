@@ -33,6 +33,18 @@ Tasks.assignmentsController = SC.ArrayController.create(
    
     // console.log("DEBUG: showAssignments(" + this.count + ") entry at: " + new Date().format('hh:mm:ss a'));
     
+    // Extract selected assignee users whose tasks are to be displayed
+    var selectedAssigneeDisplayNames = [];
+    var selectedAssignees = this.get('assigneeSelection');
+    if (selectedAssignees) {
+      var selectedAssigneeLoginNames = selectedAssignees.split(" ");
+      for (var i = 0; i < selectedAssigneeLoginNames.length; i++) {
+        var selectedAssigneeUser = CoreTasks.getUser(selectedAssigneeLoginNames[i]);
+        if (selectedAssigneeUser) selectedAssigneeDisplayNames.push(selectedAssigneeUser.get('displayName'));
+      }
+    }
+    
+    // Extract task name search filter
     var sf = this.get('searchFilter');
     sf = this._escapeMetacharacters(sf);
     var rx = new RegExp(sf, 'i');
@@ -66,17 +78,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
         }
       }, this);
   
-    var selectedAssigneeDisplayNames = [];
-    var selectedAssignees = this.get('assigneeSelection');
-    if (selectedAssignees) {
-      var selectedAssigneeLoginNames = selectedAssignees.split(" ");
-      for (var i = 0; i < selectedAssigneeLoginNames.length; i++) {
-        var selectedAssigneeUser = CoreTasks.getUser(selectedAssigneeLoginNames[i]);
-        if (selectedAssigneeUser) selectedAssigneeDisplayNames.push(selectedAssigneeUser.get('displayName'));
-      }
-    }
-    
-    // Show tasks for selected assignee(s)
+    // Show tasks for selected assignee(s) if specified
     for(assigneeName in assignees){ // list all assigned tasks
       if(assignees.hasOwnProperty(assigneeName)) {
         if(selectedAssigneeDisplayNames.length === 0 || selectedAssigneeDisplayNames.indexOf(assigneeName) !== -1) {
