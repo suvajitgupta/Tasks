@@ -67,23 +67,23 @@ Tasks.assignmentsController = SC.ArrayController.create(
           return;
         }
         assigneeName = assignee ? assignee.get('displayName') : CoreTasks.USER_UNASSIGNED;
-        var assigneeObj = assignees[assigneeName];
-        if(!assigneeObj) {
-          assigneeObj = { assignee: assignee, tasks: [] };
-          assignees[assigneeName] = assigneeObj;
-        }
-        var taskName = task.get('name');
-        if(taskName.match(rx)) { // filter tasks that match search filter
-          assigneeObj.tasks.push(task);
-        }
-      }, this);
-  
-    // Show tasks for selected assignee(s) if specified
-    for(assigneeName in assignees){ // list all assigned tasks
-      if(assignees.hasOwnProperty(assigneeName)) {
         if(selectedAssigneeDisplayNames.length === 0 || selectedAssigneeDisplayNames.indexOf(assigneeName) !== -1) {
-          this._createAssignmentNode(assignmentNodes, assigneeName, assignees[assigneeName], projectTimeLeft);
+          var assigneeObj = assignees[assigneeName];
+          if(!assigneeObj) {
+            assigneeObj = { assignee: assignee, tasks: [] };
+            assignees[assigneeName] = assigneeObj;
+          }
+          var taskName = task.get('name');
+          if(taskName.match(rx)) { // filter tasks that match search filter
+            assigneeObj.tasks.push(task);
+          }
         }
+      },
+    this);
+  
+    for(assigneeName in assignees){
+      if(assignees.hasOwnProperty(assigneeName)) {
+          this._createAssignmentNode(assignmentNodes, assigneeName, assignees[assigneeName], projectTimeLeft);
       }
     }
       
