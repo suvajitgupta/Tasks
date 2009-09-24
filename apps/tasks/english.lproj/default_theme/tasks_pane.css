@@ -77,10 +77,10 @@
   color: #111 !important;
   padding-left: 1px !important;
   padding-right: 1px !important;
-  background: #CCC !important;
+  background: #CACACA !important;
 	font-weight: normal !important;
 	font-style: normal !important;
-	text-align: right !important;
+	text-align: center !important;
 }
 
 .task-item img {
