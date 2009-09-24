@@ -111,7 +111,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   render: function(context, firstTime) {
     sc_super();
     var content = this.get('content');
-    context = context.begin('div').addClass('task-id').text(content.get('id')).end();
+    context = context.begin('div').addClass('task-id').text(content.get('id') + ':').end();
     var hasDescription = NO;
     if(content && content.get('name')){ // a task node, not an assignee node
       
