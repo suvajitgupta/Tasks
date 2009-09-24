@@ -100,8 +100,9 @@ CoreTasks.Task = CoreTasks.Record.extend({
   /**
    * The development status of the task (see below for allowed values).
    */
-  status: SC.Record.attr(String, {
+  statusValue: SC.Record.attr(String, {
     isRequired: YES,
+    key: 'status',
     defaultValue: CoreTasks.TASK_STATUS_PLANNED,
     allowed: [
       CoreTasks.TASK_STATUS_PLANNED,
@@ -109,7 +110,18 @@ CoreTasks.Task = CoreTasks.Record.extend({
       CoreTasks.TASK_STATUS_DONE,
       CoreTasks.TASK_STATUS_RISKY
     ]
-   }),
+   }) ,
+
+   status: function(key, value){
+     var currentStatus = this.get('statusValue');
+     if (value && currentStatus !== value) {
+       this.set('statusValue', value);
+       if(value !== CoreTasks.TASK_STATUS_DONE) this.set('validation', CoreTasks.TASK_VALIDATION_UNTESTED)
+     }
+     else {
+       return currentStatus;
+     }
+   }.property('statusValue').cacheable(),
 
   /**
    * The validation status of the task (see below for allowed values).
@@ -183,7 +195,9 @@ CoreTasks.Task = CoreTasks.Record.extend({
    * A string summarizing key facets of the Task for display.
    */
   displayName: function(key, value) {
+    
     if (value !== undefined) {
+      
       var taskHash = CoreTasks.Task.parse(value, false);
       // console.log("PARSED TASK: " + JSON.stringify(taskHash));
       
@@ -225,14 +239,21 @@ CoreTasks.Task = CoreTasks.Record.extend({
       
       if(taskHash.status) {
         this.propertyWillChange('status');
+        if(this.get('status') !== taskHash.status && taskHash.status !== CoreTasks.TASK_STATUS_DONE) this.writeAttribute('validation', CoreTasks.TASK_VALIDATION_UNTESTED);
         this.writeAttribute('status', taskHash.status);
         this.propertyDidChange('status');
       }
       
       if(taskHash.validation) {
-        this.propertyWillChange('validation');
-        this.writeAttribute('validation', taskHash.validation);
-        this.propertyDidChange('validation');
+        if(taskHash.validation !== CoreTasks.TASK_VALIDATION_UNTESTED &&
+           !(this.get('status') === CoreTasks.TASK_STATUS_DONE || taskHash.status === CoreTasks.TASK_STATUS_DONE )) {
+          console.log('Task Editing Error - validation of Passed/Failed only possible for status Done');
+        }
+        else {
+          this.propertyWillChange('validation');
+          this.writeAttribute('validation', taskHash.validation);
+          this.propertyDidChange('validation');
+        }
       }
 
     } else {
