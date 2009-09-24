@@ -36,7 +36,7 @@ Tasks.filterPane = SC.SheetPane.create({
         classNames: ['task-attribute-set'],
         childViews: [
           SC.CheckboxView.design({
-            layout: { left: 5, top: 4, width: 60 },
+            layout: { left: 5, top: 4, width: 65 },
             title: CoreTasks.TASK_TYPE_FEATURE.loc(),
             valueBinding: 'Tasks.assignmentsController.attributeFilterFeature',
             icon: 'task-icon-feature'
@@ -144,13 +144,13 @@ Tasks.filterPane = SC.SheetPane.create({
             value: YES
           }),
           SC.CheckboxView.design({
-            layout: { centerX: 0, top: 4, width: 60 },
+            layout: { centerX: 0, top: 4, width: 65 },
             escapeHTML: NO,
             title: '<span class=task-validation-passed><label>' + CoreTasks.TASK_VALIDATION_PASSED.loc() + '</label></span>',
             value: YES
           }),
           SC.CheckboxView.design({
-            layout: { right: 5, top: 4, width: 55 },
+            layout: { right: 5, top: 4, width: 60 },
             escapeHTML: NO,
             title: '<span class=task-validation-failed><label>' + CoreTasks.TASK_VALIDATION_FAILED.loc() + '</label></span>',
             value: YES
