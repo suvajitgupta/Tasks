@@ -68,9 +68,16 @@
 }
 
 .task-id {
-  padding-left: 20px !important;
-	width: 32px !important;
-  color: #000 !important;
+  line-height: 1.6;
+  position: absolute !important;
+  top: 2px !important;
+  bottom: 2px !important;
+  left: 18px !important;
+	width: 30px !important;
+  color: #111 !important;
+  padding-left: 1px !important;
+  padding-right: 1px !important;
+  background: #CCC !important;
 	font-weight: normal !important;
 	font-style: normal !important;
 	text-align: right !important;
