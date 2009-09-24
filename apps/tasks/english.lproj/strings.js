@@ -37,8 +37,8 @@ SC.stringsFor('English', {
   '_HelpTooltip': "Launch Tasks help",
   '_Logout': "Logout",
   '_LogoutTooltip': "Logout from Tasks",
-  "_AssigneeSelectionHint": "Specify assignee(s)...",
-  '_TasksSearchHint': "Search for task(s)...",
+  "_AssigneeSelectionHint": "Specify assignee login names",
+  '_TasksSearchHint': "Search by task ID or name",
   
   // Project strings
   '_AddProject': "Add Project",
