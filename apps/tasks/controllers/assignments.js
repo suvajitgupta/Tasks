@@ -73,8 +73,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
             assigneeObj = { assignee: assignee, tasks: [] };
             assignees[assigneeName] = assigneeObj;
           }
-          var taskName = task.get('name');
-          if(taskName.match(rx)) { // filter tasks that match search filter
+          if(task.get('name').match(rx) || ('' + task.get('id')).match(rx)) { // filter tasks whose name or ID matches search filter
             assigneeObj.tasks.push(task);
           }
         }
