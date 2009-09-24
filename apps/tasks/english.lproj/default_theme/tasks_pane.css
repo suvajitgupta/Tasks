@@ -29,15 +29,13 @@
  
 .assignee-item {
   background: #f2f2f2 !important;
-  left: 0px !important;
-  right: 0px !important;
 }
 
 .assignee-item label {
   color: white !important;
   padding-left: 10px;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
 }
 
 .assignee-not-loaded label {
@@ -69,30 +67,32 @@
 
 .task-id {
   font-size: 9px !important;
-	font-weight: normal !important;
+	font-weight: bold !important;
 	font-style: normal !important;
 	text-align: center !important;
   line-height: 2 !important;
   position: absolute !important;
   top: 2px !important;
   bottom: 2px !important;
-  left: 18px !important;
+  left: 20px !important;
 	width: 30px !important;
-  color: #111 !important;
+  color: #000 !important;
   background: #CACACA !important;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
 }
 
 .task-item img {
-  left: 0px !important;
+  left: 1px !important;
 }
 
 .task-item label {
-  left: 52px !important;
+  left: 53px !important;
 }
 
 .task-item .sc-outline {
   left: 0px !important;
-  right: 22px !important;
+  right: 16px !important;
 }
 
 .sc-view.sc-ghost-view .task-item {
