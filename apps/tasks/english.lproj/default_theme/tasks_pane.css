@@ -68,19 +68,18 @@
 }
 
 .task-id {
-  line-height: 1.6;
+  font-size: 9px !important;
+	font-weight: normal !important;
+	font-style: normal !important;
+	text-align: center !important;
+  line-height: 2 !important;
   position: absolute !important;
   top: 2px !important;
   bottom: 2px !important;
   left: 18px !important;
 	width: 30px !important;
   color: #111 !important;
-  padding-left: 1px !important;
-  padding-right: 1px !important;
   background: #CACACA !important;
-	font-weight: normal !important;
-	font-style: normal !important;
-	text-align: center !important;
 }
 
 .task-item img {
