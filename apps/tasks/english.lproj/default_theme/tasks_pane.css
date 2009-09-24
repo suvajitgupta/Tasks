@@ -63,8 +63,25 @@
 
 .task-item {
   background: #f2f2f2;
-  left: 20px !important;
+  left: 22px !important;
   right: 5px !important;
+}
+
+.task-id {
+  color: #000 !important;
+	font-weight: normal !important;
+	font-style: normal !important;
+	text-decoration: normal !important;
+	width: 32px !important;
+	text-align: right !important;
+}
+
+.task-item img {
+  left: 36px !important;
+}
+
+.task-item label {
+  left: 55px !important;
 }
 
 .task-item .sc-outline {
@@ -105,7 +122,7 @@
 
 .task-priority-high {
 	font-weight: bold !important;
-	text-decoration: underline !important;
+	text-decoration: none !important;
 }
 
 .task-priority-medium {
