@@ -69,7 +69,7 @@
 
 .task-id {
   padding-left: 20px !important;
-	width: 35px !important;
+	width: 32px !important;
   color: #000 !important;
 	font-weight: normal !important;
 	font-style: normal !important;
@@ -81,7 +81,7 @@
 }
 
 .task-item label {
-  left: 57px !important;
+  left: 52px !important;
 }
 
 .task-item .sc-outline {
