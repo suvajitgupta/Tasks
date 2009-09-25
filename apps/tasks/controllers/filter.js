@@ -24,6 +24,7 @@ Tasks.filterController = SC.ObjectController.create(
       var pane = Tasks.get('filterPane');
       pane.remove();
       pane.destroy();
+      Tasks.assignmentsController.showAssignments();
     }
     
 });

@@ -20,9 +20,82 @@ Tasks.assignmentsController = SC.ArrayController.create(
   _timer: null,
   assigneeSelection: null,
   searchFilter: null,
-  attributeFilterFeature: YES,
-  attributeFilterBug: YES,
-  attributeFilterOther: YES,
+  attributeFilterCriteria: [
+    CoreTasks.TASK_TYPE_FEATURE, CoreTasks.TASK_TYPE_BUG, CoreTasks.TASK_TYPE_OTHER,
+    CoreTasks.TASK_PRIORITY_HIGH, CoreTasks.TASK_PRIORITY_MEDIUM, CoreTasks.TASK_PRIORITY_LOW,
+    CoreTasks.TASK_STATUS_PLANNED, CoreTasks.TASK_STATUS_ACTIVE, CoreTasks.TASK_STATUS_DONE, CoreTasks.TASK_STATUS_RISKY,
+    CoreTasks.TASK_VALIDATION_UNTESTED, CoreTasks.TASK_VALIDATION_PASSED, CoreTasks.TASK_VALIDATION_FAILED
+  ],
+  
+  attributeFilter: function(name, value) {
+    if (value !== undefined) {
+      if(value) {
+        if(this.attributeFilterCriteria.indexOf(name) === -1) {
+          this.attributeFilterCriteria.push(name);
+        }
+      }
+      else {
+        var idx = this.attributeFilterCriteria.indexOf(name);
+        if (idx !== -1) this.attributeFilterCriteria.splice(idx, 1);
+      }
+      return this;
+    }
+    else {
+      return (this.attributeFilterCriteria.indexOf(name) !== -1);
+    }
+  },
+  
+  attributeFilterTypeFeature: function(key, value) {
+    return this.attributeFilter(CoreTasks.TASK_TYPE_FEATURE, value);
+  }.property('attributeFilterCriteria'),
+  
+  attributeFilterTypeBug: function(key, value) {
+    return this.attributeFilter(CoreTasks.TASK_TYPE_BUG, value);
+  }.property('attributeFilterCriteria'),
+  
+  attributeFilterTypeOther: function(key, value) {
+    return this.attributeFilter(CoreTasks.TASK_TYPE_OTHER, value);
+  }.property('attributeFilterCriteria'),
+  
+  attributeFilterPriorityHigh: function(key, value) {
+    return this.attributeFilter(CoreTasks.TASK_PRIORITY_HIGH, value);
+  }.property('attributeFilterCriteria'),
+  
+  attributeFilterPriorityMedium: function(key, value) {
+    return this.attributeFilter(CoreTasks.TASK_PRIORITY_MEDIUM, value);
+  }.property('attributeFilterCriteria'),
+  
+  attributeFilterPriorityLow: function(key, value) {
+    return this.attributeFilter(CoreTasks.TASK_PRIORITY_LOW, value);
+  }.property('attributeFilterCriteria'),
+  
+  attributeFilterStatusPlanned: function(key, value) {
+    return this.attributeFilter(CoreTasks.TASK_STATUS_PLANNED, value);
+  }.property('attributeFilterCriteria'),
+  
+  attributeFilterStatusActive: function(key, value) {
+    return this.attributeFilter(CoreTasks.TASK_STATUS_ACTIVE, value);
+  }.property('attributeFilterCriteria'),
+  
+  attributeFilterStatusDone: function(key, value) {
+    return this.attributeFilter(CoreTasks.TASK_STATUS_DONE, value);
+  }.property('attributeFilterCriteria'),
+  
+  attributeFilterStatusRisky: function(key, value) {
+    return this.attributeFilter(CoreTasks.TASK_STATUS_RISKY, value);
+  }.property('attributeFilterCriteria'),
+  
+  attributeFilterValidationUntested: function(key, value) {
+    return this.attributeFilter(CoreTasks.TASK_VALIDATION_UNTESTED, value);
+  }.property('attributeFilterCriteria'),
+  
+  attributeFilterValidationPassed: function(key, value) {
+    return this.attributeFilter(CoreTasks.TASK_VALIDATION_PASSED, value);
+  }.property('attributeFilterCriteria'),
+  
+  attributeFilterValidationFailed: function(key, value) {
+    return this.attributeFilter(CoreTasks.TASK_VALIDATION_FAILED, value);
+  }.property('attributeFilterCriteria'),
   
   hasFiltering: function() {
     return this.assigneeSelection || this.searchFilter;
@@ -73,9 +146,18 @@ Tasks.assignmentsController = SC.ArrayController.create(
             assigneeObj = { assignee: assignee, tasks: [] };
             assignees[assigneeName] = assigneeObj;
           }
-          if(task.get('name').match(rx) || ('' + task.get('id')).match(rx)) { // filter tasks whose name or ID matches search filter
-            assigneeObj.tasks.push(task);
-          }
+          
+          // Filter tasks that meet filter criteria
+          var type = task.get('type');
+          if(this.attributeFilterCriteria.indexOf(type) === -1) return;
+          var priority = task.get('priority');
+          if(this.attributeFilterCriteria.indexOf(priority) === -1) return;
+          var status = task.get('status');
+          if(this.attributeFilterCriteria.indexOf(status) === -1) return;
+          var validation = task.get('validation');
+          if(this.attributeFilterCriteria.indexOf(validation) === -1) return;
+          if(!(task.get('name').match(rx) || ('' + task.get('id')).match(rx))) return;
+          assigneeObj.tasks.push(task);
         }
       },
     this);

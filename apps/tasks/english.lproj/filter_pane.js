@@ -38,19 +38,19 @@ Tasks.filterPane = SC.SheetPane.create({
           SC.CheckboxView.design({
             layout: { left: 5, top: 4, width: 65 },
             title: CoreTasks.TASK_TYPE_FEATURE.loc(),
-            valueBinding: 'Tasks.assignmentsController.attributeFilterFeature',
+            valueBinding: 'Tasks.assignmentsController.attributeFilterTypeFeature',
             icon: 'task-icon-feature'
           }),
           SC.CheckboxView.design({
             layout: { centerX: 0, top: 4, width: 45 },
             title: CoreTasks.TASK_TYPE_BUG.loc(),
-            valueBinding: 'Tasks.assignmentsController.attributeFilterBug',
+            valueBinding: 'Tasks.assignmentsController.attributeFilterTypeBug',
             icon: 'task-icon-bug'
           }),
           SC.CheckboxView.design({
             layout: { right: 5, top: 4, width: 55 },
             title: CoreTasks.TASK_TYPE_OTHER.loc(),
-            valueBinding: 'Tasks.assignmentsController.attributeFilterOther',
+            valueBinding: 'Tasks.assignmentsController.attributeFilterTypeOther',
             icon: 'task-icon-other'
           })
         ]
@@ -70,20 +70,20 @@ Tasks.filterPane = SC.SheetPane.create({
           SC.CheckboxView.design({
             layout: { left: 5, top: 4, width: 50 },
             title: CoreTasks.TASK_PRIORITY_HIGH.loc(),
-            classNames: [ 'task-priority-high' ],
-            value: YES
+            valueBinding: 'Tasks.assignmentsController.attributeFilterPriorityHigh',
+            classNames: [ 'task-priority-high' ]
           }),
           SC.CheckboxView.design({
             layout: { centerX: 0, top: 4, width: 65 },
             title: CoreTasks.TASK_PRIORITY_MEDIUM.loc(),
-            classNames: [ 'task-priority-medium' ],
-            value: YES
+            valueBinding: 'Tasks.assignmentsController.attributeFilterPriorityMedium',
+            classNames: [ 'task-priority-medium' ]
           }),
           SC.CheckboxView.design({
             layout: { right: 5, top: 4, width: 45 },
             title: CoreTasks.TASK_PRIORITY_LOW.loc(),
-            classNames: [ 'task-priority-low' ],
-            value: YES
+            valueBinding: 'Tasks.assignmentsController.attributeFilterPriorityLow',
+            classNames: [ 'task-priority-low' ]
           })
         ]
       }),
@@ -102,26 +102,26 @@ Tasks.filterPane = SC.SheetPane.create({
           SC.CheckboxView.design({
             layout: { left: 5, top: 4, width: 65 },
             title: CoreTasks.TASK_STATUS_PLANNED.loc(),
-            classNames: [ 'task-status-planned' ],
-            value: YES
+            valueBinding: 'Tasks.assignmentsController.attributeFilterStatusPlanned',
+            classNames: [ 'task-status-planned' ]
           }),
           SC.CheckboxView.design({
             layout: { centerX: -20, top: 4, width: 55 },
             title: CoreTasks.TASK_STATUS_ACTIVE.loc(),
-            classNames: [ 'task-status-active' ],
-            value: YES
+            valueBinding: 'Tasks.assignmentsController.attributeFilterStatusActive',
+            classNames: [ 'task-status-active' ]
           }),
           SC.CheckboxView.design({
             layout: { centerX: 40, top: 4, width: 50 },
             title: CoreTasks.TASK_STATUS_DONE.loc(),
-            classNames: [ 'task-status-done' ],
-            value: YES
+            valueBinding: 'Tasks.assignmentsController.attributeFilterStatusDone',
+            classNames: [ 'task-status-done' ]
           }),
           SC.CheckboxView.design({
             layout: { right: 5, top: 4, width: 50 },
             title: CoreTasks.TASK_STATUS_RISKY.loc(),
-            classNames: [ 'task-status-risky' ],
-            value: YES
+            valueBinding: 'Tasks.assignmentsController.attributeFilterStatusRisky',
+            classNames: [ 'task-status-risky' ]
           })
         ]
       }),
@@ -141,19 +141,19 @@ Tasks.filterPane = SC.SheetPane.create({
             layout: { left: 5, top: 4, width: 70 },
             escapeHTML: NO,
             title: '<span class=task-validation-untested><label>' + CoreTasks.TASK_VALIDATION_UNTESTED.loc() + '</label></span>',
-            value: YES
+            valueBinding: 'Tasks.assignmentsController.attributeFilterValidationUntested'
           }),
           SC.CheckboxView.design({
             layout: { centerX: 0, top: 4, width: 65 },
             escapeHTML: NO,
             title: '<span class=task-validation-passed><label>' + CoreTasks.TASK_VALIDATION_PASSED.loc() + '</label></span>',
-            value: YES
+            valueBinding: 'Tasks.assignmentsController.attributeFilterValidationPassed'
           }),
           SC.CheckboxView.design({
             layout: { right: 5, top: 4, width: 60 },
             escapeHTML: NO,
             title: '<span class=task-validation-failed><label>' + CoreTasks.TASK_VALIDATION_FAILED.loc() + '</label></span>',
-            value: YES
+            valueBinding: 'Tasks.assignmentsController.attributeFilterValidationFailed'
           })
         ]
       }),
