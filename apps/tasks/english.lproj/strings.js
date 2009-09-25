@@ -100,9 +100,11 @@ SC.stringsFor('English', {
   '_AssigneeProperlyLoaded': "assignee properly loaded, has ",
   '_AssigneeOverloaded': "assignee overloaded, has ",
   
-  // Import/Export Panel strings
+  // Popup Pane/Panel strings
+  '_EnableAll': "Enable All",
   '_Cancel': "Cancel",
   '_Close': "Close",
+  '_Apply': "Apply",
   
   // Status Bar strings
   '_Displaying': "Displaying ",

@@ -245,8 +245,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
       }
       
       if(taskHash.validation) {
-        if(taskHash.validation !== CoreTasks.TASK_VALIDATION_UNTESTED &&
-           !(this.get('status') === CoreTasks.TASK_STATUS_DONE || taskHash.status === CoreTasks.TASK_STATUS_DONE )) {
+        if(taskHash.validation !== CoreTasks.TASK_VALIDATION_UNTESTED && this.readAttribute('status') !== CoreTasks.TASK_STATUS_DONE) {
           console.log('Task Editing Error - validation of Passed/Failed only possible for status Done');
         }
         else {

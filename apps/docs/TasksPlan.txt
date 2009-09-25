@@ -30,7 +30,9 @@ v Add missing 'localize' support back in CollectionView (regression from SC 0.9)
 v Beta: Make task in-cell editors fit with collection view item size [SG] <SC> @Active $Bug
 | Fix in CSS add class .ghost to list item view and set its background to none
 - Beta: Track/optimize calls to assignments controller for redrawing tasks tree [SG] <SC> @Active
+- Allow direct bookmarking of Tasks projects (using SproutCore routes) [SG] <JL>
 - Show newly added tasks/projects with a badge [SG] $Feature
+- Support email notifications on task changes to Assignee/Manager [SG] <SE> $Feature
 - Add some simple metrics/reporting capabilities [SG] $Feature
 v Provide support for color-blind users (don't use color coding as only mechanism for status/validation) [SG] $Feature
 
@@ -57,7 +59,7 @@ v Disable Add/Del. Tasks buttons when on "All Tasks" project [SG] <BB> @Done %Pa
 v Add context menu to Delete a project [SG] <JH2> $Feature
 
 Task Manager GUI
-^ Group Tasks by User and display Task summary & effort (if specified) in curly braces [SG] <JH2> @Done $Feature %Passed
+^ Group Tasks by User and display Task id, summary, and effort (if specified) in curly braces [SG] <JH2> @Done $Feature %Passed
 ^ Fix missing/flashing scrollbar on Firefox/Windows [SC] <SG> $Bug @Active
 | To reproduce: search for a Task in search bar or select AllTasks, scroll down, select a task, then select another project)
 ^ Support smart sorting of tasks by status, validation, priority, and type (in order)[SG] <SG> @Done $Feature %Passed
@@ -69,9 +71,9 @@ Task Manager GUI
 - Add Task Status/Priority/Validation radio buttons in tasks toolbar [SG] @Done $Feature %Passed
 v Enable Task Validation radio buttons only when in Done status [SG] <JH2> $Feature
 - Allow multi-selected tasks to be set to new type/status/priority/validation [SG] <BB> $Feature
-^ Add task search filter & corresponding delete button in top toolbar: support type-ahead searching [SG] @Done $Feature %Passed
+^ Add task search filter (by id/name) & corresponding delete button in top toolbar: support type-ahead searching [SG] @Done $Feature %Passed
 - Beta: Don't lose selection after changing task assignee/priority/status/validation [SG] <SG> $Bug @Active
-^ Beta: Allow task filtering by type, priority, status, and validation fields via a toolbar button/pop up panel [SG] $Feature @Active
+^ Allow task filtering by type, priority, status, and validation fields via a toolbar button/pop up panel [SG] $Feature @Done %Passed
 v Set tasks toolbar button enablement based on having a selection [SG] @Done $Feature %Passed
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done $Feature %Passed
 ^ Add "Add Task" & "Del. Task" buttons in tasks toolbar [SG] <SE> @Done $Feature %Passed
@@ -89,7 +91,7 @@ v Add hover over tooltip for assignees to show how many tasks they have and to e
 - Beta: Fix bindings problem with flashing text area for long description entry [SG] <JH2> @Active $Bug
 - Fix task pop editor location problem where it is getting cropped at the window boundary [SC] <SG> @Active $Bug
 - Fix lag in responsiveness for Tasks Description entry (bindings issue) [SG] <JH2> $Bug
-v Add context menu & hotkeys to Delete/Duplicate & Cut/Copy/Paste a task [SG] <JH2> $Feature
+v Add context menu to Delete/Duplicate & Cut/Copy/Paste a task [SG] <JH2> $Feature
 
 User Manager GUI
 ^ Add login screen to identify user who logs in (and handle login failures properly) [SG] <SE> @Done $Feature
@@ -127,7 +129,8 @@ v Allow drag-n-drop of a TXT file into App for data importing (using Google Gear
 - Restore application settings/state from last login (using HTML5 storage) [SG] <MB> $Feature
 | See demo.sproutcore.com/user_defaults and lookup SproutCore blog for Charles' posting on this topic
 - Add hotkeys for common operations (like add/delete projects/tasks, changing task priority/status/validation, saving) [SG] <MB> $Feature
-v Add Undo/Redo hotkeys & buttons in top toolbar (till last Save) [SG] <SE> $Feature
+- Allow assignee/search filter crieria to be stored/used as a "Saved Search" in projects list [SG] <SE>
+v Add Undo/Redo buttons in top toolbar (till last Save) [SG] <SE> $Feature
 
 Server
 ^ Build persistence server (using Persevere) [SE] <SG> @Done %Passed

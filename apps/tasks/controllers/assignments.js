@@ -12,20 +12,27 @@
   @author Joshua Holt
   @author Suvajit Gupta
 */
+
+Tasks.attributeFilterAllEnabled = [
+  CoreTasks.TASK_TYPE_FEATURE, CoreTasks.TASK_TYPE_BUG, CoreTasks.TASK_TYPE_OTHER,
+  CoreTasks.TASK_PRIORITY_HIGH, CoreTasks.TASK_PRIORITY_MEDIUM, CoreTasks.TASK_PRIORITY_LOW,
+  CoreTasks.TASK_STATUS_PLANNED, CoreTasks.TASK_STATUS_ACTIVE, CoreTasks.TASK_STATUS_DONE, CoreTasks.TASK_STATUS_RISKY,
+  CoreTasks.TASK_VALIDATION_UNTESTED, CoreTasks.TASK_VALIDATION_PASSED, CoreTasks.TASK_VALIDATION_FAILED
+];
+
 Tasks.assignmentsController = SC.ArrayController.create(
 /** @scope Tasks.assignmentsController.prototype */ {
   
   contentBinding: 'Tasks.projectController.tasks',
   assignedTasks: null,
   _timer: null,
+  
   assigneeSelection: null,
   searchFilter: null,
-  attributeFilterCriteria: [
-    CoreTasks.TASK_TYPE_FEATURE, CoreTasks.TASK_TYPE_BUG, CoreTasks.TASK_TYPE_OTHER,
-    CoreTasks.TASK_PRIORITY_HIGH, CoreTasks.TASK_PRIORITY_MEDIUM, CoreTasks.TASK_PRIORITY_LOW,
-    CoreTasks.TASK_STATUS_PLANNED, CoreTasks.TASK_STATUS_ACTIVE, CoreTasks.TASK_STATUS_DONE, CoreTasks.TASK_STATUS_RISKY,
-    CoreTasks.TASK_VALIDATION_UNTESTED, CoreTasks.TASK_VALIDATION_PASSED, CoreTasks.TASK_VALIDATION_FAILED
-  ],
+  attributeFilterCriteria: Tasks.attributeFilterAllEnabled.slice(0),
+  clearAttributeFilter: function() {
+    this.set('attributeFilterCriteria', Tasks.attributeFilterAllEnabled.slice(0));
+  },
   
   attributeFilter: function(name, value) {
     if (value !== undefined) {

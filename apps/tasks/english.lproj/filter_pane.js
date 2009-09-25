@@ -159,12 +159,21 @@ Tasks.filterPane = SC.SheetPane.create({
       }),
 
       SC.ButtonView.design({
+        layout: { width: 100, height: 30, right: 96, bottom: 8 },
+        titleMinWidth: 0,
+        theme: 'capsule',
+        title: "_EnableAll".loc(),
+        target: 'Tasks.assignmentsController',
+        action: 'clearAttributeFilter'
+      }),
+      
+      SC.ButtonView.design({
         layout: { width: 80, height: 30, right: 10, bottom: 8 },
         titleMinWidth: 0,
         keyEquivalent: 'escape',
         isDefault: YES,
         theme: 'capsule',
-        title: "_Close".loc(),
+        title: "_Apply".loc(),
         target: 'Tasks.filterController',
         action: 'closePane'
       })
