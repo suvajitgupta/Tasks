@@ -20,18 +20,18 @@ Tasks.ProjectItemView = SC.ListItemView.extend(
   },
 
   render: function(context, firstTime) {
-
     var content = this.get('content');
     if(content) {
-
       var projectName = content.get('name');
       if (projectName === CoreTasks.ALL_TASKS_NAME.loc() || projectName === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) context.addClass('reserved-project-item');
       else context.addClass('regular-project-item');
 
-      var tasksCountTooltip = "_ProjectTooltip".loc() + content.get('tasks').get('length') + "_Tasks".loc();
-      context.attr('title', tasksCountTooltip);
-      context.attr('alt', tasksCountTooltip);
-
+      var tasks = content.get('tasks');
+      if(tasks) {
+        var tasksCountTooltip = "_ProjectTooltip".loc() + tasks.get('length') + "_Tasks".loc();
+        context.attr('title', tasksCountTooltip);
+        context.attr('alt', tasksCountTooltip);
+      }
     }
     sc_super();
   }

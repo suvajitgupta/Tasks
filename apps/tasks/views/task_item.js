@@ -116,74 +116,72 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     
     context = context.begin('div').addClass('task-id').text(content.get('id')).end();
     var hasDescription = NO;
-    if(content && content.get('name')){ // a task node, not an assignee node
       
-      var priority = content.get('priority');
-      context.addClass('task-item');
-      switch(priority){
-        case CoreTasks.TASK_PRIORITY_HIGH:
-          context.addClass('task-priority-high');
-          break;
-        case CoreTasks.TASK_PRIORITY_MEDIUM:
-          context.addClass('task-priority-medium');
-          break;
-        case CoreTasks.TASK_PRIORITY_LOW:
-          context.addClass('task-priority-low');
-          break;          
-      }
-      
-      var status = content.get('status');
-      switch(status){
-        case CoreTasks.TASK_STATUS_PLANNED:
-          context.addClass('task-status-planned');
-          break;
-        case CoreTasks.TASK_STATUS_ACTIVE:
-          context.addClass('task-status-active');
-          break;
-        case CoreTasks.TASK_STATUS_DONE:
-          context.addClass('task-status-done');
-          break;          
-        case CoreTasks.TASK_STATUS_RISKY:
-          context.addClass('task-status-risky');
-          break;          
-      }
-      
-      var validation = content.get('validation');
-      switch(validation){
-        case CoreTasks.TASK_VALIDATION_UNTESTED:
-          context.addClass('task-validation-untested');
-          break;
-        case CoreTasks.TASK_VALIDATION_PASSED:
-          context.addClass('task-validation-passed');
-          break;
-        case CoreTasks.TASK_VALIDATION_FAILED:
-          context.addClass('task-validation-failed');
-          break;          
-      }
-      if (content.get('description')) {
-        hasDescription = YES;
-      }
-      context = context.begin('div').addClass('sc-view').addClass('task-description');
-      context = context.begin('img').attr({
-        src: SC.BLANK_IMAGE_URL,
-        title: "_EditorTooltip".loc(),
-        alt: "_EditorTooltip".loc()
-      }).addClass('task-editor');
-      if (hasDescription) {
-        context.addClass('task-icon-has-description');
-      }else{
-        context.addClass('task-icon-no-description');
-      }
-      context = context.end();
-      context = context.end();
-      
-      var submitterUser = content.get('submitter');
-      if (submitterUser) {
-        var submitter = "_TaskTooltip".loc() + '%@ (%@)'.fmt(submitterUser.get('name'), submitterUser.get('loginName'));
-        context.attr('title', submitter);
-        context.attr('alt', submitter);
-      }
+    var priority = content.get('priority');
+    context.addClass('task-item');
+    switch(priority){
+      case CoreTasks.TASK_PRIORITY_HIGH:
+        context.addClass('task-priority-high');
+        break;
+      case CoreTasks.TASK_PRIORITY_MEDIUM:
+        context.addClass('task-priority-medium');
+        break;
+      case CoreTasks.TASK_PRIORITY_LOW:
+        context.addClass('task-priority-low');
+        break;          
     }
+    
+    var status = content.get('status');
+    switch(status){
+      case CoreTasks.TASK_STATUS_PLANNED:
+        context.addClass('task-status-planned');
+        break;
+      case CoreTasks.TASK_STATUS_ACTIVE:
+        context.addClass('task-status-active');
+        break;
+      case CoreTasks.TASK_STATUS_DONE:
+        context.addClass('task-status-done');
+        break;          
+      case CoreTasks.TASK_STATUS_RISKY:
+        context.addClass('task-status-risky');
+        break;          
+    }
+    
+    var validation = content.get('validation');
+    switch(validation){
+      case CoreTasks.TASK_VALIDATION_UNTESTED:
+        context.addClass('task-validation-untested');
+        break;
+      case CoreTasks.TASK_VALIDATION_PASSED:
+        context.addClass('task-validation-passed');
+        break;
+      case CoreTasks.TASK_VALIDATION_FAILED:
+        context.addClass('task-validation-failed');
+        break;          
+    }
+    
+    if (content.get('description')) hasDescription = YES;
+    context = context.begin('div').addClass('sc-view').addClass('task-description');
+    context = context.begin('img').attr({
+      src: SC.BLANK_IMAGE_URL,
+      title: "_EditorTooltip".loc(),
+      alt: "_EditorTooltip".loc()
+    }).addClass('task-editor');
+    if (hasDescription) {
+      context.addClass('task-icon-has-description');
+    } else {
+      context.addClass('task-icon-no-description');
+    }
+    context = context.end();
+    context = context.end();
+    
+    var submitterUser = content.get('submitter');
+    if (submitterUser) {
+      var submitter = "_TaskTooltip".loc() + '%@ (%@)'.fmt(submitterUser.get('name'), submitterUser.get('loginName'));
+      context.attr('title', submitter);
+      context.attr('alt', submitter);
+    }
+
   }
   
 });

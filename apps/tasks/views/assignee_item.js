@@ -26,26 +26,30 @@ Tasks.AssigneeItemView = SC.ListItemView.extend(
       
       context.addClass('assignee-item');
       
-      var tasksCount = content.get('treeItemChildren').get('length');
+      var tasksCount = 0;
+      var tasks = content.get('treeItemChildren');
+      if (tasks) tasksCount = tasks.get('length');
       var tooltip = "_AssigneeTooltip".loc();
       
-      var loadingTooltip = null;
+      var loadingTooltip = '';
       var loading = content.get('loading');
-      if(loading === CoreTasks.USER_NOT_LOADED) {
-        loadingTooltip = "_AssigneeNotLoaded".loc();
-        context.addClass('assignee-not-loaded');
-      }
-      else if(loading === CoreTasks.USER_UNDER_LOADED) {
-        loadingTooltip = "_AssigneeUnderLoaded".loc();
-        context.addClass('assignee-under-loaded');
-      }
-      else if(loading === CoreTasks.USER_PROPERLY_LOADED) {
-        loadingTooltip = "_AssigneeProperlyLoaded".loc();
-        context.addClass('assignee-properly-loaded');
-      }
-      else if(loading === CoreTasks.USER_OVER_LOADED) {
-        loadingTooltip = "_AssigneeOverloaded".loc();
-        context.addClass('assignee-over-loaded');
+      if(loading) {
+        if(loading === CoreTasks.USER_NOT_LOADED) {
+          loadingTooltip = "_AssigneeNotLoaded".loc();
+          context.addClass('assignee-not-loaded');
+        }
+        else if(loading === CoreTasks.USER_UNDER_LOADED) {
+          loadingTooltip = "_AssigneeUnderLoaded".loc();
+          context.addClass('assignee-under-loaded');
+        }
+        else if(loading === CoreTasks.USER_PROPERLY_LOADED) {
+          loadingTooltip = "_AssigneeProperlyLoaded".loc();
+          context.addClass('assignee-properly-loaded');
+        }
+        else if(loading === CoreTasks.USER_OVER_LOADED) {
+          loadingTooltip = "_AssigneeOverloaded".loc();
+          context.addClass('assignee-over-loaded');
+        }
       }
       
       tooltip += (loadingTooltip + tasksCount + "_Tasks".loc());
