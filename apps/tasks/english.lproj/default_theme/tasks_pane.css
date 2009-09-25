@@ -70,13 +70,14 @@
 	font-weight: bold !important;
 	font-style: normal !important;
 	text-align: center !important;
-  line-height: 2 !important;
+  line-height: 2.2 !important;
   position: absolute !important;
   top: 2px !important;
   bottom: 2px !important;
   left: 20px !important;
 	width: 30px !important;
   color: #000 !important;
+  text-shadow: #fff 0 1px 1px;
   background: #CACACA !important;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
