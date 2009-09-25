@@ -138,7 +138,7 @@ Tasks.filterPane = SC.SheetPane.create({
         classNames: ['task-attribute-set'],
         childViews: [
           SC.CheckboxView.design({
-            layout: { left: 5, top: 4, width: 70 },
+            layout: { left: 5, top: 4, width: 75 },
             escapeHTML: NO,
             title: '<span class=task-validation-untested><label>' + CoreTasks.TASK_VALIDATION_UNTESTED.loc() + '</label></span>',
             valueBinding: 'Tasks.assignmentsController.attributeFilterValidationUntested'
@@ -173,7 +173,7 @@ Tasks.filterPane = SC.SheetPane.create({
         keyEquivalent: 'escape',
         isDefault: YES,
         theme: 'capsule',
-        title: "_Apply".loc(),
+        title: "_Close".loc(),
         target: 'Tasks.filterController',
         action: 'closePane'
       })

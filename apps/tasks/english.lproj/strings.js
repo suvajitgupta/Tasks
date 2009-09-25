@@ -104,7 +104,6 @@ SC.stringsFor('English', {
   '_EnableAll': "Enable All",
   '_Cancel': "Cancel",
   '_Close': "Close",
-  '_Apply': "Apply",
   
   // Status Bar strings
   '_Displaying': "Displaying ",
