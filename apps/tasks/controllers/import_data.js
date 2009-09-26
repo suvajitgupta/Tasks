@@ -29,10 +29,12 @@ Tasks.importDataController = SC.ObjectController.create(
     },
     
     closePanel: function(){
-      var panel = Tasks.getPath('importDataPage.panel');
-      panel.remove();
-      panel.destroy();
       this.set('importData','');
+      var panel = Tasks.getPath('importDataPage.panel');
+      if(panel) {
+        panel.remove();
+        panel.destroy();
+      }
     },
     
     /**
@@ -68,7 +70,7 @@ Tasks.importDataController = SC.ObjectController.create(
             }
             else {
               console.log('Task Import Error - no such assignee: ' + taskHash.assignee);
-              continue;
+              taskHash.assignee = null;
             }
           }
 
@@ -79,7 +81,7 @@ Tasks.importDataController = SC.ObjectController.create(
             }
             else {
               console.log('Task Import Error - no such submitter: ' + taskHash.submitter);
-              continue;
+              taskHash.submitter = null;
             }
           }
 

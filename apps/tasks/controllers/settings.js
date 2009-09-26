@@ -22,8 +22,10 @@ Tasks.settingsController = SC.ObjectController.create(
     
     closePanel: function(){
       var panel = Tasks.getPath('settingsPage.panel');
-      panel.remove();
-      panel.destroy();
+      if(panel) {
+        panel.remove();
+        panel.destroy();
+      }
     }
     
 });

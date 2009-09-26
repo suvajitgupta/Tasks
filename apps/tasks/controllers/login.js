@@ -30,10 +30,12 @@ Tasks.loginController = SC.ObjectController.create(
     },
     
     closePanel: function(){
-      var panel = Tasks.getPath('loginPage.panel');
-      panel.remove();
-      panel.destroy();
       this._panelOpen = false;
+      var panel = Tasks.getPath('loginPage.panel');
+      if(panel) {
+        panel.remove();
+        panel.destroy();
+      }
     },
     
     login: function() {

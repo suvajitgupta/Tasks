@@ -48,7 +48,7 @@ SC.stringsFor('English', {
   '_NewProject': "New Project",
   '_AllTasks': "All Tasks",
   '_UnallocatedTasks': "Unallocated Tasks",
-  '_ProjectTooltip': "Time left (in days) shown in curly braces, project has ",
+  '_ProjectTooltip': "Time left (in days) shown/may be entered in curly braces, project has ",
   '_Tasks': " task(s)",
   
   // Task strings
@@ -58,7 +58,7 @@ SC.stringsFor('English', {
   '_DelTask': "Del. Task",
   '_DelTaskTooltip': "Delete selected task",
   '_FilterTasks': "Filter Tasks",
-  '_FilterTasksTooltip': "Filter tasks using attributes",
+  '_FilterTasksTooltip': "Filter tasks using attributes (type, priority, status, validation)",
   '_Type': "TYPE",
   '_TypeTooltip': "Specify the kind of the selected task",
   '_Feature': "Feature",
@@ -82,11 +82,12 @@ SC.stringsFor('English', {
   '_Failed': "Failed",
   '_Effort:': "Effort:",
   '_Days': "days",
-  '_EffortOnscreenHelp': "Note: You may leave effort unspecified, enter it as a decimal value, or even as a range like 2-3",
+  '_EffortOnscreenHelp': "You may leave effort unspecified, enter it as a decimal value, or even as a range like 2-3",
   '_Description:': "Description:",
-  '_TaskTooltip': "Effort (in days) shown in curly braces, submitter is ",
-  '_IdTooltip': "A unique, system generated, ID for each task",
-  '_EditorTooltip': "Click to view/edit Task submitter/assignee/effort/description",
+  '_TaskTooltip': "Effort (in days) shown/may be entered in curly braces",
+  '_SubmitterTooltip': ", submitter is ",
+  '_IdTooltip': "A unique system-generated ID for each task",
+  '_EditorTooltip': "Click to view/edit task details (submitter, assignee, effort, and description)",
   
   // User/Assignee strings
   '_AddUser': "Add User",
