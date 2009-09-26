@@ -22,7 +22,8 @@ Tasks.mixin({
 
   // Data Loading
   goStateA3: function(){
-    // Instantiate Views
+    // Select first user at startup
+    Tasks.getPath('settingsPage.panel.usersList').select(0);
     Tasks.getPath('mainPage.mainPane').append();
   },
 

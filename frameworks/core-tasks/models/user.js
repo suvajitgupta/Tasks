@@ -1,9 +1,10 @@
 /*globals CoreTasks sc_require */
 sc_require('models/record');
 
-CoreTasks.NEW_USER_NAME = '_FirstLast';
-CoreTasks.NEW_USER_LOGIN = '_first.last';
 CoreTasks.USER_UNASSIGNED = '_Unassigned';
+CoreTasks.NEW_USER_NAME = '_FirstLast';
+CoreTasks.NEW_USER_LOGIN_NAME = '_Initials';
+
 
 // Roles:
 CoreTasks.USER_ROLE_MANAGER = '_Manager';
@@ -35,7 +36,7 @@ CoreTasks.User = CoreTasks.Record.extend({
   /**
    * The login name of the user.
    */
-  loginName: SC.Record.attr(String, { isRequired: YES, defaultValue: CoreTasks.NEW_USER_LOGIN }),
+  loginName: SC.Record.attr(String, { isRequired: YES, defaultValue: CoreTasks.NEW_USER_LOGIN_NAME }),
 
   /**
    * The role of the user (see below for allowed values).
@@ -82,3 +83,9 @@ CoreTasks.User.mixin(/** @scope CoreTasks.User */ {
   callbacks: SC.Object.create(),
   resourcePath: 'user'
 });
+
+CoreTasks.User.NEW_USER_HASH = {
+  name: CoreTasks.NEW_USER_NAME,
+  loginName: CoreTasks.NEW_USER_LOGIN_NAME,
+  role: CoreTasks.USER_ROLE_DEVELOPER
+};

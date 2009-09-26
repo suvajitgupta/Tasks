@@ -388,7 +388,7 @@ Tasks.mixin({
       project.destroy();
       
       // Select the first project in the list.
-      // CHANGE: [SC] Do this without using SC.RunLoop.begin/end, if possible.
+      // FIXME: [SC] Do this without using SC.RunLoop.begin/end, if possible.
       SC.RunLoop.begin();
       var projectsList = Tasks.getPath('mainPage.mainPane.projectsList');
       projectsList.select(projectsList.get('length') > 2? 2 : 0);
@@ -510,7 +510,53 @@ Tasks.mixin({
   filterTasks: function() {
     Tasks.filterController.openPane();
   },
+
+  /**
+   * Add a new user.
+   */
+  addUser: function() {
+    var user = CoreTasks.get('store').createRecord(CoreTasks.User, {
+      name: CoreTasks.User.NEW_USER_HASH.name.loc(),
+      loginName: CoreTasks.User.NEW_USER_HASH.loginName.loc(),
+      role: CoreTasks.User.NEW_USER_HASH.role.loc()
+    });
+    this.getPath('usersController.content').pushObject(user);
+    var listView = Tasks.getPath('settingsPage.panel.usersList');
+    var idx = listView.length - 1;
+    listView.scrollToContentIndex(idx); // FIXME: [SC] why is it not scrolling to new item?
+    listView.select(idx);
+  },
+
+  /**
+   * Delete selected user.
+   */
+  deleteUser: function() {
   
+    // Get the selected user.
+    var uc = this.get('usersController');
+    var sel = uc.get('selection');
+  
+    if (sel && sel.length() > 0) {
+      var user = sel.firstObject();
+
+      // Confirm deletion of user
+      if(!confirm("Are you sure you want to delete this user?")) return;
+
+      // Remove the user from the list and destroy.
+      uc.removeObject(user);
+      user.destroy();
+    
+      // Select the first user in the list.
+      // FIXME: [SC] Do this without using SC.RunLoop.begin/end, if possible.
+      SC.RunLoop.begin();
+      var listView = Tasks.getPath('settingsPage.panel.usersList');
+      listView.scrollToContentIndex(0);
+      listView.select(0);
+      SC.RunLoop.end();
+    
+    }
+  },
+
   /**
    * Logs a message indicating that the given state isn't handled in the given action.
    *
