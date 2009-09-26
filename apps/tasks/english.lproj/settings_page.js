@@ -22,16 +22,63 @@ Tasks.settingsPage = SC.Page.create({
       layout: { left: 0, right: 0, top: 0, bottom: 0},
       childViews: 'userManager closeButton'.w(),
       
-      userManager: SC.TextFieldView.design({
-        layout: { top: 10, left: 10, right: 10, bottom: 40 },
-        value: 'Not Implemented',
-        isTextArea: YES
+      userManager: SC.View.design({
+        layout: { left: 10, right: 10, top: 10, bottom: 45},
+        classNames: ['bordered-view'],
+        childViews: [
+        
+          SC.View.design({
+            layout: { left: 0, right: 0, top: 0, height: 35 },
+            classNames: ['toolbar'],
+            childViews: [
+            
+              SC.LabelView.design(Tasks.SimpleButton,{
+                layout: { top: 5, left: 5, height: 24, width: 90 },
+                icon: 'task-add-icon',
+                value: "_AddUser".loc(),
+                classNames: ['toolbar-label'],
+                toolTip: "_AddUserTooltip".loc(),
+                target: 'Tasks',
+                action: 'addUser'
+              }),
+
+              SC.LabelView.design(Tasks.SimpleButton,{
+                layout: { top: 5, left: 100, height: 24, width: 90 },
+                icon: 'task-del-icon',
+                value: "_DelUser".loc(),
+                classNames: ['toolbar-label'],
+                toolTip: "_DelUserTooltip".loc(),
+                isEnabledBinding: SC.Binding.oneWay('Tasks.usersController.hasSelection'),
+                target: 'Tasks',
+                action: 'deleteUser'
+              })
+
+            ]
+          }),
+        
+          SC.ScrollView.design({
+            layout: { top: 35, bottom: 0, left: 0, width: 200 },
+            hasHorizontalScroller: NO,
+            classNames: ['users-pane'],
+
+            contentView: SC.ListView.design({
+              layout: { top: 0, left:0, bottom: 0, right: 0 },
+              contentValueKey: 'displayName',
+              contentBinding: 'Tasks.usersController.arrangedObjects',
+              selectionBinding: 'Tasks.usersController.selection',
+              localize: YES,
+              rowHeight: 22,
+              classNames: ['users-pane-inner']
+            })
+          })
+                
+        ]
       }),
       
       closeButton: SC.ButtonView.design({
         layout: { width: 80, height: 30, right: 10, bottom: 8 },
         titleMinWidth: 0,
-        keyEquivalent: 'escape',
+        keyEquivalent: 'return',
         isDefault: YES,
         theme: 'capsule',
         title: "_Close".loc(),
@@ -39,12 +86,8 @@ Tasks.settingsPage = SC.Page.create({
         action: 'closePanel'
       })
       
-    }),
-    
-    focus: function() {
-      this.contentView.dataEntry.becomeFirstResponder();        
-    }
-  
+    })
+      
   })
   
 });

@@ -8,7 +8,7 @@
 */
 
 /*
-// TODO: [SC] see how to make this work instead of having min-width/height specified for mainPane
+// FIXME: [SC] see how to make this work instead of having min-width/height specified for mainPane
 body {
   position: absolute;
   top: 0;
@@ -35,6 +35,10 @@ body {
   border: 0 !important;
 }
 
+.bordered-view {
+	border: 1px solid #444 !important;
+}
+
 .error-message {
 	color: red !important;
 	font-weight: bold !important;
@@ -42,4 +46,10 @@ body {
 
 .sc-view.sc-checkbox-view span {
   font-size: 10px !important;
+}
+
+.onscreen-help {
+  color: blue !important;
+  font-size: 11px !important;
+	line-height: 12px !important;
 }

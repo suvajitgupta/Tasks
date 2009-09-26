@@ -346,7 +346,6 @@ Tasks.mixin({
     project.set('tasks', []);
     this.getPath('projectsController.content').pushObject(project);
 
-    // TODO: [SG] add new project right after currently selected project?
     var listView = Tasks.getPath('mainPage.mainPane.projectsList');
     var idx = listView.length - 1;
     listView.select(idx);

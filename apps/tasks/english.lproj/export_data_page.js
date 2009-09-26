@@ -22,7 +22,6 @@ Tasks.exportDataPage = SC.Page.create({
         SC.TextFieldView.design({
           layout: { top: 10, left: 10, right: 10, bottom: 40 },
           valueBinding: SC.Binding.oneWay('Tasks.exportDataController.data'),
-          // isEnabled: NO, // TODO: [SG] uncomment this line if exported data can be copied to clipboard
           isTextArea: YES
         }),
         SC.ButtonView.design({

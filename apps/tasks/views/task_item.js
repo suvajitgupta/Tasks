@@ -35,7 +35,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       var that = this;
       this._editorPane = SC.PickerPane.create({
         
-        layout: { width: 500, height: 175 },
+        layout: { width: 500, height: 200 },
         
         poppedUp: false,
         // TODO: [JH2] make the begin/end property changes work
@@ -80,22 +80,30 @@ Tasks.TaskItemView = SC.ListItemView.extend(
             }),
 
             SC.LabelView.design({
-              layout: { top: 42, left: 10, height: 17, width: 100 },
+              layout: { top: 47, left: 10, height: 17, width: 100 },
               value: "_Effort:".loc()
             }),
             SC.TextFieldView.design({
-              layout: { top: 42, left: 80, width: 80, height: 16 },
+              layout: { top: 47, left: 55, width: 80, height: 16 },
               valueBinding: SC.binding('.content.effort', this)
               // TODO: [SG] only allow valid values for effort
-              // TODO: [SG] add on-screen help to explain how effort can be specified (decimals, ranges)
+            }),
+            SC.LabelView.design({
+              layout: { top: 47, left: 145, height: 17, width: 30 },
+              value: "_Days".loc()
+            }),
+            SC.LabelView.design({
+              layout: { top: 45, left: 190, height: 24, right: 10 },
+              classNames: [ 'onscreen-help'],
+              value: "_EffortOnscreenHelp".loc()
             }),
 
             SC.LabelView.design({
-              layout: { top: 67, left: 10, height: 17, width: 100 },
+              layout: { top: 75, left: 10, height: 17, width: 100 },
               value: "_Description:".loc()
             }),
             SC.TextFieldView.design({
-              layout: { top: 90, left: 10, right: 10, bottom: 10 },
+              layout: { top: 98, left: 10, right: 10, bottom: 10 },
               isTextArea: YES,
               valueBinding: SC.binding('.content.description', this)
             })

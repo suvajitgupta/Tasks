@@ -1,0 +1,29 @@
+/* 
+
+  Settings Pane Styling
+
+  @author Suvajit Guupta
+  
+*/
+
+/*-----------------------------------------------------------------
+ * User pane styles
+ */
+
+.sc-scroll-view.users-pane, .sc-collection-view.users-pane-inner {
+	border-right: 1px solid #444 !important;
+  background: #CCC repeat-y 0 0;
+}
+
+.sc-view.sc-ghost-view .sc-scroll-view.users-pane, .sc-collection-view.users-pane-inner {
+  background: none !important;
+}
+
+
+/*-----------------------------------------------------------------
+ * User list item styles
+ */
+
+.users-pane-inner .sc-collection-item {
+  border: 0 !important;
+}

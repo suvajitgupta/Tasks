@@ -81,11 +81,17 @@ SC.stringsFor('English', {
   '_Passed': "Passed",
   '_Failed': "Failed",
   '_Effort:': "Effort:",
+  '_Days': "days",
+  '_EffortOnscreenHelp': "Note: You may leave effort unspecified, enter it as a decimal value, or even as a range like 2-3",
   '_Description:': "Description:",
   '_TaskTooltip': "Effort (in days) shown in curly braces, submitter is ",
   '_EditorTooltip': "Click to view/edit Task submitter/assignee/effort/description",
   
   // User/Assignee strings
+  '_AddUser': "Add User",
+  '_AddUserTooltip': "Add a new user",
+  '_DelUser': "Del. User",
+  '_DelUserTooltip': "Delete selected user",
   '_FirstLast': "First Last",
   '_first.last': "first.last",
   '_Unassigned': "Unassigned",
