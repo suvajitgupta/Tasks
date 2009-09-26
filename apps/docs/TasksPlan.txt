@@ -32,7 +32,7 @@ v Beta: Make task in-cell editors fit with collection view item size [SG] <SC> @
 - Beta: Track/optimize calls to assignments controller for redrawing tasks tree [SG] <SC> @Active
 - Beta: Allow direct bookmarking of Tasks projects (using SproutCore routes) [SG] <JL> $Feature
 - Show newly added tasks/projects with a badge [SG] $Feature
-- Support email notifications on task changes to Assignee/Manager [SG] <SE> $Feature @Active
+- Add email notifications on task changes to Assignee/Manager [SG] <SE> $Feature @Active
 - Add some simple metrics/reporting capabilities [SG] $Feature
 v Provide support for color-blind users (don't use color coding as only mechanism for status/validation) [SG] $Feature
 
@@ -43,7 +43,7 @@ Project Manager GUI
 - Beta: Support alpha sorting of projects [SG] <JH2> @Active $Feature
 v Add hover over tooltip for projects to show how many tasks they contain [SG] @Done $Feature %Passed
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done $Feature %Passed
-v Beta: Make All/Unallocated Tasks project names to be non-editable upon double clicking $Active $Bug <JH2> [SG]
+v Beta: Make All/Unallocated Tasks project names to be non-editable upon double clicking $Active $Feature <JH2> [SG]
 | Check via Inline Editor Delegate
 ^ Add "Add Project" & "Del. Project" buttons in projects toolbar [SG] <SC> @Done $Feature %Passed
 - Add warning Alert box about deleting Project with Tasks [SG] @Done $Feature %Passed
@@ -80,7 +80,7 @@ v Set tasks toolbar button enablement based on having a selection [SG] @Done $Fe
 | Logged in user is default Submitter, Assignee is either set to the same as selected task (if one) or to logged in user
 | Copy over attributes of selected task to new task
 - Clear task validation if status is changed from Done, disallow entry of Passed/Failed when task is not Done [SG] <MB> $Feature @Done %Passed
-- Beta: Make All/Unallocated Tasks queries instead of actual projects in the store [SG] <SE>
+- Beta: Have tasks refer to projects instead of the other way around [SG] <SE>
 ^ Show effort subtotals (exclude Done or Low priority tasks) in curly braces for load balancing [SG] @Done $Feature %Passed
 - Append "?" for range-based subtotals including tasks with unspecified efforts [SG] @Done $Feature %Passed
 - Color code assignee non loading in gray, under loading in green, proper loading in blue, and over loading in red [SG] @Done $Feature %Passed
@@ -100,7 +100,7 @@ User Manager GUI
 - In Firefox assignee selection disappears <SG> [SC] $Bug
 - Set assignee selection filter to logged in user if they are a Developer [SG] @Done $Feature %Passed
 - Allow assignee filtering by matching any part of name, not just loginName [SG] $Feature
-^ Beta: Add User Manager with "Add/Del. User"  and "Close" buttons in toolbar [SG] <BB> $Active $Feature
+^ Add User Manager with "Add/Del. User"  buttons in toolbar [SG] <BB> $Done $Feature
 - Add access control based on Role (User authorization) [SG] <SE> $Feature
 - Add password to login screen and change password dialog in User Manager [SG] <SE> $Feature
 - Add support for "Teams" (a user can belong to a team, a team can have a lead) [SG] <SE> $Feature
@@ -120,10 +120,9 @@ v Allow drag-n-drop of a TXT file into App for data importing (using Google Gear
 | When on "All Tasks" project with no filters on all project data is exported, otherwise only displayed data is exported
 - Add Settings button/popup to manage Users and preferences <JH2> [SG] $Feature @Active
 | Preferences:
-| * include Low priority tasks in subtotals
 | * percent and min days for Assignee loading determination
 - Beta: Add Online Help button in top Toolbar & popup Help dialog [SG] <MG> @Active $Feature
-- Add onscreen help (on blank workspace to assist new users, on panel fields that are complex) [SG] @Active $Feature
+- Add onscreen help (on panel fields that are complex and on blank workspace to assist new users) [SG] @Active $Feature
 - Add Logout button to exit in top toolbar (confirm before exiting) [SG] <H2> @Done $Feature %Passed
 - Beta: Prompt user to save changes (if any) before logging out [SG] <SE> $Feature
 - Restore application settings/state from last login (using HTML5 storage) [SG] <MB> $Feature
