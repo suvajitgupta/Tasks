@@ -102,7 +102,9 @@ Tasks.settingsPage = SC.Page.create({
             layout: { top: 170, left: 300, height: 20, width: 100 },
             localize: YES,
             objects: CoreTasks.roles,
-            valueBinding: 'Tasks.userController.role'
+            valueKey: 'role',
+            valueBinding: 'Tasks.userController'
+            // valueBinding: 'Tasks.userController.role'
           })          
                 
         ]
