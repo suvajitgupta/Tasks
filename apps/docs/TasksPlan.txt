@@ -101,6 +101,7 @@ User Manager GUI
 - Set assignee selection filter to logged in user if they are a Developer [SG] @Done $Feature %Passed
 - Allow assignee filtering by matching any part of name, not just loginName [SG] $Feature
 ^ Add User Manager with "Add/Del. User"  buttons in toolbar [SG] <BB> $Done $Feature
+- Beta: Cleanup task assignee/submitter after user deletion <SE> [SG] @Active
 - Add access control based on Role (User authorization) [SG] <SE> $Feature
 - Add password to login screen and change password dialog in User Manager [SG] <SE> $Feature
 - Add support for "Teams" (a user can belong to a team, a team can have a lead) [SG] <SE> $Feature
