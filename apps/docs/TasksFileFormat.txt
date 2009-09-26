@@ -6,7 +6,7 @@ Blank lines are allowed but ignored
 
 In format sample snippet below:
 	appended asterisk indicates a required field
-	recommend convention of prepending Task Name with the Component name followed by a colon and a space
+	recommend convention of prepending Task Name with the Component or Feature name followed by a colon and a space
 
 #Comment
 Project Name* {TimeLeft}

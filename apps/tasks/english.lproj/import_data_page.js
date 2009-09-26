@@ -21,12 +21,24 @@ Tasks.importDataPage = SC.Page.create({
     
     contentView: SC.View.design({
       layout: { left: 0, right: 0, top: 0, bottom: 0},
-      childViews: 'dataEntry importButton cancelButton'.w(),
+      childViews: 'sample format dataEntry importButton cancelButton'.w(),
       
+      sample: SC.LabelView.design({
+        escapeHTML: NO,
+        layout: { top: 10, left: 10, height: 40, width: 300 },
+        value: "_ImportInstructions:".loc()
+      }),
+      
+      format: SC.LabelView.design({
+        escapeHTML: NO,
+        layout: { top: 10, width: 400, height: 40, right: 10 },
+        classNames: [ 'onscreen-help'],
+        value: "_FormatOnscreenHelp".loc()
+      }),
+
       dataEntry: SC.TextFieldView.design({
-        layout: { top: 10, left: 10, right: 10, bottom: 40 },
+        layout: { top: 55, left: 10, right: 10, bottom: 40 },
         valueBinding: 'Tasks.importDataController.importData',
-        hint: "_ImportHint".loc(),
         isTextArea: YES
       }),
       
