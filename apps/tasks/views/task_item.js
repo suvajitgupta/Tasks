@@ -121,7 +121,8 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     var content = this.get('content');
     if(!content) return;
     
-    context = context.begin('div').addClass('task-id').text(content.get('id')).end();
+    var idTooltip = "_IdTooltip".loc();
+    context = context.begin('div').addClass('task-id').text(content.get('id')).attr('title', idTooltip).attr('alt', idTooltip).end();
     var hasDescription = NO;
       
     var priority = content.get('priority');
