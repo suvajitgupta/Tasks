@@ -19,10 +19,9 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   _editorPane: null,
   
   _listUsers: function() {
-    var ret = SC.Binding.transform(function(value, binding) {
+    return SC.Binding.transform(function(value, binding) {
        return value.toArray();
     }).from('Tasks.usersController.content');
-    return ret;
   },
 
   /** @private

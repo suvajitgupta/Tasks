@@ -92,6 +92,8 @@ SC.stringsFor('English', {
   '_AddUserTooltip': "Add a new user",
   '_DelUser': "Del. User",
   '_DelUserTooltip': "Delete selected user",
+  '_FullName:': "Full Name:",
+  '_Role:': "Role:",
   '_FirstLast': "First Last",
   '_first.last': "first.last",
   '_Unassigned': "Unassigned",

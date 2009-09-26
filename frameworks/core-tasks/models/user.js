@@ -9,6 +9,8 @@ CoreTasks.USER_UNASSIGNED = '_Unassigned';
 CoreTasks.USER_ROLE_MANAGER = '_Manager';
 CoreTasks.USER_ROLE_DEVELOPER = '_Developer'; // default
 CoreTasks.USER_ROLE_TESTER = '_Tester';
+CoreTasks.roles = [ CoreTasks.USER_ROLE_MANAGER, CoreTasks.USER_ROLE_DEVELOPER, CoreTasks.USER_ROLE_TESTER ];
+
 
 // Loading:
 CoreTasks.USER_NOT_LOADED = 1;

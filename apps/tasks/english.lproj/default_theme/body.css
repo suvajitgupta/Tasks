@@ -44,12 +44,12 @@ body {
 	font-weight: bold !important;
 }
 
-.sc-view.sc-checkbox-view span {
-  font-size: 10px !important;
-}
-
 .onscreen-help {
   color: blue !important;
   font-size: 11px !important;
 	line-height: 12px !important;
+}
+
+.sc-view.sc-checkbox-view span {
+  font-size: 10px !important;
 }

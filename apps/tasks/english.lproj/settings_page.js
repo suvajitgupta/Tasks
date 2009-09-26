@@ -1,7 +1,7 @@
 // ==========================================================================
 // Tasks.settingsPage
 // ==========================================================================
-/*globals Tasks sc_require */
+/*globals CoreTasks Tasks sc_require */
 sc_require('core');
 
 /** @static
@@ -16,8 +16,9 @@ Tasks.settingsPage = SC.Page.create({
   
   panel: SC.PanelPane.create({
     
-    layout: { centerX: 0, centerY: 0, height: 450, width: 600 },
+    layout: { centerX: 0, centerY: 0, height: 325, width: 550 },
     
+    usersList: SC.outlet('contentView.userManager.childViews.1.contentView'),
     contentView: SC.View.design({
       layout: { left: 0, right: 0, top: 0, bottom: 0},
       childViews: 'userManager closeButton'.w(),
@@ -70,7 +71,39 @@ Tasks.settingsPage = SC.Page.create({
               rowHeight: 22,
               classNames: ['users-pane-inner']
             })
-          })
+          }),
+          
+          SC.LabelView.design({
+            layout: { top: 100, left: 210, height: 17, width: 80 },
+            textAlign: SC.ALIGN_RIGHT,
+            value: "_LoginName:".loc()
+          }),
+          SC.TextFieldView.design({
+            layout: { top: 100, left: 300, height: 16, width: 150 },
+            valueBinding: SC.binding('Tasks.userController.loginName', this)
+          }),
+
+          SC.LabelView.design({
+            layout: { top: 135, left: 210, height: 17, width: 80 },
+            textAlign: SC.ALIGN_RIGHT,
+            value: "_FullName:".loc()
+          }),
+          SC.TextFieldView.design({
+            layout: { top: 135, left: 300, height: 16, width: 200 },
+            valueBinding: SC.binding('Tasks.userController.name', this)
+          }),
+          
+          SC.LabelView.design({
+            layout: { top: 170, left: 210, height: 17, width: 80 },
+            textAlign: SC.ALIGN_RIGHT,
+            value: "_Role:".loc()
+          }),
+          SC.SelectFieldView.design({
+            layout: { top: 170, left: 300, height: 20, width: 100 },
+            localize: YES,
+            objects: CoreTasks.roles,
+            valueBinding: 'Tasks.userController.role'
+          })          
                 
         ]
       }),
