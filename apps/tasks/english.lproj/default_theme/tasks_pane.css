@@ -61,37 +61,8 @@
 
 .task-item {
   background: #f2f2f2;
-  left: 24px !important;
+  left: 25px !important;
   right: 5px !important;
-}
-
-.task-id {
-  font-size: 9px !important;
-	font-weight: bold !important;
-	font-style: normal !important;
-	text-align: center !important;
-  line-height: 1.5 !important;
-  position: absolute !important;
-  top: 4px !important;
-  bottom: 4px !important;
-  left: 20px !important;
-	width: 30px !important;
-  color: #333 !important;
-  text-shadow: #fff 0 1px 1px;
-  //background: #CCC !important;
-	border: 1px solid #AAA !important;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-}
-
-.task-item img {
-  left: 1px !important;
-}
-
-.task-item label {
-  left: 53px !important;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
 }
 
 .task-item .sc-outline {
@@ -99,8 +70,34 @@
   right: 17px !important;
 }
 
-.sc-view.sc-ghost-view .task-item {
-  background: none !important;
+.task-item img {
+  left: 1px !important;
+}
+
+.task-id {
+  font-size: 9px !important;
+	font-weight: bold !important;
+	font-style: normal !important;
+	text-align: center !important;
+  line-height: 1.75 !important;
+  position: absolute !important;
+  top: 2px !important;
+  bottom: 2px !important;
+  left: 20px !important;
+	width: 30px !important;
+  color: #222 !important;
+  //text-shadow: #fff 0 1px 1px;
+	border: 1px solid #AAA !important;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+}
+
+.task-item label {
+  left: 55px !important;
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
 }
 
 
@@ -172,20 +169,20 @@
  */
 
 .task-validation-untested label {
-  padding-left: 2px !important;
-  padding-right: 2px !important;
+  padding-left: 2px;
+  padding-right: 2px;
   background: #DDD none repeat scroll 0 0 !important;
 }
 
 .task-validation-passed label {
-  padding-left: 2px !important;
-  padding-right: 2px !important;
+  padding-left: 2px;
+  padding-right: 2px;
   background: #9F9 none repeat scroll 0 0 !important;
 }
 
 .task-validation-failed label {
-  padding-left: 2px !important;
-  padding-right: 2px !important;
+  padding-left: 2px;
+  padding-right: 2px;
   background: #FCF none repeat scroll 0 0 !important;
 }
 
@@ -216,10 +213,14 @@
 
 
 /*-----------------------------------------------------------------
- * Task selection styles
+ * Task selection/dragging styles
  */
 
 .sc-theme.focus .sc-list-view.sc-source-list .sc-collection-item.sel {
 	outline: 1px solid #444 !important;
   background: #f2f2f2 !important;
+}
+
+.sc-view.sc-ghost-view .task-item {
+  background: none !important;
 }
