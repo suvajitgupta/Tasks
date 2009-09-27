@@ -177,13 +177,13 @@
 .task-validation-passed label {
   padding-left: 2px;
   padding-right: 2px;
-  background: #9F9 none repeat scroll 0 0 !important;
+  background: #BFB none repeat scroll 0 0 !important;
 }
 
 .task-validation-failed label {
   padding-left: 2px;
   padding-right: 2px;
-  background: #F9F none repeat scroll 0 0 !important;
+  background: #FBF none repeat scroll 0 0 !important;
 }
 
 
