@@ -29,7 +29,7 @@ SC.stringsFor('English', {
   '_Import': "Import",
   '_ImportTooltip': "Import Tasks data from a text format",
   '_ImportInstructions:': "Paste or type in text to be imported:<br>(see format on the right)",
-  '_FormatOnscreenHelp': "Project Name {TimeLeft}<br>- Task Name {Effort} &lt Submitter&gt [Assignee] $Type @Status %Validation<br>| Description (1 or more lines)",
+  '_FormatOnscreenHelp': "Project Name {TimeLeft}<br>- Task Name {Effort} &lt;Submitter&gt; [Assignee] $Type @Status %Validation<br>| Description (1 or more lines)",
   '_Export': "Export",
   '_ExportTooltip': "Export Tasks data to a text format",
   '_Settings': "Settings",
@@ -46,6 +46,7 @@ SC.stringsFor('English', {
   '_AddProjectTooltip': "Add a new project",
   '_DelProject': "Del. Project",
   '_DelProjectTooltip': "Delete selected project",
+  '_ConfirmProjectDeletion': "Tasks in this project will become unallocated, are you sure you want to delete it?",
   '_NewProject': "New Project",
   '_AllTasks': "All Tasks",
   '_UnallocatedTasks': "Unallocated Tasks",
@@ -115,6 +116,7 @@ SC.stringsFor('English', {
   '_EnableAll': "Enable All",
   '_Cancel': "Cancel",
   '_Close': "Close",
+  '_Apply': "Apply",
   
   // Status Bar strings
   '_Displaying': "Displaying ",

@@ -173,7 +173,7 @@ Tasks.filterPane = SC.SheetPane.create({
         keyEquivalent: 'escape',
         isDefault: YES,
         theme: 'capsule',
-        title: "_Close".loc(),
+        title: "_Apply".loc(),
         target: 'Tasks.filterController',
         action: 'closePane'
       })

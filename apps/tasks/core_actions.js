@@ -359,6 +359,8 @@ Tasks.mixin({
   
   /**
    * Delete selected project in master projects list.
+   *
+   @returns {Boolean} YES if the deletion was a success.
    */
   deleteProject: function() {
     
@@ -373,7 +375,7 @@ Tasks.mixin({
       var projectTasks = project.get('tasks');
       var taskCount = projectTasks.get('length');
       if(taskCount > 0) {
-        if(!confirm("This project has tasks, are you sure you want to delete it?")) return;
+        if(!confirm("_ConfirmProjectDeletion".loc())) return NO;
       }
 
       // Move all tasks in project to UnallocatedTasks project since they are now orphaned
@@ -395,6 +397,7 @@ Tasks.mixin({
       SC.RunLoop.end();
       
     }
+    return YES;
   },
   
   /**

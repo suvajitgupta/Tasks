@@ -60,5 +60,21 @@ Tasks.reallocationController = SC.Object.create(SC.CollectionViewDelegate,
     }       
   
     return ret;
+  },
+
+  /**
+    Called by the collection view to delete the selected items.
+    
+    @param {SC.CollectionView} view collection view
+    @param {SC.IndexSet} indexes the items to delete
+    @returns {Boolean} YES if the deletion was a success.
+  */
+  collectionViewDeleteContent: function(view, content, indexes) {
+    if (content && (SC.typeOf(content.destroyAt) === SC.T_FUNCTION || SC.typeOf(content.removeAt) === SC.T_FUNCTION)) {
+      // TODO: [SG] see how to keep selected project highlighted after user cancels deletion
+      return Tasks.deleteProject();
+    }
+    return NO;
   }
+  
 });
