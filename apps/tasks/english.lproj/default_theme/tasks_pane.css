@@ -79,16 +79,16 @@
 	font-weight: bold !important;
 	font-style: normal !important;
 	text-align: center !important;
-  line-height: 1.75 !important;
+  line-height: 2 !important;
   position: absolute !important;
-  top: 2px !important;
-  bottom: 2px !important;
+  top: 1px !important;
+  bottom: 1px !important;
   left: 20px !important;
 	width: 30px !important;
   color: #222 !important;
 	border: 1px solid #BBB !important;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
 }
 
 .task-item label {
