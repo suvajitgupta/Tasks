@@ -31,7 +31,7 @@ Tasks.importDataPage = SC.Page.create({
       
       format: SC.LabelView.design({
         escapeHTML: NO,
-        layout: { top: 10, width: 400, height: 45, right: 10 },
+        layout: { top: 10, width: 430, height: 45, right: 10 },
         classNames: [ 'onscreen-help'],
         value: "_FormatOnscreenHelp".loc()
       }),
@@ -45,6 +45,7 @@ Tasks.importDataPage = SC.Page.create({
       importButton: SC.ButtonView.design({
         layout: { width: 80, height: 30, right: 10, bottom: 8 },
         titleMinWidth: 0,
+        isEnabledBinding: SC.Binding.oneWay('Tasks.importDataController.importData').bool(),
         theme: 'capsule',
         keyEquivalent: 'return',
         isDefault: YES,
