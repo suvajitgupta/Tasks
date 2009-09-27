@@ -149,22 +149,21 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         break;
       case CoreTasks.TASK_STATUS_DONE:
         context.addClass('task-status-done');
+        var validation = content.get('validation');
+        switch(validation){
+          case CoreTasks.TASK_VALIDATION_UNTESTED:
+            context.addClass('task-validation-untested');
+            break;
+          case CoreTasks.TASK_VALIDATION_PASSED:
+            context.addClass('task-validation-passed');
+            break;
+          case CoreTasks.TASK_VALIDATION_FAILED:
+            context.addClass('task-validation-failed');
+            break;          
+        }
         break;          
       case CoreTasks.TASK_STATUS_RISKY:
         context.addClass('task-status-risky');
-        break;          
-    }
-    
-    var validation = content.get('validation');
-    switch(validation){
-      case CoreTasks.TASK_VALIDATION_UNTESTED:
-        context.addClass('task-validation-untested');
-        break;
-      case CoreTasks.TASK_VALIDATION_PASSED:
-        context.addClass('task-validation-passed');
-        break;
-      case CoreTasks.TASK_VALIDATION_FAILED:
-        context.addClass('task-validation-failed');
         break;          
     }
     

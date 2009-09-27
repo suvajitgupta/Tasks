@@ -98,6 +98,7 @@
   padding-right: 5px !important;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
+  background: #CDCDCD none repeat scroll 0 0 !important;
 }
 
 
@@ -171,7 +172,6 @@
 .task-validation-untested label {
   padding-left: 2px;
   padding-right: 2px;
-  background: #DDD none repeat scroll 0 0 !important;
 }
 
 .task-validation-passed label {
