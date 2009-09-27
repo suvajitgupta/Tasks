@@ -92,7 +92,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
               value: "_Days".loc()
             }),
             SC.LabelView.design({
-              layout: { top: 45, left: 190, height: 24, right: 10 },
+              layout: { top: 45, left: 190, height: 30, right: 10 },
               classNames: [ 'onscreen-help'],
               value: "_EffortOnscreenHelp".loc()
             }),
