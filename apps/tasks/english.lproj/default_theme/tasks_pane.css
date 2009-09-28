@@ -28,6 +28,7 @@
  */
  
 .assignee-item {
+	border: none !important;
   background: #f2f2f2 !important;
 }
 
@@ -60,6 +61,7 @@
  */
 
 .task-item {
+	border: none !important;
   background: #f2f2f2 none repeat scroll 0 0;
   left: 25px !important;
   right: 5px !important;
@@ -95,8 +97,8 @@
   left: 58px !important;
   padding-left: 5px !important;
   padding-right: 5px !important;
-	border: 1px solid #BBB !important;
-  background: #EEE none repeat scroll 0 0 !important;
+	border: 1px solid #999 !important;
+  //background: #DDD none repeat scroll 0 0 !important;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
 }

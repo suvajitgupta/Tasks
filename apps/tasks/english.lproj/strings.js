@@ -88,7 +88,7 @@ SC.stringsFor('English', {
   '_Description:': "Description:",
   '_TaskTooltip': "Effort (in days) shown/may be entered in curly braces",
   '_SubmitterTooltip': ", submitter is ",
-  '_IdTooltip': "A unique ID for each task, color code shows validation status",
+  '_IdTooltip': "A unique ID for each task, background shows validation status",
   '_EditorTooltip': "Click to view/edit task details (submitter, assignee, effort, and description)",
   
   // User/Assignee strings
