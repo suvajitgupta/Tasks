@@ -84,7 +84,7 @@ SC.stringsFor('English', {
   '_Failed': "Failed",
   '_Effort:': "Effort:",
   '_Days': "days",
-  '_EffortOnscreenHelp': "You may leave effort unspecified, enter it as a decimal value like 0.25, or even as a range like 2-3",
+  '_EffortOnscreenHelp': "You may leave effort unspecified, enter a decimal value like 0.25, or a range like 2-3",
   '_Description:': "Description:",
   '_TaskTooltip': "Effort (in days) shown/may be entered in curly braces",
   '_SubmitterTooltip': ", submitter is ",
