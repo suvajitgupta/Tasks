@@ -30,7 +30,7 @@ v Add missing 'localize' support back in CollectionView (regression from SC 0.9)
 v Beta: Make task in-cell editors fit with collection view item size [SG] <SC> @Risky $Bug
 | Fix in CSS add class .ghost to list item view and set its background to none
 - Beta: Track/optimize calls to assignments controller for redrawing tasks tree [SG] <SC> @Active
-- Beta: Allow direct bookmarking of Tasks projects (using SproutCore routes) [SG] <JL> $Feature
+- Allow direct bookmarking of Tasks projects (using SproutCore routes) [SG] <JL> $Feature
 - Show newly added tasks/projects with a badge [SG] $Feature
 - Add email notifications on task changes to Assignee/Manager [SG] <SE> $Feature @Active
 - Add some simple metrics/reporting capabilities [SG] $Feature
@@ -80,7 +80,7 @@ v Set tasks toolbar button enablement based on having a selection [SG] @Done $Fe
 | Logged in user is default Submitter, Assignee is either set to the same as selected task (if one) or to logged in user
 | Copy over attributes of selected task to new task
 - Clear task validation if status is changed from Done, disallow entry of Passed/Failed when task is not Done [SG] <MB> $Feature @Done %Passed
-- Beta: Have tasks refer to projects instead of the other way around [SG] <SE>
+^ Beta: Have tasks refer to projects instead of the other way around [SG] <SE>
 ^ Show effort subtotals (exclude Done or Low priority tasks) in curly braces for load balancing [SG] @Done $Feature %Passed
 - Append "?" for range-based subtotals including tasks with unspecified efforts [SG] @Done $Feature %Passed
 - Color code assignee non loading in gray, under loading in green, proper loading in blue, and over loading in red [SG] @Done $Feature %Passed
