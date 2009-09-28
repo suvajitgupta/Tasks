@@ -100,6 +100,7 @@ Tasks.settingsPage = SC.Page.create({
           }),
           SC.SelectFieldView.design({
             layout: { top: 170, left: 300, height: 20, width: 100 },
+            localize: YES,
             objects: CoreTasks.roles,
             valueBinding: 'Tasks.userController.role'
           })          

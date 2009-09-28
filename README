@@ -40,12 +40,13 @@ http://localhost:8088/tasks-server/explorer.html
 
 { name: '<full name>', loginName: '<initials>', role: '<role>' }
 
-...where role is ("Manager" | "Developer" | "Tester").
+...where role is ("_Manager" | "_Developer" | "_Tester").
+Note: the underscores are necessary for internationalization.
 
 For example...
 
-{ name: 'Suvajit Gupta', loginName: 'SG', role: 'Manager' }
-{ name: 'Sean Eidemiller', loginName: 'SE', role: 'Developer' }
+{ name: 'Suvajit Gupta', loginName: 'SG', role: '_Manager' }
+{ name: 'Sean Eidemiller', loginName: 'SE', role: '_Developer' }
 
 6) Repeat as desired for multiple users.
 
