@@ -28,6 +28,7 @@
  */
  
 .assignee-item {
+	font-weight: normal !important;
 	border: none !important;
   background: #f2f2f2 !important;
 }
