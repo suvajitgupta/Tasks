@@ -16,3 +16,4 @@ abbot/
 tasks-server/prod/WEB-INF/data
 tasks-server/test/WEB-INF/data
 frameworks/sproutcore/
+persevere/ra-cache
