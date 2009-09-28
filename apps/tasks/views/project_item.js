@@ -14,6 +14,11 @@
 Tasks.ProjectItemView = SC.ListItemView.extend(
 /** @scope Tasks.ProjectItemView.prototype */ {
   
+  inlineEditorWillBeginEditing: function(inlineEditor) {
+    var projectName = inlineEditor.value;
+    if (projectName === CoreTasks.ALL_TASKS_NAME.loc() || projectName === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) inlineEditor.discardEditing();
+  },
+  
   // FIXME: [SC] remove this after CollectionView localization is added back
   renderLabel: function(context, label) {
     context.push('<label>', label? label.loc() : '', '</label>') ;
