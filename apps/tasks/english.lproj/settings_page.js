@@ -12,12 +12,6 @@ sc_require('core');
   Settings Panel
   
 */
-Tasks.roles = [
-  CoreTasks.USER_ROLE_MANAGER.loc(),
-  CoreTasks.USER_ROLE_DEVELOPER.loc(),
-  CoreTasks.USER_ROLE_TESTER.loc()
-];
-
 Tasks.settingsPage = SC.Page.create({  
   
   panel: SC.PanelPane.create({
@@ -106,8 +100,7 @@ Tasks.settingsPage = SC.Page.create({
           }),
           SC.SelectFieldView.design({
             layout: { top: 170, left: 300, height: 20, width: 100 },
-            objects: Tasks.roles,
-            // TODO: [SG] figure out how to get/set role w/ I18N
+            objects: CoreTasks.roles,
             valueBinding: 'Tasks.userController.role'
           })          
                 

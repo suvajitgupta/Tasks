@@ -14,12 +14,7 @@
 				},
 				"role":{
 					"type":"any",
-					"optional":false,
-					"enum":[
-						"Manager",
-						"Developer",
-						"Tester"
-					]
+					"optional":false
 				},
 				"preferences":{
 					"type":"object",
