@@ -60,7 +60,7 @@
  */
 
 .task-item {
-  background: #f2f2f2;
+  background: #f2f2f2 none repeat scroll 0 0;
   left: 25px !important;
   right: 5px !important;
 }
@@ -79,27 +79,26 @@
 	font-weight: bold !important;
 	font-style: normal !important;
 	text-align: center !important;
-  line-height: 2 !important;
+  line-height: 1.5 !important;
   position: absolute !important;
-  top: 1px !important;
-  bottom: 1px !important;
+  top: 3px !important;
+  bottom: 3px !important;
   left: 20px !important;
 	width: 30px !important;
-  color: #222 !important;
-	border: 1px solid #BBB !important;
+  color: white !important;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
 }
 
 .task-item label {
   top: 10px !important;
-  left: 55px !important;
+  left: 58px !important;
   padding-left: 5px !important;
   padding-right: 5px !important;
 	border: 1px solid #BBB !important;
+  background: #EEE none repeat scroll 0 0 !important;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
-  background: #EEE none repeat scroll 0 0 !important;
 }
 
 
@@ -170,21 +169,41 @@
  * Task validation styles
  */
 
-.task-validation-untested label {
-  padding-left: 2px;
-  padding-right: 2px;
+.sc-view.sc-radio-view.task-attribute-set.disabled label {
+  color: #888 !important;
 }
 
-.task-validation-passed label {
-  padding-left: 2px;
-  padding-right: 2px;
-  background: #BFB none repeat scroll 0 0 !important;
+.task-validation-untested {
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 3px;
+  padding-right: 3px;
+  color: white;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  background: #444 none repeat scroll 0 0;
 }
 
-.task-validation-failed label {
-  padding-left: 2px;
-  padding-right: 2px;
-  background: #FBF none repeat scroll 0 0 !important;
+.task-validation-passed {
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 3px;
+  padding-right: 3px;
+  color: white;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  background: #363 none repeat scroll 0 0;
+}
+
+.task-validation-failed {
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 3px;
+  padding-right: 3px;
+  color: white;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  background: #C33 none repeat scroll 0 0;
 }
 
 

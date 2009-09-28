@@ -121,10 +121,6 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     var content = this.get('content');
     if(!content) return;
     
-    var idTooltip = "_IdTooltip".loc();
-    context = context.begin('div').addClass('task-id').text(content.get('id')).attr('title', idTooltip).attr('alt', idTooltip).end();
-    var hasDescription = NO;
-      
     var priority = content.get('priority');
     context.addClass('task-item');
     switch(priority){
@@ -139,6 +135,22 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         break;          
     }
     
+    var idTooltip = "_IdTooltip".loc();
+    var validationClass = null;
+    var validation = content.get('validation');
+    switch(validation){
+      case CoreTasks.TASK_VALIDATION_UNTESTED:
+        validationClass = 'task-validation-untested';
+        break;
+      case CoreTasks.TASK_VALIDATION_PASSED:
+        validationClass = 'task-validation-passed';
+        break;
+      case CoreTasks.TASK_VALIDATION_FAILED:
+        validationClass = 'task-validation-failed';
+        break;          
+    }
+    context = context.begin('div').addClass('task-id').addClass(validationClass).text(content.get('id')).attr('title', idTooltip).attr('alt', idTooltip).end();
+      
     var status = content.get('status');
     switch(status){
       case CoreTasks.TASK_STATUS_PLANNED:
@@ -149,24 +161,13 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         break;
       case CoreTasks.TASK_STATUS_DONE:
         context.addClass('task-status-done');
-        var validation = content.get('validation');
-        switch(validation){
-          case CoreTasks.TASK_VALIDATION_UNTESTED:
-            context.addClass('task-validation-untested');
-            break;
-          case CoreTasks.TASK_VALIDATION_PASSED:
-            context.addClass('task-validation-passed');
-            break;
-          case CoreTasks.TASK_VALIDATION_FAILED:
-            context.addClass('task-validation-failed');
-            break;          
-        }
         break;          
       case CoreTasks.TASK_STATUS_RISKY:
         context.addClass('task-status-risky');
         break;          
     }
     
+    var hasDescription = NO;
     if (content.get('description')) hasDescription = YES;
     context = context.begin('div').addClass('sc-view').addClass('task-description');
     context = context.begin('img').attr({
