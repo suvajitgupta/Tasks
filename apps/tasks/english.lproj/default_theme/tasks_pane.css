@@ -41,7 +41,7 @@
 }
 
 .assignee-not-loaded label {
-  background: #666 none repeat scroll 0 0 !important;
+  background: #444 none repeat scroll 0 0 !important;
 }
 
 .assignee-under-loaded label {
