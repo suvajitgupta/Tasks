@@ -238,7 +238,7 @@
 
 .sc-theme.focus .sc-list-view.sc-source-list .sc-collection-item.sel {
 	outline: 1px solid #444 !important;
-  background: #CCC !important;
+  background: #DDD !important;
 }
 
 .sc-view.sc-ghost-view .task-item {
