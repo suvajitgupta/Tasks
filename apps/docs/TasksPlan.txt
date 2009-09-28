@@ -27,7 +27,7 @@ v On Firefox dragging window to make it smaller leaves TextField entry text in t
 - On Safari it is impossible to type more than one character at the start of a line via in-cell editing [SC] <SG> $Bug
 v In Safari you can't click on assigneee selection filter and then the task filter [SC] <SG> $Bug
 v Add missing 'localize' support back in CollectionView (regression from SC 0.9) [SC] <SG> $Bug
-v Beta: Make task in-cell editors fit with collection view item size [SG] <SC> @Active $Bug
+v Beta: Make task in-cell editors fit with collection view item size [SG] <SC> @Risky $Bug
 | Fix in CSS add class .ghost to list item view and set its background to none
 - Beta: Track/optimize calls to assignments controller for redrawing tasks tree [SG] <SC> @Active
 - Beta: Allow direct bookmarking of Tasks projects (using SproutCore routes) [SG] <JL> $Feature
