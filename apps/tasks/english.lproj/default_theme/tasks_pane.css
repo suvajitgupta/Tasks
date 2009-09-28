@@ -40,19 +40,19 @@
 }
 
 .assignee-not-loaded label {
-  background: #444 none repeat scroll 0 0 !important;
+  background: #666 none repeat scroll 0 0 !important;
 }
 
 .assignee-under-loaded label {
-  background: #363 none repeat scroll 0 0 !important;
+  background: #585 none repeat scroll 0 0 !important;
 }
 
 .assignee-properly-loaded label {
-  background: #33C none repeat scroll 0 0 !important;
+  background: #55C none repeat scroll 0 0 !important;
 }
 
 .assignee-over-loaded label {
-  background: #C33 none repeat scroll 0 0 !important;
+  background: #C55 none repeat scroll 0 0 !important;
 }
 
 
@@ -181,7 +181,7 @@
   color: white;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
-  background: #444 none repeat scroll 0 0;
+  background: #666 none repeat scroll 0 0;
 }
 
 .task-validation-passed {
@@ -192,7 +192,7 @@
   color: white;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
-  background: #363 none repeat scroll 0 0;
+  background: #585 none repeat scroll 0 0;
 }
 
 .task-validation-failed {
@@ -203,7 +203,7 @@
   color: white;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
-  background: #C33 none repeat scroll 0 0;
+  background: #C55 none repeat scroll 0 0;
 }
 
 
