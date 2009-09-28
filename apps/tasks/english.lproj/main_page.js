@@ -40,6 +40,11 @@ Tasks.mainPage = SC.Page.design({
         }),
       
         SC.View.design({
+          layout: { top: 0, bottom: 0, right: 325, width: 2 },
+          classNames: ['top-bar-divider']
+        }),
+
+        SC.View.design({
           layout: { top: 0, height: 43, right: 270, width: 45 },
           childViews: [
             SC.View.design(Tasks.SimpleButton,{
@@ -241,6 +246,11 @@ Tasks.mainPage = SC.Page.design({
           action: 'deleteTask'
         }),
         
+        SC.View.design({
+          layout: { top: 0, bottom: 0, right: 565, width: 2 },
+          classNames: ['top-bar-divider']
+        }),
+
         SC.LabelView.design(Tasks.SimpleButton,{
           layout: { centerY: 3, right: 465, height: 24, width: 90 },
           icon: 'filter-tasks-icon',
