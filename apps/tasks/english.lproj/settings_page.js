@@ -75,28 +75,33 @@ Tasks.settingsPage = SC.Page.create({
           
           SC.LabelView.design({
             layout: { top: 100, left: 210, height: 17, width: 80 },
+            localize: YES,
             textAlign: SC.ALIGN_RIGHT,
-            value: "_LoginName:".loc()
+            value: "_LoginName:"
           }),
           SC.TextFieldView.design({
             layout: { top: 100, left: 300, height: 16, width: 150 },
+            localize: YES,
             valueBinding: SC.binding('Tasks.userController.loginName', this)
           }),
 
           SC.LabelView.design({
             layout: { top: 135, left: 210, height: 17, width: 80 },
+            localize: YES,
             textAlign: SC.ALIGN_RIGHT,
-            value: "_FullName:".loc()
+            value: "_FullName:"
           }),
           SC.TextFieldView.design({
             layout: { top: 135, left: 300, height: 16, width: 200 },
+            localize: YES,
             valueBinding: SC.binding('Tasks.userController.name', this)
           }),
           
           SC.LabelView.design({
             layout: { top: 170, left: 210, height: 17, width: 80 },
+            localize: YES,
             textAlign: SC.ALIGN_RIGHT,
-            value: "_Role:".loc()
+            value: "_Role:"
           }),
           SC.SelectFieldView.design({
             layout: { top: 170, left: 300, height: 20, width: 100 },
@@ -110,11 +115,12 @@ Tasks.settingsPage = SC.Page.create({
       
       closeButton: SC.ButtonView.design({
         layout: { width: 80, height: 30, right: 10, bottom: 8 },
+        localize: YES,
         titleMinWidth: 0,
         keyEquivalent: 'return',
         isDefault: YES,
         theme: 'capsule',
-        title: "_Close".loc(),
+        title: "_Close",
         target: 'Tasks.settingsController',
         action: 'closePanel'
       })
