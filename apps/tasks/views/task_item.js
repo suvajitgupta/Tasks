@@ -36,17 +36,15 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         
         layout: { width: 500, height: 200 },
         
+        // Avoid popup panel coming up on other items while it is up already
         poppedUp: false,
-        // TODO: [JH2] make the begin/end property changes work
         popup: function() {
           if(this.poppedUp) return;
           this.poppedUp = true;
           sc_super();
-          that.get('content').beginPropertyChanges();
         },
         remove: function() {
           this.poppedUp = false;
-          that.get('content').endPropertyChanges();
           sc_super();
         },
         
@@ -104,6 +102,14 @@ Tasks.TaskItemView = SC.ListItemView.extend(
             SC.TextFieldView.design({
               layout: { top: 98, left: 10, right: 10, bottom: 10 },
               isTextArea: YES,
+              didBecomeKeyResponderFrom: function(responder) {
+                this.beginPropertyChanges();
+                sc_super();
+              },
+              didLoseKeyResponderTo: function(responder) {
+                this.endPropertyChanges();
+                sc_super();
+              },
               valueBinding: SC.binding('.content.description', this)
             })
             
