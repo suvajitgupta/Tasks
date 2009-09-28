@@ -20,7 +20,8 @@
 }
 
 .sc-view.sc-list-item-view.sc-collection-item.sc-group-item {
-  //left: 0px !important;
+  position: absolute !important;
+  margin-left: -5px !important;
 }
 
 /*-----------------------------------------------------------------
@@ -35,7 +36,8 @@
 
 .assignee-item label {
   color: white !important;
-  padding-left: 5px;
+  left: 3px !important;
+  padding-left: 5px !important;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
 }
@@ -62,22 +64,16 @@
  */
 
 .task-item {
-	border: none !important;
   background: #f2f2f2 none repeat scroll 0 0;
   left: 25px !important;
   right: 5px !important;
-}
-
-.task-item .sc-outline {
-  left: 0px !important;
-  right: 17px !important;
 }
 
 .task-id {
   font-size: 9px !important;
 	font-style: normal !important;
 	text-align: center !important;
-  line-height: 1.5 !important;
+  line-height: 1.25 !important;
   position: absolute !important;
   top: 3px !important;
   bottom: 3px !important;
@@ -88,18 +84,20 @@
   -webkit-border-radius: 5px;
 }
 
+.task-item .sc-outline {
+  left: 0px !important;
+  right: 17px !important;
+}
+
 .task-item img {
-  left: 40px !important;
+  left: 41px !important;
 }
 
 .task-item label {
   top: 10px !important;
-  left: 59px !important;
+  left: 58px !important;
   padding-left: 5px !important;
   padding-right: 5px !important;
-	border: 1px solid #AAA !important;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
 }
 
 
@@ -170,24 +168,20 @@
  * Task validation styles
  */
 
-.sc-view.sc-radio-view.task-attribute-set.disabled label {
-  color: #888 !important;
-}
-
 .task-validation-untested {
-  padding-top: 1px;
-  padding-bottom: 1px;
+  padding-top: 2px;
+  padding-bottom: 2px;
   padding-left: 3px;
   padding-right: 3px;
   color: white;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
-  background: #666 none repeat scroll 0 0;
+  background: #777 none repeat scroll 0 0;
 }
 
 .task-validation-passed {
-  padding-top: 1px;
-  padding-bottom: 1px;
+  padding-top: 2px;
+  padding-bottom: 2px;
   padding-left: 3px;
   padding-right: 3px;
   color: white;
@@ -197,8 +191,8 @@
 }
 
 .task-validation-failed {
-  padding-top: 1px;
-  padding-bottom: 1px;
+  padding-top: 2px;
+  padding-bottom: 2px;
   padding-left: 3px;
   padding-right: 3px;
   color: white;
