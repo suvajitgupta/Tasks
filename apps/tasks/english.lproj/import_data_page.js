@@ -25,13 +25,13 @@ Tasks.importDataPage = SC.Page.create({
       
       sample: SC.LabelView.design({
         escapeHTML: NO,
-        layout: { top: 10, left: 10, height: 40, width: 280 },
+        layout: { top: 10, left: 10, height: 40, width: 260 },
         value: "_ImportInstructions:".loc()
       }),
       
       format: SC.LabelView.design({
         escapeHTML: NO,
-        layout: { top: 10, width: 450, height: 45, right: 10 },
+        layout: { top: 10, width: 470, height: 45, right: 10 },
         classNames: [ 'onscreen-help'],
         value: "_FormatOnscreenHelp".loc()
       }),
