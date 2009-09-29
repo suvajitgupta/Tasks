@@ -20,7 +20,9 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   
   _listUsers: function() {
     return SC.Binding.transform(function(value, binding) {
-       return value.toArray();
+       var ret = value.toArray();
+       ret.push({ id: '***', displayName: "_Unassigned".loc() });
+       return ret;
     }).from('Tasks.usersController.content');
   },
 

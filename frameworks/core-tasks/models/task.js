@@ -147,15 +147,15 @@ CoreTasks.Task = CoreTasks.Record.extend({
   submitter: SC.Record.attr('CoreTasks.User'),
   
   submitterID: function(key, value){
-    if (value) {
-      this.set('submitter', CoreTasks.User.find(CoreTasks.store, value));
+    if (value !== undefined) {
+      if(value === '***') this.set('submitter', null);
+      else this.set('submitter', CoreTasks.User.find(CoreTasks.store, value));
     }
     else {
       var submitter = this.get('submitter');
-      if (submitter && submitter.get) { // FIXME: [SC] unclear why submitter.get() is null at times
-        var id = submitter.get('id');
-        return id;
-      }
+      // FIXME: [SC] unclear why submitter.get() is null at times
+      if (submitter && submitter.get) return submitter.get('id');
+      else return '***';
     }
   }.property('submitter').cacheable(),
 
@@ -165,15 +165,15 @@ CoreTasks.Task = CoreTasks.Record.extend({
   assignee: SC.Record.attr('CoreTasks.User'),
   
   assigneeID: function(key, value){
-    if (value) {
-      this.set('assignee', CoreTasks.User.find(CoreTasks.store, value));
+    if (value !== undefined) {
+      if(value === '***') this.set('assignee', null);
+      else this.set('assignee', CoreTasks.User.find(CoreTasks.store, value));
     }
     else {
       var assignee = this.get('assignee');
-      if (assignee && assignee.get) { // FIXME: [SC] unclear why assigneee.get() is null at times
-        var id = assignee.get('id');
-        return id;
-      }
+      // FIXME: [SC] unclear why assigneee.get() is null at times
+      if (assignee && assignee.get) return assignee.get('id');
+      else return '***';
     }
   }.property('assignee').cacheable(),
 
