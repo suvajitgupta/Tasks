@@ -162,12 +162,20 @@
   background: static_url('images/default-theme-static.png') no-repeat 0 -565px;
 }
 
-.filter-tasks-icon {
+.filter-tasks-icon-has-criteria {
   width: 20px !important;
   height: 16px !important;
   margin-top: 3px !important;
   margin-right: 2px !important;
-  background: static_url('images/filter-tasks.png') no-repeat 0 0;
+  background: static_url('images/filter_tasks_has_criteria.png') no-repeat 0 0;
+}
+
+.filter-tasks-icon-no-criteria {
+  width: 20px !important;
+  height: 16px !important;
+  margin-top: 3px !important;
+  margin-right: 2px !important;
+  background: static_url('images/filter_tasks_no_criteria.png') no-repeat 0 0;
 }
 
 .assignee-selection-bar {

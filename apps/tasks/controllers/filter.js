@@ -24,6 +24,8 @@ Tasks.filterController = SC.ObjectController.create(
       var pane = Tasks.get('filterPane');
       pane.remove();
       pane.destroy();
+      var filterButton = Tasks.getPath('mainPage.mainPane.filterButton');
+      if(filterButton) filterButton.set('icon', Tasks.assignmentsController.attributeFilterIcon());
       Tasks.assignmentsController.showAssignments();
     }
     

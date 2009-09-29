@@ -253,7 +253,7 @@ Tasks.mainPage = SC.Page.design({
 
         SC.LabelView.design(Tasks.SimpleButton,{
           layout: { centerY: 3, right: 465, height: 24, width: 90 },
-          icon: 'filter-tasks-icon',
+          icon: Tasks.assignmentsController.attributeFilterIcon(),
           value: "_FilterTasks".loc(),
           classNames: ['toolbar-label'],
           toolTip: "_FilterTasksTooltip".loc(),
@@ -297,6 +297,8 @@ Tasks.mainPage = SC.Page.design({
                      
       ]
     }),
+    
+    filterButton: SC.outlet('toolbarView.childViews.6'),
 
     masterDetailView: SC.View.design({
       layout: { top: 78, bottom: 71, left: 0, right: 0 },

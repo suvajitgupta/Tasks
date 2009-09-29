@@ -104,9 +104,15 @@ Tasks.assignmentsController = SC.ArrayController.create(
     return this.attributeFilter(CoreTasks.TASK_VALIDATION_FAILED, value);
   }.property('attributeFilterCriteria'),
   
+  
+  attributeFilterIcon: function() {
+    return this.attributeFilterCriteria.length === 13? 'filter-tasks-icon-no-criteria' : 'filter-tasks-icon-has-criteria';
+  }.property('attributeFilterCriteria'),
+  
   hasFiltering: function() {
-    return this.assigneeSelection || this.searchFilter || this.attributeFilterCriteria.length != 13;
+    return this.assigneeSelection || this.searchFilter || this.attributeFilterCriteria.length !== 13;
   },
+  
   
   // count: 0, // used for tracking/tuning calls to redraw tasks pane below
   showAssignments: function() { // show tasks for selected user that matches search filter
