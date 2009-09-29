@@ -30,7 +30,7 @@ v Add missing 'localize' support back in CollectionView (regression from SC 0.9)
 v Beta: Make task in-cell editors fit with collection view item size [SG] <SC> @Risky $Bug
 | Fix in CSS add class .ghost to list item view and set its background to none
 - Beta: Track/optimize calls to assignments controller for redrawing tasks tree [SG] <SC> @Active
-- Allow direct bookmarking of Tasks projects (using SproutCore routes) [SG] <JL> $Feature
+- Allow direct bookmarking of Tasks projects (using SproutCore routes) [SG] $Feature
 - Show newly added tasks/projects with a badge [SG] $Feature
 - Add email notifications on task changes to Assignee/Manager [SG] <SE> $Feature @Active
 - Add some simple metrics/reporting capabilities [SG] $Feature

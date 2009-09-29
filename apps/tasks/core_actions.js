@@ -518,7 +518,7 @@ Tasks.mixin({
    * Add a new user.
    */
   addUser: function() {
-    var user = CoreTasks.get('store').createRecord(CoreTasks.User, CoreTasks.User.NEW_USER_HASH);
+    var user = CoreTasks.get('store').createRecord(CoreTasks.User, SC.clone(CoreTasks.User.NEW_USER_HASH));
     this.getPath('usersController.content').pushObject(user);
     var listView = Tasks.getPath('settingsPage.panel.usersList');
     var idx = listView.length - 1;
