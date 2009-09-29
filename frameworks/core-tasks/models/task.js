@@ -70,7 +70,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
    * Multi-line comments about the task (may be release notes for a feature or steps to reproduce a bug)
    */
   description: SC.Record.attr(String),
-
+  
   /**
    * The type of the task (see below for possible values).
    */
@@ -140,6 +140,24 @@ CoreTasks.Task = CoreTasks.Record.extend({
    * The effort of the task (can start with an estimate and end with the actual).
    */
   effort: SC.Record.attr(String),
+  
+  /**
+    We are using this computed property so that we can buffer changes to 
+    the effort field of a task. [JH2]
+    
+    --- Solves a jumpy text area/text field when connected to a binding. [JH2]
+  */
+  effortValue: function(key, value){
+    if (value !== undefined) {
+      this.writeAttribute('effort', value);
+    }
+    else {
+      var effort = this.get('effort');
+      if (effort) value = effort;
+      else value = '';
+    }
+    return value;
+  }.property('effort').cacheable(),
 
   /**
    * The user who creates the task.
@@ -148,15 +166,16 @@ CoreTasks.Task = CoreTasks.Record.extend({
   
   submitterID: function(key, value){
     if (value !== undefined) {
-      if(value === '***') this.set('submitter', null);
-      else this.set('submitter', CoreTasks.User.find(CoreTasks.store, value));
+      if(value === '***') this.writeAttribute('submitter', null);
+      else this.writeAttribute('submitter', CoreTasks.User.find(CoreTasks.store, value).get('id'));
     }
     else {
       var submitter = this.get('submitter');
       // FIXME: [SC] unclear why submitter.get() is null at times
-      if (submitter && submitter.get) return submitter.get('id');
-      else return '***';
+      if (submitter && submitter.get)  value = submitter.get('id');
+      else value = '***';
     }
+    return value;
   }.property('submitter').cacheable(),
 
   /**
@@ -166,15 +185,16 @@ CoreTasks.Task = CoreTasks.Record.extend({
   
   assigneeID: function(key, value){
     if (value !== undefined) {
-      if(value === '***') this.set('assignee', null);
-      else this.set('assignee', CoreTasks.User.find(CoreTasks.store, value));
+      if(value === '***') this.writeAttribute('assignee', null);
+      else this.writeAttribute('assignee', CoreTasks.User.find(CoreTasks.store, value).get('id'));
     }
     else {
       var assignee = this.get('assignee');
       // FIXME: [SC] unclear why assigneee.get() is null at times
-      if (assignee && assignee.get) return assignee.get('id');
-      else return '***';
+      if (assignee && assignee.get) value = assignee.get('id');
+      else value = '***';
     }
+    return value;
   }.property('assignee').cacheable(),
 
   /**

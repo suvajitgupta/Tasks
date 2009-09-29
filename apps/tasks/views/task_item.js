@@ -50,6 +50,21 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           sc_super();
         },
         
+        didBecomeKeyPaneFrom: function(pane) {
+          sc_super();
+          console.log("[%@] became keyPane from [%@]".fmt(this,pane));
+          var content = that.get('content');
+          content.beginEditing();
+          content.beginPropertyChanges();
+        },
+        didLoseKeyPaneTo: function(pane) {
+          sc_super();
+          console.log("[%@] Lost keyPane status to [%@]".fmt(this,pane));
+          var content = that.get('content');
+          content.endEditing();
+          content.endPropertyChanges();
+        },
+        
         contentView: SC.View.design({
           layout: { left: 0, right: 0, top: 0, bottom: 0},
           childViews: [
@@ -84,8 +99,16 @@ Tasks.TaskItemView = SC.ListItemView.extend(
             }),
             SC.TextFieldView.design({
               layout: { top: 47, left: 55, width: 80, height: 16 },
-              valueBinding: SC.binding('.content.effort', this)
+              valueBinding: SC.binding('.content.effortValue', this),
               // TODO: [SG] only allow valid values for effort
+              // FIXME [JH2] Implementing the same hacky work-around as below, b/c I'm not sure if the same crap happens with a regular text field.
+              didBecomeKeyResponder: function(responder){
+                this.beginPropertyChanges();
+              },
+              
+              didLoseKeyResponder: function(responder){
+                this.endPropertyChanges();
+              }
             }),
             SC.LabelView.design({
               layout: { top: 47, left: 145, height: 17, width: 30 },
@@ -104,15 +127,17 @@ Tasks.TaskItemView = SC.ListItemView.extend(
             SC.TextFieldView.design({
               layout: { top: 98, left: 10, right: 10, bottom: 10 },
               isTextArea: YES,
-              didBecomeKeyResponderFrom: function(responder) {
+              valueBinding: SC.binding('.content.description', this),
+              
+              // FIXME [JH2] It seems that there is a bug with textfields that are used as text areas, when the text goes beyond the lower boundry every keystroke causes the text to jump. I am circumventing this with what I condider a hacky way of working around this bug.
+              didBecomeKeyResponder: function(responder){
                 this.beginPropertyChanges();
-                sc_super();
               },
-              didLoseKeyResponderTo: function(responder) {
+              
+              didLoseKeyResponder: function(responder){
                 this.endPropertyChanges();
-                sc_super();
-              },
-              valueBinding: SC.binding('.content.description', this)
+              }
+              
             })
             
           ]
