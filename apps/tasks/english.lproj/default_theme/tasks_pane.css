@@ -36,7 +36,7 @@
 
 .assignee-item label {
   color: white !important;
-  left: 3px !important;
+  left: 4px !important;
   padding-left: 5px !important;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -65,7 +65,7 @@
 
 .task-item {
   background: #f2f2f2 none repeat scroll 0 0;
-  left: 20px !important;
+  left: 22px !important;
   right: 5px !important;
 }
 
@@ -129,7 +129,6 @@
 
 .task-priority-high {
 	font-weight: bold !important;
-	// text-decoration: underline !important;
 }
 
 .task-priority-medium {
