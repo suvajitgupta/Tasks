@@ -74,7 +74,7 @@ v Enable Task Validation radio buttons only when in Done status [SG] <JH2> $Feat
 ^ Add task search filter (by id/name) & corresponding delete button in top toolbar: support type-ahead searching [SG] @Done $Feature %Passed
 - Beta: Don't lose selection after changing task assignee/priority/status/validation [SG] <SG> $Bug @Active
 ^ Allow task attribute filtering by type, priority, status, and validation fields via a toolbar button/pop up panel [SG] $Feature @Done %Passed
-- Indicate whether there is a task attribute filter via a different icon on the toolbar button [SG] $Feature
+- Indicate whether there is a task attribute filter via a different icon on the toolbar button [SG] $Feature @Done %Passed
 v Set tasks toolbar button enablement based on having a selection [SG] @Done $Feature %Passed
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done $Feature %Passed
 ^ Add "Add Task" & "Del. Task" buttons in tasks toolbar [SG] <SE> @Done $Feature %Passed
