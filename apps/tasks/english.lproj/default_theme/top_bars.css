@@ -29,14 +29,12 @@
   font-size: 9px !important;
   color: #eee !important;
   text-align: center !important;
-  font-weight: bold !important;
 }
 
 .title-bar-label.disabled {
   font-size: 9px !important;
   color: #777 !important;
   text-align: center !important;
-  font-weight: bold !important;
 }
 
 .tasks-logo {
@@ -95,12 +93,11 @@
   font-size: 10px !important;
   color: #fff !important;
   text-align: center !important;
-  font-weight: bold !important;
 }
 
 .toolbar-label.disabled {
   font-size: 10px !important;
-  color: #AAA !important;
+  color: #999 !important;
   text-align: center !important;
   font-weight: bold !important;
 }

@@ -35,7 +35,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         Tasks.TitleView.design({
-          layout: { centerY: 0, height: 20, centerX: -88, width: 250 },
+          layout: { centerY: 0, height: 20, centerX: -93, width: 250 },
           classNames: ['welcome-message']
         }),
       
