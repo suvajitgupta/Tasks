@@ -105,7 +105,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
   }.property('attributeFilterCriteria'),
   
   hasFiltering: function() {
-    return this.assigneeSelection || this.searchFilter;
+    return this.assigneeSelection || this.searchFilter || this.attributeFilterCriteria.length != 13;
   },
   
   // count: 0, // used for tracking/tuning calls to redraw tasks pane below

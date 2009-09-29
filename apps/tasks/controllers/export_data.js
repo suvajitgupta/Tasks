@@ -48,7 +48,7 @@ Tasks.exportDataController = SC.ObjectController.create(
       for (var i = 0; i < len; i++) {
         ret += tasks.objectAt(i).exportData();
       }
-      if (len > 0) ret += '\n';
+      ret += '\n';
       
     }, pc);
     return ret;

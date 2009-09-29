@@ -73,7 +73,8 @@ v Enable Task Validation radio buttons only when in Done status [SG] <JH2> $Feat
 - Allow multi-selected tasks to be set to new type/status/priority/validation [SG] <BB> $Feature
 ^ Add task search filter (by id/name) & corresponding delete button in top toolbar: support type-ahead searching [SG] @Done $Feature %Passed
 - Beta: Don't lose selection after changing task assignee/priority/status/validation [SG] <SG> $Bug @Active
-^ Allow task filtering by type, priority, status, and validation fields via a toolbar button/pop up panel [SG] $Feature @Done %Passed
+^ Allow task attribute filtering by type, priority, status, and validation fields via a toolbar button/pop up panel [SG] $Feature @Done %Passed
+- Indicate whether there is a task attribute filter via a different icon on the toolbar button [SG] $Feature
 v Set tasks toolbar button enablement based on having a selection [SG] @Done $Feature %Passed
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done $Feature %Passed
 ^ Add "Add Task" & "Del. Task" buttons in tasks toolbar [SG] <SE> @Done $Feature %Passed
@@ -133,6 +134,7 @@ v Add Undo/Redo buttons in top toolbar (till last Save) [SG] <SE> $Feature
 
 Server
 ^ Build persistence server (using Persevere) [SE] <SG> @Done %Passed
+- Create a user in Persevere at installation time [SE] <SG>
 - Build persistence server (using Django/Google App Engine) [SC] @Active
 - Patch SproutCore to avoid overwhelming async calls for file imports with more than 20 tasks [SE] <SG> @Done %Passed $Bug
 - Beta: Switch to latest SproutCore postback and modified SC.Store APIs <SG> [SE] @Active
