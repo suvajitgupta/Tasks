@@ -68,16 +68,14 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
       this.writeAttribute('name', projectHash.name);
       this.propertyDidChange('name');
       
-      this.propertyWillChange('timeLeft');
-      this.writeAttribute('timeLeft', projectHash.timeLeft);
-      this.propertyDidChange('timeLeft');
+      if(projectHash.timeLeft) {
+        this.propertyWillChange('timeLeft');
+        this.writeAttribute('timeLeft', projectHash.timeLeft);
+        this.propertyDidChange('timeLeft');
+      }
       
     } else {
-      var name = this.get('name');
-      var timeLeft = this.get('timeLeft');
-      var ret = name;
-      if (timeLeft) ret += ' {' + timeLeft + '}';
-      return ret;
+      return this.get('name');
     }
     
   }.property('name', 'timeLeft').cacheable(),
@@ -121,7 +119,10 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
   exportData: function() {
     var projectName = this.get('name');
     if(projectName === CoreTasks.ALL_TASKS_NAME || projectName === CoreTasks.UNALLOCATED_TASKS_NAME) return '';
-    else return this.get('displayName') + '\n';
+    var ret = projectName;
+    var timeLeft = this.get('timeLeft');
+    if(timeLeft) ret += (' {' + timeLeft + '}');
+    return ret + '\n';
   }
   
 });

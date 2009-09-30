@@ -28,7 +28,7 @@ SC.stringsFor('English', {
   '_SaveTooltip': "Save Tasks data to the server",
   '_Import': "Import",
   '_ImportTooltip': "Import Tasks data from a text format",
-  '_ImportInstructions:': "Paste or type in text to be imported:<br>(see format on the right)",
+  '_ImportInstructions:': "Paste or type in text to be imported:<br>(see format on right)",
   '_FormatOnscreenHelp': "Project Name {TimeLeft}<br>- Task Name {Effort} &lt;Submitter&gt; [Assignee] $Type @Status %Validation<br>| Description (1 or more lines)",
   '_Export': "Export",
   '_ExportTooltip': "Export Tasks data to a text format",
@@ -50,8 +50,9 @@ SC.stringsFor('English', {
   '_NewProject': "New Project",
   '_AllTasks': "All Tasks",
   '_UnallocatedTasks': "Unallocated Tasks",
-  '_ProjectTooltip': "Time left (in days) shown/may be entered in curly braces, project has ",
+  '_Has': "Has ",
   '_Tasks': " task(s)",
+  '_ProjectTimeLeftTooltip': "; Time left in days (if specified within curly braces) shown on right",
   
   // Task strings
   '_AddTask': "Add Task",
@@ -83,12 +84,12 @@ SC.stringsFor('English', {
   '_Passed': "Passed",
   '_Failed': "Failed",
   '_Effort:': "Effort:",
-  '_Days': "days",
+  '_Days': "day(s)",
   '_EffortOnscreenHelp': "You may leave effort unspecified, enter a decimal value like 0.25, or a range like 2-3",
   '_Description:': "Description:",
-  '_TaskTooltip': "Effort (in days) shown/may be entered in curly braces",
-  '_SubmitterTooltip': ", submitter is ",
-  '_IdTooltip': "A unique ID for each task, background shows validation status",
+  '_SubmitterTooltip': "Submitter is ",
+  '_TaskEffortTooltip': "Effort in days (if specified) shown on right",
+  '_IdTooltip': "Unique ID for task, background color indicates validation status",
   '_EditorTooltip': "Click to view/edit task details (submitter, assignee, effort, and description)",
   
   // User/Assignee strings
@@ -106,11 +107,11 @@ SC.stringsFor('English', {
   '_Tester': "Tester",
   '_Submitter:': "Submitter: ",
   '_Assignee:': "Assignee: ",
-  '_AssigneeTooltip': "Remaining effort (in days) shown in curly braces, ",
-  '_AssigneeNotLoaded': "assignee not loaded, has ",
-  '_AssigneeUnderLoaded': "assignee under loaded, has ",
-  '_AssigneeProperlyLoaded': "assignee properly loaded, has ",
-  '_AssigneeOverloaded': "assignee overloaded, has ",
+  '_AssigneeNotLoaded': ", currently not loaded; ",
+  '_AssigneeUnderLoaded': ", currently under loaded; ",
+  '_AssigneeProperlyLoaded': ", currently properly loaded; ",
+  '_AssigneeOverloaded': ", currently overloaded; ",
+  '_AssigneeEffortTooltip': "Remaining effort in days (if any) shown on right",
   
   // Popup Pane/Panel strings
   '_EnableAll': "Enable All",

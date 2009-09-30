@@ -111,7 +111,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
               }
             }),
             SC.LabelView.design({
-              layout: { top: 47, left: 145, height: 17, width: 30 },
+              layout: { top: 47, left: 145, height: 17, width: 40 },
               value: "_Days".loc()
             }),
             SC.LabelView.design({
@@ -216,11 +216,12 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     context = context.end();
     context = context.end();
 
-    var taskTooltip = "_TaskTooltip".loc();
+    var taskTooltip = '';
     var submitterUser = content.get('submitter');
     if (submitterUser) {
-      taskTooltip += ("_SubmitterTooltip".loc() + '%@ (%@)'.fmt(submitterUser.get('name'), submitterUser.get('loginName')));
+      taskTooltip += ("_SubmitterTooltip".loc() + '%@ (%@)'.fmt(submitterUser.get('name'), submitterUser.get('loginName')) + '; ');
     }
+    taskTooltip += "_TaskEffortTooltip".loc();
     context.attr('title', taskTooltip);
     context.attr('alt', taskTooltip);
 

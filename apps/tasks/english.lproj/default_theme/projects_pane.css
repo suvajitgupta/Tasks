@@ -28,6 +28,15 @@
   border: 0 !important;
 }
 
+.projects-pane-inner .sc-collection-item .sc-outline {
+  border-top: 1px solid #BBB !important;
+  right: 10px !important;
+}
+
+.projects-pane-inner .sc-collection-item .sc-outline label {
+  right: 50px !important;
+}
+
 .projects-pane-inner .sc-collection-item.has-icon.sel {
   background: static_url('images/default-theme-selected-project.png') no-repeat 0 0 !important;
   font-weight: bold;
@@ -43,16 +52,26 @@
   font-weight: bold;
 }
 
+/*.regular-project-item .sc-outline {
+  right: 18px !important;
+}
+*/
+.regular-project-item .sc-outline .count {
+	font-weight: normal !important;
+  line-height: 12px !important;
+  color: #222 !important;
+  background: #DDD none repeat scroll 0 0 !important;
+  border: 1px solid #222 !important;
+}
+
 .project-icon-has-tasks {
   width: 16px;
   height: 16px;
   background: static_url('images/project_has_tasks.png') no-repeat 0 0;
-  //background: static_url('images/default-theme-static.png') no-repeat 0 -486px;
 }
 
 .project-icon-no-tasks {
   width: 16px;
   height: 16px;
   background: static_url('images/project_no_tasks.png') no-repeat 0 0;
-	//background: no-repeat sc_static('icons/shared') -16px -464px;
 }

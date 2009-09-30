@@ -249,6 +249,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
       }
     }
   
+    var displayEffort = null;
     var loading = CoreTasks.USER_NOT_LOADED;
     if(totalEffortMin !== 0) {
       if(projectTimeLeft) { // flag user loading
@@ -263,11 +264,12 @@ Tasks.assignmentsController = SC.ArrayController.create(
       if (totalEffortMax !== totalEffortMin) {
         totalEffort += '-' + totalEffortMax;
       }
-      displayName = displayName + ' {' + totalEffort + (taskWithUnspecifiedEffort? '?' : '') + '}';
+      displayEffort = totalEffort + (taskWithUnspecifiedEffort? '?' : '');
     }
     
     assignmentNodes.push (SC.Object.create({
       displayName: displayName,
+      effort: displayEffort,
       loading: loading,
       assignee: assigneeObj.assignee,
       treeItemChildren: tasks.sort(function(a,b) { // sort by status, then by validation (if "Done"), then by priority, lastly by type

@@ -33,9 +33,10 @@ Tasks.ProjectItemView = SC.ListItemView.extend(
 
       var tasks = content.get('tasks');
       if(tasks) {
-        var tasksCountTooltip = "_ProjectTooltip".loc() + tasks.get('length') + "_Tasks".loc();
-        context.attr('title', tasksCountTooltip);
-        context.attr('alt', tasksCountTooltip);
+        var projectTooltip = "_Has".loc() + tasks.get('length') + "_Tasks".loc();
+        projectTooltip += "_ProjectTimeLeftTooltip".loc();
+        context.attr('title', projectTooltip);
+        context.attr('alt', projectTooltip);
       }
     }
     sc_super();

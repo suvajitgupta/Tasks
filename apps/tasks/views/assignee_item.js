@@ -29,7 +29,7 @@ Tasks.AssigneeItemView = SC.ListItemView.extend(
       var tasksCount = 0;
       var tasks = content.get('treeItemChildren');
       if (tasks) tasksCount = tasks.get('length');
-      var tooltip = "_AssigneeTooltip".loc();
+      var assigneeTooltip = "_Has".loc() + tasksCount + "_Tasks".loc();
       
       var loadingTooltip = '';
       var loading = content.get('loading');
@@ -52,9 +52,9 @@ Tasks.AssigneeItemView = SC.ListItemView.extend(
         }
       }
       
-      tooltip += (loadingTooltip + tasksCount + "_Tasks".loc());
-      context.attr('title', tooltip);
-      context.attr('alt', tooltip);
+      assigneeTooltip += (loadingTooltip + '_AssigneeEffortTooltip'.loc());
+      context.attr('title', assigneeTooltip);
+      context.attr('alt', assigneeTooltip);
       
     }
     sc_super();

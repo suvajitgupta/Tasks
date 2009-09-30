@@ -231,9 +231,11 @@ CoreTasks.Task = CoreTasks.Record.extend({
       this.writeAttribute('name', taskHash.name);
       this.propertyDidChange('name');
       
-      this.propertyWillChange('effort');
-      this.writeAttribute('effort', taskHash.effort);
-      this.propertyDidChange('effort');
+      if(taskHash.effort) {
+        this.propertyWillChange('effort');
+        this.writeAttribute('effort', taskHash.effort);
+        this.propertyDidChange('effort');
+      }
       
       if(taskHash.submitter) {
         this.propertyWillChange('submitter');
@@ -276,11 +278,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
       }
 
     } else {
-      var name = this.get('name');
-      var effort = this.get('effort');
-      var ret = name;
-      if (effort) ret += ' {' + effort + '}';
-      return ret;
+      return this.get('name');
     }
     
   }.property('name', 'effort').cacheable()  ,
@@ -290,24 +288,35 @@ CoreTasks.Task = CoreTasks.Record.extend({
   * @returns {String) return a string with the tasks' data exported in it.
   */
   exportData: function() {
+    
     var ret = '', val, user;
+    
     switch(this.get('priority')) {
       case CoreTasks.TASK_PRIORITY_HIGH: val = '^'; break;
       case CoreTasks.TASK_PRIORITY_MEDIUM: val = '-'; break;
       case CoreTasks.TASK_PRIORITY_LOW: val = 'v'; break;
     }
     ret += val + ' ';
-    ret += this.get('displayName');
+    
+    ret += this.get('name');
+    var effort = this.get('effort');
+    if(effort) ret += (' {' + effort + '}');
+    
     user = this.get('submitter');
     if (user) ret += ' <' + user.get('loginName') + '>';
+    
     user = this.get('assignee');
     if (user) ret += ' [' + user.get('loginName') + ']';
+    
     val = this.get('type');
     if(val !== CoreTasks.TASK_TYPE_OTHER) ret += ' $' + val.loc();
+    
     val = this.get('status');
     if(val !== CoreTasks.TASK_STATUS_PLANNED) ret += ' @' + val.loc();
+    
     val = this.get('validation');
     if(val !== CoreTasks.TASK_VALIDATION_UNTESTED)ret += ' %' + val.loc();
+    
     val = this.get('description');
     if(val) {
       var lines = val.split('\n');
@@ -315,8 +324,10 @@ CoreTasks.Task = CoreTasks.Record.extend({
         ret += '\n| ' + lines[j];
       }
     }
+    
     ret += '\n';
     return ret;
+    
   }
   
 });

@@ -312,6 +312,7 @@ Tasks.mainPage = SC.Page.design({
         contentView: Tasks.ProjectsListView.design({
           layout: { top: 0, left:0, bottom: 0, right: 0 },
           contentValueKey: 'displayName',
+          contentUnreadCountKey: 'timeLeft',
           contentBinding: 'Tasks.projectsController.arrangedObjects',
           selectionBinding: 'Tasks.projectsController.selection',
           localize: YES,
@@ -337,6 +338,7 @@ Tasks.mainPage = SC.Page.design({
         contentView: SC.SourceListView.design({
           layout: { top: 0, bottom: 0, left: 0, right: 0 },
           contentValueKey: 'displayName',
+          contentUnreadCountKey: 'effort',
           contentBinding: 'Tasks.tasksController.arrangedObjects',
           selectionBinding: 'Tasks.tasksController.selection',
           localize: YES,
