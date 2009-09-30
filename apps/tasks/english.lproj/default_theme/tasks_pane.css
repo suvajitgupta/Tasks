@@ -94,15 +94,15 @@
   position: absolute !important;
   top: 3px !important;
   bottom: 3px !important;
-  left: 3px !important;
-	width: 30px !important;
+  left: 2px !important;
+	width: 32px !important;
   color: white !important;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
 }
 
 .task-item img {
-  left: 43px !important;
+  left: 44px !important;
 }
 
 .task-item label {
