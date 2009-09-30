@@ -23,7 +23,7 @@ SC.stringsFor('English', {
 
   // Top Bar strings
   '_Tasks': "TASKS",
-  '_Welcome': "Welcome ",
+  '_Welcome': "Welcome, ",
   '_Save': "Save",
   '_SaveTooltip': "Save Tasks data to the server",
   '_Import': "Import",

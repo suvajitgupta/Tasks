@@ -149,7 +149,16 @@ CoreTasks.Task = CoreTasks.Record.extend({
   */
   effortValue: function(key, value){
     if (value !== undefined) {
-      this.writeAttribute('effort', value);
+      if(value === '') {
+        this.writeAttribute('effort', null);
+      }
+      else {
+        var effort = CoreTasks.Task.parseEffort('{' + value + '}');
+        if(effort) {
+          this.writeAttribute('effort', effort);
+          value = effort;
+        }
+      }
     }
     else {
       value = this.get('effort');
@@ -334,6 +343,21 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
   
   callbacks: SC.Object.create(),
   resourcePath: 'task',
+  
+  /**
+   * Parse a lstring and extract effort from it.
+   *
+   * @param {String} string to extract effort from.
+   * @returns {String} Task effort (number or range).
+   */
+  parseEffort: function(line) {
+    var taskEffort = null;
+    var taskEffortMatches = /\{(\d+\.\d+-\d+\.\d+|\d+\.\d+-\d+|\d+-\d+\.\d+|\d+-\d+|\d+\.\d+|\d+)\}/.exec(line);
+    if(taskEffortMatches) {
+      taskEffort = taskEffortMatches[1]? taskEffortMatches[1] : taskEffortMatches[2];
+    }
+    return taskEffort;
+  },
 
   /**
    * Parse a line of text and extract parameters from it.
@@ -369,11 +393,7 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
     }
     
     // extract task effort
-    var taskEffortMatches = /\{(\d+\.\d+-\d+\.\d+|\d+\.\d+-\d+|\d+-\d+\.\d+|\d+-\d+|\d+\.\d+|\d+)\}/.exec(taskLine);
-    var taskEffort = null;
-    if(taskEffortMatches) {
-      taskEffort = taskEffortMatches[1]? taskEffortMatches[1] : taskEffortMatches[2];
-    }
+    var taskEffort = CoreTasks.Task.parseEffort(taskLine);
            
     // extract task assignee
     var taskAssignee = null;
