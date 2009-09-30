@@ -33,10 +33,10 @@ CoreTasks.TASK_STATUS_DONE = '_Done';
 CoreTasks.TASK_STATUS_RISKY = '_Risky';
 
 CoreTasks.taskStatusWeights = {};
-CoreTasks.taskStatusWeights[CoreTasks.TASK_STATUS_DONE] = 4;
-CoreTasks.taskStatusWeights[CoreTasks.TASK_STATUS_RISKY] = 3;
-CoreTasks.taskStatusWeights[CoreTasks.TASK_STATUS_ACTIVE] = 2;
-CoreTasks.taskStatusWeights[CoreTasks.TASK_STATUS_PLANNED] = 1;
+CoreTasks.taskStatusWeights[CoreTasks.TASK_STATUS_RISKY] = 4;
+CoreTasks.taskStatusWeights[CoreTasks.TASK_STATUS_ACTIVE] = 3;
+CoreTasks.taskStatusWeights[CoreTasks.TASK_STATUS_PLANNED] = 2;
+CoreTasks.taskStatusWeights[CoreTasks.TASK_STATUS_DONE] = 1;
 
 
 // Validation status:
@@ -45,9 +45,9 @@ CoreTasks.TASK_VALIDATION_PASSED = '_Passed';
 CoreTasks.TASK_VALIDATION_FAILED = '_Failed';
 
 CoreTasks.taskValidationWeights = {};
-CoreTasks.taskValidationWeights[CoreTasks.TASK_VALIDATION_PASSED] = 3;
-CoreTasks.taskValidationWeights[CoreTasks.TASK_VALIDATION_FAILED] = 2;
-CoreTasks.taskValidationWeights[CoreTasks.TASK_VALIDATION_UNTESTED] = 1;
+CoreTasks.taskValidationWeights[CoreTasks.TASK_VALIDATION_FAILED] = 3;
+CoreTasks.taskValidationWeights[CoreTasks.TASK_VALIDATION_UNTESTED] = 2;
+CoreTasks.taskValidationWeights[CoreTasks.TASK_VALIDATION_PASSED] = 1;
 
 
 /**
