@@ -152,9 +152,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
       this.writeAttribute('effort', value);
     }
     else {
-      var effort = this.get('effort');
-      if (effort) value = effort;
-      else value = '';
+      value = this.get('effort');
     }
     return value;
   }.property('effort').cacheable(),
