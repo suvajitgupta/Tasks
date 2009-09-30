@@ -27,7 +27,7 @@ v On Firefox dragging window to make it smaller leaves TextField entry text in t
 - On Safari it is impossible to type more than one character at the start of a line via in-cell editing [SC] <SG> $Bug
 v In Safari you can't click on assigneee selection filter and then the task filter [SC] <SG> $Bug
 v Add missing 'localize' support back in CollectionView (regression from SC 0.9) [SC] <SG> $Bug
-v Beta: Make task in-cell editors fit with collection view item size [SG] <SC> @Risky $Bug
+v Make task in-cell editors fit with collection view item size [SG] <SC> $Bug
 | Fix in CSS add class .ghost to list item view and set its background to none
 - Beta: Track/optimize calls to assignments controller for redrawing tasks tree [SG] <SC> @Active
 - Allow direct bookmarking of Tasks projects (using SproutCore routes) [SG] $Feature
@@ -113,7 +113,6 @@ Application Manager GUI
 - Beta: Enable/disable Save button based on data modification [SG] <SE> $Feature
 - Beta: Add Refresh button to get most recent data from server [SG] <SE> $Feature
 - Add "Import" button in top toolbar with associated pop up panel [SG] <BB> @Done $Feature %Passed
-- Beta: Allow import of large files (such as TasksPlan.txt) [SG] <SE> $Bug @Active
 v Allow drag-n-drop of a TXT file into App for data importing (using Google Gears) [MB] <SG> @Risky $Feature
 | Gears needs to be ported to Snow Leopard
 - Add "Export" button in top toolbar with associated pop up panel [SG] @Done $Feature %Passed
