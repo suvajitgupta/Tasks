@@ -42,7 +42,7 @@
 	font-weight: normal !important;
   line-height: 12px !important;
   color: #222 !important;
-  background: #DDD none repeat scroll 0 0 !important;
+  background: #EEE none repeat scroll 0 0 !important;
   border: 1px solid #222 !important;
 }
 
@@ -96,7 +96,6 @@
   bottom: 3px !important;
   left: 2px !important;
 	width: 32px !important;
-  color: white !important;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
 }
@@ -117,7 +116,7 @@
 	font-style: normal !important;
   line-height: 12px !important;
   color: #222 !important;
-  background: #DDD none repeat scroll 0 0 !important;
+  background: #EEE none repeat scroll 0 0 !important;
   border: 1px solid #222 !important;
 }
 
@@ -193,10 +192,10 @@
   padding-bottom: 2px;
   padding-left: 3px;
   padding-right: 3px;
-  color: white;
+  color: black;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
-  background: #444 none repeat scroll 0 0;
+  background: #BBB none repeat scroll 0 0;
 }
 
 .task-validation-passed {

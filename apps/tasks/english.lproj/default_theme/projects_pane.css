@@ -40,7 +40,7 @@
 .projects-pane-inner .sc-collection-item.has-icon.sel {
   background: static_url('images/default-theme-selected-project.png') no-repeat 0 0 !important;
   font-weight: bold;
-  color: #fff !important;
+  color: #FFF !important;
 }
 
 .reserved-project-item {
@@ -60,7 +60,7 @@
 	font-weight: normal !important;
   line-height: 12px !important;
   color: #222 !important;
-  background: #DDD none repeat scroll 0 0 !important;
+  background: #EEE none repeat scroll 0 0 !important;
   border: 1px solid #222 !important;
 }
 
