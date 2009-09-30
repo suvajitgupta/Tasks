@@ -114,6 +114,7 @@
 
 .task-item .sc-outline .count {
 	font-weight: normal !important;
+	font-style: normal !important;
   line-height: 12px !important;
   color: #222 !important;
   background: #DDD none repeat scroll 0 0 !important;
