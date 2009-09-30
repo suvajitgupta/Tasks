@@ -3,6 +3,8 @@
 // ==========================================================================
 /*globals CoreTasks Tasks */
 
+sc_require('core');
+
 /** 
 
   // FIXME: [SC] this class is needed only because SC.View doesn't render tooltips

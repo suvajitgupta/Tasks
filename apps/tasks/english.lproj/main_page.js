@@ -2,6 +2,9 @@
 // Project: Tasks
 // ==========================================================================
 /*globals CoreTasks Tasks sc_require */
+
+sc_require('views/title');
+
 /** @namespace
 
   This page lays out the Tasks application user interface.
