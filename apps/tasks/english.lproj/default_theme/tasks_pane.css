@@ -39,6 +39,8 @@
 
 .assignee-item .sc-outline .count {
   right: 26px !important;
+  margin-top: 0px !important;
+  top: 5px !important;
 	font-weight: normal !important;
   line-height: 12px !important;
   color: #222 !important;
@@ -47,9 +49,11 @@
 }
 
 .assignee-item label {
+  text-transform: none !important;
   color: white !important;
+  height: 20px !important;
   left: 4px !important;
-  padding-left: 5px !important;
+  padding-left: 10px !important;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
 }
@@ -90,28 +94,28 @@
   font-size: 9px !important;
 	font-style: normal !important;
 	text-align: center !important;
-  line-height: 1.25 !important;
+  line-height: 1.5 !important;
   position: absolute !important;
   top: 3px !important;
   bottom: 3px !important;
-  left: 2px !important;
+  left: 3px !important;
 	width: 32px !important;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
 }
 
 .task-item img {
-  left: 44px !important;
+  left: 46px !important;
 }
 
 .task-item label {
-  left: 58px !important;
+  left: 61px !important;
   right: 50px !important;
   padding-left: 5px !important;
   padding-right: 5px !important;
 }
 
 .task-item .sc-outline .count {
+  margin-top: 0px !important;
+  top: 4px !important;
 	font-weight: normal !important;
 	font-style: normal !important;
   line-height: 12px !important;
@@ -188,35 +192,29 @@
  */
 
 .task-validation-untested {
-  padding-top: 2px;
-  padding-bottom: 2px;
-  padding-left: 3px;
-  padding-right: 3px;
-  color: black;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  background: #BBB none repeat scroll 0 0;
-}
-
-.task-validation-passed {
-  padding-top: 2px;
-  padding-bottom: 2px;
+  padding-top: 1px;
+  padding-bottom: 1px;
   padding-left: 3px;
   padding-right: 3px;
   color: white;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
+  background: #777 none repeat scroll 0 0;
+}
+
+.task-validation-passed {
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 3px;
+  padding-right: 3px;
+  color: white;
   background: #585 none repeat scroll 0 0;
 }
 
 .task-validation-failed {
-  padding-top: 2px;
-  padding-bottom: 2px;
+  padding-top: 1px;
+  padding-bottom: 1px;
   padding-left: 3px;
   padding-right: 3px;
   color: white;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
   background: #C55 none repeat scroll 0 0;
 }
 
