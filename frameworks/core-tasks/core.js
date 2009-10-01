@@ -119,6 +119,16 @@ CoreTasks = SC.Object.create({
   },
 
   /**
+   * A string summarizing key facets of the Project for display.
+   *
+   * @param (String) time in days
+   */
+  displayTime: function(time) {
+    if(!time) return null;
+    return time + 'd';
+  },
+  
+  /**
    * Generate unique ID for store record creation.
    *
    * @param (String) name of unimmplemented function

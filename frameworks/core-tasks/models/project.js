@@ -36,6 +36,13 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
   timeLeft: SC.Record.attr(Number),
 
   /**
+   * Append unit of time after time left.
+   */
+  displayTimeLeft: function() {
+    return CoreTasks.displayTime(this.get('timeLeft'));
+  }.property('timeLeft').cacheable(),
+  
+  /**
    * The list of tasks associated with this project.
    */
   tasks: SC.Record.toMany('CoreTasks.Task', { defaultValue: [] }),
@@ -78,7 +85,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
       return this.get('name');
     }
     
-  }.property('name', 'timeLeft').cacheable(),
+  }.property('name').cacheable(),
 
   /**
    * Adds a given task to the project.

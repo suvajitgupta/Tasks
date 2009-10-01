@@ -29,6 +29,7 @@
  */
  
 .assignee-item {
+  text-transform: none !important;
 	font-weight: bold !important;
 	border: none !important;
   background: #f2f2f2 !important;
@@ -49,7 +50,6 @@
 }
 
 .assignee-item label {
-  text-transform: none !important;
   color: white !important;
   height: 20px !important;
   left: 4px !important;
@@ -197,7 +197,7 @@
   padding-left: 3px;
   padding-right: 3px;
   color: white;
-  background: #777 none repeat scroll 0 0;
+  background: #888 none repeat scroll 0 0;
 }
 
 .task-validation-passed {

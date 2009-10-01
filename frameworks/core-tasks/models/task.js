@@ -142,6 +142,13 @@ CoreTasks.Task = CoreTasks.Record.extend({
   effort: SC.Record.attr(String),
   
   /**
+   * Append unit of time after effort.
+   */
+  displayEffort: function() {
+    return CoreTasks.displayTime(this.get('effort'));
+  }.property('effort').cacheable(),
+  
+  /**
     We are using this computed property so that we can buffer changes to 
     the effort field of a task. [JH2]
     

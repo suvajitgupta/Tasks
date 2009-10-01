@@ -266,12 +266,12 @@ Tasks.assignmentsController = SC.ArrayController.create(
       if (totalEffortMax !== totalEffortMin) {
         totalEffort += '-' + totalEffortMax;
       }
-      displayEffort = totalEffort + (taskWithUnspecifiedEffort? '?' : '');
+      displayEffort = CoreTasks.displayTime(totalEffort) + (taskWithUnspecifiedEffort? '?' : '');
     }
     
     assignmentNodes.push (SC.Object.create({
       displayName: displayName,
-      effort: displayEffort,
+      displayEffort: displayEffort,
       loading: loading,
       assignee: assigneeObj.assignee,
       treeItemChildren: tasks.sort(function(a,b) { // sort by status, then by validation (if "Done"), then by priority, lastly by type
