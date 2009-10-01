@@ -210,9 +210,9 @@ Tasks.assignmentsController = SC.ArrayController.create(
    */
   _createAssignmentNode: function(assignmentNodes, assigneeName, assigneeObj, projectTimeLeft) {
     
-    var taskWithUnspecifiedEffort = false;
+    var taskWithUnspecifiedEffort = false, doneTaskWithUnspecifiedEffort = false;
     var displayName = assigneeName;
-    var effortString, totalEffortMin = 0, totalEffortMax = 0, effortMin, effortMax;
+    var effortString, totalDoneEffortMin = 0, totalDoneEffortMax = 0, totalEffortMin = 0, totalEffortMax = 0, effortMin, effortMax;
     var task, tasks = assigneeObj.tasks;
     var len = tasks.get('length');
     if (len === 0) return; // nothing to do
@@ -231,11 +231,13 @@ Tasks.assignmentsController = SC.ArrayController.create(
       task.addObserver('status',Tasks.assignmentsController,'_contentHasChanged');
       task.addObserver('effort',Tasks.assignmentsController,'_contentHasChanged');
       
-      // Extract/total effort for each incomplete taek (simple number or a range)
-      if(task.get('status') === CoreTasks.TASK_STATUS_DONE) continue;
+      // Extract/total effort for each taek (simple number or a range)
       effortString = task.get('effort');
       var priority = task.get('priority');
-      if(!effortString && priority !== CoreTasks.TASK_PRIORITY_LOW) taskWithUnspecifiedEffort = true;
+      if(!effortString && priority !== CoreTasks.TASK_PRIORITY_LOW) {
+        if(task.get('status') === CoreTasks.TASK_STATUS_DONE) doneTaskWithUnspecifiedEffort = true;
+        else taskWithUnspecifiedEffort = true;
+      }
       if(effortString && priority !== CoreTasks.TASK_PRIORITY_LOW) {
         // sum up effort for High/Medium priority tasks
         effortMin = parseFloat(parseFloat(effortString, 10).toFixed(2));
@@ -246,12 +248,26 @@ Tasks.assignmentsController = SC.ArrayController.create(
         else { // effort IS a range, extract max
           effortMax = parseFloat(parseFloat(effortString.slice(idx+1), 10).toFixed(2));
         }
-        totalEffortMin = parseFloat((totalEffortMin + effortMin).toFixed(2));
-        totalEffortMax = parseFloat((totalEffortMax + effortMax).toFixed(2));
+        if(task.get('status') === CoreTasks.TASK_STATUS_DONE) {
+          totalDoneEffortMin = parseFloat((totalDoneEffortMin + effortMin).toFixed(2));
+          totalDoneEffortMax = parseFloat((totalDoneEffortMax + effortMax).toFixed(2));
+        }
+        else {
+          totalEffortMin = parseFloat((totalEffortMin + effortMin).toFixed(2));
+          totalEffortMax = parseFloat((totalEffortMax + effortMax).toFixed(2));
+        }
       }
     }
   
-    var displayEffort = null;
+    var displayEffort = '';
+    if(totalDoneEffortMin !== 0) {
+      var totalDoneEffort = '' + totalDoneEffortMin;
+      if (totalDoneEffortMax !== totalDoneEffortMin) {
+        totalDoneEffort += '-' + totalDoneEffortMax;
+      }
+      displayEffort = "_Done".loc() + ': ' + CoreTasks.displayTime(totalDoneEffort) + (doneTaskWithUnspecifiedEffort? '?' : '');
+    }
+    
     var loading = CoreTasks.USER_NOT_LOADED;
     if(totalEffortMin !== 0) {
       if(projectTimeLeft) { // flag user loading
@@ -266,7 +282,8 @@ Tasks.assignmentsController = SC.ArrayController.create(
       if (totalEffortMax !== totalEffortMin) {
         totalEffort += '-' + totalEffortMax;
       }
-      displayEffort = CoreTasks.displayTime(totalEffort) + (taskWithUnspecifiedEffort? '?' : '');
+      if(displayEffort !== '') displayEffort += ', ';
+      displayEffort += "_Left".loc() + ': ' + CoreTasks.displayTime(totalEffort) + (taskWithUnspecifiedEffort? '?' : '');
     }
     
     assignmentNodes.push (SC.Object.create({
