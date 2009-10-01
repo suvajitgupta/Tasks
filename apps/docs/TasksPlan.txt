@@ -17,11 +17,10 @@ v Design single/multi-user modes & access via Desktop/Web/Mobile clients [SG] <S
 
 General Infrastructure
 ^ Develop Model and Fixtures (hardcoded & generated) [SG] <SE> @Done
-- Develop States/Actions corresponding to GUI Statecharts [SG] <SE> @Active
+- Beta: Develop States/Actions corresponding to GUI Statecharts [SG] <SE> @Active
 - Support minimum resolution of 1024x768 [SG] @Done $Feature %Passed
 - Support decimal numbers for task effort and assignee effort totals [SG] @Done %Passed $Feature
 - Beta: Handle persistence consistently (nothing should save unless user hits Save) [SE] <SG> @Active
-- SimpleButton shouldn't accept clicks when isEnabled is false [SG] <JH2> $Bug
 v On Firefox need to highlight entire item & show cursor when starting to do in-cell editing [SC] <SG> $Bug
 v On Firefox dragging window to make it smaller leaves TextField entry text in the same place - they don't move [SC] <SG> $Bug @Active
 - On Safari it is impossible to type more than one character at the start of a line via in-cell editing [SC] <SG> $Bug
@@ -30,9 +29,9 @@ v Add missing 'localize' support back in CollectionView (regression from SC 0.9)
 v Make task in-cell editors fit with collection view item size [SG] <SC> $Bug
 | Fix in CSS add class .ghost to list item view and set its background to none
 - Beta: Track/optimize calls to assignments controller for redrawing tasks tree [SG] <SC> @Active
-- Allow direct bookmarking of Tasks projects (using SproutCore routes) [SG] $Feature
+- Beta: Allow direct bookmarking of Tasks projects (using SproutCore routes) [SG] @Active $Feature
 - Show newly added tasks/projects with a badge [SG] $Feature
-- Add email notifications on task changes to Assignee/Manager [SG] <SE> $Feature @Active
+- Add email notifications on task changes to Assignee/Manager [SG] <JH2> $Feature @Active
 - Add some simple metrics/reporting capabilities [SG] $Feature
 v Provide support for color-blind users (don't use color coding as only mechanism for status/validation) [SG] $Feature
 
@@ -69,10 +68,9 @@ Task Manager GUI
 - Show Task Type via different icons [SG] <JH2> @Done $Feature %Passed
 - Show Task Priority (font style), Status (font color), Validation (background color) [SG] <MB> @Done $Feature %Passed
 - Add Task Status/Priority/Validation radio buttons in tasks toolbar [SG] @Done $Feature %Passed
-v Enable Task Validation radio buttons only when in Done status [SG] <JH2> $Feature
+v Enable Task Validation radio buttons only when in Done status [SG] <JH2> $Feature @Done %Passed
 - Allow multi-selected tasks to be set to new type/status/priority/validation [SG] <BB> $Feature
 ^ Add task search filter (by id/name) & corresponding delete button in top toolbar: support type-ahead searching [SG] @Done $Feature %Passed
-- Beta: Don't lose selection after changing task assignee/priority/status/validation [SG] <SG> $Bug @Active
 ^ Allow task attribute filtering by type, priority, status, and validation fields via a toolbar button/pop up panel [SG] $Feature @Done %Passed
 - Indicate whether there is a task attribute filter via a different icon on the toolbar button [SG] $Feature @Done %Passed
 v Set tasks toolbar button enablement based on having a selection [SG] @Done $Feature %Passed
@@ -89,7 +87,6 @@ v Add hover over tooltip for assignees to show how many tasks they have and to e
 ^ Allow multi-task drag-n-drop reassignment [BB] <SG>  @Done $Feature %Passed
 ^ Add popup viewer/editor for Task Submitter, Assignee, Effort, and Description [JH2] <SG> @Done %Passed $Feature
 - Fix task pop editor location problem where it is getting cropped at the window boundary [SC] <SG> @Active $Bug
-- Fix lag in responsiveness for Tasks Description entry (bindings issue) [SG] <JH2> $Bug
 v Add context menu to Delete/Duplicate & Cut/Copy/Paste a task [SG] <JH2> $Feature
 
 User Manager GUI
@@ -101,7 +98,7 @@ User Manager GUI
 - Allow assignee filtering by matching any part of name, not just loginName [SG] $Feature
 ^ Add User Manager with "Add/Del. User"  buttons in toolbar [SG] <BB> @Done %Passed $Feature
 - Beta: Cleanup task assignee/submitter after user deletion <SE> [SG] @Active $Bug
-- Add access control based on Role (User authorization) [SG] <SE> $Feature
+- Beta: Add access control based on Role (User authorization) [SG] <SE> $Feature
 - Add password to login screen and change password dialog in User Manager [SG] <SE> $Feature
 - Add support for "Teams" (a user can belong to a team, a team can have a lead) [SG] <SE> $Feature
 
@@ -127,7 +124,7 @@ v Allow drag-n-drop of a TXT file into App for data importing (using Google Gear
 - Beta: Prompt user to save changes (if any) before logging out [SG] <SE> $Feature
 - Restore application settings/state from last login (using HTML5 storage) [SG] <MB> $Feature
 | See demo.sproutcore.com/user_defaults and lookup SproutCore blog for Charles' posting on this topic
-- Add hotkeys for common operations (like add/delete projects/tasks, changing task priority/status/validation, saving) [SG] <MB> $Feature
+- Beta: Add hotkeys for common operations (like add/delete projects/tasks, changing task priority/status/validation, saving) [SG] <MB> $Feature
 - Allow assignee/search filter crieria to be stored/used as a "Saved Search" in projects list [SG] <SE> $Feature
 v Add Undo/Redo buttons in top toolbar (till last Save) [SG] <SE> $Feature
 
@@ -137,7 +134,7 @@ Server
 - Build persistence server (using Django/Google App Engine) [SC] @Active
 - Patch SproutCore to avoid overwhelming async calls for file imports with more than 20 tasks [SE] <SG> @Done %Passed $Bug
 - Beta: Switch to latest SproutCore postback and modified SC.Store APIs <SG> [SE] @Active
-- Add Server-side authorization [SE] <SG>
+- Beta: Add Server-side authorization [SE] <SG>
 - Add server-side data validation checks/return appropriate error codes [SE] <SG>
 v Implement multi-user concurrent access using Transaction Time [SG] <SE>
 
