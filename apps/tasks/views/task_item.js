@@ -30,10 +30,8 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     If mouse was down over Description Icon open the editor.
   */  
   mouseDown: function(event) {
-    var clsNames = event.target.className.split(' ');
-    console.log("DEBUG: " + event.target.className);
-    if (clsNames.length > 0 &&
-       (clsNames[0] === 'task-editor' || clsNames[0] === 'task-description' || clsNames[0] === 'count' || clsNames[0] === 'inner')) {
+    var classes = event.target.className;
+    if (classes.match('task-editor') || classes.match('task-description') || classes.match('count') || classes.match('inner')) {
       var layer = this.get('layer');
       var that = this;
       this._editorPane = SC.PickerPane.create({
@@ -131,7 +129,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
               isTextArea: YES,
               valueBinding: SC.binding('.content.description', this),
               
-              // FIXME [JH2] It seems that there is a bug with textfields that are used as text areas, when the text goes beyond the lower boundry every keystroke causes the text to jump. I am circumventing this with what I condider a hacky way of working around this bug.
+              // FIXME [JH2] It seems that there is a bug with textfields that are used as text areas, when the text goes beyond the lower boundary every keystroke causes the text to jump. I am circumventing this with what I consider a hacky way of working around this bug.
               didBecomeKeyResponder: function(responder){
                 this.beginPropertyChanges();
               },
