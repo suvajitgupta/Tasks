@@ -92,15 +92,14 @@
 
 .toolbar-label {
   font-size: 10px !important;
-  color: #fff !important;
+  color: white !important;
   text-align: center !important;
 }
 
 .toolbar-label.disabled {
   font-size: 10px !important;
-  color: #999 !important;
+  color: #AAA !important;
   text-align: center !important;
-  font-weight: bold !important;
 }
 
 .project-add-icon {
