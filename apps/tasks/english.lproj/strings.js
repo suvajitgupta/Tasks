@@ -77,7 +77,7 @@ SC.stringsFor('English', {
   '_Planned': "Planned",
   '_Active': "Active",
   '_Done': "Done",
-  '_Left': "Left",
+  '_Todo': "Todo",
   '_Risky': "Risky",
   '_Validation': "VALIDATION",
   '_ValidationTooltip': "Specify testing status of the selected task (only for tasks that are done)",

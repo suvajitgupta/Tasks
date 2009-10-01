@@ -284,7 +284,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
         totalEffort += '-' + totalEffortMax;
       }
       if(displayEffort !== '') displayEffort += ', ';
-      displayEffort += "_Left".loc() + ': ' + CoreTasks.displayTime(totalEffort) + (taskWithUnspecifiedEffort? '?' : '');
+      displayEffort += "_Todo".loc() + ': ' + CoreTasks.displayTime(totalEffort) + (taskWithUnspecifiedEffort? '?' : '');
     }
     
     assignmentNodes.push (SC.Object.create({
