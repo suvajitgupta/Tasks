@@ -29,9 +29,11 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   /** @private
     If mouse was down over Description Icon open the editor.
   */  
-  mouseDown: function(evt) {
-    var clsNames = evt.target.className.split(' ');
-    if (clsNames.length > 0 && clsNames[0] === 'task-editor') {
+  mouseDown: function(event) {
+    var clsNames = event.target.className.split(' ');
+    console.log("DEBUG: " + event.target.className);
+    if (clsNames.length > 0 &&
+       (clsNames[0] === 'task-editor' || clsNames[0] === 'task-description' || clsNames[0] === 'count' || clsNames[0] === 'inner')) {
       var layer = this.get('layer');
       var that = this;
       this._editorPane = SC.PickerPane.create({
@@ -143,7 +145,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           ]
         })
       });
-      this._editorPane.popup(evt.target.parentNode, SC.PICKER_POINTER);
+      this._editorPane.popup(event.target.parentNode, SC.PICKER_POINTER);
     }
     return NO;
   },

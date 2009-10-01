@@ -288,7 +288,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     
     assignmentNodes.push (SC.Object.create({
       displayName: displayName,
-      displayEffort: displayEffort,
+      displayEffort: displayEffort === ''? null : displayEffort,
       loading: loading,
       assignee: assigneeObj.assignee,
       treeItemChildren: tasks.sort(function(a,b) { // sort by status, then by validation (if "Done"), then by priority, lastly by type
