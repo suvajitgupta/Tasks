@@ -38,8 +38,15 @@ Tasks.importDataPage = SC.Page.create({
 
       dataEntry: SC.TextFieldView.design({
         layout: { top: 55, left: 10, right: 10, bottom: 40 },
+        isTextArea: YES,
         valueBinding: 'Tasks.importDataController.importData',
-        isTextArea: YES
+        // FIXME: [SC] Workaround for textfields that are used as text areas, when the text goes beyond the lower boundary every keystroke causes the text to jump
+        didBecomeKeyResponder: function(responder){
+          this.beginPropertyChanges();
+        },
+        didLoseKeyResponder: function(responder){
+          this.endPropertyChanges();
+        }
       }),
       
       importButton: SC.ButtonView.design({

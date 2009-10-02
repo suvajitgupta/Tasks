@@ -101,11 +101,10 @@ Tasks.TaskItemView = SC.ListItemView.extend(
               layout: { top: 47, left: 55, width: 80, height: 16 },
               valueBinding: SC.binding('.content.effortValue', this),
               // TODO: [SG] only allow valid values for effort
-              // FIXME [JH2] Implementing the same hacky work-around as below, b/c I'm not sure if the same crap happens with a regular text field.
+              // FIXME: [SC] Workaround for textfields that are used as text areas, when the text goes beyond the lower boundary every keystroke causes the text to jump
               didBecomeKeyResponder: function(responder){
                 this.beginPropertyChanges();
               },
-              
               didLoseKeyResponder: function(responder){
                 this.endPropertyChanges();
               }
@@ -128,16 +127,13 @@ Tasks.TaskItemView = SC.ListItemView.extend(
               layout: { top: 98, left: 10, right: 10, bottom: 10 },
               isTextArea: YES,
               valueBinding: SC.binding('.content.description', this),
-              
-              // FIXME [JH2] It seems that there is a bug with textfields that are used as text areas, when the text goes beyond the lower boundary every keystroke causes the text to jump. I am circumventing this with what I consider a hacky way of working around this bug.
+              // FIXME: [SC] Workaround for textfields that are used as text areas, when the text goes beyond the lower boundary every keystroke causes the text to jump
               didBecomeKeyResponder: function(responder){
                 this.beginPropertyChanges();
               },
-              
               didLoseKeyResponder: function(responder){
                 this.endPropertyChanges();
               }
-              
             })
             
           ]
