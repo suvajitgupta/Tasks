@@ -62,6 +62,7 @@
   color: black !important;
   background: white none repeat scroll 0 0 !important;
   border: 1px solid #AAA !important;
+  opacity: 0.8;
 }
 
 .project-icon-has-tasks {

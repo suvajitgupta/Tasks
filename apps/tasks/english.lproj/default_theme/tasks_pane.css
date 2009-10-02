@@ -47,6 +47,7 @@
   color: black !important;
   background: white none repeat scroll 0 0 !important;
   border: 1px solid #AAA !important;
+  opacity: 0.8;
 }
 
 .assignee-item label {
@@ -94,10 +95,10 @@
   font-size: 9px !important;
 	font-style: normal !important;
 	text-align: center !important;
-  line-height: 1.5 !important;
+  line-height: 1.25 !important;
   position: absolute !important;
-  top: 3px !important;
-  bottom: 3px !important;
+  top: 4px !important;
+  bottom: 4px !important;
   left: 3px !important;
 	width: 32px !important;
 }
@@ -122,6 +123,7 @@
   color: black !important;
   background: white none repeat scroll 0 0 !important;
   border: 1px solid #AAA !important;
+  opacity: 0.8;
 }
 
 
@@ -198,7 +200,7 @@
   padding-right: 3px;
   color: black;
   background: #DDD none repeat scroll 0 0;
-	outline: 1px solid #666 !important;
+	outline: 1px solid #AAA !important;
 }
 
 .task-validation-passed {
@@ -208,7 +210,7 @@
   padding-right: 3px;
   color: white;
   background: #585 none repeat scroll 0 0;
-	outline: 1px solid #666 !important;
+	outline: 1px solid #585 !important;
 }
 
 .task-validation-failed {
@@ -218,7 +220,7 @@
   padding-right: 3px;
   color: white;
   background: #C55 none repeat scroll 0 0;
-	outline: 1px solid #666 !important;
+	outline: 1px solid #C55 !important;
 }
 
 
