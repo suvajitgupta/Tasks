@@ -29,7 +29,7 @@ v Add missing 'localize' support back in CollectionView (regression from SC 0.9)
 v Make task in-cell editors fit with collection view item size [SG] <SC> $Bug
 | Fix in CSS add class .ghost to list item view and set its background to none
 - Beta: Track/optimize calls to assignments controller for redrawing tasks tree [SG] <SC> @Active
-- Beta: Allow direct bookmarking of Tasks projects (using SproutCore routes) [SG] @Active $Feature
+v Beta: Allow direct bookmarking of Tasks projects (using SproutCore routes) [SG] @Active $Feature
 - Show newly added tasks/projects with a badge [SG] $Feature
 - Add email notifications on task changes to Assignee/Manager [SG] <JH2> $Feature @Active
 - Add some simple metrics/reporting capabilities [SG] $Feature
@@ -55,7 +55,7 @@ v Disable Add/Del. Tasks buttons when on "All Tasks" project [SG] <BB> @Done %Pa
 ^ Add virtual "All Tasks" & "Unallocated Tasks" projects and display them grayed out in projects list [SG] <SE> @Done
 - Disallow "All Tasks" & "Unallocated Tasks" projects from being deleted [SG] @Done $Feature %Passed
 ^ Allow multi-task drag-n-drop Task reallocation to Projects [BB] <SG> @Done $Feature %Passed
-v Add context menu to Delete a project [SG] <JH2> $Feature
+v Beta: Add context menu to Delete a project [EG] <SG> $Feature
 
 Task Manager GUI
 ^ Group Tasks by User and display Task id, summary, and effort (if specified) in curly braces [SG] <JH2> @Done $Feature %Passed
@@ -81,7 +81,7 @@ v Set tasks toolbar button enablement based on having a selection [SG] @Done $Fe
 | Logged in user is default Submitter, Assignee is either set to the same as selected task (if one) or to logged in user
 | Copy over attributes of selected task to new task
 - Clear task validation if status is changed from Done, disallow entry of Passed/Failed when task is not Done [SG] <MB> $Feature @Done %Passed
-^ Beta: Have tasks refer to projects instead of the other way around [SG] <SE>
+^ Beta: Have tasks refer to projects instead of the other way around [SE] <SG>
 ^ Show Done/Left effort subtotals (exclude Low priority tasks) in curly braces for load balancing [SG] @Done $Feature %Passed
 - Append "?" for range-based subtotals including tasks with unspecified efforts [SG] @Done $Feature %Passed
 - Color code assignee non loading in gray, under loading in green, proper loading in blue, and over loading in red [SG] @Done $Feature %Passed
@@ -89,7 +89,7 @@ v Add hover over tooltip for assignees to show how many tasks they have and to e
 ^ Allow multi-task drag-n-drop reassignment [BB] <SG>  @Done $Feature %Passed
 ^ Add popup viewer/editor for Task Submitter, Assignee, Effort, and Description [JH2] <SG> @Done %Passed $Feature
 - Fix task pop editor location problem where it is getting cropped at the window boundary [SC] <SG> @Active $Bug
-v Add context menu to Delete/Duplicate & Cut/Copy/Paste a task [SG] <JH2> $Feature
+v Beta: Add context menu to Add/Delete a task <EG> [SG] $Feature
 
 User Manager GUI
 ^ Add login screen to identify user who logs in (and handle login failures properly) [SG] <SE> @Done %Passed $Feature
@@ -99,8 +99,8 @@ User Manager GUI
 - Set assignee selection filter to logged in user if they are a Developer [SG] @Done $Feature %Passed
 - Allow assignee filtering by matching any part of name, not just loginName [SG] $Feature
 ^ Add User Manager with "Add/Del. User"  buttons in toolbar [SG] <BB> @Done %Passed $Feature
-- Beta: Cleanup task assignee/submitter after user deletion <SE> [SG] @Active $Bug
-- Beta: Add access control based on Role (User authorization) [SG] <SE> $Feature
+- Beta: Cleanup task assignee/submitter after user deletion <BB> [SG] @Active $Bug
+- Beta: Add access control based on Role (User authorization) [JH2] <SG> $Feature
 - Add password to login screen and change password dialog in User Manager [SG] <SE> $Feature
 - Add support for "Teams" (a user can belong to a team, a team can have a lead) [SG] <SE> $Feature
 
@@ -126,17 +126,17 @@ v Allow drag-n-drop of a TXT file into App for data importing (using Google Gear
 - Beta: Prompt user to save changes (if any) before logging out [SG] <SE> $Feature
 - Restore application settings/state from last login (using HTML5 storage) [SG] <MB> $Feature
 | See demo.sproutcore.com/user_defaults and lookup SproutCore blog for Charles' posting on this topic
-- Beta: Add hotkeys for common operations (like add/delete projects/tasks, changing task priority/status/validation, saving) [SG] <MB> $Feature
+- Beta: Add hotkeys for common operations (like add/delete projects/tasks, changing task priority/status/validation, saving) [EG] <SG> $Feature
 - Allow assignee/search filter crieria to be stored/used as a "Saved Search" in projects list [SG] <SE> $Feature
 v Add Undo/Redo buttons in top toolbar (till last Save) [SG] <SE> $Feature
 
 Server
 ^ Build persistence server (using Persevere) [SE] <SG> @Done %Passed
 - Create a user in Persevere at installation time [SE] <SG>
-- Build persistence server (using Django/Google App Engine) [SC] @Active
+- Beta: Build persistence server (using Google App Engine) [JH2] <SG> @Active
 - Patch SproutCore to avoid overwhelming async calls for file imports with more than 20 tasks [SE] <SG> @Done %Passed $Bug
 - Beta: Switch to latest SproutCore postback and modified SC.Store APIs <SG> [SE] @Active
-- Beta: Add Server-side authorization [SE] <SG>
+- Beta: Add Server-side authorization [JH2] <SG>
 - Add server-side data validation checks/return appropriate error codes [SE] <SG>
 v Implement multi-user concurrent access using Transaction Time [SG] <SE>
 
