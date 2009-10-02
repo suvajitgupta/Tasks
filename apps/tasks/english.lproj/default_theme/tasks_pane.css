@@ -7,6 +7,7 @@
   
 */
 
+
 /*-----------------------------------------------------------------
  * Task pane styles
  */
@@ -198,7 +199,7 @@
   padding-left: 3px;
   padding-right: 3px;
   color: black;
-  background: #DDD none repeat scroll 0 0;
+  background: #FFF none repeat scroll 0 0;
 	outline: 1px solid #AAA !important;
 }
 
@@ -251,6 +252,10 @@
 /*-----------------------------------------------------------------
  * Task selection/dragging styles
  */
+
+.sc-list-item-view.even {
+  background-color: #DDD !important;
+}
 
 .sc-theme.focus .sc-list-view.sc-source-list .sc-collection-item.sel {
 	outline: 1px solid #9CF !important;

@@ -148,6 +148,8 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     var content = this.get('content');
     if(!content) return;
     
+    context.addClass((this.get('contentIndex') % 2 === 0)? 'even' : 'odd');
+    
     var priority = content.get('priority');
     context.addClass('task-item');
     switch(priority){
