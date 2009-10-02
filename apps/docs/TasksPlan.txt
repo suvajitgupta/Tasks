@@ -70,7 +70,7 @@ Task Manager GUI
 - Add Task Status/Priority/Validation radio buttons in tasks toolbar [SG] @Done $Feature %Passed
 v Enable Task Validation radio buttons only when in Done status [SG] <JH2> $Feature @Done %Passed
 - Beta: Allow multi-selected tasks to be set to new type/status/priority/validation [SG] <JH2> $Feature
-^ Add task search filter (by id/name) & corresponding delete button in top toolbar: support type-ahead searching [SG] @Done $Feature %Passed
+^ Add task search filter (by #ids or name) & corresponding delete button in top toolbar: support type-ahead searching [SG] @Done $Feature %Passed
 ^ Allow task attribute filtering by type, priority, status, and validation fields via a toolbar button/pop up panel [SG] $Feature @Done %Passed
 v Beta: Draw task Type icons on Filter pane <JH2> [SG] $Bug
 v Beta: Disable validation checkboxes on Filter pane if "Done" not checked <JH2> [SG] $Bug
@@ -122,7 +122,7 @@ v Allow drag-n-drop of a TXT file into App for data importing (using Google Gear
 | * email notifications
 - Beta: Add Online Help button in top Toolbar & popup Help dialog [SG] <MG> @Active $Feature
 - Add onscreen help (on panel fields that are complex and on blank workspace to assist new users) [SG] @Active $Feature
-- Add Logout button to exit in top toolbar (confirm before exiting) [SG] <H2> @Done $Feature %Passed
+- Add Logout button to exit in top toolbar (confirm before exiting, reload data/clear all filters) [SG] <H2> @Done $Feature %Passed
 - Beta: Prompt user to save changes (if any) before logging out [SG] <SE> $Feature
 - Restore application settings/state from last login (using HTML5 storage) [SG] <MB> $Feature
 | See demo.sproutcore.com/user_defaults and lookup SproutCore blog for Charles' posting on this topic

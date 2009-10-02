@@ -113,6 +113,12 @@ Tasks.assignmentsController = SC.ArrayController.create(
     return this.assigneeSelection || this.searchFilter || this.attributeFilterCriteria.length !== 13;
   },
   
+  resetFilters: function() {
+    this.set('assigneeSelection', null);
+    this.set('searchFilter', null);
+    this.clearAttributeFilter();
+  },
+  
   
   // count: 0, // used for tracking/tuning calls to redraw tasks pane below
   showAssignments: function() { // show tasks for selected user that matches search filter
