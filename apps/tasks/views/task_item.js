@@ -52,14 +52,12 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         
         didBecomeKeyPaneFrom: function(pane) {
           sc_super();
-          console.log("[%@] became keyPane from [%@]".fmt(this,pane));
           var content = that.get('content');
           content.beginEditing();
           content.beginPropertyChanges();
         },
         didLoseKeyPaneTo: function(pane) {
           sc_super();
-          console.log("[%@] Lost keyPane status to [%@]".fmt(this,pane));
           var content = that.get('content');
           content.endEditing();
           content.endPropertyChanges();
