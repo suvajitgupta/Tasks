@@ -41,10 +41,10 @@ Tasks.importDataPage = SC.Page.create({
         isTextArea: YES,
         valueBinding: 'Tasks.importDataController.importData',
         // FIXME: [SC] Workaround for textfields that are used as text areas, when the text goes beyond the lower boundary every keystroke causes the text to jump
-        didBecomeKeyResponder: function(responder){
+        didBecomeKeyResponderFrom: function(responder){
           this.beginPropertyChanges();
         },
-        didLoseKeyResponder: function(responder){
+        didLoseKeyResponderTo: function(responder){
           this.endPropertyChanges();
         }
       }),

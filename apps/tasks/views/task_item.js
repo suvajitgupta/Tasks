@@ -100,10 +100,10 @@ Tasks.TaskItemView = SC.ListItemView.extend(
               valueBinding: SC.binding('.content.effortValue', this),
               // TODO: [SG] only allow valid values for effort
               // FIXME: [SC] Workaround for textfields that are used as text areas, when the text goes beyond the lower boundary every keystroke causes the text to jump
-              didBecomeKeyResponder: function(responder){
+              didBecomeKeyResponderFrom: function(responder){
                 this.beginPropertyChanges();
               },
-              didLoseKeyResponder: function(responder){
+              didLoseKeyResponderTo: function(responder){
                 this.endPropertyChanges();
               }
             }),
@@ -126,10 +126,10 @@ Tasks.TaskItemView = SC.ListItemView.extend(
               isTextArea: YES,
               valueBinding: SC.binding('.content.description', this),
               // FIXME: [SC] Workaround for textfields that are used as text areas, when the text goes beyond the lower boundary every keystroke causes the text to jump
-              didBecomeKeyResponder: function(responder){
+              didBecomeKeyResponderFrom: function(responder){
                 this.beginPropertyChanges();
               },
-              didLoseKeyResponder: function(responder){
+              didLoseKeyResponderTo: function(responder){
                 this.endPropertyChanges();
               }
             })
