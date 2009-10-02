@@ -196,8 +196,9 @@
   padding-bottom: 1px;
   padding-left: 3px;
   padding-right: 3px;
-  color: white;
-  background: #888 none repeat scroll 0 0;
+  color: black;
+  background: #f2f2f2 none repeat scroll 0 0;
+	outline: 1px solid #666 !important;
 }
 
 .task-validation-passed {
@@ -207,6 +208,7 @@
   padding-right: 3px;
   color: white;
   background: #585 none repeat scroll 0 0;
+	outline: 1px solid #666 !important;
 }
 
 .task-validation-failed {
@@ -216,6 +218,7 @@
   padding-right: 3px;
   color: white;
   background: #C55 none repeat scroll 0 0;
+	outline: 1px solid #666 !important;
 }
 
 
