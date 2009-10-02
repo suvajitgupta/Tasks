@@ -124,7 +124,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     var selectedAssigneeDisplayNames = [];
     var selectedAssignees = this.get('assigneeSelection');
     if (selectedAssignees) {
-      var selectedAssigneeLoginNames = selectedAssignees.split(" ");
+      var selectedAssigneeLoginNames = selectedAssignees.replace(/,/g, ' ').replace(/\s+/g, ' ').split(' ');
       for (var i = 0; i < selectedAssigneeLoginNames.length; i++) {
         var selectedAssigneeUser = CoreTasks.getUser(selectedAssigneeLoginNames[i]);
         if (selectedAssigneeUser) selectedAssigneeDisplayNames.push(selectedAssigneeUser.get('displayName'));

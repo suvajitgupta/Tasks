@@ -94,7 +94,7 @@ v Add context menu to Delete/Duplicate & Cut/Copy/Paste a task [SG] <JH2> $Featu
 User Manager GUI
 ^ Add login screen to identify user who logs in (and handle login failures properly) [SG] <SE> @Done %Passed $Feature
 | Replace with real Login dialog (for IE portability)
-^ Add Assignee selection filter & corresponding delete button in top toolbar [SG] <JH2> @Done $Feature %Passed
+^ Add Assignee selection filter (space or comma separators) & corresponding delete button in top toolbar [SG] <JH2> @Done $Feature %Passed
 - Beta: In Firefox fix assignee selection appearing to far left outside of text field <SG> [MG] $Bug
 - Set assignee selection filter to logged in user if they are a Developer [SG] @Done $Feature %Passed
 - Allow assignee filtering by matching any part of name, not just loginName [SG] $Feature
