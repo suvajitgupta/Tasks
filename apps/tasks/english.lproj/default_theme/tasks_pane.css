@@ -201,6 +201,7 @@
   color: black;
   background: #FFF none repeat scroll 0 0;
 	outline: 1px solid #AAA !important;
+  opacity: 0.8;
 }
 
 .task-validation-passed {
@@ -254,7 +255,7 @@
  */
 
 .sc-list-item-view.even {
-  background-color: #DDD !important;
+  background-color: #DEDEDE !important;
 }
 
 .sc-theme.focus .sc-list-view.sc-source-list .sc-collection-item.sel {
