@@ -64,15 +64,15 @@
 }
 
 .assignee-under-loaded label {
-  background: #585 none repeat scroll 0 0 !important;
+  background: #363 none repeat scroll 0 0 !important;
 }
 
 .assignee-properly-loaded label {
-  background: #55C none repeat scroll 0 0 !important;
+  background: #44A none repeat scroll 0 0 !important;
 }
 
 .assignee-over-loaded label {
-  background: #C55 none repeat scroll 0 0 !important;
+  background: #A33 none repeat scroll 0 0 !important;
 }
 
 
@@ -208,8 +208,8 @@
   padding-left: 3px;
   padding-right: 3px;
   color: white;
-  background: #585 none repeat scroll 0 0;
-	outline: 1px solid #585 !important;
+  background: #363 none repeat scroll 0 0;
+	outline: 1px solid #363 !important;
 }
 
 .task-validation-failed {
@@ -218,8 +218,8 @@
   padding-left: 3px;
   padding-right: 3px;
   color: white;
-  background: #C55 none repeat scroll 0 0;
-	outline: 1px solid #C55 !important;
+  background: #A33 none repeat scroll 0 0;
+	outline: 1px solid #A33 !important;
 }
 
 
