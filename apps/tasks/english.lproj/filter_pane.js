@@ -141,18 +141,21 @@ Tasks.filterPane = SC.SheetPane.create({
             layout: { left: 5, top: 3, width: 75 },
             escapeHTML: NO,
             title: '<span class=task-validation-untested><label>' + CoreTasks.TASK_VALIDATION_UNTESTED.loc() + '</label></span>',
+            isEnabledBinding: SC.Binding.oneWay('Tasks.assignmentsController.attributeFilterStatusDone'),
             valueBinding: 'Tasks.assignmentsController.attributeFilterValidationUntested'
           }),
           SC.CheckboxView.design({
             layout: { centerX: 0, top: 3, width: 65 },
             escapeHTML: NO,
             title: '<span class=task-validation-passed><label>' + CoreTasks.TASK_VALIDATION_PASSED.loc() + '</label></span>',
+            isEnabledBinding: SC.Binding.oneWay('Tasks.assignmentsController.attributeFilterStatusDone'),
             valueBinding: 'Tasks.assignmentsController.attributeFilterValidationPassed'
           }),
           SC.CheckboxView.design({
             layout: { right: 5, top: 3, width: 60 },
             escapeHTML: NO,
             title: '<span class=task-validation-failed><label>' + CoreTasks.TASK_VALIDATION_FAILED.loc() + '</label></span>',
+            isEnabledBinding: SC.Binding.oneWay('Tasks.assignmentsController.attributeFilterStatusDone'),
             valueBinding: 'Tasks.assignmentsController.attributeFilterValidationFailed'
           })
         ]
