@@ -26,13 +26,13 @@ v On Firefox dragging window to make it smaller leaves TextField entry text in t
 - On Safari it is impossible to type more than one character at the start of a line via in-cell editing [SC] <SG> $Bug
 v In Safari you can't click on assigneee selection filter and then the task filter [SC] <SG> $Bug
 v Add missing 'localize' support back in CollectionView (regression from SC 0.9) [SC] <SG> $Bug
-v Make task in-cell editors fit with collection view item size [SG] <SC> $Bug
+v Make task in-cell editors fit with collection view item size [SG] <JH2> $Bug
 | Fix in CSS add class .ghost to list item view and set its background to none
 - Beta: Track/optimize calls to assignments controller for redrawing tasks tree [BB] <SG> @Active
 v Beta: Allow direct bookmarking of Tasks projects (using SproutCore routes) [SG] @Active $Feature
-- Show newly added tasks/projects with a badge [SG] $Feature
+- Show newly added tasks/projects with a badge <SE> [SG] $Feature
 - Add email notifications on task changes to Assignee/Manager [SG] <JH2> $Feature @Active
-- Add some simple metrics/reporting capabilities [SG] $Feature
+- Add some simple metrics/reporting capabilities <EG> [SG] $Feature
 v Provide support for color-blind users (don't use color coding as only mechanism for status/validation) [SG] $Feature
 
 Project Manager GUI
@@ -99,8 +99,8 @@ User Manager GUI
 - Allow assignee filtering by matching any part of name, not just loginName [SG] $Feature
 ^ Add User Manager with "Add/Del. User"  buttons in toolbar [SG] <BB> @Done %Passed $Feature
 - Beta: Cleanup task assignee/submitter after user deletion <BB> [SG] @Active $Bug
-- Beta: Add access control based on Role (User authorization) [JH2] <SG> $Feature
-- Add password to login screen and change password dialog in User Manager [SG] <SE> $Feature
+- Beta: Add access control based on User's role (enable/disable GUI functionality) [SG] <SE> $Feature
+- Beta: Add password to login screen and change password dialog in User Manager [SG] <JH2> $Feature
 - Add support for "Teams" (a user can belong to a team, a team can have a lead) [SG] <SE> $Feature
 
 Application Manager GUI
@@ -132,10 +132,10 @@ v Add Undo/Redo buttons in top toolbar (till last Save) [SG] <SE> $Feature
 Server
 ^ Build persistence server (using Persevere) [SE] <SG> @Done %Passed
 - Create a user in Persevere at installation time [SE] <SG>
-- Beta: Build persistence server (using Google App Engine) [JH2] <SG> @Active
+- Build persistence server (using Google App Engine) [JH2] <SG> @Done %Passed
 - Patch SproutCore to avoid overwhelming async calls for file imports with more than 20 tasks [SE] <SG> @Done %Passed $Bug
 - Beta: Switch to latest SproutCore postback and modified SC.Store APIs <SG> [SE] @Active
-- Beta: Add Server-side authorization [JH2] <SG>
+- Beta: Add Server-based user authentication [JH2] <SG>
 - Add server-side data validation checks/return appropriate error codes [SE] <SG>
 v Implement multi-user concurrent access using Transaction Time [SG] <SE>
 
