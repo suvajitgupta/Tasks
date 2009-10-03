@@ -564,6 +564,14 @@ Tasks.mixin({
     
     }
   },
+  
+  /**
+    If the user indicated that they needed to sign up for a new account
+    then launch the signup pane.
+  */
+  launchSignupPane: function(){
+    Tasks.SIGNUP.didBecomeFirstResponder();
+  },
 
   /**
    * Logs a message indicating that the given state isn't handled in the given action.

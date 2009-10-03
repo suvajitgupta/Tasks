@@ -24,3 +24,16 @@ Tasks = SC.Object.create(SC.Statechart,
   }
   
 });
+
+/**
+  A Standard Binding transform to localize a string in a binding.
+*/
+SC.Binding.toLocale = function() {
+  return this.transform(function(value, binding) {
+    var returnValue = '';
+    if (SC.typeOf(value) === SC.T_STRING) {
+      returnValue = "%@".fmt(value).loc();
+    }
+    return returnValue;
+  });
+};

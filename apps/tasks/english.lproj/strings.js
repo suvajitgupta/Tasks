@@ -128,6 +128,12 @@ SC.stringsFor('English', {
   '_UsersLoaded': "Loaded users, ",
   '_TasksLoaded': "tasks, ",
   '_ProjectsLoaded': " and projects.",
-  '_SaveMessage': "Last saved "
+  '_SaveMessage': "Last saved ",
+  
+  // Signup Strings
+  "_Signup": "Signup",
+  "_SignupLabelButton": "Need an account? Click here.",
+  "_SignupPrompt": "Complete the information below to signup:",
+  "_User Info:": "User Info:"
   
 });

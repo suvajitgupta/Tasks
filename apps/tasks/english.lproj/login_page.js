@@ -3,7 +3,7 @@
 // ==========================================================================
 /*globals Tasks sc_require */
 sc_require('core');
-
+sc_require('mixins/simple_button');
 /** @static
     
   @extends SC.Page
@@ -20,13 +20,20 @@ Tasks.loginPage = SC.Page.create({
     
     contentView: SC.View.design({
       layout: { left: 0, right: 0, top: 0, bottom: 0},
-      childViews: 'tasksLogo loginPrompt loginEntry loginErrorMessage loginButton cancelButton'.w(),
+      childViews: 'tasksLogo loginPrompt loginEntry loginErrorMessage loginButton cancelButton signUp'.w(),
       
       tasksLogo: SC.LabelView.design({
         layout: { top: 10,  left: 10, height: 26, width: 89 },
         classNames: ['tasks-logo']
       }),
-    
+      
+      signUp: SC.LabelView.design(Tasks.SimpleButton,{
+        layout: { bottom: 8, left: 10, height: 24, width: 200 },
+        value: "_SignupLabelButton".loc(),
+        target: 'Tasks',
+        action: 'launchSignupPane'
+      }),
+      
       loginPrompt: SC.LabelView.design({
         layout: { top: 18, left: 130, width: 75, height: 24 },
         value: "_LoginName:".loc()
