@@ -33,25 +33,25 @@ Tasks.filterPane = SC.SheetPane.create({
 
       SC.View.design({
         layout: { top: 22, height: 24, left: 10, right: 10 },
-        classNames: ['task-attribute-set'],
+        classNames: ['task-attribute-set', 'checkbox-icon'],
         childViews: [
           SC.CheckboxView.design({
-            layout: { left: 5, top: 4, width: 65 },
-            title: CoreTasks.TASK_TYPE_FEATURE.loc(),
-            valueBinding: 'Tasks.assignmentsController.attributeFilterTypeFeature',
-            icon: 'task-icon-feature'
+            layout: { left: 5, top: 4, width: 85 },
+            escapeHTML: NO,
+            title: '<img src="%@" alt="" class="task-icon-feature" />&nbsp;'.fmt(static_url('blank')) + CoreTasks.TASK_TYPE_FEATURE.loc(),
+            valueBinding: 'Tasks.assignmentsController.attributeFilterTypeFeature'
           }),
           SC.CheckboxView.design({
-            layout: { centerX: 0, top: 4, width: 45 },
-            title: CoreTasks.TASK_TYPE_BUG.loc(),
-            valueBinding: 'Tasks.assignmentsController.attributeFilterTypeBug',
-            icon: 'task-icon-bug'
+            layout: { centerX: 0, top: 4, width: 65 },
+            escapeHTML: NO,
+            title: '<img src="%@" alt="" class="task-icon-bug" />&nbsp;'.fmt(static_url('blank')) + CoreTasks.TASK_TYPE_BUG.loc(),
+            valueBinding: 'Tasks.assignmentsController.attributeFilterTypeBug'
           }),
           SC.CheckboxView.design({
-            layout: { right: 5, top: 4, width: 55 },
-            title: CoreTasks.TASK_TYPE_OTHER.loc(),
-            valueBinding: 'Tasks.assignmentsController.attributeFilterTypeOther',
-            icon: 'task-icon-other'
+            layout: { right: 5, top: 4, width: 75 },
+            escapeHTML: NO,
+            title: '<img src="%@" alt="" class="task-icon-other" />&nbsp;'.fmt(static_url('blank')) + CoreTasks.TASK_TYPE_OTHER.loc(),
+            valueBinding: 'Tasks.assignmentsController.attributeFilterTypeOther'
           })
         ]
       }),
