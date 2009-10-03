@@ -106,6 +106,7 @@ SC.stringsFor('English', {
   '_Manager': "Manager",
   '_Developer': "Developer",
   '_Tester': "Tester",
+  '_Guest': 'Guest',
   '_Submitter:': "Submitter: ",
   '_Assignee:': "Assignee: ",
   '_AssigneeNotLoaded': ", currently not loaded; ",
@@ -134,6 +135,9 @@ SC.stringsFor('English', {
   "_Signup": "Signup",
   "_SignupLabelButton": "Need an account? Click here.",
   "_SignupPrompt": "Complete the information below to signup:",
-  "_User Info:": "User Info:"
+  "_User Info:": "User Info:",
+  "_Email:": "Email:",
+  "_InvalidEmailAddress": "This email address",
+  "_EmailAddress": "Your Email Address"
   
 });

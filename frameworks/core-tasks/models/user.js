@@ -10,7 +10,8 @@ CoreTasks.NEW_USER_LOGIN_NAME = '_Initials';
 CoreTasks.USER_ROLE_MANAGER = '_Manager';
 CoreTasks.USER_ROLE_DEVELOPER = '_Developer'; // default
 CoreTasks.USER_ROLE_TESTER = '_Tester';
-CoreTasks.roles = [ CoreTasks.USER_ROLE_MANAGER, CoreTasks.USER_ROLE_DEVELOPER, CoreTasks.USER_ROLE_TESTER ];
+CoreTasks.USER_ROLE_GUEST = '_Guest'; // I added this as a role type that would allow viewing && commenting status only [JH2]
+CoreTasks.roles = [ CoreTasks.USER_ROLE_MANAGER, CoreTasks.USER_ROLE_DEVELOPER, CoreTasks.USER_ROLE_TESTER, CoreTasks.USER_ROLE_GUEST ];
 
 
 // Loading:
@@ -47,9 +48,15 @@ CoreTasks.User = CoreTasks.Record.extend({
     allowed: [
       CoreTasks.USER_ROLE_MANAGER, 
       CoreTasks.USER_ROLE_DEVELOPER,
-      CoreTasks.USER_ROLE_TESTER
+      CoreTasks.USER_ROLE_TESTER,
+      CoreTasks.USER_ROLE_GUEST
     ]
-  }), 
+  }),
+  
+  /**
+    The email address of the user.
+  */
+  emailAddress: SC.Record.attr(String),
 
   /**
    * key:value pairs storing the user's preferences.
