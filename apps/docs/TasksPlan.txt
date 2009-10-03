@@ -28,7 +28,7 @@ v In Safari you can't click on assigneee selection filter and then the task filt
 v Add missing 'localize' support back in CollectionView (regression from SC 0.9) [SC] <SG> $Bug
 v Make task in-cell editors fit with collection view item size [SG] <SC> $Bug
 | Fix in CSS add class .ghost to list item view and set its background to none
-- Beta: Track/optimize calls to assignments controller for redrawing tasks tree [SG] <SC> @Active
+- Beta: Track/optimize calls to assignments controller for redrawing tasks tree [BB] <SG> @Active
 v Beta: Allow direct bookmarking of Tasks projects (using SproutCore routes) [SG] @Active $Feature
 - Show newly added tasks/projects with a badge [SG] $Feature
 - Add email notifications on task changes to Assignee/Manager [SG] <JH2> $Feature @Active
@@ -39,7 +39,7 @@ Project Manager GUI
 ^ Add Master/Detail Explorer view with click selection of Projects showing corresponding Tasks [JH2] <SG> @Done $Feature %Passed
 ^ Show Project name & time left in curly braces (if specified) [SG] <JH2> @Done $Feature %Passed
 - Use icon to indicate if Project has any tasks or not [SG] @Done $Feature %Passed
-- Beta: Support alpha sorting of projects [SG] <JH2> @Active $Feature
+- Beta: Support alpha sorting of projects [SG] <JH2> @Risky $Feature
 v Add hover over tooltip for projects to show how many tasks they contain [SG] @Done $Feature %Passed
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done $Feature %Passed
 v Make All/Unallocated Tasks project names to be non-editable upon double clicking @Done %Passed $Feature <JH2> [SG]
@@ -80,7 +80,7 @@ v Set tasks toolbar button enablement based on having a selection [SG] @Done $Fe
 | Logged in user is default Submitter, Assignee is either set to the same as selected task (if one) or to logged in user
 | Copy over attributes of selected task to new task
 - Clear task validation if status is changed from Done, disallow entry of Passed/Failed when task is not Done [SG] <MB> $Feature @Done %Passed
-^ Beta: Have tasks refer to projects instead of the other way around [SE] <SG>
+^ Beta: Have tasks refer to projects instead of the other way around [SE] <SG> @Active
 ^ Show Done/Left effort subtotals (exclude Low priority tasks) in curly braces for load balancing [SG] @Done $Feature %Passed
 - Append "?" for range-based subtotals including tasks with unspecified efforts [SG] @Done $Feature %Passed
 - Color code assignee non loading in gray, under loading in green, proper loading in blue, and over loading in red [SG] @Done $Feature %Passed
