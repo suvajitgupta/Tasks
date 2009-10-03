@@ -37,7 +37,7 @@ v Provide support for color-blind users (don't use color coding as only mechanis
 
 Project Manager GUI
 ^ Add Master/Detail Explorer view with click selection of Projects showing corresponding Tasks [JH2] <SG> @Done $Feature %Passed
-^ Show Project name & time left in curly braces (if specified) [SG] <JH2> @Done $Feature %Passed
+^ Show Project name & time left (if specified) on far right [SG] <JH2> @Done $Feature %Passed
 - Use icon to indicate if Project has any tasks or not [SG] @Done $Feature %Passed
 - Beta: Support alpha sorting of projects [SG] <JH2> @Risky $Feature
 v Add hover over tooltip for projects to show how many tasks they contain [SG] @Done $Feature %Passed
@@ -58,7 +58,7 @@ v Disable Add/Del. Tasks buttons when on "All Tasks" project [SG] <BB> @Done %Pa
 v Beta: Add context menu to Delete a project [EG] <SG> $Feature
 
 Task Manager GUI
-^ Group Tasks by User and display Task id, summary, and effort (if specified) in curly braces [SG] <JH2> @Done $Feature %Passed
+^ Group Tasks by User and display Task id, summary, and effort (if specified) on far right [SG] <JH2> @Done $Feature %Passed
 ^ Fix missing/flashing scrollbar on Firefox/Windows [SC] <SG> $Bug @Active
 | To reproduce: search for a Task in search bar or select AllTasks, scroll down, select a task, then select another project)
 ^ Support smart sorting of tasks by status, validation, priority, and type (in order)[SG] <SG> @Done $Feature %Passed
@@ -81,7 +81,7 @@ v Set tasks toolbar button enablement based on having a selection [SG] @Done $Fe
 | Copy over attributes of selected task to new task
 - Clear task validation if status is changed from Done, disallow entry of Passed/Failed when task is not Done [SG] <MB> $Feature @Done %Passed
 ^ Beta: Have tasks refer to projects instead of the other way around [SE] <SG> @Active
-^ Show Done/Left effort subtotals (exclude Low priority tasks) in curly braces for load balancing [SG] @Done $Feature %Passed
+^ Show Done/Left effort subtotals (exclude Low priority tasks) on far right for load balancing [SG] @Done $Feature %Passed
 - Append "?" for range-based subtotals including tasks with unspecified efforts [SG] @Done $Feature %Passed
 - Color code assignee non loading in gray, under loading in green, proper loading in blue, and over loading in red [SG] @Done $Feature %Passed
 v Add hover over tooltip for assignees to show how many tasks they have and to explain loading color codes [SG] @Done $Feature %Passed
