@@ -51,11 +51,15 @@ body {
 
 .sc-view.sc-checkbox-view span {
   font-size: 10px !important;
+  text-align: left !important;
+}
+
+.checkbox-icon .icon {
+  position: absolute;
+  top: 0;
+  left: 20px;
 }
 
 .checkbox-icon .label {
-	text-align: left !important;
-  /*
-  // TODO: [MG] figure out how to make this text label move up to center vertically next to checkbox
-  */
+  left: 38px !important;
 }
