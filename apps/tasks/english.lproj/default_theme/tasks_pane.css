@@ -94,6 +94,7 @@
 
 .task-id {
   font-size: 9px !important;
+	font-weight: normal !important;
 	font-style: normal !important;
 	text-align: center !important;
   line-height: 1.25 !important;
