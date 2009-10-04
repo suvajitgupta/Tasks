@@ -2,6 +2,8 @@
 // Tasks.SIGNUP
 //============================================================================
 /*globals CoreTasks Tasks*/
+sc_require('core');
+sc_require('lib/sha1');
 /**
 
   This will serve as the responder to all signup actions
@@ -13,7 +15,7 @@
 
 */
 
-Tasks.SIGNUP = SC.Responder.create({
+Tasks.SIGNUP = SC.Responder.create(Tasks.Sha1,{
   
   // when we become first responder, always show the signup panel
   didBecomeFirstResponder: function() {
@@ -52,6 +54,7 @@ Tasks.SIGNUP = SC.Responder.create({
   
   // called when the OK button is pressed.
   submit: function() {
+    Tasks.signupController.set('password',this.sha1ify());
     this._store.commitChanges();
     this._store = null ;
     
@@ -76,6 +79,18 @@ Tasks.SIGNUP = SC.Responder.create({
     if(panel) {
       panel.focus();
     }
+  },
+  
+  sha1ify: function(){
+    var ret;
+    var userLogin = Tasks.signupController.get('loginName');
+    var userPassword = Tasks.signupController.get('password');
+    if (userLogin && userPassword) {
+      ret = this.sha1Hash('--%@--%@--'.fmt(userLogin,userPassword));
+    }else{
+      ret = "";
+    }
+    return ret;
   }
   
 });

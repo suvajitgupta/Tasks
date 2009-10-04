@@ -23,7 +23,7 @@ Tasks.signupPage = SC.Page.design({
 
     contentView: SC.View.design({
       
-      childViews: "prompt signUpButton cancelButton personalLabel loginName fullName emailLabel emailField roleLabel roleSelect".w(),
+      childViews: "prompt signUpButton cancelButton personalLabel loginName fullName emailLabel emailField passwordLabel passwordField roleLabel roleSelect".w(),
       
       // PROMPT
       prompt: SC.LabelView.design({
@@ -65,14 +65,27 @@ Tasks.signupPage = SC.Page.design({
         valueBinding: SC.binding('Tasks.signupController.emailAddress').toLocale()
       }),
       
-      roleLabel: SC.LabelView.design({
+      passwordLabel: SC.LabelView.design({
         layout: { top: 104, left: 20, width: 70, height: 18 },
+        textAlign: SC.ALIGN_RIGHT,
+        value: "_Password:".loc()
+      }),
+      
+      passwordField: SC.TextFieldView.design({
+        layout: { top: 104, left: 100, height: 20, width: 310 },
+        hint: "_PasswordHint".loc(),
+        isPassword: YES,
+        valueBinding: SC.binding('Tasks.signupController.password').toLocale()
+      }),
+      
+      roleLabel: SC.LabelView.design({
+        layout: { top: 136, left: 20, width: 70, height: 18 },
         textAlign: SC.ALIGN_RIGHT,
         value: "_Role:".loc()
       }),
       
       roleSelect: SC.SelectFieldView.design({
-        layout: { top: 104, left: 97, height: 20, width: 318 },
+        layout: { top: 136, left: 97, height: 20, width: 318 },
         localize: YES,
         objects: CoreTasks.roles,
         valueBinding: 'Tasks.signupController.role'

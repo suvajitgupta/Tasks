@@ -138,6 +138,8 @@ SC.stringsFor('English', {
   "_User Info:": "User Info:",
   "_Email:": "Email:",
   "_InvalidEmailAddress": "This email address",
-  "_EmailAddress": "Your Email Address"
+  "_EmailAddress": "Your Email Address",
+  "_Password:": "Password",
+  "_PasswordHint": "Your Password"
   
 });

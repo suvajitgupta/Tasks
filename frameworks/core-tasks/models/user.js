@@ -57,6 +57,11 @@ CoreTasks.User = CoreTasks.Record.extend({
     The email address of the user.
   */
   emailAddress: SC.Record.attr(String),
+  
+  /**
+    The password for the user. {SHA1-ified}
+  */
+  password: SC.Record.attr(String),
 
   /**
    * key:value pairs storing the user's preferences.
