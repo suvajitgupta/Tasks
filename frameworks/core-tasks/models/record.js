@@ -7,6 +7,7 @@ sc_require('models/record_attribute');
  *
  * @extends SC.Record
  * @author Suvajit Gupta
+ * @author Sean Eidemiller
  */
 CoreTasks.Record = SC.Record.extend({
 
@@ -14,6 +15,14 @@ CoreTasks.Record = SC.Record.extend({
    * The primary key for all Tasks records is the "id" attribute.
    */
   primaryKey: 'id',
+
+  /**
+   * An initial ID assigned by the client and echoed back by the server.
+   *
+   * This is needed so that the client is able to recognize a persisted record after it's ID has
+   * been properly set by the server.
+   */
+  _id: SC.Record.attr(Number),
 
   /**
    * A one-line summary of the record.
