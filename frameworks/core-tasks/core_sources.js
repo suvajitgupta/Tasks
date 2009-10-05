@@ -191,6 +191,9 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
     var recordType = store.recordTypeFor(storeKey);
     var resourcePath = recordType.resourcePath;
 
+    // Set the created-at time on the data hash.
+    dataHash.createdAt = SC.DateTime.create().get('milliseconds');
+
     // Build the request and send it off to the server.
     this._postRequest.set('address', CoreTasks.getFullResourcePath(resourcePath));
     this._postRequest.notify(this, this._createCompleted, SC.merge({
@@ -239,6 +242,9 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
     var recordType = store.recordTypeFor(storeKey);
     var resourcePath = recordType.resourcePath;
     var id = store.idFor(storeKey);
+
+    // Set the updated-at time on the data hash.
+    dataHash.updatedAt = SC.DateTime.create().get('milliseconds');
 
     // Build the request and send it off to the server.
     this._putRequest.set('address', CoreTasks.getFullResourcePath(resourcePath, id));
