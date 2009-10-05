@@ -55,6 +55,7 @@ v Disable Add/Del. Tasks buttons when on "All Tasks" project [SG] <BB> @Done %Pa
 ^ Add virtual "All Tasks" & "Unallocated Tasks" projects and display them grayed out in projects list [SG] <SE> @Done
 - Disallow "All Tasks" & "Unallocated Tasks" projects from being deleted [SG] @Done $Feature %Passed
 ^ Allow multi-task drag-n-drop Task reallocation to Projects [BB] <SG> @Done $Feature %Passed
+^ Beta: Add popup viewer/editor for Project time left [SG] $Feature @Active
 v Beta: Add context menu to Delete a project [EG] <SG> $Feature
 
 Task Manager GUI
@@ -70,7 +71,7 @@ Task Manager GUI
 - Add Task Status/Priority/Validation radio buttons in tasks toolbar [SG] @Done $Feature %Passed
 v Enable Task Validation radio buttons only when in Done status [SG] <JH2> $Feature @Done %Passed
 - Beta: Allow multi-selected tasks to be set to new type/status/priority/validation [SG] <JH2> $Feature
-^ Add task search filter (by #ids or name) & corresponding delete button in top toolbar: support type-ahead searching [SG] @Done $Feature %Passed
+^ Beta: Add task search filter (by #ids or name) & corresponding delete button in top toolbar: support type-ahead searching [SG] @Active $Feature
 ^ Allow task attribute filtering by type, priority, status, and validation fields via a toolbar button/pop up panel [SG] $Feature @Done %Passed
 v Beta: Draw task Type icons on Filter pane <JH2> [SG] $Bug
 - Indicate whether there is a task attribute filter via a different icon on the toolbar button [SG] $Feature @Done %Passed
@@ -98,9 +99,9 @@ User Manager GUI
 - Set assignee selection filter to logged in user if they are a Developer [SG] @Done $Feature %Passed
 - Allow assignee filtering by matching any part of name, not just loginName [SG] $Feature
 ^ Add User Manager with "Add/Del. User"  buttons in toolbar [SG] <BB> @Done %Passed $Feature
-- Beta: Cleanup task assignee/submitter after user deletion <BB> [SG] $Bug
+- Beta: Cleanup task assignee/submitter after user deletion <BB> [SG] $Bug @Active
 - Beta: Add access control based on User's role (enable/disable GUI functionality) [SG] <SE> $Feature
-- Beta: Add password to login screen and change password dialog in User Manager [SG] <JH2> $Feature
+- Beta: Add password to login screen and change password dialog in User Manager [JH2] <SG> $Feature @Active
 - Add support for "Teams" (a user can belong to a team, a team can have a lead) [SG] <SE> $Feature
 
 Application Manager GUI
@@ -134,8 +135,8 @@ Server
 - Create a user in Persevere at installation time [SE] <SG>
 - Build persistence server (using Google App Engine) [JH2] <SG> @Done %Passed
 - Patch SproutCore to avoid overwhelming async calls for file imports with more than 20 tasks [SE] <SG> @Done %Passed $Bug
-- Beta: Switch to latest SproutCore postback and modified SC.Store APIs <SG> [SE] @Active
-- Beta: Add Server-based user authentication [JH2] <SG>
+- Beta: Switch to latest SproutCore postback and modified SC.Store APIs <SG> [SE]
+- Beta: Add Server-based user authentication [JH2] <SG> @Active
 - Add server-side data validation checks/return appropriate error codes [SE] <SG>
 v Implement multi-user concurrent access using Transaction Time [SG] <SE>
 
