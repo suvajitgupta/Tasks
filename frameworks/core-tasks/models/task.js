@@ -67,11 +67,6 @@ CoreTasks.Task = CoreTasks.Record.extend({
   name: SC.Record.attr(String, { isRequired: YES, defaultValue: CoreTasks.NEW_TASK_NAME }),
 
   /**
-   * Multi-line comments about the task (may be release notes for a feature or steps to reproduce a bug)
-   */
-  description: SC.Record.attr(String),
-  
-  /**
    * The type of the task (see below for possible values).
    */
   type: SC.Record.attr(String, {

@@ -13,6 +13,16 @@ CoreTasks.Record = SC.Record.extend({
   /**
    * The primary key for all Tasks records is the "id" attribute.
    */
-  primaryKey: 'id'
+  primaryKey: 'id',
+
+  /**
+   * A one-line summary of the record.
+   */
+  name: SC.Record.attr(String),
+
+  /**
+   * Multi-line comments about the record.
+   */
+  description: SC.Record.attr(String)
 
 });
