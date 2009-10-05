@@ -50,12 +50,21 @@ CoreTasks = SC.Object.create({
    * @param {Hash} dataHash An optional data hash to seed the new record.
    */
   createRecord: function(recordType, dataHash) {
+    if (!dataHash) dataHash = {};
+
+    // Assign the new record a negative integer ID (will be overwritten upon persistence to the
+    // server, but certain SC mechanisms require that all records have a primary key).
+    if (dataHash.id === undefined) {
+      dataHash.id = this._currentRecordId;
+      this._currentRecordId--;
+    }
+
     // Check to see if the record defines a createRecord function (if it does, call it).
     if (recordType.createRecord) {
       return recordType.createRecord(recordType, dataHash);
     } else {
       // Otherwise, call createRecord on the store.
-      return this.get('store').createRecord(recordType, (dataHash ? dataHash : {}));
+      return this.get('store').createRecord(recordType, dataHash);
     }
   },
 
@@ -156,16 +165,11 @@ CoreTasks = SC.Object.create({
     else ret = time; // already number of days
     return parseFloat(parseFloat(ret, 10).toFixed(3));
   },
-  
-  /**
-   * Generate unique ID for store record creation.
-   *
-   * @param (String) name of unimmplemented function
-   */
-  generateId: function() {
-    return -(this._nextId++);
-  },
-  _nextId: 0
+
+  // Used to assign all newly-created records with a negative ID.
+  // TODO: [SE] Reset the counter so that we don't run out of integers if the client is left
+  // running for a very long time.
+  _currentRecordId: -1
 
 });
 
