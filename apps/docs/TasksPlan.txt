@@ -51,7 +51,7 @@ v Disallow duplicate project names after editing, provide warning to user for du
 v Add summary in projects toolbar showing number of projects & number of tasks for selected project [SG] <MB> @Done $Feature %Passed
 v Set projects toolbar button enablement based on having a selection [SG] @Done $Feature %Passed
 v Disable Add/Del. Tasks buttons when on "All Tasks" project [SG] <BB> @Done %Passed $Feature
-- Select first project at startup [SG] <JH2> @Done $Feature %Passed
+- Beta: Select first project at startup [SG] <JH2> @Active $Feature
 ^ Add virtual "All Tasks" & "Unallocated Tasks" projects and display them grayed out in projects list [SG] <SE> @Done
 - Disallow "All Tasks" & "Unallocated Tasks" projects from being deleted [SG] @Done $Feature %Passed
 ^ Allow multi-task drag-n-drop Task reallocation to Projects [BB] <SG> @Done $Feature %Passed
@@ -62,7 +62,7 @@ Task Manager GUI
 ^ Group Tasks by User and display Task id, summary, and effort (if specified) on far right [SG] <JH2> @Done $Feature %Passed
 ^ Fix missing/flashing scrollbar on Firefox/Windows [SC] <SG> $Bug @Active
 | To reproduce: search for a Task in search bar or select AllTasks, scroll down, select a task, then select another project)
-^ Support smart sorting of tasks by status, validation, priority, and type (in order)[SG] <SG> @Done $Feature %Passed
+^ Support automatic sorting of tasks by status, validation, priority, and type (in order)[SG] <SG> @Done $Feature %Passed
 - Allow Tasks under an assignee to be hidden/disclosed [SG] <JH2> @Done $Feature %Passed
 - Allow SourceListView disclosures to be opened/closed propperly (Apple has on priority list) [SC] <SG> @Active $Bug
 - Drag-n-drop in SourceListView is broken (Apple has on priority list) [SC] <SG> @Active $Bug
@@ -94,6 +94,7 @@ v Beta: Add context menu to Add/Delete a task <EG> [SG] $Feature
 User Manager GUI
 ^ Add login screen to identify user who logs in (and handle login failures properly) [SG] <SE> @Done %Passed $Feature
 | Replace with real Login dialog (for IE portability)
+- Add a user signup capability to login screen [JH2] <SG> @Done %Passed $Feature
 ^ Add Assignee selection filter (space or comma separators) & corresponding delete button in top toolbar [SG] <JH2> @Done $Feature %Passed
 - Beta: In Firefox fix assignee selection appearing to far left outside of text field <SG> [MG] $Bug
 - Set assignee selection filter to logged in user if they are a Developer [SG] @Done $Feature %Passed
@@ -126,7 +127,7 @@ v Allow drag-n-drop of a TXT file into App for data importing (using Google Gear
 - Beta: Prompt user to save changes (if any) before logging out [SG] <SE> $Feature
 - Restore application settings/state from last login (using HTML5 storage) [SG] <MB> $Feature
 | See demo.sproutcore.com/user_defaults and lookup SproutCore blog for Charles' posting on this topic
-v Beta: Add hotkeys for common operations (like add/delete projects/tasks, changing task priority/status/validation, saving) [EG] <SG> $Feature
+v Beta: Add hotkeys for common operations (like add/delete projects/tasks, changing task priority/status/validation, saving) [EG] <SG> $Feature @Active
 - Allow assignee/search filter crieria to be stored/used as a "Saved Search" in projects list [SG] <SE> $Feature
 v Add Undo/Redo buttons in top toolbar (till last Save) [SG] <SE> $Feature
 
