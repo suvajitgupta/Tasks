@@ -13,7 +13,7 @@ CoreTasks.Record = SC.Record.extend({
 
   init: function() {
     sc_super();
-    this.set('createdAt', SC.DateTime.create());
+    this.writeAttribute('createdAt', SC.DateTime.create().get('milliseconds'));
   },
 
   /**
