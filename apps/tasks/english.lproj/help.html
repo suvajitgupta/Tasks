@@ -1,10 +1,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <html>
 <head>
-  <title>My first styled page</title>
   <style type="text/css">
   body {
     color: #222;
+		font-family: "Lucida Sans","Lucida Grande",Verdana,Arial,sans-serif;
 		font-style: normal;
 		font-size: 12px;
     background-color: #fafafa
@@ -12,63 +12,56 @@
   </style>
 </head>
 <body>
-	<h1>Introduction</h1>
-		<p>This is a quick reference guide to Tasks.  This will help you understand the key concepts and learn how to the the application.</p>
-	<h1>Concepts</h1>
-	<h2>Project</h2>
-		<p>A <b>project</b> is an initiative with a <i>name</i> and <i>time left</i>.  A project contains zero or more <b>tasks</b></p>
-	<h2>Task</h2>
-		<p>A <b>task</b> is an atomic unit of work.  A task has several attributes:</p>
+	<h2>Introduction</h2>
+		<p>Tasks is built around a few simple concepts.  A "task" is something a "user" does and tasks are grouped into "projects."  A user "submits" (or creates) tasks and these are "assigned" to users.  Sets of tasks are "allocated" to a project.  A project may be an initiative or a release. The Tasks user interface is comprised of the following sections:</p>
 		<ul>
-			<li><i>name</i>: one-line summary describing the task, you may want to name related tasks with a common prefix followed by a colon</li>
-			<li><i>priority</i>: High or Medium (default) or Low (High ones must be completed, Low ones not included in effort subtotals</li>
-			<li><i>effort</i>: estimate => actual, in days</li>
-			<li><i>submitter</i>: User who submitted this task</li>
-			<li><i>assignee</i>: User to whom this task is assigned</li>
-			<li><i>type</i>: kind of task to support testing workflow - Feature or Bug or Other (default)</li>
-			<li><i>status</i>: development status - Planned (default) or Active or Done or Risky</li>
-			<li><i>validation</i>: validation status - Untested (default) or Passed or Failed</li>
-			<li><i>description</i>: (multi-line) additional information such as Feature details, Bug reproduction steps, or Release Notes</li>
+			<li>A "dock" at the top with some global action buttons</li>
+			<li>A "toolbar" below that with actions to manipulate projects and tasks</li>
+			<li>A "workspace" in the middle where projects are shown in a "master" list on the left and tasks are shown in the "detail" list on the right</li>
+			<li>A "control bar" near the bottom containing controls to manipulate task attributes</li>
+			<li>A "status bar" at the bottom to display system messages</li>
 		</ul>
-	<h2>User</h2>
-		<p>A team member with a <i>login name</i> and <i>full name</i> as well as a <i>role</i> (one of Manager, Developer, or Tester).  A user logs into the Tasks aplication and are task <i>assignees</i> and <i>submitters</i></p>
-	<h1>Basic Features</h1>
-		<p>To begin, click on "Add Project" to create your project and type in a name for it.  When you select a project in the list it shows its tasks on the right side.  You can remove a selected project by clicking on the "Del. Project" button.</p>
-		<p>Click "Add Task" to create your tasks.  Type in the task descriptions and periodically save your work.</p>
-		<pre>
-		^ Add virtual "All Tasks" & "Unallocated Tasks" projects to group all & unallocated tasks respectively [SG] <SE> @Done
-		- Allow Tasks under a User to be hidden/shown [SG] <JH2> @Done
-		- Show type via different icons [SG] <JH2> @Done
-		- Show priority (font style), status (font color), validation (background color) [SG] <MB> @Done
-		- Add Status/Priority/Validation radio buttons in tasks toolbar [SG] <EO> @Done
-		^ Add "+" & "-" buttons in tasks toolbar (logged in user is default Submitter for added tasks) [SG] <SE> @Done
-		^ Allow drag-n-drop reordering (preserve order when persisting) [SG] @Done
-		^ Allow multi-task drag-n-drop reassignment [BB] <SG>  @Done
-		^ Add popup viewer/editor for Descriptions [JH2] <SG> @Done
-		- Add status bar at the bottom summarizing stats about Tasks data [SG] <MB> @Active
-		- Add "Save" button in top toolbar, provide confirmation after save operation finishes [SG] <SE> @Active
-		- Add Logout button to exit in top toolbar [SG] <SE> @Active
-		</pre>
-	<h1>Advanced Features</h1>
-		<pre>
-		^ Show Project time left in curly braces (if specified) [SG] <JH2> @Done
-		^ Display Task summary & effort (if specified) in curly braces [SG] <JH2> @Done
-		^ Add multi-task drag-n-drop reordering [BB] <SG> @Active
-		^ Allow multi-task drag-n-drop Task reallocation to Projects [BB] <SG> @Active
-		^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done
-		v Add context menu to Delete a project [SG] <EG>
-		^ Add Search Filter & corresponding delete button in top toolbar: support type-ahead searching [SG] <DC> @Done
-		^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done
-		^ Show effort subtotals (exclude Done or Low priority tasks) in curly braces for load balancing [SG] @Done
-		- Append "?" for range-based subtotals including tasks with unspecified efforts [SG] @Done
-		- Indicate overloaded assignees (with more effort total than timeLeft in project) by color-coding them red [SG]
-		v Add context menu & hotkeys to Edit/Cut/Copy/Paste/Delete/Duplicate a task [SG] <EG>
-		^ Add Assignee selection filter in top toolbar [SG] <JH2> @Done
-		- Add "+" & "-" buttons in users toolbar and "X" button in top toolbar to return [SG] <JH2>
-		- Add access control based on Role (User authorization) [SG] <SE>
-		- Add "Import" button in top toolbar with associated pop up panel [BB] <SG> @Done
-		- Add "Export" button in top toolbar with associated pop up panel [SG] @Done
-		- Add Settings button/popup to manage Users and preferences [SG] <JH2>
-		</pre>
+		<h2>Getting Started</h2>
+		<h3>Projects</h3>
+			<p>To begin, click on "Add Project" to create a project and type in its name. To view a project's tasks, simply click on the project.  To rename a project double click on its name and change it.  To delete a project select it and then click on the "Del. Project" button.</p>
+		<h3>Tasks</h3>
+			<p>Tasks are grouped by assignee and displayed using various kinds of color coding - the legend is shown in the bottom control bar.  To create a task, click on the "Add Task" button and enter the name of the task.  After that, you typically set the task's attributes via the radio buttons in the control bar.  You may also click on the icon to the far right of the task to get a popup editor and enter additional details about the task.  Update a task's name by double clicking on it.  Delete a task using the "Del. Task" on the selected task.  To reassign a task to another user, simply drag and drop it to the target user if they are visible or use the tak popup editor to change the assignee.  To reallocate a task to another project drag and drop it on the target project in the master list.  Note: you can select multiple tasks at once and perform delete/reassign/reallocate operations.</p>
+		<h3>Users</h3>
+			<p>Click on the "Settings" button in the dock to acsess the User Manager panel.  Here you can add/modify/delete users.</p>
+	<h2>Advanced Features</h2>
+		<h3>Filtering</h3>
+			<p>Another useful feature is task filtering - you may do that in three ways: click on the "Filter Tasks" button and specify the task attributes you want to see, specify task assignees, or search using task ids or names in the search bar.  Filtering happens as you type - you will see the results immediately.</p>
+		<p>There are two virtual projects at the top of the projects list called "All Tasks" and "Unallocated Tasks" projects to show all and unallocated tasks respectively. Remember that Tasks is a rich client and you must use the Save button in the dock to periodically save your work.</p>
+		<h3>Load Balancing</h3>
+			<p>To use this feature, you can specify the "time left" in a project as well as the "effort" for tasks.  The system will automatically total the efforts for each assignee and indicate their loading via color coding. A "?" is appended for range-based subtotals including tasks with unspecified efforts.</p>
+		<h3>Data Exchange</h3>
+			<p>Tasks allows data to be exchanged via a simple import/export mechanism.  Use the "Import" button in the toolbar to bring data into the application.  Use the "Export" button to output Tasks data to another Tasks application or some other system.</p>
+	<h2>Hidden Features</h2>
+		<p>Tasks has some great power-user features that are hidden to avoid confusing regular users.  As you get more comfortable with Tasks, try to learn these shortcuts to save yourself a lot of time.</p>
+		<ul>
+			<li>Right clicking on project and tasks provides a context menu</li>
+			<li>Hotkeys are available for most of the common actions</li>
+			<li>You can type in a project's "time left" inline by typing it within curly braces</li>
+			<li>You can type in a tasks' attributes using the same syntax for Import/Export!</li>
+		</ul>
+	<h2>Reference Guide</h2>
+		<p>This section goes into details about the various entities used in the application.</p>
+		<h3>Project</h3>
+			<p>A <b>project</b> is an initiative with a <i>name</i> and <i>time left</i>.  A project contains zero or more <b>tasks</b></p>
+		<h3>Task</h3>
+			<p>A <b>task</b> is an atomic unit of work.  A task has several attributes:</p>
+			<ul>
+				<li><i>name</i>: one-line summary describing the task, you may want to name related tasks with a common prefix followed by a colon</li>
+				<li><i>priority</i>: High or Medium (default) or Low (High ones must be completed, Low ones not included in effort subtotals</li>
+				<li><i>effort</i>: estimate => actual, in days</li>
+				<li><i>submitter</i>: User who submitted this task</li>
+				<li><i>assignee</i>: User to whom this task is assigned</li>
+				<li><i>type</i>: kind of task to support testing workflow - Feature or Bug or Other (default)</li>
+				<li><i>status</i>: development status - Planned (default) or Active or Done or Risky</li>
+				<li><i>validation</i>: validation status - Untested (default) or Passed or Failed</li>
+				<li><i>description</i>: (multi-line) additional information such as Feature details, Bug reproduction steps, or Release Notes</li>
+			</ul>
+		<h3>User</h3>
+			<p>A team member with a <i>login name</i> and <i>full name</i> as well as a <i>role</i> (one of Manager, Developer, or Tester).  A user logs into the Tasks aplication and are task <i>assignees</i> and <i>submitters</i></p>
 </body>
 </html>

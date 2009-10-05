@@ -28,7 +28,7 @@ v In Safari you can't click on assigneee selection filter and then the task filt
 v Add missing 'localize' support back in CollectionView (regression from SC 0.9) [SC] <SG> $Bug
 v Make task in-cell editors fit with collection view item size [SG] <JH2> $Bug
 | Fix in CSS add class .ghost to list item view and set its background to none
-- Beta: Track/optimize calls to assignments controller for redrawing tasks tree [BB] <SG> @Active
+v Beta: Track/optimize calls to assignments controller for redrawing tasks tree [BB] <SG> @Active
 v Beta: Allow direct bookmarking of Tasks projects (using SproutCore routes) [SG] @Active $Feature
 - Show newly added tasks/projects with a badge <SE> [SG] $Feature
 - Add email notifications on task changes to Assignee/Manager [SG] <JH2> $Feature @Active
@@ -98,7 +98,7 @@ User Manager GUI
 - Set assignee selection filter to logged in user if they are a Developer [SG] @Done $Feature %Passed
 - Allow assignee filtering by matching any part of name, not just loginName [SG] $Feature
 ^ Add User Manager with "Add/Del. User"  buttons in toolbar [SG] <BB> @Done %Passed $Feature
-- Beta: Cleanup task assignee/submitter after user deletion <BB> [SG] @Active $Bug
+- Beta: Cleanup task assignee/submitter after user deletion <BB> [SG] $Bug
 - Beta: Add access control based on User's role (enable/disable GUI functionality) [SG] <SE> $Feature
 - Beta: Add password to login screen and change password dialog in User Manager [SG] <JH2> $Feature
 - Add support for "Teams" (a user can belong to a team, a team can have a lead) [SG] <SE> $Feature
@@ -125,7 +125,7 @@ v Allow drag-n-drop of a TXT file into App for data importing (using Google Gear
 - Beta: Prompt user to save changes (if any) before logging out [SG] <SE> $Feature
 - Restore application settings/state from last login (using HTML5 storage) [SG] <MB> $Feature
 | See demo.sproutcore.com/user_defaults and lookup SproutCore blog for Charles' posting on this topic
-- Beta: Add hotkeys for common operations (like add/delete projects/tasks, changing task priority/status/validation, saving) [EG] <SG> $Feature
+v Beta: Add hotkeys for common operations (like add/delete projects/tasks, changing task priority/status/validation, saving) [EG] <SG> $Feature
 - Allow assignee/search filter crieria to be stored/used as a "Saved Search" in projects list [SG] <SE> $Feature
 v Add Undo/Redo buttons in top toolbar (till last Save) [SG] <SE> $Feature
 
