@@ -13,6 +13,10 @@ Design/Planning
 - Define Tasks TXT file format for data import/export [SG] <SE> @Done
 - Design REST API supporting CRUD operations [SG] <SE> @Done
 - Design Tasks Server & evaluate persistence frameworks [SE] <SG> @Done
+- Design Role-based access control to be implemented on client and server <JH2> [SG] @Done
+| Managers have permission to do full CRUD on Projects/Tasks/Users & Import
+| Developers/Testers can only R on Projects, CRUD on Tasks, and Import Tasks (not create new Projects)
+| Guests only have R on all entities
 v Design single/multi-user modes & access via Desktop/Web/Mobile clients [SG] <SE> @Active
 
 General Infrastructure
@@ -28,8 +32,8 @@ v In Safari you can't click on assigneee selection filter and then the task filt
 v Add missing 'localize' support back in CollectionView (regression from SC 0.9) [SC] <SG> $Bug
 v Make task in-cell editors fit with collection view item size [SG] <JH2> $Bug
 | Fix in CSS add class .ghost to list item view and set its background to none
-v Beta: Track/optimize calls to assignments controller for redrawing tasks tree [BB] <SG> @Active
-v Beta: Allow direct bookmarking of Tasks projects (using SproutCore routes) [SG] @Active $Feature
+v Track/optimize calls to assignments controller for redrawing tasks tree [BB] <SG> @Active
+v Allow direct bookmarking of Tasks projects (using SproutCore routes) [SG] $Feature
 - Show newly added tasks/projects with a badge <SE> [SG] $Feature
 - Add email notifications on task changes to Assignee/Manager [SG] <JH2> $Feature @Active
 - Add some simple metrics/reporting capabilities <EG> [SG] $Feature
@@ -39,7 +43,7 @@ Project Manager GUI
 ^ Add Master/Detail Explorer view with click selection of Projects showing corresponding Tasks [JH2] <SG> @Done $Feature %Passed
 ^ Show Project name & time left (if specified) on far right [SG] <JH2> @Done $Feature %Passed
 - Use icon to indicate if Project has any tasks or not [SG] @Done $Feature %Passed
-- Beta: Support alpha sorting of projects [SG] <JH2> @Risky $Feature
+- Beta: Support alpha sorting of projects [SG] <JH2> @Active $Feature
 v Add hover over tooltip for projects to show how many tasks they contain [SG] @Done $Feature %Passed
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done $Feature %Passed
 v Make All/Unallocated Tasks project names to be non-editable upon double clicking @Done %Passed $Feature <JH2> [SG]
@@ -56,7 +60,7 @@ v Disable Add/Del. Tasks buttons when on "All Tasks" project [SG] <BB> @Done %Pa
 - Disallow "All Tasks" & "Unallocated Tasks" projects from being deleted [SG] @Done $Feature %Passed
 ^ Allow multi-task drag-n-drop Task reallocation to Projects [BB] <SG> @Done $Feature %Passed
 ^ Beta: Add popup viewer/editor for Project time left [SG] $Feature @Active
-v Beta: Add context menu to Delete a project [EG] <SG> $Feature
+v Add context menu to Add/Delete a project <SG> [JH2] $Feature
 
 Task Manager GUI
 ^ Group Tasks by User and display Task id, summary, and effort (if specified) on far right [SG] <JH2> @Done $Feature %Passed
@@ -89,19 +93,18 @@ v Add hover over tooltip for assignees to show how many tasks they have and to e
 ^ Allow multi-task drag-n-drop reassignment [BB] <SG>  @Done $Feature %Passed
 ^ Add popup viewer/editor for Task Submitter, Assignee, Effort, and Description [JH2] <SG> @Done %Passed $Feature
 - Fix task pop editor location problem where it is getting cropped at the window boundary [SC] <SG> @Active $Bug
-v Beta: Add context menu to Add/Delete a task <EG> [SG] $Feature
+v Add context menu to Add/Delete a task <SG> [JH2] $Feature
 
 User Manager GUI
 ^ Add login screen to identify user who logs in (and handle login failures properly) [SG] <SE> @Done %Passed $Feature
-| Replace with real Login dialog (for IE portability)
-- Add a user signup capability to login screen [JH2] <SG> @Done %Passed $Feature
+- Beta: Add a guest signup capability to login screen (reuse view with User Manager) [JH2] <SG> @Active $Feature
 ^ Add Assignee selection filter (space or comma separators) & corresponding delete button in top toolbar [SG] <JH2> @Done $Feature %Passed
 - Beta: In Firefox fix assignee selection appearing to far left outside of text field <SG> [MG] $Bug
 - Set assignee selection filter to logged in user if they are a Developer [SG] @Done $Feature %Passed
 - Allow assignee filtering by matching any part of name, not just loginName [SG] $Feature
-^ Add User Manager with "Add/Del. User"  buttons in toolbar [SG] <BB> @Done %Passed $Feature
+^ Beta: Add User Manager with "Add/Del. User"  buttons in toolbar (ask to reenter password) [SG] <JH2> @Active $Feature
 - Beta: Cleanup task assignee/submitter after user deletion <BB> [SG] $Bug @Active
-- Beta: Add access control based on User's role (enable/disable GUI functionality) [SG] <SE> $Feature
+- Beta: Enable/disable GUI functionality to enforce Role-based access control [SG] <JH2> $Feature
 - Beta: Add password to login screen and change password dialog in User Manager [JH2] <SG> $Feature @Active
 - Add support for "Teams" (a user can belong to a team, a team can have a lead) [SG] <SE> $Feature
 
@@ -127,17 +130,17 @@ v Allow drag-n-drop of a TXT file into App for data importing (using Google Gear
 - Beta: Prompt user to save changes (if any) before logging out [SG] <SE> $Feature
 - Restore application settings/state from last login (using HTML5 storage) [SG] <MB> $Feature
 | See demo.sproutcore.com/user_defaults and lookup SproutCore blog for Charles' posting on this topic
-v Beta: Add hotkeys for common operations (like add/delete projects/tasks, changing task priority/status/validation, saving) [EG] <SG> $Feature @Active
+v Add hotkeys for common operations (like add/delete projects/tasks and save) [EG] <SG> $Feature @Done %Passed
 - Allow assignee/search filter crieria to be stored/used as a "Saved Search" in projects list [SG] <SE> $Feature
 v Add Undo/Redo buttons in top toolbar (till last Save) [SG] <SE> $Feature
 
 Server
 ^ Build persistence server (using Persevere) [SE] <SG> @Done %Passed
 - Create a user in Persevere at installation time [SE] <SG>
-- Build persistence server (using Google App Engine) [JH2] <SG> @Done %Passed
+^ Beta: Build persistence server (local using Sinatra/SQLite and remote using Google App Engine) [JH2] <SG> @Active
 - Patch SproutCore to avoid overwhelming async calls for file imports with more than 20 tasks [SE] <SG> @Done %Passed $Bug
 - Beta: Switch to latest SproutCore postback and modified SC.Store APIs <SG> [SE]
-- Beta: Add Server-based user authentication [JH2] <SG> @Active
+- Beta: Implement Server-based user authentication & authorization (Role-based access control) [JH2] <SG> @Active
 - Add server-side data validation checks/return appropriate error codes [SE] <SG>
 v Implement multi-user concurrent access using Transaction Time [SG] <SE>
 
