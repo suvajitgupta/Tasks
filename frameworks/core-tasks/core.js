@@ -413,7 +413,7 @@ CoreTasks = SC.Object.create({
     else ret = time; // already number of days
     return parseFloat(parseFloat(ret, 10).toFixed(3));
   },
-  
+
   // Used to assign all newly-created records with a negative ID.
   // TODO: [SE] Reset the counter so that we don't run out of integers if the client is left
   // running for a very long time.
