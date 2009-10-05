@@ -13,15 +13,9 @@ CoreTasks.UNALLOCATED_TASKS_NAME = '_UnallocatedTasks';
  *
  * @extends CoreTasks.Record
  * @author Suvajit Gupta
+ * @author Sean Eidemiller
  */
 CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototype */ {
-
-  /*
-  init: function() {
-    sc_super();
-    this.set('tasks', []);
-  },
-  */
 
   /**
    * The name of the project (ex. "FR1").
@@ -36,17 +30,32 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
   timeLeft: SC.Record.attr(String),
 
   /**
+   * A read-only computed property that returns the list of tasks associated with this project.
+   *
+   * @returns {SC.RecordArray} An array of tasks.
+   */
+  tasks: function() {
+    // Create the query if necessary.
+    if (!this._tasksQuery) {
+      this._tasksQuery = SC.Query.create({ recordType: CoreTasks.Task });
+    }
+
+    // Narrow the conditions.
+    this._tasksQuery.set('conditions', 'projectId = %@');
+    this._tasksQuery.set('parameters', [this.get('id')]);
+
+    // Execute the query and return the results.
+    return this.get('store').findAll(this._tasksQuery);
+
+  }.property('id').cacheable(),
+
+  /**
    * Append unit of time after time left.
    */
   displayTimeLeft: function() {
     return CoreTasks.displayTime(this.get('timeLeft'));
   }.property('timeLeft').cacheable(),
   
-  /**
-   * The list of tasks associated with this project.
-   */
-  tasks: SC.Record.toMany('CoreTasks.Task', { defaultValue: [] }),
-
   /**
    * The path to the icon associated with a project.
    */
@@ -91,32 +100,26 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
    * Adds a given task to the project.
    */
   addTask: function(task) {
-    var tasks = this.get('tasks'); 
-    tasks.pushObject(task);
-
-    // Not quite sure why this has to be executed in a new run loop, but it does (saw this in a
-    // unit test; didn't work before).
+    // This has to be done in a separate run loop so that the dynamic "tasks" query is recomputed
+    // *after* the change is made to the store.
     SC.RunLoop.begin();
-    this.set('tasks', tasks);
+    task.set('projectId', this.get('id'));
     SC.RunLoop.end();
 
-    return tasks;
+    return this.get('tasks'); 
   },
 
   /**
    * Removes a given task from the project.
    */
   removeTask: function(task) {
-    var tasks = this.get('tasks'); 
-    tasks.removeObject(task);
-
-    // Not quite sure why this has to be executed in a new run loop, but it does (saw this in a
-    // unit test; didn't work before).
+    // This has to be done in a separate run loop so that the dynamic "tasks" query is recomputed
+    // *after* the change is made to the store.
     SC.RunLoop.begin();
-    this.set('tasks', tasks);
+    task.set('projectId', null);
     SC.RunLoop.end();
 
-    return tasks;
+    return this.get('tasks');
   },
 
   /**
@@ -132,7 +135,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
     ret += ' # ' + "_Has".loc() + this.get('tasks').get('length') + "_Tasks".loc();
     return ret + '\n';
   }
-  
+
 });
 
 CoreTasks.Project.mixin(/** @scope CoreTasks.Project */ {

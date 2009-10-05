@@ -115,7 +115,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
   /**
    * A back-pointer to the project that this task belongs to.
    */
-  project: SC.Record.attr(Number),
+  projectId: SC.Record.attr(Number),
 
   status: function(key, value){
      var currentStatus = this.get('statusValue');
