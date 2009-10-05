@@ -11,6 +11,11 @@ sc_require('models/record_attribute');
  */
 CoreTasks.Record = SC.Record.extend({
 
+  init: function() {
+    sc_super();
+    this.set('createdAt', SC.DateTime.create());
+  },
+
   /**
    * The primary key for all Tasks records is the "id" attribute.
    */
