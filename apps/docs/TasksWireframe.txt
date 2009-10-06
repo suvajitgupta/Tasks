@@ -327,7 +327,7 @@
     </control>
     <control controlID="64" controlTypeID="com.balsamiq.mockups::Label" x="428" y="47" w="-1" h="-1" measuredW="90" measuredH="25" zOrder="62" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>Welcome%20user</text>
+        <text>Hi%20user</text>
       </controlProperties>
     </control>
     <control controlID="65" controlTypeID="com.balsamiq.mockups::Button" x="810" y="44" w="-1" h="-1" measuredW="66" measuredH="28" zOrder="63" locked="false" isInGroup="-1">
