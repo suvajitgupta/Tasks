@@ -52,7 +52,7 @@ SC.stringsFor('English', {
   '_UnallocatedTasks': "Unallocated Tasks",
   '_Has': "Has ",
   '_Tasks': " task(s)",
-  '_ProjectTimeLeftTooltip': "; Time left in days (if specified within curly braces) shown on right",
+  '_ProjectTimeLeftTooltip': "; Time left (if specified) shown on right",
   
   // Task strings
   '_AddTask': "Add Task",
@@ -89,7 +89,7 @@ SC.stringsFor('English', {
   '_EffortOnscreenHelp': "You may leave effort unspecified, enter a decimal value like 0.25, or a range like 2-3",
   '_Description:': "Description:",
   '_SubmitterTooltip': "Submitter is ",
-  '_TaskEffortTooltip': "Effort in days (if specified) shown on right",
+  '_TaskEffortTooltip': "Effort (if specified) shown on right",
   '_IdTooltip': "Unique ID for task, background color indicates validation status",
   '_EditorTooltip': "Click to view/edit task details (submitter, assignee, effort, and description)",
   
@@ -113,7 +113,7 @@ SC.stringsFor('English', {
   '_AssigneeUnderLoaded': ", currently under loaded; ",
   '_AssigneeProperlyLoaded': ", currently properly loaded; ",
   '_AssigneeOverloaded': ", currently overloaded; ",
-  '_AssigneeEffortTooltip': "Remaining effort in days (if any) shown on right",
+  '_AssigneeEffortTooltip': "Remaining effort (if any) shown on right",
   
   // Popup Pane/Panel strings
   '_EnableAll': "Enable All",
