@@ -127,7 +127,7 @@ v Allow drag-n-drop of a TXT file into App for data importing (using Google Gear
 | * email notifications
 - Add Online Help button in top Toolbar & popup Help dialog [SG] @Done %Passed $Feature
 - Add onscreen help (on panel fields that are complex and on blank workspace to assist new users) [SG] @Active $Feature
-- Add Logout button to exit in top toolbar (confirm before exiting, reload data/clear all filters) [SG] <H2> @Done $Feature %Passed
+- Add Logout button to exit in top toolbar (confirm before exiting, reload data/clear all filters) [SG] <JH2> @Done $Feature %Passed
 - Beta: Prompt user to save changes (if any) before logging out [SG] <SE> $Feature
 - Restore application settings/state from last login (using HTML5 storage) [SG] <MB> $Feature
 | See demo.sproutcore.com/user_defaults and lookup SproutCore blog for Charles' posting on this topic
