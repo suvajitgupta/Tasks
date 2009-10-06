@@ -314,7 +314,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
     
     ret += this.get('name');
     var effort = this.get('effort');
-    if(effort) ret += (' {' + effort + '}');
+    if(effort) ret += (' {' + effort + 'd}');
     
     user = this.get('submitter');
     if (user) ret += ' <' + user.get('loginName') + '>';
@@ -359,7 +359,7 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
    */
   parseEffort: function(line) {
     var taskEffort = null;
-    var taskEffortMatches = /\{(\d+\.\d+-\d+\.\d+|\d+\.\d+-\d+|\d+-\d+\.\d+|\d+-\d+|\d+\.\d+|\d+)\}/.exec(line);
+    var taskEffortMatches = /\{(\d+\.\d+-\d+\.\d+|\d+\.\d+-\d+|\d+-\d+\.\d+|\d+-\d+|\d+\.\d+|\d+)[d]*\}/.exec(line);
     if(taskEffortMatches) {
       taskEffort = taskEffortMatches[1]? taskEffortMatches[1] : taskEffortMatches[2];
     }
