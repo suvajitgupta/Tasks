@@ -4,6 +4,10 @@
 		"name":"user",
 		"schema":{
 			"properties":{
+				"_id":{
+					"type":"any",
+					"optional":true
+				},
 				"name":{
 					"type":"any",
 					"optional":false
@@ -34,16 +38,28 @@
 		"name":"project",
 		"schema":{
 			"properties":{
+				"_id":{
+					"type":"any",
+					"optional":true
+				},
 				"name":{
 					"type":"any",
 					"optional":false
 				},
-				"timeLeft":{
+				"description":{
 					"type":"any",
 					"optional":true
 				},
-				"tasks":{
-					"type":"array",
+				"createdAt":{
+					"type":"number",
+					"optional":true
+				},
+				"updatedAt":{
+					"type":"number",
+					"optional":true
+				},
+				"timeLeft":{
+					"type":"any",
 					"optional":true
 				}
 			},
@@ -56,12 +72,20 @@
 		"name":"task",
 		"schema":{
 			"properties":{
+				"_id":{
+					"type":"number",
+					"optional":true
+				},
 				"name":{
 					"type":"any",
 					"optional":false
 				},
 				"description":{
 					"type":"any",
+					"optional":true
+				},
+				"projectId":{
+					"type":"number",
 					"optional":true
 				},
 				"type":{
@@ -88,6 +112,14 @@
 					"optional":true
 				},
 				"assignee":{
+					"optional":true
+				},
+				"createdAt":{
+					"type":"number",
+					"optional":true
+				},
+				"updatedAt":{
+					"type":"number",
 					"optional":true
 				}
 			},
