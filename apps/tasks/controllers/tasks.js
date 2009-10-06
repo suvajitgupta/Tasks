@@ -14,13 +14,6 @@ Tasks.tasksController = SC.TreeController.create(
   treeItemIsGrouped: YES,
   
   isAddable: function() {
-    var assigneeSelection = Tasks.assignmentsController.get('assigneeSelection');
-    if(assigneeSelection) { // only allow task addition if a task for one of the filtered assignees is selected
-      var sel = this.get('selection');
-      if(!sel) return false;
-      var selectedTask = sel.firstObject();
-      if(!selectedTask) return false;
-    }
     return this._isAllTasksProjectSelected();
   }.property('selection').cacheable(),
 

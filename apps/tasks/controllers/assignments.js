@@ -152,39 +152,37 @@ Tasks.assignmentsController = SC.ArrayController.create(
       
     // Group tasks by user & separate unassigned tasks
     var assignees = {}, assigneeName, assignee, assignmentNodes = [];
-    this.forEach( 
-      function(task){ // FIXME: [SC] unclear why task is null at times
-        if(!task) return; 
-        assignee = task.get('assignee');
-        if (assignee && !assignee.get) { // FIXME: [SC] unclear why assigneee.get() is null at times
-          return;
+    this.forEach(function(task){
+      if(!task) return;  // FIXME: [SC] unclear why task is null at times
+      assignee = task.get('assignee');
+      var taskName = task.get('name');
+      var isNewTask = (taskName === CoreTasks.NEW_TASK_NAME.loc()); // Always display "new task"s
+      if (assignee && !assignee.get) return; // FIXME: [SC] unclear why assigneee.get is null at times
+      assigneeName = assignee? assignee.get('displayName') : CoreTasks.USER_UNASSIGNED;
+      if(isNewTask || selectedAssigneeDisplayNames.length === 0 || selectedAssigneeDisplayNames.indexOf(assigneeName) !== -1) {
+        var assigneeObj = assignees[assigneeName];
+        if(!assigneeObj) {
+          assigneeObj = { assignee: assignee, tasks: [] };
+          assignees[assigneeName] = assigneeObj;
         }
-        assigneeName = assignee ? assignee.get('displayName') : CoreTasks.USER_UNASSIGNED;
-        if(selectedAssigneeDisplayNames.length === 0 || selectedAssigneeDisplayNames.indexOf(assigneeName) !== -1) {
-          var assigneeObj = assignees[assigneeName];
-          if(!assigneeObj) {
-            assigneeObj = { assignee: assignee, tasks: [] };
-            assignees[assigneeName] = assigneeObj;
+        
+        // Filter tasks that meet filter criteria
+        if(!isNewTask) {
+          var type = task.get('type');
+          if(this.attributeFilterCriteria.indexOf(type) === -1) return;
+          var priority = task.get('priority');
+          if(this.attributeFilterCriteria.indexOf(priority) === -1) return;
+          var status = task.get('status');
+          if(this.attributeFilterCriteria.indexOf(status) === -1) return;
+          if(status === CoreTasks.TASK_STATUS_DONE) {
+            var validation = task.get('validation');
+            if(this.attributeFilterCriteria.indexOf(validation) === -1) return;
           }
-          
-          // Filter tasks that meet filter criteria
-          if(task.get('name') !== CoreTasks.NEW_TASK_NAME.loc()) { // Always display "new task"s
-            var type = task.get('type');
-            if(this.attributeFilterCriteria.indexOf(type) === -1) return;
-            var priority = task.get('priority');
-            if(this.attributeFilterCriteria.indexOf(priority) === -1) return;
-            var status = task.get('status');
-            if(this.attributeFilterCriteria.indexOf(status) === -1) return;
-            if(status === CoreTasks.TASK_STATUS_DONE) {
-              var validation = task.get('validation');
-              if(this.attributeFilterCriteria.indexOf(validation) === -1) return;
-            }
-            if(!(task.get('name').match(rx) || ('' + task.get('id')).match(rx))) return;
-          }
-          assigneeObj.tasks.push(task);
+          if(!(taskName.match(rx) || ('' + task.get('id')).match(rx))) return;
         }
-      },
-    this);
+        assigneeObj.tasks.push(task);
+      }
+    }, this);
   
     for(assigneeName in assignees){
       if(assignees.hasOwnProperty(assigneeName)) {

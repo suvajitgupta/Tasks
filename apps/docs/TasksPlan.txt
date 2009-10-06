@@ -84,7 +84,7 @@ v Set tasks toolbar button enablement based on having a selection [SG] @Done $Fe
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done $Feature %Passed
 ^ Add "Add Task" & "Del. Task" buttons in tasks toolbar [SG] <SE> @Done $Feature %Passed
 | Logged in user is default Submitter, Assignee is either set to the same as selected task (if one) or to logged in user
-| Copy over attributes of selected task to new task
+| Copy over type/priority attributes of selected task to new task
 - Clear task validation if status is changed from Done, disallow entry of Passed/Failed when task is not Done [SG] <MB> $Feature @Done %Passed
 ^ Beta: Have tasks refer to projects instead of the other way around [SE] <SG> @Active
 ^ Show Done/Left effort subtotals (exclude Low priority tasks) on far right for load balancing [SG] @Done $Feature %Passed
