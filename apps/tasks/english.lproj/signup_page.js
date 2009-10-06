@@ -97,6 +97,7 @@ Tasks.signupPage = SC.Page.design({
         title: "_Signup".loc(),
         theme: 'capsule',
         keyEquivalent: 'return',
+        isDefault: YES,
         action: "submit",
         isEnabledBinding: SC.Binding.oneWay('Tasks.signupController.password').bool()
       }),
@@ -106,6 +107,7 @@ Tasks.signupPage = SC.Page.design({
         title: "_Cancel".loc(),
         theme: 'capsule',
         keyEquivalent: 'escape',
+        isCancel: YES,
         action: "cancel"
       })
       
