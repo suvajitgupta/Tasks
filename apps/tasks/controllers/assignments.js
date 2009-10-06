@@ -168,17 +168,19 @@ Tasks.assignmentsController = SC.ArrayController.create(
           }
           
           // Filter tasks that meet filter criteria
-          var type = task.get('type');
-          if(this.attributeFilterCriteria.indexOf(type) === -1) return;
-          var priority = task.get('priority');
-          if(this.attributeFilterCriteria.indexOf(priority) === -1) return;
-          var status = task.get('status');
-          if(this.attributeFilterCriteria.indexOf(status) === -1) return;
-          if(status === CoreTasks.TASK_STATUS_DONE) {
-            var validation = task.get('validation');
-            if(this.attributeFilterCriteria.indexOf(validation) === -1) return;
+          if(task.get('name') !== CoreTasks.NEW_TASK_NAME.loc()) { // Always display "new task"s
+            var type = task.get('type');
+            if(this.attributeFilterCriteria.indexOf(type) === -1) return;
+            var priority = task.get('priority');
+            if(this.attributeFilterCriteria.indexOf(priority) === -1) return;
+            var status = task.get('status');
+            if(this.attributeFilterCriteria.indexOf(status) === -1) return;
+            if(status === CoreTasks.TASK_STATUS_DONE) {
+              var validation = task.get('validation');
+              if(this.attributeFilterCriteria.indexOf(validation) === -1) return;
+            }
+            if(!(task.get('name').match(rx) || ('' + task.get('id')).match(rx))) return;
           }
-          if(!(task.get('name').match(rx) || ('' + task.get('id')).match(rx))) return;
           assigneeObj.tasks.push(task);
         }
       },

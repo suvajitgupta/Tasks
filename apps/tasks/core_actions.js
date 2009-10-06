@@ -418,7 +418,6 @@ Tasks.mixin({
     var taskHash = SC.merge({ 'submitter': user, 'assignee': user }, CoreTasks.Task.NEW_TASK_HASH);
     taskHash.name = CoreTasks.NEW_TASK_NAME.loc();
     var searchFilter = Tasks.assignmentsController.get('searchFilter');
-    if (searchFilter) taskHash.name = searchFilter + ' ' + taskHash.name;
     var task = CoreTasks.createRecord(CoreTasks.Task, taskHash);
     // task.id = CoreTasks.generateId(); // For FIXTUREs
 
@@ -434,8 +433,6 @@ Tasks.mixin({
         if(taskAssignee) task.set('assignee', taskAssignee);
         task.set('type', selectedObject.get('type'));
         task.set('priority', selectedObject.get('priority'));
-        task.set('status', selectedObject.get('status'));
-        task.set('validation', selectedObject.get('validation'));
       }
     }
 
