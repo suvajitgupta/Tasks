@@ -1,8 +1,11 @@
 Class({
   id: "project",
   properties: {
+    _id: { type: "any", optional: true },
     name: { type: "any", optional: false },
-    timeLeft: { type: "any", optional: true },
-    tasks: { type: "array", optional: true }
+    description: { type: "any", optional: true },
+    createdAt: { type: "number", optional: true },
+    updatedAt: { type: "number", optional: true },
+    timeLeft: { type: "any", optional: true }
   }
 });
