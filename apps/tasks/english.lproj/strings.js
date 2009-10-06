@@ -113,7 +113,7 @@ SC.stringsFor('English', {
   '_AssigneeUnderLoaded': ", currently under loaded; ",
   '_AssigneeProperlyLoaded': ", currently properly loaded; ",
   '_AssigneeOverloaded': ", currently overloaded; ",
-  '_AssigneeEffortTooltip': "Remaining effort (if any) shown on right",
+  '_AssigneeEffortTooltip': "Completed/remaining effort shown on right",
   
   // Popup Pane/Panel strings
   '_EnableAll': "Enable All",
