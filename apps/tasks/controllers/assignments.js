@@ -247,21 +247,21 @@ Tasks.assignmentsController = SC.ArrayController.create(
       }
       if(effortString && priority !== CoreTasks.TASK_PRIORITY_LOW) {
         // sum up effort for High/Medium priority tasks
-        effortMin = parseFloat(parseFloat(effortString, 10).toFixed(2));
+        effortMin = parseFloat(parseFloat(effortString, 10).toFixed(3));
         var idx = effortString.indexOf('-'); // see if effort is a range
         if(idx === -1) { // not a range
           effortMax = effortMin;
         }
         else { // effort IS a range, extract max
-          effortMax = parseFloat(parseFloat(effortString.slice(idx+1), 10).toFixed(2));
+          effortMax = parseFloat(parseFloat(effortString.slice(idx+1), 10).toFixed(3));
         }
         if(task.get('status') === CoreTasks.TASK_STATUS_DONE) {
-          totalDoneEffortMin = parseFloat((totalDoneEffortMin + effortMin).toFixed(2));
-          totalDoneEffortMax = parseFloat((totalDoneEffortMax + effortMax).toFixed(2));
+          totalDoneEffortMin = parseFloat((totalDoneEffortMin + effortMin).toFixed(3));
+          totalDoneEffortMax = parseFloat((totalDoneEffortMax + effortMax).toFixed(3));
         }
         else {
-          totalEffortMin = parseFloat((totalEffortMin + effortMin).toFixed(2));
-          totalEffortMax = parseFloat((totalEffortMax + effortMax).toFixed(2));
+          totalEffortMin = parseFloat((totalEffortMin + effortMin).toFixed(3));
+          totalEffortMax = parseFloat((totalEffortMax + effortMax).toFixed(3));
         }
       }
     }
