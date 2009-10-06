@@ -22,7 +22,7 @@ SC.stringsFor('English', {
   '_LogoutConfirmation': "Are you sure you want to log out?",
 
   // Top Bar strings
-  '_Tasks': "TASKS",
+  '_Credits': "Credits: Suvajit Gupta, Sean Eidemiller, Josh Holt, Brandon Blatnick, Matt Grantham",
   '_Hi': "Hi ",
   '_Save': "Save",
   '_SaveTooltip': "Save Tasks data to the server",
@@ -125,7 +125,6 @@ SC.stringsFor('English', {
   '_Displaying': "Displaying ",
   '_Projects': " project(s), ",
   '_Assignees': " assignee(s), and ",
-  '_Tasks': " task(s)",
   '_UsersLoaded': "Loaded users, ",
   '_TasksLoaded': "tasks, ",
   '_ProjectsLoaded': " and projects.",

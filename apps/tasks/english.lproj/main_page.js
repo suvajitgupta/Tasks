@@ -26,8 +26,9 @@ Tasks.mainPage = SC.Page.design({
       classNames: ['title-bar'],
       childViews: [
       
-        SC.LabelView.design({
+        Tasks.TitleView.design({
           layout: { centerY: -2, height: 26, left: 6, width: 89 },
+          toolTip: "_Credits".loc(),
           classNames: ['tasks-logo']
         }),
       
