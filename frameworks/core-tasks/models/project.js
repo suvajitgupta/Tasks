@@ -155,6 +155,18 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
     if(timeLeft) ret += (' {' + timeLeft + '}');
     ret += ' # ' + "_Has".loc() + this.get('tasks').get('length') + "_Tasks".loc();
     return ret + '\n';
+  },
+  
+  /**
+  * Destroy a project and orphan any tasks that are in it.
+  */
+  destroy: function() {
+    var tasks = this.get('tasks');
+    if(tasks) {
+      tasks.forEach(function(task) {
+        task.set('projectId', null);
+      });
+    }
   }
 
 });

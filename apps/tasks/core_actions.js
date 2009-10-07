@@ -264,23 +264,9 @@ Tasks.mixin({
    * Save modified data to persistent store.
    */
   saveData: function() {
-    var store = CoreTasks.get('store');
-
-    // Remove the store keys of the AllTasks & UnallocatedTasks projects from the changelog so that they're not
-    // persisted to the server.
-    var allTasksKey = CoreTasks.getPath('allTasks.storeKey');
-    var unallocatedTasksKey = CoreTasks.getPath('unallocatedTasks.storeKey');
-    var cl = store.changelog;
-    if (cl) {
-      if (cl.contains(allTasksKey)) cl.remove(allTasksKey);
-      if (cl.contains(unallocatedTasksKey)) cl.remove(unallocatedTasksKey);
-    }
-
-    // Now commit all dirty records to the database.
-    store.commitRecords();
+    CoreTasks.saveChanges();
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', "_SaveMessage".loc() + new Date().format('hh:mm:ss a'));
-    
   },
   
   /**
@@ -351,10 +337,7 @@ Tasks.mixin({
    * Add a new project and start editing it in projects master list.
    */
   addProject: function() {
-    var project = CoreTasks.get('store').createRecord(
-      CoreTasks.Project, { name: CoreTasks.NEW_PROJECT_NAME.loc() } );
-    // FIXME: [SC] must set tasks array to empty because for some reason it is not defaulting it to empty.
-    project.set('tasks', []);
+    var project = CoreTasks.createRecord(CoreTasks.Project, { name: CoreTasks.NEW_PROJECT_NAME.loc() } );
     this.getPath('projectsController.content').pushObject(project);
 
     var listView = Tasks.getPath('mainPage.mainPane.projectsList');
@@ -389,13 +372,6 @@ Tasks.mixin({
         if(!confirm("_ConfirmProjectDeletion".loc())) return NO;
       }
 
-      // Move all tasks in project to UnallocatedTasks project since they are now orphaned
-      var unallocatedTasksProject = CoreTasks.get('unallocatedTasks');
-      for (var i = 0; i < taskCount; i++) {
-        var task = projectTasks.objectAt(i);
-        unallocatedTasksProject.addTask(task);
-      }
-
       // Remove the project from the list and destroy.
       pc.removeObject(project);
       project.destroy();
@@ -416,42 +392,25 @@ Tasks.mixin({
    */
   addTask: function() {
     
-    var user = CoreTasks.getPath('user.id');
-    var taskHash = SC.merge({ 'submitter': user, 'assignee': user }, CoreTasks.Task.NEW_TASK_HASH);
+    var userId = CoreTasks.getPath('user.id');
+    var taskHash = SC.merge({ 'submitterId': userId, 'assigneeId': userId }, CoreTasks.Task.NEW_TASK_HASH);
     taskHash.name = CoreTasks.NEW_TASK_NAME.loc();
-    var searchFilter = Tasks.assignmentsController.get('searchFilter');
     var task = CoreTasks.createRecord(CoreTasks.Task, taskHash);
     // task.id = CoreTasks.generateId(); // For FIXTUREs
 
-    // Get selected task and get its assignee so that we can set the same assignee on the
-    // newly-created task.
+    // Get selected task and get its assignee so that we can set the same assignee on the newly-created task.
     var tc = this.get('tasksController');
     var sel = tc.get('selection');
 
     if (sel && sel.length() > 0) { // Copy some attributes of selected task to new task
       var selectedObject = sel.firstObject();
       if (SC.instanceOf(selectedObject, CoreTasks.Task)) {
-        var taskAssignee = selectedObject.get('assignee');
-        if(taskAssignee) task.set('assignee', taskAssignee);
+        var assigneeUser = selectedObject.get('assignee');
+        if(assigneeUser) task.set('assignee', assigneeUser);
         task.set('type', selectedObject.get('type'));
         task.set('priority', selectedObject.get('priority'));
       }
     }
-
-    // We have to commit the task immediately because we need the ID before we add the task to the
-    // selected project.
-    var params = {
-      successCallback: this._addTaskSuccess.bind(this),
-      failureCallback: this._addTaskFailure.bind(this)
-    };
-
-    task.commitRecord(params);
-  },
-
-  _addTaskSuccess: function(storeKey) {
-    
-    // Get the task object from the store.
-    var task = CoreTasks.get('store').materializeRecord(storeKey);
 
     // Add the new task to the currently-selected project.
     var project = this.getPath('projectsController.selection').firstObject();
@@ -477,10 +436,6 @@ Tasks.mixin({
     itemView.beginEditing();
   },
 
-  _addTaskFailure: function(storeKey) {
-    // TODO: [SE] Implement addTaskFailure
-  },
-  
   /**
    * Delete selected task in tasks detail list.
    */
@@ -513,8 +468,6 @@ Tasks.mixin({
     }
   },
   
-  // TODO: [SE] implement deleteTaskSuccess/Failure
-  
   /**
    * Filter tasks via attributes.
    */
@@ -526,7 +479,7 @@ Tasks.mixin({
    * Add a new user.
    */
   addUser: function() {
-    var user = CoreTasks.get('store').createRecord(CoreTasks.User, SC.clone(CoreTasks.User.NEW_USER_HASH));
+    var user = CoreTasks.createRecord(CoreTasks.User, SC.clone(CoreTasks.User.NEW_USER_HASH));
     this.getPath('usersController.content').pushObject(user);
     var listView = Tasks.getPath('settingsPage.panel.usersList');
     var idx = listView.length - 1;

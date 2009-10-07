@@ -178,7 +178,7 @@ CoreTasks = SC.Object.create({
     len = this._dirtyTasks.length;
 
     if (len > 0) {
-      this._saveProjects();
+      this._saveTasks();
       return; 
     }
 
