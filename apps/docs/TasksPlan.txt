@@ -55,12 +55,12 @@ v Disallow duplicate project names after editing, provide warning to user for du
 v Add summary in projects toolbar showing number of projects & number of tasks for selected project [SG] <MB> @Done $Feature %Passed
 v Beta: Enable/disable "Del. Project" button based on having a selected project [SG] @Active $Feature
 v Disable Add/Del. Tasks buttons when on "All Tasks" project [SG] <BB> @Done %Passed $Feature
-- Beta: Select first project at startup [SG] <JH2> @Done %Passed $Feature
-^ Beta: Add virtual "All Tasks" & "Unallocated Tasks" projects and display them grayed out in projects list [SG] <SE> @Active
-- Disallow "All Tasks" & "Unallocated Tasks" projects from being edited inline or deleted [SG] @Done $Feature %Passed
-^ Allow multi-task drag-n-drop reallocation to projects [BB] <SG> @Done $Feature %Passed
-^ Beta: Add popup viewer/editor for Project time left/description <SE> [SG] $Feature @Active
-v Add context menu to Add/Delete a project <JH2> [SG] $Feature
+- Beta: Select first project at startup [SG] <JH2> @Active $Feature
+^ Add virtual "All Tasks" & "Unallocated Tasks" projects and display them grayed out in projects list [SG] <SE> @Done
+- Disallow "All Tasks" & "Unallocated Tasks" projects from being deleted [SG] @Done $Feature %Passed
+^ Allow multi-task drag-n-drop Task reallocation to Projects [BB] <SG> @Done $Feature %Passed
+^ Beta: Add popup viewer/editor for Project time left/description [SG] $Feature @Active
+v Add context menu to Add/Delete a project <SG> [JH2] $Feature
 
 Task Manager GUI
 ^ Group Tasks by User and display Task id, summary, and effort (if specified) on far right [SG] <JH2> @Done $Feature %Passed
