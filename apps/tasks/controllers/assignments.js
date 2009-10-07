@@ -147,7 +147,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     var sel = Tasks.getPath('projectsController.selection');
     if (sel && sel.length() > 0) {
       var project = sel.firstObject();
-      projectTimeLeft = project.get('timeLeft');
+      projectTimeLeft = CoreTasks.convertTimeToDays(project.get('timeLeft'));
     }
       
     // Group tasks by user & separate unassigned tasks
@@ -247,13 +247,16 @@ Tasks.assignmentsController = SC.ArrayController.create(
       }
       if(effortString && priority !== CoreTasks.TASK_PRIORITY_LOW) {
         // sum up effort for High/Medium priority tasks
+        var timeUnit = CoreTasks.getTimeUnit(effortString);
         effortMin = parseFloat(parseFloat(effortString, 10).toFixed(3));
+        effortMin = CoreTasks.convertTimeToDays(effortMin + timeUnit);
         var idx = effortString.indexOf('-'); // see if effort is a range
         if(idx === -1) { // not a range
           effortMax = effortMin;
         }
         else { // effort IS a range, extract max
           effortMax = parseFloat(parseFloat(effortString.slice(idx+1), 10).toFixed(3));
+          effortMax = CoreTasks.convertTimeToDays(effortMax + timeUnit);
         }
         if(task.get('status') === CoreTasks.TASK_STATUS_DONE) {
           totalDoneEffortMin = parseFloat((totalDoneEffortMin + effortMin).toFixed(3));

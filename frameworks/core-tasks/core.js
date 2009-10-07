@@ -119,13 +119,42 @@ CoreTasks = SC.Object.create({
   },
 
   /**
-   * A string summarizing key facets of the Project for display.
+   * Display time with 'd' appended if no time unit present.
    *
-   * @param (String) time in days
+   * @param (String) time in days or hours
+   * @returns {String) return time with unit appended.
    */
   displayTime: function(time) {
-    if(!time) return null;
-    return time + 'd';
+    if(SC.none(time)) return null;
+    var lastChar = time[time.length-1];
+    return time + ((lastChar === 'd' || lastChar === 'h')? '' : 'd');
+  },
+  
+  /**
+   * Extract time unit (if specified).
+   *
+   * @param (String) time in days or hours
+   * @returns {String) return time unit (if specified) or the empty string ''.
+   */
+  getTimeUnit: function(time) {
+    if(SC.none(time)) return '';
+    var lastChar = time[time.length-1];
+    return (lastChar === 'd' || lastChar === 'h')? lastChar : '';
+  },
+  
+  /**
+   * Convert time into days using time unit if available (assumed 'd' otherwise)
+   *
+   * @param (String) time in days or hours
+   */
+  convertTimeToDays: function(time) {
+    if(SC.none(time)) return 0;
+    var lastChar = time[time.length-1];
+    var ret;
+    if(lastChar === 'd') ret = time.slice(0, time.length-1); // already in days, remove time unit
+    else if(lastChar === 'h') ret = time.slice(0, time.length-1)/8; // asssumes 8h days, convert, remove time unit
+    else ret = time; // already number of days
+    return parseFloat(parseFloat(ret, 10).toFixed(3));
   },
   
   /**

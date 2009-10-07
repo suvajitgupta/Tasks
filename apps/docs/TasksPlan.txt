@@ -24,7 +24,7 @@ General Infrastructure
 ^ Develop Model and Fixtures (hardcoded & generated) [SG] <SE> @Done
 - Beta: Develop States/Actions corresponding to GUI Statecharts [SG] <SE> @Active
 - Support minimum resolution of 1024x768 [SG] @Done $Feature %Passed
-- Support decimal numbers for task effort and assignee effort totals [SG] @Done %Passed $Feature
+- Support decimal numbers for project timeLeft and task effort in units of 'd' or 'h' [SG] @Done %Passed $Feature
 - Beta: Handle persistence consistently (nothing should save unless user hits Save) [SE] <SG> @Active
 v On Firefox need to highlight entire item & show cursor when starting to do in-cell editing [SC] <SG> $Bug
 v On Firefox dragging window to make it smaller leaves TextField entry text in the same place - they don't move [SC] <SG> $Bug @Active
@@ -60,7 +60,7 @@ v Disable Add/Del. Tasks buttons when on "All Tasks" project [SG] <BB> @Done %Pa
 ^ Add virtual "All Tasks" & "Unallocated Tasks" projects and display them grayed out in projects list [SG] <SE> @Done
 - Disallow "All Tasks" & "Unallocated Tasks" projects from being deleted [SG] @Done $Feature %Passed
 ^ Allow multi-task drag-n-drop Task reallocation to Projects [BB] <SG> @Done $Feature %Passed
-^ Beta: Add popup viewer/editor for Project time left [SG] $Feature @Active
+^ Beta: Add popup viewer/editor for Project time left/description [SG] $Feature @Active
 v Add context menu to Add/Delete a project <SG> [JH2] $Feature
 
 Task Manager GUI
@@ -92,7 +92,7 @@ v Set tasks toolbar button enablement based on having a selection [SG] @Done $Fe
 - Color code assignee non loading in gray, under loading in green, proper loading in blue, and over loading in red [SG] @Done $Feature %Passed
 v Add hover over tooltip for assignees to show how many tasks they have and to explain loading color codes [SG] @Done $Feature %Passed
 ^ Allow multi-task drag-n-drop reassignment [BB] <SG>  @Done $Feature %Passed
-^ Add popup viewer/editor for Task Submitter, Assignee, Effort, and Description [JH2] <SG> @Done %Passed $Feature
+^ Add popup viewer/editor for Task submitter, sssignee, effort, and description [JH2] <SG> @Done %Passed $Feature
 - Fix task pop editor location problem where it is getting cropped at the window boundary [SC] <SG> @Active $Bug
 v Add context menu to Add/Delete a task <SG> [JH2] $Feature
 

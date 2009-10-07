@@ -33,7 +33,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
    *
    * This is used for load-balancing.
    */
-  timeLeft: SC.Record.attr(Number),
+  timeLeft: SC.Record.attr(String),
 
   /**
    * Append unit of time after time left.
@@ -146,11 +146,12 @@ CoreTasks.Project.mixin(/** @scope CoreTasks.Project */ {
    * @returns {Object} Hash of parsed parameters.
    */
   parse: function(line) {
-    var projectName = line, projectTimeLeft = null;
-    var res = line.match(/([^\{]+)\{(\d+\.\d+|\d+)[d]*\}/);
-    if(res) {
-      projectName = res[1];
-      projectTimeLeft = res[2];
+    var projectName = line, projectTimeLeft = null, projectTimeUnit = 'd';
+    var projectMatches = line.match(/([^\{]+)\{(\d+\.\d+|\d+)(|d|h)\}/);
+    if(projectMatches) {
+      projectName = projectMatches[1];
+      projectTimeLeft = projectMatches[2];
+      if(projectMatches[3]) projectTimeLeft += projectMatches[3];
     }
     return {
       name: projectName.replace(/\s+$/, ''),
