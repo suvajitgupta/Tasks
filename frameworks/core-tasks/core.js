@@ -396,6 +396,21 @@ CoreTasks = SC.Object.create({
     else ret = time; // already number of days
     return parseFloat(parseFloat(ret, 10).toFixed(3));
   },
+  
+  /**
+   * Convert time into days using time unit if available (assumed 'd' otherwise)
+   *
+   * @param (String) time in days or hours
+   */
+  convertTimeToDays: function(time) {
+    if(SC.none(time)) return 0;
+    var lastChar = time[time.length-1];
+    var ret;
+    if(lastChar === 'd') ret = time.slice(0, time.length-1); // already in days, remove time unit
+    else if(lastChar === 'h') ret = time.slice(0, time.length-1)/8; // asssumes 8h days, convert, remove time unit
+    else ret = time; // already number of days
+    return parseFloat(parseFloat(ret, 10).toFixed(3));
+  },
 
   _storeChangelogDidChange: function() {
     var store = this.store;
