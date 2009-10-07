@@ -133,7 +133,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           ]
         })
       });
-      this._editorPane.popup(event.target.parentNode, SC.PICKER_POINTER);
+      this._editorPane.popup(layer, SC.PICKER_POINTER);
     }
     return NO;
   },
