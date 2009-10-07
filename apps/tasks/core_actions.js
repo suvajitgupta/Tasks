@@ -89,8 +89,12 @@ Tasks.mixin({
       welcomeMessage.set('toolTip', "_LoginSince".loc() + new Date().format('hh:mm:ss a MMM dd, yyyy'));
       
       // Based on user's rolem set up appropriate task filter
-      if(user.get('role') === CoreTasks.USER_ROLE_DEVELOPER) {
+      var role = user.get('role');
+      if(role === CoreTasks.USER_ROLE_DEVELOPER) { // Set assignee selection filter to logged in user
         Tasks.assignmentsController.set('assigneeSelection', this.loginName);
+      }
+      else if(role === CoreTasks.USER_ROLE_TESTER) { // Filter out Other tasks
+        Tasks.assignmentsController.attributeFilter(CoreTasks.TASK_TYPE_OTHER, 0);
       }
       this._authenticationSuccess();
       
@@ -319,8 +323,6 @@ Tasks.mixin({
       
       this.get('projectsController').set('content', null);
       this.get('assignmentsController').resetFilters();
-      var filterButton = Tasks.getPath('mainPage.mainPane.filterButton');
-      if(filterButton) filterButton.set('icon', Tasks.assignmentsController.attributeFilterIcon());
       
       CoreTasks.store.reset();
       this.goState('a', 1);

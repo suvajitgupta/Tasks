@@ -100,7 +100,7 @@ User Manager GUI
 - Beta: Add a guest signup capability to login screen (reuse view with User Manager) [JH2] <SG> @Active $Feature
 ^ Add Assignee selection filter (space or comma separators) & corresponding delete button in top toolbar [SG] <JH2> @Done $Feature %Passed
 - Beta: In Firefox fix assignee selection appearing to far left outside of text field <SG> [MG] $Bug
-- Set assignee selection filter to logged in user if they are a Developer [SG] @Done $Feature %Passed
+- Set assignee selection filter to logged in user if they are a Developer, filter out Other tasks if they are a Tester [SG] @Done $Feature %Passed
 - Allow assignee filtering by matching any part of name, not just loginName [SG] $Feature
 ^ Beta: Add User Manager with "Add/Del. User"  buttons in toolbar (ask to reenter password) [SG] <JH2> @Active $Feature
 - Beta: Cleanup task assignee/submitter after user deletion <BB> [SG] $Bug @Active

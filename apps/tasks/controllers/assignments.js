@@ -30,24 +30,28 @@ Tasks.assignmentsController = SC.ArrayController.create(
   assigneeSelection: null,
   searchFilter: null,
   attributeFilterCriteria: Tasks.attributeFilterAllEnabled.slice(0),
-  clearAttributeFilter: function() {
-    this.set('attributeFilterCriteria', Tasks.attributeFilterAllEnabled.slice(0));
-  },
   
   attributeFilter: function(name, value) {
+    var newFilterCriteria;
     if (value !== undefined) {
-      if(value) {
+      if(value) { // if not included, add attribute to filter
         if(this.attributeFilterCriteria.indexOf(name) === -1) {
-          this.attributeFilterCriteria.push(name);
+          newFilterCriteria = this.attributeFilterCriteria.splice(0);
+          newFilterCriteria.push(name);
+          this.set('attributeFilterCriteria', newFilterCriteria);
         }
       }
-      else {
+      else { // if included, remove attribute from filter
         var idx = this.attributeFilterCriteria.indexOf(name);
-        if (idx !== -1) this.attributeFilterCriteria.splice(idx, 1);
+        if (idx !== -1) {
+          newFilterCriteria = this.attributeFilterCriteria.splice(0);
+          newFilterCriteria.splice(idx, 1);
+          this.set('attributeFilterCriteria', newFilterCriteria);
+        }
       }
       return this;
     }
-    else {
+    else { // see if attribute is in filter
       return (this.attributeFilterCriteria.indexOf(name) !== -1);
     }
   },
@@ -113,6 +117,10 @@ Tasks.assignmentsController = SC.ArrayController.create(
     return this.assigneeSelection || this.searchFilter || this.attributeFilterCriteria.length !== 13;
   },
   
+  clearAttributeFilter: function() {
+    this.set('attributeFilterCriteria', Tasks.attributeFilterAllEnabled.slice(0));
+  },
+
   resetFilters: function() {
     this.set('assigneeSelection', null);
     this.set('searchFilter', null);

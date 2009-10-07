@@ -257,7 +257,8 @@ Tasks.mainPage = SC.Page.design({
 
         SC.LabelView.design(Tasks.SimpleButton,{
           layout: { centerY: 3, right: 465, height: 24, width: 90 },
-          icon: Tasks.assignmentsController.attributeFilterIcon(), // TODO: [SG] see why this can't be a binding & kill/calls to reset icon
+          displayProperties: [ 'icon' ],
+          iconBinding: 'Tasks.assignmentsController.attributeFilterIcon',
           value: "_FilterTasks".loc(),
           classNames: ['toolbar-label'],
           toolTip: "_FilterTasksTooltip".loc(),
