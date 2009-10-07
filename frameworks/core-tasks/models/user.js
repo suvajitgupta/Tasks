@@ -87,7 +87,47 @@ CoreTasks.User = CoreTasks.Record.extend({
     var name = this.get('name');
     var loginName = this.get('loginName');
     return '%@ (%@)'.fmt(name, loginName);
-  }.property('name', 'loginName').cacheable()
+  }.property('name', 'loginName').cacheable(),
+
+  /**
+   * A read-only computed property that returns the list of tasks assigned to this user
+   * before it was first persisted.
+   *
+   * @returns {SC.RecordArray} An array of tasks.
+   */
+  disassociatedAssignedTasks: function() {
+    // Create the query if necessary.
+    if (!this._disassociatedAssignedTasksQuery) {
+      this._disassociatedAssignedTasksQuery = SC.Query.create({ recordType: CoreTasks.Task });
+    }
+
+    // Narrow the conditions.
+    this._disassociatedAssignedTasksQuery.set('conditions', 'assigneeId = %@');
+    this._disassociatedAssignedTasksQuery.set('parameters', [this.get('_id')]);
+
+    // Execute the query and return the results.
+    return this.get('store').findAll(this._disassociatedAssignedTasksQuery);
+  }.property('_id').cacheable(),
+
+  /**
+   * A read-only computed property that returns the list of tasks submitted by this user
+   * before it was first persisted.
+   *
+   * @returns {SC.RecordArray} An array of tasks.
+   */
+  disassociatedSubmittedTasks: function() {
+    // Create the query if necessary.
+    if (!this._disassociatedSubmittedTasksQuery) {
+      this._disassociatedSubmittedTasksQuery = SC.Query.create({ recordType: CoreTasks.Task });
+    }
+
+    // Narrow the conditions.
+    this._disassociatedSubmittedTasksQuery.set('conditions', 'submitterId = %@');
+    this._disassociatedSubmittedTasksQuery.set('parameters', [this.get('_id')]);
+
+    // Execute the query and return the results.
+    return this.get('store').findAll(this._disassociatedSubmittedTasksQuery);
+  }.property('_id').cacheable()
 
 });
 
@@ -101,3 +141,10 @@ CoreTasks.User.NEW_USER_HASH = {
   loginName: CoreTasks.NEW_USER_LOGIN_NAME,
   role: CoreTasks.USER_ROLE_DEVELOPER
 };
+
+// Register the appropriate callbacks.
+CoreTasks.registerCallback(
+  CoreTasks.User, 'post', 'success', CoreTasks.userCreated.bind(CoreTasks));
+
+CoreTasks.registerCallback(
+  CoreTasks.User, 'put', 'success', CoreTasks.userUpdated.bind(CoreTasks));

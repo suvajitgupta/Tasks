@@ -50,6 +50,27 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
   }.property('id').cacheable(),
 
   /**
+   * A read-only computed property that returns the list of tasks associated with this project
+   * before it was first persisted.
+   *
+   * @returns {SC.RecordArray} An array of tasks.
+   */
+  disassociatedTasks: function() {
+    // Create the query if necessary.
+    if (!this._disassociatedTasksQuery) {
+      this._disassociatedTasksQuery = SC.Query.create({ recordType: CoreTasks.Task });
+    }
+
+    // Narrow the conditions.
+    this._disassociatedTasksQuery.set('conditions', 'projectId = %@');
+    this._disassociatedTasksQuery.set('parameters', [this.get('_id')]);
+
+    // Execute the query and return the results.
+    return this.get('store').findAll(this._disassociatedTasksQuery);
+
+  }.property('_id').cacheable(),
+
+  /**
    * Append unit of time after time left.
    */
   displayTimeLeft: function() {
@@ -142,7 +163,7 @@ CoreTasks.Project.mixin(/** @scope CoreTasks.Project */ {
   
   callbacks: SC.Object.create(),
   resourcePath: 'project',
-  
+
   /**
    * Parse a line of text and extract parameters from it.
    *
@@ -165,3 +186,10 @@ CoreTasks.Project.mixin(/** @scope CoreTasks.Project */ {
   }
   
 });
+
+// Register the appropriate callbacks.
+CoreTasks.registerCallback(
+  CoreTasks.Project, 'post', 'success', CoreTasks.projectCreated.bind(CoreTasks));
+
+CoreTasks.registerCallback(
+  CoreTasks.Project, 'put', 'success', CoreTasks.projectUpdated.bind(CoreTasks));

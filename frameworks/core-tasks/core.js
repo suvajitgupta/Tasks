@@ -26,8 +26,25 @@ CoreTasks = SC.Object.create({
   // TODO: [SE] set Tasks application mode via URL.
   mode: null,
 
+  /*
+   * The various modes related to the save mechanism.
+   */
+  MODE_NOT_SAVING: 0x0001,
+  MODE_SAVING: 0x0002,
+  MODE_SAVING_USERS: 0x0102,
+  MODE_SAVING_PROJECTS: 0x0202,
+  MODE_SAVING_TASKS: 0x0302,
+
+  // The current save mode.
+  saveMode: 0x0001,
+
   // The logged in user.
   user: null,
+
+  /**
+   * A record array of all projects in the store.
+   */
+  projects: null,
 
   /**
    * A special 'allTasks' project where all tasks for all projects are grouped.
@@ -55,7 +72,7 @@ CoreTasks = SC.Object.create({
     // Assign the new record a negative integer ID (will be overwritten upon persistence to the
     // server, but certain SC mechanisms require that all records have a primary key).
     if (dataHash.id === undefined) {
-      dataHash.id = this._currentRecordId;
+      dataHash.id = dataHash._id = this._currentRecordId;
       this._currentRecordId--;
     }
 
@@ -66,6 +83,220 @@ CoreTasks = SC.Object.create({
       // Otherwise, call createRecord on the store.
       return this.get('store').createRecord(recordType, dataHash);
     }
+  },
+
+  /**
+   * A read-only computed property that returns true if a save is currently in progress; false
+   * otherwise.
+   *
+   * @returns {Boolean}
+   */
+  isSaving: function() {
+    return this.get('saveMode') & CoreTasks.MODE_SAVING;
+  }.property('saveMode').cacheable(),
+
+  /*
+   * Store key arrays of all dirty records, used by the save mechanism to ensure that records are
+   * persisted in the correct order.
+   *
+   * This is less than ideal, but it works.
+   */
+  _dirtyUsers: [],
+  _dirtyProjects: [],
+  _dirtyTasks: [],
+
+  /**
+   * Persists all new and modified records to the store.
+   *
+   * Persistence must occur in a precise order to maintain entity associations.
+   */
+  saveChanges: function() {
+    if (this.get('saveMode') & CoreTasks.MODE_SAVING) {
+      throw 'Error saving data: Save already in progress.';
+    }
+
+    var store = this.get('store'), key, recType, records, len, i;
+
+    // Make our intentions known.
+    this.set('saveMode', CoreTasks.MODE_SAVING);
+
+    // Clear the arrays just in case.
+    this._dirtyUsers = [];
+    this._dirtyProjects = [];
+    this._dirtyTasks = [];
+
+    // Get the store keys of the two "special" projects that we never want to persist.
+    if (!this._allTasksKey) {
+      this._allTasksKey = this.getPath('allTasks.storeKey');
+    }
+
+    if (!this._unallocatedTasksKey) {
+      this._unallocatedTasksKey = this.getPath('unallocatedTasks.storeKey');
+    }
+
+    // Build separate arrays for all dirty records.
+    var dirtyRecordKeys = store.changelog;
+    len = dirtyRecordKeys ? dirtyRecordKeys.length : 0;
+
+    for (i = 0; i < len; i++) {
+      key = dirtyRecordKeys[i];
+      recType = store.recordTypeFor(key);
+
+      switch (recType) {
+        case CoreTasks.User:
+          this._dirtyUsers.pushObject(key);
+          break;
+        case CoreTasks.Project:
+          if (key !== this._allTasksKey && key !== this._unallocatedTasksKey) {
+            this._dirtyProjects.pushObject(key);
+          }
+
+          break;
+        case CoreTasks.Task:
+          this._dirtyTasks.pushObject(key);
+          break;
+      }
+    }
+
+    // Now start by persisting all of the dirty users, but only if there are any.
+    len = this._dirtyUsers.length;
+
+    if (len > 0) {
+      this._saveUsers();
+      return;
+    }
+
+    // If there were no dirty users, persist the dirty projects.
+    len = this._dirtyProjects.length;
+
+    if (len > 0) {
+      this._saveProjects();
+      return;
+    }
+
+    // If there were no dirty users or projects, persist the dirty tasks.
+    len = this._dirtyTasks.length;
+
+    if (len > 0) {
+      this._saveProjects();
+      return; 
+    }
+
+    // Apparently there was nothing to persist, which shouldn't ever happen.
+    console.log('Nothing new to save.');
+    this.set('saveMode', CoreTasks.MODE_NOT_SAVING);
+  },
+
+  userCreated: function(storeKey) {
+    console.log('CoreTasks#userCreated(%@)'.fmt(storeKey));
+    var user = this.get('store').materializeRecord(storeKey), tasks;
+
+    SC.RunLoop.begin();
+
+    // Update the now-disassociated assigned tasks.
+    tasks = user.get('disassociatedAssignedTasks');
+
+    if (tasks && SC.instanceOf(tasks, SC.RecordArray)) {
+      tasks.forEach(function(task) {
+        task.writeAttribute('assigneeId', user.readAttribute('id'));
+      });
+    }
+
+    // Update the now-disassociated submitted tasks.
+    tasks = user.get('disassociatedSubmittedTasks');
+
+    if (tasks && SC.instanceOf(tasks, SC.RecordArray)) {
+      tasks.forEach(function(task) {
+        task.writeAttribute('submitterId', user.readAttribute('id'));
+      });
+    }
+
+    SC.RunLoop.end();
+
+    this._dirtyUsers.removeObject(storeKey);
+    this._continueSave();
+  },
+
+  userUpdated: function(storeKey) {
+    console.log('CoreTasks#userUpdated(%@)'.fmt(storeKey));
+    this._dirtyUsers.removeObject(storeKey);
+    this._continueSave();
+  },
+
+  projectCreated: function(storeKey) {
+    console.log('CoreTasks#projectCreated(%@)'.fmt(storeKey));
+    var project = this.get('store').materializeRecord(storeKey);
+
+    // Update the now-disassociated tasks.
+    SC.RunLoop.begin();
+    var tasks = project.get('disassociatedTasks');
+
+    if (tasks && SC.instanceOf(tasks, SC.RecordArray)) {
+      tasks.forEach(function(task) {
+        task.writeAttribute('projectId', project.readAttribute('id'));
+      });
+    }
+
+    SC.RunLoop.end();
+
+    this._dirtyProjects.removeObject(storeKey);
+    this._continueSave();
+  },
+
+  projectUpdated: function(storeKey) {
+    console.log('CoreTasks#projectUpdated(%@)'.fmt(storeKey));
+    this._dirtyProjects.removeObject(storeKey);
+    this._continueSave();
+  },
+
+  taskCreated: function(storeKey) {
+    console.log('CoreTasks#taskCreated(%@)'.fmt(storeKey));
+    this._dirtyTasks.removeObject(storeKey);
+    this._continueSave();
+  },
+
+  taskUpdated: function(storeKey) {
+    console.log('CoreTasks#taskUpdated(%@)'.fmt(storeKey));
+    this._dirtyTasks.removeObject(storeKey);
+    this._continueSave();
+  },
+
+  _continueSave: function() {
+    console.log('CoreTasks#_continueSave()');
+
+    if (this._dirtyUsers.length === 0) {
+      if (this._dirtyProjects.length === 0) {
+        if (this._dirtyTasks.length === 0) {
+          this.set('saveMode', CoreTasks.MODE_NOT_SAVING);
+        } else {
+          // Save to start persisting tasks, if we haven't already.
+          if (this.get('saveMode') !== CoreTasks.MODE_SAVING_TASKS) {
+            this._saveTasks();
+          }
+        }
+
+      } else {
+        // Safe to start persisting projects, if we haven't already.
+        if (this.get('saveMode') !== CoreTasks.MODE_SAVING_PROJECTS) {
+          this._saveProjects();
+        }
+      }
+    }
+  },
+
+  _saveUsers: function() {
+    this.set('saveMode', CoreTasks.MODE_SAVING_USERS);
+    this.get('store').commitRecords(CoreTasks.User, undefined, SC.clone(this._dirtyUsers));
+  },
+
+  _saveProjects: function() {
+    this.set('saveMode', CoreTasks.MODE_SAVING_PROJECTS);
+    this.get('store').commitRecords(CoreTasks.Project, undefined, SC.clone(this._dirtyProjects));
+  },
+
+  _saveTasks: function() {
+    this.set('saveMode', CoreTasks.MODE_SAVING_TASKS);
+    this.get('store').commitRecords(CoreTasks.Task, undefined, SC.clone(this._dirtyTasks));
   },
 
   /**
@@ -165,6 +396,15 @@ CoreTasks = SC.Object.create({
     else ret = time; // already number of days
     return parseFloat(parseFloat(ret, 10).toFixed(3));
   },
+
+  _storeChangelogDidChange: function() {
+    var store = this.store;
+
+    if (store.changelog && store.changelog.length > 0) {
+      // There's something in the changelog.
+    }
+
+  }.observes('store.changelog.[]'),
 
   // Used to assign all newly-created records with a negative ID.
   // TODO: [SE] Reset the counter so that we don't run out of integers if the client is left

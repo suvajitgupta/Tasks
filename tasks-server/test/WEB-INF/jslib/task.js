@@ -10,8 +10,8 @@ Class({
     status: { type: "any", optional: true, },
     validation: { type: "any", optional: true, },
     effort: { type: "any", optional: true },
-    submitter: { optional: true },
-    assignee: { optional: true },
+    submitterId: { type: "number", optional: true },
+    assigneeId: { type: "number", optional: true },
     createdAt: { type: "number", optional: true },
     updatedAt: { type: "number", optional: true }
   }

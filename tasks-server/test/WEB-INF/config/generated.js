@@ -108,10 +108,12 @@
 					"type":"any",
 					"optional":true
 				},
-				"submitter":{
+				"submitterId":{
+					"type":"number",
 					"optional":true
 				},
-				"assignee":{
+				"assigneeId":{
+					"type":"number",
 					"optional":true
 				},
 				"createdAt":{

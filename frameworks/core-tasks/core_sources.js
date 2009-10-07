@@ -194,6 +194,9 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
     // Set the created-at time on the data hash.
     dataHash.createdAt = SC.DateTime.create().get('milliseconds');
 
+    // Remove the ID from the data hash (Persevere doesn't like it).
+    delete dataHash.id;
+
     // Build the request and send it off to the server.
     this._postRequest.set('address', CoreTasks.getFullResourcePath(resourcePath));
     this._postRequest.notify(this, this._createCompleted, SC.merge({
@@ -221,7 +224,7 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
       params.store.dataSourceDidComplete(params.storeKey, normalizedResponse, normalizedResponse.id);
 
       // Set the success callback.
-      callback = params.successCallback;
+      callback = CoreTasks.getCallback('post', 'success', params.recordType);
     }
 
     // Invoke the callback (may not be defined, but that's okay), passing along the store key in
@@ -279,9 +282,9 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
       callback = CoreTasks.getCallback('put', 'success', params.recordType);
     }
 
-    // Invoke the callback (may not be defined, but that's okay), passing along the record hash in
+    // Invoke the callback (may not be defined, but that's okay), passing along the store key in
     // case it's needed.
-    CoreTasks.invokeCallback(callback, normalizedResponse);
+    CoreTasks.invokeCallback(callback, params.storeKey);
   },
 
   /**

@@ -176,40 +176,44 @@ CoreTasks.Task = CoreTasks.Record.extend({
   /**
    * The user who creates the task.
    */
-  submitter: SC.Record.attr('CoreTasks.User'),
-  
-  submitterID: function(key, value){
+  submitterId: SC.Record.attr(Number),
+
+  submitter: function(key, value) {
     if (value !== undefined) {
-      if(value === '***') this.writeAttribute('submitter', null);
-      else this.writeAttribute('submitter', CoreTasks.User.find(CoreTasks.store, value).get('id'));
+      if (value && value.get) this.writeAttribute('submitterId', value.get('id'));
+    } else {
+      var id = this.get('submitterId');
+      if (id) {
+        value = CoreTasks.store.find(CoreTasks.User, id);
+      } else {
+        value = null;
+      }
     }
-    else {
-      var submitter = this.get('submitter');
-      // FIXME: [SC] unclear why submitter.get() is null at times
-      if (submitter && submitter.get)  value = submitter.get('id');
-      else value = '***';
-    }
+
     return value;
-  }.property('submitter').cacheable(),
+
+  }.property('submitterId').cacheable(),
 
   /**
   * The user who is assigned to complete the task.
    */
-  assignee: SC.Record.attr('CoreTasks.User'),
+  assigneeId: SC.Record.attr(Number),
   
-  assigneeID: function(key, value){
+  assignee: function(key, value){
     if (value !== undefined) {
-      if(value === '***') this.writeAttribute('assignee', null);
-      else this.writeAttribute('assignee', CoreTasks.User.find(CoreTasks.store, value).get('id'));
+      if (value && value.get) this.writeAttribute('assigneeId', value.get('id'));
+    } else {
+      var id = this.get('assigneeId');
+      if (id) {
+        value = CoreTasks.store.find(CoreTasks.User, id);
+      } else {
+        value = null;
+      }
     }
-    else {
-      var assignee = this.get('assignee');
-      // FIXME: [SC] unclear why assigneee.get() is null at times
-      if (assignee && assignee.get) value = assignee.get('id');
-      else value = '***';
-    }
+
     return value;
-  }.property('assignee').cacheable(),
+
+  }.property('assigneeId').cacheable(),
 
   /**
    * The path to the icon associated with a task.
@@ -251,20 +255,20 @@ CoreTasks.Task = CoreTasks.Record.extend({
         this.propertyDidChange('effort');
       }
       
-      if(taskHash.submitter) {
-        this.propertyWillChange('submitter');
-        var submitterUser = CoreTasks.getUser(taskHash.submitter);
-        if (!submitterUser) console.log('Task Editing Error - no such submitter: ' + taskHash.submitter);
-        else this.writeAttribute('submitter', submitterUser.get('id'));
-        this.propertyDidChange('submitter');
+      if(taskHash.submitterId) {
+        this.propertyWillChange('submitterId');
+        var submitterUser = CoreTasks.getUser(taskHash.submitterId);
+        if (!submitterUser) console.log('Task Editing Error - no such submitter: ' + taskHash.submitterId);
+        else this.writeAttribute('submitterId', submitterUser.get('id'));
+        this.propertyDidChange('submitterId');
       }
       
-      if(taskHash.assignee) {
-        this.propertyWillChange('assignee');
-        var assigneeUser = CoreTasks.getUser(taskHash.assignee);
-        if (!assigneeUser) console.log('Task Editing Error - no such assignee: ' + taskHash.assignee);
-        else this.writeAttribute('assignee', assigneeUser.get('id'));
-        this.propertyDidChange('assignee');
+      if(taskHash.assigneeId) {
+        this.propertyWillChange('assigneeId');
+        var assigneeUser = CoreTasks.getUser(taskHash.assigneeId);
+        if (!assigneeUser) console.log('Task Editing Error - no such assignee: ' + taskHash.assigneeId);
+        else this.writeAttribute('assigneeId', assigneeUser.get('id'));
+        this.propertyDidChange('assigneeId');
       }
       
       if(taskHash.type) {
@@ -446,8 +450,8 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
       name: taskName,
       priority: taskPriority,
       effort: taskEffort,
-      assignee: taskAssignee,
-      submitter: taskSubmitter,
+      assigneeId: taskAssignee,
+      submitterId: taskSubmitter,
       type: taskType,
       status: taskStatus,
       validation: taskValidation
@@ -463,3 +467,10 @@ CoreTasks.Task.NEW_TASK_HASH = {
   status: CoreTasks.TASK_STATUS_PLANNED,
   validation: CoreTasks.TASK_VALIDATION_UNTESTED
 };
+
+// Register the appropriate callbacks.
+CoreTasks.registerCallback(
+  CoreTasks.Task, 'post', 'success', CoreTasks.taskCreated.bind(CoreTasks));
+
+CoreTasks.registerCallback(
+  CoreTasks.Task, 'put', 'success', CoreTasks.taskUpdated.bind(CoreTasks));
