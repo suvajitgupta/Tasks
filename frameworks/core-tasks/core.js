@@ -138,8 +138,6 @@ CoreTasks = SC.Object.create({
     var dirtyRecordKeys = store.changelog;
     len = dirtyRecordKeys ? dirtyRecordKeys.length : 0;
 
-    debugger;
-
     for (i = 0; i < len; i++) {
       key = dirtyRecordKeys[i];
       recStatus = store.peekStatus(key);
