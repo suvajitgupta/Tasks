@@ -8,6 +8,7 @@ sc_require('mixins/simple_button');
     
   @extends SC.Page
   @author Suvajit Gupta
+  @author Matt Grantham
   
   Import Data Panel
   
@@ -15,32 +16,17 @@ sc_require('mixins/simple_button');
 Tasks.loginPage = SC.Page.create({
   
   panel: SC.PanelPane.create({
-    
-    layout: { centerX: 0, centerY: 0, height: 120, width: 430 },
+    layout: { centerX: 0, centerY: 0, height: 296, width: 843 },
+    classNames: ['login-page'],
     
     contentView: SC.View.design({
-      layout: { left: 0, right: 0, top: 0, bottom: 0},
-      childViews: 'tasksLogo loginPrompt loginEntry loginErrorMessage loginButton cancelButton signUp'.w(),
-      
-      tasksLogo: SC.LabelView.design({
-        layout: { top: 10,  left: 10, height: 26, width: 89 },
-        classNames: ['tasks-logo']
-      }),
-      
-      signUp: SC.LabelView.design(Tasks.SimpleButton,{
-        layout: { bottom: 8, left: 10, height: 24, width: 200 },
-        value: "_SignupLabelButton".loc(),
-        target: 'Tasks',
-        action: 'launchSignupPane'
-      }),
-      
-      loginPrompt: SC.LabelView.design({
-        layout: { top: 18, left: 130, width: 75, height: 24 },
-        value: "_LoginName:".loc()
-      }),
+      layout: { top: 0, bottom: 0, left: 0, right: 0 },
+      classNames: ['login-body'],
+      childViews: 'loginEntry loginErrorMessage cancelButton loginButton signUp'.w(),
       
       loginEntry: SC.TextFieldView.design({
-        layout: { top: 18, left: 215, right: 15, height: 20 },
+        layout: { top: 139, left: 343, width: 254, height: 26 },
+        classNames: ['login-name'],
         valueBinding: 'Tasks.loginController.loginName',
         keyDown: function(evt) {
           if(SC.FUNCTION_KEYS[evt.which] === 'return'){
@@ -51,14 +37,24 @@ Tasks.loginPage = SC.Page.create({
       }),
       
       loginErrorMessage: SC.LabelView.design({
-        layout: { left: 215, top: 45, right: 15, height: 20 },
+        layout: { top: 112, left: 420, width: 250, height: 20 },
         value: "_LoginError".loc(),
         isVisibleBinding: SC.Binding.oneWay('Tasks.loginController.loginError').bool(),
         classNames: ['error-message']
       }),
       
+      cancelButton: SC.ButtonView.design({
+        layout: { top: 178, left: 502, width: 80, height: 30 },
+        titleMinWidth: 0,
+        theme: 'capsule',
+        isCancel: YES,
+        title: "_Cancel".loc(),
+        target: 'Tasks.loginController',
+        action: 'cancel'
+      }),
+      
       loginButton: SC.ButtonView.design({
-        layout: { width: 80, height: 30, right: 10, bottom: 8 },
+        layout: { top: 178, left: 588, width: 80, height: 30 },
         titleMinWidth: 0,
         isEnabledBinding: SC.Binding.oneWay('Tasks.loginController.loginName').bool(),
         theme: 'capsule',
@@ -68,14 +64,12 @@ Tasks.loginPage = SC.Page.create({
         action: 'login'
       }),
       
-      cancelButton: SC.ButtonView.design({
-        layout: { width: 80, height: 30, right: 96, bottom: 8 },
-        titleMinWidth: 0,
-        theme: 'capsule',
-        isCancel: YES,
-        title: "_Cancel".loc(),
-        target: 'Tasks.loginController',
-        action: 'cancel'
+      signUp: SC.LabelView.design(Tasks.SimpleButton,{
+        layout: { top: 220, left: 514, height: 24, width: 200 },
+        classNames: ['sign-up'],
+        value: "_SignupLabelButton".loc(),
+        target: 'Tasks',
+        action: 'launchSignupPane'
       })
       
     }),
@@ -85,5 +79,5 @@ Tasks.loginPage = SC.Page.create({
     }
     
   })
-  
+    
 });

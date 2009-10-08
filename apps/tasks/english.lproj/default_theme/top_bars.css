@@ -129,7 +129,6 @@
 .filter-tasks-icon-has-criteria {
   width: 20px !important;
   height: 16px !important;
-  margin-top: 3px !important;
   margin-right: 2px !important;
   background: static_url('images/default-theme-static.png') no-repeat 0 -160px;
 }
@@ -137,7 +136,6 @@
 .filter-tasks-icon-no-criteria {
   width: 20px !important;
   height: 16px !important;
-  margin-top: 3px !important;
   margin-right: 2px !important;
   background: static_url('images/default-theme-static.png') no-repeat 0 -144px;
 }
