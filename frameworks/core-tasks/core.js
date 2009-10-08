@@ -115,7 +115,7 @@ CoreTasks = SC.Object.create({
       throw 'Error saving data: Save already in progress.';
     }
 
-    var store = this.get('store'), key, recType, records, len, i;
+    var store = this.get('store'), key, recType, recStatus, records, len, i;
 
     // Make our intentions known.
     this.set('saveMode', CoreTasks.MODE_SAVING);
@@ -140,7 +140,11 @@ CoreTasks = SC.Object.create({
 
     for (i = 0; i < len; i++) {
       key = dirtyRecordKeys[i];
+      recStatus = store.peekStatus(key);
       recType = store.recordTypeFor(key);
+
+      // Short-circuit if status is CLEAN (you can't always trust the changelog).
+      if (recStatus & SC.Record.CLEAN || recStatus === SC.Record.READY_NEW) continue;
 
       switch (recType) {
         case CoreTasks.User:
@@ -397,30 +401,6 @@ CoreTasks = SC.Object.create({
     return parseFloat(parseFloat(ret, 10).toFixed(3));
   },
   
-  /**
-   * Convert time into days using time unit if available (assumed 'd' otherwise)
-   *
-   * @param (String) time in days or hours
-   */
-  convertTimeToDays: function(time) {
-    if(SC.none(time)) return 0;
-    var lastChar = time[time.length-1];
-    var ret;
-    if(lastChar === 'd') ret = time.slice(0, time.length-1); // already in days, remove time unit
-    else if(lastChar === 'h') ret = time.slice(0, time.length-1)/8; // asssumes 8h days, convert, remove time unit
-    else ret = time; // already number of days
-    return parseFloat(parseFloat(ret, 10).toFixed(3));
-  },
-
-  _storeChangelogDidChange: function() {
-    var store = this.store;
-
-    if (store.changelog && store.changelog.length > 0) {
-      // There's something in the changelog.
-    }
-
-  }.observes('store.changelog.[]'),
-
   // Used to assign all newly-created records with a negative ID.
   // TODO: [SE] Reset the counter so that we don't run out of integers if the client is left
   // running for a very long time.
