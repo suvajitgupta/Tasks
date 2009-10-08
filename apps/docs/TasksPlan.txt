@@ -58,9 +58,9 @@ v Disable Add/Del. Tasks buttons when on "All Tasks" project [SG] <BB> @Done %Pa
 - Beta: Select first project at startup [SG] <JH2> @Done %Passed $Feature
 ^ Add virtual "All Tasks" & "Unallocated Tasks" projects and display them grayed out in projects list [SG] <SE> @Done
 - Disallow "All Tasks" & "Unallocated Tasks" projects from being deleted [SG] @Done $Feature %Passed
-^ Allow multi-task drag-n-drop Task reallocation to Projects [BB] <SG> @Done $Feature %Passed
+^ Allow multi-task drag-n-drop reallocation to projects [BB] <SG> @Done $Feature %Passed
 ^ Beta: Add popup viewer/editor for Project time left/description [SG] $Feature @Active
-v Add context menu to Add/Delete a project <SG> [JH2] $Feature
+v Add context menu to Add/Delete a project <JH2> [SG] $Feature
 
 Task Manager GUI
 ^ Group Tasks by User and display Task id, summary, and effort (if specified) on far right [SG] <JH2> @Done $Feature %Passed
@@ -75,7 +75,7 @@ Task Manager GUI
 - Add Task Status/Priority/Validation radio buttons in tasks toolbar [SG] @Done $Feature %Passed
 v Enable Task Validation radio buttons only when in Done status [SG] <JH2> $Feature @Done %Passed
 - Beta: Allow multi-selected tasks to be set to new type/status/priority/validation [SG] <JH2> $Feature
-^ Beta: Add task search filter (by #ids or name) & corresponding delete button in top toolbar: support type-ahead searching [SG] @Active $Feature
+^ Beta: Add task search filter (by #IDs or name) & corresponding delete button in top toolbar: support type-ahead searching [SG] @Done $Feature
 ^ Allow task attribute filtering by type, priority, status, and validation fields via a toolbar button/pop up panel [SG] $Feature @Done %Passed
 - Indicate whether there is a task attribute filter via a different icon on the toolbar button [SG] $Feature @Done %Passed
 v Set tasks toolbar button enablement based on having a selection [SG] @Done $Feature %Passed
@@ -92,7 +92,7 @@ v Add hover over tooltip for assignees to show how many tasks they have and to e
 ^ Allow multi-task drag-n-drop reassignment [BB] <SG>  @Done $Feature %Passed
 ^ Add popup viewer/editor for Task submitter, sssignee, effort, and description [JH2] <SG> @Done %Passed $Feature
 - Fix task pop editor location problem where it is getting cropped at the window boundary [SC] <SG> @Active $Bug
-v Add context menu to Add/Delete a task <SG> [JH2] $Feature
+v Add context menu to Add/Delete a task <JH2> [SG] $Feature
 
 User Manager GUI
 ^ Add login screen to identify user who logs in (and handle login failures properly) [SG] <SE> @Done %Passed $Feature

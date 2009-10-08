@@ -148,7 +148,19 @@ Tasks.assignmentsController = SC.ArrayController.create(
     // Extract task name search filter
     var sf = this.get('searchFilter');
     sf = this._escapeMetacharacters(sf);
-    var rx = new RegExp(sf, 'i');
+    var idPattern = null, namePattern = null;
+    var idMatches = sf.match(/((?:[^\s?#|](\d+)[^\s?|,|\w+]?)+)/g); // TODO: [SG] fix regex to match single digit IDs
+    if(idMatches) {
+      var ids = '';
+      for(i = 0; i < idMatches.length; i++) {
+        if (i) ids += '|';
+        ids += idMatches[i];
+      }
+      idPattern = new RegExp(ids);
+    }
+    else {
+      namePattern = new RegExp(sf, 'i');
+    }
     
     // Get time left, if any specified, in selected project.
     var projectTimeLeft = null;
@@ -186,7 +198,13 @@ Tasks.assignmentsController = SC.ArrayController.create(
             var validation = task.get('validation');
             if(this.attributeFilterCriteria.indexOf(validation) === -1) return;
           }
-          if(!(taskName.match(rx) || ('' + task.get('id')).match(rx))) return;
+          if(idPattern) {
+            var taskId = '' + task.get('id');
+            if(!taskId.match(idPattern)) return;
+          }
+          else if(namePattern) {
+            if(!taskName.match(namePattern)) return;
+          }
         }
         assigneeObj.tasks.push(task);
       }
