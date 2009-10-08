@@ -1,3 +1,5 @@
+require 'proxy-patch'
+
 config :'core-tasks', :required => [:sproutcore]
 config :tasks, :required => [:'core-tasks', :sproutcore]
 

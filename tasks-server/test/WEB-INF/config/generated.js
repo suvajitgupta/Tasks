@@ -51,11 +51,11 @@
 					"optional":true
 				},
 				"createdAt":{
-					"type":"number",
+					"type":"any",
 					"optional":true
 				},
 				"updatedAt":{
-					"type":"number",
+					"type":"any",
 					"optional":true
 				},
 				"timeLeft":{
@@ -73,7 +73,7 @@
 		"schema":{
 			"properties":{
 				"_id":{
-					"type":"number",
+					"type":"any",
 					"optional":true
 				},
 				"name":{
@@ -85,7 +85,7 @@
 					"optional":true
 				},
 				"projectId":{
-					"type":"number",
+					"type":"any",
 					"optional":true
 				},
 				"type":{
@@ -109,19 +109,19 @@
 					"optional":true
 				},
 				"submitterId":{
-					"type":"number",
+					"type":"any",
 					"optional":true
 				},
 				"assigneeId":{
-					"type":"number",
+					"type":"any",
 					"optional":true
 				},
 				"createdAt":{
-					"type":"number",
+					"type":"any",
 					"optional":true
 				},
 				"updatedAt":{
-					"type":"number",
+					"type":"any",
 					"optional":true
 				}
 			},

@@ -354,7 +354,7 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
 
       // Invoke the success callback.
       callback = CoreTasks.getCallback('delete', 'success', params.recordType);
-      CoreTasks.invokeCallback(callback);
+      CoreTasks.invokeCallback(callback, params.storeKey);
     }
   },
 

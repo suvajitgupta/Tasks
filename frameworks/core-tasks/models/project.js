@@ -144,9 +144,10 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
   },
 
   /**
-  * Export a project's attributes.
-  * @returns {String) return a string with the project's data exported in it.
-  */
+   * Export a project's attributes.
+   *
+   * @returns {String) A string with the project's data exported in it.
+   */
   exportData: function() {
     var projectName = this.get('name');
     if(projectName === CoreTasks.ALL_TASKS_NAME || projectName === CoreTasks.UNALLOCATED_TASKS_NAME) return '';
@@ -158,11 +159,13 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
   },
   
   /**
-  * Destroy a project and orphan any tasks that are in it.
-  */
+   * Destroys the project and orphans any tasks that are in it.
+    */
   destroy: function() {
+    sc_super();
+
     var tasks = this.get('tasks');
-    if(tasks) {
+    if (tasks) {
       tasks.forEach(function(task) {
         task.set('projectId', null);
       });
@@ -205,3 +208,6 @@ CoreTasks.registerCallback(
 
 CoreTasks.registerCallback(
   CoreTasks.Project, 'put', 'success', CoreTasks.projectUpdated.bind(CoreTasks));
+
+CoreTasks.registerCallback(
+  CoreTasks.Project, 'delete', 'success', CoreTasks.projectDeleted.bind(CoreTasks));

@@ -148,3 +148,6 @@ CoreTasks.registerCallback(
 
 CoreTasks.registerCallback(
   CoreTasks.User, 'put', 'success', CoreTasks.userUpdated.bind(CoreTasks));
+
+CoreTasks.registerCallback(
+  CoreTasks.User, 'delete', 'success', CoreTasks.userDeleted.bind(CoreTasks));

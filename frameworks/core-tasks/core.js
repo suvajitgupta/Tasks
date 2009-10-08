@@ -138,13 +138,15 @@ CoreTasks = SC.Object.create({
     var dirtyRecordKeys = store.changelog;
     len = dirtyRecordKeys ? dirtyRecordKeys.length : 0;
 
+    debugger;
+
     for (i = 0; i < len; i++) {
       key = dirtyRecordKeys[i];
       recStatus = store.peekStatus(key);
       recType = store.recordTypeFor(key);
 
       // Short-circuit if status is CLEAN (you can't always trust the changelog).
-      if (recStatus & SC.Record.CLEAN || recStatus === SC.Record.READY_NEW) continue;
+      if (recStatus & SC.Record.CLEAN && recStatus !== SC.Record.READY_NEW) continue;
 
       switch (recType) {
         case CoreTasks.User:
@@ -191,6 +193,8 @@ CoreTasks = SC.Object.create({
     this.set('saveMode', CoreTasks.MODE_NOT_SAVING);
   },
 
+  // User callbacks.
+
   userCreated: function(storeKey) {
     console.log('CoreTasks#userCreated(%@)'.fmt(storeKey));
     var user = this.get('store').materializeRecord(storeKey), tasks;
@@ -227,6 +231,14 @@ CoreTasks = SC.Object.create({
     this._continueSave();
   },
 
+  userDeleted: function(storeKey) {
+    console.log('CoreTasks.#userDeleted(%@)'.fmt(storeKey));
+    this._dirtyUsers.removeObject(storeKey);
+    this._continueSave();
+  },
+
+  // Project callbacks.
+
   projectCreated: function(storeKey) {
     console.log('CoreTasks#projectCreated(%@)'.fmt(storeKey));
     var project = this.get('store').materializeRecord(storeKey);
@@ -253,6 +265,14 @@ CoreTasks = SC.Object.create({
     this._continueSave();
   },
 
+  projectDeleted: function(storeKey) {
+    console.log('CoreTasks.#projectDeleted(%@)'.fmt(storeKey));
+    this._dirtyProjects.removeObject(storeKey);
+    this._continueSave();
+  },
+
+  // Task callbacks.
+
   taskCreated: function(storeKey) {
     console.log('CoreTasks#taskCreated(%@)'.fmt(storeKey));
     this._dirtyTasks.removeObject(storeKey);
@@ -261,6 +281,12 @@ CoreTasks = SC.Object.create({
 
   taskUpdated: function(storeKey) {
     console.log('CoreTasks#taskUpdated(%@)'.fmt(storeKey));
+    this._dirtyTasks.removeObject(storeKey);
+    this._continueSave();
+  },
+
+  taskDeleted: function(storeKey) {
+    console.log('CoreTasks.#taskDeleted(%@)'.fmt(storeKey));
     this._dirtyTasks.removeObject(storeKey);
     this._continueSave();
   },
