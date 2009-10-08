@@ -194,7 +194,6 @@ CoreTasks = SC.Object.create({
   // User callbacks.
 
   userCreated: function(storeKey) {
-    console.log('CoreTasks#userCreated(%@)'.fmt(storeKey));
     var user = this.get('store').materializeRecord(storeKey), tasks;
 
     SC.RunLoop.begin();
@@ -224,13 +223,11 @@ CoreTasks = SC.Object.create({
   },
 
   userUpdated: function(storeKey) {
-    console.log('CoreTasks#userUpdated(%@)'.fmt(storeKey));
     this._dirtyUsers.removeObject(storeKey);
     this._continueSave();
   },
 
   userDeleted: function(storeKey) {
-    console.log('CoreTasks.#userDeleted(%@)'.fmt(storeKey));
     this._dirtyUsers.removeObject(storeKey);
     this._continueSave();
   },
@@ -238,7 +235,6 @@ CoreTasks = SC.Object.create({
   // Project callbacks.
 
   projectCreated: function(storeKey) {
-    console.log('CoreTasks#projectCreated(%@)'.fmt(storeKey));
     var project = this.get('store').materializeRecord(storeKey);
 
     // Update the now-disassociated tasks.
@@ -258,13 +254,11 @@ CoreTasks = SC.Object.create({
   },
 
   projectUpdated: function(storeKey) {
-    console.log('CoreTasks#projectUpdated(%@)'.fmt(storeKey));
     this._dirtyProjects.removeObject(storeKey);
     this._continueSave();
   },
 
   projectDeleted: function(storeKey) {
-    console.log('CoreTasks.#projectDeleted(%@)'.fmt(storeKey));
     this._dirtyProjects.removeObject(storeKey);
     this._continueSave();
   },
@@ -272,26 +266,21 @@ CoreTasks = SC.Object.create({
   // Task callbacks.
 
   taskCreated: function(storeKey) {
-    console.log('CoreTasks#taskCreated(%@)'.fmt(storeKey));
     this._dirtyTasks.removeObject(storeKey);
     this._continueSave();
   },
 
   taskUpdated: function(storeKey) {
-    console.log('CoreTasks#taskUpdated(%@)'.fmt(storeKey));
     this._dirtyTasks.removeObject(storeKey);
     this._continueSave();
   },
 
   taskDeleted: function(storeKey) {
-    console.log('CoreTasks.#taskDeleted(%@)'.fmt(storeKey));
     this._dirtyTasks.removeObject(storeKey);
     this._continueSave();
   },
 
   _continueSave: function() {
-    console.log('CoreTasks#_continueSave()');
-
     if (this._dirtyUsers.length === 0) {
       if (this._dirtyProjects.length === 0) {
         if (this._dirtyTasks.length === 0) {
