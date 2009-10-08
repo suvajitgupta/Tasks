@@ -260,8 +260,7 @@
 }
 
 .sc-theme.focus .sc-list-view.sc-source-list .sc-collection-item.sel {
-	outline: 1px solid #9CF !important;
-  background: #CFF !important;
+  background: #abd7ff !important;
 }
 
 .sc-view.sc-ghost-view .task-item {
