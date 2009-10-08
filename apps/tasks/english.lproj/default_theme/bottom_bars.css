@@ -12,7 +12,7 @@
 */
 
 .control-bar {
-  background: static_url('images/default-theme-toolbar-bg.png') repeat-x 0 0; 
+  background: static_url('images/default-theme-repeat-x.png') repeat-x 0 -71px; 
 }
 
 .task-attribute-set-title  {
@@ -41,7 +41,7 @@
  */
 
 .status-bar {
-  background: static_url('images/default-theme-bar-bg.png') repeat-x 0 -44px;
+  background: static_url('images/default-theme-repeat-x.png') repeat-x 0 -44px;
 }
 
 .status-bar-message {

@@ -22,7 +22,7 @@
  */
 
 .title-bar {
-  background: static_url('images/default-theme-bar-bg.png') repeat-x 0 0;
+  background: static_url('images/default-theme-repeat-x.png') repeat-x 0 0;
 }
 
 .title-bar-label {
@@ -60,6 +60,30 @@
 /*
 // TODO: [MG] add a save-icon.disabled style
 */
+
+.add-icon {
+  width: 16px;
+  height: 16px;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -288px;
+}
+
+.disabled.add-icon {
+  width: 16px;
+  height: 16px;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -320px;
+}
+
+.delete-icon {
+  width: 16px;
+  height: 16px;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -304px;
+}
+
+.disabled .delete-icon {
+  width: 16px;
+  height: 16px;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -336px;
+}
 
 .import-icon {
   background: static_url('images/default-theme-static.png') no-repeat 0 0;
@@ -102,77 +126,18 @@
   text-align: center !important;
 }
 
-.project-add-icon {
-  width: 21px !important;
-  height: 19px !important;
-  margin-top: 3px !important;
-  margin-right: 2px !important;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -526px;
-}
-
-.project-del-icon {
-  width: 21px !important;
-  height: 19px !important;
-  margin-top: 3px !important;
-  margin-right: 2px !important;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -547px;
-}
-
-.disabled .project-del-icon {
-  width: 21px !important;
-  height: 19px !important;
-  margin-top: 3px !important;
-  margin-right: 2px !important;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -587px;
-}
-
-.task-add-icon {
-  width: 21px !important;
-  height: 21px !important;
-  margin-top: 3px !important;
-  margin-right: 2px !important;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -442px;
-}
-
-.disabled .task-add-icon {
-  width: 21px !important;
-  height: 21px !important;
-  margin-top: 3px !important;
-  margin-right: 2px !important;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -605px;
-}
-
-.task-del-icon {
-  width: 21px !important;
-  height: 21px !important;
-  margin-top: 3px !important;
-  margin-right: 2px !important;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -464px;
-}
-
-.disabled .task-del-icon
-{
-  width: 21px !important;
-  height: 21px !important;
-  margin-top: 3px !important;
-  margin-right: 2px !important;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -565px;
-}
-
 .filter-tasks-icon-has-criteria {
   width: 20px !important;
   height: 16px !important;
-  margin-top: 3px !important;
   margin-right: 2px !important;
-  background: static_url('images/filter_tasks_has_criteria.png') no-repeat 0 0;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -160px;
 }
 
 .filter-tasks-icon-no-criteria {
   width: 20px !important;
   height: 16px !important;
-  margin-top: 3px !important;
   margin-right: 2px !important;
-  background: static_url('images/filter_tasks_no_criteria.png') no-repeat 0 0;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -144px;
 }
 
 .assignee-selection-bar {
@@ -188,9 +153,8 @@
 }
 
 .assignee-selection-bar input {
-  padding: 6px 0 0 24px !important;
-  left: 7px !important;
-  width: 146px !important;
+  padding: 8px 0 0 30px !important;
+  width: 150px !important;
   outline: 0 !important;
   border: 0 !important;
   background: none !important;
@@ -213,8 +177,8 @@
 }
 
 .tasks-search-bar input {
-  padding: 6px 0 0 24px !important;
-  width: 156px !important;
+  padding: 8px 0 0 24px !important;
+  width: 154px !important;
   outline: 0 !important;
   border: 0 !important;
   background: none;
@@ -226,7 +190,7 @@
 }
 
 .filter-cancel-icon {
-  background: static_url('images/default-theme-static.png') no-repeat 0 -650px !important;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -352px !important;
   z-index: 101 !important;
   cursor: pointer !important;
 }

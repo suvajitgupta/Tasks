@@ -1,0 +1,68 @@
+/* 
+
+  Login Page Styling
+
+  @author Matt Grantham
+  
+*/
+
+.login-page {
+  background: static_url('images/login-bg.png') no-repeat;
+}
+
+.login-name {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.login-name input {
+  border: 0;
+  outline: 0;
+  background: none;
+  color: #48546c;
+}
+
+.login-body .error-message {
+  
+}
+
+.sign-up {
+  color: #b4dbdd !important;
+  font-size: 11px !important;
+}
+
+.login-body {
+  background: none !important;
+}
+
+.login-page .top-left-edge {
+  display: none;
+}
+
+.login-page .top-edge {
+  display: none;
+}
+
+.login-page .top-right-edge {
+  display: none;
+}
+
+.login-page .right-edge {
+  display: none;
+}
+
+.login-page .bottom-right-edge {
+  display: none;
+}
+
+.login-page .bottom-edge {
+  display: none;
+}
+
+.login-page .bottom-left-edge {
+  display: none;
+}
+
+.login-page .left-edge {
+  display: none;
+}

@@ -34,8 +34,8 @@ Tasks.settingsPage = SC.Page.create({
             childViews: [
             
               SC.LabelView.design(Tasks.SimpleButton,{
-                layout: { top: 5, left: 5, height: 24, width: 90 },
-                icon: 'task-add-icon',
+                layout: { top: 8, left: 5, height: 24, width: 90 },
+                icon: 'add-icon',
                 value: "_AddUser".loc(),
                 classNames: ['toolbar-label'],
                 toolTip: "_AddUserTooltip".loc(),
@@ -44,8 +44,8 @@ Tasks.settingsPage = SC.Page.create({
               }),
 
               SC.LabelView.design(Tasks.SimpleButton,{
-                layout: { top: 5, left: 100, height: 24, width: 90 },
-                icon: 'task-del-icon',
+                layout: { top: 8, left: 100, height: 24, width: 90 },
+                icon: 'delete-icon',
                 value: "_DelUser".loc(),
                 classNames: ['toolbar-label'],
                 toolTip: "_DelUserTooltip".loc(),
@@ -80,7 +80,7 @@ Tasks.settingsPage = SC.Page.create({
             value: "_LoginName:"
           }),
           SC.TextFieldView.design({
-            layout: { top: 100, left: 300, height: 16, width: 150 },
+            layout: { top: 100, left: 300, height: 16, width: 200 },
             localize: YES,
             valueBinding: SC.binding('Tasks.userController.loginName', this)
           }),
@@ -104,7 +104,7 @@ Tasks.settingsPage = SC.Page.create({
             value: "_Role:"
           }),
           SC.SelectFieldView.design({
-            layout: { top: 170, left: 300, height: 20, width: 100 },
+            layout: { top: 170, left: 300, height: 20, width: 140 },
             localize: YES,
             objects: CoreTasks.roles,
             valueBinding: 'Tasks.userController.role'

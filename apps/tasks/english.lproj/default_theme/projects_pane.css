@@ -56,22 +56,29 @@
   right: 18px !important;
 }
 */
+
 .regular-project-item .sc-outline .count {
 	font-weight: normal !important;
   line-height: 11px !important;
   color: black !important;
-  background: white none repeat scroll 0 0 !important;
-  border: 1px solid #AAA !important;
+  background: #ccc;
+  border: 1px solid #ccc !important;
+}
+
+.regular-project-item.sel .sc-outline .count {
+  color: #14398e !important;
+  background: #c1dbff;
+  border: 1px solid #c1dbff !important;
 }
 
 .project-icon-has-tasks {
   width: 16px;
   height: 16px;
-  background: static_url('images/project_has_tasks.png') no-repeat 0 0;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -192px;
 }
 
 .project-icon-no-tasks {
   width: 16px;
   height: 16px;
-  background: static_url('images/project_no_tasks.png') no-repeat 0 0;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -176px;
 }

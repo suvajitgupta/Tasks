@@ -135,19 +135,19 @@
 .task-icon-feature {
   height: 16px !important;
   width: 16px !important;
-  background: static_url('images/task_type_feature.png') no-repeat 0 0;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -256px;
 }
 
 .task-icon-bug {
   height: 16px !important;
   width: 16px !important;
-  background: static_url('images/task_type_bug.gif') no-repeat 0 0;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -240px;
 }
 
 .task-icon-other {
   width: 16px !important;
 	height: 16px !important;
-  background: static_url('images/task_type_other.png') no-repeat 0 0;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -272px;
 }
 
 /*-----------------------------------------------------------------
@@ -241,13 +241,13 @@
 .task-icon-has-description {
   width: 16px !important;
   height: 16px !important;
-  background: static_url('images/task_has_description.png');
+  background: static_url('images/default-theme-static.png') no-repeat 0 -224px;
 }
 
 .task-icon-no-description {
   width: 16px !important;
   height: 16px !important;
-  background: static_url('images/task_no_description.png');
+  background: static_url('images/default-theme-static.png') no-repeat 0 -208px;
 }
 
 
@@ -260,8 +260,7 @@
 }
 
 .sc-theme.focus .sc-list-view.sc-source-list .sc-collection-item.sel {
-	outline: 1px solid #9CF !important;
-  background: #CFF !important;
+  background: #abd7ff !important;
 }
 
 .sc-view.sc-ghost-view .task-item {
