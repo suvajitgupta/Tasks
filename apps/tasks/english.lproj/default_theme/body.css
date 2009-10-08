@@ -23,6 +23,10 @@ body {
 }
 */
 
+.sc-collection-view {
+  border-top: 0 !important;
+}
+
 #mainPane {
   min-width: 1024px;
 }
