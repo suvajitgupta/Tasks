@@ -22,7 +22,7 @@
  */
 
 .title-bar {
-  background: static_url('images/default-theme-bar-bg.png') repeat-x 0 0;
+  background: static_url('images/default-theme-repeat-x.png') repeat-x 0 0;
 }
 
 .title-bar-label {
@@ -164,7 +164,7 @@
   height: 16px !important;
   margin-top: 3px !important;
   margin-right: 2px !important;
-  background: static_url('images/filter_tasks_has_criteria.png') no-repeat 0 0;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -160px;
 }
 
 .filter-tasks-icon-no-criteria {
@@ -172,7 +172,7 @@
   height: 16px !important;
   margin-top: 3px !important;
   margin-right: 2px !important;
-  background: static_url('images/filter_tasks_no_criteria.png') no-repeat 0 0;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -144px;
 }
 
 .assignee-selection-bar {
