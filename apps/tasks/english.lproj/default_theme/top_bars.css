@@ -188,9 +188,8 @@
 }
 
 .assignee-selection-bar input {
-  padding: 6px 0 0 24px !important;
-  left: 7px !important;
-  width: 146px !important;
+  padding: 8px 0 0 30px !important;
+  width: 150px !important;
   outline: 0 !important;
   border: 0 !important;
   background: none !important;
@@ -213,8 +212,8 @@
 }
 
 .tasks-search-bar input {
-  padding: 6px 0 0 24px !important;
-  width: 156px !important;
+  padding: 8px 0 0 24px !important;
+  width: 154px !important;
   outline: 0 !important;
   border: 0 !important;
   background: none;
