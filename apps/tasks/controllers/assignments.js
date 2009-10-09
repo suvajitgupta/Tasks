@@ -149,12 +149,12 @@ Tasks.assignmentsController = SC.ArrayController.create(
     var sf = this.get('searchFilter');
     sf = this._escapeMetacharacters(sf);
     var idPattern = null, namePattern = null;
-    var idMatches = sf.match(/((?:[^\s?#|](\d+)[^\s?|,|\w+]?)+)/g); // TODO: [SG] fix regex to match single digit IDs
+    var idMatches = sf.match(/#(\d+)/g); // TODO: [SG] fix regex to match single digit IDs
     if(idMatches) {
       var ids = '';
       for(i = 0; i < idMatches.length; i++) {
         if (i) ids += '|';
-        ids += idMatches[i];
+        ids += idMatches[i].slice(1);
       }
       idPattern = new RegExp(ids);
     }
