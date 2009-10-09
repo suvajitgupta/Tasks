@@ -34,7 +34,7 @@ Tasks.settingsPage = SC.Page.create({
             childViews: [
             
               SC.LabelView.design(Tasks.SimpleButton,{
-                layout: { top: 8, left: 5, height: 24, width: 90 },
+                layout: { centerY: 0, left: 5, height: 16, width: 90 },
                 icon: 'add-icon',
                 value: "_AddUser".loc(),
                 classNames: ['toolbar-label'],
@@ -44,7 +44,7 @@ Tasks.settingsPage = SC.Page.create({
               }),
 
               SC.LabelView.design(Tasks.SimpleButton,{
-                layout: { top: 8, left: 100, height: 24, width: 90 },
+                layout: { centerY: 0, left: 100, height: 16, width: 90 },
                 icon: 'delete-icon',
                 value: "_DelUser".loc(),
                 classNames: ['toolbar-label'],
