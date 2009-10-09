@@ -43,7 +43,7 @@ Project Manager GUI
 ^ Add Master/Detail Explorer view with click selection of Projects showing corresponding Tasks [JH2] <SG> @Done $Feature %Passed
 ^ Show Project name & time left (if specified) on far right [SG] <JH2> @Done $Feature %Passed
 - Use icon to indicate if Project has any tasks or not [SG] @Done $Feature %Passed
-- Beta: Support alpha sorting of projects [SG] <JH2> @Active $Feature
+- Beta: Support alpha sorting of projects [SG] <JH2> @Risky $Feature
 v Add hover over tooltip for projects to show how many tasks they contain [SG] @Done $Feature %Passed
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done $Feature %Passed
 v Make All/Unallocated Tasks project names to be non-editable upon double clicking @Done %Passed $Feature <JH2> [SG]
@@ -59,7 +59,7 @@ v Disable Add/Del. Tasks buttons when on "All Tasks" project [SG] <BB> @Done %Pa
 ^ Add virtual "All Tasks" & "Unallocated Tasks" projects and display them grayed out in projects list [SG] <SE> @Done
 - Disallow "All Tasks" & "Unallocated Tasks" projects from being deleted [SG] @Done $Feature %Passed
 ^ Allow multi-task drag-n-drop reallocation to projects [BB] <SG> @Done $Feature %Passed
-^ Beta: Add popup viewer/editor for Project time left/description [SG] $Feature @Active
+^ Beta: Add popup viewer/editor for Project time left/description <SE> [SG] $Feature @Active
 v Add context menu to Add/Delete a project <JH2> [SG] $Feature
 
 Task Manager GUI
@@ -75,7 +75,7 @@ Task Manager GUI
 - Add Task Status/Priority/Validation radio buttons in tasks toolbar [SG] @Done $Feature %Passed
 v Enable Task Validation radio buttons only when in Done status [SG] <JH2> $Feature @Done %Passed
 - Beta: Allow multi-selected tasks to be set to new type/status/priority/validation [SG] <JH2> $Feature
-^ Beta: Add task search filter (by #IDs or name) & corresponding delete button in top toolbar: support type-ahead searching [SG] @Done $Feature
+^ Beta: Add task search filter (by #IDs or name) & corresponding delete button in top toolbar: support type-ahead searching <JH2> [SG] @Done $Feature
 ^ Allow task attribute filtering by type, priority, status, and validation fields via a toolbar button/pop up panel [SG] $Feature @Done %Passed
 - Indicate whether there is a task attribute filter via a different icon on the toolbar button [SG] $Feature @Done %Passed
 v Set tasks toolbar button enablement based on having a selection [SG] @Done $Feature %Passed
@@ -84,7 +84,7 @@ v Set tasks toolbar button enablement based on having a selection [SG] @Done $Fe
 | Logged in user is default Submitter, Assignee is either set to the same as selected task (if one) or to logged in user
 | Copy over type/priority attributes of selected task to new task
 - Clear task validation if status is changed from Done, disallow entry of Passed/Failed when task is not Done [SG] <MB> $Feature @Done %Passed
-^ Beta: Have tasks refer to projects instead of the other way around [SE] <SG> @Active
+^ Beta: Have tasks refer to projects instead of the other way around [SE] <SG> @Done
 ^ Show Done/Left effort subtotals (exclude Low priority tasks) on far right for load balancing [SG] @Done $Feature %Passed
 - Append "?" for range-based subtotals including tasks with unspecified efforts [SG] @Done $Feature %Passed
 - Color code assignee non loading in gray, under loading in green, proper loading in blue, and over loading in red [SG] @Done $Feature %Passed
@@ -98,7 +98,6 @@ User Manager GUI
 ^ Add login screen to identify user who logs in (and handle login failures properly) [SG] <SE> @Done %Passed $Feature
 - Beta: Add a guest signup capability to login screen (reuse view with User Manager) [JH2] <SG> @Active $Feature
 ^ Add Assignee selection filter (space or comma separators) & corresponding delete button in top toolbar [SG] <JH2> @Done $Feature %Passed
-- Beta: In Firefox fix assignee selection appearing to far left outside of text field <SG> [MG] $Bug
 - Set assignee selection filter to logged in user if they are a Developer, filter out Other tasks if they are a Tester [SG] @Done $Feature %Passed
 - Allow assignee filtering by matching any part of name, not just loginName [SG] $Feature
 ^ Beta: Add User Manager with "Add/Del. User"  buttons in toolbar (ask to reenter password) [SG] <JH2> @Active $Feature
