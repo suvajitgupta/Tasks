@@ -60,11 +60,11 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
     if (!this._disassociatedTasksQuery) {
       this._disassociatedTasksQuery = SC.Query.create({ recordType: CoreTasks.Task });
     }
-
+    
     // Narrow the conditions.
     this._disassociatedTasksQuery.set('conditions', 'projectId = %@');
     this._disassociatedTasksQuery.set('parameters', [this.get('_id')]);
-
+    
     // Execute the query and return the results.
     return this.get('store').findAll(this._disassociatedTasksQuery);
 
@@ -124,9 +124,10 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
     // This has to be done in a separate run loop so that the dynamic "tasks" query is recomputed
     // *after* the change is made to the store.
     SC.RunLoop.begin();
-    task.set('projectId', this.get('id'));
+    task.writeAttribute('projectId', this.get('id'));
     SC.RunLoop.end();
-
+    this.notifyPropertyChange('tasks');
+    
     return this.get('tasks'); 
   },
 
@@ -139,7 +140,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
     SC.RunLoop.begin();
     task.set('projectId', null);
     SC.RunLoop.end();
-
+    this.notifyPropertyChange('tasks');
     return this.get('tasks');
   },
 

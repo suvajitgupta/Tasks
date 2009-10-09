@@ -40,8 +40,8 @@ class User
   property  :password,      Text #,   :nullable =>  false -- NOT IMPLEMENTED IN ALL AREAS
   property  :preferences,   Json
   property  :authToken,     Text
-  # property  :created_at,      DateTime -- NOT IMPLEMENTED
-  # property  :updated_at,      DateTime -- NOT IMPLEMENTED
+  property  :createdAt,     Integer
+  property  :updatedAt,     Integer
   
   def url
     "user/#{self.id}"    
@@ -62,7 +62,7 @@ class User
   def self.parse_json(body, requestMethod)
     json = JSON.parse(body)
     ret = {}
-    json.each {|k,v| ret[k.to_sym] = v unless k == 'id' }
+    json.each {|k,v| ret[k.to_sym] = v unless k == 'id' || k == '_id' }
     if requestMethod === 'update'
       return nil if @required_for_update.find { |r| ret[r].nil? }
     else
@@ -75,10 +75,12 @@ end
 class Project
   include DataMapper::Resource
   
-  property :id,         Serial
-  property :name,       Text, :nullable => false
-  property :'timeLeft', Integer
-  property :tasks,      Json
+  property  :id,          Serial
+  property  :name,        Text, :nullable => false
+  property  :'timeLeft',  Integer
+  property  :tasks,       Json
+  property  :createdAt,   Integer
+  property  :updatedAt,   Integer
   
   def url
     "project/#{self.id}"
@@ -97,7 +99,7 @@ class Project
   def self.parse_json(body, requestMethod)
     json = JSON.parse(body)
     ret = {}
-    json.each {|k,v| ret[k.to_sym] = v unless k == 'id' }
+    json.each {|k,v| ret[k.to_sym] = v unless k == 'id' || k == '_id' }
     return nil if @required.find { |r| ret[r].nil? }
     ret
   end
@@ -111,14 +113,15 @@ class Task
   property  :name,         Text,   :nullable => false
 	property  :priority,     String, :default => '_Medium'
 	property  :effort,       String
-	property  :submitter,    Integer
-	property  :assignee,     Integer
+	property  :submitterId,  Integer
+	property  :assigneeId,   Integer
+	property  :projectId,    Integer
 	property  :type,         String, :default => '_Other'
 	property  :status,       String, :default => '_Planned'
 	property  :validation,   String, :default => '_Untested'
 	property  :description,  Text
-  # property  :created_at,   DateTime, :default  => DateTime.now -- NOT IMPLEMENTED
-  # property  :updated_at,   DateTime, :default  => DateTime.now -- NOT IMPLEMENTED
+  property  :createdAt,    Integer
+  property  :updatedAt,    Integer
   
   def url
     "task/#{self.id}"
@@ -137,7 +140,7 @@ class Task
   def self.parse_json(body, requestMethod)
     json = JSON.parse(body)
     ret = {}
-    json.each {|k,v| ret[k.to_sym] = v unless k == 'id' }
+    json.each {|k,v| ret[k.to_sym] = v unless k == 'id' || k == '_id' }
     return nil if @required.find { |r| ret[r].nil? }
     ret
   end

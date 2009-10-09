@@ -348,7 +348,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
       this._timer = null;
     }
   	this.invokeOnce(this.showAssignments);
-  }.observes('[]'),
+  }.observes('content'),
   
   _filteringHasChanged: function() { // allow users to change filters over a half second before redrawing tasks pane
     if (this._timer) this._timer.invalidate();
