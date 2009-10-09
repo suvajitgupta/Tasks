@@ -331,6 +331,8 @@ CoreTasks.Task = CoreTasks.Record.extend({
     val = this.get('validation');
     if(val !== CoreTasks.TASK_VALIDATION_UNTESTED)ret += ' %' + val.loc();
     
+    ret += ' #' + this.get('id');
+    
     val = this.get('description');
     if(val) {
       var lines = val.split('\n');
