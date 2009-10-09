@@ -393,6 +393,10 @@ Tasks.mixin({
    */
   addTask: function() {
     
+    // Add the new task to the currently-selected project.
+    var project = this.getPath('projectsController.selection').firstObject();
+    var projectId = project.get('id');
+
     var userId = CoreTasks.getPath('user.id');
     var defaultTaskHash = SC.clone(CoreTasks.Task.NEW_TASK_HASH);
     var taskHash = SC.merge({ 'submitterId': userId, 'assigneeId': userId }, defaultTaskHash);
@@ -414,16 +418,18 @@ Tasks.mixin({
       }
     }
 
-    // Add the new task to the currently-selected project.
-    var project = this.getPath('projectsController.selection').firstObject();
-    project.addTask(task);
-
     // Add the task to the All Tasks project.
+    
     //CoreTasks.get('allTasks').addTask(task);
 
     // Refresh the assignments controller.
+    this.invokeLater(this.addTasksPostProcess, task);
+  },
+  
+  addTaskPostProcess: function(task) {
+    
     var ac = this.get('assignmentsController');
-    CoreTasks.invokeLater(ac.showAssignments.bind(ac));
+    ac.showAssignments();
     
     // Select new task.
     Tasks.tasksController.selectObject(task);
@@ -457,7 +463,9 @@ Tasks.mixin({
         project.removeTask(task);
 
         // Remove the task from the All Tasks project.
+
         //CoreTasks.get('allTasks').removeTask(task);
+
 
         // Now remove the task from the assignments controller.
         tc.set('selection', null);
