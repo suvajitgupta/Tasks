@@ -150,17 +150,9 @@ Tasks.assignmentsController = SC.ArrayController.create(
     sf = this._escapeMetacharacters(sf);
     var idPattern = null, namePattern = null;
     var idMatches = sf.match(/#(\d+)/g); // TODO: [SG] fix regex to match single digit IDs
-    if(idMatches) {
-      var ids = '';
-      for(i = 0; i < idMatches.length; i++) {
-        if (i) ids += '|';
-        ids += idMatches[i].slice(1);
-      }
-      idPattern = new RegExp(ids);
-    }
-    else {
-      namePattern = new RegExp(sf, 'i');
-    }
+    if(idMatches) idPattern = new RegExp(idMatches.join("|").replace(/#/g,''));
+    else namePattern = new RegExp(sf, 'i');
+    console.log(idPattern + ":" + namePattern);
     
     // Get time left, if any specified, in selected project.
     var projectTimeLeft = null;

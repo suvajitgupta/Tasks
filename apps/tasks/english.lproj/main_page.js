@@ -203,7 +203,7 @@ Tasks.mainPage = SC.Page.design({
       childViews: [
       
         SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerY: 2, left: 5, height: 24, width: 105 },
+          layout: { centerY: 0, left: 5, height: 16, width: 105 },
           icon: 'add-icon',
           value: "_AddProject".loc(),
           classNames: ['toolbar-label'],
@@ -213,7 +213,7 @@ Tasks.mainPage = SC.Page.design({
         }),
       
         SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerY: 2, left: 115, height: 24, width: 105 },
+          layout: { centerY: 0, left: 115, height: 16, width: 105 },
           icon: 'delete-icon',
           value: "_DelProject".loc(),
           classNames: ['toolbar-label'],
@@ -229,7 +229,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerY: 2, left: 250, height: 24, width: 95 },
+          layout: { centerY: 0, left: 250, height: 16, width: 95 },
           icon: 'add-icon',
           value: "_AddTask".loc(),
           classNames: ['toolbar-label'],
@@ -240,7 +240,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerY: 2, left: 350, height: 24, width: 90 },
+          layout: { centerY: 0, left: 350, height: 16, width: 90 },
           icon: 'delete-icon',
           value: "_DelTask".loc(),
           classNames: ['toolbar-label'],
@@ -256,7 +256,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerY: 3, right: 465, height: 24, width: 90 },
+          layout: { centerY: 0, right: 465, height: 16, width: 90 },
           displayProperties: [ 'icon' ],
           iconBinding: 'Tasks.assignmentsController.attributeFilterIcon',
           value: "_FilterTasks".loc(),
