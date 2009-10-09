@@ -398,16 +398,13 @@ Tasks.mixin({
     var projectId = project.get('id');
 
     var userId = CoreTasks.getPath('user.id');
-    var defaultTaskHash = SC.clone(CoreTasks.Task.NEW_TASK_HASH);
-    var taskHash = SC.merge({ 'submitterId': userId, 'assigneeId': userId }, defaultTaskHash);
-    taskHash.name = CoreTasks.NEW_TASK_NAME.loc();
+    var taskHash = SC.merge({ 'projectId': projectId, 'submitterId': userId, 'assigneeId': userId }, SC.clone(CoreTasks.Task.NEW_TASK_HASH));
+    taskHash.name = taskHash.name.loc();
     var task = CoreTasks.createRecord(CoreTasks.Task, taskHash);
-    // task.id = CoreTasks.generateId(); // For FIXTUREs
 
     // Get selected task and get its assignee so that we can set the same assignee on the newly-created task.
     var tc = this.get('tasksController');
     var sel = tc.get('selection');
-
     if (sel && sel.length() > 0) { // Copy some attributes of selected task to new task
       var selectedObject = sel.firstObject();
       if (SC.instanceOf(selectedObject, CoreTasks.Task)) {
@@ -418,32 +415,11 @@ Tasks.mixin({
       }
     }
 
-    // Add the task to the All Tasks project.
-    
-    //CoreTasks.get('allTasks').addTask(task);
-
-    // Refresh the assignments controller.
-    this.invokeLater(this.addTasksPostProcess, task);
-  },
-  
-  addTaskPostProcess: function(task) {
-    
-    var ac = this.get('assignmentsController');
-    ac.showAssignments();
-    
     // Select new task.
     Tasks.tasksController.selectObject(task);
-    var taskIndex = Tasks.tasksController.get('arrangedObjects').toArray().indexOf(task);
-    
-    // Begin editing new task.
-    var listView = Tasks.getPath('mainPage.mainPane.tasksList');
-    // var tasksList = listView.get('content');
-    // var idx = tasksList.indexOf(task);
-    // // FIXME: [SC] added the to make the TaskList scroll to the newly added item - there is a bug with SC.TextFieldView that will cause the textfield to follow your scroll if the TextField has the cursor (focus)
-    // listView.scrollToContentIndex(idx);
-    var itemView = listView.itemViewForContentIndex(listView.get('content').indexOf(task));
-    CoreTasks.invokeLater(itemView.beginEditing.bind(itemView));
-    
+    var ac = this.get('assignmentsController');
+    CoreTasks.invokeLater(ac.showAssignments.bind(ac));
+        
   },
 
   /**
