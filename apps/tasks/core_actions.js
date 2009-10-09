@@ -240,6 +240,7 @@ Tasks.mixin({
   _dataLoadSuccess: function() {
     switch (this.state.a) {
       case 3:
+        CoreTasks.store.set('changelog',null);
         this.goState('a', 4);
         break;
       default:
@@ -426,15 +427,17 @@ Tasks.mixin({
     
     // Select new task.
     Tasks.tasksController.selectObject(task);
+    var taskIndex = Tasks.tasksController.get('arrangedObjects').toArray().indexOf(task);
     
     // Begin editing new task.
     var listView = Tasks.getPath('mainPage.mainPane.tasksList');
-    var tasksList = listView.get('content');
-    var idx = tasksList.indexOf(task);
-    // FIXME: [SC] added the to make the TaskList scroll to the newly added item - there is a bug with SC.TextFieldView that will cause the textfield to follow your scroll if the TextField has the cursor (focus)
-    listView.scrollToContentIndex(idx);
-    var itemView = listView.itemViewForContentIndex(idx);
-    itemView.beginEditing();
+    // var tasksList = listView.get('content');
+    // var idx = tasksList.indexOf(task);
+    // // FIXME: [SC] added the to make the TaskList scroll to the newly added item - there is a bug with SC.TextFieldView that will cause the textfield to follow your scroll if the TextField has the cursor (focus)
+    // listView.scrollToContentIndex(idx);
+    var itemView = listView.itemViewForContentIndex(listView.get('content').indexOf(task));
+    CoreTasks.invokeLater(itemView.beginEditing.bind(itemView));
+    
   },
 
   /**
@@ -454,7 +457,7 @@ Tasks.mixin({
         project.removeTask(task);
 
         // Remove the task from the All Tasks project.
-        CoreTasks.get('allTasks').removeTask(task);
+        //CoreTasks.get('allTasks').removeTask(task);
 
         // Now remove the task from the assignments controller.
         tc.set('selection', null);
