@@ -25,6 +25,8 @@ General Infrastructure
 - Beta: Develop States/Actions corresponding to GUI Statecharts [SG] <SE> @Active
 - Support minimum resolution of 1024x768 [SG] @Done $Feature %Passed
 - Support decimal numbers for project timeLeft and task effort in units of 'd' or 'h' [SG] @Done %Passed $Feature
+- Beta: Make "All/UnallocatedTasks" queries on the Store <SG> [SE]
+^ Have tasks refer to projects instead of the other way around [SE] <SG> @Done %Passed
 - Beta: Handle persistence consistently (nothing should save unless user hits Save) [SG] <SE> @Active
 v On Firefox need to highlight entire item & show cursor when starting to do in-cell editing [SC] <SG> $Bug
 - On Safari it is impossible to type more than one character at the start of a line via in-cell editing [SC] <SG> $Bug
@@ -84,7 +86,6 @@ v Set tasks toolbar button enablement based on having a selection [SG] @Done $Fe
 | Logged in user is default Submitter, Assignee is either set to the same as selected task (if one) or to logged in user
 | Copy over type/priority attributes of selected task to new task
 - Clear task validation if status is changed from Done, disallow entry of Passed/Failed when task is not Done [SG] <MB> $Feature @Done %Passed
-^ Have tasks refer to projects instead of the other way around [SE] <SG> @Done %Passed
 ^ Show Done/Left effort subtotals (exclude Low priority tasks) on far right for load balancing [SG] @Done $Feature %Passed
 - Append "?" for range-based subtotals including tasks with unspecified efforts [SG] @Done $Feature %Passed
 - Color code assignee non loading in gray, under loading in green, proper loading in blue, and over loading in red [SG] @Done $Feature %Passed
