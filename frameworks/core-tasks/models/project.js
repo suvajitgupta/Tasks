@@ -129,7 +129,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
     var ret = projectName;
     var timeLeft = this.get('timeLeft');
     if(timeLeft) ret += (' {' + timeLeft + '}');
-    ret += ' # Has ' + this.get('tasks').get('length') + ' task(s)';
+    ret += ' # ' + "_Has".loc() + this.get('tasks').get('length') + "_Tasks".loc();
     return ret + '\n';
   }
   
