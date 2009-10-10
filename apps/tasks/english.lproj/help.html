@@ -13,7 +13,7 @@
 </head>
 <body>
 	<h2>Introduction</h2>
-		<p>Tasks directly supports Agile development practices and the eXtreme Programming (XP) "Planning Game."  One of the main drivers behind the design of Tasks was relentless simplicity - it keeps up with the madness of software development. Developers embrace this tool since it is lightweight and discourages bean counting - focusing on what is left to do instead of looking back on what happened.</p>
+		<p>Tasks directly supports Agile development practices and the eXtreme Programming (XP) "Planning Game."  One of the main drivers behind the design of Tasks was relentless simplicity - it keeps up with the madness of software development. Developers embrace this tool since it is lightweight and focuses them on what is left to do.</p>
 		<p>As soon as you understand a few basic concepts you should be off and running in Tasks, expanding your sphere of comfort as you learn more.  A "task" is something a "user" does and tasks are grouped into "projects."  A user "submits" (or creates) tasks and these are "assigned" to users.  Sets of tasks are "allocated" to a project.  A project may be an initiative or a release. The Tasks user interface is comprised of the following sections:</p>
 		<ul>
 			<li>A "dock" at the top with some global action buttons</li>
@@ -22,18 +22,18 @@
 			<li>A "control bar" near the bottom containing controls to manipulate task attributes</li>
 			<li>A "status bar" at the bottom to display system messages</li>
 		</ul>
-		<h2>Getting Started</h2>
+		<h2>Basic Features</h2>
 		<h3>Projects</h3>
 			<p>To begin, click on "Add Project" to create a project and type in its name. To view a project's tasks, simply click on the project.  To rename a project double click on its name and change it.  To delete a project select it and then click on the "Del. Project" button.</p>
 		<h3>Tasks</h3>
 			<p>Tasks are grouped by assignee and displayed using various kinds of color coding - the legend is shown in the bottom control bar.  To create a task, click on the "Add Task" button and enter the name of the task.  After that, you typically set the task's attributes via the radio buttons in the control bar.  You may also click on the icon to the far right of the task to get a popup editor and enter additional details about the task.  Update a task's name by double clicking on it and using the inline editor.  Delete a task using the "Del. Task" on the selected task.  To reassign a task to another user, simply drag and drop it to the target user if they are visible or use the tak popup editor to change the assignee.  To reallocate a task to another project drag and drop it on the target project in the master list.  Note: you can select multiple tasks at once and perform delete/reassign/reallocate operations.</p>
 		<h3>Users</h3>
-			<p>Click on the "Settings" button in the dock to acsess the User Manager panel.  Here you can add/modify/delete users and their roles.</p>
+			<p>Click on the "Settings" button in the dock to access the User Manager panel.  Here you can add/modify/delete users and their roles.</p>
 	<h2>Advanced Features</h2>
 	<h3>Workflow</h3>
-		<p>Tasks supports a simple workflow as shown in the control bar at the bottom. You first decide on the type of task, then specify the priority, then note your development status, and finally the validation status.  Unless a task is done, you cannot validate it.
+		<p>Tasks supports a simple workflow as shown in the control bar at the bottom. You first plan your tasks, specifying their types and priorities. Then you work on your tasks, noting your status as you go. Finally, you may validate your completed tasks.
 	<h3>Sorting</h3>
-		<p>Sorting in Tasks is automatic. Projects are sorted alphabetically. Tasks are sorted by status, validation (if Done), priority, and type in that order.  This helps you keep focus on what you are working on and what is next.
+		<p>Sorting in Tasks is automatic. Projects are sorted alphabetically. Tasks are sorted by status, validation (if Done), priority, and type in that order.  This helps you focus on what you are working on now and what is next.
 	<h3>Filtering</h3>
 			<p>Another useful feature is task filtering - you may do that in three ways:</p>
 			<ul>
@@ -41,38 +41,43 @@
 				<li>Specify task assignees (comma or space separated login names)</li>
 				<li>Search using task IDs (each prepended by '#' and comma or space separated) or a string matching any part of task names in the search bar</li>
 			</ul>
-			<p>Filtering happens as you type - you will see the results immediately.  If an attribute filter is set you will see it indicated by a special icon next to the "Finter Tasks" button.</p>
+			<p>Filtering results are displayed as soon as you stop typing.  If an attribute filter is set you will see it indicated by a special icon next to the "Filter Tasks" button.</p>
 		<p>There are two virtual projects at the top of the projects list called "All Tasks" and "Unallocated Tasks" projects to show all and unallocated tasks respectively. Remember that Tasks is a rich client and you must use the Save button in the dock to periodically save your work.</p>
 		<h3>Load Balancing</h3>
 			<p>To use this feature, you can specify the "time left" in a project as well as the "effort" for tasks.  The system will automatically total the efforts for each assignee and indicate their loading via color coding. A "?" is appended for range-based subtotals including tasks with unspecified efforts.</p>
 		<h3>Data Exchange</h3>
 			<p>Tasks allows data to be exchanged via a simple import/export mechanism.  Use the "Import" button in the toolbar to bring data into the application.  Use the "Export" button to output Tasks data to another Tasks application or some other system.</p>
-	<h2>Hidden Features</h2>
-		<p>Tasks has some great power-user features that are hidden to avoid confusing regular users.  As you get more comfortable with Tasks, try to learn these shortcuts to save yourself a lot of time.</p>
+	<h2>Power User Features</h2>
+		<p>Tasks has some great hidden features to avoid confusing regular users.  As you get more comfortable with Tasks, ty using some of these shortcuts.</p>
 		<ul>
 			<li>Right clicking on project and tasks provides a context menu</li>
 			<li>Hotkeys are available for most of the common actions</li>
-			<li>You can type in a project's "time left" inline by typing it within curly braces</li>
-			<li>You can type in a tasks' attributes using the same syntax for Import/Export!</li>
+			<li>Type in a project's "time left" inline by typing it within curly braces</li>
+			<li>Type in a tasks' properties/attributes inline using the same syntax for Import/Export</li>
+			<li>Reassign a task to another user by typing in their login name within square brackets inline at the end of a task</li>
+			<li>"Manage by exception" by filtering to only see Risky or Failed tasks</li>
+			<li>Use the task "submitter" to indicate your "collaborator" - the person you will consult with</li>
+			<li>Use the Import panel to type in a bunch of tasks at once - basically use it as a simple text editor</li>
 		</ul>
 	<h2>Reference</h2>
 		<p>This section goes into details about the various entities used in the application.</p>
-		<h3>Project</h3>
-			<p>A <b>project</b> is an initiative with a <i>name</i> and <i>time left</i>.  A project contains zero or more <b>tasks</b></p>
+		<h3>User</h3>
+			<p>A team member with a <i>login name</i> and <i>full name</i> as well as a <i>role</i> (one of Manager, Developer, or Tester).  A user logs into the Tasks application using an optional <i>password</i> and are task <i>assignees</i> and <i>submitters</i>.</p>
 		<h3>Task</h3>
 			<p>A <b>task</b> is an atomic unit of work.  A task has several attributes:</p>
 			<ul>
 				<li><i>name</i>: one-line summary describing the task, you may want to name related tasks with a common prefix followed by a colon</li>
 				<li><i>priority</i>: High or Medium (default) or Low (High ones must be completed, Low ones not included in effort subtotals</li>
-				<li><i>effort</i>: estimate => actual, in days</li>
-				<li><i>submitter</i>: User who submitted this task</li>
-				<li><i>assignee</i>: User to whom this task is assigned</li>
-				<li><i>type</i>: kind of task to support testing workflow - Feature or Bug or Other (default)</li>
+				<li><i>effort</i>: optional estimate => actual (in days or hours)</li>
+				<li><i>project</i>: <b>project</b> this task is allocated to, if any</li>
+				<li><i>submitter</i>: <b>user</b> who submitted this task, if any</li>
+				<li><i>assignee</i>: <b>user</b> to whom this task is assigned, if any</li>
+				<li><i>type</i>: kind of task - Feature or Bug or Other (default)</li>
 				<li><i>status</i>: development status - Planned (default) or Active or Done or Risky</li>
 				<li><i>validation</i>: validation status - Untested (default) or Passed or Failed</li>
-				<li><i>description</i>: (multi-line) additional information such as Feature details, Bug reproduction steps, or Release Notes</li>
+				<li><i>description</i>: optional (multi-line) additional information such as Feature details, Bug reproduction steps, or Release Notes</li>
 			</ul>
-		<h3>User</h3>
-			<p>A team member with a <i>login name</i> and <i>full name</i> as well as a <i>role</i> (one of Manager, Developer, or Tester).  A user logs into the Tasks aplication and are task <i>assignees</i> and <i>submitters</i></p>
+			<h3>Project</h3>
+				<p>A <b>project</b> is an initiative with a <i>name</i> and <i>time left</i>.  A project contains zero or more <b>tasks</b> and may have a <i>description</i>.</p>
 </body>
 </html>
