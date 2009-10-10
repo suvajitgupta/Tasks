@@ -25,8 +25,7 @@ General Infrastructure
 - Beta: Develop States/Actions corresponding to GUI Statecharts [SG] <SE> @Active
 - Support minimum resolution of 1024x768 [SG] @Done $Feature %Passed
 - Support decimal numbers for project timeLeft and task effort in units of 'd' or 'h' [SG] @Done %Passed $Feature
-- Beta: Make "All/UnallocatedTasks" queries on the Store <SG> [SE]
-^ Have tasks refer to projects instead of the other way around [SE] <SG> @Done %Passed
+^ Have tasks refer to project they are allocated to and make projects Store queries [SE] <SG> @Done %Passed
 - Beta: Handle persistence consistently (nothing should save unless user hits Save) [SG] <SE> @Active
 v On Firefox need to highlight entire item & show cursor when starting to do in-cell editing [SC] <SG> $Bug
 - On Safari it is impossible to type more than one character at the start of a line via in-cell editing [SC] <SG> $Bug
@@ -35,7 +34,7 @@ v Add missing 'localize' support back in CollectionView (regression from SC 0.9)
 v Make task in-cell editors fit with collection view item size [SG] <JH2> $Bug
 | Fix in CSS add class .ghost to list item view and set its background to none
 v Track/optimize calls to assignments controller for redrawing tasks tree [BB] <SG> @Active
-v Allow direct bookmarking of Tasks projects (using SproutCore routes) [SG] $Feature
+v Allow direct bookmarking of Tasks projects using SproutCore routes [SG] $Feature
 - Show newly added tasks/projects with a badge <SE> [SG] $Feature
 - Add email notifications on task changes to Assignee/Manager [SG] <JH2> $Feature @Active
 - Add some simple metrics/reporting capabilities <EG> [SG] $Feature
@@ -48,18 +47,17 @@ Project Manager GUI
 - Beta: Support alpha sorting of projects [SG] <JH2> @Risky $Feature
 v Add hover over tooltip for projects to show how many tasks they contain [SG] @Done $Feature %Passed
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done $Feature %Passed
-v Make All/Unallocated Tasks project names to be non-editable upon double clicking @Done %Passed $Feature <JH2> [SG]
 | Check via Inline Editor Delegate
 ^ Add "Add Project" & "Del. Project" buttons in projects toolbar [SG] <SC> @Done $Feature %Passed
 - Add warning Alert box about deleting Project with Tasks [SG] @Done $Feature %Passed
 - Don't create a project if it already exists during Import [SG] @Done $Feature %Passed
 v Disallow duplicate project names after editing, provide warning to user for duplicates [SG] @Active $Feature
 v Add summary in projects toolbar showing number of projects & number of tasks for selected project [SG] <MB> @Done $Feature %Passed
-v Set projects toolbar button enablement based on having a selection [SG] @Done $Feature %Passed
+v Beta: Enable/disable "Del. Project" button based on having a selected project [SG] @Active $Feature
 v Disable Add/Del. Tasks buttons when on "All Tasks" project [SG] <BB> @Done %Passed $Feature
 - Beta: Select first project at startup [SG] <JH2> @Done %Passed $Feature
-^ Add virtual "All Tasks" & "Unallocated Tasks" projects and display them grayed out in projects list [SG] <SE> @Done
-- Disallow "All Tasks" & "Unallocated Tasks" projects from being deleted [SG] @Done $Feature %Passed
+^ Beta: Add virtual "All Tasks" & "Unallocated Tasks" projects and display them grayed out in projects list [SG] <SE> @Active
+- Disallow "All Tasks" & "Unallocated Tasks" projects from being edited inline or deleted [SG] @Done $Feature %Passed
 ^ Allow multi-task drag-n-drop reallocation to projects [BB] <SG> @Done $Feature %Passed
 ^ Beta: Add popup viewer/editor for Project time left/description <SE> [SG] $Feature @Active
 v Add context menu to Add/Delete a project <JH2> [SG] $Feature
@@ -80,11 +78,11 @@ v Enable Task Validation radio buttons only when in Done status [SG] <JH2> $Feat
 ^ Add task search filter (by #IDs or name) & corresponding delete button in top toolbar: support type-ahead searching <JH2> [SG] @Done %Passed $Feature
 ^ Allow task attribute filtering by type, priority, status, and validation fields via a toolbar button/pop up panel [SG] $Feature @Done %Passed
 - Indicate whether there is a task attribute filter via a different icon on the toolbar button [SG] $Feature @Done %Passed
-v Set tasks toolbar button enablement based on having a selection [SG] @Done $Feature %Passed
+v Beta: Enable/disable "Del. Task" button based on having a selected task [SG] @Active $Feature
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done $Feature %Passed
-^ Add "Add Task" & "Del. Task" buttons in tasks toolbar [SG] <SE> @Done $Feature %Passed
+^ Beta: Add "Add Task" & "Del. Task" buttons in tasks toolbar [SG] <SE> @Active $Feature
 | Logged in user is default Submitter, Assignee is either set to the same as selected task (if one) or to logged in user
-| Copy over type/priority attributes of selected task to new task
+| Copy over project/type/priority attributes of selected task to new task
 - Clear task validation if status is changed from Done, disallow entry of Passed/Failed when task is not Done [SG] <MB> $Feature @Done %Passed
 ^ Show Done/Left effort subtotals (exclude Low priority tasks) on far right for load balancing [SG] @Done $Feature %Passed
 - Append "?" for range-based subtotals including tasks with unspecified efforts [SG] @Done $Feature %Passed
@@ -94,6 +92,7 @@ v Add hover over tooltip for assignees to show how many tasks they have and to e
 ^ Add popup viewer/editor for Task submitter, sssignee, effort, and description [JH2] <SG> @Done %Passed $Feature
 - Fix task pop editor location problem where it is getting cropped at the window boundary [SC] <SG> @Active $Bug
 v Add context menu to Add/Delete a task <JH2> [SG] $Feature
+- Not in scope: Add support for nested tasks, inter-task dependencies/linking, task tagging, preserving original estimate/partial time logging
 
 User Manager GUI
 ^ Add login screen to identify user who logs in (and handle login failures properly) [SG] <SE> @Done %Passed $Feature
@@ -108,14 +107,14 @@ User Manager GUI
 - Add support for "Teams" (a user can belong to a team, a team can have a lead) [SG] <SE> $Feature
 
 Application Manager GUI
-- Add welcome message showing logged in user with hover over tooltip showing time of login [SG] @Done $Feature %Passed
+- Add welcome message showing logged in user/role with hover over tooltip showing time of login [SG] @Done $Feature %Passed
 - Add server data loading message in status bar during startup [SG] $Feature @Done %Passed
 - Summarize number of projects/assignees/tasks being displayed in the status bar [SG] <MB> @Done $Feature %Passed
 - Add "Save" button in top toolbar, note time of last save in status bar [SG] <BB> @Done $Feature %Passed
 - Beta: Enable/disable Save button based on data modification [SG] <SE> $Feature
 - Beta: Add Refresh button to get most recent data from server [SG] <SE> $Feature
 - Add "Import" button in top toolbar with associated pop up panel [SG] <BB> @Done $Feature %Passed
-v Allow drag-n-drop of a TXT file into App for data importing (using Google Gears) [MB] <SG> @Risky $Feature
+v Allow drag-n-drop of a TXT file into App for data importing using Google Gears [MB] <SG> @Risky $Feature
 | Gears needs to be ported to Snow Leopard
 - Add "Export" button in top toolbar with associated pop up panel [SG] @Done $Feature %Passed
 | When on "All Tasks" project with no filters on all project data is exported, otherwise only displayed data is exported
@@ -127,16 +126,16 @@ v Allow drag-n-drop of a TXT file into App for data importing (using Google Gear
 - Add onscreen help (on panel fields that are complex and on blank workspace to assist new users) [SG] @Active $Feature
 - Add Logout button to exit in top toolbar (confirm before exiting, reload data/clear all filters) [SG] <JH2> @Done $Feature %Passed
 - Beta: Prompt user to save changes (if any) before logging out [SG] <SE> $Feature
-- Restore application settings/state from last login (using HTML5 storage) [SG] <MB> $Feature
+- Restore application settings/state from last login using HTML5 storage [SG] <MB> $Feature
 | See demo.sproutcore.com/user_defaults and lookup SproutCore blog for Charles' posting on this topic
 v Add hotkeys for common operations (like add/delete projects/tasks and save) [EG] <SG> $Feature @Done %Passed
 - Allow assignee/search filter crieria to be stored/used as a "Saved Search" in projects list [SG] <SE> $Feature
 v Add Undo/Redo buttons in top toolbar (till last Save) [SG] <SE> $Feature
 
 Server
-^ Build persistence server (using Persevere) [SE] <SG> @Done %Passed
-- Create a user in Persevere at installation time [SE] <SG>
-^ Beta: Build persistence server (local using Sinatra/SQLite and remote using Google App Engine) [JH2] <SG> @Active
+^ Build persistence server using Persevere [SE] <SG> @Done %Passed
+- Create a "System Administrator (SA)" user with Manager role in Persevere at installation time [SE] <SG>
+^ Beta: Build persistence server: local using Sinatra/SQLite and remote using Google App Engine [JH2] <SG> @Active
 - Patch SproutCore to avoid overwhelming async calls for file imports with more than 20 tasks [SE] <SG> @Done %Passed $Bug
 - Beta: Switch to latest SproutCore postback and modified SC.Store APIs <SG> [SE]
 - Beta: Implement Server-based user authentication & authorization (Role-based access control) [JH2] <SG> @Active
@@ -145,6 +144,13 @@ v Implement multi-user concurrent access using Transaction Time [SG] <SE>
 
 Styling/Hardening
 ^ Beta: Style via CSS, embed catchy/sprited images [MG] <SG> @Active
+^ Beta: Perform smoke test of key functionality [SG] @Active
+| Login/Logout
+| User/Project/Task CRUD
+| All/Unallocated Tasks reserved projects
+| Project/Task attribute changes/inline editing
+| Task reassignment/reallocation (drag-n-drop)
+| Import/Export
 - Perform I18N and L10N (test with reversed strings) [SG] <JH2> @Active
 - Develop Model unit tests [SG] <BB> @Active
 - Develop View unit tests [SG] <MB> @Active
@@ -152,8 +158,8 @@ Styling/Hardening
 
 Packaging/Delivery
 ^ Develop Web client (ported to Firefox, Internet Explorer, Safari, Chrome) [SG] @Done %Passed
-- Develop Mobile client (using PhoneGap) [SG] <MB>
-v Develop Desktop client (using Webkit) [SG] <MB>
+- Develop Mobile client using PhoneGap [SG] <MB>
+v Develop Desktop client using Webkit [SG] <MB>
 
 Testing/Rollout
 - Manually test & note/fix showstoppers [SG] <BM> @Done
