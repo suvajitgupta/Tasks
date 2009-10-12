@@ -36,16 +36,16 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
    */
   tasks: function() {
     // Create the query if necessary.
-    if (!this._tasksQuery) {
-      this._tasksQuery = SC.Query.create({ recordType: CoreTasks.Task });
+    if (!this.tasksQuery) {
+      this.tasksQuery = SC.Query.create({
+        recordType: CoreTasks.Task,
+        conditions: 'projectId = %@',
+        parameters: [this.get('id')]
+      });
     }
 
-    // Narrow the conditions.
-    this._tasksQuery.set('conditions', 'projectId = %@');
-    this._tasksQuery.set('parameters', [this.get('id')]);
-
     // Execute the query and return the results.
-    return this.get('store').findAll(this._tasksQuery);
+    return this.get('store').findAll(this.tasksQuery);
 
   }.property('id').cacheable(),
 
@@ -161,7 +161,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
   
   /**
    * Destroys the project and orphans any tasks that are in it.
-    */
+   */
   destroy: function() {
     sc_super();
 
@@ -171,7 +171,12 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
         task.set('projectId', null);
       });
     }
-  }
+  },
+
+  /**
+   * The SC.Query to use when searching for tasks associated with this project. 
+   */
+  tasksQuery: null
 
 });
 
