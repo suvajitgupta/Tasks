@@ -178,55 +178,55 @@ Tasks.mixin({
     var projects = store.recordArrayFromStoreKeys(storeKeys, CoreTasks.Project, store);
     
     // // Get all tasks from the store and push them into the unallocated array.
-    // var tasks = store.findAll(SC.Query.create({ recordType: CoreTasks.Task }));
-    // var taskCount = tasks.get('length');
-    // var all = [];
-    // var unallocated = [];
-    // var unallocatedIds = [];
-    // 
-    // for (var i = 0; i < taskCount; i++) {
-    //   var task = tasks.objectAt(i);
-    //   all.push(task);
-    //   unallocated.push(task);
-    //   unallocatedIds.push(task.get('id'));
-    // }
-    // 
-    // // Create the AllTasks project to hold all tasks in the system.
-    // var allTasksProject = store.createRecord(CoreTasks.Project, {
-    //   name: CoreTasks.ALL_TASKS_NAME.loc()
-    // });
-    // 
-    // allTasksProject.set('tasks', all);
-    // CoreTasks.set('allTasks', allTasksProject);
-    // 
-    // // Find tasks that belong to projects and remove from unallocated array.
-    // var projectCount = projects.get('length');
-    // 
-    // for (i = 0; i < projectCount; i++) {
-    //   var project = projects.objectAt(i);
-    //   tasks = project.get('tasks');
-    //   taskCount = tasks.get('length');
-    //   for (var j = 0; j < taskCount; j++) {
-    //     var idx = unallocatedIds.indexOf(tasks.objectAt(j).get('id'));
-    // 
-    //     // Remove task and task ID from corresponding arrays.
-    //     unallocated.splice(idx, 1);
-    //     unallocatedIds.splice(idx, 1);
-    //   }
-    // }
-    // 
-    // // Create the UnallocatedTasks project with the unallocated tasks.
-    // var unallocatedTasksProject = CoreTasks.createRecord(CoreTasks.Project, {
-    //   id: 0,
-    //   name: CoreTasks.UNALLOCATED_TASKS_NAME.loc()
-    // });
-    // 
-    // unallocatedTasksProject.set('tasks', unallocated);
-    // CoreTasks.set('unallocatedTasks', unallocatedTasksProject);
-    // 
-    // // Add AllTasks and UnallocatedTasks projects to the top of the list of projects
-    // projects.unshiftObject(unallocatedTasksProject);
-    // projects.unshiftObject(allTasksProject);
+    var tasks = store.findAll(SC.Query.create({ recordType: CoreTasks.Task }));
+    var taskCount = tasks.get('length');
+    var all = [];
+    var unallocated = [];
+    var unallocatedIds = [];
+    
+    for (var i = 0; i < taskCount; i++) {
+      var task = tasks.objectAt(i);
+      all.push(task);
+      unallocated.push(task);
+      unallocatedIds.push(task.get('id'));
+    }
+    
+    // Create the AllTasks project to hold all tasks in the system.
+    var allTasksProject = store.createRecord(CoreTasks.Project, {
+      name: CoreTasks.ALL_TASKS_NAME.loc()
+    });
+    
+    allTasksProject.set('tasks', all);
+    CoreTasks.set('allTasks', allTasksProject);
+    
+    // Find tasks that belong to projects and remove from unallocated array.
+    var projectCount = projects.get('length');
+    
+    for (i = 0; i < projectCount; i++) {
+      var project = projects.objectAt(i);
+      tasks = project.get('tasks');
+      taskCount = tasks.get('length');
+      for (var j = 0; j < taskCount; j++) {
+        var idx = unallocatedIds.indexOf(tasks.objectAt(j).get('id'));
+    
+        // Remove task and task ID from corresponding arrays.
+        unallocated.splice(idx, 1);
+        unallocatedIds.splice(idx, 1);
+      }
+    }
+    
+    // Create the UnallocatedTasks project with the unallocated tasks.
+    var unallocatedTasksProject = CoreTasks.createRecord(CoreTasks.Project, {
+      id: 0,
+      name: CoreTasks.UNALLOCATED_TASKS_NAME.loc()
+    });
+    
+    unallocatedTasksProject.set('tasks', unallocated);
+    CoreTasks.set('unallocatedTasks', unallocatedTasksProject);
+    
+    // Add AllTasks and UnallocatedTasks projects to the top of the list of projects
+    projects.unshiftObject(unallocatedTasksProject);
+    projects.unshiftObject(allTasksProject);
 
     // Set the contnent of the projects controller.
     this.get('projectsController').set('content', projects);
@@ -394,11 +394,12 @@ Tasks.mixin({
   addTask: function() {
     
     // Add the new task to the currently-selected project.
-    var project = this.getPath('projectsController.selection').firstObject();
-    var projectId = project.get('id');
-
+    var project = Tasks.getPath('projectController');
+    var projectID = project.get('id');
+    
+    
     var userId = CoreTasks.getPath('user.id');
-    var taskHash = SC.merge({ 'projectId': projectId, 'submitterId': userId, 'assigneeId': userId }, SC.clone(CoreTasks.Task.NEW_TASK_HASH));
+    var taskHash = SC.merge({ 'projectId': projectID, 'submitterId': userId, 'assigneeId': userId }, SC.clone(CoreTasks.Task.NEW_TASK_HASH));
     taskHash.name = taskHash.name.loc();
     var task = CoreTasks.createRecord(CoreTasks.Task, taskHash);
 
@@ -414,11 +415,17 @@ Tasks.mixin({
         task.set('priority', selectedObject.get('priority'));
       }
     }
-
+    
+    
     // Select new task.
     Tasks.tasksController.selectObject(task);
-    var ac = this.get('assignmentsController');
+    var ac = this.get('assignmentsController');  
     CoreTasks.invokeLater(ac.showAssignments.bind(ac));
+    
+    
+    // Begin Editing the new task.
+    CoreTasks.invokeLater(tc.editNewTask, 200, task);
+    return YES;
         
   },
 

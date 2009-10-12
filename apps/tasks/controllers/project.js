@@ -15,6 +15,7 @@ Tasks.projectController = SC.ObjectController.create(
 /** @scope Tasks.projectController.prototype */ {
   
   contentBinding: 'Tasks.projectsController.selection',
+  contentBindingDefault: SC.Binding.single(),
   
   _contentDidChange: function() { // when a new project is selected
     Tasks.deselectTasks();

@@ -37,6 +37,15 @@ Tasks.tasksController = SC.TreeController.create(
     var selectedProjectName = Tasks.projectController.getPath('content.firstObject.name');
     if (selectedProjectName === CoreTasks.ALL_TASKS_NAME.loc()) return false;
     return true;
+  },
+  
+  editNewTask: function(task){
+    var listView = Tasks.getPath('mainPage.mainPane.tasksList');
+    var idx = listView.get('content').indexOf(task);
+    var listItem = listView.itemViewForContentIndex(idx);
+    if(listItem) {
+      listItem.beginEditing();//invokeLater(listItem.beginEditing, 200);
+    }
   }
 
 });
