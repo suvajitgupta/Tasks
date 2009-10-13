@@ -101,7 +101,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
   icon: function() {
     if(this.get('tasks').get('length') > 0) return 'project-icon-has-tasks';
     else return 'project-icon-no-tasks';
-  }.property().cacheable(),
+  }.property('tasks').cacheable(),
 
   /**
    * A string summarizing key facets of the Project for display.
