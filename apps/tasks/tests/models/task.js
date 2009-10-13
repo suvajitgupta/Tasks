@@ -3,7 +3,7 @@
  *
  * @author Suvajit Gupta
  */
-/*globals Tasks sc_require module test equals ok */
+/*globals CoreTasks Tasks sc_require module test equals ok */
 sc_require('core');
 sc_require('models/task');
 
@@ -24,7 +24,7 @@ module("Tasks.Task", {
       submitter: 1,
       assignee: 2
     };
-    task = Tasks.get('store').createRecord(Tasks.Task, taskHash);
+    task = CoreTasks.createRecord(Tasks.Task, taskHash);
   },
 
   teardown: function() {
