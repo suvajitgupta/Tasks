@@ -146,11 +146,11 @@ Styling/Hardening
 ^ Beta: Style via CSS, embed catchy/sprited images [MG] <SG> @Active
 ^ Beta: Perform smoke test of key functionality [SG] @Active
 | Login/Logout
-| User/Project/Task CRUD
+| Project/Task/User CRUD
 | All/Unallocated Tasks reserved projects
-| Project/Task attribute changes/inline editing
+| Project/Task modifications via inline editor and popup editor/control bar
 | Task reassignment/reallocation (drag-n-drop)
-| Import/Export
+| Save, Import/Export
 - Perform I18N and L10N (test with reversed strings) [SG] <JH2> @Active
 - Develop Model unit tests [SG] <BB> @Active
 - Develop View unit tests [SG] <MB> @Active

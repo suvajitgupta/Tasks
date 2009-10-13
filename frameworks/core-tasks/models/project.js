@@ -42,11 +42,24 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
   tasks: function() {
     // Create the query if necessary.
     if (!this.tasksQuery) {
-      this.tasksQuery = SC.Query.create({
-        recordType: CoreTasks.Task,
-        conditions: 'projectId = %@',
-        parameters: [this.get('id')]
-      });
+      if(this.get('name') === CoreTasks.ALL_TASKS_NAME.loc()) {
+        this.tasksQuery = SC.Query.create({
+          recordType: CoreTasks.Task
+        });
+      }
+      else if(this.get('name') === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) {
+        this.tasksQuery = SC.Query.create({
+          recordType: CoreTasks.Task,
+          conditions: 'projectId = null'
+        });
+      }
+      else {
+        this.tasksQuery = SC.Query.create({
+          recordType: CoreTasks.Task,
+          conditions: 'projectId = %@',
+          parameters: [this.get('id')]
+        });
+      }
     }
 
     // Execute the query and return the results.

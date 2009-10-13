@@ -104,8 +104,6 @@ Tasks.importDataController = SC.ObjectController.create(
             // console.log('Description:\t' + description);
           }
 
-          // taskHash.id = CoreTasks.generateId(); // For FIXTUREs
-
           var taskRecord = store.createRecord(CoreTasks.Task, taskHash);
           if(!taskRecord) {
             console.log('Task Import Error: task creation failed');
