@@ -14,15 +14,18 @@ Tasks.projectsController = SC.ArrayController.create(
   // orderBy: 'name',
   
   isDeletable: function() {
+    
     var sel = this.get('selection');
     if(!sel) return false;
+    
     var selectedProject = sel.firstObject();
     if(!selectedProject) return false;
+    
     var selectedProjectName = selectedProject.get('name');
-    if (selectedProjectName === CoreTasks.ALL_TASKS_NAME.loc() || selectedProjectName === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) {
-      return false;
-    }
+    if (selectedProjectName === CoreTasks.ALL_TASKS_NAME.loc() || selectedProjectName === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) return false;
+    
     return this.hasSelection();
+    
   }.property('selection').cacheable()
   
 });

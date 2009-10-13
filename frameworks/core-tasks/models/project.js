@@ -151,11 +151,17 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
    */
   exportData: function() {
     var projectName = this.get('name');
-    if(projectName === CoreTasks.ALL_TASKS_NAME || projectName === CoreTasks.UNALLOCATED_TASKS_NAME) return '';
-    var ret = projectName;
-    var timeLeft = this.get('timeLeft');
-    if(timeLeft) ret += (' {' + timeLeft + '}');
-    ret += ' # ' + "_Has".loc() + this.get('tasks').get('length') + "_Tasks".loc();
+    var ret;
+    if(projectName === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) {
+      ret = '# ' + projectName + '; ';
+    }
+    else {
+      ret = projectName;
+      var timeLeft = this.get('timeLeft');
+      if(timeLeft) ret += (' {' + CoreTasks.displayTime(timeLeft) + '}');
+      ret += ' # ';
+    }
+    ret += "_Has".loc() + this.get('tasks').get('length') + "_Tasks".loc();
     return ret + '\n';
   },
   

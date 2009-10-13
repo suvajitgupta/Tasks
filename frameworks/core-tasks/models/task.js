@@ -335,7 +335,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
     val = this.get('validation');
     if(val !== CoreTasks.TASK_VALIDATION_UNTESTED)ret += ' %' + val.loc();
     
-    ret += ' #' + this.get('id');
+    ret += ' ' + this.get('displayId');
     
     val = this.get('description');
     if(val) {

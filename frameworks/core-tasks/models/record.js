@@ -30,6 +30,15 @@ CoreTasks.Record = SC.Record.extend({
   _id: SC.Record.attr(Number),
 
   /**
+   * A displayable version of id.
+   */
+  displayId: function() {
+    var id = this.get('id');
+    if(id < 0) id = '----';
+    return '#' + id;
+  }.property('id').cacheable(),
+
+  /**
    * A one-line summary of the record.
    */
   name: SC.Record.attr(String),

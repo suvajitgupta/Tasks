@@ -14,7 +14,9 @@ Tasks.tasksController = SC.TreeController.create(
   treeItemIsGrouped: YES,
   
   isAddable: function() {
-    return this._isAllTasksProjectSelected();
+    var selectedProjectName = Tasks.projectController.getPath('content.firstObject.name');
+    if (selectedProjectName === CoreTasks.ALL_TASKS_NAME.loc()) return false;
+    return true;
   }.property('selection').cacheable(),
 
   isDeletable: function() {
@@ -22,7 +24,7 @@ Tasks.tasksController = SC.TreeController.create(
     if(!sel) return false;
     var selectedTask = sel.firstObject();
     if(!selectedTask) return false;
-    return this._isAllTasksProjectSelected();
+    return true;
   }.property('selection').cacheable(),
   
   isValidatable: function() {
@@ -33,19 +35,11 @@ Tasks.tasksController = SC.TreeController.create(
     return selectedTask.get('status') === CoreTasks.TASK_STATUS_DONE;
   }.property('selection').cacheable(),
   
-  _isAllTasksProjectSelected: function() {
-    var selectedProjectName = Tasks.projectController.getPath('content.firstObject.name');
-    if (selectedProjectName === CoreTasks.ALL_TASKS_NAME.loc()) return false;
-    return true;
-  },
-  
   editNewTask: function(task){
     var listView = Tasks.getPath('mainPage.mainPane.tasksList');
     var idx = listView.get('content').indexOf(task);
     var listItem = listView.itemViewForContentIndex(idx);
-    if(listItem) {
-      listItem.beginEditing();//invokeLater(listItem.beginEditing, 200);
-    }
+    if(listItem) listItem.beginEditing();
   }
 
 });

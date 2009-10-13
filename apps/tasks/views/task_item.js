@@ -174,8 +174,8 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         validationClass = 'task-validation-failed';
         break;          
     }
-    var id = content.get('id');
-    context = context.begin('div').addClass('task-id').addClass(validationClass).text('#' + id).attr('title', idTooltip).attr('alt', idTooltip).end();
+    var displayId = content.get('displayId');
+    context = context.begin('div').addClass('task-id').addClass(validationClass).text(displayId).attr('title', idTooltip).attr('alt', idTooltip).end();
       
     var status = content.get('status');
     switch(status){
