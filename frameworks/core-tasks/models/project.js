@@ -145,8 +145,6 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
     task.writeAttribute('projectId', this.get('id'));
     SC.RunLoop.end();
     this.notifyPropertyChange('tasks');
-    
-    return this.get('tasks'); 
   },
 
   /**
@@ -159,7 +157,6 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
     task.set('projectId', null);
     SC.RunLoop.end();
     this.notifyPropertyChange('tasks');
-    return this.get('tasks');
   },
 
   /**

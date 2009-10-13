@@ -101,13 +101,13 @@ Tasks.importDataController = SC.ObjectController.create(
             taskHash.description = description;
             // console.log('Description:\t' + description);
           }
+          
+          if(currentProject) {
+            taskHash.projectId = currentProject.get('id');
+          }
 
           var taskRecord = CoreTasks.createRecord(CoreTasks.Task, taskHash);
-          if(!taskRecord) {
-            console.log('Task Import Error: task creation failed');
-            continue;
-          }
-          if(currentProject) currentProject.addTask(taskRecord);
+          if(!taskRecord) console.log('Task Import Error: task creation failed');
         }
         else if (line.search(/^\s*$/) === 0) { // a blank line
           // console.log('Blank Line:');

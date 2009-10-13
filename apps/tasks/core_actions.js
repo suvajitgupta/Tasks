@@ -367,7 +367,6 @@ Tasks.mixin({
     var project = Tasks.getPath('projectController');
     var projectID = project.get('id');
     
-    
     var userId = CoreTasks.getPath('user.id');
     var taskHash = SC.merge({ 'projectId': projectID, 'submitterId': userId, 'assigneeId': userId }, SC.clone(CoreTasks.Task.NEW_TASK_HASH));
     taskHash.name = taskHash.name.loc();
@@ -386,14 +385,12 @@ Tasks.mixin({
       }
     }
     
-    
     // Select new task.
     Tasks.tasksController.selectObject(task);
     var ac = this.get('assignmentsController');  
     CoreTasks.invokeLater(ac.showAssignments.bind(ac));
     
-    
-    // Begin Editing the new task.
+    // Begin editing the new task.
     CoreTasks.invokeLater(tc.editNewTask, 200, task);
     return YES;
         
@@ -404,6 +401,8 @@ Tasks.mixin({
    */
   deleteTask: function() {
     
+    var project = this.getPath('projectController.content');
+    var ac = this.get('assignmentsController');      
     var tc = this.get('tasksController');
     var sel = tc.get('selection');
     if (sel && sel.length() > 0) {
@@ -412,17 +411,14 @@ Tasks.mixin({
         
         // Get the task and remove it from the project.
         var task = sel.nextObject(i, null, context);
-        var project = this.getPath('projectsController.selection').firstObject();
         project.removeTask(task);
 
-        // Now unselect task and remove it from the assignments controller.
-        tc.set('selection', null);
-        var ac = this.get('assignmentsController');      
+        // Remove it from the assignments controller and destroy.
         ac.removeObject(task);
-
-        // Finally, destroy the task.
         task.destroy();
       }
+      
+      tc.set('selection', null);
 
     }
   },
