@@ -9,7 +9,6 @@
 sc_require('core');
 
 // FIXME: [SC] shouldn't have to manually add/remove to/from controller instead of store notifying of changes.
-// FIXME: [SC] shouldn't have to call Store.commitRecords() after createRecord for Fixtures Data Source.
 
 Tasks.mixin({
   
@@ -193,7 +192,7 @@ Tasks.mixin({
     var allTasksQuery = SC.Query.create({
      recordType: CoreTasks.Task
     });
-    var allTasksProject = store.createRecord(CoreTasks.Project, {
+    var allTasksProject = CoreTasks.createRecord(CoreTasks.Project, {
       name: CoreTasks.ALL_TASKS_NAME.loc(),
       tasksQuery: allTasksQuery
     });

@@ -18,7 +18,6 @@ Tasks.importDataController = SC.ObjectController.create(
   
     importData: '',
     currentProject: null,
-    projectTaskMappings: null,
     
     openPanel: function(){
       var panel = Tasks.getPath('importDataPage.panel');
@@ -45,7 +44,6 @@ Tasks.importDataController = SC.ObjectController.create(
     parseAndLoadData: function() {
       
       var data = this.get('importData');
-      this.projectTaskMappings = {};
       var lines = data.split('\n');
       var store = CoreTasks.get('store');
       var currentProject = CoreTasks.get('unallocatedTasks');
@@ -104,19 +102,12 @@ Tasks.importDataController = SC.ObjectController.create(
             // console.log('Description:\t' + description);
           }
 
-          var taskRecord = store.createRecord(CoreTasks.Task, taskHash);
+          var taskRecord = CoreTasks.createRecord(CoreTasks.Task, taskHash);
           if(!taskRecord) {
             console.log('Task Import Error: task creation failed');
             continue;
           }
-          this.projectTaskMappings[taskRecord.get('name')] = currentProject.get('name');
-
-          // Immediately try to commit the task so that we get an ID.
-          var params = {
-            successCallback: this._addTaskFromImportSuccess.bind(this),
-            failureCallback: this._addTaskFromImportFailure.bind(this)
-          };
-          taskRecord.commitRecord(params);
+          if(currentProject) currentProject.addTask(taskRecord);
         }
         else if (line.search(/^\s*$/) === 0) { // a blank line
           // console.log('Blank Line:');
@@ -130,7 +121,7 @@ Tasks.importDataController = SC.ObjectController.create(
             currentProject = project;
           }
           else {
-            project = store.createRecord(CoreTasks.Project, projectHash);
+            project = CoreTasks.createRecord(CoreTasks.Project, projectHash);
             if(project) {
               currentProject = project;
               Tasks.get('projectsController').addObject(project);
@@ -145,19 +136,5 @@ Tasks.importDataController = SC.ObjectController.create(
       Tasks.assignmentsController.showAssignments();
       this.closePanel();
       
-    },
-    
-    _addTaskFromImportSuccess: function(storeKey) {
-      var taskRecord = CoreTasks.get('store').materializeRecord(storeKey);
-      var projectName = this.projectTaskMappings[taskRecord.get('name')];
-      if(projectName) {
-        // console.log("DEBUG: task: " + taskRecord.get('name') + ", project: " + projectName);
-        var currentProject = CoreTasks.getProject(projectName);
-        if(currentProject) currentProject.addTask(taskRecord);
-      }
-    },
-
-    _addTaskFromImportFailure: function(storeKey) {
-    }
-    
+    }    
 });

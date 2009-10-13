@@ -25,7 +25,7 @@ Tasks.SIGNUP = SC.Responder.create(Tasks.Sha1,{
     // Use a nested store to buffer changes so that we can discard etc..
     var store, user, pane;
     store = this._store = CoreTasks.get('store').chain(); 
-    user = store.createRecord(CoreTasks.User, SC.clone(CoreTasks.User.NEW_USER_HASH));
+    user = CoreTasks.createRecord(CoreTasks.User, SC.clone(CoreTasks.User.NEW_USER_HASH));
                                   
     Tasks.signupController.set('content',user);
     
