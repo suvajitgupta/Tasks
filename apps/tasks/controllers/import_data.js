@@ -151,7 +151,6 @@ Tasks.importDataController = SC.ObjectController.create(
     
     _addTaskFromImportSuccess: function(storeKey) {
       var taskRecord = CoreTasks.get('store').materializeRecord(storeKey);
-      CoreTasks.get('allTasks').addTask(taskRecord);
       var projectName = this.projectTaskMappings[taskRecord.get('name')];
       if(projectName) {
         // console.log("DEBUG: task: " + taskRecord.get('name') + ", project: " + projectName);

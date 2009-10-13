@@ -47,18 +47,18 @@ CoreTasks = SC.Object.create({
   projects: null,
 
   /**
-   * A special 'allTasks' project where all tasks for all projects are grouped.
+   * A special project where all tasks for all projects are grouped.
    *
    * This project exists outside of the store because we don't want it to be persisted.
    */
-  allTasks: null,
+  allTasksProject: null,
 
   /**
-   * A special 'unallocatedTasks' project where all unallocated tasks are grouped.
+   * A special project where all unallocated tasks are grouped.
    *
    * This project exists outside of the store because we don't want it to be persisted.
    */
-  unallocatedTasks: null,
+  unallocatedTasksProject: null,
 
   /**
    * Creates a new record in the store.
@@ -126,12 +126,12 @@ CoreTasks = SC.Object.create({
     this._dirtyTasks = [];
 
     // Get the store keys of the two "special" projects that we never want to persist.
-    if (!this._allTasksKey) {
-      this._allTasksKey = this.getPath('allTasks.storeKey');
+    if (!this._allTasksProjectKey) {
+      this._allTasksProjectKey = this.getPath('allTasksProject.storeKey');
     }
 
-    if (!this._unallocatedTasksKey) {
-      this._unallocatedTasksKey = this.getPath('unallocatedTasks.storeKey');
+    if (!this._unallocatedTasksProjectKey) {
+      this._unallocatedTasksProjectKey = this.getPath('unallocatedTasksProject.storeKey');
     }
 
     // Build separate arrays for all dirty records.
@@ -151,7 +151,7 @@ CoreTasks = SC.Object.create({
           this._dirtyUsers.pushObject(key);
           break;
         case CoreTasks.Project:
-          if (key !== this._allTasksKey && key !== this._unallocatedTasksKey) {
+          if (key !== this.__allTasksProjectKey && key !== this._unallocatedTasksProjectKey) {
             this._dirtyProjects.pushObject(key);
           }
 

@@ -177,60 +177,31 @@ Tasks.mixin({
     var store = CoreTasks.get('store');
     var projects = store.recordArrayFromStoreKeys(storeKeys, CoreTasks.Project, store);
     
-    // // Get all tasks from the store and push them into the unallocated array.
-    var tasks = store.findAll(SC.Query.create({ recordType: CoreTasks.Task }));
-    var taskCount = tasks.get('length');
-    var all = [];
-    var unallocated = [];
-    var unallocatedIds = [];
-    
-    for (var i = 0; i < taskCount; i++) {
-      var task = tasks.objectAt(i);
-      all.push(task);
-      unallocated.push(task);
-      unallocatedIds.push(task.get('id'));
-    }
-    
-    // Create the AllTasks project to hold all tasks in the system.
-    var allTasksProject = store.createRecord(CoreTasks.Project, {
-      name: CoreTasks.ALL_TASKS_NAME.loc()
-    });
-    
-    allTasksProject.set('tasks', all);
-    CoreTasks.set('allTasks', allTasksProject);
-    
-    // Find tasks that belong to projects and remove from unallocated array.
-    var projectCount = projects.get('length');
-    
-    for (i = 0; i < projectCount; i++) {
-      var project = projects.objectAt(i);
-      tasks = project.get('tasks');
-      taskCount = tasks.get('length');
-      for (var j = 0; j < taskCount; j++) {
-        var idx = unallocatedIds.indexOf(tasks.objectAt(j).get('id'));
-    
-        // Remove task and task ID from corresponding arrays.
-        unallocated.splice(idx, 1);
-        unallocatedIds.splice(idx, 1);
-      }
-    }
-    
     // Create the UnallocatedTasks project with the unallocated tasks.
-    var unallocatedTasksProject = CoreTasks.createRecord(CoreTasks.Project, {
-      id: 0,
-      name: CoreTasks.UNALLOCATED_TASKS_NAME.loc()
+    var unallocatedTasksQuery = SC.Query.create({
+     recordType: CoreTasks.Task,
+     conditions: 'projectId = null'
     });
-    
-    unallocatedTasksProject.set('tasks', unallocated);
-    CoreTasks.set('unallocatedTasks', unallocatedTasksProject);
-    
-    // Add AllTasks and UnallocatedTasks projects to the top of the list of projects
+    var unallocatedTasksProject = CoreTasks.createRecord(CoreTasks.Project, {
+      name: CoreTasks.UNALLOCATED_TASKS_NAME.loc(),
+      tasksQuery: unallocatedTasksQuery
+    });
+    CoreTasks.set('unallocatedTasksProject', unallocatedTasksProject);
     projects.unshiftObject(unallocatedTasksProject);
+    
+    // Create the AllTasks project to hold all tasks.
+    var allTasksQuery = SC.Query.create({
+     recordType: CoreTasks.Task
+    });
+    var allTasksProject = store.createRecord(CoreTasks.Project, {
+      name: CoreTasks.ALL_TASKS_NAME.loc(),
+      tasksQuery: allTasksQuery
+    });
+    CoreTasks.set('allTasksProject', allTasksProject);
     projects.unshiftObject(allTasksProject);
 
-    // Set the contnent of the projects controller.
+    // Set the content of the projects controller.
     this.get('projectsController').set('content', projects);
-
     this._dataLoadSuccess();
   },
 
@@ -445,14 +416,8 @@ Tasks.mixin({
         var project = this.getPath('projectsController.selection').firstObject();
         project.removeTask(task);
 
-        // Remove the task from the All Tasks project.
-
-        //CoreTasks.get('allTasks').removeTask(task);
-
-
-        // Now remove the task from the assignments controller.
+        // Now unselect task and remove it from the assignments controller.
         tc.set('selection', null);
-      
         var ac = this.get('assignmentsController');      
         ac.removeObject(task);
 

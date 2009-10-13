@@ -50,7 +50,7 @@ Tasks.reallocationController = SC.Object.create(SC.CollectionViewDelegate,
       var newProject = content.objectAt(idx);
       
       tasks.forEach(function(task) {
-        if (currentProject !== CoreTasks.get('allTasks')) {
+        if (currentProject !== CoreTasks.get('allTasksProject')) {
           currentProject.removeTask(task);
         }
         newProject.addTask(task);

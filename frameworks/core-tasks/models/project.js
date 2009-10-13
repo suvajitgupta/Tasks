@@ -30,6 +30,11 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
   timeLeft: SC.Record.attr(String),
 
   /**
+   * The SC.Query to use when searching for tasks associated with this project. 
+   */
+  tasksQuery: null,
+
+  /**
    * A read-only computed property that returns the list of tasks associated with this project.
    *
    * @returns {SC.RecordArray} An array of tasks.
@@ -177,12 +182,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
         task.set('projectId', null);
       });
     }
-  },
-
-  /**
-   * The SC.Query to use when searching for tasks associated with this project. 
-   */
-  tasksQuery: null
+  }
 
 });
 
