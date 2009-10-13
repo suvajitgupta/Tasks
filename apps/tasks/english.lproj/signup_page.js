@@ -1,8 +1,8 @@
 //============================================================================
 // Tasks.signupPage
 //============================================================================
+/*globals CoreTasks Tasks sc_require*/
 sc_require('core');
-/*globals CoreTasks Tasks*/
 /**
 
   This is the signup page for Tasks
@@ -25,13 +25,13 @@ Tasks.signupPage = SC.Page.design({
       
       childViews: "prompt signUpButton cancelButton personalLabel loginName fullName emailLabel emailField passwordLabel passwordField roleLabel roleSelect".w(),
       
-      // PROMPT
+      // Prompt
       prompt: SC.LabelView.design({
         layout: { top: 10, left: 20, height: 18, right: 20 },
         value: "_SignupPrompt".loc()
       }),
       
-      // INPUTS 
+      // Inputs 
       
       personalLabel: SC.LabelView.design({
         layout: { top: 40, left: 20, width: 70, height: 18 },
@@ -91,7 +91,7 @@ Tasks.signupPage = SC.Page.design({
         valueBinding: 'Tasks.signupController.role'
       }),
       
-      // BUTTONS
+      // Buttons
       signUpButton: SC.ButtonView.design({
         layout: { bottom: 10, right: 15, width: 90, height: 24 },
         title: "_Signup".loc(),
