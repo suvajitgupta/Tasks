@@ -14,7 +14,7 @@ Tasks.tasksController = SC.TreeController.create(
   treeItemIsGrouped: YES,
   
   isAddable: function() {
-    var selectedProjectName = Tasks.projectController.getPath('content.firstObject.name');
+    var selectedProjectName = Tasks.projectController.getPath('content.name');
     if (selectedProjectName === CoreTasks.ALL_TASKS_NAME.loc()) return false;
     return true;
   }.property('selection').cacheable(),
