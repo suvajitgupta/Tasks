@@ -365,13 +365,12 @@ Tasks.mixin({
    */
   addTask: function() {
     
-    // Add the new task to the currently-selected project.
-    var project = Tasks.getPath('projectController');
-    var projectID = project.get('id');
-    
+    // Add the new task to the currently-selected project (if one).
     var userId = CoreTasks.getPath('user.id');
-    var taskHash = SC.merge({ 'projectId': projectID, 'submitterId': userId, 'assigneeId': userId }, SC.clone(CoreTasks.Task.NEW_TASK_HASH));
+    var taskHash = SC.merge({ 'submitterId': userId, 'assigneeId': userId }, SC.clone(CoreTasks.Task.NEW_TASK_HASH));
     taskHash.name = taskHash.name.loc();
+    var projectId = Tasks.getPath('projectController.id');
+    if(!SC.none(projectId)) taskHash.projectId = projectId;
     var task = CoreTasks.createRecord(CoreTasks.Task, taskHash);
 
     // Get selected task and get its assignee so that we can set the same assignee on the newly-created task.
@@ -387,12 +386,10 @@ Tasks.mixin({
       }
     }
     
-    // Select new task.
+    // Select and begin editing new task.
     Tasks.tasksController.selectObject(task);
     var ac = this.get('assignmentsController');  
     CoreTasks.invokeLater(ac.showAssignments.bind(ac));
-    
-    // Begin editing the new task.
     CoreTasks.invokeLater(tc.editNewTask, 200, task);
     return YES;
         
