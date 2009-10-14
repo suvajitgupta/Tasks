@@ -68,7 +68,7 @@ Tasks.exportDataController = SC.ObjectController.create(
       var assignmentNode = assignmentNodes.objectAt(i);
       var tasks = assignmentNode.get('treeItemChildren');
       var tasksCount = tasks.get('length');
-      ret += '\n# ' + assignmentNode.get('displayName') + '; ' + "_Has".loc() + tasksCount + "_Tasks".loc() + '\n';
+      ret += '\n# ' + assignmentNode.get('displayName').loc() + '; ' + "_Has".loc() + tasksCount + "_Tasks".loc() + '\n';
       for(var j=0; j < tasksCount; j++) {
         ret += tasks.objectAt(j).exportData();
       }
@@ -86,7 +86,7 @@ Tasks.exportDataController = SC.ObjectController.create(
     var selectedProject = sel.firstObject();
     if(!selectedProject) return false;
     
-    var ret = "# Tasks data export at " + new Date().format('hh:mm:ss a MMM dd, yyyy') + '\n\n';
+    var ret = "_TasksExportTimestamp".loc() + new Date().format('hh:mm:ss a MMM dd, yyyy') + '\n\n';
     var selectedProjectName = selectedProject.get('name');
     if (selectedProjectName === CoreTasks.ALL_TASKS_NAME.loc() && !Tasks.assignmentsController.hasFiltering()) {
       ret += this._exportAllData();

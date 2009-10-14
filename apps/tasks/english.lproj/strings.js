@@ -49,6 +49,7 @@ SC.stringsFor('English', {
   '_ConfirmProjectDeletion': "Tasks in this project will become unallocated, are you sure you want to delete it?",
   '_NewProject': "New Project",
   '_AllTasks': "All Tasks",
+  '_Unallocated': " unallocated",
   '_UnallocatedTasks': "Unallocated Tasks",
   '_Has': "Has ",
   '_Tasks': " task(s)",
@@ -91,6 +92,7 @@ SC.stringsFor('English', {
   '_TaskEffortTooltip': "Effort (if specified) shown on right",
   '_IdTooltip': "Unique ID for task, background color indicates validation status",
   '_EditorTooltip': "Click to view/edit task details (submitter, assignee, effort, and description)",
+  '_TasksExportTimestamp': "# Tasks data export at ",
   
   // User/Assignee strings
   '_AddUser': "Add User",
