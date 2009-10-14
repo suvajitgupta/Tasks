@@ -24,7 +24,7 @@ Tasks.projectsController = SC.ArrayController.create(
     var selectedProjectName = selectedProject.get('name');
     if (selectedProjectName === CoreTasks.ALL_TASKS_NAME.loc() || selectedProjectName === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) return false;
     
-    return this.hasSelection();
+    return true;
     
   }.property('selection').cacheable()
   

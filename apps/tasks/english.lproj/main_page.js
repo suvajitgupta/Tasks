@@ -234,7 +234,6 @@ Tasks.mainPage = SC.Page.design({
           value: "_AddTask".loc(),
           classNames: ['toolbar-label'],
           toolTip: "_AddTaskTooltip".loc(),
-          isEnabledBinding: SC.Binding.oneWay('Tasks.tasksController.isAddable'),
           target: 'Tasks',
           action: 'addTask'
         }),
@@ -245,7 +244,7 @@ Tasks.mainPage = SC.Page.design({
           value: "_DelTask".loc(),
           classNames: ['toolbar-label'],
           toolTip: "_DelTaskTooltip".loc(),
-          isEnabledBinding: SC.Binding.oneWay('Tasks.tasksController.isDeletable'),
+          isEnabledBinding: SC.Binding.oneWay('Tasks.tasksController.hasSelection'),
           target: 'Tasks',
           action: 'deleteTask'
         }),

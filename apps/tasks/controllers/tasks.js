@@ -13,20 +13,6 @@ Tasks.tasksController = SC.TreeController.create(
   contentBinding: 'Tasks.assignmentsController.assignedTasks',
   treeItemIsGrouped: YES,
   
-  isAddable: function() {
-    var selectedProjectName = Tasks.projectController.getPath('content.name');
-    if (selectedProjectName === CoreTasks.ALL_TASKS_NAME.loc()) return false;
-    return true;
-  }.property('selection').cacheable(),
-
-  isDeletable: function() {
-    var sel = this.get('selection');
-    if(!sel) return false;
-    var selectedTask = sel.firstObject();
-    if(!selectedTask) return false;
-    return true;
-  }.property('selection').cacheable(),
-  
   isValidatable: function() {
     var sel = this.get('selection');
     if(!sel) return false;

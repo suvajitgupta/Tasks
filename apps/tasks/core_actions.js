@@ -365,28 +365,34 @@ Tasks.mixin({
    */
   addTask: function() {
     
-    // Add the new task to the currently-selected project (if one).
+    // Create a new task with the logged in user as the default submitter/assignee.
     var userId = CoreTasks.getPath('user.id');
     var taskHash = SC.merge({ 'submitterId': userId, 'assigneeId': userId }, SC.clone(CoreTasks.Task.NEW_TASK_HASH));
     taskHash.name = taskHash.name.loc();
-    var projectId = Tasks.getPath('projectController.id');
-    if(!SC.none(projectId)) taskHash.projectId = projectId;
-    var task = CoreTasks.createRecord(CoreTasks.Task, taskHash);
 
-    // Get selected task and get its assignee so that we can set the same assignee on the newly-created task.
+    // Get selected task (if one) and copy its project/assignee/type/priority to the new task.
     var tc = this.get('tasksController');
     var sel = tc.get('selection');
-    if (sel && sel.length() > 0) { // Copy some attributes of selected task to new task
-      var selectedObject = sel.firstObject();
-      if (SC.instanceOf(selectedObject, CoreTasks.Task)) {
-        var assigneeUser = selectedObject.get('assignee');
-        if(assigneeUser) task.set('assignee', assigneeUser);
-        task.set('type', selectedObject.get('type'));
-        task.set('priority', selectedObject.get('priority'));
+    if (sel && sel.length() > 0) {
+      var selectedTask = sel.firstObject();
+      if (SC.instanceOf(selectedTask, CoreTasks.Task)) {
+        taskHash.projectId = selectedTask.get('projectId');
+        var assigneeUser = selectedTask.get('assignee');
+        taskHash.assigneeId = assigneeUser? assigneeUser.get('id') : null;
+        taskHash.type = selectedTask.get('type');
+        taskHash.priority = selectedTask.get('priority');
+      }
+    }
+    else { // No selected task, add task to currently selected, non-reserved, project (if one).
+      var selectedProjectName = Tasks.getPath('projectController.name');
+      if (!SC.none(selectedProjectName) &&
+          selectedProjectName !== CoreTasks.ALL_TASKS_NAME.loc() && selectedProjectName !== CoreTasks.UNALLOCATED_TASKS_NAME.loc()) {
+        taskHash.projectId = Tasks.getPath('projectController.id');
       }
     }
     
-    // Select and begin editing new task.
+    // Create, select, and begin editing new task.
+    var task = CoreTasks.createRecord(CoreTasks.Task, taskHash);
     Tasks.tasksController.selectObject(task);
     var ac = this.get('assignmentsController');  
     CoreTasks.invokeLater(ac.showAssignments.bind(ac));
