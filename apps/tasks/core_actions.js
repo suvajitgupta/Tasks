@@ -406,7 +406,6 @@ Tasks.mixin({
    */
   deleteTask: function() {
     
-    var project = this.getPath('projectController.content');
     var ac = this.get('assignmentsController');      
     var tc = this.get('tasksController');
     var sel = tc.get('selection');

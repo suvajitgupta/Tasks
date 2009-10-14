@@ -350,11 +350,14 @@ CoreTasks = SC.Object.create({
    * @returns {Object} user record, if macthing one exists, or null.
    */
   getUser: function(loginName) {
-    var users = CoreTasks.get('store').findAll(SC.Query.create({
-      recordType: CoreTasks.User, 
-      conditions: 'loginName = %@',
-      parameters: [loginName]
-    }));
+    if(!this._getUserQuery) {
+      this._getUserQuery = SC.Query.create({
+        recordType: CoreTasks.User, 
+        conditions: 'loginName = %@'
+      });
+    }
+    this._getUserQuery.set('parameters', [loginName]);
+    var users = CoreTasks.get('store').findAll(this._getUserQuery);
     if(!users) return null;
     return users.objectAt(0);
   },
@@ -366,11 +369,14 @@ CoreTasks = SC.Object.create({
    * @returns {Object) return project of given name if it exists, null otherwise.
    */
   getProject: function(projectName) {
-    var projects = CoreTasks.get('store').findAll(SC.Query.create({
-      recordType: CoreTasks.Project, 
-      conditions: 'name = %@',
-      parameters: [projectName]
-    }));
+    if(!this._getProjectQuery) {
+      this._getProjectQuery = SC.Query.create({
+        recordType: CoreTasks.Project, 
+        conditions: 'name = %@'
+      });
+    }
+    this._getProjectQuery.set('parameters', [projectName]);
+    var projects = CoreTasks.get('store').findAll(this._getProjectQuery);
     if(!projects) return null;
     return projects.objectAt(0);
   },
