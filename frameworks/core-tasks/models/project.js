@@ -40,6 +40,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
    * @returns {SC.RecordArray} An array of tasks.
    */
   tasks: function() {
+    // FIXME: [SE] kill the hardcoded queries for All/UnallocatedTasks below and make 'tasksQuery' work
     // Create the query if necessary.
     if (!this.tasksQuery) {
       if(this.get('name') === CoreTasks.ALL_TASKS_NAME.loc()) {

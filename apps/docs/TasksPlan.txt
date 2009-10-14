@@ -32,6 +32,7 @@ v On Firefox need to highlight entire item & show cursor when starting to do in-
 v In Safari you can't click on assigneee selection filter and then the task filter [SC] <SG> $Bug
 v Add missing 'localize' support back in CollectionView (regression from SC 0.9) [SC] <SG> $Bug
 v Make task in-cell editors fit with collection view item size [SG] <JH2> $Bug
+v Double click to start in-cell editor, click elsewhere - causes errors [SC] <SG> $Bug
 | Fix in CSS add class .ghost to list item view and set its background to none
 v Track/optimize calls to assignments controller for redrawing tasks tree [BB] <SG> @Active
 v Allow direct bookmarking of Tasks projects using SproutCore routes [SG] $Feature
