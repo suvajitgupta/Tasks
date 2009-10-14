@@ -17,7 +17,6 @@ Tasks.importDataController = SC.ObjectController.create(
 /** @scope Orion.importDataController.prototype */ {
   
     importData: '',
-    currentProject: null,
     
     openPanel: function(){
       var panel = Tasks.getPath('importDataPage.panel');
@@ -46,7 +45,7 @@ Tasks.importDataController = SC.ObjectController.create(
       var data = this.get('importData');
       var lines = data.split('\n');
       var store = CoreTasks.get('store');
-      var currentProject = CoreTasks.get('unallocatedTasks');
+      var currentProject = null;
 
       for (var i = 0; i < lines.length; i++) {
 
@@ -102,10 +101,9 @@ Tasks.importDataController = SC.ObjectController.create(
             // console.log('Description:\t' + description);
           }
           
-          if(currentProject) {
-            taskHash.projectId = currentProject.get('id');
-          }
-
+          // Add task to current project, if one has already been encountered
+          if(currentProject) taskHash.projectId = currentProject.get('id');
+          
           var taskRecord = CoreTasks.createRecord(CoreTasks.Task, taskHash);
           if(!taskRecord) console.log('Task Import Error: task creation failed');
         }
