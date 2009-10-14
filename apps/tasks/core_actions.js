@@ -408,18 +408,12 @@ Tasks.mixin({
     if (sel && sel.length() > 0) {
       var context = {};
       for (var i = 0; i < sel.length(); i++) {
-        
-        // Get the task and remove it from the project.
+        // Get and remove task from the assignments controller and destroy.
         var task = sel.nextObject(i, null, context);
-        project.removeTask(task);
-
-        // Remove it from the assignments controller and destroy.
         ac.removeObject(task);
         task.destroy();
       }
-      
       tc.set('selection', null);
-
     }
   },
   

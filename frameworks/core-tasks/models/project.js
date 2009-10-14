@@ -154,7 +154,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
     // This has to be done in a separate run loop so that the dynamic "tasks" query is recomputed
     // *after* the change is made to the store.
     SC.RunLoop.begin();
-    task.set('projectId', null);
+    task.writeAttribute('projectId', null);
     SC.RunLoop.end();
     this.notifyPropertyChange('tasks');
   },
