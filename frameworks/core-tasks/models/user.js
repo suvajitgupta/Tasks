@@ -106,7 +106,7 @@ CoreTasks.User = CoreTasks.Record.extend({
     this._disassociatedAssignedTasksQuery.set('parameters', [this.get('_id')]);
 
     // Execute the query and return the results.
-    return this.get('store').findAll(this._disassociatedAssignedTasksQuery);
+    return this.get('store').find(this._disassociatedAssignedTasksQuery);
   }.property('_id').cacheable(),
 
   /**
@@ -126,7 +126,7 @@ CoreTasks.User = CoreTasks.Record.extend({
     this._disassociatedSubmittedTasksQuery.set('parameters', [this.get('_id')]);
 
     // Execute the query and return the results.
-    return this.get('store').findAll(this._disassociatedSubmittedTasksQuery);
+    return this.get('store').find(this._disassociatedSubmittedTasksQuery);
   }.property('_id').cacheable()
 
 });

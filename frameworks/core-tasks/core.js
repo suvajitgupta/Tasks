@@ -357,7 +357,7 @@ CoreTasks = SC.Object.create({
       });
     }
     this._getUserQuery.set('parameters', [loginName]);
-    var users = CoreTasks.get('store').findAll(this._getUserQuery);
+    var users = CoreTasks.get('store').find(this._getUserQuery);
     if(!users) return null;
     return users.objectAt(0);
   },
@@ -376,7 +376,7 @@ CoreTasks = SC.Object.create({
       });
     }
     this._getProjectQuery.set('parameters', [projectName]);
-    var projects = CoreTasks.get('store').findAll(this._getProjectQuery);
+    var projects = CoreTasks.get('store').find(this._getProjectQuery);
     if(!projects) return null;
     return projects.objectAt(0);
   },

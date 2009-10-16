@@ -6,7 +6,7 @@
 */
 /*globals CoreTasks Tasks */
 
-Tasks.projectsController = SC.ArrayController.create(
+Tasks.projectsController = SC.ArrayController.create(Tasks.statusChanged,
 /** @scope Tasks.projectsController.prototype */ {
   
   allowsMultipleSelection: NO,
@@ -26,6 +26,15 @@ Tasks.projectsController = SC.ArrayController.create(
     
     return true;
     
-  }.property('selection').cacheable()
+  }.property('selection').cacheable(),
+  
+  contentStatusDidChange: function(status){
+    if (status & SC.Record.READY){
+      Tasks.projectsLoadSuccess();
+    }
+    else if (status & SC.Record.ERROR){
+      Tasks.dataLoadFailure();
+    }
+  }
   
 });

@@ -30,10 +30,8 @@ Tasks.mixin({
         if(this._usersLoaded) {
           this._loginUser();
         }
-        else {
-          // Retrieve all users from the data source.
-          var users = CoreTasks.getUsers();
-          this.get('usersController').set('content', users);
+        else { // Retrieve all users from the data source.
+          this.usersController.set('content', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.User })));
         }
         break;
 
@@ -43,12 +41,9 @@ Tasks.mixin({
   },
 
   /**
-   * Called after all users have been loaded from the data source.
-   *
-   * Now we can "authenticate" the user by searching for a matching loginName attribute in the list
-   * of users in the store.
+   * Called after all users have been successfully loaded from the server.
    */
-  _usersLoadSuccess: function(storeKeys) {
+  usersLoadSuccess: function() {
     this._usersLoaded = true;
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', serverMessage.get('value') + "_UsersLoaded".loc());
@@ -58,13 +53,13 @@ Tasks.mixin({
   /**
    * Called if the request to the data source to load all users failed for some reason.
    */
-  _usersLoadFailure: function() {
+  usersLoadFailure: function() {
     Tasks.loginController.closePanel();
     alert('System Error: Unable to retrieve users from server');
   },
 
   /**
-   * Called to login user.
+   * Authenticate the user by searching for a matching loginName in the list of users in the store.
    */
   _loginUser: function() {
 
@@ -94,7 +89,7 @@ Tasks.mixin({
   },
 
   /**
-   * Called after successful login.
+   * Called after successful authentication.
    */
   _authenticationSuccess: function() {
     switch (this.state.a) {
@@ -111,7 +106,7 @@ Tasks.mixin({
   },
 
   /**
-   * Called after failed login.
+   * Called after failed authentication.
    */
   _authenticationFailure: function() {
     switch (this.state.a) {
@@ -130,32 +125,32 @@ Tasks.mixin({
   _loadData: function() {
 
     // Start by loading all tasks.
-    CoreTasks.getTasks();
+    this.allTasksController.set('content', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Task })));
     
   },
 
   /**
-   * Called after all tasks have been loaded from the data source.
+   * Called after all tasks have been loaded from the server.
    */
-  _tasksLoadSuccess: function() {
+  tasksLoadSuccess: function() {
 
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', serverMessage.get('value') + "_TasksLoaded".loc());
 
     // Now load all of the projects.
-    var projects = CoreTasks.getProjects();
+    this.projectsController.set('content', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Project })));
     
   },
 
   /**
-   * Called after all projects have been loaded from the data source.
+   * Called after all projects have been loaded from the server.
    */
-  _projectsLoadSuccess: function() {
+  projectsLoadSuccess: function() {
 
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', serverMessage.get('value') + "_ProjectsLoaded".loc());
 
-    var store = CoreTasks.get('store');
+    var projects = Tasks.projectsController.get('contennt');
     
     // Create the UnallocatedTasks project with the unallocated tasks.
     var unallocatedTasksQuery = SC.Query.create({
@@ -180,18 +175,16 @@ Tasks.mixin({
     CoreTasks.set('allTasksProject', allTasksProject);
     projects.unshiftObject(allTasksProject);
 
-    // Set the content of the projects controller.
-    this.get('projectsController').set('content', projects);
-    this._dataLoadSuccess();
+    this.dataLoadSuccess();
   },
 
   /**
    * Called after successful data load.
    */
-  _dataLoadSuccess: function() {
+  dataLoadSuccess: function() {
     switch (this.state.a) {
       case 3:
-        // TODO: [SG] is this the correct way to clear store changelog after adding reserved projects (All/UnallocatedTasks)?
+        // FIXME: [SG] is this the correct way to clear store changelog after adding reserved projects (All/UnallocatedTasks)?
         CoreTasks.store.set('changelog',null);
         this.goState('a', 4);
         break;
@@ -203,7 +196,7 @@ Tasks.mixin({
   /**
    * Called after failed data load.
    */
-  _dataLoadFailure: function() {
+  dataLoadFailure: function() {
     switch (this.state.a) {
       case 3:
         alert('System Error: Unable to retrieve project/task data from server');

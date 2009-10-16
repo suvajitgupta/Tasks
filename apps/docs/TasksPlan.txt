@@ -95,7 +95,7 @@ v Add hover over tooltip for assignees to show how many tasks they have and to e
 ^ Add popup viewer/editor for Task submitter, sssignee, effort, and description [JH2] <SG> @Done %Passed $Feature
 - Fix task pop editor location problem where it is getting cropped at the window boundary [SC] <SG> @Active $Bug
 v Add context menu to Add/Delete/Duplicate/Copy Contents of a task <JH2> [SG] $Feature
-- Not in scope: Add support for nested tasks, inter-task dependencies/linking, task tagging, preserving original estimate/partial time logging
+- Not in scope: Add support for nested tasks/tagging, inter-task dependencies/linking, preserving original estimate/partial time logging
 
 User Manager GUI
 ^ Add login screen to identify user who logs in (and handle login failures properly) [SG] <SE> @Done %Passed $Feature

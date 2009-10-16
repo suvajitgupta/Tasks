@@ -37,8 +37,10 @@
 		<h3>Users</h3>
 			<p>Click on the "Settings" button in the dock to access the User Manager panel.  Here you can add/modify/delete users and their roles.</p>
 	<h1>Advanced Features</h1>
-	<h3>Grouping/Traceability</h3>
-		<p>Prefix names of related tasks with <i>Use Case</i> or <i>Component</i> names so that these tasks can be found by searching for that prefix.  <app>tasks</app> also allows you to trace back to upstream Analysis artifacts via the task description: you can add a link to an external Wiki page or Content Management System (CMS) artifact.</p>
+	<h3>Grouping</h3>
+		<p>Prefix names of related tasks with <i>Use Case</i> or <i>Component</i> names so that these tasks can be found by searching for that prefix.  This is a simple solution avoiding the complications of nested tasks or tagging/tag management.</p>
+	<h3>Traceability</h3>
+		<p><app>tasks</app> allows you to trace back to upstream Analysis artifacts via the task description by adding a link to an external Wiki page or Content Management System (CMS) artifact.  If you need attachments (like a GUI wireframe HTML or visual mockup image you must host them somewhere and link to them.  There is no support for inter-task dependencies/critical path analysis - you can simply reference the ID(s) of upstream tasks in the description.</p>
 	<h3>Workflow</h3>
 		<p><app>tasks</app> supports a simple workflow as shown in the control bar at the bottom. You first plan your tasks, specifying their types and priorities. Then you work on your tasks, noting your status as you go. Finally, you may validate your completed tasks.
 	<h3>Sorting</h3>
@@ -63,7 +65,8 @@
 				<li><b>Flag Risks</b>: Developers should flag a task as <i>Risky</i> to catch management attention if the task has unresolved ambiguity, is blocked owing to other dependencies, blew up during implementation and now will take significantly longer, and so on.</li>
 				<li><b>Management by Exception</b>: Assuming Developers are flagging risks, Managers can set their tasks attribute filter to only show <i>Risky</i> or <i>Failed</i> tasks and see how to mitigate these risks.</li>
 				<li><b>Checkpointing</b>: Conduct regular SCRUM huddles a few times a week and use <app>tasks</app> to review progress, load balance remaining work, and discuss/resolve risks.</li>
-				<li><b>Chunk Up Work</b>: If you are almost finished with a task and have a small final portion left, split up the task and mark the completed portion <i>Done</i> - this will give you credit for the completed portion and avoid the <i>overloaded</i> assignee label!</li>
+				<li><b>Chunk Up Work</b>: If you are almost finished with a task and have a small final portion left, split up the task and mark the completed portion <i>Done</i> - this will give you credit for the completed portion and avoid the <i>overloaded</i> assignee label! <app>tasks</app>  doesn't preserve the original estimates and support partial time logging - it is flexible and allows a task to have no estimate at the start, refined to a range estimate, and finalized to an actual at the end.
+				</li>
 				<li><b>Collaboration</b>: Use the task <i>submitter</i> to indicate your <i>collaborator</i> - the person you will consult with.  Drop in tasks for people instead of walking up and interrupting them - they can review your requested tasks at their leisure and decide when to address them.</li>
 				<li><b>Long-Range Planning</b>: Map out future releases and background initiatives as projects - this allows you to plan future work and provides a place to capture ideas and reallocate tasks that don't fit into current schedules.</li>
 				<li><b>Baselining Plan</b>: Export a snapshot of the tasks for a release after people have committed to a plan and see how the team fares vs. the plan at the end of the release.</li>
@@ -75,7 +78,7 @@
 			<li><b>Inline Editing</b>: Type in a project's <i>time left</i> inline by typing it within curly braces. Type in a tasks' properties/attributes inline using the same syntax for Import/Export. Reassign a task to another user by typing in their login name within square brackets inline at the end of a task</li>
 			<li><b>Bulk Data Entry</b>: Use the Import panel to type in a bunch of tasks at once - basically use it as a simple text editor</li>
 		</ul>
-	<h2>Reference</h2>
+	<h1>Reference</h1>
 		<p>This section goes into details about the various entities used in the application.</p>
 		<h3>User</h3>
 			<p>A team member with a <i>login name</i> and <i>full name</i> as well as a <i>role</i> (one of Manager, Developer, or Tester).  A user logs into the <app>tasks</app> application using an optional <i>password</i> and are task <i>assignees</i> and <i>submitters</i>.</p>

@@ -64,28 +64,28 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
     }
 
     // Execute the query and return the results.
-    return this.get('store').findAll(this.tasksQuery);
+    return this.get('store').find(this.tasksQuery);
 
   }.property('id').cacheable(),
 
   /**
-   * A read-only computed property that returns the list of tasks associated with this project
+   * A read-only computed property that returns the list of tasks allocated to this project
    * before it was first persisted.
    *
    * @returns {SC.RecordArray} An array of tasks.
    */
   disassociatedTasks: function() {
     // Create the query if necessary.
-    if (!this._disassociatedTasksQuery) {
-      this._disassociatedTasksQuery = SC.Query.create({ recordType: CoreTasks.Task });
+    if (!this._disassociatedAllocatedTasksQuery) {
+      this._disassociatedAllocatedTasksQuery = SC.Query.create({ recordType: CoreTasks.Task });
     }
     
     // Narrow the conditions.
-    this._disassociatedTasksQuery.set('conditions', 'projectId = %@');
-    this._disassociatedTasksQuery.set('parameters', [this.get('_id')]);
+    this._disassociatedAllocatedTasksQuery.set('conditions', 'projectId = %@');
+    this._disassociatedAllocatedTasksQuery.set('parameters', [this.get('_id')]);
     
     // Execute the query and return the results.
-    return this.get('store').findAll(this._disassociatedTasksQuery);
+    return this.get('store').find(this._disassociatedAllocatedTasksQuery);
 
   }.property('_id').cacheable(),
 
