@@ -32,10 +32,8 @@ Tasks.mixin({
         }
         else {
           // Retrieve all users from the data source.
-          CoreTasks.get('store').findAll(CoreTasks.User, {
-            successCallback: this._usersLoadSuccess.bind(this),
-            failureCallback: this._usersLoadFailure.bind(this)
-          });
+          var users = CoreTasks.getUsers();
+          this.get('usersController').set('content', users);
         }
         break;
 
@@ -51,18 +49,10 @@ Tasks.mixin({
    * of users in the store.
    */
   _usersLoadSuccess: function(storeKeys) {
-    
     this._usersLoaded = true;
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', serverMessage.get('value') + "_UsersLoaded".loc());
-    
-    // Load all users into the usersController
-    var store = CoreTasks.get('store');
-    var users = store.recordArrayFromStoreKeys(storeKeys, CoreTasks.User, store);
-    this.get('usersController').set('content', users);
-    
     this._loginUser();
-    
   },
 
   /**
@@ -107,7 +97,6 @@ Tasks.mixin({
    * Called after successful login.
    */
   _authenticationSuccess: function() {
-    
     switch (this.state.a) {
       case 2:
         this.goState('a', 3);
@@ -119,7 +108,6 @@ Tasks.mixin({
       default:
         this._logActionNotHandled('_authenticationSuccess', 'a', this.state.a);  
     }
-    
   },
 
   /**
@@ -142,10 +130,7 @@ Tasks.mixin({
   _loadData: function() {
 
     // Start by loading all tasks.
-    CoreTasks.get('store').findAll(CoreTasks.Task, {
-      successCallback: this._tasksLoadSuccess.bind(this),
-      failureCallback: this._dataLoadFailure.bind(this)
-    });
+    CoreTasks.getTasks();
     
   },
 
@@ -158,23 +143,19 @@ Tasks.mixin({
     serverMessage.set('value', serverMessage.get('value') + "_TasksLoaded".loc());
 
     // Now load all of the projects.
-    CoreTasks.get('store').findAll(CoreTasks.Project, {
-      successCallback: this._projectsLoadSuccess.bind(this),
-      failureCallback: this._dataLoadFailure.bind(this)
-    });
+    var projects = CoreTasks.getProjects();
     
   },
 
   /**
    * Called after all projects have been loaded from the data source.
    */
-  _projectsLoadSuccess: function(storeKeys) {
+  _projectsLoadSuccess: function() {
 
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', serverMessage.get('value') + "_ProjectsLoaded".loc());
 
     var store = CoreTasks.get('store');
-    var projects = store.recordArrayFromStoreKeys(storeKeys, CoreTasks.Project, store);
     
     // Create the UnallocatedTasks project with the unallocated tasks.
     var unallocatedTasksQuery = SC.Query.create({
@@ -210,6 +191,7 @@ Tasks.mixin({
   _dataLoadSuccess: function() {
     switch (this.state.a) {
       case 3:
+        // TODO: [SG] is this the correct way to clear store changelog after adding reserved projects (All/UnallocatedTasks)?
         CoreTasks.store.set('changelog',null);
         this.goState('a', 4);
         break;
@@ -227,7 +209,7 @@ Tasks.mixin({
         alert('System Error: Unable to retrieve project/task data from server');
         break;
       default:
-        this._logActionNotHandled('dataLoadSuccess', 'a', this.state.a);  
+        this._logActionNotHandled('dataLoadFailure', 'a', this.state.a);  
     }
   },
   
