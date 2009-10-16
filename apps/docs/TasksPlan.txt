@@ -35,6 +35,8 @@ v Make task in-cell editors fit with collection view item size [SG] <JH2> $Bug
 v Double click to start in-cell editor, click elsewhere - causes errors [SC] <SG> $Bug
 | Fix in CSS add class .ghost to list item view and set its background to none
 v Track/optimize calls to assignments controller for redrawing tasks tree [BB] <SG> @Active
+v Add slide down/up animation for task attributes filter pane [SG] $Feature
+v Make buttons depressable to provide feedback when using them [SG]
 v Allow direct bookmarking of Tasks projects using SproutCore routes [SG] $Feature
 - Show newly added tasks/projects with a badge <SE> [SG] $Feature
 - Add email notifications on task changes to Assignee/Manager [SG] <JH2> $Feature @Active
@@ -125,6 +127,7 @@ v Allow drag-n-drop of a TXT file into App for data importing using Google Gears
 | * email notifications
 v Add export to HTML for human-readable version (for baselining tasks for a release, for instance) [SG]
 - Add Online Help button in top Toolbar & popup Help dialog [SG] @Done %Passed $Feature
+v Add screenshots with callouts for Online Help content [SG] $Feature
 - Add onscreen help (on panel fields that are complex and on blank workspace to assist new users) [SG] @Active $Feature
 - Add Logout button to exit in top toolbar (confirm before exiting, reload data/clear all filters) [SG] <JH2> @Done $Feature %Passed
 - Beta: Prompt user to save changes (if any) before logging out [SG] <SE> $Feature
