@@ -53,20 +53,26 @@
 			<p>Filtering results are displayed as soon as you stop typing.  If an attribute filter is set you will see it indicated by a special icon next to the "Filter Tasks" button.</p>
 		<h3>Load Balancing</h3>
 			<p>To use this feature, you must specify the <i>time left</i> in a project as well as the <i>effort</i> for tasks.  <app>tasks</app> will automatically total the efforts for each assignee and indicate their loading via color coding. A "?" is appended for range-based subtotals including tasks with unspecified efforts.</p>
+			<p>Since there are a certain number of days in a release before <i>Feature Freeze</i> - set the project's <i>time left</i> accordingly.  During this time decrement the <i>time left</i> every day and load balance the remaining work across the team. As the team moves towards <i>Code Freeze</i>, set the <i>time left</i> to the number of days you allocate to code stabilization.  This way, the team can run very tight cycles and converge on the milestones of <i>Code/Feature Freezes.</i>
 		<h3>Data Exchange</h3>
 			<p><app>tasks</app> allows data to be exchanged via a simple import/export mechanism.  Use the "Import" button in the toolbar to bring data into the application.  Use the "Export" button to output <app>tasks</app> data to another installation of the application or some other system.</p>
 		<h2>Usage Tips</h2>
 			<p>To get the maximum value from using <app>tasks</app>, consider the following usage tips:</p>
 			<ul>
-				<li>You can <i>manage by exception</i> by filtering to only see Risky or Failed tasks</li>
-				<li>Hotkeys are available for many common actions: Save = Ctrl-S, New Task = Ctrl-T, New Project = Ctrl-P</li>
-				<li>Right clicking on projects and tasks provides a context menu with common actions</li>
+				<li>Make each task SMART (Specific, Measurable, Attainable, Resourced, Timebound) ensuring that the task is: (1) self-explantory, (2) has clear success criteria to allow validation, (3) has realistic estimates which you can refine as you proceed, (4) maps out dependencies like analysis, design, infrastructure, test data, et al, and (5) is broken into small chunks each taking no more than a day or two
+				<li>Developers should flag a task as <i>Risky</i> to catch management attention if the task has unresolved ambiguity, is blocked owing to other dependencies, blew up during implementation and now will take significantly longer, and so on</li>
+				<li>Managers can then <i>manage by exception</i> by setting their tasks attribute filter to only focus on and help resolve <i>Risky</i> or <i>Failed</i> tasks</li>
+				<li>Conduct regular SCRUM huddles a few times a week and use <app>tasks</app> to review progress/load balance/resolve risks</li>
 				<li>If you are almost finished with a task and have a small final portion left, split up the task and mark the completed portion <i>Done</i> - this will give you credit for the completed portion and avoid the <i>overloaded</i> assignee label!</li>
+				<li>Map out future releases and background initiatives as projects - this allows you to plan future work and provides a place to capture ideas and reallocate tasks that don't fit into current schedules</li>
 				<li>Use the task <i>submitter</i> to indicate your <i>collaborator</i> - the person you will consult with</li>
+				<li>Export a snapshot of the tasks for a release after people have committed to a plan and see how the team fares vs. the plan at the end of the release</li>
 			</ul>
 		<h2>Power User Features</h2>
 		<p>Finally, <app>tasks</app> has some great hidden features to avoid confusing regular users.  As you get more comfortable with <app>tasks</app>, ty using some of these shortcuts.</p>
 		<ul>
+			<li>Hotkeys are available for many common actions: Save = Ctrl-S, New Task = Ctrl-T, New Project = Ctrl-P</li>
+			<li>Right clicking on projects and tasks provides a context menu with common actions</li>
 			<li>Type in a project's <i>time left</i> inline by typing it within curly braces</li>
 			<li>Type in a tasks' properties/attributes inline using the same syntax for Import/Export</li>
 			<li>Reassign a task to another user by typing in their login name within square brackets inline at the end of a task</li>
