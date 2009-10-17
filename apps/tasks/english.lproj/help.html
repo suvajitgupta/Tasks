@@ -24,7 +24,7 @@
 </head>
 <body>
 	<h1>Introduction</h1>
-		<p><app>tasks</app> directly supports Agile development practices and the eXtreme Programming (XP) <i>Planning Game</i>.  One of the main drivers behind the design of <app>tasks</app> was relentless simplicity - it keeps up with the madness of software development. Developers embrace this tool since it is lightweight and focuses them on what is left to do.</p>
+		<p><app>tasks</app> is an Agile project/task management tool built to directly support the eXtreme Programming (XP) <i>PlanningGame</i> or Scrum <i>Sprint Planning Meeting</i>.  One of the main drivers behind the design of <app>tasks</app> was relentless simplicity - it keeps up with the madness of software development. Developers embrace this tool since it is lightweight and focuses them on what is left to do.</p>
 		<p>A <i>task</i> is something a <i>user</i> does and tasks are grouped into <i>project</i>s.  A user <i>submits</i> (or creates) tasks and these are <i>assigned</i> to users.  Sets of tasks are <i>allocated</i> to a project (an initiative or a release). The <app>tasks</app> user interface is comprised of the following sections:</p>
 		<ul>
 			<li>A <b>dock</b> at the top with some global action buttons</li>
@@ -37,7 +37,7 @@
 		<p>As soon as you understand a few basic concepts you should be off and running in <app>tasks</app>, expanding your sphere of comfort as you learn more.</p>
 		<h3>Projects</h3>
 			<p>To begin, click on "Add Project" to create a project and type in its name. To view a project's tasks, simply click on the project.  To rename a project double click on its name and change it.  To delete a project select it and then click on the "Del. Project" button.</p>
-			<p>There are two reserved projects at the top of the projects list called "All Tasks" and "Unallocated Tasks" to show all and unallocated tasks respectively. Remember that <app>tasks</app> is a rich client and you must use the Save button in the dock to periodically save your work.  Your iterative releases naturally map to <app>tasks</app> projects - for example, if you are following a Rational Unified Process (RUP) or eXtreme Unified Process (XUP) lifecycle, your <i>SmallReleases</i> become projects like "FeatureReleaseOne" and so on.</p>
+			<p>There are two reserved projects at the top of the projects list called "All Tasks" and "Unallocated Tasks" to show all and unallocated tasks respectively. Remember that <app>tasks</app> is a rich client and you must use the Save button in the dock to periodically save your work.  Your iterative releases naturally map to <app>tasks</app> projects. For example, if you use Rational Unified Process (RUP) or eXtreme Unified Process (XUP), your <i>SmallReleases</i> become projects like "Architectural Baseline" and "FeatureReleaseOne."  Those using Scrum should use projects to map out their <i>sprints</i> and <i>backlog</i>.</p>
 		<h3>Tasks</h3>
 			<p>Tasks are grouped by assignee and displayed using various kinds of color coding - the legend is shown in the bottom control bar.  To create a task, click on the "Add Task" button and enter the name of the task.  After that, you typically set the task's attributes via the radio buttons in the control bar.  You may also click on the icon to the far right of the task to get a popup editor and enter additional details about the task.  Update a task's name by double clicking on it and using the inline editor.  Delete selected tasks using the "Del. Task" button.  To reassign a task to another user, simply drag and drop it to the target user if they are visible or use the tak popup editor to change the assignee.  To reallocate a task to another project drag and drop it on the target project in the master list.  Note: you can select multiple tasks at once and perform delete/reassign/reallocate operations.</p>
 		<p>When entering a task, try to use the XP principle of <i>FeaturesNotSubsystems</i> - try to build user-visible <i>Features</i> that may need some <i>Other</i> tasks as infrastructure.  XP's <i>RefactorMericilessly</i> manifests itself as <i>Bug</i> and <i>Other</i> tasks - pay off your technical debt as you go.
@@ -85,9 +85,7 @@
 			<h3>Flag Risks</h3>
 				<p>Developers should flag a task as <i>Risky</i> to catch management attention if the task has unresolved ambiguity, is blocked owing to other dependencies, blew up during implementation and now will take significantly longer, and so on.  Add notes to the task description explaining why the task is at risk.</p>
 			<h3>Manage by Exception</h3>
-				<p>Assuming Developers and Testers are flagging risks, Managers can set their tasks attribute filter to only show <i>Risky</i> or <i>Failed</i> tasks and see how to mitigate these risks.</p>
-			<h3>Monitor Progress</h3>
-				<p>Conduct regular Scrum huddles a few times a week and use <app>tasks</app> to review progress, load balance remaining work, and discuss/resolve risks.</p>
+				<p>Assuming Developers and Testers are flagging risks, Managers can set their tasks attribute filter to only show <i>Risky</i> or <i>Failed</i> tasks. At daily Scrum huddles use <app>tasks</app> to monitor progress, review risks/discuss mitigations, and load balance remaining work across team members (XP's <i>CollectiveCodeOwnership</i> helps).</p>
 			<h3>Collaborate Online</h3>
 				<p>Use the task <i>submitter</i> to indicate your <i>collaborator</i> - the person you will consult with as you work on this task.  Add tasks for people instead of walking up and interrupting them - they can review your requested tasks at their leisure and decide when to address them.  As you have ideas or notice defects, add tasks to capture them.</p>
 			<h3>Capture Release Notes</h3>
