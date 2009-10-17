@@ -67,7 +67,7 @@
 		<h3>Data Exchange</h3>
 			<p><app>tasks</app> allows data to be exchanged via a simple import/export mechanism.  Use the "Import" button in the toolbar to bring data into the application.  Use the "Export" button to output <app>tasks</app> data to another installation of the application or some other system.</p>
 		<h1>Power User Features</h1>
-			<p><app>tasks</app> has some great hidden features to avoid confusing regular users.  As you get more comfortable with <app>tasks</app>, try using some of these shortcuts.</p>
+			<p><app>tasks</app> has some great hidden features to avoid confusing regular users.  As you get more comfortable with <app>tasks</app>, try using some of these power user features.</p>
 		<h3>Shortcuts</h3>
 			<p>Hot keys are available for many common actions: Save = Ctrl-S, New Task = Ctrl-T, New Project = Ctrl-P.  Right clicking on projects and tasks provides a context menu with common actions.</p>
 		<h3>Inline Editing</h3>
@@ -90,8 +90,8 @@
 				<p>Conduct regular Scrum huddles a few times a week and use <app>tasks</app> to review progress, load balance remaining work, and discuss/resolve risks.</p>
 			<h3>Collaborate Online</h3>
 				<p>Use the task <i>submitter</i> to indicate your <i>collaborator</i> - the person you will consult with as you work on this task.  Add tasks for people instead of walking up and interrupting them - they can review your requested tasks at their leisure and decide when to address them.  As you have ideas or notice defects, add tasks to capture them.</p>
-			<h3>Just-in-Time Release Notes</h3>
-				<p>As you finish a task, document <i>Release Notes</i> in real time (what works, what doesn't, limitations, et al).  This helpde Developers document what Testers need to know as they validate completed tasks.</p>
+			<h3>Capture Release Notes</h3>
+				<p>As you finish a task, document its Release Notes in real time (what works, what doesn't, limitations, et al).  This helpde Developers document what Testers need to know as they validate completed tasks.</p>
 			<h3>Plan Long Term</h3>
 				<p>Map out future releases and background initiatives as projects - this allows you to plan future work and provides a place to capture ideas and reallocate tasks that don't fit into current schedules.</p>
 	<h1>Reference</h1>
@@ -101,9 +101,9 @@
 		<h3>Task</h3>
 			<p>An atomic unit of work with several attributes:</p>
 			<ul>
-				<li><i>name</i>: one-line summary describing the task, you may want to name related tasks with a common prefix followed by a colon</li>
-				<li><i>priority</i>: High or Medium (default) or Low (High ones must be completed, Low ones not included in effort subtotals</li>
-				<li><i>effort</i>: optional estimate => actual</li>
+				<li><i>name</i>: one-line summary describing the task; you may want to name related tasks with a common prefix followed by a colon</li>
+				<li><i>priority</i>: High or Medium (default) or Low; High ones must be completed, Low ones aren't included in effort subtotals</li>
+				<li><i>effort</i>: optional time required to complete the task (estimate => actual); can be an integer/decimal, or a range, with an optional unit of 'd' (days - default if ommitted) or 'h' (hours)</li>
 				<li><i>project</i>: project this task is allocated to, if any</li>
 				<li><i>submitter</i>: user who submitted this task, if any</li>
 				<li><i>assignee</i>: user to whom this task is assigned, if any</li>
