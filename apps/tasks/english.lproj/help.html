@@ -16,7 +16,8 @@
 	}
 	h2 {
 		padding: 2px 5px 2px 5px;
-		background-color: #CCC;
+		color: white;
+		background-color: #555;
 	}
 	h3, intro {
 		margin-left: 5px;
@@ -58,13 +59,13 @@
 	<h3>Clustering</h3>
 		<p>Prefix names of related tasks with <i>Use Case</i> or <i>Component</i> names so that these tasks can be found by searching for that prefix.  This is a simple solution for task clustering avoiding the complications of nested (sub) tasks or tagging/tag management.</p>
 	<h3>Filtering</h3>
-			<p>Another useful feature is task filtering - you may do that in three ways:</p>
+			<p>You can control which tasks are displayed via filtering, using one or more of three approaches:</p>
 			<ul>
-				<li>Click on the "Filter Tasks" button and check/uncheck the task attributes you want filter on</li>
-				<li>Specify task assignees (comma or space separated login names)</li>
-				<li>Search using task IDs (each prepended by '#' and comma or space separated) or a string matching any part of task names in the search bar</li>
+				<li>Click on the "Filter Tasks" button and check/uncheck the task attributes you want filter on. If an attribute filter is set a special icon is displayed next to the "Filter Tasks" button.</li>
+				<li>Specify one or more task assignees (comma or space separated login names).</li>
+				<li>Search using one or more task IDs (each prepended by '#' and comma or space separated) or a string matching any part of task names in the search bar</li>
 			</ul>
-			<p>Filtering results are displayed as soon as you stop typing.  If an attribute filter is set you will see it indicated by a special icon next to the "Filter Tasks" button.</p>
+			<p>Filtering results are displayed as soon as you stop typing in the assignee or search text boxes.</p>
 		<h3>Load Balancing</h3>
 			<p>To use this feature, you must specify the <i>time left</i> in a project and the <i>effort</i> for tasks as integer or decimal numbers, optionally appended with an unit of 'd' (days) or 'h' (hours).  If no time unit is specified it is assumed to mean 'days.'  Task effort may also be expressed as a range like: 3-5d.<app>tasks</app> will automatically total the efforts for each assignee (excluding <i>Low</i> priority tasks) and indicate their loading via color coding. A "?" is appended for range-based subtotals including tasks with unspecified efforts.</p>
 			<p>Since there are a certain number of days in a release before <i>Feature Freeze</i> - set the project's <i>time left</i> accordingly.  During this time decrement the <i>time left</i> every day and load balance the remaining work across the team. As the team moves towards <i>Code Freeze</i>, set the <i>time left</i> to the number of days you allocate to code stabilization.  This way, the team can run very tight cycles and converge on the milestones of <i>Code/Feature Freezes.</i>
