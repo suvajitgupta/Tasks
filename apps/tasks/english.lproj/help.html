@@ -19,32 +19,33 @@
 <body>
 	<h1>Introduction</h1>
 		<p><app>tasks</app> directly supports Agile development practices and the eXtreme Programming (XP) <i>Planning Game</i>.  One of the main drivers behind the design of <app>tasks</app> was relentless simplicity - it keeps up with the madness of software development. Developers embrace this tool since it is lightweight and focuses them on what is left to do.</p>
-		<p>As soon as you understand a few basic concepts you should be off and running in <app>tasks</app>, expanding your sphere of comfort as you learn more.  A <i>task</i> is something a <i>user</i> does and tasks are grouped into <i>project</i>s.  A user <i>submits</i> (or creates) tasks and these are <i>assigned</i> to users.  Sets of tasks are <i>allocated</i> to a project (an initiative or a release). The <app>tasks</app> user interface is comprised of the following sections:</p>
+		<p>A <i>task</i> is something a <i>user</i> does and tasks are grouped into <i>project</i>s.  A user <i>submits</i> (or creates) tasks and these are <i>assigned</i> to users.  Sets of tasks are <i>allocated</i> to a project (an initiative or a release). The <app>tasks</app> user interface is comprised of the following sections:</p>
 		<ul>
 			<li>A <b>dock</b> at the top with some global action buttons</li>
-			<li>A <b>toolbar</b> below that with actions to add/delete projects and tasks and controls for filtering tasks</li>
+			<li>A <b>toolbar</b> below that with actions to add/delete projects and tasks, and controls for filtering tasks</li>
 			<li>A <b>workspace</b> in the middle where projects are shown in a <i>master</i> list on the left and tasks are shown in the <i>detail</i> list on the right</li>
 			<li>A <b>control bar</b> near the bottom containing controls to manipulate task attributes</li>
 			<li>A <b>status bar</b> at the bottom to display system messages</li>
 		</ul>
 	<h1>Basic Features</h1>
-		<h3>Projects</h3>
+		<p>As soon as you understand a few basic concepts you should be off and running in <app>tasks</app>, expanding your sphere of comfort as you learn more.</p>		<h3>Projects</h3>
 			<p>To begin, click on "Add Project" to create a project and type in its name. To view a project's tasks, simply click on the project.  To rename a project double click on its name and change it.  To delete a project select it and then click on the "Del. Project" button.</p>
-			<p>There are two reserved projects at the top of the projects list called "All Tasks" and "Unallocated Tasks" projects to show all and unallocated tasks respectively. Remember that <app>tasks</app> is a rich client and you must use the Save button in the dock to periodically save your work.  Your iterative releases naturally map to <app>tasks</app> projects - for example, if you are following a Rational Unified Process (RUP) or eXtreme Unified Process (XUP) lifecycle, your <i>SmallReleases</i> become projects like "FeatureReleaseOne" and so on.</p>
+			<p>There are two reserved projects at the top of the projects list called "All Tasks" and "Unallocated Tasks" to show all and unallocated tasks respectively. Remember that <app>tasks</app> is a rich client and you must use the Save button in the dock to periodically save your work.  Your iterative releases naturally map to <app>tasks</app> projects - for example, if you are following a Rational Unified Process (RUP) or eXtreme Unified Process (XUP) lifecycle, your <i>SmallReleases</i> become projects like "FeatureReleaseOne" and so on.</p>
 		<h3>Tasks</h3>
 			<p>Tasks are grouped by assignee and displayed using various kinds of color coding - the legend is shown in the bottom control bar.  To create a task, click on the "Add Task" button and enter the name of the task.  After that, you typically set the task's attributes via the radio buttons in the control bar.  You may also click on the icon to the far right of the task to get a popup editor and enter additional details about the task.  Update a task's name by double clicking on it and using the inline editor.  Delete selected tasks using the "Del. Task" button.  To reassign a task to another user, simply drag and drop it to the target user if they are visible or use the tak popup editor to change the assignee.  To reallocate a task to another project drag and drop it on the target project in the master list.  Note: you can select multiple tasks at once and perform delete/reassign/reallocate operations.</p>
 		<p>When entering a task, try to use the XP principle of <i>FeaturesNotSubsystems</i> - try to have user-visible <i>Features</i> which may need some <i>Other</i> tasks as infrastructure.  XP's <i>RefactorMericilessly</i> manifests itself as <i>Bug</i> and <i>Other</i> tasks - pay off your technical debt as you go.
 		<h3>Users</h3>
 			<p>Click on the "Settings" button in the dock to access the User Manager panel.  Here you can add/modify/delete users and their roles.</p>
+		 	<h3>Sorting</h3>
+				<p>Sorting in <app>tasks</app> is automatic. Projects are sorted alphabetically. Tasks are sorted by status, validation (if Done), priority, and type in that order.  This helps you focus on what you are working on now and what is next.</p>
 	<h1>Advanced Features</h1>
+		<p>Now you are ready to graduate to the more advanced features of <app>tasks</app>.  These features are built using <i>progressive disclosure</i> which means you can learn/use them when you want - they won't get in your way if you don't need them.</p>
+		<h3>Tracing</h3>
+			<p><app>tasks</app> allows you to trace back to upstream Analysis artifacts via the task description by adding a link to an external Wiki page or Content Management System (CMS) artifact.  If you need attachments (like a GUI wireframe HTML or visual mockup image you must host them somewhere and link to them.  There is no support for inter-task dependencies/critical path analysis - you can simply reference the ID(s) of upstream tasks in the description.</p>
+		<h3>Workflow</h3>
+			<p><app>tasks</app> supports a simple workflow as shown in the control bar at the bottom. You first plan your tasks, specifying their types and priorities. Then you work on your tasks, noting your status as you go. Finally, you may validate your completed tasks.
 	<h3>Grouping</h3>
-		<p>Prefix names of related tasks with <i>Use Case</i> or <i>Component</i> names so that these tasks can be found by searching for that prefix.  This is a simple solution avoiding the complications of nested tasks or tagging/tag management.</p>
-	<h3>Traceability</h3>
-		<p><app>tasks</app> allows you to trace back to upstream Analysis artifacts via the task description by adding a link to an external Wiki page or Content Management System (CMS) artifact.  If you need attachments (like a GUI wireframe HTML or visual mockup image you must host them somewhere and link to them.  There is no support for inter-task dependencies/critical path analysis - you can simply reference the ID(s) of upstream tasks in the description.</p>
-	<h3>Workflow</h3>
-		<p><app>tasks</app> supports a simple workflow as shown in the control bar at the bottom. You first plan your tasks, specifying their types and priorities. Then you work on your tasks, noting your status as you go. Finally, you may validate your completed tasks.
-	<h3>Sorting</h3>
-		<p>Sorting in <app>tasks</app> is automatic. Projects are sorted alphabetically. Tasks are sorted by status, validation (if Done), priority, and type in that order.  This helps you focus on what you are working on now and what is next.
+		<p>Prefix names of related tasks with <i>Use Case</i> or <i>Component</i> names so that these tasks can be found by searching for that prefix.  This is a simple solution for task grouping avoiding the complications of nested tasks or tagging/tag management.</p>
 	<h3>Filtering</h3>
 			<p>Another useful feature is task filtering - you may do that in three ways:</p>
 			<ul>
@@ -54,32 +55,33 @@
 			</ul>
 			<p>Filtering results are displayed as soon as you stop typing.  If an attribute filter is set you will see it indicated by a special icon next to the "Filter Tasks" button.</p>
 		<h3>Load Balancing</h3>
-			<p>To use this feature, you must specify the <i>time left</i> in a project as well as the <i>effort</i> for tasks.  <app>tasks</app> will automatically total the efforts for each assignee and indicate their loading via color coding. A "?" is appended for range-based subtotals including tasks with unspecified efforts.</p>
+			<p>To use this feature, you must specify the <i>time left</i> in a project and the <i>effort</i> for tasks as integer or decimal numbers, optionally appended with an unit of 'd' (days) or 'h' (hours).  If no time unit is specified it is assumed to mean 'days.'  Task effort may also be expressed as a range like: 3-5d.<app>tasks</app> will automatically total the efforts for each assignee (excluding <i>Low</i> priority tasks) and indicate their loading via color coding. A "?" is appended for range-based subtotals including tasks with unspecified efforts.</p>
 			<p>Since there are a certain number of days in a release before <i>Feature Freeze</i> - set the project's <i>time left</i> accordingly.  During this time decrement the <i>time left</i> every day and load balance the remaining work across the team. As the team moves towards <i>Code Freeze</i>, set the <i>time left</i> to the number of days you allocate to code stabilization.  This way, the team can run very tight cycles and converge on the milestones of <i>Code/Feature Freezes.</i>
 		<h3>Data Exchange</h3>
 			<p><app>tasks</app> allows data to be exchanged via a simple import/export mechanism.  Use the "Import" button in the toolbar to bring data into the application.  Use the "Export" button to output <app>tasks</app> data to another installation of the application or some other system.</p>
+		<h1>Power User Features</h1>
+			<p><app>tasks</app> has some great hidden features to avoid confusing regular users.  As you get more comfortable with <app>tasks</app>, try using some of these shortcuts.</p>
+		<h3>Shortcuts</h3>
+			<p>Hot keys are available for many common actions: Save = Ctrl-S, New Task = Ctrl-T, New Project = Ctrl-P.  Right clicking on projects and tasks provides a context menu with common actions</p>
+		<h3>Inline Editing</h3>
+			<p>Type in a project's <i>time left</i> inline by typing it within curly braces. Type in a tasks' properties/attributes inline using the same syntax for Import/Export. Reassign a task to another user by typing in their login name within square brackets inline at the end of a task</p>
+		<h3>Bulk Data Entry</h3>
+			<p>Use the Import panel to type in a bunch of tasks at once - basically use it as a simple text editor</p>
 		<h1>Usage Tips</h1>
 			<p>To get the maximum value from using <app>tasks</app>, consider the following usage tips:</p>
 			<ul>
-				<li><b>SMART Tasks</b>: Make each task <i>Specific, Measurable, Attainable, Resourced, Timebound</i> ensuring that the task is: (1) self-explantory, (2) has clear success criteria to allow validation, (3) has realistic estimates which you can refine as you proceed, (4) maps out dependencies like analysis, design, infrastructure, test data, et al, and (5) is broken into small chunks each taking no more than a day or two.
-				<li><b>Flag Risks</b>: Developers should flag a task as <i>Risky</i> to catch management attention if the task has unresolved ambiguity, is blocked owing to other dependencies, blew up during implementation and now will take significantly longer, and so on.</li>
-				<li><b>Management by Exception</b>: Assuming Developers are flagging risks, Managers can set their tasks attribute filter to only show <i>Risky</i> or <i>Failed</i> tasks and see how to mitigate these risks.</li>
-				<li><b>Checkpointing</b>: Conduct regular SCRUM huddles a few times a week and use <app>tasks</app> to review progress, load balance remaining work, and discuss/resolve risks.</li>
+				<li><b>Define Tasks</b>: Make each task SMART (<i>Specific, Measurable, Attainable, Resourced, Timebound</i>) ensuring that the task: (1) is self-explanatory, (2) has clear success criteria to allow validation, (3) has realistic estimates which are refined as you proceed, (4) maps out dependencies like analysis, design, infrastructure, test data, et al, and (5) is broken into small chunks each taking no more than a day or two.
+				<li><b>Baseline Plans</b>: Export a snapshot of the tasks for a release after people have committed to a plan and see how the team fares vs. the plan at the end of the release.</li>
 				<li><b>Chunk Up Work</b>: If you are almost finished with a task and have a small final portion left, split up the task and mark the completed portion <i>Done</i> - this will give you credit for the completed portion and avoid the <i>overloaded</i> assignee label! <app>tasks</app>  doesn't preserve the original estimates and support partial time logging - it is flexible and allows a task to have no estimate at the start, refined to a range estimate, and finalized to an actual at the end.
 				</li>
-				<li><b>Collaboration</b>: Use the task <i>submitter</i> to indicate your <i>collaborator</i> - the person you will consult with.  Drop in tasks for people instead of walking up and interrupting them - they can review your requested tasks at their leisure and decide when to address them.</li>
-				<li><b>Long-Range Planning</b>: Map out future releases and background initiatives as projects - this allows you to plan future work and provides a place to capture ideas and reallocate tasks that don't fit into current schedules.</li>
-				<li><b>Baselining Plan</b>: Export a snapshot of the tasks for a release after people have committed to a plan and see how the team fares vs. the plan at the end of the release.</li>
+				<li><b>Flag Risks</b>: Developers should flag a task as <i>Risky</i> to catch management attention if the task has unresolved ambiguity, is blocked owing to other dependencies, blew up during implementation and now will take significantly longer, and so on.  Add notes to the task description explaining why the task is at risk.</li>
+				<li><b>Manage by Exception</b>: Assuming Developers are flagging risks, Managers can set their tasks attribute filter to only show <i>Risky</i> or <i>Failed</i> tasks and see how to mitigate these risks.</li>
+				<li><b>Checkpoint Progress</b>: Conduct regular SCRUM huddles a few times a week and use <app>tasks</app> to review progress, load balance remaining work, and discuss/resolve risks.</li>
+				<li><b>Collaborate</b>: Use the task <i>submitter</i> to indicate your <i>collaborator</i> - the person you will consult with as you work on this task.  Add tasks for people instead of walking up and interrupting them - they can review your requested tasks at their leisure and decide when to address them.  As you have ideas or notice defects, add tasks to capture them.</li>
+				<li><b>Plan Long Term</b>: Map out future releases and background initiatives as projects - this allows you to plan future work and provides a place to capture ideas and reallocate tasks that don't fit into current schedules.</li>
 			</ul>
-		<h1>Power User Features</h1>
-			<p>Finally, <app>tasks</app> has some great hidden features to avoid confusing regular users.  As you get more comfortable with <app>tasks</app>, ty using some of these shortcuts.</p>
-		<ul>
-			<li><b>Shortcuts</b>: Hotkeys are available for many common actions: Save = Ctrl-S, New Task = Ctrl-T, New Project = Ctrl-P.  Right clicking on projects and tasks provides a context menu with common actions</li>
-			<li><b>Inline Editing</b>: Type in a project's <i>time left</i> inline by typing it within curly braces. Type in a tasks' properties/attributes inline using the same syntax for Import/Export. Reassign a task to another user by typing in their login name within square brackets inline at the end of a task</li>
-			<li><b>Bulk Data Entry</b>: Use the Import panel to type in a bunch of tasks at once - basically use it as a simple text editor</li>
-		</ul>
 	<h1>Reference</h1>
-		<p>This section goes into details about the various entities used in the application.</p>
+		<p>This section provides details about the various entities used in <app>tasks</app>.</p>
 		<h3>User</h3>
 			<p>A team member with a <i>login name</i> and <i>full name</i> as well as a <i>role</i> (one of Manager, Developer, or Tester).  A user logs into the <app>tasks</app> application using an optional <i>password</i> and are task <i>assignees</i> and <i>submitters</i>.</p>
 		<h3>Task</h3>
@@ -87,7 +89,7 @@
 			<ul>
 				<li><i>name</i>: one-line summary describing the task, you may want to name related tasks with a common prefix followed by a colon</li>
 				<li><i>priority</i>: High or Medium (default) or Low (High ones must be completed, Low ones not included in effort subtotals</li>
-				<li><i>effort</i>: optional estimate => actual, appended with 'd' (days) or 'h' (hours)</li>
+				<li><i>effort</i>: optional estimate => actual</li>
 				<li><i>project</i>: project this task is allocated to, if any</li>
 				<li><i>submitter</i>: user who submitted this task, if any</li>
 				<li><i>assignee</i>: user to whom this task is assigned, if any</li>

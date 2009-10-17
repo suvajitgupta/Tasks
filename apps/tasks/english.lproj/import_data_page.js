@@ -40,7 +40,7 @@ Tasks.importDataPage = SC.Page.create({
         layout: { top: 55, left: 10, right: 10, bottom: 40 },
         isTextArea: YES,
         valueBinding: 'Tasks.importDataController.importData',
-        // FIXME: [SC] Workaround for textfields that are used as text areas, when the text goes beyond the lower boundary every keystroke causes the text to jump
+        // FIXME: [SC] workaround for textfields that are used as text areas, when the text goes beyond the lower boundary every keystroke causes the text to jump
         didBecomeKeyResponderFrom: function(responder){
           this.beginPropertyChanges();
         },
@@ -74,7 +74,7 @@ Tasks.importDataPage = SC.Page.create({
     }),
     
     focus: function() {
-      // FIXME: [JH2] Fix focus & begin/endChanges problems with import panel/text area
+      // FIXME: [JH2] fix focus & begin/endChanges problems with import panel/text area
       this.contentView.dataEntry.becomeFirstResponder();        
     }
   

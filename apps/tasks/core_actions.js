@@ -210,7 +210,7 @@ Tasks.mixin({
    * Save modified data to persistent store.
    */
   saveData: function() {
-    // FIXME: [JH2] Fix all records being dirty at startup - everything is saved if you press Save w/o making any changes!
+    // FIXME: [JH2] investigate why all records are dirty at startup
     CoreTasks.saveChanges();
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', "_SaveMessage".loc() + new Date().format('hh:mm:ss a'));
@@ -220,7 +220,7 @@ Tasks.mixin({
    * Import data from external text file.
    */
   importData: function() {
-    // FIXME: [SE] Fix imported tasks disappearing from project after Save, then reappearing after re-login
+    // FIXME: [SE] fix imported tasks disappearing from project after Save, then reappearing after re-login
     Tasks.importDataController.openPanel();  
   },
 
@@ -325,7 +325,7 @@ Tasks.mixin({
       project.destroy();
       
       // Select the first project in the list.
-      // FIXME: [SC] Do this without using SC.RunLoop.begin/end, if possible.
+      // FIXME: [SC] do this without using SC.RunLoop.begin/end, if possible.
       SC.RunLoop.begin();
       var projectsList = Tasks.getPath('mainPage.mainPane.projectsList');
       projectsList.select(projectsList.get('length') > 2? 2 : 0);
@@ -393,7 +393,7 @@ Tasks.mixin({
         task.destroy();
       }
       tc.set('selection', null);
-      // FIXME: [SE] Deleted task erroneously moves to UnallocatedTasks, then after Save deleted tasks become "_NewTask", clears up after re-login
+      // FIXME: [SE] fix deleted task erroneously moving to UnallocatedTasks, after Save deleted tasks become "_NewTask", clears up after re-login
     }
   },
   

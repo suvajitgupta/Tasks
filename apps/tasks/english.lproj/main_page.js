@@ -363,7 +363,7 @@ Tasks.mainPage = SC.Page.design({
         
         // ..........................................................
         // Hot Key Code
-        // FIXME: [EG] Move to /views shouldn't clutter up the .lproj layer
+        // FIXME: [EG] move to /views shouldn't clutter up the .lproj layer
         keyDown: function(evt) {
           var ret, commandCode = evt.commandCodes();
 
