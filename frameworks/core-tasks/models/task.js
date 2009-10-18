@@ -467,13 +467,3 @@ CoreTasks.Task.NEW_TASK_HASH = {
   status: CoreTasks.TASK_STATUS_PLANNED,
   validation: CoreTasks.TASK_VALIDATION_UNTESTED
 };
-
-// Register the appropriate callbacks.
-CoreTasks.registerCallback(
-  CoreTasks.Task, 'post', 'success', CoreTasks.taskCreated.bind(CoreTasks));
-
-CoreTasks.registerCallback(
-  CoreTasks.Task, 'put', 'success', CoreTasks.taskUpdated.bind(CoreTasks));
-
-CoreTasks.registerCallback(
-  CoreTasks.Task, 'delete', 'success', CoreTasks.taskDeleted.bind(CoreTasks));

@@ -7,6 +7,9 @@
  */
 /*globals CoreTasks Tasks sc_require */
 sc_require('core');
+sc_require('controllers/users');
+sc_require('controllers/tasks');
+sc_require('controllers/projects');
 
 // FIXME: [SC] shouldn't have to manually add/remove to/from controller instead of store notifying of changes.
 
@@ -31,7 +34,7 @@ Tasks.mixin({
           this._loginUser();
         }
         else { // Retrieve all users from the data source.
-          this.usersController.set('content', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.User })));
+          this.usersController.set('content', CoreTasks.store.find(SC.Query.local(CoreTasks.User)));
         }
         break;
 
@@ -123,23 +126,19 @@ Tasks.mixin({
    * Load all data (projects and tasks) used by Tasks views.
    */
   _loadData: function() {
-
     // Start by loading all tasks.
-    this.allTasksController.set('content', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Task })));
-    
+    this.allTasksController.set('content', CoreTasks.store.find(SC.Query.local(CoreTasks.Task )));
   },
 
   /**
    * Called after all tasks have been loaded from the server.
    */
   tasksLoadSuccess: function() {
-
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', serverMessage.get('value') + "_TasksLoaded".loc());
 
     // Now load all of the projects.
-    this.projectsController.set('content', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Project })));
-    
+    this.projectsController.set('content', CoreTasks.store.find(SC.Query.local(CoreTasks.Project)));
   },
 
   /**

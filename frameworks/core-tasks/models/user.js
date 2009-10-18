@@ -141,13 +141,3 @@ CoreTasks.User.NEW_USER_HASH = {
   loginName: CoreTasks.NEW_USER_LOGIN_NAME,
   role: CoreTasks.USER_ROLE_DEVELOPER
 };
-
-// Register the appropriate callbacks.
-CoreTasks.registerCallback(
-  CoreTasks.User, 'post', 'success', CoreTasks.userCreated.bind(CoreTasks));
-
-CoreTasks.registerCallback(
-  CoreTasks.User, 'put', 'success', CoreTasks.userUpdated.bind(CoreTasks));
-
-CoreTasks.registerCallback(
-  CoreTasks.User, 'delete', 'success', CoreTasks.userDeleted.bind(CoreTasks));

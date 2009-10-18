@@ -1,3 +1,9 @@
+/*globals CoreTasks sc_require */
+sc_require('core');
+
+CoreTasks.ERROR_UNEXPECTED_RESPONSE = SC.$error('Unexpected response.', 'Request Error');
+CoreTasks.ERROR_INVALID_ID_TYPE = SC.$error('Invalid ID type.', 'Request Error');
+
 /**
  * An extension of the SC.DataSource class that acts as a proxy between the data store and the
  * remote server.
@@ -5,11 +11,7 @@
  * @extends SC.DataSource
  * @author Sean Eidemiller
  */
-/*globals CoreTasks sc_require */
-sc_require('core');
-sc_require('core_callbacks');
-
-CoreTasks.RemoteDataSource = SC.DataSource.extend({
+CoreTasks.PersevereDataSource = SC.DataSource.extend({
 
   init: function() {
     sc_super();
@@ -40,156 +42,121 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
   /**
    * Fetches a list of records from the server and loads them into the given store.
    *
-   * Valid paramaters (in the params hash):
-   *  successCallback: Function to invoke on success.
-   *  failureCallback: Function to invoke on failure.
-   *  queryParams: Hash of query parameters to be appended to the URL.
-   *
    * @param {SC.Store} store The store on behalf of which the fetch request is made.
-   * @param {CoreTasks.Record | SC.Query} fetchKey
-   * @param {Hash} params Additional parameters (optional).
+   * @param {SC.Query} query The query from which the request should be generated.
    *
-   * @returns {Array} An array of store keys.
+   * @returns {Boolean} YES
    */
-  fetch: function(store, fetchKey, params) {
-    var ret = [];
-
-    if (fetchKey) {
-      // If we got an SC.Query, simply return it (SC.Store already did the work for us). I'm not
-      // sure why it even bothers to call fetch(), but it does.
-      if (SC.instanceOf(fetchKey, SC.Query)) {
-        return fetchKey;
-      }
-
-      // Assume that the fetch key is a record type and get the plural resource path from the
-      // corresponding record.
-      var resourcePath = fetchKey.resourcePath;
-
-      if (!resourcePath) {
-        console.log('Error fetching records: Unable to retrieve resource path from record type.');
-        return ret;
-      }
-
-      // Build the request and send it off to the server.
-      var path = CoreTasks.getFullResourcePath(
-        resourcePath, null, params ? params.queryParams : null);
-
-      // HACK: [SE] Persevere needs an extra slash before the resource on list-based calls,
-      // otherwise you get "unconventional" IDs in the response JSON.
-      this._getRequest.set('address', path);
-
-      var requestParams = SC.merge({
-          store: store,
-          storeKeys: ret,
-          recordType: fetchKey
-        }, params ? params : {});
-
-      this._getRequest.notify(this, this._fetchCompleted, requestParams).send();
-
-    } else {
-      console.log('Error fetching records: Fetch key is undefined or null.');
+  fetch: function(store, query) {
+    // Do some sanity checking first to make sure everything is in order.
+    if (!query || !SC.instanceOf(query, SC.Query)) {
+      throw 'Error retrieving records: Invalid query.';
     }
 
-    return ret;
-  },
+    var recordType = query.get('recordType');
 
-  _fetchCompleted: function(request, params) {
-    var response = request.response();
-
-    if (response.kindOf ? response.kindOf(SC.Error) : false) {
-      console.log('Error fetching records from server.');
-
-      // Invoke the failure callback (may not be defined).
-      CoreTasks.invokeCallback(params.failureCallback);
-
-    } else {
-      // The response object should be an array of JSON objects that need to be loaded into the
-      // store.  First, however, we have to normalize the stupid ID format that Persevere uses.
-      var storeKeys = params.store.loadRecords(
-        params.recordType, this._normalizeResponseArray(response));
-      params.storeKeys.replace(0, 0, storeKeys);
-
-      // Invoke the success callback (may not be defined).
-      CoreTasks.invokeCallback(params.successCallback, storeKeys);
+    if (!recordType || !SC.typeOf(recordType) === SC.T_FUNCTION) {
+      throw 'Error retrieving records: Invalid record type.';
     }
-  },
 
-  /**
-   * Retrieves a single record.
-   *
-   * @param {SC.Store} store The store on behalf of which the retrieval request is made.
-   * @param {Array} storeKey The store key of the record.
-   * @param {Hash} params Additional parameters (optional).
-   *
-   * @returns {Boolean} YES if handled; otherwise NO.
-   */
-  retrieveRecord: function(store, storeKey, params) {
-    var record = store.materializeRecord(storeKey);
-    var recordType = store.recordTypeFor(storeKey);
-    var id = store.idFor(storeKey);
-    
-    var idType = SC.typeOf(id);
+    var resourcePath = recordType.pluralResourcePath;
 
-    if (idType === SC.T_NUMBER || idType === SC.T_STRING){
-      // Build the request and send it off to the server.
-      var path = CoreTasks.getFullResourcePath(
-        recordType.resourcePath, id, record.get('queryParams'));
-
-      this._getRequest.set('address', path);
-      this._getRequest.notify(this, this._retrieveCompleted, {
-          store: store,
-          storeKey: storeKey,
-          recordType: recordType,
-          id: id
-        }
-      ).send();
-
-    } else {
-      // The ID shouldn't be anything other than a string or number.
-      console.log('Error retrieving record [%@]: Invalid ID type: %@'.fmt(recordType, idType));
+    if (!resourcePath) {
+      throw 'Error retrieving records: Unable to retrieve resource path from record type.';
     }
+
+    // Build the request and send it off to the server.
+    console.log('Retrieving %@ records from server...'.fmt(recordType));
+
+    var path = CoreTasks.getFullResourcePath(resourcePath, null, query.get('queryParams'));
+    this._getRequest.set('address', path);
+    this._getRequest.notify(this, this._fetchCompleted, { query: query, store: store }).send();
 
     return YES;
   },
 
-  _retrieveCompleted: function(request, params) {
+  _fetchCompleted: function(request, params) {
     var response = request.response();
-    var callback;
+    var query = params.query;
+    var store = params.store;
 
-    if (response.kindOf ? response.kindOf(SC.Error) : false) {
-      console.log('Error retrieving record [%@:%@]'.fmt(params.recordType, params.id));
+    if (SC.$ok(response)) {
+      var recordType = query.get('recordType');
 
-      // Set the failure callback.
-      callback = CoreTasks.getCallback(
-        'get', 'failure', params.recordType, response.get('request'));
+      /*
+       * The request was successful, meaning that the server returned either 200 or 204.  A 204
+       * indicates that the call succeeded but there were no matching records.
+       *
+       * If we got a 204, then response will be an XHR (that's how SC.Request.response() works).
+       *
+       * If we got a 200, then response will be an array of JSON-formatted records.
+       */
+      if (this._isXHR(response)) { 
+        if (response.status === 204) {
+          // No matching records.
+          console.log('No matching %@ records.'.fmt(recordType));
+
+          // Load an empty array into the store and invoke the callback.
+          store.loadRecords(recordType, []);
+          store.dataSourceDidFetchQuery(query);
+
+        } else if (response.status === 200) {
+          var records = this._normalizeResponseArray(response);
+
+          // Load the records into the store and invoke the callback.
+          console.log('Retrieved %@ matching %@ records.'.fmt(records.length, recordType));
+
+          store.loadRecords(recordType, records);
+          store.dataSourceDidFetchQuery(query);
+
+        } else {
+          console.log('Error retrieving records: Unexpected server response.');
+          store.dataSourceDidErrorQuery(query, CoreTasks.ERROR_UNEXPECTED_RESPONSE);
+        }
+
+      } else {
+        // Should never get here, but just in case...
+        console.log('Error retrieving records: Unexpected server response.');
+        store.dataSourceDidErrorQuery(query, CoreTasks.ERROR_UNEXPECTED_RESPONSE);
+      }
 
     } else {
-      // Load the record into the store.
-      var normalizedResponse = this._normalizeResponse(response);
-      params.store.dataSourceDidComplete(params.storeKey, normalizedResponse, params.id);
-
-      // Set the success callback.
-      callback = CoreTasks.getCallback('get', 'success', params.recordType);
+      // Request failed; invoke the error callback.
+      var error = this._buildError(response);
+      console.log('Error retrieving records: %@'.fmt(error));
+      store.dataSourceDidErrorQuery(query, error);
     }
+  },
 
-    // Invoke the callback (may not be defined, but that's okay), passing along the store key in
-    // case it's needed.
-    CoreTasks.invokeCallback(callback, params.storeKey);
+  _retrieveCompleted: function(request, params) {
+    var response = request.response();
+
+    if (SC.$ok(response)) {
+      // Request was successful; response should be a JSON object that may require normalization
+      var recordHash = this._normalizeResponse(response);
+
+      // Invoke the success callback on the store.
+      params.store.dataSourceDidComplete(params.storeKey, recordHash, recordHash.id);
+
+    } else {
+      // Request failed; invoke the error callback.
+      var error = this._buildError(response);
+      console.log('Error retrieving record [%@:%@]: %@'.fmt(params.recordType, params.id, error));
+      params.store.dataSourceDidError(params.storeKey, error);
+    }
   },
 
   /**
    * Creates a single record.
    *
    * @param {SC.Store} store The store on behalf of which the creation request is made.
-   * @param {Array} storeKey The store key of the new record.
-   * @param {Hash} params Additional parameters (optional).
+   * @param {Number} storeKey The store key of the new record.
    *
-   * @returns {Boolean} YES if handled; otherwise NO.
+   * @returns {Boolean} YES
    */
-  createRecord: function(store, storeKey, params) {
+  createRecord: function(store, storeKey) {
     var dataHash = store.readDataHash(storeKey);
     var recordType = store.recordTypeFor(storeKey);
-    var resourcePath = recordType.resourcePath;
 
     // Set the created-at time on the data hash.
     dataHash.createdAt = SC.DateTime.create().get('milliseconds');
@@ -198,59 +165,64 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
     delete dataHash.id;
 
     // Build the request and send it off to the server.
-    this._postRequest.set('address', CoreTasks.getFullResourcePath(resourcePath));
-    this._postRequest.notify(this, this._createCompleted, SC.merge({
+    console.log('Creating new %@ record on server...'.fmt(recordType));
+
+    this._postRequest.set('address', CoreTasks.getFullResourcePath(recordType.resourcePath));
+    this._postRequest.notify(this, this._createCompleted, {
         store: store,
         storeKey: storeKey,
         recordType: recordType
-      }, params ? params : {})).send(dataHash);
+      }
+    ).send(dataHash);
 
     return YES;
   },
 
   _createCompleted: function(request, params) {
     var response = request.response();
-    var callback;
 
-    if (response.kindOf ? response.kindOf(SC.Error) : false) {
-      console.log('Error creating record [%@]'.fmt(params.recordType));
+    if (SC.$ok(response)) {
+      // Request was successful; response should be a JSON object that may require normalization.
+      var recordHash = this._normalizeResponse(response);
 
-      // Set the failure callback.
-      callback = params.failureCallback;
+      // Invoke the success callback on the store.
+      params.store.dataSourceDidComplete(params.storeKey, recordHash, recordHash.id);
 
     } else {
-      // Load the record into the store.
-      var normalizedResponse = this._normalizeResponse(response);
-      params.store.dataSourceDidComplete(params.storeKey, normalizedResponse, normalizedResponse.id);
-
-      // Set the success callback.
-      callback = CoreTasks.getCallback('post', 'success', params.recordType);
+      // Request failed; invoke the error callback.
+      var error = this._buildError(response);
+      console.log('Error creating record [%@]: %@'.fmt(params.recordType, error));
+      params.store.dataSourceDidError(params.storeKey, error);
     }
-
-    // Invoke the callback (may not be defined, but that's okay), passing along the store key in
-    // case it's needed.
-    CoreTasks.invokeCallback(callback, params.storeKey);
   },
 
   /**
    * Updates a single record.
    *
    * @param {SC.Store} store The store on behalf of which the update request is made.
-   * @param {Array} storeKey The store key of the record to update.
+   * @param {Number} storeKey The store key of the record to update.
    *
-   * @returns {Boolean} YES if handled; otherwise NO.
+   * @returns {Boolean} YES if handled
    */
   updateRecord: function(store, storeKey) {
     var dataHash = store.readDataHash(storeKey);
     var recordType = store.recordTypeFor(storeKey);
-    var resourcePath = recordType.resourcePath;
     var id = store.idFor(storeKey);
+
+    // Make sure the ID is valid.
+    if (!this._isValidIdType(id)) {
+      console.log('Error updating record [%@]: Invalid ID type.'.fmt(recordType));
+      store.dataSourceDidError(storeKey, CoreTasks.ERROR_INVALID_ID_TYPE);
+      return YES;
+    }
 
     // Set the updated-at time on the data hash.
     dataHash.updatedAt = SC.DateTime.create().get('milliseconds');
 
     // Build the request and send it off to the server.
-    this._putRequest.set('address', CoreTasks.getFullResourcePath(resourcePath, id));
+    console.log('Updating %@:%@ on server...'.fmt(recordType, id));
+
+    this._putRequest.set('address', CoreTasks.getFullResourcePath(recordType.resourcePath, id));
     this._putRequest.notify(this, this._updateCompleted, {
         store: store,
         storeKey: storeKey,
@@ -264,44 +236,45 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
 
   _updateCompleted: function(request, params) {
     var response = request.response();
-    var callback;
 
-    if (response.kindOf ? response.kindOf(SC.Error) : false) {
-      console.log('Error updating record [%@:%@]'.fmt(params.recordType, params.id));
+    if (SC.$ok(response)) {
+      // Request was successful; response should be a JSON object that may require normalization.
+      var recordHash = this._normalizeResponse(response);
 
-      // Set the failure callback.
-      callback = CoreTasks.getCallback(
-        'put', 'failure', params.recordType, response.get('request'));
+      // Invoke the success callback on the store.
+      params.store.dataSourceDidComplete(params.storeKey, recordHash, recordHash.id);
 
     } else {
-      // Load the record into the store.
-      var normalizedResponse = this._normalizeResponse(response);
-      params.store.dataSourceDidComplete(params.storeKey, normalizedResponse, params.id);
-
-      // Set the success callback.
-      callback = CoreTasks.getCallback('put', 'success', params.recordType);
+      // Request failed; invoke the error callback.
+      var error = this._buildError(response);
+      console.log('Error updating record [%@:%@]: %@'.fmt(params.recordType, params.id, error));
+      params.store.dataSourceDidError(params.storeKey, error);
     }
-
-    // Invoke the callback (may not be defined, but that's okay), passing along the store key in
-    // case it's needed.
-    CoreTasks.invokeCallback(callback, params.storeKey);
   },
 
   /**
    * Destroys (deletes) a single record.
    *
    * @param {SC.Store} store The store on behalf of which the destroy request is made.
-   * @param {Array} storeKey The store key of the record to delete.
+   * @param {Number} storeKey The store key of the record to delete.
    *
-   * @returns {Boolean} YES if handled; otherwise NO.
+   * @returns {Boolean} YES
    */
   destroyRecord: function(store, storeKey) {
     var recordType = store.recordTypeFor(storeKey);
-    var resourcePath = recordType.resourcePath;
     var id = store.idFor(storeKey);
 
+    // Make sure the ID is valid.
+    if (!this._isValidIdType(id)) {
+      console.log('Error deleting record [%@]: Invalid ID type.'.fmt(recordType));
+      store.dataSourceDidError(storeKey, CoreTasks.ERROR_INVALID_ID_TYPE);
+      return YES;
+    }
+
     // Build the request and send it off to the server.
-    this._delRequest.set('address', CoreTasks.getFullResourcePath(resourcePath, id));
+    console.log('Deleting %@:%@ on server...'.fmt(recordType, id));
+
+    this._delRequest.set('address', CoreTasks.getFullResourcePath(recordType.resourcePath, id));
     this._delRequest.notify(this, this._destroyCompleted, {
         store: store,
         storeKey: storeKey,
@@ -314,9 +287,11 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
   },
 
   _destroyCompleted: function(request, params) {
-    // There's a bug in SC.Request that causes a JS error if isJSON is set to true and the response
-    // body is empty (and it will be if the deletion is successful).  Work around this by verifying
-    // that the response body is *not* empty before calling response().
+    /*
+     * There's a bug in SC.Request that causes a JS error if isJSON is set to true and the response
+     * body is empty (and it will be if the deletion is successful).  Work around this by verifying
+     * that the response body is *not* empty before calling response().
+     */
     var response = request.get('rawResponse');
 
     if (SC.typeOf(response) === SC.T_STRING) {
@@ -325,36 +300,53 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
         response = request.response();
       }
     }
-    
-    var callback;
 
-    if (response.kindOf ? response.kindOf(SC.Error) : false) {
-      console.log('Error deleting record [%@:%@]'.fmt(params.recordType, params.id));
+    if (SC.$ok(response)) {
+      /*
+       * The request was successful, meaning that the server returned either 200 or 204.
+       *
+       * A 204 indicates that the record was successfully deleted and that there's no content in
+       * the body of the response.
+       *
+       * A 200 indicates that the record was successfully deleted and that the record in the
+       * response body should be used to replace the record that was deleted (in the store).
+       */
+      if (this._isXHR(response)) {
+        // Branch on the status.
+        switch (response.status) {
+          case 204:
+            // Invoke the destroy callback on the store.
+            params.store.dataSourceDidDestroy(params.storeKey);
+            break;
 
-      // Get the callback.
-      callback = CoreTasks.getCallback(
-        'delete', 'failure', params.recordType, response.get('request'));
-        
-      // Get the JSON returned from the server, because it may be a deletion conflict.
-      var json = null;
-      var xhr = response.get('request');
+          case 200:
+            // Convert the response to a hash.
+            var hash = SC.json.decode(response.responseText);
 
-      if (xhr && xhr.responseText) json = SC.json.decode(xhr.responseText);
+            // Normalize if necessary and rewrite the record hash in the main store.
+            var normalizedHash = this._normalizeResponse(hash);
+            params.store.dataSourceDidComplete(params.storeKey, normalizedHash, hash.id);
+            break;
 
-      // Invoke the callback (with the JSON if present).
-      if (json) {
-        CoreTasks.invokeCallback(callback, json);
+          default:
+            // This would be odd, but just in case...
+            console.log('Error deleting record [%@:%@]: Unexpected server response.'.fmt(
+              params.recordType, params.id));
+            store.dataSourceDidError(params.storeKey, CoreTasks.ERROR_UNEXPECTED_RESPONSE);
+        }
+
       } else {
-        CoreTasks.invokeCallback(callback);
+        // This should never happen, but just in case...
+        console.log('Error deleting record [%@:%@]: Unexpected server response.'.fmt(
+          params.recordType, params.id));
+        params.store.dataSourceDidError(params.storeKey, CoreTasks.ERROR_UNEXPECTED_RESPONSE);
       }
 
     } else {
-      // Remove the record from the store.
-      params.store.dataSourceDidDestroy(params.storeKey);
-
-      // Invoke the success callback.
-      callback = CoreTasks.getCallback('delete', 'success', params.recordType);
-      CoreTasks.invokeCallback(callback, params.storeKey);
+      // Request failed; invoke the error callback.
+      var error = this._buildError(response);
+      console.log('Error deleting record [%@:%@]: %@'.fmt(params.recordType, params.id, error));
+      params.store.dataSourceDidError(params.storeKey, error);
     }
   },
 
@@ -416,6 +408,8 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
  * We need support for queries, but the FixturesWithQueriesDataSource class is kinda broken (lots
  * of bugs). Therefore, we implement query support in this custom implementation of
  * FixturesDataSource instead.
+ *
+ * NOTE: This class is currently broken.
  *
  * @extends SC.FixturesDataSource
  * @author Sean Eidemiller
@@ -485,8 +479,8 @@ CoreTasks.FixturesDataSource = SC.FixturesDataSource.extend({
 // Register one of the data sources with the store, depending on operating mode.
 if (CoreTasks.get('mode') === CoreTasks.get('ONLINE_MODE')) {
   // Use the remote data source.
-  CoreTasks.get('store').from(CoreTasks.RemoteDataSource.create());
-  console.log('Initialized remote data source.');
+  CoreTasks.get('store').from(CoreTasks.PersevereDataSource.create());
+  console.log('Initialized remote Persevere data source.');
 } else {
   // Use the fixtures data source.
   CoreTasks.get('store').from(CoreTasks.FixturesDataSource.create());

@@ -223,13 +223,3 @@ CoreTasks.Project.mixin(/** @scope CoreTasks.Project */ {
   }
   
 });
-
-// Register the appropriate callbacks.
-CoreTasks.registerCallback(
-  CoreTasks.Project, 'post', 'success', CoreTasks.projectCreated.bind(CoreTasks));
-
-CoreTasks.registerCallback(
-  CoreTasks.Project, 'put', 'success', CoreTasks.projectUpdated.bind(CoreTasks));
-
-CoreTasks.registerCallback(
-  CoreTasks.Project, 'delete', 'success', CoreTasks.projectDeleted.bind(CoreTasks));
