@@ -59,7 +59,7 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
       throw 'Error retrieving records: Invalid record type.';
     }
 
-    var resourcePath = recordType.pluralResourcePath;
+    var resourcePath = recordType.resourcePath;
 
     if (!resourcePath) {
       throw 'Error retrieving records: Unable to retrieve resource path from record type.';
@@ -91,28 +91,22 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
        *
        * If we got a 200, then response will be an array of JSON-formatted records.
        */
-      if (this._isXHR(response)) { 
-        if (response.status === 204) {
-          // No matching records.
-          console.log('No matching %@ records.'.fmt(recordType));
+      if (SC.typeOf(response) === SC.T_STRING) {
+        var records = this._normalizeResponseArray(response);
 
-          // Load an empty array into the store and invoke the callback.
-          store.loadRecords(recordType, []);
-          store.dataSourceDidFetchQuery(query);
+        // Load the records into the store and invoke the callback.
+        console.log('Retrieved %@ matching %@ records.'.fmt(records.length, recordType));
 
-        } else if (response.status === 200) {
-          var records = this._normalizeResponseArray(response);
+        store.loadRecords(recordType, records);
+        store.dataSourceDidFetchQuery(query);
+  
+      } else if (this._isXHR(response) && response.status === 204) { 
+        // No matching records.
+        console.log('No matching %@ records.'.fmt(recordType));
 
-          // Load the records into the store and invoke the callback.
-          console.log('Retrieved %@ matching %@ records.'.fmt(records.length, recordType));
-
-          store.loadRecords(recordType, records);
-          store.dataSourceDidFetchQuery(query);
-
-        } else {
-          console.log('Error retrieving records: Unexpected server response.');
-          store.dataSourceDidErrorQuery(query, CoreTasks.ERROR_UNEXPECTED_RESPONSE);
-        }
+        // Load an empty array into the store and invoke the callback.
+        store.loadRecords(recordType, []);
+        store.dataSourceDidFetchQuery(query);
 
       } else {
         // Should never get here, but just in case...
