@@ -27,13 +27,7 @@ Tasks.loginPage = SC.Page.create({
       loginEntry: SC.TextFieldView.design({
         layout: { top: 139, left: 343, width: 254, height: 26 },
         classNames: ['login-name'],
-        valueBinding: 'Tasks.loginController.loginName',
-        keyDown: function(evt) {
-          if(SC.FUNCTION_KEYS[evt.which] === 'return'){
-            this.get('parentView').loginButton.triggerAction(evt);
-          }
-          return sc_super();
-        }
+        valueBinding: 'Tasks.loginController.loginName'
       }),
       
       loginErrorMessage: SC.LabelView.design({

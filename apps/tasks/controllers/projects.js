@@ -30,12 +30,21 @@ Tasks.projectsController = SC.ArrayController.create(Tasks.StatusChanged,
   }.property('selection').cacheable(),
   
   contentStatusDidChange: function(status){
+    console.log("DEBUG: projectsController " + status);
     if (status & SC.Record.READY){
       Tasks.projectsLoadSuccess();
     }
     else if (status & SC.Record.ERROR){
       Tasks.dataLoadFailure();
     }
+  },
+
+  editNewProject: function(project){
+    var listView = Tasks.getPath('mainPage.mainPane.projectsList');
+    var idx = listView.get('content').indexOf(project);
+    listView.select(idx);
+    var listItem = listView.itemViewForContentIndex(idx);
+    if(listItem) listItem.beginEditing();
   }
-  
+
 });

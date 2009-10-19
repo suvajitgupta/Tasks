@@ -48,6 +48,7 @@ Tasks.mixin({
    * Called after all users have been successfully loaded from the server.
    */
   usersLoadSuccess: function() {
+    console.log("DEBUG: userLoadSuccess()");
     this._usersLoaded = true;
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', serverMessage.get('value') + "_UsersLoaded".loc());
@@ -58,6 +59,7 @@ Tasks.mixin({
    * Called if the request to the data source to load all users failed for some reason.
    */
   usersLoadFailure: function() {
+    console.log("DEBUG: userLoadFailure()");
     Tasks.loginController.closePanel();
     alert('System Error: Unable to retrieve users from server');
   },
@@ -67,6 +69,7 @@ Tasks.mixin({
    */
   _loginUser: function() {
 
+    console.log("DEBUG: loginUser()");
     var user = CoreTasks.getUser(this.loginName);
     if (user) { // See if a valid user
       
@@ -96,6 +99,7 @@ Tasks.mixin({
    * Called after successful authentication.
    */
   _authenticationSuccess: function() {
+    console.log("DEBUG: authenticationSuccess()");
     switch (this.state.a) {
       case 2:
         this.goState('a', 3);
@@ -113,6 +117,7 @@ Tasks.mixin({
    * Called after failed authentication.
    */
   _authenticationFailure: function() {
+    console.log("DEBUG: authenticationFailure()");
     switch (this.state.a) {
       case 2:
         Tasks.loginController.displayLoginError();
@@ -127,14 +132,16 @@ Tasks.mixin({
    * Load all data (projects and tasks) used by Tasks views.
    */
   _loadData: function() {
+    console.log("DEBUG: loadData()");
     // Start by loading all tasks.
-    this.allTasksController.set('content', CoreTasks.store.find(SC.Query.local(CoreTasks.Task )));
+    this.allTasksController.set('content', CoreTasks.store.find(SC.Query.local(CoreTasks.Task)));
   },
 
   /**
    * Called after all tasks have been loaded from the server.
    */
   tasksLoadSuccess: function() {
+    console.log("DEBUG: tasksLoadSuccess()");
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', serverMessage.get('value') + "_TasksLoaded".loc());
 
@@ -147,11 +154,10 @@ Tasks.mixin({
    */
   projectsLoadSuccess: function() {
 
+    console.log("DEBUG: projectsLoadSuccess()");
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', serverMessage.get('value') + "_ProjectsLoaded".loc());
-
-    var projects = Tasks.projectsController.get('contennt');
-    
+/*
     // Create the UnallocatedTasks project with the unallocated tasks.
     var unallocatedTasksQuery = SC.Query.local(CoreTasks.Task, 'projectId = null');
     var unallocatedTasksProject = CoreTasks.createRecord(CoreTasks.Project, {
@@ -159,7 +165,7 @@ Tasks.mixin({
       tasksQuery: unallocatedTasksQuery
     });
     CoreTasks.set('unallocatedTasksProject', unallocatedTasksProject);
-    projects.unshiftObject(unallocatedTasksProject);
+    Tasks.projectsController.insertAt(0, unallocatedTasksProject);
     
     // Create the AllTasks project to hold all tasks.
     var allTasksQuery = SC.Query.local(CoreTasks.Task);
@@ -168,7 +174,8 @@ Tasks.mixin({
       tasksQuery: allTasksQuery
     });
     CoreTasks.set('allTasksProject', allTasksProject);
-    projects.unshiftObject(allTasksProject);
+    Tasks.projectsController.insertAt(0, allTasksProject);
+*/
 
     this.dataLoadSuccess();
   },
@@ -177,10 +184,11 @@ Tasks.mixin({
    * Called after successful data load.
    */
   dataLoadSuccess: function() {
+    console.log("DEBUG: dataLoadSuccess()");
     switch (this.state.a) {
       case 3:
         // FIXME: [SG] is this the correct way to clear store changelog after adding reserved projects (All/UnallocatedTasks)?
-        CoreTasks.store.set('changelog',null);
+        // CoreTasks.store.set('changelog',null);
         this.goState('a', 4);
         break;
       default:
@@ -192,6 +200,7 @@ Tasks.mixin({
    * Called after failed data load.
    */
   dataLoadFailure: function() {
+    console.log("DEBUG: dataLoadFailure()");
     switch (this.state.a) {
       case 3:
         alert('System Error: Unable to retrieve project/task data from server');
@@ -281,17 +290,11 @@ Tasks.mixin({
    */
   addProject: function() {
     var project = CoreTasks.createRecord(CoreTasks.Project, { name: CoreTasks.NEW_PROJECT_NAME.loc() } );
-    this.getPath('projectsController.content').pushObject(project);
+    // this.projectsController.addObject(project);
 
-    var listView = Tasks.getPath('mainPage.mainPane.projectsList');
-    var idx = listView.length - 1;
-    listView.select(idx);
-
-    // Begin editing newly created item.
-    var itemView = listView.itemViewForContentIndex(idx);
-    
     // Wait for run loop to complete before method is called.
-    CoreTasks.invokeLater(itemView.beginEditing.bind(itemView));
+    CoreTasks.invokeLater(this.projectsController.editNewTask, 200, project);
+
   },
   
   /**
