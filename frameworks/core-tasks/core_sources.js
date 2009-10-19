@@ -66,7 +66,7 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
     }
 
     // Build the request and send it off to the server.
-    console.trace();
+    // console.trace();
     console.log('Retrieving %@ records from server...'.fmt(recordType));
 
     var path = CoreTasks.getFullResourcePath(resourcePath, null, query.get('queryParams'));
