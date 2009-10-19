@@ -351,12 +351,9 @@ CoreTasks = SC.Object.create({
    */
   getUser: function(loginName) {
     if(!this._getUserQuery) {
-      this._getUserQuery = SC.Query.create({
-        recordType: CoreTasks.User, 
-        conditions: 'loginName = %@'
-      });
+      this._getUserQuery = SC.Query.local(CoreTasks.User);
     }
-    this._getUserQuery.set('parameters', [loginName]);
+    this._getUserQuery.set('conditions', 'loginName = %@'.fmt(loginName));
     var users = CoreTasks.get('store').find(this._getUserQuery);
     if(!users) return null;
     return users.objectAt(0);
@@ -370,12 +367,9 @@ CoreTasks = SC.Object.create({
    */
   getProject: function(projectName) {
     if(!this._getProjectQuery) {
-      this._getProjectQuery = SC.Query.create({
-        recordType: CoreTasks.Project, 
-        conditions: 'name = %@'
-      });
+      this._getProjectQuery = SC.Query.local(CoreTasks.Project);
     }
-    this._getProjectQuery.set('parameters', [projectName]);
+    this._getProjectQuery.set('conditions', 'name = %@'.fmt(projectName));
     var projects = CoreTasks.get('store').find(this._getProjectQuery);
     if(!projects) return null;
     return projects.objectAt(0);

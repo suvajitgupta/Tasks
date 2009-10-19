@@ -17,8 +17,9 @@ sc_require('mixins/status_changed');
 
 Tasks.usersController = SC.ArrayController.create(Tasks.StatusChanged,
   /** @scope Tasks.usersController.prototype */ {
-    
+  
   contentStatusDidChange: function(status){
+    console.log("DEBUG: usersController " + status);
     if (status & SC.Record.READY){
       Tasks.usersLoadSuccess();
     }

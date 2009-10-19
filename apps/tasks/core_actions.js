@@ -25,6 +25,7 @@ Tasks.mixin({
    * @param {String} user's password.
    */
   authenticate: function(loginName, password) {
+    console.log("DEBUG: authenticate()");
     switch (this.state.a) {
       case 1:
         this.goState('a', 2);
@@ -152,10 +153,7 @@ Tasks.mixin({
     var projects = Tasks.projectsController.get('contennt');
     
     // Create the UnallocatedTasks project with the unallocated tasks.
-    var unallocatedTasksQuery = SC.Query.create({
-     recordType: CoreTasks.Task,
-     conditions: 'projectId = null'
-    });
+    var unallocatedTasksQuery = SC.Query.local(CoreTasks.Task, 'projectId = null');
     var unallocatedTasksProject = CoreTasks.createRecord(CoreTasks.Project, {
       name: CoreTasks.UNALLOCATED_TASKS_NAME.loc(),
       tasksQuery: unallocatedTasksQuery
@@ -164,9 +162,7 @@ Tasks.mixin({
     projects.unshiftObject(unallocatedTasksProject);
     
     // Create the AllTasks project to hold all tasks.
-    var allTasksQuery = SC.Query.create({
-     recordType: CoreTasks.Task
-    });
+    var allTasksQuery = SC.Query.local(CoreTasks.Task);
     var allTasksProject = CoreTasks.createRecord(CoreTasks.Project, {
       name: CoreTasks.ALL_TASKS_NAME.loc(),
       tasksQuery: allTasksQuery
