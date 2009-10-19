@@ -24,7 +24,6 @@ Tasks.tasksController = SC.TreeController.create(
   editNewTask: function(task){
     var listView = Tasks.getPath('mainPage.mainPane.tasksList');
     var idx = listView.get('content').indexOf(task);
-    listView.select(idx);
     var listItem = listView.itemViewForContentIndex(idx);
     if(listItem) listItem.beginEditing();
   }

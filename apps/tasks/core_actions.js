@@ -289,12 +289,12 @@ Tasks.mixin({
    * Add a new project and start editing it in projects master list.
    */
   addProject: function() {
+    // Create, select, and begin editing new project.
     var project = CoreTasks.createRecord(CoreTasks.Project, { name: CoreTasks.NEW_PROJECT_NAME.loc() } );
-    // this.projectsController.addObject(project);
-
-    // Wait for run loop to complete before method is called.
-    CoreTasks.invokeLater(this.projectsController.editNewTask, 200, project);
-
+    var pc = this.projectsController;
+    pc.selectObject(project);
+    CoreTasks.invokeLater(pc.editNewProject, 200, project);
+    
   },
   
   /**
@@ -319,7 +319,6 @@ Tasks.mixin({
       }
 
       // Remove the project from the list and destroy.
-      pc.removeObject(project);
       project.destroy();
       
       // Select the first project in the list.

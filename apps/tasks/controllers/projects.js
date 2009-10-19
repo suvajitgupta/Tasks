@@ -42,7 +42,6 @@ Tasks.projectsController = SC.ArrayController.create(Tasks.StatusChanged,
   editNewProject: function(project){
     var listView = Tasks.getPath('mainPage.mainPane.projectsList');
     var idx = listView.get('content').indexOf(project);
-    listView.select(idx);
     var listItem = listView.itemViewForContentIndex(idx);
     if(listItem) listItem.beginEditing();
   }
