@@ -18,7 +18,7 @@ Tasks.tasksController = SC.TreeController.create(
     if(!sel) return false;
     var selectedTask = sel.firstObject();
     if(!selectedTask) return false;
-    return selectedTask.get('status') === CoreTasks.TASK_STATUS_DONE;
+    return selectedTask.get('developmentStatus') === CoreTasks.TASK_STATUS_DONE;
   }.property('selection').cacheable(),
   
   editNewTask: function(task){
