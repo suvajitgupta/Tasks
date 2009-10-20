@@ -47,10 +47,10 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
         this.tasksQuery = SC.Query.local(CoreTasks.Task);
       }
       else if(this.get('name') === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) {
-        this.tasksQuery = SC.Query.local(CoreTasks.Task, 'projectId = null');
+        this.tasksQuery = SC.Query.local(CoreTasks.Task, 'projectId=null');
       }
       else {
-        this.tasksQuery = SC.Query.local(CoreTasks.Task, 'projectId = %@'.fmt(this.get('id')));
+        this.tasksQuery = SC.Query.local(CoreTasks.Task, "projectId='%@'".fmt(this.get('id')));
       }
     }
 
@@ -68,12 +68,10 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
   disassociatedTasks: function() {
     // Create the query if necessary.
     if (!this._disassociatedAllocatedTasksQuery) {
-      this._disassociatedAllocatedTasksQuery = SC.Query.local(CoreTasks.Task);
+      this._disassociatedAllocatedTasksQuery = SC.Query.local(CoreTasks.Task,
+        "projectId='%@'".fmt(this.get('_id')));
     }
-    
-    // Narrow the conditions.
-    this._disassociatedAllocatedTasksQuery.set('conditions', 'projectId = %@'.fmt(this.get('_id')));
-    
+
     // Execute the query and return the results.
     return this.get('store').find(this._disassociatedAllocatedTasksQuery);
 
