@@ -392,6 +392,51 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
     }
 
     return ret;
+  },
+
+  /**
+   * Determines whether or not a given ID is valid.
+   *
+   * @param {Number|String} The ID to validate.
+   *
+   * @returns {Boolean} YES if the ID is a string or number; NO otherwise.
+   */
+  _isValidIdType: function(id) {
+    if (id) {
+      var idType = SC.typeOf(id);
+      return (idType === SC.T_STRING || idType === SC.T_NUMBER);
+    } else {
+      return NO;
+    }
+  },
+
+  /**
+   * Builds a more specific Request Error from a generic SC.Error object.
+   *
+   * @param {SC.Error} error
+   *
+   * @returns {SC.Error}
+   */
+  _buildError: function(error) {
+    var request = error.get('request');
+    error.set('description', request.statusText);
+    error.set('label', 'Request Error');
+    error.set('code', request.status);
+    return error;
+  },
+
+  /**
+   * Determines whether or not the given object is an XHR (or equivalent).
+   *
+   * This is useful because (for cross-browser compatibility reasons) we can't simply use
+   * SC.instanceOf(obj, XMLHttpRequest).
+   *
+   * @param {Object} obj The object to check.
+   *
+   * @returns {Boolean} YES if the object appears to be an XHR; NO otherwise.
+   */
+  _isXHR: function(obj) {
+    return (obj && obj.send && obj.open && SC.typeOf(obj.send) == SC.T_FUNCTION);
   }
 
 });
