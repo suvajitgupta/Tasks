@@ -350,12 +350,14 @@ CoreTasks = SC.Object.create({
    * @returns {Object} user record, if macthing one exists, or null.
    */
   getUser: function(loginName) {
-    if(!this._getUserQuery) {
+    if (!this._getUserQuery) {
       this._getUserQuery = SC.Query.local(CoreTasks.User);
     }
+
     this._getUserQuery.set('conditions', 'loginName = %@'.fmt(loginName));
+    this._getUserQuery.parse();
+
     var users = CoreTasks.get('store').find(this._getUserQuery);
-    console.log("DEBUG: getUser matches " + (users? users.get('length') : 0) + " records");
     if(!users) return null;
     return users.objectAt(0);
   },
