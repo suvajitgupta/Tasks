@@ -177,7 +177,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     var displayId = content.get('displayId');
     context = context.begin('div').addClass('task-id').addClass(validationClass).text(displayId).attr('title', idTooltip).attr('alt', idTooltip).end();
       
-    var status = content.get('status');
+    var status = content.get('developmentStatus');
     switch(status){
       case CoreTasks.TASK_STATUS_PLANNED:
         context.addClass('task-status-planned');

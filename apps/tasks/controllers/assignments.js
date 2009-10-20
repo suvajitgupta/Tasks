@@ -183,7 +183,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
           if(this.attributeFilterCriteria.indexOf(type) === -1) return;
           var priority = task.get('priority');
           if(this.attributeFilterCriteria.indexOf(priority) === -1) return;
-          var status = task.get('status');
+          var status = task.get('developmentStatus');
           if(this.attributeFilterCriteria.indexOf(status) === -1) return;
           if(status === CoreTasks.TASK_STATUS_DONE) {
             var validation = task.get('validation');
@@ -248,18 +248,18 @@ Tasks.assignmentsController = SC.ArrayController.create(
       // FIXME: [SC] see why these are firing multiple times when only one property is changed
       task.removeObserver('assignee',Tasks.assignmentsController,'_contentHasChanged');
       task.removeObserver('priority',Tasks.assignmentsController,'_contentHasChanged');
-      task.removeObserver('status',Tasks.assignmentsController,'_contentHasChanged');
+      task.removeObserver('developmentStatus',Tasks.assignmentsController,'_contentHasChanged');
       task.removeObserver('effort',Tasks.assignmentsController,'_contentHasChanged');
       task.addObserver('assignee',Tasks.assignmentsController,'_contentHasChanged');
       task.addObserver('priority',Tasks.assignmentsController,'_contentHasChanged');
-      task.addObserver('status',Tasks.assignmentsController,'_contentHasChanged');
+      task.addObserver('developmentStatus',Tasks.assignmentsController,'_contentHasChanged');
       task.addObserver('effort',Tasks.assignmentsController,'_contentHasChanged');
       
       // Extract/total effort for each taek (simple number or a range)
       effortString = task.get('effort');
       var priority = task.get('priority');
       if(!effortString && priority !== CoreTasks.TASK_PRIORITY_LOW) {
-        if(task.get('status') === CoreTasks.TASK_STATUS_DONE) doneTaskWithUnspecifiedEffort = true;
+        if(task.get('developmentStatus') === CoreTasks.TASK_STATUS_DONE) doneTaskWithUnspecifiedEffort = true;
         else taskWithUnspecifiedEffort = true;
       }
       if(effortString && priority !== CoreTasks.TASK_PRIORITY_LOW) {
@@ -275,7 +275,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
           effortMax = parseFloat(parseFloat(effortString.slice(idx+1), 10).toFixed(3));
           effortMax = CoreTasks.convertTimeToDays(effortMax + timeUnit);
         }
-        if(task.get('status') === CoreTasks.TASK_STATUS_DONE) {
+        if(task.get('developmentStatus') === CoreTasks.TASK_STATUS_DONE) {
           totalDoneEffortMin = parseFloat((totalDoneEffortMin + effortMin).toFixed(3));
           totalDoneEffortMax = parseFloat((totalDoneEffortMax + effortMax).toFixed(3));
         }
@@ -320,8 +320,8 @@ Tasks.assignmentsController = SC.ArrayController.create(
       assignee: assigneeObj.assignee,
       treeItemChildren: tasks.sort(function(a,b) { // sort by status, then by validation (if "Done"), then by priority, lastly by type
         
-        var aStatus = a.get('status');
-        var bStatus = b.get('status');
+        var aStatus = a.get('developmentStatus');
+        var bStatus = b.get('developmentStatus');
         if(aStatus !== bStatus) return CoreTasks.taskStatusWeights[bStatus] - CoreTasks.taskStatusWeights[aStatus];
         
         if(aStatus === CoreTasks.TASK_STATUS_DONE) {

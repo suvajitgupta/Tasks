@@ -112,7 +112,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
    */
   projectId: SC.Record.attr(Number),
 
-  status: function(key, value){
+  developmentStatus: function(key, value){
      var currentStatus = this.get('statusValue');
      if (value && currentStatus !== value) {
        this.set('statusValue', value);
@@ -278,14 +278,14 @@ CoreTasks.Task = CoreTasks.Record.extend({
       }
       
       if(taskHash.status) {
-        this.propertyWillChange('status');
-        if(this.get('status') !== taskHash.status && taskHash.status !== CoreTasks.TASK_STATUS_DONE) this.writeAttribute('validation', CoreTasks.TASK_VALIDATION_UNTESTED);
-        this.writeAttribute('status', taskHash.status);
-        this.propertyDidChange('status');
+        this.propertyWillChange('statusValue');
+        if(this.get('statusValue') !== taskHash.status && taskHash.status !== CoreTasks.TASK_STATUS_DONE) this.writeAttribute('validation', CoreTasks.TASK_VALIDATION_UNTESTED);
+        this.writeAttribute('statusValue', taskHash.status);
+        this.propertyDidChange('statusValue');
       }
       
       if(taskHash.validation) {
-        if(taskHash.validation !== CoreTasks.TASK_VALIDATION_UNTESTED && this.readAttribute('status') !== CoreTasks.TASK_STATUS_DONE) {
+        if(taskHash.validation !== CoreTasks.TASK_VALIDATION_UNTESTED && this.readAttribute('statusValue') !== CoreTasks.TASK_STATUS_DONE) {
           console.log('Task Editing Error - validation of Passed/Failed only possible for status Done');
         }
         else {
@@ -329,7 +329,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
     val = this.get('type');
     if(val !== CoreTasks.TASK_TYPE_OTHER) ret += ' $' + val.loc();
     
-    val = this.get('status');
+    val = this.get('statusValue');
     if(val !== CoreTasks.TASK_STATUS_PLANNED) ret += ' @' + val.loc();
     
     val = this.get('validation');
