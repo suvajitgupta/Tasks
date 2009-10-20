@@ -16,7 +16,7 @@ sc_require('views/decorated_checkbox');
 */
 
 // FIXME: [SC] SC.CheckboxView doesn't implement textAlign or icon properties
-Tasks.filterPane = SC.SheetPane.create({  
+Tasks.filterPane = SC.PickerPane.create({  
   
   layout: { top: 78, right: 240, height: 280, width: 280 },
   

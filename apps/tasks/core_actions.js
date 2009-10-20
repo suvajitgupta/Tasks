@@ -71,7 +71,6 @@ Tasks.mixin({
 
     console.log("DEBUG: loginUser()");
     var user = CoreTasks.getUser(this.loginName);
-    console.log("DEBUG: matched user " + user.get('name'));
     if (user) { // See if a valid user
       
       // Greet user and save login session information
