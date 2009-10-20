@@ -27,12 +27,8 @@ General Infrastructure
 - Support decimal numbers for project timeLeft and task effort in units of 'd' or 'h' [SG] @Done %Passed $Feature
 ^ Have tasks refer to project they are allocated to and make projects Store queries [SE] <SG> @Done %Passed
 - Beta: Handle persistence consistently (nothing should save unless user hits Save) [SG] <SE> @Active
-v On Firefox need to highlight entire item & show cursor when starting to do in-cell editing [SC] <SG> $Bug
-- On Safari it is impossible to type more than one character at the start of a line via in-cell editing [SC] <SG> $Bug
-v In Safari you can't click on assigneee selection filter and then the task filter [SC] <SG> $Bug
-v Add missing 'localize' support back in CollectionView (regression from SC 0.9) [SC] <SG> $Bug
+v Add missing 'localize' support back in CollectionView (regression from version 0.9) [SC] <SG> $Bug
 v Make task in-cell editors fit with collection view item size [SG] <JH2> $Bug
-v Double click to start in-cell editor, click elsewhere - causes errors [SC] <SG> $Bug
 | Fix in CSS add class .ghost to list item view and set its background to none
 v Track/optimize calls to assignments controller for redrawing tasks tree [BB] <SG> @Active
 v Add slide down/up animation for task attributes filter pane [SG] $Feature
@@ -51,7 +47,7 @@ Project Manager GUI
 v Add hover over tooltip for projects to show how many tasks they contain [SG] @Done $Feature %Passed
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done $Feature %Passed
 | Check via Inline Editor Delegate
-^ Add "Add Project" & "Del. Project" buttons in projects toolbar [SG] <SC> @Done $Feature %Passed
+^ Add "Add Project" & "Del. Project" buttons in projects toolbar [SG] @Done $Feature %Passed
 - Add warning Alert box about deleting Project with Tasks [SG] @Done $Feature %Passed
 - Don't create a project if it already exists during Import [SG] @Done $Feature %Passed
 v Disallow duplicate project names after editing, provide warning to user for duplicates [SG] @Active $Feature
@@ -93,7 +89,6 @@ v Beta: Enable/disable "Del. Task" button based on having a selected task [SG] @
 v Add hover over tooltip for assignees to show how many tasks they have and to explain loading color codes [SG] @Done $Feature %Passed
 ^ Allow multi-task drag-n-drop reassignment [BB] <SG>  @Done $Feature %Passed
 ^ Add popup viewer/editor for Task submitter, sssignee, effort, and description [JH2] <SG> @Done %Passed $Feature
-- Fix task pop editor location problem where it is getting cropped at the window boundary [SC] <SG> @Active $Bug
 v Add context menu to Add/Delete/Duplicate/Copy Contents of a task <JH2> [SG] $Feature
 - Not in scope: Add support for nested tasks/tagging, inter-task dependencies/linking, preserving original estimate/partial time logging
 
@@ -157,6 +152,7 @@ Styling/Hardening
 | All/Unallocated Tasks reserved projects
 | Project/Task modifications via inline editor and popup editor/control bar
 | Task reassignment/reallocation (drag-n-drop)
+| Task attribute filtering, assignee selection, ID/name searching
 | Save, Import/Export
 - Perform I18N and L10N (test with reversed strings) [SG] <JH2> @Active
 - Develop Model unit tests [SG] <BB> @Active

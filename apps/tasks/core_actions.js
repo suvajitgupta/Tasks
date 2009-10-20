@@ -214,7 +214,6 @@ Tasks.mixin({
    * Save modified data to persistent store.
    */
   saveData: function() {
-    // FIXME: [JH2] investigate why all records are dirty at startup
     CoreTasks.saveChanges();
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', "_SaveMessage".loc() + new Date().format('hh:mm:ss a'));
@@ -427,7 +426,7 @@ Tasks.mixin({
       // TODO: [SG] set task submitter/assignee to null if they are set to deleted user
     
       // Select the first user in the list.
-      // FIXME: [SC] Do this without using SC.RunLoop.begin/end, if possible.
+      // FIXME: [SC] do this without using SC.RunLoop.begin/end, if possible.
       SC.RunLoop.begin();
       var listView = Tasks.getPath('settingsPage.panel.usersList');
       listView.scrollToContentIndex(0);
