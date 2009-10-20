@@ -355,6 +355,7 @@ CoreTasks = SC.Object.create({
     }
     this._getUserQuery.set('conditions', 'loginName = %@'.fmt(loginName));
     var users = CoreTasks.get('store').find(this._getUserQuery);
+    console.log("DEBUG: getUser matches " + (users? users.get('length') : 0) + " records");
     if(!users) return null;
     return users.objectAt(0);
   },

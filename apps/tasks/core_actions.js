@@ -71,6 +71,7 @@ Tasks.mixin({
 
     console.log("DEBUG: loginUser()");
     var user = CoreTasks.getUser(this.loginName);
+    console.log("DEBUG: matched user " + user.get('name'));
     if (user) { // See if a valid user
       
       // Greet user and save login session information
@@ -259,10 +260,9 @@ Tasks.mixin({
       Tasks.getPath('mainPage.mainPane.welcomeMessage').set('value', null);
       this._usersLoaded = false;
       
-      this.get('projectsController').set('content', null);
+      CoreTasks.store.reset();
       this.get('assignmentsController').resetFilters();
       
-      CoreTasks.store.reset();
       this.goState('a', 1);
       
     }
@@ -386,7 +386,6 @@ Tasks.mixin({
       for (var i = 0; i < sel.length(); i++) {
         // Get and remove task from the assignments controller and destroy.
         var task = sel.nextObject(i, null, context);
-        ac.removeObject(task);
         task.destroy();
       }
       tc.set('selection', null);
@@ -406,11 +405,7 @@ Tasks.mixin({
    */
   addUser: function() {
     var user = CoreTasks.createRecord(CoreTasks.User, SC.clone(CoreTasks.User.NEW_USER_HASH));
-    this.getPath('usersController.content').pushObject(user);
-    var listView = Tasks.getPath('settingsPage.panel.usersList');
-    var idx = listView.length - 1;
-    listView.scrollToContentIndex(idx); // FIXME: [SC] why is it not scrolling to new item?
-    listView.select(idx);
+    Tasks.usersController.selectObject(user);
   },
 
   /**
@@ -428,9 +423,9 @@ Tasks.mixin({
       // Confirm deletion of user
       if(!confirm("Are you sure you want to delete this user?")) return;
 
-      // Remove the user from the list and destroy.
-      uc.removeObject(user);
+      // Delete user.
       user.destroy();
+      // TODO: [SG] set task submitter/assignee to null if they are set to deleted user
     
       // Select the first user in the list.
       // FIXME: [SC] Do this without using SC.RunLoop.begin/end, if possible.
