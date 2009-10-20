@@ -158,7 +158,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     var sel = Tasks.getPath('projectsController.selection');
     if (sel && sel.length() > 0) {
       var project = sel.firstObject();
-      projectTimeLeft = CoreTasks.convertTimeToDays(project.get('timeLeft'));
+      if (project) projectTimeLeft = CoreTasks.convertTimeToDays(project.get('timeLeft'));
     }
       
     // Group tasks by user & separate unassigned tasks
