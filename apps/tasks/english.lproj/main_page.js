@@ -475,7 +475,7 @@ Tasks.mainPage = SC.Page.design({
               ],
               itemTitleKey: 'title',
               itemValueKey: 'value',
-              valueBinding: 'Tasks.taskController.status',
+              valueBinding: 'Tasks.taskController.developmentStatus',
               isEnabledBinding: SC.Binding.oneWay('Tasks.tasksController.hasSelection'),
               layoutDirection: SC.LAYOUT_HORIZONTAL
             }),
