@@ -14,9 +14,13 @@ sc_require('controllers/projects');
 // FIXME: [SC] shouldn't have to manually add/remove to/from controller instead of store notifying of changes.
 
 Tasks.mixin({
-  
-  loginName: null,
+
+  _allUsers: null,
+  _allTasks: null,
+  _allProjects: null,
   _usersLoaded: false,
+
+  loginName: null,
 
   /**
    * Authenticate user trying to log in to Tasks application.
@@ -31,12 +35,18 @@ Tasks.mixin({
         this.goState('a', 2);
         this.loginName = loginName;
         
-        if(this._usersLoaded) {
+        if (this._usersLoaded) {
           this._loginUser();
+        } else { // Retrieve all users from the data source.
+          if (!this._allUsers) {
+            this._allUsers = CoreTasks.store.find(SC.Query.local(CoreTasks.User));
+          } else {
+            this._allUsers.refresh()
+          }
+
+          this.usersController.set('content', this._allUsers);
         }
-        else { // Retrieve all users from the data source.
-          this.usersController.set('content', CoreTasks.store.find(SC.Query.local(CoreTasks.User)));
-        }
+
         break;
 
       default:
@@ -134,7 +144,13 @@ Tasks.mixin({
   _loadData: function() {
     console.log("DEBUG: loadData()");
     // Start by loading all tasks.
-    this.allTasksController.set('content', CoreTasks.store.find(SC.Query.local(CoreTasks.Task)));
+    if (!this._allTasks) {
+      this._allTasks = CoreTasks.store.find(SC.Query.local(CoreTasks.Task));
+    } else {
+      this._allTasks.refresh();
+    }
+
+    this.allTasksController.set('content', this._allTasks);
   },
 
   /**
@@ -145,8 +161,31 @@ Tasks.mixin({
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', serverMessage.get('value') + "_TasksLoaded".loc());
 
+    // Create these two reserved projects so that they show up first in the list of projects.
+
+    // Create the AllTasks project to hold all tasks.
+    var allTasksProject = CoreTasks.createRecord(CoreTasks.Project, {
+      id: -1000001,
+      name: CoreTasks.ALL_TASKS_NAME.loc()
+    });
+    CoreTasks.set('allTasksProject', allTasksProject);
+
+    // Create the UnallocatedTasks project with the unallocated tasks.
+    var unallocatedTasksProject = CoreTasks.createRecord(CoreTasks.Project, {
+      id: -1000000,
+      name: CoreTasks.UNALLOCATED_TASKS_NAME.loc()
+    });
+    CoreTasks.set('unallocatedTasksProject', unallocatedTasksProject);
+    
     // Now load all of the projects.
-    this.projectsController.set('content', CoreTasks.store.find(SC.Query.local(CoreTasks.Project)));
+    if (!this._allProjects) {
+      this._allProjects = CoreTasks.store.find(SC.Query.local(
+        CoreTasks.Project, { orderBy: 'id ASC' }));
+    } else {
+      this._allProjects.refresh();
+    }
+
+    this.projectsController.set('content', this._allProjects);
   },
 
   /**
@@ -157,25 +196,6 @@ Tasks.mixin({
     console.log("DEBUG: projectsLoadSuccess()");
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', serverMessage.get('value') + "_ProjectsLoaded".loc());
-/*
-    // Create the UnallocatedTasks project with the unallocated tasks.
-    var unallocatedTasksQuery = SC.Query.local(CoreTasks.Task, 'projectId = null');
-    var unallocatedTasksProject = CoreTasks.createRecord(CoreTasks.Project, {
-      name: CoreTasks.UNALLOCATED_TASKS_NAME.loc(),
-      tasksQuery: unallocatedTasksQuery
-    });
-    CoreTasks.set('unallocatedTasksProject', unallocatedTasksProject);
-    Tasks.projectsController.insertAt(0, unallocatedTasksProject);
-    
-    // Create the AllTasks project to hold all tasks.
-    var allTasksQuery = SC.Query.local(CoreTasks.Task);
-    var allTasksProject = CoreTasks.createRecord(CoreTasks.Project, {
-      name: CoreTasks.ALL_TASKS_NAME.loc(),
-      tasksQuery: allTasksQuery
-    });
-    CoreTasks.set('allTasksProject', allTasksProject);
-    Tasks.projectsController.insertAt(0, allTasksProject);
-*/
 
     this.dataLoadSuccess();
   },
@@ -334,7 +354,6 @@ Tasks.mixin({
    * Add a new task to tasks detail list.
    */
   addTask: function() {
-    
     // Create a new task with the logged in user as the default submitter/assignee.
     var userId = CoreTasks.getPath('user.id');
     var taskHash = SC.merge({ 'submitterId': userId, 'assigneeId': userId }, SC.clone(CoreTasks.Task.NEW_TASK_HASH));
