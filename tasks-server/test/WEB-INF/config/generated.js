@@ -96,7 +96,7 @@
 					"type":"any",
 					"optional":true
 				},
-				"status":{
+				"developmentStatus":{
 					"type":"any",
 					"optional":true
 				},

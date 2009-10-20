@@ -7,7 +7,7 @@ Class({
     projectId: { type: "any", optional: true },
     type: { type: "any", optional: true },
     priority: { type: "any", optional: true },
-    status: { type: "any", optional: true, },
+    developmentStatus: { type: "any", optional: true, },
     validation: { type: "any", optional: true, },
     effort: { type: "any", optional: true },
     submitterId: { type: "any", optional: true },
