@@ -19,7 +19,7 @@ Tasks.usersController = SC.ArrayController.create(Tasks.StatusChanged,
   /** @scope Tasks.usersController.prototype */ {
   
   contentStatusDidChange: function(status){
-    console.log("DEBUG: usersController " + status);
+    // console.log("DEBUG: usersController " + status);
     if (status & SC.Record.READY){
       Tasks.usersLoadSuccess();
     }

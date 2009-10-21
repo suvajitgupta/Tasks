@@ -123,9 +123,11 @@ Tasks.TaskItemView = SC.ListItemView.extend(
               valueBinding: SC.binding('.content.description', this),
               // FIXME: [SC] workaround for textfields that are used as text areas, when the text goes beyond the lower boundary every keystroke causes the text to jump
               didBecomeKeyResponderFrom: function(responder){
+                console.log("DEBUG: beginPropertyChanges()");
                 this.beginPropertyChanges();
               },
               didLoseKeyResponderTo: function(responder){
+                console.log("DEBUG: endPropertyChanges()");
                 this.endPropertyChanges();
               }
             })

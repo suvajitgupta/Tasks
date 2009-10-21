@@ -24,7 +24,7 @@ Tasks.mixin({
    * @param {String} user's password.
    */
   authenticate: function(loginName, password) {
-    console.log("DEBUG: authenticate()");
+    // console.log("DEBUG: authenticate()");
     switch (this.state.a) {
       case 1:
         this.goState('a', 2);
@@ -53,7 +53,7 @@ Tasks.mixin({
    * Called after all users have been successfully loaded from the server.
    */
   usersLoadSuccess: function() {
-    console.log("DEBUG: userLoadSuccess()");
+    // console.log("DEBUG: userLoadSuccess()");
     this._usersLoaded = true;
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', serverMessage.get('value') + "_UsersLoaded".loc());
@@ -64,7 +64,7 @@ Tasks.mixin({
    * Called if the request to the data source to load all users failed for some reason.
    */
   usersLoadFailure: function() {
-    console.log("DEBUG: userLoadFailure()");
+    // console.log("DEBUG: userLoadFailure()");
     Tasks.loginController.closePanel();
     alert('System Error: Unable to retrieve users from server');
   },
@@ -74,7 +74,7 @@ Tasks.mixin({
    */
   _loginUser: function() {
 
-    console.log("DEBUG: loginUser()");
+    // console.log("DEBUG: loginUser()");
     var user = CoreTasks.getUser(this.loginName);
     if (user) { // See if a valid user
       
@@ -104,7 +104,7 @@ Tasks.mixin({
    * Called after successful authentication.
    */
   _authenticationSuccess: function() {
-    console.log("DEBUG: authenticationSuccess()");
+    // console.log("DEBUG: authenticationSuccess()");
     switch (this.state.a) {
       case 2:
         this.goState('a', 3);
@@ -122,7 +122,7 @@ Tasks.mixin({
    * Called after failed authentication.
    */
   _authenticationFailure: function() {
-    console.log("DEBUG: authenticationFailure()");
+    // console.log("DEBUG: authenticationFailure()");
     switch (this.state.a) {
       case 2:
         Tasks.loginController.displayLoginError();
@@ -137,7 +137,7 @@ Tasks.mixin({
    * Load all data (projects and tasks) used by Tasks views.
    */
   _loadData: function() {
-    console.log("DEBUG: loadData()");
+    // console.log("DEBUG: loadData()");
     // Start by loading all tasks.
     if (!CoreTasks.get('allTasks')) {
       CoreTasks.set('allTasks', CoreTasks.store.find(SC.Query.local(CoreTasks.Task)));
@@ -152,7 +152,7 @@ Tasks.mixin({
    * Called after all tasks have been loaded from the server.
    */
   tasksLoadSuccess: function() {
-    console.log("DEBUG: tasksLoadSuccess()");
+    // console.log("DEBUG: tasksLoadSuccess()");
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', serverMessage.get('value') + "_TasksLoaded".loc());
 
@@ -185,7 +185,7 @@ Tasks.mixin({
    */
   projectsLoadSuccess: function() {
 
-    console.log("DEBUG: projectsLoadSuccess()");
+    // console.log("DEBUG: projectsLoadSuccess()");
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', serverMessage.get('value') + "_ProjectsLoaded".loc());
 
@@ -196,7 +196,7 @@ Tasks.mixin({
    * Called after successful data load.
    */
   dataLoadSuccess: function() {
-    console.log("DEBUG: dataLoadSuccess()");
+    // console.log("DEBUG: dataLoadSuccess()");
     switch (this.state.a) {
       case 3:
         this.goState('a', 4);
@@ -210,7 +210,7 @@ Tasks.mixin({
    * Called after failed data load.
    */
   dataLoadFailure: function() {
-    console.log("DEBUG: dataLoadFailure()");
+    // console.log("DEBUG: dataLoadFailure()");
     switch (this.state.a) {
       case 3:
         alert('System Error: Unable to retrieve project/task data from server');

@@ -29,7 +29,7 @@ Tasks.projectsController = SC.ArrayController.create(Tasks.StatusChanged,
   }.property('selection').cacheable(),
   
   contentStatusDidChange: function(status){
-    console.log("DEBUG: projectsController " + status);
+    // console.log("DEBUG: projectsController " + status);
     if (status & SC.Record.READY){
       Tasks.projectsLoadSuccess();
     }
