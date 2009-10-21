@@ -97,15 +97,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
             }),
             SC.TextFieldView.design({
               layout: { top: 47, left: 55, width: 80, height: 16 },
-              valueBinding: SC.binding('.content.effortValue', this),
-              // TODO: [SG] only allow valid values for effort
-              // FIXME: [SC] workaround for textfields that are used as text areas, when the text goes beyond the lower boundary every keystroke causes the text to jump
-              didBecomeKeyResponderFrom: function(responder){
-                this.beginPropertyChanges();
-              },
-              didLoseKeyResponderTo: function(responder){
-                this.endPropertyChanges();
-              }
+              valueBinding: SC.binding('.content.effortValue', this)
             }),
             SC.LabelView.design({
               layout: { top: 45, left: 150, height: 30, right: 10 },
@@ -120,16 +112,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
             SC.TextFieldView.design({
               layout: { top: 98, left: 10, right: 10, bottom: 10 },
               isTextArea: YES,
-              valueBinding: SC.binding('.content.description', this),
-              // FIXME: [SC] workaround for textfields that are used as text areas, when the text goes beyond the lower boundary every keystroke causes the text to jump
-              didBecomeKeyResponderFrom: function(responder){
-                console.log("DEBUG: beginPropertyChanges()");
-                this.beginPropertyChanges();
-              },
-              didLoseKeyResponderTo: function(responder){
-                console.log("DEBUG: endPropertyChanges()");
-                this.endPropertyChanges();
-              }
+              valueBinding: SC.binding('.content.description', this)
             })
             
           ]
