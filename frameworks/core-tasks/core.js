@@ -7,8 +7,49 @@
  
 CoreTasks = SC.Object.create({
 
-  // The main data store.
+  // The main data store and record sets.
   store: SC.Store.create(),
+  allUsers: null,
+  allTasks: null,
+  allProjects: null,
+
+  /**
+   * Get user record corresponding to specified loginName.
+   *
+   * @param {String} user's login name.
+   * @returns {Object} user record, if matching one exists, or null.
+   */
+  getUser: function(loginName) {
+    var usersCount = this.allUsers.get('length');
+    var matchingUser = null;
+    for(var i = 0; i < usersCount; i++) {
+      var user = this.allUsers.objectAt(i);
+      if(user.get('loginName') === loginName) {
+        matchingUser = user;
+        break;
+      }
+    }
+    return matchingUser;
+  },
+
+  /**
+   * Check project of a given name.
+   *
+   * @param {String} project name.
+   * @returns {Object) return project of given name if it exists, null otherwise.
+   */
+  getProject: function(name) {
+    var projectsCount = this.allProjects.get('length');
+    var matchingProject = null;
+    for(var i = 0; i < projectsCount; i++) {
+      var project = this.allProjects.objectAt(i);
+      if(project.get('name') === name) {
+        matchingProject = project;
+        break;
+      }
+    }
+    return matchingProject;
+  },
 
   // The resource path format for the remote server.
   _resourcePathFormat: 'tasks-server/%@%@%@',
@@ -341,41 +382,6 @@ CoreTasks = SC.Object.create({
     }
 
     return this._resourcePathFormat.fmt(resourceName, id, params);
-  },
-
-  /**
-   * Get user record corresponding to specified loginName.
-   *
-   * @param {String} user's login name.
-   * @returns {Object} user record, if macthing one exists, or null.
-   */
-  getUser: function(loginName) {
-    if (!this._getUserQuery) {
-      this._getUserQuery = SC.Query.local(CoreTasks.User);
-    }
-
-    this._getUserQuery.set('conditions', 'loginName = %@'.fmt(loginName));
-    this._getUserQuery.parse();
-
-    var users = CoreTasks.get('store').find(this._getUserQuery);
-    if(!users) return null;
-    return users.objectAt(0);
-  },
-
-  /**
-   * Check project of a given name.
-   *
-   * @param {String} project name.
-   * @returns {Object) return project of given name if it exists, null otherwise.
-   */
-  getProject: function(projectName) {
-    if(!this._getProjectQuery) {
-      this._getProjectQuery = SC.Query.local(CoreTasks.Project);
-    }
-    this._getProjectQuery.set('conditions', 'name = %@'.fmt(projectName));
-    var projects = CoreTasks.get('store').find(this._getProjectQuery);
-    if(!projects) return null;
-    return projects.objectAt(0);
   },
 
   /**

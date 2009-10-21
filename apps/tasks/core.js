@@ -19,6 +19,9 @@ Tasks = SC.Object.create(SC.Statechart,
   NAMESPACE: 'Tasks',
   VERSION: 'preBeta',
   
+  /**
+   * Deselect all tasks.
+   */
   deselectTasks: function() {
     Tasks.taskController.set('content', '');
   }

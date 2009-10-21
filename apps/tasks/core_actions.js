@@ -13,9 +13,6 @@ sc_require('controllers/projects');
 
 Tasks.mixin({
 
-  _allUsers: null,
-  _allTasks: null,
-  _allProjects: null,
   _usersLoaded: false,
 
   loginName: null,
@@ -36,13 +33,13 @@ Tasks.mixin({
         if (this._usersLoaded) {
           this._loginUser();
         } else { // Retrieve all users from the data source.
-          if (!this._allUsers) {
-            this._allUsers = CoreTasks.store.find(SC.Query.local(CoreTasks.User));
+          if (!CoreTasks.get('allUsers')) {
+            CoreTasks.set('allUsers', CoreTasks.store.find(SC.Query.local(CoreTasks.User)));
           } else {
-            this._allUsers.refresh();
+            CoreTasks.get('allUsers').refresh();
           }
 
-          this.usersController.set('content', this._allUsers);
+          this.usersController.set('content', CoreTasks.get('allUsers'));
         }
 
         break;
@@ -142,13 +139,13 @@ Tasks.mixin({
   _loadData: function() {
     console.log("DEBUG: loadData()");
     // Start by loading all tasks.
-    if (!this._allTasks) {
-      this._allTasks = CoreTasks.store.find(SC.Query.local(CoreTasks.Task));
+    if (!CoreTasks.get('allTasks')) {
+      CoreTasks.set('allTasks', CoreTasks.store.find(SC.Query.local(CoreTasks.Task)));
     } else {
-      this._allTasks.refresh();
+      CoreTasks.get('allTasks').refresh();
     }
 
-    this.allTasksController.set('content', this._allTasks);
+    this.allTasksController.set('content', CoreTasks.get('allTasks'));
   },
 
   /**
@@ -174,14 +171,13 @@ Tasks.mixin({
     CoreTasks.set('unallocatedTasksProject', unallocatedTasksProject);
     
     // Now load all of the projects.
-    if (!this._allProjects) {
-      this._allProjects = CoreTasks.store.find(SC.Query.local(
-        CoreTasks.Project, { orderBy: 'name' }));
+    if (!CoreTasks.get('allProjects')) {
+      CoreTasks.set('allProjects', CoreTasks.store.find(SC.Query.local(CoreTasks.Project, { orderBy: 'name' })));
     } else {
-      this._allProjects.refresh();
+      CoreTasks.get('allProjects').refresh();
     }
 
-    this.projectsController.set('content', this._allProjects);
+    this.projectsController.set('content', CoreTasks.get('allProjects'));
   },
 
   /**
