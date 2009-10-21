@@ -64,11 +64,12 @@ Tasks.settingsPage = SC.Page.create({
 
             contentView: SC.ListView.design({
               layout: { top: 0, left:0, bottom: 0, right: 0 },
-              contentValueKey: 'displayName',
+              contentValueKey: 'name',
               contentBinding: 'Tasks.usersController.arrangedObjects',
               selectionBinding: 'Tasks.usersController.selection',
               localize: YES,
               rowHeight: 22,
+              exampleView: Tasks.UserItemView,
               classNames: ['users-pane-inner']
             })
           }),
@@ -82,7 +83,7 @@ Tasks.settingsPage = SC.Page.create({
           SC.TextFieldView.design({
             layout: { top: 100, left: 300, height: 16, width: 200 },
             localize: YES,
-            valueBinding: SC.binding('Tasks.userController.loginName', this)
+            valueBinding: SC.binding('Tasks.userController.loginName', this).toLocale()
           }),
 
           SC.LabelView.design({
@@ -94,7 +95,7 @@ Tasks.settingsPage = SC.Page.create({
           SC.TextFieldView.design({
             layout: { top: 135, left: 300, height: 16, width: 200 },
             localize: YES,
-            valueBinding: SC.binding('Tasks.userController.name', this)
+            valueBinding: SC.binding('Tasks.userController.name', this).toLocale()
           }),
           
           SC.LabelView.design({

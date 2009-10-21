@@ -1,7 +1,8 @@
 // ==========================================================================
 // Project: Tasks 
 // ==========================================================================
-/*globals CoreTasks Tasks */
+/*globals CoreTasks Tasks sc_require */
+sc_require('mixins/localized_label');
 
 /** 
 
@@ -11,13 +12,8 @@
   @author Suvajit Gupta
 */
 
-Tasks.AssigneeItemView = SC.ListItemView.extend(
+Tasks.AssigneeItemView = SC.ListItemView.extend(Tasks.localizedLabel,
 /** @scope Tasks.AssigneeItemView.prototype */ {
-  
-  // FIXME: [SC] remove this after CollectionView localization is added back
-  renderLabel: function(context, label) {
-    context.push('<label>', label? label.loc() : '', '</label>') ;
-  },
   
   render: function(context, firstTime) {
     

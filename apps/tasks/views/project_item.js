@@ -1,7 +1,8 @@
 // ==========================================================================
 // Project: Tasks 
 // ==========================================================================
-/*globals CoreTasks Tasks */
+/*globals CoreTasks Tasks sc_require*/
+sc_require('mixins/localized_label');
 
 /** 
 
@@ -11,7 +12,7 @@
   @author Suvajit Gupta
 */
 
-Tasks.ProjectItemView = SC.ListItemView.extend(
+Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.localizedLabel,
 /** @scope Tasks.ProjectItemView.prototype */ {
   
   inlineEditorWillBeginEditing: function(inlineEditor) {
@@ -19,11 +20,6 @@ Tasks.ProjectItemView = SC.ListItemView.extend(
     if (projectName === CoreTasks.ALL_TASKS_NAME.loc() || projectName === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) inlineEditor.discardEditing();
   },
   
-  // FIXME: [SC] remove this after CollectionView localization is added back
-  renderLabel: function(context, label) {
-    context.push('<label>', label? label.loc() : '', '</label>') ;
-  },
-
   render: function(context, firstTime) {
     var content = this.get('content');
     if(content) {
