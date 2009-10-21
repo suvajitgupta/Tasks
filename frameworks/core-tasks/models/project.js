@@ -114,30 +114,6 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
   }.property('name').cacheable(),
 
   /**
-   * Adds a given task to the project.
-   */
-  addTask: function(task) {
-    // This has to be done in a separate run loop so that the dynamic "tasks" query is recomputed
-    // *after* the change is made to the store.
-    SC.RunLoop.begin();
-    task.writeAttribute('projectId', this.get('id'));
-    SC.RunLoop.end();
-    this.notifyPropertyChange('tasks');
-  },
-
-  /**
-   * Removes a given task from the project.
-   */
-  removeTask: function(task) {
-    // This has to be done in a separate run loop so that the dynamic "tasks" query is recomputed
-    // *after* the change is made to the store.
-    SC.RunLoop.begin();
-    task.writeAttribute('projectId', null);
-    SC.RunLoop.end();
-    this.notifyPropertyChange('tasks');
-  },
-
-  /**
    * Export a project's attributes.
    *
    * @returns {String) A string with the project's data exported in it.

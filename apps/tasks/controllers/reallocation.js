@@ -20,7 +20,7 @@ Tasks.reallocationController = SC.Object.create(SC.CollectionViewDelegate,
 
   collectionViewComputeDragOperations: function(view, drag, proposedDragOperations) {
     if (drag.hasDataType(Tasks.Task)) {
-        return SC.DRAG_MOVE;
+      return SC.DRAG_MOVE;
     }
     else {
       return SC.DRAG_REORDER;
@@ -48,16 +48,12 @@ Tasks.reallocationController = SC.Object.create(SC.CollectionViewDelegate,
     // if we can move, then remove tasks from the old project and add to the new project
     if (!(dragOp & SC.DRAG_MOVE)) ret = SC.DRAG_COPY;
     else {
-      var currentProject = Tasks.projectController.get('content');
-      var newProject = content.objectAt(idx);
-      
-      tasks.forEach(function(task) {
-        if (currentProject !== CoreTasks.get('allTasksProject')) {
-          currentProject.removeTask(task);
-          newProject.addTask(task);
-        }
-      }, this);
-      
+      var targetProject = content.objectAt(idx);
+      if (targetProject !== CoreTasks.get('allTasksProject')) {
+        tasks.forEach(function(task) {
+          task.set('projectId', targetProject.get('id'));
+        }, this);
+      }
       ret = SC.DRAG_MOVE;
     }       
   
