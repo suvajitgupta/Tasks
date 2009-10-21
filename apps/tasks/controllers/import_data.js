@@ -122,7 +122,6 @@ Tasks.importDataController = SC.ObjectController.create(
             project = CoreTasks.createRecord(CoreTasks.Project, projectHash);
             if(project) {
               currentProject = project;
-              Tasks.get('projectsController').addObject(project);
             }
             else {
               console.log('Project Import Error: project creation failed!');
