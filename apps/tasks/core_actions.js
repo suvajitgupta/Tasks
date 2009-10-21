@@ -34,7 +34,7 @@ Tasks.mixin({
           this._loginUser();
         } else { // Retrieve all users from the data source.
           if (!CoreTasks.get('allUsers')) {
-            CoreTasks.set('allUsers', CoreTasks.store.find(SC.Query.local(CoreTasks.User)));
+            CoreTasks.set('allUsers', CoreTasks.store.find(SC.Query.local(CoreTasks.User, { orderBy: 'name' })));
           } else {
             CoreTasks.get('allUsers').refresh();
           }
@@ -199,8 +199,6 @@ Tasks.mixin({
     console.log("DEBUG: dataLoadSuccess()");
     switch (this.state.a) {
       case 3:
-        // FIXME: [SG] is this the correct way to clear store changelog after adding reserved projects (All/UnallocatedTasks)?
-        // CoreTasks.store.set('changelog',null);
         this.goState('a', 4);
         break;
       default:
