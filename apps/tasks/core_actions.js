@@ -11,8 +11,6 @@ sc_require('controllers/users');
 sc_require('controllers/tasks');
 sc_require('controllers/projects');
 
-// FIXME: [SC] shouldn't have to manually add/remove to/from controller instead of store notifying of changes.
-
 Tasks.mixin({
 
   _allUsers: null,
@@ -41,7 +39,7 @@ Tasks.mixin({
           if (!this._allUsers) {
             this._allUsers = CoreTasks.store.find(SC.Query.local(CoreTasks.User));
           } else {
-            this._allUsers.refresh()
+            this._allUsers.refresh();
           }
 
           this.usersController.set('content', this._allUsers);
@@ -165,14 +163,12 @@ Tasks.mixin({
 
     // Create the AllTasks project to hold all tasks.
     var allTasksProject = CoreTasks.createRecord(CoreTasks.Project, {
-      id: -1000001,
       name: CoreTasks.ALL_TASKS_NAME.loc()
     });
     CoreTasks.set('allTasksProject', allTasksProject);
 
     // Create the UnallocatedTasks project with the unallocated tasks.
     var unallocatedTasksProject = CoreTasks.createRecord(CoreTasks.Project, {
-      id: -1000000,
       name: CoreTasks.UNALLOCATED_TASKS_NAME.loc()
     });
     CoreTasks.set('unallocatedTasksProject', unallocatedTasksProject);
@@ -180,7 +176,7 @@ Tasks.mixin({
     // Now load all of the projects.
     if (!this._allProjects) {
       this._allProjects = CoreTasks.store.find(SC.Query.local(
-        CoreTasks.Project, { orderBy: 'id ASC' }));
+        CoreTasks.Project, { orderBy: 'name' }));
     } else {
       this._allProjects.refresh();
     }
@@ -340,10 +336,10 @@ Tasks.mixin({
       project.destroy();
       
       // Select the first project in the list.
-      // FIXME: [SC] do this without using SC.RunLoop.begin/end, if possible.
+      // FIXME: [SC] do this without using SC.RunLoop.begin/end, if possible
       SC.RunLoop.begin();
       var projectsList = Tasks.getPath('mainPage.mainPane.projectsList');
-      projectsList.select(projectsList.get('length') > 2? 2 : 0);
+      projectsList.select(0);
       SC.RunLoop.end();
       
     }
@@ -421,6 +417,7 @@ Tasks.mixin({
    * Add a new user.
    */
   addUser: function() {
+    // Create and select new user.
     var user = CoreTasks.createRecord(CoreTasks.User, SC.clone(CoreTasks.User.NEW_USER_HASH));
     Tasks.usersController.selectObject(user);
   },
@@ -445,7 +442,7 @@ Tasks.mixin({
       // TODO: [SG] set task submitter/assignee to null if they are set to deleted user
     
       // Select the first user in the list.
-      // FIXME: [SC] do this without using SC.RunLoop.begin/end, if possible.
+      // FIXME: [SC] do this without using SC.RunLoop.begin/end, if possible
       SC.RunLoop.begin();
       var listView = Tasks.getPath('settingsPage.panel.usersList');
       listView.scrollToContentIndex(0);

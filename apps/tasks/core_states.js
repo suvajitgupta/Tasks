@@ -31,7 +31,7 @@ Tasks.mixin({
   goStateA4: function(){
     // Select first project at startup
     var projectsList = Tasks.getPath('mainPage.mainPane.projectsList');
-    projectsList.select(projectsList.get('length') > 2? 2 : 0);
+    projectsList.select(0);
   }
 
 });

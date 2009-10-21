@@ -26,7 +26,7 @@ General Infrastructure
 - Support minimum resolution of 1024x768 [SG] @Done $Feature %Passed
 - Support decimal numbers for project timeLeft and task effort in units of 'd' or 'h' [SG] @Done %Passed $Feature
 ^ Have tasks refer to project they are allocated to and make projects Store queries [SE] <SG> @Done %Passed
-- Beta: Handle persistence consistently (nothing should save unless user hits Save) [SG] <SE> @Active
+- Beta: Handle persistence consistently (nothing should save unless user hits Save) [SE] <SG> @Active
 v Add missing 'localize' support back in CollectionView (regression from version 0.9) [SC] <SG> $Bug
 v Make task in-cell editors fit with collection view item size [SG] <JH2> $Bug
 | Fix in CSS add class .ghost to list item view and set its background to none
@@ -43,7 +43,7 @@ Project Manager GUI
 ^ Add Master/Detail Explorer view with click selection of Projects showing corresponding Tasks [JH2] <SG> @Done $Feature %Passed
 ^ Show Project name & time left (if specified) on far right [SG] <JH2> @Done $Feature %Passed
 - Use icon to indicate if Project has any tasks or not [SG] @Done $Feature %Passed
-- Beta: Support alpha sorting of projects [SG] <JH2> @Risky $Feature
+- Support alpha sorting of projects [SG] <JH2> @Done %Passed $Feature
 v Add hover over tooltip for projects to show how many tasks they contain [SG] @Done $Feature %Passed
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done $Feature %Passed
 | Check via Inline Editor Delegate
@@ -52,9 +52,9 @@ v Add hover over tooltip for projects to show how many tasks they contain [SG] @
 - Don't create a project if it already exists during Import [SG] @Done $Feature %Passed
 v Disallow duplicate project names after editing, provide warning to user for duplicates [SG] @Active $Feature
 v Add summary in projects toolbar showing number of projects & number of tasks for selected project [SG] <MB> @Done $Feature %Passed
-v Beta: Enable/disable "Del. Project" button based on having a selected project [SG] @Active $Feature
+v Enable/disable "Del. Project" button based on having a selected project [SG] @Done %Passed $Feature
 v Disable Add/Del. Tasks buttons when on "All Tasks" project [SG] <BB> @Done %Passed $Feature
-- Beta: Select first project at startup [SG] <JH2> @Active $Feature
+- Select first project at startup [SG] <JH2> @Done %Passed $Feature
 ^ Add virtual "All Tasks" & "Unallocated Tasks" projects and display them grayed out in projects list [SG] <SE> @Done
 - Disallow "All Tasks" & "Unallocated Tasks" projects from being deleted [SG] @Done $Feature %Passed
 ^ Allow multi-task drag-n-drop Task reallocation to Projects [BB] <SG> @Done $Feature %Passed
@@ -77,9 +77,9 @@ v Enable Task Validation radio buttons only when in Done status [SG] <JH2> $Feat
 ^ Add task search filter (by #IDs or name) & corresponding delete button in top toolbar: support type-ahead searching <JH2> [SG] @Done %Passed $Feature
 ^ Allow task attribute filtering by type, priority, status, and validation fields via a toolbar button/pop up panel [SG] $Feature @Done %Passed
 - Indicate whether there is a task attribute filter via a different icon on the toolbar button [SG] $Feature @Done %Passed
-v Beta: Enable/disable "Del. Task" button based on having a selected task [SG] @Active $Feature
+v Enable/disable "Del. Task" button based on having a selected task [SG] @Done %Passed $Feature
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done $Feature %Passed
-^ Beta: Add "Add Task" & "Del. Task" buttons in tasks toolbar [SG] <SE> @Active $Feature
+^ Add "Add Task" & "Del. Task" buttons in tasks toolbar [SG] <SE> @Done %Passed $Feature
 | Logged in user is default Submitter, Assignee is either set to the same as selected task (if one) or to logged in user
 | Copy over project/type/priority attributes of selected task to new task
 - Clear task validation if status is changed from Done, disallow entry of Passed/Failed when task is not Done [SG] <MB> $Feature @Done %Passed
@@ -94,12 +94,12 @@ v Add context menu to Add/Delete/Duplicate/Copy Contents of a task <JH2> [SG] $F
 
 User Manager GUI
 ^ Add login screen to identify user who logs in (and handle login failures properly) [SG] <SE> @Done %Passed $Feature
-- Beta: Add a guest signup capability to login screen (reuse view with User Manager) [JH2] <SG> @Active $Feature
+- Add a guest signup capability to login screen [JH2] <SG> @Done %Passed $Feature
 ^ Add Assignee selection filter (space or comma separators) & corresponding delete button in top toolbar [SG] <JH2> @Done $Feature %Passed
 - Allow Assignee filtering by loading status (overloaded, underloaded) [SG] $Feature
 - Set assignee selection filter to logged in user if they are a Developer, filter out Other tasks if they are a Tester [SG] @Done $Feature %Passed
 - Allow assignee filtering by matching any part of name, not just loginName [SG] $Feature
-^ Beta: Add User Manager with "Add/Del. User"  buttons in toolbar (ask to reenter password) [SG] <JH2> @Active $Feature
+^ Beta: Add User Manager with "Add/Del. User"  buttons in toolbar (reuse signup view, ask to reenter password) [SG] <JH2> @Active $Feature
 - Cleanup task assignee/submitter after user deletion <SE> [SG] @Done %Passed
 - Beta: Enable/disable GUI functionality to enforce Role-based access control [SG] <JH2> $Feature
 - Beta: Add password to login screen and change password dialog in User Manager [JH2] <SG> $Feature @Active
@@ -139,7 +139,7 @@ Server
 - Create a "System Administrator (SA)" user with Manager role in Persevere at installation time [SE] <SG>
 ^ Beta: Build persistence server: local using Sinatra/SQLite and remote using Google App Engine [JH2] <SG> @Active
 - Patch SproutCore to avoid overwhelming async calls for file imports with more than 20 tasks [SE] <SG> @Done %Passed $Bug
-^ Beta: Switch to latest SproutCore postback and modified SC.Store APIs <SE> [SG] @Active
+^ Beta: Switch to latest SproutCore postback and modified SC.Store APIs <SE> [SG] @Risky
 - Beta: Implement Server-based user authentication & authorization (Role-based access control) [JH2] <SG> @Active
 - Add server-side data validation checks/return appropriate error codes [SE] <SG>
 v Implement multi-user concurrent access using Transaction Time [SG] <SE>

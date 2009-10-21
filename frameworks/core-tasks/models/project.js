@@ -30,32 +30,27 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
   timeLeft: SC.Record.attr(String),
 
   /**
-   * The SC.Query to use when searching for tasks associated with this project. 
-   */
-  tasksQuery: null,
-
-  /**
    * A read-only computed property that returns the list of tasks associated with this project.
    *
    * @returns {SC.RecordArray} An array of tasks.
    */
   tasks: function() {
-    // FIXME: [SE] kill the hardcoded queries for All/UnallocatedTasks below and make 'tasksQuery' work
+
     // Create the query if necessary.
-    if (!this.tasksQuery) {
+    if (!this._tasksQuery) {
       if(this.get('name') === CoreTasks.ALL_TASKS_NAME.loc()) {
-        this.tasksQuery = SC.Query.local(CoreTasks.Task);
+        this._tasksQuery = SC.Query.local(CoreTasks.Task);
       }
       else if(this.get('name') === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) {
-        this.tasksQuery = SC.Query.local(CoreTasks.Task, 'projectId=null');
+        this._tasksQuery = SC.Query.local(CoreTasks.Task, 'projectId=null');
       }
       else {
-        this.tasksQuery = SC.Query.local(CoreTasks.Task, "projectId='%@'".fmt(this.get('id')));
+        this._tasksQuery = SC.Query.local(CoreTasks.Task, "projectId='%@'".fmt(this.get('id')));
       }
     }
 
     // Execute the query and return the results.
-    return this.get('store').find(this.tasksQuery);
+    return this.get('store').find(this._tasksQuery);
 
   }.property('id').cacheable(),
 

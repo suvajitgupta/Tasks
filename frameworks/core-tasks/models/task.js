@@ -236,7 +236,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
     if (value !== undefined) {
       
       var taskHash = CoreTasks.Task.parse(value, false);
-      console.log("PARSED TASK: " + JSON.stringify(taskHash));
+      // console.log("PARSED TASK: " + JSON.stringify(taskHash));
       
       if(taskHash.priority) {
         this.propertyWillChange('priority');
@@ -298,7 +298,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
       return this.get('name');
     }
     
-  }.property('name', 'effort').cacheable()  ,
+  }.property('name').cacheable()  ,
 
   /**
   * Export a task's attributes.

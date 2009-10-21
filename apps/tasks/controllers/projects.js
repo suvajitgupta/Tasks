@@ -12,7 +12,6 @@ Tasks.projectsController = SC.ArrayController.create(Tasks.StatusChanged,
   
   allowsMultipleSelection: NO,
   allowsEmptySelection: NO,
-  // orderBy: 'name',
   
   isDeletable: function() {
     

@@ -32,6 +32,8 @@ Tasks.reallocationController = SC.Object.create(SC.CollectionViewDelegate,
   */
   collectionViewPerformDragOperation: function(view, drag, dragOp, idx, dropOp) {
     
+    console.log("DEBUG: reallocation");
+    
     if (dragOp & SC.DRAG_REORDER) return SC.DRAG_MOVE; // disallow reorder
     
     var tasks = drag.dataForType(Tasks.Task),
