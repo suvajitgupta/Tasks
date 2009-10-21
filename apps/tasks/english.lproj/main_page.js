@@ -3,6 +3,7 @@
 // ==========================================================================
 /*globals CoreTasks Tasks sc_require */
 
+sc_require('core');
 sc_require('views/title');
 
 /** @namespace
@@ -56,6 +57,7 @@ Tasks.mainPage = SC.Page.design({
               classNames: ['save-icon'],
               value:  "_Save".loc(),
               toolTip: "_SaveTooltip".loc(),
+              isEnabledBinding: 'CoreTasks.isStoreDirty',
               target: 'Tasks',
               action: 'saveData'
             }),
@@ -65,6 +67,7 @@ Tasks.mainPage = SC.Page.design({
               classNames: ['title-bar-label'],
               value:  "_Save".loc(),
               toolTip: "_SaveTooltip".loc(),
+              isEnabledBinding: 'CoreTasks.isStoreDirty',
               target: 'Tasks',
               action: 'saveData'
             })
@@ -218,7 +221,7 @@ Tasks.mainPage = SC.Page.design({
           value: "_DelProject".loc(),
           classNames: ['toolbar-label'],
           toolTip: "_DelProjectTooltip".loc(),
-          isEnabledBinding: SC.Binding.oneWay('Tasks.projectsController.isDeletable'),
+          isEnabledBinding: 'Tasks.projectsController.isDeletable',
           target: 'Tasks',
           action: 'deleteProject'
         }),
@@ -244,7 +247,7 @@ Tasks.mainPage = SC.Page.design({
           value: "_DelTask".loc(),
           classNames: ['toolbar-label'],
           toolTip: "_DelTaskTooltip".loc(),
-          isEnabledBinding: SC.Binding.oneWay('Tasks.tasksController.hasSelection'),
+          isEnabledBinding: 'Tasks.tasksController.hasSelection',
           target: 'Tasks',
           action: 'deleteTask'
         }),
@@ -422,7 +425,7 @@ Tasks.mainPage = SC.Page.design({
               itemValueKey: 'value',
               itemIconKey: 'icon',
               valueBinding: 'Tasks.taskController.type',
-              isEnabledBinding: SC.Binding.oneWay('Tasks.tasksController.hasSelection'),
+              isEnabledBinding: 'Tasks.tasksController.hasSelection',
               layoutDirection: SC.LAYOUT_HORIZONTAL
             }),
 
@@ -448,7 +451,7 @@ Tasks.mainPage = SC.Page.design({
               itemTitleKey: 'title',
               itemValueKey: 'value',
               valueBinding: 'Tasks.taskController.priority',
-              isEnabledBinding: SC.Binding.oneWay('Tasks.tasksController.hasSelection'),
+              isEnabledBinding: 'Tasks.tasksController.hasSelection',
               layoutDirection: SC.LAYOUT_HORIZONTAL
             }),
 
@@ -476,7 +479,7 @@ Tasks.mainPage = SC.Page.design({
               itemTitleKey: 'title',
               itemValueKey: 'value',
               valueBinding: 'Tasks.taskController.developmentStatus',
-              isEnabledBinding: SC.Binding.oneWay('Tasks.tasksController.hasSelection'),
+              isEnabledBinding: 'Tasks.tasksController.hasSelection',
               layoutDirection: SC.LAYOUT_HORIZONTAL
             }),
 
@@ -502,7 +505,7 @@ Tasks.mainPage = SC.Page.design({
               itemTitleKey: 'title',
               itemValueKey: 'value',
               valueBinding: 'Tasks.taskController.validation',
-              isEnabledBinding: SC.Binding.oneWay('Tasks.tasksController.isValidatable'),
+              isEnabledBinding: 'Tasks.tasksController.isValidatable',
               layoutDirection: SC.LAYOUT_HORIZONTAL
             })
           

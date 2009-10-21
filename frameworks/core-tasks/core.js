@@ -14,7 +14,7 @@ CoreTasks = SC.Object.create({
   allProjects: null,
 
   /**
-   * Get user record corresponding to specified loginName.
+   * Get user for a given loginName (if it exists).
    *
    * @param {String} user's login name.
    * @returns {Object} user record, if matching one exists, or null.
@@ -33,7 +33,7 @@ CoreTasks = SC.Object.create({
   },
 
   /**
-   * Check project of a given name.
+   * Get project for a given name (if it exists).
    *
    * @param {String} project name.
    * @returns {Object) return project of given name if it exists, null otherwise.
@@ -50,7 +50,7 @@ CoreTasks = SC.Object.create({
     }
     return matchingProject;
   },
-
+  
   // The resource path format for the remote server.
   _resourcePathFormat: 'tasks-server/%@%@%@',
 
@@ -125,6 +125,16 @@ CoreTasks = SC.Object.create({
       return this.get('store').createRecord(recordType, dataHash);
     }
   },
+
+  /**
+   * See if any changes have been made to the store.
+   *
+   * @returns {Boolean) return true if store.
+   */
+  isStoreDirty: function() {
+    // Ignore the two reserved projects added in by the system at startup
+    return this.getPath('store.changelog.length') > 2;
+  }.property('*store.changelog'),
 
   /**
    * A read-only computed property that returns true if a save is currently in progress; false
