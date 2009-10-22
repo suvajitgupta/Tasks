@@ -36,6 +36,9 @@ v Make buttons depressable to provide feedback when using them [SG]
 v Allow direct bookmarking of Tasks projects using SproutCore routes [SG] $Feature
 - Show newly added tasks/projects with a badge <SE> [SG] $Feature
 - Add email notifications on task changes to Assignee/Manager [SG] <JH2> $Feature @Active
+- Add abiity to watch tasks and get email notifications on task changes [SG] <JH2> $Feature
+- Add support for leaving comments in record descriptions [SG] <SE> $Feature
+- Add support for attachments in record descriptions [SG] <SE> $Feature
 - Add some simple metrics/reporting capabilities <EG> [SG] $Feature
 v Provide support for color-blind users (don't use color coding as only mechanism for status/validation) [SG] $Feature
 
