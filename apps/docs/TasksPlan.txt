@@ -112,7 +112,7 @@ Application Manager GUI
 - Add server data loading message in status bar during startup [SG] $Feature @Done %Passed
 - Summarize number of projects/assignees/tasks being displayed in the status bar [SG] <MB> @Done $Feature %Passed
 - Add "Save" button in top toolbar, note time of last save in status bar [SG] <BB> @Done $Feature %Passed
-- Beta: Enable/disable Save button based on data modification [SG] <SE> $Feature
+- Beta: Enable/disable Save button based on data modification [SG] <MB> $Feature @Risky
 - Beta: Add Refresh button to get most recent data from server [SG] <SE> $Feature
 - Add "Import" button in top toolbar with associated pop up panel [SG] <BB> @Done $Feature %Passed
 v Allow drag-n-drop of a TXT file into App for data importing using Google Gears [MB] <SG> @Risky $Feature
