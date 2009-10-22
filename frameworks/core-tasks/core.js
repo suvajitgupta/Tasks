@@ -143,7 +143,7 @@ CoreTasks = SC.Object.create({
    *
    * @returns {Boolean) return true if store.
    */
-   // FIXME: [SC] Beta: see why this is not being recomputed when the changelog length changes
+   // FIXME: [SG] Beta: see why isStoreDirty is not being recomputed when the changelog length changes
   isStoreDirty: function() {
     // Ignore the two reserved projects added in by the system at startup
     return this.getPath('store.changelog.length') > 2;
