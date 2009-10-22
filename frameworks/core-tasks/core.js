@@ -174,7 +174,7 @@ CoreTasks = SC.Object.create({
    *
    * Persistence must occur in a precise order to maintain entity associations.
    */
-  // FIXME: [SE] make save work with latest SproutCore
+  // FIXME: [SE] Beta: make save work with latest SproutCore
   saveChanges: function() {
     if (this.get('saveMode') & CoreTasks.MODE_SAVING) {
       throw 'Error saving data: Save already in progress.';
