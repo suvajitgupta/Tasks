@@ -9,7 +9,7 @@
   
 	@author Suvajit Gupta
 */
-Tasks.localizedLabel = {
+Tasks.LocalizedLabel = {
   
   renderLabel: function(context, label) {
     context.push('<label>', label? label.loc() : '', '</label>') ;

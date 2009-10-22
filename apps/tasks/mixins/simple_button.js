@@ -4,7 +4,6 @@
 // Tasks.SimpleButton
 // ==========================================================================
 /*globals Tasks sc_require */
-
 sc_require('core');
 
 /** @class

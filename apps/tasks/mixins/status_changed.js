@@ -10,6 +10,9 @@
   
   @author Mike Ball
 */
+/*globals Tasks sc_require */
+sc_require('core');
+
 Tasks.StatusChanged = {
   
   notifyOnContentStatusChange: YES,

@@ -27,7 +27,7 @@ Tasks.mainPage = SC.Page.design({
       classNames: ['title-bar'],
       childViews: [
       
-        Tasks.TitleView.design({
+        SC.LabelView.design(Tasks.ToolTip, {
           layout: { centerY: -2, height: 26, left: 6, width: 89 },
           toolTip: "_Credits".loc(),
           classNames: ['tasks-logo']
@@ -39,7 +39,7 @@ Tasks.mainPage = SC.Page.design({
           value: Tasks.VERSION
         }),
 
-        Tasks.TitleView.design({
+        SC.LabelView.design(Tasks.ToolTip, {
           layout: { centerY: 0, height: 20, centerX: -93, width: 250 },
           classNames: ['welcome-message']
         }),
@@ -402,7 +402,7 @@ Tasks.mainPage = SC.Page.design({
           layout: { centerX: 0, width: 1030, top: 0, bottom: 0 },
           childViews: [
           
-            Tasks.TitleView.design({
+            SC.LabelView.design(Tasks.ToolTip, {
               layout: { top: 3, bottom: 30, left: 10, width: 260 },
               classNames: ['task-attribute-set-title'],
               value: "_Type".loc(),
@@ -429,7 +429,7 @@ Tasks.mainPage = SC.Page.design({
               layoutDirection: SC.LAYOUT_HORIZONTAL
             }),
 
-            Tasks.TitleView.design({
+            SC.LabelView.design(Tasks.ToolTip, {
               layout: { top: 3, bottom: 30, left: 285, width: 195 },
               classNames: ['task-attribute-set-title'],
               value: "_Priority".loc(),
@@ -455,7 +455,7 @@ Tasks.mainPage = SC.Page.design({
               layoutDirection: SC.LAYOUT_HORIZONTAL
             }),
 
-            Tasks.TitleView.design({
+            SC.LabelView.design(Tasks.ToolTip, {
               layout: { top: 3, bottom: 30, left: 495, width: 265 },
               classNames: ['task-attribute-set-title'],
               value: "_Status".loc(),
@@ -483,7 +483,7 @@ Tasks.mainPage = SC.Page.design({
               layoutDirection: SC.LAYOUT_HORIZONTAL
             }),
 
-            Tasks.TitleView.design({
+            SC.LabelView.design(Tasks.ToolTip, {
               layout: { top: 3, bottom: 30, left: 775, width: 245 },
               classNames: ['task-attribute-set-title'],
               value: "_Validation".loc(),

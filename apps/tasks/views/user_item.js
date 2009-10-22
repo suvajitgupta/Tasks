@@ -12,7 +12,7 @@ sc_require('mixins/localized_label');
   @author Suvajit Gupta
 */
 
-Tasks.UserItemView = SC.ListItemView.extend(Tasks.localizedLabel,
+Tasks.UserItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
 /** @scope Tasks.UserItemView.prototype */ {
   
 });

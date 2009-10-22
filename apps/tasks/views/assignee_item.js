@@ -12,7 +12,7 @@ sc_require('mixins/localized_label');
   @author Suvajit Gupta
 */
 
-Tasks.AssigneeItemView = SC.ListItemView.extend(Tasks.localizedLabel,
+Tasks.AssigneeItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
 /** @scope Tasks.AssigneeItemView.prototype */ {
   
   render: function(context, firstTime) {
