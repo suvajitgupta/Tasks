@@ -17,7 +17,11 @@ Tasks.settingsController = SC.ObjectController.create(
   
     openPanel: function(){
       var panel = Tasks.getPath('settingsPage.panel');
-      if(panel) panel.append();
+      if(panel) {
+        panel.append();
+        var listView = Tasks.getPath('settingsPage.panel.usersList');
+        listView.select(0);
+      }
     },
     
     closePanel: function(){
@@ -27,5 +31,7 @@ Tasks.settingsController = SC.ObjectController.create(
         panel.destroy();
       }
     }
+    
+    // FIXME: [SG] Beta: how to keep currently selected user in place when name is changed and its position moves in list?
     
 });

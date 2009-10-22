@@ -333,11 +333,8 @@ Tasks.mixin({
       project.destroy();
       
       // Select the first project in the list.
-      // FIXME: [SC] do this without using SC.RunLoop.begin/end, if possible
-      SC.RunLoop.begin();
       var projectsList = Tasks.getPath('mainPage.mainPane.projectsList');
       projectsList.select(0);
-      SC.RunLoop.end();
       
     }
     return YES;
@@ -439,12 +436,9 @@ Tasks.mixin({
       // TODO: [SG] Beta: set task submitter/assignee to null if they are set to deleted user
     
       // Select the first user in the list.
-      // FIXME: [SC] do this without using SC.RunLoop.begin/end, if possible
-      SC.RunLoop.begin();
       var listView = Tasks.getPath('settingsPage.panel.usersList');
-      listView.scrollToContentIndex(0);
       listView.select(0);
-      SC.RunLoop.end();
+      listView.scrollToContentIndex(0); // FIXME: [SC] not scrolling to selected item when it is not in view
     
     }
   },
