@@ -1,9 +1,8 @@
 //============================================================================
 // Tasks.DecoratedCheckboxView
 //============================================================================
+/*globals Tasks sc_static sc_require*/
 sc_require('core');
-
-/*globals Tasks sc_static*/
 
 /**
 
@@ -31,7 +30,7 @@ Tasks.DecoratedCheckboxView = SC.CheckboxView.extend({
       var blank = sc_static('blank');
       var icon = this.get('icon');
       var disabled = this.get('isEnabled') ? '' : 'disabled="disabled"';
-      context.push('<img src="', blank, '" class="button" />');
+      context.push('<span class="button" ></span>');
       context.push('<input type="checkbox" name="%@" %@ />'.fmt(SC.guidFor(this),disabled));
       if (icon !== '' && !SC.none(icon)) {
        context.push('<img src="', blank, '" class="icon %@" />'.fmt(icon));
@@ -46,7 +45,7 @@ Tasks.DecoratedCheckboxView = SC.CheckboxView.extend({
       if (elem = this.$input()[0]) {
         if (this.get('isEnabled')) elem.disabled=NO;
         else elem.disabled=YES;
-        elem = null ; // avoid memory leaks
+        elem = null; // avoid memory leaks
       }
       
       dt = this.get('displayTitle');
@@ -56,5 +55,5 @@ Tasks.DecoratedCheckboxView = SC.CheckboxView.extend({
       }
     }
   }
-  
+    
 });
