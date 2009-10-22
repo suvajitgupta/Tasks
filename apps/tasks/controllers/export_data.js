@@ -40,11 +40,14 @@ Tasks.exportDataController = SC.ObjectController.create(
     var pc = Tasks.get('projectsController');
     pc.forEach(function(project){
       
-      if(project.get('name') === CoreTasks.ALL_TASKS_NAME.loc()) return; // skip AllTasks Project
-      ret += project.exportData();
+      var name = project.get('name');
+      if(name === CoreTasks.ALL_TASKS_NAME.loc()) return; // skip AllTasks Project
       
       var tasks = project.get('tasks');
       var len = tasks.get('length');
+      if(len === 0 && name === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) return; // skip empty UnallocatedTasks Project
+      
+      ret += project.exportData();
       for (var i = 0; i < len; i++) {
         ret += tasks.objectAt(i).exportData();
       }

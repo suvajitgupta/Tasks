@@ -233,7 +233,7 @@ Tasks.mixin({
    * Import data from external text file.
    */
   importData: function() {
-    // FIXME: [SE] fix imported tasks disappearing from project after Save, then reappearing after re-login
+    // FIXME: [SE] Beta: fix imported tasks disappearing from project after Save, then reappearing after re-login
     Tasks.importDataController.openPanel();  
   },
 
@@ -268,7 +268,10 @@ Tasks.mixin({
       Tasks.getPath('mainPage.mainPane.welcomeMessage').set('value', null);
       this._usersLoaded = false;
       
-      CoreTasks.store.reset();
+      this.usersController.set('content', null);
+      this.allTasksController.set('content', null);
+      this.projectsController.set('content', null);
+      CoreTasks.clearData();
       this.get('assignmentsController').resetFilters();
       
       this.goState('a', 1);
@@ -281,7 +284,7 @@ Tasks.mixin({
    * Save all changes before exiting application.
    */
   saveAndExit: function() {
-    // TODO: [SG] implement save & exit
+    // TODO: [SG] Beta: implement save & exit
     this._notImplemented('saveAndExit');
   },
   
@@ -289,7 +292,7 @@ Tasks.mixin({
    * Exit application without saving changes.
    */
   exitNoSave: function() {
-    // TODO: [SG] implement exit w/o save
+    // TODO: [SG] Beta: implement exit w/o save
     this._notImplemented('exitNoSave');
   },
   
@@ -396,7 +399,7 @@ Tasks.mixin({
         task.destroy();
       }
       tc.set('selection', null);
-      // FIXME: [SE] fix deleted task erroneously moving to UnallocatedTasks, after Save deleted tasks become "_NewTask", clears up after re-login
+      // FIXME: [SE] Beta: fix deleted task erroneously moving to UnallocatedTasks, after Save deleted tasks become "_NewTask", clears up after re-login
     }
   },
   
@@ -433,7 +436,7 @@ Tasks.mixin({
 
       // Delete user.
       user.destroy();
-      // TODO: [SG] set task submitter/assignee to null if they are set to deleted user
+      // TODO: [SG] Beta: set task submitter/assignee to null if they are set to deleted user
     
       // Select the first user in the list.
       // FIXME: [SC] do this without using SC.RunLoop.begin/end, if possible

@@ -41,7 +41,7 @@ Tasks.loginController = SC.ObjectController.create(
     login: function() {
       var loginName = this.get('loginName');
       if (loginName !== null && loginName !== '') {
-        Tasks.authenticate(loginName, 'password'); // TODO: [SG] get password from user
+        Tasks.authenticate(loginName, 'password'); // TODO: [SG] Beta: get password from user
       }
     },
     

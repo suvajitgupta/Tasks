@@ -20,6 +20,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.localizedLabel,
     if (projectName === CoreTasks.ALL_TASKS_NAME.loc() || projectName === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) inlineEditor.discardEditing();
   },
   
+  // FIXME: [SG] Beta: project items not being re-rendered when 'tasks' change
   render: function(context, firstTime) {
     var content = this.get('content');
     if(content) {

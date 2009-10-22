@@ -12,6 +12,18 @@ CoreTasks = SC.Object.create({
   allUsers: null,
   allTasks: null,
   allProjects: null,
+  
+  /**
+   * Clear all data from store.
+   *
+   */
+  clearData: function() {
+    this.allUsers = null;
+    this.allTasks = null;
+    this.allProjects = null;
+    this.store.reset();
+  },
+
 
   /**
    * Get user for a given loginName (if it exists).
@@ -131,7 +143,7 @@ CoreTasks = SC.Object.create({
    *
    * @returns {Boolean) return true if store.
    */
-   // FIXME: [SC] see why this is not being recomputed when the changelog length changes
+   // FIXME: [SC] Beta: see why this is not being recomputed when the changelog length changes
   isStoreDirty: function() {
     // Ignore the two reserved projects added in by the system at startup
     return this.getPath('store.changelog.length') > 2;
@@ -162,6 +174,7 @@ CoreTasks = SC.Object.create({
    *
    * Persistence must occur in a precise order to maintain entity associations.
    */
+  // FIXME: [SE] make save work with latest SproutCore
   saveChanges: function() {
     if (this.get('saveMode') & CoreTasks.MODE_SAVING) {
       throw 'Error saving data: Save already in progress.';
