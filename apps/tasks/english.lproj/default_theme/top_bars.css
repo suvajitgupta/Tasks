@@ -126,6 +126,9 @@
   text-align: center !important;
 }
 
+/*
+// TODO: [MG] Beta: get better filter has/no criteria icons
+*/
 .filter-tasks-icon-has-criteria {
   width: 20px !important;
   height: 16px !important;

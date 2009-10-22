@@ -37,6 +37,9 @@
   right: 50px !important;
 }
 
+/*
+// TODO: [MG] fix scrollbar on project list overlapping etched border with tasks pane
+*/
 .projects-pane-inner .sc-collection-item.has-icon.sel {
   background: static_url('images/default-theme-selected-project.png') no-repeat 0 0 !important;
   font-weight: bold;
