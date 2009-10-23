@@ -115,6 +115,14 @@ SC.stringsFor('English', {
   '_AssigneeProperlyLoaded': ", currently properly loaded; ",
   '_AssigneeOverloaded': ", currently overloaded; ",
   '_AssigneeEffortTooltip': "Completed/remaining effort shown on right",
+  "_NewUserSignup": "New user? Click here to signup.",
+  "_SignupPaneTitle": "New User Signup",
+  "_Email:": "Email:",
+  "_InvalidEmailAddress": "This email address",
+  "_EmailAddress": "Your Email Address",
+  "_Password:": "Password:",
+  "_PasswordHint": "Your Password",
+  "_Signup": "Signup",
   
   // Popup Pane/Panel strings
   '_EnableAll': "Enable All",
@@ -129,17 +137,6 @@ SC.stringsFor('English', {
   '_UsersLoaded': "Loaded users, ",
   '_TasksLoaded': "tasks, ",
   '_ProjectsLoaded': " and projects.",
-  '_SaveMessage': "Last saved ",
-  
-  // Signup Strings
-  "_Signup": "Signup",
-  "_SignupLabelButton": "Need an account? Click here.",
-  "_SignupPrompt": "Complete the information below to signup:",
-  "_User Info:": "User Info:",
-  "_Email:": "Email:",
-  "_InvalidEmailAddress": "This email address",
-  "_EmailAddress": "Your Email Address",
-  "_Password:": "Password",
-  "_PasswordHint": "Your Password"
-  
+  '_SaveMessage': "Last saved "
+    
 });

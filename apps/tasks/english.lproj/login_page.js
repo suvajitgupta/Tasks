@@ -22,7 +22,7 @@ Tasks.loginPage = SC.Page.create({
     contentView: SC.View.design({
       layout: { top: 0, bottom: 0, left: 0, right: 0 },
       classNames: ['login-body'],
-      childViews: 'loginEntry loginErrorMessage cancelButton loginButton signUp'.w(),
+      childViews: 'loginEntry loginErrorMessage cancelButton loginButton signup'.w(),
       
       loginEntry: SC.TextFieldView.design({
         layout: { top: 139, left: 343, width: 254, height: 26 },
@@ -58,10 +58,10 @@ Tasks.loginPage = SC.Page.create({
         action: 'login'
       }),
       
-      signUp: SC.LabelView.design(Tasks.SimpleButton,{
-        layout: { top: 220, left: 514, height: 24, width: 200 },
+      signup: SC.LabelView.design(Tasks.SimpleButton,{
+        layout: { top: 220, left: 500, height: 24, width: 200 },
         classNames: ['sign-up'],
-        value: "_SignupLabelButton".loc(),
+        value: "_NewUserSignup".loc(),
         target: 'Tasks',
         action: 'launchSignupPane'
       })

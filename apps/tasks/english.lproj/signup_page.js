@@ -17,83 +17,95 @@ sc_require('core');
 Tasks.signupPage = SC.Page.design({
   // The main signup pane.  used to show info
   mainPane: SC.PanelPane.design({
-    layout: { centerX: 0, width: 430, centerY: 0, height: 200 },
+    layout: { centerX: 0, width: 410, centerY: 0, height: 225 },
     
     defaultResponder: Tasks.SIGNUP,
 
     contentView: SC.View.design({
       
-      childViews: "prompt signUpButton cancelButton personalLabel loginName fullName emailLabel emailField passwordLabel passwordField roleLabel roleSelect".w(),
+      childViews: "prompt userInformation signUpButton cancelButton".w(),
       
-      // Prompt
       prompt: SC.LabelView.design({
-        layout: { top: 10, left: 20, height: 18, right: 20 },
-        value: "_SignupPrompt".loc()
+        layout: { top: 5, left: 10, height: 25, right: 10 },
+        textAlign: SC.ALIGN_CENTER,
+        controlSize: SC.LARGE_CONTROL_SIZE,
+        fontWeight: SC.BOLD_WEIGHT,
+        value: "_SignupPaneTitle".loc()
       }),
       
-      // Inputs 
-      
-      personalLabel: SC.LabelView.design({
-        layout: { top: 40, left: 20, width: 70, height: 18 },
-        textAlign: SC.ALIGN_RIGHT,
-        value: "_User Info:".loc() 
-      }),
-      
-      loginName: SC.TextFieldView.design({
-        layout: { top: 40, left: 100, height: 20, width: 150 },
-        hint: "_Initials".loc(),
-        valueBinding: SC.binding('Tasks.signupController.loginName').toLocale()
-      }),
+      userInformation: SC.View.design({
+        
+        layout: { top: 25, left: 10, bottom: 35, right: 10 },
+        childViews: "loginNameLabel loginNameField fullNameLabel fullNameField emailLabel emailField passwordLabel passwordField roleLabel roleSelect".w(),
+        
+        loginNameLabel: SC.LabelView.design({
+          layout: { top: 10, left: 0, width: 85, height: 18 },
+          textAlign: SC.ALIGN_RIGHT,
+          value: "_LoginName:".loc() 
+        }),
 
-      fullName: SC.TextFieldView.design({
-        layout: { top: 40, left: 260, height: 20, width: 150 },
-        hint: "_FirstLast".loc(),
-        valueBinding: SC.binding('Tasks.signupController.name').toLocale()
+        loginNameField: SC.TextFieldView.design({
+          layout: { top: 10, left: 90, height: 20, width: 200 },
+          hint: "_Initials".loc(),
+          valueBinding: SC.binding('Tasks.signupController.loginName').toLocale()
+        }),
+
+        fullNameLabel: SC.LabelView.design({
+          layout: { top: 42, left: 0, width: 85, height: 18 },
+          textAlign: SC.ALIGN_RIGHT,
+          value: "_FullName:".loc() 
+        }),
+
+        fullNameField: SC.TextFieldView.design({
+          layout: { top: 42, left: 90, height: 20, width: 200 },
+          hint: "_FirstLast".loc(),
+          valueBinding: SC.binding('Tasks.signupController.name').toLocale()
+        }),
+
+        emailLabel: SC.LabelView.design({
+          layout: { top: 74, left: 0, width: 85, height: 18 },
+          textAlign: SC.ALIGN_RIGHT,
+          value: "_Email:".loc()
+        }),
+
+        emailField: SC.TextFieldView.design(SC.Validatable,{
+          layout: { top: 74, left: 90, height: 20, width: 310 },
+          validator: SC.Validator.EmailOrEmpty,
+          errorLabel: "_InvalidEmailAddress".loc(),
+          hint: "_EmailAddress".loc(),
+          valueBinding: SC.binding('Tasks.signupController.emailAddress').toLocale()
+        }),
+
+        passwordLabel: SC.LabelView.design({
+          layout: { top: 106, left: 0, width: 85, height: 18 },
+          textAlign: SC.ALIGN_RIGHT,
+          value: "_Password:".loc()
+        }),
+
+        passwordField: SC.TextFieldView.design({
+          layout: { top: 106, left: 90, height: 20, width: 200 },
+          hint: "_PasswordHint".loc(),
+          isPassword: YES,
+          valueBinding: SC.binding('Tasks.signupController.password').toLocale()
+        }),
+
+        roleLabel: SC.LabelView.design({
+          layout: { top: 138, left: 0, width: 85, height: 18 },
+          textAlign: SC.ALIGN_RIGHT,
+          value: "_Role:".loc()
+        }),
+
+        roleSelect: SC.SelectFieldView.design({
+          layout: { top: 138, left: 90, height: 20, width: 200 },
+          localize: YES,
+          objects: CoreTasks.roles,
+          valueBinding: 'Tasks.signupController.role'
+        })
+        
       }),
       
-      emailLabel: SC.LabelView.design({
-        layout: { top: 72, left: 20, width: 70, height: 18 },
-        textAlign: SC.ALIGN_RIGHT,
-        value: "_Email:".loc()
-      }),
-      
-      emailField: SC.TextFieldView.design(SC.Validatable,{
-        layout: { top: 72, left: 100, height: 20, width: 310 },
-        validator: SC.Validator.EmailOrEmpty,
-        errorLabel: "_InvalidEmailAddress".loc(),
-        hint: "_EmailAddress".loc(),
-        valueBinding: SC.binding('Tasks.signupController.emailAddress').toLocale()
-      }),
-      
-      passwordLabel: SC.LabelView.design({
-        layout: { top: 104, left: 20, width: 70, height: 18 },
-        textAlign: SC.ALIGN_RIGHT,
-        value: "_Password:".loc()
-      }),
-      
-      passwordField: SC.TextFieldView.design({
-        layout: { top: 104, left: 100, height: 20, width: 310 },
-        hint: "_PasswordHint".loc(),
-        isPassword: YES,
-        valueBinding: SC.binding('Tasks.signupController.password').toLocale()
-      }),
-      
-      roleLabel: SC.LabelView.design({
-        layout: { top: 136, left: 20, width: 70, height: 18 },
-        textAlign: SC.ALIGN_RIGHT,
-        value: "_Role:".loc()
-      }),
-      
-      roleSelect: SC.SelectFieldView.design({
-        layout: { top: 136, left: 97, height: 20, width: 318 },
-        localize: YES,
-        objects: CoreTasks.roles,
-        valueBinding: 'Tasks.signupController.role'
-      }),
-      
-      // Buttons
       signUpButton: SC.ButtonView.design({
-        layout: { bottom: 10, right: 15, width: 90, height: 24 },
+        layout: { bottom: 10, right: 10, width: 90, height: 24 },
         title: "_Signup".loc(),
         theme: 'capsule',
         keyEquivalent: 'return',
@@ -103,7 +115,7 @@ Tasks.signupPage = SC.Page.design({
       }),
       
       cancelButton: SC.ButtonView.design({
-        layout: { bottom: 10, right: 115, width: 90, height: 24 },
+        layout: { bottom: 10, right: 110, width: 90, height: 24 },
         title: "_Cancel".loc(),
         theme: 'capsule',
         keyEquivalent: 'escape',

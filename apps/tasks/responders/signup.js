@@ -27,7 +27,7 @@ Tasks.SIGNUP = SC.Responder.create(Tasks.Sha1,{
     store = this._store = CoreTasks.get('store').chain(); 
     user = CoreTasks.createRecord(CoreTasks.User, SC.clone(CoreTasks.User.NEW_USER_HASH));
                                   
-    Tasks.signupController.set('content',user);
+    Tasks.signupController.set('content', user);
     
     // then show the dialog
     pane = Tasks.getPath('signupPage.mainPane');
