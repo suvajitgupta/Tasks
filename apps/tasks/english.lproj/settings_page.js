@@ -16,7 +16,7 @@ Tasks.settingsPage = SC.Page.create({
   
   panel: SC.PanelPane.create({
     
-    layout: { centerX: 0, centerY: 0, height: 325, width: 550 },
+    layout: { centerX: 0, centerY: 0, height: 325, width: 605 },
     
     usersList: SC.outlet('contentView.userManager.childViews.1.contentView'),
     contentView: SC.View.design({
@@ -74,42 +74,10 @@ Tasks.settingsPage = SC.Page.create({
             })
           }),
           
-          SC.LabelView.design({
-            layout: { top: 100, left: 210, height: 17, width: 80 },
-            localize: YES,
-            textAlign: SC.ALIGN_RIGHT,
-            value: "_LoginName:"
-          }),
-          SC.TextFieldView.design({
-            layout: { top: 100, left: 300, height: 16, width: 200 },
-            localize: YES,
-            valueBinding: SC.binding('Tasks.userController.loginName', this).toLocale()
-          }),
-
-          SC.LabelView.design({
-            layout: { top: 135, left: 210, height: 17, width: 80 },
-            localize: YES,
-            textAlign: SC.ALIGN_RIGHT,
-            value: "_FullName:"
-          }),
-          SC.TextFieldView.design({
-            layout: { top: 135, left: 300, height: 16, width: 200 },
-            localize: YES,
-            valueBinding: SC.binding('Tasks.userController.name', this).toLocale()
-          }),
-          
-          SC.LabelView.design({
-            layout: { top: 170, left: 210, height: 17, width: 80 },
-            localize: YES,
-            textAlign: SC.ALIGN_RIGHT,
-            value: "_Role:"
-          }),
-          SC.SelectFieldView.design({
-            layout: { top: 170, left: 300, height: 20, width: 140 },
-            localize: YES,
-            objects: CoreTasks.roles,
-            valueBinding: 'Tasks.userController.role'
-          })          
+          Tasks.UserInformationView.design({
+            layout: { top: 40, left: 200, bottom: 35, right: 10 },
+            contentBinding: 'Tasks.userController'
+          })
                 
         ]
       }),

@@ -263,6 +263,7 @@ Tasks.mixin({
    */
   logout: function() {
     
+    Tasks.SIGNUP.didBecomeFirstResponder(); return;
     if(confirm("_LogoutConfirmation".loc())) {
       
       Tasks.getPath('mainPage.mainPane.welcomeMessage').set('value', null);
@@ -305,7 +306,7 @@ Tasks.mixin({
     var pc = this.projectsController;
     pc.selectObject(project);
     CoreTasks.invokeLater(pc.editNewProject, 200, project);
-    
+    return project;
   },
   
   /**
@@ -344,6 +345,7 @@ Tasks.mixin({
    * Add a new task to tasks detail list.
    */
   addTask: function() {
+    
     // Create a new task with the logged in user as the default submitter/assignee.
     var userId = CoreTasks.getPath('user.id');
     var taskHash = SC.merge({ 'submitterId': userId, 'assigneeId': userId }, SC.clone(CoreTasks.Task.NEW_TASK_HASH));
@@ -376,7 +378,7 @@ Tasks.mixin({
     var ac = this.get('assignmentsController');  
     CoreTasks.invokeLater(ac.showAssignments.bind(ac));
     CoreTasks.invokeLater(tc.editNewTask, 200, task);
-    return YES;
+    return task;
         
   },
 
@@ -414,6 +416,7 @@ Tasks.mixin({
     // Create and select new user.
     var user = CoreTasks.createRecord(CoreTasks.User, SC.clone(CoreTasks.User.NEW_USER_HASH));
     Tasks.usersController.selectObject(user);
+    return user;
   },
 
   /**

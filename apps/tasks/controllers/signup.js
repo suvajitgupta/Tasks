@@ -1,21 +1,16 @@
-//============================================================================
-// Tasks.signupController
-//============================================================================
-sc_require('core');
+// ==========================================================================
+// Project: Tasks
+// ==========================================================================
+/*globals Tasks */
 
-/*globals Tasks*/
+/** 
 
-/**
+  This controller tracks a user signing up
 
-  The controller used for signups.
-  
   @extends SC.ObjectController
-  @author Joshua Holt [JH2]
-  @version preBeta
-  @since preBeta
-
+	@author Suvajit Gupta
 */
-
-Tasks.signupController = SC.ObjectController.create({
+Tasks.signupController = SC.ObjectController.create(
+/** @scope Tasks.signupController.prototype */ {
   
 });

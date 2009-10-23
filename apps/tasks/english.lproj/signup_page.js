@@ -17,13 +17,13 @@ sc_require('core');
 Tasks.signupPage = SC.Page.design({
   // The main signup pane.  used to show info
   mainPane: SC.PanelPane.design({
-    layout: { centerX: 0, width: 410, centerY: 0, height: 225 },
+    layout: { centerX: 0, width: 415, centerY: 0, height: 225 },
     
     defaultResponder: Tasks.SIGNUP,
 
     contentView: SC.View.design({
       
-      childViews: "prompt userInformation signUpButton cancelButton".w(),
+      childViews: "prompt userInformation signupButton cancelButton".w(),
       
       prompt: SC.LabelView.design({
         layout: { top: 5, left: 10, height: 25, right: 10 },
@@ -33,85 +33,20 @@ Tasks.signupPage = SC.Page.design({
         value: "_SignupPaneTitle".loc()
       }),
       
-      userInformation: SC.View.design({
-        
+      // FIXME: [SG] Beta: see why signup controller object is not working with user information view
+      userInformation: Tasks.UserInformationView.design({
         layout: { top: 25, left: 10, bottom: 35, right: 10 },
-        childViews: "loginNameLabel loginNameField fullNameLabel fullNameField emailLabel emailField passwordLabel passwordField roleLabel roleSelect".w(),
-        
-        loginNameLabel: SC.LabelView.design({
-          layout: { top: 10, left: 0, width: 85, height: 18 },
-          textAlign: SC.ALIGN_RIGHT,
-          value: "_LoginName:".loc() 
-        }),
-
-        loginNameField: SC.TextFieldView.design({
-          layout: { top: 10, left: 90, height: 20, width: 200 },
-          hint: "_Initials".loc(),
-          valueBinding: SC.binding('Tasks.signupController.loginName').toLocale()
-        }),
-
-        fullNameLabel: SC.LabelView.design({
-          layout: { top: 42, left: 0, width: 85, height: 18 },
-          textAlign: SC.ALIGN_RIGHT,
-          value: "_FullName:".loc() 
-        }),
-
-        fullNameField: SC.TextFieldView.design({
-          layout: { top: 42, left: 90, height: 20, width: 200 },
-          hint: "_FirstLast".loc(),
-          valueBinding: SC.binding('Tasks.signupController.name').toLocale()
-        }),
-
-        roleLabel: SC.LabelView.design({
-          layout: { top: 74, left: 0, width: 85, height: 18 },
-          textAlign: SC.ALIGN_RIGHT,
-          value: "_Role:".loc()
-        }),
-
-        roleSelect: SC.SelectFieldView.design({
-          layout: { top: 74, left: 90, height: 20, width: 200 },
-          localize: YES,
-          objects: CoreTasks.roles,
-          valueBinding: 'Tasks.signupController.role'
-        }),
-
-        emailLabel: SC.LabelView.design({
-          layout: { top: 106, left: 0, width: 85, height: 18 },
-          textAlign: SC.ALIGN_RIGHT,
-          value: "_Email:".loc()
-        }),
-
-        emailField: SC.TextFieldView.design(SC.Validatable,{
-          layout: { top: 106, left: 90, height: 20, width: 310 },
-          validator: SC.Validator.EmailOrEmpty,
-          errorLabel: "_InvalidEmailAddress".loc(),
-          hint: "_EmailAddress".loc(),
-          valueBinding: SC.binding('Tasks.signupController.emailAddress').toLocale()
-        }),
-
-        passwordLabel: SC.LabelView.design({
-          layout: { top: 138, left: 0, width: 85, height: 18 },
-          textAlign: SC.ALIGN_RIGHT,
-          value: "_Password:".loc()
-        }),
-
-        passwordField: SC.TextFieldView.design({
-          layout: { top: 138, left: 90, height: 20, width: 200 },
-          hint: "_PasswordHint".loc(),
-          isPassword: YES,
-          valueBinding: SC.binding('Tasks.signupController.password').toLocale()
-        })
-                
+        contentBinding: 'Tasks.signupController'
       }),
       
-      signUpButton: SC.ButtonView.design({
+      signupButton: SC.ButtonView.design({
         layout: { bottom: 10, right: 10, width: 90, height: 24 },
         title: "_Signup".loc(),
         theme: 'capsule',
         keyEquivalent: 'return',
         isDefault: YES,
         action: "submit",
-        isEnabledBinding: SC.Binding.oneWay('Tasks.signupController.password').bool()
+        isEnabledBinding: SC.Binding.oneWay('Tasks.userController.password').bool()
       }),
       
       cancelButton: SC.ButtonView.design({

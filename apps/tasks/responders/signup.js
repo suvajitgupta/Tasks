@@ -1,7 +1,7 @@
 //============================================================================
 // Tasks.SIGNUP
 //============================================================================
-/*globals CoreTasks Tasks*/
+/*globals CoreTasks Tasks sc_require*/
 sc_require('core');
 sc_require('lib/sha1');
 /**
@@ -17,76 +17,53 @@ sc_require('lib/sha1');
 
 Tasks.SIGNUP = SC.Responder.create(Tasks.Sha1,{
   
+  _newUser: null,
+  
   // when we become first responder, always show the signup panel
   didBecomeFirstResponder: function() {
-    // Create a new user and push it onto the users controller and select it
-    // so that we can edit it.
+    // Create a new user and start editing its properties.
+    this._newUser = CoreTasks.createRecord(CoreTasks.User, SC.clone(CoreTasks.User.NEW_USER_HASH));
+    Tasks.signupController.set('content', this._newUser);
     
-    // Use a nested store to buffer changes so that we can discard etc..
-    var store, user, pane;
-    store = this._store = CoreTasks.get('store').chain(); 
-    user = CoreTasks.createRecord(CoreTasks.User, SC.clone(CoreTasks.User.NEW_USER_HASH));
-                                  
-    Tasks.signupController.set('content', user);
-    
-    // then show the dialog
-    pane = Tasks.getPath('signupPage.mainPane');
-    // show on screen
+    var pane = Tasks.getPath('signupPage.mainPane');
     pane.append();
-    // focus first field
-    pane.makeFirstResponder(pane.contentView.loginName);
+    pane.makeFirstResponder(pane.contentView.userInformation.loginNameField);
   },
-  
-  // when we lose first responder, always hide the signup panel.
-  // willLoseFirstResponder: function() {
-  //   
-  //   // if we still have a store, then cancel first.
-  //   if (this._store) {
-  //     this._store.discardChanges();
-  //     this._store = null ;
-  //   }
-  //   // cleanup controller
-  //   Tasks.userController.set('content', null);
-  //   // Hide signup panel
-  //   Tasks.getPath('signupPage.mainPane').remove();
-  //   this.refocusLoginPanel();
-  // },
   
   // called when the OK button is pressed.
   submit: function() {
     Tasks.signupController.set('password',this.sha1ify());
-    this._store.commitChanges();
-    this._store = null ;
     
     // Save the new user
     Tasks.saveData();
     Tasks.getPath('signupPage.mainPane').remove();
-    this.refocusLoginPanel();
+    this._refocusLoginPanel();
   },
   
   // called when the Cancel button is pressed
   cancel: function() {
-    this._store.discardChanges();
-    this._store = null;
-
-    // reset app
-    Tasks.getPath('signupPage.mainPane').remove();
-    this.refocusLoginPanel();
-  },
-  
-  refocusLoginPanel: function(){
-    var panel = Tasks.getPath('loginPage.panel');
-    if(panel) {
-      panel.focus();
+    // Discard new user since signup was abandoned
+    if(this._newUser) {
+      this._newUser.destroy();
+      this._newUser = null;
     }
+
+    // Go back to login screen
+    Tasks.getPath('signupPage.mainPane').remove();
+    this._refocusLoginPanel();
   },
   
-  sha1ify: function(){
+  _refocusLoginPanel: function() {
+    var panel = Tasks.getPath('loginPage.panel');
+    if(panel) panel.focus();
+  },
+  
+  sha1ify: function() {
     var ret;
     var userLogin = Tasks.signupController.get('loginName');
     var userPassword = Tasks.signupController.get('password');
     if (userLogin && userPassword) {
-      ret = this.sha1Hash('--%@--%@--'.fmt(userLogin,userPassword));
+      ret = this.sha1Hash('--%@--%@--'.fmt(userLogin, userPassword));
     }else{
       ret = "";
     }
