@@ -266,6 +266,8 @@ Tasks.assignmentsController = SC.ArrayController.create(
         if(task.get('developmentStatus') === CoreTasks.TASK_STATUS_DONE) doneTaskWithUnspecifiedEffort = true;
         else taskWithUnspecifiedEffort = true;
       }
+      // TODO: [SG] count low priority items that are done in total
+      // TODO: [SG] if only low priority items left count them in total
       if(effortString && priority !== CoreTasks.TASK_PRIORITY_LOW) {
         // sum up effort for High/Medium priority tasks
         var timeUnit = CoreTasks.getTimeUnit(effortString);
