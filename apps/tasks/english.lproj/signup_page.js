@@ -62,14 +62,27 @@ Tasks.signupPage = SC.Page.design({
           valueBinding: SC.binding('Tasks.signupController.name').toLocale()
         }),
 
-        emailLabel: SC.LabelView.design({
+        roleLabel: SC.LabelView.design({
           layout: { top: 74, left: 0, width: 85, height: 18 },
+          textAlign: SC.ALIGN_RIGHT,
+          value: "_Role:".loc()
+        }),
+
+        roleSelect: SC.SelectFieldView.design({
+          layout: { top: 74, left: 90, height: 20, width: 200 },
+          localize: YES,
+          objects: CoreTasks.roles,
+          valueBinding: 'Tasks.signupController.role'
+        }),
+
+        emailLabel: SC.LabelView.design({
+          layout: { top: 106, left: 0, width: 85, height: 18 },
           textAlign: SC.ALIGN_RIGHT,
           value: "_Email:".loc()
         }),
 
         emailField: SC.TextFieldView.design(SC.Validatable,{
-          layout: { top: 74, left: 90, height: 20, width: 310 },
+          layout: { top: 106, left: 90, height: 20, width: 310 },
           validator: SC.Validator.EmailOrEmpty,
           errorLabel: "_InvalidEmailAddress".loc(),
           hint: "_EmailAddress".loc(),
@@ -77,31 +90,18 @@ Tasks.signupPage = SC.Page.design({
         }),
 
         passwordLabel: SC.LabelView.design({
-          layout: { top: 106, left: 0, width: 85, height: 18 },
+          layout: { top: 138, left: 0, width: 85, height: 18 },
           textAlign: SC.ALIGN_RIGHT,
           value: "_Password:".loc()
         }),
 
         passwordField: SC.TextFieldView.design({
-          layout: { top: 106, left: 90, height: 20, width: 200 },
+          layout: { top: 138, left: 90, height: 20, width: 200 },
           hint: "_PasswordHint".loc(),
           isPassword: YES,
           valueBinding: SC.binding('Tasks.signupController.password').toLocale()
-        }),
-
-        roleLabel: SC.LabelView.design({
-          layout: { top: 138, left: 0, width: 85, height: 18 },
-          textAlign: SC.ALIGN_RIGHT,
-          value: "_Role:".loc()
-        }),
-
-        roleSelect: SC.SelectFieldView.design({
-          layout: { top: 138, left: 90, height: 20, width: 200 },
-          localize: YES,
-          objects: CoreTasks.roles,
-          valueBinding: 'Tasks.signupController.role'
         })
-        
+                
       }),
       
       signUpButton: SC.ButtonView.design({
