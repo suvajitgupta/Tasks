@@ -90,7 +90,7 @@ SC.stringsFor('English', {
   '_Description:': "Description:",
   '_SubmitterTooltip': "Submitter is ",
   '_TaskEffortTooltip': "Effort (if specified) shown on right",
-  '_IdTooltip': "Unique ID for task, background color indicates validation status",
+  '_IdTooltip': "Unique ID for task; Dashes indicate unsaved tasks; Background color indicates validation status",
   '_EditorTooltip': "Click to view/edit task details (submitter, assignee, effort, and description)",
   '_TasksExportTimestamp': "# Tasks data export at ",
   
