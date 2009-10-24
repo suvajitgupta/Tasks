@@ -266,10 +266,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
         if(task.get('developmentStatus') === CoreTasks.TASK_STATUS_DONE) doneTaskWithUnspecifiedEffort = true;
         else taskWithUnspecifiedEffort = true;
       }
-      // TODO: [SG] count low priority items that are done in total
-      // TODO: [SG] if only low priority items left count them in total
-      if(effortString && priority !== CoreTasks.TASK_PRIORITY_LOW) {
-        // sum up effort for High/Medium priority tasks
+      if(effortString) { // sum up task effort
         var timeUnit = CoreTasks.getTimeUnit(effortString);
         effortMin = parseFloat(parseFloat(effortString, 10).toFixed(3));
         effortMin = CoreTasks.convertTimeToDays(effortMin + timeUnit);
@@ -282,10 +279,11 @@ Tasks.assignmentsController = SC.ArrayController.create(
           effortMax = CoreTasks.convertTimeToDays(effortMax + timeUnit);
         }
         if(task.get('developmentStatus') === CoreTasks.TASK_STATUS_DONE) {
+      // TODO: [SG] count low priority items that are done in total
           totalDoneEffortMin = parseFloat((totalDoneEffortMin + effortMin).toFixed(3));
           totalDoneEffortMax = parseFloat((totalDoneEffortMax + effortMax).toFixed(3));
         }
-        else {
+        else if (priority !== CoreTasks.TASK_PRIORITY_LOW) { // leave out Low priority items in totals
           totalEffortMin = parseFloat((totalEffortMin + effortMin).toFixed(3));
           totalEffortMax = parseFloat((totalEffortMax + effortMax).toFixed(3));
         }
