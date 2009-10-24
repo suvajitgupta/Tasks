@@ -247,12 +247,14 @@ Tasks.assignmentsController = SC.ArrayController.create(
       // Add observers to certain task properties that can require the assignmentsController to redraw
       // FIXME: [SC] see why these are firing multiple times when only one property is changed
       task.removeObserver('assignee',Tasks.assignmentsController,'_contentHasChanged');
+      task.removeObserver('name',Tasks.assignmentsController,'_contentHasChanged');
       task.removeObserver('type',Tasks.assignmentsController,'_contentHasChanged');
       task.removeObserver('priority',Tasks.assignmentsController,'_contentHasChanged');
       task.removeObserver('developmentStatus',Tasks.assignmentsController,'_contentHasChanged');
       task.removeObserver('validation',Tasks.assignmentsController,'_contentHasChanged');
       task.removeObserver('effort',Tasks.assignmentsController,'_contentHasChanged');
       task.addObserver('assignee',Tasks.assignmentsController,'_contentHasChanged');
+      task.addObserver('name',Tasks.assignmentsController,'_contentHasChanged');
       task.addObserver('type',Tasks.assignmentsController,'_contentHasChanged');
       task.addObserver('priority',Tasks.assignmentsController,'_contentHasChanged');
       task.addObserver('developmentStatus',Tasks.assignmentsController,'_contentHasChanged');

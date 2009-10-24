@@ -15,7 +15,7 @@ sc_require('views/decorated_checkbox');
   
 */
 
-Tasks.filterPane = SC.PickerPane.create({  
+Tasks.filterPane = SC.PanelPane.create({  
   
   layout: { top: 78, right: 240, height: 280, width: 280 },
   
