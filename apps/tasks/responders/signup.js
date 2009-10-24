@@ -24,7 +24,9 @@ Tasks.SIGNUP = SC.Responder.create(Tasks.Sha1,{
   // when we become first responder, always show the signup panel
   didBecomeFirstResponder: function() {
     // Create a new user and start editing its properties.
-    this._newUser = CoreTasks.createRecord(CoreTasks.User, SC.clone(CoreTasks.User.NEW_USER_HASH));
+    var newUserHash = SC.clone(CoreTasks.User.NEW_USER_HASH);
+    newUserHash.role = CoreTasks.USER_ROLE_GUEST;
+    this._newUser = CoreTasks.createRecord(CoreTasks.User, newUserHash);
     Tasks.signupController.set('content', this._newUser);
     
     var pane = Tasks.getPath('signupPage.mainPane');
@@ -38,17 +40,20 @@ Tasks.SIGNUP = SC.Responder.create(Tasks.Sha1,{
     
     // Save the new user
     Tasks.saveData();
+    Tasks.signupController.set('content', null);
     Tasks.getPath('signupPage.mainPane').remove();
     this._refocusLoginPanel();
   },
   
   // called when the Cancel button is pressed
   cancel: function() {
+    
     // Discard new user since signup was abandoned
     if(this._newUser) {
       this._newUser.destroy();
       this._newUser = null;
     }
+    Tasks.signupController.set('content', null);
 
     // Go back to login screen
     Tasks.getPath('signupPage.mainPane').remove();

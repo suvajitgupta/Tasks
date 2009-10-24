@@ -35,6 +35,7 @@ Tasks.signupPage = SC.Page.design({
       
       userInformation: Tasks.UserInformationView.design({
         layout: { top: 25, left: 10, bottom: 35, right: 10 },
+        isRoleChangeable: NO,
         contentBinding: 'Tasks.signupController'
       }),
       
@@ -44,8 +45,7 @@ Tasks.signupPage = SC.Page.design({
         theme: 'capsule',
         keyEquivalent: 'return',
         isDefault: YES,
-        action: "submit",
-        isEnabledBinding: SC.Binding.oneWay('Tasks.userController.password').bool()
+        action: "submit"
       }),
       
       cancelButton: SC.ButtonView.design({
