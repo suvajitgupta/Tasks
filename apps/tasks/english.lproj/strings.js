@@ -116,7 +116,7 @@ SC.stringsFor('English', {
   '_AssigneeOverloaded': ", currently overloaded; ",
   '_AssigneeEffortTooltip': "Completed/remaining effort shown on right",
   "_NewUserSignup": "New user? Click here to signup.",
-  "_SignupPaneTitle": "New User Signup",
+  "_SignupPrompt": "Please enter the following information to signup:",
   "_Email:": "Email:",
   "_InvalidEmailAddress": "This email address",
   "_EmailAddress": "Your Email Address",
