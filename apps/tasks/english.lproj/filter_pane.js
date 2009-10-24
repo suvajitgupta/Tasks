@@ -17,7 +17,7 @@ sc_require('views/decorated_checkbox');
 
 Tasks.filterPane = SC.PanelPane.create({  
   
-  layout: { top: 78, right: 240, height: 280, width: 280 },
+  layout: { top: 78, right: 360, height: 320, width: 280 },
   
   contentView: SC.View.design({
     
@@ -179,12 +179,43 @@ Tasks.filterPane = SC.PanelPane.create({
       }),
 
       SC.ButtonView.design({
-        layout: { width: 100, height: 30, right: 96, bottom: 8 },
+        layout: { width: 80, height: 30, left: 10, bottom: 40 },
         titleMinWidth: 0,
-        theme: 'capsule',
-        title: "_EnableAll".loc(),
+        title: "_Troubled".loc(),
+        target: 'Tasks.assignmentsController',
+        action: 'setTroubledAttributeFilter'
+      }),
+      
+      SC.ButtonView.design({
+        layout: { width: 95, height: 30, centerX: 0, bottom: 40 },
+        titleMinWidth: 0,
+        title: "_LeftToTest".loc(),
+        target: 'Tasks.assignmentsController',
+        action: 'setLeftToTestAttributeFilter'
+      }),
+      
+      SC.ButtonView.design({
+        layout: { width: 80, height: 30, right: 10, bottom: 40 },
+        titleMinWidth: 0,
+        title: "_ShowAll".loc(),
         target: 'Tasks.assignmentsController',
         action: 'clearAttributeFilter'
+      }),
+      
+      SC.ButtonView.design({
+        layout: { width: 80, height: 30, left: 10, bottom: 8 },
+        titleMinWidth: 0,
+        title: "_LeftTodo".loc(),
+        target: 'Tasks.assignmentsController',
+        action: 'setLeftTodoAttributeFilter'
+      }),
+      
+      SC.ButtonView.design({
+        layout: { width: 95, height: 30, centerX: 0, bottom: 8 },
+        titleMinWidth: 0,
+        title: "_WhatToShip".loc(),
+        target: 'Tasks.assignmentsController',
+        action: 'setWhatToShipAttributeFilter'
       }),
       
       SC.ButtonView.design({

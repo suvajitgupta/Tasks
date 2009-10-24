@@ -20,6 +20,33 @@ Tasks.attributeFilterAllEnabled = [
   CoreTasks.TASK_VALIDATION_UNTESTED, CoreTasks.TASK_VALIDATION_PASSED, CoreTasks.TASK_VALIDATION_FAILED
 ];
 
+Tasks.attributeFilterTroubled = [
+  CoreTasks.TASK_TYPE_FEATURE, CoreTasks.TASK_TYPE_BUG, CoreTasks.TASK_TYPE_OTHER,
+  CoreTasks.TASK_PRIORITY_HIGH, CoreTasks.TASK_PRIORITY_MEDIUM, CoreTasks.TASK_PRIORITY_LOW,
+  CoreTasks.TASK_STATUS_DONE, CoreTasks.TASK_STATUS_RISKY,
+  CoreTasks.TASK_VALIDATION_FAILED
+];
+
+Tasks.attributeFilterLeftTodo = [
+  CoreTasks.TASK_TYPE_FEATURE, CoreTasks.TASK_TYPE_BUG, CoreTasks.TASK_TYPE_OTHER,
+  CoreTasks.TASK_PRIORITY_HIGH, CoreTasks.TASK_PRIORITY_MEDIUM,
+  CoreTasks.TASK_STATUS_PLANNED, CoreTasks.TASK_STATUS_ACTIVE, CoreTasks.TASK_STATUS_RISKY
+];
+
+Tasks.attributeFilterLeftToTest = [
+  CoreTasks.TASK_TYPE_FEATURE, CoreTasks.TASK_TYPE_BUG, CoreTasks.TASK_TYPE_OTHER,
+  CoreTasks.TASK_PRIORITY_HIGH, CoreTasks.TASK_PRIORITY_MEDIUM, CoreTasks.TASK_PRIORITY_LOW,
+  CoreTasks.TASK_STATUS_DONE,
+  CoreTasks.TASK_VALIDATION_UNTESTED
+];
+
+Tasks.attributeFilterWhatToShip = [
+  CoreTasks.TASK_TYPE_FEATURE, CoreTasks.TASK_TYPE_BUG,
+  CoreTasks.TASK_PRIORITY_HIGH, CoreTasks.TASK_PRIORITY_MEDIUM, CoreTasks.TASK_PRIORITY_LOW,
+  CoreTasks.TASK_STATUS_DONE,
+  CoreTasks.TASK_VALIDATION_PASSED
+];
+
 Tasks.assignmentsController = SC.ArrayController.create(
 /** @scope Tasks.assignmentsController.prototype */ {
   
@@ -117,6 +144,22 @@ Tasks.assignmentsController = SC.ArrayController.create(
     return this.assigneeSelection || this.searchFilter || this.attributeFilterCriteria.length !== 13;
   },
   
+  setTroubledAttributeFilter: function() {
+    this.set('attributeFilterCriteria', Tasks.attributeFilterTroubled.slice(0));
+  },
+
+  setLeftTodoAttributeFilter: function() {
+    this.set('attributeFilterCriteria', Tasks.attributeFilterLeftTodo.slice(0));
+  },
+
+  setLeftToTestAttributeFilter: function() {
+    this.set('attributeFilterCriteria', Tasks.attributeFilterLeftToTest.slice(0));
+  },
+
+  setWhatToShipAttributeFilter: function() {
+    this.set('attributeFilterCriteria', Tasks.attributeFilterWhatToShip.slice(0));
+  },
+
   clearAttributeFilter: function() {
     this.set('attributeFilterCriteria', Tasks.attributeFilterAllEnabled.slice(0));
   },

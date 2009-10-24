@@ -125,7 +125,11 @@ SC.stringsFor('English', {
   "_Signup": "Signup",
   
   // Popup Pane/Panel strings
-  '_EnableAll': "Enable All",
+  '_Troubled': "Troubled",
+  '_LeftTodo': "Left Todo",
+  '_LeftToTest': "Left to Test",
+  '_WhatToShip': "What to Ship",
+  '_ShowAll': "Show All",
   '_Cancel': "Cancel",
   '_Close': "Close",
   '_Apply': "Apply",
