@@ -139,17 +139,6 @@ CoreTasks = SC.Object.create({
   },
 
   /**
-   * See if any changes have been made to the store.
-   *
-   * @returns {Boolean) return true if store.
-   */
-   // FIXME: [SG] Beta: see why isStoreDirty is not being recomputed when the changelog length changes
-  isStoreDirty: function() {
-    // Ignore the two reserved projects added in by the system at startup
-    return this.getPath('store.changelog.length') > 2;
-  }.property('*store.changelog.length').cacheable(),
-
-  /**
    * A read-only computed property that returns true if a save is currently in progress; false
    * otherwise.
    *

@@ -32,6 +32,4 @@ Tasks.settingsController = SC.ObjectController.create(
       }
     }
     
-    // FIXME: [SG] Beta: how to keep currently selected user in place when name is changed and its position moves in list?
-    
 });

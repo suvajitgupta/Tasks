@@ -61,7 +61,6 @@ Tasks.mainPage = SC.Page.design({
               classNames: ['save-icon'],
               value:  "_Save".loc(),
               toolTip: "_SaveTooltip".loc(),
-              isEnabledBinding: 'CoreTasks.isStoreDirty',
               target: 'Tasks',
               action: 'saveData'
             }),
@@ -71,7 +70,6 @@ Tasks.mainPage = SC.Page.design({
               classNames: ['title-bar-label'],
               value:  "_Save".loc(),
               toolTip: "_SaveTooltip".loc(),
-              isEnabledBinding: 'CoreTasks.isStoreDirty',
               target: 'Tasks',
               action: 'saveData'
             })

@@ -33,7 +33,6 @@ Tasks.signupPage = SC.Page.design({
         value: "_SignupPaneTitle".loc()
       }),
       
-      // FIXME: [SG] Beta: see why signup controller object is not working with user information view
       userInformation: Tasks.UserInformationView.design({
         layout: { top: 25, left: 10, bottom: 35, right: 10 },
         contentBinding: 'Tasks.signupController'

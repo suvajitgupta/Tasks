@@ -59,6 +59,7 @@ Tasks.settingsPage = SC.Page.create({
             ]
           }),
         
+          // FIXME: [SC] Beta: keep current user selected in master list when name is changed on detail panel
           SC.ScrollView.design({
             layout: { top: 35, bottom: 0, left: 0, width: 200 },
             hasHorizontalScroller: NO,
