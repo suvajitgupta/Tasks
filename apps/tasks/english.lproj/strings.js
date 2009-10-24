@@ -134,7 +134,7 @@ SC.stringsFor('English', {
   '_WhatToShip': "What to Ship",
   '_WhatToShipTooltip': "Deliver results - see what is ready for primetime",
   '_ShowAll': "Show All",
-  '_ShowAllTooltip': "Clear attribute filter - show all taaks",
+  '_ShowAllTooltip': "Clear attribute filter - show all tasks",
   '_Cancel': "Cancel",
   '_Close': "Close",
   '_Apply': "Apply",
