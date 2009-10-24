@@ -279,7 +279,6 @@ Tasks.assignmentsController = SC.ArrayController.create(
           effortMax = CoreTasks.convertTimeToDays(effortMax + timeUnit);
         }
         if(task.get('developmentStatus') === CoreTasks.TASK_STATUS_DONE) {
-      // TODO: [SG] count low priority items that are done in total
           totalDoneEffortMin = parseFloat((totalDoneEffortMin + effortMin).toFixed(3));
           totalDoneEffortMax = parseFloat((totalDoneEffortMax + effortMax).toFixed(3));
         }
