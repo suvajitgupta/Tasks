@@ -263,7 +263,6 @@ Tasks.mixin({
    */
   logout: function() {
     
-    Tasks.SIGNUP.didBecomeFirstResponder(); return;
     if(confirm("_LogoutConfirmation".loc())) {
       
       Tasks.getPath('mainPage.mainPane.welcomeMessage').set('value', null);
