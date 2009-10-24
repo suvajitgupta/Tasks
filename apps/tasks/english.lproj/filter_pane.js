@@ -17,7 +17,7 @@ sc_require('views/decorated_checkbox');
 
 Tasks.filterPane = SC.PanelPane.create({  
   
-  layout: { top: 78, right: 360, height: 320, width: 280 },
+  layout: { top: 78, right: 360, height: 325, width: 280 },
   
   contentView: SC.View.design({
     
@@ -177,45 +177,54 @@ Tasks.filterPane = SC.PanelPane.create({
         })
 
       }),
+      
+      SC.SeparatorView.design({
+        layout: { bottom: 75, left: 10, right: 10, height: 4 }
+      }),
 
       SC.ButtonView.design({
         layout: { width: 80, height: 30, left: 10, bottom: 40 },
         titleMinWidth: 0,
         title: "_Troubled".loc(),
+        toolTip: "_TroubledTooltip".loc(),
         target: 'Tasks.assignmentsController',
         action: 'setTroubledAttributeFilter'
-      }),
-      
-      SC.ButtonView.design({
-        layout: { width: 95, height: 30, centerX: 0, bottom: 40 },
-        titleMinWidth: 0,
-        title: "_LeftToTest".loc(),
-        target: 'Tasks.assignmentsController',
-        action: 'setLeftToTestAttributeFilter'
-      }),
-      
-      SC.ButtonView.design({
-        layout: { width: 80, height: 30, right: 10, bottom: 40 },
-        titleMinWidth: 0,
-        title: "_ShowAll".loc(),
-        target: 'Tasks.assignmentsController',
-        action: 'clearAttributeFilter'
       }),
       
       SC.ButtonView.design({
         layout: { width: 80, height: 30, left: 10, bottom: 8 },
         titleMinWidth: 0,
         title: "_LeftTodo".loc(),
+        toolTip: "_LeftTodoTooltip".loc(),
         target: 'Tasks.assignmentsController',
         action: 'setLeftTodoAttributeFilter'
+      }),
+      
+      SC.ButtonView.design({
+        layout: { width: 95, height: 30, centerX: 0, bottom: 40 },
+        titleMinWidth: 0,
+        title: "_LeftToTest".loc(),
+        toolTip: "_LeftToTestTooltip".loc(),
+        target: 'Tasks.assignmentsController',
+        action: 'setLeftToTestAttributeFilter'
       }),
       
       SC.ButtonView.design({
         layout: { width: 95, height: 30, centerX: 0, bottom: 8 },
         titleMinWidth: 0,
         title: "_WhatToShip".loc(),
+        toolTip: "_WhatToShipTooltip".loc(),
         target: 'Tasks.assignmentsController',
         action: 'setWhatToShipAttributeFilter'
+      }),
+      
+      SC.ButtonView.design({
+        layout: { width: 80, height: 30, right: 10, bottom: 40 },
+        titleMinWidth: 0,
+        title: "_ShowAll".loc(),
+        toolTip: "_ShowAllTooltip".loc(),
+        target: 'Tasks.assignmentsController',
+        action: 'clearAttributeFilter'
       }),
       
       SC.ButtonView.design({

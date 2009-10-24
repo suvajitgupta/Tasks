@@ -126,10 +126,15 @@ SC.stringsFor('English', {
   
   // Popup Pane/Panel strings
   '_Troubled': "Troubled",
+  '_TroubledTooltip': "Manage by exception - see risky and failed tasks",
   '_LeftTodo': "Left Todo",
+  '_LeftTodoTooltip': "Get to the finish line - see what's left to do",
   '_LeftToTest': "Left to Test",
+  '_LeftToTestTooltip': "Ensure quality - see what is left to validate",
   '_WhatToShip': "What to Ship",
+  '_WhatToShipTooltip': "Deliver results - see what is ready for primetime",
   '_ShowAll': "Show All",
+  '_ShowAllTooltip': "Clear attribute filter - show all taaks",
   '_Cancel': "Cancel",
   '_Close': "Close",
   '_Apply': "Apply",
