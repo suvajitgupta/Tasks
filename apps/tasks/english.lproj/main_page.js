@@ -4,8 +4,9 @@
 /*globals CoreTasks Tasks sc_require */
 
 sc_require('core');
-sc_require('views/title');
-
+sc_require('mixins/tooltip');
+sc_require('mixins/simple_button');
+sc_require('mixins/localized_label');
 /** @namespace
 
   This page lays out the Tasks application user interface.
