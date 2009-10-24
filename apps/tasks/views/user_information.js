@@ -27,7 +27,7 @@ Tasks.UserInformationView = SC.View.extend(
     this.loginNameField = this.createChildView(SC.TextFieldView.extend({
       layout: { top: 10, left: 90, height: 20, width: 200 },
       hint: "_Initials".loc(),
-      valueBinding: SC.binding('*.content.loginName', this).toLocale()
+      valueBinding: SC.binding('*content.loginName', this).toLocale()
     }));
     childViews.push(this.loginNameField);
     
@@ -40,7 +40,7 @@ Tasks.UserInformationView = SC.View.extend(
     this.fullNameField = this.createChildView(SC.TextFieldView.extend({
       layout: { top: 42, left: 90, height: 20, width: 200 },
       hint: "_FirstLast".loc(),
-      valueBinding: SC.binding('*.content.name', this).toLocale()
+      valueBinding: SC.binding('*content.name', this).toLocale()
     }));
     childViews.push(this.fullNameField);
     
@@ -54,7 +54,7 @@ Tasks.UserInformationView = SC.View.extend(
       layout: { top: 74, left: 90, height: 20, width: 200 },
       localize: YES,
       objects: CoreTasks.roles,
-      valueBinding: SC.binding('*.content.role', this)
+      valueBinding: SC.binding('*content.role', this)
     }));
     childViews.push(this.roleField);
     
@@ -69,7 +69,7 @@ Tasks.UserInformationView = SC.View.extend(
       validator: SC.Validator.EmailOrEmpty,
       errorLabel: "_InvalidEmailAddress".loc(),
       hint: "_EmailAddress".loc(),
-      valueBinding: SC.binding('*.content.emailAddress', this).toLocale()
+      valueBinding: SC.binding('*content.emailAddress', this).toLocale()
     }));
     childViews.push(this.emailField);
     
@@ -83,7 +83,7 @@ Tasks.UserInformationView = SC.View.extend(
       layout: { top: 138, left: 90, height: 20, width: 200 },
       hint: "_PasswordHint".loc(),
       isPassword: YES,
-      valueBinding: SC.binding('*.content.password', this).toLocale()
+      valueBinding: SC.binding('*content.password', this).toLocale()
     }));
     childViews.push(this.passwordField);
     
