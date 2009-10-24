@@ -4,6 +4,8 @@
 /*globals CoreTasks Tasks sc_require*/
 sc_require('core');
 sc_require('lib/sha1');
+sc_require('views/user_information');
+
 /**
 
   This will serve as the responder to all signup actions
