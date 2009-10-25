@@ -29,8 +29,8 @@ CoreTasks.Record = SC.Record.extend({
    */
   displayId: function() {
     var id = this.get('id');
-    if(id < 0) id = '-----';
-    return '#' + id;
+    if(id < 0) return '-----';
+    else return '#' + id;
   }.property('id').cacheable(),
 
   /**

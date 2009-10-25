@@ -8,13 +8,13 @@ Project:
 	id*: <Number>, # primary key
 	name*: <String>, # title
 	timeLeft: <Number>, # amount of time left in days
-	tasks: Array<Number> # array of Task ids
+	description: <String>, # multi-line additional information such as project start/end dates, goals, et al
 ##################################################
 Task:
 {
 	id*: <Number>, # primary key
-	priority: Enum<String> ("High" | "_Medium_" | "Low"), # High ones must be completed, Low ones not included in effort subtotals
 	name*: <String>, # one-line summary
+	priority: Enum<String> ("High" | "_Medium_" | "Low"), # High ones must be completed, Low ones not included in effort subtotals
 	effort: <Number> # effort estimate => actual, in days
 	submitter: <Number>, # id of User who submitted this Task
 	assignee: <Number> # id of User to whom this Task is assigned
