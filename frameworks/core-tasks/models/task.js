@@ -67,6 +67,11 @@ CoreTasks.Task = CoreTasks.Record.extend({
   name: SC.Record.attr(String, { isRequired: YES, defaultValue: CoreTasks.NEW_TASK_NAME }),
 
   /**
+   * A back-pointer to the project that this task belongs to.
+   */
+  projectId: SC.Record.attr(Number),
+
+  /**
    * The type of the task (see below for possible values).
    */
   type: SC.Record.attr(String, {
@@ -105,11 +110,6 @@ CoreTasks.Task = CoreTasks.Record.extend({
       CoreTasks.TASK_STATUS_RISKY
     ]
    }),
-
-  /**
-   * A back-pointer to the project that this task belongs to.
-   */
-  projectId: SC.Record.attr(Number),
 
   developmentStatus: function(key, value){
      var currentStatus = this.get('statusString');
