@@ -19,7 +19,7 @@ Task:
 	submitter: <Number>, # id of User who submitted this Task
 	assignee: <Number> # id of User to whom this Task is assigned
 	type: Enum<String>, ("Feature" | "Bug" | "_Other_") # kind of Task to support testing workflow
-	status: Enum<String> ("_Planned_" | "Active" | "Done" | "Risky"), # development status
+	statusString: Enum<String> ("_Planned_" | "Active" | "Done" | "Risky"), # development status
 	validation: Enum<String> ("_Untested_" | "Passed" | "Failed"), # validation status
 	description: <String>, # multi-line additional information such as Feature details, Bug reproduction steps, or Release Notes
 }

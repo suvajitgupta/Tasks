@@ -452,7 +452,7 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
       assigneeId: taskAssignee,
       submitterId: taskSubmitter,
       type: taskType,
-      status: taskStatus,
+      statusString: taskStatus,
       validation: taskValidation
     };
   }
@@ -460,9 +460,5 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
 });
 
 CoreTasks.Task.NEW_TASK_HASH = {
-  name: CoreTasks.NEW_TASK_NAME,
-  type: CoreTasks.TASK_TYPE_OTHER,
-  priority: CoreTasks.TASK_PRIORITY_MEDIUM,
-  status: CoreTasks.TASK_STATUS_PLANNED,
-  validation: CoreTasks.TASK_VALIDATION_UNTESTED
+  name: CoreTasks.NEW_TASK_NAME
 };
