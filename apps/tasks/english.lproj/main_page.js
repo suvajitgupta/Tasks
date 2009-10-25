@@ -44,7 +44,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         SC.LabelView.design(Tasks.ToolTip, {
-          layout: { centerY: 0, height: 20, centerX: -93, width: 250 },
+          layout: { centerY: 0, height: 20, centerX: -118, width: 300 },
           classNames: ['welcome-message']
         }),
       

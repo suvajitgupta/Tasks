@@ -17,7 +17,7 @@ sc_require('views/decorated_checkbox');
 
 Tasks.filterPane = SC.PanelPane.create({  
   
-  layout: { top: 78, right: 360, height: 325, width: 290 },
+  layout: { top: 78, right: 360, height: 325, width: 295 },
   
   contentView: SC.View.design({
     
@@ -117,14 +117,14 @@ Tasks.filterPane = SC.PanelPane.create({
         }),
         
         active: SC.CheckboxView.design({
-          layout: { centerX: -20, top: 4, width: 55 },
+          layout: { centerX: -25, top: 4, width: 55 },
           title: CoreTasks.TASK_STATUS_ACTIVE.loc(),
           valueBinding: 'Tasks.assignmentsController.attributeFilterStatusActive',
           classNames: [ 'task-status-active' ]
         }),
         
         done: SC.CheckboxView.design({
-          layout: { centerX: 40, top: 4, width: 50 },
+          layout: { centerX: 45, top: 4, width: 50 },
           title: CoreTasks.TASK_STATUS_DONE.loc(),
           valueBinding: 'Tasks.assignmentsController.attributeFilterStatusDone',
           classNames: [ 'task-status-done' ]
@@ -201,7 +201,7 @@ Tasks.filterPane = SC.PanelPane.create({
       }),
       
       SC.ButtonView.design({
-        layout: { width: 100, height: 30, centerX: 5, bottom: 40 },
+        layout: { width: 105, height: 30, centerX: 5, bottom: 40 },
         titleMinWidth: 0,
         title: "_LeftToTest".loc(),
         toolTip: "_LeftToTestTooltip".loc(),
@@ -210,7 +210,7 @@ Tasks.filterPane = SC.PanelPane.create({
       }),
       
       SC.ButtonView.design({
-        layout: { width: 100, height: 30, centerX: 5, bottom: 8 },
+        layout: { width: 105, height: 30, centerX: 5, bottom: 8 },
         titleMinWidth: 0,
         title: "_WhatToShip".loc(),
         toolTip: "_WhatToShipTooltip".loc(),
