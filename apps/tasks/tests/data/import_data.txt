@@ -4,7 +4,7 @@
 # Has 1 unallocated task(s)
 
 # Suvajit Gupta (SG); Has 1 task(s)
-- An unallocated, other, task done by Suvajit in no time {0} [SG] @Done
+- An unallocated, other, task done by Suvajit in no time, but with a very verbose name that will be cropped at the edge of the screen and can be seen by double clicking on the task to get the inline editor {0} [SG] @Done
 
 
 Project One # Has 4 task(s)
