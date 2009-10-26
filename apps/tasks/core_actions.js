@@ -270,7 +270,6 @@ Tasks.mixin({
       this.usersController.set('content', null);
       this.allTasksController.set('content', null);
       this.projectsController.set('content', null);
-      // FIXME: [SE] Beta: clear up All/UnallocatedTasks queries - they return shells of deleted tasks after logout!
       CoreTasks.clearData();
       this.get('assignmentsController').resetFilters();
       

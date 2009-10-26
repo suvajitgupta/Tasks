@@ -158,6 +158,7 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
 
     // Remove the ID from the data hash (Persevere doesn't like it).
     delete dataHash.id;
+    delete dataHash.tasks;
 
     // Build the request and send it off to the server.
     console.log('Creating new %@ record on server...'.fmt(recordType));
@@ -213,6 +214,7 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
 
     // Set the updated-at time on the data hash.
     dataHash.updatedAt = SC.DateTime.create().get('milliseconds');
+    delete dataHash.tasks;
 
     // Build the request and send it off to the server.
     console.log('Updating %@:%@ on server...'.fmt(recordType, id));
@@ -327,7 +329,7 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
             // This would be odd, but just in case...
             console.log('Error deleting record [%@:%@]: Unexpected server response.'.fmt(
               params.recordType, params.id));
-            store.dataSourceDidError(params.storeKey, CoreTasks.ERROR_UNEXPECTED_RESPONSE);
+            params.store.dataSourceDidError(params.storeKey, CoreTasks.ERROR_UNEXPECTED_RESPONSE);
         }
 
       } else {

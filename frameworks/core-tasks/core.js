@@ -18,9 +18,16 @@ CoreTasks = SC.Object.create({
    *
    */
   clearData: function() {
+    
+    this.allUsers.destroy();
     this.allUsers = null;
+    
+    this.allTasks.destroy();
     this.allTasks = null;
+    
+    this.allProjects.destroy();
     this.allProjects = null;
+    
     this.store.reset();
   },
 
