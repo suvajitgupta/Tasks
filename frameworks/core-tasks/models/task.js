@@ -284,17 +284,22 @@ CoreTasks.Task = CoreTasks.Record.extend({
         this.propertyDidChange('type');
       }
       
-      if(taskHash.status) {
+      if(taskHash.statusString) {
         this.propertyWillChange('statusString');
-        if(this.get('statusString') !== taskHash.status && taskHash.status !== CoreTasks.TASK_STATUS_DONE) this.writeAttribute('validation', CoreTasks.TASK_VALIDATION_UNTESTED);
-        this.writeAttribute('statusString', taskHash.status);
+        if(this.get('statusString') !== taskHash.statusString && taskHash.statusString !== CoreTasks.TASK_STATUS_DONE) this.writeAttribute('validation', CoreTasks.TASK_VALIDATION_UNTESTED);
+        this.writeAttribute('statusString', taskHash.statusString);
         this.propertyDidChange('statusString');
       }
       
       if(taskHash.validation) {
-        this.propertyWillChange('validation');
-        this.writeAttribute('validation', taskHash.validation);
-        this.propertyDidChange('validation');
+        if(this.get('statusString') !== CoreTasks.TASK_STATUS_DONE && taskHash.validation !== CoreTasks.TASK_VALIDATION_UNTESTED) {
+          console.log('Task Editing Error - validation of Passed/Failed only possible for status Done: ' + taskHash.name);
+        }
+        else {
+          this.propertyWillChange('validation');
+          this.writeAttribute('validation', taskHash.validation);
+          this.propertyDidChange('validation');
+        }
       }
 
     } else {
@@ -446,7 +451,7 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
     var taskValidation = fillDefaults? CoreTasks.TASK_VALIDATION_UNTESTED : null;
     if(taskValidationMatches) {
       taskValidation = '_' + taskValidationMatches[1];
-      if(taskValidation !== CoreTasks.TASK_VALIDATION_UNTESTED && taskStatus !== CoreTasks.TASK_STATUS_DONE) {
+      if(taskStatus && taskStatus !== CoreTasks.TASK_STATUS_DONE && taskValidation !== CoreTasks.TASK_VALIDATION_UNTESTED) {
         taskValidation = null;
         console.log('Task Parsing Error - validation of Passed/Failed only possible for status Done: ' + taskName);
       }
