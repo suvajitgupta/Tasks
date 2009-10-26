@@ -223,10 +223,10 @@ Tasks.filterPane = SC.PanelPane.create({
         layout: { width: 95, height: 30, centerX: -5, bottom: 40 },
         titleMinWidth: 0,
         classNames: ['quickfilter-label'],
-        title: "_WhatToShip".loc(),
-        toolTip: "_WhatToShipTooltip".loc(),
+        title: "_ReadyToShip".loc(),
+        toolTip: "_ReadyToShipTooltip".loc(),
         target: 'Tasks.assignmentsController',
-        action: 'setWhatToShipAttributeFilter'
+        action: 'setReadyToShipAttributeFilter'
       }),
       
       SC.ButtonView.design({
