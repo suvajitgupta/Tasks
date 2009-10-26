@@ -104,6 +104,8 @@ Tasks.TaskItemView = SC.ListItemView.extend(
               classNames: [ 'onscreen-help'],
               value: "_EffortOnscreenHelp".loc()
             }),
+            
+            // TODO: [SG] Beta: shrink onscreen help and add project selection field
 
             SC.LabelView.design({
               layout: { top: 75, left: 10, height: 17, width: 100 },
