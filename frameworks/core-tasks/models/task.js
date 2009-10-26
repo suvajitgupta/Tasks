@@ -100,7 +100,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
   /**
    * The development status of the task (see below for allowed values).
    */
-  statusString: SC.Record.attr(String, {
+  developmentStatus: SC.Record.attr(String, {
     isRequired: YES,
     defaultValue: CoreTasks.TASK_STATUS_PLANNED,
     allowed: [
@@ -111,16 +111,16 @@ CoreTasks.Task = CoreTasks.Record.extend({
     ]
    }),
 
-  developmentStatus: function(key, value){
-     var currentStatus = this.get('statusString');
+  developmentStatusWithValidation: function(key, value){
+     var currentStatus = this.get('developmentStatus');
      if (value && currentStatus !== value) {
-       this.set('statusString', value);
+       this.set('developmentStatus', value);
        if(value !== CoreTasks.TASK_STATUS_DONE) this.set('validation', CoreTasks.TASK_VALIDATION_UNTESTED)
      }
      else {
        return currentStatus;
      }
-   }.property('statusString').cacheable(),
+   }.property('developmentStatus').cacheable(),
 
   /**
    * The validation status of the task (see below for allowed values).
@@ -284,15 +284,15 @@ CoreTasks.Task = CoreTasks.Record.extend({
         this.propertyDidChange('type');
       }
       
-      if(taskHash.statusString) {
-        this.propertyWillChange('statusString');
-        if(this.get('statusString') !== taskHash.statusString && taskHash.statusString !== CoreTasks.TASK_STATUS_DONE) this.writeAttribute('validation', CoreTasks.TASK_VALIDATION_UNTESTED);
-        this.writeAttribute('statusString', taskHash.statusString);
-        this.propertyDidChange('statusString');
+      if(taskHash.developmentStatus) {
+        this.propertyWillChange('developmentStatus');
+        if(this.get('developmentStatus') !== taskHash.developmentStatus && taskHash.developmentStatus !== CoreTasks.TASK_STATUS_DONE) this.writeAttribute('validation', CoreTasks.TASK_VALIDATION_UNTESTED);
+        this.writeAttribute('developmentStatus', taskHash.developmentStatus);
+        this.propertyDidChange('developmentStatus');
       }
       
       if(taskHash.validation) {
-        if(this.get('statusString') !== CoreTasks.TASK_STATUS_DONE && taskHash.validation !== CoreTasks.TASK_VALIDATION_UNTESTED) {
+        if(this.get('developmentStatus') !== CoreTasks.TASK_STATUS_DONE && taskHash.validation !== CoreTasks.TASK_VALIDATION_UNTESTED) {
           console.log('Task Editing Error - validation of Passed/Failed only possible for status Done: ' + taskHash.name);
         }
         else {
@@ -336,7 +336,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
     val = this.get('type');
     if(val !== CoreTasks.TASK_TYPE_OTHER) ret += ' $' + val.loc();
     
-    val = this.get('statusString');
+    val = this.get('developmentStatus');
     if(val !== CoreTasks.TASK_STATUS_PLANNED) ret += ' @' + val.loc();
     
     val = this.get('validation');
@@ -464,7 +464,7 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
       assigneeId: taskAssignee,
       submitterId: taskSubmitter,
       type: taskType,
-      statusString: taskStatus,
+      developmentStatus: taskStatus,
       validation: taskValidation
     };
   }
