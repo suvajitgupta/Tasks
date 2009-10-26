@@ -88,7 +88,34 @@ CoreTasks.User = CoreTasks.Record.extend({
     var loginName = this.get('loginName');
     return '%@ (%@)'.fmt(name, loginName);
   }.property('name', 'loginName').cacheable(),
+  
+  /**
+   * Custom destroy to clean out task submitter/assignee for this user.
+   */
+  destroy: function() {
+    sc_super();
 
+    var id = this.get('id');
+    var store = this.get('store');
+    
+    var submittedTasks = store.find(SC.Query.local(CoreTasks.Task, "submitterId='%@'".fmt(id)));
+    if (submittedTasks) {
+      submittedTasks.forEach(function(task) {
+        task.set('submitterId', null);
+      });
+      submittedTasks.destroy();
+    }
+    
+    var assignedTasks = store.find(SC.Query.local(CoreTasks.Task, "assigneeId='%@'".fmt(id)));
+    if (assignedTasks) {
+      assignedTasks.forEach(function(task) {
+        task.set('assigneeId', null);
+      });
+      assignedTasks.destroy();
+    }
+    
+  },
+  
   /**
    * A read-only computed property that returns the list of tasks assigned to this user
    * before it was first persisted.

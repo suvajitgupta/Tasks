@@ -434,7 +434,6 @@ Tasks.mixin({
 
       // Delete user.
       user.destroy();
-      // TODO: [SG] Beta: set task submitter/assignee to null if they are set to deleted user
     
       // Select the first user in the list.
       var listView = Tasks.getPath('settingsPage.panel.usersList');
