@@ -64,19 +64,19 @@
 			<p>Filtering results are displayed as soon as you stop typing in the assignee or search text boxes.</p>
 		<h3>Clustering</h3>
 			<p>Prefix names of related tasks with <i>Use Case</i> or <i>Component</i> names so that these tasks can be found by searching for that prefix.  This is a simple solution for task clustering avoiding the complications of nested (sub) tasks or tagging/tag management.</p>
+		<h3>Traceability</h3>
+			<p><app>tasks</app> allows you to trace back to upstream Analysis artifacts via the task description by adding a link to an external Wiki page or Content Management System (CMS) artifact.  If you need attachments (like a GUI wireframe HTML or visual mockup image you must host them somewhere and link to them.  There is no support for inter-task dependencies/critical path analysis - you can simply reference the ID(s) of upstream tasks in the description.</p>
 		<h3>Load Balancing</h3>
 			<p>To use this feature, you must specify the <i>time left</i> in a project and the <i>effort</i> for tasks as integer or decimal numbers, optionally appended with an unit of 'd' (days) or 'h' (hours).  If no time unit is specified it is assumed to mean 'days.'  Task effort may also be expressed as a range like: 3-5d.<app>tasks</app> will automatically total the efforts for each assignee (excluding <i>Low</i> priority tasks) and indicate their loading via color coding. A "?" is appended for range-based subtotals including tasks with unspecified efforts.</p>
 			<p>Since there are a certain number of days in a release before <i>Feature Freeze</i> - set the project's <i>time left</i> accordingly.  During this time decrement the <i>time left</i> every day and load balance the remaining work across the team. As the team moves towards <i>Code Freeze</i>, set the <i>time left</i> to the number of days you allocate to code stabilization.  This way, the team can run very tight cycles and converge on the milestones of <i>Code/Feature Freezes.</i>
-			<h3>Traceability</h3>
-				<p><app>tasks</app> allows you to trace back to upstream Analysis artifacts via the task description by adding a link to an external Wiki page or Content Management System (CMS) artifact.  If you need attachments (like a GUI wireframe HTML or visual mockup image you must host them somewhere and link to them.  There is no support for inter-task dependencies/critical path analysis - you can simply reference the ID(s) of upstream tasks in the description.</p>
 	<h2>Advanced Features</h2>
 		<p style="margin-left: 5px">Lets close out with some <app>tasks</app> power user features.</p>
-		<h3>Inline Editing</h3>
-			<p>Type in a project's <i>time left</i> inline by typing it within curly braces. Type in a tasks' properties/attributes inline using the same syntax for Import/Export. Reassign a task to another user by typing in their login name within square brackets inline at the end of a task.</p>
 		<h3>Data Exchange</h3>
 			<p><app>tasks</app> allows data to be exchanged via a simple import/export mechanism.  Use the "Import" button in the toolbar to bring data into the application.  Use the "Export" button to output <app>tasks</app> data to another installation of the application or some other system.</p>
 		<h3>Bulk Data Entry</h3>
 			<p>Use the Import panel to type in a bunch of tasks at once - basically use it as a simple text editor.  You may use the rich syntax shown at the top of the import panel while performing bulk data entry if you prefer to type.</p>
+		<h3>Inline Editing</h3>
+			<p>Double click on a project and specify its <i>time left</i> as a number enclosed by curly braces. Double click on a task and specify its properties/attributes inline using the same syntax for Import/Export. Reassign a task to another user by typing in their login name within square brackets inline at the end of a task.</p>
 		<h3>Configuration and Administration</h3>
 			<p>Click on the "Settings" button in the dock to access the User Manager panel.  Here you can add/modify/delete users and their roles.  When a user is deleted, all task submitter and assignee fields referencing this user will be cleared.</p>
 	<h2>Best Practices</h2>
@@ -85,24 +85,22 @@
 			<p>Make each task SMART (<i>Specific, Measurable, Attainable, Resourced, Timebound</i>) ensuring that the task: (1) is self-explanatory, (2) has clear success criteria to allow validation, (3) has realistic estimates which are refined as you proceed, (4) maps out dependencies like analysis, design, infrastructure, test data, et al, and (5) is broken into small chunks each taking no more than a day or two.</p>
 		<h3>Baseline Plans</h3>
 			<p>Export/keep aside a snapshot of the tasks for a release after people have committed to a plan and see how the team fares vs. the plan at the end of the release during an XP <i>ProjectRetrospective</i> or Scrum <i>Sprint Review Meeting</i>.</p>
-		<h3>Chunk Up Work</h3>
-			<p>If you are almost finished with a task and have a small final portion left, split up the task and mark the completed portion <i>Done</i> - this will give you credit for the completed portion and avoid the <i>overloaded</i> assignee label! <app>tasks</app>  doesn't preserve the original estimates and support partial time logging - it is flexible and allows a task to have no estimate at the start, refined to a range estimate, and finalized to an actual at the end.</p>
+		<h3>Plan Long Term</h3>
+			<p>Map out future releases and background initiatives as projects - this allows you to plan future work and provides a place to capture ideas and reallocate tasks that don't fit into current schedules.</p>
 		<h3>Surface Risks</h3>
 			<p>Developers should flag a task as <i>Risky</i> if the task has unresolved ambiguity, is blocked owing to other dependencies, blew up during implementation and now will take significantly longer, and so on.  Add notes to the task description explaining why the task is at risk. This provides advance visibility to potential slippage or deviation ahead of time so corrective action can be taken. No problems are swept under the carpet. No one is penalized for recognizing or describing an unforeseen problem.</p>
 		<h3>Manage by Exception</h3>
 			<p>Assuming team members are surfacing risks, Managers can set their tasks attribute filter to only show <i>Risky</i> or <i>Failed</i> tasks. At daily Scrum huddles use <app>tasks</app> to monitor progress, review risks/discuss mitigations, and load balance remaining work across team members (XP's <i>CollectiveCodeOwnership</i> helps with distributing work).</p>
 		<h3>Collaborate Online</h3>
 			<p>Use the task <i>submitter</i> to indicate your <i>collaborator</i> - the person you will consult with as you work on this task.  Add tasks for people instead of walking up and interrupting them - they can review your requested tasks at their leisure and decide when to address them.  As you have ideas or notice defects, add tasks to capture them.</p>
+		<h3>Chunk Up Work</h3>
+			<p>If you are almost finished with a task and have a small final portion left, split up the task and mark the completed portion <i>Done</i> - this will give you credit for the completed portion and avoid the <i>overloaded</i> assignee label! <app>tasks</app>  doesn't preserve the original estimates and support partial time logging - it is flexible and allows a task to have no estimate at the start, refined to a range estimate, and finalized to an actual at the end.</p>
 		<h3>Capture Release Notes</h3>
 			<p>As you finish a task, document its Release Notes in real time (what works, what doesn't, limitations, et al).  This is a very effective way for Developers to document what Testers need to know when they validate completed tasks.</p>
-		<h3>Plan Long Term</h3>
-			<p>Map out future releases and background initiatives as projects - this allows you to plan future work and provides a place to capture ideas and reallocate tasks that don't fit into current schedules.</p>
 		<h3>Use Templates</h3>
 			<p>You can create project/task <i>templates</i> by exporting data and bringing them back in via import.  This is particularly useful when you have a boilerplate set of items you reuse as you start initiatives. You can create the template data outside of <app>tasks</app> as well.  Templated data gives you a jump start after which you can add/modify/delete items at will.</p>
-	<h2>Reference</h2>
+	<h2>Entity/Attribute Reference</h2>
 		<p style="margin-left: 5px">This section provides details about the various entities used in <app>tasks</app>.</p>
-		<h3>User</h3>
-			<p>A team member with a <i>login name</i> and <i>full name</i> as well as a <i>role</i> (one of Manager, Developer, or Tester).  A user logs into the <app>tasks</app> application using an optional <i>password</i> and are task <i>assignees</i> and <i>submitters</i>.</p>
 		<h3>Task</h3>
 			<p>An atomic unit of work with several attributes:</p>
 			<ul>
@@ -119,5 +117,7 @@
 			</ul>
 			<h3>Project</h3>
 				<p>An initiative with a <i>name</i>, optional <i>time left</i>, zero or more tasks, and an optional <i>description</i>.</p>
+			<h3>User</h3>
+				<p>A team member with a <i>login name</i> and <i>full name</i> as well as a <i>role</i> (one of Manager, Developer, or Tester).  A user logs into the <app>tasks</app> application using an optional <i>password</i> and can be a task <i>submitter</i> and/or <i>assignee</i>.</p>
 </body>
 </html>
