@@ -32,36 +32,65 @@ Tasks.exportDataController = SC.ObjectController.create(
   },
   
   /**
+  * Export data for a project.
+  *
+  * @param {Object} project whose data is to be exported.
+  * @returns {String) return a string with project/task data exported in it.
+  */
+  _exportProjectData: function(project) {
+    
+    var ret = '';
+    var tasks = project.get('tasks');
+    var len = tasks.get('length');
+    
+    ret += project.exportData();
+    for (var i = 0; i < len; i++) {
+      ret += tasks.objectAt(i).exportData();
+    }
+    ret += '\n';
+    
+    return ret;
+    
+  },
+  
+  /**
   * Export data for all projects.
   * @returns {String) return a string with all Tasks data exported in it.
   */
   _exportAllData: function() {
+    
     var ret = '';
     var pc = Tasks.get('projectsController');
+    var that = this;
+    
+    // First export unallocated tasks
     pc.forEach(function(project){
-      
       var name = project.get('name');
-      if(name === CoreTasks.ALL_TASKS_NAME.loc()) return; // skip AllTasks Project
-      
-      var tasks = project.get('tasks');
-      var len = tasks.get('length');
-      if(len === 0 && name === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) return; // skip empty UnallocatedTasks Project
-      
-      ret += project.exportData();
-      for (var i = 0; i < len; i++) {
-        ret += tasks.objectAt(i).exportData();
+      if(name === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) {
+        var tasks = project.get('tasks');
+        var len = tasks.get('length');
+        if(len === 0 && name === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) return; // skip empty UnallocatedTasks Project
+        ret += that._exportProjectData(project);
       }
-      ret += '\n';
-      
     }, pc);
+    
+    // Next export allocated tasks
+    pc.forEach(function(project){
+      var name = project.get('name');
+      if(name === CoreTasks.ALL_TASKS_NAME.loc() || name === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) return; // skip All and Unallocated Tasks Projects
+      ret += that._exportProjectData(project);
+    }, pc);
+    
     return ret;
+    
   },
-  
+
   /**
   * Export displayed tasks.
   * @returns {String) return a string with displayed Tasks data exported in it.
   */
   _exportDisplayedData: function() {
+    
     var ret = '';
     var tasksTree = Tasks.get('tasksController').get('content');
     var assignmentNodes = tasksTree.get('treeItemChildren');
@@ -76,7 +105,9 @@ Tasks.exportDataController = SC.ObjectController.create(
         ret += tasks.objectAt(j).exportData();
       }
     }
+    
     return ret;
+    
   },
   
   /**
