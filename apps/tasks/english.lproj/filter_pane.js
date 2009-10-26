@@ -236,7 +236,7 @@ Tasks.filterPane = SC.PanelPane.create({
         title: "_Showstoppers".loc(),
         toolTip: "_ShowstoppersTooltip".loc(),
         target: 'Tasks.assignmentsController',
-        action: 'clearAttributeFilter'
+        action: 'setShowstoppersAttributeFilter'
       }),
       
       SC.ButtonView.design({
