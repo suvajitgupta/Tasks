@@ -1,19 +1,33 @@
-#A comment
+# Tasks import test data
 
-- An unallocated, done, task [SG] @Done
 
-Project One
+# Has 1 unallocated task(s)
+
+# Suvajit Gupta (SG); Has 1 task(s)
+- An unallocated, other, task done by Suvajit in no time {0} [SG] @Done
+
+
+Project One # Has 4 task(s)
+
+# Suvajit Gupta (SG); Has 3 task(s)
 ^ A high-priority, risky, other, task that will take 2 hours submitted by and assigned to Suvajit {2h} <SG> [SG] @Risky
 | description line1
 | description line2
-- A medium priority, active, bug submitted by an unknown user and assigned to Suvajit with unspecified effort <AB> [SG] @Active $Bug
-- A medium priority bug assigned to Suvajit, which was done in 3 days but failed validation [SG] {3d} $Bug @Done %Failed
-v A low priority, planned, feature not assigned to anyone is expected to take a few days {3-5} $Feature @Planned
+- A medium priority, active, bug submitted by an unknown user and assigned to Suvajit with unspecified effort [SG] $Bug @Active
+- A medium priority bug assigned to Suvajit, which was done in 3 days but failed validation {3d} [SG] $Bug @Done %Failed
 
-Project Two With a Long Name That Will Take One Week {5d}
-^ A high priority, planned, feature assigned to Suvajit that is expected to take 6-7 days [SG] {6-7d} $Feature
-- A medium priority bug assigned to Suvajit that was done in 1 day and failed [SG] {1d} $Bug @Done %Failed
-v A low priority feature assigned to Suvajit that was completed in 2 days and it still not tested [SG] {2d} $Feature @Done
+# Unassigned; Has 1 task(s)
+v A low priority, planned, feature not assigned to anyone is expected to take a few days {3-5d} $Feature
+
+
+Project Two With a Long Name That Will Take One Week {5d} # Has 6 task(s)
+
+# Suvajit Gupta (SG); Has 4 task(s)
+^ A high priority, planned, feature assigned to Suvajit that is expected to take 6-7 days {6-7d} [SG] $Feature
+- A medium priority bug assigned to Suvajit that was done in 1 day and failed {1d} [SG] $Bug @Done %Failed
+v A low priority feature assigned to Suvajit that was completed in 2 days and it still not tested {2d} [SG] $Feature @Done
 ^ A high priority feature assigned to Suvajit that is completed in unspecified time and passed [SG] $Feature @Done %Passed
+
+# Unassigned; Has 2 task(s)
 - A medium priority, planned, other, task that takes two-and-a-half hours and is unassigned {2.5d}
-v A low priority bug assigned to a non-existent user that is planned and failed (an unacceptable combination) [XY] $Bug %Failed
+v A low priority bug assigned to a non-existent user that is planned and failed (an unacceptable combination) $Bug
