@@ -47,6 +47,12 @@ Tasks.attributeFilterWhatToShip = [
   CoreTasks.TASK_VALIDATION_PASSED
 ];
 
+Tasks.attributeFilterShowstoppers = [
+  CoreTasks.TASK_TYPE_BUG,
+  CoreTasks.TASK_PRIORITY_HIGH,
+  CoreTasks.TASK_STATUS_PLANNED, CoreTasks.TASK_STATUS_ACTIVE, CoreTasks.TASK_STATUS_RISKY
+];
+
 Tasks.assignmentsController = SC.ArrayController.create(
 /** @scope Tasks.assignmentsController.prototype */ {
   
@@ -158,6 +164,10 @@ Tasks.assignmentsController = SC.ArrayController.create(
 
   setWhatToShipAttributeFilter: function() {
     this.set('attributeFilterCriteria', Tasks.attributeFilterWhatToShip.slice(0));
+  },
+
+  setShowstoppersAttributeFilter: function() {
+    this.set('attributeFilterCriteria', Tasks.attributeFilterShowstoppers.slice(0));
   },
 
   clearAttributeFilter: function() {

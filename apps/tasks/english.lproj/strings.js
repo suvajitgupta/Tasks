@@ -125,6 +125,8 @@ SC.stringsFor('English', {
   "_Signup": "Signup",
   
   // Popup Pane/Panel strings
+  '_QuickFilters': "QUICK FILTERS",
+  '_QuickFiltersTooltip': "Most commonly used filters",
   '_Troubled': "Troubled",
   '_TroubledTooltip': "Manage by exception - see risky and failed tasks",
   '_LeftTodo': "Left Todo",
@@ -132,7 +134,9 @@ SC.stringsFor('English', {
   '_LeftToTest': "Left to Test",
   '_LeftToTestTooltip': "Ensure quality - see what is left to validate",
   '_WhatToShip': "What to Ship",
-  '_WhatToShipTooltip': "Deliver results - see what is ready for primetime",
+  '_WhatToShipTooltip': "Deliver results - see what is ready for prime time",
+  '_Showstoppers': "Showstoppers",
+  '_ShowstoppersTooltip': "Review blockers - see remaining high priority bugs",
   '_ShowAll': "Show All",
   '_ShowAllTooltip': "Clear attribute filter - show all tasks",
   '_Cancel': "Cancel",

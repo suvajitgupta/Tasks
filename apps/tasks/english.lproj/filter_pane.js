@@ -17,7 +17,7 @@ sc_require('views/decorated_checkbox');
 
 Tasks.filterPane = SC.PanelPane.create({  
   
-  layout: { top: 78, right: 360, height: 325, width: 295 },
+  layout: { top: 78, right: 360, height: 370, width: 295 },
   
   contentView: SC.View.design({
     
@@ -179,12 +179,20 @@ Tasks.filterPane = SC.PanelPane.create({
       }),
       
       SC.SeparatorView.design({
-        layout: { bottom: 75, left: 10, right: 10, height: 4 }
+        layout: { bottom: 125, left: 10, right: 10, height: 4 }
+      }),
+
+      SC.LabelView.design({
+        layout: { bottom: 95, left: 10, right: 10, height: 24 },
+        classNames: ['task-attribute-set-title'],
+        value: "_QuickFilters".loc(),
+        toolTip: "_QuickFiltersTooltip".loc()
       }),
 
       SC.ButtonView.design({
-        layout: { width: 85, height: 30, left: 10, bottom: 40 },
+        layout: { width: 80, height: 30, left: 10, bottom: 72 },
         titleMinWidth: 0,
+        classNames: ['quickfilter-label'],
         title: "_Troubled".loc(),
         toolTip: "_TroubledTooltip".loc(),
         target: 'Tasks.assignmentsController',
@@ -192,8 +200,9 @@ Tasks.filterPane = SC.PanelPane.create({
       }),
       
       SC.ButtonView.design({
-        layout: { width: 85, height: 30, left: 10, bottom: 8 },
+        layout: { width: 80, height: 30, left: 10, bottom: 40 },
         titleMinWidth: 0,
+        classNames: ['quickfilter-label'],
         title: "_LeftTodo".loc(),
         toolTip: "_LeftTodoTooltip".loc(),
         target: 'Tasks.assignmentsController',
@@ -201,8 +210,9 @@ Tasks.filterPane = SC.PanelPane.create({
       }),
       
       SC.ButtonView.design({
-        layout: { width: 105, height: 30, centerX: 5, bottom: 40 },
+        layout: { width: 95, height: 30, centerX: -5, bottom: 72 },
         titleMinWidth: 0,
+        classNames: ['quickfilter-label'],
         title: "_LeftToTest".loc(),
         toolTip: "_LeftToTestTooltip".loc(),
         target: 'Tasks.assignmentsController',
@@ -210,8 +220,9 @@ Tasks.filterPane = SC.PanelPane.create({
       }),
       
       SC.ButtonView.design({
-        layout: { width: 105, height: 30, centerX: 5, bottom: 8 },
+        layout: { width: 95, height: 30, centerX: -5, bottom: 40 },
         titleMinWidth: 0,
+        classNames: ['quickfilter-label'],
         title: "_WhatToShip".loc(),
         toolTip: "_WhatToShipTooltip".loc(),
         target: 'Tasks.assignmentsController',
@@ -219,8 +230,19 @@ Tasks.filterPane = SC.PanelPane.create({
       }),
       
       SC.ButtonView.design({
-        layout: { width: 75, height: 30, right: 10, bottom: 40 },
+        layout: { width: 90, height: 30, right: 10, bottom: 72 },
         titleMinWidth: 0,
+        classNames: ['quickfilter-label'],
+        title: "_Showstoppers".loc(),
+        toolTip: "_ShowstoppersTooltip".loc(),
+        target: 'Tasks.assignmentsController',
+        action: 'clearAttributeFilter'
+      }),
+      
+      SC.ButtonView.design({
+        layout: { width: 90, height: 30, right: 10, bottom: 40 },
+        titleMinWidth: 0,
+        classNames: ['quickfilter-label'],
         title: "_ShowAll".loc(),
         toolTip: "_ShowAllTooltip".loc(),
         target: 'Tasks.assignmentsController',
@@ -228,7 +250,7 @@ Tasks.filterPane = SC.PanelPane.create({
       }),
       
       SC.ButtonView.design({
-        layout: { width: 75, height: 30, right: 10, bottom: 8 },
+        layout: { width: 80, height: 30, right: 10, bottom: 8 },
         titleMinWidth: 0,
         keyEquivalent: 'escape',
         isDefault: YES,

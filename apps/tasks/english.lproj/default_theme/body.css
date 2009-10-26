@@ -73,6 +73,14 @@ body {
   left: 38px !important;
 }
 
+.quickfilter-label {
+  font-size: 10px !important;
+  font-weight: bold !important;
+  color: #000 !important;
+  text-align: center !important;
+}
+
+
 /*
 // TODO: [MG] sprite/delete all standalone image files
 // TODO: [MG] delete images in static PNG that we don’t use
