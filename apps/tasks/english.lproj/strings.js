@@ -88,7 +88,7 @@ SC.stringsFor('English', {
   '_Effort:': "Effort:",
   '_EffortOnscreenHelp': "You may leave effort unspecified, enter a decimal value like 0.25, or a range like 2-3 (time units are 'd' or 'h')",
   '_Description:': "Description:",
-  '_SubmitterTooltip': "Submitter is ",
+  '_SubmitterTooltip': "Submitted by ",
   '_TaskEffortTooltip': "Effort (if specified) shown on right",
   '_IdTooltip': "Unique ID for task; Dashes indicate unsaved tasks; Background color indicates validation status",
   '_EditorTooltip': "Click to view/edit task details (submitter, assignee, effort, and description)",

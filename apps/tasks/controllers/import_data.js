@@ -66,7 +66,7 @@ Tasks.importDataController = SC.ObjectController.create(
               taskHash.assigneeId = assigneeUser.get('id');
             }
             else {
-              console.log('Task Import Error - no such assignee: ' + taskHash.assignee);
+              console.log('Task Import Error - no such assignee: ' + taskHash.assigneeId);
               taskHash.assignee = null;
             }
           }
@@ -78,7 +78,7 @@ Tasks.importDataController = SC.ObjectController.create(
               
             }
             else {
-              console.log('Task Import Error - no such submitter: ' + taskHash.submitter);
+              console.log('Task Import Error - no such submitter: ' + taskHash.submitterId);
               taskHash.submitter = null;
             }
           }
