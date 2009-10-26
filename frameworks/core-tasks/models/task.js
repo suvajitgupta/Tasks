@@ -255,19 +255,27 @@ CoreTasks.Task = CoreTasks.Record.extend({
       }
       
       if(taskHash.submitterId) {
-        this.propertyWillChange('submitterId');
         var submitterUser = CoreTasks.getUser(taskHash.submitterId);
-        if (!submitterUser) console.log('Task Editing Error - no such submitter: ' + taskHash.submitterId);
-        else this.writeAttribute('submitterId', submitterUser.get('id'));
-        this.propertyDidChange('submitterId');
+        if (!submitterUser) {
+          console.log('Task Editing Error - no such submitter: ' + taskHash.submitterId);
+        }
+        else {
+          this.propertyWillChange('submitterId');
+          this.writeAttribute('submitterId', submitterUser.get('id'));
+          this.propertyDidChange('submitterId');
+        }
       }
       
       if(taskHash.assigneeId) {
-        this.propertyWillChange('assigneeId');
         var assigneeUser = CoreTasks.getUser(taskHash.assigneeId);
-        if (!assigneeUser) console.log('Task Editing Error - no such assignee: ' + taskHash.assigneeId);
-        else this.writeAttribute('assigneeId', assigneeUser.get('id'));
-        this.propertyDidChange('assigneeId');
+        if (!assigneeUser) {
+          console.log('Task Editing Error - no such assignee: ' + taskHash.assigneeId);
+        }
+        else {
+          this.propertyWillChange('assigneeId');
+          this.writeAttribute('assigneeId', assigneeUser.get('id'));
+          this.propertyDidChange('assigneeId');
+        }
       }
       
       if(taskHash.type) {
@@ -284,14 +292,9 @@ CoreTasks.Task = CoreTasks.Record.extend({
       }
       
       if(taskHash.validation) {
-        if(taskHash.validation !== CoreTasks.TASK_VALIDATION_UNTESTED && this.readAttribute('statusString') !== CoreTasks.TASK_STATUS_DONE) {
-          console.log('Task Editing Error - validation of Passed/Failed only possible for status Done');
-        }
-        else {
-          this.propertyWillChange('validation');
-          this.writeAttribute('validation', taskHash.validation);
-          this.propertyDidChange('validation');
-        }
+        this.propertyWillChange('validation');
+        this.writeAttribute('validation', taskHash.validation);
+        this.propertyDidChange('validation');
       }
 
     } else {
@@ -443,6 +446,10 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
     var taskValidation = fillDefaults? CoreTasks.TASK_VALIDATION_UNTESTED : null;
     if(taskValidationMatches) {
       taskValidation = '_' + taskValidationMatches[1];
+      if(taskValidation !== CoreTasks.TASK_VALIDATION_UNTESTED && taskStatus !== CoreTasks.TASK_STATUS_DONE) {
+        taskValidation = null;
+        console.log('Task Parsing Error - validation of Passed/Failed only possible for status Done: ' + taskName);
+      }
     }
     
     return {
