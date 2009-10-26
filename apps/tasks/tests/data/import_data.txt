@@ -8,7 +8,7 @@ Project One
 | description line2
 - A medium priority, active, bug submitted by an unknown user and assigned to Suvajit with unspecified effort <AB> [SG] @Active $Bug
 - A medium priority bug assigned to Suvajit, which was done in 3 days but failed validation [SG] {3d} $Bug @Done %Failed
-v A low priority, planned, feature development task not assigned to anyone will take a few days {3-5} $Feature @Planned
+v A low priority, planned, feature not assigned to anyone is expected to take a few days {3-5} $Feature @Planned
 
 Project Two With a Long Name That Will Take One Week {5d}
 ^ A high priority, planned, feature assigned to Suvajit that is expected to take 6-7 days [SG] {6-7d} $Feature
