@@ -78,7 +78,7 @@ v Enable Task Validation radio buttons only when in Done status [SG] <JH2> $Feat
 - Beta: Allow multi-selected tasks to be set to new type/status/priority/validation [SG] <JH2> $Feature
 ^ Add task search filter (by #IDs or name) & corresponding delete button in top toolbar: support type-ahead searching <JH2> [SG] @Done %Passed $Feature
 ^ Allow task attribute filtering by type, priority, status, and validation fields via a toolbar button/pop up panel [SG] $Feature @Done %Passed
-- Add commonly-used "QuickFilters": Troubled, Left Todo, Left to Test, Ready to Ship, Showstoppers, Show All [SG] $Feature @Done %Passed
+- Add commonly-used "QuickFilters": Troubled, Unfinished, Unvalidated, Verified, Showstoppers, All [SG] $Feature @Done %Passed
 - Indicate whether there is a task attribute filter via a different icon on the toolbar button [SG] $Feature @Done %Passed
 v Enable/disable "Del. Task" button based on having a selected task [SG] @Done %Passed $Feature
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done $Feature %Passed

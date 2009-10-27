@@ -34,14 +34,14 @@ Tasks.attributeFilterUnfinished = [
 ];
 
 Tasks.attributeFilterUnvalidated = [
-  CoreTasks.TASK_TYPE_FEATURE, CoreTasks.TASK_TYPE_BUG, CoreTasks.TASK_TYPE_OTHER,
+  CoreTasks.TASK_TYPE_FEATURE, CoreTasks.TASK_TYPE_BUG,
   CoreTasks.TASK_PRIORITY_HIGH, CoreTasks.TASK_PRIORITY_MEDIUM, CoreTasks.TASK_PRIORITY_LOW,
   CoreTasks.TASK_STATUS_DONE,
   CoreTasks.TASK_VALIDATION_UNTESTED
 ];
 
 Tasks.attributeFilterVerified = [
-CoreTasks.TASK_TYPE_FEATURE, CoreTasks.TASK_TYPE_BUG, CoreTasks.TASK_TYPE_OTHER,
+CoreTasks.TASK_TYPE_FEATURE, CoreTasks.TASK_TYPE_BUG,
   CoreTasks.TASK_PRIORITY_HIGH, CoreTasks.TASK_PRIORITY_MEDIUM, CoreTasks.TASK_PRIORITY_LOW,
   CoreTasks.TASK_STATUS_DONE,
   CoreTasks.TASK_VALIDATION_PASSED
