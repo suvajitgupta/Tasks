@@ -193,8 +193,13 @@ Tasks.assignmentsController = SC.ArrayController.create(
     if (selectedAssignees) {
       var selectedAssigneeLoginNames = selectedAssignees.replace(/,/g, ' ').replace(/\s+/g, ' ').split(' ');
       for (var i = 0; i < selectedAssigneeLoginNames.length; i++) {
-        var selectedAssigneeUser = CoreTasks.getUser(selectedAssigneeLoginNames[i]);
-        if (selectedAssigneeUser) selectedAssigneeDisplayNames.push(selectedAssigneeUser.get('displayName'));
+        if(selectedAssigneeLoginNames[i].match(/none/i)) {
+          selectedAssigneeDisplayNames.push(CoreTasks.USER_UNASSIGNED);
+        }
+        else {
+          var selectedAssigneeUser = CoreTasks.getUser(selectedAssigneeLoginNames[i]);
+          if (selectedAssigneeUser) selectedAssigneeDisplayNames.push(selectedAssigneeUser.get('displayName'));
+        }
       }
     }
     

@@ -39,7 +39,9 @@ SC.stringsFor('English', {
   '_Logout': "Logout",
   '_LogoutTooltip': "Logout from Tasks",
   "_AssigneeSelectionHint": "Specify assignee login names",
+  "_AssigneeSelectionTooltip": "Separate via commas or spaces, use 'none' to see unassigned tasks",
   '_TasksSearchHint': "Search by task #IDs or name",
+  '_TasksSearchTooltip': "Separate #IDs via commas or spaces, otherwise perform case-insensitive match",
   
   // Project strings
   '_AddProject': "Add Project",

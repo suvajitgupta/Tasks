@@ -271,10 +271,11 @@ Tasks.mainPage = SC.Page.design({
           action: 'filterTasks'
         }),
         
-        SC.TextFieldView.design({
+        SC.TextFieldView.design(Tasks.ToolTip, {
           layout: { centerY: 0, height: 24, right: 240, width: 200 },
           classNames: ['assignee-selection-bar'],
           hint: "_AssigneeSelectionHint".loc(),
+          toolTip: "_AssigneeSelectionTooltip".loc(),
           valueBinding: 'Tasks.assignmentsController.assigneeSelection'
         }),
 
@@ -288,10 +289,11 @@ Tasks.mainPage = SC.Page.design({
           isVisibleBinding: SC.Binding.oneWay('Tasks.assignmentsController.assigneeSelection').bool()
         }),
       
-        SC.TextFieldView.design({
+        SC.TextFieldView.design(Tasks.ToolTip, {
           layout: { centerY: 0, height: 24, right: 10, width: 200 },
           classNames: ['tasks-search-bar'],
           hint: "_TasksSearchHint".loc(),
+          toolTip: "_TasksSearchTooltip".loc(),
           valueBinding: 'Tasks.assignmentsController.searchFilter'
         }),
       
