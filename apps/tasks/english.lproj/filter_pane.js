@@ -17,7 +17,7 @@ sc_require('views/decorated_checkbox');
 
 Tasks.filterPane = SC.PanelPane.create({  
   
-  layout: { top: 78, right: 360, height: 370, width: 295 },
+  layout: { top: 78, right: 360, height: 370, width: 300 },
   
   contentView: SC.View.design({
     
@@ -190,7 +190,7 @@ Tasks.filterPane = SC.PanelPane.create({
       }),
 
       SC.ButtonView.design({
-        layout: { width: 90, height: 30, left: 10, bottom: 72 },
+        layout: { width: 85, height: 30, left: 10, bottom: 72 },
         titleMinWidth: 0,
         classNames: ['quickfilter-label'],
         title: "_Troubled".loc(),
@@ -200,7 +200,7 @@ Tasks.filterPane = SC.PanelPane.create({
       }),
       
       SC.ButtonView.design({
-        layout: { width: 90, height: 30, left: 10, bottom: 40 },
+        layout: { width: 85, height: 30, left: 10, bottom: 40 },
         titleMinWidth: 0,
         classNames: ['quickfilter-label'],
         title: "_Unfinished".loc(),
@@ -210,7 +210,7 @@ Tasks.filterPane = SC.PanelPane.create({
       }),
       
       SC.ButtonView.design({
-        layout: { width: 90, height: 30, centerX: 0, bottom: 72 },
+        layout: { width: 90, height: 30, centerX: -7, bottom: 72 },
         titleMinWidth: 0,
         classNames: ['quickfilter-label'],
         title: "_Unvalidated".loc(),
@@ -220,7 +220,7 @@ Tasks.filterPane = SC.PanelPane.create({
       }),
       
       SC.ButtonView.design({
-        layout: { width: 90, height: 30, centerX: 0, bottom: 40 },
+        layout: { width: 90, height: 30, centerX: -7, bottom: 40 },
         titleMinWidth: 0,
         classNames: ['quickfilter-label'],
         title: "_Verified".loc(),
@@ -230,7 +230,7 @@ Tasks.filterPane = SC.PanelPane.create({
       }),
       
       SC.ButtonView.design({
-        layout: { width: 90, height: 30, right: 10, bottom: 72 },
+        layout: { width: 100, height: 30, right: 10, bottom: 72 },
         titleMinWidth: 0,
         classNames: ['quickfilter-label'],
         title: "_Showstoppers".loc(),
@@ -240,7 +240,7 @@ Tasks.filterPane = SC.PanelPane.create({
       }),
       
       SC.ButtonView.design({
-        layout: { width: 90, height: 30, right: 10, bottom: 40 },
+        layout: { width: 100, height: 30, right: 10, bottom: 40 },
         titleMinWidth: 0,
         classNames: ['quickfilter-label'],
         title: "_All".loc(),
@@ -250,7 +250,7 @@ Tasks.filterPane = SC.PanelPane.create({
       }),
       
       SC.ButtonView.design({
-        layout: { width: 90, height: 30, right: 10, bottom: 8 },
+        layout: { width: 100, height: 30, right: 10, bottom: 8 },
         titleMinWidth: 0,
         keyEquivalent: 'escape',
         isDefault: YES,
