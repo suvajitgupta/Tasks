@@ -23,7 +23,7 @@ SC.stringsFor('English', {
 
   // Top Bar strings
   '_Credits': "Credits: Suvajit Gupta, Sean Eidemiller, Josh Holt, Brandon Blatnick, Matt Grantham",
-  '_Hi': "Hi ",
+  '_User:': "User: ",
   '_Save': "Save",
   '_SaveTooltip': "Save Tasks data to the server",
   '_Import': "Import",

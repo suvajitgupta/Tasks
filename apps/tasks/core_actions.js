@@ -81,7 +81,8 @@ Tasks.mixin({
       // Greet user and save login session information
       CoreTasks.set('user', user);
       var welcomeMessage = Tasks.getPath('mainPage.mainPane.welcomeMessage');
-      welcomeMessage.set('value', "_Hi".loc() + CoreTasks.getPath('user.name') + ', as ' + CoreTasks.getPath('user.role').loc());
+      welcomeMessage.set('value', "_User:".loc() + '<b>' + CoreTasks.getPath('user.name') + '</b>, ' +
+                         "_Role:".loc() + ' <i>' + CoreTasks.getPath('user.role').loc() + '</i>');
       welcomeMessage.set('toolTip', "_LoginSince".loc() + new Date().format('hh:mm:ss a MMM dd, yyyy'));
       
       // Based on user's rolem set up appropriate task filter
