@@ -15,6 +15,14 @@ Tasks.reallocationController = SC.Object.create(SC.CollectionViewDelegate,
 /** @scope Tasks.reallocationController.prototype */ {
   
   // ..........................................................
+  // DRAGGING
+  //
+  collectionViewValidateDragOperation: function(view, drag, op, proposedInsertionIndex, proposedDropOperation) {
+    // don't allow dropping on by default
+    return (proposedDropOperation & SC.DROP_ON) ? op : SC.DRAG_NONE ;
+  },
+  
+  // ..........................................................
   // DROP TARGET SUPPORT
   // 
 
