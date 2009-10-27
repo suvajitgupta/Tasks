@@ -67,7 +67,6 @@ Tasks.importDataPage = SC.Page.create({
     }),
     
     focus: function() {
-      // FIXME: [JH2] fix focus & begin/endChanges problems with import panel/text area
       this.contentView.dataEntry.becomeFirstResponder();        
     }
   
