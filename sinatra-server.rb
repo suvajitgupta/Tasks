@@ -36,7 +36,7 @@ class User
   property  :name,          Text,   :nullable =>  false  
   property  :loginName,     Text,   :nullable =>  false  
   property  :role,          String, :default => '_Guest'
-  property  :emailAddress,  Text #,   :nullable =>  false -- NOT IMPLEMENTED IN ALL AREAS
+  property  :email,  Text #,   :nullable =>  false -- NOT IMPLEMENTED IN ALL AREAS
   property  :password,      Text #,   :nullable =>  false -- NOT IMPLEMENTED IN ALL AREAS
   property  :preferences,   Json
   property  :authToken,     Text
@@ -55,7 +55,7 @@ class User
     ret.to_json()
   end
   
-  # @required = [:name, :loginName, :password, :emailAddress] -- waiting impelmentation
+  # @required = [:name, :loginName, :password, :email] -- waiting impelmentation
   @required = [:name, :loginName, :role]
   @required_for_update = [:name, :loginName]
   
@@ -109,19 +109,19 @@ end
 class Task
   include DataMapper::Resource
   
-  property  :id,           Serial
-  property  :name,         Text,   :nullable => false
-	property  :priority,     String, :default => '_Medium'
-	property  :effort,       String
-	property  :submitterId,  Integer
-	property  :assigneeId,   Integer
-	property  :projectId,    Integer
-	property  :type,         String, :default => '_Other'
-	property  :status,       String, :default => '_Planned'
-	property  :validation,   String, :default => '_Untested'
-	property  :description,  Text
-  property  :createdAt,    Integer
-  property  :updatedAt,    Integer
+  property  :id,                 Serial
+  property  :name,               Text,   :nullable => false
+	property  :priority,           String, :default => '_Medium'
+	property  :effort,             String
+	property  :submitterId,        Integer
+	property  :assigneeId,         Integer
+	property  :projectId,          Integer
+	property  :type,               String, :default => '_Other'
+	property  :developmentStatus,  String, :default => '_Planned'
+	property  :validation,         String, :default => '_Untested'
+	property  :description,        Text
+  property  :createdAt,          Integer
+  property  :updatedAt,          Integer
   
   def url
     "task/#{self.id}"

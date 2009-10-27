@@ -72,7 +72,7 @@ Tasks.UserInformationView = SC.View.extend(
       validator: SC.Validator.EmailOrEmpty,
       errorLabel: "_InvalidEmailAddress".loc(),
       hint: "_EmailAddress".loc(),
-      valueBinding: SC.binding('*content.emailAddress', this).toLocale()
+      valueBinding: SC.binding('*content.email', this).toLocale()
     }));
     childViews.push(this.emailField);
     

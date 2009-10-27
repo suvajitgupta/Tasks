@@ -17,7 +17,7 @@ sc_require('views/decorated_checkbox');
 
 Tasks.filterPane = SC.PanelPane.create({  
   
-  layout: { top: 78, right: 360, height: 370, width: 300 },
+  layout: { top: 78, right: 360, height: 360, width: 300 },
   
   contentView: SC.View.design({
     
@@ -252,10 +252,6 @@ Tasks.filterPane = SC.PanelPane.create({
           valueBinding: 'Tasks.assignmentsController.attributeFilterValidationFailed'
         })
 
-      }),
-
-      SC.SeparatorView.design({
-        layout: { bottom: 40, left: 10, right: 10, height: 4 }
       }),
 
       SC.ButtonView.design({
