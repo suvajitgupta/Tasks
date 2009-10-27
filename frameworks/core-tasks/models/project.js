@@ -30,6 +30,13 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
   timeLeft: SC.Record.attr(String),
 
   /**
+   * Append unit of time after time left.
+   */
+  displayTimeLeft: function() {
+    return CoreTasks.displayTime(this.get('timeLeft'));
+  }.property('timeLeft').cacheable(),
+  
+  /**
    * A read-only computed property that returns the list of tasks associated with this project.
    *
    * @returns {SC.RecordArray} An array of tasks.
@@ -73,13 +80,6 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
 
   }.property('_id').cacheable(),
 
-  /**
-   * Append unit of time after time left.
-   */
-  displayTimeLeft: function() {
-    return CoreTasks.displayTime(this.get('timeLeft'));
-  }.property('timeLeft').cacheable(),
-  
   /**
    * The path to the icon associated with a project.
    */
@@ -146,6 +146,8 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
       tasks.forEach(function(task) {
         task.set('projectId', null);
       });
+      this.get('tasks').destroy();
+      this._tasksQuery = null;
     }
   }
 

@@ -20,31 +20,31 @@ Tasks.UserInformationView = SC.View.extend(
     
     var childViews = [];
     
-    this.loginNameLabel = this.createChildView(SC.LabelView.extend({
-      layout: { top: 10, left: 0, width: 85, height: 18 },
-      textAlign: SC.ALIGN_RIGHT,
-      value: "_LoginName:".loc() 
-    }));
-    childViews.push(this.loginNameLabel);
-    this.loginNameField = this.createChildView(SC.TextFieldView.extend({
-      layout: { top: 10, left: 90, height: 20, width: 200 },
-      hint: "_Initials".loc(),
-      valueBinding: SC.binding('*content.loginName', this).toLocale()
-    }));
-    childViews.push(this.loginNameField);
-    
     this.fullNameLabel = this.createChildView(SC.LabelView.extend({
-      layout: { top: 42, left: 0, width: 85, height: 18 },
+      layout: { top: 10, left: 0, width: 85, height: 18 },
       textAlign: SC.ALIGN_RIGHT,
       value: "_FullName:".loc() 
     }));
     childViews.push(this.fullNameLabel);
     this.fullNameField = this.createChildView(SC.TextFieldView.extend({
-      layout: { top: 42, left: 90, height: 20, width: 200 },
+      layout: { top: 10, left: 90, height: 20, width: 200 },
       hint: "_FirstLast".loc(),
       valueBinding: SC.binding('*content.name', this).toLocale()
     }));
     childViews.push(this.fullNameField);
+    
+    this.loginNameLabel = this.createChildView(SC.LabelView.extend({
+      layout: { top: 42, left: 0, width: 85, height: 18 },
+      textAlign: SC.ALIGN_RIGHT,
+      value: "_LoginName:".loc() 
+    }));
+    childViews.push(this.loginNameLabel);
+    this.loginNameField = this.createChildView(SC.TextFieldView.extend({
+      layout: { top: 42, left: 90, height: 20, width: 200 },
+      hint: "_Initials".loc(),
+      valueBinding: SC.binding('*content.loginName', this).toLocale()
+    }));
+    childViews.push(this.loginNameField);
     
     this.roleLabel = this.createChildView(SC.LabelView.extend({
       layout: { top: 74, left: 0, width: 85, height: 18 },

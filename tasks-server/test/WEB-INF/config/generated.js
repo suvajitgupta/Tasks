@@ -8,6 +8,14 @@
 					"type":"any",
 					"optional":true
 				},
+				"createdAt":{
+					"type":"any",
+					"optional":true
+				},
+				"updatedAt":{
+					"type":"any",
+					"optional":true
+				},
 				"name":{
 					"type":"any",
 					"optional":false
@@ -17,6 +25,14 @@
 					"optional":false
 				},
 				"role":{
+					"type":"any",
+					"optional":false
+				},
+				"email":{
+					"type":"any",
+					"optional":false
+				},
+				"password":{
 					"type":"any",
 					"optional":false
 				},
@@ -42,19 +58,19 @@
 					"type":"any",
 					"optional":true
 				},
-				"name":{
-					"type":"any",
-					"optional":false
-				},
-				"description":{
-					"type":"any",
-					"optional":true
-				},
 				"createdAt":{
 					"type":"any",
 					"optional":true
 				},
 				"updatedAt":{
+					"type":"any",
+					"optional":true
+				},
+				"name":{
+					"type":"any",
+					"optional":false
+				},
+				"description":{
 					"type":"any",
 					"optional":true
 				},
@@ -76,6 +92,14 @@
 					"type":"any",
 					"optional":true
 				},
+				"createdAt":{
+					"type":"any",
+					"optional":true
+				},
+				"updatedAt":{
+					"type":"any",
+					"optional":true
+				},
 				"name":{
 					"type":"any",
 					"optional":false
@@ -88,19 +112,7 @@
 					"type":"any",
 					"optional":true
 				},
-				"type":{
-					"type":"any",
-					"optional":true
-				},
 				"priority":{
-					"type":"any",
-					"optional":true
-				},
-				"developmentStatus":{
-					"type":"any",
-					"optional":true
-				},
-				"validation":{
 					"type":"any",
 					"optional":true
 				},
@@ -116,11 +128,15 @@
 					"type":"any",
 					"optional":true
 				},
-				"createdAt":{
+				"type":{
 					"type":"any",
 					"optional":true
 				},
-				"updatedAt":{
+				"developmentStatus":{
+					"type":"any",
+					"optional":true
+				},
+				"validation":{
 					"type":"any",
 					"optional":true
 				}

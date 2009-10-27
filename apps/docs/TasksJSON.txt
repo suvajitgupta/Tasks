@@ -7,22 +7,26 @@ Project:
 {
 	id*: <Number>, # primary key
 	name*: <String>, # title
-	timeLeft: <Number>, # amount of time left in days
 	description: <String>, # multi-line additional information such as project start/end dates, goals, et al
+	timeLeft: <Number>, # amount of time left in days
+}
+
 ##################################################
 Task:
 {
 	id*: <Number>, # primary key
 	name*: <String>, # one-line summary
+	description: <String>, # multi-line additional information such as Feature details, Bug reproduction steps, or Release Notes
+	projectId: <Number> # refers to project task is allocated to
 	priority: Enum<String> ("High" | "_Medium_" | "Low"), # High ones must be completed, Low ones not included in effort subtotals
 	effort: <Number> # effort estimate => actual, in days
-	submitter: <Number>, # id of User who submitted this Task
-	assignee: <Number> # id of User to whom this Task is assigned
+	assigneeId: <Number> # id of User to whom this Task is assigned
+	submitterId: <Number>, # id of User who submitted this Task
 	type: Enum<String>, ("Feature" | "Bug" | "_Other_") # kind of Task to support testing workflow
 	developmentStatus: Enum<String> ("_Planned_" | "Active" | "Done" | "Risky"), # development status
 	validation: Enum<String> ("_Untested_" | "Passed" | "Failed"), # validation status
-	description: <String>, # multi-line additional information such as Feature details, Bug reproduction steps, or Release Notes
 }
+
 ##################################################
 User:
 {
@@ -30,7 +34,8 @@ User:
 	name*: <String>, # full name
 	loginName*: <String>, # login name
 	role*: Enum<String>, ("Manager" | "_Developer_" | "Tester") # to allow RBAC
+	email: <String>, # email address used for notifications
+	password: <String>, # encrypted password used for authentication
 	preferences: { key: value}, # preferences stored as key/value pairs
 	authToken: <String> # authentication token from logging into a server
 }
-##################################################

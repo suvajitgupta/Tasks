@@ -67,22 +67,9 @@ CoreTasks.Task = CoreTasks.Record.extend({
   name: SC.Record.attr(String, { isRequired: YES, defaultValue: CoreTasks.NEW_TASK_NAME }),
 
   /**
-   * A back-pointer to the project that this task belongs to.
+   * Refers to the project that this task is allocated to.
    */
   projectId: SC.Record.attr(Number),
-
-  /**
-   * The type of the task (see below for possible values).
-   */
-  type: SC.Record.attr(String, {
-    isRequired: YES,
-    defaultValue: CoreTasks.TASK_TYPE_OTHER,
-    allowed: [
-      CoreTasks.TASK_TYPE_FEATURE,
-      CoreTasks.TASK_TYPE_BUG,
-      CoreTasks.TASK_TYPE_OTHER
-    ]
-  }),
 
   /**
    * The proiority of the task (HIGH indicates task must be completed, LOW ones are not used for effort subtotals).
@@ -94,44 +81,6 @@ CoreTasks.Task = CoreTasks.Record.extend({
       CoreTasks.TASK_PRIORITY_HIGH,
       CoreTasks.TASK_PRIORITY_MEDIUM,
       CoreTasks.TASK_PRIORITY_LOW
-    ]
-  }),
-
-  /**
-   * The development status of the task (see below for allowed values).
-   */
-  developmentStatus: SC.Record.attr(String, {
-    isRequired: YES,
-    defaultValue: CoreTasks.TASK_STATUS_PLANNED,
-    allowed: [
-      CoreTasks.TASK_STATUS_PLANNED,
-      CoreTasks.TASK_STATUS_ACTIVE,
-      CoreTasks.TASK_STATUS_DONE,
-      CoreTasks.TASK_STATUS_RISKY
-    ]
-   }),
-
-  developmentStatusWithValidation: function(key, value){
-     var currentStatus = this.get('developmentStatus');
-     if (value && currentStatus !== value) {
-       this.set('developmentStatus', value);
-       if(value !== CoreTasks.TASK_STATUS_DONE) this.set('validation', CoreTasks.TASK_VALIDATION_UNTESTED)
-     }
-     else {
-       return currentStatus;
-     }
-   }.property('developmentStatus').cacheable(),
-
-  /**
-   * The validation status of the task (see below for allowed values).
-   */
-  validation: SC.Record.attr(String, {
-    isRequired: YES,
-    defaultValue: CoreTasks.TASK_VALIDATION_UNTESTED,
-    allowed: [
-      CoreTasks.TASK_VALIDATION_UNTESTED,
-      CoreTasks.TASK_VALIDATION_PASSED,
-      CoreTasks.TASK_VALIDATION_FAILED
     ]
   }),
 
@@ -213,6 +162,57 @@ CoreTasks.Task = CoreTasks.Record.extend({
     return value;
 
   }.property('assigneeId').cacheable(),
+
+  /**
+   * The type of the task (see below for possible values).
+   */
+  type: SC.Record.attr(String, {
+    isRequired: YES,
+    defaultValue: CoreTasks.TASK_TYPE_OTHER,
+    allowed: [
+      CoreTasks.TASK_TYPE_FEATURE,
+      CoreTasks.TASK_TYPE_BUG,
+      CoreTasks.TASK_TYPE_OTHER
+    ]
+  }),
+
+  /**
+   * The development status of the task (see below for allowed values).
+   */
+  developmentStatus: SC.Record.attr(String, {
+    isRequired: YES,
+    defaultValue: CoreTasks.TASK_STATUS_PLANNED,
+    allowed: [
+      CoreTasks.TASK_STATUS_PLANNED,
+      CoreTasks.TASK_STATUS_ACTIVE,
+      CoreTasks.TASK_STATUS_DONE,
+      CoreTasks.TASK_STATUS_RISKY
+    ]
+   }),
+
+  developmentStatusWithValidation: function(key, value){
+     var currentStatus = this.get('developmentStatus');
+     if (value && currentStatus !== value) {
+       this.set('developmentStatus', value);
+       if(value !== CoreTasks.TASK_STATUS_DONE) this.set('validation', CoreTasks.TASK_VALIDATION_UNTESTED)
+     }
+     else {
+       return currentStatus;
+     }
+   }.property('developmentStatus').cacheable(),
+
+  /**
+   * The validation status of the task (see below for allowed values).
+   */
+  validation: SC.Record.attr(String, {
+    isRequired: YES,
+    defaultValue: CoreTasks.TASK_VALIDATION_UNTESTED,
+    allowed: [
+      CoreTasks.TASK_VALIDATION_UNTESTED,
+      CoreTasks.TASK_VALIDATION_PASSED,
+      CoreTasks.TASK_VALIDATION_FAILED
+    ]
+  }),
 
   /**
    * The path to the icon associated with a task.
