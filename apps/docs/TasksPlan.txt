@@ -69,7 +69,7 @@ Task Manager GUI
 | To reproduce: search for a Task in search bar or select AllTasks, scroll down, select a task, then select another project)
 ^ Support automatic sorting of tasks by status, validation, priority, and type (in order)[SG] <SG> @Done $Feature %Passed
 - Allow Tasks under an assignee to be hidden/disclosed [SG] <JH2> @Done $Feature %Passed
-- Allow SourceListView disclosures to be opened/closed propperly (Apple has on priority list) [SC] <SG> @Active $Bug
+- Allow SourceListView disclosures to be opened/closed properly (Apple has on priority list) [SC] <SG> @Active $Bug
 - Drag-n-drop in SourceListView is broken (Apple has on priority list) [SC] <SG> @Active $Bug
 - Show Task Type via different icons [SG] <JH2> @Done $Feature %Passed
 - Show Task Priority (font style), Status (font color), Validation (background color) [SG] <MB> @Done $Feature %Passed
