@@ -190,43 +190,43 @@ Tasks.filterPane = SC.PanelPane.create({
       }),
 
       SC.ButtonView.design({
-        layout: { width: 80, height: 30, left: 10, bottom: 72 },
+        layout: { width: 90, height: 30, left: 10, bottom: 72 },
         titleMinWidth: 0,
         classNames: ['quickfilter-label'],
         title: "_Troubled".loc(),
         toolTip: "_TroubledTooltip".loc(),
         target: 'Tasks.assignmentsController',
-        action: 'setTroubledAttributeFilter'
+        action: 'setAttributeFilterTroubled'
       }),
       
       SC.ButtonView.design({
-        layout: { width: 80, height: 30, left: 10, bottom: 40 },
+        layout: { width: 90, height: 30, left: 10, bottom: 40 },
         titleMinWidth: 0,
         classNames: ['quickfilter-label'],
-        title: "_LeftTodo".loc(),
-        toolTip: "_LeftTodoTooltip".loc(),
+        title: "_Unfinished".loc(),
+        toolTip: "_UnfinishedTooltip".loc(),
         target: 'Tasks.assignmentsController',
-        action: 'setLeftTodoAttributeFilter'
+        action: 'setAttributeFilterUnfinished'
       }),
       
       SC.ButtonView.design({
-        layout: { width: 95, height: 30, centerX: -5, bottom: 72 },
+        layout: { width: 90, height: 30, centerX: 0, bottom: 72 },
         titleMinWidth: 0,
         classNames: ['quickfilter-label'],
-        title: "_LeftToTest".loc(),
-        toolTip: "_LeftToTestTooltip".loc(),
+        title: "_Unvalidated".loc(),
+        toolTip: "_UnvalidatedTooltip".loc(),
         target: 'Tasks.assignmentsController',
-        action: 'setLeftToTestAttributeFilter'
+        action: 'setAttributeFilterUnvalidated'
       }),
       
       SC.ButtonView.design({
-        layout: { width: 95, height: 30, centerX: -5, bottom: 40 },
+        layout: { width: 90, height: 30, centerX: 0, bottom: 40 },
         titleMinWidth: 0,
         classNames: ['quickfilter-label'],
-        title: "_ReadyToShip".loc(),
-        toolTip: "_ReadyToShipTooltip".loc(),
+        title: "_Verified".loc(),
+        toolTip: "_VerifiedTooltip".loc(),
         target: 'Tasks.assignmentsController',
-        action: 'setReadyToShipAttributeFilter'
+        action: 'setAttributeFilterVerified'
       }),
       
       SC.ButtonView.design({
@@ -236,21 +236,21 @@ Tasks.filterPane = SC.PanelPane.create({
         title: "_Showstoppers".loc(),
         toolTip: "_ShowstoppersTooltip".loc(),
         target: 'Tasks.assignmentsController',
-        action: 'setShowstoppersAttributeFilter'
+        action: 'setAttributeFilterShowstoppers'
       }),
       
       SC.ButtonView.design({
         layout: { width: 90, height: 30, right: 10, bottom: 40 },
         titleMinWidth: 0,
         classNames: ['quickfilter-label'],
-        title: "_ShowAll".loc(),
-        toolTip: "_ShowAllTooltip".loc(),
+        title: "_All".loc(),
+        toolTip: "_AllTooltip".loc(),
         target: 'Tasks.assignmentsController',
-        action: 'clearAttributeFilter'
+        action: 'setAttributeFilterNone'
       }),
       
       SC.ButtonView.design({
-        layout: { width: 80, height: 30, right: 10, bottom: 8 },
+        layout: { width: 90, height: 30, right: 10, bottom: 8 },
         titleMinWidth: 0,
         keyEquivalent: 'escape',
         isDefault: YES,

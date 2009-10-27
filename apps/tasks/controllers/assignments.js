@@ -13,7 +13,7 @@
   @author Suvajit Gupta
 */
 
-Tasks.attributeFilterAllEnabled = [
+Tasks.attributeFilterNone = [
   CoreTasks.TASK_TYPE_FEATURE, CoreTasks.TASK_TYPE_BUG, CoreTasks.TASK_TYPE_OTHER,
   CoreTasks.TASK_PRIORITY_HIGH, CoreTasks.TASK_PRIORITY_MEDIUM, CoreTasks.TASK_PRIORITY_LOW,
   CoreTasks.TASK_STATUS_PLANNED, CoreTasks.TASK_STATUS_ACTIVE, CoreTasks.TASK_STATUS_DONE, CoreTasks.TASK_STATUS_RISKY,
@@ -27,21 +27,21 @@ Tasks.attributeFilterTroubled = [
   CoreTasks.TASK_VALIDATION_FAILED
 ];
 
-Tasks.attributeFilterLeftTodo = [
+Tasks.attributeFilterUnfinished = [
   CoreTasks.TASK_TYPE_FEATURE, CoreTasks.TASK_TYPE_BUG, CoreTasks.TASK_TYPE_OTHER,
   CoreTasks.TASK_PRIORITY_HIGH, CoreTasks.TASK_PRIORITY_MEDIUM,
   CoreTasks.TASK_STATUS_PLANNED, CoreTasks.TASK_STATUS_ACTIVE, CoreTasks.TASK_STATUS_RISKY
 ];
 
-Tasks.attributeFilterLeftToTest = [
+Tasks.attributeFilterUnvalidated = [
   CoreTasks.TASK_TYPE_FEATURE, CoreTasks.TASK_TYPE_BUG, CoreTasks.TASK_TYPE_OTHER,
   CoreTasks.TASK_PRIORITY_HIGH, CoreTasks.TASK_PRIORITY_MEDIUM, CoreTasks.TASK_PRIORITY_LOW,
   CoreTasks.TASK_STATUS_DONE,
   CoreTasks.TASK_VALIDATION_UNTESTED
 ];
 
-Tasks.attributeFilterReadyToShip = [
-  CoreTasks.TASK_TYPE_FEATURE, CoreTasks.TASK_TYPE_BUG,
+Tasks.attributeFilterVerified = [
+CoreTasks.TASK_TYPE_FEATURE, CoreTasks.TASK_TYPE_BUG, CoreTasks.TASK_TYPE_OTHER,
   CoreTasks.TASK_PRIORITY_HIGH, CoreTasks.TASK_PRIORITY_MEDIUM, CoreTasks.TASK_PRIORITY_LOW,
   CoreTasks.TASK_STATUS_DONE,
   CoreTasks.TASK_VALIDATION_PASSED
@@ -62,7 +62,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
   
   assigneeSelection: null,
   searchFilter: null,
-  attributeFilterCriteria: Tasks.attributeFilterAllEnabled.slice(0),
+  attributeFilterCriteria: Tasks.attributeFilterNone.slice(0),
   
   attributeFilter: function(name, value) {
     var newFilterCriteria;
@@ -150,34 +150,34 @@ Tasks.assignmentsController = SC.ArrayController.create(
     return this.assigneeSelection || this.searchFilter || this.attributeFilterCriteria.length !== 13;
   },
   
-  setTroubledAttributeFilter: function() {
+  setAttributeFilterTroubled: function() {
     this.set('attributeFilterCriteria', Tasks.attributeFilterTroubled.slice(0));
   },
 
-  setLeftTodoAttributeFilter: function() {
-    this.set('attributeFilterCriteria', Tasks.attributeFilterLeftTodo.slice(0));
+  setAttributeFilterUnfinished: function() {
+    this.set('attributeFilterCriteria', Tasks.attributeFilterUnfinished.slice(0));
   },
 
-  setLeftToTestAttributeFilter: function() {
-    this.set('attributeFilterCriteria', Tasks.attributeFilterLeftToTest.slice(0));
+  setAttributeFilterUnvalidated: function() {
+    this.set('attributeFilterCriteria', Tasks.attributeFilterUnvalidated.slice(0));
   },
 
-  setReadyToShipAttributeFilter: function() {
-    this.set('attributeFilterCriteria', Tasks.attributeFilterReadyToShip.slice(0));
+  setAttributeFilterVerified: function() {
+    this.set('attributeFilterCriteria', Tasks.attributeFilterVerified.slice(0));
   },
 
-  setShowstoppersAttributeFilter: function() {
+  setAttributeFilterShowstoppers: function() {
     this.set('attributeFilterCriteria', Tasks.attributeFilterShowstoppers.slice(0));
   },
 
-  clearAttributeFilter: function() {
-    this.set('attributeFilterCriteria', Tasks.attributeFilterAllEnabled.slice(0));
+  setAttributeFilterNone: function() {
+    this.set('attributeFilterCriteria', Tasks.attributeFilterNone.slice(0));
   },
 
   resetFilters: function() {
     this.set('assigneeSelection', null);
     this.set('searchFilter', null);
-    this.clearAttributeFilter();
+    this.setAttributeFilterNone();
   },
   
   
