@@ -73,6 +73,12 @@ body {
   left: 38px !important;
 }
 
+.quickfilter-toolbar {
+	background: #777;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+
 .quickfilter-label {
   font-size: 10px !important;
   font-weight: bold !important;
