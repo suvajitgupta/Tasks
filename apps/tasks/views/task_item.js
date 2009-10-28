@@ -93,7 +93,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
               objectsBinding: this._listUsers(),
               nameKey: 'displayName',
               valueKey: 'id',
-              valueBinding: SC.binding('.content.submitterId', this)
+              valueBinding: SC.binding('.content.submitterValue', this)
             }),
 
             SC.LabelView.design({
@@ -106,7 +106,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
               objectsBinding: this._listUsers(),
               nameKey: 'displayName',
               valueKey: 'id',
-              valueBinding: SC.binding('.content.assigneeId', this)
+              valueBinding: SC.binding('.content.assigneeValue', this)
             }),
 
             SC.LabelView.design({

@@ -159,6 +159,25 @@ CoreTasks.Task = CoreTasks.Record.extend({
   }.property('submitterId').cacheable(),
 
   /**
+   *  This computed property buffers changes to the submitterId field.
+   */
+  submitterValue: function(key, value) {
+    
+    if (value !== undefined) {
+      var id = (value === '0')? null : value;
+      this.propertyWillChange('submitterId');
+      this.writeAttribute('submitterId', id);
+      this.propertyDidChange('submitterId');
+    } else {
+      value = this.get('submitterId');
+      if (value === null) value = '0';
+    }
+    
+    return value;
+
+  }.property('submitterId').cacheable(),
+
+  /**
   * The user who is assigned to complete the task.
    */
   assigneeId: SC.Record.attr(Number),
@@ -175,6 +194,25 @@ CoreTasks.Task = CoreTasks.Record.extend({
       }
     }
 
+    return value;
+
+  }.property('assigneeId').cacheable(),
+
+  /**
+   *  This computed property buffers changes to the assigneeId field.
+   */
+  assigneeValue: function(key, value) {
+    
+    if (value !== undefined) {
+      var id = (value === '0')? null : value;
+      this.propertyWillChange('assigneeId');
+      this.writeAttribute('assigneeId', id);
+      this.propertyDidChange('assigneeId');
+    } else {
+      value = this.get('assigneeId');
+      if (value === null) value = '0';
+    }
+    
     return value;
 
   }.property('assigneeId').cacheable(),
