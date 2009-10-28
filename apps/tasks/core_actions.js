@@ -234,6 +234,7 @@ Tasks.mixin({
    * Reload latest Tasks data from server.
    */
   refreshData: function() {
+    // TODO: [SG] Beta: implement refresh data
     this._notImplemented('refreshData');
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', "_RefreshMessage".loc() + new Date().format('hh:mm:ss a'));
