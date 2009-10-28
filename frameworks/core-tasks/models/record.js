@@ -55,7 +55,11 @@ CoreTasks.Record = SC.Record.extend({
    *
    * Expressed in milliseconds since the Unix Epoch.
    */
-  updatedAt: SC.Record.attr('CoreTasks.Date')
+  updatedAt: SC.Record.attr('CoreTasks.Date'),
+
+  commit: function() {
+    this.commitRecord();
+  }
 
 });
 

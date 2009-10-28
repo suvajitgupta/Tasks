@@ -30,11 +30,11 @@
 				},
 				"email":{
 					"type":"any",
-					"optional":false
+					"optional":true
 				},
 				"password":{
 					"type":"any",
-					"optional":false
+					"optional":true
 				},
 				"preferences":{
 					"type":"object",

@@ -1,10 +1,10 @@
+/*globals CoreTasks */
+
 /**
  * The core object of the Tasks framework.
  *
  * @author Sean Eidemiller
  */
-/*globals CoreTasks */
- 
 CoreTasks = SC.Object.create({
 
   // The main data store and record sets.
@@ -12,13 +12,12 @@ CoreTasks = SC.Object.create({
   allUsers: null,
   allTasks: null,
   allProjects: null,
-  
+
   /**
    * Clear all data from store.
    *
    */
   clearData: function() {
-    
     this.allUsers.destroy();
     this.allUsers = null;
     
@@ -30,7 +29,6 @@ CoreTasks = SC.Object.create({
     
     this.store.reset();
   },
-
 
   /**
    * Get user for a given loginName (if it exists).
@@ -97,6 +95,9 @@ CoreTasks = SC.Object.create({
 
   // The current save mode.
   saveMode: 0x0001,
+
+  // The record currently being saved (only used by the save mechanism).
+  recordBeingSaved: null,
 
   // The logged in user.
   user: null,
@@ -170,7 +171,6 @@ CoreTasks = SC.Object.create({
    *
    * Persistence must occur in a precise order to maintain entity associations.
    */
-  // FIXME: [SE] Beta: make save work with latest SproutCore
   saveChanges: function() {
     if (this.get('saveMode') & CoreTasks.MODE_SAVING) {
       throw 'Error saving data: Save already in progress.';
@@ -212,7 +212,7 @@ CoreTasks = SC.Object.create({
           this._dirtyUsers.pushObject(key);
           break;
         case CoreTasks.Project:
-          if (key !== this.__allTasksProjectKey && key !== this._unallocatedTasksProjectKey) {
+          if (key !== this._allTasksProjectKey && key !== this._unallocatedTasksProjectKey) {
             this._dirtyProjects.pushObject(key);
           }
 
@@ -252,129 +252,214 @@ CoreTasks = SC.Object.create({
     this.set('saveMode', CoreTasks.MODE_NOT_SAVING);
   },
 
-  // User callbacks.
-
-  userCreated: function(storeKey) {
-    var user = this.get('store').materializeRecord(storeKey), tasks;
-
-    SC.RunLoop.begin();
-
-    // Update the now-disassociated assigned tasks.
-    tasks = user.get('disassociatedAssignedTasks');
-
-    if (tasks && SC.instanceOf(tasks, SC.RecordArray)) {
-      tasks.forEach(function(task) {
-        task.writeAttribute('assigneeId', user.readAttribute('id'));
-      });
+  _saveUsers: function() {
+    if (this._dirtyUsers && this._dirtyUsers.length > 0) {
+      var userKey = this._dirtyUsers.objectAt(0);
+      var user = this.get('store').materializeRecord(userKey);
+      this.set('recordBeingSaved', user);
+      this.addObserver('recordBeingSaved.status', this, this._userSaveRecordDidChange);
+      if (user) user.commit(); 
+    } else {
+      // Start saving dirty projects.
+      this._saveProjects();
     }
+  },
 
-    // Update the now-disassociated submitted tasks.
-    tasks = user.get('disassociatedSubmittedTasks');
-
-    if (tasks && SC.instanceOf(tasks, SC.RecordArray)) {
-      tasks.forEach(function(task) {
-        task.writeAttribute('submitterId', user.readAttribute('id'));
-      });
+  _saveProjects: function() {
+    if (this._dirtyProjects && this._dirtyProjects.length > 0) {
+      var projectKey = this._dirtyProjects.objectAt(0);
+      var project = this.get('store').materializeRecord(projectKey);
+      this.set('recordBeingSaved', project);
+      this.addObserver('recordBeingSaved.status', this, this._projectSaveRecordDidChange);
+      if (project) project.commit(); 
+    } else {
+      // Start saving dirty tasks.
+      this._saveTasks();
     }
-
-    SC.RunLoop.end();
-
-    this._dirtyUsers.removeObject(storeKey);
-    this._continueSave();
   },
 
-  userUpdated: function(storeKey) {
-    this._dirtyUsers.removeObject(storeKey);
-    this._continueSave();
-  },
+  _saveTasks: function() {
+    if (this._dirtyTasks && this._dirtyTasks.length > 0) {
+      var taskKey = this._dirtyTasks.objectAt(0);
+      var task = this.get('store').materializeRecord(taskKey);
+      this.set('recordBeingSaved', task);
+      this.addObserver('recordBeingSaved.status', this, this._taskSaveRecordDidChange);
+      if (task) task.commit(); 
+    } else {
+      // We're done.
+      this.removeObserver('recordBeingSaved.status', this, this._taskSaveRecordDidChange);
 
-  userDeleted: function(storeKey) {
-    this._dirtyUsers.removeObject(storeKey);
-    this._continueSave();
-  },
+      this.set('recordBeingSaved', null);
+      this.set('saveMode', CoreTasks.MODE_NOT_SAVING);
 
-  // Project callbacks.
-
-  projectCreated: function(storeKey) {
-    var project = this.get('store').materializeRecord(storeKey);
-
-    // Update the now-disassociated tasks.
-    SC.RunLoop.begin();
-    var tasks = project.get('disassociatedTasks');
-
-    if (tasks && SC.instanceOf(tasks, SC.RecordArray)) {
-      tasks.forEach(function(task) {
-        task.writeAttribute('projectId', project.readAttribute('id'));
-      });
+      this._dirtyUsers = [];
+      this._dirtyProjects = [];
+      this._dirtyTasks = [];
     }
-
-    SC.RunLoop.end();
-
-    this._dirtyProjects.removeObject(storeKey);
-    this._continueSave();
   },
 
-  projectUpdated: function(storeKey) {
-    this._dirtyProjects.removeObject(storeKey);
-    this._continueSave();
-  },
+  _userSaveRecordDidChange: function() {
+    var user = this.get('recordBeingSaved');
 
-  projectDeleted: function(storeKey) {
-    this._dirtyProjects.removeObject(storeKey);
-    this._continueSave();
-  },
+    if (user && this.get('isSaving')) {
+      var status = user.get('status');
 
-  // Task callbacks.
+      if (status & SC.Record.READY || status === SC.Record.DESTROYED_CLEAN) {
+        // Save was successful; remove the current observer.
+        this.removeObserver('recordBeingSaved.status', this, this._userSaveRecordDidChange);
 
-  taskCreated: function(storeKey) {
-    this._dirtyTasks.removeObject(storeKey);
-    this._continueSave();
-  },
+        SC.RunLoop.begin();
 
-  taskUpdated: function(storeKey) {
-    this._dirtyTasks.removeObject(storeKey);
-    this._continueSave();
-  },
+        // Update the now-disassociated assigned tasks.
+        var tasks = user.get('disassociatedAssignedTasks');
 
-  taskDeleted: function(storeKey) {
-    this._dirtyTasks.removeObject(storeKey);
-    this._continueSave();
-  },
-
-  _continueSave: function() {
-    if (this._dirtyUsers.length === 0) {
-      if (this._dirtyProjects.length === 0) {
-        if (this._dirtyTasks.length === 0) {
-          this.set('saveMode', CoreTasks.MODE_NOT_SAVING);
-        } else {
-          // Save to start persisting tasks, if we haven't already.
-          if (this.get('saveMode') !== CoreTasks.MODE_SAVING_TASKS) {
-            this._saveTasks();
-          }
+        if (tasks && SC.instanceOf(tasks, SC.RecordArray)) {
+          tasks.forEach(function(task) {
+            task.writeAttribute('assigneeId', user.readAttribute('id'));
+          });
         }
 
-      } else {
-        // Safe to start persisting projects, if we haven't already.
-        if (this.get('saveMode') !== CoreTasks.MODE_SAVING_PROJECTS) {
+        // Update the now-disassociated submitted tasks.
+        tasks = user.get('disassociatedSubmittedTasks');
+
+        if (tasks && SC.instanceOf(tasks, SC.RecordArray)) {
+          tasks.forEach(function(task) {
+            task.writeAttribute('submitterId', user.readAttribute('id'));
+          });
+        }
+
+        SC.RunLoop.end();
+
+        // Continue saving dirty users, if there are any left.
+        this._dirtyUsers.removeObject(user.get('storeKey'));
+        var nextUserKey = this._dirtyUsers.objectAt(0);
+
+        if (nextUserKey) {
+          // Add a new observer and commit.
+          var nextUser = this.get('store').materializeRecord(nextUserKey);
+          this.set('recordBeingSaved', nextUser);
+          this.addObserver('recordBeingSaved.status', this, this._userSaveRecordDidChange);
+          nextUser.commit();
+        } else {
+          // Safe to start committing projects.
           this._saveProjects();
         }
+
+      } else if (status & SC.Record.ERROR) {
+        // Save failed.
+        // TODO: [SE] Handle this properly.
+        this.removeObserver('recordBeingSaved.status', this, this._userSaveRecordDidChange);
+
+        this.set('recordBeingSaved', null);
+        this.set('saveMode', CoreTasks.MODE_NOT_SAVING);
+
+        this._dirtyUsers = [];
+        this._dirtyProjects = [];
+        this._dirtyTasks = [];
+        throw 'Error saving data: Failed to save at least one user.';
       }
     }
   },
 
-  _saveUsers: function() {
-    this.set('saveMode', CoreTasks.MODE_SAVING_USERS);
-    this.get('store').commitRecords(CoreTasks.User, undefined, SC.clone(this._dirtyUsers));
+  _projectSaveRecordDidChange: function() {
+    var project = this.get('recordBeingSaved');
+
+    if (project && this.get('isSaving')) {
+      var status = project.get('status');
+
+      if (status & SC.Record.READY || status === SC.Record.DESTROYED_CLEAN) {
+        // Save was successful; remove the current observer.
+        this.removeObserver('recordBeingSaved.status', this, this._projectSaveRecordDidChange);
+
+        // Update the now-disassociated tasks.
+        SC.RunLoop.begin();
+        var tasks = project.get('disassociatedTasks');
+
+        if (tasks && SC.instanceOf(tasks, SC.RecordArray)) {
+          tasks.forEach(function(task) {
+            task.writeAttribute('projectId', project.readAttribute('id'));
+          });
+        }
+
+        SC.RunLoop.end();
+
+        // Continue saving dirty projects, if there are any left.
+        this._dirtyProjects.removeObject(project.get('storeKey'));
+        var nextProjectKey = this._dirtyProjects.objectAt(0);
+
+        if (nextProjectKey) {
+          // Add a new observer and commit.
+          var nextProject = this.get('store').materializeRecord(nextProjectKey);
+          this.set('recordBeingSaved', nextProject);
+          this.addObserver('recordBeingSaved.status', this, this._projectSaveRecordDidChange);
+          nextProject.commit();
+        } else {
+          // Safe to start committing tasks.
+          this._saveTasks();
+        }
+
+      } else if (status & SC.Record.ERROR) {
+        // Save failed.
+        // TODO: [SE] Handle this properly.
+        this.removeObserver('recordBeingSaved.status', this, this._projectSaveRecordDidChange);
+
+        this.set('recordBeingSaved', null);
+        this.set('saveMode', CoreTasks.MODE_NOT_SAVING);
+
+        this._dirtyUsers = [];
+        this._dirtyProjects = [];
+        this._dirtyTasks = [];
+        throw 'Error saving data: Failed to save at least one project.';
+      }
+    }
   },
 
-  _saveProjects: function() {
-    this.set('saveMode', CoreTasks.MODE_SAVING_PROJECTS);
-    this.get('store').commitRecords(CoreTasks.Project, undefined, SC.clone(this._dirtyProjects));
-  },
+  _taskSaveRecordDidChange: function() {
+    var task = this.get('recordBeingSaved');
 
-  _saveTasks: function() {
-    this.set('saveMode', CoreTasks.MODE_SAVING_TASKS);
-    this.get('store').commitRecords(CoreTasks.Task, undefined, SC.clone(this._dirtyTasks));
+    if (task && this.get('isSaving')) {
+      var status = task.get('status');
+
+      if (status & SC.Record.READY || status === SC.Record.DESTROYED_CLEAN) {
+        // Save was successful; remove the current observer.
+        this.removeObserver('recordBeingSaved.status', this, this._taskSaveRecordDidChange);
+
+        // Continue saving dirty tasks, if there are any left.
+        this._dirtyTasks.removeObject(task.get('storeKey'));
+        var nextTaskKey = this._dirtyTasks.objectAt(0);
+
+        if (nextTaskKey) {
+          // Add a new observer and commit.
+          var nextTask = this.get('store').materializeRecord(nextTaskKey);
+          this.set('recordBeingSaved', nextTask);
+          this.addObserver('recordBeingSaved.status', this, this._taskSaveRecordDidChange);
+          nextTask.commit();
+        } else {
+          // We're done.
+          this.removeObserver('recordBeingSaved.status', this, this._taskSaveRecordDidChange);
+
+          this.set('recordBeingSaved', null);
+          this.set('saveMode', CoreTasks.MODE_NOT_SAVING);
+
+          this._dirtyUsers = [];
+          this._dirtyProjects = [];
+          this._dirtyTasks = [];
+        }
+
+      } else if (status & SC.Record.ERROR) {
+        // Save failed.
+        // TODO: [SE] Handle this properly.
+        this.removeObserver('recordBeingSaved.status', this, this._taskSaveRecordDidChange);
+
+        this.set('recordBeingSaved', null);
+        this.set('saveMode', CoreTasks.MODE_NOT_SAVING);
+
+        this._dirtyUsers = [];
+        this._dirtyProjects = [];
+        this._dirtyTasks = [];
+        throw 'Error saving data: Failed to save at least one task.';
+      }
+    }
   },
 
   /**
@@ -444,7 +529,8 @@ CoreTasks = SC.Object.create({
   },
 
   // Used to assign all newly-created records with a negative ID.
-  // TODO: [SE] reset the counter so that we don't run out of integers if the client is left running for a long time
+  // TODO: [SE] Reset the counter so that we don't run out of integers if the client is left
+  // running for a long time.
   _currentRecordId: -1
 
 });
