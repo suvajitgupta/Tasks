@@ -300,7 +300,7 @@ Tasks.mainPage = SC.Page.design({
         }),
         
         SC.TextFieldView.design(Tasks.ToolTip, {
-          layout: { centerY: 0, height: 24, right: 240, width: 200 },
+          layout: { centerY: 0, height: 20, right: 240, width: 200 },
           classNames: ['assignee-selection-bar'],
           hint: "_AssigneeSelectionHint".loc(),
           toolTip: "_AssigneeSelectionTooltip".loc(),
@@ -318,7 +318,7 @@ Tasks.mainPage = SC.Page.design({
         }),
       
         SC.TextFieldView.design(Tasks.ToolTip, {
-          layout: { centerY: 0, height: 24, right: 10, width: 200 },
+          layout: { centerY: 0, height: 20, right: 10, width: 200 },
           classNames: ['tasks-search-bar'],
           hint: "_TasksSearchHint".loc(),
           toolTip: "_TasksSearchTooltip".loc(),
