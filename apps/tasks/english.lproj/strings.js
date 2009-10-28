@@ -90,8 +90,9 @@ SC.stringsFor('English', {
   "_Passed": "Passed",
   "_Failed": "Failed",
   "_Effort:": "Effort:",
-  "_EffortOnscreenHelp": "You may leave effort unspecified, enter a decimal value like 0.25, or a range like 2-3 (time units are 'd' or 'h')",
+  "_EffortOnscreenHelp": "May be unspecified,<br> a decimal like '0.25',<br> or a range like '2-3';<br> in units of 'd' or 'h'",
   "_Description:": "Description:",
+  "_DescriptionHint": "Enter detailed notes...",
   "_SubmitterTooltip": "Submitted by ",
   "_TaskEffortTooltip": "Effort (if specified) shown on right",
   "_IdTooltip": "Unique ID for task; Dashes indicate unsaved tasks; Background color indicates validation status",
@@ -146,6 +147,7 @@ SC.stringsFor('English', {
   "_Cancel": "Cancel",
   "_Close": "Close",
   "_Apply": "Apply",
+  "_Project:": "Project: ",
   
   // Status Bar strings
   "_Displaying": "Displaying ",

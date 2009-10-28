@@ -26,6 +26,13 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     }).from('Tasks.usersController.content');
   },
 
+  _listProjects: function() {
+    return SC.Binding.transform(function(value, binding) {
+       var ret = value.toArray();
+       return ret;
+    }).from('Tasks.projectsController.content');
+  },
+
   /** @private
     If mouse was down over Description Icon open the editor.
   */  
@@ -80,7 +87,8 @@ Tasks.TaskItemView = SC.ListItemView.extend(
             }),
 
             SC.LabelView.design({
-              layout: { top: 10, right: 145, height: 17, width: 80 },
+              layout: { top: 10, right: 165, height: 17, width: 80 },
+              textAlign: SC.ALIGN_RIGHT,
               value: "_Assignee:".loc()
             }),
             SC.SelectFieldView.design({
@@ -100,12 +108,24 @@ Tasks.TaskItemView = SC.ListItemView.extend(
               valueBinding: SC.binding('.content.effortValue', this)
             }),
             SC.LabelView.design({
-              layout: { top: 45, left: 150, height: 30, right: 10 },
+              layout: { top: 35, left: 145, height: 50, width: 125 },
+              escapeHTML: NO,
               classNames: [ 'onscreen-help'],
               value: "_EffortOnscreenHelp".loc()
             }),
             
-            // TODO: [SG] Beta: shrink onscreen help and add project selection field
+            SC.LabelView.design({
+              layout: { top: 47, right: 165, height: 17, width: 80 },
+              textAlign: SC.ALIGN_RIGHT,
+              value: "_Project:".loc()
+            }),
+            SC.SelectFieldView.design({
+              layout: { top: 47, right: 10, width: 150, height: 20 },
+              objectsBinding: this._listProjects(),
+              nameKey: 'displayName',
+              valueKey: 'id',
+              valueBinding: SC.binding('.content.projectId', this)
+            }),
 
             SC.LabelView.design({
               layout: { top: 75, left: 10, height: 17, width: 100 },
@@ -113,6 +133,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
             }),
             SC.TextFieldView.design({
               layout: { top: 98, left: 10, right: 10, bottom: 10 },
+              hint: "_DescriptionHint".loc(),
               isTextArea: YES,
               valueBinding: SC.binding('.content.description', this)
             })
