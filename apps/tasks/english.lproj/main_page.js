@@ -44,18 +44,18 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         SC.LabelView.design(Tasks.ToolTip, {
-          layout: { centerY: 0, height: 20, centerX: -118, width: 300 },
+          layout: { centerY: 0, height: 20, centerX: -150, width: 320 },
           escapeHTML: NO,
           classNames: ['welcome-message']
         }),
       
         SC.View.design({
-          layout: { top: 0, bottom: 0, right: 325, width: 2 },
+          layout: { top: 0, bottom: 0, right: 375, width: 2 },
           classNames: ['top-bar-divider']
         }),
 
         SC.View.design({
-          layout: { top: 0, height: 43, right: 270, width: 45 },
+          layout: { top: 0, height: 43, right: 325, width: 45 },
           childViews: [
             SC.View.design(Tasks.SimpleButton,{
               layout: { centerX: 0, top: 2, width: 24, height: 24 },
@@ -67,7 +67,7 @@ Tasks.mainPage = SC.Page.design({
             }),
 
             SC.LabelView.design(Tasks.SimpleButton,{
-              layout: { left: 0, right: 0, height: 19, top: 22 },
+              layout: { left: 0, right: 0, height: 19, top: 24 },
               classNames: ['title-bar-label'],
               value:  "_Save".loc(),
               toolTip: "_SaveTooltip".loc(),
@@ -77,6 +77,34 @@ Tasks.mainPage = SC.Page.design({
           ]
         }),
     
+        SC.View.design({
+          layout: { top: 0, height: 43, right: 280, width: 45 },
+          childViews: [
+            SC.View.design(Tasks.SimpleButton,{
+              layout: { centerX: 0, top: 2, width: 24, height: 24 },
+              classNames: ['refresh-icon'],
+              value:  "_Refresh".loc(),
+              toolTip: "_RefreshTooltip".loc(),
+              target: 'Tasks',
+              action: 'refreshData'
+            }),
+
+            SC.LabelView.design(Tasks.SimpleButton,{
+              layout: { left: 0, right: 0, height: 19, top: 24 },
+              classNames: ['title-bar-label'],
+              value:  "_Refresh".loc(),
+              toolTip: "_RefreshTooltip".loc(),
+              target: 'Tasks',
+              action: 'refreshData'
+            })
+          ]
+        }),
+    
+        SC.View.design({
+          layout: { top: 0, bottom: 0, right: 270, width: 2 },
+          classNames: ['top-bar-divider']
+        }),
+
         SC.View.design({
           layout: { centerY: 0, height: 43, right: 220, width: 45 },
           childViews: [
@@ -90,7 +118,7 @@ Tasks.mainPage = SC.Page.design({
             }),
 
             SC.LabelView.design(Tasks.SimpleButton,{
-              layout: { left: 0, right: 0, height: 19, top: 22 },
+              layout: { left: 0, right: 0, height: 19, top: 24 },
               classNames: ['title-bar-label'],
               title:  "_Import".loc(),
               toolTip: "_ImportTooltip".loc(),
@@ -114,7 +142,7 @@ Tasks.mainPage = SC.Page.design({
             }),
 
             SC.LabelView.design(Tasks.SimpleButton,{
-              layout: { left: 0, right: 0, height: 19, top: 22 },
+              layout: { left: 0, right: 0, height: 19, top: 24 },
               classNames: ['title-bar-label'],
               value:  "_Export".loc(),
               toolTip: "_ExportTooltip".loc(),
@@ -142,7 +170,7 @@ Tasks.mainPage = SC.Page.design({
             }),
 
             SC.LabelView.design(Tasks.SimpleButton,{
-              layout: { left: 0, right: 0, height: 19, top: 22 },
+              layout: { left: 0, right: 0, height: 19, top: 24 },
               classNames: ['title-bar-label'],
               value:  "_Settings".loc(),
               toolTip: "_SettingsTooltip".loc(),
@@ -165,7 +193,7 @@ Tasks.mainPage = SC.Page.design({
             }),
 
             SC.LabelView.design(Tasks.SimpleButton,{
-              layout: { left: 0, right: 0, height: 19, top: 22 },
+              layout: { left: 0, right: 0, height: 19, top: 24 },
               classNames: ['title-bar-label'],
               value:  "_Help".loc(),
               toolTip: "_HelpTooltip".loc(),
@@ -188,7 +216,7 @@ Tasks.mainPage = SC.Page.design({
             }),
 
             SC.LabelView.design(Tasks.SimpleButton,{
-              layout: { left: 0, right: 0, height: 19, top: 22 },
+              layout: { left: 0, right: 0, height: 19, top: 24 },
               classNames: ['title-bar-label'],
               value:  "_Logout".loc(),
               toolTip: "_LogoutTooltip".loc(),

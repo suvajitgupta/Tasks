@@ -222,12 +222,21 @@ Tasks.mixin({
   },
   
   /**
-   * Save modified data to persistent store.
+   * Save modified Tasks data to server.
    */
   saveData: function() {
     CoreTasks.saveChanges();
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', "_SaveMessage".loc() + new Date().format('hh:mm:ss a'));
+  },
+  
+  /**
+   * Reload latest Tasks data from server.
+   */
+  refreshData: function() {
+    this._notImplemented('refreshData');
+    var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
+    serverMessage.set('value', "_RefreshMessage".loc() + new Date().format('hh:mm:ss a'));
   },
   
   /**

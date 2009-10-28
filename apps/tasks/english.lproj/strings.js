@@ -25,7 +25,9 @@ SC.stringsFor('English', {
   "_Credits": "Credits: Suvajit Gupta, Sean Eidemiller, Josh Holt, Brandon Blatnick, Matt Grantham",
   "_User:": "User: ",
   "_Save": "Save",
-  "_SaveTooltip": "Save Tasks data to the server",
+  "_SaveTooltip": "Save modified Tasks data to the server",
+  "_Refresh": "Refresh",
+  "_RefreshTooltip": "Reload latest Tasks data from the server",
   "_Import": "Import",
   "_ImportTooltip": "Import Tasks data from a text format",
   "_ImportInstructions:": "Paste or type in text to be imported:<br>(see format on right)",
@@ -152,6 +154,7 @@ SC.stringsFor('English', {
   "_UsersLoaded": "Loaded users, ",
   "_TasksLoaded": "tasks, ",
   "_ProjectsLoaded": " and projects.",
-  "_SaveMessage": "Last saved "
+  "_SaveMessage": "Data last saved ",
+  "_RefreshMessage": "Data last refreshed "
     
 });

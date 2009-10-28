@@ -47,13 +47,22 @@
 }
 
 .welcome-message {
-  font-size: 12px !important;
+  font-size: 11px !important;
   text-align: center !important;
   color: white !important;
 }
 
 .save-icon {
   background: static_url('images/default-theme-static.png') no-repeat 0 -50px;
+}
+
+/*
+// TODO: [MG] Beta: add a refresh icon
+*/
+.refresh-icon {
+	width: 24px;
+	height: 24px;
+	background: no-repeat sc_static('icons/shared') 0px -216px;
 }
 
 /*
@@ -85,23 +94,38 @@
 }
 
 .import-icon {
-  background: static_url('images/default-theme-static.png') no-repeat 0 0;
+	width: 24px;
+	height: 24px;
+  background: no-repeat sc_static('icons/shared') -24px -240px;
+/*  background: static_url('images/default-theme-static.png') no-repeat 0 0;*/
 }
 
 .export-icon {
-  background: static_url('images/default-theme-static.png') no-repeat 0 -25px;
+  width: 24px;
+  height: 24px;
+  background: no-repeat sc_static('icons/shared') 0px -240px;
+/*  background: static_url('images/default-theme-static.png') no-repeat 0 -25px;*/
 }
 
 .settings-icon {
-  background: static_url('images/default-theme-static.png') no-repeat 0 -74px;
+  width: 24px;
+  height: 24px;
+  background: no-repeat sc_static('icons/shared') 0px -144px;
+/*  background: static_url('images/default-theme-static.png') no-repeat 0 -74px;*/
 }
 
 .help-icon {
-  background: static_url('images/default-theme-static.png') no-repeat 0 -98px;
+  width: 24px;
+  height: 24px;
+  background: no-repeat sc_static('icons/shared') -0px -192px;
+/*  background: static_url('images/default-theme-static.png') no-repeat 0 -98px;*/
 }
 
 .logout-icon {
-  background: static_url('images/default-theme-static.png') no-repeat 0 -121px;
+  width: 24px;
+  height: 24px;
+  background: no-repeat sc_static('icons/shared') 0px -312px;
+/*  background: static_url('images/default-theme-static.png') no-repeat 0 -121px;*/
 }
 
 
