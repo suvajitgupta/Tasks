@@ -72,7 +72,26 @@ CoreTasks.Task = CoreTasks.Record.extend({
   projectId: SC.Record.attr(Number),
 
   /**
-   * The proiority of the task (HIGH indicates task must be completed, LOW ones are not used for effort subtotals).
+   *  This computed property buffers changes to the projectId field.
+   */
+  projectValue: function(key, value) {
+    
+    if (value !== undefined) {
+      var id = (value === '0')? null : value;
+      this.propertyWillChange('projectId');
+      this.writeAttribute('projectId', id);
+      this.propertyDidChange('projectId');
+    } else {
+      value = this.get('projectId');
+      if (value === null) value = '0';
+    }
+    
+    return value;
+
+  }.property('projectId').cacheable(),
+
+  /**
+   * The priority of the task.
    */
   priority: SC.Record.attr(String, {
     isRequired: YES,
@@ -97,11 +116,8 @@ CoreTasks.Task = CoreTasks.Record.extend({
   }.property('effort').cacheable(),
   
   /**
-    We are using this computed property so that we can buffer changes to 
-    the effort field of a task. [JH2]
-    
-    --- Solves a jumpy text area/text field when connected to a binding. [JH2]
-  */
+   *  This computed property buffers changes to the effort field.
+   */
   effortValue: function(key, value){
     if (value !== undefined) {
       if(value === '') {

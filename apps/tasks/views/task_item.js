@@ -22,7 +22,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   _listUsers: function() {
     return SC.Binding.transform(function(value, binding) {
        var ret = value.toArray();
-       ret.push({ id: 0, displayName: "_Unassigned".loc() });
+       ret.push({ id: '0', displayName: "_Unassigned".loc() });
        return ret;
     }).from('Tasks.usersController.content');
   },
@@ -37,7 +37,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
        idx = ret.indexOf(CoreTasks.get('unallocatedTasksProject'));
        if(idx !== -1) ret.splice(idx, 1);
        
-       ret.push({ id: null, displayName: "_Unallocated".loc() });
+       ret.push({ id: '0', displayName: "_Unallocated".loc() });
        return ret;
        
     }).from('Tasks.projectsController.content');
@@ -134,7 +134,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
               objectsBinding: this._listProjects(),
               nameKey: 'displayName',
               valueKey: 'id',
-              valueBinding: SC.binding('.content.projectId', this)
+              valueBinding: SC.binding('.content.projectValue', this)
             }),
 
             SC.LabelView.design({
