@@ -20,12 +20,13 @@ Design/Planning
 | Guests only have R on all entities
 
 General Infrastructure
+^ Fix missing/flashing scrollbar on Firefox <SG> [SC] $Bug
 ^ Develop Model and Fixtures (hardcoded & generated) [SG] <SE> @Done
 - Beta: Develop States/Actions corresponding to GUI Statecharts [SG] <SE> @Active
 - Support minimum resolution of 1024x768 [SG] @Done $Feature %Passed
 - Support decimal numbers for project timeLeft and task effort in units of 'd' or 'h' [SG] @Done %Passed $Feature
 ^ Have tasks refer to project they are allocated to and make projects Store queries [SE] <SG> @Done %Passed
-- Beta: Handle persistence consistently (nothing should save unless user hits Save) [SE] <SG> @Active
+- Handle persistence consistently (nothing should save unless user hits Save) [SE] <SG> @Done %Passed
 v Make task in-cell editors fit with collection view item size [SG] <JH2> $Bug
 | Fix in CSS add class .ghost to list item view and set its background to none
 v Track/optimize calls to assignments controller for redrawing tasks tree [BB] <SG> @Active
@@ -85,7 +86,7 @@ v Enable/disable "Del. Task" button based on having a selected task [SG] @Done %
 - Color code assignee non loading in gray, under loading in green, proper loading in blue, and over loading in red [SG] @Done $Feature %Passed
 v Add hover over tooltip for assignees to show how many tasks they have and to explain loading color codes [SG] @Done $Feature %Passed
 ^ Allow multi-task drag-n-drop reassignment [BB] <SG>  @Done $Feature %Passed
-^ Add popup viewer/editor for Task submitter, sssignee, effort, and description [JH2] <SG> @Done %Passed $Feature
+^ Add popup viewer/editor for Task submitter, assignee, effort, project, and description [JH2] <SG> @Done %Passed $Feature
 v Add context menu to Add/Delete/Duplicate/Copy Contents of a task <JH2> [SG] $Feature
 - Not in scope: Add support for nested tasks/tagging, inter-task dependencies/linking, preserving original estimate/partial time logging
 

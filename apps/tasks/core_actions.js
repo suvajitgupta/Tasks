@@ -244,7 +244,6 @@ Tasks.mixin({
    * Import data from external text file.
    */
   importData: function() {
-    // FIXME: [SE] Beta: fix imported tasks disappearing from project after Save, then reappearing after re-login
     Tasks.importDataController.openPanel();  
   },
 
@@ -407,7 +406,6 @@ Tasks.mixin({
         task.destroy();
       }
       tc.set('selection', null);
-      // FIXME: [SE] Beta: fix deleted task erroneously moving to UnallocatedTasks, after Save deleted tasks become "_NewTask", clears up after re-login
     }
   },
   
