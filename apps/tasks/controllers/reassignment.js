@@ -61,12 +61,14 @@ Tasks.reassignmentController = SC.Object.create(SC.CollectionViewDelegate,
 
     // Get assignee of item before drag location
     var content   = view.get('content');
-    var newAssignee = content.objectAt(idx-1).get('assignee');
+    var targetAssignee = content.objectAt(idx-1).get('assignee');
     
     // Set dragged tasks' assignee to new assignee
     tasks.forEach(function(task) {
-      if (task.get('assignee') !== newAssignee) {
-        task.set('assignee', newAssignee);
+      if (task.get('assignee') !== targetAssignee) {
+        var targetAssigneeId = targetAssignee === null? null : targetAssignee.get('id');
+        // console.log('Reassigning to: ' + (targetAssignee? targetAssignee.get('name') : 'Unassigned') + ' of Id: ' + targetAssigneeId);
+        task.set('assigneeId', targetAssigneeId);
       }
     }, this);
     

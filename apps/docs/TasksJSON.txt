@@ -36,6 +36,6 @@ User:
 	role*: Enum<String>, ("Manager" | "_Developer_" | "Tester") # to allow RBAC
 	email: <String>, # email address used for notifications
 	password: <String>, # encrypted password used for authentication
-	preferences: { key: value}, # preferences stored as key/value pairs
+	preferences: { key: value }, # preferences stored as key/value pairs
 	authToken: <String> # authentication token from logging into a server
 }
