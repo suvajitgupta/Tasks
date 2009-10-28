@@ -36,7 +36,7 @@ Tasks.signupPage = SC.Page.design({
         contentBinding: 'Tasks.signupController'
       }),
       
-      // FIXME: [SG] see why you can't signup more than 1 user each time Tasks loads
+      // FIXME: [SG] Beta: see why you can't signup more than 1 user each time Tasks loads
       signupButton: SC.ButtonView.design({
         layout: { bottom: 10, right: 10, width: 90, height: 24 },
         title: "_Signup".loc(),

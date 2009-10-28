@@ -83,7 +83,7 @@ CoreTasks = SC.Object.create({
   ONLINE_MODE: 1,
 
   // The current mode of operation.
-  // TODO: [SE] set Tasks application mode via URL.
+  // TODO: [SE] set Tasks application mode via URL
   mode: null,
 
   /*
@@ -444,7 +444,7 @@ CoreTasks = SC.Object.create({
   },
 
   // Used to assign all newly-created records with a negative ID.
-  // TODO: [SE] reset the counter so that we don't run out of integers if the client is left running for a long time.
+  // TODO: [SE] reset the counter so that we don't run out of integers if the client is left running for a long time
   _currentRecordId: -1
 
 });

@@ -18,7 +18,6 @@ Design/Planning
 | Managers have permission to do full CRUD on Projects/Tasks/Users & Import
 | Developers/Testers can only R on Projects, CRUD on Tasks, and Import Tasks (not create new Projects)
 | Guests only have R on all entities
-v Design single/multi-user modes & access via Desktop/Web/Mobile clients [SG] <SE> @Active
 
 General Infrastructure
 ^ Develop Model and Fixtures (hardcoded & generated) [SG] <SE> @Done
@@ -30,11 +29,10 @@ General Infrastructure
 v Make task in-cell editors fit with collection view item size [SG] <JH2> $Bug
 | Fix in CSS add class .ghost to list item view and set its background to none
 v Track/optimize calls to assignments controller for redrawing tasks tree [BB] <SG> @Active
-v Add slide down/up animation for task attributes filter pane [SG] $Feature
 v Make buttons depressable to provide feedback when using them [SG]
-v Allow direct bookmarking of Tasks projects using SproutCore routes [SG] $Feature
+- Beta: Allow direct bookmarking of Tasks projects using SproutCore routes [SG] $Feature @Active
 - Show newly added tasks/projects with a badge <SE> [SG] $Feature
-- Add email notifications on task changes to Assignee/Manager [SG] <JH2> $Feature @Active
+- Add email notifications on task changes to Assignee/Manager [SG] <JH2> $Feature
 - Add abiity to watch tasks and get email notifications on task changes [SG] <JH2> $Feature
 - Add support for leaving comments in record descriptions [SG] <SE> $Feature
 - Add support for attachments in record descriptions [SG] <SE> $Feature
@@ -65,12 +63,8 @@ v Add context menu to Add/Delete a project <SG> [JH2] $Feature
 
 Task Manager GUI
 ^ Group Tasks by User and display Task id, summary, and effort (if specified) on far right [SG] <JH2> @Done $Feature %Passed
-^ Fix missing/flashing scrollbar on Firefox/Windows [SC] <SG> $Bug @Active
-| To reproduce: search for a Task in search bar or select AllTasks, scroll down, select a task, then select another project)
 ^ Support automatic sorting of tasks by status, validation, priority, and type (in order)[SG] <SG> @Done $Feature %Passed
 - Allow Tasks under an assignee to be hidden/disclosed [SG] <JH2> @Done $Feature %Passed
-- Allow SourceListView disclosures to be opened/closed properly (Apple has on priority list) [SC] <SG> @Active $Bug
-- Drag-n-drop in SourceListView is broken (Apple has on priority list) [SC] <SG> @Active $Bug
 - Show Task Type via different icons [SG] <JH2> @Done $Feature %Passed
 - Show Task Priority (font style), Status (font color), Validation (background color) [SG] <MB> @Done $Feature %Passed
 - Add Task Status/Priority/Validation radio buttons in tasks toolbar [SG] @Done $Feature %Passed
@@ -114,9 +108,8 @@ Application Manager GUI
 - Summarize number of projects/assignees/tasks being displayed in the status bar [SG] <MB> @Done $Feature %Passed
 - Add "Save" button in top toolbar, note time of last save in status bar [SG] <BB> @Done $Feature %Passed
 - Beta: Enable/disable Save button based on data modification [SG] <MB> $Feature @Risky
-- Beta: Add Refresh button to get most recent data from server [SG] <SE> $Feature
+- Beta: Add "Refresh" button to get most recent data from server [SG] <SE> $Feature @Active
 - Add "Import" button in top toolbar with associated pop up panel [SG] <BB> @Done $Feature %Passed
-v Allow drag-n-drop of a TXT file into App for data importing using Google Gears [MB] <SG> @Risky $Feature
 | Gears needs to be ported to Snow Leopard
 - Add "Export" button in top toolbar with associated pop up panel [SG] @Done $Feature %Passed
 | When on "All Tasks" project with no filters on all project data is exported, otherwise only displayed data is exported
@@ -125,8 +118,8 @@ v Allow drag-n-drop of a TXT file into App for data importing using Google Gears
 | * percent and min days for Assignee loading determination
 | * email notifications
 v Add export to HTML for human-readable version (for baselining tasks for a release, for instance) [SG]
-- Add Online Help button in top Toolbar & popup Help dialog [SG] @Done %Passed $Feature
-v Add screenshots with callouts for Online Help content [SG] $Feature
+- Add online "Help" button in top toolbar & popup help dialog [SG] @Done %Passed $Feature
+v Add screenshots with callouts for online help content [SG] $Feature
 - Add online training video using Captivate or Camtasia [SG] $Feature
 - Add onscreen help (on panel fields that are complex and on blank workspace to assist new users) [SG] @Active $Feature
 - Add Logout button to exit in top toolbar (confirm before exiting, reload data/clear all filters) [SG] <JH2> @Done $Feature %Passed
@@ -134,18 +127,17 @@ v Add screenshots with callouts for Online Help content [SG] $Feature
 - Restore application settings/state from last login using HTML5 storage [SG] <MB> $Feature
 | See demo.sproutcore.com/user_defaults and lookup SproutCore blog for Charles' posting on this topic
 v Add hotkeys for common operations (like add/delete projects/tasks and save) [EG] <SG> $Feature @Done %Passed
-- Allow assignee/search filter crieria to be stored/used as a "Saved Search" in projects list [SG] <SE> $Feature
 v Add Undo/Redo buttons in top toolbar (till last Save) [SG] <SE> $Feature
 
 Server
 ^ Build persistence server using Persevere [SE] <SG> @Done %Passed
 - Create a "System Administrator (SA)" user with Manager role in Persevere at installation time [SE] <SG>
+- Beta: document steps for creating a team production deployment of Tasks [SE] <SG>
 ^ Beta: Build persistence server: local using Sinatra/SQLite and remote using Google App Engine [JH2] <SG> @Active
 - Patch SproutCore to avoid overwhelming async calls for file imports with more than 20 tasks [SE] <SG> @Done %Passed $Bug
 ^ Beta: Switch to latest SproutCore postback and modified SC.Store APIs <SE> [SG] @Active
 - Beta: Implement Server-based user authentication & authorization (Role-based access control) [JH2] <SG> @Active
 - Add server-side data validation checks/return appropriate error codes [SE] <SG>
-v Implement multi-user concurrent access using Transaction Time [SG] <SE>
 
 Styling/Hardening
 ^ Beta: Style via CSS, embed catchy/sprited images [MG] <SG> @Active

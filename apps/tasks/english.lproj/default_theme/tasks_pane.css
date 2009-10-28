@@ -235,7 +235,7 @@
   top: 3px !important;
   right: 3px !important;
   width: 16px !important;
-  padding-left: 30px; // FIXME: [SC] why is so much padding needed - otherwise get a scrollbar when the popup pane comes up!
+  padding-left: 30px;
 }
 
 .task-icon-has-description {

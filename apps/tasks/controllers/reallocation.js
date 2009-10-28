@@ -75,7 +75,7 @@ Tasks.reallocationController = SC.Object.create(SC.CollectionViewDelegate,
   */
   collectionViewDeleteContent: function(view, content, indexes) {
     if (content && (SC.typeOf(content.destroyAt) === SC.T_FUNCTION || SC.typeOf(content.removeAt) === SC.T_FUNCTION)) {
-      // TODO: [SG] see how to keep selected project highlighted after user cancels deletion via Del key
+      // FIXME: [SC] see how to keep selected project highlighted after user cancels deletion via Del key
       return Tasks.deleteProject();
     }
     return NO;

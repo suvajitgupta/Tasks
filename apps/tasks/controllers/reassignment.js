@@ -53,7 +53,7 @@ Tasks.reassignmentController = SC.Object.create(SC.CollectionViewDelegate,
   collectionViewPerformDragOperation: function(view, drag, dragOp, idx, dropOp) {
     
     // tells the CollectionView to do nothing
-    // TODO: [BB] shouldn't allow the first position to be draggable
+    // TODO: [BB] don't allow the first item in list to be draggable
     if (idx === 0) return SC.DRAG_MOVE;
     
     // Extract tasks to drag

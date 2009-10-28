@@ -8,7 +8,7 @@
 */
 
 /*
-// FIXME: [SC] see how to make this work instead of having min-width/height specified for mainPane
+// FIXME: [SC] see how to make min-width/height work when specified on "body" instead of "mainPane"
 body {
   position: absolute;
   top: 0;
