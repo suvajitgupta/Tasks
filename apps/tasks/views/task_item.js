@@ -28,8 +28,17 @@ Tasks.TaskItemView = SC.ListItemView.extend(
 
   _listProjects: function() {
     return SC.Binding.transform(function(value, binding) {
+      
        var ret = value.toArray();
+       
+       var idx = ret.indexOf(CoreTasks.get('allTasksProject'));
+       if(idx !== -1) ret.splice(idx, 1);
+       idx = ret.indexOf(CoreTasks.get('unallocatedTasksProject'));
+       if(idx !== -1) ret.splice(idx, 1);
+       
+       ret.push({ id: null, displayName: "_Unallocated".loc() });
        return ret;
+       
     }).from('Tasks.projectsController.content');
   },
 

@@ -53,7 +53,7 @@ SC.stringsFor('English', {
   "_ConfirmProjectDeletion": "Tasks in this project will become unallocated, are you sure you want to delete it?",
   "_NewProject": "New Project",
   "_AllTasks": "All Tasks",
-  "_Unallocated": " unallocated",
+  "_Unallocated": "Unallocated",
   "_UnallocatedTasks": "Unallocated Tasks",
   "_Has": "Has ",
   "_Tasks": " task(s)",

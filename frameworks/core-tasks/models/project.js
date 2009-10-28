@@ -124,7 +124,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
     var tasksCount = this.get('tasks').get('length');
     var ret;
     if(projectName === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) {
-      ret = '# ' + "_Has".loc() + tasksCount + "_Unallocated".loc() + "_Tasks".loc();
+      ret = '# ' + "_Has".loc() + tasksCount + ' ' + "_Unallocated".loc() + "_Tasks".loc();
     }
     else {
       ret = projectName;
