@@ -405,7 +405,7 @@ Tasks.mixin({
         var task = sel.nextObject(i, null, context);
         task.destroy();
       }
-      tc.set('selection', null);
+      Tasks.deselectTasks();
     }
   },
   

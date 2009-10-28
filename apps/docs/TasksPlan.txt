@@ -141,7 +141,7 @@ Server
 
 Styling/Hardening
 ^ Beta: Style via CSS, embed catchy/sprited images [MG] <SG> @Active
-^ Beta: Perform smoke test of key functionality [SG] @Active
+^ Perform smoke test of key functionality [SG] @Done
 | Login/Logout
 | Project/Task/User CRUD
 | All/Unallocated Tasks reserved projects

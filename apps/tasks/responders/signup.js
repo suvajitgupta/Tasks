@@ -31,7 +31,7 @@ Tasks.SIGNUP = SC.Responder.create(Tasks.Sha1,{
     
     var pane = Tasks.getPath('signupPage.mainPane');
     pane.append();
-    pane.makeFirstResponder(pane.contentView.userInformation.loginNameField);
+    pane.makeFirstResponder(pane.contentView.userInformation.fullNameField);
   },
   
   // called when the OK button is pressed.

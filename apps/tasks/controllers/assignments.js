@@ -187,7 +187,8 @@ Tasks.assignmentsController = SC.ArrayController.create(
     // console.log("DEBUG: showAssignments(" + this.count + ") entry at: " + new Date().format('hh:mm:ss a'));
     
     // Extract selected assignee users whose tasks are to be displayed
-    var selection = Tasks.tasksController.getPath('selection.firstObject');
+    var selection = Tasks.tasksController.get('selection');
+    
     var selectedAssigneeDisplayNames = [];
     var selectedAssignees = this.get('assigneeSelection');
     if (selectedAssignees) {
@@ -270,7 +271,8 @@ Tasks.assignmentsController = SC.ArrayController.create(
       if (a.displayName===b.displayName) return 0;
       return (a.displayName > b.displayName) ? 1 : -1;
     }), treeItemIsExpanded: YES }));
-    if(selection) Tasks.tasksController.selectObject(selection);
+    
+    if(selection) Tasks.tasksController.selectObjects(selection);
     // console.log("DEBUG: showAssignments(" + this.count++ + ") exit  at: " + new Date().format('hh:mm:ss a'));
 
   },
