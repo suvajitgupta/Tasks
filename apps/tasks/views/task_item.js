@@ -18,6 +18,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   content: null,
   _editorPane: null,
   
+  // FIXME: [SG] Beta: decide how to handle null value of task.submitterId/assigneeId/projectId
   _listUsers: function() {
     return SC.Binding.transform(function(value, binding) {
        var ret = value.toArray();
