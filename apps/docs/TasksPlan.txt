@@ -157,7 +157,7 @@ Styling/Hardening
 | Task reassignment/reallocation (drag-n-drop)
 | Task attribute filtering, assignee selection, ID/name searching
 | Save, Import/Export
-- Perform I18N and L10N (test with reversed strings) [SG] <JH2> @Active
+- Perform I18N and L10N (test with reversed strings) [SG] <JH2> @Done %Passed
 - Develop Model unit tests [SG] <BB> @Active
 - Develop View unit tests [SG] <MB> @Active
 - Handle secondary scenarios/provide good diagnostics [SG] <SE>
