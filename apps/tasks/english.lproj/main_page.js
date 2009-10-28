@@ -284,12 +284,12 @@ Tasks.mainPage = SC.Page.design({
         }),
         
         SC.View.design({
-          layout: { top: 0, bottom: 0, right: 565, width: 2 },
+          layout: { top: 0, bottom: 0, right: 545, width: 2 },
           classNames: ['top-bar-divider']
         }),
 
         SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerY: 0, right: 465, height: 16, width: 90 },
+          layout: { centerY: 0, right: 445, height: 16, width: 90 },
           displayProperties: [ 'icon' ],
           iconBinding: 'Tasks.assignmentsController.attributeFilterIcon',
           value: "_FilterTasks".loc(),
@@ -299,8 +299,13 @@ Tasks.mainPage = SC.Page.design({
           action: 'filterTasks'
         }),
         
+        SC.View.design({
+          layout: { centerY: 0, height: 16, right: 405, width: 16 },
+          classNames: ['assignee-selection-icon']
+        }),
+      
         SC.TextFieldView.design(Tasks.ToolTip, {
-          layout: { centerY: 0, height: 20, right: 240, width: 200 },
+          layout: { centerY: 0, height: 20, right: 225, width: 200 },
           classNames: ['assignee-selection-bar'],
           hint: "_AssigneeSelectionHint".loc(),
           toolTip: "_AssigneeSelectionTooltip".loc(),
@@ -308,13 +313,18 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         SC.View.design({ // Assignee Selection cancel button
-          layout: { centerY: 1, height: 12, right: 245, width: 12 },
+          layout: { centerY: 1, height: 12, right: 230, width: 12 },
           isVisible: NO,
           classNames: ['filter-cancel-icon'],
           mouseDown: function() {
             Tasks.assignmentsController.set('assigneeSelection', '');
           },
           isVisibleBinding: SC.Binding.oneWay('Tasks.assignmentsController.assigneeSelection').bool()
+        }),
+      
+        SC.View.design({
+          layout: { centerY: 0, height: 16, right: 190, width: 16 },
+          classNames: ['tasks-search-icon']
         }),
       
         SC.TextFieldView.design(Tasks.ToolTip, {
