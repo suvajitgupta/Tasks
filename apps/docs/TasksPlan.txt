@@ -136,7 +136,6 @@ Server
 - Beta: document steps for creating a team production deployment of Tasks [SE] <SG>
 ^ Beta: Build persistence server: local using Sinatra/SQLite and remote using Google App Engine [JH2] <SG> @Active
 - Patch SproutCore to avoid overwhelming async calls for file imports with more than 20 tasks [SE] <SG> @Done %Passed $Bug
-^ Beta: Switch to latest SproutCore postback and modified SC.Store APIs <SE> [SG] @Active
 - Beta: Implement Server-based user authentication & authorization (Role-based access control) [JH2] <SG> @Active
 - Add server-side data validation checks/return appropriate error codes [SE] <SG>
 
