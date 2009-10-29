@@ -26,7 +26,7 @@ Tasks.loginPage = SC.Page.create({
       childViews: 'loginField loginErrorMessage cancelButton loginButton signup'.w(),
       
       loginField: SC.TextFieldView.design({
-        layout: { top: 137, left: 341, width: 252, height: 21 },
+        layout: { top: 135, left: 341, width: 252, height: 21 },
         classNames: ['login-name'],
         valueBinding: 'Tasks.loginController.loginName'
       }),

@@ -10,9 +10,22 @@
   background: static_url('images/login-bg.png') no-repeat;
 }
 
-.login-name {
-  font-size: 18px;
+.sc-view .sc-text-field-view {
+  background: none !important;
+}
+
+.sc-view.sc-text-field-view.login-name {
+  font-size: 16px;
   font-weight: bold;
+}
+
+.sc-view.sc-text-field-view.login-name.focus {
+  border: none !important;
+  outline: none !important;
+}
+
+.sc-view.sc-text-field-view.login-name .border {
+  background: none !important;
 }
 
 .login-name input {
