@@ -30,7 +30,8 @@ Tasks.attributeFilterTroubled = [
 Tasks.attributeFilterUnfinished = [
   CoreTasks.TASK_TYPE_FEATURE, CoreTasks.TASK_TYPE_BUG, CoreTasks.TASK_TYPE_OTHER,
   CoreTasks.TASK_PRIORITY_HIGH, CoreTasks.TASK_PRIORITY_MEDIUM,
-  CoreTasks.TASK_STATUS_PLANNED, CoreTasks.TASK_STATUS_ACTIVE, CoreTasks.TASK_STATUS_RISKY
+  CoreTasks.TASK_STATUS_PLANNED, CoreTasks.TASK_STATUS_ACTIVE, CoreTasks.TASK_STATUS_DONE, CoreTasks.TASK_STATUS_RISKY,
+  CoreTasks.TASK_VALIDATION_FAILED
 ];
 
 Tasks.attributeFilterUnvalidated = [
@@ -50,7 +51,8 @@ CoreTasks.TASK_TYPE_FEATURE, CoreTasks.TASK_TYPE_BUG, CoreTasks.TASK_TYPE_OTHER,
 Tasks.attributeFilterShowstoppers = [
   CoreTasks.TASK_TYPE_BUG,
   CoreTasks.TASK_PRIORITY_HIGH,
-  CoreTasks.TASK_STATUS_PLANNED, CoreTasks.TASK_STATUS_ACTIVE, CoreTasks.TASK_STATUS_RISKY
+  CoreTasks.TASK_STATUS_PLANNED, CoreTasks.TASK_STATUS_ACTIVE, CoreTasks.TASK_STATUS_DONE, CoreTasks.TASK_STATUS_RISKY,
+  CoreTasks.TASK_VALIDATION_FAILED
 ];
 
 Tasks.assignmentsController = SC.ArrayController.create(
