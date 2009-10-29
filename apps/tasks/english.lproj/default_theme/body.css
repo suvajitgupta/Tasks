@@ -23,10 +23,6 @@ body {
 }
 */
 
-.sc-collection-view {
-  border-top: 0 !important;
-}
-
 #mainPane {
   min-width: 1024px;
 }
@@ -54,7 +50,24 @@ body {
 	line-height: 12px !important;
 }
 
-.sc-text-field-view .sc-hint {
+.quickfilter-toolbar {
+	background: #36F;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+
+.quickfilter-label {
+  font-size: 10px !important;
+  font-weight: bold !important;
+  color: #000 !important;
+  text-align: center !important;
+}
+
+.sc-collection-view {
+  border-top: 0 !important;
+}
+
+.sc-view.sc-text-field-view .sc-hint {
   z-index: 0;
 }
 
@@ -72,20 +85,6 @@ body {
 .checkbox-icon .label {
   left: 38px !important;
 }
-
-.quickfilter-toolbar {
-	background: #36F;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-}
-
-.quickfilter-label {
-  font-size: 10px !important;
-  font-weight: bold !important;
-  color: #000 !important;
-  text-align: center !important;
-}
-
 
 /*
 // TODO: [MG] sprite/delete all standalone image files

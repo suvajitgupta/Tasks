@@ -299,19 +299,22 @@ Tasks.mainPage = SC.Page.design({
           action: 'filterTasks'
         }),
         
-        SC.View.design({
-          layout: { centerY: 0, height: 16, right: 405, width: 16 },
-          classNames: ['assignee-selection-icon']
-        }),
-      
         SC.TextFieldView.design(Tasks.ToolTip, {
-          layout: { centerY: 0, height: 20, right: 225, width: 200 },
+          layout: { centerY: 0, height: 24, right: 225, width: 200 },
           classNames: ['assignee-selection-bar'],
           hint: "_AssigneeSelectionHint".loc(),
           toolTip: "_AssigneeSelectionTooltip".loc(),
           valueBinding: 'Tasks.assignmentsController.assigneeSelection'
         }),
 
+        SC.TextFieldView.design(Tasks.ToolTip, {
+          layout: { centerY: 0, height: 24, right: 10, width: 200 },
+          classNames: ['tasks-search-bar'],
+          hint: "_TasksSearchHint".loc(),
+          toolTip: "_TasksSearchTooltip".loc(),
+          valueBinding: 'Tasks.assignmentsController.searchFilter'
+        }),
+      
         SC.View.design({ // Assignee Selection cancel button
           layout: { centerY: 1, height: 12, right: 230, width: 12 },
           isVisible: NO,
@@ -320,19 +323,6 @@ Tasks.mainPage = SC.Page.design({
             Tasks.assignmentsController.set('assigneeSelection', '');
           },
           isVisibleBinding: SC.Binding.oneWay('Tasks.assignmentsController.assigneeSelection').bool()
-        }),
-      
-        SC.View.design({
-          layout: { centerY: 0, height: 16, right: 190, width: 16 },
-          classNames: ['tasks-search-icon']
-        }),
-      
-        SC.TextFieldView.design(Tasks.ToolTip, {
-          layout: { centerY: 0, height: 20, right: 10, width: 200 },
-          classNames: ['tasks-search-bar'],
-          hint: "_TasksSearchHint".loc(),
-          toolTip: "_TasksSearchTooltip".loc(),
-          valueBinding: 'Tasks.assignmentsController.searchFilter'
         }),
       
         SC.View.design({ // Tasks Search cancel button

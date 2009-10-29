@@ -166,22 +166,31 @@
   background: static_url('images/default-theme-static.png') no-repeat 0 -144px;
 }
 
-.assignee-selection-icon {
-	background: no-repeat sc_static('icons/shared') -0px -448px;
-  z-index: 101 !important;
+.sc-view.sc-text-field-view.assignee-selection-bar {
+  background: none;
+}
+
+.sc-view.sc-text-field-view.assignee-selection-bar.focus {
+  outline: none !important;
+}
+
+.sc-view.sc-text-field-view.assignee-selection-bar .border {
+  background: none;
 }
 
 .assignee-selection-bar {
-/*  background: static_url('images/default-theme-assignee-selection-bg.png') no-repeat;*/
+  background: static_url('images/default-theme-assignee-selection-bg.png') no-repeat;
 }
 
 .assignee-selection-bar .sc-hint {
+  padding-top: 3px !important;
   left: 20px !important;
   font-size: 11px !important;
   font-style: italic !important;
 }
 
 .assignee-selection-bar input {
+  padding-top: 3px !important;
   padding-left: 20px !important;
   width: 155px !important;
   font-weight: bold !important;
@@ -192,22 +201,31 @@
   border: 0 !important;
 }
 
-.tasks-search-icon {
-  background: static_url('images/tasks-search.jpg') no-repeat 0 0;
-  z-index: 101 !important;
+.sc-view.sc-text-field-view.tasks-search-bar{
+  background: none;
+}
+
+.sc-view.sc-text-field-view.tasks-search-bar.focus {
+  outline: none !important;
+}
+
+.sc-view.sc-text-field-view.tasks-search-bar .border {
+  background: none;
 }
 
 .tasks-search-bar {
-/*  background: static_url('images/default-theme-search-filter-bg.png') no-repeat;*/
+  background: static_url('images/default-theme-search-filter-bg.png') no-repeat !important;
 }
 
 .tasks-search-bar .sc-hint {
+  padding-top: 3px !important;
   left: 20px !important;
   font-size: 11px !important;
   font-style: italic !important;
 }
 
 .tasks-search-bar input {
+  padding-top: 3px !important;
   padding-left: 20px !important;
   width: 155px !important;
   font-size: 11px !important;

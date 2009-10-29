@@ -10,33 +10,24 @@
   background: static_url('images/login-bg.png') no-repeat;
 }
 
-.sc-view .sc-text-field-view {
-  background: none !important;
-}
-
 .sc-view.sc-text-field-view.login-name {
   font-size: 16px;
   font-weight: bold;
 }
 
+.sc-view.sc-text-field-view.login-name {
+  background: none;
+}
+
 .sc-view.sc-text-field-view.login-name.focus {
-  border: none !important;
   outline: none !important;
 }
 
 .sc-view.sc-text-field-view.login-name .border {
-  background: none !important;
-}
-
-.login-name input {
-  border: 0;
-  outline: 0;
   background: none;
-  color: #48546c;
 }
 
 .login-body .error-message {
-  
 }
 
 .sign-up {
