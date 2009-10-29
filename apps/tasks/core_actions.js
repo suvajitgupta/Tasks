@@ -447,7 +447,7 @@ Tasks.mixin({
       // Select the first user in the list.
       var listView = Tasks.getPath('settingsPage.panel.usersList');
       listView.select(0);
-      listView.scrollToContentIndex(0); // FIXME: [SC] not scrolling to selected item when it is not in view
+      listView.scrollToContentIndex(0); // FIXME: [SC] Beta: not scrolling to selected item when it is not in view
     
     }
   },

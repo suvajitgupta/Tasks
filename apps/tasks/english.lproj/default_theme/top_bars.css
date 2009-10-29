@@ -93,6 +93,9 @@
   background: static_url('images/default-theme-static.png') no-repeat 0 -336px;
 }
 
+/*
+// TODO: [MG] delete unused images: import/export/settings/help/logout
+*/
 .import-icon {
 	width: 24px;
 	height: 24px;

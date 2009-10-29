@@ -60,7 +60,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
     // Execute the query and return the results.
     return this.get('store').find(this._tasksQuery);
 
-  }.property('id').cacheable(),
+  }.property(),
 
   /**
    * A read-only computed property that returns the list of tasks allocated to this project

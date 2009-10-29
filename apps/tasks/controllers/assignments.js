@@ -224,6 +224,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     var assignees = {}, assigneeName, assignee, assignmentNodes = [];
     this.forEach(function(task){
       if(!task) return;  // FIXME: [SC] unclear why task is null at times
+      // console.log("Task Name: " + task.get('name') + "; Id: " + task.get('id'));
       assignee = task.get('assignee');
       var taskName = task.get('name');
       var isNewTask = (taskName === CoreTasks.NEW_TASK_NAME.loc()); // Always display "new task"s
@@ -305,7 +306,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
       task = tasks.objectAt(i);
       
       // Add observers to certain task properties that can require the assignmentsController to redraw
-      // FIXME: [SC] see why these are firing multiple times when only one property is changed
+      // FIXME: [SC] Beta: see why these are firing multiple times when only one property is changed
       task.removeObserver('assignee',Tasks.assignmentsController,'_contentHasChanged');
       task.removeObserver('name',Tasks.assignmentsController,'_contentHasChanged');
       task.removeObserver('type',Tasks.assignmentsController,'_contentHasChanged');

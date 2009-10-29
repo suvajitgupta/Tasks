@@ -38,7 +38,7 @@ Tasks.reallocationController = SC.Object.create(SC.CollectionViewDelegate,
   /**
     Called if the user actually drops on the view.
   */
-  // FIXME: [BB] fix project selection loss after reallocation operation
+  // FIXME: [SG] Beta: fix project selection loss after reallocation operation
   collectionViewPerformDragOperation: function(view, drag, dragOp, idx, dropOp) {
     
     if (dragOp & SC.DRAG_REORDER) return SC.DRAG_MOVE; // disallow reorder
@@ -78,7 +78,7 @@ Tasks.reallocationController = SC.Object.create(SC.CollectionViewDelegate,
   */
   collectionViewDeleteContent: function(view, content, indexes) {
     if (content && (SC.typeOf(content.destroyAt) === SC.T_FUNCTION || SC.typeOf(content.removeAt) === SC.T_FUNCTION)) {
-      // FIXME: [SC] see how to keep selected project highlighted after user cancels deletion via Del key
+      // FIXME: [SC] Beta: see how to keep selected project highlighted after user cancels deletion via Del key
       return Tasks.deleteProject();
     }
     return NO;
