@@ -184,6 +184,7 @@
 .assignee-selection-bar input {
   padding-left: 20px !important;
   width: 155px !important;
+  font-weight: bold !important;
   font-size: 11px !important;
 }
 
@@ -192,7 +193,7 @@
 }
 
 .tasks-search-icon {
-  background: static_url('images/search.png') no-repeat 0 0;
+  background: static_url('images/search.jpg') no-repeat 0 0;
   z-index: 101 !important;
 }
 

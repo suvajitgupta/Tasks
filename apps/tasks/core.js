@@ -17,7 +17,7 @@ Tasks = SC.Object.create(SC.Statechart,
   /** @scope Tasks.prototype */ {
 
   NAMESPACE: 'Tasks',
-  VERSION: 'preBeta',
+  VERSION: 'Beta',
   
   /**
    * Deselect all tasks.

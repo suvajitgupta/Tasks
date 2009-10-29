@@ -20,12 +20,13 @@ Tasks.loginPage = SC.Page.create({
     classNames: ['login-page'],
     
     contentView: SC.View.design({
+      
       layout: { top: 0, bottom: 0, left: 0, right: 0 },
       classNames: ['login-body'],
-      childViews: 'loginEntry loginErrorMessage cancelButton loginButton signup'.w(),
+      childViews: 'loginField loginErrorMessage cancelButton loginButton signup'.w(),
       
-      loginEntry: SC.TextFieldView.design({
-        layout: { top: 139, left: 343, width: 254, height: 26 },
+      loginField: SC.TextFieldView.design({
+        layout: { top: 137, left: 341, width: 252, height: 21 },
         classNames: ['login-name'],
         valueBinding: 'Tasks.loginController.loginName'
       }),
@@ -69,7 +70,7 @@ Tasks.loginPage = SC.Page.create({
     }),
       
     focus: function() {
-      this.contentView.loginEntry.becomeFirstResponder();        
+      this.contentView.loginField.becomeFirstResponder();        
     }
     
   })
