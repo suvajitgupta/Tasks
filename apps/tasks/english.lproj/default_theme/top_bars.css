@@ -179,20 +179,20 @@
 }
 
 .assignee-selection-bar {
-  background: static_url('images/default-theme-assignee-selection-bg.png') no-repeat;
+  background: static_url('images/default-theme-assignee-selection-bg.png') no-repeat !important;
 }
 
 .assignee-selection-bar .sc-hint {
   padding-top: 3px !important;
-  left: 20px !important;
+  left: 25px !important;
   font-size: 11px !important;
   font-style: italic !important;
 }
 
 .assignee-selection-bar input {
   padding-top: 3px !important;
-  padding-left: 20px !important;
-  width: 155px !important;
+  padding-left: 25px !important;
+  width: 150px !important;
   font-weight: bold !important;
   font-size: 11px !important;
 }

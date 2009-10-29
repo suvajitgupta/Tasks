@@ -14,14 +14,38 @@
   font-size: 16px;
   font-weight: bold;
   background: none;
+  border: none !important;
+  outline: none !important;
 }
 
 .sc-view.sc-text-field-view.login-name.focus {
+  outline: none !important;
+  border: none !important;
   outline: none !important;
 }
 
 .sc-view.sc-text-field-view.login-name .border {
   background: none;
+  border: none !important;
+  outline: none !important;
+}
+
+.sc-view.sc-text-field-view.login-name .padding {
+  background: none;
+  border: none !important;
+  outline: none !important;
+}
+
+.sc-view.sc-text-field-view.login-name .padding .sc-hint {
+  background: none;
+  border: none !important;
+  outline: none !important;
+}
+
+.sc-view.sc-text-field-view.login-name .padding input {
+  background: none;
+  border: none !important;
+  outline: none !important;
 }
 
 .login-body .error-message {
