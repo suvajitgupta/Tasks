@@ -32,8 +32,13 @@ Tasks.mixin( /** @scope Tasks */ {
     Select specified project on route
   */
   routeToProject: function(params) {
-    this.set('defaultProject', params.name);
-    this.routeDefault();
+    if(SC.none(params.name)) {
+      console.log("Error: missing project name for URL routing");
+    }
+    else {
+      this.set('defaultProject', params.name);
+      this.routeDefault();
+    }
   },
   
   
