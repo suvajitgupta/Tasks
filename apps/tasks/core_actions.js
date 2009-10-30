@@ -342,12 +342,14 @@ Tasks.mixin({
         if(!confirm("_ConfirmProjectDeletion".loc())) return NO;
       }
 
-      // Remove the project from the list and destroy.
+      // Reset default project if it is deleted
+      if(project === Tasks.get('defaultProject')) Tasks.set('defaultProject', CoreTasks.get('allTasksProject'));
+
+      // Remove the project from the list and destroy
       project.destroy();
       
-      // Select the first project in the list.
-      var projectsList = Tasks.getPath('mainPage.mainPane.projectsList');
-      projectsList.select(0);
+      // Select the default project
+      this.projectsController.selectObject(Tasks.get('defaultProject'));
       
     }
     return YES;

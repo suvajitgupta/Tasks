@@ -29,9 +29,8 @@ Tasks.mixin({
 
   // Project/Task Management
   goStateA4: function(){
-    // Select appropriate project at startup
-    var defaultProject = this.get('defaultProject');
-    if(defaultProject) this.projectsController.selectObject(defaultProject);
+    // Select default project at startup
+    this.projectsController.selectObject(Tasks.get('defaultProject'));
   }
 
 });
