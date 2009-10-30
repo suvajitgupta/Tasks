@@ -4,6 +4,7 @@
 
   @author Matt Grantham
   @author Suvajit Guupta
+  @author Ryan Mudryk
   
 */
 
@@ -166,73 +167,77 @@
   background: static_url('images/default-theme-static.png') no-repeat 0 -144px;
 }
 
-.sc-view.sc-text-field-view.assignee-selection-bar {
-  background: none;
+.sc-view .assignee-selection-bar {
+  background: static_url('images/default-theme-assignee-selection-bg.png') no-repeat;
 }
 
-.sc-view.sc-text-field-view.assignee-selection-bar.focus {
-  outline: none !important;
+.sc-view .tasks-search-bar {
+  background: static_url('images/default-theme-search-filter-bg.png') no-repeat;
 }
 
-.sc-view.sc-text-field-view.assignee-selection-bar .border {
-  background: none;
+.safari .sc-view .assignee-selection-bar.focus,
+.mozilla .sc-view .assignee-selection-bar.focus,
+.msie .sc-view .assignee-selection-bar.focus,
+.safari .sc-view .tasks-search-bar.focus,
+.mozilla .sc-view .tasks-search-bar.focus,
+.msie .sc-view .tasks-search-bar.focus {
+  outline: 0;
 }
 
-.assignee-selection-bar {
-  background: static_url('images/default-theme-assignee-selection-bg.png') no-repeat !important;
+.safari .assignee-selection-bar .border,
+.safari .tasks-search-bar .border {
+  -webkit-appearance: none;
 }
 
-.assignee-selection-bar .sc-hint {
-  padding-top: 3px !important;
-  left: 25px !important;
-  font-size: 11px !important;
-  font-style: italic !important;
+.mozilla .sc-view .assignee-selection-bar .border,
+.mozilla .sc-view .tasks-search-bar .border {
+  -moz-appearance: none;
 }
 
-.assignee-selection-bar input {
-  padding-top: 3px !important;
-  padding-left: 25px !important;
-  width: 150px !important;
-  font-weight: bold !important;
-  font-size: 11px !important;
+.msie .sc-view .assignee-selection-bar .border,
+.msie .sc-view .tasks-search-bar .border {
+  border: 0;
 }
 
-.assignee-selection-bar input:focus {
-  border: 0 !important;
+.sc-view .assignee-selection-bar .padding,
+.sc-view .tasks-search-bar .padding {
+  top: 2px;
+  right: 22px;
 }
 
-.sc-view.sc-text-field-view.tasks-search-bar{
-  background: none;
+.sc-view .assignee-selection-bar .padding {
+  left: 30px;
 }
 
-.sc-view.sc-text-field-view.tasks-search-bar.focus {
-  outline: none !important;
+.sc-view .tasks-search-bar .padding {
+  left: 24px;
 }
 
-.sc-view.sc-text-field-view.tasks-search-bar .border {
-  background: none;
-}
-
-.tasks-search-bar {
-  background: static_url('images/default-theme-search-filter-bg.png') no-repeat !important;
-}
-
-.tasks-search-bar .sc-hint {
-  padding-top: 3px !important;
-  left: 20px !important;
-  font-size: 11px !important;
-  font-style: italic !important;
-}
-
+.assignee-selection-bar input,
 .tasks-search-bar input {
-  padding-top: 3px !important;
-  padding-left: 20px !important;
-  width: 155px !important;
-  font-size: 11px !important;
+  font-size: 11px;
+  font-weight: bold;
 }
 
-.tasks-search-bar input:focus {
-  border: 0 !important;
+.mozilla .assignee-selection-bar input,
+.mozilla .tasks-search-bar input {
+  top: 4px;
+}
+
+.msie .assignee-selection-bar input,
+.msie .tasks-search-bar input {
+  line-height: 22px;
+}
+
+.sc-text-field-view.assignee-selection-bar .sc-hint,
+.sc-text-field-view.tasks-search-bar .sc-hint {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-size: 11px;
+  font-style: italic;
+  line-height: 22px;
 }
 
 .filter-cancel-icon {
