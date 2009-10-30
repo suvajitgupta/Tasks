@@ -10,45 +10,44 @@
   background: static_url('images/login-bg.png') no-repeat;
 }
 
-.sc-view.sc-text-field-view.login-name {
+.sc-view .login-name {
+  background: none;
+}
+
+.safari .sc-view .login-name.focus,
+.mozilla .sc-view .login-name.focus,
+.msie .sc-view .login-name.focus {
+  outline: 0;
+}
+
+.safari .login-name .border {
+  -webkit-appearance: none;
+}
+
+.mozilla .sc-view .login-name .border {
+  -moz-appearance: none;
+}
+
+.msie .sc-view .login-name .border {
+  border: 0;
+}
+
+.sc-view .login-name .padding {
+  left: 0;
+  right: 0;
+}
+
+.login-name input {
   font-size: 16px;
   font-weight: bold;
-  background: none;
-  border: none !important;
-  outline: none !important;
 }
 
-.sc-view.sc-text-field-view.login-name.focus {
-  outline: none !important;
-  border: none !important;
-  outline: none !important;
+.mozilla .login-name input {
+  top: 4px;
 }
 
-.sc-view.sc-text-field-view.login-name .border {
-  background: none;
-  border: none !important;
-  outline: none !important;
-}
-
-.sc-view.sc-text-field-view.login-name .padding {
-  background: none;
-  border: none !important;
-  outline: none !important;
-}
-
-.sc-view.sc-text-field-view.login-name .padding .sc-hint {
-  background: none;
-  border: none !important;
-  outline: none !important;
-}
-
-.sc-view.sc-text-field-view.login-name .padding input {
-  background: none;
-  border: none !important;
-  outline: none !important;
-}
-
-.login-body .error-message {
+.msie .login-name input {
+  line-height: 26px;
 }
 
 .sign-up {
