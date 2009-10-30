@@ -366,6 +366,10 @@ Tasks.mixin({
     var userId = CoreTasks.getPath('user.id');
     var taskHash = SC.merge({ 'submitterId': userId, 'assigneeId': userId }, SC.clone(CoreTasks.Task.NEW_TASK_HASH));
     taskHash.name = taskHash.name.loc();
+    var project = Tasks.projectsController.getPath('selection.firstObject');
+    if (project && project !== CoreTasks.get('allTasksProject') && project !== CoreTasks.get('unallocatedTasksProject')) {
+      taskHash.projectId = project.get('id');
+    }
     
     // Get selected task (if one) and copy its project/assignee/type/priority to the new task.
     var tc = this.get('tasksController');
