@@ -45,7 +45,7 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
    * @param {SC.Store} store The store on behalf of which the fetch request is made.
    * @param {SC.Query} query The query from which the request should be generated.
    *
-   * @returns {Boolean} YES
+   * @returns {Boolean}
    */
   fetch: function(store, query) {
     // Do some sanity checking first to make sure everything is in order.
@@ -53,6 +53,10 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
       throw 'Error retrieving records: Invalid query.';
     }
 
+    // Check to see if we should skip the initial fetch.
+    if (query.get('initialServerFetch') === NO) return NO;
+
+    // Get the record type and resource path.
     var recordType = query.get('recordType');
 
     if (!recordType || !SC.typeOf(recordType) === SC.T_FUNCTION) {
@@ -66,7 +70,6 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
     }
 
     // Build the request and send it off to the server.
-    // console.trace();
     console.log('Retrieving %@ records from server...'.fmt(recordType));
 
     var path = CoreTasks.getFullResourcePath(resourcePath, null, query.get('queryParams'));

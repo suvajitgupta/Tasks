@@ -57,6 +57,8 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
       }
     }
 
+    this._tasksQuery.set('initialServerFetch', NO);
+
     // Execute the query and return the results.
     return this.get('store').find(this._tasksQuery);
 
