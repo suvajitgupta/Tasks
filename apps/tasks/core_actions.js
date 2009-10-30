@@ -333,16 +333,13 @@ Tasks.mixin({
    */
   deleteProject: function() {
     
-    // Get the selected project.
-    var pc = this.get('projectsController');
-    var sel = pc.get('selection');
-    
-    if (sel && sel.length() > 0) {
-      var project = sel.firstObject();
+    // Get the selected project, if one
+    var project = Tasks.projectsController.getPath('selection.firstObject');
+    if (project) {
 
       // Confirm deletion for projects that have tasks
-      var projectTasks = project.get('tasks');
-      var taskCount = projectTasks.get('length');
+      var tasks = project.get('tasks');
+      var taskCount = tasks.get('length');
       if(taskCount > 0) {
         if(!confirm("_ConfirmProjectDeletion".loc())) return NO;
       }
@@ -350,7 +347,7 @@ Tasks.mixin({
       // Reset default project if it is deleted
       if(project === Tasks.get('defaultProject')) Tasks.set('defaultProject', CoreTasks.get('allTasksProject'));
 
-      // Remove the project from the list and destroy
+      // Delete the project
       project.destroy();
       
       // Select the default project
@@ -365,11 +362,11 @@ Tasks.mixin({
    */
   addTask: function() {
     
-    // Create a new task with the logged in user as the default submitter/assignee.
+    // Create a new task with the logged in user as the default submitter/assignee within selected project, if one.
     var userId = CoreTasks.getPath('user.id');
     var taskHash = SC.merge({ 'submitterId': userId, 'assigneeId': userId }, SC.clone(CoreTasks.Task.NEW_TASK_HASH));
     taskHash.name = taskHash.name.loc();
-
+    
     // Get selected task (if one) and copy its project/assignee/type/priority to the new task.
     var tc = this.get('tasksController');
     var sel = tc.get('selection');
