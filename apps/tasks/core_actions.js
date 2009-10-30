@@ -191,8 +191,13 @@ Tasks.mixin({
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', serverMessage.get('value') + "_ProjectsLoaded".loc());
 
+    var defaultProject = CoreTasks.get('allTasksProject');
     var defaultProjectName = this.get('defaultProject');
-    if(defaultProjectName) this.set('defaultProject', CoreTasks.getProject(defaultProjectName));
+    if(defaultProjectName) { // if specified via a Route
+      var project = CoreTasks.getProject(defaultProjectName); // see if such a project exists
+      if(project) defaultProject = project;
+    }
+    this.set('defaultProject', defaultProject);
     
     this.dataLoadSuccess();
   },

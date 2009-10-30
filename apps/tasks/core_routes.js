@@ -21,7 +21,7 @@ sc_require('core');
 */
 Tasks.mixin( /** @scope Tasks */ {
   
-  defaultProject: CoreTasks.ALL_TASKS_NAME.loc(),
+  defaultProject: null,
 
   registerRoutes: function() {
     SC.routes.add('project', Tasks, 'routeToProject');
@@ -32,7 +32,6 @@ Tasks.mixin( /** @scope Tasks */ {
     Select specified project on route
   */
   routeToProject: function(params) {
-    console.log("Selecting project: " + params.name);
     this.set('defaultProject', params.name);
     this.routeDefault();
   },
