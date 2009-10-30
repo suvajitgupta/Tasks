@@ -179,6 +179,7 @@ Tasks.mixin({
     }
 
     this.projectsController.set('content', CoreTasks.get('allProjects'));
+    
   },
 
   /**
@@ -190,6 +191,9 @@ Tasks.mixin({
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', serverMessage.get('value') + "_ProjectsLoaded".loc());
 
+    var defaultProjectName = this.get('defaultProject');
+    if(defaultProjectName) this.set('defaultProject', CoreTasks.getProject(defaultProjectName));
+    
     this.dataLoadSuccess();
   },
 

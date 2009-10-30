@@ -31,7 +31,7 @@ v Make task in-cell editors fit with collection view item size [SG] <JH2> $Bug
 | Fix in CSS add class .ghost to list item view and set its background to none
 v Track/optimize calls to assignments controller for redrawing tasks tree [BB] <SG> @Active
 v Make buttons depressable to provide feedback when using them [SG]
-- Beta: Allow direct bookmarking of Tasks projects using SproutCore routes [SG] $Feature @Active
+- Allow direct bookmarking of Tasks project names using SproutCore routes [SG] $Feature @Done %Passed
 - Show newly added tasks/projects with a badge <SE> [SG] $Feature
 - Add email notifications on task changes to Assignee/Manager [SG] <JH2> $Feature
 - Add abiity to watch tasks and get email notifications on task changes [SG] <JH2> $Feature

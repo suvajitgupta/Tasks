@@ -29,9 +29,9 @@ Tasks.mixin({
 
   // Project/Task Management
   goStateA4: function(){
-    // Select first project at startup
-    var projectsList = Tasks.getPath('mainPage.mainPane.projectsList');
-    projectsList.select(0);
+    // Select appropriate project at startup
+    var defaultProject = this.get('defaultProject');
+    if(defaultProject) this.projectsController.selectObject(defaultProject);
   }
 
 });
