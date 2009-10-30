@@ -56,9 +56,6 @@
   background: static_url('images/default-theme-static.png') no-repeat 0 -50px;
 }
 
-/*
-// TODO: [MG] Beta: add a refresh icon
-*/
 .refresh-icon {
 	width: 24px;
 	height: 24px;
