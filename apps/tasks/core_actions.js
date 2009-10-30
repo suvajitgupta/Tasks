@@ -444,16 +444,13 @@ Tasks.mixin({
   deleteUser: function() {
   
     // Get the selected user.
-    var uc = this.get('usersController');
-    var sel = uc.get('selection');
-  
-    if (sel && sel.length() > 0) {
-      var user = sel.firstObject();
+    var user = Tasks.usersController.getPath('selection.firstObject');
+    if (user) {
 
       // Confirm deletion of user
       if(!confirm("Are you sure you want to delete this user?")) return;
 
-      // Delete user.
+      // Delete the user.
       user.destroy();
     
       // Select the first user in the list.
