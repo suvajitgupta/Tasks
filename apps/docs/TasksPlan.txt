@@ -129,6 +129,7 @@ v Add screenshots with callouts for online help content [SG] $Feature
 | See demo.sproutcore.com/user_defaults and lookup SproutCore blog for Charles' posting on this topic
 v Add hotkeys for common operations (like add/delete projects/tasks and save) [EG] <SG> $Feature @Done %Passed
 v Add Undo/Redo buttons in top toolbar (till last Save) [SG] <SE> $Feature
+v Support disconnected operation and synchronization after network reconnection using SproutDB [SG] <SE> $Feature
 
 Server
 ^ Build persistence server using Persevere [SE] <SG> @Done %Passed
