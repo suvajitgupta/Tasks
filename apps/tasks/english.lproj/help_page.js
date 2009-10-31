@@ -12,37 +12,19 @@ sc_require('core');
   Help Panel
   
 */
-Tasks.helpPage = SC.Page.create({  
+
+Tasks.helpPage = SC.Page.design({  
   
-  panel: SC.PanelPane.create({
+  layerId: 'mainPane',
+  mainPane: SC.MainPane.design({
     
-    layout: { centerX: 0, centerY: 0, height: 450, width: 750 },
-    
-    contentView: SC.View.design({
-      layout: { left: 0, right: 0, top: 0, bottom: 0},
-      childViews: [
-      
-       SC.WebView.design({
-          classNames: ['bordered-view'],
-          layout: { top: 10, left: 10, right: 10, bottom: 40 },
-          value: static_url('help.html')
-        }),
-      
-        SC.ButtonView.design({
-          layout: { width: 80, height: 30, right: 10, bottom: 8 },
-          titleMinWidth: 0,
-          keyEquivalent: 'return',
-          isDefault: YES,
-          theme: 'capsule',
-          title: "_Close".loc(),
-          target: 'Tasks.helpController',
-          action: 'closePanel'
-        })
-      
-      ]
+    childViews: [
+      SC.WebView.design({
+        layout: { top: 0, left: 0, right: 0, bottom: 0 },
+        value: static_url('help.html')
+      })
+    ]
             
-    })
-      
   })
   
 });

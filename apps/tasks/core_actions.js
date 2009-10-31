@@ -264,7 +264,7 @@ Tasks.mixin({
   },
   
   /**
-   * Launch new browser/tab to display online help.
+   * Launch Settings panel for user/preference management.
    */
    /**
     * Launch task editor dialog.
@@ -273,8 +273,15 @@ Tasks.mixin({
    Tasks.settingsController.openPanel();
   },
 
+  /**
+   * Display online help.
+   */
+   /**
+    * Launch task editor dialog.
+    */
   help: function() {
-    Tasks.helpController.openPanel();
+    var url = window.location.protocol + '//' + window.location.host + window.location.pathname + '#help';
+    window.open(url, '', 'width=1000,height=750,menubar=no,location=no,toolbar=no,directories=no,status=no');
   },
   
   /**
@@ -453,10 +460,8 @@ Tasks.mixin({
       // Delete the user.
       user.destroy();
     
-      // Select the first user in the list.
-      var listView = Tasks.getPath('settingsPage.panel.usersList');
-      listView.select(0);
-      listView.scrollToContentIndex(0); // FIXME: [SC] not scrolling to selected item when it is not in view
+      // Select the logged in user.
+      this.usersController.selectObject(CoreTasks.get('user'));
     
     }
   },

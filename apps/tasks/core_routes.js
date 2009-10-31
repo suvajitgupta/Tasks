@@ -25,6 +25,7 @@ Tasks.mixin( /** @scope Tasks */ {
 
   registerRoutes: function() {
     SC.routes.add('project', Tasks, 'routeToProject');
+    SC.routes.add('help', Tasks, 'routeToHelp');
     SC.routes.add(':', Tasks, 'routeDefault'); // the catch-all case that happens if nothing else matches
   },
 
@@ -39,6 +40,14 @@ Tasks.mixin( /** @scope Tasks */ {
       this.set('defaultProject', params.name);
       this.routeDefault();
     }
+  },
+  
+  
+  /**
+    Show online help skipping authentication
+  */
+  routeToHelp: function(params) {
+    Tasks.getPath('helpPage.mainPane').append();
   },
   
   

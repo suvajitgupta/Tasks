@@ -22,15 +22,18 @@ Tasks.mixin({
 
   // Data Loading
   goStateA3: function(){
-    // Select first user at startup
-    Tasks.getPath('settingsPage.panel.usersList').select(0);
+    
+    // Open main screen after successful data loading
     Tasks.getPath('mainPage.mainPane').append();
+    
   },
 
   // Project/Task Management
   goStateA4: function(){
+    
     // Select default project at startup
     this.projectsController.selectObject(Tasks.get('defaultProject'));
+    
   }
 
 });
