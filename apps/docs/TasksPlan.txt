@@ -119,7 +119,7 @@ Application Manager GUI
 | * percent and min days for Assignee loading determination
 | * email notifications
 v Add export to HTML for human-readable version (for baselining tasks for a release, for instance) [SG]
-- Add online "Help" button in top toolbar & popup help dialog [SG] @Done %Passed $Feature
+- Add online "Help" button in top toolbar & popup help window [SG] @Done %Passed $Feature
 v Add screenshots with callouts for online help content [SG] $Feature
 - Add online training video using Captivate or Camtasia [SG] $Feature
 - Add onscreen help (on panel fields that are complex and on blank workspace to assist new users) [SG] @Active $Feature
