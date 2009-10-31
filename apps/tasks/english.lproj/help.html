@@ -45,20 +45,18 @@
 			<p>To begin, click on "Add Project" to create a project and type in its name. To view a project's tasks, simply click on the project.  To rename a project double click on its name and change it (if the project is already selected, you just have to click on it again to start editing it).  To delete a project select it and then click on the "Del. Project" button.  You have the confirm the deletion if the project has tasks.</p>
 			<p>There are two reserved projects at the top of the projects list called "All Tasks" and "Unallocated Tasks" to show all and unallocated tasks respectively. Your iterative releases naturally map to <app>tasks</app> projects. For example, if you use Rational Unified Process (RUP) or eXtreme Unified Process (XUP), your timeboxed <i>SmallReleases</i> become projects like "Architectural Baseline" and "FeatureReleaseOne."  Those using Scrum should use projects to map out their <i>Sprints</i> and <i>Backlog</i>.</p>
 		<h3>Tasks</h3>
-			<p>Tasks are grouped by assignee and displayed using various kinds of color coding - the legend is shown in the bottom control bar.  To create a task, click on the "Add Task" button and enter the name of the task.  If you have a project selected, the new task is automatically allocated to that project.  If you have a task selected, the new task is automatically assigned to the same user and copies over the selected task's type and priority.  You can set the task's attributes via the radio buttons in the control bar.  You can click on the icon to the far right of the task to get a popup editor and enter additional details about the task.  Update a task's name by double clicking on it and using the inline editor.  Delete selected tasks using the "Del. Task" button.  To reassign a task to another user, simply drag-and-drop it to the target user if they are visible or use the task popup editor to change the assignee.  To reallocate a task to another project drag-and-drop it on the target project in the master list.  Note: you can select multiple tasks at once and perform delete/reassign/reallocate operations.</p>
-		<p>When entering a task, try to use the XP principle of <i>FeaturesNotSubsystems</i> - try to build user-visible <i>Features</i> that may need some <i>Other</i> tasks as infrastructure.  XP's <i>RefactorMericilessly</i> manifests itself as <i>Bug</i> and <i>Other</i> tasks - pay off your technical debt as you go.
+			<p>Tasks are grouped by assignee and displayed using various kinds of color coding - the legend is shown in the bottom control bar.  To create a task, click on the "Add Task" button and enter the name of the task.  If you have a project selected, the new task is automatically allocated to that project.  If you have a task selected, the new task is automatically assigned to the same user and copies over the selected task's type and priority.  You can set the task's attributes via the radio buttons in the control bar.  You can click on the icon to the far right of the task to get a popup editor and enter additional details about the task.  Update a task's name by double clicking on it and using the inline editor.  Delete selected tasks using the "Del. Task" button.  To reassign a task to another user, simply drag-and-drop it to the target user if they are visible or use the task popup editor to change the assignee.  To reallocate a task to another project drag-and-drop it on the target project in the master list or via the task popup editor.  Note: you can select multiple tasks at once and perform delete/reassign/reallocate operations.</p>
+		<p>When entering a task, use the XP principle of <i>FeaturesNotSubsystems</i> - try to build user-visible <i>Features</i> that may need some <i>Other</i> tasks as infrastructure.  XP's <i>RefactorMericilessly</i> manifests itself as <i>Bug</i> and <i>Other</i> tasks - pay off your technical debt as you go.
 		<h3>Workflow</h3>
 			<p><app>tasks</app> supports a simple workflow as shown in the control bar at the bottom. You first plan your tasks, specifying their types and priorities. Then you work on your tasks, noting your status as you go. Finally, you may validate your completed tasks.
 	 	<h3>Sorting</h3>
-			<p>Sorting in <app>tasks</app> is automatic. Projects are sorted alphabetically. Tasks are sorted by status, validation (if Done), priority, and type in that order.  This helps you focus on what you are working on now and what is next.</p>
+			<p>Sorting in <app>tasks</app> is automatic. Projects and users are sorted alphabetically. Tasks are sorted by status, validation (if Done), priority, and type in that order.  This helps you focus on what you are working on now and what is next.</p>
 	<h2>Intermediate Features</h2>
 		<p style="margin-left: 5px">Now you are ready to graduate to the next level of <app>tasks</app> features.</p>
-	<h3>Shortcuts</h3>
-		<p>Hot keys are available for many common actions: Save = Ctrl-S, New Task = Ctrl-T, New Project = Ctrl-P.  Right clicking on projects and tasks provides a context menu with common actions.</p>
 	<h3>Filtering</h3>
 			<p>You can control which tasks are displayed via filtering, using one or more of three approaches:</p>
 			<ul>
-				<li>Click on the "Filter Tasks" button and check/uncheck the task attributes you want filter on. You can also use the commonly used <i>QuickFilters</i> at the bottom of the filter panel. If an attribute filter is set a special icon is displayed next to the "Filter Tasks" button.</li>
+				<li>Click on the "Filter Tasks" button and use the <i>QuickFilters</i> at the top of the filter panel. If an attribute filter is set a special icon is displayed next to the "Filter Tasks" button.  You may get even more selective by manually controlling the checkboxes for the various attributes.</li>
 				<li>Specify one or more task assignees (comma or space separated login names).</li>
 				<li>Search using one or more task IDs (each prepended by '#' and comma or space separated) or a string matching any part of task names in the search bar.</li>
 			</ul>
@@ -68,10 +66,12 @@
 		<h3>Traceability</h3>
 			<p><app>tasks</app> allows you to trace back to upstream Analysis artifacts via the task description by adding a link to an external Wiki page or Content Management System (CMS) artifact.  If you need attachments (like a GUI wireframe HTML or visual mockup image you must host them somewhere and link to them.  There is no support for inter-task dependencies/critical path analysis - you can simply reference the ID(s) of upstream tasks in the description.</p>
 		<h3>Load Balancing</h3>
-			<p>To use this feature, you must specify the <i>time left</i> in a project and the <i>effort</i> for tasks as integer or decimal numbers, optionally appended with an unit of 'd' (days) or 'h' (hours).  If no time unit is specified it is assumed to mean 'days.'  Task effort may also be expressed as a range like: 3-5d.<app>tasks</app> will automatically total the efforts for each assignee (excluding <i>Low</i> priority tasks) and indicate their loading via color coding. A "?" is appended for range-based subtotals including tasks with unspecified efforts.</p>
+			<p>To use this feature, you must specify the <i>time left</i> in a project and the <i>effort</i> for tasks as integer or decimal numbers, optionally appended with an unit of 'd' (days) or 'h' (hours).  If no time unit is specified it is assumed to mean 'days.'  Task effort may also be expressed as a range like: '3-5d'.<app>tasks</app> will automatically total the efforts for each assignee (excluding <i>Low</i> priority tasks) and indicate their loading via color coding. A "?" is appended for range-based subtotals including tasks with unspecified efforts.</p>
 			<p>Since there are a certain number of days in a release before <i>Feature Freeze</i> - set the project's <i>time left</i> accordingly.  During this time decrement the <i>time left</i> every day and load balance the remaining work across the team. As the team moves towards <i>Code Freeze</i>, set the <i>time left</i> to the number of days you allocate to code stabilization.  This way, the team can run very tight cycles and converge on the milestones of <i>Code/Feature Freezes.</i>
 	<h2>Advanced Features</h2>
 		<p style="margin-left: 5px">Lets close out with some <app>tasks</app> power user features.</p>
+		<h3>Shortcuts</h3>
+			<p>Hot keys are available for many common actions: Save = Ctrl-S, New Task = Ctrl-T, New Project = Ctrl-P.  Right clicking on projects and tasks provides a context menu with common actions.</p>
 		<h3>Default Project</h3>
 			<p><app>tasks</app> allows you to specify your default project, which is selected at startup, by specifying or bookmarking an URL like this (replace items in CAPS with your specifics):</p>
 			<pre style="margin-left: 50px">http://HOST:PORT/tasks#project&amp;name=PROJECT</pre>
@@ -109,15 +109,15 @@
 			<p>An atomic unit of work with several attributes:</p>
 			<ul>
 				<li><i>name</i>: one-line summary describing the task; you may want to name related tasks with a common prefix followed by a colon</li>
+				<li><i>description</i>: optional (multi-line) additional information such as Feature details, Bug reproduction steps, or Release Notes</li>
+				<li><i>project</i>: project this task is allocated to, if any</li>
 				<li><i>priority</i>: High or Medium (default) or Low; High ones must be completed, Low ones aren't included in remaining effort subtotals</li>
 				<li><i>effort</i>: optional time required to complete the task (estimate => actual); can be an integer/decimal, or a range, with an optional unit of 'd' (days - default if omitted) or 'h' (hours)</li>
-				<li><i>project</i>: project this task is allocated to, if any</li>
 				<li><i>submitter</i>: user who submitted this task, if any</li>
 				<li><i>assignee</i>: user to whom this task is assigned, if any</li>
 				<li><i>type</i>: kind of task - Feature or Bug or Other (default)</li>
 				<li><i>status</i>: development status - Planned (default) or Active or Done or Risky</li>
 				<li><i>validation</i>: validation status - Untested (default) or Passed or Failed</li>
-				<li><i>description</i>: optional (multi-line) additional information such as Feature details, Bug reproduction steps, or Release Notes</li>
 			</ul>
 			<h3>Project</h3>
 				<p>An initiative with a <i>name</i>, optional <i>time left</i>, zero or more tasks, and an optional <i>description</i>.</p>

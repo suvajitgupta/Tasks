@@ -20,8 +20,8 @@ Task:
 	projectId: <Number> # refers to project task is allocated to
 	priority: Enum<String> ("High" | "_Medium_" | "Low"), # High ones must be completed, Low ones not included in effort subtotals
 	effort: <Number> # effort estimate => actual, in days
-	assigneeId: <Number> # id of User to whom this Task is assigned
 	submitterId: <Number>, # id of User who submitted this Task
+	assigneeId: <Number> # id of User to whom this Task is assigned
 	type: Enum<String>, ("Feature" | "Bug" | "_Other_") # kind of Task to support testing workflow
 	developmentStatus: Enum<String> ("_Planned_" | "Active" | "Done" | "Risky"), # development status
 	validation: Enum<String> ("_Untested_" | "Passed" | "Failed"), # validation status
