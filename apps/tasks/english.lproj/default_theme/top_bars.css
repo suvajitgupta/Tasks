@@ -47,8 +47,7 @@
   font-size: 10px !important;
 }
 
-.welcome-message {
-  font-size: 11px !important;
+.title-bar-message {
   text-align: center !important;
   color: white !important;
 }
