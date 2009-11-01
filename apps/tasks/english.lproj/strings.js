@@ -57,7 +57,7 @@ SC.stringsFor('English', {
   "_UnallocatedTasks": "Unallocated Tasks",
   "_Has": "Has ",
   "_Tasks": " task(s)",
-  "_ProjectTimeLeftTooltip": "; Time left (if specified) shown on right",
+  "_ProjectTimeLeftTooltip": "Time left shown on right",
   
   // Task strings
   "_AddTask": "Add Task",

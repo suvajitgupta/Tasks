@@ -30,7 +30,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       var tasks = content.get('tasks');
       if(tasks) {
         var projectTooltip = "_Has".loc() + tasks.get('length') + "_Tasks".loc();
-        projectTooltip += "_ProjectTimeLeftTooltip".loc();
+        if(content.get('displayTimeLeft')) projectTooltip += ('; ' + "_ProjectTimeLeftTooltip".loc());
         context.attr('title', projectTooltip);
         context.attr('alt', projectTooltip);
       }
