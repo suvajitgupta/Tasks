@@ -81,7 +81,6 @@ CoreTasks = SC.Object.create({
   ONLINE_MODE: 1,
 
   // The current mode of operation.
-  // TODO: [SE] set Tasks application mode via URL
   mode: null,
 
   /*
