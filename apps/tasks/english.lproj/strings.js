@@ -94,9 +94,9 @@ SC.stringsFor('English', {
   "_Description:": "Description:",
   "_DescriptionHint": "Enter detailed notes...",
   "_SubmitterTooltip": "Submitted by ",
-  "_TaskEffortTooltip": "Effort (if specified) shown on right",
-  "_IdTooltip": "Unique ID for task; Dashes indicate unsaved tasks; Background color indicates validation status",
-  "_EditorTooltip": "Click to view/edit task details (submitter, assignee, effort, and description)",
+  "_TaskEffortTooltip": "Effort shown on right",
+  "_TaskIdTooltip": "Unique ID for task; Dashes indicate unsaved tasks; Background color indicates validation status",
+  "_TaskEditorTooltip": "Click to view/edit task details (submitter, assignee, effort, and description)",
   "_TasksExportTimestamp": "# Tasks data export at ",
   
   // User/Assignee strings
@@ -156,6 +156,6 @@ SC.stringsFor('English', {
   "_UsersLoaded": "Loaded users, ",
   "_TasksLoaded": "tasks, ",
   "_ProjectsLoaded": " and projects at ",
-  "_SaveMessage": "Data last saved ",
+  "_SaveMessage": "Data last saved "
     
 });

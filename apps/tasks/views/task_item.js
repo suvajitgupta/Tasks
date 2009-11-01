@@ -177,7 +177,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         break;          
     }
     
-    var idTooltip = "_IdTooltip".loc();
+    var idTooltip = "_TaskIdTooltip".loc();
     var validationClass = null;
     var validation = content.get('validation');
     switch(validation){
@@ -192,7 +192,8 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         break;          
     }
     var displayId = content.get('displayId');
-    context = context.begin('div').addClass('task-id').addClass(validationClass).text(displayId).attr('title', idTooltip).attr('alt', idTooltip).end();
+    context = context.begin('div').addClass('task-id').addClass(validationClass).
+                text(displayId).attr('title', idTooltip).attr('alt', idTooltip).end();
       
     var status = content.get('developmentStatus');
     switch(status){
@@ -215,8 +216,8 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     context = context.begin('div').addClass('sc-view').addClass('task-description');
     context = context.begin('img').attr({
       src: SC.BLANK_IMAGE_URL,
-      title: "_EditorTooltip".loc(),
-      alt: "_EditorTooltip".loc()
+      title: "_TaskEditorTooltip".loc(),
+      alt: "_TaskEditorTooltip".loc()
     }).addClass('task-editor');
     if (hasDescription) {
       context.addClass('task-icon-has-description');
@@ -229,11 +230,16 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     var taskTooltip = '';
     var submitterUser = content.get('submitter');
     if (submitterUser) {
-      taskTooltip += ("_SubmitterTooltip".loc() + '%@ (%@)'.fmt(submitterUser.get('name'), submitterUser.get('loginName')) + '; ');
+      taskTooltip += ("_SubmitterTooltip".loc() + '%@ (%@)'.fmt(submitterUser.get('name'), submitterUser.get('loginName')));
     }
-    taskTooltip += "_TaskEffortTooltip".loc();
-    context.attr('title', taskTooltip);
-    context.attr('alt', taskTooltip);
+    if(content.get('displayEffort')) {
+      if(taskTooltip !== '')  taskTooltip += '; ';
+      taskTooltip += "_TaskEffortTooltip".loc();
+    }
+    if(taskTooltip !== '') {
+      context.attr('title', taskTooltip);
+      context.attr('alt', taskTooltip);
+    }
 
   }
   
