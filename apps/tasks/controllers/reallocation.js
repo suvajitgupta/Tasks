@@ -62,6 +62,9 @@ Tasks.reallocationController = SC.Object.create(SC.CollectionViewDelegate,
           // console.log('Reallocating to: ' + targetProject.get('name') + ' of ID: ' + targetProjectId);
           task.set('projectId', targetProjectId);
         }, this);
+        // FIXME: [SG] Beta: see if there is a need to call assignments controller to redraw after reallocation
+        // Redraw tasks list after reallocations are complete
+        // Tasks.assignmentsController.showAssignments();
       }
       ret = SC.DRAG_MOVE;
     }       
