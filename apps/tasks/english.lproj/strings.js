@@ -157,6 +157,5 @@ SC.stringsFor('English', {
   "_TasksLoaded": "tasks, ",
   "_ProjectsLoaded": " and projects at ",
   "_SaveMessage": "Data last saved ",
-  "_RefreshMessage": "Data last refreshed "
     
 });
