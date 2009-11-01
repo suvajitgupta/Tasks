@@ -14,6 +14,7 @@ sc_require('controllers/projects');
 Tasks.mixin({
 
   _usersLoaded: false,
+  _alreadyLoggedIn: false,
 
   loginName: null,
 
@@ -27,6 +28,7 @@ Tasks.mixin({
     // console.log("DEBUG: authenticate()");
     switch (this.state.a) {
       case 1:
+      case 4:
         this.goState('a', 2);
         this.loginName = loginName;
         
@@ -34,7 +36,7 @@ Tasks.mixin({
           this._loginUser();
         } else { // Retrieve all users from the data source.
           if (!CoreTasks.get('allUsers')) {
-            CoreTasks.set('allUsers', CoreTasks.store.find(SC.Query.local(CoreTasks.User, { orderBy: 'name' })));
+            CoreTasks.set('allUsers', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.User, orderBy: 'name' })));
           } else {
             CoreTasks.get('allUsers').refresh();
           }
@@ -56,7 +58,7 @@ Tasks.mixin({
     // console.log("DEBUG: userLoadSuccess()");
     this._usersLoaded = true;
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
-    serverMessage.set('value', serverMessage.get('value') + "_UsersLoaded".loc());
+    serverMessage.set('value', "_UsersLoaded".loc());
     this._loginUser();
   },
 
@@ -75,24 +77,31 @@ Tasks.mixin({
   _loginUser: function() {
 
     // console.log("DEBUG: loginUser()");
-    var user = CoreTasks.getUser(this.loginName);
+    var user = CoreTasks.get('user');
+    if(user) this._alreadyLoggedIn = true;
+    else user = CoreTasks.getUser(this.loginName);
     if (user) { // See if a valid user
       
-      // Greet user and save login session information
-      CoreTasks.set('user', user);
-      var welcomeMessage = Tasks.getPath('mainPage.mainPane.welcomeMessage');
-      welcomeMessage.set('value', "_User:".loc() + '<b>' + CoreTasks.getPath('user.name') + '</b>, ' +
-                         "_Role:".loc() + ' <i>' + CoreTasks.getPath('user.role').loc() + '</i>');
-      welcomeMessage.set('toolTip', "_LoginSince".loc() + new Date().format('hh:mm:ss a MMM dd, yyyy'));
+      if(!this._alreadyLoggedIn) {
+        
+        // Greet user and save login session information
+        CoreTasks.set('user', user);
+        var welcomeMessage = Tasks.getPath('mainPage.mainPane.welcomeMessage');
+        welcomeMessage.set('value', "_User:".loc() + '<b>' + CoreTasks.getPath('user.name') + '</b>, ' +
+                           "_Role:".loc() + ' <i>' + CoreTasks.getPath('user.role').loc() + '</i>');
+        welcomeMessage.set('toolTip', "_LoginSince".loc() + new Date().format('hh:mm:ss a MMM dd, yyyy'));
+        
+        // Based on user's role set up appropriate task filter
+        var role = user.get('role');
+        if(role === CoreTasks.USER_ROLE_DEVELOPER) { // Set assignee selection filter to logged in user
+          Tasks.assignmentsController.set('assigneeSelection', this.loginName);
+        }
+        else if(role === CoreTasks.USER_ROLE_TESTER) { // Filter out Other tasks
+          Tasks.assignmentsController.attributeFilter(CoreTasks.TASK_TYPE_OTHER, 0);
+        }
+        
+      }
       
-      // Based on user's rolem set up appropriate task filter
-      var role = user.get('role');
-      if(role === CoreTasks.USER_ROLE_DEVELOPER) { // Set assignee selection filter to logged in user
-        Tasks.assignmentsController.set('assigneeSelection', this.loginName);
-      }
-      else if(role === CoreTasks.USER_ROLE_TESTER) { // Filter out Other tasks
-        Tasks.assignmentsController.attributeFilter(CoreTasks.TASK_TYPE_OTHER, 0);
-      }
       this._authenticationSuccess();
       
     } else {
@@ -109,7 +118,7 @@ Tasks.mixin({
     switch (this.state.a) {
       case 2:
         this.goState('a', 3);
-        Tasks.loginController.closePanel();
+        if(!this._alreadyLoggedIn) Tasks.loginController.closePanel();
         // Load all data (projects and tasks) from the data source.
         this._loadData();
         break;
@@ -141,7 +150,7 @@ Tasks.mixin({
     // console.log("DEBUG: loadData()");
     // Start by loading all tasks.
     if (!CoreTasks.get('allTasks')) {
-      CoreTasks.set('allTasks', CoreTasks.store.find(SC.Query.local(CoreTasks.Task)));
+      CoreTasks.set('allTasks', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Task })));
     } else {
       CoreTasks.get('allTasks').refresh();
     }
@@ -173,7 +182,7 @@ Tasks.mixin({
     
     // Now load all of the projects.
     if (!CoreTasks.get('allProjects')) {
-      CoreTasks.set('allProjects', CoreTasks.store.find(SC.Query.local(CoreTasks.Project, { orderBy: 'name' })));
+      CoreTasks.set('allProjects', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Project, orderBy: 'name' })));
     } else {
       CoreTasks.get('allProjects').refresh();
     }
@@ -189,7 +198,7 @@ Tasks.mixin({
 
     // console.log("DEBUG: projectsLoadSuccess()");
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
-    serverMessage.set('value', serverMessage.get('value') + "_ProjectsLoaded".loc());
+    serverMessage.set('value', serverMessage.get('value') + "_ProjectsLoaded".loc() + new Date().format('hh:mm:ss a'));
 
     var defaultProject = CoreTasks.get('allTasksProject');
     var defaultProjectName = this.get('defaultProject');
@@ -240,13 +249,22 @@ Tasks.mixin({
   },
   
   /**
+   * Clears all data loaded from server.
+   */
+  clearData: function() {
+    this._usersLoaded = false;
+    this.usersController.set('content', null);
+    this.allTasksController.set('content', null);
+    this.projectsController.set('content', null);
+    CoreTasks.clearData();
+  },
+   
+  /**
    * Reload latest Tasks data from server.
    */
   refreshData: function() {
-    // TODO: [SG] Beta: implement refresh data
-    this._notImplemented('refreshData');
-    var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
-    serverMessage.set('value', "_RefreshMessage".loc() + new Date().format('hh:mm:ss a'));
+    this.clearData();
+    this.authenticate(this.loginName, 'password'); // TODO: [SG] replace with actual password
   },
   
   /**
@@ -292,13 +310,11 @@ Tasks.mixin({
     if(confirm("_LogoutConfirmation".loc())) {
       
       Tasks.getPath('mainPage.mainPane.welcomeMessage').set('value', null);
-      this._usersLoaded = false;
-      this.usersController.set('content', null);
-      this.allTasksController.set('content', null);
-      this.projectsController.set('content', null);
-      CoreTasks.clearData();
+      CoreTasks.set('user', null);
+      this._alreadyLoggedIn = false;
       this.get('assignmentsController').resetFilters();
       
+      this.clearData();
       this.goState('a', 1);
       
     }
@@ -482,7 +498,7 @@ Tasks.mixin({
    * @param {Integer} stateNum The number of the sate (ex. "4").
    */
   _logActionNotHandled: function(action, stateName, stateNum) {
-    console.log('Error: action not handled in state %@[%@]: %@'.fmt(stateName, stateNum, action));
+    // console.log('Error: action not handled in state %@[%@]: %@'.fmt(stateName, stateNum, action));
   },
   
   /**

@@ -97,10 +97,10 @@ User Manager GUI
 - Set assignee selection filter to logged in user if they are a Developer, filter out Other tasks if they are a Tester [SG] @Done $Feature %Passed
 - Allow assignee filtering by loading status (overloaded, underloaded) [SG] $Feature
 - Allow assignee filtering by matching any part of name, not just loginName [SG] $Feature
-^ Beta: Add User Manager with "Add/Del. User"  buttons in toolbar (reuse signup view, ask to reenter password) [SG] <JH2> @Active $Feature
+^ Add User Manager with "Add/Del. User"  buttons in toolbar (reuse user information view with signup screen) [SG] <JH2> @Done %Passed $Feature
 - Cleanup task assignee/submitter after user deletion <SE> [SG] @Done %Passed
 - Beta: Enable/disable GUI functionality to enforce Role-based access control [SG] <JH2> $Feature
-- Beta: Add password to login screen and change password dialog in User Manager [JH2] <SG> $Feature @Active
+- Beta: Add password to login screen and change password dialog in User Manager (ask to reenter password) [JH2] <SG> $Feature
 - Add support for "Teams" (a user can belong to a team, a team can have a lead) [SG] <SE> $Feature
 
 Application Manager GUI
@@ -109,7 +109,7 @@ Application Manager GUI
 - Summarize number of projects/assignees/tasks being displayed in the status bar [SG] <MB> @Done $Feature %Passed
 - Add "Save" button in top toolbar, note time of last save in status bar [SG] <BB> @Done $Feature %Passed
 - Beta: Enable/disable Save button based on data modification [SG] <MB> $Feature @Risky
-- Beta: Add "Refresh" button to get most recent data from server [SG] <SE> $Feature @Active
+- Add "Refresh" button to get most recent data from server [SG] <SE> $Feature @Done %Passed
 - Add "Import" button in top toolbar with associated pop up panel [SG] <BB> @Done $Feature %Passed
 | Gears needs to be ported to Snow Leopard
 - Add "Export" button in top toolbar with associated pop up panel [SG] @Done $Feature %Passed
@@ -137,7 +137,7 @@ Server
 - Beta: document steps for creating a team production deployment of Tasks [SE] <SG>
 ^ Beta: Build persistence server: local using Sinatra/SQLite and remote using Google App Engine [JH2] <SG> @Active
 - Patch SproutCore to avoid overwhelming async calls for file imports with more than 20 tasks [SE] <SG> @Done %Passed $Bug
-- Beta: Implement Server-based user authentication & authorization (Role-based access control) [JH2] <SG> @Active
+- Beta: Implement Server-based user authentication & authorization (Role-based access control) [JH2] <SG>
 - Add server-side data validation checks/return appropriate error codes [SE] <SG>
 
 Styling/Hardening

@@ -155,7 +155,7 @@ SC.stringsFor('English', {
   "_Assignees": " assignee(s), and ",
   "_UsersLoaded": "Loaded users, ",
   "_TasksLoaded": "tasks, ",
-  "_ProjectsLoaded": " and projects.",
+  "_ProjectsLoaded": " and projects at ",
   "_SaveMessage": "Data last saved ",
   "_RefreshMessage": "Data last refreshed "
     
