@@ -33,7 +33,7 @@ v Track/optimize calls to assignments controller for redrawing tasks tree [BB] <
 v Make buttons depressable to provide feedback when using them [SG]
 - Allow direct bookmarking of Tasks project names using SproutCore routes [SG] $Feature @Done %Passed
 - Show newly added tasks/projects with a badge <SE> [SG] $Feature
-- Add email notifications on task changes to Assignee/Manager [SG] <JH2> $Feature
+- Add email notifications on task changes to Submitter/Assignee [SG] <JH2> $Feature
 - Add abiity to watch tasks and get email notifications on task changes [SG] <JH2> $Feature
 - Add support for leaving comments in record descriptions [SG] <SE> $Feature
 - Add support for attachments in record descriptions [SG] <SE> $Feature
@@ -122,7 +122,7 @@ v Add export to HTML for human-readable version (for baselining tasks for a rele
 - Add online "Help" button in top toolbar & popup help window [SG] @Done %Passed $Feature
 v Add screenshots with callouts for online help content [SG] $Feature
 - Add online training video using Captivate or Camtasia [SG] $Feature
-- Add onscreen help (on panel fields that are complex and on blank workspace to assist new users) [SG] @Active $Feature
+- Add onscreen help (on panel fields that are complex and on blank workspace to assist new users) <MG> [SG] @Active $Feature
 - Add Logout button to exit in top toolbar (confirm before exiting, reload data/clear all filters) [SG] <JH2> @Done $Feature %Passed
 - Beta: Prompt user to save changes (if any) before logging out [SG] <SE> $Feature
 - Restore application settings/state from last login using HTML5 storage [SG] <MB> $Feature
