@@ -436,7 +436,7 @@ Tasks.mixin({
     if (sel && sel.length() > 0) {
       var context = {};
       for (var i = 0; i < sel.length(); i++) {
-        // Get and remove task from the assignments controller and destroy.
+        // Get and delete each selected task.
         var task = sel.nextObject(i, null, context);
         task.destroy();
       }

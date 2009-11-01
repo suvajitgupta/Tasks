@@ -59,7 +59,7 @@ v Disable Add/Del. Tasks buttons when on "All Tasks" project [SG] <BB> @Done %Pa
 ^ Add virtual "All Tasks" & "Unallocated Tasks" projects and display them grayed out in projects list [SG] <SE> @Done
 - Disallow "All Tasks" & "Unallocated Tasks" projects from being deleted [SG] @Done $Feature %Passed
 ^ Allow multi-task drag-n-drop Task reallocation to Projects [BB] <SG> @Done $Feature %Passed
-^ Beta: Add popup viewer/editor for Project time left/description [SG] $Feature @Active
+^ Beta: Add popup viewer/editor for Project time left/description [SG] $Feature
 v Add context menu to Add/Delete a project <SG> [JH2] $Feature
 
 Task Manager GUI
@@ -70,7 +70,7 @@ Task Manager GUI
 - Show Task Priority (font style), Status (font color), Validation (background color) [SG] <MB> @Done $Feature %Passed
 - Add Task Status/Priority/Validation radio buttons in tasks toolbar [SG] @Done $Feature %Passed
 v Enable Task Validation radio buttons only when in Done status [SG] <JH2> $Feature @Done %Passed
-- Beta: Allow multi-selected tasks to be set to new type/status/priority/validation [SG] <JH2> $Feature
+- Allow multi-selected tasks to be set to new type/status/priority/validation [SG] $Feature @Done %Passed
 ^ Add task search filter (by #IDs or name) & corresponding delete button in top toolbar: support type-ahead searching <JH2> [SG] @Done %Passed $Feature
 ^ Allow task attribute filtering by type, priority, status, and validation fields via a toolbar button/pop up panel [SG] $Feature @Done %Passed
 - Add commonly-used "QuickFilters": Troubled, Unfinished, Unvalidated, Verified, Showstoppers, All [SG] $Feature @Done %Passed

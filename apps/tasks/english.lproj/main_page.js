@@ -458,7 +458,7 @@ Tasks.mainPage = SC.Page.design({
               itemTitleKey: 'title',
               itemValueKey: 'value',
               itemIconKey: 'icon',
-              valueBinding: 'Tasks.taskController.type',
+              valueBinding: 'Tasks.tasksController.type',
               isEnabledBinding: 'Tasks.tasksController.hasSelection',
               layoutDirection: SC.LAYOUT_HORIZONTAL
             }),
@@ -484,7 +484,7 @@ Tasks.mainPage = SC.Page.design({
               ],
               itemTitleKey: 'title',
               itemValueKey: 'value',
-              valueBinding: 'Tasks.taskController.priority',
+              valueBinding: 'Tasks.tasksController.priority',
               isEnabledBinding: 'Tasks.tasksController.hasSelection',
               layoutDirection: SC.LAYOUT_HORIZONTAL
             }),
@@ -512,7 +512,7 @@ Tasks.mainPage = SC.Page.design({
               ],
               itemTitleKey: 'title',
               itemValueKey: 'value',
-              valueBinding: 'Tasks.taskController.developmentStatusWithValidation',
+              valueBinding: 'Tasks.tasksController.developmentStatusWithValidation',
               isEnabledBinding: 'Tasks.tasksController.hasSelection',
               layoutDirection: SC.LAYOUT_HORIZONTAL
             }),
@@ -538,7 +538,7 @@ Tasks.mainPage = SC.Page.design({
               ],
               itemTitleKey: 'title',
               itemValueKey: 'value',
-              valueBinding: 'Tasks.taskController.validation',
+              valueBinding: 'Tasks.tasksController.validation',
               isEnabledBinding: 'Tasks.tasksController.isValidatable',
               layoutDirection: SC.LAYOUT_HORIZONTAL
             })

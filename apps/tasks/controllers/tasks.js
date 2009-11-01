@@ -13,6 +13,82 @@ Tasks.tasksController = SC.TreeController.create(
   contentBinding: 'Tasks.assignmentsController.assignedTasks',
   treeItemIsGrouped: YES,
   
+  type: function(key, value) {
+    var sel = this.get('selection');
+    if(!sel) return;
+    var firstType = null;
+    if (value !== undefined) {
+      sel.forEach(function(task) {
+        var type = task.get('type');
+        if(type !== value) task.set('type', value);
+      });
+    } else {
+      sel.forEach(function(task) {
+        var type = task.get('type');
+        if(!firstType) firstType = value = type;
+        else if(type !== firstType) value = null;
+      });
+    }
+    return value;
+  }.property('selection').cacheable(),
+  
+  priority: function(key, value) {
+    var sel = this.get('selection');
+    if(!sel) return;
+    var firstPriority = null;
+    if (value !== undefined) {
+      sel.forEach(function(task) {
+        var priority = task.get('priority');
+        if(priority !== value) task.set('priority', value);
+      });
+    } else {
+      sel.forEach(function(task) {
+        var priority = task.get('priority');
+        if(!firstPriority) firstPriority = value = priority;
+        else if(priority !== firstPriority) value = null;
+      });
+    }
+    return value;
+  }.property('selection').cacheable(),
+  
+  developmentStatusWithValidation: function(key, value) {
+    var sel = this.get('selection');
+    if(!sel) return;
+    var firstDevelopmentStatusWithValidation = null;
+    if (value !== undefined) {
+      sel.forEach(function(task) {
+        var developmentStatusWithValidation = task.get('developmentStatusWithValidation');
+        if(developmentStatusWithValidation !== value) task.set('developmentStatusWithValidation', value);
+      });
+    } else {
+      sel.forEach(function(task) {
+        var developmentStatusWithValidation = task.get('developmentStatusWithValidation');
+        if(!firstDevelopmentStatusWithValidation) firstDevelopmentStatusWithValidation = value = developmentStatusWithValidation;
+        else if(developmentStatusWithValidation !== firstDevelopmentStatusWithValidation) value = null;
+      });
+    }
+    return value;
+  }.property('selection').cacheable(),
+  
+  validation: function(key, value) {
+    var sel = this.get('selection');
+    if(!sel) return;
+    var firstValidation = null;
+    if (value !== undefined) {
+      sel.forEach(function(task) {
+        var validation = task.get('validation');
+        if(validation !== value) task.set('validation', value);
+      });
+    } else {
+      sel.forEach(function(task) {
+        var validation = task.get('validation');
+        if(!firstValidation) firstValidation = value = validation;
+        else if(validation !== firstValidation) value = null;
+      });
+    }
+    return value;
+  }.property('selection').cacheable(),
+  
   isValidatable: function() {
     var sel = this.get('selection');
     if(!sel) return false;
