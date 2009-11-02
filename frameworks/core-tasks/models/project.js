@@ -144,6 +144,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
    * @returns {String) A string with the project's data exported in it.
    */
   exportData: function() {
+    
     var projectName = this.get('name');
     var tasksCount = this.get('tasks').get('length');
     var ret;
@@ -156,7 +157,18 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
       if(timeLeft) ret += (' {' + CoreTasks.displayTime(timeLeft) + '}');
       ret += ' # ' + "_Has".loc() + tasksCount + "_Tasks".loc();
     }
-    return ret + '\n';
+    
+    var val = this.get('description');
+    if(val) {
+      var lines = val.split('\n');
+      for (var j = 0; j < lines.length; j++) {
+        ret += '\n| ' + lines[j];
+      }
+    }
+    
+    ret += '\n';
+    return ret;
+    
   },
   
   /**
