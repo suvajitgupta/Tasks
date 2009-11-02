@@ -113,7 +113,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
               value: "_Effort:".loc()
             }),
             SC.TextFieldView.design({
-              layout: { top: 47, left: 55, width: 80, height: 16 },
+              layout: { top: 47, left: 55, width: 80, height: 20 },
               valueBinding: SC.binding('.content.effortValue', this)
             }),
             SC.LabelView.design({

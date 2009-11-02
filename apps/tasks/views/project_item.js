@@ -62,11 +62,11 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
               value: "_TimeLeft:".loc()
             }),
             SC.TextFieldView.design({
-              layout: { top: 10, left: 75, width: 80, height: 16 },
+              layout: { top: 10, left: 75, width: 80, height: 20 },
               valueBinding: SC.binding('.content.timeLeftValue', this)
             }),
             SC.LabelView.design({
-              layout: { top: 10, left: 160, height: 50, right: 10 },
+              layout: { top: 13, left: 160, height: 50, right: 10 },
               escapeHTML: NO,
               classNames: [ 'onscreen-help'],
               value: "_TimeLeftOnscreenHelp".loc()
