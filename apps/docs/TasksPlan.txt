@@ -94,9 +94,9 @@ User Manager GUI
 ^ Add login screen to identify user who logs in (and handle login failures properly) [SG] <SE> @Done %Passed $Feature
 - Add a guest signup capability to login screen [JH2] <SG> @Done %Passed $Feature
 ^ Add assignee filtering (space or comma separators, "none" for unassigned) & corresponding delete button in top toolbar [SG] <JH2> @Done $Feature %Passed
-- Set assignee selection filter to logged in user if they are a Developer, filter out Other tasks if they are a Tester [SG] @Done $Feature %Passed
 - Allow assignee filtering by loading status (overloaded, underloaded) [SG] $Feature
-- Allow assignee filtering by matching any part of name, not just loginName [SG] $Feature
+- Allow assignee filtering by matching any part of login or full name [SG] $Feature @Done %Passed
+- Set assignee selection filter to logged in user if they are a Developer, filter out Other tasks if they are a Tester [SG] @Done $Feature %Passed
 ^ Add User Manager with "Add/Del. User"  buttons in toolbar (reuse user information view with signup screen) [SG] <JH2> @Done %Passed $Feature
 - Cleanup task assignee/submitter after user deletion <SE> [SG] @Done %Passed
 - Beta: Enable/disable GUI functionality to enforce Role-based access control [SG] <JH2> $Feature

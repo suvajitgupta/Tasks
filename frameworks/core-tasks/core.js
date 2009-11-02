@@ -50,6 +50,24 @@ CoreTasks = SC.Object.create({
   },
 
   /**
+   * Get users whose login or full name matches a given string.
+   *
+   * @param {String} string to match loginName or name.
+   * @returns {Array} array of user records, if matching ones exist, or empty array.
+   */
+  getUsers: function(string) {
+    var usersCount = this.allUsers.get('length');
+    var matchingUsers = [];
+    for(var i = 0; i < usersCount; i++) {
+      var user = this.allUsers.objectAt(i);
+      if(user.get('loginName').indexOf(string) >= 0 || user.get('name').indexOf(string) >= 0) {
+        matchingUsers.push(user);
+      }
+    }
+    return matchingUsers;
+  },
+
+  /**
    * Get project for a given name (if it exists).
    *
    * @param {String} project name.

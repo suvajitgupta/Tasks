@@ -200,8 +200,12 @@ Tasks.assignmentsController = SC.ArrayController.create(
           selectedAssigneeDisplayNames.push(CoreTasks.USER_UNASSIGNED);
         }
         else {
-          var selectedAssigneeUser = CoreTasks.getUser(selectedAssigneeLoginNames[i]);
-          if (selectedAssigneeUser) selectedAssigneeDisplayNames.push(selectedAssigneeUser.get('displayName'));
+          var selectedAssigneeUsers = CoreTasks.getUsers(selectedAssigneeLoginNames[i]);
+          if (selectedAssigneeUsers.length > 0) {
+            for (var j = 0; j < selectedAssigneeUsers.length; j++) {
+              selectedAssigneeDisplayNames.push(selectedAssigneeUsers[j].get('displayName'));
+            }
+          }
         }
       }
     }
@@ -210,7 +214,8 @@ Tasks.assignmentsController = SC.ArrayController.create(
     var sf = this.get('searchFilter');
     sf = this._escapeMetacharacters(sf);
     var idPattern = null, namePattern = null;
-    var idMatches = sf.match(/#([-\d]+)/g);
+    var idMatches = sf.match(/#([\-\d]+)/g);
+    // console.log("DEBUG: idMatches = " + idMatches);
     if(idMatches) idPattern = new RegExp(idMatches.join("|").replace(/#/g,''));
     else namePattern = new RegExp(sf, 'i');
     
