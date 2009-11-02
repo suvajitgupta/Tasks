@@ -66,6 +66,7 @@
   color: black !important;
   background: #ccc;
   border: 1px solid #ccc !important;
+  background: white none repeat scroll 0 0 !important;
 }
 
 .regular-project-item.sel .sc-outline .count {
