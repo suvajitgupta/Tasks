@@ -37,6 +37,28 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
   }.property('timeLeft').cacheable(),
   
   /**
+   *  This computed property buffers changes to the timeLeft field.
+   */
+  timeLeftValue: function(key, value){
+    if (value !== undefined) {
+      if(value === '') {
+        this.writeAttribute('timeLeft', null);
+      }
+      else {
+        var timeLeft = CoreTasks.Project.parseTimeLeft('{' + value + '}');
+        if(timeLeft) {
+          this.writeAttribute('timeLeft', timeLeft);
+          value = timeLeft;
+        }
+      }
+    }
+    else {
+      value = this.get('timeLeft');
+    }
+    return value;
+  }.property('timeLeft').cacheable(),
+
+  /**
    * A read-only computed property that returns the list of tasks associated with this project.
    *
    * @returns {SC.RecordArray} An array of tasks.
@@ -159,6 +181,22 @@ CoreTasks.Project.mixin(/** @scope CoreTasks.Project */ {
   
   callbacks: SC.Object.create(),
   resourcePath: 'project',
+
+  /**
+   * Parse a string and extract timeLeft from it.
+   *
+   * @param {String} string to extract timeLeft from.
+   * @returns {String} Project timeLeft.
+   */
+  parseTimeLeft: function(line) {
+    var taskTimeLeft = null;
+    var taskTimeLeftMatches = /\{(\d+\.\d+|\d+)(|d|h)\}/.exec(line);
+    if(taskTimeLeftMatches) {
+      taskTimeLeft = taskTimeLeftMatches[1];
+      if(taskTimeLeftMatches[2]) taskTimeLeft += taskTimeLeftMatches[2];
+    }
+    return taskTimeLeft;
+  },
 
   /**
    * Parse a line of text and extract parameters from it.

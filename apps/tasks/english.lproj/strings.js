@@ -58,6 +58,8 @@ SC.stringsFor('English', {
   "_Has": "Has ",
   "_Tasks": " task(s)",
   "_ProjectTimeLeftTooltip": "Time left shown on right",
+  "_TimeLeft:": "Time Left:",
+  "_TimeLeftOnscreenHelp": "May be unspecified, a decimal like '0.25'; in units of 'd' or 'h'",
   
   // Task strings
   "_AddTask": "Add Task",

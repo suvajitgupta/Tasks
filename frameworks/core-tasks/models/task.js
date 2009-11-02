@@ -419,7 +419,7 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
   resourcePath: 'task',
   
   /**
-   * Parse a lstring and extract effort from it.
+   * Parse a string and extract effort from it.
    *
    * @param {String} string to extract effort from.
    * @returns {String} Task effort (number or range).
