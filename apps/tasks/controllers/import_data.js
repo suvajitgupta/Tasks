@@ -46,6 +46,7 @@ Tasks.importDataController = SC.ObjectController.create(
       var lines = data.split('\n');
       var store = CoreTasks.get('store');
       var currentProject = null;
+      var description, nextLine, descriptionLine;
 
       for (var i = 0; i < lines.length; i++) {
 
@@ -84,11 +85,11 @@ Tasks.importDataController = SC.ObjectController.create(
           }
 
           // Peek ahead to the next line(s) to see if there is a Description and bring those in
-          var description = null;
+          description = null;
           while (i < (lines.length-1)) {
-            var nextLine = lines[++i];
+            nextLine = lines[++i];
             if (nextLine.indexOf('| ') === 0) { // a Description line
-              var descriptionLine = nextLine.slice(2);
+              descriptionLine = nextLine.slice(2);
               description = (description? (description + '\n') : '') + descriptionLine;
             }
             else {
@@ -114,14 +115,32 @@ Tasks.importDataController = SC.ObjectController.create(
           var projectHash = CoreTasks.Project.parse(line);
           // console.log ('Project:\t\t' + JSON.stringify(projectHash));
           
-          var project = CoreTasks.getProject(projectHash.name);
-          if(project) {
-            currentProject = project;
+          var projectRecord = CoreTasks.getProject(projectHash.name);
+          if(projectRecord) {
+            currentProject = projectRecord;
           }
           else {
-            project = CoreTasks.createRecord(CoreTasks.Project, projectHash);
-            if(project) {
-              currentProject = project;
+            // Peek ahead to the next line(s) to see if there is a Description and bring those in
+            description = null;
+            while (i < (lines.length-1)) {
+              nextLine = lines[++i];
+              if (nextLine.indexOf('| ') === 0) { // a Description line
+                descriptionLine = nextLine.slice(2);
+                description = (description? (description + '\n') : '') + descriptionLine;
+              }
+              else {
+                i--;
+                break;
+              }
+            }
+            if(description) {
+              projectHash.description = description;
+              // console.log('Description:\t' + description);
+            }
+            
+            projectRecord = CoreTasks.createRecord(CoreTasks.Project, projectHash);
+            if(projectRecord) {
+              currentProject = projectRecord;
             }
             else {
               console.log('Project Import Error: project creation failed!');

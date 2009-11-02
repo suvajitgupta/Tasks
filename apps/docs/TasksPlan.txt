@@ -59,7 +59,7 @@ v Disable Add/Del. Tasks buttons when on "All Tasks" project [SG] <BB> @Done %Pa
 ^ Add virtual "All Tasks" & "Unallocated Tasks" projects and display them grayed out in projects list [SG] <SE> @Done
 - Disallow "All Tasks" & "Unallocated Tasks" projects from being deleted [SG] @Done $Feature %Passed
 ^ Allow multi-task drag-n-drop Task reallocation to Projects [BB] <SG> @Done $Feature %Passed
-^ Beta: Add popup viewer/editor for Project time left/description [SG] $Feature
+^ Add popup viewer/editor for Project time left/description [SG] $Feature @Done %Passed
 v Add context menu to Add/Delete a project <SG> [JH2] $Feature
 
 Task Manager GUI
