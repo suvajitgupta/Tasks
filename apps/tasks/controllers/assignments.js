@@ -210,7 +210,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     var sf = this.get('searchFilter');
     sf = this._escapeMetacharacters(sf);
     var idPattern = null, namePattern = null;
-    var idMatches = sf.match(/#(\d+)/g);
+    var idMatches = sf.match(/#([-\d]+)/g);
     if(idMatches) idPattern = new RegExp(idMatches.join("|").replace(/#/g,''));
     else namePattern = new RegExp(sf, 'i');
     
@@ -252,7 +252,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
             if(this.attributeFilterCriteria.indexOf(validation) === -1) return;
           }
           if(idPattern) {
-            var taskId = '' + task.get('id');
+            var taskId = '' + task.get('displayId');
             if(!taskId.match(idPattern)) return;
           }
           else if(namePattern) {
