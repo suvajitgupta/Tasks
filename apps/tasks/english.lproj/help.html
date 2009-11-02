@@ -35,7 +35,7 @@
 </head>
 <body>
 	<h2>Introduction</h2>
-		<p style="margin-left: 5px"><app>tasks</app> is an Agile task management tool built to directly support the eXtreme Programming (XP) <i>PlanningGame</i> or Scrum <i>Sprint Planning Meeting</i>.  <app>tasks</app> was designed to be simple and keep up with the chaos of software development. Developers embrace this tool since it is lightweight and focuses them on what is left to do. Managers like this tool since it allows them to plan and monitor the health of projects.<p>
+		<p style="margin-left: 5px"><app>tasks</app> is an Agile project management tool built to keep up with the chaos of software development. Managers like this tool since it allows them to plan and monitor the health of projects.  Developers embrace this tool since it is lightweight and focuses them on what is left to code and fix. Testers enjoy the instant visibility into completed tasks and the convenience of one-click validation.<p>
 		<p style="margin-left: 5px">A <i>task</i> is something a <i>user</i> does and tasks are grouped into <i>project</i>s.  A user <i>submits</i> (or creates) tasks and these are <i>assigned</i> to users.  Sets of tasks are <i>allocated</i> to a project (an initiative or a release). The <app>tasks</app> GUI is in essence a Scrum <i>Task Board</i> accessible by all team members and consists of the following sections:</p>
 		<ul>
 			<li>A <b>dock</b> at the top with some global action buttons</li>
@@ -54,7 +54,7 @@
 			<p>Tasks are grouped by assignee and displayed using various kinds of color coding - the legend is shown in the bottom control bar.  To create a task, click on the "Add Task" button and enter the name of the task.  If you have a project selected, the new task is automatically allocated to that project.  If you have a task selected, the new task is automatically assigned to the same user and copies over the selected task's type and priority.  You can set the task's attributes via the radio buttons in the control bar.  You can click on the icon to the far right of the task to get a popup editor and enter additional details about the task.  Update a task's name by double clicking on it and using the inline editor.  Delete selected tasks using the "Del. Task" button.  To reassign a task to another user, simply drag-and-drop it to the target user if they are visible or use the task popup editor to change the assignee.  To reallocate a task to another project drag-and-drop it on the target project in the master list or via the task popup editor.  Note: you can select multiple tasks at once and perform attribute change and delete/reassign/reallocate operations.</p>
 		<p>When entering a task, use the XP principle of <i>FeaturesNotSubsystems</i> - try to build user-visible <i>Features</i> that may need some <i>Other</i> tasks as infrastructure.  XP's <i>RefactorMericilessly</i> manifests itself as <i>Bug</i> and <i>Other</i> tasks - pay off your technical debt as you go.
 		<h3>Workflow</h3>
-			<p><app>tasks</app> supports a simple workflow as shown in the control bar at the bottom. You first plan your tasks, specifying their types and priorities. Then you work on your tasks, noting your status as you go. Finally, you may validate your completed tasks.
+			<p><app>tasks</app> supports a simple workflow as shown in the control bar at the bottom. First plan your tasks, specifying their types and priorities. Allocate tasks to projects and assign them to team members.  Then work on your tasks, noting your status as you go. Finally, validate your completed tasks.
 	 	<h3>Sorting</h3>
 			<p>Sorting in <app>tasks</app> is automatic. Projects and users are sorted alphabetically. Tasks are sorted by status, validation (if Done), priority, and type in that order.  This helps you focus on what you are working on now and what is next.</p>
 	<h2>Intermediate Features</h2>
@@ -94,7 +94,7 @@
 		<h3>Clarify Tasks</h3>
 			<p>Make each task SMART (<i>Specific, Measurable, Attainable, Resourced, Timebound</i>) ensuring that the task: (1) is self-explanatory, (2) has clear success criteria to allow validation, (3) has realistic estimates which are refined as you proceed, (4) maps out dependencies like analysis, design, infrastructure, test data, et al, and (5) is broken into small chunks each taking no more than a day or two.</p>
 		<h3>Baseline Plans</h3>
-			<p>Export/keep aside a snapshot of the tasks for a release after people have committed to a plan and see how the team fares vs. the plan at the end of the release during an XP <i>ProjectRetrospective</i> or Scrum <i>Sprint Review Meeting</i>.</p>
+			<p><app>tasks</app> directly supports eXtreme Programming (XP) <i>PlanningGame</i> or Scrum <i>Sprint Planning Meeting</i>.  Export/keep aside a snapshot of the tasks for a release after people have committed to a plan and see how the team fares vs. the plan at the end of the release during an XP <i>ProjectRetrospective</i> or Scrum <i>Sprint Review Meeting</i>.</p>
 		<h3>Plan Long Term</h3>
 			<p>Map out future releases and background initiatives as projects - this allows you to plan future work and provides a place to capture ideas and reallocate tasks that don't fit into current schedules.</p>
 		<h3>Surface Risks</h3>
@@ -107,6 +107,10 @@
 			<p>If you are almost finished with a task and have a small final portion left, split up the task and mark the completed portion <i>Done</i> - this will give you credit for the completed portion and avoid the <i>overloaded</i> assignee label! <app>tasks</app>  doesn't preserve the original estimates and support partial time logging - it is flexible and allows a task to have no estimate at the start, refined to a range estimate, and finalized to an actual at the end.</p>
 		<h3>Capture Release Notes</h3>
 			<p>As you finish a task, document its Release Notes in real time (what works, what doesn't, limitations, et al).  This is a very effective way for Developers to document what Testers need to know when they validate completed tasks.</p>
+		<h3>Ensure Independent Acceptance</h3>
+			<p>Ideally your <i>OnsiteCustomer</i> can test and accept completed work, providing invaluable feedback.  In general, it is best to have someone other than the assignee verify completed tasks, to ensure quality.</p>
+		<h3>Plan End Game</h3>
+			<p>As you <i>CountDownToRelease</i> use <i>QuickFilters</i> to view and resolve showstoppers.  This is a particularly good time to take advantage of the load balancing capabilities of <app>tasks</app> and <i>Productionize</i> your code as quickly as possible.</p>
 		<h3>Use Templates</h3>
 			<p>You can create project/task <i>templates</i> by exporting data and bringing them back in via import.  This is particularly useful when you have a boilerplate set of items you reuse as you start initiatives. You can create the template data outside of <app>tasks</app> as well.  Templated data gives you a jump start after which you can add/modify/delete items at will.</p>
 	<h2>Reference</h2>
