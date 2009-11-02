@@ -19,7 +19,7 @@ Tasks.settingsController = SC.ObjectController.create(
       var panel = Tasks.getPath('settingsPage.panel');
       if(panel) {
         // Select logged in user and open User Manager
-        Tasks.usersController.selectObject(CoreTasks.get('user'));
+        Tasks.usersController.selectObject(CoreTasks.get('currentUser'));
         panel.append();
       }
     },

@@ -77,23 +77,23 @@ Tasks.mixin({
   _loginUser: function() {
 
     // console.log("DEBUG: loginUser()");
-    var user = CoreTasks.get('user');
-    if(user) this._alreadyLoggedIn = true;
-    else user = CoreTasks.getUser(this.loginName);
-    if (user) { // See if a valid user
+    var currentUser = CoreTasks.get('currentUser');
+    if(currentUser) this._alreadyLoggedIn = true;
+    else currentUser = CoreTasks.getUser(this.loginName);
+    if (currentUser) { // See if a valid user
       
       if(!this._alreadyLoggedIn) {
         
         // Greet user and save login session information
-        CoreTasks.set('user', user);
+        CoreTasks.set('currentUser', currentUser);
         var welcomeMessage = Tasks.getPath('mainPage.mainPane.welcomeMessage');
-        welcomeMessage.set('value', "_User:".loc() + '<b>' + CoreTasks.getPath('user.name') + '</b>, ' +
-                           "_Role:".loc() + ' <i>' + CoreTasks.getPath('user.role').loc() + '</i>');
+        welcomeMessage.set('value', "_User:".loc() + '<b>' + CoreTasks.getPath('currentUser.name') + '</b>, ' +
+                           "_Role:".loc() + ' <i>' + CoreTasks.getPath('currentUser.role').loc() + '</i>');
         welcomeMessage.set('toolTip', "_LoginSince".loc() + new Date().format('hh:mm:ss a MMM dd, yyyy'));
         
         // Based on user's role set up appropriate task filter
-        var role = user.get('role');
-        if(role === CoreTasks.USER_ROLE_DEVELOPER) { // Set assignee selection filter to logged in user
+        var role = currentUser.get('role');
+        if(role === CoreTasks.USER_ROLE_DEVELOPER) { // Set assignee selection filter to current user
           Tasks.assignmentsController.set('assigneeSelection', this.loginName);
         }
         else if(role === CoreTasks.USER_ROLE_TESTER) { // Filter out Other tasks
@@ -310,7 +310,7 @@ Tasks.mixin({
     if(confirm("_LogoutConfirmation".loc())) {
       
       Tasks.getPath('mainPage.mainPane.welcomeMessage').set('value', null);
-      CoreTasks.set('user', null);
+      CoreTasks.set('currentUser', null);
       this._alreadyLoggedIn = false;
       this.get('assignmentsController').resetFilters();
       
@@ -477,7 +477,7 @@ Tasks.mixin({
       user.destroy();
     
       // Select the logged in user.
-      this.usersController.selectObject(CoreTasks.get('user'));
+      this.usersController.selectObject(CoreTasks.get('currentUser'));
     
     }
   },
