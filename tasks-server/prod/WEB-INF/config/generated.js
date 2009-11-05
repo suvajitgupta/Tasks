@@ -4,6 +4,18 @@
 		"name":"user",
 		"schema":{
 			"properties":{
+				"_id":{
+					"type":"any",
+					"optional":true
+				},
+				"createdAt":{
+					"type":"any",
+					"optional":true
+				},
+				"updatedAt":{
+					"type":"any",
+					"optional":true
+				},
 				"name":{
 					"type":"any",
 					"optional":false
@@ -15,6 +27,14 @@
 				"role":{
 					"type":"any",
 					"optional":false
+				},
+				"email":{
+					"type":"any",
+					"optional":true
+				},
+				"password":{
+					"type":"any",
+					"optional":true
 				},
 				"preferences":{
 					"type":"object",
@@ -34,16 +54,28 @@
 		"name":"project",
 		"schema":{
 			"properties":{
+				"_id":{
+					"type":"any",
+					"optional":true
+				},
+				"createdAt":{
+					"type":"any",
+					"optional":true
+				},
+				"updatedAt":{
+					"type":"any",
+					"optional":true
+				},
 				"name":{
 					"type":"any",
 					"optional":false
 				},
-				"timeLeft":{
+				"description":{
 					"type":"any",
 					"optional":true
 				},
-				"tasks":{
-					"type":"array",
+				"timeLeft":{
+					"type":"any",
 					"optional":true
 				}
 			},
@@ -56,6 +88,18 @@
 		"name":"task",
 		"schema":{
 			"properties":{
+				"_id":{
+					"type":"any",
+					"optional":true
+				},
+				"createdAt":{
+					"type":"any",
+					"optional":true
+				},
+				"updatedAt":{
+					"type":"any",
+					"optional":true
+				},
 				"name":{
 					"type":"any",
 					"optional":false
@@ -64,7 +108,7 @@
 					"type":"any",
 					"optional":true
 				},
-				"type":{
+				"projectId":{
 					"type":"any",
 					"optional":true
 				},
@@ -72,22 +116,28 @@
 					"type":"any",
 					"optional":true
 				},
-				"status":{
+				"effort":{
+					"type":"any",
+					"optional":true
+				},
+				"submitterId":{
+					"type":"any",
+					"optional":true
+				},
+				"assigneeId":{
+					"type":"any",
+					"optional":true
+				},
+				"type":{
+					"type":"any",
+					"optional":true
+				},
+				"developmentStatus":{
 					"type":"any",
 					"optional":true
 				},
 				"validation":{
 					"type":"any",
-					"optional":true
-				},
-				"effort":{
-					"type":"any",
-					"optional":true
-				},
-				"submitter":{
-					"optional":true
-				},
-				"assignee":{
 					"optional":true
 				}
 			},
