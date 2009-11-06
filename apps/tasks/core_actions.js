@@ -341,6 +341,13 @@ Tasks.mixin({
    * Add a new project and start editing it in projects master list.
    */
   addProject: function() {
+    
+    var currentUser = CoreTasks.get('currentUser');
+    if(!currentUser || currentUser.get('role') !== CoreTasks.USER_ROLE_MANAGER) {
+      console.log('Error: permission denied based on user role');
+      return null;
+    }
+    
     // Create, select, and begin editing new project.
     var project = CoreTasks.createRecord(CoreTasks.Project, { name: CoreTasks.NEW_PROJECT_NAME.loc() } );
     var pc = this.projectsController;
@@ -355,6 +362,12 @@ Tasks.mixin({
    @returns {Boolean} YES if the deletion was a success.
    */
   deleteProject: function() {
+    
+    var currentUser = CoreTasks.get('currentUser');
+    if(!currentUser || currentUser.get('role') !== CoreTasks.USER_ROLE_MANAGER) {
+      console.log('Error: permission denied based on user role');
+      return null;
+    }
     
     // Get the selected project, if one
     var project = Tasks.projectsController.getPath('selection.firstObject');
@@ -498,7 +511,7 @@ Tasks.mixin({
    * @param {Integer} stateNum The number of the sate (ex. "4").
    */
   _logActionNotHandled: function(action, stateName, stateNum) {
-    // console.log('Error: action not handled in state %@[%@]: %@'.fmt(stateName, stateNum, action));
+    console.log('Error: action not handled in state %@[%@]: %@'.fmt(stateName, stateNum, action));
   },
   
   /**

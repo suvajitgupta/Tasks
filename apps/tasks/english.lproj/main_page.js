@@ -243,6 +243,7 @@ Tasks.mainPage = SC.Page.design({
           value: "_AddProject".loc(),
           classNames: ['toolbar-label'],
           toolTip: "_AddProjectTooltip".loc(),
+          isEnabledBinding: 'Tasks.projectsController.isAddable',
           target: 'Tasks',
           action: 'addProject'
         }),
