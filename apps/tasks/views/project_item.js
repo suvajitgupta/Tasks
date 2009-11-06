@@ -92,8 +92,19 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
   },
   
   inlineEditorWillBeginEditing: function(inlineEditor) {
-    var projectName = inlineEditor.value;
-    if (projectName === CoreTasks.ALL_TASKS_NAME.loc() || projectName === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) inlineEditor.discardEditing();
+    
+    var currentUser = CoreTasks.get('currentUser');
+    if(!currentUser || currentUser.get('role') !== CoreTasks.USER_ROLE_MANAGER) {
+      inlineEditor.discardEditing();
+    }
+    else {
+      var projectName = inlineEditor.value;
+      if (projectName === CoreTasks.ALL_TASKS_NAME.loc() ||
+          projectName === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) {
+        inlineEditor.discardEditing();
+      }
+    }
+    
   },
   
   render: function(context, firstTime) {
