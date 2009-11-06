@@ -386,7 +386,7 @@ Tasks.mixin({
   addTask: function() {
     
     // Create a new task with the logged in user as the default submitter/assignee within selected project, if one.
-    var userId = CoreTasks.getPath('user.id');
+    var userId = CoreTasks.getPath('currentUser.id');
     var taskHash = SC.merge({ 'submitterId': userId, 'assigneeId': userId }, SC.clone(CoreTasks.Task.NEW_TASK_HASH));
     taskHash.name = taskHash.name.loc();
     var project = Tasks.projectsController.getPath('selection.firstObject');
