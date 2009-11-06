@@ -117,7 +117,7 @@ CoreTasks = SC.Object.create({
   recordBeingSaved: null,
 
   // The logged in user.
-  user: null,
+  currentUser: null,
 
   /**
    * A record array of all projects in the store.
