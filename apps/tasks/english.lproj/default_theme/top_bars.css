@@ -145,13 +145,13 @@
 .delete-icon {
   width: 16px;
   height: 16px;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -304px;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -303px;
 }
 
 .disabled .delete-icon {
   width: 16px;
   height: 16px;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -336px;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -335px;
 }
 
 .filter-tasks-icon-has-criteria {
