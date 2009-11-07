@@ -555,7 +555,7 @@ CoreTasks = SC.Object.create({
   },
 
   // Used to assign all newly-created records with a negative ID.
-  // TODO: [SE] Reset the counter so that we don't run out of integers if the client is left
+  // TODO: [SE] reset the counter so that we don't run out of integers if the client is left
   // running for a long time.
   _currentRecordId: -1
 

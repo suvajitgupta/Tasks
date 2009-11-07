@@ -1,10 +1,13 @@
+// ==========================================================================
+// Tasks.projectsController
+// ==========================================================================
+/*globals CoreTasks Tasks sc_require */
 /** 
   This is the controller for the Projects master list
 
   @extends SC.ArrayController
   @author Suvajit Gupta
 */
-/*globals CoreTasks Tasks sc_require */
 sc_require('mixins/status_changed');
 
 Tasks.projectsController = SC.ArrayController.create(Tasks.StatusChanged,

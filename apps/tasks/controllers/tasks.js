@@ -1,3 +1,7 @@
+// ==========================================================================
+// Tasks.tasksController
+// ==========================================================================
+/*globals CoreTasks Tasks */
 /** 
   This is the controller for the Tasks detail list, driven by the selected Project
   
@@ -5,7 +9,6 @@
   @author Joshua Holt
   @author Suvajit Gupta
 */
-/*globals CoreTasks Tasks */
 
 Tasks.tasksController = SC.TreeController.create(
 /** @scope Tasks.tasksController.prototype */ {

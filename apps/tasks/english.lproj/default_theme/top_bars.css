@@ -27,13 +27,13 @@
 }
 
 .title-bar-label {
-  font-size: 9px !important;
+  font-size: 10px !important;
   color: #eee !important;
   text-align: center !important;
 }
 
 .title-bar-label.disabled {
-  font-size: 9px !important;
+  font-size: 10px !important;
   color: #777 !important;
   text-align: center !important;
 }
@@ -49,11 +49,19 @@
 
 .title-bar-message {
   text-align: center !important;
-  color: white !important;
+  color: #CCFFFF !important;
 }
 
 .save-icon {
+	width: 24px;
+	height: 24px;
   background: static_url('images/default-theme-static.png') no-repeat 0 -50px;
+}
+
+.disabled .save-icon {
+	width: 24px;
+	height: 24px;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -366px;
 }
 
 .refresh-icon {
@@ -63,35 +71,7 @@
 }
 
 /*
-// TODO: [MG] Beta: add a save-icon.disabled style
-*/
-
-.add-icon {
-  width: 16px;
-  height: 16px;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -288px;
-}
-
-.disabled.add-icon {
-  width: 16px;
-  height: 16px;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -320px;
-}
-
-.delete-icon {
-  width: 16px;
-  height: 16px;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -304px;
-}
-
-.disabled .delete-icon {
-  width: 16px;
-  height: 16px;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -336px;
-}
-
-/*
-// TODO: [MG] delete unused images: import/export/settings/help/logout
+// TODO: [MG] delete unused images below from sprites
 */
 .import-icon {
 	width: 24px;
@@ -147,6 +127,30 @@
   font-size: 10px !important;
   color: #AAA !important;
   text-align: center !important;
+}
+
+.add-icon {
+  width: 16px;
+  height: 16px;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -288px;
+}
+
+.disabled .add-icon {
+  width: 16px;
+  height: 16px;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -320px;
+}
+
+.delete-icon {
+  width: 16px;
+  height: 16px;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -304px;
+}
+
+.disabled .delete-icon {
+  width: 16px;
+  height: 16px;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -336px;
 }
 
 .filter-tasks-icon-has-criteria {

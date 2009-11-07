@@ -134,3 +134,17 @@ docs/ folder:
 8. TasksFileFormat.txt: Shows the simple/intuitive syntax for importing data
    into and exporting data from Tasks.  In fact, the TasksPlan.txt is itself
    written in this format and can be imported into Tasks!
+
+
+TASKS ATTRIBUTIONS
+==============================================================================
+
+The filter on/off icons:
+Diagona Icons
+Copyright (C) 2007 Yusuke Kamiyamane. All rights reserved.
+The icons are licensed under a Creative Commons Attribution 3.0 license.
+
+The color indicators on the filter icon, as well as numerous other icons in Tasks:
+Silk icon set 1.3
+Mark James - http://www.famfamfam.com/lab/icons/silk/
+

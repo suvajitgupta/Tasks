@@ -86,7 +86,21 @@ body {
   left: 38px !important;
 }
 
+.sc-view.sc-label-view.title-bar-label.icon img.icon {
+	top: 0px;
+	margin-left: 0px;
+	margin-right: 4px;
+	height: 24px;
+	width: 24px;
+}
+
+.sc-view.sc-label-view.toolbar-label.icon img.icon {
+	top: 0px;
+	margin-left: 0px;
+	margin-right: 2px;
+}
+
+
 /*
-// TODO: [MG] sprite/delete all standalone image files
 // TODO: [MG] delete images in static PNG that we don’t use
 */
