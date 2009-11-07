@@ -48,8 +48,9 @@
 }
 
 .title-bar-message {
+  font-size: 11px !important;
   text-align: center !important;
-  color: #CCFFFF !important;
+  color: white !important;
 }
 
 .save-icon {
@@ -90,7 +91,7 @@
 .settings-icon {
   width: 24px;
   height: 24px;
-  background: no-repeat sc_static('icons/shared') 0px -144px;
+	background: no-repeat sc_static('icons/shared') 0px -168px;
 /*  background: static_url('images/default-theme-static.png') no-repeat 0 -74px;*/
 }
 
