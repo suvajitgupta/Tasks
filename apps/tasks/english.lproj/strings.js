@@ -59,7 +59,7 @@ SC.stringsFor('English', {
   "_Tasks": " task(s)",
   "_ProjectTimeLeftTooltip": "Time left shown on right",
   "_TimeLeft:": "Time Left:",
-  "_TimeLeftOnscreenHelp": "May be unspecified, a decimal like '0.25'; units are 'd' or 'h'",
+  "_TimeLeftOnscreenHelp": "May be unspecified, a decimal like '0.25'; units 'd' or 'h'",
   
   // Task strings
   "_AddTask": "Add Task",
@@ -92,7 +92,7 @@ SC.stringsFor('English', {
   "_Passed": "Passed",
   "_Failed": "Failed",
   "_Effort:": "Effort:",
-  "_EffortOnscreenHelp": "May be unspecified,<br> a decimal like '0.25',<br> or a range like '2-3';<br> units are 'd' or 'h'",
+  "_EffortOnscreenHelp": "May be unspecified,<br> a decimal like '0.25',<br> or a range like '2-3';<br> units 'd' or 'h'",
   "_Description:": "Description:",
   "_DescriptionHint": "Enter detailed notes...",
   "_SubmitterTooltip": "Submitted by ",
