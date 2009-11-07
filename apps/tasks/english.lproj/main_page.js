@@ -38,7 +38,7 @@ Tasks.mainPage = SC.Page.design({
         }),
       
         SC.LabelView.design({
-          layout: { centerY: -10, height: 24, left: 100, width: 50 },
+          layout: { centerY: -6, height: 24, left: 100, width: 50 },
           classNames: ['tasks-version'],
           value: Tasks.VERSION
         }),
