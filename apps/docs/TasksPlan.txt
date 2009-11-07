@@ -99,7 +99,7 @@ User Manager GUI
 - Set assignee selection filter to logged in user if they are a Developer, filter out Other tasks if they are a Tester [SG] @Done $Feature %Passed
 ^ Add User Manager with "Add/Del. User"  buttons in toolbar (reuse user information view with signup screen) [SG] <JH2> @Done %Passed $Feature
 - Cleanup task assignee/submitter after user deletion <SE> [SG] @Done %Passed
-- Beta: Enable/disable GUI functionality to enforce Role-based access control [SG] <JH2> $Feature
+- Beta: Enable/disable GUI functionality to enforce Role-based access control [SG] $Feature
 - Beta: Add password to login screen and change password dialog in User Manager (ask to reenter password) [JH2] <SG> $Feature
 - Add support for "Teams" (a user can belong to a team, a team can have a lead) [SG] <SE> $Feature
 
@@ -108,7 +108,7 @@ Application Manager GUI
 - Add server data loading message in status bar during startup [SG] $Feature @Done %Passed
 - Summarize number of projects/assignees/tasks being displayed in the status bar [SG] <MB> @Done $Feature %Passed
 - Add "Save" button in top toolbar, note time of last save in status bar [SG] <BB> @Done $Feature %Passed
-- Beta: Enable/disable Save button based on data modification [SG] <MB> $Feature @Risky
+- Beta: Enable/disable Save button based on data modification [SG] <SE> $Feature @Risky
 - Add "Refresh" button to get most recent data from server [SG] <SE> $Feature @Done %Passed
 - Add "Import" button in top toolbar with associated pop up panel [SG] <BB> @Done $Feature %Passed
 | Gears needs to be ported to Snow Leopard
