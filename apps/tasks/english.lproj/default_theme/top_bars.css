@@ -91,8 +91,7 @@
 .settings-icon {
   width: 24px;
   height: 24px;
-	background: no-repeat sc_static('icons/shared') 0px -168px;
-/*  background: static_url('images/default-theme-static.png') no-repeat 0 -74px;*/
+  background: static_url('images/default-theme-static.png') no-repeat 0 -74px;
 }
 
 .help-icon {

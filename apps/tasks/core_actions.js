@@ -262,6 +262,7 @@ Tasks.mixin({
   /**
    * Reload latest Tasks data from server.
    */
+  // TODO: [SG, SE] implement incremental refresh that doesn't reload/redraw everything on screen
   refreshData: function() {
     this.clearData();
     this.authenticate(this.loginName, 'password'); // TODO: [SG] replace with actual password
