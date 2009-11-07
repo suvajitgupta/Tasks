@@ -306,19 +306,19 @@ Tasks.mixin({
    * Handle application exiting request.
    */
   logout: function() {
-    
-    if(confirm("_LogoutConfirmation".loc())) {
-      
-      Tasks.getPath('mainPage.mainPane.welcomeMessage').set('value', null);
-      CoreTasks.set('currentUser', null);
-      this._alreadyLoggedIn = false;
-      this.get('assignmentsController').resetFilters();
-      
-      this.clearData();
-      this.goState('a', 1);
-      
-    }
-    
+    if(confirm("_LogoutConfirmation".loc())) this.restart();
+  },
+  
+  /**
+   * Restart application - invoked at logout and for a route to a new project.
+   */
+  restart: function() {
+    Tasks.getPath('mainPage.mainPane.welcomeMessage').set('value', null);
+    CoreTasks.set('currentUser', null);
+    this._alreadyLoggedIn = false;
+    this.get('assignmentsController').resetFilters();
+    this.clearData();
+    this.goState('a', 1);
   },
   
   /**

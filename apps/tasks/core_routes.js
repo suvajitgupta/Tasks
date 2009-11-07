@@ -38,7 +38,7 @@ Tasks.mixin( /** @scope Tasks */ {
     }
     else {
       this.set('defaultProject', params.name);
-      this.routeDefault();
+      this.restart();
     }
   },
   
