@@ -134,7 +134,7 @@ v Support disconnected operation and synchronization after network reconnection 
 Server
 ^ Build persistence server using Persevere [SE] <SG> @Done %Passed
 - Create a "System Administrator (SA)" user with Manager role in Persevere at installation time [SE] <SG>
-- Beta: document steps for creating a team production deployment of Tasks [SE] <SG>
+- Beta: Document steps for creating a team production deployment of Tasks [SE] <SG>
 ^ Beta: Build persistence server: local using Sinatra/SQLite and remote using Google App Engine [JH2] <SG> @Active
 - Patch SproutCore to avoid overwhelming async calls for file imports with more than 20 tasks [SE] <SG> @Done %Passed $Bug
 - Beta: Implement Server-based user authentication & authorization (Role-based access control) [JH2] <SG>

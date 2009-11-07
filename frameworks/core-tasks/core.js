@@ -196,7 +196,7 @@ CoreTasks = SC.Object.create({
    *
    * Persistence must occur in a precise order to maintain entity associations.
    */
-  // FIXME: [SE] Beta: after multiple entities are deleted, pressing Save causes these entities to flash on screen one at a time!
+  // FIXME: [SC] Beta: after multiple entities are deleted, pressing Save causes these entities to flash on screen one at a time!
   saveChanges: function() {
     if (this.get('saveMode') & CoreTasks.MODE_SAVING) {
       throw 'Error saving data: Save already in progress.';
