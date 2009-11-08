@@ -14,7 +14,7 @@ require 'dm-core'
 require 'dm-validations'
 require 'dm-timestamps'
 require 'dm-types'
-require 'persevere_adapter'
+#require 'persevere_adapter'
 require 'json'
 
 #-----------------------------------------------------------------------------
@@ -22,7 +22,7 @@ require 'json'
 #
 DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/Tasks.sqlite3")
 
-# Using Persevere Adapter... (let's see how it works --- the adapter had to heavily modified)
+# Using Persevere Adapter... (the adapter had to heavily modified -- we should not go this route yet.)
 # DataMapper.setup(:default, {
 #   :adapter => 'persevere',
 #   :host => 'localhost',
@@ -58,7 +58,9 @@ class User
   def to_json()
     ret = {}
     self.attributes.each do |k,v|
-      ret[k] = k.to_s == "id" ? self.url : v unless k.to_s == "password"
+      # We used to return a url for the id it seems that we do not now.
+      # ret[k] = k.to_s == "id" ? self.url : v unless k.to_s == "password"
+      ret[k] = v unless k.to_s == "password"
     end
     ret.to_json()
   end
@@ -98,7 +100,9 @@ class Project
   def to_json()
     ret = {}
     self.attributes.each do |k,v|
-      ret[k] = k.to_s == "id" ? self.url : v
+      # We used to return a url for the id it seems that we do not now.
+      # ret[k] = k.to_s == "id" ? self.url : v
+      ret[k] = v
     end
     ret.to_json()
   end
@@ -123,7 +127,7 @@ class Task
   property  :description,        Text
   property  :projectId,          Integer
 	property  :priority,           String, :default => '_Medium'
-	property  :effort,             Integer
+	property  :effort,             String
 	property  :submitterId,        String
 	property  :assigneeId,         String
 	property  :type,               String, :default => '_Other'
@@ -139,7 +143,9 @@ class Task
   def to_json()
     ret = {}
     self.attributes.each do |k,v|
-      ret[k] = k.to_s == "id" ? self.url : v
+      # We used to return a url for the id it seems that we do not now.
+      # ret[k] = k.to_s == "id" ? self.url : v
+      ret[k] = v
     end
     ret.to_json()
   end
