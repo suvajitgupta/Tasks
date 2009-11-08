@@ -57,7 +57,6 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
 
     if (SC.$ok(response)) {
       var recordType = query.get('recordType');
-
       /*
        * The request was successful, meaning that the server returned either 200 or 204.  A 204
        * indicates that the call succeeded but there were no matching records.
@@ -69,6 +68,14 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
       if (SC.typeOf(response) === SC.T_STRING) {
         var records = this._normalizeResponseArray(response);
 
+        // Load the records into the store and invoke the callback.
+        console.log('Retrieved %@ matching %@ records.'.fmt(records.length, recordType));
+
+        store.loadRecords(recordType, records);
+        store.dataSourceDidFetchQuery(query);
+        
+      } else if(SC.typeOf(response) === SC.T_ARRAY){
+        var records = response;
         // Load the records into the store and invoke the callback.
         console.log('Retrieved %@ matching %@ records.'.fmt(records.length, recordType));
 

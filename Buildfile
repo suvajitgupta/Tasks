@@ -11,3 +11,6 @@ proxy '/tasks-server', :to => 'localhost:8088', :protocol => 'http'
 
 # Local Persevere back end - test instance
 #proxy '/tasks-server', :to => 'localhost:8089', :protocol => 'http'
+
+# Sinatra Proxy
+#proxy '/tasks-server', :to => 'localhost:4567', :protocol => 'http'

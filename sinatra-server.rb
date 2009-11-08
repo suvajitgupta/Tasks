@@ -14,13 +14,21 @@ require 'dm-core'
 require 'dm-validations'
 require 'dm-timestamps'
 require 'dm-types'
-#require 'dm-tokyo-adapter'
+require 'persevere_adapter'
 require 'json'
 
 #-----------------------------------------------------------------------------
 # MODELS
 #
 DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/Tasks.sqlite3")
+
+# Using Persevere Adapter... (let's see how it works --- the adapter had to heavily modified)
+# DataMapper.setup(:default, {
+#   :adapter => 'persevere',
+#   :host => 'localhost',
+#   :port => '8088',
+#   :path => '/tasks-server'
+# })
 
 # USE TOKYO CABINET WHEN it's more stable
 # DataMapper.setup(:default,
@@ -36,7 +44,7 @@ class User
   property  :name,          Text,   :nullable =>  false  
   property  :loginName,     Text,   :nullable =>  false  
   property  :role,          String, :default => '_Guest'
-  property  :email,  Text #,   :nullable =>  false -- NOT IMPLEMENTED IN ALL AREAS
+  property  :email,         Text #,   :nullable =>  false -- NOT IMPLEMENTED IN ALL AREAS
   property  :password,      Text #,   :nullable =>  false -- NOT IMPLEMENTED IN ALL AREAS
   property  :preferences,   Json
   property  :authToken,     Text
@@ -77,8 +85,9 @@ class Project
   
   property  :id,          Serial
   property  :name,        Text, :nullable => false
+  property  :description, Text
   property  :'timeLeft',  Integer
-  property  :tasks,       Json
+  #property  :tasks,       Json
   property  :createdAt,   Integer
   property  :updatedAt,   Integer
   
@@ -111,15 +120,15 @@ class Task
   
   property  :id,                 Serial
   property  :name,               Text,   :nullable => false
+  property  :description,        Text
+  property  :projectId,          Integer
 	property  :priority,           String, :default => '_Medium'
-	property  :effort,             String
-	property  :submitterId,        Integer
-	property  :assigneeId,         Integer
-	property  :projectId,          Integer
+	property  :effort,             Integer
+	property  :submitterId,        String
+	property  :assigneeId,         String
 	property  :type,               String, :default => '_Other'
 	property  :developmentStatus,  String, :default => '_Planned'
 	property  :validation,         String, :default => '_Untested'
-	property  :description,        Text
   property  :createdAt,          Integer
   property  :updatedAt,          Integer
   
@@ -164,7 +173,7 @@ def json_get_list(route, options={})
       when 'project' then list = Project.all
     end
     
-    content_type "application/json"
+    content_type "application/javascript"
     list.length > 0 ? Array(list).to_json : [].to_json
       
   end
@@ -186,7 +195,7 @@ def json_get_single(route, options={})
     
     # Repond with error 404 or JSON
     halt 404, "#{modelType[modelId]} not found" if mobj.nil?
-    content_type "application/json"
+    content_type "application/javascript"
     mobj.to_json
     
   end
@@ -248,7 +257,7 @@ def json_put(route, options={})
     
     halt(500, "Could not update #{modelType}" ) unless record.update(opts)
 
-    response['Content-Type'] = "application/json"
+    response['Content-Type'] = "application/javascript"
     record.to_json
     
   end
