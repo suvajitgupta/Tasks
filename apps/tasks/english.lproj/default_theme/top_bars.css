@@ -77,15 +77,15 @@
 .import-icon {
 	width: 24px;
 	height: 24px;
-  background: no-repeat sc_static('icons/shared') -24px -240px;
-/*  background: static_url('images/default-theme-static.png') no-repeat 0 0;*/
+/*  background: no-repeat sc_static('icons/shared') -24px -240px;*/
+  background: static_url('images/default-theme-static.png') no-repeat 0 0;
 }
 
 .export-icon {
   width: 24px;
   height: 24px;
-  background: no-repeat sc_static('icons/shared') 0px -240px;
-/*  background: static_url('images/default-theme-static.png') no-repeat 0 -25px;*/
+/*  background: no-repeat sc_static('icons/shared') 0px -240px;*/
+  background: static_url('images/default-theme-static.png') no-repeat 0 -25px;
 }
 
 .settings-icon {
