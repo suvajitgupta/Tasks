@@ -198,16 +198,16 @@ CoreTasks.Project.mixin(/** @scope CoreTasks.Project */ {
    * Parse a string and extract timeLeft from it.
    *
    * @param {String} string to extract timeLeft from.
-   * @returns {String} Project timeLeft.
+   * @returns {String} project time left.
    */
   parseTimeLeft: function(line) {
-    var taskTimeLeft = null;
-    var taskTimeLeftMatches = /\{(\d+\.\d+|\d+)(|d|h)\}/.exec(line);
-    if(taskTimeLeftMatches) {
-      taskTimeLeft = taskTimeLeftMatches[1];
-      if(taskTimeLeftMatches[2]) taskTimeLeft += taskTimeLeftMatches[2];
+    var projectTimeLeft = null;
+    var projectTimeLeftMatches = /\{(\d+\.\d+|\d+)(|d|h)\}/.exec(line);
+    if(projectTimeLeftMatches) {
+      projectTimeLeft = projectTimeLeftMatches[1];
+      if(projectTimeLeftMatches[2]) projectTimeLeft += projectTimeLeftMatches[2]; // append provided time unit
     }
-    return taskTimeLeft;
+    return projectTimeLeft;
   },
 
   /**
@@ -217,15 +217,14 @@ CoreTasks.Project.mixin(/** @scope CoreTasks.Project */ {
    * @returns {Object} Hash of parsed parameters.
    */
   parse: function(line) {
-    var projectName = line, projectTimeLeft = null, projectTimeUnit = 'd';
-    var projectMatches = line.match(/([^\{]+)\{(\d+\.\d+|\d+)(|d|h)\}/);
-    if(projectMatches) {
-      projectName = projectMatches[1];
-      projectTimeLeft = projectMatches[2];
-      if(projectMatches[3]) projectTimeLeft += projectMatches[3];
+    var projectName = line;
+    var projectNameMatches = line.match(/([^\{\#]+)/);
+    if(projectNameMatches) {
+      projectName = projectNameMatches[1].replace(/\s+$/, ''); // trim trailing whitespace, if any
     }
+    var projectTimeLeft = CoreTasks.Project.parseTimeLeft(line);
     return {
-      name: projectName.replace(/\s+$/, ''),
+      name: projectName,
       timeLeft: projectTimeLeft,
       tasks: []
     };
