@@ -98,18 +98,6 @@ CoreTasks = SC.Object.create({
   _resourcePathFormat: 'tasks-server/%@%@%@',
 
   /*
-   * The various modes of operation.
-   *
-   * OFFLINE_MODE: Entities are retrieved from and persisted to internal fixtures.
-   * ONLINE_MODE: Entities are retrieved from and persisted to an actual, external server.
-   */
-  OFFLINE_MODE: 0,
-  ONLINE_MODE: 1,
-
-  // The current mode of operation.
-  mode: null,
-
-  /*
    * The various modes related to the save mechanism.
    */
   MODE_NOT_SAVING: 0x0001,
@@ -599,6 +587,30 @@ SC.mixin(Function.prototype, {
     
 });
 
-// Set the mode of operation.
-//CoreTasks.set('mode', CoreTasks.get('OFFLINE_MODE'));
-CoreTasks.set('mode', CoreTasks.get('ONLINE_MODE'));
+// Request headers.
+CoreTasks.HEADER_CONTENT_TYPE = 'Content-Type';
+CoreTasks.HEADER_VALUE_CONTENT_TYPE = 'application/json';
+CoreTasks.HEADER_ACCEPT = 'Accept';
+CoreTasks.HEADER_VALUE_ACCEPT =
+  'application/json, text/javascript, application/xml, text/xml, text/html, */*';
+
+// Reusable SC.Request objects.
+CoreTasks.REQUEST_GET = SC.Request.create({ type: 'GET', isJSON: YES })
+  .header(CoreTasks.HEADER_CONTENT_TYPE, CoreTasks.HEADER_VALUE_CONTENT_TYPE)
+  .header(CoreTasks.HEADER_ACCEPT, CoreTasks.HEADER_VALUE_ACCEPT);
+
+CoreTasks.REQUEST_POST = SC.Request.create({ type: 'POST', isJSON: YES })
+  .header(CoreTasks.HEADER_CONTENT_TYPE, CoreTasks.HEADER_VALUE_CONTENT_TYPE)
+  .header(CoreTasks.HEADER_ACCEPT, CoreTasks.HEADER_VALUE_ACCEPT);
+
+CoreTasks.REQUEST_PUT = SC.Request.create({ type: 'PUT', isJSON: YES })
+  .header(CoreTasks.HEADER_CONTENT_TYPE, CoreTasks.HEADER_VALUE_CONTENT_TYPE)
+  .header(CoreTasks.HEADER_ACCEPT, CoreTasks.HEADER_VALUE_ACCEPT);
+
+CoreTasks.REQUEST_DELETE = SC.Request.create({ type: 'DELETE', isJSON: YES })
+  .header(CoreTasks.HEADER_CONTENT_TYPE, CoreTasks.HEADER_VALUE_CONTENT_TYPE)
+  .header(CoreTasks.HEADER_ACCEPT, CoreTasks.HEADER_VALUE_ACCEPT);
+
+// Request errors.
+CoreTasks.ERROR_UNEXPECTED_RESPONSE = SC.$error('Unexpected response.', 'Request Error');
+CoreTasks.ERROR_INVALID_ID_TYPE = SC.$error('Invalid ID type.', 'Request Error');

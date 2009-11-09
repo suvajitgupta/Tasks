@@ -5,14 +5,19 @@ CoreTasks.USER_UNASSIGNED = '_Unassigned';
 CoreTasks.NEW_USER_NAME = '_FirstLast';
 CoreTasks.NEW_USER_LOGIN_NAME = '_Initials';
 
-
 // Roles:
 CoreTasks.USER_ROLE_MANAGER = '_Manager';
 CoreTasks.USER_ROLE_DEVELOPER = '_Developer'; // default
 CoreTasks.USER_ROLE_TESTER = '_Tester';
-CoreTasks.USER_ROLE_GUEST = '_Guest'; // I added this as a role type that would allow viewing && commenting status only [JH2]
-CoreTasks.roles = [ CoreTasks.USER_ROLE_MANAGER, CoreTasks.USER_ROLE_DEVELOPER, CoreTasks.USER_ROLE_TESTER, CoreTasks.USER_ROLE_GUEST ];
+// I added this as a role type that would allow viewing && commenting status only [JH2]
+CoreTasks.USER_ROLE_GUEST = '_Guest';
 
+CoreTasks.roles = [
+  CoreTasks.USER_ROLE_MANAGER,
+  CoreTasks.USER_ROLE_DEVELOPER,
+  CoreTasks.USER_ROLE_TESTER,
+  CoreTasks.USER_ROLE_GUEST
+];
 
 // Loading:
 CoreTasks.USER_NOT_LOADED = 1;
@@ -164,7 +169,23 @@ CoreTasks.User = CoreTasks.Record.extend({
 
 CoreTasks.User.mixin(/** @scope CoreTasks.User */ {
   callbacks: SC.Object.create(),
-  resourcePath: 'user'
+  resourcePath: 'user',
+
+  /**
+   * Authenticates a user given a password hash.
+   */
+  authenticate: function(loginName, passwordHash, params) {
+    if (!params) throw 'Error authenticating user: Missing success/failure callbacks.';
+
+    params.queryParams = {
+      loginName: "'%@'".fmt(loginName),
+      password: "'%@'".fmt(passwordHash)
+    };
+
+    // Send the request off to the server.
+    CoreTasks.executeTransientGet(CoreTasks.User.resourcePath, undefined, params);
+  }
+
 });
 
 CoreTasks.User.NEW_USER_HASH = {

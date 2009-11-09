@@ -1,9 +1,6 @@
 /*globals CoreTasks sc_require */
 sc_require('core');
 
-CoreTasks.ERROR_UNEXPECTED_RESPONSE = SC.$error('Unexpected response.', 'Request Error');
-CoreTasks.ERROR_INVALID_ID_TYPE = SC.$error('Invalid ID type.', 'Request Error');
-
 /**
  * An extension of the SC.DataSource class that acts as a proxy between the data store and the
  * remote server.
@@ -12,32 +9,6 @@ CoreTasks.ERROR_INVALID_ID_TYPE = SC.$error('Invalid ID type.', 'Request Error')
  * @author Sean Eidemiller
  */
 CoreTasks.PersevereDataSource = SC.DataSource.extend({
-
-  init: function() {
-    sc_super();
-
-    // Define the headers.
-    var contentTypeHeader = 'Content-Type';
-    var contentType = 'application/json';
-    var acceptHeader = 'Accept';
-    var accept = 'application/json, text/javascript, application/xml, text/xml, text/html, */*';
-
-    // Initialize the request objects.
-    this._getRequest = SC.Request.create({ type: 'GET', isJSON: YES })
-      .header(contentTypeHeader, contentType).header(acceptHeader, accept);
-
-    this._postRequest = SC.Request.create({ type: 'POST', isJSON: YES })
-      .header(contentTypeHeader, contentType).header(acceptHeader, accept);
-
-    this._putRequest = SC.Request.create({ type: 'PUT', isJSON: YES })
-      .header(contentTypeHeader, contentType).header(acceptHeader, accept);
-
-    this._delRequest = SC.Request.create({ type: 'DELETE', isJSON: YES })
-      .header(contentTypeHeader, contentType).header(acceptHeader, accept);
-
-    // Increase the max number of concurrent XHRs to 20 (default is 2).
-    SC.Request.manager.set('maxRequests', 20);
-  },
 
   /**
    * Fetches a list of records from the server and loads them into the given store.
@@ -73,8 +44,8 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
     console.log('Retrieving %@ records from server...'.fmt(recordType));
 
     var path = CoreTasks.getFullResourcePath(resourcePath, null, query.get('queryParams'));
-    this._getRequest.set('address', path);
-    this._getRequest.notify(this, this._fetchCompleted, { query: query, store: store }).send();
+    CoreTasks.REQUEST_GET.set('address', path);
+    CoreTasks.REQUEST_GET.notify(this, this._fetchCompleted, { query: query, store: store }).send();
 
     return YES;
   },
@@ -166,8 +137,8 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
     // Build the request and send it off to the server.
     console.log('Creating new %@ record on server...'.fmt(recordType));
 
-    this._postRequest.set('address', CoreTasks.getFullResourcePath(recordType.resourcePath));
-    this._postRequest.notify(this, this._createCompleted, {
+    CoreTasks.REQUEST_POST.set('address', CoreTasks.getFullResourcePath(recordType.resourcePath));
+    CoreTasks.REQUEST_POST.notify(this, this._createCompleted, {
         store: store,
         storeKey: storeKey,
         recordType: recordType
@@ -222,8 +193,8 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
     // Build the request and send it off to the server.
     console.log('Updating %@:%@ on server...'.fmt(recordType, id));
 
-    this._putRequest.set('address', CoreTasks.getFullResourcePath(recordType.resourcePath, id));
-    this._putRequest.notify(this, this._updateCompleted, {
+    CoreTasks.REQUEST_PUT.set('address', CoreTasks.getFullResourcePath(recordType.resourcePath, id));
+    CoreTasks.REQUEST_PUT.notify(this, this._updateCompleted, {
         store: store,
         storeKey: storeKey,
         recordType: recordType,
@@ -274,8 +245,9 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
     // Build the request and send it off to the server.
     console.log('Deleting %@:%@ on server...'.fmt(recordType, id));
 
-    this._delRequest.set('address', CoreTasks.getFullResourcePath(recordType.resourcePath, id));
-    this._delRequest.notify(this, this._destroyCompleted, {
+    CoreTasks.REQUEST_DELETE.set(
+      'address', CoreTasks.getFullResourcePath(recordType.resourcePath, id));
+    CoreTasks.REQUEST_DELETE.notify(this, this._destroyCompleted, {
         store: store,
         storeKey: storeKey,
         recordType: recordType,
@@ -446,88 +418,6 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
 
 });
 
-/**
- * An extension of the SC.FixturesDataSource class that provides functionality specific
- * to Tasks.
- *
- * We need support for queries, but the FixturesWithQueriesDataSource class is kinda broken (lots
- * of bugs). Therefore, we implement query support in this custom implementation of
- * FixturesDataSource instead.
- *
- * NOTE: This class is currently broken.
- *
- * @extends SC.FixturesDataSource
- * @author Sean Eidemiller
- */
-CoreTasks.FixturesDataSource = SC.FixturesDataSource.extend({
-
-  fetch: function(store, fetchKey, params) {
-    // If we got an SC.Query, simply return it (SC.Store already did the work for us). I'm not
-    // sure why it even bothers to call fetch(), but it does.
-    if (SC.instanceOf(fetchKey, SC.Query)) return fetchKey;
-
-    var ret = arguments.callee.base.apply(this,arguments);
-
-    // Assume success.
-    if (params) CoreTasks.invokeCallback(params.successCallback);
-
-    return ret;
-  },
-
-  retrieveRecord: function(store, storeKey, params) {
-    var ret = [];
-
-    // Notify the store that the data source completed.
-    store.dataSourceDidComplete(storeKey, this.fixtureForStoreKey(store, storeKey),
-      store.idFor(storeKey));
-
-    ret.push(storeKey);
-
-    // Assume success.
-    if (params) CoreTasks.invokeCallback(params.successCallback, storeKey);
-
-    return ret;
-  },
-
-  createRecord: function(store, storeKey, params) {
-    // Notify the store that the data source completed.
-    var recordHash = store.readDataHash(storeKey);
-    store.dataSourceDidComplete(storeKey, recordHash, store.idFor(storeKey));
-
-    // Assume success.
-    if (params) CoreTasks.invokeCallback(params.successCallback, storeKey);
-
-    return YES;
-  },
-
-  updateRecord: function(store, storeKey, params) {
-    // Notify the store that the data source completed.
-    store.dataSourceDidComplete(storeKey);
-
-    // Assume success.
-    if (params) CoreTasks.invokeCallback(params.successCallback, storeKey);
-
-    return YES;
-  },
-
-  destroyRecord: function(store, storeKey, params) {
-    arguments.callee.base.apply(this,arguments);
-
-    // Assume success.
-    if (params) CoreTasks.invokeCallback(params.successCallback, storeKey);
-
-    return YES;
-  }
-
-});
-
-// Register one of the data sources with the store, depending on operating mode.
-if (CoreTasks.get('mode') === CoreTasks.get('ONLINE_MODE')) {
-  // Use the remote data source.
-  CoreTasks.get('store').from(CoreTasks.PersevereDataSource.create());
-  console.log('Initialized remote Persevere data source.');
-} else {
-  // Use the fixtures data source.
-  CoreTasks.get('store').from(CoreTasks.FixturesDataSource.create());
-  console.log('Initialized fixtures data source.');
-}
+// Create the main store with the Persevere data source.
+CoreTasks.get('store').from(CoreTasks.PersevereDataSource.create());
+console.log('Initialized remote Persevere data source.');
