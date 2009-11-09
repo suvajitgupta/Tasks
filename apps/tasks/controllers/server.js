@@ -19,7 +19,7 @@ Tasks.serverController = SC.Object.create(
       
       var currentUser = CoreTasks.get('currentUser');
       // FIXME: [SG] Beta: see why this doesn't recompute after logout or role change via User Manager
-      console.log("DEBUG: in isSaveable() for user: " + currentUser);
+      // console.log("DEBUG: in isSaveable() for user: " + currentUser);
       if(!currentUser || currentUser.get('role') === CoreTasks.USER_ROLE_GUEST) return false;
       
       return true;
