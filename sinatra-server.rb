@@ -16,6 +16,7 @@ require 'dm-timestamps'
 require 'dm-types'
 #require 'persevere_adapter'
 require 'json'
+require 'sha1'
 
 #-----------------------------------------------------------------------------
 # MODELS
@@ -39,17 +40,39 @@ DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/Tasks.sqlite3")
 
 class User
   include DataMapper::Resource
-
-  property  :id,            Serial
-  property  :name,          Text,   :nullable =>  false  
-  property  :loginName,     Text,   :nullable =>  false  
-  property  :role,          String, :default => '_Guest'
-  property  :email,         Text #,   :nullable =>  false -- NOT IMPLEMENTED IN ALL AREAS
-  property  :password,      Text #,   :nullable =>  false -- NOT IMPLEMENTED IN ALL AREAS
-  property  :preferences,   Json
-  property  :authToken,     Text
-  property  :createdAt,     Integer
-  property  :updatedAt,     Integer
+  
+  attr_accessor :password
+  
+  property  :id,              Serial
+  property  :name,            Text,   :nullable =>  false  
+  property  :loginName,       Text,   :nullable =>  false  
+  property  :role,            String, :default => '_Guest'
+  property  :email,           Text 
+  #property  :password,        Text
+  property  :hashed_password, String, :writer => :protected
+  property  :preferences,     Json
+  property  :authToken,       String
+  property  :createdAt,       Integer
+  property  :updatedAt,       Integer
+  property  :salt,            String, :writer => :protected
+  
+  def self.authenticate(loginName, password)
+    current_user = first(:loginName => loginName) # Emable this later so that I user can login in with their email address || first(:email => login_name_or_email)
+    return nil if current_user.nil? || User.encrypt(password, current_user.salt) != current_user.hashed_password
+    current_user
+  end
+  
+  def self.encrypt(password, token)
+    Digest::SHA1.hexdigest(password + token)
+  end
+  
+  # Set the user's password, producing a salt if necessary
+  def password=(pass)
+    @password = pass
+    self.salt = (1..12).map{(rand(26)+65).chr}.join if !self.salt
+    self.hashed_password = User.encrypt(@password, self.salt)
+  end
+  
   
   def url
     "user/#{self.id}"    
@@ -60,7 +83,7 @@ class User
     self.attributes.each do |k,v|
       # We used to return a url for the id it seems that we do not now.
       # ret[k] = k.to_s == "id" ? self.url : v unless k.to_s == "password"
-      ret[k] = v unless k.to_s == "password"
+      ret[k] = v unless k.to_s == "password" || k.to_s == "hashed_password" || k.to_s == "salt"
     end
     ret.to_json()
   end
@@ -166,6 +189,37 @@ DataMapper.auto_upgrade!
 
 #-----------------------------------------------------------------------------
 # HELPERS
+#
+
+helpers do
+  
+  def login_required
+    if session[:user]
+      return true
+    elsif request.env['REQUEST_PATH'] =~ /(\.json|\.xml)$/ && request.env['HTTP_USER_AGENT'] !~ /Mozilla/
+        @auth ||= Rack::Auth::Basic::Request.new(request.env)
+        if @auth.provided? && @auth.basic? && @auth.credentials && User.authenticate(@auth.credentials.first, @auth.credentials.last)
+          session[:user] = User.first(:loginName => @auth.credentials.first).id
+          return true
+        else
+          status 401
+          halt("401 Unauthorized") rescue throw(:halt, "401 Unauthorized")
+        end
+    else
+      session[:return_to] = request.fullpath
+      redirect '/'
+      pass rescue throw :pass
+    end
+  end
+  
+  def current_user
+    User.get(session[:user])
+  end
+  
+end
+
+#-----------------------------------------------------------------------------
+# URL MAP HELPERS 
 #
 def json_get_list(route, options={})
   get(route, options) do 
@@ -287,10 +341,37 @@ def json_delete(route, options={})
   end
 end
 
+def json_login(route, options={})
+  post(route, options) do
+    record = {}
+    # parse JSON request body or halt with 404
+    opts = User.parse_json(request.body.read, 'post') rescue nil
+    halt 404, "Invalid JSON" if opts.nil?
+    
+    puts "In JSON LOGIN login:[#{opts[:loginName]}], pass:[#{opts[:password]}]"
+    
+    # Attempt to authenticate the user
+    record = User.authenticate(opts[:loginName], opts[:password]) rescue nil
+    
+    # Repond with error 404 or JSON
+    halt 404, "User not authenticated" if record.nil?
+    content_type "application/javascript"
+    session[:user] = record.id
+    session[:authToken] = record.salt
+    record.to_json
+  end
+end
+
+#-----------------------------------------------------------------------------
+# Configuration Options
+#
+set :sessions, true
+set :port, 4567
+
 #-----------------------------------------------------------------------------
 # ROUTES
 #
-# REGEX VERSIONS
+# REGEX VERSIONS -------------------------------------------------------------
 #
 # json_get_list   %r{/tasks-server/([\w]+)$}
 # 
@@ -302,14 +383,22 @@ end
 # 
 # json_delete     %r{/tasks-server/([\w]+)/([\w+])$}
 
-# NAMED PARAM VERSIONS
-#
+# NAMED PARAM VERSIONS -------------------------------------------------------
+
+# LOGIN
+json_login      '/tasks-server/login'
+
+# Fetch all records for a model
 json_get_list   '/tasks-server/:model'
 
+# Fetch one record for a model:id
 json_get_single '/tasks-server/:model/:id'
 
+# Save a record for a model type
 json_post       '/tasks-server/:model'
 
+# Update a record for a model type:id
 json_put        '/tasks-server/:model/:id'
 
+# Delete a record for a model type:id
 json_delete     '/tasks-server/:model/:id'
