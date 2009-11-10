@@ -143,6 +143,7 @@
   background: static_url('images/default-theme-static.png') no-repeat 0 -240px;
 }
 
+// TODO: [MG] darken gear icon a bit
 .task-icon-other {
   width: 16px !important;
 	height: 16px !important;

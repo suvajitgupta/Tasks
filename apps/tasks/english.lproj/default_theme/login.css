@@ -6,6 +6,7 @@
   
 */
 
+// TODO: [MG] remove hardcoded text from login image
 .login-page {
   background: static_url('images/login-bg.png') no-repeat;
 }
