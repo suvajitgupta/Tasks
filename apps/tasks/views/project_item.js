@@ -31,7 +31,8 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
         // Avoid popup panel coming up on other items while it is up already
         poppedUp: false,
         popup: function() {
-          if(this.poppedUp) return;
+          var projectName = that.getPath('content.name');
+          if(projectName === CoreTasks.ALL_TASKS_NAME.loc() || projectName === CoreTasks.UNALLOCATED_TASKS_NAME.loc() || this.poppedUp) return;
           this.poppedUp = true;
           sc_super();
         },

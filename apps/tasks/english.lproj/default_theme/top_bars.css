@@ -38,7 +38,9 @@
   text-align: center !important;
 }
 
+/*
 // TODO: [MG] use same image for login screen and main page
+*/
 .tasks-logo {
   background: static_url('images/tasks-logo.png') no-repeat 0 0;
 }
@@ -54,7 +56,9 @@
   color: white !important;
 }
 
+/*
 // TODO: [MG] make dock icons 16x16 and use hover over titles?
+*/
 .save-icon {
 	width: 24px;
 	height: 24px;
@@ -154,8 +158,9 @@
   height: 16px;
   background: static_url('images/default-theme-static.png') no-repeat 0 -335px;
 }
-
+/*
 // TODO: [RM] check/fix coordinates of Filter icons in sprited image
+*/
 .filter-tasks-icon-has-criteria {
   width: 20px !important;
   height: 16px !important;
