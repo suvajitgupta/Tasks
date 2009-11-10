@@ -31,7 +31,7 @@ SC.stringsFor('English', {
   "_Import": "Import",
   "_ImportTooltip": "Import Tasks data from a text format",
   "_ImportInstructions:": "Paste or type in text to be imported:<br>(see format on right)",
-  "_FormatOnscreenHelp": "Project Name {TimeLeft}<br>- Task Name {Effort} &lt;Submitter&gt; [Assignee] $Type @Status %Validation<br>| Description (1 or more lines)",
+  "_FormatOnscreenHelp": "Project Name {TimeLeft}<br>- Task Name {Effort} &lt;Submitter&gt; [Assignee] $Type @Status %Validation<br>| Description (1 or more lines following a Project or Task)",
   "_Export": "Export",
   "_ExportTooltip": "Export Tasks data to a text format",
   "_Settings": "Settings",

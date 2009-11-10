@@ -11,4 +11,4 @@ In format sample snippet below:
 #Comment
 Project Name* {TimeLeft}
 - Task Name* {Effort} <Submitter> [Assignee] $Type @Status %Validation
-| Description (1 or more lines)
+| Description (1 or more lines following a Project or Task)
