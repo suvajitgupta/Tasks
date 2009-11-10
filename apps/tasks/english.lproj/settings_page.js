@@ -46,7 +46,7 @@ Tasks.settingsPage = SC.Page.create({
               }),
 
               SC.LabelView.design(Tasks.SimpleButton,{
-                layout: { centerY: 0, left: 100, height: 16, width: 90 },
+                layout: { centerY: 0, left: 90, height: 16, width: 90 },
                 icon: 'delete-icon',
                 value: "_DelUser".loc(),
                 classNames: ['toolbar-label'],
@@ -54,6 +54,17 @@ Tasks.settingsPage = SC.Page.create({
                 isEnabledBinding: SC.Binding.oneWay('Tasks.usersController.hasSelection'),
                 target: 'Tasks',
                 action: 'deleteUser'
+              }),
+              
+              SC.View.design({
+                layout: { top: 8, bottom: 8, left: 190, width: 2 },
+                classNames: ['top-bar-divider']
+              }),
+              
+              SC.LabelView.design({
+                layout: { centerY: 0, left: 310, height: 20, width: 120 },
+                value: "_UserManager".loc(),
+                classNames: ['window-title']
               })
 
             ]

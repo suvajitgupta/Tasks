@@ -378,7 +378,7 @@ Tasks.mixin({
       var tasks = project.get('tasks');
       var taskCount = tasks.get('length');
       if(taskCount > 0) {
-        if(!confirm("_ConfirmProjectDeletion".loc())) return NO;
+        if(!confirm("_ProjectDeletionConfirmation".loc())) return NO;
       }
 
       // Reset default project if it is deleted
@@ -485,7 +485,7 @@ Tasks.mixin({
     if (user) {
 
       // Confirm deletion of user
-      if(!confirm("Are you sure you want to delete this user?")) return;
+      if(!confirm("_UserDeletionConfirmation".loc())) return;
 
       // Delete the user.
       user.destroy();

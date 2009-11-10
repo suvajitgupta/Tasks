@@ -50,11 +50,12 @@ SC.stringsFor('English', {
   "_AddProjectTooltip": "Add a new project",
   "_DelProject": "Del. Project",
   "_DelProjectTooltip": "Delete selected project",
-  "_ConfirmProjectDeletion": "Tasks in this project will become unallocated, are you sure you want to delete it?",
+  "_ProjectDeletionConfirmation": "Tasks in this project will become unallocated, are you sure you want to delete it?",
   "_NewProject": "New Project",
   "_AllTasks": "All Tasks",
   "_Unallocated": "Unallocated",
   "_UnallocatedTasks": "Unallocated Tasks",
+  "_ProjectkEditorTooltip": "Click on icon to view/edit project time left/description; ",
   "_Has": "Has ",
   "_Tasks": " task(s)",
   "_ProjectTimeLeftTooltip": "Time left shown on right",
@@ -104,6 +105,7 @@ SC.stringsFor('English', {
   // User/Assignee strings
   "_AddUser": "Add User",
   "_AddUserTooltip": "Add a new user",
+  "_UserDeletionConfirmation": "Are you sure you want to delete this user?",
   "_DelUser": "Del. User",
   "_DelUserTooltip": "Delete selected user",
   "_FullName:": "Full Name:",
@@ -130,6 +132,7 @@ SC.stringsFor('English', {
   "_Password:": "Password:",
   "_PasswordHint": "Your Password",
   "_Signup": "Signup",
+  "_UserManager": "User Manager",
   
   // Popup Pane/Panel strings
   "_QuickFilters": "QUICK FILTERS",
