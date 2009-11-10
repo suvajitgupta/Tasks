@@ -51,7 +51,7 @@ Tasks.mainPage = SC.Page.design({
         }),
       
         SC.View.design({
-          layout: { top: 0, bottom: 0, right: 540, width: 2 },
+          layout: { top: 8, bottom: 8, right: 540, width: 2 },
           classNames: ['top-bar-divider']
         }),
 
@@ -77,7 +77,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         SC.View.design({
-          layout: { top: 0, bottom: 0, right: 385, width: 2 },
+          layout: { top: 8, bottom: 8, right: 383, width: 2 },
           classNames: ['top-bar-divider']
         }),
         
@@ -103,7 +103,7 @@ Tasks.mainPage = SC.Page.design({
         }),
         
         SC.View.design({
-          layout: { top: 0, bottom: 0, right: 230, width: 2 },
+          layout: { top: 8, bottom: 8, right: 230, width: 2 },
           classNames: ['top-bar-divider']
         }),
 
@@ -170,7 +170,7 @@ Tasks.mainPage = SC.Page.design({
         }),
         
         SC.View.design({
-          layout: { top: 0, bottom: 0, left: 228, width: 2 },
+          layout: { top: 8, bottom: 8, left: 228, width: 2 },
           classNames: ['top-bar-divider']
         }),
 
@@ -196,7 +196,7 @@ Tasks.mainPage = SC.Page.design({
         }),
         
         SC.View.design({
-          layout: { top: 0, bottom: 0, right: 540, width: 2 },
+          layout: { top: 8, bottom: 8, right: 540, width: 2 },
           classNames: ['top-bar-divider']
         }),
 
