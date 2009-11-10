@@ -141,7 +141,7 @@ Server
 - Add server-side data validation checks/return appropriate error codes [SE] <SG>
 
 Styling/Hardening
-^ Beta: Style via CSS, embed catchy/sprited images [MG] <SG> @Active
+^ Beta: Style via CSS, embed catchy/sprited images [MG] <SG> @Done
 ^ Perform smoke test of key functionality [SG] @Done
 | Login/Logout
 | Project/Task/User CRUD
