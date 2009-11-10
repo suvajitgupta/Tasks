@@ -14,7 +14,7 @@ Design/Planning
 - Define Tasks TXT file format for data import/export [SG] <SE> @Done
 - Design REST API supporting CRUD operations [SG] <SE> @Done
 - Design Tasks Server & evaluate persistence frameworks [SE] <SG> @Done
-- Design Role-based access control to be implemented on client and server <JH2> [SG] @Done
+- Design authorization to be implemented on client and server <JH2> [SG] @Done
 | Managers have permission to do full CRUD on Projects/Tasks/Users & Import
 | Developers/Testers can only R on Projects, CRUD on Tasks, and Import Tasks (not create new Projects)
 | Guests only have R on all entities
@@ -28,7 +28,6 @@ General Infrastructure
 ^ Have tasks refer to project they are allocated to and make projects Store queries [SE] <SG> @Done %Passed
 - Handle persistence consistently (nothing should save unless user hits Save) [SE] <SG> @Done %Passed
 v Make task in-cell editors fit with collection view item size [SG] <JH2> $Bug
-| Fix in CSS add class .ghost to list item view and set its background to none
 v Track/optimize calls to assignments controller for redrawing tasks tree [BB] <SG> @Active
 v Make buttons depressable to provide feedback when using them [SG]
 - Allow direct bookmarking of Tasks project names using SproutCore routes [SG] $Feature @Done %Passed
@@ -99,7 +98,7 @@ User Manager GUI
 - Set assignee selection filter to logged in user if they are a Developer, filter out Other tasks if they are a Tester [SG] @Done $Feature %Passed
 ^ Add User Manager with "Add/Del. User"  buttons in toolbar (reuse user information view with signup screen) [SG] <JH2> @Done %Passed $Feature
 - Cleanup task assignee/submitter after user deletion <SE> [SG] @Done %Passed
-- Beta: Enable/disable GUI functionality to enforce Role-based access control [SG] $Feature
+- Beta: Implement Server-based RBAC (role-based access control) [SG] $Feature
 - Beta: Add password to login screen and change password dialog in User Manager (ask to reenter password) [JH2] <SG> $Feature
 - Add support for "Teams" (a user can belong to a team, a team can have a lead) [SG] <SE> $Feature
 
@@ -141,7 +140,7 @@ Server
 - Add server-side data validation checks/return appropriate error codes [SE] <SG>
 
 Styling/Hardening
-^ Beta: Style via CSS, embed catchy/sprited images [MG] <SG> @Done
+^ Style via CSS, embed catchy/sprited images [MG] <SG> @Done %Passed
 ^ Perform smoke test of key functionality [SG] @Done
 | Login/Logout
 | Project/Task/User CRUD
