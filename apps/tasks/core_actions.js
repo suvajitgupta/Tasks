@@ -68,7 +68,7 @@ Tasks.mixin({
   usersLoadFailure: function() {
     // console.log("DEBUG: userLoadFailure()");
     Tasks.loginController.closePanel();
-    alert('System Error: Unable to retrieve users from server');
+    SC.AlertPane.error ('System Error', 'Unable to retrieve users from server');
   },
 
   /**
@@ -232,7 +232,7 @@ Tasks.mixin({
     // console.log("DEBUG: dataLoadFailure()");
     switch (this.state.a) {
       case 3:
-        alert('System Error: Unable to retrieve project/task data from server');
+        SC.AlertPane.error ('System Error', 'Unable to retrieve project/task data from server');
         break;
       default:
         this._logActionNotHandled('dataLoadFailure', 'a', this.state.a);  
@@ -525,7 +525,7 @@ Tasks.mixin({
     if(functionName) {
       prefix = functionName + '(): ';
     }
-    alert (prefix + 'Not yet implemented');
+    SC.AlertPane.warn ('Unimplemented Functionality', prefix + 'Not yet implemented');
   }  
   
 });
