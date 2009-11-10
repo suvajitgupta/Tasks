@@ -38,7 +38,7 @@ Tasks.helpPage = SC.Page.design({
           }),
           
           SC.LabelView.design({
-            layout: { centerY: 0, height: 20, centerX: -60, width: 60 },
+            layout: { centerY: 0, height: 20, centerX: 0, width: 60 },
             value: "_Help".loc(),
             classNames: ['window-title']
           })
