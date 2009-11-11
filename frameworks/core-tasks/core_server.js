@@ -122,7 +122,7 @@ CoreTasks.mixin({
         if (params.noMatchingRecordsCallback) {
           CoreTasks.invokeCallback(params.noMatchingRecordsCallback);
         } else {
-          CoreTasks.invokeCallback(params.successCallback, normalizedResponse);
+          CoreTasks.invokeCallback(params.failureCallback, normalizedResponse);
         }
       }
     }

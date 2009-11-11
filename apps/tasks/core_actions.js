@@ -27,64 +27,88 @@ Tasks.mixin({
    * @param {String} user's password.
    */
   authenticate: function(loginName, password) {
-    // console.log("DEBUG: authenticate()");
+    console.log("DEBUG: authenticate()");
     switch (this.state.a) {
       case 1:
       case 4:
         this.goState('a', 2);
+
         this.loginName = loginName;
         
-        if (this._usersLoaded) {
-          this._loginUser();
-        } else { // Retrieve all users from the data source.
-          if (!CoreTasks.get('allUsers')) {
-            CoreTasks.set('allUsers', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.User, orderBy: 'name' })));
-          } else {
-            CoreTasks.get('allUsers').refresh();
-          }
-
-          this.usersController.set('content', CoreTasks.get('allUsers'));
-        }
-
+        var params = {
+          successCallback: this._authenticationSuccess.bind(this),
+          failureCallback: this._authenticationFailure.bind(this)
+        };
+        CoreTasks.User.authenticate(loginName, "", params);
         break;
 
       default:
         this._logActionNotHandled('authenticate', 'a', this.state.a);  
     }
   },
+  
+  /**
+   * Called after successful authentication.
+   */
+  _authenticationSuccess: function() {
+    console.log("DEBUG: authenticationSuccess()");
+    switch (this.state.a) {
+      case 2:
+        this.goState('a', 3);
+        if(!this._alreadyLoggedIn) Tasks.loginController.closePanel();
+        // Load all data (projects and tasks) from the data source.
+        this._loadData();
+        break;
 
+      default:
+        this._logActionNotHandled('_authenticationSuccess', 'a', this.state.a);  
+    }
+  },
+
+  /**
+   * Called after failed authentication.
+   */
+  _authenticationFailure: function() {
+    console.log("DEBUG: authenticationFailure()");
+    switch (this.state.a) {
+      case 2:
+        Tasks.loginController.displayLoginError();
+        this.goState('a', 1);
+        break;
+      default:
+        this._logActionNotHandled('_authenticationFailure', 'a', this.state.a);  
+    }
+  },
+  
+  /**
+   * Load all Tasks data from the server.
+   */
+  _loadData: function() {
+    console.log("DEBUG: loadData()");
+    // Start by loading all users.
+    if (!CoreTasks.get('allUsers')) {
+      CoreTasks.set('allUsers', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.User })));
+    } else {
+      CoreTasks.get('allUsers').refresh();
+    }
+
+    this.usersController.set('content', CoreTasks.get('allUsers'));
+  },
+  
   /**
    * Called after all users have been successfully loaded from the server.
    */
   usersLoadSuccess: function() {
-    // console.log("DEBUG: userLoadSuccess()");
+    console.log("DEBUG: userLoadSuccess()");
     this._usersLoaded = true;
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', "_UsersLoaded".loc());
-    this._loginUser();
-  },
-
-  /**
-   * Called if the request to the data source to load all users failed for some reason.
-   */
-  usersLoadFailure: function() {
-    // console.log("DEBUG: userLoadFailure()");
-    Tasks.loginController.closePanel();
-    SC.AlertPane.error ('System Error', 'Unable to retrieve users from server');
-  },
-
-  /**
-   * Authenticate the user by searching for a matching loginName in the list of users in the store.
-   */
-  _loginUser: function() {
-
-    // console.log("DEBUG: loginUser()");
-    var currentUser = CoreTasks.get('currentUser');
-    if(currentUser) this._alreadyLoggedIn = true;
-    else currentUser = CoreTasks.getUser(this.loginName);
-    if (currentUser) { // See if a valid user
+    
+    // Set the current logged on user
+    var currentUser = CoreTasks.getUser(this.loginName);
+    if (currentUser) {
       
-      if(!this._alreadyLoggedIn) {
+      if(!this._alreadyLoggedIn) { // not a refresh
         
         // Greet user and save login session information
         CoreTasks.set('currentUser', currentUser);
@@ -103,54 +127,12 @@ Tasks.mixin({
         }
         
       }
+    }
+    else {
+      SC.AlertPane.error ('System Error', 'Logged in user no longer exists!');
+    }
       
-      this._authenticationSuccess();
-      
-    } else {
-      this._authenticationFailure();
-    }
-    
-  },
-
-  /**
-   * Called after successful authentication.
-   */
-  _authenticationSuccess: function() {
-    // console.log("DEBUG: authenticationSuccess()");
-    switch (this.state.a) {
-      case 2:
-        this.goState('a', 3);
-        if(!this._alreadyLoggedIn) Tasks.loginController.closePanel();
-        // Load all data (projects and tasks) from the data source.
-        this._loadData();
-        break;
-
-      default:
-        this._logActionNotHandled('_authenticationSuccess', 'a', this.state.a);  
-    }
-  },
-
-  /**
-   * Called after failed authentication.
-   */
-  _authenticationFailure: function() {
-    // console.log("DEBUG: authenticationFailure()");
-    switch (this.state.a) {
-      case 2:
-        Tasks.loginController.displayLoginError();
-        this.goState('a', 1);
-        break;
-      default:
-        this._logActionNotHandled('_authenticationFailure', 'a', this.state.a);  
-    }
-  },
-  
-  /**
-   * Load all data (projects and tasks) used by Tasks views.
-   */
-  _loadData: function() {
-    // console.log("DEBUG: loadData()");
-    // Start by loading all tasks.
+    // Now load all of the tasks.
     if (!CoreTasks.get('allTasks')) {
       CoreTasks.set('allTasks', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Task })));
     } else {
@@ -158,13 +140,14 @@ Tasks.mixin({
     }
 
     this.allTasksController.set('content', CoreTasks.get('allTasks'));
+    
   },
 
   /**
    * Called after all tasks have been loaded from the server.
    */
   tasksLoadSuccess: function() {
-    // console.log("DEBUG: tasksLoadSuccess()");
+    console.log("DEBUG: tasksLoadSuccess()");
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', serverMessage.get('value') + "_TasksLoaded".loc());
 
@@ -198,7 +181,7 @@ Tasks.mixin({
    */
   projectsLoadSuccess: function() {
 
-    // console.log("DEBUG: projectsLoadSuccess()");
+    console.log("DEBUG: projectsLoadSuccess()");
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', serverMessage.get('value') + "_ProjectsLoaded".loc() + new Date().format('hh:mm:ss a'));
 
@@ -217,7 +200,7 @@ Tasks.mixin({
    * Called after successful data load.
    */
   dataLoadSuccess: function() {
-    // console.log("DEBUG: dataLoadSuccess()");
+    console.log("DEBUG: dataLoadSuccess()");
     switch (this.state.a) {
       case 3:
         this.goState('a', 4);
@@ -231,10 +214,10 @@ Tasks.mixin({
    * Called after failed data load.
    */
   dataLoadFailure: function() {
-    // console.log("DEBUG: dataLoadFailure()");
+    console.log("DEBUG: dataLoadFailure()");
     switch (this.state.a) {
       case 3:
-        SC.AlertPane.error ('System Error', 'Unable to retrieve project/task data from server');
+        SC.AlertPane.error ('System Error', 'Unable to retrieve Tasks data from server');
         break;
       default:
         this._logActionNotHandled('dataLoadFailure', 'a', this.state.a);  

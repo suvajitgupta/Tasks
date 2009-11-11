@@ -24,7 +24,7 @@ Tasks.usersController = SC.ArrayController.create(Tasks.StatusChanged,
       Tasks.usersLoadSuccess();
     }
     else if (status & SC.Record.ERROR){
-      Tasks.usersLoadFailure();
+      Tasks.dataLoadFailure();
     }
   }
   
