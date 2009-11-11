@@ -15,7 +15,6 @@ sc_require('controllers/projects');
 
 Tasks.mixin({
 
-  _usersLoaded: false,
   _alreadyLoggedIn: false,
 
   loginName: null,
@@ -55,7 +54,7 @@ Tasks.mixin({
     switch (this.state.a) {
       case 2:
         this.goState('a', 3);
-        if(!this._alreadyLoggedIn) Tasks.loginController.closePanel();
+        Tasks.loginController.closePanel();
         // Load all data (projects and tasks) from the data source.
         this._loadData();
         break;
@@ -100,7 +99,6 @@ Tasks.mixin({
    */
   usersLoadSuccess: function() {
     console.log("DEBUG: userLoadSuccess()");
-    this._usersLoaded = true;
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', "_UsersLoaded".loc());
     
@@ -237,7 +235,6 @@ Tasks.mixin({
    * Clears all data loaded from server.
    */
   clearData: function() {
-    this._usersLoaded = false;
     this.usersController.set('content', null);
     this.allTasksController.set('content', null);
     this.projectsController.set('content', null);
