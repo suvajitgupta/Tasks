@@ -19,7 +19,10 @@ SC.stringsFor('English', {
   "_Login": "Login",
   "_LoginError": "Login failed, please try again",
   "_LoginSince": "Logged in since ",
+  "_Confirmation": "Confirmation",
   "_LogoutConfirmation": "Are you sure you want to log out?",
+  "_Yes": "Yes",
+  "_No": "No",
 
   // Top Bar strings
   "_Credits": "Credits: Suvajit Gupta, Sean Eidemiller, Josh Holt, Brandon Blatnick, Matt Grantham",

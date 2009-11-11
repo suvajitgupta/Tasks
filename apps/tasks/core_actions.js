@@ -6,7 +6,6 @@
  * License: Licened under MIT license (see license.js)
  */
 /*globals CoreTasks Tasks sc_require */
-// TODO: [SG] Beta: replace all confirm dialogs with SC.AlertPane.warn("Are you sure?", "This will hurt!", null, Yes", "No");
 // TODO: [SG] Beta: handle backspace to not go back to previous Web page and leave the Tasks app!
 
 sc_require('core');
@@ -310,7 +309,13 @@ Tasks.mixin({
    * Handle application exiting request.
    */
   logout: function() {
-    if(confirm("_LogoutConfirmation".loc())) this.restart();
+    SC.AlertPane.warn("_Confirmation".loc(), "_LogoutConfirmation".loc(), null, "_No".loc(), "_Yes".loc(), null,
+      SC.Object.create({
+        alertPaneDidDismiss: function(pane, status) {
+          if(status === SC.BUTTON2_STATUS) Tasks.restart();
+        }
+      })
+    );
   },
   
   /**
@@ -381,7 +386,16 @@ Tasks.mixin({
       var tasks = project.get('tasks');
       var taskCount = tasks.get('length');
       if(taskCount > 0) {
-        if(!confirm("_ProjectDeletionConfirmation".loc())) return NO;
+        // FIXME: [SG] Beta: see how to get confirm dialog modal behavior
+        var aborted = false;
+        SC.AlertPane.warn("_Confirmation".loc(), "_ProjectDeletionConfirmation".loc(), null, "_No".loc(), "_Yes".loc(), null,
+          SC.Object.create({
+            alertPaneDidDismiss: function(pane, status) {
+              if(status === SC.BUTTON2_STATUS) aborted = true;
+            }
+          })
+        );
+        if(aborted) return NO;
       }
 
       // Reset default project if it is deleted
@@ -393,8 +407,9 @@ Tasks.mixin({
       // Select the default project
       this.projectsController.selectObject(Tasks.get('defaultProject'));
       
+      return YES;
+      
     }
-    return YES;
   },
   
   /**
@@ -488,14 +503,20 @@ Tasks.mixin({
     if (user) {
 
       // Confirm deletion of user
-      if(!confirm("_UserDeletionConfirmation".loc())) return;
+      SC.AlertPane.warn("_Confirmation".loc(), "_UserDeletionConfirmation".loc(), null, "_No".loc(), "_Yes".loc(), null,
+        SC.Object.create({
+          alertPaneDidDismiss: function(pane, status) {
+            if(status === SC.BUTTON2_STATUS) {
+              // Delete the user.
+              user.destroy();
 
-      // Delete the user.
-      user.destroy();
-    
-      // Select the logged in user.
-      this.usersController.selectObject(CoreTasks.get('currentUser'));
-    
+              // Select the logged in user.
+              Tasks.usersController.selectObject(CoreTasks.get('currentUser'));
+            }
+          }
+        })
+      );
+
     }
   },
   
