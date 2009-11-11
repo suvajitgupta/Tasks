@@ -45,7 +45,7 @@ else
   exit 1
 fi
 
-if [ -f "$ERR_FILE" ]; then
+if [ -e "$ERR_FILE" ]; then
   rm "$ERR_FILE"
 fi
 
