@@ -26,7 +26,7 @@ Tasks.mixin({
    * @param {String} user's password.
    */
   authenticate: function(loginName, password) {
-    console.log("DEBUG: authenticate()");
+    // console.log("DEBUG: authenticate()");
     switch (this.state.a) {
       case 1:
       case 4:
@@ -50,7 +50,7 @@ Tasks.mixin({
    * Called after successful authentication.
    */
   _authenticationSuccess: function() {
-    console.log("DEBUG: authenticationSuccess()");
+    // console.log("DEBUG: authenticationSuccess()");
     switch (this.state.a) {
       case 2:
         this.goState('a', 3);
@@ -68,7 +68,7 @@ Tasks.mixin({
    * Called after failed authentication.
    */
   _authenticationFailure: function() {
-    console.log("DEBUG: authenticationFailure()");
+    // console.log("DEBUG: authenticationFailure()");
     switch (this.state.a) {
       case 2:
         Tasks.loginController.displayLoginError();
@@ -83,7 +83,7 @@ Tasks.mixin({
    * Load all Tasks data from the server.
    */
   _loadData: function() {
-    console.log("DEBUG: loadData()");
+    // console.log("DEBUG: loadData()");
     // Start by loading all users.
     if (!CoreTasks.get('allUsers')) {
       CoreTasks.set('allUsers', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.User })));
@@ -98,7 +98,7 @@ Tasks.mixin({
    * Called after all users have been successfully loaded from the server.
    */
   usersLoadSuccess: function() {
-    console.log("DEBUG: userLoadSuccess()");
+    // console.log("DEBUG: userLoadSuccess()");
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', "_UsersLoaded".loc());
     
@@ -145,7 +145,7 @@ Tasks.mixin({
    * Called after all tasks have been loaded from the server.
    */
   tasksLoadSuccess: function() {
-    console.log("DEBUG: tasksLoadSuccess()");
+    // console.log("DEBUG: tasksLoadSuccess()");
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', serverMessage.get('value') + "_TasksLoaded".loc());
 
@@ -179,7 +179,7 @@ Tasks.mixin({
    */
   projectsLoadSuccess: function() {
 
-    console.log("DEBUG: projectsLoadSuccess()");
+    // console.log("DEBUG: projectsLoadSuccess()");
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', serverMessage.get('value') + "_ProjectsLoaded".loc() + new Date().format('hh:mm:ss a'));
 
@@ -198,7 +198,7 @@ Tasks.mixin({
    * Called after successful data load.
    */
   dataLoadSuccess: function() {
-    console.log("DEBUG: dataLoadSuccess()");
+    // console.log("DEBUG: dataLoadSuccess()");
     switch (this.state.a) {
       case 3:
         this.goState('a', 4);
@@ -212,7 +212,7 @@ Tasks.mixin({
    * Called after failed data load.
    */
   dataLoadFailure: function() {
-    console.log("DEBUG: dataLoadFailure()");
+    // console.log("DEBUG: dataLoadFailure()");
     switch (this.state.a) {
       case 3:
         SC.AlertPane.error ('System Error', 'Unable to retrieve Tasks data from server');
@@ -346,9 +346,7 @@ Tasks.mixin({
   },
   
   /**
-   * Delete selected project in master projects list.
-   *
-   @returns {Boolean} YES if the deletion was a success.
+   * Delete selected project in master projects list, asking for confirmation if project has tasks.
    */
   deleteProject: function() {
     
@@ -366,30 +364,32 @@ Tasks.mixin({
       var tasks = project.get('tasks');
       var taskCount = tasks.get('length');
       if(taskCount > 0) {
-        // FIXME: [SG] Beta: see how to get confirm dialog modal behavior
-        var aborted = false;
         SC.AlertPane.warn("_Confirmation".loc(), "_ProjectDeletionConfirmation".loc(), null, "_No".loc(), "_Yes".loc(), null,
           SC.Object.create({
             alertPaneDidDismiss: function(pane, status) {
-              if(status === SC.BUTTON2_STATUS) aborted = true;
+              if(status === SC.BUTTON2_STATUS) Tasks._deleteProject(project);
             }
           })
         );
-        if(aborted) return NO;
       }
-
-      // Reset default project if it is deleted
-      if(project === Tasks.get('defaultProject')) Tasks.set('defaultProject', CoreTasks.get('allTasksProject'));
-
-      // Delete the project
-      project.destroy();
-      
-      // Select the default project
-      this.projectsController.selectObject(Tasks.get('defaultProject'));
-      
-      return YES;
-      
+      else {
+        Tasks._deleteProject(project);
+      }
     }
+  },
+  
+  /**
+   * Delete project without user confirmation.
+   */
+  _deleteProject: function(project) {
+    // Reset default project if it is deleted
+    if(project === Tasks.get('defaultProject')) Tasks.set('defaultProject', CoreTasks.get('allTasksProject'));
+
+    // Delete the project
+    project.destroy();
+
+    // Select the default project
+    Tasks.projectsController.selectObject(Tasks.get('defaultProject'));
   },
   
   /**

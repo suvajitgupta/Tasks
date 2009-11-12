@@ -77,12 +77,10 @@ Tasks.reallocationController = SC.Object.create(SC.CollectionViewDelegate,
     
     @param {SC.CollectionView} view collection view
     @param {SC.IndexSet} indexes the items to delete
-    @returns {Boolean} YES if the deletion was a success.
   */
   collectionViewDeleteContent: function(view, content, indexes) {
     if (content && (SC.typeOf(content.destroyAt) === SC.T_FUNCTION || SC.typeOf(content.removeAt) === SC.T_FUNCTION)) {
-      // FIXME: [SC] Beta: see how to keep selected project highlighted after user cancels deletion via Del key
-      return Tasks.deleteProject();
+      Tasks.deleteProject();
     }
     return NO;
   }
