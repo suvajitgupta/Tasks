@@ -31,12 +31,10 @@ Tasks.mixin({
       case 1:
       case 4:
         this.goState('a', 2);
-
-        this.loginName = loginName;
-        
+        Tasks.set('loginName', loginName);
         var params = {
-          successCallback: this._authenticationSuccess.bind(this),
-          failureCallback: this._authenticationFailure.bind(this)
+          successCallback: this.authenticationSuccess.bind(this),
+          failureCallback: this.authenticationFailure.bind(this)
         };
         CoreTasks.User.authenticate(loginName, "", params);
         break;
@@ -49,9 +47,10 @@ Tasks.mixin({
   /**
    * Called after successful authentication.
    */
-  _authenticationSuccess: function() {
+  authenticationSuccess: function() {
     // console.log("DEBUG: authenticationSuccess()");
     switch (this.state.a) {
+      case 1:
       case 2:
         this.goState('a', 3);
         Tasks.loginController.closePanel();
@@ -60,14 +59,14 @@ Tasks.mixin({
         break;
 
       default:
-        this._logActionNotHandled('_authenticationSuccess', 'a', this.state.a);  
+        this._logActionNotHandled('authenticationSuccess', 'a', this.state.a);  
     }
   },
 
   /**
    * Called after failed authentication.
    */
-  _authenticationFailure: function() {
+  authenticationFailure: function() {
     // console.log("DEBUG: authenticationFailure()");
     switch (this.state.a) {
       case 2:
@@ -75,7 +74,7 @@ Tasks.mixin({
         this.goState('a', 1);
         break;
       default:
-        this._logActionNotHandled('_authenticationFailure', 'a', this.state.a);  
+        this._logActionNotHandled('authenticationFailure', 'a', this.state.a);  
     }
   },
   

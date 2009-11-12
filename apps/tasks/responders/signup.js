@@ -36,13 +36,15 @@ Tasks.SIGNUP = SC.Responder.create(Tasks.Sha1,{
   
   // called when the OK button is pressed.
   submit: function() {
-    Tasks.signupController.set('password',this.sha1ify());
-    
     // Save the new user
+    Tasks.signupController.set('password',this.sha1ify());
+    Tasks.set('loginName', Tasks.signupController.get('loginName'));
     Tasks.saveData();
+    
+    // Login new user
     Tasks.signupController.set('content', null);
     Tasks.getPath('signupPage.mainPane').remove();
-    this._refocusLoginPanel();
+    Tasks.authenticationSuccess();
   },
   
   // called when the Cancel button is pressed

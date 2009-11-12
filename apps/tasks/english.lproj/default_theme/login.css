@@ -43,6 +43,7 @@
 .login-name input {
   font-size: 16px;
   font-weight: bold;
+  color: #444 !important;
 }
 
 .mozilla .login-name input {
@@ -54,7 +55,7 @@
 }
 
 .sign-up {
-  color: #b4dbdd !important;
+  color: #39C !important;
   font-size: 11px !important;
 }
 
