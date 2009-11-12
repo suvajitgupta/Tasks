@@ -91,7 +91,7 @@ v Add context menu to Add/Delete/Duplicate/Copy Contents of a task <JH2> [SG] $F
 
 User Manager GUI
 ^ Add login screen to identify user who logs in (and handle login failures properly) [SG] <SE> @Done %Passed $Feature
-- Add a guest signup capability to login screen [JH2] <SG> @Done %Passed $Feature
+- Allow new guests to sign up from login screen and them in immediately after [JH2] <SG> @Done %Passed $Feature
 ^ Add assignee filtering (space or comma separators, "none" for unassigned) & corresponding delete button in top toolbar [SG] <JH2> @Done $Feature %Passed
 - Allow assignee filtering by loading status (overloaded, underloaded) [SG] $Feature
 - Allow assignee filtering by matching any part of login or full name [SG] $Feature @Done %Passed

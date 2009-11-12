@@ -338,7 +338,7 @@ Tasks.mainPage = SC.Page.design({
     projectsList: SC.outlet('masterDetailView.projectsMasterView.childViews.0.contentView'),
     tasksList: SC.outlet('masterDetailView.tasksDetailView.childViews.0.contentView'),
     
-    // FIXME: [RM] Beta: fix radio buttons being cropped at bottom on Firefox/Windows
+    // FIXME: [SC] Beta: fix radio buttons being cropped at bottom on Firefox/Windows
     controlBarView: SC.View.design({
       layout: { left: 0, right: 0, bottom: 20, height: 51 },
       classNames: ['control-bar'],
