@@ -17,7 +17,6 @@ Tasks.mixin({
 
   // Authentication
   goStateA2: function(){
-    // TODO: [SG] Beta: integrate server-based user authentication
   },
 
   // Data Loading

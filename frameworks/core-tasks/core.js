@@ -361,7 +361,7 @@ CoreTasks = SC.Object.create({
 
       } else if (status & SC.Record.ERROR) {
         // Save failed.
-        // TODO: [SE] handle user save failure properly.
+        // TODO: [SE] handle user save failure properly
         this.removeObserver('recordBeingSaved.status', this, this._userSaveRecordDidChange);
 
         this.set('recordBeingSaved', null);
@@ -414,7 +414,7 @@ CoreTasks = SC.Object.create({
 
       } else if (status & SC.Record.ERROR) {
         // Save failed.
-        // TODO: [SE] handle project save failure properly.
+        // TODO: [SE] handle project save failure properly
         this.removeObserver('recordBeingSaved.status', this, this._projectSaveRecordDidChange);
 
         this.set('recordBeingSaved', null);
@@ -462,7 +462,7 @@ CoreTasks = SC.Object.create({
 
       } else if (status & SC.Record.ERROR) {
         // Save failed.
-        // TODO: [SE] handle task save failure properly.
+        // TODO: [SE] handle task save failure properly
         this.removeObserver('recordBeingSaved.status', this, this._taskSaveRecordDidChange);
 
         this.set('recordBeingSaved', null);

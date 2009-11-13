@@ -17,22 +17,10 @@ Tasks.projectsController = SC.ArrayController.create(Tasks.StatusChanged,
   allowsEmptySelection: NO,
   
   isAddable: function() {
-    
-    var currentUser = CoreTasks.get('currentUser');
-    // FIXME: [SG] Beta: see why this doesn't recompute after logout or role change via User Manager
-    // console.log("DEBUG: in isAddable() for user: " + currentUser);
-    if(!currentUser || currentUser.get('role') !== CoreTasks.USER_ROLE_MANAGER) return false;
-    
     return true;
-    
   }.property('CoreTasks.currentUser.role').cacheable(),
   
   isDeletable: function() {
-    
-    var currentUser = CoreTasks.get('currentUser');
-    // FIXME: [SG] Beta: see why this doesn't recompute after logout or role change via User Manager
-    // console.log("DEBUG: in isAddable() for user: " + currentUser);
-    if(!currentUser || currentUser.get('role') !== CoreTasks.USER_ROLE_MANAGER) return false;
     
     var sel = this.get('selection');
     if(!sel) return false;

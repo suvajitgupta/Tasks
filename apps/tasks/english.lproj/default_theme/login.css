@@ -7,7 +7,7 @@
 */
 
 /*
-// TODO: [MG] remove hardcoded labels from login image and add I18N strings instead
+// TODO: [SG] switch to new login image and add I18N labels on top of it
 */
 .login-page {
   background: static_url('images/login-bg.png') no-repeat;
