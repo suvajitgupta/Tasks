@@ -1,7 +1,7 @@
 // ==========================================================================
 // Project:   Tasks.reassignmentController
 // ==========================================================================
-/*globals Tasks */
+/*globals Tasks CoreTasks */
 
 /** @class
 
@@ -25,25 +25,27 @@ Tasks.reassignmentController = SC.Object.create(SC.CollectionViewDelegate,
   },
   
   /**
-    If the requested dataType is tasks, provide the currently selected
-    tasks.  Otherwise return null.
+    If the requested dataType is a Task, provide the currently selected tasks.  Otherwise return null.
   */
   collectionViewDragDataForType: function(view, drag, dataType) {
     var ret=null, sel;
     
-    if (dataType === Tasks.Task) {
-      sel = view.get('selection');
-      ret = [];
-      if (sel) sel.forEach(function(x) { ret.push(x); }, this);
+    if(!CoreTasks.getPath('permissions.canEditTask')) {
+      console.log('Error: you do not have permission to reassign or reallocate a task');
     }
-    
-    return ret ;
+    else {
+      if (dataType === Tasks.Task) {
+        sel = view.get('selection');
+        ret = [];
+        if (sel) sel.forEach(function(x) { ret.push(x); }, this);
+      }
+    }
+    return ret;
   },
   
   // ..........................................................
   // DROP TARGET SUPPORT
   // 
-
   /**
     Called if the user actually drops on the view.  Since we are dragging to and from
     the same view, let the CollectionView handle the actual reorder by returning SC.DRAG_NONE.
@@ -58,6 +60,7 @@ Tasks.reassignmentController = SC.Object.create(SC.CollectionViewDelegate,
     
     // Extract tasks to drag
     var tasks = drag.dataForType(Tasks.Task);
+    if(!tasks) return SC.DRAG_MOVE;
 
     // Get assignee of item before drag location
     var content   = view.get('content');

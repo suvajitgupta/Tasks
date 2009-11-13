@@ -25,7 +25,6 @@ Tasks.reallocationController = SC.Object.create(SC.CollectionViewDelegate,
   // ..........................................................
   // DROP TARGET SUPPORT
   // 
-
   collectionViewComputeDragOperations: function(view, drag, proposedDragOperations) {
     if (drag.hasDataType(Tasks.Task)) {
       return SC.DRAG_MOVE;
