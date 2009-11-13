@@ -31,6 +31,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
         // Avoid popup panel coming up on other items while it is up already
         poppedUp: false,
         popup: function() {
+          if(!CoreTasks.getPath('permissions.canEditProject')) return;
           var projectName = that.getPath('content.name');
           if(projectName === CoreTasks.ALL_TASKS_NAME.loc() || projectName === CoreTasks.UNALLOCATED_TASKS_NAME.loc() || this.poppedUp) return;
           this.poppedUp = true;
@@ -94,8 +95,8 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
   
   inlineEditorWillBeginEditing: function(inlineEditor) {
     
-    var currentUser = CoreTasks.get('currentUser');
-    if(!currentUser || currentUser.get('role') !== CoreTasks.USER_ROLE_MANAGER) {
+    if(!CoreTasks.getPath('permissions.canEditProject')) {
+      console.log('Error: you do not have permission to edit a project');
       inlineEditor.discardEditing();
     }
     else {

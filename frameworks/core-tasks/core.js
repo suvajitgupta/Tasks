@@ -119,6 +119,7 @@ CoreTasks = SC.Object.create({
   // Stores access control rights for current user.
   permissions: SC.Object.create({
     canAddProject: NO,
+    canEditProject: NO,
     canDeleteProject: NO,
     canAddTask: NO,
     canDeleteTask: NO
@@ -130,6 +131,7 @@ CoreTasks = SC.Object.create({
     switch(this.currentUser.get('role')) {
       case CoreTasks.USER_ROLE_MANAGER:
       this.permissions.set('canAddProject', YES);
+      this.permissions.set('canEditProject', YES);
       this.permissions.set('canDeleteProject', YES);
       this.permissions.set('canAddTask', YES);
       this.permissions.set('canDeleteTask', YES);
@@ -137,12 +139,14 @@ CoreTasks = SC.Object.create({
       case CoreTasks.USER_ROLE_DEVELOPER:
       case CoreTasks.USER_ROLE_TESTER:
         this.permissions.set('canAddProject', NO);
+        this.permissions.set('canEditProject', NO);
         this.permissions.set('canDeleteProject', NO);
         this.permissions.set('canAddTask', YES);
         this.permissions.set('canDeleteTask', YES);
         break;
       case CoreTasks.USER_ROLE_GUEST:
         this.permissions.set('canAddProject', NO);
+        this.permissions.set('canEditProject', NO);
         this.permissions.set('canDeleteProject', NO);
         this.permissions.set('canAddTask', NO);
         this.permissions.set('canDeleteTask', NO);
