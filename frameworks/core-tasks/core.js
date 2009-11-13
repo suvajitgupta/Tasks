@@ -37,7 +37,7 @@ CoreTasks = SC.Object.create({
     if(this.store) this.store.reset();
     
   },
-
+  
   /**
    * Get user for a given loginName (if it exists).
    *
@@ -114,11 +114,6 @@ CoreTasks = SC.Object.create({
 
   // The logged in user.
   currentUser: null,
-
-  /**
-   * A record array of all projects in the store.
-   */
-  projects: null,
 
   /**
    * A special project where all tasks for all projects are grouped.
