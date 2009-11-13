@@ -152,7 +152,7 @@ Tasks.mainPage = SC.Page.design({
           value: "_AddProject".loc(),
           classNames: ['toolbar-label'],
           toolTip: "_AddProjectTooltip".loc(),
-          isEnabledBinding: 'Tasks.projectsController.isAddable',
+          isEnabledBinding: 'CoreTasks.permissions.canAddProject',
           target: 'Tasks',
           action: 'addProject'
         }),
@@ -179,6 +179,7 @@ Tasks.mainPage = SC.Page.design({
           value: "_AddTask".loc(),
           classNames: ['toolbar-label'],
           toolTip: "_AddTaskTooltip".loc(),
+          isEnabledBinding: 'CoreTasks.permissions.canAddTask',
           target: 'Tasks',
           action: 'addTask'
         }),
@@ -189,7 +190,7 @@ Tasks.mainPage = SC.Page.design({
           value: "_DelTask".loc(),
           classNames: ['toolbar-label'],
           toolTip: "_DelTaskTooltip".loc(),
-          isEnabledBinding: 'Tasks.tasksController.hasSelection',
+          isEnabledBinding: 'Tasks.tasksController.isDeletable',
           target: 'Tasks',
           action: 'deleteTask'
         }),

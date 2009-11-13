@@ -16,11 +16,9 @@ Tasks.projectsController = SC.ArrayController.create(Tasks.StatusChanged,
   allowsMultipleSelection: NO,
   allowsEmptySelection: NO,
   
-  isAddable: function() {
-    return true;
-  }.property('CoreTasks.currentUser.role').cacheable(),
-  
   isDeletable: function() {
+    
+    if(!CoreTasks.getPath('permissions.canDeleteProject')) return false;
     
     var sel = this.get('selection');
     if(!sel) return false;

@@ -34,6 +34,7 @@ CoreTasks = SC.Object.create({
       this.allProjects = null;
     }
     
+    // FIXME: [SE/SG] Beta: see why there are lingering records after logout/relogin (add task as Manager, login as Guest and you'll see "_NewTask")
     if(this.store) this.store.reset();
     
   },
@@ -114,6 +115,40 @@ CoreTasks = SC.Object.create({
 
   // The logged in user.
   currentUser: null,
+  
+  // Stores access control rights for current user.
+  permissions: SC.Object.create({
+    canAddProject: NO,
+    canDeleteProject: NO,
+    canAddTask: NO,
+    canDeleteTask: NO
+  }),
+  
+  // Sets appropriate permissions based on current user's role
+  setPermissions: function() {
+    if(!this.currentUser) return;
+    switch(this.currentUser.get('role')) {
+      case CoreTasks.USER_ROLE_MANAGER:
+      this.permissions.set('canAddProject', YES);
+      this.permissions.set('canDeleteProject', YES);
+      this.permissions.set('canAddTask', YES);
+      this.permissions.set('canDeleteTask', YES);
+        break;
+      case CoreTasks.USER_ROLE_DEVELOPER:
+      case CoreTasks.USER_ROLE_TESTER:
+        this.permissions.set('canAddProject', NO);
+        this.permissions.set('canDeleteProject', NO);
+        this.permissions.set('canAddTask', YES);
+        this.permissions.set('canDeleteTask', YES);
+        break;
+      case CoreTasks.USER_ROLE_GUEST:
+        this.permissions.set('canAddProject', NO);
+        this.permissions.set('canDeleteProject', NO);
+        this.permissions.set('canAddTask', NO);
+        this.permissions.set('canDeleteTask', NO);
+        break;
+    }
+  },
 
   /**
    * A special project where all tasks for all projects are grouped.

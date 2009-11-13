@@ -9,7 +9,6 @@ CoreTasks.NEW_USER_LOGIN_NAME = '_Initials';
 CoreTasks.USER_ROLE_MANAGER = '_Manager';
 CoreTasks.USER_ROLE_DEVELOPER = '_Developer'; // default
 CoreTasks.USER_ROLE_TESTER = '_Tester';
-// I added this as a role type that would allow viewing && commenting status only [JH2]
 CoreTasks.USER_ROLE_GUEST = '_Guest';
 
 CoreTasks.roles = [

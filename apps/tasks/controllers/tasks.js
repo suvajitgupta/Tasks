@@ -16,6 +16,17 @@ Tasks.tasksController = SC.TreeController.create(
   contentBinding: 'Tasks.assignmentsController.assignedTasks',
   treeItemIsGrouped: YES,
   
+  isDeletable: function() {
+    
+    if(!CoreTasks.getPath('permissions.canDeleteTask')) return false;
+    
+    var sel = this.get('selection');
+    if(!sel) return false;
+    
+    return true;
+    
+  }.property('selection').cacheable(),
+  
   type: function(key, value) {
     var sel = this.get('selection');
     if(!sel) return;

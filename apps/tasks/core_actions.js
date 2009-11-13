@@ -109,6 +109,8 @@ Tasks.mixin({
         
         // Greet user and save login session information
         CoreTasks.set('currentUser', currentUser);
+        CoreTasks.setPermissions();
+        
         var welcomeMessage = Tasks.getPath('mainPage.mainPane.welcomeMessage');
         welcomeMessage.set('value', "_User:".loc() + '<b>' + CoreTasks.getPath('currentUser.name') + '</b>, ' +
                            "_Role:".loc() + ' <i>' + CoreTasks.getPath('currentUser.role').loc() + '</i>');
@@ -330,9 +332,8 @@ Tasks.mixin({
    */
   addProject: function() {
     
-    var currentUser = CoreTasks.get('currentUser');
-    if(!currentUser || currentUser.get('role') !== CoreTasks.USER_ROLE_MANAGER) {
-      console.log('Error: permission denied based on user role');
+    if(!CoreTasks.getPath('permissions.canAddProject')) {
+      console.log('Error: you do not have permission to add a project');
       return null;
     }
     
@@ -349,10 +350,9 @@ Tasks.mixin({
    */
   deleteProject: function() {
     
-    var currentUser = CoreTasks.get('currentUser');
-    if(!currentUser || currentUser.get('role') !== CoreTasks.USER_ROLE_MANAGER) {
-      console.log('Error: permission denied based on user role');
-      return null;
+    if(!CoreTasks.getPath('permissions.canDeleteProject')) {
+      console.log('Error: you do not have permission to delete a project');
+      return;
     }
     
     // Get the selected project, if one
@@ -395,6 +395,11 @@ Tasks.mixin({
    * Add a new task to tasks detail list.
    */
   addTask: function() {
+    
+    if(!CoreTasks.getPath('permissions.canAddTask')) {
+      console.log('Error: you do not have permission to add a task');
+      return null;
+    }
     
     // Create a new task with the logged in user as the default submitter/assignee within selected project, if one.
     var userId = CoreTasks.getPath('currentUser.id');
@@ -440,6 +445,11 @@ Tasks.mixin({
    * Delete selected task in tasks detail list.
    */
   deleteTask: function() {
+    
+    if(!CoreTasks.getPath('permissions.canDeleteTask')) {
+      console.log('Error: you do not have permission to delete a task');
+      return;
+    }
     
     var ac = this.get('assignmentsController');      
     var tc = this.get('tasksController');
