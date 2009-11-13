@@ -31,7 +31,6 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
         // Avoid popup panel coming up on other items while it is up already
         poppedUp: false,
         popup: function() {
-          if(!CoreTasks.getPath('permissions.canEditProject')) return;
           var projectName = that.getPath('content.name');
           if(projectName === CoreTasks.ALL_TASKS_NAME.loc() || projectName === CoreTasks.UNALLOCATED_TASKS_NAME.loc() || this.poppedUp) return;
           this.poppedUp = true;
@@ -65,6 +64,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
             }),
             SC.TextFieldView.design({
               layout: { top: 10, left: 75, width: 80, height: 20 },
+              isEnabledBinding: 'CoreTasks.permissions.canEditProject',
               valueBinding: SC.binding('.content.timeLeftValue', this)
             }),
             SC.LabelView.design({
@@ -82,6 +82,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
               layout: { top: 65, left: 10, right: 10, bottom: 10 },
               hint: "_DescriptionHint".loc(),
               isTextArea: YES,
+              isEnabledBinding: 'CoreTasks.permissions.canEditProject',
               valueBinding: SC.binding('.content.description', this)
             })
             

@@ -16,6 +16,17 @@ Tasks.tasksController = SC.TreeController.create(
   contentBinding: 'Tasks.assignmentsController.assignedTasks',
   treeItemIsGrouped: YES,
   
+  isEditable: function() {
+    
+    if(!CoreTasks.getPath('permissions.canEditTask')) return false;
+    
+    var sel = this.get('selection');
+    if(!sel) return false;
+    
+    return true;
+    
+  }.property('selection').cacheable(),
+  
   isDeletable: function() {
     
     if(!CoreTasks.getPath('permissions.canDeleteTask')) return false;
@@ -24,6 +35,19 @@ Tasks.tasksController = SC.TreeController.create(
     if(!sel) return false;
     
     return true;
+    
+  }.property('selection').cacheable(),
+  
+  isValidatable: function() {
+    
+    if(!CoreTasks.getPath('permissions.canEditTask')) return false;
+    
+    var sel = this.get('selection');
+    if(!sel) return false;
+    
+    var selectedTask = sel.firstObject();
+    if(!selectedTask) return false;
+    return selectedTask.get('developmentStatus') === CoreTasks.TASK_STATUS_DONE;
     
   }.property('selection').cacheable(),
   
@@ -101,14 +125,6 @@ Tasks.tasksController = SC.TreeController.create(
       });
     }
     return value;
-  }.property('selection').cacheable(),
-  
-  isValidatable: function() {
-    var sel = this.get('selection');
-    if(!sel) return false;
-    var selectedTask = sel.firstObject();
-    if(!selectedTask) return false;
-    return selectedTask.get('developmentStatus') === CoreTasks.TASK_STATUS_DONE;
   }.property('selection').cacheable(),
   
   editNewTask: function(task){

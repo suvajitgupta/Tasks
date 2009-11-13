@@ -92,6 +92,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
               objectsBinding: this._listUsers(),
               nameKey: 'displayName',
               valueKey: 'id',
+              isEnabledBinding: 'CoreTasks.permissions.canEditTask',
               valueBinding: SC.binding('.content.submitterValue', this)
             }),
 
@@ -105,6 +106,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
               objectsBinding: this._listUsers(),
               nameKey: 'displayName',
               valueKey: 'id',
+              isEnabledBinding: 'CoreTasks.permissions.canEditTask',
               valueBinding: SC.binding('.content.assigneeValue', this)
             }),
 
@@ -114,6 +116,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
             }),
             SC.TextFieldView.design({
               layout: { top: 47, left: 55, width: 80, height: 20 },
+              isEnabledBinding: 'CoreTasks.permissions.canEditTask',
               valueBinding: SC.binding('.content.effortValue', this)
             }),
             SC.LabelView.design({
@@ -133,6 +136,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
               objectsBinding: this._listProjects(),
               nameKey: 'displayName',
               valueKey: 'id',
+              isEnabledBinding: 'CoreTasks.permissions.canEditTask',
               valueBinding: SC.binding('.content.projectValue', this)
             }),
 
@@ -144,6 +148,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
               layout: { top: 98, left: 10, right: 10, bottom: 10 },
               hint: "_DescriptionHint".loc(),
               isTextArea: YES,
+              isEnabledBinding: 'CoreTasks.permissions.canEditTask',
               valueBinding: SC.binding('.content.description', this)
             })
             
@@ -153,6 +158,13 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       this._editorPane.popup(layer, SC.PICKER_POINTER);
     }
     return NO;
+  },
+  
+  inlineEditorWillBeginEditing: function(inlineEditor) {
+    if(!CoreTasks.getPath('permissions.canEditTask')) {
+      console.log('Error: you do not have permission to edit a task');
+      inlineEditor.discardEditing();
+    }
   },
   
   render: function(context, firstTime) {
