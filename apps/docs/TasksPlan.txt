@@ -14,7 +14,7 @@ Design/Planning
 - Define Tasks TXT file format for data import/export [SG] <SE> @Done
 - Design REST API supporting CRUD operations [SG] <SE> @Done
 - Design Tasks Server & evaluate persistence frameworks [SE] <SG> @Done
-- Design authorization to be implemented on client and server <JH2> [SG] @Done
+- Design RBAC (role-based access control) to be implemented on GUI and Server <JH2> [SG] @Done
 | Managers have permission to do full CRUD on Projects/Tasks/Users & Import
 | Developers/Testers can only R on Projects, CRUD on Tasks, and Import Tasks (not create new Projects)
 | Guests only have R on all entities
@@ -27,6 +27,8 @@ General Infrastructure
 - Support decimal numbers for project timeLeft and task effort in units of 'd' or 'h' [SG] @Done %Passed $Feature
 ^ Have tasks refer to project they are allocated to and make projects Store queries [SE] <SG> @Done %Passed
 - Handle persistence consistently (nothing should save unless user hits Save) [SE] <SG> @Done %Passed
+- Beta: Implement GUI-based RBAC (role-based access control) [SG] $Feature @Active
+- Beta: Implement Server-based RBAC (role-based access control) [JH2]
 v Make task in-cell editors fit with collection view item size [SG] <JH2> $Bug
 v Track/optimize calls to assignments controller for redrawing tasks tree [BB] <SG> @Active
 v Make buttons depressable to provide feedback when using them [SG]
@@ -98,7 +100,6 @@ User Manager GUI
 - Set assignee selection filter to logged in user if they are a Developer, filter out Other tasks if they are a Tester [SG] @Done $Feature %Passed
 ^ Add User Manager with "Add/Del. User"  buttons in toolbar (reuse user information view with signup screen) [SG] <JH2> @Done %Passed $Feature
 - Cleanup task assignee/submitter after user deletion <SE> [SG] @Done %Passed
-- Beta: Implement Server-based RBAC (role-based access control) [SG] $Feature
 - Beta: Add password to login screen and change password dialog in User Manager (ask to reenter password) [JH2] <SG> $Feature
 - Add support for "Teams" (a user can belong to a team, a team can have a lead) [SG] <SE> $Feature
 
