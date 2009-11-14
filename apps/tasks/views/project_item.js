@@ -110,6 +110,14 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     
   },
   
+  renderIcon: function(context, icon){
+    var projectName = this.getPath('content.name');
+    var projectTooltip = '';
+    if(projectName !== CoreTasks.ALL_TASKS_NAME.loc() && projectName !== CoreTasks.UNALLOCATED_TASKS_NAME.loc()) projectTooltip = "_ProjectkEditorTooltip".loc();
+    context.begin('img').addClass('icon').addClass(icon).attr('src', SC.BLANK_IMAGE_URL)
+          .attr('title', projectTooltip).attr('alt', projectTooltip).end();
+  },
+  
   render: function(context, firstTime) {
     var content = this.get('content');
     if(content) {
@@ -118,12 +126,14 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       if (projectName === CoreTasks.ALL_TASKS_NAME.loc() || projectName === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) context.addClass('reserved-project-item');
       else context.addClass('regular-project-item');
 
-      var projectTooltip = "_ProjectkEditorTooltip".loc();
+      var projectTooltip = '';
       var tasks = content.get('tasks');
       if(tasks) projectTooltip += "_Has".loc() + tasks.get('length') + "_Tasks".loc();
       if(content.get('displayTimeLeft')) projectTooltip += ('; ' + "_ProjectTimeLeftTooltip".loc());
-      context.attr('title', projectTooltip);
-      context.attr('alt', projectTooltip);
+      if(projectTooltip !== '') {
+        context.attr('title', projectTooltip);
+        context.attr('alt', projectTooltip);
+      }
     }
     sc_super();
   }
