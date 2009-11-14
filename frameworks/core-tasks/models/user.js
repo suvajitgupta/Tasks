@@ -95,6 +95,15 @@ CoreTasks.User = CoreTasks.Record.extend({
   }.property('name', 'loginName').cacheable(),
   
   /**
+   * Export a user's attributes.
+   *
+   * @returns {String) A string with the user's data exported in it.
+   */
+  exportData: function() {
+    return "{ name: '" + this.get('name') + "', loginName: '" + this.get('loginName') + "', role: '" + this.get('role') + "', password: '' }\n";
+  },
+  
+  /**
    * Custom destroy to clean out task submitter/assignee for this user.
    */
   destroy: function() {
