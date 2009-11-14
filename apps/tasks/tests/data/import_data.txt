@@ -8,11 +8,13 @@
 
 
 Project One # Has 4 task(s)
+| project description line1
+| project description line2
 
 # Suvajit Gupta (SG); Has 3 task(s)
 ^ A high-priority, risky, other, task that will take 2 hours submitted by and assigned to Suvajit {2h} <SG> [SG] @Risky
-| description line1
-| description line2
+| task description line1
+| task description line2
 - A medium priority, active, bug submitted by an unknown user and assigned to Suvajit with unspecified effort [SG] $Bug @Active
 - A medium priority bug assigned to Suvajit, which was done in 3 days but failed validation {3d} [SG] $Bug @Done %Failed
 
