@@ -476,10 +476,17 @@ Tasks.mixin({
    * Add a new user.
    */
   addUser: function() {
+
+    if(!CoreTasks.getPath('permissions.canAddUser')) {
+      console.log('Error: you do not have permission to add a user');
+      return null;
+    }
+    
     // Create and select new user.
     var user = CoreTasks.createRecord(CoreTasks.User, SC.clone(CoreTasks.User.NEW_USER_HASH));
     Tasks.usersController.selectObject(user);
     return user;
+    
   },
 
   /**
@@ -487,6 +494,11 @@ Tasks.mixin({
    */
   deleteUser: function() {
   
+    if(!CoreTasks.getPath('permissions.canDeleteUser')) {
+      console.log('Error: you do not have permission to delete a user');
+      return;
+    }
+    
     // Get the selected user.
     var user = Tasks.usersController.getPath('selection.firstObject');
     if (user) {
