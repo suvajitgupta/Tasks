@@ -20,7 +20,6 @@ Tasks.settingsPage = SC.Page.create({
     
     layout: { centerX: 0, centerY: 0, height: 325, width: 605 },
     
-    usersList: SC.outlet('contentView.userManager.childViews.1.contentView'),
     contentView: SC.View.design({
       layout: { left: 0, right: 0, top: 0, bottom: 0},
       childViews: 'userManager closeButton'.w(),
