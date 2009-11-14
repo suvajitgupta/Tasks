@@ -87,6 +87,7 @@ Tasks.mainPage = SC.Page.design({
           title:  "_Import".loc(),
           toolTip: "_ImportTooltip".loc(),
           value:  "_Import".loc(),
+          isEnabledBinding: 'CoreTasks.permissions.canImportData',
           target: 'Tasks',
           action: 'importData'
         }),

@@ -120,6 +120,12 @@ Tasks.importDataController = SC.ObjectController.create(
             currentProject = projectRecord;
           }
           else {
+            
+            if(!CoreTasks.getPath('permissions.canAddProject')) {
+              console.log('Error: you do not have permission to import a project');
+              break;
+            }
+            
             // Peek ahead to the next line(s) to see if there is a Description and bring those in
             description = null;
             while (i < (lines.length-1)) {
@@ -149,8 +155,8 @@ Tasks.importDataController = SC.ObjectController.create(
         }
       }
       
-      Tasks.assignmentsController.showAssignments();
       this.closePanel();
+      Tasks.assignmentsController.showAssignments();
       
     }    
 });
