@@ -126,7 +126,6 @@ CoreTasks = SC.Object.create({
     canDeleteTask: NO,
     canImportData: NO,
     canAddUser: NO,
-    canEditUser: NO,
     canDeleteUser: NO
   }),
   
@@ -143,7 +142,6 @@ CoreTasks = SC.Object.create({
         this.permissions.set('canDeleteTask', YES);
         this.permissions.set('canImportData', YES);
         this.permissions.set('canAddUser', YES);
-        this.permissions.set('canEditUser', YES);
         this.permissions.set('canDeleteUser', YES);
         break;
       case CoreTasks.USER_ROLE_DEVELOPER:
@@ -156,7 +154,6 @@ CoreTasks = SC.Object.create({
         this.permissions.set('canDeleteTask', YES);
         this.permissions.set('canImportData', YES);
         this.permissions.set('canAddUser', NO);
-        this.permissions.set('canEditUser', NO);
         this.permissions.set('canDeleteUser', NO);
         break;
       case CoreTasks.USER_ROLE_GUEST:
@@ -168,7 +165,6 @@ CoreTasks = SC.Object.create({
         this.permissions.set('canDeleteTask', NO);
         this.permissions.set('canImportData', NO);
         this.permissions.set('canAddUser', NO);
-        this.permissions.set('canEditUser', NO);
         this.permissions.set('canDeleteUser', NO);
         break;
     }
