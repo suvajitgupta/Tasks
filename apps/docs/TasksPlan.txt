@@ -33,9 +33,6 @@ v Make task in-cell editors fit with collection view item size [SG] <JH2> $Bug
 v Track/optimize calls to assignments controller for redrawing tasks tree [BB] <SG> @Active
 v Make buttons depressable to provide feedback when using them [SG]
 - Allow direct bookmarking of Tasks project names using SproutCore routes [SG] $Feature @Done %Passed
-- Show newly added tasks/projects with a badge <SE> [SG] $Feature
-- Beta: Add email notifications on task changes to Submitter/Assignee [JH2] <SG> $Feature
-- Beta: Add abiity to watch tasks and get email notifications on task changes [SG] <JH2> $Feature
 - Beta: Add support for leaving comments in record descriptions [SG] <SE> $Feature
 - Add support for attachments in record descriptions [SG] <SE> $Feature
 - Add some simple metrics/reporting capabilities <EG> [SG] $Feature
@@ -61,7 +58,8 @@ v Disable Add/Del. Tasks buttons when on "All Tasks" project [SG] <BB> @Done %Pa
 - Disallow "All Tasks" & "Unallocated Tasks" projects from being deleted [SG] @Done $Feature %Passed
 ^ Allow multi-task drag-n-drop Task reallocation to Projects [BB] <SG> @Done $Feature %Passed
 ^ Add popup viewer/editor for Project time left/description [SG] $Feature @Done %Passed
-v Add context menu to Add/Delete a project <SG> [JH2] $Feature
+- Add Project Statistics popup to show breakdown by Task attributes (what percent in each) [SG] $Feature
+v Add context menu to Add/Edit/Delete/View Statistics of a project <SG> [JH2] $Feature
 
 Task Manager GUI
 ^ Group Tasks by User and display Task id, summary, and effort (if specified) on far right [SG] <JH2> @Done $Feature %Passed
@@ -88,7 +86,10 @@ v Enable/disable "Del. Task" button based on having a selected task [SG] @Done %
 v Add hover over tooltip for assignees to show how many tasks they have and to explain loading color codes [SG] @Done $Feature %Passed
 ^ Allow multi-task drag-n-drop reassignment [BB] <SG>  @Done $Feature %Passed
 ^ Add popup viewer/editor for Task submitter, assignee, effort, project, and description [JH2] <SG> @Done %Passed $Feature
-v Add context menu to Add/Delete/Duplicate/Copy Contents of a task <JH2> [SG] $Feature
+v Add context menu to Add/Edit/Delete/Snapshot a task <JH2> [SG] $Feature
+| "Snapshot" copies task ID and name into clipboard
+- Beta: Add abiity to watch tasks and get email notifications on task changes [SG] <JH2> $Feature
+- Highlight newly added tasks with a badge to the left <SE> [SG] $Feature
 - Not in scope: Add support for nested tasks/tagging, inter-task dependencies/linking, preserving original estimate/partial time logging
 
 User Manager GUI
@@ -133,11 +134,15 @@ v Support disconnected operation and synchronization after network reconnection 
 
 Server
 ^ Build persistence server using Persevere [SE] <SG> @Done %Passed
-- Create a "System Administrator (SA)" user with Manager role in Persevere at installation time [SE] <SG>
+- Create command-line scripts to start/stop Server and to create users <SG> [SE] $Feature @Done %Passed
 - Beta: Document steps for creating a team production deployment of Tasks [SE] <SG>
 ^ Beta: Build persistence server: local using Sinatra/SQLite and remote using Google App Engine [JH2] <SG> @Active
 - Patch SproutCore to avoid overwhelming async calls for file imports with more than 20 tasks [SE] <SG> @Done %Passed $Bug
 - Beta: Implement Server-based user authentication & authorization (Role-based access control) [JH2] <SG> @Active
+- Beta: Add email notifications on noteworthy Task changes [JH2] <SG> $Feature
+| Notify Assignee when Task is added by Submitter different than Assignee (via New or Reassignment operations)
+| Notify Assignee when Done Task is Failed
+| Notify Managers when Task is flagged as Risky
 - Add server-side data validation checks/return appropriate error codes [SE] <SG>
 
 Styling/Hardening
@@ -153,7 +158,7 @@ Styling/Hardening
 - Perform I18N and L10N (test with reversed strings) [SG] <JH2> @Done %Passed
 - Develop Model unit tests [SG] <BB> @Active
 - Develop View unit tests [SG] <MB> @Active
-- Handle secondary scenarios/provide good diagnostics [SG] <SE>
+- Handle secondary scenarios/provide good diagnostics [SG] <SE> @Active
 
 Packaging/Delivery
 ^ Develop Web client (ported to Firefox, Internet Explorer, Safari, Chrome) [SG] @Done %Passed
@@ -163,5 +168,5 @@ v Develop Desktop client using Webkit [SG] <MB>
 Testing/Rollout
 - Manually test & note/fix showstoppers [SG] <BM> @Done
 - Create automated test scripts using Selenium [BM] <SG> @Active
-- Conduct usability tests, collect/address feedback [SG] <MG> @Active
+- Collect/address feedback from Alpha/Beta users and targeted usability tests <MG> [SG] @Active
 - Provide SproutCore doctool-style comments [SG] <SE>
