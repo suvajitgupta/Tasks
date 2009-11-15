@@ -88,8 +88,8 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
             
           ]
         })
-      });
-      this._editorPane.popup(layer, SC.PICKER_POINTER);
+      }).popup(this, SC.PICKER_MENU);
+      if(this._editorPane) this._editorPane.popup(layer, SC.PICKER_POINTER);
     }
     return NO;
   },
