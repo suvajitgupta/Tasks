@@ -359,6 +359,10 @@ Tasks.mixin({
     var project = Tasks.projectsController.getPath('selection.firstObject');
     if (project) {
 
+      // Disallow deletion of reserved projects
+      var projectName = project.get('name');
+      if (projectName === CoreTasks.ALL_TASKS_NAME.loc() || projectName === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) return;
+      
       // Confirm deletion for projects that have tasks
       var tasks = project.get('tasks');
       var taskCount = tasks.get('length');
