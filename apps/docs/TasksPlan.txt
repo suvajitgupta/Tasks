@@ -59,7 +59,7 @@ v Disable Add/Del. Tasks buttons when on "All Tasks" project [SG] <BB> @Done %Pa
 ^ Allow multi-task drag-n-drop Task reallocation to Projects [BB] <SG> @Done $Feature %Passed
 ^ Add popup viewer/editor for Project time left/description [SG] $Feature @Done %Passed
 - Add Project Statistics popup to show breakdown by Task attributes (what percent in each) [SG] $Feature
-v Add context menu to Add/Edit/Delete/View Statistics of a project <SG> [JH2] $Feature
+v Add context menu to Add/Show Details/Delete/View Statistics of a project <SG> [JH2] $Feature
 
 Task Manager GUI
 ^ Group Tasks by User and display Task id, summary, and effort (if specified) on far right [SG] <JH2> @Done $Feature %Passed
@@ -86,7 +86,7 @@ v Enable/disable "Del. Task" button based on having a selected task [SG] @Done %
 v Add hover over tooltip for assignees to show how many tasks they have and to explain loading color codes [SG] @Done $Feature %Passed
 ^ Allow multi-task drag-n-drop reassignment [BB] <SG>  @Done $Feature %Passed
 ^ Add popup viewer/editor for Task submitter, assignee, effort, project, and description [JH2] <SG> @Done %Passed $Feature
-v Add context menu to Add/Edit/Delete/Snapshot a task <JH2> [SG] $Feature
+v Add context menu to Add/Show Details/Delete/Snapshot a task <JH2> [SG] $Feature
 | "Snapshot" copies task ID and name into clipboard
 - Beta: Add abiity to watch tasks and get email notifications on task changes [SG] <JH2> $Feature
 - Highlight newly added tasks with a badge to the left <SE> [SG] $Feature
