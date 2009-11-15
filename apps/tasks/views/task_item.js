@@ -88,7 +88,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
               value: "_Submitter:".loc()
             }),
             SC.SelectFieldView.design({
-              layout: { top: 10, left: 80, width: 150, height: 22 },
+              layout: { top: 10, left: 80, width: 175, height: 22 },
               objectsBinding: this._listUsers(),
               nameKey: 'displayName',
               valueKey: 'id',
@@ -97,12 +97,12 @@ Tasks.TaskItemView = SC.ListItemView.extend(
             }),
 
             SC.LabelView.design({
-              layout: { top: 10, right: 165, height: 17, width: 80 },
+              layout: { top: 10, right: 190, height: 17, width: 80 },
               textAlign: SC.ALIGN_RIGHT,
               value: "_Assignee:".loc()
             }),
             SC.SelectFieldView.design({
-              layout: { top: 10, right: 10, width: 150, height: 20 },
+              layout: { top: 10, right: 10, width: 175, height: 20 },
               objectsBinding: this._listUsers(),
               nameKey: 'displayName',
               valueKey: 'id',
@@ -127,12 +127,12 @@ Tasks.TaskItemView = SC.ListItemView.extend(
             }),
             
             SC.LabelView.design({
-              layout: { top: 47, right: 165, height: 17, width: 80 },
+              layout: { top: 47, right: 190, height: 17, width: 80 },
               textAlign: SC.ALIGN_RIGHT,
               value: "_Project:".loc()
             }),
             SC.SelectFieldView.design({
-              layout: { top: 47, right: 10, width: 150, height: 20 },
+              layout: { top: 47, right: 10, width: 175, height: 20 },
               objectsBinding: this._listProjects(),
               nameKey: 'displayName',
               valueKey: 'id',
