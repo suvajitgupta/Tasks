@@ -100,7 +100,7 @@ User Manager GUI
 - Set assignee selection filter to logged in user if they are a Developer, filter out Other tasks if they are a Tester [SG] @Done $Feature %Passed
 ^ Add User Manager with "Add/Del. User"  buttons in toolbar (reuse user information view with signup screen) [SG] <JH2> @Done %Passed $Feature
 - Cleanup task assignee/submitter after user deletion <SE> [SG] @Done %Passed
-- Beta: Add password to login screen and change password dialog in User Manager (ask to reenter password) [JH2] <SG> $Feature
+- Beta: Add password to login screen and change password dialog in User Manager (ask to reenter password) [SG] <JH2> $Feature @Active
 - Add support for "Teams" (a user can belong to a team, a team can have a lead) [SG] <SE> $Feature
 
 Application Manager GUI
@@ -137,7 +137,7 @@ Server
 - Beta: Document steps for creating a team production deployment of Tasks [SE] <SG>
 ^ Beta: Build persistence server: local using Sinatra/SQLite and remote using Google App Engine [JH2] <SG> @Active
 - Patch SproutCore to avoid overwhelming async calls for file imports with more than 20 tasks [SE] <SG> @Done %Passed $Bug
-- Beta: Implement Server-based user authentication & authorization (Role-based access control) [JH2] <SG>
+- Beta: Implement Server-based user authentication & authorization (Role-based access control) [JH2] <SG> @Active
 - Add server-side data validation checks/return appropriate error codes [SE] <SG>
 
 Styling/Hardening

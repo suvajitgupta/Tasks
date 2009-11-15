@@ -5,7 +5,7 @@ sc_require('core_callbacks');
  * made on behalf of the store (not directly, at least).  Functions that ARE made on behalf of the
  * store are routed through the data source instead.
  *
- * TODO: [SE] find a better name for this file (core_server doesn't seem right).
+ * TODO: [SE] find a better name for this file (core_server doesn't seem right)
  *
  * @author Sean Eidemiller
  */
