@@ -7,7 +7,6 @@ sc_require('core');
 sc_require('mixins/tooltip');
 sc_require('mixins/simple_button');
 sc_require('mixins/localized_label');
-sc_require('views/projects_list');
 sc_require('views/summary');
 
 /** @namespace
