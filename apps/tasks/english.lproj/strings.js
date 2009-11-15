@@ -43,8 +43,8 @@ SC.stringsFor('English', {
   "_HelpTooltip": "Launch Tasks help",
   "_Logout": "Logout",
   "_LogoutTooltip": "Logout from Tasks",
-  "_AssigneeSelectionHint": "Specify assignee login names",
-  "_AssigneeSelectionTooltip": "Separate via commas or spaces, use 'none' to see unassigned tasks",
+  "_AssigneeSelectionHint": "Specify assignees to show",
+  "_AssigneeSelectionTooltip": "Use all or part of full/login name separated via commas or spaces; Type 'none' to see unassigned tasks",
   "_TasksSearchHint": "Search by task #IDs or name",
   "_TasksSearchTooltip": "Separate #IDs via commas or spaces, otherwise perform case-insensitive match",
   
