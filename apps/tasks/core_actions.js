@@ -85,7 +85,7 @@ Tasks.mixin({
     // console.log("DEBUG: loadData()");
     // Start by loading all users.
     if (!CoreTasks.get('allUsers')) {
-      CoreTasks.set('allUsers', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.User })));
+      CoreTasks.set('allUsers', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.User, orderBy: 'name' })));
     } else {
       CoreTasks.get('allUsers').refresh();
     }
