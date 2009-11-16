@@ -75,7 +75,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
         this._tasksQuery = SC.Query.local(CoreTasks.Task, 'projectId=null');
       }
       else {
-        this._tasksQuery = SC.Query.local(CoreTasks.Task, "projectId='%@'".fmt(this.get('id')));
+        this._tasksQuery = SC.Query.local(CoreTasks.Task, "projectId=%@".fmt(this.get('id')));
       }
     }
 
