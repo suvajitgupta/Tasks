@@ -90,7 +90,12 @@ v Add context menu to Add/Show Details/Delete/Snapshot a task <JH2> [SG] $Featur
 | "Snapshot" copies task ID and name into clipboard
 - Beta: Add abiity to watch tasks and get email notifications on task changes [SG] <JH2> $Feature
 - Highlight newly added tasks with a badge to the left <SE> [SG] $Feature
-- Not in scope: Add support for nested tasks/tagging, inter-task dependencies/linking, preserving original estimate/partial time logging
+- Out of Scope: Add support for nested tasks/tagging $Feature
+| Use "Clustering" approach described in Help instead
+- Out of Scope: Add support for managing inter-task dependencies/linking $Feature
+| You can reference #IDs of upstream tasks in the description field instead
+- Out of Scope: Add support for preserving original task estimates/partial time logging $Feature
+| Use "Chunk Up Work" best practice described in Help instead
 
 User Manager GUI
 ^ Add login screen to identify user who logs in (and handle login failures properly) [SG] <SE> @Done %Passed $Feature
@@ -119,7 +124,7 @@ Application Manager GUI
 | Preferences:
 | * percent and min days for Assignee loading determination
 | * email notifications
-v Add export to HTML for human-readable version (for baselining tasks for a release, for instance) [SG]
+- Add "Export to HTML" capability for printable & human-readable version (for baselining tasks for a release, for instance) [SG] $Feature
 - Add online "Help" button in top toolbar & popup help window [SG] @Done %Passed $Feature
 v Add screenshots with callouts for online help content [SG] $Feature
 - Add online training video using Captivate or Camtasia [SG] $Feature
@@ -128,7 +133,7 @@ v Add screenshots with callouts for online help content [SG] $Feature
 - Beta: Prompt user to save changes (if any) before logging out [SG] <SE> $Feature
 - Restore application settings/state from last login using HTML5 storage [SG] <MB> $Feature
 | See demo.sproutcore.com/user_defaults and lookup SproutCore blog for Charles' posting on this topic
-v Add hotkeys for common operations (like add/delete projects/tasks and save) [EG] <SG> $Feature @Done %Passed
+v Add hotkeys for common operations (like add Projects/Tasks and Save) [EG] <SG> $Feature @Done %Passed
 v Add Undo/Redo buttons in top toolbar (till last Save) [SG] <SE> $Feature
 v Support disconnected operation and synchronization after network reconnection using SproutDB [SG] <SE> $Feature
 
@@ -139,7 +144,7 @@ Server
 ^ Beta: Build persistence server: local using Sinatra/SQLite and remote using Google App Engine [JH2] <SG> @Active
 - Patch SproutCore to avoid overwhelming async calls for file imports with more than 20 tasks [SE] <SG> @Done %Passed $Bug
 - Beta: Implement Server-based user authentication & authorization (Role-based access control) [JH2] <SG> @Active
-- Beta: Add email notifications on noteworthy Task changes [JH2] <SG> $Feature
+- Beta: Add email notifications on noteworthy Task changes [JH2] <SG> $Feature @Active
 | Notify Assignee when Task is added by Submitter different than Assignee (via New or Reassignment operations)
 | Notify Assignee when Done Task is Failed
 | Notify Managers when Task is flagged as Risky
