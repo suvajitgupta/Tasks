@@ -252,13 +252,8 @@ CoreTasks = SC.Object.create({
     this._dirtyTasks = [];
 
     // Get the store keys of the two "special" projects that we never want to persist.
-    if (!this._allTasksProjectKey) {
-      this._allTasksProjectKey = this.getPath('allTasksProject.storeKey');
-    }
-
-    if (!this._unallocatedTasksProjectKey) {
-      this._unallocatedTasksProjectKey = this.getPath('unallocatedTasksProject.storeKey');
-    }
+    var allTasksProjectKey = this.getPath('allTasksProject.storeKey');
+    var unallocatedTasksProjectKey = this.getPath('unallocatedTasksProject.storeKey');
 
     // Build separate arrays for all dirty records.
     var dirtyRecordKeys = store.changelog;
@@ -277,7 +272,7 @@ CoreTasks = SC.Object.create({
           this._dirtyUsers.pushObject(key);
           break;
         case CoreTasks.Project:
-          if (key !== this._allTasksProjectKey && key !== this._unallocatedTasksProjectKey) {
+          if (key !== allTasksProjectKey && key !== unallocatedTasksProjectKey) {
             this._dirtyProjects.pushObject(key);
           }
 
