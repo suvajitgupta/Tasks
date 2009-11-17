@@ -12,7 +12,7 @@
 */
 
 /*
-// TODO: [MG] make tasks control bar look convex like the toolbar at the top (dark at the bottom as well)
+// TODO: [MG] Beta: make tasks control bar look convex like the toolbar at the top (dark at the bottom as well)
 */
 .control-bar {
   background: static_url('images/default-theme-repeat-x.png') repeat-x 0 -71px; 
