@@ -40,6 +40,8 @@ CoreTasks = SC.Object.create({
    */
   clearData: function() {
     
+    this.allTasksProject = this.unallocatedTasksProject = null;
+    
     if(this.allUsers) {
       this.allUsers.destroy();
       this.allUsers = null;
