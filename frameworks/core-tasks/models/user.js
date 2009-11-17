@@ -189,9 +189,45 @@ CoreTasks.User.mixin(/** @scope CoreTasks.User */ {
       loginName: "'%@'".fmt(loginName),
       password: "'%@'".fmt(passwordHash)
     };
+    
+    var loginHash = {
+      loginName: '%@'.fmt(loginName),
+      password: '9b7e26f2d7f75f2488da08771a730fcc5372fcd8'
+    };
 
     // Send the request off to the server.
     CoreTasks.executeTransientGet(CoreTasks.User.resourcePath, undefined, params);
+  },
+  
+  /**
+   * Authenticates a user given a password hash on the Sinatra backend.
+   */
+  sinatraAuthenticate: function(loginName, passwordHash, params) {
+    if (!params) throw 'Error authenticating user: Missing success/failure callbacks.';
+
+    params.queryParams = {};
+    
+    var loginHash = {
+      // example of a loginName: 'BOBO'
+      loginName: '%@'.fmt(loginName),
+      // example of a password: '9b7e26f2d7f75f2488da08771a730fcc5372fcd8'
+      password: '%@'.fmt(passwordHash) 
+    };
+    
+    // For the sinatra server
+    CoreTasks.executeTransientPost('login', loginHash, params);
+  },
+  
+  /**
+  * User Logout -- delete's the user's session(cookie)
+  */
+  sinatraLogout: function(path, params) {
+    if (!params) throw 'Error logging out: Missing success/failure callbacks.';
+    
+    params.queryParams = {};
+    
+    // Removes the session cookie.
+    CoreTasks.executeTransientPost('logout', undefined, params);
   }
 
 });
