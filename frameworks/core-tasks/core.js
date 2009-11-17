@@ -16,13 +16,18 @@ CoreTasks = SC.Object.create({
       sc_super() ; // MUST COME FIRST
       
       if (storeKey === undefined) storeKey = recordType.storeKeyFor(id);
-      var status = this.readStatus(storeKey), changelog, K = SC.Record;
+      var status = this.readStatus(storeKey), K = SC.Record;
       
       if (status & K.RECORD_DIRTY || status & K.READY_NEW || 
           status & K.DESTROYED_DIRTY) {
         console.log('got a dirty record') ;
         CoreTasks.set('needsSave', YES) ;
       }
+    },
+    
+    destroyRecord: function(recordType, id, storeKey) {
+      sc_super() ;
+      CoreTasks.set('needsSave', YES) ;
     }
     
   }),
