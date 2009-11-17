@@ -1,4 +1,5 @@
 sc_require('core_callbacks');
+/*globals CoreTasks*/
 
 /**
  * A mixin on CoreTasks that defines all of the functions that handle requests to the server NOT
@@ -114,8 +115,11 @@ CoreTasks.mixin({
       // Make sure we actually got something.
       var normalizedResponse = this._normalizeResponseArray(response);
 
-      if (normalizedResponse.length > 0) {
+      // CHANGED [JH2] Modified this check to handle sinatra and GAE auth
+      if (normalizedResponse.length && normalizedResponse.length > 0) {
         // Invoke the success callback (may not be defined).
+        CoreTasks.invokeCallback(params.successCallback, normalizedResponse);
+      } else if (normalizedResponse.loginName) {
         CoreTasks.invokeCallback(params.successCallback, normalizedResponse);
       } else {
         // Invoke the no-matching-records callback (or the success callback if it doesn't exist).
