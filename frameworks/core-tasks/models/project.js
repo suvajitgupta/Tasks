@@ -65,27 +65,25 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
    */
   // FIXME: [SC] Beta: query not recomputing when tasks are added/deleted or imported/saved - icon not redrawing/tasks not showing
   tasks: function() {
-
-    // Create the query if necessary.
-    if (!this._tasksQuery) {
-      if(this.get('name') === CoreTasks.ALL_TASKS_NAME.loc()) {
-        this._tasksQuery = SC.Query.local(CoreTasks.Task);
-      }
-      else if(this.get('name') === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) {
-        this._tasksQuery = SC.Query.local(CoreTasks.Task, 'projectId=null');
-      }
-      else {
-        this._tasksQuery = SC.Query.local(CoreTasks.Task, "projectId='%@'".fmt(this.get('id')));
-      }
+    var query ;
+    
+    if (this.get('name') === CoreTasks.ALL_TASKS_NAME.loc()) {
+      query = SC.Query.local(CoreTasks.Task);
     }
-
-    this._tasksQuery.set('initialServerFetch', NO);
-
+    else if (this.get('name') === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) {
+      query = SC.Query.local(CoreTasks.Task, 'projectId=null');
+    }
+    else {
+      query = SC.Query.local(CoreTasks.Task, "projectId='%@'".fmt(this.get('id')));
+    }
+    
+    query.set('initialServerFetch', NO);
+    
     // Execute the query and return the results.
-    return this.get('store').find(this._tasksQuery);
-
-  }.property(),
-
+    return this.get('store').find(query) ;
+    
+  }.property('id', 'name').cacheable(),
+  
   /**
    * A read-only computed property that returns the list of tasks allocated to this project
    * before it was first persisted.
