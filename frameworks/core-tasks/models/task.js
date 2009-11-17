@@ -121,12 +121,16 @@ CoreTasks.Task = CoreTasks.Record.extend({
   effortValue: function(key, value){
     if (value !== undefined) {
       if(value === '') {
+        this.propertyWillChange('effort');
         this.writeAttribute('effort', null);
+        this.propertyDidChange('effort');
       }
       else {
         var effort = CoreTasks.Task.parseEffort('{' + value + '}');
         if(effort) {
+          this.propertyWillChange('effort');
           this.writeAttribute('effort', effort);
+          this.propertyDidChange('effort');
           value = effort;
         }
       }
