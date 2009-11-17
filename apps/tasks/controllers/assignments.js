@@ -280,7 +280,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
       return (a.displayName > b.displayName) ? 1 : -1;
     }), treeItemIsExpanded: YES }));
     
-    if(selection) Tasks.tasksController.selectObjects(selection);
+    // if(selection) Tasks.tasksController.selectObjects(selection);
     // console.log("DEBUG: showAssignments(" + this.count++ + ") exit  at: " + new Date().format('hh:mm:ss a'));
 
   },
