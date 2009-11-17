@@ -21,18 +21,12 @@ Tasks.mixin({
 
   // Data Loading
   goStateA3: function(){
-    
-    // Open main screen after successful data loading
-    Tasks.getPath('mainPage.mainPane').append();
-    
+    Tasks.loadData();
   },
 
   // Project/Task Management
   goStateA4: function(){
-    
-    // Select default project at startup
     this.projectsController.selectObject(Tasks.get('defaultProject'));
-    
   }
 
 });

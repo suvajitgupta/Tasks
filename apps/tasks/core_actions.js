@@ -29,7 +29,6 @@ Tasks.mixin({
     // console.log("DEBUG: authenticate()");
     switch (this.state.a) {
       case 1:
-      case 4:
         this.goState('a', 2);
         Tasks.set('loginName', loginName);
         var params = {
@@ -52,10 +51,9 @@ Tasks.mixin({
     switch (this.state.a) {
       case 1:
       case 2:
-        this.goState('a', 3);
         Tasks.loginController.closePanel();
-        // Load all data (projects and tasks) from the data source.
-        this._loadData();
+        Tasks.getPath('mainPage.mainPane').append();
+        this.goState('a', 3);
         break;
 
       default:
@@ -81,16 +79,16 @@ Tasks.mixin({
   /**
    * Load all Tasks data from the server.
    */
-  _loadData: function() {
+  loadData: function() {
     // console.log("DEBUG: loadData()");
     // Start by loading all users.
     if (!CoreTasks.get('allUsers')) {
       CoreTasks.set('allUsers', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.User, orderBy: 'name' })));
+      this.usersController.set('content', CoreTasks.get('allUsers'));
     } else {
       CoreTasks.get('allUsers').refresh();
     }
 
-    this.usersController.set('content', CoreTasks.get('allUsers'));
   },
   
   /**
@@ -134,11 +132,10 @@ Tasks.mixin({
     // Now load all of the tasks.
     if (!CoreTasks.get('allTasks')) {
       CoreTasks.set('allTasks', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Task })));
+      this.allTasksController.set('content', CoreTasks.get('allTasks'));
     } else {
       CoreTasks.get('allTasks').refresh();
     }
-
-    this.allTasksController.set('content', CoreTasks.get('allTasks'));
     
   },
 
@@ -150,28 +147,29 @@ Tasks.mixin({
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', serverMessage.get('value') + "_TasksLoaded".loc());
 
-    // Create these two reserved projects so that they show up first in the list of projects.
-
     // Create the AllTasks project to hold all tasks.
-    var allTasksProject = CoreTasks.createRecord(CoreTasks.Project, {
-      name: CoreTasks.ALL_TASKS_NAME.loc()
-    });
-    CoreTasks.set('allTasksProject', allTasksProject);
+    if(!CoreTasks.get('allTasksProject')) {
+      var allTasksProject = CoreTasks.createRecord(CoreTasks.Project, {
+        name: CoreTasks.ALL_TASKS_NAME.loc()
+      });
+      CoreTasks.set('allTasksProject', allTasksProject);
+    }
 
     // Create the UnallocatedTasks project with the unallocated tasks.
-    var unallocatedTasksProject = CoreTasks.createRecord(CoreTasks.Project, {
-      name: CoreTasks.UNALLOCATED_TASKS_NAME.loc()
-    });
-    CoreTasks.set('unallocatedTasksProject', unallocatedTasksProject);
+    if(!CoreTasks.get('unallocatedTasksProject')) {
+      var unallocatedTasksProject = CoreTasks.createRecord(CoreTasks.Project, {
+        name: CoreTasks.UNALLOCATED_TASKS_NAME.loc()
+      });
+      CoreTasks.set('unallocatedTasksProject', unallocatedTasksProject);
+    }
     
     // Now load all of the projects.
     if (!CoreTasks.get('allProjects')) {
       CoreTasks.set('allProjects', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Project, orderBy: 'name' })));
+      this.projectsController.set('content', CoreTasks.get('allProjects'));
     } else {
       CoreTasks.get('allProjects').refresh();
     }
-
-    this.projectsController.set('content', CoreTasks.get('allProjects'));
     
   },
 
@@ -233,22 +231,10 @@ Tasks.mixin({
   },
   
   /**
-   * Clears all data loaded from server.
-   */
-  clearData: function() {
-    this.usersController.set('content', null);
-    this.allTasksController.set('content', null);
-    this.projectsController.set('content', null);
-    CoreTasks.clearData();
-  },
-   
-  /**
    * Reload latest Tasks data from server.
    */
-  // TODO: [SG, SE] implement incremental refresh that doesn't reload/redraw everything on screen
   refreshData: function() {
-    this.clearData();
-    this.authenticate(this.loginName, 'password'); // TODO: [SG] replace with actual password
+    this.goState('a', 3);
   },
   
   /**
@@ -303,12 +289,19 @@ Tasks.mixin({
    * Restart application - invoked at logout and for a route to a new project.
    */
   restart: function() {
+    
     Tasks.getPath('mainPage.mainPane.welcomeMessage').set('value', null);
     CoreTasks.set('currentUser', null);
     this._alreadyLoggedIn = false;
+    
     this.get('assignmentsController').resetFilters();
-    this.clearData();
+    this.usersController.set('content', null);
+    this.allTasksController.set('content', null);
+    this.projectsController.set('content', null);
+    CoreTasks.clearData();
+    
     this.goState('a', 1);
+    
   },
   
   /**
