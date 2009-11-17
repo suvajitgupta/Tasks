@@ -6,9 +6,26 @@
  * @author Sean Eidemiller
  */
 CoreTasks = SC.Object.create({
-
+  
+  needsSave: NO,
+  
   // The main data store and record sets.
-  store: SC.Store.create(),
+  store: SC.Store.create({
+    
+    recordDidChange: function(recordType, id, storeKey, key) {
+      sc_super() ; // MUST COME FIRST
+      
+      if (storeKey === undefined) storeKey = recordType.storeKeyFor(id);
+      var status = this.readStatus(storeKey), changelog, K = SC.Record;
+      
+      if (status & K.RECORD_DIRTY || status & K.READY_NEW || 
+          status & K.DESTROYED_DIRTY) {
+        console.log('got a dirty record') ;
+        CoreTasks.set('needsSave', YES) ;
+      }
+    }
+    
+  }),
   allUsers: null,
   allTasks: null,
   allProjects: null,
@@ -36,6 +53,8 @@ CoreTasks = SC.Object.create({
     
     // FIXME: [SE/SG] Beta: see why there are lingering records after logout/relogin (add task as Manager, login as Guest and you'll see "_NewTask")
     if(this.store) this.store.reset();
+    
+    this.set('needsSave', NO) ;
     
   },
   
@@ -310,6 +329,7 @@ CoreTasks = SC.Object.create({
     // Apparently there was nothing to persist, which shouldn't ever happen.
     console.log('Nothing new to save.');
     this.set('saveMode', CoreTasks.MODE_NOT_SAVING);
+    this.set('needsSave', NO) ;
   },
 
   _saveUsers: function() {
@@ -351,6 +371,7 @@ CoreTasks = SC.Object.create({
 
       this.set('recordBeingSaved', null);
       this.set('saveMode', CoreTasks.MODE_NOT_SAVING);
+      this.set('needsSave', NO) ;
 
       this._dirtyUsers = [];
       this._dirtyProjects = [];
@@ -412,6 +433,7 @@ CoreTasks = SC.Object.create({
 
         this.set('recordBeingSaved', null);
         this.set('saveMode', CoreTasks.MODE_NOT_SAVING);
+        this.set('needsSave', NO) ;
 
         this._dirtyUsers = [];
         this._dirtyProjects = [];
@@ -465,6 +487,7 @@ CoreTasks = SC.Object.create({
 
         this.set('recordBeingSaved', null);
         this.set('saveMode', CoreTasks.MODE_NOT_SAVING);
+        this.set('needsSave', NO) ;
 
         this._dirtyUsers = [];
         this._dirtyProjects = [];
@@ -500,6 +523,7 @@ CoreTasks = SC.Object.create({
 
           this.set('recordBeingSaved', null);
           this.set('saveMode', CoreTasks.MODE_NOT_SAVING);
+          this.set('needsSave', NO) ;
 
           this._dirtyUsers = [];
           this._dirtyProjects = [];
@@ -513,6 +537,7 @@ CoreTasks = SC.Object.create({
 
         this.set('recordBeingSaved', null);
         this.set('saveMode', CoreTasks.MODE_NOT_SAVING);
+        this.set('needsSave', NO) ;
 
         this._dirtyUsers = [];
         this._dirtyProjects = [];

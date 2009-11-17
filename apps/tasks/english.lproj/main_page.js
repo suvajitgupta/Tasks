@@ -59,7 +59,7 @@ Tasks.mainPage = SC.Page.design({
           classNames: ['title-bar-label'],
           value:  "_Save".loc(),
           toolTip: "_SaveTooltip".loc(),
-          isEnabledBinding: 'Tasks.serverController.isSaveable',
+          isEnabledBinding: 'CoreTasks.needsSave',
           target: 'Tasks',
           action: 'saveData'
         }),
