@@ -20,9 +20,8 @@ Design/Planning
 | Guests only have R on all entities
 
 General Infrastructure
-^ Fix missing/flashing scrollbar on Firefox <SG> [SC] $Bug
 ^ Develop Model and Fixtures (hardcoded & generated) [SG] <SE> @Done
-- Beta: Develop States/Actions corresponding to GUI Statecharts [SG] <SE> @Active
+- Develop States/Actions corresponding to GUI Statecharts [SG] <SE> @Done
 - Support minimum resolution of 1024x768 [SG] @Done $Feature %Passed
 - Support decimal numbers for project timeLeft and task effort in units of 'd' or 'h' [SG] @Done %Passed $Feature
 ^ Have tasks refer to project they are allocated to and make projects Store queries [SE] <SG> @Done %Passed
@@ -31,7 +30,7 @@ General Infrastructure
 - Beta: Implement Server-based RBAC (role-based access control) <SG> [JH2] @Active
 v Make task in-cell editors fit with collection view item size [SG] <JH2> $Bug
 v Track/optimize calls to assignments controller for redrawing tasks tree [BB] <SG> @Active
-v Make buttons depressable to provide feedback when using them [SG]
+v Make buttons depressable to provide feedback when using them [SG] $Feature
 - Allow direct bookmarking of Tasks project names using SproutCore routes [SG] $Feature @Done %Passed
 - Beta: Add support for leaving comments in record descriptions [SG] <SE> $Feature
 - Add support for attachments in record descriptions [SG] <SE> $Feature
@@ -49,17 +48,17 @@ v Add hover over tooltip for projects to show how many tasks they contain [SG] @
 ^ Add "Add Project" & "Del. Project" buttons in projects toolbar [SG] @Done $Feature %Passed
 - Add warning Alert box about deleting Project with Tasks [SG] @Done $Feature %Passed
 - Don't create a project if it already exists during Import [SG] @Done $Feature %Passed
-v Disallow duplicate project names after editing, provide warning to user for duplicates [SG] @Active $Feature
+v Disallow duplicate project names after editing, provide warning to user for duplicates [SG] $Feature
 v Add summary in projects toolbar showing number of projects & number of tasks for selected project [SG] <MB> @Done $Feature %Passed
 v Enable/disable "Del. Project" button based on having a selected project [SG] @Done %Passed $Feature
 v Disable Add/Del. Tasks buttons when on "All Tasks" project [SG] <BB> @Done %Passed $Feature
 - Select first project at startup [SG] <JH2> @Done %Passed $Feature
-^ Add virtual "All Tasks" & "Unallocated Tasks" projects and display them grayed out in projects list [SG] <SE> @Done
+^ Add virtual "All Tasks" & "Unallocated Tasks" projects and display them grayed out in projects list [SG] <SE> $Feature @Done %Passed
 - Disallow "All Tasks" & "Unallocated Tasks" projects from being deleted [SG] @Done $Feature %Passed
-^ Allow multi-task drag-n-drop Task reallocation to Projects [BB] <SG> @Done $Feature %Passed
+^ Allow multi-task drag-n-drop reallocation to other projects [BB] <SG> @Done $Feature %Passed
 ^ Add popup viewer/editor for Project time left/description [SG] $Feature @Done %Passed
 - Add Project Statistics popup to show breakdown by Task attributes (what percent in each) [SG] $Feature
-v Add context menu to Add/Show Details/Delete/View Statistics of a project <SG> [JH2] $Feature
+v Add context menu to Add/Show Details/Delete/View Statistics of a project <JH2> [SG] $Feature
 
 Task Manager GUI
 ^ Group Tasks by User and display Task id, summary, and effort (if specified) on far right [SG] <JH2> @Done $Feature %Passed
@@ -84,12 +83,12 @@ v Enable/disable "Del. Task" button based on having a selected task [SG] @Done %
 - Append "?" for range-based subtotals including tasks with unspecified efforts [SG] @Done $Feature %Passed
 - Color code assignee non loading in gray, under loading in green, proper loading in blue, and over loading in red [SG] @Done $Feature %Passed
 v Add hover over tooltip for assignees to show how many tasks they have and to explain loading color codes [SG] @Done $Feature %Passed
-^ Allow multi-task drag-n-drop reassignment [BB] <SG>  @Done $Feature %Passed
+^ Allow multi-task drag-n-drop reassignment to other assignees [BB] <SG>  @Done $Feature %Passed
 ^ Add popup viewer/editor for Task submitter, assignee, effort, project, and description [JH2] <SG> @Done %Passed $Feature
 v Add context menu to Add/Show Details/Delete/Snapshot a task <JH2> [SG] $Feature
 | "Snapshot" copies task ID and name into clipboard
 - Beta: Add abiity to watch tasks and get email notifications on task changes [SG] <JH2> $Feature
-- Highlight newly added tasks with a badge to the left <SE> [SG] $Feature
+- Beta: Highlight newly added tasks with a badge to the left <SE> [SG] $Feature
 - Out of Scope: Add support for nested tasks/tagging $Feature
 | Use "Clustering" approach described in Help instead
 - Out of Scope: Add support for managing inter-task dependencies/linking $Feature
@@ -105,7 +104,7 @@ User Manager GUI
 - Allow assignee filtering by matching any part of login or full name [SG] $Feature @Done %Passed
 - Set assignee selection filter to logged in user if they are a Developer, filter out Other tasks if they are a Tester [SG] @Done $Feature %Passed
 ^ Add User Manager with "Add/Del. User"  buttons in toolbar (reuse user information view with signup screen) [SG] <JH2> @Done %Passed $Feature
-- Cleanup task assignee/submitter after user deletion <SE> [SG] @Done %Passed
+- Reset task assignee/submitter after user deletion <SE> [SG] $Feature @Done %Passed
 - Beta: Add password to login screen and change password dialog in User Manager (ask to reenter password) [SG] <JH2> $Feature @Active
 - Add support for "Teams" (a user can belong to a team, a team can have a lead) [SG] <SE> $Feature
 
@@ -124,7 +123,7 @@ Application Manager GUI
 | Preferences:
 | * percent and min days for Assignee loading determination
 | * email notifications
-- Add "Export to HTML" capability for printable & human-readable version (for baselining tasks for a release, for instance) [SG] $Feature
+- Beta: Add "Export to HTML" capability for printable & human-readable version (for baselining tasks for a release, for instance) [SG] $Feature
 - Add online "Help" button in top toolbar & popup help window [SG] @Done %Passed $Feature
 v Add screenshots with callouts for online help content [SG] $Feature
 - Add online training video using Captivate or Camtasia [SG] $Feature
@@ -139,10 +138,9 @@ v Support disconnected operation and synchronization after network reconnection 
 
 Server
 ^ Build persistence server using Persevere [SE] <SG> @Done %Passed
-- Create command-line scripts to start/stop Server and to create users <SG> [SE] $Feature @Done %Passed
+- Beta: Create command-line scripts to start/stop Server and to create users <SG> [SE] $Feature @Active
 - Beta: Document steps for creating a team production deployment of Tasks [SE] <SG>
 ^ Beta: Build persistence server: local using Sinatra/SQLite and remote using Google App Engine [JH2] <SG> @Active
-- Patch SproutCore to avoid overwhelming async calls for file imports with more than 20 tasks [SE] <SG> @Done %Passed $Bug
 - Beta: Implement Server-based user authentication & authorization (Role-based access control) [JH2] <SG> @Active
 - Beta: Add email notifications on noteworthy Task changes [JH2] <SG> $Feature @Active
 | Notify Assignee when Task is added by Submitter different than Assignee (via New or Reassignment operations)
@@ -171,7 +169,7 @@ Packaging/Delivery
 v Develop Desktop client using Webkit [SG] <MB>
 
 Testing/Rollout
-- Manually test & note/fix showstoppers [SG] <BM> @Done
+- Note all FIXMEs/TODOs/bugs & remove these as they are resolved [SG] <BM> @Active
 - Create automated test scripts using Selenium [BM] <SG> @Active
 - Collect/address feedback from Alpha/Beta users and targeted usability tests <MG> [SG] @Active
 - Provide SproutCore doctool-style comments [SG] <SE>
