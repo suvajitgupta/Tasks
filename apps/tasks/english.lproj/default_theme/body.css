@@ -51,7 +51,8 @@ body {
 }
 
 .quickfilter-toolbar {
-	background: #555;
+  border: 1px solid #bcbcbc;
+	background: #cfcfcf;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
 }
@@ -100,8 +101,3 @@ body {
 	margin-right: 2px;
 	height: 18px;
 }
-
-
-/*
-// TODO: [MG] delete images in static PNG that we don’t use
-*/

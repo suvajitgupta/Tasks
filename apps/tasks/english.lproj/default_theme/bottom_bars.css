@@ -25,12 +25,22 @@
   text-align: center !important;
 }
 
+.filter-pane .task-attribute-set {
+  font-size: 10px !important;
+  text-align: center !important;
+  line-height: 1.5;
+  border: 1px solid #bcbcbc;
+	background: #cfcfcf;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+
 .task-attribute-set {
   font-size: 10px !important;
   text-align: center !important;
   line-height: 1.5;
-	border: 1px solid #444 !important;
-  background: #f2f2f2 !important;
+  border: 1px solid #cfcfcf;
+	background: #cfcfcf;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
 }

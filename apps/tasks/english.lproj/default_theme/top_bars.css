@@ -38,9 +38,6 @@
   text-align: center !important;
 }
 
-/*
-// TODO: [MG] use same Tasks logo for Tasks login screen and dock
-*/
 .tasks-logo {
   background: static_url('images/tasks-logo.png') no-repeat 0 0;
 }
@@ -62,9 +59,6 @@
   color: white !important;
 }
 
-/*
-// TODO: [MG] make dock icons 16x16 and use hover over titles?
-*/
 .save-icon {
 	width: 24px;
 	height: 24px;
@@ -83,20 +77,15 @@
 	background: no-repeat sc_static('icons/shared') 0px -264px;
 }
 
-/*
-// TODO: [MG] delete commented out code below & unused images from sprites 
-*/
 .import-icon {
 	width: 24px;
 	height: 24px;
-/*  background: no-repeat sc_static('icons/shared') -24px -240px;*/
   background: static_url('images/default-theme-static.png') no-repeat 0 0;
 }
 
 .export-icon {
   width: 24px;
   height: 24px;
-/*  background: no-repeat sc_static('icons/shared') 0px -240px;*/
   background: static_url('images/default-theme-static.png') no-repeat 0 -25px;
 }
 
@@ -110,14 +99,12 @@
   width: 24px;
   height: 24px;
   background: no-repeat sc_static('icons/shared') -0px -192px;
-/*  background: static_url('images/default-theme-static.png') no-repeat 0 -98px;*/
 }
 
 .logout-icon {
   width: 24px;
   height: 24px;
   background: no-repeat sc_static('icons/shared') 0px -312px;
-/*  background: static_url('images/default-theme-static.png') no-repeat 0 -121px;*/
 }
 
 
