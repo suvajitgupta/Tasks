@@ -21,6 +21,7 @@ sc_require('core');
 */
 Tasks.mixin( /** @scope Tasks */ {
   
+  defaultProjectName: null,
   defaultProject: null,
 
   registerRoutes: function() {
@@ -37,7 +38,7 @@ Tasks.mixin( /** @scope Tasks */ {
       console.log("Error: missing project name for URL routing");
     }
     else {
-      this.set('defaultProject', params.name);
+      this.set('defaultProjectName', params.name);
       this.restart();
     }
   },
