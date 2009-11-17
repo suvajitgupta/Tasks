@@ -65,7 +65,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
    */
   // FIXME: [SC] Beta: query not recomputing when tasks are added/deleted or imported/saved - icon not redrawing/tasks not showing
   tasks: function() {
-    var query ;
+    var query, recArray ;
     
     if (this.get('name') === CoreTasks.ALL_TASKS_NAME.loc()) {
       query = SC.Query.local(CoreTasks.Task);
@@ -80,9 +80,18 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
     query.set('initialServerFetch', NO);
     
     // Execute the query and return the results.
-    return this.get('store').find(query) ;
+    recArray = this.get('store').find(query) ;
     
+    // observe the length property of the recAry for changes
+    recArray.addObserver('length', this, this._tasksLengthDidChange) ;
+    
+    return recArray ;
   }.property('id', 'name').cacheable(),
+  
+  _tasksLengthDidChange: function() {
+    // console.log('%@._tasksLengthDidChange()'.fmt(this));
+    this.propertyDidChange('*') ; // refresh ourself
+  },
   
   /**
    * A read-only computed property that returns the list of tasks allocated to this project
