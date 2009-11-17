@@ -57,7 +57,6 @@ CoreTasks = SC.Object.create({
       this.allProjects = null;
     }
     
-    // FIXME: [SE/SG] Beta: see why there are lingering records after logout/relogin (add task as Manager, login as Guest and you'll see "_NewTask")
     if(this.store) this.store.reset();
     
     this.set('needsSave', NO) ;

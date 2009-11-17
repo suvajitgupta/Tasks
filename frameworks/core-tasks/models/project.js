@@ -63,7 +63,6 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
    *
    * @returns {SC.RecordArray} An array of tasks.
    */
-  // FIXME: [SC] Beta: query not recomputing when tasks are added/deleted or imported/saved - icon not redrawing/tasks not showing
   tasks: function() {
     var query, recArray ;
     
