@@ -20,7 +20,6 @@ CoreTasks = SC.Object.create({
       
       if (status & K.RECORD_DIRTY || status & K.READY_NEW || 
           status & K.DESTROYED_DIRTY) {
-        console.log('got a dirty record') ;
         CoreTasks.set('needsSave', YES) ;
       }
     },
