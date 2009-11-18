@@ -440,7 +440,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
       this._timer = null;
     }
   	this.invokeOnce(this.showAssignments);
-  }.observes('[]', 'nodesExpanded'),
+  }.observes('[]'),
   
   _filteringHasChanged: function() { // allow users to change filters over a half second before redrawing tasks pane
     if (this._timer) this._timer.invalidate();
@@ -455,6 +455,12 @@ Tasks.assignmentsController = SC.ArrayController.create(
   _searchFilterHasChanged: function() {
     // console.log("DEBUG: Search filter changed: '" + this.searchFilter + "'");
     this._filteringHasChanged();
-  }.observes('searchFilter')
+  }.observes('searchFilter'),
+  
+  collapse: function() {
+    this.nodesExpanded = false;
+    this.showAssignments();
+    this.nodesExpanded = true;
+  }
   
 });

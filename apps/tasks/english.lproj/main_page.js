@@ -149,8 +149,8 @@ Tasks.mainPage = SC.Page.design({
         SC.LabelView.design(Tasks.SimpleButton,{
           layout: { centerY: 0, left: 0, height: 18, width: 105 },
           icon: 'add-icon',
-          value: "_AddProject".loc(),
           classNames: ['toolbar-label'],
+          value: "_AddProject".loc(),
           toolTip: "_AddProjectTooltip".loc(),
           isEnabledBinding: 'CoreTasks.permissions.canAddProject',
           target: 'Tasks',
@@ -160,8 +160,8 @@ Tasks.mainPage = SC.Page.design({
         SC.LabelView.design(Tasks.SimpleButton,{
           layout: { centerY: 0, left: 100, height: 18, width: 105 },
           icon: 'delete-icon',
-          value: "_DelProject".loc(),
           classNames: ['toolbar-label'],
+          value: "_DelProject".loc(),
           toolTip: "_DelProjectTooltip".loc(),
           isEnabledBinding: 'Tasks.projectsController.isDeletable',
           target: 'Tasks',
@@ -176,8 +176,8 @@ Tasks.mainPage = SC.Page.design({
         SC.LabelView.design(Tasks.SimpleButton,{
           layout: { centerY: 0, left: 230, height: 18, width: 95 },
           icon: 'add-icon',
-          value: "_AddTask".loc(),
           classNames: ['toolbar-label'],
+          value: "_AddTask".loc(),
           toolTip: "_AddTaskTooltip".loc(),
           isEnabledBinding: 'CoreTasks.permissions.canAddTask',
           target: 'Tasks',
@@ -187,20 +187,22 @@ Tasks.mainPage = SC.Page.design({
         SC.LabelView.design(Tasks.SimpleButton,{
           layout: { centerY: 0, left: 325, height: 18, width: 90 },
           icon: 'delete-icon',
-          value: "_DelTask".loc(),
           classNames: ['toolbar-label'],
+          value: "_DelTask".loc(),
           toolTip: "_DelTaskTooltip".loc(),
           isEnabledBinding: 'Tasks.tasksController.isDeletable',
           target: 'Tasks',
           action: 'deleteTask'
         }),
         
-        SC.CheckboxView.design(Tasks.ToolTip, {
-          layout: { centerY: 0, left: 430, height: 18, width: 75 },
+        SC.LabelView.design(Tasks.SimpleButton,{
+          layout: { centerY: 0, left: 425, height: 18, width: 75 },
+          icon: 'collapse-icon',
           classNames: ['toolbar-label'],
-          title: "_Expanded".loc(),
-          toolTip: "_ExpandedTooltip".loc(),
-          valueBinding: 'Tasks.assignmentsController.nodesExpanded'
+          value: "_Collapse".loc(),
+          toolTip: "_CollapseTooltip".loc(),
+          target: 'Tasks.assignmentsController',
+          action: 'collapse'
         }),
                 
         SC.View.design({
@@ -212,8 +214,8 @@ Tasks.mainPage = SC.Page.design({
           layout: { centerY: 0, right: 440, height: 18, width: 60 },
           displayProperties: [ 'icon' ],
           iconBinding: 'Tasks.assignmentsController.attributeFilterIcon',
-          value: "_Filter".loc(),
           classNames: ['toolbar-label'],
+          value: "_Filter".loc(),
           toolTip: "_FilterTooltip".loc(),
           target: 'Tasks',
           action: 'filterTasks'

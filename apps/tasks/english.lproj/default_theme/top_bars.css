@@ -151,6 +151,13 @@
   height: 16px;
   background: static_url('images/default-theme-static.png') no-repeat 0 -335px;
 }
+
+.collapse-icon {
+  width: 20px !important;
+  height: 16px !important;
+  background: static_url('images/collapse.png') no-repeat;
+}
+
 /*
 // TODO: [RM] check/fix coordinates of Filter icons in sprited image
 */

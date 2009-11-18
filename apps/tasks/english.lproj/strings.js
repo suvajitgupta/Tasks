@@ -47,8 +47,8 @@ SC.stringsFor('English', {
   "_AssigneeSelectionTooltip": "Use all or part of full/login name separated via commas or spaces; Type 'None' to see unassigned tasks",
   "_TasksSearchHint": "Search by task #IDs or name",
   "_TasksSearchTooltip": "Separate #IDs via commas or spaces, otherwise perform case-insensitive match",
-  "_Expanded": "Expanded",
-  "_ExpandedTooltip": "Check this box to keep assignees grouping tasks expanded below",
+  "_Collapse": "Collapse",
+  "_CollapseTooltip": "Collapse all assignees below to see everyone at a glance",
   
   // Project strings
   "_AddProject": "Add Project",
