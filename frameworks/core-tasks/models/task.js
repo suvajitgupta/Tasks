@@ -488,8 +488,6 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
       taskSubmitter = taskSubmitterMatches[1];
     }
     
-    // TODO: [SG] check for valid values during importing of task type/status/validation
-    
     // extract task type
     var taskTypeMatches = /\$([\w]+)/.exec(taskLine);
     var taskType = fillDefaults? CoreTasks.TASK_TYPE_OTHER : null;

@@ -437,8 +437,7 @@ CoreTasks = SC.Object.create({
 
       } else if (status & SC.Record.ERROR) {
         // Save failed.
-        // TODO: [SE] handle user save failure properly
-        this.removeObserver('recordBeingSaved.status', this, this._userSaveRecordDidChange);
+      this.removeObserver('recordBeingSaved.status', this, this._userSaveRecordDidChange);
 
         this.set('recordBeingSaved', null);
         this.set('saveMode', CoreTasks.MODE_NOT_SAVING);
@@ -491,7 +490,6 @@ CoreTasks = SC.Object.create({
 
       } else if (status & SC.Record.ERROR) {
         // Save failed.
-        // TODO: [SE] handle project save failure properly
         this.removeObserver('recordBeingSaved.status', this, this._projectSaveRecordDidChange);
 
         this.set('recordBeingSaved', null);
@@ -541,7 +539,6 @@ CoreTasks = SC.Object.create({
 
       } else if (status & SC.Record.ERROR) {
         // Save failed.
-        // TODO: [SE] handle task save failure properly
         this.removeObserver('recordBeingSaved.status', this, this._taskSaveRecordDidChange);
 
         this.set('recordBeingSaved', null);
@@ -623,8 +620,7 @@ CoreTasks = SC.Object.create({
   },
 
   // Used to assign all newly-created records with a negative ID.
-  // TODO: [SE] reset the counter so that we don't run out of integers if the client is left
-  // running for a long time.
+  // Note: this counter may run out of integers if the client is left running for a long time.
   _currentRecordId: -1
 
 });
