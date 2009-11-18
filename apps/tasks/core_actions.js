@@ -15,8 +15,7 @@ sc_require('controllers/projects');
 
 Tasks.mixin({
 
-  _alreadyLoggedIn: false,
-
+  _loginTime: true, // to indicate when there is a login sequence in progress
   loginName: null,
 
   /**
@@ -95,7 +94,7 @@ Tasks.mixin({
    * Called after all users have been successfully loaded from the server.
    */
   usersLoadSuccess: function() {
-    // console.log("DEBUG: userLoadSuccess()");
+    // console.log("DEBUG: usersLoadSuccess()");
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', "_UsersLoaded".loc());
     
@@ -103,9 +102,7 @@ Tasks.mixin({
     var currentUser = CoreTasks.getUser(this.loginName);
     if (currentUser) {
       
-      if(!this._alreadyLoggedIn) { // not a refresh
-        
-        this._alreadyLoggedIn = true;
+      if(this._loginTime) {
         
         // Greet user and save login session information
         CoreTasks.set('currentUser', currentUser);
@@ -184,13 +181,15 @@ Tasks.mixin({
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', serverMessage.get('value') + "_ProjectsLoaded".loc() + new Date().format('hh:mm:ss a'));
 
-    var defaultProject = CoreTasks.get('allTasksProject');
-    var defaultProjectName = this.get('defaultProjectName');
-    if(defaultProjectName) { // if specified via a Route
-      var project = CoreTasks.getProject(defaultProjectName); // see if such a project exists
-      if(project) defaultProject = project;
+    if(this._loginTime) {
+      var defaultProject = CoreTasks.get('allTasksProject');
+      var defaultProjectName = this.get('defaultProjectName');
+      if(defaultProjectName) { // if specified via a Route
+        var project = CoreTasks.getProject(defaultProjectName); // see if such a project exists
+        if(project) defaultProject = project;
+      }
+      this.set('defaultProject', defaultProject);
     }
-    this.set('defaultProject', defaultProject);
     
     this.dataLoadSuccess();
   },
@@ -202,6 +201,10 @@ Tasks.mixin({
     // console.log("DEBUG: dataLoadSuccess()");
     switch (this.state.a) {
       case 3:
+        if(this._loginTime) {
+          this.projectsController.selectObject(Tasks.get('defaultProject'));
+          this._loginTime = false;
+        }
         this.goState('a', 4);
         break;
       default:
@@ -294,7 +297,7 @@ Tasks.mixin({
     
     Tasks.getPath('mainPage.mainPane.welcomeMessage').set('value', null);
     CoreTasks.set('currentUser', null);
-    this._alreadyLoggedIn = false;
+    this._loginTime = true;
     
     this.get('assignmentsController').resetFilters();
     this.usersController.set('content', null);

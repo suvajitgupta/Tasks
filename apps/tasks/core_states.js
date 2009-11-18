@@ -11,22 +11,21 @@ sc_require('core');
 Tasks.mixin({
   
   // Login
-  goStateA1: function(){
+  goStateA1: function() {
     Tasks.loginController.openPanel();
   },
 
   // Authentication
-  goStateA2: function(){
+  goStateA2: function() {
   },
 
   // Data Loading
-  goStateA3: function(){
+  goStateA3: function() {
     Tasks.loadData();
   },
 
   // Project/Task Management
-  goStateA4: function(){
-    this.projectsController.selectObject(Tasks.get('defaultProject'));
+  goStateA4: function() {
   }
 
 });
