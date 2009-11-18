@@ -79,7 +79,7 @@ Tasks.settingsPage = SC.Page.create({
             contentView: SC.ListView.design({
               layout: { top: 0, left:0, bottom: 0, right: 0 },
               contentValueKey: 'name',
-              contentBinding: 'Tasks.usersController.arrangedObjects', // FIXME: [SG] Beta: show all users only to Managers
+              contentBinding: 'Tasks.usersController.editableUsers', // show all users only to Managers
               selectionBinding: 'Tasks.usersController.selection',
               localize: YES,
               rowHeight: 22,
