@@ -407,7 +407,11 @@ Tasks.assignmentsController = SC.ArrayController.create(
         var bPriority = b.get('priority');
         if(aPriority !== bPriority) return CoreTasks.taskPriorityWeights[bPriority] - CoreTasks.taskPriorityWeights[aPriority];
         
-        return CoreTasks.taskTypeWeights[b.get('type')] - CoreTasks.taskTypeWeights[a.get('type')];
+        var aType = a.get('type');
+        var bType = b.get('type');
+        if(aType !== bType) return CoreTasks.taskTypeWeights[bType] - CoreTasks.taskTypeWeights[aType];
+        
+        return b.get('id') - a.get('id');
         
       }),
       treeItemIsExpanded: YES

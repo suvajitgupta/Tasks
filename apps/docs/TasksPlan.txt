@@ -62,7 +62,7 @@ v Add context menu to Add/Show Details/Delete/View Statistics of a project <JH2>
 
 Task Manager GUI
 ^ Group Tasks by User and display Task id, summary, and effort (if specified) on far right [SG] <JH2> @Done $Feature %Passed
-^ Support automatic sorting of tasks by status, validation, priority, and type (in order)[SG] <SG> @Done $Feature %Passed
+^ Support automatic sorting of tasks by status, validation, priority, type, and ID (in that order)[SG] <SG> @Done $Feature %Passed
 - Allow Tasks under an assignee to be hidden/disclosed [SG] <JH2> @Done $Feature %Passed
 - Show Task Type via different icons [SG] <JH2> @Done $Feature %Passed
 - Show Task Priority (font style), Status (font color), Validation (background color) [SG] <MB> @Done $Feature %Passed
