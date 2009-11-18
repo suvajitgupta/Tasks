@@ -105,6 +105,8 @@ Tasks.mixin({
       
       if(!this._alreadyLoggedIn) { // not a refresh
         
+        this._alreadyLoggedIn = true;
+        
         // Greet user and save login session information
         CoreTasks.set('currentUser', currentUser);
         CoreTasks.setPermissions();
