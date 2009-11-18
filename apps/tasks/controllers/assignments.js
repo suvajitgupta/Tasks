@@ -60,6 +60,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
   
   contentBinding: 'Tasks.projectController.tasks',
   assignedTasks: null,
+  nodesExpanded: true,
   _timer: null,
   
   assigneeSelection: null,
@@ -428,7 +429,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
         return b.get('id') - a.get('id');
         
       }),
-      treeItemIsExpanded: YES
+      treeItemIsExpanded: this.nodesExpanded
     }));
   },
   
@@ -439,7 +440,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
       this._timer = null;
     }
   	this.invokeOnce(this.showAssignments);
-  }.observes('[]'),
+  }.observes('[]', 'nodesExpanded'),
   
   _filteringHasChanged: function() { // allow users to change filters over a half second before redrawing tasks pane
     if (this._timer) this._timer.invalidate();

@@ -47,6 +47,8 @@ SC.stringsFor('English', {
   "_AssigneeSelectionTooltip": "Use all or part of full/login name separated via commas or spaces; Type 'None' to see unassigned tasks",
   "_TasksSearchHint": "Search by task #IDs or name",
   "_TasksSearchTooltip": "Separate #IDs via commas or spaces, otherwise perform case-insensitive match",
+  "_Expanded": "Expanded",
+  "_ExpandedTooltip": "Check this box to keep assignees grouping tasks expanded below",
   
   // Project strings
   "_AddProject": "Add Project",
@@ -71,8 +73,8 @@ SC.stringsFor('English', {
   "_NewTask": "New Task",
   "_DelTask": "Del. Task",
   "_DelTaskTooltip": "Delete selected task",
-  "_FilterTasks": "Filter Tasks",
-  "_FilterTasksTooltip": "Filter tasks using attributes (type, priority, status, validation)",
+  "_Filter": "Filter Tasks",
+  "_FilterTooltip": "Filter tasks using attributes (type, priority, status, validation)",
   "_Type": "TYPE",
   "_TypeTooltip": "Kind of task: user visible functionality, defect fix, or other",
   "_Feature": "Feature",

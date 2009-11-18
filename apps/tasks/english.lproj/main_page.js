@@ -147,7 +147,7 @@ Tasks.mainPage = SC.Page.design({
       childViews: [
       
         SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerY: 0, left: 5, height: 18, width: 105 },
+          layout: { centerY: 0, left: 0, height: 18, width: 105 },
           icon: 'add-icon',
           value: "_AddProject".loc(),
           classNames: ['toolbar-label'],
@@ -158,7 +158,7 @@ Tasks.mainPage = SC.Page.design({
         }),
       
         SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerY: 0, left: 115, height: 18, width: 105 },
+          layout: { centerY: 0, left: 100, height: 18, width: 105 },
           icon: 'delete-icon',
           value: "_DelProject".loc(),
           classNames: ['toolbar-label'],
@@ -174,7 +174,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerY: 0, left: 250, height: 18, width: 95 },
+          layout: { centerY: 0, left: 230, height: 18, width: 95 },
           icon: 'add-icon',
           value: "_AddTask".loc(),
           classNames: ['toolbar-label'],
@@ -185,7 +185,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerY: 0, left: 350, height: 18, width: 90 },
+          layout: { centerY: 0, left: 325, height: 18, width: 90 },
           icon: 'delete-icon',
           value: "_DelTask".loc(),
           classNames: ['toolbar-label'],
@@ -195,18 +195,26 @@ Tasks.mainPage = SC.Page.design({
           action: 'deleteTask'
         }),
         
+        SC.CheckboxView.design(Tasks.ToolTip, {
+          layout: { centerY: 0, left: 430, height: 18, width: 75 },
+          classNames: ['toolbar-label'],
+          title: "_Expanded".loc(),
+          toolTip: "_ExpandedTooltip".loc(),
+          valueBinding: 'Tasks.assignmentsController.nodesExpanded'
+        }),
+                
         SC.View.design({
-          layout: { top: 8, bottom: 8, right: 540, width: 2 },
+          layout: { top: 8, bottom: 8, right: 505, width: 2 },
           classNames: ['top-bar-divider']
         }),
 
         SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerY: 0, right: 440, height: 18, width: 90 },
+          layout: { centerY: 0, right: 440, height: 18, width: 60 },
           displayProperties: [ 'icon' ],
           iconBinding: 'Tasks.assignmentsController.attributeFilterIcon',
-          value: "_FilterTasks".loc(),
+          value: "_Filter".loc(),
           classNames: ['toolbar-label'],
-          toolTip: "_FilterTasksTooltip".loc(),
+          toolTip: "_FilterTooltip".loc(),
           target: 'Tasks',
           action: 'filterTasks'
         }),
@@ -339,7 +347,6 @@ Tasks.mainPage = SC.Page.design({
     projectsList: SC.outlet('masterDetailView.projectsMasterView.childViews.0.contentView'),
     tasksList: SC.outlet('masterDetailView.tasksDetailView.childViews.0.contentView'),
     
-    // FIXME: [SC] Beta: fix radio buttons being cropped at bottom on Firefox/Windows
     controlBarView: SC.View.design({
       layout: { left: 0, right: 0, bottom: 20, height: 51 },
       classNames: ['control-bar'],
