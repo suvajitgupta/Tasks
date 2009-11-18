@@ -71,6 +71,7 @@ CoreTasks = SC.Object.create({
    * @returns {Object} user record, if matching one exists, or null.
    */
   getUser: function(loginName) {
+    if (!this.allUsers) return null;
     var usersCount = this.allUsers.get('length');
     var matchingUser = null;
     for(var i = 0; i < usersCount; i++) {
@@ -90,6 +91,7 @@ CoreTasks = SC.Object.create({
    * @returns {Array} array of user records, if matching ones exist, or empty array.
    */
   getUsers: function(string) {
+    if (!this.allUsers) return [];
     var usersCount = this.allUsers.get('length');
     var namePattern = new RegExp(string);
     var matchingUsers = [];
@@ -109,6 +111,7 @@ CoreTasks = SC.Object.create({
    * @returns {Object) return project of given name if it exists, null otherwise.
    */
   getProject: function(name) {
+    if (!this.allProjects) return null;
     var projectsCount = this.allProjects.get('length');
     var matchingProject = null;
     for(var i = 0; i < projectsCount; i++) {
