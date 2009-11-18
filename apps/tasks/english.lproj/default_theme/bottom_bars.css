@@ -49,8 +49,14 @@
   padding-right: 4px;
 }
 
+/*
+// FIXME: [SC] Hacks to workaround bug in radiobutton styling on non-OSX platforms
+*/
 .mozilla.windows .control-bar .sc-radio-view.sc-layout-horizontal .sc-radio-button {
-  margin-top: -10px;
+  margin-top: -12px;
+}
+.safari.mac .control-bar .sc-radio-view.sc-layout-horizontal .sc-radio-button {
+  margin-top: 4px;
 }
 
 /*-----------------------------------------------------------------
