@@ -216,8 +216,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     var idPattern = null, namePattern = null;
     var idMatches = sf.match(/#([\-\d]+)/g);
     // console.log("DEBUG: idMatches = " + idMatches);
-    if(idMatches) idPattern = new RegExp(idMatches.join("|").replace(/#/g,''));
-    else namePattern = new RegExp(sf, 'i');
+    if(!idMatches) namePattern = new RegExp(sf, 'i');
     
     // Get time left, if any specified, in selected project.
     var projectTimeLeft = null;
@@ -256,9 +255,9 @@ Tasks.assignmentsController = SC.ArrayController.create(
             var validation = task.get('validation');
             if(this.attributeFilterCriteria.indexOf(validation) === -1) return;
           }
-          if(idPattern) {
-            var taskId = '' + task.get('displayId');
-            if(!taskId.match(idPattern)) return;
+          if(idMatches) {
+            var taskId = task.get('displayId');
+            if(idMatches.indexOf(taskId) == -1) return;
           }
           else if(namePattern) {
             if(!taskName.match(namePattern)) return;
