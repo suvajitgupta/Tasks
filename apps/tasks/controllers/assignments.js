@@ -257,7 +257,22 @@ Tasks.assignmentsController = SC.ArrayController.create(
           }
           if(idMatches) {
             var taskId = task.get('displayId');
-            if(idMatches.indexOf(taskId) == -1) return;
+            if(idMatches.indexOf(taskId) === -1) { // doesn't match task ID exactly
+              // see if any task ID entered in the search is a part of the task name
+              var taskNameHasID = false;
+              for (var i = 0; !taskNameHasID && i < idMatches.length; i++) {
+                var taskIdMatches = taskName.match(/#([\-\d]+)/g);
+                if(taskIdMatches) { // task name has ID(s) in it
+                  for (var j=0; j < taskIdMatches.length; j++) {
+                    if(taskIdMatches[j] === idMatches[i]) { // found match!
+                      taskNameHasID = true;
+                      break;
+                    }
+                  }
+                }
+              }
+              if(!taskNameHasID) return;
+            }
           }
           else if(namePattern) {
             if(!taskName.match(namePattern)) return;
