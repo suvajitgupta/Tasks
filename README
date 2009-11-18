@@ -27,31 +27,11 @@ INITIAL PERSEVERE SETUP
 
 1) Start the Persevere server (see above).
 
-2) Navigate to the following URL...
+2) Run a script to create the first user, after which you can log into Tasks
+   and use the User Manager GUI:
 
-http://localhost:8088/tasks-server/explorer.html
 
-3) Select "user" (with a lowercase "u") from the "Select a class/table"
-   dropdown menu.
-
-4) Click on the "Create New User" button.
-
-5) In the dialog box, enter the following JSON snippet...
-
-{ name: '<full name>', loginName: '<initials>', role: '<role>' }
-
-...where role is ("_Manager" | "_Developer" | "_Tester").
-Note: the underscores are necessary for internationalization.
-
-For example...
-
-{ name: 'Suvajit Gupta', loginName: 'SG', role: '_Manager' }
-{ name: 'Sean Eidemiller', loginName: 'SE', role: '_Developer' }
-
-6) Repeat as desired for multiple users.
-
-7) Click the "Save" button.
-
+./user-add.sh "System Admin" SA Manager localhost:8088
 
 RUNNING TASKS
 ==============================================================================
@@ -148,3 +128,10 @@ The color indicators on the filter icon, as well as numerous other icons in Task
 Silk icon set 1.3
 Mark James - http://www.famfamfam.com/lab/icons/silk/
 
+
+PERSEVERE ADMINISTRATION
+==============================================================================
+
+1) Navigate to the following URL to directly manipulate Persevere data:
+
+http://localhost:8088/tasks-server/explorer.html
