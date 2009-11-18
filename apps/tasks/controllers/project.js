@@ -18,7 +18,14 @@ Tasks.projectController = SC.ObjectController.create(
   contentBindingDefault: SC.Binding.single(),
   
   _contentDidChange: function() { // when a new project is selected
-    Tasks.deselectTasks();
+    var last = this._project,
+        cur = this.get('content') ;
+    
+    if (cur && cur.firstObject) cur = cur.firstObject() ;
+    if (last !== cur) {
+      Tasks.deselectTasks() ;
+      this._project = cur ;
+    }
   }.observes('content')
   
 });
