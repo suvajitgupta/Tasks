@@ -49,6 +49,10 @@
   padding-right: 4px;
 }
 
+.mozilla.windows .control-bar .sc-radio-view.sc-layout-horizontal .sc-radio-button {
+  margin-top: -10px;
+}
+
 /*-----------------------------------------------------------------
  * Status bar styles
  */
