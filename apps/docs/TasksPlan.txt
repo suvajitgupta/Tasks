@@ -29,12 +29,11 @@ General Infrastructure
 - Implement GUI-based RBAC (role-based access control) <JH2> [SG] $Feature @Done %Passed
 - Beta: Implement Server-based RBAC (role-based access control) <SG> [JH2] @Active
 v Make task in-cell editors fit with collection view item size [SG] <JH2> $Bug
-v Track/optimize calls to assignments controller for redrawing tasks tree [BB] <SG> @Active
+v Track/optimize calls to assignments controller for redrawing tasks tree [BB] <SG> @Risky
 v Make buttons depressable to provide feedback when using them [SG] $Feature
 - Allow direct bookmarking of Tasks project names using SproutCore routes [SG] $Feature @Done %Passed
 - Beta: Add support for leaving comments in record descriptions [SG] <SE> $Feature
 - Add support for attachments in record descriptions [SG] <SE> $Feature
-- Add some simple metrics/reporting capabilities <EG> [SG] $Feature
 v Provide support for color-blind users (don't use color coding as only mechanism for status/validation) [SG] $Feature
 
 Project Manager GUI
@@ -58,7 +57,7 @@ v Disable Add/Del. Tasks buttons when on "All Tasks" project [SG] <BB> @Done %Pa
 ^ Allow multi-task drag-n-drop reallocation to other projects [BB] <SG> @Done $Feature %Passed
 ^ Add popup viewer/editor for Project time left/description [SG] $Feature @Done %Passed
 - Add Project Statistics popup to show breakdown by Task attributes (what percent in each) [SG] $Feature
-v Add context menu to Add/Show Details/Delete/View Statistics of a project <JH2> [SG] $Feature
+v Add project context menu with options: Add, Edit..., Delete, Statistics... <JH2> [SG] $Feature
 
 Task Manager GUI
 ^ Group Tasks by User and display Task id, summary, and effort (if specified) on far right [SG] <JH2> @Done $Feature %Passed
@@ -85,7 +84,7 @@ v Enable/disable "Del. Task" button based on having a selected task [SG] @Done %
 v Add hover over tooltip for assignees to show how many tasks they have and to explain loading color codes [SG] @Done $Feature %Passed
 ^ Allow multi-task drag-n-drop reassignment to other assignees [BB] <SG>  @Done $Feature %Passed
 ^ Add popup viewer/editor for Task submitter, assignee, effort, project, and description [JH2] <SG> @Done %Passed $Feature
-v Add context menu to Add/Show Details/Delete/Snapshot a task <JH2> [SG] $Feature
+v Add task context menu with options: Add, Edit..., Delete, Snapshot (copy ID/name to clipboard) <JH2> [SG] $Feature
 | "Snapshot" copies task ID and name into clipboard
 - Beta: Add abiity to watch tasks and get email notifications on task changes [SG] <JH2> $Feature
 - Beta: Highlight newly added tasks with a badge to the left <SE> [SG] $Feature
@@ -100,7 +99,6 @@ User Manager GUI
 ^ Add login screen to identify user who logs in (and handle login failures properly) [SG] <SE> @Done %Passed $Feature
 - Allow new guests to sign up from login screen and them in immediately after [JH2] <SG> @Done %Passed $Feature
 ^ Add assignee filtering (space or comma separators, "none" for unassigned) & corresponding delete button in top toolbar [SG] <JH2> @Done $Feature %Passed
-- Allow assignee filtering by loading status (overloaded, underloaded) [SG] $Feature
 - Allow assignee filtering by matching any part of login or full name [SG] $Feature @Done %Passed
 - Set assignee selection filter to logged in user if they are a Developer, filter out Other tasks if they are a Tester [SG] @Done $Feature %Passed
 ^ Add User Manager with "Add/Del. User"  buttons in toolbar (reuse user information view with signup screen) [SG] <JH2> @Done %Passed $Feature
@@ -126,7 +124,7 @@ Application Manager GUI
 - Beta: Add "Export to HTML" capability for printable & human-readable version (for baselining tasks for a release, for instance) [SG] $Feature
 - Add online "Help" button in top toolbar & popup help window [SG] @Done %Passed $Feature
 v Add screenshots with callouts for online help content [SG] $Feature
-- Add online training video using Captivate or Camtasia [SG] $Feature
+v Add online training video using Captivate or Camtasia [SG] $Feature
 - Add onscreen help (on panel fields that are complex and on blank workspace to assist new users) <MG> [SG] @Active $Feature
 - Add Logout button to exit in top toolbar (confirm before exiting, reload data/clear all filters) [SG] <JH2> @Done $Feature %Passed
 - Beta: Prompt user to save changes (if any) before logging out [SG] <SE> $Feature
@@ -134,16 +132,16 @@ v Add screenshots with callouts for online help content [SG] $Feature
 | See demo.sproutcore.com/user_defaults and lookup SproutCore blog for Charles' posting on this topic
 - Add "Collapse" button to close all assignee treenodes and show everyone at a glance [SG] $Feature @Done %Passed
 v Add hotkeys for common operations (like add Projects/Tasks and Save) [EG] <SG> $Feature @Done %Passed
-v Add Undo/Redo buttons in top toolbar (till last Save) [SG] <SE> $Feature
+- Add Undo/Redo buttons in top toolbar (till last Save) [SG] <SE> $Feature
 v Support disconnected operation and synchronization after network reconnection using SproutDB [SG] <SE> $Feature
 
 Server
 ^ Build persistence server using Persevere [SE] <SG> @Done %Passed
-- Beta: Create command-line scripts to start/stop Server and to create users <SG> [SE] $Feature @Active
-- Beta: Document steps for creating a team production deployment of Tasks [SE] <SG>
-^ Beta: Build persistence server: local using Sinatra/SQLite and remote using Google App Engine [JH2] <SG> @Active
+- Create command-line scripts to start/stop Server and to create users <SG> [SE] $Feature @Done %Passed
+- Beta: Document steps for creating a team production deployment of Tasks [SE] <SG> @Active
+^ Beta: Deploy publicly-accessible instance using Google App Engine/Pyton [JH2] <SG> @Active
 - Beta: Implement Server-based user authentication & authorization (Role-based access control) [JH2] <SG> @Active
-- Beta: Add email notifications on noteworthy Task changes [JH2] <SG> $Feature @Active
+- Beta: Add email notifications on noteworthy Task changes [JH2] <SG> $Feature
 | Notify Assignee when Task is added by Submitter different than Assignee (via New or Reassignment operations)
 | Notify Assignee when Done Task is Failed
 | Notify Managers when Task is flagged as Risky
@@ -173,4 +171,4 @@ Testing/Rollout
 - Note all FIXMEs/TODOs/bugs & remove these as they are resolved [SG] <BM> @Active
 - Create automated test scripts using Selenium [BM] <SG> @Active
 - Collect/address feedback from Alpha/Beta users and targeted usability tests <MG> [SG] @Active
-- Provide SproutCore doctool-style comments [SG] <SE>
+v Provide SproutCore doctool-style comments [SG] <SE>

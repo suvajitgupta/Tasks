@@ -126,7 +126,12 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
       
       var currentName = this.get('name');
       var projectHash = CoreTasks.Project.parse(value);
-      // console.log("PARSED PROJECT: " + JSON.stringify(projectHash));
+      console.log("PARSED PROJECT: " + JSON.stringify(projectHash));
+      
+      if(projectHash.name === "Fuck") {
+        console.log("Throwing...");
+        throw "Watch your language!";
+      }
       
       this.propertyWillChange('name');
       this.writeAttribute('name', projectHash.name);
