@@ -11,9 +11,6 @@
 * Control bar styles
 */
 
-/*
-// TODO: [MG] Beta: make tasks control bar look convex like the toolbar at the top (dark at the bottom as well)
-*/
 .control-bar {
   background: static_url('images/default-theme-repeat-x.png') repeat-x 0 -71px; 
 }
@@ -26,22 +23,12 @@
   text-align: center !important;
 }
 
-.filter-pane .task-attribute-set {
-  font-size: 10px !important;
-  text-align: center !important;
-  line-height: 1.5;
-  border: 1px solid #bcbcbc;
-	background: #cfcfcf;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-}
-
 .task-attribute-set {
   font-size: 10px !important;
   text-align: center !important;
   line-height: 1.5;
   border: 1px solid #aaa;
-	background: #cecece;
+	background: #FFF;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
 }
