@@ -376,9 +376,9 @@ Tasks.assignmentsController = SC.ArrayController.create(
   
     var displayEffort = '';
     if(totalDoneEffortMin !== 0) {
-      var totalDoneEffort = '' + parseFloat(totalDoneEffortMin).toFixed(1);
+      var totalDoneEffort = '' + parseFloat(totalDoneEffortMin.toFixed(1));
       if (totalDoneEffortMax !== totalDoneEffortMin) {
-        totalDoneEffort += '-' + parseFloat(totalDoneEffortMax).toFixed(1);
+        totalDoneEffort += '-' + parseFloat(totalDoneEffortMax.toFixed(1));
       }
       displayEffort = "_Done".loc() + ': ' + CoreTasks.displayTime(totalDoneEffort) + (doneTaskWithUnspecifiedEffort? '?' : '');
     }
@@ -393,9 +393,9 @@ Tasks.assignmentsController = SC.ArrayController.create(
         else if(effortGap > 1 && effortGapPercent > 15) loading = CoreTasks.USER_OVER_LOADED;
         else loading = CoreTasks.USER_PROPERLY_LOADED;
       }
-      var totalEffort = '' + parseFloat(totalEffortMin).toFixed(1);
+      var totalEffort = '' + parseFloat(totalEffortMin.toFixed(1));
       if (totalEffortMax !== totalEffortMin) {
-        totalEffort += '-' + parseFloat(totalEffortMax).toFixed(1);
+        totalEffort += '-' + parseFloat(totalEffortMax.toFixed(1));
       }
       if(displayEffort !== '') displayEffort += ', ';
       displayEffort += "_Todo".loc() + ': ' + CoreTasks.displayTime(totalEffort) + (taskWithUnspecifiedEffort? '?' : '');
