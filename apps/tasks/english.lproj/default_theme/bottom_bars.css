@@ -22,6 +22,7 @@
   font-size: 10px !important;
   font-weight: bold !important;
   color: #000 !important;
+  text-shadow: #fff 0 1px 1px;
   text-align: center !important;
 }
 
@@ -39,8 +40,8 @@
   font-size: 10px !important;
   text-align: center !important;
   line-height: 1.5;
-  border: 1px solid #cfcfcf;
-	background: #cfcfcf;
+  border: 1px solid #aaa;
+	background: #cecece;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
 }
