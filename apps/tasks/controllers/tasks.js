@@ -14,6 +14,7 @@ Tasks.tasksController = SC.TreeController.create(
 /** @scope Tasks.tasksController.prototype */ {
 
   contentBinding: 'Tasks.assignmentsController.assignedTasks',
+  allowsEmptySelection: NO,
   treeItemIsGrouped: YES,
   
   isEditable: function() {
@@ -21,7 +22,7 @@ Tasks.tasksController = SC.TreeController.create(
     if(!CoreTasks.getPath('permissions.canEditTask')) return false;
     
     var sel = this.get('selection');
-    if(!sel) return false;
+    if(!sel || sel.get('length') === 0) return false;
     
     return true;
     
@@ -32,7 +33,7 @@ Tasks.tasksController = SC.TreeController.create(
     if(!CoreTasks.getPath('permissions.canDeleteTask')) return false;
     
     var sel = this.get('selection');
-    if(!sel) return false;
+    if(!sel || sel.get('length') === 0) return false;
     
     return true;
     
@@ -43,7 +44,7 @@ Tasks.tasksController = SC.TreeController.create(
     if(!CoreTasks.getPath('permissions.canEditTask')) return false;
     
     var sel = this.get('selection');
-    if(!sel) return false;
+    if(!sel || sel.get('length') === 0) return false;
     
     var selectedTask = sel.firstObject();
     if(!selectedTask) return false;
@@ -53,7 +54,7 @@ Tasks.tasksController = SC.TreeController.create(
   
   type: function(key, value) {
     var sel = this.get('selection');
-    if(!sel) return;
+    if(!sel || sel.get('length') === 0) return false;
     var firstType = null;
     if (value !== undefined) {
       sel.forEach(function(task) {
@@ -72,7 +73,7 @@ Tasks.tasksController = SC.TreeController.create(
   
   priority: function(key, value) {
     var sel = this.get('selection');
-    if(!sel) return;
+    if(!sel || sel.get('length') === 0) return false;
     var firstPriority = null;
     if (value !== undefined) {
       sel.forEach(function(task) {
@@ -91,7 +92,7 @@ Tasks.tasksController = SC.TreeController.create(
   
   developmentStatusWithValidation: function(key, value) {
     var sel = this.get('selection');
-    if(!sel) return;
+    if(!sel || sel.get('length') === 0) return false;
     var firstDevelopmentStatusWithValidation = null;
     if (value !== undefined) {
       sel.forEach(function(task) {
@@ -110,7 +111,7 @@ Tasks.tasksController = SC.TreeController.create(
   
   validation: function(key, value) {
     var sel = this.get('selection');
-    if(!sel) return;
+    if(!sel || sel.get('length') === 0) return false;
     var firstValidation = null;
     if (value !== undefined) {
       sel.forEach(function(task) {
