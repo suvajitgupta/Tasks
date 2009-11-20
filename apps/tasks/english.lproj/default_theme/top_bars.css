@@ -28,7 +28,7 @@
 
 .title-bar-label {
   font-size: 10px !important;
-  color: #eee !important;
+  color: #DDD !important;
   text-align: center !important;
 }
 
@@ -43,20 +43,20 @@
 }
 
 .tasks-version {
-  color: #fff !important;
+  color: #DDD !important;
   font-size: 10px !important;
 }
 
 .user-role-message {
   font-size: 11px !important;
   text-align: center !important;
-  color: white !important;
+  color: #DDD !important;
 }
 
 .window-title {
   font-size: 14px !important;
   text-align: center !important;
-  color: white !important;
+  color: #DDD !important;
 }
 
 .save-icon {
@@ -118,7 +118,7 @@
 
 .toolbar-label {
   font-size: 10px !important;
-  color: white !important;
+  color: #EEE !important;
   text-align: center !important;
 }
 
