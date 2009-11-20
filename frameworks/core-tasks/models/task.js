@@ -294,7 +294,6 @@ CoreTasks.Task = CoreTasks.Record.extend({
     if (value !== undefined) {
       
       var taskHash = CoreTasks.Task.parse(value, false);
-      // console.log("PARSED TASK: " + JSON.stringify(taskHash));
       
       if(taskHash.priority) {
         this.propertyWillChange('priority');
@@ -473,7 +472,7 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
     
     // extract task effort
     var taskEffort = CoreTasks.Task.parseEffort(taskLine);
-           
+
     // extract task assignee
     var taskAssignee = null;
     var taskAssigneeMatches = /\[([\w]+)\]/.exec(taskLine);
@@ -492,6 +491,7 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
     var taskTypeMatches = /\$([\w]+)/.exec(taskLine);
     var taskType = fillDefaults? CoreTasks.TASK_TYPE_OTHER : null;
     if(taskTypeMatches) {
+      
       taskType = '_' + taskTypeMatches[1];
     }
     
@@ -513,7 +513,7 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
       }
     }
     
-    return {
+    var ret = {
       name: taskName,
       priority: taskPriority,
       effort: taskEffort,
@@ -523,6 +523,9 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
       developmentStatus: taskStatus,
       validation: taskValidation
     };
+    // console.log("DEBUG: Task hash = " + JSON.stringify(ret));
+    return ret;
+    
   }
   
 });

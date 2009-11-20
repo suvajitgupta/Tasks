@@ -140,7 +140,6 @@ Server
 ^ Build persistence server using Persevere [SE] <SG> @Done %Passed
 - Create command-line scripts to start/stop Server and to create users <SG> [SE] $Feature @Done %Passed
 - Beta: Document steps for creating a team production deployment of Tasks [SE] <SG> @Active
-^ Beta: Deploy publicly-accessible instance using Google App Engine/Pyton [JH2] <SG> @Active
 - Beta: Implement Server-based user authentication & authorization (Role-based access control) [JH2] <SG> @Active
 - Beta: Add email notifications on noteworthy Task changes [JH2] <SG> $Feature
 | Notify Assignee when Task is added by Submitter different than Assignee (via New or Reassignment operations)
@@ -164,6 +163,7 @@ Styling/Hardening
 - Handle secondary scenarios/provide good diagnostics [SG] <SE> @Active
 
 Packaging/Delivery
+- Deploy publicly-accessible instance using Google App Engine/Python [JH2] <SG> @Done %Passed
 ^ Develop Web client (ported to Firefox, Internet Explorer, Safari, Chrome) [SG] @Done %Passed
 - Develop Mobile client using PhoneGap [SG] <MB>
 v Develop Desktop client using Webkit [SG] <MB>

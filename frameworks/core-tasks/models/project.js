@@ -126,12 +126,6 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
       
       var currentName = this.get('name');
       var projectHash = CoreTasks.Project.parse(value);
-      console.log("PARSED PROJECT: " + JSON.stringify(projectHash));
-      
-      if(projectHash.name === "Fuck") {
-        console.log("Throwing...");
-        throw "Watch your language!";
-      }
       
       this.propertyWillChange('name');
       this.writeAttribute('name', projectHash.name);
@@ -228,17 +222,22 @@ CoreTasks.Project.mixin(/** @scope CoreTasks.Project */ {
    * @returns {Object} Hash of parsed parameters.
    */
   parse: function(line) {
+    
     var projectName = line;
     var projectNameMatches = line.match(/([^\{\#]+)/);
     if(projectNameMatches) {
       projectName = projectNameMatches[1].replace(/\s+$/, ''); // trim trailing whitespace, if any
     }
     var projectTimeLeft = CoreTasks.Project.parseTimeLeft(line);
-    return {
+    
+    var ret = {
       name: projectName,
       timeLeft: projectTimeLeft,
       tasks: []
     };
+    // console.log("DEBUG: Project hash = " + JSON.stringify(ret));
+    return ret;
+    
   }
   
 });
