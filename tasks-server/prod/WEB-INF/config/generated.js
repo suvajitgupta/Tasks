@@ -47,7 +47,30 @@
 			},
 			"prototype":{
 			},
-			"instances":{"$ref":"../user/"}
+			"instances":{"$ref":"../user/"},
+			"authenticate":
+function (username, password) {
+    if (username === null) {
+        return null;
+    }
+    var error = "null";
+    var successful = false;
+    var user = load("user/[?loginName=$1]", username)[0];
+    if (user) {
+        if (user.password === password || user.password === null) {
+            successful = true;
+        } else {
+            error = "(" + user.password + ")";
+        }
+    } else {
+        error = " User " + username + " Found";
+    }
+    if (!successful) {
+        throw new AccessError("Authentication failed  " + error);
+    }
+    return load("user/[?loginName=$1]", username)[0];
+}
+
 		}
 	},
 	{"id":"generated.js?sources?1",

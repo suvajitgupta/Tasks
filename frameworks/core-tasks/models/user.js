@@ -189,11 +189,6 @@ CoreTasks.User.mixin(/** @scope CoreTasks.User */ {
       loginName: "'%@'".fmt(loginName),
       password: "'%@'".fmt(passwordHash)
     };
-    
-    var loginHash = {
-      loginName: '%@'.fmt(loginName),
-      password: '9b7e26f2d7f75f2488da08771a730fcc5372fcd8'
-    };
 
     // Send the request off to the server.
     CoreTasks.executeTransientGet(CoreTasks.User.resourcePath, undefined, params);
