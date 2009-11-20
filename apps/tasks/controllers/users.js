@@ -36,7 +36,6 @@ Tasks.usersController = SC.ArrayController.create(Tasks.StatusChanged,
     if (status & SC.Record.READY){
       var currentUser = CoreTasks.getUser(Tasks.loginName);
       if(currentUser) {
-        this.set('editableUsers', null);
         if(currentUser.get('role') === CoreTasks.USER_ROLE_MANAGER) {
           this.set('editableUsers', this.arrangedObjects);
         }
