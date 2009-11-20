@@ -74,6 +74,19 @@
   background: #A33 none repeat scroll 0 0 !important;
 }
 
+.assignee-red-flag {
+  position: absolute !important;
+  top: 3px !important;
+  left: 300px !important;
+  width: 16px !important;
+  z-index: 10 !important;
+}
+
+.red-flag-icon {
+  width: 20px !important;
+  height: 16px !important;
+  background: static_url('images/red-flag.png') no-repeat;
+}
 
 /*-----------------------------------------------------------------
  * Task list item styles

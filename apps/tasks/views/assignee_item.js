@@ -48,6 +48,14 @@ Tasks.AssigneeItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
         }
       }
       
+      if(content.get('risky') === true) {
+        context.begin('div').addClass('sc-view').addClass('assignee-red-flag').begin('img').attr({
+          src: SC.BLANK_IMAGE_URL,
+          title: "_RiskyTooltip".loc(),
+          alt: "_RiskyTooltip".loc()
+        }).addClass('red-flag-icon').end().end();
+      }
+      
       assigneeTooltip += (loadingTooltip + '_AssigneeEffortTooltip'.loc());
       context.attr('title', assigneeTooltip);
       context.attr('alt', assigneeTooltip);

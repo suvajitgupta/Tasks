@@ -124,6 +124,7 @@ SC.stringsFor('English', {
   "_Guest": 'Guest',
   "_Submitter:": "Submitter: ",
   "_Assignee:": "Assignee: ",
+  "_RiskyTooltip": "Assignee has risky task(s)",
   "_AssigneeNotLoaded": ", currently not loaded; ",
   "_AssigneeUnderLoaded": ", currently under loaded; ",
   "_AssigneeProperlyLoaded": ", currently properly loaded; ",

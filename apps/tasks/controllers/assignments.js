@@ -259,9 +259,9 @@ Tasks.assignmentsController = SC.ArrayController.create(
           if(this.attributeFilterCriteria.indexOf(type) === -1) return;
           var priority = task.get('priority');
           if(this.attributeFilterCriteria.indexOf(priority) === -1) return;
-          var status = task.get('developmentStatus');
-          if(this.attributeFilterCriteria.indexOf(status) === -1) return;
-          if(status === CoreTasks.TASK_STATUS_DONE) {
+          var developmentStatus = task.get('developmentStatus');
+          if(this.attributeFilterCriteria.indexOf(developmentStatus) === -1) return;
+          if(developmentStatus === CoreTasks.TASK_STATUS_DONE) {
             var validation = task.get('validation');
             if(this.attributeFilterCriteria.indexOf(validation) === -1) return;
           }
@@ -331,9 +331,11 @@ Tasks.assignmentsController = SC.ArrayController.create(
     var effortString, totalDoneEffortMin = 0, totalDoneEffortMax = 0, totalEffortMin = 0, totalEffortMax = 0, effortMin, effortMax;
     var task, tasks = assigneeObj.tasks;
     var len = tasks.get('length');
+    var riskyTaskCount = 0;
     if (len === 0) return; // nothing to do
     
     for (var i = 0; i < len; i++) {
+      
       task = tasks.objectAt(i);
       
       // Add observers to certain task properties that can require the assignmentsController to redraw
@@ -356,8 +358,10 @@ Tasks.assignmentsController = SC.ArrayController.create(
       // Extract/total effort for each taek (simple number or a range)
       effortString = task.get('effort');
       var priority = task.get('priority');
+      var developmentStatus = task.get('developmentStatus');
+      if(developmentStatus === CoreTasks.TASK_STATUS_RISKY) riskyTaskCount++;
       if(!effortString && priority !== CoreTasks.TASK_PRIORITY_LOW) {
-        if(task.get('developmentStatus') === CoreTasks.TASK_STATUS_DONE) doneTaskWithUnspecifiedEffort = true;
+        if(developmentStatus === CoreTasks.TASK_STATUS_DONE) doneTaskWithUnspecifiedEffort = true;
         else taskWithUnspecifiedEffort = true;
       }
       if(effortString) { // sum up task effort
@@ -372,7 +376,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
           effortMax = parseFloat(parseFloat(effortString.slice(idx+1), 10).toFixed(3));
           effortMax = CoreTasks.convertTimeToDays(effortMax + timeUnit);
         }
-        if(task.get('developmentStatus') === CoreTasks.TASK_STATUS_DONE) {
+        if(developmentStatus === CoreTasks.TASK_STATUS_DONE) {
           totalDoneEffortMin = parseFloat((totalDoneEffortMin + effortMin).toFixed(3));
           totalDoneEffortMax = parseFloat((totalDoneEffortMax + effortMax).toFixed(3));
         }
@@ -413,6 +417,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     assignmentNodes.push (SC.Object.create({
       displayName: displayName,
       displayEffort: displayEffort === ''? null : displayEffort,
+      risky:  riskyTaskCount > 0,
       loading: loading,
       assignee: assigneeObj.assignee,
       treeItemChildren: tasks.sort(function(a,b) { // sort by status, then by validation (if "Done"), then by priority, lastly by type

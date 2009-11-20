@@ -72,6 +72,7 @@ v Enable Task Validation radio buttons only when in Done status [SG] <JH2> $Feat
 ^ Allow task attribute filtering by type, priority, status, and validation fields via a toolbar button/pop up panel [SG] $Feature @Done %Passed
 - Add commonly-used "QuickFilters": Troubled, Unfinished, Unvalidated, Verified, Showstoppers, All [SG] $Feature @Done %Passed
 - Indicate whether there is a task attribute filter via a different icon on the toolbar button [SG] $Feature @Done %Passed
+- Indicate whether there are any risky items under an assignee using a red flag in assignee grouping bar [SG] $Feature @Done %Passed
 v Enable/disable "Del. Task" button based on having a selected task [SG] @Done %Passed $Feature
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done $Feature %Passed
 ^ Add "Add Task" & "Del. Task" buttons in tasks toolbar [SG] <SE> @Done %Passed $Feature
