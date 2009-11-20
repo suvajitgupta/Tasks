@@ -39,21 +39,25 @@
 .assignee-item .sc-outline {
 }
 
-.assignee-item .sc-outline .count {
-  right: 10px !important;
-  margin-top: 0px !important;
-  top: 5px !important;
-	font-weight: normal !important;
-  line-height: 11px !important;
-  color: black !important;
-  background: white none repeat scroll 0 0 !important;
+.assignee-red-flag {
+  position: absolute !important;
+  top: 3px !important;
+  left: 25px !important;
+  width: 16px !important;
+  z-index: 10 !important;
+}
+
+.red-flag-icon {
+  width: 16px !important;
+  height: 16px !important;
+  background: static_url('images/red-flag.png') no-repeat;
 }
 
 .assignee-item label {
   color: white !important;
   height: 20px !important;
   left: 4px !important;
-  padding-left: 10px !important;
+  padding-left: 25px !important;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
 }
@@ -74,19 +78,16 @@
   background: #A33 none repeat scroll 0 0 !important;
 }
 
-.assignee-red-flag {
-  position: absolute !important;
-  top: 3px !important;
-  left: 300px !important;
-  width: 16px !important;
-  z-index: 10 !important;
+.assignee-item .sc-outline .count {
+  right: 10px !important;
+  margin-top: 0px !important;
+  top: 5px !important;
+	font-weight: normal !important;
+  line-height: 11px !important;
+  color: black !important;
+  background: white none repeat scroll 0 0 !important;
 }
 
-.red-flag-icon {
-  width: 20px !important;
-  height: 16px !important;
-  background: static_url('images/red-flag.png') no-repeat;
-}
 
 /*-----------------------------------------------------------------
  * Task list item styles
