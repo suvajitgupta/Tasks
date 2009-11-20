@@ -147,7 +147,7 @@ Tasks.mainPage = SC.Page.design({
       childViews: [
       
         SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerY: 0, left: 0, height: 18, width: 105 },
+          layout: { centerY: 0, left: 10, height: 18, width: 105 },
           icon: 'add-icon',
           classNames: ['toolbar-label'],
           value: "_AddProject".loc(),
@@ -158,7 +158,7 @@ Tasks.mainPage = SC.Page.design({
         }),
       
         SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerY: 0, left: 100, height: 18, width: 105 },
+          layout: { centerY: 0, left: 115, height: 18, width: 105 },
           icon: 'delete-icon',
           classNames: ['toolbar-label'],
           value: "_DelProject".loc(),
@@ -174,7 +174,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerY: 0, left: 230, height: 18, width: 95 },
+          layout: { centerY: 0, left: 235, height: 18, width: 95 },
           icon: 'add-icon',
           classNames: ['toolbar-label'],
           value: "_AddTask".loc(),
@@ -185,7 +185,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerY: 0, left: 325, height: 18, width: 90 },
+          layout: { centerY: 0, left: 330, height: 18, width: 90 },
           icon: 'delete-icon',
           classNames: ['toolbar-label'],
           value: "_DelTask".loc(),
@@ -195,8 +195,13 @@ Tasks.mainPage = SC.Page.design({
           action: 'deleteTask'
         }),
         
+        SC.View.design({
+          layout: { top: 8, bottom: 8, left: 425, width: 2 },
+          classNames: ['top-bar-divider']
+        }),
+
         SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerY: 0, left: 425, height: 18, width: 75 },
+          layout: { centerY: 0, centerX: -40, height: 18, width: 75 },
           icon: 'collapse-icon',
           classNames: ['toolbar-label'],
           value: "_Collapse".loc(),
