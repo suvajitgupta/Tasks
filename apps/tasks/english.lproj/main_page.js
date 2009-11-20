@@ -196,23 +196,18 @@ Tasks.mainPage = SC.Page.design({
         }),
         
         SC.View.design({
-          layout: { top: 8, bottom: 8, left: 425, width: 2 },
+          layout: { top: 8, bottom: 8, right: 595, width: 2 },
           classNames: ['top-bar-divider']
         }),
 
         SC.LabelView.design(Tasks.SimpleButton,{
-          layout: { centerY: 0, centerX: -40, height: 18, width: 75 },
+          layout: { centerY: 0, right: 510, height: 18, width: 75 },
           icon: 'collapse-icon',
           classNames: ['toolbar-label'],
           value: "_Collapse".loc(),
           toolTip: "_CollapseTooltip".loc(),
           target: 'Tasks.assignmentsController',
           action: 'collapse'
-        }),
-                
-        SC.View.design({
-          layout: { top: 8, bottom: 8, right: 505, width: 2 },
-          classNames: ['top-bar-divider']
         }),
 
         SC.LabelView.design(Tasks.SimpleButton,{

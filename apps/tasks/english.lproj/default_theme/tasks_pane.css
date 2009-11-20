@@ -57,7 +57,7 @@
   color: white !important;
   height: 20px !important;
   left: 4px !important;
-  padding-left: 25px !important;
+  padding-left: 24px !important;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
 }
@@ -79,7 +79,7 @@
 }
 
 .assignee-item .sc-outline .count {
-  right: 10px !important;
+  right: 27px !important;
   margin-top: 0px !important;
   top: 5px !important;
 	font-weight: normal !important;
