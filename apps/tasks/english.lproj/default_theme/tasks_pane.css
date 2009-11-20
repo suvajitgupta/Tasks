@@ -75,7 +75,7 @@
 }
 
 .assignee-over-loaded label {
-  background: #A33 none repeat scroll 0 0 !important;
+  background: #C33 none repeat scroll 0 0 !important;
 }
 
 .assignee-item .sc-outline .count {
@@ -233,8 +233,8 @@
   padding-left: 3px;
   padding-right: 3px;
   color: white;
-  background: #A33 none repeat scroll 0 0;
-	outline: 1px solid #A33 !important;
+  background: #C33 none repeat scroll 0 0;
+	outline: 1px solid #C33 !important;
 }
 
 
