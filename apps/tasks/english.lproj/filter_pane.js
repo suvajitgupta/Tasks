@@ -256,14 +256,23 @@ Tasks.filterPane = SC.PanelPane.create({
       }),
 
       SC.ButtonView.design({
-        layout: { width: 100, height: 30, right: 10, bottom: 8 },
+        layout: { width: 80, height: 30, right: 96, bottom: 8 },
         titleMinWidth: 0,
-        keyEquivalent: 'escape',
+        theme: 'capsule',
+        title: "_Close".loc(),
+        target: 'Tasks.filterController',
+        action: 'closePane'
+      }),
+      
+      SC.ButtonView.design({
+        layout: { width: 80, height: 30, right: 10, bottom: 8 },
+        titleMinWidth: 0,
+        keyEquivalent: 'return',
         isDefault: YES,
         theme: 'capsule',
         title: "_Apply".loc(),
         target: 'Tasks.filterController',
-        action: 'closePane'
+        action: 'applyFilter'
       })
     
     ]

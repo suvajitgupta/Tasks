@@ -144,6 +144,15 @@ Tasks.assignmentsController = SC.ArrayController.create(
     return this.attributeFilter(CoreTasks.TASK_VALIDATION_FAILED, value);
   }.property('attributeFilterCriteria'),
   
+  attributeFilterCriteriaCopy: null,
+  
+  backupAttributeFilterCriteria: function() {
+    this.attributeFilterCriteriaCopy = this.attributeFilterCriteria.slice(0);
+  },
+  
+  restoreAttributeFilterCriteria: function() {
+    this.set('attributeFilterCriteria', this.attributeFilterCriteriaCopy);
+  },
   
   attributeFilterIcon: function() {
     return this.attributeFilterCriteria.length === 13? 'filter-tasks-icon-no-criteria' : 'filter-tasks-icon-has-criteria';
