@@ -440,7 +440,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
         var bType = b.get('type');
         if(aType !== bType) return CoreTasks.taskTypeWeights[bType] - CoreTasks.taskTypeWeights[aType];
         
-        return b.get('id') - a.get('id');
+        return a.get('id') - b.get('id');
         
       }),
       treeItemIsExpanded: this.nodesExpanded
