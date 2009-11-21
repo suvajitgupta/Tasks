@@ -5,8 +5,9 @@ Change to the directory where you would like to work on Tasks and type...
 
 git clone git://github.com/sproutit/sproutcore-abbot.git abbot
 git clone git://github.com/suvajitgupta/Tasks.git tasks
-cd tasks/frameworks/sproutcore
+cd tasks/frameworks
 git clone git://github.com/suvajitgupta/sproutcore.git sproutcore
+git checkout origin/stable
 cd ../../
 
 RUNNING PERSEVERE
