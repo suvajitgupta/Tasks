@@ -33,7 +33,7 @@ INITIAL PERSEVERE SETUP
    and use the User Manager GUI:
 
 ./user-add.sh "System Admin" SA Manager localhost:8088
-
+(press Enter twice to enter a blank password for now)
 
 RUNNING TASKS
 ==============================================================================
