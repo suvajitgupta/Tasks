@@ -667,8 +667,7 @@ SC.mixin(Function.prototype, {
 CoreTasks.HEADER_CONTENT_TYPE = 'Content-Type';
 CoreTasks.HEADER_VALUE_CONTENT_TYPE = 'application/json';
 CoreTasks.HEADER_ACCEPT = 'Accept';
-CoreTasks.HEADER_VALUE_ACCEPT =
-  'application/json, text/javascript, application/xml, text/xml, text/html, */*';
+CoreTasks.HEADER_VALUE_ACCEPT = 'application/json';
 
 // Reusable SC.Request objects.
 CoreTasks.REQUEST_GET = SC.Request.create({ type: 'GET', isJSON: YES })
