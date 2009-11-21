@@ -8,6 +8,11 @@ CoreTasks.NEW_TASK_NAME = '_NewTask';
 CoreTasks.TASK_TYPE_FEATURE = '_Feature'; // default
 CoreTasks.TASK_TYPE_BUG = '_Bug';
 CoreTasks.TASK_TYPE_OTHER = '_Other';
+CoreTasks.taskTypesAllowed = [
+  CoreTasks.TASK_TYPE_FEATURE,
+  CoreTasks.TASK_TYPE_BUG,
+  CoreTasks.TASK_TYPE_OTHER
+];
 
 CoreTasks.taskTypeWeights = {};
 CoreTasks.taskTypeWeights[CoreTasks.TASK_TYPE_FEATURE] = 3;
@@ -31,6 +36,12 @@ CoreTasks.TASK_STATUS_PLANNED = '_Planned'; // default
 CoreTasks.TASK_STATUS_ACTIVE = '_Active';
 CoreTasks.TASK_STATUS_DONE = '_Done';
 CoreTasks.TASK_STATUS_RISKY = '_Risky';
+CoreTasks.taskStatusesAllowed = [
+  CoreTasks.TASK_STATUS_PLANNED,
+  CoreTasks.TASK_STATUS_ACTIVE,
+  CoreTasks.TASK_STATUS_DONE,
+  CoreTasks.TASK_STATUS_RISKY
+];
 
 CoreTasks.taskStatusWeights = {};
 CoreTasks.taskStatusWeights[CoreTasks.TASK_STATUS_RISKY] = 4;
@@ -43,6 +54,11 @@ CoreTasks.taskStatusWeights[CoreTasks.TASK_STATUS_DONE] = 1;
 CoreTasks.TASK_VALIDATION_UNTESTED = '_Untested'; // default
 CoreTasks.TASK_VALIDATION_PASSED = '_Passed';
 CoreTasks.TASK_VALIDATION_FAILED = '_Failed';
+CoreTasks.taskValidationsAllowed = [
+  CoreTasks.TASK_VALIDATION_UNTESTED,
+  CoreTasks.TASK_VALIDATION_PASSED,
+  CoreTasks.TASK_VALIDATION_FAILED
+];
 
 CoreTasks.taskValidationWeights = {};
 CoreTasks.taskValidationWeights[CoreTasks.TASK_VALIDATION_FAILED] = 3;
@@ -227,11 +243,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
   type: SC.Record.attr(String, {
     isRequired: YES,
     defaultValue: CoreTasks.TASK_TYPE_OTHER,
-    allowed: [
-      CoreTasks.TASK_TYPE_FEATURE,
-      CoreTasks.TASK_TYPE_BUG,
-      CoreTasks.TASK_TYPE_OTHER
-    ]
+    allowed: CoreTasks.taskTypesAllowed
   }),
 
   /**
@@ -240,12 +252,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
   developmentStatus: SC.Record.attr(String, {
     isRequired: YES,
     defaultValue: CoreTasks.TASK_STATUS_PLANNED,
-    allowed: [
-      CoreTasks.TASK_STATUS_PLANNED,
-      CoreTasks.TASK_STATUS_ACTIVE,
-      CoreTasks.TASK_STATUS_DONE,
-      CoreTasks.TASK_STATUS_RISKY
-    ]
+    allowed: CoreTasks.taskStatusesAllowed
    }),
 
   developmentStatusWithValidation: function(key, value){
@@ -265,11 +272,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
   validation: SC.Record.attr(String, {
     isRequired: YES,
     defaultValue: CoreTasks.TASK_VALIDATION_UNTESTED,
-    allowed: [
-      CoreTasks.TASK_VALIDATION_UNTESTED,
-      CoreTasks.TASK_VALIDATION_PASSED,
-      CoreTasks.TASK_VALIDATION_FAILED
-    ]
+    allowed: CoreTasks.taskValidationsAllowed
   }),
 
   /**
@@ -491,25 +494,39 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
     var taskTypeMatches = /\$([\w]+)/.exec(taskLine);
     var taskType = fillDefaults? CoreTasks.TASK_TYPE_OTHER : null;
     if(taskTypeMatches) {
-      
-      taskType = '_' + taskTypeMatches[1];
+      if(CoreTasks.taskTypesAllowed.indexOf('_' + taskTypeMatches[1]) === -1) {
+        console.log('Task Parsing Error - illegal type: ' + taskTypeMatches[1]);
+      }
+      else {
+        taskType = '_' + taskTypeMatches[1];
+      }
     }
     
-    // extract task status
+    // extract task development status
     var taskStatusMatches = /@([\w]+)/.exec(taskLine);
     var taskStatus = fillDefaults? CoreTasks.TASK_STATUS_PLANNED : null;
     if(taskStatusMatches) {
-      taskStatus = '_' + taskStatusMatches[1];
+      if(CoreTasks.taskStatusesAllowed.indexOf('_' + taskStatusMatches[1]) === -1) {
+        console.log('Task Parsing Error - illegal status: ' + taskStatusMatches[1]);
+      }
+      else {
+        taskStatus = '_' + taskStatusMatches[1];
+      }
     }
     
     // extract task validation
     var taskValidationMatches = /%([\w]+)/.exec(taskLine);
     var taskValidation = fillDefaults? CoreTasks.TASK_VALIDATION_UNTESTED : null;
     if(taskValidationMatches) {
-      taskValidation = '_' + taskValidationMatches[1];
-      if(taskStatus && taskStatus !== CoreTasks.TASK_STATUS_DONE && taskValidation !== CoreTasks.TASK_VALIDATION_UNTESTED) {
-        taskValidation = null;
-        console.log('Task Parsing Error - validation of Passed/Failed only possible for status Done: ' + taskName);
+      if(CoreTasks.taskValidationsAllowed.indexOf('_' + taskValidationMatches[1]) === -1) {
+        console.log('Task Parsing Error - illegal validation: ' + taskValidationMatches[1]);
+      }
+      else {
+        taskValidation = '_' + taskValidationMatches[1];
+        if(taskStatus && taskStatus !== CoreTasks.TASK_STATUS_DONE && taskValidation !== CoreTasks.TASK_VALIDATION_UNTESTED) {
+          taskValidation = null;
+          console.log('Task Parsing Error - validation of Passed/Failed only possible for status Done: ' + taskName);
+        }
       }
     }
     

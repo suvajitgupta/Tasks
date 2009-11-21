@@ -9,8 +9,6 @@ sc_require('core');
  * @author Sean Eidemiller
  */
  
-// TODO: [SE] enforce valid values during record creation
-
 CoreTasks.RecordAttribute = SC.RecordAttribute.extend({
 
   /**
