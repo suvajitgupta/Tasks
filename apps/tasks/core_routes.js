@@ -48,6 +48,13 @@ Tasks.mixin( /** @scope Tasks */ {
     Show online help skipping authentication
   */
   routeToHelp: function(params) {
+    if(CoreTasks.get('currentUser')) { // logged in, so close
+      var mainPage = Tasks.getPath('mainPage.mainPane');
+      if(mainPage) {
+        mainPage.remove();
+        mainPage.destroy();
+      }
+    }
     Tasks.getPath('helpPage.mainPane').append();
   },
   
