@@ -54,9 +54,9 @@ http://localhost:4020/tasks
 TASKS OVERVIEW
 ==============================================================================
 
-Welcome to "Tasks!" I created "Tasks" for a few reasons:
+Welcome to "Tasks!" - it was created for a few reasons:
 
-1. To become a "real" sample application that goes beyond the "hello world"
+1. To become a comprehensive sample application that goes beyond  "hello world"
    examples (like "clock") and snippets showing off facets of SproutCore
    (like "drag").  SproutCore is very elegant and powerful framework and my
    goal is to use Tasks to ramp up as well as showcase its capabilities.
