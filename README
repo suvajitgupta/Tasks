@@ -32,8 +32,8 @@ INITIAL PERSEVERE SETUP
 2) Run a script to create the first user, after which you can log into Tasks
    and use the User Manager GUI:
 
-
 ./user-add.sh "System Admin" SA Manager localhost:8088
+
 
 RUNNING TASKS
 ==============================================================================
