@@ -9,7 +9,7 @@ cd tasks/frameworks
 rmdir sproutcore
 git clone git://github.com/suvajitgupta/sproutcore.git sproutcore
 cd sproutcore
-git checkout origin/stable
+git checkout -b origin/stable
 cd ../../
 
 RUNNING PERSEVERE
