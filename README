@@ -49,7 +49,7 @@ RUNNING TASKS
 http://localhost:4020/tasks
 
 2) Enter your login name in the dialog box (corresponds to "loginName" in the
-   user JSON that you defined in the Persever setup).
+   user JSON that you defined in the Persevere setup).
 
 3) Add a project, add tasks to it, hit Save periodically, have fun!
 
