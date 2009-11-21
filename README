@@ -32,7 +32,7 @@ INITIAL PERSEVERE SETUP
 2) Run a script to create the first user, after which you can log into Tasks
    and use the User Manager GUI:
 
-./user-add.sh "System Admin" SA Manager localhost:8088
+./user-add.sh "System Admin" "SA" Manager localhost:8088
 (press Enter twice to enter a blank password for now)
 
 RUNNING TASKS
@@ -48,8 +48,8 @@ RUNNING TASKS
 
 http://localhost:4020/tasks
 
-2) Enter your login name in the dialog box (corresponds to "loginName" in the
-   user JSON that you defined in the Persevere setup).
+2) Enter 'SA' in the dialog box and no password and press Enter.
+   The Tasks GUI should come up.
 
 3) Add a project, add tasks to it, hit Save periodically, have fun!
 
