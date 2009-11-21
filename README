@@ -52,6 +52,10 @@ http://localhost:4020/tasks
    The Tasks GUI should come up.
 
 3) Add a project, add tasks to it, hit Save periodically, have fun!
+   Alternatively, to get some sample data to play with, you can click
+   on the Import button and paste in the contents of the file:
+
+apps/tasks/tests/data/import_data.txt
 
 
 TASKS OVERVIEW
