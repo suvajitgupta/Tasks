@@ -65,7 +65,8 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
        *
        * If we got a 200, then response will be an array of JSON-formatted records.
        */
-      if (SC.typeOf(response) === SC.T_STRING) {
+      var responseType = SC.typeOf(response)
+      if (responseType === SC.T_STRING || responseType === SC.T_ARRAY) {
         var records = this._normalizeResponseArray(response);
 
         // Load the records into the store and invoke the callback.
