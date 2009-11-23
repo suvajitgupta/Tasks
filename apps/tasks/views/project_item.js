@@ -95,7 +95,6 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
   },
   
   inlineEditorWillBeginEditing: function(inlineEditor) {
-    
     if(!CoreTasks.getPath('permissions.canEditProject')) {
       console.log('Error: you do not have permission to edit a project');
       inlineEditor.discardEditing();
@@ -107,7 +106,11 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
         inlineEditor.discardEditing();
       }
     }
-    
+  },
+  
+  inlineEditorDidEndEditing: function(inlineEditor, finalValue) {
+    sc_super();
+    if(finalValue.indexOf('{') >= 0) Tasks.assignmentsController.showAssignments();
   },
   
   renderIcon: function(context, icon){
