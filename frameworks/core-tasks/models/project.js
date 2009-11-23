@@ -42,12 +42,16 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
   timeLeftValue: function(key, value){
     if (value !== undefined) {
       if(value === '') {
+        this.propertyWillChange('timeLeft');
         this.writeAttribute('timeLeft', null);
+        this.propertyDidChange('timeLeft');
       }
       else {
         var timeLeft = CoreTasks.Project.parseTimeLeft('{' + value + '}');
         if(timeLeft) {
+          this.propertyWillChange('timeLeft');
           this.writeAttribute('timeLeft', timeLeft);
+          this.propertyDidChange('timeLeft');
           value = timeLeft;
         }
       }

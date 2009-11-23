@@ -27,6 +27,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       this._editorPane = SC.PickerPane.create({
         
         layout: { width: 500, height: 200 },
+        _timeLeft: null,
         
         // Avoid popup panel coming up on other items while it is up already
         poppedUp: false,
@@ -34,11 +35,16 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
           var projectName = that.getPath('content.name');
           if(projectName === CoreTasks.ALL_TASKS_NAME.loc() || projectName === CoreTasks.UNALLOCATED_TASKS_NAME.loc() || this.poppedUp) return;
           this.poppedUp = true;
+          this._timeLeft = that.getPath('content.timeLeft');
           sc_super();
         },
         remove: function() {
           this.poppedUp = false;
           sc_super();
+          if(this._timeLeft !== that.getPath('content.timeLeft')) { // if timeLeft has changed, redraw got load balancing recalculation
+            console.log("Boo!");
+            Tasks.assignmentsController.showAssignments();
+          }
         },
         
         didBecomeKeyPaneFrom: function(pane) {
@@ -110,7 +116,9 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
   
   inlineEditorDidEndEditing: function(inlineEditor, finalValue) {
     sc_super();
-    if(finalValue.indexOf('{') >= 0) Tasks.assignmentsController.showAssignments();
+    if(finalValue.indexOf('{') >= 0) { // if effort was specified inline, redraw got load balancing recalculation
+      Tasks.assignmentsController.showAssignments();
+    }
   },
   
   renderIcon: function(context, icon){
