@@ -50,39 +50,51 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
     return YES;
   },
 
-  _fetchCompleted: function(response, params) {
-    var results;
+  _fetchCompleted: function(request, params) {
+    var response = request.response();
     var query = params.query;
     var store = params.store;
 
-    if (SC.ok(response) && SC.ok(results = response.get('body'))) {
+    if (SC.$ok(response)) {
       var recordType = query.get('recordType');
-      var status = response.get('status');
-      var xhr;
+      /*
+       * The request was successful, meaning that the server returned either 200 or 204.  A 204
+       * indicates that the call succeeded but there were no matching records.
+       *
+       * If we got a 204, then response will be an XHR (that's how SC.Request.response() works).
+       *
+       * If we got a 200, then response will be an array of JSON-formatted records.
+       */
+      var responseType = SC.typeOf(response)
+      if (responseType === SC.T_STRING || responseType === SC.T_ARRAY) {
+        var records = this._normalizeResponseArray(response);
 
-      if (SC.typeOf(results) === SC.T_ARRAY) {
-        if (results.length > 0) {
-          // Got an array of records; normalize if necessary.
-          var records = this._normalizeResponseArray(results);
+        // Load the records into the store and invoke the callback.
+        console.log('Retrieved %@ matching %@ records.'.fmt(records.length, recordType));
 
-          // Load the records into the store and invoke the callback.
-          console.log('Retrieved %@ matching %@ records.'.fmt(records.length, recordType));
+        store.loadRecords(recordType, records);
+        store.dataSourceDidFetchQuery(query);
+        
+      } else if(SC.typeOf(response) === SC.T_ARRAY){
+        var records = response;
+        // Load the records into the store and invoke the callback.
+        console.log('Retrieved %@ matching %@ records.'.fmt(records.length, recordType));
 
-          store.loadRecords(recordType, records);
-          store.dataSourceDidFetchQuery(query);
-        } else {
-          // No matching records.
-          console.log('No matching %@ records.'.fmt(recordType));
+        store.loadRecords(recordType, records);
+        store.dataSourceDidFetchQuery(query);
+  
+      } else if (this._isXHR(response) && response.status === 204) { 
+        // No matching records.
+        console.log('No matching %@ records.'.fmt(recordType));
 
-          // Load an empty array into the store and invoke the callback.
-          store.loadRecords(recordType, []);
-          store.dataSourceDidFetchQuery(query);
-        }
+        // Load an empty array into the store and invoke the callback.
+        store.loadRecords(recordType, []);
+        store.dataSourceDidFetchQuery(query);
 
       } else {
         // Should never get here, but just in case...
         console.log('Error retrieving records: Unexpected server response.');
-        store.dataSourceDidErrorQuery(query, CoreOrion.ERROR_UNEXPECTED_RESPONSE);
+        store.dataSourceDidErrorQuery(query, CoreTasks.ERROR_UNEXPECTED_RESPONSE);
       }
 
     } else {
@@ -90,6 +102,24 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
       var error = this._buildError(response);
       console.log('Error retrieving records: %@'.fmt(error));
       store.dataSourceDidErrorQuery(query, error);
+    }
+  },
+
+  _retrieveCompleted: function(request, params) {
+    var response = request.response();
+
+    if (SC.$ok(response)) {
+      // Request was successful; response should be a JSON object that may require normalization
+      var recordHash = this._normalizeResponse(response);
+
+      // Invoke the success callback on the store.
+      params.store.dataSourceDidComplete(params.storeKey, recordHash, recordHash.id);
+
+    } else {
+      // Request failed; invoke the error callback.
+      var error = this._buildError(response);
+      console.log('Error retrieving record [%@:%@]: %@'.fmt(params.recordType, params.id, error));
+      params.store.dataSourceDidError(params.storeKey, error);
     }
   },
 
@@ -126,12 +156,12 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
     return YES;
   },
 
-  _createCompleted: function(response, params) {
-    var results;
+  _createCompleted: function(request, params) {
+    var response = request.response();
 
-    if (SC.ok(response) && SC.ok(results = response.get('body'))) {
+    if (SC.$ok(response)) {
       // Request was successful; response should be a JSON object that may require normalization.
-      var recordHash = this._normalizeResponse(results);
+      var recordHash = this._normalizeResponse(response);
 
       // Invoke the success callback on the store.
       params.store.dataSourceDidComplete(params.storeKey, recordHash, recordHash.id);
@@ -183,12 +213,12 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
     return YES;
   },
 
-  _updateCompleted: function(response, params) {
-    var results;
+  _updateCompleted: function(request, params) {
+    var response = request.response();
 
-    if (SC.ok(response) && SC.ok(results = response.get('body'))) {
+    if (SC.$ok(response)) {
       // Request was successful; response should be a JSON object that may require normalization.
-      var recordHash = this._normalizeResponse(results);
+      var recordHash = this._normalizeResponse(response);
 
       // Invoke the success callback on the store.
       params.store.dataSourceDidComplete(params.storeKey, recordHash, recordHash.id);
@@ -236,18 +266,60 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
     return YES;
   },
 
-  _destroyCompleted: function(response, params) {
-    var results;
+  _destroyCompleted: function(request, params) {
+    /*
+     * There's a bug in SC.Request that causes a JS error if isJSON is set to true and the response
+     * body is empty (and it will be if the deletion is successful).  Work around this by verifying
+     * that the response body is *not* empty before calling response().
+     */
+    var response = request.get('rawResponse');
 
-    if (SC.ok(response) && SC.ok(results = response.get('body'))) {
-      if (response.status === 204) {
-        // Invoke the destroy callback on the store.
-        params.store.dataSourceDidDestroy(params.storeKey);
+    if (SC.typeOf(response) === SC.T_STRING) {
+      if (response !== "") {
+        // Safe to call response() function.
+        response = request.response();
+      }
+    }
+
+    if (SC.$ok(response)) {
+      /*
+       * The request was successful, meaning that the server returned either 200 or 204.
+       *
+       * A 204 indicates that the record was successfully deleted and that there's no content in
+       * the body of the response.
+       *
+       * A 200 indicates that the record was successfully deleted and that the record in the
+       * response body should be used to replace the record that was deleted (in the store).
+       */
+      if (this._isXHR(response)) {
+        // Branch on the status.
+        switch (response.status) {
+          case 204:
+            // Invoke the destroy callback on the store.
+            params.store.dataSourceDidDestroy(params.storeKey);
+            break;
+
+          case 200:
+            // Convert the response to a hash.
+            var hash = SC.json.decode(response.responseText);
+
+            // Normalize if necessary and rewrite the record hash in the main store.
+            var normalizedHash = this._normalizeResponse(hash);
+            params.store.dataSourceDidComplete(params.storeKey, normalizedHash, hash.id);
+            break;
+
+          default:
+            // This would be odd, but just in case...
+            console.log('Error deleting record [%@:%@]: Unexpected server response.'.fmt(
+              params.recordType, params.id));
+            params.store.dataSourceDidError(params.storeKey, CoreTasks.ERROR_UNEXPECTED_RESPONSE);
+        }
+
       } else {
         // This should never happen, but just in case...
         console.log('Error deleting record [%@:%@]: Unexpected server response.'.fmt(
           params.recordType, params.id));
-        params.store.dataSourceDidError(params.storeKey, CoreOrion.ERROR_UNEXPECTED_RESPONSE);
+        params.store.dataSourceDidError(params.storeKey, CoreTasks.ERROR_UNEXPECTED_RESPONSE);
       }
 
     } else {
@@ -305,19 +377,32 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
   },
 
   /**
-   * Builds a more specific request error from an SC.XHRResponse object.
+   * Builds a more specific Request Error from a generic SC.Error object.
    *
-   * @param {SC.XHRResponse} response
+   * @param {SC.Error} error
    *
    * @returns {SC.Error}
    */
-  _buildError: function(response) {
-    var error = response.get('errorObject');
-    var xhr = response.get('rawRequest');
-    error.set('description', xhr.statusText);
+  _buildError: function(error) {
+    var request = error.get('request');
+    error.set('description', request.statusText);
     error.set('label', 'Request Error');
-    error.set('code', xhr.status);
+    error.set('code', request.status);
     return error;
+  },
+
+  /**
+   * Determines whether or not the given object is an XHR (or equivalent).
+   *
+   * This is useful because (for cross-browser compatibility reasons) we can't simply use
+   * SC.instanceOf(obj, XMLHttpRequest).
+   *
+   * @param {Object} obj The object to check.
+   *
+   * @returns {Boolean} YES if the object appears to be an XHR; NO otherwise.
+   */
+  _isXHR: function(obj) {
+    return (obj && obj.send && obj.open && SC.typeOf(obj.send) == SC.T_FUNCTION);
   }
 
 });
