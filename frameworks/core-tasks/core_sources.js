@@ -338,20 +338,11 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
    * TODO: [SE] document how server response is normalized
    */
   _normalizeResponse: function(hash) {
-    // HACK: [SE] Browsers running in OS X get a string and not a hash, so we have to convert it.
-    if (SC.typeOf(hash) === SC.T_STRING) {
-      // HACK: [SE] Also, for some reason, JSON.parse() doesn't like the parentheses that Persevere
-      // uses to enclose its responses to POST requests, but only in browsers running on OS X.
-      if (hash.indexOf("(") === 0) {
-        var tempHash = hash;
-        hash = tempHash.slice(1, -1);
-      }
-
-      hash = SC.json.decode(hash);
+    if (hash && hash.id) {
+      var id = hash.id;
+      if (id && SC.typeOf(id) === SC.T_STRING) hash.id = id.replace(/^.*\//, '') * 1;
     }
 
-    var id = hash.id;
-    if (id && SC.typeOf(id) === SC.T_STRING) hash.id = id.replace(/^.*\//, '') * 1;
     return hash;
   },
 
@@ -359,16 +350,6 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
    * TODO: [SE] document how server response array is normalized
    */
   _normalizeResponseArray: function(hashes) {
-    // HACK: [SE] Browsers running in OS X get a string and not a hash, and they don't like the
-    // format of the string that Persevere sends over the wire. We have to do some <sigh>
-    // massaging to get it to work.
-    if (SC.typeOf(hashes) === SC.T_STRING) {
-      // The first 4 characters of a JSON array returned by Persevere are "{}&&", which confuses the
-      // JSON.parse() function; strip them out.
-      var hashString = hashes.slice(4);
-      hashes = SC.json.decode(hashString);
-    }
-
     var ret = hashes ? hashes : [];
     var len = hashes.length;
 
