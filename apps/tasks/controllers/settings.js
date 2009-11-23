@@ -13,7 +13,7 @@ sc_require('core');
   Controller for Application Settings.
 */
 Tasks.settingsController = SC.ObjectController.create(
-/** @scope Orion.settingsController.prototype */ {
+/** @scope Tasks.settingsController.prototype */ {
   
     openPanel: function(){
       var panel = Tasks.getPath('settingsPage.panel');

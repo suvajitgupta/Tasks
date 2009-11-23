@@ -13,7 +13,7 @@ sc_require('core');
   Controller for logging in user.
 */
 Tasks.loginController = SC.ObjectController.create(
-/** @scope Orion.loginController.prototype */ {
+/** @scope Tasks.loginController.prototype */ {
   
     _panelOpen: false,
     loginError: false,

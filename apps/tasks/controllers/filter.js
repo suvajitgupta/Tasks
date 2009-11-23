@@ -13,7 +13,7 @@ sc_require('core');
   Controller for Application Settings.
 */
 Tasks.filterController = SC.ObjectController.create(
-/** @scope Orion.filterController.prototype */ {
+/** @scope Tasks.filterController.prototype */ {
   
     openPane: function(){
       Tasks.assignmentsController.backupAttributeFilterCriteria();

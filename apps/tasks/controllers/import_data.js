@@ -14,7 +14,7 @@ sc_require('core');
   Controller for the import data pane.
 */
 Tasks.importDataController = SC.ObjectController.create(
-/** @scope Orion.importDataController.prototype */ {
+/** @scope Tasks.importDataController.prototype */ {
   
     importData: '',
     
