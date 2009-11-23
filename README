@@ -39,13 +39,13 @@ RUNNING TASKS
 
 1) Start the SproutCore server...
 
-../abbot/bin/sc-server
+../abbot/bin/sc-server --port 4400
 
 (This assumes that you have the SC build tools installed.)
 
 1) Navigate to the following URL...
 
-http://localhost:4020/tasks
+http://localhost:4400/tasks
 
 2) Enter 'SA' in the dialog box and no password and press Enter.
    The Tasks GUI should come up.
