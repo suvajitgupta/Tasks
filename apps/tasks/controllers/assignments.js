@@ -376,7 +376,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
           effortMax = parseFloat(parseFloat(effortString.slice(idx+1), 10).toFixed(3));
           effortMax = CoreTasks.convertTimeToDays(effortMax + timeUnit);
         }
-        if(developmentStatus === CoreTasks.TASK_STATUS_DONE) {
+        if(developmentStatus === CoreTasks.TASK_STATUS_DONE && task.get('validation') !== CoreTasks.TASK_VALIDATION_FAILED) {
           totalDoneEffortMin = parseFloat((totalDoneEffortMin + effortMin).toFixed(3));
           totalDoneEffortMax = parseFloat((totalDoneEffortMax + effortMax).toFixed(3));
         }
@@ -440,7 +440,13 @@ Tasks.assignmentsController = SC.ArrayController.create(
         var bType = b.get('type');
         if(aType !== bType) return CoreTasks.taskTypeWeights[bType] - CoreTasks.taskTypeWeights[aType];
         
-        return a.get('id') - b.get('id');
+        var aID = a.get('id');
+        var bID = b.get('id');
+        console.log(a.get('name') + ': ' + aID + '; ' + b.get('name') + ': ' + bID);
+        if(aID < 0 && bID < 0) return bID - aID;
+        else if(aID < 0) return 1;
+        else if(bID < 0) return -1;
+        else return aID - bID;
         
       }),
       treeItemIsExpanded: this.nodesExpanded
