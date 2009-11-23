@@ -82,7 +82,7 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
       } else {
         // Should never get here, but just in case...
         console.log('Error retrieving records: Unexpected server response.');
-        store.dataSourceDidErrorQuery(query, CoreTasks.ERROR_UNEXPECTED_RESPONSE);
+        store.dataSourceDidErrorQuery(query, CoreOrion.ERROR_UNEXPECTED_RESPONSE);
       }
 
     } else {
@@ -247,7 +247,7 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
         // This should never happen, but just in case...
         console.log('Error deleting record [%@:%@]: Unexpected server response.'.fmt(
           params.recordType, params.id));
-        params.store.dataSourceDidError(params.storeKey, CoreTasks.ERROR_UNEXPECTED_RESPONSE);
+        params.store.dataSourceDidError(params.storeKey, CoreOrion.ERROR_UNEXPECTED_RESPONSE);
       }
 
     } else {
