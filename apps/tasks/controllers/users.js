@@ -1,8 +1,7 @@
 //============================================================================
 // Tasks.usersController
 //============================================================================
-/*globals Tasks CoreTasks sc_require */
-sc_require('mixins/status_changed');
+/*globals Tasks CoreTasks SCUI */
 
 /**
 
@@ -15,7 +14,7 @@ sc_require('mixins/status_changed');
 
 */
 
-Tasks.usersController = SC.ArrayController.create(Tasks.StatusChanged,
+Tasks.usersController = SC.ArrayController.create(SCUI.StatusChanged,
   /** @scope Tasks.usersController.prototype */ {
   
   isDeletable: function() {

@@ -1,8 +1,7 @@
 //============================================================================
 // Tasks.allTasksController
 //============================================================================
-/*globals Tasks sc_require */
-sc_require('mixins/status_changed');
+/*globals Tasks SCUI */
 
 /**
 
@@ -15,7 +14,7 @@ sc_require('mixins/status_changed');
 
 */
 
-Tasks.allTasksController = SC.ArrayController.create(Tasks.StatusChanged,
+Tasks.allTasksController = SC.ArrayController.create(SCUI.StatusChanged,
   /** @scope Tasks.allTasksController.prototype */ {
     
   contentStatusDidChange: function(status){
