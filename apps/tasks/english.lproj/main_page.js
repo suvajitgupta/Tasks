@@ -1,10 +1,9 @@
 // ==========================================================================
 // Project: Tasks
 // ==========================================================================
-/*globals CoreTasks Tasks sc_require */
+/*globals CoreTasks Tasks sc_require SCUI */
 
 sc_require('core');
-sc_require('mixins/tooltip');
 sc_require('mixins/simple_button');
 sc_require('mixins/localized_label');
 sc_require('views/summary');
@@ -30,7 +29,7 @@ Tasks.mainPage = SC.Page.design({
       classNames: ['title-bar'],
       childViews: [
       
-        SC.LabelView.design(Tasks.ToolTip, {
+        SC.LabelView.design(SCUI.ToolTip, {
           layout: { centerY: -2, height: 26, left: 6, width: 89 },
           toolTip: "_Credits".loc(),
           classNames: ['tasks-logo']
@@ -42,7 +41,7 @@ Tasks.mainPage = SC.Page.design({
           value: Tasks.VERSION
         }),
 
-        SC.LabelView.design(Tasks.ToolTip, {
+        SC.LabelView.design(SCUI.ToolTip, {
           layout: { centerY: 0, height: 20, centerX: -210, width: 320 },
           escapeHTML: NO,
           classNames: ['user-role-message']
@@ -221,7 +220,7 @@ Tasks.mainPage = SC.Page.design({
           action: 'filterTasks'
         }),
         
-        SC.TextFieldView.design(Tasks.ToolTip, {
+        SC.TextFieldView.design(SCUI.ToolTip, {
           layout: { centerY: 0, height: 24, right: 225, width: 200 },
           classNames: ['assignee-selection-bar'],
           hint: "_AssigneeSelectionHint".loc(),
@@ -229,7 +228,7 @@ Tasks.mainPage = SC.Page.design({
           valueBinding: 'Tasks.assignmentsController.assigneeSelection'
         }),
 
-        SC.TextFieldView.design(Tasks.ToolTip, {
+        SC.TextFieldView.design(SCUI.ToolTip, {
           layout: { centerY: 0, height: 24, right: 10, width: 200 },
           classNames: ['tasks-search-bar'],
           hint: "_TasksSearchHint".loc(),
@@ -357,7 +356,7 @@ Tasks.mainPage = SC.Page.design({
           layout: { centerX: 0, width: 1030, top: 0, bottom: 0 },
           childViews: [
           
-            SC.LabelView.design(Tasks.ToolTip, {
+            SC.LabelView.design(SCUI.ToolTip, {
               layout: { top: 3, bottom: 30, left: 10, width: 260 },
               classNames: ['task-attribute-set-title'],
               value: "_Type".loc(),
@@ -384,7 +383,7 @@ Tasks.mainPage = SC.Page.design({
               layoutDirection: SC.LAYOUT_HORIZONTAL
             }),
 
-            SC.LabelView.design(Tasks.ToolTip, {
+            SC.LabelView.design(SCUI.ToolTip, {
               layout: { top: 3, bottom: 30, left: 285, width: 195 },
               classNames: ['task-attribute-set-title'],
               value: "_Priority".loc(),
@@ -410,7 +409,7 @@ Tasks.mainPage = SC.Page.design({
               layoutDirection: SC.LAYOUT_HORIZONTAL
             }),
 
-            SC.LabelView.design(Tasks.ToolTip, {
+            SC.LabelView.design(SCUI.ToolTip, {
               layout: { top: 3, bottom: 30, left: 495, width: 265 },
               classNames: ['task-attribute-set-title'],
               value: "_Status".loc(),
@@ -438,7 +437,7 @@ Tasks.mainPage = SC.Page.design({
               layoutDirection: SC.LAYOUT_HORIZONTAL
             }),
 
-            SC.LabelView.design(Tasks.ToolTip, {
+            SC.LabelView.design(SCUI.ToolTip, {
               layout: { top: 3, bottom: 30, left: 775, width: 245 },
               classNames: ['task-attribute-set-title'],
               value: "_Validation".loc(),

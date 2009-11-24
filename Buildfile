@@ -1,7 +1,8 @@
 require 'proxy-patch'
 
+config :scui, :required => [:foundation, :calendar, :dashboard, :drawing, :linkit]
 config :'core-tasks', :required => [:sproutcore]
-config :tasks, :required => [:'core-tasks', :sproutcore]
+config :tasks, :required => [:'core-tasks', :sproutcore, :scui]
 
 # JH2's GAE backend - under development (needs to be updated to latest)
 # proxy '/tasks-server', :to => 'tasks-sc.appspot.com', :protocol => 'http'

@@ -15,6 +15,7 @@ server-test.err
 abbot/
 tasks-server/prod/WEB-INF/data
 tasks-server/test/WEB-INF/data
+frameworks/scui/
 frameworks/sproutcore/
 persevere/ra-cache
 Tasks.sqlite3

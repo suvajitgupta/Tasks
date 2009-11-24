@@ -1,7 +1,7 @@
 // ==========================================================================
 // Tasks.helpPage
 // ==========================================================================
-/*globals Tasks sc_require */
+/*globals Tasks sc_require SCUI */
 sc_require('core');
 
 /** @static
@@ -25,7 +25,7 @@ Tasks.helpPage = SC.Page.design({
         classNames: ['title-bar'],
         childViews: [
         
-          SC.LabelView.design(Tasks.ToolTip, {
+          SC.LabelView.design(SCUI.ToolTip, {
             layout: { centerY: -2, height: 26, left: 6, width: 89 },
             toolTip: "_Credits".loc(),
             classNames: ['tasks-logo']
