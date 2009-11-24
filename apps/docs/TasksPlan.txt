@@ -39,6 +39,8 @@ v Provide support for color-blind users (don't use color coding as only mechanis
 Project Manager GUI
 ^ Add Master/Detail Explorer view with click selection of Projects showing corresponding Tasks [JH2] <SG> @Done $Feature %Passed
 ^ Show Project name & time left (if specified) on far right [SG] <JH2> @Done $Feature %Passed
+^ Allow Project target date to be specified inline or via popup editor/Calendar chooser <SE> [SG] $Feature
+| Delete all references to timeLeft and update Persevere data to reflect this schema change
 - Use icon to indicate if Project has any tasks or not [SG] @Done $Feature %Passed
 - Support alpha sorting of projects [SG] <JH2> @Done %Passed $Feature
 v Add hover over tooltip for projects to show how many tasks they contain [SG] @Done $Feature %Passed
