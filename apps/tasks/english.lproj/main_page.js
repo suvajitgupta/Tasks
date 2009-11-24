@@ -4,7 +4,6 @@
 /*globals CoreTasks Tasks sc_require SCUI */
 
 sc_require('core');
-sc_require('mixins/simple_button');
 sc_require('mixins/localized_label');
 sc_require('views/summary');
 
@@ -52,7 +51,7 @@ Tasks.mainPage = SC.Page.design({
           classNames: ['top-bar-divider']
         }),
 
-        SC.LabelView.design(Tasks.SimpleButton,{
+        SC.LabelView.design(SCUI.SimpleButton,{
           layout: { centerY: 0, right: 475, height: 24, width: 60 },
           icon: ['save-icon'],
           classNames: ['title-bar-label'],
@@ -63,7 +62,7 @@ Tasks.mainPage = SC.Page.design({
           action: 'saveData'
         }),
     
-        SC.LabelView.design(Tasks.SimpleButton,{
+        SC.LabelView.design(SCUI.SimpleButton,{
           layout: { centerY: 0, right: 390, height: 24, width: 80 },
           icon: ['refresh-icon'],
           classNames: ['title-bar-label'],
@@ -78,7 +77,7 @@ Tasks.mainPage = SC.Page.design({
           classNames: ['top-bar-divider']
         }),
         
-        SC.LabelView.design(Tasks.SimpleButton,{
+        SC.LabelView.design(SCUI.SimpleButton,{
           layout: { centerY: 0, right: 310, height: 24, width: 70 },
           icon: ['import-icon'],
           classNames: ['title-bar-label'],
@@ -90,7 +89,7 @@ Tasks.mainPage = SC.Page.design({
           action: 'importData'
         }),
 
-        SC.LabelView.design(Tasks.SimpleButton,{
+        SC.LabelView.design(SCUI.SimpleButton,{
           layout: { centerY: 0, right: 240, height: 24, width: 70 },
           icon: ['export-icon'],
           classNames: ['title-bar-label'],
@@ -105,7 +104,7 @@ Tasks.mainPage = SC.Page.design({
           classNames: ['top-bar-divider']
         }),
 
-        SC.LabelView.design(Tasks.SimpleButton,{
+        SC.LabelView.design(SCUI.SimpleButton,{
           layout: { centerY: 0, right: 150, height: 24, width: 75 },
           icon: ['settings-icon'],
           classNames: ['title-bar-label'],
@@ -115,7 +114,7 @@ Tasks.mainPage = SC.Page.design({
           action: 'settings'
         }),
         
-        SC.LabelView.design(Tasks.SimpleButton,{
+        SC.LabelView.design(SCUI.SimpleButton,{
           layout: { centerY: 0, right: 85, height: 24, width: 60 },
           icon: ['help-icon'],
           classNames: ['title-bar-label'],
@@ -125,7 +124,7 @@ Tasks.mainPage = SC.Page.design({
           action: 'help'
         }),
         
-        SC.LabelView.design(Tasks.SimpleButton,{
+        SC.LabelView.design(SCUI.SimpleButton,{
           layout: { centerY: 0, right: 10, height: 24, width: 75 },
           icon: ['logout-icon'],
           classNames: ['title-bar-label'],
@@ -145,7 +144,7 @@ Tasks.mainPage = SC.Page.design({
       classNames: ['toolbar'],
       childViews: [
       
-        SC.LabelView.design(Tasks.SimpleButton,{
+        SC.LabelView.design(SCUI.SimpleButton,{
           layout: { centerY: 0, left: 10, height: 18, width: 105 },
           icon: 'add-icon',
           classNames: ['toolbar-label'],
@@ -156,7 +155,7 @@ Tasks.mainPage = SC.Page.design({
           action: 'addProject'
         }),
       
-        SC.LabelView.design(Tasks.SimpleButton,{
+        SC.LabelView.design(SCUI.SimpleButton,{
           layout: { centerY: 0, left: 115, height: 18, width: 105 },
           icon: 'delete-icon',
           classNames: ['toolbar-label'],
@@ -172,7 +171,7 @@ Tasks.mainPage = SC.Page.design({
           classNames: ['top-bar-divider']
         }),
 
-        SC.LabelView.design(Tasks.SimpleButton,{
+        SC.LabelView.design(SCUI.SimpleButton,{
           layout: { centerY: 0, left: 235, height: 18, width: 95 },
           icon: 'add-icon',
           classNames: ['toolbar-label'],
@@ -183,7 +182,7 @@ Tasks.mainPage = SC.Page.design({
           action: 'addTask'
         }),
 
-        SC.LabelView.design(Tasks.SimpleButton,{
+        SC.LabelView.design(SCUI.SimpleButton,{
           layout: { centerY: 0, left: 330, height: 18, width: 90 },
           icon: 'delete-icon',
           classNames: ['toolbar-label'],
@@ -199,7 +198,7 @@ Tasks.mainPage = SC.Page.design({
           classNames: ['top-bar-divider']
         }),
 
-        SC.LabelView.design(Tasks.SimpleButton,{
+        SC.LabelView.design(SCUI.SimpleButton,{
           layout: { centerY: 0, right: 510, height: 18, width: 75 },
           icon: 'collapse-icon',
           classNames: ['toolbar-label'],
@@ -209,7 +208,7 @@ Tasks.mainPage = SC.Page.design({
           action: 'collapse'
         }),
 
-        SC.LabelView.design(Tasks.SimpleButton,{
+        SC.LabelView.design(SCUI.SimpleButton,{
           layout: { centerY: 0, right: 440, height: 18, width: 60 },
           displayProperties: [ 'icon' ],
           iconBinding: 'Tasks.assignmentsController.attributeFilterIcon',

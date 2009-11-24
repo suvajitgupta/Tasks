@@ -1,7 +1,7 @@
 // ==========================================================================
 // Tasks.settingsPage
 // ==========================================================================
-/*globals CoreTasks Tasks sc_require */
+/*globals CoreTasks Tasks sc_require SCUI */
 sc_require('core');
 sc_require('views/user_item');
 sc_require('views/user_information');
@@ -34,7 +34,7 @@ Tasks.settingsPage = SC.Page.create({
             classNames: ['toolbar'],
             childViews: [
             
-              SC.LabelView.design(Tasks.SimpleButton,{
+              SC.LabelView.design(SCUI.SimpleButton,{
                 layout: { centerY: 0, left: 5, height: 16, width: 90 },
                 icon: 'add-icon',
                 value: "_AddUser".loc(),
@@ -45,7 +45,7 @@ Tasks.settingsPage = SC.Page.create({
                 action: 'addUser'
               }),
 
-              SC.LabelView.design(Tasks.SimpleButton,{
+              SC.LabelView.design(SCUI.SimpleButton,{
                 layout: { centerY: 0, left: 90, height: 16, width: 90 },
                 icon: 'delete-icon',
                 value: "_DelUser".loc(),

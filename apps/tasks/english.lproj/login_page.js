@@ -1,9 +1,9 @@
 // ==========================================================================
 // Tasks.importData
 // ==========================================================================
-/*globals Tasks sc_require */
+/*globals Tasks sc_require SCUI */
 sc_require('core');
-sc_require('mixins/simple_button');
+
 /** @static
     
   @extends SC.Page
@@ -59,7 +59,7 @@ Tasks.loginPage = SC.Page.create({
         action: 'login'
       }),
       
-      signup: SC.LabelView.design(Tasks.SimpleButton,{
+      signup: SC.LabelView.design(SCUI.SimpleButton,{
         layout: { top: 220, left: 500, height: 24, width: 200 },
         classNames: ['sign-up'],
         value: "_NewUserSignup".loc(),
