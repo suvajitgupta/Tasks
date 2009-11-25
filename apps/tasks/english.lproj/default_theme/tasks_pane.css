@@ -58,11 +58,12 @@
   height: 20px !important;
   left: 8px !important;
   padding-left: 8px !important;
-  background: #BBB none repeat scroll 0 0 !important;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
 }
 
 .assignee-not-loaded label {
-  background: #333 none repeat scroll 0 0 !important;
+  background: #444 none repeat scroll 0 0 !important;
 }
 
 .assignee-under-loaded label {
@@ -83,9 +84,8 @@
   top: 6px !important;
 	font-weight: normal !important;
   line-height: 11px !important;
-  color: black !important;
-  border: 1px solid #ccc !important;
-  background: white none repeat scroll 0 0 !important;
+  color: #222 !important;
+  background: #EEE none repeat scroll 0 0 !important;
 }
 
 
@@ -109,7 +109,7 @@
 	font-weight: normal !important;
 	font-style: normal !important;
 	text-align: right !important;
-  line-height: 1.25 !important;
+  line-height: 1.5 !important;
   position: absolute !important;
   top: 4px !important;
   bottom: 4px !important;
@@ -135,9 +135,8 @@
 	font-style: normal !important;
   line-height: 11px !important;
   color: black !important;
-  background: white none repeat scroll 0 0 !important;
   border: 1px solid #AAA !important;
-  opacity: 0.8;
+  background: #EEE none repeat scroll 0 0 !important;
 }
 
 
@@ -214,7 +213,6 @@
   color: black;
   background: #FFF none repeat scroll 0 0;
 	outline: 1px solid #AAA !important;
-  opacity: 0.8;
 }
 
 .task-validation-passed {
@@ -269,6 +267,14 @@
 
 .sc-list-item-view.even-item {
   background-color: #DEDEDE !important;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+
+.sc-list-item-view.odd-item {
+  background-color: #FFF !important;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
 }
 
 .sc-theme.focus .sc-list-view.sc-source-list .sc-collection-item.sel {

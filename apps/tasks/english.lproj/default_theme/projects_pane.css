@@ -61,8 +61,8 @@
 	font-weight: normal !important;
   line-height: 11px !important;
   color: black !important;
-  border: 1px solid #ccc !important;
-  background: white none repeat scroll 0 0 !important;
+  border: 1px solid #CCC !important;
+  background: #EEE none repeat scroll 0 0 !important;
 }
 
 .regular-project-item.sel .sc-outline .count {
