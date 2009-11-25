@@ -5,6 +5,10 @@
  *
  * @author Sean Eidemiller
  */
+ 
+// FIXME: [SE] delete records that are already deleted in Persevere when you get 404s in response to PUTs/DELETEs
+// FIXME: [SE] delete records that no longer exist after a refresh (compare store items vs. returned results)
+ 
 CoreTasks = SC.Object.create({
   
   needsSave: NO,
