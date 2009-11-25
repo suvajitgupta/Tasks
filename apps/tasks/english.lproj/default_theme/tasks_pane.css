@@ -58,24 +58,9 @@
   height: 20px !important;
   left: 4px !important;
   padding-left: 24px !important;
+  background: #666 none repeat scroll 0 0 !important;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
-}
-
-.assignee-not-loaded label {
-  background: #444 none repeat scroll 0 0 !important;
-}
-
-.assignee-under-loaded label {
-  background: #363 none repeat scroll 0 0 !important;
-}
-
-.assignee-properly-loaded label {
-  background: #36F none repeat scroll 0 0 !important;
-}
-
-.assignee-over-loaded label {
-  background: #C33 none repeat scroll 0 0 !important;
 }
 
 .assignee-item .sc-outline .count {
@@ -84,8 +69,27 @@
   top: 5px !important;
 	font-weight: normal !important;
   line-height: 11px !important;
-  color: black !important;
-  background: white none repeat scroll 0 0 !important;
+  color: white !important;
+}
+
+.assignee-not-loaded .count {
+  background: #333 none repeat scroll 0 0 !important;
+  border: 1px solid #333 !important;
+}
+
+.assignee-under-loaded .count {
+  background: #363 none repeat scroll 0 0 !important;
+  border: 1px solid #363 !important;
+}
+
+.assignee-properly-loaded .count {
+  background: #36F none repeat scroll 0 0 !important;
+  border: 1px solid #36F !important;
+}
+
+.assignee-over-loaded .count {
+  background: #C33 none repeat scroll 0 0 !important;
+  border: 1px solid #C33 !important;
 }
 
 
@@ -267,7 +271,7 @@
  * Task selection/dragging styles
  */
 
-.sc-list-item-view.even-task {
+.sc-list-item-view.even-item {
   background-color: #DEDEDE !important;
 }
 
