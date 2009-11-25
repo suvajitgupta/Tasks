@@ -199,6 +199,7 @@ Tasks.mixin({
         if(project) defaultProject = project;
       }
       this.set('defaultProject', defaultProject);
+      this.projectsController.selectObject(defaultProject);
     }
     
     this.dataLoadSuccess();
@@ -212,7 +213,6 @@ Tasks.mixin({
     switch (this.state.a) {
       case 3:
         if(this._loginTime) {
-          this.projectsController.selectObject(Tasks.get('defaultProject'));
           this._loginTime = false;
         }
         this.goState('a', 4);

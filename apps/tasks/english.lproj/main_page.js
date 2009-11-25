@@ -205,8 +205,26 @@ Tasks.mainPage = SC.Page.design({
           valueBinding: 'Tasks.assignmentsController.displayMode'
         }),
 
+        SC.TextFieldView.design(SCUI.ToolTip, {
+          layout: { centerY: 0, height: 24, right: 290, width: 200 },
+          classNames: ['assignee-selection-bar'],
+          hint: "_AssigneeSelectionHint".loc(),
+          toolTip: "_AssigneeSelectionTooltip".loc(),
+          valueBinding: 'Tasks.assignmentsController.assigneeSelection'
+        }),
+        
+        SC.View.design({ // Assignee Selection cancel button
+          layout: { centerY: 1, height: 12, right: 295, width: 12 },
+          isVisible: NO,
+          classNames: ['filter-cancel-icon'],
+          mouseDown: function() {
+            Tasks.assignmentsController.set('assigneeSelection', '');
+          },
+          isVisibleBinding: SC.Binding.oneWay('Tasks.assignmentsController.assigneeSelection').bool()
+        }),
+      
         SC.LabelView.design(SCUI.SimpleButton,{
-          layout: { centerY: 0, right: 430, height: 18, width: 60 },
+          layout: { centerY: 0, right: 220, height: 18, width: 60 },
           displayProperties: [ 'icon' ],
           iconBinding: 'Tasks.assignmentsController.attributeFilterIcon',
           classNames: ['toolbar-label'],
@@ -217,29 +235,11 @@ Tasks.mainPage = SC.Page.design({
         }),
         
         SC.TextFieldView.design(SCUI.ToolTip, {
-          layout: { centerY: 0, height: 24, right: 220, width: 200 },
-          classNames: ['assignee-selection-bar'],
-          hint: "_AssigneeSelectionHint".loc(),
-          toolTip: "_AssigneeSelectionTooltip".loc(),
-          valueBinding: 'Tasks.assignmentsController.assigneeSelection'
-        }),
-
-        SC.TextFieldView.design(SCUI.ToolTip, {
           layout: { centerY: 0, height: 24, right: 10, width: 200 },
           classNames: ['tasks-search-bar'],
           hint: "_TasksSearchHint".loc(),
           toolTip: "_TasksSearchTooltip".loc(),
           valueBinding: 'Tasks.assignmentsController.searchFilter'
-        }),
-      
-        SC.View.design({ // Assignee Selection cancel button
-          layout: { centerY: 1, height: 12, right: 225, width: 12 },
-          isVisible: NO,
-          classNames: ['filter-cancel-icon'],
-          mouseDown: function() {
-            Tasks.assignmentsController.set('assigneeSelection', '');
-          },
-          isVisibleBinding: SC.Binding.oneWay('Tasks.assignmentsController.assigneeSelection').bool()
         }),
       
         SC.View.design({ // Tasks Search cancel button
@@ -251,7 +251,7 @@ Tasks.mainPage = SC.Page.design({
           },
           isVisibleBinding: SC.Binding.oneWay('Tasks.assignmentsController.searchFilter').bool()
         })
-                     
+                             
       ]
     }),
     
