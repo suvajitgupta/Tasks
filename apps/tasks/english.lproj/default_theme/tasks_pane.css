@@ -42,7 +42,7 @@
 .assignee-red-flag {
   position: absolute !important;
   top: 3px !important;
-  left: 25px !important;
+  left: 5px !important;
   width: 16px !important;
   z-index: 10 !important;
 }
@@ -54,11 +54,11 @@
 }
 
 .assignee-item label {
-  color: white !important;
+  color: #111 !important;
   height: 20px !important;
-  left: 4px !important;
-  padding-left: 24px !important;
-  background: #666 none repeat scroll 0 0 !important;
+  left: 6px !important;
+  padding-left: 10px !important;
+  background: #AAA none repeat scroll 0 0 !important;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
 }

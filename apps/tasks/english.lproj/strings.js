@@ -47,8 +47,8 @@ SC.stringsFor('English', {
   "_AssigneeSelectionTooltip": "Use all or part of full/login name separated via commas or spaces; Type 'None' to see unassigned tasks",
   "_TasksSearchHint": "Search by task #IDs or name",
   "_TasksSearchTooltip": "Separate #IDs via commas or spaces, otherwise perform case-insensitive match",
-  "_Overview": "Overview",
-  "_Details": "Details",
+  "_DisplayModeTeam": "Team",
+  "_DisplayModeTasks": "Tasks",
   
   // Project strings
   "_AddProject": "Add Project",

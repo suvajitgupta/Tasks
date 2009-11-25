@@ -55,15 +55,15 @@ Tasks.attributeFilterShowstoppers = [
   CoreTasks.TASK_VALIDATION_FAILED
 ];
 
-Tasks.DISPLAY_MODE_OVERVIEW = false;
-Tasks.DISPLAY_MODE_DETAILS = true;
+Tasks.DISPLAY_MODE_TEAM = false;
+Tasks.DISPLAY_MODE_TASKS = true;
 
 Tasks.assignmentsController = SC.ArrayController.create(
 /** @scope Tasks.assignmentsController.prototype */ {
   
   contentBinding: 'Tasks.projectController.tasks',
   assignedTasks: null,
-  _showDetails: true,
+  _showTasks: true,
   _clearingAssigneeSelection: false,
   displayMode: function(key, value) {
     if (value !== undefined) {
@@ -74,11 +74,11 @@ Tasks.assignmentsController = SC.ArrayController.create(
           this.set('assigneeSelection', null);
         }
       }
-      this.set('_showDetails', value);
+      this.set('_showTasks', value);
     } else {
-      return this.get('_showDetails');
+      return this.get('_showTasks');
     }
-  }.property('_showDetails').cacheable(),
+  }.property('_showTasks').cacheable(),
   
   assigneeSelection: null,
   searchFilter: null,
@@ -438,7 +438,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
       loading: loading,
       assignee: assigneeObj.assignee,
       tasksCount: tasks.get('length'),
-      treeItemChildren: this._showDetails? tasks.sort(function(a,b) { // sort by status, then by validation (if "Done"), then by priority, lastly by type
+      treeItemChildren: this._showTasks? tasks.sort(function(a,b) { // sort by status, then by validation (if "Done"), then by priority, lastly by type
         
         var aStatus = a.get('developmentStatus');
         var bStatus = b.get('developmentStatus');
@@ -479,7 +479,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
       this._timer = null;
     }
   	this.invokeOnce(this.showAssignments);
-  }.observes('[]', '_showDetails'),
+  }.observes('[]', '_showTasks'),
   
   _filteringHasChanged: function() { // allow users to change filters over a half second before redrawing tasks pane
     if (this._timer) this._timer.invalidate();
@@ -487,9 +487,9 @@ Tasks.assignmentsController = SC.ArrayController.create(
   },
   
   _assigneeSelectionHasChanged: function() {
-    // console.log("DEBUG: Assignee selection changed to '" + this.assigneeSelection + "'" + " displayDetails = " + this.get('_showDetails'));
-    if(!this.get('_showDetails') && !this._clearingAssigneeSelection) {
-      this.set('_showDetails', true);
+    // console.log("DEBUG: Assignee selection changed to '" + this.assigneeSelection + "'" + " displayDetails = " + this.get('_showTasks'));
+    if(!this.get('_showTasks') && !this._clearingAssigneeSelection) {
+      this.set('_showTasks', true);
     }
     this._clearingAssigneeSelection = false;
     this._filteringHasChanged();
