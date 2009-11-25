@@ -16,7 +16,7 @@ Tasks.AssigneeItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
 /** @scope Tasks.AssigneeItemView.prototype */ {
   
   mouseDown: function(event) {
-    if(Tasks.assignmentsController.get('displayMode') === Tasks.DISPLAY_MODE_OVERVIEW) {
+    if(Tasks.assignmentsController.get('displayMode') === Tasks.DISPLAY_MODE_TEAM) {
       var loginNameMatches = this.getPath('content.displayName').match(/\((.+)\)/);
       Tasks.assignmentsController.set('assigneeSelection', loginNameMatches[1]);
     }
