@@ -206,7 +206,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         SC.TextFieldView.design(SCUI.ToolTip, {
-          layout: { centerY: 0, height: 24, right: 290, width: 200 },
+          layout: { centerY: 0, height: 24, right: 275, width: 200 },
           classNames: ['assignee-selection-bar'],
           hint: "_AssigneeSelectionHint".loc(),
           toolTip: "_AssigneeSelectionTooltip".loc(),
@@ -214,7 +214,7 @@ Tasks.mainPage = SC.Page.design({
         }),
         
         SC.View.design({ // Assignee Selection cancel button
-          layout: { centerY: 1, height: 12, right: 295, width: 12 },
+          layout: { centerY: 1, height: 12, right: 280, width: 12 },
           isVisible: NO,
           classNames: ['filter-cancel-icon'],
           mouseDown: function() {
@@ -224,7 +224,7 @@ Tasks.mainPage = SC.Page.design({
         }),
       
         SC.LabelView.design(SCUI.SimpleButton,{
-          layout: { centerY: 0, right: 220, height: 18, width: 60 },
+          layout: { centerY: 0, right: 215, height: 18, width: 60 },
           displayProperties: [ 'icon' ],
           iconBinding: 'Tasks.assignmentsController.attributeFilterIcon',
           classNames: ['toolbar-label'],
