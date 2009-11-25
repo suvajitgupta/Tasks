@@ -42,7 +42,7 @@
 .assignee-red-flag {
   position: absolute !important;
   top: 3px !important;
-  left: 5px !important;
+  left: 6px !important;
   width: 16px !important;
   z-index: 10 !important;
 }
@@ -56,17 +56,16 @@
 .assignee-item label {
   color: #111 !important;
   height: 20px !important;
-  left: 6px !important;
-  padding-left: 10px !important;
-  background: #AAA none repeat scroll 0 0 !important;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
+  left: 8px !important;
+  padding-left: 8px !important;
+  background: #BBB none repeat scroll 0 0 !important;
+  outline: 1px solid #777 !important;
 }
 
 .assignee-item .sc-outline .count {
-  right: 27px !important;
+  right: 10px !important;
   margin-top: 0px !important;
-  top: 5px !important;
+  top: 6px !important;
 	font-weight: normal !important;
   line-height: 11px !important;
   color: #EEE !important;
@@ -277,6 +276,8 @@
 
 .sc-theme.focus .sc-list-view.sc-source-list .sc-collection-item.sel {
   background: #abd7ff !important;
+	border: none !important;
+	outline: 1px solid #777 !important;
 }
 
 .sc-view.sc-ghost-view .task-item {

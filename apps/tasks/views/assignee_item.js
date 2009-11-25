@@ -53,12 +53,18 @@ Tasks.AssigneeItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
         }
       }
       
-      if(content.get('risky') === true) {
-        context.begin('div').addClass('sc-view').addClass('assignee-red-flag').begin('img').attr({
-          src: SC.BLANK_IMAGE_URL,
-          title: "_RiskyTooltip".loc(),
-          alt: "_RiskyTooltip".loc()
-        }).addClass('red-flag-icon').end().end();
+      if (Tasks.assignmentsController.get('displayMode') === Tasks.DISPLAY_MODE_TEAM) {
+        var riskyTasksCount = content.get('riskyTasksCount');
+        var failedTasksCount = content.get('failedTasksCount');
+        if(riskyTasksCount > 0 || failedTasksCount > 0) {
+          var riskyTooltip = "_Has".loc() + riskyTasksCount + ' ' + "_Risky".loc() +
+                             ' & ' + failedTasksCount + ' ' + "_Failed".loc() + "_Tasks".loc();
+          context.begin('div').addClass('sc-view').addClass('assignee-red-flag').begin('img').attr({
+            src: SC.BLANK_IMAGE_URL,
+            title: riskyTooltip,
+            alt: riskyTooltip
+          }).addClass('red-flag-icon').end().end();
+        }
       }
       
       assigneeTooltip += (loadingTooltip + '_AssigneeEffortTooltip'.loc());

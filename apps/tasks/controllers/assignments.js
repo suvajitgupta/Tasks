@@ -348,7 +348,8 @@ Tasks.assignmentsController = SC.ArrayController.create(
     var effortString, totalDoneEffortMin = 0, totalDoneEffortMax = 0, totalEffortMin = 0, totalEffortMax = 0, effortMin, effortMax;
     var task, tasks = assigneeObj.tasks;
     var len = tasks.get('length');
-    var riskyTaskCount = 0;
+    var riskyTasksCount = 0;
+    var failedTasksCount = 0;
     if (len === 0) return; // nothing to do
     
     for (var i = 0; i < len; i++) {
@@ -376,7 +377,9 @@ Tasks.assignmentsController = SC.ArrayController.create(
       effortString = task.get('effort');
       var priority = task.get('priority');
       var developmentStatus = task.get('developmentStatus');
-      if(developmentStatus === CoreTasks.TASK_STATUS_RISKY) riskyTaskCount++;
+      if(developmentStatus === CoreTasks.TASK_STATUS_RISKY) riskyTasksCount++;
+      var validation = task.get('validation');
+      if(validation === CoreTasks.TASK_VALIDATION_FAILED) failedTasksCount++;
       if(!effortString && priority !== CoreTasks.TASK_PRIORITY_LOW) {
         if(developmentStatus === CoreTasks.TASK_STATUS_DONE) doneTaskWithUnspecifiedEffort = true;
         else taskWithUnspecifiedEffort = true;
@@ -393,7 +396,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
           effortMax = parseFloat(parseFloat(effortString.slice(idx+1), 10).toFixed(3));
           effortMax = CoreTasks.convertTimeToDays(effortMax + timeUnit);
         }
-        if(developmentStatus === CoreTasks.TASK_STATUS_DONE && task.get('validation') !== CoreTasks.TASK_VALIDATION_FAILED) {
+        if(developmentStatus === CoreTasks.TASK_STATUS_DONE && validation !== CoreTasks.TASK_VALIDATION_FAILED) {
           totalDoneEffortMin = parseFloat((totalDoneEffortMin + effortMin).toFixed(3));
           totalDoneEffortMax = parseFloat((totalDoneEffortMax + effortMax).toFixed(3));
         }
@@ -434,7 +437,8 @@ Tasks.assignmentsController = SC.ArrayController.create(
     assignmentNodes.push (SC.Object.create({
       displayName: displayName,
       displayEffort: displayEffort === ''? null : displayEffort,
-      risky:  riskyTaskCount > 0,
+      riskyTasksCount:  riskyTasksCount,
+      failedTasksCount:  failedTasksCount,
       loading: loading,
       assignee: assigneeObj.assignee,
       tasksCount: tasks.get('length'),
