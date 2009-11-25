@@ -55,13 +55,30 @@ Tasks.attributeFilterShowstoppers = [
   CoreTasks.TASK_VALIDATION_FAILED
 ];
 
+Tasks.DISPLAY_MODE_OVERVIEW = false;
+Tasks.DISPLAY_MODE_DETAILS = true;
+
 Tasks.assignmentsController = SC.ArrayController.create(
 /** @scope Tasks.assignmentsController.prototype */ {
   
   contentBinding: 'Tasks.projectController.tasks',
   assignedTasks: null,
-  nodesExpanded: true,
-  _timer: null,
+  _showDetails: true,
+  _clearingAssigneeSelection: false,
+  displayMode: function(key, value) {
+    if (value !== undefined) {
+      if(value === false) { // clear assignee selection before going to Summmary mode
+        var assigneeSelection = this.get('assigneeSelection');
+        if(assigneeSelection !== null && assigneeSelection !== '') {
+          this._clearingAssigneeSelection = true;
+          this.set('assigneeSelection', null);
+        }
+      }
+      this.set('_showDetails', value);
+    } else {
+      return this.get('_showDetails');
+    }
+  }.property('_showDetails').cacheable(),
   
   assigneeSelection: null,
   searchFilter: null,
@@ -420,7 +437,8 @@ Tasks.assignmentsController = SC.ArrayController.create(
       risky:  riskyTaskCount > 0,
       loading: loading,
       assignee: assigneeObj.assignee,
-      treeItemChildren: tasks.sort(function(a,b) { // sort by status, then by validation (if "Done"), then by priority, lastly by type
+      tasksCount: tasks.get('length'),
+      treeItemChildren: this._showDetails? tasks.sort(function(a,b) { // sort by status, then by validation (if "Done"), then by priority, lastly by type
         
         var aStatus = a.get('developmentStatus');
         var bStatus = b.get('developmentStatus');
@@ -442,16 +460,17 @@ Tasks.assignmentsController = SC.ArrayController.create(
         
         var aID = a.get('id');
         var bID = b.get('id');
-        console.log(a.get('name') + ': ' + aID + '; ' + b.get('name') + ': ' + bID);
         if(aID < 0 && bID < 0) return bID - aID;
         else if(aID < 0) return 1;
         else if(bID < 0) return -1;
         else return aID - bID;
         
-      }),
-      treeItemIsExpanded: this.nodesExpanded
+      }) : null,
+      treeItemIsExpanded: true
     }));
   },
+  
+  _timer: null,
   
   _contentHasChanged: function() {
     // console.log("DEBUG: Tasks content changed at: " + new Date().format('hh:mm:ss a'));
@@ -460,7 +479,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
       this._timer = null;
     }
   	this.invokeOnce(this.showAssignments);
-  }.observes('[]'),
+  }.observes('[]', '_showDetails'),
   
   _filteringHasChanged: function() { // allow users to change filters over a half second before redrawing tasks pane
     if (this._timer) this._timer.invalidate();
@@ -468,19 +487,17 @@ Tasks.assignmentsController = SC.ArrayController.create(
   },
   
   _assigneeSelectionHasChanged: function() {
-    // console.log("DEBUG: Assignee selection changed: '" + this.assigneeSelection + "'");
+    // console.log("DEBUG: Assignee selection changed to '" + this.assigneeSelection + "'" + " displayDetails = " + this.get('_showDetails'));
+    if(!this.get('_showDetails') && !this._clearingAssigneeSelection) {
+      this.set('_showDetails', true);
+    }
+    this._clearingAssigneeSelection = false;
     this._filteringHasChanged();
   }.observes('assigneeSelection'),
   
   _searchFilterHasChanged: function() {
-    // console.log("DEBUG: Search filter changed: '" + this.searchFilter + "'");
+    // console.log("DEBUG: Search filter changed to '" + this.searchFilter + "'");
     this._filteringHasChanged();
-  }.observes('searchFilter'),
-  
-  collapse: function() {
-    this.nodesExpanded = false;
-    this.showAssignments();
-    this.nodesExpanded = true;
-  }
+  }.observes('searchFilter')
   
 });

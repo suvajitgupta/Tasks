@@ -15,6 +15,13 @@ sc_require('mixins/localized_label');
 Tasks.AssigneeItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
 /** @scope Tasks.AssigneeItemView.prototype */ {
   
+  mouseDown: function(event) {
+    if(Tasks.assignmentsController.get('displayMode') === Tasks.DISPLAY_MODE_OVERVIEW) {
+      var loginNameMatches = this.getPath('content.displayName').match(/\((.+)\)/);
+      Tasks.assignmentsController.set('assigneeSelection', loginNameMatches[1]);
+    }
+  },
+  
   render: function(context, firstTime) {
     
     var content = this.get('content');
@@ -22,9 +29,7 @@ Tasks.AssigneeItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       
       context.addClass('assignee-item');
       
-      var tasksCount = 0;
-      var tasks = content.get('treeItemChildren');
-      if (tasks) tasksCount = tasks.get('length');
+      var tasksCount = content.get('tasksCount');
       var assigneeTooltip = "_Has".loc() + tasksCount + "_Tasks".loc();
       
       var loadingTooltip = '';

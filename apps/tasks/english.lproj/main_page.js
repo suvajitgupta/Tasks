@@ -145,7 +145,7 @@ Tasks.mainPage = SC.Page.design({
       childViews: [
       
         SC.LabelView.design(SCUI.SimpleButton,{
-          layout: { centerY: 0, left: 10, height: 18, width: 105 },
+          layout: { centerY: 0, left: 0, height: 18, width: 105 },
           icon: 'add-icon',
           classNames: ['toolbar-label'],
           value: "_AddProject".loc(),
@@ -156,7 +156,7 @@ Tasks.mainPage = SC.Page.design({
         }),
       
         SC.LabelView.design(SCUI.SimpleButton,{
-          layout: { centerY: 0, left: 115, height: 18, width: 105 },
+          layout: { centerY: 0, left: 100, height: 18, width: 105 },
           icon: 'delete-icon',
           classNames: ['toolbar-label'],
           value: "_DelProject".loc(),
@@ -172,7 +172,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         SC.LabelView.design(SCUI.SimpleButton,{
-          layout: { centerY: 0, left: 235, height: 18, width: 95 },
+          layout: { centerY: 0, left: 230, height: 18, width: 95 },
           icon: 'add-icon',
           classNames: ['toolbar-label'],
           value: "_AddTask".loc(),
@@ -183,7 +183,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         SC.LabelView.design(SCUI.SimpleButton,{
-          layout: { centerY: 0, left: 330, height: 18, width: 90 },
+          layout: { centerY: 0, left: 315, height: 18, width: 90 },
           icon: 'delete-icon',
           classNames: ['toolbar-label'],
           value: "_DelTask".loc(),
@@ -193,23 +193,20 @@ Tasks.mainPage = SC.Page.design({
           action: 'deleteTask'
         }),
         
-        SC.View.design({
-          layout: { top: 8, bottom: 8, right: 595, width: 2 },
-          classNames: ['top-bar-divider']
-        }),
-
-        SC.LabelView.design(SCUI.SimpleButton,{
-          layout: { centerY: 0, right: 510, height: 18, width: 75 },
-          icon: 'collapse-icon',
+        SC.SegmentedView.design({
+          layout: { centerY: 0, centerX: -40, height: 24, width: 130},
           classNames: ['toolbar-label'],
-          value: "_Collapse".loc(),
-          toolTip: "_CollapseTooltip".loc(),
-          target: 'Tasks.assignmentsController',
-          action: 'collapse'
+          items: [
+            { title: "_Overview".loc(), value: false },
+            { title: "_Details".loc(), value: true }
+          ],
+          itemTitleKey: 'title',
+          itemValueKey: 'value',
+          valueBinding: 'Tasks.assignmentsController.displayMode'
         }),
 
         SC.LabelView.design(SCUI.SimpleButton,{
-          layout: { centerY: 0, right: 440, height: 18, width: 60 },
+          layout: { centerY: 0, right: 430, height: 18, width: 60 },
           displayProperties: [ 'icon' ],
           iconBinding: 'Tasks.assignmentsController.attributeFilterIcon',
           classNames: ['toolbar-label'],
@@ -220,7 +217,7 @@ Tasks.mainPage = SC.Page.design({
         }),
         
         SC.TextFieldView.design(SCUI.ToolTip, {
-          layout: { centerY: 0, height: 24, right: 225, width: 200 },
+          layout: { centerY: 0, height: 24, right: 220, width: 200 },
           classNames: ['assignee-selection-bar'],
           hint: "_AssigneeSelectionHint".loc(),
           toolTip: "_AssigneeSelectionTooltip".loc(),
@@ -236,7 +233,7 @@ Tasks.mainPage = SC.Page.design({
         }),
       
         SC.View.design({ // Assignee Selection cancel button
-          layout: { centerY: 1, height: 12, right: 230, width: 12 },
+          layout: { centerY: 1, height: 12, right: 225, width: 12 },
           isVisible: NO,
           classNames: ['filter-cancel-icon'],
           mouseDown: function() {
@@ -314,7 +311,9 @@ Tasks.mainPage = SC.Page.design({
           exampleView: Tasks.TaskItemView,
           groupExampleView: Tasks.AssigneeItemView,
           delegate: Tasks.reassignmentController,
-          selectOnMouseDown: YES
+          selectOnMouseDown: YES,
+          target: 'Tasks.assignmentsController',
+          action: 'showAssignee'
         }),
         
         // ..........................................................

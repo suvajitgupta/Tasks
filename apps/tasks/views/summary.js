@@ -31,7 +31,7 @@ Tasks.SummaryView = SC.View.extend(
 
       var tasksCount = 0;
       for(var i=0; i < assigneesCount; i++) {
-        tasksCount += assignmentNodes.objectAt(i).get('treeItemChildren').get('length');
+        tasksCount += assignmentNodes.objectAt(i).get('tasksCount');
       }
       summary += tasksCount + "_Tasks".loc();
     }

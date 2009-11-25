@@ -133,7 +133,7 @@ v Add online training video using Captivate or Camtasia [SG] $Feature
 - Beta: Prompt user to save changes (if any) before logging out [SG] <SE> $Feature
 - Restore application settings/state from last login using HTML5 storage [SG] <MB> $Feature
 | See demo.sproutcore.com/user_defaults and lookup SproutCore blog for Charles' posting on this topic
-- Add "Collapse" button to close all assignee treenodes and show everyone at a glance [SG] $Feature @Done %Passed
+- Add "Overview" display mode (vs. "Details") to show everyone at a glance, clicking on assignee shows their tasks [SG] $Feature @Done %Passed
 v Add hotkeys for common operations (like add Projects/Tasks and Save) [EG] <SG> $Feature @Done %Passed
 - Add Undo/Redo buttons in top toolbar (till last Save) [SG] <SE> $Feature
 v Support disconnected operation and synchronization after network reconnection using SproutDB [SG] <SE> $Feature
