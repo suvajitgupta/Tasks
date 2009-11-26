@@ -302,7 +302,10 @@ Tasks.assignmentsController = SC.ArrayController.create(
             }
           }
           else if(namePattern) {
-            if(!taskName.match(namePattern)) return;
+            if(!taskName.match(namePattern)) {
+              var description = task.get('description');
+              if(!description || !description.match(namePattern)) return;
+            }
           }
         }
         assigneeObj.tasks.push(task);
