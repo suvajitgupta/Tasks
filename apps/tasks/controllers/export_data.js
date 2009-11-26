@@ -96,13 +96,14 @@ Tasks.exportDataController = SC.ObjectController.create(
     var assignmentNodes = tasksTree.get('treeItemChildren');
     var assigneesCount = assignmentNodes.get('length');
     for(var i=0; i < assigneesCount; i++) {
-      
       var assignmentNode = assignmentNodes.objectAt(i);
       var tasks = assignmentNode.get('treeItemChildren');
-      var tasksCount = tasks.get('length');
+      var tasksCount = assignmentNode.get('tasksCount');
       ret += '\n# ' + assignmentNode.get('displayName').loc() + '; ' + "_Has".loc() + tasksCount + "_Tasks".loc() + '\n';
-      for(var j=0; j < tasksCount; j++) {
-        ret += tasks.objectAt(j).exportData();
+      if(tasks) {
+        for(var j=0; j < tasksCount; j++) {
+          ret += tasks.objectAt(j).exportData();
+        }
       }
     }
     
