@@ -60,6 +60,7 @@
   padding-left: 8px !important;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
+  opacity: 0.9;
 }
 
 .assignee-not-loaded label {
@@ -224,6 +225,7 @@
   color: white;
   background: #363 none repeat scroll 0 0;
 	outline: 1px solid #363 !important;
+  opacity: 0.9;
 }
 
 .task-validation-failed {
@@ -234,6 +236,7 @@
   color: white;
   background: #C33 none repeat scroll 0 0;
 	outline: 1px solid #C33 !important;
+  opacity: 0.9;
 }
 
 
