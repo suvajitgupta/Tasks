@@ -417,8 +417,8 @@ Tasks.mixin({
    */
   addTask: function() {
     
-    if(!CoreTasks.getPath('permissions.canAddTask')) {
-      console.log('Error: you do not have permission to add a task');
+    if(!Tasks.tasksController.isAddable()) {
+      console.log('Error: this is the wrong display mode or you do not have permission to add a task');
       return null;
     }
     
@@ -467,8 +467,8 @@ Tasks.mixin({
    */
   deleteTask: function() {
     
-    if(!CoreTasks.getPath('permissions.canDeleteTask')) {
-      console.log('Error: you do not have permission to delete a task');
+    if(!Tasks.tasksController.isDeletable()) {
+      console.log('Error: this is the wrong display mode or you do not have permission to delete a task');
       return;
     }
     
