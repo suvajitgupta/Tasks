@@ -496,6 +496,7 @@ Tasks.mixin({
   /**
    * Add a new user.
    */
+  // FIXME: [SG/SE] Beta: see why after adding a user and doing a Save, all tasks show up assigned to this new user
   addUser: function() {
 
     if(!CoreTasks.getPath('permissions.canAddUser')) {
@@ -513,6 +514,7 @@ Tasks.mixin({
   /**
    * Delete selected user.
    */
+  // FIXME: [SG/SE] Beta: after add a new user, press Save, then login again and delete this user - Save fails this time
   deleteUser: function() {
   
     if(!CoreTasks.getPath('permissions.canDeleteUser')) {
