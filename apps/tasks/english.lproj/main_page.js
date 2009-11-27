@@ -177,7 +177,7 @@ Tasks.mainPage = SC.Page.design({
           classNames: ['toolbar-label'],
           value: "_AddTask".loc(),
           toolTip: "_AddTaskTooltip".loc(),
-          isEnabledBinding: 'CoreTasks.permissions.canAddTask',
+          isEnabledBinding: 'Tasks.tasksController.isAddable',
           target: 'Tasks',
           action: 'addTask'
         }),

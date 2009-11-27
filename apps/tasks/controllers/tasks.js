@@ -17,6 +17,16 @@ Tasks.tasksController = SC.TreeController.create(
   allowsEmptySelection: NO,
   treeItemIsGrouped: YES,
   
+  isAddable: function() {
+    
+    if(Tasks.assignmentsController.get('displayMode') === Tasks.DISPLAY_MODE_TEAM) return false
+    
+    if(!CoreTasks.getPath('permissions.canAddTask')) return false;
+    
+    return true;
+    
+  }.property().cacheable(),
+  
   isEditable: function() {
     
     if(!CoreTasks.getPath('permissions.canEditTask')) return false;
@@ -30,6 +40,7 @@ Tasks.tasksController = SC.TreeController.create(
   
   isDeletable: function() {
     
+    if(Tasks.assignmentsController.get('displayMode') === Tasks.DISPLAY_MODE_TEAM) return false
     if(!CoreTasks.getPath('permissions.canDeleteTask')) return false;
     
     var sel = this.get('selection');
