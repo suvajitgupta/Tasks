@@ -37,7 +37,6 @@ Tasks.reallocationController = SC.Object.create(SC.CollectionViewDelegate,
   /**
     Called if the user actually drops on the view.
   */
-  // FIXME: [SG] Beta: fix project selection loss after reallocation operation
   collectionViewPerformDragOperation: function(view, drag, dragOp, idx, dropOp) {
     
     if (dragOp & SC.DRAG_REORDER) return SC.DRAG_MOVE; // disallow reorder
