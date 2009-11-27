@@ -69,12 +69,11 @@ Tasks.SIGNUP = SC.Responder.create(Tasks.Sha1,{
   
   sha1ify: function() {
     var ret;
-    var userLogin = Tasks.signupController.get('loginName');
-    var userPassword = Tasks.signupController.get('password');
-    if (userLogin && userPassword) {
-      ret = this.sha1Hash('--%@--%@--'.fmt(userLogin, userPassword));
+    var password = Tasks.signupController.get('password');
+    if (password) {
+      ret = this.sha1Hash(password);
     }else{
-      ret = "";
+      ret = '';
     }
     return ret;
   }

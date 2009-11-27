@@ -230,5 +230,6 @@ CoreTasks.User.mixin(/** @scope CoreTasks.User */ {
 CoreTasks.User.NEW_USER_HASH = {
   name: CoreTasks.NEW_USER_NAME,
   loginName: CoreTasks.NEW_USER_LOGIN_NAME,
-  role: CoreTasks.USER_ROLE_DEVELOPER
+  role: CoreTasks.USER_ROLE_DEVELOPER,
+  password: ''
 };
