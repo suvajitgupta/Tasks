@@ -17,6 +17,7 @@ CoreTasks = SC.Object.create({
   store: SC.Store.create({
     
     recordDidChange: function(recordType, id, storeKey, key) {
+      // console.log("DEBUG: recordDidChange(): " + recordType);
       sc_super() ; // MUST COME FIRST
       
       if (storeKey === undefined) storeKey = recordType.storeKeyFor(id);
@@ -224,6 +225,7 @@ CoreTasks = SC.Object.create({
    * @param {Hash} dataHash An optional data hash to seed the new record.
    */
   createRecord: function(recordType, dataHash) {
+    // console.log("DEBUG: createRecord(): " + recordType);
     if (!dataHash) dataHash = {};
 
     // Assign the new record a negative integer ID (will be overwritten upon persistence to the

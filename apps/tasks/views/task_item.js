@@ -160,7 +160,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     return NO;
   },
   
-  // FIXME: [SC] Make task in-cell editors fit with collection view item size
+  // FIXME: [SC] make task in-cell editors fit with collection view item size
   inlineEditorWillBeginEditing: function(inlineEditor) {
     if(!CoreTasks.getPath('permissions.canEditTask')) {
       console.log('Error: you do not have permission to edit a task');
