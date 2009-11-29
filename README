@@ -7,7 +7,7 @@ git clone git://github.com/sproutit/sproutcore-abbot.git abbot
 git clone git://github.com/suvajitgupta/Tasks.git tasks
 cd tasks/frameworks
 git clone git@github.com:Rigel/SCUI.git scui
-git clone git://github.com/suvajitgupta/sproutcore.git sproutcore
+git clone git://github.com/sproutit/sproutcore.git sproutcore
 cd sproutcore
 git checkout -b origin/stable
 cd ../../
