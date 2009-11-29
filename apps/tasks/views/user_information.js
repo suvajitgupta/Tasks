@@ -14,8 +14,6 @@
 Tasks.UserInformationView = SC.View.extend(
 /** @scope Tasks.UserInformationView.prototype */ {
   
-  isRoleChangeable: YES,
-  
   createChildViews: function() {
     
     var childViews = [];
@@ -57,7 +55,7 @@ Tasks.UserInformationView = SC.View.extend(
       localize: YES,
       objects: CoreTasks.roles,
       valueBinding: SC.binding('*content.role', this),
-      isEnabledBinding: SC.binding('*isRoleChangeable', this)
+      isEnabledBinding: 'CoreTasks.permissions.canEditUserRole'
     }));
     childViews.push(this.roleField);
     
