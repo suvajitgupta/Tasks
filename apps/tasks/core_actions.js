@@ -357,7 +357,7 @@ Tasks.mixin({
     var project = CoreTasks.createRecord(CoreTasks.Project, { name: CoreTasks.NEW_PROJECT_NAME.loc() } );
     var pc = this.projectsController;
     pc.selectObject(project);
-    // FIXME: [SG] may need to expand the delay interval for launching inline editors on IE
+    // FIXME: [SG] Beta: may need to expand the delay interval for launching inline editors on IE
     CoreTasks.invokeLater(pc.editNewProject, 200, project);
     return project;
   },
