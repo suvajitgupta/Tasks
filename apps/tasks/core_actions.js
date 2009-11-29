@@ -349,7 +349,7 @@ Tasks.mixin({
   addProject: function() {
     
     if(!CoreTasks.getPath('permissions.canAddProject')) {
-      console.log('Error: you do not have permission to add a project');
+      console.error('You do not have permission to add a project');
       return null;
     }
     
@@ -368,7 +368,7 @@ Tasks.mixin({
   deleteProject: function() {
     
     if(!CoreTasks.getPath('permissions.canDeleteProject')) {
-      console.log('Error: you do not have permission to delete a project');
+      console.error('You do not have permission to delete a project');
       return;
     }
     
@@ -418,7 +418,7 @@ Tasks.mixin({
   addTask: function() {
     
     if(!Tasks.tasksController.isAddable()) {
-      console.log('Error: this is the wrong display mode or you do not have permission to add a task');
+      console.error('This is the wrong display mode or you do not have permission to add a task');
       return null;
     }
     
@@ -468,7 +468,7 @@ Tasks.mixin({
   deleteTask: function() {
     
     if(!Tasks.tasksController.isDeletable()) {
-      console.log('Error: this is the wrong display mode or you do not have permission to delete a task');
+      console.error('This is the wrong display mode or you do not have permission to delete a task');
       return;
     }
     
@@ -499,7 +499,7 @@ Tasks.mixin({
   addUser: function() {
 
     if(!CoreTasks.getPath('permissions.canAddUser')) {
-      console.log('Error: you do not have permission to add a user');
+      console.error('You do not have permission to add a user');
       return null;
     }
     
@@ -516,7 +516,7 @@ Tasks.mixin({
   deleteUser: function() {
   
     if(!CoreTasks.getPath('permissions.canDeleteUser')) {
-      console.log('Error: you do not have permission to delete a user');
+      console.error('You do not have permission to delete a user');
       return;
     }
     
@@ -558,7 +558,7 @@ Tasks.mixin({
    * @param {Integer} stateNum The number of the sate (ex. "4").
    */
   _logActionNotHandled: function(action, stateName, stateNum) {
-    console.log('Error: action not handled in state %@[%@]: %@'.fmt(stateName, stateNum, action));
+    console.error('Action not handled in state %@[%@]: %@'.fmt(stateName, stateNum, action));
   },
   
   /**
