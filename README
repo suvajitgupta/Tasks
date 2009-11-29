@@ -10,6 +10,7 @@ git clone git@github.com:Rigel/SCUI.git scui
 git clone git://github.com/sproutit/sproutcore.git sproutcore
 cd ..
 
+
 RUNNING PERSEVERE
 ==============================================================================
 
@@ -33,6 +34,7 @@ INITIAL PERSEVERE SETUP
 ./user-add.sh 'System Admin' 'SA' 'Manager' localhost:8088
 (press Enter twice to create a blank password for now)
 
+
 RUNNING TASKS
 ==============================================================================
 
@@ -40,16 +42,14 @@ RUNNING TASKS
 
 ../abbot/bin/sc-server --port 4400
 
-(This assumes that you have the SC build tools installed.)
-
-1) Navigate to the following URL...
+2) Navigate to the following URL...
 
 http://localhost:4400/tasks
 
-2) Enter 'SA' in the dialog box and no password and press Enter.
+3) Enter 'SA' in the dialog box and no password and press Enter.
    The Tasks GUI should come up.
 
-3) Add a project, add tasks to it, hit Save periodically, have fun!
+4) Add a project, add tasks to it, hit Save periodically, have fun!
    Alternatively, to get some sample data to play with, you can click
    on the Import button and paste in the contents of the file:
 
