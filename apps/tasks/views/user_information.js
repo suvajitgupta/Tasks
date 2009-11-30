@@ -82,6 +82,7 @@ Tasks.UserInformationView = SC.View.extend(
     childViews.push(this.passwordLabel);
     this.passwordField = this.createChildView(SC.TextFieldView.extend({
       layout: { top: 138, left: 90, height: 20, width: 275 },
+      isPassword: YES,
       hint: "_PasswordHint".loc(),
       isPassword: YES,
       valueBinding: SC.binding('*content.password', this).toLocale()

@@ -52,6 +52,7 @@ Tasks.loginPage = SC.Page.create({
       // TODO: [SG] Beta: see how to mask password as it is entered on screen
       passwordField: SC.TextFieldView.design({
         layout: { top: 154, left: 344, width: 246, height: 26 },
+        isPassword: YES,
         classNames: ['login-name'],
         valueBinding: 'Tasks.loginController.password'
       }),
