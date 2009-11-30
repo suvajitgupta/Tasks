@@ -25,7 +25,7 @@ Tasks.UserInformationView = SC.View.extend(
     }));
     childViews.push(this.fullNameLabel);
     this.fullNameField = this.createChildView(SC.TextFieldView.extend({
-      layout: { top: 10, left: 90, height: 20, width: 275 },
+      layout: { top: 10, left: 90, height: 20, width: 300 },
       hint: "_FirstLast".loc(),
       valueBinding: SC.binding('*content.name', this).toLocale()
     }));
@@ -38,7 +38,7 @@ Tasks.UserInformationView = SC.View.extend(
     }));
     childViews.push(this.loginNameLabel);
     this.loginNameField = this.createChildView(SC.TextFieldView.extend({
-      layout: { top: 42, left: 90, height: 20, width: 275 },
+      layout: { top: 42, left: 90, height: 20, width: 300 },
       hint: "_Initials".loc(),
       valueBinding: SC.binding('*content.loginName', this).toLocale()
     }));
@@ -51,7 +51,7 @@ Tasks.UserInformationView = SC.View.extend(
     }));
     childViews.push(this.roleLabel);
     this.roleField = this.createChildView(SC.SelectFieldView.extend({
-      layout: { top: 74, left: 90, height: 20, width: 275 },
+      layout: { top: 74, left: 90, height: 20, width: 300 },
       localize: YES,
       objects: CoreTasks.roles,
       valueBinding: SC.binding('*content.role', this),
@@ -66,7 +66,7 @@ Tasks.UserInformationView = SC.View.extend(
     }));
     childViews.push(this.emailLabel);
     this.emailField = this.createChildView(SC.TextFieldView.extend(SC.Validatable,{
-      layout: { top: 106, left: 90, height: 20, width: 275 },
+      layout: { top: 106, left: 90, height: 20, width: 300 },
       validator: SC.Validator.EmailOrEmpty,
       errorLabel: "_InvalidEmailAddress".loc(),
       hint: "_EmailAddress".loc(),
@@ -81,7 +81,7 @@ Tasks.UserInformationView = SC.View.extend(
     }));
     childViews.push(this.passwordLabel);
     this.passwordField = this.createChildView(SC.TextFieldView.extend({
-      layout: { top: 138, left: 90, height: 20, width: 275 },
+      layout: { top: 138, left: 90, height: 20, width: 300 },
       isPassword: YES,
       hint: "_PasswordHint".loc(),
       isPassword: YES,

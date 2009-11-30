@@ -3,7 +3,6 @@
 //============================================================================
 /*globals CoreTasks Tasks sc_require*/
 sc_require('core');
-sc_require('lib/sha1');
 sc_require('views/user_information');
 
 /**
@@ -17,7 +16,7 @@ sc_require('views/user_information');
 
 */
 
-Tasks.SIGNUP = SC.Responder.create(Tasks.Sha1,{
+Tasks.SIGNUP = SC.Responder.create({
   
   _newUser: null,
   
@@ -37,8 +36,8 @@ Tasks.SIGNUP = SC.Responder.create(Tasks.Sha1,{
   // called when the OK button is pressed.
   submit: function() {
     // Save the new user
-    Tasks.signupController.set('password',this.sha1ify());
     Tasks.set('loginName', Tasks.signupController.get('loginName'));
+    Tasks.signupController.set('password', Tasks.userController.hashPassword(Tasks.signupController.get('password')));
     Tasks.saveData();
     
     // Login new user
@@ -65,17 +64,6 @@ Tasks.SIGNUP = SC.Responder.create(Tasks.Sha1,{
   _refocusLoginPanel: function() {
     var panel = Tasks.getPath('loginPage.panel');
     if(panel) panel.focus();
-  },
-  
-  sha1ify: function() {
-    var ret;
-    var password = Tasks.signupController.get('password');
-    if (password) {
-      ret = this.sha1Hash(password);
-    }else{
-      ret = '';
-    }
-    return ret;
-  }
+  }  
   
 });

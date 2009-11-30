@@ -17,7 +17,7 @@ sc_require('core');
 Tasks.signupPage = SC.Page.design({
   // The main signup pane.  used to show info
   mainPane: SC.PanelPane.design({
-    layout: { centerX: 0, width: 415, centerY: 0, height: 220 },
+    layout: { centerX: 0, width: 420, centerY: 0, height: 225 },
     
     defaultResponder: Tasks.SIGNUP,
 
@@ -26,12 +26,13 @@ Tasks.signupPage = SC.Page.design({
       childViews: "prompt userInformation signupButton cancelButton".w(),
       
       prompt: SC.LabelView.design({
-        layout: { top: 5, left: 10, height: 18, right: 10 },
-         value: "_SignupPrompt".loc()
+        layout: { top: 5, left: 10, height: 24, right: 10 },
+        classNames: ['login-label'],
+        value: "_SignupPrompt".loc()
       }),
       
       userInformation: Tasks.UserInformationView.design({
-        layout: { top: 20, left: 10, bottom: 35, right: 10 },
+        layout: { top: 26, left: 10, bottom: 35, right: 10 },
         isRoleChangeable: NO,
         contentBinding: 'Tasks.signupController'
       }),

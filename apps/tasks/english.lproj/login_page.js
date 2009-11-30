@@ -49,7 +49,6 @@ Tasks.loginPage = SC.Page.create({
         textAlign: SC.ALIGN_RIGHT,
         value: "_Password:".loc() 
       }),
-      // TODO: [SG] Beta: see how to mask password as it is entered on screen
       passwordField: SC.TextFieldView.design({
         layout: { top: 154, left: 344, width: 246, height: 26 },
         isPassword: YES,
@@ -95,7 +94,6 @@ Tasks.loginPage = SC.Page.create({
       
     }),
     
-    // FIXME: [SG] Beta: see why cursor is not blinking in this field at startup as it used to before
     focus: function() {
       this.contentView.loginNameField.becomeFirstResponder();        
     }

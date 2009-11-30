@@ -2,7 +2,8 @@
 // Tasks.userController
 
 // ==========================================================================
-/*globals Tasks */
+/*globals Tasks sc_require */
+sc_require('lib/sha1');
 
 /** 
 
@@ -11,9 +12,13 @@
   @extends SC.ObjectController
 	@author Suvajit Gupta
 */
-Tasks.userController = SC.ObjectController.create(
+Tasks.userController = SC.ObjectController.create(Tasks.Sha1,
 /** @scope Tasks.userController.prototype */ {
   
-  contentBinding: 'Tasks.usersController.selection'
+  contentBinding: 'Tasks.usersController.selection',
+  
+  hashPassword: function(password) {
+    return password? this.sha1Hash(password) : '';
+  }
 
 });
