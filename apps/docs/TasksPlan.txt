@@ -103,7 +103,7 @@ User Manager GUI
 - Allow new guests to sign up from login screen and them in immediately after [JH2] <SG> @Done %Passed $Feature
 ^ Add assignee filtering (space or comma separators, "none" for unassigned) & corresponding delete button in top toolbar [SG] <JH2> @Done $Feature %Passed
 - Allow assignee filtering by matching any part of login or full name [SG] $Feature @Done %Passed
-- Set assignee selection filter to logged in user if they are a Developer, filter out Other tasks if they are a Tester [SG] @Done $Feature %Passed
+- Set assignee selection filter to logged in user if they are a Developer [SG] @Done $Feature %Passed
 ^ Add User Manager with "Add/Del. User"  buttons in toolbar (reuse user information view with signup screen) [SG] <JH2> @Done %Passed $Feature
 - Reset task assignee/submitter after user deletion <SE> [SG] $Feature @Done %Passed
 - Beta: Add password to login screen and change password dialog in User Manager (ask to reenter password) [SG] <JH2> $Feature @Active

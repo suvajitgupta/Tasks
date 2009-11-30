@@ -128,9 +128,6 @@ Tasks.mixin({
         if(role === CoreTasks.USER_ROLE_DEVELOPER) { // Set assignee selection filter to current user
           Tasks.assignmentsController.set('assigneeSelection', this.loginName);
         }
-        else if(role === CoreTasks.USER_ROLE_TESTER) { // Filter out Other tasks
-          Tasks.assignmentsController.attributeFilter(CoreTasks.TASK_TYPE_OTHER, 0);
-        }
         
       }
     }
