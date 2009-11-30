@@ -20,6 +20,7 @@ Tasks.AssigneeItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       var loginNameMatches = this.getPath('content.displayName').match(/\((.+)\)/);
       Tasks.assignmentsController.set('assigneeSelection', loginNameMatches[1]);
     }
+    else sc_super();
   },
   
   render: function(context, firstTime) {
