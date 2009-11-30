@@ -18,6 +18,7 @@ Tasks.loginController = SC.ObjectController.create(
     _panelOpen: false,
     loginError: false,
     loginName: '',
+    password: '',
     
     openPanel: function(){
       if(this._panelOpen) return;
@@ -40,8 +41,9 @@ Tasks.loginController = SC.ObjectController.create(
     
     login: function() {
       var loginName = this.get('loginName');
+      var password = this.get('password');
       if (loginName !== null && loginName !== '') {
-        Tasks.authenticate(loginName, 'password'); // TODO: [SG] Beta: get password from user
+        Tasks.authenticate(loginName, password);
       }
     },
     
@@ -54,8 +56,8 @@ Tasks.loginController = SC.ObjectController.create(
       Tasks.mainPage.get('mainPane').removeAllChildren();
     },
     
-    _loginNameHasChanged: function() {
+    _loginInformationHasChanged: function() {
       this.set('loginError', false);
-    }.observes('loginName')
+    }.observes('loginName', 'password')
     
 });

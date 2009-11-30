@@ -15,6 +15,7 @@
 SC.stringsFor('English', {
 
   // Authentication strings
+  "_LoginPrompt": "Sign into your account",
   "_LoginName:": "Login Name:",
   "_Login": "Login",
   "_LoginError": "Login failed, please try again",

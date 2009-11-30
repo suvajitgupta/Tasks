@@ -34,12 +34,12 @@ Tasks.mixin({
           successCallback: this.authenticationSuccess.bind(this),
           failureCallback: this.authenticationFailure.bind(this)
         };
-        // perservere authentication
-        CoreTasks.User.authenticate(loginName, "", params);
+        // Perservere authentication
+        CoreTasks.User.authenticate(loginName, password, params);
         // sinatra authentication
         // TODO [JH2, SG]  We need a way to determine the backend
         // This has been tested and it works! :)
-        // CoreTasks.User.sinatraAuthenticate(loginName,"",params);
+        // CoreTasks.User.sinatraAuthenticate(loginName, password,params);
         break;
 
       default:
