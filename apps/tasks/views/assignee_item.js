@@ -18,7 +18,8 @@ Tasks.AssigneeItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
   mouseDown: function(event) {
     if(Tasks.assignmentsController.get('displayMode') === Tasks.DISPLAY_MODE_TEAM) {
       var loginNameMatches = this.getPath('content.displayName').match(/\((.+)\)/);
-      Tasks.assignmentsController.set('assigneeSelection', loginNameMatches[1]);
+      var assigneeSelection = loginNameMatches? loginNameMatches[1] : 'none';
+      Tasks.assignmentsController.set('assigneeSelection', assigneeSelection);
     }
     else sc_super();
   },
