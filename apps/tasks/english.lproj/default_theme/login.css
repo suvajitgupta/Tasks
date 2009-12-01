@@ -58,44 +58,44 @@
   color: #444 !important;
 }
 
-.sc-view .login-name {
+.sc-view .login-field {
   background: none;
 }
 
-.safari .sc-view .login-name.focus,
-.mozilla .sc-view .login-name.focus,
-.msie .sc-view .login-name.focus {
+.safari .sc-view .login-field.focus,
+.mozilla .sc-view .login-field.focus,
+.msie .sc-view .login-field.focus {
   outline: 0;
 }
 
-.safari .login-name .border {
+.safari .login-field .border {
   -webkit-appearance: none;
 }
 
-.mozilla .sc-view .login-name .border {
+.mozilla .sc-view .login-field .border {
   -moz-appearance: none;
 }
 
-.msie .sc-view .login-name .border {
+.msie .sc-view .login-field .border {
   border: 0;
 }
 
-.sc-view .login-name .padding {
+.sc-view .login-field .padding {
   left: 0;
   right: 0;
 }
 
-.login-name input {
+.login-field input {
   font-size: 16px;
   font-weight: bold;
   color: #444 !important;
 }
 
-.mozilla .login-name input {
+.mozilla .login-field input {
   top: 4px;
 }
 
-.msie .login-name input {
+.msie .login-field input {
   line-height: 26px;
 }
 

@@ -23,11 +23,12 @@ Tasks.signupPage = SC.Page.design({
 
     contentView: SC.View.design({
       
-      childViews: "prompt userInformation signupButton cancelButton".w(),
+      childViews: "signupPrompt userInformation signupButton cancelButton".w(),
       
-      prompt: SC.LabelView.design({
+      signupPrompt: SC.LabelView.design({
         layout: { top: 5, left: 10, height: 24, right: 10 },
         classNames: ['login-label'],
+        textAlign: SC.ALIGN_CENTER,
         value: "_SignupPrompt".loc()
       }),
       

@@ -39,7 +39,7 @@ Tasks.loginPage = SC.Page.create({
       }),
       loginNameField: SC.TextFieldView.design({
         layout: { top: 113, left: 344, width: 246, height: 26 },
-        classNames: ['login-name'],
+        classNames: ['login-field'],
         valueBinding: 'Tasks.loginController.loginName'
       }),
       
@@ -52,7 +52,7 @@ Tasks.loginPage = SC.Page.create({
       passwordField: SC.TextFieldView.design({
         layout: { top: 154, left: 344, width: 246, height: 26 },
         isPassword: YES,
-        classNames: ['login-name'],
+        classNames: ['login-field'],
         valueBinding: 'Tasks.loginController.password'
       }),
       

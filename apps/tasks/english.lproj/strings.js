@@ -15,7 +15,7 @@
 SC.stringsFor('English', {
 
   // Authentication strings
-  "_LoginPrompt": "Sign into your account",
+  "_LoginPrompt": "Please sign in",
   "_LoginName:": "Login Name:",
   "_Login": "Login",
   "_LoginError": "Login failed, please try again",
@@ -131,7 +131,7 @@ SC.stringsFor('English', {
   "_AssigneeOverloaded": ", currently overloaded; ",
   "_AssigneeEffortTooltip": "Completed/remaining effort shown on right",
   "_NewUserSignup": "New user? Click here to signup.",
-  "_SignupPrompt": "Please enter the following information to signup:",
+  "_SignupPrompt": "Guest User Signup",
   "_Email:": "Email:",
   "_InvalidEmailAddress": "This email address",
   "_EmailAddress": "Your Email Address",
