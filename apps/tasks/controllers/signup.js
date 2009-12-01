@@ -13,4 +13,6 @@
 Tasks.signupController = SC.ObjectController.create(
 /** @scope Tasks.signupController.prototype */ {
   
+  unhashedPassword: ''
+  
 });

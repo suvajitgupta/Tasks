@@ -85,7 +85,7 @@ Tasks.UserInformationView = SC.View.extend(
       isPassword: YES,
       hint: "_PasswordHint".loc(),
       isPassword: YES,
-      valueBinding: SC.binding('*content.password', this).toLocale()
+      valueBinding: SC.binding('*content.unhashedPassword', this).toLocale()
     }));
     childViews.push(this.passwordField);
     

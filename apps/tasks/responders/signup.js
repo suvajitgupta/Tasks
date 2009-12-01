@@ -37,7 +37,8 @@ Tasks.SIGNUP = SC.Responder.create({
   submit: function() {
     // Save the new user
     Tasks.set('loginName', Tasks.signupController.get('loginName'));
-    Tasks.signupController.set('password', Tasks.userController.hashPassword(Tasks.signupController.get('password')));
+    var unhashedPassword = Tasks.signupController.get('unhashedPassword');
+    Tasks.signupController.set('password', Tasks.userController.hashPassword(unhashedPassword));
     Tasks.saveData();
     
     // Login new user
