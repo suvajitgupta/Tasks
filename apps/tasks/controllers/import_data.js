@@ -41,7 +41,6 @@ Tasks.importDataController = SC.ObjectController.create(
      * @param {String} data to be parsed.
      */
     // FIXME: [EO] Beta: why is CoreTasks.store.saveNeeded not being set after a successful import?
-    // FIXME: [SC] Beta: why is Import not working on Safari until you launch panel the second time?
     parseAndLoadData: function() {
       
       var data = this.get('importData');

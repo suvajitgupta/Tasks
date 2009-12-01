@@ -106,7 +106,7 @@ User Manager GUI
 - Set assignee selection filter to logged in user if they are a Developer [SG] @Done $Feature %Passed
 ^ Add User Manager with "Add/Del. User"  buttons in toolbar (reuse user information view with signup screen) [SG] <JH2> @Done %Passed $Feature
 - Reset task assignee/submitter after user deletion <SE> [SG] $Feature @Done %Passed
-- Beta: Add password to login screen and change password dialog in User Manager (ask to reenter password) [SG] <JH2> $Feature @Active
+- Add password to login, signup, and User Manager screens (save in encrypted format) [SG] <JH2> $Feature @Done #Passed
 - Add support for "Teams" (a user can belong to a team, a team can have a lead) [SG] <SE> $Feature
 
 Application Manager GUI
@@ -128,7 +128,7 @@ Application Manager GUI
 - Add online "Help" button in top toolbar & popup help window [SG] @Done %Passed $Feature
 v Add screenshots with callouts for online help content [SG] $Feature
 v Add online training video using Captivate or Camtasia [SG] $Feature
-- Add onscreen help (on panel fields that are complex and on blank workspace to assist new users) <MG> [SG] @Active $Feature
+- Beta: Add onscreen help (on panel fields that are complex and on blank workspace to assist new users) <MG> [SG] @Active $Feature
 - Add Logout button to exit in top toolbar (confirm before exiting, reload data/clear all filters) [SG] <JH2> @Done $Feature %Passed
 - Beta: Prompt user to save changes (if any) before logging out [SG] <SE> $Feature
 - Restore application settings/state from last login using HTML5 storage [SG] <MB> $Feature
