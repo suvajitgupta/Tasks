@@ -1,8 +1,6 @@
-/*globals Tasks */
-
 // Place strings you want to localize here.  In your app, use the key and
 // localize it using "key string": "text".  HINT: For your key names, use the
-// english string with an underscore in front.  This way you can still see
+// English string with an underscore in front.  This way you can still see
 // how your UI will look and you'll notice right away when something needs a
 // localized string added to this file!
 //
@@ -26,7 +24,7 @@ SC.stringsFor('English', {
   "_No": "No",
 
   // Top Bar strings
-  "_Credits": "Credits: Suvajit Gupta, Sean Eidemiller, Josh Holt, Brandon Blatnick, Matt Grantham",
+  "_Credits": "Credits: Suvajit Gupta, Sean Eidemiller, Josh Holt, and Matt Grantham",
   "_User:": "User: ",
   "_Save": "Save",
   "_SaveTooltip": "Save modified Tasks data to the server",
@@ -50,7 +48,7 @@ SC.stringsFor('English', {
   "_TasksSearchTooltip": "Separate #IDs via commas or spaces, otherwise perform case-insensitive match",
   "_DisplayModeTeam": "Team",
   "_DisplayModeTasks": "Tasks",
-  "_DisplayModeTooltip": "Choose 'Team' to see summmary of all assignees, 'Tasks' to see details",
+  "_DisplayModeTooltip": "Choose 'Team' to see summary of all assignees, 'Tasks' to see details",
   
   // Project strings
   "_AddProject": "Add Project",
