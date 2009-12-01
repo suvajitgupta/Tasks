@@ -193,7 +193,7 @@ Tasks.mainPage = SC.Page.design({
           action: 'deleteTask'
         }),
         
-        SC.SegmentedView.design({
+        SC.SegmentedView.design(SCUI.ToolTip, {
           layout: { centerY: 0, centerX: -40, height: 24, width: 130},
           classNames: ['toolbar-label'],
           items: [
@@ -202,6 +202,7 @@ Tasks.mainPage = SC.Page.design({
           ],
           itemTitleKey: 'title',
           itemValueKey: 'value',
+          toolTip: "_DisplayModeTooltip".loc(),
           valueBinding: 'Tasks.assignmentsController.displayMode'
         }),
 

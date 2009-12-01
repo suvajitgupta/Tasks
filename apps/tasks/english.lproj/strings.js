@@ -50,6 +50,7 @@ SC.stringsFor('English', {
   "_TasksSearchTooltip": "Separate #IDs via commas or spaces, otherwise perform case-insensitive match",
   "_DisplayModeTeam": "Team",
   "_DisplayModeTasks": "Tasks",
+  "_DisplayModeTooltip": "Choose 'Team' to see summmary of all assignees, 'Tasks' to see details",
   
   // Project strings
   "_AddProject": "Add Project",
