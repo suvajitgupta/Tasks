@@ -61,8 +61,8 @@ CoreTasks.taskValidationsAllowed = [
 ];
 
 CoreTasks.taskValidationWeights = {};
-CoreTasks.taskValidationWeights[CoreTasks.TASK_VALIDATION_FAILED] = 3;
-CoreTasks.taskValidationWeights[CoreTasks.TASK_VALIDATION_UNTESTED] = 2;
+CoreTasks.taskValidationWeights[CoreTasks.TASK_VALIDATION_UNTESTED] = 3;
+CoreTasks.taskValidationWeights[CoreTasks.TASK_VALIDATION_FAILED] = 2;
 CoreTasks.taskValidationWeights[CoreTasks.TASK_VALIDATION_PASSED] = 1;
 
 
