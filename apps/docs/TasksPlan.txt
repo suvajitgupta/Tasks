@@ -89,7 +89,7 @@ v Add hover over tooltip for assignees to show how many tasks they have and to e
 ^ Add popup viewer/editor for Task submitter, assignee, effort, project, and description [JH2] <SG> @Done %Passed $Feature
 v Add task context menu with options: Add, Edit..., Delete, Snapshot (copy ID/name to clipboard) <JH2> [SG] $Feature
 | "Snapshot" copies task ID and name into clipboard
-- Beta: Add abiity to watch tasks and get email notifications on task changes [SG] <JH2> $Feature
+- Beta: Add ability to watch tasks and get email notifications on task changes [SG] <JH2> $Feature
 - Beta: Highlight newly added tasks with a badge to the left <SE> [SG] $Feature
 - Out of Scope: Add support for nested tasks/tagging $Feature
 | Use "Clustering" approach described in Help instead
