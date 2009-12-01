@@ -26,7 +26,7 @@ Tasks.loginPage = SC.Page.create({
       childViews: 'loginPromptLabel loginNameLabel loginNameField passwordLabel passwordField loginErrorMessage cancelButton loginButton signup'.w(),
       
       loginPromptLabel: SC.LabelView.design({
-        layout: { top: 65, left: 255, width: 250, height: 24 },
+        layout: { top: 65, left: 255, width: 250, height: 30 },
         classNames: ['login-prompt'],
         value: "_LoginPrompt".loc() 
       }),
