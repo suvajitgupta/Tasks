@@ -20,6 +20,7 @@ SC.stringsFor('English', {
   "_LoginSince": "Logged in since ",
   "_Confirmation": "Confirmation",
   "_LogoutConfirmation": "Are you sure you want to log out?",
+  "_SaveConfirmation": "You have unsaved changes - save before logging out?",
   "_Yes": "Yes",
   "_No": "No",
 

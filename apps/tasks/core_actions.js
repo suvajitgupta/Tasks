@@ -291,10 +291,50 @@ Tasks.mixin({
     SC.AlertPane.warn("_Confirmation".loc(), "_LogoutConfirmation".loc(), null, "_No".loc(), "_Yes".loc(), null,
       SC.Object.create({
         alertPaneDidDismiss: function(pane, status) {
-          if(status === SC.BUTTON2_STATUS) Tasks.restart();
+          if(status === SC.BUTTON2_STATUS) {
+            Tasks._exit();
+          }
         }
       })
     );
+  },
+  
+  /**
+   * See if there are any changes before exiting application.
+   */
+  _exit: function() {
+    if(CoreTasks.get('needsSave')) {
+      SC.AlertPane.warn("_Confirmation".loc(), "_SaveConfirmation".loc(), null, "_No".loc(), "_Yes".loc(), null,
+        SC.Object.create({
+          alertPaneDidDismiss: function(pane, status) {
+            if(status === SC.BUTTON2_STATUS) {
+              Tasks.saveAndExit();
+            }
+            else if(status === SC.BUTTON1_STATUS){
+              Tasks.exitNoSave();
+            }
+          }
+        })
+      );
+    }
+    else {
+      this.exitNoSave();
+    }
+  },
+  
+  /**
+   * Save all changes before exiting application.
+   */
+  saveAndExit: function() {
+    CoreTasks.saveChanges();
+    this.restart();
+  },
+  
+  /**
+   * Exit application without saving changes.
+   */
+  exitNoSave: function() {
+    this.restart();
   },
   
   /**
@@ -322,22 +362,6 @@ Tasks.mixin({
     
     this.goState('a', 1);
     
-  },
-  
-  /**
-   * Save all changes before exiting application.
-   */
-  saveAndExit: function() {
-    // TODO: [SG] Beta: implement save & exit
-    this._notImplemented('saveAndExit');
-  },
-  
-  /**
-   * Exit application without saving changes.
-   */
-  exitNoSave: function() {
-    // TODO: [SG] Beta: implement exit w/o save
-    this._notImplemented('exitNoSave');
   },
   
   /**
