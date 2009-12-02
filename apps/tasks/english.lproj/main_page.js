@@ -41,18 +41,18 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         SC.LabelView.design(SCUI.ToolTip, {
-          layout: { centerY: 0, height: 20, centerX: -210, width: 320 },
+          layout: { centerY: 0, height: 20, centerX: -130, width: 320 },
           escapeHTML: NO,
           classNames: ['user-role-message']
         }),
         
         SC.View.design({
-          layout: { top: 8, bottom: 8, right: 491, width: 2 },
+          layout: { top: 8, bottom: 8, right: 405, width: 2 },
           classNames: ['top-bar-divider']
         }),
 
         SC.LabelView.design( SCUI.SimpleButton, {
-          layout: { centerY: 0, right: 420, height: 32, width: 70 },
+          layout: { centerY: 0, right: 340, height: 32, width: 70 },
           icon: ['save-icon'],
           toolTip: "_SaveTooltip".loc(),
           isEnabledBinding: 'CoreTasks.needsSave',
@@ -61,7 +61,7 @@ Tasks.mainPage = SC.Page.design({
         }),
         
         SC.LabelView.design( SCUI.SimpleButton, {
-          layout: { centerY: 0, right: 350, height: 32, width: 70 },
+          layout: { centerY: 0, right: 285, height: 32, width: 70 },
           classNames: ['refresh-icon'],
           toolTip: "_RefreshTooltip".loc(),
           target: 'Tasks',
@@ -69,12 +69,12 @@ Tasks.mainPage = SC.Page.design({
         }),
         
         SC.View.design({
-          layout: { top: 8, bottom: 8, right: 351, width: 2 },
+          layout: { top: 8, bottom: 8, right: 285, width: 2 },
           classNames: ['top-bar-divider']
         }),
         
         SC.LabelView.design( SCUI.SimpleButton, {
-          layout: { centerY: 0, right: 280, height: 32, width: 70 },
+          layout: { centerY: 0, right: 220, height: 32, width: 70 },
           icon: ['import-icon'],
           toolTip: "_ImportTooltip".loc(),
           isEnabledBinding: 'CoreTasks.permissions.canImportData',
@@ -83,7 +83,7 @@ Tasks.mainPage = SC.Page.design({
         }),
         
         SC.LabelView.design( SCUI.SimpleButton, {
-          layout: { centerY: 0, right: 210, height: 32, width: 70 },
+          layout: { centerY: 0, right: 170, height: 32, width: 70 },
           classNames: ['export-icon'],
           toolTip: "_ExportTooltip".loc(),
           target: 'Tasks',
@@ -91,12 +91,12 @@ Tasks.mainPage = SC.Page.design({
         }),
         
         SC.View.design({
-          layout: { top: 8, bottom: 8, right: 211, width: 2 },
+          layout: { top: 8, bottom: 8, right: 170, width: 2 },
           classNames: ['top-bar-divider']
         }),
         
         SC.LabelView.design( SCUI.SimpleButton, {
-          layout: { centerY: 0, right: 140, height: 32, width: 70 },
+          layout: { centerY: 0, right: 100, height: 32, width: 70 },
           classNames: ['settings-icon'],
           toolTip: "_SettingsTooltip".loc(),
           target: 'Tasks',
@@ -104,7 +104,7 @@ Tasks.mainPage = SC.Page.design({
         }),
         
         SC.LabelView.design( SCUI.SimpleButton, {
-          layout: { centerY: 0, right: 70, height: 32, width: 70 },
+          layout: { centerY: 0, right: 50, height: 32, width: 70 },
           classNames: ['help-icon'],
           toolTip: "_HelpTooltip".loc(),
           target: 'Tasks',
