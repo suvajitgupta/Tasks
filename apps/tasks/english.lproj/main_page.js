@@ -5,6 +5,7 @@
 
 sc_require('core');
 sc_require('mixins/localized_label');
+sc_require('views/logo');
 sc_require('views/summary');
 
 /** @namespace
@@ -28,16 +29,8 @@ Tasks.mainPage = SC.Page.design({
       classNames: ['title-bar'],
       childViews: [
       
-        SC.LabelView.design(SCUI.ToolTip, {
-          layout: { centerY: -2, height: 26, left: 6, width: 89 },
-          toolTip: "_Credits".loc(),
-          classNames: ['tasks-logo']
-        }),
-      
-        SC.LabelView.design({
-          layout: { centerY: -6, height: 24, left: 100, width: 50 },
-          classNames: ['tasks-version'],
-          value: Tasks.VERSION
+        Tasks.LogoView.design({
+          layout: { centerY: 0, height: 26, left: 0, width: 150 }
         }),
 
         SC.LabelView.design(SCUI.ToolTip, {

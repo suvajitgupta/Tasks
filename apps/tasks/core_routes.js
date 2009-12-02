@@ -23,31 +23,54 @@ Tasks.mixin( /** @scope Tasks */ {
   
   defaultProjectName: null,
   defaultProject: null,
+  detailTaskID: null,
 
   registerRoutes: function() {
     SC.routes.add('project', Tasks, 'routeToProject');
+    SC.routes.add('task', Tasks, 'routeToTask');
     SC.routes.add('help', Tasks, 'routeToHelp');
     SC.routes.add(':', Tasks, 'routeDefault'); // the catch-all case that happens if nothing else matches
   },
 
   /**
-    Select specified project on route
+    At startup, select specified project on route
   */
   routeToProject: function(params) {
     if(SC.none(params.name)) {
       console.log("Error: missing project name for URL routing");
     }
     else {
-      this.set('defaultProjectName', params.name);
-      this.restart();
+      Tasks.set('defaultProjectName', params.name);
+      Tasks.restart();
     }
   },
   
+  /**
+    Show details of specified task on route
+  */
+  routeToTask: function(params) {
+    Tasks._closeMainPage();
+    if(SC.none(params.ID)) {
+      console.log("Error: missing task ID for URL routing");
+    }
+    else {
+      Tasks.set('detailTaskID', params.ID);
+      Tasks.getPath('taskPage.mainPane').append();
+    }
+  },
   
   /**
     Show online help skipping authentication
   */
   routeToHelp: function(params) {
+    Tasks._closeMainPage();
+    Tasks.getPath('helpPage.mainPane').append();
+  },
+  
+  /**
+    Close main page if already logged in
+  */
+  _closeMainPage: function() {
     if(CoreTasks.get('currentUser')) { // logged in, so close
       var mainPage = Tasks.getPath('mainPage.mainPane');
       if(mainPage) {
@@ -55,9 +78,7 @@ Tasks.mixin( /** @scope Tasks */ {
         mainPage.destroy();
       }
     }
-    Tasks.getPath('helpPage.mainPane').append();
   },
-  
   
   /**
     The catch-all case that gets fired if nothing else matches

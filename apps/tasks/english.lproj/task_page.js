@@ -1,5 +1,5 @@
 // ==========================================================================
-// Tasks.helpPage
+// Tasks.taskPage
 // ==========================================================================
 /*globals Tasks sc_require SCUI */
 sc_require('core');
@@ -10,11 +10,11 @@ sc_require('views/logo');
   @extends SC.Page
   @author Suvajit Gupta
   
-  Help Panel
+  Task Panel
   
 */
 
-Tasks.helpPage = SC.Page.design({  
+Tasks.taskPage = SC.Page.design({  
   
   layerId: 'mainPane',
   mainPane: SC.MainPane.design({
@@ -29,19 +29,30 @@ Tasks.helpPage = SC.Page.design({
           Tasks.LogoView.design({
             layout: { centerY: 0, height: 26, left: 0, width: 150 }
           }),
-          
+
           SC.LabelView.design({
             layout: { centerY: 0, height: 20, centerX: -30, width: 120 },
-            value: "_Help".loc(),
+            value: "_TaskDetails".loc(),
             classNames: ['window-title']
           })
         
         ]
       }),
       
-      SC.WebView.design({
+      SC.View.design({
+        
         layout: { top: 43, left: 0, right: 0, bottom: 0 },
-        value: static_url('help.html')
+        classNames: ['task-detail-pane'],
+        
+        childViews: [
+        
+          SC.LabelView.design({
+            layout: { top: 10, height: 24, left: 10, right: 10 },
+            valueBinding: 'Tasks.detailTaskID'
+          })
+        
+        ]
+
       })
     ]
             

@@ -35,7 +35,7 @@ SC.stringsFor('English', {
   "_Export": "Export",
   "_ExportTooltip": "Export Tasks data to a text format",
   "_SettingsTooltip": "Administer Tasks users and settings",
-  "_Help": "Help",
+  "_Help": "Online Help",
   "_HelpTooltip": "Open Tasks online help in a separate window",
   "_LogoutTooltip": "Sign out of Tasks and allow next user to sign in",
   "_DisplayModeTeam": "Team",
@@ -67,6 +67,7 @@ SC.stringsFor('English', {
   "_Close": "Close",
   "_Apply": "Apply",
   "_Project:": "Project: ",
+  "_TaskDetails": "Task Details",
   
   // Project strings
   "_AddProject": "Add Project",

@@ -12,6 +12,7 @@
  * Task pane styles
  */
  
+.task-detail-pane,
 .sc-collection-view.sc-list-view.sc-source-list.tasks-pane-inner {
   background: #f2f2f2 !important;
 }
