@@ -87,7 +87,7 @@
   line-height: 11px !important;
   color: #000 !important;
   background: #FFF none repeat scroll 0 0 !important;
-  opacity: 0.7;
+  opacity: 0.8;
 }
 
 
@@ -138,9 +138,15 @@
   line-height: 11px !important;
   color: black !important;
   border: 1px solid #AAA !important;
-  background: #EEE none repeat scroll 0 0 !important;
 }
 
+.task-item.even-item .sc-outline .count {
+  background: #FFF none repeat scroll 0 0 !important;
+}
+
+.task-item.odd-item .sc-outline .count {
+  background: #EEE none repeat scroll 0 0 !important;
+}
 
 /*-----------------------------------------------------------------
  * Task type styles
@@ -157,6 +163,7 @@
   width: 16px !important;
   background: static_url('images/default-theme-static.png') no-repeat 0 -240px;
 }
+
 .task-icon-other {
   width: 16px !important;
 	height: 16px !important;
