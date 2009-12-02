@@ -10,6 +10,10 @@ git clone git@github.com:Rigel/SCUI.git scui
 git clone git://github.com/sproutit/sproutcore.git sproutcore
 cd ..
 
+If you don't have the latest Ruby gems, type...
+
+sudo gem install thor
+
 
 RUNNING PERSEVERE
 ==============================================================================
