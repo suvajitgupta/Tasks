@@ -59,52 +59,92 @@
   color: #DDD !important;
 }
 
+/*-----------------------------------------------------------------
+ * Dock Icons
+ */
+ 
 .save-icon {
-	width: 24px;
-	height: 24px;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -50px;
+  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 0;
 }
 
 .disabled .save-icon {
-	width: 24px;
-	height: 24px;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -366px;
+  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -32px;
+}
+
+.save-icon:hover {
+  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -64px;
 }
 
 .refresh-icon {
-	width: 24px;
-	height: 24px;
-	background: no-repeat sc_static('icons/shared') 0px -264px;
+  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -96px;
+}
+
+.disabled .refresh-icon {
+  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -128px;
+}
+
+.refresh-icon:hover {
+  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -160px;
 }
 
 .import-icon {
-	width: 24px;
-	height: 24px;
-  background: static_url('images/default-theme-static.png') no-repeat 0 0;
+  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -288px;
+}
+
+.disabled .import-icon {
+  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -320px;
+}
+
+.import-icon:hover {
+  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -352px;
 }
 
 .export-icon {
-  width: 24px;
-  height: 24px;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -25px;
+  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -192px;
+}
+
+.disabled .export-icon {
+  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -224px;
+}
+
+.export-icon:hover {
+  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -256px;
 }
 
 .settings-icon {
-  width: 24px;
-  height: 24px;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -74px;
+  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -384px;
+}
+
+.disabled .settings-icon {
+  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -416px;
+}
+
+.settings-icon:hover {
+  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -448px;
 }
 
 .help-icon {
-  width: 24px;
-  height: 24px;
-  background: no-repeat sc_static('icons/shared') -0px -192px;
+  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -480px;
+}
+
+.disabled .help-icon {
+  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -512px;
+}
+
+.help-icon:hover {
+  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -544px;
 }
 
 .logout-icon {
-  width: 24px;
-  height: 24px;
-  background: no-repeat sc_static('icons/shared') 0px -312px;
+  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -576px;
+}
+
+.disabled .logout-icon {
+  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -608px;
+}
+
+.logout-icon:hover {
+  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -640px;
 }
 
 

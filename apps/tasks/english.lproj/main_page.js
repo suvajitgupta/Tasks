@@ -45,95 +45,80 @@ Tasks.mainPage = SC.Page.design({
           escapeHTML: NO,
           classNames: ['user-role-message']
         }),
-      
+        
         SC.View.design({
-          layout: { top: 8, bottom: 8, right: 540, width: 2 },
+          layout: { top: 8, bottom: 8, right: 491, width: 2 },
           classNames: ['top-bar-divider']
         }),
 
-        SC.LabelView.design(SCUI.SimpleButton,{
-          layout: { centerY: 0, right: 475, height: 24, width: 60 },
-          icon: ['save-icon'],
-          classNames: ['title-bar-label'],
-          value:  "_Save".loc(),
+        SC.View.design( SCUI.SimpleButton, {
+          layout: { centerY: 0, right: 420, height: 32, width: 70 },
+          classNames: ['save-icon'],
           toolTip: "_SaveTooltip".loc(),
           isEnabledBinding: 'CoreTasks.needsSave',
           target: 'Tasks',
           action: 'saveData'
         }),
-    
-        SC.LabelView.design(SCUI.SimpleButton,{
-          layout: { centerY: 0, right: 390, height: 24, width: 80 },
-          icon: ['refresh-icon'],
-          classNames: ['title-bar-label'],
-          value:  "_Refresh".loc(),
+        
+        SC.View.design( SCUI.SimpleButton, {
+          layout: { centerY: 0, right: 350, height: 32, width: 70 },
+          classNames: ['refresh-icon'],
           toolTip: "_RefreshTooltip".loc(),
           target: 'Tasks',
           action: 'refreshData'
         }),
-
+        
         SC.View.design({
-          layout: { top: 8, bottom: 8, right: 383, width: 2 },
+          layout: { top: 8, bottom: 8, right: 351, width: 2 },
           classNames: ['top-bar-divider']
         }),
         
-        SC.LabelView.design(SCUI.SimpleButton,{
-          layout: { centerY: 0, right: 310, height: 24, width: 70 },
-          icon: ['import-icon'],
-          classNames: ['title-bar-label'],
-          title:  "_Import".loc(),
+        SC.View.design( SCUI.SimpleButton, {
+          layout: { centerY: 0, right: 280, height: 32, width: 70 },
+          classNames: ['import-icon'],
           toolTip: "_ImportTooltip".loc(),
-          value:  "_Import".loc(),
           isEnabledBinding: 'CoreTasks.permissions.canImportData',
           target: 'Tasks',
           action: 'importData'
         }),
-
-        SC.LabelView.design(SCUI.SimpleButton,{
-          layout: { centerY: 0, right: 240, height: 24, width: 70 },
-          icon: ['export-icon'],
-          classNames: ['title-bar-label'],
-          value:  "_Export".loc(),
+        
+        SC.View.design( SCUI.SimpleButton, {
+          layout: { centerY: 0, right: 210, height: 32, width: 70 },
+          classNames: ['export-icon'],
           toolTip: "_ExportTooltip".loc(),
           target: 'Tasks',
           action: 'exportData'
         }),
         
         SC.View.design({
-          layout: { top: 8, bottom: 8, right: 230, width: 2 },
+          layout: { top: 8, bottom: 8, right: 211, width: 2 },
           classNames: ['top-bar-divider']
         }),
-
-        SC.LabelView.design(SCUI.SimpleButton,{
-          layout: { centerY: 0, right: 150, height: 24, width: 75 },
-          icon: ['settings-icon'],
-          classNames: ['title-bar-label'],
-          value:  "_Settings".loc(),
+        
+        SC.View.design( SCUI.SimpleButton, {
+          layout: { centerY: 0, right: 140, height: 32, width: 70 },
+          classNames: ['settings-icon'],
           toolTip: "_SettingsTooltip".loc(),
           target: 'Tasks',
           action: 'settings'
         }),
         
-        SC.LabelView.design(SCUI.SimpleButton,{
-          layout: { centerY: 0, right: 85, height: 24, width: 60 },
-          icon: ['help-icon'],
-          classNames: ['title-bar-label'],
-          value:  "_Help".loc(),
+        SC.View.design( SCUI.SimpleButton, {
+          layout: { centerY: 0, right: 70, height: 32, width: 70 },
+          classNames: ['help-icon'],
           toolTip: "_HelpTooltip".loc(),
           target: 'Tasks',
           action: 'help'
         }),
         
-        SC.LabelView.design(SCUI.SimpleButton,{
-          layout: { centerY: 0, right: 10, height: 24, width: 75 },
-          icon: ['logout-icon'],
-          classNames: ['title-bar-label'],
-          value:  "_Logout".loc(),
+        SC.View.design( SCUI.SimpleButton, {
+          layout: { centerY: 0, right: 0, height: 32, width: 70 },
+          classNames: ['logout-icon'],
           toolTip: "_LogoutTooltip".loc(),
           target: 'Tasks',
           action: 'logout'
         })
-      
+        
       ]
     }),
     
