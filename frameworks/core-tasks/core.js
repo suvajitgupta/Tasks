@@ -16,6 +16,12 @@ CoreTasks = SC.Object.create({
   // The main data store and record sets.
   store: SC.Store.create({
     
+    createRecord: function(recordType, dataHash, id) {
+      var ret = sc_super() ;
+      CoreTasks.set('needsSave', YES) ;
+      return ret ;
+    },
+    
     recordDidChange: function(recordType, id, storeKey, key) {
       // console.log("DEBUG: recordDidChange(): " + recordType);
       var ret = sc_super() ; // MUST COME FIRST
@@ -29,12 +35,6 @@ CoreTasks = SC.Object.create({
         CoreTasks.set('needsSave', YES) ;
       }
       
-      return ret ;
-    },
-    
-    createRecord: function(recordType, dataHash, id) {
-      var ret = sc_super() ;
-      CoreTasks.set('needsSave', YES) ;
       return ret ;
     },
     

@@ -169,6 +169,9 @@ Tasks.mixin({
       CoreTasks.set('unallocatedTasksProject', unallocatedTasksProject);
     }
     
+    // Clear save flag after creation of two reserved projects
+    CoreTasks.set('needsSave', NO);
+    
     // Now load all of the projects.
     if (!CoreTasks.get('allProjects')) {
       CoreTasks.set('allProjects', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Project, orderBy: 'name' })));
