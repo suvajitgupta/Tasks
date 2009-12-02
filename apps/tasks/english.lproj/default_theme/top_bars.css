@@ -69,6 +69,12 @@
   background: static_url('images/default-theme-dock-icons.png') no-repeat 0 0;
 }
 
+.save-icon:hover {
+  width: 70px !important;
+  height: 32px !important;
+  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -64px;
+}
+
 .disabled .save-icon {
   width: 70px !important;
   height: 32px !important;
@@ -76,12 +82,6 @@
 }
 
 .disabled .save-icon:hover {
-  width: 70px !important;
-  height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -32px;
-}
-
-.save-icon:hover {
   width: 70px !important;
   height: 32px !important;
   background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -64px;
@@ -111,6 +111,12 @@
   background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -288px;
 }
 
+.import-icon:hover {
+  width: 70px !important;
+  height: 32px !important;
+  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -352px;
+}
+
 .disabled .import-icon {
   width: 70px !important;
   height: 32px !important;
@@ -118,12 +124,6 @@
 }
 
 .disabled .import-icon:hover {
-  width: 70px !important;
-  height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -320px;
-}
-
-.import-icon:hover {
   width: 70px !important;
   height: 32px !important;
   background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -352px;

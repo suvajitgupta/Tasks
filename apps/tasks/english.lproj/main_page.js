@@ -75,7 +75,7 @@ Tasks.mainPage = SC.Page.design({
         
         SC.LabelView.design( SCUI.SimpleButton, {
           layout: { centerY: 0, right: 280, height: 32, width: 70 },
-          classNames: ['import-icon'],
+          icon: ['import-icon'],
           toolTip: "_ImportTooltip".loc(),
           isEnabledBinding: 'CoreTasks.permissions.canImportData',
           target: 'Tasks',
