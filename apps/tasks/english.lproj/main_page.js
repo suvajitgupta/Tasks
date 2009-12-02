@@ -51,16 +51,16 @@ Tasks.mainPage = SC.Page.design({
           classNames: ['top-bar-divider']
         }),
 
-        SC.View.design( SCUI.SimpleButton, {
+        SC.LabelView.design( SCUI.SimpleButton, {
           layout: { centerY: 0, right: 420, height: 32, width: 70 },
-          classNames: ['save-icon'],
+          icon: ['save-icon'],
           toolTip: "_SaveTooltip".loc(),
           isEnabledBinding: 'CoreTasks.needsSave',
           target: 'Tasks',
           action: 'saveData'
         }),
         
-        SC.View.design( SCUI.SimpleButton, {
+        SC.LabelView.design( SCUI.SimpleButton, {
           layout: { centerY: 0, right: 350, height: 32, width: 70 },
           classNames: ['refresh-icon'],
           toolTip: "_RefreshTooltip".loc(),
@@ -73,7 +73,7 @@ Tasks.mainPage = SC.Page.design({
           classNames: ['top-bar-divider']
         }),
         
-        SC.View.design( SCUI.SimpleButton, {
+        SC.LabelView.design( SCUI.SimpleButton, {
           layout: { centerY: 0, right: 280, height: 32, width: 70 },
           classNames: ['import-icon'],
           toolTip: "_ImportTooltip".loc(),
@@ -82,7 +82,7 @@ Tasks.mainPage = SC.Page.design({
           action: 'importData'
         }),
         
-        SC.View.design( SCUI.SimpleButton, {
+        SC.LabelView.design( SCUI.SimpleButton, {
           layout: { centerY: 0, right: 210, height: 32, width: 70 },
           classNames: ['export-icon'],
           toolTip: "_ExportTooltip".loc(),
@@ -95,7 +95,7 @@ Tasks.mainPage = SC.Page.design({
           classNames: ['top-bar-divider']
         }),
         
-        SC.View.design( SCUI.SimpleButton, {
+        SC.LabelView.design( SCUI.SimpleButton, {
           layout: { centerY: 0, right: 140, height: 32, width: 70 },
           classNames: ['settings-icon'],
           toolTip: "_SettingsTooltip".loc(),
@@ -103,7 +103,7 @@ Tasks.mainPage = SC.Page.design({
           action: 'settings'
         }),
         
-        SC.View.design( SCUI.SimpleButton, {
+        SC.LabelView.design( SCUI.SimpleButton, {
           layout: { centerY: 0, right: 70, height: 32, width: 70 },
           classNames: ['help-icon'],
           toolTip: "_HelpTooltip".loc(),
@@ -111,7 +111,7 @@ Tasks.mainPage = SC.Page.design({
           action: 'help'
         }),
         
-        SC.View.design( SCUI.SimpleButton, {
+        SC.LabelView.design( SCUI.SimpleButton, {
           layout: { centerY: 0, right: 0, height: 32, width: 70 },
           classNames: ['logout-icon'],
           toolTip: "_LogoutTooltip".loc(),
