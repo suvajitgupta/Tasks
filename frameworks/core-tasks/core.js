@@ -18,7 +18,7 @@ CoreTasks = SC.Object.create({
     
     recordDidChange: function(recordType, id, storeKey, key) {
       // console.log("DEBUG: recordDidChange(): " + recordType);
-      sc_super() ; // MUST COME FIRST
+      var ret = sc_super() ; // MUST COME FIRST
       
       if (storeKey === undefined) storeKey = recordType.storeKeyFor(id);
       var status = this.readStatus(storeKey), K = SC.Record;
@@ -28,11 +28,20 @@ CoreTasks = SC.Object.create({
         // console.log('got a dirty record') ;
         CoreTasks.set('needsSave', YES) ;
       }
+      
+      return ret ;
+    },
+    
+    createRecord: function(recordType, dataHash, id) {
+      var ret = sc_super() ;
+      CoreTasks.set('needsSave', YES) ;
+      return ret ;
     },
     
     destroyRecord: function(recordType, id, storeKey) {
-      sc_super() ;
+      var ret = sc_super() ;
       CoreTasks.set('needsSave', YES) ;
+      return ret ;
     }
     
   }),
