@@ -101,3 +101,7 @@ body {
 	margin-right: 2px;
 	height: 18px;
 }
+
+.sc-view.sc-radio-view.task-attribute-set.disabled .sc-radio-button .sc-button-label {
+  color: black;
+}
