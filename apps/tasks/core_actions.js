@@ -437,11 +437,13 @@ Tasks.mixin({
   
   /**
    * Add a new task to tasks detail list.
+   *
+   * @param {Boolean} flag to indicate whether to make a duplicate of selected task.
    */
-  addTask: function() {
+  addTask: function(duplicate) {
     
     if(!Tasks.tasksController.isAddable()) {
-      console.error('This is the wrong display mode or you do not have permission to add a task');
+      console.error('This is the wrong display mode or you do not have permission to add or duplicate a task');
       return null;
     }
     
@@ -465,6 +467,7 @@ Tasks.mixin({
         taskHash.assigneeId = assigneeUser? assigneeUser.get('id') : null;
         taskHash.type = selectedTask.get('type');
         taskHash.priority = selectedTask.get('priority');
+        taskHash.name = selectedTask.get('name');
       }
     }
     else { // No selected task, add task to currently selected, non-reserved, project (if one).

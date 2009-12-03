@@ -309,6 +309,10 @@ Tasks.mainPage = SC.Page.design({
             Tasks.addTask();
             ret = YES;
           }
+          else if (commandCode[0] === 'ctrl_d'){  //ctrl-d
+            Tasks.addTask(true); // duplicate
+            ret = YES;
+          }
           else if (commandCode[0] === 'ctrl_p'){  //ctrl-p
             Tasks.addProject();
             ret = YES;
