@@ -155,6 +155,7 @@ SC.stringsFor('English', {
   "_PasswordHint": "Your Password",
   "_Signup": "Signup",
   "_UserManager": "User Manager",
+  "_Users": " users",
   
   // Status Bar strings
   "_Displaying": "Displaying ",

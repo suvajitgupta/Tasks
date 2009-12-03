@@ -22,7 +22,7 @@ Tasks.settingsPage = SC.Page.create({
     
     contentView: SC.View.design({
       layout: { left: 0, right: 0, top: 0, bottom: 0},
-      childViews: 'userManager closeButton'.w(),
+      childViews: 'userManager usersCount closeButton'.w(),
       
       userManager: SC.View.design({
         layout: { left: 10, right: 10, top: 10, bottom: 45},
@@ -81,7 +81,7 @@ Tasks.settingsPage = SC.Page.create({
               contentBinding: 'Tasks.usersController.editableUsers', // show all users only to Managers
               selectionBinding: 'Tasks.usersController.selection',
               localize: YES,
-              rowHeight: 22,
+              rowHeight: 20,
               exampleView: Tasks.UserItemView,
               classNames: ['users-pane-inner']
             })
@@ -90,9 +90,15 @@ Tasks.settingsPage = SC.Page.create({
           Tasks.UserInformationView.design({
             layout: { top: 60, left: 200, bottom: 35, right: 10 },
             contentBinding: 'Tasks.userController'
-          })
-                
+          })          
+
         ]
+      }),
+      
+      usersCount: SC.LabelView.design({
+        layout: { left: 0, width: 200, bottom: 8, height: 30 },
+        textAlign: SC.ALIGN_CENTER,
+        valueBinding: 'Tasks.usersController.usersCount' 
       }),
       
       closeButton: SC.ButtonView.design({

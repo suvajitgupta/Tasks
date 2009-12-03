@@ -17,6 +17,12 @@
 Tasks.usersController = SC.ArrayController.create(SCUI.StatusChanged,
   /** @scope Tasks.usersController.prototype */ {
   
+  usersCount: function() {
+    return this.get('length') + "_Users".loc();
+  }.property('[]').cacheable(),
+
+  editableUsers: [], // based on role, only current user or all users are available in User Manager
+
   isDeletable: function() {
 
     if(!CoreTasks.getPath('permissions.canDeleteUser')) return false;
