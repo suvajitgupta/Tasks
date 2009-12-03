@@ -36,7 +36,10 @@ INITIAL PERSEVERE SETUP
    and use the User Manager GUI:
 
 ./user-add.sh 'System Admin' 'SA' 'Manager' localhost:8088
-(press Enter twice to create a blank password for now)
+(enter/reenter password and remember it!)
+
+./user-add.sh 'Guest User' 'guest' 'Guest' localhost:8088
+(press Enter twice to create a blank password)
 
 
 RUNNING TASKS

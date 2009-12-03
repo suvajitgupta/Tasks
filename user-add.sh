@@ -31,8 +31,8 @@ if [ -z "$LOGIN_NAME" ]; then
   exit 1
 fi
 
-if [ "$ROLE" != "Developer" ] && [ "$ROLE" != "Manager" ] && [ "$ROLE" != "Tester" ]; then
-  echo "ERROR: Role must be one of [ \"Developer\" | \"Manager\" | \"Tester\" ]"
+if [ "$ROLE" != "Manager" ] && [ "$ROLE" != "Developer" ] && [ "$ROLE" != "Tester" ] && [ "$ROLE" != "Guest" ]; then
+  echo "ERROR: Role must be one of [ \"Manager\" | \"Developer\" | \"Tester\"  | \"Guest\" ]"
   exit 1
 fi
 

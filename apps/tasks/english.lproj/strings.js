@@ -67,7 +67,6 @@ SC.stringsFor('English', {
   "_Close": "Close",
   "_Apply": "Apply",
   "_Project:": "Project: ",
-  "_TaskDetails": "Task Details",
   
   // Project strings
   "_AddProject": "Add Project",

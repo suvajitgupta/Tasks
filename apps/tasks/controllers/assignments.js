@@ -503,7 +503,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
   }.observes('assigneeSelection'),
   
   _searchFilterHasChanged: function() {
-    console.log("DEBUG: Search filter changed to '" + this.searchFilter + "'");
+    // console.log("DEBUG: Search filter changed to '" + this.searchFilter + "'");
     this._filteringHasChanged();
   }.observes('searchFilter')
   

@@ -14,16 +14,12 @@ sc_require('core');
   This mixin handles all the routing for Tasks.  Routes parse custom URL parameters
   to go straight to particular sections of the application.  They support bookmarking and
   browser history.
-  
-  For example:
-    'http://[host]/tasks#project&name=MyProject' would select MyProject upon startup (if it exists).
-    
+      
 */
 Tasks.mixin( /** @scope Tasks */ {
   
   defaultProjectName: null,
   defaultProject: null,
-  detailTaskID: null,
 
   registerRoutes: function() {
     SC.routes.add('project', Tasks, 'routeToProject');
@@ -34,6 +30,10 @@ Tasks.mixin( /** @scope Tasks */ {
 
   /**
     At startup, select specified project on route
+    
+    Example:
+      'http://[host]/tasks#project&name=MyProject' would select MyProject upon startup (if it exists).
+    
   */
   routeToProject: function(params) {
     if(SC.none(params.name)) {
@@ -47,20 +47,30 @@ Tasks.mixin( /** @scope Tasks */ {
   
   /**
     Show details of specified task on route
+    
+    Example:
+      'http://[host]/tasks#task&IDs=#321, #422' would log in as special 'guest' user and set search filter to '#321, #422'.
+    
   */
   routeToTask: function(params) {
     Tasks._closeMainPage();
-    if(SC.none(params.ID)) {
-      console.log("Error: missing task ID for URL routing");
+    if(SC.none(params.IDs)) {
+      console.log("Error: missing task ID(s) for URL routing");
     }
     else {
-      Tasks.set('detailTaskID', params.ID);
-      Tasks.getPath('taskPage.mainPane').append();
+      // Enter the statechart.
+      Tasks.goState('a', 1);
+      Tasks.authenticate('guest', '');
+      Tasks.assignmentsController.set('searchFilter', params.IDs);
     }
   },
   
   /**
     Show online help skipping authentication
+    
+    Format:
+      'http://[host]/tasks#help' would show online help without requiring user authentication.
+    
   */
   routeToHelp: function(params) {
     Tasks._closeMainPage();
@@ -86,6 +96,7 @@ Tasks.mixin( /** @scope Tasks */ {
   routeDefault: function(params) {
     // Enter the statechart.
     Tasks.goState('a', 1);
+    Tasks.loginController.openPanel();
   }
   
 });

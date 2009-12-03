@@ -115,7 +115,7 @@ Tasks.mainPage = SC.Page.design({
       ]
     }),
     
-    welcomeMessage: SC.outlet('titleBarView.childViews.2'),
+    welcomeMessage: SC.outlet('titleBarView.childViews.1'),
     
     toolbarView: SC.View.design({
       layout: { left: 0, right: 0, top: 42, height: 36 },

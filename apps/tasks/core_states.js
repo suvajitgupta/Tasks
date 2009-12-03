@@ -12,7 +12,6 @@ Tasks.mixin({
   
   // Login
   goStateA1: function() {
-    Tasks.loginController.openPanel();
   },
 
   // Authentication
