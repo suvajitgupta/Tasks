@@ -159,6 +159,7 @@ Tasks.mixin({
         name: CoreTasks.ALL_TASKS_NAME.loc()
       });
       CoreTasks.set('allTasksProject', allTasksProject);
+      CoreTasks.set('needsSave', NO);
     }
 
     // Create the UnallocatedTasks project with the unallocated tasks.
@@ -167,10 +168,8 @@ Tasks.mixin({
         name: CoreTasks.UNALLOCATED_TASKS_NAME.loc()
       });
       CoreTasks.set('unallocatedTasksProject', unallocatedTasksProject);
+      CoreTasks.set('needsSave', NO);
     }
-    
-    // Clear save flag after creation of two reserved projects
-    CoreTasks.set('needsSave', NO);
     
     // Now load all of the projects.
     if (!CoreTasks.get('allProjects')) {
