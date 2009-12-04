@@ -104,38 +104,33 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       if(this._editorPane) this._editorPane.popup(layer, SC.PICKER_POINTER);
     }
     else if(!that.get('isReservedProject')) { // popup context menu
-      
-      var menuOptions = [
-        {
-          title: "_ProjectStatistics".loc(),
-          isEnabled: YES,
-          target: 'Tasks',
-          action: 'projectStatistics'
-        },
-        {
-          title: "_DelProject".loc(),
-          isEnabled: CoreTasks.getPath('permissions.canDeleteProject'),
-          target: 'Tasks',
-          action: 'deleteProject'
-        }
-      ];    
-
       var pane = SCUI.ContextMenuPane.create({
         contentView: SC.View.design({}),
         layout: { width: 165, height: 0 },
         itemTitleKey: 'title',
+        itemIconKey: 'icon',
         itemIsEnabledKey: 'isEnabled',
         itemTargetKey: 'target',
         itemActionKey: 'action',
-        items: menuOptions
+        items: [
+          {
+            title: "_ProjectStatistics".loc(),
+            isEnabled: YES,
+            target: 'Tasks',
+            action: 'projectStatistics'
+          },
+          {
+            title: "_DelProject".loc(),
+            icon: 'delete-icon',
+            isEnabled: CoreTasks.getPath('permissions.canDeleteProject'),
+            target: 'Tasks',
+            action: 'deleteProject'
+          }
+        ]        
       });
-
       pane.popup(this, event); // pass in the mouse event so the pane can figure out where to put itself
-
     }
-    
     return NO;
-    
   },
   
   inlineEditorWillBeginEditing: function(inlineEditor) {
