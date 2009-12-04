@@ -93,6 +93,7 @@ SC.stringsFor('English', {
   "_AddTask": "Add Task",
   "_AddTaskTooltip": "Add a new task, to the same assignee if there is a selected task",
   "_DuplicateTask": "Dup. Task",
+  "_Copy": ": copy",
   "_CopyID/Name": "Copy ID/Name",
   "_CopyLink": "Copy Link",
   "_NewTask": "New Task",
