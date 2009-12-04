@@ -53,7 +53,7 @@ RUNNING TASKS
 
 http://localhost:4400/tasks
 
-3) Enter 'SA' in the dialog box and no password and press Enter.
+3) Enter 'SA' in the dialog box and the password you set earlier and press Enter.
    The Tasks GUI should come up.
 
 4) Add a project, add tasks to it, hit Save periodically, have fun!
