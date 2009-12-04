@@ -443,6 +443,8 @@ Tasks.mixin({
    */
   addTask: function(duplicate) {
     
+    if(duplicate === undefined) duplicate = false;
+    
     if(!Tasks.tasksController.isAddable()) {
       console.error('This is the wrong display mode or you do not have permission to add or duplicate a task');
       return null;
@@ -468,10 +470,18 @@ Tasks.mixin({
         taskHash.assigneeId = assigneeUser? assigneeUser.get('id') : null;
         taskHash.type = selectedTask.get('type');
         taskHash.priority = selectedTask.get('priority');
-        taskHash.name = selectedTask.get('name');
+        if(duplicate) {
+          taskHash.name = selectedTask.get('name');
+          taskHash.developmentStatus = selectedTask.get('developmentStatus');
+          taskHash.validation = selectedTask.get('validation');
+        }
       }
     }
     else { // No selected task, add task to currently selected, non-reserved, project (if one).
+      if(duplicate) {
+        console.warn('You must have a task selected to duplicate it');
+        return null;
+      }
       var selectedProjectName = Tasks.getPath('projectController.name');
       if (!SC.none(selectedProjectName) &&
           selectedProjectName !== CoreTasks.ALL_TASKS_NAME.loc() && selectedProjectName !== CoreTasks.UNALLOCATED_TASKS_NAME.loc()) {
