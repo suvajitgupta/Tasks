@@ -6,7 +6,6 @@
  * License: Licened under MIT license (see license.js)
  */
 /*globals CoreTasks Tasks sc_require */
-// TODO: [SG] Beta: handle backspace to not go back to previous Web page and leave the Tasks app!
 
 sc_require('core');
 sc_require('controllers/users');

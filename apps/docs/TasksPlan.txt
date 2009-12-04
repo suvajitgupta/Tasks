@@ -32,14 +32,13 @@ v Track/optimize calls to assignments controller for redrawing tasks tree <BB> [
 v Make buttons depressable to provide feedback when using them [SG] $Feature
 - Support direct access to Tasks projects or tasks using SproutCore routes [SG] $Feature @Done %Passed
 - Beta: Add support for leaving comments about tasks [SG] <SE> $Feature
-v Provide support for color-blind users (don't use color coding as only mechanism for status/validation) [SG] $Feature
 - Out of Scope: Add support for attachments in record descriptions $Feature
 | Upload attachment somewhere and insert URL to it in record description
 
 Project Manager GUI
 ^ Add Master/Detail Explorer view with click selection of Projects showing corresponding Tasks [JH2] <SG> @Done $Feature %Passed
 ^ Show Project name & time left (if specified) on far right [SG] <JH2> @Done $Feature %Passed
-^ Allow Project target date to be specified inline or via popup editor/Calendar chooser <SE> [SG] $Feature
+^ Beta: Allow Project target date to be specified inline or via popup editor/Calendar chooser <SE> [SG] $Feature @Active
 | Delete all references to timeLeft and update Persevere data to reflect this schema change
 - Use icon to indicate if Project has any tasks or not [SG] @Done $Feature %Passed
 - Support alpha sorting of projects [SG] <JH2> @Done %Passed $Feature
@@ -87,7 +86,8 @@ v Enable/disable "Del. Task" button based on having a selected task [SG] @Done %
 v Add hover over tooltip for assignees to show how many tasks they have and to explain loading color codes [SG] @Done $Feature %Passed
 ^ Allow multi-task drag-n-drop reassignment to other assignees [BB] <SG>  @Done $Feature %Passed
 ^ Add popup viewer/editor for Task submitter, assignee, effort, project, and description [JH2] <SG> $Feature @Done %Passed
-v Add task context menu with options: Add, Duplicate, Delete, Copy ID/Name, Copy Link (last two to clipboard) [SG] $Feature @Done %Passsed
+- Beta: Support task Copy ID/Name and Copy Link (URL with "Route") to clipboard [SG] $Feature @Active
+v Add task context menu with options: Add, Duplicate, Delete, Copy ID/Name, Copy Link [SG] $Feature @Done %Passsed
 - Beta: Add ability to watch tasks and get email notifications on task changes [SG] <JH2> $Feature
 - Beta: Highlight newly added tasks with a badge to the left <SE> [SG] $Feature
 - Out of Scope: Add support for nested tasks/tagging $Feature
@@ -123,7 +123,7 @@ Application Manager GUI
 | Preferences:
 | * percent and min days for Assignee loading determination
 | * email notifications
-- Add "Export to HTML" capability for printable & human-readable version (for baselining tasks for a release, for instance) [SG] $Feature
+- Beta: Add "Export to HTML" capability for printable & human-readable version (for baselining tasks for a release) [SG] $Feature
 - Add online "Help" button in top toolbar & popup help window [SG] @Done %Passed $Feature
 v Add screenshots with callouts for online help content [SG] $Feature
 v Add online training video using Captivate or Camtasia [SG] $Feature
@@ -135,7 +135,7 @@ v Add online training video using Captivate or Camtasia [SG] $Feature
 - Add "Team" display mode (vs. "Tasks") to show everyone at a glance, clicking on assignee shows their tasks [SG] $Feature @Done %Passed
 v Add hotkeys for common operations (like add Projects/Tasks and Save) [EG] <SG> $Feature @Done %Passed
 - Add Undo/Redo buttons in top toolbar (till last Save) [SG] <SE> $Feature
-v Support disconnected operation and synchronization after network reconnection using SproutDB [SG] <SE> $Feature
+- Support disconnected operation and synchronization after network reconnection using SproutDB [SG] <SE> $Feature
 
 Server
 ^ Build persistence server using Persevere [SE] <SG> @Done %Passed
@@ -143,7 +143,7 @@ Server
 - Beta: Document steps for creating a team production deployment of Tasks [SE] <SG> @Active
 - Beta: Implement Server-based user authentication [JH2] <SG> @Active
 - Beta: Implement Server-based RBAC (role-based access control) <SG> [JH2] @Active
-- Beta: Add email notifications on noteworthy Task changes [JH2] <SG> $Feature
+- Beta: Add email notifications on noteworthy changes [JH2] <SG> $Feature
 | Notify Assignee when Task is added by Submitter different than Assignee (via New or Reassignment operations)
 | Notify Assignee when Done Task is Failed
 | Notify Managers when Task is flagged as Risky
@@ -168,10 +168,10 @@ Packaging/Delivery
 - Deploy publicly-accessible instance using Google App Engine/Python [JH2] <SG> @Done %Passed
 ^ Develop Web client (ported to Firefox, Internet Explorer, Safari, Chrome) [SG] @Done %Passed
 - Develop Mobile client using PhoneGap [SG] <MB>
-v Develop Desktop client using Webkit [SG] <MB>
+- Develop Desktop client using Webkit [SG] <MB>
 
 Testing/Rollout
 - Note all FIXMEs/TODOs/bugs & remove these as they are resolved [SG] <BM> @Active
 - Create automated test scripts using Selenium [BM] <SG> @Active
-- Collect/address feedback from Alpha/Beta users and targeted usability tests <MG> [SG] @Active
+- Collect/address feedback from Alpha/Beta users and targeted usability tests <MG> [SG] @Done %Passed
 v Provide SproutCore doctool-style comments [SG] <SE>
