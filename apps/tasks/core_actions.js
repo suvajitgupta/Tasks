@@ -363,6 +363,7 @@ Tasks.mixin({
     CoreTasks.clearData();
     
     this.goState('a', 1);
+    Tasks.loginController.openPanel();
     
   },
   
