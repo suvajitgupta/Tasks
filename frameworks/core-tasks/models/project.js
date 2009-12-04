@@ -247,3 +247,7 @@ CoreTasks.Project.mixin(/** @scope CoreTasks.Project */ {
   }
   
 });
+
+CoreTasks.Project.NEW_PROJECT_HASH = {
+  name: CoreTasks.NEW_PROJECT_NAME
+};

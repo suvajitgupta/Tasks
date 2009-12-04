@@ -82,3 +82,9 @@
   height: 16px;
   background: static_url('images/default-theme-static.png') no-repeat 0 -176px;
 }
+
+.project-duplicate-icon {
+  width: 16px !important;
+  height: 16px !important;
+  background: static_url('images/project-duplicate.png') no-repeat;
+}

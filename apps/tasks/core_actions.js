@@ -367,22 +367,53 @@ Tasks.mixin({
   },
   
   /**
-   * Add a new project and start editing it in projects master list.
+   * Create a new project in projects master list and start editing it .
+   *
+   * @param {Boolean} flag to indicate whether to make a duplicate of selected task.
    */
-  addProject: function() {
+  _createProject: function(duplicate) {
     
     if(!CoreTasks.getPath('permissions.canAddProject')) {
-      console.error('You do not have permission to add a project');
+      console.error('You do not have permission to add or duplicate a project');
       return null;
     }
     
+    var projectHash = SC.clone(CoreTasks.Project.NEW_PROJECT_HASH);
+    projectHash.name = projectHash.name.loc();
+    if(duplicate) {
+      var selectedProject = Tasks.projectsController.getPath('selection.firstObject');
+      if (!selectedProject) {
+        console.warn('You must have a project selected to duplicate it');
+        return null;
+      }
+      projectHash.name = selectedProject.get('name') + ": Copy".loc();
+      projectHash.description = selectedProject.get('description');
+      projectHash.timeLeft = selectedProject.get('timeLeft');
+    }
+    
     // Create, select, and begin editing new project.
-    var project = CoreTasks.createRecord(CoreTasks.Project, { name: CoreTasks.NEW_PROJECT_NAME.loc() } );
+    var project = CoreTasks.createRecord(CoreTasks.Project, projectHash);
     var pc = this.projectsController;
     pc.selectObject(project);
     // FIXME: [SG] Beta: may need to expand the delay interval for launching inline editors on IE
     CoreTasks.invokeLater(pc.editNewProject, 200, project);
     return project;
+  },
+  
+  /**
+   * Add a new project in projects master list.
+   */
+  addProject: function() {
+    this._createProject(false);
+  },
+  
+  /**
+   * Duplicate selected project in projects master list.
+   *
+   * @param {Boolean} flag to indicate whether to make a duplicate of selected project.
+   */
+  duplicateProject: function() {
+    this._createProject(true);
   },
   
   /**
@@ -396,30 +427,30 @@ Tasks.mixin({
     }
     
     // Get the selected project, if one
-    var project = Tasks.projectsController.getPath('selection.firstObject');
-    if (project) {
+    var selectedProject = Tasks.projectsController.getPath('selection.firstObject');
+    if (selectedProject) {
 
       // Disallow deletion of reserved projects
-      var projectName = project.get('name');
-      if (projectName === CoreTasks.ALL_TASKS_NAME.loc() || projectName === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) {
+      var selectedProjectName = selectedProject.get('name');
+      if (selectedProjectName === CoreTasks.ALL_TASKS_NAME.loc() || selectedProjectName === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) {
         console.warn('You cannot delete a reserved project');
         return;
       }
       
       // Confirm deletion for projects that have tasks
-      var tasks = project.get('tasks');
+      var tasks = selectedProject.get('tasks');
       var taskCount = tasks.get('length');
       if(taskCount > 0) {
         SC.AlertPane.warn("_Confirmation".loc(), "_ProjectDeletionConfirmation".loc(), null, "_No".loc(), "_Yes".loc(), null,
           SC.Object.create({
             alertPaneDidDismiss: function(pane, status) {
-              if(status === SC.BUTTON2_STATUS) Tasks._deleteProject(project);
+              if(status === SC.BUTTON2_STATUS) Tasks._deleteProject(selectedProject);
             }
           })
         );
       }
       else {
-        Tasks._deleteProject(project);
+        Tasks._deleteProject(selectedProject);
       }
     }
   },
@@ -446,13 +477,11 @@ Tasks.mixin({
   },
   
   /**
-   * Create a new task in tasks detail list.
+   * Create a new task in tasks detail list and start editing it.
    *
    * @param {Boolean} flag to indicate whether to make a duplicate of selected task.
    */
-  createTask: function(duplicate) {
-    
-    if(duplicate === undefined) duplicate = false;
+  _createTask: function(duplicate) {
     
     if(!Tasks.tasksController.isAddable()) {
       console.error('This is the wrong display mode or you do not have permission to add or duplicate a task');
@@ -511,21 +540,21 @@ Tasks.mixin({
   },
 
   /**
-   * Add a new task in detail list.
+   * Add a new task in tasks detail list.
    *
    * @param {Boolean} flag to indicate whether to make a duplicate of selected task.
    */
   addTask: function() {
-    this.createTask(false);
+    this._createTask(false);
   },
   
   /**
-   * Duplicate selected task in detail list.
+   * Duplicate selected task in tasks detail list.
    *
    * @param {Boolean} flag to indicate whether to make a duplicate of selected task.
    */
   duplicateTask: function() {
-    this.createTask(true);
+    this._createTask(true);
   },
   
   /**

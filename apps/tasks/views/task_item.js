@@ -160,7 +160,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     else { // popup context menu
       var pane = SCUI.ContextMenuPane.create({
         contentView: SC.View.design({}),
-        layout: { width: 140, height: 0 },
+        layout: { width: 155, height: 0 },
         itemTitleKey: 'title',
         itemIconKey: 'icon',
         itemIsEnabledKey: 'isEnabled',
@@ -189,7 +189,9 @@ Tasks.TaskItemView = SC.ListItemView.extend(
             target: 'Tasks',
             action: 'deleteTask'
           },
-          { isSeparator: YES },
+          {
+            isSeparator: YES
+          },
           {
             title: "_CopyID/Name".loc(),
             isEnabled: YES,

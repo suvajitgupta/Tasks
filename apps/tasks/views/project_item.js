@@ -106,18 +106,20 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     else if(!that.get('isReservedProject')) { // popup context menu
       var pane = SCUI.ContextMenuPane.create({
         contentView: SC.View.design({}),
-        layout: { width: 130, height: 0 },
+        layout: { width: 140, height: 0 },
         itemTitleKey: 'title',
         itemIconKey: 'icon',
         itemIsEnabledKey: 'isEnabled',
         itemTargetKey: 'target',
         itemActionKey: 'action',
+        itemSeparatorKey: 'isSeparator',
         items: [
           {
-            title: "_Statistics".loc(),
-            isEnabled: YES,
+            title: "_Duplicate".loc(),
+            icon: 'project-duplicate-icon',
+            isEnabled: CoreTasks.getPath('permissions.canAddProject'),
             target: 'Tasks',
-            action: 'projectStatistics'
+            action: 'duplicateProject'
           },
           {
             title: "_Delete".loc(),
@@ -125,6 +127,15 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
             isEnabled: CoreTasks.getPath('permissions.canDeleteProject'),
             target: 'Tasks',
             action: 'deleteProject'
+          },
+          {
+            isSeparator: YES
+          },
+          {
+            title: "_Statistics".loc(),
+            isEnabled: YES,
+            target: 'Tasks',
+            action: 'projectStatistics'
           }
         ]        
       });
