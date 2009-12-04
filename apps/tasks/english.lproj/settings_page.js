@@ -96,7 +96,8 @@ Tasks.settingsPage = SC.Page.create({
       }),
       
       usersCount: SC.LabelView.design({
-        layout: { left: 0, width: 200, bottom: 8, height: 30 },
+        layout: { left: 10, width: 200, bottom: 8, height: 24 },
+        controlSize: SC.SMALL_CONTROL_SIZE,
         textAlign: SC.ALIGN_CENTER,
         valueBinding: 'Tasks.usersController.usersCount' 
       }),
