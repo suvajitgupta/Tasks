@@ -321,10 +321,18 @@ Tasks.assignmentsController = SC.ArrayController.create(
     // Sort grouped tasks by assignee
     this.set('assignedTasks', SC.Object.create({ treeItemChildren: assignmentNodes.sort(function(a,b) {
       if(!Tasks.assignmentsController._showTasks) { // Team display mode, first try to sort in descending order of loading/red flags
-        var loadingDelta = b.effortGapPercent - a.effortGapPercent;
-        if(loadingDelta !== 0) return loadingDelta;
-        var redFlagsDelta = (b.riskyTasksCount + b.failedTasksCount) - (a.riskyTasksCount + a.failedTasksCount);
-        if(redFlagsDelta !== 0) return redFlagsDelta;
+        if(a.loading != CoreTasks.USER_NOT_LOADED && b.loading != CoreTasks.USER_NOT_LOADED) {
+          var loadingDelta = b.effortGapPercent - a.effortGapPercent;
+          if(loadingDelta !== 0) return loadingDelta;
+          var redFlagsDelta = (b.riskyTasksCount + b.failedTasksCount) - (a.riskyTasksCount + a.failedTasksCount);
+          if(redFlagsDelta !== 0) return redFlagsDelta;
+        }
+        else if(b.loading === CoreTasks.USER_NOT_LOADED && a.loading !== CoreTasks.USER_NOT_LOADED) {
+          return -1;
+        }
+        else if(b.loading !== CoreTasks.USER_NOT_LOADED && a.loading === CoreTasks.USER_NOT_LOADED) {
+          return 1;
+        }
       }
       // Alpha sort by display names
       if (a.displayName === b.displayName) return 0;
@@ -427,11 +435,13 @@ Tasks.assignmentsController = SC.ArrayController.create(
     }
     
     var loading = CoreTasks.USER_NOT_LOADED;
+    var effortGap = 0, effortGapPercent = 0;
     if(totalEffortMin !== 0) {
+      console.log('LOADING: ' + displayName + ': ' + totalEffortMin + '-' + totalEffortMax);
       if(projectTimeLeft) { // flag user loading
         var totalEffortAve = (totalEffortMin + totalEffortMax)/2;
-        var effortGap = totalEffortAve - projectTimeLeft;
-        var effortGapPercent = 100*effortGap/projectTimeLeft;
+        effortGap = totalEffortAve - projectTimeLeft;
+        effortGapPercent = 100*effortGap/projectTimeLeft;
         if(effortGap < 1 && effortGapPercent < -15) loading = CoreTasks.USER_UNDER_LOADED;
         else if(effortGap > 1 && effortGapPercent > 15) loading = CoreTasks.USER_OVER_LOADED;
         else loading = CoreTasks.USER_PROPERLY_LOADED;
