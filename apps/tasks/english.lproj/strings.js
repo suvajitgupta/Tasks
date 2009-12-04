@@ -84,6 +84,7 @@ SC.stringsFor('English', {
   "_ProjectTimeLeftTooltip": "Time left shown on right",
   "_TimeLeft:": "Time Left:",
   "_TimeLeftOnscreenHelp": "May be unspecified, a decimal like '0.25'; units 'd' or 'h'",
+  "_ProjectStatistics": "Project Statistics...",
   
   // Task strings
   "_AddTask": "Add Task",

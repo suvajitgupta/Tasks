@@ -402,7 +402,10 @@ Tasks.mixin({
 
       // Disallow deletion of reserved projects
       var projectName = project.get('name');
-      if (projectName === CoreTasks.ALL_TASKS_NAME.loc() || projectName === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) return;
+      if (projectName === CoreTasks.ALL_TASKS_NAME.loc() || projectName === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) {
+        console.warn('You cannot delete a reserved project');
+        return;
+      }
       
       // Confirm deletion for projects that have tasks
       var tasks = project.get('tasks');
@@ -434,6 +437,13 @@ Tasks.mixin({
 
     // Select the default project
     Tasks.projectsController.selectObject(Tasks.get('defaultProject'));
+  },
+  
+  /**
+   * Popup Project Statistics panel.
+   */
+  projectStatistics: function() {
+    this._notImplemented('Project Statistics');
   },
   
   /**
@@ -601,14 +611,14 @@ Tasks.mixin({
   /**
    * Temporary callback to handle missing functionality.
    *
-   * @param (String) name of unimmplemented function
+   * @param (String) message to show user
    */
-  _notImplemented: function(functionName) {
+  _notImplemented: function(message) {
     var prefix = '';
-    if(functionName) {
-      prefix = functionName + '(): ';
+    if(message) {
+      prefix = message;
     }
-    SC.AlertPane.warn ('Unimplemented Functionality', prefix + 'Not yet implemented');
+    SC.AlertPane.warn ('Unimplemented Functionality', prefix + ' coming soon!');
   }  
   
 });

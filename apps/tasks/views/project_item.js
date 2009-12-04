@@ -1,7 +1,7 @@
 // ==========================================================================
 // Project: Tasks 
 // ==========================================================================
-/*globals CoreTasks Tasks sc_require*/
+/*globals CoreTasks Tasks sc_require SCUI */
 sc_require('mixins/localized_label');
 
 /** 
@@ -19,11 +19,18 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     If mouse was down over Description Icon open the editor.
   */  
   mouseDown: function(event) {
+    
+    var that = this;
+    this.set('isReservedProject', false);
+    var projectName = this.getPath('content.name');
+    if(projectName === CoreTasks.ALL_TASKS_NAME.loc() || projectName === CoreTasks.UNALLOCATED_TASKS_NAME.loc() || this.poppedUp) {
+      this.set('isReservedProject', true);
+    }
+    
     var classes = event.target.className;
     if (classes.match('project-icon-no-tasks') || classes.match('project-icon-has-tasks') ||
         classes.match('count') || classes.match('inner')) {
       var layer = this.get('layer');
-      var that = this;
       this._editorPane = SC.PickerPane.create({
         
         layout: { width: 500, height: 200 },
@@ -32,8 +39,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
         // Avoid popup panel coming up on other items while it is up already
         poppedUp: false,
         popup: function() {
-          var projectName = that.getPath('content.name');
-          if(projectName === CoreTasks.ALL_TASKS_NAME.loc() || projectName === CoreTasks.UNALLOCATED_TASKS_NAME.loc() || this.poppedUp) return;
+          if(that.get('isReservedProject')) return;
           this.poppedUp = true;
           this._timeLeft = that.getPath('content.timeLeft');
           sc_super();
@@ -97,7 +103,39 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       }).popup(this, SC.PICKER_MENU);
       if(this._editorPane) this._editorPane.popup(layer, SC.PICKER_POINTER);
     }
+    else if(!that.get('isReservedProject')) { // popup context menu
+      
+      var menuOptions = [
+        {
+          title: "_ProjectStatistics".loc(),
+          isEnabled: YES,
+          target: 'Tasks',
+          action: 'projectStatistics'
+        },
+        {
+          title: "_DelProject".loc(),
+          isEnabled: CoreTasks.getPath('permissions.canDeleteProject'),
+          target: 'Tasks',
+          action: 'deleteProject'
+        }
+      ];    
+
+      var pane = SCUI.ContextMenuPane.create({
+        contentView: SC.View.design({}),
+        layout: { width: 165, height: 0 },
+        itemTitleKey: 'title',
+        itemIsEnabledKey: 'isEnabled',
+        itemTargetKey: 'target',
+        itemActionKey: 'action',
+        items: menuOptions
+      });
+
+      pane.popup(this, event); // pass in the mouse event so the pane can figure out where to put itself
+
+    }
+    
     return NO;
+    
   },
   
   inlineEditorWillBeginEditing: function(inlineEditor) {
