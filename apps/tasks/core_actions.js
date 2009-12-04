@@ -386,7 +386,7 @@ Tasks.mixin({
         console.warn('You must have a project selected to duplicate it');
         return null;
       }
-      projectHash.name = selectedProject.get('name') + ": Copy".loc();
+      projectHash.name = selectedProject.get('name') + "_Copy".loc();
       projectHash.description = selectedProject.get('description');
       projectHash.timeLeft = selectedProject.get('timeLeft');
     }

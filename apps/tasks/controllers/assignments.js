@@ -320,8 +320,13 @@ Tasks.assignmentsController = SC.ArrayController.create(
       
     // Sort grouped tasks by assignee
     this.set('assignedTasks', SC.Object.create({ treeItemChildren: assignmentNodes.sort(function(a,b) {
-      if (a.displayName===b.displayName) return 0;
-      return (a.displayName > b.displayName) ? 1 : -1;
+      if(this._showTasks) { // Tasks display mode, alpha sort by display names
+        if (a.displayName===b.displayName) return 0;
+        return (a.displayName > b.displayName) ? 1 : -1;
+      }
+      else { // Team display mode, sort in descending order of loading
+        return (b.effortGapPercent - a.effortGapPercent);
+      }
     }), treeItemIsExpanded: YES }));
     
     if(selection) Tasks.tasksController.selectObjects(selection);
@@ -440,6 +445,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     assignmentNodes.push (SC.Object.create({
       displayName: displayName,
       displayEffort: displayEffort === ''? null : displayEffort,
+      effortGapPercent: effortGapPercent,
       riskyTasksCount:  riskyTasksCount,
       failedTasksCount:  failedTasksCount,
       loading: loading,
