@@ -58,7 +58,7 @@ v Disable Add/Del. Tasks buttons when on "All Tasks" project [SG] <BB> @Done %Pa
 - Disallow "All Tasks" & "Unallocated Tasks" projects from being deleted [SG] @Done $Feature %Passed
 ^ Allow multi-task drag-n-drop reallocation to other projects [BB] <SG> @Done $Feature %Passed
 ^ Add popup viewer/editor for Project time left/description [SG] $Feature @Done %Passed
-v Add project context menu with options: Delete, Statistics... [SG] $Feature @Done %Passed
+v Add project context menu with options: Statistics..., Delete [SG] $Feature @Done %Passed
 - Add Project Statistics popup to show breakdown by Task attributes (what percent in each) [SG] $Feature
 
 Task Manager GUI
@@ -86,8 +86,8 @@ v Enable/disable "Del. Task" button based on having a selected task [SG] @Done %
 - Color code assignee non loading in gray, under loading in green, proper loading in blue, and over loading in red [SG] @Done $Feature %Passed
 v Add hover over tooltip for assignees to show how many tasks they have and to explain loading color codes [SG] @Done $Feature %Passed
 ^ Allow multi-task drag-n-drop reassignment to other assignees [BB] <SG>  @Done $Feature %Passed
-^ Add popup viewer/editor for Task submitter, assignee, effort, project, and description [JH2] <SG> @Done %Passed $Feature
-v Add task context menu with options: Add, Duplicate, Delete, Copy ID/Name, Copy Link (to clipboard) [SG] $Feature @Active
+^ Add popup viewer/editor for Task submitter, assignee, effort, project, and description [JH2] <SG> $Feature @Done %Passed
+v Add task context menu with options: Add, Duplicate, Delete, Copy ID/Name, Copy Link (last two to clipboard) [SG] $Feature @Done %Passsed
 - Beta: Add ability to watch tasks and get email notifications on task changes [SG] <JH2> $Feature
 - Beta: Highlight newly added tasks with a badge to the left <SE> [SG] $Feature
 - Out of Scope: Add support for nested tasks/tagging $Feature

@@ -67,6 +67,9 @@ SC.stringsFor('English', {
   "_Close": "Close",
   "_Apply": "Apply",
   "_Project:": "Project: ",
+  "_Add": "Add",
+  "_Duplicate": "Duplicate",
+  "_Delete": "Delete",
   
   // Project strings
   "_AddProject": "Add Project",
@@ -84,11 +87,14 @@ SC.stringsFor('English', {
   "_ProjectTimeLeftTooltip": "Time left shown on right",
   "_TimeLeft:": "Time Left:",
   "_TimeLeftOnscreenHelp": "May be unspecified, a decimal like '0.25'; units 'd' or 'h'",
-  "_ProjectStatistics": "Project Statistics...",
+  "_Statistics": "Statistics...",
   
   // Task strings
   "_AddTask": "Add Task",
   "_AddTaskTooltip": "Add a new task, to the same assignee if there is a selected task",
+  "_DuplicateTask": "Dup. Task",
+  "_CopyID/Name": "Copy ID/Name",
+  "_CopyLink": "Copy Link",
   "_NewTask": "New Task",
   "_DelTask": "Del. Task",
   "_DelTaskTooltip": "Delete selected task",

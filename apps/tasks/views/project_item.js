@@ -106,7 +106,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     else if(!that.get('isReservedProject')) { // popup context menu
       var pane = SCUI.ContextMenuPane.create({
         contentView: SC.View.design({}),
-        layout: { width: 165, height: 0 },
+        layout: { width: 130, height: 0 },
         itemTitleKey: 'title',
         itemIconKey: 'icon',
         itemIsEnabledKey: 'isEnabled',
@@ -114,13 +114,13 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
         itemActionKey: 'action',
         items: [
           {
-            title: "_ProjectStatistics".loc(),
+            title: "_Statistics".loc(),
             isEnabled: YES,
             target: 'Tasks',
             action: 'projectStatistics'
           },
           {
-            title: "_DelProject".loc(),
+            title: "_Delete".loc(),
             icon: 'delete-icon',
             isEnabled: CoreTasks.getPath('permissions.canDeleteProject'),
             target: 'Tasks',

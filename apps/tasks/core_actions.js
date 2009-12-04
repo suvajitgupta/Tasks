@@ -447,11 +447,11 @@ Tasks.mixin({
   },
   
   /**
-   * Add a new task to tasks detail list.
+   * Create a new task in tasks detail list.
    *
    * @param {Boolean} flag to indicate whether to make a duplicate of selected task.
    */
-  addTask: function(duplicate) {
+  createTask: function(duplicate) {
     
     if(duplicate === undefined) duplicate = false;
     
@@ -510,6 +510,24 @@ Tasks.mixin({
   },
 
   /**
+   * Add a new task in detail list.
+   *
+   * @param {Boolean} flag to indicate whether to make a duplicate of selected task.
+   */
+  addTask: function() {
+    this.createTask(false);
+  },
+  
+  /**
+   * Duplicate selected task in detail list.
+   *
+   * @param {Boolean} flag to indicate whether to make a duplicate of selected task.
+   */
+  duplicateTask: function() {
+    this.createTask(true);
+  },
+  
+  /**
    * Delete selected task in tasks detail list.
    */
   deleteTask: function() {
@@ -531,6 +549,20 @@ Tasks.mixin({
       }
       Tasks.deselectTasks();
     }
+  },
+  
+  /**
+   * Copy selected task's ID/name into clipboard.
+   */
+  copyTaskIDName: function() {
+    this._notImplemented('Copy Task ID/Name');
+  },
+  
+  /**
+   * Copy selected task's link (URL to route to) into clipboard.
+   */
+  copyTaskLink: function() {
+    this._notImplemented('Copy Task Link');
   },
   
   /**

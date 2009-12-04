@@ -1,7 +1,7 @@
 // ==========================================================================
 // Project: Tasks 
 // ==========================================================================
-/*globals CoreTasks Tasks */
+/*globals CoreTasks Tasks SCUI */
 
 /** 
 
@@ -156,6 +156,55 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         })
       });
       this._editorPane.popup(layer, SC.PICKER_POINTER);
+    }
+    else { // popup context menu
+      var pane = SCUI.ContextMenuPane.create({
+        contentView: SC.View.design({}),
+        layout: { width: 140, height: 0 },
+        itemTitleKey: 'title',
+        itemIconKey: 'icon',
+        itemIsEnabledKey: 'isEnabled',
+        itemTargetKey: 'target',
+        itemActionKey: 'action',
+        itemSeparatorKey: 'isSeparator',
+        items: [
+          {
+            title: "_Add".loc(),
+            icon: 'add-icon',
+            isEnabled: CoreTasks.getPath('permissions.canAddTask'),
+            target: 'Tasks',
+            action: 'addTask'
+          },
+          {
+            title: "_Duplicate".loc(),
+            icon: 'task-duplicate-icon',
+            isEnabled: CoreTasks.getPath('permissions.canAddTask'),
+            target: 'Tasks',
+            action: 'duplicateTask'
+          },
+          {
+            title: "_Delete".loc(),
+            icon: 'delete-icon',
+            isEnabled: CoreTasks.getPath('permissions.canDeleteTask'),
+            target: 'Tasks',
+            action: 'deleteTask'
+          },
+          { isSeparator: YES },
+          {
+            title: "_CopyID/Name".loc(),
+            isEnabled: YES,
+            target: 'Tasks',
+            action: 'copyTaskIDName'
+          },
+          {
+            title: "_CopyLink".loc(),
+            isEnabled: YES,
+            target: 'Tasks',
+            action: 'copyTaskLink'
+          }
+        ]        
+      });
+      pane.popup(this, event); // pass in the mouse event so the pane can figure out where to put itself
     }
     return NO;
   },

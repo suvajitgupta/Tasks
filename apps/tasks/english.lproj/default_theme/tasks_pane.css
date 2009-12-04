@@ -171,6 +171,13 @@
   background: static_url('images/default-theme-static.png') no-repeat 0 -272px;
 }
 
+.task-duplicate-icon {
+  width: 16px !important;
+  height: 16px !important;
+  background: static_url('images/task-duplicate.png') no-repeat;
+}
+
+
 /*-----------------------------------------------------------------
  * Task priority styles
  */

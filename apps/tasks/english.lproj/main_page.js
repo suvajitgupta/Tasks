@@ -310,7 +310,7 @@ Tasks.mainPage = SC.Page.design({
             ret = YES;
           }
           else if (commandCode[0] === 'ctrl_d'){  //ctrl-d
-            Tasks.addTask(true); // duplicate
+            Tasks.duplicateTask();
             ret = YES;
           }
           else if (commandCode[0] === 'ctrl_p'){  //ctrl-p
