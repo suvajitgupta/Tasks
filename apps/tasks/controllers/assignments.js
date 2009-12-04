@@ -437,7 +437,6 @@ Tasks.assignmentsController = SC.ArrayController.create(
     var loading = CoreTasks.USER_NOT_LOADED;
     var effortGap = 0, effortGapPercent = 0;
     if(totalEffortMin !== 0) {
-      console.log('LOADING: ' + displayName + ': ' + totalEffortMin + '-' + totalEffortMax);
       if(projectTimeLeft) { // flag user loading
         var totalEffortAve = (totalEffortMin + totalEffortMax)/2;
         effortGap = totalEffortAve - projectTimeLeft;
