@@ -320,13 +320,15 @@ Tasks.assignmentsController = SC.ArrayController.create(
       
     // Sort grouped tasks by assignee
     this.set('assignedTasks', SC.Object.create({ treeItemChildren: assignmentNodes.sort(function(a,b) {
-      if(this._showTasks) { // Tasks display mode, alpha sort by display names
-        if (a.displayName===b.displayName) return 0;
-        return (a.displayName > b.displayName) ? 1 : -1;
+      if(!Tasks.assignmentsController._showTasks) { // Team display mode, first try to sort in descending order of loading/red flags
+        var loadingDelta = b.effortGapPercent - a.effortGapPercent;
+        if(loadingDelta !== 0) return loadingDelta;
+        var redFlagsDelta = (b.riskyTasksCount + b.failedTasksCount) - (a.riskyTasksCount + a.failedTasksCount);
+        if(redFlagsDelta !== 0) return redFlagsDelta;
       }
-      else { // Team display mode, sort in descending order of loading
-        return (b.effortGapPercent - a.effortGapPercent);
-      }
+      // Alpha sort by display names
+      if (a.displayName === b.displayName) return 0;
+      return (a.displayName > b.displayName) ? 1 : -1;
     }), treeItemIsExpanded: YES }));
     
     if(selection) Tasks.tasksController.selectObjects(selection);
@@ -451,7 +453,8 @@ Tasks.assignmentsController = SC.ArrayController.create(
       loading: loading,
       assignee: assigneeObj.assignee,
       tasksCount: tasks.get('length'),
-      treeItemChildren: this._showTasks? tasks.sort(function(a,b) { // sort by status, then by validation (if "Done"), then by priority, lastly by type
+      treeItemChildren: Tasks.assignmentsController._showTasks? tasks.sort(function(a,b) {
+        // sort by status, then by validation (if "Done"), then by priority, lastly by type
         
         var aStatus = a.get('developmentStatus');
         var bStatus = b.get('developmentStatus');
