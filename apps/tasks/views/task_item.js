@@ -1,7 +1,7 @@
 // ==========================================================================
 // Project: Tasks 
 // ==========================================================================
-/*globals CoreTasks Tasks SCUI */
+/*globals CoreTasks Tasks SCUI sc_static */
 
 /** 
 
@@ -160,7 +160,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     else { // popup context menu
       var pane = SCUI.ContextMenuPane.create({
         contentView: SC.View.design({}),
-        layout: { width: 155, height: 0 },
+        layout: { width: 170, height: 0 },
         itemTitleKey: 'title',
         itemIconKey: 'icon',
         itemIsEnabledKey: 'isEnabled',
@@ -194,12 +194,14 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           },
           {
             title: "_CopyID/Name".loc(),
+            icon: sc_static('blank'),
             isEnabled: YES,
             target: 'Tasks',
             action: 'copyTaskIDName'
           },
           {
             title: "_CopyLink".loc(),
+            icon: sc_static('blank'),
             isEnabled: YES,
             target: 'Tasks',
             action: 'copyTaskLink'

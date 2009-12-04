@@ -106,7 +106,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     else if(!that.get('isReservedProject')) { // popup context menu
       var pane = SCUI.ContextMenuPane.create({
         contentView: SC.View.design({}),
-        layout: { width: 140, height: 0 },
+        layout: { width: 150, height: 0 },
         itemTitleKey: 'title',
         itemIconKey: 'icon',
         itemIsEnabledKey: 'isEnabled',
@@ -133,6 +133,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
           },
           {
             title: "_Statistics".loc(),
+            icon: sc_static('blank'),
             isEnabled: YES,
             target: 'Tasks',
             action: 'projectStatistics'
