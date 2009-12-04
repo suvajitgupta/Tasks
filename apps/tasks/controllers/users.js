@@ -29,6 +29,9 @@ Tasks.usersController = SC.ArrayController.create(SCUI.StatusChanged,
 
     var sel = this.get('selection');
     if(!sel) return false;
+    
+    var selectedUser = sel.get('firstObject');
+    if(selectedUser === CoreTasks.get('currentUser')) return false; // can't delete yourself!
 
     return true;
 
