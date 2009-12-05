@@ -52,10 +52,10 @@
   font-weight: bold;
 }
 
-/*.regular-project-item .sc-outline {
-  right: 18px !important;
+.regular-project-item .sc-outline:hover,
+.reserved-project-item .sc-outline:hover {
+	border: 1px solid #AAA !important;
 }
-*/
 
 .regular-project-item .sc-outline .count {
 	font-weight: normal !important;
