@@ -54,7 +54,9 @@
 
 .regular-project-item .sc-outline:hover,
 .reserved-project-item .sc-outline:hover {
-	border: 1px solid #AAA !important;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+	border: 1px solid #888 !important;
 }
 
 .regular-project-item .sc-outline .count {
