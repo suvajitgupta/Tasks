@@ -509,7 +509,7 @@ Tasks.mixin({
         taskHash.type = selectedTask.get('type');
         taskHash.priority = selectedTask.get('priority');
         if(duplicate) {
-          taskHash.name = selectedTask.get('name') + ": Copy".loc();
+          taskHash.name = selectedTask.get('name') + "_Copy".loc();
           taskHash.effort = selectedTask.get('effort');
           taskHash.description = selectedTask.get('description');
           taskHash.developmentStatus = selectedTask.get('developmentStatus');
