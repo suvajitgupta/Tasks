@@ -240,10 +240,16 @@ Tasks.assignmentsController = SC.ArrayController.create(
     // Extract task name search filter
     var sf = this.get('searchFilter');
     sf = this._escapeMetacharacters(sf);
-    var idPattern = null, namePattern = null;
+    var idPattern = null, namePattern = null, inverseSearch = false;
     var idMatches = sf.match(/#([\-\d]+)/g);
     // console.log("DEBUG: idMatches = " + idMatches);
-    if(!idMatches) namePattern = new RegExp(sf, 'i');
+    if(!idMatches) {
+      if (sf.indexOf('^') === 0) { // inverse search requested
+        inverseSearch = true;
+        sf = sf.slice(1);
+      }
+      namePattern = new RegExp(sf, 'i');
+    }
     
     // Get time left, if any specified, in selected project.
     var projectTimeLeft = null;
@@ -302,9 +308,12 @@ Tasks.assignmentsController = SC.ArrayController.create(
             }
           }
           else if(namePattern) {
-            if(!taskName.match(namePattern)) {
-              var description = task.get('description');
-              if(!description || !description.match(namePattern)) return;
+            var nameMatches = taskName.match(namePattern); // first try to search in name
+            if((nameMatches && inverseSearch) || (!nameMatches && !inverseSearch)) { // then try to search in description
+              var taskDescription = task.get('description');
+              if(!taskDescription) return; // no description, cannot match
+              var descriptionMatches = taskDescription.match(namePattern);
+              if((descriptionMatches && inverseSearch) || (!descriptionMatches && !inverseSearch)) return; // no match found
             }
           }
         }
