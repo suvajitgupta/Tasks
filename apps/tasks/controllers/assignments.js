@@ -269,6 +269,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
       // console.log("Task Name: " + task.get('name') + "; Id: " + task.get('id'));
       assignee = task.get('assignee');
       var taskName = task.get('name');
+      var taskDescription = task.get('description');
       var isNewTask = (taskName === CoreTasks.NEW_TASK_NAME.loc()); // Always display "new task"s
       if (assignee && !assignee.get) return; // FIXME: [SC] unclear why assigneee.get is null at times
       assigneeName = assignee? assignee.get('displayName') : CoreTasks.USER_UNASSIGNED;
@@ -295,25 +296,25 @@ Tasks.assignmentsController = SC.ArrayController.create(
             var taskId = task.get('displayId');
             if(idMatches.indexOf(taskId) === -1) { // doesn't match task ID exactly
               // see if any task ID entered in the search is a part of the task name
-              var taskNameHasID = false;
-              for (var i = 0; !taskNameHasID && i < idMatches.length; i++) {
-                var taskIdMatches = taskName.match(/#([\-\d]+)/g);
+              var taskHasID = false;
+              for (var i = 0; !taskHasID && i < idMatches.length; i++) {
+                var searchText = taskName + (taskDescription? taskDescription : '');
+                var taskIdMatches = searchText.match(/#([\-\d]+)/g);
                 if(taskIdMatches) { // task name has ID(s) in it
                   for (var j=0; j < taskIdMatches.length; j++) {
                     if(taskIdMatches[j] === idMatches[i]) { // found match!
-                      taskNameHasID = true;
+                      taskHasID = true;
                       break;
                     }
                   }
                 }
               }
-              if(!taskNameHasID) return;
+              if(!taskHasID) return;
             }
           }
-          else if(searchPattern) { // regular expression (case insensitive) search of task name and/or description
+          else if(searchPattern) { // case insensitive search of task name and/or description
             var nameMatches = taskName.match(searchPattern);
             console.log('DEBUG: ' + taskName + ', nameMatches=' + (nameMatches !== null));
-            var taskDescription = task.get('description');
             if(positiveMatch) { // find what matches search pattern
               if(!nameMatches) { // try matching description
                 if(!taskDescription) console.log('DEBUG: ' + taskName + ', description=null');
