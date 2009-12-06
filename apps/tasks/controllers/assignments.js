@@ -220,7 +220,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     
     var selectedAssigneeDisplayNames = [];
     var selectedAssignees = this.get('assigneeSelection');
-    if (selectedAssignees) {
+    if (selectedAssignees && selectedAssignees !== '') { // if assignee selection is specified
       var selectedAssigneeNames = selectedAssignees.replace(/,/g, ' ').replace(/\s+/g, ' ').replace(/\s+$/, '').split(' ');
       for (var i = 0; i < selectedAssigneeNames.length; i++) {
         if(selectedAssigneeNames[i].match(/none/i)) {
@@ -238,17 +238,20 @@ Tasks.assignmentsController = SC.ArrayController.create(
     }
     
     // Extract task name search filter
-    var sf = this.get('searchFilter');
-    sf = this._escapeMetacharacters(sf);
-    var idPattern = null, namePattern = null, inverseSearch = false;
-    var idMatches = sf.match(/#([\-\d]+)/g);
-    // console.log("DEBUG: idMatches = " + idMatches);
-    if(!idMatches) {
-      if (sf.indexOf('^') === 0) { // inverse search requested
-        inverseSearch = true;
-        sf = sf.slice(1);
+    var idPattern = null, searchPattern = null, positiveMatch = true;
+    var searchFilter = this.get('searchFilter');
+    if (searchFilter && searchFilter !== '') { // if a search filter is specified
+      searchFilter = this._escapeMetacharacters(searchFilter);
+      var idMatches = searchFilter.match(/#([\-\d]+)/g);
+      // console.log("DEBUG: idMatches = " + idMatches);
+      if(!idMatches) {
+        if (searchFilter.indexOf('^') === 0) { // inverse search specified
+          positiveMatch = false;
+          console.log('DEBUG: inverse search');
+          searchFilter = searchFilter.slice(1);
+        }
+        searchPattern = new RegExp(searchFilter, 'i');
       }
-      namePattern = new RegExp(sf, 'i');
     }
     
     // Get time left, if any specified, in selected project.
@@ -288,7 +291,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
             var validation = task.get('validation');
             if(this.attributeFilterCriteria.indexOf(validation) === -1) return;
           }
-          if(idMatches) {
+          if(idMatches) { // one or more exact ID matches of task ID or IDs in name
             var taskId = task.get('displayId');
             if(idMatches.indexOf(taskId) === -1) { // doesn't match task ID exactly
               // see if any task ID entered in the search is a part of the task name
@@ -307,13 +310,22 @@ Tasks.assignmentsController = SC.ArrayController.create(
               if(!taskNameHasID) return;
             }
           }
-          else if(namePattern) {
-            var nameMatches = taskName.match(namePattern); // first try to search in name
-            if((nameMatches && inverseSearch) || (!nameMatches && !inverseSearch)) { // then try to search in description
-              var taskDescription = task.get('description');
-              if(!taskDescription) return; // no description, cannot match
-              var descriptionMatches = taskDescription.match(namePattern);
-              if((descriptionMatches && inverseSearch) || (!descriptionMatches && !inverseSearch)) return; // no match found
+          else if(searchPattern) { // regular expression (case insensitive) search of task name and/or description
+            var nameMatches = taskName.match(searchPattern);
+            console.log('DEBUG: ' + taskName + ', nameMatches=' + (nameMatches !== null));
+            var taskDescription = task.get('description');
+            if(positiveMatch) { // find what matches search pattern
+              if(!nameMatches) { // try matching description
+                if(!taskDescription) console.log('DEBUG: ' + taskName + ', description=null');
+                else console.log('DEBUG: ' + taskName + ', descriptionMatches=' + (taskDescription.match(searchPattern) !== null));
+                if(!taskDescription || !taskDescription.match(searchPattern)) return;
+              }
+            }
+            else { // inverse search - what doesn't match search pattern
+              if(nameMatches) return;
+              if(!taskDescription) console.log('DEBUG: ' + taskName + ', description=null');
+              else console.log('DEBUG: ' + taskName + ', descriptionMatches=' + (taskDescription.match(searchPattern) !== null));
+              if(taskDescription && taskDescription.match(searchPattern)) return;
             }
           }
         }
