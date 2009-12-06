@@ -615,6 +615,7 @@ Tasks.mixin({
     // Create and select new user.
     var user = CoreTasks.createRecord(CoreTasks.User, SC.clone(CoreTasks.User.NEW_USER_HASH));
     Tasks.usersController.selectObject(user);
+    Tasks.settingsPage.get('userInformation').get('fullNameField').becomeFirstResponder();
     return user;
     
   },

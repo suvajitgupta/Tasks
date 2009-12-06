@@ -116,6 +116,8 @@ Tasks.settingsPage = SC.Page.create({
       
     })
       
-  })
+  }),
+  
+  userInformation: SC.outlet('panel.contentView.userManager.childViews.2'),
   
 });
