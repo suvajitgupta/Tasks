@@ -165,10 +165,10 @@ Styling/Hardening
 - Handle secondary scenarios/provide good diagnostics [SG] <SE> @Active
 
 Packaging/Delivery
+^ Develop Web client (ported to Firefox, Internet Explorer, Safari, Chrome) [SG] $Feature @Done %Passed
 - Deploy publicly-accessible instance using Google App Engine/Python [JH2] <SG> @Done %Passed
-^ Develop Web client (ported to Firefox, Internet Explorer, Safari, Chrome) [SG] @Done %Passed
-- Develop Mobile client using PhoneGap [SG] <MB>
-- Develop Desktop client using Webkit [SG] <MB>
+- Develop Desktop client using Webkit <JH2> [SG] $Feature @Active
+- Develop Mobile client using PhoneGap <MB> [SG] $Feature
 
 Testing/Rollout
 - Note all FIXMEs/TODOs/bugs & remove these as they are resolved [SG] <BM> @Active
