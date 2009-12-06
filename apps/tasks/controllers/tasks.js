@@ -19,13 +19,19 @@ Tasks.tasksController = SC.TreeController.create(
   
   isAddable: function() {
     
-    if(Tasks.assignmentsController.get('displayMode') === Tasks.DISPLAY_MODE_TEAM) return false
+    if(Tasks.assignmentsController.get('displayMode') === Tasks.DISPLAY_MODE_TEAM) return false;
     
     if(!CoreTasks.getPath('permissions.canAddTask')) return false;
     
+    var selectedProject = Tasks.projectsController.getPath('selection.firstObject');
+    if (selectedProject && selectedProject.get('name') === CoreTasks.ALL_TASKS_NAME.loc()) {
+      var selectedTask = Tasks.tasksController.getPath('selection.firstObject');
+      if(!selectedTask) return false;
+    }
+    
     return true;
     
-  }.property().cacheable(),
+  }.property('selection').cacheable(),
   
   isEditable: function() {
     
