@@ -35,10 +35,8 @@ Tasks.mixin({
         };
         // Perservere authentication
         CoreTasks.User.authenticate(loginName, password, params);
-        // sinatra authentication
-        // TODO [JH2, SG]  We need a way to determine the backend
-        // This has been tested and it works! :)
-        // CoreTasks.User.sinatraAuthenticate(loginName, password,params);
+        // TODO: [JH2, SG] Beta: need a way to determine the backend and call the appropriate authentication method
+        // CoreTasks.User.sinatraAuthenticate(loginName, password, params);
         break;
 
       default:
@@ -347,10 +345,9 @@ Tasks.mixin({
     CoreTasks.set('currentUser', null);
     this._loginTime = true;
     
-    // TODO [JH2, SG] We need to determine what backend we are using
-    // before we can use this, but it works.
+    // TODO: [JH2, SG] Beta: need to determine the backend and logout appropriately
     // var params = {
-    //   successCallback: function() { console.log('successful logout'); }.bind(this),
+    //   successCallback: function() { console.log('Successful logout'); }.bind(this),
     //   failureCallback: function() { console.log('Failed logout'); }.bind(this)
     // };
     // CoreTasks.User.logout('logout', params);
