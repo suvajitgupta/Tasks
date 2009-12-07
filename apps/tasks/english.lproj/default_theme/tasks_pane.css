@@ -297,7 +297,7 @@
 .sc-theme.focus .sc-list-view.sc-source-list .sc-collection-item.sel {
   background: #abd7ff;
 	border: none !important;
-	outline: 1px solid #777 !important;
+	border: 1px solid #999 !important;
 }
 
 .sc-theme.focus .sc-list-view.sc-source-list .sc-collection-item.task-item:hover {

@@ -37,12 +37,6 @@
   right: 50px !important;
 }
 
-.projects-pane-inner .sc-collection-item.has-icon.sel {
-  background: static_url('images/default-theme-selected-project.png') no-repeat 0 0 !important;
-  font-weight: bold;
-  color: #FFF !important;
-}
-
 .reserved-project-item {
 	color: #666 !important;
 } 
@@ -52,11 +46,17 @@
   font-weight: bold;
 }
 
-.regular-project-item .sc-outline:hover,
-.reserved-project-item .sc-outline:hover {
+.projects-pane-inner .sc-collection-item.has-icon.sel,
+.project-item.sel .sc-outline:hover {
+  background: static_url('images/default-theme-selected-project.png') no-repeat 0 0 !important;
+  font-weight: bold;
+  color: #FFF !important;
+}
+
+.project-item .sc-outline:hover {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
-	border: 1px solid #888 !important;
+  background: #CCC none repeat scroll 0 0 !important;
 }
 
 .regular-project-item .sc-outline .count {

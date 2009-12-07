@@ -57,7 +57,7 @@ Tasks.settingsPage = SC.Page.create({
               }),
               
               SC.View.design({
-                layout: { top: 8, bottom: 8, left: 190, width: 2 },
+                layout: { top: 8, bottom: 8, left: 200, width: 2 },
                 classNames: ['top-bar-divider']
               }),
               

@@ -27,7 +27,10 @@
   background: none !important;
 }
 
-.users-pane .sc-collection-item.sel {
+.users-pane .sc-collection-item.sel,
+.users-pane .sc-collection-item.sel:hover {
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
   background: static_url('images/default-theme-selected-project.png') no-repeat 0 0 !important;
   font-weight: bold;
   color: #FFF !important;
@@ -36,7 +39,7 @@
 .users-pane .sc-collection-item:hover {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
-	border: 1px solid #888 !important;
+  background: #CCC none repeat scroll 0 0 !important;
 }
 
 
