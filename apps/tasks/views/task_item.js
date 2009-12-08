@@ -244,37 +244,39 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       isSeparator: YES
     });
     
-    var validation = this.get('content').get('validation');
-    if(validation !== CoreTasks.TASK_VALIDATION_UNTESTED) {
+    if(status === CoreTasks.TASK_STATUS_DONE) {
+      var validation = this.get('content').get('validation');
+      if(validation !== CoreTasks.TASK_VALIDATION_UNTESTED) {
+        ret.push({
+          title: '<span class=task-validation-untested>' + CoreTasks.TASK_VALIDATION_UNTESTED.loc() + '</span>',
+          icon: sc_static('blank'),
+          isEnabled: YES,
+          target: 'Tasks.tasksController',
+          action: 'setValidationUntested'
+        });
+      }
+      if(validation !== CoreTasks.TASK_VALIDATION_PASSED) {
+        ret.push({
+          title: '<span class=task-validation-passed>' + CoreTasks.TASK_VALIDATION_PASSED.loc() + '</span>',
+          icon: sc_static('blank'),
+          isEnabled: YES,
+          target: 'Tasks.tasksController',
+          action: 'setValidationPassed'
+        });
+      }
+      if(validation !== CoreTasks.TASK_VALIDATION_FAILED) {
       ret.push({
-        title: '<span class=task-validation-untested>' + CoreTasks.TASK_VALIDATION_UNTESTED.loc() + '</span>',
-        icon: sc_static('blank'),
-        isEnabled: YES,
-        target: 'Tasks.tasksController',
-        action: 'setValidationUntested'
-      });
-    }
-    if(validation !== CoreTasks.TASK_VALIDATION_PASSED) {
+          title: '<span class=task-validation-failed>' + CoreTasks.TASK_VALIDATION_FAILED.loc() + '</span>',
+          icon: sc_static('blank'),
+          isEnabled: YES,
+          target: 'Tasks.tasksController',
+          action: 'setValidationFailed'
+        });
+      }
       ret.push({
-        title: '<span class=task-validation-passed>' + CoreTasks.TASK_VALIDATION_PASSED.loc() + '</span>',
-        icon: sc_static('blank'),
-        isEnabled: YES,
-        target: 'Tasks.tasksController',
-        action: 'setValidationPassed'
+        isSeparator: YES
       });
     }
-    if(validation !== CoreTasks.TASK_VALIDATION_FAILED) {
-    ret.push({
-        title: '<span class=task-validation-failed>' + CoreTasks.TASK_VALIDATION_FAILED.loc() + '</span>',
-        icon: sc_static('blank'),
-        isEnabled: YES,
-        target: 'Tasks.tasksController',
-        action: 'setValidationFailed'
-      });
-    }
-    ret.push({
-      isSeparator: YES
-    });
     
     ret.push({
       title: "_CopyID/Name".loc(),
