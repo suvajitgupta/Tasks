@@ -126,6 +126,18 @@ Tasks.tasksController = SC.TreeController.create(
     return value;
   }.property('selection').cacheable(),
   
+  setStatusActive: function() {
+    this.developmentStatusWithValidation('developmentStatusWithValidation', CoreTasks.TASK_STATUS_ACTIVE);
+  },
+  
+  setStatusDone: function() {
+    this.developmentStatusWithValidation('developmentStatusWithValidation', CoreTasks.TASK_STATUS_DONE);
+  },
+  
+  setStatusRisky: function() {
+    this.developmentStatusWithValidation('developmentStatusWithValidation', CoreTasks.TASK_STATUS_RISKY);
+  },
+  
   validation: function(key, value) {
     var sel = this.get('selection');
     if(!sel || sel.get('length') === 0) return false;
@@ -144,6 +156,14 @@ Tasks.tasksController = SC.TreeController.create(
     }
     return value;
   }.property('selection').cacheable(),
+  
+  setValidationPassed: function() {
+    this.validation('validation', CoreTasks.TASK_VALIDATION_PASSED);
+  },
+  
+  setValidationFailed: function() {
+    this.validation('validation', CoreTasks.TASK_VALIDATION_FAILED);
+  },
   
   editNewTask: function(task){
     var listView = Tasks.getPath('mainPage.mainPane.tasksList');
