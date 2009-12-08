@@ -400,7 +400,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
     if(val !== CoreTasks.TASK_STATUS_PLANNED) ret += ' @' + val.loc();
     
     val = this.get('validation');
-    if(val !== CoreTasks.TASK_VALIDATION_UNTESTED)ret += ' %' + val.loc();
+    if(val !== CoreTasks.TASK_VALIDATION_UNTESTED) ret += ' %' + val.loc();
     
     if(this.get('id') > 0) ret += ' ' + this.get('displayId');
     
