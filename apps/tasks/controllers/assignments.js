@@ -314,7 +314,6 @@ Tasks.assignmentsController = SC.ArrayController.create(
           }
           else if(searchPattern) { // case insensitive search of task name and/or description
             var nameMatches = taskName.match(searchPattern);
-            console.log('DEBUG: ' + taskName + ', nameMatches=' + (nameMatches !== null));
             if(positiveMatch) { // find what matches search pattern
               if(!nameMatches) { // try matching description
                 if(!taskDescription) console.log('DEBUG: ' + taskName + ', description=null');
