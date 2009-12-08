@@ -145,6 +145,7 @@ Server
 - Beta: Implement Server-based RBAC (role-based access control) <SG> [JH2] @Active
 - Beta: Add email notifications on noteworthy changes [JH2] <SG> $Feature
 | Notify Assignee when Task is added by Submitter different than Assignee (via New or Reassignment operations)
+| Notify Assignee/Submitter if a Task is edited by someone other than them
 | Notify Assignee when Done Task is Failed
 | Notify Managers when Task is flagged as Risky
 - Add server-side data validation checks/return appropriate error codes [SE] <SG>
