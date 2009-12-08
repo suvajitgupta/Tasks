@@ -109,9 +109,3 @@ body {
 .sc-view.sc-menu-item {
   font-size: 11px !important;
 }
-
-.selected-item-icon {
-  width: 16px !important;
-  height: 16px !important;
-  background: static_url('images/selected-item.png') no-repeat 0 0px;
-}

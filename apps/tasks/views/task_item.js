@@ -158,8 +158,6 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       this._editorPane.popup(layer, SC.PICKER_POINTER);
     }
     else { // popup context menu
-      var status = this.get('content').get('developmentStatus');
-      var validation = this.get('content').get('validation');
       var pane = SCUI.ContextMenuPane.create({
         contentView: SC.View.design({}),
         layout: { width: 170, height: 0 },
@@ -170,91 +168,129 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         itemTargetKey: 'target',
         itemActionKey: 'action',
         itemSeparatorKey: 'isSeparator',
-        items: [
-          {
-            title: "_Add".loc(),
-            icon: 'add-icon',
-            isEnabled: CoreTasks.getPath('permissions.canAddTask'),
-            target: 'Tasks',
-            action: 'addTask'
-          },
-          {
-            title: "_Duplicate".loc(),
-            icon: 'task-duplicate-icon',
-            isEnabled: CoreTasks.getPath('permissions.canAddTask'),
-            target: 'Tasks',
-            action: 'duplicateTask'
-          },
-          {
-            title: "_Delete".loc(),
-            icon: 'delete-icon',
-            isEnabled: CoreTasks.getPath('permissions.canDeleteTask'),
-            target: 'Tasks',
-            action: 'deleteTask'
-          },
-          {
-            isSeparator: YES
-          },
-          {
-            title: '<span class=task-status-active>' + CoreTasks.TASK_STATUS_ACTIVE.loc() + '</span>',
-            icon: status === CoreTasks.TASK_STATUS_ACTIVE? 'selected-item-icon' : sc_static('blank'),
-            isEnabled: status === CoreTasks.TASK_STATUS_ACTIVE? NO : YES,
-            target: 'Tasks.tasksController',
-            action: 'setStatusActive'
-          },
-          {
-            title: '<span class=task-status-done>' + CoreTasks.TASK_STATUS_DONE.loc() + '</span>',
-            icon: status === CoreTasks.TASK_STATUS_DONE? 'selected-item-icon' : sc_static('blank'),
-            isEnabled: status === CoreTasks.TASK_STATUS_DONE? NO : YES,
-            target: 'Tasks.tasksController',
-            action: 'setStatusDone'
-          },
-          {
-            title: '<span class=task-status-risky>' + CoreTasks.TASK_STATUS_RISKY.loc() + '</span>',
-            icon: status === CoreTasks.TASK_STATUS_RISKY? 'selected-item-icon' : sc_static('blank'),
-            isEnabled: status === CoreTasks.TASK_STATUS_RISKY? NO : YES,
-            target: 'Tasks.tasksController',
-            action: 'setStatusRisky'
-          },
-          {
-            isSeparator: YES
-          },
-          {
-            title: '<span class=task-validation-passed>' + CoreTasks.TASK_VALIDATION_PASSED.loc() + '</span>',
-            icon: validation ===CoreTasks.TASK_VALIDATION_PASSED? 'selected-item-icon' : sc_static('blank'),
-            isEnabled: status !== CoreTasks.TASK_STATUS_DONE || validation === CoreTasks.TASK_VALIDATION_PASSED? NO : YES,
-            target: 'Tasks.tasksController',
-            action: 'setValidationPassed'
-          },
-          {
-            title: '<span class=task-validation-failed>' + CoreTasks.TASK_VALIDATION_FAILED.loc() + '</span>',
-            icon: validation === CoreTasks.TASK_VALIDATION_FAILED? 'selected-item-icon' : sc_static('blank'),
-            isEnabled: status !== CoreTasks.TASK_STATUS_DONE || validation === CoreTasks.TASK_VALIDATION_FAILED? NO : YES,
-            target: 'Tasks.tasksController',
-            action: 'setValidationFailed'
-          },
-          {
-            isSeparator: YES
-          },
-          {
-            title: "_CopyID/Name".loc(),
-            icon: sc_static('blank'),
-            isEnabled: YES,
-            target: 'Tasks',
-            action: 'copyTaskIDName'
-          },
-          {
-            title: "_CopyLink".loc(),
-            icon: sc_static('blank'),
-            isEnabled: YES,
-            target: 'Tasks',
-            action: 'copyTaskLink'
-          }
-        ]        
+        items: this._buildContextMenu()        
       });
       pane.popup(this, event); // pass in the mouse event so the pane can figure out where to put itself
     }
     return NO;
+  },
+  
+  _buildContextMenu: function() {
+    
+    var ret = [];
+    ret.push({
+      title: "_Add".loc(),
+      icon: 'add-icon',
+      isEnabled: CoreTasks.getPath('permissions.canAddTask'),
+      target: 'Tasks',
+      action: 'addTask'
+    });
+    ret.push({
+      title: "_Duplicate".loc(),
+      icon: 'task-duplicate-icon',
+      isEnabled: CoreTasks.getPath('permissions.canAddTask'),
+      target: 'Tasks',
+      action: 'duplicateTask'
+    });
+    ret.push({
+      title: "_Delete".loc(),
+      icon: 'delete-icon',
+      isEnabled: CoreTasks.getPath('permissions.canDeleteTask'),
+      target: 'Tasks',
+      action: 'deleteTask'
+    });
+    ret.push({
+      isSeparator: YES
+    });
+    
+    var status = this.get('content').get('developmentStatus');
+    if(status !== CoreTasks.TASK_STATUS_PLANNED) {
+      ret.push({
+        title: '<span class=task-status-planned>' + CoreTasks.TASK_STATUS_PLANNED.loc() + '</span>',
+        icon: sc_static('blank'),
+        isEnabled: YES,
+        target: 'Tasks.tasksController',
+        action: 'setStatusPlanned'
+      });
+    }
+    if(status !== CoreTasks.TASK_STATUS_ACTIVE) {
+      ret.push({
+        title: '<span class=task-status-active>' + CoreTasks.TASK_STATUS_ACTIVE.loc() + '</span>',
+        icon: sc_static('blank'),
+        isEnabled: YES,
+        target: 'Tasks.tasksController',
+        action: 'setStatusActive'
+      });
+    }
+    if(status !== CoreTasks.TASK_STATUS_DONE) {
+      ret.push({
+        title: '<span class=task-status-done>' + CoreTasks.TASK_STATUS_DONE.loc() + '</span>',
+        icon: sc_static('blank'),
+        isEnabled: YES,
+        target: 'Tasks.tasksController',
+        action: 'setStatusDone'
+      });
+    }
+    if(status !== CoreTasks.TASK_STATUS_RISKY) {
+      ret.push({
+        title: '<span class=task-status-risky>' + CoreTasks.TASK_STATUS_RISKY.loc() + '</span>',
+        icon: sc_static('blank'),
+        isEnabled: YES,
+        target: 'Tasks.tasksController',
+        action: 'setStatusRisky'
+      });
+    }
+    ret.push({
+      isSeparator: YES
+    });
+    
+    var validation = this.get('content').get('validation');
+    if(validation !== CoreTasks.TASK_VALIDATION_UNTESTED) {
+      ret.push({
+        title: '<span class=task-validation-untested>' + CoreTasks.TASK_VALIDATION_UNTESTED.loc() + '</span>',
+        icon: sc_static('blank'),
+        isEnabled: YES,
+        target: 'Tasks.tasksController',
+        action: 'setValidationUntested'
+      });
+    }
+    if(validation !== CoreTasks.TASK_VALIDATION_PASSED) {
+      ret.push({
+        title: '<span class=task-validation-passed>' + CoreTasks.TASK_VALIDATION_PASSED.loc() + '</span>',
+        icon: sc_static('blank'),
+        isEnabled: YES,
+        target: 'Tasks.tasksController',
+        action: 'setValidationPassed'
+      });
+    }
+    if(validation !== CoreTasks.TASK_VALIDATION_FAILED) {
+    ret.push({
+        title: '<span class=task-validation-failed>' + CoreTasks.TASK_VALIDATION_FAILED.loc() + '</span>',
+        icon: sc_static('blank'),
+        isEnabled: YES,
+        target: 'Tasks.tasksController',
+        action: 'setValidationFailed'
+      });
+    }
+    ret.push({
+      isSeparator: YES
+    });
+    
+    ret.push({
+      title: "_CopyID/Name".loc(),
+      icon: sc_static('blank'),
+      isEnabled: YES,
+      target: 'Tasks',
+      action: 'copyTaskIDName'
+    });
+    ret.push({
+      title: "_CopyLink".loc(),
+      icon: sc_static('blank'),
+      isEnabled: YES,
+      target: 'Tasks',
+      action: 'copyTaskLink'
+    });
+    return ret;
   },
   
   inlineEditorWillBeginEditing: function(inlineEditor) {

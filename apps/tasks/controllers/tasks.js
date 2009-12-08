@@ -126,6 +126,10 @@ Tasks.tasksController = SC.TreeController.create(
     return value;
   }.property('selection').cacheable(),
   
+  setStatusPlanned: function() {
+    this.developmentStatusWithValidation('developmentStatusWithValidation', CoreTasks.TASK_STATUS_PLANNED);
+  },
+  
   setStatusActive: function() {
     this.developmentStatusWithValidation('developmentStatusWithValidation', CoreTasks.TASK_STATUS_ACTIVE);
   },
@@ -156,6 +160,10 @@ Tasks.tasksController = SC.TreeController.create(
     }
     return value;
   }.property('selection').cacheable(),
+  
+  setValidationUntested: function() {
+    this.validation('validation', CoreTasks.TASK_VALIDATION_UNTESTED);
+  },
   
   setValidationPassed: function() {
     this.validation('validation', CoreTasks.TASK_VALIDATION_PASSED);
