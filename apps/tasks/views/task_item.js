@@ -178,20 +178,26 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   _buildContextMenu: function() {
     
     var ret = [];
-    ret.push({
-      title: "_Add".loc(),
-      icon: 'add-icon',
-      isEnabled: CoreTasks.getPath('permissions.canAddTask'),
-      target: 'Tasks',
-      action: 'addTask'
-    });
-    ret.push({
-      title: "_Duplicate".loc(),
-      icon: 'task-duplicate-icon',
-      isEnabled: CoreTasks.getPath('permissions.canAddTask'),
-      target: 'Tasks',
-      action: 'duplicateTask'
-    });
+    
+    var sel = Tasks.tasksController.get('selection');
+    var selectedTasksCount = sel? sel.get('length') : 0;
+    if(selectedTasksCount === 1) {
+      ret.push({
+        title: "_Add".loc(),
+        icon: 'add-icon',
+        isEnabled: CoreTasks.getPath('permissions.canAddTask'),
+        target: 'Tasks',
+        action: 'addTask'
+      });
+      ret.push({
+        title: "_Duplicate".loc(),
+        icon: 'task-duplicate-icon',
+        isEnabled: CoreTasks.getPath('permissions.canAddTask'),
+        target: 'Tasks',
+        action: 'duplicateTask'
+      });
+    }
+    
     ret.push({
       title: "_Delete".loc(),
       icon: 'delete-icon',
@@ -278,21 +284,25 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       });
     }
     
-    ret.push({
-      title: "_CopyID/Name".loc(),
-      icon: sc_static('blank'),
-      isEnabled: YES,
-      target: 'Tasks',
-      action: 'copyTaskIDName'
-    });
-    ret.push({
-      title: "_CopyLink".loc(),
-      icon: sc_static('blank'),
-      isEnabled: YES,
-      target: 'Tasks',
-      action: 'copyTaskLink'
-    });
+    if(selectedTasksCount === 1) {
+      ret.push({
+        title: "_CopyID/Name".loc(),
+        icon: sc_static('blank'),
+        isEnabled: YES,
+        target: 'Tasks',
+        action: 'copyTaskIDName'
+      });
+      ret.push({
+        title: "_CopyLink".loc(),
+        icon: sc_static('blank'),
+        isEnabled: YES,
+        target: 'Tasks',
+        action: 'copyTaskLink'
+      });
+    }
+  
     return ret;
+    
   },
   
   inlineEditorWillBeginEditing: function(inlineEditor) {
