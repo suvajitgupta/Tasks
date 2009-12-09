@@ -247,7 +247,6 @@ Tasks.assignmentsController = SC.ArrayController.create(
       if(!idMatches) {
         if (searchFilter.indexOf('^') === 0) { // inverse search specified
           positiveMatch = false;
-          console.log('DEBUG: inverse search');
           searchFilter = searchFilter.slice(1);
         }
         searchPattern = new RegExp(searchFilter, 'i');
@@ -316,15 +315,11 @@ Tasks.assignmentsController = SC.ArrayController.create(
             var nameMatches = taskName.match(searchPattern);
             if(positiveMatch) { // find what matches search pattern
               if(!nameMatches) { // try matching description
-                if(!taskDescription) console.log('DEBUG: ' + taskName + ', description=null');
-                else console.log('DEBUG: ' + taskName + ', descriptionMatches=' + (taskDescription.match(searchPattern) !== null));
                 if(!taskDescription || !taskDescription.match(searchPattern)) return;
               }
             }
             else { // inverse search - what doesn't match search pattern
               if(nameMatches) return;
-              if(!taskDescription) console.log('DEBUG: ' + taskName + ', description=null');
-              else console.log('DEBUG: ' + taskName + ', descriptionMatches=' + (taskDescription.match(searchPattern) !== null));
               if(taskDescription && taskDescription.match(searchPattern)) return;
             }
           }
