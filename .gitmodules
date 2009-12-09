@@ -1,0 +1,6 @@
+[submodule "frameworks/scui"]
+	path = frameworks/scui
+	url = git://github.com/etgryphon/sproutcore-ui.git
+[submodule "frameworks/sproutcore"]
+	path = frameworks/sproutcore
+	url = git://github.com/sproutit/sproutcore.git
