@@ -11,7 +11,7 @@ if command == "setup":
   else:
     import tools.usage
     tools.usage.run()
-elif command == "update"
+elif command == "update":
   import tools.update
   tools.update.run()
 elif command == "clean":
