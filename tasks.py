@@ -12,8 +12,12 @@ if command == "setup":
     import tools.usage
     tools.usage.run()
 elif command == "update":
-  import tools.update
-  tools.update.run()
+  if len(sys.argv) > 3:
+	  import tools.update
+	  tools.update.run(sys.argv[2], sys.argv[3])
+  else:
+    import tools.usage
+    tools.usage.run()
 elif command == "clean":
 	import tools.clean
 	tools.clean.run()
