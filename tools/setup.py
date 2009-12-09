@@ -6,6 +6,8 @@ cmd.setBase(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 commands = [
   cmd.relative(""),
   # Ensure that all frameworks are present for the build later
+  ["git", "submodule", "add", "git://github.com/etgryphon/sproutcore-ui.git", "frameworks/scui"],
+  ["git", "submodule", "add", "git://github.com/sproutit/sproutcore.git", "frameworks/sproutcore"],
   ["git", "submodule", "init"],
   ["git", "submodule", "sync"],
   ["git", "submodule", "update"],
