@@ -46,6 +46,11 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     If mouse was down over Description Icon open the editor.
   */  
   mouseDown: function(event) {
+    
+    SC.RunLoop.begin();
+    this.parentView.mouseDown(event);
+    SC.RunLoop.end();
+    
     var classes = event.target.className;
     if (classes.match('task-editor') || classes.match('task-description') || classes.match('count') || classes.match('inner')) {
       var layer = this.get('layer');
@@ -172,7 +177,13 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       });
       pane.popup(this, event); // pass in the mouse event so the pane can figure out where to put itself
     }
-    return NO;
+    
+    return YES;
+    
+  },
+  
+  mouseUp: function(event){
+    return sc_super();
   },
   
   _buildContextMenu: function() {

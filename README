@@ -99,7 +99,7 @@ Signup as a new user from login screen and ensure Tasks comes up and works
 
 9) Now deploy to the cloud by pressing 'Deploy'
 Sign up on Tasks running on GAE deployment at http://<application identifier>.appspot.com
-Make newly created user a _Manager using GAE 'Dashboard' button at top right:
+Make newly created user a Manager using GAE 'Dashboard' button at top right:
 	Click on 'Data Viewer' under Datastore section on left
 	Select 'User' table from select field view
 	Click id of user and change 'role' to '_Manager'
