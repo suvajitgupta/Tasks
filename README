@@ -82,10 +82,10 @@ sc-build -rc --build=<build id>
 5) While enjoying your Java, get the Tasks-GAE server code:
 cd ../
 git clone git://github.com/joshholt/SproutCoreTasks-AppEngineBackend.git tasks-gae
-cd tasks-gae
+cd tasks
 
 6) After sc-build finishes, copy tasks production build to tasks-gae:
-cp -r ../tasks/tmp/build/static .
+cp -r tmp/build/static ../tasks-gae
 
 7) Inform GAE about production build:
 <your-favorite-editor> app.yaml and fill in your <build id> and your
