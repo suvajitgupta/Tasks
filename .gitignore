@@ -17,3 +17,4 @@ tasks-server/prod/WEB-INF/data
 tasks-server/test/WEB-INF/data
 persevere/ra-cache
 Tasks.sqlite3
+sinatra-server.rb

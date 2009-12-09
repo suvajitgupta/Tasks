@@ -6,20 +6,23 @@ else:
 
 if command == "setup":
   if len(sys.argv) > 3:
-	  import commands.setup
-	  commands.setup.run(sys.argv[2], sys.argv[3])
+	  import tools.setup
+	  tools.setup.run(sys.argv[2], sys.argv[3])
   else:
-    import commands.usage
-    commands.usage.run()	  
+    import tools.usage
+    tools.usage.run()
+elif command == "update"
+  import tools.update
+  tools.update.run()
 elif command == "clean":
-	import commands.clean
-	commands.clean.run()
+	import tools.clean
+	tools.clean.run()
 elif command == "start":
-  import commands.start
+  import tools.start
   if sys.argv[2]:
-    commands.start.run(sys.argv[2])
+    tools.start.run(sys.argv[2])
   else:
-    commands.start.run()
+    tools.start.run()
 elif command == "usage":
-	import commands.usage
-	commands.usage.run()
+	import tools.usage
+	tools.usage.run()

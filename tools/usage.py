@@ -10,6 +10,12 @@ def run():
 	print "               params: <GAE application indetifier>,"
 	print "                       <Tasks Build Number or Name>"
 	print
+	print "update:        Updates Tasks, SCUI, Sproutcore, GAE backend, and"
+	print "               rebuilds Tasks with the updated code for deployment"
+	print
+	print "               params: <GAE application indetifier>,"
+	print "                       <Tasks Build Number or Name>"
+	print 
 	print "start:         starts the local dev server."
 	print
 	print "               params: <optional port number>"
