@@ -88,6 +88,18 @@ Tasks.tasksController = SC.TreeController.create(
     return value;
   }.property('selection').cacheable(),
   
+  setTypeFeature: function() {
+    this.type('type', CoreTasks.TASK_TYPE_FEATURE);
+  },
+  
+  setTypeBug: function() {
+    this.type('type', CoreTasks.TASK_TYPE_BUG);
+  },
+  
+  setTypeOther: function() {
+    this.type('type', CoreTasks.TASK_TYPE_OTHER);
+  },
+  
   priority: function(key, value) {
     var sel = this.get('selection');
     if(!sel || sel.get('length') === 0) return false;
@@ -106,6 +118,18 @@ Tasks.tasksController = SC.TreeController.create(
     }
     return value;
   }.property('selection').cacheable(),
+  
+  setPriorityHigh: function() {
+    this.priority('priority', CoreTasks.TASK_PRIORITY_HIGH);
+  },
+  
+  setPriorityMedium: function() {
+    this.priority('priority', CoreTasks.TASK_PRIORITY_MEDIUM);
+  },
+  
+  setPriorityLow: function() {
+    this.priority('priority', CoreTasks.TASK_PRIORITY_LOW);
+  },
   
   developmentStatusWithValidation: function(key, value) {
     var sel = this.get('selection');

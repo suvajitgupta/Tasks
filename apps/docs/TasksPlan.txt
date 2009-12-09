@@ -87,7 +87,7 @@ v Add hover over tooltip for assignees to show how many tasks they have and to e
 ^ Allow multi-task drag-n-drop reassignment to other assignees [BB] <SG>  @Done $Feature %Passed
 ^ Add popup viewer/editor for Task submitter, assignee, effort, project, and description [JH2] <SG> $Feature @Done %Passed
 - Beta: Support task Copy ID/Name and Copy Link (URL with "Route") to clipboard [SG] $Feature @Risky
-v Add task context menu with options: Add, Duplicate, Delete; Planned, Active, Done, Failed; Untested, Passed, Failed; Copy ID/Name, Copy Link [SG] $Feature @Done %Passed
+v Add task context menu with options: Add, Duplicate, Delete; All Task Attributes; Copy ID/Name, Copy Link [SG] $Feature @Done %Passed
 - Beta: Add ability to watch tasks and get email notifications on task changes [SG] <JH2> $Feature
 - Beta: Highlight newly added tasks with a badge to the left <SE> [SG] $Feature
 - Out of Scope: Add support for nested tasks/tagging $Feature

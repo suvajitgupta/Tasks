@@ -221,6 +221,70 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       isSeparator: YES
     });
     
+    var type = Tasks.tasksController.get('type');
+    if(type !== CoreTasks.TASK_TYPE_FEATURE) {
+      ret.push({
+        title: '<span class=task-type-feature>' + CoreTasks.TASK_TYPE_FEATURE.loc() + '</span>',
+        icon: 'task-icon-feature',
+        isEnabled: YES,
+        target: 'Tasks.tasksController',
+        action: 'setTypeFeature'
+      });
+    }
+    if(type !== CoreTasks.TASK_TYPE_BUG) {
+      ret.push({
+        title: '<span class=task-type-bug>' + CoreTasks.TASK_TYPE_BUG.loc() + '</span>',
+        icon: 'task-icon-bug',
+        isEnabled: YES,
+        target: 'Tasks.tasksController',
+        action: 'setTypeBug'
+      });
+    }
+    if(type !== CoreTasks.TASK_TYPE_OTHER) {
+      ret.push({
+        title: '<span class=task-type-other>' + CoreTasks.TASK_TYPE_OTHER.loc() + '</span>',
+        icon: 'task-icon-other',
+        isEnabled: YES,
+        target: 'Tasks.tasksController',
+        action: 'setTypeOther'
+      });
+    }
+    ret.push({
+      isSeparator: YES
+    });
+    
+    var priority = Tasks.tasksController.get('priority');
+    if(priority !== CoreTasks.TASK_PRIORITY_HIGH) {
+      ret.push({
+        title: '<span class=task-priority-high>' + CoreTasks.TASK_PRIORITY_HIGH.loc() + '</span>',
+        icon: sc_static('blank'),
+        isEnabled: YES,
+        target: 'Tasks.tasksController',
+        action: 'setPriorityHigh'
+      });
+    }
+    if(priority !== CoreTasks.TASK_PRIORITY_MEDIUM) {
+      ret.push({
+        title: '<span class=task-priority-medium>' + CoreTasks.TASK_PRIORITY_MEDIUM.loc() + '</span>',
+        icon: sc_static('blank'),
+        isEnabled: YES,
+        target: 'Tasks.tasksController',
+        action: 'setPriorityMedium'
+      });
+    }
+    if(priority !== CoreTasks.TASK_PRIORITY_LOW) {
+      ret.push({
+        title: '<span class=task-priority-low>' + CoreTasks.TASK_PRIORITY_LOW.loc() + '</span>',
+        icon: sc_static('blank'),
+        isEnabled: YES,
+        target: 'Tasks.tasksController',
+        action: 'setPriorityLow'
+      });
+    }
+    ret.push({
+      isSeparator: YES
+    });
+    
     var developmentStatus = Tasks.tasksController.get('developmentStatusWithValidation');
     if(developmentStatus !== CoreTasks.TASK_STATUS_PLANNED) {
       ret.push({
