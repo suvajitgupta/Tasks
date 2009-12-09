@@ -105,6 +105,17 @@ Make newly created user a Manager using GAE 'Dashboard' button at top right:
 	Click id of user and change 'role' to '_Manager'
 Login to Tasks now and start adding projects/tasks/users...
 
+GOOGLE APP ENGINE (GAE) DEPLOYMENT (Fast Path)
+==============================================================================
+
+1.) Run the following command from inside Tasks' root directory
+	> python tasks.py setup <app identifier> <build indetifier>
+	
+	-- where <app identifier> is your GAE application identifier (i.e. tasks-demo)
+	-- and <build identifier> is you build name or number (i.e. beta1)
+	
+2.) Then follow steps 8 & 9 above in the GOOGLE APP ENGINE DEPLOYMENT
+
 
 TASKS OVERVIEW
 ==============================================================================
