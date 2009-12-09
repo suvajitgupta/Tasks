@@ -47,11 +47,12 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   */  
   mouseDown: function(event) {
     
-    // FIXME: [JH2] try to get selection to update before context menu uses selection without using a run loop
+    // Get selection to update before context menu uses selection
     SC.RunLoop.begin();
     this.parentView.mouseDown(event);
     SC.RunLoop.end();
     
+    // See what user clicked on
     var classes = event.target.className;
     if (classes.match('task-editor') || classes.match('task-description') || classes.match('count') || classes.match('inner')) {
       var layer = this.get('layer');
