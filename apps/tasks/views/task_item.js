@@ -47,6 +47,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   */  
   mouseDown: function(event) {
     
+    // FIXME: [JH2] try to get selection to update before context menu uses selection without using a run loop
     SC.RunLoop.begin();
     this.parentView.mouseDown(event);
     SC.RunLoop.end();
