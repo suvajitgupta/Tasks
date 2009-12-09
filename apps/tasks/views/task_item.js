@@ -180,7 +180,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       pane.popup(this, event); // pass in the mouse event so the pane can figure out where to put itself
     }
     
-    return YES;
+    return NO; // so that drag-n-drop can work!
     
   },
   
