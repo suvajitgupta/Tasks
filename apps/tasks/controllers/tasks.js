@@ -126,19 +126,19 @@ Tasks.tasksController = SC.TreeController.create(
     return value;
   }.property('selection').cacheable(),
   
-  setStatusPlanned: function() {
+  setDevelopmentStatusPlanned: function() {
     this.developmentStatusWithValidation('developmentStatusWithValidation', CoreTasks.TASK_STATUS_PLANNED);
   },
   
-  setStatusActive: function() {
+  setDevelopmentStatusActive: function() {
     this.developmentStatusWithValidation('developmentStatusWithValidation', CoreTasks.TASK_STATUS_ACTIVE);
   },
   
-  setStatusDone: function() {
+  setDevelopmentStatusDone: function() {
     this.developmentStatusWithValidation('developmentStatusWithValidation', CoreTasks.TASK_STATUS_DONE);
   },
   
-  setStatusRisky: function() {
+  setDevelopmentStatusRisky: function() {
     this.developmentStatusWithValidation('developmentStatusWithValidation', CoreTasks.TASK_STATUS_RISKY);
   },
   

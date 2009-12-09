@@ -209,49 +209,49 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       isSeparator: YES
     });
     
-    var status = this.get('content').get('developmentStatus');
-    if(status !== CoreTasks.TASK_STATUS_PLANNED) {
+    var developmentStatus = Tasks.tasksController.get('developmentStatusWithValidation');
+    if(developmentStatus !== CoreTasks.TASK_STATUS_PLANNED) {
       ret.push({
         title: '<span class=task-status-planned>' + CoreTasks.TASK_STATUS_PLANNED.loc() + '</span>',
         icon: sc_static('blank'),
         isEnabled: YES,
         target: 'Tasks.tasksController',
-        action: 'setStatusPlanned'
+        action: 'setDevelopmentStatusPlanned'
       });
     }
-    if(status !== CoreTasks.TASK_STATUS_ACTIVE) {
+    if(developmentStatus !== CoreTasks.TASK_STATUS_ACTIVE) {
       ret.push({
         title: '<span class=task-status-active>' + CoreTasks.TASK_STATUS_ACTIVE.loc() + '</span>',
         icon: sc_static('blank'),
         isEnabled: YES,
         target: 'Tasks.tasksController',
-        action: 'setStatusActive'
+        action: 'setDevelopmentStatusActive'
       });
     }
-    if(status !== CoreTasks.TASK_STATUS_DONE) {
+    if(developmentStatus !== CoreTasks.TASK_STATUS_DONE) {
       ret.push({
         title: '<span class=task-status-done>' + CoreTasks.TASK_STATUS_DONE.loc() + '</span>',
         icon: sc_static('blank'),
         isEnabled: YES,
         target: 'Tasks.tasksController',
-        action: 'setStatusDone'
+        action: 'setDevelopmentStatusDone'
       });
     }
-    if(status !== CoreTasks.TASK_STATUS_RISKY) {
+    if(developmentStatus !== CoreTasks.TASK_STATUS_RISKY) {
       ret.push({
         title: '<span class=task-status-risky>' + CoreTasks.TASK_STATUS_RISKY.loc() + '</span>',
         icon: sc_static('blank'),
         isEnabled: YES,
         target: 'Tasks.tasksController',
-        action: 'setStatusRisky'
+        action: 'setDevelopmentStatusRisky'
       });
     }
-    ret.push({
-      isSeparator: YES
-    });
     
-    if(status === CoreTasks.TASK_STATUS_DONE) {
-      var validation = this.get('content').get('validation');
+    if(developmentStatus === CoreTasks.TASK_STATUS_DONE) {
+      ret.push({
+        isSeparator: YES
+      });
+      var validation = Tasks.tasksController.get('validation');
       if(validation !== CoreTasks.TASK_VALIDATION_UNTESTED) {
         ret.push({
           title: '<span class=task-validation-untested>' + CoreTasks.TASK_VALIDATION_UNTESTED.loc() + '</span>',
@@ -271,7 +271,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         });
       }
       if(validation !== CoreTasks.TASK_VALIDATION_FAILED) {
-      ret.push({
+        ret.push({
           title: '<span class=task-validation-failed>' + CoreTasks.TASK_VALIDATION_FAILED.loc() + '</span>',
           icon: sc_static('blank'),
           isEnabled: YES,
@@ -279,12 +279,12 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           action: 'setValidationFailed'
         });
       }
-      ret.push({
-        isSeparator: YES
-      });
     }
     
     if(selectedTasksCount === 1) {
+      ret.push({
+        isSeparator: YES
+      });
       ret.push({
         title: "_CopyID/Name".loc(),
         icon: sc_static('blank'),
@@ -352,8 +352,8 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     context = context.begin('div').addClass('task-id').addClass(validationClass).
                 text(displayId).attr('title', idTooltip).attr('alt', idTooltip).end();
       
-    var status = content.get('developmentStatus');
-    switch(status){
+    var developmentStatus = content.get('developmentStatus');
+    switch(developmentStatus){
       case CoreTasks.TASK_STATUS_PLANNED:
         context.addClass('task-status-planned');
         break;
