@@ -51,17 +51,50 @@ body {
 }
 
 .quickfilter-toolbar {
-  border: 1px solid #bcbcbc;
-	background: #AAA;
+  border: 1px solid #AAA;
+  background: #FFF;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
 }
 
-.quickfilter-label {
+.quickfilter-label,
+.quickfilter-label .sc-button-inner,
+.quickfilter-label .sc-button-inner label {
   font-size: 10px !important;
-  font-weight: bold !important;
-  color: #000 !important;
   text-align: center !important;
+  color: #FFF !important;
+  -moz-border-radius: 15px !important;
+  -webkit-border-radius: 15px !important;
+}
+
+.troubled .sc-button-inner,
+.troubled .sc-button-inner label {
+  background: #C33 !important;
+}
+
+.unfinished .sc-button-inner,
+.unfinished .sc-button-inner label {
+  background: #33F !important;
+}
+
+.unvalidated .sc-button-inner,
+.unvalidated .sc-button-inner label {
+  background: #6C6 !important;
+}
+
+.verified .sc-button-inner,
+.verified .sc-button-inner label {
+  background: #363 !important;
+}
+
+.showstoppers .sc-button-inner,
+.showstoppers .sc-button-inner label {
+  background: #639 !important;
+}
+
+.all .sc-button-inner,
+.all .sc-button-inner label {
+  background: #555 !important;
 }
 
 .sc-collection-view {

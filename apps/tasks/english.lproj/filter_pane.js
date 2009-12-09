@@ -41,7 +41,7 @@ Tasks.filterPane = SC.PanelPane.create({
           SC.ButtonView.design({
             layout: { width: 85, height: 30, left: 5, top: 7 },
             titleMinWidth: 0,
-            classNames: ['quickfilter-label'],
+            classNames: ['quickfilter-label', 'troubled'],
             title: "_Troubled".loc(),
             toolTip: "_TroubledTooltip".loc(),
             target: 'Tasks.assignmentsController',
@@ -51,7 +51,7 @@ Tasks.filterPane = SC.PanelPane.create({
           SC.ButtonView.design({
             layout: { width: 85, height: 30, left: 5, top: 39 },
             titleMinWidth: 0,
-            classNames: ['quickfilter-label'],
+            classNames: ['quickfilter-label', 'unfinished'],
             title: "_Unfinished".loc(),
             toolTip: "_UnfinishedTooltip".loc(),
             target: 'Tasks.assignmentsController',
@@ -61,7 +61,7 @@ Tasks.filterPane = SC.PanelPane.create({
           SC.ButtonView.design({
             layout: { width: 90, height: 30, centerX: -7, top: 7 },
             titleMinWidth: 0,
-            classNames: ['quickfilter-label'],
+            classNames: ['quickfilter-label', 'unvalidated'],
             title: "_Unvalidated".loc(),
             toolTip: "_UnvalidatedTooltip".loc(),
             target: 'Tasks.assignmentsController',
@@ -71,7 +71,7 @@ Tasks.filterPane = SC.PanelPane.create({
           SC.ButtonView.design({
             layout: { width: 90, height: 30, centerX: -7, top: 39 },
             titleMinWidth: 0,
-            classNames: ['quickfilter-label'],
+            classNames: ['quickfilter-label', 'verified'],
             title: "_Verified".loc(),
             toolTip: "_VerifiedTooltip".loc(),
             target: 'Tasks.assignmentsController',
@@ -81,7 +81,7 @@ Tasks.filterPane = SC.PanelPane.create({
           SC.ButtonView.design({
             layout: { width: 100, height: 30, right: 5, top: 7 },
             titleMinWidth: 0,
-            classNames: ['quickfilter-label'],
+            classNames: ['quickfilter-label', 'showstoppers'],
             title: "_Showstoppers".loc(),
             toolTip: "_ShowstoppersTooltip".loc(),
             target: 'Tasks.assignmentsController',
@@ -91,7 +91,7 @@ Tasks.filterPane = SC.PanelPane.create({
           SC.ButtonView.design({
             layout: { width: 100, height: 30, right: 5, top: 39 },
             titleMinWidth: 0,
-            classNames: ['quickfilter-label'],
+            classNames: ['quickfilter-label', 'all'],
             title: "_All".loc(),
             toolTip: "_AllTooltip".loc(),
             target: 'Tasks.assignmentsController',
