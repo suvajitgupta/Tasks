@@ -60,11 +60,10 @@ Tasks.exportDataController = SC.ObjectController.create(
   _exportAllData: function() {
     
     var ret = '';
-    var pc = Tasks.get('projectsController');
     var that = this;
     
     // First export unallocated tasks
-    pc.forEach(function(project){
+    Tasks.projectsController.forEach(function(project){
       var name = project.get('name');
       if(name === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) {
         var tasks = project.get('tasks');
@@ -72,14 +71,14 @@ Tasks.exportDataController = SC.ObjectController.create(
         if(len === 0 && name === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) return; // skip empty UnallocatedTasks Project
         ret += that._exportProjectData(project);
       }
-    }, pc);
+    }, Tasks.projectsController);
     
     // Next export allocated tasks
-    pc.forEach(function(project){
+    Tasks.projectsController.forEach(function(project){
       var name = project.get('name');
       if(name === CoreTasks.ALL_TASKS_NAME.loc() || name === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) return; // skip All and Unallocated Tasks Projects
       ret += that._exportProjectData(project);
-    }, pc);
+    }, Tasks.projectsController);
     
     return ret;
     
@@ -92,7 +91,7 @@ Tasks.exportDataController = SC.ObjectController.create(
   _exportDisplayedData: function() {
     
     var ret = '';
-    var tasksTree = Tasks.get('tasksController').get('content');
+    var tasksTree = Tasks.tasksController.get('content');
     var assignmentNodes = tasksTree.get('treeItemChildren');
     var assigneesCount = assignmentNodes.get('length');
     for(var i=0; i < assigneesCount; i++) {
