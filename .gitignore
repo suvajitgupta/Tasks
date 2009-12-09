@@ -18,3 +18,5 @@ tasks-server/test/WEB-INF/data
 persevere/ra-cache
 Tasks.sqlite3
 sinatra-server.rb
+tools/*.pyc
+tools/helpers/*.pyc
