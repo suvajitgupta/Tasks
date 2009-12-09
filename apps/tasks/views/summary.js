@@ -30,10 +30,20 @@ Tasks.SummaryView = SC.View.extend(
       summary += assigneesCount + "_Assignees".loc();
 
       var tasksCount = 0;
+      var redFlags = 0;
       for(var i=0; i < assigneesCount; i++) {
-        tasksCount += assignmentNodes.objectAt(i).get('tasksCount');
+        var assignmentNode = assignmentNodes.objectAt(i);
+        tasksCount += assignmentNode.get('tasksCount');
+        var riskyTasksCount = assignmentNode.get('riskyTasksCount');
+        var failedTasksCount = assignmentNode.get('failedTasksCount');
+        if(riskyTasksCount > 0 || failedTasksCount > 0) redFlags++;
       }
-      summary += tasksCount + "_Tasks".loc();
+      if(Tasks.assignmentsController.get('displayMode') === Tasks.DISPLAY_MODE_TEAM) {
+        summary += redFlags + "_RedFlags".loc();
+      }
+      else { // display mode === Tasks.DISPLAY_MODE_TASKS
+        summary += tasksCount + "_Tasks".loc();
+      }
     }
     
     // display value

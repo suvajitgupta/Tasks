@@ -169,6 +169,7 @@ SC.stringsFor('English', {
   "_Displaying": "Displaying ",
   "_Projects": " project(s), ",
   "_Assignees": " assignee(s), and ",
+  "_RedFlags": " red flag(s)",
   "_UsersLoaded": "Loaded users, ",
   "_TasksLoaded": "tasks, ",
   "_ProjectsLoaded": " and projects at ",
