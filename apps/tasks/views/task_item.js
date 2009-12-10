@@ -59,7 +59,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       var that = this;
       this._editorPane = SC.PickerPane.create({
         
-        layout: { width: 550, height: 230 },
+        layout: { width: 740, height: 330 },
         
         // Avoid popup panel coming up on other items while it is up already
         poppedUp: false,
