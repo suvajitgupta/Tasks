@@ -62,6 +62,7 @@ body {
 .quickfilter-label .sc-button-inner label {
   font-size: 10px !important;
   color: #FFF !important;
+  text-shadow: none !important;
   -moz-border-radius: 15px !important;
   -webkit-border-radius: 15px !important;
 }
@@ -71,7 +72,7 @@ body {
 }
 
 .quickfilter-label.active .sc-button-inner label {
-  color: #BBB !important;
+  text-shadow: 0 1px #BBB !important;
 }
 
 .troubled .sc-button-inner,

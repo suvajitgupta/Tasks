@@ -239,6 +239,7 @@
   background: #363 none repeat scroll 0 0;
 	outline: 1px solid #363 !important;
   opacity: 0.85;
+  text-shadow: none !important;
 }
 
 .task-validation-failed {
@@ -250,6 +251,7 @@
   background: #C33 none repeat scroll 0 0;
 	outline: 1px solid #C33 !important;
   opacity: 0.9;
+  text-shadow: none !important;
 }
 
 
