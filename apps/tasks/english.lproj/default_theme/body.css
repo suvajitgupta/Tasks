@@ -61,10 +61,17 @@ body {
 .quickfilter-label .sc-button-inner,
 .quickfilter-label .sc-button-inner label {
   font-size: 10px !important;
-  text-align: center !important;
   color: #FFF !important;
   -moz-border-radius: 15px !important;
   -webkit-border-radius: 15px !important;
+}
+
+.quickfilter-label.active {
+  border: 1px solid #555 !important;
+}
+
+.quickfilter-label.active .sc-button-inner label {
+  color: #BBB !important;
 }
 
 .troubled .sc-button-inner,

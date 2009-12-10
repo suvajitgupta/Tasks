@@ -20,3 +20,5 @@ Tasks.sqlite3
 sinatra-server.rb
 tools/*.pyc
 tools/helpers/*.pyc
+frameworks/scui
+frameworks/sproutcore
