@@ -150,3 +150,7 @@ body {
 .sc-view.sc-menu-item {
   font-size: 11px !important;
 }
+
+.sc-view.sc-button-view.sc-menu-item.disabled {
+  height: 4px !important;
+}

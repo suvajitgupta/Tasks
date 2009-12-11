@@ -167,7 +167,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     else { // popup context menu
       var pane = SCUI.ContextMenuPane.create({
         contentView: SC.View.design({}),
-        layout: { width: 170, height: 0 },
+        layout: { width: 190, height: 0 },
         escapeHTML: NO,
         itemTitleKey: 'title',
         itemIconKey: 'icon',
@@ -370,7 +370,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         action: 'copyTaskIDName'
       });
       ret.push({
-        title: "_CopyLink".loc(),
+        title: "_CopyLinkLocation".loc(),
         icon: sc_static('blank'),
         isEnabled: YES,
         target: 'Tasks',

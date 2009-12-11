@@ -95,7 +95,7 @@ SC.stringsFor('English', {
   "_DuplicateTask": "Dup. Task",
   "_Copy": ": copy",
   "_CopyID/Name": "Copy ID/Name",
-  "_CopyLink": "Copy Link",
+  "_CopyLinkLocation": "Copy Link Location",
   "_NewTask": "New Task",
   "_DelTask": "Del. Task",
   "_DelTaskTooltip": "Delete selected task",
