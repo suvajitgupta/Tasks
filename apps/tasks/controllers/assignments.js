@@ -379,7 +379,8 @@ Tasks.assignmentsController = SC.ArrayController.create(
     
     var taskWithUnspecifiedEffort = false, doneTaskWithUnspecifiedEffort = false;
     var displayName = assigneeName;
-    var effortString, totalDoneEffortMin = 0, totalDoneEffortMax = 0, totalEffortMin = 0, totalEffortMax = 0, effortMin, effortMax;
+    var effortString, totalFinishedEffortMin = 0, totalFinishedEffortMax = 0, totalEffortMin = 0, totalEffortMax = 0, effortMin, effortMax;
+    var totalFinishedCount = 0, totalLeftCount = 0;
     var task, tasks = assigneeObj.tasks;
     var len = tasks.get('length');
     var riskyTasksCount = 0;
@@ -407,13 +408,18 @@ Tasks.assignmentsController = SC.ArrayController.create(
       task.addObserver('validation',Tasks.assignmentsController,'_contentHasChanged');
       task.addObserver('effort',Tasks.assignmentsController,'_contentHasChanged');
       
-      // Extract/total effort for each taek (simple number or a range)
+      // Extract/total effort for each task (simple number or a range)
       effortString = task.get('effort');
       var priority = task.get('priority');
       var developmentStatus = task.get('developmentStatus');
-      if(developmentStatus === CoreTasks.TASK_STATUS_RISKY) riskyTasksCount++;
       var validation = task.get('validation');
+      
+      if(developmentStatus === CoreTasks.TASK_STATUS_DONE && validation !== CoreTasks.TASK_VALIDATION_FAILED) totalFinishedCount++;
+      else if (priority !== CoreTasks.TASK_PRIORITY_LOW) totalLeftCount++;
+      
+      if(developmentStatus === CoreTasks.TASK_STATUS_RISKY) riskyTasksCount++;
       if(validation === CoreTasks.TASK_VALIDATION_FAILED) failedTasksCount++;
+      
       if(!effortString && priority !== CoreTasks.TASK_PRIORITY_LOW) {
         if(developmentStatus === CoreTasks.TASK_STATUS_DONE) doneTaskWithUnspecifiedEffort = true;
         else taskWithUnspecifiedEffort = true;
@@ -431,8 +437,8 @@ Tasks.assignmentsController = SC.ArrayController.create(
           effortMax = CoreTasks.convertTimeToDays(effortMax + timeUnit);
         }
         if(developmentStatus === CoreTasks.TASK_STATUS_DONE && validation !== CoreTasks.TASK_VALIDATION_FAILED) {
-          totalDoneEffortMin = parseFloat((totalDoneEffortMin + effortMin).toFixed(3));
-          totalDoneEffortMax = parseFloat((totalDoneEffortMax + effortMax).toFixed(3));
+          totalFinishedEffortMin = parseFloat((totalFinishedEffortMin + effortMin).toFixed(3));
+          totalFinishedEffortMax = parseFloat((totalFinishedEffortMax + effortMax).toFixed(3));
         }
         else if (priority !== CoreTasks.TASK_PRIORITY_LOW) { // leave out Low priority items in totals
           totalEffortMin = parseFloat((totalEffortMin + effortMin).toFixed(3));
@@ -442,12 +448,12 @@ Tasks.assignmentsController = SC.ArrayController.create(
     }
   
     var displayEffort = '';
-    if(totalDoneEffortMin !== 0) {
-      var totalDoneEffort = '' + parseFloat(totalDoneEffortMin.toFixed(1));
-      if (totalDoneEffortMax !== totalDoneEffortMin) {
-        totalDoneEffort += '-' + parseFloat(totalDoneEffortMax.toFixed(1));
+    if(totalFinishedEffortMin !== 0) {
+      var totalFinishedEffort = '' + parseFloat(totalFinishedEffortMin.toFixed(1));
+      if (totalFinishedEffortMax !== totalFinishedEffortMin) {
+        totalFinishedEffort += '-' + parseFloat(totalFinishedEffortMax.toFixed(1));
       }
-      displayEffort = "_Done".loc() + ': ' + CoreTasks.displayTime(totalDoneEffort) + (doneTaskWithUnspecifiedEffort? '?' : '');
+      displayEffort = totalFinishedCount + ' ' + "_Finished".loc() + ': ' + CoreTasks.displayTime(totalFinishedEffort) + (doneTaskWithUnspecifiedEffort? '?' : '');
     }
     
     var loading = CoreTasks.USER_NOT_LOADED;
@@ -466,7 +472,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
         totalEffort += '-' + parseFloat(totalEffortMax.toFixed(1));
       }
       if(displayEffort !== '') displayEffort += ', ';
-      displayEffort += "_Todo".loc() + ': ' + CoreTasks.displayTime(totalEffort) + (taskWithUnspecifiedEffort? '?' : '');
+      displayEffort += totalLeftCount + ' ' + "_Left".loc() + ': ' + CoreTasks.displayTime(totalEffort) + (taskWithUnspecifiedEffort? '?' : '');
     }
     
     assignmentNodes.push (SC.Object.create({
