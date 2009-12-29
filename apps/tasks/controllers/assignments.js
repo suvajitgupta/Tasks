@@ -337,7 +337,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     // Sort grouped tasks by assignee
     this.set('assignedTasks', SC.Object.create({ treeItemChildren: assignmentNodes.sort(function(a,b) {
       if(!Tasks.assignmentsController._showTasks) { // Team display mode, first try to sort in descending order of loading/red flags
-        if(a.loading != CoreTasks.USER_NOT_LOADED && b.loading != CoreTasks.USER_NOT_LOADED) {
+        if(a.loading !== CoreTasks.USER_NOT_LOADED && b.loading !== CoreTasks.USER_NOT_LOADED) {
           var loadingDelta = b.effortGapPercent - a.effortGapPercent;
           if(loadingDelta !== 0) return loadingDelta;
           var redFlagsDelta = (b.riskyTasksCount + b.failedTasksCount) - (a.riskyTasksCount + a.failedTasksCount);
@@ -348,6 +348,9 @@ Tasks.assignmentsController = SC.ArrayController.create(
         }
         else if(b.loading !== CoreTasks.USER_NOT_LOADED && a.loading === CoreTasks.USER_NOT_LOADED) {
           return 1;
+        }
+        else { // a.loading === CoreTasks.USER_NOT_LOADED && b.loading === CoreTasks.USER_NOT_LOADED
+          return a.effortGapPercent - b.effortGapPercent;
         }
       }
       // Alpha sort by display names
@@ -448,7 +451,12 @@ Tasks.assignmentsController = SC.ArrayController.create(
     }
   
     var finishedEffort = '', displayEffort = '';
+    var effortGap = 0, effortGapPercent = 0;
     if(totalFinishedEffortMin !== 0) {
+      if(projectTimeLeft) {
+        var totalFinishedEffortAve = (totalFinishedEffortMin + totalFinishedEffortMax)/2;
+        effortGapPercent = 100*totalFinishedEffortAve/projectTimeLeft;
+      }
       var totalFinishedEffort = '' + parseFloat(totalFinishedEffortMin.toFixed(1));
       if (totalFinishedEffortMax !== totalFinishedEffortMin) {
         totalFinishedEffort += '-' + parseFloat(totalFinishedEffortMax.toFixed(1));
@@ -457,7 +465,6 @@ Tasks.assignmentsController = SC.ArrayController.create(
     }
     
     var loading = CoreTasks.USER_NOT_LOADED;
-    var effortGap = 0, effortGapPercent = 0;
     if(totalEffortMin !== 0) {
       if(projectTimeLeft) { // flag user loading
         var totalEffortAve = (totalEffortMin + totalEffortMax)/2;
