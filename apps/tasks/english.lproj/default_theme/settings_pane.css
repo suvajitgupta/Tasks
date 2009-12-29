@@ -29,17 +29,17 @@
 
 .users-pane .sc-collection-item.sel,
 .users-pane .sc-collection-item.sel:hover {
-  -moz-border-radius: 0px;
-  -webkit-border-radius: 0px;
-  background: static_url('images/default-theme-selected-project.png') no-repeat 0 0 !important;
-  font-weight: bold;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+
+.users-pane .sc-collection-item.sel {
   color: #FFF !important;
+  background: static_url('images/default-theme-selected-project.png') no-repeat 0 0 !important;
 }
 
 .users-pane .sc-collection-item:hover {
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  background: #CCC none repeat scroll 0 0 !important;
+  background: #CCC none repeat scroll 0 0;
 }
 
 
