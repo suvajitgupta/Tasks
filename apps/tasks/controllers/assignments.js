@@ -450,18 +450,20 @@ Tasks.assignmentsController = SC.ArrayController.create(
       }
     }
   
-    var finishedEffort = '', totalFinishedEffortAve = 0;
+    var finishedEffort = totalFinishedCount + ' ' + "_Finished".loc();
+    var totalFinishedEffortAve = 0;
     if(totalFinishedEffortMin !== 0) {
       totalFinishedEffortAve = (totalFinishedEffortMin + totalFinishedEffortMax)/2;
       var totalFinishedEffort = '' + parseFloat(totalFinishedEffortMin.toFixed(1));
       if (totalFinishedEffortMax !== totalFinishedEffortMin) {
         totalFinishedEffort += '-' + parseFloat(totalFinishedEffortMax.toFixed(1));
       }
-      finishedEffort = totalFinishedCount + ' ' + "_Finished".loc() + ': ' + CoreTasks.displayTime(totalFinishedEffort) + (doneTaskWithUnspecifiedEffort? '?' : '');
+      finishedEffort += ': ' + CoreTasks.displayTime(totalFinishedEffort) + (doneTaskWithUnspecifiedEffort? '?' : '');
     }
     
     var loading = CoreTasks.USER_NOT_LOADED;
-    var displayEffort = '', effortGap = 0, effortGapPercent = 0;
+    var displayEffort = totalLeftCount + ' ' + "_Left".loc();
+    var effortGap = 0, effortGapPercent = 0;
     if(totalEffortMin !== 0) {
       if(projectTimeLeft) { // flag user loading
         var totalEffortAve = (totalEffortMin + totalEffortMax)/2;
@@ -475,7 +477,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
       if (totalEffortMax !== totalEffortMin) {
         totalEffort += '-' + parseFloat(totalEffortMax.toFixed(1));
       }
-      displayEffort = totalLeftCount + ' ' + "_Left".loc() + ': ' + CoreTasks.displayTime(totalEffort) + (taskWithUnspecifiedEffort? '?' : '');
+      displayEffort += ': ' + CoreTasks.displayTime(totalEffort) + (taskWithUnspecifiedEffort? '?' : '');
     }
     
     assignmentNodes.push (SC.Object.create({
