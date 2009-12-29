@@ -349,8 +349,8 @@ Tasks.assignmentsController = SC.ArrayController.create(
         else if(b.loading !== CoreTasks.USER_NOT_LOADED && a.loading === CoreTasks.USER_NOT_LOADED) {
           return 1;
         }
-        else if (a.effortGapPercent !== 0 || b.effortGapPercent !== 0) {
-          return a.effortGapPercent - b.effortGapPercent;
+        else if (a.totalFinishedEffortAve !== 0 || b.totalFinishedEffortAve !== 0) {
+          return a.totalFinishedEffortAve - b.totalFinishedEffortAve;
         }
       }
       // Alpha sort by display names
@@ -450,13 +450,9 @@ Tasks.assignmentsController = SC.ArrayController.create(
       }
     }
   
-    var finishedEffort = '', displayEffort = '';
-    var effortGap = 0, effortGapPercent = 0;
+    var finishedEffort = '', totalFinishedEffortAve = 0;
     if(totalFinishedEffortMin !== 0) {
-      if(projectTimeLeft) {
-        var totalFinishedEffortAve = (totalFinishedEffortMin + totalFinishedEffortMax)/2;
-        effortGapPercent = 100*totalFinishedEffortAve/projectTimeLeft;
-      }
+      totalFinishedEffortAve = (totalFinishedEffortMin + totalFinishedEffortMax)/2;
       var totalFinishedEffort = '' + parseFloat(totalFinishedEffortMin.toFixed(1));
       if (totalFinishedEffortMax !== totalFinishedEffortMin) {
         totalFinishedEffort += '-' + parseFloat(totalFinishedEffortMax.toFixed(1));
@@ -465,6 +461,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     }
     
     var loading = CoreTasks.USER_NOT_LOADED;
+    var displayEffort = '', effortGap = 0, effortGapPercent = 0;
     if(totalEffortMin !== 0) {
       if(projectTimeLeft) { // flag user loading
         var totalEffortAve = (totalEffortMin + totalEffortMax)/2;
@@ -484,6 +481,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     assignmentNodes.push (SC.Object.create({
       displayName: displayName,
       finishedEffort: finishedEffort,
+      totalFinishedEffortAve: totalFinishedEffortAve,
       displayEffort: displayEffort,
       effortGapPercent: effortGapPercent,
       riskyTasksCount:  riskyTasksCount,

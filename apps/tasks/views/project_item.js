@@ -1,7 +1,7 @@
 // ==========================================================================
 // Project: Tasks 
 // ==========================================================================
-/*globals CoreTasks Tasks sc_require SCUI */
+/*globals CoreTasks Tasks sc_require SCUI sc_static */
 sc_require('mixins/localized_label');
 
 /** 
@@ -48,7 +48,6 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
           this.poppedUp = false;
           sc_super();
           if(this._timeLeft !== that.getPath('content.timeLeft')) { // if timeLeft has changed, redraw got load balancing recalculation
-            console.log("Boo!");
             Tasks.assignmentsController.showAssignments();
           }
         },
