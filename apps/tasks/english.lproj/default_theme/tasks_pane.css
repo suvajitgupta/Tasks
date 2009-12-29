@@ -113,8 +113,15 @@
   right: 5px !important;
 }
 
+.new-task {
+  color: black !important;
+  font-size: 16px !important;
+	font-weight: bold !important;
+	line-height: 28px !important;
+}
+
 .task-item .sc-outline {
-  left: 0px !important;
+  left: 7px !important;
   right: 18px !important;
 }
 
@@ -127,7 +134,7 @@
   position: absolute !important;
   top: 4px !important;
   bottom: 4px !important;
-  left: 3px !important;
+  left: 10px !important;
 	width: 32px !important;
 }
 

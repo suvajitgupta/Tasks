@@ -12,6 +12,8 @@
   @author Joshua Holt
 */
 
+var MILLISECONDS_IN_DAY = 24*60*60*1000;
+
 Tasks.TaskItemView = SC.ListItemView.extend(
 /** @scope Tasks.TaskItemView.prototype */ {
   
@@ -397,6 +399,21 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     
     context.addClass((this.get('contentIndex') % 2 === 0)? 'even-item' : 'odd-item');
     
+    var createdAt = content.get('createdAt');
+    if(createdAt) {
+      var then = createdAt.get('milliseconds');
+      var now = SC.DateTime.create().get('milliseconds');
+      var ageInDays = (now - then)/MILLISECONDS_IN_DAY;
+      if(ageInDays <= 1) {
+        context = context.begin('span');
+        context = context.addClass('new-task').push('*').attr({
+          title: "_NewTaskTooltip".loc(),
+          alt: "_NewTaskTooltip".loc()
+        });
+        context = context.end();
+      }
+    }
+
     var priority = content.get('priority');
     context.addClass('task-item');
     switch(priority){
@@ -460,7 +477,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     }
     context = context.end();
     context = context.end();
-
+    
     var taskTooltip = '';
     var submitterUser = content.get('submitter');
     if (submitterUser) {
