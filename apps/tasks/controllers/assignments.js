@@ -349,7 +349,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
         else if(b.loading !== CoreTasks.USER_NOT_LOADED && a.loading === CoreTasks.USER_NOT_LOADED) {
           return 1;
         }
-        else { // a.loading === CoreTasks.USER_NOT_LOADED && b.loading === CoreTasks.USER_NOT_LOADED
+        else if (a.effortGapPercent !== 0 || b.effortGapPercent !== 0) {
           return a.effortGapPercent - b.effortGapPercent;
         }
       }
