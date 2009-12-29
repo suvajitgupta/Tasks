@@ -22,27 +22,22 @@ Tasks.mixin( /** @scope Tasks */ {
   defaultProject: null,
 
   registerRoutes: function() {
-    SC.routes.add('project', Tasks, 'routeToProject');
-    SC.routes.add('task', Tasks, 'routeToTask');
     SC.routes.add('help', Tasks, 'routeToHelp');
+    SC.routes.add('task', Tasks, 'routeToTask');
+    SC.routes.add('project', Tasks, 'routeToProject');
     SC.routes.add(':', Tasks, 'routeDefault'); // the catch-all case that happens if nothing else matches
   },
 
   /**
-    At startup, select specified project on route
+    Show online help skipping authentication
     
-    Example:
-      'http://[host]/tasks#project&name=MyProject' would select MyProject upon startup (if it exists).
+    Format:
+      'http://[host]/tasks#help' would show online help without requiring user authentication.
     
   */
-  routeToProject: function(params) {
-    if(SC.none(params.name)) {
-      console.log("Error: missing project name for URL routing");
-    }
-    else {
-      Tasks.set('defaultProjectName', params.name);
-      Tasks.restart();
-    }
+  routeToHelp: function(params) {
+    Tasks._closeMainPage();
+    Tasks.getPath('helpPage.mainPane').append();
   },
   
   /**
@@ -66,18 +61,6 @@ Tasks.mixin( /** @scope Tasks */ {
   },
   
   /**
-    Show online help skipping authentication
-    
-    Format:
-      'http://[host]/tasks#help' would show online help without requiring user authentication.
-    
-  */
-  routeToHelp: function(params) {
-    Tasks._closeMainPage();
-    Tasks.getPath('helpPage.mainPane').append();
-  },
-  
-  /**
     Close main page if already logged in
   */
   _closeMainPage: function() {
@@ -91,12 +74,38 @@ Tasks.mixin( /** @scope Tasks */ {
   },
   
   /**
+    At startup, select specified project on route
+    
+    Example:
+      'http://[host]/tasks#project&name=MyProject' would select MyProject upon startup (if it exists).
+    
+  */
+  routeToProject: function(params) {
+    if(SC.none(params.name)) {
+      console.log("Error: missing project name for URL routing");
+    }
+    else if(this.loginTime) {
+      Tasks.set('defaultProjectName', params.name);
+      Tasks.restart();
+    }
+    else {
+      var project = CoreTasks.getProject(params.name); // see if such a project exists
+      if(project && project !== this.get('defaultProject')) {
+        this.set('defaultProject', project);
+        this.projectsController.selectObject(project);
+      }
+    }
+  },
+  
+  /**
     The catch-all case that gets fired if nothing else matches
   */
   routeDefault: function(params) {
-    // Enter the statechart.
-    Tasks.goState('a', 1);
-    Tasks.loginController.openPanel();
+    if(this.loginTime) {
+      // Enter the statechart.
+      Tasks.goState('a', 1);
+      Tasks.loginController.openPanel();
+    }
   }
   
 });

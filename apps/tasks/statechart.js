@@ -118,7 +118,7 @@ SC.Statechart = {
         
         result += '\n\nHistory:\n\n';
         
-        for (var key in this.history) {
+        for (key in this.history) {
           if ( key.match(regex) ) result = result + key + this.history[key] + ': ' + '\n';
         }
         
@@ -155,6 +155,7 @@ SC.Statechart = {
     @param {Boolean} delay Pass NO or undefined to enter the state immediately, YES to enter the state the next run loop
   */
   goState: function(stateVar,index,delay) {
+    // console.log('Going to State: ' + stateVar + index);
     var func = this['goState%@%@'.fmt(stateVar.toUpperCase(),index)];
     
     if (func === undefined) {

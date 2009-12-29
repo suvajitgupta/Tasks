@@ -14,7 +14,7 @@ sc_require('controllers/projects');
 
 Tasks.mixin({
 
-  _loginTime: true, // to indicate when there is a login sequence in progress
+  loginTime: true, // to indicate when there is a login sequence in progress
   loginName: null,
 
   /**
@@ -104,7 +104,7 @@ Tasks.mixin({
     var currentUser = CoreTasks.getUser(this.loginName);
     if (currentUser) {
       
-      if(this._loginTime) {
+      if(this.loginTime) {
         
         // Greet user and save login session information
         CoreTasks.set('currentUser', currentUser);
@@ -187,7 +187,7 @@ Tasks.mixin({
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', serverMessage.get('value') + "_ProjectsLoaded".loc() + new Date().format('hh:mm:ss a'));
 
-    if(this._loginTime) {
+    if(this.loginTime) {
       var defaultProject = CoreTasks.get('allTasksProject');
       var defaultProjectName = this.get('defaultProjectName');
       if(defaultProjectName) { // if specified via a Route
@@ -195,7 +195,6 @@ Tasks.mixin({
         if(project) defaultProject = project;
       }
       this.set('defaultProject', defaultProject);
-      this.projectsController.selectObject(defaultProject);
     }
     
     this.dataLoadSuccess();
@@ -208,8 +207,9 @@ Tasks.mixin({
     // console.log("DEBUG: dataLoadSuccess()");
     switch (this.state.a) {
       case 3:
-        if(this._loginTime) {
-          this._loginTime = false;
+        if(this.loginTime) {
+          this.loginTime = false;
+          this.projectsController.selectObject(this.get('defaultProject'));
         }
         this.goState('a', 4);
         break;
@@ -343,7 +343,7 @@ Tasks.mixin({
     
     Tasks.getPath('mainPage.mainPane.welcomeMessage').set('value', null);
     CoreTasks.set('currentUser', null);
-    this._loginTime = true;
+    this.loginTime = true;
     
     // TODO: [JH2, SG] Beta: need to determine the backend and logout appropriately
     // var params = {
