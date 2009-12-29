@@ -85,7 +85,6 @@
 }
 
 .assignee-item .sc-outline .count {
-  right: 10px !important;
   margin-top: 0px !important;
   top: 6px !important;
 	font-weight: normal !important;
@@ -93,6 +92,14 @@
   color: #000 !important;
   background: #FFF none repeat scroll 0 0 !important;
   opacity: 0.85;
+}
+
+.assignee-item .sc-outline .count {
+  right: 10px !important;
+}
+
+.assignee-item .sc-outline .count.finished {
+  right: 150px !important;
 }
 
 

@@ -75,6 +75,16 @@ Tasks.AssigneeItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       
     }
     sc_super();
+  },
+  
+  renderCount: function(context, count) {
+    var content = this.get('content');
+    var finishedEffort = content.get('finishedEffort');
+    if(finishedEffort) {
+      context.push('<span class="count finished"><span class="inner">')
+        .push(finishedEffort.toString()).push('</span></span>') ;
+    }
+    sc_super();
   }
   
 });
