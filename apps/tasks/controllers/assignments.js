@@ -450,7 +450,8 @@ Tasks.assignmentsController = SC.ArrayController.create(
       }
     }
   
-    var finishedEffort = totalFinishedCount + ' ' + "_Finished".loc();
+    var finishedEffort = '';
+    if(totalFinishedCount) finishedEffort += totalFinishedCount + ' ' + "_Finished".loc();
     var totalFinishedEffortAve = 0;
     if(totalFinishedEffortMin !== 0) {
       totalFinishedEffortAve = (totalFinishedEffortMin + totalFinishedEffortMax)/2;
@@ -462,7 +463,8 @@ Tasks.assignmentsController = SC.ArrayController.create(
     }
     
     var loading = CoreTasks.USER_NOT_LOADED;
-    var displayEffort = totalLeftCount + ' ' + "_Left".loc();
+    var displayEffort = '';
+    if(totalLeftCount) displayEffort += totalLeftCount + ' ' + "_Left".loc();
     var effortGap = 0, effortGapPercent = 0;
     if(totalEffortMin !== 0) {
       if(projectTimeLeft) { // flag user loading
