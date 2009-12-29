@@ -84,7 +84,7 @@ Tasks.AssigneeItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       context.push('<span class="count finished"><span class="inner">')
         .push(finishedEffort.toString()).push('</span></span>') ;
     }
-    sc_super();
+    if(count !== '') sc_super();
   }
   
 });

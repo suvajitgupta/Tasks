@@ -447,7 +447,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
       }
     }
   
-    var finishedEffort = null, displayEffort = null;
+    var finishedEffort = '', displayEffort = '';
     if(totalFinishedEffortMin !== 0) {
       var totalFinishedEffort = '' + parseFloat(totalFinishedEffortMin.toFixed(1));
       if (totalFinishedEffortMax !== totalFinishedEffortMin) {
