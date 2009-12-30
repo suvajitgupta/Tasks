@@ -394,10 +394,9 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   render: function(context, firstTime) {
     
     sc_super();
+    
     var content = this.get('content');
     if(!content) return;
-    
-    context.addClass((this.get('contentIndex') % 2 === 0)? 'even-item' : 'odd-item');
     
     var createdAt = content.get('createdAt');
     if(createdAt) {
@@ -405,15 +404,16 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       var now = SC.DateTime.create().get('milliseconds');
       var ageInDays = (now - then)/MILLISECONDS_IN_DAY;
       if(ageInDays <= 1) {
-        context = context.begin('span');
-        context = context.addClass('new-task').push('*').attr({
+        context = context.begin('img').addClass('new-task').attr({
+          src: SC.BLANK_IMAGE_URL,
           title: "_NewTaskTooltip".loc(),
           alt: "_NewTaskTooltip".loc()
-        });
-        context = context.end();
+        }).end();
       }
     }
 
+    context.addClass((this.get('contentIndex') % 2 === 0)? 'even-item' : 'odd-item');
+    
     var priority = content.get('priority');
     context.addClass('task-item');
     switch(priority){

@@ -114,14 +114,14 @@
 }
 
 .new-task {
-  color: black !important;
-  font-size: 16px !important;
-	font-weight: bold !important;
-	line-height: 28px !important;
+  margin-left: -3px !important;
+  height: 11px !important;
+  width: 11px !important;
+  background: static_url('images/new-task.png') no-repeat 0 0;
 }
 
 .task-item .sc-outline {
-  left: 7px !important;
+  left: 8px !important;
   right: 18px !important;
 }
 
@@ -134,11 +134,11 @@
   position: absolute !important;
   top: 4px !important;
   bottom: 4px !important;
-  left: 10px !important;
+  left: 11px !important;
 	width: 32px !important;
 }
 
-.task-item img {
+.task-item .sc-outline img {
   left: 46px !important;
 }
 
