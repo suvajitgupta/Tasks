@@ -398,19 +398,34 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     var content = this.get('content');
     if(!content) return;
     
-    var ageInDays = 0;
-    var createdAt = content.get('createdAt');
-    if(createdAt) {
-      var then = createdAt.get('milliseconds');
-      var now = SC.DateTime.create().get('milliseconds');
-      ageInDays = (now - then)/MILLISECONDS_IN_DAY;
-    }
-    if(ageInDays <= 1) {
-      context = context.begin('img').addClass('new-task').attr({
-        src: SC.BLANK_IMAGE_URL,
-        title: "_NewTaskTooltip".loc(),
-        alt: "_NewTaskTooltip".loc()
-      }).end();
+    // Put a badge before Planned tasks that were created or updated recently
+    var developmentStatus = content.get('developmentStatus');
+    
+    if(developmentStatus === CoreTasks.TASK_STATUS_PLANNED) {
+      // First check if the task was created recently
+      var ageInDays = 0;
+      var now = SC.DateTime.create().get('milliseconds'), then;
+      var createdAt = content.get('createdAt');
+      if(createdAt) {
+        then = createdAt.get('milliseconds');
+        ageInDays = (now - then)/MILLISECONDS_IN_DAY;
+      }
+      // Then check if the task was updated recently
+      if(ageInDays > 1) {
+        var updatedAt = content.get('updatedAt');
+        if(updatedAt) {
+          then = updatedAt.get('milliseconds');
+          ageInDays = (now - then)/MILLISECONDS_IN_DAY;
+        }
+      }
+      // Decide if it was recently created/updated
+      if(ageInDays <= 1) {
+        context = context.begin('img').addClass('new-task').attr({
+          src: SC.BLANK_IMAGE_URL,
+          title: "_NewTaskTooltip".loc(),
+          alt: "_NewTaskTooltip".loc()
+        }).end();
+      }
     }
 
     context.addClass((this.get('contentIndex') % 2 === 0)? 'even-item' : 'odd-item');
@@ -447,7 +462,6 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     context = context.begin('div').addClass('task-id').addClass(validationClass).
                 text(displayId).attr('title', idTooltip).attr('alt', idTooltip).end();
       
-    var developmentStatus = content.get('developmentStatus');
     switch(developmentStatus){
       case CoreTasks.TASK_STATUS_PLANNED:
         context.addClass('task-status-planned');

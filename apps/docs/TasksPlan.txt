@@ -90,7 +90,7 @@ v Add hover over tooltip for assignees to show how many tasks they have and to e
 - Beta: Support task Copy ID/Name and Copy Link Location (URL with "Route") to clipboard [SG] $Feature @Risky
 v Add task context menu with options: Add, Duplicate, Delete; All Task Attributes; Copy ID/Name, Copy Link [SG] $Feature @Done %Passed
 - Beta: Add ability to watch tasks and get email notifications on task changes [SG] <JH2> $Feature
-- Highlight newly added tasks with a badge to the left <SE> [SG] $Feature @Done %Passed
+- Add a badge (dot) before Planned tasks that were created or updated within the last day <SE> [SG] $Feature @Done %Passed
 - Out of Scope: Add support for nested tasks/tagging $Feature
 | Use "Clustering" approach described in Help instead
 - Out of Scope: Add support for managing inter-task dependencies/linking $Feature
