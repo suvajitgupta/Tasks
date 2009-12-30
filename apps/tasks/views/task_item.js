@@ -398,18 +398,19 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     var content = this.get('content');
     if(!content) return;
     
+    var ageInDays = 0;
     var createdAt = content.get('createdAt');
     if(createdAt) {
       var then = createdAt.get('milliseconds');
       var now = SC.DateTime.create().get('milliseconds');
-      var ageInDays = (now - then)/MILLISECONDS_IN_DAY;
-      if(ageInDays <= 1) {
-        context = context.begin('img').addClass('new-task').attr({
-          src: SC.BLANK_IMAGE_URL,
-          title: "_NewTaskTooltip".loc(),
-          alt: "_NewTaskTooltip".loc()
-        }).end();
-      }
+      ageInDays = (now - then)/MILLISECONDS_IN_DAY;
+    }
+    if(ageInDays <= 1) {
+      context = context.begin('img').addClass('new-task').attr({
+        src: SC.BLANK_IMAGE_URL,
+        title: "_NewTaskTooltip".loc(),
+        alt: "_NewTaskTooltip".loc()
+      }).end();
     }
 
     context.addClass((this.get('contentIndex') % 2 === 0)? 'even-item' : 'odd-item');
