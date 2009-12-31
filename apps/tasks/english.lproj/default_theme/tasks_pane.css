@@ -14,7 +14,7 @@
  
 .task-detail-pane,
 .sc-collection-view.sc-list-view.sc-source-list.tasks-pane-inner {
-  background: #f2f2f2 !important;
+  background-color: #f2f2f2 !important;
 }
 
 .sc-view.sc-ghost-view .sc-collection-view.sc-list-view.sc-source-list.tasks-pane-inner {
@@ -24,6 +24,14 @@
 .sc-view.sc-list-item-view.sc-collection-item.sc-group-item {
   position: absolute !important;
   margin-left: -5px !important;
+}
+
+.zero-tasks-helper {
+  background: static_url('images/zero-tasks-helper.png') no-repeat 5% 5px;
+}
+
+.no-tasks-helper {
+  background: static_url('images/no-tasks-helper.png') no-repeat 90% 5px;
 }
 
 /*-----------------------------------------------------------------

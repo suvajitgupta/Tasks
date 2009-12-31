@@ -292,7 +292,22 @@ Tasks.mainPage = SC.Page.design({
           delegate: Tasks.reassignmentController,
           selectOnMouseDown: YES,
           target: 'Tasks.assignmentsController',
-          action: 'showAssignee'
+          action: 'showAssignee',
+          
+          render: function(context, firstTime) {
+            if(Tasks.loginTime) return;
+            var tasksCount = Tasks.allTasksController.getPath('content.length');
+            if(tasksCount === 0) {
+              context.addClass('zero-tasks-helper');
+            }
+            else if (this.getPath('content.length') === 0) {
+              context.addClass('no-tasks-helper');
+            } else {
+              context.removeClass('zero-tasks-helper');
+              context.removeClass('no-tasks-helper');
+              sc_super();
+            }
+          }
         }),
         
         // ..........................................................
