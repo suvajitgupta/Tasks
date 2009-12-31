@@ -2,7 +2,7 @@
  * A mixin that defines all of the "actions" that trigger state transitions.
  *
  * @author Sean Eidemiller
- * @author Suvajit GÏupta
+ * @author Suvajit Gupta
  * License: Licened under MIT license (see license.js)
  */
 /*globals CoreTasks Tasks sc_require */
@@ -356,6 +356,7 @@ Tasks.mixin({
     this.usersController.set('content', null);
     this.allTasksController.set('content', null);
     this.projectsController.set('content', null);
+    this.projectsController.set('selection', null);
     CoreTasks.clearData();
     
     this.goState('a', 1);
