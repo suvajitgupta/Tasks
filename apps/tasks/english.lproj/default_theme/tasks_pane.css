@@ -30,6 +30,10 @@
   background: static_url('images/zero-tasks-helper.png') no-repeat 5% 5px;
 }
 
+.display-mode-helper {
+  background: static_url('images/no-tasks-helper.png') no-repeat 37% 5px; // TODO: switch to proper image from MG;
+}
+
 .no-tasks-helper {
   background: static_url('images/no-tasks-helper.png') no-repeat 90% 5px;
 }

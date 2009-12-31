@@ -299,11 +299,13 @@ Tasks.mainPage = SC.Page.design({
             var tasksCount = Tasks.projectsController.getPath('selection.firstObject.tasks.length');
             if(tasksCount === 0) {
               if(Tasks.tasksController.isAddable()) context.addClass('zero-tasks-helper');
+              else context.addClass('display-mode-helper');
             }
             else if (this.getPath('content.length') === 0) {
               context.addClass('no-tasks-helper');
             } else {
               context.removeClass('zero-tasks-helper');
+              context.removeClass('display-mode-helper');
               context.removeClass('no-tasks-helper');
               sc_super();
             }
