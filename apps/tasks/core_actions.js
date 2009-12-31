@@ -188,7 +188,7 @@ Tasks.mixin({
     serverMessage.set('value', serverMessage.get('value') + "_ProjectsLoaded".loc() + new Date().format('hh:mm:ss a'));
 
     if(this.loginTime) {
-      var defaultProject = CoreTasks.get('allTasksProject');
+      var defaultProject = CoreTasks.get('unallocatedTasksProject');
       var defaultProjectName = this.get('defaultProjectName');
       if(defaultProjectName) { // if specified via a Route
         var project = CoreTasks.getProject(defaultProjectName); // see if such a project exists
@@ -457,7 +457,7 @@ Tasks.mixin({
    */
   _deleteProject: function(project) {
     // Reset default project if it is deleted
-    if(project === Tasks.get('defaultProject')) Tasks.set('defaultProject', CoreTasks.get('allTasksProject'));
+    if(project === Tasks.get('defaultProject')) Tasks.set('defaultProject', CoreTasks.get('unallocatedTasksProject'));
 
     // Delete the project
     project.destroy();
