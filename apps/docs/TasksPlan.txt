@@ -128,7 +128,7 @@ Application Manager GUI
 - Add online "Help" button in top toolbar & popup help window [SG] @Done %Passed $Feature
 v Add screenshots with callouts for online help content [SG] $Feature
 v Add online training video using Captivate or Camtasia [SG] $Feature
-- Beta: Add onscreen help (on panel fields that are complex and on blank workspace to assist new users) <MG> [SG] @Active $Feature
+- Add onscreen help (on panel fields that are complex and on blank workspace to assist new users) <MG> [SG] $Feature @Done %Passed
 - Add Logout button to exit in top toolbar (confirm before exiting, reload data/clear all filters) [SG] <JH2> @Done $Feature %Passed
 - Prompt user to save changes (if any) before logging out [SG] <SE> $Feature @Done %Passed
 - Restore application settings/state from last login using HTML5 storage [SG] <MB> $Feature
