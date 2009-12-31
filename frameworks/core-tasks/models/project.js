@@ -152,29 +152,38 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
   /**
    * Export a project's attributes.
    *
+   * @param {String} format in which data is to be exported.
    * @returns {String) A string with the project's data exported in it.
    */
-  exportData: function() {
+  exportData: function(format) {
     
     var projectName = this.get('name');
     var tasksCount = this.get('tasks').get('length');
-    var ret;
+    
+    var ret = '';
+    if(format === 'HTML') ret += '<h2>';
+    
     if(projectName === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) {
-      ret = '# ' + "_Has".loc() + tasksCount + ' ' + "_Unallocated".loc() + "_Tasks".loc();
+      ret += '# ' + "_Has".loc() + tasksCount + ' ' + "_Unallocated".loc() + "_Tasks".loc();
     }
     else {
-      ret = projectName;
+      ret += projectName;
       var timeLeft = this.get('timeLeft');
       if(timeLeft) ret += (' {' + CoreTasks.displayTime(timeLeft) + '}');
       ret += ' # ' + "_Has".loc() + tasksCount + "_Tasks".loc();
     }
+    if(format === 'HTML') ret += '\n</h2>';
     
     var val = this.get('description');
     if(val) {
+      if(format === 'HTML') ret += '\n<pre>';
       var lines = val.split('\n');
       for (var j = 0; j < lines.length; j++) {
-        ret += '\n| ' + lines[j];
+        ret += '\n';
+        if(format === 'Text') ret += '| ';
+        ret += lines[j];
       }
+      if(format === 'HTML') ret += '\n</pre>';
     }
     
     ret += '\n';

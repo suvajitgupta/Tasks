@@ -370,11 +370,16 @@ CoreTasks.Task = CoreTasks.Record.extend({
 
   /**
   * Export a task's attributes.
+  *
+  * @param {String} format in which data is to be exported.
   * @returns {String) return a string with the tasks' data exported in it.
   */
-  exportData: function() {
+  exportData: function(format) {
     
-    var ret = '', val, user;
+    var val, user;
+    
+    var ret = '';
+    if(format === 'HTML') ret += '<p>';
     
     switch(this.get('priority')) {
       case CoreTasks.TASK_PRIORITY_HIGH: val = '^'; break;
@@ -403,13 +408,18 @@ CoreTasks.Task = CoreTasks.Record.extend({
     if(val !== CoreTasks.TASK_VALIDATION_UNTESTED) ret += ' %' + val.loc();
     
     if(this.get('id') > 0) ret += ' ' + this.get('displayId');
+    if(format === 'HTML') ret += '\n</p>';
     
     val = this.get('description');
     if(val) {
+      if(format === 'HTML') ret += '\n<pre>';
       var lines = val.split('\n');
       for (var j = 0; j < lines.length; j++) {
-        ret += '\n| ' + lines[j];
+        ret += '\n';
+        if(format === 'Text') ret += '| ';
+        ret += lines[j];
       }
+      if(format === 'HTML') ret += '\n</pre>';
     }
     
     ret += '\n';

@@ -80,7 +80,7 @@ Tasks.mainPage = SC.Page.design({
           classNames: ['export-icon'],
           toolTip: "_ExportTooltip".loc(),
           target: 'Tasks.exportDataController',
-          action: 'exportDataFormats'
+          action: 'selectExportDataFormat'
         }),
         
         SC.View.design({
