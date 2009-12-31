@@ -295,7 +295,7 @@ Tasks.mainPage = SC.Page.design({
           action: 'showAssignee',
           
           render: function(context, firstTime) {
-            if(Tasks.loginTime) return;
+            if(Tasks.loginTime || !Tasks.tasksController.isAddable()) return;
             var tasksCount = Tasks.projectsController.getPath('selection.firstObject.tasks.length');
             if(tasksCount === 0) {
               context.addClass('zero-tasks-helper');
