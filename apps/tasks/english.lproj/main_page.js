@@ -79,8 +79,8 @@ Tasks.mainPage = SC.Page.design({
           layout: { centerY: 0, right: 170, height: 32, width: 70 },
           classNames: ['export-icon'],
           toolTip: "_ExportTooltip".loc(),
-          target: 'Tasks',
-          action: 'exportData'
+          target: 'Tasks.exportDataController',
+          action: 'exportDataFormats'
         }),
         
         SC.View.design({
@@ -115,7 +115,8 @@ Tasks.mainPage = SC.Page.design({
       ]
     }),
     
-    welcomeMessage: SC.outlet('titleBarView.childViews.1'),
+    userRoleMessage: SC.outlet('titleBarView.childViews.1'),
+    exportButton: SC.outlet('titleBarView.childViews.7'),
     
     toolbarView: SC.View.design({
       layout: { left: 0, right: 0, top: 42, height: 36 },

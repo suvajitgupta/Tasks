@@ -118,6 +118,18 @@ body {
   text-align: left !important;
 }
 
+.text-icon {
+  width: 16px;
+  height: 16px;
+  background: static_url('images/text.png') no-repeat 0 0;
+}
+
+.html-icon {
+  width: 16px;
+  height: 16px;
+  background: static_url('images/html.png') no-repeat 0 0;
+}
+
 .checkbox-icon .icon {
   position: absolute;
   top: 0;

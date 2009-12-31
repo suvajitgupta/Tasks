@@ -34,6 +34,8 @@ SC.stringsFor('English', {
   "_ImportTooltip": "Import Tasks data from a text format",
   "_Export": "Export",
   "_ExportTooltip": "Export Tasks data to a text format",
+  "_ExportText": "Export as Text...",
+  "_ExportHTML": "Export as HTML...",
   "_SettingsTooltip": "Administer Tasks users and settings",
   "_Help": "Online Help",
   "_HelpTooltip": "Open Tasks online help in a separate window",

@@ -18,7 +18,6 @@ Tasks.exportDataController = SC.ObjectController.create(
   data: '',
   
   openPanel: function(){
-    this._exportData();
     var panel = Tasks.getPath('exportDataPage.panel');
     if(panel) panel.append();
   },
@@ -113,7 +112,7 @@ Tasks.exportDataController = SC.ObjectController.create(
   /**
   * Export data per Tasks file format.
   */
-  _exportData: function() {
+  _exportDataAsText: function(format) {
     
     var sel = Tasks.projectsController.get('selection');
     if(!sel) return false;
@@ -131,7 +130,30 @@ Tasks.exportDataController = SC.ObjectController.create(
     }
     
     this.set('data', ret);
+    Tasks.exportDataController.openPanel();
     
+  },
+  
+  /**
+  * Export Tasks data in one of the available formatsSG.
+  */
+  exportDataFormats: function() {
+    var pane = SC.MenuPane.create({
+      layout: { width: 175, height: 0 },
+      items: [
+        { title: "_ExportText", icon: 'text-icon', isEnabled: YES, target: this, action: '_exportDataAsText' },
+        { title: "_ExportHTML", icon: 'html-icon', isEnabled: YES, target: this, action: '_exportDataAsHTML' }
+      ],
+      localize: YES,
+      itemIsEnabledKey: 'isEnabled',
+      itemTitleKey: 'title',
+      itemIconKey: 'icon',
+      itemActionKey: 'action',
+      preferType: SC.PICKER_MENU,
+      contentView: SC.View.extend({})
+    });
+    pane.popup(Tasks.getPath('mainPage.mainPane.exportButton'));
   }
+  
 
 });

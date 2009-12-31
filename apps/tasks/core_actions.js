@@ -110,10 +110,10 @@ Tasks.mixin({
         CoreTasks.set('currentUser', currentUser);
         CoreTasks.setPermissions();
         
-        var welcomeMessage = Tasks.getPath('mainPage.mainPane.welcomeMessage');
-        welcomeMessage.set('value', "_User:".loc() + '<b>' + CoreTasks.getPath('currentUser.name') + '</b>, ' +
+        var userRoleMessage = Tasks.getPath('mainPage.mainPane.userRoleMessage');
+        userRoleMessage.set('value', "_User:".loc() + '<b>' + CoreTasks.getPath('currentUser.name') + '</b>, ' +
                            "_Role:".loc() + ' <i>' + CoreTasks.getPath('currentUser.role').loc() + '</i>');
-        welcomeMessage.set('toolTip', "_LoginSince".loc() + new Date().format('hh:mm:ss a MMM dd, yyyy'));
+        userRoleMessage.set('toolTip', "_LoginSince".loc() + new Date().format('hh:mm:ss a MMM dd, yyyy'));
         
         // Based on user's role set up appropriate task filter
         var role = currentUser.get('role');
@@ -256,13 +256,6 @@ Tasks.mixin({
   },
 
   /**
-   * Export data to external text file.
-   */
-  exportData: function() {
-    Tasks.exportDataController.openPanel();  
-  },
-  
-  /**
    * Launch Settings panel for user/preference management.
    */
    /**
@@ -341,7 +334,7 @@ Tasks.mixin({
    */
   restart: function() {
     
-    Tasks.getPath('mainPage.mainPane.welcomeMessage').set('value', null);
+    Tasks.getPath('mainPage.mainPane.userRoleMessage').set('value', null);
     CoreTasks.set('currentUser', null);
     this.loginTime = true;
     
