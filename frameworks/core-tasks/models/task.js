@@ -376,11 +376,10 @@ CoreTasks.Task = CoreTasks.Record.extend({
   */
   exportData: function(format) {
     
-    var val, user;
-    
     var ret = '';
     if(format === 'HTML') ret += '<p>';
     
+    var val;
     switch(this.get('priority')) {
       case CoreTasks.TASK_PRIORITY_HIGH: val = '^'; break;
       case CoreTasks.TASK_PRIORITY_MEDIUM: val = '-'; break;
@@ -392,20 +391,20 @@ CoreTasks.Task = CoreTasks.Record.extend({
     var effort = this.get('effort');
     if(effort) ret += (' {' + CoreTasks.displayTime(effort) + '}');
     
-    user = this.get('submitter');
-    if (user) ret += ' <' + user.get('loginName') + '>';
+    var submitter = this.get('submitter');
+    if (submitter) ret += ' <' + submitter.get('loginName') + '>';
     
-    user = this.get('assignee');
-    if (user) ret += ' [' + user.get('loginName') + ']';
+    var assignee = this.get('assignee');
+    if (assignee) ret += ' [' + assignee.get('loginName') + ']';
     
-    val = this.get('type');
-    if(val !== CoreTasks.TASK_TYPE_OTHER) ret += ' $' + val.loc();
+    var type = this.get('type');
+    if(type !== CoreTasks.TASK_TYPE_OTHER) ret += ' $' + type.loc();
     
-    val = this.get('developmentStatus');
-    if(val !== CoreTasks.TASK_STATUS_PLANNED) ret += ' @' + val.loc();
+    var developmentStatus = this.get('developmentStatus');
+    if(developmentStatus !== CoreTasks.TASK_STATUS_PLANNED) ret += ' @' + developmentStatus.loc();
     
-    val = this.get('validation');
-    if(val !== CoreTasks.TASK_VALIDATION_UNTESTED) ret += ' %' + val.loc();
+    var validation = this.get('validation');
+    if(validation !== CoreTasks.TASK_VALIDATION_UNTESTED) ret += ' %' + validation.loc();
     
     if(this.get('id') > 0) ret += ' ' + this.get('displayId');
     if(format === 'HTML') ret += '\n</p>';
