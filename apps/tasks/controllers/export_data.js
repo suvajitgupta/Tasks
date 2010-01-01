@@ -19,13 +19,13 @@ Tasks.HEADER_STYLE = '<head>\n' +
 ' -webkit-border-radius: 5px;\n' +
 '}\n' +
 'h2 {\n' +
-'	font-size: 14px;\n' +
+'	font-size: 15px;\n' +
 '	background-color: #333;\n' +
 '}\n' +
 'h3 {\n' +
 '	font-size: 12px;\n' +
 '	margin-left: 10px;\n' +
-'	background-color: #666;\n' +
+'	background-color: #555;\n' +
 '}\n' +
 '.id {\n' +
 '	font-size: 10px;\n' +
@@ -37,7 +37,7 @@ Tasks.HEADER_STYLE = '<head>\n' +
 ' font-weight: normal !important;\n' +
 ' font-style: normal !important;\n' +
 '	border: 1px solid gray;\n' +
-'	padding: 0px 5px 0px 5px;\n' +
+'	padding: 0px 7px 0px 7px;\n' +
 ' -moz-border-radius: 7px;\n' +
 ' -webkit-border-radius: 7px;\n' +
 '}\n' +
