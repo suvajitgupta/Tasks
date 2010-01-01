@@ -5,6 +5,7 @@
 
 sc_require('core');
 
+// TODO: [SG/MG] Beta: Tasks HTML Export refinements: show type icon, align project badge with text, use tables to align columns?
 Tasks.HEADER_STYLE = '<head>\n' + 
 '<style type="text/css">\n' +
 'body {\n' +

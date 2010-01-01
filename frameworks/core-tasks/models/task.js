@@ -395,7 +395,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
         case CoreTasks.TASK_TYPE_BUG: ret += 'background-color:orange'; break;
         case CoreTasks.TASK_TYPE_OTHER: ret += 'background-color:gray'; break;
       }
-      ret += ';">' + type.loc().charAt(0) + '</span>&nbsp;<span style="';
+      ret += ';">' + type.loc() + '</span>&nbsp;<span style="';
       switch(priority) {
         case CoreTasks.TASK_PRIORITY_HIGH: ret += 'font-weight:bold;'; break;
         case CoreTasks.TASK_PRIORITY_LOW: ret += 'font-style:italic;'; break;
