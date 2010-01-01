@@ -25,7 +25,6 @@ Tasks.HEADER_STYLE = '<head>\n' +
 'h3 {\n' +
 '	font-size: 11px;\n' +
 '	margin-left: 10px;\n' +
-'	background-color: #666;\n' +
 '}\n' +
 '.id {\n' +
 '	font-size: 9px;\n' +
@@ -41,6 +40,7 @@ Tasks.HEADER_STYLE = '<head>\n' +
 '	padding: 0px 7px 0px 7px;\n' +
 ' -moz-border-radius: 7px;\n' +
 ' -webkit-border-radius: 7px;\n' +
+' opacity: 0.85;\n' +
 '}\n' +
 'p, pre {\n' +
 '	font-size: 11px;\n' +
@@ -162,7 +162,16 @@ Tasks.exportDataController = SC.ObjectController.create(
       var assignmentNode = assignmentNodes.objectAt(i);
       var tasks = assignmentNode.get('treeItemChildren');
       var tasksCount = assignmentNode.get('tasksCount');
-      if(format === 'HTML') ret += '<h3>';
+      if(format === 'HTML') {
+        ret += '<h3 style="background-color:';
+        switch(assignmentNode.get('loading')) {
+          case CoreTasks.USER_NOT_LOADED: ret += 'gray'; break;
+          case CoreTasks.USER_UNDER_LOADED: ret += 'green'; break;
+          case CoreTasks.USER_PROPERLY_LOADED: ret += 'blue'; break;
+          case CoreTasks.USER_OVER_LOADED: ret += 'red'; break;
+        }
+        ret += ';">';
+      }
       else ret += '\n# ';
       ret += assignmentNode.get('displayName').loc();
       if(format === 'HTML') {
