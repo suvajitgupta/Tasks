@@ -135,7 +135,7 @@ SC.stringsFor('English', {
   "_TaskEffortTooltip": "Effort shown on right",
   "_TaskIdTooltip": "Unique ID for task; Dashes indicate unsaved tasks; Background color indicates validation status",
   "_TaskEditorTooltip": "Click to view/edit task details (submitter, assignee, effort, project, and description)",
-  "_TasksExportTimestamp": "# Tasks data export at ",
+  "_TasksExportTimestamp": "Tasks data export at ",
   
   // User/Assignee strings
   "_AddUser": "Add User",

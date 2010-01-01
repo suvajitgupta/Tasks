@@ -103,9 +103,10 @@ Tasks.exportDataController = SC.ObjectController.create(
       var tasks = assignmentNode.get('treeItemChildren');
       var tasksCount = assignmentNode.get('tasksCount');
       if(format === 'HTML') ret += '<h3>';
+      else ret += '\n# ';
+      ret += assignmentNode.get('displayName').loc() + ' # ' + "_Has".loc() + tasksCount + "_Tasks".loc();
+      if(format === 'HTML') ret += '</h3>';
       ret += '\n';
-      ret += '# ' + assignmentNode.get('displayName').loc() + '; ' + "_Has".loc() + tasksCount + "_Tasks".loc() + '\n';
-      if(format === 'HTML') ret += '</h3>\n';
       if(tasks) {
         for(var j=0; j < tasksCount; j++) {
           ret += tasks.objectAt(j).exportData(format);
@@ -132,9 +133,11 @@ Tasks.exportDataController = SC.ObjectController.create(
     var ret = '';
     if(format === 'HTML') ret += '<html>\n<body>\n';
     
-    if(format === 'HTML') ret += '<p>\n';
-    ret += "_TasksExportTimestamp".loc() + new Date().format('hh:mm:ss a MMM dd, yyyy') + '\n';
+    if(format === 'HTML') ret += '<p>';
+    else ret += '# ';
+    ret += "_TasksExportTimestamp".loc() + new Date().format('hh:mm:ss a MMM dd, yyyy');
     if(format === 'HTML') ret += '</p>';
+    else ret += '\n';
     ret += '\n';
     
     var selectedProjectName = selectedProject.get('name');

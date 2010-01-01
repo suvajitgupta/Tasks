@@ -172,7 +172,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
       if(timeLeft) ret += (' {' + CoreTasks.displayTime(timeLeft) + '}');
       ret += ' # ' + "_Has".loc() + tasksCount + "_Tasks".loc();
     }
-    if(format === 'HTML') ret += '\n</h2>';
+    if(format === 'HTML') ret += '</h2>';
     
     var val = this.get('description');
     if(val) {

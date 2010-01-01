@@ -376,16 +376,26 @@ CoreTasks.Task = CoreTasks.Record.extend({
   */
   exportData: function(format) {
     
-    var ret = '';
-    if(format === 'HTML') ret += '<p>';
+    var priority = this.get('priority');
     
-    var val;
-    switch(this.get('priority')) {
-      case CoreTasks.TASK_PRIORITY_HIGH: val = '^'; break;
-      case CoreTasks.TASK_PRIORITY_MEDIUM: val = '-'; break;
-      case CoreTasks.TASK_PRIORITY_LOW: val = 'v'; break;
+    var ret = '';
+    if(format === 'HTML') {
+      ret += '<p style="';
+      switch(priority) {
+        case CoreTasks.TASK_PRIORITY_HIGH: ret += 'font-weight: bold;'; break;
+        case CoreTasks.TASK_PRIORITY_LOW: ret += 'font-style: italic;'; break;
+      }
+      ret += '">' + this.get('displayId') + ' ';
     }
-    ret += val + ' ';
+    else{
+      var val;
+      switch(priority) {
+        case CoreTasks.TASK_PRIORITY_HIGH: val = '^'; break;
+        case CoreTasks.TASK_PRIORITY_MEDIUM: val = '-'; break;
+        case CoreTasks.TASK_PRIORITY_LOW: val = 'v'; break;
+      }
+      ret += val + ' ';
+    }
     
     ret += this.get('name');
     var effort = this.get('effort');
@@ -406,8 +416,8 @@ CoreTasks.Task = CoreTasks.Record.extend({
     var validation = this.get('validation');
     if(validation !== CoreTasks.TASK_VALIDATION_UNTESTED) ret += ' %' + validation.loc();
     
-    if(this.get('id') > 0) ret += ' ' + this.get('displayId');
-    if(format === 'HTML') ret += '\n</p>';
+    if(format === 'HTML') ret += '</p>';
+    else if(this.get('id') > 0) ret += ' ' + this.get('displayId');
     
     val = this.get('description');
     if(val) {
