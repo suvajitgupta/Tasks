@@ -383,14 +383,14 @@ CoreTasks.Task = CoreTasks.Record.extend({
     
     var ret = '';
     if(format === 'HTML') {
-      ret += '<p><span style="border: 1px solid ';
+      ret += '<p><small><span style="border: 1px solid ';
       switch(validation) {
         case CoreTasks.TASK_VALIDATION_UNTESTED: ret += 'black;color:black;background-color:white;'; break;
         case CoreTasks.TASK_VALIDATION_PASSED: ret += 'green;color:white;background-color:green;'; break;
         case CoreTasks.TASK_VALIDATION_FAILED: ret += 'red;color:white;background-color:red;'; break;
       }
-      ret += '"><small>&nbsp' + this.get('displayId') + '&nbsp</small></span>&nbsp';
-      ret += '<span style="color:white;background-color:black;">' + type.loc() + '</span>&nbsp<span style="';
+      ret += '">&nbsp' + this.get('displayId') + '&nbsp</span>&nbsp';
+      ret += '<span style="color:white;background-color:black;">' + type.loc() + '</span></small>&nbsp<span style="';
       switch(priority) {
         case CoreTasks.TASK_PRIORITY_HIGH: ret += 'font-weight:bold;'; break;
         case CoreTasks.TASK_PRIORITY_LOW: ret += 'font-style:italic;'; break;
