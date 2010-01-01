@@ -25,6 +25,11 @@ Tasks.HEADER_STYLE = '<head>\n' +
 '	font-size: 11px;\n' +
 '	margin-left: 10px;\n' +
 '}\n' +
+'p, pre {\n' +
+'	font-size: 11px;\n' +
+'	margin-top: -2px;\n' +
+'	margin-left: 25px;\n' +
+'}\n' +
 '.id {\n' +
 '	font-size: 9px;\n' +
 '	padding: 2px 5px 2px 5px;\n' +
@@ -40,11 +45,6 @@ Tasks.HEADER_STYLE = '<head>\n' +
 ' -moz-border-radius: 7px;\n' +
 ' -webkit-border-radius: 7px;\n' +
 ' opacity: 0.85;\n' +
-'}\n' +
-'p, pre {\n' +
-'	font-size: 11px;\n' +
-'	margin-top: -2px;\n' +
-'	margin-left: 25px;\n' +
 '}\n' +
 '</style>\n' +
 '</head>\n';
