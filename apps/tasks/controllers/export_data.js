@@ -5,6 +5,51 @@
 
 sc_require('core');
 
+Tasks.HEADER_STYLE = '<head>\n' + 
+'<style type="text/css">\n' +
+'body {\n' +
+'	font-family: "Lucida Sans","Lucida Grande",Verdana,Arial,sans-serif;\n' +
+'	font-style: normal;\n' +
+'  background-color: #fafafa;\n' +
+'}\n' +
+'h2, h3 {\n' +
+'	padding: 4px 6px 4px 6px;\n' +
+'	color: white;\n' +
+' -moz-border-radius: 5px;\n' +
+' -webkit-border-radius: 5px;\n' +
+'}\n' +
+'h2 {\n' +
+'	font-size: 14px;\n' +
+'	background-color: #333;\n' +
+'}\n' +
+'h3 {\n' +
+'	font-size: 12px;\n' +
+'	margin-left: 10px;\n' +
+'	background-color: #666;\n' +
+'}\n' +
+'.id {\n' +
+'	font-size: 10px;\n' +
+'	padding: 2px 5px 2px 5px;\n' +
+'}\n' +
+'.effort {\n' +
+'	color: black;\n' +
+'	font-size: 11px;\n' +
+' font-weight: normal !important;\n' +
+' font-style: normal !important;\n' +
+'	border: 1px solid gray;\n' +
+'	padding: 0px 5px 0px 5px;\n' +
+' -moz-border-radius: 7px;\n' +
+' -webkit-border-radius: 7px;\n' +
+'}\n' +
+'p, center, pre {\n' +
+'	font-size: 12px;\n' +
+'	margin-top: -2px;\n' +
+'	margin-left: 25px;\n' +
+'}\n' +
+'</style>\n' +
+'</head>\n';
+
+
 /** @static
   
   @extends SC.ObjectController
@@ -131,12 +176,12 @@ Tasks.exportDataController = SC.ObjectController.create(
     if(!selectedProject) return false;
     
     var ret = '';
-    if(format === 'HTML') ret += '<html>\n<body>\n';
+    if(format === 'HTML') ret += '<html>\n' + Tasks.HEADER_STYLE + '<body>\n';
     
-    if(format === 'HTML') ret += '<p>';
+    if(format === 'HTML') ret += '<center>';
     else ret += '# ';
     ret += "_TasksExportTimestamp".loc() + new Date().format('hh:mm:ss a MMM dd, yyyy');
-    if(format === 'HTML') ret += '</p>';
+    if(format === 'HTML') ret += '</center>';
     else ret += '\n';
     ret += '\n';
     

@@ -383,14 +383,19 @@ CoreTasks.Task = CoreTasks.Record.extend({
     
     var ret = '';
     if(format === 'HTML') {
-      ret += '<p><small><span style="border: 1px solid ';
+      ret += '<p><span class="id" style="border: 1px solid ';
       switch(validation) {
-        case CoreTasks.TASK_VALIDATION_UNTESTED: ret += 'black;color:black;background-color:white;'; break;
+        case CoreTasks.TASK_VALIDATION_UNTESTED: ret += 'gray;color:black;background-color:white;'; break;
         case CoreTasks.TASK_VALIDATION_PASSED: ret += 'green;color:white;background-color:green;'; break;
         case CoreTasks.TASK_VALIDATION_FAILED: ret += 'red;color:white;background-color:red;'; break;
       }
-      ret += '">&nbsp' + this.get('displayId') + '&nbsp</span>&nbsp';
-      ret += '<span style="color:white;background-color:black;">' + type.loc() + '</span></small>&nbsp<span style="';
+      ret += '">' + this.get('displayId') + '</span>&nbsp;<span style="color:';
+      switch(type) {
+        case CoreTasks.TASK_TYPE_FEATURE: ret += 'black;background-color:yellow;"> F '; break;
+        case CoreTasks.TASK_TYPE_BUG: ret += 'white;background-color:red;"> B '; break;
+        case CoreTasks.TASK_TYPE_OTHER: ret += 'white;background-color:gray;"> O '; break;
+      }
+      ret += '</span>&nbsp;<span style="';
       switch(priority) {
         case CoreTasks.TASK_PRIORITY_HIGH: ret += 'font-weight:bold;'; break;
         case CoreTasks.TASK_PRIORITY_LOW: ret += 'font-style:italic;'; break;
@@ -414,7 +419,13 @@ CoreTasks.Task = CoreTasks.Record.extend({
     
     ret += this.get('name');
     var effort = this.get('effort');
-    if(effort) ret += (' {' + CoreTasks.displayTime(effort) + '}');
+    if(effort) {
+      if(format === 'HTML') ret += '&nbsp;<span class="effort">';
+      else ret += ' {';
+      ret += CoreTasks.displayTime(effort);
+      if(format === 'HTML') ret += '</span>';
+      else ret += '}';
+    }
     
     if(format === 'Text') {
       var submitter = this.get('submitter');
