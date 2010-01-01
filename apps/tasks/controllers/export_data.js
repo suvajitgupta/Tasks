@@ -42,7 +42,7 @@ Tasks.HEADER_STYLE = '<head>\n' +
 ' -moz-border-radius: 7px;\n' +
 ' -webkit-border-radius: 7px;\n' +
 '}\n' +
-'p, center, pre {\n' +
+'p, pre {\n' +
 '	font-size: 11px;\n' +
 '	margin-top: -2px;\n' +
 '	margin-left: 25px;\n' +
@@ -164,8 +164,15 @@ Tasks.exportDataController = SC.ObjectController.create(
       var tasksCount = assignmentNode.get('tasksCount');
       if(format === 'HTML') ret += '<h3>';
       else ret += '\n# ';
-      ret += assignmentNode.get('displayName').loc() + ' # ' + "_Has".loc() + tasksCount + "_Tasks".loc();
-      if(format === 'HTML') ret += '</h3>';
+      ret += assignmentNode.get('displayName').loc();
+      if(format === 'HTML') {
+        var finishedEffort = assignmentNode.get('finishedEffort');
+        if(finishedEffort) ret += '&nbsp;<span class="badge">' + finishedEffort + '</span>';
+        var displayEffort = assignmentNode.get('displayEffort');
+        if(displayEffort) ret += '&nbsp;<span class="badge">' + displayEffort + '</span>';
+        ret += '</h3>';
+      }
+      else ret += ' # ' + "_Has".loc() + tasksCount + "_Tasks".loc();
       ret += '\n';
       if(tasks) {
         for(var j=0; j < tasksCount; j++) {
@@ -193,10 +200,10 @@ Tasks.exportDataController = SC.ObjectController.create(
     var ret = '';
     if(format === 'HTML') ret += '<html>\n' + Tasks.HEADER_STYLE + '<body>\n';
     
-    if(format === 'HTML') ret += '<center>';
+    if(format === 'HTML') ret += '<p>';
     else ret += '# ';
     ret += "_TasksExportTimestamp".loc() + new Date().format('hh:mm:ss a MMM dd, yyyy');
-    if(format === 'HTML') ret += '</center>';
+    if(format === 'HTML') ret += '</p>';
     else ret += '\n';
     ret += '\n';
     
