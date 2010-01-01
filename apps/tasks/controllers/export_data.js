@@ -10,7 +10,6 @@ Tasks.HEADER_STYLE = '<head>\n' +
 'body {\n' +
 '	font-family: "Lucida Sans","Lucida Grande",Verdana,Arial,sans-serif;\n' +
 '	font-style: normal;\n' +
-'  background-color: #fafafa;\n' +
 '}\n' +
 'h2, h3 {\n' +
 '	padding: 4px 6px 4px 6px;\n' +
@@ -20,7 +19,7 @@ Tasks.HEADER_STYLE = '<head>\n' +
 '}\n' +
 'h2 {\n' +
 '	font-size: 14px;\n' +
-'	background-color: #333;\n' +
+'	background-color: black;\n' +
 '}\n' +
 'h3 {\n' +
 '	font-size: 11px;\n' +
