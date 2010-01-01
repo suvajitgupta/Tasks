@@ -19,21 +19,22 @@ Tasks.HEADER_STYLE = '<head>\n' +
 ' -webkit-border-radius: 5px;\n' +
 '}\n' +
 'h2 {\n' +
-'	font-size: 15px;\n' +
+'	font-size: 14px;\n' +
 '	background-color: #333;\n' +
 '}\n' +
 'h3 {\n' +
-'	font-size: 12px;\n' +
+'	font-size: 11px;\n' +
 '	margin-left: 10px;\n' +
-'	background-color: #555;\n' +
+'	background-color: #666;\n' +
 '}\n' +
 '.id {\n' +
-'	font-size: 10px;\n' +
+'	font-size: 9px;\n' +
 '	padding: 2px 5px 2px 5px;\n' +
 '}\n' +
-'.effort {\n' +
+'.badge {\n' +
 '	color: black;\n' +
-'	font-size: 11px;\n' +
+'	background-color: white;\n' +
+'	font-size: 10px;\n' +
 ' font-weight: normal !important;\n' +
 ' font-style: normal !important;\n' +
 '	border: 1px solid gray;\n' +
@@ -42,7 +43,7 @@ Tasks.HEADER_STYLE = '<head>\n' +
 ' -webkit-border-radius: 7px;\n' +
 '}\n' +
 'p, center, pre {\n' +
-'	font-size: 12px;\n' +
+'	font-size: 11px;\n' +
 '	margin-top: -2px;\n' +
 '	margin-left: 25px;\n' +
 '}\n' +
@@ -62,12 +63,26 @@ Tasks.exportDataController = SC.ObjectController.create(
 
   data: '',
   
-  openPanel: function(){
-    var panel = Tasks.getPath('exportDataPage.panel');
-    if(panel) panel.append();
+  /**
+   * Show exported data in a popup panel or new window - based on format.
+   *
+   * @param {String} format in which data was exported.
+   */
+  showExportedData: function(format) {
+    if(format === 'HTML') {
+      var win = window.open(null, "_Export".loc());
+      if(win) {
+        win.document.write(this.data);
+    		win.document.close();
+      }
+    }
+    else {
+      var panel = Tasks.getPath('exportDataPage.panel');
+      if(panel) panel.append();
+    }
   },
 
-  closePanel: function(){
+  closePanel: function() {
     var panel = Tasks.getPath('exportDataPage.panel');
     if(panel) {
       panel.remove();
@@ -197,7 +212,7 @@ Tasks.exportDataController = SC.ObjectController.create(
     if(format === 'HTML') ret += '</body>\n</html>\n';
     this.set('data', ret);
     
-    Tasks.exportDataController.openPanel();
+    Tasks.exportDataController.showExportedData(format);
     
   },
   

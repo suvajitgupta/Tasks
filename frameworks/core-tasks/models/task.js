@@ -418,9 +418,10 @@ CoreTasks.Task = CoreTasks.Record.extend({
     }
     
     ret += this.get('name');
+    
     var effort = this.get('effort');
     if(effort) {
-      if(format === 'HTML') ret += '&nbsp;<span class="effort">';
+      if(format === 'HTML') ret += '&nbsp;<span class="badge">';
       else ret += ' {';
       ret += CoreTasks.displayTime(effort);
       if(format === 'HTML') ret += '</span>';

@@ -164,15 +164,22 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
     if(format === 'HTML') ret += '<h2>';
     
     if(projectName === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) {
-      ret += '# ' + "_Has".loc() + tasksCount + ' ' + "_Unallocated".loc() + "_Tasks".loc();
+      if(format === 'Text') ret += '# ';
+      ret += "_Unallocated".loc();
     }
     else {
       ret += projectName;
       var timeLeft = this.get('timeLeft');
-      if(timeLeft) ret += (' {' + CoreTasks.displayTime(timeLeft) + '}');
-      ret += ' # ' + "_Has".loc() + tasksCount + "_Tasks".loc();
+      if(timeLeft) {
+        if(format === 'HTML') ret += '&nbsp;<span class="badge">';
+        else ret += ' {';
+        ret += CoreTasks.displayTime(timeLeft);
+        if(format === 'HTML') ret += '</span>';
+        else ret += '}';
+      }
     }
     if(format === 'HTML') ret += '</h2>';
+    else ret += ' # ' + "_Has".loc() + tasksCount + "_Tasks".loc();
     
     var val = this.get('description');
     if(val) {
