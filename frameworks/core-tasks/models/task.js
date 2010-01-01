@@ -377,15 +377,30 @@ CoreTasks.Task = CoreTasks.Record.extend({
   exportData: function(format) {
     
     var priority = this.get('priority');
+    var developmentStatus = this.get('developmentStatus');
+    var validation = this.get('validation');
+    var type = this.get('type');
     
     var ret = '';
     if(format === 'HTML') {
-      ret += '<p style="';
-      switch(priority) {
-        case CoreTasks.TASK_PRIORITY_HIGH: ret += 'font-weight: bold;'; break;
-        case CoreTasks.TASK_PRIORITY_LOW: ret += 'font-style: italic;'; break;
+      ret += '<p><span style="border: 1px solid ';
+      switch(validation) {
+        case CoreTasks.TASK_VALIDATION_UNTESTED: ret += 'black;color:black;background-color:white;'; break;
+        case CoreTasks.TASK_VALIDATION_PASSED: ret += 'green;color:white;background-color:green;'; break;
+        case CoreTasks.TASK_VALIDATION_FAILED: ret += 'red;color:white;background-color:red;'; break;
       }
-      ret += '">' + this.get('displayId') + ' ';
+      ret += '"><small>&nbsp' + this.get('displayId') + '&nbsp</small></span>&nbsp';
+      ret += '<span style="color:white;background-color:black;">' + type.loc() + '</span>&nbsp<span style="';
+      switch(priority) {
+        case CoreTasks.TASK_PRIORITY_HIGH: ret += 'font-weight:bold;'; break;
+        case CoreTasks.TASK_PRIORITY_LOW: ret += 'font-style:italic;'; break;
+      }
+      switch(developmentStatus) {
+        case CoreTasks.TASK_STATUS_ACTIVE: ret += 'color:blue;'; break;
+        case CoreTasks.TASK_STATUS_DONE: ret += 'color:green;'; break;
+        case CoreTasks.TASK_STATUS_RISKY: ret += 'color:red;'; break;
+      }
+      ret += '">';
     }
     else{
       var val;
@@ -401,22 +416,20 @@ CoreTasks.Task = CoreTasks.Record.extend({
     var effort = this.get('effort');
     if(effort) ret += (' {' + CoreTasks.displayTime(effort) + '}');
     
-    var submitter = this.get('submitter');
-    if (submitter) ret += ' <' + submitter.get('loginName') + '>';
+    if(format === 'Text') {
+      var submitter = this.get('submitter');
+      if (submitter) ret += ' <' + submitter.get('loginName') + '>';
     
-    var assignee = this.get('assignee');
-    if (assignee) ret += ' [' + assignee.get('loginName') + ']';
+      var assignee = this.get('assignee');
+      if (assignee) ret += ' [' + assignee.get('loginName') + ']';
     
-    var type = this.get('type');
-    if(type !== CoreTasks.TASK_TYPE_OTHER) ret += ' $' + type.loc();
+      if(type !== CoreTasks.TASK_TYPE_OTHER) ret += ' $' + type.loc();
     
-    var developmentStatus = this.get('developmentStatus');
-    if(developmentStatus !== CoreTasks.TASK_STATUS_PLANNED) ret += ' @' + developmentStatus.loc();
+      if(developmentStatus !== CoreTasks.TASK_STATUS_PLANNED) ret += ' @' + developmentStatus.loc();
+      if(validation !== CoreTasks.TASK_VALIDATION_UNTESTED) ret += ' %' + validation.loc();
+    }
     
-    var validation = this.get('validation');
-    if(validation !== CoreTasks.TASK_VALIDATION_UNTESTED) ret += ' %' + validation.loc();
-    
-    if(format === 'HTML') ret += '</p>';
+    if(format === 'HTML') ret += '</span></p>';
     else if(this.get('id') > 0) ret += ' ' + this.get('displayId');
     
     val = this.get('description');
