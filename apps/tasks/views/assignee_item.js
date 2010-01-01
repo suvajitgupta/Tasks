@@ -32,7 +32,7 @@ Tasks.AssigneeItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       context.addClass('assignee-item');
       
       var tasksCount = content.get('tasksCount');
-      var assigneeTooltip = "_Has".loc() + tasksCount + "_Tasks".loc();
+      var assigneeTooltip = "_Has".loc() + tasksCount + "_tasks".loc();
       
       var loadingTooltip = '';
       var loading = content.get('loading');
@@ -60,7 +60,7 @@ Tasks.AssigneeItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
         var failedTasksCount = content.get('failedTasksCount');
         if(riskyTasksCount > 0 || failedTasksCount > 0) {
           var riskyTooltip = "_Has".loc() + riskyTasksCount + ' ' + "_Risky".loc() +
-                             ' & ' + failedTasksCount + ' ' + "_Failed".loc() + "_Tasks".loc();
+                             ' & ' + failedTasksCount + ' ' + "_Failed".loc() + "_tasks".loc();
           context.begin('div').addClass('sc-view').addClass('assignee-red-flag').begin('img').attr({
             src: SC.BLANK_IMAGE_URL,
             title: riskyTooltip,

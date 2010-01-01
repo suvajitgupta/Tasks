@@ -176,8 +176,8 @@ Tasks.mainPage = SC.Page.design({
           layout: { centerY: 0, centerX: -40, height: 24, width: 130},
           classNames: ['toolbar-label'],
           items: [
-            { title: "_DisplayModeTeam".loc(), value: Tasks.DISPLAY_MODE_TEAM },
-            { title: "_DisplayModeTasks".loc(), value: Tasks.DISPLAY_MODE_TASKS }
+            { title: "_Team".loc(), value: Tasks.DISPLAY_MODE_TEAM },
+            { title: "_Tasks".loc(), value: Tasks.DISPLAY_MODE_TASKS }
           ],
           itemTitleKey: 'title',
           itemValueKey: 'value',

@@ -42,7 +42,7 @@ Tasks.SummaryView = SC.View.extend(
         summary += redFlags + "_RedFlags".loc();
       }
       else { // display mode === Tasks.DISPLAY_MODE_TASKS
-        summary += tasksCount + "_Tasks".loc();
+        summary += tasksCount + "_tasks".loc();
       }
     }
     

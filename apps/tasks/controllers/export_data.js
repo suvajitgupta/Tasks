@@ -6,7 +6,8 @@
 sc_require('core');
 
 // TODO: [SG/MG] Beta: Tasks HTML Export refinements: show type icon, align project badge with text, use tables to align columns?
-Tasks.HEADER_STYLE = '<head>\n' + 
+Tasks.HEADER_STYLE = '<head>\n' +
+'<title>' + "_Tasks".loc() + ' ' + "_Export".loc() + '</title>\n' +
 '<style type="text/css">\n' +
 'body {\n' +
 '	font-family: "Lucida Sans","Lucida Grande",Verdana,Arial,sans-serif;\n' +
@@ -70,7 +71,7 @@ Tasks.exportDataController = SC.ObjectController.create(
    */
   showExportedData: function(format) {
     if(format === 'HTML') {
-      var win = window.open(null, "_Export".loc());
+      var win = window.open('Tasks');
       if(win) {
         win.document.write(this.data);
     		win.document.close();
@@ -181,7 +182,7 @@ Tasks.exportDataController = SC.ObjectController.create(
         if(displayEffort) ret += '&nbsp;<span class="badge">' + displayEffort + '</span>';
         ret += '</h3>';
       }
-      else ret += ' # ' + "_Has".loc() + tasksCount + "_Tasks".loc();
+      else ret += ' # ' + "_Has".loc() + tasksCount + "_tasks".loc();
       ret += '\n';
       if(tasks) {
         for(var j=0; j < tasksCount; j++) {
