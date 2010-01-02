@@ -39,8 +39,8 @@ Tasks.HEADER_STYLE = '<head>\n' +
 '	color: black;\n' +
 '	background-color: white;\n' +
 '	font-size: 10px;\n' +
-' font-weight: normal !important;\n' +
-' font-style: normal !important;\n' +
+' font-weight: normal;\n' +
+' font-style: normal;\n' +
 '	border: 1px solid gray;\n' +
 '	padding: 0px 7px 0px 7px;\n' +
 ' -moz-border-radius: 7px;\n' +

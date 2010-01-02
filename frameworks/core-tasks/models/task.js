@@ -418,6 +418,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
     }
     
     ret += this.get('name');
+    if(format === 'HTML') ret += '</span>';
     
     var effort = this.get('effort');
     if(effort) {
@@ -428,7 +429,8 @@ CoreTasks.Task = CoreTasks.Record.extend({
       else ret += '}';
     }
     
-    if(format === 'Text') {
+    if(format === 'HTML')  ret += '</p>';
+    else {
       var submitter = this.get('submitter');
       if (submitter) ret += ' <' + submitter.get('loginName') + '>';
     
@@ -439,10 +441,9 @@ CoreTasks.Task = CoreTasks.Record.extend({
     
       if(developmentStatus !== CoreTasks.TASK_STATUS_PLANNED) ret += ' @' + developmentStatus.loc();
       if(validation !== CoreTasks.TASK_VALIDATION_UNTESTED) ret += ' %' + validation.loc();
+      
+      if(this.get('id') > 0) ret += ' ' + this.get('displayId');
     }
-    
-    if(format === 'HTML') ret += '</span></p>';
-    else if(this.get('id') > 0) ret += ' ' + this.get('displayId');
     
     val = this.get('description');
     if(val) {
