@@ -41,7 +41,7 @@ Tasks.HEADER_STYLE = '<head>\n' +
 '	text-align: center;\n' +
 '	width: 32px;\n' +
 '	font-size: 9px;\n' +
-'	padding: 1px 5px;\n' +
+'	padding: 1px 4px;\n' +
 '}\n' +
 '.untested {\n' +
 '	border: 1px solid gray;\n' +
@@ -98,7 +98,8 @@ Tasks.HEADER_STYLE = '<head>\n' +
 '.risky {\n' +
 '	color: red;\n' +
 '}\n' +
-'.time {\n' +
+'.time, .finished {\n' +
+'	position: absolute;\n' +
 '	color: black;\n' +
 '	background-color: white;\n' +
 '	font-size: 10px;\n' +
@@ -109,13 +110,19 @@ Tasks.HEADER_STYLE = '<head>\n' +
 ' -webkit-border-radius: 7px;\n' +
 ' opacity: 0.85;\n' +
 '}\n' +
+'.time {\n' +
+'	right: 10px;\n' +
+'}\n' +
+'.finished {\n' +
+'	right: 125px;\n' +
+'}\n' +
 '</style>\n' +
 '</head>\n' +
 '<body>\n' +
 '<center>\n' +
-'PRIORITY: <span class="high">High</span>, <span class="medium">Medium</span>, <span class="low">Low</span>;\n' +
-'&nbsp;&nbsp;&nbsp;STATUS: <span class="planned">Planned</span>, <span class="active">Active</span>, <span class="done">Done</span>, <span class="risky">Risky</span>;\n' +
-'&nbsp;&nbsp;&nbsp;VALIDATION: <span class="untested">Untested</span>, <span class="passed">Passed</span>, <span class="failed">Failed</span>\n' +
+'<strong>PRIORITY:</strong> <span class="high">High</span>, <span class="medium">Medium</span>, <span class="low">Low</span>;\n' +
+'&nbsp;&nbsp;&nbsp;<strong>STATUS:</strong> <span class="planned">Planned</span>, <span class="active">Active</span>, <span class="done">Done</span>, <span class="risky">Risky</span>;\n' +
+'&nbsp;&nbsp;&nbsp;<strong>VALIDATION:</strong> <span class="untested">Untested</span>, <span class="passed">Passed</span>, <span class="failed">Failed</span>\n' +
 '</center>\n' +
 '<hr>\n';
 
@@ -245,7 +252,7 @@ Tasks.exportDataController = SC.ObjectController.create(
       ret += assignmentNode.get('displayName').loc();
       if(format === 'HTML') {
         var finishedEffort = assignmentNode.get('finishedEffort');
-        if(finishedEffort) ret += '&nbsp;<span class="time">' + finishedEffort + '</span>';
+        if(finishedEffort) ret += '&nbsp;<span class="finished">' + finishedEffort + '</span>';
         var displayEffort = assignmentNode.get('displayEffort');
         if(displayEffort) ret += '&nbsp;<span class="time">' + displayEffort + '</span>';
         ret += '</h3>';
