@@ -113,10 +113,11 @@ Tasks.HEADER_STYLE = '<head>\n' +
 '</head>\n' +
 '<body>\n' +
 '<center>\n' +
-'&nbsp;PRIORITY: <span class="high">High</span>, <span class="medium">Medium</span>, <span class="low">Low</span>;\n' +
-'&nbsp;STATUS: <span class="planned">Planned</span>, <span class="active">Active</span>, <span class="done">Done</span>, <span class="risky">Risky</span>;\n' +
-'&nbsp;VALIDATION: <span class="untested">Untested</span>, <span class="passed">Passed</span>, <span class="failed">Failed</span>\n' +
-'</center>\n';
+'PRIORITY: <span class="high">High</span>, <span class="medium">Medium</span>, <span class="low">Low</span>;\n' +
+'&nbsp;&nbsp;&nbsp;STATUS: <span class="planned">Planned</span>, <span class="active">Active</span>, <span class="done">Done</span>, <span class="risky">Risky</span>;\n' +
+'&nbsp;&nbsp;&nbsp;VALIDATION: <span class="untested">Untested</span>, <span class="passed">Passed</span>, <span class="failed">Failed</span>\n' +
+'</center>\n' +
+'<hr>\n';
 
 
 /** @static
