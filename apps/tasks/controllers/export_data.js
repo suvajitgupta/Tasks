@@ -31,16 +31,18 @@ Tasks.HEADER_STYLE = '<head>\n' +
 '	margin-top: -2px;\n' +
 '	margin-left: 25px;\n' +
 '}\n' +
-'.id {\n' +
+'.prefix {\n' +
+'	display: inline-block;\n' +
+'	text-align: center;\n' +
+'	width: 32px;\n' +
 '	font-size: 9px;\n' +
-'	padding: 2px 5px 2px 5px;\n' +
+'	padding: 1px 5px 1px 5px;\n' +
 '}\n' +
-'.badge {\n' +
+'.postfix {\n' +
 '	color: black;\n' +
 '	background-color: white;\n' +
 '	font-size: 10px;\n' +
 ' font-weight: normal;\n' +
-' font-style: normal;\n' +
 '	border: 1px solid gray;\n' +
 '	padding: 0px 7px 0px 7px;\n' +
 ' -moz-border-radius: 7px;\n' +
@@ -176,9 +178,9 @@ Tasks.exportDataController = SC.ObjectController.create(
       ret += assignmentNode.get('displayName').loc();
       if(format === 'HTML') {
         var finishedEffort = assignmentNode.get('finishedEffort');
-        if(finishedEffort) ret += '&nbsp;<span class="badge">' + finishedEffort + '</span>';
+        if(finishedEffort) ret += '&nbsp;<span class="postfix">' + finishedEffort + '</span>';
         var displayEffort = assignmentNode.get('displayEffort');
-        if(displayEffort) ret += '&nbsp;<span class="badge">' + displayEffort + '</span>';
+        if(displayEffort) ret += '&nbsp;<span class="postfix">' + displayEffort + '</span>';
         ret += '</h3>';
       }
       else ret += ' # ' + "_Has".loc() + tasksCount + "_tasks".loc();

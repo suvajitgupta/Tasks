@@ -383,17 +383,17 @@ CoreTasks.Task = CoreTasks.Record.extend({
     
     var ret = '';
     if(format === 'HTML') {
-      ret += '<p><span class="id" style="border: 1px solid ';
+      ret += '<p><span class="prefix" style="border: 1px solid ';
       switch(validation) {
         case CoreTasks.TASK_VALIDATION_UNTESTED: ret += 'gray;color:black;background-color:white;'; break;
         case CoreTasks.TASK_VALIDATION_PASSED: ret += 'green;color:white;background-color:green;'; break;
         case CoreTasks.TASK_VALIDATION_FAILED: ret += 'red;color:white;background-color:red;'; break;
       }
-      ret += '">' + this.get('displayId') + '</span>&nbsp;<span class="badge" style="';
+      ret += '">' + this.get('displayId') + '</span>&nbsp;<span class="prefix" style="border: 1px solid ';
       switch(type) {
-        case CoreTasks.TASK_TYPE_FEATURE: ret += 'background-color:yellow'; break;
-        case CoreTasks.TASK_TYPE_BUG: ret += 'background-color:orange'; break;
-        case CoreTasks.TASK_TYPE_OTHER: ret += 'background-color:silver'; break;
+        case CoreTasks.TASK_TYPE_FEATURE: ret += 'yellow;background-color:yellow'; break;
+        case CoreTasks.TASK_TYPE_BUG: ret += 'orange;background-color:orange'; break;
+        case CoreTasks.TASK_TYPE_OTHER: ret += 'silver;background-color:silver'; break;
       }
       ret += ';">' + type.loc() + '</span>&nbsp;<span style="';
       switch(priority) {
@@ -422,7 +422,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
     
     var effort = this.get('effort');
     if(effort) {
-      if(format === 'HTML') ret += '&nbsp;<span class="badge">';
+      if(format === 'HTML') ret += '&nbsp;<span class="postfix">';
       else ret += ' {';
       ret += CoreTasks.displayTime(effort);
       if(format === 'HTML') ret += '</span>';
