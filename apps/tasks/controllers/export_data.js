@@ -11,6 +11,7 @@ Tasks.HEADER_STYLE = '<head>\n' +
 'body {\n' +
 '	font-family: "Lucida Sans","Lucida Grande",Verdana,Arial,sans-serif;\n' +
 '	font-style: normal;\n' +
+'	font-size: 11px;\n' +
 '}\n' +
 'h2, h3 {\n' +
 '	padding: 3px 6px;\n' +
@@ -28,9 +29,12 @@ Tasks.HEADER_STYLE = '<head>\n' +
 '	margin-left: 10px;\n' +
 '}\n' +
 'p, pre {\n' +
-'	font-size: 11px;\n' +
-'	margin-top: -2px;\n' +
+'	margin-top: -5px;\n' +
 '	margin-left: 25px;\n' +
+'	border-color: silver;\n' +
+'	border-width: 1px;\n' +
+'	border-bottom-style: dotted;\n' +
+'	padding-bottom: 2px;\n' +
 '}\n' +
 '.id, .type {\n' +
 '	display: inline-block;\n' +
@@ -108,11 +112,11 @@ Tasks.HEADER_STYLE = '<head>\n' +
 '</style>\n' +
 '</head>\n' +
 '<body>\n' +
-'<p>\n' +
+'<center>\n' +
 '&nbsp;PRIORITY: <span class="high">High</span>, <span class="medium">Medium</span>, <span class="low">Low</span>;\n' +
 '&nbsp;STATUS: <span class="planned">Planned</span>, <span class="active">Active</span>, <span class="done">Done</span>, <span class="risky">Risky</span>;\n' +
 '&nbsp;VALIDATION: <span class="untested">Untested</span>, <span class="passed">Passed</span>, <span class="failed">Failed</span>\n' +
-'</p>\n';
+'</center>\n';
 
 
 /** @static
@@ -273,10 +277,10 @@ Tasks.exportDataController = SC.ObjectController.create(
     var ret = '';
     if(format === 'HTML') ret += '<html>\n' + Tasks.HEADER_STYLE;
     
-    if(format === 'HTML') ret += '<p>';
+    if(format === 'HTML') ret += '<center>';
     else ret += '# ';
     ret += "_TasksExportTimestamp".loc() + new Date().format('hh:mm:ss a MMM dd, yyyy');
-    if(format === 'HTML') ret += '</p>';
+    if(format === 'HTML') ret += '</center>';
     else ret += '\n';
     ret += '\n';
     
