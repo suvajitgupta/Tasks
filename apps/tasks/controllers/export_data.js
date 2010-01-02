@@ -71,7 +71,7 @@ Tasks.exportDataController = SC.ObjectController.create(
    */
   showExportedData: function(format) {
     if(format === 'HTML') {
-      var win = window.open('Tasks');
+      var win = window.open();
       if(win) {
         win.document.write(this.data);
     		win.document.close();

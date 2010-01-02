@@ -142,7 +142,6 @@ v Add hotkeys for common operations (like add Projects/Tasks and Save) [EG] <SG>
 Server
 ^ Build persistence server using Persevere [SE] <SG> @Done %Passed
 - Create command-line scripts to start/stop Server and to create users <SG> [SE] $Feature @Done %Passed
-- Beta: Document steps for creating a team production deployment of Tasks [SE] <SG> @Active
 - Beta: Implement Server-based user authentication [JH2] <SG> @Active
 - Beta: Implement Server-based RBAC (role-based access control) <SG> [JH2] @Active
 - Beta: Add email notifications on noteworthy changes [JH2] <SG> $Feature @Active
