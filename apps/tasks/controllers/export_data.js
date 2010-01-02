@@ -37,9 +37,10 @@ Tasks.HEADER_STYLE = '<head>\n' +
 '	padding-bottom: 2px;\n' +
 '}\n' +
 'pre {\n' +
+' white-space: pre-wrap;\n' +
+' word-wrap: break-word;\n' +
 '	margin-top: -10px;\n' +
 '	margin-left: 115px;\n' +
-' white-space: pre-wrap;\n' +
 ' background-color: beige;\n' +
 '}\n' +
 '.id, .type {\n' +
