@@ -171,7 +171,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
       ret += projectName;
       var timeLeft = this.get('timeLeft');
       if(timeLeft) {
-        if(format === 'HTML') ret += '&nbsp;<span class="postfix">';
+        if(format === 'HTML') ret += '&nbsp;<span class="time">';
         else ret += ' {';
         ret += CoreTasks.displayTime(timeLeft);
         if(format === 'HTML') ret += '</span>';

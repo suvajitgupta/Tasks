@@ -13,13 +13,14 @@ Tasks.HEADER_STYLE = '<head>\n' +
 '	font-style: normal;\n' +
 '}\n' +
 'h2, h3 {\n' +
-'	padding: 4px 6px 4px 6px;\n' +
+'	padding: 3px 6px;\n' +
 '	color: white;\n' +
 ' -moz-border-radius: 5px;\n' +
 ' -webkit-border-radius: 5px;\n' +
 '}\n' +
 'h2 {\n' +
 '	font-size: 14px;\n' +
+'	border: 1px solid black;\n' +
 '	background-color: black;\n' +
 '}\n' +
 'h3 {\n' +
@@ -31,20 +32,75 @@ Tasks.HEADER_STYLE = '<head>\n' +
 '	margin-top: -2px;\n' +
 '	margin-left: 25px;\n' +
 '}\n' +
-'.prefix {\n' +
+'.id, .type {\n' +
 '	display: inline-block;\n' +
 '	text-align: center;\n' +
 '	width: 32px;\n' +
 '	font-size: 9px;\n' +
-'	padding: 1px 5px 1px 5px;\n' +
+'	padding: 1px 5px;\n' +
 '}\n' +
-'.postfix {\n' +
+'.untested {\n' +
+'	border: 1px solid gray;\n' +
+'	color: black;\n' +
+'	background-color: white;\n' +
+'}\n' +
+'.not-loaded {\n' +
+'	border: 1px solid gray;\n' +
+'	color: white;\n' +
+'	background-color: gray;\n' +
+'}\n' +
+'.properly-loaded {\n' +
+'	border: 1px solid blue;\n' +
+'	color: white;\n' +
+'	background-color: blue;\n' +
+'}\n' +
+'.passed, .under-loaded {\n' +
+'	border: 1px solid green;\n' +
+'	color: white;\n' +
+'	background-color: green;\n' +
+'}\n' +
+'.failed, .overloaded {\n' +
+'	border: 1px solid red;\n' +
+'	color: white;\n' +
+'	background-color: red;\n' +
+'}\n' +
+'.feature {\n' +
+'	border: 1px solid yellow;\n' +
+'	color: black;\n' +
+'	background-color: yellow;\n' +
+'}\n' +
+'.bug {\n' +
+'	border: 1px solid orange;\n' +
+'	color: black;\n' +
+'	background-color: orange;\n' +
+'}\n' +
+'.other {\n' +
+'	border: 1px solid silver;\n' +
+'	color: black;\n' +
+'	background-color: silver;\n' +
+'}\n' +
+'.high {\n' +
+'	font-weight: bold;\n' +
+'}\n' +
+'.low {\n' +
+'	font-style: italic;\n' +
+'}\n' +
+'.active {\n' +
+'	color: blue;\n' +
+'}\n' +
+'.done {\n' +
+'	color: green;\n' +
+'}\n' +
+'.risky {\n' +
+'	color: red;\n' +
+'}\n' +
+'.time {\n' +
 '	color: black;\n' +
 '	background-color: white;\n' +
 '	font-size: 10px;\n' +
 ' font-weight: normal;\n' +
-'	border: 1px solid gray;\n' +
-'	padding: 0px 7px 0px 7px;\n' +
+' border: 1px solid gray;\n' +
+'	padding: 0px 7px;\n' +
 ' -moz-border-radius: 7px;\n' +
 ' -webkit-border-radius: 7px;\n' +
 ' opacity: 0.85;\n' +
@@ -165,22 +221,22 @@ Tasks.exportDataController = SC.ObjectController.create(
       var tasks = assignmentNode.get('treeItemChildren');
       var tasksCount = assignmentNode.get('tasksCount');
       if(format === 'HTML') {
-        ret += '<h3 style="background-color:';
+        ret += '<h3 class="';
         switch(assignmentNode.get('loading')) {
-          case CoreTasks.USER_NOT_LOADED: ret += 'gray'; break;
-          case CoreTasks.USER_UNDER_LOADED: ret += 'green'; break;
-          case CoreTasks.USER_PROPERLY_LOADED: ret += 'blue'; break;
-          case CoreTasks.USER_OVER_LOADED: ret += 'red'; break;
+          case CoreTasks.USER_NOT_LOADED: ret += 'not-loaded'; break;
+          case CoreTasks.USER_UNDER_LOADED: ret += 'under-loaded'; break;
+          case CoreTasks.USER_PROPERLY_LOADED: ret += 'properly-loaded'; break;
+          case CoreTasks.USER_OVER_LOADED: ret += 'overloaded'; break;
         }
-        ret += ';">';
+        ret += '">';
       }
       else ret += '\n# ';
       ret += assignmentNode.get('displayName').loc();
       if(format === 'HTML') {
         var finishedEffort = assignmentNode.get('finishedEffort');
-        if(finishedEffort) ret += '&nbsp;<span class="postfix">' + finishedEffort + '</span>';
+        if(finishedEffort) ret += '&nbsp;<span class="time">' + finishedEffort + '</span>';
         var displayEffort = assignmentNode.get('displayEffort');
-        if(displayEffort) ret += '&nbsp;<span class="postfix">' + displayEffort + '</span>';
+        if(displayEffort) ret += '&nbsp;<span class="time">' + displayEffort + '</span>';
         ret += '</h3>';
       }
       else ret += ' # ' + "_Has".loc() + tasksCount + "_tasks".loc();

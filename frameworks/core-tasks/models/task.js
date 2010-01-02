@@ -383,29 +383,9 @@ CoreTasks.Task = CoreTasks.Record.extend({
     
     var ret = '';
     if(format === 'HTML') {
-      ret += '<p><span class="prefix" style="border: 1px solid ';
-      switch(validation) {
-        case CoreTasks.TASK_VALIDATION_UNTESTED: ret += 'gray;color:black;background-color:white;'; break;
-        case CoreTasks.TASK_VALIDATION_PASSED: ret += 'green;color:white;background-color:green;'; break;
-        case CoreTasks.TASK_VALIDATION_FAILED: ret += 'red;color:white;background-color:red;'; break;
-      }
-      ret += '">' + this.get('displayId') + '</span>&nbsp;<span class="prefix" style="border: 1px solid ';
-      switch(type) {
-        case CoreTasks.TASK_TYPE_FEATURE: ret += 'yellow;background-color:yellow'; break;
-        case CoreTasks.TASK_TYPE_BUG: ret += 'orange;background-color:orange'; break;
-        case CoreTasks.TASK_TYPE_OTHER: ret += 'silver;background-color:silver'; break;
-      }
-      ret += ';">' + type.loc() + '</span>&nbsp;<span style="';
-      switch(priority) {
-        case CoreTasks.TASK_PRIORITY_HIGH: ret += 'font-weight:bold;'; break;
-        case CoreTasks.TASK_PRIORITY_LOW: ret += 'font-style:italic;'; break;
-      }
-      switch(developmentStatus) {
-        case CoreTasks.TASK_STATUS_ACTIVE: ret += 'color:blue;'; break;
-        case CoreTasks.TASK_STATUS_DONE: ret += 'color:green;'; break;
-        case CoreTasks.TASK_STATUS_RISKY: ret += 'color:red;'; break;
-      }
-      ret += '">';
+      ret += '<p><span class="id ' + validation.loc().toLowerCase() + '">' + this.get('displayId') + '</span>';
+      ret += '&nbsp;<span class="type ' + type.loc().toLowerCase() + '">' + type.loc() + '</span>';
+      ret += '&nbsp;<span class="' + priority.loc().toLowerCase() + ' ' + developmentStatus.loc().toLowerCase() + '">';
     }
     else{
       var val;
@@ -422,7 +402,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
     
     var effort = this.get('effort');
     if(effort) {
-      if(format === 'HTML') ret += '&nbsp;<span class="postfix">';
+      if(format === 'HTML') ret += '&nbsp;<span class="time">';
       else ret += ' {';
       ret += CoreTasks.displayTime(effort);
       if(format === 'HTML') ret += '</span>';
