@@ -49,6 +49,11 @@ Tasks.HEADER_STYLE = '<head>\n' +
 '	font-size: 9px;\n' +
 '	padding: 1px 4px;\n' +
 '}\n' +
+'.type {\n' +
+'	border: 1px solid gray;\n' +
+' -moz-border-radius: 15px;\n' +
+' -webkit-border-radius: 15px;\n' +
+'}\n' +
 '.untested {\n' +
 '	border: 1px solid gray;\n' +
 '	color: black;\n' +
@@ -75,17 +80,14 @@ Tasks.HEADER_STYLE = '<head>\n' +
 '	background-color: red;\n' +
 '}\n' +
 '.feature {\n' +
-'	border: 1px solid yellow;\n' +
 '	color: black;\n' +
 '	background-color: yellow;\n' +
 '}\n' +
 '.bug {\n' +
-'	border: 1px solid coral;\n' +
 '	color: black;\n' +
 '	background-color: coral;\n' +
 '}\n' +
 '.other {\n' +
-'	border: 1px solid silver;\n' +
 '	color: black;\n' +
 '	background-color: silver;\n' +
 '}\n' +
