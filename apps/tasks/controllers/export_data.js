@@ -28,7 +28,7 @@ Tasks.HEADER_STYLE = '<head>\n' +
 '	font-size: 11px;\n' +
 '	margin-left: 10px;\n' +
 '}\n' +
-'p, pre {\n' +
+'p {\n' +
 '	margin-top: -5px;\n' +
 '	margin-left: 25px;\n' +
 '	border-color: silver;\n' +
@@ -37,7 +37,10 @@ Tasks.HEADER_STYLE = '<head>\n' +
 '	padding-bottom: 2px;\n' +
 '}\n' +
 'pre {\n' +
+'	margin-top: -10px;\n' +
+'	margin-left: 115px;\n' +
 ' white-space: pre-wrap;\n' +
+' background-color: beige;\n' +
 '}\n' +
 '.id, .type {\n' +
 '	display: inline-block;\n' +
@@ -52,9 +55,9 @@ Tasks.HEADER_STYLE = '<head>\n' +
 '	background-color: white;\n' +
 '}\n' +
 '.not-loaded {\n' +
-'	border: 1px solid gray;\n' +
+'	border: 1px solid dimGray;\n' +
 '	color: white;\n' +
-'	background-color: gray;\n' +
+'	background-color: dimGray;\n' +
 '}\n' +
 '.properly-loaded {\n' +
 '	border: 1px solid blue;\n' +
@@ -77,9 +80,9 @@ Tasks.HEADER_STYLE = '<head>\n' +
 '	background-color: yellow;\n' +
 '}\n' +
 '.bug {\n' +
-'	border: 1px solid orange;\n' +
+'	border: 1px solid coral;\n' +
 '	color: black;\n' +
-'	background-color: orange;\n' +
+'	background-color: coral;\n' +
 '}\n' +
 '.other {\n' +
 '	border: 1px solid silver;\n' +
