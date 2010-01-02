@@ -5,7 +5,6 @@
 
 sc_require('core');
 
-// TODO: [SG/MG] Beta: Tasks HTML Export refinements: show type icon, align project badge with text, use tables to align columns?
 Tasks.HEADER_STYLE = '<head>\n' +
 '<title>' + "_Tasks".loc() + ' ' + "_Export".loc() + '</title>\n' +
 '<style type="text/css">\n' +
