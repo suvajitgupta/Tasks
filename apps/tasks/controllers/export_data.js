@@ -36,6 +36,9 @@ Tasks.HEADER_STYLE = '<head>\n' +
 '	border-bottom-style: dotted;\n' +
 '	padding-bottom: 2px;\n' +
 '}\n' +
+'pre {\n' +
+' white-space: pre-wrap;\n' +
+'}\n' +
 '.id, .type {\n' +
 '	display: inline-block;\n' +
 '	text-align: center;\n' +
