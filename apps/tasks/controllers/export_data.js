@@ -106,7 +106,13 @@ Tasks.HEADER_STYLE = '<head>\n' +
 ' opacity: 0.85;\n' +
 '}\n' +
 '</style>\n' +
-'</head>\n';
+'</head>\n' +
+'<body>\n' +
+'<p>\n' +
+'&nbsp;PRIORITY: <span class="high">High</span>, <span class="medium">Medium</span>, <span class="low">Low</span>;\n' +
+'&nbsp;STATUS: <span class="planned">Planned</span>, <span class="active">Active</span>, <span class="done">Done</span>, <span class="risky">Risky</span>;\n' +
+'&nbsp;VALIDATION: <span class="untested">Untested</span>, <span class="passed">Passed</span>, <span class="failed">Failed</span>\n' +
+'</p>\n';
 
 
 /** @static
@@ -265,7 +271,7 @@ Tasks.exportDataController = SC.ObjectController.create(
     if(!selectedProject) return false;
     
     var ret = '';
-    if(format === 'HTML') ret += '<html>\n' + Tasks.HEADER_STYLE + '<body>\n';
+    if(format === 'HTML') ret += '<html>\n' + Tasks.HEADER_STYLE;
     
     if(format === 'HTML') ret += '<p>';
     else ret += '# ';
