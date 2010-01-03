@@ -31,7 +31,7 @@
 }
 
 .display-mode-helper {
-  background: static_url('images/no-tasks-helper.png') no-repeat 37% 5px;
+  background: static_url('images/no-tasks-helper.png') no-repeat 33% 5px;
 /*
 // TODO: [SG] switch to proper helper image from MG;
 */

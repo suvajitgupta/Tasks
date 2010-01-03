@@ -118,10 +118,6 @@ Tasks.mixin({
         // Based on user's role set up appropriate task filter
         var role = currentUser.get('role');
         
-        // Set "Team" display mode for Managers
-        Tasks.assignmentsController.set('displayMode',
-          role === CoreTasks.USER_ROLE_MANAGER? Tasks.DISPLAY_MODE_TEAM : Tasks.DISPLAY_MODE_TASKS);
-        
         if(role === CoreTasks.USER_ROLE_DEVELOPER) { // Set assignee selection filter to current user
           Tasks.assignmentsController.set('assigneeSelection', this.loginName);
         }

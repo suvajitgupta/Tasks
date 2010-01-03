@@ -55,8 +55,8 @@ Tasks.attributeFilterShowstoppers = [
   CoreTasks.TASK_VALIDATION_FAILED
 ];
 
-Tasks.DISPLAY_MODE_TEAM = false;
 Tasks.DISPLAY_MODE_TASKS = true;
+Tasks.DISPLAY_MODE_TEAM = false;
 
 Tasks.assignmentsController = SC.ArrayController.create(
 /** @scope Tasks.assignmentsController.prototype */ {
