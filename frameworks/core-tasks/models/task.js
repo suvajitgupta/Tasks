@@ -555,17 +555,23 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
     
     // extract task validation
     var taskValidation = fillDefaults? CoreTasks.TASK_VALIDATION_UNTESTED : null;
-    var taskValidationMatches = /%(\w+)/.exec(taskLine);
+    var taskValidationMatches = taskLine.match(/%(\w+)/g);
     if(taskValidationMatches) {
-      if(CoreTasks.taskValidationsAllowed.indexOf('_' + taskValidationMatches[1]) === -1) {
-        console.log('Task Parsing Error - illegal validation: ' + taskValidationMatches[1]);
+      if(taskValidationMatches.length === 1) {
+        var validation = taskValidationMatches[0].slice(1);
+        if(CoreTasks.taskValidationsAllowed.indexOf('_' + validation) === -1) {
+          console.log('Task Parsing Error - illegal validation: ' + validation);
+        }
+        else {
+          taskValidation = '_' + validation;
+          if((taskStatus === null || taskStatus !== CoreTasks.TASK_STATUS_DONE) && taskValidation !== CoreTasks.TASK_VALIDATION_UNTESTED) {
+            taskValidation = null;
+            console.log('Task Parsing Error - validation of Passed/Failed only possible for status Done: ' + taskName);
+          }
+        }
       }
       else {
-        taskValidation = '_' + taskValidationMatches[1];
-        if(taskStatus && taskStatus !== CoreTasks.TASK_STATUS_DONE && taskValidation !== CoreTasks.TASK_VALIDATION_UNTESTED) {
-          taskValidation = null;
-          console.log('Task Parsing Error - validation of Passed/Failed only possible for status Done: ' + taskName);
-        }
+        console.log('Task Parsing Error - multiple validations illegal: ' + taskValidationMatches);
       }
     }
     
