@@ -459,7 +459,8 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
     
     var taskEffort = null;
     
-    if(line.match(/\{/g).length === 1) {
+    var matches = line.match(/\{/g);
+    if(matches === null || matches.length === 1) {
       var taskEffortMatches = /\{(\d+\.\d+-\d+\.\d+|\d+\.\d+-\d+|\d+-\d+\.\d+|\d+-\d+|\d+\.\d+|\d+)(|d|h)\}/.exec(line);
       if(taskEffortMatches) {
         taskEffort = taskEffortMatches[1];
