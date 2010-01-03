@@ -518,32 +518,44 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
     }
     
     // extract task type
-    var taskTypeMatches = /\$([\w]+)/.exec(taskLine);
     var taskType = fillDefaults? CoreTasks.TASK_TYPE_OTHER : null;
+    var taskTypeMatches = taskLine.match(/\$(\w+)/g);
     if(taskTypeMatches) {
-      if(CoreTasks.taskTypesAllowed.indexOf('_' + taskTypeMatches[1]) === -1) {
-        console.log('Task Parsing Error - illegal type: ' + taskTypeMatches[1]);
+      if(taskTypeMatches.length === 1) {
+        var type = taskTypeMatches[0].slice(1);
+        if(CoreTasks.taskTypesAllowed.indexOf('_' + type) === -1) {
+          console.log('Task Parsing Error - illegal type: ' + type);
+        }
+        else {
+          taskType = '_' + type;
+        }
       }
       else {
-        taskType = '_' + taskTypeMatches[1];
+        console.log('Task Parsing Error - multiple types illegal: ' + taskTypeMatches);
       }
     }
     
     // extract task development status
-    var taskStatusMatches = /@([\w]+)/.exec(taskLine);
     var taskStatus = fillDefaults? CoreTasks.TASK_STATUS_PLANNED : null;
+    var taskStatusMatches = taskLine.match(/@(\w+)/g);
     if(taskStatusMatches) {
-      if(CoreTasks.taskStatusesAllowed.indexOf('_' + taskStatusMatches[1]) === -1) {
-        console.log('Task Parsing Error - illegal status: ' + taskStatusMatches[1]);
+      if(taskStatusMatches.length === 1) {
+        var status = taskStatusMatches[0].slice(1);
+        if(CoreTasks.taskStatusesAllowed.indexOf('_' + status) === -1) {
+          console.log('Task Parsing Error - illegal status: ' + status);
+        }
+        else {
+          taskStatus = '_' + status;
+        }
       }
       else {
-        taskStatus = '_' + taskStatusMatches[1];
+        console.log('Task Parsing Error - multiple statuses illegal: ' + taskStatusMatches);
       }
     }
     
     // extract task validation
-    var taskValidationMatches = /%([\w]+)/.exec(taskLine);
     var taskValidation = fillDefaults? CoreTasks.TASK_VALIDATION_UNTESTED : null;
+    var taskValidationMatches = /%(\w+)/.exec(taskLine);
     if(taskValidationMatches) {
       if(CoreTasks.taskValidationsAllowed.indexOf('_' + taskValidationMatches[1]) === -1) {
         console.log('Task Parsing Error - illegal validation: ' + taskValidationMatches[1]);
