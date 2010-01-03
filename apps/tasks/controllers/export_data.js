@@ -9,121 +9,121 @@ Tasks.HEADER_STYLE = '<head>\n' +
 '<title>' + "_Tasks".loc() + ' ' + "_Export".loc() + '</title>\n' +
 '<style type="text/css">\n' +
 'body {\n' +
-'	font-family: "Lucida Sans","Lucida Grande",Verdana,Arial,sans-serif;\n' +
-'	font-style: normal;\n' +
-'	font-size: 11px;\n' +
+' font-family: "Lucida Sans","Lucida Grande",Verdana,Arial,sans-serif;\n' +
+' font-style: normal;\n' +
+' font-size: 11px;\n' +
 '}\n' +
 'h1, h2 {\n' +
-'	padding: 3px 6px;\n' +
-'	color: white;\n' +
+' padding: 3px 6px;\n' +
+' color: white;\n' +
 ' -moz-border-radius: 5px;\n' +
 ' -webkit-border-radius: 5px;\n' +
 '}\n' +
 'h1 {\n' +
-'	font-size: 14px;\n' +
-'	border: 1px solid black;\n' +
-'	background-color: black;\n' +
+' font-size: 14px;\n' +
+' border: 1px solid black;\n' +
+' background-color: black;\n' +
 '}\n' +
 'h2 {\n' +
-'	font-size: 11px;\n' +
-'	margin-left: 10px;\n' +
+' font-size: 11px;\n' +
+' margin-left: 10px;\n' +
 '}\n' +
 'p {\n' +
-'	margin-top: -5px;\n' +
-'	margin-left: 25px;\n' +
-'	border-color: silver;\n' +
-'	border-width: 1px;\n' +
-'	border-bottom-style: dotted;\n' +
-'	padding-bottom: 2px;\n' +
+' margin-top: -5px;\n' +
+' margin-left: 25px;\n' +
+' border-color: silver;\n' +
+' border-width: 1px;\n' +
+' border-bottom-style: dotted;\n' +
+' padding-bottom: 2px;\n' +
 '}\n' +
 'pre {\n' +
 ' white-space: pre-wrap;\n' +
 ' word-wrap: break-word;\n' +
-'	margin-top: -10px;\n' +
-'	margin-left: 115px;\n' +
+' margin-top: -10px;\n' +
+' margin-left: 115px;\n' +
 ' background-color: beige;\n' +
 '}\n' +
 '.id, .type {\n' +
-'	display: inline-block;\n' +
-'	text-align: center;\n' +
-'	width: 32px;\n' +
-'	font-size: 9px;\n' +
-'	padding: 1px 4px;\n' +
+' display: inline-block;\n' +
+' text-align: center;\n' +
+' width: 32px;\n' +
+' font-size: 9px;\n' +
+' padding: 1px 4px;\n' +
 '}\n' +
 '.type {\n' +
-'	border: 1px solid gray;\n' +
+' border: 1px solid gray;\n' +
 ' -moz-border-radius: 15px;\n' +
 ' -webkit-border-radius: 15px;\n' +
 '}\n' +
 '.untested {\n' +
-'	border: 1px solid gray;\n' +
-'	color: black;\n' +
-'	background-color: white;\n' +
+' border: 1px solid gray;\n' +
+' color: black;\n' +
+' background-color: white;\n' +
 '}\n' +
 '.not-loaded {\n' +
-'	border: 1px solid dimGray;\n' +
-'	color: white;\n' +
-'	background-color: dimGray;\n' +
+' border: 1px solid dimGray;\n' +
+' color: white;\n' +
+' background-color: dimGray;\n' +
 '}\n' +
 '.properly-loaded {\n' +
-'	border: 1px solid blue;\n' +
-'	color: white;\n' +
-'	background-color: blue;\n' +
+' border: 1px solid blue;\n' +
+' color: white;\n' +
+' background-color: blue;\n' +
 '}\n' +
 '.passed, .under-loaded {\n' +
-'	border: 1px solid green;\n' +
-'	color: white;\n' +
-'	background-color: green;\n' +
+' border: 1px solid green;\n' +
+' color: white;\n' +
+' background-color: green;\n' +
 '}\n' +
 '.failed, .overloaded {\n' +
-'	border: 1px solid red;\n' +
-'	color: white;\n' +
-'	background-color: red;\n' +
+' border: 1px solid red;\n' +
+' color: white;\n' +
+' background-color: red;\n' +
 '}\n' +
 '.feature {\n' +
-'	color: black;\n' +
-'	background-color: yellow;\n' +
+' color: black;\n' +
+' background-color: yellow;\n' +
 '}\n' +
 '.bug {\n' +
-'	color: black;\n' +
-'	background-color: coral;\n' +
+' color: black;\n' +
+' background-color: coral;\n' +
 '}\n' +
 '.other {\n' +
-'	color: black;\n' +
-'	background-color: silver;\n' +
+' color: black;\n' +
+' background-color: silver;\n' +
 '}\n' +
 '.high {\n' +
-'	font-weight: bold;\n' +
+' font-weight: bold;\n' +
 '}\n' +
 '.low {\n' +
-'	font-style: italic;\n' +
+' font-style: italic;\n' +
 '}\n' +
 '.active {\n' +
-'	color: blue;\n' +
+' color: blue;\n' +
 '}\n' +
 '.done {\n' +
-'	color: green;\n' +
+' color: green;\n' +
 '}\n' +
 '.risky {\n' +
-'	color: red;\n' +
+' color: red;\n' +
 '}\n' +
 '.time, .total {\n' +
-'	position: absolute;\n' +
-'	color: black;\n' +
-'	background-color: white;\n' +
-'	font-size: 10px;\n' +
+' position: absolute;\n' +
+' color: black;\n' +
+' background-color: white;\n' +
+' font-size: 10px;\n' +
 ' font-weight: normal;\n' +
 ' border: 1px solid gray;\n' +
-'	padding: 0px 7px;\n' +
+' padding: 0px 7px;\n' +
 ' -moz-border-radius: 7px;\n' +
 ' -webkit-border-radius: 7px;\n' +
 ' opacity: 0.85;\n' +
 '}\n' +
 '.time {\n' +
-'	right: 10px;\n' +
+' right: 10px;\n' +
 '}\n' +
 '.total {\n' +
-'	right: 125px;\n' +
+' right: 125px;\n' +
 '}\n' +
 '</style>\n' +
 '</head>\n' +
