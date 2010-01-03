@@ -503,16 +503,18 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
 
     // extract task assignee
     var taskAssignee = null;
-    var taskAssigneeMatches = /\[([\w]+)\]/.exec(taskLine);
+    var taskAssigneeMatches = taskLine.match(/\[[\w\s]+\]/g);
     if(taskAssigneeMatches) {
-      taskAssignee = taskAssigneeMatches[1];
+      if(taskAssigneeMatches.length === 1) taskAssignee = taskAssigneeMatches[0].slice(1, taskAssigneeMatches[0].length-1);
+      else console.log('Task Parsing Error - multiple assignees illegal: ' + taskAssigneeMatches);
     }
     
     // extract task submitter
     var taskSubmitter = null;
-    var taskSubmitterMatches = /\<([\w]+)\>/.exec(taskLine);
+    var taskSubmitterMatches = taskLine.match(/\<[\w\s]+\>/g);
     if(taskSubmitterMatches) {
-      taskSubmitter = taskSubmitterMatches[1];
+      if(taskSubmitterMatches.length === 1) taskSubmitter = taskSubmitterMatches[0].slice(1, taskSubmitterMatches[0].length-1);
+      else console.log('Task Parsing Error - multiple submitters illegal: ' + taskSubmitterMatches);
     }
     
     // extract task type
