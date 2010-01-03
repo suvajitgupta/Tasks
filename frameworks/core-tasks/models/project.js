@@ -231,13 +231,22 @@ CoreTasks.Project.mixin(/** @scope CoreTasks.Project */ {
    * @returns {String} project time left.
    */
   parseTimeLeft: function(line) {
+    
     var projectTimeLeft = null;
-    var projectTimeLeftMatches = /\{(\d+\.\d+|\d+)(|d|h)\}/.exec(line);
-    if(projectTimeLeftMatches) {
-      projectTimeLeft = projectTimeLeftMatches[1];
-      if(projectTimeLeftMatches[2]) projectTimeLeft += projectTimeLeftMatches[2]; // append provided time unit
+    
+    if(line.match(/\{/g).length === 1) {
+      var projectTimeLeftMatches = /\{(\d+\.\d+|\d+)(|d|h)\}/.exec(line);
+      if(projectTimeLeftMatches) {
+        projectTimeLeft = projectTimeLeftMatches[1];
+        if(projectTimeLeftMatches[2]) projectTimeLeft += projectTimeLeftMatches[2]; // append provided time unit
+      }
     }
+    else {
+      console.log('Project Parsing Error - multiple timeLefts illegal');
+    }
+    
     return projectTimeLeft;
+    
   },
 
   /**

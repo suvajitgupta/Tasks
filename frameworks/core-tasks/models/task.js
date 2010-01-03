@@ -456,12 +456,20 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
    * @returns {String} Task effort (number or range).
    */
   parseEffort: function(line) {
+    
     var taskEffort = null;
-    var taskEffortMatches = /\{(\d+\.\d+-\d+\.\d+|\d+\.\d+-\d+|\d+-\d+\.\d+|\d+-\d+|\d+\.\d+|\d+)(|d|h)\}/.exec(line);
-    if(taskEffortMatches) {
-      taskEffort = taskEffortMatches[1];
-      if(taskEffortMatches[2]) taskEffort += taskEffortMatches[2];
+    
+    if(line.match(/\{/g).length === 1) {
+      var taskEffortMatches = /\{(\d+\.\d+-\d+\.\d+|\d+\.\d+-\d+|\d+-\d+\.\d+|\d+-\d+|\d+\.\d+|\d+)(|d|h)\}/.exec(line);
+      if(taskEffortMatches) {
+        taskEffort = taskEffortMatches[1];
+        if(taskEffortMatches[2]) taskEffort += taskEffortMatches[2];
+      }
     }
+    else {
+      console.log('Task Parsing Error - multiple efforts illegal');
+    }
+    
     return taskEffort;
   },
 
