@@ -234,7 +234,8 @@ CoreTasks.Project.mixin(/** @scope CoreTasks.Project */ {
     
     var projectTimeLeft = null;
     
-    if(line.match(/\{/g).length === 1) {
+    var matches = line.match(/\{/g);
+    if(matches === null || matches.length === 1) {
       var projectTimeLeftMatches = /\{(\d+\.\d+|\d+)(|d|h)\}/.exec(line);
       if(projectTimeLeftMatches) {
         projectTimeLeft = projectTimeLeftMatches[1];
@@ -257,7 +258,7 @@ CoreTasks.Project.mixin(/** @scope CoreTasks.Project */ {
    */
   parse: function(line) {
     
-    var projectName = '';
+    var projectName = line;
     var projectNameMatches = line.match(/^([^\{\#]+)/);
     if(projectNameMatches) {
       projectName = projectNameMatches[1].replace(/\s+$/, ''); // trim trailing whitespace, if any

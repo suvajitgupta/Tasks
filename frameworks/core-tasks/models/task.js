@@ -501,7 +501,7 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
     
     // extract task name
     var taskNameMatches = /(^[^\{<\[\$@%]+)/.exec(taskLine);
-    var taskName = '';
+    var taskName = taskLine;
     if (taskNameMatches) {
       taskName = taskNameMatches[1].replace(/\s+$/, '');
     }
