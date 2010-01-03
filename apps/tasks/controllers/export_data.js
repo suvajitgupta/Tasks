@@ -13,18 +13,18 @@ Tasks.HEADER_STYLE = '<head>\n' +
 '	font-style: normal;\n' +
 '	font-size: 11px;\n' +
 '}\n' +
-'h2, h3 {\n' +
+'h1, h2 {\n' +
 '	padding: 3px 6px;\n' +
 '	color: white;\n' +
 ' -moz-border-radius: 5px;\n' +
 ' -webkit-border-radius: 5px;\n' +
 '}\n' +
-'h2 {\n' +
+'h1 {\n' +
 '	font-size: 14px;\n' +
 '	border: 1px solid black;\n' +
 '	background-color: black;\n' +
 '}\n' +
-'h3 {\n' +
+'h2 {\n' +
 '	font-size: 11px;\n' +
 '	margin-left: 10px;\n' +
 '}\n' +
@@ -107,7 +107,7 @@ Tasks.HEADER_STYLE = '<head>\n' +
 '.risky {\n' +
 '	color: red;\n' +
 '}\n' +
-'.time, .finished {\n' +
+'.time, .total {\n' +
 '	position: absolute;\n' +
 '	color: black;\n' +
 '	background-color: white;\n' +
@@ -122,7 +122,7 @@ Tasks.HEADER_STYLE = '<head>\n' +
 '.time {\n' +
 '	right: 10px;\n' +
 '}\n' +
-'.finished {\n' +
+'.total {\n' +
 '	right: 125px;\n' +
 '}\n' +
 '</style>\n' +
@@ -248,7 +248,7 @@ Tasks.exportDataController = SC.ObjectController.create(
       var tasks = assignmentNode.get('treeItemChildren');
       var tasksCount = assignmentNode.get('tasksCount');
       if(format === 'HTML') {
-        ret += '<h3 class="';
+        ret += '<h2 class="';
         switch(assignmentNode.get('loading')) {
           case CoreTasks.USER_NOT_LOADED: ret += 'not-loaded'; break;
           case CoreTasks.USER_UNDER_LOADED: ret += 'under-loaded'; break;
@@ -261,10 +261,10 @@ Tasks.exportDataController = SC.ObjectController.create(
       ret += assignmentNode.get('displayName').loc();
       if(format === 'HTML') {
         var finishedEffort = assignmentNode.get('finishedEffort');
-        if(finishedEffort) ret += '&nbsp;<span class="finished">' + finishedEffort + '</span>';
+        if(finishedEffort) ret += '&nbsp;<span class="total">' + finishedEffort + '</span>';
         var displayEffort = assignmentNode.get('displayEffort');
         if(displayEffort) ret += '&nbsp;<span class="time">' + displayEffort + '</span>';
-        ret += '</h3>';
+        ret += '</h2>';
       }
       else ret += ' # ' + "_Has".loc() + tasksCount + "_tasks".loc();
       ret += '\n';

@@ -161,7 +161,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
     var tasksCount = this.get('tasks').get('length');
     
     var ret = '';
-    if(format === 'HTML') ret += '<h2>';
+    if(format === 'HTML') ret += '<h1>';
     
     if(projectName === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) {
       if(format === 'Text') ret += '# ';
@@ -178,8 +178,11 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
         else ret += '}';
       }
     }
-    if(format === 'HTML') ret += '</h2>';
-    else ret += ' # ' + "_Has".loc() + tasksCount + "_Tasks".loc();
+    
+    if(format === 'HTML') ret += '<span class="total">';
+    else ret += ' # ';
+    ret += "_Has".loc() + tasksCount + "_tasks".loc();
+    if(format === 'HTML') ret += '</span></h2>';
     
     var val = this.get('description');
     if(val) {
