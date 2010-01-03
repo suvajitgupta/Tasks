@@ -1,5 +1,3 @@
-require 'proxy-patch'
-
 config :scui, :required => [:foundation, :calendar, :dashboard, :drawing, :linkit]
 config :'core-tasks', :required => [:sproutcore]
 config :tasks, :required => [:'core-tasks', :sproutcore, :scui]
