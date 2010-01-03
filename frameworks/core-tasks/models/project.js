@@ -248,8 +248,8 @@ CoreTasks.Project.mixin(/** @scope CoreTasks.Project */ {
    */
   parse: function(line) {
     
-    var projectName = line;
-    var projectNameMatches = line.match(/([^\{\#]+)/);
+    var projectName = '';
+    var projectNameMatches = line.match(/^([^\{\#]+)/);
     if(projectNameMatches) {
       projectName = projectNameMatches[1].replace(/\s+$/, ''); // trim trailing whitespace, if any
     }
