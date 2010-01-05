@@ -7,7 +7,18 @@ sc_require('core');
 
 Tasks.HEADER_STYLE = '<head>\n' +
 '<title>' + "_Tasks".loc() + ' ' + "_Export".loc() + '</title>\n' +
+'<script type="text/javascript">\n' +
+'<!--\n' +
+'var showDescriptions = false;\n' +
+'function toggleDescriptions() {\n' +
+' showDescriptions = !showDescriptions;\n' +
+' document.body.className = showDescriptions? "showDescriptions" : "";\n' +
+'}\n' +
+'//-->\n' +
+'</script>\n' +
 '<style type="text/css">\n' +
+'body pre { display:none }\n' +
+'body.showDescriptions pre { display:block }\n' +
 'body {\n' +
 ' font-family: "Lucida Sans","Lucida Grande",Verdana,Arial,sans-serif;\n' +
 ' font-style: normal;\n' +
@@ -132,8 +143,7 @@ Tasks.HEADER_STYLE = '<head>\n' +
 '<strong>PRIORITY:</strong> <span class="high">High</span>, <span class="medium">Medium</span>, <span class="low">Low</span>;\n' +
 '&nbsp;&nbsp;&nbsp;<strong>STATUS:</strong> <span class="planned">Planned</span>, <span class="active">Active</span>, <span class="done">Done</span>, <span class="risky">Risky</span>;\n' +
 '&nbsp;&nbsp;&nbsp;<strong>VALIDATION:</strong> <span class="untested">Untested</span>, <span class="passed">Passed</span>, <span class="failed">Failed</span>\n' +
-'</center>\n' +
-'<hr>\n';
+'<br><input type=checkbox onclick="toggleDescriptions()"/>Show descriptions&nbsp;&nbsp;&nbsp;\n';
 
 
 /** @static
@@ -294,10 +304,9 @@ Tasks.exportDataController = SC.ObjectController.create(
     var ret = '';
     if(format === 'HTML') ret += '<html>\n' + Tasks.HEADER_STYLE;
     
-    if(format === 'HTML') ret += '<center>';
-    else ret += '# ';
+    if(format === 'Text') ret += '# ';
     ret += "_TasksExportTimestamp".loc() + new Date().format('hh:mm:ss a MMM dd, yyyy');
-    if(format === 'HTML') ret += '</center>';
+    if(format === 'HTML') ret += '</center>\n';
     else ret += '\n';
     ret += '\n';
     
