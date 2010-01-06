@@ -54,6 +54,7 @@ Tasks.mixin( /** @scope Tasks */ {
     }
     else {
       // Enter the statechart.
+      Tasks.set('defaultProjectName', CoreTasks.ALL_TASKS_NAME.loc());
       Tasks.goState('a', 1);
       Tasks.authenticate('guest', '');
       Tasks.assignmentsController.set('searchFilter', params.IDs);
