@@ -49,7 +49,6 @@ Tasks.usersController = SC.ArrayController.create(SCUI.StatusChanged,
           this.set('editableUsers', [ currentUser ]);
         }
       }
-      // FIXME: [SC] Beta: see why editable users cannot be reset after logging in as a Manager and then logging out/back in as a non-Manaager
       // console.log("DEBUG: role of " + currentUser.get('role') + " should see #users = " + this.getPath('editableUsers.length'));
       Tasks.usersLoadSuccess();
     }
