@@ -5,7 +5,7 @@
 
 sc_require('core');
 
-Tasks.HEADER_STYLE = '<head>\n' +
+Tasks.EXPORT_HEADER = '<head>\n' +
 '<title>' + "_Tasks".loc() + ' ' + "_Export".loc() + '</title>\n' +
 '<script type="text/javascript">\n' +
 '<!--\n' +
@@ -143,7 +143,8 @@ Tasks.HEADER_STYLE = '<head>\n' +
 '<strong>PRIORITY:</strong> <span class="high">High</span>, <span class="medium">Medium</span>, <span class="low">Low</span>;\n' +
 '&nbsp;&nbsp;&nbsp;<strong>STATUS:</strong> <span class="planned">Planned</span>, <span class="active">Active</span>, <span class="done">Done</span>, <span class="risky">Risky</span>;\n' +
 '&nbsp;&nbsp;&nbsp;<strong>VALIDATION:</strong> <span class="untested">Untested</span>, <span class="passed">Passed</span>, <span class="failed">Failed</span>\n' +
-'<br><input type=checkbox onclick="toggleDescriptions()"/>Show descriptions&nbsp;&nbsp;&nbsp;\n';
+'</center><hr>\n' +
+'<input type=checkbox onclick="toggleDescriptions()"/>Show descriptions\n';
 
 
 /** @static
@@ -302,11 +303,12 @@ Tasks.exportDataController = SC.ObjectController.create(
     if(!selectedProject) return false;
     
     var ret = '';
-    if(format === 'HTML') ret += '<html>\n' + Tasks.HEADER_STYLE;
+    if(format === 'HTML') ret += '<html>\n' + Tasks.EXPORT_HEADER;
     
-    if(format === 'Text') ret += '# ';
-    ret += "_TasksExportTimestamp".loc() + new Date().format('hh:mm:ss a MMM dd, yyyy');
-    if(format === 'HTML') ret += '</center>\n';
+    if(format === 'HTML') ret += '<span class="time">';
+    else ret += '# ' + "_Tasks".loc() + ' ' + "_Export".loc() + ' ';
+    ret += new Date().format('hh:mm:ss a MMM dd, yyyy');
+    if(format === 'HTML') ret += '</span>\n';
     else ret += '\n';
     ret += '\n';
     
