@@ -50,7 +50,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 'pre {\n' +
 ' white-space: pre-wrap;\n' +
 ' word-wrap: break-word;\n' +
-' margin-top: -10px;\n' +
+' margin-top: -9px;\n' +
 ' margin-left: 115px;\n' +
 ' background-color: beige;\n' +
 '}\n' +
@@ -144,7 +144,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 '&nbsp;&nbsp;&nbsp;<strong>STATUS:</strong> <span class="planned">Planned</span>, <span class="active">Active</span>, <span class="done">Done</span>, <span class="risky">Risky</span>;\n' +
 '&nbsp;&nbsp;&nbsp;<strong>VALIDATION:</strong> <span class="untested">Untested</span>, <span class="passed">Passed</span>, <span class="failed">Failed</span>\n' +
 '</center><hr>\n' +
-'<input type=checkbox onclick="toggleDescriptions()"/>Show descriptions\n';
+'<input type=checkbox onclick="toggleDescriptions()"/>Show Descriptions\n';
 
 
 /** @static
