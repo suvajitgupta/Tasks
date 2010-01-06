@@ -51,17 +51,17 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' white-space: pre-wrap;\n' +
 ' word-wrap: break-word;\n' +
 ' margin-top: -9px;\n' +
-' margin-left: 115px;\n' +
+' margin-left: 120px;\n' +
 ' background-color: beige;\n' +
 '}\n' +
-'.id, .type {\n' +
+'.untested, .passed, .failed, .feature, .bug, .other {\n' +
 ' display: inline-block;\n' +
 ' text-align: center;\n' +
-' width: 32px;\n' +
+' width: 40px;\n' +
 ' font-size: 9px;\n' +
-' padding: 1px 4px;\n' +
+' padding: 1px 1px;\n' +
 '}\n' +
-'.type {\n' +
+'.feature, .bug, .other {\n' +
 ' border: 1px solid gray;\n' +
 ' -moz-border-radius: 15px;\n' +
 ' -webkit-border-radius: 15px;\n' +
@@ -140,9 +140,9 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 '</head>\n' +
 '<body>\n' +
 '<center>\n' +
-'<strong>PRIORITY:</strong> <span class="high">High</span>, <span class="medium">Medium</span>, <span class="low">Low</span>;\n' +
-'&nbsp;&nbsp;&nbsp;<strong>STATUS:</strong> <span class="planned">Planned</span>, <span class="active">Active</span>, <span class="done">Done</span>, <span class="risky">Risky</span>;\n' +
-'&nbsp;&nbsp;&nbsp;<strong>VALIDATION:</strong> <span class="untested">Untested</span>, <span class="passed">Passed</span>, <span class="failed">Failed</span>\n' +
+'<strong>PRIORITY:</strong> <span class="high">High</span> <span class="medium">Medium</span> <span class="low">Low</span>\n' +
+'&nbsp;&nbsp;&nbsp;<strong>STATUS:</strong> <span class="planned">Planned</span> <span class="active">Active</span> <span class="done">Done</span> <span class="risky">Risky</span>\n' +
+'&nbsp;&nbsp;&nbsp;<strong>VALIDATION:</strong> <span class="untested">Untested</span> <span class="passed">Passed</span> <span class="failed">Failed</span>\n' +
 '</center><hr>\n' +
 '<input type=checkbox onclick="toggleDescriptions()"/>Show Descriptions\n';
 

@@ -383,8 +383,8 @@ CoreTasks.Task = CoreTasks.Record.extend({
     
     var ret = '';
     if(format === 'HTML') {
-      ret += '<p><span class="id ' + validation.loc().toLowerCase() + '">' + this.get('displayId') + '</span>';
-      ret += '&nbsp;<span class="type ' + type.loc().toLowerCase() + '">' + type.loc() + '</span>';
+      ret += '<p><span class="' + validation.loc().toLowerCase() + '">' + this.get('displayId') + '</span>';
+      ret += '&nbsp;<span class="' + type.loc().toLowerCase() + '">' + type.loc() + '</span>';
       ret += '&nbsp;<span class="' + priority.loc().toLowerCase() + ' ' + developmentStatus.loc().toLowerCase() + '">';
     }
     else{
