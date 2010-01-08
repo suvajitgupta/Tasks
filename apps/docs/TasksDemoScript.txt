@@ -1,0 +1,14 @@
+Tasks - sample SproutCore application, agile project management tool, SproutCore issue tracker (Lighthouse replacement)
+
+Projects - adding/deleting/editing (inline/popup), All/Unallocated Tasks
+Tasks - adding/deleting/editing (inline/popup), attributes/workflow (type/priority/status/validation)
+
+Grouping - by assignee
+Sorting - by attributes
+Filtering - by assignee, attributes, or searching (text/IDs)
+
+Display Modes - Tasks/Team, red flags
+Load Balancing - assignee color coding
+
+Import/Export - Text/HTML
+Help - best practices
