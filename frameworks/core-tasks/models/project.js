@@ -179,7 +179,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
       }
     }
     
-    if(format === 'HTML') ret += '<span class="total">';
+    if(format === 'HTML') ret += '&nbsp;<span class="total">';
     else ret += ' # ';
     ret += "_Has".loc() + tasksCount + "_tasks".loc();
     if(format === 'HTML') ret += '</span></h1>';
