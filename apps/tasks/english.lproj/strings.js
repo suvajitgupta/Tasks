@@ -49,6 +49,8 @@ SC.stringsFor('English', {
   "_TasksSearchTooltip": "Separate #IDs via commas or spaces, otherwise perform case-insensitive search (a caret prefix will find items that don't match the search pattern)",
   
   // Popup Pane/Panel strings
+  "_CreateMissingUsers": "Create Missing Users",
+  "_CreateMissingUsersTooltip": "Automatically create new users for unknown assignees/submitters found during importing",
   "_ImportInstructions:": "Paste or type in text to be imported:<br>(see format on right)",
   "_FormatOnscreenHelp": "Project Name {TimeLeft}<br>- Task Name {Effort} &lt;Submitter&gt; [Assignee] $Type @Status %Validation<br>| Description (1 or more lines following a Project or Task)",
   "_QuickFilters": "QUICK FILTERS",

@@ -16,6 +16,7 @@ sc_require('core');
 Tasks.importDataController = SC.ObjectController.create(
 /** @scope Tasks.importDataController.prototype */ {
   
+    createMissingUsers: false,
     importData: '',
     
     openPanel: function(){
@@ -37,15 +38,14 @@ Tasks.importDataController = SC.ObjectController.create(
     
     /**
      * Parse data and create/load objects.
-     *
-     * @param {String} data to be parsed.
      */
     parseAndLoadData: function() {
       
-      var data = this.get('importData');
-      var lines = data.split('\n');
       var store = CoreTasks.get('store');
       var currentProject = null;
+      var createMissingUsers = this.get('createMissingUsers');
+      var importData = this.get('importData');
+      var lines = importData.split('\n');
       var description, nextLine, descriptionLine;
 
       for (var i = 0; i < lines.length; i++) {
@@ -66,6 +66,10 @@ Tasks.importDataController = SC.ObjectController.create(
             if (assigneeUser) {
               taskHash.assigneeId = assigneeUser.get('id');
             }
+            else if (createMissingUsers) {
+              assigneeUser = this._createUser(taskHash.assigneeId);
+              if(assigneeUser) taskHash.assigneeId = assigneeUser.get('id');
+            }
             else {
               console.log('Task Import Error - no such assignee: ' + taskHash.assigneeId);
               taskHash.assigneeId = null;
@@ -76,6 +80,10 @@ Tasks.importDataController = SC.ObjectController.create(
             var submitterUser = CoreTasks.getUser(taskHash.submitterId);
             if (submitterUser) {
               taskHash.submitterId = submitterUser.get('id');
+            }
+            else if (createMissingUsers) {
+              submitterUser = this._createUser(taskHash.submitterId);
+              if(submitterUser) taskHash.submitterId = submitterUser.get('id');
             }
             else {
               console.log('Task Import Error - no such submitter: ' + taskHash.submitterId);
@@ -157,5 +165,15 @@ Tasks.importDataController = SC.ObjectController.create(
       this.closePanel();
       Tasks.assignmentsController.showAssignments();
       
-    }    
+    },
+    
+    _createUser: function(name) {
+      console.log('Creating new user: ' + name);
+      SC.RunLoop.begin();
+      var userHash = SC.merge(SC.clone(CoreTasks.User.NEW_USER_HASH), { 'name': name, 'loginName': name });
+      var user = CoreTasks.createRecord(CoreTasks.User, userHash);
+      SC.RunLoop.end();
+      return user;
+    }
+    
 });

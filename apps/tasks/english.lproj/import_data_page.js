@@ -1,7 +1,7 @@
 // ==========================================================================
 // Tasks.importDataPage
 // ==========================================================================
-/*globals Tasks sc_require */
+/*globals Tasks sc_require SCUI */
 sc_require('core');
 
 /** @static
@@ -21,7 +21,7 @@ Tasks.importDataPage = SC.Page.create({
     
     contentView: SC.View.design({
       layout: { left: 0, right: 0, top: 0, bottom: 0},
-      childViews: 'titlebar sample format dataEntry importButton cancelButton'.w(),
+      childViews: 'titlebar sample format dataEntry createMissingUsersCheckbox importButton cancelButton'.w(),
       
       titlebar: SC.View.design(SC.Border, {
         layout: { left: 10, right: 10, top: 10, height: 35 },
@@ -52,6 +52,14 @@ Tasks.importDataPage = SC.Page.create({
         layout: { top: 95, left: 10, right: 10, bottom: 40 },
         isTextArea: YES,
         valueBinding: 'Tasks.importDataController.importData'
+      }),
+      
+      createMissingUsersCheckbox: SC.CheckboxView.design(SCUI.ToolTip, {
+        layout: { width: 175, height: 22, left: 10, bottom: 8 },
+        title: "_CreateMissingUsers".loc(),
+        toolTip: "_CreateMissingUsersTooltip".loc(),
+        valueBinding: 'Tasks.importDataController.createMissingUsers',
+        classNames: [ 'task-priority-high' ]
       }),
       
       importButton: SC.ButtonView.design({
