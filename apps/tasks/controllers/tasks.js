@@ -17,20 +17,32 @@ Tasks.tasksController = SC.TreeController.create(
   allowsEmptySelection: YES,
   treeItemIsGrouped: YES,
   
+  canGuestAddEditTask: function() {
+    if(CoreTasks.getPath('currentUser.role') === CoreTasks.USER_ROLE_GUEST) {
+      var selectedProjectName = Tasks.projectsController.getPath('selection.firstObject.name');
+      if (selectedProjectName !== CoreTasks.UNALLOCATED_TASKS_NAME.loc()) return false;
+    }
+    return true;
+  }.property().cacheable(),
+  
   isAddable: function() {
     
     if(Tasks.assignmentsController.get('displayMode') === Tasks.DISPLAY_MODE_TEAM) return false;
     
     if(!CoreTasks.getPath('permissions.canAddTask')) return false;
     
+    if(!this.canGuestAddEditTask()) return false;
+    
     return true;
     
-  }.property('selection').cacheable(),
+  }.property().cacheable(),
   
   isEditable: function() {
     
     if(!CoreTasks.getPath('permissions.canEditTask')) return false;
     
+    if(!this.canGuestAddEditTask()) return false;
+
     var sel = this.get('selection');
     if(!sel || sel.get('length') === 0) return false;
     
@@ -40,7 +52,8 @@ Tasks.tasksController = SC.TreeController.create(
   
   isDeletable: function() {
     
-    if(Tasks.assignmentsController.get('displayMode') === Tasks.DISPLAY_MODE_TEAM) return false
+    if(Tasks.assignmentsController.get('displayMode') === Tasks.DISPLAY_MODE_TEAM) return false;
+    
     if(!CoreTasks.getPath('permissions.canDeleteTask')) return false;
     
     var sel = this.get('selection');
@@ -54,11 +67,14 @@ Tasks.tasksController = SC.TreeController.create(
     
     if(!CoreTasks.getPath('permissions.canEditTask')) return false;
     
+    if(!this.canGuestAddEditTask()) return false;
+
     var sel = this.get('selection');
     if(!sel || sel.get('length') === 0) return false;
     
     var selectedTask = sel.firstObject();
     if(!selectedTask) return false;
+    
     return selectedTask.get('developmentStatus') === CoreTasks.TASK_STATUS_DONE;
     
   }.property('selection').cacheable(),

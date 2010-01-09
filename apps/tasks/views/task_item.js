@@ -101,7 +101,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
               objectsBinding: this._listUsers(),
               nameKey: 'displayName',
               valueKey: 'id',
-              isEnabledBinding: 'CoreTasks.permissions.canEditTask',
+              isEnabledBinding: 'Tasks.tasksController.isEditable',
               valueBinding: SC.binding('.content.submitterValue', this)
             }),
 
@@ -115,7 +115,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
               objectsBinding: this._listUsers(),
               nameKey: 'displayName',
               valueKey: 'id',
-              isEnabledBinding: 'CoreTasks.permissions.canEditTask',
+              isEnabledBinding: 'Tasks.tasksController.isEditable',
               valueBinding: SC.binding('.content.assigneeValue', this)
             }),
 
@@ -125,7 +125,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
             }),
             SC.TextFieldView.design({
               layout: { top: 47, left: 55, width: 80, height: 20 },
-              isEnabledBinding: 'CoreTasks.permissions.canEditTask',
+              isEnabledBinding: 'Tasks.tasksController.isEditable',
               valueBinding: SC.binding('.content.effortValue', this)
             }),
             SC.LabelView.design({
@@ -145,7 +145,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
               objectsBinding: this._listProjects(),
               nameKey: 'displayName',
               valueKey: 'id',
-              isEnabledBinding: 'CoreTasks.permissions.canEditTask',
+              isEnabledBinding: 'Tasks.tasksController.isEditable',
               valueBinding: SC.binding('.content.projectValue', this)
             }),
 
@@ -157,7 +157,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
               layout: { top: 98, left: 10, right: 10, bottom: 10 },
               hint: "_DescriptionHint".loc(),
               isTextArea: YES,
-              isEnabledBinding: 'CoreTasks.permissions.canEditTask',
+              isEnabledBinding: 'Tasks.tasksController.isEditable',
               valueBinding: SC.binding('.content.description', this)
             })
             
@@ -192,178 +192,191 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   
   _buildContextMenu: function() {
     
-    var ret = [];
+    var ret = [], needsSeparator = false;
     
     var sel = Tasks.tasksController.get('selection');
     var selectedTasksCount = sel? sel.get('length') : 0;
-    if(selectedTasksCount === 1) {
+    if(selectedTasksCount === 1 && Tasks.tasksController.isAddable()) {
+      needsSeparator = true;
       ret.push({
         title: "_Add".loc(),
         icon: 'add-icon',
-        isEnabled: CoreTasks.getPath('permissions.canAddTask'),
+        isEnabled: YES,
         target: 'Tasks',
         action: 'addTask'
       });
       ret.push({
         title: "_Duplicate".loc(),
         icon: 'task-duplicate-icon',
-        isEnabled: CoreTasks.getPath('permissions.canAddTask'),
+        isEnabled: YES,
         target: 'Tasks',
         action: 'duplicateTask'
       });
     }
     
-    ret.push({
-      title: "_Delete".loc(),
-      icon: 'delete-icon',
-      isEnabled: CoreTasks.getPath('permissions.canDeleteTask'),
-      target: 'Tasks',
-      action: 'deleteTask'
-    });
-    ret.push({
-      isSeparator: YES
-    });
-    
-    var type = Tasks.tasksController.get('type');
-    if(type !== CoreTasks.TASK_TYPE_FEATURE) {
+    if(selectedTasksCount > 0 && Tasks.tasksController.isDeletable()) {
+      needsSeparator = true;
       ret.push({
-        title: '<span class=task-type-feature>' + CoreTasks.TASK_TYPE_FEATURE.loc() + '</span>',
-        icon: 'task-icon-feature',
+        title: "_Delete".loc(),
+        icon: 'delete-icon',
         isEnabled: YES,
-        target: 'Tasks.tasksController',
-        action: 'setTypeFeature'
-      });
-    }
-    if(type !== CoreTasks.TASK_TYPE_BUG) {
-      ret.push({
-        title: '<span class=task-type-bug>' + CoreTasks.TASK_TYPE_BUG.loc() + '</span>',
-        icon: 'task-icon-bug',
-        isEnabled: YES,
-        target: 'Tasks.tasksController',
-        action: 'setTypeBug'
-      });
-    }
-    if(type !== CoreTasks.TASK_TYPE_OTHER) {
-      ret.push({
-        title: '<span class=task-type-other>' + CoreTasks.TASK_TYPE_OTHER.loc() + '</span>',
-        icon: 'task-icon-other',
-        isEnabled: YES,
-        target: 'Tasks.tasksController',
-        action: 'setTypeOther'
-      });
-    }
-    ret.push({
-      isSeparator: YES
-    });
-    
-    var priority = Tasks.tasksController.get('priority');
-    if(priority !== CoreTasks.TASK_PRIORITY_HIGH) {
-      ret.push({
-        title: '<span class=task-priority-high>' + CoreTasks.TASK_PRIORITY_HIGH.loc() + '</span>',
-        icon: sc_static('blank'),
-        isEnabled: YES,
-        target: 'Tasks.tasksController',
-        action: 'setPriorityHigh'
-      });
-    }
-    if(priority !== CoreTasks.TASK_PRIORITY_MEDIUM) {
-      ret.push({
-        title: '<span class=task-priority-medium>' + CoreTasks.TASK_PRIORITY_MEDIUM.loc() + '</span>',
-        icon: sc_static('blank'),
-        isEnabled: YES,
-        target: 'Tasks.tasksController',
-        action: 'setPriorityMedium'
-      });
-    }
-    if(priority !== CoreTasks.TASK_PRIORITY_LOW) {
-      ret.push({
-        title: '<span class=task-priority-low>' + CoreTasks.TASK_PRIORITY_LOW.loc() + '</span>',
-        icon: sc_static('blank'),
-        isEnabled: YES,
-        target: 'Tasks.tasksController',
-        action: 'setPriorityLow'
-      });
-    }
-    ret.push({
-      isSeparator: YES
-    });
-    
-    var developmentStatus = Tasks.tasksController.get('developmentStatusWithValidation');
-    if(developmentStatus !== CoreTasks.TASK_STATUS_PLANNED) {
-      ret.push({
-        title: '<span class=task-status-planned>' + CoreTasks.TASK_STATUS_PLANNED.loc() + '</span>',
-        icon: sc_static('blank'),
-        isEnabled: YES,
-        target: 'Tasks.tasksController',
-        action: 'setDevelopmentStatusPlanned'
-      });
-    }
-    if(developmentStatus !== CoreTasks.TASK_STATUS_ACTIVE) {
-      ret.push({
-        title: '<span class=task-status-active>' + CoreTasks.TASK_STATUS_ACTIVE.loc() + '</span>',
-        icon: sc_static('blank'),
-        isEnabled: YES,
-        target: 'Tasks.tasksController',
-        action: 'setDevelopmentStatusActive'
-      });
-    }
-    if(developmentStatus !== CoreTasks.TASK_STATUS_DONE) {
-      ret.push({
-        title: '<span class=task-status-done>' + CoreTasks.TASK_STATUS_DONE.loc() + '</span>',
-        icon: sc_static('blank'),
-        isEnabled: YES,
-        target: 'Tasks.tasksController',
-        action: 'setDevelopmentStatusDone'
-      });
-    }
-    if(developmentStatus !== CoreTasks.TASK_STATUS_RISKY) {
-      ret.push({
-        title: '<span class=task-status-risky>' + CoreTasks.TASK_STATUS_RISKY.loc() + '</span>',
-        icon: sc_static('blank'),
-        isEnabled: YES,
-        target: 'Tasks.tasksController',
-        action: 'setDevelopmentStatusRisky'
+        target: 'Tasks',
+        action: 'deleteTask'
       });
     }
     
-    if(developmentStatus === CoreTasks.TASK_STATUS_DONE) {
+    if (needsSeparator) {
+        ret.push({
+        isSeparator: YES
+      });
+    }
+    
+    needsSeparator = false;
+    if(Tasks.tasksController.isEditable()) {
+      needsSeparator = true;
+      var type = Tasks.tasksController.get('type');
+      if(type !== CoreTasks.TASK_TYPE_FEATURE) {
+        ret.push({
+          title: '<span class=task-type-feature>' + CoreTasks.TASK_TYPE_FEATURE.loc() + '</span>',
+          icon: 'task-icon-feature',
+          isEnabled: YES,
+          target: 'Tasks.tasksController',
+          action: 'setTypeFeature'
+        });
+      }
+      if(type !== CoreTasks.TASK_TYPE_BUG) {
+        ret.push({
+          title: '<span class=task-type-bug>' + CoreTasks.TASK_TYPE_BUG.loc() + '</span>',
+          icon: 'task-icon-bug',
+          isEnabled: YES,
+          target: 'Tasks.tasksController',
+          action: 'setTypeBug'
+        });
+      }
+      if(type !== CoreTasks.TASK_TYPE_OTHER) {
+        ret.push({
+          title: '<span class=task-type-other>' + CoreTasks.TASK_TYPE_OTHER.loc() + '</span>',
+          icon: 'task-icon-other',
+          isEnabled: YES,
+          target: 'Tasks.tasksController',
+          action: 'setTypeOther'
+        });
+      }
       ret.push({
         isSeparator: YES
       });
-      var validation = Tasks.tasksController.get('validation');
-      if(validation !== CoreTasks.TASK_VALIDATION_UNTESTED) {
+
+      var priority = Tasks.tasksController.get('priority');
+      if(priority !== CoreTasks.TASK_PRIORITY_HIGH) {
         ret.push({
-          title: '<span class=task-validation-untested>' + CoreTasks.TASK_VALIDATION_UNTESTED.loc() + '</span>',
+          title: '<span class=task-priority-high>' + CoreTasks.TASK_PRIORITY_HIGH.loc() + '</span>',
           icon: sc_static('blank'),
           isEnabled: YES,
           target: 'Tasks.tasksController',
-          action: 'setValidationUntested'
+          action: 'setPriorityHigh'
         });
       }
-      if(validation !== CoreTasks.TASK_VALIDATION_PASSED) {
+      if(priority !== CoreTasks.TASK_PRIORITY_MEDIUM) {
         ret.push({
-          title: '<span class=task-validation-passed>' + CoreTasks.TASK_VALIDATION_PASSED.loc() + '</span>',
+          title: '<span class=task-priority-medium>' + CoreTasks.TASK_PRIORITY_MEDIUM.loc() + '</span>',
           icon: sc_static('blank'),
           isEnabled: YES,
           target: 'Tasks.tasksController',
-          action: 'setValidationPassed'
+          action: 'setPriorityMedium'
         });
       }
-      if(validation !== CoreTasks.TASK_VALIDATION_FAILED) {
+      if(priority !== CoreTasks.TASK_PRIORITY_LOW) {
         ret.push({
-          title: '<span class=task-validation-failed>' + CoreTasks.TASK_VALIDATION_FAILED.loc() + '</span>',
+          title: '<span class=task-priority-low>' + CoreTasks.TASK_PRIORITY_LOW.loc() + '</span>',
           icon: sc_static('blank'),
           isEnabled: YES,
           target: 'Tasks.tasksController',
-          action: 'setValidationFailed'
+          action: 'setPriorityLow'
         });
+      }
+      ret.push({
+        isSeparator: YES
+      });
+
+      var developmentStatus = Tasks.tasksController.get('developmentStatusWithValidation');
+      if(developmentStatus !== CoreTasks.TASK_STATUS_PLANNED) {
+        ret.push({
+          title: '<span class=task-status-planned>' + CoreTasks.TASK_STATUS_PLANNED.loc() + '</span>',
+          icon: sc_static('blank'),
+          isEnabled: YES,
+          target: 'Tasks.tasksController',
+          action: 'setDevelopmentStatusPlanned'
+        });
+      }
+      if(developmentStatus !== CoreTasks.TASK_STATUS_ACTIVE) {
+        ret.push({
+          title: '<span class=task-status-active>' + CoreTasks.TASK_STATUS_ACTIVE.loc() + '</span>',
+          icon: sc_static('blank'),
+          isEnabled: YES,
+          target: 'Tasks.tasksController',
+          action: 'setDevelopmentStatusActive'
+        });
+      }
+      if(developmentStatus !== CoreTasks.TASK_STATUS_DONE) {
+        ret.push({
+          title: '<span class=task-status-done>' + CoreTasks.TASK_STATUS_DONE.loc() + '</span>',
+          icon: sc_static('blank'),
+          isEnabled: YES,
+          target: 'Tasks.tasksController',
+          action: 'setDevelopmentStatusDone'
+        });
+      }
+      if(developmentStatus !== CoreTasks.TASK_STATUS_RISKY) {
+        ret.push({
+          title: '<span class=task-status-risky>' + CoreTasks.TASK_STATUS_RISKY.loc() + '</span>',
+          icon: sc_static('blank'),
+          isEnabled: YES,
+          target: 'Tasks.tasksController',
+          action: 'setDevelopmentStatusRisky'
+        });
+      }
+
+      if(developmentStatus === CoreTasks.TASK_STATUS_DONE) {
+        ret.push({
+          isSeparator: YES
+        });
+        var validation = Tasks.tasksController.get('validation');
+        if(validation !== CoreTasks.TASK_VALIDATION_UNTESTED) {
+          ret.push({
+            title: '<span class=task-validation-untested>' + CoreTasks.TASK_VALIDATION_UNTESTED.loc() + '</span>',
+            icon: sc_static('blank'),
+            isEnabled: YES,
+            target: 'Tasks.tasksController',
+            action: 'setValidationUntested'
+          });
+        }
+        if(validation !== CoreTasks.TASK_VALIDATION_PASSED) {
+          ret.push({
+            title: '<span class=task-validation-passed>' + CoreTasks.TASK_VALIDATION_PASSED.loc() + '</span>',
+            icon: sc_static('blank'),
+            isEnabled: YES,
+            target: 'Tasks.tasksController',
+            action: 'setValidationPassed'
+          });
+        }
+        if(validation !== CoreTasks.TASK_VALIDATION_FAILED) {
+          ret.push({
+            title: '<span class=task-validation-failed>' + CoreTasks.TASK_VALIDATION_FAILED.loc() + '</span>',
+            icon: sc_static('blank'),
+            isEnabled: YES,
+            target: 'Tasks.tasksController',
+            action: 'setValidationFailed'
+          });
+        }
       }
     }
     
     if(selectedTasksCount === 1) {
-      ret.push({
-        isSeparator: YES
-      });
+      if(needsSeparator) {
+        ret.push({
+          isSeparator: YES
+        });
+      }
       ret.push({
         title: "_CopyID/Name".loc(),
         icon: sc_static('blank'),
@@ -385,8 +398,8 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   },
   
   inlineEditorWillBeginEditing: function(inlineEditor) {
-    if(!CoreTasks.getPath('permissions.canEditTask')) {
-      console.log('Error: you do not have permission to edit a task');
+    if(!Tasks.tasksController.isEditable()) {
+      console.log('Error: you do not have permission to edit task(s) here');
       inlineEditor.discardEditing();
     }
   },

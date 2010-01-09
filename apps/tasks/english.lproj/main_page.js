@@ -135,11 +135,11 @@ Tasks.mainPage = SC.Page.design({
         }),
       
         SC.LabelView.design(SCUI.SimpleButton,{
-          layout: { centerY: 0, left: 100, height: 18, width: 105 },
+          layout: { centerY: 0, left: 100, height: 18, width: 115 },
           icon: 'delete-icon',
           classNames: ['toolbar-label'],
-          value: "_DelProject".loc(),
-          toolTip: "_DelProjectTooltip".loc(),
+          value: "_DeleteProject".loc(),
+          toolTip: "_DeleteProjectTooltip".loc(),
           isEnabledBinding: 'Tasks.projectsController.isDeletable',
           target: 'Tasks',
           action: 'deleteProject'
@@ -162,11 +162,11 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         SC.LabelView.design(SCUI.SimpleButton,{
-          layout: { centerY: 0, left: 315, height: 18, width: 90 },
+          layout: { centerY: 0, left: 315, height: 18, width: 100 },
           icon: 'delete-icon',
           classNames: ['toolbar-label'],
-          value: "_DelTask".loc(),
-          toolTip: "_DelTaskTooltip".loc(),
+          value: "_DeleteTask".loc(),
+          toolTip: "_DeleteTaskTooltip".loc(),
           isEnabledBinding: 'Tasks.tasksController.isDeletable',
           target: 'Tasks',
           action: 'deleteTask'

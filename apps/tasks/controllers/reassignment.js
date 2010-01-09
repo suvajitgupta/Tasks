@@ -30,8 +30,8 @@ Tasks.reassignmentController = SC.Object.create(SC.CollectionViewDelegate,
   collectionViewDragDataForType: function(view, drag, dataType) {
     var ret=null, sel;
     
-    if(!CoreTasks.getPath('permissions.canEditTask')) {
-      console.log('Error: you do not have permission to reassign or reallocate a task');
+    if(!Tasks.tasksController.isEditable()) {
+      console.log('Error: you do not have permission to reassign or reallocate task(s) here');
     }
     else {
       if (dataType === Tasks.Task) {

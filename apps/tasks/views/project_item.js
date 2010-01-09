@@ -102,7 +102,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       }).popup(this, SC.PICKER_MENU);
       if(this._editorPane) this._editorPane.popup(layer, SC.PICKER_POINTER);
     }
-    else if(!that.get('isReservedProject')) { // popup context menu
+    else { // popup context menu
       var pane = SCUI.ContextMenuPane.create({
         contentView: SC.View.design({}),
         layout: { width: 150, height: 0 },
@@ -112,36 +112,57 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
         itemTargetKey: 'target',
         itemActionKey: 'action',
         itemSeparatorKey: 'isSeparator',
-        items: [
-          {
-            title: "_Duplicate".loc(),
-            icon: 'project-duplicate-icon',
-            isEnabled: CoreTasks.getPath('permissions.canAddProject'),
-            target: 'Tasks',
-            action: 'duplicateProject'
-          },
-          {
-            title: "_Delete".loc(),
-            icon: 'delete-icon',
-            isEnabled: CoreTasks.getPath('permissions.canDeleteProject'),
-            target: 'Tasks',
-            action: 'deleteProject'
-          },
-          {
-            isSeparator: YES
-          },
-          {
-            title: "_Statistics".loc(),
-            icon: sc_static('blank'),
-            isEnabled: YES,
-            target: 'Tasks',
-            action: 'projectStatistics'
-          }
-        ]        
+        items: this._buildContextMenu(that.get('isReservedProject'))
       });
       pane.popup(this, event); // pass in the mouse event so the pane can figure out where to put itself
     }
     return NO;
+  },
+  
+  _buildContextMenu: function(isReservedProject) {
+    
+    var ret = [];
+    
+    if(CoreTasks.getPath('permissions.canAddProject')) {
+      ret.push({
+        title: "_Add".loc(),
+        icon: 'add-icon',
+        isEnabled: YES,
+        target: 'Tasks',
+        action: 'addProject'
+      });
+    }
+    
+    if(!isReservedProject && CoreTasks.getPath('permissions.canAddProject')) {
+      ret.push({
+        title: "_Duplicate".loc(),
+        icon: 'project-duplicate-icon',
+        isEnabled: YES,
+        target: 'Tasks',
+        action: 'duplicateProject'
+      });
+    }
+    
+    if(!isReservedProject && CoreTasks.getPath('permissions.canDeleteProject')) {
+      ret.push({
+        title: "_Delete".loc(),
+        icon: 'delete-icon',
+        isEnabled: YES,
+        target: 'Tasks',
+        action: 'deleteProject'
+      });
+    }
+    
+    ret.push({
+      title: "_Statistics".loc(),
+      icon: sc_static('blank'),
+      isEnabled: YES,
+      target: 'Tasks',
+      action: 'projectStatistics'
+    });
+    
+    return ret;
+    
   },
   
   inlineEditorWillBeginEditing: function(inlineEditor) {

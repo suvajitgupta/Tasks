@@ -46,11 +46,11 @@ Tasks.settingsPage = SC.Page.create({
               }),
 
               SC.LabelView.design(SCUI.SimpleButton,{
-                layout: { centerY: 0, left: 90, height: 16, width: 90 },
+                layout: { centerY: 0, left: 90, height: 16, width: 100 },
                 icon: 'delete-icon',
-                value: "_DelUser".loc(),
+                value: "_DeleteUser".loc(),
                 classNames: ['toolbar-label'],
-                toolTip: "_DelUserTooltip".loc(),
+                toolTip: "_DeleteUserTooltip".loc(),
                 isEnabledBinding: 'Tasks.usersController.isDeletable',
                 target: 'Tasks',
                 action: 'deleteUser'
