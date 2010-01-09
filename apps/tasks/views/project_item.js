@@ -176,14 +176,22 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
   render: function(context, firstTime) {
     var content = this.get('content');
     if(content) {
+      var projectTooltip = '';
       var projectName = content.get('name');
       context.addClass('project-item');
-      if (projectName === CoreTasks.ALL_TASKS_NAME.loc() || projectName === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) context.addClass('reserved-project-item');
-      else context.addClass('regular-project-item');
+      if (projectName === CoreTasks.ALL_TASKS_NAME.loc() || projectName === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) {
+        context.addClass('reserved-project-item');
+        projectTooltip += "_ReservedProject".loc();
+      }
+      else {
+        context.addClass('regular-project-item');
+      }
 
-      var projectTooltip = '';
       var tasks = content.get('tasks');
-      if(tasks) projectTooltip += "_Has".loc() + tasks.get('length') + "_tasks".loc();
+      if(tasks) {
+        if(projectTooltip !== '') projectTooltip += '; ';
+        projectTooltip += "_Has".loc() + tasks.get('length') + "_tasks".loc();
+      }
       if(content.get('displayTimeLeft')) projectTooltip += ('; ' + "_ProjectTimeLeftTooltip".loc());
       if(projectTooltip !== '') {
         context.attr('title', projectTooltip);
