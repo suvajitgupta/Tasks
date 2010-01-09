@@ -37,10 +37,10 @@
 }
 
 .reserved-project-item {
-	color: #666 !important;
+	text-decoration: underline !important;
 } 
 
-.regular-project-item {
+.regular-project-item, .reserved-project-item {
   color: #222 !important;
   font-weight: bold;
 }
