@@ -483,7 +483,7 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
    */
   parse: function(line, fillDefaults) {
 
-    if (fillDefaults === undefined) filldefaults = true;
+    if (fillDefaults === undefined) fillDefaults = true;
     
     // extract priority based on bullet, if one
     var hasBullet = false;
