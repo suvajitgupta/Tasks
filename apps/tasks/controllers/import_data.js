@@ -168,7 +168,7 @@ Tasks.importDataController = SC.ObjectController.create(
     },
     
     _createUser: function(name) {
-      console.log('Creating new user: ' + name);
+      // console.log('DEBUG: Creating new user: ' + name);
       SC.RunLoop.begin();
       var userHash = SC.merge(SC.clone(CoreTasks.User.NEW_USER_HASH), { 'name': name, 'loginName': name });
       var user = CoreTasks.createRecord(CoreTasks.User, userHash);
