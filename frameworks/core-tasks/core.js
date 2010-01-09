@@ -206,8 +206,8 @@ CoreTasks = SC.Object.create({
         this.permissions.set('canAddProject', NO);
         this.permissions.set('canEditProject', NO);
         this.permissions.set('canDeleteProject', NO);
-        this.permissions.set('canAddTask', NO);
-        this.permissions.set('canEditTask', NO);
+        this.permissions.set('canAddTask', YES);
+        this.permissions.set('canEditTask', YES);
         this.permissions.set('canDeleteTask', NO);
         this.permissions.set('canImportData', NO);
         this.permissions.set('canAddUser', NO);

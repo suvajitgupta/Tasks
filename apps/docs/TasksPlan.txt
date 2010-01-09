@@ -6,7 +6,7 @@ Design/Planning
 | Manager - add/edit/delete Users/Projects/Tasks, allocate Tasks to Projects, assign to/load balance Tasks across Developers, view Task status
 | Developer - add/edit/delete Tasks, view Tasks & update effort (estimates=>actual)/status, reassign Tasks to other Developers or reallocate to other Projects, add Task Release Notes in description field
 | Tester - view Tasks of type Feature/Bug that are Done (read Release Notes in description field), validate Tasks (mark as Passed | Failed), submit Bugs as Tasks with details to reproduce problem in description field
-| Guest - view Projects/Tasks (no create/update/delete permissions)
+| Guest - view Projects, add/edit Tasks (no delete permissions)
 ^ Create GUI Wireframes using Balsamiq [SG] @Done
 ^ Create GUI Statecharts using Omnigraffle [SG] <SE> @Done
 - Create GUI Mockups using Photoshop [MG] <SG> @Done
