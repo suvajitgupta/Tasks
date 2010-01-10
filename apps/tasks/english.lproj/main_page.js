@@ -246,7 +246,7 @@ Tasks.mainPage = SC.Page.design({
         hasHorizontalScroller: NO,
         classNames: ['projects-pane'],
 
-        contentView: SC.ListView.design({
+        contentView: SC.SourceListView.design({
           layout: { top: 0, left:0, bottom: 0, right: 0 },
           contentValueKey: 'displayName',
           contentUnreadCountKey: 'displayTimeLeft',

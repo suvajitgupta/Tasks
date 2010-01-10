@@ -39,14 +39,13 @@
 .reserved-project-item {
   color: #888 !important;
   font-weight: bold;
-	text-transform: uppercase !important;
 } 
 
 .regular-project-item {
   color: #222 !important;
 }
 
-.projects-pane-inner .sc-collection-item.has-icon.sel,
+.project-item.sel,
 .project-item.sel .sc-outline:hover {
   color: #FFF !important;
   background: static_url('images/default-theme-selected-project.png') no-repeat 0 0 !important;
