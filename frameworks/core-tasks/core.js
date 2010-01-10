@@ -45,6 +45,7 @@ CoreTasks = SC.Object.create({
     }
     
   }),
+  
   allUsers: null,
   allTasks: null,
   allProjects: null,
@@ -231,6 +232,17 @@ CoreTasks = SC.Object.create({
    */
   unallocatedTasksProject: null,
 
+  /**
+   * See if project is reserved.
+   *
+   * @param {Object} project to check.
+   * @returns {Boolean} true if project is reserved, false otherwise.
+   */
+  isReservedProject: function(project) {
+    return project === CoreTasks.get('allTasksProject') || project === CoreTasks.get('unallocatedTasksProject');
+  },
+
+  
   /**
    * Creates a new record in the store.
    *

@@ -362,7 +362,7 @@ Tasks.mixin({
   _createProject: function(duplicate) {
     
     if(!CoreTasks.getPath('permissions.canAddProject')) {
-      console.error('You do not have permission to add or duplicate a project');
+      console.warn('You do not have permission to add or duplicate a project');
       return null;
     }
     
@@ -409,7 +409,7 @@ Tasks.mixin({
   deleteProject: function() {
     
     if(!CoreTasks.getPath('permissions.canDeleteProject')) {
-      console.error('You do not have permission to delete a project');
+      console.warn('You do not have permission to delete a project');
       return;
     }
     
@@ -418,8 +418,7 @@ Tasks.mixin({
     if (selectedProject) {
 
       // Disallow deletion of reserved projects
-      var selectedProjectName = selectedProject.get('name');
-      if (selectedProjectName === CoreTasks.ALL_TASKS_NAME.loc() || selectedProjectName === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) {
+      if (CoreTasks.isReservedProject(selectedProject)) {
         console.warn('You cannot delete a reserved project');
         return;
       }
@@ -471,7 +470,7 @@ Tasks.mixin({
   _createTask: function(duplicate) {
     
     if(!Tasks.tasksController.isAddable()) {
-      console.error('This is the wrong display mode or you do not have permission to add or duplicate a task');
+      console.warn('This is the wrong display mode or you do not have permission to add or duplicate a task');
       return null;
     }
     
@@ -509,9 +508,8 @@ Tasks.mixin({
         console.warn('You must have a task selected to duplicate it');
         return null;
       }
-      var selectedProjectName = Tasks.getPath('projectController.name');
-      if (!SC.none(selectedProjectName) &&
-          selectedProjectName !== CoreTasks.ALL_TASKS_NAME.loc() && selectedProjectName !== CoreTasks.UNALLOCATED_TASKS_NAME.loc()) {
+      var selectedProject = Tasks.projectsController.getPath('selection.firstObject');
+      if (!CoreTasks.isReservedProject(selectedProject)) {
         taskHash.projectId = Tasks.getPath('projectController.id');
       }
     }
@@ -550,7 +548,7 @@ Tasks.mixin({
   deleteTask: function() {
     
     if(!Tasks.tasksController.isDeletable()) {
-      console.error('This is the wrong display mode or you do not have permission to delete a task');
+      console.warn('This is the wrong display mode or you do not have permission to delete a task');
       return;
     }
     
@@ -595,7 +593,7 @@ Tasks.mixin({
   addUser: function() {
 
     if(!CoreTasks.getPath('permissions.canAddUser')) {
-      console.error('You do not have permission to add a user');
+      console.warn('You do not have permission to add a user');
       return null;
     }
     
@@ -613,7 +611,7 @@ Tasks.mixin({
   deleteUser: function() {
   
     if(!CoreTasks.getPath('permissions.canDeleteUser')) {
-      console.error('You do not have permission to delete a user');
+      console.warn('You do not have permission to delete a user');
       return;
     }
     

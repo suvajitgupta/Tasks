@@ -62,8 +62,6 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
     return value;
   }.property('timeLeft').cacheable(),
 
-  // TODO: [SG] add 'isReserved()' method and use this from View layer
-
   /**
    * A read-only computed property that returns the list of tasks associated with this project.
    *

@@ -222,19 +222,17 @@ Tasks.exportDataController = SC.ObjectController.create(
     
     // First export unallocated tasks
     Tasks.projectsController.forEach(function(project){
-      var name = project.get('name');
-      if(name === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) {
+      if(project === CoreTasks.get('unallocatedTasksProject')) {
         var tasks = project.get('tasks');
         var len = tasks.get('length');
-        if(len === 0 && name === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) return; // skip empty UnallocatedTasks Project
+        if(len === 0) return; // skip empty UnallocatedTasks Project
         ret += that._exportProjectData(project, format);
       }
     }, Tasks.projectsController);
     
     // Next export allocated tasks
     Tasks.projectsController.forEach(function(project){
-      var name = project.get('name');
-      if(name === CoreTasks.ALL_TASKS_NAME.loc() || name === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) return; // skip All and Unallocated Tasks Projects
+      if(CoreTasks.isReservedProject(project)) return; // skip All and Unallocated Tasks Projects
       ret += that._exportProjectData(project, format);
     }, Tasks.projectsController);
     
@@ -312,8 +310,7 @@ Tasks.exportDataController = SC.ObjectController.create(
     else ret += '\n';
     ret += '\n';
     
-    var selectedProjectName = selectedProject.get('name');
-    if (selectedProjectName === CoreTasks.ALL_TASKS_NAME.loc() && !Tasks.assignmentsController.hasFiltering()) {
+    if (selectedProject === CoreTasks.get('allTasksProject') && !Tasks.assignmentsController.hasFiltering()) {
       ret += this._exportAllData(format);
     }
     else {

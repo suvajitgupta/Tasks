@@ -85,7 +85,7 @@ SC.stringsFor('English', {
   "_AllTasks": "All Tasks",
   "_Unallocated": "Unallocated",
   "_UnallocatedTasks": "Unallocated Tasks",
-  "_ProjectkEditorTooltip": "Click to view/edit project details (time left, description)",
+  "_ProjectEditorTooltip": "Click to view/edit project details (time left, description)",
   "_ReservedProject": "Is a reserved project (cannot modify/delete)",
   "_Has": "Has ",
   "_tasks": " task(s)",

@@ -24,8 +24,7 @@ Tasks.projectsController = SC.ArrayController.create(SCUI.StatusChanged,
     var selectedProject = sel.firstObject();
     if(!selectedProject) return false;
     
-    var selectedProjectName = selectedProject.get('name');
-    if (selectedProjectName === CoreTasks.ALL_TASKS_NAME.loc() || selectedProjectName === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) return false;
+    if (CoreTasks.isReservedProject(selectedProject)) return false;
     
     return true;
     

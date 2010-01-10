@@ -21,11 +21,8 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
   mouseDown: function(event) {
     
     var that = this;
-    this.set('isReservedProject', false);
-    var projectName = this.getPath('content.name');
-    if(projectName === CoreTasks.ALL_TASKS_NAME.loc() || projectName === CoreTasks.UNALLOCATED_TASKS_NAME.loc() || this.poppedUp) {
-      this.set('isReservedProject', true);
-    }
+    var content = this.get('content');
+    this.set('isReservedProject', CoreTasks.isReservedProject(content));
     
     var classes = event.target.className;
     if (classes.match('project-icon-no-tasks') || classes.match('project-icon-has-tasks') ||
@@ -167,13 +164,13 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
   
   inlineEditorWillBeginEditing: function(inlineEditor) {
     if(!CoreTasks.getPath('permissions.canEditProject')) {
-      console.log('Error: you do not have permission to edit a project');
+      console.warn('You do not have permission to edit a project');
       inlineEditor.discardEditing();
     }
     else {
-      var projectName = inlineEditor.value;
-      if (projectName === CoreTasks.ALL_TASKS_NAME.loc() ||
-          projectName === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) {
+      var selectedProject = Tasks.projectsController.getPath('selection.firstObject');
+      if (CoreTasks.isReservedProject(selectedProject)) {
+        console.warn('You cannot edit a reserved project');
         inlineEditor.discardEditing();
       }
     }
@@ -187,9 +184,9 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
   },
   
   renderIcon: function(context, icon){
-    var projectName = this.getPath('content.name');
+    var content = this.get('content');
     var projectTooltip = '';
-    if(projectName !== CoreTasks.ALL_TASKS_NAME.loc() && projectName !== CoreTasks.UNALLOCATED_TASKS_NAME.loc()) projectTooltip = "_ProjectkEditorTooltip".loc();
+    if(!CoreTasks.isReservedProject(content)) projectTooltip = "_ProjectEditorTooltip".loc();
     context.begin('img').addClass('icon').addClass(icon).attr('src', SC.BLANK_IMAGE_URL)
           .attr('title', projectTooltip).attr('alt', projectTooltip).end();
   },
@@ -198,9 +195,8 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     var content = this.get('content');
     if(content) {
       var projectTooltip = '';
-      var projectName = content.get('name');
       context.addClass('project-item');
-      if (projectName === CoreTasks.ALL_TASKS_NAME.loc() || projectName === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) {
+      if (CoreTasks.isReservedProject(content)) {
         context.addClass('reserved-project-item');
         projectTooltip += "_ReservedProject".loc();
       }
