@@ -37,7 +37,7 @@
 }
 
 .reserved-project-item {
-	text-decoration: underline !important;
+	text-transform: uppercase !important;
 } 
 
 .regular-project-item, .reserved-project-item {
