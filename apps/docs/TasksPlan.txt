@@ -6,7 +6,7 @@ Design/Planning
 | Manager - add/edit/delete Users/Projects/Tasks, allocate Tasks to Projects, assign to/load balance Tasks across Developers, view Task status
 | Developer - add/edit/delete Tasks, view Tasks & update effort (estimates=>actual)/status, reassign Tasks to other Developers or reallocate to other Projects, add Task Release Notes in description field
 | Tester - view Tasks of type Feature/Bug that are Done (read Release Notes in description field), validate Tasks (mark as Passed | Failed), submit Bugs as Tasks with details to reproduce problem in description field
-| Guest - view Projects, add/edit Unallocated Tasks (no delete permissions)
+| Guest - view Projects, add/edit unallocated Tasks (no delete permissions)
 ^ Create GUI Wireframes using Balsamiq [SG] @Done
 ^ Create GUI Statecharts using Omnigraffle [SG] <SE> @Done
 - Create GUI Mockups using Photoshop [MG] <SG> @Done
@@ -16,8 +16,8 @@ Design/Planning
 - Design Tasks Server & evaluate persistence frameworks [SE] <SG> @Done
 - Design RBAC (role-based access control) to be implemented on GUI and Server <JH2> [SG] @Done
 | Managers have permission to do full CRUD on Projects/Tasks/Users & Import
-| Developers/Testers can only R on Projects, CRUD on Tasks, and Import Tasks (not create new Projects)
-| Guests can only CRU Tasks
+| Developers/Testers can only R on Projects, full CRUD on Tasks, and Import Tasks (not create new Projects)
+| Guests can only R on Projects/Tasks, and CU unallocated Tasks
 
 General Infrastructure
 ^ Develop Model and Fixtures (hardcoded & generated) [SG] <SE> @Done
@@ -47,7 +47,6 @@ v Add hover over tooltip for projects to show how many tasks they contain [SG] @
 | Check via Inline Editor Delegate
 ^ Add "Add Project" & "Del. Project" buttons in projects toolbar [SG] @Done $Feature %Passed
 - Add warning Alert box about deleting Project with Tasks [SG] @Done $Feature %Passed
-- Don't create a project if it already exists during Import [SG] @Done $Feature %Passed
 v Disallow duplicate project names after editing, provide warning to user for duplicates [SG] $Feature
 v Add summary in projects toolbar showing number of projects & number of tasks for selected project [SG] <MB> @Done $Feature %Passed
 v Enable/disable "Del. Project" button based on having a selected project [SG] @Done %Passed $Feature
@@ -57,7 +56,7 @@ v Disable Add/Del. Tasks buttons when on "All Tasks" project [SG] <BB> @Done %Pa
 - Disallow "All Tasks" & "Unallocated Tasks" projects from being deleted [SG] @Done $Feature %Passed
 ^ Allow multi-task drag-n-drop reallocation to other projects [BB] <SG> @Done $Feature %Passed
 ^ Add popup viewer/editor for Project time left/description [SG] $Feature @Done %Passed
-v Add project context menu with options: Duplicate, Delete; Statistics... [SG] $Feature @Done %Passed
+v Add project context menu with options: Add, Duplicate, Delete, Statistics... [SG] $Feature @Done %Passed
 - Beta: Add Project Statistics popup to show breakdown by Task attributes (what percent in each) [SG] $Feature @Active
 
 Task Manager GUI
@@ -89,7 +88,7 @@ v Add hover over tooltip for assignees to show how many tasks they have and to e
 - Beta: Support task Copy ID/Name and Copy Link Location (URL with "Route") to clipboard [SG] $Feature @Risky
 v Add task context menu with options: Add, Duplicate, Delete; All Task Attributes; Copy ID/Name, Copy Link [SG] $Feature @Done %Passed
 - Beta: Add ability to watch tasks and get email notifications on task changes [SG] <JH2> $Feature
-- Add a badge (dot) before Planned tasks that were created or updated within the last day <SE> [SG] $Feature @Done %Passed
+- Add an indicator (dot) before Planned tasks that were created or updated within the last day <SE> [SG] $Feature @Done %Passed
 - Out of Scope: Add support for nested tasks/tagging $Feature
 | Use "Clustering" approach described in Help instead
 - Out of Scope: Add support for managing inter-task dependencies/linking $Feature
@@ -117,8 +116,9 @@ Application Manager GUI
 - Enable/disable Save button based on data modification [EO] <SG> $Feature @Done %Passed
 - Add "Refresh" button to get most recent data from server [SG] <SE> $Feature @Done %Passed
 - Add "Import" button in top toolbar with associated pop up panel [SG] <BB> @Done $Feature %Passed
-| Gears needs to be ported to Snow Leopard
-- Add "Export" button in top toolbar with associated pop up panel [SG] @Done $Feature %Passed
+- Don't create a project if it already exists during Import [SG] @Done $Feature %Passed
+- Allow option to automatically create new users for unknown assignees/submitters found during importing [SG] @Done $Feature %Passed
+- Add "Export" button in top toolbar with associated pop up panel, allowing user to choose between Text/HTML formats [SG] @Done $Feature %Passed
 | When on "All Tasks" project with no filters on all project data is exported, otherwise only displayed data is exported
 - Add Settings button/popup to manage Users and preferences <JH2> [SG] $Feature @Active
 | Preferences:
