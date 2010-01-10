@@ -259,7 +259,7 @@ CoreTasks.Project.mixin(/** @scope CoreTasks.Project */ {
     var projectName = line;
     var projectNameMatches = line.match(/^([^\{\#]+)/);
     if(projectNameMatches) {
-      projectName = projectNameMatches[1].replace(/\s+$/, ''); // trim trailing whitespace, if any
+      projectName = projectNameMatches[1].replace(/^\s+/, '').replace(/\s+$/, ''); // trim leading/trailing whitespace, if any
     }
     var projectTimeLeft = CoreTasks.Project.parseTimeLeft(line);
     
