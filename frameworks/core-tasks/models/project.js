@@ -126,9 +126,12 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
    * A string summarizing key facets of the Project for display.
    */
   displayName: function(key, value) {
+    
     if (value !== undefined) {
       
       var currentName = this.get('name');
+      if (currentName === CoreTasks.ALL_TASKS_NAME.loc() || currentName === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) return;
+      
       var projectHash = CoreTasks.Project.parse(value);
       
       this.propertyWillChange('name');

@@ -37,10 +37,11 @@
 }
 
 .reserved-project-item {
+  color: #777 !important;
 	text-transform: uppercase !important;
 } 
 
-.regular-project-item, .reserved-project-item {
+.regular-project-item {
   color: #222 !important;
   font-weight: bold;
 }

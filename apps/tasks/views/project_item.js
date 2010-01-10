@@ -168,8 +168,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       inlineEditor.discardEditing();
     }
     else {
-      var selectedProject = Tasks.projectsController.getPath('selection.firstObject');
-      if (CoreTasks.isReservedProject(selectedProject)) {
+      if(this.get('isReservedProject')) {
         console.warn('You cannot edit a reserved project');
         inlineEditor.discardEditing();
       }
