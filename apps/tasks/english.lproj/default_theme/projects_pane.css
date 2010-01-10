@@ -37,13 +37,13 @@
 }
 
 .reserved-project-item {
-  color: #777 !important;
+  color: #888 !important;
+  font-weight: bold;
 	text-transform: uppercase !important;
 } 
 
 .regular-project-item {
   color: #222 !important;
-  font-weight: bold;
 }
 
 .projects-pane-inner .sc-collection-item.has-icon.sel,
