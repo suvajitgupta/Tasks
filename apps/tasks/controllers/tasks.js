@@ -19,8 +19,8 @@ Tasks.tasksController = SC.TreeController.create(
   
   canGuestAddEditTask: function() {
     if(CoreTasks.getPath('currentUser.role') === CoreTasks.USER_ROLE_GUEST) {
-      var selectedProjectName = Tasks.projectsController.getPath('selection.firstObject.name');
-      if (selectedProjectName !== CoreTasks.UNALLOCATED_TASKS_NAME.loc()) return false;
+      var selectedProject = Tasks.projectsController.getPath('selection.firstObject');
+      if (selectedProject !== CoreTasks.get('unallocatedTasksProject')) return false;
     }
     return true;
   }.property().cacheable(),
