@@ -155,7 +155,7 @@ Styling/Hardening
 ^ Perform smoke test of key functionality [SG] @Done
 | Login/Logout
 | Project/Task/User CRUD
-| All/Unallocated Tasks reserved projects
+| All/Unallocated Tasks system projects
 | Project/Task modifications via inline editor and popup editor/control bar
 | Task reassignment/reallocation (drag-n-drop)
 | Task attribute filtering, assignee selection, ID/name searching

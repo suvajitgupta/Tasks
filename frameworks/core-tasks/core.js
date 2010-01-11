@@ -233,12 +233,12 @@ CoreTasks = SC.Object.create({
   unallocatedTasksProject: null,
 
   /**
-   * See if project is reserved.
+   * See if project is a system project.
    *
    * @param {Object} project to check.
-   * @returns {Boolean} true if project is reserved, false otherwise.
+   * @returns {Boolean} true if system project, false otherwise.
    */
-  isReservedProject: function(project) {
+  isSystemProject: function(project) {
     return project === CoreTasks.get('allTasksProject') || project === CoreTasks.get('unallocatedTasksProject');
   },
 

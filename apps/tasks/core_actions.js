@@ -417,9 +417,9 @@ Tasks.mixin({
     var selectedProject = Tasks.projectsController.getPath('selection.firstObject');
     if (selectedProject) {
 
-      // Disallow deletion of reserved projects
-      if (CoreTasks.isReservedProject(selectedProject)) {
-        console.warn('You cannot delete a reserved project');
+      // Disallow deletion of system projects
+      if (CoreTasks.isSystemProject(selectedProject)) {
+        console.warn('You cannot delete a system project');
         return;
       }
       
@@ -503,13 +503,13 @@ Tasks.mixin({
         }
       }
     }
-    else { // No selected task, add task to currently selected, non-reserved, project (if one).
+    else { // No selected task, add task to currently selected, non-system, project (if one).
       if(duplicate) {
         console.warn('You must have a task selected to duplicate it');
         return null;
       }
       var selectedProject = Tasks.projectsController.getPath('selection.firstObject');
-      if (!CoreTasks.isReservedProject(selectedProject)) {
+      if (!CoreTasks.isSystemProject(selectedProject)) {
         taskHash.projectId = Tasks.getPath('projectController.id');
       }
     }

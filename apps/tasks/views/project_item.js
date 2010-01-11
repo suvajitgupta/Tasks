@@ -24,7 +24,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     var content = this.get('content');
     if(!content.get('id')) return sc_super();
 
-    this.set('isReservedProject', CoreTasks.isReservedProject(content));
+    this.set('isSystemProject', CoreTasks.isSystemProject(content));
     
     var classes = event.target.className;
     if (classes.match('project-icon-no-tasks') || classes.match('project-icon-has-tasks') ||
@@ -38,7 +38,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
         // Avoid popup panel coming up on other items while it is up already
         poppedUp: false,
         popup: function() {
-          if(that.get('isReservedProject')) return;
+          if(that.get('isSystemProject')) return;
           this.poppedUp = true;
           this._timeLeft = that.getPath('content.timeLeft');
           sc_super();
@@ -111,14 +111,14 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
         itemTargetKey: 'target',
         itemActionKey: 'action',
         itemSeparatorKey: 'isSeparator',
-        items: this._buildContextMenu(that.get('isReservedProject'))
+        items: this._buildContextMenu(that.get('isSystemProject'))
       });
       pane.popup(this, event); // pass in the mouse event so the pane can figure out where to put itself
     }
     return NO;
   },
   
-  _buildContextMenu: function(isReservedProject) {
+  _buildContextMenu: function(isSystemProject) {
     
     var ret = [];
     
@@ -132,7 +132,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       });
     }
     
-    if(!isReservedProject && CoreTasks.getPath('permissions.canAddProject')) {
+    if(!isSystemProject && CoreTasks.getPath('permissions.canAddProject')) {
       ret.push({
         title: "_Duplicate".loc(),
         icon: 'project-duplicate-icon',
@@ -142,7 +142,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       });
     }
     
-    if(!isReservedProject && CoreTasks.getPath('permissions.canDeleteProject')) {
+    if(!isSystemProject && CoreTasks.getPath('permissions.canDeleteProject')) {
       ret.push({
         title: "_Delete".loc(),
         icon: 'delete-icon',
@@ -170,8 +170,8 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       inlineEditor.discardEditing();
     }
     else {
-      if(this.get('isReservedProject')) {
-        console.warn('You cannot edit a reserved project');
+      if(this.get('isSystemProject')) {
+        console.warn('You cannot edit a system project');
         inlineEditor.discardEditing();
       }
     }
@@ -187,7 +187,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
   renderIcon: function(context, icon){
     var content = this.get('content');
     var projectTooltip = '';
-    if(!CoreTasks.isReservedProject(content)) projectTooltip = "_ProjectEditorTooltip".loc();
+    if(!CoreTasks.isSystemProject(content)) projectTooltip = "_ProjectEditorTooltip".loc();
     context.begin('img').addClass('icon').addClass(icon).attr('src', SC.BLANK_IMAGE_URL)
           .attr('title', projectTooltip).attr('alt', projectTooltip).end();
   },
@@ -199,7 +199,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       var projectTooltip = '';
       if(content.get('id')) {
         context.addClass('project-item');
-        if (CoreTasks.isReservedProject(content)) projectTooltip += "_ReservedProject".loc();
+        if (CoreTasks.isSystemProject(content)) projectTooltip += "_SystemProject".loc();
       }
 
       var tasks = content.get('tasks');

@@ -21,10 +21,10 @@ Tasks.projectsController = SC.ArrayController.create(SCUI.StatusChanged,
       var len = projects.get('length');
       for (var i = 0; i < len; i++) {
         var project = projects.objectAt(i);
-        if(CoreTasks.isReservedProject(project)) tasksSources.push(project);
+        if(CoreTasks.isSystemProject(project)) tasksSources.push(project);
         else projectsSources.push(project);
       }
-      nodes.push(SC.Object.create({ displayName: "_Tasks".loc(), treeItemChildren: tasksSources, treeItemIsExpanded: YES }));
+      nodes.push(SC.Object.create({ displayName: "_System".loc(), treeItemChildren: tasksSources, treeItemIsExpanded: YES }));
       nodes.push(SC.Object.create({ displayName: "_Projects".loc(), treeItemChildren: projectsSources, treeItemIsExpanded: YES }));
     }
     return SC.Object.create({ treeItemChildren: nodes, treeItemIsExpanded: YES });
@@ -40,7 +40,7 @@ Tasks.projectsController = SC.ArrayController.create(SCUI.StatusChanged,
     var selectedProject = sel.firstObject();
     if(!selectedProject) return false;
     
-    if (CoreTasks.isReservedProject(selectedProject)) return false;
+    if (CoreTasks.isSystemProject(selectedProject)) return false;
     
     return true;
     
