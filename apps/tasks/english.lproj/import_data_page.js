@@ -56,6 +56,7 @@ Tasks.importDataPage = SC.Page.create({
       
       createMissingUsersCheckbox: SC.CheckboxView.design(SCUI.ToolTip, {
         layout: { width: 175, height: 22, left: 10, bottom: 8 },
+        isEnabledBinding: 'CoreTasks.permissions.canAddUser',
         title: "_CreateMissingUsers".loc(),
         toolTip: "_CreateMissingUsersTooltip".loc(),
         valueBinding: 'Tasks.importDataController.createMissingUsers',
