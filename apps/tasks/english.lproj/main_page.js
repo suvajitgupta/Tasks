@@ -173,7 +173,7 @@ Tasks.mainPage = SC.Page.design({
         }),
         
         SC.SegmentedView.design(SCUI.ToolTip, {
-          layout: { centerY: 0, centerX: -40, height: 24, width: 130},
+          layout: { centerY: 0, centerX: -35, height: 24, width: 130},
           classNames: ['toolbar-label'],
           items: [
             { title: "_Tasks".loc(), value: Tasks.DISPLAY_MODE_TASKS },

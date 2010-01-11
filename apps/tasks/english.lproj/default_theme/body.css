@@ -40,6 +40,11 @@ body {
 	background: #eee;
 }
 
+.sc-segmented-view {
+  font-weight: bold !important;
+  text-transform: uppercase !important;
+}
+
 .error-message {
 	color: red !important;
 }

@@ -336,7 +336,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
       
     // Sort grouped tasks by assignee
     this.set('assignedTasks', SC.Object.create({ treeItemChildren: assignmentNodes.sort(function(a,b) {
-      if(!Tasks.assignmentsController._showTasks) { // Team display mode, first try to sort in descending order of loading/red flags
+      if(!Tasks.assignmentsController._showTasks) { // TEAM display mode, first try to sort in descending order of loading/red flags
         if(a.loading !== CoreTasks.USER_NOT_LOADED && b.loading !== CoreTasks.USER_NOT_LOADED) {
           var loadingDelta = b.effortGapPercent - a.effortGapPercent;
           if(loadingDelta !== 0) return loadingDelta;
