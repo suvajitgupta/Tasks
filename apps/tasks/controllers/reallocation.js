@@ -39,6 +39,10 @@ Tasks.reallocationController = SC.Object.create(SC.CollectionViewDelegate,
   */
   collectionViewPerformDragOperation: function(view, drag, dragOp, idx, dropOp) {
     
+    if(CoreTasks.getPath('currentUser.role') === CoreTasks.USER_ROLE_GUEST) {
+      console.warn('You do not have permission to reallocate task(s)');
+      return SC.DRAG_MOVE;
+    }
     if (dragOp & SC.DRAG_REORDER) return SC.DRAG_MOVE; // disallow reorder
     
     var tasks = drag.dataForType(Tasks.Task),
