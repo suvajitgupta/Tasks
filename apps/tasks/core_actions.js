@@ -166,7 +166,7 @@ Tasks.mixin({
     
     // Now load all of the projects.
     if (!CoreTasks.get('allProjects')) {
-      CoreTasks.set('allProjects', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Project, orderBy: 'name' })));
+      CoreTasks.set('allProjects', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Project })));
       this.projectsController.set('content', CoreTasks.get('allProjects'));
     } else {
       CoreTasks.get('allProjects').refresh();
