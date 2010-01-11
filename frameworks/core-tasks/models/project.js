@@ -244,7 +244,7 @@ CoreTasks.Project.mixin(/** @scope CoreTasks.Project */ {
       }
     }
     else {
-      console.log('Project Parsing Error - multiple timeLefts illegal');
+      console.warn('Project Parsing Error - multiple timeLefts illegal');
     }
     
     return projectTimeLeft;

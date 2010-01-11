@@ -50,7 +50,7 @@ Tasks.mixin( /** @scope Tasks */ {
   routeToTask: function(params) {
     Tasks._closeMainPage();
     if(SC.none(params.IDs)) {
-      console.log("Error: missing task ID(s) for URL routing");
+      console.warn("Missing task ID(s) for URL routing");
     }
     else {
       // Enter the statechart.
@@ -83,7 +83,7 @@ Tasks.mixin( /** @scope Tasks */ {
   */
   routeToProject: function(params) {
     if(SC.none(params.name)) {
-      console.log("Error: missing project name for URL routing");
+      console.warn("Missing project name for URL routing");
     }
     else if(this.loginTime) {
       Tasks.set('defaultProjectName', params.name);

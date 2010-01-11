@@ -31,7 +31,7 @@ Tasks.reassignmentController = SC.Object.create(SC.CollectionViewDelegate,
     var ret=null, sel;
     
     if(!Tasks.tasksController.isEditable()) {
-      console.log('Error: you do not have permission to reassign or reallocate task(s) here');
+      console.warn('You do not have permission to reassign or reallocate task(s) here');
     }
     else {
       if (dataType === Tasks.Task) {

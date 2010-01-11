@@ -10,7 +10,7 @@ function main() { Tasks.main(); }
 
 Tasks.main = function main() {
 
-  console.log("\"Tasks\" started at: %@".fmt(new Date()));
+  console.log('DEBUG: "Tasks" started at: %@'.fmt(new Date()));
   Tasks.registerRoutes();
 
 };

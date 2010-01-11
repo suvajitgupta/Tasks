@@ -71,7 +71,7 @@ Tasks.importDataController = SC.ObjectController.create(
               if(assigneeUser) taskHash.assigneeId = assigneeUser.get('id');
             }
             else {
-              console.warn('Task Import Error - no such assignee: ' + taskHash.assigneeId);
+              console.warn('Task Import: no such assignee: ' + taskHash.assigneeId);
               taskHash.assigneeId = null;
             }
           }
@@ -86,7 +86,7 @@ Tasks.importDataController = SC.ObjectController.create(
               if(submitterUser) taskHash.submitterId = submitterUser.get('id');
             }
             else {
-              console.warn('Task Import Error - no such submitter: ' + taskHash.submitterId);
+              console.warn('Task Import: no such submitter: ' + taskHash.submitterId);
               taskHash.submitterId = null;
             }
           }
@@ -113,7 +113,7 @@ Tasks.importDataController = SC.ObjectController.create(
           if(currentProject) taskHash.projectId = currentProject.get('id');
           
           var taskRecord = CoreTasks.createRecord(CoreTasks.Task, taskHash);
-          if(!taskRecord) console.error('Import Error: task creation failed');
+          if(!taskRecord) console.error('Import: task creation failed');
         }
         else if (line.search(/^\s*$/) === 0) { // a blank line
           // console.log('Blank Line:');
@@ -148,10 +148,10 @@ Tasks.importDataController = SC.ObjectController.create(
             if(CoreTasks.getPath('permissions.canAddProject')) {
               projectRecord = CoreTasks.createRecord(CoreTasks.Project, projectHash);
               if(projectRecord) currentProject = projectRecord;
-              else console.error('Import Error: project creation failed!');
+              else console.error('Import: project creation failed!');
             }
             else {
-              console.warn('Import Error: you do not have permission to create project \""' + projectHash.name + '"');
+              console.warn('Task Import: you do not have permission to create project \""' + projectHash.name + '"');
             }
           }
         }

@@ -399,7 +399,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   
   inlineEditorWillBeginEditing: function(inlineEditor) {
     if(!Tasks.tasksController.isEditable()) {
-      console.log('Error: you do not have permission to edit task(s) here');
+      console.warn('You do not have permission to edit task(s) here');
       inlineEditor.discardEditing();
     }
   },

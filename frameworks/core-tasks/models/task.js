@@ -317,7 +317,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
       if(taskHash.submitterId) {
         var submitterUser = CoreTasks.getUser(taskHash.submitterId);
         if (!submitterUser) {
-          console.log('Task Editing Error - no such submitter: ' + taskHash.submitterId);
+          console.warn('Task Editing Error - no such submitter: ' + taskHash.submitterId);
         }
         else {
           this.propertyWillChange('submitterId');
@@ -329,7 +329,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
       if(taskHash.assigneeId) {
         var assigneeUser = CoreTasks.getUser(taskHash.assigneeId);
         if (!assigneeUser) {
-          console.log('Task Editing Error - no such assignee: ' + taskHash.assigneeId);
+          console.warn('Task Editing Error - no such assignee: ' + taskHash.assigneeId);
         }
         else {
           this.propertyWillChange('assigneeId');
@@ -353,7 +353,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
       
       if(taskHash.validation) {
         if(this.get('developmentStatus') !== CoreTasks.TASK_STATUS_DONE && taskHash.validation !== CoreTasks.TASK_VALIDATION_UNTESTED) {
-          console.log('Task Editing Error - validation of Passed/Failed only possible for status Done: ' + taskHash.name);
+          console.warn('Task Editing Error - validation of Passed/Failed only possible for status Done: ' + taskHash.name);
         }
         else {
           this.propertyWillChange('validation');
@@ -468,7 +468,7 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
       }
     }
     else {
-      console.log('Task Parsing Error - multiple efforts illegal');
+      console.warn('Task Parsing Error - multiple efforts illegal');
     }
     
     return taskEffort;
@@ -516,7 +516,7 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
     var taskAssigneeMatches = taskLine.match(/\[[\w\s]+\]/g);
     if(taskAssigneeMatches) {
       if(taskAssigneeMatches.length === 1) taskAssignee = taskAssigneeMatches[0].slice(1, taskAssigneeMatches[0].length-1);
-      else console.log('Task Parsing Error - multiple assignees illegal: ' + taskAssigneeMatches);
+      else console.warn('Task Parsing Error - multiple assignees illegal: ' + taskAssigneeMatches);
     }
     
     // extract task submitter
@@ -524,7 +524,7 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
     var taskSubmitterMatches = taskLine.match(/\<[\w\s]+\>/g);
     if(taskSubmitterMatches) {
       if(taskSubmitterMatches.length === 1) taskSubmitter = taskSubmitterMatches[0].slice(1, taskSubmitterMatches[0].length-1);
-      else console.log('Task Parsing Error - multiple submitters illegal: ' + taskSubmitterMatches);
+      else console.warn('Task Parsing Error - multiple submitters illegal: ' + taskSubmitterMatches);
     }
     
     // extract task type
@@ -534,14 +534,14 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
       if(taskTypeMatches.length === 1) {
         var type = taskTypeMatches[0].slice(1);
         if(CoreTasks.taskTypesAllowed.indexOf('_' + type) === -1) {
-          console.log('Task Parsing Error - illegal type: ' + type);
+          console.warn('Task Parsing Error - illegal type: ' + type);
         }
         else {
           taskType = '_' + type;
         }
       }
       else {
-        console.log('Task Parsing Error - multiple types illegal: ' + taskTypeMatches);
+        console.warn('Task Parsing Error - multiple types illegal: ' + taskTypeMatches);
       }
     }
     
@@ -552,14 +552,14 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
       if(taskStatusMatches.length === 1) {
         var status = taskStatusMatches[0].slice(1);
         if(CoreTasks.taskStatusesAllowed.indexOf('_' + status) === -1) {
-          console.log('Task Parsing Error - illegal status: ' + status);
+          console.warn('Task Parsing Error - illegal status: ' + status);
         }
         else {
           taskStatus = '_' + status;
         }
       }
       else {
-        console.log('Task Parsing Error - multiple statuses illegal: ' + taskStatusMatches);
+        console.warn('Task Parsing Error - multiple statuses illegal: ' + taskStatusMatches);
       }
     }
     
@@ -570,18 +570,18 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
       if(taskValidationMatches.length === 1) {
         var validation = taskValidationMatches[0].slice(1);
         if(CoreTasks.taskValidationsAllowed.indexOf('_' + validation) === -1) {
-          console.log('Task Parsing Error - illegal validation: ' + validation);
+          console.warn('Task Parsing Error - illegal validation: ' + validation);
         }
         else {
           taskValidation = '_' + validation;
           if((taskStatus === null || taskStatus !== CoreTasks.TASK_STATUS_DONE) && taskValidation !== CoreTasks.TASK_VALIDATION_UNTESTED) {
             taskValidation = null;
-            console.log('Task Parsing Error - validation of Passed/Failed only possible for status Done: ' + taskName);
+            console.warn('Task Parsing Error - validation of Passed/Failed only possible for status Done: ' + taskName);
           }
         }
       }
       else {
-        console.log('Task Parsing Error - multiple validations illegal: ' + taskValidationMatches);
+        console.warn('Task Parsing Error - multiple validations illegal: ' + taskValidationMatches);
       }
     }
     
