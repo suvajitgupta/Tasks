@@ -250,7 +250,7 @@ Tasks.mainPage = SC.Page.design({
           layout: { top: 0, left:0, bottom: 0, right: 0 },
           contentValueKey: 'displayName',
           contentUnreadCountKey: 'displayTimeLeft',
-          contentBinding: 'Tasks.projectsController.arrangedObjects',
+          contentBinding: 'Tasks.sourcesController.arrangedObjects',
           selectionBinding: 'Tasks.projectsController.selection',
           localize: YES,
           rowHeight: 24,

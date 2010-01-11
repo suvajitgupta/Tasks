@@ -36,18 +36,17 @@
   right: 50px !important;
 }
 
-.reserved-project-item {
-  color: #888 !important;
-  font-weight: bold;
-} 
+.project-item .sc-outline {
+  left: 6px !important;
+  color: #222;
+}
 
-.regular-project-item {
-  color: #222 !important;
+.project-item.sel .sc-outline {
+  color: #FFF !important;
 }
 
 .project-item.sel,
 .project-item.sel .sc-outline:hover {
-  color: #FFF !important;
   background: static_url('images/default-theme-selected-project.png') no-repeat 0 0 !important;
 }
 
@@ -57,15 +56,15 @@
   background: #CCC none repeat scroll 0 0 !important;
 }
 
-.regular-project-item .sc-outline .count {
+.project-item .sc-outline .count {
 	font-weight: normal !important;
   line-height: 11px !important;
   color: black !important;
   border: 1px solid #CCC !important;
-  background: #EEE none repeat scroll 0 0 !important;
+  background: #FFF none repeat scroll 0 0 !important;
 }
 
-.regular-project-item.sel .sc-outline .count {
+.project-item.sel .sc-outline .count {
   color: #14398e !important;
   background: #c1dbff;
   border: 1px solid #c1dbff !important;

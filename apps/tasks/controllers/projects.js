@@ -3,7 +3,7 @@
 // ==========================================================================
 /*globals CoreTasks Tasks SCUI */
 /** 
-  This is the controller for the Projects master list
+  This is the controller for all Projects
 
   @extends SC.ArrayController
   @author Suvajit Gupta
@@ -13,6 +13,22 @@ Tasks.projectsController = SC.ArrayController.create(SCUI.StatusChanged,
 /** @scope Tasks.projectsController.prototype */ {
   
   allowsMultipleSelection: NO,
+  
+  sources: function() {
+    var nodes = [], tasksSources = [], projectsSources = [];
+    var projects = this.get('arrangedObjects');
+    if(projects) {
+      var len = projects.get('length');
+      for (var i = 0; i < len; i++) {
+        var project = projects.objectAt(i);
+        if(CoreTasks.isReservedProject(project)) tasksSources.push(project);
+        else projectsSources.push(project);
+      }
+      nodes.push(SC.Object.create({ displayName: "_Tasks".loc(), treeItemChildren: tasksSources, treeItemIsExpanded: YES }));
+      nodes.push(SC.Object.create({ displayName: "_Projects".loc(), treeItemChildren: projectsSources, treeItemIsExpanded: YES }));
+    }
+    return SC.Object.create({ treeItemChildren: nodes, treeItemIsExpanded: YES });
+  }.property('[]').cacheable(),
   
   isDeletable: function() {
     

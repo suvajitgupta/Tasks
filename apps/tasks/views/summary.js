@@ -21,13 +21,13 @@ Tasks.SummaryView = SC.View.extend(
   
   render: function(context, firstTime) {
 
-    var summary = "_Displaying".loc() + (this.get('projectsCount')-2) + "_Projects".loc();
+    var summary = "_Displaying".loc() + (this.get('projectsCount')-2) + "_projects".loc();
 
     if(this.tasksTree) {
       var assigneesCount = 0;
       var assignmentNodes = this.tasksTree.get('treeItemChildren');
       if(assignmentNodes) assigneesCount = assignmentNodes.get('length');
-      summary += assigneesCount + "_Assignees".loc();
+      summary += assigneesCount + "_assignees".loc();
 
       var tasksCount = 0;
       var redFlags = 0;

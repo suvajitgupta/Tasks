@@ -22,6 +22,8 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     
     var that = this;
     var content = this.get('content');
+    if(!content.get('id')) return sc_super();
+
     this.set('isReservedProject', CoreTasks.isReservedProject(content));
     
     var classes = event.target.className;
@@ -191,16 +193,13 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
   },
   
   render: function(context, firstTime) {
+    
     var content = this.get('content');
     if(content) {
       var projectTooltip = '';
-      context.addClass('project-item');
-      if (CoreTasks.isReservedProject(content)) {
-        context.addClass('reserved-project-item');
-        projectTooltip += "_ReservedProject".loc();
-      }
-      else {
-        context.addClass('regular-project-item');
+      if(content.get('id')) {
+        context.addClass('project-item');
+        if (CoreTasks.isReservedProject(content)) projectTooltip += "_ReservedProject".loc();
       }
 
       var tasks = content.get('tasks');

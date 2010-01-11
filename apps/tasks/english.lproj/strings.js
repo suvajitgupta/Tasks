@@ -26,6 +26,7 @@ SC.stringsFor('English', {
 
   // Top Bar strings
   "_Tasks": "Tasks",
+  "_Projects": "Projects",
   "_Credits": "Credits: Suvajit Gupta, Sean Eidemiller, Josh Holt, and Matt Grantham",
   "_User:": "User: ",
   "_Role:": "Role:",
@@ -82,9 +83,9 @@ SC.stringsFor('English', {
   "_DeleteProjectTooltip": "Delete selected project",
   "_ProjectDeletionConfirmation": "Tasks in this project will become unallocated, are you sure you want to delete it?",
   "_NewProject": "New Project",
-  "_AllTasks": " All Tasks",
+  "_AllTasks": "All Tasks",
   "_Unallocated": "Unallocated",
-  "_UnallocatedTasks": " Unallocated Tasks",
+  "_UnallocatedTasks": "Unallocated Tasks",
   "_ProjectEditorTooltip": "Click to view/edit project details (time left, description)",
   "_ReservedProject": "Is a reserved project (cannot edit/delete)",
   "_Has": "Has ",
@@ -173,8 +174,8 @@ SC.stringsFor('English', {
   
   // Status Bar strings
   "_Displaying": "Displaying ",
-  "_Projects": " project(s), ",
-  "_Assignees": " assignee(s), and ",
+  "_projects": " project(s), ",
+  "_assignees": " assignee(s), and ",
   "_RedFlags": " red flag(s)",
   "_UsersLoaded": "Loaded users, ",
   "_TasksLoaded": "tasks, ",
