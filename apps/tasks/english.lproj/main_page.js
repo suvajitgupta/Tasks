@@ -60,7 +60,6 @@ Tasks.mainPage = SC.Page.design({
           layout: { centerY: 0, right: 220, height: 32, width: 70 },
           icon: ['import-icon'],
           toolTip: "_ImportTooltip".loc(),
-          isEnabledBinding: 'CoreTasks.permissions.canImportData',
           target: 'Tasks',
           action: 'importData'
         }),

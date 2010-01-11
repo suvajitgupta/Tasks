@@ -71,7 +71,7 @@ Tasks.importDataController = SC.ObjectController.create(
               if(assigneeUser) taskHash.assigneeId = assigneeUser.get('id');
             }
             else {
-              console.log('Task Import Error - no such assignee: ' + taskHash.assigneeId);
+              console.warn('Task Import Error - no such assignee: ' + taskHash.assigneeId);
               taskHash.assigneeId = null;
             }
           }
@@ -86,7 +86,7 @@ Tasks.importDataController = SC.ObjectController.create(
               if(submitterUser) taskHash.submitterId = submitterUser.get('id');
             }
             else {
-              console.log('Task Import Error - no such submitter: ' + taskHash.submitterId);
+              console.warn('Task Import Error - no such submitter: ' + taskHash.submitterId);
               taskHash.submitterId = null;
             }
           }
@@ -113,7 +113,7 @@ Tasks.importDataController = SC.ObjectController.create(
           if(currentProject) taskHash.projectId = currentProject.get('id');
           
           var taskRecord = CoreTasks.createRecord(CoreTasks.Task, taskHash);
-          if(!taskRecord) console.log('Task Import Error: task creation failed');
+          if(!taskRecord) console.error('Import Error: task creation failed');
         }
         else if (line.search(/^\s*$/) === 0) { // a blank line
           // console.log('Blank Line:');
@@ -122,41 +122,36 @@ Tasks.importDataController = SC.ObjectController.create(
           var projectHash = CoreTasks.Project.parse(line);
           // console.log ('Project:\t\t' + JSON.stringify(projectHash));
           
-          var projectRecord = CoreTasks.getProject(projectHash.name);
-          if(projectRecord) {
-            currentProject = projectRecord;
-          }
-          else {
-            
-            if(!CoreTasks.getPath('permissions.canAddProject')) {
-              console.log('Error: you do not have permission to import a project');
-              break;
-            }
-            
-            // Peek ahead to the next line(s) to see if there is a Description and bring those in
-            description = null;
-            while (i < (lines.length-1)) {
-              nextLine = lines[++i];
-              if (nextLine.indexOf('| ') === 0) { // a Description line
-                descriptionLine = nextLine.slice(2);
-                description = (description? (description + '\n') : '') + descriptionLine;
-              }
-              else {
-                i--;
-                break;
-              }
-            }
-            if(description) {
-              projectHash.description = description;
-              // console.log('Description:\t' + description);
-            }
-            
-            projectRecord = CoreTasks.createRecord(CoreTasks.Project, projectHash);
-            if(projectRecord) {
-              currentProject = projectRecord;
+          // Peek ahead to the next line(s) to see if there is a Description and bring those in
+          description = null;
+          while (i < (lines.length-1)) {
+            nextLine = lines[++i];
+            if (nextLine.indexOf('| ') === 0) { // a Description line
+              descriptionLine = nextLine.slice(2);
+              description = (description? (description + '\n') : '') + descriptionLine;
             }
             else {
-              console.log('Project Import Error: project creation failed!');
+              i--;
+              break;
+            }
+          }
+          if(description) {
+            projectHash.description = description;
+            // console.log('Description:\t' + description);
+          }
+          
+          var projectRecord = CoreTasks.getProject(projectHash.name);
+          if(projectRecord) { // existing project - switch to it
+            if(CoreTasks.getPath('currentUser.role') !== CoreTasks.USER_ROLE_GUEST) currentProject = projectRecord;
+          }
+          else { // create new project if allowed and switch to it if allowed
+            if(CoreTasks.getPath('permissions.canAddProject')) {
+              projectRecord = CoreTasks.createRecord(CoreTasks.Project, projectHash);
+              if(projectRecord) currentProject = projectRecord;
+              else console.error('Import Error: project creation failed!');
+            }
+            else {
+              console.warn('Import Error: you do not have permission to create project \""' + projectHash.name + '"');
             }
           }
         }

@@ -15,8 +15,8 @@ Design/Planning
 - Design REST API supporting CRUD operations [SG] <SE> @Done
 - Design Tasks Server & evaluate persistence frameworks [SE] <SG> @Done
 - Design RBAC (role-based access control) to be implemented on GUI and Server <JH2> [SG] @Done
-| Managers have permission to do full CRUD on Projects/Tasks/Users & Import
-| Developers/Testers can only R on Projects, full CRUD on Tasks, and Import Tasks (not create new Projects)
+| Managers have permission to do full CRUD on Projects/Tasks/Users
+| Developers/Testers can only R on Projects, full CRUD on Tasks
 | Guests can only R on Projects/Tasks, and CU unallocated Tasks
 
 General Infrastructure
