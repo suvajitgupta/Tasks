@@ -39,13 +39,8 @@ Tasks.mainPage = SC.Page.design({
           classNames: ['user-role-message']
         }),
         
-        SC.View.design({
-          layout: { top: 8, bottom: 8, right: 405, width: 2 },
-          classNames: ['top-bar-divider']
-        }),
-
         SC.LabelView.design( SCUI.SimpleButton, {
-          layout: { centerY: 0, right: 340, height: 32, width: 70 },
+          layout: { centerY: 0, right: 325, height: 32, width: 70 },
           icon: ['save-icon'],
           toolTip: "_SaveTooltip".loc(),
           isEnabledBinding: 'CoreTasks.needsSave',
@@ -54,16 +49,11 @@ Tasks.mainPage = SC.Page.design({
         }),
         
         SC.LabelView.design( SCUI.SimpleButton, {
-          layout: { centerY: 0, right: 285, height: 32, width: 70 },
+          layout: { centerY: 0, right: 270, height: 32, width: 70 },
           classNames: ['refresh-icon'],
           toolTip: "_RefreshTooltip".loc(),
           target: 'Tasks',
           action: 'refreshData'
-        }),
-        
-        SC.View.design({
-          layout: { top: 8, bottom: 8, right: 285, width: 2 },
-          classNames: ['top-bar-divider']
         }),
         
         SC.LabelView.design( SCUI.SimpleButton, {
