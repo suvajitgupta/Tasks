@@ -145,7 +145,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
               objectsBinding: this._listProjects(),
               nameKey: 'displayName',
               valueKey: 'id',
-              isEnabledBinding: 'Tasks.tasksController.isEditable',
+              isEnabledBinding: 'Tasks.tasksController.isReallocatable',
               valueBinding: SC.binding('.content.projectValue', this)
             }),
 

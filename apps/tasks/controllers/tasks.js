@@ -50,6 +50,14 @@ Tasks.tasksController = SC.TreeController.create(
     
   }.property('selection').cacheable(),
   
+  isReallocatable: function() {
+    
+    if(CoreTasks.getPath('currentUser.role') === CoreTasks.USER_ROLE_GUEST) return false;
+    
+    return this.isEditable();
+    
+  }.property('isEditable').cacheable(),
+  
   isDeletable: function() {
     
     if(Tasks.assignmentsController.get('displayMode') === Tasks.DISPLAY_MODE_TEAM) return false;
