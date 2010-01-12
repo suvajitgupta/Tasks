@@ -76,17 +76,17 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         },
         
         didBecomeKeyPaneFrom: function(pane) {
-          console.log('DEBUG: didBecomeKeyPaneFrom()');
+          // console.log('DEBUG: didBecomeKeyPaneFrom()');
           sc_super();
           var content = that.get('content');
           content.beginEditing();
         },
         didLoseKeyPaneTo: function(pane) {
-          console.log('DEBUG: didLoseKeyPaneTo()');
+          // console.log('DEBUG: didLoseKeyPaneTo()');
           sc_super();
           var content = that.get('content');
           content.endEditing();
-          // FIXME: [SG] Beta: this is causing record to be dirtied even if no changes are made
+          // FIXME: [SC] Beta: this is causing record to be dirtied even if no changes are made
         },
         
         contentView: SC.View.design({

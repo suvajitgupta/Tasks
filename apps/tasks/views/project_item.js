@@ -60,7 +60,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
           sc_super();
           var content = that.get('content');
           content.endEditing();
-          // FIXME: [SG] Beta: this is causing record to be dirtied even if no changes are made
+          // FIXME: [SC] Beta: this is causing record to be dirtied even if no changes are made
         },
         
         contentView: SC.View.design({
