@@ -88,8 +88,8 @@ CoreTasks.User = CoreTasks.Record.extend({
    * A string summarizing key facets of the Task for display.
    */
   displayName: function() {
-    var name = this.get('name');
-    var loginName = this.get('loginName');
+    var name = this.get('name').loc();
+    var loginName = this.get('loginName').loc();
     return '%@ (%@)'.fmt(name, loginName);
   }.property('name', 'loginName').cacheable(),
   

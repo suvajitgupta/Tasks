@@ -20,9 +20,6 @@ Tasks.settingsController = SC.ObjectController.create(
       if(panel) {
         // Scroll to/select logged in user and open User Manager
         var currentUser = CoreTasks.get('currentUser');
-        var usersList = Tasks.settingsPage.get('usersList');
-        var idx = usersList.get('content').indexOf(currentUser);
-        usersList.scrollToContentIndex(idx); // FIXME: [SC] see why list won't scroll to selected item on demand
         Tasks.usersController.selectObject(currentUser);
         panel.append();
       }

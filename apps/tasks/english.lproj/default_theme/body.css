@@ -171,3 +171,7 @@ body {
 .sc-view.sc-button-view.sc-menu-item.disabled {
   height: 4px !important;
 }
+
+.users-pane-inner .sc-view.sc-list-item-view.sc-collection-item .sc-outline {
+  left: 15px !important;
+}
