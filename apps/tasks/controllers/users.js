@@ -38,7 +38,7 @@ Tasks.usersController = SC.ArrayController.create(SCUI.StatusChanged,
   editableUsers: [], // based on role, only current user or all users are available in User Manager
   
   contentStatusDidChange: function(status){
-    // console.log("DEBUG: usersController " + status);
+    // console.log('DEBUG: usersController ' + status);
     if (status & SC.Record.READY){
       var currentUser = CoreTasks.getUser(Tasks.loginName);
       if(currentUser) {
@@ -49,7 +49,7 @@ Tasks.usersController = SC.ArrayController.create(SCUI.StatusChanged,
           this.set('editableUsers', [ currentUser ]);
         }
       }
-      // console.log("DEBUG: role of " + currentUser.get('role') + " should see #users = " + this.getPath('editableUsers.length'));
+      // console.log('DEBUG: role of ' + currentUser.get('role') + ' should see #users = ' + this.getPath('editableUsers.length'));
       Tasks.usersLoadSuccess();
     }
     else if (status & SC.Record.ERROR){

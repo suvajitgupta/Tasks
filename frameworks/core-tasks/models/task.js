@@ -595,7 +595,7 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
       developmentStatus: taskStatus,
       validation: taskValidation
     };
-    // console.log("DEBUG: Task hash = " + JSON.stringify(ret));
+    // console.log('DEBUG: Task hash = ' + JSON.stringify(ret));
     return ret;
     
   }

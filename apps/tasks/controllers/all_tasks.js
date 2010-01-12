@@ -18,7 +18,7 @@ Tasks.allTasksController = SC.ArrayController.create(SCUI.StatusChanged,
   /** @scope Tasks.allTasksController.prototype */ {
     
   contentStatusDidChange: function(status){
-    // console.log("DEBUG: allTasksController " + status);
+    // console.log('DEBUG: allTasksController ' + status);
     if (status & SC.Record.READY){
       Tasks.tasksLoadSuccess();
     }

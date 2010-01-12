@@ -68,6 +68,8 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
    * @returns {SC.RecordArray} An array of tasks.
    */
   tasks: function() {
+    
+    // console.log('DEBUG: Task model tasks(): ' + this.get('displayName'));
     var query, recArray ;
     
     if (this.get('name') === CoreTasks.ALL_TASKS_NAME.loc()) {
@@ -271,7 +273,7 @@ CoreTasks.Project.mixin(/** @scope CoreTasks.Project */ {
       timeLeft: projectTimeLeft,
       tasks: []
     };
-    // console.log("DEBUG: Project hash = " + JSON.stringify(ret));
+    // console.log('DEBUG: Project hash = ' + JSON.stringify(ret));
     return ret;
     
   }

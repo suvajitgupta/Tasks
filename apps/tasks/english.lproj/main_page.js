@@ -252,7 +252,13 @@ Tasks.mainPage = SC.Page.design({
           canDeleteContent: true,
           destroyOnRemoval: YES,
           exampleView: Tasks.ProjectItemView,
-          delegate: Tasks.reallocationController
+          delegate: Tasks.reallocationController,
+          
+          render: function(context, firstTime) {
+            // console.log('DEBUG-ON: Projects Master render(), editorPoppedUp=' + Tasks.editorPoppedUp);
+            if(Tasks.loginTime) return;
+            sc_super();
+          }
         })
       }),
       
@@ -281,10 +287,9 @@ Tasks.mainPage = SC.Page.design({
           groupExampleView: Tasks.AssigneeItemView,
           delegate: Tasks.reassignmentController,
           selectOnMouseDown: YES,
-          target: 'Tasks.assignmentsController',
-          action: 'showAssignee',
           
           render: function(context, firstTime) {
+            // console.log('DEBUG-ON: Tasks Detail render(), editorPoppedUp=' + Tasks.editorPoppedUp);
             if(Tasks.loginTime) return;
             var tasksCount = Tasks.projectsController.getPath('selection.firstObject.tasks.length');
             if(tasksCount === 0) {

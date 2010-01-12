@@ -18,7 +18,7 @@ Tasks.projectsController = SC.ArrayController.create(SCUI.StatusChanged,
   
   showSources: function() {
     
-    // console.log('DEBUG: sources()');
+    // console.log('DEBUG-ON: projectsController content changed, editorPoppedUp=' + Tasks.editorPoppedUp);
     Tasks.sourcesRedrawNeeded = true;
     if(Tasks.editorPoppedUp) return;
     
@@ -62,7 +62,7 @@ Tasks.projectsController = SC.ArrayController.create(SCUI.StatusChanged,
   }.property('selection').cacheable(),
   
   contentStatusDidChange: function(status){
-    // console.log("DEBUG: projectsController " + status);
+    // console.log('DEBUG: projectsController ' + status);
     if (status & SC.Record.READY){
       Tasks.projectsLoadSuccess();
     }

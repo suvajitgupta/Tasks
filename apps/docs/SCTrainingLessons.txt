@@ -4,7 +4,7 @@
 - Ensure @scope & @extend for all files
 - Kill all require sc_require('core'); statements
 - Named hashes are strange in SC - find other ways instead
-- Don't use .observes()
+- Minimize use of .observes()
 - Don't put view properties or actions in controllers
 - Don't get('content') from controllers (e.g., as in exportData)
 - Ensure bindings are of the form 'Namespace.Object.Property'

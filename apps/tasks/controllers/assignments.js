@@ -213,7 +213,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
   // count: 0, // used for tracking/tuning calls to redraw tasks pane below
   showAssignments: function() { // show tasks for selected user that matches search filter
    
-    // console.log("DEBUG: showAssignments(" + this.count + ") entry at: " + new Date().format('hh:mm:ss a'));
+    // console.log('DEBUG: showAssignments(' + this.count + ') entry at: ' + new Date().format('hh:mm:ss a'));
     
     // Extract selected assignee users whose tasks are to be displayed
     var selection = Tasks.tasksController.get('selection');
@@ -243,7 +243,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     if (searchFilter && searchFilter !== '') { // if a search filter is specified
       searchFilter = this._escapeMetacharacters(searchFilter);
       var idMatches = searchFilter.match(/#([\-\d]+)/g);
-      // console.log("DEBUG: idMatches = " + idMatches);
+      // console.log('DEBUG: idMatches = ' + idMatches);
       if(!idMatches) {
         if (searchFilter.indexOf('^') === 0) { // inverse search specified
           positiveMatch = false;
@@ -359,7 +359,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     }), treeItemIsExpanded: YES }));
     
     if(selection) Tasks.tasksController.selectObjects(selection);
-    // console.log("DEBUG: showAssignments(" + this.count++ + ") exit  at: " + new Date().format('hh:mm:ss a'));
+    // console.log('DEBUG: showAssignments(' + this.count++ + ') exit  at: ' + new Date().format('hh:mm:ss a'));
     Tasks.assignmentsRedrawNeeded = false;    
 
   },
@@ -394,23 +394,6 @@ Tasks.assignmentsController = SC.ArrayController.create(
     for (var i = 0; i < len; i++) {
       
       task = tasks.objectAt(i);
-      
-      // Add observers to certain task properties that can require the assignmentsController to redraw
-      // FIXME: [SC] see why bindings are firing multiple times when only one property is changed
-      task.removeObserver('assignee',Tasks.assignmentsController,'_contentHasChanged');
-      task.removeObserver('name',Tasks.assignmentsController,'_contentHasChanged');
-      task.removeObserver('type',Tasks.assignmentsController,'_contentHasChanged');
-      task.removeObserver('priority',Tasks.assignmentsController,'_contentHasChanged');
-      task.removeObserver('developmentStatus',Tasks.assignmentsController,'_contentHasChanged');
-      task.removeObserver('validation',Tasks.assignmentsController,'_contentHasChanged');
-      task.removeObserver('effort',Tasks.assignmentsController,'_contentHasChanged');
-      task.addObserver('assignee',Tasks.assignmentsController,'_contentHasChanged');
-      task.addObserver('name',Tasks.assignmentsController,'_contentHasChanged');
-      task.addObserver('type',Tasks.assignmentsController,'_contentHasChanged');
-      task.addObserver('priority',Tasks.assignmentsController,'_contentHasChanged');
-      task.addObserver('developmentStatus',Tasks.assignmentsController,'_contentHasChanged');
-      task.addObserver('validation',Tasks.assignmentsController,'_contentHasChanged');
-      task.addObserver('effort',Tasks.assignmentsController,'_contentHasChanged');
       
       // Extract/total effort for each task (simple number or a range)
       effortString = task.get('effort');
@@ -530,7 +513,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
   _timer: null,
   
   _contentHasChanged: function() {
-    // console.log("DEBUG: Tasks content changed at: " + new Date().format('hh:mm:ss a'));
+    // console.log('DEBUG-ON: assignmentsController content changed, editorPoppedUp=' + Tasks.editorPoppedUp);
     Tasks.assignmentsRedrawNeeded = true;    
     if(Tasks.editorPoppedUp) return;
   	if (this._timer) { // called as a result of a timer set for assignee selection or search filter changes
@@ -546,7 +529,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
   },
   
   _assigneeSelectionHasChanged: function() {
-    // console.log("DEBUG: Assignee selection changed to '" + this.assigneeSelection + "'" + " displayDetails = " + this.get('_showTasks'));
+    // console.log('DEBUG: Assignee selection changed to "' + this.assigneeSelection + '" + ' displayDetails = ' + this.get('_showTasks'));
     if(!this.get('_showTasks') && !this._clearingAssigneeSelection) {
       this.set('_showTasks', true);
     }
@@ -555,7 +538,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
   }.observes('assigneeSelection'),
   
   _searchFilterHasChanged: function() {
-    // console.log("DEBUG: Search filter changed to '" + this.searchFilter + "'");
+    // console.log('DEBUG: Search filter changed to "' + this.searchFilter + '"');
     this._filteringHasChanged();
   }.observes('searchFilter')
   

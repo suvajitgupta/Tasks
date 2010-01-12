@@ -15,6 +15,8 @@ sc_require('mixins/localized_label');
 Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
 /** @scope Tasks.ProjectItemView.prototype */ {
   
+  displayProperties: ['displayName', 'displayTimeLeft'],
+  
   /** @private
     If mouse was down over Description Icon open the editor.
   */  
@@ -183,10 +185,10 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
   
   render: function(context, firstTime) {
     
-    sc_super();
     var content = this.get('content');
     if(!content) return;
-    // console.log('DEBUG: Project.render(): ' + content.get('displayName'));
+    // console.log('DEBUG-ON: Project render(): ' + content.get('displayName'));
+    sc_super();
     
     var projectTooltip = '';
     if(content.get('id')) {
