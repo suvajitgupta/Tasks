@@ -14,8 +14,14 @@ Tasks.projectsController = SC.ArrayController.create(SCUI.StatusChanged,
   
   allowsMultipleSelection: NO,
   
-  sources: function() {
+  sources: null,
+  
+  showSources: function() {
+    
     // console.log('DEBUG: sources()');
+    Tasks.sourcesRedrawNeeded = true;
+    if(Tasks.editorPoppedUp) return;
+    
     var nodes = [], tasksSources = [], projectsSources = [];
     var projects = this.get('arrangedObjects');
     if(projects) {
@@ -33,8 +39,11 @@ Tasks.projectsController = SC.ArrayController.create(SCUI.StatusChanged,
         else return aName > bName? 1 : -1;
       }), treeItemIsExpanded: YES }));
     }
-    return SC.Object.create({ treeItemChildren: nodes, treeItemIsExpanded: YES });
-  }.property('[]').cacheable(),
+    
+    this.set('sources', SC.Object.create({ treeItemChildren: nodes, treeItemIsExpanded: YES }));
+    Tasks.sourcesRedrawNeeded = false;
+    
+  }.observes('[]'),
   
   isDeletable: function() {
     

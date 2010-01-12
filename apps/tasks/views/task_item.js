@@ -64,29 +64,16 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         layout: { width: 740, height: 300 },
         
         // Avoid popup panel coming up on other items while it is up already
-        poppedUp: false,
         popup: function() {
-          if(this.poppedUp) return;
-          this.poppedUp = true;
           sc_super();
+          Tasks.editorPoppedUp = true;
         },
         remove: function() {
-          this.poppedUp = false;
           sc_super();
-        },
-        
-        didBecomeKeyPaneFrom: function(pane) {
-          // console.log('DEBUG: didBecomeKeyPaneFrom()');
-          sc_super();
-          var content = that.get('content');
-          content.beginEditing();
-        },
-        didLoseKeyPaneTo: function(pane) {
-          // console.log('DEBUG: didLoseKeyPaneTo()');
-          sc_super();
-          var content = that.get('content');
-          content.endEditing();
-          // FIXME: [SC] Beta: this is causing record to be dirtied even if no changes are made
+          Tasks.editorPoppedUp = false;
+          if(Tasks.assignmentsRedrawNeeded) {
+            Tasks.assignmentsController.showAssignments();
+          }
         },
         
         contentView: SC.View.design({
@@ -408,9 +395,9 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   render: function(context, firstTime) {
     
     sc_super();
-    
     var content = this.get('content');
     if(!content) return;
+    // console.log('DEBUG: Task.render(): ' + content.get('displayName'));
     
     // Put a badge before Planned tasks that were created or updated recently
     var developmentStatus = content.get('developmentStatus');

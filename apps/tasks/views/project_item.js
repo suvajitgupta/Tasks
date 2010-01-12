@@ -36,31 +36,21 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
         _timeLeft: null,
         
         // Avoid popup panel coming up on other items while it is up already
-        poppedUp: false,
         popup: function() {
-          if(that.get('isSystemProject')) return;
-          this.poppedUp = true;
-          this._timeLeft = that.getPath('content.timeLeft');
           sc_super();
+          Tasks.editorPoppedUp = true;
+          if(that.get('isSystemProject')) return;
+          this._timeLeft = that.getPath('content.timeLeft');
         },
         remove: function() {
-          this.poppedUp = false;
           sc_super();
+          Tasks.editorPoppedUp = false;
+          if(Tasks.sourcesRedrawNeeded) {
+            Tasks.projectsController.showSources();
+          }
           if(this._timeLeft !== that.getPath('content.timeLeft')) { // if timeLeft has changed, redraw got load balancing recalculation
             Tasks.assignmentsController.showAssignments();
           }
-        },
-        
-        didBecomeKeyPaneFrom: function(pane) {
-          sc_super();
-          var content = that.get('content');
-          content.beginEditing();
-        },
-        didLoseKeyPaneTo: function(pane) {
-          sc_super();
-          var content = that.get('content');
-          content.endEditing();
-          // FIXME: [SC] Beta: this is causing record to be dirtied even if no changes are made
         },
         
         contentView: SC.View.design({
@@ -192,23 +182,26 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
   },
   
   render: function(context, firstTime) {
+    
+    sc_super();
     var content = this.get('content');
-    if(content) {
-      var projectTooltip = '';
-      if(content.get('id')) {
-        context.addClass('project-item');
-        var tasks = content.get('tasks');
-        if(tasks) {
-          projectTooltip += "_Has".loc() + tasks.get('length') + "_tasks".loc();
-        }
-        if (CoreTasks.isSystemProject(content)) projectTooltip += ('; ' + "_SystemProject".loc());
-        else if(content.get('displayTimeLeft')) projectTooltip += ('; ' + "_ProjectTimeLeftTooltip".loc());
-        if(projectTooltip !== '') {
-          context.attr('title', projectTooltip);
-          context.attr('alt', projectTooltip);
-        }
+    if(!content) return;
+    // console.log('DEBUG: Project.render(): ' + content.get('displayName'));
+    
+    var projectTooltip = '';
+    if(content.get('id')) {
+      context.addClass('project-item');
+      var tasks = content.get('tasks');
+      if(tasks) {
+        projectTooltip += "_Has".loc() + tasks.get('length') + "_tasks".loc();
+      }
+      if (CoreTasks.isSystemProject(content)) projectTooltip += ('; ' + "_SystemProject".loc());
+      else if(content.get('displayTimeLeft')) projectTooltip += ('; ' + "_ProjectTimeLeftTooltip".loc());
+      if(projectTooltip !== '') {
+        context.attr('title', projectTooltip);
+        context.attr('alt', projectTooltip);
       }
     }
-    sc_super();
+
   }
 });

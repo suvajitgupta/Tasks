@@ -360,6 +360,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     
     if(selection) Tasks.tasksController.selectObjects(selection);
     // console.log("DEBUG: showAssignments(" + this.count++ + ") exit  at: " + new Date().format('hh:mm:ss a'));
+    Tasks.assignmentsRedrawNeeded = false;    
 
   },
   
@@ -530,6 +531,8 @@ Tasks.assignmentsController = SC.ArrayController.create(
   
   _contentHasChanged: function() {
     // console.log("DEBUG: Tasks content changed at: " + new Date().format('hh:mm:ss a'));
+    Tasks.assignmentsRedrawNeeded = true;    
+    if(Tasks.editorPoppedUp) return;
   	if (this._timer) { // called as a result of a timer set for assignee selection or search filter changes
       this._timer.invalidate();
       this._timer = null;
