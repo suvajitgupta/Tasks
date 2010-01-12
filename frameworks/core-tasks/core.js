@@ -17,31 +17,33 @@ CoreTasks = SC.Object.create({
   store: SC.Store.create({
     
     createRecord: function(recordType, dataHash, id) {
-      var ret = sc_super() ;
-      CoreTasks.set('needsSave', YES) ;
-      return ret ;
+      // console.log('DEBUG: createRecord(): recordType=' + recordType + ', dataHash=' + JSON.stringify(dataHash));
+      var ret = sc_super();
+      CoreTasks.set('needsSave', YES);
+      return ret;
     },
     
     recordDidChange: function(recordType, id, storeKey, key) {
-      // console.log("DEBUG: recordDidChange(): " + recordType);
-      var ret = sc_super() ; // MUST COME FIRST
+      // console.log('DEBUG: recordDidChange(): storeKey=' + storeKey + ', key=' + key);
+      var ret = sc_super(); // MUST COME FIRST
       
       if (storeKey === undefined) storeKey = recordType.storeKeyFor(id);
       var status = this.readStatus(storeKey), K = SC.Record;
       
       if (status & K.RECORD_DIRTY || status & K.READY_NEW || 
           status & K.DESTROYED_DIRTY) {
-        // console.log('got a dirty record') ;
-        CoreTasks.set('needsSave', YES) ;
+        // console.log('got a dirty record');
+        CoreTasks.set('needsSave', YES);
       }
       
-      return ret ;
+      return ret;
     },
     
     destroyRecord: function(recordType, id, storeKey) {
-      var ret = sc_super() ;
-      CoreTasks.set('needsSave', YES) ;
-      return ret ;
+      // console.log('DEBUG: destroyRecord(): storeKey=' + storeKey);
+      var ret = sc_super();
+      CoreTasks.set('needsSave', YES);
+      return ret;
     }
     
   }),
@@ -75,7 +77,7 @@ CoreTasks = SC.Object.create({
     
     if(this.store) this.store.reset();
     
-    this.set('needsSave', NO) ;
+    this.set('needsSave', NO);
     
   },
   
@@ -364,7 +366,7 @@ CoreTasks = SC.Object.create({
     // Apparently there was nothing to persist, which shouldn't ever happen.
     console.log('Nothing new to save.');
     this.set('saveMode', CoreTasks.MODE_NOT_SAVING);
-    this.set('needsSave', NO) ;
+    this.set('needsSave', NO);
   },
 
   _saveUsers: function() {
@@ -406,7 +408,7 @@ CoreTasks = SC.Object.create({
 
       this.set('recordBeingSaved', null);
       this.set('saveMode', CoreTasks.MODE_NOT_SAVING);
-      this.set('needsSave', NO) ;
+      this.set('needsSave', NO);
 
       this._dirtyUsers = [];
       this._dirtyProjects = [];
@@ -467,7 +469,7 @@ CoreTasks = SC.Object.create({
 
         this.set('recordBeingSaved', null);
         this.set('saveMode', CoreTasks.MODE_NOT_SAVING);
-        this.set('needsSave', NO) ;
+        this.set('needsSave', NO);
 
         this._dirtyUsers = [];
         this._dirtyProjects = [];
@@ -520,7 +522,7 @@ CoreTasks = SC.Object.create({
 
         this.set('recordBeingSaved', null);
         this.set('saveMode', CoreTasks.MODE_NOT_SAVING);
-        this.set('needsSave', NO) ;
+        this.set('needsSave', NO);
 
         this._dirtyUsers = [];
         this._dirtyProjects = [];
@@ -556,7 +558,7 @@ CoreTasks = SC.Object.create({
 
           this.set('recordBeingSaved', null);
           this.set('saveMode', CoreTasks.MODE_NOT_SAVING);
-          this.set('needsSave', NO) ;
+          this.set('needsSave', NO);
 
           this._dirtyUsers = [];
           this._dirtyProjects = [];
@@ -569,7 +571,7 @@ CoreTasks = SC.Object.create({
 
         this.set('recordBeingSaved', null);
         this.set('saveMode', CoreTasks.MODE_NOT_SAVING);
-        this.set('needsSave', NO) ;
+        this.set('needsSave', NO);
 
         this._dirtyUsers = [];
         this._dirtyProjects = [];

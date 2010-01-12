@@ -54,12 +54,12 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
         didBecomeKeyPaneFrom: function(pane) {
           sc_super();
           var content = that.get('content');
-          content.beginPropertyChanges();
+          content.beginEditing();
         },
         didLoseKeyPaneTo: function(pane) {
           sc_super();
           var content = that.get('content');
-          content.endPropertyChanges();
+          content.endEditing();
         },
         
         contentView: SC.View.design({
