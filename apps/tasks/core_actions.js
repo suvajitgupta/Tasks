@@ -275,7 +275,6 @@ Tasks.mixin({
   /**
    * Handle application exiting request.
    */
-  // FIXME: [SG] Beta: make logout exit completely and redirect to login screen
   logout: function() {
     SC.AlertPane.warn("_Confirmation".loc(), "_LogoutConfirmation".loc(), null, "_No".loc(), "_Yes".loc(), null,
       SC.Object.create({
