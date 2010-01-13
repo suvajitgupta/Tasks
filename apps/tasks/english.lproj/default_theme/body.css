@@ -175,3 +175,16 @@ body {
 .users-pane-inner .sc-view.sc-list-item-view.sc-collection-item .sc-outline {
   left: 15px !important;
 }
+
+.statistics-pane td {
+  border: 0 !important;
+  font-size: 11px !important;
+}
+
+.statistics-pane tr.even {
+  background-color: silver;
+}
+
+.statistics-pane tr.odd {
+  background-color: white;
+}

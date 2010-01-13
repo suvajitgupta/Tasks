@@ -16,13 +16,13 @@ sc_require('core');
 
 Tasks.statisticsPane = SC.PanelPane.create({  
   
-  layout: { centerX: 0, centerY: 0, height: 300, width: 500 },
+  layout: { centerX: 0, centerY: 0, height: 260, width: 600 },
   classNames: ['statistics-pane'],
   
   contentView: SC.View.design({
     
     layout: { top: 0, left: 0, bottom: 0, right: 0 },
-    childViews: 'titlebar projectName statistics closeButton'.w(),
+    childViews: 'titlebar projectNameLabel projectName statistics closeButton'.w(),
     
     titlebar: SC.View.design(SC.Border, {
       layout: { left: 10, right: 10, top: 10, height: 35 },
@@ -36,16 +36,21 @@ Tasks.statisticsPane = SC.PanelPane.create({
       ]
     }),
     
-    projectName: SC.LabelView.design({
-      layout: { top: 50, left: 10, height: 40, right: 10 },
-      textAlign: SC.ALIGN_CENTER,
-      valueBinding: 'Tasks.projectController.projectName'
+    projectNameLabel: SC.LabelView.design({
+      layout: { top: 50, left: 10, height: 20, width: 50 },
+      value: "_Project:".loc()
     }),
     
-    statistics: SC.TextFieldView.design({
+    projectName: SC.LabelView.design({
+      layout: { top: 50, left: 60, height: 20, right: 10 },
+      fontWeight: SC.BOLD_WEIGHT,
+      valueBinding: 'Tasks.projectController*content.name'
+    }),
+    
+    statistics: SC.LabelView.design({
       layout: { top: 75, left: 10, right: 10, bottom: 40 },
-      valueBinding: 'Tasks.projectController.projectStatistics',
-      isTextArea: YES
+      escapeHTML: NO,
+      valueBinding: 'Tasks.projectController.projectStatistics'
     }),
     
     closeButton: SC.ButtonView.design({

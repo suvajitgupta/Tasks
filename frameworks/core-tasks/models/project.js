@@ -205,6 +205,55 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
   },
   
   /**
+   * Get statistics about the tasks in the project
+   *
+   */
+  statistics: function() {
+
+    var tasks = this.get('tasks');
+    var tasksCount = tasks.get('length');
+    var featureCount = 0, bugCount = 0, otherCount = 0;
+    var highCount = 0, mediumCount = 0, lowCount = 0;
+    var plannedCount = 0, activeCount = 0, doneCount = 0, riskyCount = 0;
+    var untestedCount = 0, passedCount = 0, failedCount = 0;
+    if(tasksCount > 0) {
+      for(var i=0; i<tasksCount; i++) {
+        var task = tasks.objectAt(i);
+        switch(task.get('type')) {
+          case CoreTasks.TASK_TYPE_FEATURE: featureCount++; break;
+          case CoreTasks.TASK_TYPE_BUG: bugCount++; break;
+          case CoreTasks.TASK_TYPE_OTHER: otherCount++; break;
+        }
+        switch(task.get('priority')) {
+          case CoreTasks.TASK_PRIORITY_HIGH: highCount++; break;
+          case CoreTasks.TASK_PRIORITY_MEDIUM: mediumCount++; break;
+          case CoreTasks.TASK_PRIORITY_LOW: lowCount++; break;
+        }
+        switch(task.get('developmentStatus')) {
+          case CoreTasks.TASK_STATUS_PLANNED: plannedCount++; break;
+          case CoreTasks.TASK_STATUS_ACTIVE: activeCount++; break;
+          case CoreTasks.TASK_STATUS_DONE: doneCount++; break;
+          case CoreTasks.TASK_STATUS_RISKY: riskyCount++; break;
+        }
+        switch(task.get('validation')) {
+          case CoreTasks.TASK_VALIDATION_UNTESTED: untestedCount++; break;
+          case CoreTasks.TASK_VALIDATION_PASSED: passedCount++; break;
+          case CoreTasks.TASK_VALIDATION_FAILED: failedCount++; break;
+        }
+      }
+    }
+      
+    return {
+      tasksCount: tasksCount,
+      featureCount: featureCount, bugCount: bugCount, otherCount: otherCount,
+      highCount: highCount, mediumCount: mediumCount, lowCount: lowCount,
+      plannedCount: plannedCount, activeCount: activeCount, doneCount: doneCount, riskyCount: riskyCount,
+      untestedCount: untestedCount, passedCount: passedCount, failedCount: failedCount
+    };
+  
+  },
+  
+  /**
    * Destroys the project and orphans any tasks that are in it.
    */
   destroy: function() {

@@ -22,55 +22,32 @@ Tasks.projectController = SC.ObjectController.create(
     var ret = '';
     var project = this.get('content');
     if(project) {
-      var tasks = project.get('tasks');
-      var tasksCount = tasks.get('length');
-      ret += "_Has".loc() + project.getPath('tasks.length') + "_tasks".loc();
+      var stats = project.statistics();
+      var tasksCount = stats.tasksCount;
+      ret += "_Has".loc() + tasksCount + "_tasks".loc() + '<br>';
       if(tasksCount > 0) {
-        var featureCount = 0, bugCount = 0, otherCount = 0;
-        var highCount = 0, mediumCount = 0, lowCount = 0;
-        var plannedCount = 0, activeCount = 0, doneCount = 0, riskyCount = 0;
-        var untestedCount = 0, passedCount = 0, failedCount = 0;
-        for(var i=0; i<tasksCount; i++) {
-          var task = tasks.objectAt(i);
-          switch(task.get('type')) {
-            case CoreTasks.TASK_TYPE_FEATURE: featureCount++; break;
-            case CoreTasks.TASK_TYPE_BUG: bugCount++; break;
-            case CoreTasks.TASK_TYPE_OTHER: otherCount++; break;
-          }
-          switch(task.get('priority')) {
-            case CoreTasks.TASK_PRIORITY_HIGH: highCount++; break;
-            case CoreTasks.TASK_PRIORITY_MEDIUM: mediumCount++; break;
-            case CoreTasks.TASK_PRIORITY_LOW: lowCount++; break;
-          }
-          switch(task.get('developmentStatus')) {
-            case CoreTasks.TASK_STATUS_PLANNED: plannedCount++; break;
-            case CoreTasks.TASK_STATUS_ACTIVE: activeCount++; break;
-            case CoreTasks.TASK_STATUS_DONE: doneCount++; break;
-            case CoreTasks.TASK_STATUS_RISKY: riskyCount++; break;
-          }
-          switch(task.get('validation')) {
-            case CoreTasks.TASK_VALIDATION_UNTESTED: untestedCount++; break;
-            case CoreTasks.TASK_VALIDATION_PASSED: passedCount++; break;
-            case CoreTasks.TASK_VALIDATION_FAILED: failedCount++; break;
-          }
-        }
-        ret += ('\n' + "_Type".loc() + ' - ');
-        ret += ("_Feature".loc() + ': ' + featureCount + ' (' + Math.round(100*featureCount/tasksCount) + '%)');
-        ret += (', ' + "_Bug".loc() + ': ' + bugCount + ' (' + Math.round(100*bugCount/tasksCount) + '%)');
-        ret += (', ' + "_Other".loc() + ': ' + otherCount + ' (' + Math.round(100*otherCount/tasksCount) + '%)');
-        ret += ('\n' + "_Priority".loc() + ' - ');
-        ret += ("_High".loc() + ': ' + highCount + ' (' + Math.round(100*highCount/tasksCount) + '%)');
-        ret += (', ' + "_Medium".loc() + ': ' + mediumCount + ' (' + Math.round(100*mediumCount/tasksCount) + '%)');
-        ret += (', ' + "_Low".loc() + ': ' + lowCount + ' (' + Math.round(100*lowCount/tasksCount) + '%)');
-        ret += ('\n' + "_Status".loc() + ' - ');
-        ret += ("_Planned".loc() + ': ' + plannedCount + ' (' + Math.round(100*plannedCount/tasksCount) + '%)');
-        ret += (', ' + "_Active".loc() + ': ' + activeCount + ' (' + Math.round(100*activeCount/tasksCount) + '%)');
-        ret += (', ' + "_Done".loc() + ': ' + doneCount + ' (' + Math.round(100*doneCount/tasksCount) + '%)');
-        ret += (', ' + "_Risky".loc() + ': ' + riskyCount + ' (' + Math.round(100*riskyCount/tasksCount) + '%)');
-        ret += ('\n' + "_Validation".loc() + ' - ');
-        ret += ("_Untested".loc() + ': ' + untestedCount + ' (' + Math.round(100*untestedCount/tasksCount) + '%)');
-        ret += (', ' + "_Passed".loc() + ': ' + passedCount + ' (' + Math.round(100*passedCount/tasksCount) + '%)');
-        ret += (', ' + "_Failed".loc() + ': ' + failedCount + ' (' + Math.round(100*failedCount/tasksCount) + '%)');
+        ret += '<table width="100%"><tr class="even">';
+        ret += ('<td><span class="task-attribute-set-title">' + "_Type".loc() + '</td>');
+        ret += ('<td>' + "_Feature".loc() + ': ' + stats.featureCount + ' (' + Math.round(100*stats.featureCount/stats.tasksCount) + '%)' + '</td>');
+        ret += ('<td>' + "_Bug".loc() + ': ' + stats.bugCount + ' (' + Math.round(100*stats.bugCount/stats.tasksCount) + '%)' + '</td>');
+        ret += ('<td>' + "_Other".loc() + ': ' + stats.otherCount + ' (' + Math.round(100*stats.otherCount/stats.tasksCount) + '%)' + '</td>');
+        ret += '<td></td></tr><tr class="odd">';
+        ret += ('<td><span class="task-attribute-set-title">' + "_Priority".loc() + '</td>');
+        ret += ('<td><span class="task-priority-high">' + "_High".loc() + ':</span> ' + stats.highCount + ' (' + Math.round(100*stats.highCount/stats.tasksCount) + '%)' + '</td>');
+        ret += ('<td><span class="task-priority-medium">' + "_Medium".loc() + ':</span> ' + stats.mediumCount + ' (' + Math.round(100*stats.mediumCount/stats.tasksCount) + '%)' + '</td>');
+        ret += ('<td><span class="task-priority-low">' + "_Low".loc() + ':</span> ' + stats.lowCount + ' (' + Math.round(100*stats.lowCount/stats.tasksCount) + '%)' + '</td>');
+        ret += '<td></td></tr><tr class="even">';
+        ret += ('<td><span class="task-attribute-set-title">' + "_Status".loc() + '</td>');
+        ret += ('<td><span class="task-status-planned">' + "_Planned".loc() + ':</span> ' + stats.plannedCount + ' (' + Math.round(100*stats.plannedCount/stats.tasksCount) + '%)' + '</td>');
+        ret += ('<td><span class="task-status-active">' + "_Active".loc() + ':</span> ' + stats.activeCount + ' (' + Math.round(100*stats.activeCount/stats.tasksCount) + '%)' + '</td>');
+        ret += ('<td><span class="task-status-done">' + "_Done".loc() + ':</span> ' + stats.doneCount + ' (' + Math.round(100*stats.doneCount/stats.tasksCount) + '%)' + '</td>');
+        ret += ('<td><span class="task-status-risky">' + "_Risky".loc() + ':</span> ' + stats.riskyCount + ' (' + Math.round(100*stats.riskyCount/stats.tasksCount) + '%)' + '</td>');
+        ret += '</tr><tr class="odd">';
+        ret += ('<td><span class="task-attribute-set-title">' + "_Validation".loc() + '</td>');
+        ret += ('<td><span class="task-validation-untested">' + "_Untested".loc() + ':</span> ' + stats.untestedCount + ' (' + Math.round(100*stats.untestedCount/stats.tasksCount) + '%)' + '</td>');
+        ret += ('<td><span class="task-validation-passed">' + "_Passed".loc() + ':</span> ' + stats.passedCount + ' (' + Math.round(100*stats.passedCount/stats.tasksCount) + '%)' + '</td>');
+        ret += ('<td><span class="task-validation-failed">' + "_Failed".loc() + ':</span> ' + stats.failedCount + ' (' + Math.round(100*stats.failedCount/stats.tasksCount) + '%)' + '</td>');
+        ret += '<td></td></tr></table>';
       }
     }
     this.set('projectStatistics', ret);
@@ -91,10 +68,6 @@ Tasks.projectController = SC.ObjectController.create(
     this.set('projectStatistics', '');
   },
   
-  projectName: function() {
-    return "_Project:".loc() + this.getPath('content.name');
-  }.property('content').cacheable(),
-
   _contentDidChange: function() { // when a new project is selected
     var last = this._project,
         cur = this.get('content');
