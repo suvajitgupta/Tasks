@@ -8,7 +8,7 @@ sc_require('views/decorated_checkbox');
 
 /** @static
     
-  @extends SC.SheetPane
+  @extends SC.PanelPane
   @author Suvajit Gupta
   
   Filter Panel

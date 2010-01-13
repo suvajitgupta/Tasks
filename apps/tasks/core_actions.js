@@ -458,7 +458,7 @@ Tasks.mixin({
    * Popup Project Statistics panel.
    */
   projectStatistics: function() {
-    this._notImplemented('Project Statistics');
+    Tasks.projectController.showStatistics();  
   },
   
   /**

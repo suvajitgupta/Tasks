@@ -144,7 +144,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     }
     
     ret.push({
-      title: "_Statistics".loc(),
+      title: "_ShowStatistics".loc(),
       icon: sc_static('blank'),
       isEnabled: YES,
       target: 'Tasks',
