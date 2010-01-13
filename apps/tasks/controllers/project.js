@@ -103,8 +103,10 @@ Tasks.projectController = SC.ObjectController.create(
     if (last !== cur) {
       // console.log('Switching to project: ' + cur.get('name'));
       Tasks.deselectTasks();
-      this._project = cur;
-      SC.routes.set('location', '#project&name=' + cur.get('name'));
+      if(cur) {
+        this._project = cur;
+        SC.routes.set('location', '#project&name=' + cur.get('name'));
+      }
     }
   }.observes('content')
   
