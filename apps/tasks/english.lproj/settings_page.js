@@ -18,7 +18,7 @@ Tasks.settingsPage = SC.Page.create({
   
   panel: SC.PanelPane.create({
     
-    layout: { centerX: 0, centerY: 0, height: 325, width: 630 },
+    layout: { centerX: 0, centerY: 0, height: 425, width: 730 },
     
     contentView: SC.View.design({
       layout: { left: 0, right: 0, top: 0, bottom: 0},
@@ -35,7 +35,7 @@ Tasks.settingsPage = SC.Page.create({
             childViews: [
             
               SC.LabelView.design(SCUI.SimpleButton,{
-                layout: { centerY: 0, left: 5, height: 16, width: 90 },
+                layout: { centerY: 0, left: 55, height: 16, width: 90 },
                 icon: 'add-icon',
                 value: "_AddUser".loc(),
                 classNames: ['toolbar-label'],
@@ -46,7 +46,7 @@ Tasks.settingsPage = SC.Page.create({
               }),
 
               SC.LabelView.design(SCUI.SimpleButton,{
-                layout: { centerY: 0, left: 90, height: 16, width: 100 },
+                layout: { centerY: 0, left: 140, height: 16, width: 100 },
                 icon: 'delete-icon',
                 value: "_DeleteUser".loc(),
                 classNames: ['toolbar-label'],
@@ -57,12 +57,12 @@ Tasks.settingsPage = SC.Page.create({
               }),
               
               SC.View.design({
-                layout: { top: 8, bottom: 8, left: 200, width: 2 },
+                layout: { top: 8, bottom: 8, left: 300, width: 2 },
                 classNames: ['top-bar-divider']
               }),
               
               SC.LabelView.design({
-                layout: { centerY: 0, left: 310, height: 20, width: 120 },
+                layout: { centerY: 0, left: 410, height: 20, width: 120 },
                 value: "_UserManager".loc(),
                 classNames: ['window-title']
               })
@@ -71,7 +71,7 @@ Tasks.settingsPage = SC.Page.create({
           }),
         
           SC.ScrollView.design({
-            layout: { top: 35, bottom: 0, left: 0, width: 200 },
+            layout: { top: 35, bottom: 0, left: 0, width: 300 },
             hasHorizontalScroller: NO,
             classNames: ['users-pane'],
 
@@ -89,7 +89,7 @@ Tasks.settingsPage = SC.Page.create({
           }),
           
           Tasks.UserInformationView.design({
-            layout: { top: 60, left: 200, bottom: 35, right: 10 },
+            layout: { top: 40, left: 300, bottom: 35, right: 10 },
             contentBinding: 'Tasks.userController'
           })          
 
