@@ -311,6 +311,7 @@
  */
 
 .sc-list-item-view.even-item {
+	border: 1px solid #f2f2f2 !important;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
 }
