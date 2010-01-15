@@ -332,6 +332,7 @@
 
 .task-item:hover {
   background: #CCC none repeat scroll 0 0 !important;
+	border: 1px solid #CCC !important;
 }
 
 .sc-view.sc-ghost-view .task-item {
