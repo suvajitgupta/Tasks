@@ -1,7 +1,7 @@
 // ==========================================================================
 // Tasks.projectController
 // ==========================================================================
-/*globals Tasks CoreTasks */
+/*globals Tasks CoreTasks sc_static */
 
 /** 
 
@@ -24,13 +24,14 @@ Tasks.projectController = SC.ObjectController.create(
     if(project) {
       var stats = project.statistics();
       var tasksCount = stats.tasksCount;
-      ret += "_Has".loc() + tasksCount + "_tasks".loc() + '<br>';
+      ret += '<pre>' + "_Has".loc() + tasksCount + "_tasks".loc() + '</pre>';
       if(tasksCount > 0) {
+        var blank = sc_static('blank');
         ret += '<table width="100%"><tr class="even">';
         ret += ('<td><span class="task-attribute-set-title">' + "_Type".loc() + '</td>');
-        ret += ('<td>' + "_Feature".loc() + ': ' + stats.featureCount + ' (' + Math.round(100*stats.featureCount/stats.tasksCount) + '%)' + '</td>');
-        ret += ('<td>' + "_Bug".loc() + ': ' + stats.bugCount + ' (' + Math.round(100*stats.bugCount/stats.tasksCount) + '%)' + '</td>');
-        ret += ('<td>' + "_Other".loc() + ': ' + stats.otherCount + ' (' + Math.round(100*stats.otherCount/stats.tasksCount) + '%)' + '</td>');
+        ret += ('<td><img src="' + blank + '" class="task-icon-feature"/>&nbsp;' + "_Feature".loc() + ': ' + stats.featureCount + ' (' + Math.round(100*stats.featureCount/stats.tasksCount) + '%)' + '</td>');
+        ret += ('<td><img src="' + blank + '" class="task-icon-bug"/>&nbsp;' + "_Bug".loc() + ': ' + stats.bugCount + ' (' + Math.round(100*stats.bugCount/stats.tasksCount) + '%)' + '</td>');
+        ret += ('<td><img src="' + blank + '" class="task-icon-other"/>&nbsp;'  + "_Other".loc() + ': ' + stats.otherCount + ' (' + Math.round(100*stats.otherCount/stats.tasksCount) + '%)' + '</td>');
         ret += '<td></td></tr><tr class="odd">';
         ret += ('<td><span class="task-attribute-set-title">' + "_Priority".loc() + '</td>');
         ret += ('<td><span class="task-priority-high">' + "_High".loc() + ':</span> ' + stats.highCount + ' (' + Math.round(100*stats.highCount/stats.tasksCount) + '%)' + '</td>');

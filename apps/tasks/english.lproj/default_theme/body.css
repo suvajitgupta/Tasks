@@ -176,15 +176,25 @@ body {
   left: 15px !important;
 }
 
+.statistics-pane table {
+  border: 1px solid gray !important;
+  border-collapse: separate !important;
+}
+
 .statistics-pane td {
-  border: 0 !important;
   font-size: 11px !important;
+  line-height: 20px !important;
+	border: none !important;
+}
+
+.statistics-pane td img {
+  vertical-align: middle !important;
 }
 
 .statistics-pane tr.even {
-  background-color: silver;
+  background-color: #ddd;
 }
 
 .statistics-pane tr.odd {
-  background-color: white;
+  background-color: #f2f2f2;
 }
