@@ -145,7 +145,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
               layout: { top: 98, left: 10, right: 10, bottom: 10 },
               hint: "_DescriptionHint".loc(),
               isTextArea: YES,
-              isEnabledBinding: 'Tasks.tasksController.isEditable',
+              isEnabled: YES,
               valueBinding: SC.binding('.content.description', this)
             })
             
