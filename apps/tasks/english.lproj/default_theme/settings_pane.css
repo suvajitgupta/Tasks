@@ -41,6 +41,11 @@
   background: #CCC none repeat scroll 0 0;
 }
 
+.users-pane .sc-collection-item.sc-group-item:hover {
+  background: none !important;
+}
+
+
 
 /*-----------------------------------------------------------------
  * User list item styles
