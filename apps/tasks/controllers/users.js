@@ -21,13 +21,12 @@ Tasks.usersController = SC.ArrayController.create(SCUI.StatusChanged,
 
   showRoles: function() {
 
-    // console.log('DEBUG: usersController content changed');
-
     var nodes = [], managerRoles = [], developerRoles = [], testerRoles = [], guestRoles = [];
     var users = this.get('arrangedObjects');
     if(users) {
       var editableUsers = []; // based on role, only current user or all users are available in User Manager
-      var currentUser = CoreTasks.getUser(Tasks.get('loginName'));
+      var currentUser = CoreTasks.get('currentUser');
+      if(!currentUser) currentUser = CoreTasks.getUser(Tasks.get('loginName')); // at startup time
       if(currentUser) {
         if(currentUser.get('role') === CoreTasks.USER_ROLE_MANAGER) {
           editableUsers = users;
@@ -35,6 +34,7 @@ Tasks.usersController = SC.ArrayController.create(SCUI.StatusChanged,
         else {
           editableUsers.push(currentUser);
         }
+        // console.log('DEBUG: showRoles() currentUser=' + currentUser.get('name') + ', #editableUsers=' + editableUsers.get('length'));
       }
 
       var len = editableUsers.get('length');
