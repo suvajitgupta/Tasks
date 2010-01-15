@@ -94,8 +94,12 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
   }.property('id', 'name').cacheable(),
   
   _tasksLengthDidChange: function() {
-    // console.log('%@._tasksLengthDidChange()'.fmt(this));
-    this.propertyDidChange('*') ; // refresh ourself
+    var len = this.getPath('tasks.length');
+    if(SC.none(this._oldLength) || (this._oldLength !== len)) {
+      this._oldLength = len;
+      // console.log('tasksLengthDidChange() for project: ' + this.get('name'));
+      this.propertyDidChange('*') ; // refresh ourself
+    }
   },
   
   /**

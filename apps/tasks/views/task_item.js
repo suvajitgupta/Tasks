@@ -396,7 +396,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     
     var content = this.get('content');
     if(!content) return;
-    // console.log('DEBUG-ON: Task render(): ' + content.get('displayName'));
+    // console.log('DEBUG-ON: Task render(' + firstTime + '): ' + content.get('displayName'));
     sc_super();
     
     // Put a badge before Planned tasks that were created or updated recently
