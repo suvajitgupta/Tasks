@@ -62,7 +62,7 @@ Tasks.settingsPage = SC.Page.create({
               }),
               
               SC.LabelView.design({
-                layout: { centerY: 0, left: 410, height: 20, width: 120 },
+                layout: { centerY: 0, left: 435, height: 20, width: 120 },
                 value: "_UserManager".loc(),
                 classNames: ['window-title']
               })
