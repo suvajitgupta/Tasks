@@ -311,8 +311,6 @@
  */
 
 .sc-list-item-view.even-item {
-	border: 1px solid #EEE !important;
-  background-color: #EEE;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
 }
