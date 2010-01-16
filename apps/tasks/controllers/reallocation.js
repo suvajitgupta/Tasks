@@ -30,7 +30,7 @@ Tasks.reallocationController = SC.Object.create(SC.CollectionViewDelegate,
       return SC.DRAG_MOVE;
     }
     else {
-      return SC.DRAG_REORDER;
+      return SC.DRAG_NONE;
     }
   },
   

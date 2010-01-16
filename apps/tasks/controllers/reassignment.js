@@ -40,6 +40,15 @@ Tasks.reassignmentController = SC.Object.create(SC.CollectionViewDelegate,
   // ..........................................................
   // DROP TARGET SUPPORT
   // 
+  collectionViewComputeDragOperations: function(view, drag, proposedDragOperations) {
+    if (drag.hasDataType(CoreTasks.Task)) {
+      return SC.DRAG_MOVE;
+    }
+    else {
+      return SC.DRAG_NONE;
+    }
+  },
+  
   /**
     Called if the user actually drops on the view.  Since we are dragging to and from
     the same view, let the CollectionView handle the actual reorder by returning SC.DRAG_NONE.
