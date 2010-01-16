@@ -280,7 +280,6 @@ Tasks.mainPage = SC.Page.design({
           contentIconKey: 'icon',
           exampleView: Tasks.TaskItemView,
           groupExampleView: Tasks.AssigneeItemView,
-          // isVisible: NO, // KILL
           isEditable: YES,
           canEditContent: YES,
           canReorderContent: YES,
