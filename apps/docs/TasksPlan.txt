@@ -54,7 +54,7 @@ v Disable Add/Del. Tasks buttons when on "All Tasks" project [SG] <BB> @Done %Pa
 - Select first project at startup [SG] <JH2> @Done %Passed $Feature
 ^ Add virtual "All Tasks" & "Unallocated Tasks" projects and display them grayed out in projects list [SG] <SE> $Feature @Done %Passed
 - Disallow "All Tasks" & "Unallocated Tasks" projects from being deleted [SG] @Done $Feature %Passed
-^ Allow multi-task drag-n-drop reallocation to other projects [BB] <SG> @Done $Feature %Passed
+^ Allow multi-task drag-and-drop reallocation to other projects [BB] <SG> @Done $Feature %Passed
 ^ Add popup viewer/editor for Project time left/description [SG] $Feature @Done %Passed
 v Add project context menu with options: Add, Duplicate, Delete, Statistics... [SG] $Feature @Done %Passed
 - Beta: Add Project Statistics popup to show breakdown by Task attributes (what percent in each) [SG] $Feature @Active
@@ -83,7 +83,7 @@ v Enable/disable "Del. Task" button based on having a selected task [SG] @Done %
 - Append "?" for range-based subtotals including tasks with unspecified efforts [SG] @Done $Feature %Passed
 - Color code assignee non loading in gray, under loading in green, proper loading in blue, and over loading in red [SG] @Done $Feature %Passed
 v Add hover over tooltip for assignees to show how many tasks they have and to explain loading color codes [SG] @Done $Feature %Passed
-^ Allow multi-task drag-n-drop reassignment to other assignees [BB] <SG>  @Done $Feature %Passed
+^ Allow multi-task drag-and-drop reassignment to other assignees [BB] <SG>  @Done $Feature %Passed
 ^ Add popup viewer/editor for Task submitter, assignee, effort, project, and description [JH2] <SG> $Feature @Done %Passed
 - Beta: Support task Copy ID/Name and Copy Link Location (URL with "Route") to clipboard [SG] $Feature @Risky
 v Add task context menu with options: Add, Duplicate, Delete; All Task Attributes; Copy ID/Name, Copy Link [SG] $Feature @Done %Passed
@@ -98,13 +98,14 @@ v Add task context menu with options: Add, Duplicate, Delete; All Task Attribute
 
 User Manager GUI
 ^ Add login screen to identify user who logs in (and handle login failures properly) [SG] <SE> @Done %Passed $Feature
-- Allow new guests to sign up from login screen and them in immediately after [JH2] <SG> @Done %Passed $Feature
+- Add password to login, signup, and User Manager screens (save in encrypted format) [SG] <JH2> $Feature @Done %Passed
+- Allow new guests to sign up from login screen and log them in immediately after [JH2] <SG> @Done %Passed $Feature
 ^ Add assignee filtering (space or comma separators, "none" for unassigned) & corresponding delete button in top toolbar [SG] <JH2> @Done $Feature %Passed
 - Allow assignee filtering by matching any part of login or full name [SG] $Feature @Done %Passed
 - Set assignee selection filter to logged in user if they are a Developer [SG] @Done $Feature %Passed
 ^ Add User Manager with "Add/Del. User"  buttons in toolbar (reuse user information view with signup screen) and user count at bottom [SG] <JH2> @Done %Passed $Feature
+^ Allow multi-user drag-and-drop role change in User Manager [SG] @Done $Feature %Failed
 - Reset task assignee/submitter after user deletion <SE> [SG] $Feature @Done %Passed
-- Add password to login, signup, and User Manager screens (save in encrypted format) [SG] <JH2> $Feature @Done %Passed
 - Out of Scope: Add support for "Teams" (a user can belong to a team, a team can have a lead) $Feature
 | Create separate projects for different teams to keep their tasks/deadlines separate instead
 
@@ -153,13 +154,13 @@ Server
 Styling/Hardening
 ^ Style via CSS, embed catchy/sprited images [MG] <SG> @Done %Passed
 ^ Perform smoke test of key functionality [SG] @Done
-| Login/Logout
+| Login/Logout, Guest Signup
 | Project/Task/User CRUD
 | All/Unallocated Tasks system projects
 | Project/Task modifications via inline editor and popup editor/control bar
-| Task reassignment/reallocation (drag-n-drop)
+| Task reassignment/reallocation, User role change (drag-and-drop)
 | Task attribute filtering, assignee selection, ID/name searching
-| Save, Import/Export
+| Save, Import/Export (Text & HTML)
 - Perform I18N and L10N (test with reversed strings) [SG] <JH2> @Done %Passed
 - Develop Model unit tests [SG] <BB> @Active
 - Develop View unit tests [SG] <MB> @Active
