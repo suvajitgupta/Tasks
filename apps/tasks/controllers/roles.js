@@ -9,6 +9,8 @@
   @author Suvajit Gupta
 */
 
+// FIXME: [SC] Beta: see how to get drop events delivered to popped up Settings panel instead of SourceListViews underneath
+
 Tasks.rolesController = SC.TreeController.create(SC.CollectionViewDelegate,
 /** @scope Tasks.rolesController.prototype */ {
   
@@ -45,11 +47,9 @@ Tasks.rolesController = SC.TreeController.create(SC.CollectionViewDelegate,
   // 
   collectionViewComputeDragOperations: function(view, drag, proposedDragOperations) {
     if (drag.hasDataType(CoreTasks.User)) {
-      console.log('User dropping');
       return SC.DRAG_MOVE;
     }
     else {
-      console.log('Other stuff dropping');
       return SC.DRAG_NONE;
     }
   },
@@ -61,33 +61,35 @@ Tasks.rolesController = SC.TreeController.create(SC.CollectionViewDelegate,
     SC.DRAG_MOVE.
   */
   collectionViewPerformDragOperation: function(view, drag, dragOp, idx, dropOp) {
+    var ret = SC.DRAG_MOVE;
     
     if(!CoreTasks.permissions.get('canEditUserRole')) {
       console.warn('You do not have permission to change user role');
-      return SC.DRAG_MOVE;
+      return ret;
     }
     
     // tells the CollectionView to do nothing
-    if (idx <= 0) return SC.DRAG_MOVE;
+    if (idx < 0) return ret;
     
     // Extract tasks to drag
     var users = drag.dataForType(CoreTasks.User);
-    if(!users) return SC.DRAG_MOVE;
+    if(!users) return ret;
 
     // Get assignee of item before drag location
     var content   = view.get('content');
-    var targetRole = content.objectAt(idx-1).get('role');
+    var targetRole = content.objectAt(idx).get('role');
     
     // Set dragged tasks' assignee to new assignee
     users.forEach(function(user) {
       if (user.get('role') !== targetRole) {
         // console.log('Changing role of: ' + user.get('name') + ' to ' + targetRole);
         user.set('role', targetRole);
+        ret = SC.DRAG_NONE;
       }
     }, this);
     
     // Redraw users list after role changes are complete
-    return SC.DRAG_NONE;
+    return ret;
   },
   
   /**

@@ -57,21 +57,23 @@ Tasks.reassignmentController = SC.Object.create(SC.CollectionViewDelegate,
   */
   collectionViewPerformDragOperation: function(view, drag, dragOp, idx, dropOp) {
     
+    var ret = SC.DRAG_MOVE;
+    
     if(!Tasks.tasksController.isEditable()) {
       console.warn('You do not have permission to reassign or reallocate task(s) here');
-      return SC.DRAG_MOVE;
+      return ret;
     }
     
     // tells the CollectionView to do nothing
-    if (idx <= 0) return SC.DRAG_MOVE;
+    if (idx < 0) return ret;
     
     // Extract tasks to drag
     var tasks = drag.dataForType(CoreTasks.Task);
-    if(!tasks) return SC.DRAG_MOVE;
+    if(!tasks) return ret;
 
     // Get assignee of item before drag location
     var content   = view.get('content');
-    var targetAssignee = content.objectAt(idx-1).get('assignee');
+    var targetAssignee = content.objectAt(idx).get('assignee');
     
     // Set dragged tasks' assignee to new assignee
     tasks.forEach(function(task) {
@@ -79,12 +81,13 @@ Tasks.reassignmentController = SC.Object.create(SC.CollectionViewDelegate,
         var targetAssigneeId = targetAssignee === null? null : targetAssignee.get('id');
         // console.log('Reassigning to: ' + (targetAssignee? targetAssignee.get('name') : 'Unassigned') + ' of Id: ' + targetAssigneeId);
         task.set('assigneeId', targetAssigneeId);
+        ret = SC.DRAG_NONE;
       }
     }, this);
     
     // Redraw tasks list after reassignments are complete
-    Tasks.assignmentsController.showAssignments();
-    return SC.DRAG_NONE;
+    if(ret === SC.DRAG_NONE) Tasks.assignmentsController.showAssignments();
+    return ret;
   },
   
   /**

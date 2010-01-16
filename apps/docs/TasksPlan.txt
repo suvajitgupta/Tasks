@@ -104,7 +104,7 @@ User Manager GUI
 - Allow assignee filtering by matching any part of login or full name [SG] $Feature @Done %Passed
 - Set assignee selection filter to logged in user if they are a Developer [SG] @Done $Feature %Passed
 ^ Add User Manager with "Add/Del. User"  buttons in toolbar (reuse user information view with signup screen) and user count at bottom [SG] <JH2> @Done %Passed $Feature
-^ Allow multi-user drag-and-drop role change in User Manager [SG] @Done $Feature %Failed
+^ Allow multi-user drag-and-drop role change in User Manager [SG] @Done $Feature %Passed
 - Reset task assignee/submitter after user deletion <SE> [SG] $Feature @Done %Passed
 - Out of Scope: Add support for "Teams" (a user can belong to a team, a team can have a lead) $Feature
 | Create separate projects for different teams to keep their tasks/deadlines separate instead
