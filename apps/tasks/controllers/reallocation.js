@@ -47,8 +47,6 @@ Tasks.reallocationController = SC.Object.create(SC.CollectionViewDelegate,
     
     var tasks = drag.dataForType(CoreTasks.Task),
         content   = view.get('content'),
-        len       = view.get('length'),
-        source    = drag.get('source'),
         ret       = SC.DRAG_NONE;
     
     // only if data is available from drag
@@ -58,7 +56,7 @@ Tasks.reallocationController = SC.Object.create(SC.CollectionViewDelegate,
     if (!(dragOp & SC.DRAG_MOVE)) ret = SC.DRAG_COPY;
     else {
       var targetProject = content.objectAt(idx);
-      if (targetProject !== CoreTasks.get('allTasksProject')) {
+      if (targetProject.get('id') && targetProject !== CoreTasks.get('allTasksProject')) {
         tasks.forEach(function(task) {
           var targetProjectId = (targetProject === CoreTasks.get('unallocatedTasksProject')? null : targetProject.get('id'));
           // console.log('Reallocating to: ' + targetProject.get('name') + ' of ID: ' + targetProjectId);
