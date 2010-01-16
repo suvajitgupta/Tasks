@@ -134,7 +134,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' right: 10px;\n' +
 '}\n' +
 '.total {\n' +
-' right: 150px;\n' +
+' right: 175px;\n' +
 '}\n' +
 '</style>\n' +
 '</head>\n' +
