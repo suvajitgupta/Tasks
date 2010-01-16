@@ -18,10 +18,10 @@ Tasks.reassignmentController = SC.Object.create(SC.CollectionViewDelegate,
   // 
   
   /**
-    When dragging, add an Task data type to the drag.
+    When dragging, add Task data type to the drag.
   */
   collectionViewDragDataTypes: function(view) {
-    return [Tasks.Task];
+    return [CoreTasks.Task];
   },
   
   /**
@@ -29,16 +29,10 @@ Tasks.reassignmentController = SC.Object.create(SC.CollectionViewDelegate,
   */
   collectionViewDragDataForType: function(view, drag, dataType) {
     var ret=null, sel;
-    
-    if(!Tasks.tasksController.isEditable()) {
-      console.warn('You do not have permission to reassign or reallocate task(s) here');
-    }
-    else {
-      if (dataType === Tasks.Task) {
-        sel = view.get('selection');
-        ret = [];
-        if (sel) sel.forEach(function(x) { ret.push(x); }, this);
-      }
+    if (dataType === CoreTasks.Task) {
+      sel = view.get('selection');
+      ret = [];
+      if (sel) sel.forEach(function(x) { ret.push(x); }, this);
     }
     return ret;
   },
@@ -54,12 +48,16 @@ Tasks.reassignmentController = SC.Object.create(SC.CollectionViewDelegate,
   */
   collectionViewPerformDragOperation: function(view, drag, dragOp, idx, dropOp) {
     
+    if(!Tasks.tasksController.isEditable()) {
+      console.warn('You do not have permission to reassign or reallocate task(s) here');
+      return SC.DRAG_MOVE;
+    }
+    
     // tells the CollectionView to do nothing
-    // TODO: [BB] don't allow the first item in list to be draggable
-    if (idx === 0) return SC.DRAG_MOVE;
+    if (idx <= 0) return SC.DRAG_MOVE;
     
     // Extract tasks to drag
-    var tasks = drag.dataForType(Tasks.Task);
+    var tasks = drag.dataForType(CoreTasks.Task);
     if(!tasks) return SC.DRAG_MOVE;
 
     // Get assignee of item before drag location

@@ -34,23 +34,22 @@ Tasks.AssigneeItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       var tasksCount = content.get('tasksCount');
       var assigneeTooltip = "_Has".loc() + tasksCount + "_tasks".loc();
       
-      var loadingTooltip = '';
       var loading = content.get('loading');
       if(loading) {
         if(loading === CoreTasks.USER_NOT_LOADED) {
-          loadingTooltip = "_AssigneeNotLoaded".loc();
+          assigneeTooltip += "_AssigneeNotLoaded".loc();
           context.addClass('assignee-not-loaded');
         }
         else if(loading === CoreTasks.USER_UNDER_LOADED) {
-          loadingTooltip = "_AssigneeUnderLoaded".loc();
+          assigneeTooltip += "_AssigneeUnderLoaded".loc();
           context.addClass('assignee-under-loaded');
         }
         else if(loading === CoreTasks.USER_PROPERLY_LOADED) {
-          loadingTooltip = "_AssigneeProperlyLoaded".loc();
+          assigneeTooltip += "_AssigneeProperlyLoaded".loc();
           context.addClass('assignee-properly-loaded');
         }
         else if(loading === CoreTasks.USER_OVER_LOADED) {
-          loadingTooltip = "_AssigneeOverloaded".loc();
+          assigneeTooltip += "_AssigneeOverloaded".loc();
           context.addClass('assignee-over-loaded');
         }
       }
@@ -69,7 +68,6 @@ Tasks.AssigneeItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
         }
       }
       
-      assigneeTooltip += (loadingTooltip + '_AssigneeEffortTooltip'.loc());
       context.attr('title', assigneeTooltip);
       context.attr('alt', assigneeTooltip);
       

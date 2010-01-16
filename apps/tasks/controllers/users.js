@@ -21,7 +21,7 @@ Tasks.usersController = SC.ArrayController.create(SCUI.StatusChanged,
 
   showRoles: function() {
 
-    var nodes = [], managerRoles = [], developerRoles = [], testerRoles = [], guestRoles = [];
+    var isManager = false, nodes = [], managerRoles = [], developerRoles = [], testerRoles = [], guestRoles = [];
     var users = this.get('arrangedObjects');
     if(users) {
       var editableUsers = []; // based on role, only current user or all users are available in User Manager
@@ -29,6 +29,7 @@ Tasks.usersController = SC.ArrayController.create(SCUI.StatusChanged,
       if(!currentUser) currentUser = CoreTasks.getUser(Tasks.get('loginName')); // at startup time
       if(currentUser) {
         if(currentUser.get('role') === CoreTasks.USER_ROLE_MANAGER) {
+          isManager = true;
           editableUsers = users;
         }
         else {
@@ -47,17 +48,21 @@ Tasks.usersController = SC.ArrayController.create(SCUI.StatusChanged,
           case CoreTasks.USER_ROLE_GUEST: guestRoles.push(user); break;
         }
       }
-      if(managerRoles.get('length') > 0) {
-        nodes.push(SC.Object.create({ displayName: CoreTasks.USER_ROLE_MANAGER.loc() + 's', treeItemChildren: managerRoles, treeItemIsExpanded: YES }));
+      if(isManager || managerRoles.get('length') > 0) {
+        nodes.push(SC.Object.create({ displayName: CoreTasks.USER_ROLE_MANAGER.loc() + 's', role: CoreTasks.USER_ROLE_MANAGER,
+                   treeItemChildren: managerRoles, treeItemIsExpanded: YES }));
       }
-      if(developerRoles.get('length') > 0) {
-        nodes.push(SC.Object.create({ displayName: CoreTasks.USER_ROLE_DEVELOPER.loc() + 's', treeItemChildren: developerRoles, treeItemIsExpanded: YES }));
+      if(isManager || developerRoles.get('length') > 0) {
+        nodes.push(SC.Object.create({ displayName: CoreTasks.USER_ROLE_DEVELOPER.loc() + 's', role: CoreTasks.USER_ROLE_DEVELOPER,
+                   treeItemChildren: developerRoles, treeItemIsExpanded: YES }));
       }
-      if(testerRoles.get('length') > 0) {
-        nodes.push(SC.Object.create({ displayName: CoreTasks.USER_ROLE_TESTER.loc() + 's', treeItemChildren: testerRoles, treeItemIsExpanded: YES }));
+      if(isManager || testerRoles.get('length') > 0) {
+        nodes.push(SC.Object.create({ displayName: CoreTasks.USER_ROLE_TESTER.loc() + 's', role: CoreTasks.USER_ROLE_TESTER,
+                   treeItemChildren: testerRoles, treeItemIsExpanded: YES }));
       }
-      if(guestRoles.get('length') > 0) {
-        nodes.push(SC.Object.create({ displayName: CoreTasks.USER_ROLE_GUEST.loc() + 's', treeItemChildren: guestRoles, treeItemIsExpanded: YES }));
+      if(isManager || guestRoles.get('length') > 0) {
+        nodes.push(SC.Object.create({ displayName: CoreTasks.USER_ROLE_GUEST.loc() + 's', role: CoreTasks.USER_ROLE_GUEST,
+                   treeItemChildren: guestRoles, treeItemIsExpanded: YES }));
       }
     }
 

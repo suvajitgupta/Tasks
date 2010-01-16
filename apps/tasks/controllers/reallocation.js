@@ -26,7 +26,7 @@ Tasks.reallocationController = SC.Object.create(SC.CollectionViewDelegate,
   // DROP TARGET SUPPORT
   // 
   collectionViewComputeDragOperations: function(view, drag, proposedDragOperations) {
-    if (drag.hasDataType(Tasks.Task)) {
+    if (drag.hasDataType(CoreTasks.Task)) {
       return SC.DRAG_MOVE;
     }
     else {
@@ -45,7 +45,7 @@ Tasks.reallocationController = SC.Object.create(SC.CollectionViewDelegate,
     }
     if (dragOp & SC.DRAG_REORDER) return SC.DRAG_MOVE; // disallow reorder
     
-    var tasks = drag.dataForType(Tasks.Task),
+    var tasks = drag.dataForType(CoreTasks.Task),
         content   = view.get('content'),
         len       = view.get('length'),
         source    = drag.get('source'),
@@ -60,7 +60,7 @@ Tasks.reallocationController = SC.Object.create(SC.CollectionViewDelegate,
       var targetProject = content.objectAt(idx);
       if (targetProject !== CoreTasks.get('allTasksProject')) {
         tasks.forEach(function(task) {
-          var targetProjectId = targetProject === CoreTasks.get('unallocatedTasksProject')? null : targetProject.get('id');
+          var targetProjectId = (targetProject === CoreTasks.get('unallocatedTasksProject')? null : targetProject.get('id'));
           // console.log('Reallocating to: ' + targetProject.get('name') + ' of ID: ' + targetProjectId);
           task.set('projectId', targetProjectId);
         }, this);

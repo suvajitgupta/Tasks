@@ -81,10 +81,16 @@ Tasks.settingsPage = SC.Page.create({
               contentBinding: 'Tasks.rolesController.arrangedObjects',
               selectionBinding: 'Tasks.usersController.selection',
               localize: YES,
-              rowHeight: 20,
+              rowHeight: 24,
+              classNames: ['users-pane-inner'],
               hasContentIcon: YES,
               contentIconKey: 'icon',
-              classNames: ['users-pane-inner']
+              canReorderContent: YES,
+              canDeleteContent: YES,
+              destroyOnRemoval: YES,
+              delegate: Tasks.rolesController,
+              selectOnMouseDown: YES
+
             })
           }),
           
