@@ -221,16 +221,19 @@ Tasks.assignmentsController = SC.ArrayController.create(
     var selectedAssigneeDisplayNames = [];
     var selectedAssignees = this.get('assigneeSelection');
     if (selectedAssignees && selectedAssignees !== '') { // if assignee selection is specified
-      var selectedAssigneeNames = selectedAssignees.replace(/,/g, ' ').replace(/\s+/g, ' ').replace(/\s+$/, '').split(' ');
-      for (var i = 0; i < selectedAssigneeNames.length; i++) {
-        if(selectedAssigneeNames[i].match(/none/i)) {
-          selectedAssigneeDisplayNames.push(CoreTasks.USER_UNASSIGNED);
-        }
-        else {
-          var selectedAssigneeUsers = CoreTasks.getUsers(selectedAssigneeNames[i]);
-          if (selectedAssigneeUsers.length > 0) {
-            for (var j = 0; j < selectedAssigneeUsers.length; j++) {
-              selectedAssigneeDisplayNames.push(selectedAssigneeUsers[j].get('displayName'));
+      var selectedAssigneeNames = selectedAssignees.replace(/,/g, ' ').replace(/\s+/g, ' ').replace(/^\s+/, '').replace(/\s+$/, '');
+      if (selectedAssigneeNames !== '') {
+        selectedAssigneeNames = selectedAssigneeNames.split(' ');
+        for (var i = 0; i < selectedAssigneeNames.length; i++) {
+          if(selectedAssigneeNames[i].match(/none/i)) {
+            selectedAssigneeDisplayNames.push(CoreTasks.USER_UNASSIGNED);
+          }
+          else {
+            var selectedAssigneeUsers = CoreTasks.getUsers(selectedAssigneeNames[i]);
+            if (selectedAssigneeUsers.length > 0) {
+              for (var j = 0; j < selectedAssigneeUsers.length; j++) {
+                selectedAssigneeDisplayNames.push(selectedAssigneeUsers[j].get('displayName'));
+              }
             }
           }
         }
