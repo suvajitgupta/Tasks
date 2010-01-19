@@ -76,6 +76,8 @@ SC.stringsFor('English', {
   "_Delete": "Delete",
   "_ShowStatistics": "Statistics...",
   "_Statistics": "Statistics",
+  "_Created:": "Created: ",
+  "_Updated:": "Updated: ",
   
   // Project strings
   "_AddProject": "Add Project",

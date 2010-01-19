@@ -2,6 +2,8 @@
 sc_require('core');
 sc_require('models/record_attribute');
 
+CoreTasks.DATE_TIME_FORMAT = '%I:%M %p %a %b %d, %Y';
+
 /**
  * The base record from which all models in the CoreTasks framework will derive.
  *
@@ -59,6 +61,10 @@ CoreTasks.Record = SC.Record.extend({
    * Expressed in milliseconds since the Unix Epoch.
    */
   createdAt: SC.Record.attr('CoreTasks.Date'),
+  displayCreatedAt: function() {
+    var time = this.get('createdAt');
+    return time? ("_Created:".loc() + time.toFormattedString(CoreTasks.DATE_TIME_FORMAT)) : '';
+  }.property('createdAt'),
 
   /**
    * Time at which the record was last updated.
@@ -66,6 +72,10 @@ CoreTasks.Record = SC.Record.extend({
    * Expressed in milliseconds since the Unix Epoch.
    */
   updatedAt: SC.Record.attr('CoreTasks.Date'),
+  displayUpdatedAt: function() {
+    var time = this.get('updatedAt');
+    return time? ("_Updated:".loc() + time.toFormattedString(CoreTasks.DATE_TIME_FORMAT)) : '';
+  }.property('updatedAt'),
 
   commit: function() {
     this.commitRecord();

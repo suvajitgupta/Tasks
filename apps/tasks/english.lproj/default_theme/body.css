@@ -55,6 +55,11 @@ body {
 	line-height: 12px !important;
 }
 
+.date-time {
+  color: #444 !important;
+  font-size: 10px !important;
+}
+
 .quickfilter-toolbar {
   border: 1px solid #AAA;
   background: #FFF;

@@ -43,7 +43,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
        
     }).from('Tasks.projectsController.content');
   },
-
+  
   /** @private
     If mouse was down over Description Icon open the editor.
   */  
@@ -142,11 +142,23 @@ Tasks.TaskItemView = SC.ListItemView.extend(
               value: "_Description:".loc()
             }),
             SC.TextFieldView.design({
-              layout: { top: 98, left: 10, right: 10, bottom: 10 },
+              layout: { top: 98, left: 10, right: 10, bottom: 25 },
               hint: "_DescriptionHint".loc(),
               isTextArea: YES,
               isEnabled: YES,
               valueBinding: SC.binding('.content.description', this)
+            }),
+            SC.LabelView.design({
+              layout: { left:10, bottom: 5, height: 17, width: 250 },
+              classNames: [ 'date-time'],
+              textAlign: SC.ALIGN_LEFT,
+              valueBinding: SC.binding('.content.displayCreatedAt', this)
+            }),
+            SC.LabelView.design({
+              layout: { right:10, bottom: 5, height: 17, width: 250 },
+              classNames: [ 'date-time'],
+              textAlign: SC.ALIGN_RIGHT,
+              valueBinding: SC.binding('.content.displayUpdatedAt', this)
             })
             
           ]

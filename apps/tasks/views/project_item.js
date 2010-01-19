@@ -34,7 +34,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       var layer = this.get('layer');
       this._editorPane = SC.PickerPane.create({
         
-        layout: { width: 500, height: 200 },
+        layout: { width: 740, height: 265 },
         _timeLeft: null,
         
         // Avoid popup panel coming up on other items while it is up already
@@ -80,11 +80,23 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
               value: "_Description:".loc()
             }),
             SC.TextFieldView.design({
-              layout: { top: 65, left: 10, right: 10, bottom: 10 },
+              layout: { top: 65, left: 10, right: 10, bottom: 25 },
               hint: "_DescriptionHint".loc(),
               isTextArea: YES,
               isEnabledBinding: 'CoreTasks.permissions.canEditProject',
               valueBinding: SC.binding('.content.description', this)
+            }),
+            SC.LabelView.design({
+              layout: { left:10, bottom: 5, height: 17, width: 250 },
+              classNames: [ 'date-time'],
+              textAlign: SC.ALIGN_LEFT,
+              valueBinding: SC.binding('.content.displayCreatedAt', this)
+            }),
+            SC.LabelView.design({
+              layout: { right:10, bottom: 5, height: 17, width: 250 },
+              classNames: [ 'date-time'],
+              textAlign: SC.ALIGN_RIGHT,
+              valueBinding: SC.binding('.content.displayUpdatedAt', this)
             })
             
           ]
