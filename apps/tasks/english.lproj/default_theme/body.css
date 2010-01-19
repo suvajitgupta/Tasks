@@ -180,6 +180,9 @@ body {
 .users-pane-inner .sc-view.sc-list-item-view.sc-collection-item .sc-outline {
   left: 15px !important;
 }
+.sc-view.sc-list-item-view.sc-collection-item.sc-group-item {
+  color: #888 !important;
+}
 
 .statistics-pane table {
   border: 1px solid gray !important;
