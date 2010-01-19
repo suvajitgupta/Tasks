@@ -37,11 +37,11 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
         layout: { width: 740, height: 265 },
         _timeLeft: null,
         
-        // Avoid popup panel coming up on other items while it is up already
+        // Avoid popup panel coming up for system projects
         popup: function() {
+          if(that.get('isSystemProject')) return;
           sc_super();
           Tasks.editorPoppedUp = true;
-          if(that.get('isSystemProject')) return;
           this._timeLeft = that.getPath('content.timeLeft');
         },
         remove: function() {
