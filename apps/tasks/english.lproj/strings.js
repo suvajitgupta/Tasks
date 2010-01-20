@@ -183,7 +183,7 @@ SC.stringsFor('English', {
   "_assignees": " assignee(s), and ",
   "_RedFlags": " red flag(s)",
   "_AutoSave": "Auto Save",
-  "_AutoSaveTooltip": "Automatially save changes to the server, other you have to press \"Save\" button periodically",
+  "_AutoSaveTooltip": "Automatially save changes to the server, otherwise you have to press \"Save\" button periodically",
   "_UsersLoaded": "Loaded users, ",
   "_TasksLoaded": "tasks, ",
   "_ProjectsLoaded": " and projects at ",
