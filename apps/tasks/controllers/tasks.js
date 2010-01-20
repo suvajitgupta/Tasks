@@ -96,6 +96,7 @@ Tasks.tasksController = SC.TreeController.create(
         var type = task.get('type');
         if(type !== value) task.set('type', value);
       });
+      if(!Tasks.get('manualSave')) Tasks.saveData();
     } else {
       sel.forEach(function(task) {
         var type = task.get('type');
@@ -127,6 +128,7 @@ Tasks.tasksController = SC.TreeController.create(
         var priority = task.get('priority');
         if(priority !== value) task.set('priority', value);
       });
+      if(!Tasks.get('manualSave')) Tasks.saveData();
     } else {
       sel.forEach(function(task) {
         var priority = task.get('priority');
@@ -158,6 +160,7 @@ Tasks.tasksController = SC.TreeController.create(
         var developmentStatusWithValidation = task.get('developmentStatusWithValidation');
         if(developmentStatusWithValidation !== value) task.set('developmentStatusWithValidation', value);
       });
+      if(!Tasks.get('manualSave')) Tasks.saveData();
     } else {
       sel.forEach(function(task) {
         var developmentStatusWithValidation = task.get('developmentStatusWithValidation');
@@ -193,6 +196,7 @@ Tasks.tasksController = SC.TreeController.create(
         var validation = task.get('validation');
         if(validation !== value) task.set('validation', value);
       });
+      if(!Tasks.get('manualSave')) Tasks.saveData();
     } else {
       sel.forEach(function(task) {
         var validation = task.get('validation');

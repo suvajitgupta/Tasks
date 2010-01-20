@@ -61,11 +61,14 @@ Tasks.reallocationController = SC.Object.create(SC.CollectionViewDelegate,
           var targetProjectId = (targetProject === CoreTasks.get('unallocatedTasksProject')? null : targetProject.get('id'));
           // console.log('Reallocating to: ' + targetProject.get('name') + ' of ID: ' + targetProjectId);
           task.set('projectId', targetProjectId);
+          ret = SC.DRAG_MOVE;
         }, this);
       }
-      ret = SC.DRAG_MOVE;
     }       
   
+    if(ret === SC.DRAG_MOVE) {
+      if(!Tasks.get('manualSave')) Tasks.saveData();
+    }
     return ret;
   },
 

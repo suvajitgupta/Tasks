@@ -232,9 +232,11 @@ Tasks.mixin({
    * Save modified Tasks data to server.
    */
   saveData: function() {
-    CoreTasks.saveChanges();
-    var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
-    serverMessage.set('value', "_SaveMessage".loc() + new Date().format('hh:mm:ss a'));
+    if(CoreTasks.get('needsSave')) {
+      CoreTasks.saveChanges();
+      var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
+      serverMessage.set('value', "_SaveMessage".loc() + new Date().format('hh:mm:ss a'));
+    }
   },
   
   /**
@@ -354,6 +356,22 @@ Tasks.mixin({
   },
   
   /**
+   * Add a new project in projects master list.
+   */
+  addProject: function() {
+    this._createProject(false);
+  },
+  
+  /**
+   * Duplicate selected project in projects master list.
+   *
+   * @param {Boolean} flag to indicate whether to make a duplicate of selected project.
+   */
+  duplicateProject: function() {
+    this._createProject(true);
+  },
+  
+  /**
    * Create a new project in projects master list and start editing it .
    *
    * @param {Boolean} flag to indicate whether to make a duplicate of selected task.
@@ -383,23 +401,8 @@ Tasks.mixin({
     var pc = this.projectsController;
     pc.selectObject(project);
     CoreTasks.invokeLater(pc.editNewProject, 200, project);
+    if(!Tasks.get('manualSave')) Tasks.saveData();
     return project;
-  },
-  
-  /**
-   * Add a new project in projects master list.
-   */
-  addProject: function() {
-    this._createProject(false);
-  },
-  
-  /**
-   * Duplicate selected project in projects master list.
-   *
-   * @param {Boolean} flag to indicate whether to make a duplicate of selected project.
-   */
-  duplicateProject: function() {
-    this._createProject(true);
   },
   
   /**
@@ -452,6 +455,7 @@ Tasks.mixin({
 
     // Select the default project
     Tasks.projectsController.selectObject(Tasks.get('defaultProject'));
+    if(!Tasks.get('manualSave')) Tasks.saveData();
   },
   
   /**
@@ -461,6 +465,27 @@ Tasks.mixin({
     Tasks.projectController.showStatistics();  
   },
   
+  /**
+   * Add a new task in tasks detail list.
+   *
+   * @param {Boolean} flag to indicate whether to make a duplicate of selected task.
+   */
+  addTask: function() {
+    this._createTask(false);
+  },
+  
+  /**
+   * Duplicate selected task in tasks detail list.
+   *
+   * @param {Boolean} flag to indicate whether to make a duplicate of selected task.
+   */
+  duplicateTask: function() {
+    this._createTask(true);
+  },
+  
+  /**
+   * Delete selected task in tasks detail list.
+   */
   /**
    * Create a new task in tasks detail list and start editing it.
    *
@@ -519,31 +544,11 @@ Tasks.mixin({
     var ac = this.get('assignmentsController');  
     CoreTasks.invokeLater(ac.showAssignments.bind(ac));
     CoreTasks.invokeLater(tc.editNewTask, 200, task);
+    if(!Tasks.get('manualSave')) Tasks.saveData();
     return task;
         
   },
 
-  /**
-   * Add a new task in tasks detail list.
-   *
-   * @param {Boolean} flag to indicate whether to make a duplicate of selected task.
-   */
-  addTask: function() {
-    this._createTask(false);
-  },
-  
-  /**
-   * Duplicate selected task in tasks detail list.
-   *
-   * @param {Boolean} flag to indicate whether to make a duplicate of selected task.
-   */
-  duplicateTask: function() {
-    this._createTask(true);
-  },
-  
-  /**
-   * Delete selected task in tasks detail list.
-   */
   deleteTask: function() {
     
     if(!Tasks.tasksController.isDeletable()) {
@@ -562,6 +567,7 @@ Tasks.mixin({
         task.destroy();
       }
       Tasks.deselectTasks();
+      if(!Tasks.get('manualSave')) Tasks.saveData();
     }
   },
   
@@ -600,6 +606,7 @@ Tasks.mixin({
     var user = CoreTasks.createRecord(CoreTasks.User, SC.clone(CoreTasks.User.NEW_USER_HASH));
     Tasks.usersController.selectObject(user);
     Tasks.settingsPage.get('userInformation').get('fullNameField').becomeFirstResponder();
+    if(!Tasks.get('manualSave')) Tasks.saveData();
     return user;
     
   },
@@ -628,6 +635,7 @@ Tasks.mixin({
 
               // Select the logged in user.
               Tasks.usersController.selectObject(CoreTasks.get('currentUser'));
+              if(!Tasks.get('manualSave')) Tasks.saveData();
             }
           }
         })

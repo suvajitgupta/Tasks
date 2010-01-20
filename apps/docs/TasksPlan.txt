@@ -137,7 +137,7 @@ v Add online training video using Captivate or Camtasia [SG] $Feature
 | See demo.sproutcore.com/user_defaults and lookup SproutCore blog for Charles' posting on this topic
 - Add "TEAM" display mode (vs. "TASKS") to show everyone at a glance, clicking on assignee shows their tasks [SG] $Feature @Done %Passed
 v Add hotkeys for common operations (like add Projects/Tasks and Save) [EG] <SG> $Feature @Done %Passed
-- Add Undo/Redo buttons in top toolbar (till last Save) [SG] <SE> $Feature
+- Add Undo/Redo buttons in top toolbar [SG] <SE> $Feature
 - Support disconnected operation and synchronization after network reconnection using SproutDB [SG] <SE> $Feature
 
 Server
@@ -156,11 +156,12 @@ Styling/Hardening
 ^ Style via CSS, embed catchy/sprited images [MG] <SG> @Done %Passed
 ^ Perform smoke test of key functionality [SG] @Done
 | Login/Logout, Guest Signup
-| Project/Task/User CRUD
 | All/Unallocated Tasks system projects
+| Project/Task/User CRUD via toolbar buttons/context menus
 | Project/Task modifications via inline editor and popup editor/control bar
-| Task reassignment/reallocation, User role change (drag-and-drop)
+| Task reassignment/reallocation & User role change via drag-and-drop
 | Task attribute filtering, assignee selection, ID/name searching
+| User modifications via User Manager
 | Save, Import/Export (Text & HTML)
 - Perform I18N and L10N (test with reversed strings) [SG] <JH2> @Done %Passed
 - Develop Model unit tests [SG] <BB> @Active

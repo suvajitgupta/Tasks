@@ -89,6 +89,9 @@ Tasks.rolesController = SC.TreeController.create(SC.CollectionViewDelegate,
     }, this);
     
     // Redraw users list after role changes are complete
+    if(ret === SC.DRAG_NONE) {
+      if(!Tasks.get('manualSave')) Tasks.saveData();
+    }
     return ret;
   },
   

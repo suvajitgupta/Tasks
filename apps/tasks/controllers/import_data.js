@@ -159,6 +159,7 @@ Tasks.importDataController = SC.ObjectController.create(
       
       this.closePanel();
       Tasks.assignmentsController.showAssignments();
+      if(!Tasks.get('manualSave')) Tasks.saveData();
       
     },
     

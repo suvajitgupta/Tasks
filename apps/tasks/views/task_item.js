@@ -74,6 +74,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           if(Tasks.assignmentsRedrawNeeded) {
             Tasks.assignmentsController.showAssignments();
           }
+          if(!Tasks.get('manualSave')) Tasks.saveData();
         },
         
         contentView: SC.View.design({
@@ -402,6 +403,11 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       console.warn('You do not have permission to edit task(s) here');
       inlineEditor.discardEditing();
     }
+  },
+  
+  inlineEditorDidEndEditing: function(inlineEditor, finalValue) {
+    sc_super();
+    if(!Tasks.get('manualSave')) Tasks.saveData();
   },
   
   render: function(context, firstTime) {

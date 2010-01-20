@@ -44,6 +44,7 @@ Tasks.mainPage = SC.Page.design({
           icon: ['save-icon'],
           toolTip: "_SaveTooltip".loc(),
           isEnabledBinding: 'CoreTasks.needsSave',
+          isVisibleBinding: 'Tasks.manualSave',
           target: 'Tasks',
           action: 'saveData'
         }),
