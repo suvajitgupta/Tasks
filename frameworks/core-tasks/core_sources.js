@@ -194,10 +194,15 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
       params.store.dataSourceDidComplete(params.storeKey, recordHash, recordHash.id);
 
     } else {
-      // Request failed; invoke the error callback.
-      var error = this._buildError(response);
-      console.log('Error updating record [%@:%@]: %@'.fmt(params.recordType, params.id, error));
-      params.store.dataSourceDidError(params.storeKey, error);
+      if(response.status === 404) { // not found on server, record must have been deleted
+        // delete record in the store
+        CoreTasks.get('store').removeDataHash(params.storeKey, SC.Record.DESTROYED_CLEAN); // FIXME: [SG] Beta: switch to Evin's code to remove record from store
+      }
+      else { // Request failed; invoke the error callback.
+        var error = this._buildError(response);
+        console.log('Error updating record [%@:%@]: %@'.fmt(params.recordType, params.id, error));
+        params.store.dataSourceDidError(params.storeKey, error);
+      }
     }
   },
 
@@ -240,21 +245,24 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
     var results;
 
     if (SC.ok(response) && SC.ok(results = response.get('body'))) {
-      if (response.status === 200 || response.status === 204) {
+      if (response.status === 200 || response.status === 204) { // successfully deleted
         // Invoke the destroy callback on the store.
         params.store.dataSourceDidDestroy(params.storeKey);
-      } else {
-        // This should never happen, but just in case...
+      } else { // This should never happen, but just in case...
         console.log('Error deleting record [%@:%@]: Unexpected server response: %@'.fmt(
           params.recordType, params.id, response.status));
         params.store.dat200aSourceDidError(params.storeKey, CoreTasks.ERROR_UNEXPECTED_RESPONSE);
       }
-
     } else {
-      // Request failed; invoke the error callback.
-      var error = this._buildError(response);
-      console.log('Error deleting record [%@:%@]: %@'.fmt(params.recordType, params.id, error));
-      params.store.dataSourceDidError(params.storeKey, error);
+      if(response.status === 404) { // not found on server, record must have been deleted
+        // delete record in the store
+        CoreTasks.get('store').removeDataHash(params.storeKey, SC.Record.DESTROYED_CLEAN); // FIXME: [SG] Beta: switch to Evin's code to remove record from store
+      }
+      else { // Request failed; invoke the error callback.
+        var error = this._buildError(response);
+        console.log('Error deleting record [%@:%@]: %@'.fmt(params.recordType, params.id, error));
+        params.store.dataSourceDidError(params.storeKey, error);
+      }
     }
   },
 
