@@ -401,7 +401,7 @@ Tasks.mixin({
     var pc = this.projectsController;
     pc.selectObject(project);
     CoreTasks.invokeLater(pc.editNewProject, 200, project);
-    if(!Tasks.get('manualSave')) Tasks.saveData();
+    if(Tasks.get('autoSave')) Tasks.saveData();
     return project;
   },
   
@@ -438,7 +438,7 @@ Tasks.mixin({
 
               // Select the default project
               Tasks.projectsController.selectObject(Tasks.get('defaultProject'));
-              if(!Tasks.get('manualSave')) Tasks.saveData();
+              if(Tasks.get('autoSave')) Tasks.saveData();
             }
           }
         })
@@ -532,7 +532,7 @@ Tasks.mixin({
     var ac = this.get('assignmentsController');  
     CoreTasks.invokeLater(ac.showAssignments.bind(ac));
     CoreTasks.invokeLater(tc.editNewTask, 200, task);
-    if(!Tasks.get('manualSave')) Tasks.saveData();
+    if(Tasks.get('autoSave')) Tasks.saveData();
     return task;
         
   },
@@ -562,7 +562,7 @@ Tasks.mixin({
                 task.destroy();
               }
               Tasks.deselectTasks();
-              if(!Tasks.get('manualSave')) Tasks.saveData();
+              if(Tasks.get('autoSave')) Tasks.saveData();
             }
           }
         })
@@ -606,7 +606,7 @@ Tasks.mixin({
     var user = CoreTasks.createRecord(CoreTasks.User, SC.clone(CoreTasks.User.NEW_USER_HASH));
     Tasks.usersController.selectObject(user);
     Tasks.settingsPage.get('userInformation').get('fullNameField').becomeFirstResponder();
-    if(!Tasks.get('manualSave')) Tasks.saveData();
+    if(Tasks.get('autoSave')) Tasks.saveData();
     return user;
     
   },
@@ -635,7 +635,7 @@ Tasks.mixin({
 
               // Select the logged in user.
               Tasks.usersController.selectObject(CoreTasks.get('currentUser'));
-              if(!Tasks.get('manualSave')) Tasks.saveData();
+              if(Tasks.get('autoSave')) Tasks.saveData();
             }
           }
         })

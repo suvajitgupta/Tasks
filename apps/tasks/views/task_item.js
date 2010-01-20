@@ -74,7 +74,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           if(Tasks.assignmentsRedrawNeeded) {
             Tasks.assignmentsController.showAssignments();
           }
-          if(!Tasks.get('manualSave')) Tasks.saveData();
+          if(Tasks.get('autoSave')) Tasks.saveData();
         },
         
         contentView: SC.View.design({
@@ -407,7 +407,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   
   inlineEditorDidEndEditing: function(inlineEditor, finalValue) {
     sc_super();
-    if(!Tasks.get('manualSave')) Tasks.saveData();
+    if(Tasks.get('autoSave')) Tasks.saveData();
   },
   
   render: function(context, firstTime) {

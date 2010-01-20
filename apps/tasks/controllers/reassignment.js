@@ -87,7 +87,7 @@ Tasks.reassignmentController = SC.Object.create(SC.CollectionViewDelegate,
     
     // Redraw tasks list after reassignments are complete
     if(ret === SC.DRAG_NONE) {
-      if(!Tasks.get('manualSave')) Tasks.saveData();
+      if(Tasks.get('autoSave')) Tasks.saveData();
       Tasks.assignmentsController.showAssignments();
     }
     return ret;

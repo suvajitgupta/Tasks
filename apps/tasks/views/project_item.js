@@ -53,7 +53,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
           if(this._timeLeft !== that.getPath('content.timeLeft')) { // if timeLeft has changed, redraw got load balancing recalculation
             Tasks.assignmentsController.showAssignments();
           }
-          if(!Tasks.get('manualSave')) Tasks.saveData();
+          if(Tasks.get('autoSave')) Tasks.saveData();
         },
         
         contentView: SC.View.design({
@@ -186,7 +186,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     if(finalValue.indexOf('{') >= 0) { // if effort was specified inline, redraw got load balancing recalculation
       Tasks.assignmentsController.showAssignments();
     }
-    if(!Tasks.get('manualSave')) Tasks.saveData();
+    if(Tasks.get('autoSave')) Tasks.saveData();
   },
   
   renderIcon: function(context, icon){

@@ -44,7 +44,9 @@ Tasks.mainPage = SC.Page.design({
           icon: ['save-icon'],
           toolTip: "_SaveTooltip".loc(),
           isEnabledBinding: 'CoreTasks.needsSave',
-          isVisibleBinding: 'Tasks.manualSave',
+          isVisibleBinding: SC.Binding.transform(function(value, binding) {
+                                                   return !value;
+                                                 }).from('Tasks.autoSave'),
           target: 'Tasks',
           action: 'saveData'
         }),
@@ -465,7 +467,7 @@ Tasks.mainPage = SC.Page.design({
     statusBarView: SC.View.design(SC.Border, {
       layout: { bottom: 0, height: 20, left: 0, right: 0 },
       classNames: ['status-bar'],
-      childViews: ['summaryView', 'serverMessageView'],
+      childViews: ['summaryView', 'autoSave', 'serverMessageView'],
       borderStyle: SC.BORDER_TOP,
         
       summaryView: Tasks.SummaryView.design({
@@ -475,6 +477,13 @@ Tasks.mainPage = SC.Page.design({
         tasksTreeBinding: SC.Binding.oneWay('Tasks.tasksController.content')
       }),
 
+      autoSave: SC.CheckboxView.design(SCUI.ToolTip, {
+        layout: { centerY: 0, height: 16, centerX: 5, width: 100 },
+        title: "_AutoSave".loc(),
+        toolTip: "_AutoSaveTooltip".loc(),
+        valueBinding: 'Tasks.autoSave'
+      }),
+      
       serverMessageView: SC.LabelView.design({
         layout: { centerY: 0, height: 16, width: 400, right: 10 },
         classNames: ['status-bar-message'],
