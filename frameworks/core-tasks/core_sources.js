@@ -240,14 +240,14 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
     var results;
 
     if (SC.ok(response) && SC.ok(results = response.get('body'))) {
-      if (response.status === 200) {
+      if (response.status === 200 || response.status === 204) {
         // Invoke the destroy callback on the store.
         params.store.dataSourceDidDestroy(params.storeKey);
       } else {
         // This should never happen, but just in case...
         console.log('Error deleting record [%@:%@]: Unexpected server response: %@'.fmt(
           params.recordType, params.id, response.status));
-        params.store.dataSourceDidError(params.storeKey, CoreTasks.ERROR_UNEXPECTED_RESPONSE);
+        params.store.dat200aSourceDidError(params.storeKey, CoreTasks.ERROR_UNEXPECTED_RESPONSE);
       }
 
     } else {
