@@ -548,14 +548,26 @@ Tasks.mixin({
     var tc = this.get('tasksController');
     var sel = tc.get('selection');
     if (sel && sel.length() > 0) {
-      var context = {};
-      for (var i = 0; i < sel.length(); i++) {
-        // Get and delete each selected task.
-        var task = sel.nextObject(i, null, context);
-        task.destroy();
-      }
-      Tasks.deselectTasks();
-      if(!Tasks.get('manualSave')) Tasks.saveData();
+
+
+      // Confirm deletion operation
+      SC.AlertPane.warn("_Confirmation".loc(), "_TaskDeletionConfirmation".loc(), null, "_No".loc(), "_Yes".loc(), null,
+        SC.Object.create({
+          alertPaneDidDismiss: function(pane, status) {
+            if(status === SC.BUTTON2_STATUS) {
+              var context = {};
+              for (var i = 0; i < sel.length(); i++) {
+                // Get and delete each selected task.
+                var task = sel.nextObject(i, null, context);
+                task.destroy();
+              }
+              Tasks.deselectTasks();
+              if(!Tasks.get('manualSave')) Tasks.saveData();
+            }
+          }
+        })
+      );
+
     }
   },
   
