@@ -425,39 +425,27 @@ Tasks.mixin({
         return;
       }
       
-      // Confirm deletion for projects that have tasks
-      var tasks = selectedProject.get('tasks');
-      var taskCount = tasks.get('length');
-      if(taskCount > 0) {
-        SC.AlertPane.warn("_Confirmation".loc(), "_ProjectDeletionConfirmation".loc(), null, "_No".loc(), "_Yes".loc(), null,
-          SC.Object.create({
-            alertPaneDidDismiss: function(pane, status) {
-              if(status === SC.BUTTON2_STATUS) Tasks._deleteProject(selectedProject);
+      // Confirm deletion operation
+      SC.AlertPane.warn("_Confirmation".loc(), "_ProjectDeletionConfirmation".loc(), null, "_No".loc(), "_Yes".loc(), null,
+        SC.Object.create({
+          alertPaneDidDismiss: function(pane, status) {
+            if(status === SC.BUTTON2_STATUS) {
+              // Reset default project if it is deleted
+              if(selectedProject === Tasks.get('defaultProject')) Tasks.set('defaultProject', CoreTasks.get('unallocatedTasksProject'));
+
+              // Delete the project
+              selectedProject.destroy();
+
+              // Select the default project
+              Tasks.projectsController.selectObject(Tasks.get('defaultProject'));
+              if(!Tasks.get('manualSave')) Tasks.saveData();
             }
-          })
-        );
-      }
-      else {
-        Tasks._deleteProject(selectedProject);
-      }
+          }
+        })
+      );
     }
   },
-  
-  /**
-   * Delete project without user confirmation.
-   */
-  _deleteProject: function(project) {
-    // Reset default project if it is deleted
-    if(project === Tasks.get('defaultProject')) Tasks.set('defaultProject', CoreTasks.get('unallocatedTasksProject'));
 
-    // Delete the project
-    project.destroy();
-
-    // Select the default project
-    Tasks.projectsController.selectObject(Tasks.get('defaultProject'));
-    if(!Tasks.get('manualSave')) Tasks.saveData();
-  },
-  
   /**
    * Popup Project Statistics panel.
    */
