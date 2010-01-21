@@ -38,10 +38,13 @@
   text-align: center !important;
 }
 
+.installation-logo {
+  margin-top: -22px !important;
+  background: static_url('images/sproutcore-logo.png') no-repeat 0 0;
+}
+
 .tasks-logo {
   margin-top: -15px !important;
-  width: 175px !important;
-  height: 36px !important;
   background: static_url('images/tasks-logo.png') no-repeat 0 0;
 }
 
@@ -57,17 +60,12 @@
   -webkit-border-radius: 15px;
 }
 
-.installation-logo {
-  margin-top: -22px !important;
-  width: 175px !important;
-  height: 36px !important;
-  background: static_url('images/sproutcore-logo.png') no-repeat 0 0;
-}
-
 .user-role-message {
   font-size: 11px !important;
   color: #DDD !important;
-  margin-top: -18px !important;
+  line-height: 15px !important;
+  margin-top: -16px !important;
+  text-align: center !important;
 }
 
 .window-title {

@@ -29,21 +29,21 @@ Tasks.mainPage = SC.Page.design({
       classNames: ['title-bar'],
       childViews: [
       
+        SC.LabelView.design({
+          layout: { left: 0, width: 225, centerY: 0, height: 42 },
+          classNames: ['installation-logo']
+        }),
+
         Tasks.LogoView.design({
-          layout: { centerY: 0, height: 42, left: 0, width: 238 }
+          layout: { left: 225, width: 150, centerY: 0, height: 42 }
         }),
 
         SC.LabelView.design(SCUI.ToolTip, {
-          layout: { centerY: 0, height: 42, left: 238, width: 238 },
+          layout: { centerY: 0, height: 42, centerX: -35, width: 225 },
           escapeHTML: NO,
           classNames: ['user-role-message']
         }),
         
-        SC.LabelView.design({
-          layout: { centerY: 0, height: 42, centerX: 40, width: 175 },
-          classNames: ['installation-logo']
-        }),
-
         SC.LabelView.design( SCUI.SimpleButton, {
           layout: { centerY: 0, right: 325, height: 32, width: 70 },
           icon: ['save-icon'],
@@ -112,7 +112,7 @@ Tasks.mainPage = SC.Page.design({
       ]
     }),
     
-    userRoleMessage: SC.outlet('titleBarView.childViews.1'),
+    userRoleMessage: SC.outlet('titleBarView.childViews.2'),
     exportButton: SC.outlet('titleBarView.childViews.7'),
     
     toolbarView: SC.View.design({
