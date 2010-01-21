@@ -39,18 +39,35 @@
 }
 
 .tasks-logo {
+  margin-top: -15px !important;
+  width: 175px !important;
+  height: 36px !important;
   background: static_url('images/tasks-logo.png') no-repeat 0 0;
 }
 
 .tasks-version {
-  color: #DDD !important;
-  font-size: 10px !important;
+  font-size: 9px !important;
+  color: white !important;
+  background-color: red !important;
+  text-align: center !important;
+  line-height: 15px !important;
+  margin-top: -18px !important;
+	border: 1px solid white !important;
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+}
+
+.installation-logo {
+  margin-top: -22px !important;
+  width: 175px !important;
+  height: 36px !important;
+  background: static_url('images/sproutcore-logo.png') no-repeat 0 0;
 }
 
 .user-role-message {
-  font-size: 12px !important;
-  text-align: center !important;
+  font-size: 11px !important;
   color: #DDD !important;
+  margin-top: -18px !important;
 }
 
 .window-title {

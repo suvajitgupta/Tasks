@@ -30,15 +30,20 @@ Tasks.mainPage = SC.Page.design({
       childViews: [
       
         Tasks.LogoView.design({
-          layout: { centerY: 0, height: 26, left: 0, width: 150 }
+          layout: { centerY: 0, height: 42, left: 0, width: 238 }
         }),
 
         SC.LabelView.design(SCUI.ToolTip, {
-          layout: { centerY: 0, height: 20, centerX: -130, width: 320 },
+          layout: { centerY: 0, height: 42, left: 238, width: 238 },
           escapeHTML: NO,
           classNames: ['user-role-message']
         }),
         
+        SC.LabelView.design({
+          layout: { centerY: 0, height: 42, centerX: 40, width: 175 },
+          classNames: ['installation-logo']
+        }),
+
         SC.LabelView.design( SCUI.SimpleButton, {
           layout: { centerY: 0, right: 325, height: 32, width: 70 },
           icon: ['save-icon'],

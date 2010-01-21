@@ -111,7 +111,7 @@ Tasks.mixin({
         CoreTasks.setPermissions();
         
         var userRoleMessage = Tasks.getPath('mainPage.mainPane.userRoleMessage');
-        userRoleMessage.set('value', "_User:".loc() + '<b>' + CoreTasks.getPath('currentUser.name') + '</b>, ' +
+        userRoleMessage.set('value', "_User:".loc() + '<b>' + CoreTasks.getPath('currentUser.name') + '</b><br>' +
                            "_Role:".loc() + ' <i>' + CoreTasks.getPath('currentUser.role').loc() + '</i>');
         userRoleMessage.set('toolTip', "_LoginSince".loc() + new Date().format('hh:mm:ss a MMM dd, yyyy'));
         
