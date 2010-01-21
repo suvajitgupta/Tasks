@@ -30,7 +30,7 @@ Tasks.mainPage = SC.Page.design({
       childViews: [
       
         SC.LabelView.design({
-          layout: { left: 0, width: 225, centerY: 0, height: 42 },
+          layout: { left: 20, width: 200, centerY: 0, height: 42 },
           classNames: ['installation-logo']
         }),
 
@@ -39,7 +39,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         SC.LabelView.design(SCUI.ToolTip, {
-          layout: { centerY: 0, height: 42, centerX: -35, width: 225 },
+          layout: { centerY: 0, height: 35, centerX: -35, width: 225 },
           escapeHTML: NO,
           classNames: ['user-role-message']
         }),
