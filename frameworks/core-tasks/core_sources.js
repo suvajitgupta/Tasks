@@ -83,7 +83,6 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
           }
           for(var j = 0, n = deletedStoreKeys.length; j < n; j++) {
             var storeKey = deletedStoreKeys[j];
-            console.log('DEBUG: deleting for storeKey=' + storeKey);
             store.removeDataHash(storeKey, SC.Record.DESTROYED_CLEAN);
             store.dataHashDidChange(storeKey);
           }
