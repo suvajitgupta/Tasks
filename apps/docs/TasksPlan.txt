@@ -111,6 +111,7 @@ User Manager GUI
 | Create separate projects for different teams to keep their tasks/deadlines separate instead
 
 Application Manager GUI
+- Add installation and Tasks logos to top bar and display program version [SG] @Done $Feature %Passed
 - Add welcome message showing logged in user/role with hover over tooltip showing time of login [SG] @Done $Feature %Passed
 - Add server data loading message in status bar during startup [SG] $Feature @Done %Passed
 - Summarize number of projects/assignees/tasks being displayed in the status bar [SG] <MB> @Done $Feature %Passed
