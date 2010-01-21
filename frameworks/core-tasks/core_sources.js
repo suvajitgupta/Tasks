@@ -67,8 +67,27 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
 
           // Load the records into the store and invoke the callback.
           console.log('Retrieved %@ matching %@ records.'.fmt(records.length, recordType));
-
           store.loadRecords(recordType, records);
+
+          // Identify/remove any records that have been deleted on server but exist in the store
+          var idsOnServer = [];
+          for(var i = 0, len = records.length; i < len; i++) {
+            idsOnServer[i] = '' + records[i].id;
+          }
+          var idsInStore = recordType.storeKeysById();
+          var deletedStoreKeys = [];
+          for(var id in idsInStore) {
+            if(id > 0 && idsOnServer.indexOf(id) < 0) {
+              deletedStoreKeys.push(idsInStore[id]);
+            }
+          }
+          for(var j = 0, n = deletedStoreKeys.length; j < n; j++) {
+            var storeKey = deletedStoreKeys[j];
+            console.log('DEBUG: deleting for storeKey=' + storeKey);
+            store.removeDataHash(storeKey, SC.Record.DESTROYED_CLEAN);
+            store.dataHashDidChange(storeKey);
+          }
+
           store.dataSourceDidFetchQuery(query);
         } else {
           // No matching records.
@@ -196,7 +215,9 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
     } else {
       if(response.status === 404) { // not found on server, record must have been deleted
         // delete record in the store
-        CoreTasks.get('store').removeDataHash(params.storeKey, SC.Record.DESTROYED_CLEAN); // FIXME: [SG] Beta: switch to Evin's code to remove record from store
+        var store = CoreTasks.get('store');
+        store.removeDataHash(params.storeKey, SC.Record.DESTROYED_CLEAN);
+        store.dataHashDidChange(params.storeKey);
       }
       else { // Request failed; invoke the error callback.
         var error = this._buildError(response);
@@ -256,7 +277,9 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
     } else {
       if(response.status === 404) { // not found on server, record must have been deleted
         // delete record in the store
-        CoreTasks.get('store').removeDataHash(params.storeKey, SC.Record.DESTROYED_CLEAN); // FIXME: [SG] Beta: switch to Evin's code to remove record from store
+        var store = CoreTasks.get('store');
+        store.removeDataHash(params.storeKey, SC.Record.DESTROYED_CLEAN);
+        store.dataHashDidChange(params.storeKey);
       }
       else { // Request failed; invoke the error callback.
         var error = this._buildError(response);
