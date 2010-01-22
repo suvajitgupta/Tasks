@@ -23,7 +23,7 @@ Tasks.LogoView = SC.View.extend(
     }),
 
     SC.LabelView.design({
-      layout: { centerY: -6, height: 15, left: 100, width: 30 },
+      layout: { centerY: -6, height: 10, left: 95, width: 22 },
       classNames: ['tasks-version'],
       value: Tasks.VERSION
     })

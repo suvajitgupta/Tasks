@@ -53,9 +53,10 @@
   color: white !important;
   background-color: red !important;
   text-align: center !important;
-  line-height: 15px !important;
+  line-height: 10px !important;
   margin-top: -18px !important;
 	border: 2px solid white !important;
+	padding: 1px 1px !important;
   -moz-border-radius: 15px;
   -webkit-border-radius: 15px;
 }
