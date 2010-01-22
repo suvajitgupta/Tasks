@@ -61,11 +61,10 @@
   -webkit-border-radius: 15px;
 }
 
-.user-role-message {
+.user-attribute-message {
   font-size: 11px !important;
   color: #DDD !important;
   line-height: 15px !important;
-  margin-top: -16px !important;
   text-align: center !important;
 }
 

@@ -39,15 +39,22 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         SC.LabelView.design(SCUI.ToolTip, {
-          layout: { centerY: 0, height: 35, centerX: -35, width: 225 },
+          layout: { centerY: -8, height: 18, centerX: -35, width: 225 },
           escapeHTML: NO,
           valueBinding: SC.Binding.transform(function(value, binding) {
-            console.log('DEBUG: role message: ' + value);
             if(!value) return '';
-            return "_User:".loc() + '<b>' + CoreTasks.getPath('currentUser.name') + '</b><br>' +
-                   "_Role:".loc() + ' <i>' + CoreTasks.getPath('currentUser.role').loc() + '</i>';
-          }).from('CoreTasks*currentUser'),
-          classNames: ['user-role-message']
+            return "_User:".loc() + '<b>' + value + '</b>';
+          }).from('CoreTasks*currentUser.name'),
+          classNames: ['user-attribute-message']
+        }),
+        SC.LabelView.design({
+          layout: { centerY: 8, height: 18, centerX: -35, width: 225 },
+          escapeHTML: NO,
+          valueBinding: SC.Binding.transform(function(value, binding) {
+            if(!value) return '';
+            return "_Role:".loc() + ' <i>' + value.loc() + '</i>';
+          }).from('CoreTasks*currentUser.role'),
+          classNames: ['user-attribute-message']
         }),
         
         SC.LabelView.design( SCUI.SimpleButton, {
@@ -118,7 +125,8 @@ Tasks.mainPage = SC.Page.design({
       ]
     }),
     
-    userRoleMessage: SC.outlet('titleBarView.childViews.2'),
+    userNameMessage: SC.outlet('titleBarView.childViews.2'),
+    userRoleMessage: SC.outlet('titleBarView.childViews.3'),
     exportButton: SC.outlet('titleBarView.childViews.7'),
     
     toolbarView: SC.View.design({
