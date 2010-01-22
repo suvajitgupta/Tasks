@@ -302,7 +302,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
               for (var i = 0; !taskHasID && i < idMatches.length; i++) {
                 var searchText = taskName + (taskDescription? taskDescription : '');
                 var taskIdMatches = searchText.match(/#([\-\d]+)/g);
-                if(taskIdMatches) { // task name has ID(s) in it
+                if(taskIdMatches) { // task name has IDs in it
                   for (var j=0; j < taskIdMatches.length; j++) {
                     if(taskIdMatches[j] === idMatches[i]) { // found match!
                       taskHasID = true;

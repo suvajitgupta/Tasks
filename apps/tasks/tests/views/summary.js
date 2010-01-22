@@ -25,5 +25,5 @@ module("Tasks.SummaryView tests", pane.standardSetup());
 test("no items", function(){
   var view = pane.view('SummaryView');
   ok(view, 'view should render');
-  equals(view.$().get(0).innerHTML, 'Displaying -2 project(s), ', 'summary at startup');
+  equals(view.$().get(0).innerHTML, 'Displaying -2 projects, ', 'summary at startup');
 });

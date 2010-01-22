@@ -1,33 +1,33 @@
 # Tasks Import test data
 
 
-# Unallocated # Has 1 task(s)
+# Unallocated # Has 1 tasks
 
-# Suvajit Gupta (SG); Has 1 task(s)
+# Suvajit Gupta (SG); Has 1 tasks
 - An unallocated, other, task done by Suvajit in no time, but with a very verbose name that will be cropped at the edge of the screen and can be seen by double clicking on the task to get the inline editor {0d} [SG] @Done
 
 
-Project One # Has 4 task(s)
+Project One # Has 4 tasks
 | project description line1
 | project description line2
 
-# Suvajit Gupta (SG) # Has 3 task(s)
+# Suvajit Gupta (SG) # Has 3 tasks
 ^ A high-priority, risky, other, task that will take 2 hours submitted by and assigned to Suvajit {2h} <SG> [SG] @Risky
 | task description line1
 | task description line2
 - A medium priority, active, bug submitted by an unknown user and assigned to Suvajit with unspecified effort [SG] $Bug @Active
 - A medium priority bug assigned to Suvajit, which was done in 3 days but failed validation {3d} [SG] $Bug @Done %Failed
 
-# Unassigned # Has 1 task(s)
+# Unassigned # Has 1 tasks
 v A low priority, planned, feature not assigned to anyone is expected to take a few days {3-5d} $Feature
 
 
-Project Two With a Long Name That Will Take One Week {3d} # Has 7 task(s)
+Project Two With a Long Name That Will Take One Week {3d} # Has 7 tasks
 
-# Guest User (guest) # Has 1 task(s)
+# Guest User (guest) # Has 1 tasks
 - A medium priority, other, task assigned to Guest completed in a couple of hours {2h} [guest] @Done
 
-# Suvajit Gupta (SG) # Has 5 task(s)
+# Suvajit Gupta (SG) # Has 5 tasks
 ^ A high priority, active, showstopper bug in Suvajit's code that is expected to take 1 day to fix {1-2d} [SG] $Bug @Active
 | Some comments
 | that span multiple
@@ -38,6 +38,6 @@ v A low priority feature assigned to Suvajit that was completed in 2 days and it
 ^ A high priority feature assigned to Suvajit that is completed in unspecified time and passed [SG] $Feature @Done %Passed
 | A single line comment.
 
-# Unassigned # Has 2 task(s)
+# Unassigned # Has 2 tasks
 - A medium priority, planned, other, task that takes two-and-a-half hours and is unassigned {2.5d}
 v A low priority bug assigned to a non-existent user that is planned and failed (an unacceptable combination) $Bug

@@ -91,7 +91,7 @@ Tasks.importDataController = SC.ObjectController.create(
             }
           }
 
-          // Peek ahead to the next line(s) to see if there is a Description and bring those in
+          // Peek ahead to the next lines to see if there is a Description and bring those in
           description = null;
           while (i < (lines.length-1)) {
             nextLine = lines[++i];
@@ -122,7 +122,7 @@ Tasks.importDataController = SC.ObjectController.create(
           var projectHash = CoreTasks.Project.parse(line);
           // console.log ('Project:\t\t' + JSON.stringify(projectHash));
           
-          // Peek ahead to the next line(s) to see if there is a Description and bring those in
+          // Peek ahead to the next lines to see if there is a Description and bring those in
           description = null;
           while (i < (lines.length-1)) {
             nextLine = lines[++i];

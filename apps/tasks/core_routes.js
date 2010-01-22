@@ -50,7 +50,7 @@ Tasks.mixin( /** @scope Tasks */ {
   routeToTask: function(params) {
     Tasks._closeMainPage();
     if(SC.none(params.IDs)) {
-      console.warn("Missing task ID(s) for URL routing");
+      console.warn("Missing task IDs for URL routing");
     }
     else {
       // Enter the statechart.
