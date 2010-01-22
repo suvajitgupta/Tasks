@@ -9,7 +9,7 @@
   @author Suvajit Gupta
 */
 
-// FIXME: [SC] Beta: see how to get Firefox/Chrome drop events delivered to popped up Settings panel instead of SourceListViews underneath
+// FIXME: [SC] Beta: get Firefox/Chrome drop events delivered to popped up Settings panel instead of SourceListViews underneath
 
 Tasks.rolesController = SC.TreeController.create(SC.CollectionViewDelegate,
 /** @scope Tasks.rolesController.prototype */ {

@@ -32,14 +32,14 @@ v Make task in-cell editors fit with collection view item size [SG] <JH2> $Bug
 v Track/optimize calls to assignments controller for redrawing tasks tree <BB> [SG] @Risky
 v Make buttons depressable to provide feedback when using them [SG] $Feature
 - Support direct access to Tasks projects or tasks using SproutCore routes [SG] $Feature @Done %Passed
-- Beta: Add support for leaving comments about tasks [SG] <SE> $Feature
+- Beta: Add support for leaving comments about tasks [SG] <JH2> $Feature
 - Out of Scope: Add support for attachments in record descriptions $Feature
 | Upload attachment somewhere and insert URL to it in record description
 
 Project Manager GUI
 ^ Add Master/Detail Explorer view with click selection of Projects showing corresponding Tasks [JH2] <SG> @Done $Feature %Passed
 ^ Show Project name & time left (if specified) on far right [SG] <JH2> @Done $Feature %Passed
-^ Beta: Allow Project target date to be specified inline or via popup editor/Calendar chooser <SE> [SG] $Feature @Active
+^ Beta: Allow Project target date to be specified inline or via popup editor/Calendar chooser <JH2> [SG] $Feature @Active
 | Delete all references to timeLeft and update Persevere data to reflect this schema change
 - Use icon to indicate if Project has any tasks or not [SG] @Done $Feature %Passed
 - Support alpha sorting of projects [SG] <JH2> @Done %Passed $Feature
