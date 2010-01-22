@@ -58,7 +58,7 @@ v Disable Add/Del. Tasks buttons when on "All Tasks" project [SG] <BB> @Done %Pa
 ^ Allow multi-task drag-and-drop reallocation to other projects [BB] <SG> @Done $Feature %Passed
 ^ Add popup viewer/editor for Project time left/description [SG] $Feature @Done %Passed
 v Add project context menu with options: Add, Duplicate, Delete, Statistics... [SG] $Feature @Done %Passed
-- Beta: Add Project Statistics popup to show breakdown by Task attributes (what percent in each) [SG] $Feature @Active
+- Beta: Add Project Statistics popup to show percent breakdown by Task attributes (HTML and graphics) [SG] $Feature @Active
 
 Task Manager GUI
 ^ Group Tasks by User and display Task id, summary, and effort (if specified) on far right [SG] <JH2> @Done $Feature %Passed
