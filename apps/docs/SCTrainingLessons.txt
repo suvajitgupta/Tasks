@@ -23,5 +23,5 @@
 - Read runtime/mixins/observable.js, system/bindings.js, event.js
 - Learn how to use mixins/enumerable.js reducers
 
-- Fix Tasks memory leak on Windows/Firefox [AP]
+- Fix Tasks memory leak on Windows/Firefox [AP] & Windows/Chrome [SH]
 - Set SC.LOG_BINDINGS to YES to troubleshoot

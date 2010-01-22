@@ -26,12 +26,12 @@ CoreTasks.Record = SC.Record.extend({
    */
   _id: SC.Record.attr(Number),
 
-  // FIXME: [SC] need to patch SC.Record to not make id() cacheable on storeKey
+  // make id() cacheable on storeKey
   id: function() {
     return SC.Store.idFor(this.storeKey);
   }.property('storeKey'),
 
-  // FIXME: [SC] need to patch SC.Record to not make status() cacheable on storeKey
+  // make status() cacheable on storeKey
   status: function() {
     return this.store.readStatus(this.storeKey);
   }.property('storeKey'),
