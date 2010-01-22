@@ -41,6 +41,12 @@ Tasks.mainPage = SC.Page.design({
         SC.LabelView.design(SCUI.ToolTip, {
           layout: { centerY: 0, height: 35, centerX: -35, width: 225 },
           escapeHTML: NO,
+          valueBinding: SC.Binding.transform(function(value, binding) {
+            console.log('DEBUG: role message: ' + value);
+            if(!value) return '';
+            return "_User:".loc() + '<b>' + CoreTasks.getPath('currentUser.name') + '</b><br>' +
+                   "_Role:".loc() + ' <i>' + CoreTasks.getPath('currentUser.role').loc() + '</i>';
+          }).from('CoreTasks*currentUser'),
           classNames: ['user-role-message']
         }),
         
