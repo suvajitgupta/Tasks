@@ -115,7 +115,6 @@ CoreTasks.mixin({
       // Make sure we actually got something.
       var normalizedResponse = this._normalizeResponseArray(response);
 
-      // CHANGED [JH2] Modified this check to handle Sinatra and GAE authentication
       if (normalizedResponse.length && normalizedResponse.length > 0) {
         // Invoke the success callback (may not be defined).
         CoreTasks.invokeCallback(params.successCallback, normalizedResponse);

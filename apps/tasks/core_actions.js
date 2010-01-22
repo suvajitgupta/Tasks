@@ -35,8 +35,6 @@ Tasks.mixin({
         };
         // Perservere authentication
         CoreTasks.User.authenticate(loginName, password, params);
-        // TODO: [JH2, SG] Beta: need a way to determine the backend and call the appropriate authentication method
-        // CoreTasks.User.sinatraAuthenticate(loginName, password, params);
         break;
 
       default:
