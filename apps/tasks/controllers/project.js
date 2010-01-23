@@ -15,7 +15,20 @@ Tasks.projectController = SC.ObjectController.create(
 /** @scope Tasks.projectController.prototype */ {
   
   contentBinding: 'Tasks.projectsController.selection',
-  contentBindingDefault: SC.Binding.single(),
+  displayTasks: function() {
+    var ret = [];
+    var sel = this.get('content');
+    var len = sel? sel.length() : 0;
+    if (len > 0) {
+      var context = {};
+      for (var i = 0; i < len; i++) {
+        var project = sel.nextObject(i, null, context);
+        if(project.get('name') === CoreTasks.ALL_TASKS_NAME.loc()) return project.get('tasks');
+        ret.pushObjects(project.get('tasks'));
+      }
+    }
+    return ret;
+  }.property('content').cacheable(),
   
   projectStatistics: '',
   computeStatistics: function() {
@@ -69,7 +82,9 @@ Tasks.projectController = SC.ObjectController.create(
     this.set('projectStatistics', '');
   },
   
-  _contentDidChange: function() { // when a new project is selected
+  _contentDidChange: function() { // set URL route when a single project is selected
+    if(this.getPath('content.length') !== 1) return;
+    
     var last = this._project,
         cur = this.get('content');
     

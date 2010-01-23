@@ -61,7 +61,7 @@ Tasks.DISPLAY_MODE_TEAM = false;
 Tasks.assignmentsController = SC.ArrayController.create(
 /** @scope Tasks.assignmentsController.prototype */ {
   
-  contentBinding: 'Tasks.projectController.tasks',
+  contentBinding: 'Tasks.projectController.displayTasks',
   assignedTasks: null,
   _showTasks: true,
   _clearingAssigneeSelection: false,

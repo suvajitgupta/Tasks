@@ -12,8 +12,6 @@
 Tasks.projectsController = SC.ArrayController.create(SCUI.StatusChanged,
 /** @scope Tasks.projectsController.prototype */ {
   
-  allowsMultipleSelection: NO,
-  
   sources: null,
   
   showSources: function() {

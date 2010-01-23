@@ -544,8 +544,8 @@ Tasks.mixin({
     var ac = this.get('assignmentsController');      
     var tc = this.get('tasksController');
     var sel = tc.get('selection');
-    var len = sel.length();
-    if (sel && len > 0) {
+    var len = sel? sel.length() : 0;
+    if (len > 0) {
 
       // Confirm deletion operation
       SC.AlertPane.warn("_Confirmation".loc(), "_TaskDeletionConfirmation".loc(), null, "_No".loc(), "_Yes".loc(), null,
@@ -620,8 +620,8 @@ Tasks.mixin({
     
     var uc = this.get('usersController');      
     var sel = uc.get('selection');
-    var len = sel.length();
-    if (sel && len > 0) {
+    var len = sel? sel.length() : 0;
+    if (len > 0) {
       
       // Confirm deletion operation
       SC.AlertPane.warn("_Confirmation".loc(), "_UserDeletionConfirmation".loc(), null, "_No".loc(), "_Yes".loc(), null,

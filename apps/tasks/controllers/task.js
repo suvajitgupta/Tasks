@@ -11,7 +11,7 @@
 	@author Suvajit Gupta
 */
 Tasks.taskController = SC.ObjectController.create(
-/** @scope Tasks.projectController.prototype */ {
+/** @scope Tasks.taskController.prototype */ {
   
   contentBinding: 'Tasks.tasksController.selection'
 
