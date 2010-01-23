@@ -1,7 +1,7 @@
 // ==========================================================================
 // Tasks.signupController
 // ==========================================================================
-/*globals Tasks */
+/*globals Tasks CoreTasks*/
 
 /** 
 
@@ -13,6 +13,14 @@
 Tasks.signupController = SC.ObjectController.create(
 /** @scope Tasks.signupController.prototype */ {
   
-  unhashedPassword: ''
+  unhashedPassword: '',
+  
+  isValidUserName: function() {
+    var name = this.get('name');
+    if(name === CoreTasks.NEW_USER_NAME) return false;
+    var loginName = this.get('loginName');
+    if(loginName === CoreTasks.NEW_USER_LOGIN_NAME) return false;
+    return true;
+  }.property('name', 'loginName').cacheable()
   
 });

@@ -41,6 +41,7 @@ Tasks.signupPage = SC.Page.design({
       signupButton: SC.ButtonView.design({
         layout: { bottom: 10, right: 10, width: 90, height: 24 },
         title: "_Signup".loc(),
+        isEnabledBinding: 'Tasks.signupController.isValidUserName',
         theme: 'capsule',
         keyEquivalent: 'return',
         isDefault: YES,
