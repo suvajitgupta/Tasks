@@ -136,7 +136,8 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       });
     }
     
-    if(!isSystemProject && CoreTasks.getPath('permissions.canAddProject')) {
+    if(Tasks.projectsController.getPath('selection.length') === 1 &&
+      !isSystemProject && CoreTasks.getPath('permissions.canAddProject')) {
       ret.push({
         title: "_Duplicate".loc(),
         icon: 'project-duplicate-icon',
