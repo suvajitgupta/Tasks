@@ -318,7 +318,7 @@ Tasks.mainPage = SC.Page.design({
               if(Tasks.tasksController.isAddable()) context.addClass('zero-tasks-helper');
               else context.addClass('display-mode-helper');
             }
-            else if (this.getPath('content.length') === 0) {
+            else if (tasksCount !== undefined && this.getPath('content.length') === 0) {
               context.addClass('no-tasks-helper');
             } else {
               context.removeClass('zero-tasks-helper');
