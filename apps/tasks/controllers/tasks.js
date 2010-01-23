@@ -23,7 +23,7 @@ Tasks.tasksController = SC.TreeController.create(
       if (selectedProject !== CoreTasks.get('unallocatedTasksProject')) return false;
     }
     return true;
-  }.property().cacheable(),
+  }.property('content').cacheable(),
   
   isAddable: function() {
     
