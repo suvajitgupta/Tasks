@@ -32,7 +32,7 @@ v Make task in-cell editors fit with collection view item size [SG] <JH2> $Bug
 v Track/optimize calls to assignments controller for redrawing tasks tree <BB> [SG] @Risky
 v Make buttons depressable to provide feedback when using them [SG] $Feature
 - Support direct access to Tasks projects or tasks using SproutCore routes [SG] $Feature @Done %Passed
-- Beta: Add support for leaving comments about tasks [SG] <JH2> $Feature
+- Beta: Add support for adding Comments to tasks [SG] <JH2> $Feature
 - Out of Scope: Add support for attachments in record descriptions $Feature
 | Upload attachment somewhere and insert URL to it in record description
 
@@ -58,7 +58,7 @@ v Disable Add/Del. Tasks buttons when on "All Tasks" project [SG] <BB> @Done %Pa
 ^ Allow multi-task drag-and-drop reallocation to other projects [BB] <SG> @Done $Feature %Passed
 ^ Add popup viewer/editor for Project time left/description [SG] $Feature @Done %Passed
 v Add project context menu with options: Add, Duplicate, Delete, Statistics... [SG] $Feature @Done %Passed
-- Beta: Add Project Statistics popup to show percent breakdown by Task attributes (HTML and graphics) [SG] $Feature @Active
+- Beta: Add Project Statistics popup to show percent breakdown by Task attributes (HTML and graphical) [SG] $Feature @Active
 
 Task Manager GUI
 ^ Group Tasks by User and display Task id, summary, and effort (if specified) on far right [SG] <JH2> @Done $Feature %Passed
@@ -88,7 +88,7 @@ v Add hover over tooltip for assignees to show how many tasks they have and to e
 ^ Add popup viewer/editor for Task submitter, assignee, effort, project, and description [JH2] <SG> $Feature @Done %Passed
 - Beta: Support task Copy ID/Name and Copy Link Location (URL with "Route") to clipboard [SG] $Feature @Risky
 v Add task context menu with options: Add, Duplicate, Delete; All Task Attributes; Copy ID/Name, Copy Link [SG] $Feature @Done %Passed
-- Beta: Add ability to watch tasks and get email notifications on task changes [SG] <JH2> $Feature
+- Beta: Add ability to "Watch" tasks and get Email Notifications after task changes [SG] <JH2> $Feature
 - Add an indicator (dot) before Planned tasks that were created or updated within the last day <SE> [SG] $Feature @Done %Passed
 - Out of Scope: Add support for nested tasks/tagging $Feature
 | Use "Clustering" approach described in Help instead
@@ -147,7 +147,7 @@ Server
 - Create command-line scripts to start/stop Server and to create users <SG> [SE] $Feature @Done %Passed
 - Beta: Implement Server-based user authentication [JH2] <SG> @Active
 - Beta: Implement Server-based RBAC (role-based access control) <SG> [JH2] @Active
-- Beta: Add email notifications on noteworthy changes [JH2] <SG> $Feature @Active
+- Beta: Send Email Notifications on noteworthy changes [JH2] <SG> $Feature @Active
 | Notify Assignee when Task is added by Submitter different than Assignee (via New or Reassignment operations)
 | Notify Assignee/Submitter if a Task is edited by someone other than them
 | Notify Assignee when Done Task is Failed
