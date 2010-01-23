@@ -27,6 +27,7 @@ Tasks.tasksController = SC.TreeController.create(
   
   isAddable: function() {
     
+    if(Tasks.projectsController.getPath('selection.length') !== 1) return false;
     if(Tasks.assignmentsController.get('displayMode') === Tasks.DISPLAY_MODE_TEAM) return false;
     
     if(!CoreTasks.getPath('permissions.canAddTask')) return false;
@@ -35,7 +36,7 @@ Tasks.tasksController = SC.TreeController.create(
     
     return true;
     
-  }.property().cacheable(),
+  }.property('content').cacheable(),
   
   isEditable: function() {
     

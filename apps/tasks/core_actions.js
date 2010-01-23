@@ -487,14 +487,15 @@ Tasks.mixin({
     var userId = CoreTasks.getPath('currentUser.id');
     var taskHash = SC.merge({ 'submitterId': userId, 'assigneeId': userId }, SC.clone(CoreTasks.Task.NEW_TASK_HASH));
     taskHash.name = taskHash.name.loc();
-    var project = Tasks.projectsController.getPath('selection.firstObject');
+    var sel = Tasks.projectsController.getPath('selection');
+    var project = (sel && sel.get('length' === 1))? sel.get('firstObject') : null;
     if (project && project !== CoreTasks.get('allTasksProject') && project !== CoreTasks.get('unallocatedTasksProject')) {
       taskHash.projectId = project.get('id');
     }
     
     // Get selected task (if one) and copy its project/assignee/type/priority to the new task.
     var tc = this.get('tasksController');
-    var sel = tc.get('selection');
+    sel = tc.get('selection');
     if (sel && sel.length() > 0) {
       var selectedTask = sel.firstObject();
       if (SC.instanceOf(selectedTask, CoreTasks.Task)) {

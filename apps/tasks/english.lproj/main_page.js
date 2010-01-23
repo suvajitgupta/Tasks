@@ -310,23 +310,63 @@ Tasks.mainPage = SC.Page.design({
           delegate: Tasks.reassignmentController,
           selectOnMouseDown: YES,
           
+          /* Helper image display logic:
+              No projects selected - "select project" helper
+            	Single project selected:
+            	  if project has no tasks:
+            		  addTask enabled - "zero tasks" helper
+              		else - "display mode" helper
+              	else project has tasks
+          		    if no tasks filtering through - "no tasks" helper
+            	Multiple projects selected
+            		if projects have tasks:
+            		  if no tasks filtering through - "no tasks" helper
+        	*/
           render: function(context, firstTime) {
+          	
             // console.log('DEBUG-ON: Tasks Detail render(), editorPoppedUp=' + Tasks.editorPoppedUp);
             if(Tasks.loginTime) return;
-            var tasksCount = Tasks.projectsController.getPath('selection.firstObject.tasks.length');
-            if(tasksCount === 0) {
-              if(Tasks.tasksController.isAddable()) context.addClass('zero-tasks-helper');
-              else context.addClass('display-mode-helper');
+            var sel = Tasks.projectsController.getPath('selection');
+            var selectedProjectsCount = sel? sel.get('length') : 0;
+            if(selectedProjectsCount === 0) { // No projects selected
+              context.addClass('select-project-helper');
+              return;
             }
-            else if (tasksCount !== undefined && this.getPath('content.length') === 0) {
-              context.addClass('no-tasks-helper');
-            } else {
-              context.removeClass('zero-tasks-helper');
-              context.removeClass('display-mode-helper');
-              context.removeClass('no-tasks-helper');
-              sc_super();
+            else if(selectedProjectsCount === 1) { // Single project selected
+              if(sel.getPath('firstObject.tasks.length') === 0) { // Project has no tasks
+                if(Tasks.tasksController.isAddable()) context.addClass('zero-tasks-helper');
+                else context.addClass('display-mode-helper');
+                return;
+              }
+              else { // Project has tasks
+                if(this.getPath('content.length') === 0) { // No tasks filtering through
+                  context.addClass('no-tasks-helper');
+                  return;
+                }
+              }
             }
+            else { // Multiple projects selected
+              var tasksCount = 0;
+              var ctx = {};
+              for (var i = 0; i < selectedProjectsCount; i++) {
+                var project = sel.nextObject(i, null, ctx);
+                tasksCount += project.getPath('tasks.length');
+              }
+              if(tasksCount > 0) { // Projects have tasks
+                if(this.getPath('content.length') === 0) { // No tasks filtering through
+                  context.addClass('no-tasks-helper');
+                  return;
+                }
+              }
+            }
+            
+            // Remove helper images (if any) and render tasks
+            context.removeClass('zero-tasks-helper');
+            context.removeClass('display-mode-helper');
+            context.removeClass('no-tasks-helper');
+            sc_super();
           }
+          
         }),
         
         // ..........................................................
