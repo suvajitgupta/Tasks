@@ -23,7 +23,7 @@ Tasks.projectController = SC.ObjectController.create(
       var context = {};
       for (var i = 0; i < len; i++) {
         var project = sel.nextObject(i, null, context);
-        if(project.get('name') === CoreTasks.ALL_TASKS_NAME.loc()) return project.get('tasks');
+        if(project === CoreTasks.get('allTasksProject')) return project.get('tasks');
         ret.pushObjects(project.get('tasks'));
       }
     }

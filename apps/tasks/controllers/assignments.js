@@ -259,7 +259,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     // Get time left, if any specified, in selected project.
     var projectTimeLeft = null;
     var sel = Tasks.getPath('projectsController.selection');
-    if (sel && sel.length() > 0) {
+    if (sel && sel.length() === 1) {
       var project = sel.firstObject();
       if (project) projectTimeLeft = CoreTasks.convertTimeToDays(project.get('timeLeft'));
     }
