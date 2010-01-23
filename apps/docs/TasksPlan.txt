@@ -28,8 +28,7 @@ General Infrastructure
 - Handle persistence consistently (nothing should save unless user hits Save) [SE] <SG> @Done %Passed
 - Implement GUI-based RBAC (role-based access control) [SG] $Feature @Done %Passed
 - Display record created/updated time at the bottom of popup editors [SG] $Feature @Done %Passed
-v Make task in-cell editors fit with collection view item size [SG] <JH2> $Bug
-v Track/optimize calls to assignments controller for redrawing tasks tree <BB> [SG] @Risky
+v Track/optimize calls to assignments controller and custom view render methods <BB> [SG] @Risky
 v Make buttons depressable to provide feedback when using them [SG] $Feature
 - Support direct access to Tasks projects or tasks using SproutCore routes [SG] $Feature @Done %Passed
 - Beta: Add support for adding Comments to tasks [SG] <JH2> $Feature
@@ -130,8 +129,8 @@ Application Manager GUI
 | * email notifications
 - Add "Export to HTML" capability for printable & human-readable version (for baselining tasks for a release) [SG] $Feature @Done %Passed
 - Add online "Help" button in top toolbar & popup help window [SG] @Done %Passed $Feature
-v Add screenshots with callouts for online help content [SG] $Feature
-v Add online training video using Captivate or Camtasia [SG] $Feature
+v Add online training video using Captivate or Camtasia [SG] $Feature @Done
+| http://www.youtube.com/watch?v=6egjJw_RS1g
 - Add onscreen help (on panel fields that are complex and on blank workspace to assist new users) <MG> [SG] $Feature @Done %Passed
 - Add Logout button to exit in top toolbar (confirm before exiting, reload data/clear all filters) [SG] <JH2> @Done $Feature %Passed
 - Prompt user to save changes (if any) before logging out [SG] <SE> $Feature @Done %Passed
@@ -139,7 +138,7 @@ v Add online training video using Captivate or Camtasia [SG] $Feature
 | See demo.sproutcore.com/user_defaults and lookup SproutCore blog for Charles' posting on this topic
 - Add "TEAM" display mode (vs. "TASKS") to show everyone at a glance, clicking on assignee shows their tasks [SG] $Feature @Done %Passed
 v Add hotkeys for common operations (like add Projects/Tasks and Save) [EG] <SG> $Feature @Done %Passed
-- Add Undo/Redo buttons in top toolbar [SG] <SE> $Feature
+- Add Undo/Redo capability [SG] <SE> $Feature
 - Support disconnected operation and synchronization after network reconnection using SproutDB [SG] <SE> $Feature
 
 Server
