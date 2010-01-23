@@ -149,7 +149,7 @@ SC.stringsFor('English', {
   // User/Assignee strings
   "_AddUser": "Add User",
   "_AddUserTooltip": "Add a new user",
-  "_UserDeletionConfirmation": "Are you sure you want to delete this user?",
+  "_UserDeletionConfirmation": "Are you sure you want to delete these users?",
   "_DeleteUser": "Delete User",
   "_DeleteUserTooltip": "Delete selected user",
   "_FullName:": "Full Name:",

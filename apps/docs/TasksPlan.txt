@@ -177,7 +177,7 @@ Packaging/Delivery
 - Develop Mobile client using PhoneGap <MB> [SG] $Feature
 
 Testing/Rollout
-- Note all FIXMEs/TODOs/bugs & remove these as they are resolved [SG] <BM> @Active
-- Create automated test scripts using Selenium [BM] <SG> @Active
+- Note all FIXMEs/TODOs/bugs & remove these as they are resolved [SG] @Active
+- Create automated test scripts using Selenium [SG] <MC>
 - Collect/address feedback from Alpha/Beta users and targeted usability tests <MG> [SG] @Done %Passed
 v Provide SproutCore doctool-style comments [SG] <SE>

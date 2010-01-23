@@ -544,24 +544,24 @@ Tasks.mixin({
     var ac = this.get('assignmentsController');      
     var tc = this.get('tasksController');
     var sel = tc.get('selection');
-    if (sel && sel.length() > 0) {
-
+    var len = sel.length();
+    if (sel && len > 0) {
 
       // Confirm deletion operation
       SC.AlertPane.warn("_Confirmation".loc(), "_TaskDeletionConfirmation".loc(), null, "_No".loc(), "_Yes".loc(), null,
-        SC.Object.create({
-          alertPaneDidDismiss: function(pane, status) {
-            if(status === SC.BUTTON2_STATUS) {
-              var context = {};
-              for (var i = 0; i < sel.length(); i++) {
-                // Get and delete each selected task.
-                var task = sel.nextObject(i, null, context);
-                task.destroy();
-              }
-              Tasks.deselectTasks();
-              if(Tasks.get('autoSave')) Tasks.saveData();
+      SC.Object.create({
+        alertPaneDidDismiss: function(pane, status) {
+          if(status === SC.BUTTON2_STATUS) {
+            var context = {};
+            for (var i = 0; i < len; i++) {
+              // Get and delete each selected task.
+              var task = sel.nextObject(i, null, context);
+              task.destroy();
             }
+            Tasks.deselectTasks();
+            if(Tasks.get('autoSave')) Tasks.saveData();
           }
+        }
         })
       );
 
@@ -618,18 +618,22 @@ Tasks.mixin({
       return;
     }
     
-    // Get the selected user.
-    var user = Tasks.usersController.getPath('selection.firstObject');
-    if (user) {
-
-      // Confirm deletion of user
+    var uc = this.get('usersController');      
+    var sel = uc.get('selection');
+    var len = sel.length();
+    if (sel && len > 0) {
+      
+      // Confirm deletion operation
       SC.AlertPane.warn("_Confirmation".loc(), "_UserDeletionConfirmation".loc(), null, "_No".loc(), "_Yes".loc(), null,
         SC.Object.create({
           alertPaneDidDismiss: function(pane, status) {
             if(status === SC.BUTTON2_STATUS) {
-              // Delete the user.
-              user.destroy();
-
+              var context = {};
+              for (var i = 0; i < len; i++) {
+                // Get and delete each selected user.
+                var user = sel.nextObject(i, null, context);
+                user.destroy();
+              }
               // Select the logged in user.
               Tasks.usersController.selectObject(CoreTasks.get('currentUser'));
               if(Tasks.get('autoSave')) Tasks.saveData();

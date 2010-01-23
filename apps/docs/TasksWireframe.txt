@@ -130,7 +130,7 @@
     <control controlID="28" controlTypeID="com.balsamiq.mockups::ModalScreen" x="5" y="94" w="280" h="254" measuredW="320" measuredH="240" zOrder="26" locked="false" isInGroup="-1"/>
     <control controlID="29" controlTypeID="com.balsamiq.mockups::DataGrid" x="5" y="131" w="280" h="180" measuredW="285" measuredH="148" zOrder="27" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>Login%20Name%2C%20Full%20Name%2C%20Role%0ASG%2C%20Suvajit%20Gupta%2C%20Manager%0AMB%2C%20Mike%20Ball%2C%20Developer%0AJL%2C%20Jonathan%20Lewis%2C%20Developer%0ABM%2C%20Bill%20Mosteller%2C%20Tester</text>
+        <text>Login%20Name%2C%20Full%20Name%2C%20Role%0ASG%2C%20Suvajit%20Gupta%2C%20Manager%0AMB%2C%20Mike%20Ball%2C%20Developer%0AJL%2C%20Jonathan%20Lewis%2C%20Developer%0AAS%2C%20Arti%20Singh%2C%20Tester</text>
       </controlProperties>
     </control>
     <control controlID="30" controlTypeID="com.balsamiq.mockups::StickyNote" x="582" y="545" w="228" h="92" measuredW="109" measuredH="123" zOrder="28" locked="false" isInGroup="-1">
