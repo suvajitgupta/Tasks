@@ -51,7 +51,7 @@ Tasks.projectController = SC.ObjectController.create(
   projectStatistics: '',
   computeStatistics: function() {
     var ret = '';
-    var project = this.get('content');
+    var project = this.getPath('content.firstObject');
     if(project) {
       var stats = project.statistics();
       var tasksCount = stats.tasksCount;

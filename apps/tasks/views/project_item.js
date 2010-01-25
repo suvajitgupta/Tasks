@@ -157,13 +157,16 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       });
     }
     
-    ret.push({
-      title: "_ShowStatistics".loc(),
-      icon: sc_static('blank'),
-      isEnabled: YES,
-      target: 'Tasks',
-      action: 'projectStatistics'
-    });
+    // TODO: [SG] support multi-project statistics
+    if(Tasks.projectsController.getPath('selection.length') === 1) {
+      ret.push({
+        title: "_ShowStatistics".loc(),
+        icon: sc_static('blank'),
+        isEnabled: YES,
+        target: 'Tasks',
+        action: 'projectStatistics'
+      });
+    }
     
     return ret;
     

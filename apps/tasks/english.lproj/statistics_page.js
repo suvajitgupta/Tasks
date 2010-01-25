@@ -42,7 +42,7 @@ Tasks.statisticsPane = SC.PanelPane.create({
       escapeHTML: NO,
       valueBinding: SC.Binding.transform(function(value, binding) {
          return "_Project:".loc() + '<b>' + value + '</b>';
-      }).from('Tasks.projectController*content.name')
+      }).from('Tasks.projectController*content.firstObject.name')
     }),
     
     statistics: SC.LabelView.design({
