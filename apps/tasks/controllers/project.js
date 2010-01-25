@@ -15,6 +15,7 @@ Tasks.projectController = SC.ObjectController.create(
 /** @scope Tasks.projectController.prototype */ {
   
   contentBinding: 'Tasks.projectsController.selection',
+  
   displayTasks: function() {
     var ret = [];
     var sel = this.get('content');
@@ -29,6 +30,23 @@ Tasks.projectController = SC.ObjectController.create(
     }
     return ret;
   }.property('content').cacheable(),
+
+  _contentDidChange: function() { // set URL route when a single project is selected
+    if(this.getPath('content.length') !== 1) return;
+
+    var last = this._project,
+        cur = this.get('content');
+
+    if (cur && cur.firstObject) cur = cur.firstObject();
+    if (last !== cur) {
+      // console.log('Switching to project: ' + cur.get('name'));
+      Tasks.deselectTasks();
+      if(cur) {
+        this._project = cur;
+        SC.routes.set('location', '#project&name=' + cur.get('name'));
+      }
+    }
+  }.observes('content'),
   
   projectStatistics: '',
   computeStatistics: function() {
@@ -80,23 +98,6 @@ Tasks.projectController = SC.ObjectController.create(
       panel.destroy();
     }
     this.set('projectStatistics', '');
-  },
-  
-  _contentDidChange: function() { // set URL route when a single project is selected
-    if(this.getPath('content.length') !== 1) return;
-    
-    var last = this._project,
-        cur = this.get('content');
-    
-    if (cur && cur.firstObject) cur = cur.firstObject();
-    if (last !== cur) {
-      // console.log('Switching to project: ' + cur.get('name'));
-      Tasks.deselectTasks();
-      if(cur) {
-        this._project = cur;
-        SC.routes.set('location', '#project&name=' + cur.get('name'));
-      }
-    }
-  }.observes('content')
+  }
   
 });

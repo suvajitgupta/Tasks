@@ -88,16 +88,17 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
     recArray = this.get('store').find(query) ;
     
     // observe the length property of the recAry for changes
-    recArray.addObserver('length', this, this._tasksLengthDidChange) ;
+    recArray.addObserver('length', this, this._tasksDidChange) ;
     
     return recArray ;
   }.property('id', 'name').cacheable(),
   
-  _tasksLengthDidChange: function() {
+  _tasksDidChange: function() {
+    // console.log('DEBUG: tasksDidChange() for project: ' + this.get('name'));
     var len = this.getPath('tasks.length');
     if(SC.none(this._oldLength) || (this._oldLength !== len)) {
       this._oldLength = len;
-      // console.log('tasksLengthDidChange() for project: ' + this.get('name'));
+      // console.log('DEBUG: tasks length changed for project: ' + this.get('name'));
       this.propertyDidChange('*') ; // refresh ourself
     }
   },
