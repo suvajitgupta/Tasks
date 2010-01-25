@@ -312,7 +312,6 @@ Tasks.exportDataController = SC.ObjectController.create(
     if(projectsToExport.get('length') === 0) {
       projectsToExport.push(CoreTasks.get('allTasksProject'));
     }
-    console.log('DEBUG: projectsToExport ' + projectsToExport);
     
     var ret = '';
     if(format === 'HTML') ret += '<html>\n' + Tasks.EXPORT_HEADER;
