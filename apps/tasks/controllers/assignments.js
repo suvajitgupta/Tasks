@@ -61,9 +61,7 @@ Tasks.DISPLAY_MODE_TEAM = false;
 Tasks.assignmentsController = SC.ArrayController.create(
 /** @scope Tasks.assignmentsController.prototype */ {
   
-  contentBinding: 'Tasks.projectController.tasks',
-  // FIXME: [SG] Beta: switch back to handling multi-selected projects
-  // contentBinding: 'Tasks.projectController.displayTasks',
+  contentBinding: 'Tasks.projectController.displayTasks',
   
   assignedTasks: null,
   _showTasks: true,
@@ -517,7 +515,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
   _timer: null,
   
   _contentHasChanged: function() {
-    // console.log('DEBUG-ON: assignmentsController content changed, editorPoppedUp=' + Tasks.editorPoppedUp);
+    console.log('DEBUG-ON: assignmentsController content changed, editorPoppedUp=' + Tasks.editorPoppedUp);
     Tasks.assignmentsRedrawNeeded = true;    
     if(Tasks.editorPoppedUp) return;
   	if (this._timer) { // called as a result of a timer set for assignee selection or search filter changes
