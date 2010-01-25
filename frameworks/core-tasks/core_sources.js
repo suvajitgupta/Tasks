@@ -154,7 +154,7 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
 
   _createCompleted: function(response, params) {
     var results;
-
+    var store = CoreTasks.get('store');
     if (SC.ok(response) && SC.ok(results = response.get('body'))) {
       // Request was successful; response should be a JSON object that may require normalization.
       var recordHash = this._normalizeResponse(results);
@@ -162,7 +162,13 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
       // Invoke the success callback on the store.
       params.store.dataSourceDidComplete(params.storeKey, recordHash, recordHash.id);
 
-    } else {
+    } else if(response.status === 401) {
+      console.log("Attempted to update: [%@:%@]: %@".fmt(params.recordType, params.id, this._buildError(response)));
+      store.writeStatus(params.storeKey, SC.Record.READY_CLEAN);
+      store.refreshRecord(params.recordType, params.id, params.storeKey);
+      store.dataHashDidChange(params.storeKey);
+    }
+    else {
       // Request failed; invoke the error callback.
       var error = this._buildError(response);
       console.log('Error creating record [%@]: %@'.fmt(params.recordType, error));
@@ -230,10 +236,10 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
         store.removeDataHash(params.storeKey, SC.Record.DESTROYED_CLEAN);
         store.dataHashDidChange(params.storeKey);
       } else if(response.status === 401) {
-        // TODO: [JH2] Find out what actually needs to happen here...
         console.log("Attempted to update: [%@:%@]: %@".fmt(params.recordType, params.id, this._buildError(response)));
-        //store.refreshRecord(params.recordType, params.id, params.storeKey);
-        //store.dataHashDidChange(params.storeKey);
+        store.writeStatus(params.storeKey, SC.Record.READY_CLEAN);
+        store.refreshRecord(params.recordType, params.id, params.storeKey);
+        store.dataHashDidChange(params.storeKey);
       }
       else { // Request failed; invoke the error callback.
         var error = this._buildError(response);
@@ -300,6 +306,11 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
         // delete record in the store
         var store = CoreTasks.get('store');
         store.removeDataHash(params.storeKey, SC.Record.DESTROYED_CLEAN);
+        store.dataHashDidChange(params.storeKey);
+      } else if(response.status === 401) {
+        console.log("Attempted to update: [%@:%@]: %@".fmt(params.recordType, params.id, this._buildError(response)));
+        store.writeStatus(params.storeKey, SC.Record.READY_CLEAN);
+        store.refreshRecord(params.recordType, params.id, params.storeKey);
         store.dataHashDidChange(params.storeKey);
       }
       else { // Request failed; invoke the error callback.
