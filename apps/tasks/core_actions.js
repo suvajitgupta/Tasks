@@ -412,34 +412,37 @@ Tasks.mixin({
       return;
     }
     
-    // Get the selected project, if one
-    var selectedProject = Tasks.projectsController.getPath('selection.firstObject');
-    if (selectedProject) {
+    var pc = this.get('projectsController');
+    var sel = pc.get('selection');
+    var len = sel? sel.length() : 0;
+    if (len > 0) {
 
-      // Disallow deletion of system projects
-      if (CoreTasks.isSystemProject(selectedProject)) {
-        console.warn('You cannot delete a system project');
-        return;
-      }
-      
       // Confirm deletion operation
       SC.AlertPane.warn("_Confirmation".loc(), "_ProjectDeletionConfirmation".loc(), null, "_No".loc(), "_Yes".loc(), null,
-        SC.Object.create({
-          alertPaneDidDismiss: function(pane, status) {
-            if(status === SC.BUTTON2_STATUS) {
-              // Reset default project if it is deleted
-              if(selectedProject === Tasks.get('defaultProject')) Tasks.set('defaultProject', CoreTasks.get('unallocatedTasksProject'));
-
-              // Delete the project
-              selectedProject.destroy();
-
-              // Select the default project
-              Tasks.projectsController.selectObject(Tasks.get('defaultProject'));
-              if(Tasks.get('autoSave')) Tasks.saveData();
+      SC.Object.create({
+        alertPaneDidDismiss: function(pane, status) {
+          if(status === SC.BUTTON2_STATUS) {
+            var context = {};
+            for (var i = 0; i < len; i++) {
+              // Get and delete each selected (non-system) project.
+              var project = sel.nextObject(i, null, context);
+              if (CoreTasks.isSystemProject(project)) {
+                console.warn('You cannot delete a system project');
+              }
+              else {
+                // Reset default project if it is deleted
+                if(project === Tasks.get('defaultProject')) Tasks.set('defaultProject', CoreTasks.get('unallocatedTasksProject'));
+                project.destroy();
+              }
             }
+            // Select the default project
+            Tasks.projectsController.selectObject(Tasks.get('defaultProject'));
+            if(Tasks.get('autoSave')) Tasks.saveData();
           }
+        }
         })
       );
+
     }
   },
 
