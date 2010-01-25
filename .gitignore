@@ -22,3 +22,4 @@ tools/*.pyc
 tools/helpers/*.pyc
 frameworks/scui
 frameworks/sproutcore
+tasks_gae/

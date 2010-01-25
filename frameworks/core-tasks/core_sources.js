@@ -122,7 +122,15 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
   createRecord: function(store, storeKey) {
     var dataHash = store.readDataHash(storeKey);
     var recordType = store.recordTypeFor(storeKey);
-
+    var queryParams = {};
+    if (CoreTasks.get('currentUser')) {
+      queryParams = {
+        UUID: CoreTasks.getPath('currentUser.id'),
+        role: CoreTasks.getPath('currentUser.role'),
+        ATO: CoreTasks.getPath('currentUser.authToken'),
+        action: "create%@".fmt(recordType._object_className.split('.')[1])
+      };
+    }
     // Set the created-at time on the data hash.
     dataHash.createdAt = SC.DateTime.create().get('milliseconds');
 
@@ -133,7 +141,7 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
     // Build the request and send it off to the server.
     console.log('Creating new %@ record on server...'.fmt(recordType));
 
-    CoreTasks.REQUEST_POST.set('address', CoreTasks.getFullResourcePath(recordType.resourcePath));
+    CoreTasks.REQUEST_POST.set('address', CoreTasks.getFullResourcePath(recordType.resourcePath, null, queryParams));
     CoreTasks.REQUEST_POST.notify(this, this._createCompleted, {
         store: store,
         storeKey: storeKey,
@@ -146,7 +154,7 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
 
   _createCompleted: function(response, params) {
     var results;
-
+    var store = CoreTasks.get('store');
     if (SC.ok(response) && SC.ok(results = response.get('body'))) {
       // Request was successful; response should be a JSON object that may require normalization.
       var recordHash = this._normalizeResponse(results);
@@ -154,7 +162,13 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
       // Invoke the success callback on the store.
       params.store.dataSourceDidComplete(params.storeKey, recordHash, recordHash.id);
 
-    } else {
+    } else if(response.status === 401) {
+      console.log("Attempted to update: [%@:%@]: %@".fmt(params.recordType, params.id, this._buildError(response)));
+      store.writeStatus(params.storeKey, SC.Record.READY_CLEAN);
+      store.refreshRecord(params.recordType, params.id, params.storeKey);
+      store.dataHashDidChange(params.storeKey);
+    }
+    else {
       // Request failed; invoke the error callback.
       var error = this._buildError(response);
       console.log('Error creating record [%@]: %@'.fmt(params.recordType, error));
@@ -174,7 +188,12 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
     var dataHash = store.readDataHash(storeKey);
     var recordType = store.recordTypeFor(storeKey);
     var id = store.idFor(storeKey);
-
+    var queryParams = {
+      UUID: CoreTasks.getPath('currentUser.id'),
+      role: CoreTasks.getPath('currentUser.role'),
+      ATO: CoreTasks.getPath('currentUser.authToken'),
+      action: "update%@".fmt(recordType._object_className.split('.')[1])
+    };
     // Make sure the ID is valid.
     if (!this._isValidIdType(id)) {
       console.log('Error updating record [%@]: Invalid ID type.'.fmt(recordType));
@@ -189,7 +208,7 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
     // Build the request and send it off to the server.
     console.log('Updating %@:%@ on server...'.fmt(recordType, id));
 
-    CoreTasks.REQUEST_PUT.set('address', CoreTasks.getFullResourcePath(recordType.resourcePath, id));
+    CoreTasks.REQUEST_PUT.set('address', CoreTasks.getFullResourcePath(recordType.resourcePath, id, queryParams));
     CoreTasks.REQUEST_PUT.notify(this, this._updateCompleted, {
         store: store,
         storeKey: storeKey,
@@ -203,7 +222,7 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
 
   _updateCompleted: function(response, params) {
     var results;
-
+    var store = CoreTasks.get('store');
     if (SC.ok(response) && SC.ok(results = response.get('body'))) {
       // Request was successful; response should be a JSON object that may require normalization.
       var recordHash = this._normalizeResponse(results);
@@ -214,8 +233,12 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
     } else {
       if(response.status === 404) { // not found on server, record must have been deleted
         // delete record in the store
-        var store = CoreTasks.get('store');
         store.removeDataHash(params.storeKey, SC.Record.DESTROYED_CLEAN);
+        store.dataHashDidChange(params.storeKey);
+      } else if(response.status === 401) {
+        console.log("Attempted to update: [%@:%@]: %@".fmt(params.recordType, params.id, this._buildError(response)));
+        store.writeStatus(params.storeKey, SC.Record.READY_CLEAN);
+        store.refreshRecord(params.recordType, params.id, params.storeKey);
         store.dataHashDidChange(params.storeKey);
       }
       else { // Request failed; invoke the error callback.
@@ -237,7 +260,12 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
   destroyRecord: function(store, storeKey) {
     var recordType = store.recordTypeFor(storeKey);
     var id = store.idFor(storeKey);
-
+    var queryParams = {
+      UUID: CoreTasks.getPath('currentUser.id'),
+      role: CoreTasks.getPath('currentUser.role'),
+      ATO: CoreTasks.getPath('currentUser.authToken'),
+      action: "delete%@".fmt(recordType._object_className.split('.')[1])
+    };
     // Make sure the ID is valid.
     if (!this._isValidIdType(id)) {
       console.log('Error deleting record [%@]: Invalid ID type.'.fmt(recordType));
@@ -249,7 +277,7 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
     console.log('Deleting %@:%@ on server...'.fmt(recordType, id));
 
     CoreTasks.REQUEST_DELETE.set(
-      'address', CoreTasks.getFullResourcePath(recordType.resourcePath, id));
+      'address', CoreTasks.getFullResourcePath(recordType.resourcePath, id, queryParams));
     CoreTasks.REQUEST_DELETE.notify(this, this._destroyCompleted, {
         store: store,
         storeKey: storeKey,
@@ -278,6 +306,11 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
         // delete record in the store
         var store = CoreTasks.get('store');
         store.removeDataHash(params.storeKey, SC.Record.DESTROYED_CLEAN);
+        store.dataHashDidChange(params.storeKey);
+      } else if(response.status === 401) {
+        console.log("Attempted to update: [%@:%@]: %@".fmt(params.recordType, params.id, this._buildError(response)));
+        store.writeStatus(params.storeKey, SC.Record.READY_CLEAN);
+        store.refreshRecord(params.recordType, params.id, params.storeKey);
         store.dataHashDidChange(params.storeKey);
       }
       else { // Request failed; invoke the error callback.
