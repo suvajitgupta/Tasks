@@ -412,8 +412,7 @@ Tasks.mixin({
       return;
     }
     
-    var pc = this.get('projectsController');
-    var sel = pc.get('selection');
+    var sel = Tasks.projectsController.get('selection');
     var len = sel? sel.length() : 0;
     if (len > 0) {
 

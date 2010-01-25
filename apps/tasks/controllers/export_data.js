@@ -295,10 +295,24 @@ Tasks.exportDataController = SC.ObjectController.create(
    */
   _exportData: function(format) {
     
+    var projectsToExport = [];
     var sel = Tasks.projectsController.get('selection');
-    if(!sel) return false;
-    var selectedProject = sel.firstObject();
-    if(!selectedProject) return false;
+    var len = sel? sel.get('length') : 0;
+    var i, context = {}, project;
+    if(len > 0) {
+      for (i = 0; i < len; i++) {
+        project = sel.nextObject(i, null, context);
+        if(project === CoreTasks.get('allTasksProject')) {
+          projectsToExport = [];
+          break;
+        }
+        projectsToExport.push(project);
+      }
+    }
+    if(projectsToExport.get('length') === 0) {
+      projectsToExport.push(CoreTasks.get('allTasksProject'));
+    }
+    console.log('DEBUG: projectsToExport ' + projectsToExport);
     
     var ret = '';
     if(format === 'HTML') ret += '<html>\n' + Tasks.EXPORT_HEADER;
@@ -310,11 +324,24 @@ Tasks.exportDataController = SC.ObjectController.create(
     else ret += '\n';
     ret += '\n';
     
-    if (selectedProject === CoreTasks.get('allTasksProject') && !Tasks.assignmentsController.hasFiltering()) {
+    if (projectsToExport[0] === CoreTasks.get('allTasksProject') && !Tasks.assignmentsController.hasFiltering()) {
       ret += this._exportAllData(format);
     }
     else {
-      ret += selectedProject.exportData(format);
+      if(len === 1) {
+        ret += project.exportData(format);
+      }
+      else { // multiple projects selected
+        if(format === 'HTML') ret += '<h1>\n';
+        for (i = 0; i < len; i++) {
+          project = sel.nextObject(i, null, context);
+          if(format === 'Text') ret += '# ';
+          ret += project.get('name');
+          if(format === 'HTML') ret += '<br>';
+          ret += '\n';
+        }
+        if(format === 'HTML') ret += '</h1>\n';
+      }
       ret += this._exportDisplayedData(format);
     }
     
