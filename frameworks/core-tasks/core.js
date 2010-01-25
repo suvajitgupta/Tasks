@@ -21,7 +21,7 @@ CoreTasks = SC.Object.create({
     },
     
     recordDidChange: function(recordType, id, storeKey, key) {
-      // console.log('DEBUG: recordDidChange(): storeKey=' + storeKey + ', key=' + key);
+      console.log('DEBUG: recordDidChange(): storeKey=' + storeKey + ', key=' + key);
       var ret = sc_super(); // MUST COME FIRST
       
       if (storeKey === undefined) storeKey = recordType.storeKeyFor(id);
