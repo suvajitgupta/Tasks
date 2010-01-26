@@ -106,18 +106,21 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       if(this._editorPane) this._editorPane.popup(layer, SC.PICKER_POINTER);
     }
     else { // popup context menu
-      var pane = SCUI.ContextMenuPane.create({
-        contentView: SC.View.design({}),
-        layout: { width: 150, height: 0 },
-        itemTitleKey: 'title',
-        itemIconKey: 'icon',
-        itemIsEnabledKey: 'isEnabled',
-        itemTargetKey: 'target',
-        itemActionKey: 'action',
-        itemSeparatorKey: 'isSeparator',
-        items: this._buildContextMenu(that.get('isSystemProject'))
-      });
-      pane.popup(this, event); // pass in the mouse event so the pane can figure out where to put itself
+      var items = this._buildContextMenu(that.get('isSystemProject'));
+      if(items.length > 0) {
+        var pane = SCUI.ContextMenuPane.create({
+          contentView: SC.View.design({}),
+          layout: { width: 150, height: 0 },
+          itemTitleKey: 'title',
+          itemIconKey: 'icon',
+          itemIsEnabledKey: 'isEnabled',
+          itemTargetKey: 'target',
+          itemActionKey: 'action',
+          itemSeparatorKey: 'isSeparator',
+          items: items
+        });
+        pane.popup(this, event); // pass in the mouse event so the pane can figure out where to put itself
+      }
     }
     return NO;
   },
