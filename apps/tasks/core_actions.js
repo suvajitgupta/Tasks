@@ -528,8 +528,7 @@ Tasks.mixin({
     
     // Create, select, and begin editing new task.
     var task = CoreTasks.createRecord(CoreTasks.Task, taskHash);
-    Tasks.tasksController.selectObject(task);
-    var ac = this.get('assignmentsController');  
+    tc.selectObject(task);
     CoreTasks.invokeLater(tc.editNewTask, 200, task);
     if(Tasks.get('autoSave')) Tasks.saveData();
     return task;
