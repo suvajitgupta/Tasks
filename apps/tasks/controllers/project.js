@@ -17,7 +17,7 @@ Tasks.projectController = SC.ObjectController.create(
   contentBinding: 'Tasks.projectsController.selection',
   
   displayTasks: function() {
-    console.log('DEBUG: displayTasks()');
+    // console.log('DEBUG: displayTasks()');
     var ret = [];
     var sel = this.get('content');
     var len = sel? sel.length() : 0;
