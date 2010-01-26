@@ -61,7 +61,9 @@ Tasks.DISPLAY_MODE_TEAM = false;
 Tasks.assignmentsController = SC.ArrayController.create(
 /** @scope Tasks.assignmentsController.prototype */ {
   
-  contentBinding: 'Tasks.projectController.displayTasks',
+  contentBinding: 'Tasks.projectController.tasks',
+  // FIXME: [SG] Beta: restore multi-project selection handling - currently disabled because of "Add Task" timing errors with inline editor
+  // contentBinding: 'Tasks.projectController.displayTasks',
   
   assignedTasks: null,
   _showTasks: true,

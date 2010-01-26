@@ -530,7 +530,6 @@ Tasks.mixin({
     var task = CoreTasks.createRecord(CoreTasks.Task, taskHash);
     Tasks.tasksController.selectObject(task);
     var ac = this.get('assignmentsController');  
-    CoreTasks.invokeLater(ac.showAssignments.bind(ac));
     CoreTasks.invokeLater(tc.editNewTask, 200, task);
     if(Tasks.get('autoSave')) Tasks.saveData();
     return task;
