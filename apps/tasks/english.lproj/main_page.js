@@ -216,7 +216,6 @@ Tasks.mainPage = SC.Page.design({
       
         SC.LabelView.design(SCUI.SimpleButton,{
           layout: { centerY: 0, right: 215, height: 18, width: 60 },
-          displayProperties: [ 'icon' ],
           iconBinding: 'Tasks.assignmentsController.attributeFilterIcon',
           classNames: ['toolbar-label'],
           value: "_Filter".loc(),

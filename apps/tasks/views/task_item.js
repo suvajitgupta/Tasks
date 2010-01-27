@@ -18,6 +18,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
 /** @scope Tasks.TaskItemView.prototype */ {
   
   content: null,
+  
   _editorPane: null,
   
   _listUsers: function() {
@@ -528,6 +529,11 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       context.attr('alt', taskTooltip);
     }
 
-  }
+  },
+  
+  contentPropertyDidChange: function() {
+    if(Tasks.editorPoppedUp) return;
+    sc_super();
+  }  
   
 });
