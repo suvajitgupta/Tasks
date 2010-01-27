@@ -25,6 +25,7 @@ Tasks.projectController = SC.ObjectController.create(
       var context = {};
       for (var i = 0; i < len; i++) {
         var project = sel.nextObject(i, null, context);
+        // console.log('DEBUG: project: ' + project.get('name') + ', tasks: ' + project.get('tasks').getEach('name'));
         if(project === CoreTasks.get('allTasksProject')) return project.get('tasks');
         ret.pushObjects(project.get('tasks'));
       }

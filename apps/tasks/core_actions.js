@@ -527,8 +527,11 @@ Tasks.mixin({
     }
     
     // Create, select, and begin editing new task.
+    SC.RunLoop.begin();
     var task = CoreTasks.createRecord(CoreTasks.Task, taskHash);
+    SC.RunLoop.end();
     tc.selectObject(task);
+    Tasks.projectController.propertyDidChange('displayTasks');
     CoreTasks.invokeLater(tc.editNewTask, 200, task);
     if(Tasks.get('autoSave')) Tasks.saveData();
     return task;
@@ -557,7 +560,9 @@ Tasks.mixin({
             for (var i = 0; i < len; i++) {
               // Get and delete each selected task.
               var task = sel.nextObject(i, null, context);
+              SC.RunLoop.begin();
               task.destroy();
+              SC.RunLoop.end();
             }
             Tasks.deselectTasks();
             if(Tasks.get('autoSave')) Tasks.saveData();
