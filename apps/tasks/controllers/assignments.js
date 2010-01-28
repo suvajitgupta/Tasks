@@ -400,12 +400,12 @@ Tasks.assignmentsController = SC.ArrayController.create(
     var effortString, totalFinishedEffortMin = 0, totalFinishedEffortMax = 0, totalEffortMin = 0, totalEffortMax = 0, effortMin, effortMax;
     var totalFinishedCount = 0, totalLeftCount = 0;
     var task, tasks = assigneeObj.tasks;
-    var len = tasks.get('length');
+    var tasksCount = tasks.get('length');
     var riskyTasksCount = 0;
     var failedTasksCount = 0;
-    if (len === 0) return; // nothing to do
+    if (tasksCount === 0) return; // nothing to do
     
-    for (var i = 0; i < len; i++) {
+    for (var i = 0; i < tasksCount; i++) {
       
       task = tasks.objectAt(i);
       
@@ -482,6 +482,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     
     assignmentNodes.push (SC.Object.create({
       displayName: displayName,
+      tasksCount: tasksCount,
       finishedEffort: finishedEffort,
       totalFinishedEffortAve: totalFinishedEffortAve,
       displayEffort: displayEffort,
@@ -490,7 +491,6 @@ Tasks.assignmentsController = SC.ArrayController.create(
       failedTasksCount:  failedTasksCount,
       loading: loading,
       assignee: assigneeObj.assignee,
-      tasksCount: tasks.get('length'),
       treeItemChildren: Tasks.assignmentsController._showTasks? tasks.sort(function(a,b) {
         // sort by status, then by validation (if "Done"), then by priority, lastly by type
         
