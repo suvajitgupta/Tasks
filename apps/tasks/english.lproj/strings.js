@@ -45,8 +45,8 @@ SC.stringsFor('English', {
   "_DisplayModeTooltip": "Choose 'TASKS' display mode to see details or 'TEAM' to see team summary",
   "_AssigneeSelectionHint": "Specify assignees to show",
   "_AssigneeSelectionTooltip": "Use all or part of full/login name separated via commas or spaces; Type 'None' to see unassigned tasks",
-  "_TasksSearchHint": "Search by task #IDs or name",
-  "_TasksSearchTooltip": "Separate #IDs via commas or spaces, otherwise perform case-insensitive search (a caret prefix will find items that don't match the search pattern)",
+  "_TasksSearchHint": "Search for task #IDs or text",
+  "_TasksSearchTooltip": "Separate #IDs by commas or spaces, otherwise search for text within task name or description (prefix with a caret to find items that don't match text)",
   
   // Popup Pane/Panel strings
   "_CreateMissingUsers": "Create Missing Users",
