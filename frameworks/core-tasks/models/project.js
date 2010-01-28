@@ -69,32 +69,39 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
    */
   tasks: function() {
     
-    // console.log('DEBUG: Task model tasks(): ' + this.get('displayName'));
-    var query, recArray ;
+    var id = this.get('id');
+    if(SC.none(this._oldId) || (this._oldId !== id)) {
+      this._oldId = id;
     
-    if (this.get('name') === CoreTasks.ALL_TASKS_NAME.loc()) {
-      query = SC.Query.local(CoreTasks.Task);
+      // console.log('DEBUG: computing tasks() for project: ' + this.get('displayName'));
+      var query, recArray ;
+    
+      if (this === CoreTasks.get('allTasksProject')) {
+        query = SC.Query.local(CoreTasks.Task);
+      }
+      else if (this === CoreTasks.get('unallocatedTasksProject')) {
+        query = SC.Query.local(CoreTasks.Task, 'projectId=null');
+      }
+      else {
+        query = SC.Query.local(CoreTasks.Task, "projectId='%@'".fmt(this.get('id')));
+      }
+    
+      query.set('initialServerFetch', NO);
+    
+      // Execute the query and return the results.
+      this._recArray = this.get('store').find(query) ;
+    
+      // observe the length property of the recAry for changes
+      this._recArray.addObserver('length', this, this._tasksLengthDidChange);
+      
     }
-    else if (this.get('name') === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) {
-      query = SC.Query.local(CoreTasks.Task, 'projectId=null');
-    }
-    else {
-      query = SC.Query.local(CoreTasks.Task, "projectId='%@'".fmt(this.get('id')));
-    }
     
-    query.set('initialServerFetch', NO);
+    return this._recArray;
     
-    // Execute the query and return the results.
-    recArray = this.get('store').find(query) ;
-    
-    // observe the length property of the recAry for changes
-    recArray.addObserver('length', this, this._tasksDidChange) ;
-    
-    return recArray ;
-  }.property('id', 'name').cacheable(),
+  }.property('id').cacheable(),
   
-  _tasksDidChange: function() {
-    // console.log('DEBUG: tasksDidChange() for project: ' + this.get('name'));
+  _tasksLengthDidChange: function() {
+    console.log('DEBUG: tasks length changed for project: ' + this.get('name'));
     var len = this.getPath('tasks.length');
     if(SC.none(this._oldLength) || (this._oldLength !== len)) {
       this._oldLength = len;
