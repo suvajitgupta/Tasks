@@ -529,25 +529,26 @@ Tasks.mainPage = SC.Page.design({
       borderStyle: SC.BORDER_TOP,
         
       summaryView: Tasks.SummaryView.design({
-        layout: { centerY: 0, height: 16, left: 5, right: 500 },
+        layout: { centerY: 0, height: 16, left: 5, width: 400 },
         classNames: ['status-bar-message'],
         projectsCountBinding: SC.Binding.oneWay('Tasks.projectsController.length'),
         tasksTreeBinding: SC.Binding.oneWay('Tasks.tasksController.content')
       }),
 
+      
+      serverMessageView: SC.LabelView.design({
+        layout: { centerY: 0, height: 16, right: 95, width: 400 },
+        classNames: ['status-bar-message'],
+        textAlign: SC.ALIGN_RIGHT,
+        value: ''
+      }),
+      
       autoSave: SC.CheckboxView.design(SCUI.ToolTip, {
-        layout: { centerY: 0, height: 16, centerX: 5, width: 100 },
+        layout: { centerY: 0, height: 16, right: 5, width: 75 },
         classNames: ['status-bar-message'],
         title: "_AutoSave".loc(),
         toolTip: "_AutoSaveTooltip".loc(),
         valueBinding: 'Tasks.autoSave'
-      }),
-      
-      serverMessageView: SC.LabelView.design({
-        layout: { centerY: 0, height: 16, width: 400, right: 10 },
-        classNames: ['status-bar-message'],
-        textAlign: SC.ALIGN_RIGHT,
-        value: ''
       })
       
     }),
