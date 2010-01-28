@@ -43,6 +43,7 @@
 
 .project-item.sel .sc-outline {
   color: #FFF !important;
+	font-weight: normal !important;
 }
 
 .project-item.sel,
