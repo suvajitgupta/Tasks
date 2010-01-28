@@ -544,8 +544,9 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       autoSave: SC.CheckboxView.design(SCUI.ToolTip, {
-        layout: { centerY: 0, height: 16, right: 5, width: 75 },
+        layout: { centerY: 0, height: 16, right: 5, width: 80 },
         classNames: ['status-bar-message'],
+        textAlign: SC.ALIGN_RIGHT,
         title: "_AutoSave".loc(),
         toolTip: "_AutoSaveTooltip".loc(),
         valueBinding: 'Tasks.autoSave'
