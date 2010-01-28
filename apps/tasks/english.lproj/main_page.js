@@ -199,9 +199,9 @@ Tasks.mainPage = SC.Page.design({
         SC.TextFieldView.design(SCUI.ToolTip, {
           layout: { centerY: 0, height: 24, right: 275, width: 200 },
           classNames: ['assignee-selection-bar'],
-          hint: "_AssigneeSelectionHint".loc(),
-          toolTip: "_AssigneeSelectionTooltip".loc(),
-          valueBinding: 'Tasks.assignmentsController.assigneeSelection'
+          hint: "_UserSelectionHint".loc(),
+          toolTip: "_UserSelectionTooltip".loc(),
+          valueBinding: 'Tasks.assignmentsController.userSelection'
         }),
         
         SC.View.design({ // Assignee Selection cancel button
@@ -209,9 +209,9 @@ Tasks.mainPage = SC.Page.design({
           isVisible: NO,
           classNames: ['filter-cancel-icon'],
           mouseDown: function() {
-            Tasks.assignmentsController.set('assigneeSelection', '');
+            Tasks.assignmentsController.set('userSelection', '');
           },
-          isVisibleBinding: SC.Binding.oneWay('Tasks.assignmentsController.assigneeSelection').bool()
+          isVisibleBinding: SC.Binding.oneWay('Tasks.assignmentsController.userSelection').bool()
         }),
       
         SC.LabelView.design(SCUI.SimpleButton,{

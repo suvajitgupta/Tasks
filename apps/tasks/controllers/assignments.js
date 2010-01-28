@@ -67,14 +67,14 @@ Tasks.assignmentsController = SC.ArrayController.create(
   
   assignedTasks: null,
   _showTasks: true,
-  _clearingAssigneeSelection: false,
+  _clearingUserSelection: false,
   displayMode: function(key, value) {
     if (value !== undefined) {
-      if(value === false) { // clear assignee selection before going to Summmary mode
-        var assigneeSelection = this.get('assigneeSelection');
-        if(assigneeSelection !== null && assigneeSelection !== '') {
-          this._clearingAssigneeSelection = true;
-          this.set('assigneeSelection', null);
+      if(value === false) { // clear assignee selection before going to "TEAM" mode
+        var userSelection = this.get('userSelection');
+        if(userSelection !== null && userSelection !== '') {
+          this._clearingUserSelection = true;
+          this.set('userSelection', null);
         }
       }
       this.set('_showTasks', value);
@@ -83,7 +83,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     }
   }.property('_showTasks').cacheable(),
   
-  assigneeSelection: null,
+  userSelection: null,
   searchFilter: null,
   attributeFilterCriteria: Tasks.attributeFilterNone.slice(0),
   
@@ -179,7 +179,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
   }.property('attributeFilterCriteria'),
   
   hasFiltering: function() {
-    return this.assigneeSelection || this.searchFilter || this.attributeFilterCriteria.length !== 13;
+    return this.userSelection || this.searchFilter || this.attributeFilterCriteria.length !== 13;
   },
   
   setAttributeFilterTroubled: function() {
@@ -207,7 +207,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
   },
 
   resetFilters: function() {
-    this.set('assigneeSelection', null);
+    this.set('userSelection', null);
     this.set('searchFilter', null);
     this.setAttributeFilterNone();
   },
@@ -217,25 +217,32 @@ Tasks.assignmentsController = SC.ArrayController.create(
   showAssignments: function() { // show tasks for selected user that matches search filter
    
     // console.log('DEBUG: showAssignments(' + this.count + ') entry at: ' + new Date().format('hh:mm:ss a'));
-    
-    // Extract selected assignee users whose tasks are to be displayed
+    // Preserve selected tasks to be restored at the end of redrawing assignments
     var selection = Tasks.tasksController.get('selection');
     
-    var selectedAssigneeDisplayNames = [];
-    var selectedAssignees = this.get('assigneeSelection');
-    if (selectedAssignees && selectedAssignees !== '') { // if assignee selection is specified
-      var selectedAssigneeNames = selectedAssignees.replace(/,/g, ' ').replace(/\s+/g, ' ').replace(/^\s+/, '').replace(/\s+$/, '');
-      if (selectedAssigneeNames !== '') {
-        selectedAssigneeNames = selectedAssigneeNames.split(' ');
-        for (var i = 0; i < selectedAssigneeNames.length; i++) {
-          if(selectedAssigneeNames[i].match(/none/i)) {
-            selectedAssigneeDisplayNames.push(CoreTasks.USER_UNASSIGNED);
+    // Extract selected users (assignees or <submitters>)
+    var userSelectionDisplayNames = [];
+    var assigneeSearch = true; // default
+    var userSelection = this.get('userSelection');
+    if (userSelection && userSelection !== '') { // if user selection is specified
+      if(userSelection[0] === '<' && userSelection[userSelection.length-1] === '>') { // looking for submitters
+        assigneeSearch= false;
+        userSelection = userSelection.substr(1,userSelection.length-2);
+      }
+      var userSelectionNames = userSelection.replace(/,/g, ' ').replace(/\s+/g, ' ').replace(/^\s+/, '').replace(/\s+$/, '');
+      if (userSelectionNames !== '') {
+        userSelectionNames = userSelectionNames.split(' ');
+        console.log('DEBUG: selected ' + (assigneeSearch? 'assignees' : 'submitters') + ' = ' + userSelectionNames);
+        for (var i = 0; i < userSelectionNames.length; i++) {
+          var userSelectionName = userSelectionNames[i];
+          if(userSelectionName.match(/none/i)) {
+            userSelectionDisplayNames.push(CoreTasks.USER_UNASSIGNED);
           }
           else {
-            var selectedAssigneeUsers = CoreTasks.getUsers(selectedAssigneeNames[i]);
+            var selectedAssigneeUsers = CoreTasks.getUsers(userSelectionName);
             if (selectedAssigneeUsers.length > 0) {
               for (var j = 0; j < selectedAssigneeUsers.length; j++) {
-                selectedAssigneeDisplayNames.push(selectedAssigneeUsers[j].get('displayName'));
+                userSelectionDisplayNames.push(selectedAssigneeUsers[j].get('displayName'));
               }
             }
           }
@@ -278,7 +285,8 @@ Tasks.assignmentsController = SC.ArrayController.create(
       var isNewTask = (taskName === CoreTasks.NEW_TASK_NAME.loc()); // Always display "new task"s
       assigneeName = assignee? assignee.get('displayName') : CoreTasks.USER_UNASSIGNED;
       submitterName = submitter? submitter.get('displayName') : CoreTasks.USER_UNASSIGNED;
-      if(isNewTask || selectedAssigneeDisplayNames.length === 0 || selectedAssigneeDisplayNames.indexOf(submitterName) !== -1) {
+      if(isNewTask || userSelectionDisplayNames.length === 0 ||
+         userSelectionDisplayNames.indexOf(assigneeSearch? assigneeName : submitterName) !== -1) {
         var assigneeObj = assignees[assigneeName];
         if(!assigneeObj) {
           assigneeObj = { assignee: assignee, tasks: [] };
@@ -530,19 +538,19 @@ Tasks.assignmentsController = SC.ArrayController.create(
   	this.invokeOnce(this.showAssignments);
   }.observes('[]', '_showTasks'),
   
-  _filteringHasChanged: function() { // allow users to change filters over a half second before redrawing tasks pane
+  _filteringHasChanged: function() { // allow typing delay over a half second before redrawing tasks pane
     if (this._timer) this._timer.invalidate();
     this._timer = this.invokeLater(this._contentHasChanged, 500);
   },
   
-  _assigneeSelectionHasChanged: function() {
-    // console.log('DEBUG: Assignee selection changed to "' + this.assigneeSelection + '" + ' displayDetails = ' + this.get('_showTasks'));
-    if(!this.get('_showTasks') && !this._clearingAssigneeSelection) {
+  _userSelectionHasChanged: function() {
+    // console.log('DEBUG: User selection changed to "' + this.userSelection + '" + ' showTasks = ' + this.get('_showTasks'));
+    if(!this.get('_showTasks') && !this._clearingUserSelection) {
       this.set('_showTasks', true);
     }
-    this._clearingAssigneeSelection = false;
+    this._clearingUserSelection = false;
     this._filteringHasChanged();
-  }.observes('assigneeSelection'),
+  }.observes('userSelection'),
   
   _searchFilterHasChanged: function() {
     // console.log('DEBUG: Search filter changed to "' + this.searchFilter + '"');

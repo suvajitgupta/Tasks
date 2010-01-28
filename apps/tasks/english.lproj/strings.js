@@ -43,9 +43,9 @@ SC.stringsFor('English', {
   "_LogoutTooltip": "Sign out of Tasks and allow next user to sign in",
   "_Team": "Team",
   "_DisplayModeTooltip": "Choose 'TASKS' display mode to see details or 'TEAM' to see team summary",
-  "_AssigneeSelectionHint": "Specify assignees to show",
-  "_AssigneeSelectionTooltip": "Use all or part of full/login name separated via commas or spaces; Type 'None' to see unassigned tasks",
-  "_TasksSearchHint": "Search for task #IDs or text",
+  "_UserSelectionHint": "Assignees or <Submitters>",
+  "_UserSelectionTooltip": "Use all or part of full/login name separated via commas or spaces; Use 'none' for unassigned",
+  "_TasksSearchHint": "Task #IDs or search text",
   "_TasksSearchTooltip": "Separate #IDs by commas or spaces, otherwise search for text within task name or description (prefix with a caret to find items that don't match text)",
   
   // Popup Pane/Panel strings

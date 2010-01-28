@@ -115,7 +115,7 @@ Tasks.mixin({
         var role = currentUser.get('role');
         
         if(role === CoreTasks.USER_ROLE_DEVELOPER) { // Set assignee selection filter to current user
-          Tasks.assignmentsController.set('assigneeSelection', this.loginName);
+          Tasks.assignmentsController.set('userSelection', this.loginName);
         }
         
       }
