@@ -423,7 +423,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     // Put a badge before Planned tasks that were created or updated recently
     var developmentStatus = content.get('developmentStatus');
     
-    if(developmentStatus === CoreTasks.TASK_STATUS_PLANNED) {
+    if(developmentStatus === CoreTasks.TASK_STATUS_PLANNED || developmentStatus === CoreTasks.TASK_STATUS_RISKY) {
       // First check if the task was created recently
       var ageInDays = 0;
       var now = SC.DateTime.create().get('milliseconds'), then;
@@ -442,7 +442,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       }
       // Decide if it was recently created/updated
       if(ageInDays <= 1) {
-        context = context.begin('img').addClass('new-task').attr({
+        context = context.begin('img').addClass('recently-updated-task').attr({
           src: SC.BLANK_IMAGE_URL,
           title: "_NewTaskTooltip".loc(),
           alt: "_NewTaskTooltip".loc()
