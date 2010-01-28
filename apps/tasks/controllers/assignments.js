@@ -268,15 +268,17 @@ Tasks.assignmentsController = SC.ArrayController.create(
     }
       
     // Group tasks by user & separate unassigned tasks
-    var assignees = {}, assigneeName, assignee, assignmentNodes = [];
+    var assignees = {}, submitter, submitterName, assigneeName, assignee, assignmentNodes = [];
     this.forEach(function(task){
       // console.log("Task Name: " + task.get('name') + "; Id: " + task.get('id'));
       assignee = task.get('assignee');
+      submitter = task.get('submitter');
       var taskName = task.get('name');
       var taskDescription = task.get('description');
       var isNewTask = (taskName === CoreTasks.NEW_TASK_NAME.loc()); // Always display "new task"s
       assigneeName = assignee? assignee.get('displayName') : CoreTasks.USER_UNASSIGNED;
-      if(isNewTask || selectedAssigneeDisplayNames.length === 0 || selectedAssigneeDisplayNames.indexOf(assigneeName) !== -1) {
+      submitterName = submitter? submitter.get('displayName') : CoreTasks.USER_UNASSIGNED;
+      if(isNewTask || selectedAssigneeDisplayNames.length === 0 || selectedAssigneeDisplayNames.indexOf(submitterName) !== -1) {
         var assigneeObj = assignees[assigneeName];
         if(!assigneeObj) {
           assigneeObj = { assignee: assignee, tasks: [] };

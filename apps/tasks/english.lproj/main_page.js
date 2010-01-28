@@ -313,13 +313,13 @@ Tasks.mainPage = SC.Page.design({
               No projects selected - "select project" helper
             	Single project selected:
             	  if project has no tasks:
-            		  addTask enabled - "zero tasks" helper
+            		  addTask enabled - "add tasks tasks" helper
               		else - "display mode" helper
               	else project has tasks
-          		    if no tasks filtering through - "no tasks" helper
+          		    if no tasks filtering through - "adjust filter" helper
             	Multiple projects selected
             		if projects have tasks:
-            		  if no tasks filtering through - "no tasks" helper
+            		  if no tasks filtering through - "adjust filter" helper
         	*/
           render: function(context, firstTime) {
           	
@@ -333,13 +333,13 @@ Tasks.mainPage = SC.Page.design({
             }
             else if(selectedProjectsCount === 1) { // Single project selected
               if(sel.getPath('firstObject.tasks.length') === 0) { // Project has no tasks
-                if(Tasks.tasksController.isAddable()) context.addClass('zero-tasks-helper');
+                if(Tasks.tasksController.isAddable()) context.addClass('add-tasks-helper');
                 else context.addClass('display-mode-helper');
                 return;
               }
               else { // Project has tasks
                 if(this.getPath('content.length') === 0) { // No tasks filtering through
-                  context.addClass('no-tasks-helper');
+                  context.addClass('adjust-filter-helper');
                   return;
                 }
               }
@@ -353,16 +353,16 @@ Tasks.mainPage = SC.Page.design({
               }
               if(tasksCount > 0) { // Projects have tasks
                 if(this.getPath('content.length') === 0) { // No tasks filtering through
-                  context.addClass('no-tasks-helper');
+                  context.addClass('adjust-filter-helper');
                   return;
                 }
               }
             }
             
             // Remove helper images (if any) and render tasks
-            context.removeClass('zero-tasks-helper');
+            context.removeClass('add-tasks-helper');
             context.removeClass('display-mode-helper');
-            context.removeClass('no-tasks-helper');
+            context.removeClass('adjust-filter-helper');
             sc_super();
           }
           
