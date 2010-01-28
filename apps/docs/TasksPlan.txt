@@ -100,7 +100,7 @@ User Manager GUI
 ^ Add login screen to identify user who logs in (and handle login failures properly) [SG] <SE> @Done %Passed $Feature
 - Add password to login, signup, and User Manager screens (save in encrypted format) [SG] <JH2> $Feature @Done %Passed
 - Allow new guests to sign up from login screen and log them in immediately after [JH2] <SG> @Done %Passed $Feature
-^ Add assignee filtering (space or comma separators, "none" for unassigned) & corresponding delete button in top toolbar [SG] <JH2> @Done $Feature %Passed
+^ Add assignee/submitter filtering (space or comma separators, "none" for unassigned) & corresponding delete button in top toolbar [SG] <JH2> @Done $Feature %Passed
 - Allow assignee filtering by matching any part of login or full name [SG] $Feature @Done %Passed
 - Set assignee selection filter to logged in user if they are a Developer [SG] @Done $Feature %Passed
 ^ Add User Manager with "Add/Del. User"  buttons in toolbar (reuse user information view with signup screen) and user count at bottom [SG] <JH2> @Done %Passed $Feature
@@ -161,7 +161,7 @@ Styling/Hardening
 | Project/Task/User CRUD via toolbar buttons/context menus
 | Project/Task modifications via inline editor and popup editor/control bar
 | Task reassignment/reallocation & User role change via drag-and-drop
-| Task attribute filtering, assignee selection, ID/name searching
+| Task attribute filtering, assignee/submitter selection, ID/name searching
 | User modifications via User Manager
 | Save, Import/Export (Text & HTML)
 - Perform I18N and L10N (test with reversed strings) [SG] <JH2> @Done %Passed
