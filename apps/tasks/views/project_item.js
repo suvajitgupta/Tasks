@@ -22,6 +22,8 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
   */  
   mouseDown: function(event) {
     
+    // console.log('DEBUG: mouse down on project item: ' + this.getPath('content.name'));
+
     var that = this;
     var content = this.get('content');
     if(!content.get('id')) return sc_super();

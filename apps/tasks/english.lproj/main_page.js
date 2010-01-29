@@ -256,7 +256,7 @@ Tasks.mainPage = SC.Page.design({
         hasHorizontalScroller: NO,
         classNames: ['projects-pane'],
 
-        contentView: SC.SourceListView.design({
+        contentView: Tasks.SourceListView.design({
           layout: { top: 0, left:0, bottom: 0, right: 0 },
           contentValueKey: 'displayName',
           contentUnreadCountKey: 'displayTimeLeft',
@@ -280,6 +280,7 @@ Tasks.mainPage = SC.Page.design({
             if(Tasks.loginTime) return;
             sc_super();
           }
+          
         })
       }),
       
@@ -288,7 +289,7 @@ Tasks.mainPage = SC.Page.design({
         hasHorizontalScroller: NO,
         classNames: ['tasks-pane'],
 
-        contentView: SC.SourceListView.design({
+        contentView: Tasks.SourceListView.design({
           layout: { top: 0, bottom: 0, left: 0, right: 0 },
           contentValueKey: 'displayName',
           contentUnreadCountKey: 'displayEffort',
@@ -365,7 +366,7 @@ Tasks.mainPage = SC.Page.design({
             context.removeClass('adjust-filter-helper');
             sc_super();
           }
-          
+                    
         }),
         
         // ..........................................................
@@ -395,6 +396,7 @@ Tasks.mainPage = SC.Page.design({
           }
           return ret;
         }
+        
       })
         
     }),

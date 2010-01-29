@@ -50,9 +50,13 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   */  
   mouseDown: function(event) {
     
+    // console.log('DEBUG: mouse down on task item: ' + this.getPath('content.name'));
+    
     // Get selection to update before context menu uses selection
     SC.RunLoop.begin();
-    this.parentView.mouseDown(event);
+    var pv = this.parentView;
+    pv.set('taskClickedOn', true);
+    pv.mouseDown(event);
     SC.RunLoop.end();
     
     // See what user clicked on
