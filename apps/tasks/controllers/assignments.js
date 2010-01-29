@@ -232,7 +232,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
       var userSelectionNames = userSelection.replace(/,/g, ' ').replace(/\s+/g, ' ').replace(/^\s+/, '').replace(/\s+$/, '');
       if (userSelectionNames !== '') {
         userSelectionNames = userSelectionNames.split(' ');
-        console.log('DEBUG: selected ' + (assigneeSearch? 'assignees' : 'submitters') + ' = ' + userSelectionNames);
+        // console.log('DEBUG: selected ' + (assigneeSearch? 'assignees' : 'submitters') + ' = ' + userSelectionNames);
         for (var i = 0; i < userSelectionNames.length; i++) {
           var userSelectionName = userSelectionNames[i];
           if(userSelectionName.match(/none/i)) {
