@@ -21,7 +21,8 @@ Tasks.SummaryView = SC.View.extend(
   
   render: function(context, firstTime) {
 
-    var summary = "_Displaying".loc() + (this.get('projectsCount')-2) + "_projects".loc();
+    var projectsCount = this.get('projectsCount');
+    var summary = "_Displaying".loc() + (projectsCount < 2? 0 : projectsCount-2) + "_projects".loc();
 
     if(this.tasksTree) {
       var assigneesCount = 0;
