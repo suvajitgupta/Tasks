@@ -16,7 +16,7 @@ sc_require('core');
 
 Tasks.statisticsPane = SC.PanelPane.create({  
   
-  layout: { centerX: 0, centerY: 0, height: 230, width: 575 },
+  layout: { centerX: 0, centerY: 0, height: 230, width: 600 },
   classNames: ['statistics-pane'],
   
   contentView: SC.View.design({
