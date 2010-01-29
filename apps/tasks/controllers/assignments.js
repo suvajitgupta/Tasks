@@ -566,6 +566,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     var highCount = 0, mediumCount = 0, lowCount = 0;
     var plannedCount = 0, activeCount = 0, doneCount = 0, riskyCount = 0;
     var untestedCount = 0, passedCount = 0, failedCount = 0;
+    // TODO: [SG] Beta: compute/display statistics about assignees
     
     var assigneesCount = 0;
     var assignmentNodes = this.getPath('assignedTasks.treeItemChildren');
@@ -573,13 +574,11 @@ Tasks.assignmentsController = SC.ArrayController.create(
     var tasksCount, totalTasksCount = 0;
     for(var i=0; i < assigneesCount; i++) {
       var assignmentNode = assignmentNodes.objectAt(i);
-      console.log(assignmentNode.get('displayName'));
       tasksCount = assignmentNode.get('tasksCount');
       totalTasksCount += tasksCount;
       var tasks = assignmentNode.get('treeItemChildren');
       for(var j=0; j<tasksCount; j++) {
         var task = tasks.objectAt(j);
-        console.log('\t' + task.get('name'));
         switch(task.get('type')) {
           case CoreTasks.TASK_TYPE_FEATURE: featureCount++; break;
           case CoreTasks.TASK_TYPE_BUG: bugCount++; break;
