@@ -57,10 +57,14 @@
   background: static_url('images/default-theme-repeat-x.png') repeat-x 0 -44px;
 }
 
-.status-bar-label {
+.status-bar-label, .status-bar-button {
   font-size: 10px !important;
   color: #000 !important;
   text-shadow: #fff 0 1px 1px;
+}
+
+.status-bar-button.disabled {
+  color: #777 !important;
 }
 
 .statistics-icon {

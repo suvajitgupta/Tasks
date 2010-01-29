@@ -533,20 +533,18 @@ Tasks.mainPage = SC.Page.design({
       summaryView: Tasks.SummaryView.design({
         layout: { centerY: 0, height: 16, left: 5, width: 400 },
         classNames: ['status-bar-label'],
-        projectsCountBinding: SC.Binding.oneWay('Tasks.assignmentsController.content.length'),
-        // projectsCountBinding: SC.Binding.oneWay('Tasks.projectsController.length'),
+        projectsCountBinding: SC.Binding.oneWay('Tasks.projectsController.length'),
         tasksTreeBinding: SC.Binding.oneWay('Tasks.tasksController.content')
       }),
         
       statisticsButton: SC.LabelView.design( SCUI.SimpleButton, {
         layout: { centerY: 0, height: 16, centerX: -35, width: 80 },
         titleMinWidth: 0,
-        classNames: ['status-bar-label'],
+        classNames: ['status-bar-button'],
         value: "_ShowStatistics".loc(),
         icon: 'statistics-icon',
         toolTip: "_ShowStatisticsTooltip".loc(),
-        // FIXME: [SG] Beta: see why isEnabled binding is not working for Statistics button
-        // isEnabledBinding: SC.Binding.oneWay('Tasks.tasksController.arrangedObjects.length').bool(),
+        isEnabledBinding: SC.Binding.oneWay('Tasks.tasksController*arrangedObjects.length').bool(),
         target: 'Tasks',
         action: 'projectStatistics'
       }),
