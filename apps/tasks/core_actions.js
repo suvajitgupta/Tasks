@@ -333,13 +333,6 @@ Tasks.mixin({
     CoreTasks.set('currentUser', null);
     this.loginTime = true;
     
-    // TODO: [JH2, SG] Beta: need to determine the backend and logout appropriately
-    // var params = {
-    //   successCallback: function() { console.log('Successful logout'); }.bind(this),
-    //   failureCallback: function() { console.log('Failed logout'); }.bind(this)
-    // };
-    // CoreTasks.User.logout('logout', params);
-    
     this.get('assignmentsController').resetFilters();
     this.usersController.set('content', null);
     this.allTasksController.set('content', null);

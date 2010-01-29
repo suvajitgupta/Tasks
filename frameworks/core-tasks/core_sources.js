@@ -126,7 +126,6 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
     if (CoreTasks.get('currentUser')) {
       queryParams = {
         UUID: CoreTasks.getPath('currentUser.id'),
-        role: CoreTasks.getPath('currentUser.role'),
         ATO: CoreTasks.getPath('currentUser.authToken'),
         action: "create%@".fmt(recordType._object_className.split('.')[1])
       };
@@ -190,7 +189,6 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
     var id = store.idFor(storeKey);
     var queryParams = {
       UUID: CoreTasks.getPath('currentUser.id'),
-      role: CoreTasks.getPath('currentUser.role'),
       ATO: CoreTasks.getPath('currentUser.authToken'),
       action: "update%@".fmt(recordType._object_className.split('.')[1])
     };
@@ -262,7 +260,6 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
     var id = store.idFor(storeKey);
     var queryParams = {
       UUID: CoreTasks.getPath('currentUser.id'),
-      role: CoreTasks.getPath('currentUser.role'),
       ATO: CoreTasks.getPath('currentUser.authToken'),
       action: "delete%@".fmt(recordType._object_className.split('.')[1])
     };
