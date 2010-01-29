@@ -538,7 +538,7 @@ Tasks.mainPage = SC.Page.design({
       }),
         
       statisticsButton: SC.LabelView.design( SCUI.SimpleButton, {
-        layout: { centerY: 0, height: 16, centerX: -30, width: 85 },
+        layout: { centerY: 0, height: 16, centerX: -30, width: 90 },
         titleMinWidth: 0,
         classNames: ['status-bar-button'],
         value: "_ShowStatistics".loc(),
