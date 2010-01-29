@@ -527,27 +527,40 @@ Tasks.mainPage = SC.Page.design({
     statusBarView: SC.View.design(SC.Border, {
       layout: { bottom: 0, height: 20, left: 0, right: 0 },
       classNames: ['status-bar'],
-      childViews: ['summaryView', 'autoSave', 'serverMessageView'],
+      childViews: ['summaryView', 'statisticsButton', 'serverMessageView', 'autoSaveCheckbox'],
       borderStyle: SC.BORDER_TOP,
         
       summaryView: Tasks.SummaryView.design({
         layout: { centerY: 0, height: 16, left: 5, width: 400 },
-        classNames: ['status-bar-message'],
-        projectsCountBinding: SC.Binding.oneWay('Tasks.projectsController.length'),
+        classNames: ['status-bar-label'],
+        projectsCountBinding: SC.Binding.oneWay('Tasks.assignmentsController.content.length'),
+        // projectsCountBinding: SC.Binding.oneWay('Tasks.projectsController.length'),
         tasksTreeBinding: SC.Binding.oneWay('Tasks.tasksController.content')
       }),
-
+        
+      statisticsButton: SC.LabelView.design( SCUI.SimpleButton, {
+        layout: { centerY: 0, height: 16, centerX: -35, width: 80 },
+        titleMinWidth: 0,
+        classNames: ['status-bar-label'],
+        value: "_ShowStatistics".loc(),
+        icon: 'statistics-icon',
+        toolTip: "_ShowStatisticsTooltip".loc(),
+        // FIXME: [SG] Beta: see why isEnabled binding is not working for Statistics button
+        // isEnabledBinding: SC.Binding.oneWay('Tasks.tasksController.arrangedObjects.length').bool(),
+        target: 'Tasks',
+        action: 'projectStatistics'
+      }),
       
       serverMessageView: SC.LabelView.design({
         layout: { centerY: 0, height: 16, right: 95, width: 400 },
-        classNames: ['status-bar-message'],
+        classNames: ['status-bar-label'],
         textAlign: SC.ALIGN_RIGHT,
         value: ''
       }),
       
-      autoSave: SC.CheckboxView.design(SCUI.ToolTip, {
+      autoSaveCheckbox: SC.CheckboxView.design(SCUI.ToolTip, {
         layout: { centerY: 0, height: 16, right: 5, width: 80 },
-        classNames: ['status-bar-message'],
+        classNames: ['status-bar-label'],
         textAlign: SC.ALIGN_RIGHT,
         title: "_AutoSave".loc(),
         toolTip: "_AutoSaveTooltip".loc(),

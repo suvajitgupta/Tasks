@@ -75,6 +75,7 @@ SC.stringsFor('English', {
   "_Duplicate": "Duplicate",
   "_Delete": "Delete",
   "_ShowStatistics": "Statistics...",
+  "_ShowStatisticsTooltip": "Show statistics about contents of tasks workspace",
   "_Statistics": "Statistics",
   "_Created:": "Created: ",
   "_Updated:": "Updated: ",

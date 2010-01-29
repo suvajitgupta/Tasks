@@ -50,15 +50,21 @@
 }
 
 /*-----------------------------------------------------------------
- * Status bar styles
+ * Status bar styles/icons
  */
 
 .status-bar {
   background: static_url('images/default-theme-repeat-x.png') repeat-x 0 -44px;
 }
 
-.status-bar-message {
+.status-bar-label {
   font-size: 10px !important;
   color: #000 !important;
   text-shadow: #fff 0 1px 1px;
+}
+
+.statistics-icon {
+  width: 16px;
+  height: 16px;
+  background: static_url('images/statistics.png') no-repeat;
 }

@@ -449,7 +449,7 @@ Tasks.mixin({
    * Popup Project Statistics panel.
    */
   projectStatistics: function() {
-    Tasks.projectController.showStatistics();  
+    Tasks.assignmentsController.showStatistics();  
   },
   
   /**

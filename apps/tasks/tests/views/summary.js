@@ -11,7 +11,7 @@ sc_require('views/summary');
 var pane = SC.ControlTestPane.design()
   .add('SummaryView', Tasks.SummaryView, {
     layout: { top: 0, height: 16, width: 150, right: 0 },
-    classNames: ['status-bar-message'],
+    classNames: ['status-bar-label'],
     projectsCount: 0,
     tasksTree: null
   });

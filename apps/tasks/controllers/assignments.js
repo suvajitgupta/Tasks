@@ -1,7 +1,7 @@
 // ==========================================================================
 // Tasks.assignmentsController
 // ==========================================================================
-/*globals CoreTasks Tasks */
+/*globals CoreTasks Tasks sc_static*/
 
 /** 
 
@@ -555,6 +555,101 @@ Tasks.assignmentsController = SC.ArrayController.create(
   _searchFilterHasChanged: function() {
     // console.log('DEBUG: Search filter changed to "' + this.searchFilter + '"');
     this._filteringHasChanged();
-  }.observes('searchFilter')
+  }.observes('searchFilter'),
+  
+  
+  statistics: '',
+  
+  computeStatistics: function() {
+
+    var tasks = this.get('content');
+    var tasksCount = tasks.get('length');
+    var featureCount = 0, bugCount = 0, otherCount = 0;
+    var highCount = 0, mediumCount = 0, lowCount = 0;
+    var plannedCount = 0, activeCount = 0, doneCount = 0, riskyCount = 0;
+    var untestedCount = 0, passedCount = 0, failedCount = 0;
+    if(tasksCount > 0) {
+      for(var i=0; i<tasksCount; i++) {
+        var task = tasks.objectAt(i);
+        switch(task.get('type')) {
+          case CoreTasks.TASK_TYPE_FEATURE: featureCount++; break;
+          case CoreTasks.TASK_TYPE_BUG: bugCount++; break;
+          case CoreTasks.TASK_TYPE_OTHER: otherCount++; break;
+        }
+        switch(task.get('priority')) {
+          case CoreTasks.TASK_PRIORITY_HIGH: highCount++; break;
+          case CoreTasks.TASK_PRIORITY_MEDIUM: mediumCount++; break;
+          case CoreTasks.TASK_PRIORITY_LOW: lowCount++; break;
+        }
+        switch(task.get('developmentStatus')) {
+          case CoreTasks.TASK_STATUS_PLANNED: plannedCount++; break;
+          case CoreTasks.TASK_STATUS_ACTIVE: activeCount++; break;
+          case CoreTasks.TASK_STATUS_DONE: doneCount++; break;
+          case CoreTasks.TASK_STATUS_RISKY: riskyCount++; break;
+        }
+        switch(task.get('validation')) {
+          case CoreTasks.TASK_VALIDATION_UNTESTED: untestedCount++; break;
+          case CoreTasks.TASK_VALIDATION_PASSED: passedCount++; break;
+          case CoreTasks.TASK_VALIDATION_FAILED: failedCount++; break;
+        }
+      }
+    }
+      
+    return {
+      tasksCount: tasksCount,
+      featureCount: featureCount, bugCount: bugCount, otherCount: otherCount,
+      highCount: highCount, mediumCount: mediumCount, lowCount: lowCount,
+      plannedCount: plannedCount, activeCount: activeCount, doneCount: doneCount, riskyCount: riskyCount,
+      untestedCount: untestedCount, passedCount: passedCount, failedCount: failedCount
+    };
+  
+  },
+  
+  generateStatistics: function() {
+    var ret = '';
+    var stats = this.computeStatistics();
+    var tasksCount = stats.tasksCount;
+    if(tasksCount > 0) {
+      var blank = sc_static('blank');
+      ret += '<table width="100%"><tr class="even">';
+      ret += ('<td><span class="task-attribute-set-title">' + "_Type".loc() + '</td>');
+      ret += ('<td><img src="' + blank + '" class="task-icon-feature"/>&nbsp;' + "_Feature".loc() + ': ' + stats.featureCount + ' (' + Math.round(100*stats.featureCount/stats.tasksCount) + '%)' + '</td>');
+      ret += ('<td><img src="' + blank + '" class="task-icon-bug"/>&nbsp;' + "_Bug".loc() + ': ' + stats.bugCount + ' (' + Math.round(100*stats.bugCount/stats.tasksCount) + '%)' + '</td>');
+      ret += ('<td><img src="' + blank + '" class="task-icon-other"/>&nbsp;'  + "_Other".loc() + ': ' + stats.otherCount + ' (' + Math.round(100*stats.otherCount/stats.tasksCount) + '%)' + '</td>');
+      ret += '<td></td></tr><tr class="odd">';
+      ret += ('<td><span class="task-attribute-set-title">' + "_Priority".loc() + '</td>');
+      ret += ('<td><span class="task-priority-high">' + "_High".loc() + ':</span> ' + stats.highCount + ' (' + Math.round(100*stats.highCount/stats.tasksCount) + '%)' + '</td>');
+      ret += ('<td><span class="task-priority-medium">' + "_Medium".loc() + ':</span> ' + stats.mediumCount + ' (' + Math.round(100*stats.mediumCount/stats.tasksCount) + '%)' + '</td>');
+      ret += ('<td><span class="task-priority-low">' + "_Low".loc() + ':</span> ' + stats.lowCount + ' (' + Math.round(100*stats.lowCount/stats.tasksCount) + '%)' + '</td>');
+      ret += '<td></td></tr><tr class="even">';
+      ret += ('<td><span class="task-attribute-set-title">' + "_Status".loc() + '</td>');
+      ret += ('<td><span class="task-status-planned">' + "_Planned".loc() + ':</span> ' + stats.plannedCount + ' (' + Math.round(100*stats.plannedCount/stats.tasksCount) + '%)' + '</td>');
+      ret += ('<td><span class="task-status-active">' + "_Active".loc() + ':</span> ' + stats.activeCount + ' (' + Math.round(100*stats.activeCount/stats.tasksCount) + '%)' + '</td>');
+      ret += ('<td><span class="task-status-done">' + "_Done".loc() + ':</span> ' + stats.doneCount + ' (' + Math.round(100*stats.doneCount/stats.tasksCount) + '%)' + '</td>');
+      ret += ('<td><span class="task-status-risky">' + "_Risky".loc() + ':</span> ' + stats.riskyCount + ' (' + Math.round(100*stats.riskyCount/stats.tasksCount) + '%)' + '</td>');
+      ret += '</tr><tr class="odd">';
+      ret += ('<td><span class="task-attribute-set-title">' + "_Validation".loc() + '</td>');
+      ret += ('<td><span class="task-validation-untested">' + "_Untested".loc() + ':</span> ' + stats.untestedCount + ' (' + Math.round(100*stats.untestedCount/stats.tasksCount) + '%)' + '</td>');
+      ret += ('<td><span class="task-validation-passed">' + "_Passed".loc() + ':</span> ' + stats.passedCount + ' (' + Math.round(100*stats.passedCount/stats.tasksCount) + '%)' + '</td>');
+      ret += ('<td><span class="task-validation-failed">' + "_Failed".loc() + ':</span> ' + stats.failedCount + ' (' + Math.round(100*stats.failedCount/stats.tasksCount) + '%)' + '</td>');
+      ret += '<td></td></tr></table>';
+    }
+    this.set('statistics', ret);
+  },
+  
+  showStatistics: function() {
+    this.generateStatistics();
+    var panel = Tasks.getPath('statisticsPane');
+    if(panel) panel.append();
+  },
+  
+  closePanel: function() {
+    var panel = Tasks.getPath('statisticsPane');
+    if(panel) {
+      panel.remove();
+      panel.destroy();
+    }
+    this.set('statistics', '');
+  }
   
 });

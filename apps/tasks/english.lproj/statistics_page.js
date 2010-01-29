@@ -16,13 +16,13 @@ sc_require('core');
 
 Tasks.statisticsPane = SC.PanelPane.create({  
   
-  layout: { centerX: 0, centerY: 0, height: 275, width: 575 },
+  layout: { centerX: 0, centerY: 0, height: 230, width: 575 },
   classNames: ['statistics-pane'],
   
   contentView: SC.View.design({
     
     layout: { top: 0, left: 0, bottom: 0, right: 0 },
-    childViews: 'titlebar projectName statistics closeButton'.w(),
+    childViews: 'titlebar statistics closeButton'.w(),
     
     titlebar: SC.View.design(SC.Border, {
       layout: { left: 10, right: 10, top: 10, height: 35 },
@@ -36,20 +36,11 @@ Tasks.statisticsPane = SC.PanelPane.create({
       ]
     }),
     
-    projectName: SC.LabelView.design({
-      layout: { top: 50, left: 10, height: 20, right: 10 },
-      textAlign: SC.ALIGN_CENTER,
-      escapeHTML: NO,
-      valueBinding: SC.Binding.transform(function(value, binding) {
-         return "_Project:".loc() + '<b>' + value + '</b>';
-      }).from('Tasks.projectController*content.firstObject.name')
-    }),
-    
     statistics: SC.LabelView.design({
-      layout: { top: 75, left: 10, right: 10, bottom: 40 },
+      layout: { top: 50, left: 10, right: 10, bottom: 40 },
       textAlign: SC.ALIGN_CENTER,
       escapeHTML: NO,
-      valueBinding: 'Tasks.projectController.projectStatistics'
+      valueBinding: 'Tasks.assignmentsController.statistics'
     }),
     
     closeButton: SC.ButtonView.design({
@@ -59,7 +50,7 @@ Tasks.statisticsPane = SC.PanelPane.create({
       isDefault: YES,
       theme: 'capsule',
       title: "_Close".loc(),
-      target: 'Tasks.projectController',
+      target: 'Tasks.assignmentsController',
       action: 'closePanel'
     })
     
