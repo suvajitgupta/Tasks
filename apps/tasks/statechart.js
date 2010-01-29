@@ -21,8 +21,6 @@
 //
 // ========================================================================
 
-// FIXME: [SC] delete this file once this code moves into SproutCore framework
-
 /**
   @namespace
   
