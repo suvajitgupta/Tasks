@@ -562,15 +562,24 @@ Tasks.assignmentsController = SC.ArrayController.create(
   
   computeStatistics: function() {
 
-    var tasks = this.get('content');
-    var tasksCount = tasks.get('length');
     var featureCount = 0, bugCount = 0, otherCount = 0;
     var highCount = 0, mediumCount = 0, lowCount = 0;
     var plannedCount = 0, activeCount = 0, doneCount = 0, riskyCount = 0;
     var untestedCount = 0, passedCount = 0, failedCount = 0;
-    if(tasksCount > 0) {
-      for(var i=0; i<tasksCount; i++) {
-        var task = tasks.objectAt(i);
+    
+    var assigneesCount = 0;
+    var assignmentNodes = this.getPath('assignedTasks.treeItemChildren');
+    if(assignmentNodes) assigneesCount = assignmentNodes.get('length');
+    var tasksCount, totalTasksCount = 0;
+    for(var i=0; i < assigneesCount; i++) {
+      var assignmentNode = assignmentNodes.objectAt(i);
+      console.log(assignmentNode.get('displayName'));
+      tasksCount = assignmentNode.get('tasksCount');
+      totalTasksCount += tasksCount;
+      var tasks = assignmentNode.get('treeItemChildren');
+      for(var j=0; j<tasksCount; j++) {
+        var task = tasks.objectAt(j);
+        console.log('\t' + task.get('name'));
         switch(task.get('type')) {
           case CoreTasks.TASK_TYPE_FEATURE: featureCount++; break;
           case CoreTasks.TASK_TYPE_BUG: bugCount++; break;
@@ -594,9 +603,9 @@ Tasks.assignmentsController = SC.ArrayController.create(
         }
       }
     }
-      
+
     return {
-      tasksCount: tasksCount,
+      tasksCount: totalTasksCount,
       featureCount: featureCount, bugCount: bugCount, otherCount: otherCount,
       highCount: highCount, mediumCount: mediumCount, lowCount: lowCount,
       plannedCount: plannedCount, activeCount: activeCount, doneCount: doneCount, riskyCount: riskyCount,
