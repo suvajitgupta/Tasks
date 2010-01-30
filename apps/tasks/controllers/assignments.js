@@ -61,9 +61,8 @@ Tasks.DISPLAY_MODE_TEAM = false;
 Tasks.assignmentsController = SC.ArrayController.create(
 /** @scope Tasks.assignmentsController.prototype */ {
   
-  contentBinding: 'Tasks.projectController.tasks',
-  // FIXME: [SG] Beta: restore multi-project selection handling - currently disabled because of "Add Task" timing errors with inline editor
-  // contentBinding: 'Tasks.projectController.displayTasks',
+  // contentBinding: 'Tasks.projectController.tasks', // single-project selection mode
+  contentBinding: 'Tasks.projectController.displayTasks', // multi-project selection mode
   
   assignedTasks: null,
   _showTasks: true,
@@ -528,7 +527,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
   
   _contentHasChanged: function() {
     var content = this.get('content');
-    // console.log('DEBUG-ON: editorPoppedUp=' + Tasks.editorPoppedUp + ', tasks: ' + content);
+    // if (content) console.log('DEBUG-ON: editorPoppedUp=' + Tasks.editorPoppedUp + ', tasks: ' + content.getEach('name'));
     Tasks.assignmentsRedrawNeeded = true;    
     if(Tasks.editorPoppedUp) return;
   	if (this._timer) { // called as a result of a timer set for assignee selection or search filter changes

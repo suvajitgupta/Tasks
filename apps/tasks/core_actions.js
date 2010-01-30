@@ -549,15 +549,16 @@ Tasks.mixin({
       SC.Object.create({
         alertPaneDidDismiss: function(pane, status) {
           if(status === SC.BUTTON2_STATUS) {
+            SC.RunLoop.begin();
             var context = {};
             for (var i = 0; i < len; i++) {
               // Get and delete each selected task.
               var task = sel.nextObject(i, null, context);
-              SC.RunLoop.begin();
               task.destroy();
-              SC.RunLoop.end();
             }
+            SC.RunLoop.end();
             Tasks.deselectTasks();
+            Tasks.projectController.propertyDidChange('displayTasks');
             if(Tasks.get('autoSave')) Tasks.saveData();
           }
         }
