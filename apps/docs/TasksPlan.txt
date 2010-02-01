@@ -15,9 +15,10 @@ Design/Planning
 - Design REST API supporting CRUD operations [SG] <SE> @Done
 - Design Tasks Server & evaluate persistence frameworks [SE] <SG> @Done
 - Design RBAC (role-based access control) to be implemented on GUI and Server <JH2> [SG] @Done
-| Managers have permission to do full CRUD on Projects/Tasks/Users
-| Developers/Testers can only R on Projects, full CRUD on Tasks
-| Guests can only R on Projects/Tasks, and CU unallocated Tasks
+| Any authenticated user can read Projects/Tasks and update their own User attributes (except role)
+| Only Managers can create/update/delete Projects & Users
+| Managers/Developers/Testers can create/update/delete Tasks
+| Guests can only create/update unallocated Tasks & update Task descriptions
 
 General Infrastructure
 ^ Develop Model and Fixtures (hardcoded & generated) [SG] <SE> @Done
@@ -88,7 +89,7 @@ v Add hover over tooltip for assignees to show how many tasks they have and to e
 - Beta: Support task Copy ID/Name and Copy Link Location (URL with "Route") to clipboard [SG] $Feature @Risky
 v Add task context menu with options: Add, Duplicate, Delete; All Task Attributes; Copy ID/Name, Copy Link [SG] $Feature @Done %Passed
 - Beta: Add ability to "Watch" tasks and get Email Notifications after task changes [SG] <JH2> $Feature
-- Add an indicator (dot) before Planned tasks that were created or updated within the last day <SE> [SG] $Feature @Done %Passed
+- Add an indicator (dot) before tasks that were created or updated within the last day <SE> [SG] $Feature @Done %Passed
 - Out of Scope: Add support for nested tasks/tagging $Feature
 | Use "Clustering" approach described in Help instead
 - Out of Scope: Add support for managing inter-task dependencies/linking $Feature
@@ -148,9 +149,10 @@ Server
 - Beta: Implement Server-based user authentication [JH2] <SG> @Active
 - Beta: Implement Server-based RBAC (role-based access control) <SG> [JH2] @Active
 - Beta: Send Email Notifications on noteworthy changes [JH2] <SG> $Feature @Active
-| Notify Assignee when Task is added by Submitter different than Assignee (via New or Reassignment operations)
-| Notify Assignee/Submitter if a Task is edited by someone other than them
-| Notify Assignee when Done Task is Failed
+| Don’t send email if email address is not provided
+| Notify Assignee when Task is created by Submitter different than Assignee
+| Notify Assignee/Submitter if a Task is updated by someone other than them (send single email if Assignee/Submitter are identical)
+| Notify Assignee when a Done Task is Failed
 | Notify Managers when Task is flagged as Risky
 - Add server-side data validation checks/return appropriate error codes [SE] <SG>
 
