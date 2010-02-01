@@ -58,6 +58,10 @@ Tasks.attributeFilterShowstoppers = [
 Tasks.DISPLAY_MODE_TASKS = true;
 Tasks.DISPLAY_MODE_TEAM = false;
 
+Tasks.FILTER_DONTCARE = -1;
+Tasks.FILTER_YES = 0;
+Tasks.FILTER_NO = 1;
+
 Tasks.assignmentsController = SC.ArrayController.create(
 /** @scope Tasks.assignmentsController.prototype */ {
   
@@ -65,6 +69,10 @@ Tasks.assignmentsController = SC.ArrayController.create(
   contentBinding: 'Tasks.projectController.displayTasks', // multi-project selection mode
   
   assignedTasks: null,
+  
+  effortSpecified: Tasks.FILTER_DONTCARE,
+  recentlyUpdated: Tasks.FILTER_DONTCARE,
+  
   _showTasks: true,
   _clearingUserSelection: false,
   displayMode: function(key, value) {

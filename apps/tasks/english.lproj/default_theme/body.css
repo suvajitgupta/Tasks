@@ -40,7 +40,8 @@ body {
 	background: #eee;
 }
 
-.sc-segmented-view {
+.display-modes {
+  font-size: 10px !important;
   font-weight: bold !important;
   text-transform: uppercase !important;
 }
@@ -113,6 +114,11 @@ body {
 .all .sc-button-inner,
 .all .sc-button-inner label {
   background: #555 !important;
+}
+
+.filter-label {
+  font-size: 10px !important;
+  color: #000 !important;
 }
 
 .sc-collection-view {

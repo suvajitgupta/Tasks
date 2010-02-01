@@ -1,7 +1,7 @@
 // ==========================================================================
 // Tasks.filterPane
 // ==========================================================================
-/*globals Tasks CoreTasks sc_require */
+/*globals Tasks CoreTasks SCUI sc_require */
 sc_require('core');
 sc_require('views/decorated_checkbox');
 
@@ -17,7 +17,7 @@ sc_require('views/decorated_checkbox');
 
 Tasks.filterPane = SC.PanelPane.create({  
   
-  layout: { top: 78, right: 90, height: 360, width: 300 },
+  layout: { top: 78, right: 90, height: 460, width: 300 },
   classNames: ['filter-pane'],
   
   contentView: SC.View.design({
@@ -253,6 +253,50 @@ Tasks.filterPane = SC.PanelPane.create({
           valueBinding: 'Tasks.assignmentsController.attributeFilterValidationFailed'
         })
 
+      }),
+
+      SC.LabelView.design({
+        layout: { bottom: 90, height: 22, left: 15, width: 95 },
+        classNames: ['filter-label'],
+        textAlign: SC.ALIGN_RIGHT,
+        value: "_EffortSpecified:".loc()
+      }),
+
+      SC.SegmentedView.design(SCUI.ToolTip, {
+        layout: { bottom: 92, height: 24, left: 100, right: 10 },
+        classNames: ['filter-label'],
+        layoutDirection: SC.LAYOUT_HORIZONTAL,
+        items: [
+          { title: "_DontCare".loc(), value: Tasks.FILTER_DONTCARE },
+          { title: "_Yes".loc(), value: Tasks.FILTER_YES },
+          { title: "_No".loc(), value: Tasks.FILTER_NO }
+        ],
+        itemTitleKey: 'title',
+        itemValueKey: 'value',
+        toolTip: "_EffortSpecifiedTooltip".loc(),
+        valueBinding: 'Tasks.assignmentsController.effortSpecified'
+      }),
+
+      SC.LabelView.design({
+        layout: { bottom: 55, height: 22, left: 15, width: 95 },
+        classNames: ['filter-label'],
+        textAlign: SC.ALIGN_RIGHT,
+        value: "_RecentlyUpdated:".loc()
+      }),
+
+      SC.SegmentedView.design(SCUI.ToolTip, {
+        layout: { bottom: 57, height: 24, left: 100, right: 10 },
+        classNames: ['filter-label'],
+        layoutDirection: SC.LAYOUT_HORIZONTAL,
+        items: [
+          { title: "_DontCare".loc(), value: Tasks.FILTER_DONTCARE },
+          { title: "_Yes".loc(), value: Tasks.FILTER_YES },
+          { title: "_No".loc(), value: Tasks.FILTER_NO }
+        ],
+        itemTitleKey: 'title',
+        itemValueKey: 'value',
+        toolTip: "_RecentlyUpdatedTooltip".loc(),
+        valueBinding: 'Tasks.assignmentsController.recentlyUpdated'
       }),
 
       SC.ButtonView.design({
