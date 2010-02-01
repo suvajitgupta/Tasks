@@ -149,11 +149,12 @@ Server
 - Beta: Implement Server-based user authentication [JH2] <SG> @Active
 - Beta: Implement Server-based RBAC (role-based access control) <SG> [JH2] @Active
 - Beta: Send Email Notifications on noteworthy changes [JH2] <SG> $Feature @Active
-| Don’t send email if email address is not provided
-| Notify Assignee when Task is created by Submitter different than Assignee
-| Notify Assignee/Submitter if a Task is updated by someone other than them (send single email if Assignee/Submitter are identical)
-| Notify Assignee when a Done Task is Failed
+| Notify Submitter/Assignee when Task is created/deleted by someone other than them
 | Notify Managers when Task is flagged as Risky
+| Notify Assignee when a Done Task is Failed
+| 
+| Don’t send email if Email address is unspecified
+| Send a single email if Assignee/Submitter are identical
 - Add server-side data validation checks/return appropriate error codes [SE] <SG>
 
 Styling/Hardening
