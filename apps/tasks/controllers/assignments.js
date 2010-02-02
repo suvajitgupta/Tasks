@@ -70,9 +70,6 @@ Tasks.assignmentsController = SC.ArrayController.create(
   
   assignedTasks: null,
   
-  effortSpecified: Tasks.FILTER_DONTCARE,
-  recentlyUpdated: Tasks.FILTER_DONTCARE,
-  
   _showTasks: true,
   _clearingUserSelection: false,
   displayMode: function(key, value) {
@@ -93,6 +90,8 @@ Tasks.assignmentsController = SC.ArrayController.create(
   userSelection: null,
   searchFilter: null,
   attributeFilterCriteria: Tasks.attributeFilterNone.slice(0),
+  effortSpecified: Tasks.FILTER_DONTCARE,
+  recentlyUpdated: Tasks.FILTER_DONTCARE,
   
   attributeFilter: function(name, value) {
     var newFilterCriteria;
@@ -182,8 +181,9 @@ Tasks.assignmentsController = SC.ArrayController.create(
   },
   
   attributeFilterIcon: function() {
-    return this.attributeFilterCriteria.length === 13? 'filter-tasks-icon-no-criteria' : 'filter-tasks-icon-has-criteria';
-  }.property('attributeFilterCriteria'),
+    return this.attributeFilterCriteria.length === 13 && this.effortSpecified === Tasks.FILTER_DONTCARE &&  this.recentlyUpdated === Tasks.FILTER_DONTCARE?
+    'filter-tasks-icon-no-criteria' : 'filter-tasks-icon-has-criteria';
+  }.property('attributeFilterCriteria', 'effortSpecified', 'recentlyUpdated').cacheable(),
   
   hasFiltering: function() {
     return this.userSelection || this.searchFilter || this.attributeFilterCriteria.length !== 13;
@@ -209,14 +209,16 @@ Tasks.assignmentsController = SC.ArrayController.create(
     this.set('attributeFilterCriteria', Tasks.attributeFilterShowstoppers.slice(0));
   },
 
-  setAttributeFilterNone: function() {
+  clearAttributeFilter: function() {
     this.set('attributeFilterCriteria', Tasks.attributeFilterNone.slice(0));
+    this.set('effortSpecified', Tasks.FILTER_DONTCARE);
+    this.set('recentlyUpdated', Tasks.FILTER_DONTCARE);
   },
 
   resetFilters: function() {
     this.set('userSelection', null);
     this.set('searchFilter', null);
-    this.setAttributeFilterNone();
+    this.clearAttributeFilter();
   },
   
   

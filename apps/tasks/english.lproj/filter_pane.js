@@ -95,7 +95,7 @@ Tasks.filterPane = SC.PanelPane.create({
             title: "_All".loc(),
             toolTip: "_AllTooltip".loc(),
             target: 'Tasks.assignmentsController',
-            action: 'setAttributeFilterNone'
+            action: 'clearAttributeFilter'
           })
           
         ]
