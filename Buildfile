@@ -1,6 +1,6 @@
 config :scui, :required => [:foundation, :calendar, :dashboard, :drawing, :linkit]
 config :'core-tasks', :required => [:sproutcore]
-config :tasks, :required => [:'core-tasks', :sproutcore, :scui],:title=>"Demo:Tasks"
+config :tasks, :required => [:'core-tasks', :sproutcore, :scui],:title=>"SproutCore:Tasks"
 
 # JH2's GAE backend - under development (needs to be updated to latest)
 # proxy '/tasks-server', :to => 'tasks-sc.appspot.com', :protocol => 'http'
