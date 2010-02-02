@@ -597,7 +597,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     var highCount = 0, mediumCount = 0, lowCount = 0;
     var plannedCount = 0, activeCount = 0, doneCount = 0, riskyCount = 0;
     var untestedCount = 0, passedCount = 0, failedCount = 0;
-    // TODO: [SG] Beta: compute/display statistics about assignees
+    // TODO: [SG] Beta: compute/display statistics about assignees/submitters
     
     var assigneesCount = 0;
     var assignmentNodes = this.getPath('assignedTasks.treeItemChildren');
@@ -644,7 +644,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
   
   },
   
-  generateStatistics: function() {
+  displayStatistics: function() {
     var ret = '';
     var stats = this.computeStatistics();
     var tasksCount = stats.tasksCount;
@@ -677,7 +677,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
   },
   
   showStatistics: function() {
-    this.generateStatistics();
+    this.displayStatistics();
     var panel = Tasks.getPath('statisticsPane');
     if(panel) panel.append();
   },

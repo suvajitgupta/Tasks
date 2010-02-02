@@ -172,6 +172,7 @@ Styling/Hardening
 - Perform I18N and L10N (test with reversed strings) [SG] <JH2> @Done %Passed
 - Develop Model unit tests [SG] <BB> @Active
 - Develop View unit tests [SG] <MB> @Active
+- Note all FIXMEs/TODOs/bugs & remove these as they are resolved [SG] @Active
 - Handle secondary scenarios/provide good diagnostics [SG] <SE> @Active
 
 Packaging/Delivery
@@ -181,7 +182,6 @@ Packaging/Delivery
 - Develop Mobile client using PhoneGap <MB> [SG] $Feature
 
 Testing/Rollout
-- Note all FIXMEs/TODOs/bugs & remove these as they are resolved [SG] @Active
-- Create automated test scripts using Selenium [SG] <MC>
+- Create automated test scripts using Lebowski/Selenium @Active [SG] <MC>
 - Collect/address feedback from Alpha/Beta users and targeted usability tests <MG> [SG] @Done %Passed
 v Provide SproutCore doctool-style comments [SG] <SE>
