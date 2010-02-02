@@ -3,6 +3,7 @@ sc_require('core');
 sc_require('models/record_attribute');
 
 CoreTasks.DATE_TIME_FORMAT = '%I:%M %p %a %b %d, %Y';
+CoreTasks.MILLISECONDS_IN_DAY = 24*60*60*1000;
 
 /**
  * The base record from which all models in the CoreTasks framework will derive.
@@ -76,6 +77,30 @@ CoreTasks.Record = SC.Record.extend({
     var time = this.get('updatedAt');
     return time? ("_Updated:".loc() + time.toFormattedString(CoreTasks.DATE_TIME_FORMAT)) : '';
   }.property('updatedAt'),
+
+  /**
+   * Check if record was created or updated recently.
+   */
+  isRecentlyUpdated: function() {
+    // First check if the record was created recently
+    var ageInDays = 0;
+    var now = SC.DateTime.create().get('milliseconds'), then;
+    var createdAt = this.get('createdAt');
+    if(createdAt) {
+      then = createdAt.get('milliseconds');
+      ageInDays = (now - then)/CoreTasks.MILLISECONDS_IN_DAY;
+    }
+    // Then check if the record was updated recently
+    if(ageInDays > 1) {
+      var updatedAt = this.get('updatedAt');
+      if(updatedAt) {
+        then = updatedAt.get('milliseconds');
+        ageInDays = (now - then)/CoreTasks.MILLISECONDS_IN_DAY;
+      }
+    }
+    // Decide if record was recently created/updated
+    return ageInDays <= 1? true : false;
+  }.property('createdAt', 'updatedAt').cacheable(),
 
   commit: function() {
     this.commitRecord();

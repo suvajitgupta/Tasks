@@ -65,8 +65,6 @@ CoreTasks.taskValidationWeights[CoreTasks.TASK_VALIDATION_UNTESTED] = 3;
 CoreTasks.taskValidationWeights[CoreTasks.TASK_VALIDATION_FAILED] = 2;
 CoreTasks.taskValidationWeights[CoreTasks.TASK_VALIDATION_PASSED] = 1;
 
-var MILLISECONDS_IN_DAY = 24*60*60*1000;
-
 /**
  * The task model.
  *
@@ -290,30 +288,6 @@ CoreTasks.Task = CoreTasks.Record.extend({
     }
   }.property('type').cacheable(),
   
-  /**
-   * Check if task was created or updated recently.
-   */
-  isRecentlyUpdated: function() {
-    // First check if the task was created recently
-    var ageInDays = 0;
-    var now = SC.DateTime.create().get('milliseconds'), then;
-    var createdAt = this.get('createdAt');
-    if(createdAt) {
-      then = createdAt.get('milliseconds');
-      ageInDays = (now - then)/MILLISECONDS_IN_DAY;
-    }
-    // Then check if the task was updated recently
-    if(ageInDays > 1) {
-      var updatedAt = this.get('updatedAt');
-      if(updatedAt) {
-        then = updatedAt.get('milliseconds');
-        ageInDays = (now - then)/MILLISECONDS_IN_DAY;
-      }
-    }
-    // Decide if it was recently created/updated
-    return ageInDays <= 1? true : false;
-  }.property('createdAt', 'updatedAt').cacheable(),
-
   /**
    * A string summarizing key facets of the Task for display.
    */
