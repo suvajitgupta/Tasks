@@ -302,6 +302,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
         
         // Filter tasks that meet filter criteria
         if(!isNewTask) {
+          
           var type = task.get('type');
           if(this.attributeFilterCriteria.indexOf(type) === -1) return;
           var priority = task.get('priority');
@@ -312,6 +313,21 @@ Tasks.assignmentsController = SC.ArrayController.create(
             var validation = task.get('validation');
             if(this.attributeFilterCriteria.indexOf(validation) === -1) return;
           }
+          
+          var effortSpecified = this.get('effortSpecified');
+          if(effortSpecified !== Tasks.FILTER_DONTCARE) {
+            var taskEffortSpecified = !SC.none(task.get('effort'));
+            if(effortSpecified === Tasks.FILTER_YES && !taskEffortSpecified) return;
+            if(effortSpecified === Tasks.FILTER_NO && taskEffortSpecified) return;
+          }
+          
+          var recentlyUpdated = this.get('recentlyUpdated');
+          if(recentlyUpdated !== Tasks.FILTER_DONTCARE) {
+            var taskRecentlyUpdated = task.get('isRecentlyUpdated');
+            if(recentlyUpdated === Tasks.FILTER_YES && !taskRecentlyUpdated) return;
+            if(recentlyUpdated === Tasks.FILTER_NO && taskRecentlyUpdated) return;
+          }
+          
           if(idMatches) { // one or more exact ID matches of task ID or IDs in name
             var taskId = task.get('displayId');
             if(idMatches.indexOf(taskId) === -1) { // doesn't match task ID exactly
