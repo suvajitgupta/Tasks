@@ -171,13 +171,19 @@ Tasks.assignmentsController = SC.ArrayController.create(
   }.property('attributeFilterCriteria'),
   
   attributeFilterCriteriaCopy: null,
+  effortSpecifiedCopy: null,
+  recentlyUpdatedCopy: null,
   
   backupAttributeFilterCriteria: function() {
     this.attributeFilterCriteriaCopy = this.attributeFilterCriteria.slice(0);
+    this.effortSpecifiedCopy = this.effortSpecified;
+    this.recentlyUpdatedCopy = this.recentlyUpdated;
   },
   
   restoreAttributeFilterCriteria: function() {
     this.set('attributeFilterCriteria', this.attributeFilterCriteriaCopy);
+    this.set('effortSpecified', this.effortSpecifiedCopy);
+    this.set('recentlyUpdated', this.recentlyUpdatedCopy);
   },
   
   attributeFilterIcon: function() {
