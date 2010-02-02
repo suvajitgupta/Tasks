@@ -12,8 +12,6 @@
   @author Joshua Holt
 */
 
-var MILLISECONDS_IN_DAY = 24*60*60*1000;
-
 Tasks.TaskItemView = SC.ListItemView.extend(
 /** @scope Tasks.TaskItemView.prototype */ {
   
@@ -424,34 +422,13 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     // console.log('DEBUG-ON: Task render(' + firstTime + '): ' + content.get('displayName'));
     sc_super();
     
-    // Put a badge before Planned tasks that were created or updated recently
-    var developmentStatus = content.get('developmentStatus');
-    
-    if(developmentStatus === CoreTasks.TASK_STATUS_PLANNED || developmentStatus === CoreTasks.TASK_STATUS_RISKY) {
-      // First check if the task was created recently
-      var ageInDays = 0;
-      var now = SC.DateTime.create().get('milliseconds'), then;
-      var createdAt = content.get('createdAt');
-      if(createdAt) {
-        then = createdAt.get('milliseconds');
-        ageInDays = (now - then)/MILLISECONDS_IN_DAY;
-      }
-      // Then check if the task was updated recently
-      if(ageInDays > 1) {
-        var updatedAt = content.get('updatedAt');
-        if(updatedAt) {
-          then = updatedAt.get('milliseconds');
-          ageInDays = (now - then)/MILLISECONDS_IN_DAY;
-        }
-      }
-      // Decide if it was recently created/updated
-      if(ageInDays <= 1) {
-        context = context.begin('img').addClass('recently-updated-task').attr({
-          src: SC.BLANK_IMAGE_URL,
-          title: "_NewTaskTooltip".loc(),
-          alt: "_NewTaskTooltip".loc()
-        }).end();
-      }
+    // Put a dot before tasks that were created or updated recently
+    if(content.isRecentlyUpdated()) {
+      context = context.begin('img').addClass('recently-updated-task').attr({
+        src: SC.BLANK_IMAGE_URL,
+        title: "_RecentlyUpdatedTaskTooltip".loc(),
+        alt: "_RecentlyUpdatedTaskTooltip".loc()
+      }).end();
     }
 
     context.addClass((this.get('contentIndex') % 2 === 0)? 'even-item' : 'odd-item');
@@ -488,7 +465,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     context = context.begin('div').addClass('task-id').addClass(validationClass).
                 text(displayId).attr('title', idTooltip).attr('alt', idTooltip).end();
       
-    switch(developmentStatus){
+    switch(content.get('developmentStatus')){
       case CoreTasks.TASK_STATUS_PLANNED:
         context.addClass('task-status-planned');
         break;

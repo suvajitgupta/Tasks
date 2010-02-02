@@ -147,7 +147,7 @@ SC.stringsFor('English', {
   "_Description:": "Description:",
   "_DescriptionHint": "Enter detailed notes...",
   "_SubmitterTooltip": "Submitted by ",
-  "_NewTaskTooltip": "This dot indicates a Planned or Risky task created or updated within the last day",
+  "_RecentlyUpdatedTaskTooltip": "This dot indicates a task created or updated within the last day",
   "_TaskEffortTooltip": "Effort shown on right",
   "_TaskIdTooltip": "Unique ID for task; Dashes indicate unsaved tasks; Background color indicates validation status",
   "_TaskEditorTooltip": "Click to view/edit task details (submitter, assignee, effort, project, and description)",
