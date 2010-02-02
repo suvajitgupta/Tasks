@@ -31,7 +31,7 @@ Tasks.mainPage = SC.Page.design({
       
         SC.LabelView.design({
           layout: { left: 5, width: 200, centerY: 0, height: 42 },
-          classNames: [document.title.match(/Demo/)? 'demo-logo' : 'sproutcore-logo']
+          classNames: [document.title.match(/Demo/)? 'demo-logo' : 'application-logo']
         }),
 
         Tasks.LogoView.design({
