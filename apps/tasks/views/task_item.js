@@ -423,7 +423,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     sc_super();
     
     // Put a dot before tasks that were created or updated recently
-    if(content.isRecentlyUpdated()) {
+    if(content.get('isRecentlyUpdated')) {
       context = context.begin('img').addClass('recently-updated-task').attr({
         src: SC.BLANK_IMAGE_URL,
         title: "_RecentlyUpdatedTaskTooltip".loc(),

@@ -294,7 +294,6 @@ CoreTasks.Task = CoreTasks.Record.extend({
    * Check if task was created or updated recently.
    */
   isRecentlyUpdated: function() {
-    var developmentStatus = this.get('developmentStatus');
     // First check if the task was created recently
     var ageInDays = 0;
     var now = SC.DateTime.create().get('milliseconds'), then;
@@ -313,7 +312,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
     }
     // Decide if it was recently created/updated
     return ageInDays <= 1? true : false;
-  },
+  }.property('createdAt', 'updatedAt').cacheable(),
 
   /**
    * A string summarizing key facets of the Task for display.
