@@ -31,11 +31,11 @@ Tasks.mainPage = SC.Page.design({
       
         SC.LabelView.design({
           layout: { left: 5, width: 200, centerY: 0, height: 42 },
-          classNames: ['installation-logo']
+          classNames: [document.title.match(/Demo/)? 'demo-logo' : 'sproutcore-logo']
         }),
 
         Tasks.LogoView.design({
-          layout: { left: 175, width: 150, centerY: 0, height: 42 }
+          layout: { left: document.title.match(/Demo/)? 80: 175, width: 150, centerY: 0, height: 42 }
         }),
 
         SC.LabelView.design(SCUI.ToolTip, {
