@@ -40,7 +40,7 @@ Tasks.settingsPage = SC.Page.create({
                 value: "_AddUser".loc(),
                 classNames: ['toolbar-label'],
                 toolTip: "_AddUserTooltip".loc(),
-                isEnabledBinding: 'CoreTasks.permissions.canAddUser',
+                isEnabledBinding: 'CoreTasks.permissions.canCreateUser',
                 target: 'Tasks',
                 action: 'addUser'
               }),

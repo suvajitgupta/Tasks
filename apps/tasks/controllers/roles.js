@@ -63,7 +63,7 @@ Tasks.rolesController = SC.TreeController.create(SC.CollectionViewDelegate,
   collectionViewPerformDragOperation: function(view, drag, dragOp, idx, dropOp) {
     var ret = SC.DRAG_MOVE;
     
-    if(!CoreTasks.permissions.get('canEditUserRole')) {
+    if(!CoreTasks.permissions.get('canUpdateUserRole')) {
       console.warn('You do not have permission to change user role');
       return ret;
     }

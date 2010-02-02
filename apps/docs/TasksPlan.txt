@@ -172,8 +172,7 @@ Styling/Hardening
 - Perform I18N and L10N (test with reversed strings) [SG] <JH2> @Done %Passed
 - Develop Model unit tests [SG] <BB> @Active
 - Develop View unit tests [SG] <MB> @Active
-- Note all FIXMEs/TODOs/bugs & remove these as they are resolved [SG] @Active
-- Handle secondary scenarios/provide good diagnostics [SG] <SE> @Active
+Update- Handle secondary scenarios/provide good diagnostics [SG] <SE> @Active
 
 Packaging/Delivery
 ^ Develop Web client (ported to Firefox, Internet Explorer, Safari, Chrome) [SG] $Feature @Done %Passed

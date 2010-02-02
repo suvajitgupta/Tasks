@@ -31,7 +31,7 @@ Tasks.tasksController = SC.TreeController.create(
     if(Tasks.projectsController.getPath('selection.length') !== 1) return false;
     if(Tasks.assignmentsController.get('displayMode') === Tasks.DISPLAY_MODE_TEAM) return false;
     
-    if(!CoreTasks.getPath('permissions.canAddTask')) return false;
+    if(!CoreTasks.getPath('permissions.canCreateTask')) return false;
     
     if(!this.canGuestAddEditTask()) return false;
     
@@ -41,7 +41,7 @@ Tasks.tasksController = SC.TreeController.create(
   
   isEditable: function() {
     
-    if(!CoreTasks.getPath('permissions.canEditTask')) return false;
+    if(!CoreTasks.getPath('permissions.canUpdateTask')) return false;
     
     if(!this.canGuestAddEditTask()) return false;
 
@@ -75,7 +75,7 @@ Tasks.tasksController = SC.TreeController.create(
   
   isValidatable: function() {
     
-    if(!CoreTasks.getPath('permissions.canEditTask')) return false;
+    if(!CoreTasks.getPath('permissions.canUpdateTask')) return false;
     
     if(!this.canGuestAddEditTask()) return false;
 

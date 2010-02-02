@@ -161,14 +161,14 @@ CoreTasks = SC.Object.create({
   
   // Stores access control rights for current user.
   permissions: SC.Object.create({
-    canAddProject: NO,
-    canEditProject: NO,
+    canCreateProject: NO,
+    canUpdateProject: NO,
     canDeleteProject: NO,
-    canAddTask: NO,
-    canEditTask: NO,
+    canCreateTask: NO,
+    canUpdateTask: NO,
     canDeleteTask: NO,
-    canAddUser: NO,
-    canEditUserRole: NO,
+    canCreateUser: NO,
+    canUpdateUserRole: NO,
     canDeleteUser: NO
   }),
   
@@ -177,37 +177,37 @@ CoreTasks = SC.Object.create({
     if(!this.currentUser) return;
     switch(this.currentUser.get('role')) {
       case CoreTasks.USER_ROLE_MANAGER:
-        this.permissions.set('canAddProject', YES);
-        this.permissions.set('canEditProject', YES);
+        this.permissions.set('canCreateProject', YES);
+        this.permissions.set('canUpdateProject', YES);
         this.permissions.set('canDeleteProject', YES);
-        this.permissions.set('canAddTask', YES);
-        this.permissions.set('canEditTask', YES);
+        this.permissions.set('canCreateTask', YES);
+        this.permissions.set('canUpdateTask', YES);
         this.permissions.set('canDeleteTask', YES);
-        this.permissions.set('canAddUser', YES);
-        this.permissions.set('canEditUserRole', YES);
+        this.permissions.set('canCreateUser', YES);
+        this.permissions.set('canUpdateUserRole', YES);
         this.permissions.set('canDeleteUser', YES);
         break;
       case CoreTasks.USER_ROLE_DEVELOPER:
       case CoreTasks.USER_ROLE_TESTER:
-        this.permissions.set('canAddProject', NO);
-        this.permissions.set('canEditProject', NO);
+        this.permissions.set('canCreateProject', NO);
+        this.permissions.set('canUpdateProject', NO);
         this.permissions.set('canDeleteProject', NO);
-        this.permissions.set('canAddTask', YES);
-        this.permissions.set('canEditTask', YES);
+        this.permissions.set('canCreateTask', YES);
+        this.permissions.set('canUpdateTask', YES);
         this.permissions.set('canDeleteTask', YES);
-        this.permissions.set('canAddUser', NO);
-        this.permissions.set('canEditUserRole', NO);
+        this.permissions.set('canCreateUser', NO);
+        this.permissions.set('canUpdateUserRole', NO);
         this.permissions.set('canDeleteUser', NO);
         break;
       case CoreTasks.USER_ROLE_GUEST:
-        this.permissions.set('canAddProject', NO);
-        this.permissions.set('canEditProject', NO);
+        this.permissions.set('canCreateProject', NO);
+        this.permissions.set('canUpdateProject', NO);
         this.permissions.set('canDeleteProject', NO);
-        this.permissions.set('canAddTask', YES);
-        this.permissions.set('canEditTask', YES);
+        this.permissions.set('canCreateTask', YES);
+        this.permissions.set('canUpdateTask', YES);
         this.permissions.set('canDeleteTask', NO);
-        this.permissions.set('canAddUser', NO);
-        this.permissions.set('canEditUserRole', NO);
+        this.permissions.set('canCreateUser', NO);
+        this.permissions.set('canUpdateUserRole', NO);
         this.permissions.set('canDeleteUser', NO);
         break;
     }

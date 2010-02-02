@@ -68,7 +68,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
             }),
             SC.TextFieldView.design({
               layout: { top: 10, left: 75, width: 80, height: 20 },
-              isEnabledBinding: 'CoreTasks.permissions.canEditProject',
+              isEnabledBinding: 'CoreTasks.permissions.canUpdateProject',
               valueBinding: SC.binding('.content.timeLeftValue', this)
             }),
             SC.LabelView.design({
@@ -86,7 +86,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
               layout: { top: 65, left: 10, right: 10, bottom: 25 },
               hint: "_DescriptionHint".loc(),
               isTextArea: YES,
-              isEnabledBinding: 'CoreTasks.permissions.canEditProject',
+              isEnabledBinding: 'CoreTasks.permissions.canUpdateProject',
               valueBinding: SC.binding('.content.description', this)
             }),
             SC.LabelView.design({
@@ -131,7 +131,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     
     var ret = [];
     
-    if(CoreTasks.getPath('permissions.canAddProject')) {
+    if(CoreTasks.getPath('permissions.canCreateProject')) {
       ret.push({
         title: "_Add".loc(),
         icon: 'add-icon',
@@ -142,7 +142,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     }
     
     if(Tasks.projectsController.getPath('selection.length') === 1 &&
-      !isSystemProject && CoreTasks.getPath('permissions.canAddProject')) {
+      !isSystemProject && CoreTasks.getPath('permissions.canCreateProject')) {
       ret.push({
         title: "_Duplicate".loc(),
         icon: 'project-duplicate-icon',
@@ -167,7 +167,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
   },
   
   inlineEditorWillBeginEditing: function(inlineEditor) {
-    if(!CoreTasks.getPath('permissions.canEditProject')) {
+    if(!CoreTasks.getPath('permissions.canUpdateProject')) {
       console.warn('You do not have permission to edit a project');
       inlineEditor.discardEditing();
     }

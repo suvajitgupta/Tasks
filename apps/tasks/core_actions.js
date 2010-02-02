@@ -368,7 +368,7 @@ Tasks.mixin({
    */
   _createProject: function(duplicate) {
     
-    if(!CoreTasks.getPath('permissions.canAddProject')) {
+    if(!CoreTasks.getPath('permissions.canCreateProject')) {
       console.warn('You do not have permission to add or duplicate a project');
       return null;
     }
@@ -594,7 +594,7 @@ Tasks.mixin({
    */
   addUser: function() {
 
-    if(!CoreTasks.getPath('permissions.canAddUser')) {
+    if(!CoreTasks.getPath('permissions.canCreateUser')) {
       console.warn('You do not have permission to add a user');
       return null;
     }

@@ -55,7 +55,7 @@ Tasks.UserInformationView = SC.View.extend(
       localize: YES,
       objects: CoreTasks.roles,
       valueBinding: SC.binding('*content.role', this),
-      isEnabledBinding: 'CoreTasks.permissions.canEditUserRole'
+      isEnabledBinding: 'CoreTasks.permissions.canUpdateUserRole'
     }));
     childViews.push(this.roleField);
     

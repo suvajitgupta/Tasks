@@ -145,7 +145,7 @@ Tasks.importDataController = SC.ObjectController.create(
             if(CoreTasks.getPath('currentUser.role') !== CoreTasks.USER_ROLE_GUEST) currentProject = projectRecord;
           }
           else { // create new project if allowed and switch to it if allowed
-            if(CoreTasks.getPath('permissions.canAddProject')) {
+            if(CoreTasks.getPath('permissions.canCreateProject')) {
               projectRecord = CoreTasks.createRecord(CoreTasks.Project, projectHash);
               if(projectRecord) currentProject = projectRecord;
               else console.error('Import: project creation failed!');
