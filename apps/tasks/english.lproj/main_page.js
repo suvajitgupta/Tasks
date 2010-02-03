@@ -527,18 +527,11 @@ Tasks.mainPage = SC.Page.design({
     statusBarView: SC.View.design(SC.Border, {
       layout: { bottom: 0, height: 20, left: 0, right: 0 },
       classNames: ['status-bar'],
-      childViews: ['summaryView', 'statisticsButton', 'serverMessageView', 'autoSaveCheckbox'],
+      childViews: ['statisticsButton', 'summaryView', 'serverMessageView', 'autoSaveCheckbox'],
       borderStyle: SC.BORDER_TOP,
         
-      summaryView: Tasks.SummaryView.design({
-        layout: { centerY: 0, height: 16, left: 5, width: 400 },
-        classNames: ['status-bar-label'],
-        projectsCountBinding: SC.Binding.oneWay('Tasks.projectsController.length'),
-        tasksTreeBinding: SC.Binding.oneWay('Tasks.tasksController.content')
-      }),
-        
       statisticsButton: SC.LabelView.design( SCUI.SimpleButton, {
-        layout: { centerY: 0, height: 16, centerX: -30, width: 90 },
+        layout: { centerY: 0, height: 16, left: 230, width: 90 },
         titleMinWidth: 0,
         classNames: ['status-bar-button'],
         value: "_ShowStatistics".loc(),
@@ -549,8 +542,15 @@ Tasks.mainPage = SC.Page.design({
         action: 'projectStatistics'
       }),
       
+      summaryView: Tasks.SummaryView.design({
+        layout: { centerY: 0, height: 16, centerX: 0, width: 250 },
+        classNames: ['status-bar-label'],
+        textAlign: SC.ALIGN_CENTER,
+        tasksTreeBinding: SC.Binding.oneWay('Tasks.tasksController.content')
+      }),
+        
       serverMessageView: SC.LabelView.design({
-        layout: { centerY: 0, height: 16, right: 95, width: 400 },
+        layout: { centerY: 0, height: 16, right: 95, width: 350 },
         classNames: ['status-bar-label'],
         textAlign: SC.ALIGN_RIGHT,
         value: ''

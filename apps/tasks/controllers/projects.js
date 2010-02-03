@@ -30,7 +30,7 @@ Tasks.projectsController = SC.ArrayController.create(SCUI.StatusChanged,
         else projectsSources.push(project);
       }
       nodes.push(SC.Object.create({ displayName: "_System".loc(), treeItemChildren: tasksSources, treeItemIsExpanded: YES }));
-      nodes.push(SC.Object.create({ displayName: "_Projects".loc(), treeItemChildren: projectsSources.sort(function(a,b) {
+      nodes.push(SC.Object.create({ displayName: projectsSources.length + ' ' + "_Projects".loc(), treeItemChildren: projectsSources.sort(function(a,b) {
         var aName = a.get('name');
         var bName = b.get('name');
         if(aName === bName) return 0;

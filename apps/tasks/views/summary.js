@@ -7,28 +7,25 @@
 
   Display number of Tasks in selected Project.
   
-  @extends SC.View
+  @extends SC.LabelView
   @author Suvajit Gupta
 */
 
-Tasks.SummaryView = SC.View.extend(
+Tasks.SummaryView = SC.LabelView.extend(
 /** @scope Tasks.SummaryView.prototype */ {
   
-  projectsCount: '',
   tasksTree: '',
-
-  displayProperties: ['projectsCount', 'tasksTree'],
+  displayProperties: ['tasksTree'],
   
   render: function(context, firstTime) {
 
-    var projectsCount = this.get('projectsCount');
-    var summary = "_Displaying".loc() + (projectsCount < 2? 0 : projectsCount-2) + "_projects".loc();
-
+    console.log('DEBUG: SummaryView.render()');
+    var summary = '';
     if(this.tasksTree) {
       var assigneesCount = 0;
       var assignmentNodes = this.tasksTree.get('treeItemChildren');
       if(assignmentNodes) assigneesCount = assignmentNodes.get('length');
-      summary += assigneesCount + "_assignees".loc();
+      summary += ("_Displaying".loc() + assigneesCount + "_assignees".loc());
 
       var tasksCount = 0;
       var redFlags = 0;
@@ -48,7 +45,8 @@ Tasks.SummaryView = SC.View.extend(
     }
     
     // display value
-    context.push(summary);
+    this.set('value', summary);
+    sc_super();
     
   }
   

@@ -49,20 +49,20 @@ Tasks.usersController = SC.ArrayController.create(SCUI.StatusChanged,
         }
       }
       if(isManager || managerRoles.get('length') > 0) {
-        nodes.push(SC.Object.create({ displayName: CoreTasks.USER_ROLE_MANAGER.loc() + 's', role: CoreTasks.USER_ROLE_MANAGER,
-                   treeItemChildren: managerRoles, treeItemIsExpanded: YES }));
+        nodes.push(SC.Object.create({ displayName: managerRoles.length + ' ' + CoreTasks.USER_ROLE_MANAGER.loc() + 's',
+                   role: CoreTasks.USER_ROLE_MANAGER, treeItemChildren: managerRoles, treeItemIsExpanded: YES }));
       }
       if(isManager || developerRoles.get('length') > 0) {
-        nodes.push(SC.Object.create({ displayName: CoreTasks.USER_ROLE_DEVELOPER.loc() + 's', role: CoreTasks.USER_ROLE_DEVELOPER,
-                   treeItemChildren: developerRoles, treeItemIsExpanded: YES }));
+        nodes.push(SC.Object.create({ displayName: developerRoles.length + ' ' + CoreTasks.USER_ROLE_DEVELOPER.loc() + 's',
+                   role: CoreTasks.USER_ROLE_DEVELOPER, treeItemChildren: developerRoles, treeItemIsExpanded: YES }));
       }
       if(isManager || testerRoles.get('length') > 0) {
-        nodes.push(SC.Object.create({ displayName: CoreTasks.USER_ROLE_TESTER.loc() + 's', role: CoreTasks.USER_ROLE_TESTER,
-                   treeItemChildren: testerRoles, treeItemIsExpanded: YES }));
+        nodes.push(SC.Object.create({ displayName: testerRoles.length + ' ' + CoreTasks.USER_ROLE_TESTER.loc() + 's',
+                   role: CoreTasks.USER_ROLE_TESTER, treeItemChildren: testerRoles, treeItemIsExpanded: YES }));
       }
       if(isManager || guestRoles.get('length') > 0) {
-        nodes.push(SC.Object.create({ displayName: CoreTasks.USER_ROLE_GUEST.loc() + 's', role: CoreTasks.USER_ROLE_GUEST,
-                   treeItemChildren: guestRoles, treeItemIsExpanded: YES }));
+        nodes.push(SC.Object.create({ displayName: guestRoles.length + ' ' + CoreTasks.USER_ROLE_GUEST.loc() + 's',
+                   role: CoreTasks.USER_ROLE_GUEST, treeItemChildren: guestRoles, treeItemIsExpanded: YES }));
       }
     }
 

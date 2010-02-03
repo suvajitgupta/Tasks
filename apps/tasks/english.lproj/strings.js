@@ -186,7 +186,7 @@ SC.stringsFor('English', {
   // Status Bar strings
   "_Displaying": "Displaying ",
   "_projects": " projects, ",
-  "_assignees": " assignees, and ",
+  "_assignees": " assignees and ",
   "_RedFlags": " red flags",
   "_AutoSave": "Auto Save",
   "_AutoSaveTooltip": "Automatially save changes to the server, otherwise you have to press \"Save\" button periodically",
