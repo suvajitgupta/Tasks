@@ -527,8 +527,16 @@ Tasks.mainPage = SC.Page.design({
     statusBarView: SC.View.design(SC.Border, {
       layout: { bottom: 0, height: 20, left: 0, right: 0 },
       classNames: ['status-bar'],
-      childViews: ['statisticsButton', 'summaryView', 'serverMessageView', 'autoSaveCheckbox'],
+      childViews: ['selectionView', 'statisticsButton', 'summaryView', 'serverMessageView', 'autoSaveCheckbox'],
       borderStyle: SC.BORDER_TOP,
+        
+      selectionView: Tasks.SelectionView.design({
+        layout: { centerY: 0, height: 16, left: 10, width: 220 },
+        classNames: ['status-bar-label'],
+        textAlign: SC.ALIGN_LEFT,
+        projectsSelectionBinding: SC.Binding.oneWay('Tasks.projectsController.selection'),
+        tasksSelectionBinding: SC.Binding.oneWay('Tasks.tasksController.selection')
+      }),
         
       statisticsButton: SC.LabelView.design( SCUI.SimpleButton, {
         layout: { centerY: 0, height: 16, left: 230, width: 90 },

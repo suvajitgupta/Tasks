@@ -184,8 +184,9 @@ SC.stringsFor('English', {
   "_Users": " registered users",
   
   // Status Bar strings
+  "_Selected": "Selected ",
   "_Displaying": "Displaying ",
-  "_projects": " projects, ",
+  "_projects": " projects and ",
   "_assignees": " assignees and ",
   "_RedFlags": " red flags",
   "_AutoSave": "Auto Save",

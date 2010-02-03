@@ -14,18 +14,17 @@
 Tasks.SummaryView = SC.LabelView.extend(
 /** @scope Tasks.SummaryView.prototype */ {
   
-  tasksTree: '',
+  tasksTree: null,
   displayProperties: ['tasksTree'],
   
   render: function(context, firstTime) {
 
-    console.log('DEBUG: SummaryView.render()');
-    var summary = '';
+    var message = '';
     if(this.tasksTree) {
       var assigneesCount = 0;
       var assignmentNodes = this.tasksTree.get('treeItemChildren');
       if(assignmentNodes) assigneesCount = assignmentNodes.get('length');
-      summary += ("_Displaying".loc() + assigneesCount + "_assignees".loc());
+      message += ("_Displaying".loc() + assigneesCount + "_assignees".loc());
 
       var tasksCount = 0;
       var redFlags = 0;
@@ -37,15 +36,15 @@ Tasks.SummaryView = SC.LabelView.extend(
         if(riskyTasksCount > 0 || failedTasksCount > 0) redFlags++;
       }
       if(Tasks.assignmentsController.get('displayMode') === Tasks.DISPLAY_MODE_TEAM) {
-        summary += redFlags + "_RedFlags".loc();
+        message += redFlags + "_RedFlags".loc();
       }
       else { // display mode === Tasks.DISPLAY_MODE_TASKS
-        summary += tasksCount + "_tasks".loc();
+        message += tasksCount + "_tasks".loc();
       }
     }
     
     // display value
-    this.set('value', summary);
+    this.set('value', message);
     sc_super();
     
   }
