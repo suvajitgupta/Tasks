@@ -187,6 +187,7 @@ Tasks.mixin({
         if(project) defaultProject = project;
       }
       this.set('defaultProject', defaultProject);
+      Tasks.sourcesController.propertyDidChange('arrangedObjects');
     }
     
     this.dataLoadSuccess();

@@ -16,12 +16,12 @@ Tasks.projectsController = SC.ArrayController.create(SCUI.StatusChanged,
   
   showSources: function() {
     
-    // console.log('DEBUG-ON: projectsController content changed, editorPoppedUp=' + Tasks.editorPoppedUp);
+    var projects = this.get('arrangedObjects');
+    // console.log('DEBUG-ON: projectsController content changed, editorPoppedUp=' + Tasks.editorPoppedUp + ', projects: ' + projects.getEach('name'));
     Tasks.sourcesRedrawNeeded = true;
     if(Tasks.editorPoppedUp) return;
     
     var nodes = [], tasksSources = [], projectsSources = [];
-    var projects = this.get('arrangedObjects');
     if(projects) {
       var len = projects.get('length');
       for (var i = 0; i < len; i++) {
