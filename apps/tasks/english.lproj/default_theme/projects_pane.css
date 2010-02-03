@@ -60,15 +60,14 @@
 .project-item .sc-outline .count {
 	font-weight: normal !important;
   line-height: 11px !important;
-  color: black !important;
-  border: 1px solid #CCC !important;
-  background: #FFF none repeat scroll 0 0 !important;
+  color: white !important;
+  border: 1px solid silver !important;
+  background: #999 none repeat scroll 0 0 !important;
 }
 
 .project-item.sel .sc-outline .count {
-  color: #14398e !important;
-  background: #c1dbff;
-  border: 1px solid #c1dbff !important;
+  color: #555 !important;
+  background: white none repeat scroll 0 0 !important;
 }
 
 .project-icon-has-tasks {
