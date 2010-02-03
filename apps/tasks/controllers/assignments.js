@@ -250,7 +250,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
         // console.log('DEBUG: selected ' + (assigneeSearch? 'assignees' : 'submitters') + ' = ' + userSelectionNames);
         for (var i = 0; i < userSelectionNames.length; i++) {
           var userSelectionName = userSelectionNames[i];
-          if(userSelectionName.match(/none/i)) {
+          if(userSelectionName.toLowerCase() === CoreTasks.USER_NONE) {
             userSelectionDisplayNames.push(CoreTasks.USER_UNASSIGNED);
           }
           else {
