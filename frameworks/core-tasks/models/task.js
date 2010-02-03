@@ -314,25 +314,27 @@ CoreTasks.Task = CoreTasks.Record.extend({
       }
       
       if(taskHash.submitterId) {
-        var submitterUser = CoreTasks.getUser(taskHash.submitterId);
-        if (!submitterUser) {
+        var submitterNone = (taskHash.submitterId.toLowerCase() === CoreTasks.USER_NONE);
+        var submitterUser = submitterNone? null : CoreTasks.getUser(taskHash.submitterId);
+        if (!submitterNone && !submitterUser) {
           console.warn('Task Editing Error - no such submitter: ' + taskHash.submitterId);
         }
         else {
           this.propertyWillChange('submitterId');
-          this.writeAttribute('submitterId', submitterUser.get('id'));
+          this.writeAttribute('submitterId', submitterUser? submitterUser.get('id') : null);
           this.propertyDidChange('submitterId');
         }
       }
       
       if(taskHash.assigneeId) {
-        var assigneeUser = CoreTasks.getUser(taskHash.assigneeId);
-        if (!assigneeUser) {
+        var assigneeNone = (taskHash.assigneeId.toLowerCase() === CoreTasks.USER_NONE);
+        var assigneeUser = assigneeNone? null : CoreTasks.getUser(taskHash.assigneeId);
+        if (!assigneeNone && !assigneeUser) {
           console.warn('Task Editing Error - no such assignee: ' + taskHash.assigneeId);
         }
         else {
           this.propertyWillChange('assigneeId');
-          this.writeAttribute('assigneeId', assigneeUser.get('id'));
+          this.writeAttribute('assigneeId', assigneeUser? assigneeUser.get('id') : null);
           this.propertyDidChange('assigneeId');
         }
       }
