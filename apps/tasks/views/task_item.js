@@ -74,6 +74,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         remove: function() {
           sc_super();
           Tasks.editorPoppedUp = false;
+          that.get('content').set('description', that._editorPane.getPath('contentView.childViews').objectAt(10).get('value'));
           if(Tasks.assignmentsRedrawNeeded) {
             Tasks.assignmentsController.showAssignments();
           }
@@ -151,7 +152,8 @@ Tasks.TaskItemView = SC.ListItemView.extend(
               hint: "_DescriptionHint".loc(),
               isTextArea: YES,
               isEnabled: YES,
-              valueBinding: SC.binding('.content.description', this)
+              // valueBinding: SC.binding('.content.description', this)
+              value: that.getPath('content.description')
             }),
             SC.LabelView.design({
               layout: { left:10, bottom: 5, height: 17, width: 250 },
