@@ -52,12 +52,13 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' padding-bottom: 2px;\n' +
 '}\n' +
 'pre {\n' +
-' margin-top: -4px;\n' +
+' margin-top: -5px;\n' +
 ' margin-bottom: 8px;\n' +
 ' margin-left: 120px;\n' +
 ' background-color: beige;\n' +
 ' white-space: pre-wrap;\n' +
 ' word-wrap: break-word;\n' +
+' border: 1px solid silver;\n' +
 '}\n' +
 '.untested, .passed, .failed, .feature, .bug, .other {\n' +
 ' display: inline-block;\n' +
