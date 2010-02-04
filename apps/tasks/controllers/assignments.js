@@ -648,7 +648,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     var ret = '';
     var stats = this.computeStatistics();
     var tasksCount = stats.tasksCount;
-    if(tasksCount > 0) {
+    if(tasksCount > 0 && (stats.featureCount+stats.bugCount+stats.otherCount) > 0) {
       var blank = sc_static('blank');
       ret += '<table width="100%"><tr class="even">';
       ret += ('<td><span class="task-attribute-set-title">' + "_Type".loc() + '</td>');
