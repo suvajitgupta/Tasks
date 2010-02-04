@@ -175,15 +175,20 @@
 .task-item .sc-outline .count {
   margin-top: 0px !important;
   top: 5px !important;
-	font-weight: normal !important;
-	font-style: normal !important;
-  line-height: 11px !important;
-  color: white !important;
-  border: 1px solid silver !important;
-  background: gray none repeat scroll 0 0 !important;
 }
 
-.task-item.sel .sc-outline .count {
+.task-item .sc-outline .count,
+.project-item .sc-outline .count {
+	font-weight: normal !important;
+  line-height: 11px !important;
+  color: white !important;
+  border: 1px solid #99C !important;
+  background: #99C none repeat scroll 0 0 !important;
+}
+
+
+.task-item.sel .sc-outline .count,
+.project-item.sel .sc-outline .count {
   color: #555 !important;
   background: white none repeat scroll 0 0 !important;
 }
@@ -262,38 +267,33 @@
  * Task validation styles
  */
 
-.task-validation-untested {
+.task-validation-untested, .task-validation-passed, .task-validation-failed {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 3px;
   padding-right: 3px;
+}
+
+.task-validation-untested {
   color: black;
   background: #FFF none repeat scroll 0 0;
 	outline: 1px solid #AAA !important;
 }
 
-.task-validation-passed {
-  padding-top: 1px;
-  padding-bottom: 1px;
-  padding-left: 3px;
-  padding-right: 3px;
+.task-validation-passed, .task-validation-failed {
   color: white;
-  background: #363 none repeat scroll 0 0;
-	outline: 1px solid #363 !important;
   opacity: 0.85;
   text-shadow: none !important;
 }
 
+.task-validation-passed {
+  background: #363 none repeat scroll 0 0;
+	outline: 1px solid #363 !important;
+}
+
 .task-validation-failed {
-  padding-top: 1px;
-  padding-bottom: 1px;
-  padding-left: 3px;
-  padding-right: 3px;
-  color: white;
   background: #C33 none repeat scroll 0 0;
 	outline: 1px solid #C33 !important;
-  opacity: 0.9;
-  text-shadow: none !important;
 }
 
 
