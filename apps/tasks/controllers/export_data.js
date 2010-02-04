@@ -27,7 +27,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 'h1, h2 {\n' +
 ' margin-top: 4px;\n' +
 ' margin-bottom: 4px;\n' +
-' padding: 2px 6px;\n' +
+' padding: 3px 6px;\n' +
 ' color: white;\n' +
 ' opacity: 0.85;\n' +
 ' -moz-border-radius: 5px;\n' +
@@ -35,8 +35,8 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 '}\n' +
 'h1 {\n' +
 ' font-size: 14px;\n' +
-' border: 1px solid black;\n' +
 ' background-color: black;\n' +
+' border: 1px solid black;\n' +
 '}\n' +
 'h2 {\n' +
 ' font-size: 11px;\n' +
@@ -72,29 +72,31 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' -webkit-border-radius: 15px;\n' +
 '}\n' +
 '.untested {\n' +
-' border: 1px solid gray;\n' +
 ' color: black;\n' +
 ' background-color: white;\n' +
+' border: 1px solid gray;\n' +
 '}\n' +
 '.not-loaded {\n' +
-' border: 1px solid #444;\n' +
 ' color: white;\n' +
 ' background-color: #444;\n' +
+' border: 1px solid #444;\n' +
 '}\n' +
 '.properly-loaded {\n' +
-' border: 1px solid blue;\n' +
 ' color: white;\n' +
-' background-color: blue;\n' +
+' background-color: #36F;\n' +
+' border: 1px solid #36F;\n' +
 '}\n' +
 '.passed, .under-loaded {\n' +
-' border: 1px solid green;\n' +
 ' color: white;\n' +
-' background-color: green;\n' +
+' background-color: #363;\n' +
+' border: 1px solid #363;\n' +
+' opacity: 0.85;\n' +
 '}\n' +
 '.failed, .overloaded {\n' +
-' border: 1px solid red;\n' +
 ' color: white;\n' +
-' background-color: red;\n' +
+' background-color: #C33;\n' +
+' border: 1px solid #C33;\n' +
+' opacity: 0.85;\n' +
 '}\n' +
 '.feature {\n' +
 ' color: black;\n' +
@@ -134,13 +136,13 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 '}\n' +
 '.effort {\n' +
 ' color: white;\n' +
-' border: 1px solid silver;\n' +
 ' background-color: gray;\n' +
+' border: 1px solid silver;\n' +
 '}\n' +
 '.time, .total {\n' +
 ' color: black;\n' +
-' border: 1px solid gray;\n' +
 ' background-color: white;\n' +
+' border: 1px solid gray;\n' +
 '}\n' +
 '.effort, .time {\n' +
 ' right: 10px;\n' +
