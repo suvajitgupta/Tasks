@@ -25,8 +25,11 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' font-size: 11px;\n' +
 '}\n' +
 'h1, h2 {\n' +
+' margin-top: 5px;\n' +
+' margin-bottom: 4px;\n' +
 ' padding: 3px 6px;\n' +
 ' color: white;\n' +
+' opacity: 0.85;\n' +
 ' -moz-border-radius: 5px;\n' +
 ' -webkit-border-radius: 5px;\n' +
 '}\n' +
@@ -40,7 +43,8 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' margin-left: 10px;\n' +
 '}\n' +
 'p {\n' +
-' margin-top: -5px;\n' +
+' margin-top: 4px;\n' +
+' margin-bottom: 4px;\n' +
 ' margin-left: 25px;\n' +
 ' border-color: silver;\n' +
 ' border-width: 1px;\n' +
@@ -48,11 +52,12 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' padding-bottom: 2px;\n' +
 '}\n' +
 'pre {\n' +
-' white-space: pre-wrap;\n' +
-' word-wrap: break-word;\n' +
-' margin-top: -9px;\n' +
+' margin-top: 0px;\n' +
+' margin-bottom: 5px;\n' +
 ' margin-left: 120px;\n' +
 ' background-color: beige;\n' +
+' white-space: pre-wrap;\n' +
+' word-wrap: break-word;\n' +
 '}\n' +
 '.untested, .passed, .failed, .feature, .bug, .other {\n' +
 ' display: inline-block;\n' +
@@ -72,9 +77,9 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' background-color: white;\n' +
 '}\n' +
 '.not-loaded {\n' +
-' border: 1px solid dimGray;\n' +
+' border: 1px solid #444;\n' +
 ' color: white;\n' +
-' background-color: dimGray;\n' +
+' background-color: #444;\n' +
 '}\n' +
 '.properly-loaded {\n' +
 ' border: 1px solid blue;\n' +
