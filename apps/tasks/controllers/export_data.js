@@ -27,7 +27,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 'h1, h2 {\n' +
 ' margin-top: 4px;\n' +
 ' margin-bottom: 4px;\n' +
-' padding: 3px 6px;\n' +
+' padding: 2px 6px;\n' +
 ' color: white;\n' +
 ' opacity: 0.85;\n' +
 ' -moz-border-radius: 5px;\n' +
