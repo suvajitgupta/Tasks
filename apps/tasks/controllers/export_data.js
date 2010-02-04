@@ -118,19 +118,26 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 '.risky {\n' +
 ' color: red;\n' +
 '}\n' +
-'.time, .total {\n' +
+'.effort, .time, .total {\n' +
 ' position: absolute;\n' +
-' color: black;\n' +
-' background-color: white;\n' +
 ' font-size: 10px;\n' +
 ' font-weight: normal;\n' +
-' border: 1px solid gray;\n' +
 ' padding: 0px 7px;\n' +
 ' -moz-border-radius: 7px;\n' +
 ' -webkit-border-radius: 7px;\n' +
 ' opacity: 0.85;\n' +
 '}\n' +
-'.time {\n' +
+'.effort {\n' +
+' color: white;\n' +
+' border: 1px solid silver;\n' +
+' background-color: gray;\n' +
+'}\n' +
+'.time, .total {\n' +
+' color: black;\n' +
+' border: 1px solid gray;\n' +
+' background-color: white;\n' +
+'}\n' +
+'.effort, .time {\n' +
 ' right: 10px;\n' +
 '}\n' +
 '.total {\n' +

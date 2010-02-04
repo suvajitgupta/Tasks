@@ -62,7 +62,7 @@
   line-height: 11px !important;
   color: white !important;
   border: 1px solid silver !important;
-  background: #999 none repeat scroll 0 0 !important;
+  background: gray none repeat scroll 0 0 !important;
 }
 
 .project-item.sel .sc-outline .count {

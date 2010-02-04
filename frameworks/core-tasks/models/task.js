@@ -404,7 +404,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
     
     var effort = this.get('effort');
     if(effort) {
-      if(format === 'HTML') ret += '&nbsp;<span class="time">';
+      if(format === 'HTML') ret += '&nbsp;<span class="effort">';
       else ret += ' {';
       ret += CoreTasks.displayTime(effort);
       if(format === 'HTML') ret += '</span>';
