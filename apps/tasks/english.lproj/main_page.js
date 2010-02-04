@@ -277,7 +277,7 @@ Tasks.mainPage = SC.Page.design({
           
           render: function(context, firstTime) {
             // console.log('DEBUG-ON: Projects Master render(), editorPoppedUp=' + Tasks.editorPoppedUp);
-            if(Tasks.loginTime) return;
+            if(CoreTasks.loginTime) return;
             sc_super();
           }
           
@@ -325,7 +325,7 @@ Tasks.mainPage = SC.Page.design({
           render: function(context, firstTime) {
           	
             // console.log('DEBUG-ON: Tasks Detail render(), editorPoppedUp=' + Tasks.editorPoppedUp);
-            if(Tasks.loginTime) return;
+            if(CoreTasks.loginTime) return;
             var sel = Tasks.projectsController.getPath('selection');
             var selectedProjectsCount = sel? sel.get('length') : 0;
             if(selectedProjectsCount === 0) { // No projects selected

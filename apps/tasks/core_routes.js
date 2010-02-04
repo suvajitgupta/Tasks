@@ -85,7 +85,7 @@ Tasks.mixin( /** @scope Tasks */ {
     if(SC.none(params.name)) {
       console.warn("Missing project name for URL routing");
     }
-    else if(this.loginTime) {
+    else if(CoreTasks.loginTime) {
       Tasks.set('defaultProjectName', params.name);
       Tasks.restart();
     }
@@ -102,7 +102,7 @@ Tasks.mixin( /** @scope Tasks */ {
     The catch-all case that gets fired if nothing else matches
   */
   routeDefault: function(params) {
-    if(this.loginTime) {
+    if(CoreTasks.loginTime) {
       // Enter the statechart.
       Tasks.goState('a', 1);
       Tasks.loginController.openPanel();

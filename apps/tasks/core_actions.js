@@ -14,7 +14,6 @@ sc_require('controllers/projects');
 
 Tasks.mixin({
 
-  loginTime: true, // to indicate when there is a login sequence in progress
   loginName: null,
 
   /**
@@ -102,7 +101,7 @@ Tasks.mixin({
     var currentUser = CoreTasks.getUser(this.loginName);
     if (currentUser) {
       
-      if(this.loginTime) {
+      if(CoreTasks.loginTime) {
         
         // Greet user and save login session information
         CoreTasks.set('currentUser', currentUser);
@@ -179,7 +178,7 @@ Tasks.mixin({
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', serverMessage.get('value') + "_ProjectsLoaded".loc() + new Date().format('hh:mm:ss a'));
 
-    if(this.loginTime) {
+    if(CoreTasks.loginTime) {
       var defaultProject = CoreTasks.get('unallocatedTasksProject');
       var defaultProjectName = this.get('defaultProjectName');
       if(defaultProjectName) { // if specified via a Route
@@ -200,8 +199,8 @@ Tasks.mixin({
     // console.log('DEBUG: dataLoadSuccess()');
     switch (this.state.a) {
       case 3:
-        if(this.loginTime) {
-          this.loginTime = false;
+        if(CoreTasks.loginTime) {
+          CoreTasks.loginTime = false;
           this.projectsController.selectObject(this.get('defaultProject'));
         }
         this.goState('a', 4);
@@ -332,7 +331,7 @@ Tasks.mixin({
     Tasks.getPath('mainPage.mainPane.userNameMessage').set('value', null);
     Tasks.getPath('mainPage.mainPane.userRoleMessage').set('value', null);
     CoreTasks.set('currentUser', null);
-    this.loginTime = true;
+    CoreTasks.loginTime = true;
     
     this.get('assignmentsController').resetFilters();
     this.usersController.set('content', null);

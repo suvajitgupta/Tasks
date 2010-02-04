@@ -69,22 +69,26 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
           console.log('Retrieved %@ matching %@ records.'.fmt(records.length, recordType));
           store.loadRecords(recordType, records);
 
-          // Identify/remove any records that have been deleted on server but exist in the store
-          var idsOnServer = [];
-          for(var i = 0, len = records.length; i < len; i++) {
-            idsOnServer[i] = '' + records[i].id;
-          }
-          var idsInStore = recordType.storeKeysById();
-          var deletedStoreKeys = [];
-          for(var id in idsInStore) {
-            if(id > 0 && idsOnServer.indexOf(id) < 0) {
-              deletedStoreKeys.push(idsInStore[id]);
+          if(!CoreTasks.loginTime) {
+            // Identify/remove any records that have been deleted on server but exist in the store
+            var idsOnServer = [];
+            for(var i = 0, len = records.length; i < len; i++) {
+              idsOnServer[i] = '' + records[i].id;
             }
-          }
-          for(var j = 0, n = deletedStoreKeys.length; j < n; j++) {
-            var storeKey = deletedStoreKeys[j];
-            store.removeDataHash(storeKey, SC.Record.DESTROYED_CLEAN);
-            store.dataHashDidChange(storeKey);
+            var idsInStore = recordType.storeKeysById();
+            var deletedStoreKeys = [];
+            for(var id in idsInStore) {
+              if(id > 0 && idsOnServer.indexOf(id) < 0) {
+                deletedStoreKeys.push(idsInStore[id]);
+              }
+            }
+            SC.RunLoop.begin();
+            for(var j = 0, n = deletedStoreKeys.length; j < n; j++) {
+              var storeKey = deletedStoreKeys[j];
+              store.removeDataHash(storeKey, SC.Record.DESTROYED_CLEAN);
+              store.dataHashDidChange(storeKey);
+            }
+            SC.RunLoop.end();
           }
 
           store.dataSourceDidFetchQuery(query);
