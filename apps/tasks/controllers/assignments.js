@@ -608,7 +608,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
       tasksCount = assignmentNode.get('tasksCount');
       totalTasksCount += tasksCount;
       var tasks = assignmentNode.get('treeItemChildren');
-      for(var j=0; j<tasksCount; j++) {
+      for(var j=0; tasks && j<tasksCount; j++) {
         var task = tasks.objectAt(j);
         switch(task.get('type')) {
           case CoreTasks.TASK_TYPE_FEATURE: featureCount++; break;
