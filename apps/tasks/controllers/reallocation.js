@@ -66,6 +66,7 @@ Tasks.reallocationController = SC.Object.create(SC.CollectionViewDelegate,
       }
     }       
   
+    // FIXME: [SC] Beta: how to get store to update before queries run - project.tasks not catching changes made for task reallocation
     // Redraw tasks list after reallocations are complete
     if(ret === SC.DRAG_MOVE) {
       if(Tasks.get('autoSave')) Tasks.saveData();
