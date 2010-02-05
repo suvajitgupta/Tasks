@@ -66,8 +66,10 @@ Tasks.reallocationController = SC.Object.create(SC.CollectionViewDelegate,
       }
     }       
   
+    // Redraw tasks list after reallocations are complete
     if(ret === SC.DRAG_MOVE) {
       if(Tasks.get('autoSave')) Tasks.saveData();
+      Tasks.assignmentsController.showAssignments();
     }
     return ret;
   },
