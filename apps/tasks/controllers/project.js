@@ -33,6 +33,31 @@ Tasks.projectController = SC.ObjectController.create(
     return ret;
   }.property('content').cacheable(),
 
+  _contentTasksDidChange: function() {
+    this.propertyDidChange('displayTasks');
+  },
+  
+  _updateDisplayTaskObserving: function() {
+    var content = this.get('content'),
+        observing = this._displayTaskObserving;
+     
+    // Tear down old observers
+    if (observing) {
+      observing.forEach(function(tasks) {
+        tasks.removeObserver('[]', this, this._contentTasksDidChange);
+      }, this);
+    }
+  
+    // Set up new observers
+    observing = this._displayTaskObserving = [];
+    content.forEach(function(project) {
+      var tasks = project.get('tasks');
+      observing.push(tasks);
+      tasks.addObserver('[]', this, this._contentTasksDidChange);
+    }, this);
+     
+  }.observes('content'),
+  
   _contentDidChange: function() { // set URL route when a single project is selected
     if(this.getPath('content.length') !== 1) return;
 
