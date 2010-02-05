@@ -38,7 +38,6 @@
 
 .project-item .sc-outline {
   left: 6px !important;
-  color: #222;
 }
 
 .project-item.sel .sc-outline {
@@ -57,16 +56,28 @@
   background: #CCC none repeat scroll 0 0 !important;
 }
 
-.project-icon-has-tasks {
-  width: 16px;
-  height: 16px;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -192px;
+/*
+// TODO: [MG] Beta: remove project has/no tasks icons in sprite
+*/
+
+.project-icon-has-description {
+  width: 16px !important;
+  height: 16px !important;
+  background: static_url('images/project-has-description.png') no-repeat 0 0;
 }
 
-.project-icon-no-tasks {
-  width: 16px;
-  height: 16px;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -176px;
+.project-icon-no-description {
+  width: 16px !important;
+  height: 16px !important;
+  background: static_url('images/project-no-description.png') no-repeat 0 0;
+}
+
+.sc-view.project-has-tasks {
+  color: #111;
+}
+
+.sc-view.project-no-tasks {
+  color: #888;
 }
 
 .project-duplicate-icon {

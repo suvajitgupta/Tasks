@@ -31,7 +31,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     this.set('isSystemProject', CoreTasks.isSystemProject(content));
     
     var classes = event.target.className;
-    if (classes.match('project-icon-no-tasks') || classes.match('project-icon-has-tasks') ||
+    if (classes.match('project-icon-has-description') || classes.match('project-icon-no-description') ||
         classes.match('count') || classes.match('inner')) {
       var layer = this.get('layer');
       this._editorPane = SC.PickerPane.create({
@@ -208,6 +208,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       var tasks = content.get('tasks');
       if(tasks) {
         projectTooltip += "_Has".loc() + tasks.get('length') + "_tasks".loc();
+        context.addClass(tasks.get('length') > 0? 'project-has-tasks' : 'project-no-tasks');
       }
       if (CoreTasks.isSystemProject(content)) projectTooltip += ('; ' + "_SystemProject".loc());
       else if(content.get('displayTimeLeft')) projectTooltip += ('; ' + "_ProjectTimeLeftTooltip".loc());
