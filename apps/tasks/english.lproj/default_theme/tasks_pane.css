@@ -179,18 +179,19 @@
 
 .task-item .sc-outline .count,
 .project-item .sc-outline .count {
+	font-style: normal !important;
 	font-weight: normal !important;
   line-height: 11px !important;
   color: white !important;
-  border: 1px solid #99C !important;
-  background: #99C none repeat scroll 0 0 !important;
+  border: 1px solid #90A9DE !important;
+  background: #90A9DE none repeat scroll 0 0 !important;
 }
 
 
 .task-item.sel .sc-outline .count,
 .project-item.sel .sc-outline .count {
   color: #555 !important;
-  background: white none repeat scroll 0 0 !important;
+  background: #EEE none repeat scroll 0 0 !important;
 }
 
 
