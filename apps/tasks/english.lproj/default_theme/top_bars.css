@@ -64,14 +64,14 @@
   margin-top: -18px !important;
   color: #555 !important;
   background: #9FF none repeat scroll 0 0 !important;
-	padding: 1px 1px !important;
+	padding: 0px !important;
   -moz-border-radius: 15px;
   -webkit-border-radius: 15px;
 }
 
 .user-attribute-message {
   font-size: 11px !important;
-  color: #DDD !important;
+  color: #FFF !important;
   line-height: 15px !important;
   text-align: center !important;
 }
