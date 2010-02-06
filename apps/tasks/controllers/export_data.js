@@ -131,15 +131,15 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 '.effort, .time, .total {\n' +
 ' position: absolute;\n' +
 ' font-size: 10px;\n' +
-' font-weight: normal;\n' +
+' font-weight: bold;\n' +
 ' padding: 0px 8px;\n' +
 ' -moz-border-radius: 7px;\n' +
 ' -webkit-border-radius: 7px;\n' +
 '}\n' +
 '.effort {\n' +
 ' color: white;\n' +
-' background-color: #81B0D5;\n' +
-' border: 1px solid #81B0D5;\n' +
+' background-color: #A1B0C5;\n' +
+' border: 1px solid #A1B0C5;\n' +
 '}\n' +
 '.time, .total {\n' +
 ' color: black;\n' +

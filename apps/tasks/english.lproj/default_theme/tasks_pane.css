@@ -110,7 +110,7 @@
 .assignee-item .sc-outline .count {
   margin-top: 0px !important;
   top: 6px !important;
-	font-weight: normal !important;
+	font-weight: bold !important;
   line-height: 11px !important;
   color: #000 !important;
   background: #FFF none repeat scroll 0 0 !important;
@@ -180,11 +180,11 @@
 .task-item .sc-outline .count,
 .project-item .sc-outline .count {
 	font-style: normal !important;
-	font-weight: normal !important;
+	font-weight: bold !important;
   line-height: 11px !important;
   color: white !important;
-  border: 1px solid #81B0D5 !important;
-  background: #81B0D5 none repeat scroll 0 0 !important;
+  border: 1px solid #A1B0C5 !important;
+  background: #A1B0C5 none repeat scroll 0 0 !important;
 }
 
 
