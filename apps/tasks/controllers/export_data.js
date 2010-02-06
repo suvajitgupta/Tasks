@@ -132,7 +132,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' position: absolute;\n' +
 ' font-size: 10px;\n' +
 ' font-weight: bold;\n' +
-' padding: 0px 8px;\n' +
+' padding: 0px 4px;\n' +
 ' -moz-border-radius: 7px;\n' +
 ' -webkit-border-radius: 7px;\n' +
 '}\n' +
@@ -142,6 +142,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' border: 1px solid #A1B0C5;\n' +
 '}\n' +
 '.time, .total {\n' +
+' line-height: 12px;\n' +
 ' color: black;\n' +
 ' background-color: white;\n' +
 ' border: 1px solid gray;\n' +
