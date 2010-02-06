@@ -109,12 +109,13 @@
 
 .assignee-item .sc-outline .count {
   margin-top: 0px !important;
-  top: 6px !important;
+  top: 7px !important;
 	font-weight: bold !important;
   line-height: 12px !important;
   color: #000 !important;
+  border: none !important;
   background: #FFF none repeat scroll 0 0 !important;
-  padding: 0px 4px;
+  padding: 1px 5px;
   opacity: 0.85;
 }
 
@@ -183,17 +184,18 @@
 	font-style: normal !important;
 	font-weight: bold !important;
   line-height: 11px !important;
-  color: white !important;
-  border: 1px solid #A1B0C5 !important;
+  color: #FFF !important;
+  border: none !important;
   background: #A1B0C5 none repeat scroll 0 0 !important;
-  padding: 0px 4px;
+  padding: 1px 5px;
 }
 
 
 .task-item.sel .sc-outline .count,
 .project-item.sel .sc-outline .count {
-  color: #555 !important;
-  background: #EEE none repeat scroll 0 0 !important;
+  color: #A1B0C5 !important;
+  border: none !important;
+  background: #FFF none repeat scroll 0 0 !important;
 }
 
 

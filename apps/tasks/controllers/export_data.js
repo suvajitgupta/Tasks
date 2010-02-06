@@ -25,8 +25,8 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' font-size: 11px;\n' +
 '}\n' +
 'h1, h2 {\n' +
-' line-height: 14px;\n' +
-' margin-top: 4px;\n' +
+' line-height: 13px;\n' +
+' margin-top: 5px;\n' +
 ' margin-bottom: 4px;\n' +
 ' padding: 3px 6px;\n' +
 ' color: white;\n' +
@@ -130,9 +130,9 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 '}\n' +
 '.effort, .time, .total {\n' +
 ' position: absolute;\n' +
-' font-size: 10px;\n' +
+' font-size: 11px;\n' +
 ' font-weight: bold;\n' +
-' padding: 0px 4px;\n' +
+' padding: 1px 5px;\n' +
 ' letter-spacing: -1px !important;\n' +
 ' -moz-border-radius: 7px;\n' +
 ' -webkit-border-radius: 7px;\n' +
@@ -140,13 +140,11 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 '.effort {\n' +
 ' color: white;\n' +
 ' background-color: #A1B0C5;\n' +
-' border: 1px solid #A1B0C5;\n' +
 '}\n' +
 '.time, .total {\n' +
 ' line-height: 12px;\n' +
 ' color: black;\n' +
 ' background-color: white;\n' +
-' border: 1px solid gray;\n' +
 ' opacity: 0.85;\n' +
 '}\n' +
 '.effort, .time {\n' +
