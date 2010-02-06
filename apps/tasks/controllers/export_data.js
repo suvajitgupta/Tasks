@@ -133,6 +133,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' font-size: 10px;\n' +
 ' font-weight: bold;\n' +
 ' padding: 0px 4px;\n' +
+' letter-spacing: -1px !important;\n' +
 ' -moz-border-radius: 7px;\n' +
 ' -webkit-border-radius: 7px;\n' +
 '}\n' +
