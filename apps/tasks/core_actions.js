@@ -520,11 +520,8 @@ Tasks.mixin({
     }
     
     // Create, select, and begin editing new task.
-    SC.RunLoop.begin();
     var task = CoreTasks.createRecord(CoreTasks.Task, taskHash);
-    SC.RunLoop.end();
     tc.selectObject(task);
-    Tasks.projectController.propertyDidChange('displayTasks');
     CoreTasks.invokeLater(tc.editNewTask, 200, task);
     if(Tasks.get('autoSave')) Tasks.saveData();
     return task;
@@ -549,16 +546,13 @@ Tasks.mixin({
       SC.Object.create({
         alertPaneDidDismiss: function(pane, status) {
           if(status === SC.BUTTON2_STATUS) {
-            SC.RunLoop.begin();
             var context = {};
             for (var i = 0; i < len; i++) {
               // Get and delete each selected task.
               var task = sel.nextObject(i, null, context);
               task.destroy();
             }
-            SC.RunLoop.end();
             Tasks.deselectTasks();
-            Tasks.projectController.propertyDidChange('displayTasks');
             if(Tasks.get('autoSave')) Tasks.saveData();
           }
         }
