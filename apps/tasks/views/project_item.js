@@ -167,6 +167,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
   },
   
   inlineEditorWillBeginEditing: function(inlineEditor) {
+    this._name = this.getPath('content.name');
     if(!CoreTasks.getPath('permissions.canUpdateProject')) {
       console.warn('You do not have permission to edit a project');
       inlineEditor.discardEditing();
@@ -180,11 +181,19 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
   },
   
   inlineEditorDidEndEditing: function(inlineEditor, finalValue) {
-    sc_super();
-    if(finalValue.indexOf('{') >= 0) { // if effort was specified inline, redraw got load balancing recalculation
-      Tasks.assignmentsController.showAssignments();
+    console.log('DEBUG: old name: ' + this._name);
+    if(finalValue !== this._name && CoreTasks.getProject(finalValue)) {
+      console.error('There is already a project with this name');
+      this.set('isEditing', NO) ;
+      this.displayDidChange();
     }
-    if(Tasks.get('autoSave')) Tasks.saveData();
+    else {
+      sc_super();
+      if(finalValue.indexOf('{') >= 0) { // if effort was specified inline, redraw got load balancing recalculation
+        Tasks.assignmentsController.showAssignments();
+      }
+      if(Tasks.get('autoSave')) Tasks.saveData();
+    }
   },
   
   renderIcon: function(context, icon){
