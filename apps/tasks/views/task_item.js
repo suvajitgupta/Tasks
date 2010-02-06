@@ -78,7 +78,6 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           if(Tasks.assignmentsRedrawNeeded) {
             Tasks.assignmentsController.showAssignments();
           }
-          if(CoreTasks.get('needsSave')) Tasks.projectController.propertyDidChange('displayTasks');
           if(Tasks.get('autoSave')) Tasks.saveData();
         },
         
@@ -413,7 +412,6 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   
   inlineEditorDidEndEditing: function(inlineEditor, finalValue) {
     sc_super();
-    if(CoreTasks.get('needsSave')) Tasks.projectController.propertyDidChange('displayTasks');
     if(Tasks.get('autoSave')) Tasks.saveData();
   },
   
