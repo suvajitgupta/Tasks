@@ -51,8 +51,6 @@
 }
 
 .project-item .sc-outline:hover {
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
   background: #CCC none repeat scroll 0 0 !important;
 }
 

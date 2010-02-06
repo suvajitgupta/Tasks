@@ -27,11 +27,6 @@
   background: none !important;
 }
 
-.users-pane .sc-collection-item {
-  -moz-border-radius: 5px !important;
-  -webkit-border-radius: 5px !important;
-}
-
 .users-pane .sc-collection-item.sel {
   color: #FFF !important;
 	font-weight: normal !important;

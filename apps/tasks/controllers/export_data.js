@@ -130,6 +130,8 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 '}\n' +
 '.effort, .time, .total {\n' +
 ' position: absolute;\n' +
+' height: 12px;\n' +
+' line-height: 11px;\n' +
 ' font-size: 11px;\n' +
 ' font-weight: bold;\n' +
 ' padding: 1px 5px;\n' +
@@ -142,7 +144,6 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' background-color: #A1B0C5;\n' +
 '}\n' +
 '.time, .total {\n' +
-' line-height: 12px;\n' +
 ' color: black;\n' +
 ' background-color: white;\n' +
 ' opacity: 0.85;\n' +

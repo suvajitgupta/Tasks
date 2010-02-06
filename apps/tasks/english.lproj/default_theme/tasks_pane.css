@@ -52,7 +52,6 @@
 .assignee-item {
   text-transform: none !important;
 	font-weight: bold !important;
-	border: none !important;
   background: #f2f2f2 !important;
 }
 
@@ -111,6 +110,7 @@
   margin-top: 0px !important;
   top: 7px !important;
 	font-weight: bold !important;
+  height: 12px !important;
   line-height: 12px !important;
   color: #000 !important;
   border: none !important;
@@ -136,6 +136,9 @@
   background: #f2f2f2 none repeat scroll 0 0;
   left: 22px !important;
   right: 5px !important;
+	border: 1px dotted silver !important;
+	border-left-color: #f2f2f2 !important;
+	border-right-color: #f2f2f2 !important;
 }
 
 .recently-updated {
@@ -183,6 +186,7 @@
 .project-item .sc-outline .count {
 	font-style: normal !important;
 	font-weight: bold !important;
+  height: 12px !important;
   line-height: 11px !important;
   color: #FFF !important;
   border: none !important;
@@ -194,7 +198,6 @@
 .task-item.sel .sc-outline .count,
 .project-item.sel .sc-outline .count {
   color: #A1B0C5 !important;
-  border: none !important;
   background: #FFF none repeat scroll 0 0 !important;
 }
 
@@ -330,19 +333,6 @@
 /*-----------------------------------------------------------------
  * Task selection/dragging styles
  */
-
-.sc-list-item-view.even-item {
-	border: 1px solid #f2f2f2 !important;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-}
-
-.sc-list-item-view.odd-item {
-	border: 1px solid #FFF !important;
-  background-color: #FFF;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-}
 
 .task-item.sel,
 .task-item.sel:hover {
