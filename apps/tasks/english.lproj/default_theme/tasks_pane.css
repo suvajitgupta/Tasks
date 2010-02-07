@@ -230,6 +230,12 @@
   background: static_url('images/task-duplicate.png') no-repeat;
 }
 
+.task-id-name-icon {
+  width: 16px !important;
+  height: 16px !important;
+  background: static_url('images/task-id-name.png') no-repeat;
+}
+
 .task-link-icon {
   width: 16px !important;
   height: 16px !important;
