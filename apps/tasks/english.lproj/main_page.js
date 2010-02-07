@@ -30,14 +30,17 @@ Tasks.mainPage = SC.Page.design({
       childViews: [
       
         Tasks.LogoView.design({
-          layout: { left: 10, width: 150, centerY: 0, height: 42 }
+          layout: { left: 10, width: 140, centerY: 0, height: 42 }
         }),
 
         SC.View.design({
-          layout: { left: 160, width: document.title.match(/Greenhouse/)? 40 : 150, centerY: -1, height: 35 },
+          layout: { left: 155, width: document.title.match(/SproutCore/)? 140 : 32, centerY: -1, height: 32 },
           tagName: 'img',
           render: function(context, firstTime) {
-            if(document.title.match(/Demo/)) {
+            if(document.title.match(/Dev/)) {
+              context.attr('src', sc_static('images/dev-logo.jpg'));
+            }
+            else if(document.title.match(/Demo/)) {
               context.attr('src', sc_static('images/demo-logo.jpg'));
             }
             else if(document.title.match(/Greenhouse/)) {
