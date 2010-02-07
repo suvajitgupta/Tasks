@@ -295,7 +295,7 @@ Tasks.filterPane = SC.PanelPane.create({
         ],
         itemTitleKey: 'title',
         itemValueKey: 'value',
-        toolTip: "_RecentlyUpdatedTooltip".loc(),
+        toolTip: "_RecentlyUpdatedFilterTooltip".loc(),
         valueBinding: 'Tasks.assignmentsController.recentlyUpdated'
       }),
 

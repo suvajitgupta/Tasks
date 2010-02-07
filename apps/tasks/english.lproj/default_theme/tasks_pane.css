@@ -141,11 +141,8 @@
 	border-right-color: #f2f2f2 !important;
 }
 
-.recently-updated {
+.task-item .recently-updated {
   margin-left: -3px !important;
-  height: 11px !important;
-  width: 11px !important;
-  background: static_url('images/recently-updated.png') no-repeat 0 0;
 }
 
 .task-item .sc-outline {

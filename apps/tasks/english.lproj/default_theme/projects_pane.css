@@ -45,6 +45,11 @@
 	font-weight: normal !important;
 }
 
+.project-item.project-no-tasks.sel .sc-outline {
+  color: #CCC !important;
+	font-weight: normal !important;
+}
+
 .project-item.sel,
 .project-item.sel .sc-outline:hover {
   background: static_url('images/default-theme-selected-project.png') no-repeat 0 0 !important;

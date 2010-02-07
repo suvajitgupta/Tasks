@@ -181,7 +181,6 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
   },
   
   inlineEditorDidEndEditing: function(inlineEditor, finalValue) {
-    console.log('DEBUG: old name: ' + this._name);
     if(finalValue !== this._name && CoreTasks.getProject(finalValue)) {
       console.error('There is already a project with this name');
       this.set('isEditing', NO) ;
@@ -211,6 +210,17 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     // console.log('DEBUG-ON: Project render(' + firstTime + '): ' + content.get('displayName'));
     sc_super();
     
+    var isSystemProject = CoreTasks.isSystemProject(content);
+    
+    // Put a dot before non-system projects that were created or updated recently
+    if(!isSystemProject && content.get('isRecentlyUpdated')) {
+      context = context.begin('img').addClass('recently-updated').attr({
+        src: SC.BLANK_IMAGE_URL,
+        title: "_RecentlyUpdatedTooltip".loc(),
+        alt: "_RecentlyUpdatedTooltip".loc()
+      }).end();
+    }
+
     var projectTooltip = '';
     if(content.get('id')) {
       context.addClass('project-item');
@@ -219,7 +229,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
         projectTooltip += "_Has".loc() + tasks.get('length') + "_tasks".loc();
         context.addClass(tasks.get('length') > 0? 'project-has-tasks' : 'project-no-tasks');
       }
-      if (CoreTasks.isSystemProject(content)) projectTooltip += ('; ' + "_SystemProject".loc());
+      if (isSystemProject) projectTooltip += ('; ' + "_SystemProject".loc());
       else if(content.get('displayTimeLeft')) projectTooltip += ('; ' + "_ProjectTimeLeftTooltip".loc());
       if(projectTooltip !== '') {
         context.attr('title', projectTooltip);

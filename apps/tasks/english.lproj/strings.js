@@ -117,7 +117,7 @@ SC.stringsFor('English', {
   "_EffortSpecified:": "Effort Specified:",
   "_EffortSpecifiedTooltip": "Show/hide tasks that have effort specified",
   "_RecentlyUpdated:": "Recently Updated:",
-  "_RecentlyUpdatedTooltip": "Show/hide recently updated tasks",
+  "_RecentlyUpdatedFilterTooltip": "Show/hide recently updated tasks",
   "_Type": "TYPE",
   "_TypeTooltip": "Kind of task: user visible functionality, defect fix, or other",
   "_Feature": "Feature",

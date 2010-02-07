@@ -121,6 +121,13 @@ body {
   color: #000 !important;
 }
 
+.recently-updated {
+  margin-left: 3px !important;
+  height: 11px !important;
+  width: 11px !important;
+  background: static_url('images/recently-updated.png') no-repeat 0 0;
+}
+
 .sc-collection-view {
   border-top: 0 !important;
 }
@@ -183,13 +190,21 @@ body {
   height: 4px !important;
 }
 
-.users-pane-inner .sc-view.sc-list-item-view.sc-collection-item .sc-outline {
-  left: 15px !important;
-}
 .sc-view.sc-list-item-view.sc-collection-item.sc-group-item {
+  left: 0px !important;
   color: #888 !important;
 }
 
+.sc-list-item-view img.disclosure {
+  left: -5px !important;
+}
+
+.sc-view.sc-list-item-view.sc-collection-item.sc-group-item label {
+  left: 10px !important;
+}
+
+styles...1923582 (line 757)
+.sc-list-item-view img.disclosure
 .statistics-pane table {
   border: 1px solid gray !important;
   border-collapse: separate !important;

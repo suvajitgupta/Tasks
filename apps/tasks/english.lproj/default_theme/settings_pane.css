@@ -42,6 +42,13 @@
   background: none !important;
 }
 
+.user-item {
+  left: 0px !important;
+}
+
+.user-item .sc-outline {
+  left: 10px !important;
+}
 
 
 /*-----------------------------------------------------------------

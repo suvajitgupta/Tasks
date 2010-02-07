@@ -76,13 +76,14 @@ Tasks.settingsPage = SC.Page.create({
             classNames: ['users-pane'],
 
             contentView: Tasks.SourceListView.design({
-              layout: { top: 0, left:0, bottom: 0, right: 0 },
+              layout: { top: 0, left:5, bottom: 0, right: 0 },
               contentValueKey: 'displayName',
               contentBinding: 'Tasks.rolesController.arrangedObjects',
               selectionBinding: 'Tasks.usersController.selection',
               localize: YES,
               rowHeight: 24,
               classNames: ['users-pane-inner'],
+              exampleView: Tasks.UserItemView,
               hasContentIcon: YES,
               contentIconKey: 'icon',
               canReorderContent: YES,
@@ -90,7 +91,6 @@ Tasks.settingsPage = SC.Page.create({
               destroyOnRemoval: YES,
               delegate: Tasks.rolesController,
               selectOnMouseDown: YES
-
             })
           }),
           
