@@ -38,18 +38,6 @@
   text-align: center !important;
 }
 
-.demo-logo {
-  margin-top: -22px !important;
-  top: 30px !important;
-  left: 35px !important;
-  background: static_url('images/demo-logo.jpg') no-repeat 0 0;
-}
-
-.application-logo {
-  margin-top: -22px !important;
-  background: static_url('images/sproutcore-logo.png') no-repeat 0 0;
-}
-
 .tasks-logo {
   margin-top: -15px !important;
   background: static_url('images/tasks-logo.png') no-repeat 0 0;

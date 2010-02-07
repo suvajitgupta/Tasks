@@ -1,7 +1,7 @@
 // ==========================================================================
 // Project: Tasks
 // ==========================================================================
-/*globals CoreTasks Tasks sc_require SCUI */
+/*globals CoreTasks Tasks sc_require SCUI sc_static*/
 
 sc_require('core');
 sc_require('mixins/localized_label');
@@ -29,13 +29,24 @@ Tasks.mainPage = SC.Page.design({
       classNames: ['title-bar'],
       childViews: [
       
-        SC.LabelView.design({
-          layout: { left: 5, width: 200, centerY: 0, height: 42 },
-          classNames: [document.title.match(/Demo/)? 'demo-logo' : 'application-logo']
+        Tasks.LogoView.design({
+          layout: { left: 10, width: 150, centerY: 0, height: 42 }
         }),
 
-        Tasks.LogoView.design({
-          layout: { left: document.title.match(/Demo/)? 80: 175, width: 150, centerY: 0, height: 42 }
+        SC.View.design({
+          layout: { left: 160, width: document.title.match(/Greenhouse/)? 40 : 150, centerY: -1, height: 35 },
+          tagName: 'img',
+          render: function(context, firstTime) {
+            if(document.title.match(/Demo/)) {
+              context.attr('src', sc_static('images/demo-logo.jpg'));
+            }
+            else if(document.title.match(/Greenhouse/)) {
+              context.attr('src', sc_static('images/greenhouse-logo.png'));
+            }
+            else if(document.title.match(/SproutCore/)) {
+              context.attr('src', sc_static('images/sproutcore-logo.png'));
+            }
+          }
         }),
 
         SC.LabelView.design(SCUI.ToolTip, {
