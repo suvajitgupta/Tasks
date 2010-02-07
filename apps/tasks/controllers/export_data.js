@@ -61,6 +61,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' white-space: pre-wrap;\n' +
 ' word-wrap: break-word;\n' +
 ' border: 1px solid silver;\n' +
+' padding: 5px;\n' +
 '}\n' +
 '.untested, .passed, .failed, .feature, .bug, .other {\n' +
 ' display: inline-block;\n' +
