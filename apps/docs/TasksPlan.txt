@@ -28,6 +28,7 @@ General Infrastructure
 ^ Have tasks refer to project they are allocated to and make projects Store queries [SE] <SG> @Done %Passed
 - Handle persistence consistently (nothing should save unless user hits Save) [SE] <SG> @Done %Passed
 - Implement GUI-based RBAC (role-based access control) [SG] $Feature @Done %Passed
+- Add an indicator (dot) before Projects/Tasks/Users that were created or updated within the last day <SE> [SG] $Feature @Done %Passed
 - Display record created/updated time at the bottom of popup editors [SG] $Feature @Done %Passed
 v Track/optimize calls to assignments controller and custom view render methods <BB> [SG] @Active
 v Make buttons depressable to provide feedback when using them [SG] $Feature
@@ -92,7 +93,6 @@ v Add hover over tooltip for assignees to show how many tasks they have and to e
 - Beta: Support task Copy ID/Name and Copy Link Location (URL with "Route") to clipboard [SG] $Feature @Risky
 v Add task context menu with options: Add, Duplicate, Delete; All Task Attributes; Copy ID/Name, Copy Link [SG] $Feature @Done %Passed
 - Beta: Add ability to "Watch" tasks and get Email Notifications after task changes [SG] <JH2> $Feature
-- Add an indicator (dot) before tasks that were created or updated within the last day <SE> [SG] $Feature @Done %Passed
 - Out of Scope: Add support for nested tasks/tagging $Feature
 | Use "Clustering" approach described in Help instead
 - Out of Scope: Add support for managing inter-task dependencies/linking $Feature
@@ -121,7 +121,7 @@ Application Manager GUI
 - Add "Save" button in top toolbar, note time of last save in status bar [SG] <BB> @Done $Feature %Passed
 - Add "Auto Save" checkbox in status bar [SG] <BB> @Done $Feature %Passed
 - Enable/disable Save button based on data modification [EO] <SG> $Feature @Done %Passed
-- Add "Refresh" button to get most recent data from server [SG] <SE> $Feature @Done %Passed
+- Add "Refresh" button to synchronize GUI with latest data from server [SG] <SE> $Feature @Done %Passed
 - Add "Import" button in top toolbar with associated pop up panel [SG] <BB> @Done $Feature %Passed
 - Don't create a project if it already exists during Import [SG] @Done $Feature %Passed
 - Allow option to automatically create new users for unknown assignees/submitters found during importing [SG] @Done $Feature %Passed
