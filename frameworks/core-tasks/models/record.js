@@ -91,7 +91,7 @@ CoreTasks.Record = SC.Record.extend({
       ageInDays = (now - then)/CoreTasks.MILLISECONDS_IN_DAY;
     }
     // Then check if the record was updated recently
-    if(ageInDays > 1) {
+    if(!ageInDays) {
       var updatedAt = this.get('updatedAt');
       if(updatedAt) {
         then = updatedAt.get('milliseconds');
@@ -99,7 +99,7 @@ CoreTasks.Record = SC.Record.extend({
       }
     }
     // Decide if record was recently created/updated
-    return (ageInDays !== null && ageInDays <= 1)? true : false;
+    return (ageInDays === null || ageInDays > 1)? false : true;
   }.property('createdAt', 'updatedAt').cacheable(),
 
   commit: function() {
