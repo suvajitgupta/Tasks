@@ -91,7 +91,7 @@ CoreTasks.Record = SC.Record.extend({
       ageInDays = (now - then)/CoreTasks.MILLISECONDS_IN_DAY;
     }
     // Then check if the record was updated recently
-    if(!ageInDays) {
+    if(ageInDays === null || ageInDays > 1) {
       var updatedAt = this.get('updatedAt');
       if(updatedAt) {
         then = updatedAt.get('milliseconds');
