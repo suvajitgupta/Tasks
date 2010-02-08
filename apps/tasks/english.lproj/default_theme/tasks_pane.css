@@ -73,6 +73,7 @@
 }
 
 .assignee-item label {
+  font-size: 11px !important;
   color: #FFF !important;
   height: 20px !important;
   left: 8px !important;
