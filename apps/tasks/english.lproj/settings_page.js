@@ -35,7 +35,7 @@ Tasks.settingsPage = SC.Page.create({
             childViews: [
             
               SC.LabelView.design(SCUI.SimpleButton,{
-                layout: { centerY: 0, left: 55, height: 16, width: 90 },
+                layout: { centerY: 0, left: 20, height: 16, width: 90 },
                 icon: 'add-icon',
                 value: "_AddUser".loc(),
                 classNames: ['toolbar-label'],
@@ -46,7 +46,7 @@ Tasks.settingsPage = SC.Page.create({
               }),
 
               SC.LabelView.design(SCUI.SimpleButton,{
-                layout: { centerY: 0, left: 140, height: 16, width: 100 },
+                layout: { centerY: 0, left: 120, height: 16, width: 100 },
                 icon: 'delete-icon',
                 value: "_DeleteUser".loc(),
                 classNames: ['toolbar-label'],
@@ -71,7 +71,7 @@ Tasks.settingsPage = SC.Page.create({
           }),
         
           SC.ScrollView.design({
-            layout: { top: 35, bottom: 0, left: 0, width: 300 },
+            layout: { top: 35, bottom: 0, left: 0, width: 250 },
             hasHorizontalScroller: NO,
             classNames: ['users-pane'],
 
@@ -95,18 +95,18 @@ Tasks.settingsPage = SC.Page.create({
           }),
           
           Tasks.UserInformationView.design({
-            layout: { top: 40, left: 300, bottom: 35, right: 10 },
+            layout: { top: 100, left: 275, bottom: 35, right: 10 },
             contentBinding: 'Tasks.userController'
           }),
           
           SC.LabelView.design({
-            layout: { left:310, bottom: 5, height: 17, width: 250 },
+            layout: { left:255, bottom: 5, height: 17, width: 250 },
             classNames: [ 'date-time'],
             textAlign: SC.ALIGN_LEFT,
             valueBinding: SC.binding('Tasks.userController.displayCreatedAt', this)
           }),
           SC.LabelView.design({
-            layout: { right:10, bottom: 5, height: 17, width: 250 },
+            layout: { right:5, bottom: 5, height: 17, width: 250 },
             classNames: [ 'date-time'],
             textAlign: SC.ALIGN_RIGHT,
             valueBinding: SC.binding('Tasks.userController.displayUpdatedAt', this)
