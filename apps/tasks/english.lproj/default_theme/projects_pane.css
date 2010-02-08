@@ -51,11 +51,11 @@
 }
 
 .project-item.sel,
-.project-item.sel .sc-outline:hover {
+.projects-pane .project-item.sel:hover {
   background: static_url('images/default-theme-selected-project.png') no-repeat 0 0 !important;
 }
 
-.project-item .sc-outline:hover {
+.projects-pane .sc-collection-item:hover {
   background: #CCC none repeat scroll 0 0 !important;
 }
 
