@@ -134,7 +134,6 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' height: 12px;\n' +
 ' line-height: 11px;\n' +
 ' font-size: 11px;\n' +
-' font-weight: bold;\n' +
 ' padding: 1px 5px;\n' +
 ' letter-spacing: -1px !important;\n' +
 ' -moz-border-radius: 7px;\n' +
