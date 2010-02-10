@@ -229,13 +229,20 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
         projectTooltip += "_Has".loc() + tasks.get('length') + "_tasks".loc();
         context.addClass(tasks.get('length') > 0? 'project-has-tasks' : 'project-no-tasks');
       }
-      if (isSystemProject) projectTooltip += ('; ' + "_SystemProject".loc());
-      else if(content.get('displayTimeLeft')) projectTooltip += ('; ' + "_ProjectTimeLeftTooltip".loc());
       if(projectTooltip !== '') {
         context.attr('title', projectTooltip);
         context.attr('alt', projectTooltip);
       }
     }
 
+  },
+
+  renderCount: function(context, count) {
+    if(count) {
+      var timeLeftTooltip = "_ProjectTimeLeftTooltip".loc();
+      context.push('<span class="count" title="' + timeLeftTooltip + '">');
+      context.push('<span class="inner">').push(count).push('</span></span>');
+    }
   }
+  
 });

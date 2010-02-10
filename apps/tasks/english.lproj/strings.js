@@ -93,10 +93,9 @@ SC.stringsFor('English', {
   "_Unallocated": "Unallocated",
   "_UnallocatedTasks": "Unallocated Tasks",
   "_ProjectEditorTooltip": "Click to view/edit project details (time left, description)",
-  "_SystemProject": "Cannot edit/delete a system project",
   "_Has": "Has ",
   "_tasks": " tasks",
-  "_ProjectTimeLeftTooltip": "Time left shown on right",
+  "_ProjectTimeLeftTooltip": "Time left",
   "_TimeLeft:": "Time Left:",
   "_TimeLeftOnscreenHelp": "May be unspecified, a decimal like '0.25'; units 'd' or 'h'",
   
