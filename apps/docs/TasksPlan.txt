@@ -16,7 +16,8 @@ Design/Planning
 - Design Tasks Server & evaluate persistence frameworks [SE] <SG> @Done
 - Design RBAC (role-based access control) to be implemented on GUI and Server <JH2> [SG] @Done
 | Any authenticated user can read Projects/Tasks and update their own User attributes (except role)
-| Only Managers can create/update/delete Projects & Users
+| Everyone can create/update Users (except Role attribute); Only Managers can update User Role and delete Users
+| Only Managers can create/update/delete Projects
 | Managers/Developers/Testers can create/update/delete Tasks
 | Guests can only create/update unallocated Tasks & update Task descriptions
 
@@ -132,7 +133,7 @@ Application Manager GUI
 | * auto save on or off
 | * percent and min days for Assignee loading determination
 | * email notifications
-- Add "Export to HTML" capability for printable & human-readable version (for baselining tasks for a release) [SG] $Feature @Done %Passed
+- Add "Exort to HTML" capability for printable & human-readable version (for baselining tasks for a release) [SG] $Feature @Done %Passed
 - Add online "Help" button in top toolbar & popup help window [SG] @Done %Passed $Feature
 v Add online training video using Captivate or Camtasia [SG] $Feature @Done
 | http://www.youtube.com/watch?v=6egjJw_RS1g
@@ -152,12 +153,8 @@ Server
 - Beta: Implement Server-based user authentication [JH2] <SG> @Active
 - Beta: Implement Server-based RBAC (role-based access control) <SG> [JH2] @Active
 - Beta: Send Email Notifications on noteworthy changes [JH2] <SG> $Feature @Active
-| Notify Submitter/Assignee when Task is created/deleted by someone other than them
-| Notify Managers when Task is flagged as Risky
-| Notify Assignee when a Done Task is Failed
-| 
+| Notify Submitter/Assignee when Task is created/updated/deleted by someone other than them
 | Don’t send email if Email address is unspecified
-| Send a single email if Assignee/Submitter are identical
 - Add server-side data validation checks/return appropriate error codes [SE] <SG>
 
 Styling/Hardening
