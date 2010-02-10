@@ -151,7 +151,6 @@ Tasks.TaskItemView = SC.ListItemView.extend(
               hint: "_DescriptionHint".loc(),
               isTextArea: YES,
               isEnabled: YES,
-              // valueBinding: SC.binding('.content.description', this)
               value: that.getPath('content.description')
             }),
             SC.LabelView.design({
@@ -494,20 +493,21 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     context = context.end();
     context = context.end();
     
-    var taskTooltip = '';
     var submitterUser = content.get('submitter');
     if (submitterUser) {
-      taskTooltip += ("_SubmitterTooltip".loc() + '%@ (%@)'.fmt(submitterUser.get('name'), submitterUser.get('loginName')));
-    }
-    if(content.get('displayEffort')) {
-      if(taskTooltip !== '')  taskTooltip += '; ';
-      taskTooltip += "_TaskEffortTooltip".loc();
-    }
-    if(taskTooltip !== '') {
+      var taskTooltip = ("_SubmitterTooltip".loc() + '%@ (%@)'.fmt(submitterUser.get('name'), submitterUser.get('loginName')));
       context.attr('title', taskTooltip);
       context.attr('alt', taskTooltip);
     }
 
+  },
+
+  renderCount: function(context, count) {
+    if(count) {
+      var effortTooltip = "_TaskEffortTooltip".loc();
+      context.push('<span class="count" title="' + effortTooltip + '">');
+      context.push('<span class="inner">').push(count).push('</span></span>');
+    }
   },
   
   contentPropertyDidChange: function() {
