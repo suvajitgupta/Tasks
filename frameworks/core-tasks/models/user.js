@@ -112,7 +112,7 @@ CoreTasks.User = CoreTasks.Record.extend({
     var id = this.get('id');
     var store = this.get('store');
     
-    var submittedTasksQuery = SC.Query.local(CoreTasks.Task, "submitterId=%@".fmt(id));
+    var submittedTasksQuery = SC.Query.local(CoreTasks.Task, "submitterId='%@'".fmt(id));
     submittedTasksQuery.set('initialServerFetch', NO);
     var submittedTasks = store.find(submittedTasksQuery);
     if (submittedTasks) {
@@ -123,7 +123,7 @@ CoreTasks.User = CoreTasks.Record.extend({
       submittedTasksQuery = null;
     }
     
-    var assignedTasksQuery = SC.Query.local(CoreTasks.Task, "assigneeId=%@".fmt(id));
+    var assignedTasksQuery = SC.Query.local(CoreTasks.Task, "assigneeId='%@'".fmt(id));
     assignedTasksQuery.set('initialServerFetch', NO);
     var assignedTasks = store.find(assignedTasksQuery);
     if (assignedTasks) {
