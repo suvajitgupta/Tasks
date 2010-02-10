@@ -57,12 +57,12 @@ Tasks.settingsPage = SC.Page.create({
               }),
               
               SC.View.design({
-                layout: { top: 8, bottom: 8, left: 300, width: 2 },
+                layout: { top: 8, bottom: 8, left: 250, width: 2 },
                 classNames: ['top-bar-divider']
               }),
               
               SC.LabelView.design({
-                layout: { centerY: 0, left: 435, height: 20, width: 120 },
+                layout: { centerY: 0, left: 410, height: 20, width: 120 },
                 value: "_UserManager".loc(),
                 classNames: ['window-title']
               })
