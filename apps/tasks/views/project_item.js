@@ -198,7 +198,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
   renderIcon: function(context, icon){
     var content = this.get('content');
     var projectTooltip = '';
-    if(!CoreTasks.isSystemProject(content)) projectTooltip = "_ProjectEditorTooltip".loc();
+    if(!CoreTasks.isSystemProject(content)) projectTooltip = "_ProjectDescriptionTooltip".loc();
     context.begin('img').addClass('icon').addClass(icon).attr('src', SC.BLANK_IMAGE_URL)
           .attr('title', projectTooltip).attr('alt', projectTooltip).end();
   },

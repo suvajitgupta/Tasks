@@ -31,7 +31,7 @@ Tasks.UserItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       }).end();
     }
     
-    context.addClass('user-item');
+    if(content.get('id')) context.addClass('user-item');
     
   }
   

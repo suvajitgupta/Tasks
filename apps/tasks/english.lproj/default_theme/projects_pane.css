@@ -25,6 +25,7 @@
  */
 
 .projects-pane-inner .sc-collection-item {
+  left: 10px !important;
   border: 0 !important;
 }
 
@@ -37,9 +38,17 @@
 }
 
 .project-item .sc-outline {
-  left: 6px !important;
+  left: 10px !important;
 }
 
+.project-item .sc-outline img {
+  left: 0px !important;
+}
+
+.project-item label {
+  left: 19px !important;
+}
+  
 .project-item.sel .sc-outline {
   color: #FFF !important;
 	font-weight: normal !important;

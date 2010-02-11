@@ -138,10 +138,6 @@
 	border-right-color: #f2f2f2 !important;
 }
 
-.task-item .recently-updated {
-  margin-left: -3px !important;
-}
-
 .task-item .sc-outline {
   left: 8px !important;
   right: 18px !important;

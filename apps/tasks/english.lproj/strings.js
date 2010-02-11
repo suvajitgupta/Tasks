@@ -92,10 +92,10 @@ SC.stringsFor('English', {
   "_AllTasks": "All Tasks",
   "_Unallocated": "Unallocated",
   "_UnallocatedTasks": "Unallocated Tasks",
-  "_ProjectEditorTooltip": "Click to view/edit project details (time left, description)",
   "_Has": "Has ",
   "_tasks": " tasks",
-  "_ProjectTimeLeftTooltip": "Time left",
+  "_ProjectTimeLeftTooltip": "Project time left - click to edit",
+  "_ProjectDescriptionTooltip": "Project description - click to edit",
   "_TimeLeft:": "Time Left:",
   "_TimeLeftOnscreenHelp": "May be unspecified, a decimal like '0.25'; units 'd' or 'h'",
   
@@ -146,10 +146,10 @@ SC.stringsFor('English', {
   "_Description:": "Description:",
   "_DescriptionHint": "Enter detailed notes...",
   "_SubmitterTooltip": "Submitted by ",
-  "_RecentlyUpdatedTooltip": "This dot indicates an item created or updated within the last day",
-  "_TaskEffortTooltip": "Task effort",
+  "_RecentlyUpdatedTooltip": "This dot indicates a recently created/updated item (within the last day)",
+  "_TaskEffortTooltip": "Task effort - click to edit",
   "_TaskIdTooltip": "Unique ID for task; Dashes indicate unsaved tasks; Background color indicates validation status",
-  "_TaskEditorTooltip": "Click to view/edit task details (submitter, assignee, effort, project, and description)",
+  "_TaskDescriptionTooltip": "Task description - click to edit",
   
   // User/Assignee strings
   "_AddUser": "Add User",

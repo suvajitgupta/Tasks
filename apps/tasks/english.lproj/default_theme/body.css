@@ -122,7 +122,7 @@ body {
 }
 
 .recently-updated {
-  margin-left: 3px !important;
+  margin-left: -3px !important;
   height: 11px !important;
   width: 11px !important;
   background: static_url('images/recently-updated.png') no-repeat 0 0;

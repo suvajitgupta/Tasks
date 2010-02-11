@@ -482,8 +482,8 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     context = context.begin('div').addClass('sc-view').addClass('task-description');
     context = context.begin('img').attr({
       src: SC.BLANK_IMAGE_URL,
-      title: "_TaskEditorTooltip".loc(),
-      alt: "_TaskEditorTooltip".loc()
+      title: "_TaskDescriptionTooltip".loc(),
+      alt: "_TaskDescriptionTooltip".loc()
     }).addClass('task-editor');
     if (hasDescription) {
       context.addClass('task-icon-has-description');
