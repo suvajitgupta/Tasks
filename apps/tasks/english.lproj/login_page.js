@@ -84,13 +84,13 @@ Tasks.loginPage = SC.Page.create({
         action: 'login'
       }),
       
-      signup: SC.LabelView.design(SCUI.SimpleButton,{
+      signup: document.title.match(/Dev|Demo|Greenhouse|SproutCore/)? SC.LabelView.design(SCUI.SimpleButton,{
         layout: { top: 235, left: 500, height: 24, width: 200 },
         classNames: ['sign-up'],
         value: "_NewUserSignup".loc(),
         target: 'Tasks',
         action: 'launchSignupPane'
-      })
+      }) : SC.View.design()
       
     }),
     
