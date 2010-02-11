@@ -6,6 +6,8 @@
 Project:
 {
 	id*: <Number>, # primary key
+	createdAt: time when record was created (in milliseconds since the Unix Epoch)
+	updatedAt: time when record was last updated (in milliseconds since the Unix Epoch)
 	name*: <String>, # title
 	description: <String>, # multi-line additional information such as project start/end dates, goals, et al
 	timeLeft: <Number>, # amount of time left in days
@@ -15,6 +17,8 @@ Project:
 Task:
 {
 	id*: <Number>, # primary key
+	createdAt: time when record was created (in milliseconds since the Unix Epoch)
+	updatedAt: time when record was last updated (in milliseconds since the Unix Epoch)
 	name*: <String>, # one-line summary
 	description: <String>, # multi-line additional information such as Feature details, Bug reproduction steps, or Release Notes
 	projectId: <Number> # refers to project task is allocated to
@@ -31,6 +35,8 @@ Task:
 User:
 {
 	id*: <Number>, # primary key
+	createdAt: time when record was created (in milliseconds since the Unix Epoch)
+	updatedAt: time when record was last updated (in milliseconds since the Unix Epoch)
 	name*: <String>, # full name
 	loginName*: <String>, # login name
 	role*: Enum<String>, ("Manager" | "_Developer_" | "Tester") # to allow RBAC
