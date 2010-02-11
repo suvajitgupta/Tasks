@@ -138,6 +138,9 @@
 	border-right-color: #f2f2f2 !important;
 }
 
+.task-item.sel .recently-updated {
+}
+
 .task-item .sc-outline {
   left: 8px !important;
   right: 18px !important;
