@@ -128,6 +128,10 @@ body {
   background: static_url('images/recently-updated.png') no-repeat 0 0;
 }
 
+.sel .recently-updated {
+  background: static_url('images/recently-updated-selected.png') no-repeat 0 0;
+}
+
 .sc-collection-view {
   border-top: 0 !important;
 }
