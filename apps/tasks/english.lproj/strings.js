@@ -110,7 +110,7 @@ SC.stringsFor('English', {
   "_DeleteTask": "Delete Task",
   "_DeleteTaskTooltip": "Delete selected task",
   "_TaskDeletionConfirmation": "Are you sure you want to delete these tasks?",
-  "_Filter": "Filter Tasks",
+  "_Filter": "Filter",
   "_FilterTooltip": "Filter tasks using attributes (type, priority, status, validation)",
   "_DontCare": "Don't Care",
   "_EffortSpecified:": "Effort Specified:",
