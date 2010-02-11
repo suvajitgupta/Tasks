@@ -139,6 +139,7 @@
 }
 
 .task-item.sel .recently-updated {
+  background: static_url('images/recently-updated.png') no-repeat 0 0;
 }
 
 .task-item .sc-outline {
