@@ -66,7 +66,7 @@ v Add project context menu with options: Add, Duplicate, Delete [SG] $Feature @D
 
 Task Manager GUI
 ^ Group Tasks by User and display Task id, summary, and effort (if specified) on far right [SG] <JH2> @Done $Feature %Passed
-^ Support automatic sorting of tasks by status, validation, priority, type, and ID (in that order)[SG] <SG> @Done $Feature %Passed
+^ Support automatic sorting of tasks by status, validation, priority, type, and name or index (if name starts with a number) [SG] <SG> @Done $Feature %Passed
 - Allow Tasks under an assignee to be hidden/disclosed [SG] <JH2> @Done $Feature %Passed
 - Show Task Type via different icons [SG] <JH2> @Done $Feature %Passed
 - Show Task Priority (font style), Status (font color), Validation (background color) [SG] <MB> @Done $Feature %Passed

@@ -523,7 +523,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
       loading: loading,
       assignee: assigneeObj.assignee,
       treeItemChildren: Tasks.assignmentsController._showTasks? tasks.sort(function(a,b) {
-        // sort by status, then by validation (if "Done"), then by priority, lastly by type
+        // sort by status, then by validation (if "Done"), then by priority, then by type
         
         var aStatus = a.get('developmentStatus');
         var bStatus = b.get('developmentStatus');
@@ -550,11 +550,20 @@ Tasks.assignmentsController = SC.ArrayController.create(
         // else if(bID < 0) return -1;
         // else return aID - bID;
         
-        // Alpha sort by names
+        // Finally alpha sort by names, or optionally numerically if task name starts with a number
         var aName = a.get('name');
         var bName = b.get('name');
         if (aName === bName) return 0;
-        else return (aName > bName) ? 1 : -1;
+        else {
+          var aIndexMatches = /^(\d+\.\d+|\d+)/.exec(aName);
+          if(aIndexMatches) {
+            var bIndexMatches = /^(\d+\.\d+|\d+)/.exec(bName);
+            if(bIndexMatches) {
+              return parseFloat(aIndexMatches[1]) - parseFloat(bIndexMatches[1]);
+            }
+          }
+          return (aName > bName) ? 1 : -1;
+        }
         
       }) : null,
       treeItemIsExpanded: true
