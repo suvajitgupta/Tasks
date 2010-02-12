@@ -543,12 +543,18 @@ Tasks.assignmentsController = SC.ArrayController.create(
         var bType = b.get('type');
         if(aType !== bType) return CoreTasks.taskTypeWeights[bType] - CoreTasks.taskTypeWeights[aType];
         
-        var aID = a.get('id');
-        var bID = b.get('id');
-        if(aID < 0 && bID < 0) return bID - aID;
-        else if(aID < 0) return 1;
-        else if(bID < 0) return -1;
-        else return aID - bID;
+        // var aID = a.get('id');
+        // var bID = b.get('id');
+        // if(aID < 0 && bID < 0) return bID - aID;
+        // else if(aID < 0) return 1;
+        // else if(bID < 0) return -1;
+        // else return aID - bID;
+        
+        // Alpha sort by names
+        var aName = a.get('name');
+        var bName = b.get('name');
+        if (aName === bName) return 0;
+        else return (aName > bName) ? 1 : -1;
         
       }) : null,
       treeItemIsExpanded: true
