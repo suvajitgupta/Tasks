@@ -493,12 +493,12 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     context = context.end();
     context = context.end();
     
-    var submitterUser = content.get('submitter');
-    if (submitterUser) {
-      var taskTooltip = ("_SubmitterTooltip".loc() + '%@ (%@)'.fmt(submitterUser.get('name'), submitterUser.get('loginName')));
-      context.attr('title', taskTooltip);
-      context.attr('alt', taskTooltip);
-    }
+    // var submitterUser = content.get('submitter');
+    // if (submitterUser) {
+    //   var taskTooltip = ("_SubmitterTooltip".loc() + '%@ (%@)'.fmt(submitterUser.get('name'), submitterUser.get('loginName')));
+    //   context.attr('title', taskTooltip);
+    //   context.attr('alt', taskTooltip);
+    // }
 
   },
 
