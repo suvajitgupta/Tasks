@@ -56,17 +56,20 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 'pre {\n' +
 ' margin-top: -5px;\n' +
 ' margin-bottom: 8px;\n' +
-' margin-left: 120px;\n' +
+' margin-left: 100px;\n' +
 ' background-color: beige;\n' +
 ' white-space: pre-wrap;\n' +
 ' word-wrap: break-word;\n' +
 ' border: 1px solid silver;\n' +
 ' padding: 5px;\n' +
 '}\n' +
+'.id {\n' +
+' letter-spacing: -1px;\n' +
+'}\n' +
 '.untested, .passed, .failed, .feature, .bug, .other {\n' +
 ' display: inline-block;\n' +
 ' text-align: center;\n' +
-' width: 40px;\n' +
+' width: 32px;\n' +
 ' font-size: 9px;\n' +
 ' padding: 1px 1px;\n' +
 '}\n' +
