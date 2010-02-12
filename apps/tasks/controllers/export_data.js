@@ -69,7 +69,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' letter-spacing: -1px;\n' +
 '}\n' +
 '.untested, .passed, .failed, .feature, .bug, .other {\n' +
-' width: 40px;\n' +
+' width: 44px;\n' +
 ' display: inline-block;\n' +
 ' text-align: center;\n' +
 ' font-size: 9px;\n' +
