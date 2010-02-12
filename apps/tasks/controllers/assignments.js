@@ -186,9 +186,9 @@ Tasks.assignmentsController = SC.ArrayController.create(
     this.set('recentlyUpdated', this.recentlyUpdatedCopy);
   },
   
-  attributeFilterIcon: function() {
+  attributeFilterState: function() {
     return this.attributeFilterCriteria.length === 13 && this.effortSpecified === Tasks.FILTER_DONTCARE &&  this.recentlyUpdated === Tasks.FILTER_DONTCARE?
-    'filter-tasks-icon-no-criteria' : 'filter-tasks-icon-has-criteria';
+    "_FilterOff".loc() : "_FilterOn".loc();
   }.property('attributeFilterCriteria', 'effortSpecified', 'recentlyUpdated').cacheable(),
   
   hasFiltering: function() {

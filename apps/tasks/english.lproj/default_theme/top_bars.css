@@ -264,20 +264,17 @@
 }
 
 /*
-// TODO: [RM] check/fix coordinates of Filter icons in sprited image
+// TODO: [MG] delete Filter icons in sprited image at -160px & -144px
 */
-.filter-tasks-icon-has-criteria {
-  width: 20px !important;
+.filter-icon {
+  margin-right: 0px !important;
+  width: 16px !important;
   height: 16px !important;
-  margin-right: 2px !important;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -160px;
+  background: static_url('images/filter-icon.png') no-repeat 0 0;
 }
 
-.filter-tasks-icon-no-criteria {
-  width: 20px !important;
-  height: 16px !important;
-  margin-right: 2px !important;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -144px;
+.filter-button {
+  text-align: left !important;
 }
 
 .sc-view .assignee-selection-bar {

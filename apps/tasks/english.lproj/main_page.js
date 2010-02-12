@@ -229,17 +229,17 @@ Tasks.mainPage = SC.Page.design({
         }),
       
         SC.LabelView.design(SCUI.SimpleButton,{
-          layout: { centerY: 0, right: 215, height: 18, width: 60 },
-          iconBinding: 'Tasks.assignmentsController.attributeFilterIcon',
-          classNames: ['toolbar-label'],
-          value: "_Filter".loc(),
+          layout: { centerY: 0, right: 195, height: 18, width: 75 },
+          icon: 'filter-icon',
+          classNames: ['toolbar-label', 'filter-button'],
+          valueBinding: 'Tasks.assignmentsController.attributeFilterState',
           toolTip: "_FilterTooltip".loc(),
           target: 'Tasks',
           action: 'filterTasks'
         }),
         
         SC.TextFieldView.design(SCUI.ToolTip, {
-          layout: { centerY: 0, height: 24, right: 10, width: 200 },
+          layout: { centerY: 0, height: 24, right: 5, width: 200 },
           classNames: ['tasks-search-bar'],
           hint: "_TasksSearchHint".loc(),
           toolTip: "_TasksSearchTooltip".loc(),
@@ -247,7 +247,7 @@ Tasks.mainPage = SC.Page.design({
         }),
       
         SC.View.design({ // Tasks Search cancel button
-          layout: { centerY: 1, height: 12, right: 15, width: 12 },
+          layout: { centerY: 1, height: 12, right: 10, width: 12 },
           isVisible: NO,
           classNames: ['filter-cancel-icon'],
           mouseDown: function() {
