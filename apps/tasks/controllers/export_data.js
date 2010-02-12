@@ -26,7 +26,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 '}\n' +
 'h1, h2 {\n' +
 ' line-height: 13px;\n' +
-' margin-top: 5px;\n' +
+' margin-top: 4px;\n' +
 ' margin-bottom: 4px;\n' +
 ' padding: 3px 6px;\n' +
 ' color: white;\n' +
@@ -56,7 +56,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 'pre {\n' +
 ' margin-top: -5px;\n' +
 ' margin-bottom: 8px;\n' +
-' margin-left: 100px;\n' +
+' margin-left: 115px;\n' +
 ' background-color: beige;\n' +
 ' white-space: pre-wrap;\n' +
 ' word-wrap: break-word;\n' +
@@ -64,19 +64,24 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' padding: 5px;\n' +
 '}\n' +
 '.id {\n' +
+' line-height: 1.5;\n' +
+' width: 32px !important;\n' +
 ' letter-spacing: -1px;\n' +
 '}\n' +
 '.untested, .passed, .failed, .feature, .bug, .other {\n' +
+' width: 40px;\n' +
 ' display: inline-block;\n' +
 ' text-align: center;\n' +
-' width: 32px;\n' +
 ' font-size: 9px;\n' +
-' padding: 1px 1px;\n' +
 '}\n' +
 '.feature, .bug, .other {\n' +
+' padding: 1px 0px;\n' +
 ' border: 1px solid gray;\n' +
 ' -moz-border-radius: 15px;\n' +
 ' -webkit-border-radius: 15px;\n' +
+'}\n' +
+'.untested, .passed, .failed {\n' +
+' padding: 1px 3px;\n' +
 '}\n' +
 '.untested {\n' +
 ' color: black;\n' +
