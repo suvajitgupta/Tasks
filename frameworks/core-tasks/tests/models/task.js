@@ -2,59 +2,69 @@
  * CoreTasks.Task Unit Test
  *
  * @author Brandon Blatnick
+ * @author Suvajit Gupta
  */
-/*globals CoreTasks */
+/*globals CoreTasks sc_require module CoreTasks equals test*/
 // http://localhost:4400/core-tasks/en/current/tests/models/task.html
 sc_require('core');
 sc_require('models/task');
 
-var task; 
+var doneTask; 
 
 module("CoreTasks.Task", {
 
   setup: function() {
     
-    var taskHash = {
-      name: CoreTasks.NEW_TASK_NAME
+    var doneTaskHash = {
+      name: CoreTasks.NEW_TASK_NAME,
+      developmentStatus: CoreTasks.TASK_STATUS_DONE,
+      validation: CoreTasks.TASK_VALIDATION_PASSED
     };
-
-    task = CoreTasks.createRecord(CoreTasks.Task, taskHash);
+    doneTask = CoreTasks.createRecord(CoreTasks.Task, doneTaskHash);
 
   },
 
   teardown: function() {
     
-    task.destroy();
-    task = null;
+    doneTask.destroy();
+    doneTask = null;
     
   }
 });
 
+test("Computed Property: developmentStatusWithValidation",
+function() {
+
+  equals(doneTask.get('developmentStatus'), CoreTasks.TASK_STATUS_DONE, "developmentStatus initialized to");
+  equals(doneTask.get('validation'), CoreTasks.TASK_VALIDATION_PASSED, "validation initialized to");
+  doneTask.set('developmentStatusWithValidation', CoreTasks.TASK_STATUS_ACTIVE);
+  equals(doneTask.get('developmentStatus'), CoreTasks.TASK_STATUS_ACTIVE, "developmentStatus changed to");
+  equals(doneTask.get('validation'), CoreTasks.TASK_VALIDATION_UNTESTED, "validation adjusted to");
+
+});
+
 test("Computed Property: projectValue",
 function() {
 
-  task.set('projectId', 100);
-  equals(task.get('projectValue'), 100, "acceptable projectValue retrieval");
+  doneTask.set('projectId', null);
+  equals(doneTask.get('projectValue'), 0, "set projectId to null, projectValue is");
+  
+  doneTask.set('projectValue', '0');
+  equals(doneTask.get('projectId'), null, "set projectValue to '0', projectId is");
+  
+  doneTask.set('projectId', 100);
+  equals(doneTask.get('projectValue'), 100, "set projectId to 100, projectValue is");
 
-  task.set('projectId', null);
-  equals(task.get('projectValue'), 0, "null projectValue retrieval");
-  
-  SC.RunLoop.begin();
-  task.set('projectId', null);
-  SC.RunLoop.end();
-  equals(task.get('projectValue'), 0, "0 projectValue setting");
-  
 });
 
 
 test("Computed Property: projectValue",
 function() {
 
-  task.set('effort', '2h');
-  equals(task.get('displayEffort'), '2h', "effort with unit appended");
+  doneTask.set('effort', '2h');
+  equals(doneTask.get('displayEffort'), '2h', "effort with unit appended");
 
-  task.set('effort', '2');
-  equals(task.get('displayEffort'), '2d', "effort with unit missing, should be in days");
+  doneTask.set('effort', '2');
+  equals(doneTask.get('displayEffort'), '2d', "effort with unit missing, should be in days");
 
 });
-
