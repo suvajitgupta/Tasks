@@ -705,10 +705,10 @@ Tasks.assignmentsController = SC.ArrayController.create(
         ret += '<td></td></tr></table>';
       }
       else { // displayMode === Tasks.DISPLAY_MODE_TEAM
-        ret += '<hr>' + "_Assignees:".loc() + stats.notLoadedAssigneesCount + ' ' + "_AssigneeNotLoaded".loc() + ', ' +
-                                              stats.underloadedAssigneesCount + ' ' + "_AssigneeUnderLoaded".loc() + ', ' +
+        ret += '<hr>' + "_Assignees:".loc() + stats.overloadedAssigneesCount + ' ' + "_AssigneeOverloaded".loc() + ', ' +
                                               stats.properlyLoadedAssigneesCount + ' ' + "_AssigneeProperlyLoaded".loc() + ', ' +
-                                              stats.overloadedAssigneesCount + ' ' + "_AssigneeOverloaded".loc();
+                                              stats.underloadedAssigneesCount + ' ' + "_AssigneeUnderLoaded".loc() + ', ' +
+                                              stats.notLoadedAssigneesCount + ' ' + "_AssigneeNotLoaded".loc();
         ret += '<hr>' + "_RedFlags:".loc() + stats.riskyTasksCount + ' ' + "_Risky".loc() + ', ' +
                                              stats.failedTasksCount + ' ' + "_Failed".loc();
         ret += '<hr>';
