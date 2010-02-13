@@ -568,6 +568,7 @@ Tasks.mainPage = SC.Page.design({
         layout: { centerY: 0, height: 16, centerX: -20, width: 250 },
         classNames: ['status-bar-label'],
         textAlign: SC.ALIGN_CENTER,
+        displayModeBinding: SC.Binding.oneWay('Tasks.assignmentsController.displayMode'),
         tasksTreeBinding: SC.Binding.oneWay('Tasks.tasksController.content')
       }),
         

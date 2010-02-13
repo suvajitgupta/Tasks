@@ -14,8 +14,9 @@
 Tasks.SummaryView = SC.LabelView.extend(
 /** @scope Tasks.SummaryView.prototype */ {
   
+  displayMode: null,
   tasksTree: null,
-  displayProperties: ['tasksTree'],
+  displayProperties: ['displayMode', 'tasksTree'],
   
   render: function(context, firstTime) {
 
@@ -35,10 +36,10 @@ Tasks.SummaryView = SC.LabelView.extend(
         var failedTasksCount = assignmentNode.get('failedTasksCount');
         if(riskyTasksCount > 0 || failedTasksCount > 0) redFlags++;
       }
-      if(Tasks.assignmentsController.get('displayMode') === Tasks.DISPLAY_MODE_TEAM) {
+      if(this.displayMode === Tasks.DISPLAY_MODE_TEAM) {
         message += redFlags + "_RedFlags".loc();
       }
-      else { // display mode === Tasks.DISPLAY_MODE_TASKS
+      else { // this.displayMode === Tasks.DISPLAY_MODE_TASKS
         message += tasksCount + "_tasks".loc();
       }
     }
