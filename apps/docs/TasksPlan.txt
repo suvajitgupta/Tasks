@@ -34,7 +34,7 @@ General Infrastructure
 v Track/optimize calls to assignments controller and custom view render methods <BB> [SG] @Active
 v Make buttons depressable to provide feedback when using them [SG] $Feature
 - Support direct access to Tasks projects or tasks using SproutCore routes [SG] $Feature @Done %Passed
-- Beta: Add support for adding Comments to tasks [SG] <JH2> $Feature @Active
+^ Beta: Add support for adding Comments to tasks [SG] <JH2> $Feature @Active
 - Out of Scope: Add support for attachments in record descriptions $Feature
 | Upload attachment somewhere and insert URL to it in record description
 
@@ -50,7 +50,7 @@ v Add hover over tooltip for projects to show how many tasks they contain [SG] @
 | Check via Inline Editor Delegate
 ^ Add "Add Project" & "Del. Project" buttons in projects toolbar [SG] @Done $Feature %Passed
 - Add warning Alert box about deleting Project with Tasks [SG] @Done $Feature %Passed
-- Beta: Disallow names that are already in use or reserved and providing warning to user [SG] $Feature @Active
+v Beta: Disallow names that are already in use or reserved and providing warning to user [SG] $Feature @Active
 | Project name: cannot be same as any existing name
 | User login name cannot cannot be same as any existing name or be reserved name "none"
 v Add summary in projects toolbar showing number of projects & number of tasks for selected project [SG] <MB> @Done $Feature %Passed
@@ -93,7 +93,7 @@ v Add hover over tooltip for assignees to show how many tasks they have and to e
 ^ Add popup viewer/editor for Task submitter, assignee, effort, project, and description [JH2] <SG> $Feature @Done %Passed
 - Beta: Support task Copy ID/Name and Copy Link Location (URL with "Route") to clipboard [SG] $Feature @Risky
 v Add task context menu with options: Add, Duplicate, Delete; All Task Attributes; Copy ID/Name, Copy Link [SG] $Feature @Done %Passed
-- Beta: Add ability to "Watch" tasks and get Email Notifications after task changes [SG] <JH2> $Feature
+^ Beta: Add ability to "Watch" tasks and get Email Notifications after task changes [SG] <JH2> $Feature
 - Out of Scope: Add support for nested tasks/tagging $Feature
 | Use "Clustering" approach described in Help instead
 - Out of Scope: Add support for managing inter-task dependencies/linking $Feature
@@ -150,12 +150,12 @@ v Add hotkeys for common operations (like add Projects/Tasks and Save) [EG] <SG>
 Server
 ^ Build persistence server using Persevere [SE] <SG> @Done %Passed
 - Create command-line scripts to start/stop Server and to create users <SG> [SE] $Feature @Done %Passed
-- Beta: Implement Server-based user authentication [JH2] <SG> @Active
+- Implement Server-based user authentication [JH2] <SG> @Done %Passed
 - Beta: Implement Server-based RBAC (role-based access control) <SG> [JH2] @Active
 - Beta: Send Email Notifications on noteworthy changes [JH2] <SG> $Feature @Active
 | Notify Submitter/Assignee when Task is created/updated/deleted by someone other than them
 | Don’t send email if Email address is unspecified
-- Add server-side data validation checks/return appropriate error codes [SE] <SG>
+- Add Server-side data validation checks/return appropriate error codes [SE] <SG>
 
 Styling/Hardening
 ^ Style via CSS, embed catchy/sprited images [MG] <SG> @Done %Passed
@@ -176,7 +176,7 @@ Styling/Hardening
 Packaging/Delivery
 ^ Develop Web client (ported to Firefox, Internet Explorer, Safari, Chrome) [SG] $Feature @Done %Passed
 - Deploy publicly-accessible instance using Google App Engine/Python [JH2] <SG> @Done %Passed
-- Develop Desktop client using Webkit <JH2> [SG] $Feature @Active
+- Develop Desktop client using Webkit <JH2> [SG] $Feature
 - Develop Mobile client using PhoneGap <MB> [SG] $Feature
 
 Testing/Rollout
