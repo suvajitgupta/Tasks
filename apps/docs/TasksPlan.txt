@@ -62,7 +62,8 @@ v Disable Add/Del. Tasks buttons when on "All Tasks" project [SG] <BB> @Done %Pa
 ^ Allow multi-task drag-and-drop reallocation to other projects [BB] <SG> @Done $Feature %Passed
 ^ Add popup viewer/editor for Project time left/description [SG] $Feature @Done %Passed
 v Add project context menu with options: Add, Duplicate, Delete [SG] $Feature @Done %Passed
-- Beta: Add "Statistics..." button/popup to show percent breakdown of displayed tasks by attributes (HTML & graphical) [SG] $Feature @Active
+- Add "Statistics..." button/popup to show percent breakdown of displayed tasks by attributes (HTML) [SG] $Feature @Done %Passed
+- Add alternate graphical view (pie charts, bar graphs) for statistics of displayed tasks [SG] $Feature
 
 Task Manager GUI
 ^ Group Tasks by User and display Task id, summary, and effort (if specified) on far right [SG] <JH2> @Done $Feature %Passed
@@ -108,7 +109,8 @@ User Manager GUI
 ^ Add assignee/submitter filtering (space or comma separators, "none" for unassigned) & corresponding delete button in top toolbar [SG] <JH2> @Done $Feature %Passed
 - Allow assignee filtering by matching any part of login or full name [SG] $Feature @Done %Passed
 - Set assignee selection filter to logged in user if they are a Developer [SG] @Done $Feature %Passed
-^ Add User Manager with "Add/Del. User"  buttons in toolbar (reuse user information view with signup screen) and user count at bottom [SG] <JH2> @Done %Passed $Feature
+^ Add Settings button/popup embedding User Manager with "Add/Del. User"  buttons in toolbar [SG] <JH2> @Done %Passed $Feature
+- Show number of registered/selected users at the bottom of User Manager panel [SG] $Feature @Done %Passed
 ^ Allow multi-user drag-and-drop role change in User Manager [SG] @Done $Feature %Passed
 - Reset task assignee/submitter after user deletion <SE> [SG] $Feature @Done %Passed
 - Out of Scope: Add support for "Teams" (a user can belong to a team, a team can have a lead) $Feature
@@ -118,7 +120,7 @@ Application Manager GUI
 - Add installation and Tasks logos to top bar and display program version [SG] @Done $Feature %Passed
 - Add welcome message showing logged in user/role with hover over tooltip showing time of login [SG] @Done $Feature %Passed
 - Add server data loading message in status bar during startup [SG] $Feature @Done %Passed
-- Display number of selected projects/tasks and displayed assignees/tasks in the status bar [SG] <MB> @Done $Feature %Passed
+- Show number of selected projects/tasks and displayed assignees/tasks in the status bar [SG] <MB> @Done $Feature %Passed
 - Add "Save" button in top toolbar, note time of last save in status bar [SG] <BB> @Done $Feature %Passed
 - Add "Auto Save" checkbox in status bar [SG] <BB> @Done $Feature %Passed
 - Enable/disable Save button based on data modification [EO] <SG> $Feature @Done %Passed
@@ -128,11 +130,6 @@ Application Manager GUI
 - Allow option to automatically create new users for unknown assignees/submitters found during importing [SG] @Done $Feature %Passed
 - Add "Export" button in top toolbar with associated pop up panel, allowing user to choose between Text/HTML formats [SG] @Done $Feature %Passed
 | When on "All Tasks" project with no filters on all project data is exported, otherwise only displayed data is exported
-- Add Settings button/popup to manage user preferences <JH2> [SG] $Feature
-| Preferences:
-| * auto save on or off
-| * percent and min days for Assignee loading determination
-| * email notifications
 - Add "Exort to HTML" capability for printable & human-readable version (for baselining tasks for a release) [SG] $Feature @Done %Passed
 - Add online "Help" button in top toolbar & popup help window [SG] @Done %Passed $Feature
 v Add online training video using Captivate or Camtasia [SG] $Feature @Done
@@ -140,11 +137,16 @@ v Add online training video using Captivate or Camtasia [SG] $Feature @Done
 - Add onscreen help (on panel fields that are complex and on blank workspace to assist new users) <MG> [SG] $Feature @Done %Passed
 - Add Logout button to exit in top toolbar (confirm before exiting, reload data/clear all filters) [SG] <JH2> @Done $Feature %Passed
 - Prompt user to save changes (if any) before logging out [SG] <SE> $Feature @Done %Passed
-- Restore application settings/state from last login using HTML5 storage [SG] <MB> $Feature
 | See demo.sproutcore.com/user_defaults and lookup SproutCore blog for Charles' posting on this topic
 - Add "TEAM" display mode (vs. "TASKS") to show everyone at a glance, clicking on assignee shows their tasks [SG] $Feature @Done %Passed
-v Add hotkeys for common operations (like add Projects/Tasks and Save) [EG] <SG> $Feature @Done %Passed
-- Add Undo/Redo capability [SG] <SE> $Feature
+v Add hotkeys for common operations (like Add/Duplcate Tasks and Save) [EG] <SG> $Feature @Done %Passed
+- Add tab in Settings popup panel to manage user preferences [SG] $Feature
+| Preferences:
+| * auto save on or off
+| * percent and min days for Assignee loading determination
+| * email notifications
+- Apply application settings/state from last login saved using HTML5 storage [SG] <MB> $Feature
+- Support Undo/Redo via toolbar buttons and hotkeys [SG] <SE> $Feature
 - Support disconnected operation and synchronization after network reconnection using SproutDB [SG] <SE> $Feature
 
 Server
@@ -153,8 +155,10 @@ Server
 - Implement Server-based user authentication [JH2] <SG> @Done %Passed
 - Beta: Implement Server-based RBAC (role-based access control) <SG> [JH2] @Active
 - Beta: Send Email Notifications on noteworthy changes [JH2] <SG> $Feature @Active
+| Add a Server setting to enable/disable server notifications for a Tasks installation
 | Notify Submitter/Assignee when Task is created/updated/deleted by someone other than them
 | Don’t send email if Email address is unspecified
+| For Task updates, indicate old and new values of attributes
 - Add Server-side data validation checks/return appropriate error codes [SE] <SG>
 
 Styling/Hardening
@@ -170,7 +174,7 @@ Styling/Hardening
 | Save, Import/Export (Text & HTML)
 - Perform I18N and L10N (test with reversed strings) [SG] <JH2> @Done %Passed
 - Develop Model unit tests [SG] <BB> @Active
-- Develop View unit tests [SG] <MB> @Active
+- Develop View unit tests [SG] <BB> @Active
 - Handle secondary scenarios/provide good diagnostics [SG] <SE> @Active
 
 Packaging/Delivery
