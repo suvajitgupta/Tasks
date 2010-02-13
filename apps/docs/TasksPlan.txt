@@ -141,10 +141,9 @@ v Add online training video using Captivate or Camtasia [SG] $Feature @Done
 - Add "TEAM" display mode (vs. "TASKS") to show everyone at a glance, clicking on assignee shows their tasks [SG] $Feature @Done %Passed
 v Add hotkeys for common operations (like Add/Duplcate Tasks and Save) [EG] <SG> $Feature @Done %Passed
 - Add tab in Settings popup panel to manage user preferences [SG] $Feature
-| Preferences:
-| * auto save on or off
-| * percent and min days for Assignee loading determination
-| * email notifications
+| Auto save
+| Email notifications
+| Percent or Threshold (in days) for Assignee loading determination
 - Apply application settings/state from last login saved using HTML5 storage [SG] <MB> $Feature
 - Support Undo/Redo via toolbar buttons and hotkeys [SG] <SE> $Feature
 - Support disconnected operation and synchronization after network reconnection using SproutDB [SG] <SE> $Feature
