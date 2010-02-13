@@ -25,7 +25,7 @@ Tasks.SummaryView = SC.LabelView.extend(
       var assigneesCount = 0;
       var assignmentNodes = this.tasksTree.get('treeItemChildren');
       if(assignmentNodes) assigneesCount = assignmentNodes.get('length');
-      message += ("_Displaying".loc() + assigneesCount + "_assignees".loc());
+      message += (assigneesCount + "_assignees".loc());
 
       var tasksCount = 0;
       var redFlags = 0;
@@ -42,6 +42,7 @@ Tasks.SummaryView = SC.LabelView.extend(
       else { // this.displayMode === Tasks.DISPLAY_MODE_TASKS
         message += tasksCount + "_tasks".loc();
       }
+      message += "_displayed".loc();
     }
     
     // display value

@@ -20,7 +20,7 @@ Tasks.SelectionView = SC.LabelView.extend(
   
   render: function(context, firstTime) {
 
-    var message = "_Selected".loc();
+    var message = '';
     var projectsSelection = this.get('projectsSelection');
     if(projectsSelection) {
       message += (projectsSelection.get('length') + "_projects".loc());
@@ -29,6 +29,7 @@ Tasks.SelectionView = SC.LabelView.extend(
     if(tasksSelection) {
       message += (tasksSelection.get('length') + "_tasks".loc());
     }
+    message += "_selected".loc();
     
     // display value
     this.set('value', message);

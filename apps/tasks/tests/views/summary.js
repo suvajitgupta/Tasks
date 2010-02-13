@@ -48,21 +48,21 @@ module("Tasks.SummaryView tests", pane.standardSetup());
 test("startup", function(){
   var view = pane.view('null');
   ok(view, 'view should render');
-  equals(view.$().get(0).innerHTML, '', 'null summary');
+  equals(view.$().get(0).innerHTML, '', 'Null summary');
 });
 
 test("empty", function(){
   var view = pane.view('empty');
-  equals(view.$().get(0).innerHTML, 'Displaying 0 assignees and 0 tasks', 'empty summary');
+  equals(view.$().get(0).innerHTML, '0 assignees and 0 tasks displayed', 'Empty summary');
 });
 
 
 test("TASKS display mode", function(){
   var view = pane.view('tasks');
-  equals(view.$().get(0).innerHTML, 'Displaying 3 assignees and 12 tasks', 'TASKS display mode summary');
+  equals(view.$().get(0).innerHTML, '3 assignees and 12 tasks displayed', 'Sample TASKS display mode summary');
 });
 
 test("TEAM display mode", function(){
   var view = pane.view('team');
-  equals(view.$().get(0).innerHTML, 'Displaying 3 assignees and 2 red flags', 'TEAM display mode summary');
+  equals(view.$().get(0).innerHTML, '3 assignees and 2 red flags displayed', 'Sample TEAM display mode summary');
 });

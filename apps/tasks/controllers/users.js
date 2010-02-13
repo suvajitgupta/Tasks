@@ -71,8 +71,8 @@ Tasks.usersController = SC.ArrayController.create(SCUI.StatusChanged,
   }.observes('[]'),
 
   usersCount: function() {
-    return this.get('length') + "_Users".loc();
-  }.property('[]').cacheable(),
+    return this.get('length') + "_RegisteredUsers".loc() + this.getPath('selection.length') + "_selected".loc();
+  }.property('[]', 'selection').cacheable(),
 
   isDeletable: function() {
 
