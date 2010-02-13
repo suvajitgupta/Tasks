@@ -36,11 +36,11 @@ Tasks.SummaryView = SC.LabelView.extend(
         var failedTasksCount = assignmentNode.get('failedTasksCount');
         if(riskyTasksCount > 0 || failedTasksCount > 0) redFlags++;
       }
-      if(this.displayMode === Tasks.DISPLAY_MODE_TEAM) {
-        message += redFlags + "_RedFlags".loc();
-      }
-      else { // this.displayMode === Tasks.DISPLAY_MODE_TASKS
+      if(this.displayMode === Tasks.DISPLAY_MODE_TASKS) {
         message += tasksCount + "_tasks".loc();
+      }
+      else { // this.displayMode === Tasks.DISPLAY_MODE_TEAM
+        message += redFlags + "_redFlags".loc();
       }
       message += "_displayed".loc();
     }

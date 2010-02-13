@@ -24,6 +24,7 @@ var pane = SC.ControlTestPane.design()
   })
   .add('empty', Tasks.SummaryView, {
     layout: { top: 0, height: 16, width: 250, left: 0 },
+    displayMode: Tasks.DISPLAY_MODE_TASKS,
     tasksTree: emptyTree
   })
   .add('tasks', Tasks.SummaryView, {
