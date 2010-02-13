@@ -32,17 +32,6 @@ module("CoreTasks.Task", {
   }
 });
 
-test("Computed Property: developmentStatusWithValidation",
-function() {
-
-  equals(doneTask.get('developmentStatus'), CoreTasks.TASK_STATUS_DONE, "developmentStatus initialized to");
-  equals(doneTask.get('validation'), CoreTasks.TASK_VALIDATION_PASSED, "validation initialized to");
-  doneTask.set('developmentStatusWithValidation', CoreTasks.TASK_STATUS_ACTIVE);
-  equals(doneTask.get('developmentStatus'), CoreTasks.TASK_STATUS_ACTIVE, "developmentStatus changed to");
-  equals(doneTask.get('validation'), CoreTasks.TASK_VALIDATION_UNTESTED, "validation adjusted to");
-
-});
-
 test("Computed Property: projectValue",
 function() {
 
@@ -57,8 +46,7 @@ function() {
 
 });
 
-
-test("Computed Property: projectValue",
+test("Computed Property: displayEffort",
 function() {
 
   doneTask.set('effort', '2h');
@@ -68,3 +56,34 @@ function() {
   equals(doneTask.get('displayEffort'), '2d', "effort with unit missing, should be in days");
 
 });
+
+test("Computed Property: effortValue",
+function() {
+
+  doneTask.set('effortValue', '');
+  equals(doneTask.get('displayEffort'), null, "set effort value to ''");
+
+  doneTask.set('effortValue', '33');
+  equals(doneTask.get('effortValue'), '33', "set effortValue to 33, effortValue is");
+  equals(doneTask.get('displayEffort'), '33d', "set effortValue to 33, displayEffort is");
+
+});
+
+test("Computed Property: developmentStatusWithValidation",
+function() {
+
+  equals(doneTask.get('developmentStatus'), CoreTasks.TASK_STATUS_DONE, "developmentStatus initialized to");
+  equals(doneTask.get('validation'), CoreTasks.TASK_VALIDATION_PASSED, "validation initialized to");
+  doneTask.set('developmentStatusWithValidation', CoreTasks.TASK_STATUS_ACTIVE);
+  equals(doneTask.get('developmentStatus'), CoreTasks.TASK_STATUS_ACTIVE, "developmentStatus changed to");
+  equals(doneTask.get('validation'), CoreTasks.TASK_VALIDATION_UNTESTED, "validation adjusted to");
+
+});
+
+test("Computed Property: icon",
+function() {
+
+  equals(doneTask.get('icon'), 'task-icon-other', "icon is");
+
+});
+
