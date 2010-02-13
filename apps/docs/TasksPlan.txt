@@ -172,8 +172,7 @@ Styling/Hardening
 | User modifications via User Manager
 | Save, Import/Export (Text & HTML)
 - Perform I18N and L10N (test with reversed strings) [SG] <JH2> @Done %Passed
-- Develop Model unit tests [SG] <BB> @Active
-- Develop View unit tests [SG] <BB> @Active
+- Develop Model/View unit tests [SG] <BB> @Active
 - Handle secondary scenarios/provide good diagnostics [SG] <SE> @Active
 
 Packaging/Delivery
