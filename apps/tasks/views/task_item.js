@@ -477,13 +477,18 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         break;          
     }
     
+    var taskTooltip = "_TaskDescriptionTooltip".loc();
+    var submitterUser = content.get('submitter');
+    if (submitterUser) {
+      taskTooltip += ('; ' + "_SubmitterTooltip".loc() + '%@ (%@)'.fmt(submitterUser.get('name'), submitterUser.get('loginName')));
+    }
     var hasDescription = NO;
     if (content.get('description')) hasDescription = YES;
     context = context.begin('div').addClass('sc-view').addClass('task-description');
     context = context.begin('img').attr({
       src: SC.BLANK_IMAGE_URL,
-      title: "_TaskDescriptionTooltip".loc(),
-      alt: "_TaskDescriptionTooltip".loc()
+      title: taskTooltip,
+      alt: taskTooltip
     }).addClass('task-editor');
     if (hasDescription) {
       context.addClass('task-icon-has-description');
@@ -493,12 +498,6 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     context = context.end();
     context = context.end();
     
-    // var submitterUser = content.get('submitter');
-    // if (submitterUser) {
-    //   var taskTooltip = ("_SubmitterTooltip".loc() + '%@ (%@)'.fmt(submitterUser.get('name'), submitterUser.get('loginName')));
-    //   context.attr('title', taskTooltip);
-    //   context.attr('alt', taskTooltip);
-    // }
 
   },
 
