@@ -72,7 +72,7 @@ Tasks.mainPage = SC.Page.design({
         }),
         
         SC.LabelView.design( SCUI.SimpleButton, {
-          layout: { centerY: 0, right: 325, height: 32, width: 70 },
+          layout: { centerY: 2, right: 345, height: 32, width: 60 },
           icon: ['save-icon'],
           toolTip: "_SaveTooltip".loc(),
           isEnabledBinding: 'CoreTasks.needsSave',
@@ -84,7 +84,7 @@ Tasks.mainPage = SC.Page.design({
         }),
         
         SC.LabelView.design( SCUI.SimpleButton, {
-          layout: { centerY: 0, right: 270, height: 32, width: 70 },
+          layout: { centerY: 0, right: 290, height: 32, width: 32 },
           classNames: ['refresh-icon'],
           toolTip: "_RefreshTooltip".loc(),
           target: 'Tasks',
@@ -92,7 +92,7 @@ Tasks.mainPage = SC.Page.design({
         }),
         
         SC.LabelView.design( SCUI.SimpleButton, {
-          layout: { centerY: 0, right: 220, height: 32, width: 70 },
+          layout: { centerY: 0, right: 235, height: 32, width: 60 },
           icon: ['import-icon'],
           toolTip: "_ImportTooltip".loc(),
           target: 'Tasks',
@@ -100,7 +100,7 @@ Tasks.mainPage = SC.Page.design({
         }),
         
         SC.LabelView.design( SCUI.SimpleButton, {
-          layout: { centerY: 0, right: 170, height: 32, width: 70 },
+          layout: { centerY: 0, right: 180, height: 32, width: 32 },
           classNames: ['export-icon'],
           toolTip: "_ExportTooltip".loc(),
           target: 'Tasks.exportDataController',
@@ -108,12 +108,12 @@ Tasks.mainPage = SC.Page.design({
         }),
         
         SC.View.design({
-          layout: { top: 8, bottom: 8, right: 170, width: 2 },
+          layout: { top: 8, bottom: 8, right: 175, width: 2 },
           classNames: ['top-bar-divider']
         }),
         
         SC.LabelView.design( SCUI.SimpleButton, {
-          layout: { centerY: 0, right: 100, height: 32, width: 70 },
+          layout: { centerY: 0, right: 110, height: 32, width: 32 },
           classNames: ['settings-icon'],
           toolTip: "_SettingsTooltip".loc(),
           target: 'Tasks',
@@ -121,7 +121,7 @@ Tasks.mainPage = SC.Page.design({
         }),
         
         SC.LabelView.design( SCUI.SimpleButton, {
-          layout: { centerY: 0, right: 50, height: 32, width: 70 },
+          layout: { centerY: 0, right: 55, height: 32, width: 32 },
           classNames: ['help-icon'],
           toolTip: "_HelpTooltip".loc(),
           target: 'Tasks',
@@ -129,7 +129,7 @@ Tasks.mainPage = SC.Page.design({
         }),
         
         SC.LabelView.design( SCUI.SimpleButton, {
-          layout: { centerY: 0, right: 0, height: 32, width: 70 },
+          layout: { centerY: 0, right: 5, height: 32, width: 32 },
           classNames: ['logout-icon'],
           toolTip: "_LogoutTooltip".loc(),
           target: 'Tasks',
@@ -211,7 +211,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         SC.TextFieldView.design(SCUI.ToolTip, {
-          layout: { centerY: 0, height: 24, right: 275, width: 200 },
+          layout: { centerY: 0, height: 24, right: 280, width: 200 },
           classNames: ['assignee-selection-bar'],
           hint: "_UserSelectionHint".loc(),
           toolTip: "_UserSelectionTooltip".loc(),
@@ -219,7 +219,7 @@ Tasks.mainPage = SC.Page.design({
         }),
         
         SC.View.design({ // Assignee Selection cancel button
-          layout: { centerY: 1, height: 12, right: 280, width: 12 },
+          layout: { centerY: 1, height: 12, right: 285, width: 12 },
           isVisible: NO,
           classNames: ['filter-cancel-icon'],
           mouseDown: function() {
@@ -229,9 +229,9 @@ Tasks.mainPage = SC.Page.design({
         }),
       
         SC.LabelView.design(SCUI.SimpleButton,{
-          layout: { centerY: 0, right: 196, height: 18, width: 75 },
+          layout: { centerY: 0, right: 205, height: 18, width: 75 },
           icon: 'filter-icon',
-          classNames: ['toolbar-label', 'filter-button'],
+          classNames: ['toolbar-label'],
           valueBinding: 'Tasks.assignmentsController.attributeFilterState',
           toolTip: "_FilterTooltip".loc(),
           target: 'Tasks',
@@ -553,7 +553,7 @@ Tasks.mainPage = SC.Page.design({
       }),
         
       statisticsButton: SC.LabelView.design( SCUI.SimpleButton, {
-        layout: { centerY: 0, height: 16, left: 230, width: 90 },
+        layout: { centerY: 0, height: 16, left: 230, width: 95 },
         titleMinWidth: 0,
         classNames: ['status-bar-button'],
         value: "_ShowStatistics".loc(),

@@ -75,141 +75,141 @@
  */
  
 .save-icon {
-  width: 70px !important;
+  width: 55px !important;
   height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 0;
+  background: static_url('images/default-theme-dock-icons.png') no-repeat -7px 0px;
 }
 
 .save-icon:hover {
-  width: 70px !important;
+  width: 55px !important;
   height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -64px;
+  background: static_url('images/default-theme-dock-icons.png') no-repeat -7px -64px;
 }
 
 .disabled .save-icon {
-  width: 70px !important;
+  width: 55px !important;
   height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -32px;
+  background: static_url('images/default-theme-dock-icons.png') no-repeat -7px -32px;
 }
 
 .disabled .save-icon:hover {
-  width: 70px !important;
+  width: 55px !important;
   height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -64px;
+  background: static_url('images/default-theme-dock-icons.png') no-repeat -7px -64px;
 }
 
 .refresh-icon {
-  width: 70px !important;
+  width: 55px !important;
   height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -96px;
+  background: static_url('images/default-theme-dock-icons.png') no-repeat -7px -96px;
 }
 
 .disabled .refresh-icon {
-  width: 70px !important;
+  width: 55px !important;
   height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -128px;
+  background: static_url('images/default-theme-dock-icons.png') no-repeat -7px -128px;
 }
 
 .refresh-icon:hover {
-  width: 70px !important;
+  width: 55px !important;
   height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -160px;
+  background: static_url('images/default-theme-dock-icons.png') no-repeat -7px -160px;
 }
 
 .import-icon {
-  width: 70px !important;
+  width: 55px !important;
   height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -288px;
+  background: static_url('images/default-theme-dock-icons.png') no-repeat -7px -288px;
 }
 
 .import-icon:hover {
-  width: 70px !important;
+  width: 55px !important;
   height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -352px;
+  background: static_url('images/default-theme-dock-icons.png') no-repeat -7px -352px;
 }
 
 .disabled .import-icon {
-  width: 70px !important;
+  width: 55px !important;
   height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -320px;
+  background: static_url('images/default-theme-dock-icons.png') no-repeat -7px -320px;
 }
 
 .disabled .import-icon:hover {
-  width: 70px !important;
+  width: 55px !important;
   height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -352px;
+  background: static_url('images/default-theme-dock-icons.png') no-repeat -7px -352px;
 }
 
 .export-icon {
-  width: 70px !important;
+  width: 55px !important;
   height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -192px;
+  background: static_url('images/default-theme-dock-icons.png') no-repeat -7px -192px;
 }
 
 .disabled .export-icon {
-  width: 70px !important;
+  width: 55px !important;
   height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -224px;
+  background: static_url('images/default-theme-dock-icons.png') no-repeat -7px -224px;
 }
 
 .export-icon:hover {
-  width: 70px !important;
+  width: 55px !important;
   height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -256px;
+  background: static_url('images/default-theme-dock-icons.png') no-repeat -7px -256px;
 }
 
 .settings-icon {
-  width: 70px !important;
+  width: 55px !important;
   height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -384px;
+  background: static_url('images/default-theme-dock-icons.png') no-repeat -7px -384px;
 }
 
 .disabled .settings-icon {
-  width: 70px !important;
+  width: 55px !important;
   height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -416px;
+  background: static_url('images/default-theme-dock-icons.png') no-repeat -7px -416px;
 }
 
 .settings-icon:hover {
-  width: 70px !important;
+  width: 55px !important;
   height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -448px;
+  background: static_url('images/default-theme-dock-icons.png') no-repeat -7px -448px;
 }
 
 .help-icon {
-  width: 70px !important;
+  width: 55px !important;
   height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -480px;
+  background: static_url('images/default-theme-dock-icons.png') no-repeat -7px -480px;
 }
 
 .disabled .help-icon {
-  width: 70px !important;
+  width: 55px !important;
   height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -512px;
+  background: static_url('images/default-theme-dock-icons.png') no-repeat -7px -512px;
 }
 
 .help-icon:hover {
-  width: 70px !important;
+  width: 55px !important;
   height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -544px;
+  background: static_url('images/default-theme-dock-icons.png') no-repeat -7px -544px;
 }
 
 .logout-icon {
-  width: 70px !important;
+  width: 50px !important;
   height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -576px;
+  background: static_url('images/default-theme-dock-icons.png') no-repeat -10px -576px;
 }
 
 .disabled .logout-icon {
-  width: 70px !important;
+  width: 50px !important;
   height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -608px;
+  background: static_url('images/default-theme-dock-icons.png') no-repeat -10px -608px;
 }
 
 .logout-icon:hover {
-  width: 70px !important;
+  width: 50px !important;
   height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat 0 -640px;
+  background: static_url('images/default-theme-dock-icons.png') no-repeat -10px -640px;
 }
 
 
@@ -267,14 +267,10 @@
 // TODO: [MG] delete Filter icons in sprited image at -160px & -144px
 */
 .filter-icon {
-  margin-right: -2px !important;
+  margin-right: -1px !important;
   width: 16px !important;
   height: 16px !important;
   background: static_url('images/filter-icon.png') no-repeat 0 0;
-}
-
-.filter-button {
-  text-align: left !important;
 }
 
 .sc-view .assignee-selection-bar {

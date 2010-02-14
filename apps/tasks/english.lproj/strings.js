@@ -173,7 +173,7 @@ SC.stringsFor('English', {
   "_AssigneeUnderLoaded": "Under Loaded",
   "_AssigneeProperlyLoaded": "Properly Loaded",
   "_AssigneeOverloaded": "Overloaded",
-  "_NewUserSignup": "New user? Click here to signup.",
+  "_NewUserSignup": "New User Signup",
   "_SignupPrompt": "Guest User Signup",
   "_Email:": "Email:",
   "_InvalidEmailAddress": "This email address",

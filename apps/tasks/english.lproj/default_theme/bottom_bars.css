@@ -66,6 +66,7 @@
 .status-bar-button {
   font-size: 10px !important;
   font-weight: bold !important;
+  text-align: center !important;
   color: #000 !important;
 }
 

@@ -100,6 +100,7 @@
 }
 
 .sign-up {
-  color: #39C !important;
+  color: #333 !important;
   font-size: 11px !important;
+  font-weight: bold !important;
 }
