@@ -32,7 +32,7 @@ General Infrastructure
 - Add an indicator (dot) before Projects/Tasks/Users that were created or updated within the last day <SE> [SG] $Feature @Done %Passed
 - Display record created/updated time at the bottom of popup editors [SG] $Feature @Done %Passed
 v Track/optimize calls to assignments controller and custom view render methods <BB> [SG] @Active
-v Make buttons depressable to provide feedback when using them [SG] $Feature
+v Make buttons depressable to provide feedback when using them [SG] $Feature @Done %Passed
 - Support direct access to Tasks projects or tasks using SproutCore routes [SG] $Feature @Done %Passed
 ^ Beta: Add support for adding Comments to tasks [SG] <JH2> $Feature @Active
 - Out of Scope: Add support for attachments in record descriptions $Feature
