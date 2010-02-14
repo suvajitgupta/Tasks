@@ -187,7 +187,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         SC.LabelView.design(SCUI.SimpleButton,{
-          layout: { centerY: 0, left: 315, height: 18, width: 100 },
+          layout: { centerY: 0, left: 320, height: 18, width: 100 },
           icon: 'delete-icon',
           classNames: ['toolbar-label'],
           value: "_DeleteTask".loc(),
