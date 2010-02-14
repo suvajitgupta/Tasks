@@ -185,14 +185,14 @@
   line-height: 11px !important;
   color: #FFF !important;
   border: none !important;
-  background: #A1B0C5 none repeat scroll 0 0 !important;
+  background: #97A8C7 none repeat scroll 0 0 !important;
   padding: 1px 5px;
 }
 
 
 .task-item.sel .sc-outline .count,
 .project-item.sel .sc-outline .count {
-  color: #A1B0C5 !important;
+  color: #97A8C7 !important;
   background: #FFF none repeat scroll 0 0 !important;
 }
 
