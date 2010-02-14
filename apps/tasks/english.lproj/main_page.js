@@ -149,7 +149,7 @@ Tasks.mainPage = SC.Page.design({
       childViews: [
       
         SC.LabelView.design(SCUI.SimpleButton,{
-          layout: { centerY: 0, left: 0, height: 18, width: 105 },
+          layout: { centerY: 0, left: 5, height: 18, width: 105 },
           icon: 'add-icon',
           classNames: ['toolbar-label'],
           value: "_AddProject".loc(),
@@ -160,7 +160,7 @@ Tasks.mainPage = SC.Page.design({
         }),
       
         SC.LabelView.design(SCUI.SimpleButton,{
-          layout: { centerY: 0, left: 100, height: 18, width: 115 },
+          layout: { centerY: 0, left: 105, height: 18, width: 115 },
           icon: 'delete-icon',
           classNames: ['toolbar-label'],
           value: "_DeleteProject".loc(),

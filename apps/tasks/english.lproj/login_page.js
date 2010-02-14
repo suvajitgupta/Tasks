@@ -25,6 +25,16 @@ Tasks.loginPage = SC.Page.create({
       classNames: ['login-body'],
       childViews: 'loginPromptLabel loginNameLabel loginNameField passwordLabel passwordField loginErrorMessage cancelButton loginButton signup'.w(),
       
+      signup: document.title.match(/Dev|Demo|Greenhouse|SproutCore/)? SC.LabelView.design(SCUI.SimpleButton,{
+        layout: { top: 70, left: 520, height: 16, width: 140 },
+        classNames: ['sign-up'],
+        textAlign: SC.ALIGN_CENTER,
+        icon: 'add-icon',
+        value: "_NewUserSignup".loc(),
+        target: 'Tasks',
+        action: 'launchSignupPane'
+      }) : SC.View.design(),
+      
       loginPromptLabel: SC.LabelView.design({
         layout: { top: 65, left: 255, width: 250, height: 30 },
         classNames: ['login-prompt'],
@@ -82,18 +92,8 @@ Tasks.loginPage = SC.Page.create({
         title: "_Login".loc(),
         target: 'Tasks.loginController',
         action: 'login'
-      }),
-      
-      signup: document.title.match(/Dev|Demo|Greenhouse|SproutCore/)? SC.LabelView.design(SCUI.SimpleButton,{
-        layout: { top: 70, left: 520, height: 20, width: 140 },
-        classNames: ['sign-up'],
-        textAlign: SC.ALIGN_CENTER,
-        icon: 'add-icon',
-        value: "_NewUserSignup".loc(),
-        target: 'Tasks',
-        action: 'launchSignupPane'
-      }) : SC.View.design()
-      
+      })
+            
     }),
     
     focus: function() {

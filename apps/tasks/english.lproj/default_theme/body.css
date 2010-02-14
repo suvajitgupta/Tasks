@@ -233,7 +233,7 @@ styles...1923582 (line 757)
 }
 
 .sc-view.sc-label-view.active {
-  border: 1px solid #222 !important;
+  border: 1px solid #555 !important;
   background-color: #AAA;
   -moz-border-radius: 15px !important;
   -webkit-border-radius: 15px !important;
