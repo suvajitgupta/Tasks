@@ -149,7 +149,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 '}\n' +
 '.effort {\n' +
 ' color: white;\n' +
-' background-color: #97A8C6;\n' +
+' background-color: #97A8C7;\n' +
 '}\n' +
 '.time, .total {\n' +
 ' color: black;\n' +
