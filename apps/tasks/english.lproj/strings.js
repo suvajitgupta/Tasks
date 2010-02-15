@@ -193,6 +193,8 @@ SC.stringsFor('English', {
   "_RedFlags:": "Red Flags: ",
   "_AutoSave": "Auto Save",
   "_AutoSaveTooltip": "Automatially save changes to the server, otherwise you have to press \"Save\" button periodically",
+  "_SendNotifications": "Notifications",
+  "_SendNotificationsTooltip": "Check to deliver email notifications when tasks are created, updated, and deleted",
   "_UsersLoaded": "Loaded users, ",
   "_TasksLoaded": "tasks, ",
   "_ProjectsLoaded": " and projects at ",

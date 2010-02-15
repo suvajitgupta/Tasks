@@ -541,7 +541,7 @@ Tasks.mainPage = SC.Page.design({
     statusBarView: SC.View.design(SC.Border, {
       layout: { bottom: 0, height: 20, left: 0, right: 0 },
       classNames: ['status-bar'],
-      childViews: ['selectionView', 'statisticsButton', 'summaryView', 'serverMessageView', 'autoSaveCheckbox'],
+      childViews: ['selectionView', 'statisticsButton', 'summaryView', 'serverMessageView', 'notifyCheckbox', 'autoSaveCheckbox'],
       borderStyle: SC.BORDER_TOP,
         
       selectionView: Tasks.SelectionView.design({
@@ -573,10 +573,19 @@ Tasks.mainPage = SC.Page.design({
       }),
         
       serverMessageView: SC.LabelView.design({
-        layout: { centerY: 0, height: 16, right: 95, width: 350 },
+        layout: { centerY: 0, height: 16, right: 195, width: 350 },
         classNames: ['status-bar-label'],
         textAlign: SC.ALIGN_RIGHT,
         value: ''
+      }),
+      
+      notifyCheckbox: SC.CheckboxView.design(SCUI.ToolTip, {
+        layout: { centerY: 0, height: 16, right: 95, width: 80 },
+        classNames: ['status-bar-label'],
+        textAlign: SC.ALIGN_RIGHT,
+        title: "_SendNotifications".loc(),
+        toolTip: "_SendNotificationsTooltip".loc(),
+        valueBinding: 'CoreTasks.shouldNotify'
       }),
       
       autoSaveCheckbox: SC.CheckboxView.design(SCUI.ToolTip, {

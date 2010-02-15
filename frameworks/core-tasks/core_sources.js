@@ -131,7 +131,8 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
       queryParams = {
         UUID: CoreTasks.getPath('currentUser.id'),
         ATO: CoreTasks.getPath('currentUser.authToken'),
-        action: "create%@".fmt(recordType._object_className.split('.')[1])
+        action: "create%@".fmt(recordType._object_className.split('.')[1]),
+        notify: CoreTasks.get('shouldNotify')
       };
     }
     // Set the created-at time on the data hash.
@@ -194,7 +195,8 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
     var queryParams = {
       UUID: CoreTasks.getPath('currentUser.id'),
       ATO: CoreTasks.getPath('currentUser.authToken'),
-      action: "update%@".fmt(recordType._object_className.split('.')[1])
+      action: "update%@".fmt(recordType._object_className.split('.')[1]),
+      notify: CoreTasks.get('shouldNotify')
     };
     // Make sure the ID is valid.
     if (!this._isValidIdType(id)) {
@@ -265,7 +267,8 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
     var queryParams = {
       UUID: CoreTasks.getPath('currentUser.id'),
       ATO: CoreTasks.getPath('currentUser.authToken'),
-      action: "delete%@".fmt(recordType._object_className.split('.')[1])
+      action: "delete%@".fmt(recordType._object_className.split('.')[1]),
+      notify: CoreTasks.get('shouldNotify')
     };
     // Make sure the ID is valid.
     if (!this._isValidIdType(id)) {
