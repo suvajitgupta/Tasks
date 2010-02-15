@@ -541,7 +541,7 @@ Tasks.mainPage = SC.Page.design({
     statusBarView: SC.View.design(SC.Border, {
       layout: { bottom: 0, height: 20, left: 0, right: 0 },
       classNames: ['status-bar'],
-      childViews: ['selectionView', 'statisticsButton', 'summaryView', 'serverMessageView', 'notifyCheckbox', 'autoSaveCheckbox'],
+      childViews: ['selectionView', 'statisticsButton', 'summaryView', 'serverMessageView', 'autoSaveCheckbox', 'notificationsCheckbox'],
       borderStyle: SC.BORDER_TOP,
         
       selectionView: Tasks.SelectionView.design({
@@ -553,7 +553,7 @@ Tasks.mainPage = SC.Page.design({
       }),
         
       statisticsButton: SC.LabelView.design( SCUI.SimpleButton, {
-        layout: { centerY: 0, height: 16, left: 230, width: 95 },
+        layout: { centerY: 0, height: 16, left: 220, width: 90 },
         titleMinWidth: 0,
         classNames: ['status-bar-button'],
         value: "_ShowStatistics".loc(),
@@ -565,36 +565,35 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       summaryView: Tasks.SummaryView.design({
-        layout: { centerY: 0, height: 16, centerX: -20, width: 250 },
+        layout: { centerY: 0, height: 16, left: 320, width: 250 },
         classNames: ['status-bar-label'],
-        textAlign: SC.ALIGN_CENTER,
         displayModeBinding: SC.Binding.oneWay('Tasks.assignmentsController.displayMode'),
         tasksTreeBinding: SC.Binding.oneWay('Tasks.tasksController.content')
       }),
         
       serverMessageView: SC.LabelView.design({
-        layout: { centerY: 0, height: 16, right: 195, width: 350 },
+        layout: { centerY: 0, height: 16, right: 175, width: 350 },
         classNames: ['status-bar-label'],
         textAlign: SC.ALIGN_RIGHT,
         value: ''
       }),
       
-      notifyCheckbox: SC.CheckboxView.design(SCUI.ToolTip, {
-        layout: { centerY: 0, height: 16, right: 95, width: 80 },
-        classNames: ['status-bar-label'],
-        textAlign: SC.ALIGN_RIGHT,
-        title: "_SendNotifications".loc(),
-        toolTip: "_SendNotificationsTooltip".loc(),
-        valueBinding: 'CoreTasks.shouldNotify'
-      }),
-      
       autoSaveCheckbox: SC.CheckboxView.design(SCUI.ToolTip, {
-        layout: { centerY: 0, height: 16, right: 5, width: 80 },
+        layout: { centerY: 0, height: 16, right: 85, width: 75 },
         classNames: ['status-bar-label'],
         textAlign: SC.ALIGN_RIGHT,
         title: "_AutoSave".loc(),
         toolTip: "_AutoSaveTooltip".loc(),
         valueBinding: 'Tasks.autoSave'
+      }),
+      
+      notificationsCheckbox: SC.CheckboxView.design(SCUI.ToolTip, {
+        layout: { centerY: 0, height: 16, right: 5, width: 80 },
+        classNames: ['status-bar-label'],
+        textAlign: SC.ALIGN_RIGHT,
+        title: "_SendNotifications".loc(),
+        toolTip: "_SendNotificationsTooltip".loc(),
+        valueBinding: 'CoreTasks.shouldNotify'
       })
       
     }),
