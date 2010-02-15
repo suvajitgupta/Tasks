@@ -197,7 +197,7 @@ SC.stringsFor('English', {
   "_SendNotificationsTooltip": "Check to have server send Email notifications when tasks are created/updated/deleted",
   "_UsersLoaded": "Loaded users, ",
   "_TasksLoaded": "tasks, ",
-  "_ProjectsLoaded": " and projects at ",
+  "_ProjectsLoaded": " projects at ",
   "_SaveMessage": "Data last saved "
     
 });
