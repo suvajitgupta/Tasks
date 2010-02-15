@@ -158,7 +158,7 @@ Tasks.importDataController = SC.ObjectController.create(
       }
       
       this.closePanel();
-      if(Tasks.get('autoSave')) Tasks.saveData();
+      if(CoreTasks.get('autoSave')) Tasks.saveData();
       
     },
     

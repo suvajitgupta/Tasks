@@ -86,7 +86,7 @@ Tasks.reassignmentController = SC.Object.create(SC.CollectionViewDelegate,
     }, this);
     
     if(ret === SC.DRAG_NONE) {
-      if(Tasks.get('autoSave')) Tasks.saveData();
+      if(CoreTasks.get('autoSave')) Tasks.saveData();
     }
     return ret;
   },

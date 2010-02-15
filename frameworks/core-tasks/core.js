@@ -8,7 +8,10 @@
  
 CoreTasks = SC.Object.create({
   
+  // Global settings
+  autoSave: true,
   needsSave: NO,
+  shouldNotify: true,
   
   // The main data store and record sets.
   store: SC.Store.create({
@@ -158,9 +161,6 @@ CoreTasks = SC.Object.create({
 
   // The logged in user.
   currentUser: null,
-  
-  // Global App Notification setting
-  shouldNotify: false,
   
   // Stores access control rights for current user.
   permissions: SC.Object.create({

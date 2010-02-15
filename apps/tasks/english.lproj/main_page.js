@@ -78,7 +78,7 @@ Tasks.mainPage = SC.Page.design({
           isEnabledBinding: 'CoreTasks.needsSave',
           isVisibleBinding: SC.Binding.transform(function(value, binding) {
                                                    return !value;
-                                                 }).from('Tasks.autoSave'),
+                                                 }).from('CoreTasks.autoSave'),
           target: 'Tasks',
           action: 'saveData'
         }),
@@ -584,7 +584,7 @@ Tasks.mainPage = SC.Page.design({
         textAlign: SC.ALIGN_RIGHT,
         title: "_AutoSave".loc(),
         toolTip: "_AutoSaveTooltip".loc(),
-        valueBinding: 'Tasks.autoSave'
+        valueBinding: 'CoreTasks.autoSave'
       }),
       
       notificationsCheckbox: SC.CheckboxView.design(SCUI.ToolTip, {

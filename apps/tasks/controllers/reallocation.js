@@ -67,7 +67,7 @@ Tasks.reallocationController = SC.Object.create(SC.CollectionViewDelegate,
     }       
   
     if(ret === SC.DRAG_MOVE) {
-      if(Tasks.get('autoSave')) Tasks.saveData();
+      if(CoreTasks.get('autoSave')) Tasks.saveData();
     }
     return ret;
   },

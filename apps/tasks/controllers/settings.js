@@ -31,7 +31,7 @@ Tasks.settingsController = SC.ObjectController.create(
         panel.remove();
         panel.destroy();
       }
-      if(Tasks.get('autoSave')) Tasks.saveData();
+      if(CoreTasks.get('autoSave')) Tasks.saveData();
     }
     
 });
