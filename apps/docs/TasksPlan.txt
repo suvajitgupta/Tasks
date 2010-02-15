@@ -25,16 +25,16 @@ General Infrastructure
 ^ Develop Model and Fixtures (hardcoded & generated) [SG] <SE> @Done
 - Develop States/Actions corresponding to GUI Statecharts [SG] <SE> @Done
 - Support minimum resolution of 1024x768 [SG] @Done $Feature %Passed
-- Support decimal numbers for project timeLeft and task effort in units of 'd' or 'h' [SG] @Done %Passed $Feature
-^ Have tasks refer to project they are allocated to and make projects Store queries [SE] <SG> @Done %Passed
-- Handle persistence consistently (nothing should save unless user hits Save) [SE] <SG> @Done %Passed
+- Support decimal numbers for Project TimeLeft and Task effort in units of 'd' or 'h' [SG] @Done %Passed $Feature
+^ Have Tasks refer to Project they are allocated to and make projects Store queries [SE] <SG> @Done %Passed
+- Handle persistence consistently (nothing should save unless user hits "Save") [SE] <SG> @Done %Passed
 - Implement GUI-based RBAC (role-based access control) [SG] $Feature @Done %Passed
 - Add an indicator (dot) before Projects/Tasks/Users that were created or updated within the last day <SE> [SG] $Feature @Done %Passed
 - Display record created/updated time at the bottom of popup editors [SG] $Feature @Done %Passed
 v Track/optimize calls to assignments controller and custom view render methods <BB> [SG] @Active
 v Make buttons depressable to provide feedback when using them [SG] $Feature @Done %Passed
-- Support direct access to Tasks projects or tasks using SproutCore routes [SG] $Feature @Done %Passed
-^ Beta: Add support for adding Comments to tasks [SG] <JH2> $Feature @Active
+- Support direct access to Projects or Tasks using SproutCore routes [SG] $Feature @Done %Passed
+^ Beta: Add support for adding Comments to Tasks [SG] <JH2> $Feature @Active
 - Out of Scope: Add support for attachments in record descriptions $Feature
 | Upload attachment somewhere and insert URL to it in record description
 
@@ -43,9 +43,9 @@ Project Manager GUI
 ^ Show Project name & time left (if specified) on far right [SG] <JH2> @Done $Feature %Passed
 ^ Beta: Allow Project target date to be specified inline or via popup editor/Calendar chooser <JH2> [SG] $Feature @Active
 | Delete all references to timeLeft and update Persevere/Google App Engine models
-- Use icon to indicate if Project has any tasks or not [SG] @Done $Feature %Passed
-- Support alpha sorting of projects [SG] <JH2> @Done %Passed $Feature
-v Add hover over tooltip for projects to show how many tasks they contain [SG] @Done $Feature %Passed
+- Use icon to indicate if Project has any Tasks or not [SG] @Done $Feature %Passed
+- Support alpha sorting of Projects [SG] <JH2> @Done %Passed $Feature
+v Add hover over tooltip for Projects to show how many Tasks they contain [SG] @Done $Feature %Passed
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done $Feature %Passed
 | Check via Inline Editor Delegate
 ^ Add "Add Project" & "Del. Project" buttons in projects toolbar [SG] @Done $Feature %Passed
@@ -53,53 +53,53 @@ v Add hover over tooltip for projects to show how many tasks they contain [SG] @
 v Beta: Disallow names that are already in use or reserved and providing warning to user [SG] $Feature @Active
 | Project name: cannot be same as any existing name
 | User login name cannot cannot be same as any existing name or be reserved name "none"
-v Add summary in projects toolbar showing number of projects & number of tasks for selected project [SG] <MB> @Done $Feature %Passed
+v Add summary in projects toolbar showing number of Projects & number of Tasks for selected project [SG] <MB> @Done $Feature %Passed
 v Enable/disable "Del. Project" button based on having a selected project [SG] @Done %Passed $Feature
 v Disable Add/Del. Tasks buttons when on "All Tasks" project [SG] <BB> @Done %Passed $Feature
-- Select first project at startup [SG] <JH2> @Done %Passed $Feature
+- Select "Unallocated Tasks" project at startup [SG] @Done %Passed $Feature
 ^ Add virtual "All Tasks" & "Unallocated Tasks" projects and display them grayed out in projects list [SG] <SE> $Feature @Done %Passed
 - Disallow "All Tasks" & "Unallocated Tasks" projects from being deleted [SG] @Done $Feature %Passed
 ^ Allow multi-task drag-and-drop reallocation to other projects [BB] <SG> @Done $Feature %Passed
 ^ Add popup viewer/editor for Project time left/description [SG] $Feature @Done %Passed
-v Add project context menu with options: Add, Duplicate, Delete [SG] $Feature @Done %Passed
-- Add "Statistics..." button/popup to show percent breakdown of displayed tasks by attributes (HTML) [SG] $Feature @Done %Passed
-- Add alternate graphical view (pie charts, bar graphs) for statistics of displayed tasks [SG] $Feature
+v Add Project context menu with options: Add, Duplicate, Delete [SG] $Feature @Done %Passed
+- Add "Statistics..." button/popup to show percent breakdown of displayed Tasks by attributes (HTML) [SG] $Feature @Done %Passed
+- Add alternate graphical view (pie charts, bar graphs) for statistics of displayed Tasks [SG] $Feature
 
 Task Manager GUI
 ^ Group Tasks by User and display Task id, summary, and effort (if specified) on far right [SG] <JH2> @Done $Feature %Passed
-^ Support automatic sorting of tasks by status, validation, priority, type, and name or index (if name starts with a number) [SG] <SG> @Done $Feature %Passed
+^ Support automatic sorting of Tasks by Status, Validation, Priority, Type, and Name or "index" (if name starts with a number) [SG] <SG> @Done $Feature %Passed
 - Allow Tasks under an assignee to be hidden/disclosed [SG] <JH2> @Done $Feature %Passed
 - Show Task Type via different icons [SG] <JH2> @Done $Feature %Passed
 - Show Task Priority (font style), Status (font color), Validation (background color) [SG] <MB> @Done $Feature %Passed
 - Add Task Status/Priority/Validation radio buttons in tasks toolbar [SG] @Done $Feature %Passed
 v Enable Task Validation radio buttons only when in Done status [SG] <JH2> $Feature @Done %Passed
-- Allow multi-selected tasks to be set to new type/status/priority/validation [SG] $Feature @Done %Passed
-^ Add task search filter (by #IDs or name) & corresponding delete button in top toolbar: support type-ahead searching <JH2> [SG] @Done %Passed $Feature
-^ Allow task attribute filtering by type, priority, status, and validation fields via a toolbar button/pop up panel [SG] $Feature @Done %Passed
+- Allow multi-task modification of Type/Status/Priority/Validation [SG] $Feature @Done %Passed
+^ Add Task search filter (by #IDs or name) & corresponding delete button in top toolbar: support type-ahead searching <JH2> [SG] @Done %Passed $Feature
+^ Allow Task attribute filtering by Type, Priority, Status, and Validation fields via a toolbar button/pop up panel [SG] $Feature @Done %Passed
 - Add commonly-used "QuickFilters": Troubled, Unfinished, Unvalidated, Verified, Showstoppers, All [SG] $Feature @Done %Passed
-- Support filtering of tasks that were recently updated or have effort specified [SG] $Feature @Done %Passed
-- Indicate whether there is a task attribute filter via a different icon on the toolbar button [SG] $Feature @Done %Passed
+- Support filtering of Tasks that were recently updated or have effort specified [SG] $Feature @Done %Passed
+- Indicate whether there is a Task attribute filter via a different icon on the toolbar button [SG] $Feature @Done %Passed
 - Indicate whether there are any risky items under an assignee using a red flag in assignee grouping bar [SG] $Feature @Done %Passed
-v Enable/disable "Del. Task" button based on having a selected task [SG] @Done %Passed $Feature
+v Enable/disable "Del. Task" button based on having a selected Task [SG] @Done %Passed $Feature
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done $Feature %Passed
 ^ Add "Add Task" & "Del. Task" buttons in tasks toolbar [SG] <SE> @Done %Passed $Feature
-| Logged in user is default Submitter, Assignee is either set to the same as selected task (if one) or to logged in user
-| Copy over project/type/priority attributes of selected task to new task
-- Clear task validation if status is changed from Done, disallow entry of Passed/Failed when task is not Done [SG] <MB> $Feature @Done %Passed
-^ Show Done/Left effort subtotals (exclude incomplete Low priority tasks) on far right for load balancing [SG] @Done $Feature %Passed
-- Append "?" for range-based subtotals including tasks with unspecified efforts [SG] @Done $Feature %Passed
+| Logged in user is default Submitter, Assignee is either set to the same as selected Task (if one) or to logged in user
+| Copy over Project/Type/Priority attributes of selected Task to new Task
+- Clear Task Validation if Sstatus is changed from Done, disallow entry of Passed/Failed when not Done [SG] <MB> $Feature @Done %Passed
+^ Show Done/Left effort subtotals (exclude incomplete Low priority Tasks) on far right for load balancing [SG] @Done $Feature %Passed
+- Append "?" for range-based subtotals including Ttasks with unspecified Efforts [SG] @Done $Feature %Passed
 - Color code assignee non loading in gray, under loading in green, proper loading in blue, and over loading in red [SG] @Done $Feature %Passed
-v Add hover over tooltip for assignees to show how many tasks they have and to explain loading color codes [SG] @Done $Feature %Passed
-^ Allow multi-task drag-and-drop reassignment to other assignees [BB] <SG>  @Done $Feature %Passed
-^ Add popup viewer/editor for Task submitter, assignee, effort, project, and description [JH2] <SG> $Feature @Done %Passed
-- Beta: Support task Copy ID/Name and Copy Link Location (URL with "Route") to clipboard [SG] $Feature @Risky
-v Add task context menu with options: Add, Duplicate, Delete; All Task Attributes; Copy ID/Name, Copy Link [SG] $Feature @Done %Passed
-^ Beta: Add ability to "Watch" tasks and get Email Notifications after task changes [SG] <JH2> $Feature
-- Out of Scope: Add support for nested tasks/tagging $Feature
+v Add hover over tooltip for assignees to show how many Tasks they have and to explain loading color codes [SG] @Done $Feature %Passed
+^ Allow multi-task drag-and-drop reassignment to other Assignees [BB] <SG>  @Done $Feature %Passed
+^ Add popup viewer/editor for Task Submitter, Assignee, Effort, Project, and Description [JH2] <SG> $Feature @Done %Passed
+- Beta: Support Task Copy ID/Name and Copy Link Location (URL with "Route") to clipboard [SG] $Feature @Risky
+v Add Task context menu with options: Add, Duplicate, Delete; All Task Attributes; Copy ID/Name, Copy Link [SG] $Feature @Done %Passed
+^ Beta: Add ability to "Watch" Tasks and get Email Notifications after Task changes [SG] <JH2> $Feature
+- Out of Scope: Add support for nested Tasks and Task tagging $Feature
 | Use "Clustering" approach described in Help instead
-- Out of Scope: Add support for managing inter-task dependencies/linking $Feature
-| You can reference #IDs of upstream tasks in the description field instead
-- Out of Scope: Add support for preserving original task estimates/partial time logging $Feature
+- Out of Scope: Add support for managing inter-Task dependencies/linking $Feature
+| You can reference #IDs of upstream Tasks in the Description field instead
+- Out of Scope: Add support for preserving original Task estimates/partial time logging $Feature
 | Use "Chunk Up Work" best practice described in Help instead
 
 User Manager GUI
@@ -112,33 +112,34 @@ User Manager GUI
 ^ Add Settings button/popup embedding User Manager with "Add/Del. User"  buttons in toolbar [SG] <JH2> @Done %Passed $Feature
 - Show number of registered/selected users at the bottom of User Manager panel [SG] $Feature @Done %Passed
 ^ Allow multi-user drag-and-drop role change in User Manager [SG] @Done $Feature %Passed
-- Reset task assignee/submitter after user deletion <SE> [SG] $Feature @Done %Passed
+- Reset Task Assignee/Submitter after user deletion <SE> [SG] $Feature @Done %Passed
 - Out of Scope: Add support for "Teams" (a user can belong to a team, a team can have a lead) $Feature
 | Create separate projects for different teams to keep their tasks/deadlines separate instead
 
 Application Manager GUI
-- Add installation and Tasks logos to top bar and display program version [SG] @Done $Feature %Passed
+- Add Tasks logo to top bar and display program version as a badge [SG] @Done $Feature %Passed
+- Add "Installation" logo (dependent on Buildfile) to top bar [SG] @Done $Feature %Passed
 - Add welcome message showing logged in user/role with hover over tooltip showing time of login [SG] @Done $Feature %Passed
 - Add Server data loading message in status bar during startup [SG] $Feature @Done %Passed
-- Show number of selected projects/tasks and displayed assignees/tasks in the status bar [SG] <MB> @Done $Feature %Passed
+- Show number of selected Projects/Tasks and displayed Assignees/Tasks in the status bar [SG] <MB> @Done $Feature %Passed
 - Add "Save" button in top toolbar, note time of last save in status bar [SG] <BB> @Done $Feature %Passed
-- Add "Auto Save" checkbox in status bar [SG] <BB> @Done $Feature %Passed
+- Add "AutoSave" checkbox in status bar [SG] <BB> @Done $Feature %Passed
 - Enable/disable Save button based on data modification [EO] <SG> $Feature @Done %Passed
 - Add "Refresh" button to synchronize GUI with latest data from Server [SG] <SE> $Feature @Done %Passed
 - Add "Import" button in top toolbar with associated pop up panel [SG] <BB> @Done $Feature %Passed
-- Don't create a project if it already exists during Import [SG] @Done $Feature %Passed
+- Don't create a Project if it already exists during Import [SG] @Done $Feature %Passed
 - Allow option to automatically create new users for unknown assignees/submitters found during importing [SG] @Done $Feature %Passed
 - Add "Export" button in top toolbar with associated pop up panel, allowing user to choose between Text/HTML formats [SG] @Done $Feature %Passed
-| When on "All Tasks" project with no filters on all project data is exported, otherwise only displayed data is exported
-- Add "Exort to HTML" capability for printable & human-readable version (for baselining tasks for a release) [SG] $Feature @Done %Passed
+| When on "All Tasks" project with no filters on all Project data is exported, otherwise only displayed data is exported
+- Add "Exort to HTML" capability for printable & human-readable version (for baselining Tasks for a release) [SG] $Feature @Done %Passed
 - Add online "Help" button in top toolbar & popup help window [SG] @Done %Passed $Feature
 v Add online training video using Captivate or Camtasia [SG] $Feature @Done
 | http://www.youtube.com/watch?v=6egjJw_RS1g
 - Add onscreen help (on panel fields that are complex and on blank workspace to assist new users) <MG> [SG] $Feature @Done %Passed
-- Add Logout button to exit in top toolbar (confirm before exiting, reload data/clear all filters) [SG] <JH2> @Done $Feature %Passed
+- Add "Logout" button to exit in top toolbar (confirm before exiting, reload data/clear all filters) [SG] <JH2> @Done $Feature %Passed
 - Prompt user to save changes (if any) before logging out [SG] <SE> $Feature @Done %Passed
 | See demo.sproutcore.com/user_defaults and lookup SproutCore blog for Charles' posting on this topic
-- Add "TEAM" display mode (vs. "TASKS") to show everyone at a glance, clicking on assignee shows their tasks [SG] $Feature @Done %Passed
+- Add "TEAM" display mode (vs. "TASKS") to show everyone at a glance, clicking on Assignee shows their Tasks [SG] $Feature @Done %Passed
 v Add hotkeys for common operations (like Add/Duplcate Tasks and Save) [EG] <SG> $Feature @Done %Passed
 - Add tab in Settings popup panel to manage user preferences [SG] $Feature
 | Auto save
