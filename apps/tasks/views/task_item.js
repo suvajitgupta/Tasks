@@ -477,33 +477,29 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         break;          
     }
     
-    var taskTooltip = "_TaskDescriptionTooltip".loc();
+    var hasDescription = NO;
+    if (content.get('description')) hasDescription = YES;
+    var taskTooltip = (hasDescription? "_Has".loc() : ("_No".loc() + ' ')) + "_description".loc();
     var submitterUser = content.get('submitter');
     if (submitterUser) {
       taskTooltip += ('; ' + "_SubmitterTooltip".loc() + '%@ (%@)'.fmt(submitterUser.get('name'), submitterUser.get('loginName')));
     }
-    var hasDescription = NO;
-    if (content.get('description')) hasDescription = YES;
+    taskTooltip += "_ClickToEdit".loc();
     context = context.begin('div').addClass('sc-view').addClass('task-description');
     context = context.begin('img').attr({
       src: SC.BLANK_IMAGE_URL,
       title: taskTooltip,
       alt: taskTooltip
     }).addClass('task-editor');
-    if (hasDescription) {
-      context.addClass('task-icon-has-description');
-    } else {
-      context.addClass('task-icon-no-description');
-    }
+    context.addClass(hasDescription? 'task-icon-has-description' : 'task-icon-no-description');
     context = context.end();
     context = context.end();
-    
 
   },
 
   renderCount: function(context, count) {
     if(count) {
-      var effortTooltip = "_TaskEffortTooltip".loc();
+      var effortTooltip = "_TaskEffortTooltip".loc() + "_ClickToEdit".loc();
       context.push('<span class="count" title="' + effortTooltip + '">');
       context.push('<span class="inner">').push(count).push('</span></span>');
     }
