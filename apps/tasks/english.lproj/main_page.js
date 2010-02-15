@@ -572,14 +572,14 @@ Tasks.mainPage = SC.Page.design({
       }),
         
       serverMessageView: SC.LabelView.design({
-        layout: { centerY: 0, height: 16, right: 185, width: 350 },
+        layout: { centerY: 0, height: 16, right: 195, width: 350 },
         classNames: ['status-bar-label'],
         textAlign: SC.ALIGN_RIGHT,
         value: ''
       }),
       
       autoSaveCheckbox: SC.CheckboxView.design(SCUI.ToolTip, {
-        layout: { centerY: 0, height: 16, right: 95, width: 75 },
+        layout: { centerY: 0, height: 16, right: 105, width: 75 },
         classNames: ['status-bar-label'],
         textAlign: SC.ALIGN_RIGHT,
         title: "_AutoSave".loc(),
@@ -588,7 +588,7 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       notificationsCheckbox: SC.CheckboxView.design(SCUI.ToolTip, {
-        layout: { centerY: 0, height: 16, right: 5, width: 90 },
+        layout: { centerY: 0, height: 16, right: 10, width: 90 },
         classNames: ['status-bar-label'],
         textAlign: SC.ALIGN_RIGHT,
         title: "_SendNotifications".loc(),
