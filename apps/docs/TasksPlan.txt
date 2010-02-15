@@ -42,7 +42,7 @@ Project Manager GUI
 ^ Add Master/Detail Explorer view with click selection of Projects showing corresponding Tasks [JH2] <SG> @Done $Feature %Passed
 ^ Show Project name & time left (if specified) on far right [SG] <JH2> @Done $Feature %Passed
 ^ Beta: Allow Project target date to be specified inline or via popup editor/Calendar chooser <JH2> [SG] $Feature @Active
-| Delete all references to timeLeft and update Persevere data to reflect this schema change
+| Delete all references to timeLeft and update Persevere/Google App Engine models
 - Use icon to indicate if Project has any tasks or not [SG] @Done $Feature %Passed
 - Support alpha sorting of projects [SG] <JH2> @Done %Passed $Feature
 v Add hover over tooltip for projects to show how many tasks they contain [SG] @Done $Feature %Passed
@@ -119,12 +119,12 @@ User Manager GUI
 Application Manager GUI
 - Add installation and Tasks logos to top bar and display program version [SG] @Done $Feature %Passed
 - Add welcome message showing logged in user/role with hover over tooltip showing time of login [SG] @Done $Feature %Passed
-- Add server data loading message in status bar during startup [SG] $Feature @Done %Passed
+- Add Server data loading message in status bar during startup [SG] $Feature @Done %Passed
 - Show number of selected projects/tasks and displayed assignees/tasks in the status bar [SG] <MB> @Done $Feature %Passed
 - Add "Save" button in top toolbar, note time of last save in status bar [SG] <BB> @Done $Feature %Passed
 - Add "Auto Save" checkbox in status bar [SG] <BB> @Done $Feature %Passed
 - Enable/disable Save button based on data modification [EO] <SG> $Feature @Done %Passed
-- Add "Refresh" button to synchronize GUI with latest data from server [SG] <SE> $Feature @Done %Passed
+- Add "Refresh" button to synchronize GUI with latest data from Server [SG] <SE> $Feature @Done %Passed
 - Add "Import" button in top toolbar with associated pop up panel [SG] <BB> @Done $Feature %Passed
 - Don't create a project if it already exists during Import [SG] @Done $Feature %Passed
 - Allow option to automatically create new users for unknown assignees/submitters found during importing [SG] @Done $Feature %Passed
@@ -149,16 +149,19 @@ v Add hotkeys for common operations (like Add/Duplcate Tasks and Save) [EG] <SG>
 - Support disconnected operation and synchronization after network reconnection using SproutDB [SG] <SE> $Feature
 
 Server
-^ Build persistence server using Persevere [SE] <SG> @Done %Passed
-- Create command-line scripts to start/stop Server and to create users <SG> [SE] $Feature @Done %Passed
-- Implement Server-based user authentication [JH2] <SG> @Done %Passed
-- Beta: Implement Server-based RBAC (role-based access control) <SG> [JH2] @Active
-- Beta: Send Email Notifications on noteworthy changes [JH2] <SG> $Feature @Active
-| Add a Server setting to enable/disable server notifications for a Tasks installation
+^ Build persistence Server using Persevere [SE] <SG> @Done %Passed
+- Create command-line scripts to start/stop Persevere Server and to create users <SG> [SE] $Feature @Done %Passed
+^ Build persistence Server using Google App Engine [JH2] <SG> @Done %Passed
+- Implement Server-based user authentication in Python on Google App Engine [JH2] <SG> $Feature @Done %Passed
+- Implement Server-based RBAC (role-based access control) in Python on Google App Engine <SG> [JH2] $Feature @Done %Passed
+- Beta: Send Email Notifications on noteworthy changes in Python on Google App Engine [JH2] <SG> $Feature @Active
+| Add a checkbox in status bar to enable/disable server notifications
 | Notify Submitter/Assignee when Task is created/updated/deleted by someone other than them
-| Don’t send email if Email address is unspecified
+| Don’t send Submitter or Assignee notification if their Email address is unspecified
+| Indicate Task ID, CRUD action, and user who triggered notifications in Subject: line
 | For Task updates, indicate old and new values of attributes
-- Add Server-side data validation checks/return appropriate error codes [SE] <SG>
+
+- Add Server-side data validation checks/return appropriate error codes [SE] <SG> $Feature
 
 Styling/Hardening
 ^ Style via CSS, embed catchy/sprited images [MG] <SG> @Done %Passed
