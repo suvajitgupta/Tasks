@@ -37,7 +37,7 @@ Tasks.statisticsPane = SC.PanelPane.create({
     }),
     
     statistics: SC.LabelView.design({
-      layout: { top: 50, left: 10, right: 10, bottom: 40 },
+      layout: { top: 50, left: 10, right: 10, bottom: 10 },
       textAlign: SC.ALIGN_CENTER,
       escapeHTML: NO,
       valueBinding: 'Tasks.assignmentsController.statistics'

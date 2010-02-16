@@ -167,6 +167,7 @@ SC.stringsFor('English', {
   "_Tester": "Tester",
   "_Guest": 'Guest',
   "_Submitter:": "Submitter: ",
+  "_Submitters:": "Submitters: ",
   "_Assignee:": "Assignee: ",
   "_Assignees:": "Assignees: ",
   "_AssigneeNotLoaded": "Not Loaded",

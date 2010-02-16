@@ -608,6 +608,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
   
   computeStatistics: function() {
 
+    var submitters = {};
     var notLoadedAssigneesCount = 0, underloadedAssigneesCount = 0,
         properlyLoadedAssigneesCount = 0, overloadedAssigneesCount = 0;
     var riskyTasksCount = 0, failedTasksCount = 0;
@@ -636,6 +637,13 @@ Tasks.assignmentsController = SC.ArrayController.create(
       var tasks = assignmentNode.get('treeItemChildren');
       for(var j=0; tasks && j<tasksCount; j++) {
         var task = tasks.objectAt(j);
+        var submitter = task.get('submitter');
+        if(submitter) {
+          var submitterName = submitter.get('loginName');
+          if(submitters[submitterName]) submitters[submitterName]++;
+          else submitters[submitterName] = 1;
+        }
+        
         switch(task.get('type')) {
           case CoreTasks.TASK_TYPE_FEATURE: featureCount++; break;
           case CoreTasks.TASK_TYPE_BUG: bugCount++; break;
@@ -659,8 +667,13 @@ Tasks.assignmentsController = SC.ArrayController.create(
         }
       }
     }
+    var submittersCount = 0;
+    for(var s in submitters) {
+      submittersCount++;
+    }
 
     return {
+      submittersCount: submittersCount,
       notLoadedAssigneesCount: notLoadedAssigneesCount,
       underloadedAssigneesCount: underloadedAssigneesCount,
       properlyLoadedAssigneesCount: properlyLoadedAssigneesCount,
@@ -702,6 +715,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
         ret += ('<td><span class="task-validation-passed">' + "_Passed".loc() + ':</span> ' + stats.passedCount + ' (' + Math.round(100*stats.passedCount/stats.tasksCount) + '%)' + '</td>');
         ret += ('<td><span class="task-validation-failed">' + "_Failed".loc() + ':</span> ' + stats.failedCount + ' (' + Math.round(100*stats.failedCount/stats.tasksCount) + '%)' + '</td>');
         ret += '<td></td></tr></table>';
+        ret += "_Submitters:".loc() + stats.submittersCount;
       }
       else { // displayMode === Tasks.DISPLAY_MODE_TEAM
         ret += '<hr>' + "_Assignees:".loc() + stats.overloadedAssigneesCount + ' ' + "_AssigneeOverloaded".loc() + ', ' +
