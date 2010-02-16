@@ -229,7 +229,7 @@ Tasks.mainPage = SC.Page.design({
         }),
       
         SC.LabelView.design(SCUI.SimpleButton,{
-          layout: { centerY: 0, right: 204, height: 18, width: 70 },
+          layout: { centerY: 0, right: 206, height: 18, width: 72 },
           icon: 'filter-icon',
           classNames: ['toolbar-label'],
           value: "_Filter".loc(),
@@ -239,7 +239,7 @@ Tasks.mainPage = SC.Page.design({
         }),
         
         SC.View.design({ // Filter cancel button
-          layout: { centerY: 1, height: 12, right: 260, width: 12 },
+          layout: { centerY: 1, height: 12, right: 210, width: 12 },
           isVisible: NO,
           classNames: ['filter-cancel-icon'],
           mouseDown: function() {
