@@ -514,8 +514,10 @@ Tasks.assignmentsController = SC.ArrayController.create(
     assignmentNodes.push (SC.Object.create({
       displayName: displayName,
       tasksCount: tasksCount,
+      finishedTasksCount: totalFinishedCount,
       finishedEffort: finishedEffort,
       totalFinishedEffortAve: totalFinishedEffortAve,
+      leftTasksCount: totalLeftCount,
       displayEffort: displayEffort,
       effortGapPercent: effortGapPercent,
       riskyTasksCount:  riskyTasksCount,
@@ -611,6 +613,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     var submitters = {};
     var notLoadedAssigneesCount = 0, underloadedAssigneesCount = 0,
         properlyLoadedAssigneesCount = 0, overloadedAssigneesCount = 0;
+    var finishedTasksCount = 0, leftTasksCount = 0;
     var riskyTasksCount = 0, failedTasksCount = 0;
     var featureCount = 0, bugCount = 0, otherCount = 0;
     var highCount = 0, mediumCount = 0, lowCount = 0;
@@ -623,6 +626,8 @@ Tasks.assignmentsController = SC.ArrayController.create(
     var tasksCount, totalTasksCount = 0;
     for(var i=0; i < assigneesCount; i++) {
       var assignmentNode = assignmentNodes.objectAt(i);
+      finishedTasksCount += assignmentNode.get('finishedTasksCount');
+      leftTasksCount += assignmentNode.get('leftTasksCount');
       var loading = assignmentNode.get('loading');
       switch(loading) {
         case CoreTasks.USER_NOT_LOADED: notLoadedAssigneesCount++; break;
@@ -674,6 +679,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
 
     return {
       submittersCount: submittersCount,
+      finishedTasksCount: finishedTasksCount, leftTasksCount: leftTasksCount,
       notLoadedAssigneesCount: notLoadedAssigneesCount,
       underloadedAssigneesCount: underloadedAssigneesCount,
       properlyLoadedAssigneesCount: properlyLoadedAssigneesCount,
@@ -724,6 +730,8 @@ Tasks.assignmentsController = SC.ArrayController.create(
                                               stats.notLoadedAssigneesCount + ' ' + "_AssigneeNotLoaded".loc();
         ret += '<hr>' + "_RedFlags:".loc() + stats.riskyTasksCount + ' ' + "_Risky".loc() + ', ' +
                                              stats.failedTasksCount + ' ' + "_Failed".loc();
+        ret += '<hr>' + "_Summary:".loc() + stats.finishedTasksCount + ' ' + "_finished".loc() + ', ' +
+                                            stats.leftTasksCount + ' ' + "_left".loc();
         ret += '<hr>';
       }
     }

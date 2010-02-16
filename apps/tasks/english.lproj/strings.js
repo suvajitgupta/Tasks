@@ -77,6 +77,7 @@ SC.stringsFor('English', {
   "_ShowStatistics": "Statistics...",
   "_ShowStatisticsTooltip": "Show statistics about displayed tasks",
   "_Statistics": "Statistics",
+  "_Summary:": "Summary: ",
   "_Created:": "Created: ",
   "_Updated:": "Updated: ",
   
