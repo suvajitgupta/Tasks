@@ -604,7 +604,6 @@ Tasks.assignmentsController = SC.ArrayController.create(
   }.observes('searchFilter'),
   
   
-  // TODO: [SG] Beta: compute/display statistics about submitters
   statistics: '',
   
   computeStatistics: function() {

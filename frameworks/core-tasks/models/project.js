@@ -62,6 +62,8 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
     return value;
   }.property('timeLeft').cacheable(),
 
+  // FIXME [SC]: need to fix SC.Query to handle negative numbers - recently broken since commit e3bbb4a88ae2bc9fa217d0cf5a24868683f6ae91
+  // FIXME [SC]: fix all Tasks being fetched after a Project name is changed - should only update Project record
   /**
    * A read-only computed property that returns the list of tasks associated with this project.
    *
