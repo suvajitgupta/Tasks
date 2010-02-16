@@ -138,6 +138,7 @@ body {
 
 .sc-view.sc-text-field-view .sc-hint {
   z-index: 0;
+  letter-spacing: -1px;
 }
 
 .sc-view.sc-checkbox-view span {

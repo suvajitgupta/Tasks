@@ -229,7 +229,7 @@ Tasks.mainPage = SC.Page.design({
         }),
       
         SC.LabelView.design(SCUI.SimpleButton,{
-          layout: { centerY: 0, right: 205, height: 18, width: 70 },
+          layout: { centerY: 0, right: 204, height: 18, width: 70 },
           icon: 'filter-icon',
           classNames: ['toolbar-label'],
           value: "_Filter".loc(),
