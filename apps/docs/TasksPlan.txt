@@ -153,9 +153,9 @@ Server
 ^ Build persistence Server using Persevere [SE] <SG> @Done %Passed
 - Create command-line scripts to start/stop Persevere Server and to create users <SG> [SE] $Feature @Done %Passed
 ^ Build persistence Server using Google App Engine [JH2] <SG> @Done %Passed
-- Implement Server-based user authentication in Python on Google App Engine [JH2] <SG> $Feature @Done %Passed
-- Implement Server-based RBAC (role-based access control) in Python on Google App Engine <SG> [JH2] $Feature @Done %Passed
-- Beta: Send Email Notifications on noteworthy changes in Python on Google App Engine [JH2] <SG> $Feature @Active
+- Implement Server-based user authentication using Python on Google App Engine [JH2] <SG> $Feature @Done %Passed
+- Implement Server-based RBAC (role-based access control) using Python on Google App Engine <SG> [JH2] $Feature @Done %Passed
+^ Beta: Send Email Notifications on noteworthy changes using Python on Google App Engine [JH2] <SG> $Feature @Active
 | Add a checkbox in status bar to enable/disable server notifications
 | Notify Submitter/Assignee when Task is created/updated by someone other than them
 | Don’t send Submitter or Assignee notification if their Email address is unspecified
