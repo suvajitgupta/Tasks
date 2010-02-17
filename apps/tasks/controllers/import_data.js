@@ -42,6 +42,7 @@ Tasks.importDataController = SC.ObjectController.create(
     parseAndLoadData: function() {
       
       var store = CoreTasks.get('store');
+      var currentUserId = CoreTasks.getPath('currentUser.id');
       var currentProject = null;
       var createMissingUsers = this.get('createMissingUsers');
       var importData = this.get('importData');
@@ -89,6 +90,9 @@ Tasks.importDataController = SC.ObjectController.create(
               console.warn('Task Import: no such submitter: ' + taskHash.submitterId);
               taskHash.submitterId = null;
             }
+          }
+          else {
+            taskHash.submitterId = currentUserId;
           }
 
           // Peek ahead to the next lines to see if there is a Description and bring those in
