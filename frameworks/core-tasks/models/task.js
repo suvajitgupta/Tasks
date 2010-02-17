@@ -605,5 +605,9 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
 });
 
 CoreTasks.Task.NEW_TASK_HASH = {
-  name: CoreTasks.NEW_TASK_NAME
+  name: CoreTasks.NEW_TASK_NAME,
+  type: CoreTasks.TASK_TYPE_FEATURE,
+  priority: CoreTasks.TASK_PRIORITY_MEDIUM,
+  developmentStatus: CoreTasks.TASK_STATUS_PLANNED,
+  validation: CoreTasks.TASK_VALIDATION_UNTESTED
 };
