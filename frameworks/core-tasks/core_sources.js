@@ -78,7 +78,9 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
             var idsInStore = recordType.storeKeysById();
             var deletedStoreKeys = [];
             for(var id in idsInStore) {
-              if(id > 0 && idsOnServer.indexOf(id) < 0) {
+              // FIXME: [SE/SG] Revert once SC.Query is able to parse negative numbers.
+              if (id > 0 && id < 1000000 && idsOnServer.indexOf(id) < 0) {
+              //if (id > 0 && idsOnServer.indexOf(id) < 0) {
                 deletedStoreKeys.push(idsInStore[id]);
               }
             }

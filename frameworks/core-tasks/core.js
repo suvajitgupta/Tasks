@@ -255,7 +255,9 @@ CoreTasks = SC.Object.create({
     // server, but certain SC mechanisms require that all records have a primary key).
     if (dataHash.id === undefined) {
       dataHash.id = dataHash._id = this._currentRecordId;
-      this._currentRecordId--;
+      // FIXME: [SE/SG] Revert to decrement once SC.Query parsing works with negative numbers.
+      // this._currentRecordId--;
+      this._currentRecordId++;
     }
 
     // Check to see if the record defines a createRecord function (if it does, call it).
@@ -649,7 +651,9 @@ CoreTasks = SC.Object.create({
 
   // Used to assign all newly-created records with a negative ID.
   // Note: this counter may run out of integers if the client is left running for a long time.
-  _currentRecordId: -1
+  // FIXME: [SE/SG] Revert to negative numbers once SC.Query parsing is fixed.
+  //_currentRecordId: -1
+  _currentRecordId: 1000000
 
 });
 
