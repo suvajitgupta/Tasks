@@ -56,8 +56,11 @@ if [ "$PASSWORD" != "$PASSWORD_VERIFY" ]; then
   exit 1
 fi
 
+# Hash the password (SHA1)
+PASSWORD_HASH=`/bin/echo -n $PASSWORD | sha1sum | awk '{print $1}'`
+
 # Build the JSON and POST to the server using cURL.
-JSON="{name:'$FULL_NAME',loginName:'$LOGIN_NAME',role:'_$ROLE',password:'$PASSWORD'}"
+JSON="{name:'$FULL_NAME',loginName:'$LOGIN_NAME',role:'_$ROLE',password:'$PASSWORD_HASH'}"
 
 /bin/echo -n "Creating new user... "
 
