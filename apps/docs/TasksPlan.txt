@@ -117,9 +117,7 @@ User Manager GUI
 | Create separate projects for different teams to keep their tasks/deadlines separate instead
 
 Application Manager GUI
-- Support "Software" vs. "Todo" mode (in latter case, Task Type & Validation are not available via GUI) [SG] $Feature @Done %Passed
 - Add Tasks logo to top bar and display program version as a badge [SG] $Feature @Done %Passed
-- Add "Installation" logo (dependent on Buildfile) to top bar [SG] @Done $Feature %Passed
 - Add welcome message showing logged in user/role with hover over tooltip showing time of login [SG] @Done $Feature %Passed
 - Add Server data loading message in status bar during startup [SG] $Feature @Done %Passed
 - Show number of selected Projects/Tasks and displayed Assignees/Tasks in the status bar [SG] <MB> @Done $Feature %Passed
@@ -181,9 +179,13 @@ Styling/Hardening
 - Develop Model/View unit tests [SG] <BB> @Active
 - Handle secondary scenarios/provide good diagnostics [SG] <SE> @Active
 
-Packaging/Delivery
+Installation/Deployment
+- Support customizable (via Buildfile) "Installation" logo and title (shown in Browser/tab title) [SG] @Done $Feature %Passed
+- Support customizable Guest signup capability via "Login" screen (useful for open-source projects) [SG] @Done $Feature %Passed
+- Support customizable "Software" vs. "Todo" mode (in latter case, Task Type & Validation are not available via GUI) [SG] $Feature @Done %Passed
+- Support customizable default "AutoSave" and "Notifications" settings (can be overridden by User via GUI) [SG] $Feature @Done %Passed
+- Deploy publicly-accessible instances using Google App Engine/Python [JH2] <SG> @Done %Passed
 ^ Develop Web client (ported to Firefox, Internet Explorer, Safari, Chrome) [SG] $Feature @Done %Passed
-- Deploy publicly-accessible instance using Google App Engine/Python [JH2] <SG> @Done %Passed
 - Develop Desktop client using Webkit <JH2> [SG] $Feature
 - Develop Mobile client using PhoneGap <MB> [SG] $Feature
 

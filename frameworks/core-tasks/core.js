@@ -8,11 +8,11 @@
  
 CoreTasks = SC.Object.create({
   
-  // Global settings
-  autoSave: true,
-  needsSave: NO,
+  // Installation-level settings
   shouldNotify: true,
+  autoSave: true,
   
+  needsSave: NO,
   // The main data store and record sets.
   store: SC.Store.create({
     
