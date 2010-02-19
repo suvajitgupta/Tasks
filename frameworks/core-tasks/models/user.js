@@ -112,7 +112,7 @@ CoreTasks.User = CoreTasks.Record.extend({
     var id = this.get('id');
     var store = this.get('store');
     
-    var submittedTasksQuery = SC.Query.local(CoreTasks.Task, "submitterId='%@'".fmt(id));
+    var submittedTasksQuery = SC.Query.local(CoreTasks.Task, "submitterId=%@".fmt(id));
     submittedTasksQuery.set('initialServerFetch', NO);
     var submittedTasks = store.find(submittedTasksQuery);
     if (submittedTasks) {
@@ -123,7 +123,7 @@ CoreTasks.User = CoreTasks.Record.extend({
       submittedTasksQuery = null;
     }
     
-    var assignedTasksQuery = SC.Query.local(CoreTasks.Task, "assigneeId='%@'".fmt(id));
+    var assignedTasksQuery = SC.Query.local(CoreTasks.Task, "assigneeId=%@".fmt(id));
     assignedTasksQuery.set('initialServerFetch', NO);
     var assignedTasks = store.find(assignedTasksQuery);
     if (assignedTasks) {
@@ -145,7 +145,7 @@ CoreTasks.User = CoreTasks.Record.extend({
   disassociatedAssignedTasks: function() {
     // Create the query if necessary.
     if (!this._disassociatedAssignedTasksQuery) {
-      this._disassociatedAssignedTasksQuery = SC.Query.local(CoreTasks.Task, "assigneeId='%@'".fmt(this.get('_id')));
+      this._disassociatedAssignedTasksQuery = SC.Query.local(CoreTasks.Task, "assigneeId=%@".fmt(this.get('_id')));
       this._disassociatedAssignedTasksQuery.set('initialServerFetch', NO);
     }
 
@@ -162,7 +162,7 @@ CoreTasks.User = CoreTasks.Record.extend({
   disassociatedSubmittedTasks: function() {
     // Create the query if necessary.
     if (!this._disassociatedSubmittedTasksQuery) {
-      this._disassociatedSubmittedTasksQuery = SC.Query.local(CoreTasks.Task, "submitterId='%@'".fmt(this.get('_id')));
+      this._disassociatedSubmittedTasksQuery = SC.Query.local(CoreTasks.Task, "submitterId=%@".fmt(this.get('_id')));
       this._disassociatedSubmittedTasksQuery.set('initialServerFetch', NO);
     }
 
