@@ -117,7 +117,7 @@ User Manager GUI
 | Create separate projects for different teams to keep their tasks/deadlines separate instead
 
 Application Manager GUI
-- Support "software" vs "todo" mode (in latter case, Task Type & Validation do not appear via GUI)[SG] @Done $Feature %Passed
+- Support "software" vs "todo" mode (in latter case, Task Type & Validation do not appear via GUI) [SG] @Done $Feature %Passed
 - Add Tasks logo to top bar and display program version as a badge [SG] @Done $Feature %Passed
 - Add "Installation" logo (dependent on Buildfile) to top bar [SG] @Done $Feature %Passed
 - Add welcome message showing logged in user/role with hover over tooltip showing time of login [SG] @Done $Feature %Passed
