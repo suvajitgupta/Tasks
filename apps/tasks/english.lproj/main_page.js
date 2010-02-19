@@ -4,6 +4,7 @@
 /*globals CoreTasks Tasks sc_require SCUI sc_static*/
 
 sc_require('core');
+sc_require('main');
 sc_require('mixins/localized_label');
 sc_require('views/logo');
 sc_require('views/summary');
@@ -323,7 +324,7 @@ Tasks.mainPage = SC.Page.design({
           localize: YES,
           rowHeight: 24,
           classNames: ['tasks-pane-inner'],
-          hasContentIcon: YES,
+          hasContentIcon: Tasks.softwareMode,
           contentIconKey: 'icon',
           exampleView: Tasks.TaskItemView,
           groupExampleView: Tasks.AssigneeItemView,

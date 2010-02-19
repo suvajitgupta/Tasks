@@ -166,10 +166,14 @@
 }
 
 .task-item label {
-  left: 61px !important;
+  left: 41px !important;
   right: 50px !important;
   padding-left: 5px !important;
   padding-right: 5px !important;
+}
+
+.task-item.task-type-displayed label {
+  left: 61px !important;
 }
 
 .task-item .sc-outline .count {

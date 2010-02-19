@@ -151,7 +151,8 @@ SC.stringsFor('English', {
   "_SubmitterTooltip": "Submitted by ",
   "_RecentlyUpdatedTooltip": "This dot indicates an item created/updated recently (within the last day)",
   "_TaskEffortTooltip": "Effort",
-  "_TaskIdTooltip": "Unique ID (dashes for unsaved tasks); Background color indicates validation status",
+  "_TaskIdTooltip": "Unique ID (dashes for unsaved tasks)",
+  "_TaskValidationTooltip": "; Background color indicates validation status",
   
   // User/Assignee strings
   "_AddUser": "Add User",

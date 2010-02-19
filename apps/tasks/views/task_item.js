@@ -434,6 +434,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
 
     var priority = content.get('priority');
     context.addClass('task-item');
+    if(Tasks.softwareMode) context.addClass('task-type-displayed');
     switch(priority){
       case CoreTasks.TASK_PRIORITY_HIGH:
         context.addClass('task-priority-high');
@@ -447,6 +448,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     }
     
     var idTooltip = "_TaskIdTooltip".loc();
+    if(Tasks.softwareMode) idTooltip += "_TaskValidationTooltip".loc();
     var validationClass = null;
     var validation = content.get('validation');
     switch(validation){
