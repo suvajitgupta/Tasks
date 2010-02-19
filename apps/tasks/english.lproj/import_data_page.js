@@ -45,7 +45,7 @@ Tasks.importDataPage = SC.Page.create({
         escapeHTML: NO,
         layout: { top: 50, width: 470, height: 45, right: 10 },
         classNames: [ 'onscreen-help'],
-        value: "_FormatOnscreenHelp".loc()
+        value: Tasks.softwareMode? "_FormatOnscreenHelpSoftwareMode".loc() : "_FormatOnscreenHelpTodoMode".loc()
       }),
 
       dataEntry: SC.TextFieldView.design({
