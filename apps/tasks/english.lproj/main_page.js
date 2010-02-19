@@ -440,6 +440,7 @@ Tasks.mainPage = SC.Page.design({
             SC.LabelView.design(SCUI.ToolTip, {
               layout: { top: 3, bottom: 30, left: 10, width: 260 },
               classNames: ['task-attribute-set-title'],
+              isVisibleBinding: 'Tasks.softwareMode',
               value: "_Type".loc(),
               toolTip: "_TypeTooltip".loc()
             }),
@@ -448,6 +449,7 @@ Tasks.mainPage = SC.Page.design({
               layout: { top: 20, bottom: 6, left: 10, width: 260 },
               escapeHTML: NO,
               classNames: ['task-attribute-set'],
+              isVisibleBinding: 'Tasks.softwareMode',
               items: [
                 { title: CoreTasks.TASK_TYPE_FEATURE.loc() + '&nbsp;',
                   value: CoreTasks.TASK_TYPE_FEATURE, icon: 'task-icon-feature' },
@@ -521,6 +523,7 @@ Tasks.mainPage = SC.Page.design({
             SC.LabelView.design(SCUI.ToolTip, {
               layout: { top: 3, bottom: 30, left: 775, width: 245 },
               classNames: ['task-attribute-set-title'],
+              isVisibleBinding: 'Tasks.softwareMode',
               value: "_Validation".loc(),
               toolTip: "_ValidationTooltip".loc()
             }),
@@ -529,6 +532,7 @@ Tasks.mainPage = SC.Page.design({
               layout: { top: 20, bottom: 6, left: 775, width: 245 },
               escapeHTML: NO,
               classNames: ['task-attribute-set'],
+              isVisibleBinding: 'Tasks.softwareMode',
               items: [
                 { title: '<span class=task-validation-untested><label>' + CoreTasks.TASK_VALIDATION_UNTESTED.loc() + '</label></span>&nbsp;',
                   value: CoreTasks.TASK_VALIDATION_UNTESTED },

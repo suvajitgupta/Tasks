@@ -239,38 +239,40 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     needsSeparator = false;
     if(Tasks.tasksController.isEditable()) {
       needsSeparator = true;
-      var type = Tasks.tasksController.get('type');
-      if(type !== CoreTasks.TASK_TYPE_FEATURE) {
+      if(Tasks.softwareMode) {
+        var type = Tasks.tasksController.get('type');
+        if(type !== CoreTasks.TASK_TYPE_FEATURE) {
+          ret.push({
+            title: '<span class=task-type-feature>' + CoreTasks.TASK_TYPE_FEATURE.loc() + '</span>',
+            icon: 'task-icon-feature',
+            isEnabled: YES,
+            target: 'Tasks.tasksController',
+            action: 'setTypeFeature'
+          });
+        }
+        if(type !== CoreTasks.TASK_TYPE_BUG) {
+          ret.push({
+            title: '<span class=task-type-bug>' + CoreTasks.TASK_TYPE_BUG.loc() + '</span>',
+            icon: 'task-icon-bug',
+            isEnabled: YES,
+            target: 'Tasks.tasksController',
+            action: 'setTypeBug'
+          });
+        }
+        if(type !== CoreTasks.TASK_TYPE_OTHER) {
+          ret.push({
+            title: '<span class=task-type-other>' + CoreTasks.TASK_TYPE_OTHER.loc() + '</span>',
+            icon: 'task-icon-other',
+            isEnabled: YES,
+            target: 'Tasks.tasksController',
+            action: 'setTypeOther'
+          });
+        }
         ret.push({
-          title: '<span class=task-type-feature>' + CoreTasks.TASK_TYPE_FEATURE.loc() + '</span>',
-          icon: 'task-icon-feature',
-          isEnabled: YES,
-          target: 'Tasks.tasksController',
-          action: 'setTypeFeature'
+          isSeparator: YES
         });
       }
-      if(type !== CoreTasks.TASK_TYPE_BUG) {
-        ret.push({
-          title: '<span class=task-type-bug>' + CoreTasks.TASK_TYPE_BUG.loc() + '</span>',
-          icon: 'task-icon-bug',
-          isEnabled: YES,
-          target: 'Tasks.tasksController',
-          action: 'setTypeBug'
-        });
-      }
-      if(type !== CoreTasks.TASK_TYPE_OTHER) {
-        ret.push({
-          title: '<span class=task-type-other>' + CoreTasks.TASK_TYPE_OTHER.loc() + '</span>',
-          icon: 'task-icon-other',
-          isEnabled: YES,
-          target: 'Tasks.tasksController',
-          action: 'setTypeOther'
-        });
-      }
-      ret.push({
-        isSeparator: YES
-      });
-
+      
       var priority = Tasks.tasksController.get('priority');
       if(priority !== CoreTasks.TASK_PRIORITY_HIGH) {
         ret.push({
@@ -341,7 +343,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         });
       }
 
-      if(developmentStatus === CoreTasks.TASK_STATUS_DONE) {
+      if(Tasks.softwareMode && developmentStatus === CoreTasks.TASK_STATUS_DONE) {
         ret.push({
           isSeparator: YES
         });
