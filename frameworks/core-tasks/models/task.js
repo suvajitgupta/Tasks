@@ -5,9 +5,9 @@ sc_require('models/record');
 CoreTasks.NEW_TASK_NAME = '_NewTask';
 
 // Types:
-CoreTasks.TASK_TYPE_FEATURE = '_Feature'; // default
+CoreTasks.TASK_TYPE_FEATURE = '_Feature';
 CoreTasks.TASK_TYPE_BUG = '_Bug';
-CoreTasks.TASK_TYPE_OTHER = '_Other';
+CoreTasks.TASK_TYPE_OTHER = '_Other'; // default
 CoreTasks.taskTypesAllowed = [
   CoreTasks.TASK_TYPE_FEATURE,
   CoreTasks.TASK_TYPE_BUG,
@@ -606,7 +606,7 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
 
 CoreTasks.Task.NEW_TASK_HASH = {
   name: CoreTasks.NEW_TASK_NAME,
-  type: CoreTasks.TASK_TYPE_FEATURE,
+  type: CoreTasks.TASK_TYPE_OTHER,
   priority: CoreTasks.TASK_PRIORITY_MEDIUM,
   developmentStatus: CoreTasks.TASK_STATUS_PLANNED,
   validation: CoreTasks.TASK_VALIDATION_UNTESTED
