@@ -12,13 +12,6 @@ CoreTasks.USER_ROLE_DEVELOPER = '_Developer'; // default
 CoreTasks.USER_ROLE_TESTER = '_Tester';
 CoreTasks.USER_ROLE_GUEST = '_Guest';
 
-CoreTasks.roles = [
-  CoreTasks.USER_ROLE_MANAGER,
-  CoreTasks.USER_ROLE_DEVELOPER,
-  CoreTasks.USER_ROLE_TESTER,
-  CoreTasks.USER_ROLE_GUEST
-];
-
 // Loading:
 CoreTasks.USER_NOT_LOADED = 1;
 CoreTasks.USER_UNDER_LOADED = 2;

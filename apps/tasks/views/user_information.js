@@ -14,6 +14,15 @@
 Tasks.UserInformationView = SC.View.extend(
 /** @scope Tasks.UserInformationView.prototype */ {
   
+  _listRoles: function() {
+     var ret = [];
+     ret.push({ name: CoreTasks.USER_ROLE_MANAGER, value: CoreTasks.USER_ROLE_MANAGER });
+     ret.push({ name: Tasks.softwareMode? CoreTasks.USER_ROLE_DEVELOPER : "_User", value: CoreTasks.USER_ROLE_DEVELOPER });
+     if(Tasks.softwareMode) ret.push({ name: CoreTasks.USER_ROLE_TESTER, value: CoreTasks.USER_ROLE_TESTER });
+     ret.push({ name: CoreTasks.USER_ROLE_GUEST, value: CoreTasks.USER_ROLE_GUEST });
+     return ret;
+  },
+
   createChildViews: function() {
     
     var childViews = [];
@@ -53,7 +62,9 @@ Tasks.UserInformationView = SC.View.extend(
     this.roleField = this.createChildView(SC.SelectFieldView.extend({
       layout: { top: 74, left: 90, height: 20, width: 300 },
       localize: YES,
-      objects: CoreTasks.roles,
+      nameKey: 'name',
+      valueKey: 'value',
+      objects: this._listRoles(),
       valueBinding: SC.binding('*content.role', this),
       isEnabledBinding: 'CoreTasks.permissions.canUpdateUserRole'
     }));

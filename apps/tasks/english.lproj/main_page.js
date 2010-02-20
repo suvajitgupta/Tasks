@@ -67,7 +67,10 @@ Tasks.mainPage = SC.Page.design({
           escapeHTML: NO,
           valueBinding: SC.Binding.transform(function(value, binding) {
             if(!value) return '';
-            return "_Role:".loc() + ' <i>' + value.loc() + '</i>';
+            var role;
+            if(!Tasks.softwareMode && value === CoreTasks.USER_ROLE_DEVELOPER) role = "_User".loc();
+            else role = value.loc();
+            return "_Role:".loc() + ' <i>' + role + '</i>';
           }).from('CoreTasks*currentUser.role'),
           classNames: ['user-attribute-message']
         }),
