@@ -166,6 +166,9 @@ Server
 Styling/Hardening
 ^ Style via CSS, embed catchy/sprited images [MG] <SG> @Done %Passed
 - Sprite final set of icons for efficiency [MG] <SG> @Active
+- Perform I18N and L10N (test with reversed strings) [SG] <JH2> @Done %Passed
+- Collect/address feedback from Alpha/Beta users and targeted usability tests <MG> [SG] @Done %Passed
+- Handle secondary scenarios/provide good diagnostics [SG] <SE> @Active
 ^ Perform smoke test of key functionality [SG] @Done
 | Login/Logout, Guest Signup
 | All/Unallocated Tasks system projects
@@ -175,9 +178,8 @@ Styling/Hardening
 | Task attribute filtering, assignee/submitter selection, ID/name searching
 | User modifications via User Manager
 | Save, Import/Export (Text & HTML)
-- Perform I18N and L10N (test with reversed strings) [SG] <JH2> @Done %Passed
 - Develop Model/View unit tests [SG] <BB> @Active
-- Handle secondary scenarios/provide good diagnostics [SG] <SE> @Active
+- Create automated test scripts using Lebowski/Selenium @Active [SG] <MC>
 
 Installation/Deployment
 - Support customizable (via Buildfile) "Installation" logo and title (shown in Browser/tab title) [SG] @Done $Feature %Passed
@@ -188,8 +190,4 @@ Installation/Deployment
 ^ Develop Web client (ported to Firefox, Internet Explorer, Safari, Chrome) [SG] $Feature @Done %Passed
 - Develop Desktop client using Webkit <JH2> [SG] $Feature
 - Develop Mobile client using PhoneGap <MB> [SG] $Feature
-
-Testing/Rollout
-- Create automated test scripts using Lebowski/Selenium @Active [SG] <MC>
-- Collect/address feedback from Alpha/Beta users and targeted usability tests <MG> [SG] @Done %Passed
 v Provide SproutCore doctool-style comments [SG] <SE>
