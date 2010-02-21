@@ -576,7 +576,7 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
         }
         else {
           taskValidation = '_' + validation;
-          if((taskStatus === null || taskStatus !== CoreTasks.TASK_STATUS_DONE) && taskValidation !== CoreTasks.TASK_VALIDATION_UNTESTED) {
+          if((taskStatus !== null && taskStatus !== CoreTasks.TASK_STATUS_DONE) && taskValidation !== CoreTasks.TASK_VALIDATION_UNTESTED) {
             taskValidation = null;
             console.warn('Task Parsing Error - validation of Passed/Failed only possible for status Done: ' + taskName);
           }
@@ -597,7 +597,7 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
       developmentStatus: taskStatus,
       validation: taskValidation
     };
-    // console.log('DEBUG: Task hash = ' + JSON.stringify(ret));
+    console.log('DEBUG: Task hash = ' + JSON.stringify(ret));
     return ret;
     
   }
