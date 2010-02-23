@@ -33,7 +33,7 @@ Tasks.loginPage = SC.Page.create({
         value: "_NewUserSignup".loc(),
         target: 'Tasks',
         action: 'launchSignupPane'
-      }) : SC.View.design(),
+      }) : SC.View.design({ layout: { top: 70, left: 520, height: 1, width: 1 } }),
       
       loginPromptLabel: SC.LabelView.design({
         layout: { top: 65, left: 255, width: 250, height: 30 },
