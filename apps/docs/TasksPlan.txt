@@ -154,7 +154,7 @@ Server
 ^ Build persistence Server using Google App Engine [JH2] <SG> @Done %Passed
 - Implement Server-based user authentication using Python on Google App Engine [JH2] <SG> $Feature @Done %Passed
 - Implement Server-based RBAC (role-based access control) using Python on Google App Engine <SG> [JH2] $Feature @Done %Passed
-^ Beta: Send Email Notifications on noteworthy changes using Python on Google App Engine [JH2] <SG> $Feature @Active
+^ Send Email Notifications on noteworthy changes using Python on Google App Engine [JH2] <SG> $Feature @Done %Passed
 | Add a checkbox in status bar to enable/disable server notifications
 | Notify Submitter/Assignee when Task is created/updated by someone other than them
 | Don’t send Submitter or Assignee notification if their Email address is unspecified
