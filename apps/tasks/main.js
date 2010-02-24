@@ -9,7 +9,7 @@ sc_require('core_routes');
 function main() { Tasks.main(); }
 
 // if software mode set to false, works as a simple ToDo list (Task Type/Validation are not available through GUI)
-Tasks.softwareMode = document.title.match(/ToDo/)? false: true;
+Tasks.softwareMode = document.title.match(/todo/i)? false: true;
 
 Tasks.editorPoppedUp = false;
 Tasks.assignmentsRedrawNeeded = false;
