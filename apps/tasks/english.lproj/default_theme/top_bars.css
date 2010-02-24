@@ -273,6 +273,10 @@
   background: static_url('images/filter-icon.png') no-repeat 0 0;
 }
 
+.filter-label {
+  margin-right: 20px !important;
+}
+
 .sc-view .assignee-selection-bar {
   background: static_url('images/default-theme-assignee-selection-bg.png') no-repeat;
 }
