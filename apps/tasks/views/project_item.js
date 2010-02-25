@@ -60,49 +60,49 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
         
         contentView: SC.View.design({
           layout: { left: 0, right: 0, top: 0, bottom: 0},
-          childViews: [
+          childViews: 'timeLeftLabel timeLeftField timeLeftHelpLabel descriptionLabel descriptionField createdAtLabel updatedAtLabel'.w(),
+        
+          timeLeftLabel: SC.LabelView.design({
+            layout: { top: 10, left: 10, height: 17, width: 100 },
+            value: "_TimeLeft:".loc()
+          }),
+          timeLeftField: SC.TextFieldView.design({
+            layout: { top: 10, left: 75, width: 80, height: 20 },
+            isEnabledBinding: 'CoreTasks.permissions.canUpdateProject',
+            valueBinding: SC.binding('.content.timeLeftValue', this)
+          }),
+          timeLeftHelpLabel: SC.LabelView.design({
+            layout: { top: 13, left: 160, height: 50, right: 10 },
+            escapeHTML: NO,
+            classNames: [ 'onscreen-help'],
+            value: "_TimeLeftOnscreenHelp".loc()
+          }),
           
-            SC.LabelView.design({
-              layout: { top: 10, left: 10, height: 17, width: 100 },
-              value: "_TimeLeft:".loc()
-            }),
-            SC.TextFieldView.design({
-              layout: { top: 10, left: 75, width: 80, height: 20 },
-              isEnabledBinding: 'CoreTasks.permissions.canUpdateProject',
-              valueBinding: SC.binding('.content.timeLeftValue', this)
-            }),
-            SC.LabelView.design({
-              layout: { top: 13, left: 160, height: 50, right: 10 },
-              escapeHTML: NO,
-              classNames: [ 'onscreen-help'],
-              value: "_TimeLeftOnscreenHelp".loc()
-            }),
+          descriptionLabel: SC.LabelView.design({
+            layout: { top: 40, left: 10, height: 17, width: 100 },
+            value: "_Description:".loc()
+          }),
+          descriptionField: SC.TextFieldView.design({
+            layout: { top: 65, left: 10, right: 10, bottom: 25 },
+            hint: "_DescriptionHint".loc(),
+            isTextArea: YES,
+            isEnabledBinding: 'CoreTasks.permissions.canUpdateProject',
+            valueBinding: SC.binding('.content.description', this)
+          }),
+          
+          createdAtLabel: SC.LabelView.design({
+            layout: { left:10, bottom: 5, height: 17, width: 250 },
+            classNames: [ 'date-time'],
+            textAlign: SC.ALIGN_LEFT,
+            valueBinding: SC.binding('.content.displayCreatedAt', this)
+          }),
+          updatedAtLabel: SC.LabelView.design({
+            layout: { right:10, bottom: 5, height: 17, width: 250 },
+            classNames: [ 'date-time'],
+            textAlign: SC.ALIGN_RIGHT,
+            valueBinding: SC.binding('.content.displayUpdatedAt', this)
+          })
             
-            SC.LabelView.design({
-              layout: { top: 40, left: 10, height: 17, width: 100 },
-              value: "_Description:".loc()
-            }),
-            SC.TextFieldView.design({
-              layout: { top: 65, left: 10, right: 10, bottom: 25 },
-              hint: "_DescriptionHint".loc(),
-              isTextArea: YES,
-              isEnabledBinding: 'CoreTasks.permissions.canUpdateProject',
-              valueBinding: SC.binding('.content.description', this)
-            }),
-            SC.LabelView.design({
-              layout: { left:10, bottom: 5, height: 17, width: 250 },
-              classNames: [ 'date-time'],
-              textAlign: SC.ALIGN_LEFT,
-              valueBinding: SC.binding('.content.displayCreatedAt', this)
-            }),
-            SC.LabelView.design({
-              layout: { right:10, bottom: 5, height: 17, width: 250 },
-              classNames: [ 'date-time'],
-              textAlign: SC.ALIGN_RIGHT,
-              valueBinding: SC.binding('.content.displayUpdatedAt', this)
-            })
-            
-          ]
         })
       }).popup(this, SC.PICKER_MENU);
       if(this._editorPane) this._editorPane.popup(layer, SC.PICKER_POINTER);

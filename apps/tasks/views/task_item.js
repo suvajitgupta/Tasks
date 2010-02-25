@@ -83,90 +83,90 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         
         contentView: SC.View.design({
           layout: { left: 0, right: 0, top: 0, bottom: 0},
-          childViews: [
+          childViews: 'submitterLabel submitterField assigneeLabel assigneeField effortLabel effortField effortHelpLabel projectLabel projectField descriptionLabel descriptionField createdAtLabel updatedAtLabel'.w(),
+        
+          submitterLabel: SC.LabelView.design({
+            layout: { top: 10, left: 10, height: 17, width: 80 },
+            value: "_Submitter:".loc()
+          }),
+          submitterField: SC.SelectFieldView.design({
+            layout: { top: 10, left: 80, width: 175, height: 22 },
+            objectsBinding: this._listUsers(),
+            nameKey: 'displayName',
+            valueKey: 'id',
+            isEnabledBinding: 'Tasks.tasksController.isEditable',
+            valueBinding: SC.binding('.content.submitterValue', this)
+          }),
+
+          assigneeLabel: SC.LabelView.design({
+            layout: { top: 10, right: 190, height: 17, width: 80 },
+            textAlign: SC.ALIGN_RIGHT,
+            value: "_Assignee:".loc()
+          }),
+          assigneeField: SC.SelectFieldView.design({
+            layout: { top: 10, right: 10, width: 175, height: 20 },
+            objectsBinding: this._listUsers(),
+            nameKey: 'displayName',
+            valueKey: 'id',
+            isEnabledBinding: 'Tasks.tasksController.isEditable',
+            valueBinding: SC.binding('.content.assigneeValue', this)
+          }),
+
+          effortLabel: SC.LabelView.design({
+            layout: { top: 47, left: 10, height: 17, width: 100 },
+            value: "_Effort:".loc()
+          }),
+          effortField: SC.TextFieldView.design({
+            layout: { top: 47, left: 55, width: 80, height: 20 },
+            isEnabledBinding: 'Tasks.tasksController.isEditable',
+            valueBinding: SC.binding('.content.effortValue', this)
+          }),
+          effortHelpLabel: SC.LabelView.design({
+            layout: { top: 35, left: 145, height: 50, width: 125 },
+            escapeHTML: NO,
+            classNames: [ 'onscreen-help'],
+            value: "_EffortOnscreenHelp".loc()
+          }),
           
-            SC.LabelView.design({
-              layout: { top: 10, left: 10, height: 17, width: 80 },
-              value: "_Submitter:".loc()
-            }),
-            SC.SelectFieldView.design({
-              layout: { top: 10, left: 80, width: 175, height: 22 },
-              objectsBinding: this._listUsers(),
-              nameKey: 'displayName',
-              valueKey: 'id',
-              isEnabledBinding: 'Tasks.tasksController.isEditable',
-              valueBinding: SC.binding('.content.submitterValue', this)
-            }),
+          projectLabel: SC.LabelView.design({
+            layout: { top: 47, right: 190, height: 17, width: 80 },
+            textAlign: SC.ALIGN_RIGHT,
+            value: "_Project:".loc()
+          }),
+          projectField: SC.SelectFieldView.design({
+            layout: { top: 47, right: 10, width: 175, height: 20 },
+            objectsBinding: this._listProjects(),
+            nameKey: 'displayName',
+            valueKey: 'id',
+            isEnabledBinding: 'Tasks.tasksController.isReallocatable',
+            valueBinding: SC.binding('.content.projectValue', this)
+          }),
 
-            SC.LabelView.design({
-              layout: { top: 10, right: 190, height: 17, width: 80 },
-              textAlign: SC.ALIGN_RIGHT,
-              value: "_Assignee:".loc()
-            }),
-            SC.SelectFieldView.design({
-              layout: { top: 10, right: 10, width: 175, height: 20 },
-              objectsBinding: this._listUsers(),
-              nameKey: 'displayName',
-              valueKey: 'id',
-              isEnabledBinding: 'Tasks.tasksController.isEditable',
-              valueBinding: SC.binding('.content.assigneeValue', this)
-            }),
-
-            SC.LabelView.design({
-              layout: { top: 47, left: 10, height: 17, width: 100 },
-              value: "_Effort:".loc()
-            }),
-            SC.TextFieldView.design({
-              layout: { top: 47, left: 55, width: 80, height: 20 },
-              isEnabledBinding: 'Tasks.tasksController.isEditable',
-              valueBinding: SC.binding('.content.effortValue', this)
-            }),
-            SC.LabelView.design({
-              layout: { top: 35, left: 145, height: 50, width: 125 },
-              escapeHTML: NO,
-              classNames: [ 'onscreen-help'],
-              value: "_EffortOnscreenHelp".loc()
-            }),
+          descriptionLabel: SC.LabelView.design({
+            layout: { top: 75, left: 10, height: 17, width: 100 },
+            value: "_Description:".loc()
+          }),
+          descriptionField: SC.TextFieldView.design({
+            layout: { top: 98, left: 10, right: 10, bottom: 25 },
+            hint: "_DescriptionHint".loc(),
+            isTextArea: YES,
+            isEnabled: YES,
+            value: that.getPath('content.description')
+          }),
+          
+          createdAtLabel: SC.LabelView.design({
+            layout: { left:10, bottom: 5, height: 17, width: 250 },
+            classNames: [ 'date-time'],
+            textAlign: SC.ALIGN_LEFT,
+            valueBinding: SC.binding('.content.displayCreatedAt', this)
+          }),
+          updatedAtLabel: SC.LabelView.design({
+            layout: { right:10, bottom: 5, height: 17, width: 250 },
+            classNames: [ 'date-time'],
+            textAlign: SC.ALIGN_RIGHT,
+            valueBinding: SC.binding('.content.displayUpdatedAt', this)
+          })
             
-            SC.LabelView.design({
-              layout: { top: 47, right: 190, height: 17, width: 80 },
-              textAlign: SC.ALIGN_RIGHT,
-              value: "_Project:".loc()
-            }),
-            SC.SelectFieldView.design({
-              layout: { top: 47, right: 10, width: 175, height: 20 },
-              objectsBinding: this._listProjects(),
-              nameKey: 'displayName',
-              valueKey: 'id',
-              isEnabledBinding: 'Tasks.tasksController.isReallocatable',
-              valueBinding: SC.binding('.content.projectValue', this)
-            }),
-
-            SC.LabelView.design({
-              layout: { top: 75, left: 10, height: 17, width: 100 },
-              value: "_Description:".loc()
-            }),
-            SC.TextFieldView.design({
-              layout: { top: 98, left: 10, right: 10, bottom: 25 },
-              hint: "_DescriptionHint".loc(),
-              isTextArea: YES,
-              isEnabled: YES,
-              value: that.getPath('content.description')
-            }),
-            SC.LabelView.design({
-              layout: { left:10, bottom: 5, height: 17, width: 250 },
-              classNames: [ 'date-time'],
-              textAlign: SC.ALIGN_LEFT,
-              valueBinding: SC.binding('.content.displayCreatedAt', this)
-            }),
-            SC.LabelView.design({
-              layout: { right:10, bottom: 5, height: 17, width: 250 },
-              classNames: [ 'date-time'],
-              textAlign: SC.ALIGN_RIGHT,
-              valueBinding: SC.binding('.content.displayUpdatedAt', this)
-            })
-            
-          ]
         })
       });
       this._editorPane.popup(layer, SC.PICKER_POINTER);
