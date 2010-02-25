@@ -20,31 +20,29 @@ Tasks.helpPage = SC.Page.design({
   layerId: 'mainPane',
   mainPane: SC.MainPane.design({
     
-    childViews: [
+    childViews: 'titleView contentView'.w(),
     
-      SC.View.design(SC.Border, {
-        layout: { top: 0, left: 0, right: 0, height: 43 },
-        classNames: ['title-bar'],
-        childViews: [
-        
-          Tasks.LogoView.design({
-            layout: { centerY: 0, height: 42, left: 0, width: 150 }
-          }),
-          
-          SC.LabelView.design({
-            layout: { centerY: 0, height: 20, centerX: -30, width: 120 },
-            value: "_Help".loc(),
-            classNames: ['window-title']
-          })
-        
-        ]
+    titleView: SC.View.design(SC.Border, {
+      layout: { top: 0, left: 0, right: 0, height: 43 },
+      classNames: ['title-bar'],
+      childViews: 'logoView title'.w(),
+      
+      logoView: Tasks.LogoView.design({
+        layout: { centerY: 0, height: 42, left: 0, width: 150 }
       }),
       
-      SC.WebView.design({
-        layout: { top: 43, left: 0, right: 0, bottom: 0 },
-        value: static_url('help.html') + '?softwareMode=' + Tasks.softwareMode
+      title: SC.LabelView.design({
+        layout: { centerY: 0, height: 20, centerX: -30, width: 120 },
+        value: "_Help".loc(),
+        classNames: ['window-title']
       })
-    ]
+      
+    }),
+    
+    contentView: SC.WebView.design({
+      layout: { top: 43, left: 0, right: 0, bottom: 0 },
+      value: static_url('help.html') + '?softwareMode=' + Tasks.softwareMode
+    })
             
   })
   

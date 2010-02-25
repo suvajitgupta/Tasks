@@ -27,92 +27,90 @@ Tasks.settingsPage = SC.Page.create({
       userManager: SC.View.design({
         layout: { left: 10, right: 10, top: 10, bottom: 45},
         classNames: ['bordered-view'],
-        childViews: [
+        childViews: 'toolbar usersMasterView userDetailView createdAtLabel updatedAtLabel'.w(),
         
-          SC.View.design({
-            layout: { left: 0, right: 0, top: 0, height: 35 },
-            classNames: ['toolbar'],
-            childViews: [
-            
-              SC.LabelView.design(SCUI.SimpleButton,{
-                layout: { centerY: 0, left: 20, height: 16, width: 90 },
-                icon: 'add-icon',
-                value: "_AddUser".loc(),
-                classNames: ['toolbar-label'],
-                toolTip: "_AddUserTooltip".loc(),
-                isEnabledBinding: 'CoreTasks.permissions.canCreateUser',
-                target: 'Tasks',
-                action: 'addUser'
-              }),
-
-              SC.LabelView.design(SCUI.SimpleButton,{
-                layout: { centerY: 0, left: 120, height: 16, width: 100 },
-                icon: 'delete-icon',
-                value: "_DeleteUser".loc(),
-                classNames: ['toolbar-label'],
-                toolTip: "_DeleteUserTooltip".loc(),
-                isEnabledBinding: 'Tasks.usersController.isDeletable',
-                target: 'Tasks',
-                action: 'deleteUser'
-              }),
-              
-              SC.View.design({
-                layout: { top: 8, bottom: 8, left: 250, width: 2 },
-                classNames: ['top-bar-divider']
-              }),
-              
-              SC.LabelView.design({
-                layout: { centerY: 0, left: 410, height: 20, width: 120 },
-                value: "_UserManager".loc(),
-                classNames: ['window-title']
-              })
-
-            ]
+        toolbar: SC.View.design({
+          layout: { left: 0, right: 0, top: 0, height: 35 },
+          classNames: ['toolbar'],
+          childViews: 'addButton deleteButton divider title'.w(),
+          
+          addButton: SC.LabelView.design(SCUI.SimpleButton,{
+            layout: { centerY: 0, left: 20, height: 16, width: 90 },
+            icon: 'add-icon',
+            value: "_AddUser".loc(),
+            classNames: ['toolbar-label'],
+            toolTip: "_AddUserTooltip".loc(),
+            isEnabledBinding: 'CoreTasks.permissions.canCreateUser',
+            target: 'Tasks',
+            action: 'addUser'
           }),
-        
-          SC.ScrollView.design({
-            layout: { top: 35, bottom: 0, left: 0, width: 250 },
-            hasHorizontalScroller: NO,
-            classNames: ['users-pane'],
 
-            contentView: Tasks.SourceListView.design({
-              layout: { top: 0, left:0, bottom: 0, right: 0 },
-              contentValueKey: 'displayName',
-              contentBinding: 'Tasks.rolesController.arrangedObjects',
-              selectionBinding: 'Tasks.usersController.selection',
-              localize: YES,
-              rowHeight: 24,
-              classNames: ['users-pane-inner'],
-              exampleView: Tasks.UserItemView,
-              hasContentIcon: YES,
-              contentIconKey: 'icon',
-              canReorderContent: YES,
-              canDeleteContent: YES,
-              destroyOnRemoval: YES,
-              delegate: Tasks.rolesController,
-              selectOnMouseDown: YES
-            })
+          deleteButton: SC.LabelView.design(SCUI.SimpleButton,{
+            layout: { centerY: 0, left: 120, height: 16, width: 100 },
+            icon: 'delete-icon',
+            value: "_DeleteUser".loc(),
+            classNames: ['toolbar-label'],
+            toolTip: "_DeleteUserTooltip".loc(),
+            isEnabledBinding: 'Tasks.usersController.isDeletable',
+            target: 'Tasks',
+            action: 'deleteUser'
           }),
           
-          Tasks.UserInformationView.design({
-            layout: { top: 100, left: 275, bottom: 35, right: 10 },
-            contentBinding: 'Tasks.userController'
+          divider: SC.View.design({
+            layout: { top: 8, bottom: 8, left: 250, width: 2 },
+            classNames: ['top-bar-divider']
           }),
           
-          SC.LabelView.design({
-            layout: { left:255, bottom: 5, height: 17, width: 250 },
-            classNames: [ 'date-time'],
-            textAlign: SC.ALIGN_LEFT,
-            valueBinding: SC.binding('Tasks.userController.displayCreatedAt', this)
-          }),
-          SC.LabelView.design({
-            layout: { right:5, bottom: 5, height: 17, width: 250 },
-            classNames: [ 'date-time'],
-            textAlign: SC.ALIGN_RIGHT,
-            valueBinding: SC.binding('Tasks.userController.displayUpdatedAt', this)
+          title: SC.LabelView.design({
+            layout: { centerY: 0, left: 410, height: 20, width: 120 },
+            value: "_UserManager".loc(),
+            classNames: ['window-title']
           })
 
-        ]
+        }),
+      
+        usersMasterView: SC.ScrollView.design({
+          layout: { top: 35, bottom: 0, left: 0, width: 250 },
+          hasHorizontalScroller: NO,
+          classNames: ['users-pane'],
+
+          contentView: Tasks.SourceListView.design({
+            layout: { top: 0, left:0, bottom: 0, right: 0 },
+            contentValueKey: 'displayName',
+            contentBinding: 'Tasks.rolesController.arrangedObjects',
+            selectionBinding: 'Tasks.usersController.selection',
+            localize: YES,
+            rowHeight: 24,
+            classNames: ['users-pane-inner'],
+            exampleView: Tasks.UserItemView,
+            hasContentIcon: YES,
+            contentIconKey: 'icon',
+            canReorderContent: YES,
+            canDeleteContent: YES,
+            destroyOnRemoval: YES,
+            delegate: Tasks.rolesController,
+            selectOnMouseDown: YES
+          })
+        }),
+        
+        userDetailView: Tasks.UserInformationView.design({
+          layout: { top: 100, left: 275, bottom: 35, right: 10 },
+          contentBinding: 'Tasks.userController'
+        }),
+        
+        createdAtLabel: SC.LabelView.design({
+          layout: { left:255, bottom: 5, height: 17, width: 250 },
+          classNames: [ 'date-time'],
+          textAlign: SC.ALIGN_LEFT,
+          valueBinding: SC.binding('Tasks.userController.displayCreatedAt', this)
+        }),
+        updatedAtLabel: SC.LabelView.design({
+          layout: { right:5, bottom: 5, height: 17, width: 250 },
+          classNames: [ 'date-time'],
+          textAlign: SC.ALIGN_RIGHT,
+          valueBinding: SC.binding('Tasks.userController.displayUpdatedAt', this)
+        })
+
       }),
       
       usersCount: SC.LabelView.design({
@@ -138,6 +136,6 @@ Tasks.settingsPage = SC.Page.create({
       
   }),
   
-  userInformation: SC.outlet('panel.contentView.userManager.childViews.2')
+  userInformation: SC.outlet('panel.contentView.userManager.userDetailView')
   
 });

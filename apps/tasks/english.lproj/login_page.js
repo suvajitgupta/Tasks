@@ -23,9 +23,9 @@ Tasks.loginPage = SC.Page.create({
       
       layout: { top: 0, bottom: 0, left: 0, right: 0 },
       classNames: ['login-body'],
-      childViews: 'loginPromptLabel loginNameLabel loginNameField passwordLabel passwordField loginErrorMessage cancelButton loginButton signup'.w(),
+      childViews: 'loginPromptLabel loginNameLabel loginNameField passwordLabel passwordField loginErrorMessage cancelButton loginButton signupButton'.w(),
       
-      signup: document.title.match(/Dev|Demo|Greenhouse|SproutCore/)? SC.LabelView.design(SCUI.SimpleButton,{
+      signupButton: document.title.match(/Dev|Demo|Greenhouse|SproutCore/)? SC.LabelView.design(SCUI.SimpleButton,{
         layout: { top: 70, left: 520, height: 16, width: 140 },
         classNames: ['sign-up'],
         textAlign: SC.ALIGN_CENTER,

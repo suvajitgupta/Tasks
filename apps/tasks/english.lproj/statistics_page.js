@@ -27,13 +27,12 @@ Tasks.statisticsPane = SC.PanelPane.create({
     titlebar: SC.View.design(SC.Border, {
       layout: { left: 10, right: 10, top: 10, height: 35 },
       classNames: ['toolbar'],
-      childViews: [
-        SC.LabelView.design({
-          layout: { centerY: 0, height: 20, centerX: 0, width: 200 },
-          value: "_Statistics".loc(),
-          classNames: ['window-title']
-        })
-      ]
+      childViews: 'title'.w(),
+      title: SC.LabelView.design({
+        layout: { centerY: 0, height: 20, centerX: 0, width: 200 },
+        value: "_Statistics".loc(),
+        classNames: ['window-title']
+      })
     }),
     
     statistics: SC.LabelView.design({

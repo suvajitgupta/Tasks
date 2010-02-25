@@ -14,20 +14,18 @@
 Tasks.LogoView = SC.View.extend(
 /** @scope Tasks.LogoView.prototype */ {
   
-  childViews: [
+  childViews: 'logoIcon versionLabel'.w(),
   
-    SC.LabelView.design(SCUI.ToolTip, {
-      layout: { centerY: -2, height: 26, left: 6, width: 89 },
-      toolTip: "_Credits".loc(),
-      classNames: ['tasks-logo']
-    }),
+  logoIcon: SC.LabelView.design(SCUI.ToolTip, {
+    layout: { centerY: -2, height: 26, left: 6, width: 89 },
+    toolTip: "_Credits".loc(),
+    classNames: ['tasks-logo']
+  }),
 
-    SC.LabelView.design({
-      layout: { centerY: -6, height: 11, left: 95, width: 40 },
-      classNames: ['tasks-version'],
-      value: Tasks.VERSION
-    })
-  
-  ]
-  
+  versionLabel: SC.LabelView.design({
+    layout: { centerY: -6, height: 11, left: 95, width: 40 },
+    classNames: ['tasks-version'],
+    value: Tasks.VERSION
+  })
+
 });
