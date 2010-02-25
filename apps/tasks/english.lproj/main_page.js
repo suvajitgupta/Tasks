@@ -396,35 +396,35 @@ Tasks.mainPage = SC.Page.design({
             sc_super();
           }
                     
-        }),
+        })
         
         // ..........................................................
-        // Hot Key Code
+        // Hot Key Code - disabled for now owing to conflicts with browser shortcuts
         // TODO: [EG] move to /views shouldn't clutter up the .lproj layer
-        keyDown: function(evt) {
-          var ret, commandCode = evt.commandCodes();
-
-          if(commandCode[0] === 'ctrl_s'){  //ctrl-s
-            Tasks.saveData();
-            ret = YES;
-          }
-          else if (commandCode[0] === 'ctrl_t'){  //ctrl-t
-            Tasks.addTask();
-            ret = YES;
-          }
-          else if (commandCode[0] === 'ctrl_d'){  //ctrl-d
-            Tasks.duplicateTask();
-            ret = YES;
-          }
-          else if (commandCode[0] === 'ctrl_p'){  //ctrl-p
-            Tasks.addProject();
-            ret = YES;
-          }
-          else{
-            ret = this.interpretKeyEvents(evt) ;
-          }
-          return ret;
-        }
+        // keyDown: function(evt) {
+        //   var ret, commandCode = evt.commandCodes();
+        // 
+        //   if(commandCode[0] === 'ctrl_s'){  //ctrl-s
+        //     Tasks.saveData();
+        //     ret = YES;
+        //   }
+        //   else if (commandCode[0] === 'ctrl_t'){  //ctrl-t
+        //     Tasks.addTask();
+        //     ret = YES;
+        //   }
+        //   else if (commandCode[0] === 'ctrl_d'){  //ctrl-d
+        //     Tasks.duplicateTask();
+        //     ret = YES;
+        //   }
+        //   else if (commandCode[0] === 'ctrl_p'){  //ctrl-p
+        //     Tasks.addProject();
+        //     ret = YES;
+        //   }
+        //   else{
+        //     ret = this.interpretKeyEvents(evt) ;
+        //   }
+        //   return ret;
+        // }
         
       })
         
