@@ -2,54 +2,9 @@
 
 sc_require('models/user');
 
-/**
- * Creates a sampling of users covering all available roles.
- */
 CoreTasks.User.FIXTURES = [
-
-  { id: 1,
-  name: "Suvajit Gupta",
-  role: CoreTasks.USER_ROLE_MANAGER,
-  loginName: "SG" },
-  
-  { id: 2,
-  name: "Sean Eidemiller",
-  role: CoreTasks.USER_ROLE_DEVELOPER,
-  loginName: "SE" },
-
-  { id: 3,
-  name: "Josh Holt",
-  role: CoreTasks.USER_ROLE_DEVELOPER,
-  loginName: "JH2" },
-
-  { id: 4,
-  name: "Brandon Blatnick",
-  role: CoreTasks.USER_ROLE_DEVELOPER,
-  loginName: "BB" },
-
-  { id: 5,
-  name: "Mike Ball",
-  role: CoreTasks.USER_ROLE_DEVELOPER,
-  loginName: "MB" },
-
-  { id: 6,
-  name: "Evin Grano",
-  role: CoreTasks.USER_ROLE_DEVELOPER,
-  loginName: "EG" },
-
-  { id: 7,
-  name: "Michael Cohen",
-  role: CoreTasks.USER_ROLE_DEVELOPER,
-  loginName: "SC" },
-
-  { id: 8,
-  name: "Matt Grantham",
-  role: CoreTasks.USER_ROLE_DEVELOPER,
-  loginName: "MG" },
-
-  { id: 9,
-  name: "Arti Singh",
-  role: CoreTasks.USER_ROLE_TESTER,
-  loginName: "AS" }
-
+  { id: 1, loginName: "mgr", name: "Manager User", role: "_Manager" },
+  { id: 2, loginName: "dev", name: "Developer User", role: "_Developer" },
+  { id: 3, loginName: "tst", name: "Tester User", role: "_Tester" },
+  { id: 4, loginName: "guest", name: "Guest User", role: "_Guest" }
 ];

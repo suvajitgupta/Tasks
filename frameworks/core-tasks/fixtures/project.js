@@ -4,15 +4,15 @@ sc_require('models/project');
 
 CoreTasks.Project.FIXTURES = [];
 
-/**
- * Generate a few project fixtures referencing task fixtures.
- */
-for (var i = 0; i < 5; i++) {
+for (var i = 0; i < 7; i++) {
   var projectHash = {};
   projectHash.id = i+1;
   projectHash.name = "Project" + projectHash.id;
-  var t = 4*i;
-  projectHash.tasks = [ t+1, t+2, t+3, t+4 ];
-  if (i < 3) projectHash.timeLeft = t*t;
+  if (i%2) {
+    projectHash.timeLeft = projectHash.id;
+  }
+  else {
+    projectHash.description = "Description" + projectHash.id;
+  }
   CoreTasks.Project.FIXTURES[i] = projectHash;
 }
