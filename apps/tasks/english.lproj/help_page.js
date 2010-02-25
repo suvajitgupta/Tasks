@@ -42,7 +42,7 @@ Tasks.helpPage = SC.Page.design({
       
       SC.WebView.design({
         layout: { top: 43, left: 0, right: 0, bottom: 0 },
-        value: static_url('help.html') + '&softwareMode=' + Tasks.softwareMode
+        value: static_url('help.html') + '?softwareMode=' + Tasks.softwareMode
       })
     ]
             
