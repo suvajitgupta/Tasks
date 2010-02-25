@@ -24,6 +24,11 @@ CoreTasks.taskTypeWeights[CoreTasks.TASK_TYPE_OTHER] = 1;
 CoreTasks.TASK_PRIORITY_HIGH = '_High';
 CoreTasks.TASK_PRIORITY_MEDIUM = '_Medium'; // default
 CoreTasks.TASK_PRIORITY_LOW = '_Low';
+CoreTasks.taskPrioritiesAllowed = [
+  CoreTasks.TASK_PRIORITY_HIGH,
+  CoreTasks.TASK_PRIORITY_MEDIUM,
+  CoreTasks.TASK_PRIORITY_LOW
+];
 
 CoreTasks.taskPriorityWeights = {};
 CoreTasks.taskPriorityWeights[CoreTasks.TASK_PRIORITY_HIGH] = 3;
@@ -111,11 +116,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
   priority: SC.Record.attr(String, {
     isRequired: YES,
     defaultValue: CoreTasks.TASK_PRIORITY_MEDIUM,
-    allowed: [
-      CoreTasks.TASK_PRIORITY_HIGH,
-      CoreTasks.TASK_PRIORITY_MEDIUM,
-      CoreTasks.TASK_PRIORITY_LOW
-    ]
+    allowed: CoreTasks.taskPrioritiesAllowed
   }),
 
   /**

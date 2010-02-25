@@ -32,8 +32,13 @@ Tasks.mixin({
           successCallback: this.authenticationSuccess.bind(this),
           failureCallback: this.authenticationFailure.bind(this)
         };
-        // Perservere authentication
-        CoreTasks.User.authenticate(loginName, password, params);
+        // remote authentication
+        if(CoreTasks.remoteDataSource) {
+          CoreTasks.User.authenticate(loginName, password, params);
+        }
+        else {
+          this.authenticationSuccess();
+        }
         break;
 
       default:

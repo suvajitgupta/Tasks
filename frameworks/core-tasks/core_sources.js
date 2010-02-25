@@ -8,7 +8,7 @@ sc_require('core');
  * @extends SC.DataSource
  * @author Sean Eidemiller
  */
-CoreTasks.PersevereDataSource = SC.DataSource.extend({
+CoreTasks.RemoteDataSource = SC.DataSource.extend({
 
   /**
    * Fetches a list of records from the server and loads them into the given store.
@@ -391,6 +391,7 @@ CoreTasks.PersevereDataSource = SC.DataSource.extend({
 
 });
 
-// Create the main store with the Persevere data source.
-CoreTasks.get('store').from(CoreTasks.PersevereDataSource.create());
-console.log('Initialized remote Persevere data source.');
+// Create the main store with the appropriate data source
+CoreTasks.remoteDataSource = true; // Set to false to get Fixtures
+CoreTasks.get('store').from(CoreTasks.remoteDataSource? CoreTasks.RemoteDataSource.create() : SC.FixturesDataSource.create());
+console.log('Initialized ' + (CoreTasks.remoteDataSource? 'remote' : 'fixtures') + ' data source.');
