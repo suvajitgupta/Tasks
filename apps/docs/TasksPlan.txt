@@ -140,6 +140,7 @@ v Add online training video using Captivate or Camtasia [SG] $Feature @Done
 | See demo.sproutcore.com/user_defaults and lookup SproutCore blog for Charles' posting on this topic
 - Add "TEAM" display mode (vs. "TASKS") to show everyone at a glance, clicking on Assignee shows their Tasks [SG] $Feature @Done %Passed
 v Add hotkeys for common operations (like Add/Duplcate Tasks and Save) [EG] <SG> $Feature @Done %Passed
+| Turned these off for now since these are conflicting with browser shortcuts
 - Add tab in Settings popup panel to manage user preferences [SG] $Feature
 | Auto save
 | Email notifications
