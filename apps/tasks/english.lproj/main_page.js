@@ -6,7 +6,6 @@
 sc_require('core');
 sc_require('main');
 sc_require('mixins/localized_label');
-sc_require('mixins/permissions');
 sc_require('views/logo');
 sc_require('views/summary');
 
