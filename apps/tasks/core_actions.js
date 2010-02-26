@@ -112,8 +112,8 @@ Tasks.mixin({
         CoreTasks.set('currentUser', currentUser);
         CoreTasks.setPermissions();
         
-        var userNameMessage = Tasks.getPath('mainPage.mainPane.userNameMessage');
-        userNameMessage.set('toolTip', "_LoginSince".loc() + new Date().format('hh:mm:ss a MMM dd, yyyy'));
+        var userName = Tasks.getPath('mainPage.mainPane.userName');
+        userName.set('toolTip', "_LoginSince".loc() + new Date().format('hh:mm:ss a MMM dd, yyyy'));
         
         // Based on user's role set up appropriate task filter
         var role = currentUser.get('role');
@@ -333,8 +333,8 @@ Tasks.mixin({
    */
   restart: function() {
     
-    Tasks.getPath('mainPage.mainPane.userNameMessage').set('value', null);
-    Tasks.getPath('mainPage.mainPane.userRoleMessage').set('value', null);
+    Tasks.getPath('mainPage.mainPane.userName').set('value', null);
+    Tasks.getPath('mainPage.mainPane.userRole').set('value', null);
     CoreTasks.set('currentUser', null);
     CoreTasks.loginTime = true;
     
