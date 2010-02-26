@@ -16,5 +16,7 @@ Tasks.main = function main() {
 
   // console.log('DEBUG: "Tasks" started at: %@'.fmt(new Date()));
   Tasks.registerRoutes();
+  
+  Tasks.isLoaded = YES; // for Lebowski
 
 };

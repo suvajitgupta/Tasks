@@ -18,6 +18,7 @@ Tasks = SC.Object.create(SC.Statechart,
 
   NAMESPACE: 'Tasks',
   VERSION: 'Beta',
+  isLoaded: NO, // for Lebowski
   
   /**
    * Deselect all tasks.
