@@ -162,18 +162,18 @@
 }
 
 .task-item .sc-outline img {
-  left: 46px !important;
+  left: 40px !important;
 }
 
 .task-item label {
-  left: 41px !important;
+  left: 38px !important;
   right: 50px !important;
   padding-left: 5px !important;
   padding-right: 5px !important;
 }
 
 .task-item.task-type-displayed label {
-  left: 61px !important;
+  left: 58px !important;
 }
 
 .task-item .sc-outline .count {
