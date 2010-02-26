@@ -75,6 +75,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' font-size: 9px;\n' +
 '}\n' +
 '.feature, .bug, .other {\n' +
+(Tasks.softwareMode? '' : ' display: none;\n') +
 ' padding: 1px 0px;\n' +
 ' border: 1px solid gray;\n' +
 ' -moz-border-radius: 15px;\n' +
