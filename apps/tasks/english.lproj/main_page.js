@@ -6,6 +6,7 @@
 sc_require('core');
 sc_require('main');
 sc_require('mixins/localized_label');
+sc_require('mixins/permissions');
 sc_require('views/logo');
 sc_require('views/summary');
 
@@ -157,7 +158,7 @@ Tasks.mainPage = SC.Page.design({
         classNames: ['toolbar-label'],
         value: "_AddProject".loc(),
         toolTip: "_AddProjectTooltip".loc(),
-        isEnabledBinding: 'CoreTasks.permissions.canCreateProject',
+        isVisibleBinding: 'CoreTasks.permissions.canCreateProject',
         target: 'Tasks',
         action: 'addProject'
       }),
@@ -167,6 +168,7 @@ Tasks.mainPage = SC.Page.design({
         classNames: ['toolbar-label'],
         value: "_DeleteProject".loc(),
         toolTip: "_DeleteProjectTooltip".loc(),
+        isVisibleBinding: 'CoreTasks.permissions.canDeleteProject',
         isEnabledBinding: 'Tasks.projectsController.isDeletable',
         target: 'Tasks',
         action: 'deleteProject'
@@ -183,6 +185,7 @@ Tasks.mainPage = SC.Page.design({
         classNames: ['toolbar-label'],
         value: "_AddTask".loc(),
         toolTip: "_AddTaskTooltip".loc(),
+        isVisibleBinding: 'CoreTasks.permissions.canCreateTask',
         isEnabledBinding: 'Tasks.tasksController.isAddable',
         target: 'Tasks',
         action: 'addTask'
@@ -193,6 +196,7 @@ Tasks.mainPage = SC.Page.design({
         classNames: ['toolbar-label'],
         value: "_DeleteTask".loc(),
         toolTip: "_DeleteTaskTooltip".loc(),
+        isVisibleBinding: 'CoreTasks.permissions.canDeleteTask',
         isEnabledBinding: 'Tasks.tasksController.isDeletable',
         target: 'Tasks',
         action: 'deleteTask'

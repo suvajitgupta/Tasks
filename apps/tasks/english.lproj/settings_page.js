@@ -40,7 +40,7 @@ Tasks.settingsPage = SC.Page.create({
             value: "_AddUser".loc(),
             classNames: ['toolbar-label'],
             toolTip: "_AddUserTooltip".loc(),
-            isEnabledBinding: 'CoreTasks.permissions.canCreateUser',
+            isVisibleBinding: 'CoreTasks.permissions.canCreateUser',
             target: 'Tasks',
             action: 'addUser'
           }),
@@ -51,6 +51,7 @@ Tasks.settingsPage = SC.Page.create({
             value: "_DeleteUser".loc(),
             classNames: ['toolbar-label'],
             toolTip: "_DeleteUserTooltip".loc(),
+            isVisibleBinding: 'CoreTasks.permissions.canDeleteUser',
             isEnabledBinding: 'Tasks.usersController.isDeletable',
             target: 'Tasks',
             action: 'deleteUser'
