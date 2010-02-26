@@ -144,7 +144,7 @@ Tasks.mainPage = SC.Page.design({
     
     userName: SC.outlet('titleBarView.userNameLabel'),
     userRole: SC.outlet('titleBarView.userRoleLabel'),
-    exportButton: SC.outlet('titleBarView.childViews.7'),
+    exportButton: SC.outlet('titleBarView.exportButton'),
     
     toolbarView: SC.View.design({
       layout: { left: 0, right: 0, top: 42, height: 36 },
@@ -421,8 +421,8 @@ Tasks.mainPage = SC.Page.design({
         
     }),
 
-    projectsList: SC.outlet('masterDetailView.projectsMasterView.childViews.0.contentView'),
-    tasksList: SC.outlet('masterDetailView.tasksDetailView.childViews.0.contentView'),
+    projectsList: SC.outlet('masterDetailView.projectsMasterView.contentView'),
+    tasksList: SC.outlet('masterDetailView.tasksDetailView.contentView'),
     
     controlBarView: SC.View.design({
       layout: { left: 0, right: 0, bottom: 20, height: 51 },
