@@ -598,8 +598,11 @@ Tasks.mixin({
       return null;
     }
     
-    // Create and select new user.
-    var user = CoreTasks.createRecord(CoreTasks.User, SC.clone(CoreTasks.User.NEW_USER_HASH));
+    // Create and select new user (copy role of selected user if one).
+    var userHash = SC.clone(CoreTasks.User.NEW_USER_HASH);
+    var selectedUser = Tasks.usersController.getPath('selection.firstObject');
+    if (selectedUser) userHash.role = selectedUser.get('role');
+    var user = CoreTasks.createRecord(CoreTasks.User, userHash);
     Tasks.usersController.selectObject(user);
     Tasks.settingsPage.get('userInformation').get('fullNameField').becomeFirstResponder();
     if(CoreTasks.get('autoSave')) Tasks.saveData();

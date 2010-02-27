@@ -48,14 +48,14 @@ Project Manager GUI
 v Add hover over tooltip for Projects to show how many Tasks they contain [SG] @Done $Feature %Passed
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done $Feature %Passed
 | Check via Inline Editor Delegate
-^ Add "Add Project" & "Del. Project" buttons in projects toolbar [SG] @Done $Feature %Passed
+^ Add "Add Project" & "Delete Project" buttons in projects toolbar [SG] @Done $Feature %Passed
 - Add warning Alert box about deleting Project with Tasks [SG] @Done $Feature %Passed
 v Beta: Disallow names that are already in use or reserved and providing warning to user [SG] $Feature @Active
 | Project name: cannot be same as any existing name
 | User login name cannot cannot be same as any existing name or be reserved name "none"
 v Add summary in projects toolbar showing number of Projects & number of Tasks for selected project [SG] <MB> @Done $Feature %Passed
-v Enable/disable "Del. Project" button based on having a selected project [SG] @Done %Passed $Feature
-v Disable Add/Del. Tasks buttons when on "All Tasks" project [SG] <BB> @Done %Passed $Feature
+v Enable/disable "Delete Project" button based on having a selected project [SG] @Done %Passed $Feature
+v Disable Add/Delete Tasks buttons when on "All Tasks" project [SG] <BB> @Done %Passed $Feature
 - Select "Unallocated Tasks" project at startup [SG] @Done %Passed $Feature
 ^ Add virtual "All Tasks" & "Unallocated Tasks" projects and display them grayed out in projects list [SG] <SE> $Feature @Done %Passed
 - Disallow "All Tasks" & "Unallocated Tasks" projects from being deleted [SG] @Done $Feature %Passed
@@ -80,11 +80,11 @@ v Enable Task Validation radio buttons only when in Done status [SG] <JH2> $Feat
 - Support filtering of Tasks that were recently updated or have effort specified [SG] $Feature @Done %Passed
 - Indicate whether there is a Task attribute filter via a different icon on the toolbar button [SG] $Feature @Done %Passed
 - Indicate whether there are any risky items under an assignee using a red flag in assignee grouping bar [SG] $Feature @Done %Passed
-v Enable/disable "Del. Task" button based on having a selected Task [SG] @Done %Passed $Feature
+v Enable/disable "Delete Task" button based on having a selected Task [SG] @Done %Passed $Feature
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done $Feature %Passed
-^ Add "Add Task" & "Del. Task" buttons in tasks toolbar [SG] <SE> @Done %Passed $Feature
+^ Add "Add Task" & "Delete Task" buttons in tasks toolbar [SG] <SE> @Done %Passed $Feature
 | Logged in user is default Submitter, Assignee is either set to the same as selected Task (if one) or to logged in user
-| Copy over Project/Type/Priority attributes of selected Task to new Task
+| Copy over Project/Type/Priority attributes of first selected Task to new Task
 - Clear Task Validation if Sstatus is changed from Done, disallow entry of Passed/Failed when not Done [SG] <MB> $Feature @Done %Passed
 ^ Show Done/Left effort subtotals (exclude incomplete Low priority Tasks) on far right for load balancing [SG] @Done $Feature %Passed
 - Append "?" for range-based subtotals including Ttasks with unspecified Efforts [SG] @Done $Feature %Passed
@@ -109,7 +109,8 @@ User Manager GUI
 ^ Add assignee/submitter filtering (space or comma separators, "none" for unassigned) & corresponding delete button in top toolbar [SG] <JH2> @Done $Feature %Passed
 - Allow assignee filtering by matching any part of login or full name [SG] $Feature @Done %Passed
 - Set assignee selection filter to logged in user if they are a Developer [SG] @Done $Feature %Passed
-^ Add Settings button/popup embedding User Manager with "Add/Del. User"  buttons in toolbar [SG] <JH2> @Done %Passed $Feature
+^ Add Settings button/popup embedding User Manager with "Add/Delete User"  buttons in toolbar [SG] <JH2> @Done %Passed $Feature
+| Copy over Role attribute of first selected User to new User
 - Show number of registered/selected users at the bottom of User Manager panel [SG] $Feature @Done %Passed
 ^ Allow multi-user drag-and-drop role change in User Manager [SG] @Done $Feature %Passed
 - Reset Task Assignee/Submitter after user deletion <SE> [SG] $Feature @Done %Passed
