@@ -41,11 +41,21 @@ Tasks.UserItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     return NO;
   },
   
-  _buildContextMenu: function(isSystemProject) {
+  _buildContextMenu: function() {
     
     var ret = [];
     
-    if(!isSystemProject && CoreTasks.getPath('permissions.canDeleteUser')) {
+    if(CoreTasks.getPath('permissions.canCreateUser')) {
+      ret.push({
+        title: "_Add".loc(),
+        icon: 'add-icon',
+        isEnabled: YES,
+        target: 'Tasks',
+        action: 'addUser'
+      });
+    }
+    
+    if(CoreTasks.getPath('permissions.canDeleteUser')) {
       ret.push({
         title: "_Delete".loc(),
         icon: 'delete-icon',
