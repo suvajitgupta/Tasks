@@ -22,3 +22,5 @@ tools/*.pyc
 tools/helpers/*.pyc
 frameworks/scui
 frameworks/sproutcore
+*.gif
+*.jpg
