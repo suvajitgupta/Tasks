@@ -56,7 +56,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 'pre {\n' +
 ' margin-top: -5px;\n' +
 ' margin-bottom: 8px;\n' +
-' margin-left: 115px;\n' +
+' margin-left: ' + (Tasks.softwareMode? '115' : '70') + 'px;\n' +
 ' background-color: beige;\n' +
 ' white-space: pre-wrap;\n' +
 ' word-wrap: break-word;\n' +
