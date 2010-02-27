@@ -230,11 +230,13 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
   },
 
   renderIcon: function(context, icon){
-    var content = this.get('content');
-    var projectTooltip = content.get('description')? "_Has".loc() : ("_No".loc() + ' ');
-    if(!CoreTasks.isSystemProject(content)) projectTooltip += ("_description".loc() + "_ClickToEdit".loc());
-    context.begin('img').addClass('icon').addClass(icon).attr('src', SC.BLANK_IMAGE_URL)
-          .attr('title', projectTooltip).attr('alt', projectTooltip).end();
+    if(!SC.none(icon)) {
+      var content = this.get('content');
+      var projectTooltip = content.get('description')? "_Has".loc() : ("_No".loc() + ' ');
+      if(!CoreTasks.isSystemProject(content)) projectTooltip += ("_description".loc() + "_ClickToEdit".loc());
+      context.begin('img').addClass('icon').addClass(icon).attr('src', SC.BLANK_IMAGE_URL)
+            .attr('title', projectTooltip).attr('alt', projectTooltip).end();
+    }
   },
   
   renderCount: function(context, count) {
