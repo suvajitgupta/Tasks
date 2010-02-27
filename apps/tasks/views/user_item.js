@@ -1,7 +1,7 @@
 // ==========================================================================
 // Project: Tasks 
 // ==========================================================================
-/*globals CoreTasks Tasks sc_require*/
+/*globals CoreTasks Tasks sc_require SCUI*/
 sc_require('mixins/localized_label');
 
 /** 
@@ -15,6 +15,50 @@ sc_require('mixins/localized_label');
 Tasks.UserItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
 /** @scope Tasks.UserItemView.prototype */ {
   
+  mouseDown: function(event) {
+    
+    // console.log('DEBUG: mouse down on user item: ' + this.getPath('content.name'));
+
+    var that = this;
+    var content = this.get('content');
+    if(!content.get('id')) return sc_super();
+
+    var items = this._buildContextMenu();
+    if(items.length > 0) {
+      var pane = SCUI.ContextMenuPane.create({
+        contentView: SC.View.design({}),
+        layout: { width: 150, height: 0 },
+        itemTitleKey: 'title',
+        itemIconKey: 'icon',
+        itemIsEnabledKey: 'isEnabled',
+        itemTargetKey: 'target',
+        itemActionKey: 'action',
+        itemSeparatorKey: 'isSeparator',
+        items: items
+      });
+      pane.popup(this, event); // pass in the mouse event so the pane can figure out where to put itself
+    }
+    return NO;
+  },
+  
+  _buildContextMenu: function(isSystemProject) {
+    
+    var ret = [];
+    
+    if(!isSystemProject && CoreTasks.getPath('permissions.canDeleteUser')) {
+      ret.push({
+        title: "_Delete".loc(),
+        icon: 'delete-icon',
+        isEnabled: YES,
+        target: 'Tasks',
+        action: 'deleteUser'
+      });
+    }
+    
+    return ret;
+    
+  },
+
   render: function(context, firstTime) {
     
     var content = this.get('content');
