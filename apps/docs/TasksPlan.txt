@@ -55,7 +55,7 @@ v Beta: Disallow names that are already in use or reserved and providing warning
 | User login name cannot cannot be same as any existing name or be reserved name "none"
 v Add summary in projects toolbar showing number of Projects & number of Tasks for selected project [SG] <MB> @Done $Feature %Passed
 v Enable/disable "Delete Project" button based on having a selected project [SG] @Done %Passed $Feature
-v Disable Add/Delete Tasks buttons when on "All Tasks" project [SG] <BB> @Done %Passed $Feature
+v Disable "Add Task" button when no project is selected [SG] <BB> @Done %Passed $Feature
 - Select "Unallocated Tasks" project at startup [SG] @Done %Passed $Feature
 ^ Add virtual "All Tasks" & "Unallocated Tasks" projects and display them grayed out in projects list [SG] <SE> $Feature @Done %Passed
 - Disallow "All Tasks" & "Unallocated Tasks" projects from being deleted [SG] @Done $Feature %Passed
@@ -71,7 +71,7 @@ Task Manager GUI
 - Allow Tasks under an assignee to be hidden/disclosed [SG] <JH2> @Done $Feature %Passed
 - Show Task Type via different icons [SG] <JH2> @Done $Feature %Passed
 - Show Task Priority (font style), Status (font color), Validation (background color) [SG] <MB> @Done $Feature %Passed
-- Add Task Status/Priority/Validation radio buttons in tasks toolbar [SG] @Done $Feature %Passed
+- Add Task "Type/Priority/Status/Validation" radio buttons in tasks toolbar [SG] @Done $Feature %Passed
 v Enable Task Validation radio buttons only when in Done status [SG] <JH2> $Feature @Done %Passed
 - Allow multi-task modification of Type/Status/Priority/Validation [SG] $Feature @Done %Passed
 ^ Add Task search filter (by #IDs or name) & corresponding delete button in top toolbar: support type-ahead searching <JH2> [SG] @Done %Passed $Feature
@@ -111,6 +111,7 @@ User Manager GUI
 - Set assignee selection filter to logged in user if they are a Developer [SG] @Done $Feature %Passed
 ^ Add Settings button/popup embedding User Manager with "Add/Delete User"  buttons in toolbar [SG] <JH2> @Done %Passed $Feature
 | Copy over Role attribute of first selected User to new User
+v Enable/disable "Delete User" button based on having a selected user [SG] @Done %Passed $Feature
 - Show number of registered/selected users at the bottom of User Manager panel [SG] $Feature @Done %Passed
 ^ Allow multi-user drag-and-drop role change in User Manager [SG] @Done $Feature %Passed
 - Reset Task Assignee/Submitter after user deletion <SE> [SG] $Feature @Done %Passed
@@ -124,7 +125,7 @@ Application Manager GUI
 - Show number of selected Projects/Tasks and displayed Assignees/Tasks in the status bar [SG] <MB> @Done $Feature %Passed
 - Add "Save" button in top toolbar, note time of last save in status bar [SG] <BB> @Done $Feature %Passed
 - Add "AutoSave" checkbox in status bar [SG] <BB> @Done $Feature %Passed
-- Enable/disable Save button based on data modification [EO] <SG> $Feature @Done %Passed
+- Enable/disable "Save" button based on data modification [EO] <SG> $Feature @Done %Passed
 - Add "Refresh" button to synchronize GUI with latest data from Server [SG] <SE> $Feature @Done %Passed
 - Add "Import" button in top toolbar with associated pop up panel [SG] <BB> @Done $Feature %Passed
 - Don't create a Project if it already exists during Import [SG] @Done $Feature %Passed
