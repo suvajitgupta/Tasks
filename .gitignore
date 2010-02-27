@@ -9,8 +9,6 @@ server-test.err
 tasks-server/prod/WEB-INF/data
 tasks-server/test/WEB-INF/data
 persevere/ra-cache
-tools/*.pyc
-tools/helpers/*.pyc
 frameworks/scui
 frameworks/sproutcore
 *.gif
