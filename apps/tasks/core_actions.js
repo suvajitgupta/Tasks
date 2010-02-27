@@ -279,10 +279,10 @@ Tasks.mixin({
    * Handle application exiting request.
    */
   logout: function() {
-    SC.AlertPane.warn("_Confirmation".loc(), "_LogoutConfirmation".loc(), null, "_No".loc(), "_Yes".loc(), null,
+    SC.AlertPane.warn("_Confirmation".loc(), "_LogoutConfirmation".loc(), null, "_Yes".loc(), "_No".loc(), null,
       SC.Object.create({
         alertPaneDidDismiss: function(pane, status) {
-          if(status === SC.BUTTON2_STATUS) {
+          if(status === SC.BUTTON1_STATUS) {
             Tasks._exit();
           }
         }
@@ -295,13 +295,13 @@ Tasks.mixin({
    */
   _exit: function() {
     if(CoreTasks.get('needsSave')) {
-      SC.AlertPane.warn("_Confirmation".loc(), "_SaveConfirmation".loc(), null, "_No".loc(), "_Yes".loc(), null,
+      SC.AlertPane.warn("_Confirmation".loc(), "_SaveConfirmation".loc(), null, "_Yes".loc(), "_No".loc(), null,
         SC.Object.create({
           alertPaneDidDismiss: function(pane, status) {
-            if(status === SC.BUTTON2_STATUS) {
+            if(status === SC.BUTTON1_STATUS) {
               Tasks.saveAndExit();
             }
-            else if(status === SC.BUTTON1_STATUS){
+            else if(status === SC.BUTTON2_STATUS){
               Tasks.exitNoSave();
             }
           }
@@ -415,10 +415,10 @@ Tasks.mixin({
     if (len > 0) {
 
       // Confirm deletion operation
-      SC.AlertPane.warn("_Confirmation".loc(), "_ProjectDeletionConfirmation".loc(), null, "_No".loc(), "_Yes".loc(), null,
+      SC.AlertPane.warn("_Confirmation".loc(), "_ProjectDeletionConfirmation".loc(), null, "_Yes".loc(), "_No".loc(), null,
       SC.Object.create({
         alertPaneDidDismiss: function(pane, status) {
-          if(status === SC.BUTTON2_STATUS) {
+          if(status === SC.BUTTON1_STATUS) {
             var context = {};
             for (var i = 0; i < len; i++) {
               // Get and delete each selected (non-system) project.
@@ -547,10 +547,10 @@ Tasks.mixin({
     if (len > 0) {
 
       // Confirm deletion operation
-      SC.AlertPane.warn("_Confirmation".loc(), "_TaskDeletionConfirmation".loc(), null, "_No".loc(), "_Yes".loc(), null,
+      SC.AlertPane.warn("_Confirmation".loc(), "_TaskDeletionConfirmation".loc(), null, "_Yes".loc(), "_No".loc(), null,
       SC.Object.create({
         alertPaneDidDismiss: function(pane, status) {
-          if(status === SC.BUTTON2_STATUS) {
+          if(status === SC.BUTTON1_STATUS) {
             var context = {};
             for (var i = 0; i < len; i++) {
               // Get and delete each selected task.
@@ -623,10 +623,10 @@ Tasks.mixin({
     if (len > 0) {
       
       // Confirm deletion operation
-      SC.AlertPane.warn("_Confirmation".loc(), "_UserDeletionConfirmation".loc(), null, "_No".loc(), "_Yes".loc(), null,
+      SC.AlertPane.warn("_Confirmation".loc(), "_UserDeletionConfirmation".loc(), null, "_Yes".loc(), "_No".loc(), null,
         SC.Object.create({
           alertPaneDidDismiss: function(pane, status) {
-            if(status === SC.BUTTON2_STATUS) {
+            if(status === SC.BUTTON1_STATUS) {
               var context = {};
               for (var i = 0; i < len; i++) {
                 // Get and delete each selected user.
