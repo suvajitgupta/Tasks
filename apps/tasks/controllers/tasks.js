@@ -17,7 +17,7 @@ Tasks.tasksController = SC.TreeController.create(
   allowsEmptySelection: YES,
   treeItemIsGrouped: YES,
   
-  canGuestAddEditTask: function() {
+  isGuestInUnallocatedTasks: function() {
     if(CoreTasks.getPath('currentUser.role') === CoreTasks.USER_ROLE_GUEST) {
       if(Tasks.projectsController.getPath('selection.length') !== 1) return false;
       var selectedProject = Tasks.projectsController.getPath('selection.firstObject');
@@ -27,23 +27,17 @@ Tasks.tasksController = SC.TreeController.create(
   }.property('content').cacheable(),
   
   isAddable: function() {
-    
     if(Tasks.projectsController.getPath('selection.length') !== 1) return false;
     if(Tasks.assignmentsController.get('displayMode') === Tasks.DISPLAY_MODE_TEAM) return false;
-    
     if(!CoreTasks.getPath('permissions.canCreateTask')) return false;
-    
-    if(!this.canGuestAddEditTask()) return false;
-    
+    if(!this.isGuestInUnallocatedTasks()) return false;
     return true;
-    
   }.property('content').cacheable(),
   
   isEditable: function() {
     
     if(!CoreTasks.getPath('permissions.canUpdateTask')) return false;
-    
-    if(!this.canGuestAddEditTask()) return false;
+    if(!this.isGuestInUnallocatedTasks()) return false;
 
     var sel = this.get('selection');
     if(!sel || sel.get('length') === 0) return false;
@@ -53,22 +47,38 @@ Tasks.tasksController = SC.TreeController.create(
   }.property('selection').cacheable(),
   
   isReallocatable: function() {
-    
     if(CoreTasks.getPath('currentUser.role') === CoreTasks.USER_ROLE_GUEST) return false;
-    
     return this.isEditable();
-    
   }.property('isEditable').cacheable(),
   
   isDeletable: function() {
     
     if(Tasks.assignmentsController.get('displayMode') === Tasks.DISPLAY_MODE_TEAM) return false;
-    
     if(!CoreTasks.getPath('permissions.canDeleteTask')) return false;
+    if(!this.isGuestInUnallocatedTasks()) return false;
     
     var sel = this.get('selection');
     if(!sel || sel.get('length') === 0) return false;
     
+    if((CoreTasks.getPath('currentUser.role') === CoreTasks.USER_ROLE_GUEST) && !this.areUserSubmittedTasks()) return false;
+    
+    return true;
+    
+  }.property('selection').cacheable(),
+  
+  areUserSubmittedTasks: function() {
+
+    var sel = this.get('selection');
+    if(!sel) return true;
+    var len = sel.get('length');
+    if(len === 0) return true;
+    var userId = CoreTasks.getPath('currentUser.id');
+    var context = {};
+    for (var i = 0; i < len; i++) {
+      var task = sel.nextObject(i, null, context);
+      var submitterId = task.get('submitterId');
+      if(userId !== submitterId) return false;
+    }
     return true;
     
   }.property('selection').cacheable(),
@@ -77,7 +87,7 @@ Tasks.tasksController = SC.TreeController.create(
     
     if(!CoreTasks.getPath('permissions.canUpdateTask')) return false;
     
-    if(!this.canGuestAddEditTask()) return false;
+    if(!this.isGuestInUnallocatedTasks()) return false;
 
     var sel = this.get('selection');
     if(!sel || sel.get('length') === 0) return false;
@@ -88,7 +98,7 @@ Tasks.tasksController = SC.TreeController.create(
     return selectedTask.get('developmentStatus') === CoreTasks.TASK_STATUS_DONE;
     
   }.property('selection').cacheable(),
-  
+
   type: function(key, value) {
     var sel = this.get('selection');
     if(!sel || sel.get('length') === 0) return false;
