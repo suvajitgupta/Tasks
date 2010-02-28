@@ -162,18 +162,19 @@
 }
 
 .task-item .sc-outline img {
-  left: 40px !important;
+  margin-top: -9px !important;
+  left: 45px !important;
 }
 
 .task-item label {
-  left: 38px !important;
+  left: 42px !important;
   right: 50px !important;
   padding-left: 5px !important;
   padding-right: 5px !important;
 }
 
 .task-item.task-type-displayed label {
-  left: 58px !important;
+  left: 61px !important;
 }
 
 .task-item .sc-outline .count {
@@ -286,7 +287,7 @@
  * Task validation styles
  */
 
-.task-validation-untested, .task-validation-passed, .task-validation-failed {
+.sc-view .task-validation-untested, .sc-view .task-validation-passed, .sc-view .task-validation-failed {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 3px;
