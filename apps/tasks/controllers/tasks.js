@@ -17,11 +17,11 @@ Tasks.tasksController = SC.TreeController.create(
   allowsEmptySelection: YES,
   treeItemIsGrouped: YES,
   
-  isGuestInUnallocatedTasks: function() {
+  isGuestInSystemProject: function() {
     if(CoreTasks.getPath('currentUser.role') === CoreTasks.USER_ROLE_GUEST) {
       if(Tasks.projectsController.getPath('selection.length') !== 1) return false;
       var selectedProject = Tasks.projectsController.getPath('selection.firstObject');
-      if (selectedProject !== CoreTasks.get('unallocatedTasksProject')) return false;
+      if(!CoreTasks.isSystemProject(selectedProject)) return false;
     }
     return true;
   }.property('content').cacheable(),
@@ -30,14 +30,14 @@ Tasks.tasksController = SC.TreeController.create(
     if(Tasks.projectsController.getPath('selection.length') !== 1) return false;
     if(Tasks.assignmentsController.get('displayMode') === Tasks.DISPLAY_MODE_TEAM) return false;
     if(!CoreTasks.getPath('permissions.canCreateTask')) return false;
-    if(!this.isGuestInUnallocatedTasks()) return false;
+    if(!this.isGuestInSystemProject()) return false;
     return true;
   }.property('content').cacheable(),
   
   isEditable: function() {
     
     if(!CoreTasks.getPath('permissions.canUpdateTask')) return false;
-    if(!this.isGuestInUnallocatedTasks()) return false;
+    if(!this.isGuestInSystemProject()) return false;
 
     var sel = this.get('selection');
     if(!sel || sel.get('length') === 0) return false;
@@ -55,7 +55,7 @@ Tasks.tasksController = SC.TreeController.create(
     
     if(Tasks.assignmentsController.get('displayMode') === Tasks.DISPLAY_MODE_TEAM) return false;
     if(!CoreTasks.getPath('permissions.canDeleteTask')) return false;
-    if(!this.isGuestInUnallocatedTasks()) return false;
+    if(!this.isGuestInSystemProject()) return false;
     
     var sel = this.get('selection');
     if(!sel || sel.get('length') === 0) return false;
@@ -83,11 +83,28 @@ Tasks.tasksController = SC.TreeController.create(
     
   }.property('selection').cacheable(),
   
+  areUserAssignedTasks: function() {
+
+    var sel = this.get('selection');
+    if(!sel) return true;
+    var len = sel.get('length');
+    if(len === 0) return true;
+    var userId = CoreTasks.getPath('currentUser.id');
+    var context = {};
+    for (var i = 0; i < len; i++) {
+      var task = sel.nextObject(i, null, context);
+      var assigneeId = task.get('assigneeId');
+      if(userId !== assigneeId) return false;
+    }
+    return true;
+    
+  }.property('selection').cacheable(),
+  
   isValidatable: function() {
     
     if(!CoreTasks.getPath('permissions.canUpdateTask')) return false;
     
-    if(!this.isGuestInUnallocatedTasks()) return false;
+    if(!this.isGuestInSystemProject()) return false;
 
     var sel = this.get('selection');
     if(!sel || sel.get('length') === 0) return false;
