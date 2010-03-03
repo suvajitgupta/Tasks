@@ -184,7 +184,7 @@ Tasks.mixin({
     serverMessage.set('value', serverMessage.get('value') + "_ProjectsLoaded".loc() + new Date().format('hh:mm:ss a'));
 
     if(CoreTasks.loginTime) {
-      var defaultProject = CoreTasks.get('unallocatedTasksProject');
+      var defaultProject = CoreTasks.get('allTasksProject');
       var defaultProjectName = this.get('defaultProjectName');
       if(defaultProjectName) { // if specified via a Route
         var project = CoreTasks.getProject(defaultProjectName); // see if such a project exists
