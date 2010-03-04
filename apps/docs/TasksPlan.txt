@@ -19,7 +19,7 @@ Design/Planning
 | Everyone can create/update Users (except Role attribute); Only Managers can update User Role and delete Users
 | Only Managers can create/update/delete Projects
 | Managers/Developers/Testers can create/update/delete Tasks
-| Guests can only create/update unallocated Tasks & update Task descriptions
+| Guests can only create/update unallocated Tasks they submitted & update Task descriptions
 
 General Infrastructure
 ^ Develop Model and Fixtures (hardcoded & generated) [SG] <SE> @Done
@@ -56,9 +56,9 @@ v Beta: Disallow names that are already in use or reserved and providing warning
 v Add summary in projects toolbar showing number of Projects & number of Tasks for selected project [SG] <MB> @Done $Feature %Passed
 v Enable/disable "Delete Project" button based on having a selected project [SG] @Done %Passed $Feature
 v Disable "Add Task" button when no project is selected [SG] <BB> @Done %Passed $Feature
-- Select "Unallocated Tasks" project at startup [SG] @Done %Passed $Feature
-^ Add virtual "All Tasks" & "Unallocated Tasks" projects and display them grayed out in projects list [SG] <SE> $Feature @Done %Passed
-- Disallow "All Tasks" & "Unallocated Tasks" projects from being deleted [SG] @Done $Feature %Passed
+- Select "All Tasks" project at startup [SG] @Done %Passed $Feature
+^ Add "All/Unallocated Tasks" system projects  [SG] <SE> $Feature @Done %Passed
+- Disallow system projects from being deleted [SG] @Done $Feature %Passed
 ^ Allow multi-task drag-and-drop reallocation to other projects [BB] <SG> @Done $Feature %Passed
 ^ Add popup viewer/editor for Project time left/description [SG] $Feature @Done %Passed
 v Add Project context menu with options: Add, Duplicate, Delete [SG] $Feature @Done %Passed

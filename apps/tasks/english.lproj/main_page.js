@@ -6,7 +6,6 @@
 sc_require('core');
 sc_require('main');
 sc_require('mixins/localized_label');
-sc_require('mixins/and_binding');
 sc_require('mixins/permissible');
 sc_require('views/logo');
 sc_require('views/summary');
@@ -198,7 +197,7 @@ Tasks.mainPage = SC.Page.design({
         value: "_DeleteTask".loc(),
         toolTip: "_DeleteTaskTooltip".loc(),
         isVisibleBinding: 'CoreTasks.permissions.canDeleteTask',
-        isEnabledBinding: SC.Binding.and('Tasks.tasksController.isDeletable', 'Tasks.tasksController.areUserAssignedTasks'),
+        isEnabledBinding: 'Tasks.tasksController.isDeletable',
         isPermittedBinding: 'Tasks.tasksController.areUserAssignedTasks',
         target: 'Tasks',
         action: 'deleteTask'
