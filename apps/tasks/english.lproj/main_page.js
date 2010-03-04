@@ -6,6 +6,8 @@
 sc_require('core');
 sc_require('main');
 sc_require('mixins/localized_label');
+sc_require('mixins/and_binding');
+sc_require('mixins/permissible');
 sc_require('views/logo');
 sc_require('views/summary');
 
@@ -189,14 +191,15 @@ Tasks.mainPage = SC.Page.design({
         target: 'Tasks',
         action: 'addTask'
       }),
-      deleteTaskButton: SC.LabelView.design(SCUI.SimpleButton,{
+      deleteTaskButton: SC.LabelView.design(SCUI.SimpleButton,Tasks.Permissible,{
         layout: { centerY: 0, left: 320, height: 18, width: 100 },
         icon: 'delete-icon',
         classNames: ['toolbar-label'],
         value: "_DeleteTask".loc(),
         toolTip: "_DeleteTaskTooltip".loc(),
         isVisibleBinding: 'CoreTasks.permissions.canDeleteTask',
-        isEnabledBinding: 'Tasks.tasksController.isDeletable',
+        isEnabledBinding: SC.Binding.and('Tasks.tasksController.isDeletable', 'Tasks.tasksController.areUserAssignedTasks'),
+        isPermittedBinding: 'Tasks.tasksController.areUserAssignedTasks',
         target: 'Tasks',
         action: 'deleteTask'
       }),
@@ -436,10 +439,11 @@ Tasks.mainPage = SC.Page.design({
         layout: { centerX: 0, width: 1030, top: 0, bottom: 0 },
         childViews: 'typeLabel typeRadiobuttons priorityLabel priorityRadiobuttons statusLabel statusRadiobuttons validationLabel validationRadiobuttons'.w(),
         
-        typeLabel: SC.LabelView.design(SCUI.ToolTip, {
+        typeLabel: SC.LabelView.design(SCUI.ToolTip, Tasks.Permissible, {
           layout: { top: 3, bottom: 30, left: 10, width: 260 },
           classNames: ['task-attribute-set-title'],
           isVisibleBinding: 'Tasks.softwareMode',
+          isPermittedBinding: 'Tasks.tasksController.isEditable',
           value: "_Type".loc(),
           toolTip: "_TypeTooltip".loc()
         }),
@@ -465,9 +469,10 @@ Tasks.mainPage = SC.Page.design({
           layoutDirection: SC.LAYOUT_HORIZONTAL
         }),
 
-        priorityLabel: SC.LabelView.design(SCUI.ToolTip, {
+        priorityLabel: SC.LabelView.design(SCUI.ToolTip, Tasks.Permissible, {
           layout: { top: 3, bottom: 30, left: 285, width: 195 },
           classNames: ['task-attribute-set-title'],
+          isPermittedBinding: 'Tasks.tasksController.isEditable',
           value: "_Priority".loc(),
           toolTip: "_PriorityTooltip".loc()
         }),
@@ -491,9 +496,10 @@ Tasks.mainPage = SC.Page.design({
           layoutDirection: SC.LAYOUT_HORIZONTAL
         }),
 
-        statusLabel: SC.LabelView.design(SCUI.ToolTip, {
+        statusLabel: SC.LabelView.design(SCUI.ToolTip, Tasks.Permissible, {
           layout: { top: 3, bottom: 30, left: 495, width: 265 },
           classNames: ['task-attribute-set-title'],
+          isPermittedBinding: 'Tasks.tasksController.isEditable',
           value: "_Status".loc(),
           toolTip: "_StatusTooltip".loc()
         }),
@@ -519,10 +525,11 @@ Tasks.mainPage = SC.Page.design({
           layoutDirection: SC.LAYOUT_HORIZONTAL
         }),
 
-        validationLabel: SC.LabelView.design(SCUI.ToolTip, {
+        validationLabel: SC.LabelView.design(SCUI.ToolTip, Tasks.Permissible, {
           layout: { top: 3, bottom: 30, left: 775, width: 245 },
           classNames: ['task-attribute-set-title'],
           isVisibleBinding: 'Tasks.softwareMode',
+          isPermittedBinding: 'Tasks.tasksController.isEditable',
           value: "_Validation".loc(),
           toolTip: "_ValidationTooltip".loc()
         }),

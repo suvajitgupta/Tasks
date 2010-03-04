@@ -12,7 +12,7 @@
 */
 SC.stringsFor('English', {
 
-  // Authentication strings
+  // Authentication/authorization strings
   "_LoginPrompt": "Please sign in",
   "_LoginName:": "Login Name:",
   "_Login": "Login",
@@ -23,6 +23,7 @@ SC.stringsFor('English', {
   "_SaveConfirmation": "You have unsaved changes - save before logging out?",
   "_Yes": "Yes",
   "_No": "No",
+  "_unauthorized": "unauthorized",
 
   // Top Bar strings
   "_Tasks": "Tasks",

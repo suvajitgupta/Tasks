@@ -219,7 +219,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       });
     }
     
-    if(selectedTasksCount > 0 && Tasks.tasksController.isDeletable()) {
+    if(Tasks.tasksController.get('isDeletable')) {
       needsSeparator = true;
       ret.push({
         title: "_Delete".loc(),

@@ -195,6 +195,10 @@ body {
   height: 4px !important;
 }
 
+.sc-view.sc-list-item-view.sc-collection-item .sc-outline label {
+  opacity: 1 !important;
+}
+
 .sc-view.sc-list-item-view.sc-collection-item.sc-group-item {
   left: 0px !important;
   color: #777 !important;
