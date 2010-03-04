@@ -172,19 +172,22 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       this._editorPane.popup(layer, SC.PICKER_POINTER);
     }
     else { // popup context menu
-      var pane = SCUI.ContextMenuPane.create({
-        contentView: SC.View.design({}),
-        layout: { width: 190, height: 0 },
-        escapeHTML: NO,
-        itemTitleKey: 'title',
-        itemIconKey: 'icon',
-        itemIsEnabledKey: 'isEnabled',
-        itemTargetKey: 'target',
-        itemActionKey: 'action',
-        itemSeparatorKey: 'isSeparator',
-        items: this._buildContextMenu()        
-      });
-      pane.popup(this, event); // pass in the mouse event so the pane can figure out where to put itself
+      var items = this._buildContextMenu();
+      if(items.length > 0) {
+        var pane = SCUI.ContextMenuPane.create({
+          contentView: SC.View.design({}),
+          layout: { width: 190, height: 0 },
+          escapeHTML: NO,
+          itemTitleKey: 'title',
+          itemIconKey: 'icon',
+          itemIsEnabledKey: 'isEnabled',
+          itemTargetKey: 'target',
+          itemActionKey: 'action',
+          itemSeparatorKey: 'isSeparator',
+          items: items        
+        });
+        pane.popup(this, event); // pass in the mouse event so the pane can figure out where to put itself
+      }
     }
     
     return NO; // so that drag-n-drop can work!
