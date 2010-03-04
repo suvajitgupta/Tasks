@@ -201,7 +201,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     
     var sel = Tasks.tasksController.get('selection');
     var selectedTasksCount = sel? sel.get('length') : 0;
-    if(selectedTasksCount === 1 && Tasks.tasksController.isAddable()) {
+    if(selectedTasksCount === 1 && Tasks.tasksController.get('isAddable')) {
       needsSeparator = true;
       ret.push({
         title: "_Add".loc(),
