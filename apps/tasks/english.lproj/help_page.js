@@ -3,7 +3,6 @@
 // ==========================================================================
 /*globals Tasks sc_require SCUI */
 sc_require('core');
-sc_require('main');
 sc_require('views/logo');
 
 /** @static

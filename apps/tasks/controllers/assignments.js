@@ -1,7 +1,7 @@
 // ==========================================================================
 // Tasks.assignmentsController
 // ==========================================================================
-/*globals CoreTasks Tasks sc_static*/
+/*globals CoreTasks Tasks sc_static sc_require*/
 
 /** 
 
@@ -12,6 +12,7 @@
   @author Joshua Holt
   @author Suvajit Gupta
 */
+sc_require('core');
 
 Tasks.attributeFilterNone = [
   CoreTasks.TASK_TYPE_FEATURE, CoreTasks.TASK_TYPE_BUG, CoreTasks.TASK_TYPE_OTHER,
@@ -20,19 +21,26 @@ Tasks.attributeFilterNone = [
   CoreTasks.TASK_VALIDATION_UNTESTED, CoreTasks.TASK_VALIDATION_PASSED, CoreTasks.TASK_VALIDATION_FAILED
 ];
 
+Tasks.attributeFilterShowstoppers = [
+  CoreTasks.TASK_TYPE_BUG,
+  CoreTasks.TASK_PRIORITY_HIGH,
+  CoreTasks.TASK_STATUS_PLANNED, CoreTasks.TASK_STATUS_ACTIVE, CoreTasks.TASK_STATUS_DONE, CoreTasks.TASK_STATUS_RISKY,
+  CoreTasks.TASK_VALIDATION_FAILED
+];
+
 Tasks.attributeFilterTroubled = [
   CoreTasks.TASK_TYPE_FEATURE, CoreTasks.TASK_TYPE_BUG, CoreTasks.TASK_TYPE_OTHER,
   CoreTasks.TASK_PRIORITY_HIGH, CoreTasks.TASK_PRIORITY_MEDIUM, CoreTasks.TASK_PRIORITY_LOW,
-  CoreTasks.TASK_STATUS_DONE, CoreTasks.TASK_STATUS_RISKY,
-  CoreTasks.TASK_VALIDATION_FAILED
+  CoreTasks.TASK_STATUS_RISKY
 ];
+if(Tasks.softwareMode) Tasks.attributeFilterTroubled.pushObjects([CoreTasks.TASK_STATUS_DONE, CoreTasks.TASK_VALIDATION_FAILED]);
 
 Tasks.attributeFilterUnfinished = [
   CoreTasks.TASK_TYPE_FEATURE, CoreTasks.TASK_TYPE_BUG, CoreTasks.TASK_TYPE_OTHER,
   CoreTasks.TASK_PRIORITY_HIGH, CoreTasks.TASK_PRIORITY_MEDIUM,
-  CoreTasks.TASK_STATUS_PLANNED, CoreTasks.TASK_STATUS_ACTIVE, CoreTasks.TASK_STATUS_DONE, CoreTasks.TASK_STATUS_RISKY,
-  CoreTasks.TASK_VALIDATION_FAILED
+  CoreTasks.TASK_STATUS_PLANNED, CoreTasks.TASK_STATUS_ACTIVE, CoreTasks.TASK_STATUS_RISKY
 ];
+if(Tasks.softwareMode) Tasks.attributeFilterUnfinished.pushObjects([CoreTasks.TASK_STATUS_DONE, CoreTasks.TASK_VALIDATION_FAILED]);
 
 Tasks.attributeFilterUnvalidated = [
   CoreTasks.TASK_TYPE_FEATURE, CoreTasks.TASK_TYPE_BUG,
@@ -41,18 +49,11 @@ Tasks.attributeFilterUnvalidated = [
   CoreTasks.TASK_VALIDATION_UNTESTED
 ];
 
-Tasks.attributeFilterVerified = [
+Tasks.attributeFilterCompleted = [
 CoreTasks.TASK_TYPE_FEATURE, CoreTasks.TASK_TYPE_BUG, CoreTasks.TASK_TYPE_OTHER,
   CoreTasks.TASK_PRIORITY_HIGH, CoreTasks.TASK_PRIORITY_MEDIUM, CoreTasks.TASK_PRIORITY_LOW,
   CoreTasks.TASK_STATUS_DONE,
-  CoreTasks.TASK_VALIDATION_PASSED
-];
-
-Tasks.attributeFilterShowstoppers = [
-  CoreTasks.TASK_TYPE_BUG,
-  CoreTasks.TASK_PRIORITY_HIGH,
-  CoreTasks.TASK_STATUS_PLANNED, CoreTasks.TASK_STATUS_ACTIVE, CoreTasks.TASK_STATUS_DONE, CoreTasks.TASK_STATUS_RISKY,
-  CoreTasks.TASK_VALIDATION_FAILED
+  (Tasks.softwareMode? CoreTasks.TASK_VALIDATION_PASSED : CoreTasks.TASK_VALIDATION_UNTESTED)
 ];
 
 Tasks.DISPLAY_MODE_TASKS = true;
@@ -195,6 +196,10 @@ Tasks.assignmentsController = SC.ArrayController.create(
     return this.userSelection || this.searchFilter || this.attributeFilterCriteria.length !== 13;
   },
   
+  setAttributeFilterShowstoppers: function() {
+    this.set('attributeFilterCriteria', Tasks.attributeFilterShowstoppers.slice(0));
+  },
+
   setAttributeFilterTroubled: function() {
     this.set('attributeFilterCriteria', Tasks.attributeFilterTroubled.slice(0));
   },
@@ -207,12 +212,8 @@ Tasks.assignmentsController = SC.ArrayController.create(
     this.set('attributeFilterCriteria', Tasks.attributeFilterUnvalidated.slice(0));
   },
 
-  setAttributeFilterVerified: function() {
-    this.set('attributeFilterCriteria', Tasks.attributeFilterVerified.slice(0));
-  },
-
-  setAttributeFilterShowstoppers: function() {
-    this.set('attributeFilterCriteria', Tasks.attributeFilterShowstoppers.slice(0));
+  setAttributeFilterCompleted: function() {
+    this.set('attributeFilterCriteria', Tasks.attributeFilterCompleted.slice(0));
   },
 
   clearAttributeFilter: function() {

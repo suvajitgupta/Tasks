@@ -101,8 +101,8 @@ body {
   background: #6C6 !important;
 }
 
-.verified .sc-button-inner,
-.verified .sc-button-inner label {
+.completed .sc-button-inner,
+.completed .sc-button-inner label {
   background: #363 !important;
 }
 

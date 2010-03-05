@@ -3,7 +3,6 @@
 // ==========================================================================
 /*globals Tasks CoreTasks SCUI sc_require */
 sc_require('core');
-sc_require('main');
 sc_require('views/decorated_checkbox');
 
 
@@ -18,7 +17,7 @@ sc_require('views/decorated_checkbox');
 
 Tasks.filterPane = SC.PanelPane.create({  
   
-  layout: { top: 78, right: 100, height: Tasks.softwareMode? 460 : 320, width: 310 },
+  layout: { top: 78, right: 100, height: Tasks.softwareMode? 460 : 355, width: 310 },
   classNames: ['filter-pane'],
   
   contentView: SC.View.design({
@@ -35,9 +34,9 @@ Tasks.filterPane = SC.PanelPane.create({
     
     quickfilterToolbar: SC.View.design({
 
-      layout: { top: 28, left: 5, height: Tasks.softwareMode? 70 : 35, right: 5 },
+      layout: { top: 28, left: 5, height: 70, right: 5 },
       classNames: ['quickfilter-toolbar'],
-      childViews: 'allButton troubledButton unfinishedButton unvalidatedButton verifiedButton showstoppersButton'.w(),
+      childViews: 'allButton troubledButton unfinishedButton unvalidatedButton completedButton showstoppersButton'.w(),
   
       allButton: SC.ButtonView.design({
         layout: { width: 90, height: 30, left: 5, top: 7 },
@@ -48,9 +47,20 @@ Tasks.filterPane = SC.PanelPane.create({
         target: 'Tasks.assignmentsController',
         action: 'clearAttributeFilter'
       }),
-  
+
+      showstoppersButton: SC.ButtonView.design({
+        layout: { width: 100, height: 30, centerX: 0, top: 7 },
+        titleMinWidth: 0,
+        classNames: ['quickfilter-label', 'showstoppers'],
+        isVisible: Tasks.softwareMode,
+        title: "_Showstoppers".loc(),
+        toolTip: "_ShowstoppersTooltip".loc(),
+        target: 'Tasks.assignmentsController',
+        action: 'setAttributeFilterShowstoppers'
+      }),      
+
       troubledButton: SC.ButtonView.design({
-        layout: { width: 90, height: 30, centerX: -5, top: 7 },
+        layout: { width: 90, height: 30, right: 5, top: 7 },
         titleMinWidth: 0,
         classNames: ['quickfilter-label', 'troubled'],
         title: "_Troubled".loc(),
@@ -60,7 +70,7 @@ Tasks.filterPane = SC.PanelPane.create({
       }),
   
       unfinishedButton: SC.ButtonView.design({
-        layout: { width: 100, height: 30, right: 5, top: 7 },
+        layout: { width: 90, height: 30, left: 5, top: 39 },
         titleMinWidth: 0,
         classNames: ['quickfilter-label', 'unfinished'],
         title: "_Unfinished".loc(),
@@ -70,7 +80,7 @@ Tasks.filterPane = SC.PanelPane.create({
       }),
   
       unvalidatedButton: SC.ButtonView.design({
-        layout: { width: 90, height: 30, left: 5, top: 39 },
+        layout: { width: 100, height: 30, centerX: 0, top: 39 },
         titleMinWidth: 0,
         classNames: ['quickfilter-label', 'unvalidated'],
         isVisible: Tasks.softwareMode,
@@ -80,28 +90,16 @@ Tasks.filterPane = SC.PanelPane.create({
         action: 'setAttributeFilterUnvalidated'
       }),
   
-      verifiedButton: SC.ButtonView.design({
-        layout: { width: 90, height: 30, centerX: -5, top: 39 },
+      completedButton: SC.ButtonView.design({
+        layout: { width: 90, height: 30, right: 5, top: 39 },
         titleMinWidth: 0,
-        classNames: ['quickfilter-label', 'verified'],
-        isVisible: Tasks.softwareMode,
-        title: "_Verified".loc(),
-        toolTip: "_VerifiedTooltip".loc(),
+        classNames: ['quickfilter-label', 'completed'],
+        title: "_Completed".loc(),
+        toolTip: "_CompletedTooltip".loc(),
         target: 'Tasks.assignmentsController',
-        action: 'setAttributeFilterVerified'
-      }),
-  
-      showstoppersButton: SC.ButtonView.design({
-        layout: { width: 100, height: 30, right: 5, top: 39 },
-        titleMinWidth: 0,
-        classNames: ['quickfilter-label', 'showstoppers'],
-        isVisible: Tasks.softwareMode,
-        title: "_Showstoppers".loc(),
-        toolTip: "_ShowstoppersTooltip".loc(),
-        target: 'Tasks.assignmentsController',
-        action: 'setAttributeFilterShowstoppers'
+        action: 'setAttributeFilterCompleted'
       })
-               
+                     
     }),
     
     typeLabel: SC.LabelView.design({
@@ -143,14 +141,14 @@ Tasks.filterPane = SC.PanelPane.create({
     }),
 
     priorityLabel: SC.LabelView.design({
-      layout: { top: Tasks.softwareMode? 165 : 75, height: 24, left: 10, right: 10 },
+      layout: { top: Tasks.softwareMode? 165 : 110, height: 24, left: 10, right: 10 },
       classNames: ['task-attribute-set-title'],
       value: "_Priority".loc(),
       toolTip: "_PriorityTooltip".loc()
     }),
 
     priorityCheckboxes: SC.View.design({
-      layout: { top: Tasks.softwareMode? 183 : 92, height: 24, left: 10, right: 10 },
+      layout: { top: Tasks.softwareMode? 183 : 127, height: 24, left: 10, right: 10 },
       classNames: ['task-attribute-set'],
       displayProperties: [ 'high', 'medium', 'low' ],
       childViews: 'high medium low'.w(),
@@ -179,14 +177,14 @@ Tasks.filterPane = SC.PanelPane.create({
     }),
 
     statusLabel: SC.LabelView.design({
-      layout: { top: Tasks.softwareMode? 220 : 135, height: 24, left: 10, right: 10 },
+      layout: { top: Tasks.softwareMode? 220 : 170, height: 24, left: 10, right: 10 },
       classNames: ['task-attribute-set-title'],
       value: "_Status".loc(),
       toolTip: "_StatusTooltip".loc()
     }),
 
     statusCheckboxes: SC.View.design({
-      layout: { top: Tasks.softwareMode? 237 : 152, height: 24, left: 10, right: 10 },
+      layout: { top: Tasks.softwareMode? 237 : 187, height: 24, left: 10, right: 10 },
       classNames: ['task-attribute-set'],
       displayProperties: [ 'planned', 'active', 'done', 'risky' ],
       childViews: 'planned active done risky'.w(),

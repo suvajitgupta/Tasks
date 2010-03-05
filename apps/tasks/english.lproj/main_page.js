@@ -4,7 +4,6 @@
 /*globals CoreTasks Tasks sc_require SCUI sc_static*/
 
 sc_require('core');
-sc_require('main');
 sc_require('mixins/localized_label');
 sc_require('mixins/permissible');
 sc_require('views/logo');
