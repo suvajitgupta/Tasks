@@ -70,7 +70,7 @@ Tasks.projectController = SC.ObjectController.create(
       Tasks.deselectTasks();
       if(cur) {
         this._project = cur;
-        SC.routes.set('location', '#project&name=' + cur.get('name'));
+        SC.routes.set('location', '#project&name=' + escape(cur.get('name')));
       }
     }
   }.observes('content')
