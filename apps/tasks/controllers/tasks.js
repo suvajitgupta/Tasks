@@ -68,6 +68,11 @@ Tasks.tasksController = SC.TreeController.create(
     
   }.property('selection').cacheable(),
   
+  notGuestOrGuestSubmittedTasks: function() {
+    if(CoreTasks.getPath('currentUser.role') !== CoreTasks.USER_ROLE_GUEST || this.get('areUserSubmittedTasks')) return true;
+    return false;
+  }.property('areUserSubmittedTasks').cacheable(),
+  
   areUserSubmittedTasks: function() {
 
     var sel = this.get('selection');
