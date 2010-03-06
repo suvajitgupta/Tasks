@@ -113,7 +113,7 @@ Tasks.mixin({
         CoreTasks.setPermissions();
         
         var userName = Tasks.getPath('mainPage.mainPane.userName');
-        userName.set('toolTip', "_LoginSince".loc() + new Date().format('hh:mm:ss a MMM dd, yyyy'));
+        userName.set('toolTip', "_LoginSince".loc() + new Date().format('hh:mm a MMM dd, yyyy'));
         
         // Based on user's role set up appropriate task filter
         var role = currentUser.get('role');
@@ -181,7 +181,7 @@ Tasks.mixin({
 
     // console.log('DEBUG: projectsLoadSuccess()');
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
-    serverMessage.set('value', serverMessage.get('value') + "_ProjectsLoaded".loc() + new Date().format('hh:mm:ss a'));
+    serverMessage.set('value', serverMessage.get('value') + "_ProjectsLoaded".loc() + new Date().format('hh:mm a'));
 
     if(CoreTasks.loginTime) {
       var defaultProject = CoreTasks.get('allTasksProject');
@@ -236,7 +236,7 @@ Tasks.mixin({
     if(CoreTasks.get('needsSave')) {
       CoreTasks.saveChanges();
       var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
-      serverMessage.set('value', "_SaveMessage".loc() + new Date().format('hh:mm:ss a'));
+      serverMessage.set('value', "_SaveMessage".loc() + new Date().format('hh:mm a'));
     }
   },
   

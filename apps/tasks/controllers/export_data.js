@@ -345,7 +345,7 @@ Tasks.exportDataController = SC.ObjectController.create(
     
     if(format === 'HTML') ret += '<span class="time">';
     else ret += '# ' + "_Tasks".loc() + ' ' + "_Export".loc() + ' ';
-    ret += new Date().format('hh:mm:ss a MMM dd, yyyy');
+    ret += new Date().format('hh:mm a MMM dd, yyyy');
     if(format === 'HTML') ret += '</span>\n';
     else ret += '\n';
     ret += '\n';
