@@ -17,7 +17,7 @@ Tasks.projectsController = SC.ArrayController.create(SCUI.StatusChanged,
   showSources: function() {
     
     var projects = this.get('arrangedObjects');
-    // console.log('DEBUG-ON: projectsController content changed, editorPoppedUp=' + Tasks.editorPoppedUp + ', projects: ' + projects.getEach('name'));
+    // console.log('DEBUG: projectsController content changed, editorPoppedUp=' + Tasks.editorPoppedUp + ', projects: ' + projects.getEach('name'));
     Tasks.sourcesRedrawNeeded = true;
     if(Tasks.editorPoppedUp) return;
     

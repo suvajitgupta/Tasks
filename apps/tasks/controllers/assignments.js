@@ -577,7 +577,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
   
   _contentHasChanged: function() {
     var content = this.get('content');
-    // if (content) console.log('DEBUG-ON: editorPoppedUp=' + Tasks.editorPoppedUp + ', tasks: ' + content.getEach('name'));
+    // if (content) console.log('DEBUG: editorPoppedUp=' + Tasks.editorPoppedUp + ', tasks: ' + content.getEach('name'));
     Tasks.assignmentsRedrawNeeded = true;    
     if(Tasks.editorPoppedUp) return;
   	if (this._timer) { // called as a result of a timer set for assignee selection or search filter changes

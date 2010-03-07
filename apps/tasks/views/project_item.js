@@ -199,7 +199,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     
     var content = this.get('content');
     if(!content) return;
-    // console.log('DEBUG-ON: Project render(' + firstTime + '): ' + content.get('displayName'));
+    // console.log('DEBUG: Project render(' + firstTime + '): ' + content.get('displayName'));
     sc_super();
     
     var isSystemProject = CoreTasks.isSystemProject(content);

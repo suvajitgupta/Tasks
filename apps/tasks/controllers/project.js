@@ -1,7 +1,7 @@
 // ==========================================================================
 // Tasks.projectController
 // ==========================================================================
-/*globals Tasks CoreTasks*/
+/*globals Tasks CoreTasks escape*/
 
 /** 
 
@@ -66,7 +66,7 @@ Tasks.projectController = SC.ObjectController.create(
 
     if (cur && cur.firstObject) cur = cur.firstObject();
     if (last !== cur) {
-      // console.log('Switching to project: ' + cur.get('name'));
+      // console.log('DEBUG: Switching to project: ' + cur.get('name'));
       Tasks.deselectTasks();
       if(cur) {
         this._project = cur;

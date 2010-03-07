@@ -48,6 +48,7 @@ Tasks.mixin( /** @scope Tasks */ {
     
   */
   routeToTask: function(params) {
+    // console.log('DEBUG: routeToTask: ' + params.IDs);
     Tasks._closeMainPage();
     if(SC.none(params.IDs)) {
       console.warn("Missing task IDs for URL routing");
@@ -82,6 +83,7 @@ Tasks.mixin( /** @scope Tasks */ {
     
   */
   routeToProject: function(params) {
+    // console.log('DEBUG: routeToProject: ' + params.name);
     if(SC.none(params.name)) {
       console.warn("Missing project name for URL routing");
     }
