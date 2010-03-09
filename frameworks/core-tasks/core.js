@@ -161,6 +161,10 @@ CoreTasks = SC.Object.create({
 
   // The logged in user.
   currentUser: null,
+  isCurrentUserAManager: function() {
+    return this.getPath('currentUser.role') === CoreTasks.USER_ROLE_MANAGER;
+  }.property('currentUser').cacheable(),
+  
   
   // Stores access control rights for current user.
   permissions: SC.Object.create({

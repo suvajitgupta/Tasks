@@ -32,7 +32,7 @@ Tasks.settingsPage = SC.Page.create({
         toolbar: SC.View.design({
           layout: { left: 0, right: 0, top: 0, height: 35 },
           classNames: ['toolbar'],
-          childViews: 'addButton deleteButton divider title'.w(),
+          childViews: 'addButton deleteButton divider title userNamePatternField userNamePatternCancelButton'.w(),
           
           addButton: SC.LabelView.design(SCUI.SimpleButton,{
             layout: { centerY: 0, left: 20, height: 16, width: 90 },
@@ -63,9 +63,27 @@ Tasks.settingsPage = SC.Page.create({
           }),
           
           title: SC.LabelView.design({
-            layout: { centerY: 0, left: 410, height: 20, width: 120 },
+            layout: { centerY: 0, left: 310, height: 20, width: 120 },
             value: "_UserManager".loc(),
             classNames: ['window-title']
+          }),
+          
+          userNamePatternField: SC.TextFieldView.design(SCUI.ToolTip, {
+            layout: { centerY: 0, height: 24, right: 5, width: 200 },
+            classNames: ['user-selection-bar'],
+            hint: "_UserNamePatternSelectionHint".loc(),
+            toolTip: "_UserNamePatternSelectionTooltip".loc(),
+            isVisibleBinding: 'CoreTasks*isCurrentUserAManager',
+            valueBinding: 'Tasks.usersController.userNamePattern'
+          }),
+          userNamePatternCancelButton: SC.View.design({ // User selection cancel button
+            layout: { centerY: 1, height: 12, right: 10, width: 12 },
+            isVisible: NO,
+            classNames: ['filter-cancel-icon'],
+            mouseDown: function() {
+              Tasks.usersController.set('userNamePattern', '');
+            },
+            isVisibleBinding: SC.Binding.oneWay('Tasks.usersController.userNamePattern').bool()
           })
 
         }),

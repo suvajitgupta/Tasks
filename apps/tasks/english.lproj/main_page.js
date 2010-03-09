@@ -217,12 +217,12 @@ Tasks.mainPage = SC.Page.design({
 
       userSelectionField: SC.TextFieldView.design(SCUI.ToolTip, {
         layout: { centerY: 0, height: 24, right: 280, width: 200 },
-        classNames: ['assignee-selection-bar'],
+        classNames: ['user-selection-bar'],
         hint: "_UserSelectionHint".loc(),
         toolTip: "_UserSelectionTooltip".loc(),
         valueBinding: 'Tasks.assignmentsController.userSelection'
       }),
-      userSelectionCancelButton: SC.View.design({ // Assignee Selection cancel button
+      userSelectionCancelButton: SC.View.design({ // Assignee/Submitter selection cancel button
         layout: { centerY: 1, height: 12, right: 285, width: 12 },
         isVisible: NO,
         classNames: ['filter-cancel-icon'],

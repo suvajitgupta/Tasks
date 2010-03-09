@@ -113,8 +113,9 @@ User Manager GUI
 | Copy over Role attribute of first selected User to new User
 v Enable/disable "Delete User" button based on having a selected user [SG] @Done %Passed $Feature
 - Show number of registered/selected users at the bottom of User Manager panel [SG] $Feature @Done %Passed
-^ Allow multi-user drag-and-drop role change in User Manager [SG] @Done $Feature %Passed
 - Reset Task Assignee/Submitter after user deletion <SE> [SG] $Feature @Done %Passed
+^ Allow multi-user drag-and-drop role change in User Manager [SG] @Done $Feature %Passed
+^ Add User type-ahead search filter (case insensitive name/loginName match) [SG] @Done %Passed $Feature
 - Out of Scope: Add support for "Teams" (a user can belong to a team, a team can have a lead) $Feature
 | Create separate projects for different teams to keep their tasks/deadlines separate instead
 
@@ -179,7 +180,7 @@ Styling/Hardening
 | Project/Task modifications via inline editor and popup editor/control bar
 | Task reassignment/reallocation & User role change via drag-and-drop
 | Task attribute filtering, assignee/submitter selection, ID/name searching
-| User modifications via User Manager
+| User modifications via User Manager, searching for users
 | Save, Import/Export (Text & HTML)
 - Develop Model/View unit tests [SG] <BB> @Active
 - Create automated test scripts using Lebowski/Selenium @Active [SG] <MC>

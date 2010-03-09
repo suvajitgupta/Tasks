@@ -2,7 +2,7 @@
 // Tasks.userController
 
 // ==========================================================================
-/*globals Tasks sc_require */
+/*globals CoreTasks Tasks sc_require */
 sc_require('lib/sha1');
 
 /** 

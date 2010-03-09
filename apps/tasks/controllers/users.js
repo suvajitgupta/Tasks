@@ -17,20 +17,34 @@
 Tasks.usersController = SC.ArrayController.create(SCUI.StatusChanged,
   /** @scope Tasks.usersController.prototype */ {
   
+  userNamePattern: null,
   roles: null,
 
   showRoles: function() {
 
-    var isManager = false, nodes = [], managerRoles = [], developerRoles = [], testerRoles = [], guestRoles = [];
-    var users = this.get('arrangedObjects');
+    // console.log('DEBUG: showRoles()');
+    var nodes = [], managerRoles = [], developerRoles = [], testerRoles = [], guestRoles = [];
+    var user, users = this.get('arrangedObjects');
     if(users) {
       var editableUsers = []; // based on role, only current user or all users are available in User Manager
       var currentUser = CoreTasks.get('currentUser');
       if(!currentUser) currentUser = CoreTasks.getUser(Tasks.get('loginName')); // at startup time
       if(currentUser) {
-        if(currentUser.get('role') === CoreTasks.USER_ROLE_MANAGER) {
-          isManager = true;
-          editableUsers = users;
+        var isCurrentUserAManager = (currentUser.get('role') === CoreTasks.USER_ROLE_MANAGER);
+        if(isCurrentUserAManager) {
+          var pattern = this.get('userNamePattern');
+          if(pattern === null || pattern === '') {
+            editableUsers = users;
+          }
+          else {
+            editableUsers = [];
+            var searchPattern = new RegExp(pattern, 'i');
+            var numUsers = users.get('length');
+            for (var j=0; j<numUsers; j++) {
+              user = users.objectAt(j);
+              if(searchPattern.exec(user.get('name')) || searchPattern.exec(user.get('loginName'))) editableUsers.push(user);
+            }
+          }
         }
         else {
           editableUsers.push(currentUser);
@@ -40,7 +54,7 @@ Tasks.usersController = SC.ArrayController.create(SCUI.StatusChanged,
 
       var len = editableUsers.get('length');
       for (var i = 0; i < len; i++) {
-        var user = editableUsers.objectAt(i);
+        user = editableUsers.objectAt(i);
         switch(user.get('role')) {
           case CoreTasks.USER_ROLE_MANAGER: managerRoles.push(user); break;
           case CoreTasks.USER_ROLE_DEVELOPER: developerRoles.push(user); break;
@@ -48,20 +62,20 @@ Tasks.usersController = SC.ArrayController.create(SCUI.StatusChanged,
           case CoreTasks.USER_ROLE_GUEST: guestRoles.push(user); break;
         }
       }
-      if(isManager || managerRoles.get('length') > 0) {
+      if(isCurrentUserAManager || managerRoles.get('length') > 0) {
         nodes.push(SC.Object.create({ displayName: managerRoles.length + ' ' + CoreTasks.USER_ROLE_MANAGER.loc() + 's',
                    role: CoreTasks.USER_ROLE_MANAGER, treeItemChildren: managerRoles, treeItemIsExpanded: YES }));
       }
-      if(isManager || developerRoles.get('length') > 0) {
+      if(isCurrentUserAManager || developerRoles.get('length') > 0) {
         var groupTitle = Tasks.softwareMode? CoreTasks.USER_ROLE_DEVELOPER.loc() : "_User".loc();
         nodes.push(SC.Object.create({ displayName: developerRoles.length + ' ' +  groupTitle + 's',
                    role: CoreTasks.USER_ROLE_DEVELOPER, treeItemChildren: developerRoles, treeItemIsExpanded: YES }));
       }
-      if(Tasks.softwareMode && isManager || testerRoles.get('length') > 0) {
+      if(Tasks.softwareMode && isCurrentUserAManager || testerRoles.get('length') > 0) {
         nodes.push(SC.Object.create({ displayName: testerRoles.length + ' ' + CoreTasks.USER_ROLE_TESTER.loc() + 's',
                    role: CoreTasks.USER_ROLE_TESTER, treeItemChildren: testerRoles, treeItemIsExpanded: YES }));
       }
-      if(isManager || guestRoles.get('length') > 0) {
+      if(isCurrentUserAManager || guestRoles.get('length') > 0) {
         nodes.push(SC.Object.create({ displayName: guestRoles.length + ' ' + CoreTasks.USER_ROLE_GUEST.loc() + 's',
                    role: CoreTasks.USER_ROLE_GUEST, treeItemChildren: guestRoles, treeItemIsExpanded: YES }));
       }
@@ -69,7 +83,7 @@ Tasks.usersController = SC.ArrayController.create(SCUI.StatusChanged,
 
     this.set('roles', SC.Object.create({ treeItemChildren: nodes, treeItemIsExpanded: YES }));
 
-  }.observes('[]'),
+  }.observes('[]', 'userNamePattern'),
 
   usersCount: function() {
     return this.get('length') + "_RegisteredUsers".loc() + this.getPath('selection.length') + "_selected".loc();
