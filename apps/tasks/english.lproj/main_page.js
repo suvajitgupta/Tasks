@@ -441,7 +441,7 @@ Tasks.mainPage = SC.Page.design({
           layout: { top: 3, bottom: 30, left: 10, width: 260 },
           classNames: ['task-attribute-set-title'],
           isVisibleBinding: 'Tasks.softwareMode',
-          isPermittedBinding: 'Tasks.tasksController.isEditable',
+          isPermittedBinding: 'Tasks.tasksController.areUserSubmittedTasks',
           value: "_Type".loc(),
           toolTip: "_TypeTooltip".loc()
         }),
@@ -470,7 +470,7 @@ Tasks.mainPage = SC.Page.design({
         priorityLabel: SC.LabelView.design(SCUI.ToolTip, Tasks.Permissible, {
           layout: { top: 3, bottom: 30, left: 285, width: 195 },
           classNames: ['task-attribute-set-title'],
-          isPermittedBinding: 'Tasks.tasksController.isEditable',
+          isPermittedBinding: 'Tasks.tasksController.areUserSubmittedTasks',
           value: "_Priority".loc(),
           toolTip: "_PriorityTooltip".loc()
         }),
@@ -497,7 +497,7 @@ Tasks.mainPage = SC.Page.design({
         statusLabel: SC.LabelView.design(SCUI.ToolTip, Tasks.Permissible, {
           layout: { top: 3, bottom: 30, left: 495, width: 265 },
           classNames: ['task-attribute-set-title'],
-          isPermittedBinding: 'Tasks.tasksController.isEditable',
+          isPermittedBinding: 'Tasks.tasksController.areUserSubmittedTasks',
           value: "_Status".loc(),
           toolTip: "_StatusTooltip".loc()
         }),
@@ -527,7 +527,7 @@ Tasks.mainPage = SC.Page.design({
           layout: { top: 3, bottom: 30, left: 775, width: 245 },
           classNames: ['task-attribute-set-title'],
           isVisibleBinding: 'Tasks.softwareMode',
-          isPermittedBinding: 'Tasks.tasksController.isEditable',
+          isPermittedBinding: 'Tasks.tasksController.areUserSubmittedTasks',
           value: "_Validation".loc(),
           toolTip: "_ValidationTooltip".loc()
         }),
