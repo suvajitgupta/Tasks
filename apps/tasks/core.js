@@ -42,5 +42,5 @@ SC.Binding.toLocale = function() {
   });
 };
 
-// if software mode set to false, works as a simple ToDo list (Task Type/Validation are not available through GUI)
+// if software mode set to false, works as a simple To Do list (Task Type/Validation are not available through GUI)
 Tasks.softwareMode = document.title.match(/todo/i)? false: true;

@@ -395,7 +395,6 @@ Tasks.mainPage = SC.Page.design({
         
         // ..........................................................
         // Hot Key Code - disabled for now owing to conflicts with browser shortcuts
-        // TODO: [EG] move to /views shouldn't clutter up the .lproj layer
         // keyDown: function(evt) {
         //   var ret, commandCode = evt.commandCodes();
         // 

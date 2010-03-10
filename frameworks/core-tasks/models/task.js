@@ -477,7 +477,6 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
     return taskEffort;
   },
 
-  // TODO: [SG] allow task names to embed metacharacters by enclosing in quotes
   /**
    * Parse a line of text and extract parameters from it.
    *
