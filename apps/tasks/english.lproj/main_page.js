@@ -437,7 +437,7 @@ Tasks.mainPage = SC.Page.design({
         childViews: 'typeLabel typeRadiobuttons priorityLabel priorityRadiobuttons statusLabel statusRadiobuttons validationLabel validationRadiobuttons'.w(),
         
         typeLabel: SC.LabelView.design(SCUI.ToolTip, Tasks.Permissible, {
-          layout: { top: 3, bottom: 30, left: 10, width: 260 },
+          layout: { top: 3, bottom: 30, left: 110, width: 60 },
           classNames: ['task-attribute-set-title'],
           isVisibleBinding: 'Tasks.softwareMode',
           isPermittedBinding: 'Tasks.tasksController.areUserSubmittedTasks',
@@ -446,7 +446,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         typeRadiobuttons: SC.RadioView.design({
-          layout: { top: 20, bottom: 6, left: 10, width: 260 },
+          layout: { top: 22, bottom: 6, left: 10, width: 260 },
           escapeHTML: NO,
           classNames: ['task-attribute-set'],
           isVisibleBinding: 'Tasks.softwareMode',
@@ -467,7 +467,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         priorityLabel: SC.LabelView.design(SCUI.ToolTip, Tasks.Permissible, {
-          layout: { top: 3, bottom: 30, left: 285, width: 195 },
+          layout: { top: 3, bottom: 30, left: 345, width: 95 },
           classNames: ['task-attribute-set-title'],
           isPermittedBinding: 'Tasks.tasksController.areUserSubmittedTasks',
           value: "_Priority".loc(),
@@ -475,7 +475,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         priorityRadiobuttons: SC.RadioView.design({
-          layout: { top: 20, bottom: 6, left: 285, width: 195 },
+          layout: { top: 22, bottom: 6, left: 285, width: 195 },
           escapeHTML: NO,
           classNames: ['task-attribute-set'],
           items: [
@@ -494,7 +494,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         statusLabel: SC.LabelView.design(SCUI.ToolTip, Tasks.Permissible, {
-          layout: { top: 3, bottom: 30, left: 495, width: 265 },
+          layout: { top: 3, bottom: 30, left: 585, width: 70 },
           classNames: ['task-attribute-set-title'],
           isPermittedBinding: 'Tasks.tasksController.areUserSubmittedTasks',
           value: "_Status".loc(),
@@ -502,7 +502,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         statusRadiobuttons: SC.RadioView.design({
-          layout: { top: 20, bottom: 6, left: 495, width: 265 },
+          layout: { top: 22, bottom: 6, left: 495, width: 265 },
           escapeHTML: NO,
           classNames: ['task-attribute-set'],
           items: [
@@ -523,7 +523,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         validationLabel: SC.LabelView.design(SCUI.ToolTip, Tasks.Permissible, {
-          layout: { top: 3, bottom: 30, left: 775, width: 245 },
+          layout: { top: 3, bottom: 30, left: 855, width: 100 },
           classNames: ['task-attribute-set-title'],
           isVisibleBinding: 'Tasks.softwareMode',
           isPermittedBinding: 'Tasks.tasksController.areUserSubmittedTasks',
@@ -532,7 +532,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         validationRadiobuttons: SC.RadioView.design({
-          layout: { top: 20, bottom: 6, left: 775, width: 245 },
+          layout: { top: 22, bottom: 6, left: 775, width: 245 },
           escapeHTML: NO,
           classNames: ['task-attribute-set'],
           isVisibleBinding: 'Tasks.softwareMode',

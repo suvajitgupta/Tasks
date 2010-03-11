@@ -241,3 +241,7 @@ body {
   -moz-border-radius: 15px !important;
   -webkit-border-radius: 15px !important;
 }
+
+.unauthorized {
+  outline: 1px solid red !important;
+}
