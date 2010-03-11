@@ -145,6 +145,8 @@ CoreTasks.User = CoreTasks.Record.extend({
    * @returns {SC.RecordArray} An array of tasks.
    */
   disassociatedAssignedTasks: function() {
+    if(SC.none(this.get('_id'))) return null;
+    
     // Create the query if necessary.
     if (!this._disassociatedAssignedTasksQuery) {
       this._disassociatedAssignedTasksQuery = SC.Query.local(CoreTasks.Task, "assigneeId=%@".fmt(this.get('_id')));
@@ -162,6 +164,8 @@ CoreTasks.User = CoreTasks.Record.extend({
    * @returns {SC.RecordArray} An array of tasks.
    */
   disassociatedSubmittedTasks: function() {
+    if(SC.none(this.get('_id'))) return null;
+    
     // Create the query if necessary.
     if (!this._disassociatedSubmittedTasksQuery) {
       this._disassociatedSubmittedTasksQuery = SC.Query.local(CoreTasks.Task, "submitterId=%@".fmt(this.get('_id')));

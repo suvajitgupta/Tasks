@@ -337,7 +337,6 @@ CoreTasks = SC.Object.create({
           if (key !== allTasksProjectKey && key !== unallocatedTasksProjectKey) {
             this._dirtyProjects.pushObject(key);
           }
-
           break;
         case CoreTasks.Task:
           this._dirtyTasks.pushObject(key);
@@ -436,7 +435,6 @@ CoreTasks = SC.Object.create({
 
         // Update the now-disassociated assigned tasks.
         var tasks = user.get('disassociatedAssignedTasks');
-
         if (tasks && SC.instanceOf(tasks, SC.RecordArray)) {
           tasks.forEach(function(task) {
             task.writeAttribute('assigneeId', user.readAttribute('id'));
@@ -445,7 +443,6 @@ CoreTasks = SC.Object.create({
 
         // Update the now-disassociated submitted tasks.
         tasks = user.get('disassociatedSubmittedTasks');
-
         if (tasks && SC.instanceOf(tasks, SC.RecordArray)) {
           tasks.forEach(function(task) {
             task.writeAttribute('submitterId', user.readAttribute('id'));
