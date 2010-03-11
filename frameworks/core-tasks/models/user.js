@@ -18,7 +18,6 @@ CoreTasks.USER_UNDER_LOADED = 2;
 CoreTasks.USER_PROPERLY_LOADED = 3;
 CoreTasks.USER_OVER_LOADED = 4;
 
-// FIXME: [SG/JH2] Beta: Tasks GAE assigning all Unallocated tasks to a User after it is modified via User Manager
 /**
  * The user model.
  *
