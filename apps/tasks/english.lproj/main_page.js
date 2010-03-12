@@ -197,7 +197,7 @@ Tasks.mainPage = SC.Page.design({
         toolTip: "_DeleteTaskTooltip".loc(),
         isVisibleBinding: 'CoreTasks.permissions.canDeleteTask',
         isEnabledBinding: SC.Binding.logicalAnd('Tasks.tasksController.isDeletable', 'Tasks.tasksController.notGuestOrGuestSubmittedTasks'),
-        isPermittedBinding: 'Tasks.tasksController.areUserSubmittedTasks',
+        isPermittedBinding: 'Tasks.tasksController.notGuestOrGuestSubmittedTasks',
         target: 'Tasks',
         action: 'deleteTask'
       }),
@@ -440,7 +440,7 @@ Tasks.mainPage = SC.Page.design({
           layout: { top: 3, bottom: 30, left: 110, width: 60 },
           classNames: ['task-attribute-set-title'],
           isVisibleBinding: 'Tasks.softwareMode',
-          isPermittedBinding: 'Tasks.tasksController.areUserSubmittedTasks',
+          isPermittedBinding: 'Tasks.tasksController.notGuestOrGuestSubmittedTasks',
           value: "_Type".loc(),
           toolTip: "_TypeTooltip".loc()
         }),
@@ -469,7 +469,7 @@ Tasks.mainPage = SC.Page.design({
         priorityLabel: SC.LabelView.design(SCUI.ToolTip, Tasks.Permissible, {
           layout: { top: 3, bottom: 30, left: 345, width: 95 },
           classNames: ['task-attribute-set-title'],
-          isPermittedBinding: 'Tasks.tasksController.areUserSubmittedTasks',
+          isPermittedBinding: 'Tasks.tasksController.notGuestOrGuestSubmittedTasks',
           value: "_Priority".loc(),
           toolTip: "_PriorityTooltip".loc()
         }),
@@ -496,7 +496,7 @@ Tasks.mainPage = SC.Page.design({
         statusLabel: SC.LabelView.design(SCUI.ToolTip, Tasks.Permissible, {
           layout: { top: 3, bottom: 30, left: 585, width: 70 },
           classNames: ['task-attribute-set-title'],
-          isPermittedBinding: 'Tasks.tasksController.areUserSubmittedTasks',
+          isPermittedBinding: 'Tasks.tasksController.notGuestOrGuestSubmittedTasks',
           value: "_Status".loc(),
           toolTip: "_StatusTooltip".loc()
         }),
@@ -526,7 +526,7 @@ Tasks.mainPage = SC.Page.design({
           layout: { top: 3, bottom: 30, left: 855, width: 100 },
           classNames: ['task-attribute-set-title'],
           isVisibleBinding: 'Tasks.softwareMode',
-          isPermittedBinding: 'Tasks.tasksController.areUserSubmittedTasks',
+          isPermittedBinding: 'Tasks.tasksController.notGuestOrGuestSubmittedTasks',
           value: "_Validation".loc(),
           toolTip: "_ValidationTooltip".loc()
         }),
