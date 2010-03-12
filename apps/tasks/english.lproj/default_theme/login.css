@@ -91,10 +91,6 @@
   color: #444 !important;
 }
 
-.mozilla .login-field input {
-  top: 4px;
-}
-
 .msie .login-field input {
   line-height: 26px;
 }

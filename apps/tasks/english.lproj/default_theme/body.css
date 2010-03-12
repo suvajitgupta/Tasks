@@ -242,6 +242,10 @@ body {
   -webkit-border-radius: 15px !important;
 }
 
+.mozilla .sc-text-field-view input {
+  top:0px !important;
+}
+
 .unauthorized {
   outline: 1px solid red !important;
 }
