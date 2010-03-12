@@ -47,8 +47,8 @@ Tasks.mainPage = SC.Page.design({
           else if(document.title.match(/Greenhouse/)) {
             context.attr('src', sc_static('images/greenhouse-logo.png'));
           }
-          else if(document.title.match(/TPG/)) {
-            context.attr('src', sc_static('images/tpg-logo.gif'));
+          else if(document.title.match(/SproutCore/)) {
+            context.attr('src', sc_static('images/sproutcore-logo.png'));
           }
         }
       }),
@@ -196,7 +196,7 @@ Tasks.mainPage = SC.Page.design({
         value: "_DeleteTask".loc(),
         toolTip: "_DeleteTaskTooltip".loc(),
         isVisibleBinding: 'CoreTasks.permissions.canDeleteTask',
-        isEnabledBinding: SC.Binding.and('Tasks.tasksController.isDeletable', 'Tasks.tasksController.notGuestOrGuestSubmittedTasks'),
+        isEnabledBinding: SC.Binding.logicalAnd('Tasks.tasksController.isDeletable', 'Tasks.tasksController.notGuestOrGuestSubmittedTasks'),
         isPermittedBinding: 'Tasks.tasksController.notGuestOrGuestSubmittedTasks',
         target: 'Tasks',
         action: 'deleteTask'
