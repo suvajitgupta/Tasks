@@ -50,7 +50,7 @@ v Add hover over tooltip for Projects to show how many Tasks they contain [SG] @
 | Check via Inline Editor Delegate
 ^ Add "Add Project" & "Delete Project" buttons in projects toolbar [SG] @Done $Feature %Passed
 - Add warning Alert box about deleting Project with Tasks [SG] @Done $Feature %Passed
-v Beta: Disallow Project names or User loginNames that are already in use or reserved [SG] $Feature @Active
+v Disallow Project names or User loginNames that are already in use or reserved [SG] $Feature @Active
 | Project name cannot be duplicated or a system project name
 | User login name cannot be duplicated or reserved name "none"
 v Add summary in projects toolbar showing number of Projects & number of Tasks for selected project [SG] <MB> @Done $Feature %Passed
@@ -166,11 +166,11 @@ Server
 | Indicate Task ID, create/update action, and user who triggered notifications in Subject: line
 | For Task updates, indicate old and new values of attributes
 
-- Add Server-side data validation checks/return appropriate error codes [SE] <SG> $Feature
+- Add Server-side data validation checks/return appropriate error codes [SE] <SG> $Feature @Active
 
 Styling/Hardening
 ^ Style via CSS, embed catchy/sprited images [MG] <SG> @Done %Passed
-- Sprite final set of icons for efficiency [MG] <SG> @Active
+- Split/sprite final set of icons for efficiency [MG] <JH2> @Active
 - Perform I18N and L10N (test with reversed strings) [SG] <JH2> @Done %Passed
 - Collect/address feedback from Alpha/Beta users and targeted usability tests <MG> [SG] @Done %Passed
 - Handle secondary scenarios/provide good diagnostics [SG] <SE> @Active
@@ -184,7 +184,7 @@ Styling/Hardening
 | User modifications via User Manager, searching for users
 | Save, Import/Export (Text & HTML)
 - Develop Model/View unit tests [SG] <BB> @Active
-- Create automated test scripts using Lebowski/Selenium @Active [SG] <MC>
+- Create automated test scripts using Lebowski/Selenium @Active [MR] <MC>
 
 Installation/Deployment
 - Support customizable (via Buildfile) "Installation" logo and title (shown in Browser/tab title) [SG] @Done $Feature %Passed
