@@ -23,6 +23,34 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
   name: SC.Record.attr(String, { isRequired: YES, defaultValue: CoreTasks.NEW_PROJECT_NAME }),
 
   /**
+   * A string summarizing key facets of the Project for display.
+   */
+  displayName: function(key, value) {
+    
+    if (value !== undefined) {
+      
+      var currentName = this.get('name');
+      if (currentName === CoreTasks.ALL_TASKS_NAME.loc() || currentName === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) return;
+      
+      var projectHash = CoreTasks.Project.parse(value);
+      
+      this.propertyWillChange('name');
+      this.writeAttribute('name', projectHash.name);
+      this.propertyDidChange('name');
+      
+      if(projectHash.timeLeft) {
+        this.propertyWillChange('timeLeft');
+        this.writeAttribute('timeLeft', projectHash.timeLeft);
+        this.propertyDidChange('timeLeft');
+      }
+      
+    } else {
+      return this.get('name');
+    }
+    
+  }.property('name').cacheable(),
+
+  /**
    * The amount of time remaining before project completion, expressed in days.
    *
    * This is used for load-balancing.
@@ -137,34 +165,6 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
     if(CoreTasks.isSystemProject(this)) return 'system-project-icon';
     return this.get('description')? 'project-icon-has-description' : 'project-icon-no-description';
   }.property('description'),
-
-  /**
-   * A string summarizing key facets of the Project for display.
-   */
-  displayName: function(key, value) {
-    
-    if (value !== undefined) {
-      
-      var currentName = this.get('name');
-      if (currentName === CoreTasks.ALL_TASKS_NAME.loc() || currentName === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) return;
-      
-      var projectHash = CoreTasks.Project.parse(value);
-      
-      this.propertyWillChange('name');
-      this.writeAttribute('name', projectHash.name);
-      this.propertyDidChange('name');
-      
-      if(projectHash.timeLeft) {
-        this.propertyWillChange('timeLeft');
-        this.writeAttribute('timeLeft', projectHash.timeLeft);
-        this.propertyDidChange('timeLeft');
-      }
-      
-    } else {
-      return this.get('name');
-    }
-    
-  }.property('name').cacheable(),
 
   /**
    * Export a project's attributes.

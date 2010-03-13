@@ -49,7 +49,7 @@ Tasks.UserInformationView = SC.View.extend(
     this.loginNameField = this.createChildView(SC.TextFieldView.extend({
       layout: { top: 42, left: 90, height: 20, width: 300 },
       hint: "_Initials".loc(),
-      valueBinding: SC.binding('*content.loginName', this).toLocale()
+      valueBinding: SC.binding('*content.loginNameValue', this).toLocale()
     }));
     childViews.push(this.loginNameField);
     

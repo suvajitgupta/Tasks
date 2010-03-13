@@ -87,6 +87,88 @@ CoreTasks.Task = CoreTasks.Record.extend({
   name: SC.Record.attr(String, { isRequired: YES, defaultValue: CoreTasks.NEW_TASK_NAME }),
 
   /**
+   * A string summarizing key facets of the Task for display.
+   */
+  displayName: function(key, value) {
+    
+    if (value !== undefined) {
+      
+      var taskHash = CoreTasks.Task.parse(value, false);
+      
+      if(taskHash.priority) {
+        this.propertyWillChange('priority');
+        this.writeAttribute('priority', taskHash.priority);
+        this.propertyDidChange('priority');
+      }
+      
+      this.propertyWillChange('name');
+      this.writeAttribute('name', taskHash.name);
+      this.propertyDidChange('name');
+      
+      if(taskHash.effort) {
+        this.propertyWillChange('effort');
+        this.writeAttribute('effort', taskHash.effort);
+        this.propertyDidChange('effort');
+      }
+      
+      if(taskHash.submitterId) {
+        var submitterNone = (taskHash.submitterId.toLowerCase() === CoreTasks.USER_NONE);
+        var submitterUser = submitterNone? null : CoreTasks.getUser(taskHash.submitterId);
+        if (!submitterNone && !submitterUser) {
+          console.warn('Task Editing Error - no such submitter: ' + taskHash.submitterId);
+        }
+        else {
+          this.propertyWillChange('submitterId');
+          this.writeAttribute('submitterId', submitterUser? submitterUser.get('id') : null);
+          this.propertyDidChange('submitterId');
+        }
+      }
+      
+      if(taskHash.assigneeId) {
+        var assigneeNone = (taskHash.assigneeId.toLowerCase() === CoreTasks.USER_NONE);
+        var assigneeUser = assigneeNone? null : CoreTasks.getUser(taskHash.assigneeId);
+        if (!assigneeNone && !assigneeUser) {
+          console.warn('Task Editing Error - no such assignee: ' + taskHash.assigneeId);
+        }
+        else {
+          this.propertyWillChange('assigneeId');
+          this.writeAttribute('assigneeId', assigneeUser? assigneeUser.get('id') : null);
+          this.propertyDidChange('assigneeId');
+        }
+      }
+      
+      if(taskHash.type) {
+        this.propertyWillChange('type');
+        this.writeAttribute('type', taskHash.type);
+        this.propertyDidChange('type');
+      }
+      
+      if(taskHash.developmentStatus) {
+        this.propertyWillChange('developmentStatus');
+        if(this.get('developmentStatus') !== taskHash.developmentStatus &&
+           taskHash.developmentStatus !== CoreTasks.TASK_STATUS_DONE) this.writeAttribute('validation', CoreTasks.TASK_VALIDATION_UNTESTED);
+        this.writeAttribute('developmentStatus', taskHash.developmentStatus);
+        this.propertyDidChange('developmentStatus');
+      }
+      
+      if(taskHash.validation) {
+        if(this.get('developmentStatus') !== CoreTasks.TASK_STATUS_DONE && taskHash.validation !== CoreTasks.TASK_VALIDATION_UNTESTED) {
+          console.warn('Task Editing Error - validation of Passed/Failed only possible for status Done: ' + taskHash.name);
+        }
+        else {
+          this.propertyWillChange('validation');
+          this.writeAttribute('validation', taskHash.validation);
+          this.propertyDidChange('validation');
+        }
+      }
+
+    } else {
+      return this.get('name');
+    }
+    
+  }.property('name').cacheable(),
+
+  /**
    * Refers to the project that this task is allocated to.
    */
   projectId: SC.Record.attr(Number),
@@ -289,88 +371,6 @@ CoreTasks.Task = CoreTasks.Record.extend({
     }
   }.property('type').cacheable(),
   
-  /**
-   * A string summarizing key facets of the Task for display.
-   */
-  displayName: function(key, value) {
-    
-    if (value !== undefined) {
-      
-      var taskHash = CoreTasks.Task.parse(value, false);
-      
-      if(taskHash.priority) {
-        this.propertyWillChange('priority');
-        this.writeAttribute('priority', taskHash.priority);
-        this.propertyDidChange('priority');
-      }
-      
-      this.propertyWillChange('name');
-      this.writeAttribute('name', taskHash.name);
-      this.propertyDidChange('name');
-      
-      if(taskHash.effort) {
-        this.propertyWillChange('effort');
-        this.writeAttribute('effort', taskHash.effort);
-        this.propertyDidChange('effort');
-      }
-      
-      if(taskHash.submitterId) {
-        var submitterNone = (taskHash.submitterId.toLowerCase() === CoreTasks.USER_NONE);
-        var submitterUser = submitterNone? null : CoreTasks.getUser(taskHash.submitterId);
-        if (!submitterNone && !submitterUser) {
-          console.warn('Task Editing Error - no such submitter: ' + taskHash.submitterId);
-        }
-        else {
-          this.propertyWillChange('submitterId');
-          this.writeAttribute('submitterId', submitterUser? submitterUser.get('id') : null);
-          this.propertyDidChange('submitterId');
-        }
-      }
-      
-      if(taskHash.assigneeId) {
-        var assigneeNone = (taskHash.assigneeId.toLowerCase() === CoreTasks.USER_NONE);
-        var assigneeUser = assigneeNone? null : CoreTasks.getUser(taskHash.assigneeId);
-        if (!assigneeNone && !assigneeUser) {
-          console.warn('Task Editing Error - no such assignee: ' + taskHash.assigneeId);
-        }
-        else {
-          this.propertyWillChange('assigneeId');
-          this.writeAttribute('assigneeId', assigneeUser? assigneeUser.get('id') : null);
-          this.propertyDidChange('assigneeId');
-        }
-      }
-      
-      if(taskHash.type) {
-        this.propertyWillChange('type');
-        this.writeAttribute('type', taskHash.type);
-        this.propertyDidChange('type');
-      }
-      
-      if(taskHash.developmentStatus) {
-        this.propertyWillChange('developmentStatus');
-        if(this.get('developmentStatus') !== taskHash.developmentStatus &&
-           taskHash.developmentStatus !== CoreTasks.TASK_STATUS_DONE) this.writeAttribute('validation', CoreTasks.TASK_VALIDATION_UNTESTED);
-        this.writeAttribute('developmentStatus', taskHash.developmentStatus);
-        this.propertyDidChange('developmentStatus');
-      }
-      
-      if(taskHash.validation) {
-        if(this.get('developmentStatus') !== CoreTasks.TASK_STATUS_DONE && taskHash.validation !== CoreTasks.TASK_VALIDATION_UNTESTED) {
-          console.warn('Task Editing Error - validation of Passed/Failed only possible for status Done: ' + taskHash.name);
-        }
-        else {
-          this.propertyWillChange('validation');
-          this.writeAttribute('validation', taskHash.validation);
-          this.propertyDidChange('validation');
-        }
-      }
-
-    } else {
-      return this.get('name');
-    }
-    
-  }.property('name').cacheable(),
-
   /**
   * Export a task's attributes.
   *

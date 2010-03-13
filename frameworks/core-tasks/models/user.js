@@ -38,6 +38,31 @@ CoreTasks.User = CoreTasks.Record.extend({
   loginName: SC.Record.attr(String, { isRequired: YES, defaultValue: CoreTasks.NEW_USER_LOGIN_NAME }),
 
   /**
+   *  This computed property ensures valid loginNames.
+   */
+  loginNameValue: function(key, value){
+    if (value !== undefined) {
+      if(value.match(/none/i)) {
+        console.warn('This login name is reserved');
+        value = this.readAttribute('loginName');
+      }
+      else if(CoreTasks.getUser(value)) { // see if this loginName is already taken
+        console.error('This user login name is already taken: ' + value);
+        value = this.readAttribute('loginName');
+      }
+      else {
+        this.propertyWillChange('loginName');
+        this.writeAttribute('loginName', value);
+        this.propertyDidChange('loginName');
+      }
+    }
+    else {
+      value = this.get('loginName');
+    }
+    return value;
+  }.property('loginName').cacheable(),
+
+  /**
    * The role of the user (see below for allowed values).
    */
   role: SC.Record.attr(String, {

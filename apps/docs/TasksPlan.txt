@@ -50,9 +50,9 @@ v Add hover over tooltip for Projects to show how many Tasks they contain [SG] @
 | Check via Inline Editor Delegate
 ^ Add "Add Project" & "Delete Project" buttons in projects toolbar [SG] @Done $Feature %Passed
 - Add warning Alert box about deleting Project with Tasks [SG] @Done $Feature %Passed
-v Beta: Disallow names that are already in use or reserved and providing warning to user [SG] $Feature @Active
-| Project name: cannot be same as any existing name
-| User login name cannot cannot be same as any existing name or be reserved name "none"
+v Beta: Disallow Project names or User loginNames that are already in use or reserved [SG] $Feature @Active
+| Project name cannot be duplicated or a system project name
+| User login name cannot be duplicated or reserved name "none"
 v Add summary in projects toolbar showing number of Projects & number of Tasks for selected project [SG] <MB> @Done $Feature %Passed
 v Enable/disable "Delete Project" button based on having a selected project [SG] @Done %Passed $Feature
 v Disable "Add Task" button when no project is selected [SG] <BB> @Done %Passed $Feature
