@@ -247,5 +247,5 @@ body {
 }
 
 .unauthorized {
-  outline: 1px solid red !important;
+  text-decoration: line-through !important;
 }
