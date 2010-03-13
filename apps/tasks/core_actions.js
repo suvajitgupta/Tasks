@@ -28,16 +28,20 @@ Tasks.mixin({
       case 1:
         this.goState('a', 2);
         Tasks.set('loginName', loginName);
-        var params = {
-          successCallback: this.authenticationSuccess.bind(this),
-          failureCallback: this.authenticationFailure.bind(this)
-        };
-        // remote authentication
-        if(CoreTasks.remoteDataSource) {
-          CoreTasks.User.authenticate(loginName, password, params);
+        if(CoreTasks.remoteDataSource) { // remote authentication
+          var params = {
+            successCallback: this.authenticationSuccess.bind(this),
+            failureCallback: this.authenticationFailure.bind(this)
+          };
+          return CoreTasks.User.authenticate(loginName, password, params);
         }
-        else {
-          this.authenticationSuccess();
+        else { // running off fixtures
+          for(var i = 0, len = CoreTasks.User.FIXTURES.length; i < len; i++) {
+            if(loginName === CoreTasks.User.FIXTURES[i].loginName) {
+              return this.authenticationSuccess();
+            }
+          }
+          return this.authenticationFailure();
         }
         break;
 
