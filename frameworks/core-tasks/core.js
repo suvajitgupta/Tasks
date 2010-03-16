@@ -51,6 +51,7 @@ CoreTasks = SC.Object.create({
   allUsers: null,
   allTasks: null,
   allProjects: null,
+  allWatches: null,
 
   /**
    * Clear all data from store.
@@ -73,6 +74,11 @@ CoreTasks = SC.Object.create({
     if(this.allProjects) {
       this.allProjects.destroy();
       this.allProjects = null;
+    }
+    
+    if(this.allWatches) {
+      this.allWatches.destroy();
+      this.allWatches = null;
     }
     
     if(this.store) this.store.reset();
@@ -107,14 +113,14 @@ CoreTasks = SC.Object.create({
    * @param {String} string to match loginName exactly or name partially.
    * @returns {Array} array of user records, if matching ones exist, or empty array.
    */
-  getUsers: function(string) {
+  getUsers: function(loginName) {
     if (!this.allUsers) return [];
     var usersCount = this.allUsers.get('length');
-    var namePattern = new RegExp(string);
+    var namePattern = new RegExp(loginName);
     var matchingUsers = [];
     for(var i = 0; i < usersCount; i++) {
       var user = this.allUsers.objectAt(i);
-      if(user.get('loginName') === string || user.get('name').match(namePattern)) {
+      if(user.get('loginName') === loginName || user.get('name').match(namePattern)) {
         matchingUsers.push(user);
       }
     }
@@ -141,6 +147,24 @@ CoreTasks = SC.Object.create({
     return matchingProject;
   },
   
+  /**
+   * Check if current user is watching a given task.
+   *
+   * @param {String} task ID.
+   * @returns {Boolean} true if watching, false otherwise.
+   */
+  isCurrentUserWatchingTask: function(taskId) {
+    if (!this.allWatches) return [];
+    var currentUserId = this.getPath('currentUser.id');
+    var watchesCount = this.allWatches.get('length');
+    for(var i = 0; i < watchesCount; i++) {
+      var watch = this.allWatches.objectAt(i);
+      if(('' + watch.get('userId')) !== currentUserId) continue;
+      if(('' + watch.get('taskId')) === taskId) return true;
+    }
+    return false;
+  },
+
   // The resource path format for the remote server.
   _resourcePathFormat: 'tasks-server/%@%@%@',
 

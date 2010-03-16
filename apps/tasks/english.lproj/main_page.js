@@ -5,7 +5,6 @@
 
 sc_require('core');
 sc_require('mixins/localized_label');
-sc_require('mixins/permissible');
 sc_require('views/logo');
 sc_require('views/summary');
 
@@ -190,7 +189,7 @@ Tasks.mainPage = SC.Page.design({
         target: 'Tasks',
         action: 'addTask'
       }),
-      deleteTaskButton: SC.LabelView.design(SCUI.SimpleButton,Tasks.Permissible,{
+      deleteTaskButton: SC.LabelView.design(SCUI.SimpleButton,SCUI.Permissible,{
         layout: { centerY: 0, left: 320, height: 18, width: 100 },
         icon: 'delete-icon',
         classNames: ['toolbar-label'],
@@ -437,7 +436,7 @@ Tasks.mainPage = SC.Page.design({
         layout: { centerX: 0, width: 1030, top: 0, bottom: 0 },
         childViews: 'typeLabel typeRadiobuttons priorityLabel priorityRadiobuttons statusLabel statusRadiobuttons validationLabel validationRadiobuttons'.w(),
         
-        typeLabel: SC.LabelView.design(SCUI.ToolTip, Tasks.Permissible, {
+        typeLabel: SC.LabelView.design(SCUI.ToolTip, SCUI.Permissible, {
           layout: { top: 3, bottom: 30, left: 110, width: 60 },
           classNames: ['task-attribute-set-title'],
           isVisibleBinding: 'Tasks.softwareMode',
@@ -467,7 +466,7 @@ Tasks.mainPage = SC.Page.design({
           layoutDirection: SC.LAYOUT_HORIZONTAL
         }),
 
-        priorityLabel: SC.LabelView.design(SCUI.ToolTip, Tasks.Permissible, {
+        priorityLabel: SC.LabelView.design(SCUI.ToolTip, SCUI.Permissible, {
           layout: { top: 3, bottom: 30, left: 345, width: 95 },
           classNames: ['task-attribute-set-title'],
           isPermittedBinding: 'Tasks.tasksController.notGuestOrGuestSubmittedTasks',
@@ -494,7 +493,7 @@ Tasks.mainPage = SC.Page.design({
           layoutDirection: SC.LAYOUT_HORIZONTAL
         }),
 
-        statusLabel: SC.LabelView.design(SCUI.ToolTip, Tasks.Permissible, {
+        statusLabel: SC.LabelView.design(SCUI.ToolTip, SCUI.Permissible, {
           layout: { top: 3, bottom: 30, left: 585, width: 70 },
           classNames: ['task-attribute-set-title'],
           isPermittedBinding: 'Tasks.tasksController.notGuestOrGuestSubmittedTasks',
@@ -523,7 +522,7 @@ Tasks.mainPage = SC.Page.design({
           layoutDirection: SC.LAYOUT_HORIZONTAL
         }),
 
-        validationLabel: SC.LabelView.design(SCUI.ToolTip, Tasks.Permissible, {
+        validationLabel: SC.LabelView.design(SCUI.ToolTip, SCUI.Permissible, {
           layout: { top: 3, bottom: 30, left: 855, width: 100 },
           classNames: ['task-attribute-set-title'],
           isVisibleBinding: 'Tasks.softwareMode',

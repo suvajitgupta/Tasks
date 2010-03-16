@@ -45,3 +45,13 @@ User:
 	preferences: { key: value }, # preferences stored as key/value pairs
 	authToken: <String> # authentication token from logging into a server
 }
+
+##################################################
+Watch:
+{
+	id*: <Number>, # primary key
+	createdAt: time when record was created (in milliseconds since the Unix Epoch)
+	updatedAt: time when record was last updated (in milliseconds since the Unix Epoch)
+	taskId: <Number> # refers to task being watched
+	userId: <Number> # refers to user who is watching
+}

@@ -185,7 +185,7 @@ Tasks.mixin({
 
     // console.log('DEBUG: projectsLoadSuccess()');
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
-    serverMessage.set('value', serverMessage.get('value') + "_ProjectsLoaded".loc() + new Date().format('hh:mm a'));
+    serverMessage.set('value', serverMessage.get('value') + "_ProjectsLoaded".loc());
 
     if(CoreTasks.loginTime) {
       var defaultProject = CoreTasks.get('allTasksProject');
@@ -198,6 +198,24 @@ Tasks.mixin({
       Tasks.sourcesController.propertyDidChange('arrangedObjects');
     }
     
+    // Now load all of the watches.
+    if (!CoreTasks.get('allWatches')) {
+      CoreTasks.set('allWatches', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Watch })));
+      this.watchesController.set('content', CoreTasks.get('allWatches'));
+    } else {
+      CoreTasks.get('allWatches').refresh();
+    }
+  },
+
+  /**
+   * Called after all watches have been loaded from the server.
+   */
+  watchesLoadSuccess: function() {
+
+    // console.log('DEBUG: watchesLoadSuccess()');
+    var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
+    serverMessage.set('value', serverMessage.get('value') + "_WatchesLoaded".loc() + new Date().format('hh:mm a'));
+
     this.dataLoadSuccess();
   },
 
