@@ -141,6 +141,7 @@ v Add online training video using Captivate or Camtasia [SG] $Feature @Done
 | http://www.youtube.com/watch?v=6egjJw_RS1g
 - Add onscreen help (on panel fields that are complex and on blank workspace to assist new users) <MG> [SG] $Feature @Done %Passed
 - Add "Logout" button to exit in top toolbar (confirm before exiting, reload data/clear all filters) [SG] <JH2> @Done $Feature %Passed
+- Destroy authentication token while logging User out [SG] <JH2>
 - Prompt user to save changes (if any) before logging out [SG] <SE> $Feature @Done %Passed
 | See demo.sproutcore.com/user_defaults and lookup SproutCore blog for Charles' posting on this topic
 - Add "TEAM" display mode (vs. "TASKS") to show everyone at a glance, clicking on Assignee shows their Tasks [SG] $Feature @Done %Passed
