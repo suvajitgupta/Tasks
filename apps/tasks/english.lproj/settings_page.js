@@ -18,7 +18,7 @@ Tasks.settingsPage = SC.Page.create({
   
   panel: SC.PanelPane.create({
     
-    layout: { centerX: 0, centerY: 0, height: 425, width: 730 },
+    layout: { centerX: 0, centerY: 0, height: 425, width: 780 },
     
     contentView: SC.View.design({
       layout: { left: 0, right: 0, top: 0, bottom: 0},
@@ -35,7 +35,7 @@ Tasks.settingsPage = SC.Page.create({
           childViews: 'addButton deleteButton divider title userNamePatternField userNamePatternCancelButton'.w(),
           
           addButton: SC.LabelView.design(SCUI.SimpleButton,{
-            layout: { centerY: 0, left: 20, height: 16, width: 90 },
+            layout: { centerY: 0, left: 45, height: 16, width: 90 },
             icon: 'add-icon',
             value: "_AddUser".loc(),
             classNames: ['toolbar-label'],
@@ -46,7 +46,7 @@ Tasks.settingsPage = SC.Page.create({
           }),
 
           deleteButton: SC.LabelView.design(SCUI.SimpleButton,{
-            layout: { centerY: 0, left: 120, height: 16, width: 100 },
+            layout: { centerY: 0, left: 145, height: 16, width: 100 },
             icon: 'delete-icon',
             value: "_DeleteUser".loc(),
             classNames: ['toolbar-label'],
@@ -58,12 +58,12 @@ Tasks.settingsPage = SC.Page.create({
           }),
           
           divider: SC.View.design({
-            layout: { top: 8, bottom: 8, left: 250, width: 2 },
+            layout: { top: 8, bottom: 8, left: 300, width: 2 },
             classNames: ['top-bar-divider']
           }),
           
           title: SC.LabelView.design({
-            layout: { centerY: 0, left: 310, height: 20, width: 120 },
+            layout: { centerY: 0, left: 360, height: 20, width: 120 },
             value: "_UserManager".loc(),
             classNames: ['window-title']
           }),
@@ -89,7 +89,7 @@ Tasks.settingsPage = SC.Page.create({
         }),
       
         usersMasterView: SC.ScrollView.design({
-          layout: { top: 35, bottom: 0, left: 0, width: 250 },
+          layout: { top: 35, bottom: 0, left: 0, width: 300 },
           hasHorizontalScroller: NO,
           classNames: ['users-pane'],
 
@@ -113,12 +113,12 @@ Tasks.settingsPage = SC.Page.create({
         }),
         
         userDetailView: Tasks.UserInformationView.design({
-          layout: { top: 100, left: 275, bottom: 35, right: 10 },
+          layout: { top: 100, left: 325, bottom: 35, right: 10 },
           contentBinding: 'Tasks.userController'
         }),
         
         createdAtLabel: SC.LabelView.design({
-          layout: { left:255, bottom: 5, height: 17, width: 250 },
+          layout: { left:305, bottom: 5, height: 17, width: 250 },
           classNames: [ 'date-time'],
           textAlign: SC.ALIGN_LEFT,
           valueBinding: SC.binding('Tasks.userController.displayCreatedAt', this)
