@@ -188,7 +188,7 @@ SC.stringsFor('English', {
   "_PasswordHint": "Your Password",
   "_Signup": "Signup",
   "_UserManager": "User Manager",
-  "_RegisteredUsers": " registered users, ",
+  "_DisplayedUsers": " users displayed, ",
   "_UserNamePatternSelectionHint": "User name pattern",
   "_UserNamePatternSelectionTooltip": "Specify pattern to match all or part of users' full/login name",
   

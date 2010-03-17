@@ -114,7 +114,7 @@ User Manager GUI
 ^ Add Settings button/popup embedding User Manager with "Add/Delete User"  buttons in toolbar [SG] <JH2> @Done %Passed $Feature
 | Copy over Role attribute of first selected User to new User
 v Enable/disable "Delete User" button based on having a selected user [SG] @Done %Passed $Feature
-- Show number of registered/selected users at the bottom of User Manager panel [SG] $Feature @Done %Passed
+- Show number of displayed/selected users at the bottom of User Manager panel [SG] $Feature @Done %Passed
 - Reset Task Assignee/Submitter after user deletion <SE> [SG] $Feature @Done %Passed
 ^ Allow multi-user drag-and-drop role change in User Manager [SG] @Done $Feature %Passed
 ^ Add User type-ahead search filter (case insensitive name/loginName match) [SG] @Done %Passed $Feature

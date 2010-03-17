@@ -19,6 +19,7 @@ Tasks.usersController = SC.ArrayController.create(SCUI.StatusChanged,
   
   userNamePattern: null,
   roles: null,
+  editableUsersCount: 0,
 
   showRoles: function() {
 
@@ -53,6 +54,7 @@ Tasks.usersController = SC.ArrayController.create(SCUI.StatusChanged,
       }
 
       var len = editableUsers.get('length');
+      this.set('editableUsersCount', len);
       for (var i = 0; i < len; i++) {
         user = editableUsers.objectAt(i);
         switch(user.get('role')) {
@@ -86,8 +88,8 @@ Tasks.usersController = SC.ArrayController.create(SCUI.StatusChanged,
   }.observes('[]', 'userNamePattern'),
 
   usersCount: function() {
-    return this.get('length') + "_RegisteredUsers".loc() + this.getPath('selection.length') + "_selected".loc();
-  }.property('[]', 'selection').cacheable(),
+    return this.getPath('editableUsersCount') + "_DisplayedUsers".loc() + this.getPath('selection.length') + "_selected".loc();
+  }.property('editableUsersCount', 'selection').cacheable(),
 
   isDeletable: function() {
 
