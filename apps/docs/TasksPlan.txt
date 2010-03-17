@@ -172,10 +172,9 @@ Server
 
 Styling/Hardening
 ^ Style via CSS, embed catchy/sprited images [MG] <SG> @Done %Passed
-- Split/sprite final set of icons for efficiency [MG] <JH2> @Active
+- Split/sprite final set of icons for efficiency [MG] <JH2>
 - Perform I18N and L10N (test with reversed strings) [SG] <JH2> @Done %Passed
 - Collect/address feedback from Alpha/Beta users and targeted usability tests <MG> [SG] @Done %Passed
-- Handle secondary scenarios/provide good diagnostics [SG] <SE> @Active
 ^ Perform smoke test of key functionality [SG] @Done
 | Login/Logout, Guest Signup
 | All/Unallocated Tasks system projects
