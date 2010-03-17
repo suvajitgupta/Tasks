@@ -19,9 +19,14 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   
   _editorPane: null,
   
-  _listUsers: function() {
+  _listUsers: function(excludeGuests) {
     return SC.Binding.transform(function(value, binding) {
-       var ret = value.toArray();
+       var users = value.toArray();
+       var ret = [];
+       for(var i=0, len = users.get('length'); i < len; i++) {
+         var user = users.objectAt(i);
+         if(!excludeGuests || user.get('role') !== CoreTasks.USER_ROLE_GUEST) ret.push(user);
+       }
        ret.push({ id: '0', displayName: "_Unassigned".loc() });
        return ret;
     }).from('Tasks.usersController.content');
@@ -91,7 +96,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           }),
           submitterField: SC.SelectFieldView.design({
             layout: { top: 10, left: 80, width: 175, height: 22 },
-            objectsBinding: this._listUsers(),
+            objectsBinding: this._listUsers(false),
             nameKey: 'displayName',
             valueKey: 'id',
             isEnabledBinding: 'Tasks.tasksController.isEditable',
@@ -105,7 +110,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           }),
           assigneeField: SC.SelectFieldView.design({
             layout: { top: 10, right: 10, width: 175, height: 20 },
-            objectsBinding: this._listUsers(),
+            objectsBinding: this._listUsers(true),
             nameKey: 'displayName',
             valueKey: 'id',
             isEnabledBinding: 'Tasks.tasksController.isEditable',
