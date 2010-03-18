@@ -2,12 +2,15 @@
 
 sc_require('models/task');
 
+function loc(str) {
+  return str.replace('_', '');
+}
+
 CoreTasks.Task.FIXTURES = [];
 
 for (var i = 0; i < 25; i++) {
   var taskHash = {};
   taskHash.id = i+1;
-  taskHash.name = taskHash.id + ". Task";
   taskHash.priority = CoreTasks.taskPrioritiesAllowed[i%3];
   taskHash.type = CoreTasks.taskTypesAllowed[i%3];
   taskHash.developmentStatus = CoreTasks.taskStatusesAllowed[i%4];
@@ -23,5 +26,11 @@ for (var i = 0; i < 25; i++) {
   else {
     taskHash.description = "Description" + taskHash.id;
   }
+  var status = taskHash.developmentStatus;
+  taskHash.name = "Task" + taskHash.id + " type:" + loc(taskHash.type) + " priority:" + loc(taskHash.priority) + " status:" + loc(taskHash.developmentStatus);
+  if(taskHash.developmentStatus === CoreTasks.TASK_STATUS_DONE) {
+    taskHash.name += (" validation:" + loc(taskHash.validation));
+  }
+  
   CoreTasks.Task.FIXTURES[i] = taskHash;
 }
