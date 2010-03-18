@@ -97,12 +97,12 @@ CoreTasks.User = CoreTasks.Record.extend({
   authToken: SC.Record.attr(String),
   
   /**
-   * A computed property to indicate whether user would need notifications.
-   * @returns {Boolean} true: if user has an authToken (connected to GAE server that supports notifications) and an email address, false otherwise
+   * A computed property to indicate whether the server is capable of sending notifications.
+   * @returns {Boolean} true: if user has an authToken (connected to GAE server that supports notifications), false otherwise
    */
-  allowNotifications: function() {
-    return this.get('authToken') && this.get('email');
-  }.property('authToken', 'email').cacheable(),
+  canServerSendNotifications: function() {
+    return this.get('authToken');
+  }.property('authToken').cacheable(),
   
   /**
    * The path to the icon associated with a user.
