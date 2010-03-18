@@ -446,7 +446,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         typeRadiobuttons: SC.RadioView.design({
-          layout: { top: 22, bottom: 6, left: 10, width: 260 },
+          layout: { top: 20, bottom: 6, left: 10, width: 260 },
           escapeHTML: NO,
           classNames: ['task-attribute-set'],
           isVisibleBinding: 'Tasks.softwareMode',
@@ -475,7 +475,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         priorityRadiobuttons: SC.RadioView.design({
-          layout: { top: 22, bottom: 6, left: 285, width: 195 },
+          layout: { top: 20, bottom: 6, left: 285, width: 195 },
           escapeHTML: NO,
           classNames: ['task-attribute-set'],
           items: [
@@ -502,7 +502,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         statusRadiobuttons: SC.RadioView.design({
-          layout: { top: 22, bottom: 6, left: 495, width: 265 },
+          layout: { top: 20, bottom: 6, left: 495, width: 265 },
           escapeHTML: NO,
           classNames: ['task-attribute-set'],
           items: [
@@ -532,7 +532,7 @@ Tasks.mainPage = SC.Page.design({
         }),
 
         validationRadiobuttons: SC.RadioView.design({
-          layout: { top: 22, bottom: 6, left: 775, width: 245 },
+          layout: { top: 20, bottom: 6, left: 775, width: 245 },
           escapeHTML: NO,
           classNames: ['task-attribute-set'],
           isVisibleBinding: 'Tasks.softwareMode',
