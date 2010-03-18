@@ -591,8 +591,8 @@ Tasks.mainPage = SC.Page.design({
         layout: { centerY: 0, height: 16, right: 350, width: 90 },
         classNames: ['status-bar-label'],
         textAlign: SC.ALIGN_RIGHT,
-        isVisible: NO,
-        isVisibleBinding: SC.binding('CoreTasks*currentUser.canServerSendNotifications'),
+        // isVisible: NO,
+        isVisibleBinding: SC.binding('CoreTasks*canServerSendNotifications'),
         title: "_SendNotifications".loc(),
         toolTip: "_SendNotificationsTooltip".loc(),
         valueBinding: 'CoreTasks.shouldNotify'

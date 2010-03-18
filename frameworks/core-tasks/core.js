@@ -165,6 +165,14 @@ CoreTasks = SC.Object.create({
     return this.getPath('currentUser.role') === CoreTasks.USER_ROLE_MANAGER;
   }.property('currentUser').cacheable(),
   
+  /**
+   * A computed property to indicate whether the server is capable of sending notifications.
+   * @returns {Boolean} true: if connected to a server that supports notifications, false otherwise
+   */
+  canServerSendNotifications: function() {
+    return !SC.none(this.getPath('currentUser.authToken')); // non-null for GAE
+  }.property('currentUser').cacheable(),
+  
   
   // Stores access control rights for current user.
   permissions: SC.Object.create({
