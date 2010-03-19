@@ -27,7 +27,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
          var user = users.objectAt(i);
          if(!excludeGuests || user.get('role') !== CoreTasks.USER_ROLE_GUEST) ret.push(user);
        }
-       ret.push({ id: '0', displayName: "_Unassigned".loc() });
+       ret.push({ id: '0', displayName: "_Unassigned".loc(), icon: sc_static('blank') });
        return ret;
     }).from('Tasks.usersController.content');
   },
@@ -94,11 +94,12 @@ Tasks.TaskItemView = SC.ListItemView.extend(
             layout: { top: 10, left: 10, height: 17, width: 80 },
             value: "_Submitter:".loc()
           }),
-          submitterField: SC.SelectFieldView.design({
-            layout: { top: 10, left: 80, width: 175, height: 22 },
+          submitterField: SCUI.ComboBoxView.design({
+            layout: { top: 10, left: 75, width: 175, height: 20 },
             objectsBinding: this._listUsers(false),
             nameKey: 'displayName',
             valueKey: 'id',
+            iconKey: 'icon',
             isEnabledBinding: 'Tasks.tasksController.isEditable',
             valueBinding: SC.binding('.content.submitterValue', this)
           }),
@@ -108,11 +109,12 @@ Tasks.TaskItemView = SC.ListItemView.extend(
             textAlign: SC.ALIGN_RIGHT,
             value: "_Assignee:".loc()
           }),
-          assigneeField: SC.SelectFieldView.design({
+          assigneeField: SCUI.ComboBoxView.design({
             layout: { top: 10, right: 10, width: 175, height: 20 },
             objectsBinding: this._listUsers(true),
             nameKey: 'displayName',
             valueKey: 'id',
+            iconKey: 'icon',
             isEnabledBinding: 'Tasks.tasksController.isEditable',
             valueBinding: SC.binding('.content.assigneeValue', this)
           }),
@@ -384,6 +386,30 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           });
         }
       }
+      
+      var taskWatch = Tasks.tasksController.get('taskWatch');
+      ret.push({
+        isSeparator: YES
+      });
+      if(taskWatch !== CoreTasks.TASK_WATCH_ON) {
+        ret.push({
+          title: "_Watch".loc(),
+          icon: sc_static('blank'),
+          isEnabled: YES,
+          target: 'Tasks.tasksController',
+          action: 'watchTasks'
+        });
+      }
+      if(taskWatch !== CoreTasks.TASK_WATCH_OFF) {
+        ret.push({
+          title: "_Unwatch".loc(),
+          icon: sc_static('blank'),
+          isEnabled: YES,
+          target: 'Tasks.tasksController',
+          action: 'unwatchTasks'
+        });
+      }
+      
     }
     
     if(selectedTasksCount === 1) {

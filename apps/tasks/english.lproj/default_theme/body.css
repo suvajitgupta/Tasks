@@ -152,7 +152,7 @@ body {
   background: static_url('images/text.png') no-repeat 0 0;
 }
 
-.html-icon {
+.html-scui {
   width: 16px;
   height: 16px;
   background: static_url('images/html.png') no-repeat 0 0;
@@ -216,6 +216,14 @@ body {
   font-size: 11px !important;
   text-align: left !important;
   padding: 0px 4px !important;
+}
+
+.scui-combobox-view .scui-combobox-dropdown-button-view {
+  width: 18px !important;
+  height: 17px !important;
+  border: 1px solid gray !important;
+  margin-right: 2px !important;
+  background: static_url('images/dropdown-arrow.png') no-repeat 0 0;
 }
 
 .statistics-pane table {
