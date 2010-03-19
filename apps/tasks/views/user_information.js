@@ -60,7 +60,7 @@ Tasks.UserInformationView = SC.View.extend(
     }));
     childViews.push(this.roleLabel);
     this.roleField = this.createChildView(SC.SelectButtonView.extend({
-      layout: { top: 73, left: 90, height: 22, width: 130 },
+      layout: { top: 73, left: 90, height: 22, width: 150 },
       localize: YES,
       objects: this._listRoles(),
       nameKey: 'name',
