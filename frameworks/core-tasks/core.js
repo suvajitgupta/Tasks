@@ -150,19 +150,19 @@ CoreTasks = SC.Object.create({
   /**
    * Check if current user is watching a given task.
    *
-   * @param {String} task ID.
-   * @returns {Boolean} true if watching, false otherwise.
+   * @param {String} task.
+   * @returns {Boolean} CoreTasks.TASK_WATCH_ON if watching, CoreTasks.TASK_WATCH_OFF otherwise.
    */
-  isCurrentUserWatchingTask: function(taskId) {
+  isCurrentUserWatchingTask: function(task) {
     if (!this.allWatches) return [];
     var currentUserId = this.getPath('currentUser.id');
     var watchesCount = this.allWatches.get('length');
     for(var i = 0; i < watchesCount; i++) {
       var watch = this.allWatches.objectAt(i);
       if(('' + watch.get('userId')) !== currentUserId) continue;
-      if(('' + watch.get('taskId')) === taskId) return true;
+      if(('' + watch.get('taskId')) === task.get('id')) return CoreTasks.TASK_WATCH_ON;
     }
-    return false;
+    return CoreTasks.TASK_WATCH_OFF;
   },
 
   // The resource path format for the remote server.

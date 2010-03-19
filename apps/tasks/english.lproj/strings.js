@@ -194,6 +194,10 @@ SC.stringsFor('English', {
   "_UserSearchPatternSelectionHint": "User name or email pattern",
   "_UserSearchPatternSelectionTooltip": "Specify pattern to match all or part of users' full/login name or email",
   
+  // Watch strings
+  "_Watch": "Watch",
+  "_Unwatch": "Unwatch",
+
   // Status Bar strings
   "_selected": " selected",
   "_displayed": " displayed",

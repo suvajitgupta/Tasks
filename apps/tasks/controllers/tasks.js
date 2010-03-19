@@ -243,6 +243,34 @@ Tasks.tasksController = SC.TreeController.create(
     this.validation('validation', CoreTasks.TASK_VALIDATION_FAILED);
   },
   
+  taskWatch: function(key, value) {
+    var sel = this.get('selection');
+    if(!sel || sel.get('length') === 0) return false;
+    var firstTaskWatch = null;
+    if (value !== undefined) {
+      sel.forEach(function(task) {
+        var taskWatch = CoreTasks.isCurrentUserWatchingTask(task);
+        if(taskWatch !== value) task.set('taskWatch', value);
+      });
+      if(CoreTasks.get('autoSave')) Tasks.saveData();
+    } else {
+      sel.forEach(function(task) {
+        var taskWatch = CoreTasks.isCurrentUserWatchingTask(task);
+        if(!firstTaskWatch) firstTaskWatch = value = taskWatch;
+        else if(taskWatch !== firstTaskWatch) value = null;
+      });
+    }
+    return value;
+  }.property('selection').cacheable(),
+  
+  watchTasks: function() {
+    this.taskWatch('taskWatch', CoreTasks.TASK_WATCH_ON);
+  },
+  
+  unwatchTasks: function() {
+    this.taskWatch('taskWatch', CoreTasks.TASK_WATCH_OFF);
+  },
+  
   editNewTask: function(task){
     var listView = Tasks.getPath('mainPage.mainPane.tasksList');
     var idx = listView.get('content').indexOf(task);

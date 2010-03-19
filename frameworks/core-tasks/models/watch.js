@@ -1,6 +1,9 @@
 /*globals CoreTasks sc_require */
 sc_require('models/record');
 
+CoreTasks.TASK_WATCH_ON = 1;
+CoreTasks.TASK_WATCH_OFF = 0;
+
 /**
  * The watch model.
  *

@@ -31,6 +31,5 @@ for (var i = 0; i < 25; i++) {
   if(taskHash.developmentStatus === CoreTasks.TASK_STATUS_DONE) {
     taskHash.name += (" validation:" + loc(taskHash.validation));
   }
-  
   CoreTasks.Task.FIXTURES[i] = taskHash;
 }
