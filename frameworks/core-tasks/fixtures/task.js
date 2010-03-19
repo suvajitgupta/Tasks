@@ -18,8 +18,8 @@ for (var i = 0; i < 25; i++) {
     taskHash.validation = CoreTasks.taskValidationsAllowed[i%3];
   }
   taskHash.projectId = taskHash.id%5 + 1;
-  taskHash.submitterId = taskHash.id%4 + 1;
-  taskHash.assigneeId = taskHash.id%4 + 1;
+  taskHash.submitterId = (i%2? 1 : 4);
+  taskHash.assigneeId = taskHash.id%3 + 1;
   if (i%2) {
     taskHash.effort = taskHash.id;
   }
