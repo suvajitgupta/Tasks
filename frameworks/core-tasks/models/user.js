@@ -100,7 +100,16 @@ CoreTasks.User = CoreTasks.Record.extend({
    * The path to the icon associated with a user.
    */
   icon: function() {
-    return 'sc-icon-user-16';
+    switch (this.get('role')){
+      case CoreTasks.USER_ROLE_MANAGER:
+        return 'user-role-manager';
+      case CoreTasks.USER_ROLE_DEVELOPER:
+        return 'user-role-developer';
+      case CoreTasks.USER_ROLE_TESTER:
+        return 'user-role-tester';
+      case CoreTasks.USER_ROLE_GUEST:
+        return 'user-role-guest';
+    }
   }.property().cacheable(),
 
   /**

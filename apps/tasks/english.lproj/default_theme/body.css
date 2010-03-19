@@ -212,6 +212,12 @@ body {
   left: 10px !important;
 }
 
+.select-button span label {
+  font-size: 11px !important;
+  text-align: left !important;
+  padding: 0px 4px !important;
+}
+
 .statistics-pane table {
   border: 1px solid gray !important;
   border-collapse: separate !important;

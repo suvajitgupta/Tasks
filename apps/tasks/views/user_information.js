@@ -16,10 +16,10 @@ Tasks.UserInformationView = SC.View.extend(
   
   _listRoles: function() {
      var ret = [];
-     ret.push({ name: CoreTasks.USER_ROLE_MANAGER, value: CoreTasks.USER_ROLE_MANAGER });
-     ret.push({ name: Tasks.softwareMode? CoreTasks.USER_ROLE_DEVELOPER : "_User", value: CoreTasks.USER_ROLE_DEVELOPER });
-     if(Tasks.softwareMode) ret.push({ name: CoreTasks.USER_ROLE_TESTER, value: CoreTasks.USER_ROLE_TESTER });
-     ret.push({ name: CoreTasks.USER_ROLE_GUEST, value: CoreTasks.USER_ROLE_GUEST });
+     ret.push({ name: CoreTasks.USER_ROLE_MANAGER, value: CoreTasks.USER_ROLE_MANAGER, icon: 'user-role-manager' });
+     ret.push({ name: Tasks.softwareMode? CoreTasks.USER_ROLE_DEVELOPER : "_User", value: CoreTasks.USER_ROLE_DEVELOPER, icon: 'user-role-developer' });
+     if(Tasks.softwareMode) ret.push({ name: CoreTasks.USER_ROLE_TESTER, value: CoreTasks.USER_ROLE_TESTER, icon: 'user-role-tester' });
+     ret.push({ name: CoreTasks.USER_ROLE_GUEST, value: CoreTasks.USER_ROLE_GUEST, icon: 'user-role-guest' });
      return ret;
   },
 
@@ -59,12 +59,13 @@ Tasks.UserInformationView = SC.View.extend(
       value: "_Role:".loc()
     }));
     childViews.push(this.roleLabel);
-    this.roleField = this.createChildView(SC.SelectFieldView.extend({
-      layout: { top: 74, left: 90, height: 20, width: 300 },
+    this.roleField = this.createChildView(SC.SelectButtonView.extend({
+      layout: { top: 73, left: 90, height: 22, width: 130 },
       localize: YES,
+      objects: this._listRoles(),
       nameKey: 'name',
       valueKey: 'value',
-      objects: this._listRoles(),
+      iconKey: 'icon',
       valueBinding: SC.binding('*content.role', this),
       isEnabledBinding: 'CoreTasks.permissions.canUpdateUserRole'
     }));
