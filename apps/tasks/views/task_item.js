@@ -95,7 +95,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
             value: "_Submitter:".loc()
           }),
           submitterField: SCUI.ComboBoxView.design({
-            layout: { top: 10, left: 75, width: 175, height: 20 },
+            layout: { top: 10, left: 75, width: 225, height: 20 },
             objectsBinding: this._listUsers(false),
             nameKey: 'displayName',
             valueKey: 'id',
@@ -105,12 +105,12 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           }),
 
           assigneeLabel: SC.LabelView.design({
-            layout: { top: 10, right: 190, height: 17, width: 80 },
+            layout: { top: 10, right: 240, height: 17, width: 80 },
             textAlign: SC.ALIGN_RIGHT,
             value: "_Assignee:".loc()
           }),
           assigneeField: SCUI.ComboBoxView.design({
-            layout: { top: 10, right: 10, width: 175, height: 20 },
+            layout: { top: 10, right: 10, width: 225, height: 20 },
             objectsBinding: this._listUsers(true),
             nameKey: 'displayName',
             valueKey: 'id',
@@ -136,12 +136,12 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           }),
           
           projectLabel: SC.LabelView.design({
-            layout: { top: 47, right: 190, height: 17, width: 80 },
+            layout: { top: 47, right: 240, height: 17, width: 80 },
             textAlign: SC.ALIGN_RIGHT,
             value: "_Project:".loc()
           }),
           projectField: SC.SelectFieldView.design({
-            layout: { top: 47, right: 10, width: 175, height: 20 },
+            layout: { top: 47, right: 10, width: 225, height: 20 },
             objectsBinding: this._listProjects(),
             nameKey: 'displayName',
             valueKey: 'id',
