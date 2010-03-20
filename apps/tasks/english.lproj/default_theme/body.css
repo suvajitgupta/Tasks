@@ -51,7 +51,7 @@ body {
 }
 
 .onscreen-help {
-  color: blue !important;
+  color: #777 !important;
   font-size: 10px !important;
 	line-height: 12px !important;
 }
