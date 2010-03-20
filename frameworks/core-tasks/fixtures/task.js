@@ -10,6 +10,9 @@ CoreTasks.Task.FIXTURES = [];
 
 for (var i = 0; i < 25; i++) {
   var taskHash = {};
+  if (i%5 === 0) {
+    taskHash.createdAt = taskHash.updatedAt = SC.DateTime.create().get('milliseconds');
+  }
   taskHash.id = i+1;
   taskHash.priority = CoreTasks.taskPrioritiesAllowed[i%3];
   taskHash.type = CoreTasks.taskTypesAllowed[i%3];
