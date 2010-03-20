@@ -52,7 +52,7 @@ body {
 
 .onscreen-help {
   color: blue !important;
-  font-size: 11px !important;
+  font-size: 10px !important;
 	line-height: 12px !important;
 }
 
@@ -152,10 +152,16 @@ body {
   background: static_url('images/text.png') no-repeat 0 0;
 }
 
-.html-scui {
+.html-icon {
   width: 16px;
   height: 16px;
   background: static_url('images/html.png') no-repeat 0 0;
+}
+
+.description-icon {
+  width: 16px;
+  height: 16px;
+  background: static_url('images/description.png') no-repeat 0 0;
 }
 
 .checkbox-icon .icon {
@@ -214,6 +220,7 @@ body {
 
 .select-button {
   border: 1px solid gray !important;
+  background-color: #DDD !important;
 }
 
 .select-button span label {

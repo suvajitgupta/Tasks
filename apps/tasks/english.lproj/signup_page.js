@@ -17,7 +17,7 @@ sc_require('core');
 Tasks.signupPage = SC.Page.design({
   // The main signup pane.  used to show info
   mainPane: SC.PanelPane.design({
-    layout: { centerX: 0, width: 420, centerY: 0, height: 225 },
+    layout: { centerX: 0, width: 420, centerY: 0, height: 215 },
     
     defaultResponder: Tasks.SIGNUP,
 
@@ -28,8 +28,10 @@ Tasks.signupPage = SC.Page.design({
       signupPrompt: SC.LabelView.design({
         layout: { top: 5, left: 10, height: 24, right: 10 },
         classNames: ['login-label'],
+        fontWeight: SC.BOLD_WEIGHT,
         textAlign: SC.ALIGN_CENTER,
-        value: "_SignupPrompt".loc()
+        icon: 'user-role-guest',
+        value: "_GuestSignup".loc()
       }),
       
       userInformation: Tasks.UserInformationView.design({

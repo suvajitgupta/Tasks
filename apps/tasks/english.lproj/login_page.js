@@ -23,14 +23,14 @@ Tasks.loginPage = SC.Page.create({
       
       layout: { top: 0, bottom: 0, left: 0, right: 0 },
       classNames: ['login-body'],
-      childViews: 'loginPromptLabel loginNameLabel loginNameField passwordLabel passwordField loginErrorMessage cancelButton loginButton signupButton'.w(),
+      childViews: 'loginPromptLabel loginNameLabel loginNameField passwordLabel passwordField loginErrorMessage cancelButton loginButton guestSignupButton'.w(),
       
-      signupButton: document.title.match(/Dev|Demo|Greenhouse|SproutCore/)? SC.LabelView.design(SCUI.SimpleButton,{
-        layout: { top: 70, left: 520, height: 16, width: 140 },
+      guestSignupButton: document.title.match(/Dev|Demo|Greenhouse|SproutCore/)? SC.LabelView.design(SCUI.SimpleButton,{
+        layout: { top: 67, left: 530, height: 16, width: 140 },
         classNames: ['sign-up'],
         textAlign: SC.ALIGN_CENTER,
-        icon: 'add-icon',
-        value: "_NewUserSignup".loc(),
+        icon: 'user-role-guest',
+        value: "_GuestSignup".loc(),
         target: 'Tasks',
         action: 'launchSignupPane'
       }) : SC.View.design({ layout: { top: 70, left: 520, height: 1, width: 1 } }),

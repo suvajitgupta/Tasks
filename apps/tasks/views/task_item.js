@@ -95,7 +95,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
             value: "_Submitter:".loc()
           }),
           submitterField: SCUI.ComboBoxView.design({
-            layout: { top: 10, left: 75, width: 225, height: 20 },
+            layout: { top: 10, left: 75, width: 250, height: 20 },
             objectsBinding: this._listUsers(false),
             nameKey: 'displayName',
             valueKey: 'id',
@@ -105,12 +105,12 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           }),
 
           assigneeLabel: SC.LabelView.design({
-            layout: { top: 10, right: 240, height: 17, width: 80 },
+            layout: { top: 10, right: 265, height: 17, width: 80 },
             textAlign: SC.ALIGN_RIGHT,
             value: "_Assignee:".loc()
           }),
           assigneeField: SCUI.ComboBoxView.design({
-            layout: { top: 10, right: 10, width: 225, height: 20 },
+            layout: { top: 10, right: 10, width: 250, height: 20 },
             objectsBinding: this._listUsers(true),
             nameKey: 'displayName',
             valueKey: 'id',
@@ -129,28 +129,30 @@ Tasks.TaskItemView = SC.ListItemView.extend(
             valueBinding: SC.binding('.content.effortValue', this)
           }),
           effortHelpLabel: SC.LabelView.design({
-            layout: { top: 35, left: 145, height: 50, width: 125 },
+            layout: { top: 45, left: 145, height: 30, width: 275 },
             escapeHTML: NO,
             classNames: [ 'onscreen-help'],
             value: "_EffortOnscreenHelp".loc()
           }),
           
           projectLabel: SC.LabelView.design({
-            layout: { top: 47, right: 240, height: 17, width: 80 },
+            layout: { top: 47, right: 265, height: 17, width: 80 },
             textAlign: SC.ALIGN_RIGHT,
             value: "_Project:".loc()
           }),
-          projectField: SC.SelectFieldView.design({
-            layout: { top: 47, right: 10, width: 225, height: 20 },
+          projectField: SCUI.ComboBoxView.design({
+            layout: { top: 47, right: 10, width: 250, height: 20 },
             objectsBinding: this._listProjects(),
             nameKey: 'displayName',
             valueKey: 'id',
+            iconKey: 'icon',
             isEnabledBinding: 'Tasks.tasksController.isReallocatable',
             valueBinding: SC.binding('.content.projectValue', this)
           }),
 
           descriptionLabel: SC.LabelView.design({
             layout: { top: 75, left: 10, height: 17, width: 100 },
+            icon: 'description-icon',
             value: "_Description:".loc()
           }),
           descriptionField: SC.TextFieldView.design({

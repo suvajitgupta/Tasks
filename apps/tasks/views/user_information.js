@@ -53,23 +53,20 @@ Tasks.UserInformationView = SC.View.extend(
     }));
     childViews.push(this.loginNameField);
     
-    this.roleLabel = this.createChildView(SC.LabelView.extend({
+    this.passwordLabel = this.createChildView(SC.LabelView.extend({
       layout: { top: 74, left: 0, width: 85, height: 18 },
       textAlign: SC.ALIGN_RIGHT,
-      value: "_Role:".loc()
+      value: "_Password:".loc()
     }));
-    childViews.push(this.roleLabel);
-    this.roleField = this.createChildView(SC.SelectButtonView.extend({
-      layout: { top: 73, left: 90, height: 22, width: 150 },
-      localize: YES,
-      objects: this._listRoles(),
-      nameKey: 'name',
-      valueKey: 'value',
-      iconKey: 'icon',
-      valueBinding: SC.binding('*content.role', this),
-      isEnabledBinding: 'CoreTasks.permissions.canUpdateUserRole'
+    childViews.push(this.passwordLabel);
+    this.passwordField = this.createChildView(SC.TextFieldView.extend({
+      layout: { top: 74, left: 90, height: 20, width: 300 },
+      isPassword: YES,
+      hint: "_PasswordHint".loc(),
+      isPassword: YES,
+      valueBinding: SC.binding('*content.unhashedPassword', this).toLocale()
     }));
-    childViews.push(this.roleField);
+    childViews.push(this.passwordField);
     
     this.emailLabel = this.createChildView(SC.LabelView.extend({
       layout: { top: 106, left: 0, width: 85, height: 18 },
@@ -85,21 +82,32 @@ Tasks.UserInformationView = SC.View.extend(
       valueBinding: SC.binding('*content.email', this).toLocale()
     }));
     childViews.push(this.emailField);
+    this.emailHelpLabel =  this.createChildView(SC.LabelView.design({
+      layout: { top: 133, left: 90, height: 20, width: 300 },
+      escapeHTML: NO,
+      classNames: [ 'onscreen-help'],
+      value: "_EmailOnscreenHelp".loc()
+    }));
+    childViews.push(this.emailHelpLabel);
     
-    this.passwordLabel = this.createChildView(SC.LabelView.extend({
-      layout: { top: 138, left: 0, width: 85, height: 18 },
+    this.roleLabel = this.createChildView(SC.LabelView.extend({
+      layout: { top: 155, left: 0, width: 85, height: 18 },
       textAlign: SC.ALIGN_RIGHT,
-      value: "_Password:".loc()
+      isVisibleBinding: 'CoreTasks.permissions.canUpdateUserRole',
+      value: "_Role:".loc()
     }));
-    childViews.push(this.passwordLabel);
-    this.passwordField = this.createChildView(SC.TextFieldView.extend({
-      layout: { top: 138, left: 90, height: 20, width: 300 },
-      isPassword: YES,
-      hint: "_PasswordHint".loc(),
-      isPassword: YES,
-      valueBinding: SC.binding('*content.unhashedPassword', this).toLocale()
+    childViews.push(this.roleLabel);
+    this.roleField = this.createChildView(SC.SelectButtonView.extend({
+      layout: { top: 154, left: 90, height: 22, width: 150 },
+      localize: YES,
+      isVisibleBinding: 'CoreTasks.permissions.canUpdateUserRole',
+      objects: this._listRoles(),
+      nameKey: 'name',
+      valueKey: 'value',
+      iconKey: 'icon',
+      valueBinding: SC.binding('*content.role', this)
     }));
-    childViews.push(this.passwordField);
+    childViews.push(this.roleField);
     
     this.set('childViews', childViews);
     
