@@ -54,23 +54,24 @@ Tasks.mainPage = SC.Page.design({
       }),
 
       userNameLabel: SC.LabelView.design(SCUI.ToolTip, {
-        layout: { centerY: -8, height: 18, centerX: -35, width: 225 },
+        layout: { centerY: -8, height: 18, centerX: -35, width: 250 },
         escapeHTML: NO,
         valueBinding: SC.Binding.transform(function(value, binding) {
           if(!value) return '';
-          return "_User:".loc() + '<b>' + value + '</b>';
+          return "_Welcome".loc() + '<b>' + value + '</b>';
         }).from('CoreTasks*currentUser.name'),
         classNames: ['user-attribute-message']
       }),
       userRoleLabel: SC.LabelView.design({
-        layout: { centerY: 8, height: 18, centerX: -35, width: 225 },
+        layout: { centerY: 10, height: 18, centerX: -35, width: 150 },
         escapeHTML: NO,
+        iconBinding: 'CoreTasks*currentUser.icon',
         valueBinding: SC.Binding.transform(function(value, binding) {
           if(!value) return '';
           var role;
           if(!Tasks.softwareMode && value === CoreTasks.USER_ROLE_DEVELOPER) role = "_User".loc();
           else role = value.loc();
-          return "_Role:".loc() + ' <i>' + role + '</i>';
+          return ' <i>' + role + '</i>';
         }).from('CoreTasks*currentUser.role'),
         classNames: ['user-attribute-message']
       }),

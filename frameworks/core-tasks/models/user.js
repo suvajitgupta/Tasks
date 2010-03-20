@@ -110,7 +110,7 @@ CoreTasks.User = CoreTasks.Record.extend({
       case CoreTasks.USER_ROLE_GUEST:
         return 'user-role-guest';
     }
-  }.property().cacheable(),
+  }.property('role').cacheable(),
 
   /**
    * A string summarizing key facets of the Task for display.

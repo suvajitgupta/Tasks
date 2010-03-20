@@ -64,6 +64,10 @@
   text-align: center !important;
 }
 
+.user-attribute-message .icon {
+  top: 0px !important;
+}
+
 .window-title {
   font-size: 14px !important;
   text-align: center !important;

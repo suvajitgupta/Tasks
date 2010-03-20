@@ -212,6 +212,10 @@ body {
   left: 10px !important;
 }
 
+.select-button {
+  border: 1px solid gray !important;
+}
+
 .select-button span label {
   font-size: 11px !important;
   text-align: left !important;
