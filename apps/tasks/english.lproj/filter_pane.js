@@ -15,9 +15,9 @@ sc_require('views/decorated_checkbox');
   
 */
 
-Tasks.filterPane = SC.PanelPane.create({  
+Tasks.filterPane = SC.SheetPane.create({  
   
-  layout: { top: 78, right: 100, height: Tasks.softwareMode? 460 : 355, width: 310 },
+  layout: { right: 100, height: Tasks.softwareMode? 460 : 355, width: 310 },
   classNames: ['filter-pane'],
   
   contentView: SC.View.design({
