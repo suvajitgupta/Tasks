@@ -15,11 +15,11 @@ CoreTasks.Watch = CoreTasks.Record.extend({
   /**
    * Refers to task being watched.
    */
-  taskId: SC.Record.attr(Number),
+  taskId: SC.Record.attr(String),
 
   /**
    * Refers to user who is watching.
    */
-  userId: SC.Record.attr(Number)
+  userId: SC.Record.attr(String)
 
 });

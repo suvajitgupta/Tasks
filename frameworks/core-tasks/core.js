@@ -159,8 +159,8 @@ CoreTasks = SC.Object.create({
     var watchesCount = this.allWatches.get('length');
     for(var i = 0; i < watchesCount; i++) {
       var watch = this.allWatches.objectAt(i);
-      if(('' + watch.get('userId')) !== currentUserId) continue;
-      if(('' + watch.get('taskId')) === task.get('id')) return CoreTasks.TASK_WATCH_ON;
+      if(watch.get('userId') !== currentUserId) continue;
+      if(watch.get('taskId') === task.get('id')) return CoreTasks.TASK_WATCH_ON;
     }
     return CoreTasks.TASK_WATCH_OFF;
   },

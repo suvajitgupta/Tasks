@@ -73,7 +73,7 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
             // Identify/remove any records that have been deleted on server but exist in the store
             var idsOnServer = [];
             for(var i = 0, len = records.length; i < len; i++) {
-              idsOnServer[i] = '' + records[i].id;
+              idsOnServer[i] = records[i].id;
             }
             var idsInStore = recordType.storeKeysById();
             var deletedStoreKeys = [];
@@ -392,6 +392,6 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
 });
 
 // Create the main store with the appropriate data source
-CoreTasks.remoteDataSource = false; // Set to false to get Fixtures
+CoreTasks.remoteDataSource = true; // Set to false to get Fixtures
 CoreTasks.get('store').from(CoreTasks.remoteDataSource? CoreTasks.RemoteDataSource.create() : SC.FixturesDataSource.create());
 console.log('Initialized ' + (CoreTasks.remoteDataSource? 'remote' : 'fixtures') + ' data source.');

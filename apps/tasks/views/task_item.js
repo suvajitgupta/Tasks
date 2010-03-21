@@ -398,7 +398,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           title: "_Watch".loc(),
           icon: sc_static('blank'),
           isEnabled: YES,
-          target: 'Tasks.tasksController',
+          target: 'Tasks',
           action: 'watchTasks'
         });
       }
@@ -407,7 +407,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           title: "_Unwatch".loc(),
           icon: sc_static('blank'),
           isEnabled: YES,
-          target: 'Tasks.tasksController',
+          target: 'Tasks',
           action: 'unwatchTasks'
         });
       }

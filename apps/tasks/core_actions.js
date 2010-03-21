@@ -198,13 +198,19 @@ Tasks.mixin({
       Tasks.sourcesController.propertyDidChange('arrangedObjects');
     }
     
-    // Now load all of the watches.
-    if (!CoreTasks.get('allWatches')) {
-      CoreTasks.set('allWatches', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Watch })));
-      this.watchesController.set('content', CoreTasks.get('allWatches'));
-    } else {
-      CoreTasks.get('allWatches').refresh();
+    if(CoreTasks.canServerSendNotifications) {
+      // Now load all of the watches.
+      if (!CoreTasks.get('allWatches')) {
+        CoreTasks.set('allWatches', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Watch })));
+        this.watchesController.set('content', CoreTasks.get('allWatches'));
+      } else {
+        CoreTasks.get('allWatches').refresh();
+      }
     }
+    else {
+      this.dataLoadSuccess();
+    }
+    
   },
 
   /**
@@ -214,7 +220,7 @@ Tasks.mixin({
 
     // console.log('DEBUG: watchesLoadSuccess()');
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
-    serverMessage.set('value', serverMessage.get('value') + "_WatchesLoaded".loc() + new Date().format('hh:mm a'));
+    serverMessage.set('value', serverMessage.get('value') + "_WatchesLoaded".loc());
 
     this.dataLoadSuccess();
   },
@@ -224,6 +230,9 @@ Tasks.mixin({
    */
   dataLoadSuccess: function() {
     // console.log('DEBUG: dataLoadSuccess()');
+    var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
+    serverMessage.set('value', serverMessage.get('value') + "_at".loc() + new Date().format('hh:mm a'));
+
     switch (this.state.a) {
       case 3:
         if(CoreTasks.loginTime) {
@@ -423,7 +432,7 @@ Tasks.mixin({
   },
   
   /**
-   * Delete selected project in master projects list, asking for confirmation if project has tasks.
+  * Delete selected tasks, asking for confirmation first.
    */
   deleteProject: function() {
     
@@ -555,6 +564,9 @@ Tasks.mixin({
         
   },
 
+  /**
+   * Delete selected tasks, asking for confirmation first.
+   */
   deleteTask: function() {
     
     if(!Tasks.tasksController.isDeletable()) {
@@ -586,6 +598,28 @@ Tasks.mixin({
         })
       );
 
+    }
+  },
+  
+  /**
+   * Watch selected tasks, if they are not already being watched.
+   */
+  watchTasks: function() {
+    var tc = this.get('tasksController');
+    var sel = tc.get('selection');
+    var len = sel? sel.length() : 0;
+    if (len > 0) {
+      var currentUserId = CoreTasks.getPath('currentUser.id');
+      var context = {};
+      for (var i = 0; i < len; i++) {
+        // Get and watch each selected task.
+        var task = sel.nextObject(i, null, context);
+        if(!CoreTasks.isCurrentUserWatchingTask(task)) {
+          var watch = CoreTasks.createRecord(CoreTasks.Watch, { taskId: task.get('id'), userId: currentUserId });
+        }  console.log('DEBUG: ' + watch);
+        
+      }
+      if(CoreTasks.get('autoSave')) Tasks.saveData();
     }
   },
   

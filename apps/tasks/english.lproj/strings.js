@@ -209,10 +209,11 @@ SC.stringsFor('English', {
   "_AutoSaveTooltip": "Check to automatially save changes to the server (otherwise you have to manually press the \"Save\" button)",
   "_SendNotifications": "Notifications",
   "_SendNotificationsTooltip": "Check to have server send Email notifications when tasks are created/updated/deleted",
-  "_UsersLoaded": "Loaded users, ",
-  "_TasksLoaded": "tasks, ",
-  "_ProjectsLoaded": " projects, ",
-  "_WatchesLoaded": " watches at ",
+  "_UsersLoaded": "Loaded users",
+  "_TasksLoaded": ", tasks",
+  "_ProjectsLoaded": ", projects",
+  "_WatchesLoaded": ", watches",
+  "_at": " at ",
   "_SaveMessage": "Data last saved "
     
 });
