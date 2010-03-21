@@ -231,7 +231,7 @@ body {
   background: none !important;
 }
 
-.select-button span label {
+.sc-text-field-view, .select-button span label {
   font-size: 11px !important;
 }
 
