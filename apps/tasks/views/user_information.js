@@ -85,7 +85,7 @@ Tasks.UserInformationView = SC.View.extend(
     this.emailHelpLabel =  this.createChildView(SC.LabelView.design({
       layout: { top: 131, left: 90, height: 20, width: 300 },
       escapeHTML: NO,
-      classNames: [ 'onscreen-help'],
+      classNames: ['onscreen-help'],
       value: "_EmailOnscreenHelp".loc()
     }));
     childViews.push(this.emailHelpLabel);
@@ -99,7 +99,7 @@ Tasks.UserInformationView = SC.View.extend(
     childViews.push(this.roleLabel);
     this.roleField = this.createChildView(SC.SelectButtonView.extend({
       layout: { top: 159, left: 90, height: 24, width: 150 },
-      classNames: [ 'capsule'],
+      classNames: ['square'],
       localize: YES,
       isVisibleBinding: 'CoreTasks.permissions.canUpdateUserRole',
       objects: this._listRoles(),
