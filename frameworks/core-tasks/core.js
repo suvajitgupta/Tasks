@@ -154,13 +154,14 @@ CoreTasks = SC.Object.create({
    * @returns {Boolean} CoreTasks.TASK_WATCH_ON if watching, CoreTasks.TASK_WATCH_OFF otherwise.
    */
   isCurrentUserWatchingTask: function(task) {
-    if (!this.allWatches) return [];
-    var currentUserId = this.getPath('currentUser.id');
-    var watchesCount = this.allWatches.get('length');
-    for(var i = 0; i < watchesCount; i++) {
-      var watch = this.allWatches.objectAt(i);
-      if(watch.get('userId') !== currentUserId) continue;
-      if(watch.get('taskId') === task.get('id')) return CoreTasks.TASK_WATCH_ON;
+    if (this.allWatches) {
+      var currentUserId = this.getPath('currentUser.id');
+      var watchesCount = this.allWatches.get('length');
+      for(var i = 0; i < watchesCount; i++) {
+        var watch = this.allWatches.objectAt(i);
+        if(watch.get('userId') !== currentUserId) continue;
+        if(watch.get('taskId') === task.get('id')) return CoreTasks.TASK_WATCH_ON;
+      }
     }
     return CoreTasks.TASK_WATCH_OFF;
   },
@@ -194,6 +195,7 @@ CoreTasks = SC.Object.create({
    * @returns {Boolean} true: if connected to a server that supports notifications, false otherwise
    */
   canServerSendNotifications: function() {
+    if(!CoreTasks.get('remoteDataSource')) return true; // to assist with testing via fixtures
     return !SC.none(this.getPath('currentUser.authToken')); // non-null for GAE
   }.property('currentUser').cacheable(),
   

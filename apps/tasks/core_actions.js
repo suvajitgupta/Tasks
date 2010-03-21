@@ -198,7 +198,7 @@ Tasks.mixin({
       Tasks.sourcesController.propertyDidChange('arrangedObjects');
     }
     
-    if(CoreTasks.canServerSendNotifications) {
+    if(CoreTasks.get('canServerSendNotifications')) {
       // Now load all of the watches.
       if (!CoreTasks.get('allWatches')) {
         CoreTasks.set('allWatches', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Watch })));
@@ -616,7 +616,8 @@ Tasks.mixin({
         var task = sel.nextObject(i, null, context);
         if(!CoreTasks.isCurrentUserWatchingTask(task)) {
           var watch = CoreTasks.createRecord(CoreTasks.Watch, { taskId: task.get('id'), userId: currentUserId });
-        }  console.log('DEBUG: ' + watch);
+          console.log('DEBUG: watch = ' + watch);
+        }
         
       }
       if(CoreTasks.get('autoSave')) Tasks.saveData();

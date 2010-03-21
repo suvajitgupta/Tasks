@@ -73,7 +73,7 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
             // Identify/remove any records that have been deleted on server but exist in the store
             var idsOnServer = [];
             for(var i = 0, len = records.length; i < len; i++) {
-              idsOnServer[i] = records[i].id;
+              idsOnServer[i] = '' + records[i].id;
             }
             var idsInStore = recordType.storeKeysById();
             var deletedStoreKeys = [];

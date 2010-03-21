@@ -25,7 +25,7 @@ CoreTasks.Record = SC.Record.extend({
    * This is needed so that the client is able to recognize a persisted record after it's ID has
    * been properly set by the server.
    */
-  _id: SC.Record.attr(String),
+  _id: SC.Record.attr(Number),
 
   // make id() cacheable on storeKey
   id: function() {

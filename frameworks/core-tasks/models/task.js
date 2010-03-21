@@ -171,7 +171,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
   /**
    * Refers to the project that this task is allocated to.
    */
-  projectId: SC.Record.attr(String),
+  projectId: SC.Record.attr(Number),
 
   /**
    *  This computed property buffers changes to the projectId field.
@@ -242,7 +242,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
   /**
    * The user who creates the task.
    */
-  submitterId: SC.Record.attr(String),
+  submitterId: SC.Record.attr(Number),
 
   submitter: function(key, value) {
     if (value !== undefined) {
@@ -282,7 +282,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
   /**
   * The user who is assigned to complete the task.
    */
-  assigneeId: SC.Record.attr(String),
+  assigneeId: SC.Record.attr(Number),
   
   assignee: function(key, value){
     if (value !== undefined) {

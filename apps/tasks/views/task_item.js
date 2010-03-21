@@ -389,27 +389,29 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         }
       }
       
-      var taskWatch = Tasks.tasksController.get('taskWatch');
-      ret.push({
-        isSeparator: YES
-      });
-      if(taskWatch !== CoreTasks.TASK_WATCH_ON) {
+      if(CoreTasks.get('canServerSendNotifications')) {
+        var taskWatch = Tasks.tasksController.get('taskWatch');
         ret.push({
-          title: "_Watch".loc(),
-          icon: sc_static('blank'),
-          isEnabled: YES,
-          target: 'Tasks',
-          action: 'watchTasks'
+          isSeparator: YES
         });
-      }
-      if(taskWatch !== CoreTasks.TASK_WATCH_OFF) {
-        ret.push({
-          title: "_Unwatch".loc(),
-          icon: sc_static('blank'),
-          isEnabled: YES,
-          target: 'Tasks',
-          action: 'unwatchTasks'
-        });
+        if(taskWatch !== CoreTasks.TASK_WATCH_ON) {
+          ret.push({
+            title: "_Watch".loc(),
+            icon: sc_static('blank'),
+            isEnabled: YES,
+            target: 'Tasks',
+            action: 'watchTasks'
+          });
+        }
+        if(taskWatch !== CoreTasks.TASK_WATCH_OFF) {
+          ret.push({
+            title: "_Unwatch".loc(),
+            icon: sc_static('blank'),
+            isEnabled: YES,
+            target: 'Tasks',
+            action: 'unwatchTasks'
+          });
+        }
       }
       
     }
