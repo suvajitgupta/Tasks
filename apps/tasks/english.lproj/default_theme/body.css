@@ -218,9 +218,17 @@ body {
   left: 10px !important;
 }
 
-.select-button {
-  border: 1px solid gray !important;
-  background-color: #DDD !important;
+/*
+// FIXME: [SC] hacks to turn off blue ring highlight around select button with focus
+*/
+.sc-theme .sc-button-view.popup.focus .focus-ring .focus-middle,
+.sc-theme .sc-button-view.square.focus .focus-ring .focus-left,
+.sc-theme .sc-button-view.dropdown.focus .focus-ring .focus-left,
+.sc-theme .sc-button-view.popup.focus .focus-ring .focus-left,
+.sc-theme .sc-button-view.square.focus .focus-ring .focus-right,
+.sc-theme .sc-button-view.dropdown.focus .focus-ring .focus-right,
+.sc-theme .sc-button-view.popup.focus .focus-ring .focus-right {
+  background: none !important;
 }
 
 .select-button span label {

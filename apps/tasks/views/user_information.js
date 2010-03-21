@@ -91,14 +91,15 @@ Tasks.UserInformationView = SC.View.extend(
     childViews.push(this.emailHelpLabel);
     
     this.roleLabel = this.createChildView(SC.LabelView.extend({
-      layout: { top: 160, left: 0, width: 85, height: 18 },
+      layout: { top: 162, left: 0, width: 85, height: 18 },
       textAlign: SC.ALIGN_RIGHT,
       isVisibleBinding: 'CoreTasks.permissions.canUpdateUserRole',
       value: "_Role:".loc()
     }));
     childViews.push(this.roleLabel);
     this.roleField = this.createChildView(SC.SelectButtonView.extend({
-      layout: { top: 159, left: 90, height: 22, width: 150 },
+      layout: { top: 159, left: 90, height: 24, width: 150 },
+      classNames: [ 'capsule'],
       localize: YES,
       isVisibleBinding: 'CoreTasks.permissions.canUpdateUserRole',
       objects: this._listRoles(),
