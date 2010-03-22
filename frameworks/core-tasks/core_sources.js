@@ -392,6 +392,6 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
 });
 
 // Create the main store with the appropriate data source
-CoreTasks.remoteDataSource = true; // Set to false to get Fixtures
+CoreTasks.remoteDataSource = false; // Set to false to get Fixtures
 CoreTasks.get('store').from(CoreTasks.remoteDataSource? CoreTasks.RemoteDataSource.create() : SC.FixturesDataSource.create());
 console.log('Initialized ' + (CoreTasks.remoteDataSource? 'remote' : 'fixtures') + ' data source.');

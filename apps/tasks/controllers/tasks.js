@@ -114,7 +114,6 @@ Tasks.tasksController = SC.TreeController.create(
   type: function(key, value) {
     var sel = this.get('selection');
     if(!sel || sel.get('length') === 0) return false;
-    var firstType = null;
     if (value !== undefined) {
       sel.forEach(function(task) {
         var type = task.get('type');
@@ -122,6 +121,7 @@ Tasks.tasksController = SC.TreeController.create(
       });
       if(CoreTasks.get('autoSave')) Tasks.saveData();
     } else {
+      var firstType = null;
       sel.forEach(function(task) {
         var type = task.get('type');
         if(!firstType) firstType = value = type;
@@ -146,8 +146,8 @@ Tasks.tasksController = SC.TreeController.create(
   priority: function(key, value) {
     var sel = this.get('selection');
     if(!sel || sel.get('length') === 0) return false;
-    var firstPriority = null;
     if (value !== undefined) {
+      var firstPriority = null;
       sel.forEach(function(task) {
         var priority = task.get('priority');
         if(priority !== value) task.set('priority', value);
@@ -178,7 +178,6 @@ Tasks.tasksController = SC.TreeController.create(
   developmentStatusWithValidation: function(key, value) {
     var sel = this.get('selection');
     if(!sel || sel.get('length') === 0) return false;
-    var firstDevelopmentStatusWithValidation = null;
     if (value !== undefined) {
       sel.forEach(function(task) {
         var developmentStatusWithValidation = task.get('developmentStatusWithValidation');
@@ -186,6 +185,7 @@ Tasks.tasksController = SC.TreeController.create(
       });
       if(CoreTasks.get('autoSave')) Tasks.saveData();
     } else {
+      var firstDevelopmentStatusWithValidation = null;
       sel.forEach(function(task) {
         var developmentStatusWithValidation = task.get('developmentStatusWithValidation');
         if(!firstDevelopmentStatusWithValidation) firstDevelopmentStatusWithValidation = value = developmentStatusWithValidation;
@@ -214,7 +214,6 @@ Tasks.tasksController = SC.TreeController.create(
   validation: function(key, value) {
     var sel = this.get('selection');
     if(!sel || sel.get('length') === 0) return false;
-    var firstValidation = null;
     if (value !== undefined) {
       sel.forEach(function(task) {
         var validation = task.get('validation');
@@ -222,6 +221,7 @@ Tasks.tasksController = SC.TreeController.create(
       });
       if(CoreTasks.get('autoSave')) Tasks.saveData();
     } else {
+      var firstValidation = null;
       sel.forEach(function(task) {
         var validation = task.get('validation');
         if(!firstValidation) firstValidation = value = validation;
@@ -243,33 +243,17 @@ Tasks.tasksController = SC.TreeController.create(
     this.validation('validation', CoreTasks.TASK_VALIDATION_FAILED);
   },
   
-  taskWatch: function(key, value) {
+  watch: function() {
     var sel = this.get('selection');
     if(!sel || sel.get('length') === 0) return false;
-    var firstTaskWatch = null;
-    if (value !== undefined) {
-      sel.forEach(function(task) {
-        var taskWatch = CoreTasks.isCurrentUserWatchingTask(task);
-        if(taskWatch !== value) task.set('taskWatch', value);
-      });
-      if(CoreTasks.get('autoSave')) Tasks.saveData();
-    } else {
-      sel.forEach(function(task) {
-        var taskWatch = CoreTasks.isCurrentUserWatchingTask(task);
-        if(!firstTaskWatch) firstTaskWatch = value = taskWatch;
-        else if(taskWatch !== firstTaskWatch) value = null;
-      });
-    }
+    var value, firstWatch = null;
+    sel.forEach(function(task) {
+      var taskWatch = CoreTasks.isCurrentUserWatchingTask(task);
+      if(!firstWatch) firstWatch = value = taskWatch;
+      else if(taskWatch !== firstWatch) value = null;
+    });
     return value;
   }.property('selection').cacheable(),
-  
-  watchTasks: function() {
-    this.taskWatch('taskWatch', CoreTasks.TASK_WATCH_ON);
-  },
-  
-  unwatchTasks: function() {
-    this.taskWatch('taskWatch', CoreTasks.TASK_WATCH_OFF);
-  },
   
   editNewTask: function(task){
     var listView = Tasks.getPath('mainPage.mainPane.tasksList');

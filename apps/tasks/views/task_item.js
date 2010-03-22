@@ -390,17 +390,17 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       }
       
       if(CoreTasks.get('canServerSendNotifications')) {
-        var taskWatch = Tasks.tasksController.get('taskWatch');
         ret.push({
           isSeparator: YES
         });
+        var taskWatch = Tasks.tasksController.get('watch');
         if(taskWatch !== CoreTasks.TASK_WATCH_ON) {
           ret.push({
             title: "_Watch".loc(),
             icon: sc_static('blank'),
             isEnabled: YES,
             target: 'Tasks',
-            action: 'watchTasks'
+            action: 'watchTask'
           });
         }
         if(taskWatch !== CoreTasks.TASK_WATCH_OFF) {
@@ -409,7 +409,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
             icon: sc_static('blank'),
             isEnabled: YES,
             target: 'Tasks',
-            action: 'unwatchTasks'
+            action: 'unwatchTask'
           });
         }
       }

@@ -150,7 +150,7 @@ CoreTasks = SC.Object.create({
   /**
    * Check if current user is watching a given task.
    *
-   * @param {String} task.
+   * @param {Object} task.
    * @returns {Boolean} CoreTasks.TASK_WATCH_ON if watching, CoreTasks.TASK_WATCH_OFF otherwise.
    */
   isCurrentUserWatchingTask: function(task) {
@@ -159,11 +159,30 @@ CoreTasks = SC.Object.create({
       var watchesCount = this.allWatches.get('length');
       for(var i = 0; i < watchesCount; i++) {
         var watch = this.allWatches.objectAt(i);
-        if(watch.get('userId') !== currentUserId) continue;
-        if(watch.get('taskId') === task.get('id')) return CoreTasks.TASK_WATCH_ON;
+        if(('' + watch.get('userId')) !== currentUserId) continue;
+        if(('' + watch.get('taskId')) === task.get('id')) return CoreTasks.TASK_WATCH_ON;
       }
     }
     return CoreTasks.TASK_WATCH_OFF;
+  },
+
+  /**
+   * Get watch for current user on a given task.
+   *
+   * @param {Object} task.
+   * @returns {Object} watch (if exists), or null (if not).
+   */
+  getCurrentUserTaskWatch: function(task) {
+    if (this.allWatches)  {
+      var currentUserId = this.getPath('currentUser.id');
+      var watchesCount = this.allWatches.get('length');
+      for(var i = 0; i < watchesCount; i++) {
+        var watch = this.allWatches.objectAt(i);
+        if(('' + watch.get('userId')) !== currentUserId) continue;
+        if(('' + watch.get('taskId')) === task.get('id')) return watch;
+      }
+    }
+    return null;
   },
 
   // The resource path format for the remote server.
@@ -333,6 +352,8 @@ CoreTasks = SC.Object.create({
    * Persistence must occur in a precise order to maintain entity associations.
    */
   saveChanges: function() {
+    if(!this.get('remoteDataSource')) return; // nothing to do in fixtures mode
+    
     if (this.get('saveMode') & CoreTasks.MODE_SAVING) {
       throw 'Error saving data: Save already in progress.';
     }

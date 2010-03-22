@@ -20,7 +20,7 @@ for (var i = 0; i < 25; i++) {
   if(taskHash.developmentStatus === CoreTasks.TASK_STATUS_DONE) {
     taskHash.validation = CoreTasks.taskValidationsAllowed[i%3];
   }
-  taskHash.projectId = '' + taskHash.id%5 + 1;
+  if(i > 5) taskHash.projectId = taskHash.id%5 + 1;
   taskHash.submitterId = (i%2? 1 : 4);
   taskHash.assigneeId = taskHash.id%3 + 1;
   if (i%2) {

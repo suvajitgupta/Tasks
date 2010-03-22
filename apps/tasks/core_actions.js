@@ -602,9 +602,9 @@ Tasks.mixin({
   },
   
   /**
-   * Watch selected tasks, if they are not already being watched.
+   * Watch selected tasks (if they are not already being watched).
    */
-  watchTasks: function() {
+  watchTask: function() {
     var tc = this.get('tasksController');
     var sel = tc.get('selection');
     var len = sel? sel.length() : 0;
@@ -616,9 +616,27 @@ Tasks.mixin({
         var task = sel.nextObject(i, null, context);
         if(!CoreTasks.isCurrentUserWatchingTask(task)) {
           var watch = CoreTasks.createRecord(CoreTasks.Watch, { taskId: task.get('id'), userId: currentUserId });
-          console.log('DEBUG: watch = ' + watch);
         }
         
+      }
+      if(CoreTasks.get('autoSave')) Tasks.saveData();
+    }
+  },
+  
+  /**
+   * Unwatch selected tasks (if they are being watched).
+   */
+  unwatchTask: function() {
+    var tc = this.get('tasksController');
+    var sel = tc.get('selection');
+    var len = sel? sel.length() : 0;
+    if (len > 0) {
+      var context = {};
+      for (var i = 0; i < len; i++) {
+        // Get and unwatch each selected task.
+        var task = sel.nextObject(i, null, context);
+        var watch = CoreTasks.getCurrentUserTaskWatch(task);
+        if(watch) watch.destroy();
       }
       if(CoreTasks.get('autoSave')) Tasks.saveData();
     }
