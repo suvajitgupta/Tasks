@@ -40,10 +40,16 @@ Tasks.usersController = SC.ArrayController.create(SCUI.StatusChanged,
           else {
             editableUsers = [];
             var searchPattern = new RegExp(pattern, 'i');
+            var emailSearch = (pattern.indexOf('@') != -1);
             var numUsers = users.get('length');
             for (var j=0; j<numUsers; j++) {
               user = users.objectAt(j);
-              if(searchPattern.exec(user.get('name')) || searchPattern.exec(user.get('loginName'))) editableUsers.push(user);
+              if(emailSearch) {
+                if(searchPattern.exec(user.get('email')) )editableUsers.push(user);
+              }
+              else {
+                if(searchPattern.exec(user.get('name')) || searchPattern.exec(user.get('loginName'))) editableUsers.push(user);
+              }
             }
           }
         }

@@ -189,8 +189,8 @@ SC.stringsFor('English', {
   "_Signup": "Signup",
   "_UserManager": "User Manager",
   "_DisplayedUsers": " users displayed, ",
-  "_UserNamePatternSelectionHint": "User name pattern",
-  "_UserNamePatternSelectionTooltip": "Specify pattern to match all or part of users' full/login name",
+  "_UserSearchPatternSelectionHint": "User name or email pattern",
+  "_UserSearchPatternSelectionTooltip": "Specify pattern to match all or part of users' full/login name or email",
   
   // Status Bar strings
   "_selected": " selected",
