@@ -89,23 +89,23 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' background-color: white;\n' +
 ' border: 1px solid gray;\n' +
 '}\n' +
-'.not-loaded {\n' +
+'.assignee-not-loaded {\n' +
 ' color: white;\n' +
 ' background-color: #444;\n' +
 ' border: 1px solid #444;\n' +
 '}\n' +
-'.properly-loaded {\n' +
+'.assignee-properly-loaded {\n' +
 ' color: white;\n' +
 ' background-color: #36F;\n' +
 ' border: 1px solid #36F;\n' +
 '}\n' +
-'.passed, .under-loaded {\n' +
+'.passed, .assignee-under-loaded {\n' +
 ' color: white;\n' +
 ' background-color: #363;\n' +
 ' border: 1px solid #363;\n' +
 ' opacity: 0.85;\n' +
 '}\n' +
-'.failed, .overloaded {\n' +
+'.failed, .assignee-overloaded {\n' +
 ' color: white;\n' +
 ' background-color: #C33;\n' +
 ' border: 1px solid #C33;\n' +
@@ -162,6 +162,9 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 '}\n' +
 '.total {\n' +
 ' right: 175px;\n' +
+'}\n' +
+'.warning {\n' +
+' background-color: yellow !important;\n' +
 '}\n' +
 '</style>\n' +
 '</head>\n' +
@@ -275,7 +278,7 @@ Tasks.exportDataController = SC.ObjectController.create(
    */
   _exportDisplayedData: function(format) {
     
-    var ret = '';
+    var ret = '', warning;
     var tasksTree = Tasks.tasksController.get('content');
     var assignmentNodes = tasksTree.get('treeItemChildren');
     var assigneesCount = assignmentNodes.get('length');
@@ -286,10 +289,10 @@ Tasks.exportDataController = SC.ObjectController.create(
       if(format === 'HTML') {
         ret += '<h2 class="';
         switch(assignmentNode.get('loading')) {
-          case CoreTasks.USER_NOT_LOADED: ret += 'not-loaded'; break;
-          case CoreTasks.USER_UNDER_LOADED: ret += 'under-loaded'; break;
-          case CoreTasks.USER_PROPERLY_LOADED: ret += 'properly-loaded'; break;
-          case CoreTasks.USER_OVER_LOADED: ret += 'overloaded'; break;
+          case CoreTasks.USER_NOT_LOADED: ret += 'assignee-not-loaded'; break;
+          case CoreTasks.USER_UNDER_LOADED: ret += 'assignee-under-loaded'; break;
+          case CoreTasks.USER_PROPERLY_LOADED: ret += 'assignee-properly-loaded'; break;
+          case CoreTasks.USER_OVER_LOADED: ret += 'assignee-overloaded'; break;
         }
         ret += '">';
       }
@@ -297,9 +300,11 @@ Tasks.exportDataController = SC.ObjectController.create(
       ret += assignmentNode.get('displayName').loc();
       if(format === 'HTML') {
         var finishedEffort = assignmentNode.get('finishedEffort');
-        if(finishedEffort) ret += '&nbsp;<span class="total">' + finishedEffort + '</span>';
-        var displayEffort = assignmentNode.get('displayEffort');
-        if(displayEffort) ret += '&nbsp;<span class="time">' + displayEffort + '</span>';
+        warning = (finishedEffort.match(/\-/) !== null);
+        if(finishedEffort) ret += '&nbsp;<span class="total' + (warning? ' warning' : '') + '">' + finishedEffort + '</span>';
+        var leftEffort = assignmentNode.get('displayEffort');
+        warning = (leftEffort.match(/\?$/) !== null);
+        if(leftEffort) ret += '&nbsp;<span class="time' + (warning? ' warning' : '') + '">' + leftEffort + '</span>';
         ret += '</h2>';
       }
       else ret += ' # ' + "_Has".loc() + tasksCount + "_tasks".loc();
