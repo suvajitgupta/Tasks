@@ -352,7 +352,10 @@ CoreTasks = SC.Object.create({
    * Persistence must occur in a precise order to maintain entity associations.
    */
   saveChanges: function() {
-    if(!this.get('remoteDataSource')) return; // nothing to do in fixtures mode
+    if(!this.get('remoteDataSource')) { // nothing to do in fixtures mode
+      this.set('needsSave', NO);
+      return;
+    }
     
     if (this.get('saveMode') & CoreTasks.MODE_SAVING) {
       throw 'Error saving data: Save already in progress.';

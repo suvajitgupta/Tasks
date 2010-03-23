@@ -243,6 +243,7 @@ Tasks.tasksController = SC.TreeController.create(
     this.validation('validation', CoreTasks.TASK_VALIDATION_FAILED);
   },
   
+  watches: null,
   watch: function() {
     var sel = this.get('selection');
     if(!sel || sel.get('length') === 0) return false;
@@ -253,7 +254,7 @@ Tasks.tasksController = SC.TreeController.create(
       else if(taskWatch !== firstWatch) value = null;
     });
     return value;
-  }.property('selection').cacheable(),
+  }.property('selection', 'watches').cacheable(),
   
   editNewTask: function(task){
     var listView = Tasks.getPath('mainPage.mainPane.tasksList');

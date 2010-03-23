@@ -12,6 +12,10 @@
 Tasks.watchesController = SC.ArrayController.create(SCUI.StatusChanged,
 /** @scope Tasks.watchesController.prototype */ {
   
+  _contentDidChange: function() {
+    Tasks.tasksController.propertyDidChange('watches');
+  }.observes('[]'),
+  
   contentStatusDidChange: function(status){
     // console.log('DEBUG: watchesController ' + status);
     if (status & SC.Record.READY){

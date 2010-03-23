@@ -390,9 +390,12 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       }
       
       if(CoreTasks.get('canServerSendNotifications')) {
-        ret.push({
-          isSeparator: YES
-        });
+        if(needsSeparator) {
+          ret.push({
+            isSeparator: YES
+          });
+        }
+        needsSeparator = true;
         var taskWatch = Tasks.tasksController.get('watch');
         if(taskWatch !== CoreTasks.TASK_WATCH_ON) {
           ret.push({

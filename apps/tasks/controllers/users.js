@@ -45,7 +45,7 @@ Tasks.usersController = SC.ArrayController.create(SCUI.StatusChanged,
             for (var j=0; j<numUsers; j++) {
               user = users.objectAt(j);
               if(emailSearch) {
-                if(searchPattern.exec(user.get('email')) )editableUsers.push(user);
+                if(searchPattern.exec(user.get('email'))) editableUsers.push(user);
               }
               else {
                 if(searchPattern.exec(user.get('name')) || searchPattern.exec(user.get('loginName'))) editableUsers.push(user);
