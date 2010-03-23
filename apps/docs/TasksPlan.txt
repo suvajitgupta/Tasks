@@ -96,6 +96,7 @@ v Add hover over tooltip for assignees to show how many Tasks they have and to e
 - Beta: Support Task Copy ID/Name and Copy Link Location (URL with "Route") to clipboard [SG] $Feature @Risky
 v Add Task context menu with options: Add, Duplicate, Delete; All Task Attributes; Copy ID/Name, Copy Link [SG] $Feature @Done %Passed
 ^ Beta: Add ability to "Watch" Tasks and get Email Notifications after Task changes [SG] <JH2> $Feature @Active
+- Support "Find & Replace" within Task names  (operating only on items in Tasks Detail view)[SG] $Feature
 - Allow Task names to embed metacharacters by enclosing in quotes [SG] $Feature
 - Out of Scope: Add support for nested Tasks and Task tagging $Feature
 | Use "Clustering" approach described in Help instead
@@ -152,6 +153,9 @@ v Add hotkeys for common operations (like Add/Duplcate Tasks and Save) [EG] <SG>
 | Email notifications
 | Percent or Threshold (in days) for Assignee loading determination
 - Apply application settings/state from last login saved using HTML5 storage [SG] <MB> $Feature
+- Support archiving of entities to manage screen clutter and optimize performance [SG] $Feature
+| Archived Projects/Tasks would be loaded/displayed only on demand
+| Archived Users cannot be made Assignees/Submitters going forward
 - Support Undo/Redo via toolbar buttons and hotkeys [SG] <SE> $Feature
 - Support disconnected operation and synchronization after network reconnection using SproutDB [SG] <SE> $Feature
 

@@ -179,6 +179,8 @@ SC.stringsFor('English', {
   "_AssigneeUnderLoaded": "Under Loaded",
   "_AssigneeProperlyLoaded": "Properly Loaded",
   "_AssigneeOverloaded": "Overloaded",
+  "_FinishedRangeWarning": ", finished effort includes range",
+  "_IncompleteEffortWarning": ", total effort incomplete",
   "_GuestSignup": "Guest Signup",
   "_Email:": "Email:",
   "_EmailOnscreenHelp": "Specify to receive Email notifications",

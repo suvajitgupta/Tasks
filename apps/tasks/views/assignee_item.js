@@ -34,9 +34,9 @@ Tasks.AssigneeItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       var tasksCount = content.get('tasksCount');
       var assigneeTooltip = "_Has".loc() + tasksCount + "_tasks".loc();
       
-      assigneeTooltip += ' (';
       var loading = content.get('loading');
       if(loading) {
+        assigneeTooltip += ' (';
         if(loading === CoreTasks.USER_NOT_LOADED) {
           assigneeTooltip += "_AssigneeNotLoaded".loc();
           context.addClass('assignee-not-loaded');
@@ -53,8 +53,19 @@ Tasks.AssigneeItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
           assigneeTooltip += "_AssigneeOverloaded".loc();
           context.addClass('assignee-over-loaded');
         }
+        assigneeTooltip += ')';
       }
-      assigneeTooltip += ')';
+      
+      var finishedEffort = content.get('finishedEffort');
+      if(finishedEffort.match(/\-/)) {
+        assigneeTooltip += "_FinishedRangeWarning".loc();
+        context.addClass('finishedRangeWarning');
+      }
+      var leftEffort = content.get('displayEffort');
+      if(leftEffort.match(/\?$/)) {
+        assigneeTooltip += "_IncompleteEffortWarning".loc();
+        context.addClass('incompleteEffortWarning');
+      }
       
       if (Tasks.assignmentsController.get('displayMode') === Tasks.DISPLAY_MODE_TEAM) {
         var riskyTasksCount = content.get('riskyTasksCount');
