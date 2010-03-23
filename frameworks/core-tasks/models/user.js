@@ -131,7 +131,7 @@ CoreTasks.User = CoreTasks.Record.extend({
   },
   
   /**
-   * Custom destroy to clean out task submitter/assignee for this user.
+   * Custom destroy to clear out task submitter/assignee and delete any watches for this user.
    */
   destroy: function() {
     // console.log('DEBUG: destroying User: ' + this.get('name'));
@@ -160,6 +160,18 @@ CoreTasks.User = CoreTasks.Record.extend({
       });
       assignedTasks.destroy();
       assignedTasksQuery = null;
+    }
+    
+    var watchesQuery = SC.Query.local(CoreTasks.Watch, "userId=%@".fmt(id));
+    watchesQuery.set('initialServerFetch', NO);
+    var watches = store.find(watchesQuery);
+    if (watches) {
+      watches.forEach(function(watch) {
+        console.log('DEBUG: deleting watch ' + watch);
+        watch.destroy();
+      });
+      watches.destroy();
+      watchesQuery = null;
     }
     
   },

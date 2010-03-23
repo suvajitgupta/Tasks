@@ -445,8 +445,31 @@ CoreTasks.Task = CoreTasks.Record.extend({
     ret += '\n';
     return ret;
     
-  }
+  },
   
+  /**
+   * Custom destroy to delete any watches for this task.
+   */
+  destroy: function() {
+    sc_super();
+
+    var id = this.get('id');
+    var store = this.get('store');
+    
+    var watchesQuery = SC.Query.local(CoreTasks.Watch, "taskId=%@".fmt(id));
+    watchesQuery.set('initialServerFetch', NO);
+    var watches = store.find(watchesQuery);
+    if (watches) {
+      watches.forEach(function(watch) {
+        console.log('DEBUG: deleting watch ' + watch);
+        watch.destroy();
+      });
+      watches.destroy();
+      watchesQuery = null;
+    }
+    
+  }
+    
 });
 
 CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
