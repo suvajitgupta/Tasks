@@ -167,7 +167,7 @@ CoreTasks.User = CoreTasks.Record.extend({
     var watches = store.find(watchesQuery);
     if (watches) {
       watches.forEach(function(watch) {
-        console.log('DEBUG: deleting watch ' + watch);
+        // console.log('DEBUG: deleting watch ' + watch);
         watch.destroy();
       });
       watches.destroy();

@@ -451,6 +451,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
    * Custom destroy to delete any watches for this task.
    */
   destroy: function() {
+    // console.log('DEBUG: destroying Task: ' + this.get('name'));
     sc_super();
 
     var id = this.get('id');
@@ -461,7 +462,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
     var watches = store.find(watchesQuery);
     if (watches) {
       watches.forEach(function(watch) {
-        console.log('DEBUG: deleting watch ' + watch);
+        // console.log('DEBUG: deleting watch ' + watch);
         watch.destroy();
       });
       watches.destroy();
