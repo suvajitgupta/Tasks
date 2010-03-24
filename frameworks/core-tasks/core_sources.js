@@ -87,6 +87,9 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
             SC.RunLoop.begin();
             for(var j = 0, n = deletedStoreKeys.length; j < n; j++) {
               var storeKey = deletedStoreKeys[j];
+              var record = store.materializeRecord(storeKey);
+              // console.log('DEBUG: deleting after refresh() ' + record);
+              if(record.get('destroyWatches')) record.destroyWatches();
               store.removeDataHash(storeKey, SC.Record.DESTROYED_CLEAN);
               store.dataHashDidChange(storeKey);
             }
@@ -392,6 +395,6 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
 });
 
 // Create the main store with the appropriate data source
-CoreTasks.remoteDataSource = false; // Set to false to get Fixtures
+CoreTasks.remoteDataSource = true; // Set to false to get Fixtures
 CoreTasks.get('store').from(CoreTasks.remoteDataSource? CoreTasks.RemoteDataSource.create() : SC.FixturesDataSource.create());
 console.log('Initialized ' + (CoreTasks.remoteDataSource? 'remote' : 'fixtures') + ' data source.');

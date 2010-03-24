@@ -161,6 +161,14 @@ CoreTasks.User = CoreTasks.Record.extend({
       assignedTasks.destroy();
       assignedTasksQuery = null;
     }
+
+    this.destroyWatches();
+    
+  },
+    
+  destroyWatches: function() {
+    var id = this.get('id');
+    var store = this.get('store');
     
     var watchesQuery = SC.Query.local(CoreTasks.Watch, "userId=%@".fmt(id));
     watchesQuery.set('initialServerFetch', NO);
@@ -173,8 +181,8 @@ CoreTasks.User = CoreTasks.Record.extend({
       watches.destroy();
       watchesQuery = null;
     }
-    
   },
+  
   
   /**
    * A read-only computed property that returns the list of tasks assigned to this user

@@ -454,9 +454,13 @@ CoreTasks.Task = CoreTasks.Record.extend({
     // console.log('DEBUG: destroying Task: ' + this.get('name'));
     sc_super();
 
+    this.destroyWatches();
+    
+  },
+  
+  destroyWatches: function() {
     var id = this.get('id');
     var store = this.get('store');
-    
     var watchesQuery = SC.Query.local(CoreTasks.Watch, "taskId=%@".fmt(id));
     watchesQuery.set('initialServerFetch', NO);
     var watches = store.find(watchesQuery);
@@ -468,8 +472,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
       watches.destroy();
       watchesQuery = null;
     }
-    
-  }
+  }  
     
 });
 
