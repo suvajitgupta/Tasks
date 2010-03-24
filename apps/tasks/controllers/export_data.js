@@ -154,8 +154,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 '}\n' +
 '.time, .total {\n' +
 ' color: black;\n' +
-' background-color: white;\n' +
-' opacity: 0.85;\n' +
+' background-color: #DDD;\n' +
 '}\n' +
 '.effort, .time {\n' +
 ' right: 10px;\n' +
@@ -164,7 +163,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' right: 175px;\n' +
 '}\n' +
 '.warning {\n' +
-' background-color: yellow !important;\n' +
+' background-color: #FF6 !important;\n' +
 '}\n' +
 '</style>\n' +
 '</head>\n' +

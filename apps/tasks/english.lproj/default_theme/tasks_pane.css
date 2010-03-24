@@ -112,7 +112,6 @@
   color: #000 !important;
   border: none !important;
   padding: 1px 5px;
-  opacity: 0.85;
 }
 
 .assignee-item .sc-outline .count {
@@ -126,12 +125,12 @@
 .assignee-item .sc-outline .count,
 .assignee-item .sc-outline .count.finished,
 .assignee-item.incompleteEffortWarning .sc-outline .count.finished {
-  background: white none repeat scroll 0 0 !important;
+  background: #DDD none repeat scroll 0 0 !important;
 }
 
 .assignee-item.incompleteEffortWarning .sc-outline .count,
 .assignee-item.finishedRangeWarning .sc-outline .count.finished {
-  background: yellow none repeat scroll 0 0 !important;
+  background: #FF6 none repeat scroll 0 0 !important;
 }
 
 
