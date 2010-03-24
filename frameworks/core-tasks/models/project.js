@@ -222,6 +222,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
    * Destroys the project and orphans any tasks that are in it.
    */
   destroy: function() {
+    // console.log('DEBUG: destroying Project: ' + this.get('name'));
     sc_super();
 
     var tasks = this.get('tasks');

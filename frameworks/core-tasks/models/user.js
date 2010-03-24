@@ -134,6 +134,7 @@ CoreTasks.User = CoreTasks.Record.extend({
    * Custom destroy to clean out task submitter/assignee for this user.
    */
   destroy: function() {
+    // console.log('DEBUG: destroying User: ' + this.get('name'));
     sc_super();
 
     var id = this.get('id');
