@@ -128,8 +128,7 @@
   background: #DDD none repeat scroll 0 0 !important;
 }
 
-.assignee-item.incompleteEffortWarning .sc-outline .count,
-.assignee-item.finishedRangeWarning .sc-outline .count.finished {
+.assignee-item.incompleteEffortWarning .sc-outline .count {
   background: #FF6 none repeat scroll 0 0 !important;
 }
 
@@ -203,6 +202,9 @@
   padding: 1px 5px;
 }
 
+.task-item .sc-outline .count.doneEffortRangeWarning {
+  background: orange none repeat scroll 0 0 !important;
+}
 
 .task-item.sel .sc-outline .count,
 .project-item.sel .sc-outline .count {

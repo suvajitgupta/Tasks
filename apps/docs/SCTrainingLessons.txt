@@ -25,3 +25,6 @@
 
 - Fix Tasks memory leak on Windows/Firefox [AP] & Windows/Chrome [SH]
 - Set SC.LOG_BINDINGS to YES to troubleshoot
+
+- All policy decisions should be made by the application, not by controllers
+- All data updates should 

@@ -405,7 +405,9 @@ CoreTasks.Task = CoreTasks.Record.extend({
     
     var effort = this.get('effort');
     if(effort) {
-      if(format === 'HTML') ret += '&nbsp;<span class="effort">';
+      var doneEffortRange = false;
+      if(developmentStatus === CoreTasks.TASK_STATUS_DONE && effort.match(/\-/)) doneEffortRange = true;
+      if(format === 'HTML') ret += '&nbsp;<span class="effort' + (doneEffortRange? ' doneEffortRangeWarning' : '') + '">';
       else ret += ' {';
       ret += CoreTasks.displayTime(effort);
       if(format === 'HTML') ret += '</span>';

@@ -57,11 +57,6 @@ Tasks.AssigneeItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
         assigneeTooltip += ')';
       }
       
-      var finishedEffort = content.get('finishedEffort');
-      if(finishedEffort.match(/\-/)) {
-        assigneeTooltip += "_FinishedRangeWarning".loc();
-        context.addClass('finishedRangeWarning');
-      }
       var leftEffort = content.get('displayEffort');
       if(leftEffort.match(/\?$/)) {
         assigneeTooltip += "_IncompleteEffortWarning".loc();

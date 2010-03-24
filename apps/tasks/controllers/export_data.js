@@ -162,7 +162,10 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 '.total {\n' +
 ' right: 175px;\n' +
 '}\n' +
-'.warning {\n' +
+'.doneEffortRangeWarning {\n' +
+' background-color: orange !important;\n' +
+'}\n' +
+'.incompleteEffortWarning {\n' +
 ' background-color: #FF6 !important;\n' +
 '}\n' +
 '</style>\n' +
@@ -277,7 +280,7 @@ Tasks.exportDataController = SC.ObjectController.create(
    */
   _exportDisplayedData: function(format) {
     
-    var ret = '', warning;
+    var ret = '', incompleteEffortWarning;
     var tasksTree = Tasks.tasksController.get('content');
     var assignmentNodes = tasksTree.get('treeItemChildren');
     var assigneesCount = assignmentNodes.get('length');
@@ -299,11 +302,10 @@ Tasks.exportDataController = SC.ObjectController.create(
       ret += assignmentNode.get('displayName').loc();
       if(format === 'HTML') {
         var finishedEffort = assignmentNode.get('finishedEffort');
-        warning = (finishedEffort.match(/\-/) !== null);
-        if(finishedEffort) ret += '&nbsp;<span class="total' + (warning? ' warning' : '') + '">' + finishedEffort + '</span>';
+        if(finishedEffort) ret += '&nbsp;<span class="total">' + finishedEffort + '</span>';
         var leftEffort = assignmentNode.get('displayEffort');
-        warning = (leftEffort.match(/\?$/) !== null);
-        if(leftEffort) ret += '&nbsp;<span class="time' + (warning? ' warning' : '') + '">' + leftEffort + '</span>';
+        incompleteEffortWarning = (leftEffort.match(/\?$/) !== null);
+        if(leftEffort) ret += '&nbsp;<span class="time' + (incompleteEffortWarning? ' incompleteEffortWarning' : '') + '">' + leftEffort + '</span>';
         ret += '</h2>';
       }
       else ret += ' # ' + "_Has".loc() + tasksCount + "_tasks".loc();

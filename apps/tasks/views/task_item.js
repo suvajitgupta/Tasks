@@ -538,9 +538,14 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   },
 
   renderCount: function(context, count) {
-    if(count) {
-      var effortTooltip = "_TaskEffortTooltip".loc() + "_ClickToEdit".loc();
-      context.push('<span class="count" title="' + effortTooltip + '">');
+    var content = this.get('content');
+    if(content && count) {
+      console.log('DEBUG: ' + typeof count);
+      var status = content.get('developmentStatus'), doneEffortRange = false;
+      if(status === CoreTasks.TASK_STATUS_DONE && count.match(/\-/)) doneEffortRange = true;
+  
+      var effortTooltip = "_TaskEffortTooltip".loc() + "_ClickToEdit".loc() + (doneEffortRange? "_DoneEffortRangeWarning".loc() : '');
+      context.push('<span class="count' + (doneEffortRange? ' doneEffortRangeWarning' : '') + '" title="' + effortTooltip + '">');
       context.push('<span class="inner">').push(count).push('</span></span>');
     }
   },
