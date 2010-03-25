@@ -97,6 +97,8 @@
 			<p>Click on the "Statistics..." button on the status bar to get a popup dialog summarizing statistics about the displayed tasks.  This is quite useful in seeing how tasks are broken up by their attributes.</p>
 	<h2>Advanced Features</h2>
 		<p style="margin-left: 5px">Let's close out with some <app>tasks</app> power user features.</p>
+		<h3>Email Notifications</h3>
+			<p><app>tasks</app> running with a Google App Engine server sends email notifications when Tasks are created/updated by someone other than the Submitter or Assignee.  To receive email notifications, you must specify a valid email address via the Settings panel.  If you don't want notifications sent when you make changes, uncheck "Notications" in the status bar.  You can also "Watch" or "Unwatch" sets of tasks via the context menu.</p>
 		<h3>Default Project</h3>
 			<p><app>tasks</app> allows you to specify your default project, which is selected at startup, by specifying or bookmarking an URL like this (replace items in CAPS with your specifics):</p>
 			<pre style="margin-left: 50px">http://HOST:PORT/tasks#project&amp;name=PROJECT</pre>
@@ -160,5 +162,7 @@
 				<p>An initiative with a <i>name</i>, optional <i>time left</i>, zero or more tasks, and an optional <i>description</i>.</p>
 			<h3>User</h3>
 				<p>A team member with a <i>login name</i> and <i>full name</i> as well as a <i>role</i> (like Manager or Guest).  A user logs into the <app>tasks</app> application using an optional <i>password</i> and can be a task <i>submitter</i> and/or <i>assignee</i>.</p>
+			<h3>Watch</h3>
+				<p>Indicates a <i>task</i> being watched by a <i>user</i>.</p>
 </body>
 </html>
