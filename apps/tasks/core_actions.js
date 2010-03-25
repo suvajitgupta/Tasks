@@ -428,7 +428,7 @@ Tasks.mixin({
               }
               else {
                 // Reset default project if it is deleted
-                if(project === Tasks.get('defaultProject')) Tasks.set('defaultProject', CoreTasks.get('unallocatedTasksProject'));
+                if(project === Tasks.get('defaultProject')) Tasks.set('defaultProject', CoreTasks.get('allTasksProject'));
                 project.destroy();
               }
             }

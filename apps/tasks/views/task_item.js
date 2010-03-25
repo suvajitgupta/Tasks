@@ -540,7 +540,6 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   renderCount: function(context, count) {
     var content = this.get('content');
     if(content && count) {
-      console.log('DEBUG: ' + typeof count);
       var status = content.get('developmentStatus'), doneEffortRange = false;
       if(status === CoreTasks.TASK_STATUS_DONE && count.match(/\-/)) doneEffortRange = true;
   
