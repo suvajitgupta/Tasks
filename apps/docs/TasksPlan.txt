@@ -180,14 +180,17 @@ Styling/Hardening
 - Perform I18N and L10N (test with reversed strings) [SG] <JH2> @Done %Passed
 - Collect/address feedback from Alpha/Beta users and targeted usability tests <MG> [SG] @Done %Passed
 ^ Perform smoke test of key functionality [SG] @Done
-| Login/Logout, Guest Signup
-| All/Unallocated Tasks system projects
+| Login, Guest Signup, Logout
+| All/Unallocated Tasks system projects, Tasks/Team display modes
 | Project/Task/User CRUD via toolbar buttons/context menus
 | Project/Task modifications via inline editor and popup editor/control bar
 | Task reassignment/reallocation & User role change via drag-and-drop
-| Task attribute filtering, assignee/submitter selection, ID/name searching
+| Task filtering via assignee/submitter selection, attributes, and ID/name searching
 | User modifications via User Manager, searching for users
-| Save, Import/Export (Text & HTML)
+| Auto & manual Save, Refresh
+| Import/Export (Text & HTML)
+| Popup online Help, Statistics
+| Email Notifications, Task watching
 - Develop Model/View unit tests [SG] <BB> @Active
 - Create automated test scripts using Lebowski/Selenium @Active [MR] <MC>
 
