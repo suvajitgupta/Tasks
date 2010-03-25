@@ -89,6 +89,9 @@ Tasks.mixin({
   loadData: function() {
     // console.log('DEBUG: loadData()');
     // Start by loading all users.
+    var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
+    serverMessage.set('icon', 'progress-icon');
+    serverMessage.set('value', "_LoadingUsers".loc());
     if (!CoreTasks.get('allUsers')) {
       CoreTasks.set('allUsers', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.User, orderBy: 'name' })));
       this.usersController.set('content', CoreTasks.get('allUsers'));
@@ -103,9 +106,6 @@ Tasks.mixin({
    */
   usersLoadSuccess: function() {
     // console.log('DEBUG: usersLoadSuccess()');
-    var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
-    serverMessage.set('value', "_UsersLoaded".loc());
-    
     // Set the current logged on user
     var currentUser = CoreTasks.getUser(this.loginName);
     if (currentUser) {
@@ -133,6 +133,8 @@ Tasks.mixin({
     }
       
     // Now load all of the tasks.
+    var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
+    serverMessage.set('value', "_LoadingTasks".loc());
     if (!CoreTasks.get('allTasks')) {
       CoreTasks.set('allTasks', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Task })));
       this.allTasksController.set('content', CoreTasks.get('allTasks'));
@@ -147,9 +149,6 @@ Tasks.mixin({
    */
   tasksLoadSuccess: function() {
     // console.log('DEBUG: tasksLoadSuccess()');
-    var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
-    serverMessage.set('value', serverMessage.get('value') + "_TasksLoaded".loc());
-
     // Create the AllTasks project to hold all tasks.
     if(!CoreTasks.get('allTasksProject')) {
       var allTasksProject = CoreTasks.createRecord(CoreTasks.Project, {
@@ -169,6 +168,8 @@ Tasks.mixin({
     }
     
     // Now load all of the projects.
+    var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
+    serverMessage.set('value', "_LoadingProjects".loc());
     if (!CoreTasks.get('allProjects')) {
       CoreTasks.set('allProjects', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Project })));
       this.projectsController.set('content', CoreTasks.get('allProjects'));
@@ -182,11 +183,7 @@ Tasks.mixin({
    * Called after all projects have been loaded from the server.
    */
   projectsLoadSuccess: function() {
-
     // console.log('DEBUG: projectsLoadSuccess()');
-    var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
-    serverMessage.set('value', serverMessage.get('value') + "_ProjectsLoaded".loc());
-
     if(CoreTasks.loginTime) {
       var defaultProject = CoreTasks.get('allTasksProject');
       var defaultProjectName = this.get('defaultProjectName');
@@ -200,6 +197,8 @@ Tasks.mixin({
     
     if(CoreTasks.get('canServerSendNotifications')) {
       // Now load all of the watches.
+      var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
+      serverMessage.set('value', "_LoadingWatches".loc());
       if (!CoreTasks.get('allWatches')) {
         CoreTasks.set('allWatches', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Watch })));
         this.watchesController.set('content', CoreTasks.get('allWatches'));
@@ -217,11 +216,7 @@ Tasks.mixin({
    * Called after all watches have been loaded from the server.
    */
   watchesLoadSuccess: function() {
-
     // console.log('DEBUG: watchesLoadSuccess()');
-    var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
-    serverMessage.set('value', serverMessage.get('value') + "_WatchesLoaded".loc());
-
     this.dataLoadSuccess();
   },
 
@@ -231,7 +226,8 @@ Tasks.mixin({
   dataLoadSuccess: function() {
     // console.log('DEBUG: dataLoadSuccess()');
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
-    serverMessage.set('value', serverMessage.get('value') + "_at".loc() + new Date().format('hh:mm a'));
+    serverMessage.set('icon', '');
+    serverMessage.set('value', "_DataLoaded".loc() + new Date().format('hh:mm a MMM dd, yyyy'));
 
     switch (this.state.a) {
       case 3:
@@ -251,6 +247,9 @@ Tasks.mixin({
    */
   dataLoadFailure: function() {
     // console.log('DEBUG: dataLoadFailure()');
+    var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
+    serverMessage.set('icon', '');
+    serverMessage.set('value', "_DataLoadFailed".loc() + new Date().format('hh:mm a MMM dd, yyyy'));
     switch (this.state.a) {
       case 3:
         SC.AlertPane.error ('System Error', 'Unable to retrieve Tasks data from server');
@@ -265,9 +264,11 @@ Tasks.mixin({
    */
   saveData: function() {
     if(CoreTasks.get('needsSave')) {
-      CoreTasks.saveChanges();
       var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
-      serverMessage.set('value', "_SaveMessage".loc() + new Date().format('hh:mm a'));
+      serverMessage.set('icon', 'progress-icon');
+      CoreTasks.saveChanges();
+      serverMessage.set('icon', '');
+      serverMessage.set('value', "_DataSaved".loc() + new Date().format('hh:mm a MMM dd, yyyy'));
     }
   },
   

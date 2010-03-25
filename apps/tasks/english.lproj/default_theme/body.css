@@ -146,6 +146,12 @@ body {
   text-align: left !important;
 }
 
+.progress-icon {
+  width: 16px;
+  height: 16px;
+  background: static_url('images/progress.gif') no-repeat 0 0;
+}
+
 .text-icon {
   width: 16px;
   height: 16px;
