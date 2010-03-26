@@ -159,8 +159,8 @@ CoreTasks = SC.Object.create({
       var watchesCount = this.allWatches.get('length');
       for(var i = 0; i < watchesCount; i++) {
         var watch = this.allWatches.objectAt(i);
-        if((watch.get('userId')) !== currentUserId) continue;
-        if((watch.get('taskId')) === task.get('id')) return CoreTasks.TASK_WATCH_ON;
+        if(watch.get('userId') !== currentUserId) continue;
+        if(watch.get('taskId') === task.get('id')) return CoreTasks.TASK_WATCH_ON;
       }
     }
     return CoreTasks.TASK_WATCH_OFF;
@@ -178,8 +178,8 @@ CoreTasks = SC.Object.create({
       var watchesCount = this.allWatches.get('length');
       for(var i = 0; i < watchesCount; i++) {
         var watch = this.allWatches.objectAt(i);
-        if((watch.get('userId')) !== currentUserId) continue;
-        if((watch.get('taskId')) === task.get('id')) return watch;
+        if(watch.get('userId') !== currentUserId) continue;
+        if(watch.get('taskId') === task.get('id')) return watch;
       }
     }
     return null;
@@ -552,17 +552,8 @@ CoreTasks = SC.Object.create({
 
       } else if (status & SC.Record.ERROR) {
         // Save failed.
-      this.removeObserver('recordBeingSaved.status', this, this._userSaveRecordDidChange);
-
-        this.set('recordBeingSaved', null);
-        this.set('saveMode', CoreTasks.MODE_NOT_SAVING);
-        this.set('needsSave', NO);
-
-        this._dirtyUsers = [];
-        this._dirtyProjects = [];
-        this._dirtyTasks = [];
-        this._dirtyWatches = [];
-        throw 'Error saving data: Failed to save at least one user.';
+        this.removeObserver('recordBeingSaved.status', this, this._userSaveRecordDidChange);
+        this._postSaveCleanup('user');
       }
     }
   },
@@ -607,16 +598,7 @@ CoreTasks = SC.Object.create({
       } else if (status & SC.Record.ERROR) {
         // Save failed.
         this.removeObserver('recordBeingSaved.status', this, this._projectSaveRecordDidChange);
-
-        this.set('recordBeingSaved', null);
-        this.set('saveMode', CoreTasks.MODE_NOT_SAVING);
-        this.set('needsSave', NO);
-
-        this._dirtyUsers = [];
-        this._dirtyProjects = [];
-        this._dirtyTasks = [];
-        this._dirtyWatches = [];
-        throw 'Error saving data: Failed to save at least one project.';
+        this._postSaveCleanup('project');
       }
     }
   },
@@ -631,7 +613,18 @@ CoreTasks = SC.Object.create({
         // Save was successful; remove the current observer.
         this.removeObserver('recordBeingSaved.status', this, this._taskSaveRecordDidChange);
 
-        // TODO: [SG] Update the now-disassociated watches.
+        SC.RunLoop.begin();
+
+        // Update the now-disassociated watches.
+        var watches = task.get('disassociatedWatches');
+        console.log('DEBUG: disassociated watches: ' + (watches? watches.getEach('id') : 'none'));
+        if (watches && SC.instanceOf(watches, SC.RecordArray)) {
+          watches.forEach(function(watch) {
+            watch.writeAttribute('taskId', task.readAttribute('id'));
+          });
+        }
+        
+        SC.RunLoop.end();
 
         // Continue saving dirty tasks, if there are any left.
         this._dirtyTasks.removeObject(task.get('storeKey'));
@@ -644,32 +637,14 @@ CoreTasks = SC.Object.create({
           this.addObserver('recordBeingSaved.status', this, this._taskSaveRecordDidChange);
           nextTask.commit();
         } else {
-          // We're done.
-          this.removeObserver('recordBeingSaved.status', this, this._taskSaveRecordDidChange);
-
-          this.set('recordBeingSaved', null);
-          this.set('saveMode', CoreTasks.MODE_NOT_SAVING);
-          this.set('needsSave', NO);
-
-          this._dirtyUsers = [];
-          this._dirtyProjects = [];
-          this._dirtyTasks = [];
-          this._dirtyWatches = [];
+          // Safe to start committing wacthes.
+          this._saveWatches();
         }
 
       } else if (status & SC.Record.ERROR) {
         // Save failed.
         this.removeObserver('recordBeingSaved.status', this, this._taskSaveRecordDidChange);
-
-        this.set('recordBeingSaved', null);
-        this.set('saveMode', CoreTasks.MODE_NOT_SAVING);
-        this.set('needsSave', NO);
-
-        this._dirtyUsers = [];
-        this._dirtyProjects = [];
-        this._dirtyTasks = [];
-        this._dirtyWatches = [];
-        throw 'Error saving data: Failed to save at least one task.';
+        this._postSaveCleanup('task');
       }
     }
   },
@@ -684,8 +659,6 @@ CoreTasks = SC.Object.create({
         // Save was successful; remove the current observer.
         this.removeObserver('recordBeingSaved.status', this, this._watchSaveRecordDidChange);
 
-        // TODO: [SG] Update the now-disassociated watches.
-
         // Continue saving dirty watches, if there are any left.
         this._dirtyWatches.removeObject(watch.get('storeKey'));
         var nextWatchKey = this._dirtyWatches.objectAt(0);
@@ -699,32 +672,36 @@ CoreTasks = SC.Object.create({
         } else {
           // We're done.
           this.removeObserver('recordBeingSaved.status', this, this._watchSaveRecordDidChange);
-
-          this.set('recordBeingSaved', null);
-          this.set('saveMode', CoreTasks.MODE_NOT_SAVING);
-          this.set('needsSave', NO);
-
-          this._dirtyUsers = [];
-          this._dirtyProjects = [];
-          this._dirtyTasks = [];
-          this._dirtyWatches = [];
+          this._postSaveCleanup();
         }
 
       } else if (status & SC.Record.ERROR) {
         // Save failed.
         this.removeObserver('recordBeingSaved.status', this, this._watchSaveRecordDidChange);
-
-        this.set('recordBeingSaved', null);
-        this.set('saveMode', CoreTasks.MODE_NOT_SAVING);
-        this.set('needsSave', NO);
-
-        this._dirtyUsers = [];
-        this._dirtyProjects = [];
-        this._dirtyTasks = [];
-        this._dirtyWatches = [];
-        throw 'Error saving data: Failed to save at least one task.';
+        this._postSaveCleanup('watch');
       }
     }
+  },
+  
+  /**
+   * Cleanup as save operation ends.
+   *
+   * @param {String} if provided, will throw an exception indicating error.
+   *
+   */
+  _postSaveCleanup: function(errorRecordType) {
+    
+    this.set('recordBeingSaved', null);
+    this.set('saveMode', CoreTasks.MODE_NOT_SAVING);
+    this.set('needsSave', NO);
+
+    this._dirtyUsers = [];
+    this._dirtyProjects = [];
+    this._dirtyTasks = [];
+    this._dirtyWatches = [];
+    
+    if(errorRecordType !== undefined) throw 'Error saving data: Failed to save at least one ' + errorRecordType;
+    
   },
 
   /**

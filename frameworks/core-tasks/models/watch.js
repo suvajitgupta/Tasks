@@ -23,3 +23,10 @@ CoreTasks.Watch = CoreTasks.Record.extend({
   userId: SC.Record.attr(Number)
 
 });
+
+CoreTasks.Watch.mixin(/** @scope CoreTasks.Watch */ {
+  
+  callbacks: SC.Object.create(),
+  resourcePath: 'watch'
+  
+});

@@ -183,7 +183,6 @@ CoreTasks.User = CoreTasks.Record.extend({
     }
   },
   
-  
   /**
    * A read-only computed property that returns the list of tasks assigned to this user
    * before it was first persisted.

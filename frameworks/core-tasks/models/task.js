@@ -472,7 +472,26 @@ CoreTasks.Task = CoreTasks.Record.extend({
       watches.destroy();
       watchesQuery = null;
     }
-  }  
+  },
+  
+  /**
+   * A read-only computed property that returns the list of watches for this task
+   * before it was first persisted.
+   *
+   * @returns {SC.RecordArray} An array of watches.
+   */
+  disassociatedWatches: function() {
+    if(SC.none(this.get('_id'))) return null;
+    
+    // Create the query if necessary.
+    if (!this._disassociatedWatchesQuery) {
+      this._disassociatedWatchesQuery = SC.Query.local(CoreTasks.Watch, "taskId=%@".fmt(this.get('_id')));
+      this._disassociatedWatchesQuery.set('initialServerFetch', NO);
+    }
+
+    // Execute the query and return the results.
+    return this.get('store').find(this._disassociatedWatchesQuery);
+  }.property('_id').cacheable()
     
 });
 
