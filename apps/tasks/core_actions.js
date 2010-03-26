@@ -265,9 +265,7 @@ Tasks.mixin({
   saveData: function() {
     if(CoreTasks.get('needsSave')) {
       var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
-      serverMessage.set('icon', 'progress-icon');
       CoreTasks.saveChanges();
-      serverMessage.set('icon', '');
       serverMessage.set('value', "_DataSaved".loc() + new Date().format('hh:mm a MMM dd, yyyy'));
     }
   },
