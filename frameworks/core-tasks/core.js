@@ -493,15 +493,7 @@ CoreTasks = SC.Object.create({
     } else {
       // We're done.
       this.removeObserver('recordBeingSaved.status', this, this._watchSaveRecordDidChange);
-
-      this.set('recordBeingSaved', null);
-      this.set('saveMode', CoreTasks.MODE_NOT_SAVING);
-      this.set('needsSave', NO);
-
-      this._dirtyUsers = [];
-      this._dirtyProjects = [];
-      this._dirtyTasks = [];
-      this._dirtyWatches = [];
+      this._postSaveCleanup();
     }
   },
 
