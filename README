@@ -8,8 +8,9 @@ git clone git://github.com/suvajitgupta/Tasks.git tasks
 cd tasks/frameworks
 git clone git://github.com/etgryphon/sproutcore-ui.git scui
 git clone git://github.com/sproutit/sproutcore.git sproutcore
+cd sproutcore
 git reset --hard 725c490576519f26ab6f09195718750583920039
-cd ..
+cd ../../
 
 If you don't have the latest Ruby gems, type...
 
