@@ -159,8 +159,8 @@ CoreTasks = SC.Object.create({
       var watchesCount = this.allWatches.get('length');
       for(var i = 0; i < watchesCount; i++) {
         var watch = this.allWatches.objectAt(i);
-        if(('' + watch.get('userId')) !== currentUserId) continue;
-        if(('' + watch.get('taskId')) === task.get('id')) return CoreTasks.TASK_WATCH_ON;
+        if((watch.get('userId')) !== currentUserId) continue;
+        if((watch.get('taskId')) === task.get('id')) return CoreTasks.TASK_WATCH_ON;
       }
     }
     return CoreTasks.TASK_WATCH_OFF;
@@ -178,8 +178,8 @@ CoreTasks = SC.Object.create({
       var watchesCount = this.allWatches.get('length');
       for(var i = 0; i < watchesCount; i++) {
         var watch = this.allWatches.objectAt(i);
-        if(('' + watch.get('userId')) !== currentUserId) continue;
-        if(('' + watch.get('taskId')) === task.get('id')) return watch;
+        if((watch.get('userId')) !== currentUserId) continue;
+        if((watch.get('taskId')) === task.get('id')) return watch;
       }
     }
     return null;
@@ -370,6 +370,7 @@ CoreTasks = SC.Object.create({
     this._dirtyUsers = [];
     this._dirtyProjects = [];
     this._dirtyTasks = [];
+    this._dirtyWatches = [];
 
     // Get the store keys of the two "special" projects that we never want to persist.
     var allTasksProjectKey = this.getPath('allTasksProject.storeKey');
@@ -399,6 +400,9 @@ CoreTasks = SC.Object.create({
         case CoreTasks.Task:
           this._dirtyTasks.pushObject(key);
           break;
+        case CoreTasks.Watch:
+          this._dirtyWatches.pushObject(key);
+          break;
       }
     }
 
@@ -423,6 +427,14 @@ CoreTasks = SC.Object.create({
 
     if (len > 0) {
       this._saveTasks();
+      return; 
+    }
+
+    // If there were no dirty users or projects or tasks, persist the dirty watches.
+    len = this._dirtyWatches.length;
+
+    if (len > 0) {
+      this._saveWatches();
       return; 
     }
 
@@ -466,8 +478,21 @@ CoreTasks = SC.Object.create({
       this.addObserver('recordBeingSaved.status', this, this._taskSaveRecordDidChange);
       if (task) task.commit(); 
     } else {
+      // Start saving dirty watches.
+      this._saveWatches();
+    }
+  },
+
+  _saveWatches: function() {
+    if (this._dirtyWatches && this._dirtyWatches.length > 0) {
+      var watchKey = this._dirtyWatches.objectAt(0);
+      var watch = this.get('store').materializeRecord(watchKey);
+      this.set('recordBeingSaved', watch);
+      this.addObserver('recordBeingSaved.status', this, this._watchSaveRecordDidChange);
+      if (watch) watch.commit(); 
+    } else {
       // We're done.
-      this.removeObserver('recordBeingSaved.status', this, this._taskSaveRecordDidChange);
+      this.removeObserver('recordBeingSaved.status', this, this._watchSaveRecordDidChange);
 
       this.set('recordBeingSaved', null);
       this.set('saveMode', CoreTasks.MODE_NOT_SAVING);
@@ -476,6 +501,7 @@ CoreTasks = SC.Object.create({
       this._dirtyUsers = [];
       this._dirtyProjects = [];
       this._dirtyTasks = [];
+      this._dirtyWatches = [];
     }
   },
 
@@ -506,7 +532,7 @@ CoreTasks = SC.Object.create({
             task.writeAttribute('submitterId', user.readAttribute('id'));
           });
         }
-
+        
         SC.RunLoop.end();
 
         // Continue saving dirty users, if there are any left.
@@ -535,6 +561,7 @@ CoreTasks = SC.Object.create({
         this._dirtyUsers = [];
         this._dirtyProjects = [];
         this._dirtyTasks = [];
+        this._dirtyWatches = [];
         throw 'Error saving data: Failed to save at least one user.';
       }
     }
@@ -588,6 +615,7 @@ CoreTasks = SC.Object.create({
         this._dirtyUsers = [];
         this._dirtyProjects = [];
         this._dirtyTasks = [];
+        this._dirtyWatches = [];
         throw 'Error saving data: Failed to save at least one project.';
       }
     }
@@ -602,6 +630,8 @@ CoreTasks = SC.Object.create({
       if (status & SC.Record.READY || status === SC.Record.DESTROYED_CLEAN) {
         // Save was successful; remove the current observer.
         this.removeObserver('recordBeingSaved.status', this, this._taskSaveRecordDidChange);
+
+        // TODO: [SG] Update the now-disassociated watches.
 
         // Continue saving dirty tasks, if there are any left.
         this._dirtyTasks.removeObject(task.get('storeKey'));
@@ -624,6 +654,7 @@ CoreTasks = SC.Object.create({
           this._dirtyUsers = [];
           this._dirtyProjects = [];
           this._dirtyTasks = [];
+          this._dirtyWatches = [];
         }
 
       } else if (status & SC.Record.ERROR) {
@@ -637,6 +668,60 @@ CoreTasks = SC.Object.create({
         this._dirtyUsers = [];
         this._dirtyProjects = [];
         this._dirtyTasks = [];
+        this._dirtyWatches = [];
+        throw 'Error saving data: Failed to save at least one task.';
+      }
+    }
+  },
+
+  _watchSaveRecordDidChange: function() {
+    var watch = this.get('recordBeingSaved');
+
+    if (watch && this.get('isSaving')) {
+      var status = watch.get('status');
+
+      if (status & SC.Record.READY || status === SC.Record.DESTROYED_CLEAN) {
+        // Save was successful; remove the current observer.
+        this.removeObserver('recordBeingSaved.status', this, this._watchSaveRecordDidChange);
+
+        // TODO: [SG] Update the now-disassociated watches.
+
+        // Continue saving dirty watches, if there are any left.
+        this._dirtyWatches.removeObject(watch.get('storeKey'));
+        var nextWatchKey = this._dirtyWatches.objectAt(0);
+
+        if (nextWatchKey) {
+          // Add a new observer and commit.
+          var nextWatch = this.get('store').materializeRecord(nextWatchKey);
+          this.set('recordBeingSaved', nextWatch);
+          this.addObserver('recordBeingSaved.status', this, this._watchSaveRecordDidChange);
+          nextWatch.commit();
+        } else {
+          // We're done.
+          this.removeObserver('recordBeingSaved.status', this, this._watchSaveRecordDidChange);
+
+          this.set('recordBeingSaved', null);
+          this.set('saveMode', CoreTasks.MODE_NOT_SAVING);
+          this.set('needsSave', NO);
+
+          this._dirtyUsers = [];
+          this._dirtyProjects = [];
+          this._dirtyTasks = [];
+          this._dirtyWatches = [];
+        }
+
+      } else if (status & SC.Record.ERROR) {
+        // Save failed.
+        this.removeObserver('recordBeingSaved.status', this, this._watchSaveRecordDidChange);
+
+        this.set('recordBeingSaved', null);
+        this.set('saveMode', CoreTasks.MODE_NOT_SAVING);
+        this.set('needsSave', NO);
+
+        this._dirtyUsers = [];
+        this._dirtyProjects = [];
+        this._dirtyTasks = [];
+        this._dirtyWatches = [];
         throw 'Error saving data: Failed to save at least one task.';
       }
     }

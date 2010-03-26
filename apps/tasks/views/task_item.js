@@ -400,7 +400,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         if(taskWatch !== CoreTasks.TASK_WATCH_ON) {
           ret.push({
             title: "_Watch".loc(),
-            icon: sc_static('blank'),
+            icon: 'watch-icon',
             isEnabled: YES,
             target: 'Tasks',
             action: 'watchTask'
@@ -409,7 +409,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         if(taskWatch !== CoreTasks.TASK_WATCH_OFF) {
           ret.push({
             title: "_Unwatch".loc(),
-            icon: sc_static('blank'),
+            icon: 'unwatch-icon',
             isEnabled: YES,
             target: 'Tasks',
             action: 'unwatchTask'

@@ -241,6 +241,18 @@
   background: static_url('images/task-duplicate.png') no-repeat;
 }
 
+.watch-icon {
+  width: 16px !important;
+  height: 16px !important;
+  background: static_url('images/watch.png') no-repeat;
+}
+
+.unwatch-icon {
+  width: 16px !important;
+  height: 16px !important;
+  background: static_url('images/unwatch.png') no-repeat;
+}
+
 .task-id-name-icon {
   width: 16px !important;
   height: 16px !important;
