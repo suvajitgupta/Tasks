@@ -514,8 +514,9 @@ Tasks.mixin({
     
     // Create a new task with the logged in user as the default submitter/assignee within selected project, if one.
     var userId = CoreTasks.getPath('currentUser.id');
-    var taskHash = SC.merge({ 'submitterId': userId, 'assigneeId': userId }, SC.clone(CoreTasks.Task.NEW_TASK_HASH));
+    var taskHash = SC.merge({ 'submitterId': userId }, SC.clone(CoreTasks.Task.NEW_TASK_HASH));
     taskHash.name = taskHash.name.loc();
+    if(CoreTasks.getPath('currentUser.role') !== CoreTasks.USER_ROLE_GUEST) taskHash.assigneeId = userId;
     var sel = Tasks.projectsController.getPath('selection');
     var project = (sel && sel.get('length' === 1))? sel.get('firstObject') : null;
     if (project && project !== CoreTasks.get('allTasksProject') && project !== CoreTasks.get('unallocatedTasksProject')) {
@@ -530,7 +531,7 @@ Tasks.mixin({
       if (SC.instanceOf(selectedTask, CoreTasks.Task)) {
         taskHash.projectId = selectedTask.get('projectId');
         var assigneeUser = selectedTask.get('assignee');
-        taskHash.assigneeId = assigneeUser? assigneeUser.get('id') : null;
+        taskHash.assigneeId = (assigneeUser && assigneeUser.get('role') !== CoreTasks.USER_ROLE_GUEST)? assigneeUser.get('id') : null;
         taskHash.type = selectedTask.get('type');
         taskHash.priority = selectedTask.get('priority');
         if(duplicate) {
