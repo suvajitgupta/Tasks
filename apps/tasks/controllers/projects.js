@@ -77,3 +77,5 @@ Tasks.projectsController = SC.ArrayController.create(SCUI.StatusChanged,
   }
 
 });
+
+// Tasks.projectsController.addProbe('sources');

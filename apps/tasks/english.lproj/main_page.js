@@ -297,14 +297,7 @@ Tasks.mainPage = SC.Page.design({
           canReorderContent: YES,
           canDeleteContent: YES,
           destroyOnRemoval: YES,
-          delegate: Tasks.reallocationController,
-          
-          render: function(context, firstTime) {
-            // console.log('DEBUG: Projects Master render(), editorPoppedUp=' + Tasks.editorPoppedUp);
-            if(CoreTasks.loginTime) return;
-            sc_super();
-          }
-          
+          delegate: Tasks.reallocationController                
         })
       }),
       

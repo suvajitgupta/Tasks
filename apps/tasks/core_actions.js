@@ -192,7 +192,7 @@ Tasks.mixin({
         if(project) defaultProject = project;
       }
       this.set('defaultProject', defaultProject);
-      Tasks.sourcesController.propertyDidChange('arrangedObjects');
+      // Tasks.sourcesController.propertyDidChange('arrangedObjects');
     }
     
     if(CoreTasks.get('canServerSendNotifications')) {
