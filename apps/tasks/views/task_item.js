@@ -389,34 +389,34 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         }
       }
       
-      if(CoreTasks.get('canServerSendNotifications')) {
-        if(needsSeparator) {
-          ret.push({
-            isSeparator: YES
-          });
-        }
-        needsSeparator = true;
-        var taskWatch = Tasks.tasksController.get('watch');
-        if(taskWatch !== CoreTasks.TASK_WATCH_ON) {
-          ret.push({
-            title: "_Watch".loc(),
-            icon: 'watch-icon',
-            isEnabled: YES,
-            target: 'Tasks',
-            action: 'watchTask'
-          });
-        }
-        if(taskWatch !== CoreTasks.TASK_WATCH_OFF) {
-          ret.push({
-            title: "_Unwatch".loc(),
-            icon: 'unwatch-icon',
-            isEnabled: YES,
-            target: 'Tasks',
-            action: 'unwatchTask'
-          });
-        }
+    }
+    
+    if(CoreTasks.get('canServerSendNotifications')) {
+      if(needsSeparator) {
+        ret.push({
+          isSeparator: YES
+        });
       }
-      
+      needsSeparator = true;
+      var taskWatch = Tasks.tasksController.get('watch');
+      if(taskWatch !== CoreTasks.TASK_WATCH_ON) {
+        ret.push({
+          title: "_Watch".loc(),
+          icon: 'watch-icon',
+          isEnabled: YES,
+          target: 'Tasks',
+          action: 'watchTask'
+        });
+      }
+      if(taskWatch !== CoreTasks.TASK_WATCH_OFF) {
+        ret.push({
+          title: "_Unwatch".loc(),
+          icon: 'unwatch-icon',
+          isEnabled: YES,
+          target: 'Tasks',
+          action: 'unwatchTask'
+        });
+      }
     }
     
     if(selectedTasksCount === 1) {
