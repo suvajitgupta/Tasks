@@ -24,6 +24,10 @@
  * Project list item styles
  */
 
+.projects-pane .sc-view.sc-list-item-view.sc-collection-item .sc-outline label {
+  opacity: 1 !important;
+}
+
 .projects-pane-inner .sc-collection-item {
   left: 0px !important;
   border: 0 !important;
