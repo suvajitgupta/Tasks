@@ -57,7 +57,19 @@ if [ "$PASSWORD" != "$PASSWORD_VERIFY" ]; then
 fi
 
 # Hash the password (SHA1)
-PASSWORD_HASH=`/bin/echo -n $PASSWORD | sha1sum | awk '{print $1}'`
+SHA1_BIN=`which sha1sum`
+
+if [ $? -ne 0 ]; then
+  OPENSSL_BIN=`which openssl`
+  if [ $? -ne 0 ]; then
+    echo "ERROR: Unable to generate SHA1 hash of password (missing binary)."
+    exit 1
+  else
+    SHA1_BIN="$OPENSSL_BIN sha1" 
+  fi
+fi
+
+PASSWORD_HASH=`/bin/echo -n $PASSWORD | $SHA1_BIN | awk '{print $1}'`
 
 # Build the JSON and POST to the server using cURL.
 JSON="{name:'$FULL_NAME',loginName:'$LOGIN_NAME',role:'_$ROLE',password:'$PASSWORD_HASH'}"
