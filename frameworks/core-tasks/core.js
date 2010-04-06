@@ -609,7 +609,7 @@ CoreTasks = SC.Object.create({
 
         // Update the now-disassociated watches.
         var watches = task.get('disassociatedWatches');
-        console.log('DEBUG: disassociated watches: ' + (watches? watches.getEach('id') : 'none'));
+        // console.log('DEBUG: disassociated watches: ' + (watches? watches.getEach('id') : 'none'));
         if (watches && SC.instanceOf(watches, SC.RecordArray)) {
           watches.forEach(function(watch) {
             watch.writeAttribute('taskId', task.readAttribute('id'));
