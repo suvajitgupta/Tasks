@@ -147,6 +147,8 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
    * @returns {SC.RecordArray} An array of tasks.
    */
   disassociatedTasks: function() {
+    if(SC.none(this.get('_id'))) return null;
+
     // Create the query if necessary.
     if (!this._disassociatedAllocatedTasksQuery) {
       this._disassociatedAllocatedTasksQuery = SC.Query.local(CoreTasks.Task,
