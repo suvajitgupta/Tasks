@@ -203,13 +203,14 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       displayModeSegments: SC.SegmentedView.design(SCUI.ToolTip, {
-        layout: { centerY: 0, centerX: -35, height: 24, width: 130},
+        layout: { centerY: 0, centerX: -40, height: 24, width: 145},
         classNames: ['display-modes'],
         items: [
-          { title: "_Tasks".loc(), value: Tasks.DISPLAY_MODE_TASKS },
-          { title: "_Team".loc(), value: Tasks.DISPLAY_MODE_TEAM }
+          { title: "_Tasks".loc(), icon: 'tasks-icon', value: Tasks.DISPLAY_MODE_TASKS },
+          { title: "_Team".loc(), icon: 'sc-icon-group-16', value: Tasks.DISPLAY_MODE_TEAM }
         ],
         itemTitleKey: 'title',
+        itemIconKey: 'icon',
         itemValueKey: 'value',
         toolTip: "_DisplayModeTooltip".loc(),
         valueBinding: 'Tasks.assignmentsController.displayMode'
