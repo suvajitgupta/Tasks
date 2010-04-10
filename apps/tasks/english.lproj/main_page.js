@@ -27,7 +27,7 @@ Tasks.mainPage = SC.Page.design({
     titleBarView: SC.View.design(SC.Border, {
       layout: { top: 0, left: 0, right: 0, height: 43 },
       classNames: ['title-bar'],
-      childViews: 'tasksLogo installationLogo userNameLabel userRoleLabel saveButton refreshButton importButton exportButton divider settingsButton helpButton logoutButton'.w(),
+      childViews: 'tasksLogo installationLogo userNameLabel userRoleLabel saveButton importButton exportButton divider settingsButton helpButton logoutButton'.w(),
       
       tasksLogo: Tasks.LogoView.design({
         layout: { left: 10, width: 140, centerY: 0, height: 42 }
@@ -85,14 +85,6 @@ Tasks.mainPage = SC.Page.design({
                                                }).from('CoreTasks.autoSave'),
         target: 'Tasks',
         action: 'saveData'
-      }),
-      
-      refreshButton: SC.LabelView.design( SCUI.SimpleButton, {
-        layout: { centerY: 0, right: 290, height: 32, width: 32 },
-        classNames: ['refresh-icon'],
-        toolTip: "_RefreshTooltip".loc(),
-        target: 'Tasks',
-        action: 'refreshData'
       }),
       
       importButton: SC.LabelView.design( SCUI.SimpleButton, {
@@ -551,7 +543,7 @@ Tasks.mainPage = SC.Page.design({
     statusBarView: SC.View.design(SC.Border, {
       layout: { bottom: 0, height: 20, left: 0, right: 0 },
       classNames: ['status-bar'],
-      childViews: 'selectionView statisticsButton summaryView serverMessageView autoSaveCheckbox notificationsCheckbox'.w(),
+      childViews: 'selectionView statisticsButton summaryView notificationsCheckbox autoSaveCheckbox serverMessageView refreshButton'.w(),
       borderStyle: SC.BORDER_TOP,
         
       selectionView: Tasks.SelectionView.design({
@@ -602,11 +594,19 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       serverMessageView: SC.LabelView.design({
-        layout: { centerY: 0, height: 16, right: 10, width: 250 },
+        layout: { centerY: 0, height: 16, right: 25, width: 250 },
         classNames: ['status-bar-label'],
         icon: '',
         textAlign: SC.ALIGN_RIGHT,
         value: ''
+      }),
+
+      refreshButton: SC.LabelView.design( SCUI.SimpleButton, {
+        layout: { centerY: 0, height: 16, right: 5, width: 16 },
+        classNames: ['refresh-icon'],
+        toolTip: "_RefreshTooltip".loc(),
+        target: 'Tasks',
+        action: 'refreshData'
       })
       
     }),

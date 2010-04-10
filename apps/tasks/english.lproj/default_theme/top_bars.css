@@ -102,22 +102,10 @@
   background: static_url('images/default-theme-dock-icons.png') no-repeat -7px -64px;
 }
 
-.refresh-icon {
-  width: 55px !important;
-  height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat -7px -96px;
-}
-
 .disabled .refresh-icon {
   width: 55px !important;
   height: 32px !important;
   background: static_url('images/default-theme-dock-icons.png') no-repeat -7px -128px;
-}
-
-.refresh-icon:hover {
-  width: 55px !important;
-  height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat -7px -160px;
 }
 
 .import-icon {

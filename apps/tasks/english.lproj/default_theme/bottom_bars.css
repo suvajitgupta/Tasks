@@ -57,6 +57,18 @@
   background: static_url('images/default-theme-repeat-x.png') repeat-x 0 -44px;
 }
 
+.refresh-icon {
+  width: 16px;
+  height: 16px;
+  background: static_url('images/refresh-icon.png') no-repeat 0 0;
+}
+
+.progress-icon {
+  width: 16px;
+  height: 16px;
+  background: static_url('images/progress.gif') no-repeat 0 0;
+}
+
 .status-bar-label {
   font-size: 10px !important;
   color: #000 !important;

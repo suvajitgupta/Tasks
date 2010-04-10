@@ -152,12 +152,6 @@ body {
   background: static_url('images/tasks-icon.png') no-repeat;
 }
 
-.progress-icon {
-  width: 16px;
-  height: 16px;
-  background: static_url('images/progress.gif') no-repeat 0 0;
-}
-
 .text-icon {
   width: 16px;
   height: 16px;
