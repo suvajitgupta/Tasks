@@ -145,6 +145,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
             toolTip: "_TypeTooltip".loc()
           }),
                     
+          // FIXME: [SG] figure out how to pass styles into SelectButtonView so that task priority/status/validation can be displayed
           priorityLabel: SC.LabelView.design({
             layout: { top: 10, left: 175, height: 24, width: 55 },
             textAlign: SC.ALIGN_RIGHT,
@@ -233,12 +234,12 @@ Tasks.TaskItemView = SC.ListItemView.extend(
             value: "_Effort:".loc()
           }),
           effortField: SC.TextFieldView.design({
-            layout: { top: 82, left: 55, width: 80, height: 20 },
+            layout: { top: 82, left: 50, width: 80, height: 20 },
             isEnabledBinding: 'Tasks.tasksController.isEditable',
             valueBinding: SC.binding('.content.effortValue', this)
           }),
           effortHelpLabel: SC.LabelView.design({
-            layout: { top: 82, left: 145, height: 30, width: 275 },
+            layout: { top: 82, left: 140, height: 30, width: 275 },
             escapeHTML: NO,
             classNames: [ 'onscreen-help'],
             value: "_EffortOnscreenHelp".loc()
