@@ -34,12 +34,11 @@
 }
 
 .tasks-version {
-  font-size: 11px !important;
+  font-size: 10px !important;
   font-style: italic !important;
-  font-weight: bold !important;
   text-align: center !important;
   line-height: 11px !important;
-  margin-top: -18px !important;
+  margin-top: -11px !important;
   color: #555 !important;
   background: #CCC none repeat scroll 0 0 !important;
 	padding: 0px !important;
@@ -47,15 +46,11 @@
   -webkit-border-radius: 15px;
 }
 
-.user-attribute-message {
-  font-size: 11px !important;
-  color: #FFF !important;
-  line-height: 15px !important;
+.user-name-message {
+  font-size: 10px !important;
+  color: #EEE !important;
   text-align: center !important;
-}
-
-.user-attribute-message .icon {
-  top: 0px !important;
+  line-height: 15px !important;
 }
 
 .window-title {

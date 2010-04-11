@@ -25,12 +25,12 @@ Tasks.mainPage = SC.Page.design({
     childViews: 'titleBarView toolbarView masterDetailView statusBarView'.w(),
     
     titleBarView: SC.View.design(SC.Border, {
-      layout: { top: 0, left: 0, right: 0, height: 43 },
+      layout: { top: 2, left: 0, right: 0, height: 43 },
       classNames: ['title-bar'],
-      childViews: 'tasksLogo installationLogo userNameLabel userRoleLabel importButton exportButton settingsButton helpButton logoutButton'.w(),
+      childViews: 'tasksLogo installationLogo userNameLabel importButton exportButton settingsButton helpButton logoutButton'.w(),
       
       tasksLogo: Tasks.LogoView.design({
-        layout: { left: 10, width: 140, centerY: 0, height: 42 }
+        layout: { left: 5, width: 145, top: 0, height: 24 }
       }),
 
       installationLogo: SC.View.design({
@@ -53,28 +53,13 @@ Tasks.mainPage = SC.Page.design({
       }),
 
       userNameLabel: SC.LabelView.design(SCUI.ToolTip, {
-        layout: { centerY: -8, height: 18, centerX: -35, width: 250 },
-        escapeHTML: NO,
+        layout: { bottom: 2, left: 0, width: 150, height: 16 },
         valueBinding: SC.Binding.transform(function(value, binding) {
-          if(!value) return '';
-          return "_Welcome".loc() + '<b>' + value + '</b>';
+          return value? ("_Hi".loc() + value) : '';
         }).from('CoreTasks*currentUser.name'),
-        classNames: ['user-attribute-message']
+        classNames: ['user-name-message']
       }),
-      userRoleLabel: SC.LabelView.design({
-        layout: { centerY: 10, height: 18, centerX: -35, width: 150 },
-        escapeHTML: NO,
-        iconBinding: 'CoreTasks*currentUser.icon',
-        valueBinding: SC.Binding.transform(function(value, binding) {
-          if(!value) return '';
-          var role;
-          if(!Tasks.softwareMode && value === CoreTasks.USER_ROLE_DEVELOPER) role = "_User".loc();
-          else role = value.loc();
-          return ' <i>' + role + '</i>';
-        }).from('CoreTasks*currentUser.role'),
-        classNames: ['user-attribute-message']
-      }),
-      
+
       importButton: SC.LabelView.design( SCUI.SimpleButton, {
         layout: { centerY: 0, right: 235, height: 32, width: 60 },
         icon: ['import-icon'],

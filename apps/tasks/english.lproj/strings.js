@@ -27,7 +27,7 @@ SC.stringsFor('English', {
   // Top Bar strings
   "_Tasks": "Tasks",
   "_Credits": "Credits: Suvajit Gupta, Sean Eidemiller, Josh Holt, and Matt Grantham",
-  "_Welcome": "Welcome ",
+  "_Hi": "Hi ",
   "_Role:": "Role:",
   "_SaveTooltip": "Save modified Tasks data to the server",
   "_RefreshTooltip": "Reload latest Tasks data from the server",

@@ -363,7 +363,6 @@ Tasks.mixin({
   restart: function() {
     
     Tasks.getPath('mainPage.mainPane.userName').set('value', null);
-    Tasks.getPath('mainPage.mainPane.userRole').set('value', null);
     CoreTasks.set('currentUser', null);
     CoreTasks.loginTime = true;
     
