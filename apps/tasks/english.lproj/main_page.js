@@ -22,12 +22,12 @@ Tasks.mainPage = SC.Page.design({
   mainPane: SC.MainPane.design({
     
     layerId: 'mainPane',
-    childViews: 'titleBarView toolbarView masterDetailView statusBarView'.w(),
+    childViews: 'topBarView masterDetailView bottomBarView'.w(),
     
-    titleBarView: SC.View.design(SC.Border, {
+    topBarView: SC.View.design(SC.Border, {
       layout: { top: 2, left: 0, right: 0, height: 43 },
       classNames: ['title-bar'],
-      childViews: 'tasksLogo installationLogo userNameLabel importButton exportButton settingsButton helpButton logoutButton'.w(),
+      childViews: 'tasksLogo installationLogo userNameLabel displayModeSegments userSelectionField userSelectionCancelButton filterPanelButton filterCancelButton tasksSearchField tasksSearchCancelButton'.w(),
       
       tasksLogo: Tasks.LogoView.design({
         layout: { left: 5, width: 145, top: 0, height: 24 }
@@ -60,66 +60,15 @@ Tasks.mainPage = SC.Page.design({
         classNames: ['user-name-message']
       }),
 
-      importButton: SC.LabelView.design( SCUI.SimpleButton, {
-        layout: { centerY: 0, right: 235, height: 32, width: 60 },
-        icon: ['import-icon'],
-        toolTip: "_ImportTooltip".loc(),
-        target: 'Tasks',
-        action: 'importData'
-      }),
-      
-      exportButton: SC.LabelView.design( SCUI.SimpleButton, {
-        layout: { centerY: 0, right: 180, height: 32, width: 32 },
-        classNames: ['export-icon'],
-        toolTip: "_ExportTooltip".loc(),
-        target: 'Tasks.exportDataController',
-        action: 'selectExportDataFormat'
-      }),
-      
-      settingsButton: SC.LabelView.design( SCUI.SimpleButton, {
-        layout: { centerY: 0, right: 110, height: 32, width: 32 },
-        classNames: ['settings-icon'],
-        toolTip: "_SettingsTooltip".loc(),
-        target: 'Tasks',
-        action: 'settings'
-      }),
-      
-      helpButton: SC.LabelView.design( SCUI.SimpleButton, {
-        layout: { centerY: 0, right: 55, height: 32, width: 32 },
-        classNames: ['help-icon'],
-        toolTip: "_HelpTooltip".loc(),
-        target: 'Tasks',
-        action: 'help'
-      }),
-      
-      logoutButton: SC.LabelView.design( SCUI.SimpleButton, {
-        layout: { centerY: 0, right: 5, height: 32, width: 32 },
-        classNames: ['logout-icon'],
-        toolTip: "_LogoutTooltip".loc(),
-        target: 'Tasks',
-        action: 'logout'
-      })
-        
-    }),
-    
-    userName: SC.outlet('titleBarView.userNameLabel'),
-    userRole: SC.outlet('titleBarView.userRoleLabel'),
-    exportButton: SC.outlet('titleBarView.exportButton'),
-    
-    toolbarView: SC.View.design({
-      layout: { left: 0, right: 0, top: 42, height: 36 },
-      classNames: ['toolbar'],
-      childViews: 'displayModeSegments userSelectionField userSelectionCancelButton filterPanelButton filterCancelButton tasksSearchField tasksSearchCancelButton'.w(),
-    
       displayModeSegments: SC.SegmentedView.design(SCUI.ToolTip, {
-        layout: { centerY: 0, centerX: -40, height: 24, width: 145},
+        layout: { centerY: 0, centerX: -90, height: 24, width: 145},
         classNames: ['display-modes'],
         items: [
           { title: "_Tasks".loc(), icon: 'tasks-icon', value: Tasks.DISPLAY_MODE_TASKS },
           { title: "_Team".loc(), icon: 'sc-icon-group-16', value: Tasks.DISPLAY_MODE_TEAM }
         ],
         itemTitleKey: 'title',
-        itemIconKey: 'icon',
+        // itemIconKey: 'icon', // disabling icons for now - appearing too cluttered
         itemValueKey: 'value',
         toolTip: "_DisplayModeTooltip".loc(),
         valueBinding: 'Tasks.assignmentsController.displayMode'
@@ -179,10 +128,86 @@ Tasks.mainPage = SC.Page.design({
         isVisibleBinding: SC.Binding.oneWay('Tasks.assignmentsController.searchFilter').bool()
       })
                              
+      // TODO: [SG] convert all of these to a drop-down actions menu
+      
+      // notificationsCheckbox: SC.CheckboxView.design(SCUI.ToolTip, {
+      //   layout: { centerY: 0, height: 16, right: 350, width: 90 },
+      //   classNames: ['status-bar-label'],
+      //   textAlign: SC.ALIGN_RIGHT,
+      //   // isVisible: NO,
+      //   isVisibleBinding: SC.binding('CoreTasks*canServerSendNotifications'),
+      //   title: "_SendNotifications".loc(),
+      //   toolTip: "_SendNotificationsTooltip".loc(),
+      //   valueBinding: 'CoreTasks.shouldNotify'
+      // }),
+      // 
+      // autoSaveCheckbox: SC.CheckboxView.design(SCUI.ToolTip, {
+      //   layout: { centerY: 0, height: 16, right: 260, width: 75 },
+      //   classNames: ['status-bar-label'],
+      //   textAlign: SC.ALIGN_RIGHT,
+      //   title: "_AutoSave".loc(),
+      //   toolTip: "_AutoSaveTooltip".loc(),
+      //   valueBinding: 'CoreTasks.autoSave'
+      // }),
+      // 
+      // statisticsButton: SC.LabelView.design( SCUI.SimpleButton, {
+      //   layout: { centerY: 0, height: 16, left: 220, width: 90 },
+      //   titleMinWidth: 0,
+      //   classNames: ['status-bar-button'],
+      //   value: "_ShowStatistics".loc(),
+      //   icon: 'statistics-icon',
+      //   toolTip: "_ShowStatisticsTooltip".loc(),
+      //   isEnabledBinding: SC.Binding.oneWay('Tasks.tasksController*arrangedObjects.length').bool(),
+      //   target: 'Tasks',
+      //   action: 'projectStatistics'
+      // }),
+      // 
+      // importButton: SC.LabelView.design( SCUI.SimpleButton, {
+      //   layout: { centerY: 0, right: 235, height: 32, width: 60 },
+      //   icon: ['import-icon'],
+      //   toolTip: "_ImportTooltip".loc(),
+      //   target: 'Tasks',
+      //   action: 'importData'
+      // }),
+      // 
+      // exportButton: SC.LabelView.design( SCUI.SimpleButton, {
+      //   layout: { centerY: 0, right: 180, height: 32, width: 32 },
+      //   classNames: ['export-icon'],
+      //   toolTip: "_ExportTooltip".loc(),
+      //   target: 'Tasks.exportDataController',
+      //   action: 'selectExportDataFormat'
+      // }),
+      // 
+      // settingsButton: SC.LabelView.design( SCUI.SimpleButton, {
+      //   layout: { centerY: 0, right: 110, height: 32, width: 32 },
+      //   classNames: ['settings-icon'],
+      //   toolTip: "_SettingsTooltip".loc(),
+      //   target: 'Tasks',
+      //   action: 'settings'
+      // }),
+      // 
+      // helpButton: SC.LabelView.design( SCUI.SimpleButton, {
+      //   layout: { centerY: 0, right: 55, height: 32, width: 32 },
+      //   classNames: ['help-icon'],
+      //   toolTip: "_HelpTooltip".loc(),
+      //   target: 'Tasks',
+      //   action: 'help'
+      // }),
+      // 
+      // logoutButton: SC.LabelView.design( SCUI.SimpleButton, {
+      //   layout: { centerY: 0, right: 5, height: 32, width: 32 },
+      //   classNames: ['logout-icon'],
+      //   toolTip: "_LogoutTooltip".loc(),
+      //   target: 'Tasks',
+      //   action: 'logout'
+      // })
+        
     }),
     
+    userName: SC.outlet('topBarView.userNameLabel'),
+    
     masterDetailView: SC.View.design({
-      layout: { top: 78, bottom: 24, left: 0, right: 0 },
+      layout: { top: 45, bottom: 24, left: 0, right: 0 },
       childViews: 'projectsMasterView tasksDetailView'.w(),
       
       projectsMasterView: SC.ScrollView.design({
@@ -330,10 +355,10 @@ Tasks.mainPage = SC.Page.design({
     projectsList: SC.outlet('masterDetailView.projectsMasterView.contentView'),
     tasksList: SC.outlet('masterDetailView.tasksDetailView.contentView'),
     
-    statusBarView: SC.View.design(SC.Border, {
+    bottomBarView: SC.View.design(SC.Border, {
       layout: { bottom: 0, height: 24, left: 0, right: 0 },
       classNames: ['status-bar'],
-      childViews: 'addProjectButton deleteProjectButton selectionView divider addTaskButton deleteTaskButton summaryView notificationsCheckbox autoSaveCheckbox serverMessageView refreshButton saveButton'.w(),
+      childViews: 'addProjectButton deleteProjectButton selectionView divider addTaskButton deleteTaskButton summaryView serverMessageView refreshButton saveButton'.w(),
       borderStyle: SC.BORDER_TOP,
         
       addProjectButton: SC.LabelView.design(SCUI.SimpleButton,{
@@ -369,18 +394,6 @@ Tasks.mainPage = SC.Page.design({
         classNames: ['divider']
       }),
       
-      // statisticsButton: SC.LabelView.design( SCUI.SimpleButton, {
-      //   layout: { centerY: 0, height: 16, left: 220, width: 90 },
-      //   titleMinWidth: 0,
-      //   classNames: ['status-bar-button'],
-      //   value: "_ShowStatistics".loc(),
-      //   icon: 'statistics-icon',
-      //   toolTip: "_ShowStatisticsTooltip".loc(),
-      //   isEnabledBinding: SC.Binding.oneWay('Tasks.tasksController*arrangedObjects.length').bool(),
-      //   target: 'Tasks',
-      //   action: 'projectStatistics'
-      // }),
-      
       addTaskButton: SC.LabelView.design(SCUI.SimpleButton,{
         layout: { centerY: 0, left: 237, height: 16, width: 16 },
         icon: 'add-icon',
@@ -391,7 +404,7 @@ Tasks.mainPage = SC.Page.design({
         action: 'addTask'
       }),
       deleteTaskButton: SC.LabelView.design(SCUI.SimpleButton,SCUI.Permissible,{
-        layout: { centerY: 0, left: 260, height: 16, width: 16 },
+        layout: { centerY: 0, left: 262, height: 16, width: 16 },
         icon: 'delete-icon',
         toolTip: "_DeleteTaskTooltip".loc(),
         isVisibleBinding: 'CoreTasks.permissions.canDeleteTask',
@@ -408,26 +421,6 @@ Tasks.mainPage = SC.Page.design({
         tasksTreeBinding: SC.Binding.oneWay('Tasks.tasksController.content')
       }),
         
-      notificationsCheckbox: SC.CheckboxView.design(SCUI.ToolTip, {
-        layout: { centerY: 0, height: 16, right: 350, width: 90 },
-        classNames: ['status-bar-label'],
-        textAlign: SC.ALIGN_RIGHT,
-        // isVisible: NO,
-        isVisibleBinding: SC.binding('CoreTasks*canServerSendNotifications'),
-        title: "_SendNotifications".loc(),
-        toolTip: "_SendNotificationsTooltip".loc(),
-        valueBinding: 'CoreTasks.shouldNotify'
-      }),
-      
-      autoSaveCheckbox: SC.CheckboxView.design(SCUI.ToolTip, {
-        layout: { centerY: 0, height: 16, right: 260, width: 75 },
-        classNames: ['status-bar-label'],
-        textAlign: SC.ALIGN_RIGHT,
-        title: "_AutoSave".loc(),
-        toolTip: "_AutoSaveTooltip".loc(),
-        valueBinding: 'CoreTasks.autoSave'
-      }),
-      
       serverMessageView: SC.LabelView.design({
         layout: { centerY: 0, height: 16, right: 55, width: 250 },
         classNames: ['status-bar-label'],
@@ -457,7 +450,7 @@ Tasks.mainPage = SC.Page.design({
             
     }),
     
-    serverMessage: SC.outlet('statusBarView.serverMessageView')
+    serverMessage: SC.outlet('bottomBarView.serverMessageView')
     
   })
 });

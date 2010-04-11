@@ -405,7 +405,7 @@ Tasks.exportDataController = SC.ObjectController.create(
       preferType: SC.PICKER_MENU,
       contentView: SC.View.extend({})
     });
-    pane.popup(Tasks.getPath('mainPage.mainPane.exportButton'));
+    pane.popup(Tasks.getPath('mainPage.mainPane.exportButton')); // TODO: [SG] convert to a full menu of top bar actions instead of popup menu on button
   }
   
 

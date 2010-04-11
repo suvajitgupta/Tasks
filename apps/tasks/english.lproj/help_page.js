@@ -27,7 +27,7 @@ Tasks.helpPage = SC.Page.design({
       childViews: 'logoView title'.w(),
       
       logoView: Tasks.LogoView.design({
-        layout: { centerY: 0, height: 42, left: 0, width: 150 }
+        layout: { left: 5, centerY: 0, height: 42, width: 150 }
       }),
       
       title: SC.LabelView.design({
