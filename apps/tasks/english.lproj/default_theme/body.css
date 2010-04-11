@@ -41,7 +41,7 @@ body {
 }
 
 .display-modes {
-  font-size: 10px !important;
+  font-size: 9px !important;
   font-weight: bold !important;
   text-transform: uppercase !important;
 }
@@ -149,7 +149,7 @@ body {
 .tasks-icon {
   width: 16px !important;
   height: 16px !important;
-  background: static_url('images/tasks-icon.png') no-repeat;
+  background: static_url('images/tasks.png') no-repeat;
 }
 
 .text-icon {

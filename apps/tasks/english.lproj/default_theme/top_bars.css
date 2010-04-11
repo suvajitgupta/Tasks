@@ -217,7 +217,7 @@
   margin-right: -1px !important;
   width: 16px !important;
   height: 16px !important;
-  background: static_url('images/filter-icon.png') no-repeat 0 0;
+  background: static_url('images/filter.png') no-repeat 0 0;
 }
 
 .filter-label {

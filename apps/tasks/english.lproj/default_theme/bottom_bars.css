@@ -70,13 +70,13 @@
 .refresh-icon {
   width: 16px;
   height: 16px;
-  background: static_url('images/refresh-icon.png') no-repeat 0 0;
+  background: static_url('images/refresh.png') no-repeat 0 0;
 }
 
 .save-icon {
   width: 16px;
   height: 16px;
-  background: static_url('images/save-icon.png') no-repeat 0 0;
+  background: static_url('images/save.png') no-repeat 0 0;
 }
 
 .disabled .save-icon {
