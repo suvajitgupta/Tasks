@@ -83,9 +83,7 @@ SC.stringsFor('English', {
   "_Updated:": "Updated: ",
   
   // Project strings
-  "_AddProject": "Add Project",
   "_AddProjectTooltip": "Add a new project",
-  "_DeleteProject": "Delete Project",
   "_DeleteProjectTooltip": "Delete selected project",
   "_ProjectDeletionConfirmation": "Are you sure you want to delete the selected projects?",
   "_TasksUnallocated": "Any tasks allocated to deleted projects will become unallocated.",
@@ -104,14 +102,11 @@ SC.stringsFor('English', {
   "_TimeLeftOnscreenHelp": "May be unspecified, a decimal like '0.25'; in units 'd' or 'h'",
   
   // Task strings
-  "_AddTask": "Add Task",
   "_AddTaskTooltip": "Add a new task, to the same project/assignee if there is a selected task",
-  "_DuplicateTask": "Dup. Task",
   "_Copy": ": copy",
   "_CopyID/Name": "Copy ID/Name",
   "_CopyLinkLocation": "Copy Link Location",
   "_NewTask": "New Task",
-  "_DeleteTask": "Delete Task",
   "_DeleteTaskTooltip": "Delete selected task",
   "_TaskDeletionConfirmation": "Are you sure you want to delete the selected tasks?",
   "_Filter": "Filter",

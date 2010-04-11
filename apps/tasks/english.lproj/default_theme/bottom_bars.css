@@ -56,16 +56,31 @@
   background: static_url('images/default-theme-repeat-x.png') repeat-x 0 -44px;
 }
 
-.refresh-icon {
-  width: 16px;
-  height: 16px;
-  background: static_url('images/refresh-icon.png') no-repeat 0 0;
+.divider {
+  background: static_url('images/default-theme-repeat-y.png') repeat-y -239px 0;
+  border: 0;
 }
 
 .progress-icon {
   width: 16px;
   height: 16px;
   background: static_url('images/progress.gif') no-repeat 0 0;
+}
+
+.refresh-icon {
+  width: 16px;
+  height: 16px;
+  background: static_url('images/refresh-icon.png') no-repeat 0 0;
+}
+
+.save-icon {
+  width: 16px;
+  height: 16px;
+  background: static_url('images/save-icon.png') no-repeat 0 0;
+}
+
+.disabled .save-icon {
+  opacity: 0.4;
 }
 
 .status-bar-label {

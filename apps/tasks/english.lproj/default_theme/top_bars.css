@@ -9,16 +9,6 @@
 */
 
 /*-----------------------------------------------------------------
- * Top bar styles
- */
-
-.top-bar-divider {
-  background: static_url('images/default-theme-repeat-y.png') repeat-y -239px 0;
-  border: 0;
-}
-
-
-/*-----------------------------------------------------------------
  * Title bar styles/icons
  */
 
@@ -78,36 +68,6 @@
  * Dock Icons
  */
  
-.save-icon {
-  width: 55px !important;
-  height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat -7px 0px;
-}
-
-.save-icon:hover {
-  width: 55px !important;
-  height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat -7px -64px;
-}
-
-.disabled .save-icon {
-  width: 55px !important;
-  height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat -7px -32px;
-}
-
-.disabled .save-icon:hover {
-  width: 55px !important;
-  height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat -7px -64px;
-}
-
-.disabled .refresh-icon {
-  width: 55px !important;
-  height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat -7px -128px;
-}
-
 .import-icon {
   width: 55px !important;
   height: 32px !important;

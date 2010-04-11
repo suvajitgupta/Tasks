@@ -115,7 +115,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         remove: function() {
           sc_super();
           Tasks.editorPoppedUp = false;
-          that.get('content').setIfChanged('description', that._editorPane.getPath('contentView.childViews').objectAt(10).get('value'));
+          that.get('content').setIfChanged('description', that._editorPane.getPath('contentView.descriptionField.value'));
           if(Tasks.assignmentsRedrawNeeded) {
             Tasks.assignmentsController.showAssignments();
           }
