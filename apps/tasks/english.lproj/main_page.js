@@ -22,7 +22,7 @@ Tasks.mainPage = SC.Page.design({
   mainPane: SC.MainPane.design({
     
     layerId: 'mainPane',
-    childViews: 'titleBarView toolbarView masterDetailView controlBarView statusBarView'.w(),
+    childViews: 'titleBarView toolbarView masterDetailView statusBarView'.w(),
     
     titleBarView: SC.View.design(SC.Border, {
       layout: { top: 0, left: 0, right: 0, height: 43 },
@@ -265,7 +265,7 @@ Tasks.mainPage = SC.Page.design({
     }),
     
     masterDetailView: SC.View.design({
-      layout: { top: 78, bottom: 71, left: 0, right: 0 },
+      layout: { top: 78, bottom: 20, left: 0, right: 0 },
       childViews: 'projectsMasterView tasksDetailView'.w(),
       
       projectsMasterView: SC.ScrollView.design({
@@ -412,133 +412,6 @@ Tasks.mainPage = SC.Page.design({
 
     projectsList: SC.outlet('masterDetailView.projectsMasterView.contentView'),
     tasksList: SC.outlet('masterDetailView.tasksDetailView.contentView'),
-    
-    controlBarView: SC.View.design({
-      layout: { left: 0, right: 0, bottom: 20, height: 51 },
-      classNames: ['control-bar'],
-      childViews: 'controlBar'.w(),
-    
-      controlBar: SC.View.design({
-        layout: { centerX: 0, width: 1030, top: 0, bottom: 0 },
-        childViews: 'typeLabel typeRadiobuttons priorityLabel priorityRadiobuttons statusLabel statusRadiobuttons validationLabel validationRadiobuttons'.w(),
-        
-        typeLabel: SC.LabelView.design(SCUI.ToolTip, SCUI.Permissible, {
-          layout: { top: 3, bottom: 30, left: 110, width: 60 },
-          classNames: ['task-attribute-set-title'],
-          isVisibleBinding: 'Tasks.softwareMode',
-          isPermittedBinding: 'Tasks.tasksController.notGuestOrGuestSubmittedTasks',
-          value: "_Type".loc(),
-          toolTip: "_TypeTooltip".loc()
-        }),
-
-        typeRadiobuttons: SC.RadioView.design({
-          layout: { top: 20, bottom: 6, left: 10, width: 260 },
-          escapeHTML: NO,
-          classNames: ['task-attribute-set'],
-          isVisibleBinding: 'Tasks.softwareMode',
-          items: [
-            { title: CoreTasks.TASK_TYPE_FEATURE.loc() + '&nbsp;',
-              value: CoreTasks.TASK_TYPE_FEATURE, icon: 'task-icon-feature' },
-            { title: CoreTasks.TASK_TYPE_BUG.loc() + '&nbsp;',
-              value: CoreTasks.TASK_TYPE_BUG, icon: 'task-icon-bug' },
-            { title: CoreTasks.TASK_TYPE_OTHER.loc() + '&nbsp;',
-              value: CoreTasks.TASK_TYPE_OTHER, icon: 'task-icon-other' }
-          ],
-          itemTitleKey: 'title',
-          itemValueKey: 'value',
-          itemIconKey: 'icon',
-          valueBinding: 'Tasks.tasksController.type',
-          isEnabledBinding: 'Tasks.tasksController.isEditable',
-          layoutDirection: SC.LAYOUT_HORIZONTAL
-        }),
-
-        priorityLabel: SC.LabelView.design(SCUI.ToolTip, SCUI.Permissible, {
-          layout: { top: 3, bottom: 30, left: 345, width: 95 },
-          classNames: ['task-attribute-set-title'],
-          isPermittedBinding: 'Tasks.tasksController.notGuestOrGuestSubmittedTasks',
-          value: "_Priority".loc(),
-          toolTip: "_PriorityTooltip".loc()
-        }),
-
-        priorityRadiobuttons: SC.RadioView.design({
-          layout: { top: 20, bottom: 6, left: 285, width: 195 },
-          escapeHTML: NO,
-          classNames: ['task-attribute-set'],
-          items: [
-            { title: '<span class=task-priority-high>' + CoreTasks.TASK_PRIORITY_HIGH.loc() + '</span>&nbsp;',
-              value: CoreTasks.TASK_PRIORITY_HIGH },
-            { title: '<span class=task-priority-medium>' + CoreTasks.TASK_PRIORITY_MEDIUM.loc() + '</span>&nbsp;',
-              value: CoreTasks.TASK_PRIORITY_MEDIUM },
-            { title: '<span class=task-priority-low>' + CoreTasks.TASK_PRIORITY_LOW.loc() + '</span>&nbsp;',
-              value: CoreTasks.TASK_PRIORITY_LOW }
-          ],
-          itemTitleKey: 'title',
-          itemValueKey: 'value',
-          valueBinding: 'Tasks.tasksController.priority',
-          isEnabledBinding: 'Tasks.tasksController.isEditable',
-          layoutDirection: SC.LAYOUT_HORIZONTAL
-        }),
-
-        statusLabel: SC.LabelView.design(SCUI.ToolTip, SCUI.Permissible, {
-          layout: { top: 3, bottom: 30, left: 585, width: 70 },
-          classNames: ['task-attribute-set-title'],
-          isPermittedBinding: 'Tasks.tasksController.notGuestOrGuestSubmittedTasks',
-          value: "_Status".loc(),
-          toolTip: "_StatusTooltip".loc()
-        }),
-
-        statusRadiobuttons: SC.RadioView.design({
-          layout: { top: 20, bottom: 6, left: 495, width: 265 },
-          escapeHTML: NO,
-          classNames: ['task-attribute-set'],
-          items: [
-            { title: '<span class=task-status-planned>' + CoreTasks.TASK_STATUS_PLANNED.loc() + '</span>&nbsp;',
-              value: CoreTasks.TASK_STATUS_PLANNED },
-            { title: '<span class=task-status-active>' + CoreTasks.TASK_STATUS_ACTIVE.loc() + '</span>&nbsp;',
-              value: CoreTasks.TASK_STATUS_ACTIVE },
-            { title: '<span class=task-status-done>' + CoreTasks.TASK_STATUS_DONE.loc() + '</span>&nbsp;',
-              value: CoreTasks.TASK_STATUS_DONE },
-            { title: '<span class=task-status-risky>' + CoreTasks.TASK_STATUS_RISKY.loc() + '</span>&nbsp;',
-              value: CoreTasks.TASK_STATUS_RISKY }
-          ],
-          itemTitleKey: 'title',
-          itemValueKey: 'value',
-          valueBinding: 'Tasks.tasksController.developmentStatusWithValidation',
-          isEnabledBinding: 'Tasks.tasksController.isEditable',
-          layoutDirection: SC.LAYOUT_HORIZONTAL
-        }),
-
-        validationLabel: SC.LabelView.design(SCUI.ToolTip, SCUI.Permissible, {
-          layout: { top: 3, bottom: 30, left: 855, width: 100 },
-          classNames: ['task-attribute-set-title'],
-          isVisibleBinding: 'Tasks.softwareMode',
-          isPermittedBinding: 'Tasks.tasksController.notGuestOrGuestSubmittedTasks',
-          value: "_Validation".loc(),
-          toolTip: "_ValidationTooltip".loc()
-        }),
-
-        validationRadiobuttons: SC.RadioView.design({
-          layout: { top: 20, bottom: 6, left: 775, width: 245 },
-          escapeHTML: NO,
-          classNames: ['task-attribute-set'],
-          isVisibleBinding: 'Tasks.softwareMode',
-          items: [
-            { title: '<span class=task-validation-untested><label>' + CoreTasks.TASK_VALIDATION_UNTESTED.loc() + '</label></span>&nbsp;',
-              value: CoreTasks.TASK_VALIDATION_UNTESTED },
-            { title: '<span class=task-validation-passed><label>' + CoreTasks.TASK_VALIDATION_PASSED.loc() + '</label></span>&nbsp;',
-              value: CoreTasks.TASK_VALIDATION_PASSED },
-            { title: '<span class=task-validation-failed><label>' + CoreTasks.TASK_VALIDATION_FAILED.loc() + '</label></span>&nbsp;',
-              value: CoreTasks.TASK_VALIDATION_FAILED }
-          ],
-          itemTitleKey: 'title',
-          itemValueKey: 'value',
-          valueBinding: 'Tasks.tasksController.validation',
-          isEnabledBinding: 'Tasks.tasksController.isValidatable',
-          layoutDirection: SC.LAYOUT_HORIZONTAL
-        })
-          
-        })
-    }),
     
     statusBarView: SC.View.design(SC.Border, {
       layout: { bottom: 0, height: 20, left: 0, right: 0 },

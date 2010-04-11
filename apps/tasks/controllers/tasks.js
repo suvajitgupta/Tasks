@@ -68,6 +68,10 @@ Tasks.tasksController = SC.TreeController.create(
     
   }.property('selection').cacheable(),
   
+  isValidatable: function() {
+    return this.get('isEditable') && this.get('developmentStatusWithValidation') === CoreTasks.TASK_STATUS_DONE;
+  }.property('isEditable', 'developmentStatusWithValidation').cacheable(),
+
   notGuestOrGuestSubmittedTasks: function() {
     if(CoreTasks.getPath('currentUser.role') !== CoreTasks.USER_ROLE_GUEST || this.get('areUserSubmittedTasks')) return true;
     return false;
@@ -107,10 +111,6 @@ Tasks.tasksController = SC.TreeController.create(
     
   }.property('selection').cacheable(),
   
-  isValidatable: function() {
-    return this.get('isEditable') && this.get('developmentStatusWithValidation') === CoreTasks.TASK_STATUS_DONE;
-  }.property('isEditable').cacheable(),
-
   type: function(key, value) {
     var sel = this.get('selection');
     if(!sel || sel.get('length') === 0) return false;

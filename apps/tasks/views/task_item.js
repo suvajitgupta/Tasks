@@ -19,6 +19,39 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   
   _editorPane: null,
   
+  _listTypes: function() {
+     var ret = [];
+     ret.push({ name: CoreTasks.TASK_TYPE_FEATURE, value: CoreTasks.TASK_TYPE_FEATURE, icon: 'task-icon-feature' });
+     ret.push({ name: CoreTasks.TASK_TYPE_BUG, value: CoreTasks.TASK_TYPE_BUG, icon: 'task-icon-bug' });
+     ret.push({ name: CoreTasks.TASK_TYPE_OTHER, value: CoreTasks.TASK_TYPE_OTHER, icon: 'task-icon-other' });
+     return ret;
+  },
+
+  _listPriorities: function() {
+     var ret = [];
+     ret.push({ name: CoreTasks.TASK_PRIORITY_HIGH, value: CoreTasks.TASK_PRIORITY_HIGH });
+     ret.push({ name: CoreTasks.TASK_PRIORITY_MEDIUM, value: CoreTasks.TASK_PRIORITY_MEDIUM });
+     ret.push({ name: CoreTasks.TASK_PRIORITY_LOW, value: CoreTasks.TASK_PRIORITY_LOW });
+     return ret;
+  },
+
+  _listStatuses: function() {
+     var ret = [];
+     ret.push({ name: CoreTasks.TASK_STATUS_PLANNED, value: CoreTasks.TASK_STATUS_PLANNED });
+     ret.push({ name: CoreTasks.TASK_STATUS_ACTIVE, value: CoreTasks.TASK_STATUS_ACTIVE });
+     ret.push({ name: CoreTasks.TASK_STATUS_DONE, value: CoreTasks.TASK_STATUS_DONE });
+     ret.push({ name: CoreTasks.TASK_STATUS_RISKY, value: CoreTasks.TASK_STATUS_RISKY });
+     return ret;
+  },
+
+  _listValidations: function() {
+     var ret = [];
+     ret.push({ name: CoreTasks.TASK_VALIDATION_UNTESTED, value: CoreTasks.TASK_VALIDATION_UNTESTED });
+     ret.push({ name: CoreTasks.TASK_VALIDATION_PASSED, value: CoreTasks.TASK_VALIDATION_PASSED });
+     ret.push({ name: CoreTasks.TASK_VALIDATION_FAILED, value: CoreTasks.TASK_VALIDATION_FAILED });
+     return ret;
+  },
+
   _listUsers: function(excludeGuests) {
     return SC.Binding.transform(function(value, binding) {
        var users = value.toArray();
@@ -49,7 +82,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   },
   
   /** @private
-    If mouse was down over Description Icon open the editor.
+    If mouse was down over Description icon or effort badge popup the editor.
   */  
   mouseDown: function(event) {
     
@@ -64,7 +97,10 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     
     // See what user clicked on
     var classes = event.target.className;
-    if (classes.match('task-editor') || classes.match('task-description') || classes.match('count') || classes.match('inner')) {
+    var sel = Tasks.getPath('tasksController.selection');
+    var singleSelect = (sel && sel.get('length') === 1);
+    
+    if (singleSelect && (classes.match('task-editor') || classes.match('task-description') || classes.match('count') || classes.match('inner'))) {
       var layer = this.get('layer');
       var that = this;
       this._editorPane = SC.PickerPane.create({
@@ -88,14 +124,87 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         
         contentView: SC.View.design({
           layout: { left: 0, right: 0, top: 0, bottom: 0},
-          childViews: 'submitterLabel submitterField assigneeLabel assigneeField effortLabel effortField effortHelpLabel projectLabel projectField descriptionLabel descriptionField createdAtLabel updatedAtLabel'.w(),
+          childViews: 'typeLabel typeField priorityLabel priorityField statusLabel statusField validationLabel validationField submitterLabel submitterField assigneeLabel assigneeField effortLabel effortField effortHelpLabel projectLabel projectField descriptionLabel descriptionField createdAtLabel updatedAtLabel'.w(),
         
+          typeLabel: SC.LabelView.design({
+            layout: { top: 10, left: 10, height: 24, width: 45 },
+            isVisibleBinding: 'Tasks.softwareMode',
+            value: "_Type".loc()
+          }),
+          typeField: SC.SelectButtonView.design({
+            layout: { top: 7, left: 47, height: 24, width: 125 },
+            classNames: ['square'],
+            localize: YES,
+            isVisibleBinding: 'Tasks.softwareMode',
+            isEnabledBinding: 'Tasks.tasksController.isEditable',
+            objects: this._listTypes(),
+            nameKey: 'name',
+            valueKey: 'value',
+            iconKey: 'icon',
+            valueBinding: SC.binding('.content.type', this),
+            toolTip: "_TypeTooltip".loc()
+          }),
+                    
+          priorityLabel: SC.LabelView.design({
+            layout: { top: 10, left: 175, height: 24, width: 55 },
+            textAlign: SC.ALIGN_RIGHT,
+            value: "_Priority".loc()
+          }),
+          priorityField: SC.SelectButtonView.design({
+            layout: { top: 7, left: 235, height: 24, width: 125 },
+            classNames: ['square'],
+            localize: YES,
+            isEnabledBinding: 'Tasks.tasksController.isEditable',
+            objects: this._listPriorities(),
+            nameKey: 'name',
+            valueKey: 'value',
+            valueBinding: SC.binding('.content.priority', this),
+            toolTip: "_PriorityTooltip".loc()
+          }),
+                    
+          statusLabel: SC.LabelView.design({
+            layout: { top: 10, left: 360, height: 24, width: 50 },
+            textAlign: SC.ALIGN_RIGHT,
+            value: "_Status".loc()
+          }),
+          statusField: SC.SelectButtonView.design({
+            layout: { top: 7, left: 415, height: 24, width: 125 },
+            classNames: ['square'],
+            localize: YES,
+            isEnabledBinding: 'Tasks.tasksController.isEditable',
+            objects: this._listStatuses(),
+            nameKey: 'name',
+            valueKey: 'value',
+            // bind to tasksController instead of to content to trigger validation button enablement below
+            valueBinding: SC.binding('Tasks.tasksController.developmentStatusWithValidation'),
+            toolTip: "_StatusTooltip".loc()
+          }),
+
+          validationLabel: SC.LabelView.design({
+            layout: { top: 10, left: 555, height: 24, width: 70 },
+            textAlign: SC.ALIGN_RIGHT,
+            isVisibleBinding: 'Tasks.softwareMode',
+            value: "_Validation".loc()
+          }),
+          validationField: SC.SelectButtonView.design({
+            layout: { top: 7, left: 630, height: 24, width: 125 },
+            classNames: ['square'],
+            localize: YES,
+            isVisibleBinding: 'Tasks.softwareMode',
+            isEnabledBinding: 'Tasks.tasksController.isValidatable',
+            objects: this._listValidations(),
+            nameKey: 'name',
+            valueKey: 'value',
+            valueBinding: SC.binding('.content.validation', this),
+            toolTip: "_ValidationTooltip".loc()
+          }),
+
           submitterLabel: SC.LabelView.design({
-            layout: { top: 10, left: 10, height: 17, width: 80 },
+            layout: { top: 45, left: 10, height: 17, width: 80 },
             value: "_Submitter:".loc()
           }),
           submitterField: SCUI.ComboBoxView.design({
-            layout: { top: 10, left: 75, width: 250, height: 20 },
+            layout: { top: 45, left: 75, width: 250, height: 20 },
             objectsBinding: this._listUsers(false),
             nameKey: 'displayName',
             valueKey: 'id',
@@ -105,12 +214,12 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           }),
 
           assigneeLabel: SC.LabelView.design({
-            layout: { top: 10, right: 265, height: 17, width: 80 },
+            layout: { top: 45, right: 265, height: 17, width: 80 },
             textAlign: SC.ALIGN_RIGHT,
             value: "_Assignee:".loc()
           }),
           assigneeField: SCUI.ComboBoxView.design({
-            layout: { top: 10, right: 10, width: 250, height: 20 },
+            layout: { top: 45, right: 10, width: 250, height: 20 },
             objectsBinding: this._listUsers(true),
             nameKey: 'displayName',
             valueKey: 'id',
@@ -120,28 +229,28 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           }),
 
           effortLabel: SC.LabelView.design({
-            layout: { top: 47, left: 10, height: 17, width: 100 },
+            layout: { top: 82, left: 10, height: 17, width: 100 },
             value: "_Effort:".loc()
           }),
           effortField: SC.TextFieldView.design({
-            layout: { top: 47, left: 55, width: 80, height: 20 },
+            layout: { top: 82, left: 55, width: 80, height: 20 },
             isEnabledBinding: 'Tasks.tasksController.isEditable',
             valueBinding: SC.binding('.content.effortValue', this)
           }),
           effortHelpLabel: SC.LabelView.design({
-            layout: { top: 45, left: 145, height: 30, width: 275 },
+            layout: { top: 82, left: 145, height: 30, width: 275 },
             escapeHTML: NO,
             classNames: [ 'onscreen-help'],
             value: "_EffortOnscreenHelp".loc()
           }),
           
           projectLabel: SC.LabelView.design({
-            layout: { top: 47, right: 265, height: 17, width: 80 },
+            layout: { top: 82, right: 265, height: 17, width: 80 },
             textAlign: SC.ALIGN_RIGHT,
             value: "_Project:".loc()
           }),
           projectField: SCUI.ComboBoxView.design({
-            layout: { top: 47, right: 10, width: 250, height: 20 },
+            layout: { top: 82, right: 10, width: 250, height: 20 },
             objectsBinding: this._listProjects(),
             nameKey: 'displayName',
             valueKey: 'id',
@@ -151,12 +260,12 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           }),
 
           descriptionLabel: SC.LabelView.design({
-            layout: { top: 75, left: 10, height: 17, width: 100 },
+            layout: { top: 115, left: 10, height: 17, width: 100 },
             icon: 'description-icon',
             value: "_Description:".loc()
           }),
           descriptionField: SC.TextFieldView.design({
-            layout: { top: 98, left: 10, right: 10, bottom: 25 },
+            layout: { top: 138, left: 10, right: 10, bottom: 25 },
             hint: "_DescriptionHint".loc(),
             isTextArea: YES,
             isEnabled: YES,

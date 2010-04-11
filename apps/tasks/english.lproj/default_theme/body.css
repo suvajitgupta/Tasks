@@ -224,12 +224,17 @@ body {
 // FIXME: [SC] hacks to turn off blue ring highlight around select button with focus
 */
 .sc-theme .sc-button-view.popup.focus .focus-ring .focus-middle,
-.sc-theme .sc-button-view.square.focus .focus-ring .focus-left,
-.sc-theme .sc-button-view.dropdown.focus .focus-ring .focus-left,
 .sc-theme .sc-button-view.popup.focus .focus-ring .focus-left,
+.sc-theme .sc-button-view.popup.focus .focus-ring .focus-right,
+.sc-theme .sc-button-view.square.focus .focus-ring .focus-middle,
+.sc-theme .sc-button-view.square.focus .focus-ring .focus-left,
 .sc-theme .sc-button-view.square.focus .focus-ring .focus-right,
-.sc-theme .sc-button-view.dropdown.focus .focus-ring .focus-right,
-.sc-theme .sc-button-view.popup.focus .focus-ring .focus-right {
+.sc-theme .sc-button-view.capsule.focus .focus-ring .focus-middle,
+.sc-theme .sc-button-view.capsule.focus .focus-ring .focus-left,
+.sc-theme .sc-button-view.capsule.focus .focus-ring .focus-right,
+.sc-theme .sc-button-view.dropdown.focus .focus-ring .focus-middle,
+.sc-theme .sc-button-view.dropdown.focus .focus-ring .focus-left,
+.sc-theme .sc-button-view.dropdown.focus .focus-ring .focus-right {
   background: none !important;
 }
 
@@ -241,7 +246,7 @@ body {
   width: 18px !important;
   height: 17px !important;
   border: 1px solid gray !important;
-  margin-right: 2px !important;
+  margin-right: 8px !important;
   background: static_url('images/dropdown-arrow.png') no-repeat 0 0;
 }
 
