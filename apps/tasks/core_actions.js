@@ -474,7 +474,7 @@ Tasks.mixin({
   /**
    * Popup Project Statistics panel.
    */
-  projectStatistics: function() {
+  viewStatistics: function() {
     Tasks.assignmentsController.showStatistics();  
   },
   
@@ -726,6 +726,20 @@ Tasks.mixin({
   */
   launchSignupPane: function(){
     Tasks.SIGNUP.didBecomeFirstResponder();
+  },
+
+  /**
+    Manipulate auto save option.
+  */
+  toggleAutoSave: function(){
+    CoreTasks.set('autoSave', !CoreTasks.get('autoSave'));
+  },
+
+  /**
+    Manipulate email notifications option.
+  */
+  toggleShouldNotify: function(){
+    CoreTasks.set('shouldNotify', !CoreTasks.get('shouldNotify'));
   },
 
   /**

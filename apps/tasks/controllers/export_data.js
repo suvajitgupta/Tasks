@@ -384,29 +384,7 @@ Tasks.exportDataController = SC.ObjectController.create(
     
   },
   
-  _exportDataAsText: function() { this._exportData('Text'); },
-  _exportDataAsHTML: function() { this._exportData('HTML'); },
+  exportDataAsText: function() { this._exportData('Text'); },
+  exportDataAsHTML: function() { this._exportData('HTML'); }
   
-  /**
-  * Export Tasks data in one of the available formats.
-  */
-  selectExportDataFormat: function() {
-    var pane = SC.MenuPane.create({
-      layout: { width: 175, height: 0 },
-      items: [
-        { title: "_ExportText", icon: 'text-icon', isEnabled: YES, target: this, action: '_exportDataAsText' },
-        { title: "_ExportHTML", icon: 'html-icon', isEnabled: YES, target: this, action: '_exportDataAsHTML' }
-      ],
-      localize: YES,
-      itemIsEnabledKey: 'isEnabled',
-      itemTitleKey: 'title',
-      itemIconKey: 'icon',
-      itemActionKey: 'action',
-      preferType: SC.PICKER_MENU,
-      contentView: SC.View.extend({})
-    });
-    pane.popup(Tasks.getPath('mainPage.mainPane.exportButton')); // TODO: [SG] convert to a full menu of top bar actions instead of popup menu on button
-  }
-  
-
 });

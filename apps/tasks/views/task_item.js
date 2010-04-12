@@ -145,7 +145,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
             toolTip: "_TypeTooltip".loc()
           }),
                     
-          // FIXME: [SG] figure out how to pass styles into SelectButtonView so that task priority/status/validation can be displayed
+          // TODO: [SG] figure out how to pass styles into SelectButtonView so that task priority/status/validation can be displayed
           priorityLabel: SC.LabelView.design({
             layout: { top: 10, left: 175, height: 24, width: 55 },
             textAlign: SC.ALIGN_RIGHT,
