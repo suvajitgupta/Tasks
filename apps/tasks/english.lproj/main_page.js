@@ -17,6 +17,37 @@ sc_require('views/summary');
   @author Joshua Holt
 */
 
+Tasks.actionsMenuHelper = SC.Object.create({
+
+  displayedTasksCountBinding: SC.Binding.oneWay('Tasks.tasksController*arrangedObjects.length'),
+  autoSaveBinding: SC.Binding.oneWay('CoreTasks*autoSave'),
+
+  // TODO: [SG] ensure proper ellipses, icons, tooltips, and enablement logic
+  _listActions: function() {
+    var ret = [];
+    if(this.getPath('displayedTasksCount') > 0) {
+      ret.push({ title: "_ViewStatistics".loc(), icon: 'statistics-icon', target: 'Tasks', action: 'viewStatistics', isEnabled: YES });
+      ret.push({ isSeparator: YES });
+    }
+    ret.push({ title: "_ImportData".loc(), icon: 'import-icon', target: 'Tasks', action: 'importData', isEnabled: YES });
+    ret.push({ title: "_ExportText".loc(), icon: 'text-icon', target: 'Tasks.exportDataController', action: 'exportDataAsText', isEnabled: YES });
+    ret.push({ title: "_ExportHTML".loc(), icon: 'html-icon', target: 'Tasks.exportDataController', action: 'exportDataAsHTML', isEnabled: YES });
+    ret.push({ isSeparator: YES });
+    ret.push({ title: "_Settings".loc(), icon: 'settings-icon', target: 'Tasks', action: 'settings', isEnabled: YES });
+    var autoSave = CoreTasks.get('autoSave');
+    ret.push({ title: (autoSave? "_Disable".loc() : "_Enable".loc()) + "_AutoSave".loc(), icon: 'save-icon', target: 'Tasks', action: 'toggleAutoSave', isEnabled: YES, checkbox: !autoSave });
+    if(CoreTasks.get('canServerSendNotifications')) {
+      var shouldNotify = CoreTasks.get('shouldNotify');
+      ret.push({ title: (shouldNotify? "_Disable".loc() : "_Enable".loc()) + "_SendNotifications".loc(), icon: 'notification-icon', target: 'Tasks', action: 'toggleShouldNotify', isEnabled: YES, checkbox: !shouldNotify });
+    }
+    ret.push({ isSeparator: YES });
+    ret.push({ title: "_Help".loc(), icon: 'sc-icon-help-16', target: 'Tasks', action: 'help', isEnabled: YES });
+    ret.push({ title: "_Logout".loc(), icon: sc_static('blank'), target: 'Tasks', action: 'logout', isEnabled: YES });
+    return ret;
+  }.property('autoSave', 'displayedTasksCount').cacheable()
+  
+});
+
 Tasks.mainPage = SC.Page.design({
 
   mainPane: SC.MainPane.design({
@@ -27,10 +58,18 @@ Tasks.mainPage = SC.Page.design({
     topBarView: SC.View.design(SC.Border, {
       layout: { top: 2, left: 0, right: 0, height: 43 },
       classNames: ['title-bar'],
-      childViews: 'tasksLogo installationLogo userNameLabel displayModeSegments userSelectionField userSelectionCancelButton filterPanelButton filterCancelButton tasksSearchField tasksSearchCancelButton'.w(),
+      childViews: 'tasksLogo userNameLabel installationLogo actionsMenu displayModeSegments userSelectionField userSelectionCancelButton filterPanelButton filterCancelButton tasksSearchField tasksSearchCancelButton'.w(),
       
       tasksLogo: Tasks.LogoView.design({
         layout: { left: 5, width: 145, top: 0, height: 24 }
+      }),
+
+      userNameLabel: SC.LabelView.design(SCUI.ToolTip, {
+        layout: { bottom: 2, left: 0, width: 150, height: 16 },
+        valueBinding: SC.Binding.transform(function(value, binding) {
+          return value? ("_Hi".loc() + value) : '';
+        }).from('CoreTasks*currentUser.name'),
+        classNames: ['user-name-message']
       }),
 
       installationLogo: SC.View.design({
@@ -51,17 +90,29 @@ Tasks.mainPage = SC.Page.design({
           }
         }
       }),
-
-      userNameLabel: SC.LabelView.design(SCUI.ToolTip, {
-        layout: { bottom: 2, left: 0, width: 150, height: 16 },
-        valueBinding: SC.Binding.transform(function(value, binding) {
-          return value? ("_Hi".loc() + value) : '';
-        }).from('CoreTasks*currentUser.name'),
-        classNames: ['user-name-message']
+      actionsMenu: SC.ButtonView.design(SCUI.DropDown, {
+        layout: { centerY: 0, left: 320, height: 24, width: 42 },
+        classNames: ['actions-menu'],
+        titleMinWidth: 0,
+        hasIcon: YES,
+        icon: 'actions-icon',
+        toolTip: "_ActionsMenuTooltip".loc(),
+        dropDown: SC.MenuPane.design({
+          contentView: SC.View.design({}),
+          layout: { width: 175, height: 0 },
+          itemTitleKey: 'title',
+          itemIconKey: 'icon',
+          itemTargetKey: 'target',
+          itemActionKey: 'action',
+          itemSeparatorKey: 'isSeparator',
+          itemIsEnabledKey: 'isEnabled',
+          itemCheckboxKey: 'checkbox',
+          itemsBinding: SC.Binding.oneWay('Tasks.actionsMenuHelper._listActions')    
+        })
       }),
 
       displayModeSegments: SC.SegmentedView.design(SCUI.ToolTip, {
-        layout: { centerY: 0, centerX: -90, height: 24, width: 145},
+        layout: { centerY: 0, centerX: -70, height: 24, width: 100 },
         classNames: ['display-modes'],
         items: [
           { title: "_Tasks".loc(), icon: 'tasks-icon', value: Tasks.DISPLAY_MODE_TASKS },
@@ -94,7 +145,7 @@ Tasks.mainPage = SC.Page.design({
       filterPanelButton: SC.LabelView.design(SCUI.SimpleButton,{
         layout: { centerY: 0, right: 202, height: 18, width: 50 },
         icon: 'filter-icon',
-        classNames: ['toolbar-label', 'filter-label'],
+        classNames: ['top-bar-label', 'filter-label'],
         value: "_Filter".loc(),
         toolTip: "_FilterTooltip".loc(),
         target: 'Tasks',
@@ -128,80 +179,6 @@ Tasks.mainPage = SC.Page.design({
         isVisibleBinding: SC.Binding.oneWay('Tasks.assignmentsController.searchFilter').bool()
       })
                              
-      // TODO: [SG] convert all of these to a drop-down actions menu
-      
-      // notificationsCheckbox: SC.CheckboxView.design(SCUI.ToolTip, {
-      //   layout: { centerY: 0, height: 16, right: 350, width: 90 },
-      //   classNames: ['status-bar-label'],
-      //   textAlign: SC.ALIGN_RIGHT,
-      //   // isVisible: NO,
-      //   isVisibleBinding: SC.binding('CoreTasks*canServerSendNotifications'),
-      //   title: "_SendNotifications".loc(),
-      //   toolTip: "_SendNotificationsTooltip".loc(),
-      //   valueBinding: 'CoreTasks.shouldNotify'
-      // }),
-      // 
-      // autoSaveCheckbox: SC.CheckboxView.design(SCUI.ToolTip, {
-      //   layout: { centerY: 0, height: 16, right: 260, width: 75 },
-      //   classNames: ['status-bar-label'],
-      //   textAlign: SC.ALIGN_RIGHT,
-      //   title: "_AutoSave".loc(),
-      //   toolTip: "_AutoSaveTooltip".loc(),
-      //   valueBinding: 'CoreTasks.autoSave'
-      // }),
-      // 
-      // statisticsButton: SC.LabelView.design( SCUI.SimpleButton, {
-      //   layout: { centerY: 0, height: 16, left: 220, width: 90 },
-      //   titleMinWidth: 0,
-      //   classNames: ['status-bar-button'],
-      //   value: "_ShowStatistics".loc(),
-      //   icon: 'statistics-icon',
-      //   toolTip: "_ShowStatisticsTooltip".loc(),
-      //   isEnabledBinding: SC.Binding.oneWay('Tasks.tasksController*arrangedObjects.length').bool(),
-      //   target: 'Tasks',
-      //   action: 'projectStatistics'
-      // }),
-      // 
-      // importButton: SC.LabelView.design( SCUI.SimpleButton, {
-      //   layout: { centerY: 0, right: 235, height: 32, width: 60 },
-      //   icon: ['import-icon'],
-      //   toolTip: "_ImportTooltip".loc(),
-      //   target: 'Tasks',
-      //   action: 'importData'
-      // }),
-      // 
-      // exportButton: SC.LabelView.design( SCUI.SimpleButton, {
-      //   layout: { centerY: 0, right: 180, height: 32, width: 32 },
-      //   classNames: ['export-icon'],
-      //   toolTip: "_ExportTooltip".loc(),
-      //   target: 'Tasks.exportDataController',
-      //   action: 'selectExportDataFormat'
-      // }),
-      // 
-      // settingsButton: SC.LabelView.design( SCUI.SimpleButton, {
-      //   layout: { centerY: 0, right: 110, height: 32, width: 32 },
-      //   classNames: ['settings-icon'],
-      //   toolTip: "_SettingsTooltip".loc(),
-      //   target: 'Tasks',
-      //   action: 'settings'
-      // }),
-      // 
-      // helpButton: SC.LabelView.design( SCUI.SimpleButton, {
-      //   layout: { centerY: 0, right: 55, height: 32, width: 32 },
-      //   classNames: ['help-icon'],
-      //   toolTip: "_HelpTooltip".loc(),
-      //   target: 'Tasks',
-      //   action: 'help'
-      // }),
-      // 
-      // logoutButton: SC.LabelView.design( SCUI.SimpleButton, {
-      //   layout: { centerY: 0, right: 5, height: 32, width: 32 },
-      //   classNames: ['logout-icon'],
-      //   toolTip: "_LogoutTooltip".loc(),
-      //   target: 'Tasks',
-      //   action: 'logout'
-      // })
-        
     }),
     
     userName: SC.outlet('topBarView.userNameLabel'),
@@ -357,14 +334,14 @@ Tasks.mainPage = SC.Page.design({
     
     bottomBarView: SC.View.design(SC.Border, {
       layout: { bottom: 0, height: 24, left: 0, right: 0 },
-      classNames: ['status-bar'],
+      classNames: ['bottom-bar'],
       childViews: 'addProjectButton deleteProjectButton selectionView divider addTaskButton deleteTaskButton summaryView serverMessageView refreshButton saveButton'.w(),
       borderStyle: SC.BORDER_TOP,
         
       addProjectButton: SC.LabelView.design(SCUI.SimpleButton,{
         layout: { centerY: 0, left: 7, height: 16, width: 16 },
         icon: 'add-icon',
-        classNames: ['toolbar-label'],
+        classNames: ['top-bar-label'],
         toolTip: "_AddProjectTooltip".loc(),
         isVisibleBinding: 'CoreTasks.permissions.canCreateProject',
         target: 'Tasks',
@@ -373,7 +350,7 @@ Tasks.mainPage = SC.Page.design({
       deleteProjectButton: SC.LabelView.design(SCUI.SimpleButton,{
         layout: { centerY: 0, left: 33, height: 16, width: 16 },
         icon: 'delete-icon',
-        classNames: ['toolbar-label'],
+        classNames: ['top-bar-label'],
         toolTip: "_DeleteProjectTooltip".loc(),
         isVisibleBinding: 'CoreTasks.permissions.canDeleteProject',
         isEnabledBinding: 'Tasks.projectsController.isDeletable',
@@ -383,7 +360,7 @@ Tasks.mainPage = SC.Page.design({
       
       selectionView: Tasks.SelectionView.design({
         layout: { centerY: 0, height: 16, left: 57, width: 220 },
-        classNames: ['status-bar-label'],
+        classNames: ['bottom-bar-label'],
         textAlign: SC.ALIGN_LEFT,
         projectsSelectionBinding: SC.Binding.oneWay('Tasks.projectsController.selection'),
         tasksSelectionBinding: SC.Binding.oneWay('Tasks.tasksController.selection')
@@ -416,28 +393,28 @@ Tasks.mainPage = SC.Page.design({
       
       summaryView: Tasks.SummaryView.design({
         layout: { centerY: 0, height: 16, left: 290, width: 250 },
-        classNames: ['status-bar-label'],
+        classNames: ['bottom-bar-label'],
         displayModeBinding: SC.Binding.oneWay('Tasks.assignmentsController.displayMode'),
         tasksTreeBinding: SC.Binding.oneWay('Tasks.tasksController.content')
       }),
         
       serverMessageView: SC.LabelView.design({
         layout: { centerY: 0, height: 16, right: 55, width: 250 },
-        classNames: ['status-bar-label'],
+        classNames: ['bottom-bar-label'],
         icon: '',
         textAlign: SC.ALIGN_RIGHT,
         value: ''
       }),
 
       refreshButton: SC.LabelView.design( SCUI.SimpleButton, {
-        layout: { centerY: 0, height: 16, right: 30, width: 16 },
+        layout: { centerY: 0, height: 18, right: 30, width: 18 },
         icon: 'refresh-icon',
         toolTip: "_RefreshTooltip".loc(),
         target: 'Tasks',
         action: 'refreshData'
       }),
       saveButton: SC.LabelView.design( SCUI.SimpleButton, {
-        layout: { centerY: 0, height: 16, right: 7, width: 16 },
+        layout: { centerY: 0, height: 18, right: 7, width: 18 },
         icon: 'save-icon',
         toolTip: "_SaveTooltip".loc(),
         isEnabledBinding: 'CoreTasks.needsSave',

@@ -146,6 +146,18 @@ body {
   text-align: left !important;
 }
 
+.actions-menu span label{
+  margin-left: 6px !important;
+  margin-right: 6px !important;
+  line-height: 28px !important;
+}
+
+.actions-icon {
+  width: 25px !important;
+  height: 16px !important;
+  background: static_url('images/actions.png') no-repeat;
+}
+
 .tasks-icon {
   width: 16px !important;
   height: 16px !important;
@@ -155,19 +167,19 @@ body {
 .text-icon {
   width: 16px;
   height: 16px;
-  background: static_url('images/text.png') no-repeat 0 0;
+  background: static_url('images/text.png') no-repeat;
 }
 
 .html-icon {
   width: 16px;
   height: 16px;
-  background: static_url('images/html.png') no-repeat 0 0;
+  background: static_url('images/html.png') no-repeat;
 }
 
 .description-icon {
   width: 16px;
   height: 16px;
-  background: static_url('images/description.png') no-repeat 0 0;
+  background: static_url('images/description.png') no-repeat;
 }
 
 .checkbox-icon .icon {
@@ -188,7 +200,7 @@ body {
 	width: 24px;
 }
 
-.sc-view.sc-label-view.toolbar-label.icon img.icon {
+.sc-view.sc-label-view.top-bar-label.icon img.icon {
 	top: 0px;
 	margin-left: 0px;
 	margin-right: 2px;

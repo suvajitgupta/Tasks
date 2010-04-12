@@ -11,10 +11,6 @@
 * Control bar styles
 */
 
-.control-bar {
-  background: static_url('images/default-theme-repeat-x.png') repeat-x 0 -71px; 
-}
-
 .task-attribute-set-title  {
   font-size: 10px !important;
   color: #000 !important;
@@ -36,29 +32,41 @@
   padding-right: 4px;
 }
 
-/*
-// FIXME: [SC] remove hacks to workaround bug in radiobutton styling on non-OSX platforms, can't do this for Linux
-*/
-.mozilla.windows .control-bar .sc-radio-view.sc-layout-horizontal .sc-radio-button {
-  margin-top: -12px;
-}
-.chrome.windows .control-bar .sc-radio-view.sc-layout-horizontal .sc-radio-button,
-.safari.windows .control-bar .sc-radio-view.sc-layout-horizontal .sc-radio-button,
-.safari.mac .control-bar .sc-radio-view.sc-layout-horizontal .sc-radio-button {
-  margin-top: 4px;
-}
-
 /*-----------------------------------------------------------------
  * Status bar styles/icons
  */
 
-.status-bar {
+.bottom-bar {
   background: static_url('images/default-theme-repeat-x.png') repeat-x 0 -44px;
 }
 
 .divider {
   background: static_url('images/default-theme-repeat-y.png') repeat-y -239px 0;
   border: 0;
+}
+
+.add-icon {
+  width: 16px;
+  height: 16px;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -288px;
+}
+
+.disabled .add-icon {
+  width: 16px;
+  height: 16px;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -320px;
+}
+
+.delete-icon {
+  width: 16px;
+  height: 16px;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -303px;
+}
+
+.disabled .delete-icon {
+  width: 16px;
+  height: 16px;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -335px;
 }
 
 .progress-icon {
@@ -83,21 +91,10 @@
   opacity: 0.5;
 }
 
-.status-bar-label {
+.bottom-bar-label {
   font-size: 10px !important;
   color: #000 !important;
   text-shadow: #fff 0 1px 1px;
-}
-
-.status-bar-button {
-  font-size: 10px !important;
-  font-weight: bold !important;
-  text-align: center !important;
-  color: #000 !important;
-}
-
-.status-bar-button.disabled {
-  color: #777 !important;
 }
 
 .statistics-icon {
