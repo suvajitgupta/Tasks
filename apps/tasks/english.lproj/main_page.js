@@ -23,7 +23,7 @@ Tasks.actionsMenuHelper = SC.Object.create({
   autoSaveBinding: SC.Binding.oneWay('CoreTasks*autoSave'),
   shouldNotifyBinding: SC.Binding.oneWay('CoreTasks*shouldNotify'),
 
-  // TODO: [SG] ensure proper ellipses, icons, tooltips, and enablement logic
+  // TODO: [SG] Beta: add tooltips to actions menu items
   _listActions: function() {
     var ret = [];
     if(this.getPath('displayedTasksCount') > 0) {
