@@ -21,6 +21,7 @@ Tasks.actionsMenuHelper = SC.Object.create({
 
   displayedTasksCountBinding: SC.Binding.oneWay('Tasks.tasksController*arrangedObjects.length'),
   autoSaveBinding: SC.Binding.oneWay('CoreTasks*autoSave'),
+  shouldNotifyBinding: SC.Binding.oneWay('CoreTasks*shouldNotify'),
 
   // TODO: [SG] ensure proper ellipses, icons, tooltips, and enablement logic
   _listActions: function() {
@@ -34,17 +35,17 @@ Tasks.actionsMenuHelper = SC.Object.create({
     ret.push({ title: "_ExportHTML".loc(), icon: 'html-icon', target: 'Tasks.exportDataController', action: 'exportDataAsHTML', isEnabled: YES });
     ret.push({ isSeparator: YES });
     ret.push({ title: "_Settings".loc(), icon: 'settings-icon', target: 'Tasks', action: 'settings', isEnabled: YES });
-    var autoSave = CoreTasks.get('autoSave');
+    var autoSave = this.get('autoSave');
     ret.push({ title: (autoSave? "_Disable".loc() : "_Enable".loc()) + "_AutoSave".loc(), icon: 'save-icon', target: 'Tasks', action: 'toggleAutoSave', isEnabled: YES, checkbox: !autoSave });
     if(CoreTasks.get('canServerSendNotifications')) {
-      var shouldNotify = CoreTasks.get('shouldNotify');
+      var shouldNotify = this.get('shouldNotify');
       ret.push({ title: (shouldNotify? "_Disable".loc() : "_Enable".loc()) + "_SendNotifications".loc(), icon: 'notification-icon', target: 'Tasks', action: 'toggleShouldNotify', isEnabled: YES, checkbox: !shouldNotify });
     }
     ret.push({ isSeparator: YES });
     ret.push({ title: "_Help".loc(), icon: 'sc-icon-help-16', target: 'Tasks', action: 'help', isEnabled: YES });
     ret.push({ title: "_Logout".loc(), icon: sc_static('blank'), target: 'Tasks', action: 'logout', isEnabled: YES });
     return ret;
-  }.property('autoSave', 'displayedTasksCount').cacheable()
+  }.property('displayedTasksCount', 'autoSave', 'shouldNotify').cacheable()
   
 });
 
