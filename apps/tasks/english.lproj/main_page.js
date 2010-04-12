@@ -17,7 +17,8 @@ sc_require('views/summary');
   @author Joshua Holt
 */
 
-Tasks.actionsMenuHelper = SC.Object.create({
+Tasks._wideLogo = document.title.match(/Eloqua/)? true : false;
+Tasks.mainPageHelper = SC.Object.create({
 
   displayedTasksCountBinding: SC.Binding.oneWay('Tasks.tasksController*arrangedObjects.length'),
   autoSaveBinding: SC.Binding.oneWay('CoreTasks*autoSave'),
@@ -45,7 +46,17 @@ Tasks.actionsMenuHelper = SC.Object.create({
     ret.push({ title: "_Help".loc(), icon: 'sc-icon-help-16', target: 'Tasks', action: 'help', isEnabled: YES });
     ret.push({ title: "_Logout".loc(), icon: sc_static('blank'), target: 'Tasks', action: 'logout', isEnabled: YES });
     return ret;
-  }.property('displayedTasksCount', 'autoSave', 'shouldNotify').cacheable()
+  }.property('displayedTasksCount', 'autoSave', 'shouldNotify').cacheable(),
+  
+  currentUserNameBinding: SC.Binding.oneWay('CoreTasks*currentUser.name'),
+  currentUserRoleBinding: SC.Binding.oneWay('CoreTasks*currentUser.role'),
+  welcomeMessage: function() {
+    var name = this.get('currentUserName');
+    var role = this.get('currentUserRole');
+    if(SC.none(name) || SC.none(role)) return '';
+    if(!Tasks.softwareMode && role === CoreTasks.USER_ROLE_DEVELOPER) role = "_User";
+    return "_Hi".loc() + name + ' <i>(' + role.loc() + ')</i>';
+  }.property('currentUserName', 'currentUserRole').cacheable()
   
 });
 
@@ -57,24 +68,13 @@ Tasks.mainPage = SC.Page.design({
     childViews: 'topBarView masterDetailView bottomBarView'.w(),
     
     topBarView: SC.View.design(SC.Border, {
-      layout: { top: 2, left: 0, right: 0, height: 43 },
-      classNames: ['title-bar'],
-      childViews: 'tasksLogo userNameLabel installationLogo actionsMenu displayModeSegments userSelectionField userSelectionCancelButton filterPanelButton filterCancelButton tasksSearchField tasksSearchCancelButton'.w(),
       
-      tasksLogo: Tasks.LogoView.design({
-        layout: { left: 5, width: 145, top: 0, height: 24 }
-      }),
-
-      userNameLabel: SC.LabelView.design(SCUI.ToolTip, {
-        layout: { bottom: 2, left: 0, width: 150, height: 16 },
-        valueBinding: SC.Binding.transform(function(value, binding) {
-          return value? ("_Hi".loc() + value) : '';
-        }).from('CoreTasks*currentUser.name'),
-        classNames: ['user-name-message']
-      }),
-
+      layout: { top: 0, left: 0, right: 0, height: 43 },
+      classNames: ['title-bar'],
+      childViews: 'installationLogo tasksLogo userNameLabel displayModeSegments userSelectionField userSelectionCancelButton filterPanelButton filterCancelButton tasksSearchField tasksSearchCancelButton actionsMenu'.w(),
+      
       installationLogo: SC.View.design({
-        layout: { left: 155, width: document.title.match(/Dev|Demo|Greenhouse/)? 32: 140, centerY: -1, height: 32 },
+        layout: { left: 4, top: 3, width: Tasks._wideLogo? 80: 35, height: Tasks._wideLogo? 20 : 35 },
         tagName: 'img',
         render: function(context, firstTime) {
           if(document.title.match(/Dev/)) {
@@ -83,16 +83,102 @@ Tasks.mainPage = SC.Page.design({
           else if(document.title.match(/Demo/)) {
             context.attr('src', sc_static('images/demo-logo.jpg'));
           }
-          else if(document.title.match(/Greenhouse/)) {
-            context.attr('src', sc_static('images/greenhouse-logo.png'));
-          }
           else if(document.title.match(/SproutCore/)) {
             context.attr('src', sc_static('images/sproutcore-logo.png'));
           }
+          else if(document.title.match(/Greenhouse/)) {
+            context.attr('src', sc_static('images/greenhouse-logo.png'));
+          }
+          else if(document.title.match(/TPG/)) {
+            context.attr('src', sc_static('images/tpg-logo.png'));
+          }
+          else if(document.title.match(/Eloqua/)) {
+            context.attr('src', sc_static('images/eloqua-logo.gif'));
+          }
         }
       }),
+      
+      tasksLogo: Tasks.LogoView.design({
+        layout: { left: Tasks._wideLogo? 90 : 42, width: 145, top: 2, height: 24 }
+      }),
+
+      userNameLabel: SC.LabelView.design(SCUI.ToolTip, {
+        layout: { bottom: 1, left: Tasks._wideLogo? 5 : 45, width: 215, height: 16 },
+        classNames: ['welcome-message'],
+        escapeHTML: NO,
+        valueBinding: SC.Binding.oneWay('Tasks.mainPageHelper.welcomeMessage')
+      }),
+
+      displayModeSegments: SC.SegmentedView.design(SCUI.ToolTip, {
+        layout: { left: 260, centerY: 0, height: 24, width: 135 },
+        classNames: ['display-modes'],
+        items: [
+          { title: "_Tasks".loc(), icon: 'tasks-icon', value: Tasks.DISPLAY_MODE_TASKS },
+          { title: "_Team".loc(), icon: 'sc-icon-group-16', value: Tasks.DISPLAY_MODE_TEAM }
+        ],
+        itemTitleKey: 'title',
+        itemIconKey: 'icon', // disabling icons for now - appearing too cluttered
+        itemValueKey: 'value',
+        toolTip: "_DisplayModeTooltip".loc(),
+        valueBinding: 'Tasks.assignmentsController.displayMode'
+      }),
+
+      userSelectionField: SC.TextFieldView.design(SCUI.ToolTip, {
+        layout: { centerY: 0, height: 24, right: 370, width: 200 },
+        classNames: ['user-selection-bar'],
+        hint: "_UserSelectionHint".loc(),
+        toolTip: "_UserSelectionTooltip".loc(),
+        valueBinding: 'Tasks.assignmentsController.userSelection'
+      }),
+      userSelectionCancelButton: SC.View.design({ // Assignee/Submitter selection cancel button
+        layout: { centerY: 1, height: 12, right: 375, width: 12 },
+        isVisible: NO,
+        classNames: ['filter-cancel-icon'],
+        mouseDown: function() {
+          Tasks.assignmentsController.set('userSelection', '');
+        },
+        isVisibleBinding: SC.Binding.oneWay('Tasks.assignmentsController.userSelection').bool()
+      }),
+    
+      filterPanelButton: SC.LabelView.design(SCUI.SimpleButton,{
+        layout: { centerY: 0, height: 18, right: 292, width: 50 },
+        icon: 'filter-icon',
+        classNames: ['top-bar-label', 'filter-label'],
+        value: "_Filter".loc(),
+        toolTip: "_FilterTooltip".loc(),
+        target: 'Tasks',
+        action: 'filterTasks'
+      }),
+      filterCancelButton: SC.View.design({ // Filter cancel button
+        layout: { centerY: 1, height: 12, right: 302, width: 12 },
+        isVisible: NO,
+        classNames: ['filter-cancel-icon'],
+        mouseDown: function() {
+          Tasks.assignmentsController.clearAttributeFilter();
+          Tasks.assignmentsController.showAssignments();
+        },
+        isVisibleBinding: SC.Binding.oneWay('Tasks.assignmentsController.attributeFilterEnabled').bool()
+      }),
+    
+      tasksSearchField: SC.TextFieldView.design(SCUI.ToolTip, {
+        layout: { centerY: 0, height: 24, right: 95, width: 200 },
+        classNames: ['tasks-search-bar'],
+        hint: "_TasksSearchHint".loc(),
+        toolTip: "_TasksSearchTooltip".loc(),
+        valueBinding: 'Tasks.assignmentsController.searchFilter'
+      }),
+      tasksSearchCancelButton: SC.View.design({ // Tasks Search cancel button
+        layout: { centerY: 1, height: 12, right: 100, width: 12 },
+        isVisible: NO,
+        classNames: ['filter-cancel-icon'],
+        mouseDown: function() {
+          Tasks.assignmentsController.set('searchFilter', '');
+        },
+        isVisibleBinding: SC.Binding.oneWay('Tasks.assignmentsController.searchFilter').bool()
+      }),
+      
       actionsMenu: SC.ButtonView.design(SCUI.DropDown, {
-        layout: { centerY: 0, left: 320, height: 24, width: 42 },
+        layout: { centerY: 0, right: 5, height: 24, width: 42 },
         classNames: ['actions-menu'],
         titleMinWidth: 0,
         hasIcon: YES,
@@ -108,76 +194,8 @@ Tasks.mainPage = SC.Page.design({
           itemSeparatorKey: 'isSeparator',
           itemIsEnabledKey: 'isEnabled',
           itemCheckboxKey: 'checkbox',
-          itemsBinding: SC.Binding.oneWay('Tasks.actionsMenuHelper._listActions')    
+          itemsBinding: SC.Binding.oneWay('Tasks.mainPageHelper._listActions')    
         })
-      }),
-
-      displayModeSegments: SC.SegmentedView.design(SCUI.ToolTip, {
-        layout: { centerY: 0, centerX: -70, height: 24, width: 100 },
-        classNames: ['display-modes'],
-        items: [
-          { title: "_Tasks".loc(), icon: 'tasks-icon', value: Tasks.DISPLAY_MODE_TASKS },
-          { title: "_Team".loc(), icon: 'sc-icon-group-16', value: Tasks.DISPLAY_MODE_TEAM }
-        ],
-        itemTitleKey: 'title',
-        // itemIconKey: 'icon', // disabling icons for now - appearing too cluttered
-        itemValueKey: 'value',
-        toolTip: "_DisplayModeTooltip".loc(),
-        valueBinding: 'Tasks.assignmentsController.displayMode'
-      }),
-
-      userSelectionField: SC.TextFieldView.design(SCUI.ToolTip, {
-        layout: { centerY: 0, height: 24, right: 280, width: 200 },
-        classNames: ['user-selection-bar'],
-        hint: "_UserSelectionHint".loc(),
-        toolTip: "_UserSelectionTooltip".loc(),
-        valueBinding: 'Tasks.assignmentsController.userSelection'
-      }),
-      userSelectionCancelButton: SC.View.design({ // Assignee/Submitter selection cancel button
-        layout: { centerY: 1, height: 12, right: 285, width: 12 },
-        isVisible: NO,
-        classNames: ['filter-cancel-icon'],
-        mouseDown: function() {
-          Tasks.assignmentsController.set('userSelection', '');
-        },
-        isVisibleBinding: SC.Binding.oneWay('Tasks.assignmentsController.userSelection').bool()
-      }),
-    
-      filterPanelButton: SC.LabelView.design(SCUI.SimpleButton,{
-        layout: { centerY: 0, right: 202, height: 18, width: 50 },
-        icon: 'filter-icon',
-        classNames: ['top-bar-label', 'filter-label'],
-        value: "_Filter".loc(),
-        toolTip: "_FilterTooltip".loc(),
-        target: 'Tasks',
-        action: 'filterTasks'
-      }),
-      filterCancelButton: SC.View.design({ // Filter cancel button
-        layout: { centerY: 1, height: 12, right: 212, width: 12 },
-        isVisible: NO,
-        classNames: ['filter-cancel-icon'],
-        mouseDown: function() {
-          Tasks.assignmentsController.clearAttributeFilter();
-          Tasks.assignmentsController.showAssignments();
-        },
-        isVisibleBinding: SC.Binding.oneWay('Tasks.assignmentsController.attributeFilterEnabled').bool()
-      }),
-    
-      tasksSearchField: SC.TextFieldView.design(SCUI.ToolTip, {
-        layout: { centerY: 0, height: 24, right: 5, width: 200 },
-        classNames: ['tasks-search-bar'],
-        hint: "_TasksSearchHint".loc(),
-        toolTip: "_TasksSearchTooltip".loc(),
-        valueBinding: 'Tasks.assignmentsController.searchFilter'
-      }),
-      tasksSearchCancelButton: SC.View.design({ // Tasks Search cancel button
-        layout: { centerY: 1, height: 12, right: 10, width: 12 },
-        isVisible: NO,
-        classNames: ['filter-cancel-icon'],
-        mouseDown: function() {
-          Tasks.assignmentsController.set('searchFilter', '');
-        },
-        isVisibleBinding: SC.Binding.oneWay('Tasks.assignmentsController.searchFilter').bool()
       })
                              
     }),
@@ -185,7 +203,7 @@ Tasks.mainPage = SC.Page.design({
     userName: SC.outlet('topBarView.userNameLabel'),
     
     masterDetailView: SC.View.design({
-      layout: { top: 45, bottom: 24, left: 0, right: 0 },
+      layout: { top: 43, bottom: 24, left: 0, right: 0 },
       childViews: 'projectsMasterView tasksDetailView'.w(),
       
       projectsMasterView: SC.ScrollView.design({

@@ -2,8 +2,10 @@ config :scui, :required => [:foundation, :calendar, :dashboard, :drawing, :linki
 config :'core-tasks', :required => [:sproutcore]
 config :tasks, :required => [:'core-tasks', :sproutcore, :scui],:title=>"Tasks:Dev"
 # config :tasks, :required => [:'core-tasks', :sproutcore, :scui],:title=>"Tasks:Demo"
-# config :tasks, :required => [:'core-tasks', :sproutcore, :scui],:title=>"Tasks:Greenhouse"
 # config :tasks, :required => [:'core-tasks', :sproutcore, :scui],:title=>"Tasks:SproutCore"
+# config :tasks, :required => [:'core-tasks', :sproutcore, :scui],:title=>"Tasks:Greenhouse"
+# config :tasks, :required => [:'core-tasks', :sproutcore, :scui],:title=>"Tasks:TPG"
+# config :tasks, :required => [:'core-tasks', :sproutcore, :scui],:title=>"Todos:Eloqua"
 
 # Local Persevere back end - prod instance
 proxy '/tasks-server', :to => 'localhost:8088', :protocol => 'http'

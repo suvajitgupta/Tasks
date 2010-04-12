@@ -37,6 +37,6 @@ Tasks.userController = SC.ObjectController.create(Tasks.Sha1,
       var password = user.get('password');
       this._unhashedPassword = password? 'password' : '';
     }
-  }.observes('content')  
-
+  }.observes('content')
+  
 });

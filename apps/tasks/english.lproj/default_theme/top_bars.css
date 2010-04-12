@@ -46,10 +46,9 @@
   -webkit-border-radius: 15px;
 }
 
-.user-name-message {
+.welcome-message {
   font-size: 10px !important;
   color: #EEE !important;
-  text-align: center !important;
   line-height: 15px !important;
 }
 
