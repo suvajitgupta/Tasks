@@ -74,14 +74,14 @@ Tasks.mainPage = SC.Page.design({
       }),
 
       installationLogo: SC.View.design({
-        layout: { left: 155, width: document.title.match(/Dev|Greenhouse/)? 32: 140, centerY: -1, height: 32 },
+        layout: { left: 155, width: document.title.match(/Dev|Demo|Greenhouse/)? 32: 140, centerY: -1, height: 32 },
         tagName: 'img',
         render: function(context, firstTime) {
           if(document.title.match(/Dev/)) {
             context.attr('src', sc_static('images/dev-logo.jpg'));
           }
           else if(document.title.match(/Demo/)) {
-            context.attr('src', sc_static('images/demo-logo.png'));
+            context.attr('src', sc_static('images/demo-logo.jpg'));
           }
           else if(document.title.match(/Greenhouse/)) {
             context.attr('src', sc_static('images/greenhouse-logo.png'));
