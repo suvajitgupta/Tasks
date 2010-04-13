@@ -48,12 +48,12 @@ Project Manager GUI
 v Add hover over tooltip for Projects to show how many Tasks they contain [SG] @Done $Feature %Passed
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done $Feature %Passed
 | Check via Inline Editor Delegate
-^ Add "Add Project" & "Delete Project" buttons in projects toolbar [SG] @Done $Feature %Passed
+^ Add buttons to add/delete Projects [SG] @Done $Feature %Passed
 - Add warning Alert box about deleting Project with Tasks [SG] @Done $Feature %Passed
 v Disallow Project names or User loginNames that are already in use or reserved [SG] $Feature @Active
 | Project name cannot be duplicated or a system project name
 | User login name cannot be duplicated or reserved name "none"
-v Add summary in projects toolbar showing number of Projects & number of Tasks for selected project [SG] <MB> @Done $Feature %Passed
+v Add summary in projects bottom showing number of Projects & number of Tasks for selected projects [SG] <MB> @Done $Feature %Passed
 v Enable/disable "Delete Project" button based on having a selected project [SG] @Done %Passed $Feature
 v Disable "Add Task" button when no project is selected [SG] <BB> @Done %Passed $Feature
 - Select "All Tasks" project at startup [SG] @Done %Passed $Feature
@@ -71,18 +71,18 @@ Task Manager GUI
 - Allow Tasks under an assignee to be hidden/disclosed [SG] <JH2> @Done $Feature %Passed
 - Show Task Type via different icons [SG] <JH2> @Done $Feature %Passed
 - Show Task Priority (font style), Status (font color), Validation (background color) [SG] <MB> @Done $Feature %Passed
-- Add Task "Type/Priority/Status/Validation" radio buttons in tasks toolbar [SG] @Done $Feature %Passed
+- Add Task "Type/Priority/Status/Validation" select buttons in tasks popup editor [SG] @Done $Feature %Passed
 v Enable Task Validation radio buttons only when in Done status [SG] <JH2> $Feature @Done %Passed
 - Allow multi-task modification of Type/Status/Priority/Validation [SG] $Feature @Done %Passed
-^ Add Task search filter (by #IDs or name) & corresponding delete button in top toolbar: support type-ahead searching <JH2> [SG] @Done %Passed $Feature
-^ Allow Task attribute filtering by Type, Priority, Status, and Validation fields via a toolbar button/pop up panel [SG] $Feature @Done %Passed
+^ Add Task search filter (by #IDs or name) & corresponding delete button in top bar: support type-ahead searching <JH2> [SG] @Done %Passed $Feature
+^ Allow Task attribute filtering by Type, Priority, Status, and Validation fields via a top bar button/sheet pane [SG] $Feature @Done %Passed
 - Add commonly-used "QuickFilters": Troubled, Unfinished, Unvalidated, Completed, Showstoppers, All [SG] $Feature @Done %Passed
 - Support filtering of Tasks that were recently updated or have effort specified [SG] $Feature @Done %Passed
-- Indicate whether there is a Task attribute filter via a different icon on the toolbar button [SG] $Feature @Done %Passed
+- Indicate whether there is a Task attribute filter via cancel icon [SG] $Feature @Done %Passed
 - Indicate whether there are any risky items under an assignee using a red flag in assignee grouping bar [SG] $Feature @Done %Passed
 v Enable/disable "Delete Task" button based on having a selected Task [SG] @Done %Passed $Feature
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done $Feature %Passed
-^ Add "Add Task" & "Delete Task" buttons in tasks toolbar [SG] <SE> @Done %Passed $Feature
+^ Add buttons to add/delete Tasks [SG] <SE> @Done %Passed $Feature
 | Logged in user is default Submitter, Assignee is either set to the same as selected Task (if one) or to logged in user
 | Copy over Project/Type/Priority attributes of first selected Task to new Task
 - Clear Task Validation if Sstatus is changed from Done, disallow entry of Passed/Failed when not Done [SG] <MB> $Feature @Done %Passed
@@ -109,10 +109,10 @@ User Manager GUI
 ^ Add login screen to identify user who logs in (and handle login failures properly) [SG] <SE> @Done %Passed $Feature
 - Add password to login, signup, and User Manager screens (save in encrypted format) [SG] <JH2> $Feature @Done %Passed
 - Allow new guests to sign up from login screen and log them in immediately after [JH2] <SG> @Done %Passed $Feature
-^ Add assignee/submitter filtering (space or comma separators, "none" for unassigned) & corresponding delete button in top toolbar [SG] <JH2> @Done $Feature %Passed
+^ Add assignee/submitter filtering (space or comma separators, "none" for unassigned) & corresponding delete button [SG] <JH2> @Done $Feature %Passed
 - Allow assignee filtering by matching any part of login or full name [SG] $Feature @Done %Passed
 - Set assignee selection filter to logged in user if they are a Developer [SG] @Done $Feature %Passed
-^ Add Settings button/popup embedding User Manager with "Add/Delete User"  buttons in toolbar [SG] <JH2> @Done %Passed $Feature
+^ Add Settings button/popup embedding User Manager with buttons to add/delete users at bottom [SG] <JH2> @Done %Passed $Feature
 | Copy over Role attribute of first selected User to new User
 v Enable/disable "Delete User" button based on having a selected user [SG] @Done %Passed $Feature
 - Show number of displayed/selected users at the bottom of User Manager panel [SG] $Feature @Done %Passed
@@ -125,23 +125,23 @@ v Enable/disable "Delete User" button based on having a selected user [SG] @Done
 Application Manager GUI
 - Add Tasks logo to top bar and display program version as a badge [SG] $Feature @Done %Passed
 - Add welcome message showing logged in user/role with hover over tooltip showing time of login [SG] @Done $Feature %Passed
-- Add Server data loading message in status bar during startup [SG] $Feature @Done %Passed
-- Show number of selected Projects/Tasks and displayed Assignees/Tasks in the status bar [SG] <MB> @Done $Feature %Passed
-- Add "Save" button in top toolbar, note time of last save in status bar [SG] <BB> @Done $Feature %Passed
-- Add "AutoSave" checkbox in status bar [SG] <BB> @Done $Feature %Passed
+- Add Server data loading message in bottom bar during startup [SG] $Feature @Done %Passed
+- Show number of selected Projects/Tasks and displayed Assignees/Tasks in the bottom bar [SG] <MB> @Done $Feature %Passed
+- Add "Save" button in bottom bar, note time of last save in bottom bar [SG] <BB> @Done $Feature %Passed
+- Add "AutoSave" enable/disable capability via actions menu [SG] <BB> @Done $Feature %Passed
 - Enable/disable "Save" button based on data modification [EO] <SG> $Feature @Done %Passed
 - Add "Refresh" button to synchronize GUI with latest data from Server [SG] <SE> $Feature @Done %Passed
-- Add "Import" button in top toolbar with associated pop up panel [SG] <BB> @Done $Feature %Passed
+- Add "Import" menu item in actions menu with associated pop up panel [SG] <BB> @Done $Feature %Passed
 - Don't create a Project if it already exists during Import [SG] @Done $Feature %Passed
 - Allow option to automatically create new users for unknown assignees/submitters found during importing [SG] @Done $Feature %Passed
-- Add "Export" button in top toolbar with associated pop up panel, allowing user to choose between Text/HTML formats [SG] @Done $Feature %Passed
+- Add "Export" menu items in actions menu with associated pop up panels, allowing user to choose between Text/HTML formats [SG] @Done $Feature %Passed
 | When on "All Tasks" project with no filters on all Project data is exported, otherwise only displayed data is exported
 - Add "Exort to HTML" capability for printable & human-readable version (for baselining Tasks for a release) [SG] $Feature @Done %Passed
-- Add online "Help" button in top toolbar & popup help window [SG] @Done %Passed $Feature
+- Add online "Help" menu item in actions menu and popup help window [SG] @Done %Passed $Feature
 v Add online training video using Captivate or Camtasia [SG] $Feature @Done
 | http://www.youtube.com/watch?v=6egjJw_RS1g
 - Add onscreen help (on panel fields that are complex and on blank workspace to assist new users) <MG> [SG] $Feature @Done %Passed
-- Add "Logout" button to exit in top toolbar (confirm before exiting, reload data/clear all filters) [SG] <JH2> @Done $Feature %Passed
+- Add "Logout" menu item in actions menu (confirm before exiting, reload data/clear all filters) [SG] <JH2> @Done $Feature %Passed
 - Destroy authentication token while logging User out [SG] <JH2>
 - Prompt user to save changes (if any) before logging out [SG] <SE> $Feature @Done %Passed
 | See demo.sproutcore.com/user_defaults and lookup SproutCore blog for Charles' posting on this topic
@@ -156,7 +156,7 @@ v Add hotkeys for common operations (like Add/Duplcate Tasks and Save) [EG] <SG>
 - Support archiving of entities to manage screen clutter and optimize performance [SG] $Feature
 | Archived Projects/Tasks would be loaded/displayed only on demand
 | Archived Users cannot be made Assignees/Submitters going forward
-- Support Undo/Redo via toolbar buttons and hotkeys [SG] <SE> $Feature
+- Support Undo/Redo hotkeys [SG] <SE> $Feature
 - Support disconnected operation and synchronization after network reconnection using SproutDB [SG] <SE> $Feature
 
 Server
@@ -166,7 +166,7 @@ Server
 - Implement Server-based user authentication using Python on Google App Engine [JH2] <SG> $Feature @Done %Passed
 - Implement Server-based RBAC (role-based access control) using Python on Google App Engine <SG> [JH2] $Feature @Done %Passed
 ^ Send Email Notifications on noteworthy changes using Python on Google App Engine [SG] <JH2> $Feature @Done %Passed
-| Add a checkbox in status bar to enable/disable server notifications
+| Add email notifications enable/disable capability via actions menu
 | Notify Submitter/Assignee when Task is created/updated by someone other than them
 | Don’t send Submitter or Assignee notification if their Email address is unspecified
 | Indicate Task ID, create/update action, and user who triggered notifications in Subject: line
@@ -182,8 +182,8 @@ Styling/Hardening
 ^ Perform smoke test of key functionality [SG] @Done
 | Login, Guest Signup, Logout
 | All/Unallocated Tasks system projects, Tasks/Team display modes
-| Project/Task/User CRUD via toolbar buttons/context menus
-| Project/Task modifications via inline editor and popup editor/control bar
+| Project/Task/User CRUD via buttons/context menus
+| Project/Task modifications via inline and popup editors
 | Task reassignment/reallocation & User role change via drag-and-drop
 | Task filtering via assignee/submitter selection, attributes, and ID/name searching
 | User modifications via User Manager, searching for users
