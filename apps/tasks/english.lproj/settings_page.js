@@ -85,7 +85,7 @@ Tasks.settingsPage = SC.Page.create({
         }),
         
         userDetailView: Tasks.UserInformationView.design({
-          layout: { top: 50, left: 325, bottom: 35, right: 10 },
+          layout: { top: 10, left: 325, bottom: 35, right: 10 },
           contentBinding: 'Tasks.userController'
         }),
         
