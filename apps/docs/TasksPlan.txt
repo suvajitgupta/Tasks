@@ -1,5 +1,9 @@
-TODOs from GUI redesign:
-- switch add-tasks-helper image to point at lower left [MG]
+Finalize GUI layout/style: [MG/SG]
+- get 20x20 plus/minus images for add/delete buttons
+- switch add-tasks-helper image to point at lower left
+- get better icons: dropdown, import, project/task duplicate
+- make Tasks looks more like Greenhouse from a styling perspective
+- switch to using Chance to create sprites/CSS
 
 # Tasks Plan - please see below for items you can work on & mark their status as you start/finish them
 
