@@ -115,7 +115,7 @@ Tasks.settingsPage = SC.Page.create({
       }),
 
       deleteButton: SC.LabelView.design(SCUI.SimpleButton,{
-        layout: { left: 41, width: 16, bottom: 15, height: 16 },
+        layout: { left: 45, width: 16, bottom: 15, height: 16 },
         icon: 'delete-icon',
         classNames: ['top-bar-label'],
         toolTip: "_DeleteUserTooltip".loc(),

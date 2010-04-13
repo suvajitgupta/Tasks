@@ -30,7 +30,7 @@
 }
 
 .add-tasks-helper {
-  background: static_url('images/add-tasks-helper.png') no-repeat 5px 95%;
+  background: static_url('images/add-tasks-helper.png') no-repeat 10px 97%;
 }
 
 .display-mode-helper {
@@ -38,7 +38,7 @@
 }
 
 .adjust-filter-helper {
-  background: static_url('images/adjust-filter-helper.png') no-repeat 85% 5px;
+  background: static_url('images/adjust-filter-helper.png') no-repeat 80% 5px;
 }
 
 .select-project-helper {

@@ -357,7 +357,7 @@ Tasks.mainPage = SC.Page.design({
       borderStyle: SC.BORDER_TOP,
         
       addProjectButton: SC.LabelView.design(SCUI.SimpleButton,{
-        layout: { centerY: 0, left: 7, height: 16, width: 16 },
+        layout: { centerY: 0, left: 10, height: 16, width: 16 },
         icon: 'add-icon',
         classNames: ['top-bar-label'],
         toolTip: "_AddProjectTooltip".loc(),
@@ -366,7 +366,7 @@ Tasks.mainPage = SC.Page.design({
         action: 'addProject'
       }),
       deleteProjectButton: SC.LabelView.design(SCUI.SimpleButton,{
-        layout: { centerY: 0, left: 33, height: 16, width: 16 },
+        layout: { centerY: 0, left: 40, height: 16, width: 16 },
         icon: 'delete-icon',
         classNames: ['top-bar-label'],
         toolTip: "_DeleteProjectTooltip".loc(),
@@ -382,7 +382,7 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       addTaskButton: SC.LabelView.design(SCUI.SimpleButton,{
-        layout: { centerY: 0, left: 237, height: 16, width: 16 },
+        layout: { centerY: 0, left: 240, height: 16, width: 16 },
         icon: 'add-icon',
         toolTip: "_AddTaskTooltip".loc(),
         isVisibleBinding: 'CoreTasks.permissions.canCreateTask',
@@ -391,7 +391,7 @@ Tasks.mainPage = SC.Page.design({
         action: 'addTask'
       }),
       deleteTaskButton: SC.LabelView.design(SCUI.SimpleButton,SCUI.Permissible,{
-        layout: { centerY: 0, left: 262, height: 16, width: 16 },
+        layout: { centerY: 0, left: 270, height: 16, width: 16 },
         icon: 'delete-icon',
         toolTip: "_DeleteTaskTooltip".loc(),
         isVisibleBinding: 'CoreTasks.permissions.canDeleteTask',
@@ -402,7 +402,7 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       summaryView: Tasks.SummaryView.design({
-        layout: { centerY: 0, height: 16, centerX: 10, width: 450 },
+        layout: { centerY: 0, height: 16, centerX: 20, width: 450 },
         classNames: ['bottom-bar-label'],
         textAlign: SC.ALIGN_CENTER,
         displayModeBinding: SC.Binding.oneWay('Tasks.assignmentsController.displayMode'),
