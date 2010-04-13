@@ -8,26 +8,6 @@
   
 */
 
-/*-----------------------------------------------------------------
- * Title bar styles/icons
- */
-
-.title-bar {
-  background: static_url('images/default-theme-repeat-x.png') repeat-x 0 0;
-}
-
-.title-bar-label {
-  font-size: 10px !important;
-  color: #DDD !important;
-  text-align: center !important;
-}
-
-.title-bar-label.disabled {
-  font-size: 10px !important;
-  color: #777 !important;
-  text-align: center !important;
-}
-
 .tasks-logo {
   margin-top: -15px !important;
   background: static_url('images/tasks-logo.png') no-repeat 0 0;
@@ -52,118 +32,13 @@
   line-height: 15px !important;
 }
 
-.window-title {
-  font-size: 14px !important;
-  text-align: center !important;
-  color: #DDD !important;
+.display-modes {
+  font-size: 9px !important;
+  font-weight: bold !important;
+  text-transform: uppercase !important;
 }
 
-/*-----------------------------------------------------------------
- * Dock Icons
- */
- 
-.import-icon {
-  width: 55px !important;
-  height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat -7px -288px;
-}
-
-.import-icon:hover {
-  width: 55px !important;
-  height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat -7px -352px;
-}
-
-.disabled .import-icon {
-  width: 55px !important;
-  height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat -7px -320px;
-}
-
-.disabled .import-icon:hover {
-  width: 55px !important;
-  height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat -7px -352px;
-}
-
-.export-icon {
-  width: 55px !important;
-  height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat -7px -192px;
-}
-
-.disabled .export-icon {
-  width: 55px !important;
-  height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat -7px -224px;
-}
-
-.export-icon:hover {
-  width: 55px !important;
-  height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat -7px -256px;
-}
-
-.settings-icon {
-  width: 55px !important;
-  height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat -7px -384px;
-}
-
-.disabled .settings-icon {
-  width: 55px !important;
-  height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat -7px -416px;
-}
-
-.settings-icon:hover {
-  width: 55px !important;
-  height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat -7px -448px;
-}
-
-.help-icon {
-  width: 55px !important;
-  height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat -7px -480px;
-}
-
-.disabled .help-icon {
-  width: 55px !important;
-  height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat -7px -512px;
-}
-
-.help-icon:hover {
-  width: 55px !important;
-  height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat -7px -544px;
-}
-
-.logout-icon {
-  width: 50px !important;
-  height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat -10px -576px;
-}
-
-.disabled .logout-icon {
-  width: 50px !important;
-  height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat -10px -608px;
-}
-
-.logout-icon:hover {
-  width: 50px !important;
-  height: 32px !important;
-  background: static_url('images/default-theme-dock-icons.png') no-repeat -10px -640px;
-}
-
-
-/*-----------------------------------------------------------------
- * Toolbar styles/icons
- */
-
-.toolbar {
+.titlebar {
   background: static_url('images/default-theme-repeat-x.png') repeat-x 0 -122px; 
 }
 
@@ -173,16 +48,71 @@
   text-align: center !important;
 }
 
-.top-bar-label.disabled {
-  font-size: 10px !important;
-  color: #AAA !important;
-  text-align: center !important;
+.sc-view .user-selection-bar {
+  background: static_url('images/default-theme-user-selection-bg.png') no-repeat;
+}
+
+.sc-view .search-bar {
+  background: static_url('images/default-theme-search-filter-bg.png') no-repeat;
+}
+
+.filter-icon {
+  margin-right: -1px !important;
+  width: 16px !important;
+  height: 16px !important;
+  background: static_url('images/filter.png') no-repeat 0 0;
+}
+
+.filter-cancel-icon {
+  background: static_url('images/default-theme-static.png') no-repeat 0 -352px !important;
+  z-index: 100 !important;
+  cursor: pointer !important;
+}
+
+.filter-label {
+  margin-right: 20px !important;
+}
+
+.actions-menu span label{
+  margin-left: 6px !important;
+  margin-right: 6px !important;
+  line-height: 28px !important;
+}
+
+.actions-icon {
+  width: 25px !important;
+  height: 16px !important;
+  background: static_url('images/actions.png') no-repeat;
+}
+
+.tasks-icon {
+  width: 16px !important;
+  height: 16px !important;
+  background: static_url('images/tasks.png') no-repeat;
+}
+
+.statistics-icon {
+  width: 16px;
+  height: 16px;
+  background: static_url('images/statistics.png') no-repeat;
 }
 
 .import-icon {
   width: 16px;
   height: 16px;
   background: static_url('images/import.png') no-repeat;
+}
+
+.text-icon {
+  width: 16px;
+  height: 16px;
+  background: static_url('images/text.png') no-repeat;
+}
+
+.html-icon {
+  width: 16px;
+  height: 16px;
+  background: static_url('images/html.png') no-repeat;
 }
 
 .notification-icon {
@@ -195,25 +125,6 @@
   width: 16px;
   height: 16px;
   background: static_url('images/settings.png') no-repeat;
-}
-
-.filter-icon {
-  margin-right: -1px !important;
-  width: 16px !important;
-  height: 16px !important;
-  background: static_url('images/filter.png') no-repeat 0 0;
-}
-
-.filter-label {
-  margin-right: 20px !important;
-}
-
-.sc-view .user-selection-bar {
-  background: static_url('images/default-theme-user-selection-bg.png') no-repeat;
-}
-
-.sc-view .search-bar {
-  background: static_url('images/default-theme-search-filter-bg.png') no-repeat;
 }
 
 .safari .sc-view .user-selection-bar.focus,
@@ -284,8 +195,12 @@
   line-height: 22px;
 }
 
-.filter-cancel-icon {
-  background: static_url('images/default-theme-static.png') no-repeat 0 -352px !important;
-  z-index: 100 !important;
-  cursor: pointer !important;
+.title-bar {
+  background: static_url('images/default-theme-repeat-x.png') repeat-x 0 0;
+}
+
+.window-title {
+  font-size: 14px !important;
+  text-align: center !important;
+  color: #DDD !important;
 }

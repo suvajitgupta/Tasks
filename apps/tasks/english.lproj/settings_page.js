@@ -25,8 +25,8 @@ Tasks.settingsPage = SC.Page.create({
       childViews: 'titlebar userManager addButton deleteButton usersCount closeButton'.w(),
       
       titlebar: SC.View.design({
-        layout: { left: 10, right: 10, top: 10, height: 35 },
-        classNames: ['toolbar'],
+        layout: { left: 10, right: 10, top: 5, height: 35 },
+        classNames: ['titlebar'],
         childViews: 'userNamePatternField userNamePatternCancelButton title'.w(),
         
         userNamePatternField: SC.TextFieldView.design(SCUI.ToolTip, {
@@ -56,7 +56,7 @@ Tasks.settingsPage = SC.Page.create({
       }),
     
       userManager: SC.View.design({
-        layout: { left: 10, right: 10, top: 45, bottom: 40},
+        layout: { left: 10, right: 10, top: 40, bottom: 40},
         classNames: ['bordered-view'],
         childViews: 'usersMasterView userDetailView createdAtLabel updatedAtLabel'.w(),
         

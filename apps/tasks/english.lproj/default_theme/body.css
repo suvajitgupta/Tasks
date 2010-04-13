@@ -40,14 +40,28 @@ body {
 	background: #eee;
 }
 
-.display-modes {
-  font-size: 9px !important;
-  font-weight: bold !important;
-  text-transform: uppercase !important;
+.add-icon {
+  width: 16px;
+  height: 16px;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -288px;
 }
 
-.error-message {
-	color: red !important;
+.disabled .add-icon {
+  width: 16px;
+  height: 16px;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -320px;
+}
+
+.delete-icon {
+  width: 16px;
+  height: 16px;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -303px;
+}
+
+.disabled .delete-icon {
+  width: 16px;
+  height: 16px;
+  background: static_url('images/default-theme-static.png') no-repeat 0 -335px;
 }
 
 .onscreen-help {
@@ -121,6 +135,23 @@ body {
   color: #000 !important;
 }
 
+.task-attribute-set-title  {
+  font-size: 10px !important;
+  color: #000 !important;
+  text-shadow: #fff 0 1px 1px;
+  text-align: center !important;
+}
+
+.task-attribute-set {
+  font-size: 10px !important;
+  text-align: center !important;
+  line-height: 1.5;
+  border: 1px solid #AAA;
+  background: #FFF;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+
 .recently-updated {
   margin-left: -3px !important;
   height: 11px !important;
@@ -146,42 +177,6 @@ body {
   text-align: left !important;
 }
 
-.actions-menu span label{
-  margin-left: 6px !important;
-  margin-right: 6px !important;
-  line-height: 28px !important;
-}
-
-.actions-icon {
-  width: 25px !important;
-  height: 16px !important;
-  background: static_url('images/actions.png') no-repeat;
-}
-
-.tasks-icon {
-  width: 16px !important;
-  height: 16px !important;
-  background: static_url('images/tasks.png') no-repeat;
-}
-
-.text-icon {
-  width: 16px;
-  height: 16px;
-  background: static_url('images/text.png') no-repeat;
-}
-
-.html-icon {
-  width: 16px;
-  height: 16px;
-  background: static_url('images/html.png') no-repeat;
-}
-
-.description-icon {
-  width: 16px;
-  height: 16px;
-  background: static_url('images/description.png') no-repeat;
-}
-
 .checkbox-icon .icon {
   position: absolute;
   top: 0;
@@ -192,12 +187,10 @@ body {
   left: 38px !important;
 }
 
-.sc-view.sc-label-view.title-bar-label.icon img.icon {
-	top: 0px;
-	margin-left: 0px;
-	margin-right: 2px;
-	height: 24px;
-	width: 24px;
+.description-icon {
+  width: 16px;
+  height: 16px;
+  background: static_url('images/description.png') no-repeat;
 }
 
 .sc-view.sc-label-view.top-bar-label.icon img.icon {

@@ -7,34 +7,9 @@
   
 */
 
-/*-----------------------------------------------------------------
-* Control bar styles
-*/
-
-.task-attribute-set-title  {
-  font-size: 10px !important;
-  color: #000 !important;
-  text-shadow: #fff 0 1px 1px;
-  text-align: center !important;
-}
-
-.task-attribute-set {
-  font-size: 10px !important;
-  text-align: center !important;
-  line-height: 1.5;
-  border: 1px solid #AAA;
-  background: #FFF;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-}
-
 .sc-radio-view.sc-layout-horizontal .sc-radio-button {
   padding-right: 4px;
 }
-
-/*-----------------------------------------------------------------
- * Status bar styles/icons
- */
 
 .bottom-bar {
   background: static_url('images/default-theme-repeat-x.png') repeat-x 0 -44px;
@@ -45,28 +20,10 @@
   border: 0;
 }
 
-.add-icon {
-  width: 16px;
-  height: 16px;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -288px;
-}
-
-.disabled .add-icon {
-  width: 16px;
-  height: 16px;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -320px;
-}
-
-.delete-icon {
-  width: 16px;
-  height: 16px;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -303px;
-}
-
-.disabled .delete-icon {
-  width: 16px;
-  height: 16px;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -335px;
+.bottom-bar-label {
+  font-size: 10px !important;
+  color: #000 !important;
+  text-shadow: #fff 0 1px 1px;
 }
 
 .progress-icon {
@@ -89,16 +46,4 @@
 
 .disabled .save-icon {
   opacity: 0.5;
-}
-
-.bottom-bar-label {
-  font-size: 10px !important;
-  color: #000 !important;
-  text-shadow: #fff 0 1px 1px;
-}
-
-.statistics-icon {
-  width: 16px;
-  height: 16px;
-  background: static_url('images/statistics.png') no-repeat;
 }

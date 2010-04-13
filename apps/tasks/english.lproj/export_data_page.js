@@ -23,7 +23,7 @@ Tasks.exportDataPage = SC.Page.create({
       
       titlebar: SC.View.design(SC.Border, {
         layout: { left: 10, right: 10, top: 10, height: 35 },
-        classNames: ['toolbar'],
+        classNames: ['titlebar'],
         childViews: 'title'.w(),
         title: SC.LabelView.design({
           layout: { centerY: 0, height: 20, centerX: 0, width: 80 },

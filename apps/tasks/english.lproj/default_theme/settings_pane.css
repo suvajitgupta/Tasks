@@ -10,10 +10,6 @@
  * User pane styles
  */
  
-.bordered-view .toolbar {
-  background: static_url('images/default-theme-repeat-x.png') repeat-x 0 -124px;
-}
-
 .sc-scroll-view.users-pane {
 	border-right: 1px solid #bbb !important;
   background: #e1e7f0;

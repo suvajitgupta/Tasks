@@ -100,3 +100,7 @@
   font-size: 11px !important;
   font-weight: bold !important;
 }
+
+.error-message {
+	color: red !important;
+}
