@@ -70,7 +70,7 @@ Tasks.projectController = SC.ObjectController.create(
       Tasks.deselectTasks();
       if(cur) {
         this._project = cur;
-        // FIXME: [SC] Beta: see why setting a route causes 2 calls, making project names with percents to cause escaping errors
+        // TODO: [SG] switch to using project IDs for routes instead of names (which may embed percent chars)
         SC.routes.set('location', '#project&name=' + escape(cur.get('name')));
       }
     }
