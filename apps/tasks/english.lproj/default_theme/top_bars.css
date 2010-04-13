@@ -212,36 +212,36 @@
   background: static_url('images/default-theme-user-selection-bg.png') no-repeat;
 }
 
-.sc-view .tasks-search-bar {
+.sc-view .search-bar {
   background: static_url('images/default-theme-search-filter-bg.png') no-repeat;
 }
 
 .safari .sc-view .user-selection-bar.focus,
 .mozilla .sc-view .user-selection-bar.focus,
 .msie .sc-view .user-selection-bar.focus,
-.safari .sc-view .tasks-search-bar.focus,
-.mozilla .sc-view .tasks-search-bar.focus,
-.msie .sc-view .tasks-search-bar.focus {
+.safari .sc-view .search-bar.focus,
+.mozilla .sc-view .search-bar.focus,
+.msie .sc-view .search-bar.focus {
   outline: 0;
 }
 
 .safari .user-selection-bar .border,
-.safari .tasks-search-bar .border {
+.safari .search-bar .border {
   -webkit-appearance: none;
 }
 
 .mozilla .sc-view .user-selection-bar .border,
-.mozilla .sc-view .tasks-search-bar .border {
+.mozilla .sc-view .search-bar .border {
   -moz-appearance: none;
 }
 
 .msie .sc-view .user-selection-bar .border,
-.msie .sc-view .tasks-search-bar .border {
+.msie .sc-view .search-bar .border {
   border: 0;
 }
 
 .sc-view .user-selection-bar .padding,
-.sc-view .tasks-search-bar .padding {
+.sc-view .search-bar .padding {
   top: 2px;
   right: 22px;
 }
@@ -250,7 +250,7 @@
   left: 30px;
 }
 
-.sc-view .tasks-search-bar .padding {
+.sc-view .search-bar .padding {
   left: 24px;
 }
 
@@ -259,22 +259,22 @@
   font-weight: bold;
 }
 
-.tasks-search-bar input {
+.search-bar input {
   font-size: 11px;
 }
 
 .mozilla .user-selection-bar input,
-.mozilla .tasks-search-bar input {
+.mozilla .search-bar input {
   top: 4px;
 }
 
 .msie .user-selection-bar input,
-.msie .tasks-search-bar input {
+.msie .search-bar input {
   line-height: 22px;
 }
 
 .sc-text-field-view.user-selection-bar .sc-hint,
-.sc-text-field-view.tasks-search-bar .sc-hint {
+.sc-text-field-view.search-bar .sc-hint {
   top: 0;
   bottom: 0;
   left: 0;

@@ -22,74 +22,46 @@ Tasks.settingsPage = SC.Page.create({
     
     contentView: SC.View.design({
       layout: { left: 0, right: 0, top: 0, bottom: 0},
-      childViews: 'userManager usersCount closeButton'.w(),
+      childViews: 'titlebar userManager addButton deleteButton usersCount closeButton'.w(),
       
-      userManager: SC.View.design({
-        layout: { left: 10, right: 10, top: 10, bottom: 45},
-        classNames: ['bordered-view'],
-        childViews: 'toolbar usersMasterView userDetailView createdAtLabel updatedAtLabel'.w(),
+      titlebar: SC.View.design({
+        layout: { left: 10, right: 10, top: 10, height: 35 },
+        classNames: ['toolbar'],
+        childViews: 'userNamePatternField userNamePatternCancelButton title'.w(),
         
-        toolbar: SC.View.design({
-          layout: { left: 0, right: 0, top: 0, height: 35 },
-          classNames: ['toolbar'],
-          childViews: 'addButton deleteButton divider title userNamePatternField userNamePatternCancelButton'.w(),
-          
-          addButton: SC.LabelView.design(SCUI.SimpleButton,{
-            layout: { centerY: 0, left: 45, height: 16, width: 90 },
-            icon: 'add-icon',
-            value: "_AddUser".loc(),
-            classNames: ['top-bar-label'],
-            toolTip: "_AddUserTooltip".loc(),
-            isVisibleBinding: 'CoreTasks.permissions.canCreateUser',
-            target: 'Tasks',
-            action: 'addUser'
-          }),
-
-          deleteButton: SC.LabelView.design(SCUI.SimpleButton,{
-            layout: { centerY: 0, left: 145, height: 16, width: 100 },
-            icon: 'delete-icon',
-            value: "_DeleteUser".loc(),
-            classNames: ['top-bar-label'],
-            toolTip: "_DeleteUserTooltip".loc(),
-            isVisibleBinding: 'CoreTasks.permissions.canDeleteUser',
-            isEnabledBinding: 'Tasks.usersController.isDeletable',
-            target: 'Tasks',
-            action: 'deleteUser'
-          }),
-          
-          divider: SC.View.design({
-            layout: { top: 8, bottom: 8, left: 300, width: 2 },
-            classNames: ['top-bar-divider']
-          }),
-          
-          title: SC.LabelView.design({
-            layout: { centerY: 0, left: 360, height: 20, width: 120 },
-            value: "_Settings".loc(),
-            classNames: ['window-title']
-          }),
-          
-          userNamePatternField: SC.TextFieldView.design(SCUI.ToolTip, {
-            layout: { centerY: 0, height: 24, right: 5, width: 200 },
-            classNames: ['user-selection-bar'],
-            hint: "_UserSearchPatternSelectionHint".loc(),
-            toolTip: "_UserSearchPatternSelectionTooltip".loc(),
-            isVisibleBinding: 'CoreTasks*isCurrentUserAManager',
-            valueBinding: 'Tasks.usersController.userNamePattern'
-          }),
-          userNamePatternCancelButton: SC.View.design({ // User selection cancel button
-            layout: { centerY: 1, height: 12, right: 10, width: 12 },
-            isVisible: NO,
-            classNames: ['filter-cancel-icon'],
-            mouseDown: function() {
-              Tasks.usersController.set('userNamePattern', '');
-            },
-            isVisibleBinding: SC.Binding.oneWay('Tasks.usersController.userNamePattern').bool()
-          })
-
+        userNamePatternField: SC.TextFieldView.design(SCUI.ToolTip, {
+          layout: { centerY: 0, height: 24, left: 7, width: 200 },
+          classNames: ['search-bar'],
+          hint: "_UserSearchPatternSelectionHint".loc(),
+          toolTip: "_UserSearchPatternSelectionTooltip".loc(),
+          isVisibleBinding: 'CoreTasks*isCurrentUserAManager',
+          valueBinding: 'Tasks.usersController.userNamePattern'
         }),
-      
+        userNamePatternCancelButton: SC.View.design({ // User selection cancel button
+          layout: { centerY: 1, height: 12, left: 190, width: 12 },
+          isVisible: NO,
+          classNames: ['filter-cancel-icon'],
+          mouseDown: function() {
+            Tasks.usersController.set('userNamePattern', '');
+          },
+          isVisibleBinding: SC.Binding.oneWay('Tasks.usersController.userNamePattern').bool()
+        }),
+
+        title: SC.LabelView.design({
+          layout: { centerY: 0, centerX: 0, height: 20, width: 120 },
+          value: "_Settings".loc(),
+          classNames: ['window-title']
+        })
+        
+      }),
+    
+      userManager: SC.View.design({
+        layout: { left: 10, right: 10, top: 45, bottom: 40},
+        classNames: ['bordered-view'],
+        childViews: 'usersMasterView userDetailView createdAtLabel updatedAtLabel'.w(),
+        
         usersMasterView: SC.ScrollView.design({
-          layout: { top: 35, bottom: 0, left: 0, width: 300 },
+          layout: { top: 0, bottom: 0, left: 0, width: 300 },
           hasHorizontalScroller: NO,
           classNames: ['users-pane'],
 
@@ -132,10 +104,31 @@ Tasks.settingsPage = SC.Page.create({
 
       }),
       
+      addButton: SC.LabelView.design(SCUI.SimpleButton,{
+        layout: { left: 15, width: 16, bottom: 15, height: 16 },
+        icon: 'add-icon',
+        classNames: ['top-bar-label'],
+        toolTip: "_AddUserTooltip".loc(),
+        isVisibleBinding: 'CoreTasks.permissions.canCreateUser',
+        target: 'Tasks',
+        action: 'addUser'
+      }),
+
+      deleteButton: SC.LabelView.design(SCUI.SimpleButton,{
+        layout: { left: 41, width: 16, bottom: 15, height: 16 },
+        icon: 'delete-icon',
+        classNames: ['top-bar-label'],
+        toolTip: "_DeleteUserTooltip".loc(),
+        isVisibleBinding: 'CoreTasks.permissions.canDeleteUser',
+        isEnabledBinding: 'Tasks.usersController.isDeletable',
+        target: 'Tasks',
+        action: 'deleteUser'
+      }),
+      
       usersCount: SC.LabelView.design({
-        layout: { left: 10, width: 250, bottom: 8, height: 24 },
+        layout: { centerX: 0, width: 250, bottom: 12, height: 15 },
         controlSize: SC.SMALL_CONTROL_SIZE,
-        textAlign: SC.ALIGN_LEFT,
+        textAlign: SC.ALIGN_CENTER,
         valueBinding: 'Tasks.usersController.usersCount' 
       }),
       

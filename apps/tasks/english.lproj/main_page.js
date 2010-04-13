@@ -55,7 +55,7 @@ Tasks.mainPageHelper = SC.Object.create({
     var role = this.get('currentUserRole');
     if(SC.none(name) || SC.none(role)) return '';
     if(!Tasks.softwareMode && role === CoreTasks.USER_ROLE_DEVELOPER) role = "_User";
-    return "_Hi".loc() + name + ' <i>: ' + role.loc() + '</i>';
+    return "_Hi".loc() + name + ' :<i> ' + role.loc() + '</i>';
   }.property('currentUserName', 'currentUserRole').cacheable()
   
 });
@@ -162,7 +162,7 @@ Tasks.mainPage = SC.Page.design({
     
       tasksSearchField: SC.TextFieldView.design(SCUI.ToolTip, {
         layout: { centerY: 0, height: 24, right: 95, width: 200 },
-        classNames: ['tasks-search-bar'],
+        classNames: ['search-bar'],
         hint: "_TasksSearchHint".loc(),
         toolTip: "_TasksSearchTooltip".loc(),
         valueBinding: 'Tasks.assignmentsController.searchFilter'
