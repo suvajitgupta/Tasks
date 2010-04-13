@@ -23,7 +23,7 @@ Tasks.filterPane = SC.SheetPane.create({
   contentView: SC.View.design({
     
     layout: { top: 0, left: 0, bottom: 0, right: 0 },
-    childViews: 'title quickfilterToolbar typeLabel typeCheckboxes priorityLabel priorityCheckboxes statusLabel statusCheckboxes validationLabel validationCheckboxes effortSpecifiedLabel effortSpecifiedSegments recentlyUpdatedLabel recentlyUpdatedSegments closeButton applyButton'.w(),
+    childViews: 'title quickfilterToolbar typeLabel typeCheckboxes priorityLabel priorityCheckboxes statusLabel statusCheckboxes validationLabel validationCheckboxes effortSpecifiedLabel effortSpecifiedRadiobuttons recentlyUpdatedLabel recentlyUpdatedRadiobuttons closeButton applyButton'.w(),
     
     title: SC.LabelView.design({
       layout: { top: 10, left: 10, right: 10, height: 24 },
@@ -261,15 +261,15 @@ Tasks.filterPane = SC.SheetPane.create({
     }),
 
     effortSpecifiedLabel: SC.LabelView.design({
-      layout: { bottom: 90, height: 22, left: 15, width: 95 },
+      layout: { bottom: 90, height: 22, left: 10, width: 100 },
       classNames: ['filter-label'],
       textAlign: SC.ALIGN_RIGHT,
       value: "_EffortSpecified:".loc()
     }),
 
-    effortSpecifiedSegments: SC.SegmentedView.design(SCUI.ToolTip, {
-      layout: { bottom: 92, height: 24, left: 100, right: 10 },
-      classNames: ['filter-label'],
+    effortSpecifiedRadiobuttons: SC.RadioView.design(SCUI.ToolTip, {
+      layout: { bottom: 90, height: 24, left: 115, right: 10 },
+      classNames: ['task-attribute-set'],
       layoutDirection: SC.LAYOUT_HORIZONTAL,
       items: [
         { title: "_DontCare".loc(), value: Tasks.FILTER_DONTCARE },
@@ -283,15 +283,15 @@ Tasks.filterPane = SC.SheetPane.create({
     }),
 
     recentlyUpdatedLabel: SC.LabelView.design({
-      layout: { bottom: 55, height: 22, left: 15, width: 95 },
+      layout: { bottom: 55, height: 22, left: 10, width: 100 },
       classNames: ['filter-label'],
       textAlign: SC.ALIGN_RIGHT,
       value: "_RecentlyUpdated:".loc()
     }),
 
-    recentlyUpdatedSegments: SC.SegmentedView.design(SCUI.ToolTip, {
-      layout: { bottom: 57, height: 24, left: 100, right: 10 },
-      classNames: ['filter-label'],
+    recentlyUpdatedRadiobuttons: SC.RadioView.design(SCUI.ToolTip, {
+      layout: { bottom: 55, height: 24, left: 115, right: 10 },
+      classNames: ['task-attribute-set'],
       layoutDirection: SC.LAYOUT_HORIZONTAL,
       items: [
         { title: "_DontCare".loc(), value: Tasks.FILTER_DONTCARE },
