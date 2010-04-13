@@ -1,3 +1,6 @@
+TODOs from GUI redesign:
+- switch add-tasks-helper image to point at lower left [MG]
+
 # Tasks Plan - please see below for items you can work on & mark their status as you start/finish them
 
 Design/Planning

@@ -30,15 +30,15 @@
 }
 
 .add-tasks-helper {
-  background: static_url('images/add-tasks-helper.png') no-repeat 5% 5px;
+  background: static_url('images/add-tasks-helper.png') no-repeat 5px 95%;
 }
 
 .display-mode-helper {
-  background: static_url('images/display-mode-helper.png') no-repeat 33% 5px;
+  background: static_url('images/display-mode-helper.png') no-repeat 5px 5px;
 }
 
 .adjust-filter-helper {
-  background: static_url('images/adjust-filter-helper.png') no-repeat 90% 5px;
+  background: static_url('images/adjust-filter-helper.png') no-repeat 85% 5px;
 }
 
 .select-project-helper {
