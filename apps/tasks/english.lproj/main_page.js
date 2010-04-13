@@ -28,14 +28,14 @@ Tasks.mainPageHelper = SC.Object.create({
   _listActions: function() {
     var ret = [];
     if(this.getPath('displayedTasksCount') > 0) {
-      ret.push({ title: "_ViewStatistics".loc(), icon: 'statistics-icon', target: 'Tasks', action: 'viewStatistics', isEnabled: YES });
+      ret.push({ title: "_LaunchStatistics".loc(), icon: 'statistics-icon', target: 'Tasks', action: 'viewStatistics', isEnabled: YES });
       ret.push({ isSeparator: YES });
     }
-    ret.push({ title: "_ImportData".loc(), icon: 'import-icon', target: 'Tasks', action: 'importData', isEnabled: YES });
-    ret.push({ title: "_ExportText".loc(), icon: 'text-icon', target: 'Tasks.exportDataController', action: 'exportDataAsText', isEnabled: YES });
-    ret.push({ title: "_ExportHTML".loc(), icon: 'html-icon', target: 'Tasks.exportDataController', action: 'exportDataAsHTML', isEnabled: YES });
+    ret.push({ title: "_LaunchImport".loc(), icon: 'import-icon', target: 'Tasks', action: 'importData', isEnabled: YES });
+    ret.push({ title: "_LaunchExportText".loc(), icon: 'text-icon', target: 'Tasks.exportDataController', action: 'exportDataAsText', isEnabled: YES });
+    ret.push({ title: "_LaunchExportHTML".loc(), icon: 'html-icon', target: 'Tasks.exportDataController', action: 'exportDataAsHTML', isEnabled: YES });
     ret.push({ isSeparator: YES });
-    ret.push({ title: "_Settings".loc(), icon: 'settings-icon', target: 'Tasks', action: 'settings', isEnabled: YES });
+    ret.push({ title: "_LaunchSettings".loc(), icon: 'settings-icon', target: 'Tasks', action: 'settings', isEnabled: YES });
     var autoSave = this.get('autoSave');
     ret.push({ title: (autoSave? "_Disable".loc() : "_Enable".loc()) + "_AutoSave".loc(), icon: 'save-icon', target: 'Tasks', action: 'toggleAutoSave', isEnabled: YES, checkbox: !autoSave });
     if(CoreTasks.get('canServerSendNotifications')) {
@@ -43,7 +43,7 @@ Tasks.mainPageHelper = SC.Object.create({
       ret.push({ title: (shouldNotify? "_Disable".loc() : "_Enable".loc()) + "_SendNotifications".loc(), icon: 'notification-icon', target: 'Tasks', action: 'toggleShouldNotify', isEnabled: YES, checkbox: !shouldNotify });
     }
     ret.push({ isSeparator: YES });
-    ret.push({ title: "_Help".loc(), icon: 'sc-icon-help-16', target: 'Tasks', action: 'help', isEnabled: YES });
+    ret.push({ title: "_LaunchHelp".loc(), icon: 'sc-icon-help-16', target: 'Tasks', action: 'help', isEnabled: YES });
     ret.push({ title: "_Logout".loc(), icon: sc_static('blank'), target: 'Tasks', action: 'logout', isEnabled: YES });
     return ret;
   }.property('displayedTasksCount', 'autoSave', 'shouldNotify').cacheable(),
@@ -55,7 +55,7 @@ Tasks.mainPageHelper = SC.Object.create({
     var role = this.get('currentUserRole');
     if(SC.none(name) || SC.none(role)) return '';
     if(!Tasks.softwareMode && role === CoreTasks.USER_ROLE_DEVELOPER) role = "_User";
-    return "_Hi".loc() + name + ' <i>(' + role.loc() + ')</i>';
+    return "_Hi".loc() + name + ' <i>: ' + role.loc() + '</i>';
   }.property('currentUserName', 'currentUserRole').cacheable()
   
 });
