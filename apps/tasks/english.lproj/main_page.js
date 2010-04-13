@@ -353,7 +353,7 @@ Tasks.mainPage = SC.Page.design({
     bottomBarView: SC.View.design(SC.Border, {
       layout: { bottom: 0, height: 24, left: 0, right: 0 },
       classNames: ['bottom-bar'],
-      childViews: 'addProjectButton deleteProjectButton selectionView divider addTaskButton deleteTaskButton summaryView serverMessageView refreshButton saveButton'.w(),
+      childViews: 'addProjectButton deleteProjectButton divider addTaskButton deleteTaskButton summaryView serverMessageView refreshButton saveButton'.w(),
       borderStyle: SC.BORDER_TOP,
         
       addProjectButton: SC.LabelView.design(SCUI.SimpleButton,{
@@ -376,14 +376,6 @@ Tasks.mainPage = SC.Page.design({
         action: 'deleteProject'
       }),
       
-      selectionView: Tasks.SelectionView.design({
-        layout: { centerY: 0, height: 16, left: 57, width: 220 },
-        classNames: ['bottom-bar-label'],
-        textAlign: SC.ALIGN_LEFT,
-        projectsSelectionBinding: SC.Binding.oneWay('Tasks.projectsController.selection'),
-        tasksSelectionBinding: SC.Binding.oneWay('Tasks.tasksController.selection')
-      }),
-        
       divider: SC.View.design({
         layout: { centerY: 0, height: 16, left: 228, width: 2 },
         classNames: ['divider']
@@ -410,10 +402,13 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       summaryView: Tasks.SummaryView.design({
-        layout: { centerY: 0, height: 16, left: 290, width: 250 },
+        layout: { centerY: 0, height: 16, centerX: 10, width: 450 },
         classNames: ['bottom-bar-label'],
+        textAlign: SC.ALIGN_CENTER,
         displayModeBinding: SC.Binding.oneWay('Tasks.assignmentsController.displayMode'),
-        tasksTreeBinding: SC.Binding.oneWay('Tasks.tasksController.content')
+        tasksTreeBinding: SC.Binding.oneWay('Tasks.tasksController.content'),
+        projectsSelectionBinding: SC.Binding.oneWay('Tasks.projectsController.selection'),
+        tasksSelectionBinding: SC.Binding.oneWay('Tasks.tasksController.selection')
       }),
         
       serverMessageView: SC.LabelView.design({

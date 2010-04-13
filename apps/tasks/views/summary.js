@@ -16,7 +16,9 @@ Tasks.SummaryView = SC.LabelView.extend(
   
   displayMode: null,
   tasksTree: null,
-  displayProperties: ['displayMode', 'tasksTree'],
+  projectsSelection: null,
+  tasksSelection: null,
+  displayProperties: ['displayMode', 'tasksTree', 'projectsSelection', 'tasksSelection'],
   
   render: function(context, firstTime) {
 
@@ -42,8 +44,18 @@ Tasks.SummaryView = SC.LabelView.extend(
       else { // this.displayMode === Tasks.DISPLAY_MODE_TEAM
         message += redFlags + "_redFlags".loc();
       }
-      message += "_displayed".loc();
+      message += "_displayed".loc() + ', ';
     }
+    
+    var projectsSelection = this.get('projectsSelection');
+    if(projectsSelection) {
+      message += (projectsSelection.get('length') + "_projects".loc());
+    }
+    var tasksSelection = this.get('tasksSelection');
+    if(tasksSelection) {
+      message += (tasksSelection.get('length') + "_tasks".loc());
+    }
+    message += "_selected".loc();
     
     // display value
     this.set('value', message);
