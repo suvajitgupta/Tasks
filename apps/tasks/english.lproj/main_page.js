@@ -30,10 +30,6 @@ Tasks.mainPageHelper = SC.Object.create({
       ret.push({ title: "_LaunchStatistics".loc(), icon: 'statistics-icon', target: 'Tasks', action: 'viewStatistics', isEnabled: YES });
       ret.push({ isSeparator: YES });
     }
-    ret.push({ title: "_LaunchImport".loc(), icon: 'import-icon', target: 'Tasks', action: 'importData', isEnabled: YES });
-    ret.push({ title: "_LaunchExportText".loc(), icon: 'text-icon', target: 'Tasks.exportDataController', action: 'exportDataAsText', isEnabled: YES });
-    ret.push({ title: "_LaunchExportHTML".loc(), icon: 'html-icon', target: 'Tasks.exportDataController', action: 'exportDataAsHTML', isEnabled: YES });
-    ret.push({ isSeparator: YES });
     ret.push({ title: "_LaunchSettings".loc(), icon: 'settings-icon', target: 'Tasks', action: 'settings', isEnabled: YES });
     var autoSave = this.get('autoSave');
     ret.push({ title: (autoSave? "_Disable".loc() : "_Enable".loc()) + "_AutoSave".loc(), icon: 'save-icon', target: 'Tasks', action: 'toggleAutoSave', isEnabled: YES, checkbox: !autoSave });
@@ -41,6 +37,10 @@ Tasks.mainPageHelper = SC.Object.create({
       var shouldNotify = this.get('shouldNotify');
       ret.push({ title: (shouldNotify? "_Disable".loc() : "_Enable".loc()) + "_SendNotifications".loc(), icon: 'notification-icon', target: 'Tasks', action: 'toggleShouldNotify', isEnabled: YES, checkbox: !shouldNotify });
     }
+    ret.push({ isSeparator: YES });
+    ret.push({ title: "_LaunchImport".loc(), icon: 'import-icon', target: 'Tasks', action: 'importData', isEnabled: YES });
+    ret.push({ title: "_LaunchExportText".loc(), icon: 'text-icon', target: 'Tasks.exportDataController', action: 'exportDataAsText', isEnabled: YES });
+    ret.push({ title: "_LaunchExportHTML".loc(), icon: 'html-icon', target: 'Tasks.exportDataController', action: 'exportDataAsHTML', isEnabled: YES });
     ret.push({ isSeparator: YES });
     ret.push({ title: "_LaunchHelp".loc(), icon: 'sc-icon-help-16', target: 'Tasks', action: 'help', isEnabled: YES });
     ret.push({ title: "_Logout".loc(), icon: sc_static('blank'), target: 'Tasks', action: 'logout', isEnabled: YES });
