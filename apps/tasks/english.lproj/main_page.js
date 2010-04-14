@@ -379,7 +379,7 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       divider: SC.View.design({
-        layout: { centerY: 0, height: 16, left: 228, width: 2 },
+        layout: { top: 0, bottom: 0, left: 228, width: 2 },
         classNames: ['divider']
       }),
       
@@ -426,7 +426,7 @@ Tasks.mainPage = SC.Page.design({
       }),
 
       refreshButton: SC.ButtonView.design({
-        layout: { centerY: 0, right: 40, height: 24, width: 32 },
+        layout: { centerY: 0, right: 38, height: 24, width: 33 },
         classNames: ['image-button'],
         titleMinWidth: 0,
         icon: 'refresh-icon',
@@ -435,7 +435,7 @@ Tasks.mainPage = SC.Page.design({
         action: 'refreshData'
       }),
       saveButton: SC.ButtonView.design({
-        layout: { centerY: 0, right: 5, height: 24, width: 32 },
+        layout: { centerY: 0, right: 5, height: 24, width: 33 },
         classNames: ['image-button'],
         titleMinWidth: 0,
         icon: 'save-icon',
