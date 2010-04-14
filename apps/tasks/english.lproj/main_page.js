@@ -139,17 +139,17 @@ Tasks.mainPage = SC.Page.design({
         isVisibleBinding: SC.Binding.oneWay('Tasks.assignmentsController.userSelection').bool()
       }),
     
-      filterPanelButton: SC.LabelView.design(SCUI.SimpleButton,{
-        layout: { centerY: 0, height: 18, right: 292, width: 50 },
+      filterPanelButton: SC.ButtonView.design({
+        layout: { centerY: 0, height: 24, right: 306, width: 50 },
+        titleMinWidth: 0,
         icon: 'filter-icon',
-        classNames: ['top-bar-label', 'filter-label'],
-        value: "_Filter".loc(),
+        classNames: ['image-button'],
         toolTip: "_FilterTooltip".loc(),
         target: 'Tasks',
         action: 'filterTasks'
       }),
       filterCancelButton: SC.View.design({ // Filter cancel button
-        layout: { centerY: 1, height: 12, right: 302, width: 12 },
+        layout: { centerY: 1, height: 12, right: 309, width: 12 },
         isVisible: NO,
         classNames: ['filter-cancel-icon'],
         mouseDown: function() {

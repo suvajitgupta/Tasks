@@ -180,13 +180,6 @@ body {
   background: static_url('images/description.png') no-repeat;
 }
 
-.sc-view.sc-label-view.top-bar-label.icon img.icon {
-	top: 0px;
-	margin-left: 0px;
-	margin-right: 2px;
-	height: 18px;
-}
-
 .sc-view.sc-radio-view.task-attribute-set.disabled .sc-radio-button .sc-button-label {
   color: black;
 }

@@ -42,12 +42,6 @@
   background: static_url('images/default-theme-repeat-x.png') repeat-x 0 -122px; 
 }
 
-.top-bar-label {
-  font-size: 10px !important;
-  color: #EEE !important;
-  text-align: center !important;
-}
-
 .sc-view .user-selection-bar {
   background: static_url('images/default-theme-user-selection-bg.png') no-repeat;
 }
@@ -67,10 +61,6 @@
   background: static_url('images/default-theme-static.png') no-repeat 0 -352px !important;
   z-index: 100 !important;
   cursor: pointer !important;
-}
-
-.filter-label {
-  margin-right: 20px !important;
 }
 
 .actions-icon {
