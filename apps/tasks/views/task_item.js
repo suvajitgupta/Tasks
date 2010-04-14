@@ -295,7 +295,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       if(items.length > 0) {
         var pane = SCUI.ContextMenuPane.create({
           contentView: SC.View.design({}),
-          layout: { width: 190, height: 0 },
+          layout: { width: 180, height: 0 },
           escapeHTML: NO,
           itemTitleKey: 'title',
           itemIconKey: 'icon',
@@ -327,14 +327,14 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       needsSeparator = true;
       ret.push({
         title: "_Add".loc(),
-        icon: 'add-icon',
+        icon: sc_static('blank'),
         isEnabled: YES,
         target: 'Tasks',
         action: 'addTask'
       });
       ret.push({
         title: "_Duplicate".loc(),
-        icon: 'task-duplicate-icon',
+        icon: sc_static('blank'),
         isEnabled: YES,
         target: 'Tasks',
         action: 'duplicateTask'
@@ -345,7 +345,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       needsSeparator = true;
       ret.push({
         title: "_Delete".loc(),
-        icon: 'delete-icon',
+        icon: sc_static('blank'),
         isEnabled: YES,
         target: 'Tasks',
         action: 'deleteTask'

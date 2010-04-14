@@ -27,9 +27,8 @@ Tasks.UserItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     if(items.length > 0) {
       var pane = SCUI.ContextMenuPane.create({
         contentView: SC.View.design({}),
-        layout: { width: 150, height: 0 },
+        layout: { width: 125, height: 0 },
         itemTitleKey: 'title',
-        itemIconKey: 'icon',
         itemIsEnabledKey: 'isEnabled',
         itemTargetKey: 'target',
         itemActionKey: 'action',
@@ -48,7 +47,6 @@ Tasks.UserItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     if(CoreTasks.getPath('permissions.canCreateUser')) {
       ret.push({
         title: "_Add".loc(),
-        icon: 'add-icon',
         isEnabled: YES,
         target: 'Tasks',
         action: 'addUser'
@@ -58,7 +56,6 @@ Tasks.UserItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     if(CoreTasks.getPath('permissions.canDeleteUser')) {
       ret.push({
         title: "_Delete".loc(),
-        icon: 'delete-icon',
         isEnabled: YES,
         target: 'Tasks',
         action: 'deleteUser'

@@ -1,10 +1,3 @@
-Finalize GUI layout/style: [MG/SG]
-- get 20x20 plus/minus images for add/delete buttons
-- switch add-tasks-helper image to point at lower left
-- get better icons: dropdown, import, project/task duplicate
-- make Tasks looks more like Greenhouse from a styling perspective
-- switch to using Chance to create sprites/CSS
-
 # Tasks Plan - please see below for items you can work on & mark their status as you start/finish them
 
 Design/Planning
@@ -183,7 +176,7 @@ Server
 
 Styling/Hardening
 ^ Style via CSS, embed catchy/sprited images [MG] <SG> @Done %Passed
-- Split/sprite final set of icons for efficiency [MG] <JH2>
+- Split/sprite final set of icons using Chance [MG] <JH2>
 - Perform I18N and L10N (test with reversed strings) [SG] <JH2> @Done %Passed
 - Collect/address feedback from Alpha/Beta users and targeted usability tests <MG> [SG] @Done %Passed
 ^ Perform smoke test of key functionality [SG] @Done

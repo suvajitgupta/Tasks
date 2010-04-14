@@ -101,9 +101,3 @@
   height: 16px !important;
   background: static_url('images/system-project.png') no-repeat;
 }
-
-.project-duplicate-icon {
-  width: 16px !important;
-  height: 16px !important;
-  background: static_url('images/project-duplicate.png') no-repeat;
-}

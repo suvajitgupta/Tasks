@@ -40,28 +40,15 @@ body {
 	background: #eee;
 }
 
-.add-icon {
-  width: 16px;
-  height: 16px;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -288px;
+.image-button span label{
+  line-height: 28px !important;
+  margin-left: 8px !important;
+  margin-right: 3px !important;
 }
 
-.disabled .add-icon {
-  width: 16px;
-  height: 16px;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -320px;
-}
-
-.delete-icon {
-  width: 16px;
-  height: 16px;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -303px;
-}
-
-.disabled .delete-icon {
-  width: 16px;
-  height: 16px;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -335px;
+.add-delete-button span label {
+  font-size: 16px !important;
+	line-height: 22px !important;
 }
 
 .onscreen-help {

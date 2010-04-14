@@ -113,9 +113,8 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       if(items.length > 0) {
         var pane = SCUI.ContextMenuPane.create({
           contentView: SC.View.design({}),
-          layout: { width: 150, height: 0 },
+          layout: { width: 125, height: 0 },
           itemTitleKey: 'title',
-          itemIconKey: 'icon',
           itemIsEnabledKey: 'isEnabled',
           itemTargetKey: 'target',
           itemActionKey: 'action',
@@ -135,7 +134,6 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     if(CoreTasks.getPath('permissions.canCreateProject')) {
       ret.push({
         title: "_Add".loc(),
-        icon: 'add-icon',
         isEnabled: YES,
         target: 'Tasks',
         action: 'addProject'
@@ -146,7 +144,6 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       !isSystemProject && CoreTasks.getPath('permissions.canCreateProject')) {
       ret.push({
         title: "_Duplicate".loc(),
-        icon: 'project-duplicate-icon',
         isEnabled: YES,
         target: 'Tasks',
         action: 'duplicateProject'
@@ -156,7 +153,6 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     if(!isSystemProject && CoreTasks.getPath('permissions.canDeleteProject')) {
       ret.push({
         title: "_Delete".loc(),
-        icon: 'delete-icon',
         isEnabled: YES,
         target: 'Tasks',
         action: 'deleteProject'
