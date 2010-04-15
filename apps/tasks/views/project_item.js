@@ -30,9 +30,13 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
 
     this.set('isSystemProject', CoreTasks.isSystemProject(content));
     
+    // See what user clicked on
     var classes = event.target.className;
-    if (classes.match('project-icon-has-description') || classes.match('project-icon-no-description') ||
-        classes.match('count') || classes.match('inner')) {
+    // console.log('DEBUG: classes = "' + classes + '"');
+    var sel = Tasks.getPath('projectsController.selection');
+    var singleSelect = (sel && sel.get('length') === 1);
+    
+    if (singleSelect && classes !== "") { // one project selected and didn't click on the inline editable name
       var layer = this.get('layer');
       this._editorPane = SC.PickerPane.create({
         
@@ -105,7 +109,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
           })
             
         })
-      }).popup(this, SC.PICKER_MENU);
+      });
       if(this._editorPane) this._editorPane.popup(layer, SC.PICKER_POINTER);
     }
     else { // popup context menu
