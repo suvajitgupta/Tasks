@@ -97,10 +97,11 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     
     // See what user clicked on
     var classes = event.target.className;
+    // console.log('DEBUG: classes = "' + classes + '"');
     var sel = Tasks.getPath('tasksController.selection');
     var singleSelect = (sel && sel.get('length') === 1);
     
-    if (singleSelect && (classes.match('task-editor') || classes.match('task-description') || classes.match('count') || classes.match('inner'))) {
+    if (singleSelect && classes !== "") { // one task selected and didn't click on the inline editable name
       var layer = this.get('layer');
       var that = this;
       this._editorPane = SC.PickerPane.create({
@@ -645,7 +646,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       src: SC.BLANK_IMAGE_URL,
       title: taskTooltip,
       alt: taskTooltip
-    }).addClass('task-editor');
+    });
     context.addClass(hasDescription? 'task-icon-has-description' : 'task-icon-no-description');
     context = context.end();
     context = context.end();
