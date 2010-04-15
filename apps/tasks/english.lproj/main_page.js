@@ -491,7 +491,7 @@ Tasks.mainPage = SC.Page.design({
         icon: 'delete-icon',
         toolTip: "_DeleteTaskTooltip".loc(),
         isVisibleBinding: 'CoreTasks.permissions.canDeleteTask',
-        isEnabledBinding: SC.Binding.logicalAnd('Tasks.tasksController.isDeletable', 'Tasks.tasksController.notGuestOrGuestSubmittedTasks'),
+        isEnabledBinding: SC.Binding.and('Tasks.tasksController.isDeletable', 'Tasks.tasksController.notGuestOrGuestSubmittedTasks'),
         isPermittedBinding: 'Tasks.tasksController.notGuestOrGuestSubmittedTasks',
         target: 'Tasks',
         action: 'deleteTask'
