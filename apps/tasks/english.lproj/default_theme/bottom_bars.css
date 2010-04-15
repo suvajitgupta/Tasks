@@ -44,6 +44,6 @@
   background: static_url('images/save.png') no-repeat 0 0;
 }
 
-.disabled .save-icon {
+.disabled .refresh-icon, .disabled .save-icon {
   opacity: 0.5;
 }
