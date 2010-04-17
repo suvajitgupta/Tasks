@@ -34,7 +34,7 @@ General Infrastructure
 v Track/optimize calls to assignments controller and custom view render methods <BB> [SG] @Active
 v Make buttons depressable to provide feedback when using them [SG] $Feature @Done %Passed
 - Support direct access to Projects or Tasks using SproutCore routes [SG] $Feature @Done %Passed
-^ Beta: Add support for adding Comments to Tasks [SG] <JH2> $Feature @Active
+- Use JSONP-based data loading for performance speedup [SG] <SE>
 - Out of Scope: Add support for attachments in record descriptions $Feature
 | Upload attachment somewhere and insert URL to it in record description
 
@@ -98,6 +98,8 @@ v Add Task context menu with options: Add, Duplicate, Delete; All Task Attribute
 ^ Add ability to "Watch" Tasks and get Email Notifications after Task changes [SG] <JH2> $Feature @Done %Passed
 - Support "Find & Replace" within Task names  (operating only on items in Tasks Detail view)[SG] $Feature
 - Allow Task names to embed metacharacters by enclosing in quotes [SG] $Feature
+^ Beta: Add support for adding Comments to Tasks [SG] <JH2> $Feature @Active
+- Add "Search and Replace" capability [SG] $Feature
 - Out of Scope: Add support for nested Tasks and Task tagging $Feature
 | Use "Clustering" approach described in Help instead
 - Out of Scope: Add support for managing inter-Task dependencies/linking $Feature
