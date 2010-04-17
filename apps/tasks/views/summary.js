@@ -55,7 +55,9 @@ Tasks.SummaryView = SC.LabelView.extend(
     if(tasksSelection) {
       message += (tasksSelection.get('length') + "_tasks".loc());
     }
-    message += "_selected".loc();
+    if(projectsSelection || tasksSelection) {
+      message += "_selected".loc();
+    }
     
     // display value
     this.set('value', message);
