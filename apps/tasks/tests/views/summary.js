@@ -6,7 +6,6 @@
  * @author Suvajit Gupta
  */
 // http://localhost:4400/tasks/en/current/tests/views/summary.html
-// TODO: [SG] rewrite based on merger with SelectionView fields
 
 sc_require('core');
 sc_require('views/summary'); 
