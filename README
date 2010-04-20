@@ -4,8 +4,13 @@ GETTING TASKS & SPROUTCORE CODE
 Change to the directory where you would like to work on Tasks and type...
 
 git clone git://github.com/sproutit/sproutcore-abbot.git abbot
+
 git clone git://github.com/suvajitgupta/Tasks.git tasks
-cd tasks/frameworks
+cd tasks
+git branch --track test remotes/origin/test
+git checkout test
+
+cd frameworks
 git clone git://github.com/etgryphon/sproutcore-ui.git scui
 git clone git://github.com/sproutit/sproutcore.git sproutcore
 cd sproutcore
