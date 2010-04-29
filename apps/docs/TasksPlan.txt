@@ -63,7 +63,7 @@ v Disable "Add Task" button when no project is selected [SG] <BB> @Done %Passed 
 ^ Add popup viewer/editor for Project time left/description [SG] $Feature @Done %Passed
 v Add Project context menu with options: Add, Duplicate, Delete [SG] $Feature @Done %Passed
 - Add "Statistics..." button/popup to show percent breakdown of displayed Tasks by attributes (HTML) [SG] $Feature @Done %Passed
-- Add alternate graphical view (pie charts, bar graphs) for statistics of displayed Tasks [SG] $Feature
+- Add alternate graphical view (pie charts, bar graphs) for statistics of displayed Tasks [SG] <MB> $Feature
 
 Task Manager GUI
 ^ Group Tasks by User and display Task id, summary, and effort (if specified) on far right [SG] <JH2> @Done $Feature %Passed
@@ -158,8 +158,8 @@ v Add hotkeys for common operations (like Add/Duplcate Tasks and Save) [EG] <SG>
 - Support archiving of entities to manage screen clutter and optimize performance [SG] $Feature
 | Archived Projects/Tasks would be loaded/displayed only on demand
 | Archived Users cannot be made Assignees/Submitters going forward
-- Support Undo/Redo hotkeys [SG] <SE> $Feature
-- Support disconnected operation and synchronization after network reconnection using SproutDB [SG] <SE> $Feature
+- Support Disconnected Operation (synchronization after network reconnection) using Hub.js [SG] <SE> $Feature
+- Support Undo/Redo using Hub.js [SG] <SE> $Feature
 
 Server
 ^ Build persistence Server using Persevere [SE] <SG> @Done %Passed
@@ -178,6 +178,7 @@ Server
 
 Styling/Hardening
 ^ Style via CSS, embed catchy/sprited images [MG] <SG> @Done %Passed
+- Beta: Redesign layouts/style for iPad/touch interactions [MG] <SG> @Active
 - Split/sprite final set of icons using Chance [MG] <JH2>
 - Perform I18N and L10N (test with reversed strings) [SG] <JH2> @Done %Passed
 - Collect/address feedback from Alpha/Beta users and targeted usability tests <MG> [SG] @Done %Passed
@@ -194,7 +195,7 @@ Styling/Hardening
 | Popup online Help, Statistics
 | Email Notifications, Task watching
 - Develop Model/View unit tests [SG] <BB> @Active
-- Create automated test scripts using Lebowski/Selenium @Active [MR] <MC>
+- Create automated test scripts using Lebowski/Selenium [SG] <MR> @Active
 
 Installation/Deployment
 - Support customizable (via Buildfile) "Installation" logo and title (shown in Browser/tab title) [SG] @Done $Feature %Passed
@@ -203,6 +204,6 @@ Installation/Deployment
 - Support customizable default "AutoSave" and "Notifications" settings (can be overridden by User via GUI) [SG] $Feature @Done %Passed
 - Deploy publicly-accessible instances using Google App Engine/Python [JH2] <SG> @Done %Passed
 ^ Develop Web client (ported to Firefox, Internet Explorer, Safari, Chrome) [SG] $Feature @Done %Passed
-- Develop Desktop client using Webkit <JH2> [SG] $Feature
-- Develop Mobile client using PhoneGap <MB> [SG] $Feature
+- Develop Desktop/iPad client <JH2> [SG] $Feature
+- Develop Mobile client <MB> [SG] $Feature
 v Provide SproutCore doctool-style comments [SG] <SE>
