@@ -3,8 +3,6 @@
 // ==========================================================================
 /*globals Tasks CoreTasks SCUI sc_require */
 sc_require('core');
-sc_require('views/decorated_checkbox');
-
 
 /** @static
     
