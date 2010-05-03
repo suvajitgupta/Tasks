@@ -70,7 +70,7 @@ Tasks.mainPage = SC.Page.design({
       
       layout: { top: 0, left: 0, right: 0, height: 43 },
       classNames: ['title-bar'],
-      childViews: 'installationLogo tasksLogo userNameLabel displayModeSegments userSelectionField userSelectionCancelButton filterPanelButton filterCancelButton tasksSearchField tasksSearchCancelButton actionsMenu'.w(),
+      childViews: 'installationLogo tasksLogo userNameLabel displayModeSegments filterPanelButton filterCancelButton tasksSearchField tasksSearchCancelButton actionsMenu'.w(),
       
       installationLogo: SC.View.design({
         layout: { left: 4, top: 3, width: Tasks._wideLogo? 80: 35, height: Tasks._wideLogo? 20 : 35 },
@@ -122,23 +122,6 @@ Tasks.mainPage = SC.Page.design({
         valueBinding: 'Tasks.assignmentsController.displayMode'
       }),
 
-      userSelectionField: SC.TextFieldView.design(SCUI.ToolTip, {
-        layout: { centerY: 0, height: 24, right: 370, width: 200 },
-        classNames: ['user-selection-bar'],
-        hint: "_UserSelectionHint".loc(),
-        toolTip: "_UserSelectionTooltip".loc(),
-        valueBinding: 'Tasks.assignmentsController.userSelection'
-      }),
-      userSelectionCancelButton: SC.View.design({ // Assignee/Submitter selection cancel button
-        layout: { centerY: 1, height: 12, right: 375, width: 12 },
-        isVisible: NO,
-        classNames: ['filter-cancel-icon'],
-        mouseDown: function() {
-          Tasks.assignmentsController.set('userSelection', '');
-        },
-        isVisibleBinding: SC.Binding.oneWay('Tasks.assignmentsController.userSelection').bool()
-      }),
-    
       filterPanelButton: SC.ButtonView.design({
         layout: { centerY: 0, height: 24, right: 306, width: 50 },
         titleMinWidth: 0,

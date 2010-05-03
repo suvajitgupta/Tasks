@@ -72,14 +72,12 @@ Tasks.assignmentsController = SC.ArrayController.create(
   assignedTasks: null,
   
   _showTasks: true,
-  _clearingUserSelection: false,
   displayMode: function(key, value) {
     if (value !== undefined) {
       if(value === false) { // clear assignee selection before going to "TEAM" mode
-        var userSelection = this.get('userSelection');
-        if(userSelection !== null && userSelection !== '') {
-          this._clearingUserSelection = true;
-          this.set('userSelection', null);
+        var searchFilter = this.get('searchFilter');
+        if(searchFilter !== null && searchFilter !== '') {
+          this.set('searchFilter', null);
         }
       }
       this.set('_showTasks', value);
@@ -235,42 +233,66 @@ Tasks.assignmentsController = SC.ArrayController.create(
     // console.log('DEBUG: showAssignments(' + this.count + ') entry at: ' + new Date().format('hh:mm:ss a'));
     // Preserve selected tasks to be restored at the end of redrawing assignments
     var selection = Tasks.tasksController.get('selection');
+    var idPattern = null, searchPattern = null, positiveMatch = true;
+    var searchFilter = this.get('searchFilter');
     
     // Extract selected users (assignees or <submitters>)
-    var userSelectionDisplayNames = [];
-    var assigneeSearch = true; // default
-    var userSelection = this.get('userSelection');
-    if (userSelection && userSelection !== '') { // if user selection is specified
-      if(userSelection[0] === '<' && userSelection[userSelection.length-1] === '>') { // looking for submitters
-        assigneeSearch= false;
-        userSelection = userSelection.substr(1,userSelection.length-2);
-      }
-      var userSelectionNames = userSelection.replace(/,/g, ' ').replace(/\s+/g, ' ').replace(/^\s+/, '').replace(/\s+$/, '');
-      if (userSelectionNames !== '') {
-        userSelectionNames = userSelectionNames.split(' ');
-        // console.log('DEBUG: selected ' + (assigneeSearch? 'assignees' : 'submitters') + ' = ' + userSelectionNames);
-        for (var i = 0; i < userSelectionNames.length; i++) {
-          var userSelectionName = userSelectionNames[i];
-          if(userSelectionName.toLowerCase() === CoreTasks.USER_NONE) {
-            userSelectionDisplayNames.push(CoreTasks.USER_UNASSIGNED);
-          }
-          else {
-            var selectedAssigneeUsers = CoreTasks.getUsers(userSelectionName);
-            if (selectedAssigneeUsers.length > 0) {
-              for (var j = 0; j < selectedAssigneeUsers.length; j++) {
-                userSelectionDisplayNames.push(selectedAssigneeUsers[j].get('displayName'));
+    var i, j, assigneeSelectionDisplayNames = [], submitterSelectionDisplayNames = [];
+    if (searchFilter && searchFilter !== '') { // if a search filter is specified
+      var assigneeSelection = searchFilter.match(/\[.*\]/);
+      if (assigneeSelection) { // if assignee selection is specified
+        assigneeSelection += ''; // convert to string
+        searchFilter = searchFilter.replace(assigneeSelection, ''); // remove assignee selection from search filter
+        assigneeSelection = assigneeSelection.substr(1,assigneeSelection.length-2);
+        var assigneeSelectionNames = assigneeSelection.replace(/,/g, ' ').replace(/\s+/g, ' ').replace(/^\s+/, '').replace(/\s+$/, '');
+        if (assigneeSelection !== '') {
+          assigneeSelectionNames = assigneeSelectionNames.split(' ');
+          for (i = 0; i < assigneeSelectionNames.length; i++) {
+            var assigneeSelectionName = assigneeSelectionNames[i];
+            if(assigneeSelectionName.toLowerCase() === CoreTasks.USER_NONE) {
+              assigneeSelectionDisplayNames.push(CoreTasks.USER_UNASSIGNED);
+            }
+            else {
+              var selectedAssigneeUsers = CoreTasks.getUsers(assigneeSelectionName);
+              if (selectedAssigneeUsers.length > 0) {
+                for (j = 0; j < selectedAssigneeUsers.length; j++) {
+                  assigneeSelectionDisplayNames.push(selectedAssigneeUsers[j].get('displayName'));
+                }
               }
             }
+            // console.log('DEBUG: assignees: ' + assigneeSelectionDisplayNames);
+          }
+        }
+        var submitterSelection = searchFilter.match(/\<.*\>/);
+        if (submitterSelection) { // if submitter selection is specified
+          submitterSelection += ''; // convert to string
+          searchFilter = searchFilter.replace(submitterSelection, ''); // remove submitter selection from search filter
+          submitterSelection = submitterSelection.substr(1,submitterSelection.length-2);
+          var submitterSelectionNames = submitterSelection.replace(/,/g, ' ').replace(/\s+/g, ' ').replace(/^\s+/, '').replace(/\s+$/, '');
+          if (submitterSelection !== '') {
+            submitterSelectionNames = submitterSelectionNames.split(' ');
+            for (i = 0; i < submitterSelectionNames.length; i++) {
+              var submitterSelectionName = submitterSelectionNames[i];
+              if(submitterSelectionName.toLowerCase() === CoreTasks.USER_NONE) {
+                submitterSelectionDisplayNames.push(CoreTasks.USER_UNASSIGNED);
+              }
+              else {
+                var selectedSubmitterUsers = CoreTasks.getUsers(submitterSelectionName);
+                if (selectedSubmitterUsers.length > 0) {
+                  for (j = 0; j < selectedSubmitterUsers.length; j++) {
+                    submitterSelectionDisplayNames.push(selectedSubmitterUsers[j].get('displayName'));
+                  }
+                }
+              }
+            }
+            // console.log('DEBUG: submitters: ' + submitterSelectionDisplayNames);
           }
         }
       }
-    }
     
-    // Extract task name search filter
-    var idPattern = null, searchPattern = null, positiveMatch = true;
-    var searchFilter = this.get('searchFilter');
-    if (searchFilter && searchFilter !== '') { // if a search filter is specified
-      searchFilter = this._escapeMetacharacters(searchFilter);
+      // Extract task name search filter
+      searchFilter = this._escapeMetacharacters(searchFilter).replace(/^\s+/, '').replace(/\s+$/, '');
+      // console.log('DEBUG: searchFilter: ' + searchFilter);
       var idMatches = searchFilter.match(/#([\-\d]+)/g);
       // console.log('DEBUG: idMatches = ' + idMatches);
       if(!idMatches) {
@@ -301,8 +323,10 @@ Tasks.assignmentsController = SC.ArrayController.create(
       var isNewTask = (taskName === CoreTasks.NEW_TASK_NAME.loc()); // Always display "new task"s
       assigneeName = assignee? assignee.get('displayName') : CoreTasks.USER_UNASSIGNED;
       submitterName = submitter? submitter.get('displayName') : CoreTasks.USER_UNASSIGNED;
-      if(isNewTask || userSelectionDisplayNames.length === 0 ||
-         userSelectionDisplayNames.indexOf(assigneeSearch? assigneeName : submitterName) !== -1) {
+      if(isNewTask || assigneeSelectionDisplayNames.length === 0 || assigneeSelectionDisplayNames.indexOf(assigneeName) !== -1) {
+        
+        if(submitterSelectionDisplayNames.length !== 0 && submitterSelectionDisplayNames.indexOf(submitterName) === -1) return;
+        
         var assigneeObj = assignees[assigneeName];
         if(!assigneeObj) {
           assigneeObj = { assignee: assignee, tasks: [] };
@@ -591,15 +615,6 @@ Tasks.assignmentsController = SC.ArrayController.create(
     if (this._timer) this._timer.invalidate();
     this._timer = this.invokeLater(this._contentHasChanged, 500);
   },
-  
-  _userSelectionHasChanged: function() {
-    // console.log('DEBUG: User selection changed to "' + this.userSelection + '" + ' showTasks = ' + this.get('_showTasks'));
-    if(!this.get('_showTasks') && !this._clearingUserSelection) {
-      this.set('_showTasks', true);
-    }
-    this._clearingUserSelection = false;
-    this._filteringHasChanged();
-  }.observes('userSelection'),
   
   _searchFilterHasChanged: function() {
     // console.log('DEBUG: Search filter changed to "' + this.searchFilter + '"');

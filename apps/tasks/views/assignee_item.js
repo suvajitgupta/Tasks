@@ -19,7 +19,8 @@ Tasks.AssigneeItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     if(Tasks.assignmentsController.get('displayMode') === Tasks.DISPLAY_MODE_TEAM) {
       var loginNameMatches = this.getPath('content.displayName').match(/\((.+)\)/);
       var assignee = loginNameMatches? loginNameMatches[1] : 'none';
-      Tasks.assignmentsController.set('userSelection', assignee);
+      Tasks.assignmentsController.set('displayMode', Tasks.DISPLAY_MODE_TASKS);
+      Tasks.assignmentsController.set('searchFilter', '[' + assignee + ']');
     }
     else sc_super();
   },

@@ -32,8 +32,8 @@ Tasks.settingsPage = SC.Page.create({
         userNamePatternField: SC.TextFieldView.design(SCUI.ToolTip, {
           layout: { centerY: 0, height: 24, left: 7, width: 200 },
           classNames: ['search-bar'],
-          hint: "_UserSearchPatternSelectionHint".loc(),
-          toolTip: "_UserSearchPatternSelectionTooltip".loc(),
+          hint: "_UserSearchSelectionHint".loc(),
+          toolTip: "_UserSearchSelectionTooltip".loc(),
           isVisibleBinding: 'CoreTasks*isCurrentUserAManager',
           valueBinding: 'Tasks.usersController.userNamePattern'
         }),

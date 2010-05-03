@@ -150,8 +150,8 @@ SC.stringsFor('English', {
   "_TaskIdTooltip": "Unique ID (dashes for unsaved tasks)",
   "_TaskValidationTooltip": "; Background color indicates validation status",
   "_Tasks": "Tasks",
-  "_TasksSearchHint": "Task #IDs or search text",
-  "_TasksSearchTooltip": "Separate #IDs by commas or spaces, otherwise search for text within task name or description (prefix with a caret to find items that don't match text)",
+  "_TasksSearchHint": "Task search pattern",
+  "_TasksSearchTooltip": "Specify [Assignees] or <Submitters> (use all or part of full/login name separated via commas or spaces - use 'none' for unassigned), #IDs (separated by commas or spaces), or text (to match within task name or description - prefix with a caret to find items that don't match text)",
   "_TasksUnallocated": "Any tasks allocated to deleted projects will become unallocated.",
   "_TasksUnassigned": "Any tasks assigned to deleted users will become unassigned.",
   "_Team": "Team",
@@ -174,10 +174,8 @@ SC.stringsFor('English', {
   "_Updated:": "Updated: ",
   "_User": "User",
   "_UserDeletionConfirmation": "Are you sure you want to delete the selected users?",
-  "_UserSearchPatternSelectionHint": "User name or email pattern",
-  "_UserSearchPatternSelectionTooltip": "Specify pattern to match all or part of users' full/login name or email",
-  "_UserSelectionHint": "Assignees or <Submitters>",
-  "_UserSelectionTooltip": "Use all or part of full/login name separated via commas or spaces; Use 'none' for unassigned",
+  "_UserSearchSelectionHint": "User name or email pattern",
+  "_UserSearchSelectionTooltip": "Specify pattern to match all or part of users' full/login name or email",
   "_Validation": "Validation:",
   "_ValidationTooltip": "Testing status of completed task - independent verification recommended",
   "_Watch": "Watch",
@@ -193,5 +191,4 @@ SC.stringsFor('English', {
   "_tasks": " tasks",
   "_total": ", total "
 
-    
 });
