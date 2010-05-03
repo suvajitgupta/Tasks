@@ -27,7 +27,8 @@
 }
 
 .welcome-message {
-  font-size: 10px !important;
+  font-size: 11px !important;
+  text-align: center !important;
   color: #EEE !important;
   line-height: 15px !important;
 }
@@ -81,6 +82,18 @@
   background: static_url('images/statistics.png') no-repeat;
 }
 
+.settings-icon {
+  width: 16px;
+  height: 16px;
+  background: static_url('images/settings.png') no-repeat;
+}
+
+.notification-icon {
+  width: 16px;
+  height: 16px;
+  background: static_url('images/notification.png') no-repeat;
+}
+
 .import-icon {
   width: 16px;
   height: 16px;
@@ -99,16 +112,10 @@
   background: static_url('images/html.png') no-repeat;
 }
 
-.notification-icon {
+.logout-icon {
   width: 16px;
   height: 16px;
-  background: static_url('images/notification.png') no-repeat;
-}
-
-.settings-icon {
-  width: 16px;
-  height: 16px;
-  background: static_url('images/settings.png') no-repeat;
+  background: static_url('images/logout.png') no-repeat;
 }
 
 .safari .sc-view .user-selection-bar.focus,

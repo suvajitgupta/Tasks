@@ -115,13 +115,11 @@ Tasks.mixin({
         // Greet user and save login session information
         CoreTasks.set('currentUser', currentUser);
         CoreTasks.setPermissions();
-        
-        var userName = Tasks.getPath('mainPage.mainPane.userName');
-        userName.set('toolTip', "_LoginSince".loc() + new Date().format('hh:mm a MMM dd, yyyy'));
+        var welcomeMessage = Tasks.getPath('mainPage.mainPane.welcomeMessage');
+        welcomeMessage.set('toolTip', "_LoginSince".loc() + new Date().format('hh:mm a MMM dd, yyyy'));
         
         // Based on user's role set up appropriate task filter
         var role = currentUser.get('role');
-        
         if(role === CoreTasks.USER_ROLE_DEVELOPER) { // Set assignee selection filter to current user
           Tasks.assignmentsController.set('searchFilter', '[' + this.loginName + ']');
         }
@@ -362,7 +360,7 @@ Tasks.mixin({
    */
   restart: function() {
     
-    Tasks.getPath('mainPage.mainPane.userName').set('value', null);
+    Tasks.setPath('mainPage.mainPane.welcomeMessage.value', null);
     CoreTasks.set('currentUser', null);
     CoreTasks.loginTime = true;
     
