@@ -611,14 +611,11 @@ Tasks.assignmentsController = SC.ArrayController.create(
   	this.invokeOnce(this.showAssignments);
   }.observes('[]', '_showTasks'),
   
-  _filteringHasChanged: function() { // allow typing delay over a half second before redrawing tasks pane
-    if (this._timer) this._timer.invalidate();
-    this._timer = this.invokeLater(this._contentHasChanged, 500);
-  },
-  
   _searchFilterHasChanged: function() {
     // console.log('DEBUG: Search filter changed to "' + this.searchFilter + '"');
-    this._filteringHasChanged();
+    // Allow typing delay over a half second before redrawing tasks pane
+    if (this._timer) this._timer.invalidate();
+    this._timer = this.invokeLater(this._contentHasChanged, 500);
   }.observes('searchFilter'),
   
   
