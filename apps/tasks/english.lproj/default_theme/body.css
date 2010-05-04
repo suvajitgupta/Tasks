@@ -239,7 +239,10 @@ body.sc-theme {
 .sc-theme .sc-radio-view.sc-layout-horizontal .sc-radio-button {
   margin-top: 4px;
 }
-.picker-resizable-handle {
+
+.sc-segment label {
+  line-height: 32px !important;
+}.picker-resizable-handle {
   width: 16px;
   height: 16px;
   background: static_url('images/lower-right-drag.png') no-repeat;
