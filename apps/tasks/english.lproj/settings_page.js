@@ -116,7 +116,7 @@ Tasks.settingsPage = SC.Page.create({
       }),
 
       deleteButton: SC.ButtonView.design({
-        layout: { left: 47, bottom: 10, height: 24, width: 32 },
+        layout: { left: 57, bottom: 10, height: 24, width: 32 },
         classNames: ['add-delete-button'],
         titleMinWidth: 0,
         title: '-',

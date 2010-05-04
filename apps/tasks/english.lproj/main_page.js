@@ -336,7 +336,7 @@ Tasks.mainPage = SC.Page.design({
     bottomBarView: SC.View.design(SC.Border, {
       layout: { bottom: 0, height: 26, left: 0, right: 0 },
       classNames: ['bottom-bar'],
-      childViews: 'addProjectButton deleteProjectButton divider addTaskButton deleteTaskButton summaryView serverMessageView refreshButton saveButton'.w(),
+      childViews: 'addProjectButton deleteProjectButton divider addTaskButton deleteTaskButton summaryView serverMessageView saveButton refreshButton'.w(),
       borderStyle: SC.BORDER_TOP,
         
       addProjectButton: SC.ButtonView.design({
@@ -350,7 +350,7 @@ Tasks.mainPage = SC.Page.design({
         action: 'addProject'
       }),
       deleteProjectButton: SC.ButtonView.design({
-        layout: { centerY: 0, left: 42, height: 24, width: 32 },
+        layout: { centerY: 0, left: 52, height: 24, width: 32 },
         classNames: ['add-delete-button'],
         titleMinWidth: 0,
         title: '-',
@@ -378,7 +378,7 @@ Tasks.mainPage = SC.Page.design({
         action: 'addTask'
       }),
       deleteTaskButton: SC.ButtonView.design(SCUI.Permissible,{
-        layout: { centerY: 0, left: 272, height: 24, width: 32 },
+        layout: { centerY: 0, left: 282, height: 24, width: 32 },
         classNames: ['add-delete-button'],
         titleMinWidth: 0,
         title: '-',
@@ -401,28 +401,15 @@ Tasks.mainPage = SC.Page.design({
       }),
         
       serverMessageView: SC.LabelView.design({
-        layout: { centerY: 0, height: 16, right: 80, width: 250 },
+        layout: { centerY: 0, height: 16, right: 95, width: 250 },
         classNames: ['bottom-bar-label'],
         icon: '',
         textAlign: SC.ALIGN_RIGHT,
         value: ''
       }),
-
-      refreshButton: SC.ButtonView.design({
-        layout: { centerY: 0, right: 38, height: 24, width: 33 },
-        classNames: ['image-button'],
-        titleMinWidth: 0,
-        icon: 'refresh-icon',
-        toolTip: "_RefreshTooltip".loc(),
-        target: 'Tasks',
-        action: 'refreshData',
-        isEnabledBinding: SC.Binding.transform(function(value, binding) {
-                                                 return value === ''; // when not saving, shown via progress icon
-                                               }).from('Tasks.mainPage.mainPane.serverMessage.icon')
-        
-      }),
+      
       saveButton: SC.ButtonView.design({
-        layout: { centerY: 0, right: 5, height: 24, width: 33 },
+        layout: { centerY: 0, right: 53, height: 24, width: 33 },
         classNames: ['image-button'],
         titleMinWidth: 0,
         icon: 'save-icon',
@@ -433,8 +420,19 @@ Tasks.mainPage = SC.Page.design({
                                                }).from('CoreTasks.autoSave'),
         target: 'Tasks',
         action: 'saveData'
-      })
-            
+      }),
+      refreshButton: SC.ButtonView.design({
+        layout: { centerY: 0, right: 10, height: 24, width: 33 },
+        classNames: ['image-button'],
+        titleMinWidth: 0,
+        icon: 'refresh-icon',
+        toolTip: "_RefreshTooltip".loc(),
+        target: 'Tasks',
+        action: 'refreshData',
+        isEnabledBinding: SC.Binding.transform(function(value, binding) {
+                                                 return value === ''; // when not saving, shown via progress icon
+                                               }).from('Tasks.mainPage.mainPane.serverMessage.icon')
+      })            
     }),
     
     serverMessage: SC.outlet('bottomBarView.serverMessageView')
