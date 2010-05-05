@@ -46,11 +46,6 @@ body {
   margin-right: 3px !important;
 }
 
-.add-delete-button span label {
-  font-size: 16px !important;
-	line-height: 22px !important;
-}
-
 .onscreen-help {
   color: #777 !important;
   font-size: 10px !important;
@@ -172,6 +167,24 @@ body {
 
 .checkbox-icon .label {
   left: 38px !important;
+}
+
+.add-icon {
+  width: 16px;
+  height: 16px;
+  background: static_url('images/add.png') no-repeat;
+}
+
+.duplicate-icon {
+  width: 16px;
+  height: 16px;
+  background: static_url('images/duplicate.png') no-repeat;
+}
+
+.delete-icon {
+  width: 16px;
+  height: 16px;
+  background: static_url('images/delete.png') no-repeat;
 }
 
 .description-icon {

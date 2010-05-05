@@ -340,20 +340,20 @@ Tasks.mainPage = SC.Page.design({
       borderStyle: SC.BORDER_TOP,
         
       addProjectButton: SC.ButtonView.design({
-        layout: { centerY: 0, left: 10, height: 24, width: 32 },
-        classNames: ['add-delete-button'],
+        layout: { centerY: 0, left: 10, height: 24, width: 33 },
+        classNames: ['image-button'],
         titleMinWidth: 0,
-        title: '+',
+        icon: 'add-icon',
         toolTip: "_AddProjectTooltip".loc(),
         isVisibleBinding: 'CoreTasks.permissions.canCreateProject',
         target: 'Tasks',
         action: 'addProject'
       }),
       deleteProjectButton: SC.ButtonView.design({
-        layout: { centerY: 0, left: 52, height: 24, width: 32 },
-        classNames: ['add-delete-button'],
+        layout: { centerY: 0, left: 52, height: 24, width: 33 },
+        classNames: ['image-button'],
         titleMinWidth: 0,
-        title: '-',
+        icon: 'delete-icon',
         toolTip: "_DeleteProjectTooltip".loc(),
         isVisibleBinding: 'CoreTasks.permissions.canDeleteProject',
         isEnabledBinding: 'Tasks.projectsController.isDeletable',
@@ -367,10 +367,10 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       addTaskButton: SC.ButtonView.design({
-        layout: { centerY: 0, left: 240, height: 24, width: 32 },
-        classNames: ['add-delete-button'],
+        layout: { centerY: 0, left: 240, height: 24, width: 33 },
+        classNames: ['image-button'],
         titleMinWidth: 0,
-        title: '+',
+        icon: 'add-icon',
         toolTip: "_AddTaskTooltip".loc(),
         isVisibleBinding: 'CoreTasks.permissions.canCreateTask',
         isEnabledBinding: 'Tasks.tasksController.isAddable',
@@ -378,10 +378,10 @@ Tasks.mainPage = SC.Page.design({
         action: 'addTask'
       }),
       deleteTaskButton: SC.ButtonView.design(SCUI.Permissible,{
-        layout: { centerY: 0, left: 282, height: 24, width: 32 },
-        classNames: ['add-delete-button'],
+        layout: { centerY: 0, left: 282, height: 24, width: 33 },
+        classNames: ['image-button'],
         titleMinWidth: 0,
-        title: '-',
+        icon: 'delete-icon',
         toolTip: "_DeleteTaskTooltip".loc(),
         isVisibleBinding: 'CoreTasks.permissions.canDeleteTask',
         isEnabledBinding: SC.Binding.logicalAnd('Tasks.tasksController.isDeletable', 'Tasks.tasksController.notGuestOrGuestSubmittedTasks'),

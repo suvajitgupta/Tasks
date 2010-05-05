@@ -105,10 +105,10 @@ Tasks.settingsPage = SC.Page.create({
       }),
       
       addButton: SC.ButtonView.design({
-        layout: { left: 15, bottom: 10, height: 24, width: 32 },
-        classNames: ['add-delete-button'],
+        layout: { left: 15, bottom: 10, height: 24, width: 33 },
+        classNames: ['image-button'],
         titleMinWidth: 0,
-        title: '+',
+        icon: 'add-icon',
         toolTip: "_AddUserTooltip".loc(),
         isVisibleBinding: 'CoreTasks.permissions.canCreateUser',
         target: 'Tasks',
@@ -116,10 +116,10 @@ Tasks.settingsPage = SC.Page.create({
       }),
 
       deleteButton: SC.ButtonView.design({
-        layout: { left: 57, bottom: 10, height: 24, width: 32 },
-        classNames: ['add-delete-button'],
+        layout: { left: 57, bottom: 10, height: 24, width: 33 },
+        classNames: ['image-button'],
         titleMinWidth: 0,
-        title: '-',
+        icon: 'delete-icon',
         toolTip: "_DeleteUserTooltip".loc(),
         isVisibleBinding: 'CoreTasks.permissions.canDeleteUser',
         isEnabledBinding: 'Tasks.usersController.isDeletable',

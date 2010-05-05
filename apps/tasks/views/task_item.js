@@ -328,14 +328,14 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       needsSeparator = true;
       ret.push({
         title: "_Add".loc(),
-        icon: sc_static('blank'),
+        icon: 'add-icon',
         isEnabled: YES,
         target: 'Tasks',
         action: 'addTask'
       });
       ret.push({
         title: "_Duplicate".loc(),
-        icon: sc_static('blank'),
+        icon: 'duplicate-icon',
         isEnabled: YES,
         target: 'Tasks',
         action: 'duplicateTask'
@@ -346,7 +346,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       needsSeparator = true;
       ret.push({
         title: "_Delete".loc(),
-        icon: sc_static('blank'),
+        icon: 'delete-icon',
         isEnabled: YES,
         target: 'Tasks',
         action: 'deleteTask'
