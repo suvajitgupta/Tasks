@@ -43,10 +43,6 @@
   background: static_url('images/default-theme-repeat-x.png') repeat-x 0 -122px; 
 }
 
-.sc-view .user-selection-bar {
-  background: static_url('images/default-theme-user-selection-bg.png') no-repeat;
-}
-
 .sc-view .search-bar {
   background: static_url('images/default-theme-search-filter-bg.png') no-repeat;
 }
@@ -118,64 +114,45 @@
   background: static_url('images/logout.png') no-repeat;
 }
 
-.safari .sc-view .user-selection-bar.focus,
-.mozilla .sc-view .user-selection-bar.focus,
-.msie .sc-view .user-selection-bar.focus,
 .safari .sc-view .search-bar.focus,
 .mozilla .sc-view .search-bar.focus,
 .msie .sc-view .search-bar.focus {
   outline: 0;
 }
 
-.safari .user-selection-bar .border,
 .safari .search-bar .border {
   -webkit-appearance: none;
 }
 
-.mozilla .sc-view .user-selection-bar .border,
 .mozilla .sc-view .search-bar .border {
   -moz-appearance: none;
 }
 
-.msie .sc-view .user-selection-bar .border,
 .msie .sc-view .search-bar .border {
   border: 0;
 }
 
-.sc-view .user-selection-bar .padding,
 .sc-view .search-bar .padding {
   top: 2px;
   right: 22px;
-}
-
-.sc-view .user-selection-bar .padding {
-  left: 30px;
 }
 
 .sc-view .search-bar .padding {
   left: 24px;
 }
 
-.user-selection-bar input {
-  font-size: 11px;
-  font-weight: bold;
-}
-
 .search-bar input {
   font-size: 11px;
 }
 
-.mozilla .user-selection-bar input,
 .mozilla .search-bar input {
   top: 4px;
 }
 
-.msie .user-selection-bar input,
 .msie .search-bar input {
   line-height: 22px;
 }
 
-.sc-text-field-view.user-selection-bar .sc-hint,
 .sc-text-field-view.search-bar .sc-hint {
   top: 0;
   bottom: 0;
