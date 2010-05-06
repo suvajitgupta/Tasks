@@ -218,6 +218,10 @@ body {
   left: 10px !important;
 }
 
+.projects-pane .sc-view.sc-list-item-view.sc-collection-item.sc-group-item label {
+  left: -6px !important;
+}
+
 /*
 // FIXME: [SC] hacks to turn off blue ring highlight around select button with focus
 */
