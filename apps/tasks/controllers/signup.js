@@ -17,9 +17,9 @@ Tasks.signupController = SC.ObjectController.create(
   
   isValidUserName: function() {
     var name = this.get('name');
-    if(name === CoreTasks.NEW_USER_NAME) return false;
+    if(name === '' || name === CoreTasks.NEW_USER_NAME || name === CoreTasks.NEW_USER_NAME.loc()) return false;
     var loginName = this.get('loginName');
-    if(loginName === CoreTasks.NEW_USER_LOGIN_NAME) return false;
+    if(loginName === '' || loginName === CoreTasks.NEW_USER_LOGIN_NAME || loginName === CoreTasks.NEW_USER_LOGIN_NAME.loc()) return false;
     return true;
   }.property('name', 'loginName').cacheable()
   
