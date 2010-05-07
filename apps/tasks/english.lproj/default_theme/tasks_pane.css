@@ -155,7 +155,6 @@
 
 .task-item .sc-outline {
   left: 8px !important;
-  right: 18px !important;
 }
 
 .task-id {
@@ -346,18 +345,6 @@
   top: 4px !important;
   right: 3px !important;
   width: 16px !important;
-}
-
-.task-icon-has-description {
-  width: 16px !important;
-  height: 16px !important;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -224px;
-}
-
-.task-icon-no-description {
-  width: 16px !important;
-  height: 16px !important;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -208px;
 }
 
 

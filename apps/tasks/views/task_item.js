@@ -602,6 +602,10 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         validationClass = 'task-validation-failed';
         break;          
     }
+    var submitterUser = content.get('submitter');
+    if (submitterUser) {
+      idTooltip += ("_SubmitterTooltip".loc() + '%@ (%@)'.fmt(submitterUser.get('name'), submitterUser.get('loginName')));
+    }
     var displayId = content.get('displayId');
     context = context.begin('div').addClass('task-id').addClass(validationClass).
                 text(displayId).attr('title', idTooltip).attr('alt', idTooltip).end();
@@ -621,24 +625,6 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         break;          
     }
     
-    var hasDescription = NO;
-    if (content.get('description')) hasDescription = YES;
-    var taskTooltip = (hasDescription? "_Has".loc() : ("_No".loc() + ' ')) + "_description".loc();
-    var submitterUser = content.get('submitter');
-    if (submitterUser) {
-      taskTooltip += ('; ' + "_SubmitterTooltip".loc() + '%@ (%@)'.fmt(submitterUser.get('name'), submitterUser.get('loginName')));
-    }
-    taskTooltip += "_ClickToEdit".loc();
-    context = context.begin('div').addClass('sc-view').addClass('task-description');
-    context = context.begin('img').attr({
-      src: SC.BLANK_IMAGE_URL,
-      title: taskTooltip,
-      alt: taskTooltip
-    });
-    context.addClass(hasDescription? 'task-icon-has-description' : 'task-icon-no-description');
-    context = context.end();
-    context = context.end();
-
   },
 
   renderCount: function(context, count) {
