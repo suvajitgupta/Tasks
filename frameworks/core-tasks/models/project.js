@@ -164,8 +164,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
    * The path to the icon associated with a project.
    */
   icon: function() {
-    if(CoreTasks.isSystemProject(this)) return 'system-project-icon';
-    return this.get('description')? 'project-icon-has-description' : 'project-icon-no-description';
+    return this.getPath('tasks.length') > 0? 'project-icon' : 'empty-project-icon';
   }.property('description'),
 
   /**

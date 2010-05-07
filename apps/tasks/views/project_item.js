@@ -219,26 +219,14 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     }
 
     var projectTooltip = '';
-    if(content.get('id')) {
-      context.addClass('project-item');
-      var tasks = content.get('tasks');
-      if(tasks) {
-        projectTooltip += "_Has".loc() + tasks.get('length') + "_tasks".loc();
-        context.addClass(tasks.get('length') > 0? 'project-has-tasks' : 'project-no-tasks');
-      }
-      if(projectTooltip !== '') {
-        context.attr('title', projectTooltip);
-        context.attr('alt', projectTooltip);
-      }
-    }
+    if(content.get('id')) context.addClass('project-item');
 
   },
 
   renderIcon: function(context, icon){
     if(!SC.none(icon)) {
       var content = this.get('content');
-      var projectTooltip = content.get('description')? "_Has".loc() : ("_No".loc() + ' ');
-      if(!CoreTasks.isSystemProject(content)) projectTooltip += ("_description".loc() + "_ClickToEdit".loc());
+      var projectTooltip = "_Has".loc() + content.getPath('tasks.length') + "_tasks".loc();
       context.begin('img').addClass('icon').addClass(icon).attr('src', SC.BLANK_IMAGE_URL)
             .attr('title', projectTooltip).attr('alt', projectTooltip).end();
     }
@@ -246,7 +234,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
   
   renderCount: function(context, count) {
     if(count) {
-      var timeLeftTooltip = "_ProjectTimeLeftTooltip".loc() + "_ClickToEdit".loc();
+      var timeLeftTooltip = "_ProjectTimeLeftTooltip".loc();
       context.push('<span class="count" title="' + timeLeftTooltip + '">');
       context.push('<span class="inner">').push(count).push('</span></span>');
     }

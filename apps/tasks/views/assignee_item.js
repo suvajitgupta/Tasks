@@ -34,29 +34,28 @@ Tasks.AssigneeItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       context.addClass('assignee-item');
       
       var tasksCount = content.get('tasksCount');
-      var assigneeTooltip = "_Has".loc() + tasksCount + "_tasks".loc();
+      var assigneeTooltip;
       
       var loading = content.get('loading');
       if(loading) {
-        assigneeTooltip += ' (';
         if(loading === CoreTasks.USER_NOT_LOADED) {
-          assigneeTooltip += "_AssigneeNotLoaded".loc();
+          assigneeTooltip = "_AssigneeNotLoaded".loc();
           context.addClass('assignee-not-loaded');
         }
         else if(loading === CoreTasks.USER_UNDER_LOADED) {
-          assigneeTooltip += "_AssigneeUnderLoaded".loc();
+          assigneeTooltip = "_AssigneeUnderLoaded".loc();
           context.addClass('assignee-under-loaded');
         }
         else if(loading === CoreTasks.USER_PROPERLY_LOADED) {
-          assigneeTooltip += "_AssigneeProperlyLoaded".loc();
+          assigneeTooltip = "_AssigneeProperlyLoaded".loc();
           context.addClass('assignee-properly-loaded');
         }
         else if(loading === CoreTasks.USER_OVER_LOADED) {
-          assigneeTooltip += "_AssigneeOverloaded".loc();
+          assigneeTooltip = "_AssigneeOverloaded".loc();
           context.addClass('assignee-over-loaded');
         }
-        assigneeTooltip += ')';
       }
+      assigneeTooltip += "_with".loc() + tasksCount + "_tasks".loc();
       
       var leftEffort = content.get('displayEffort');
       if(leftEffort.match(/\?$/)) {

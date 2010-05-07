@@ -72,32 +72,18 @@
   background: #CCC none repeat scroll 0 0 !important;
 }
 
-.sc-view.project-has-tasks {
-  color: #111;
-}
-
-.sc-view.project-no-tasks {
-  color: #888;
-}
-
 .project-item .count {
   right: 12px !important;
 }
 
-.project-icon-has-description {
+.project-icon {
   width: 16px !important;
   height: 16px !important;
-  background: static_url('images/project-has-description.png') no-repeat 0 0;
+  background: static_url('images/project.png') no-repeat 0 0;
 }
 
-.project-icon-no-description {
+.empty-project-icon {
   width: 16px !important;
   height: 16px !important;
-  background: static_url('images/project-no-description.png') no-repeat 0 0;
-}
-
-.system-project-icon {
-  width: 16px !important;
-  height: 16px !important;
-  background: static_url('images/system-project.png') no-repeat;
+  background: static_url('images/empty-project.png') no-repeat 0 0;
 }
