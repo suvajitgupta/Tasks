@@ -304,6 +304,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           itemTargetKey: 'target',
           itemActionKey: 'action',
           itemSeparatorKey: 'isSeparator',
+          itemCheckboxKey: 'checkbox',
           items: items        
         });
         pane.popup(this, event); // pass in the mouse event so the pane can figure out where to put itself
@@ -364,140 +365,127 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       needsSeparator = true;
       if(Tasks.softwareMode) {
         var type = Tasks.tasksController.get('type');
-        if(type !== CoreTasks.TASK_TYPE_FEATURE) {
-          ret.push({
-            title: '<span class=task-type-feature>' + CoreTasks.TASK_TYPE_FEATURE.loc() + '</span>',
-            icon: 'task-icon-feature',
-            isEnabled: YES,
-            target: 'Tasks.tasksController',
-            action: 'setTypeFeature'
-          });
-        }
-        if(type !== CoreTasks.TASK_TYPE_BUG) {
-          ret.push({
-            title: '<span class=task-type-bug>' + CoreTasks.TASK_TYPE_BUG.loc() + '</span>',
-            icon: 'task-icon-bug',
-            isEnabled: YES,
-            target: 'Tasks.tasksController',
-            action: 'setTypeBug'
-          });
-        }
-        if(type !== CoreTasks.TASK_TYPE_OTHER) {
-          ret.push({
-            title: '<span class=task-type-other>' + CoreTasks.TASK_TYPE_OTHER.loc() + '</span>',
-            icon: 'task-icon-other',
-            isEnabled: YES,
-            target: 'Tasks.tasksController',
-            action: 'setTypeOther'
-          });
-        }
+        ret.push({
+          title: '<span class=task-type-feature>' + CoreTasks.TASK_TYPE_FEATURE.loc() + '</span>',
+          icon: 'task-icon-feature',
+          isEnabled: YES,
+          checkbox: type === CoreTasks.TASK_TYPE_FEATURE,
+          target: 'Tasks.tasksController',
+          action: 'setTypeFeature'
+        });
+        ret.push({
+          title: '<span class=task-type-bug>' + CoreTasks.TASK_TYPE_BUG.loc() + '</span>',
+          icon: 'task-icon-bug',
+          isEnabled: YES,
+          checkbox: type === CoreTasks.TASK_TYPE_BUG,
+          target: 'Tasks.tasksController',
+          action: 'setTypeBug'
+        });
+        ret.push({
+          title: '<span class=task-type-other>' + CoreTasks.TASK_TYPE_OTHER.loc() + '</span>',
+          icon: 'task-icon-other',
+          isEnabled: YES,
+          checkbox: type === CoreTasks.TASK_TYPE_OTHER,
+          target: 'Tasks.tasksController',
+          action: 'setTypeOther'
+        });
         ret.push({
           isSeparator: YES
         });
       }
       
       var priority = Tasks.tasksController.get('priority');
-      if(priority !== CoreTasks.TASK_PRIORITY_HIGH) {
-        ret.push({
-          title: '<span class=task-priority-high>' + CoreTasks.TASK_PRIORITY_HIGH.loc() + '</span>',
-          icon: sc_static('blank'),
-          isEnabled: YES,
-          target: 'Tasks.tasksController',
-          action: 'setPriorityHigh'
-        });
-      }
-      if(priority !== CoreTasks.TASK_PRIORITY_MEDIUM) {
-        ret.push({
-          title: '<span class=task-priority-medium>' + CoreTasks.TASK_PRIORITY_MEDIUM.loc() + '</span>',
-          icon: sc_static('blank'),
-          isEnabled: YES,
-          target: 'Tasks.tasksController',
-          action: 'setPriorityMedium'
-        });
-      }
-      if(priority !== CoreTasks.TASK_PRIORITY_LOW) {
-        ret.push({
-          title: '<span class=task-priority-low>' + CoreTasks.TASK_PRIORITY_LOW.loc() + '</span>',
-          icon: sc_static('blank'),
-          isEnabled: YES,
-          target: 'Tasks.tasksController',
-          action: 'setPriorityLow'
-        });
-      }
+      ret.push({
+        title: '<span class=task-priority-high>' + CoreTasks.TASK_PRIORITY_HIGH.loc() + '</span>',
+        icon: sc_static('blank'),
+        isEnabled: YES,
+        checkbox: priority === CoreTasks.TASK_PRIORITY_HIGH,
+        target: 'Tasks.tasksController',
+        action: 'setPriorityHigh'
+      });
+      ret.push({
+        title: '<span class=task-priority-medium>' + CoreTasks.TASK_PRIORITY_MEDIUM.loc() + '</span>',
+        icon: sc_static('blank'),
+        isEnabled: YES,
+        checkbox: priority === CoreTasks.TASK_PRIORITY_MEDIUM,
+        target: 'Tasks.tasksController',
+        action: 'setPriorityMedium'
+      });
+      ret.push({
+        title: '<span class=task-priority-low>' + CoreTasks.TASK_PRIORITY_LOW.loc() + '</span>',
+        icon: sc_static('blank'),
+        isEnabled: YES,
+        checkbox: priority === CoreTasks.TASK_PRIORITY_LOW,
+        target: 'Tasks.tasksController',
+        action: 'setPriorityLow'
+      });
       ret.push({
         isSeparator: YES
       });
 
       var developmentStatus = Tasks.tasksController.get('developmentStatusWithValidation');
-      if(developmentStatus !== CoreTasks.TASK_STATUS_PLANNED) {
-        ret.push({
-          title: '<span class=task-status-planned>' + CoreTasks.TASK_STATUS_PLANNED.loc() + '</span>',
-          icon: sc_static('blank'),
-          isEnabled: YES,
-          target: 'Tasks.tasksController',
-          action: 'setDevelopmentStatusPlanned'
-        });
-      }
-      if(developmentStatus !== CoreTasks.TASK_STATUS_ACTIVE) {
-        ret.push({
-          title: '<span class=task-status-active>' + CoreTasks.TASK_STATUS_ACTIVE.loc() + '</span>',
-          icon: sc_static('blank'),
-          isEnabled: YES,
-          target: 'Tasks.tasksController',
-          action: 'setDevelopmentStatusActive'
-        });
-      }
-      if(developmentStatus !== CoreTasks.TASK_STATUS_DONE) {
-        ret.push({
-          title: '<span class=task-status-done>' + CoreTasks.TASK_STATUS_DONE.loc() + '</span>',
-          icon: sc_static('blank'),
-          isEnabled: YES,
-          target: 'Tasks.tasksController',
-          action: 'setDevelopmentStatusDone'
-        });
-      }
-      if(developmentStatus !== CoreTasks.TASK_STATUS_RISKY) {
-        ret.push({
-          title: '<span class=task-status-risky>' + CoreTasks.TASK_STATUS_RISKY.loc() + '</span>',
-          icon: sc_static('blank'),
-          isEnabled: YES,
-          target: 'Tasks.tasksController',
-          action: 'setDevelopmentStatusRisky'
-        });
-      }
+      ret.push({
+        title: '<span class=task-status-planned>' + CoreTasks.TASK_STATUS_PLANNED.loc() + '</span>',
+        icon: sc_static('blank'),
+        isEnabled: YES,
+        checkbox: developmentStatus === CoreTasks.TASK_STATUS_PLANNED,
+        target: 'Tasks.tasksController',
+        action: 'setDevelopmentStatusPlanned'
+      });
+      ret.push({
+        title: '<span class=task-status-active>' + CoreTasks.TASK_STATUS_ACTIVE.loc() + '</span>',
+        icon: sc_static('blank'),
+        isEnabled: YES,
+        checkbox: developmentStatus === CoreTasks.TASK_STATUS_ACTIVE,
+        target: 'Tasks.tasksController',
+        action: 'setDevelopmentStatusActive'
+      });
+      ret.push({
+        title: '<span class=task-status-done>' + CoreTasks.TASK_STATUS_DONE.loc() + '</span>',
+        icon: sc_static('blank'),
+        isEnabled: YES,
+        checkbox: developmentStatus === CoreTasks.TASK_STATUS_DONE,
+        target: 'Tasks.tasksController',
+        action: 'setDevelopmentStatusDone'
+      });
+      ret.push({
+        title: '<span class=task-status-risky>' + CoreTasks.TASK_STATUS_RISKY.loc() + '</span>',
+        icon: sc_static('blank'),
+        isEnabled: YES,
+        checkbox: developmentStatus === CoreTasks.TASK_STATUS_RISKY,
+        target: 'Tasks.tasksController',
+        action: 'setDevelopmentStatusRisky'
+      });
 
       if(Tasks.softwareMode && developmentStatus === CoreTasks.TASK_STATUS_DONE) {
         ret.push({
           isSeparator: YES
         });
         var validation = Tasks.tasksController.get('validation');
-        if(validation !== CoreTasks.TASK_VALIDATION_UNTESTED) {
-          ret.push({
-            title: '<span class=task-validation-untested>' + CoreTasks.TASK_VALIDATION_UNTESTED.loc() + '</span>',
-            icon: sc_static('blank'),
-            isEnabled: YES,
-            target: 'Tasks.tasksController',
-            action: 'setValidationUntested'
-          });
-        }
-        if(validation !== CoreTasks.TASK_VALIDATION_PASSED) {
-          ret.push({
-            title: '<span class=task-validation-passed>' + CoreTasks.TASK_VALIDATION_PASSED.loc() + '</span>',
-            icon: sc_static('blank'),
-            isEnabled: YES,
-            target: 'Tasks.tasksController',
-            action: 'setValidationPassed'
-          });
-        }
-        if(validation !== CoreTasks.TASK_VALIDATION_FAILED) {
-          ret.push({
-            title: '<span class=task-validation-failed>' + CoreTasks.TASK_VALIDATION_FAILED.loc() + '</span>',
-            icon: sc_static('blank'),
-            isEnabled: YES,
-            target: 'Tasks.tasksController',
-            action: 'setValidationFailed'
-          });
-        }
+        ret.push({
+          title: '<span class=task-validation-untested>' + CoreTasks.TASK_VALIDATION_UNTESTED.loc() + '</span>',
+          icon: sc_static('blank'),
+          isEnabled: YES,
+          checkbox: validation === CoreTasks.TASK_VALIDATION_UNTESTED,
+          target: 'Tasks.tasksController',
+          action: 'setValidationUntested'
+        });
+        ret.push({
+          title: '<span class=task-validation-passed>' + CoreTasks.TASK_VALIDATION_PASSED.loc() + '</span>',
+          icon: sc_static('blank'),
+          isEnabled: YES,
+          checkbox: validation === CoreTasks.TASK_VALIDATION_PASSED,
+          target: 'Tasks.tasksController',
+          action: 'setValidationPassed'
+        });
+        ret.push({
+          title: '<span class=task-validation-failed>' + CoreTasks.TASK_VALIDATION_FAILED.loc() + '</span>',
+          icon: sc_static('blank'),
+          isEnabled: YES,
+          checkbox: validation === CoreTasks.TASK_VALIDATION_FAILED,
+          target: 'Tasks.tasksController',
+          action: 'setValidationFailed'
+        });
       }
       
     }
