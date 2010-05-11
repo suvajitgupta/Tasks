@@ -47,7 +47,6 @@ Tasks.projectsController = SC.ArrayController.create(SCUI.StatusChanged,
               break;
             default:
               console.error('Project: "' + project.get('name') + '" with illegal development status ' + project.get('developmentStatus'));
-              systemProjects.push(project);
               break;
           }
         }
