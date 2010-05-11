@@ -263,6 +263,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
 
           descriptionLabel: SC.LabelView.design({
             layout: { top: 115, left: 10, height: 17, width: 100 },
+            icon: 'description-icon',
             value: "_Description:".loc()
           }),
           descriptionField: SC.TextFieldView.design({
