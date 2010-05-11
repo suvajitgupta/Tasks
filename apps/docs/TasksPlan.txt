@@ -204,6 +204,6 @@ Installation/Deployment
 - Support customizable default "AutoSave" and "Notifications" settings (can be overridden by User via GUI) [SG] $Feature @Done %Passed
 - Deploy publicly-accessible instances using Google App Engine/Python [JH2] <SG> @Done %Passed
 ^ Develop Web client (ported to Firefox, Internet Explorer, Safari, Chrome) [SG] $Feature @Done %Passed
-- Develop Desktop/iPad client <JH2> [SG] $Feature
+- Develop Desktop/iPad client <JH2> [SG] $Feature @Active
 - Develop Mobile client <MB> [SG] $Feature
 v Provide SproutCore doctool-style comments [SG] <SE>

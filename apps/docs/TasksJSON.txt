@@ -11,6 +11,8 @@ Project:
 	name*: <String>, # title
 	description: <String>, # multi-line additional information such as project start/end dates, goals, et al
 	timeLeft: <Number>, # amount of time left in days
+	developmentStatus: Enum<String> ("_Planned_" | "Active" | "Done" | "Risky"), # development status
+	developmentStatus: Enum<String> ("_Planned_" | "Active" | "Done"), # development status
 }
 
 ##################################################
