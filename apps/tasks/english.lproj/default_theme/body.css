@@ -8,6 +8,29 @@
 */
 
 /*
+
+
+/*-----------------------------------------------------------------
+ * Status styles
+ */
+
+.status-planned {
+	color: black !important;
+}
+
+.status-active {
+  color: blue !important;
+}
+
+.status-done {
+  color: green !important;
+}
+
+.status-risky {
+  color: red !important;
+}
+
+
 // FIXME: [SC] see how to make min-width/height work when specified on "body" instead of "mainPane"
 body {
   position: absolute;

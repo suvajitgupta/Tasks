@@ -729,10 +729,10 @@ Tasks.assignmentsController = SC.ArrayController.create(
         ret += '<td></td></tr>';
         ret += '<tr class="even">';
         ret += ('<td><span class="task-attribute-set-title">' + "_Status".loc() + '</td>');
-        ret += ('<td><span class="task-status-planned">' + "_Planned".loc() + ':</span> ' + stats.plannedCount + ' (' + Math.round(100*stats.plannedCount/stats.tasksCount) + '%)' + '</td>');
-        ret += ('<td><span class="task-status-active">' + "_Active".loc() + ':</span> ' + stats.activeCount + ' (' + Math.round(100*stats.activeCount/stats.tasksCount) + '%)' + '</td>');
-        ret += ('<td><span class="task-status-done">' + "_Done".loc() + ':</span> ' + stats.doneCount + ' (' + Math.round(100*stats.doneCount/stats.tasksCount) + '%)' + '</td>');
-        ret += ('<td><span class="task-status-risky">' + "_Risky".loc() + ':</span> ' + stats.riskyCount + ' (' + Math.round(100*stats.riskyCount/stats.tasksCount) + '%)' + '</td>');
+        ret += ('<td><span class="status-planned">' + "_Planned".loc() + ':</span> ' + stats.plannedCount + ' (' + Math.round(100*stats.plannedCount/stats.tasksCount) + '%)' + '</td>');
+        ret += ('<td><span class="status-active">' + "_Active".loc() + ':</span> ' + stats.activeCount + ' (' + Math.round(100*stats.activeCount/stats.tasksCount) + '%)' + '</td>');
+        ret += ('<td><span class="status-done">' + "_Done".loc() + ':</span> ' + stats.doneCount + ' (' + Math.round(100*stats.doneCount/stats.tasksCount) + '%)' + '</td>');
+        ret += ('<td><span class="status-risky">' + "_Risky".loc() + ':</span> ' + stats.riskyCount + ' (' + Math.round(100*stats.riskyCount/stats.tasksCount) + '%)' + '</td>');
         ret += '</tr>';
         if(Tasks.softwareMode) {
           ret += '<tr class="odd">';

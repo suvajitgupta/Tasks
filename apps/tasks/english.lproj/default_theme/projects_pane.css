@@ -24,6 +24,10 @@
  * Project list item styles
  */
 
+.system-project {
+	color: #777 !important;
+}
+
 .projects-pane .sc-view.sc-list-item-view.sc-collection-item .sc-outline label {
   opacity: 1 !important;
 }

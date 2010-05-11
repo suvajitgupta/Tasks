@@ -282,27 +282,6 @@
 
 
 /*-----------------------------------------------------------------
- * Task status styles
- */
-
-.task-status-planned {
-	color: black !important;
-}
-
-.task-status-active {
-  color: blue !important;
-}
-
-.task-status-done {
-  color: green !important;
-}
-
-.task-status-risky {
-  color: red !important;
-}
-
-
-/*-----------------------------------------------------------------
  * Task validation styles
  */
 

@@ -424,7 +424,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
 
       var developmentStatus = Tasks.tasksController.get('developmentStatusWithValidation');
       ret.push({
-        title: '<span class=task-status-planned>' + CoreTasks.STATUS_PLANNED.loc() + '</span>',
+        title: '<span class=status-planned>' + CoreTasks.STATUS_PLANNED.loc() + '</span>',
         icon: sc_static('blank'),
         isEnabled: YES,
         checkbox: developmentStatus === CoreTasks.STATUS_PLANNED,
@@ -432,7 +432,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         action: 'setDevelopmentStatusPlanned'
       });
       ret.push({
-        title: '<span class=task-status-active>' + CoreTasks.STATUS_ACTIVE.loc() + '</span>',
+        title: '<span class=status-active>' + CoreTasks.STATUS_ACTIVE.loc() + '</span>',
         icon: sc_static('blank'),
         isEnabled: YES,
         checkbox: developmentStatus === CoreTasks.STATUS_ACTIVE,
@@ -440,7 +440,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         action: 'setDevelopmentStatusActive'
       });
       ret.push({
-        title: '<span class=task-status-done>' + CoreTasks.STATUS_DONE.loc() + '</span>',
+        title: '<span class=status-done>' + CoreTasks.STATUS_DONE.loc() + '</span>',
         icon: sc_static('blank'),
         isEnabled: YES,
         checkbox: developmentStatus === CoreTasks.STATUS_DONE,
@@ -448,7 +448,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         action: 'setDevelopmentStatusDone'
       });
       ret.push({
-        title: '<span class=task-status-risky>' + CoreTasks.STATUS_RISKY.loc() + '</span>',
+        title: '<span class=status-risky>' + CoreTasks.STATUS_RISKY.loc() + '</span>',
         icon: sc_static('blank'),
         isEnabled: YES,
         checkbox: developmentStatus === CoreTasks.STATUS_RISKY,
@@ -611,16 +611,16 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       
     switch(content.get('developmentStatus')){
       case CoreTasks.STATUS_PLANNED:
-        context.addClass('task-status-planned');
+        context.addClass('status-planned');
         break;
       case CoreTasks.STATUS_ACTIVE:
-        context.addClass('task-status-active');
+        context.addClass('status-active');
         break;
       case CoreTasks.STATUS_DONE:
-        context.addClass('task-status-done');
+        context.addClass('status-done');
         break;          
       case CoreTasks.STATUS_RISKY:
-        context.addClass('task-status-risky');
+        context.addClass('status-risky');
         break;          
     }
     

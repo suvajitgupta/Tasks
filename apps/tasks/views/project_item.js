@@ -232,6 +232,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     sc_super();
     
     var isSystemProject = CoreTasks.isSystemProject(content);
+    if(isSystemProject) context.addClass('system-project');
     
     // Put a dot before non-system projects that were created or updated recently
     if(!isSystemProject && content.get('isRecentlyUpdated')) {
@@ -247,16 +248,16 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
 
     switch(content.get('developmentStatus')){
       case CoreTasks.STATUS_PLANNED:
-        context.addClass('task-status-planned');
+        context.addClass('status-planned');
         break;
       case CoreTasks.STATUS_ACTIVE:
-        context.addClass('task-status-active');
+        context.addClass('status-active');
         break;
       case CoreTasks.STATUS_DONE:
-        context.addClass('task-status-done');
+        context.addClass('status-done');
         break;          
       case CoreTasks.STATUS_RISKY:
-        context.addClass('task-status-risky');
+        context.addClass('status-risky');
         break;          
     }
 
