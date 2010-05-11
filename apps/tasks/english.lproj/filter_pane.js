@@ -191,28 +191,28 @@ Tasks.filterPane = SC.SheetPane.create({
       
       planned: SC.CheckboxView.design({
         layout: { left: 5, top: 4, width: 65 },
-        title: CoreTasks.TASK_STATUS_PLANNED.loc(),
+        title: CoreTasks.STATUS_PLANNED.loc(),
         valueBinding: 'Tasks.assignmentsController.attributeFilterStatusPlanned',
         classNames: [ 'task-status-planned' ]
       }),
       
       active: SC.CheckboxView.design({
         layout: { centerX: -25, top: 4, width: 55 },
-        title: CoreTasks.TASK_STATUS_ACTIVE.loc(),
+        title: CoreTasks.STATUS_ACTIVE.loc(),
         valueBinding: 'Tasks.assignmentsController.attributeFilterStatusActive',
         classNames: [ 'task-status-active' ]
       }),
       
       done: SC.CheckboxView.design({
         layout: { centerX: 45, top: 4, width: 50 },
-        title: CoreTasks.TASK_STATUS_DONE.loc(),
+        title: CoreTasks.STATUS_DONE.loc(),
         valueBinding: 'Tasks.assignmentsController.attributeFilterStatusDone',
         classNames: [ 'task-status-done' ]
       }),
       
       risky: SC.CheckboxView.design({
         layout: { right: 5, top: 4, width: 50 },
-        title: CoreTasks.TASK_STATUS_RISKY.loc(),
+        title: CoreTasks.STATUS_RISKY.loc(),
         valueBinding: 'Tasks.assignmentsController.attributeFilterStatusRisky',
         classNames: [ 'task-status-risky' ]
       })

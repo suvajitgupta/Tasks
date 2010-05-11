@@ -415,9 +415,11 @@ Tasks.mixin({
       projectHash.name = selectedProject.get('name') + "_Copy".loc();
       projectHash.description = selectedProject.get('description');
       projectHash.timeLeft = selectedProject.get('timeLeft');
+      projectHash.developmentStatus = selectedProject.get('developmentStatus');
     }
     
     // Create, select, and begin editing new project.
+    JSON.stringify(projectHash);
     var project = CoreTasks.createRecord(CoreTasks.Project, projectHash);
     var pc = this.projectsController;
     pc.selectObject(project);

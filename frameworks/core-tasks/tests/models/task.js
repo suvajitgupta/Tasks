@@ -17,7 +17,7 @@ module("CoreTasks.Task", {
     
     var doneTaskHash = {
       name: CoreTasks.NEW_TASK_NAME,
-      developmentStatus: CoreTasks.TASK_STATUS_DONE,
+      developmentStatus: CoreTasks.STATUS_DONE,
       validation: CoreTasks.TASK_VALIDATION_PASSED
     };
     doneTask = CoreTasks.createRecord(CoreTasks.Task, doneTaskHash);
@@ -72,10 +72,10 @@ function() {
 test("Computed Property: developmentStatusWithValidation",
 function() {
 
-  equals(doneTask.get('developmentStatus'), CoreTasks.TASK_STATUS_DONE, "developmentStatus initialized to");
+  equals(doneTask.get('developmentStatus'), CoreTasks.STATUS_DONE, "developmentStatus initialized to");
   equals(doneTask.get('validation'), CoreTasks.TASK_VALIDATION_PASSED, "validation initialized to");
-  doneTask.set('developmentStatusWithValidation', CoreTasks.TASK_STATUS_ACTIVE);
-  equals(doneTask.get('developmentStatus'), CoreTasks.TASK_STATUS_ACTIVE, "developmentStatus changed to");
+  doneTask.set('developmentStatusWithValidation', CoreTasks.STATUS_ACTIVE);
+  equals(doneTask.get('developmentStatus'), CoreTasks.STATUS_ACTIVE, "developmentStatus changed to");
   equals(doneTask.get('validation'), CoreTasks.TASK_VALIDATION_UNTESTED, "validation adjusted to");
 
 });

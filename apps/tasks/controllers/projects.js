@@ -14,6 +14,13 @@ Tasks.projectsController = SC.ArrayController.create(SCUI.StatusChanged,
   
   sources: null,
   
+  _nameAlphaSort: function(a,b) {
+    var aName = a.get('name');
+    var bName = b.get('name');
+    if(aName === bName) return 0;
+    else return aName > bName? 1 : -1;
+  },
+
   showSources: function() {
     
     var projects = this.get('arrangedObjects');
@@ -21,23 +28,41 @@ Tasks.projectsController = SC.ArrayController.create(SCUI.StatusChanged,
     Tasks.sourcesRedrawNeeded = true;
     if(Tasks.editorPoppedUp) return;
     
-    var nodes = [], tasksSources = [], projectsSources = [];
+    var nodes = [], systemProjects = [], doneProjects = [], activeProjects = [], plannedProjects = [];
     if(projects) {
       var len = projects.get('length');
       for (var i = 0; i < len; i++) {
         var project = projects.objectAt(i);
-        if(CoreTasks.isSystemProject(project)) tasksSources.push(project);
-        else projectsSources.push(project);
+        if(CoreTasks.isSystemProject(project)) systemProjects.push(project);
+        else {
+          switch(project.get('developmentStatus')) {
+            case CoreTasks.STATUS_DONE:
+              doneProjects.push(project);
+              break;
+            case CoreTasks.STATUS_ACTIVE:
+              activeProjects.push(project);
+              break;
+            case CoreTasks.STATUS_PLANNED:
+              plannedProjects.push(project);
+              break;
+            default:
+              console.error('Project: "' + project.get('name') + '" with illegal development status ' + project.get('developmentStatus'));
+              systemProjects.push(project);
+              break;
+          }
+        }
       }
-      nodes.push(SC.Object.create({ displayName: "_System".loc(), treeItemChildren: tasksSources, treeItemIsExpanded: YES }));
-      nodes.push(SC.Object.create({ displayName: projectsSources.length + ' ' + "_Projects".loc(), treeItemChildren: projectsSources.sort(function(a,b) {
-        var aName = a.get('name');
-        var bName = b.get('name');
-        if(aName === bName) return 0;
-        else return aName > bName? 1 : -1;
-      }), treeItemIsExpanded: YES }));
-    }
+      nodes.push(SC.Object.create({ displayName: "_System".loc() + ' ' + "Projects".loc(), treeItemChildren: systemProjects,
+                 treeItemIsExpanded: NO }));
+      nodes.push(SC.Object.create({ displayName: doneProjects.length + ' ' + "Projects".loc() + ' ' + CoreTasks.STATUS_DONE.loc(),
+                 developmentStatus: CoreTasks.STATUS_DONE, treeItemChildren: doneProjects.sort(this._nameAlphaSort), treeItemIsExpanded: NO }));
+      nodes.push(SC.Object.create({ displayName: activeProjects.length + ' ' + "Projects".loc() + ' ' + CoreTasks.STATUS_ACTIVE.loc(),
+                 developmentStatus: CoreTasks.STATUS_ACTIVE, treeItemChildren: activeProjects.sort(this._nameAlphaSort), treeItemIsExpanded: YES }));
+      nodes.push(SC.Object.create({ displayName: plannedProjects.length + ' ' + "Projects".loc() + ' ' + CoreTasks.STATUS_PLANNED.loc(),
+                 developmentStatus: CoreTasks.STATUS_PLANNED, treeItemChildren: plannedProjects.sort(this._nameAlphaSort), treeItemIsExpanded: YES }));
     
+    }
+
     this.set('sources', SC.Object.create({ treeItemChildren: nodes, treeItemIsExpanded: YES }));
     Tasks.sourcesRedrawNeeded = false;
     

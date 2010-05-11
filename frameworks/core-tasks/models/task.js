@@ -37,22 +37,18 @@ CoreTasks.taskPriorityWeights[CoreTasks.TASK_PRIORITY_LOW] = 1;
 
 
 // Development status:
-CoreTasks.TASK_STATUS_PLANNED = '_Planned'; // default
-CoreTasks.TASK_STATUS_ACTIVE = '_Active';
-CoreTasks.TASK_STATUS_DONE = '_Done';
-CoreTasks.TASK_STATUS_RISKY = '_Risky';
 CoreTasks.taskStatusesAllowed = [
-  CoreTasks.TASK_STATUS_PLANNED,
-  CoreTasks.TASK_STATUS_ACTIVE,
-  CoreTasks.TASK_STATUS_DONE,
-  CoreTasks.TASK_STATUS_RISKY
+  CoreTasks.STATUS_PLANNED,
+  CoreTasks.STATUS_ACTIVE,
+  CoreTasks.STATUS_DONE,
+  CoreTasks.STATUS_RISKY
 ];
 
 CoreTasks.taskStatusWeights = {};
-CoreTasks.taskStatusWeights[CoreTasks.TASK_STATUS_RISKY] = 4;
-CoreTasks.taskStatusWeights[CoreTasks.TASK_STATUS_ACTIVE] = 3;
-CoreTasks.taskStatusWeights[CoreTasks.TASK_STATUS_PLANNED] = 2;
-CoreTasks.taskStatusWeights[CoreTasks.TASK_STATUS_DONE] = 1;
+CoreTasks.taskStatusWeights[CoreTasks.STATUS_RISKY] = 4;
+CoreTasks.taskStatusWeights[CoreTasks.STATUS_ACTIVE] = 3;
+CoreTasks.taskStatusWeights[CoreTasks.STATUS_PLANNED] = 2;
+CoreTasks.taskStatusWeights[CoreTasks.STATUS_DONE] = 1;
 
 
 // Validation status:
@@ -146,13 +142,13 @@ CoreTasks.Task = CoreTasks.Record.extend({
       if(taskHash.developmentStatus) {
         this.propertyWillChange('developmentStatus');
         if(this.get('developmentStatus') !== taskHash.developmentStatus &&
-           taskHash.developmentStatus !== CoreTasks.TASK_STATUS_DONE) this.writeAttribute('validation', CoreTasks.TASK_VALIDATION_UNTESTED);
+           taskHash.developmentStatus !== CoreTasks.STATUS_DONE) this.writeAttribute('validation', CoreTasks.TASK_VALIDATION_UNTESTED);
         this.writeAttribute('developmentStatus', taskHash.developmentStatus);
         this.propertyDidChange('developmentStatus');
       }
       
       if(taskHash.validation) {
-        if(this.get('developmentStatus') !== CoreTasks.TASK_STATUS_DONE && taskHash.validation !== CoreTasks.TASK_VALIDATION_UNTESTED) {
+        if(this.get('developmentStatus') !== CoreTasks.STATUS_DONE && taskHash.validation !== CoreTasks.TASK_VALIDATION_UNTESTED) {
           console.warn('Task Editing Error - validation of Passed/Failed only possible for status Done: ' + taskHash.name);
         }
         else {
@@ -333,7 +329,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
    */
   developmentStatus: SC.Record.attr(String, {
     isRequired: YES,
-    defaultValue: CoreTasks.TASK_STATUS_PLANNED,
+    defaultValue: CoreTasks.STATUS_PLANNED,
     allowed: CoreTasks.taskStatusesAllowed
    }),
 
@@ -341,7 +337,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
      var currentStatus = this.get('developmentStatus');
      if (value && currentStatus !== value) {
        this.set('developmentStatus', value);
-       if(value !== CoreTasks.TASK_STATUS_DONE) this.set('validation', CoreTasks.TASK_VALIDATION_UNTESTED)
+       if(value !== CoreTasks.STATUS_DONE) this.set('validation', CoreTasks.TASK_VALIDATION_UNTESTED)
      }
      else {
        return currentStatus;
@@ -406,7 +402,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
     var effort = this.get('effort');
     if(effort) {
       var doneEffortRange = false;
-      if(developmentStatus === CoreTasks.TASK_STATUS_DONE && effort.match(/\-/)) doneEffortRange = true;
+      if(developmentStatus === CoreTasks.STATUS_DONE && effort.match(/\-/)) doneEffortRange = true;
       if(format === 'HTML') ret += '&nbsp;<span class="effort' + (doneEffortRange? ' doneEffortRangeWarning' : '') + '">';
       else ret += ' {';
       ret += CoreTasks.displayTime(effort);
@@ -424,7 +420,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
     
       if(type !== CoreTasks.TASK_TYPE_OTHER) ret += ' $' + type.loc();
     
-      if(developmentStatus !== CoreTasks.TASK_STATUS_PLANNED) ret += ' @' + developmentStatus.loc();
+      if(developmentStatus !== CoreTasks.STATUS_PLANNED) ret += ' @' + developmentStatus.loc();
       if(validation !== CoreTasks.TASK_VALIDATION_UNTESTED) ret += ' %' + validation.loc();
       
       if(this.get('id') > 0) ret += ' ' + this.get('displayId');
@@ -596,7 +592,7 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
     }
     
     // extract task development status
-    var taskStatus = fillDefaults? CoreTasks.TASK_STATUS_PLANNED : null;
+    var taskStatus = fillDefaults? CoreTasks.STATUS_PLANNED : null;
     var taskStatusMatches = taskLine.match(/@(\w+)/g);
     if(taskStatusMatches) {
       if(taskStatusMatches.length === 1) {
@@ -624,7 +620,7 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
         }
         else {
           taskValidation = '_' + validation;
-          if((taskStatus !== null && taskStatus !== CoreTasks.TASK_STATUS_DONE) && taskValidation !== CoreTasks.TASK_VALIDATION_UNTESTED) {
+          if((taskStatus !== null && taskStatus !== CoreTasks.STATUS_DONE) && taskValidation !== CoreTasks.TASK_VALIDATION_UNTESTED) {
             taskValidation = null;
             console.warn('Task Parsing Error - validation of Passed/Failed only possible for status Done: ' + taskName);
           }
@@ -656,6 +652,6 @@ CoreTasks.Task.NEW_TASK_HASH = {
   name: CoreTasks.NEW_TASK_NAME,
   type: CoreTasks.TASK_TYPE_OTHER,
   priority: CoreTasks.TASK_PRIORITY_MEDIUM,
-  developmentStatus: CoreTasks.TASK_STATUS_PLANNED,
+  developmentStatus: CoreTasks.STATUS_PLANNED,
   validation: CoreTasks.TASK_VALIDATION_UNTESTED
 };

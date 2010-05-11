@@ -5,6 +5,12 @@ sc_require('models/record_attribute');
 CoreTasks.DATE_TIME_FORMAT = '%I:%M %p %a %b %d, %Y';
 CoreTasks.MILLISECONDS_IN_DAY = 24*60*60*1000;
 
+// Development status:
+CoreTasks.STATUS_PLANNED = '_Planned'; // default
+CoreTasks.STATUS_ACTIVE = '_Active';
+CoreTasks.STATUS_DONE = '_Done';
+CoreTasks.STATUS_RISKY = '_Risky';
+
 /**
  * The base record from which all models in the CoreTasks framework will derive.
  *

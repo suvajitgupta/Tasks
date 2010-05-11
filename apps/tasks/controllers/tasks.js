@@ -69,7 +69,7 @@ Tasks.tasksController = SC.TreeController.create(
   }.property('selection').cacheable(),
   
   isValidatable: function() {
-    return this.get('isEditable') && this.get('developmentStatusWithValidation') === CoreTasks.TASK_STATUS_DONE;
+    return this.get('isEditable') && this.get('developmentStatusWithValidation') === CoreTasks.STATUS_DONE;
   }.property('isEditable', 'developmentStatusWithValidation').cacheable(),
 
   notGuestOrGuestSubmittedTasks: function() {
@@ -196,19 +196,19 @@ Tasks.tasksController = SC.TreeController.create(
   }.property('selection').cacheable(),
   
   setDevelopmentStatusPlanned: function() {
-    this.developmentStatusWithValidation('developmentStatusWithValidation', CoreTasks.TASK_STATUS_PLANNED);
+    this.developmentStatusWithValidation('developmentStatusWithValidation', CoreTasks.STATUS_PLANNED);
   },
   
   setDevelopmentStatusActive: function() {
-    this.developmentStatusWithValidation('developmentStatusWithValidation', CoreTasks.TASK_STATUS_ACTIVE);
+    this.developmentStatusWithValidation('developmentStatusWithValidation', CoreTasks.STATUS_ACTIVE);
   },
   
   setDevelopmentStatusDone: function() {
-    this.developmentStatusWithValidation('developmentStatusWithValidation', CoreTasks.TASK_STATUS_DONE);
+    this.developmentStatusWithValidation('developmentStatusWithValidation', CoreTasks.STATUS_DONE);
   },
   
   setDevelopmentStatusRisky: function() {
-    this.developmentStatusWithValidation('developmentStatusWithValidation', CoreTasks.TASK_STATUS_RISKY);
+    this.developmentStatusWithValidation('developmentStatusWithValidation', CoreTasks.STATUS_RISKY);
   },
   
   validation: function(key, value) {

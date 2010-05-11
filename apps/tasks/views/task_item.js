@@ -37,10 +37,10 @@ Tasks.TaskItemView = SC.ListItemView.extend(
 
   _listStatuses: function() {
      var ret = [];
-     ret.push({ name: CoreTasks.TASK_STATUS_PLANNED, value: CoreTasks.TASK_STATUS_PLANNED });
-     ret.push({ name: CoreTasks.TASK_STATUS_ACTIVE, value: CoreTasks.TASK_STATUS_ACTIVE });
-     ret.push({ name: CoreTasks.TASK_STATUS_DONE, value: CoreTasks.TASK_STATUS_DONE });
-     ret.push({ name: CoreTasks.TASK_STATUS_RISKY, value: CoreTasks.TASK_STATUS_RISKY });
+     ret.push({ name: CoreTasks.STATUS_PLANNED, value: CoreTasks.STATUS_PLANNED });
+     ret.push({ name: CoreTasks.STATUS_ACTIVE, value: CoreTasks.STATUS_ACTIVE });
+     ret.push({ name: CoreTasks.STATUS_DONE, value: CoreTasks.STATUS_DONE });
+     ret.push({ name: CoreTasks.STATUS_RISKY, value: CoreTasks.STATUS_RISKY });
      return ret;
   },
 
@@ -202,11 +202,11 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           }),
 
           submitterLabel: SC.LabelView.design({
-            layout: { top: 45, left: 10, height: 17, width: 80 },
+            layout: { top: 47, left: 10, height: 24, width: 80 },
             value: "_Submitter:".loc()
           }),
           submitterField: SCUI.ComboBoxView.design({
-            layout: { top: 45, left: 75, width: 250, height: 20 },
+            layout: { top: 45, left: 75, width: 250, height: 24 },
             objectsBinding: this._listUsers(false),
             nameKey: 'displayName',
             valueKey: 'id',
@@ -216,12 +216,12 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           }),
 
           assigneeLabel: SC.LabelView.design({
-            layout: { top: 45, right: 265, height: 17, width: 80 },
+            layout: { top: 47, right: 265, height: 24, width: 80 },
             textAlign: SC.ALIGN_RIGHT,
             value: "_Assignee:".loc()
           }),
           assigneeField: SCUI.ComboBoxView.design({
-            layout: { top: 45, right: 10, width: 250, height: 20 },
+            layout: { top: 45, right: 10, width: 250, height: 24 },
             objectsBinding: this._listUsers(true),
             nameKey: 'displayName',
             valueKey: 'id',
@@ -231,11 +231,11 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           }),
 
           effortLabel: SC.LabelView.design({
-            layout: { top: 82, left: 10, height: 17, width: 100 },
+            layout: { top: 84, left: 10, height: 24, width: 100 },
             value: "_Effort:".loc()
           }),
           effortField: SC.TextFieldView.design({
-            layout: { top: 82, left: 50, width: 80, height: 20 },
+            layout: { top: 82, left: 50, width: 80, height: 24 },
             isEnabledBinding: 'Tasks.tasksController.isEditable',
             valueBinding: SC.binding('.content.effortValue', this)
           }),
@@ -247,12 +247,12 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           }),
           
           projectLabel: SC.LabelView.design({
-            layout: { top: 82, right: 265, height: 17, width: 80 },
+            layout: { top: 84, right: 265, height: 24, width: 80 },
             textAlign: SC.ALIGN_RIGHT,
             value: "_Project:".loc()
           }),
           projectField: SCUI.ComboBoxView.design({
-            layout: { top: 82, right: 10, width: 250, height: 20 },
+            layout: { top: 82, right: 10, width: 250, height: 24 },
             objectsBinding: this._listProjects(),
             nameKey: 'displayName',
             valueKey: 'id',
@@ -263,7 +263,6 @@ Tasks.TaskItemView = SC.ListItemView.extend(
 
           descriptionLabel: SC.LabelView.design({
             layout: { top: 115, left: 10, height: 17, width: 100 },
-            icon: 'description-icon',
             value: "_Description:".loc()
           }),
           descriptionField: SC.TextFieldView.design({
@@ -425,39 +424,39 @@ Tasks.TaskItemView = SC.ListItemView.extend(
 
       var developmentStatus = Tasks.tasksController.get('developmentStatusWithValidation');
       ret.push({
-        title: '<span class=task-status-planned>' + CoreTasks.TASK_STATUS_PLANNED.loc() + '</span>',
+        title: '<span class=task-status-planned>' + CoreTasks.STATUS_PLANNED.loc() + '</span>',
         icon: sc_static('blank'),
         isEnabled: YES,
-        checkbox: developmentStatus === CoreTasks.TASK_STATUS_PLANNED,
+        checkbox: developmentStatus === CoreTasks.STATUS_PLANNED,
         target: 'Tasks.tasksController',
         action: 'setDevelopmentStatusPlanned'
       });
       ret.push({
-        title: '<span class=task-status-active>' + CoreTasks.TASK_STATUS_ACTIVE.loc() + '</span>',
+        title: '<span class=task-status-active>' + CoreTasks.STATUS_ACTIVE.loc() + '</span>',
         icon: sc_static('blank'),
         isEnabled: YES,
-        checkbox: developmentStatus === CoreTasks.TASK_STATUS_ACTIVE,
+        checkbox: developmentStatus === CoreTasks.STATUS_ACTIVE,
         target: 'Tasks.tasksController',
         action: 'setDevelopmentStatusActive'
       });
       ret.push({
-        title: '<span class=task-status-done>' + CoreTasks.TASK_STATUS_DONE.loc() + '</span>',
+        title: '<span class=task-status-done>' + CoreTasks.STATUS_DONE.loc() + '</span>',
         icon: sc_static('blank'),
         isEnabled: YES,
-        checkbox: developmentStatus === CoreTasks.TASK_STATUS_DONE,
+        checkbox: developmentStatus === CoreTasks.STATUS_DONE,
         target: 'Tasks.tasksController',
         action: 'setDevelopmentStatusDone'
       });
       ret.push({
-        title: '<span class=task-status-risky>' + CoreTasks.TASK_STATUS_RISKY.loc() + '</span>',
+        title: '<span class=task-status-risky>' + CoreTasks.STATUS_RISKY.loc() + '</span>',
         icon: sc_static('blank'),
         isEnabled: YES,
-        checkbox: developmentStatus === CoreTasks.TASK_STATUS_RISKY,
+        checkbox: developmentStatus === CoreTasks.STATUS_RISKY,
         target: 'Tasks.tasksController',
         action: 'setDevelopmentStatusRisky'
       });
 
-      if(Tasks.softwareMode && developmentStatus === CoreTasks.TASK_STATUS_DONE) {
+      if(Tasks.softwareMode && developmentStatus === CoreTasks.STATUS_DONE) {
         ret.push({
           isSeparator: YES
         });
@@ -611,16 +610,16 @@ Tasks.TaskItemView = SC.ListItemView.extend(
                 text(displayId).attr('title', idTooltip).attr('alt', idTooltip).end();
       
     switch(content.get('developmentStatus')){
-      case CoreTasks.TASK_STATUS_PLANNED:
+      case CoreTasks.STATUS_PLANNED:
         context.addClass('task-status-planned');
         break;
-      case CoreTasks.TASK_STATUS_ACTIVE:
+      case CoreTasks.STATUS_ACTIVE:
         context.addClass('task-status-active');
         break;
-      case CoreTasks.TASK_STATUS_DONE:
+      case CoreTasks.STATUS_DONE:
         context.addClass('task-status-done');
         break;          
-      case CoreTasks.TASK_STATUS_RISKY:
+      case CoreTasks.STATUS_RISKY:
         context.addClass('task-status-risky');
         break;          
     }
@@ -631,7 +630,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     var content = this.get('content');
     if(content && count) {
       var status = content.get('developmentStatus'), doneEffortRange = false;
-      if(status === CoreTasks.TASK_STATUS_DONE && count.match(/\-/)) doneEffortRange = true;
+      if(status === CoreTasks.STATUS_DONE && count.match(/\-/)) doneEffortRange = true;
   
       var effortTooltip = "_TaskEffortTooltip".loc() + (doneEffortRange? "_DoneEffortRangeWarning".loc() : '');
       context.push('<span class="count' + (doneEffortRange? ' doneEffortRangeWarning' : '') + '" title="' + effortTooltip + '">');

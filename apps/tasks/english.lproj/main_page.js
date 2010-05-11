@@ -204,7 +204,6 @@ Tasks.mainPage = SC.Page.design({
           classNames: ['projects-pane-inner'],
           hasContentIcon: YES,
           contentIconKey: 'icon',
-          groupExampleView: Tasks.UndiscloseableGroupItemView,
           exampleView: Tasks.ProjectItemView,
           isEditable: YES,
           canEditContent: YES,

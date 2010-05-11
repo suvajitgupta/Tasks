@@ -6,6 +6,12 @@ CoreTasks.NEW_PROJECT_NAME = '_NewProject';
 CoreTasks.ALL_TASKS_NAME = '_AllTasks';
 CoreTasks.UNALLOCATED_TASKS_NAME = '_UnallocatedTasks';
 
+CoreTasks.projectStatusesAllowed = [
+  CoreTasks.STATUS_PLANNED,
+  CoreTasks.STATUS_ACTIVE,
+  CoreTasks.STATUS_DONE
+];
+
 /**
  * The project model.
  *
@@ -89,6 +95,33 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
     }
     return value;
   }.property('timeLeft').cacheable(),
+
+  /**
+   * The development status of the project (see below for allowed values).
+   */
+  developmentStatus: SC.Record.attr(String, {
+    isRequired: YES,
+    defaultValue: CoreTasks.STATUS_PLANNED,
+    allowed: CoreTasks.projectStatusesAllowed
+   }),
+
+   /**
+    *  This computed property buffers changes to the developmentStatus field.
+    */
+   statusValue: function(key, value) {
+
+     if (value !== undefined) {
+       this.propertyWillChange('developmentStatus');
+       this.writeAttribute('developmentStatus', value);
+       this.propertyDidChange('developmentStatus');
+     } else {
+       value = this.get('developmentStatus');
+       if (value === null) value = CoreTasks.STATUS_PLANNED;
+     }
+
+     return value;
+
+   }.property('developmentStatus').cacheable(),
 
   // FIXME [SC]: need to fix SC.Query to handle negative numbers - recently broken since commit e3bbb4a88ae2bc9fa217d0cf5a24868683f6ae91
   // FIXME [SC]: fix all Tasks being fetched after a Project name is changed - should only update Project record
@@ -297,5 +330,6 @@ CoreTasks.Project.mixin(/** @scope CoreTasks.Project */ {
 });
 
 CoreTasks.Project.NEW_PROJECT_HASH = {
-  name: CoreTasks.NEW_PROJECT_NAME
+  name: CoreTasks.NEW_PROJECT_NAME,
+  developmentStatus: CoreTasks.STATUS_PLANNED
 };

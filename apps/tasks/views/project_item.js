@@ -17,6 +17,14 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
   
   displayProperties: ['displayName', 'displayTimeLeft'],
   
+  _listStatuses: function() {
+     var ret = [];
+     ret.push({ name: CoreTasks.STATUS_PLANNED, value: CoreTasks.STATUS_PLANNED });
+     ret.push({ name: CoreTasks.STATUS_ACTIVE, value: CoreTasks.STATUS_ACTIVE });
+     ret.push({ name: CoreTasks.STATUS_DONE, value: CoreTasks.STATUS_DONE });
+     return ret;
+  },
+
   /** @private
     If mouse was down over Description Icon open the editor.
   */  
@@ -64,27 +72,43 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
         
         contentView: SC.View.design({
           layout: { left: 0, right: 0, top: 0, bottom: 0},
-          childViews: 'timeLeftLabel timeLeftField timeLeftHelpLabel descriptionLabel descriptionField createdAtLabel updatedAtLabel'.w(),
+          childViews: 'timeLeftLabel timeLeftField timeLeftHelpLabel statusLabel statusField descriptionLabel descriptionField createdAtLabel updatedAtLabel'.w(),
         
           timeLeftLabel: SC.LabelView.design({
-            layout: { top: 10, left: 10, height: 17, width: 100 },
+            layout: { top: 12, left: 10, height: 17, width: 100 },
             value: "_TimeLeft:".loc()
           }),
           timeLeftField: SC.TextFieldView.design({
-            layout: { top: 10, left: 75, width: 80, height: 20 },
+            layout: { top: 10, left: 75, width: 80, height: 24 },
             isEnabledBinding: 'CoreTasks.permissions.canUpdateProject',
             valueBinding: SC.binding('.content.timeLeftValue', this)
           }),
           timeLeftHelpLabel: SC.LabelView.design({
-            layout: { top: 13, left: 160, height: 50, right: 10 },
+            layout: { top: 16, left: 160, height: 20, right: 10 },
             escapeHTML: NO,
             classNames: [ 'onscreen-help'],
             value: "_TimeLeftOnscreenHelp".loc()
           }),
           
+          statusLabel: SC.LabelView.design({
+            layout: { top: 12, right: 113, height: 24, width: 50 },
+            textAlign: SC.ALIGN_RIGHT,
+            value: "_Status".loc()
+          }),
+          statusField: SC.SelectButtonView.design({
+            layout: { top: 7, right: 10, height: 24, width: 125 },
+            classNames: ['square'],
+            localize: YES,
+            isEnabledBinding: 'CoreTasks.permissions.canUpdateProject',
+            objects: this._listStatuses(),
+            nameKey: 'name',
+            valueKey: 'value',
+            valueBinding: SC.binding('.content.statusValue', this),
+            toolTip: "_StatusTooltip".loc()
+          }),
+
           descriptionLabel: SC.LabelView.design({
             layout: { top: 40, left: 10, height: 17, width: 100 },
-            icon: 'description-icon',
             value: "_Description:".loc()
           }),
           descriptionField: SC.TextFieldView.design({
@@ -220,6 +244,21 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
 
     var projectTooltip = '';
     if(content.get('id')) context.addClass('project-item');
+
+    switch(content.get('developmentStatus')){
+      case CoreTasks.STATUS_PLANNED:
+        context.addClass('task-status-planned');
+        break;
+      case CoreTasks.STATUS_ACTIVE:
+        context.addClass('task-status-active');
+        break;
+      case CoreTasks.STATUS_DONE:
+        context.addClass('task-status-done');
+        break;          
+      case CoreTasks.STATUS_RISKY:
+        context.addClass('task-status-risky');
+        break;          
+    }
 
   },
 

@@ -48,8 +48,7 @@
 			"prototype":{
 			},
 			"instances":{"$ref":"../user/"},
-			"authenticate":
-function (username, password) {
+			"authenticate":function (username, password) {
     if (username === null) {
         return null;
     }
@@ -70,7 +69,6 @@ function (username, password) {
     }
     return load("user/[?loginName=$1]", username)[0];
 }
-
 		}
 	},
 	{"id":"generated.js?sources?1",
@@ -98,6 +96,10 @@ function (username, password) {
 					"optional":true
 				},
 				"timeLeft":{
+					"type":"any",
+					"optional":true
+				},
+				"developmentStatus":{
 					"type":"any",
 					"optional":true
 				}

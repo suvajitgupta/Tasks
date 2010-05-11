@@ -17,42 +17,42 @@ sc_require('core');
 Tasks.attributeFilterNone = [
   CoreTasks.TASK_TYPE_FEATURE, CoreTasks.TASK_TYPE_BUG, CoreTasks.TASK_TYPE_OTHER,
   CoreTasks.TASK_PRIORITY_HIGH, CoreTasks.TASK_PRIORITY_MEDIUM, CoreTasks.TASK_PRIORITY_LOW,
-  CoreTasks.TASK_STATUS_PLANNED, CoreTasks.TASK_STATUS_ACTIVE, CoreTasks.TASK_STATUS_DONE, CoreTasks.TASK_STATUS_RISKY,
+  CoreTasks.STATUS_PLANNED, CoreTasks.STATUS_ACTIVE, CoreTasks.STATUS_DONE, CoreTasks.STATUS_RISKY,
   CoreTasks.TASK_VALIDATION_UNTESTED, CoreTasks.TASK_VALIDATION_PASSED, CoreTasks.TASK_VALIDATION_FAILED
 ];
 
 Tasks.attributeFilterShowstoppers = [
   CoreTasks.TASK_TYPE_BUG,
   CoreTasks.TASK_PRIORITY_HIGH,
-  CoreTasks.TASK_STATUS_PLANNED, CoreTasks.TASK_STATUS_ACTIVE, CoreTasks.TASK_STATUS_DONE, CoreTasks.TASK_STATUS_RISKY,
+  CoreTasks.STATUS_PLANNED, CoreTasks.STATUS_ACTIVE, CoreTasks.STATUS_DONE, CoreTasks.STATUS_RISKY,
   CoreTasks.TASK_VALIDATION_FAILED
 ];
 
 Tasks.attributeFilterTroubled = [
   CoreTasks.TASK_TYPE_FEATURE, CoreTasks.TASK_TYPE_BUG, CoreTasks.TASK_TYPE_OTHER,
   CoreTasks.TASK_PRIORITY_HIGH, CoreTasks.TASK_PRIORITY_MEDIUM, CoreTasks.TASK_PRIORITY_LOW,
-  CoreTasks.TASK_STATUS_RISKY
+  CoreTasks.STATUS_RISKY
 ];
-if(Tasks.softwareMode) Tasks.attributeFilterTroubled.pushObjects([CoreTasks.TASK_STATUS_DONE, CoreTasks.TASK_VALIDATION_FAILED]);
+if(Tasks.softwareMode) Tasks.attributeFilterTroubled.pushObjects([CoreTasks.STATUS_DONE, CoreTasks.TASK_VALIDATION_FAILED]);
 
 Tasks.attributeFilterUnfinished = [
   CoreTasks.TASK_TYPE_FEATURE, CoreTasks.TASK_TYPE_BUG, CoreTasks.TASK_TYPE_OTHER,
   CoreTasks.TASK_PRIORITY_HIGH, CoreTasks.TASK_PRIORITY_MEDIUM,
-  CoreTasks.TASK_STATUS_PLANNED, CoreTasks.TASK_STATUS_ACTIVE, CoreTasks.TASK_STATUS_RISKY
+  CoreTasks.STATUS_PLANNED, CoreTasks.STATUS_ACTIVE, CoreTasks.STATUS_RISKY
 ];
-if(Tasks.softwareMode) Tasks.attributeFilterUnfinished.pushObjects([CoreTasks.TASK_STATUS_DONE, CoreTasks.TASK_VALIDATION_FAILED]);
+if(Tasks.softwareMode) Tasks.attributeFilterUnfinished.pushObjects([CoreTasks.STATUS_DONE, CoreTasks.TASK_VALIDATION_FAILED]);
 
 Tasks.attributeFilterUnvalidated = [
   CoreTasks.TASK_TYPE_FEATURE, CoreTasks.TASK_TYPE_BUG,
   CoreTasks.TASK_PRIORITY_HIGH, CoreTasks.TASK_PRIORITY_MEDIUM, CoreTasks.TASK_PRIORITY_LOW,
-  CoreTasks.TASK_STATUS_DONE,
+  CoreTasks.STATUS_DONE,
   CoreTasks.TASK_VALIDATION_UNTESTED
 ];
 
 Tasks.attributeFilterCompleted = [
 CoreTasks.TASK_TYPE_FEATURE, CoreTasks.TASK_TYPE_BUG, CoreTasks.TASK_TYPE_OTHER,
   CoreTasks.TASK_PRIORITY_HIGH, CoreTasks.TASK_PRIORITY_MEDIUM, CoreTasks.TASK_PRIORITY_LOW,
-  CoreTasks.TASK_STATUS_DONE,
+  CoreTasks.STATUS_DONE,
   (Tasks.softwareMode? CoreTasks.TASK_VALIDATION_PASSED : CoreTasks.TASK_VALIDATION_UNTESTED)
 ];
 
@@ -142,19 +142,19 @@ Tasks.assignmentsController = SC.ArrayController.create(
   }.property('attributeFilterCriteria'),
   
   attributeFilterStatusPlanned: function(key, value) {
-    return this.attributeFilter(CoreTasks.TASK_STATUS_PLANNED, value);
+    return this.attributeFilter(CoreTasks.STATUS_PLANNED, value);
   }.property('attributeFilterCriteria'),
   
   attributeFilterStatusActive: function(key, value) {
-    return this.attributeFilter(CoreTasks.TASK_STATUS_ACTIVE, value);
+    return this.attributeFilter(CoreTasks.STATUS_ACTIVE, value);
   }.property('attributeFilterCriteria'),
   
   attributeFilterStatusDone: function(key, value) {
-    return this.attributeFilter(CoreTasks.TASK_STATUS_DONE, value);
+    return this.attributeFilter(CoreTasks.STATUS_DONE, value);
   }.property('attributeFilterCriteria'),
   
   attributeFilterStatusRisky: function(key, value) {
-    return this.attributeFilter(CoreTasks.TASK_STATUS_RISKY, value);
+    return this.attributeFilter(CoreTasks.STATUS_RISKY, value);
   }.property('attributeFilterCriteria'),
   
   attributeFilterValidationUntested: function(key, value) {
@@ -342,7 +342,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
           if(this.attributeFilterCriteria.indexOf(priority) === -1) return;
           var developmentStatus = task.get('developmentStatus');
           if(this.attributeFilterCriteria.indexOf(developmentStatus) === -1) return;
-          if(developmentStatus === CoreTasks.TASK_STATUS_DONE) {
+          if(developmentStatus === CoreTasks.STATUS_DONE) {
             var validation = task.get('validation');
             if(this.attributeFilterCriteria.indexOf(validation) === -1) return;
           }
@@ -471,14 +471,14 @@ Tasks.assignmentsController = SC.ArrayController.create(
       var developmentStatus = task.get('developmentStatus');
       var validation = task.get('validation');
       
-      if(developmentStatus === CoreTasks.TASK_STATUS_DONE && validation !== CoreTasks.TASK_VALIDATION_FAILED) totalFinishedCount++;
+      if(developmentStatus === CoreTasks.STATUS_DONE && validation !== CoreTasks.TASK_VALIDATION_FAILED) totalFinishedCount++;
       else if (priority !== CoreTasks.TASK_PRIORITY_LOW) totalLeftCount++;
       
-      if(developmentStatus === CoreTasks.TASK_STATUS_RISKY) riskyTasksCount++;
+      if(developmentStatus === CoreTasks.STATUS_RISKY) riskyTasksCount++;
       if(validation === CoreTasks.TASK_VALIDATION_FAILED) failedTasksCount++;
       
       if(!effortString && priority !== CoreTasks.TASK_PRIORITY_LOW) {
-        if(developmentStatus === CoreTasks.TASK_STATUS_DONE) doneTaskWithUnspecifiedEffort = true;
+        if(developmentStatus === CoreTasks.STATUS_DONE) doneTaskWithUnspecifiedEffort = true;
         else taskWithUnspecifiedEffort = true;
       }
       if(effortString) { // sum up task effort
@@ -493,7 +493,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
           effortMax = parseFloat(parseFloat(effortString.slice(idx+1), 10).toFixed(3));
           effortMax = CoreTasks.convertTimeToDays(effortMax + timeUnit);
         }
-        if(developmentStatus === CoreTasks.TASK_STATUS_DONE && validation !== CoreTasks.TASK_VALIDATION_FAILED) {
+        if(developmentStatus === CoreTasks.STATUS_DONE && validation !== CoreTasks.TASK_VALIDATION_FAILED) {
           totalFinishedEffortMin = parseFloat((totalFinishedEffortMin + effortMin).toFixed(3));
           totalFinishedEffortMax = parseFloat((totalFinishedEffortMax + effortMax).toFixed(3));
         }
@@ -556,7 +556,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
         var bStatus = b.get('developmentStatus');
         if(aStatus !== bStatus) return CoreTasks.taskStatusWeights[bStatus] - CoreTasks.taskStatusWeights[aStatus];
         
-        if(aStatus === CoreTasks.TASK_STATUS_DONE) {
+        if(aStatus === CoreTasks.STATUS_DONE) {
           var aValidation = a.get('validation');
           var bValidation = b.get('validation');
           if(aValidation !== bValidation) return CoreTasks.taskValidationWeights[bValidation] - CoreTasks.taskValidationWeights[aValidation];
@@ -673,10 +673,10 @@ Tasks.assignmentsController = SC.ArrayController.create(
           case CoreTasks.TASK_PRIORITY_LOW: lowCount++; break;
         }
         switch(task.get('developmentStatus')) {
-          case CoreTasks.TASK_STATUS_PLANNED: plannedCount++; break;
-          case CoreTasks.TASK_STATUS_ACTIVE: activeCount++; break;
-          case CoreTasks.TASK_STATUS_DONE: doneCount++; break;
-          case CoreTasks.TASK_STATUS_RISKY: riskyCount++; break;
+          case CoreTasks.STATUS_PLANNED: plannedCount++; break;
+          case CoreTasks.STATUS_ACTIVE: activeCount++; break;
+          case CoreTasks.STATUS_DONE: doneCount++; break;
+          case CoreTasks.STATUS_RISKY: riskyCount++; break;
         }
         switch(task.get('validation')) {
           case CoreTasks.TASK_VALIDATION_UNTESTED: untestedCount++; break;
