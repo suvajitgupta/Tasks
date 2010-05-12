@@ -16,6 +16,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
 /** @scope Tasks.TaskItemView.prototype */ {
   
   content: null,
+  escapeHTML: NO,
   
   _editorPane: null,
   
@@ -623,9 +624,8 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     // Indicate which items have a description
     var description = content.get('description');
     if(description) {
-      context = context.begin('div').addClass('description-icon').end();
-      // FIXME: [SG] uncomment line below and end() above once you figure out how to escape metachars in description which is messing up display
-                  // .attr('title', description).attr('alt', description).end();
+      context = context.begin('div').addClass('description-icon')
+                  .attr('title', description).attr('alt', description).end();
     }
 
   },
