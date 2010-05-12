@@ -243,7 +243,6 @@ body {
 .sc-view.sc-list-item-view.sc-collection-item.sc-group-item {
   left: 0px !important;
   color: #777 !important;
-  text-transform: none !important;
 }
 
 .sc-list-item-view img.disclosure {
