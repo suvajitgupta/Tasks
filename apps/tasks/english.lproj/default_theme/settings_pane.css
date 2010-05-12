@@ -59,8 +59,9 @@
 }
 
 /*-----------------------------------------------------------------
- * User role icons
+ * User-related icons
  */
+ 
 .user-role-manager {
   width: 16px !important;
   height: 16px !important;
@@ -83,6 +84,12 @@
   width: 16px !important;
   height: 16px !important;
   background: static_url('images/user-role-guest.png') no-repeat 0 0;
+}
+
+.lock-icon {
+  width: 16px !important;
+  height: 16px !important;
+  background: static_url('images/lock.png') no-repeat 0 0;
 }
 
 /*-----------------------------------------------------------------

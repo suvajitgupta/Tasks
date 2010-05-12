@@ -83,10 +83,10 @@
   background: static_url('images/settings.png') no-repeat;
 }
 
-.notification-icon {
+.email-icon {
   width: 16px;
   height: 16px;
-  background: static_url('images/notification.png') no-repeat;
+  background: static_url('images/email.png') no-repeat;
 }
 
 .import-icon {

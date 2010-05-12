@@ -56,7 +56,8 @@ Tasks.UserInformationView = SC.View.extend(
     this.passwordLabel = this.createChildView(SC.LabelView.extend({
       layout: { top: 74, left: 0, width: 85, height: 18 },
       textAlign: SC.ALIGN_RIGHT,
-      value: "_Password:".loc()
+      value: "_Password:".loc(),
+      icon: 'lock-icon'
     }));
     childViews.push(this.passwordLabel);
     this.passwordField = this.createChildView(SC.TextFieldView.extend({
@@ -71,7 +72,8 @@ Tasks.UserInformationView = SC.View.extend(
     this.emailLabel = this.createChildView(SC.LabelView.extend({
       layout: { top: 106, left: 0, width: 85, height: 18 },
       textAlign: SC.ALIGN_RIGHT,
-      value: "_Email:".loc()
+      value: "_Email:".loc(),
+      icon: 'email-icon'
     }));
     childViews.push(this.emailLabel);
     this.emailField = this.createChildView(SC.TextFieldView.extend(SC.Validatable,{

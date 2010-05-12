@@ -35,7 +35,7 @@ Tasks.mainPageHelper = SC.Object.create({
     ret.push({ title: "_Toggle".loc() + "_AutoSave".loc(), icon: 'save-icon', target: 'Tasks', action: 'toggleAutoSave', isEnabled: YES, checkbox: autoSave });
     if(CoreTasks.get('canServerSendNotifications')) {
       var shouldNotify = this.get('shouldNotify');
-      ret.push({ title: "_Toggle".loc() + "_SendNotifications".loc(), icon: 'notification-icon', target: 'Tasks', action: 'toggleShouldNotify', isEnabled: YES, checkbox: shouldNotify });
+      ret.push({ title: "_Toggle".loc() + "_SendNotifications".loc(), icon: 'email-icon', target: 'Tasks', action: 'toggleShouldNotify', isEnabled: YES, checkbox: shouldNotify });
     }
     ret.push({ isSeparator: YES });
     ret.push({ title: "_LaunchImport".loc(), icon: 'import-icon', target: 'Tasks', action: 'importData', isEnabled: YES });
