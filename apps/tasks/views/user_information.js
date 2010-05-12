@@ -57,7 +57,7 @@ Tasks.UserInformationView = SC.View.extend(
       layout: { top: 74, left: 0, width: 85, height: 18 },
       textAlign: SC.ALIGN_RIGHT,
       value: "_Password:".loc(),
-      icon: 'lock-icon'
+      icon: 'password-icon'
     }));
     childViews.push(this.passwordLabel);
     this.passwordField = this.createChildView(SC.TextFieldView.extend({
