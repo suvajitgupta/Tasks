@@ -565,8 +565,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     
     // Put a dot before tasks that were created or updated recently
     if(content.get('isRecentlyUpdated')) {
-      context = context.begin('img').addClass('recently-updated').attr({
-        src: SC.BLANK_IMAGE_URL,
+      context = context.begin('div').addClass('recently-updated').attr({
         title: "_RecentlyUpdatedTooltip".loc(),
         alt: "_RecentlyUpdatedTooltip".loc()
       }).end();
@@ -602,10 +601,6 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         validationClass = 'task-validation-failed';
         break;          
     }
-    var submitterUser = content.get('submitter');
-    if (submitterUser) {
-      idTooltip += ("_SubmitterTooltip".loc() + '%@ (%@)'.fmt(submitterUser.get('name'), submitterUser.get('loginName')));
-    }
     var displayId = content.get('displayId');
     context = context.begin('div').addClass('task-id').addClass(validationClass).
                 text(displayId).attr('title', idTooltip).attr('alt', idTooltip).end();
@@ -625,8 +620,23 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         break;          
     }
     
+    // Indicate which items have a description
+    if(content.get('description')) context = context.begin('div').addClass('description-icon').end();
+
   },
 
+  renderIcon: function(context, icon){
+    var content = this.get('content');
+    if(!SC.none(icon)) {
+      var taskTooltip = '', submitterUser = content.get('submitter');
+      if (submitterUser) {
+        taskTooltip += ("_SubmitterTooltip".loc() + '%@ (%@)'.fmt(submitterUser.get('name'), submitterUser.get('loginName')));
+      }
+      context.begin('img').addClass('icon').addClass(icon).attr('src', SC.BLANK_IMAGE_URL)
+            .attr('title', taskTooltip).attr('alt', taskTooltip).end();
+    }
+  },
+  
   renderCount: function(context, count) {
     var content = this.get('content');
     if(content && count) {

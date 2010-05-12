@@ -78,8 +78,7 @@ Tasks.UserItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     
     // Put a dot before users that were created or updated recently
     if(content.get('isRecentlyUpdated')) {
-      context = context.begin('img').addClass('recently-updated').attr({
-        src: SC.BLANK_IMAGE_URL,
+      context = context.begin('div').addClass('recently-updated').attr({
         title: "_RecentlyUpdatedTooltip".loc(),
         alt: "_RecentlyUpdatedTooltip".loc()
       }).end();

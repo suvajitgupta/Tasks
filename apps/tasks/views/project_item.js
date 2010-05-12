@@ -15,7 +15,7 @@ sc_require('mixins/localized_label');
 Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
 /** @scope Tasks.ProjectItemView.prototype */ {
   
-  displayProperties: ['displayName', 'displayTimeLeft'],
+  displayProperties: ['displayName', 'displayTimeLeft', 'description'],
   
   _listStatuses: function() {
      var ret = [];
@@ -237,8 +237,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     
     // Put a dot before non-system projects that were created or updated recently
     if(!isSystemProject && content.get('isRecentlyUpdated')) {
-      context = context.begin('img').addClass('recently-updated').attr({
-        src: SC.BLANK_IMAGE_URL,
+      context = context.begin('div').addClass('recently-updated').attr({
         title: "_RecentlyUpdatedTooltip".loc(),
         alt: "_RecentlyUpdatedTooltip".loc()
       }).end();
@@ -262,6 +261,9 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
         break;          
     }
 
+    // Indicate which items have a description
+    if(content.get('description')) context = context.begin('div').addClass('description-icon').end();
+    
   },
 
   renderIcon: function(context, icon){
@@ -275,6 +277,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
   
   renderCount: function(context, count) {
     if(count) {
+      // Show time left for project
       var timeLeftTooltip = "_ProjectTimeLeftTooltip".loc();
       context.push('<span class="count" title="' + timeLeftTooltip + '">');
       context.push('<span class="inner">').push(count).push('</span></span>');

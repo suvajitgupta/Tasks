@@ -118,7 +118,7 @@
 }
 
 .assignee-item .sc-outline .count {
-  right: 10px !important;
+  right: 16px !important;
 }
 
 .assignee-item .sc-outline .count.finished {
@@ -187,21 +187,10 @@
   left: 61px !important;
 }
 
-.task-item .sc-outline .count {
+.task-item .count {
   margin-top: 0px !important;
   top: 5px !important;
-}
-
-.task-item .sc-outline .count,
-.project-item .sc-outline .count {
-	font-style: normal !important;
-	font-weight: normal !important;
-  height: 12px !important;
-  line-height: 11px !important;
-  color: #FFF !important;
-  border: none !important;
-  background: #97A8C7 none repeat scroll 0 0 !important;
-  padding: 1px 5px;
+	right: 12px !important;
 }
 
 .task-item .sc-outline .count.doneEffortRangeWarning {
@@ -212,6 +201,12 @@
 .project-item.sel .sc-outline .count {
   color: #97A8C7 !important;
   background: #FFF none repeat scroll 0 0 !important;
+}
+
+.task-item .description-icon {
+  position: absolute;
+  top: 4px !important;
+  right: 0px !important;
 }
 
 
