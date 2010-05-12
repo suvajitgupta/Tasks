@@ -86,6 +86,13 @@ Tasks.UserItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     
     if(content.get('id')) context.addClass('user-item');
     
+    // Indicate which users have a password
+    var password = content.get('password');
+    if(password) {
+      context = context.begin('div').addClass('lock-icon')
+                  .attr('title', "_PasswordTooltip".loc()).attr('alt', "_PasswordTooltip".loc()).end();
+    }
+
   }
   
 });
