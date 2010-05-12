@@ -90,6 +90,8 @@
   width: 16px !important;
   height: 16px !important;
   background: static_url('images/lock.png') no-repeat 0 0;
+  position: absolute !important;
+  right: 5px !important;
 }
 
 /*-----------------------------------------------------------------
