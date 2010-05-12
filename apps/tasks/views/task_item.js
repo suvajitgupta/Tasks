@@ -621,14 +621,19 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     }
     
     // Indicate which items have a description
-    if(content.get('description')) context = context.begin('div').addClass('description-icon').end();
+    var description = content.get('description');
+    if(description) {
+      context = context.begin('div').addClass('description-icon')
+                  .attr('title', description).attr('alt', description).end();
+    }
 
   },
 
   renderIcon: function(context, icon){
-    var content = this.get('content');
     if(!SC.none(icon)) {
-      var taskTooltip = '', submitterUser = content.get('submitter');
+      var content = this.get('content');
+      var taskTooltip = "_Type".loc() + ' ' + content.get('type').loc();
+      var submitterUser = content.get('submitter');
       if (submitterUser) {
         taskTooltip += ("_SubmitterTooltip".loc() + '%@ (%@)'.fmt(submitterUser.get('name'), submitterUser.get('loginName')));
       }

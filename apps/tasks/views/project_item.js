@@ -262,7 +262,11 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     }
 
     // Indicate which items have a description
-    if(content.get('description')) context = context.begin('div').addClass('description-icon').end();
+    var description = content.get('description');
+    if(description) {
+      context = context.begin('div').addClass('description-icon')
+                  .attr('title', description).attr('alt', description).end();
+    }
     
   },
 
@@ -271,7 +275,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       var content = this.get('content');
       var projectTooltip = "_Has".loc() + content.getPath('tasks.length') + "_tasks".loc();
       context.begin('img').addClass('icon').addClass(icon).attr('src', SC.BLANK_IMAGE_URL)
-            .attr('title', projectTooltip).attr('alt', projectTooltip).end();
+        .attr('title', projectTooltip).attr('alt', projectTooltip).end();
     }
   },
   
