@@ -16,7 +16,6 @@ Tasks.TaskItemView = SC.ListItemView.extend(
 /** @scope Tasks.TaskItemView.prototype */ {
   
   content: null,
-  escapeHTML: NO,
   
   _editorPane: null,
   
@@ -622,10 +621,10 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     }
     
     // Indicate which items have a description
-    var description = content.get('description');
+    var description = SC.RenderContext.escapeHTML(content.get('description'));
     if(description) {
       context = context.begin('div').addClass('description-icon')
-                  .attr('title', description).attr('alt', description).end();
+                  .attr('title', SC.RenderContext.escapeHTML(description)).attr('alt', description).end();
     }
 
   },
