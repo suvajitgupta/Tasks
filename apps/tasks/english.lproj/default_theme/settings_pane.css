@@ -46,6 +46,14 @@
   left: 10px !important;
 }
 
+.sc-view.sc-list-item-view.sc-collection-item.user-item,
+.users-pane .sc-view.sc-list-item-view.sc-collection-item.sc-group-item {
+  border: 1px dotted silver !important;
+  border-top-color: #E1E7F0 !important;
+  border-left-color: #E1E7F0 !important;
+  border-right-color: #E1E7F0 !important;
+}
+
 .user-item .sc-outline {
   left: 10px !important;
 }
@@ -91,6 +99,7 @@
   height: 16px !important;
   background: static_url('images/lock.png') no-repeat 0 0;
   position: absolute !important;
+  top: 4px !important;
   right: 5px !important;
 }
 

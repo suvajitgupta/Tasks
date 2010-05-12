@@ -28,6 +28,14 @@
 	color: #777 !important;
 }
 
+.sc-view.sc-list-item-view.sc-collection-item.project-item,
+.projects-pane .sc-view.sc-list-item-view.sc-collection-item.sc-group-item {
+  border: 1px dotted silver !important;
+  border-top-color: #E1E7F0 !important;
+  border-left-color: #E1E7F0 !important;
+  border-right-color: #f2f2f2 !important;
+}
+
 .projects-pane .sc-view.sc-list-item-view.sc-collection-item .sc-outline label {
   opacity: 1 !important;
 }
