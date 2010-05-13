@@ -250,10 +250,10 @@
   background: static_url('images/task-id-name.png') no-repeat;
 }
 
-.task-link-icon {
+.link-icon {
   width: 16px !important;
   height: 16px !important;
-  background: static_url('images/task-link.png') no-repeat;
+  background: static_url('images/link.png') no-repeat;
 }
 
 

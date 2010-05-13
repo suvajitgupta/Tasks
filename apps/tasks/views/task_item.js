@@ -533,7 +533,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       });
       ret.push({
         title: "_CopyLinkLocation".loc(),
-        icon: 'task-link-icon',
+        icon: 'link-icon',
         isEnabled: YES,
         target: 'Tasks',
         action: 'copyTaskLink'
