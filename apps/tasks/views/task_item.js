@@ -526,7 +526,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       }
       ret.push({
         title: "_CopyID/Name".loc(),
-        icon: 'task-id-name-icon',
+        icon: 'id-name-icon',
         isEnabled: YES,
         target: 'Tasks',
         action: 'copyTaskIDName'

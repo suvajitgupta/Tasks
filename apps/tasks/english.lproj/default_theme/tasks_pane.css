@@ -206,7 +206,7 @@
 .task-item .description-icon {
   position: absolute;
   top: 9px !important;
-  right: -1px !important;
+  right: -2px !important;
 }
 
 
@@ -244,10 +244,10 @@
   background: static_url('images/unwatch.png') no-repeat;
 }
 
-.task-id-name-icon {
+.id-name-icon {
   width: 16px !important;
   height: 16px !important;
-  background: static_url('images/task-id-name.png') no-repeat;
+  background: static_url('images/id-name.png') no-repeat;
 }
 
 .link-icon {
