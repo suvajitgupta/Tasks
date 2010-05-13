@@ -29,20 +29,20 @@
   margin-left: -5px !important;
 }
 
-.add-tasks-helper {
-  background: static_url('images/add-tasks-helper.png') no-repeat 0px 98%;
+.helper-add-tasks {
+  background: static_url('images/helper-add-tasks.png') no-repeat 0px 98%;
 }
 
-.display-mode-helper {
-  background: static_url('images/display-mode-helper.png') no-repeat 10px 5px;
+.helper-display-mode {
+  background: static_url('images/helper-display-mode.png') no-repeat 10px 5px;
 }
 
-.adjust-filter-helper {
-  background: static_url('images/adjust-filter-helper.png') no-repeat 98% 5px;
+.helper-adjust-filter {
+  background: static_url('images/helper-adjust-filter.png') no-repeat 98% 5px;
 }
 
-.select-project-helper {
-  background: static_url('images/select-project-helper.png') no-repeat 0px 15px;
+.helper-select-project {
+  background: static_url('images/helper-select-project.png') no-repeat 0px 15px;
 }
 
 /*-----------------------------------------------------------------

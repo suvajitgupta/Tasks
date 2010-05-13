@@ -259,18 +259,18 @@ Tasks.mainPage = SC.Page.design({
             var sel = Tasks.projectsController.getPath('selection');
             var selectedProjectsCount = sel? sel.get('length') : 0;
             if(selectedProjectsCount === 0) { // No projects selected
-              context.addClass('select-project-helper');
+              context.addClass('helper-select-project');
               return;
             }
             else if(selectedProjectsCount === 1) { // Single project selected
               if(sel.getPath('firstObject.tasks.length') === 0) { // Project has no tasks
-                if(Tasks.tasksController.isAddable()) context.addClass('add-tasks-helper');
-                else context.addClass('display-mode-helper');
+                if(Tasks.tasksController.isAddable()) context.addClass('helper-add-tasks');
+                else context.addClass('helper-display-mode');
                 return;
               }
               else { // Project has tasks
                 if(this.getPath('content.length') === 0) { // No tasks filtering through
-                  context.addClass('adjust-filter-helper');
+                  context.addClass('helper-adjust-filter');
                   return;
                 }
               }
@@ -284,16 +284,16 @@ Tasks.mainPage = SC.Page.design({
               }
               if(tasksCount > 0) { // Projects have tasks
                 if(this.getPath('content.length') === 0) { // No tasks filtering through
-                  context.addClass('adjust-filter-helper');
+                  context.addClass('helper-adjust-filter');
                   return;
                 }
               }
             }
             
             // Remove helper images (if any) and render tasks
-            context.removeClass('add-tasks-helper');
-            context.removeClass('display-mode-helper');
-            context.removeClass('adjust-filter-helper');
+            context.removeClass('helper-add-tasks');
+            context.removeClass('helper-display-mode');
+            context.removeClass('helper-adjust-filter');
             sc_super();
           }
                     
