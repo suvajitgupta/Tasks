@@ -205,8 +205,8 @@
 
 .task-item .description-icon {
   position: absolute;
-  top: 4px !important;
-  right: 0px !important;
+  top: 9px !important;
+  right: -1px !important;
 }
 
 
