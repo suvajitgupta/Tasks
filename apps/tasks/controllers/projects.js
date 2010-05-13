@@ -51,15 +51,14 @@ Tasks.projectsController = SC.ArrayController.create(SCUI.StatusChanged,
           }
         }
       }
-      nodes.push(SC.Object.create({ displayName: plannedProjects.length + ' ' + CoreTasks.STATUS_PLANNED.loc() + ' ' + "Projects".loc(),
-                 developmentStatus: CoreTasks.STATUS_PLANNED, treeItemChildren: plannedProjects.sort(this._nameAlphaSort), treeItemIsExpanded: YES }));
-      nodes.push(SC.Object.create({ displayName: activeProjects.length + ' ' + CoreTasks.STATUS_ACTIVE.loc() + ' ' + "Projects".loc(),
-                 developmentStatus: CoreTasks.STATUS_ACTIVE, treeItemChildren: activeProjects.sort(this._nameAlphaSort), treeItemIsExpanded: YES }));
-      nodes.push(SC.Object.create({ displayName: doneProjects.length + ' ' + CoreTasks.STATUS_DONE.loc() + ' ' + "Projects".loc(),
-                 developmentStatus: CoreTasks.STATUS_DONE, treeItemChildren: doneProjects.sort(this._nameAlphaSort), treeItemIsExpanded: NO }));
       nodes.push(SC.Object.create({ displayName: systemProjects.length + ' ' + "_System".loc() + ' ' + "Projects".loc(), treeItemChildren: systemProjects,
                  treeItemIsExpanded: NO }));
-    
+      nodes.push(SC.Object.create({ displayName: activeProjects.length + ' ' + CoreTasks.STATUS_ACTIVE.loc() + ' ' + "Projects".loc(),
+                 developmentStatus: CoreTasks.STATUS_ACTIVE, treeItemChildren: activeProjects.sort(this._nameAlphaSort), treeItemIsExpanded: YES }));
+      nodes.push(SC.Object.create({ displayName: plannedProjects.length + ' ' + CoreTasks.STATUS_PLANNED.loc() + ' ' + "Projects".loc(),
+                 developmentStatus: CoreTasks.STATUS_PLANNED, treeItemChildren: plannedProjects.sort(this._nameAlphaSort), treeItemIsExpanded: YES }));
+      nodes.push(SC.Object.create({ displayName: doneProjects.length + ' ' + CoreTasks.STATUS_DONE.loc() + ' ' + "Projects".loc(),
+                 developmentStatus: CoreTasks.STATUS_DONE, treeItemChildren: doneProjects.sort(this._nameAlphaSort), treeItemIsExpanded: NO }));
     }
 
     this.set('sources', SC.Object.create({ treeItemChildren: nodes, treeItemIsExpanded: YES }));
