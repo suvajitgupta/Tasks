@@ -34,7 +34,7 @@ General Infrastructure
 v Track/optimize calls to assignments controller and custom view render methods <BB> [SG] @Active
 v Make buttons depressable to provide feedback when using them [SG] $Feature @Done %Passed
 - Support direct access to Projects or Tasks using SproutCore routes [SG] $Feature @Done %Passed
-- Use JSONP-based data loading for performance speedup [SG] <SE>
+- Implement JSONP-based data loading for performance speedup [SG] <SE>
 - Out of Scope: Add support for attachments in record descriptions $Feature
 | Upload attachment somewhere and insert URL to it in record description
 
@@ -63,7 +63,7 @@ v Disable "Add Task" button when no project is selected [SG] <BB> @Done %Passed 
 ^ Add popup viewer/editor for Project time left/description [SG] $Feature @Done %Passed
 v Add Project context menu with options: Add, Duplicate, Delete [SG] $Feature @Done %Passed
 - Add "Statistics..." button/popup to show percent breakdown of displayed Tasks by attributes (HTML) [SG] $Feature @Done %Passed
-- Add alternate graphical view (pie charts, bar graphs) for statistics of displayed Tasks [SG] <MB> $Feature
+- Add alternate graphical view (pie charts, bar graphs) for statistics of displayed Tasks [SG] <EG> $Feature
 
 Task Manager GUI
 ^ Group Tasks by User and display Task id, summary, and effort (if specified) on far right [SG] <JH2> @Done $Feature %Passed
@@ -96,10 +96,9 @@ v Add hover over tooltip for assignees to show how many Tasks they have and to e
 - Beta: Support Task Copy ID/Name and Copy Link Location (URL with "Route") to clipboard [SG] $Feature @Risky
 v Add Task context menu with options: Add, Duplicate, Delete; All Task Attributes; Copy ID/Name, Copy Link [SG] $Feature @Done %Passed
 ^ Add ability to "Watch" Tasks and get Email Notifications after Task changes [SG] <JH2> $Feature @Done %Passed
-- Support "Find & Replace" within Task names  (operating only on items in Tasks Detail view)[SG] $Feature
+- Allow "Find & Replace" within Task names  (operating only on items in Tasks Detail view)[SG] $Feature
 - Allow Task names to embed metacharacters by enclosing in quotes [SG] $Feature
 ^ Beta: Add support for adding Comments to Tasks [SG] <JH2> $Feature @Active
-- Add "Search and Replace" capability [SG] $Feature
 - Out of Scope: Add support for nested Tasks and Task tagging $Feature
 | Use "Clustering" approach described in Help instead
 - Out of Scope: Add support for managing inter-Task dependencies/linking $Feature
@@ -121,6 +120,8 @@ v Enable/disable "Delete User" button based on having a selected user [SG] @Done
 - Reset Task Assignee/Submitter after user deletion <SE> [SG] $Feature @Done %Passed
 ^ Allow multi-user drag-and-drop role change in User Manager [SG] @Done $Feature %Passed
 ^ Add User type-ahead search filter (case insensitive name/loginName match) [SG] @Done %Passed $Feature
+- Add ability to mark Users as inactive <SG> [SG] $Feature
+| Inactive Users cannot be made Assignees/Submitters
 - Out of Scope: Add support for "Teams" (a user can belong to a team, a team can have a lead) $Feature
 | Create separate projects for different teams to keep their tasks/deadlines separate instead
 
@@ -144,20 +145,17 @@ v Add online training video using Captivate or Camtasia [SG] $Feature @Done
 | http://www.youtube.com/watch?v=6egjJw_RS1g
 - Add onscreen help (on panel fields that are complex and on blank workspace to assist new users) <MG> [SG] $Feature @Done %Passed
 - Add "Logout" menu item in actions menu (confirm before exiting, reload data/clear all filters) [SG] <JH2> @Done $Feature %Passed
-- Destroy authentication token while logging User out [SG] <JH2>
+- Destroy authentication token when User logs out [SG] <JH2>
 - Prompt user to save changes (if any) before logging out [SG] <SE> $Feature @Done %Passed
 | See demo.sproutcore.com/user_defaults and lookup SproutCore blog for Charles' posting on this topic
 - Add "TEAM" display mode (vs. "TASKS") to show everyone at a glance, clicking on Assignee shows their Tasks [SG] $Feature @Done %Passed
 v Add hotkeys for common operations (like Add/Duplcate Tasks and Save) [EG] <SG> $Feature @Done %Passed
 | Turned these off for now since these are conflicting with browser shortcuts
-- Add tab in Settings popup panel to manage user preferences [SG] $Feature
+- Provide tab in Settings popup panel to manage user preferences [SG] $Feature
 | Auto save
 | Email notifications
 | Percent or Threshold (in days) for Assignee loading determination
-- Apply application settings/state from last login saved using HTML5 storage [SG] <MB> $Feature
-- Support archiving of entities to manage screen clutter and optimize performance [SG] $Feature
-| Archived Projects/Tasks would be loaded/displayed only on demand
-| Archived Users cannot be made Assignees/Submitters going forward
+- Provide application settings/state persistence from last login saved using HTML5 storage [SG] <MB> $Feature
 - Support Disconnected Operation (synchronization after network reconnection) using Hub.js [SG] <SE> $Feature
 - Support Undo/Redo using Hub.js [SG] <SE> $Feature
 
@@ -173,13 +171,13 @@ Server
 | Don’t send Submitter or Assignee notification if their Email address is unspecified
 | Indicate Task ID, create/update action, and user who triggered notifications in Subject: line
 | For Task updates, indicate old and new values of attributes
-- Provide link to Task in email notification (should not require authentication if user is signed in) [SG] $Feature
-- Add Server-side data validation checks/return appropriate error codes [SE] <SG> $Feature @Active
+- Add link to Task in email notification (should not require authentication if user is signed in) [SG] $Feature
+- Add Server-side data validation checks/return appropriate error codes [SE] <SG>
 
 Styling/Hardening
 ^ Style via CSS, embed catchy/sprited images [MG] <SG> @Done %Passed
-- Beta: Redesign layouts/style for iPad/touch interactions [MG] <SG> @Active
-- Split/sprite final set of icons using Chance [MG] <JH2>
+- Beta: Re-style for iPad operation [MG] <SG> @Active
+- Beta: Split/sprite final set of icons using Chance [JH2] <SG>
 - Perform I18N and L10N (test with reversed strings) [SG] <JH2> @Done %Passed
 - Collect/address feedback from Alpha/Beta users and targeted usability tests <MG> [SG] @Done %Passed
 ^ Perform smoke test of key functionality [SG] @Done
@@ -204,6 +202,6 @@ Installation/Deployment
 - Support customizable default "AutoSave" and "Notifications" settings (can be overridden by User via GUI) [SG] $Feature @Done %Passed
 - Deploy publicly-accessible instances using Google App Engine/Python [JH2] <SG> @Done %Passed
 ^ Develop Web client (ported to Firefox, Internet Explorer, Safari, Chrome) [SG] $Feature @Done %Passed
-- Develop Desktop/iPad client <JH2> [SG] $Feature @Active
-- Develop Mobile client <MB> [SG] $Feature
-v Provide SproutCore doctool-style comments [SG] <SE>
+- Beta: Develop unified Desktop/iPad client <JH2> [SG] $Feature @Active
+- Provide SproutCore doctool-style comments [SG] <SE>
+v Develop Mobile client <MB> [SG] $Feature
