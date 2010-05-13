@@ -15,11 +15,6 @@
   background: static_url('images/default-theme-repeat-x.png') repeat-x 0 -44px;
 }
 
-.divider {
-  background: static_url('images/default-theme-repeat-y.png') repeat-y -239px 0;
-  border: 0;
-}
-
 .bottom-bar-label {
   font-size: 10px !important;
   color: #000 !important;

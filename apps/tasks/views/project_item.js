@@ -264,8 +264,9 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     // Indicate which items have a description
     var description = SC.RenderContext.escapeHTML(content.get('description'));
     if(description) {
+      description = description.replace(/\"/g, '\'');
       context = context.begin('div').addClass('description-icon')
-                  .attr('title', description).attr('alt', description).end();
+                  .attr({'title': description,'alt': description}).end();
     }
     
   },

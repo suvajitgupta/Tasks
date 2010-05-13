@@ -12,7 +12,7 @@
  */
 
 .sc-scroll-view.projects-pane, .sc-collection-view.projects-pane-inner {
-  background: static_url('images/default-theme-repeat-y.png') repeat-y 0 0;
+  background: #DEE4EA;
 }
 
 .sc-view.sc-ghost-view .sc-scroll-view.projects-pane, .sc-collection-view.projects-pane-inner {
@@ -85,13 +85,13 @@
 }
 
 .project-item .count {
-  right: 18px !important;
+  right: 14px !important;
 }
 
 .project-item .description-icon {
   position: absolute;
   top: 9px !important;
-  right: 4px !important;
+  right: -2px !important;
 }
 
 .project-icon {

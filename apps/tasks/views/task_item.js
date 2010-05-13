@@ -623,8 +623,9 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     // Indicate which items have a description
     var description = SC.RenderContext.escapeHTML(content.get('description'));
     if(description) {
+      description = description.replace(/\"/g, '\'');
       context = context.begin('div').addClass('description-icon')
-                  .attr('title', SC.RenderContext.escapeHTML(description)).attr('alt', description).end();
+                  .attr({'title': description,'alt': description}).end();
     }
 
   },

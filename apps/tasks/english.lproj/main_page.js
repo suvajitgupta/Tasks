@@ -336,7 +336,7 @@ Tasks.mainPage = SC.Page.design({
     bottomBarView: SC.View.design(SC.Border, {
       layout: { bottom: 0, height: 26, left: 0, right: 0 },
       classNames: ['bottom-bar'],
-      childViews: 'addProjectButton deleteProjectButton divider addTaskButton deleteTaskButton summaryView serverMessageView saveButton refreshButton'.w(),
+      childViews: 'addProjectButton deleteProjectButton addTaskButton deleteTaskButton summaryView serverMessageView saveButton refreshButton'.w(),
       borderStyle: SC.BORDER_TOP,
         
       addProjectButton: SC.ButtonView.design({
@@ -361,13 +361,8 @@ Tasks.mainPage = SC.Page.design({
         action: 'deleteProject'
       }),
       
-      divider: SC.View.design({
-        layout: { top: 0, bottom: 0, left: 228, width: 2 },
-        classNames: ['divider']
-      }),
-      
       addTaskButton: SC.ButtonView.design({
-        layout: { centerY: 0, left: 240, height: 24, width: 33 },
+        layout: { centerY: 0, left: 250, height: 24, width: 33 },
         classNames: ['image-button'],
         titleMinWidth: 0,
         icon: 'add-icon',
@@ -378,7 +373,7 @@ Tasks.mainPage = SC.Page.design({
         action: 'addTask'
       }),
       deleteTaskButton: SC.ButtonView.design(SCUI.Permissible,{
-        layout: { centerY: 0, left: 282, height: 24, width: 33 },
+        layout: { centerY: 0, left: 292, height: 24, width: 33 },
         classNames: ['image-button'],
         titleMinWidth: 0,
         icon: 'delete-icon',
