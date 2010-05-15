@@ -30,6 +30,7 @@ Tasks.importDataPage = SC.Page.create({
         title: SC.LabelView.design({
           layout: { centerY: 0, height: 20, centerX: 0, width: 80 },
           value: "_Import".loc(),
+          icon: 'import-icon',
           classNames: ['window-title']
         })
       }),

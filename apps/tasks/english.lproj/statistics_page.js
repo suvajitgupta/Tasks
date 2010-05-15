@@ -31,6 +31,7 @@ Tasks.statisticsPane = SC.PanelPane.create({
       title: SC.LabelView.design({
         layout: { centerY: 0, height: 20, centerX: 0, width: 200 },
         value: "_Statistics".loc(),
+        icon: 'statistics-icon',
         classNames: ['window-title']
       })
     }),

@@ -28,6 +28,7 @@ Tasks.exportDataPage = SC.Page.create({
         title: SC.LabelView.design({
           layout: { centerY: 0, height: 20, centerX: 0, width: 80 },
           value: "_Export".loc(),
+          icon: 'text-icon',
           classNames: ['window-title']
         })
       }),

@@ -50,6 +50,7 @@ Tasks.settingsPage = SC.Page.create({
         title: SC.LabelView.design({
           layout: { centerY: 0, centerX: 0, height: 20, width: 120 },
           value: "_Settings".loc(),
+          icon: 'settings-icon',
           classNames: ['window-title']
         })
         

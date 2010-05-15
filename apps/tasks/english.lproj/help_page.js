@@ -33,6 +33,7 @@ Tasks.helpPage = SC.Page.design({
       title: SC.LabelView.design({
         layout: { centerY: 0, height: 20, centerX: -30, width: 120 },
         value: "_OnlineHelp".loc(),
+        icon: 'sc-icon-help-16',
         classNames: ['window-title']
       })
       

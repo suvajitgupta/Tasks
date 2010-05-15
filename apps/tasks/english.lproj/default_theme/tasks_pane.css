@@ -244,12 +244,6 @@
   background: static_url('images/unwatch.png') no-repeat;
 }
 
-.id-name-icon {
-  width: 16px !important;
-  height: 16px !important;
-  background: static_url('images/id-name.png') no-repeat;
-}
-
 .link-icon {
   width: 16px !important;
   height: 16px !important;
