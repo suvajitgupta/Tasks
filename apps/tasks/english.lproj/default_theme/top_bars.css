@@ -42,9 +42,8 @@
   background: static_url('images/default-theme-repeat-x.png') repeat-x 0 -122px; 
 }
 
-.titlebar .sc-label-view img {
-  margin-right: 4px !important;
-  top: -1px !important;
+.sc-label-view img {
+  margin-right: 2px !important;
   vertical-align: middle !important;
 }
 
