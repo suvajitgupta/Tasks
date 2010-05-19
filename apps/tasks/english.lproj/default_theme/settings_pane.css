@@ -42,16 +42,9 @@
   background: none !important;
 }
 
-.user-item {
-  left: 10px !important;
-}
-
-.sc-view.sc-list-item-view.sc-collection-item.user-item,
-.users-pane .sc-view.sc-list-item-view.sc-collection-item.sc-group-item {
-  border: 1px dotted silver !important;
-  border-top-color: #E1E7F0 !important;
-  border-left-color: #E1E7F0 !important;
-  border-right-color: #E1E7F0 !important;
+.users-pane-inner .sc-view.sc-list-item-view.sc-collection-item.sc-group-item.even,
+.sc-view.sc-list-item-view.sc-collection-item.user-item.even {
+  background: #EDF3FE !important;
 }
 
 .user-item .sc-outline {
