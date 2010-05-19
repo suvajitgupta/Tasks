@@ -742,7 +742,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
           ret += ('<td><span class="task-validation-failed">' + "_Failed".loc() + ':</span> ' + stats.failedCount + ' (' + Math.round(100*stats.failedCount/stats.tasksCount) + '%)' + '</td>');
           ret += '<td></td></tr>';
         }
-        ret += '</table>';
+        ret += '</table><br>';
         ret += "_Submitters:".loc() + stats.submittersCount;
       }
       else { // displayMode === Tasks.DISPLAY_MODE_TEAM
