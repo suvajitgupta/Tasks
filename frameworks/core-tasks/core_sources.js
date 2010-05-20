@@ -41,7 +41,7 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
     }
 
     // Build the request and send it off to the server.
-    console.log('Retrieving %@ records from server...'.fmt(recordType));
+    // console.log('Retrieving %@ records from server...'.fmt(recordType));
 
     var path = CoreTasks.getFullResourcePath(resourcePath, null, query.get('queryParams'));
     CoreTasks.REQUEST_GET.set('address', path);
@@ -66,7 +66,7 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
           var records = this._normalizeResponseArray(results);
 
           // Load the records into the store and invoke the callback.
-          console.log('Retrieved %@ matching %@ records.'.fmt(records.length, recordType));
+          // console.log('Retrieved %@ matching %@ records.'.fmt(records.length, recordType));
           store.loadRecords(recordType, records);
 
           if(!CoreTasks.loginTime) {
@@ -397,4 +397,4 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
 // Create the main store with the appropriate data source
 CoreTasks.remoteDataSource = true; // Set to false to get Fixtures
 CoreTasks.get('store').from(CoreTasks.remoteDataSource? CoreTasks.RemoteDataSource.create() : SC.FixturesDataSource.create());
-console.log('Initialized ' + (CoreTasks.remoteDataSource? 'remote' : 'fixtures') + ' data source.');
+// console.log('Initialized ' + (CoreTasks.remoteDataSource? 'remote' : 'fixtures') + ' data source.');
