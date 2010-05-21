@@ -215,7 +215,7 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       tasksDetailView: SC.ScrollView.design({
-        layout: { top: 0, bottom: 0, left: 238, right: 0 },
+        layout: { top: 0, bottom: 0, left: 239, right: 0 },
         hasHorizontalScroller: NO,
         classNames: ['tasks-pane'],
 
