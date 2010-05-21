@@ -30,7 +30,7 @@
 
 .projects-pane-inner .sc-view.sc-list-item-view.sc-collection-item.sc-group-item.even,
 .sc-view.sc-list-item-view.sc-collection-item.project-item.even {
-  background: #EDF3FE !important;
+  background: #EDF3FE;
 }
 
 .projects-pane .sc-view.sc-list-item-view.sc-collection-item .sc-outline label {
