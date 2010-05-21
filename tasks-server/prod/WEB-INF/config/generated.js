@@ -48,7 +48,8 @@
 			"prototype":{
 			},
 			"instances":{"$ref":"../user/"},
-			"authenticate":function (username, password) {
+			"authenticate":
+function (username, password) {
     if (username === null) {
         return null;
     }
@@ -69,6 +70,7 @@
     }
     return load("user/[?loginName=$1]", username)[0];
 }
+
 		}
 	},
 	{"id":"generated.js?sources?1",

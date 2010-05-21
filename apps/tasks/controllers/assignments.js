@@ -770,7 +770,6 @@ Tasks.assignmentsController = SC.ArrayController.create(
     var panel = Tasks.getPath('statisticsPane');
     if(panel) {
       panel.remove();
-      panel.destroy();
     }
     this.set('statistics', '');
   }

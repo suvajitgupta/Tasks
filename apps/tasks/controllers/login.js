@@ -35,7 +35,6 @@ Tasks.loginController = SC.ObjectController.create(
       var panel = Tasks.getPath('loginPage.panel');
       if(panel) {
         panel.remove();
-        panel.destroy();
       }
     },
     

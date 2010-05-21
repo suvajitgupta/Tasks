@@ -70,7 +70,6 @@ Tasks.mixin( /** @scope Tasks */ {
       var mainPage = Tasks.getPath('mainPage.mainPane');
       if(mainPage) {
         mainPage.remove();
-        mainPage.destroy();
       }
     }
   },

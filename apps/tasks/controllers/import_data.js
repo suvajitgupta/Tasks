@@ -32,7 +32,6 @@ Tasks.importDataController = SC.ObjectController.create(
       var panel = Tasks.getPath('importDataPage.panel');
       if(panel) {
         panel.remove();
-        panel.destroy();
       }
     },
     

@@ -214,7 +214,6 @@ Tasks.exportDataController = SC.ObjectController.create(
     var panel = Tasks.getPath('exportDataPage.panel');
     if(panel) {
       panel.remove();
-      panel.destroy();
     }
   },
   

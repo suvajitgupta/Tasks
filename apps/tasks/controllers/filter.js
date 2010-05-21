@@ -35,7 +35,6 @@ Tasks.filterController = SC.ObjectController.create(
     var pane = Tasks.get('filterPane');
     if(pane) {
       pane.remove();
-      pane.destroy();
     }
   }
   
