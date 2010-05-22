@@ -155,7 +155,7 @@ v Add hotkeys for common operations (like Add/Duplcate Tasks and Save) [EG] <SG>
 | Auto save
 | Email notifications
 | Percent or Threshold (in days) for Assignee loading determination
-- Provide application settings/state persistence from last login saved using HTML5 storage [SG] <MB> $Feature
+- Support Application settings/state persistence from last login saved using HTML5 storage [SG] <MB> $Feature
 - Support Disconnected Operation (synchronization after network reconnection) using Hub.js [SG] <SE> $Feature
 - Support Undo/Redo using Hub.js [SG] <SE> $Feature
 
@@ -173,6 +173,7 @@ Server
 | For Task updates, indicate old and new values of attributes
 - Add link to Task in email notification (should not require authentication if user is signed in) [SG] $Feature
 - Add Server-side data validation checks/return appropriate error codes [SE] <SG>
+- Build bridge to "github issues" from Google App Engine [JH2] <SG>
 
 Styling/Hardening
 ^ Style via CSS, embed catchy/sprited images [MG] <SG> @Done %Passed
