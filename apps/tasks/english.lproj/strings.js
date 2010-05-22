@@ -146,7 +146,7 @@ SC.stringsFor('English', {
   "_TaskDeletionConfirmation": "Are you sure you want to delete the selected tasks?",
   "_TaskEffortTooltip": "Task effort",
   "_TaskIdTooltip": "#ID (dashes for unsaved tasks)",
-  "_TaskValidationTooltip": "; Background color shows validation",
+  "_TaskValidationTooltip": ", background color shows validation",
   "_Tasks": "Tasks",
   "_TasksSearchHint": "Task search pattern",
   "_TasksSearchTooltip": "Specify [Assignees] or <Submitters> (use all or part of full/login name separated via commas or spaces - use 'none' for unassigned), #IDs (separated by commas or spaces), or text (to match within task name or description - prefix with a caret to find items that don't match text)",

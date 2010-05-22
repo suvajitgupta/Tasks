@@ -588,6 +588,8 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     
     var idTooltip = "_TaskIdTooltip".loc();
     if(Tasks.softwareMode) idTooltip += "_TaskValidationTooltip".loc();
+    var submitterUser = content.get('submitter');
+    if (submitterUser) idTooltip += ("_SubmitterTooltip".loc() + '%@ (%@)'.fmt(submitterUser.get('name'), submitterUser.get('loginName')));
     var validationClass = null;
     var validation = content.get('validation');
     switch(validation){
@@ -634,10 +636,6 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     if(!SC.none(icon)) {
       var content = this.get('content');
       var taskTooltip = "_Type".loc() + ' ' + content.get('type').loc();
-      var submitterUser = content.get('submitter');
-      if (submitterUser) {
-        taskTooltip += ("_SubmitterTooltip".loc() + '%@ (%@)'.fmt(submitterUser.get('name'), submitterUser.get('loginName')));
-      }
       context.begin('img').addClass('icon').addClass(icon).attr('src', SC.BLANK_IMAGE_URL)
             .attr('title', taskTooltip).attr('alt', taskTooltip).end();
     }
