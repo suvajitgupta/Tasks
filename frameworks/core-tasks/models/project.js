@@ -38,7 +38,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
       var currentName = this.get('name');
       if (currentName === CoreTasks.ALL_TASKS_NAME.loc() || currentName === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) return;
       
-      var projectHash = CoreTasks.Project.parse(value);
+      var projectHash = CoreTasks.Project.parse(value, false);
       
       this.propertyWillChange('name');
       this.writeAttribute('name', projectHash.name);
@@ -48,6 +48,12 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
         this.propertyWillChange('timeLeft');
         this.writeAttribute('timeLeft', projectHash.timeLeft);
         this.propertyDidChange('timeLeft');
+      }
+      
+      if(projectHash.developmentStatus) {
+        this.propertyWillChange('developmentStatus');
+        this.writeAttribute('developmentStatus', projectHash.developmentStatus);
+        this.propertyDidChange('developmentStatus');
       }
       
     } else {
@@ -317,20 +323,43 @@ CoreTasks.Project.mixin(/** @scope CoreTasks.Project */ {
    * Parse a line of text and extract parameters from it.
    *
    * @param {String} string to extract parameters from.
+   * @param (Boolean) optional parameter to specify if defaults are to be filled in
    * @returns {Object} Hash of parsed parameters.
    */
-  parse: function(line) {
+  parse: function(line, fillDefaults) {
     
+    // extract project name
     var projectName = line;
-    var projectNameMatches = line.match(/^([^\{\#]+)/);
+    var projectNameMatches = line.match(/^([^\{\@#]+)/);
     if(projectNameMatches) {
       projectName = projectNameMatches[1].replace(/^\s+/, '').replace(/\s+$/, ''); // trim leading/trailing whitespace, if any
     }
+
+    // extract project time left
     var projectTimeLeft = CoreTasks.Project.parseTimeLeft(line);
     
+    // extract project development status
+    var projectStatus = fillDefaults? CoreTasks.STATUS_PLANNED : null;
+    var projectStatusMatches = line.match(/@(\w+)/g);
+    if(projectStatusMatches) {
+      if(projectStatusMatches.length === 1) {
+        var status = projectStatusMatches[0].slice(1);
+        if(CoreTasks.projectStatusesAllowed.indexOf('_' + status) === -1) {
+          console.warn('Project Parsing Error - illegal status: ' + status);
+        }
+        else {
+          projectStatus = '_' + status;
+        }
+      }
+      else {
+        console.warn('Project Parsing Error - multiple statuses illegal: ' + projectStatusMatches);
+      }
+    }
+
     var ret = {
       name: projectName,
       timeLeft: projectTimeLeft,
+      developmentStatus: projectStatus,
       tasks: []
     };
     // console.log('DEBUG: Project hash = ' + JSON.stringify(ret));
