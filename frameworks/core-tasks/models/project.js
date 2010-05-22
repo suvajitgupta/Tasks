@@ -209,6 +209,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
   exportData: function(format) {
     
     var projectName = this.get('name');
+    var developmentStatus = this.get('developmentStatus');
     var tasksCount = this.get('tasks').get('length');
     
     var ret = '';
@@ -216,10 +217,14 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
     
     if(projectName === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) {
       if(format === 'Text') ret += '# ';
-      ret += "_Unallocated".loc();
+      ret += "_UnallocatedTasks".loc();
     }
     else {
+      
+      if(format === 'HTML') ret += '&nbsp;<span class="' + developmentStatus.loc().toLowerCase() + '">';
       ret += projectName;
+      if(format === 'HTML') ret += '</span>';
+      
       var timeLeft = this.get('timeLeft');
       if(timeLeft) {
         if(format === 'HTML') ret += '&nbsp;<span class="time">';
@@ -228,6 +233,11 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
         if(format === 'HTML') ret += '</span>';
         else ret += '}';
       }
+      
+    }
+    
+    if(format === 'Text') {
+      if(developmentStatus !== CoreTasks.STATUS_PLANNED) ret += ' @' + developmentStatus.loc();
     }
     
     if(format === 'HTML') ret += '&nbsp;<span class="total">';
@@ -246,6 +256,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
       }
       if(format === 'HTML') ret += '\n</pre>';
     }
+    
     
     ret += '\n';
     return ret;

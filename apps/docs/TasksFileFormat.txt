@@ -9,6 +9,6 @@ In format sample snippet below:
 	recommend convention of prepending Task Name with the Component or Feature name followed by a colon and a space
 
 #Comment
-Project Name* {TimeLeft}
+Project Name* {TimeLeft} @Status
 - Task Name* {Effort} <Submitter> [Assignee] $Type @Status %Validation
 | Description (1 or more lines following a Project or Task)

@@ -36,7 +36,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 '}\n' +
 'h1 {\n' +
 ' font-size: 14px;\n' +
-' background-color: black;\n' +
+' background-color: #AAA;\n' +
 ' border: 1px solid black;\n' +
 '}\n' +
 'h2 {\n' +
@@ -128,6 +128,9 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 '}\n' +
 '.low {\n' +
 ' font-style: italic;\n' +
+'}\n' +
+'.planned {\n' +
+' color: black;\n' +
 '}\n' +
 '.active {\n' +
 ' color: blue;\n' +

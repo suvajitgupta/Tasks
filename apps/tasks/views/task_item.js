@@ -75,7 +75,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
        idx = ret.indexOf(CoreTasks.get('unallocatedTasksProject'));
        if(idx !== -1) ret.splice(idx, 1);
        
-       ret.push({ id: '0', displayName: "_Unallocated".loc() });
+       ret.push({ id: '0', displayName: "_UnallocatedTasks".loc() });
        return ret;
        
     }).from('Tasks.projectsController.content');
