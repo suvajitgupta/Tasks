@@ -136,7 +136,7 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
       queryParams = {
         UUID: CoreTasks.getPath('currentUser.id'),
         ATO: CoreTasks.getPath('currentUser.authToken'),
-        action: "create%@".fmt(recordType._object_className.split('.')[1]),
+        action: "create%@".fmt(recordType.toString().split('.')[1]),
         notify: CoreTasks.get('shouldNotify')
       };
     }
@@ -200,7 +200,7 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
     var queryParams = {
       UUID: CoreTasks.getPath('currentUser.id'),
       ATO: CoreTasks.getPath('currentUser.authToken'),
-      action: "update%@".fmt(recordType._object_className.split('.')[1]),
+      action: "update%@".fmt(recordType.toString().split('.')[1]),
       notify: CoreTasks.get('shouldNotify')
     };
     // Make sure the ID is valid.
@@ -272,7 +272,7 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
     var queryParams = {
       UUID: CoreTasks.getPath('currentUser.id'),
       ATO: CoreTasks.getPath('currentUser.authToken'),
-      action: "delete%@".fmt(recordType._object_className.split('.')[1]),
+      action: "delete%@".fmt(recordType.toString().split('.')[1]),
       notify: CoreTasks.get('shouldNotify')
     };
     // Make sure the ID is valid.
