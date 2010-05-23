@@ -37,7 +37,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 'h1 {\n' +
 ' font-size: 14px;\n' +
 ' background-color: #AAA;\n' +
-' border: 1px solid black;\n' +
+' border: 1px solid #AAA;\n' +
 '}\n' +
 'h2 {\n' +
 ' font-size: 11px;\n' +

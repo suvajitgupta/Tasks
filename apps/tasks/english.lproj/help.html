@@ -62,7 +62,8 @@
 			<p>Tasks are grouped by assignee and displayed using various kinds of color coding - the legend is shown in the bottom control bar.  To create a task, click on the plus button beneath the tasks list button and enter the name of the task.  If you have a project selected, the new task is automatically allocated to that project.  If you have a task selected, the new task is automatically assigned to the same user and copies over some of the selected task's attributes.  You can set the task's attributes via the radio buttons in the control bar.  You can click on the icon to the far right of the task to get a popup editor and enter additional details about the task.  Update a task's name by double clicking on it and using the inline editor.  Delete selected tasks using the plus button beneath the tasks list.  To reassign a task to another user, simply drag-and-drop it to the target user if they are visible or use the task popup editor to change the assignee.  To reallocate a task to another project drag-and-drop it on the target project in the master list or via the task popup editor.  Note: you can select multiple tasks at once and perform attribute change and delete/reassign/reallocate operations.</p>
 		<p class="softwareOnly">When entering a task, use the XP principle of <i>FeaturesNotSubsystems</i> - try to build user-visible <i>Features</i> that may need some <i>Other</i> tasks as infrastructure.  XP's <i>RefactorMericilessly</i> manifests itself as <i>Bug</i> and <i>Other</i> tasks - pay off your technical debt as you go.
 		<h3 class="softwareOnly">Workflow</h3>
-			<p class="softwareOnly">First, plan your tasks, specifying their types and priorities. Allocate tasks to projects and assign them to team members.  Then work on your tasks, noting your status as you go. Finally, validate your completed tasks.
+			<p>As you work on projects, you can mark them as active via the popup or inline editors.  When all tasks for a project are completed, you can mark it as done and it won't clutter the screen.</p>
+			<p class="softwareOnly">Plan your tasks, specifying their types and priorities. Allocate tasks to projects and assign them to team members.  Then work on your tasks, noting your status as you go. Finally, validate your completed tasks.</p
 	 	<h3>Sorting</h3>
 			<p>Sorting in <app>tasks</app> is automatic. Projects and Users are sorted alphabetically. Tasks are sorted by their attributes as well as alphabetically or by index (if task name starts with a number).  This helps you focus on what you are working on now and what is next.</p>
 		<h3 style="display:none">Shortcuts</h3>
@@ -152,7 +153,7 @@
 				<li class="softwareOnly"><i>validation</i>: validation status - Untested (default) or Passed or Failed</li>
 			</ul>
 			<h3>Project</h3>
-				<p>An initiative with a <i>name</i>, optional <i>time left</i>, zero or more tasks, and an optional <i>description</i>.</p>
+				<p>An initiative with a <i>name</i>, optional <i>time left</i>, <i>status</i>, zero or more tasks, and an optional <i>description</i>.</p>
 			<h3>User</h3>
 				<p>A team member with a <i>login name</i> and <i>full name</i> as well as a <i>role</i> (like Manager or Guest).  A user logs into the <app>tasks</app> application using an optional <i>password</i> and can be a task <i>submitter</i> and/or <i>assignee</i>.</p>
 			<h3>Watch</h3>

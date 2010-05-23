@@ -3,7 +3,7 @@
 Design/Planning
 - Review comparable applications for ideas: Mac Things/TaskPaper, Jira [SG] <MB> @Done
 - Define Personas (Roles) & User Stories/Use Cases [SG] <SE> @Done
-| Manager - add/edit/delete Users/Projects/Tasks, allocate Tasks to Projects, assign to/load balance Tasks across Developers, view Task status
+| Manager - add/edit/delete Users/Projects/Tasks, allocate Tasks to Projects, assign to/load balance Tasks across Developers, view/update Project/Task status
 | Developer - add/edit/delete Tasks, view Tasks & update effort (estimates=>actual)/status, reassign Tasks to other Developers or reallocate to other Projects, add Task Release Notes in description field
 | Tester - view Tasks of type Feature/Bug that are Done (read Release Notes in description field), validate Tasks (mark as Passed | Failed), submit Bugs as Tasks with details to reproduce problem in description field
 | Guest - view Projects, add/edit unallocated Tasks (no delete permissions)
@@ -45,6 +45,7 @@ Project Manager GUI
 | Delete all references to timeLeft and update Persevere/Google App Engine models
 - Use icon to indicate if Project has any Tasks or not [SG] @Done $Feature %Passed
 - Support alpha sorting of Projects [SG] <JH2> @Done %Passed $Feature
+- Allow multi-project modification of Status [SG] $Feature @Done %Passed
 v Add hover over tooltip for Projects to show how many Tasks they contain [SG] @Done $Feature %Passed
 ^ Add double-click in-cell editing and parse/extract optional parameters if specified [SG] @Done $Feature %Passed
 | Check via Inline Editor Delegate
@@ -72,7 +73,7 @@ Task Manager GUI
 - Show Task Type via different icons [SG] <JH2> @Done $Feature %Passed
 - Show Task Priority (font style), Status (font color), Validation (background color) [SG] <MB> @Done $Feature %Passed
 - Add Task "Type/Priority/Status/Validation" select buttons in tasks popup editor [SG] @Done $Feature %Passed
-v Enable Task Validation radio buttons only when in Done status [SG] <JH2> $Feature @Done %Passed
+v Enable Task Validation editing only when in Done status [SG] <JH2> $Feature @Done %Passed
 - Allow multi-task modification of Type/Status/Priority/Validation [SG] $Feature @Done %Passed
 ^ Add Task search filter (by #IDs or name) & corresponding delete button in top bar: support type-ahead searching <JH2> [SG] @Done %Passed $Feature
 ^ Allow Task attribute filtering by Type, Priority, Status, and Validation fields via a top bar button/sheet pane [SG] $Feature @Done %Passed
@@ -85,7 +86,7 @@ v Enable/disable "Delete Task" button based on having a selected Task [SG] @Done
 ^ Add buttons to add/delete Tasks [SG] <SE> @Done %Passed $Feature
 | Logged in user is default Submitter, Assignee is either set to the same as selected Task (if one) or to logged in user
 | Copy over Project/Type/Priority attributes of first selected Task to new Task
-- Clear Task Validation if Sstatus is changed from Done, disallow entry of Passed/Failed when not Done [SG] <MB> $Feature @Done %Passed
+- Clear Task Validation if status is changed from Done, disallow entry of Passed/Failed when not Done [SG] <MB> $Feature @Done %Passed
 ^ Show Done/Left effort subtotals (exclude incomplete Low priority Tasks) on far right for load balancing [SG] @Done $Feature %Passed
 - Append "?" for range-based subtotals including Ttasks with unspecified Efforts [SG] @Done $Feature %Passed
 - Color code assignee non loading in gray, under loading in green, proper loading in blue, and over loading in red [SG] @Done $Feature %Passed
