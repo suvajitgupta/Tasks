@@ -88,20 +88,13 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     
     // console.log('DEBUG: mouse down on task item: ' + this.getPath('content.name'));
     
-    // Get selection to update before context menu uses selection
-    SC.RunLoop.begin();
-    var pv = this.parentView;
-    pv.set('taskClickedOn', true);
-    pv.mouseDown(event);
-    SC.RunLoop.end();
-    
     // See what user clicked on
     var classes = event.target.className;
     // console.log('DEBUG: classes = "' + classes + '"');
     var sel = Tasks.getPath('tasksController.selection');
     var singleSelect = (sel && sel.get('length') === 1);
     
-    if (singleSelect && classes !== "") { // one task selected and didn't click on the inline editable name
+    if (event.which === 1 && singleSelect && classes !== "") { // left click with one task selected and didn't click on the inline editable name
       var layer = this.get('layer');
       var that = this;
       this._editorPane = SC.PickerPane.create({
@@ -291,25 +284,6 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       });
       this._editorPane.popup(layer, SC.PICKER_POINTER);
     }
-    else { // popup context menu
-      var items = this._buildContextMenu();
-      if(items.length > 0) {
-        var pane = SCUI.ContextMenuPane.create({
-          contentView: SC.View.design({}),
-          layout: { width: 180, height: 0 },
-          escapeHTML: NO,
-          itemTitleKey: 'title',
-          itemIconKey: 'icon',
-          itemIsEnabledKey: 'isEnabled',
-          itemTargetKey: 'target',
-          itemActionKey: 'action',
-          itemSeparatorKey: 'isSeparator',
-          itemCheckboxKey: 'checkbox',
-          items: items        
-        });
-        pane.popup(this, event); // pass in the mouse event so the pane can figure out where to put itself
-      }
-    }
     
     return NO; // so that drag-n-drop can work!
     
@@ -319,7 +293,125 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     return sc_super();
   },
   
-  _buildContextMenu: function() {
+  inlineEditorWillBeginEditing: function(inlineEditor) {
+    if(!Tasks.tasksController.isEditable()) {
+      console.warn('You do not have permission to edit tasks here');
+      inlineEditor.discardEditing();
+    }
+  },
+  
+  inlineEditorDidEndEditing: function(inlineEditor, finalValue) {
+    sc_super();
+    if(CoreTasks.get('autoSave')) Tasks.saveData();
+  },
+  
+  render: function(context, firstTime) {
+    
+    var content = this.get('content');
+    if(!content) return;
+    // console.log('DEBUG: Task render(' + firstTime + '): ' + content.get('displayName'));
+    sc_super();
+    
+    // Put a dot before tasks that were created or updated recently
+    if(content.get('isRecentlyUpdated')) {
+      context = context.begin('div').addClass('recently-updated').attr({
+        title: "_RecentlyUpdatedTooltip".loc(),
+        alt: "_RecentlyUpdatedTooltip".loc()
+      }).end();
+    }
+
+    var priority = content.get('priority');
+    context.addClass('task-item');
+    if(Tasks.softwareMode) context.addClass('task-type-displayed');
+    switch(priority){
+      case CoreTasks.TASK_PRIORITY_HIGH:
+        context.addClass('task-priority-high');
+        break;
+      case CoreTasks.TASK_PRIORITY_MEDIUM:
+        context.addClass('task-priority-medium');
+        break;
+      case CoreTasks.TASK_PRIORITY_LOW:
+        context.addClass('task-priority-low');
+        break;          
+    }
+    
+    var idTooltip = "_TaskIdTooltip".loc();
+    if(Tasks.softwareMode) idTooltip += "_TaskValidationTooltip".loc();
+    var submitterUser = content.get('submitter');
+    if (submitterUser) idTooltip += ("_SubmitterTooltip".loc() + '%@ (%@)'.fmt(submitterUser.get('name'), submitterUser.get('loginName')));
+    var validationClass = null;
+    var validation = content.get('validation');
+    switch(validation){
+      case CoreTasks.TASK_VALIDATION_UNTESTED:
+        validationClass = 'task-validation-untested';
+        break;
+      case CoreTasks.TASK_VALIDATION_PASSED:
+        validationClass = 'task-validation-passed';
+        break;
+      case CoreTasks.TASK_VALIDATION_FAILED:
+        validationClass = 'task-validation-failed';
+        break;          
+    }
+    var displayId = content.get('displayId');
+    context = context.begin('div').addClass('task-id').addClass(validationClass).
+                text(displayId).attr('title', idTooltip).attr('alt', idTooltip).end();
+      
+    switch(content.get('developmentStatus')){
+      case CoreTasks.STATUS_PLANNED:
+        context.addClass('status-planned');
+        break;
+      case CoreTasks.STATUS_ACTIVE:
+        context.addClass('status-active');
+        break;
+      case CoreTasks.STATUS_DONE:
+        context.addClass('status-done');
+        break;          
+      case CoreTasks.STATUS_RISKY:
+        context.addClass('status-risky');
+        break;          
+    }
+    
+    // Indicate which items have a description
+    var description = SC.RenderContext.escapeHTML(content.get('description'));
+    if(description) {
+      description = description.replace(/\"/g, '\'');
+      context = context.begin('div').addClass('description-icon')
+                  .attr({'title': description,'alt': description}).end();
+    }
+
+  },
+
+  renderIcon: function(context, icon){
+    if(!SC.none(icon)) {
+      var content = this.get('content');
+      var taskTooltip = "_Type".loc() + ' ' + content.get('type').loc();
+      context.begin('img').addClass('icon').addClass(icon).attr('src', SC.BLANK_IMAGE_URL)
+            .attr('title', taskTooltip).attr('alt', taskTooltip).end();
+    }
+  },
+  
+  renderCount: function(context, count) {
+    var content = this.get('content');
+    if(content && count) {
+      var status = content.get('developmentStatus'), doneEffortRange = false;
+      if(status === CoreTasks.STATUS_DONE && count.match(/\-/)) doneEffortRange = true;
+  
+      var effortTooltip = "_TaskEffortTooltip".loc() + (doneEffortRange? "_DoneEffortRangeWarning".loc() : '');
+      context.push('<span class="count' + (doneEffortRange? ' doneEffortRangeWarning' : '') + '" title="' + effortTooltip + '">');
+      context.push('<span class="inner">').push(count).push('</span></span>');
+    }
+  },
+  
+  contentPropertyDidChange: function() {
+    if(Tasks.editorPoppedUp) return;
+    sc_super();
+  }  
+  
+});
+
+Tasks.TaskItemView.mixin(/** @scope Tasks.TaskItemView */ {
+  
+  buildContextMenu: function() {
     
     var ret = [], needsSeparator = false;
     
@@ -542,120 +634,6 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   
     return ret;
     
-  },
-  
-  inlineEditorWillBeginEditing: function(inlineEditor) {
-    if(!Tasks.tasksController.isEditable()) {
-      console.warn('You do not have permission to edit tasks here');
-      inlineEditor.discardEditing();
-    }
-  },
-  
-  inlineEditorDidEndEditing: function(inlineEditor, finalValue) {
-    sc_super();
-    if(CoreTasks.get('autoSave')) Tasks.saveData();
-  },
-  
-  render: function(context, firstTime) {
-    
-    var content = this.get('content');
-    if(!content) return;
-    // console.log('DEBUG: Task render(' + firstTime + '): ' + content.get('displayName'));
-    sc_super();
-    
-    // Put a dot before tasks that were created or updated recently
-    if(content.get('isRecentlyUpdated')) {
-      context = context.begin('div').addClass('recently-updated').attr({
-        title: "_RecentlyUpdatedTooltip".loc(),
-        alt: "_RecentlyUpdatedTooltip".loc()
-      }).end();
-    }
-
-    var priority = content.get('priority');
-    context.addClass('task-item');
-    if(Tasks.softwareMode) context.addClass('task-type-displayed');
-    switch(priority){
-      case CoreTasks.TASK_PRIORITY_HIGH:
-        context.addClass('task-priority-high');
-        break;
-      case CoreTasks.TASK_PRIORITY_MEDIUM:
-        context.addClass('task-priority-medium');
-        break;
-      case CoreTasks.TASK_PRIORITY_LOW:
-        context.addClass('task-priority-low');
-        break;          
-    }
-    
-    var idTooltip = "_TaskIdTooltip".loc();
-    if(Tasks.softwareMode) idTooltip += "_TaskValidationTooltip".loc();
-    var submitterUser = content.get('submitter');
-    if (submitterUser) idTooltip += ("_SubmitterTooltip".loc() + '%@ (%@)'.fmt(submitterUser.get('name'), submitterUser.get('loginName')));
-    var validationClass = null;
-    var validation = content.get('validation');
-    switch(validation){
-      case CoreTasks.TASK_VALIDATION_UNTESTED:
-        validationClass = 'task-validation-untested';
-        break;
-      case CoreTasks.TASK_VALIDATION_PASSED:
-        validationClass = 'task-validation-passed';
-        break;
-      case CoreTasks.TASK_VALIDATION_FAILED:
-        validationClass = 'task-validation-failed';
-        break;          
-    }
-    var displayId = content.get('displayId');
-    context = context.begin('div').addClass('task-id').addClass(validationClass).
-                text(displayId).attr('title', idTooltip).attr('alt', idTooltip).end();
-      
-    switch(content.get('developmentStatus')){
-      case CoreTasks.STATUS_PLANNED:
-        context.addClass('status-planned');
-        break;
-      case CoreTasks.STATUS_ACTIVE:
-        context.addClass('status-active');
-        break;
-      case CoreTasks.STATUS_DONE:
-        context.addClass('status-done');
-        break;          
-      case CoreTasks.STATUS_RISKY:
-        context.addClass('status-risky');
-        break;          
-    }
-    
-    // Indicate which items have a description
-    var description = SC.RenderContext.escapeHTML(content.get('description'));
-    if(description) {
-      description = description.replace(/\"/g, '\'');
-      context = context.begin('div').addClass('description-icon')
-                  .attr({'title': description,'alt': description}).end();
-    }
-
-  },
-
-  renderIcon: function(context, icon){
-    if(!SC.none(icon)) {
-      var content = this.get('content');
-      var taskTooltip = "_Type".loc() + ' ' + content.get('type').loc();
-      context.begin('img').addClass('icon').addClass(icon).attr('src', SC.BLANK_IMAGE_URL)
-            .attr('title', taskTooltip).attr('alt', taskTooltip).end();
-    }
-  },
-  
-  renderCount: function(context, count) {
-    var content = this.get('content');
-    if(content && count) {
-      var status = content.get('developmentStatus'), doneEffortRange = false;
-      if(status === CoreTasks.STATUS_DONE && count.match(/\-/)) doneEffortRange = true;
-  
-      var effortTooltip = "_TaskEffortTooltip".loc() + (doneEffortRange? "_DoneEffortRangeWarning".loc() : '');
-      context.push('<span class="count' + (doneEffortRange? ' doneEffortRangeWarning' : '') + '" title="' + effortTooltip + '">');
-      context.push('<span class="inner">').push(count).push('</span></span>');
-    }
-  },
-  
-  contentPropertyDidChange: function() {
-    if(Tasks.editorPoppedUp) return;
-    sc_super();
-  }  
+  }
   
 });

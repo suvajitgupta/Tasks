@@ -44,7 +44,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     var sel = Tasks.getPath('projectsController.selection');
     var singleSelect = (sel && sel.get('length') === 1);
     
-    if (singleSelect && classes !== "") { // one project selected and didn't click on the inline editable name
+    if (event.which === 1 && singleSelect && classes !== "") { // left click with one project selected and didn't click on the inline editable name
       var layer = this.get('layer');
       this._editorPane = SC.PickerPane.create({
         
@@ -137,63 +137,8 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       });
       if(this._editorPane) this._editorPane.popup(layer, SC.PICKER_POINTER);
     }
-    else { // popup context menu
-      var items = this._buildContextMenu(that.get('isSystemProject'));
-      if(items.length > 0) {
-        var pane = SCUI.ContextMenuPane.create({
-          contentView: SC.View.design({}),
-          layout: { width: 125, height: 0 },
-          itemTitleKey: 'title',
-          itemIconKey: 'icon',
-          itemIsEnabledKey: 'isEnabled',
-          itemTargetKey: 'target',
-          itemActionKey: 'action',
-          itemSeparatorKey: 'isSeparator',
-          items: items
-        });
-        pane.popup(this, event); // pass in the mouse event so the pane can figure out where to put itself
-      }
-    }
+
     return NO;
-  },
-  
-  _buildContextMenu: function(isSystemProject) {
-    
-    var ret = [];
-    
-    if(CoreTasks.getPath('permissions.canCreateProject')) {
-      ret.push({
-        title: "_Add".loc(),
-        icon: 'add-icon',
-        isEnabled: YES,
-        target: 'Tasks',
-        action: 'addProject'
-      });
-    }
-    
-    if(Tasks.projectsController.getPath('selection.length') === 1 &&
-      !isSystemProject && CoreTasks.getPath('permissions.canCreateProject')) {
-      ret.push({
-        title: "_Duplicate".loc(),
-        icon: 'duplicate-icon',
-        isEnabled: YES,
-        target: 'Tasks',
-        action: 'duplicateProject'
-      });
-    }
-    
-    if(!isSystemProject && CoreTasks.getPath('permissions.canDeleteProject')) {
-      ret.push({
-        title: "_Delete".loc(),
-        icon: 'delete-icon',
-        isEnabled: YES,
-        target: 'Tasks',
-        action: 'deleteProject'
-      });
-    }
-    
-    return ret;
-    
   },
   
   inlineEditorWillBeginEditing: function(inlineEditor) {
@@ -287,6 +232,88 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       context.push('<span class="count" title="' + timeLeftTooltip + '">');
       context.push('<span class="inner">').push(count).push('</span></span>');
     }
+  }
+  
+});
+
+Tasks.ProjectItemView.mixin(/** @scope Tasks.TaskItemView */ {
+
+  buildContextMenu: function() {
+    
+    var ret = [];
+    
+    // Ensure there are no system projects selected before creating context menu
+    var sel = Tasks.projectsController.get('selection');
+    var len = sel? sel.length() : 0;
+    var context = {};
+    for (var i = 0; i < len; i++) {
+      var project = sel.nextObject(i, null, context);
+      if (CoreTasks.isSystemProject(project)) return ret;
+    }
+    
+    if(CoreTasks.getPath('permissions.canCreateProject')) {
+      ret.push({
+        title: "_Add".loc(),
+        icon: 'add-icon',
+        isEnabled: YES,
+        target: 'Tasks',
+        action: 'addProject'
+      });
+    }
+    
+    if(Tasks.projectsController.getPath('selection.length') === 1 &&
+      CoreTasks.getPath('permissions.canCreateProject')) {
+      ret.push({
+        title: "_Duplicate".loc(),
+        icon: 'duplicate-icon',
+        isEnabled: YES,
+        target: 'Tasks',
+        action: 'duplicateProject'
+      });
+    }
+
+    if(CoreTasks.getPath('permissions.canDeleteProject')) {
+      ret.push({
+        title: "_Delete".loc(),
+        icon: 'delete-icon',
+        isEnabled: YES,
+        target: 'Tasks',
+        action: 'deleteProject'
+      });
+    }
+
+    ret.push({
+      isSeparator: YES
+    });
+
+    var developmentStatus = Tasks.projectsController.get('developmentStatus');
+    ret.push({
+      title: '<span class=status-planned>' + CoreTasks.STATUS_PLANNED.loc() + '</span>',
+      icon: sc_static('blank'),
+      isEnabled: YES,
+      checkbox: developmentStatus === CoreTasks.STATUS_PLANNED,
+      target: 'Tasks.projectsController',
+      action: 'setDevelopmentStatusPlanned'
+    });
+    ret.push({
+      title: '<span class=status-active>' + CoreTasks.STATUS_ACTIVE.loc() + '</span>',
+      icon: sc_static('blank'),
+      isEnabled: YES,
+      checkbox: developmentStatus === CoreTasks.STATUS_ACTIVE,
+      target: 'Tasks.projectsController',
+      action: 'setDevelopmentStatusActive'
+    });
+    ret.push({
+      title: '<span class=status-done>' + CoreTasks.STATUS_DONE.loc() + '</span>',
+      icon: sc_static('blank'),
+      isEnabled: YES,
+      checkbox: developmentStatus === CoreTasks.STATUS_DONE,
+      target: 'Tasks.projectsController',
+      action: 'setDevelopmentStatusDone'
+    });
+    
+    return ret;
+    
   }
   
 });

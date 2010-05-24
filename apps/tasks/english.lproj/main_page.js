@@ -193,7 +193,7 @@ Tasks.mainPage = SC.Page.design({
         hasHorizontalScroller: NO,
         classNames: ['projects-pane'],
 
-        contentView: Tasks.SourceListView.design({
+        contentView: SC.SourceListView.design({
           layout: { top: 0, left:0, bottom: 0, right: 0 },
           contentValueKey: 'displayName',
           contentUnreadCountKey: 'displayTimeLeft',
@@ -206,11 +206,41 @@ Tasks.mainPage = SC.Page.design({
           contentIconKey: 'icon',
           exampleView: Tasks.ProjectItemView,
           isEditable: YES,
+          allowDeselectAll: YES,
           canEditContent: YES,
           canReorderContent: YES,
           canDeleteContent: YES,
           destroyOnRemoval: YES,
-          delegate: Tasks.reallocationController                
+          selectOnMouseDown: YES,
+          delegate: Tasks.reallocationController,
+          
+          selectionEvent: null,
+          mouseDown: function(event) {
+            var ret = sc_super();
+            if(event.which === 3) { // right click
+              this.set('selectionEvent', event);
+              this.invokeLast('popupContextMenu');
+            }
+            return ret;
+          },
+          popupContextMenu: function() {
+            var items = Tasks.ProjectItemView.buildContextMenu();
+            if(items.length > 0) {
+              var pane = SCUI.ContextMenuPane.create({
+                contentView: SC.View.design({}),
+                layout: { width: 125, height: 0 },
+                itemTitleKey: 'title',
+                itemIconKey: 'icon',
+                itemIsEnabledKey: 'isEnabled',
+                itemTargetKey: 'target',
+                itemActionKey: 'action',
+                itemSeparatorKey: 'isSeparator',
+                items: items
+              });
+              pane.popup(this, this.get('selectionEvent')); // pass in the mouse event so the pane can figure out where to put itself
+            }
+          }
+                           
         })
       }),
       
@@ -219,7 +249,7 @@ Tasks.mainPage = SC.Page.design({
         hasHorizontalScroller: NO,
         classNames: ['tasks-pane'],
 
-        contentView: Tasks.SourceListView.design({
+        contentView: SC.SourceListView.design({
           layout: { top: 0, bottom: 0, left: 0, right: 0 },
           contentValueKey: 'displayName',
           contentUnreadCountKey: 'displayEffort',
@@ -233,12 +263,42 @@ Tasks.mainPage = SC.Page.design({
           exampleView: Tasks.TaskItemView,
           groupExampleView: Tasks.AssigneeItemView,
           isEditable: YES,
+          allowDeselectAll: YES,
           canEditContent: YES,
           canReorderContent: YES,
           canDeleteContent: YES,
           destroyOnRemoval: YES,
-          delegate: Tasks.reassignmentController,
           selectOnMouseDown: YES,
+          delegate: Tasks.reassignmentController,
+          
+          selectionEvent: null,
+          mouseDown: function(event) {
+            var ret = sc_super();
+            if(event.which === 3) { // right click
+              this.set('selectionEvent', event);
+              this.invokeLast('popupContextMenu');
+            }
+            return ret;
+          },
+          popupContextMenu: function() {
+            var items = Tasks.TaskItemView.buildContextMenu();
+            if(items.length > 0) {
+              var pane = SCUI.ContextMenuPane.create({
+                contentView: SC.View.design({}),
+                layout: { width: 180, height: 0 },
+                escapeHTML: NO,
+                itemTitleKey: 'title',
+                itemIconKey: 'icon',
+                itemIsEnabledKey: 'isEnabled',
+                itemTargetKey: 'target',
+                itemActionKey: 'action',
+                itemSeparatorKey: 'isSeparator',
+                itemCheckboxKey: 'checkbox',
+                items: items        
+              });
+              pane.popup(this, this.get('selectionEvent')); // pass in the mouse event so the pane can figure out where to put itself
+            }
+          },
           
           /* Helper image display logic:
               No projects selected - "select project" helper
@@ -301,8 +361,8 @@ Tasks.mainPage = SC.Page.design({
         
         // ..........................................................
         // Hot Key Code - disabled for now owing to conflicts with browser shortcuts
-        // keyDown: function(evt) {
-        //   var ret, commandCode = evt.commandCodes();
+        // keyDown: function(event) {
+        //   var ret, commandCode = event.commandCodes();
         // 
         //   if(commandCode[0] === 'ctrl_s'){  //ctrl-s
         //     Tasks.saveData();
@@ -321,7 +381,7 @@ Tasks.mainPage = SC.Page.design({
         //     ret = YES;
         //   }
         //   else{
-        //     ret = this.interpretKeyEvents(evt) ;
+        //     ret = this.interpretKeyEvents(event) ;
         //   }
         //   return ret;
         // }

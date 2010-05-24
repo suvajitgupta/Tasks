@@ -82,6 +82,38 @@ Tasks.projectsController = SC.ArrayController.create(SCUI.StatusChanged,
     
   }.property('selection').cacheable(),
   
+  developmentStatus: function(key, value) {
+    var sel = this.get('selection');
+    if(!sel || sel.get('length') === 0) return false;
+    if (value !== undefined) {
+      sel.forEach(function(task) {
+        var developmentStatus = task.get('developmentStatus');
+        if(developmentStatus !== value) task.set('developmentStatus', value);
+      });
+      if(CoreTasks.get('autoSave')) Tasks.saveData();
+    } else {
+      var firstDevelopmentStatus = null;
+      sel.forEach(function(task) {
+        var developmentStatus = task.get('developmentStatus');
+        if(!firstDevelopmentStatus) firstDevelopmentStatus = value = developmentStatus;
+        else if(developmentStatus !== firstDevelopmentStatus) value = null;
+      });
+    }
+    return value;
+  }.property('selection').cacheable(),
+  
+  setDevelopmentStatusPlanned: function() {
+    this.developmentStatus('developmentStatus', CoreTasks.STATUS_PLANNED);
+  },
+  
+  setDevelopmentStatusActive: function() {
+    this.developmentStatus('developmentStatus', CoreTasks.STATUS_ACTIVE);
+  },
+  
+  setDevelopmentStatusDone: function() {
+    this.developmentStatus('developmentStatus', CoreTasks.STATUS_DONE);
+  },
+  
   contentStatusDidChange: function(status){
     // console.log('DEBUG: projectsController ' + status);
     if (status & SC.Record.READY){
