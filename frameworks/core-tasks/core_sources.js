@@ -148,7 +148,7 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
     delete dataHash.tasks;
 
     // Build the request and send it off to the server.
-    console.log('Creating new %@ record on server...'.fmt(recordType));
+    // console.log('Creating new %@ record on server...'.fmt(recordType));
 
     CoreTasks.REQUEST_POST.set('address', CoreTasks.getFullResourcePath(recordType.resourcePath, null, queryParams));
     CoreTasks.REQUEST_POST.notify(this, this._createCompleted, {
@@ -215,7 +215,7 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
     delete dataHash.tasks;
 
     // Build the request and send it off to the server.
-    console.log('Updating %@:%@ on server...'.fmt(recordType, id));
+    // console.log('Updating %@:%@ on server...'.fmt(recordType, id));
 
     CoreTasks.REQUEST_PUT.set('address', CoreTasks.getFullResourcePath(recordType.resourcePath, id, queryParams));
     CoreTasks.REQUEST_PUT.notify(this, this._updateCompleted, {
@@ -283,7 +283,7 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
     }
 
     // Build the request and send it off to the server.
-    console.log('Deleting %@:%@ on server...'.fmt(recordType, id));
+    // console.log('Deleting %@:%@ on server...'.fmt(recordType, id));
 
     CoreTasks.REQUEST_DELETE.set(
       'address', CoreTasks.getFullResourcePath(recordType.resourcePath, id, queryParams));
