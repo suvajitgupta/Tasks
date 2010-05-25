@@ -1,5 +1,5 @@
 // ==========================================================================
-// Project:   Tasks.reassignmentController
+// Project:   Tasks.tasksListDelegate
 // ==========================================================================
 /*globals Tasks CoreTasks */
 
@@ -9,9 +9,10 @@
 
   @extends SC.Object
   @author Brandon Blatnick
+  @author Suvajit Gupta
 */
-Tasks.reassignmentController = SC.Object.create(SC.CollectionViewDelegate,
-/** @scope Tasks.reassignmentController.prototype */ {
+Tasks.tasksListDelegate = SC.Object.create(SC.CollectionViewDelegate,
+/** @scope Tasks.tasksListDelegate.prototype */ {
   
   // ..........................................................
   // DRAG SOURCE SUPPORT
@@ -71,15 +72,15 @@ Tasks.reassignmentController = SC.Object.create(SC.CollectionViewDelegate,
     var tasks = drag.dataForType(CoreTasks.Task);
     if(!tasks) return ret;
 
-    // Get assignee of item before drag location
-    var content   = view.get('content');
+    // Get assignee of item before drop location
+    var content = view.get('content');
     var targetAssignee = content.objectAt(idx).get('assignee');
     
     // Set dragged tasks' assignee to new assignee
     tasks.forEach(function(task) {
       if (task.get('assignee') !== targetAssignee) {
         var targetAssigneeId = targetAssignee === null? null : targetAssignee.get('id');
-        // console.log('Reassigning to: ' + (targetAssignee? targetAssignee.get('name') : 'Unassigned') + ' of Id: ' + targetAssigneeId);
+        // console.log('Reassigning task "' + task.get('name') + '" to: ' + (targetAssignee? targetAssignee.get('name') : 'Unassigned'));
         task.set('assigneeId', targetAssigneeId);
         ret = SC.DRAG_NONE;
       }
@@ -88,6 +89,7 @@ Tasks.reassignmentController = SC.Object.create(SC.CollectionViewDelegate,
     if(ret === SC.DRAG_NONE) {
       if(CoreTasks.get('autoSave')) Tasks.saveData();
     }
+    
     return ret;
   },
   
