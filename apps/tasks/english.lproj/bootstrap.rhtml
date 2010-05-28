@@ -1,0 +1,9 @@
+<% content_for :bootstrap do %>
+window.loadUsers = function loadUsers(data) {
+  if(data){
+		console.log("Downloaded users using JSONP");
+		window.data = data;
+  }
+};
+<% end %>
+<script type="text/javascript" charset="utf-8" src="tasks-server/jsonpCallback"></script>
