@@ -152,7 +152,7 @@ Tasks.mainPage = SC.Page.design({
          
         projectsList: SC.ScrollView.design({
           contentView: SC.ListView.design({
-            layout: { top: 0, left:0, bottom: 0, right: 0 },
+            layout: { top: 0, left:0, bottom: 27, right: 0 },
             contentValueKey: 'displayName',
             contentUnreadCountKey: 'displayCountDown',
             contentBinding: 'Tasks.sourcesController.arrangedObjects',
@@ -354,7 +354,7 @@ Tasks.mainPage = SC.Page.design({
          tasksList: SC.ScrollView.design({
            
              contentView: SC.ListView.design({
-               layout: { top: 0, bottom: 0, left: 0, right: 0 },
+               layout: { top: 0, bottom: 27, left: 0, right: 0 },
                contentValueKey: 'displayName',
                contentUnreadCountKey: 'displayEffort',
                contentBinding: 'Tasks.tasksController.arrangedObjects',
