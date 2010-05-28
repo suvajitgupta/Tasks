@@ -192,7 +192,6 @@ Tasks.mainPage = SC.Page.design({
       projectsMasterView: SC.ScrollView.design({
         layout: { top: 0, bottom: 0, left: 0, width: 238 },
         hasHorizontalScroller: NO,
-        classNames: ['projects-pane'],
 
         contentView: SC.SourceListView.design({
           layout: { top: 0, left:0, bottom: 0, right: 0 },
@@ -249,7 +248,6 @@ Tasks.mainPage = SC.Page.design({
       tasksDetailView: SC.ScrollView.design({
         layout: { top: 0, bottom: 0, left: 239, right: 0 },
         hasHorizontalScroller: NO,
-        classNames: ['tasks-pane'],
 
         contentView: SC.SourceListView.design({
           layout: { top: 0, bottom: 0, left: 0, right: 0 },

@@ -11,11 +11,11 @@
  * Project pane styles
  */
 
-.sc-scroll-view.projects-pane, .sc-collection-view.projects-pane-inner {
-  background: #DEE4EA;
+.sc-scroll-view .sc-collection-view.projects-pane-inner {
+  background: #E1E7F0 !important;
 }
 
-.sc-view.sc-ghost-view .sc-scroll-view.projects-pane, .sc-collection-view.projects-pane-inner {
+.sc-view.sc-ghost-view .sc-scroll-view {
   background: none !important;
 }
 
@@ -33,12 +33,11 @@
   background: #EDF3FE;
 }
 
-.projects-pane .sc-view.sc-list-item-view.sc-collection-item .sc-outline label {
+.projects-pane-inner .sc-view.sc-list-item-view.sc-collection-item .sc-outline label {
   opacity: 1 !important;
 }
 
 .projects-pane-inner .sc-collection-item {
-  left: 0px !important;
   border: 0 !important;
 }
 
@@ -62,25 +61,6 @@
   left: 19px !important;
 }
   
-.project-item.sel .sc-outline {
-  color: #FFF !important;
-	font-weight: normal !important;
-}
-
-.project-item.project-no-tasks.sel .sc-outline {
-  color: #CCC !important;
-	font-weight: normal !important;
-}
-
-.project-item.sel,
-.projects-pane .project-item.sel:hover {
-  background: static_url('images/default-theme-selected-project.png') no-repeat 0 0 !important;
-}
-
-.projects-pane .sc-collection-item:hover {
-  background: #CCC none repeat scroll 0 0 !important;
-}
-
 .project-item .count {
   right: 14px !important;
 }

@@ -12,7 +12,7 @@
  * Task pane styles
  */
  
-.tasks-pane .sc-view.sc-list-item-view.sc-collection-item.task-item .sc-outline label {
+.tasks-pane-inner .sc-view.sc-list-item-view.sc-collection-item.task-item .sc-outline label {
   opacity: 0.85 !important;
 }
 
