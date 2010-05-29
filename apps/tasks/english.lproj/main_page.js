@@ -205,6 +205,7 @@ Tasks.mainPage = SC.Page.design({
           hasContentIcon: YES,
           contentIconKey: 'icon',
           exampleView: Tasks.ProjectItemView,
+          groupExampleView: Tasks.GroupItemView, // added to avoid context menu
           isEditable: YES,
           allowDeselectAll: YES,
           canEditContent: YES,

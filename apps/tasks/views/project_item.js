@@ -236,11 +236,12 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
   
 });
 
-Tasks.ProjectItemView.mixin(/** @scope Tasks.TaskItemView */ {
+Tasks.ProjectItemView.mixin(/** @scope Tasks.ProjectItemView */ {
 
   buildContextMenu: function() {
     
     var ret = [];
+    // if(!content.get('id')) return ret; // group item
     
     // Ensure there are no system projects selected before creating context menu
     var sel = Tasks.projectsController.get('selection');

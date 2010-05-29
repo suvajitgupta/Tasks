@@ -58,7 +58,7 @@ Tasks.AssigneeItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       assigneeTooltip += "_with".loc() + tasksCount + "_tasks".loc();
       
       var leftEffort = content.get('displayEffort');
-      if(leftEffort.match(/\?$/)) {
+      if(leftEffort && leftEffort.match(/\?$/)) {
         assigneeTooltip += "_IncompleteEffortWarning".loc();
         context.addClass('incompleteEffortWarning');
       }

@@ -4,6 +4,7 @@
 /*globals CoreTasks Tasks sc_require SCUI */
 sc_require('core');
 sc_require('views/user_item');
+sc_require('views/group_item');
 sc_require('views/user_information');
 
 /** @static
@@ -69,23 +70,56 @@ Tasks.settingsPage = SC.Page.create({
           contentView: SC.SourceListView.design({
             layout: { top: 0, left:0, bottom: 0, right: 0 },
             contentValueKey: 'displayName',
+            contentUnreadCountKey: 'displayTimeLeft',
             contentBinding: 'Tasks.rolesController.arrangedObjects',
             selectionBinding: 'Tasks.usersController.selection',
             localize: YES,
             rowHeight: 24,
-            allowDeselectAll: YES,
             classNames: ['users-pane-inner'],
-            exampleView: Tasks.UserItemView,
             hasContentIcon: YES,
             contentIconKey: 'icon',
+            exampleView: Tasks.UserItemView,
+            groupExampleView: Tasks.GroupItemView, // added to avoid context menu
+            isEditable: YES,
+            allowDeselectAll: YES,
+            canEditContent: YES,
             canReorderContent: YES,
             canDeleteContent: YES,
             destroyOnRemoval: YES,
+            selectOnMouseDown: YES,
             delegate: Tasks.rolesController,
-            selectOnMouseDown: YES
+          
+            selectionEvent: null,
+            mouseDown: function(event) {
+              var ret = sc_super();
+              if(event.which === 3) { // right click
+                this.set('selectionEvent', event);
+                this.invokeLast('popupContextMenu');
+              }
+              return ret;
+            },
+            popupContextMenu: function() {
+              var items = Tasks.UserItemView.buildContextMenu();
+              if(items.length > 0) {
+                var pane = SCUI.ContextMenuPane.create({
+                  contentView: SC.View.design({}),
+                  layout: { width: 125, height: 0 },
+                  itemTitleKey: 'title',
+                  itemIconKey: 'icon',
+                  itemIsEnabledKey: 'isEnabled',
+                  itemTargetKey: 'target',
+                  itemActionKey: 'action',
+                  itemSeparatorKey: 'isSeparator',
+                  items: items
+                });
+                pane.popup(this, this.get('selectionEvent')); // pass in the mouse event so the pane can figure out where to put itself
+              }
+            }
+                           
           })
-        }),
         
+        }),
+
         userDetailView: Tasks.UserInformationView.design({
           layout: { top: 10, left: 325, bottom: 35, right: 10 },
           contentBinding: 'Tasks.userController'

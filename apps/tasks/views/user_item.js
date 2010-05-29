@@ -15,33 +15,38 @@ sc_require('mixins/localized_label');
 Tasks.UserItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
 /** @scope Tasks.UserItemView.prototype */ {
   
-  mouseDown: function(event) {
+  render: function(context, firstTime) {
     
-    // console.log('DEBUG: mouse down on user item: ' + this.getPath('content.name'));
-
-    var that = this;
     var content = this.get('content');
-    if(!content.get('id')) return sc_super();
-
-    var items = this._buildContextMenu();
-    if(items.length > 0) {
-      var pane = SCUI.ContextMenuPane.create({
-        contentView: SC.View.design({}),
-        layout: { width: 125, height: 0 },
-        itemTitleKey: 'title',
-        itemIconKey: 'icon',
-        itemIsEnabledKey: 'isEnabled',
-        itemTargetKey: 'target',
-        itemActionKey: 'action',
-        itemSeparatorKey: 'isSeparator',
-        items: items
-      });
-      pane.popup(this, event); // pass in the mouse event so the pane can figure out where to put itself
+    if(!content) return;
+    // console.log('DEBUG: User render(' + firstTime + '): ' + content.get('displayName'));
+    sc_super();
+    
+    // Put a dot before users that were created or updated recently
+    if(content.get('isRecentlyUpdated')) {
+      context = context.begin('div').addClass('recently-updated').attr({
+        title: "_RecentlyUpdatedTooltip".loc(),
+        alt: "_RecentlyUpdatedTooltip".loc()
+      }).end();
     }
-    return NO;
-  },
+    
+    if(content.get('id')) context.addClass('user-item');
+    
+    // Indicate which users have a password
+    var password = content.get('password');
+    if(password) {
+      context = context.begin('div').addClass('password-icon')
+                  .attr('title', "_PasswordTooltip".loc()).attr('alt', "_PasswordTooltip".loc()).end();
+    }
+
+  }
   
-  _buildContextMenu: function() {
+});
+
+
+Tasks.UserItemView.mixin(/** @scope Tasks.UserItemView */ {
+
+  buildContextMenu: function() {
     
     var ret = [];
     
@@ -69,30 +74,4 @@ Tasks.UserItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     
   },
 
-  render: function(context, firstTime) {
-    
-    var content = this.get('content');
-    if(!content) return;
-    // console.log('DEBUG: User render(' + firstTime + '): ' + content.get('displayName'));
-    sc_super();
-    
-    // Put a dot before users that were created or updated recently
-    if(content.get('isRecentlyUpdated')) {
-      context = context.begin('div').addClass('recently-updated').attr({
-        title: "_RecentlyUpdatedTooltip".loc(),
-        alt: "_RecentlyUpdatedTooltip".loc()
-      }).end();
-    }
-    
-    if(content.get('id')) context.addClass('user-item');
-    
-    // Indicate which users have a password
-    var password = content.get('password');
-    if(password) {
-      context = context.begin('div').addClass('password-icon')
-                  .attr('title', "_PasswordTooltip".loc()).attr('alt', "_PasswordTooltip".loc()).end();
-    }
-
-  }
-  
 });
