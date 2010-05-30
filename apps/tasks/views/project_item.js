@@ -282,36 +282,40 @@ Tasks.ProjectItemView.mixin(/** @scope Tasks.ProjectItemView */ {
         action: 'deleteProject'
       });
     }
+    
+    if(CoreTasks.getPath('permissions.canUpdateProject')) {
 
-    ret.push({
-      isSeparator: YES
-    });
+      ret.push({
+        isSeparator: YES
+      });
 
-    var developmentStatus = Tasks.projectsController.get('developmentStatus');
-    ret.push({
-      title: '<span class=status-planned>' + CoreTasks.STATUS_PLANNED.loc() + '</span>',
-      icon: sc_static('blank'),
-      isEnabled: YES,
-      checkbox: developmentStatus === CoreTasks.STATUS_PLANNED,
-      target: 'Tasks.projectsController',
-      action: 'setDevelopmentStatusPlanned'
-    });
-    ret.push({
-      title: '<span class=status-active>' + CoreTasks.STATUS_ACTIVE.loc() + '</span>',
-      icon: sc_static('blank'),
-      isEnabled: YES,
-      checkbox: developmentStatus === CoreTasks.STATUS_ACTIVE,
-      target: 'Tasks.projectsController',
-      action: 'setDevelopmentStatusActive'
-    });
-    ret.push({
-      title: '<span class=status-done>' + CoreTasks.STATUS_DONE.loc() + '</span>',
-      icon: sc_static('blank'),
-      isEnabled: YES,
-      checkbox: developmentStatus === CoreTasks.STATUS_DONE,
-      target: 'Tasks.projectsController',
-      action: 'setDevelopmentStatusDone'
-    });
+      var developmentStatus = Tasks.projectsController.get('developmentStatus');
+      ret.push({
+        title: '<span class=status-planned>' + CoreTasks.STATUS_PLANNED.loc() + '</span>',
+        icon: sc_static('blank'),
+        isEnabled: YES,
+        checkbox: developmentStatus === CoreTasks.STATUS_PLANNED,
+        target: 'Tasks.projectsController',
+        action: 'setDevelopmentStatusPlanned'
+      });
+      ret.push({
+        title: '<span class=status-active>' + CoreTasks.STATUS_ACTIVE.loc() + '</span>',
+        icon: sc_static('blank'),
+        isEnabled: YES,
+        checkbox: developmentStatus === CoreTasks.STATUS_ACTIVE,
+        target: 'Tasks.projectsController',
+        action: 'setDevelopmentStatusActive'
+      });
+      ret.push({
+        title: '<span class=status-done>' + CoreTasks.STATUS_DONE.loc() + '</span>',
+        icon: sc_static('blank'),
+        isEnabled: YES,
+        checkbox: developmentStatus === CoreTasks.STATUS_DONE,
+        target: 'Tasks.projectsController',
+        action: 'setDevelopmentStatusDone'
+      });
+
+    }
     
     return ret;
     
