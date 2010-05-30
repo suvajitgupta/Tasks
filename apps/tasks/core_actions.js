@@ -419,7 +419,6 @@ Tasks.mixin({
     }
     
     // Create, select, and begin editing new project.
-    JSON.stringify(projectHash);
     var project = CoreTasks.createRecord(CoreTasks.Project, projectHash);
     var pc = this.projectsController;
     pc.selectObject(project);
