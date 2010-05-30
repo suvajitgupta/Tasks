@@ -70,8 +70,48 @@ Tasks.UserItemView.mixin(/** @scope Tasks.UserItemView */ {
       });
     }
     
+    ret.push({
+      isSeparator: YES
+    });
+
+    var role = Tasks.usersController.get('role');
+    ret.push({
+      title: CoreTasks.USER_ROLE_MANAGER.loc(),
+      icon: 'user-role-manager',
+      isEnabled: YES,
+      checkbox: role === CoreTasks.USER_ROLE_MANAGER,
+      target: 'Tasks.usersController',
+      action: 'setRoleManager'
+    });
+    ret.push({
+      title: (Tasks.softwareMode? CoreTasks.USER_ROLE_DEVELOPER.loc() : "_User".loc()),
+      icon: 'user-role-developer',
+      isEnabled: YES,
+      checkbox: role === CoreTasks.USER_ROLE_DEVELOPER,
+      target: 'Tasks.usersController',
+      action: 'setRoleDeveloper'
+    });
+    if(Tasks.softwareMode) {
+    ret.push({
+        title: CoreTasks.USER_ROLE_TESTER.loc(),
+        icon: 'user-role-tester',
+        isEnabled: YES,
+        checkbox: role === CoreTasks.USER_ROLE_TESTER,
+        target: 'Tasks.usersController',
+        action: 'setRoleTester'
+      });
+    }
+    ret.push({
+      title: CoreTasks.USER_ROLE_GUEST.loc(),
+      icon: 'user-role-guest',
+      isEnabled: YES,
+      checkbox: role === CoreTasks.USER_ROLE_GUEST,
+      target: 'Tasks.usersController',
+      action: 'setRoleGuest'
+    });
+
     return ret;
     
-  },
+  }
 
 });

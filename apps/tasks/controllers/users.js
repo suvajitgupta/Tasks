@@ -79,7 +79,7 @@ Tasks.usersController = SC.ArrayController.create(SCUI.StatusChanged,
         nodes.push(SC.Object.create({ displayName: developerRoles.length + ' ' +  groupTitle + 's',
                    role: CoreTasks.USER_ROLE_DEVELOPER, treeItemChildren: developerRoles, treeItemIsExpanded: YES }));
       }
-      if(Tasks.softwareMode && isCurrentUserAManager || testerRoles.get('length') > 0) {
+      if(Tasks.softwareMode && (isCurrentUserAManager || testerRoles.get('length') > 0)) {
         nodes.push(SC.Object.create({ displayName: testerRoles.length + ' ' + CoreTasks.USER_ROLE_TESTER.loc() + 's',
                    role: CoreTasks.USER_ROLE_TESTER, treeItemChildren: testerRoles, treeItemIsExpanded: YES }));
       }
@@ -110,6 +110,42 @@ Tasks.usersController = SC.ArrayController.create(SCUI.StatusChanged,
     return true;
 
   }.property('selection').cacheable(),
+  
+  role: function(key, value) {
+    var sel = this.get('selection');
+    if(!sel || sel.get('length') === 0) return false;
+    if (value !== undefined) {
+      sel.forEach(function(user) {
+        var role = user.get('role');
+        if(role !== value) user.set('role', value);
+      });
+      if(CoreTasks.get('autoSave')) Tasks.saveData();
+    } else {
+      var firstRole = null;
+      sel.forEach(function(user) {
+        var role = user.get('role');
+        if(!firstRole) firstRole = value = role;
+        else if(role !== firstRole) value = null;
+      });
+    }
+    return value;
+  }.property('selection').cacheable(),
+  
+  setRoleManager: function() {
+    this.role('role', CoreTasks.USER_ROLE_MANAGER);
+  },
+  
+  setRoleDeveloper: function() {
+    this.role('role', CoreTasks.USER_ROLE_DEVELOPER);
+  },
+  
+  setRoleTester: function() {
+    this.role('role', CoreTasks.USER_ROLE_TESTER);
+  },
+  
+  setRoleGuest: function() {
+    this.role('role', CoreTasks.USER_ROLE_GUEST);
+  },
   
   contentStatusDidChange: function(status){
     // console.log('DEBUG: usersController ' + status);
