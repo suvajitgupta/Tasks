@@ -424,7 +424,6 @@ Tasks.mixin({
     var pc = this.projectsController;
     pc.selectObject(project);
     CoreTasks.invokeLater(pc.editNewProject, 200, project);
-    if(CoreTasks.get('autoSave')) Tasks.saveData();
     return project;
   },
   
@@ -557,7 +556,6 @@ Tasks.mixin({
     var task = CoreTasks.createRecord(CoreTasks.Task, taskHash);
     tc.selectObject(task);
     CoreTasks.invokeLater(tc.editNewTask, 200, task);
-    if(CoreTasks.get('autoSave')) Tasks.saveData();
     return task;
         
   },
