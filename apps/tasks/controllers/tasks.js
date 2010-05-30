@@ -183,7 +183,8 @@ Tasks.tasksController = SC.TreeController.create(
         var developmentStatusWithValidation = task.get('developmentStatusWithValidation');
         if(developmentStatusWithValidation !== value) task.set('developmentStatusWithValidation', value);
       });
-      if(CoreTasks.get('autoSave')) Tasks.saveData();
+      // check for edior popped up in just this case since this method is called to trigger validation button enablement/disablement
+      if(!Tasks.editorPoppedUp && CoreTasks.get('autoSave')) Tasks.saveData();
     } else {
       var firstDevelopmentStatusWithValidation = null;
       sel.forEach(function(task) {
