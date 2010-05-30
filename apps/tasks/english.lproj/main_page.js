@@ -7,7 +7,6 @@ sc_require('core');
 sc_require('mixins/localized_label');
 sc_require('views/logo');
 sc_require('views/summary');
-sc_require('views/source_list');
 
 /** @namespace
 
