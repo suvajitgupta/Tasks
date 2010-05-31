@@ -128,7 +128,7 @@ Tasks.projectsController = SC.ArrayController.create(SCUI.StatusChanged,
     var listView = Tasks.getPath('mainPage.mainPane.projectsList');
     var idx = listView.get('content').indexOf(project);
     var listItem = listView.itemViewForContentIndex(idx);
-    if(listItem) listItem.beginEditing();
+    if(listItem) listItem.popupEditor();
   }
 
 });

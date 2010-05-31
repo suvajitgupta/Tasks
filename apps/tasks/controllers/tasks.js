@@ -262,7 +262,7 @@ Tasks.tasksController = SC.TreeController.create(
     var idx = listView.get('content').indexOf(task);
     // console.log('DEBUG: tasksController.editNewTask at index: ' + idx);
     var listItem = listView.itemViewForContentIndex(idx);
-    if(listItem) listItem.beginEditing();
+    if(listItem) listItem.popupEditor();
   }
 
 });

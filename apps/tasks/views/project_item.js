@@ -32,7 +32,6 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     
     // console.log('DEBUG: mouse down on project item: ' + this.getPath('content.name'));
 
-    var that = this;
     var content = this.get('content');
     if(!content.get('id')) return sc_super();
 
@@ -45,100 +44,114 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     var singleSelect = (sel && sel.get('length') === 1);
     
     if (event.which === 1 && singleSelect && classes !== "") { // left click with one project selected and didn't click on the inline editable name
-      var layer = this.get('layer');
-      this._editorPane = SC.PickerPane.create({
-        
-        layout: { width: 740, height: 265 },
-        _timeLeft: null,
-        
-        // Avoid popup panel coming up for system projects
-        popup: function() {
-          if(that.get('isSystemProject')) return;
-          sc_super();
-          Tasks.editorPoppedUp = true;
-          this._timeLeft = that.getPath('content.timeLeft');
-        },
-        remove: function() {
-          sc_super();
-          Tasks.editorPoppedUp = false;
-          if(Tasks.sourcesRedrawNeeded) {
-            Tasks.projectsController.showSources();
-          }
-          if(this._timeLeft !== that.getPath('content.timeLeft')) { // if timeLeft has changed, redraw got load balancing recalculation
-            Tasks.assignmentsController.showAssignments();
-          }
-          if(CoreTasks.get('autoSave')) Tasks.saveData();
-        },
-        
-        contentView: SC.View.design({
-          layout: { left: 0, right: 0, top: 0, bottom: 0},
-          childViews: 'timeLeftLabel timeLeftField timeLeftHelpLabel statusLabel statusField descriptionLabel descriptionField createdAtLabel updatedAtLabel'.w(),
-        
-          timeLeftLabel: SC.LabelView.design({
-            layout: { top: 12, left: 10, height: 17, width: 100 },
-            value: "_TimeLeft:".loc()
-          }),
-          timeLeftField: SC.TextFieldView.design({
-            layout: { top: 10, left: 75, width: 80, height: 24 },
-            isEnabledBinding: 'CoreTasks.permissions.canUpdateProject',
-            valueBinding: SC.binding('.content.timeLeftValue', this)
-          }),
-          timeLeftHelpLabel: SC.LabelView.design({
-            layout: { top: 16, left: 160, height: 20, right: 10 },
-            escapeHTML: NO,
-            classNames: [ 'onscreen-help'],
-            value: "_TimeLeftOnscreenHelp".loc()
-          }),
-          
-          statusLabel: SC.LabelView.design({
-            layout: { top: 12, right: 113, height: 24, width: 50 },
-            textAlign: SC.ALIGN_RIGHT,
-            value: "_Status".loc()
-          }),
-          statusField: SC.SelectButtonView.design({
-            layout: { top: 7, right: 10, height: 24, width: 125 },
-            classNames: ['square'],
-            localize: YES,
-            isEnabledBinding: 'CoreTasks.permissions.canUpdateProject',
-            objects: this._listStatuses(),
-            nameKey: 'name',
-            valueKey: 'value',
-            valueBinding: SC.binding('.content.statusValue', this),
-            toolTip: "_StatusTooltip".loc()
-          }),
-
-          descriptionLabel: SC.LabelView.design({
-            layout: { top: 40, left: 10, height: 17, width: 100 },
-            icon: 'description-icon',
-            value: "_Description:".loc()
-          }),
-          descriptionField: SC.TextFieldView.design({
-            layout: { top: 65, left: 10, right: 10, bottom: 25 },
-            hint: "_DescriptionHint".loc(),
-            isTextArea: YES,
-            isEnabledBinding: 'CoreTasks.permissions.canUpdateProject',
-            valueBinding: SC.binding('.content.description', this)
-          }),
-          
-          createdAtLabel: SC.LabelView.design({
-            layout: { left:10, bottom: 5, height: 17, width: 250 },
-            classNames: [ 'date-time'],
-            textAlign: SC.ALIGN_LEFT,
-            valueBinding: SC.binding('.content.displayCreatedAt', this)
-          }),
-          updatedAtLabel: SC.LabelView.design({
-            layout: { right:10, bottom: 5, height: 17, width: 250 },
-            classNames: [ 'date-time'],
-            textAlign: SC.ALIGN_RIGHT,
-            valueBinding: SC.binding('.content.displayUpdatedAt', this)
-          })
-            
-        })
-      });
-      if(this._editorPane) this._editorPane.popup(layer, SC.PICKER_POINTER);
+      this.popupEditor();
     }
 
     return NO;
+  },
+  
+  popupEditor: function() {
+    var layer = this.get('layer');
+    var that = this;
+    this._editorPane = SC.PickerPane.create({
+      
+      layout: { width: 740, height: 265 },
+      _timeLeft: null,
+      
+      // Avoid popup panel coming up for system projects
+      popup: function() {
+        if(that.get('isSystemProject')) return;
+        sc_super();
+        Tasks.editorPoppedUp = true;
+        this._timeLeft = that.getPath('content.timeLeft');
+        this.getPath('contentView.nameField').becomeFirstResponder();
+      },
+      remove: function() {
+        sc_super();
+        Tasks.editorPoppedUp = false;
+        var content = that.get('content');
+        var cv = that._editorPane.get('contentView');
+        content.setIfChanged('displayName', cv.getPath('nameField.value'));
+        content.setIfChanged('timeLeft', cv.getPath('timeLeftField.value'));
+        content.setIfChanged('description',  cv.getPath('descriptionField.value'));
+        if(Tasks.sourcesRedrawNeeded) Tasks.projectsController.showSources();
+        // If timeLeft has changed, recalculate load balancing
+        if(this._timeLeft !== that.getPath('content.timeLeft')) Tasks.assignmentsController.showAssignments();
+        if(CoreTasks.get('autoSave')) Tasks.saveData();
+      },
+      
+      contentView: SC.View.design({
+        layout: { left: 0, right: 0, top: 0, bottom: 0},
+        childViews: 'nameField timeLeftLabel timeLeftField timeLeftHelpLabel statusLabel statusField descriptionLabel descriptionField createdAtLabel updatedAtLabel'.w(),
+      
+        nameField: SC.TextFieldView.design({
+          layout: { top: 5, left: 10, right: 10, height: 24 },
+          isEnabledBinding: 'CoreTasks.permissions.canUpdateProject',
+          value: that.getPath('content.name')
+        }),
+
+        timeLeftLabel: SC.LabelView.design({
+          layout: { top: 42, left: 10, height: 17, width: 100 },
+          value: "_TimeLeft:".loc()
+        }),
+        timeLeftField: SC.TextFieldView.design({
+          layout: { top: 40, left: 75, width: 80, height: 24 },
+          isEnabledBinding: 'CoreTasks.permissions.canUpdateProject',
+          value: that.getPath('content.timeLeft')
+        }),
+        timeLeftHelpLabel: SC.LabelView.design({
+          layout: { top: 16, left: 160, height: 20, right: 10 },
+          escapeHTML: NO,
+          classNames: [ 'onscreen-help'],
+          value: "_TimeLeftOnscreenHelp".loc()
+        }),
+        
+        statusLabel: SC.LabelView.design({
+          layout: { top: 42, right: 113, height: 24, width: 50 },
+          textAlign: SC.ALIGN_RIGHT,
+          value: "_Status".loc()
+        }),
+        statusField: SC.SelectButtonView.design({
+          layout: { top: 40, right: 10, height: 24, width: 125 },
+          classNames: ['square'],
+          localize: YES,
+          isEnabledBinding: 'CoreTasks.permissions.canUpdateProject',
+          objects: this._listStatuses(),
+          nameKey: 'name',
+          valueKey: 'value',
+          valueBinding: SC.binding('.content.statusValue', this),
+          toolTip: "_StatusTooltip".loc()
+        }),
+
+        descriptionLabel: SC.LabelView.design({
+          layout: { top: 70, left: 10, height: 17, width: 100 },
+          icon: 'description-icon',
+          value: "_Description:".loc()
+        }),
+        descriptionField: SC.TextFieldView.design({
+          layout: { top: 95, left: 10, right: 10, bottom: 25 },
+          hint: "_DescriptionHint".loc(),
+          isTextArea: YES,
+          isEnabledBinding: 'CoreTasks.permissions.canUpdateProject',
+          value: that.getPath('content.description')
+        }),
+        
+        createdAtLabel: SC.LabelView.design({
+          layout: { left:10, bottom: 5, height: 17, width: 250 },
+          classNames: [ 'date-time'],
+          textAlign: SC.ALIGN_LEFT,
+          valueBinding: SC.binding('.content.displayCreatedAt', this)
+        }),
+        updatedAtLabel: SC.LabelView.design({
+          layout: { right:10, bottom: 5, height: 17, width: 250 },
+          classNames: [ 'date-time'],
+          textAlign: SC.ALIGN_RIGHT,
+          valueBinding: SC.binding('.content.displayUpdatedAt', this)
+        })
+          
+      })
+    });
+    if(this._editorPane) this._editorPane.popup(layer, SC.PICKER_POINTER);
   },
   
   inlineEditorWillBeginEditing: function(inlineEditor) {
