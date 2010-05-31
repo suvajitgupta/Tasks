@@ -64,7 +64,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
         sc_super();
         Tasks.editorPoppedUp = true;
         this._timeLeft = that.getPath('content.timeLeft');
-        this.getPath('contentView.nameField').becomeFirstResponder();
+        if(CoreTasks.getPath('permissions.canUpdateProject')) this.getPath('contentView.nameField').becomeFirstResponder();
       },
       remove: function() {
         sc_super();
