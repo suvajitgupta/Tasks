@@ -185,10 +185,10 @@ Styling/Hardening
 ^ Perform smoke test of key functionality [SG] @Done
 | Login, Guest Signup, Logout
 | All/Unallocated Tasks system projects, Tasks/Team display modes
-| Project/Task/User CRUD via buttons/context menus
+| Project/Task/User add/duplicate/delete via buttons/context menus
 | Project/Task modifications via inline and popup editors
-| Task reassignment/reallocation & User role change via drag-and-drop
-| Task filtering via assignee/submitter selection, attributes, and ID/name searching
+| Project status, Task reassignment/reallocation, and User role change via drag-and-drop
+| Task filtering via QuickFilters/attributes and assignees/submitters/IDs/name
 | User modifications via User Manager, searching for users
 | Auto & manual Save, Refresh
 | Import/Export (Text & HTML)
