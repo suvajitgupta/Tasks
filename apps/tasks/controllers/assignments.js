@@ -77,7 +77,12 @@ Tasks.assignmentsController = SC.ArrayController.create(
       if(value === false) { // clear assignee selection before going to "TEAM" mode
         var searchFilter = this.get('searchFilter');
         if(searchFilter !== null && searchFilter !== '') {
-          this.set('searchFilter', null);
+          var assigneeSelection = searchFilter.match(/\[.*\]/);
+          if (assigneeSelection) { // if assignee selection is specified
+            assigneeSelection += ''; // convert to string
+            searchFilter = searchFilter.replace(assigneeSelection, ''); // remove assignee selection from search filter
+            this.set('searchFilter', searchFilter);
+          }
         }
       }
       this.set('_showTasks', value);
