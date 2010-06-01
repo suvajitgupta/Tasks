@@ -268,30 +268,30 @@ Tasks.assignmentsController = SC.ArrayController.create(
             // console.log('DEBUG: assignees: ' + assigneeSelectionDisplayNames);
           }
         }
-        var submitterSelection = searchFilter.match(/\<.*\>/);
-        if (submitterSelection) { // if submitter selection is specified
-          submitterSelection += ''; // convert to string
-          searchFilter = searchFilter.replace(submitterSelection, ''); // remove submitter selection from search filter
-          submitterSelection = submitterSelection.substr(1,submitterSelection.length-2);
-          var submitterSelectionNames = submitterSelection.replace(/,/g, ' ').replace(/\s+/g, ' ').replace(/^\s+/, '').replace(/\s+$/, '');
-          if (submitterSelection !== '') {
-            submitterSelectionNames = submitterSelectionNames.split(' ');
-            for (i = 0; i < submitterSelectionNames.length; i++) {
-              var submitterSelectionName = submitterSelectionNames[i];
-              if(submitterSelectionName.toLowerCase() === CoreTasks.USER_NONE) {
-                submitterSelectionDisplayNames.push(CoreTasks.USER_UNASSIGNED);
-              }
-              else {
-                var selectedSubmitterUsers = CoreTasks.getUsers(submitterSelectionName);
-                if (selectedSubmitterUsers.length > 0) {
-                  for (j = 0; j < selectedSubmitterUsers.length; j++) {
-                    submitterSelectionDisplayNames.push(selectedSubmitterUsers[j].get('displayName'));
-                  }
+      }
+      var submitterSelection = searchFilter.match(/\<.*\>/);
+      if (submitterSelection) { // if submitter selection is specified
+        submitterSelection += ''; // convert to string
+        searchFilter = searchFilter.replace(submitterSelection, ''); // remove submitter selection from search filter
+        submitterSelection = submitterSelection.substr(1,submitterSelection.length-2);
+        var submitterSelectionNames = submitterSelection.replace(/,/g, ' ').replace(/\s+/g, ' ').replace(/^\s+/, '').replace(/\s+$/, '');
+        if (submitterSelection !== '') {
+          submitterSelectionNames = submitterSelectionNames.split(' ');
+          for (i = 0; i < submitterSelectionNames.length; i++) {
+            var submitterSelectionName = submitterSelectionNames[i];
+            if(submitterSelectionName.toLowerCase() === CoreTasks.USER_NONE) {
+              submitterSelectionDisplayNames.push(CoreTasks.USER_UNASSIGNED);
+            }
+            else {
+              var selectedSubmitterUsers = CoreTasks.getUsers(submitterSelectionName);
+              if (selectedSubmitterUsers.length > 0) {
+                for (j = 0; j < selectedSubmitterUsers.length; j++) {
+                  submitterSelectionDisplayNames.push(selectedSubmitterUsers[j].get('displayName'));
                 }
               }
             }
-            // console.log('DEBUG: submitters: ' + submitterSelectionDisplayNames);
           }
+          // console.log('DEBUG: submitters: ' + submitterSelectionDisplayNames);
         }
       }
     
