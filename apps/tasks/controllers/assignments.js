@@ -535,6 +535,9 @@ Tasks.assignmentsController = SC.ArrayController.create(
       }
       displayEffort += ("_total".loc() + CoreTasks.displayTime(totalEffort) + (taskWithUnspecifiedEffort? '?' : ''));
     }
+    else if(totalLeftCount && projectTimeLeft) { // have tasks but don't have any estimates
+      displayEffort += "_total".loc() + '?';
+    }
     
     assignmentNodes.push (SC.Object.create({
       displayName: displayName,
