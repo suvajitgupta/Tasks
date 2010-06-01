@@ -64,7 +64,7 @@ v Disable "Add Task" button when no project is selected [SG] <BB> @Done %Passed 
 ^ Add popup viewer/editor for Project time left/description [SG] $Feature @Done %Passed
 v Add Project context menu with options: Add, Duplicate, Delete [SG] $Feature @Done %Passed
 - Add "Statistics..." button/popup to show percent breakdown of displayed Tasks by attributes (HTML) [SG] $Feature @Done %Passed
-- Add alternate graphical view (pie charts, bar graphs) for statistics of displayed Tasks [SG] <EG> $Feature
+- Support alternate graphical view (pie charts, bar graphs) for statistics of displayed Tasks [SG] <EG> $Feature
 
 Task Manager GUI
 ^ Group Tasks by User and display Task id, summary, and effort (if specified) on far right [SG] <JH2> @Done $Feature %Passed
@@ -173,7 +173,7 @@ Server
 | Indicate Task ID, create/update action, and user who triggered notifications in Subject: line
 | For Task updates, indicate old and new values of attributes
 - Add link to Task in email notification (should not require authentication if user is signed in) [SG] $Feature
-- Add Server-side data validation checks/return appropriate error codes [SE] <SG>
+- Add Server-side data validation checks/return appropriate error codes [SE] <SG> @Active
 - Build bridge to "github issues" from Google App Engine [JH2] <SG>
 
 Styling/Hardening
@@ -195,7 +195,8 @@ Styling/Hardening
 | Popup online Help, Statistics
 | Email Notifications, Task watching
 - Develop Model/View unit tests [SG] <BB> @Active
-- Create automated test scripts using Lebowski/Selenium [SG] <MR> @Active
+- Refactor code to "root controller pattern" and new SproutCore statecharts [SG] <EG> @Active
+- Develop automated test scripts using Lebowski/Selenium [SG] <MR> @Active
 
 Installation/Deployment
 - Support customizable (via Buildfile) "Installation" logo and title (shown in Browser/tab title) [SG] @Done $Feature %Passed
@@ -204,6 +205,6 @@ Installation/Deployment
 - Support customizable default "AutoSave" and "Notifications" settings (can be overridden by User via GUI) [SG] $Feature @Done %Passed
 - Deploy publicly-accessible instances using Google App Engine/Python [JH2] <SG> @Done %Passed
 ^ Develop Web client (ported to Firefox, Internet Explorer, Safari, Chrome) [SG] $Feature @Done %Passed
-- Beta: Develop unified Desktop/iPad client <JH2> [SG] $Feature @Active
+- Beta: Develop unified Desktop/iPad client <JH2> [SG] $Feature @Risky
 - Provide SproutCore doctool-style comments [SG] <SE>
 v Develop Mobile client <MB> [SG] $Feature
