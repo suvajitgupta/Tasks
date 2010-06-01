@@ -23,7 +23,6 @@ git reset --hard 725c490576519f26ab6f09195718750583920039
 # if you want to play with the 'touch' version
 git branch --track touch remotes/origin/quilmes
 git checkout touch
-git reset --hard 6cdce65d0cc3c87830d0139c66e4b865ddd5d8c5
 
 cd ../../
 
