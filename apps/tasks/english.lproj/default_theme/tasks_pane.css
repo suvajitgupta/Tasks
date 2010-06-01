@@ -193,7 +193,9 @@
 	right: 12px !important;
 }
 
-.task-item .sc-outline .count.doneEffortRangeWarning {
+.task-item .sc-outline .count.doneEffortRangeWarning,
+.task-item.sel .sc-outline .count.doneEffortRangeWarning {
+  color: #FFF !important;
   background: orange none repeat scroll 0 0 !important;
 }
 
