@@ -100,7 +100,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
           value: that.getPath('content.timeLeft')
         }),
         timeLeftHelpLabel: SC.LabelView.design({
-          layout: { top: 16, left: 160, height: 20, right: 10 },
+          layout: { top: 46, left: 160, height: 20, right: 10 },
           escapeHTML: NO,
           classNames: [ 'onscreen-help'],
           value: "_TimeLeftOnscreenHelp".loc()
