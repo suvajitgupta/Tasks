@@ -82,16 +82,22 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       
       contentView: SC.View.design({
         layout: { left: 0, right: 0, top: 0, bottom: 0},
-        childViews: 'nameField timeLeftLabel timeLeftField timeLeftHelpLabel statusLabel statusField descriptionLabel descriptionField createdAtLabel updatedAtLabel'.w(),
+        childViews: 'nameLabel nameField timeLeftLabel timeLeftField timeLeftHelpLabel statusLabel statusField descriptionLabel descriptionField createdAtLabel updatedAtLabel'.w(),
       
+        nameLabel: SC.LabelView.design({
+          layout: { top: 6, left: 0, height: 24, width: 70 },
+          textAlign: SC.ALIGN_RIGHT,
+          value: "_Name".loc()
+        }),
         nameField: SC.TextFieldView.design({
-          layout: { top: 5, left: 10, right: 10, height: 24 },
+          layout: { top: 5, left: 75, right: 10, height: 24 },
           isEnabledBinding: 'CoreTasks.permissions.canUpdateProject',
           value: that.getPath('content.name')
         }),
 
         timeLeftLabel: SC.LabelView.design({
-          layout: { top: 42, left: 10, height: 17, width: 100 },
+          layout: { top: 42, left: 0, height: 17, width: 70 },
+          textAlign: SC.ALIGN_RIGHT,
           value: "_TimeLeft:".loc()
         }),
         timeLeftField: SC.TextFieldView.design({

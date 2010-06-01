@@ -134,21 +134,27 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       
       contentView: SC.View.design({
         layout: { left: 0, right: 0, top: 0, bottom: 0},
-        childViews: 'nameField typeLabel typeField priorityLabel priorityField statusLabel statusField validationLabel validationField submitterLabel submitterField assigneeLabel assigneeField effortLabel effortField effortHelpLabel projectLabel projectField descriptionLabel descriptionField createdAtLabel updatedAtLabel'.w(),
+        childViews: 'nameLabel nameField typeLabel typeField priorityLabel priorityField statusLabel statusField validationLabel validationField submitterLabel submitterField assigneeLabel assigneeField effortLabel effortField effortHelpLabel projectLabel projectField descriptionLabel descriptionField createdAtLabel updatedAtLabel'.w(),
       
+        nameLabel: SC.LabelView.design({
+          layout: { top: 6, left: 0, height: 24, width: 45 },
+          textAlign: SC.ALIGN_RIGHT,
+          value: "_Name".loc()
+        }),
         nameField: SC.TextFieldView.design({
-          layout: { top: 5, left: 10, right: 10, height: 24 },
+          layout: { top: 5, left: 52, right: 10, height: 24 },
           isEnabledBinding: 'Tasks.tasksController.isEditable',
           value: that.getPath('content.name')
         }),
 
         typeLabel: SC.LabelView.design({
-          layout: { top: 40, left: 10, height: 24, width: 45 },
+          layout: { top: 40, left: 0, height: 24, width: 45 },
           isVisibleBinding: 'Tasks.softwareMode',
+          textAlign: SC.ALIGN_RIGHT,
           value: "_Type".loc()
         }),
         typeField: SC.SelectButtonView.design({
-          layout: { top: 38, left: 47, height: 24, width: 125 },
+          layout: { top: 38, left: 50, height: 24, width: 125 },
           classNames: ['square'],
           localize: YES,
           isVisibleBinding: 'Tasks.softwareMode',
