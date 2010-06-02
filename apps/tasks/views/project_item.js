@@ -64,7 +64,11 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
         sc_super();
         Tasks.editorPoppedUp = true;
         this._timeLeft = that.getPath('content.timeLeft');
-        if(CoreTasks.getPath('permissions.canUpdateProject')) this.getPath('contentView.nameField').becomeFirstResponder();
+        var name = that.getPath('content.name');
+        var copyPattern = new RegExp("_Copy".loc() + '$');
+        if((name === CoreTasks.NEW_PROJECT_NAME.loc() || copyPattern.exec(name)) && CoreTasks.getPath('permissions.canUpdateProject')) {
+          this.getPath('contentView.nameField').becomeFirstResponder();
+        }
       },
       remove: function() {
         sc_super();
