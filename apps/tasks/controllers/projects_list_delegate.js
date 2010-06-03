@@ -114,7 +114,7 @@ Tasks.projectsListDelegate = SC.Object.create(SC.CollectionViewDelegate,
       if (!(dragOp & SC.DRAG_MOVE)) ret = SC.DRAG_COPY;
       else {
         var targetProject = content.objectAt(idx);
-        if (targetProject.get('id') && targetProject !== CoreTasks.get('allTasksProject')) {
+        if (targetProject.get('id') && targetProject !== CoreTasks.get('allTasksProject') && targetProject !== CoreTasks.get('unassignedTasksProject')) {
           tasks.forEach(function(task) {
             var targetProjectId = (targetProject === CoreTasks.get('unallocatedTasksProject')? null : targetProject.get('id'));
             // console.log('Reallocating task "' + task.get('name') + '" to project "' + targetProject.get('name'));

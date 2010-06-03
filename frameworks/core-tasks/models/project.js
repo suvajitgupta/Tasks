@@ -5,6 +5,7 @@ sc_require('models/record');
 CoreTasks.NEW_PROJECT_NAME = '_NewProject';
 CoreTasks.ALL_TASKS_NAME = '_AllTasks';
 CoreTasks.UNALLOCATED_TASKS_NAME = '_UnallocatedTasks';
+CoreTasks.UNASSIGNED_TASKS_NAME = '_UnassignedTasks';
 
 CoreTasks.projectStatusesAllowed = [
   CoreTasks.STATUS_PLANNED,
@@ -150,6 +151,9 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
       }
       else if (this === CoreTasks.get('unallocatedTasksProject')) {
         query = SC.Query.local(CoreTasks.Task, 'projectId=null');
+      }
+      else if (this === CoreTasks.get('unassignedTasksProject')) {
+        query = SC.Query.local(CoreTasks.Task, 'assigneeId=null');
       }
       else {
         query = SC.Query.local(CoreTasks.Task, "projectId=%@".fmt(this.get('id')));

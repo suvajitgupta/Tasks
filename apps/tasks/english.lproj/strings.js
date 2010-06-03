@@ -162,6 +162,7 @@ SC.stringsFor('English', {
   "_Type": "Type:",
   "_TypeTooltip": "Kind of task: user visible functionality, defect fix, or other",
   "_UnallocatedTasks": "Unallocated Tasks",
+  "_UnassignedTasks": "Unassigned Tasks",
   "_Unassigned": "Unassigned",
   "_Unfinished": "Unfinished",
   "_UnfinishedTooltip": "Deliver on Commitments: what's left to finish",

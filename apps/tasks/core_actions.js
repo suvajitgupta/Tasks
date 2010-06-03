@@ -147,7 +147,8 @@ Tasks.mixin({
    */
   tasksLoadSuccess: function() {
     // console.log('DEBUG: tasksLoadSuccess()');
-    // Create the AllTasks project to hold all tasks.
+
+    // Create all system projects
     if(!CoreTasks.get('allTasksProject')) {
       var allTasksProject = CoreTasks.createRecord(CoreTasks.Project, {
         name: CoreTasks.ALL_TASKS_NAME.loc()
@@ -155,8 +156,6 @@ Tasks.mixin({
       CoreTasks.set('allTasksProject', allTasksProject);
       CoreTasks.set('needsSave', NO);
     }
-
-    // Create the UnallocatedTasks project with the unallocated tasks.
     if(!CoreTasks.get('unallocatedTasksProject')) {
       var unallocatedTasksProject = CoreTasks.createRecord(CoreTasks.Project, {
         name: CoreTasks.UNALLOCATED_TASKS_NAME.loc()
@@ -164,8 +163,15 @@ Tasks.mixin({
       CoreTasks.set('unallocatedTasksProject', unallocatedTasksProject);
       CoreTasks.set('needsSave', NO);
     }
+    if(!CoreTasks.get('unassignedTasksProject')) {
+      var unassignedTasksProject = CoreTasks.createRecord(CoreTasks.Project, {
+        name: CoreTasks.UNASSIGNED_TASKS_NAME.loc()
+      });
+      CoreTasks.set('unassignedTasksProject', unassignedTasksProject);
+      CoreTasks.set('needsSave', NO);
+    }
     
-    // Now load all of the projects.
+    // Now load all of the user-defined projects.
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', "_LoadingProjects".loc());
     if (!CoreTasks.get('allProjects')) {
@@ -516,7 +522,7 @@ Tasks.mixin({
     if(CoreTasks.getPath('currentUser.role') !== CoreTasks.USER_ROLE_GUEST) taskHash.assigneeId = userId;
     var sel = Tasks.projectsController.getPath('selection');
     var project = (sel && sel.get('length' === 1))? sel.get('firstObject') : null;
-    if (project && project !== CoreTasks.get('allTasksProject') && project !== CoreTasks.get('unallocatedTasksProject')) {
+    if (project && CoreTasks.isSystemProject(project)) {
       taskHash.projectId = project.get('id');
     }
     

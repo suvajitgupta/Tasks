@@ -59,7 +59,7 @@ CoreTasks = SC.Object.create({
    */
   clearData: function() {
     
-    this.allTasksProject = this.unallocatedTasksProject = null;
+    this.allTasksProject = this.unallocatedTasksProject = this.unassignedTasksProject = null;
     
     if(this.allUsers) {
       this.allUsers.destroy();
@@ -274,18 +274,11 @@ CoreTasks = SC.Object.create({
   },
 
   /**
-   * A special project where all tasks for all projects are grouped.
-   *
-   * This project exists outside of the store because we don't want it to be persisted.
+   * System projects (these are "virtual" - created at runtime and not persisted).
    */
   allTasksProject: null,
-
-  /**
-   * A special project where all unallocated tasks are grouped.
-   *
-   * This project exists outside of the store because we don't want it to be persisted.
-   */
   unallocatedTasksProject: null,
+  unassignedTasksProject: null,
 
   /**
    * See if project is a system project.
@@ -294,7 +287,9 @@ CoreTasks = SC.Object.create({
    * @returns {Boolean} true if system project, false otherwise.
    */
   isSystemProject: function(project) {
-    return project === CoreTasks.get('allTasksProject') || project === CoreTasks.get('unallocatedTasksProject');
+    return project === CoreTasks.get('allTasksProject') ||
+           project === CoreTasks.get('unallocatedTasksProject') ||
+           project === CoreTasks.get('unassignedTasksProject');
   },
 
   
@@ -372,9 +367,10 @@ CoreTasks = SC.Object.create({
     this._dirtyTasks = [];
     this._dirtyWatches = [];
 
-    // Get the store keys of the two "special" projects that we never want to persist.
+    // Get the store keys of the system projects that we don't want to persist.
     var allTasksProjectKey = this.getPath('allTasksProject.storeKey');
     var unallocatedTasksProjectKey = this.getPath('unallocatedTasksProject.storeKey');
+    var unassignedTasksProjectKey = this.getPath('unassignedTasksProject.storeKey');
 
     // Build separate arrays for all dirty records.
     var dirtyRecordKeys = store.changelog;
@@ -393,7 +389,7 @@ CoreTasks = SC.Object.create({
           this._dirtyUsers.pushObject(key);
           break;
         case CoreTasks.Project:
-          if (key !== allTasksProjectKey && key !== unallocatedTasksProjectKey) {
+          if (key !== allTasksProjectKey && key !== unallocatedTasksProjectKey && key !== unassignedTasksProjectKey) {
             this._dirtyProjects.pushObject(key);
           }
           break;
