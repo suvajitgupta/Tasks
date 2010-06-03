@@ -266,7 +266,7 @@ Tasks.exportDataController = SC.ObjectController.create(
     
     // Next export allocated tasks
     Tasks.projectsController.forEach(function(project){
-      if(CoreTasks.isSystemProject(project)) return; // skip All and Unallocated Tasks Projects
+      if(CoreTasks.isSystemProject(project)) return; // skip system projects
       ret += that._exportProjectData(project, format);
     }, Tasks.projectsController);
     

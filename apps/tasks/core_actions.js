@@ -519,7 +519,10 @@ Tasks.mixin({
     var userId = CoreTasks.getPath('currentUser.id');
     var taskHash = SC.merge({ 'submitterId': userId }, SC.clone(CoreTasks.Task.NEW_TASK_HASH));
     taskHash.name = taskHash.name.loc();
-    if(CoreTasks.getPath('currentUser.role') !== CoreTasks.USER_ROLE_GUEST) taskHash.assigneeId = userId;
+    if(Tasks.getPath('projectsController.selection.firstObject') !== CoreTasks.get('unassignedTasksProject') &&
+       CoreTasks.getPath('currentUser.role') !== CoreTasks.USER_ROLE_GUEST) {
+         taskHash.assigneeId = userId;
+    }
     var sel = Tasks.projectsController.getPath('selection');
     var project = (sel && sel.get('length' === 1))? sel.get('firstObject') : null;
     if (project && CoreTasks.isSystemProject(project)) {
