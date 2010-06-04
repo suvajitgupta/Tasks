@@ -95,8 +95,8 @@ Tasks.mainPage = SC.Page.design({
  mainPane: SC.MainPane.design({
    
    welcomeMessage: SC.outlet('masterDetailView.detailView.topToolbar.welcomeMessageLabel'),
-   projectsList:   SC.outlet('masterDetailView.masterView.contentView.contentView'),
-   tasksList:      SC.outlet('masterDetailView.detailView.contentView.contentView'),
+   projectsList:   SC.outlet('masterDetailView.masterView.contentView.projectsList.contentView'),
+   tasksList:      SC.outlet('masterDetailView.detailView.contentView.tasksList.contentView'),
    serverMessage:  SC.outlet('masterDetailView.detailView.contentView.tasksBottomBar.serverMessageView'),
 
    layout: { left: 0, right: 0, top: 0, bottom: 0, minWidth: 1024, minHeight: 640 },
