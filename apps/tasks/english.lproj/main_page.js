@@ -358,34 +358,25 @@ Tasks.mainPage = SC.Page.design({
             sc_super();
           }
                     
-        })
+        }),
         
-        // ..........................................................
-        // Hot Key Code - disabled for now owing to conflicts with browser shortcuts
-        // keyDown: function(event) {
-        //   var ret, commandCode = event.commandCodes();
-        // 
-        //   if(commandCode[0] === 'ctrl_s'){  //ctrl-s
-        //     Tasks.saveData();
-        //     ret = YES;
-        //   }
-        //   else if (commandCode[0] === 'ctrl_t'){  //ctrl-t
-        //     Tasks.addTask();
-        //     ret = YES;
-        //   }
-        //   else if (commandCode[0] === 'ctrl_d'){  //ctrl-d
-        //     Tasks.duplicateTask();
-        //     ret = YES;
-        //   }
-        //   else if (commandCode[0] === 'ctrl_p'){  //ctrl-p
-        //     Tasks.addProject();
-        //     ret = YES;
-        //   }
-        //   else{
-        //     ret = this.interpretKeyEvents(event) ;
-        //   }
-        //   return ret;
-        // }
+        // Hotkeys - be careful to avoid conflicts with browser shortcuts!
+        keyDown: function(event) {
+          var ret, commandCode = event.commandCodes();
+          // console.log('DEBUG: hotkey "' + commandCode[0] + '" pressed');
+          if (commandCode[0] === 'ctrl_='){  // control_equals
+            Tasks.addTask();
+            ret = YES;
+          }
+          else if (commandCode[0] === 'ctrl_shift_+'){  // control_shift_plus
+            Tasks.duplicateTask();
+            ret = YES;
+          }
+          else {
+            ret = this.interpretKeyEvents(event) ;
+          }
+          return ret;
+        }
         
       })
         
