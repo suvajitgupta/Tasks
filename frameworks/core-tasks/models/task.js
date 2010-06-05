@@ -438,7 +438,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
       if(format === 'HTML') ret += '\n</pre>';
     }
     
-    ret += '\n';
+    ret += '\n\n';
     return ret;
     
   },
@@ -532,34 +532,34 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
 
     if (fillDefaults === undefined) fillDefaults = true;
     
-    // extract priority based on bullet, if one
-    var hasBullet = false;
+    // extract priority based on bullet, if one is provided
     var taskPriority = fillDefaults? CoreTasks.TASK_PRIORITY_MEDIUM : null;
-    if (line.charAt(0) === '^') {
-      taskPriority = CoreTasks.TASK_PRIORITY_HIGH;
-      hasBullet = true;
-    } else if (line.charAt(0) === '-') {
-      taskPriority = CoreTasks.TASK_PRIORITY_MEDIUM;
-      hasBullet = true;
-    } else if (line.charAt(0) === 'v') {
-      taskPriority = CoreTasks.TASK_PRIORITY_LOW;
-      hasBullet = true;
+    var taskBulletMatches = line.match(/^\s*([\^\-v])\s+/);
+    if(taskBulletMatches) {
+      line = line.replace(taskBulletMatches[0], '');
+      switch(taskBulletMatches[1]) {
+        case '^':
+          taskPriority = CoreTasks.TASK_PRIORITY_HIGH;
+          break;
+        case '-':
+          taskPriority = CoreTasks.TASK_PRIORITY_MEDIUM;
+          break;
+        case 'v':
+          taskPriority = CoreTasks.TASK_PRIORITY_LOW;
+          break;
+      }
     }
-    var taskLine = hasBullet? line.slice(2) : line;
     
     // extract task name
-    var taskNameMatches = /(^[^\{<\[\$@%]+)/.exec(taskLine);
-    var taskName = taskLine;
-    if (taskNameMatches) {
-      taskName = taskNameMatches[1].replace(/\s+$/, '');
-    }
+    var taskNameMatches = /^\s*(^[^\{<\[\$@%]+)/.exec(line);
+    var taskName = taskNameMatches? taskNameMatches[1].replace(/\s*$/, '') : line;
     
     // extract task effort
-    var taskEffort = CoreTasks.Task.parseEffort(taskLine);
+    var taskEffort = CoreTasks.Task.parseEffort(line);
 
     // extract task assignee
     var taskAssignee = null;
-    var taskAssigneeMatches = taskLine.match(/\[[\w\s]+\]/g);
+    var taskAssigneeMatches = line.match(/\[[\w\s]+\]/g);
     if(taskAssigneeMatches) {
       if(taskAssigneeMatches.length === 1) taskAssignee = taskAssigneeMatches[0].slice(1, taskAssigneeMatches[0].length-1);
       else console.warn('Task Parsing Error - multiple assignees illegal: ' + taskAssigneeMatches);
@@ -567,7 +567,7 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
     
     // extract task submitter
     var taskSubmitter = null;
-    var taskSubmitterMatches = taskLine.match(/\<[\w\s]+\>/g);
+    var taskSubmitterMatches = line.match(/\<[\w\s]+\>/g);
     if(taskSubmitterMatches) {
       if(taskSubmitterMatches.length === 1) taskSubmitter = taskSubmitterMatches[0].slice(1, taskSubmitterMatches[0].length-1);
       else console.warn('Task Parsing Error - multiple submitters illegal: ' + taskSubmitterMatches);
@@ -575,7 +575,7 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
     
     // extract task type
     var taskType = fillDefaults? CoreTasks.TASK_TYPE_OTHER : null;
-    var taskTypeMatches = taskLine.match(/\$(\w+)/g);
+    var taskTypeMatches = line.match(/\$(\w+)/g);
     if(taskTypeMatches) {
       if(taskTypeMatches.length === 1) {
         var type = taskTypeMatches[0].slice(1);
@@ -593,7 +593,7 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
     
     // extract task development status
     var taskStatus = fillDefaults? CoreTasks.STATUS_PLANNED : null;
-    var taskStatusMatches = taskLine.match(/@(\w+)/g);
+    var taskStatusMatches = line.match(/@(\w+)/g);
     if(taskStatusMatches) {
       if(taskStatusMatches.length === 1) {
         var status = taskStatusMatches[0].slice(1);
@@ -611,7 +611,7 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
     
     // extract task validation
     var taskValidation = fillDefaults? CoreTasks.TASK_VALIDATION_UNTESTED : null;
-    var taskValidationMatches = taskLine.match(/%(\w+)/g);
+    var taskValidationMatches = line.match(/%(\w+)/g);
     if(taskValidationMatches) {
       if(taskValidationMatches.length === 1) {
         var validation = taskValidationMatches[0].slice(1);

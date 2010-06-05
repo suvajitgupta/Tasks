@@ -223,7 +223,8 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
     var tasksCount = this.get('tasks').get('length');
     
     var ret = '';
-    if(format === 'HTML') ret += '<h1>';
+    if(format === 'Text') ret += '#================================================================================\n';
+    else ret += '<h1>';
     
     if(projectName === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) {
       if(format === 'Text') ret += '# ';
@@ -267,7 +268,8 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
       if(format === 'HTML') ret += '\n</pre>';
     }
     
-    
+    ret += '\n';
+    if(format === 'Text') ret += '#================================================================================\n';
     ret += '\n';
     return ret;
     

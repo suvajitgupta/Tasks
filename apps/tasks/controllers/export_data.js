@@ -312,6 +312,8 @@ Tasks.exportDataController = SC.ObjectController.create(
       }
       else ret += ' # ' + "_Has".loc() + tasksCount + "_tasks".loc();
       ret += '\n';
+      if(format === 'Text') ret += '#--------------------------------------------------------------------------------\n';
+      ret += '\n';
       if(tasks) {
         for(var j=0; j < tasksCount; j++) {
           ret += tasks.objectAt(j).exportData(format);
@@ -366,7 +368,8 @@ Tasks.exportDataController = SC.ObjectController.create(
         ret += project.exportData(format);
       }
       else { // multiple projects selected
-        if(format === 'HTML') ret += '<h1>\n';
+        if(format === 'Text') ret += '#================================================================================\n';
+        else ret += '<h1>\n';
         for (i = 0; i < len; i++) {
           project = sel.nextObject(i, null, context);
           if(format === 'Text') ret += '# ';
@@ -374,7 +377,9 @@ Tasks.exportDataController = SC.ObjectController.create(
           if(format === 'HTML') ret += '<br>';
           ret += '\n';
         }
-        if(format === 'HTML') ret += '</h1>\n';
+        if(format === 'Text') ret += '#================================================================================\n\n';
+        else ret += '</h1>\n\n';
+        
       }
       ret += this._exportDisplayedData(format);
     }

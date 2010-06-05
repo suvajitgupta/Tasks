@@ -1,4 +1,4 @@
-A line starting with a "#" is a Comment (these are ignored when imported)
+Any text after a "#" is a Comment (these are ignored when imported)
 A line starting with a "^ " or "- " or "v " is a Task (priority: "^" indicates High, "-" indicated Medium, "v" indicates Low)
 A line starting with a "| " is a (potentially multiline) Description for the last Task above it
 Any other line is a Project
