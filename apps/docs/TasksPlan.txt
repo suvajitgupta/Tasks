@@ -1,6 +1,8 @@
 # Tasks Plan - please see below for items you can work on & mark their status as you start/finish them
 
-Design/Planning
+- Create TextMate syntax highlighting for Tasks import/export format [JH2] <SG> @Active
+
+Design/Planning @Done
 - Review comparable applications for ideas: Mac Things/TaskPaper, Jira [SG] <MB> @Done
 - Define Personas (Roles) & User Stories/Use Cases [SG] <SE> @Done
 | Manager - add/edit/delete Users/Projects/Tasks, allocate Tasks to Projects, assign to/load balance Tasks across Developers, view/update Project/Task status
@@ -10,7 +12,7 @@ Design/Planning
 ^ Create GUI Wireframes using Balsamiq [SG] @Done
 ^ Create GUI Statecharts using Omnigraffle [SG] <SE> @Done
 - Create GUI Mockups using Photoshop [MG] <SG> @Done
-^ Define Models/JSON: Task, Project, User [SG] <SE> @Done
+^ Define core Models/JSON [SG] <SE> @Done
 - Define Tasks TXT file format for data import/export [SG] <SE> @Done
 - Design REST API supporting CRUD operations [SG] <SE> @Done
 - Design Tasks Server & evaluate persistence frameworks [SE] <SG> @Done
@@ -21,7 +23,7 @@ Design/Planning
 | Managers/Developers/Testers can create/update/delete Tasks
 | Guests can only create/update unallocated Tasks they submitted & update Task descriptions
 
-General Infrastructure
+General Infrastructure @Active
 ^ Develop Model and Fixtures (hardcoded & generated) [SG] <SE> @Done
 - Develop States/Actions corresponding to GUI Statecharts [SG] <SE> @Done
 - Support minimum resolution of 1024x768 [SG] @Done $Feature %Passed
@@ -34,11 +36,12 @@ General Infrastructure
 v Track/optimize calls to assignments controller and custom view render methods <BB> [SG] @Active
 v Make buttons depressable to provide feedback when using them [SG] $Feature @Done %Passed
 - Support direct access to Projects or Tasks using SproutCore routes [SG] $Feature @Done %Passed
-- Implement JSONP-based data loading for performance speedup [SG] <SE>
+- Implement HTML5 cascading data source to speedup data loads [JH2] <SG>
+- Implement JSONP-based data loading for performance speedup [JH2] <SG>
 - Out of Scope: Add support for attachments in record descriptions $Feature
 | Upload attachment somewhere and insert URL to it in record description
 
-Project Manager GUI
+Project Manager GUI @Active
 ^ Add Master/Detail Explorer view with click selection of Projects showing corresponding Tasks [JH2] <SG> @Done $Feature %Passed
 ^ Show Project name & time left (if specified) on far right [SG] <JH2> @Done $Feature %Passed
 ^ Beta: Allow Project target date to be specified inline or via popup editor/Calendar chooser <JH2> [SG] $Feature @Active
@@ -66,7 +69,7 @@ v Add Project context menu with options: Add, Duplicate, Delete [SG] $Feature @D
 - Add "Statistics..." button/popup to show percent breakdown of displayed Tasks by attributes (HTML) [SG] $Feature @Done %Passed
 - Support alternate graphical view (pie charts, bar graphs) for statistics of displayed Tasks [SG] <EG> $Feature
 
-Task Manager GUI
+Task Manager GUI @Active
 ^ Group Tasks by User and display Task id, summary, and effort (if specified) on far right [SG] <JH2> @Done $Feature %Passed
 ^ Support automatic sorting of Tasks by Status, Validation, Priority, Type, and Name or "index" (if name starts with a number) [SG] <SG> @Done $Feature %Passed
 - Allow Tasks under an assignee to be hidden/disclosed [SG] <JH2> @Done $Feature %Passed
@@ -107,7 +110,7 @@ v Add Task context menu with options: Add, Duplicate, Delete; All Task Attribute
 - Out of Scope: Add support for preserving original Task estimates/partial time logging $Feature
 | Use "Chunk Up Work" best practice described in Help instead
 
-User Manager GUI
+User Manager GUI @Active
 ^ Add login screen to identify user who logs in (and handle login failures properly) [SG] <SE> @Done %Passed $Feature
 - Add password to login, signup, and User Manager screens (save in encrypted format) [SG] <JH2> $Feature @Done %Passed
 - Allow new guests to sign up from login screen and log them in immediately after [JH2] <SG> @Done %Passed $Feature
@@ -126,7 +129,7 @@ v Enable/disable "Delete User" button based on having a selected user [SG] @Done
 - Out of Scope: Add support for "Teams" (a user can belong to a team, a team can have a lead) $Feature
 | Create separate projects for different teams to keep their tasks/deadlines separate instead
 
-Application Manager GUI
+Application Manager GUI @Active
 - Add Tasks logo to top bar and display program version as a badge [SG] $Feature @Done %Passed
 - Add welcome message showing logged in user/role with hover over tooltip showing time of login [SG] @Done $Feature %Passed
 - Add Server data loading message in bottom bar during startup [SG] $Feature @Done %Passed
@@ -159,8 +162,9 @@ v Add hotkeys for common operations (like Add/Duplcate Tasks and Save) [EG] <SG>
 - Support Application settings/state persistence from last login saved using HTML5 storage [SG] <MB> $Feature
 - Support Disconnected Operation (synchronization after network reconnection) using Hub.js [SG] <SE> $Feature
 - Support Undo/Redo using Hub.js [SG] <SE> $Feature
+- Support emails including task details to other users via Server [SG] $Feature
 
-Server
+Server @Active
 ^ Build persistence Server using Persevere [SE] <SG> @Done %Passed
 - Create command-line scripts to start/stop Persevere Server and to create users <SG> [SE] $Feature @Done %Passed
 ^ Build persistence Server using Google App Engine [JH2] <SG> @Done %Passed
@@ -176,7 +180,7 @@ Server
 - Add Server-side data validation checks/return appropriate error codes [SE] <SG> @Active
 - Build bridge to "github issues" from Google App Engine [JH2] <SG>
 
-Styling/Hardening
+Styling/Hardening @Active
 ^ Style via CSS, embed catchy/sprited images [MG] <SG> @Done %Passed
 - Beta: Re-style for iPad operation [MG] <SG> @Active
 - Beta: Split/sprite final set of icons using Chance [JH2] <SG>
