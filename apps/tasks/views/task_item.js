@@ -120,7 +120,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       popup: function() {
         sc_super();
         Tasks.editorPoppedUp = true;
-        // FIXME: [SG] fix issue with list selection not changing by the time the popup editor name field is selected
+        // TODO: [SG] Beta: fix issue with list selection not changing by the time the popup editor name field is selected
         var name = that.getPath('content.name');
         var copyPattern = new RegExp("_Copy".loc() + '$');
         if((name === CoreTasks.NEW_TASK_NAME.loc() || copyPattern.exec(name)) && Tasks.getPath('tasksController.isEditable')) {
@@ -174,7 +174,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           toolTip: "_TypeTooltip".loc()
         }),
                   
-        // TODO: [SG] Beta: write custom view so that task priority/status/validation styles can be displayed in tasks popup editor
+        // TODO: [SG] Beta: write custom view so that task priority/status/validation styles can be displayed in popup editors
         priorityLabel: SC.LabelView.design({
           layout: { top: 40, left: 175, height: 24, width: 55 },
           textAlign: SC.ALIGN_RIGHT,
