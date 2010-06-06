@@ -36,8 +36,10 @@ General Infrastructure @Active
 v Track/optimize calls to assignments controller and custom view render methods <BB> [SG] @Active
 v Make buttons depressable to provide feedback when using them [SG] $Feature @Done %Passed
 - Support direct access to Projects or Tasks using SproutCore routes [SG] $Feature @Done %Passed
+- Destroy authentication token when User logs out [SG] <JH2>
 - Implement HTML5 cascading data source to speedup data loads [JH2] <SG>
 - Implement JSONP-based data loading for performance speedup [JH2] <SG>
+- Support Disconnected Operation (synchronization after network reconnection) using Hub.js [SG] <JH2> $Feature
 - Out of Scope: Add support for attachments in record descriptions $Feature
 | Upload attachment somewhere and insert URL to it in record description
 
@@ -100,9 +102,10 @@ v Add hover over tooltip for assignees to show how many Tasks they have and to e
 - Beta: Support Task Copy ID/Name and Copy Link Location (URL with "Route") to clipboard [SG] $Feature @Risky
 v Add Task context menu with options: Add, Duplicate, Delete; All Task Attributes; Copy ID/Name, Copy Link [SG] $Feature @Done %Passed
 ^ Add ability to "Watch" Tasks and get Email Notifications after Task changes [SG] <JH2> $Feature @Done %Passed
+^ Beta: Add support for adding Comments to Tasks [SG] <JH2> $Feature @Active
 - Allow "Find & Replace" within Task names  (operating only on items in Tasks Detail view)[SG] $Feature
 - Allow Task names to embed metacharacters by enclosing in quotes [SG] $Feature
-^ Beta: Add support for adding Comments to Tasks [SG] <JH2> $Feature @Active
+- Support emails including Task details to other users via Server [SG] $Feature
 - Out of Scope: Add support for nested Tasks and Task tagging $Feature
 | Use "Clustering" approach described in Help instead
 - Out of Scope: Add support for managing inter-Task dependencies/linking $Feature
@@ -149,7 +152,6 @@ v Add online training video using Captivate or Camtasia [SG] $Feature @Done
 | http://www.youtube.com/watch?v=6egjJw_RS1g
 - Add onscreen help (on panel fields that are complex and on blank workspace to assist new users) <MG> [SG] $Feature @Done %Passed
 - Add "Logout" menu item in actions menu (confirm before exiting, reload data/clear all filters) [SG] <JH2> @Done $Feature %Passed
-- Destroy authentication token when User logs out [SG] <JH2>
 - Prompt user to save changes (if any) before logging out [SG] <SE> $Feature @Done %Passed
 | See demo.sproutcore.com/user_defaults and lookup SproutCore blog for Charles' posting on this topic
 - Add "TEAM" display mode (vs. "TASKS") to show everyone at a glance, clicking on Assignee shows their Tasks [SG] $Feature @Done %Passed
@@ -160,9 +162,7 @@ v Add hotkeys for common operations (like Add/Duplcate Tasks and Save) [EG] <SG>
 | Email notifications
 | Percent or Threshold (in days) for Assignee loading determination
 - Support Application settings/state persistence from last login saved using HTML5 storage [SG] <MB> $Feature
-- Support Disconnected Operation (synchronization after network reconnection) using Hub.js [SG] <SE> $Feature
-- Support Undo/Redo using Hub.js [SG] <SE> $Feature
-- Support emails including task details to other users via Server [SG] $Feature
+- Support Undo/Redo using Hub.js [SG] <JH2> $Feature
 
 Server @Active
 ^ Build persistence Server using Persevere [SE] <SG> @Done %Passed
@@ -202,7 +202,7 @@ Styling/Hardening @Active
 - Refactor code to "root controller pattern" and new SproutCore statecharts [SG] <EG> @Active
 - Develop automated test scripts using Lebowski/Selenium [SG] <MR> @Active
 
-Installation/Deployment
+Installation/Deployment @Active
 - Support customizable (via Buildfile) "Installation" logo and title (shown in Browser/tab title) [SG] @Done $Feature %Passed
 - Support customizable Guest signup capability via "Login" screen (useful for open-source projects) [SG] @Done $Feature %Passed
 - Support customizable "Software" vs. "Todo" mode (in latter case, Task Type & Validation are not available via GUI) [SG] $Feature @Done %Passed
@@ -211,4 +211,6 @@ Installation/Deployment
 ^ Develop Web client (ported to Firefox, Internet Explorer, Safari, Chrome) [SG] $Feature @Done %Passed
 - Beta: Develop unified Desktop/iPad client <JH2> [SG] $Feature @Risky
 - Provide SproutCore doctool-style comments [SG] <SE>
-v Develop Mobile client <MB> [SG] $Feature
+
+Mobile
+- Develop Mobile client <MB> [SG] $Feature
