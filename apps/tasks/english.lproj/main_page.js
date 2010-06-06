@@ -318,6 +318,9 @@ Tasks.mainPage = SC.Page.design({
            layout: { centerY: 0, height: 12, right: 219, width: 12 },
            isVisible: NO,
            classNames: ['filter-cancel-icon'],
+           touchStart: function() {
+             this.mouseDown();
+           },
            mouseDown: function() {
              Tasks.assignmentsController.clearAttributeFilter();
              Tasks.assignmentsController.showAssignments();
@@ -338,6 +341,9 @@ Tasks.mainPage = SC.Page.design({
            layout: { centerY: 0, height: 12, right: 10, width: 12 },
            isVisible: NO,
            classNames: ['filter-cancel-icon'],
+           touchStart: function() {
+             this.mouseDown();
+           },
            mouseDown: function() {
              Tasks.assignmentsController.set('searchFilter', '');
            },
