@@ -50,7 +50,7 @@ Tasks.importDataController = SC.ObjectController.create(
 
       for (var i = 0; i < lines.length; i++) {
 
-        var line = lines[i];
+        var line = lines[i].replace(/^\s+/, '');
 
         if (line.indexOf('#') === 0) { // a Comment
           var commentLine = line.slice(1);
@@ -97,7 +97,7 @@ Tasks.importDataController = SC.ObjectController.create(
           // Peek ahead to the next lines to see if there is a Description and bring those in
           description = null;
           while (i < (lines.length-1)) {
-            nextLine = lines[++i];
+            nextLine = lines[++i].replace(/^\s+/, '');
             if (nextLine.indexOf('| ') === 0) { // a Description line
               descriptionLine = nextLine.slice(2);
               description = (description? (description + '\n') : '') + descriptionLine;
@@ -128,7 +128,7 @@ Tasks.importDataController = SC.ObjectController.create(
           // Peek ahead to the next lines to see if there is a Description and bring those in
           description = null;
           while (i < (lines.length-1)) {
-            nextLine = lines[++i];
+            nextLine = lines[++i].replace(/^\s+/, '');
             if (nextLine.indexOf('| ') === 0) { // a Description line
               descriptionLine = nextLine.slice(2);
               description = (description? (description + '\n') : '') + descriptionLine;
