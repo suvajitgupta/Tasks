@@ -43,7 +43,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     var sel = Tasks.getPath('projectsController.selection');
     var singleSelect = (sel && sel.get('length') === 1);
     
-    if (event.which === 1 && singleSelect && classes !== "") { // left click with one project selected and didn't click on the inline editable name
+    if ((!event.which || event.which === 1) && singleSelect && classes !== "") { // left click with one project selected and didn't click on the inline editable name
       this.popupEditor();
     }
 
