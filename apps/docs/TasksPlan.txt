@@ -39,7 +39,7 @@ v Make buttons depressable to provide feedback when using them [SG] $Feature @Do
 - Destroy authentication token when User logs out [SG] <JH2>
 - Implement HTML5 cascading data source to speedup data loads [JH2] <SG>
 - Implement JSONP-based data loading for performance speedup [JH2] <SG>
-- Support Disconnected Operation (synchronization after network reconnection) using Hub.js [SG] <JH2> $Feature
+- Implement disconnected operation (offline mode, synchronization after network reconnection) using Hub.js [JH2] <SG>
 - Out of Scope: Add support for attachments in record descriptions $Feature
 | Upload attachment somewhere and insert URL to it in record description
 
@@ -69,7 +69,7 @@ v Disable "Add Task" button when no project is selected [SG] <BB> @Done %Passed 
 ^ Add popup viewer/editor for Project time left/description [SG] $Feature @Done %Passed
 v Add Project context menu with options: Add, Duplicate, Delete [SG] $Feature @Done %Passed
 - Add "Statistics..." button/popup to show percent breakdown of displayed Tasks by attributes (HTML) [SG] $Feature @Done %Passed
-- Support alternate graphical view (pie charts, bar graphs) for statistics of displayed Tasks [SG] <EG> $Feature
+- Support alternate graphical view (pie charts, bar graphs) for Statistics using Sai [SG] <EG> $Feature
 
 Task Manager GUI @Active
 ^ Group Tasks by User and display Task id, summary, and effort (if specified) on far right [SG] <JH2> @Done $Feature %Passed
@@ -182,8 +182,8 @@ Server @Active
 
 Styling/Hardening @Active
 ^ Style via CSS, embed catchy/sprited images [MG] <SG> @Done %Passed
-- Beta: Re-style for iPad operation [MG] <SG> @Active
-- Beta: Split/sprite final set of icons using Chance [JH2] <SG>
+- Beta: Re-style to match Greenhouse look & feel [MG] <SG> @Active
+- Beta: Split/sprite final set of icons using Chance [JH2] <MG>
 - Perform I18N and L10N (test with reversed strings) [SG] <JH2> @Done %Passed
 - Collect/address feedback from Alpha/Beta users and targeted usability tests <MG> [SG] @Done %Passed
 ^ Perform smoke test of key functionality [SG] @Done
@@ -208,9 +208,9 @@ Installation/Deployment @Active
 - Support customizable "Software" vs. "Todo" mode (in latter case, Task Type & Validation are not available via GUI) [SG] $Feature @Done %Passed
 - Support customizable default "AutoSave" and "Notifications" settings (can be overridden by User via GUI) [SG] $Feature @Done %Passed
 - Deploy publicly-accessible instances using Google App Engine/Python [JH2] <SG> @Done %Passed
-^ Develop Web client (ported to Firefox, Internet Explorer, Safari, Chrome) [SG] $Feature @Done %Passed
-- Beta: Develop unified Desktop/iPad client <JH2> [SG] $Feature @Risky
-- Provide SproutCore doctool-style comments [SG] <SE>
+- Port GUI to Firefox, Internet Explorer, Safari, and Chrome [SG] @Done %Passed
+v Provide SproutCore doctool-style comments [SG] <SE>
 
-Mobile
-- Develop Mobile client <MB> [SG] $Feature
+Touch Interfaces
+- Beta: Develop iPad client with swiveling Master/Detail view <JH2> [SG] @Risky
+- Develop iPhone client <MB> [SG]
