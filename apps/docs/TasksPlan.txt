@@ -1,6 +1,6 @@
 # Tasks Plan - please see below for items you can work on & mark their status as you start/finish them
 
-- Create TextMate syntax highlighting for Tasks import/export format [JH2] <SG> @Active
+v Support syntax highlighted editing for Tasks import/export format using TextMate [JH2] <SG> @Active
 
 Design/Planning @Done
 - Review comparable applications for ideas: Mac Things/TaskPaper, Jira [SG] <MB> @Done
@@ -84,6 +84,7 @@ v Enable Task Validation editing only when in Done status [SG] <JH2> $Feature @D
 ^ Allow Task attribute filtering by Type, Priority, Status, and Validation fields via a top bar button/sheet pane [SG] $Feature @Done %Passed
 - Add commonly-used "QuickFilters": Troubled, Unfinished, Unvalidated, Completed, Showstoppers, All [SG] $Feature @Done %Passed
 - Support filtering of Tasks that were recently updated or have effort specified [SG] $Feature @Done %Passed
+- Support filtering of Tasks that were created or updated within a specified timeframe [SG] $Feature
 - Indicate whether there is a Task attribute filter via cancel icon [SG] $Feature @Done %Passed
 - Indicate whether there are any risky items under an assignee using a red flag in assignee grouping bar [SG] $Feature @Done %Passed
 v Enable/disable "Delete Task" button based on having a selected Task [SG] @Done %Passed $Feature
@@ -177,7 +178,8 @@ Server @Active
 | Indicate Task ID, create/update action, and user who triggered notifications in Subject: line
 | For Task updates, indicate old and new values of attributes
 - Add link to Task in email notification (should not require authentication if user is signed in) [SG] $Feature
-- Add Server-side data validation checks/return appropriate error codes [SE] <SG> @Active
+- Add Server-side data validation checks/return appropriate error codes [SG] <SE>
+- Add GUI-side data validation checks and corresponding user feedback [SG] <JL>
 - Build bridge to "github issues" from Google App Engine [JH2] <SG>
 
 Styling/Hardening @Active
