@@ -94,6 +94,18 @@
   right: -2px !important;
 }
 
+.system-project-icon {
+  width: 16px !important;
+  height: 16px !important;
+  background: static_url('images/system-project.png') no-repeat 0 0;
+}
+
+.empty-system-project-icon {
+  width: 16px !important;
+  height: 16px !important;
+  background: static_url('images/empty-system-project.png') no-repeat 0 0;
+}
+
 .project-icon {
   width: 16px !important;
   height: 16px !important;

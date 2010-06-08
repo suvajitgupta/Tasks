@@ -73,12 +73,14 @@ Tasks.TaskItemView = SC.ListItemView.extend(
        // Remove system projects from list since you cannot assign to them
        var idx = ret.indexOf(CoreTasks.get('allTasksProject'));
        if(idx !== -1) ret.splice(idx, 1);
-       idx = ret.indexOf(CoreTasks.get('unallocatedTasksProject'));
-       if(idx !== -1) ret.splice(idx, 1);
        idx = ret.indexOf(CoreTasks.get('unassignedTasksProject'));
        if(idx !== -1) ret.splice(idx, 1);
+       idx = ret.indexOf(CoreTasks.get('unallocatedTasksProject'));
+       if(idx !== -1) {
+         ret.splice(idx, 1);
+         ret.push({ id: '0', icon: CoreTasks.getPath('unallocatedTasksProject.icon'), displayName: "_UnallocatedTasks".loc() });
+       }
        
-       ret.push({ id: '0', displayName: "_UnallocatedTasks".loc() });
        return ret;
        
     }).from('Tasks.projectsController.content');
