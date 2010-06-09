@@ -770,14 +770,15 @@ Tasks.assignmentsController = SC.ArrayController.create(
   
   showStatistics: function() {
     this.displayStatistics();
-    var panel = Tasks.getPath('statisticsPane');
-    if(panel) panel.append();
+    // HACK: [SG] Creating/destroying panel so that text label refreshes, which is wasn't on quilmes
+    this._panel = Tasks.getPath('statisticsPane').create();
+    if(this._panel) this._panel.append();
   },
   
   closePanel: function() {
-    var panel = Tasks.getPath('statisticsPane');
-    if(panel) {
-      panel.remove();
+    if(this._panel) {
+      this._panel.remove();
+      this._panel.destroy();
     }
     this.set('statistics', '');
   }

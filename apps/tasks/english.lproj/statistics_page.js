@@ -14,7 +14,7 @@ sc_require('core');
   
 */
 
-Tasks.statisticsPane = SC.PanelPane.create({  
+Tasks.statisticsPane = SC.PanelPane.extend({  
   
   layout: { centerX: 0, centerY: 0, height: Tasks.softwareMode? 230 : 200, width: 650 },
   classNames: ['statistics-pane'],
