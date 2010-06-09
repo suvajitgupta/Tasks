@@ -86,43 +86,25 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       
       contentView: SC.View.design({
         layout: { left: 0, right: 0, top: 0, bottom: 0},
-        childViews: 'nameLabel nameField timeLeftLabel timeLeftField timeLeftHelpLabel statusLabel statusField descriptionLabel descriptionField createdAtLabel updatedAtLabel'.w(),
+        childViews: 'nameLabel nameField  statusLabel statusField targetDateTimeLeftRadiobuttons targetDateField timeLeftField timeLeftHelpLabel descriptionLabel descriptionField createdAtLabel updatedAtLabel'.w(),
       
         nameLabel: SC.LabelView.design({
-          layout: { top: 6, left: 0, height: 24, width: 70 },
-          textAlign: SC.ALIGN_RIGHT,
+          layout: { top: 6, left: 10, height: 24, width: 45 },
           value: "_Name".loc()
         }),
         nameField: SC.TextFieldView.design({
-          layout: { top: 5, left: 75, right: 10, height: 24 },
+          layout: { top: 5, left: 55, right: 200, height: 24 },
           isEnabledBinding: 'CoreTasks.permissions.canUpdateProject',
           value: that.getPath('content.name')
         }),
-
-        timeLeftLabel: SC.LabelView.design({
-          layout: { top: 42, left: 0, height: 17, width: 70 },
-          textAlign: SC.ALIGN_RIGHT,
-          value: "_TimeLeft:".loc()
-        }),
-        timeLeftField: SC.TextFieldView.design({
-          layout: { top: 40, left: 75, width: 80, height: 24 },
-          isEnabledBinding: 'CoreTasks.permissions.canUpdateProject',
-          value: that.getPath('content.timeLeft')
-        }),
-        timeLeftHelpLabel: SC.LabelView.design({
-          layout: { top: 46, left: 160, height: 20, right: 10 },
-          escapeHTML: NO,
-          classNames: [ 'onscreen-help'],
-          value: "_TimeLeftOnscreenHelp".loc()
-        }),
         
         statusLabel: SC.LabelView.design({
-          layout: { top: 42, right: 113, height: 24, width: 50 },
+          layout: { top: 7, right: 113, height: 24, width: 50 },
           textAlign: SC.ALIGN_RIGHT,
           value: "_Status".loc()
         }),
         statusField: SC.SelectButtonView.design({
-          layout: { top: 40, right: 10, height: 24, width: 125 },
+          layout: { top: 5, right: 10, height: 24, width: 125 },
           classNames: ['square'],
           localize: YES,
           isEnabledBinding: 'CoreTasks.permissions.canUpdateProject',
@@ -131,6 +113,33 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
           valueKey: 'value',
           valueBinding: SC.binding('.content.statusValue', this),
           toolTip: "_StatusTooltip".loc()
+        }),
+
+        targetDateTimeLeftRadiobuttons: SC.RadioView.design({
+          layout: { top: 40, left: 150, height: 40, width: 150 },
+          layoutDirection: SC.LAYOUT_VERTICAL,
+          items: [
+            { title: "_TargetDate:".loc(), value: 1 },
+            { title: "_TimeLeft:".loc(), value: 2 }
+          ],
+          itemTitleKey: 'title',
+          itemValueKey: 'value',
+          value: 1
+        }),
+        targetDateField: SCUI.DatePickerView.design({
+          layout: { top: 35, left: 250, width: 125, height: 24 },
+          date: SC.DateTime.create()
+        }),
+        timeLeftField: SC.TextFieldView.design({
+          layout: { top: 60, left: 250, width: 125, height: 24 },
+          isEnabledBinding: 'CoreTasks.permissions.canUpdateProject',
+          value: that.getPath('content.timeLeft')
+        }),
+        timeLeftHelpLabel: SC.LabelView.design({
+          layout: { top: 66, left: 380, height: 20, right: 10 },
+          escapeHTML: NO,
+          classNames: [ 'onscreen-help'],
+          value: "_TimeLeftOnscreenHelp".loc()
         }),
 
         descriptionLabel: SC.LabelView.design({

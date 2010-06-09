@@ -117,3 +117,95 @@
   height: 16px !important;
   background: static_url('images/empty-project.png') no-repeat 0 0;
 }
+
+
+/* Calendar styles */
+
+.scui-datechooser-button {
+  z-index: 100;
+}
+
+.scui-calendar > div,
+.scui-datepicker-today,
+.scui-datepicker-none {
+  text-align: center;
+}
+
+.scui-calendar .month_header {
+  font-weight: bold;
+  line-height: 20px;
+}
+
+.scui-calendar .weekday {
+  color: #010101;
+  line-height: 20px;
+  font-size: 11px;
+}
+
+.scui-calendar .scui-dates {
+  border-bottom: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+}
+
+.scui-calendar .scui-date {
+  border-top: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  line-height: 25px;
+}
+
+.scui-calendar .scui-date.past {
+  color: #a6a6a6;
+}
+
+.scui-calendar .scui-date.today,
+.scui-datepicker-today {
+  color: #fff !important;
+  background-color: #97A8C7;
+}
+
+.scui-calendar .scui-date.present {
+  color: #888;
+  background: #fff;
+}
+
+.scui-calendar .scui-date.future {
+  color: #a6a6a6;
+  background: #f2f2f2;
+}
+
+.scui-calendar .scui-date.sel {
+  color: white;
+  background: blue;
+}
+
+.scui-calendar .previous-month-icon {
+  width: 8px !important;
+  height: 8px !important;
+  background: static_url('images/previous-month.png') no-repeat 0 0;
+}
+
+.scui-calendar .next-month-icon {
+  width: 8px !important;
+  height: 8px !important;
+  background: static_url('images/next-month.png') no-repeat 0 0;
+}
+
+.scui-datepicker-today,
+.scui-datepicker-none {
+  border: 1px solid #ccc;
+  -moz-border-radius: 5px;
+  font-size: 11px;
+  line-height: 18px;
+}
+
+.scui-datepicker-none {
+  color: white !important;
+  background-color: #999;
+}
+
+
+.calendar-icon {
+  width: 16px !important;
+  height: 16px !important;
+  background: static_url('images/calendar.png') no-repeat;
+}

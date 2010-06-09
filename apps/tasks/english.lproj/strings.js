@@ -144,6 +144,7 @@ SC.stringsFor('English', {
   "_Submitters:": "Submitters: ",
   "_Summary:": "Summary: ",
   "_System": "System",
+  "_TargetDate:": "Target Date:",
   "_TaskDeletionConfirmation": "Are you sure you want to delete the selected tasks?",
   "_TaskEffortTooltip": "Task effort",
   "_TaskIdTooltip": "Task #ID (dashes indicate unsaved)",
