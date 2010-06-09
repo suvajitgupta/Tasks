@@ -42,20 +42,24 @@ To stop the Persevere server...
 
 ./server-stop.sh
 
-
 INITIAL PERSEVERE SETUP
 ==============================================================================
 
-1) Start the Persevere server (see above).
-
-2) Run a script to create the first user, after which you can log into Tasks
-   and use the User Manager GUI:
+After starting the Persevere server (see above), run a script to create the
+first user (after which you can log into Tasks and use the User Manager GUI):
 
 ./user-add.sh 'System Admin' 'SA' 'Manager' localhost:8088
 (enter/reenter password and remember it!)
 
 ./user-add.sh 'Guest User' 'guest' 'Guest' localhost:8088
 (press Enter twice to create a blank password)
+
+ADMINISTERING PERSEVERE
+==============================================================================
+
+Navigate to the following URL to directly manipulate Persevere data:
+
+http://localhost:8088/tasks-server/explorer.html
 
 
 RUNNING TASKS
@@ -78,6 +82,17 @@ http://localhost:4400/tasks
 
 apps/tasks/tests/data/import_data.txt
 
+
+GOOGLE APP ENGINE (GAE) DEPLOYMENT (Fast Path)
+==============================================================================
+
+1.) Run the following command from inside Tasks' root directory
+	> python tasks.py setup <app identifier> <build indetifier>
+	
+	-- where <app identifier> is your GAE application identifier (i.e. tasks-demo)
+	-- and <build identifier> is you build name or number (i.e. beta1)
+	
+2.) Then follow steps 8 & 9 above in the GOOGLE APP ENGINE DEPLOYMENT
 
 GOOGLE APP ENGINE (GAE) DEPLOYMENT
 ==============================================================================
@@ -120,17 +135,6 @@ Make newly created user a Manager using GAE 'Dashboard' button at top right:
 	Select 'User' table from select field view
 	Click id of user and change 'role' to '_Manager'
 Login to Tasks now and start adding projects/tasks/users...
-
-GOOGLE APP ENGINE (GAE) DEPLOYMENT (Fast Path)
-==============================================================================
-
-1.) Run the following command from inside Tasks' root directory
-	> python tasks.py setup <app identifier> <build indetifier>
-	
-	-- where <app identifier> is your GAE application identifier (i.e. tasks-demo)
-	-- and <build identifier> is you build name or number (i.e. beta1)
-	
-2.) Then follow steps 8 & 9 above in the GOOGLE APP ENGINE DEPLOYMENT
 
 
 TASKS OVERVIEW
@@ -206,11 +210,3 @@ The icons are licensed under a Creative Commons Attribution 3.0 license.
 The color indicators on the filter icon, as well as numerous other icons in Tasks:
 Silk icon set 1.3
 Mark James - http://www.famfamfam.com/lab/icons/silk/
-
-
-PERSEVERE ADMINISTRATION
-==============================================================================
-
-1) Navigate to the following URL to directly manipulate Persevere data:
-
-http://localhost:8088/tasks-server/explorer.html
