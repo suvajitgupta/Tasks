@@ -312,18 +312,20 @@ CoreTasks.Project.mixin(/** @scope CoreTasks.Project */ {
     var projectTimeLeft = null;
     
     var matches = line.match(/\{/g);
-    if(matches === null || matches.length === 1) {
-      var projectTimeLeftMatches = /\{(\d+\.\d+|\d+)(|d|h)\}/.exec(line);
-      if(projectTimeLeftMatches) {
-        projectTimeLeft = projectTimeLeftMatches[1];
-        if(projectTimeLeftMatches[2]) projectTimeLeft += projectTimeLeftMatches[2]; // append provided time unit
+    if(matches !== null) {
+      if(matches.length === 1) {
+        var projectTimeLeftMatches = /\{(\d+\.\d+|\d+)(|d|h)\}/.exec(line);
+        if(projectTimeLeftMatches) {
+          projectTimeLeft = projectTimeLeftMatches[1];
+          if(projectTimeLeftMatches[2]) projectTimeLeft += projectTimeLeftMatches[2]; // append provided time unit
+        }
+        else {
+          console.warn('Project Parsing Error - illegal timeLeft');
+        }
       }
       else {
-        console.warn('Project Parsing Error - illegal timeLeft');
+        console.warn('Project Parsing Error - multiple timeLefts illegal');
       }
-    }
-    else {
-      console.warn('Project Parsing Error - multiple timeLefts illegal');
     }
     
     return projectTimeLeft;
