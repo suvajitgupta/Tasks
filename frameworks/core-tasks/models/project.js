@@ -210,7 +210,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
     var hasTasks = this.getPath('tasks.length') > 0;
     if(CoreTasks.isSystemProject(this)) return hasTasks? 'system-project-icon' : 'empty-system-project-icon';
     return hasTasks? 'project-icon' : 'empty-project-icon';
-  }.property('description'),
+  }.property('tasks'),
 
   /**
    * Export a project's attributes.
