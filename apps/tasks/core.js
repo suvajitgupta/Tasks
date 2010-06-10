@@ -13,6 +13,17 @@
 /*globals Tasks sc_require */
 sc_require('statechart');
 
+(function() {
+  console.log('running hack');
+  // HACK
+  if (SC.Binding.logicalAnd) {
+    SC.Binding.and = SC.Binding.logicalAnd;
+  }
+  else if (SC.Binding.and) {
+    SC.Binding.logicalAnd = SC.Binding.and;
+  }
+})();
+
 Tasks = SC.Object.create(SC.Statechart,
   /** @scope Tasks.prototype */ {
 
