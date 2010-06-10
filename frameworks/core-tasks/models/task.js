@@ -513,6 +513,9 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
         taskEffort = taskEffortMatches[1];
         if(taskEffortMatches[2]) taskEffort += taskEffortMatches[2];
       }
+      else {
+        console.warn('Task Parsing Error - illegal effort');
+      }
     }
     else {
       console.warn('Task Parsing Error - multiple efforts illegal');

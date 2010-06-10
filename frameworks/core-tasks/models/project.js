@@ -318,6 +318,9 @@ CoreTasks.Project.mixin(/** @scope CoreTasks.Project */ {
         projectTimeLeft = projectTimeLeftMatches[1];
         if(projectTimeLeftMatches[2]) projectTimeLeft += projectTimeLeftMatches[2]; // append provided time unit
       }
+      else {
+        console.warn('Project Parsing Error - illegal timeLeft');
+      }
     }
     else {
       console.warn('Project Parsing Error - multiple timeLefts illegal');
