@@ -12,6 +12,20 @@ sc_require('mixins/localized_label');
   @author Suvajit Gupta
 */
 
+// TODO: [SG] Move to project model as a computed property
+var TasksProjectHelper = SC.Object.create({
+  
+  timeLeftMode: true,
+
+  targetDateMode: function(key, value) {
+      // QUESTION: why is this not firing when timeLeftMode changes?
+      console.log('DEBUG: timeLeftMode: ' + this.get('timeLeftMode'));
+      if (value !== undefined) this.set('timeLeftMode', !value);
+      else value = !this.get('timeLeftMode');
+      return value;
+    }.property('timeLeftMode')
+});
+
 Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
 /** @scope Tasks.ProjectItemView.prototype */ {
   
@@ -53,6 +67,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
   popupEditor: function() {
     var layer = this.get('layer');
     var that = this;
+    
     this._editorPane = SC.PickerPane.create({
       
       layout: { width: 740, height: 265 },
@@ -76,7 +91,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
         var content = that.get('content');
         var cv = that._editorPane.get('contentView');
         content.setIfChanged('displayName', cv.getPath('nameField.value'));
-        content.setIfChanged('timeLeft', cv.getPath('timeLeftField.value'));
+        content.setIfChanged('timeLeftValue', cv.getPath('timeLeftField.value'));
         content.setIfChanged('description',  cv.getPath('descriptionField.value'));
         if(Tasks.sourcesRedrawNeeded) Tasks.projectsController.showSources();
         // If timeLeft has changed, recalculate load balancing
@@ -86,7 +101,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       
       contentView: SC.View.design({
         layout: { left: 0, right: 0, top: 0, bottom: 0},
-        childViews: 'nameLabel nameField  statusLabel statusField targetDateTimeLeftRadiobuttons targetDateField timeLeftField timeLeftHelpLabel descriptionLabel descriptionField createdAtLabel updatedAtLabel'.w(),
+        childViews: 'nameLabel nameField  statusLabel statusField targetDateTimeLeftRadiobuttons timeLeftField timeLeftHelpLabel targetDateField descriptionLabel descriptionField createdAtLabel updatedAtLabel'.w(),
       
         nameLabel: SC.LabelView.design({
           layout: { top: 6, left: 10, height: 24, width: 45 },
@@ -116,30 +131,31 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
         }),
 
         targetDateTimeLeftRadiobuttons: SC.RadioView.design({
-          layout: { top: 40, left: 150, height: 40, width: 150 },
+          layout: { top: 40, left: 150, height: 40, width: 110 },
           layoutDirection: SC.LAYOUT_VERTICAL,
           items: [
-            { title: "_TargetDate:".loc(), value: 1 },
-            { title: "_TimeLeft:".loc(), value: 2 }
+            { title: "_TimeLeft:".loc(), value: true },
+            { title: "_TargetDate:".loc(), value: false }
           ],
           itemTitleKey: 'title',
           itemValueKey: 'value',
-          value: 1
-        }),
-        targetDateField: SCUI.DatePickerView.design({
-          layout: { top: 35, left: 250, width: 125, height: 24 },
-          date: SC.DateTime.create()
+          valueBinding: 'TasksProjectHelper.timeLeftMode'
         }),
         timeLeftField: SC.TextFieldView.design({
-          layout: { top: 60, left: 250, width: 125, height: 24 },
-          isEnabledBinding: 'CoreTasks.permissions.canUpdateProject',
+          layout: { top: 35, left: 250, width: 125, height: 24 },
+          isEnabledBinding: SC.Binding.logicalAnd('CoreTasks.permissions.canUpdateProject', 'TasksProjectHelper.timeLeftMode'),
           value: that.getPath('content.timeLeft')
         }),
         timeLeftHelpLabel: SC.LabelView.design({
-          layout: { top: 66, left: 380, height: 20, right: 10 },
+          layout: { top: 40, left: 380, height: 20, right: 10 },
           escapeHTML: NO,
           classNames: [ 'onscreen-help'],
           value: "_TimeLeftOnscreenHelp".loc()
+        }),
+        targetDateField: SCUI.DatePickerView.design({
+          layout: { top: 60, left: 250, width: 125, height: 24 },
+          isEnabledBinding: SC.Binding.logicalAnd('CoreTasks.permissions.canUpdateProject', 'TasksProjectHelper.targetDateMode'),
+          date: SC.DateTime.create()
         }),
 
         descriptionLabel: SC.LabelView.design({

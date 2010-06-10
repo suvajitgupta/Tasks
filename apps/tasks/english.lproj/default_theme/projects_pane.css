@@ -194,6 +194,7 @@
 .scui-datepicker-none {
   border: 1px solid #ccc;
   -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
   font-size: 11px;
   line-height: 18px;
 }
@@ -209,3 +210,8 @@
   height: 16px !important;
   background: static_url('images/calendar.png') no-repeat;
 }
+
+.calendar-icon.disabled {
+  opacity: 0.5;
+}
+
