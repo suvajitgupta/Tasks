@@ -194,7 +194,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 Tasks.EXPORT_LEGEND = '<input type=checkbox onclick="toggleDescriptions()"/><span class="description">&nbsp;Description&nbsp;</span>\n' +
 '<span class="legend">\n<strong>PRIORITY:</strong> <span class="high">High</span> <span class="medium">Medium</span> <span class="low">Low</span>\n' +
 '&nbsp;&nbsp;&nbsp;<strong>STATUS:</strong> <span class="planned">Planned</span> <span class="active">Active</span> <span class="done">Done</span> <span class="risky">Risky</span>\n' +
-'&nbsp;&nbsp;&nbsp;<strong>VALIDATION:</strong> <span class="untested">Untested</span> <span class="passed">Passed</span> <span class="failed">Failed</span></span><br>\n';
+'&nbsp;&nbsp;&nbsp;<strong>VALIDATION:</strong> <span class="untested">Untested</span> <span class="passed">Passed</span> <span class="failed">Failed</span></span><br><br>\n';
 
 
 /** @static
