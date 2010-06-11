@@ -114,8 +114,10 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   popupEditor: function() {
     var layer = this.get('layer');
     var that = this;
-    this._editorPane = SC.PickerPane.create({
+    this._editorPane = SCUI.ResizablePickerPane.create({
       
+      minWidth: 700,
+      minHeight: 250,
       layout: { width: 740, height: 330 },
       
       // Avoid popup panel coming up on other items while it is up already
@@ -178,12 +180,12 @@ Tasks.TaskItemView = SC.ListItemView.extend(
                   
         // TODO: [SG] Beta: write custom view so that task priority/status/validation styles can be displayed in popup editors
         priorityLabel: SC.LabelView.design({
-          layout: { top: 40, left: 175, height: 24, width: 55 },
+          layout: { top: 40, left: 165, height: 24, width: 55 },
           textAlign: SC.ALIGN_RIGHT,
           value: "_Priority".loc()
         }),
         priorityField: SC.SelectButtonView.design({
-          layout: { top: 38, left: 235, height: 24, width: 125 },
+          layout: { top: 38, left: 225, height: 24, width: 125 },
           classNames: ['square'],
           localize: YES,
           isEnabledBinding: 'Tasks.tasksController.isEditable',
@@ -195,12 +197,12 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         }),
                   
         statusLabel: SC.LabelView.design({
-          layout: { top: 40, left: 360, height: 24, width: 50 },
+          layout: { top: 40, left: 340, height: 24, width: 50 },
           textAlign: SC.ALIGN_RIGHT,
           value: "_Status".loc()
         }),
         statusField: SC.SelectButtonView.design({
-          layout: { top: 38, left: 415, height: 24, width: 125 },
+          layout: { top: 38, left: 395, height: 24, width: 125 },
           classNames: ['square'],
           localize: YES,
           isEnabledBinding: 'Tasks.tasksController.isEditable',
@@ -213,13 +215,13 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         }),
 
         validationLabel: SC.LabelView.design({
-          layout: { top: 40, left: 555, height: 24, width: 70 },
+          layout: { top: 40, left: 515, height: 24, width: 70 },
           textAlign: SC.ALIGN_RIGHT,
           isVisibleBinding: 'Tasks.softwareMode',
           value: "_Validation".loc()
         }),
         validationField: SC.SelectButtonView.design({
-          layout: { top: 38, left: 630, height: 24, width: 125 },
+          layout: { top: 38, left: 592, height: 24, width: 125 },
           classNames: ['square'],
           localize: YES,
           isVisibleBinding: 'Tasks.softwareMode',
@@ -305,13 +307,13 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         }),
         
         createdAtLabel: SC.LabelView.design({
-          layout: { left:10, bottom: 5, height: 17, width: 250 },
+          layout: { left: 20, bottom: 5, height: 17, width: 250 },
           classNames: [ 'date-time'],
           textAlign: SC.ALIGN_LEFT,
           valueBinding: SC.binding('.content.displayCreatedAt', this)
         }),
         updatedAtLabel: SC.LabelView.design({
-          layout: { right:10, bottom: 5, height: 17, width: 250 },
+          layout: { right: 20, bottom: 5, height: 17, width: 250 },
           classNames: [ 'date-time'],
           textAlign: SC.ALIGN_RIGHT,
           valueBinding: SC.binding('.content.displayUpdatedAt', this)

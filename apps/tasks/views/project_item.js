@@ -68,8 +68,10 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     var layer = this.get('layer');
     var that = this;
     
-    this._editorPane = SC.PickerPane.create({
+    this._editorPane = SCUI.ResizablePickerPane.create({
       
+      minWidth: 700,
+      minHeight: 200,
       layout: { width: 740, height: 265 },
       _timeLeft: null,
       
@@ -173,13 +175,13 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
         }),
         
         createdAtLabel: SC.LabelView.design({
-          layout: { left:10, bottom: 5, height: 17, width: 250 },
+          layout: { left: 20, bottom: 5, height: 17, width: 250 },
           classNames: [ 'date-time'],
           textAlign: SC.ALIGN_LEFT,
           valueBinding: SC.binding('.content.displayCreatedAt', this)
         }),
         updatedAtLabel: SC.LabelView.design({
-          layout: { right:10, bottom: 5, height: 17, width: 250 },
+          layout: { right: 20, bottom: 5, height: 17, width: 250 },
           classNames: [ 'date-time'],
           textAlign: SC.ALIGN_RIGHT,
           valueBinding: SC.binding('.content.displayUpdatedAt', this)

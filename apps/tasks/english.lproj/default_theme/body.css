@@ -321,3 +321,9 @@
 .safari.mac .sc-radio-view.sc-layout-horizontal .sc-radio-button {
   margin-top: 4px;
 }
+
+.picker-resizable-handle {
+  width: 16px;
+  height: 16px;
+  background: static_url('images/lower-right-drag.png') no-repeat;
+}
