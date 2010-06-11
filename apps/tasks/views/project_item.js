@@ -101,7 +101,8 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       
       contentView: SC.View.design({
         layout: { left: 0, right: 0, top: 0, bottom: 0},
-        childViews: 'nameLabel nameField  statusLabel statusField targetDateTimeLeftRadiobuttons timeLeftField timeLeftHelpLabel targetDateField descriptionLabel descriptionField createdAtLabel updatedAtLabel'.w(),
+        childViews: 'nameLabel nameField  statusLabel statusField targetDateTimeLeftRadiobuttons timeLeftField timeLeftHelpLabel descriptionLabel descriptionField createdAtLabel updatedAtLabel'.w(),
+        // childViews: 'nameLabel nameField  statusLabel statusField targetDateTimeLeftRadiobuttons timeLeftField timeLeftHelpLabel targetDateField descriptionLabel descriptionField createdAtLabel updatedAtLabel'.w(),
       
         nameLabel: SC.LabelView.design({
           layout: { top: 6, left: 10, height: 24, width: 45 },
@@ -134,8 +135,8 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
           layout: { top: 40, left: 150, height: 40, width: 110 },
           layoutDirection: SC.LAYOUT_VERTICAL,
           items: [
-            { title: "_TimeLeft:".loc(), value: true },
-            { title: "_TargetDate:".loc(), value: false }
+            { title: "_TimeLeft:".loc(), value: true }
+            // { title: "_TargetDate:".loc(), value: false }
           ],
           itemTitleKey: 'title',
           itemValueKey: 'value',
