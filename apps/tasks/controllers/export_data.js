@@ -55,14 +55,14 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 '}\n' +
 'pre, .description {\n' +
 ' background-color: beige;\n' +
+' outline: 1px solid silver;\n' +
 '}\n' +
 'pre {\n' +
-' margin-top: -5px;\n' +
+' margin-top: -4px;\n' +
 ' margin-bottom: 8px;\n' +
 ' margin-left: ' + (Tasks.softwareMode? '115' : '70') + 'px;\n' +
 ' white-space: pre-wrap;\n' +
 ' word-wrap: break-word;\n' +
-' border: 1px solid silver;\n' +
 ' padding: 5px;\n' +
 '}\n' +
 '.titlebar {\n' +
@@ -191,10 +191,10 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 '</style>\n' +
 '</head>\n';
 
-Tasks.EXPORT_LEGEND = '<input type=checkbox onclick="toggleDescriptions()"/>Show <span class="description">Descriptions<span>\n' +
+Tasks.EXPORT_LEGEND = '<input type=checkbox onclick="toggleDescriptions()"/><span class="description">&nbsp;Description&nbsp;</span>\n' +
 '<span class="legend">\n<strong>PRIORITY:</strong> <span class="high">High</span> <span class="medium">Medium</span> <span class="low">Low</span>\n' +
 '&nbsp;&nbsp;&nbsp;<strong>STATUS:</strong> <span class="planned">Planned</span> <span class="active">Active</span> <span class="done">Done</span> <span class="risky">Risky</span>\n' +
-'&nbsp;&nbsp;&nbsp;<strong>VALIDATION:</strong> <span class="untested">Untested</span> <span class="passed">Passed</span> <span class="failed">Failed</span></span><br><br>\n';
+'&nbsp;&nbsp;&nbsp;<strong>VALIDATION:</strong> <span class="untested">Untested</span> <span class="passed">Passed</span> <span class="failed">Failed</span></span><br>\n';
 
 
 /** @static
