@@ -127,8 +127,8 @@ Tasks.mainPage = SC.Page.design({
         layout: { left: 300, centerY: 0, height: 24, width: 90 },
         classNames: ['display-modes'],
         items: [
-          { title: '', icon: 'tasks-icon', value: Tasks.DISPLAY_MODE_TASKS },
-          { title: '', icon: 'sc-icon-group-16', value: Tasks.DISPLAY_MODE_TEAM }
+          { title: '', icon: 'sc-icon-group-16', value: Tasks.DISPLAY_MODE_TEAM },
+          { title: '', icon: 'tasks-icon', value: Tasks.DISPLAY_MODE_TASKS }
         ],
         itemTitleKey: 'title',
         itemIconKey: 'icon', // disabling icons for now - appearing too cluttered
