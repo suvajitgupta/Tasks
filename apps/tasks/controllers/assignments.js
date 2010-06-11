@@ -626,6 +626,34 @@ Tasks.assignmentsController = SC.ArrayController.create(
     this._timer = this.invokeLater(this._contentHasChanged, 500);
   }.observes('searchFilter'),
   
+  assignmentsSummary: function() {
+    
+    var ret = '';
+    
+    var assigneesCount = 0;
+    var assignmentNodes = this.getPath('assignedTasks.treeItemChildren');
+    if(assignmentNodes) assigneesCount = assignmentNodes.get('length');
+    ret += (assigneesCount + "_assignees".loc());
+
+    var tasksCount = 0;
+    var redFlags = 0;
+    for(var i=0; i < assigneesCount; i++) {
+      var assignmentNode = assignmentNodes.objectAt(i);
+      tasksCount += assignmentNode.get('tasksCount');
+      var riskyTasksCount = assignmentNode.get('riskyTasksCount');
+      var failedTasksCount = assignmentNode.get('failedTasksCount');
+      if(riskyTasksCount > 0 || failedTasksCount > 0) redFlags++;
+    }
+    if(this.get('displayMode') === Tasks.DISPLAY_MODE_TASKS) {
+      ret += tasksCount + "_tasks".loc();
+    }
+    else { // this.displayMode === Tasks.DISPLAY_MODE_TEAM
+      ret += redFlags + "_redFlags".loc();
+    }
+    
+    return ret;
+
+  }.property('assignedTasks'),
   
   statistics: '',
   

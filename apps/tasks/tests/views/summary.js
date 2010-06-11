@@ -10,12 +10,6 @@
 sc_require('core');
 sc_require('views/summary'); 
 
-var emptyTree = [];
-var sampleTree = SC.Object.create({ treeItemChildren: [
-  SC.Object.create({ tasksCount: 5, riskyTasksCount: 2 }),
-  SC.Object.create({ tasksCount: 4, failedTasksCount: 1 }),
-  SC.Object.create({ tasksCount: 3 })
-] });
 
 var noSelection = SC.Object.create({ length: 0 });
 var singleSelection = SC.Object.create({ length: 1 });
@@ -26,22 +20,19 @@ var pane = SC.ControlTestPane.design()
   })
   .add('empty', Tasks.SummaryView, {
     layout: { top: 0, height: 16, width: 250, left: 0 },
-    displayMode: Tasks.DISPLAY_MODE_TASKS,
-    tasksTree: emptyTree,
+    assignmentsSummary: "0 assignees and 0 tasks",
     projectsSelection: noSelection,
     tasksSelection: noSelection
   })
   .add('tasks', Tasks.SummaryView, {
     layout: { top: 0, height: 16, width: 250, left: 0 },
-    displayMode: Tasks.DISPLAY_MODE_TASKS,
-    tasksTree: sampleTree,
+    assignmentsSummary: "3 assignees and 12 tasks",
     projectsSelection: singleSelection,
     tasksSelection: singleSelection
   })
   .add('team', Tasks.SummaryView, {
     layout: { top: 0, height: 16, width: 250, left: 0 },
-    displayMode: Tasks.DISPLAY_MODE_TEAM,
-    tasksTree: sampleTree,
+    assignmentsSummary: "3 assignees and 2 red flags",
     projectsSelection: singleSelection,
     tasksSelection: singleSelection
   });

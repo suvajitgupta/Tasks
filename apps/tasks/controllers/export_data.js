@@ -53,15 +53,29 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' border-bottom-style: dotted;\n' +
 ' padding-bottom: 2px;\n' +
 '}\n' +
+'pre, .description {\n' +
+' background-color: beige;\n' +
+'}\n' +
 'pre {\n' +
 ' margin-top: -5px;\n' +
 ' margin-bottom: 8px;\n' +
 ' margin-left: ' + (Tasks.softwareMode? '115' : '70') + 'px;\n' +
-' background-color: beige;\n' +
 ' white-space: pre-wrap;\n' +
 ' word-wrap: break-word;\n' +
 ' border: 1px solid silver;\n' +
 ' padding: 5px;\n' +
+'}\n' +
+'.titlebar {\n' +
+' font-size: 14px;\n' +
+' font-weight: bold;\n' +
+'}\n' +
+'.legend {\n' +
+' position: absolute;\n' +
+' left: 150px;\n' +
+' right: 150px;\n' +
+' text-align: center;\n' +
+' line-height: 1.5;\n' +
+' margin-top: 2px;\n' +
 '}\n' +
 '.id {\n' +
 ' line-height: 1.5;\n' +
@@ -172,14 +186,12 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' background-color: #FF6 !important;\n' +
 '}\n' +
 '</style>\n' +
-'</head>\n' +
-'<body>\n' +
-'<center>\n' +
-'<strong>PRIORITY:</strong> <span class="high">High</span> <span class="medium">Medium</span> <span class="low">Low</span>\n' +
+'</head>\n';
+
+Tasks.EXPORT_LEGEND = '<hr><input type=checkbox onclick="toggleDescriptions()"/>Show <span class="description">Descriptions<span>\n' +
+'<span class="legend">\n<strong>PRIORITY:</strong> <span class="high">High</span> <span class="medium">Medium</span> <span class="low">Low</span>\n' +
 '&nbsp;&nbsp;&nbsp;<strong>STATUS:</strong> <span class="planned">Planned</span> <span class="active">Active</span> <span class="done">Done</span> <span class="risky">Risky</span>\n' +
-'&nbsp;&nbsp;&nbsp;<strong>VALIDATION:</strong> <span class="untested">Untested</span> <span class="passed">Passed</span> <span class="failed">Failed</span>\n' +
-'</center><hr>\n' +
-'<input type=checkbox onclick="toggleDescriptions()"/>Show Descriptions\n';
+'&nbsp;&nbsp;&nbsp;<strong>VALIDATION:</strong> <span class="untested">Untested</span> <span class="passed">Passed</span> <span class="failed">Failed</span></span><hr><br>\n';
 
 
 /** @static
@@ -351,14 +363,11 @@ Tasks.exportDataController = SC.ObjectController.create(
     }
     
     var ret = '';
-    if(format === 'HTML') ret += '<html>\n' + Tasks.EXPORT_HEADER;
-    
-    if(format === 'HTML') ret += '<span class="time">';
-    else ret += '# ' + "_Tasks".loc() + ' ' + "_Export".loc() + ' ';
-    ret += new Date().format('hh:mm a MMM dd, yyyy');
-    if(format === 'HTML') ret += '</span>\n';
-    else ret += '\n';
-    ret += '\n';
+    if(format === 'HTML') ret += '<html>\n' + Tasks.EXPORT_HEADER + '\n<body>\n<center class="titlebar">';
+    else ret += '# ';
+    ret += "_Tasks".loc() + ' ' + "_Export".loc() + ' (' + new Date().format('hh:mm a MMM dd, yyyy') + '): ' + Tasks.getPath('assignmentsController.assignmentsSummary');
+    if(format === 'HTML') ret += '</center>\n' + Tasks.EXPORT_LEGEND;
+    ret += '\n\n';
     
     if (projectsToExport[0] === CoreTasks.get('allTasksProject') && !Tasks.assignmentsController.hasFiltering()) {
       ret += this._exportAllData(format);

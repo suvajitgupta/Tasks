@@ -442,8 +442,7 @@ Tasks.mainPage = SC.Page.design({
         layout: { centerY: 0, height: 16, centerX: 20, width: 450 },
         classNames: ['bottom-bar-label'],
         textAlign: SC.ALIGN_CENTER,
-        displayModeBinding: SC.Binding.oneWay('Tasks.assignmentsController.displayMode'),
-        tasksTreeBinding: SC.Binding.oneWay('Tasks.tasksController.content'),
+        assignmentsSummaryBinding: SC.Binding.oneWay('Tasks.assignmentsController.assignmentsSummary'),
         projectsSelectionBinding: SC.Binding.oneWay('Tasks.projectsController.selection'),
         tasksSelectionBinding: SC.Binding.oneWay('Tasks.tasksController.selection')
       }),
