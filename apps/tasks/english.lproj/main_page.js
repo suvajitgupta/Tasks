@@ -99,7 +99,7 @@ Tasks.mainPage = SC.Page.design({
    tasksList:      SC.outlet('masterDetailView.detailView.contentView.tasksList.contentView'),
    serverMessage:  SC.outlet('masterDetailView.detailView.contentView.tasksBottomBar.serverMessageView'),
 
-   layout: { left: 0, right: 0, top: 0, bottom: 0, minWidth: 1024, minHeight: 640 },
+   layout: { left: 0, right: 0, top: 0, bottom: 0 },
    childViews: 'masterDetailView'.w(),
 
    masterDetailView: SC.MasterDetailView.design({
