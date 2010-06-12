@@ -14,8 +14,7 @@
 sc_require('statechart');
 
 (function() {
-  console.log('running hack');
-  // HACK
+  // FIXME: [SG] remove when switching to SC TOT where logicalAnd() has been replaced with and()
   if (SC.Binding.logicalAnd) {
     SC.Binding.and = SC.Binding.logicalAnd;
   }
