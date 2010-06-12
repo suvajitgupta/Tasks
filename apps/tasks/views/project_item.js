@@ -18,12 +18,11 @@ var TasksProjectHelper = SC.Object.create({
   timeLeftMode: true,
 
   targetDateMode: function(key, value) {
-      // QUESTION: why is this not firing when timeLeftMode changes?
-      console.log('DEBUG: timeLeftMode: ' + this.get('timeLeftMode'));
-      if (value !== undefined) this.set('timeLeftMode', !value);
-      else value = !this.get('timeLeftMode');
-      return value;
-    }.property('timeLeftMode')
+    if (value !== undefined) this.set('timeLeftMode', !value);
+    else value = !this.get('timeLeftMode');
+    return value;
+  }.property('timeLeftMode')
+    
 });
 
 Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
