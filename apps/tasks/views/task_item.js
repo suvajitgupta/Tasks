@@ -12,6 +12,8 @@
   @author Joshua Holt
 */
 
+Tasks.TASK_EDITOR = 2; // used to indicate which editor is popped up
+
 Tasks.TaskItemView = SC.ListItemView.extend(
 /** @scope Tasks.TaskItemView.prototype */ {
   
@@ -123,7 +125,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       // Avoid popup panel coming up on other items while it is up already
       popup: function() {
         sc_super();
-        Tasks.editorPoppedUp = true;
+        Tasks.editorPoppedUp = Tasks.TASK_EDITOR;
         // TODO: [SG] Beta: fix issue with list selection not changing by the time the popup editor name field is selected
         var name = that.getPath('content.name');
         var copyPattern = new RegExp("_Copy".loc() + '$');
@@ -133,7 +135,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       },
       remove: function() {
         sc_super();
-        Tasks.editorPoppedUp = false;
+        Tasks.editorPoppedUp = null;
         var content = that.get('content');
         var cv = that._editorPane.get('contentView');
         content.setIfChanged('displayName', cv.getPath('nameField.value'));

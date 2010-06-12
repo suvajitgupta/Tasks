@@ -25,6 +25,8 @@ var TasksProjectHelper = SC.Object.create({
     
 });
 
+Tasks.PROJECT_EDITOR = 1; // used to indicate which editor is popped up
+
 Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
 /** @scope Tasks.ProjectItemView.prototype */ {
   
@@ -78,7 +80,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       popup: function() {
         if(that.get('isSystemProject')) return;
         sc_super();
-        Tasks.editorPoppedUp = true;
+        Tasks.editorPoppedUp = Tasks.PROJECT_EDITOR;
         this._timeLeft = that.getPath('content.timeLeft');
         var name = that.getPath('content.name');
         var copyPattern = new RegExp("_Copy".loc() + '$');
@@ -88,7 +90,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       },
       remove: function() {
         sc_super();
-        Tasks.editorPoppedUp = false;
+        Tasks.editorPoppedUp = null;
         var content = that.get('content');
         var cv = that._editorPane.get('contentView');
         content.setIfChanged('displayName', cv.getPath('nameField.value'));

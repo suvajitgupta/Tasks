@@ -8,7 +8,7 @@ sc_require('core_routes');
 
 function main() { Tasks.main(); }
 
-Tasks.editorPoppedUp = false;
+Tasks.editorPoppedUp = null;
 Tasks.assignmentsRedrawNeeded = false;
 Tasks.sourcesRedrawNeeded = false;
 
