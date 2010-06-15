@@ -31,7 +31,7 @@ Tasks.loginPage = SC.Page.create({
       }),
       
       guestSignupButton: document.title.match(/Dev|Demo|SproutCore|Greenhouse/)? SC.ButtonView.design({
-        layout: { top: 20, right: 0, height: 24, width: 145 },
+        layout: { top: 20, right: 0, height: 23, width: 145 },
         icon: 'user-role-guest',
         title: "_GuestSignup".loc() + '...',
         target: 'Tasks',
@@ -52,7 +52,7 @@ Tasks.loginPage = SC.Page.create({
       }),
       
       loginErrorMessage: SC.LabelView.design({
-        layout: { top: 195, left: 200, width: 300, height: 20 },
+        layout: { top: 175, left: 70, width: 220, height: 20 },
         classNames: ['error-message'],
         value: "_LoginError".loc(),
         isVisibleBinding: SC.Binding.oneWay('Tasks.loginController.loginError').bool()

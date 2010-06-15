@@ -41,6 +41,15 @@
   padding: 0 6px;
 }
 
+.login-body .sc-text-field-view.focus .sc-hint {
+  color: #BBB;
+  display: inline;
+}
+
+.login-body .sc-text-field-view.focus.not-empty .sc-hint {
+  display: none;
+}
+
 .mozilla .login-body .sc-text-field-view .border {
   -moz-appearance: none;
 }
@@ -59,7 +68,7 @@
 }
 
 .error-message {
-	color: red !important;
+	color: #F66 !important;
 }
 
 /* Default Panel Styling Overrides */
