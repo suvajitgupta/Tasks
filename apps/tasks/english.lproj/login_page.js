@@ -16,64 +16,52 @@ sc_require('core');
 Tasks.loginPage = SC.Page.create({
   
   panel: SC.PanelPane.create({
-    layout: { centerX: 0, centerY: 0, height: 296, width: 843 },
+    layout: { top: 0, bottom: 0, left: 0, right: 0 },
     classNames: ['login-page'],
     
     contentView: SC.View.design({
       
-      layout: { top: 0, bottom: 0, left: 0, right: 0 },
+      layout: { centerX: 0, centerY: 0, width: 390, height: 196 },
       classNames: ['login-body'],
-      childViews: 'loginPromptLabel loginNameLabel loginNameField passwordLabel passwordField loginErrorMessage loginButton guestSignupButton'.w(),
+      childViews: 'logo loginNameField passwordField loginErrorMessage loginButton guestSignupButton'.w(),
+      
+      logo: SC.View.design({
+        layout: { top: 0, left: 0, width: 153, height: 56 },
+        classNames: ['logo-l']
+      }),
       
       guestSignupButton: document.title.match(/Dev|Demo|SproutCore|Greenhouse/)? SC.ButtonView.design({
-        layout: { top: 64, left: 520, height: 24, width: 145 },
+        layout: { top: 20, right: 0, height: 24, width: 145 },
         icon: 'user-role-guest',
         title: "_GuestSignup".loc() + '...',
         target: 'Tasks',
         action: 'launchSignupPane'
       }) : SC.View.design({ layout: { top: 70, left: 520, height: 1, width: 1 } }),
       
-      loginPromptLabel: SC.LabelView.design({
-        layout: { top: 65, left: 255, width: 250, height: 30 },
-        classNames: ['login-prompt'],
-        value: "_LoginPrompt".loc() 
-      }),
-      
-      loginNameLabel: SC.LabelView.design({
-        layout: { top: 115, left: 200, width: 125, height: 18 },
-        classNames: ['login-label'],
-        textAlign: SC.ALIGN_RIGHT,
-        value: "_LoginName:".loc() 
-      }),
       loginNameField: SC.TextFieldView.design({
-        layout: { top: 113, left: 344, width: 246, height: 26 },
-        classNames: ['login-field'],
+        layout: { top: 80, left: 60, right: 0, height: 32 },
+        hint: '_LoginNameHint'.loc(),
         valueBinding: 'Tasks.loginController.loginName'
       }),
       
-      passwordLabel: SC.LabelView.design({
-        layout: { top: 158, left: 200, width: 125, height: 18 },
-        classNames: ['login-label'],
-        textAlign: SC.ALIGN_RIGHT,
-        value: "_Password:".loc() 
-      }),
       passwordField: SC.TextFieldView.design({
-        layout: { top: 154, left: 344, width: 246, height: 26 },
+        layout: { top: 126, left: 60, right: 0, height: 32 },
         isPassword: YES,
-        classNames: ['login-field'],
+        hint: '_PasswordHint'.loc(),
         valueBinding: 'Tasks.loginController.password'
       }),
       
       loginErrorMessage: SC.LabelView.design({
-        layout: { top: 195, left: 200, width: 250, height: 20 },
+        layout: { top: 195, left: 200, width: 300, height: 20 },
         classNames: ['error-message'],
         value: "_LoginError".loc(),
         isVisibleBinding: SC.Binding.oneWay('Tasks.loginController.loginError').bool()
       }),
       
       loginButton: SC.ButtonView.design({
-        layout: { top: 195, left: 585, width: 80, height: 24 },
+        layout: { bottom: 0, right: 0, width: 80, height: 24 },
         titleMinWidth: 0,
+        className: ['login-button'],
         isEnabledBinding: SC.Binding.oneWay('Tasks.loginController.loginName').bool(),
         theme: 'capsule',
         isDefault: YES,

@@ -7,43 +7,49 @@
 */
 
 .login-page {
-  background: static_url('images/login-bg.png') no-repeat;
+  background: static_url('images/app-bg.png');
 }
 
-.login-page .top-left-edge {
-  display: none;
+.logo-l {
+  background: static_url('images/logo-l.png') no-repeat;
 }
 
-.login-page .top-edge {
-  display: none;
+/* Custom Text Fields */
+.login-body .sc-text-field-view {
+  border: 1px solid #000;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  background: #f8f8f8;
+  box-shadow: inset 0 3px 5px rgba(0,0,0,.4);
+  -moz-box-shadow: inset 0 3px 5px rgba(0,0,0,.4);
+  -webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,.4);
+  outline: 0 !important;
 }
 
-.login-page .top-right-edge {
-  display: none;
+.login-body .sc-text-field-view.focus {
+  border: 2px solid #00a8ff;
+  margin-top: -1px;
+  margin-left: -1px;
+  outline: 0 !important;
 }
 
-.login-page .right-edge {
-  display: none;
+.login-body .sc-text-field-view .sc-hint {
+  font-size: 16px;
+  color: #858585;
+  line-height: 28px;
+  padding: 0 6px;
 }
 
-.login-page .bottom-right-edge {
-  display: none;
+.mozilla .login-body .sc-text-field-view .border {
+  -moz-appearance: none;
 }
 
-.login-page .bottom-edge {
-  display: none;
-}
-
-.login-page .bottom-left-edge {
-  display: none;
-}
-
-.login-page .left-edge {
-  display: none;
-}
-
-.login-body {
-  background: none !important;
+.login-body .sc-text-field-view input {
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 32px;
+  padding: 0 6px;
 }
 
 .sc-view .login-prompt {
@@ -52,49 +58,35 @@
   color: #444 !important;
 }
 
-.sc-view .login-label {
-  font-size: 11pt;
-  font-weight: bold;
-  color: #444 !important;
-}
-
-.sc-view .login-field {
-  background: none;
-}
-
-.safari .sc-view .login-field.focus,
-.mozilla .sc-view .login-field.focus,
-.msie .sc-view .login-field.focus {
-  outline: 0;
-}
-
-.safari .login-field .border {
-  -webkit-appearance: none;
-}
-
-.mozilla .sc-view .login-field .border {
-  -moz-appearance: none;
-}
-
-.msie .sc-view .login-field .border {
-  border: 0;
-}
-
-.sc-view .login-field .padding {
-  left: 0;
-  right: 0;
-}
-
-.login-field input {
-  font-size: 16px;
-  font-weight: bold;
-  color: #444 !important;
-}
-
-.msie .login-field input {
-  line-height: 26px;
-}
-
 .error-message {
 	color: red !important;
+}
+
+/* Default Panel Styling Overrides */
+.login-page .login-body {
+  background: none !important;
+}
+.login-page .top-left-edge {
+  display: none;
+}
+.login-page .top-edge {
+  display: none;
+}
+.login-page .top-right-edge {
+  display: none;
+}
+.login-page .right-edge {
+  display: none;
+}
+.login-page .bottom-right-edge {
+  display: none;
+}
+.login-page .bottom-edge {
+  display: none;
+}
+.login-page .bottom-left-edge {
+  display: none;
+}
+.login-page .left-edge {
+  display: none;
 }
