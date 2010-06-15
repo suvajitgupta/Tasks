@@ -61,9 +61,8 @@ Tasks.loginPage = SC.Page.create({
       loginButton: SC.ButtonView.design({
         layout: { bottom: 0, right: 0, width: 80, height: 24 },
         titleMinWidth: 0,
-        className: ['login-button square'],
+        classNames: ['login-button'],
         isEnabledBinding: SC.Binding.oneWay('Tasks.loginController.loginName').bool(),
-        theme: 'capsule',
         isDefault: YES,
         title: "_Login".loc(),
         target: 'Tasks.loginController',
