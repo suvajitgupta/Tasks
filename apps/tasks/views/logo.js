@@ -17,13 +17,13 @@ Tasks.LogoView = SC.View.extend(
   childViews: 'logoIcon versionLabel'.w(),
   
   logoIcon: SC.LabelView.design(SCUI.ToolTip, {
-    layout: { centerY: -2, height: 24, left: 0, width: 89 },
+    layout: { centerY: 0, height: 27, left: 0, width: 71 },
     toolTip: "_Credits".loc(),
     classNames: ['tasks-logo']
   }),
 
   versionLabel: SC.LabelView.design({
-    layout: { centerY: -3, height: 11, left: 90, width: 35 },
+    layout: { centerY: -3, height: 11, left: 82, width: 35 },
     classNames: ['tasks-version'],
     value: Tasks.VERSION
   })

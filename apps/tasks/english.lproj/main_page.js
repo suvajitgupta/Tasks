@@ -99,7 +99,7 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       tasksLogo: Tasks.LogoView.design({
-        layout: { left: Tasks._wideLogo? 90 : 42, width: 145, centerY: 0, height: 24 }
+        layout: { left: Tasks._wideLogo? 98 : 50, width: 145, centerY: 0, height: 24 }
       }),
 
       actionsMenu: SC.ButtonView.design(SCUI.DropDown, {
