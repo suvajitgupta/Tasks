@@ -190,7 +190,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
           
       })
     });
-    if(this._editorPane) this._editorPane.popup(layer, SC.PICKER_POINTER);
+    if(this._editorPane) this._editorPane.popup(layer);
   },
   
   inlineEditorWillBeginEditing: function(inlineEditor) {

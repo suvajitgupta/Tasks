@@ -323,7 +323,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           
       })
     });
-    this._editorPane.popup(layer, SC.PICKER_POINTER);
+    this._editorPane.popup(layer);
   },
   
   inlineEditorWillBeginEditing: function(inlineEditor) {
