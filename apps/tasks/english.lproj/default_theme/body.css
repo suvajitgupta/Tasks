@@ -369,7 +369,9 @@ body.sc-theme {
 
 .sc-segment label {
   line-height: 32px !important;
-}.picker-resizable-handle {
+}
+
+.picker-resizable-handle {
   width: 16px;
   height: 16px;
   background: static_url('images/lower-right-drag.png') no-repeat;
