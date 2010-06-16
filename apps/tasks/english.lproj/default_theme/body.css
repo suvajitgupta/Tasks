@@ -242,6 +242,133 @@ body.sc-theme {
 
 .sc-segment label {
   line-height: 32px !important;
+}
+
+.picker-resizable-handle {
+  width: 16px;
+  height: 16px;
+  background: static_url('images/lower-right-drag.png') no-repeat;
+}
+
+/*-----------------------------------------------------------------
+ * Filter pane styles
+ */
+
+.quickfilter-label,
+.quickfilter-label .sc-button-inner,
+.quickfilter-label .sc-button-inner label {
+  font-size: 10px !important;
+  color: #FFF !important;
+  text-shadow: none !important;
+  -moz-border-radius: 15px !important;
+  -webkit-border-radius: 15px !important;
+}
+
+.quickfilter-label.active {
+  border: 1px solid #555 !important;
+}
+
+.quickfilter-label.active .sc-button-inner label {
+  text-shadow: 0 1px #BBB !important;
+}
+
+.troubled .sc-button-inner,
+.troubled .sc-button-inner label {
+  background: #C33 !important;
+}
+
+.unfinished .sc-button-inner,
+.unfinished .sc-button-inner label {
+  background: #33F !important;
+}
+
+.unvalidated .sc-button-inner,
+.unvalidated .sc-button-inner label {
+  background: #6C6 !important;
+}
+
+.completed .sc-button-inner,
+.completed .sc-button-inner label {
+  background: #363 !important;
+}
+
+.showstoppers .sc-button-inner,
+.showstoppers .sc-button-inner label {
+  background: #639 !important;
+}
+
+.all .sc-button-inner,
+.all .sc-button-inner label {
+  background: #555 !important;
+}
+
+.item-group {
+  font-size: 10px !important;
+  text-align: center !important;
+  line-height: 1.5;
+  border: 1px solid #888;
+  background: #EEE;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+
+/*-----------------------------------------------------------------
+ * Statistics pane styles
+ */
+
+.statistics-pane table {
+  border: 1px solid gray !important;
+  border-collapse: separate !important;
+  margin: 0px !important;
+}
+
+.statistics-pane td {
+  font-size: 11px !important;
+  line-height: 20px !important;
+	border: none !important;
+}
+
+.statistics-pane td img {
+  vertical-align: middle !important;
+}
+
+.statistics-pane tr.even {
+  background-color: #ddd;
+}
+
+.statistics-pane tr.odd {
+  background-color: #eee;
+}
+
+.sc-view.sc-label-view.active {
+  border: 1px solid #555 !important;
+  background-color: #AAA;
+  -moz-border-radius: 15px !important;
+  -webkit-border-radius: 15px !important;
+}
+
+.mozilla .sc-text-field-view input {
+  top:0px !important;
+}
+
+/*
+// FIXME: [SC] remove hacks to workaround bug in radiobutton styling on non-OSX platforms, can't do this for Linux
+*/
+.mozilla.windows .sc-radio-view.sc-layout-horizontal .sc-radio-button {
+  margin-top: -12px;
+}
+.chrome.windows .sc-radio-view.sc-layout-horizontal .sc-radio-button,
+.safari.windows .sc-radio-view.sc-layout-horizontal .sc-radio-button,
+.safari.mac .sc-radio-view.sc-layout-horizontal .sc-radio-button {
+  margin-top: 4px;
+}
+
+.sc-theme .sc-radio-view.sc-layout-horizontal .sc-radio-button {
+  margin-top: 4px;
+}
+
+.sc-segment label {
+  line-height: 32px !important;
 }.picker-resizable-handle {
   width: 16px;
   height: 16px;
