@@ -10,6 +10,14 @@
 /*
 
 
+/* Application Background */
+
+body.sc-theme {
+  background: static_url('images/app-bg.png') !important;
+}
+
+
+
 /*-----------------------------------------------------------------
  * Status styles
  */
@@ -154,15 +162,11 @@
 }
 
 .sc-collection-item.sel, .sc-collection-item.sel:hover {
-  background: #3366FF none repeat scroll 0 0 !important;
-}
-
-.projects-pane-inner .sc-collection-item.sel .sc-outline {
-  color: #FFF !important;
+  background: #3366FF none repeat scroll 0 0;
 }
 
 .sc-collection-item:hover {
-  background: #CCC none repeat scroll 0 0 !important;
+  background: #CCC none repeat scroll 0 0;
 }
 
 .sc-collection-item.sc-group-item:hover {

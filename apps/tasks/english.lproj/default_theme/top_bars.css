@@ -168,7 +168,7 @@
 }
 
 .title-bar {
-  background: static_url('images/default-theme-repeat-x.png') repeat-x 0 0;
+  background: static_url('images/title-bar-bg.png') repeat-x;
 }
 
 .window-title {

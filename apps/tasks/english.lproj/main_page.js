@@ -69,12 +69,12 @@ Tasks.mainPage = SC.Page.design({
     
     topBarView: SC.View.design(SC.Border, {
       
-      layout: { top: 0, left: 0, right: 0, height: 43 },
+      layout: { top: 0, left: 0, right: 0, height: 56 },
       classNames: ['title-bar'],
       childViews: 'installationLogo tasksLogo actionsMenu displayModeSegments welcomeMessageLabel filterPanelButton filterCancelButton tasksSearchField tasksSearchCancelButton'.w(),
       
       installationLogo: SC.View.design({
-        layout: { left: 4, centerY: 0, width: Tasks._wideLogo? 80: 35, height: Tasks._wideLogo? 20 : 35 },
+        layout: { left: 4, centerY: -4, width: Tasks._wideLogo? 80: 35, height: Tasks._wideLogo? 20 : 35 },
         tagName: 'img',
         render: function(context, firstTime) {
           if(document.title.match(/Dev/)) {
@@ -99,11 +99,11 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       tasksLogo: Tasks.LogoView.design({
-        layout: { left: Tasks._wideLogo? 98 : 50, width: 145, centerY: 0, height: 24 }
+        layout: { left: Tasks._wideLogo? 98 : 50, width: 145, centerY: -4, height: 27 }
       }),
 
       actionsMenu: SC.ButtonView.design(SCUI.DropDown, {
-        layout: { centerY: 0, left: 240, height: 24, width: 52 },
+        layout: { centerY: -4, left: 240, height: 24, width: 52 },
         classNames: ['image-button'],
         titleMinWidth: 0,
         hasIcon: YES,
@@ -124,7 +124,7 @@ Tasks.mainPage = SC.Page.design({
       }),
 
       displayModeSegments: SC.SegmentedView.design(SCUI.ToolTip, {
-        layout: { left: 300, centerY: 0, height: 24, width: 90 },
+        layout: { left: 300, centerY: -4, height: 24, width: 90 },
         classNames: ['display-modes'],
         items: [
           { title: '', icon: 'sc-icon-group-16', value: Tasks.DISPLAY_MODE_TEAM },
@@ -138,14 +138,14 @@ Tasks.mainPage = SC.Page.design({
       }),
 
       welcomeMessageLabel: SC.LabelView.design(SCUI.ToolTip, {
-        layout: { centerX: 55, centerY: 0, width: 200, height: 32 },
+        layout: { centerX: 55, centerY: -4, width: 200, height: 32 },
         classNames: ['welcome-message'],
         escapeHTML: NO,
         valueBinding: SC.Binding.oneWay('Tasks.mainPageHelper.welcomeMessage')
       }),
 
       filterPanelButton: SC.ButtonView.design({
-        layout: { centerY: 0, height: 24, right: 216, width: 50 },
+        layout: { centerY: -4, height: 24, right: 216, width: 50 },
         titleMinWidth: 0,
         icon: 'filter-icon',
         classNames: ['image-button'],
@@ -154,7 +154,7 @@ Tasks.mainPage = SC.Page.design({
         action: 'filterTasks'
       }),
       filterCancelButton: SC.View.design({ // Filter cancel button
-        layout: { centerY: 1, height: 12, right: 219, width: 12 },
+        layout: { centerY: -3, height: 12, right: 219, width: 12 },
         isVisible: NO,
         classNames: ['filter-cancel-icon'],
         mouseDown: function() {
@@ -165,14 +165,14 @@ Tasks.mainPage = SC.Page.design({
       }),
     
       tasksSearchField: SC.TextFieldView.design(SCUI.ToolTip, {
-        layout: { centerY: 0, height: 24, right: 5, width: 200 },
+        layout: { centerY: -4, height: 24, right: 5, width: 200 },
         classNames: ['search-bar'],
         hint: "_TasksSearchHint".loc(),
         toolTip: "_TasksSearchTooltip".loc(),
         valueBinding: 'Tasks.assignmentsController.searchFilter'
       }),
       tasksSearchCancelButton: SC.View.design({ // Tasks Search cancel button
-        layout: { centerY: 1, height: 12, right: 10, width: 12 },
+        layout: { centerY: -3, height: 12, right: 10, width: 12 },
         isVisible: NO,
         classNames: ['filter-cancel-icon'],
         mouseDown: function() {
@@ -190,7 +190,8 @@ Tasks.mainPage = SC.Page.design({
       childViews: 'projectsMasterView tasksDetailView'.w(),
       
       projectsMasterView: SC.ScrollView.design({
-        layout: { top: 0, bottom: 0, left: 0, width: 238 },
+        layout: { top: 10, bottom: 10, left: 10, width: 225 },
+        classNames: ['projects-pane'],
         hasHorizontalScroller: NO,
 
         contentView: SC.SourceListView.design({
@@ -246,7 +247,7 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       tasksDetailView: SC.ScrollView.design({
-        layout: { top: 0, bottom: 0, left: 239, right: 0 },
+        layout: { top: 10, bottom: 10, left: 246, right: 10 },
         hasHorizontalScroller: NO,
 
         contentView: SC.SourceListView.design({
