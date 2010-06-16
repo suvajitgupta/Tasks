@@ -34,9 +34,9 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
   
   _listStatuses: function() {
      var ret = [];
-     ret.push({ name: CoreTasks.STATUS_PLANNED, value: CoreTasks.STATUS_PLANNED });
-     ret.push({ name: CoreTasks.STATUS_ACTIVE, value: CoreTasks.STATUS_ACTIVE });
-     ret.push({ name: CoreTasks.STATUS_DONE, value: CoreTasks.STATUS_DONE });
+     ret.push({ name: '<span class=status-planned>' + CoreTasks.STATUS_PLANNED.loc() + '</span>', value: CoreTasks.STATUS_PLANNED });
+     ret.push({ name: '<span class=status-active>' + CoreTasks.STATUS_ACTIVE.loc() + '</span>', value: CoreTasks.STATUS_ACTIVE });
+     ret.push({ name: '<span class=status-done>' + CoreTasks.STATUS_DONE.loc() + '</span>', value: CoreTasks.STATUS_DONE });
      return ret;
   },
 

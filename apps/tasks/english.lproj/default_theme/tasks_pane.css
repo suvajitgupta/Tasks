@@ -286,7 +286,7 @@
 .task-validation-untested {
   color: black;
   background: #FFF none repeat scroll 0 0;
-	outline: 1px solid #AAA !important;
+	border: 1px solid #AAA !important;
 }
 
 .task-validation-passed, .task-validation-failed {
@@ -297,12 +297,12 @@
 
 .task-validation-passed {
   background: #363 none repeat scroll 0 0;
-	outline: 1px solid #363 !important;
+	border: 1px solid #363 !important;
 }
 
 .task-validation-failed {
   background: #C33 none repeat scroll 0 0;
-	outline: 1px solid #C33 !important;
+	border: 1px solid #C33 !important;
 }
 
 

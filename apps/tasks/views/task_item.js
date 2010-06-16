@@ -31,26 +31,26 @@ Tasks.TaskItemView = SC.ListItemView.extend(
 
   _listPriorities: function() {
      var ret = [];
-     ret.push({ name: CoreTasks.TASK_PRIORITY_HIGH, value: CoreTasks.TASK_PRIORITY_HIGH });
-     ret.push({ name: CoreTasks.TASK_PRIORITY_MEDIUM, value: CoreTasks.TASK_PRIORITY_MEDIUM });
-     ret.push({ name: CoreTasks.TASK_PRIORITY_LOW, value: CoreTasks.TASK_PRIORITY_LOW });
+     ret.push({ name: '<span class=task-priority-high>' + CoreTasks.TASK_PRIORITY_HIGH.loc() + '</span>', value: CoreTasks.TASK_PRIORITY_HIGH });
+     ret.push({ name: '<span class=task-priority-medium>' + CoreTasks.TASK_PRIORITY_MEDIUM.loc() + '</span>', value: CoreTasks.TASK_PRIORITY_MEDIUM });
+     ret.push({ name: '<span class=task-priority-low>' + CoreTasks.TASK_PRIORITY_LOW.loc() + '</span>', value: CoreTasks.TASK_PRIORITY_LOW });
      return ret;
   },
 
   _listStatuses: function() {
      var ret = [];
-     ret.push({ name: CoreTasks.STATUS_PLANNED, value: CoreTasks.STATUS_PLANNED });
-     ret.push({ name: CoreTasks.STATUS_ACTIVE, value: CoreTasks.STATUS_ACTIVE });
-     ret.push({ name: CoreTasks.STATUS_DONE, value: CoreTasks.STATUS_DONE });
-     ret.push({ name: CoreTasks.STATUS_RISKY, value: CoreTasks.STATUS_RISKY });
+     ret.push({ name: '<span class=status-planned>' + CoreTasks.STATUS_PLANNED.loc() + '</span>', value: CoreTasks.STATUS_PLANNED });
+     ret.push({ name: '<span class=status-active>' + CoreTasks.STATUS_ACTIVE.loc() + '</span>', value: CoreTasks.STATUS_ACTIVE });
+     ret.push({ name: '<span class=status-done>' + CoreTasks.STATUS_DONE.loc() + '</span>', value: CoreTasks.STATUS_DONE });
+     ret.push({ name: '<span class=status-risky>' + CoreTasks.STATUS_RISKY.loc() + '</span>', value: CoreTasks.STATUS_RISKY });
      return ret;
   },
 
   _listValidations: function() {
      var ret = [];
-     ret.push({ name: CoreTasks.TASK_VALIDATION_UNTESTED, value: CoreTasks.TASK_VALIDATION_UNTESTED });
-     ret.push({ name: CoreTasks.TASK_VALIDATION_PASSED, value: CoreTasks.TASK_VALIDATION_PASSED });
-     ret.push({ name: CoreTasks.TASK_VALIDATION_FAILED, value: CoreTasks.TASK_VALIDATION_FAILED });
+     ret.push({ name: '<span class=task-validation-untested>' + CoreTasks.TASK_VALIDATION_UNTESTED.loc() + '</span>', value: CoreTasks.TASK_VALIDATION_UNTESTED });
+     ret.push({ name: '<span class=task-validation-passed>' + CoreTasks.TASK_VALIDATION_PASSED.loc() + '</span>', value: CoreTasks.TASK_VALIDATION_PASSED });
+     ret.push({ name: '<span class=task-validation-failed>' + CoreTasks.TASK_VALIDATION_FAILED.loc() + '</span>', value: CoreTasks.TASK_VALIDATION_FAILED });
      return ret;
   },
 
@@ -180,7 +180,6 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           toolTip: "_TypeTooltip".loc()
         }),
                   
-        // TODO: [SG] Beta: write custom view so that task priority/status/validation styles can be displayed in popup editors
         priorityLabel: SC.LabelView.design({
           layout: { top: 40, left: 165, height: 24, width: 55 },
           textAlign: SC.ALIGN_RIGHT,
