@@ -1,0 +1,67 @@
+/* 
+
+  Tasks Filter Pane Styling 
+
+  @author Suvajit Guupta
+  
+*/
+
+/* Application styles */
+
+.quickfilter-label,
+.quickfilter-label .sc-button-inner,
+.quickfilter-label .sc-button-inner label {
+  font-size: 10px !important;
+  color: #FFF !important;
+  text-shadow: none !important;
+  -moz-border-radius: 15px !important;
+  -webkit-border-radius: 15px !important;
+}
+
+.quickfilter-label.active {
+  border: 1px solid #555 !important;
+}
+
+.quickfilter-label.active .sc-button-inner label {
+  text-shadow: 0 1px #BBB !important;
+}
+
+.troubled .sc-button-inner,
+.troubled .sc-button-inner label {
+  background: #C33 !important;
+}
+
+.unfinished .sc-button-inner,
+.unfinished .sc-button-inner label {
+  background: #33F !important;
+}
+
+.unvalidated .sc-button-inner,
+.unvalidated .sc-button-inner label {
+  background: #6C6 !important;
+}
+
+.completed .sc-button-inner,
+.completed .sc-button-inner label {
+  background: #363 !important;
+}
+
+.showstoppers .sc-button-inner,
+.showstoppers .sc-button-inner label {
+  background: #639 !important;
+}
+
+.all .sc-button-inner,
+.all .sc-button-inner label {
+  background: #555 !important;
+}
+
+.item-group {
+  font-size: 10px !important;
+  text-align: center !important;
+  line-height: 1.5;
+  border: 1px solid #888;
+  background: #EEE;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}

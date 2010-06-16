@@ -1,0 +1,42 @@
+/* 
+
+  Tasks Statistics Pane Styling 
+
+  @author Suvajit Guupta
+  
+*/
+
+.statistics-pane table {
+  border: 1px solid gray !important;
+  border-collapse: separate !important;
+  margin: 0px !important;
+}
+
+.statistics-pane td {
+  font-size: 11px !important;
+  line-height: 20px !important;
+	border: none !important;
+}
+
+.statistics-pane td img {
+  vertical-align: middle !important;
+}
+
+.statistics-pane tr.even {
+  background-color: #ddd;
+}
+
+.statistics-pane tr.odd {
+  background-color: #eee;
+}
+
+.sc-view.sc-label-view.active {
+  border: 1px solid #555 !important;
+  background-color: #AAA;
+  -moz-border-radius: 15px !important;
+  -webkit-border-radius: 15px !important;
+}
+
+.mozilla .sc-text-field-view input {
+  top:0px !important;
+}

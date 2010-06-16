@@ -234,3 +234,10 @@ body.sc-theme {
   height: 16px;
   background: static_url('images/lower-right-drag.png') no-repeat;
 }
+
+/*
+// FIXME: [SC] should be added to standard theme (Ace1) to resolve tearing on side on panels
+*/
+.sc-panel {
+  -webkit-transform: translate3d(0px,0px,0px);
+}
