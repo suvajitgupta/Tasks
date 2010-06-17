@@ -150,8 +150,11 @@ Tasks.mainPage = SC.Page.design({
         childViews: "projectsList projectsBottomBar".w(),
          
         projectsList: SC.ScrollView.design({
+          
+          classNames: ['projects-pane'],
+          layout: { top: 10, bottom: 35, left: 10, right: 10 },
+          
           contentView: SC.ListView.design({
-            layout: { top: 0, left:0, bottom: 27, right: 0 },
             contentValueKey: 'displayName',
             contentUnreadCountKey: 'displayCountDown',
             contentBinding: 'Tasks.sourcesController.arrangedObjects',
@@ -203,7 +206,7 @@ Tasks.mainPage = SC.Page.design({
          
          projectsBottomBar: SC.View.design({
            
-           layout: { bottom: 0, height: 26, left: 0, right: 0 },
+           layout: { bottom: 0, height: 35, left: 0, right: 0 },
            childViews: 'addProjectButton deleteProjectButton'.w(),
 
            addProjectButton: SC.ButtonView.design({
@@ -358,8 +361,10 @@ Tasks.mainPage = SC.Page.design({
          
          tasksList: SC.ScrollView.design({
            
+           classNames: ['tasks-pane'],
+           layout: { top: 10, bottom: 35, left: 0, right: 10 },
+
              contentView: SC.ListView.design({
-               layout: { top: 0, bottom: 27, left: 0, right: 0 },
                contentValueKey: 'displayName',
                contentUnreadCountKey: 'displayEffort',
                contentBinding: 'Tasks.tasksController.arrangedObjects',
@@ -506,7 +511,7 @@ Tasks.mainPage = SC.Page.design({
 
           tasksBottomBar: SC.View.design({
 
-             layout: { bottom: 0, height: 26, left: 0, right: 0 },
+             layout: { bottom: 0, height: 35, left: 0, right: 0 },
              childViews: 'addTaskButton deleteTaskButton summaryView serverMessageView saveButton refreshButton'.w(),
 
              addTaskButton: SC.ButtonView.design({
