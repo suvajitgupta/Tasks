@@ -386,10 +386,8 @@ Tasks.mainPage = SC.Page.design({
     tasksList: SC.outlet('masterDetailView.tasksDetailView.contentView'),
     
     bottomBarView: SC.View.design(SC.Border, {
-      layout: { bottom: 0, height: 26, left: 0, right: 0 },
-      classNames: ['bottom-bar'],
+      layout: { bottom: 0, height: 35, left: 0, right: 0 },
       childViews: 'addProjectButton deleteProjectButton addTaskButton deleteTaskButton summaryView serverMessageView saveButton refreshButton'.w(),
-      borderStyle: SC.BORDER_TOP,
         
       addProjectButton: SC.ButtonView.design({
         layout: { centerY: 0, left: 10, height: 24, width: 33 },

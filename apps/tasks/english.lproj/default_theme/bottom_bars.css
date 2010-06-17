@@ -11,14 +11,10 @@
   padding-right: 4px;
 }
 
-.bottom-bar {
-  background: static_url('images/default-theme-repeat-x.png') repeat-x 0 -44px;
-}
-
 .bottom-bar-label {
   font-size: 10px !important;
-  color: #000 !important;
-  text-shadow: #fff 0 1px 1px;
+  color: #aaa !important;
+  text-shadow: #111 0 1px 1px;
 }
 
 .progress-icon {

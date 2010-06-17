@@ -243,21 +243,6 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     var projectTooltip = '';
     if(content.get('id')) context.addClass('project-item');
 
-    switch(content.get('developmentStatus')){
-      case CoreTasks.STATUS_PLANNED:
-        context.addClass('status-planned');
-        break;
-      case CoreTasks.STATUS_ACTIVE:
-        context.addClass('status-active');
-        break;
-      case CoreTasks.STATUS_DONE:
-        context.addClass('status-done');
-        break;          
-      case CoreTasks.STATUS_RISKY:
-        context.addClass('status-risky');
-        break;          
-    }
-
     // Indicate which items have a description
     var description = SC.RenderContext.escapeHTML(content.get('description'));
     if(description) {
