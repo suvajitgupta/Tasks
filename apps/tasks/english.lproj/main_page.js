@@ -281,8 +281,8 @@ Tasks.mainPage = SC.Page.design({
          masterPickerButton: SC.ButtonView.extend({
            layout: { left: 170, centerY: 0, height: 24, width: 32 },
            titleMinWidth: 0,
-           icon: 'project-icon',
-           classNames: ['dark'],
+           icon: 'empty-project-icon',
+           classNames: ['image-button'],
            action: 'toggleMasterPicker',
            isVisible: NO,
            isVisibleBinding: 'Tasks.mainPage.mainPane.masterDetailView.masterIsHidden'
