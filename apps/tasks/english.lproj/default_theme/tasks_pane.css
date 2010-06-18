@@ -20,6 +20,11 @@
   background: none !important;
 }
 
+.assignee-item label, .task-item, .task-id {
+  -moz-border-radius: 3px !important;
+  -webkit-border-radius: 3px !important;
+}
+
 .sc-view.sc-list-item-view.sc-collection-item.sc-group-item {
   position: absolute !important;
   margin-left: -5px !important;
@@ -80,14 +85,12 @@
 }
 
 .assignee-item label {
-	font-size: 14px !important;
+	font-size: 13px !important;
   color: #444 !important;
-  top: 6px !important;
+  top: 7px !important;
   left: 8px !important;
-  height: 28px !important;
-  padding-left: 8px !important;
-  -moz-border-radius: 3px 3px 0px 0px;
-  -webkit-border-radius: 3px 3px 0px 0px;
+  height: 18px !important;
+  padding-left: 14px !important;
   opacity: 0.85;
 }
 
@@ -116,7 +119,7 @@
   top: 0px !important;
 	font-weight: normal !important;
   height: 12px !important;
-  line-height: 12px !important;
+  line-height: 11px !important;
   color: #FFF !important;
   border: none !important;
   padding: 1px 5px;
@@ -135,10 +138,6 @@
 .assignee-item.incompleteEffortWarning .sc-outline .count.finished {
   background: #666 none repeat scroll 0 0 !important;
   top: 0px !important;
-}
-
-.assignee-item.incompleteEffortWarning .sc-outline .count {
-  background: darkOrange none repeat scroll 0 0 !important;
 }
 
 
@@ -198,9 +197,9 @@
 }
 
 .task-item .sc-outline .count.doneEffortRangeWarning,
-.task-item.sel .sc-outline .count.doneEffortRangeWarning {
-  color: #FFF !important;
-  background: darkOrange none repeat scroll 0 0 !important;
+.task-item.sel .sc-outline .count.doneEffortRangeWarning,
+.assignee-item.incompleteEffortWarning .sc-outline .count {
+  background: #F60 none repeat scroll 0 0 !important;
 }
 
 .task-item.sel .sc-outline .count,
