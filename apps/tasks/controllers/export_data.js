@@ -65,8 +65,8 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' word-wrap: break-word;\n' +
 ' padding: 5px;\n' +
 '}\n' +
-'.titlebar {\n' +
-' background-color: #505D7D;\n' +
+'.title-bar {\n' +
+' background-color: #343434;\n' +
 ' color: #DDD\n;' +
 ' font-size: 14px;\n' +
 ' font-weight: bold;\n' +
@@ -366,7 +366,7 @@ Tasks.exportDataController = SC.ObjectController.create(
     }
     
     var ret = '';
-    if(format === 'HTML') ret += '<html>\n' + Tasks.EXPORT_HEADER + '\n<body>\n<center class="titlebar">';
+    if(format === 'HTML') ret += '<html>\n' + Tasks.EXPORT_HEADER + '\n<body>\n<center class="title-bar">';
     else ret += '# ';
     ret += "_Tasks".loc() + ' ' + "_Export".loc() + ' (' + new Date().format('hh:mm a MMM dd, yyyy') + '): ' + Tasks.getPath('assignmentsController.assignmentsSummary');
     if(format === 'HTML') ret += '</center>\n' + Tasks.EXPORT_LEGEND;

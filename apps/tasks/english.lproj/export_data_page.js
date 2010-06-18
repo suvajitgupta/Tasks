@@ -22,8 +22,8 @@ Tasks.exportDataPage = SC.Page.create({
       childViews: 'titlebar exportField closeButton'.w(),
       
       titlebar: SC.View.design(SC.Border, {
-        layout: { left: 10, right: 10, top: 10, height: 35 },
-        classNames: ['titlebar'],
+        layout: { left: 0, right: 0, top: 0, height: 45 },
+        classNames: ['title-bar'],
         childViews: 'title'.w(),
         title: SC.LabelView.design({
           layout: { centerY: 0, height: 20, centerX: 0, width: 80 },
@@ -34,11 +34,11 @@ Tasks.exportDataPage = SC.Page.create({
       }),
     
       exportField: SC.TextFieldView.design({
-        layout: { top: 45, left: 10, right: 10, bottom: 40 },
+        layout: { left: 10, right: 10, top: 55, bottom: 40 },
         valueBinding: SC.Binding.oneWay('Tasks.exportDataController.data'),
         isTextArea: YES
       }),
-      
+    
       closeButton: SC.ButtonView.design({
         layout: { width: 80, height: 30, right: 10, bottom: 8 },
         titleMinWidth: 0,

@@ -25,8 +25,8 @@ Tasks.statisticsPane = SC.PanelPane.extend({
     childViews: 'titlebar statistics closeButton'.w(),
     
     titlebar: SC.View.design(SC.Border, {
-      layout: { left: 10, right: 10, top: 10, height: 35 },
-      classNames: ['titlebar'],
+      layout: { left: 0, right: 0, top: 0, height: 45 },
+      classNames: ['title-bar'],
       childViews: 'title'.w(),
       title: SC.LabelView.design({
         layout: { centerY: 0, height: 20, centerX: 0, width: 200 },
@@ -37,7 +37,7 @@ Tasks.statisticsPane = SC.PanelPane.extend({
     }),
     
     statistics: SC.LabelView.design({
-      layout: { top: 50, left: 10, right: 10, bottom: 10 },
+      layout: { top: 55, left: 10, right: 10, bottom: 10 },
       textAlign: SC.ALIGN_CENTER,
       controlSize: SC.SMALL_CONTROL_SIZE,
       escapeHTML: NO,

@@ -24,8 +24,8 @@ Tasks.importDataPage = SC.Page.create({
       childViews: 'titlebar sample format dataEntry createMissingUsersCheckbox importButton cancelButton'.w(),
       
       titlebar: SC.View.design(SC.Border, {
-        layout: { left: 10, right: 10, top: 10, height: 35 },
-        classNames: ['titlebar'],
+        layout: { left: 0, right: 0, top: 0, height: 45 },
+        classNames: ['title-bar'],
         childViews: 'title'.w(),
         title: SC.LabelView.design({
           layout: { centerY: 0, height: 20, centerX: 0, width: 80 },
@@ -37,19 +37,19 @@ Tasks.importDataPage = SC.Page.create({
       
       sample: SC.LabelView.design({
         escapeHTML: NO,
-        layout: { top: 50, left: 10, height: 40, width: 260 },
+        layout: { top: 55, left: 10, height: 40, width: 260 },
         value: "_ImportInstructions:".loc()
       }),
       
       format: SC.LabelView.design({
         escapeHTML: NO,
-        layout: { top: 50, width: 470, height: 45, right: 10 },
+        layout: { top: 55, width: 470, height: 45, right: 10 },
         classNames: [ 'onscreen-help'],
         value: Tasks.softwareMode? "_FormatOnscreenHelpSoftwareMode".loc() : "_FormatOnscreenHelpTodoMode".loc()
       }),
 
       dataEntry: SC.TextFieldView.design({
-        layout: { top: 95, left: 10, right: 10, bottom: 40 },
+        layout: { top: 100, left: 10, right: 10, bottom: 40 },
         isTextArea: YES,
         valueBinding: 'Tasks.importDataController.importData'
       }),

@@ -10,12 +10,28 @@
 /*
 
 
-/* Application Background */
+/* Application styles */
 
 body.sc-theme {
   background: static_url('images/app-bg.png') !important;
 }
 
+.sc-theme .sc-pane.sc-main {
+  background: none !important;
+}
+
+.sc-theme .sc-view {
+  color: #000;
+}
+
+.sc-theme .sc-gray-border {
+  border: 0 !important;
+}
+
+.bordered-view {
+	border: 1px solid #bbb !important;
+	background: #eee;
+}
 
 /*-----------------------------------------------------------------
  * Status styles
@@ -37,18 +53,9 @@ body.sc-theme {
   color: red !important;
 }
 
-.sc-theme .sc-view {
-  color: #000;
-}
-
-.sc-theme .sc-gray-border {
-  border: 0 !important;
-}
-
-.bordered-view {
-	border: 1px solid #bbb !important;
-	background: #eee;
-}
+/*-----------------------------------------------------------------
+ * Shared styles
+ */
 
 .image-button span label{
   line-height: 28px !important;
@@ -65,83 +72,6 @@ body.sc-theme {
 .date-time {
   color: #444 !important;
   font-size: 10px !important;
-}
-
-.quickfilter-toolbar {
-  border: 1px solid #AAA;
-  background: #FFF;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-}
-
-.quickfilter-label,
-.quickfilter-label .sc-button-inner,
-.quickfilter-label .sc-button-inner label {
-  font-size: 10px !important;
-  color: #FFF !important;
-  text-shadow: none !important;
-  -moz-border-radius: 15px !important;
-  -webkit-border-radius: 15px !important;
-}
-
-.quickfilter-label.active {
-  border: 1px solid #555 !important;
-}
-
-.quickfilter-label.active .sc-button-inner label {
-  text-shadow: 0 1px #BBB !important;
-}
-
-.troubled .sc-button-inner,
-.troubled .sc-button-inner label {
-  background: #C33 !important;
-}
-
-.unfinished .sc-button-inner,
-.unfinished .sc-button-inner label {
-  background: #33F !important;
-}
-
-.unvalidated .sc-button-inner,
-.unvalidated .sc-button-inner label {
-  background: #6C6 !important;
-}
-
-.completed .sc-button-inner,
-.completed .sc-button-inner label {
-  background: #363 !important;
-}
-
-.showstoppers .sc-button-inner,
-.showstoppers .sc-button-inner label {
-  background: #639 !important;
-}
-
-.all .sc-button-inner,
-.all .sc-button-inner label {
-  background: #555 !important;
-}
-
-.filter-label {
-  font-size: 10px !important;
-  color: #000 !important;
-}
-
-.task-attribute-set-title  {
-  font-size: 10px !important;
-  color: #000 !important;
-  text-shadow: #fff 0 1px 1px;
-  text-align: center !important;
-}
-
-.task-attribute-set {
-  font-size: 10px !important;
-  text-align: center !important;
-  line-height: 1.5;
-  border: 1px solid #AAA;
-  background: #FFF;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
 }
 
 .recently-updated {
@@ -288,46 +218,6 @@ body.sc-theme {
   background: static_url('images/dropdown-arrow.png') no-repeat 0 0;
 }
 
-.statistics-pane table {
-  border: 1px solid gray !important;
-  border-collapse: separate !important;
-  margin: 0px !important;
-  border-radius: 5px !important;
-  -moz-border-radius: 5px !important;
-  -webkit-border-radius: 5px !important;
-  box-shadow: inset 0 2px 6px rgba(0,0,0,.3) !important;
-  -moz-box-shadow: inset 0 2px 3px rgba(0,0,0,.3) !important;
-  -webkit-box-shadow: inset 0 2px 3px rgba(0,0,0,.3) !important;
-}
-
-.statistics-pane td {
-  font-size: 11px !important;
-  line-height: 20px !important;
-	border: none !important;
-}
-
-.statistics-pane td img {
-  vertical-align: middle !important;
-}
-
-.statistics-pane tr.even {
-  background-color: #ddd;
-}
-
-.statistics-pane tr.odd {
-  background-color: #f2f2f2;
-}
-
-.sc-view.sc-label-view.active {
-  border: 1px solid #555 !important;
-  background-color: #AAA;
-  -moz-border-radius: 15px !important;
-  -webkit-border-radius: 15px !important;
-}
-
-.mozilla .sc-text-field-view input {
-  top:0px !important;
-}
 
 /*
 // FIXME: [SC] remove hacks to workaround bug in radiobutton styling on non-OSX platforms, can't do this for Linux
@@ -345,4 +235,122 @@ body.sc-theme {
   width: 16px;
   height: 16px;
   background: static_url('images/lower-right-drag.png') no-repeat;
+}/*-----------------------------------------------------------------
+ * Filter pane styles
+ */
+
+.quickfilter-toolbar {
+  border: 1px solid #AAA;
+  background: #FFF;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+
+.quickfilter-label,
+.quickfilter-label .sc-button-inner,
+.quickfilter-label .sc-button-inner label {
+  font-size: 10px !important;
+  color: #FFF !important;
+  text-shadow: none !important;
+  -moz-border-radius: 15px !important;
+  -webkit-border-radius: 15px !important;
+}
+
+.quickfilter-label.active {
+  border: 1px solid #555 !important;
+}
+
+.quickfilter-label.active .sc-button-inner label {
+  text-shadow: 0 1px #BBB !important;
+}
+
+.troubled .sc-button-inner,
+.troubled .sc-button-inner label {
+  background: #C33 !important;
+}
+
+.unfinished .sc-button-inner,
+.unfinished .sc-button-inner label {
+  background: #33F !important;
+}
+
+.unvalidated .sc-button-inner,
+.unvalidated .sc-button-inner label {
+  background: #6C6 !important;
+}
+
+.completed .sc-button-inner,
+.completed .sc-button-inner label {
+  background: #363 !important;
+}
+
+.showstoppers .sc-button-inner,
+.showstoppers .sc-button-inner label {
+  background: #639 !important;
+}
+
+.all .sc-button-inner,
+.all .sc-button-inner label {
+  background: #555 !important;
+}
+
+.filter-label {
+  font-size: 10px !important;
+  color: #000 !important;
+}
+
+.task-attribute-set-title  {
+  font-size: 10px !important;
+  color: #000 !important;
+  text-shadow: #fff 0 1px 1px;
+  text-align: center !important;
+}
+
+.task-attribute-set {
+  font-size: 10px !important;
+  text-align: center !important;
+  line-height: 1.5;
+  border: 1px solid #AAA;
+  background: #FFF;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+
+/*-----------------------------------------------------------------
+ * Statistics pane styles
+ */
+
+.statistics-pane table {
+  border: 1px solid gray !important;
+  border-collapse: separate !important;
+  margin: 0px !important;
+}
+
+.statistics-pane td {
+  font-size: 11px !important;
+  line-height: 20px !important;
+	border: none !important;
+}
+
+.statistics-pane td img {
+  vertical-align: middle !important;
+}
+
+.statistics-pane tr.even {
+  background-color: #ddd;
+}
+
+.statistics-pane tr.odd {
+  background-color: #eee;
+}
+
+.sc-view.sc-label-view.active {
+  border: 1px solid #555 !important;
+  background-color: #AAA;
+  -moz-border-radius: 15px !important;
+  -webkit-border-radius: 15px !important;
+}
+
+.mozilla .sc-text-field-view input {
+  top:0px !important;
 }

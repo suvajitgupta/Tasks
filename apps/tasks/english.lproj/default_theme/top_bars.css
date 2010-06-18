@@ -27,7 +27,7 @@
 }
 
 .welcome-message {
-  font-size: 11px !important;
+  font-size: 14px !important;
   text-align: center !important;
   color: #BBB !important;
   line-height: 15px !important;
@@ -36,10 +36,6 @@
 .display-modes {
   font-size: 9px !important;
   font-weight: bold !important;
-}
-
-.titlebar {
-  background: static_url('images/default-theme-repeat-x.png') repeat-x 0 -122px; 
 }
 
 .sc-label-view img {

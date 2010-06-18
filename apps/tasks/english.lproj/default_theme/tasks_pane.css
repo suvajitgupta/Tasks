@@ -12,12 +12,8 @@
  * Task pane styles
  */
  
-.tasks-pane-inner .sc-view.sc-list-item-view.sc-collection-item.task-item .sc-outline label {
-  opacity: 0.85 !important;
-}
-
 .sc-collection-view.sc-list-view.sc-source-list.tasks-pane-inner {
-  background-color: #f2f2f2 !important;
+  background: none !important;
 }
 
 .sc-view.sc-ghost-view .sc-collection-view.sc-list-view.sc-source-list.tasks-pane-inner {
@@ -29,6 +25,14 @@
   margin-left: -5px !important;
 }
 
+.tasks-pane-inner .sc-view.sc-list-item-view.sc-collection-item.task-item .sc-outline label {
+  opacity: 0.85 !important;
+}
+
+/*-----------------------------------------------------------------
+ * Task pane helper images
+ */
+ 
 .helper-add-tasks {
   background: static_url('images/helper-add-tasks.png') no-repeat 0px 98%;
 }
@@ -49,10 +53,13 @@
  * Assignee loading styles
  */
  
+.assignee-item.sc-list-item-view .sc-outline {
+  top: 8px;
+}
+
 .assignee-item {
   text-transform: none !important;
 	font-weight: bold !important;
-  background: #f2f2f2 !important;
 }
 
 .assignee-item .sc-outline {
@@ -73,12 +80,14 @@
 }
 
 .assignee-item label {
-  color: #FFF !important;
-  height: 20px !important;
+	font-size: 14px !important;
+  color: #444 !important;
+  top: 6px !important;
   left: 8px !important;
+  height: 28px !important;
   padding-left: 8px !important;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
+  -moz-border-radius: 3px 3px 0px 0px;
+  -webkit-border-radius: 3px 3px 0px 0px;
   opacity: 0.85;
 }
 
@@ -87,32 +96,28 @@
 }
 
 .assignee-not-loaded label {
-  background: #444 none repeat scroll 0 0 !important;
-	border: 1px solid #444 !important;
+  background: lightGray none repeat scroll 0 0 !important;
 }
 
 .assignee-under-loaded label {
-  background: #363 none repeat scroll 0 0 !important;
-	border: 1px solid #363 !important;
+  background: paleGreen none repeat scroll 0 0 !important;
 }
 
 .assignee-properly-loaded label {
-  background: #36F none repeat scroll 0 0 !important;
-	border: 1px solid #36F !important;
+  background: paleTurquoise none repeat scroll 0 0 !important;
 }
 
 .assignee-over-loaded label {
-  background: #C33 none repeat scroll 0 0 !important;
-	border: 1px solid #C33 !important;
+  background: pink none repeat scroll 0 0 !important;
 }
 
 .assignee-item .sc-outline .count {
   margin-top: 0px !important;
-  top: 7px !important;
+  top: 0px !important;
 	font-weight: normal !important;
   height: 12px !important;
   line-height: 12px !important;
-  color: #000 !important;
+  color: #FFF !important;
   border: none !important;
   padding: 1px 5px;
 }
@@ -128,11 +133,12 @@
 .assignee-item .sc-outline .count,
 .assignee-item .sc-outline .count.finished,
 .assignee-item.incompleteEffortWarning .sc-outline .count.finished {
-  background: #DDD none repeat scroll 0 0 !important;
+  background: #666 none repeat scroll 0 0 !important;
+  top: 0px !important;
 }
 
 .assignee-item.incompleteEffortWarning .sc-outline .count {
-  background: #FF6 none repeat scroll 0 0 !important;
+  background: darkOrange none repeat scroll 0 0 !important;
 }
 
 
@@ -141,12 +147,10 @@
  */
 
 .task-item {
-  background: #f2f2f2 none repeat scroll 0 0;
-  left: 22px !important;
-  right: 5px !important;
-	border: 1px dotted silver !important;
-	border-left-color: #f2f2f2 !important;
-	border-right-color: #f2f2f2 !important;
+  background: #eee none repeat scroll 0 0;
+  left: 21px !important;
+  right: 3px !important;
+	border: 1px solid #888 !important;
 }
 
 .task-item.sel .recently-updated {
@@ -196,7 +200,7 @@
 .task-item .sc-outline .count.doneEffortRangeWarning,
 .task-item.sel .sc-outline .count.doneEffortRangeWarning {
   color: #FFF !important;
-  background: orange none repeat scroll 0 0 !important;
+  background: darkOrange none repeat scroll 0 0 !important;
 }
 
 .task-item.sel .sc-outline .count,
@@ -324,13 +328,11 @@
 
 .task-item.sel,
 .task-item.sel:hover {
-  background: #abd7ff none repeat scroll 0 0 !important;
-	border: 1px solid #999 !important;
+  background: paleGoldenRod none repeat scroll 0 0 !important;
 }
 
 .task-item:hover {
   background: #CCC none repeat scroll 0 0 !important;
-	border: 1px solid #CCC !important;
 }
 
 .sc-view.sc-ghost-view .task-item {

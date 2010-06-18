@@ -54,7 +54,7 @@ Tasks.mainPageHelper = SC.Object.create({
     var role = this.get('currentUserRole');
     if(SC.none(name) || SC.none(role)) return '';
     if(!Tasks.softwareMode && role === CoreTasks.USER_ROLE_DEVELOPER) role = "_User";
-    return "_Hi".loc() + '<b>' + name + '</b><br><i> ' + role.loc() + '</i>';
+    return "_Hi".loc() + '<b>' + name + '</b><br><small>' + role.loc() + '</small>';
   }.property('currentUserName', 'currentUserRole').cacheable()
   
 });
@@ -138,7 +138,7 @@ Tasks.mainPage = SC.Page.design({
       }),
 
       welcomeMessageLabel: SC.LabelView.design(SCUI.ToolTip, {
-        layout: { centerX: 55, centerY: -4, width: 200, height: 32 },
+        layout: { centerX: 55, centerY: -4, width: 250, height: 32 },
         classNames: ['welcome-message'],
         escapeHTML: NO,
         valueBinding: SC.Binding.oneWay('Tasks.mainPageHelper.welcomeMessage')
