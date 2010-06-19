@@ -247,7 +247,7 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       tasksDetailView: SC.ScrollView.design({
-        layout: { top: 10, bottom: 10, left: 246, right: 10 },
+        layout: { top: 5, bottom: 10, left: 245, right: 10 },
         hasHorizontalScroller: NO,
 
         contentView: SC.SourceListView.design({

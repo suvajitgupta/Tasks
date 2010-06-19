@@ -229,11 +229,9 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     // console.log('DEBUG: Project render(' + firstTime + '): ' + content.get('displayName'));
     sc_super();
     
-    var isSystemProject = CoreTasks.isSystemProject(content);
-    if(isSystemProject) context.addClass('system-project');
     
     // Put a dot before non-system projects that were created or updated recently
-    if(!isSystemProject && content.get('isRecentlyUpdated')) {
+    if(!CoreTasks.isSystemProject(content) && content.get('isRecentlyUpdated')) {
       context = context.begin('div').addClass('recently-updated').attr({
         title: "_RecentlyUpdatedTooltip".loc(),
         alt: "_RecentlyUpdatedTooltip".loc()

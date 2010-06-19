@@ -27,21 +27,6 @@
   background: none !important;
 }
 
-.users-pane .sc-collection-item.sel {
-  color: #FFF !important;
-	font-weight: normal !important;
-	border: 1px solid #EEE !important;
-  background: #3366FF none repeat scroll 0 0 !important;
-}
-
-.users-pane .sc-collection-item:hover {
-  background: #CCC none repeat scroll 0 0;
-}
-
-.users-pane .sc-collection-item.sc-group-item:hover {
-  background: none !important;
-}
-
 .users-pane-inner .sc-view.sc-list-item-view.sc-collection-item.sc-group-item.even,
 .sc-view.sc-list-item-view.sc-collection-item.user-item.even {
   background: #EDF3FE;

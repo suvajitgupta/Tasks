@@ -79,27 +79,20 @@ body.sc-theme {
   margin-left: -3px !important;
   height: 11px !important;
   width: 11px !important;
-  background: static_url('images/recently-updated.png') no-repeat 0 0;
 }
 
-.sel .recently-updated {
-  background: static_url('images/recently-updated-selected.png') no-repeat 0 0;
+.projects-pane-inner .recently-updated,
+.users-pane-inner .sel .recently-updated {
+  background: static_url('images/white-dot.png') no-repeat 0 0;
+}
+
+.tasks-pane-inner .recently-updated,
+.users-pane-inner .recently-updated {
+  background: static_url('images/black-dot.png') no-repeat 0 0;
 }
 
 .sc-collection-view {
   border-top: 0 !important;
-}
-
-.sc-collection-item.sel, .sc-collection-item.sel:hover {
-  background: #3366FF none repeat scroll 0 0;
-}
-
-.sc-collection-item:hover {
-  background: #CCC none repeat scroll 0 0;
-}
-
-.sc-collection-item.sc-group-item:hover {
-  background: none !important;
 }
 
 .sc-view.sc-text-field-view .sc-hint {
@@ -143,7 +136,7 @@ body.sc-theme {
 .description-icon {
   width: 16px !important;
   height: 16px !important;
-  background: static_url('images/description.png') no-repeat;
+  background: static_url('images/picture_empty.png') no-repeat;
 }
 
 .sc-outline .count {

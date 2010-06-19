@@ -52,7 +52,7 @@ SC.stringsFor('English', {
   "_Description:": "Description:",
   "_DescriptionHint": "Enter detailed notes...",
   "_Developer": "Developer",
-  "_DisplayModeTooltip": "Display Mode: click on left to see tasks; click on right for team summary",
+  "_DisplayModeTooltip": "Display Mode: click on left for team summary; click on right to see tasks",
   "_DisplayedUsers": " users displayed, ",
   "_Done": "Done",
   "_DoneEffortRangeWarning": " (completed task shouldn't have an effort range)",

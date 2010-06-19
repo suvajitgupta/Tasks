@@ -31,41 +31,77 @@
   background: none !important;
 }
 
+.projects-pane-inner .sc-collection-item,
+.projects-pane-inner .sc-collection-item .sc-outline,
+.users-pane-inner .sc-collection-item,
+.users-pane-inner .sc-collection-item .sc-outline {
+  -moz-border-radius: 3px !important;
+  -webkit-border-radius: 3px !important;
+}
+
+
+/*-----------------------------------------------------------------
+ * Project group item styles
+ */
+ 
+.projects-pane-inner .sc-group-item .sc-outline {
+  top: 2px !important;
+  bottom: 1px !important;
+  left: 8px !important;
+  right: 0px !important;
+  background-color: #3A3A3A !important;
+}
+
+.projects-pane .sc-group-item .sc-outline img {
+  left: 5px !important;
+}
+
+.projects-pane .sc-view.sc-list-item-view.sc-collection-item.sc-group-item .sc-outline label {
+  left: 20px !important;
+}
+
+.projects-pane-inner .sc-collection-item:hover {
+  background: #111 none repeat scroll 0 0 !important;
+}
+
+.users-pane-inner .sc-collection-item:hover {
+  background: #CCC none repeat scroll 0 0 !important;
+}
+
+.projects-pane-inner .sc-collection-item.sc-group-item:hover,
+.users-pane-inner .sc-collection-item.sc-group-item:hover {
+  background: none !important;
+}
 
 /*-----------------------------------------------------------------
  * Project list item styles
  */
  
+.projects-pane-inner .sc-collection-item,
+.users-pane-inner .sc-collection-item {
+  left: 3px !important;
+  right: 3px !important;
+}
+
+.sc-list-view.sc-source-list.projects-pane-inner .sc-collection-item.sel,
+.sc-list-view.sc-source-list.projects-pane-inner .sc-collection-item.sel:hover,
+.sc-list-view.sc-source-list.users-pane-inner .sc-collection-item.sel:hover,
+.sc-list-view.sc-source-list.users-pane-inner .sc-collection-item.sel {
+  font-weight: normal !important;
+  background: #1F4F9B none repeat scroll 0 0 !important;
+  border-color: #222 !important;
+}
 
 .projects-pane .projects-pane-inner .sc-collection-item label {
-   color: #bebebe;
-   text-shadow: 0 1px 0 #000;
- }
-
-.projects-pane .projects-pane-inner .sc-collection-item.sel label {
-    color: #fff;
-    text-shadow: 0 1px 0 #000;
+  color: #BEBEBE;
 }
 
-.projects-pane .projects-pane-inner .sc-collection-item.sel,
-.projects-pane .projects-pane-inner .sc-collection-item.sel:hover {
-  background: #3366FF;
-}
-
-.sc-collection-item:hover {
-  background: #494949;
-}
-
-.system-project {
-	color: #777 !important;
+.projects-pane-inner .sc-collection-item.sel label {
+  color: #FFF;
 }
 
 .projects-pane-inner .sc-view.sc-list-item-view.sc-collection-item .sc-outline label {
   opacity: 1 !important;
-}
-
-.projects-pane-inner .sc-collection-item {
-  border: 0 !important;
 }
 
 .project-item .recently-updated {
@@ -94,8 +130,8 @@
 
 .project-item .description-icon {
   position: absolute;
-  top: 9px !important;
-  right: -2px !important;
+  top: 4px !important;
+  right: -1px !important;
 }
 
 .system-project-icon {
@@ -123,7 +159,9 @@
 }
 
 
-/* Calendar styles */
+/*-----------------------------------------------------------------
+ * Calendar styles
+ */
 
 .scui-datechooser-button {
   z-index: 100;
@@ -207,7 +245,6 @@
   color: white !important;
   background-color: #999;
 }
-
 
 .calendar-icon {
   width: 16px !important;
