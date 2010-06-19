@@ -362,7 +362,7 @@ Tasks.mainPage = SC.Page.design({
          tasksList: SC.ScrollView.design({
            
            classNames: ['tasks-pane'],
-           layout: { top: 10, bottom: 35, left: 0, right: 10 },
+           layout: { top: 5, bottom: 35, left: 0, right: 10 },
 
              contentView: SC.ListView.design({
                contentValueKey: 'displayName',
