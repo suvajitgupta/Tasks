@@ -74,8 +74,8 @@
   color: #DDD !important;
 }
 
-.projects-pane-inner .sc-collection-item:hover {
-  background: #222 none repeat scroll 0 0 !important;
+.projects-pane-inner .sc-view.sc-list-item-view.sc-collection-item.project-item:hover {
+  background: #262626 none repeat scroll 0 0 !important;
 }
 
 .users-pane-inner .sc-collection-item:hover {
@@ -97,6 +97,10 @@
   right: 2px !important;
 }
 
+.projects-pane-inner .sc-collection-item.project-item {
+  background-color: #333 !important;
+}
+
 .sc-list-view.sc-source-list.projects-pane-inner .sc-collection-item.sel,
 .sc-list-view.sc-source-list.projects-pane-inner .sc-collection-item.sel:hover,
 .sc-list-view.sc-source-list.users-pane-inner .sc-collection-item.sel:hover,
@@ -107,7 +111,7 @@
 }
 
 .projects-pane .projects-pane-inner .sc-collection-item label {
-  color: #777;
+  color: #888;
 }
 
 .projects-pane-inner .sc-collection-item.sel label {
