@@ -103,7 +103,7 @@ Tasks.mainPage = SC.Page.design({
       }),
 
       actionsMenu: SC.ButtonView.design(SCUI.DropDown, {
-        layout: { centerY: -4, left: 240, height: 24, width: 52 },
+        layout: { centerY: -4, left: 245, height: 24, width: 52 },
         classNames: ['image-button'],
         titleMinWidth: 0,
         hasIcon: YES,
@@ -124,7 +124,7 @@ Tasks.mainPage = SC.Page.design({
       }),
 
       displayModeSegments: SC.SegmentedView.design(SCUI.ToolTip, {
-        layout: { left: 300, centerY: -4, height: 24, width: 90 },
+        layout: { left: 305, centerY: -4, height: 24, width: 90 },
         classNames: ['display-modes'],
         items: [
           { title: '', icon: 'sc-icon-group-16', value: Tasks.DISPLAY_MODE_TEAM },
