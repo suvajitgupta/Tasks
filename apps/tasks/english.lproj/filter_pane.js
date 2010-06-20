@@ -24,7 +24,7 @@ Tasks.filterPane = SC.SheetPane.create({
     childViews: 'title quickfilterToolbar typeLabel typeCheckboxes priorityLabel priorityCheckboxes statusLabel statusCheckboxes validationLabel validationCheckboxes effortSpecifiedLabel effortSpecifiedRadiobuttons recentlyUpdatedLabel recentlyUpdatedRadiobuttons closeButton applyButton'.w(),
     
     title: SC.LabelView.design({
-      layout: { top: 10, left: 10, right: 10, height: 24 },
+      layout: { top: 10, centerX: 0, width: 150, height: 24 },
       textAlign: SC.ALIGN_CENTER,
       value: "_QuickFilters".loc(),
       toolTip: "_QuickFiltersTooltip".loc()
@@ -33,7 +33,7 @@ Tasks.filterPane = SC.SheetPane.create({
     quickfilterToolbar: SC.View.design({
 
       layout: { top: 28, left: 5, height: 70, right: 5 },
-      classNames: ['quickfilter-toolbar'],
+      classNames: ['item-group'],
       childViews: 'allButton troubledButton unfinishedButton unvalidatedButton completedButton showstoppersButton'.w(),
   
       allButton: SC.ButtonView.design({
@@ -109,7 +109,7 @@ Tasks.filterPane = SC.SheetPane.create({
 
     typeCheckboxes: SC.View.design({
       layout: { top: 127, height: 24, left: 10, right: 10 },
-      classNames: ['task-attribute-set', 'checkbox-icon'],
+      classNames: ['item-group', 'checkbox-icon'],
       isVisible: Tasks.softwareMode,
       displayProperties: [ 'feature', 'bug', 'other' ],
       childViews: 'feature bug other'.w(),
@@ -145,7 +145,7 @@ Tasks.filterPane = SC.SheetPane.create({
 
     priorityCheckboxes: SC.View.design({
       layout: { top: Tasks.softwareMode? 183 : 127, height: 24, left: 10, right: 10 },
-      classNames: ['task-attribute-set'],
+      classNames: ['item-group'],
       displayProperties: [ 'high', 'medium', 'low' ],
       childViews: 'high medium low'.w(),
       
@@ -180,7 +180,7 @@ Tasks.filterPane = SC.SheetPane.create({
 
     statusCheckboxes: SC.View.design({
       layout: { top: Tasks.softwareMode? 237 : 187, height: 24, left: 10, right: 10 },
-      classNames: ['task-attribute-set'],
+      classNames: ['item-group'],
       displayProperties: [ 'planned', 'active', 'done', 'risky' ],
       childViews: 'planned active done risky'.w(),
       
@@ -223,7 +223,7 @@ Tasks.filterPane = SC.SheetPane.create({
 
     validationCheckboxes: SC.View.design({
       layout: { top: 292, height: 24, left: 10, right: 10 },
-      classNames: ['task-attribute-set'],
+      classNames: ['item-group'],
       isVisible: Tasks.softwareMode,
       displayProperties: [ 'untested', 'passed', 'failed' ],
       childViews: 'untested passed failed'.w(),
@@ -262,7 +262,7 @@ Tasks.filterPane = SC.SheetPane.create({
 
     effortSpecifiedRadiobuttons: SC.RadioView.design(SCUI.ToolTip, {
       layout: { bottom: 90, height: 24, left: 115, right: 10 },
-      classNames: ['task-attribute-set'],
+      classNames: ['item-group'],
       layoutDirection: SC.LAYOUT_HORIZONTAL,
       items: [
         { title: "_DontCare".loc(), value: Tasks.FILTER_DONTCARE },
@@ -283,7 +283,7 @@ Tasks.filterPane = SC.SheetPane.create({
 
     recentlyUpdatedRadiobuttons: SC.RadioView.design(SCUI.ToolTip, {
       layout: { bottom: 55, height: 24, left: 115, right: 10 },
-      classNames: ['task-attribute-set'],
+      classNames: ['item-group'],
       layoutDirection: SC.LAYOUT_HORIZONTAL,
       items: [
         { title: "_DontCare".loc(), value: Tasks.FILTER_DONTCARE },

@@ -7,44 +7,6 @@
 */
 
 /*-----------------------------------------------------------------
- * User pane styles
- */
- 
-.sc-scroll-view.users-pane {
-	border-right: 1px solid #bbb !important;
-  background: #e1e7f0;
-}
-
-.sc-collection-view.users-pane-inner {
-  border: none !important;
-}
-
-.users-pane-inner .sc-collection-item .sc-outline label {
-  right: 50px !important;
-}
-
-.sc-view.sc-ghost-view .sc-scroll-view.users-pane, .sc-collection-view.users-pane-inner {
-  background: none !important;
-}
-
-.users-pane-inner .sc-view.sc-list-item-view.sc-collection-item.sc-group-item.even,
-.sc-view.sc-list-item-view.sc-collection-item.user-item.even {
-  background: #EDF3FE;
-}
-
-.user-item .sc-outline {
-  left: 10px !important;
-}
-
-.user-item .sc-outline img {
-  left: 0px !important;
-}
-
-.user-item label {
-  left: 19px !important;
-}
-
-/*-----------------------------------------------------------------
  * User-related icons
  */
  
@@ -87,10 +49,6 @@
 /*-----------------------------------------------------------------
  * User list item styles
  */
-
-.users-pane-inner .sc-collection-item {
-  border: 0 !important;
-}
 
 .sc-view.sc-ghost-view .users-pane-inner .sc-view.sc-list-item-view {
 	border: 1px solid #999 !important;

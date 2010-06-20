@@ -59,8 +59,7 @@ Tasks.importDataPage = SC.Page.create({
         isEnabledBinding: 'CoreTasks.permissions.canCreateUser',
         title: "_CreateMissingUsers".loc(),
         toolTip: "_CreateMissingUsersTooltip".loc(),
-        valueBinding: 'Tasks.importDataController.createMissingUsers',
-        classNames: [ 'task-priority-high' ]
+        valueBinding: 'Tasks.importDataController.createMissingUsers'
       }),
       
       importButton: SC.ButtonView.design({

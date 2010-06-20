@@ -59,11 +59,10 @@ Tasks.settingsPage = SC.Page.create({
     
       userManager: SC.View.design({
         layout: { left: 10, right: 10, top: 55, bottom: 40},
-        classNames: ['bordered-view'],
         childViews: 'usersMasterView userDetailView createdAtLabel updatedAtLabel'.w(),
         
         usersMasterView: SC.ScrollView.design({
-          layout: { top: 0, bottom: 0, left: 0, width: 300 },
+          layout: { top: 0, bottom: 0, left: 0, width: 290 },
           hasHorizontalScroller: NO,
           classNames: ['users-pane'],
 
@@ -121,18 +120,18 @@ Tasks.settingsPage = SC.Page.create({
         }),
 
         userDetailView: Tasks.UserInformationView.design({
-          layout: { top: 10, left: 325, bottom: 35, right: 10 },
+          layout: { top: 10, left: 325, height: 200, right: 10 },
           contentBinding: 'Tasks.userController'
         }),
         
         createdAtLabel: SC.LabelView.design({
-          layout: { left:305, bottom: 5, height: 17, width: 250 },
+          layout: { left:305, top: 210, height: 17, width: 250 },
           classNames: [ 'date-time'],
           textAlign: SC.ALIGN_LEFT,
           valueBinding: SC.binding('Tasks.userController.displayCreatedAt', this)
         }),
         updatedAtLabel: SC.LabelView.design({
-          layout: { right:5, bottom: 5, height: 17, width: 250 },
+          layout: { right:5, top: 210, height: 17, width: 250 },
           classNames: [ 'date-time'],
           textAlign: SC.ALIGN_RIGHT,
           valueBinding: SC.binding('Tasks.userController.displayUpdatedAt', this)

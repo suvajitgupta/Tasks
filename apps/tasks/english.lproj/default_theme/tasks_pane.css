@@ -200,11 +200,6 @@
   background: #C60 none repeat scroll 0 0 !important;
 }
 
-.project-item.sel .sc-outline .count {
-  color: #777 !important;
-  background: #FFF none repeat scroll 0 0 !important;
-}
-
 .task-item .description-icon {
   position: absolute;
   top: 4px !important;
@@ -325,7 +320,7 @@
 .tasks-pane-inner .task-item.sel,
 .tasks-pane-inner .task-item.sel:hover {
   background: #FFC none repeat scroll 0 0 !important;
-  border-color: black !important;
+  border-color: #000 !important;
 }
 
 .task-item:hover {

@@ -28,13 +28,12 @@ body.sc-theme {
   border: 0 !important;
 }
 
-.bordered-view {
-	border: 1px solid #bbb !important;
-	background: #eee;
+.sc-pane.sc-panel > .sc-view {
+  background-color: #BBB;
 }
 
-.sc-pane.sc-panel > .sc-view {
-  background-color: #AAA;
+.sc-menu-item span.separator {
+  border-bottom:1px solid #888 !important;
 }
 
 /*-----------------------------------------------------------------
@@ -86,12 +85,13 @@ body.sc-theme {
 }
 
 .projects-pane-inner .recently-updated,
-.users-pane-inner .sel .recently-updated {
+.users-pane-inner .recently-updated {
   background: static_url('images/white-dot.png') no-repeat 0 0;
 }
 
 .tasks-pane-inner .recently-updated,
-.users-pane-inner .recently-updated {
+.projects-pane-inner .sel .recently-updated,
+.users-pane-inner .sel .recently-updated {
   background: static_url('images/black-dot.png') no-repeat 0 0;
 }
 
@@ -148,13 +148,13 @@ body.sc-theme {
 	font-weight: normal !important;
   height: 12px !important;
   line-height: 11px !important;
-  color: #CCC !important;
+  color: #DDD !important;
   border: none !important;
   background: #888 none repeat scroll 0 0 !important;
   padding: 1px 5px;
 }
 
-.sc-view.sc-radio-view.task-attribute-set.disabled .sc-radio-button .sc-button-label {
+.sc-view.sc-radio-view.item-group.disabled .sc-radio-button .sc-button-label {
   color: black;
 }
 
@@ -172,6 +172,14 @@ body.sc-theme {
 
 .sc-view.sc-list-item-view.sc-collection-item.sc-group-item label {
   left: 10px !important;
+}
+
+.sc-group-item .sc-outline img {
+  left: 5px !important;
+}
+
+.sc-theme .sc-label-view img.icon {
+	top: 0px !important;
 }
 
 /*
@@ -227,16 +235,11 @@ body.sc-theme {
   width: 16px;
   height: 16px;
   background: static_url('images/lower-right-drag.png') no-repeat;
-}/*-----------------------------------------------------------------
+}
+
+/*-----------------------------------------------------------------
  * Filter pane styles
  */
-
-.quickfilter-toolbar {
-  border: 1px solid #AAA;
-  background: #DDD;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-}
 
 .quickfilter-label,
 .quickfilter-label .sc-button-inner,
@@ -286,12 +289,12 @@ body.sc-theme {
   background: #555 !important;
 }
 
-.task-attribute-set {
+.item-group {
   font-size: 10px !important;
   text-align: center !important;
   line-height: 1.5;
   border: 1px solid #888;
-  background: #CCC;
+  background: #EEE;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
 }
