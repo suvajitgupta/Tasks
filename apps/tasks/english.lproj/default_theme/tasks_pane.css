@@ -109,22 +109,21 @@
 }
 
 .assignee-under-loaded label {
-  background: paleGreen none repeat scroll 0 0 !important;
+  background: #6F6 none repeat scroll 0 0 !important;
 }
 
 .assignee-properly-loaded label {
-  background: paleTurquoise none repeat scroll 0 0 !important;
+  background: #0FF none repeat scroll 0 0 !important;
 }
 
 .assignee-over-loaded label {
-  background: pink none repeat scroll 0 0 !important;
+  background: #F99 none repeat scroll 0 0 !important;
 }
 
 .assignee-item .sc-outline .count {
   right: 12px !important;
   margin-top: 0px !important;
   top: 0px !important;
-	font-size: 12px !important;
 	font-weight: normal !important;
   height: 12px !important;
   line-height: 11px !important;
@@ -170,12 +169,12 @@
   top: 4px !important;
   bottom: 4px !important;
   left: 11px !important;
-	width: 32px !important;
+	width: 40px !important;
 }
 
 .task-item .sc-outline img {
   margin-top: -9px !important;
-  left: 45px !important;
+  left: 53px !important;
 }
 
 .tasks-pane-inner .sc-list-item-view label {
@@ -183,12 +182,12 @@
 }
 
 .task-item label {
-  left: 42px !important;
+  left: 50px !important;
   padding-left: 5px !important;
 }
 
 .task-item.task-type-displayed label {
-  left: 61px !important;
+  left: 68px !important;
 }
 
 .task-item .count {
@@ -327,7 +326,7 @@
 
 .tasks-pane-inner .task-item.sel,
 .tasks-pane-inner .task-item.sel:hover {
-  background: paleGoldenRod none repeat scroll 0 0 !important;
+  background: #FFC none repeat scroll 0 0 !important;
   border-color: black !important;
 }
 

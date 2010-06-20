@@ -60,7 +60,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 'pre {\n' +
 ' margin-top: -4px;\n' +
 ' margin-bottom: 8px;\n' +
-' margin-left: ' + (Tasks.softwareMode? '115' : '70') + 'px;\n' +
+' margin-left: ' + (Tasks.softwareMode? '123' : '78') + 'px;\n' +
 ' white-space: pre-wrap;\n' +
 ' word-wrap: break-word;\n' +
 ' padding: 5px;\n' +
@@ -82,7 +82,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 '}\n' +
 '.id {\n' +
 ' line-height: 1.5;\n' +
-' width: 32px !important;\n' +
+' width: 40px !important;\n' +
 ' letter-spacing: -1px;\n' +
 '}\n' +
 '.untested, .passed, .failed, .feature, .bug, .other {\n' +
