@@ -255,7 +255,7 @@ Tasks.filterPane = SC.SheetPane.create({
     }),
 
     effortSpecifiedLabel: SC.LabelView.design({
-      layout: { bottom: 90, height: 22, left: 10, width: 100 },
+      layout: { bottom: 90, height: 22, left: 0, width: 112 },
       textAlign: SC.ALIGN_RIGHT,
       value: "_EffortSpecified:".loc()
     }),
@@ -276,7 +276,7 @@ Tasks.filterPane = SC.SheetPane.create({
     }),
 
     recentlyUpdatedLabel: SC.LabelView.design({
-      layout: { bottom: 55, height: 22, left: 10, width: 100 },
+      layout: { bottom: 55, height: 22, left: 0, width: 112 },
       textAlign: SC.ALIGN_RIGHT,
       value: "_RecentlyUpdated:".loc()
     }),
