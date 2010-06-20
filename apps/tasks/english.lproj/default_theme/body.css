@@ -140,7 +140,7 @@ body.sc-theme {
 .description-icon {
   width: 16px !important;
   height: 16px !important;
-  background: static_url('images/attach.png') no-repeat;
+  background: static_url('images/description.png') no-repeat;
 }
 
 .sc-outline .count {
