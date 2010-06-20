@@ -25,7 +25,7 @@ Tasks.filterPane = SC.SheetPane.create({
     
     title: SC.LabelView.design({
       layout: { top: 10, left: 10, right: 10, height: 24 },
-      classNames: ['task-attribute-set-title'],
+      textAlign: SC.ALIGN_CENTER,
       value: "_QuickFilters".loc(),
       toolTip: "_QuickFiltersTooltip".loc()
     }),
@@ -102,7 +102,6 @@ Tasks.filterPane = SC.SheetPane.create({
     
     typeLabel: SC.LabelView.design({
       layout: { top: 110, height: 24, left: 10, right: 10 },
-      classNames: ['task-attribute-set-title'],
       isVisible: Tasks.softwareMode,
       value: "_Type".loc(),
       toolTip: "_TypeTooltip".loc()
@@ -140,7 +139,6 @@ Tasks.filterPane = SC.SheetPane.create({
 
     priorityLabel: SC.LabelView.design({
       layout: { top: Tasks.softwareMode? 165 : 110, height: 24, left: 10, right: 10 },
-      classNames: ['task-attribute-set-title'],
       value: "_Priority".loc(),
       toolTip: "_PriorityTooltip".loc()
     }),
@@ -176,7 +174,6 @@ Tasks.filterPane = SC.SheetPane.create({
 
     statusLabel: SC.LabelView.design({
       layout: { top: Tasks.softwareMode? 220 : 170, height: 24, left: 10, right: 10 },
-      classNames: ['task-attribute-set-title'],
       value: "_Status".loc(),
       toolTip: "_StatusTooltip".loc()
     }),
@@ -219,7 +216,6 @@ Tasks.filterPane = SC.SheetPane.create({
 
     validationLabel: SC.LabelView.design({
       layout: { top: 275, height: 24, left: 10, right: 10 },
-      classNames: ['task-attribute-set-title'],
       isVisible: Tasks.softwareMode,
       value: "_Validation".loc(),
       toolTip: "_ValidationTooltip".loc()
@@ -260,7 +256,6 @@ Tasks.filterPane = SC.SheetPane.create({
 
     effortSpecifiedLabel: SC.LabelView.design({
       layout: { bottom: 90, height: 22, left: 10, width: 100 },
-      classNames: ['filter-label'],
       textAlign: SC.ALIGN_RIGHT,
       value: "_EffortSpecified:".loc()
     }),
@@ -282,7 +277,6 @@ Tasks.filterPane = SC.SheetPane.create({
 
     recentlyUpdatedLabel: SC.LabelView.design({
       layout: { bottom: 55, height: 22, left: 10, width: 100 },
-      classNames: ['filter-label'],
       textAlign: SC.ALIGN_RIGHT,
       value: "_RecentlyUpdated:".loc()
     }),

@@ -33,6 +33,10 @@ body.sc-theme {
 	background: #eee;
 }
 
+.sc-pane.sc-panel > .sc-view {
+  background-color: #AAA;
+}
+
 /*-----------------------------------------------------------------
  * Status styles
  */
@@ -64,7 +68,7 @@ body.sc-theme {
 }
 
 .onscreen-help {
-  color: #777 !important;
+  color: #444 !important;
   font-size: 10px !important;
 	line-height: 12px !important;
 }
@@ -197,7 +201,7 @@ body.sc-theme {
 }
 
 .scui-combobox-view label {
-  height: 24px !important;
+  height: 23px !important;
 }
 
 .scui-combobox-view .scui-combobox-dropdown-button-view {
@@ -282,24 +286,12 @@ body.sc-theme {
   background: #555 !important;
 }
 
-.filter-label {
-  font-size: 10px !important;
-  color: #000 !important;
-}
-
-.task-attribute-set-title  {
-  font-size: 10px !important;
-  color: #000 !important;
-  text-shadow: #fff 0 1px 1px;
-  text-align: center !important;
-}
-
 .task-attribute-set {
   font-size: 10px !important;
   text-align: center !important;
   line-height: 1.5;
-  border: 1px solid #AAA;
-  background: #FFF;
+  border: 1px solid #888;
+  background: #CCC;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
 }
