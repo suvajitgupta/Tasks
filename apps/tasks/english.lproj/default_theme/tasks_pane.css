@@ -138,7 +138,6 @@
 .assignee-item .sc-outline .count,
 .assignee-item .sc-outline .count.finished,
 .assignee-item.incompleteEffortWarning .sc-outline .count.finished {
-  background: #666 none repeat scroll 0 0 !important;
   top: 0px !important;
 }
 
@@ -198,7 +197,7 @@
 .task-item .sc-outline .count.doneEffortRangeWarning,
 .task-item.sel .sc-outline .count.doneEffortRangeWarning,
 .assignee-item.incompleteEffortWarning .sc-outline .count {
-  background: #F60 none repeat scroll 0 0 !important;
+  background: #C60 none repeat scroll 0 0 !important;
 }
 
 .project-item.sel .sc-outline .count {
