@@ -102,7 +102,7 @@
 .sc-list-view.sc-source-list.users-pane-inner .sc-collection-item.sel:hover,
 .sc-list-view.sc-source-list.users-pane-inner .sc-collection-item.sel {
   font-weight: normal !important;
-  background: #1F4F9B none repeat scroll 0 0 !important;
+  background: #369 none repeat scroll 0 0 !important;
   border-color: #222 !important;
 }
 
