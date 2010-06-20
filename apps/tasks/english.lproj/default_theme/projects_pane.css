@@ -119,7 +119,7 @@
 }
 
 .project-item .recently-updated {
-  margin-left: 2px !important;
+  margin-left: 0px !important;
 }
 
 .projects-pane-inner .sc-collection-item .sc-outline label {
@@ -131,7 +131,7 @@
 }
 
 .project-item .sc-outline img {
-  left: 0px !important;
+  left: -2px !important;
   margin-top: -9px !important;
 }
 
