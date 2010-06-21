@@ -411,7 +411,7 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       addTaskButton: SC.ButtonView.design({
-        layout: { centerY: 0, left: 250, height: 24, width: 33 },
+        layout: { centerY: 0, left: 245, height: 24, width: 33 },
         classNames: ['image-button'],
         titleMinWidth: 0,
         icon: 'add-icon',
@@ -422,7 +422,7 @@ Tasks.mainPage = SC.Page.design({
         action: 'addTask'
       }),
       deleteTaskButton: SC.ButtonView.design(SCUI.Permissible,{
-        layout: { centerY: 0, left: 292, height: 24, width: 33 },
+        layout: { centerY: 0, left: 287, height: 24, width: 33 },
         classNames: ['image-button'],
         titleMinWidth: 0,
         icon: 'delete-icon',
