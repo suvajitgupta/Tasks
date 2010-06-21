@@ -45,11 +45,3 @@
   top: 4px !important;
   right: 5px !important;
 }
-
-/*-----------------------------------------------------------------
- * User list item styles
- */
-
-.sc-view.sc-ghost-view .users-pane-inner .sc-view.sc-list-item-view {
-	border: 1px solid #999 !important;
-}

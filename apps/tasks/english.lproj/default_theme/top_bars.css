@@ -1,12 +1,22 @@
 /* 
 
-  Top Navigation Styling
+  Top Bar Styling
 
-  @author Matt Grantham
   @author Suvajit Guupta
+  @author Matt Grantham
   @author Ryan Mudryk
   
 */
+
+.title-bar {
+  background: static_url('images/title-bar-bg.png') repeat-x;
+}
+
+.window-title {
+  font-size: 14px !important;
+  text-align: center !important;
+  color: #DDD !important;
+}
 
 .tasks-logo {
   margin-top: -15px !important;
@@ -26,45 +36,10 @@
   -webkit-border-radius: 15px;
 }
 
-.welcome-message {
-  font-size: 13px !important;
-  text-align: center !important;
-  color: #BBB !important;
-  line-height: 15px !important;
-}
-
-.sc-label-view img {
-  margin-right: 2px !important;
-  vertical-align: middle !important;
-}
-
-.sc-view .search-bar {
-  background: static_url('images/default-theme-search-filter-bg.png') no-repeat;
-}
-
-.filter-icon {
-  margin-right: -1px !important;
-  width: 16px !important;
-  height: 16px !important;
-  background: static_url('images/filter.png') no-repeat 0 0;
-}
-
-.filter-cancel-icon {
-  background: static_url('images/default-theme-static.png') no-repeat 0 -352px !important;
-  z-index: 100 !important;
-  cursor: pointer !important;
-}
-
 .actions-icon {
   width: 25px !important;
   height: 16px !important;
   background: static_url('images/actions.png') no-repeat;
-}
-
-.tasks-icon {
-  width: 16px !important;
-  height: 16px !important;
-  background: static_url('images/tasks.png') no-repeat;
 }
 
 .statistics-icon {
@@ -108,6 +83,41 @@
   height: 16px;
   background: static_url('images/logout.png') no-repeat;
 }
+
+.tasks-icon {
+  width: 16px !important;
+  height: 16px !important;
+  background: static_url('images/tasks.png') no-repeat;
+}
+
+.welcome-message {
+  font-size: 13px !important;
+  text-align: center !important;
+  color: #BBB !important;
+  line-height: 15px !important;
+}
+
+.filter-icon {
+  margin-right: -1px !important;
+  width: 16px !important;
+  height: 16px !important;
+  background: static_url('images/filter.png') no-repeat 0 0;
+}
+
+.filter-cancel-icon {
+  background: static_url('images/default-theme-static.png') no-repeat 0 -352px !important;
+  z-index: 100 !important;
+  cursor: pointer !important;
+}
+
+.sc-view .search-bar {
+  background: static_url('images/default-theme-search-filter-bg.png') no-repeat;
+}
+
+
+/*-----------------------------------------------------------------
+ * Search bar browser specific overrides
+ */
 
 .safari .sc-view .search-bar.focus,
 .mozilla .sc-view .search-bar.focus,
@@ -156,14 +166,4 @@
   font-size: 11px;
   font-style: italic;
   line-height: 22px;
-}
-
-.title-bar {
-  background: static_url('images/title-bar-bg.png') repeat-x;
-}
-
-.window-title {
-  font-size: 14px !important;
-  text-align: center !important;
-  color: #DDD !important;
 }

@@ -2,8 +2,8 @@
 
   Tasks Pane Styling 
 
-  @author Matt Grantham
   @author Suvajit Gupta
+  @author Matt Grantham
   
 */
 
@@ -134,6 +134,11 @@
   margin-top: 0px !important;
 }
 
+.assignee-item.incompleteEffortWarning .sc-outline .count,
+.task-item .sc-outline .count.doneEffortRangeWarning {
+  background: #C60 none repeat scroll 0 0 !important;
+}
+
 
 /*-----------------------------------------------------------------
  * Task list item styles
@@ -184,11 +189,6 @@
 .task-item .count {
   top: 5px !important;
 	right: 12px !important;
-}
-
-.assignee-item.incompleteEffortWarning .sc-outline .count,
-.task-item .sc-outline .count.doneEffortRangeWarning {
-  background: #C60 none repeat scroll 0 0 !important;
 }
 
 .task-item .description-icon {
