@@ -92,7 +92,7 @@
 
 .sc-view.sc-list-item-view.sc-collection-item.sc-group-item.assignee-item .sc-outline label {
 	font-size: 13px !important;
-  color: #444 !important;
+  color: #111 !important;
   top: 7px !important;
   left: 0px !important;
   height: 18px !important;
@@ -105,19 +105,25 @@
 }
 
 .assignee-not-loaded label {
-  background: #bbb none repeat scroll 0 0 !important;
+  background: #999 none repeat scroll 0 0 !important;
 }
 
 .assignee-under-loaded label {
-  background: #6F6 none repeat scroll 0 0 !important;
+  background: #3C6 none repeat scroll 0 0 !important;
 }
 
 .assignee-properly-loaded label {
-  background: #0FF none repeat scroll 0 0 !important;
+  background: #39C none repeat scroll 0 0 !important;
 }
 
 .assignee-over-loaded label {
   background: #F99 none repeat scroll 0 0 !important;
+}
+
+.tasks-pane-inner .assignee-item .sc-outline .count,
+.assignee-item.incompleteEffortWarning .sc-outline .count.finished {
+  color: #DDD !important;
+  background: #555 none repeat scroll 0 0 !important;
 }
 
 .assignee-item .sc-outline .count {

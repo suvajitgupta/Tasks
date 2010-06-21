@@ -140,13 +140,12 @@ body.sc-theme {
   background: static_url('images/description.png') no-repeat;
 }
 
-.sc-outline .count,
-.assignee-item.incompleteEffortWarning .sc-outline .count.finished {
+.sc-outline .count {
 	font-style: normal !important;
 	font-weight: normal !important;
   height: 12px !important;
   line-height: 11px !important;
-  color: #DDD !important;
+  color: #EEE !important;
   border: none !important;
   background: #888 none repeat scroll 0 0 !important;
   padding: 1px 5px;
