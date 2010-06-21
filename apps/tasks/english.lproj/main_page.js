@@ -435,7 +435,7 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       summaryView: Tasks.SummaryView.design({
-        layout: { centerY: 0, height: 16, centerX: 20, width: 450 },
+        layout: { centerY: 0, height: 18, centerX: 20, width: 450 },
         classNames: ['bottom-bar-label'],
         textAlign: SC.ALIGN_CENTER,
         assignmentsSummaryBinding: SC.Binding.oneWay('Tasks.assignmentsController.assignmentsSummary'),
@@ -444,7 +444,7 @@ Tasks.mainPage = SC.Page.design({
       }),
         
       serverMessageView: SC.LabelView.design({
-        layout: { centerY: 0, height: 16, right: 95, width: 250 },
+        layout: { centerY: 0, height: 18, right: 95, width: 250 },
         classNames: ['bottom-bar-label'],
         icon: '',
         textAlign: SC.ALIGN_RIGHT,
