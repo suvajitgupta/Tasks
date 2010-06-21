@@ -125,7 +125,6 @@ Tasks.mainPage = SC.Page.design({
 
       displayModeSegments: SC.SegmentedView.design(SCUI.ToolTip, {
         layout: { left: 305, centerY: -4, height: 24, width: 90 },
-        classNames: ['display-modes'],
         items: [
           { title: '', icon: 'sc-icon-group-16', value: Tasks.DISPLAY_MODE_TEAM },
           { title: '', icon: 'tasks-icon', value: Tasks.DISPLAY_MODE_TASKS }

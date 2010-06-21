@@ -7,10 +7,6 @@
   
 */
 
-.sc-radio-view.sc-layout-horizontal .sc-radio-button {
-  padding-right: 4px;
-}
-
 .bottom-bar-label {
   font-size: 10px !important;
   color: #aaa !important;
@@ -22,16 +18,16 @@
   background: static_url('images/progress.gif') no-repeat 0 0;
 }
 
-.refresh-icon {
-  width: 16px;
-  height: 16px;
-  background: static_url('images/refresh.png') no-repeat 0 0;
-}
-
 .save-icon {
   width: 16px;
   height: 16px;
   background: static_url('images/save.png') no-repeat 0 0;
+}
+
+.refresh-icon {
+  width: 16px;
+  height: 16px;
+  background: static_url('images/refresh.png') no-repeat 0 0;
 }
 
 .disabled .add-icon, .disabled .delete-icon, .disabled .refresh-icon, .disabled .save-icon {

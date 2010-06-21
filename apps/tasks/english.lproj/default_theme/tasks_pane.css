@@ -122,13 +122,7 @@
 
 .assignee-item .sc-outline .count {
   right: 12px !important;
-  margin-top: 0px !important;
   top: 0px !important;
-	font-weight: normal !important;
-  height: 12px !important;
-  line-height: 11px !important;
-  border: none !important;
-  padding: 1px 5px;
 }
 
 .assignee-item .sc-outline .count.finished {
@@ -136,9 +130,8 @@
 }
 
 .assignee-item .sc-outline .count,
-.assignee-item .sc-outline .count.finished,
-.assignee-item.incompleteEffortWarning .sc-outline .count.finished {
-  top: 0px !important;
+.task-item .count {
+  margin-top: 0px !important;
 }
 
 
@@ -189,14 +182,12 @@
 }
 
 .task-item .count {
-  margin-top: 0px !important;
   top: 5px !important;
 	right: 12px !important;
 }
 
-.task-item .sc-outline .count.doneEffortRangeWarning,
-.task-item.sel .sc-outline .count.doneEffortRangeWarning,
-.assignee-item.incompleteEffortWarning .sc-outline .count {
+.assignee-item.incompleteEffortWarning .sc-outline .count,
+.task-item .sc-outline .count.doneEffortRangeWarning {
   background: #C60 none repeat scroll 0 0 !important;
 }
 
