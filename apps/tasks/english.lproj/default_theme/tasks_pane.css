@@ -106,18 +106,30 @@
 
 .assignee-not-loaded label {
   background: #999 none repeat scroll 0 0 !important;
+  box-shadow: inset 0 3px 3px #777;
+  -moz-box-shadow: inset 0 3px 3px gray;
+  -webkit-box-shadow: inset 0 3px 3px gray;
 }
 
 .assignee-under-loaded label {
   background: #3C6 none repeat scroll 0 0 !important;
+  box-shadow: inset 0 3px 3px #090;
+  -moz-box-shadow: inset 0 3px 3px #090;
+  -webkit-box-shadow: inset 0 3px 3px #090;
 }
 
 .assignee-properly-loaded label {
   background: #39C none repeat scroll 0 0 !important;
+  box-shadow: inset 0 3px 3px #069;
+  -moz-box-shadow: inset 0 3px 3px #069;
+  -webkit-box-shadow: inset 0 3px 3px #069;
 }
 
 .assignee-over-loaded label {
   background: #F99 none repeat scroll 0 0 !important;
+  box-shadow: inset 0 3px 3px #C66;
+  -moz-box-shadow: inset 0 3px 3px #C66;
+  -webkit-box-shadow: inset 0 3px 3px #C66;
 }
 
 .tasks-pane-inner .assignee-item .sc-outline .count,
