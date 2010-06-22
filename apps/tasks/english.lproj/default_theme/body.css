@@ -33,6 +33,10 @@ body.sc-theme {
   border-bottom:1px solid #888 !important;
 }
 
+.sc-alert .info .separator {
+  background-color: #999 !important;
+}
+
 /*-----------------------------------------------------------------
  * Status styles
  */
