@@ -99,15 +99,17 @@
 }
 
 .projects-pane-inner .sc-group-item.sel .sc-outline,
-.users-pane-inner .sc-group-item.sel .sc-outline,
 .projects-pane-inner .sc-view.sc-list-item-view.sc-collection-item.sc-group-item.sel .sc-outline label,
-.users-pane-inner .sc-view.sc-list-item-view.sc-collection-item.sc-group-item.sel .sc-outline label,
 .sc-list-view.sc-source-list.projects-pane-inner .sc-collection-item.sel,
 .sc-list-view.sc-source-list.projects-pane-inner .sc-collection-item.sel:hover,
-.sc-list-view.sc-source-list.users-pane-inner .sc-collection-item.sel:hover,
-.sc-list-view.sc-source-list.users-pane-inner .sc-collection-item.sel {
+.users-pane-inner .sc-group-item.sel .sc-outline,
+.users-pane-inner .sc-view.sc-list-item-view.sc-collection-item.sc-group-item.sel .sc-outline label,
+.sc-list-view.sc-source-list.users-pane-inner .sc-collection-item.sel,
+.sc-list-view.sc-source-list.users-pane-inner .sc-collection-item.sel:hover {
+  margin-top: 1px !important;
+  height: 22px !important;
   color: #000 !important;
-  background: #EEE !important;
+  background: lightBlue !important;
   border-color: #000 !important;
 }
 
@@ -118,29 +120,31 @@
   font-weight: normal !important;
 }
 
-.projects-pane .projects-pane-inner .sc-collection-item label,
-.users-pane .users-pane-inner .sc-collection-item label {
-  color: #BBB;
-}
-
-.projects-pane-inner .sc-view.sc-list-item-view.sc-collection-item .sc-outline label,
-.users-pane-inner .sc-view.sc-list-item-view.sc-collection-item .sc-outline label {
-  opacity: 1 !important;
-}
-
 .project-item .recently-updated,
 .users-item .recently-updated {
   margin-left: 0px !important;
 }
 
-.projects-pane-inner .sc-collection-item .sc-outline label,
-.users-pane-inner .sc-collection-item .sc-outline label {
-  right: 50px !important;
-}
-
 .project-item .sc-outline,
 .user-item .sc-outline {
   left: 15px !important;
+}
+
+.projects-pane .projects-pane-inner .sc-collection-item label,
+.users-pane .users-pane-inner .sc-collection-item label {
+  color: #BBB;
+}
+
+.projects-pane .projects-pane-inner .sc-collection-item.sel label,
+.users-pane .users-pane-inner .sc-collection-item.sel label {
+  color: #222;
+}
+
+.projects-pane-inner .sc-view.sc-list-item-view.sc-collection-item .sc-outline label,
+.users-pane-inner .sc-view.sc-list-item-view.sc-collection-item .sc-outline label {
+  left: 19px !important;
+  right: 50px !important;
+  opacity: 1 !important;
 }
 
 .project-item .sc-outline img,
@@ -149,11 +153,6 @@
   margin-top: -9px !important;
 }
 
-.project-item label,
-.user-item label {
-  left: 19px !important;
-}
-  
 .project-item .count {
   right: 14px !important;
 }

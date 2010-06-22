@@ -79,7 +79,7 @@ Tasks.settingsPage = SC.Page.create({
             contentIconKey: 'icon',
             exampleView: Tasks.UserItemView,
             groupExampleView: Tasks.GroupItemView, // added to avoid context menu
-            isEditable: YES,
+            isEditable: NO,
             allowDeselectAll: YES,
             canEditContent: YES,
             canReorderContent: YES,
