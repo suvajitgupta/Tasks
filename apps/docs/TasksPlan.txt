@@ -37,7 +37,7 @@ v Track/optimize calls to assignments controller and custom view render methods 
 v Make buttons depressable to provide feedback when using them [SG] $Feature @Done %Passed
 - Support direct access to Projects or Tasks using SproutCore routes [SG] $Feature @Done %Passed
 - Destroy authentication token when User logs out [SG] <JH2>
-- Implement HTML5 cascading data source to speedup data loads [JH2] <SG>
+- Implement HTML5 cascading data source to speedup data loads [SE] <SG>
 - Implement JSONP-based data loading for performance speedup [JH2] <SG>
 - Implement disconnected operation (offline mode, synchronization after network reconnection) using Hub.js [JH2] <SG>
 - Out of Scope: Add support for attachments in record descriptions $Feature
@@ -201,7 +201,7 @@ Styling/Hardening @Active
 | Popup online Help, Statistics
 | Email Notifications, Task watching
 - Develop Model/View unit tests [SG] <BB> @Active
-- Refactor code to "root controller pattern" and new SproutCore statecharts [SG] <EG> @Active
+- Refactor code to "root controller pattern" and new SproutCore statecharts [SG] <MC> @Active
 - Develop automated test scripts using Lebowski/Selenium [SG] <MR> @Active
 
 Installation/Deployment @Active
@@ -214,5 +214,5 @@ Installation/Deployment @Active
 v Provide SproutCore doctool-style comments [SG] <SE>
 
 Touch Interfaces
-- Beta: Develop iPad client with swiveling Master/Detail view <JH2> [SG] @Risky
+- Develop iPad client with swiveling Master/Detail view <JH2> [SG] @Active
 - Develop iPhone client <MB> [SG]
