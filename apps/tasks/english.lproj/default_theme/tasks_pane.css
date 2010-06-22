@@ -86,6 +86,7 @@
 }
 
 .assignee-item .sc-outline img {
+  top: 6px !important;
   left: 5px !important;
   z-index: 10 !important;
 }
@@ -93,10 +94,10 @@
 .sc-view.sc-list-item-view.sc-collection-item.sc-group-item.assignee-item .sc-outline label {
 	font-size: 13px !important;
   color: #111 !important;
-  top: 7px !important;
+  top: 6px !important;
   left: 0px !important;
   right: 0px !important;
-  height: 18px !important;
+  height: 19px !important;
   padding-left: 20px !important;
   opacity: 0.85;
 }
@@ -107,30 +108,30 @@
 
 .assignee-not-loaded label {
   background: #AAA none repeat scroll 0 0 !important;
-  box-shadow: inset 0 3px 3px #888;
-  -moz-box-shadow: inset 0 3px 3px #888;
-  -webkit-box-shadow: inset 0 3px 3px #888;
+  box-shadow: inset 0 3px 3px #CCC;
+  -moz-box-shadow: inset 0 3px 3px #CCC;
+  -webkit-box-shadow: inset 0 3px 3px #CCC;
 }
 
 .assignee-under-loaded label {
   background: #3C6 none repeat scroll 0 0 !important;
-  box-shadow: inset 0 3px 3px #090;
-  -moz-box-shadow: inset 0 3px 3px #090;
-  -webkit-box-shadow: inset 0 3px 3px #090;
+  box-shadow: inset 0 3px 3px #3F6;
+  -moz-box-shadow: inset 0 3px 3px #3F6;
+  -webkit-box-shadow: inset 0 3px 3px #3F6;
 }
 
 .assignee-properly-loaded label {
   background: #69F none repeat scroll 0 0 !important;
-  box-shadow: inset 0 3px 3px #66F;
-  -moz-box-shadow: inset 0 3px 3px #66F;
-  -webkit-box-shadow: inset 0 3px 3px #66F;
+  box-shadow: inset 0 3px 3px #6CF;
+  -moz-box-shadow: inset 0 3px 3px #6CF;
+  -webkit-box-shadow: inset 0 3px 3px #6CF;
 }
 
 .assignee-over-loaded label {
   background: #F99 none repeat scroll 0 0 !important;
-  box-shadow: inset 0 3px 3px #C77;
-  -moz-box-shadow: inset 0 3px 3px #C77;
-  -webkit-box-shadow: inset 0 3px 3px #C77;
+  box-shadow: inset 0 3px 3px #FBF;
+  -moz-box-shadow: inset 0 3px 3px #FBF;
+  -webkit-box-shadow: inset 0 3px 3px #FBF;
 }
 
 .tasks-pane-inner .assignee-item .sc-outline .count,
@@ -150,12 +151,16 @@
 
 .assignee-item .sc-outline .count,
 .task-item .count {
-  margin-top: 0px !important;
+  margin-top: -1px !important;
 }
 
-.assignee-item.incompleteEffortWarning .sc-outline .count,
 .task-item .sc-outline .count.doneEffortRangeWarning {
-  background: #C33 none repeat scroll 0 0 !important;
+  background: #F93 none repeat scroll 0 0 !important;
+}
+
+.assignee-item.incompleteEffortWarning .sc-outline .count {
+  color: #333 !important;
+  background: #FF6 none repeat scroll 0 0 !important;
 }
 
 
