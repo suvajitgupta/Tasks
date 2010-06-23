@@ -95,14 +95,17 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     
     // console.log('DEBUG: mouse down on task item: ' + this.getPath('content.name'));
     
-    // See what user clicked on
+    // See what user clicked on an popup editor accordingly
     var classes = event.target.className;
     // console.log('DEBUG: classes = "' + classes + '"');
-    var sel = Tasks.getPath('tasksController.selection');
-    var singleSelect = (sel && sel.get('length') === 1);
+    if(classes.indexOf("task-id ") !== -1 || classes.indexOf("task-icon") !== -1 || classes.indexOf("inner") !== -1 ||
+       classes.indexOf("count") !== -1 || classes.indexOf("description-icon") !== -1) {
+      var sel = Tasks.getPath('tasksController.selection');
+      var singleSelect = (sel && sel.get('length') === 1);
     
-    if ((!event.which || event.which === 1) && singleSelect && classes !== "") { // left click with one task selected and didn't click on the inline editable name
-      this.popupEditor();
+      if ((!event.which || event.which === 1) && singleSelect && classes !== "") { // left click with one task selected and didn't click on the inline editable name
+        this.popupEditor();
+      }
     }
     
     return NO; // so that drag-n-drop can work!

@@ -52,14 +52,16 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
 
     this.set('isSystemProject', CoreTasks.isSystemProject(content));
     
-    // See what user clicked on
+    // See what user clicked on an popup editor accordingly
     var classes = event.target.className;
     // console.log('DEBUG: classes = "' + classes + '"');
-    var sel = Tasks.getPath('projectsController.selection');
-    var singleSelect = (sel && sel.get('length') === 1);
-    
-    if ((!event.which || event.which === 1) && singleSelect && classes !== "") { // left click with one project selected and didn't click on the inline editable name
-      this.popupEditor();
+    if(classes.indexOf("project-icon") !== -1 || classes.indexOf("inner") !== -1 || classes.indexOf("count") !== -1 || classes.indexOf("description-icon") !== -1) {
+      var sel = Tasks.getPath('projectsController.selection');
+      var singleSelect = (sel && sel.get('length') === 1);
+
+      if ((!event.which || event.which === 1) && singleSelect && classes !== "") { // left click with one project selected and didn't click on the inline editable name
+        this.popupEditor();
+      }
     }
 
     return NO;
