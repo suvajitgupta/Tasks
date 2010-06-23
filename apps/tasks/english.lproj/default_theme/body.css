@@ -63,7 +63,7 @@ body.sc-theme {
   margin-left: 8px !important;
   margin-right: 3px !important;
 }
-.sc-theme .sc-button-view.sc-regular-size.square.disabled {
+.sc-theme .sc-button-view.sc-regular-size.square.image-button.disabled {
   background: #EEE !important;
   height: 23px !important;
   width: 32px !important;
