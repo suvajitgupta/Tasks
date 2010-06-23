@@ -78,7 +78,7 @@
 .projects-pane-inner .sc-view.sc-list-item-view.sc-collection-item.sc-group-item .sc-outline label,
 .users-pane-inner .sc-view.sc-list-item-view.sc-collection-item.sc-group-item .sc-outline label {
   left: 20px !important;
-  color: #DDD !important;
+  color: #EEE !important;
 }
 
 
@@ -109,7 +109,7 @@
   margin-top: 1px !important;
   height: 22px !important;
   color: #000 !important;
-  background: lightBlue !important;
+  background: #9CF !important;
   border-color: #000 !important;
 }
 
@@ -132,7 +132,7 @@
 
 .projects-pane .projects-pane-inner .sc-collection-item label,
 .users-pane .users-pane-inner .sc-collection-item label {
-  color: #BBB;
+  color: #CCC;
 }
 
 .projects-pane .projects-pane-inner .sc-collection-item.sel label,
@@ -155,6 +155,8 @@
 
 .project-item .count {
   right: 14px !important;
+  background: #EEE !important;
+  color: #555 !important;
 }
 
 .project-item .description-icon {

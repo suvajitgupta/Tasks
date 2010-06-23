@@ -136,13 +136,13 @@
 
 .tasks-pane-inner .assignee-item .sc-outline .count,
 .assignee-item.incompleteEffortWarning .sc-outline .count.finished {
-  color: #DDD !important;
-  background: #555 none repeat scroll 0 0 !important;
+  top: 0px !important;
+  color: #555 !important;
+  background: #DDD none repeat scroll 0 0 !important;
 }
 
 .assignee-item .sc-outline .count {
   right: 12px !important;
-  top: 0px !important;
 }
 
 .assignee-item .sc-outline .count.finished {
@@ -151,7 +151,7 @@
 
 .assignee-item .sc-outline .count,
 .task-item .count {
-  margin-top: -1px !important;
+  margin-top: 0px !important;
 }
 
 .task-item .sc-outline .count.doneEffortRangeWarning {
@@ -160,7 +160,7 @@
 
 .assignee-item.incompleteEffortWarning .sc-outline .count {
   color: #333 !important;
-  background: #FF6 none repeat scroll 0 0 !important;
+  background: #FF8 none repeat scroll 0 0 !important;
 }
 
 
@@ -334,8 +334,8 @@
 
 .tasks-pane-inner .task-item.sel,
 .tasks-pane-inner .task-item.sel:hover {
-  background: lightBlue none repeat scroll 0 0 !important;
-  border-color: #000 !important;
+  background: #9CF none repeat scroll 0 0 !important;
+  border-color: #666 !important;
 }
 
 .task-item:hover {
