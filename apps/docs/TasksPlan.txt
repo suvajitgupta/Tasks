@@ -184,7 +184,7 @@ Server @Active
 
 Styling/Hardening @Active
 ^ Style via CSS, embed catchy/sprited images [MG] <SG> @Done %Passed
-- Beta: Re-style to match Greenhouse look & feel [MG] <SG> @Active
+^ Beta: Re-style to match Greenhouse look & feel [SG] <MG> @Active
 - Beta: Split/sprite final set of icons using Chance [JH2] <MG>
 - Perform I18N and L10N (test with reversed strings) [SG] <JH2> @Done %Passed
 - Collect/address feedback from Alpha/Beta users and targeted usability tests <MG> [SG] @Done %Passed
@@ -214,5 +214,5 @@ Installation/Deployment @Active
 v Provide SproutCore doctool-style comments [SG] <SE>
 
 Touch Interfaces
-- Develop iPad client with swiveling Master/Detail view <JH2> [SG] @Active
+- Develop iPad client with swiveling Master/Detail view <JH2> [SG] @Risky
 - Develop iPhone client <MB> [SG]
