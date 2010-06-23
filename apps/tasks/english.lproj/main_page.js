@@ -64,7 +64,7 @@ Tasks.mainPage = SC.Page.design({
   mainPane: SC.MainPane.design({
     
     layerId: 'mainPane',
-    layout: { left: 0, right: 0, top: 0, bottom: 0, minWidth: 1024, minHeight: 640 },
+    layout: { left: 0, right: 0, top: 0, bottom: 0, minWidth: 925, minHeight: 500 },
     childViews: 'topBarView masterDetailView bottomBarView'.w(),
     
     topBarView: SC.View.design(SC.Border, {

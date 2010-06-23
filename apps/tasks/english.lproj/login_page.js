@@ -26,7 +26,7 @@ Tasks.loginPage = SC.Page.create({
       childViews: 'logo loginNameField passwordField loginErrorMessage loginButton guestSignupButton'.w(),
       
       logo: SC.View.design({
-        layout: { top: 0, left: 0, width: 153, height: 56 },
+        layout: { top: 0, left: 10, width: 153, height: 56 },
         classNames: ['logo-l']
       }),
       
