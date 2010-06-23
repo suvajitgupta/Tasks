@@ -31,5 +31,5 @@
 }
 
 .disabled .add-icon, .disabled .delete-icon, .disabled .refresh-icon, .disabled .save-icon {
-  opacity: 0.5;
+  opacity: 0.4;
 }

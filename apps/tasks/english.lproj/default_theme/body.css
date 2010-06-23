@@ -29,12 +29,9 @@ body.sc-theme {
   background-color: #BBB;
 }
 
-.sc-menu-item span.separator {
-  border-bottom:1px solid #888 !important;
-}
-
-.sc-alert .info .separator {
-  background-color: #999 !important;
+.separator {
+  background-color: #CCC !important;
+  border-top: 1px solid #888 !important;
 }
 
 /*-----------------------------------------------------------------
@@ -65,6 +62,12 @@ body.sc-theme {
   line-height: 28px !important;
   margin-left: 8px !important;
   margin-right: 3px !important;
+}
+.sc-theme .sc-button-view.sc-regular-size.square.disabled {
+  background: #EEE !important;
+  height: 23px !important;
+  width: 32px !important;
+  -moz-border-radius: 5px !important;
 }
 
 .onscreen-help {
