@@ -210,9 +210,11 @@
   left: 68px !important;
 }
 
-.task-item .count {
+.task-item .count,
+.task-item.sel .sc-outline .count {
   top: 5px !important;
 	right: 12px !important;
+	background-color: #888 !important;
 }
 
 .task-item .description-icon {
