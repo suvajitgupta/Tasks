@@ -90,12 +90,12 @@
 .users-pane-inner .sc-collection-item.user-item {
   left: 1px !important;
   right: 2px !important;
-  background-color: #333 !important;
+  background-color: #353535 !important;
 }
 
 .projects-pane-inner .sc-view.sc-list-item-view.sc-collection-item.project-item:hover,
 .users-pane-inner .sc-view.sc-list-item-view.sc-collection-item.user-item:hover {
-  background-color: #262626 !important;
+  background-color: #2A2A2A !important;
 }
 
 .projects-pane-inner .sc-group-item.sel .sc-outline,

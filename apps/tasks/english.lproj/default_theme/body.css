@@ -10,7 +10,7 @@
 /* Application styles */
 
 body.sc-theme {
-  background: static_url('images/app-bg.png') !important;
+  background: #444 !important;
 }
 
 .sc-theme .sc-pane.sc-main {
