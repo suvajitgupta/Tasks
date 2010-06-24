@@ -13,43 +13,35 @@ sc_require('core');
   Import Data Panel
   
 */
-Tasks.importDataPage = SC.Page.create({  
+Tasks.importDataPage = SC.Page.create({
   
-  panel: SC.PanelPane.create({
+  panel: SCUI.ModalPane.create({
     
-    layout: { centerX: 0, centerY: 0, height: 425, width: 780 },
+    titleBarHeight: 40,
+    title: "_Import".loc(),
+    minHeight: 300,
+    minWidth: 625,
+    layout: { centerX: 0, centerY: 0, height: 500, width: 700 },
     
     contentView: SC.View.design({
       layout: { left: 0, right: 0, top: 0, bottom: 0},
-      childViews: 'titlebar sample format dataEntry createMissingUsersCheckbox importButton cancelButton'.w(),
+      childViews: 'instructions sampleFormat dataEntryField createMissingUsersCheckbox importButton'.w(),
       
-      titlebar: SC.View.design(SC.Border, {
-        layout: { left: 0, right: 0, top: 0, height: 45 },
-        classNames: ['title-bar'],
-        childViews: 'title'.w(),
-        title: SC.LabelView.design({
-          layout: { centerY: 0, height: 20, centerX: 0, width: 80 },
-          value: "_Import".loc(),
-          icon: 'import-icon',
-          classNames: ['window-title']
-        })
-      }),
-      
-      sample: SC.LabelView.design({
+      instructions: SC.LabelView.design({
         escapeHTML: NO,
-        layout: { top: 55, left: 10, height: 40, width: 260 },
+        layout: { top: 10, left: 10, height: 40, width: 250 },
         value: "_ImportInstructions:".loc()
       }),
       
-      format: SC.LabelView.design({
+      sampleFormat: SC.LabelView.design({
         escapeHTML: NO,
-        layout: { top: 55, width: 470, height: 45, right: 10 },
+        layout: { top: 10, left: 260, height: 45, width: 425 },
         classNames: [ 'onscreen-help'],
         value: Tasks.softwareMode? "_FormatOnscreenHelpSoftwareMode".loc() : "_FormatOnscreenHelpTodoMode".loc()
       }),
 
-      dataEntry: SC.TextFieldView.design({
-        layout: { top: 100, left: 10, right: 10, bottom: 40 },
+      dataEntryField: SC.TextFieldView.design({
+        layout: { top: 55, left: 10, right: 10, bottom: 40 },
         isTextArea: YES,
         valueBinding: 'Tasks.importDataController.importData'
       }),
@@ -63,7 +55,7 @@ Tasks.importDataPage = SC.Page.create({
       }),
       
       importButton: SC.ButtonView.design({
-        layout: { width: 80, height: 30, right: 10, bottom: 8 },
+        layout: { width: 80, height: 30, right: 15, bottom: 8 },
         titleMinWidth: 0,
         theme: 'capsule',
         keyEquivalent: 'return',
@@ -71,23 +63,12 @@ Tasks.importDataPage = SC.Page.create({
         title: "_Import".loc(),
         target: 'Tasks.importDataController',
         action: 'parseAndLoadData'
-      }),
-      
-      cancelButton: SC.ButtonView.design({
-        layout: { width: 80, height: 30, right: 96, bottom: 8 },
-        titleMinWidth: 0,
-        keyEquivalent: 'escape',
-        isCancel: YES,
-        theme: 'capsule',
-        title: "_Cancel".loc(),
-        target: 'Tasks.importDataController',
-        action: 'closePanel'
       })
-      
+            
     }),
     
     focus: function() {
-      this.contentView.dataEntry.becomeFirstResponder();        
+      Tasks.importDataPage.getPath('panel._contentView.childViews.0.dataEntryField').becomeFirstResponder();        
     }
   
   })

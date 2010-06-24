@@ -148,6 +148,7 @@ SC.stringsFor('English', {
   "_TaskEffortTooltip": "Task effort",
   "_TaskIdTooltip": "Task #ID (dashes indicate unsaved)",
   "_TaskValidationTooltip": ", background color shows validation",
+  "_Task": "Task",
   "_Tasks": "Tasks",
   "_TasksSearchHint": "Task search pattern",
   "_TasksSearchTooltip": "Specify [Assignees] or <Submitters> (use all or part of full/login name separated via commas or spaces - use 'none' for unassigned), #IDs (separated by commas or spaces), or text (to match within task name or description - prefix with a caret to find items that don't match text)",

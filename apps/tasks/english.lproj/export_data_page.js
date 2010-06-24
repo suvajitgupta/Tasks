@@ -14,42 +14,24 @@ sc_require('core');
 */
 Tasks.exportDataPage = SC.Page.create({  
   
-  panel: SC.PanelPane.create({
+  panel: SCUI.ModalPane.create({
     
-    layout: { centerX: 0, centerY: 0, height: 425, width: 780 },
+    titleBarHeight: 40,
+    title: "_Export".loc(),
+    minHeight: 300,
+    minWidth: 625,
+    layout: { centerX: 0, centerY: 0, height: 500, width: 700 },
+    
     contentView: SC.View.design({
-      layout: { left: 0, right: 0, top: 0, bottom: 0},
-      childViews: 'titlebar exportField closeButton'.w(),
       
-      titlebar: SC.View.design(SC.Border, {
-        layout: { left: 0, right: 0, top: 0, height: 45 },
-        classNames: ['title-bar'],
-        childViews: 'title'.w(),
-        title: SC.LabelView.design({
-          layout: { centerY: 0, height: 20, centerX: 0, width: 80 },
-          value: "_Export".loc(),
-          icon: 'text-icon',
-          classNames: ['window-title']
-        })
-      }),
-    
+      childViews: 'exportField'.w(),
+      
       exportField: SC.TextFieldView.design({
-        layout: { left: 10, right: 10, top: 55, bottom: 40 },
+        layout: { left: 10, right: 10, top: 10, bottom: 10 },
         valueBinding: SC.Binding.oneWay('Tasks.exportDataController.data'),
         isTextArea: YES
-      }),
-    
-      closeButton: SC.ButtonView.design({
-        layout: { width: 80, height: 30, right: 10, bottom: 8 },
-        titleMinWidth: 0,
-        keyEquivalent: 'return',
-        isDefault: YES,
-        theme: 'capsule',
-        title: "_Close".loc(),
-        target: 'Tasks.exportDataController',
-        action: 'closePanel'
       })
-        
+              
     })
   })
   

@@ -119,15 +119,17 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   popupEditor: function() {
     var layer = this.get('layer');
     var that = this;
-    this._editorPane = SCUI.ResizablePickerPane.create({
+    this._editorPane = SCUI.ModalPane.create({
       
+      titleBarHeight: 40,
+      title: "_Task".loc() + ' ' + that.getPath('content.displayId'),
       minWidth: 700,
-      minHeight: 250,
-      layout: { width: 740, height: 330 },
+      minHeight: 270,
+      layout: { centerX:0, centerY: 0, width: 740, height: 330 },
       
       // Avoid popup panel coming up on other items while it is up already
       popup: function() {
-        sc_super();
+        that._editorPane.append();
         Tasks.editorPoppedUp = Tasks.TASK_EDITOR;
         // TODO: [SG] Beta: fix issue with list selection not changing by the time the popup editor name field is selected
         var name = that.getPath('content.name');
@@ -140,7 +142,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         sc_super();
         Tasks.editorPoppedUp = null;
         var content = that.get('content');
-        var cv = that._editorPane.get('contentView');
+        var cv = that._editorPane.get('_contentView');
         content.setIfChanged('displayName', cv.getPath('nameField.value'));
         content.setIfChanged('effortValue', cv.getPath('effortField.value'));
         content.setIfChanged('description',  cv.getPath('descriptionField.value'));
@@ -252,12 +254,12 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         }),
 
         assigneeLabel: SC.LabelView.design({
-          layout: { top: 77, right: 265, height: 24, width: 80 },
+          layout: { top: 77, left: 352, height: 24, width: 80 },
           textAlign: SC.ALIGN_RIGHT,
           value: "_Assignee:".loc()
         }),
         assigneeField: SCUI.ComboBoxView.design({
-          layout: { top: 75, right: 10, width: 250, height: 24 },
+          layout: { top: 75, left: 441, width: 250, height: 24 },
           objectsBinding: this._listUsers(true),
           nameKey: 'displayName',
           valueKey: 'id',
@@ -283,12 +285,12 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         }),
         
         projectLabel: SC.LabelView.design({
-          layout: { top: 114, right: 265, height: 24, width: 80 },
+          layout: { top: 114, left: 352, height: 24, width: 80 },
           textAlign: SC.ALIGN_RIGHT,
           value: "_Project:".loc()
         }),
         projectField: SCUI.ComboBoxView.design({
-          layout: { top: 112, right: 10, width: 250, height: 24 },
+          layout: { top: 112, left: 441, width: 250, height: 24 },
           objectsBinding: this._listProjects(),
           nameKey: 'displayName',
           valueKey: 'id',

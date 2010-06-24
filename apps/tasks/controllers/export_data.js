@@ -228,13 +228,6 @@ Tasks.exportDataController = SC.ObjectController.create(
     }
   },
 
-  closePanel: function() {
-    var panel = Tasks.getPath('exportDataPage.panel');
-    if(panel) {
-      panel.remove();
-    }
-  },
-  
   /**
    * Export data for a project.
    *
