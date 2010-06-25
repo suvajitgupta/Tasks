@@ -17,9 +17,9 @@ sc_require('core');
 Tasks.statisticsPane = SCUI.ModalPane.extend({
   
   isResizable: NO,
-  titleBarHeight: 40,
   title: "_Statistics".loc(),
   titleIcon: 'statistics-icon',
+  titleBarHeight: 40,
   layout: { centerX: 0, centerY: 0, height: Tasks.softwareMode? 220 : 190, width: 650 },
   classNames: ['statistics-pane'],
   // TODO: [SG] need to call assignmentsController.closePanel() upon pressing red button

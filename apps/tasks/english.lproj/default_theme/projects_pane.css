@@ -69,7 +69,7 @@
   bottom: 0px !important;
   left: 1px !important;
   right: 2px !important;
-  background-color: #444;
+  background-color: #393939;
   box-shadow: inset 0 3px 8px rgba(150,150,150,.6), 0 1px 0 rgba(0,0,0,.4);
   -moz-box-shadow: inset 0 3px 8px rgba(150,150,150,.6), 0 1px 0 rgba(0,0,0,.4);
   -webkit-box-shadow: inset 0 3px 8px rgba(150,150,150,.6), 0 1px 0 rgba(0,0,0,.4);
@@ -121,13 +121,13 @@
 }
 
 .project-item .recently-updated,
-.users-item .recently-updated {
+.user-item .recently-updated {
   margin-left: 0px !important;
 }
 
 .project-item .sc-outline,
 .user-item .sc-outline {
-  left: 15px !important;
+  left: 5px !important;
 }
 
 .projects-pane .projects-pane-inner .sc-collection-item label,
@@ -142,15 +142,14 @@
 
 .projects-pane-inner .sc-view.sc-list-item-view.sc-collection-item .sc-outline label,
 .users-pane-inner .sc-view.sc-list-item-view.sc-collection-item .sc-outline label {
-  left: 19px !important;
+  left: 30px !important;
   right: 50px !important;
   opacity: 1 !important;
 }
 
-.project-item .sc-outline img,
-.user-item .sc-outline img {
-  left: -2px !important;
-  margin-top: -9px !important;
+.projects-pane .projects-pane-inner .sc-outline img,
+.users-pane .users-pane-inner .sc-outline img {
+  top: 12px !important;
 }
 
 .project-item .count {

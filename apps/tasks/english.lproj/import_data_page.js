@@ -17,8 +17,9 @@ Tasks.importDataPage = SC.Page.create({
   
   panel: SCUI.ModalPane.create({
     
-    titleBarHeight: 40,
     title: "_Import".loc(),
+    titleIcon: 'import-icon',
+    titleBarHeight: 40,
     minHeight: 300,
     minWidth: 625,
     layout: { centerX: 0, centerY: 0, height: 500, width: 700 },
@@ -68,7 +69,7 @@ Tasks.importDataPage = SC.Page.create({
     }),
     
     focus: function() {
-      Tasks.importDataPage.getPath('panel._contentView.childViews.0.dataEntryField').becomeFirstResponder();        
+      Tasks.importDataPage.getPath('panel.contentView.dataEntryField').becomeFirstResponder();        
     }
   
   })

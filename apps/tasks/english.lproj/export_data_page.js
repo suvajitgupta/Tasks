@@ -16,8 +16,9 @@ Tasks.exportDataPage = SC.Page.create({
   
   panel: SCUI.ModalPane.create({
     
-    titleBarHeight: 40,
     title: "_Export".loc(),
+    titleIcon: 'text-icon',
+    titleBarHeight: 40,
     minHeight: 300,
     minWidth: 625,
     layout: { centerX: 0, centerY: 0, height: 500, width: 700 },
