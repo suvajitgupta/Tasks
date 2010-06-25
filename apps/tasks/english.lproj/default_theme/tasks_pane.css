@@ -85,10 +85,10 @@
 .sc-view.sc-list-item-view.sc-collection-item.sc-group-item.assignee-item {
   text-transform: none !important;
 	font-weight: bold !important;
-	font-size: 13px !important;
+	font-size: 14px !important;
   color: #222 !important;
   margin-top: 5px !important;
-  left: 5px !important;
+  left: 6px !important;
   right: 0px !important;
   height: 19px !important;
   padding-left: 20px !important;
@@ -136,7 +136,7 @@
 .assignee-item.incompleteEffortWarning .sc-outline .count.finished {
   top: -5px !important;
   color: #555 !important;
-  font-size: 12px !important;
+  font-size: 11px !important;
   background: #FFF none repeat scroll 0 0 !important;
 }
 
@@ -187,7 +187,7 @@
   position: absolute !important;
   top: 4px !important;
   bottom: 4px !important;
-  left: 11px !important;
+  left: 12px !important;
 	width: 40px !important;
 }
 
@@ -198,6 +198,7 @@
 
 .task-item label {
   left: 50px !important;
+  right: 50px !important;
   padding-left: 6px !important;
 }
 
@@ -330,7 +331,7 @@
 }
 
 .task-item:hover {
-  background: #CCC none repeat scroll 0 0 !important;
+  background: #DDD none repeat scroll 0 0 !important;
 }
 
 .sc-view.sc-ghost-view .task-item {

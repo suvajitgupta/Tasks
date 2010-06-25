@@ -83,7 +83,7 @@ body.sc-theme {
 
 .recently-updated {
   margin-top: 4px !important;
-  margin-left: -3px !important;
+  margin-left: -2px !important;
   height: 11px !important;
   width: 11px !important;
 }
@@ -170,10 +170,6 @@ body.sc-theme {
 
 .sc-list-item-view img.disclosure {
   left: -5px !important;
-}
-
-.sc-view.sc-list-item-view.sc-collection-item.sc-group-item label {
-  left: 10px !important;
 }
 
 .sc-group-item .sc-outline img {
