@@ -17,48 +17,40 @@ sc_require('views/user_information');
 */
 Tasks.settingsPage = SC.Page.create({  
   
-  panel: SC.PanelPane.create({
+  panel: SCUI.ModalPane.create({
     
-    layout: { centerX: 0, centerY: 0, height: 425, width: 780 },
+    title: "_Settings".loc(),
+    titleIcon: 'settings-icon',
+    titleBarHeight: 40,
+    minHeight: 350,
+    minWidth: 780,
+    maxWidth: 780,
+    layout: { centerX: 0, centerY: 0, height: 350, width: 780 },
     
     contentView: SC.View.design({
       layout: { left: 0, right: 0, top: 0, bottom: 0},
-      childViews: 'titlebar userManager addButton deleteButton usersCount closeButton'.w(),
+      childViews: 'userNamePatternField userNamePatternCancelButton userManager addButton deleteButton usersCount'.w(),
       
-      titlebar: SC.View.design({
-        layout: { left: 0, right: 0, top: 0, height: 45 },
-        classNames: ['title-bar'],
-        childViews: 'userNamePatternField userNamePatternCancelButton title'.w(),
-        
-        userNamePatternField: SC.TextFieldView.design(SCUI.ToolTip, {
-          layout: { centerY: 0, height: 24, left: 7, width: 200 },
-          classNames: ['search-bar'],
-          hint: "_UserSearchSelectionHint".loc(),
-          toolTip: "_UserSearchSelectionTooltip".loc(),
-          isVisibleBinding: 'CoreTasks*isCurrentUserAManager',
-          valueBinding: 'Tasks.usersController.userNamePattern'
-        }),
-        userNamePatternCancelButton: SC.View.design({ // User selection cancel button
-          layout: { centerY: 1, height: 12, left: 190, width: 12 },
-          isVisible: NO,
-          classNames: ['filter-cancel-icon'],
-          mouseDown: function() {
-            Tasks.usersController.set('userNamePattern', '');
-          },
-          isVisibleBinding: SC.Binding.oneWay('Tasks.usersController.userNamePattern').bool()
-        }),
-
-        title: SC.LabelView.design({
-          layout: { centerY: 0, centerX: 0, height: 20, width: 120 },
-          value: "_Settings".loc(),
-          icon: 'settings-icon',
-          classNames: ['window-title']
-        })
-        
+      userNamePatternField: SC.TextFieldView.design(SCUI.ToolTip, {
+        layout: { top: 10, height: 24, left: 43, width: 200 },
+        classNames: ['search-bar'],
+        hint: "_UserSearchSelectionHint".loc(),
+        toolTip: "_UserSearchSelectionTooltip".loc(),
+        isVisibleBinding: 'CoreTasks*isCurrentUserAManager',
+        valueBinding: 'Tasks.usersController.userNamePattern'
       }),
-    
+      userNamePatternCancelButton: SC.View.design({ // User selection cancel button
+        layout: { top: 17, height: 12, left: 225, width: 12 },
+        isVisible: NO,
+        classNames: ['filter-cancel-icon'],
+        mouseDown: function() {
+          Tasks.usersController.set('userNamePattern', '');
+        },
+        isVisibleBinding: SC.Binding.oneWay('Tasks.usersController.userNamePattern').bool()
+      }),
+
       userManager: SC.View.design({
-        layout: { left: 10, right: 10, top: 55, bottom: 40},
+        layout: { left: 10, right: 10, top: 40, bottom: 40},
         childViews: 'usersMasterView userDetailView createdAtLabel updatedAtLabel'.w(),
         
         usersMasterView: SC.ScrollView.design({
@@ -163,25 +155,17 @@ Tasks.settingsPage = SC.Page.create({
       }),
       
       usersCount: SC.LabelView.design({
-        layout: { centerX: 0, width: 250, bottom: 12, height: 15 },
+        layout: { left: 105, width: 200, bottom: 12, height: 15 },
         controlSize: SC.SMALL_CONTROL_SIZE,
-        textAlign: SC.ALIGN_CENTER,
         valueBinding: 'Tasks.usersController.usersCount' 
-      }),
-      
-      closeButton: SC.ButtonView.design({
-        layout: { width: 80, height: 30, right: 10, bottom: 8 },
-        localize: YES,
-        titleMinWidth: 0,
-        keyEquivalent: 'return',
-        isDefault: YES,
-        theme: 'capsule',
-        title: "_Close",
-        target: 'Tasks.settingsController',
-        action: 'closePanel'
       })
       
-    })
+    }),
+    
+    remove: function() {
+      sc_super();
+      if(CoreTasks.get('autoSave')) Tasks.saveData();
+    }
       
   }),
   

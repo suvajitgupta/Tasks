@@ -23,14 +23,6 @@ Tasks.settingsController = SC.ObjectController.create(
         Tasks.usersController.selectObject(currentUser);
         panel.append();
       }
-    },
-    
-    closePanel: function(){
-      var panel = Tasks.getPath('settingsPage.panel');
-      if(panel) {
-        panel.remove();
-      }
-      if(CoreTasks.get('autoSave')) Tasks.saveData();
     }
-    
+        
 });
