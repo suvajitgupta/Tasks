@@ -106,7 +106,6 @@
 .users-pane-inner .sc-view.sc-list-item-view.sc-collection-item.sc-group-item.sel .sc-outline label,
 .sc-list-view.sc-source-list.users-pane-inner .sc-collection-item.sel,
 .sc-list-view.sc-source-list.users-pane-inner .sc-collection-item.sel:hover {
-  margin-top: 1px !important;
   height: 22px !important;
   color: #000 !important;
   background: #9CF !important;
@@ -147,9 +146,10 @@
   opacity: 1 !important;
 }
 
-.projects-pane .projects-pane-inner .sc-outline img,
-.users-pane .users-pane-inner .sc-outline img {
+.projects-pane .projects-pane-inner .sel .sc-outline img,
+.users-pane .users-pane-inner .sel .sc-outline img {
   top: 12px !important;
+  margin-top: -9px !important;
 }
 
 .project-item .count {

@@ -125,7 +125,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       title: "_Task".loc() + that.getPath('content.displayId'),
       minWidth: 700,
       minHeight: 270,
-      layout: { centerX:0, centerY: 0, width: 740, height: 330 },
+      layout: { centerX:0, centerY: 0, width: 700, height: 330 },
       
       // Avoid popup panel coming up on other items while it is up already
       popup: function() {

@@ -77,7 +77,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       title: "_Project".loc() + that.getPath('content.displayId'),
       minWidth: 700,
       minHeight: 200,
-      layout: { centerX:0, centerY: 0, width: 740, height: 275 },
+      layout: { centerX:0, centerY: 0, width: 700, height: 275 },
       _timeLeft: null,
       
       // Avoid popup panel coming up for system projects

@@ -102,30 +102,30 @@
 
 .assignee-item.assignee-not-loaded {
   background: #AAA none repeat scroll 0 0 !important;
-  box-shadow: inset 0 3px 3px #CCC;
-  -moz-box-shadow: inset 0 3px 3px #CCC;
-  -webkit-box-shadow: inset 0 3px 3px #CCC;
+  box-shadow: inset 0px 2px 2px #CCC;
+  -moz-box-shadow: inset 0px 2px 2px #CCC;
+  -webkit-box-shadow: inset 0px 2px 2px #CCC;
 }
 
 .assignee-item.assignee-under-loaded {
   background: #3C6 none repeat scroll 0 0 !important;
-  box-shadow: inset 3px 3px 3px #3F6;
-  -moz-box-shadow: inset 3px 3px 3px #3F6;
-  -webkit-box-shadow: inset 3px 3px 3px #3F6;
+  box-shadow: inset 0px 2px 2px #3F6;
+  -moz-box-shadow: inset 0px 2px 2px #3F6;
+  -webkit-box-shadow: inset 0px 2px 2px #3F6;
 }
 
 .assignee-item.assignee-properly-loaded {
   background: #69F none repeat scroll 0 0 !important;
-  box-shadow: inset 3px 3px 3px #6CF;
-  -moz-box-shadow: inset 3px 3px 3px #6CF;
-  -webkit-box-shadow: inset 3px 3px 3px #6CF;
+  box-shadow: inset 0px 2px 2px #6CF;
+  -moz-box-shadow: inset 0px 2px 2px #6CF;
+  -webkit-box-shadow: inset 0px 2px 2px #6CF;
 }
 
 .assignee-item.assignee-over-loaded {
   background: #F99 none repeat scroll 0 0 !important;
-  box-shadow: inset 3px 3px 3px #FBF;
-  -moz-box-shadow: inset 3px 3px 3px #FBF;
-  -webkit-box-shadow: inset 3px 3px 3px #FBF;
+  box-shadow: inset 0px 2px 2px #FBF;
+  -moz-box-shadow: inset 0px 2px 2px #FBF;
+  -webkit-box-shadow: inset 0px 2px 2px #FBF;
 }
 
 .tasks-pane-inner .sc-view.sc-list-item-view.sc-collection-item.sc-group-item.assignee-item label {
@@ -170,7 +170,6 @@
 
 .task-item {
   background: #EEE none repeat scroll 0 0;
-  right: 1px !important;
 	border: 1px solid #09F !important;
 }
 
