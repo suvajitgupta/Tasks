@@ -123,7 +123,7 @@
 }
 
 .filter-cancel-icon {
-  background: static_url('images/default-theme-static.png') no-repeat 0 -352px !important;
+  background: static_url('cancel.png') no-repeat;
   z-index: 100 !important;
   cursor: pointer !important;
 }

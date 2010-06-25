@@ -141,10 +141,16 @@ body.sc-theme {
   background: static_url('images/delete.png') no-repeat;
 }
 
-.description-icon {
+.task-item .description-icon {
   width: 16px !important;
   height: 16px !important;
-  background: static_url('images/description.png') no-repeat;
+  background: static_url('images/task-description.png') no-repeat;
+}
+
+.project-item .description-icon {
+  width: 16px !important;
+  height: 16px !important;
+  background: static_url('images/project-description.png') no-repeat;
 }
 
 .sc-outline .count {

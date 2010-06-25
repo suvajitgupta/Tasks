@@ -227,19 +227,19 @@
 .task-icon-feature {
   height: 16px !important;
   width: 16px !important;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -256px;
+  background: static_url('images/feature.png') no-repeat;
 }
 
 .task-icon-bug {
   height: 16px !important;
   width: 16px !important;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -240px;
+  background: static_url('images/bug.png') no-repeat;
 }
 
 .task-icon-other {
   width: 16px !important;
 	height: 16px !important;
-  background: static_url('images/default-theme-static.png') no-repeat 0 -272px;
+  background: static_url('images/other.png') no-repeat;
 }
 
 .watch-icon {
