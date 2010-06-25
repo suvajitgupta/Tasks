@@ -88,11 +88,12 @@
 	font-size: 14px !important;
   color: #222 !important;
   margin-top: 5px !important;
-  left: 6px !important;
+  left: 5px !important;
   right: 0px !important;
-  height: 19px !important;
+  height: 18px !important;
   padding-left: 20px !important;
   opacity: 0.85;
+  border-bottom: 1px solid #555 !important;
 }
 
 .sc-view.sc-list-item-view.sc-collection-item.sc-group-item.assignee-item:hover {
@@ -128,8 +129,8 @@
 }
 
 .tasks-pane-inner .sc-view.sc-list-item-view.sc-collection-item.sc-group-item.assignee-item label {
-  left: 5px !important;
-  margin-top: -13px !important;
+  left: 8px !important;
+  margin-top: -14px !important;
 }
 
 .tasks-pane-inner .assignee-item .sc-outline .count,
@@ -169,7 +170,7 @@
 
 .task-item {
   background: #EEE none repeat scroll 0 0;
-  left: 0px !important;
+  right: 1px !important;
 	border: 1px solid #09F !important;
 }
 
@@ -327,7 +328,6 @@
 .tasks-pane-inner .task-item.sel,
 .tasks-pane-inner .task-item.sel:hover {
   background: #9CF none repeat scroll 0 0 !important;
-  border-color: #666 !important;
 }
 
 .task-item:hover {
