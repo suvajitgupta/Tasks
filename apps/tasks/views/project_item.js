@@ -71,17 +71,19 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     var layer = this.get('layer');
     var that = this;
     
-    this._editorPane = SCUI.ResizablePickerPane.create({
+    this._editorPane = SCUI.ModalPane.create({
       
+      titleBarHeight: 40,
+      title: "_Project".loc() + that.getPath('content.displayId'),
       minWidth: 700,
       minHeight: 200,
-      layout: { width: 740, height: 265 },
+      layout: { centerX:0, centerY: 0, width: 740, height: 275 },
       _timeLeft: null,
       
       // Avoid popup panel coming up for system projects
       popup: function() {
         if(that.get('isSystemProject')) return;
-        sc_super();
+        that._editorPane.append();
         Tasks.editorPoppedUp = Tasks.PROJECT_EDITOR;
         this._timeLeft = that.getPath('content.timeLeft');
         var name = that.getPath('content.name');
@@ -102,6 +104,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
         // If timeLeft has changed, recalculate load balancing
         if(this._timeLeft !== that.getPath('content.timeLeft')) Tasks.assignmentsController.showAssignments();
         if(CoreTasks.get('autoSave')) Tasks.saveData();
+        that._editorPane.destroy();
       },
       
       contentView: SC.View.design({

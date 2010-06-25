@@ -26,12 +26,12 @@ body.sc-theme {
 }
 
 .sc-pane.sc-panel > .sc-view {
-  background-color: #BBB;
+  background-color: #CCC;
 }
 
 .separator {
-  background-color: #CCC !important;
-  border-top: 1px solid #888 !important;
+  background-color: #EEE !important;
+  border-top: 1px solid #999 !important;
 }
 
 /*-----------------------------------------------------------------

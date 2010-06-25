@@ -122,7 +122,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     this._editorPane = SCUI.ModalPane.create({
       
       titleBarHeight: 40,
-      title: "_Task".loc() + ' ' + that.getPath('content.displayId'),
+      title: "_Task".loc() + that.getPath('content.displayId'),
       minWidth: 700,
       minHeight: 270,
       layout: { centerX:0, centerY: 0, width: 740, height: 330 },
@@ -142,12 +142,13 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         sc_super();
         Tasks.editorPoppedUp = null;
         var content = that.get('content');
-        var cv = that._editorPane.get('_contentView');
+        var cv = that._editorPane.get('contentView');
         content.setIfChanged('displayName', cv.getPath('nameField.value'));
         content.setIfChanged('effortValue', cv.getPath('effortField.value'));
         content.setIfChanged('description',  cv.getPath('descriptionField.value'));
         if(Tasks.assignmentsRedrawNeeded) Tasks.assignmentsController.showAssignments();
         if(CoreTasks.get('autoSave')) Tasks.saveData();
+        that._editorPane.destroy();
       },
       
       contentView: SC.View.design({
