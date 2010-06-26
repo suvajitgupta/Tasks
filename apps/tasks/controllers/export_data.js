@@ -25,33 +25,33 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' font-size: 11px;\n' +
 '}\n' +
 'h1, h2 {\n' +
-' line-height: 13px;\n' +
-' margin-top: 4px;\n' +
+' line-height: 18px;\n' +
+' margin-top: 14px;\n' +
 ' margin-bottom: 4px;\n' +
 ' padding: 3px 6px;\n' +
-' color: white;\n' +
 ' opacity: 0.85;\n' +
-' -moz-border-radius: 5px;\n' +
-' -webkit-border-radius: 5px;\n' +
 '}\n' +
 'h1 {\n' +
 ' font-size: 14px;\n' +
-' background-color: #AAA;\n' +
-' border: 1px solid #AAA;\n' +
+' color: #EEE;\n' +
+' background-color: #555;\n' +
+' border: 1px solid #555;\n' +
 '}\n' +
 'h2 {\n' +
-' font-size: 11px;\n' +
-' margin-left: 10px;\n' +
+' font-size: 13px;\n' +
+' color: #222;\n' +
+' padding-left: 10px;\n' +
+' border: 1px solid #333;\n' +
+'}\n' +
+'h2, p {\n' +
+' margin-left: 15px;\n' +
 '}\n' +
 'p {\n' +
-' line-height: 12px;\n' +
-' margin-top: 4px;\n' +
+' line-height: 23px;\n' +
+' margin-top: -5px;\n' +
 ' margin-bottom: 4px;\n' +
-' margin-left: 25px;\n' +
-' border-color: silver;\n' +
-' border-width: 1px;\n' +
-' border-bottom-style: dotted;\n' +
-' padding-bottom: 2px;\n' +
+' border: 1px solid #09F;\n' +
+' padding: 0px;\n' +
 '}\n' +
 'pre, .description {\n' +
 ' background-color: beige;\n' +
@@ -60,13 +60,13 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 'pre {\n' +
 ' margin-top: -4px;\n' +
 ' margin-bottom: 8px;\n' +
-' margin-left: ' + (Tasks.softwareMode? '123' : '78') + 'px;\n' +
+' margin-left: ' + (Tasks.softwareMode? '121' : '75') + 'px;\n' +
 ' white-space: pre-wrap;\n' +
 ' word-wrap: break-word;\n' +
 ' padding: 5px;\n' +
 '}\n' +
 '.title-bar {\n' +
-' background-color: #343434;\n' +
+' background-color: #444;\n' +
 ' color: #DDD\n;' +
 ' font-size: 14px;\n' +
 ' font-weight: bold;\n' +
@@ -80,14 +80,21 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' line-height: 1.5;\n' +
 ' margin-top: 2px;\n' +
 '}\n' +
+'.name {\n' +
+' border-left: 2px solid red;\n' +
+' padding-left: 5px;\n' +
+'}\n' +
+'.name, .untested, .passed, .failed, .feature, .bug, .other {\n' +
+' display: inline-block;\n' +
+'}\n' +
 '.id {\n' +
+' margin-left: 5px;\n' +
 ' line-height: 1.5;\n' +
 ' width: 40px !important;\n' +
 ' letter-spacing: -1px;\n' +
 '}\n' +
 '.untested, .passed, .failed, .feature, .bug, .other {\n' +
 ' width: 44px;\n' +
-' display: inline-block;\n' +
 ' text-align: center;\n' +
 ' font-size: 9px;\n' +
 '}\n' +
@@ -95,37 +102,37 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 (Tasks.softwareMode? '' : ' display: none;\n') +
 ' padding: 1px 0px;\n' +
 ' border: 1px solid gray;\n' +
+' line-height: 10px;\n' +
 ' -moz-border-radius: 15px;\n' +
 ' -webkit-border-radius: 15px;\n' +
 '}\n' +
 '.untested, .passed, .failed {\n' +
+' color: black;\n' +
 ' padding: 1px 3px;\n' +
 '}\n' +
 '.untested {\n' +
-' color: black;\n' +
 ' background-color: white;\n' +
-' border: 1px solid gray;\n' +
 '}\n' +
 '.assignee-not-loaded {\n' +
-' color: white;\n' +
-' background-color: #444;\n' +
-' border: 1px solid #444;\n' +
+' background-color: #AAA;\n' +
 '}\n' +
 '.assignee-properly-loaded {\n' +
-' color: white;\n' +
-' background-color: #36F;\n' +
-' border: 1px solid #36F;\n' +
+' background-color: #69F;\n' +
 '}\n' +
-'.passed, .assignee-under-loaded {\n' +
-' color: white;\n' +
-' background-color: #363;\n' +
-' border: 1px solid #363;\n' +
+'.passed {\n' +
+' background-color: #6F6;\n' +
 ' opacity: 0.85;\n' +
 '}\n' +
-'.failed, .assignee-overloaded {\n' +
-' color: white;\n' +
-' background-color: #C33;\n' +
-' border: 1px solid #C33;\n' +
+'.assignee-under-loaded {\n' +
+' background-color: #3C6;\n' +
+' opacity: 0.85;\n' +
+'}\n' +
+'.failed {\n' +
+' background-color: #F9C;\n' +
+' opacity: 0.85;\n' +
+'}\n' +
+'.assignee-overloaded {\n' +
+' background-color: #F99;\n' +
 ' opacity: 0.85;\n' +
 '}\n' +
 '.feature {\n' +
@@ -146,22 +153,23 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 '.low {\n' +
 ' font-style: italic;\n' +
 '}\n' +
-'.planned {\n' +
+'p .planned {\n' +
 ' color: black;\n' +
 '}\n' +
-'.active {\n' +
+'p.active {\n' +
 ' color: blue;\n' +
 '}\n' +
-'.done {\n' +
+'p .done {\n' +
 ' color: green;\n' +
 '}\n' +
-'.risky {\n' +
+'p.risky {\n' +
 ' color: red;\n' +
 '}\n' +
 '.effort, .time, .total {\n' +
 ' position: absolute;\n' +
 ' height: 12px;\n' +
 ' line-height: 11px;\n' +
+' margin-top: 3px;\n' +
 ' font-size: 11px;\n' +
 ' padding: 1px 5px;\n' +
 ' letter-spacing: -1px !important;\n' +
@@ -170,20 +178,21 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 '}\n' +
 '.effort {\n' +
 ' color: white;\n' +
-' background-color: #97A8C7;\n' +
+' background-color: #888;\n' +
 '}\n' +
 '.time, .total {\n' +
 ' color: black;\n' +
+' margin-top: 3px;\n' +
 ' background-color: #DDD;\n' +
 '}\n' +
 '.effort, .time {\n' +
-' right: 10px;\n' +
+' right: 15px;\n' +
 '}\n' +
 '.total {\n' +
 ' right: 175px;\n' +
 '}\n' +
 '.doneEffortRangeWarning {\n' +
-' background-color: orange !important;\n' +
+' background-color: #F93 !important;\n' +
 '}\n' +
 '.incompleteEffortWarning {\n' +
 ' background-color: #FF6 !important;\n' +

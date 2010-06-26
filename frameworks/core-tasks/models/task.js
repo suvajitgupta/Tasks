@@ -396,8 +396,9 @@ CoreTasks.Task = CoreTasks.Record.extend({
       ret += val + ' ';
     }
     
+    if(format === 'HTML') ret += '<span class="name">';
     ret += this.get('name');
-    if(format === 'HTML') ret += '</span>';
+    if(format === 'HTML') ret += '</span></span>';
     
     var effort = this.get('effort');
     if(effort) {
