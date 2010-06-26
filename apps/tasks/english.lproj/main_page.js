@@ -189,7 +189,7 @@ Tasks.mainPage = SC.Page.design({
       childViews: 'projectsMasterView tasksDetailView'.w(),
       
       projectsMasterView: SC.ScrollView.design({
-        layout: { top: 10, bottom: 10, left: 10, width: 240 },
+        layout: { top: 13, bottom: 10, left: 10, width: 240 },
         classNames: ['projects-pane'],
         hasHorizontalScroller: NO,
 
@@ -246,7 +246,7 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       tasksDetailView: SC.ScrollView.design({
-        layout: { top: 5, bottom: 10, left: 260, right: 10 },
+        layout: { top: 15, bottom: 10, left: 260, right: 10 },
         hasHorizontalScroller: NO,
 
         contentView: SC.SourceListView.design({
@@ -271,6 +271,18 @@ Tasks.mainPage = SC.Page.design({
           selectOnMouseDown: YES,
           delegate: Tasks.tasksListDelegate,
           
+          headerRowHeight: 40,
+          rowDelegate: function() {
+            return this;
+          }.property().cacheable(),
+          customRowHeightIndexes: function() {
+            return SC.IndexSet.create(0, this.get('length'));
+          }.property('length').cacheable(),
+          contentIndexRowHeight: function(view, content, idx) {
+            var outlineLevel = this.get('contentDelegate').contentIndexOutlineLevel(this, content, idx);
+            var isHeader = (outlineLevel === 0) ? YES : NO;
+            return idx && isHeader? this.get('headerRowHeight') : this.get('rowHeight');
+          },
           selectionEvent: null,
           mouseDown: function(event) {
             var ret = sc_super();
@@ -280,6 +292,7 @@ Tasks.mainPage = SC.Page.design({
             }
             return ret;
           },
+          
           popupContextMenu: function() {
             var items = Tasks.TaskItemView.buildContextMenu();
             if(items.length > 0) {

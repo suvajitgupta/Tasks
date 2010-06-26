@@ -55,7 +55,7 @@
 
 .assignee-red-flag {
   position: absolute !important;
-  top: 0px !important;
+  top: 4px !important;
   left: 2px !important;
   width: 16px !important;
   z-index: 10 !important;
@@ -68,7 +68,7 @@
 }
 
 .assignee-item .sc-outline img {
-  top: 1px !important;
+  top: 3px !important;
   left: -10px !important;
   z-index: 10 !important;
 }
@@ -78,13 +78,16 @@
 	font-weight: bold !important;
 	font-size: 14px !important;
   color: #222 !important;
-  margin-top: 5px !important;
+  margin-top: 15px !important;
   left: 5px !important;
   right: 0px !important;
-  height: 18px !important;
+  height: 24px !important;
   padding-left: 20px !important;
   opacity: 0.85;
   border-bottom: 1px solid #555 !important;
+}
+.sc-view.sc-list-item-view.sc-collection-item.sc-group-item.assignee-item.first-assignee-item {
+  margin-top: -1px !important;
 }
 
 .sc-view.sc-list-item-view.sc-collection-item.sc-group-item.assignee-item:hover {
@@ -126,9 +129,10 @@
 
 .tasks-pane-inner .assignee-item .sc-outline .count,
 .assignee-item.incompleteEffortWarning .sc-outline .count.finished {
-  top: -5px !important;
+  top: -2px !important;
   color: #555 !important;
   font-size: 11px !important;
+  font-weight: bold !important;
   background: #FFF none repeat scroll 0 0 !important;
 }
 

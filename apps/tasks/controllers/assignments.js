@@ -234,6 +234,11 @@ Tasks.assignmentsController = SC.ArrayController.create(
   
   // count: 0, // used for tracking/tuning calls to redraw tasks pane below
   showAssignments: function() { // show tasks for selected user that matches search filter
+    
+    // Force tasks list indexes to be recomputed so that different height group/regular items redraw correctly
+    var tasksList = Tasks.mainPage.getPath('mainPane.tasksList')
+    indexes = SC.IndexSet.create(0, tasksList.get('length'));
+    tasksList.rowHeightDidChangeForIndexes(indexes);
    
     // console.log('DEBUG: showAssignments(' + this.count + ') entry at: ' + new Date().format('hh:mm:ss a'));
     // Preserve selected tasks to be restored at the end of redrawing assignments

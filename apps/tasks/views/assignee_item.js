@@ -31,6 +31,7 @@ Tasks.AssigneeItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     if(content) {
       // console.log('DEBUG: Assignee render(' + firstTime + '): ' + content.get('displayName'));
       
+      if(!this.get('contentIndex')) context.addClass('first-assignee-item');
       context.addClass('assignee-item');
       
       var tasksCount = content.get('tasksCount');
