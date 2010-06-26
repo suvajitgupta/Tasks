@@ -131,7 +131,6 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       popup: function() {
         that._editorPane.append();
         Tasks.editorPoppedUp = Tasks.TASK_EDITOR;
-        // TODO: [SG] Beta: fix issue with list selection not changing by the time the popup editor name field is selected
         var name = that.getPath('content.name');
         var copyPattern = new RegExp("_Copy".loc() + '$');
         if((name === CoreTasks.NEW_TASK_NAME.loc() || copyPattern.exec(name)) && Tasks.getPath('tasksController.isEditable')) {
