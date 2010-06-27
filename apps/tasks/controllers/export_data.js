@@ -118,15 +118,15 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 '}\n' +
 '.feature {\n' +
 ' color: black;\n' +
-' background-color: yellow;\n' +
+' background-color: #EFC62A;\n' +
 '}\n' +
 '.bug {\n' +
 ' color: black;\n' +
-' background-color: red;\n' +
+' background-color: #9E1D14;\n' +
 '}\n' +
 '.other {\n' +
 ' color: black;\n' +
-' background-color: silver;\n' +
+' background-color: #C7C7C7;\n' +
 '}\n' +
 '.name {\n' +
 ' border-left: 2px solid red;\n' +
