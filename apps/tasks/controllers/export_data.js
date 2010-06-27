@@ -76,7 +76,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 'pre {\n' +
 ' margin-top: -3px;\n' +
 ' margin-bottom: 10px;\n' +
-' margin-left: ' + (Tasks.softwareMode? '89' : '75') + 'px;\n' +
+' margin-left: ' + (Tasks.softwareMode? '91' : '75') + 'px;\n' +
 ' margin-right: 1px;\n' +
 ' white-space: pre-wrap;\n' +
 ' word-wrap: break-word;\n' +
@@ -141,16 +141,16 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 '.low {\n' +
 ' font-style: italic;\n' +
 '}\n' +
-'p .planned {\n' +
+'.planned {\n' +
 ' color: black;\n' +
 '}\n' +
-'p .active {\n' +
+'.active {\n' +
 ' color: blue;\n' +
 '}\n' +
-'p .done {\n' +
+'.done {\n' +
 ' color: green;\n' +
 '}\n' +
-'p.risky {\n' +
+'.risky {\n' +
 ' color: red;\n' +
 '}\n' +
 '.untested, .passed, .failed {\n' +

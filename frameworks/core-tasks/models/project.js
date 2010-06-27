@@ -234,7 +234,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
     }
     else {
       
-      if(format === 'HTML') ret += '&nbsp;<span class="' + developmentStatus.loc().toLowerCase() + '">';
+      if(format === 'HTML') ret += '&nbsp;<span>';
       ret += projectName;
       if(format === 'HTML') ret += '</span>';
       

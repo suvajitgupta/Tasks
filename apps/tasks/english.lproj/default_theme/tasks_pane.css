@@ -198,7 +198,7 @@
   height: 24px !important;
   line-height: 24px !important;
   padding-left: 6px !important;
-  opacity: 0.85 !important;
+  opacity: 1 !important;
 }
 
 .tasks-pane-inner .sc-view.sc-list-item-view.sc-collection-item.task-item.task-type-displayed label {
@@ -292,10 +292,6 @@
 
 .task-validation-untested, .task-validation-passed, .task-validation-failed {
   color: black;
-}
-
-.task-validation-passed, .task-validation-failed {
-  opacity: 0.85;
 }
 
 .task-validation-passed {
