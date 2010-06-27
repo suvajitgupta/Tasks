@@ -29,7 +29,6 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' margin-top: 14px;\n' +
 ' margin-bottom: 4px;\n' +
 ' padding: 3px 6px;\n' +
-' opacity: 0.85;\n' +
 '}\n' +
 'h1 {\n' +
 ' font-size: 14px;\n' +
@@ -38,10 +37,10 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' border: 1px solid #555;\n' +
 '}\n' +
 'h2 {\n' +
-' font-size: 13px;\n' +
+' font-size: 14px;\n' +
 ' color: #222;\n' +
 ' padding-left: 10px;\n' +
-' border: 1px solid #333;\n' +
+' border: 1px solid #666;\n' +
 '}\n' +
 'h2, p {\n' +
 ' margin-left: 15px;\n' +
@@ -58,16 +57,17 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' outline: 1px solid silver;\n' +
 '}\n' +
 'pre {\n' +
-' margin-top: -4px;\n' +
-' margin-bottom: 8px;\n' +
-' margin-left: ' + (Tasks.softwareMode? '121' : '75') + 'px;\n' +
+' margin-top: -3px;\n' +
+' margin-bottom: 10px;\n' +
+' margin-left: ' + (Tasks.softwareMode? '122' : '75') + 'px;\n' +
+' margin-right: 1px;\n' +
 ' white-space: pre-wrap;\n' +
 ' word-wrap: break-word;\n' +
 ' padding: 5px;\n' +
 '}\n' +
 '.title-bar {\n' +
 ' background-color: #444;\n' +
-' color: #DDD\n;' +
+' color: #DDD;\n' +
 ' font-size: 14px;\n' +
 ' font-weight: bold;\n' +
 ' line-height: 32px;\n' +
@@ -91,12 +91,15 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' margin-left: 5px;\n' +
 ' line-height: 1.5;\n' +
 ' width: 40px !important;\n' +
+' text-align: center;\n' +
 ' letter-spacing: -1px;\n' +
+' font-size: 9px;\n' +
 '}\n' +
-'.untested, .passed, .failed, .feature, .bug, .other {\n' +
+'.feature, .bug, .other {\n' +
 ' width: 44px;\n' +
 ' text-align: center;\n' +
 ' font-size: 9px;\n' +
+' font-weight: bold;\n' +
 '}\n' +
 '.feature, .bug, .other {\n' +
 (Tasks.softwareMode? '' : ' display: none;\n') +
@@ -119,21 +122,17 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 '.assignee-properly-loaded {\n' +
 ' background-color: #69F;\n' +
 '}\n' +
-'.passed {\n' +
-' background-color: #6F6;\n' +
-' opacity: 0.85;\n' +
-'}\n' +
 '.assignee-under-loaded {\n' +
 ' background-color: #3C6;\n' +
-' opacity: 0.85;\n' +
-'}\n' +
-'.failed {\n' +
-' background-color: #F9C;\n' +
-' opacity: 0.85;\n' +
 '}\n' +
 '.assignee-overloaded {\n' +
 ' background-color: #F99;\n' +
-' opacity: 0.85;\n' +
+'}\n' +
+'.passed {\n' +
+' background-color: #6F6;\n' +
+'}\n' +
+'.failed {\n' +
+' background-color: #F9C;\n' +
 '}\n' +
 '.feature {\n' +
 ' color: black;\n' +
@@ -156,7 +155,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 'p .planned {\n' +
 ' color: black;\n' +
 '}\n' +
-'p.active {\n' +
+'p .active {\n' +
 ' color: blue;\n' +
 '}\n' +
 'p .done {\n' +
@@ -181,9 +180,9 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' background-color: #888;\n' +
 '}\n' +
 '.time, .total {\n' +
-' color: black;\n' +
-' margin-top: 3px;\n' +
-' background-color: #DDD;\n' +
+' color: #555;\n' +
+' margin-top: 2px;\n' +
+' background-color: #EEE;\n' +
 '}\n' +
 '.effort, .time {\n' +
 ' right: 15px;\n' +

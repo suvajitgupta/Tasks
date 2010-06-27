@@ -154,7 +154,6 @@
 }
 
 .assignee-item.incompleteEffortWarning .sc-outline .count {
-  color: #333 !important;
   background: #FF8 none repeat scroll 0 0 !important;
 }
 
