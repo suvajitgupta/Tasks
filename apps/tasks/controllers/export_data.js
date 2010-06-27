@@ -17,12 +17,29 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 '//-->\n' +
 '</script>\n' +
 '<style type="text/css">\n' +
-'body pre { display:none }\n' +
-'body.showDescriptions pre { display:block }\n' +
+'body pre { display: none }\n' +
+'body.showDescriptions pre { display: block }\n' +
 'body {\n' +
 ' font-family: "Lucida Sans","Lucida Grande",Verdana,Arial,sans-serif;\n' +
 ' font-style: normal;\n' +
 ' font-size: 11px;\n' +
+'}\n' +
+'.title-bar {\n' +
+' background-color: #444;\n' +
+' color: #DDD;\n' +
+' font-size: 14px;\n' +
+' font-weight: bold;\n' +
+' line-height: 44px;\n' +
+'}\n' +
+'.legend {\n' +
+' position: absolute;\n' +
+' margin-top: -5px;\n' +
+' line-height: 1.5;\n' +
+'}\n' +
+'.description {\n' +
+' position: absolute;\n' +
+' margin-top: -5px;\n' +
+' right: 10px;\n' +
 '}\n' +
 'h1, h2 {\n' +
 ' line-height: 18px;\n' +
@@ -59,62 +76,11 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 'pre {\n' +
 ' margin-top: -3px;\n' +
 ' margin-bottom: 10px;\n' +
-' margin-left: ' + (Tasks.softwareMode? '122' : '75') + 'px;\n' +
+' margin-left: ' + (Tasks.softwareMode? '89' : '75') + 'px;\n' +
 ' margin-right: 1px;\n' +
 ' white-space: pre-wrap;\n' +
 ' word-wrap: break-word;\n' +
 ' padding: 5px;\n' +
-'}\n' +
-'.title-bar {\n' +
-' background-color: #444;\n' +
-' color: #DDD;\n' +
-' font-size: 14px;\n' +
-' font-weight: bold;\n' +
-' line-height: 32px;\n' +
-'}\n' +
-'.legend {\n' +
-' position: absolute;\n' +
-' left: 150px;\n' +
-' right: 150px;\n' +
-' text-align: center;\n' +
-' line-height: 1.5;\n' +
-' margin-top: 2px;\n' +
-'}\n' +
-'.name {\n' +
-' border-left: 2px solid red;\n' +
-' padding-left: 5px;\n' +
-'}\n' +
-'.name, .untested, .passed, .failed, .feature, .bug, .other {\n' +
-' display: inline-block;\n' +
-'}\n' +
-'.id {\n' +
-' margin-left: 5px;\n' +
-' line-height: 1.5;\n' +
-' width: 40px !important;\n' +
-' text-align: center;\n' +
-' letter-spacing: -1px;\n' +
-' font-size: 9px;\n' +
-'}\n' +
-'.feature, .bug, .other {\n' +
-' width: 44px;\n' +
-' text-align: center;\n' +
-' font-size: 9px;\n' +
-' font-weight: bold;\n' +
-'}\n' +
-'.feature, .bug, .other {\n' +
-(Tasks.softwareMode? '' : ' display: none;\n') +
-' padding: 1px 0px;\n' +
-' border: 1px solid gray;\n' +
-' line-height: 10px;\n' +
-' -moz-border-radius: 15px;\n' +
-' -webkit-border-radius: 15px;\n' +
-'}\n' +
-'.untested, .passed, .failed {\n' +
-' color: black;\n' +
-' padding: 1px 3px;\n' +
-'}\n' +
-'.untested {\n' +
-' background-color: white;\n' +
 '}\n' +
 '.assignee-not-loaded {\n' +
 ' background-color: #AAA;\n' +
@@ -128,11 +94,27 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 '.assignee-overloaded {\n' +
 ' background-color: #F99;\n' +
 '}\n' +
-'.passed {\n' +
-' background-color: #6F6;\n' +
+'.id {\n' +
+' margin-left: 5px;\n' +
+' line-height: 1.5;\n' +
+' width: 40px !important;\n' +
+' text-align: center;\n' +
+' letter-spacing: -1px;\n' +
+' font-size: 9px;\n' +
 '}\n' +
-'.failed {\n' +
-' background-color: #F9C;\n' +
+'.feature, .bug, .other {\n' +
+' left: 80px;\n' +
+' width: 12px;\n' +
+' text-align: center;\n' +
+' font-size: 9px;\n' +
+' font-weight: bold;\n' +
+(Tasks.softwareMode? '' : ' display: none !important;\n') +
+' padding: 1px 0px;\n' +
+' border: 1px solid #AAA;\n' +
+' line-height: 10px;\n' +
+' margin-right: 2px;\n' +
+' -moz-border-radius: 15px;\n' +
+' -webkit-border-radius: 15px;\n' +
 '}\n' +
 '.feature {\n' +
 ' color: black;\n' +
@@ -140,11 +122,18 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 '}\n' +
 '.bug {\n' +
 ' color: black;\n' +
-' background-color: coral;\n' +
+' background-color: red;\n' +
 '}\n' +
 '.other {\n' +
 ' color: black;\n' +
 ' background-color: silver;\n' +
+'}\n' +
+'.name {\n' +
+' border-left: 2px solid red;\n' +
+' padding-left: 7px;\n' +
+'}\n' +
+'.name, .feature, .bug, .other, .untested, .passed, .failed {\n' +
+' display: inline-block;\n' +
 '}\n' +
 '.high {\n' +
 ' font-weight: bold;\n' +
@@ -163,6 +152,19 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 '}\n' +
 'p.risky {\n' +
 ' color: red;\n' +
+'}\n' +
+'.untested, .passed, .failed {\n' +
+' color: black;\n' +
+' padding: 1px 3px;\n' +
+'}\n' +
+'.untested {\n' +
+' background-color: white;\n' +
+'}\n' +
+'.passed {\n' +
+' background-color: #6F6;\n' +
+'}\n' +
+'.failed {\n' +
+' background-color: #F9C;\n' +
 '}\n' +
 '.effort, .time, .total {\n' +
 ' position: absolute;\n' +
@@ -199,10 +201,12 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 '</style>\n' +
 '</head>\n';
 
-Tasks.EXPORT_LEGEND = '<input type=checkbox onclick="toggleDescriptions()"/><span class="description">&nbsp;Description&nbsp;</span>\n' +
-'<span class="legend">\n<strong>PRIORITY:</strong> <span class="high">High</span> <span class="medium">Medium</span> <span class="low">Low</span>\n' +
+Tasks.EXPORT_LEGEND = '<br><span class="legend">\n' +
+(Tasks.softwareMode? '<strong>TYPE:</strong> <span class="feature">&nbsp;</span>Feature <span class="bug">&nbsp;</span>Bug <span class="other">&nbsp;</span>Other\n&nbsp;&nbsp;&nbsp;' : '') +
+'<strong>PRIORITY:</strong> <span class="high">High</span> <span class="medium">Medium</span> <span class="low">Low</span>\n' +
 '&nbsp;&nbsp;&nbsp;<strong>STATUS:</strong> <span class="planned">Planned</span> <span class="active">Active</span> <span class="done">Done</span> <span class="risky">Risky</span>\n' +
-'&nbsp;&nbsp;&nbsp;<strong>VALIDATION:</strong> <span class="untested">Untested</span> <span class="passed">Passed</span> <span class="failed">Failed</span></span><br><br>\n';
+'&nbsp;&nbsp;&nbsp;<strong>VALIDATION:</strong> <span class="untested">Untested</span> <span class="passed">Passed</span> <span class="failed">Failed</span></span>\n' +
+'<span class="description"><input type=checkbox onclick="toggleDescriptions()"/>&nbsp;Description&nbsp;</span>\n<br><hr>\n';
 
 
 /** @static
