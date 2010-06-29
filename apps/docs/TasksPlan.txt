@@ -1,6 +1,6 @@
 # Tasks Plan - please see below for items you can work on & mark their status as you start/finish them
 
-v Support syntax highlighted editing for Tasks import/export format using TextMate [JH2] <SG> @Active
+v Support syntax highlighted editing for Tasks import/export format using TextMate [JH2] <SG> @Done
 
 Design/Planning @Done
 - Review comparable applications for ideas: Mac Things/TaskPaper, Jira [SG] <MB> @Done
@@ -180,12 +180,12 @@ Server @Active
 - Add link to Task in email notification (should not require authentication if user is signed in) [SG] $Feature
 - Add Server-side data validation checks/return appropriate error codes [SG] <SE>
 - Add GUI-side data validation checks and corresponding user feedback [SG] <JL>
-- Build bridge to "github issues" from Google App Engine [JH2] <SG>
+- Implement bridge to "github issues" from Google App Engine [JH2] <SG>
 
 Styling/Hardening @Active
 ^ Style via CSS, embed catchy/sprited images [MG] <SG> @Done %Passed
 ^ Beta: Re-style to match Greenhouse look & feel [SG] <MG> @Active
-- Beta: Split/sprite final set of icons using Chance [JH2] <MG>
+- Beta: Run Chance to optimize loading of final set of split-up icons [JH2] <MG>
 - Perform I18N and L10N (test with reversed strings) [SG] <JH2> @Done %Passed
 - Collect/address feedback from Alpha/Beta users and targeted usability tests <MG> [SG] @Done %Passed
 ^ Perform smoke test of key functionality [SG] @Done
