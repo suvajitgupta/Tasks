@@ -25,7 +25,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' font-size: 11px;\n' +
 '}\n' +
 '.title-bar {\n' +
-' background-color: #444;\n' +
+' background-color: #333;\n' +
 ' color: #DDD;\n' +
 ' font-size: 14px;\n' +
 ' font-weight: bold;\n' +
@@ -63,6 +63,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' margin-left: 15px;\n' +
 '}\n' +
 'p {\n' +
+' background-color: #EEE;\n' +
 ' line-height: 23px;\n' +
 ' margin-top: -5px;\n' +
 ' margin-bottom: 4px;\n' +
@@ -156,9 +157,6 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 '.untested, .passed, .failed {\n' +
 ' color: black;\n' +
 ' padding: 1px 3px;\n' +
-'}\n' +
-'.untested {\n' +
-' background-color: white;\n' +
 '}\n' +
 '.passed {\n' +
 ' background-color: #6F6;\n' +
