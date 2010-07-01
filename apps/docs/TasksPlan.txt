@@ -38,7 +38,7 @@ v Make buttons depressable to provide feedback when using them [SG] $Feature @Do
 - Support direct access to Projects or Tasks using SproutCore routes [SG] $Feature @Done %Passed
 - Destroy authentication token when User logs out [SG] <JH2>
 - Implement HTML5 cascading data source to speedup data loads [SE] <SG>
-- Implement JSONP-based data loading for performance speedup [JH2] <SG>
+- Implement JSONP-based data loading for performance speedup [SE] <SG>
 - Implement disconnected operation (offline mode, synchronization after network reconnection) using Hub.js [JH2] <SG>
 - Out of Scope: Add support for attachments in record descriptions $Feature
 | Upload attachment somewhere and insert URL to it in record description
