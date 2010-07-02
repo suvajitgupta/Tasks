@@ -103,8 +103,8 @@ Tasks.mainPage = SC.Page.design({
       }),
 
       actionsMenu: SC.ButtonView.design(SCUI.DropDown, {
-        layout: { centerY: -4, left: 260, height: 24, width: 52 },
-        classNames: ['image-button'],
+        layout: { centerY: -4, left: 260, height: 24, width: 50 },
+        classNames: ['dark'],
         titleMinWidth: 0,
         hasIcon: YES,
         icon: 'actions-icon',
@@ -147,7 +147,7 @@ Tasks.mainPage = SC.Page.design({
         layout: { centerY: -4, height: 24, right: 221, width: 50 },
         titleMinWidth: 0,
         icon: 'filter-icon',
-        classNames: ['image-button'],
+        classNames: ['dark'],
         toolTip: "_FilterTooltip".loc(),
         target: 'Tasks',
         action: 'filterTasks'
@@ -402,8 +402,8 @@ Tasks.mainPage = SC.Page.design({
       childViews: 'addProjectButton deleteProjectButton addTaskButton deleteTaskButton summaryView serverMessageView saveButton refreshButton'.w(),
         
       addProjectButton: SC.ButtonView.design({
-        layout: { centerY: 0, left: 10, height: 24, width: 33 },
-        classNames: ['image-button'],
+        layout: { centerY: 0, left: 10, height: 24, width: 32 },
+        classNames: ['dark'],
         titleMinWidth: 0,
         icon: 'add-icon',
         toolTip: "_AddProjectTooltip".loc(),
@@ -412,8 +412,8 @@ Tasks.mainPage = SC.Page.design({
         action: 'addProject'
       }),
       deleteProjectButton: SC.ButtonView.design({
-        layout: { centerY: 0, left: 52, height: 24, width: 33 },
-        classNames: ['image-button'],
+        layout: { centerY: 0, left: 52, height: 24, width: 32 },
+        classNames: ['dark'],
         titleMinWidth: 0,
         icon: 'delete-icon',
         toolTip: "_DeleteProjectTooltip".loc(),
@@ -424,8 +424,8 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       addTaskButton: SC.ButtonView.design({
-        layout: { centerY: 0, left: 260, height: 24, width: 33 },
-        classNames: ['image-button'],
+        layout: { centerY: 0, left: 260, height: 24, width: 32 },
+        classNames: ['dark'],
         titleMinWidth: 0,
         icon: 'add-icon',
         toolTip: "_AddTaskTooltip".loc(),
@@ -435,8 +435,8 @@ Tasks.mainPage = SC.Page.design({
         action: 'addTask'
       }),
       deleteTaskButton: SC.ButtonView.design(SCUI.Permissible,{
-        layout: { centerY: 0, left: 302, height: 24, width: 33 },
-        classNames: ['image-button'],
+        layout: { centerY: 0, left: 302, height: 24, width: 32 },
+        classNames: ['dark'],
         titleMinWidth: 0,
         icon: 'delete-icon',
         toolTip: "_DeleteTaskTooltip".loc(),
@@ -465,8 +465,8 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       saveButton: SC.ButtonView.design({
-        layout: { centerY: 0, right: 53, height: 24, width: 33 },
-        classNames: ['image-button'],
+        layout: { centerY: 0, right: 53, height: 24, width: 32 },
+        classNames: ['dark'],
         titleMinWidth: 0,
         icon: 'save-icon',
         toolTip: "_SaveTooltip".loc(),
@@ -478,8 +478,8 @@ Tasks.mainPage = SC.Page.design({
         action: 'saveData'
       }),
       refreshButton: SC.ButtonView.design({
-        layout: { centerY: 0, right: 10, height: 24, width: 33 },
-        classNames: ['image-button'],
+        layout: { centerY: 0, right: 10, height: 24, width: 32 },
+        classNames: ['dark'],
         titleMinWidth: 0,
         icon: 'refresh-icon',
         toolTip: "_RefreshTooltip".loc(),

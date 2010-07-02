@@ -133,7 +133,7 @@ Tasks.settingsPage = SC.Page.create({
       
       addButton: SC.ButtonView.design({
         layout: { left: 15, bottom: 10, height: 24, width: 33 },
-        classNames: ['image-button'],
+        classNames: ['dark'],
         titleMinWidth: 0,
         icon: 'add-icon',
         toolTip: "_AddUserTooltip".loc(),
@@ -144,7 +144,7 @@ Tasks.settingsPage = SC.Page.create({
 
       deleteButton: SC.ButtonView.design({
         layout: { left: 57, bottom: 10, height: 24, width: 33 },
-        classNames: ['image-button'],
+        classNames: ['dark'],
         titleMinWidth: 0,
         icon: 'delete-icon',
         toolTip: "_DeleteUserTooltip".loc(),

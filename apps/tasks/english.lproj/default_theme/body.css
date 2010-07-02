@@ -58,18 +58,6 @@ body.sc-theme {
  * Shared styles
  */
 
-.image-button span label{
-  line-height: 28px !important;
-  margin-left: 8px !important;
-  margin-right: 3px !important;
-}
-.sc-theme .sc-button-view.sc-regular-size.square.image-button.disabled {
-  background: #EEE !important;
-  height: 23px !important;
-  width: 32px !important;
-  -moz-border-radius: 5px !important;
-}
-
 .onscreen-help {
   color: #444 !important;
   font-size: 10px !important;
@@ -123,22 +111,26 @@ body.sc-theme {
   left: 22px !important;
 }
 
+.sc-button-view.dark img {
+  left: 1px;
+}
+
 .add-icon {
   width: 16px;
   height: 16px;
   background: static_url('images/add.png') no-repeat;
 }
 
-.duplicate-icon {
-  width: 16px;
-  height: 16px;
-  background: static_url('images/duplicate.png') no-repeat;
-}
-
 .delete-icon {
   width: 16px;
   height: 16px;
   background: static_url('images/delete.png') no-repeat;
+}
+
+.duplicate-icon {
+  width: 16px;
+  height: 16px;
+  background: static_url('images/duplicate.png') no-repeat;
 }
 
 .task-item .description-icon {

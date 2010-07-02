@@ -55,9 +55,12 @@
 }
 
 .actions-icon {
-  width: 25px !important;
-  height: 16px !important;
   background: static_url('images/actions.png') no-repeat;
+  width: 28px;
+  height: 17px;
+}
+.active .actions-icon {
+  background: static_url('images/actions-active.png') no-repeat;
 }
 
 .statistics-icon {
@@ -116,10 +119,13 @@
 }
 
 .filter-icon {
-  margin-right: -1px !important;
+  margin-left: -2px !important;
   width: 16px !important;
   height: 16px !important;
   background: static_url('images/filter.png') no-repeat 0 0;
+}
+.active .filter-icon {
+  background: static_url('images/filter-active.png') no-repeat 0 0;
 }
 
 .filter-cancel-icon {
