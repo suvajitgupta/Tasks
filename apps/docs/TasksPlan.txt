@@ -33,21 +33,20 @@ General Infrastructure @Active
 - Implement GUI-based RBAC (role-based access control) [SG] $Feature @Done %Passed
 - Add an indicator (dot) before Projects/Tasks/Users that were created or updated within the last day <SE> [SG] $Feature @Done %Passed
 - Display record created/updated time at the bottom of popup editors [SG] $Feature @Done %Passed
-v Track/optimize calls to assignments controller and custom view render methods <BB> [SG] @Active
+- Track/optimize calls to assignments controller and custom view render methods <BB> [SG] @Active
 v Make buttons depressable to provide feedback when using them [SG] $Feature @Done %Passed
 - Support direct access to Projects or Tasks using SproutCore routes [SG] $Feature @Done %Passed
-- Destroy authentication token when User logs out [SG] <JH2>
+- Destroy authentication token when User logs out [SG] <JH2> @Active
 - Implement HTML5 cascading data source to speedup data loads [SE] <SG>
 - Implement JSONP-based data loading for performance speedup [SE] <SG>
-- Implement disconnected operation (offline mode, synchronization after network reconnection) using Hub.js [JH2] <SG>
+- Implement disconnected operation (offline mode, synchronization after network reconnection) using Hub.js [JH2] <SG> $Feature
 - Out of Scope: Add support for attachments in record descriptions $Feature
 | Upload attachment somewhere and insert URL to it in record description
 
 Project Manager GUI @Active
 ^ Add Master/Detail Explorer view with click selection of Projects showing corresponding Tasks [JH2] <SG> @Done $Feature %Passed
 ^ Show Project name & time left (if specified) on far right [SG] <JH2> @Done $Feature %Passed
-^ Beta: Allow Project target date to be specified inline or via popup editor/Calendar chooser <JH2> [SG] $Feature @Active
-| Delete all references to timeLeft and update Persevere/Google App Engine models
+^ Beta: Add Project "countdown" support to autmatically decrement days based on timeLeft and current time <JH2> [SG] $Feature @Active
 - Use icon to indicate if Project has any Tasks or not [SG] @Done $Feature %Passed
 - Support alpha sorting of Projects [SG] <JH2> @Done %Passed $Feature
 - Allow multi-project modification of Status [SG] $Feature @Done %Passed
@@ -69,7 +68,7 @@ v Disable "Add Task" button when no project is selected [SG] <BB> @Done %Passed 
 ^ Add popup viewer/editor for Project time left/description [SG] $Feature @Done %Passed
 v Add Project context menu with options: Add, Duplicate, Delete [SG] $Feature @Done %Passed
 - Add "Statistics..." button/popup to show percent breakdown of displayed Tasks by attributes (HTML) [SG] $Feature @Done %Passed
-- Support alternate graphical view (pie charts, bar graphs) for Statistics using Sai [SG] <EG> $Feature
+- Add alternate graphical view (pie charts, bar graphs) for Statistics using Sai [SG] <EG> $Feature
 
 Task Manager GUI @Active
 ^ Group Tasks by User and display Task id, summary, and effort (if specified) on far right [SG] <JH2> @Done $Feature %Passed
@@ -100,10 +99,10 @@ v Add hover over tooltip for assignees to show how many Tasks they have and to e
 ^ Allow multi-task drag-and-drop reassignment to other Assignees [BB] <SG>  @Done $Feature %Passed
 ^ Add popup viewer/editor for Task Submitter, Assignee, Effort, Project, and Description [JH2] <SG> $Feature @Done %Passed
 - Limit Assignees to non-Guest users in Task popup editor [SG] $Feature @Done %Passed
-- Beta: Support Task Copy ID/Name and Copy Link Location (URL with "Route") to clipboard [SG] $Feature @Risky
+- Support Task Copy ID/Name and Copy Link Location (URL with "Route") to clipboard [SG] $Feature @Active
 v Add Task context menu with options: Add, Duplicate, Delete; All Task Attributes; Copy ID/Name, Copy Link [SG] $Feature @Done %Passed
 ^ Add ability to "Watch" Tasks and get Email Notifications after Task changes [SG] <JH2> $Feature @Done %Passed
-^ Beta: Add support for adding Comments to Tasks [SG] <JH2> $Feature @Active
+^ Beta: Support Comments on Tasks [SG] <JH2> $Feature @Active
 - Allow "Find & Replace" within Task names  (operating only on items in Tasks Detail view)[SG] $Feature
 - Allow Task names to embed metacharacters by enclosing in quotes [SG] $Feature
 - Support emails including Task details to other users via Server [SG] $Feature
@@ -128,7 +127,7 @@ v Enable/disable "Delete User" button based on having a selected user [SG] @Done
 - Reset Task Assignee/Submitter after user deletion <SE> [SG] $Feature @Done %Passed
 ^ Allow multi-user drag-and-drop role change in User Manager [SG] @Done $Feature %Passed
 ^ Add User type-ahead search filter (case insensitive name/loginName match) [SG] @Done %Passed $Feature
-- Add ability to mark Users as inactive <SG> [SG] $Feature
+- Provide ability to mark Users as inactive <SG> [SG] $Feature
 | Inactive Users cannot be made Assignees/Submitters
 - Out of Scope: Add support for "Teams" (a user can belong to a team, a team can have a lead) $Feature
 | Create separate projects for different teams to keep their tasks/deadlines separate instead
@@ -155,7 +154,7 @@ v Add online training video using Captivate or Camtasia [SG] $Feature @Done
 - Add "Logout" menu item in actions menu (confirm before exiting, reload data/clear all filters) [SG] <JH2> @Done $Feature %Passed
 - Prompt user to save changes (if any) before logging out [SG] <SE> $Feature @Done %Passed
 | See demo.sproutcore.com/user_defaults and lookup SproutCore blog for Charles' posting on this topic
-- Add "TEAM" display mode (vs. "TASKS") to show everyone at a glance, clicking on Assignee shows their Tasks [SG] $Feature @Done %Passed
+- Add Team display mode (vs. Tasks) to show everyone at a glance, clicking on Assignee shows their Tasks [SG] $Feature @Done %Passed
 v Add hotkeys for common operations (like Add/Duplcate Tasks and Save) [EG] <SG> $Feature @Done %Passed
 | Turned these off for now since these are conflicting with browser shortcuts
 - Provide tab in Settings popup panel to manage user preferences [SG] $Feature
@@ -163,11 +162,12 @@ v Add hotkeys for common operations (like Add/Duplcate Tasks and Save) [EG] <SG>
 | Email notifications
 | Percent or Threshold (in days) for Assignee loading determination
 - Support Application settings/state persistence from last login saved using HTML5 storage [SG] <MB> $Feature
-- Support Undo/Redo using Hub.js [SG] <JH2> $Feature
+- Support undo/redo using Hub.js [SG] <JH2> $Feature
 
-Server @Active
+Server/Tools @Active
 ^ Build persistence Server using Persevere [SE] <SG> @Done %Passed
 - Create command-line scripts to start/stop Persevere Server and to create users <SG> [SE] $Feature @Done %Passed
+- Create tool to parse CSV files and create Tasks import format <SG> [SE] $Feature @Active
 ^ Build persistence Server using Google App Engine [JH2] <SG> @Done %Passed
 - Implement Server-based user authentication using Python on Google App Engine [JH2] <SG> $Feature @Done %Passed
 - Implement Server-based RBAC (role-based access control) using Python on Google App Engine <SG> [JH2] $Feature @Done %Passed
@@ -177,15 +177,15 @@ Server @Active
 | Don’t send Submitter or Assignee notification if their Email address is unspecified
 | Indicate Task ID, create/update action, and user who triggered notifications in Subject: line
 | For Task updates, indicate old and new values of attributes
-- Add link to Task in email notification (should not require authentication if user is signed in) [SG] $Feature
+- Add link to Task in email notification (should not require authentication if user is signed in) <JH2> [SG] $Feature
 - Add Server-side data validation checks/return appropriate error codes [SG] <SE>
 - Add GUI-side data validation checks and corresponding user feedback [SG] <JL>
-- Implement bridge to "github issues" from Google App Engine [JH2] <SG>
+- Implement bridge to "github issues" from Google App Engine [JH2] <SG> $Feature
 
 Styling/Hardening @Active
-^ Style via CSS, embed catchy/sprited images [MG] <SG> @Done %Passed
-^ Beta: Re-style to match Greenhouse look & feel [SG] <MG> @Active
-- Beta: Run Chance to optimize loading of final set of split-up icons [JH2] <MG>
+^ Style via CSS, embed catchy/sprited images [MG] <SG> $Feature @Done %Passed
+^ Beta: Re-style to match Greenhouse look & feel [SG] $Feature <MG> @Active
+- Beta: Run Chance to optimize loading of final set of split-up icons [JH2] <SG> @Active
 - Perform I18N and L10N (test with reversed strings) [SG] <JH2> @Done %Passed
 - Collect/address feedback from Alpha/Beta users and targeted usability tests <MG> [SG] @Done %Passed
 ^ Perform smoke test of key functionality [SG] @Done
@@ -200,7 +200,7 @@ Styling/Hardening @Active
 | Import/Export (Text & HTML)
 | Popup online Help, Statistics
 | Email Notifications, Task watching
-- Develop Model/View unit tests [SG] <BB> @Active
+- Develop comprehensive Model/View unit tests [SG] <BB> @Active
 - Refactor code to "root controller pattern" and new SproutCore statecharts [SG] <MC> @Active
 - Develop automated test scripts using Lebowski/Selenium [SG] <MR> @Active
 
