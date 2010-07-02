@@ -133,7 +133,7 @@ body.sc-theme {
   background: static_url('images/duplicate.png') no-repeat;
 }
 
-.task-item .description-icon {
+.description-icon, .task-item .description-icon {
   width: 16px !important;
   height: 16px !important;
   background: static_url('images/task-description.png') no-repeat;
