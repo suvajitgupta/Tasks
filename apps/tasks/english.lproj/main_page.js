@@ -282,7 +282,7 @@ Tasks.mainPage = SC.Page.design({
            layout: { left: 170, centerY: 0, height: 24, width: 32 },
            titleMinWidth: 0,
            icon: 'empty-project-icon',
-           classNames: ['image-button'],
+           classNames: ['dark'],
            action: 'toggleMasterPicker',
            isVisible: NO,
            isVisibleBinding: 'Tasks.mainPage.mainPane.masterDetailView.masterIsHidden'
@@ -362,7 +362,7 @@ Tasks.mainPage = SC.Page.design({
          tasksList: SC.ScrollView.design({
            
            classNames: ['tasks-pane'],
-           layout: { top: 12, bottom: 35, left: 0, right: 10 },
+           layout: { top: 12, bottom: 35, left: 5, right: 5 },
 
              contentView: SC.ListView.design({
                contentValueKey: 'displayName',
