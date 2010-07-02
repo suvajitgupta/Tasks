@@ -2,6 +2,7 @@
 sc_require('core');
 sc_require('models/record_attribute');
 
+CoreTasks.DATE_FORMAT = '%a %b %d, %Y';
 CoreTasks.DATE_TIME_FORMAT = '%I:%M %p %a %b %d, %Y';
 CoreTasks.MILLISECONDS_IN_DAY = 24*60*60*1000;
 

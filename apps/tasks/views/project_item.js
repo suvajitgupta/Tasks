@@ -12,19 +12,6 @@ sc_require('mixins/localized_label');
   @author Suvajit Gupta
 */
 
-// TODO: [SG] Move to project model as a computed property
-var TasksProjectHelper = SC.Object.create({
-  
-  timeLeftMode: true,
-
-  targetDateMode: function(key, value) {
-    if (value !== undefined) this.set('timeLeftMode', !value);
-    else value = !this.get('timeLeftMode');
-    return value;
-  }.property('timeLeftMode')
-    
-});
-
 Tasks.PROJECT_EDITOR = 1; // used to indicate which editor is popped up
 
 Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
@@ -109,15 +96,15 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       
       contentView: SC.View.design({
         layout: { left: 0, right: 0, top: 0, bottom: 0},
-        childViews: 'nameLabel nameField  statusLabel statusField targetDateTimeLeftRadiobuttons timeLeftField timeLeftHelpLabel descriptionLabel descriptionField createdAtLabel updatedAtLabel'.w(),
-        // childViews: 'nameLabel nameField  statusLabel statusField targetDateTimeLeftRadiobuttons timeLeftField timeLeftHelpLabel targetDateField descriptionLabel descriptionField createdAtLabel updatedAtLabel'.w(),
+        childViews: 'nameLabel nameField  statusLabel statusField timeLeftLabel timeLeftField timeLeftHelpLabel activatedAtLabel descriptionLabel descriptionField createdAtLabel updatedAtLabel'.w(),
       
         nameLabel: SC.LabelView.design({
-          layout: { top: 6, left: 10, height: 24, width: 45 },
+          layout: { top: 6, left: 10, height: 24, width: 60 },
+          textAlign: SC.ALIGN_RIGHT,
           value: "_Name".loc()
         }),
         nameField: SC.TextFieldView.design({
-          layout: { top: 5, left: 55, right: 200, height: 24 },
+          layout: { top: 5, left: 75, right: 200, height: 24 },
           isEnabledBinding: 'CoreTasks.permissions.canUpdateProject',
           value: that.getPath('content.name')
         }),
@@ -135,36 +122,32 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
           objects: this._listStatuses(),
           nameKey: 'name',
           valueKey: 'value',
-          valueBinding: SC.binding('.content.statusValue', this),
+          valueBinding: SC.binding('.content.developmentStatusValue', this),
           toolTip: "_StatusTooltip".loc()
         }),
 
-        targetDateTimeLeftRadiobuttons: SC.RadioView.design({
-          layout: { top: 40, left: 150, height: 40, width: 110 },
-          layoutDirection: SC.LAYOUT_VERTICAL,
-          items: [
-            { title: "_TimeLeft:".loc(), value: true }
-            // { title: "_TargetDate:".loc(), value: false }
-          ],
-          itemTitleKey: 'title',
-          itemValueKey: 'value',
-          valueBinding: 'TasksProjectHelper.timeLeftMode'
+        timeLeftLabel: SC.LabelView.design({
+          layout: { top: 40, left: 10, height: 24, width: 60 },
+          textAlign: SC.ALIGN_RIGHT,
+          value: "_TimeLeft:".loc()
         }),
         timeLeftField: SC.TextFieldView.design({
-          layout: { top: 35, left: 250, width: 125, height: 24 },
+          layout: { top: 37, left: 75, width: 80, height: 24 },
           isEnabledBinding: SC.Binding.logicalAnd('CoreTasks.permissions.canUpdateProject', 'TasksProjectHelper.timeLeftMode'),
           value: that.getPath('content.timeLeft')
         }),
         timeLeftHelpLabel: SC.LabelView.design({
-          layout: { top: 40, left: 380, height: 20, right: 10 },
+          layout: { top: 45, left: 165, height: 20, width: 300 },
           escapeHTML: NO,
           classNames: [ 'onscreen-help'],
           value: "_TimeLeftOnscreenHelp".loc()
         }),
-        targetDateField: SCUI.DatePickerView.design({
-          layout: { top: 60, left: 250, width: 125, height: 24 },
-          isEnabledBinding: SC.Binding.logicalAnd('CoreTasks.permissions.canUpdateProject', 'TasksProjectHelper.targetDateMode'),
-          date: SC.DateTime.create()
+
+        activatedAtLabel: SC.LabelView.design({
+          layout: { top: 41, right: 15, height: 17, width: 175 },
+          classNames: [ 'date-time'],
+          textAlign: SC.ALIGN_RIGHT,
+          valueBinding: SC.binding('.content.displayActivatedAt', this)
         }),
 
         descriptionLabel: SC.LabelView.design({

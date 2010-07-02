@@ -7,6 +7,7 @@ Class({
     name: { type: "any", optional: false },
     description: { type: "any", optional: true },
     timeLeft: { type: "any", optional: true },
-    developmentStatus: { type: "any", optional: true, }
+    developmentStatus: { type: "any", optional: true, },
+    activatedAt: { type: "any", optional: true }
   }
 });

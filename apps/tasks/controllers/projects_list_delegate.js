@@ -84,14 +84,14 @@ Tasks.projectsListDelegate = SC.Object.create(SC.CollectionViewDelegate,
       // Get status of item before drop location
       var dropLocation = content.objectAt(idx);
       if(CoreTasks.isSystemProject(dropLocation) || !dropLocation) return ret;
-      var targetStatus = dropLocation.get('developmentStatus');
+      var targetStatus = dropLocation.get('developmentStatusValue');
       if(SC.none(targetStatus)) return ret;
 
       // Set dragged projects' status to new status
       projects.forEach(function(project) {
-        if (project.get('developmentStatus') !== targetStatus) {
+        if (project.get('developmentStatusValue') !== targetStatus) {
           // console.log('Changing status of project "' + project.get('name') + '" to: ' + targetStatus.loc());
-          project.set('developmentStatus', targetStatus);
+          project.set('developmentStatusValue', targetStatus);
           ret = SC.DRAG_MOVE;
         }
       }, this);

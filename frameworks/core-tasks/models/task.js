@@ -333,6 +333,9 @@ CoreTasks.Task = CoreTasks.Record.extend({
     allowed: CoreTasks.taskStatusesAllowed
    }),
 
+   /**
+    * Buffers changes to developmentStatus making appropriate changes to validation.
+    */
   developmentStatusWithValidation: function(key, value){
      var currentStatus = this.get('developmentStatus');
      if (value && currentStatus !== value) {

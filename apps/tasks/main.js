@@ -18,5 +18,14 @@ Tasks.main = function main() {
   Tasks.registerRoutes();
   
   Tasks.isLoaded = YES; // for Lebowski
+  
+  // Setup timer to refresh project countdowns
+  SC.Timer.schedule({
+    target: 'Tasks.projectsController', 
+    action: 'refreshCountdowns', 
+    interval: 60*60*1000, // every hour
+    repeats: YES
+  }) ;
+  
 
 };

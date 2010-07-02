@@ -236,8 +236,8 @@ Tasks.assignmentsController = SC.ArrayController.create(
   showAssignments: function() { // show tasks for selected user that matches search filter
     
     // Force tasks list indexes to be recomputed so that different height group/regular items redraw correctly
-    var tasksList = Tasks.mainPage.getPath('mainPane.tasksList')
-    indexes = SC.IndexSet.create(0, tasksList.get('length'));
+    var tasksList = Tasks.mainPage.getPath('mainPane.tasksList');
+    var indexes = SC.IndexSet.create(0, tasksList.get('length'));
     tasksList.rowHeightDidChangeForIndexes(indexes);
    
     // console.log('DEBUG: showAssignments(' + this.count + ') entry at: ' + new Date().format('hh:mm:ss a'));
@@ -319,7 +319,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     var sel = Tasks.getPath('projectsController.selection');
     if (sel && sel.length() === 1) {
       var project = sel.firstObject();
-      if (project) projectTimeLeft = CoreTasks.convertTimeToDays(project.get('timeLeft'));
+      if (project) projectTimeLeft = CoreTasks.convertTimeToDays(project.get('countdown'));
     }
       
     // Group tasks by user & separate unassigned tasks

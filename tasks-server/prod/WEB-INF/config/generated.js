@@ -104,6 +104,10 @@ function (username, password) {
 				"developmentStatus":{
 					"type":"any",
 					"optional":true
+				},
+				"activatedAt":{
+					"type":"any",
+					"optional":true
 				}
 			},
 			"prototype":{

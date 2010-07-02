@@ -231,6 +231,7 @@ Tasks.mixin({
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('icon', '');
     serverMessage.set('value', "_DataLoaded".loc() + new Date().format('hh:mm a MMM dd, yyyy'));
+    Tasks.projectsController.refreshCountdowns();
 
     switch (this.state.a) {
       case 3:

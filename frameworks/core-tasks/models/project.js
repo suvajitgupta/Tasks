@@ -115,12 +115,12 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
    /**
     *  This computed property buffers changes to the developmentStatus field.
     */
-   statusValue: function(key, value) {
+   developmentStatusValue: function(key, value) {
 
      if (value !== undefined) {
-       this.propertyWillChange('developmentStatus');
-       this.writeAttribute('developmentStatus', value);
-       this.propertyDidChange('developmentStatus');
+       this.set('developmentStatus', value);
+       if(value === CoreTasks.STATUS_ACTIVE) this.set('activatedAt', SC.DateTime.create());
+       else this.set('activatedAt', null);
      } else {
        value = this.get('developmentStatus');
        if (value === null) value = CoreTasks.STATUS_PLANNED;
@@ -129,6 +129,56 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
      return value;
 
    }.property('developmentStatus').cacheable(),
+
+   /**
+    * The time when the project is activated. Null for inactive projects.
+    *
+    * This is used for load-balancing.
+    */
+   activatedAt: SC.Record.attr('CoreTasks.Date'),
+   displayActivatedAt: function() {
+     var value = this.get('activatedAt');
+     if(!value) return '';
+     if (SC.typeOf(value) === SC.T_NUMBER) value = SC.DateTime.create(value);
+     return "_Activated:".loc() + value.toFormattedString(CoreTasks.DATE_FORMAT);
+   }.property('activatedAt'),
+
+   /**
+    * The number of days left in the project counting down from current time.
+    */
+   countdown: function() {
+     
+     console.log('DEBUG: countdown() for project: ' + this.get('name'));
+     
+     var timeLeft = this.get('timeLeft');
+     if (SC.none(timeLeft)) return null;
+     var activatedAt = this.get('activatedAt');
+     if (SC.none(activatedAt)) return timeLeft;
+     
+     // if(this.get('name') === "FooFooFoo") debugger;
+     var now = SC.DateTime.create();
+     var dayOfWeek = now.get('dayOfWeek');
+     if(dayOfWeek === 0 || dayOfWeek == 6) now = now.get('lastFriday');
+     var today = now.get('dayOfYear');
+     var activationDay = activatedAt.get('dayOfYear');
+     var daysElapsed = today - activationDay;
+     var weeksElapsed = Math.floor(daysElapsed/7);
+     var weekendDays = weeksElapsed*2;
+     daysElapsed -= weekendDays;
+     var countdown = CoreTasks.convertTimeToDays(timeLeft) - daysElapsed;
+     if (countdown < 0) countdown = 0;
+     
+     return CoreTasks.convertTimeToDays(countdown);
+     
+   }.property('timeLeft', 'activatedAt').cacheable(),
+
+   /**
+    * Append unit of time after countdown.
+    */
+   displayCountdown: function() {
+     return CoreTasks.displayTime(this.get('countdown'));
+   }.property('countdown').cacheable(),
+
 
   // FIXME [SC]: need to fix SC.Query to handle negative numbers - recently broken since commit e3bbb4a88ae2bc9fa217d0cf5a24868683f6ae91
   // FIXME [SC]: fix all Tasks being fetched after a Project name is changed - should only update Project record
