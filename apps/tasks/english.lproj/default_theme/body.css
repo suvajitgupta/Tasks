@@ -115,6 +115,10 @@ body.sc-theme {
 .sc-button-view.dark img {
   left: 1px;
 }
+.sc-button-view.dark.active img,
+.sc-button-view.dark.disabled img {
+  opacity: 0.5;
+}
 
 .add-icon {
   width: 16px;

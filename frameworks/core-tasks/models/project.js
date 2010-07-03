@@ -148,7 +148,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
     */
    countdown: function() {
      
-     console.log('DEBUG: countdown() for project: ' + this.get('name'));
+     // console.log('DEBUG: countdown() for project: ' + this.get('name'));
      
      var timeLeft = this.get('timeLeft');
      if (SC.none(timeLeft)) return null;
@@ -158,7 +158,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
      // if(this.get('name') === "FooFooFoo") debugger;
      var now = SC.DateTime.create();
      var dayOfWeek = now.get('dayOfWeek');
-     if(dayOfWeek === 0 || dayOfWeek == 6) now = now.get('lastFriday');
+     if(dayOfWeek === 0 || dayOfWeek == 1) now = now.get('lastSaturday');
      var today = now.get('dayOfYear');
      var activationDay = activatedAt.get('dayOfYear');
      var daysElapsed = today - activationDay;

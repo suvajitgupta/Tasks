@@ -59,9 +59,6 @@
   width: 28px;
   height: 17px;
 }
-.active .actions-icon {
-  background: static_url('images/actions-active.png') no-repeat;
-}
 
 .statistics-icon {
   width: 16px;
@@ -123,9 +120,6 @@
   width: 16px !important;
   height: 16px !important;
   background: static_url('images/filter.png') no-repeat 0 0;
-}
-.active .filter-icon {
-  background: static_url('images/filter-active.png') no-repeat 0 0;
 }
 
 .filter-cancel-icon {

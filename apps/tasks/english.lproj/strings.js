@@ -119,7 +119,7 @@ SC.stringsFor('English', {
   "_Project": "Project ",
   "_Project:": "Project: ",
   "_ProjectDeletionConfirmation": "Are you sure you want to delete the selected projects?",
-  "_ProjectTimeLeftTooltip": "Project time left",
+  "_ProjectCountdownTooltip": "Countdown of days left",
   "_Projects": "Projects",
   "_QuickFilters": "QUICK FILTERS",
   "_QuickFiltersTooltip": "Commonly used filters",

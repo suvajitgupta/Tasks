@@ -25,9 +25,6 @@
   margin-left: 1px;
   margin-top: 1px;
 }
-.active .save-icon {
-  background: static_url('images/save-active.png') no-repeat 0 0;
-}
 
 .refresh-icon {
   width: 16px;
@@ -35,10 +32,4 @@
   background: static_url('images/refresh.png') no-repeat 0 0;
   margin-left: 1px;
   margin-top: 1px;
-}
-
-.active .add-icon, .disabled .add-icon,
-.active .delete-icon, .disabled .delete-icon,
-.active .refresh-icon, .disabled .refresh-icon {
-  opacity: 0.5;
 }

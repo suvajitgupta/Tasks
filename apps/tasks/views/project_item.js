@@ -133,7 +133,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
         }),
         timeLeftField: SC.TextFieldView.design({
           layout: { top: 37, left: 75, width: 80, height: 24 },
-          isEnabledBinding: SC.Binding.logicalAnd('CoreTasks.permissions.canUpdateProject', 'TasksProjectHelper.timeLeftMode'),
+          isEnabledBinding: 'CoreTasks.permissions.canUpdateProject',
           value: that.getPath('content.timeLeft')
         }),
         timeLeftHelpLabel: SC.LabelView.design({
@@ -251,8 +251,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
   renderCount: function(context, count) {
     if(count) {
       // Show time left for project
-      var timeLeftTooltip = "_ProjectTimeLeftTooltip".loc();
-      context.push('<span class="count" title="' + timeLeftTooltip + '">');
+      context.push('<span class="count" title="' + "_ProjectCountdownTooltip".loc() + '">');
       context.push('<span class="inner">').push(count).push('</span></span>');
     }
   }
