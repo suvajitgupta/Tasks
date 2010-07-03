@@ -130,7 +130,11 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
 
      if (value !== undefined) {
        this.set('developmentStatus', value);
-       if(value === CoreTasks.STATUS_ACTIVE) this.set('activatedAt', SC.DateTime.create());
+       if(value === CoreTasks.STATUS_ACTIVE) {
+         SC.RunLoop.begin();
+         this.set('activatedAt', SC.DateTime.create());
+         SC.RunLoop.end();
+       }
        else this.set('activatedAt', null);
      } else {
        value = this.get('developmentStatus');
@@ -163,24 +167,31 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
      
      var timeLeft = this.get('timeLeft');
      if (SC.none(timeLeft)) return null;
+     timeLeft = CoreTasks.convertTimeToDays(timeLeft);
+     
      var activatedAt = this.get('activatedAt');
+     console.log('DEBUG: activatedAt: ' + activatedAt);
      if (SC.none(activatedAt)) return timeLeft;
      
-     // if(this.get('name') === "FooFooFoo") debugger;
-     var now = SC.DateTime.create();
-     var dayOfWeek = now.get('dayOfWeek');
-     if(dayOfWeek === 0 || dayOfWeek == 1) now = now.get('lastSaturday');
-     var today = now.get('dayOfYear');
-     if(SC.none(activatedAt.get)) return timeLeft;
-     var activationDay = activatedAt.get('dayOfYear');
-     var daysElapsed = today - activationDay;
+     var today = SC.DateTime.create();
+     var todayOfYear = today.get('dayOfYear');
+     var todayOfWeek = today.get('dayOfWeek');
+     if(todayOfWeek === 0 || todayOfWeek === 1) todayOfYear = today.get('lastSaturday').get('dayOfYear');
+     
+     var activationDayOfYear = activatedAt.get('dayOfYear');
+     var activationDayOfWeek = activatedAt.get('dayOfWeek');
+     if(activationDayOfWeek === 0 || activationDayOfWeek === 6) activationDayOfYear = activatedAt.get('nextMonday').get('dayOfYear');
+     
+     var daysElapsed = todayOfYear - activationDayOfYear;
      var weeksElapsed = Math.floor(daysElapsed/7);
      var weekendDays = weeksElapsed*2;
+     if(todayOfWeek < activationDayOfWeek) weekendDays += 2;
      daysElapsed -= weekendDays;
-     var countDown = CoreTasks.convertTimeToDays(timeLeft) - daysElapsed;
+     
+     var countDown = timeLeft - daysElapsed;
      if (countDown < 0) countDown = 0;
      
-     return CoreTasks.convertTimeToDays(countDown);
+     return countDown;
      
    }.property('timeLeft', 'activatedAt').cacheable(),
 
