@@ -48,16 +48,15 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' padding: 3px 6px;\n' +
 '}\n' +
 'h1 {\n' +
-' font-size: 14px;\n' +
-' color: #EEE;\n' +
-' background-color: #555;\n' +
-' border: 1px solid #555;\n' +
+' font-size: 20px;\n' +
+' background-color: #CCC;\n' +
+' border: 1px solid #AAA;\n' +
 '}\n' +
 'h2 {\n' +
 ' font-size: 14px;\n' +
 ' color: #222;\n' +
 ' padding-left: 10px;\n' +
-' border: 1px solid #666;\n' +
+' border: 1px solid #777;\n' +
 '}\n' +
 'h2, p {\n' +
 ' margin-left: 15px;\n' +
@@ -388,6 +387,7 @@ Tasks.exportDataController = SC.ObjectController.create(
         for (i = 0; i < len; i++) {
           project = sel.nextObject(i, null, context);
           if(format === 'Text') ret += '# ';
+          else ret += '<span class="' + project.get('developmentStatus').loc().toLowerCase() + '">';
           ret += project.get('name');
           if(format === 'HTML') ret += '<br>';
           ret += '\n';
