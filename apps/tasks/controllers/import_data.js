@@ -71,7 +71,7 @@ Tasks.importDataController = SC.ObjectController.create(
               if(assigneeUser) taskHash.assigneeId = assigneeUser.get('id');
             }
             else {
-              console.warn('Task Import: no such assignee: ' + taskHash.assigneeId);
+              console.warn('Task Import Error - no such assignee: ' + taskHash.assigneeId);
               taskHash.assigneeId = null;
             }
           }
@@ -86,7 +86,7 @@ Tasks.importDataController = SC.ObjectController.create(
               if(submitterUser) taskHash.submitterId = submitterUser.get('id');
             }
             else {
-              console.warn('Task Import: no such submitter: ' + taskHash.submitterId);
+              console.warn('Task Import Error - no such submitter: ' + taskHash.submitterId);
               taskHash.submitterId = null;
             }
           }
@@ -150,11 +150,22 @@ Tasks.importDataController = SC.ObjectController.create(
           else { // create new project if allowed and switch to it if allowed
             if(CoreTasks.getPath('permissions.canCreateProject')) {
               projectRecord = CoreTasks.createRecord(CoreTasks.Project, projectHash);
-              if(projectRecord) currentProject = projectRecord;
+              if(projectRecord) {
+                if(projectRecord.activatedAt) {
+                  if(projectRecord.get('developmentStatus') !== CoreTasks.STATUS_ACTIVE) {
+                    console.warn('Project Import Error - activatedAt can only be specified for status Active for project ' + projectHash.name);
+                    projectRecord.set('activatedAt', null);
+                  }
+                  else {
+                    projectRecord.set('activatedAt', SC.DateTime.parse(projectHash.activatedAt, CoreTasks.ACTIVATED_AT_DATE_FORMAT));
+                  }
+                }
+                currentProject = projectRecord;
+              }
               else console.error('Import: project creation failed!');
             }
             else {
-              console.warn('Task Import: you do not have permission to create project \""' + projectHash.name + '"');
+              console.warn('Task Import Error - you do not have permission to create project: ' + projectHash.name);
             }
           }
         }
