@@ -115,14 +115,14 @@ Tasks.projectsController = SC.ArrayController.create(SCUI.StatusChanged,
   },
   
   /**
-   * Force recomputation of project countdowns where needed
+   * Force recomputation of project countDowns where needed
    */
   refreshCountdowns: function() {
     // console.log('DEBUG: refreshCountdowns() at: ' + new Date().format('hh:mm:ss a'));
     this.forEach(function(project){
       if(project.get('developmentStatus') === CoreTasks.STATUS_ACTIVE && !SC.none(project.get('timeLeft'))) {
         // console.log('DEBUG: project: ' + project.get('name'));
-        project.notifyPropertyChange('countdown');
+        project.notifyPropertyChange('countDown');
       }
     }, Tasks.projectsController);
   },

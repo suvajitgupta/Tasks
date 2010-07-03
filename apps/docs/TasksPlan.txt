@@ -46,7 +46,7 @@ v Make buttons depressable to provide feedback when using them [SG] $Feature @Do
 Project Manager GUI @Active
 ^ Add Master/Detail Explorer view with click selection of Projects showing corresponding Tasks [JH2] <SG> @Done $Feature %Passed
 ^ Show Project name & time left (if specified) on far right [SG] <JH2> @Done $Feature %Passed
-^ Beta: Add Project "countdown" support to autmatically decrement days based on timeLeft and current time <JH2> [SG] $Feature @Active
+^ Beta: Add Project countDown support to autmatically decrement days based on timeLeft and current time <JH2> [SG] $Feature @Active
 - Use icon to indicate if Project has any Tasks or not [SG] @Done $Feature %Passed
 - Support alpha sorting of Projects [SG] <JH2> @Done %Passed $Feature
 - Allow multi-project modification of Status [SG] $Feature @Done %Passed

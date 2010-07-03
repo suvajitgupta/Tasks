@@ -7,6 +7,8 @@ CoreTasks.ALL_TASKS_NAME = '_AllTasks';
 CoreTasks.UNALLOCATED_TASKS_NAME = '_UnallocatedTasks';
 CoreTasks.UNASSIGNED_TASKS_NAME = '_UnassignedTasks';
 
+CoreTasks.ACTIVATED_AT_DATE_FORMAT = '%m/%d/%Y';
+
 CoreTasks.projectStatusesAllowed = [
   CoreTasks.STATUS_PLANNED,
   CoreTasks.STATUS_ACTIVE,
@@ -55,6 +57,15 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
         this.propertyWillChange('developmentStatus');
         this.writeAttribute('developmentStatus', projectHash.developmentStatus);
         this.propertyDidChange('developmentStatus');
+      }
+      
+      if(projectHash.activatedAt) {
+        if(this.get('developmentStatus') !== CoreTasks.STATUS_ACTIVE) {
+          console.warn('Project Editing Error - activatedAt can only be specified for status Active: ' + projectHash.name);
+        }
+        else {
+          this.set('activatedAt', SC.DateTime.parse(projectHash.activatedAt, CoreTasks.ACTIVATED_AT_DATE_FORMAT));
+        }
       }
       
     } else {
@@ -146,9 +157,9 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
    /**
     * The number of days left in the project counting down from current time.
     */
-   countdown: function() {
+   countDown: function() {
      
-     // console.log('DEBUG: countdown() for project: ' + this.get('name'));
+     // console.log('DEBUG: countDown() for project: ' + this.get('name'));
      
      var timeLeft = this.get('timeLeft');
      if (SC.none(timeLeft)) return null;
@@ -160,24 +171,25 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
      var dayOfWeek = now.get('dayOfWeek');
      if(dayOfWeek === 0 || dayOfWeek == 1) now = now.get('lastSaturday');
      var today = now.get('dayOfYear');
+     if(SC.none(activatedAt.get)) return timeLeft;
      var activationDay = activatedAt.get('dayOfYear');
      var daysElapsed = today - activationDay;
      var weeksElapsed = Math.floor(daysElapsed/7);
      var weekendDays = weeksElapsed*2;
      daysElapsed -= weekendDays;
-     var countdown = CoreTasks.convertTimeToDays(timeLeft) - daysElapsed;
-     if (countdown < 0) countdown = 0;
+     var countDown = CoreTasks.convertTimeToDays(timeLeft) - daysElapsed;
+     if (countDown < 0) countDown = 0;
      
-     return CoreTasks.convertTimeToDays(countdown);
+     return CoreTasks.convertTimeToDays(countDown);
      
    }.property('timeLeft', 'activatedAt').cacheable(),
 
    /**
-    * Append unit of time after countdown.
+    * Append unit of time after countDown.
     */
-   displayCountdown: function() {
-     return CoreTasks.displayTime(this.get('countdown'));
-   }.property('countdown').cacheable(),
+   displayCountDown: function() {
+     return CoreTasks.displayTime(this.get('countDown'));
+   }.property('countDown').cacheable(),
 
 
   // FIXME [SC]: need to fix SC.Query to handle negative numbers - recently broken since commit e3bbb4a88ae2bc9fa217d0cf5a24868683f6ae91
@@ -278,9 +290,9 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
     if(format === 'Text') ret += '#================================================================================\n';
     else ret += '<h1>';
     
-    if(projectName === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) {
+    if(projectName === CoreTasks.UNALLOCATED_TASKS_NAME.loc() || projectName === CoreTasks.UNASSIGNED_TASKS_NAME.loc()) {
       if(format === 'Text') ret += '# ';
-      ret += "_UnallocatedTasks".loc();
+      ret += projectName.loc();
     }
     else {
       
@@ -288,13 +300,15 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
       ret += projectName;
       if(format === 'HTML') ret += '</span>';
       
-      var timeLeft = this.get('timeLeft');
-      if(timeLeft) {
-        if(format === 'HTML') ret += '&nbsp;<span class="time">';
-        else ret += ' {';
-        ret += CoreTasks.displayTime(timeLeft);
-        if(format === 'HTML') ret += '</span>';
-        else ret += '}';
+      if(format === 'Text') {
+        var timeLeft = this.get('timeLeft');
+        if(timeLeft) ret += (' {' + CoreTasks.displayTime(timeLeft) + '}');
+        var activatedAt = this.get('activatedAt');
+        if(activatedAt) ret += (' <' + activatedAt.toFormattedString(CoreTasks.ACTIVATED_AT_DATE_FORMAT) + '>');
+      }
+      else {
+        var countDown = this.get('countDown');
+        if(countDown) ret += ('&nbsp;<span class="time">' + CoreTasks.displayTime(countDown) + '</span>');
       }
       
     }
@@ -355,7 +369,7 @@ CoreTasks.Project.mixin(/** @scope CoreTasks.Project */ {
    * Parse a string and extract timeLeft from it.
    *
    * @param {String} string to extract timeLeft from.
-   * @returns {String} project time left.
+   * @returns {String} project timeLeft.
    */
   parseTimeLeft: function(line) {
     
@@ -383,6 +397,36 @@ CoreTasks.Project.mixin(/** @scope CoreTasks.Project */ {
   },
 
   /**
+   * Parse a string and extract activatedAt from it.
+   *
+   * @param {String} string to extract activatedAt from.
+   * @returns {String} project activatedAt.
+   */
+  parseActivatedAt: function(line) {
+    
+    var projectActivatedAt = null;
+    
+    var matches = line.match(/</g);
+    if(matches !== null) {
+      if(matches.length === 1) {
+        var projectActivatedAtMatches = /<(.*)>/.exec(line);
+        if(projectActivatedAtMatches) {
+          projectActivatedAt = projectActivatedAtMatches[1];
+        }
+        else {
+          console.warn('Project Parsing Error - illegal activatedAt');
+        }
+      }
+      else {
+        console.warn('Project Parsing Error - multiple activatedAts illegal');
+      }
+    }
+    
+    return projectActivatedAt;
+    
+  },
+
+  /**
    * Parse a line of text and extract parameters from it.
    *
    * @param {String} string to extract parameters from.
@@ -393,13 +437,14 @@ CoreTasks.Project.mixin(/** @scope CoreTasks.Project */ {
     
     // extract project name
     var projectName = line;
-    var projectNameMatches = line.match(/^([^\{\@#]+)/);
+    var projectNameMatches = line.match(/^([^\{<\@#]+)/);
     if(projectNameMatches) {
       projectName = projectNameMatches[1].replace(/^\s+/, '').replace(/\s+$/, ''); // trim leading/trailing whitespace, if any
     }
 
-    // extract project time left
+    // extract project timeLeft & activatedAt if provided
     var projectTimeLeft = CoreTasks.Project.parseTimeLeft(line);
+    var projectActivatedAt = CoreTasks.Project.parseActivatedAt(line);
     
     // extract project development status
     var projectStatus = fillDefaults? CoreTasks.STATUS_PLANNED : null;
@@ -422,6 +467,7 @@ CoreTasks.Project.mixin(/** @scope CoreTasks.Project */ {
     var ret = {
       name: projectName,
       timeLeft: projectTimeLeft,
+      activatedAt: projectActivatedAt,
       developmentStatus: projectStatus,
       tasks: []
     };

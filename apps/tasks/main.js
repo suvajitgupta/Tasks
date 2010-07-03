@@ -19,7 +19,7 @@ Tasks.main = function main() {
   
   Tasks.isLoaded = YES; // for Lebowski
   
-  // Setup timer to refresh project countdowns
+  // Setup timer to refresh project countDowns
   SC.Timer.schedule({
     target: 'Tasks.projectsController', 
     action: 'refreshCountdowns', 
