@@ -130,11 +130,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
 
      if (value !== undefined) {
        this.set('developmentStatus', value);
-       if(value === CoreTasks.STATUS_ACTIVE) {
-         SC.RunLoop.begin();
-         this.set('activatedAt', SC.DateTime.create());
-         SC.RunLoop.end();
-       }
+       if(value === CoreTasks.STATUS_ACTIVE) this.set('activatedAt', SC.DateTime.create());
        else this.set('activatedAt', null);
      } else {
        value = this.get('developmentStatus');
@@ -151,10 +147,14 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
     * This is used for load-balancing.
     */
    activatedAt: SC.Record.attr('CoreTasks.Date'),
-   displayActivatedAt: function() {
+   activatedAtValue: function() {
      var value = this.get('activatedAt');
-     if(!value) return '';
      if (SC.typeOf(value) === SC.T_NUMBER) value = SC.DateTime.create(value);
+     return value;
+   }.property('activatedAt'),
+   displayActivatedAt: function() {
+     var value = this.get('activatedAtValue');
+     if(!value) return '';
      return "_Activated:".loc() + value.toFormattedString(CoreTasks.DATE_FORMAT);
    }.property('activatedAt'),
 
@@ -163,32 +163,42 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
     */
    countDown: function() {
      
-     // console.log('DEBUG: countDown() for project: ' + this.get('name'));
-     
      var timeLeft = this.get('timeLeft');
      if (SC.none(timeLeft)) return null;
      timeLeft = CoreTasks.convertTimeToDays(timeLeft);
      
-     var activatedAt = this.get('activatedAt');
-     console.log('DEBUG: activatedAt: ' + activatedAt);
+     var activatedAt = this.get('activatedAtValue');
+     // console.log('DEBUG: name: "' + this.get('name') + '", activatedAt: ' + (activatedAt? activatedAt.toFormattedString(CoreTasks.ACTIVATED_AT_DATE_FORMAT) : 'null'));
      if (SC.none(activatedAt)) return timeLeft;
      
      var today = SC.DateTime.create();
      var todayOfYear = today.get('dayOfYear');
      var todayOfWeek = today.get('dayOfWeek');
-     if(todayOfWeek === 0 || todayOfWeek === 1) todayOfYear = today.get('lastSaturday').get('dayOfYear');
+     // console.log('DEBUG: today: ' + today.toFormattedString(CoreTasks.ACTIVATED_AT_DATE_FORMAT) + ', todayOfYear: ' + todayOfYear);
+     if(todayOfWeek === 0 || todayOfWeek === 1) {
+       todayOfYear = today.get('lastSaturday').get('dayOfYear');
+       todayOfWeek = 6;
+     }
+     // console.log('DEBUG: revised todayOfYear: ' + todayOfYear + ', todayOfWeek: ' + todayOfWeek);
      
      var activationDayOfYear = activatedAt.get('dayOfYear');
      var activationDayOfWeek = activatedAt.get('dayOfWeek');
-     if(activationDayOfWeek === 0 || activationDayOfWeek === 6) activationDayOfYear = activatedAt.get('nextMonday').get('dayOfYear');
+     if(activationDayOfWeek === 0 || activationDayOfWeek === 6) {
+       activationDayOfYear = activatedAt.get('nextMonday').get('dayOfYear');
+       activationDayOfWeek = 1;
+     }
+     // console.log('DEBUG: activationDayOfYear: ' + activationDayOfYear + ', activationDayOfWeek: ' + activationDayOfWeek);
      
      var daysElapsed = todayOfYear - activationDayOfYear;
      var weeksElapsed = Math.floor(daysElapsed/7);
+     // console.log('DEBUG: daysElapsed: ' + daysElapsed + ', weeksElapsed: ' + weeksElapsed);
      var weekendDays = weeksElapsed*2;
-     if(todayOfWeek < activationDayOfWeek) weekendDays += 2;
-     daysElapsed -= weekendDays;
+     if(weeksElapsed === 0 && (todayOfWeek > 0 && activationDayOfWeek < 6)) weekendDays += 2;
+     if(daysElapsed > 2) daysElapsed -= weekendDays;
+     // console.log('DEBUG: revised daysElapsed: ' + daysElapsed + ', weekendDays: ' + weekendDays);
      
      var countDown = timeLeft - daysElapsed;
+     // console.log('DEBUG: countDown: ' + countDown);
      if (countDown < 0) countDown = 0;
      
      return countDown;
