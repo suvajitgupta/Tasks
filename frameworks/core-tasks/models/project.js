@@ -196,6 +196,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
      // console.log('DEBUG: activationDayOfYear: ' + activationDayOfYear + ', activationDayOfWeek: ' + activationDayOfWeek);
      
      var daysElapsed = todayOfYear - activationDayOfYear;
+     if(daysElapsed < 0) daysElapsed = 0;
      var weeksElapsed = Math.floor(daysElapsed/7);
      // console.log('DEBUG: daysElapsed: ' + daysElapsed + ', weeksElapsed: ' + weeksElapsed);
      var weekendDays = weeksElapsed*2;
