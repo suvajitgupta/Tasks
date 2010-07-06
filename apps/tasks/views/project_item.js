@@ -86,6 +86,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
         var cv = that._editorPane.get('contentView');
         content.setIfChanged('displayName', cv.getPath('nameField.value'));
         content.setIfChanged('timeLeftValue', cv.getPath('timeLeftField.value'));
+        content.setIfChanged('activatedAtValue',  cv.getPath('activatedAtField.date'));
         content.setIfChanged('description',  cv.getPath('descriptionField.value'));
         if(Tasks.sourcesRedrawNeeded) Tasks.projectsController.showSources();
         // If timeLeft has changed, recalculate load balancing
@@ -96,7 +97,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       
       contentView: SC.View.design({
         layout: { left: 0, right: 0, top: 0, bottom: 0},
-        childViews: 'nameLabel nameField  statusLabel statusField timeLeftLabel timeLeftField timeLeftHelpLabel activatedAtLabel descriptionLabel descriptionField createdAtLabel updatedAtLabel'.w(),
+        childViews: 'nameLabel nameField  statusLabel statusField timeLeftLabel timeLeftField timeLeftHelpLabel activatedAtLabel activatedAtField descriptionLabel descriptionField createdAtLabel updatedAtLabel'.w(),
       
         nameLabel: SC.LabelView.design({
           layout: { top: 6, left: 10, height: 24, width: 60 },
@@ -144,10 +145,14 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
         }),
 
         activatedAtLabel: SC.LabelView.design({
-          layout: { top: 41, right: 15, height: 17, width: 175 },
-          classNames: [ 'date-time'],
+          layout: { top: 40, right: 142, height: 24, width: 100 },
           textAlign: SC.ALIGN_RIGHT,
-          valueBinding: SC.binding('.content.displayActivatedAt', this)
+          value: "_Activated:".loc()
+        }),
+        activatedAtField: SCUI.DatePickerView.design({
+          layout: { top: 37, right: 10, height: 24, width: 125 },
+          isEnabledBinding: 'CoreTasks.permissions.canUpdateProject',
+          date: that.getPath('content.activatedAtValue')
         }),
 
         descriptionLabel: SC.LabelView.design({

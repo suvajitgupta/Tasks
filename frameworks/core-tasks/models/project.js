@@ -147,16 +147,22 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
     * This is used for load-balancing.
     */
    activatedAt: SC.Record.attr('CoreTasks.Date'),
-   activatedAtValue: function() {
-     var value = this.get('activatedAt');
-     if (SC.typeOf(value) === SC.T_NUMBER) value = SC.DateTime.create(value);
+
+   /**
+    *  This computed property buffers changes to the activatedAt field.
+    */
+   activatedAtValue: function(key, value) {
+     
+     if (value !== undefined) {
+       this.set('activatedAt', value);
+     } else {
+       value = this.get('activatedAt');
+       if (SC.typeOf(value) === SC.T_NUMBER) value = SC.DateTime.create(value);
+     }
+
      return value;
-   }.property('activatedAt'),
-   displayActivatedAt: function() {
-     var value = this.get('activatedAtValue');
-     if(!value) return '';
-     return "_Activated:".loc() + value.toFormattedString(CoreTasks.DATE_FORMAT);
-   }.property('activatedAt'),
+     
+   }.property('activatedAt').cacheable(),
 
    /**
     * The number of days left in the project counting down from current time.

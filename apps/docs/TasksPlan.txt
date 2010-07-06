@@ -45,7 +45,7 @@ v Make buttons depressable to provide feedback when using them [SG] $Feature @Do
 
 Project Manager GUI @Active
 ^ Add Master/Detail Explorer view with click selection of Projects showing corresponding Tasks [JH2] <SG> @Done $Feature %Passed
-^ Show Project name & time left (if specified) on far right [SG] <JH2> @Done $Feature %Passed
+^ Show Project name & countDown (if specified) on far right [SG] <JH2> @Done $Feature %Passed
 ^ Beta: Add Project countDown support to autmatically decrement days based on timeLeft and current time <JH2> [SG] $Feature @Active
 - Use icon to indicate if Project has any Tasks or not [SG] @Done $Feature %Passed
 - Support alpha sorting of Projects [SG] <JH2> @Done %Passed $Feature
@@ -65,7 +65,7 @@ v Disable "Add Task" button when no project is selected [SG] <BB> @Done %Passed 
 ^ Add "All/Unallocated/Unassigned Tasks" system projects  [SG] <SE> $Feature @Done %Passed
 - Disallow system projects from being deleted [SG] @Done $Feature %Passed
 ^ Allow multi-task drag-and-drop reallocation to other projects [BB] <SG> @Done $Feature %Passed
-^ Add popup viewer/editor for Project time left/description [SG] $Feature @Done %Passed
+^ Add popup viewer/editor for Project timeLeft/description [SG] $Feature @Done %Passed
 v Add Project context menu with options: Add, Duplicate, Delete [SG] $Feature @Done %Passed
 - Add "Statistics..." button/popup to show percent breakdown of displayed Tasks by attributes (HTML) [SG] $Feature @Done %Passed
 - Add alternate graphical view (pie charts, bar graphs) for Statistics using Sai [SG] <EG> $Feature

@@ -11,6 +11,7 @@ Project:
 	name*: <String>, # title
 	description: <String>, # multi-line additional information such as project start/end dates, goals, et al
 	timeLeft: <Number>, # amount of time left in days
+	activatedAt: <String>, # date project was activated in format'%m/%d/%Y'
 	developmentStatus: Enum<String> ("_Planned_" | "Active" | "Done"), # development status
 }
 
@@ -24,9 +25,9 @@ Task:
 	description: <String>, # multi-line additional information such as Feature details, Bug reproduction steps, or Release Notes
 	projectId: <Number> # refers to project task is allocated to
 	priority: Enum<String> ("High" | "_Medium_" | "Low"), # High ones must be completed, Low ones not included in effort subtotals
-	effort: <Number> # effort estimate => actual, in days
-	submitterId: <Number>, # id of User who submitted this Task
-	assigneeId: <Number> # id of User to whom this Task is assigned
+	effort: <String> # effort estimate => actual, in days
+	submitterId: <String>, # loginName of User who submitted this Task
+	assigneeId: <String> # loginName of User to whom this Task is assigned
 	type: Enum<String>, ("Feature" | "Bug" | "_Other_") # kind of Task to support testing workflow
 	developmentStatus: Enum<String> ("_Planned_" | "Active" | "Done" | "Risky"), # development status
 	validation: Enum<String> ("_Untested_" | "Passed" | "Failed"), # validation status
