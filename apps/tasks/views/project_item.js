@@ -138,7 +138,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
           value: that.getPath('content.timeLeft')
         }),
         timeLeftHelpLabel: SC.LabelView.design({
-          layout: { top: 45, left: 165, height: 20, width: 300 },
+          layout: { top: 45, left: 165, height: 20, width: 310 },
           escapeHTML: NO,
           classNames: [ 'onscreen-help'],
           value: "_TimeLeftOnscreenHelp".loc()
@@ -182,7 +182,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
         }),
 
         closeButton: SC.ButtonView.design({
-          layout: { bottom: 10, right: 10, width: 80, height: 24 },
+          layout: { bottom: 10, right: 15, width: 80, height: 24 },
           theme: 'capsule',
           classNames: ['dark'],
           isDefault: YES,
