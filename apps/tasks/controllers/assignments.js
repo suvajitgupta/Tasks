@@ -810,10 +810,10 @@ Tasks.assignmentsController = SC.ArrayController.create(
   
   closePanel: function() {
     if(this._panel) {
-      this._panel.remove();
       this._panel.destroy();
+      this._panel = null;
+      this.set('statistics', '');
     }
-    this.set('statistics', '');
   }
   
 });

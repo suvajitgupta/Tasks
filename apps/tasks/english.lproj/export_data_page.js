@@ -25,12 +25,21 @@ Tasks.exportDataPage = SC.Page.create({
     
     contentView: SC.View.design({
       
-      childViews: 'exportField'.w(),
+      childViews: 'exportField closeButton'.w(),
       
       exportField: SC.TextFieldView.design({
-        layout: { left: 10, right: 10, top: 10, bottom: 10 },
+        layout: { left: 10, right: 10, top: 10, bottom: 40 },
         valueBinding: SC.Binding.oneWay('Tasks.exportDataController.data'),
         isTextArea: YES
+      }),
+      
+      closeButton: SC.ButtonView.design({
+        layout: { bottom: 10, right: 10, width: 80, height: 24 },
+        theme: 'capsule',
+        classNames: ['dark'],
+        isDefault: YES,
+        title: "_Close".loc(),
+        action: 'remove'
       })
               
     })

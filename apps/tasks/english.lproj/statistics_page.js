@@ -22,11 +22,10 @@ Tasks.statisticsPane = SCUI.ModalPane.extend({
   titleBarHeight: 40,
   layout: { centerX: 0, centerY: 0, height: Tasks.softwareMode? 220 : 190, width: 650 },
   classNames: ['statistics-pane'],
-  // TODO: [SG] need to call assignmentsController.closePanel() upon pressing red button
   
   contentView: SC.View.design({
     
-    childViews: 'statistics'.w(),
+    childViews: 'statistics closeButton'.w(),
     
     statistics: SC.LabelView.design({
       layout: { top: 10, left: 10, right: 10, bottom: 10 },
@@ -34,8 +33,22 @@ Tasks.statisticsPane = SCUI.ModalPane.extend({
       controlSize: SC.SMALL_CONTROL_SIZE,
       escapeHTML: NO,
       valueBinding: 'Tasks.assignmentsController.statistics'
+    }),
+      
+    closeButton: SC.ButtonView.design({
+      layout: { bottom: 10, right: 10, width: 80, height: 24 },
+      theme: 'capsule',
+      classNames: ['dark'],
+      isDefault: YES,
+      title: "_Close".loc(),
+      action: 'remove'
     })
         
-  })
+  }),
+  
+  remove: function() {
+    sc_super();
+    Tasks.assignmentsController.closePanel();
+  }
       
 });

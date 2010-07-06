@@ -63,8 +63,8 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       titleBarHeight: 40,
       title: "_Project".loc() + that.getPath('content.displayId'),
       minWidth: 700,
-      minHeight: 200,
-      layout: { centerX:0, centerY: 0, width: 700, height: 275 },
+      minHeight: 240,
+      layout: { centerX:0, centerY: 0, width: 700, height: 315 },
       _timeLeft: null,
       
       // Avoid popup panel coming up for system projects
@@ -97,7 +97,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       
       contentView: SC.View.design({
         layout: { left: 0, right: 0, top: 0, bottom: 0},
-        childViews: 'nameLabel nameField  statusLabel statusField timeLeftLabel timeLeftField timeLeftHelpLabel activatedAtLabel activatedAtField descriptionLabel descriptionField createdAtLabel updatedAtLabel'.w(),
+        childViews: 'nameLabel nameField  statusLabel statusField timeLeftLabel timeLeftField timeLeftHelpLabel activatedAtLabel activatedAtField descriptionLabel descriptionField createdAtLabel updatedAtLabel closeButton'.w(),
       
         nameLabel: SC.LabelView.design({
           layout: { top: 6, left: 10, height: 24, width: 60 },
@@ -161,7 +161,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
           value: "_Description:".loc()
         }),
         descriptionField: SC.TextFieldView.design({
-          layout: { top: 95, left: 10, right: 10, bottom: 25 },
+          layout: { top: 95, left: 10, right: 10, bottom: 65 },
           hint: "_DescriptionHint".loc(),
           isTextArea: YES,
           isEnabledBinding: 'CoreTasks.permissions.canUpdateProject',
@@ -169,16 +169,25 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
         }),
         
         createdAtLabel: SC.LabelView.design({
-          layout: { left: 20, bottom: 5, height: 17, width: 250 },
+          layout: { left: 20, bottom: 45, height: 17, width: 250 },
           classNames: [ 'date-time'],
           textAlign: SC.ALIGN_LEFT,
           valueBinding: SC.binding('.content.displayCreatedAt', this)
         }),
         updatedAtLabel: SC.LabelView.design({
-          layout: { right: 20, bottom: 5, height: 17, width: 250 },
+          layout: { right: 20, bottom: 45, height: 17, width: 250 },
           classNames: [ 'date-time'],
           textAlign: SC.ALIGN_RIGHT,
           valueBinding: SC.binding('.content.displayUpdatedAt', this)
+        }),
+
+        closeButton: SC.ButtonView.design({
+          layout: { bottom: 10, right: 10, width: 80, height: 24 },
+          theme: 'capsule',
+          classNames: ['dark'],
+          isDefault: YES,
+          title: "_Close".loc(),
+          action: 'remove'
         })
           
       })

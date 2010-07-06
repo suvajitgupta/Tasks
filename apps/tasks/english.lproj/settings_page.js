@@ -29,7 +29,7 @@ Tasks.settingsPage = SC.Page.create({
     
     contentView: SC.View.design({
       layout: { left: 0, right: 0, top: 0, bottom: 0},
-      childViews: 'userNamePatternField userNamePatternCancelButton userManager addButton deleteButton usersCount'.w(),
+      childViews: 'userNamePatternField userNamePatternCancelButton userManager addButton deleteButton usersCount closeButton'.w(),
       
       userNamePatternField: SC.TextFieldView.design(SCUI.ToolTip, {
         layout: { top: 10, height: 24, left: 43, width: 200 },
@@ -158,6 +158,15 @@ Tasks.settingsPage = SC.Page.create({
         layout: { left: 105, width: 200, bottom: 12, height: 15 },
         controlSize: SC.SMALL_CONTROL_SIZE,
         valueBinding: 'Tasks.usersController.usersCount' 
+      }),
+
+      closeButton: SC.ButtonView.design({
+        layout: { bottom: 10, right: 10, width: 80, height: 24 },
+        theme: 'capsule',
+        classNames: ['dark'],
+        isDefault: YES,
+        title: "_Close".loc(),
+        action: 'remove'
       })
       
     }),
