@@ -1,0 +1,6 @@
+"Type","Priority","External Key","Component","Name","Description","Submitter","Assignee","Effort"
+"Feature","High","F-2987","Parsers","Add parser for binary tree structure",,"SG","SE","5d"
+"Other","Low","O-1134","Documentation","Update README file","Update example script usage in README file to reflect new command-line options.
+
+-f <fmt>, --format=<fmt>
+-a <algo>, --algorithm=<algo>","SE","SG","1h"

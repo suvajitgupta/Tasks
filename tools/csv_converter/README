@@ -1,0 +1,30 @@
+Tasks CSV Converter                                                        v0.1
+===============================================================================
+
+A simple Java utility that converts a CSV-formatted file to a Tasks-formatted
+text file.
+
+Author: Sean Eidemiller (sean@halcyon.cc)
+
+Required headers (case-insensitive):
+  - Name
+
+Optional headers (case-insensitive):
+  - Priority*
+  - Type*
+  - Description
+  - Component
+  - External Key
+  - Submitter*
+  - Assignee*
+  - Validation*
+  - Effort*
+  - Status*
+
+*See Tasks documentation for legal values.
+
+To compile (requires Ant, JDK 1.5+):
+  ant
+
+To run (requires JRE 1.5+):
+  ./convert.sh <Project Name> <CSV File> <Output File>
