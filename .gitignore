@@ -13,3 +13,5 @@ tools/*.pyc
 tools/helpers/*.pyc
 frameworks/scui
 frameworks/sproutcore
+tools/csv_converter/build
+tools/csv_converter/dist
