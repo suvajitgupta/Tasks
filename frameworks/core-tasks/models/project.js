@@ -60,12 +60,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
       }
       
       if(projectHash.activatedAt) {
-        if(this.get('developmentStatus') !== CoreTasks.STATUS_ACTIVE) {
-          console.warn('Project Editing Error - activatedAt can only be specified for status Active: ' + projectHash.name);
-        }
-        else {
-          this.set('activatedAt', SC.DateTime.parse(projectHash.activatedAt, CoreTasks.ACTIVATED_AT_DATE_FORMAT));
-        }
+        this.set('activatedAt', SC.DateTime.parse(projectHash.activatedAt, CoreTasks.ACTIVATED_AT_DATE_FORMAT));
       }
       
     } else {
