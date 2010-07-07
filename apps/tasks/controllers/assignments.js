@@ -335,8 +335,6 @@ Tasks.assignmentsController = SC.ArrayController.create(
       submitterName = submitter? submitter.get('displayName') : CoreTasks.USER_UNASSIGNED;
       if(isNewTask || assigneeSelectionDisplayNames.length === 0 || assigneeSelectionDisplayNames.indexOf(assigneeName) !== -1) {
         
-        if(submitterSelectionDisplayNames.length !== 0 && submitterSelectionDisplayNames.indexOf(submitterName) === -1) return;
-        
         var assigneeObj = assignees[assigneeName];
         if(!assigneeObj) {
           assigneeObj = { assignee: assignee, tasks: [] };
@@ -346,6 +344,8 @@ Tasks.assignmentsController = SC.ArrayController.create(
         // Filter tasks that meet filter criteria
         if(!isNewTask) {
           
+          if(submitterSelectionDisplayNames.length !== 0 && submitterSelectionDisplayNames.indexOf(submitterName) === -1) return;
+        
           var type = task.get('type');
           if(this.attributeFilterCriteria.indexOf(type) === -1) return;
           var priority = task.get('priority');
