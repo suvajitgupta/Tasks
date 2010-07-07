@@ -10,16 +10,16 @@ Required headers (case-insensitive):
   - Name
 
 Optional headers (case-insensitive):
-  - Priority*
-  - Type*
+  - Priority ["high" | "medium" (default) | "low"]
+  - Type ["feature" (default) | "bug" | "other"]
   - Description
   - Component
   - External Key
-  - Submitter*
-  - Assignee*
+  - Submitter
+  - Assignee
   - Validation*
   - Effort*
-  - Status*
+  - Status ["active" | "done" | "planned" (default)| "risky"]
 
 *See Tasks documentation for legal values.
 
