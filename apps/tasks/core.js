@@ -23,6 +23,12 @@ sc_require('statechart');
   }
 })();
 
+SCUI.ContextMenuPane = SCUI.ContextMenuPane.extend({
+  exampleView: SC.MenuItemView.extend({
+    escapeHTML: NO
+  })
+});
+
 Tasks = SC.Object.create(SC.Statechart,
   /** @scope Tasks.prototype */ {
 
