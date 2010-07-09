@@ -232,6 +232,10 @@ body.sc-theme {
   margin-top: 4px;
 }
 
+.safari .sc-view .sc-text-field-view.focus {
+  outline: none;
+}
+
 .picker-resizable-handle {
   width: 16px;
   height: 16px;
