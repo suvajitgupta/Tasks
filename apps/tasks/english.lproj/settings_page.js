@@ -161,8 +161,7 @@ Tasks.settingsPage = SC.Page.create({
       }),
 
       closeButton: SC.ButtonView.design({
-        layout: { bottom: 10, right: 15, width: 80, height: 24 },
-        theme: 'capsule',
+        layout: { bottom: 10, right: 20, width: 80, height: 24 },
         classNames: ['dark'],
         isDefault: YES,
         title: "_Close".loc(),

@@ -56,9 +56,9 @@ Tasks.importDataPage = SC.Page.create({
       }),
       
       importButton: SC.ButtonView.design({
-        layout: { width: 80, height: 30, right: 15, bottom: 8 },
-        titleMinWidth: 0,
-        theme: 'capsule',
+        layout: { width: 80, height: 30, right: 20, bottom: 8 },
+        classNames: ['dark'],
+        isEnabledBinding: SC.Binding.oneWay('Tasks.importDataController.importData').bool(),
         keyEquivalent: 'return',
         isDefault: YES,
         title: "_Import".loc(),

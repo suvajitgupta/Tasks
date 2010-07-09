@@ -298,8 +298,8 @@ Tasks.filterPane = SC.SheetPane.create({
 
     closeButton: SC.ButtonView.design({
       layout: { width: 80, height: 30, right: 96, bottom: 8 },
+      classNames: ['dark'],
       titleMinWidth: 0,
-      theme: 'capsule',
       title: "_Cancel".loc(),
       target: 'Tasks.filterController',
       action: 'closePane'
@@ -307,10 +307,10 @@ Tasks.filterPane = SC.SheetPane.create({
     
     applyButton: SC.ButtonView.design({
       layout: { width: 80, height: 30, right: 10, bottom: 8 },
+      classNames: ['dark'],
       titleMinWidth: 0,
       keyEquivalent: 'return',
       isDefault: YES,
-      theme: 'capsule',
       title: "_Apply".loc(),
       target: 'Tasks.filterController',
       action: 'applyFilter'

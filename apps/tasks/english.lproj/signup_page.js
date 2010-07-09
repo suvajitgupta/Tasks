@@ -42,9 +42,9 @@ Tasks.signupPage = SC.Page.design({
       
       signupButton: SC.ButtonView.design({
         layout: { bottom: 10, right: 10, width: 90, height: 24 },
+        classNames: ['dark'],
         title: "_Signup".loc(),
         isEnabledBinding: 'Tasks.signupController.isValidUserName',
-        theme: 'capsule',
         keyEquivalent: 'return',
         isDefault: YES,
         action: "submit"
@@ -52,8 +52,8 @@ Tasks.signupPage = SC.Page.design({
       
       cancelButton: SC.ButtonView.design({
         layout: { bottom: 10, right: 110, width: 90, height: 24 },
+        classNames: ['dark'],
         title: "_Cancel".loc(),
-        theme: 'capsule',
         keyEquivalent: 'escape',
         isCancel: YES,
         action: "cancel"

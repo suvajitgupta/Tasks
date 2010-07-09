@@ -1,6 +1,6 @@
 /*
 ==========================================================================
- Project: Greenhouse - Custom Button Styles
+ Project: Tasks - Custom Button Styles
  Author: Matt Grantham - @MattGrantham
 ==========================================================================
 */
@@ -42,13 +42,13 @@
 
 /* Disabled */
 .sc-theme .sc-button-view.sc-regular-size.square.disabled.dark {
-  background: static_url('images/buttons/dark/disabled-r.png') no-repeat right;
+  background: static_url('images/buttons/dark/disabled-r.png') no-repeat right !important;
 }
 .sc-theme .sc-button-view.sc-regular-size.square.disabled.dark .sc-button-inner {
-  background: static_url('images/buttons/dark/disabled-l.png') no-repeat;
+  background: static_url('images/buttons/dark/disabled-l.png') no-repeat !important;
 }
 .sc-theme .sc-button-view.sc-regular-size.square.disabled.dark .sc-button-label {
-  background: static_url('images/buttons/dark/disabled-m.png') repeat-x;
+  background: static_url('images/buttons/dark/disabled-m.png') repeat-x !important;
   color: #d0d0d0;
   margin-left: 5px;
   margin-right: 5px;
@@ -95,14 +95,14 @@
 
 /* Selected - Disabled*/
 .sc-theme .sc-button-view.sc-regular-size.square.dark.sel.disabled {
-  background: static_url('images/buttons/dark/sel-disabled-r.png') no-repeat right;
+  background: static_url('images/buttons/dark/sel-disabled-r.png') no-repeat right !important;
 }
 
 .sc-theme .sc-button-view.sc-regular-size.square.dark.sel.disabled .sc-button-inner {
-  background: static_url('images/buttons/dark/sel-disabled-l.png') no-repeat;
+  background: static_url('images/buttons/dark/sel-disabled-l.png') no-repeat !important;
 }
 .sc-theme .sc-button-view.sc-regular-size.square.dark.sel.disabled .sc-button-label {
-  background: static_url('images/buttons/dark/sel-disabled-m.png') repeat-x;
+  background: static_url('images/buttons/dark/sel-disabled-m.png') repeat-x !important;
   margin-left: 5px;
   margin-right: 5px;
   color: #fff;
@@ -145,14 +145,14 @@
 
 /* Disabled */
 .sc-theme .sc-button-view.sc-regular-size.capsule.disabled {
-  background: static_url('images/buttons/capsule/disabled-r.png') no-repeat right;
+  background: static_url('images/buttons/capsule/disabled-r.png') no-repeat right !important;
 }
 
 .sc-theme .sc-button-view.sc-regular-size.capsule.disabled .sc-button-inner {
-  background: static_url('images/buttons/capsule/disabled-l.png') no-repeat;
+  background: static_url('images/buttons/capsule/disabled-l.png') no-repeat !important;
 }
 .sc-theme .sc-button-view.sc-regular-size.capsule.disabled .sc-button-label {
-  background: static_url('images/buttons/shared/disabled-m.png') repeat-x;
+  background: static_url('images/buttons/shared/disabled-m.png') repeat-x !important;
   margin-left: 12px;
   margin-right: 12px;
   color: #b2b2b2;
@@ -194,14 +194,14 @@
 
 /* Selected - Disabled */
 .sc-theme .sc-button-view.sc-regular-size.capsule.disabled.sel {
-  background: static_url('images/buttons/capsule/sel-disabled-r.png') no-repeat right;
+  background: static_url('images/buttons/capsule/sel-disabled-r.png') no-repeat right !important;
 }
 
 .sc-theme .sc-button-view.sc-regular-size.capsule.disabled.sel .sc-button-inner {
-  background: static_url('images/buttons/capsule/sel-disabled-l.png') no-repeat;
+  background: static_url('images/buttons/capsule/sel-disabled-l.png') no-repeat !important;
 }
 .sc-theme .sc-button-view.sc-regular-size.capsule.disabled.sel .sc-button-label {
-  background: static_url('images/buttons/shared/sel-disabled-m.png') repeat-x;
+  background: static_url('images/buttons/shared/sel-disabled-m.png') repeat-x !important;
   margin-left: 12px;
   margin-right: 12px;
   color: #c1c7b7;
@@ -245,14 +245,14 @@
 
 /* Disabled */
 .sc-theme .sc-button-view.sc-regular-size.square.disabled {
-  background: static_url('images/buttons/square/disabled-r.png') no-repeat right;
+  background: static_url('images/buttons/square/disabled-r.png') no-repeat right !important;
 }
 
 .sc-theme .sc-button-view.sc-regular-size.square.disabled .sc-button-inner {
-  background: static_url('images/buttons/square/disabled-l.png') no-repeat;
+  background: static_url('images/buttons/square/disabled-l.png') no-repeat !important;
 }
 .sc-theme .sc-button-view.sc-regular-size.square.disabled .sc-button-label {
-  background: static_url('images/buttons/shared/disabled-m.png') repeat-x;
+  background: static_url('images/buttons/shared/disabled-m.png') repeat-x !important;
   margin-left: 6px;
   margin-right: 6px;
   color: #b2b2b2;
@@ -294,14 +294,14 @@
 
 /* Selected - Disabled */
 .sc-theme .sc-button-view.sc-regular-size.square.disabled.sel {
-  background: static_url('images/buttons/square/sel-disabled-r.png') no-repeat right;
+  background: static_url('images/buttons/square/sel-disabled-r.png') no-repeat right !important;
 }
 
 .sc-theme .sc-button-view.sc-regular-size.square.disabled.sel .sc-button-inner {
-  background: static_url('images/buttons/square/sel-disabled-l.png') no-repeat;
+  background: static_url('images/buttons/square/sel-disabled-l.png') no-repeat !important;
 }
 .sc-theme .sc-button-view.sc-regular-size.square.disabled.sel .sc-button-label {
-  background: static_url('images/buttons/shared/sel-disabled-m.png') repeat-x;
+  background: static_url('images/buttons/shared/sel-disabled-m.png') repeat-x !important;
   margin-left: 6px;
   margin-right: 6px;
   color: #c1c7b7;
