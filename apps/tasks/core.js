@@ -23,12 +23,6 @@ sc_require('statechart');
   }
 })();
 
-SCUI.ContextMenuPane = SCUI.ContextMenuPane.extend({
-  exampleView: SC.MenuItemView.extend({
-    escapeHTML: NO
-  })
-});
-
 Tasks = SC.Object.create(SC.Statechart,
   /** @scope Tasks.prototype */ {
 
@@ -44,6 +38,22 @@ Tasks = SC.Object.create(SC.Statechart,
   }
   
 });
+
+/**
+  Some view overrides to turn off escapeHTML for menu items in context menus and select buttons.
+*/
+SC.MenuItemView = SC.MenuItemView.extend({
+  escapeHTML: NO
+});
+
+SC.SelectButtonView = SC.SelectButtonView.extend({
+  escapeHTML: NO
+});
+
+SCUI.ContextMenuPane = SCUI.ContextMenuPane.extend({
+  exampleView: SC.MenuItemView
+});
+
 
 /**
   A Standard Binding transform to localize a string in a binding.
