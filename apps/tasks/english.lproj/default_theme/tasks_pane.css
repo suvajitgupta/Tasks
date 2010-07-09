@@ -12,11 +12,11 @@
  * Task pane styles
  */
  
-.sc-collection-view.sc-list-view.sc-source-list.tasks-pane-inner {
+.sc-collection-view.sc-list-view.sc-list-view.tasks-pane-inner {
   background: none;
 }
 
-.sc-view.sc-ghost-view .sc-collection-view.sc-list-view.sc-source-list.tasks-pane-inner {
+.sc-view.sc-ghost-view .sc-collection-view.sc-list-view.sc-list-view.tasks-pane-inner {
   background: none !important;
 }
 

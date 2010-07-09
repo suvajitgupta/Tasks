@@ -23,10 +23,10 @@
   -webkit-box-shadow: inset 0 3px 8px rgba(0,0,0,.6), 0 1px 0 rgba(255,255,255,.4);
 }
 
-.sc-view.sc-collection-view.sc-list-view.sc-source-list.projects-pane-inner,
-.sc-theme.focus .sc-view.sc-collection-view.sc-list-view.sc-source-list.projects-pane-inner,
-.sc-view.sc-collection-view.sc-list-view.sc-source-list.users-pane-inner,
-.sc-theme.focus .sc-view.sc-collection-view.sc-list-view.sc-source-list.users-pane-inner {
+.sc-view.sc-collection-view.sc-list-view.sc-list-view.projects-pane-inner,
+.sc-theme.focus .sc-view.sc-collection-view.sc-list-view.sc-list-view.projects-pane-inner,
+.sc-view.sc-collection-view.sc-list-view.sc-list-view.users-pane-inner,
+.sc-theme.focus .sc-view.sc-collection-view.sc-list-view.sc-list-view.users-pane-inner {
   background: none;
 }
 
@@ -100,22 +100,22 @@
 
 .projects-pane-inner .sc-group-item.sel .sc-outline,
 .projects-pane-inner .sc-view.sc-list-item-view.sc-collection-item.sc-group-item.sel .sc-outline label,
-.sc-list-view.sc-source-list.projects-pane-inner .sc-collection-item.sel,
-.sc-list-view.sc-source-list.projects-pane-inner .sc-collection-item.sel:hover,
+.sc-list-view.sc-list-view.projects-pane-inner .sc-collection-item.sel,
+.sc-list-view.sc-list-view.projects-pane-inner .sc-collection-item.sel:hover,
 .users-pane-inner .sc-group-item.sel .sc-outline,
 .users-pane-inner .sc-view.sc-list-item-view.sc-collection-item.sc-group-item.sel .sc-outline label,
-.sc-list-view.sc-source-list.users-pane-inner .sc-collection-item.sel,
-.sc-list-view.sc-source-list.users-pane-inner .sc-collection-item.sel:hover {
+.sc-list-view.sc-list-view.users-pane-inner .sc-collection-item.sel,
+.sc-list-view.sc-list-view.users-pane-inner .sc-collection-item.sel:hover {
   height: 22px !important;
   color: #000 !important;
   background: #9CF !important;
   border-color: #000 !important;
 }
 
-.sc-list-view.sc-source-list.projects-pane-inner .sc-collection-item.project-item.sel,
-.sc-list-view.sc-source-list.projects-pane-inner .sc-collection-item.project-item.sel:hover,
-.sc-list-view.sc-source-list.users-pane-inner .sc-collection-item.user-item.sel:hover,
-.sc-list-view.sc-source-list.users-pane-inner .sc-collection-item.user-item.sel {
+.sc-list-view.sc-list-view.projects-pane-inner .sc-collection-item.project-item.sel,
+.sc-list-view.sc-list-view.projects-pane-inner .sc-collection-item.project-item.sel:hover,
+.sc-list-view.sc-list-view.users-pane-inner .sc-collection-item.user-item.sel:hover,
+.sc-list-view.sc-list-view.users-pane-inner .sc-collection-item.user-item.sel {
   font-weight: normal !important;
 }
 

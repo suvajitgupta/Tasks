@@ -193,7 +193,7 @@ Tasks.mainPage = SC.Page.design({
         classNames: ['projects-pane'],
         hasHorizontalScroller: NO,
 
-        contentView: SC.SourceListView.design({
+        contentView: SC.ListView.design({
           layout: { top: 0, left:0, bottom: 0, right: 0 },
           contentValueKey: 'displayName',
           contentUnreadCountKey: 'displayCountDown',
@@ -249,7 +249,7 @@ Tasks.mainPage = SC.Page.design({
         layout: { top: 15, bottom: 10, left: 260, right: 10 },
         hasHorizontalScroller: NO,
 
-        contentView: SC.SourceListView.design({
+        contentView: SC.ListView.design({
           layout: { top: 0, bottom: 0, left: 0, right: 0 },
           contentValueKey: 'displayName',
           contentUnreadCountKey: 'displayEffort',
