@@ -45,8 +45,8 @@ v Make buttons depressable to provide feedback when using them [SG] $Feature @Do
 
 Project Manager GUI @Active
 ^ Add Master/Detail Explorer view with click selection of Projects showing corresponding Tasks [JH2] <SG> @Done $Feature %Passed
+^ Add Project countDown support to autmatically decrement days based on timeLeft and current time <JH2> [SG] $Feature @Done
 ^ Show Project name & countDown (if specified) on far right [SG] <JH2> @Done $Feature %Passed
-^ Beta: Add Project countDown support to autmatically decrement days based on timeLeft and current time <JH2> [SG] $Feature @Active
 - Use icon to indicate if Project has any Tasks or not [SG] @Done $Feature %Passed
 - Support alpha sorting of Projects [SG] <JH2> @Done %Passed $Feature
 - Allow multi-project modification of Status [SG] $Feature @Done %Passed
@@ -184,7 +184,7 @@ Server/Tools @Active
 
 Styling/Hardening @Active
 ^ Style via CSS, embed catchy/sprited images [MG] <SG> $Feature @Done %Passed
-^ Beta: Re-style to match Greenhouse look & feel [SG] $Feature <MG> @Active
+^ Re-style to match Greenhouse look & feel [SG] $Feature <MG> @Done
 - Beta: Run Chance to optimize loading of final set of split-up icons [JH2] <SG> @Active
 - Perform I18N and L10N (test with reversed strings) [SG] <JH2> @Done %Passed
 - Collect/address feedback from Alpha/Beta users and targeted usability tests <MG> [SG] @Done %Passed
