@@ -169,7 +169,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
      timeLeft = CoreTasks.convertTimeToDays(timeLeft);
      
      var activatedAt = this.get('activatedAtValue');
-     // console.log('DEBUG: name: "' + this.get('name') + '", activatedAt: ' + (activatedAt? activatedAt.toFormattedString(CoreTasks.ACTIVATED_AT_DATE_FORMAT) : 'null'));
+     // console.log('DEBUG: name: "' + this.get('name')  + '", timeLeft: ' + timeLeft + 'd, activatedAt: ' + (activatedAt? activatedAt.toFormattedString(CoreTasks.ACTIVATED_AT_DATE_FORMAT) : 'null'));
      if (SC.none(activatedAt)) return timeLeft;
      
      var today = SC.DateTime.create();
@@ -179,25 +179,28 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
      if(todayOfWeek === 0 || todayOfWeek === 1) {
        todayOfYear = today.get('lastSaturday').get('dayOfYear');
        todayOfWeek = 6;
+       // console.log('DEBUG: revised todayOfYear: ' + todayOfYear + ', todayOfWeek: ' + todayOfWeek);
      }
-     // console.log('DEBUG: revised todayOfYear: ' + todayOfYear + ', todayOfWeek: ' + todayOfWeek);
      
      var activationDayOfYear = activatedAt.get('dayOfYear');
      var activationDayOfWeek = activatedAt.get('dayOfWeek');
+     // console.log('DEBUG: activationDayOfYear: ' + activationDayOfYear + ', activationDayOfWeek: ' + activationDayOfWeek);
      if(activationDayOfWeek === 0 || activationDayOfWeek === 6) {
        activationDayOfYear = activatedAt.get('nextMonday').get('dayOfYear');
        activationDayOfWeek = 1;
+       // console.log('DEBUG: revised activationDayOfYear: ' + activationDayOfYear + ', activationDayOfWeek: ' + activationDayOfWeek);
      }
-     // console.log('DEBUG: activationDayOfYear: ' + activationDayOfYear + ', activationDayOfWeek: ' + activationDayOfWeek);
      
      var daysElapsed = todayOfYear - activationDayOfYear;
      if(daysElapsed < 0) daysElapsed = 0;
      var weeksElapsed = Math.floor(daysElapsed/7);
-     // console.log('DEBUG: daysElapsed: ' + daysElapsed + ', weeksElapsed: ' + weeksElapsed);
      var weekendDays = weeksElapsed*2;
-     if(weeksElapsed === 0 && (todayOfWeek > 0 && activationDayOfWeek < 6)) weekendDays += 2;
-     if(daysElapsed > 2) daysElapsed -= weekendDays;
-     // console.log('DEBUG: revised daysElapsed: ' + daysElapsed + ', weekendDays: ' + weekendDays);
+     if(daysElapsed < 7 && activationDayOfWeek > todayOfWeek) weekendDays += 2; // a weekend is in the mix
+     // console.log('DEBUG: daysElapsed: ' + daysElapsed + ', weeksElapsed: ' + weeksElapsed + ', weekendDays: ' + weekendDays);
+     if(daysElapsed > 2 && weekendDays > 0) {
+       daysElapsed -= weekendDays;
+       // console.log('DEBUG: revised daysElapsed: ' + daysElapsed);
+     }
      
      var countDown = timeLeft - daysElapsed;
      // console.log('DEBUG: countDown: ' + countDown);
