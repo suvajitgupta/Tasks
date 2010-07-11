@@ -64,7 +64,7 @@ Tasks.mainPage = SC.Page.design({
   mainPane: SC.MainPane.design({
     
     layerId: 'mainPane',
-    layout: { left: 0, right: 0, top: 0, bottom: 0, minWidth: 925, minHeight: 500 },
+    layout: { left: 0, right: 0, top: 0, bottom: 0, minWidth: 1000, minHeight: 500 },
     childViews: 'topBarView masterDetailView bottomBarView'.w(),
     
     topBarView: SC.View.design(SC.Border, {
@@ -448,9 +448,8 @@ Tasks.mainPage = SC.Page.design({
       }),
       
       summaryView: Tasks.SummaryView.design({
-        layout: { centerY: 0, height: 18, centerX: 10, width: 450 },
+        layout: { centerY: 0, height: 18, left: 345, width: 400 },
         classNames: ['bottom-bar-label'],
-        textAlign: SC.ALIGN_CENTER,
         assignmentsSummaryBinding: SC.Binding.oneWay('Tasks.assignmentsController.assignmentsSummary'),
         projectsSelectionBinding: SC.Binding.oneWay('Tasks.projectsController.selection'),
         tasksSelectionBinding: SC.Binding.oneWay('Tasks.tasksController.selection')
