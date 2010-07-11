@@ -205,7 +205,8 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
     * Append unit of time after countDown.
     */
    displayCountDown: function() {
-     return CoreTasks.displayTime(this.get('countDown'));
+     var countDown = this.get('countDown');
+     return SC.none(countDown)? null : (countDown + 'd');
    }.property('countDown').cacheable(),
 
 

@@ -722,13 +722,19 @@ CoreTasks = SC.Object.create({
   /**
    * Display time with 'd' appended if no time unit present.
    *
-   * @param (String) time in days or hours
+   * @param (String) timeString in days or hours
    * @returns {String) return time with unit appended.
    */
-  displayTime: function(time) {
-    if(SC.none(time)) return null;
-    var lastChar = time[time.length-1];
-    return time + ((lastChar === 'd' || lastChar === 'h')? '' : 'd');
+  displayTime: function(timeString) {
+    if(SC.none(timeString)) return null;
+    var lastChar = timeString[timeString.length-1];
+    var displayTime = parseFloat(parseFloat(timeString, 10).toFixed(3));
+    var idx = timeString.indexOf('-'); // see if time is a range
+    if(idx !== -1) { // a range
+      var max = parseFloat(parseFloat(timeString.slice(idx+1), 10).toFixed(3));
+      displayTime += ('-' + max);
+    }
+    return displayTime + ((lastChar === 'd' || lastChar === 'h')? lastChar : 'd');
   },
   
   /**
