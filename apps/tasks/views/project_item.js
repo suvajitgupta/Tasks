@@ -17,7 +17,7 @@ Tasks.PROJECT_EDITOR = 1; // used to indicate which editor is popped up
 Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
 /** @scope Tasks.ProjectItemView.prototype */ {
   
-  displayProperties: ['displayName', 'displayTimeLeft', 'description'],
+  displayProperties: ['displayName', 'displayCountDown', 'description'],
   
   _listStatuses: function() {
      var ret = [];

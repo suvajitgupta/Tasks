@@ -183,6 +183,10 @@ body.sc-theme {
 	top: 0px !important;
 }
 
+.sc-list-item-view img.icon {
+  left: 10px !important;
+}
+
 /*
 // FIXME: [SC] hacks to turn off blue ring highlight around select button with focus
 */
