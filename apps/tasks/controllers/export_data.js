@@ -187,7 +187,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' right: 15px;\n' +
 '}\n' +
 '.total {\n' +
-' right: 175px;\n' +
+' right: 225px;\n' +
 '}\n' +
 '.doneEffortRangeWarning {\n' +
 ' background-color: #F93 !important;\n' +
