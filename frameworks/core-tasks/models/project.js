@@ -77,13 +77,6 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
   timeLeft: SC.Record.attr(String),
 
   /**
-   * Append unit of time after time left.
-   */
-  displayTimeLeft: function() {
-    return CoreTasks.displayTime(this.get('timeLeft'));
-  }.property('timeLeft').cacheable(),
-  
-  /**
    *  This computed property buffers changes to the timeLeft field.
    */
   timeLeftValue: function(key, value){
