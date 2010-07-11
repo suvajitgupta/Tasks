@@ -125,8 +125,6 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
 
      if (value !== undefined) {
        this.set('developmentStatus', value);
-       if(value === CoreTasks.STATUS_ACTIVE) this.set('activatedAt', SC.DateTime.create());
-       else this.set('activatedAt', null);
      } else {
        value = this.get('developmentStatus');
        if (value === null) value = CoreTasks.STATUS_PLANNED;

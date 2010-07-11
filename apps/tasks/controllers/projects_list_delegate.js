@@ -92,6 +92,7 @@ Tasks.projectsListDelegate = SC.Object.create(SC.CollectionViewDelegate,
         if (project.get('developmentStatus') !== targetStatus) {
           // console.log('Changing status of project "' + project.get('name') + '" to: ' + targetStatus.loc());
           project.set('developmentStatusValue', targetStatus);
+          if(targetStatus === CoreTasks.STATUS_ACTIVE && !project.get('activatedAt')) project.set('activatedAt', SC.DateTime.create());
           ret = SC.DRAG_MOVE;
         }
       }, this);
