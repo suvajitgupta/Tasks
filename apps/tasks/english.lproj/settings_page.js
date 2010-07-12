@@ -51,7 +51,7 @@ Tasks.settingsPage = SC.Page.create({
 
       userManager: SC.View.design({
         layout: { left: 10, right: 10, top: 40, bottom: 40},
-        childViews: 'usersMasterView userDetailView createdAtLabel updatedAtLabel'.w(),
+        childViews: 'usersMasterView userWellView userDetailView createdAtLabel updatedAtLabel'.w(),
         
         usersMasterView: SC.ScrollView.design({
           layout: { top: 0, bottom: 0, left: 0, width: 290 },
@@ -108,6 +108,12 @@ Tasks.settingsPage = SC.Page.create({
                            
           })
         
+        }),
+        
+        userWellView: SC.WellView.design({
+          layout: { top: 0, left: 300, height: 230, right: 0 },
+          contentView: SC.View.design({
+          })
         }),
 
         userDetailView: Tasks.UserInformationView.design({
