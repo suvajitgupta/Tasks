@@ -163,12 +163,13 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
      // console.log('DEBUG: name: "' + this.get('name')  + '", timeLeft: ' + timeLeft + 'd, activatedAt: ' + (activatedAt? activatedAt.toFormattedString(CoreTasks.ACTIVATED_AT_DATE_FORMAT) : 'null'));
      if (SC.none(activatedAt)) return timeLeft;
      
+     // var today = SC.DateTime.parse(CoreTasks.Project.parseActivatedAt("<07/19/2010>"), CoreTasks.ACTIVATED_AT_DATE_FORMAT); // testing code
      var today = SC.DateTime.create();
      var todayOfYear = today.get('dayOfYear');
      var todayOfWeek = today.get('dayOfWeek');
      // console.log('DEBUG: today: ' + today.toFormattedString(CoreTasks.ACTIVATED_AT_DATE_FORMAT) + ', todayOfYear: ' + todayOfYear);
-     if(todayOfWeek === 0 || todayOfWeek === 1) {
-       todayOfYear = today.get('lastSaturday').get('dayOfYear');
+     if(todayOfWeek < 2) { // if Sunday or Monday go back to last Saturday
+       todayOfYear -= (todayOfWeek === 0? 1 : 2);
        todayOfWeek = 6;
        // console.log('DEBUG: revised todayOfYear: ' + todayOfYear + ', todayOfWeek: ' + todayOfWeek);
      }
@@ -176,8 +177,8 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
      var activationDayOfYear = activatedAt.get('dayOfYear');
      var activationDayOfWeek = activatedAt.get('dayOfWeek');
      // console.log('DEBUG: activationDayOfYear: ' + activationDayOfYear + ', activationDayOfWeek: ' + activationDayOfWeek);
-     if(activationDayOfWeek === 0 || activationDayOfWeek === 6) {
-       activationDayOfYear = activatedAt.get('nextMonday').get('dayOfYear');
+     if(activationDayOfWeek === 0 || activationDayOfWeek === 6) { // if weekend day go to next Monday
+       activationDayOfYear += (activationDayOfWeek === 0? 1 : 2);
        activationDayOfWeek = 1;
        // console.log('DEBUG: revised activationDayOfYear: ' + activationDayOfYear + ', activationDayOfWeek: ' + activationDayOfWeek);
      }
@@ -186,7 +187,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
      if(daysElapsed < 0) daysElapsed = 0;
      var weeksElapsed = Math.floor(daysElapsed/7);
      var weekendDays = weeksElapsed*2;
-     if(daysElapsed < 7 && activationDayOfWeek > todayOfWeek) weekendDays += 2; // a weekend is in the mix
+     if(activationDayOfWeek > todayOfWeek) weekendDays += 2; // another weekend is in the mix
      // console.log('DEBUG: daysElapsed: ' + daysElapsed + ', weeksElapsed: ' + weeksElapsed + ', weekendDays: ' + weekendDays);
      if(daysElapsed > 2 && weekendDays > 0) {
        daysElapsed -= weekendDays;
