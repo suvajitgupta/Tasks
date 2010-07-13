@@ -37,15 +37,15 @@ General Infrastructure @Active
 v Make buttons depressable to provide feedback when using them [SG] $Feature @Done %Passed
 - Support direct access to Projects or Tasks using SproutCore routes [SG] $Feature @Done %Passed
 - Destroy authentication token when User logs out [SG] <JH2> @Active
+- Implement JSONP-based data loading for performance speedup [SG] <SE> @Active
 - Implement HTML5 cascading data source to speedup data loads [SE] <SG>
-- Implement JSONP-based data loading for performance speedup [SE] <SG>
 - Implement disconnected operation (offline mode, synchronization after network reconnection) using Hub.js [JH2] <SG> $Feature
 - Out of Scope: Add support for attachments in record descriptions $Feature
 | Upload attachment somewhere and insert URL to it in record description
 
 Project Manager GUI @Active
 ^ Add Master/Detail Explorer view with click selection of Projects showing corresponding Tasks [JH2] <SG> @Done $Feature %Passed
-^ Add Project countDown support to autmatically decrement days based on timeLeft and current time <JH2> [SG] $Feature @Done
+^ Add Project countDown support to autmatically decrement days based on timeLeft and current time <JH2> [SG] $Feature @Done %Passed
 ^ Show Project name & countDown (if specified) on far right [SG] <JH2> @Done $Feature %Passed
 - Use icon to indicate if Project has any Tasks or not [SG] @Done $Feature %Passed
 - Support alpha sorting of Projects [SG] <JH2> @Done %Passed $Feature
@@ -148,7 +148,7 @@ Application Manager GUI @Active
 | When on "All Tasks" project with no filters on all Project data is exported, otherwise only displayed data is exported
 - Add "Exort to HTML" capability for printable & human-readable version (for baselining Tasks for a release) [SG] $Feature @Done %Passed
 - Add online "Help" menu item in actions menu and popup help window [SG] @Done %Passed $Feature
-v Add online training video using Captivate or Camtasia [SG] $Feature @Done
+v Add online training video using QuickTime [SG] $Feature @Done
 | http://www.youtube.com/watch?v=6egjJw_RS1g
 - Add onscreen help (on panel fields that are complex and on blank workspace to assist new users) <MG> [SG] $Feature @Done %Passed
 - Add "Logout" menu item in actions menu (confirm before exiting, reload data/clear all filters) [SG] <JH2> @Done $Feature %Passed
@@ -167,7 +167,7 @@ v Add hotkeys for common operations (like Add/Duplcate Tasks and Save) [EG] <SG>
 Server/Tools @Active
 ^ Build persistence Server using Persevere [SE] <SG> @Done %Passed
 - Create command-line scripts to start/stop Persevere Server and to create users <SG> [SE] $Feature @Done %Passed
-- Create tool to parse CSV files and create Tasks import format <SG> [SE] $Feature @Active
+- Create tool to parse CSV files and create Tasks import format <SG> [SE] $Feature @Done
 ^ Build persistence Server using Google App Engine [JH2] <SG> @Done %Passed
 - Implement Server-based user authentication using Python on Google App Engine [JH2] <SG> $Feature @Done %Passed
 - Implement Server-based RBAC (role-based access control) using Python on Google App Engine <SG> [JH2] $Feature @Done %Passed
@@ -214,5 +214,5 @@ Installation/Deployment @Active
 v Provide SproutCore doctool-style comments [SG] <SE>
 
 Touch Interfaces
-- Develop iPad client with swiveling Master/Detail view <JH2> [SG] @Risky
+^ Beta: Develop iPad client with swiveling Master/Detail view <JH2> [SG] @Active
 - Develop iPhone client <MB> [SG]
