@@ -35,7 +35,6 @@ Tasks.exportDataPage = SC.Page.create({
       
       closeButton: SC.ButtonView.design({
         layout: { bottom: 10, right: 20, width: 80, height: 24 },
-        classNames: ['dark'],
         keyEquivalent: 'return',
         isDefault: YES,
         title: "_Close".loc(),

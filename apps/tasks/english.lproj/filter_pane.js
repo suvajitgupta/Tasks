@@ -21,7 +21,7 @@ Tasks.filterPane = SC.SheetPane.create({
   contentView: SC.View.design({
     
     layout: { top: 0, left: 0, bottom: 0, right: 0 },
-    childViews: 'title quickfilterToolbar typeLabel typeCheckboxes priorityLabel priorityCheckboxes statusLabel statusCheckboxes validationLabel validationCheckboxes effortSpecifiedLabel effortSpecifiedRadiobuttons recentlyUpdatedLabel recentlyUpdatedRadiobuttons closeButton applyButton'.w(),
+    childViews: 'title quickfilterToolbar typeLabel typeCheckboxes priorityLabel priorityCheckboxes statusLabel statusCheckboxes validationLabel validationCheckboxes effortSpecifiedLabel effortSpecifiedRadiobuttons recentlyUpdatedLabel recentlyUpdatedRadiobuttons cancelButton applyButton'.w(),
     
     title: SC.LabelView.design({
       layout: { top: 10, centerX: 0, width: 150, height: 24 },
@@ -296,9 +296,8 @@ Tasks.filterPane = SC.SheetPane.create({
       valueBinding: 'Tasks.assignmentsController.recentlyUpdated'
     }),
 
-    closeButton: SC.ButtonView.design({
+    cancelButton: SC.ButtonView.design({
       layout: { width: 80, height: 30, right: 96, bottom: 8 },
-      classNames: ['dark'],
       titleMinWidth: 0,
       title: "_Cancel".loc(),
       target: 'Tasks.filterController',
@@ -307,7 +306,6 @@ Tasks.filterPane = SC.SheetPane.create({
     
     applyButton: SC.ButtonView.design({
       layout: { width: 80, height: 30, right: 10, bottom: 8 },
-      classNames: ['dark'],
       titleMinWidth: 0,
       keyEquivalent: 'return',
       isDefault: YES,

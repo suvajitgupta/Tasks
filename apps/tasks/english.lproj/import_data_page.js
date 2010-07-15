@@ -26,7 +26,7 @@ Tasks.importDataPage = SC.Page.create({
     
     contentView: SC.View.design({
       layout: { left: 0, right: 0, top: 0, bottom: 0},
-      childViews: 'instructions sampleFormat dataEntryField createMissingUsersCheckbox importButton'.w(),
+      childViews: 'instructions sampleFormat dataEntryField createMissingUsersCheckbox cancelButton importButton'.w(),
       
       instructions: SC.LabelView.design({
         escapeHTML: NO,
@@ -55,9 +55,15 @@ Tasks.importDataPage = SC.Page.create({
         valueBinding: 'Tasks.importDataController.createMissingUsers'
       }),
       
+      cancelButton: SC.ButtonView.design({
+        layout: { width: 80, height: 30, right: 110, bottom: 8 },
+        titleMinWidth: 0,
+        title: "_Cancel".loc(),
+        action: 'remove'
+      }),
+
       importButton: SC.ButtonView.design({
         layout: { width: 80, height: 30, right: 20, bottom: 8 },
-        classNames: ['dark'],
         isEnabledBinding: SC.Binding.oneWay('Tasks.importDataController.importData').bool(),
         keyEquivalent: 'return',
         isDefault: YES,

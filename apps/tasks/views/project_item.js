@@ -183,7 +183,6 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
 
         closeButton: SC.ButtonView.design({
           layout: { bottom: 10, right: 20, width: 80, height: 24 },
-          classNames: ['dark'],
           isDefault: YES,
           title: "_Close".loc(),
           action: 'remove'
