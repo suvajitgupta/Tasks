@@ -27,8 +27,8 @@ describe "Login Test" do
     @login_panel.should be_visible_in_window
   end
   
-  it "will login as Suvajit and confirm main screen is visible" do
-    @login_panel['loginNameField'].type 'SG'
+  it "will login as 'guest' and confirm main screen is visible" do
+    @login_panel['loginNameField'].type 'guest'
     @login_panel['passwordField'].type ''
     @login_panel['loginButton'].click
     

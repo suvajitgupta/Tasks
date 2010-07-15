@@ -137,6 +137,19 @@ Make newly created user a Manager using GAE 'Dashboard' button at top right:
 Login to Tasks now and start adding projects/tasks/users...
 
 
+RUNNING LEBOWSKI
+==============================================================================
+
+1) From another terminal window, run the Lebowski server:
+lebowski-start-server
+
+2) From another terminal window, run Lebowski scripts:
+cd spec
+lebowski-spec -f n tasks_spec.rb
+
+3) Before reruning step (2), stop Lebowski server (Control-C) and restart it (Step 1)
+
+
 TASKS OVERVIEW
 ==============================================================================
 
