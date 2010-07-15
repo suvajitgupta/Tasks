@@ -496,14 +496,12 @@ Tasks.TaskItemView.mixin(/** @scope Tasks.TaskItemView */ {
       });
     }
     
-    if (needsSeparator) {
-        ret.push({
-        isSeparator: YES
-      });
-    }
-    
-    needsSeparator = false;
     if(Tasks.tasksController.isEditable()) {
+      if(needsSeparator) {
+        ret.push({
+          isSeparator: YES
+        });
+      }
       needsSeparator = true;
       if(Tasks.softwareMode) {
         var type = Tasks.tasksController.get('type');
@@ -632,7 +630,7 @@ Tasks.TaskItemView.mixin(/** @scope Tasks.TaskItemView */ {
       
     }
     
-    if(CoreTasks.get('canServerSendNotifications')) {
+    if(selectedTasksCount > 0 && CoreTasks.get('canServerSendNotifications')) {
       if(needsSeparator) {
         ret.push({
           isSeparator: YES
@@ -640,6 +638,7 @@ Tasks.TaskItemView.mixin(/** @scope Tasks.TaskItemView */ {
       }
       needsSeparator = true;
       var taskWatch = Tasks.tasksController.get('watch');
+      // console.log('DEBUG: selection watch=' + taskWatch);
       if(taskWatch !== CoreTasks.TASK_WATCH_ON) {
         ret.push({
           title: "_Watch".loc(),

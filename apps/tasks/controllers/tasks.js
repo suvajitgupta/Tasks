@@ -124,7 +124,7 @@ Tasks.tasksController = SC.TreeController.create(
       var firstType = null;
       sel.forEach(function(task) {
         var type = task.get('type');
-        if(!firstType) firstType = value = type;
+        if(firstType === null) firstType = value = type;
         else if(type !== firstType) value = null;
       });
     }
@@ -147,16 +147,16 @@ Tasks.tasksController = SC.TreeController.create(
     var sel = this.get('selection');
     if(!sel || sel.get('length') === 0) return false;
     if (value !== undefined) {
-      var firstPriority = null;
       sel.forEach(function(task) {
         var priority = task.get('priority');
         if(priority !== value) task.set('priority', value);
       });
       if(CoreTasks.get('autoSave')) Tasks.saveData();
     } else {
+      var firstPriority = null;
       sel.forEach(function(task) {
         var priority = task.get('priority');
-        if(!firstPriority) firstPriority = value = priority;
+        if(firstPriority === null) firstPriority = value = priority;
         else if(priority !== firstPriority) value = null;
       });
     }
@@ -189,7 +189,7 @@ Tasks.tasksController = SC.TreeController.create(
       var firstDevelopmentStatusWithValidation = null;
       sel.forEach(function(task) {
         var developmentStatusWithValidation = task.get('developmentStatusWithValidation');
-        if(!firstDevelopmentStatusWithValidation) firstDevelopmentStatusWithValidation = value = developmentStatusWithValidation;
+        if(firstDevelopmentStatusWithValidation === null) firstDevelopmentStatusWithValidation = value = developmentStatusWithValidation;
         else if(developmentStatusWithValidation !== firstDevelopmentStatusWithValidation) value = null;
       });
     }
@@ -225,7 +225,7 @@ Tasks.tasksController = SC.TreeController.create(
       var firstValidation = null;
       sel.forEach(function(task) {
         var validation = task.get('validation');
-        if(!firstValidation) firstValidation = value = validation;
+        if(firstValidation === null) firstValidation = value = validation;
         else if(validation !== firstValidation) value = null;
       });
     }
@@ -244,18 +244,19 @@ Tasks.tasksController = SC.TreeController.create(
     this.validation('validation', CoreTasks.TASK_VALIDATION_FAILED);
   },
   
-  watches: null,
   watch: function() {
+    // console.log('DEBUG: tasksController.watch()');
     var sel = this.get('selection');
     if(!sel || sel.get('length') === 0) return false;
     var value, firstWatch = null;
     sel.forEach(function(task) {
       var taskWatch = CoreTasks.isCurrentUserWatchingTask(task);
-      if(!firstWatch) firstWatch = value = taskWatch;
+      // console.log('DEBUG: task: "' + task.get('name') + '" watch=' + taskWatch);
+      if(firstWatch === null) firstWatch = value = taskWatch;
       else if(taskWatch !== firstWatch) value = null;
     });
     return value;
-  }.property('selection', 'watches').cacheable(),
+  }.property('selection').cacheable(),
   
   editNewTask: function(task){
     var listView = Tasks.getPath('mainPage.mainPane.tasksList');
