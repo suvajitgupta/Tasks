@@ -143,8 +143,13 @@
   top: -2px !important;
 }
 
-.sc-view .sc-text-field-view.search-bar.sc-hint .field {
+.sc-view .sc-text-field-view.search-bar.sc-hint .field,
+.sc-view .sc-text-field-view.search-bar .sc-hint {
   color: #777 !important;
+}
+
+.sc-view .sc-text-field-view.search-bar .sc-hint {
+  top: 2px !important;
 }
 
 

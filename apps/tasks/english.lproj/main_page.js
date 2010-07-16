@@ -153,7 +153,7 @@ Tasks.mainPage = SC.Page.design({
         action: 'filterTasks'
       }),
       filterCancelButton: SC.View.design({ // Filter cancel button
-        layout: { centerY: -3, height: 12, right: 224, width: 12 },
+        layout: { centerY: -5, height: 12, right: 224, width: 12 },
         isVisible: NO,
         classNames: ['filter-cancel-icon'],
         mouseDown: function() {
@@ -164,14 +164,14 @@ Tasks.mainPage = SC.Page.design({
       }),
     
       tasksSearchField: SC.TextFieldView.design(SCUI.ToolTip, {
-        layout: { centerY: -4, height: 24, right: 10, width: 200 },
+        layout: { centerY: -4, height: 25, right: 10, width: 200 },
         classNames: ['search-bar'],
         hint: "_TasksSearchHint".loc(),
         toolTip: "_TasksSearchTooltip".loc(),
         valueBinding: 'Tasks.assignmentsController.searchFilter'
       }),
       tasksSearchCancelButton: SC.View.design({ // Tasks Search cancel button
-        layout: { centerY: -3, height: 12, right: 15, width: 12 },
+        layout: { centerY: -5, height: 12, right: 15, width: 12 },
         isVisible: NO,
         classNames: ['filter-cancel-icon'],
         mouseDown: function() {
