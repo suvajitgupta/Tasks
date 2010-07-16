@@ -144,6 +144,7 @@ Application Manager GUI @Active
 - Add "Import" menu item in actions menu with associated pop up panel [SG] <BB> @Done $Feature %Passed
 - Don't create a Project if it already exists during Import [SG] @Done $Feature %Passed
 - Allow option to automatically create new users for unknown assignees/submitters found during importing [SG] @Done $Feature %Passed
+- Turn off notifications during importing [SG] @Done $Feature %Passed
 - Add "Export" menu items in actions menu with associated pop up panels, allowing user to choose between Text/HTML formats [SG] @Done $Feature %Passed
 | When on "All Tasks" project with no filters on all Project data is exported, otherwise only displayed data is exported
 - Add "Exort to HTML" capability for printable & human-readable version (for baselining Tasks for a release) [SG] $Feature @Done %Passed

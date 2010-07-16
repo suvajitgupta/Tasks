@@ -40,6 +40,10 @@ Tasks.importDataController = SC.ObjectController.create(
      */
     parseAndLoadData: function() {
       
+      // Cache shouldNotify and turn off during importing
+      var shouldNotify = CoreTasks.get('shouldNotify');
+      CoreTasks.set('shouldNotify', false);
+      
       var store = CoreTasks.get('store');
       var currentUserId = CoreTasks.getPath('currentUser.id');
       var currentProject = null;
@@ -165,6 +169,8 @@ Tasks.importDataController = SC.ObjectController.create(
       
       this.closePanel();
       if(CoreTasks.get('autoSave')) Tasks.saveData();
+      
+      CoreTasks.set('shouldNotify', shouldNotify); // restore cached value
       
     },
     
