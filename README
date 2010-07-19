@@ -145,7 +145,7 @@ lebowski-start-server
 
 2) From another terminal window, run Lebowski scripts:
 cd spec
-lebowski-spec -f n tasks_spec.rb
+lebowski-spec -f n main.rb
 
 3) Before reruning step (2), stop Lebowski server (Control-C) and restart it (Step 1)
 

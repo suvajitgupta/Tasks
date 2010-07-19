@@ -71,7 +71,7 @@ Tasks.mainPage = SC.Page.design({
       
       layout: { top: 0, left: 0, right: 0, height: 56 },
       classNames: ['title-bar'],
-      childViews: 'installationLogo tasksLogo actionsMenu displayModeSegments welcomeMessageLabel filterPanelButton filterCancelButton tasksSearchField tasksSearchCancelButton'.w(),
+      childViews: 'installationLogo tasksLogo actionsButton displayModeSegments welcomeMessageLabel filterPanelButton filterCancelButton tasksSearchField tasksSearchCancelButton'.w(),
       
       installationLogo: SC.View.design({
         layout: { left: 15, centerY: -4, width: Tasks._wideLogo? 80: 35, height: Tasks._wideLogo? 20 : 35 },
@@ -102,13 +102,13 @@ Tasks.mainPage = SC.Page.design({
         layout: { left: Tasks._wideLogo? 110 : 60, width: 145, centerY: -4, height: 27 }
       }),
 
-      actionsMenu: SC.ButtonView.design(SCUI.DropDown, {
+      actionsButton: SC.ButtonView.design(SCUI.DropDown, {
         layout: { centerY: -4, left: 260, height: 24, width: 50 },
         classNames: ['dark'],
         titleMinWidth: 0,
         hasIcon: YES,
         icon: 'actions-icon',
-        toolTip: "_ActionsMenuTooltip".loc(),
+        toolTip: "_ActionsButtonTooltip".loc(),
         dropDown: SC.MenuPane.design({
           contentView: SC.View.design({}),
           layout: { width: 175, height: 0 },

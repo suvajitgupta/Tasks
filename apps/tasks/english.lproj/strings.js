@@ -12,7 +12,7 @@
 */
 SC.stringsFor('English', {
 
-  "_ActionsMenuTooltip": "Globally available actions",
+  "_ActionsButtonTooltip": "Globally available actions",
   "_Activated:": "Activated: ",
   "_Active": "Active",
   "_Add": "Add",
