@@ -116,22 +116,19 @@ Tasks.filterPane = SC.SheetPane.create({
       
       feature: SC.CheckboxView.design({
         layout: { left: 5, top: 4, width: 95 },
-        icon: 'task-icon-feature',
-        title: CoreTasks.TASK_TYPE_FEATURE.loc(),
+        title: '<span class="checkbox-icon task-icon-feature">' + CoreTasks.TASK_TYPE_FEATURE.loc() + '</span>',
         valueBinding: 'Tasks.assignmentsController.attributeFilterTypeFeature'
       }),
       
       bug: SC.CheckboxView.design({
         layout: { centerX: 0, top: 4, width: 75 },
-        icon: 'task-icon-bug',
-        title: CoreTasks.TASK_TYPE_BUG.loc(),
+        title: '<span class="checkbox-icon task-icon-bug">' + CoreTasks.TASK_TYPE_BUG.loc() + '</span>',
         valueBinding: 'Tasks.assignmentsController.attributeFilterTypeBug'
       }),
       
       other: SC.CheckboxView.design({
         layout: { right: 5, top: 4, width: 85 },
-        icon: 'task-icon-other',
-        title: CoreTasks.TASK_TYPE_OTHER.loc(),
+        title: '<span class="checkbox-icon task-icon-other">' + CoreTasks.TASK_TYPE_OTHER.loc() + '</span>',
         valueBinding: 'Tasks.assignmentsController.attributeFilterTypeOther'
       })
 

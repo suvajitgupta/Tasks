@@ -505,7 +505,7 @@ Tasks.TaskItemView.mixin(/** @scope Tasks.TaskItemView */ {
       if(Tasks.softwareMode) {
         var type = Tasks.tasksController.get('type');
         ret.push({
-          title: '<span class=task-type-feature>' + CoreTasks.TASK_TYPE_FEATURE.loc() + '</span>',
+          title: CoreTasks.TASK_TYPE_FEATURE.loc(),
           icon: 'task-icon-feature',
           isEnabled: YES,
           checkbox: type === CoreTasks.TASK_TYPE_FEATURE,
@@ -513,7 +513,7 @@ Tasks.TaskItemView.mixin(/** @scope Tasks.TaskItemView */ {
           action: 'setTypeFeature'
         });
         ret.push({
-          title: '<span class=task-type-bug>' + CoreTasks.TASK_TYPE_BUG.loc() + '</span>',
+          title: CoreTasks.TASK_TYPE_BUG.loc(),
           icon: 'task-icon-bug',
           isEnabled: YES,
           checkbox: type === CoreTasks.TASK_TYPE_BUG,
@@ -521,7 +521,7 @@ Tasks.TaskItemView.mixin(/** @scope Tasks.TaskItemView */ {
           action: 'setTypeBug'
         });
         ret.push({
-          title: '<span class=task-type-other>' + CoreTasks.TASK_TYPE_OTHER.loc() + '</span>',
+          title: CoreTasks.TASK_TYPE_OTHER.loc(),
           icon: 'task-icon-other',
           isEnabled: YES,
           checkbox: type === CoreTasks.TASK_TYPE_OTHER,

@@ -65,3 +65,8 @@
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
 }
+
+.checkbox-icon {
+  padding-top: 3px;
+  padding-left: 18px;
+}
