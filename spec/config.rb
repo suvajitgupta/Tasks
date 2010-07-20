@@ -1,3 +1,6 @@
+# Tasks/Lebowski login tests
+# Author: Mike Ramsey, Suvajit Gupta
+
 App.define 'mainPane', 'mainPage.mainPane', MainPane
 
 

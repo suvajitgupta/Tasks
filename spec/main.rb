@@ -1,3 +1,6 @@
+# Tasks/Lebowski login tests
+# Author: Mike Ramsey, Suvajit Gupta
+
 App = Application.new \
         :app_root_path => "/tasks",
         :app_name => "Tasks",
