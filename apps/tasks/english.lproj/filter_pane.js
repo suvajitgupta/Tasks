@@ -107,6 +107,7 @@ Tasks.filterPane = SC.SheetPane.create({
       toolTip: "_TypeTooltip".loc()
     }),
 
+    // FIXME [SC]: switch back to using icon for checkboxes when they work in SC master, like it does on quilmes
     typeCheckboxes: SC.View.design({
       layout: { top: 127, height: 24, left: 10, right: 10 },
       classNames: ['item-group', 'checkbox-icon'],
