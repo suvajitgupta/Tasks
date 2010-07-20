@@ -188,7 +188,8 @@ body.sc-theme {
 	top: 0px !important;
 }
 
-.sc-list-item-view img.icon {
+.projects-pane-inner .sc-list-item-view img.icon,
+.users-pane-inner .sc-list-item-view img.icon {
   left: 10px !important;
 }
 
