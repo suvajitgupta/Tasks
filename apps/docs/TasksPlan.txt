@@ -100,7 +100,7 @@ v Add hover over tooltip for assignees to show how many Tasks they have and to e
 ^ Allow multi-task drag-and-drop reassignment to other Assignees [BB] <SG>  @Done $Feature %Passed
 ^ Add popup viewer/editor for Task Submitter, Assignee, Effort, Project, and Description [JH2] <SG> $Feature @Done %Passed
 - Limit Assignees to non-Guest users in Task popup editor [SG] $Feature @Done %Passed
-- Support Task Copy ID/Name and Copy Link Location (URL with "Route") to clipboard [SG] $Feature @Active
+- Support Task Copy ID/Name and Copy Link Location (URL with "Route") to clipboard [SG] $Feature @Risky
 v Add Task context menu with options: Add, Duplicate, Delete; All Task Attributes; Copy ID/Name, Copy Link [SG] $Feature @Done %Passed
 ^ Add ability to "Watch" Tasks and get Email Notifications after Task changes [SG] <JH2> $Feature @Done %Passed
 ^ Beta: Support Comments on Tasks [SG] <JH2> $Feature @Active
@@ -180,14 +180,14 @@ Server/Tools @Active
 | Indicate Task ID, create/update action, and user who triggered notifications in Subject: line
 | For Task updates, indicate old and new values of attributes
 - Add link to Task in email notification (should not require authentication if user is signed in) <JH2> [SG] $Feature
-- Add Server-side data validation checks/return appropriate error codes [SG] <SE>
-- Add GUI-side data validation checks and corresponding user feedback [SG] <JL>
+- Implement Server-side data validation checks/return appropriate error codes [SG] <SE>
+- Implement GUI-side data validation checks and corresponding user feedback [SG] <JL>
 - Implement bridge to "github issues" from Google App Engine [JH2] <SG> $Feature
 
 Styling/Hardening @Active
 ^ Style via CSS, embed catchy/sprited images [MG] <SG> $Feature @Done %Passed
 ^ Re-style to match Greenhouse look & feel [SG] $Feature <MG> @Done
-- Beta: Run Chance to optimize loading of final set of split-up icons [JH2] <SG> @Active
+- Beta: Run Chance to optimize loading of final set of split-up icons [SG] <JH2> @Active
 - Perform I18N and L10N (test with reversed strings) [SG] <JH2> @Done %Passed
 - Collect/address feedback from Alpha/Beta users and targeted usability tests <MG> [SG] @Done %Passed
 ^ Perform smoke test of key functionality [SG] @Done
@@ -216,5 +216,5 @@ Installation/Deployment @Active
 v Provide SproutCore doctool-style comments [SG] <SE>
 
 Touch Interfaces
-^ Beta: Develop iPad client with swiveling Master/Detail view <JH2> [SG] @Active
+- Develop iPad client with swiveling Master/Detail view <JH2> [SG] @Risky
 - Develop iPhone client <MB> [SG]
