@@ -182,6 +182,7 @@ Server/Tools @Active
 - Add link to Task in email notification (should not require authentication if user is signed in) <JH2> [SG] $Feature
 - Implement Server-side data validation checks/return appropriate error codes [SG] <SE>
 - Implement GUI-side data validation checks and corresponding user feedback [SG] <JL>
+^ Convert Tasks into a Jira plugin [JH2] <SG> $Feature
 - Implement bridge to "github issues" from Google App Engine [JH2] <SG> $Feature
 
 Styling/Hardening @Active
