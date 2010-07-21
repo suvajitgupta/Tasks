@@ -32,6 +32,7 @@ Tasks.loginPage = SC.Page.create({
       
       guestSignupButton: document.title.match(/Dev|Demo|SproutCore|Greenhouse/)? SC.ButtonView.design({
         layout: { top: 20, right: 0, height: 23, width: 145 },
+        classNames: ['dark'],
         icon: 'user-role-guest',
         title: "_GuestSignup".loc() + '...',
         target: 'Tasks',

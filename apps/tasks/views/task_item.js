@@ -313,13 +313,13 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         }),
         
         createdAtLabel: SC.LabelView.design({
-          layout: { left: 10, bottom: 40, height: 17, width: 250 },
+          layout: { left: 10, bottom: 45, height: 17, width: 250 },
           classNames: [ 'date-time'],
           textAlign: SC.ALIGN_LEFT,
           valueBinding: SC.binding('.content.displayCreatedAt', this)
         }),
         updatedAtLabel: SC.LabelView.design({
-          layout: { right: 10, bottom: 40, height: 17, width: 250 },
+          layout: { right: 10, bottom: 45, height: 17, width: 250 },
           classNames: [ 'date-time'],
           textAlign: SC.ALIGN_RIGHT,
           valueBinding: SC.binding('.content.displayUpdatedAt', this)

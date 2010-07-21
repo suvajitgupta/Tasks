@@ -36,7 +36,7 @@ Tasks.statisticsPane = SCUI.ModalPane.extend({
     }),
       
     closeButton: SC.ButtonView.design({
-      layout: { bottom: 10, right: 20, width: 80, height: 24 },
+      layout: { bottom: 10, right: 10, width: 80, height: 24 },
       isDefault: YES,
       title: "_Close".loc(),
       action: 'remove'
