@@ -385,7 +385,7 @@ Tasks.mainPage = SC.Page.design({
             ret = YES;
           }
           else {
-            ret = this.interpretKeyEvents(event) ;
+            ret = NO;
           }
           return ret;
         }
