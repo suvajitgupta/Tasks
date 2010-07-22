@@ -67,8 +67,8 @@
 .users-pane-inner .sc-group-item .sc-outline {
   top: 1px !important;
   bottom: 0px !important;
-  left: 1px !important;
-  right: 2px !important;
+  left: 0px !important;
+  right: 1px !important;
   background-color: #393939;
   box-shadow: inset 0 3px 8px rgba(150,150,150,.6), 0 1px 0 rgba(0,0,0,.4);
   -moz-box-shadow: inset 0 3px 8px rgba(150,150,150,.6), 0 1px 0 rgba(0,0,0,.4);
@@ -88,8 +88,9 @@
  
 .projects-pane-inner .sc-collection-item.project-item,
 .users-pane-inner .sc-collection-item.user-item {
+  margin-top: 1px !important;
   left: 1px !important;
-  right: 2px !important;
+  right: 1px !important;
   background-color: #353535 !important;
 }
 
