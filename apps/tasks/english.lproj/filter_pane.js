@@ -39,12 +39,14 @@ Tasks.filterPane = SC.SheetPane.create({
     quickfilterToolbar: SC.View.design({
 
       layout: { top: 28, left: 5, height: 70, right: 5 },
+      classNames: ['quickfilter-toolbar'],
       childViews: 'allButton troubledButton unfinishedButton unvalidatedButton completedButton showstoppersButton'.w(),
   
       allButton: SC.ButtonView.design({
         layout: { width: 90, height: 30, left: 5, top: 7 },
         titleMinWidth: 0,
-        classNames: ['quickfilter-label', 'all'],
+        theme: ['capsule'],
+        classNames: ['all'],
         title: "_All".loc(),
         toolTip: "_AllTooltip".loc(),
         target: 'Tasks.assignmentsController',
@@ -54,7 +56,8 @@ Tasks.filterPane = SC.SheetPane.create({
       showstoppersButton: SC.ButtonView.design({
         layout: { width: 100, height: 30, centerX: 0, top: 7 },
         titleMinWidth: 0,
-        classNames: ['quickfilter-label', 'showstoppers'],
+        theme: ['capsule'],
+        classNames: ['showstoppers'],
         isVisible: Tasks.softwareMode,
         title: "_Showstoppers".loc(),
         toolTip: "_ShowstoppersTooltip".loc(),
@@ -65,7 +68,8 @@ Tasks.filterPane = SC.SheetPane.create({
       troubledButton: SC.ButtonView.design({
         layout: { width: 90, height: 30, right: 5, top: 7 },
         titleMinWidth: 0,
-        classNames: ['quickfilter-label', 'troubled'],
+        theme: ['capsule'],
+        classNames: ['troubled'],
         title: "_Troubled".loc(),
         toolTip: "_TroubledTooltip".loc(),
         target: 'Tasks.assignmentsController',
@@ -75,7 +79,8 @@ Tasks.filterPane = SC.SheetPane.create({
       unfinishedButton: SC.ButtonView.design({
         layout: { width: 90, height: 30, left: 5, top: 39 },
         titleMinWidth: 0,
-        classNames: ['quickfilter-label', 'unfinished'],
+        theme: ['capsule'],
+        classNames: ['unfinished'],
         title: "_Unfinished".loc(),
         toolTip: "_UnfinishedTooltip".loc(),
         target: 'Tasks.assignmentsController',
@@ -85,7 +90,8 @@ Tasks.filterPane = SC.SheetPane.create({
       unvalidatedButton: SC.ButtonView.design({
         layout: { width: 100, height: 30, centerX: 0, top: 39 },
         titleMinWidth: 0,
-        classNames: ['quickfilter-label', 'unvalidated'],
+        theme: ['capsule'],
+        classNames: ['unvalidated'],
         isVisible: Tasks.softwareMode,
         title: "_Unvalidated".loc(),
         toolTip: "_UnvalidatedTooltip".loc(),
@@ -96,7 +102,8 @@ Tasks.filterPane = SC.SheetPane.create({
       completedButton: SC.ButtonView.design({
         layout: { width: 90, height: 30, right: 5, top: 39 },
         titleMinWidth: 0,
-        classNames: ['quickfilter-label', 'completed'],
+        theme: ['capsule'],
+        classNames: ['completed'],
         title: "_Completed".loc(),
         toolTip: "_CompletedTooltip".loc(),
         target: 'Tasks.assignmentsController',
@@ -127,13 +134,13 @@ Tasks.filterPane = SC.SheetPane.create({
       }),
       
       bug: SC.CheckboxView.design({
-        layout: { centerX: 0, top: 4, width: 75 },
+        layout: { centerX: 0, top: 4, width: 65 },
         title: '<span class="checkbox-icon task-icon-bug">' + CoreTasks.TASK_TYPE_BUG.loc() + '</span>',
         valueBinding: 'Tasks.assignmentsController.attributeFilterTypeBug'
       }),
       
       other: SC.CheckboxView.design({
-        layout: { right: 5, top: 4, width: 85 },
+        layout: { right: 5, top: 4, width: 75 },
         title: '<span class="checkbox-icon task-icon-other">' + CoreTasks.TASK_TYPE_OTHER.loc() + '</span>',
         valueBinding: 'Tasks.assignmentsController.attributeFilterTypeOther'
       })

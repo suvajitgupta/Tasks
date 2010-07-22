@@ -8,52 +8,34 @@
 
 /* Application styles */
 
-.quickfilter-label,
-.quickfilter-label .sc-button-inner,
-.quickfilter-label .sc-button-inner label {
+.quickfilter-toolbar .sc-button-inner label {
   font-size: 10px !important;
-  color: #FFF !important;
-  text-shadow: none !important;
-  -moz-border-radius: 15px !important;
-  -webkit-border-radius: 15px !important;
+  text-transform: uppercase !important;
 }
 
-.quickfilter-label.active {
-  border: 1px solid #555 !important;
+.all {
+  color: black !important;
 }
 
-.quickfilter-label.active .sc-button-inner label {
-  text-shadow: 0 1px #BBB !important;
+.showstoppers {
+  color: purple !important;
 }
 
-.troubled .sc-button-inner,
-.troubled .sc-button-inner label {
-  background: #C33 !important;
+.troubled {
+  color: red !important;
 }
 
-.unfinished .sc-button-inner,
-.unfinished .sc-button-inner label {
-  background: #33F !important;
+.unfinished {
+  color: blue !important;
 }
 
-.unvalidated .sc-button-inner,
-.unvalidated .sc-button-inner label {
-  background: #6C6 !important;
+.unvalidated {
+  color: #0C0 !important;
 }
 
-.completed .sc-button-inner,
-.completed .sc-button-inner label {
-  background: #363 !important;
-}
-
-.showstoppers .sc-button-inner,
-.showstoppers .sc-button-inner label {
-  background: #639 !important;
-}
-
-.all .sc-button-inner,
-.all .sc-button-inner label {
-  background: #555 !important;
+.completed {
+  color: darkGreen !important;
+  font-weight: bold !important;
 }
 
 .item-group {
