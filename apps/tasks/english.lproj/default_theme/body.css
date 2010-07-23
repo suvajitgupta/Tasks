@@ -9,8 +9,9 @@
 
 /* Application styles */
 
-body.sc-theme {
-  background: #3D3D3D !important;
+body.sc-theme,
+.sc-workspace-view .sc-view {
+  background: #3D3D3D;
 }
 
 .sc-theme .sc-pane.sc-main {
