@@ -62,7 +62,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' margin-left: 15px;\n' +
 '}\n' +
 'p {\n' +
-' background-color: #EEE;\n' +
+' background-color: #FFC;\n' +
 ' line-height: 23px;\n' +
 ' margin-top: -5px;\n' +
 ' margin-bottom: 4px;\n' +
