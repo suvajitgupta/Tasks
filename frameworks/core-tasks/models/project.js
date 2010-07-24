@@ -326,8 +326,8 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
         if(activatedAt) ret += (' <' + activatedAt.toFormattedString(CoreTasks.ACTIVATED_AT_DATE_FORMAT) + '>');
       }
       else {
-        var countDown = this.get('countDown');
-        if(countDown) ret += ('&nbsp;<span class="time">' + CoreTasks.displayTime(countDown) + '</span>');
+        var countDown = this.get('displayCountDown');
+        if(countDown) ret += ('&nbsp;<span class="time">' + countDown + '</span>');
       }
       
     }
