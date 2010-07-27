@@ -138,7 +138,9 @@ body.sc-theme {
   background: static_url('images/duplicate.png') no-repeat;
 }
 
-.description-icon, .task-item .description-icon {
+.description-icon,
+.project-item.sel .description-icon,
+.task-item .description-icon {
   width: 16px !important;
   height: 16px !important;
   background: static_url('images/task-description.png') no-repeat;
