@@ -96,28 +96,24 @@
 
 .assignee-item.assignee-not-loaded {
   background: #AAA none repeat scroll 0 0 !important;
-  box-shadow: inset 0px 2px 2px #CCC;
   -moz-box-shadow: inset 0px 2px 2px #CCC;
   -webkit-box-shadow: inset 0px 2px 2px #CCC;
 }
 
 .assignee-item.assignee-under-loaded {
   background: #3C6 none repeat scroll 0 0 !important;
-  box-shadow: inset 0px 2px 2px #3F6;
   -moz-box-shadow: inset 0px 2px 2px #3F6;
   -webkit-box-shadow: inset 0px 2px 2px #3F6;
 }
 
 .assignee-item.assignee-properly-loaded {
   background: #69F none repeat scroll 0 0 !important;
-  box-shadow: inset 0px 2px 2px #6CF;
   -moz-box-shadow: inset 0px 2px 2px #6CF;
   -webkit-box-shadow: inset 0px 2px 2px #6CF;
 }
 
-.assignee-item.assignee-over-loaded {
+.assignee-item.assignee-overloaded {
   background: #F99 none repeat scroll 0 0 !important;
-  box-shadow: inset 0px 2px 2px #FBF;
   -moz-box-shadow: inset 0px 2px 2px #FBF;
   -webkit-box-shadow: inset 0px 2px 2px #FBF;
 }
@@ -284,14 +280,10 @@
  */
 
 .sc-view .task-validation-untested, .sc-view .task-validation-passed, .sc-view .task-validation-failed {
-  padding-top: 1px;
-  padding-bottom: 1px;
-  padding-left: 3px;
-  padding-right: 3px;
-}
-
-.task-validation-untested, .task-validation-passed, .task-validation-failed {
   color: black;
+  padding: 1px 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
 }
 
 .task-validation-passed {

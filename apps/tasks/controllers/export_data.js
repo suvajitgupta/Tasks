@@ -42,7 +42,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' right: 10px;\n' +
 '}\n' +
 'h1, h2 {\n' +
-' line-height: 18px;\n' +
+' line-height: 17px;\n' +
 ' margin-top: 14px;\n' +
 ' margin-bottom: 4px;\n' +
 ' padding: 3px 6px;\n' +
@@ -82,17 +82,28 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' word-wrap: break-word;\n' +
 ' padding: 5px;\n' +
 '}\n' +
+'.assignee {\n' +
+' border-bottom: 2px solid #555;\n' +
+'}\n' +
 '.assignee-not-loaded {\n' +
 ' background-color: #AAA;\n' +
-'}\n' +
-'.assignee-properly-loaded {\n' +
-' background-color: #69F;\n' +
+' -moz-box-shadow: inset 0px 2px 2px #CCC;\n' +
+' -webkit-box-shadow: inset 0px 2px 2px #CCC;\n' +
 '}\n' +
 '.assignee-under-loaded {\n' +
 ' background-color: #3C6;\n' +
+' -moz-box-shadow: inset 0px 2px 2px #3F6;\n' +
+' -webkit-box-shadow: inset 0px 2px 2px #3F6;\n' +
+'}\n' +
+'.assignee-properly-loaded {\n' +
+' background-color: #69F;\n' +
+' -moz-box-shadow: inset 0px 2px 2px #6CF;\n' +
+' -webkit-box-shadow: inset 0px 2px 2px #6CF;\n' +
 '}\n' +
 '.assignee-overloaded {\n' +
 ' background-color: #F99;\n' +
+' -moz-box-shadow: inset 0px 2px 2px #FBF;\n' +
+' -webkit-box-shadow: inset 0px 2px 2px #FBF;\n' +
 '}\n' +
 '.id {\n' +
 ' margin-left: 5px;\n' +
@@ -156,6 +167,8 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 '.untested, .passed, .failed {\n' +
 ' color: black;\n' +
 ' padding: 1px 3px;\n' +
+' -moz-border-radius: 3px;\n' +
+' -webkit-border-radius: 3px;\n' +
 '}\n' +
 '.passed {\n' +
 ' background-color: #6F6;\n' +
@@ -308,7 +321,7 @@ Tasks.exportDataController = SC.ObjectController.create(
       var tasks = assignmentNode.get('treeItemChildren');
       var tasksCount = assignmentNode.get('tasksCount');
       if(format === 'HTML') {
-        ret += '<h2 class="';
+        ret += '<h2 class="assignee ';
         switch(assignmentNode.get('loading')) {
           case CoreTasks.USER_NOT_LOADED: ret += 'assignee-not-loaded'; break;
           case CoreTasks.USER_UNDER_LOADED: ret += 'assignee-under-loaded'; break;

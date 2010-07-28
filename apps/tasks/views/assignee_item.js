@@ -53,7 +53,7 @@ Tasks.AssigneeItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
         }
         else if(loading === CoreTasks.USER_OVER_LOADED) {
           assigneeTooltip = "_AssigneeOverloaded".loc();
-          context.addClass('assignee-over-loaded');
+          context.addClass('assignee-overloaded');
         }
       }
       assigneeTooltip += "_with".loc() + tasksCount + "_tasks".loc();
