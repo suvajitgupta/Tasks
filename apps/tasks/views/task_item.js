@@ -91,18 +91,18 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   _embedClippy: function(context, details) {
     var clippyTooltip = "_ClippyTooltip".loc();
     var detailsId = 'clippy-details';
+    context.push('<span style="display:none;" id="' + detailsId + '">' + details + '</span>');
     context.push('<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"\n' +
                  'width="14"\n' +
                  'height="15"\n' +
                  'id="clippy-object" >\n' +
-                 // '<param name="movie" value="http://assets0.github.com/flash/clippy.swf?v5"/>\n' +
                  '<param name="movie" value="' + static_url('clippy.swf') + '"/>\n' +
                  '<param name="allowScriptAccess" value="always" />\n' +
                  '<param name="quality" value="high" />\n' +
                  '<param name="scale" value="noscale" />\n' +
                  '<param NAME="FlashVars" value="id=' + detailsId + '&amp;copied=&amp;copyto=">\n' +
                  '<param name="bgcolor" value="#FFF">\n' +
-                 // '<embed src="http://assets0.github.com/flash/clippy.swf?v5"\n' +
+                 '<param name="wmode" value="opaque">\n' +
                  '<embed src="' + static_url('clippy.swf') + '"\n' +
                  'width="14"\n' +
                  'height="15"\n' +
@@ -113,9 +113,9 @@ Tasks.TaskItemView = SC.ListItemView.extend(
                  'pluginspage="http://www.macromedia.com/go/getflashplayer"\n' +
                  'FlashVars="id=' + detailsId + '&amp;copied=&amp;copyto="\n' +
                  'bgcolor="#FFF"\n' +
+                 'wmode="opaque"\n' +
                  '/>\n' +
                  '</object>\n');
-    context.push('<span id=' + detailsId + '">' + details + '</span>');
   },
   
   /** @private
