@@ -27,7 +27,7 @@ Tasks = SC.Object.create(SC.Statechart,
   /** @scope Tasks.prototype */ {
 
   NAMESPACE: 'Tasks',
-  VERSION: 'Beta',
+  VERSION: '1.0',
   isLoaded: NO, // for Lebowski
   
   /**

@@ -43,6 +43,7 @@
 
 .tasks-version {
   font-size: 10px !important;
+  font-weight: bold !important;
   font-style: italic !important;
   text-align: center !important;
   line-height: 11px !important;
