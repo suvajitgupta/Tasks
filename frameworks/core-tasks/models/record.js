@@ -110,6 +110,29 @@ CoreTasks.Record = SC.Record.extend({
     // Decide if record was recently created/updated
     return (ageInDays === null || ageInDays > 1)? false : true;
   }.property('createdAt', 'updatedAt').cacheable(),
+  
+  /**
+   * Reverts the record to the ready state (if it's currently in an error state).
+   */
+  revertToReady: function() {
+    if (this.get('status') === SC.Record.ERROR) {
+      var store = this.get('store');
+      var key = this.get('storeKey');
+
+      // FIXME: [SE/SG] Revert once SC.Query is able to parse negative numbers.
+      if (this.get('id') < 1000000) {
+        SC.RunLoop.begin();
+        store.writeStatus(key, SC.Record.READY_DIRTY);
+        store.dataHashDidChange(key);
+        SC.RunLoop.end();
+      } else {
+        SC.RunLoop.begin();
+        store.writeStatus(key, SC.Record.READY_NEW);
+        store.dataHashDidChange(key);
+        SC.RunLoop.end();
+      }
+    }
+  },
 
   commit: function() {
     this.commitRecord();

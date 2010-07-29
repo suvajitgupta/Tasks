@@ -340,6 +340,7 @@ CoreTasks = SC.Object.create({
   _dirtyUsers: [],
   _dirtyProjects: [],
   _dirtyTasks: [],
+  _dirtyWatches: [],
 
   /**
    * Persists all new and modified records to the store.
@@ -679,6 +680,8 @@ CoreTasks = SC.Object.create({
    */
   _postSaveCleanup: function(errorRecordType) {
     
+    var record = this.get('recordBeingSaved');
+    if(record) record.revertToReady();
     this.set('recordBeingSaved', null);
     this.set('saveMode', CoreTasks.MODE_NOT_SAVING);
     this.set('needsSave', NO);
