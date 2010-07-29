@@ -88,6 +88,36 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     }).from('Tasks.projectsController.content');
   },
   
+  _embedClippy: function(context, details) {
+    var clippyTooltip = "_ClippyTooltip".loc();
+    var detailsId = 'clippy-details';
+    context.push('<span id=' + detailsId + ' style="display:none">' + details + '</span>');
+    context.push('<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"\n' +
+                 'width="14"\n' +
+                 'height="15"\n' +
+                 'id="clippy-object" >\n' +
+                 // '<param name="movie" value="http://assets0.github.com/flash/clippy.swf?v5"/>\n' +
+                 '<param name="movie" value="' + static_url('clippy.swf') + '"/>\n' +
+                 '<param name="allowScriptAccess" value="always" />\n' +
+                 '<param name="quality" value="high" />\n' +
+                 '<param name="scale" value="noscale" />\n' +
+                 '<param NAME="FlashVars" value="id=' + detailsId + '&amp;copied=&amp;copyto=">\n' +
+                 '<param name="bgcolor" value="#FFF">\n' +
+                 // '<embed src="http://assets0.github.com/flash/clippy.swf?v5"\n' +
+                 '<embed src="' + static_url('clippy.swf') + '"\n' +
+                 'width="14"\n' +
+                 'height="15"\n' +
+                 'name="clippy"\n' +
+                 'quality="high"\n' +
+                 'allowScriptAccess="always"\n' +
+                 'type="application/x-shockwave-flash"\n' +
+                 'pluginspage="http://www.macromedia.com/go/getflashplayer"\n' +
+                 'FlashVars="id=' + detailsId + '&amp;copied=&amp;copyto="\n' +
+                 'bgcolor="#FFF"\n' +
+                 '/>\n' +
+                 '</object>\n').attr('title', clippyTooltip).attr('alt', clippyTooltip);
+  },
+  
   /** @private
     If mouse was down over Description icon or effort badge popup the editor.
   */  
@@ -152,27 +182,34 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       
       contentView: SC.View.design({
         layout: { left: 0, right: 0, top: 0, bottom: 0},
-        childViews: 'nameLabel nameField typeLabel typeField priorityLabel priorityField statusLabel statusField validationLabel validationField submitterLabel submitterField assigneeLabel assigneeField effortLabel effortField effortHelpLabel projectLabel projectField descriptionLabel descriptionField createdAtLabel updatedAtLabel closeButton'.w(),
+        childViews: 'nameLabel nameField clippyIcon typeLabel typeField priorityLabel priorityField statusLabel statusField validationLabel validationField effortLabel effortField effortHelpLabel projectLabel projectField submitterLabel submitterField assigneeLabel assigneeField descriptionLabel descriptionField createdAtLabel updatedAtLabel closeButton'.w(),
       
         nameLabel: SC.LabelView.design({
-          layout: { top: 6, left: 0, height: 24, width: 45 },
+          layout: { top: 6, left: 0, height: 24, width: 55 },
           textAlign: SC.ALIGN_RIGHT,
           value: "_Name".loc()
         }),
         nameField: SC.TextFieldView.design({
-          layout: { top: 5, left: 52, right: 10, height: 24 },
+          layout: { top: 5, left: 60, right: 30, height: 24 },
           isEnabledBinding: 'Tasks.tasksController.isEditable',
           value: that.getPath('content.name')
         }),
+        
+        clippyIcon: SC.View.design({
+          layout: { top: 10, right: 7, height: 16, width: 16 },
+          render: function(context, firstTime) {
+            that._embedClippy(context, that.getPath('content.displayId') + ' ' + that.getPath('content.displayName'));
+          }
+        }),
 
         typeLabel: SC.LabelView.design({
-          layout: { top: 40, left: 0, height: 24, width: 45 },
+          layout: { top: 40, left: 0, height: 24, width: 55 },
           isVisibleBinding: 'Tasks.softwareMode',
           textAlign: SC.ALIGN_RIGHT,
           value: "_Type".loc()
         }),
         typeField: SC.SelectButtonView.design({
-          layout: { top: 38, left: 50, height: 24, width: 125 },
+          layout: { top: 38, left: 60, height: 24, width: 125 },
           classNames: ['square'],
           localize: YES,
           isVisibleBinding: 'Tasks.softwareMode',
@@ -184,14 +221,14 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           valueBinding: SC.binding('.content.type', this),
           toolTip: "_TypeTooltip".loc()
         }),
-                  
+   
         priorityLabel: SC.LabelView.design({
-          layout: { top: 40, left: 165, height: 24, width: 55 },
+          layout: { top: 40, left: 170, height: 24, width: 55 },
           textAlign: SC.ALIGN_RIGHT,
           value: "_Priority".loc()
         }),
         priorityField: SC.SelectButtonView.design({
-          layout: { top: 38, left: 225, height: 24, width: 125 },
+          layout: { top: 38, left: 230, height: 24, width: 125 },
           classNames: ['square'],
           localize: YES,
           isEnabledBinding: 'Tasks.tasksController.isEditable',
@@ -239,12 +276,45 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           toolTip: "_ValidationTooltip".loc()
         }),
 
+        effortLabel: SC.LabelView.design({
+          layout: { top: 77, left: 0, height: 24, width: 55 },
+          textAlign: SC.ALIGN_RIGHT,
+          value: "_Effort:".loc()
+        }),
+        effortField: SC.TextFieldView.design({
+          layout: { top: 75, left: 60, width: 95, height: 24 },
+          isEnabledBinding: 'Tasks.tasksController.isEditable',
+          value: that.getPath('content.effortValue')
+        }),
+        effortHelpLabel: SC.LabelView.design({
+          layout: { top: 75, left: 160, height: 30, width: 225 },
+          escapeHTML: NO,
+          classNames: [ 'onscreen-help'],
+          value: "_EffortOnscreenHelp".loc()
+        }),
+        
+        projectLabel: SC.LabelView.design({
+          layout: { top: 114, left: 0, height: 24, width: 55 },
+          textAlign: SC.ALIGN_RIGHT,
+          value: "_Project:".loc()
+        }),
+        projectField: SCUI.ComboBoxView.design({
+          layout: { top: 112, left: 60, width: 270, height: 24 },
+          objectsBinding: this._listProjects(),
+          nameKey: 'displayName',
+          valueKey: 'id',
+          iconKey: 'icon',
+          isEnabledBinding: 'Tasks.tasksController.isReallocatable',
+          valueBinding: SC.binding('.content.projectValue', this)
+        }),
+
         submitterLabel: SC.LabelView.design({
-          layout: { top: 77, left: 10, height: 24, width: 80 },
+          layout: { top: 77, left: 360, height: 24, width: 75 },
+          textAlign: SC.ALIGN_RIGHT,
           value: "_Submitter:".loc()
         }),
         submitterField: SCUI.ComboBoxView.design({
-          layout: { top: 75, left: 75, width: 250, height: 24 },
+          layout: { top: 75, left: 442, width: 250, height: 24 },
           objectsBinding: this._listUsers(false),
           nameKey: 'displayName',
           valueKey: 'id',
@@ -254,49 +324,18 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         }),
 
         assigneeLabel: SC.LabelView.design({
-          layout: { top: 77, left: 352, height: 24, width: 80 },
+          layout: { top: 114, left: 360, height: 24, width: 75 },
           textAlign: SC.ALIGN_RIGHT,
           value: "_Assignee:".loc()
         }),
         assigneeField: SCUI.ComboBoxView.design({
-          layout: { top: 75, left: 441, width: 250, height: 24 },
+          layout: { top: 112, left: 442, width: 250, height: 24 },
           objectsBinding: this._listUsers(true),
           nameKey: 'displayName',
           valueKey: 'id',
           iconKey: 'icon',
           isEnabledBinding: 'Tasks.tasksController.isEditable',
           valueBinding: SC.binding('.content.assigneeValue', this)
-        }),
-
-        effortLabel: SC.LabelView.design({
-          layout: { top: 114, left: 10, height: 24, width: 100 },
-          value: "_Effort:".loc()
-        }),
-        effortField: SC.TextFieldView.design({
-          layout: { top: 112, left: 50, width: 80, height: 24 },
-          isEnabledBinding: 'Tasks.tasksController.isEditable',
-          value: that.getPath('content.effortValue')
-        }),
-        effortHelpLabel: SC.LabelView.design({
-          layout: { top: 112, left: 140, height: 30, width: 275 },
-          escapeHTML: NO,
-          classNames: [ 'onscreen-help'],
-          value: "_EffortOnscreenHelp".loc()
-        }),
-        
-        projectLabel: SC.LabelView.design({
-          layout: { top: 114, left: 352, height: 24, width: 80 },
-          textAlign: SC.ALIGN_RIGHT,
-          value: "_Project:".loc()
-        }),
-        projectField: SCUI.ComboBoxView.design({
-          layout: { top: 112, left: 441, width: 250, height: 24 },
-          objectsBinding: this._listProjects(),
-          nameKey: 'displayName',
-          valueKey: 'id',
-          iconKey: 'icon',
-          isEnabledBinding: 'Tasks.tasksController.isReallocatable',
-          valueBinding: SC.binding('.content.projectValue', this)
         }),
 
         descriptionLabel: SC.LabelView.design({
@@ -353,6 +392,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     
     var content = this.get('content');
     if(!content) return;
+    
     // console.log('DEBUG: Task render(' + firstTime + '): ' + content.get('displayName'));
     sc_super();
     
@@ -422,7 +462,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       context = context.begin('div').addClass('description-icon')
                   .attr({'title': description,'alt': description}).end();
     }
-
+    
   },
 
   renderIcon: function(context, icon){
@@ -658,28 +698,6 @@ Tasks.TaskItemView.mixin(/** @scope Tasks.TaskItemView */ {
       }
     }
     
-    if(selectedTasksCount === 1) {
-      if(needsSeparator) {
-        ret.push({
-          isSeparator: YES
-        });
-      }
-      ret.push({
-        title: "_CopyID/Name".loc(),
-        icon: 'sc-icon-bookmark-16',
-        isEnabled: YES,
-        target: 'Tasks',
-        action: 'copyTaskIDName'
-      });
-      ret.push({
-        title: "_CopyLinkLocation".loc(),
-        icon: 'link-icon',
-        isEnabled: YES,
-        target: 'Tasks',
-        action: 'copyTaskLink'
-      });
-    }
-  
     return ret;
     
   }

@@ -648,20 +648,6 @@ Tasks.mixin({
   },
   
   /**
-   * Copy selected task's ID/name into clipboard.
-   */
-  copyTaskIDName: function() {
-    this._notImplemented('Copy Task ID/Name');
-  },
-  
-  /**
-   * Copy selected task's link (URL to route to) into clipboard.
-   */
-  copyTaskLink: function() {
-    this._notImplemented('Copy Task Link');
-  },
-  
-  /**
    * Filter tasks via attributes.
    */
   filterTasks: function() {

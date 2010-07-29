@@ -32,6 +32,7 @@ SC.stringsFor('English', {
   "_AutoSave": "AutoSave",
   "_Bug": "Bug",
   "_Cancel": "Cancel",
+  "_ClippyTooltip": "Copy Task ID and Name to clipboard",
   "_Close": "Close",
   "_Completed": "Completed",
   "_CompletedTooltip": "Ready for Primetime: what's done & passed",

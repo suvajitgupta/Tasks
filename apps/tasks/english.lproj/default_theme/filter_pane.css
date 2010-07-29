@@ -11,6 +11,8 @@
 .quickfilter-toolbar .sc-button-inner label {
   font-size: 10px !important;
   text-transform: uppercase !important;
+  text-shadow: 0 1px 0 #777 !important;
+  letter-spacing: -1px !important;
 }
 
 .all {
