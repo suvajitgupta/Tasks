@@ -91,7 +91,6 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   _embedClippy: function(context, details) {
     var clippyTooltip = "_ClippyTooltip".loc();
     var detailsId = 'clippy-details';
-    context.push('<span id=' + detailsId + ' style="display:none">' + details + '</span>');
     context.push('<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"\n' +
                  'width="14"\n' +
                  'height="15"\n' +
@@ -116,6 +115,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
                  'bgcolor="#FFF"\n' +
                  '/>\n' +
                  '</object>\n');
+    context.push('<span id=' + detailsId + '">' + details + '</span>');
   },
   
   /** @private
