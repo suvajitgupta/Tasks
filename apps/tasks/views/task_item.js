@@ -115,7 +115,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
                  'FlashVars="id=' + detailsId + '&amp;copied=&amp;copyto="\n' +
                  'bgcolor="#FFF"\n' +
                  '/>\n' +
-                 '</object>\n').attr('title', clippyTooltip).attr('alt', clippyTooltip);
+                 '</object>\n');
   },
   
   /** @private
@@ -182,7 +182,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       
       contentView: SC.View.design({
         layout: { left: 0, right: 0, top: 0, bottom: 0},
-        childViews: 'nameLabel nameField clippyIcon typeLabel typeField priorityLabel priorityField statusLabel statusField validationLabel validationField effortLabel effortField effortHelpLabel projectLabel projectField submitterLabel submitterField assigneeLabel assigneeField descriptionLabel descriptionField createdAtLabel updatedAtLabel closeButton'.w(),
+        childViews: 'nameLabel nameField typeLabel typeField priorityLabel priorityField statusLabel statusField validationLabel validationField effortLabel effortField effortHelpLabel projectLabel projectField submitterLabel submitterField assigneeLabel assigneeField descriptionLabel descriptionField createdAtLabel updatedAtLabel clippyIcon clippyHelpLabel closeButton'.w(),
       
         nameLabel: SC.LabelView.design({
           layout: { top: 6, left: 0, height: 24, width: 55 },
@@ -190,18 +190,11 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           value: "_Name".loc()
         }),
         nameField: SC.TextFieldView.design({
-          layout: { top: 5, left: 60, right: 30, height: 24 },
+          layout: { top: 5, left: 60, right: 10, height: 24 },
           isEnabledBinding: 'Tasks.tasksController.isEditable',
           value: that.getPath('content.name')
         }),
         
-        clippyIcon: SC.View.design({
-          layout: { top: 10, right: 7, height: 16, width: 16 },
-          render: function(context, firstTime) {
-            that._embedClippy(context, that.getPath('content.displayId') + ' ' + that.getPath('content.displayName'));
-          }
-        }),
-
         typeLabel: SC.LabelView.design({
           layout: { top: 40, left: 0, height: 24, width: 55 },
           isVisibleBinding: 'Tasks.softwareMode',
@@ -362,6 +355,18 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           classNames: [ 'date-time'],
           textAlign: SC.ALIGN_RIGHT,
           valueBinding: SC.binding('.content.displayUpdatedAt', this)
+        }),
+
+        clippyIcon: SC.View.design({
+          layout: { bottom: 13, left: 10, height: 16, width: 16 },
+          render: function(context, firstTime) {
+            that._embedClippy(context, that.getPath('content.displayId') + ' ' + that.getPath('content.displayName'));
+          }
+        }),
+        clippyHelpLabel: SC.LabelView.design({
+          layout: { bottom: 10, left: 28, height: 16, width: 200 },
+          classNames: [ 'onscreen-help'],
+          value: "_ClippyOnscreenHelp".loc()
         }),
 
         closeButton: SC.ButtonView.design({
