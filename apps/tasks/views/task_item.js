@@ -153,9 +153,9 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       
       titleBarHeight: 40,
       title: "_Task".loc() + that.getPath('content.displayId'),
-      minWidth: 700,
+      minWidth: 725,
       minHeight: 310,
-      layout: { centerX:0, centerY: 0, width: 700, height: 370 },
+      layout: { centerX:0, centerY: 0, width: 725, height: 370 },
       
       // Avoid popup panel coming up on other items while it is up already
       popup: function() {
@@ -209,7 +209,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           value: "_Type".loc()
         }),
         typeField: SC.SelectButtonView.design({
-          layout: { top: 38, left: 60, height: 24, width: 125 },
+          layout: { top: 38, left: 60, height: 24, width: 120 },
           classNames: ['square'],
           localize: YES,
           isVisibleBinding: 'Tasks.softwareMode',
@@ -228,7 +228,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           value: "_Priority".loc()
         }),
         priorityField: SC.SelectButtonView.design({
-          layout: { top: 38, left: 230, height: 24, width: 125 },
+          layout: { top: 38, left: 230, height: 24, width: 120 },
           classNames: ['square'],
           localize: YES,
           isEnabledBinding: 'Tasks.tasksController.isEditable',
@@ -240,12 +240,12 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         }),
                   
         statusLabel: SC.LabelView.design({
-          layout: { top: 40, left: 340, height: 24, width: 50 },
+          layout: { top: 40, right: 285, height: 24, width: 50 },
           textAlign: SC.ALIGN_RIGHT,
           value: "_Status".loc()
         }),
         statusField: SC.SelectButtonView.design({
-          layout: { top: 38, left: 395, height: 24, width: 125 },
+          layout: { top: 38, right: 190, height: 24, width: 120 },
           classNames: ['square'],
           localize: YES,
           isEnabledBinding: 'Tasks.tasksController.isEditable',
@@ -258,13 +258,13 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         }),
 
         validationLabel: SC.LabelView.design({
-          layout: { top: 40, left: 515, height: 24, width: 70 },
+          layout: { top: 40, right: 105, height: 24, width: 70 },
           textAlign: SC.ALIGN_RIGHT,
           isVisibleBinding: 'Tasks.softwareMode',
           value: "_Validation".loc()
         }),
         validationField: SC.SelectButtonView.design({
-          layout: { top: 38, left: 592, height: 24, width: 125 },
+          layout: { top: 38, right: 10, height: 24, width: 120 },
           classNames: ['square'],
           localize: YES,
           isVisibleBinding: 'Tasks.softwareMode',
@@ -309,12 +309,12 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         }),
 
         submitterLabel: SC.LabelView.design({
-          layout: { top: 77, left: 360, height: 24, width: 75 },
+          layout: { top: 77, right: 285, height: 24, width: 75 },
           textAlign: SC.ALIGN_RIGHT,
           value: "_Submitter:".loc()
         }),
         submitterField: SCUI.ComboBoxView.design({
-          layout: { top: 75, left: 442, width: 250, height: 24 },
+          layout: { top: 75, right: 10, width: 272, height: 24 },
           objectsBinding: this._listUsers(false),
           nameKey: 'displayName',
           valueKey: 'id',
@@ -324,12 +324,12 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         }),
 
         assigneeLabel: SC.LabelView.design({
-          layout: { top: 114, left: 360, height: 24, width: 75 },
+          layout: { top: 114, right: 285, height: 24, width: 75 },
           textAlign: SC.ALIGN_RIGHT,
           value: "_Assignee:".loc()
         }),
         assigneeField: SCUI.ComboBoxView.design({
-          layout: { top: 112, left: 442, width: 250, height: 24 },
+          layout: { top: 112, right: 10, width: 272, height: 24 },
           objectsBinding: this._listUsers(true),
           nameKey: 'displayName',
           valueKey: 'id',
