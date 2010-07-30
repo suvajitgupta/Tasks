@@ -110,32 +110,39 @@ CoreTasks.Record = SC.Record.extend({
     // Decide if record was recently created/updated
     return (ageInDays === null || ageInDays > 1)? false : true;
   }.property('createdAt', 'updatedAt').cacheable(),
-  
-  /**
-   * Reverts the record to the ready state (if it's currently in an error state).
-   */
-  revertToReady: function() {
-    if (this.get('status') === SC.Record.ERROR) {
-      var store = this.get('store');
-      var key = this.get('storeKey');
 
-      // FIXME: [SE/SG] Revert once SC.Query is able to parse negative numbers.
-      if (this.get('id') < 1000000) {
-        SC.RunLoop.begin();
-        store.writeStatus(key, SC.Record.READY_DIRTY);
-        store.dataHashDidChange(key);
-        SC.RunLoop.end();
-      } else {
-        SC.RunLoop.begin();
-        store.writeStatus(key, SC.Record.READY_NEW);
-        store.dataHashDidChange(key);
-        SC.RunLoop.end();
-      }
-    }
+  /*
+   * The state of the record immediately prior to persistence, used as revert state if there's an
+   * error.
+   */
+  _revertToState: null,
+
+  /**
+   * Reverts the record to a non-error state.
+   */
+  revertState: function() {
+    if (this.get('status') !== SC.Record.ERROR || SC.none(this._revertToState)) return;
+
+    var store = this.get('store');
+    var key = this.get('storeKey');
+
+    SC.RunLoop.begin();
+    store.writeStatus(key, this._revertToState);
+    store.dataHashDidChange(key);
+    this._revertToState = null;
+    SC.RunLoop.end();
   },
 
   commit: function() {
-    this.commitRecord();
+    // Store the revert-to state and commit.
+    this._revertToState = this.store.peekStatus(this.get('storeKey'));
+    return this.commitRecord();
+  },
+
+  destroy: function() {
+    // Store the revert-to state and destroy.
+    this._revertToState = SC.Record.DESTROYED_DIRTY;
+    return sc_super();
   }
 
 });

@@ -676,12 +676,12 @@ CoreTasks = SC.Object.create({
    * Cleanup as save operation ends.
    *
    * @param {String} if provided, will throw an exception indicating error.
-   *
    */
   _postSaveCleanup: function(errorRecordType) {
-    
+    // Revert the record (if defined) to its pre-commit state.
     var record = this.get('recordBeingSaved');
-    if(record) record.revertToReady();
+    if (record) record.revertState();
+
     this.set('recordBeingSaved', null);
     this.set('saveMode', CoreTasks.MODE_NOT_SAVING);
     this.set('needsSave', NO);
@@ -691,8 +691,9 @@ CoreTasks = SC.Object.create({
     this._dirtyTasks = [];
     this._dirtyWatches = [];
     
-    if(errorRecordType !== undefined) throw 'Error saving data: Failed to save at least one ' + errorRecordType;
-    
+    if (errorRecordType !== undefined) {
+      throw 'Error saving data: Failed to save at least one ' + errorRecordType;
+    }
   },
 
   /**
