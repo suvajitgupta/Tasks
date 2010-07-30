@@ -358,13 +358,13 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         }),
 
         clippyIcon: SC.View.design({
-          layout: { bottom: 13, left: 10, height: 16, width: 16 },
+          layout: { bottom: 10, left: 10, height: 16, width: 16 },
           render: function(context, firstTime) {
             that._embedClippy(context, that.getPath('content.displayId') + ' ' + that.getPath('content.displayName'));
           }
         }),
         clippyHelpLabel: SC.LabelView.design({
-          layout: { bottom: 10, left: 28, height: 16, width: 200 },
+          layout: { bottom: 12, left: 28, height: 12, width: 200 },
           classNames: [ 'onscreen-help'],
           value: "_ClippyOnscreenHelp".loc()
         }),

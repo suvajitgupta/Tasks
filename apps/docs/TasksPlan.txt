@@ -188,7 +188,7 @@ Server/Tools @Active
 Styling/Hardening @Active
 ^ Style via CSS, embed catchy/sprited images [MG] <SG> $Feature @Done %Passed
 ^ Re-style to match Greenhouse look & feel [SG] $Feature <MG> @Done
-- Run Chance to optimize loading of final set of split-up icons [SG] <JH2> @Active
+- Run Chance to optimize loading of final set of split-up icons [JH2] <SG> @Active
 - Perform I18N and L10N (test with reversed strings) [SG] <JH2> @Done %Passed
 - Collect/address feedback from Alpha/Beta users and targeted usability tests <MG> [SG] @Done %Passed
 ^ Perform smoke test of key functionality [SG] @Done
