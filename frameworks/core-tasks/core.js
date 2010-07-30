@@ -680,11 +680,10 @@ CoreTasks = SC.Object.create({
   _postSaveCleanup: function(errorRecordType) {
     // Revert the record (if defined) to its pre-commit state.
     var record = this.get('recordBeingSaved');
-    if (record) record.revertState();
+    if (record && !record.revertState()) this.set('needsSave', NO);
 
     this.set('recordBeingSaved', null);
     this.set('saveMode', CoreTasks.MODE_NOT_SAVING);
-    this.set('needsSave', NO);
 
     this._dirtyUsers = [];
     this._dirtyProjects = [];

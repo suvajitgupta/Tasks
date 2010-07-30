@@ -121,16 +121,18 @@ CoreTasks.Record = SC.Record.extend({
    * Reverts the record to a non-error state.
    */
   revertState: function() {
-    if (this.get('status') !== SC.Record.ERROR || SC.none(this._revertToState)) return;
+    
+    if (this.get('status') !== SC.Record.ERROR || SC.none(this._revertToState)) return false;
 
     var store = this.get('store');
     var key = this.get('storeKey');
-
     SC.RunLoop.begin();
     store.writeStatus(key, this._revertToState);
     store.dataHashDidChange(key);
     this._revertToState = null;
     SC.RunLoop.end();
+    return true;
+    
   },
 
   commit: function() {
