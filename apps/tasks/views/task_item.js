@@ -89,7 +89,6 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   },
   
   _embedClippy: function(context, details) {
-    var clippyTooltip = "_ClippyTooltip".loc();
     var detailsId = 'clippy-details';
     context.push('<span style="display:none;" id="' + detailsId + '">' + details + '</span>');
     context.push('<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"\n' +
@@ -100,7 +99,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
                  '<param name="allowScriptAccess" value="always" />\n' +
                  '<param name="quality" value="high" />\n' +
                  '<param name="scale" value="noscale" />\n' +
-                 '<param NAME="FlashVars" value="id=' + detailsId + '&amp;copied=&amp;copyto=">\n' +
+                 '<param NAME="FlashVars" value="id=' + detailsId + '">\n' +
                  '<param name="bgcolor" value="#FFF">\n' +
                  '<param name="wmode" value="opaque">\n' +
                  '<embed src="' + static_url('clippy.swf') + '"\n' +
@@ -111,7 +110,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
                  'allowScriptAccess="always"\n' +
                  'type="application/x-shockwave-flash"\n' +
                  'pluginspage="http://www.macromedia.com/go/getflashplayer"\n' +
-                 'FlashVars="id=' + detailsId + '&amp;copied=&amp;copyto="\n' +
+                 'FlashVars="id=' + detailsId + '"\n' +
                  'bgcolor="#FFF"\n' +
                  'wmode="opaque"\n' +
                  '/>\n' +
