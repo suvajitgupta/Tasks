@@ -111,7 +111,7 @@ CoreTasks.mixin({
       console.log('Error retrieving search results from server.');
 
       // Invoke the failure callback (may not be defined).
-      CoreTasks.invokeCallback(params.failureCallback);
+      CoreTasks.invokeCallback(params.failureCallback, response);
 
     } else {
       // Make sure we actually got something.

@@ -23,7 +23,7 @@ Tasks.loginPage = SC.Page.create({
       
       layout: { centerX: 0, centerY: 0, width: 390, height: 196 },
       classNames: ['login-body'],
-      childViews: 'logo loginNameField passwordField loginErrorMessage loginButton guestSignupButton'.w(),
+      childViews: 'logo loginNameField passwordField loginErrorMessageLabel loginButton guestSignupButton'.w(),
       
       logo: SC.View.design({
         layout: { top: 0, left: 10, width: 153, height: 56 },
@@ -52,11 +52,10 @@ Tasks.loginPage = SC.Page.create({
         valueBinding: 'Tasks.loginController.password'
       }),
       
-      loginErrorMessage: SC.LabelView.design({
-        layout: { top: 175, left: 70, width: 220, height: 20 },
+      loginErrorMessageLabel: SC.LabelView.design({
+        layout: { top: 175, left: 60, width: 240, height: 20 },
         classNames: ['error-message'],
-        value: "_LoginError".loc(),
-        isVisibleBinding: SC.Binding.oneWay('Tasks.loginController.loginError').bool()
+        valueBinding: SC.Binding.oneWay('Tasks.loginController.loginErrorMessage')
       }),
       
       loginButton: SC.ButtonView.design({

@@ -16,7 +16,7 @@ Tasks.loginController = SC.ObjectController.create(
 /** @scope Tasks.loginController.prototype */ {
   
     _panelOpen: false,
-    loginError: false,
+    loginErrorMessage: '',
     loginName: '',
     password: '',
     
@@ -46,12 +46,13 @@ Tasks.loginController = SC.ObjectController.create(
       }
     },
     
-    displayLoginError: function(){
-      this.set('loginError', true);
+    displayLoginError: function(errorMessage){
+      console.log(errorMessage);
+      this.set('loginErrorMessage', errorMessage);
     },
     
     _loginInformationHasChanged: function() {
-      this.set('loginError', false);
+      this.set('loginErrorMessage', '');
     }.observes('loginName', 'password')
     
 });

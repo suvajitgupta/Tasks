@@ -70,12 +70,15 @@ Tasks.mixin({
 
   /**
    * Called after failed authentication.
+   *
+   * @param {SC.Response} response object from failed call
    */
-  authenticationFailure: function() {
+  authenticationFailure: function(response) {
     // console.log('DEBUG: authenticationFailure()');
     switch (this.state.a) {
       case 2:
-        Tasks.loginController.displayLoginError();
+        var errorString = SC.instanceOf(response, SC.Error)? "_LoginServerAccessError".loc() : "_LoginAuthenticationError".loc();
+        Tasks.loginController.displayLoginError(errorString);
         this.goState('a', 1);
         break;
       default:
