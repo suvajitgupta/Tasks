@@ -36,11 +36,10 @@ General Infrastructure @Active
 - Track/optimize calls to assignments controller and custom view render methods <BB> [SG] @Active
 v Make buttons depressable to provide feedback when using them [SG] $Feature @Done %Passed
 - Support direct access to Projects or Tasks using SproutCore routes [SG] $Feature @Done %Passed
-- Destroy authentication token when User logs out [SG] <JH2> @Active
+- Destroy authentication token when User logs out [SG] <JH2> $Feature @Active
 - Implement/benchmark JSONP-based data loading for performance speedup (XHRs faster) [SG] <SE> @Done
-^ Optimize data loading to use single Server call for all entities <SE> [SG]
-^ Optimize startup data load using HTML5 cascading data source <SE> [SG]
-- Implement disconnected operation (offline mode, synchronization after network reconnection) using Hub.js [JH2] <SG> $Feature
+^ Optimize data loading to use single Server call for all entities <SE> [SG] @Active
+^ Optimize startup data load using HTML5 cascading data source <SE> [SG] @Active
 - Out of Scope: Add support for attachments in record descriptions $Feature
 | Upload attachment somewhere and insert URL to it in record description
 
@@ -56,7 +55,7 @@ v Add hover over tooltip for Projects to show how many Tasks they contain [SG] @
 | Check via Inline Editor Delegate
 ^ Add buttons to add/delete Projects [SG] @Done $Feature %Passed
 - Add warning Alert box about deleting Project with Tasks [SG] @Done $Feature %Passed
-v Disallow Project names or User loginNames that are already in use or reserved [SG] $Feature @Active
+- Disallow Project names or User loginNames that are already in use or reserved [SG] $Feature @Active
 | Project name cannot be duplicated or a system project name
 | User login name cannot be duplicated or reserved name "none"
 v Add summary in projects bottom showing number of Projects & number of Tasks for selected projects [SG] <MB> @Done $Feature %Passed
@@ -69,7 +68,7 @@ v Disable "Add Task" button when no project is selected [SG] <BB> @Done %Passed 
 ^ Add popup viewer/editor for Project timeLeft/description [SG] $Feature @Done %Passed
 v Add Project context menu with options: Add, Duplicate, Delete [SG] $Feature @Done %Passed
 - Add "Statistics..." button/popup to show percent breakdown of displayed Tasks by attributes (HTML) [SG] $Feature @Done %Passed
-- Add alternate graphical view (pie charts, bar graphs) for Statistics using Sai [SG] <EG> $Feature
+- Support alternate graphical view (pie charts, bar graphs) for Statistics using Sai [SG] <EG> $Feature @Active
 
 Task Manager GUI @Active
 ^ Group Tasks by User and display Task id, summary, and effort (if specified) on far right [SG] <JH2> @Done $Feature %Passed
@@ -83,8 +82,8 @@ v Enable Task Validation editing only when in Done status [SG] <JH2> $Feature @D
 ^ Add Task search filter (by #IDs or name) & corresponding delete button in top bar: support type-ahead searching <JH2> [SG] @Done %Passed $Feature
 ^ Allow Task attribute filtering by Type, Priority, Status, and Validation fields via a top bar button/sheet pane [SG] $Feature @Done %Passed
 - Add commonly-used "QuickFilters": Troubled, Unfinished, Unvalidated, Completed, Showstoppers, All [SG] $Feature @Done %Passed
-- Support filtering of Tasks that were recently updated or have effort specified [SG] $Feature @Done %Passed
-- Support filtering of Tasks that were created or updated within a specified timeframe [SG] $Feature
+- Allow filtering of Tasks that were recently updated or have effort specified [SG] $Feature @Done %Passed
+- Allow filtering of Tasks that were created or updated within a specified timeframe [SG] $Feature
 - Indicate whether there is a Task attribute filter via cancel icon [SG] $Feature @Done %Passed
 - Indicate whether there are any risky items under an assignee using a red flag in assignee grouping bar [SG] $Feature @Done %Passed
 v Enable/disable "Delete Task" button based on having a selected Task [SG] @Done %Passed $Feature
@@ -103,7 +102,7 @@ v Add hover over tooltip for assignees to show how many Tasks they have and to e
 - Support Task ID/Name copy to clipboard from popup editor [SG] <JH2> $Feature @Done %Passed
 v Add Task context menu with options: Add, Duplicate, Delete; All Task Attributes; Copy ID/Name, Copy Link [SG] $Feature @Done %Passed
 ^ Add ability to "Watch" Tasks and get Email Notifications after Task changes [SG] <JH2> $Feature @Done %Passed
-^ Beta: Support Comments on Tasks [SG] <JH2> $Feature @Active
+- Support Comments on Tasks [SG] <JH2> $Feature @Active
 - Allow "Find & Replace" within Task names  (operating only on items in Tasks Detail view)[SG] $Feature
 - Allow Task names to embed metacharacters by enclosing in quotes [SG] $Feature
 - Support emails including Task details to other users via Server [SG] $Feature
@@ -164,7 +163,8 @@ v Add hotkeys for common operations (like Add/Duplcate Tasks and Save) [EG] <SG>
 | Email notifications
 | Percent or Threshold (in days) for Assignee loading determination
 - Support Application settings/state persistence from last login saved using HTML5 storage [SG] <MB> $Feature
-- Support undo/redo using Hub.js [SG] <JH2> $Feature
+- Support offline mode with synchronization after network reconnection using Hub.js [SG] <EG> $Feature
+- Support undo/redo using Hub.js [SG] <EG> $Feature
 
 Server/Tools @Active
 ^ Build persistence Server using Persevere [SE] <SG> @Done %Passed
@@ -188,7 +188,7 @@ Server/Tools @Active
 Styling/Hardening @Active
 ^ Style via CSS, embed catchy/sprited images [MG] <SG> $Feature @Done %Passed
 ^ Re-style to match Greenhouse look & feel [SG] $Feature <MG> @Done
-- Beta: Run Chance to optimize loading of final set of split-up icons [SG] <JH2> @Active
+- Run Chance to optimize loading of final set of split-up icons [SG] <JH2> @Active
 - Perform I18N and L10N (test with reversed strings) [SG] <JH2> @Done %Passed
 - Collect/address feedback from Alpha/Beta users and targeted usability tests <MG> [SG] @Done %Passed
 ^ Perform smoke test of key functionality [SG] @Done
