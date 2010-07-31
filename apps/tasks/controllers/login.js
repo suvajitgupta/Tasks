@@ -47,7 +47,7 @@ Tasks.loginController = SC.ObjectController.create(
     },
     
     displayLoginError: function(errorMessage){
-      console.log(errorMessage);
+      // console.log(errorMessage);
       this.set('loginErrorMessage', errorMessage);
     },
     

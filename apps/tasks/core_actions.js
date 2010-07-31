@@ -763,3 +763,15 @@ Tasks.mixin({
   }  
   
 });
+
+Tasks.serverAccessHelper = SC.Object.create({
+  
+  dataSaveErrorBinding: SC.Binding.oneWay('CoreTasks*dataSaveError'),
+  dataSaveErrorDidChange: function() {
+    if(this.get('dataSaveError')) {
+      var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
+      serverMessage.set('value', "_DataServerAccessError".loc());
+    }
+  }.observes('dataSaveError')
+  
+});
