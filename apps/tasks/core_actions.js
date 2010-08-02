@@ -259,7 +259,7 @@ Tasks.mixin({
     serverMessage.set('value', "_DataLoadFailed".loc() + new Date().format('hh:mm a MMM dd, yyyy'));
     switch (this.state.a) {
       case 3:
-        SC.AlertPane.error ('System Error', 'Unable to retrieve Tasks data from server');
+        if(!CoreTasks.loginTime) this.goState('a', 4);
         break;
       default:
         this._logActionNotHandled('dataLoadFailure', 'a', this.state.a);  
@@ -277,6 +277,17 @@ Tasks.mixin({
     }
   },
   
+  /**
+   * Called by CoreTasks when data saves fail.
+   *
+   * @param (String) type of record for which save failed
+   */
+  dataSaveErrorCallback: function(errorRecordType) {
+    // console.log('DEBUG: dataSaveErrorCallback(' + errorRecordType + ')');
+    var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
+    serverMessage.set('value', "_DataSaveError".loc() + new Date().format('hh:mm a MMM dd, yyyy'));
+  },
+
   /**
    * Reload latest Tasks data from server.
    */
@@ -760,18 +771,7 @@ Tasks.mixin({
       prefix = message;
     }
     SC.AlertPane.warn ('Unimplemented Functionality', prefix + ' coming soon!');
-  }  
-  
+  }
+    
 });
 
-Tasks.serverAccessHelper = SC.Object.create({
-  
-  dataSaveErrorBinding: SC.Binding.oneWay('CoreTasks*dataSaveError'),
-  dataSaveErrorDidChange: function() {
-    if(this.get('dataSaveError')) {
-      var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
-      serverMessage.set('value', "_DataServerAccessError".loc());
-    }
-  }.observes('dataSaveError')
-  
-});

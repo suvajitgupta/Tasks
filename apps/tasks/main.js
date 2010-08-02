@@ -13,8 +13,9 @@ Tasks.assignmentsRedrawNeeded = false;
 Tasks.sourcesRedrawNeeded = false;
 
 Tasks.main = function main() {
-
+  
   // console.log('DEBUG: "Tasks" started at: %@'.fmt(new Date()));
+  CoreTasks.dataSaveErrorCallback = Tasks.dataSaveErrorCallback;
   Tasks.registerRoutes();
   
   Tasks.isLoaded = YES; // for Lebowski

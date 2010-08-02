@@ -672,7 +672,7 @@ CoreTasks = SC.Object.create({
     }
   },
   
-  dataSaveError: false,
+  dataSaveErrorCallback: null,
   /**
    * Cleanup as save operation ends.
    *
@@ -692,12 +692,8 @@ CoreTasks = SC.Object.create({
     this._dirtyTasks = [];
     this._dirtyWatches = [];
     
-    if (errorRecordType === undefined) {
-      this.set('dataSaveError', false);
-    }
-    else {
-      console.error('Error saving data: Failed to save at least one ' + errorRecordType);
-      this.set('dataSaveError', true);
+    if (errorRecordType !== undefined) {
+      if(this.dataSaveErrorCallback) this.dataSaveErrorCallback(errorRecordType);
     }
     
   },

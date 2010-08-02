@@ -47,7 +47,7 @@ SC.stringsFor('English', {
   "_DataLoadFailed": "Data load failed ",
   "_DataLoaded": "Data loaded ",
   "_DataSaved": "Data saved ",
-  "_DataServerAccessError": "Data save or server access error",
+  "_DataSaveError": "Data save failed ",
   "_Delete": "Delete",
   "_DeleteProjectTooltip": "Delete selected projects",
   "_DeleteTaskTooltip": "Delete selected tasks",
