@@ -359,7 +359,9 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         clippyIcon: SC.View.design({
           layout: { bottom: 10, left: 10, height: 16, width: 16 },
           render: function(context, firstTime) {
-            that._embedClippy(context, that.getPath('content.displayId') + ' ' + that.getPath('content.displayName'));
+            if(firstTime) {
+              that._embedClippy(context, that.getPath('content.displayId') + ' ' + that.getPath('content.displayName'));
+            }
           }
         }),
         clippyHelpLabel: SC.LabelView.design({
