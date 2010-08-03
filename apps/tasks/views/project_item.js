@@ -66,6 +66,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       minHeight: 240,
       layout: { centerX:0, centerY: 0, width: 700, height: 315 },
       _timeLeft: null,
+      _activatedAt: null,
       
       // Avoid popup panel coming up for system projects
       popup: function() {
@@ -73,6 +74,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
         that._editorPane.append();
         Tasks.editorPoppedUp = Tasks.PROJECT_EDITOR;
         this._timeLeft = that.getPath('content.timeLeft');
+        this._activatedAt = that.getPath('content.activatedAt');
         var name = that.getPath('content.name');
         var copyPattern = new RegExp("_Copy".loc() + '$');
         if((name === CoreTasks.NEW_PROJECT_NAME.loc() || copyPattern.exec(name)) && CoreTasks.getPath('permissions.canUpdateProject')) {
@@ -89,8 +91,11 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
         content.setIfChanged('activatedAtValue',  cv.getPath('activatedAtField.date'));
         content.setIfChanged('description',  cv.getPath('descriptionField.value'));
         if(Tasks.sourcesRedrawNeeded) Tasks.projectsController.showSources();
-        // If timeLeft has changed, recalculate load balancing
-        if(this._timeLeft !== that.getPath('content.timeLeft')) Tasks.assignmentsController.showAssignments();
+        // If timeLeft or activatedAt has changed, recalculate load balancing
+        if(this._timeLeft !== that.getPath('content.timeLeft') ||
+           this._activatedAt !== that.getPath('content.activatedAt')) {
+          Tasks.assignmentsController.showAssignments();
+        }
         if(CoreTasks.get('autoSave')) Tasks.saveData();
         that._editorPane.destroy();
       },
@@ -145,12 +150,13 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
         }),
 
         activatedAtLabel: SC.LabelView.design({
-          layout: { top: 40, right: 142, height: 24, width: 100 },
+          layout: { top: 40, right: 113, height: 24, width: 100 },
           textAlign: SC.ALIGN_RIGHT,
           value: "_Activated:".loc()
         }),
         activatedAtField: SCUI.DatePickerView.design({
-          layout: { top: 37, right: 10, height: 24, width: 125 },
+          layout: { top: 37, right: 10, height: 24, width: 100 },
+          dateFormat: CoreTasks.DATE_FORMAT,
           isEnabledBinding: 'CoreTasks.permissions.canUpdateProject',
           date: that.getPath('content.activatedAtValue')
         }),
@@ -215,7 +221,8 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     }
     else {
       sc_super();
-      if(finalValue.indexOf('{') >= 0) { // if effort was specified inline, redraw got load balancing recalculation
+      // if timeLeft or activatedAt was specified inline, redraw got load balancing recalculation
+      if(finalValue.indexOf('{') >= 0 || finalValue.indexOf('<')  >= 0) {
         Tasks.assignmentsController.showAssignments();
       }
       if(CoreTasks.get('autoSave')) Tasks.saveData();
