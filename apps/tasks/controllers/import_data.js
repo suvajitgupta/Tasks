@@ -155,7 +155,7 @@ Tasks.importDataController = SC.ObjectController.create(
             if(CoreTasks.getPath('permissions.canCreateProject')) {
               projectRecord = CoreTasks.createRecord(CoreTasks.Project, projectHash);
               if(projectRecord) {
-                if(projectRecord.activatedAt) projectRecord.set('activatedAt', SC.DateTime.parse(projectHash.activatedAt, CoreTasks.ACTIVATED_AT_DATE_FORMAT));
+                if(projectRecord.activatedAt) projectRecord.set('activatedAt', SC.DateTime.parse(projectHash.activatedAt, CoreTasks.DATE_FORMAT));
                 currentProject = projectRecord;
               }
               else console.error('Import: project creation failed!');

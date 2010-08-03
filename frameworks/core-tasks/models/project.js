@@ -7,7 +7,7 @@ CoreTasks.ALL_TASKS_NAME = '_AllTasks';
 CoreTasks.UNALLOCATED_TASKS_NAME = '_UnallocatedTasks';
 CoreTasks.UNASSIGNED_TASKS_NAME = '_UnassignedTasks';
 
-CoreTasks.ACTIVATED_AT_DATE_FORMAT = '%m/%d/%Y';
+CoreTasks.DATE_FORMAT = '%m/%d/%Y';
 
 CoreTasks.projectStatusesAllowed = [
   CoreTasks.STATUS_PLANNED,
@@ -60,7 +60,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
       }
       
       if(projectHash.activatedAt) {
-        this.set('activatedAt', SC.DateTime.parse(projectHash.activatedAt, CoreTasks.ACTIVATED_AT_DATE_FORMAT));
+        this.set('activatedAt', SC.DateTime.parse(projectHash.activatedAt, CoreTasks.DATE_FORMAT));
       }
       
     } else {
@@ -160,14 +160,14 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
      timeLeft = CoreTasks.convertTimeToDays(timeLeft);
      
      var activatedAt = this.get('activatedAtValue');
-     // console.log('DEBUG: name: "' + this.get('name')  + '", timeLeft: ' + timeLeft + 'd, activatedAt: ' + (activatedAt? activatedAt.toFormattedString(CoreTasks.ACTIVATED_AT_DATE_FORMAT) : 'null'));
+     // console.log('DEBUG: name: "' + this.get('name')  + '", timeLeft: ' + timeLeft + 'd, activatedAt: ' + (activatedAt? activatedAt.toFormattedString(CoreTasks.DATE_FORMAT) : 'null'));
      if (SC.none(activatedAt)) return timeLeft;
      
-     // var today = SC.DateTime.parse(CoreTasks.Project.parseActivatedAt("<07/19/2010>"), CoreTasks.ACTIVATED_AT_DATE_FORMAT); // testing code
+     // var today = SC.DateTime.parse(CoreTasks.Project.parseActivatedAt("<07/19/2010>"), CoreTasks.DATE_FORMAT); // testing code
      var today = SC.DateTime.create();
      var todayOfYear = today.get('dayOfYear');
      var todayOfWeek = today.get('dayOfWeek');
-     // console.log('DEBUG: today: ' + today.toFormattedString(CoreTasks.ACTIVATED_AT_DATE_FORMAT) + ', todayOfYear: ' + todayOfYear);
+     // console.log('DEBUG: today: ' + today.toFormattedString(CoreTasks.DATE_FORMAT) + ', todayOfYear: ' + todayOfYear);
      if(todayOfWeek < 2) { // if Sunday or Monday go back to last Saturday
        todayOfYear -= (todayOfWeek === 0? 1 : 2);
        todayOfWeek = 6;
@@ -323,7 +323,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
         var timeLeft = this.get('timeLeft');
         if(timeLeft) ret += (' {' + CoreTasks.displayTime(timeLeft) + '}');
         var activatedAt = this.get('activatedAt');
-        if(activatedAt) ret += (' <' + activatedAt.toFormattedString(CoreTasks.ACTIVATED_AT_DATE_FORMAT) + '>');
+        if(activatedAt) ret += (' <' + activatedAt.toFormattedString(CoreTasks.DATE_FORMAT) + '>');
       }
       else {
         var countDown = this.get('displayCountDown');

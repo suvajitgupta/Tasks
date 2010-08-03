@@ -240,7 +240,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     var indexes = SC.IndexSet.create(0, tasksList.get('length'));
     tasksList.rowHeightDidChangeForIndexes(indexes);
    
-    // console.log('DEBUG: showAssignments(' + this.count + ') entry at: ' + new Date().format('hh:mm:ss a'));
+    // console.log('DEBUG: showAssignments(' + this.count + ') entry at: ' + SC.DateTime.create().toFormattedString(CoreTasks.DATE_FORMAT));
     // Preserve selected tasks to be restored at the end of redrawing assignments
     var selection = Tasks.tasksController.get('selection');
     var idPattern = null, searchPattern = null, positiveMatch = true;
@@ -439,7 +439,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     }), treeItemIsExpanded: YES }));
     
     if(selection) Tasks.tasksController.selectObjects(selection);
-    // console.log('DEBUG: showAssignments(' + this.count++ + ') exit  at: ' + new Date().format('hh:mm:ss a'));
+    // console.log('DEBUG: showAssignments(' + this.count++ + ') exit  at: ' + SC.DateTime.create().toFormattedString(CoreTasks.DATE_FORMAT));
     Tasks.assignmentsRedrawNeeded = false;    
 
   },

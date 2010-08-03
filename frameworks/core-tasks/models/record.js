@@ -2,8 +2,6 @@
 sc_require('core');
 sc_require('models/record_attribute');
 
-CoreTasks.DATE_FORMAT = '%a %b %d, %Y';
-CoreTasks.DATE_TIME_FORMAT = '%I:%M %p %a %b %d, %Y';
 CoreTasks.MILLISECONDS_IN_DAY = 24*60*60*1000;
 
 // Development status:
@@ -73,7 +71,7 @@ CoreTasks.Record = SC.Record.extend({
   createdAt: SC.Record.attr('CoreTasks.Date'),
   displayCreatedAt: function() {
     var time = this.get('createdAt');
-    return time? ("_Created:".loc() + time.toFormattedString(CoreTasks.DATE_TIME_FORMAT)) : '';
+    return time? ("_Created:".loc() + time.toFormattedString(CoreTasks.TIME_DATE_FORMAT)) : '';
   }.property('createdAt'),
 
   /**
@@ -84,7 +82,7 @@ CoreTasks.Record = SC.Record.extend({
   updatedAt: SC.Record.attr('CoreTasks.Date'),
   displayUpdatedAt: function() {
     var time = this.get('updatedAt');
-    return time? ("_Updated:".loc() + time.toFormattedString(CoreTasks.DATE_TIME_FORMAT)) : '';
+    return time? ("_Updated:".loc() + time.toFormattedString(CoreTasks.TIME_DATE_FORMAT)) : '';
   }.property('updatedAt'),
 
   /**

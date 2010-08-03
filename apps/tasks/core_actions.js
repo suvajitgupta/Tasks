@@ -119,7 +119,7 @@ Tasks.mixin({
         CoreTasks.set('currentUser', currentUser);
         CoreTasks.setPermissions();
         var welcomeMessage = Tasks.getPath('mainPage.mainPane.welcomeMessage');
-        welcomeMessage.set('toolTip', "_LoginSince".loc() + new Date().format('hh:mm a MMM dd, yyyy'));
+        welcomeMessage.set('toolTip', "_LoginSince".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
         
         // Based on user's role set up appropriate task filter
         var role = currentUser.get('role');
@@ -233,7 +233,7 @@ Tasks.mixin({
     // console.log('DEBUG: dataLoadSuccess()');
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('icon', '');
-    serverMessage.set('value', "_DataLoaded".loc() + new Date().format('hh:mm a MMM dd, yyyy'));
+    serverMessage.set('value', "_DataLoaded".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
     Tasks.projectsController.refreshCountdowns();
 
     switch (this.state.a) {
@@ -256,7 +256,7 @@ Tasks.mixin({
     // console.log('DEBUG: dataLoadFailure()');
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('icon', '');
-    serverMessage.set('value', "_DataLoadFailed".loc() + new Date().format('hh:mm a MMM dd, yyyy'));
+    serverMessage.set('value', "_DataLoadFailed".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
     switch (this.state.a) {
       case 3:
         if(!CoreTasks.loginTime) this.goState('a', 4);
@@ -273,7 +273,7 @@ Tasks.mixin({
     if(CoreTasks.get('needsSave')) {
       var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
       CoreTasks.saveChanges();
-      serverMessage.set('value', "_DataSaved".loc() + new Date().format('hh:mm a MMM dd, yyyy'));
+      serverMessage.set('value', "_DataSaved".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
     }
   },
   
@@ -285,7 +285,7 @@ Tasks.mixin({
   dataSaveErrorCallback: function(errorRecordType) {
     // console.log('DEBUG: dataSaveErrorCallback(' + errorRecordType + ')');
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
-    serverMessage.set('value', "_DataSaveError".loc() + new Date().format('hh:mm a MMM dd, yyyy'));
+    serverMessage.set('value', "_DataSaveError".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
   },
 
   /**
