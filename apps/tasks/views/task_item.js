@@ -88,35 +88,6 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     }).from('Tasks.projectsController.content');
   },
   
-  _embedClippy: function(context, details) {
-    var detailsId = 'clippy-details';
-    context.push('<span style="display:none;" id="' + detailsId + '">' + details + '</span>');
-    context.push('<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"\n' +
-                 'width="14"\n' +
-                 'height="15"\n' +
-                 'id="clippy-object" >\n' +
-                 '<param name="movie" value="' + static_url('clippy.swf') + '"/>\n' +
-                 '<param name="allowScriptAccess" value="always" />\n' +
-                 '<param name="quality" value="high" />\n' +
-                 '<param name="scale" value="noscale" />\n' +
-                 '<param NAME="FlashVars" value="id=' + detailsId + '">\n' +
-                 '<param name="bgcolor" value="#FFF">\n' +
-                 '<param name="wmode" value="opaque">\n' +
-                 '<embed src="' + static_url('clippy.swf') + '"\n' +
-                 'width="14"\n' +
-                 'height="15"\n' +
-                 'name="clippy"\n' +
-                 'quality="high"\n' +
-                 'allowScriptAccess="always"\n' +
-                 'type="application/x-shockwave-flash"\n' +
-                 'pluginspage="http://www.macromedia.com/go/getflashplayer"\n' +
-                 'FlashVars="id=' + detailsId + '"\n' +
-                 'bgcolor="#FFF"\n' +
-                 'wmode="opaque"\n' +
-                 '/>\n' +
-                 '</object>\n');
-  },
-  
   /** @private
     If mouse was down over Description icon or effort badge popup the editor.
   */  
@@ -181,7 +152,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       
       contentView: SC.View.design({
         layout: { left: 0, right: 0, top: 0, bottom: 0},
-        childViews: 'nameLabel nameField typeLabel typeField priorityLabel priorityField statusLabel statusField validationLabel validationField effortLabel effortField effortHelpLabel projectLabel projectField submitterLabel submitterField assigneeLabel assigneeField descriptionLabel descriptionField createdAtLabel updatedAtLabel clippyIcon clippyHelpLabel closeButton'.w(),
+        childViews: 'nameLabel nameField typeLabel typeField priorityLabel priorityField statusLabel statusField validationLabel validationField effortLabel effortField effortHelpLabel projectLabel projectField submitterLabel submitterField assigneeLabel assigneeField descriptionLabel descriptionField createdAtLabel updatedAtLabel closeButton'.w(),
       
         nameLabel: SC.LabelView.design({
           layout: { top: 6, left: 0, height: 24, width: 55 },
@@ -354,20 +325,6 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           classNames: [ 'date-time'],
           textAlign: SC.ALIGN_RIGHT,
           valueBinding: SC.binding('.content.displayUpdatedAt', this)
-        }),
-
-        clippyIcon: SC.View.design({
-          layout: { bottom: 10, left: 10, height: 16, width: 16 },
-          render: function(context, firstTime) {
-            if(firstTime) {
-              that._embedClippy(context, that.getPath('content.displayId') + ' ' + that.getPath('content.displayName'));
-            }
-          }
-        }),
-        clippyHelpLabel: SC.LabelView.design({
-          layout: { bottom: 12, left: 28, height: 12, width: 200 },
-          classNames: [ 'onscreen-help'],
-          value: "_ClippyOnscreenHelp".loc()
         }),
 
         closeButton: SC.ButtonView.design({

@@ -60,6 +60,7 @@ Tasks.mixin({
       case 2:
         Tasks.loginController.closePanel();
         Tasks.getPath('mainPage.mainPane').append();
+        Tasks.mainPageHelper.set('clippyDetails', document.getElementById(Tasks.mainPageHelper.clippyDetailsId));
         this.goState('a', 3);
         break;
 

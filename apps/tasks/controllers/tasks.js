@@ -258,6 +258,20 @@ Tasks.tasksController = SC.TreeController.create(
     return value;
   }.property('selection').cacheable(),
   
+  _updateClippyDetails: function() {
+    var clippyDetails = Tasks.mainPageHelper.get('clippyDetails');
+    if(clippyDetails) {
+      var ret = '';
+      var sel = this.get('selection');
+      if(sel && sel.get('length') > 0) {
+        sel.forEach(function(task) {
+          ret += (task.get('displayId') + ' ' + task.get('displayName') + '\n');
+        });
+      }
+      clippyDetails.innerHTML = ret;
+    }
+  }.observes('selection'),
+  
   editNewTask: function(task){
     var listView = Tasks.getPath('mainPage.mainPane.tasksList');
     var idx = listView.get('content').indexOf(task);

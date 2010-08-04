@@ -23,7 +23,38 @@ Tasks.mainPageHelper = SC.Object.create({
   displayedTasksCountBinding: SC.Binding.oneWay('Tasks.tasksController*arrangedObjects.length'),
   autoSaveBinding: SC.Binding.oneWay('CoreTasks*autoSave'),
   shouldNotifyBinding: SC.Binding.oneWay('CoreTasks*shouldNotify'),
+  clippyDetailsId: 'clippy-details',
+  clippyDetails: null,
 
+  _embedClippy: function(context) {
+    var clippyTooltip = "_ClippyTooltip".loc();
+    context.push('<span style="display:none;" id="' + Tasks.mainPageHelper.clippyDetailsId + '"></span>');
+    context.push('<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"\n' +
+                 'width="14"\n' +
+                 'height="15"\n' +
+                 'id="clippy-object" >\n' +
+                 '<param name="movie" value="' + static_url('clippy.swf') + '"/>\n' +
+                 '<param name="allowScriptAccess" value="always" />\n' +
+                 '<param name="quality" value="high" />\n' +
+                 '<param name="scale" value="noscale" />\n' +
+                 '<param NAME="FlashVars" value="id=' + Tasks.mainPageHelper.clippyDetailsId + '">\n' +
+                 '<param name="bgcolor" value="#FFF">\n' +
+                 '<param name="wmode" value="opaque">\n' +
+                 '<embed src="' + static_url('clippy.swf') + '"\n' +
+                 'width="14"\n' +
+                 'height="15"\n' +
+                 'name="clippy"\n' +
+                 'quality="high"\n' +
+                 'allowScriptAccess="always"\n' +
+                 'type="application/x-shockwave-flash"\n' +
+                 'pluginspage="http://www.macromedia.com/go/getflashplayer"\n' +
+                 'FlashVars="id=' + Tasks.mainPageHelper.clippyDetailsId + '"\n' +
+                 'bgcolor="#FFF"\n' +
+                 'wmode="opaque"\n' +
+                 '/>\n' +
+                 '</object>\n').attr('title', clippyTooltip).attr('alt', clippyTooltip);
+  },
+  
   _listActions: function() {
     var ret = [];
     if(this.getPath('displayedTasksCount') > 0) {
@@ -71,7 +102,7 @@ Tasks.mainPage = SC.Page.design({
       
       layout: { top: 0, left: 0, right: 0, height: 56 },
       classNames: ['title-bar'],
-      childViews: 'installationLogo tasksLogo actionsButton displayModeSegments welcomeMessageLabel filterPanelButton filterCancelButton tasksSearchField tasksSearchCancelButton'.w(),
+      childViews: 'installationLogo tasksLogo actionsButton displayModeSegments welcomeMessageLabel clippyIcon filterPanelButton filterCancelButton tasksSearchField tasksSearchCancelButton'.w(),
       
       installationLogo: SC.View.design({
         layout: { left: 15, centerY: -4, width: Tasks._wideLogo? 80: 35, height: Tasks._wideLogo? 20 : 35 },
@@ -143,6 +174,16 @@ Tasks.mainPage = SC.Page.design({
         valueBinding: SC.Binding.oneWay('Tasks.mainPageHelper.welcomeMessage')
       }),
 
+      clippyIcon: SC.View.design({
+        layout: { centerY: -4, right: 283, height: 14, width: 14 },
+        isVisibleBinding: SC.Binding.oneWay('Tasks.tasksController.hasSelection'),
+        render: function(context, firstTime) {
+          if(firstTime) {
+            Tasks.mainPageHelper._embedClippy(context);
+          }
+        }
+      }),
+      
       filterPanelButton: SC.ButtonView.design({
         layout: { centerY: -4, height: 24, right: 221, width: 50 },
         titleMinWidth: 0,
