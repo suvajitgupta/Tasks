@@ -92,17 +92,46 @@ Tasks.mixin({
    */
   loadData: function() {
     // console.log('DEBUG: loadData()');
-    // Start by loading all users.
-    var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
-    serverMessage.set('icon', 'progress-icon');
-    serverMessage.set('value', "_LoadingUsers".loc());
-    if (!CoreTasks.get('allUsers')) {
-      CoreTasks.set('allUsers', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.User, orderBy: 'name' })));
-      this.usersController.set('content', CoreTasks.get('allUsers'));
-    } else {
-      CoreTasks.get('allUsers').refresh();
+    // Load all records via consolidated call for GAE
+    SC.Request.getUrl('tasks-server/records').json()
+      .notify(this, 'recordsLoadCallback')
+      .send();
+  },
+  
+  recordsLoadCallback: function(response) {
+    if(SC.ok(response)) {
+      
+      // Process/load records into store
+      var records = response.get('body');
+      if(!records) this.dataLoadFailure();
+      var typeMap = {
+        "user":     CoreTasks.User,
+        "task":     CoreTasks.Task,
+        "project":  CoreTasks.Project,
+        "watch":    CoreTasks.Watch
+      };
+      SC.RunLoop.begin();
+      for(var recordType in records) {
+        CoreTasks.store.loadRecords(typeMap[recordType], records[recordType]);
+      }
+      SC.RunLoop.end();
+      
+      // Start by loading all users.
+      var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
+      serverMessage.set('icon', 'progress-icon');
+      serverMessage.set('value', "_LoadingUsers".loc());
+      if (!CoreTasks.get('allUsers')) {
+        CoreTasks.set('allUsers', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.User, orderBy: 'name', initialServerFetch: NO })));
+        this.usersController.set('content', CoreTasks.get('allUsers'));
+        this.usersLoadSuccess(); // HACK
+      } else {
+        CoreTasks.get('allUsers').refresh();
+      }
+      
     }
-
+    else {
+      this.dataLoadFailure();
+    }
   },
   
   /**
@@ -138,8 +167,9 @@ Tasks.mixin({
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', "_LoadingTasks".loc());
     if (!CoreTasks.get('allTasks')) {
-      CoreTasks.set('allTasks', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Task })));
+      CoreTasks.set('allTasks', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Task, initialServerFetch: NO })));
       this.allTasksController.set('content', CoreTasks.get('allTasks'));
+      this.tasksLoadSuccess(); // HACK
     } else {
       CoreTasks.get('allTasks').refresh();
     }
@@ -179,8 +209,9 @@ Tasks.mixin({
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', "_LoadingProjects".loc());
     if (!CoreTasks.get('allProjects')) {
-      CoreTasks.set('allProjects', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Project })));
+      CoreTasks.set('allProjects', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Project, initialServerFetch: NO })));
       this.projectsController.set('content', CoreTasks.get('allProjects'));
+      this.projectsLoadSuccess(); // HACK
     } else {
       CoreTasks.get('allProjects').refresh();
     }
@@ -207,8 +238,9 @@ Tasks.mixin({
       var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
       serverMessage.set('value', "_LoadingWatches".loc());
       if (!CoreTasks.get('allWatches')) {
-        CoreTasks.set('allWatches', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Watch })));
+        CoreTasks.set('allWatches', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Watch, initialServerFetch: NO })));
         this.watchesController.set('content', CoreTasks.get('allWatches'));
+        this.watchesLoadSuccess(); // HACK
       } else {
         CoreTasks.get('allWatches').refresh();
       }
