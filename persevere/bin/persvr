@@ -163,6 +163,7 @@ exec "$JAVACMD" \
 :$PERSVR_HOME/lib/jetty-6.1.14.jar" \
 -Dpersevere.instance=$LOCAL_DIR \
 -Dpersevere.home=$PERSVR_HOME \
+-Djava.net.preferIPv4Stack=true \
 ${PERSEVERE_LAUNCHER} $QUOTED_ARGS
 
 

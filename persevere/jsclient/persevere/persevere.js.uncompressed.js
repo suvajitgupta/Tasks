@@ -58,8 +58,8 @@ dojo.date.stamp.fromISOString = function(/*String*/formattedString, /*Number?*/d
 			/^(?:(\d{4})(?:-(\d{2})(?:-(\d{2}))?)?)?(?:T(\d{2}):(\d{2})(?::(\d{2})(.\d+)?)?((?:[+-](\d{2}):(\d{2}))|Z)?)?$/;
 	}
 
-	var match = dojo.date.stamp._isoRegExp.exec(formattedString);
-	var result = null;
+	var match = dojo.date.stamp._isoRegExp.exec(formattedString),
+		result = null;
 
 	if(match){
 		match.shift();
@@ -77,11 +77,13 @@ dojo.date.stamp.fromISOString = function(/*String*/formattedString, /*Number?*/d
 				}
 			});
 		}
-		result = new Date(match[0]||1970, match[1]||0, match[2]||1, match[3]||0, match[4]||0, match[5]||0, match[6]||0);
-//		result.setFullYear(match[0]||1970); // for year < 100
+		result = new Date(match[0]||1970, match[1]||0, match[2]||1, match[3]||0, match[4]||0, match[5]||0, match[6]||0); //TODO: UTC defaults
+		if(match[0] < 100){
+			result.setFullYear(match[0] || 1970);
+		}
 
-		var offset = 0;
-		var zoneSign = match[7] && match[7].charAt(0);
+		var offset = 0,
+			zoneSign = match[7] && match[7].charAt(0);
 		if(zoneSign != 'Z'){
 			offset = ((match[8] || 0) * 60) + (Number(match[9]) || 0);
 			if(zoneSign != '-'){ offset *= -1; }
@@ -126,9 +128,9 @@ dojo.date.stamp.toISOString = function(/*Date*/dateObject, /*dojo.date.stamp.__O
 
 	var _ = function(n){ return (n < 10) ? "0" + n : n; };
 	options = options || {};
-	var formattedDate = [];
-	var getter = options.zulu ? "getUTC" : "get";
-	var date = "";
+	var formattedDate = [],
+		getter = options.zulu ? "getUTC" : "get",
+		date = "";
 	if(options.selector != "time"){
 		var year = dateObject[getter+"FullYear"]();
 		date = ["0000".substr((year+"").length)+year, _(dateObject[getter+"Month"]()+1), _(dateObject[getter+"Date"]())].join('-');
@@ -207,6 +209,7 @@ dojox.json.ref = {
 		args = args || {};
 		var idAttribute = args.idAttribute || 'id';
 		var refAttribute = this.refAttribute;
+		var idAsRef = args.idAsRef;
 		var prefix = args.idPrefix || ''; 
 		var assignAbsoluteIds = args.assignAbsoluteIds;
 		var index = args.index || {}; // create an index if one doesn't exist
@@ -270,7 +273,7 @@ dojox.json.ref = {
 				if(it.hasOwnProperty(i)){
 					val=it[i];
 					if((typeof val =='object') && val && !(val instanceof Date) && i != '__parent'){
-						ref=val[refAttribute];
+						ref=val[refAttribute] || (idAsRef && val[idAttribute]);
 						if(!ref || !val.__parent){
 							val.__parent = it;
 						}
@@ -562,10 +565,10 @@ dojo.provide("dojox.rpc.Rest");
 
 	function index(deferred, service, range, id){
 		deferred.addCallback(function(result){
-			if(range){
-				// try to record the total number of items from the range header
-				range = deferred.ioArgs.xhr && deferred.ioArgs.xhr.getResponseHeader("Content-Range");
-				deferred.fullLength = range && (range=range.match(/\/(.*)/)) && parseInt(range[1]);
+			if(deferred.ioArgs.xhr && range){
+					// try to record the total number of items from the range header
+					range = deferred.ioArgs.xhr.getResponseHeader("Content-Range");
+					deferred.fullLength = range && (range=range.match(/\/(.*)/)) && parseInt(range[1]);
 			}
 			return result;
 		});
@@ -593,13 +596,17 @@ dojo.provide("dojox.rpc.Rest");
 		// the default XHR args creator:
 		service._getRequest = getRequest || function(id, args){
 			if(dojo.isObject(id)){
-				var sort = args.sort && args.sort[0];
-				if(sort && sort.attribute){
-					id.sort = (sort.descending ? '-' : '') + sort.attribute; 
-				}
 				id = dojo.objectToQuery(id);
 				id = id ? "?" + id: "";
-			}		
+			}
+			if(args && args.sort && !args.queryStr){
+				id += (id ? "&" : "?") + "sort("
+				for(var i = 0; i<args.sort.length; i++){
+					var sort = args.sort[i];
+					id += (i > 0 ? "," : "") + (sort.descending ? '-' : '+') + encodeURIComponent(sort.attribute); 
+				}
+				id += ")";
+			}
 			var request = {
 				url: path + (id == null ? "" : id),
 				handleAs: isJson ? 'json' : 'text', 
@@ -665,7 +672,11 @@ dojo.provide("dojox.rpc.JsonRest");
 		if(timeStamp && Rest._timeStamps){
 			Rest._timeStamps[defaultId] = timeStamp;
 		}
-		return value && dojox.json.ref.resolveJson(value, {
+		var hrefProperty = service._schema && service._schema.hrefProperty;
+		if(hrefProperty){
+			dojox.json.ref.refAttribute = hrefProperty;
+		}
+		value = value && dojox.json.ref.resolveJson(value, {
 			defaultId: defaultId, 
 			index: Rest._index,
 			timeStamps: timeStamp && Rest._timeStamps,
@@ -674,9 +685,11 @@ dojo.provide("dojox.rpc.JsonRest");
 			idAttribute: jr.getIdAttribute(service),
 			schemas: jr.schemas,
 			loader:	jr._loader,
+			idAsRef: service.idAsRef, 
 			assignAbsoluteIds: true
 		});
-		
+		dojox.json.ref.refAttribute  = "$ref";
+		return value;
 	}
 	jr = dojox.rpc.JsonRest={
 		serviceClass: dojox.rpc.Rest,
@@ -708,13 +721,44 @@ dojo.provide("dojox.rpc.JsonRest");
 							if(!(object.__id in alreadyRecorded)){// if it has already been saved, we don't want to repeat it
 								// record that we are saving
 								alreadyRecorded[object.__id] = object;
-								actions.push({method:"put",target:object,content:object});
+								if(kwArgs.incrementalUpdates 
+									&& !pathParts){ // I haven't figured out how we would do incremental updates on sub-objects yet
+									// make an incremental update using a POST
+									var incremental = (typeof kwArgs.incrementalUpdates == 'function' ?
+										kwArgs.incrementalUpdates : function(){
+											incremental = {};
+											for(var j in object){
+												if(object.hasOwnProperty(j)){
+													if(object[j] !== old[j]){
+														incremental[j] = object[j];
+													}
+												}else if(old.hasOwnProperty(j)){
+													// we can't use incremental updates to remove properties
+													return null;
+												}
+											}
+											return incremental;
+										})(object, old);
+								}
+								
+								if(incremental){
+									actions.push({method:"post",target:object, content: incremental});
+								}
+								else{
+									actions.push({method:"put",target:object,content:object});
+								}
 							}
 						}else{
 							// new object
-							
-							actions.push({method:"post",target:{__id:jr.getServiceAndId(object.__id).service.servicePath},
-													content:object});
+							var service = jr.getServiceAndId(object.__id).service;
+							var idAttribute = jr.getIdAttribute(service);
+							if((idAttribute in object) && !kwArgs.alwaysPostNewItems){
+								// if the id attribute is specified, then we should know the location
+								actions.push({method:"put",target:object, content:object});
+							}else{
+								actions.push({method:"post",target:{__id:service.servicePath},
+														content:object});
+							}
 						}
 					}else if(old){
 						// deleted object
@@ -725,11 +769,16 @@ dojo.provide("dojox.rpc.JsonRest");
 				}
 			}
 			dojo.connect(kwArgs,"onError",function(){
-				var postCommitDirtyObjects = dirtyObjects;
-				dirtyObjects = savingObjects;
-				var numDirty = 0; // make sure this does't do anything if it is called again
-				jr.revert(); // revert if there was an error
-				dirtyObjects = postCommitDirtyObjects;
+				if(kwArgs.revertOnError !== false){
+					var postCommitDirtyObjects = dirtyObjects;
+					dirtyObjects = savingObjects;
+					var numDirty = 0; // make sure this does't do anything if it is called again
+					jr.revert(); // revert if there was an error
+					dirtyObjects = postCommitDirtyObjects;
+				}
+				else{
+					dirtyObjects = dirtyObject.concat(savingObjects); 
+				}
 			});
 			jr.sendToServer(actions, kwArgs);
 			return actions;
@@ -791,7 +840,7 @@ dojo.provide("dojox.rpc.JsonRest");
 						}catch(e){}
 						if(!(--left)){
 							if(kwArgs.onComplete){
-								kwArgs.onComplete.call(kwArgs.scope);
+								kwArgs.onComplete.call(kwArgs.scope, actions);
 							}
 						}
 						return value;
@@ -820,20 +869,38 @@ dojo.provide("dojox.rpc.JsonRest");
 				var dirty = dirtyObjects[i];
 				var object = dirty.object;
 				var old = dirty.old;
+				var store = dojox.data._getStoreForItem(object || old);
+				
 				if(!(service && (object || old) && 
 					(object || old).__id.indexOf(service.servicePath))){
 					// if we are in the specified store or if this is a global revert
 					if(object && old){
 						// changed
 						for(var j in old){
-							if(old.hasOwnProperty(j)){
+							if(old.hasOwnProperty(j) && object[j] !== old[j]){
+								if(store){
+									store.onSet(object, j, object[j], old[j]);
+								}
 								object[j] = old[j];
 							}
 						}
 						for(j in object){
 							if(!old.hasOwnProperty(j)){
+								if(store){
+									store.onSet(object, j, object[j]);
+								}
 								delete object[j];
 							}
+						}
+					}else if(!old){
+						// was an addition, remove it
+						if(store){
+							store.onDelete(object);
+						}
+					}else{
+						// was a deletion, we will add it back
+						if(store){
+							store.onNew(old);
 						}
 					}
 					delete (object || old).__isDirty;
@@ -948,7 +1015,7 @@ dojo.provide("dojox.rpc.JsonRest");
 			if(schema){
 				if(!(idAttr = schema._idAttr)){
 					for(var i in schema.properties){
-						if(schema.properties[i].identity){
+						if(schema.properties[i].identity || (schema.properties[i].link == "self")){
 							schema._idAttr = idAttr = i;
 						}
 					}
@@ -1002,11 +1069,12 @@ dojo.provide("dojox.rpc.JsonRest");
 		},
 		query: function(service, id, args){
 			var deferred = service(id, args);
+			
 			deferred.addCallback(function(result){
 				if(result.nodeType && result.cloneNode){
 					// return immediately if it is an XML document
 					return result;
-				}
+				}				
 				return resolveJson(service, deferred, result, typeof id != 'string' || (args && (args.start || args.count)) ? undefined: id);
 			});
 			return deferred;			
@@ -1059,10 +1127,10 @@ dojo.provide("persevere.persevere");
 	var username = null;
 	var plainXhr = dojo.xhr;
 	dojo.xhr = function(method,args,hasBody) {
-		function done(res) {
-			username = dfd.ioArgs.xhr.getResponseHeader("Username");
-		}
 		dfd = plainXhr(method,args,hasBody);
+		dfd.addCallback(function(){
+			username = dfd.ioArgs.xhr.getResponseHeader("Username");
+		});
 		return dfd;
 	};
 	function lazyLoad(value, callback){
@@ -1153,7 +1221,7 @@ dojo.provide("persevere.persevere");
 			dfd.addBoth(function(schemas){
 				for(var i in schemas){
 					if(typeof schemas[i] == 'object'){
-						scope[i] = schemas[i] = dojox.rpc.JsonRest.getConstructor(new dojo._Url(path,i) + '', schemas[i]);
+						scope[i] = schemas[i] = dojox.rpc.JsonRest.getConstructor(new dojo._Url(path,i) + '/', schemas[i]);
 					}
 				}
 				return (results = schemas);

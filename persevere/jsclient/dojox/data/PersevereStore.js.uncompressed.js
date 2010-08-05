@@ -22,9 +22,9 @@ dojo.provide("dojox.data.ServiceStore");
 // A ServiceStore is a readonly data store that provides a data.data interface to an RPC service.
 // var myServices = new dojox.rpc.Service(dojo.moduleUrl("dojox.rpc.tests.resources", "test.smd"));
 // var serviceStore = new dojox.data.ServiceStore({service:myServices.ServiceStore});
-// 
+//
 // The ServiceStore also supports lazy loading. References can be made to objects that have not been loaded.
-//  For example if a service returned:
+//	For example if a service returned:
 // {"name":"Example","lazyLoadedObject":{"$ref":"obj2"}}
 //
 // And this object has accessed using the dojo.data API:
@@ -33,33 +33,32 @@ dojo.provide("dojox.data.ServiceStore");
 //
 
 dojo.declare("dojox.data.ServiceStore",
-	// ClientFilter is intentionally not required, ServiceStore does not need it, and is more 
+	// ClientFilter is intentionally not required, ServiceStore does not need it, and is more
 	// lightweight without it, but if it is provided, the ServiceStore will use it.
-	dojox.data.ClientFilter,  
-	{
+	dojox.data.ClientFilter,{
 		service: null,
 		constructor: function(options){
 			//summary:
-			//		ServiceStore constructor, instantiate a new ServiceStore 
-			// 		A ServiceStore can be configured from a JSON Schema. Queries are just 
+			//		ServiceStore constructor, instantiate a new ServiceStore
+			// 		A ServiceStore can be configured from a JSON Schema. Queries are just
 			// 		passed through to the underlying services
 			//
-			// options: 
+			// options:
 			// 		Keyword arguments
 			// The *schema* parameter
 			//		This is a schema object for this store. This should be JSON Schema format.
-			// 
+			//
 			// The *service* parameter
-			// 		This is the service object that is used to retrieve lazy data and save results 
+			// 		This is the service object that is used to retrieve lazy data and save results
 			// 		The function should be directly callable with a single parameter of an object id to be loaded
 			//
 			// The *idAttribute* parameter
 			//		Defaults to 'id'. The name of the attribute that holds an objects id.
-			//		This can be a preexisting id provided by the server.  
+			//		This can be a preexisting id provided by the server.
 			//		If an ID isn't already provided when an object
 			//		is fetched or added to the store, the autoIdentity system
 			//		will generate an id for it and add it to the index.
-			// 
+			//
 			// The *estimateCountFactor* parameter
 			// 		This parameter is used by the ServiceStore to estimate the total count. When
 			//		paging is indicated in a fetch and the response includes the full number of items
@@ -68,7 +67,7 @@ dojo.declare("dojox.data.ServiceStore",
 			//		does not support paging, and the response is the full set of items, where the
 			// 		total count is equal to the numer of items returned. If the server does support
 			//		paging, an estimateCountFactor of 2 is a good value for estimating the total count
-			//		It is also possible to override _processResults if the server can provide an exact 
+			//		It is also possible to override _processResults if the server can provide an exact
 			// 		total count.
 			//
 			// The *syncMode* parameter
@@ -77,7 +76,7 @@ dojo.declare("dojox.data.ServiceStore",
 			//		callbacks are unnecessary. This will only work with a synchronous capable service.
 			//
 			// description:
-			//		ServiceStore can do client side caching and result set updating if 
+			//		ServiceStore can do client side caching and result set updating if
 			// 		dojox.data.ClientFilter is loaded. Do this add:
 			//	|	dojo.require("dojox.data.ClientFilter")
 			//		prior to loading the ServiceStore (ClientFilter must be loaded before ServiceStore).
@@ -85,10 +84,10 @@ dojo.declare("dojox.data.ServiceStore",
 			//		client side and server side components by putting client side actions in
 			//		clientFilter property in fetch calls. For example you could override fetch:
 			//	|	fetch: function(args){
-  			//	|		// do the sorting and paging on the client side
-   			//	|		args.clientFilter = {start:args.start, count: args.count, sort: args.sort};
-   			//	|		// args.query will be passed to the service object for the server side handling
-   			//	|		return this.inherited(arguments);
+				//	|		// do the sorting and paging on the client side
+	 			//	|		args.clientFilter = {start:args.start, count: args.count, sort: args.sort};
+	 			//	|		// args.query will be passed to the service object for the server side handling
+	 			//	|		return this.inherited(arguments);
 			//	|	}
 			//		When extending this class, if you would like to create lazy objects, you can follow
 			//		the example from dojox.data.tests.stores.ServiceStore:
@@ -99,7 +98,7 @@ dojo.declare("dojox.data.ServiceStore",
 			// |			callback(this);
 			// |		}
 			// |	};
-			//setup a byId alias to the api call	
+			//setup a byId alias to the api call
 			this.byId=this.fetchItemByIdentity;
 			this._index = {};
 			// if the advanced json parser is enabled, we can pass through object updates as onSet events
@@ -116,7 +115,7 @@ dojo.declare("dojox.data.ServiceStore",
 		syncMode: false,
 		estimateCountFactor: 1,
 		getSchema: function(){
-			return this.schema; 
+			return this.schema;
 		},
 
 		loadLazyValues:true,
@@ -125,30 +124,31 @@ dojo.declare("dojox.data.ServiceStore",
 			// summary:
 			//	Gets the value of an item's 'property'
 			//
-			//	item: 
+			//	item:
 			//		The item to get the value from
-			//	property: 
-			//		property to look up value for	
-			//	defaultValue: 
+			//	property:
+			//		property to look up value for
+			//	defaultValue:
 			//		the default value
+
 			var value = item[property];
 			return value || // return the plain value since it was found;
-						(property in item ? // a truthy value was not found, see if we actually have it 
+						(property in item ? // a truthy value was not found, see if we actually have it
 							value : // we do, so we can return it
-							item._loadObject ? // property was not found, maybe because the item is not loaded, we will try to load it synchronously so we can get the property 
-								(dojox.rpc._sync = true) && arguments.callee.call(this,dojox.data.ServiceStore.prototype.loadItem({item:item}) || {}, property, defaultValue) : // load the item and run getValue again 
+							item._loadObject ? // property was not found, maybe because the item is not loaded, we will try to load it synchronously so we can get the property
+								(dojox.rpc._sync = true) && arguments.callee.call(this,dojox.data.ServiceStore.prototype.loadItem({item:item}) || {}, property, defaultValue) : // load the item and run getValue again
 								defaultValue);// not in item -> return default value
 		},
 		getValues: function(item, property){
 			// summary:
 			//		Gets the value of an item's 'property' and returns
-			//		it.  If this value is an array it is just returned,
+			//		it.	If this value is an array it is just returned,
 			//		if not, the value is added to an array and that is returned.
 			//
 			//	item: /* object */
 			//	property: /* string */
-			//		property to look up value for	
-	
+			//		property to look up value for
+
 			var val = this.getValue(item,property);
 			return val instanceof Array ? val : val === undefined ? [] : [val];
 		},
@@ -156,7 +156,7 @@ dojo.declare("dojox.data.ServiceStore",
 		getAttributes: function(item){
 			// summary:
 			//	Gets the available attributes of an item's 'property' and returns
-			//	it as an array. 
+			//	it as an array.
 			//
 			//	item: /* object */
 
@@ -175,7 +175,7 @@ dojo.declare("dojox.data.ServiceStore",
 			//
 			//	item: /* object */
 			//	attribute: /* string */
-			return attribute in item;		
+			return attribute in item;
 		},
 
 		containsValue: function(item, attribute, value){
@@ -191,20 +191,20 @@ dojo.declare("dojox.data.ServiceStore",
 
 		isItem: function(item){
 			// summary:
-			//		Checks to see if the argument is an item 
+			//		Checks to see if the argument is an item
 			//
 			//	item: /* object */
 			//	attribute: /* string */
-		
+
 			// we have no way of determining if it belongs, we just have object returned from
 			// 	service queries
-			return (typeof item == 'object') && item && !(item instanceof Date); 
+			return (typeof item == 'object') && item && !(item instanceof Date);
 		},
 
 		isItemLoaded: function(item){
 			// summary:
-			//		Checks to see if the item is loaded. 
-			// 
+			//		Checks to see if the item is loaded.
+			//
 			//		item: /* object */
 
 			return item && !item._loadObject;
@@ -214,7 +214,7 @@ dojo.declare("dojox.data.ServiceStore",
 			// summary:
 			// 		Loads an item and calls the callback handler. Note, that this will call the callback
 			// 		handler even if the item is loaded. Consequently, you can use loadItem to ensure
-			// 		that an item is loaded is situations when the item may or may not be loaded yet. 
+			// 		that an item is loaded is situations when the item may or may not be loaded yet.
 			// 		If you access a value directly through property access, you can use this to load
 			// 		a lazy value as well (doesn't need to be an item).
 			//
@@ -225,7 +225,7 @@ dojo.declare("dojox.data.ServiceStore",
 			// 				// do something with the item
 			//			}
 			//		});
-			
+
 			var item;
 			if(args.item._loadObject){
 				args.item._loadObject(function(result){
@@ -233,26 +233,26 @@ dojo.declare("dojox.data.ServiceStore",
 					delete item._loadObject;
 					var func = result instanceof Error ? args.onError : args.onItem;
 					if(func){
-						func.call(args.scope, result);				
+						func.call(args.scope, result);
 					}
 				});
 			}else if(args.onItem){
-				// even if it is already loaded, we will use call the callback, this makes it easier to 
-				// use when it is not known if the item is loaded (you can always safely call loadItem). 
+				// even if it is already loaded, we will use call the callback, this makes it easier to
+				// use when it is not known if the item is loaded (you can always safely call loadItem).
 				args.onItem.call(args.scope, args.item);
 			}
 			return item;
 		},
 		_currentId : 0,
 		_processResults : function(results, deferred){
-			// this should return an object with the items as an array and the total count of 
+			// this should return an object with the items as an array and the total count of
 			// items (maybe more than currently in the result set).
 			// for example:
-			//	| {totalCount:10,[{id:1},{id:2}]}
-			
+			//	| {totalCount:10, items: [{id:1},{id:2}]}
+
 			// index the results, assigning ids as necessary
 
-			if (results && typeof results == 'object'){
+			if(results && typeof results == 'object'){
 				var id = results.__id;
 				if(!id){// if it hasn't been assigned yet
 					if(this.idAttribute){
@@ -273,7 +273,7 @@ dojo.declare("dojox.data.ServiceStore",
 						this._index[id] = results;
 					}
 				}
-				for (var i in results){
+				for(var i in results){
 					results[i] = this._processResults(results[i], deferred).items;
 				}
 				var count = results.length;
@@ -287,26 +287,26 @@ dojo.declare("dojox.data.ServiceStore",
 			// summary:
 			//		See dojo.data.api.Read.fetch
 			//
-			// The *queryOptions.cache* parameter 
-			//		If true, indicates that the query result should be cached for future use. This is only available 
-			// 		if dojox.data.ClientFilter has been loaded before the ServiceStore 
+			// The *queryOptions.cache* parameter
+			//		If true, indicates that the query result should be cached for future use. This is only available
+			// 		if dojox.data.ClientFilter has been loaded before the ServiceStore
 			//
 			//	The *syncMode* parameter
 			//		Indicates that the call should be fetch synchronously if possible (this is not always possible)
 			//
 			// The *clientFetch* parameter
 			//		This is a fetch keyword argument for explicitly doing client side filtering, querying, and paging
-			
+
 			args = args || {};
 
 			if("syncMode" in args ? args.syncMode : this.syncMode){
-				dojox.rpc._sync = true;	
+				dojox.rpc._sync = true;
 			}
 			var self = this;
-			
+
 			var scope = args.scope || self;
 			var defResult = this.cachingFetch ? this.cachingFetch(args) : this._doQuery(args);
-			defResult.request = args; 
+			defResult.request = args;
 			defResult.addCallback(function(results){
 				if(args.clientFetch){
 					results = self.clientSideFetch({query:args.clientFetch,sort:args.sort,start:args.start,count:args.count},results);
@@ -317,19 +317,21 @@ dojo.declare("dojox.data.ServiceStore",
 					args.onBegin.call(scope, resultSet.totalCount, args);
 				}
 				if(args.onItem){
-					for(var i=0; i<results.length;i++){	
+					for(var i=0; i<results.length;i++){
 						args.onItem.call(scope, results[i], args);
 					}
-				}					
+				}
 				if(args.onComplete){
 					args.onComplete.call(scope, args.onItem ? null : results, args);
 				}
 				return results;
 			});
-			defResult.addErrback(args.onError && dojo.hitch(scope, args.onError));
+			defResult.addErrback(args.onError && function(err){
+				return args.onError.call(scope, err, args);
+			});
 			args.abort = function(){
 				// abort the request
-				defResult.ioArgs.xhr.abort();
+				defResult.cancel();
 			};
 			args.store = this;
 			return args;
@@ -342,9 +344,9 @@ dojo.declare("dojox.data.ServiceStore",
 			// summary:
 			// 		return the store feature set
 
-			return { 
+			return {
 				"dojo.data.api.Read": true,
-				"dojo.data.api.Identity": true, 
+				"dojo.data.api.Identity": true,
 				"dojo.data.api.Schema": this.schema
 			};
 		},
@@ -352,7 +354,7 @@ dojo.declare("dojox.data.ServiceStore",
 		getLabel: function(item){
 			// summary
 			//		returns the label for an item. Just gets the "label" attribute.
-			//	
+			//
 			return this.getValue(item,this.labelAttribute);
 		},
 
@@ -364,30 +366,30 @@ dojo.declare("dojox.data.ServiceStore",
 
 		//Identity API Support
 
-		
+
 		getIdentity: function(item){
 			return item.__id;
 		},
 
 		getIdentityAttributes: function(item){
 			// summary:
-			//		returns the attributes which are used to make up the 
-			//		identity of an item.  Basically returns this.idAttribute
+			//		returns the attributes which are used to make up the
+			//		identity of an item.	Basically returns this.idAttribute
 
 			return [this.idAttribute];
 		},
 
 		fetchItemByIdentity: function(args){
-			// summary: 
+			// summary:
 			//		fetch an item by its identity, by looking in our index of what we have loaded
 			var item = this._index[(args._prefix || '') + args.identity];
-			if(item && args.onItem){
+			if(item){
 				// the item exists in the index
 				if(item._loadObject){
-					// we have a handle on the item, but it isn't loaded yet, so we need to load it 
+					// we have a handle on the item, but it isn't loaded yet, so we need to load it
 					args.item = item;
-					this.loadItem(args);
-				}else{
+					return this.loadItem(args);
+				}else if(args.onItem){
 					// it's already loaded, so we can immediately callback
 					args.onItem.call(args.scope, item);
 				}
@@ -402,7 +404,7 @@ dojo.declare("dojox.data.ServiceStore",
 			}
 			return item;
 		}
-	
+
 	}
 );
 
@@ -453,8 +455,8 @@ dojo.date.stamp.fromISOString = function(/*String*/formattedString, /*Number?*/d
 			/^(?:(\d{4})(?:-(\d{2})(?:-(\d{2}))?)?)?(?:T(\d{2}):(\d{2})(?::(\d{2})(.\d+)?)?((?:[+-](\d{2}):(\d{2}))|Z)?)?$/;
 	}
 
-	var match = dojo.date.stamp._isoRegExp.exec(formattedString);
-	var result = null;
+	var match = dojo.date.stamp._isoRegExp.exec(formattedString),
+		result = null;
 
 	if(match){
 		match.shift();
@@ -472,11 +474,13 @@ dojo.date.stamp.fromISOString = function(/*String*/formattedString, /*Number?*/d
 				}
 			});
 		}
-		result = new Date(match[0]||1970, match[1]||0, match[2]||1, match[3]||0, match[4]||0, match[5]||0, match[6]||0);
-//		result.setFullYear(match[0]||1970); // for year < 100
+		result = new Date(match[0]||1970, match[1]||0, match[2]||1, match[3]||0, match[4]||0, match[5]||0, match[6]||0); //TODO: UTC defaults
+		if(match[0] < 100){
+			result.setFullYear(match[0] || 1970);
+		}
 
-		var offset = 0;
-		var zoneSign = match[7] && match[7].charAt(0);
+		var offset = 0,
+			zoneSign = match[7] && match[7].charAt(0);
 		if(zoneSign != 'Z'){
 			offset = ((match[8] || 0) * 60) + (Number(match[9]) || 0);
 			if(zoneSign != '-'){ offset *= -1; }
@@ -521,9 +525,9 @@ dojo.date.stamp.toISOString = function(/*Date*/dateObject, /*dojo.date.stamp.__O
 
 	var _ = function(n){ return (n < 10) ? "0" + n : n; };
 	options = options || {};
-	var formattedDate = [];
-	var getter = options.zulu ? "getUTC" : "get";
-	var date = "";
+	var formattedDate = [],
+		getter = options.zulu ? "getUTC" : "get",
+		date = "";
 	if(options.selector != "time"){
 		var year = dateObject[getter+"FullYear"]();
 		date = ["0000".substr((year+"").length)+year, _(dateObject[getter+"Month"]()+1), _(dateObject[getter+"Date"]())].join('-');
@@ -602,6 +606,7 @@ dojox.json.ref = {
 		args = args || {};
 		var idAttribute = args.idAttribute || 'id';
 		var refAttribute = this.refAttribute;
+		var idAsRef = args.idAsRef;
 		var prefix = args.idPrefix || ''; 
 		var assignAbsoluteIds = args.assignAbsoluteIds;
 		var index = args.index || {}; // create an index if one doesn't exist
@@ -665,7 +670,7 @@ dojox.json.ref = {
 				if(it.hasOwnProperty(i)){
 					val=it[i];
 					if((typeof val =='object') && val && !(val instanceof Date) && i != '__parent'){
-						ref=val[refAttribute];
+						ref=val[refAttribute] || (idAsRef && val[idAttribute]);
 						if(!ref || !val.__parent){
 							val.__parent = it;
 						}
@@ -957,10 +962,10 @@ dojo.provide("dojox.rpc.Rest");
 
 	function index(deferred, service, range, id){
 		deferred.addCallback(function(result){
-			if(range){
-				// try to record the total number of items from the range header
-				range = deferred.ioArgs.xhr && deferred.ioArgs.xhr.getResponseHeader("Content-Range");
-				deferred.fullLength = range && (range=range.match(/\/(.*)/)) && parseInt(range[1]);
+			if(deferred.ioArgs.xhr && range){
+					// try to record the total number of items from the range header
+					range = deferred.ioArgs.xhr.getResponseHeader("Content-Range");
+					deferred.fullLength = range && (range=range.match(/\/(.*)/)) && parseInt(range[1]);
 			}
 			return result;
 		});
@@ -988,13 +993,17 @@ dojo.provide("dojox.rpc.Rest");
 		// the default XHR args creator:
 		service._getRequest = getRequest || function(id, args){
 			if(dojo.isObject(id)){
-				var sort = args.sort && args.sort[0];
-				if(sort && sort.attribute){
-					id.sort = (sort.descending ? '-' : '') + sort.attribute; 
-				}
 				id = dojo.objectToQuery(id);
 				id = id ? "?" + id: "";
-			}		
+			}
+			if(args && args.sort && !args.queryStr){
+				id += (id ? "&" : "?") + "sort("
+				for(var i = 0; i<args.sort.length; i++){
+					var sort = args.sort[i];
+					id += (i > 0 ? "," : "") + (sort.descending ? '-' : '+') + encodeURIComponent(sort.attribute); 
+				}
+				id += ")";
+			}
 			var request = {
 				url: path + (id == null ? "" : id),
 				handleAs: isJson ? 'json' : 'text', 
@@ -1060,7 +1069,11 @@ dojo.provide("dojox.rpc.JsonRest");
 		if(timeStamp && Rest._timeStamps){
 			Rest._timeStamps[defaultId] = timeStamp;
 		}
-		return value && dojox.json.ref.resolveJson(value, {
+		var hrefProperty = service._schema && service._schema.hrefProperty;
+		if(hrefProperty){
+			dojox.json.ref.refAttribute = hrefProperty;
+		}
+		value = value && dojox.json.ref.resolveJson(value, {
 			defaultId: defaultId, 
 			index: Rest._index,
 			timeStamps: timeStamp && Rest._timeStamps,
@@ -1069,9 +1082,11 @@ dojo.provide("dojox.rpc.JsonRest");
 			idAttribute: jr.getIdAttribute(service),
 			schemas: jr.schemas,
 			loader:	jr._loader,
+			idAsRef: service.idAsRef, 
 			assignAbsoluteIds: true
 		});
-		
+		dojox.json.ref.refAttribute  = "$ref";
+		return value;
 	}
 	jr = dojox.rpc.JsonRest={
 		serviceClass: dojox.rpc.Rest,
@@ -1103,13 +1118,44 @@ dojo.provide("dojox.rpc.JsonRest");
 							if(!(object.__id in alreadyRecorded)){// if it has already been saved, we don't want to repeat it
 								// record that we are saving
 								alreadyRecorded[object.__id] = object;
-								actions.push({method:"put",target:object,content:object});
+								if(kwArgs.incrementalUpdates 
+									&& !pathParts){ // I haven't figured out how we would do incremental updates on sub-objects yet
+									// make an incremental update using a POST
+									var incremental = (typeof kwArgs.incrementalUpdates == 'function' ?
+										kwArgs.incrementalUpdates : function(){
+											incremental = {};
+											for(var j in object){
+												if(object.hasOwnProperty(j)){
+													if(object[j] !== old[j]){
+														incremental[j] = object[j];
+													}
+												}else if(old.hasOwnProperty(j)){
+													// we can't use incremental updates to remove properties
+													return null;
+												}
+											}
+											return incremental;
+										})(object, old);
+								}
+								
+								if(incremental){
+									actions.push({method:"post",target:object, content: incremental});
+								}
+								else{
+									actions.push({method:"put",target:object,content:object});
+								}
 							}
 						}else{
 							// new object
-							
-							actions.push({method:"post",target:{__id:jr.getServiceAndId(object.__id).service.servicePath},
-													content:object});
+							var service = jr.getServiceAndId(object.__id).service;
+							var idAttribute = jr.getIdAttribute(service);
+							if((idAttribute in object) && !kwArgs.alwaysPostNewItems){
+								// if the id attribute is specified, then we should know the location
+								actions.push({method:"put",target:object, content:object});
+							}else{
+								actions.push({method:"post",target:{__id:service.servicePath},
+														content:object});
+							}
 						}
 					}else if(old){
 						// deleted object
@@ -1120,11 +1166,16 @@ dojo.provide("dojox.rpc.JsonRest");
 				}
 			}
 			dojo.connect(kwArgs,"onError",function(){
-				var postCommitDirtyObjects = dirtyObjects;
-				dirtyObjects = savingObjects;
-				var numDirty = 0; // make sure this does't do anything if it is called again
-				jr.revert(); // revert if there was an error
-				dirtyObjects = postCommitDirtyObjects;
+				if(kwArgs.revertOnError !== false){
+					var postCommitDirtyObjects = dirtyObjects;
+					dirtyObjects = savingObjects;
+					var numDirty = 0; // make sure this does't do anything if it is called again
+					jr.revert(); // revert if there was an error
+					dirtyObjects = postCommitDirtyObjects;
+				}
+				else{
+					dirtyObjects = dirtyObject.concat(savingObjects); 
+				}
 			});
 			jr.sendToServer(actions, kwArgs);
 			return actions;
@@ -1186,7 +1237,7 @@ dojo.provide("dojox.rpc.JsonRest");
 						}catch(e){}
 						if(!(--left)){
 							if(kwArgs.onComplete){
-								kwArgs.onComplete.call(kwArgs.scope);
+								kwArgs.onComplete.call(kwArgs.scope, actions);
 							}
 						}
 						return value;
@@ -1215,20 +1266,38 @@ dojo.provide("dojox.rpc.JsonRest");
 				var dirty = dirtyObjects[i];
 				var object = dirty.object;
 				var old = dirty.old;
+				var store = dojox.data._getStoreForItem(object || old);
+				
 				if(!(service && (object || old) && 
 					(object || old).__id.indexOf(service.servicePath))){
 					// if we are in the specified store or if this is a global revert
 					if(object && old){
 						// changed
 						for(var j in old){
-							if(old.hasOwnProperty(j)){
+							if(old.hasOwnProperty(j) && object[j] !== old[j]){
+								if(store){
+									store.onSet(object, j, object[j], old[j]);
+								}
 								object[j] = old[j];
 							}
 						}
 						for(j in object){
 							if(!old.hasOwnProperty(j)){
+								if(store){
+									store.onSet(object, j, object[j]);
+								}
 								delete object[j];
 							}
+						}
+					}else if(!old){
+						// was an addition, remove it
+						if(store){
+							store.onDelete(object);
+						}
+					}else{
+						// was a deletion, we will add it back
+						if(store){
+							store.onNew(old);
 						}
 					}
 					delete (object || old).__isDirty;
@@ -1343,7 +1412,7 @@ dojo.provide("dojox.rpc.JsonRest");
 			if(schema){
 				if(!(idAttr = schema._idAttr)){
 					for(var i in schema.properties){
-						if(schema.properties[i].identity){
+						if(schema.properties[i].identity || (schema.properties[i].link == "self")){
 							schema._idAttr = idAttr = i;
 						}
 					}
@@ -1397,11 +1466,12 @@ dojo.provide("dojox.rpc.JsonRest");
 		},
 		query: function(service, id, args){
 			var deferred = service(id, args);
+			
 			deferred.addCallback(function(result){
 				if(result.nodeType && result.cloneNode){
 					// return immediately if it is an XML document
 					return result;
-				}
+				}				
 				return resolveJson(service, deferred, result, typeof id != 'string' || (args && (args.start || args.count)) ? undefined: id);
 			});
 			return deferred;			
@@ -1457,10 +1527,10 @@ dojo.declare("dojox.data.JsonRestStore",
 		constructor: function(options){
 			//summary:
 			//		JsonRestStore is a Dojo Data store interface to JSON HTTP/REST web
-			//		storage services that support read and write through GET, PUT, POST, and DELETE. 
-			// options: 
+			//		storage services that support read and write through GET, PUT, POST, and DELETE.
+			// options:
 			// 		Keyword arguments
-			//	
+			//
 			// The *schema* parameter
 			//		This is a schema object for this store. This should be JSON Schema format.
 			//
@@ -1472,8 +1542,8 @@ dojo.declare("dojox.data.JsonRestStore",
 			// 			post(id,value) - posts (appends) the value at the given id
 			// 			delete(id) - deletes the value corresponding to the given id
 			//		Note that it is critical that the service parses responses as JSON.
-			//		If you are using dojox.rpc.Service, the easiest way to make sure this 
-			// 		happens is to make the responses have a content type of 
+			//		If you are using dojox.rpc.Service, the easiest way to make sure this
+			// 		happens is to make the responses have a content type of
 			// 		application/json. If you are creating your own service, make sure you
 			//		use handleAs: "json" with your XHR requests.
 			//
@@ -1499,22 +1569,22 @@ dojo.declare("dojox.data.JsonRestStore",
 			// 		When using a Rest store on a public network, it is important to implement proper security measures to
 			//		control access to resources.
 			//		On the server side implementing a REST interface means providing GET, PUT, POST, and DELETE handlers.
-			//		GET - Retrieve an object or array/result set, this can be by id (like /table/1) or with a 
-			// 			query (like /table/?name=foo). 
-			//		PUT - This should modify a object, the URL will correspond to the id (like /table/1), and the body will 
+			//		GET - Retrieve an object or array/result set, this can be by id (like /table/1) or with a
+			// 			query (like /table/?name=foo).
+			//		PUT - This should modify a object, the URL will correspond to the id (like /table/1), and the body will
 			// 			provide the modified object
 			//		POST - This should create a new object. The URL will correspond to the target store (like /table/)
 			// 			and the body should be the properties of the new object. The server's response should include a
 			// 			Location header that indicates the id of the newly created object. This id will be used for subsequent
 			// 			PUT and DELETE requests. JsonRestStore also includes a Content-Location header that indicates
-			//			the temporary randomly generated id used by client, and this location is used for subsequent 
-			// 			PUT/DELETEs if no Location header is provided by the server or if a modification is sent prior 
-			// 			to receiving a response from the server. 
+			//			the temporary randomly generated id used by client, and this location is used for subsequent
+			// 			PUT/DELETEs if no Location header is provided by the server or if a modification is sent prior
+			// 			to receiving a response from the server.
 			// 		DELETE - This should delete an object by id.
 			// 		These articles include more detailed information on using the JsonRestStore:
 			//		http://www.sitepen.com/blog/2008/06/13/restful-json-dojo-data/
 			//		http://blog.medryx.org/2008/07/24/jsonreststore-overview/
-			//		
+			//
 			//	example:
 			// 		A JsonRestStore takes a REST service or a URL and uses it the remote communication for a
 			// 		read/write dojo.data implementation. A JsonRestStore can be created with a simple URL like:
@@ -1545,7 +1615,7 @@ dojo.declare("dojox.data.JsonRestStore",
 			// 		And this object has accessed using the dojo.data API:
 			//	|	var obj = jsonStore.getValue(myObject,"lazyLoadedObject");
 			//		The object would automatically be requested from the server (with an object id of "obj2").
-			//	
+			//
 
 			dojo.connect(dojox.rpc.Rest._index,"onUpdate",this,function(obj,attrName,oldValue,newValue){
 				var prefix = this.service.servicePath;
@@ -1556,20 +1626,21 @@ dojo.declare("dojox.data.JsonRestStore",
 				}
 			});
 			this.idAttribute = this.idAttribute || 'id';// no options about it, we have to have identity
-			
-			if(typeof this.target == 'string'){
-				this.target = this.target.match(/\/$/) || this.allowNoTrailingSlash ? this.target : (this.target + '/');
+
+			if(typeof options.target == 'string'){
+				options.target = options.target.match(/\/$/) || this.allowNoTrailingSlash ? options.target : (options.target + '/');
 				if(!this.service){
-					this.service = dojox.rpc.JsonRest.services[this.target] || 
-							dojox.rpc.Rest(this.target, true); 
+					this.service = dojox.rpc.JsonRest.services[options.target] ||
+							dojox.rpc.Rest(options.target, true);
 					// create a default Rest service
 				}
 			}
-			
-			dojox.rpc.JsonRest.registerService(this.service, this.target, this.schema);
+
+			dojox.rpc.JsonRest.registerService(this.service, options.target, this.schema);
 			this.schema = this.service._schema = this.schema || this.service._schema || {};
-			// wrap the service with so it goes through JsonRest manager 
+			// wrap the service with so it goes through JsonRest manager
 			this.service._store = this;
+			this.service.idAsRef = this.idAsRef;
 			this.schema._idAttr = this.idAttribute;
 			var constructor = dojox.rpc.JsonRest.getConstructor(this.service);
 			var self = this;
@@ -1580,13 +1651,20 @@ dojo.declare("dojox.data.JsonRestStore",
 			this._constructor.prototype = constructor.prototype;
 			this._index = dojox.rpc.Rest._index;
 		},
+		
+		// summary:
+		//		Will load any schemas referenced content-type header or in Link headers
+		loadReferencedSchema: true,
+		// summary:
+		//		Treat objects in queries as partially loaded objects
+		idAsRef: false,
 		referenceIntegrity: true,
 		target:"",
 		// summary:
 		// 		Allow no trailing slash on target paths. This is generally discouraged since
 		// 		it creates prevents simple scalar values from being used a relative URLs.
-		// 		Disabled by default.  
-		allowNoTrailingSlash: false,		
+		// 		Disabled by default.
+		allowNoTrailingSlash: false,
 		//Write API Support
 		newItem: function(data, parentInfo){
 			// summary:
@@ -1611,7 +1689,7 @@ dojo.declare("dojox.data.JsonRestStore",
 			//		deletes item and any references to that item from the store.
 			//
 			//	item:
-			//  	item to delete
+			//		item to delete
 			//
 
 			//	If the desire is to delete only one reference, unsetAttribute or
@@ -1629,26 +1707,28 @@ dojo.declare("dojox.data.JsonRestStore",
 					// mark it checked so we don't run into circular loops when encountering cycles
 					parent.__checked = 1;
 					for(var i in parent){
-						var value = parent[i];
-						if(value == item){
-							if(parent != index){ // make sure we are just operating on real objects 
-								if(parent instanceof Array){
-									// mark it as needing to be spliced, don't do it now or it will mess up the index into the array
-									(toSplice = toSplice || []).push(i);	
-								}else{
-									// property, just delete it.
-									(dojox.data._getStoreForItem(parent) || store).unsetAttribute(parent, i);
+						if(i.substring(0,2) != "__"){
+							var value = parent[i];
+							if(value == item){
+								if(parent != index){ // make sure we are just operating on real objects
+									if(parent instanceof Array){
+										// mark it as needing to be spliced, don't do it now or it will mess up the index into the array
+										(toSplice = toSplice || []).push(i);
+									}else{
+										// property, just delete it.
+										(dojox.data._getStoreForItem(parent) || store).unsetAttribute(parent, i);
+									}
 								}
-							}
-						}else{
-							if((typeof value == 'object') && value){
-								if(!value.__checked){
-									// recursively search
-									fixReferences(value);
-								}
-								if(typeof value.__checked == 'object' && parent != index){
-									// if it is a modified array, we will replace it
-									(dojox.data._getStoreForItem(parent) || store).setValue(parent, i, value.__checked);
+							}else{
+								if((typeof value == 'object') && value){
+									if(!value.__checked){
+										// recursively search
+										fixReferences(value);
+									}
+									if(typeof value.__checked == 'object' && parent != index){
+										// if it is a modified array, we will replace it
+										(dojox.data._getStoreForItem(parent) || store).setValue(parent, i, value.__checked);
+									}
 								}
 							}
 						}
@@ -1672,14 +1752,14 @@ dojo.declare("dojox.data.JsonRestStore",
 					// remove the checked marker
 					delete checked[i++].__checked;
 				}
-			}			
+			}
 			dojox.rpc.JsonRest.deleteObject(item);
 
 			store.onDelete(item);
 		},
 		changing: function(item,_deleting){
 			// summary:
-			//		adds an item to the list of dirty items.  This item
+			//		adds an item to the list of dirty items.	This item
 			//		contains a reference to the item itself as well as a
 			//		cloned and trimmed version of old item for use with
 			//		revert.
@@ -1732,16 +1812,38 @@ dojo.declare("dojox.data.JsonRestStore",
 			//		Saves the dirty data using REST Ajax methods. See dojo.data.api.Write for API.
 			//
 			//	kwArgs.global:
-			//		This will cause the save to commit the dirty data for all 
+			//		This will cause the save to commit the dirty data for all
 			// 		JsonRestStores as a single transaction.
+			//
+			//	kwArgs.revertOnError
+			//		This will cause the changes to be reverted if there is an
+			//		error on the save. By default a revert is executed unless
+			//		a value of false is provide for this parameter.
+			//
+			//	kwArgs.incrementalUpdates
+			//		For items that have been updated, if this is enabled, the server will be sent a POST request
+			// 		with a JSON object containing the changed properties. By default this is
+			// 		not enabled, and a PUT is used to deliver an update, and will include a full
+			// 		serialization of all the properties of the item/object.
+			//		If this is true, the POST request body will consist of a JSON object with
+			// 		only the changed properties. The incrementalUpdates parameter may also
+			//		be a function, in which case it will be called with the updated and previous objects
+			//		and an object update representation can be returned.
+			//
+			//	kwArgs.alwaysPostNewItems
+			//		If this is true, new items will always be sent with a POST request. By default
+			//		this is not enabled, and the JsonRestStore will send a POST request if
+			//		the item does not include its identifier (expecting server assigned location/
+			//		identifier), and will send a PUT request if the item does include its identifier
+			//		(the PUT will be sent to the URI corresponding to the provided identifier).
 
 			if(!(kwArgs && kwArgs.global)){
 				(kwArgs = kwArgs || {}).service = this.service;
 			}
 			if("syncMode" in kwArgs ? kwArgs.syncMode : this.syncMode){
-				dojox.rpc._sync = true;	
+				dojox.rpc._sync = true;
 			}
-			
+
 			var actions = dojox.rpc.JsonRest.commit(kwArgs);
 			this.serverVersion = this._updates && this._updates.length;
 			return actions;
@@ -1752,27 +1854,8 @@ dojo.declare("dojox.data.JsonRestStore",
 			//		returns any modified data to its original state prior to a save();
 			//
 			//	kwArgs.global:
-			//		This will cause the revert to undo all the changes for all 
+			//		This will cause the revert to undo all the changes for all
 			// 		JsonRestStores in a single operation.
-			var dirtyObjects = dojox.rpc.JsonRest.getDirtyObjects().concat([]);
-			while (dirtyObjects.length>0){
-				var d = dirtyObjects.pop();
-				var store = dojox.data._getStoreForItem(d.object || d.old);
-				if(!d.object){
-					// was a deletion, we will add it back
-					store.onNew(d.old);
-				}else if(!d.old){
-					// was an addition, remove it
-					store.onDelete(d.object);
-				}else{
-					// find all the properties that were modified
-					for(var i in d.object){
-						if(d.object[i] != d.old[i]){
-							store.onSet(d.object, i, d.object[i], d.old[i]);
-						}
-					}
-				}
-			}
 			dojox.rpc.JsonRest.revert(kwArgs && kwArgs.global && this.service);
 		},
 
@@ -1795,7 +1878,33 @@ dojo.declare("dojox.data.JsonRestStore",
 		},
 		_doQuery: function(args){
 			var query= typeof args.queryStr == 'string' ? args.queryStr : args.query;
-			return dojox.rpc.JsonRest.query(this.service,query, args);
+			var deferred = dojox.rpc.JsonRest.query(this.service,query, args);
+			var self = this;
+			if(this.loadReferencedSchema){
+				deferred.addCallback(function(result){
+					var contentType = deferred.ioArgs && deferred.ioArgs.xhr && deferred.ioArgs.xhr.getResponseHeader("Content-Type");
+					var schemaRef = contentType && contentType.match(/definedby\s*=\s*([^;]*)/);
+					if(contentType && !schemaRef){
+						schemaRef = deferred.ioArgs.xhr.getResponseHeader("Link");
+						schemaRef = schemaRef && schemaRef.match(/<([^>]*)>;\s*rel="?definedby"?/);
+					}
+					schemaRef = schemaRef && schemaRef[1];
+					if(schemaRef){
+						var serviceAndId = dojox.rpc.JsonRest.getServiceAndId((self.target + schemaRef).replace(/^(.*\/)?(\w+:\/\/)|[^\/\.]+\/\.\.\/|^.*\/(\/)/,"$2$3"));
+						var schemaDeferred = dojox.rpc.JsonRest.byId(serviceAndId.service, serviceAndId.id);
+						schemaDeferred.addCallbacks(function(newSchema){
+							dojo.mixin(self.schema, newSchema);
+							return result;
+						}, function(error){
+							console.error(error); // log it, but don't let it cause the main request to fail
+							return result;
+						});
+						return schemaDeferred;
+					}
+					return undefined;//don't change anything, and deal with the stupid post-commit lint complaints
+				});
+			}
+			return deferred;
 		},
 		_processResults: function(results, deferred){
 			// index the results
@@ -1815,8 +1924,8 @@ dojo.declare("dojox.data.JsonRestStore",
 				return id;
 			}
 			var prefix = this.service.servicePath.replace(/[^\/]*$/,'');
-			// support for relative or absolute referencing with ids 
-			return id.substring(0,prefix.length) != prefix ?  id : id.substring(prefix.length); // String
+			// support for relative or absolute referencing with ids
+			return id.substring(0,prefix.length) != prefix ?	id : id.substring(prefix.length); // String
 		},
 		fetchItemByIdentity: function(args){
 			var id = args.identity;
@@ -1825,7 +1934,7 @@ dojo.declare("dojox.data.JsonRestStore",
 			if(id.toString().match(/^(\w*:)?\//)){
 				var serviceAndId = dojox.rpc.JsonRest.getServiceAndId(id);
 				store = serviceAndId.service._store;
-				args.identity = serviceAndId.id; 
+				args.identity = serviceAndId.id;
 			}
 			args._prefix = store.service.servicePath.replace(/[^\/]*$/,'');
 			return store.inherited(arguments);
@@ -1844,13 +1953,13 @@ dojo.declare("dojox.data.JsonRestStore",
 			features["dojo.data.api.Notification"] = true;
 			return features;
 		},
-		
+
 		getParent: function(item){
 			//	summary:
 			//		Returns the parent item (or query) for the given item
 			//	item:
 			//		The item to find the parent of
-			
+
 			return item && item.__parent;
 		}
 
@@ -1864,17 +1973,17 @@ dojox.data.JsonRestStore.getStore = function(options, Class){
 	//	options:
 	//		See the JsonRestStore constructor
 	//	Class:
-	//		Constructor to use (for creating stores from JsonRestStore subclasses). 
+	//		Constructor to use (for creating stores from JsonRestStore subclasses).
 	// 		This is optional and defaults to JsonRestStore.
 	if(typeof options.target == 'string'){
-		options.target = options.target.match(/\/$/) || options.allowNoTrailingSlash ? 
+		options.target = options.target.match(/\/$/) || options.allowNoTrailingSlash ?
 				options.target : (options.target + '/');
 		var store = (dojox.rpc.JsonRest.services[options.target] || {})._store;
 		if(store){
 			return store;
 		}
 	}
-	return new (Class||dojox.data.JsonRestStore)(options);
+	return new (Class || dojox.data.JsonRestStore)(options);
 };
 dojox.data._getStoreForItem = function(item){
 	if(item.__id){
@@ -1919,7 +2028,7 @@ dojo.declare("dojox.data.util.JsonQuery", null, {
 				}else if(value!="*"){ // full wildcards can be ommitted
 					jsonQuery += (first ? "" : "&") + newPath +
 						((!isDataItem && typeof value == "string" && args.queryOptions && args.queryOptions.ignoreCase) ? "~" : "=") +
-						 dojo.toJson(value);
+						 (self.simplifiedQuery ? encodeURIComponent(value) : dojo.toJson(value));
 					first = false;
 				}
 			}			
@@ -2155,6 +2264,7 @@ dojo.provide("dojox.io.xhrPlugins");
 		//	summary:
 		// 		overrides the default xhr handler to implement a registry of
 		// 		xhr handlers
+		var plainXhr = getPlainXhr();
 		if(!registry){
 			registry = new dojo.AdapterRegistry();
 			// replaces the default xhr() method. Can we just use connect() instead?
@@ -2172,7 +2282,7 @@ dojo.provide("dojox.io.xhrPlugins");
 					var root = window.location.href.match(/^.*?\/\/.*?\//)[0];
 					return args.url.substring(0, root.length) == root; // or check to see if we have the same path
 				},
-				getPlainXhr()
+				plainXhr
 			);
 		}
 		return registry.register.apply(registry, arguments);
@@ -2614,6 +2724,9 @@ dojo.declare("dojo.io.iframe.__ioArgs", dojo.__IoArgs, {
 =====*/
 
 dojo.io.iframe = {
+	// summary: 
+	//		Sends an Ajax I/O call using and Iframe (for instance, to upload files)
+	
 	create: function(/*String*/fname, /*String*/onloadstr, /*String?*/uri){
 		//	summary:
 		//		Creates a hidden iframe in the page. Used mostly for IO
@@ -2715,20 +2828,21 @@ dojo.io.iframe = {
 			(
 				(
 					(iframeNode.name) && (iframeNode.document) && 
-					(document.getElementsByTagName("iframe")[iframeNode.name].contentWindow) &&
-					(document.getElementsByTagName("iframe")[iframeNode.name].contentWindow.document)
+					(dojo.doc.getElementsByTagName("iframe")[iframeNode.name].contentWindow) &&
+					(dojo.doc.getElementsByTagName("iframe")[iframeNode.name].contentWindow.document)
 				)
 			) ||  // IE
 			(
-				(iframeNode.name)&&(document.frames[iframeNode.name])&&
-				(document.frames[iframeNode.name].document)
+				(iframeNode.name)&&(dojo.doc.frames[iframeNode.name])&&
+				(dojo.doc.frames[iframeNode.name].document)
 			) || null;
 		return doc;
 	},
 
 	send: function(/*dojo.io.iframe.__ioArgs*/args){
-		//summary: function that sends the request to the server.
-		//This transport can only process one send() request at a time, so if send() is called
+		//summary: 
+		//		Function that sends the request to the server.
+		//		This transport can only process one send() request at a time, so if send() is called
 		//multiple times, it will queue up the calls and only process one at a time.
 		if(!this["_frame"]){
 			this._frame = this.create(this._iframeName, dojo._scopeName + ".io.iframe._iframeOnload();");
@@ -2836,7 +2950,17 @@ dojo.io.iframe = {
 		//summary: Internal method used to fire the next request in the bind queue.
 		try{
 			if((this._currentDfd)||(this._dfdQueue.length == 0)){ return; }
-			var dfd = this._currentDfd = this._dfdQueue.shift();
+			//Find next deferred, skip the canceled ones.
+			do{
+				var dfd = this._currentDfd = this._dfdQueue.shift();
+			} while(dfd && dfd.canceled && this._dfdQueue.length);
+
+			//If no more dfds, cancel.
+			if(!dfd || dfd.canceled){
+				this._currentDfd =  null;
+				return;
+			}
+
 			var ioArgs = dfd.ioArgs;
 			var args = ioArgs.args;
 

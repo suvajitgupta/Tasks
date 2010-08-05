@@ -4,8 +4,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.Cookie;
@@ -18,14 +21,15 @@ import org.mozilla.javascript.ScriptRuntime;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 import org.persvr.Persevere;
+import org.persvr.datasource.JavaScriptDBSource;
 import org.persvr.datasource.UserAssignableIdSource;
 import org.persvr.javascript.PersevereNativeFunction;
 import org.persvr.remote.Client;
 import org.persvr.remote.DataSerializer;
+import org.persvr.remote.EventStream;
 import org.persvr.remote.JsonReceiver;
 import org.persvr.remote.Client.IndividualRequest;
 import org.persvr.security.Capability;
-import org.persvr.security.SystemPermission;
 import org.persvr.security.UserSecurity;
 
 /**
@@ -219,6 +223,23 @@ public class PjsLibrary extends NativeObject {
 				return UserSecurity.currentUser();
 			}
 		},true,true);
+		set("loggedInUsers", new PersevereNativeFunction() {
+			@Override
+			public Object call(Context cx, Scriptable scope,
+					Scriptable thisObj, Object[] args) {
+				Boolean onlyConnected = args.length > 0 && Boolean.TRUE.equals(args[0]);
+				Set users = new HashSet();
+				for (Map.Entry<String, Client> entry : EventStream.streams.entrySet()){
+					Client client = entry.getValue();
+					if(!onlyConnected || client.isConnected()){
+						Object user = client.getAuthorizedUser();
+						if(user != null)
+							users.add(user);
+					}
+				}
+				return new PersistableArray(users.toArray());
+			}
+		},false,true);
 		set("putHandler", new PersevereNativeFunction() {
 			@Override
 			public Object call(Context cx, Scriptable scope,
@@ -393,6 +414,28 @@ public class PjsLibrary extends NativeObject {
 				} catch (ClassCastException e) {
 					throw ScriptRuntime.constructError("TypeError", "Must pass in a class and a number");
 				}
+				return null;
+			}
+		},false,true);
+		set("freezeDatabase", new PersevereNativeFunction() {
+			@Override
+			public Object call(Context cx, Scriptable scope,
+					Scriptable thisObj, Object[] args) {
+				if(!UserSecurity.hasPermission("freezeDatabase")){
+					throw ScriptRuntime.constructError("AccessError", "You do not have access to freeze the database");
+				}
+				JavaScriptDBSource.getDatabase().freeze();
+				return null;
+			}
+		},false,true);
+		set("unfreezeDatabase", new PersevereNativeFunction() {
+			@Override
+			public Object call(Context cx, Scriptable scope,
+					Scriptable thisObj, Object[] args) {
+				if(!UserSecurity.hasPermission("freezeDatabase")){
+					throw ScriptRuntime.constructError("AccessError", "You do not have access to freeze the database");
+				}
+				JavaScriptDBSource.getDatabase().unfreeze();
 				return null;
 			}
 		},false,true);

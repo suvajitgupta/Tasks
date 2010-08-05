@@ -135,7 +135,7 @@ public class RequestHelper extends JsonReceiver {
 			return FunctionUtils.createFunction(((JSONFunction)value).toString(),"new function");
 		}
 		if (value instanceof Map)
-			return convertIdIfNeeded(idFromJSPONObject((Map) value,id instanceof ObjectId ? (ObjectId) id : null));
+			return convertIdIfNeeded(idFromJSPONObject((Map) value,id instanceof ObjectId ? (ObjectId) id : null, true));
 		
 		 return convertJsonStringToObject(jsponString);
 	}
@@ -221,7 +221,7 @@ public class RequestHelper extends JsonReceiver {
 					throw new SecurityException(e);
 				}
 				catch (IndexOutOfBoundsException e) {
-					throw new RuntimeException("Authorization must be in the form Basic base64encoded(user:password)");
+					throw new SecurityException("Authorization must be in the form Basic base64encoded(user:password)");
 				}
 		}
 		UserSecurity.registerThisThread(user);

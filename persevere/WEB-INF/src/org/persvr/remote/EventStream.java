@@ -86,6 +86,9 @@ public abstract class EventStream implements PropertyChangeSetListener {
 			}
 		}
 	}
+	public boolean isConnected(){
+		return callback != null;
+	}
 	/**
 	 * Indicates an event is available on this stream
 	 * @return
@@ -183,12 +186,12 @@ public abstract class EventStream implements PropertyChangeSetListener {
 				}
 			}			
 		}
+		if(notificationQueue.size() > 100){
+			notificationQueue.clear();
+		}
 		// go through each resource now
 		for (Notification notification: updatedResources) {
 			notificationQueue.add(notification);
-			if(notificationQueue.size() > 100){
-				notificationQueue.clear();
-			}
 //			createResponse(entry.getKey(), notification.call);
 			notification.headers.put("__now__", new Date().getTime() + "");
 			/*if (!(response instanceof InnerResponse)) {

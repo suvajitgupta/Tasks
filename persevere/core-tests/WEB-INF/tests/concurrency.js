@@ -55,7 +55,7 @@ tests([
       // WORKAROUND this : threads.push( new Thread( function() {
       // would really like to be ablew to call join on it!
       // Create this thread - store the object for later join( )
-      var thread = java.lang.Thread( function () {
+      var thread = new Thread( function () {
           // try to get a unique number for each thread - this is tricky...
           var t = index++;
           commit();
@@ -85,7 +85,6 @@ tests([
        //WORKAROUND  this:    } ) );
       } );
       threads.push( thread );
-      thread.start();
     }
     
     // hope all the threads are done

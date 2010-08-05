@@ -152,8 +152,9 @@ public class Channels extends HttpServlet {
 
 	protected EventStream getEventStream(HttpServletRequest req) throws IOException {
 		Client stream;
-		String connectionId = req.getRemoteAddr() + PersevereFilter.getParameter(req,"Create-Client-Id");
-		if (connectionId == null) {
+		String createConnectionId = PersevereFilter.getParameter(req,"Create-Client-Id");
+		String connectionId;
+		if (createConnectionId == null) {
 			connectionId = req.getRemoteAddr() + PersevereFilter.getParameter(req,"Client-Id");
 			if (connectionId == null) 
 				throw new RuntimeException("You must include a Client-Id or Create-Client-Id header");
@@ -162,6 +163,7 @@ public class Channels extends HttpServlet {
 				return null; // referring to a connection id that has been initialized yet
 		}
 		else { // create a new client id
+			connectionId = req.getRemoteAddr() + createConnectionId;
 			// else we are picking up connection that was initialized by subscription request
 			synchronized(EventStream.streams){
 				stream = EventStream.streams.get(connectionId);

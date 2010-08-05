@@ -147,9 +147,13 @@ public class Method extends BaseFunction {
 					throw PersistableClass.addPropertyToValidationError(e,"the return value");
 				}
 			}
-			if(Boolean.TRUE.equals(methodDefinition.get("observable")))
-				Transaction.addObservedCall(((Persistable)thisObj).getId(),innerFunction instanceof RestMethod ? methodName.toUpperCase() : methodName, returnValue, Boolean.TRUE.equals(methodDefinition.get("idempotent")), clientInitiatedCall);
-
+			if(Boolean.TRUE.equals(methodDefinition.get("observable"))) {
+				if (returnValue instanceof org.mozilla.javascript.Undefined && methodName.toUpperCase().equals("DELETE")) {
+					Transaction.currentTransaction().addObservedCall(((Persistable)thisObj).getId(),innerFunction instanceof RestMethod ? methodName.toUpperCase() : methodName, thisObj, Boolean.TRUE.equals(methodDefinition.get("idempotent")), clientInitiatedCall);
+				} else {
+					Transaction.currentTransaction().addObservedCall(((Persistable)thisObj).getId(),innerFunction instanceof RestMethod ? methodName.toUpperCase() : methodName, returnValue, Boolean.TRUE.equals(methodDefinition.get("idempotent")), clientInitiatedCall);
+				}
+			}
 			return returnValue;
 		}
 		if(((Persistable)thisObj).getId().source instanceof HttpJsonSource) {
@@ -157,11 +161,8 @@ public class Method extends BaseFunction {
 			  	return ((HttpJsonSource)((Persistable)thisObj).getId().source).executeRPC(((Persistable)thisObj).getId(), methodName, args);
 			}
 		}
-		if(Boolean.TRUE == safeMode.get())
-			throw new SecurityException("Can not call a method in a query unless it is marked 'safe' in the method definition");
 		return innerFunction.call(cx, scope, thisObj, args);
 	}
-
 	public static long startTiming(){
 		long startTime = System.nanoTime();
 		LinkedList<Long> currentTiming = currentTimings.get();

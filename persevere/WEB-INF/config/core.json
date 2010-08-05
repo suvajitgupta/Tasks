@@ -55,32 +55,41 @@
 			"instances":{"$ref":"../Object/"},
 			"description":"Every persistable object",
 			core:true,
+			"fragmentResolution": "dot-delimited",
+			"queryEncoding": "application/x-jsonquery-urlencoded",
+			"hrefProperty": "$ref",
+			query: function(query, target){
+				return query.execute(target);
+			},
+			"properties": {
+				"id":{"link":"self"}
+			},
 			"methods":{
 				"put":{
 					"observable":true,
 					"runAt":"system",
 					"idempotent":true
-					},
+				},
 				"delete":{
 					"observable":true,
 					"runAt":"system",
 					"idempotent":true
-					},
+				},
 				"message":{
 					"parameters":{
-						},
+					},
 					"observable":true,
 					"runAt":"system"
-					},
+				},
 				"post":{
 					"observable":true,
 					"runAt":"system"
-					},
+				},
 				"get":{
 					"runAt":"system",
 					"idempotent":true,
 					"safe":true
-					}
+				}
 				}
 			}
 		},
@@ -174,6 +183,9 @@
 	}
 	return user;
 },
+			"changePassword": function(newPassword){
+				security.changePassword(newPassword);
+			},
 			"grantAccess":function (username, resource, accessLevel) {
 	var user;
 	if(username == "public"){
@@ -218,15 +230,6 @@
 							"name":"resource"
 							},
 						{
-							"enum":[
-								"granted",
-								"none",
-								"limited",
-								"read",
-								"execute",
-								"append",
-								"write",
-								"full"],
 							"type":"string",
 							"optional":true,
 							"name":"accessLevel"
@@ -319,9 +322,18 @@
 						}
 					},
 					"quality":1
+				},
+				"onSave": function(){
+					// Users with "uploadHtml" permission (superuser by default)
+					if(hasPermission("uploadHtml")){
+						return;
 					}
+					// No one else can use a Content-Type containing "html"
+					if (this.contentType && this.contentType.toLowerCase().indexOf("html") > -1)
+						throw new TypeError("Content-Type header containing 'html' poses XSS risk");
 				}
-			},
+			}
+		},
 		"name":"File"
 		},
 		{

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.EventListener;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.TreeSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -43,24 +44,34 @@ import org.persvr.util.JsponEncoding;
  */
 public class Client extends EventStream { 
 	public static final boolean LOG_ALL_OUTPUT = false;
-	Transaction transaction;
+	
+	Map<Long, Transaction> transactions= new HashMap<Long, Transaction>();
 	
 	public static void addSerializer(DataSerializer serializer) {
 		serializers.add(0,serializer);
 		defaultSerializer = serializer;
 	}
-	public void commitTransaction(){
-		try{
-			Transaction.currentTransaction().commit();
-		}
-		finally{
-			// just in case anything further happens
-			transaction = null;
+	public synchronized void commitTransaction(Long transactionId){
+		transactions.get(transactionId).commit();
+	}
+	public synchronized void setOpenTransaction(Long transactionId, Transaction transaction){
+		transactions.put(transactionId, transaction);
+	}
+	
+	public synchronized void clearOpenTransaction(Long transactionId){
+		transactions.remove(transactionId);
+		markTransactionProcessed(transactionId);
+	}
+	
+	public synchronized void startOrEnterTransaction(Long sequenceId, Long transactionId){
+		Transaction existingTransaction = transactions.get(transactionId);
+		if(existingTransaction!=null){
+			existingTransaction.enterTransaction(sequenceId);
+		}else{
+			transactions.put(transactionId, Transaction.startTransaction(sequenceId, transactionId));
 		}
 	}
-	public void setOpenTransaction(Transaction transaction){
-		this.transaction = transaction;
-	}
+	
 	private Client(){
 		// a no transaction connection for the server
 	}
@@ -203,7 +214,7 @@ public class Client extends EventStream {
 			int slashIndex = requestedPath.indexOf('/');
 			if (slashIndex > -1) {
 		        requestedSource = id.getSource();
-		        requestedPath = requestedPath.substring(slashIndex+1);
+		        requestedPath = requestedPath.substring(requestedSource.getId().length() +1);
 		        int lastSlash = requestedPath.lastIndexOf('/');
 		        if (lastSlash > -1){
 					int bracketIndex = requestedPath.indexOf('[');
@@ -444,32 +455,53 @@ public class Client extends EventStream {
     public HttpSession getSession() {
     	return httpSession;
     }
-    public class Sequence {
-    	public long seqId;
-    	public boolean isExecuting = false;
-		public Sequence(long seqId) {
-			super();
-			this.seqId = seqId;
-		}
-    }
-    List<Sequence> sequences = new ArrayList<Sequence>(1);
-    public Sequence getSequence(){
-    	if(sequences.size() > 0)
-    		return sequences.get(0);
-    	else
-    		return null;
-    }
-    public Sequence getSequenceObject(long seqId) {
-    	synchronized(sequences){
-	    	for (Sequence sequence : sequences)
-	    		if (sequence.seqId - 3 < seqId && sequence.seqId + 100 > seqId)
-	    			return sequence;
-	    	Sequence sequence = new Sequence(seqId);
-	    	sequences.add(sequence);
-	    	return sequence;
-    	}
-    }
 
+	private TreeSet<Long> unprocessedSequenceIds = new TreeSet<Long>();
+	private Long maxSequenceId = new Long(0);
+	private Long maxTransactionId = new Long(0);
+	
+	public synchronized void addSequenceId(Long newSequenceId){
+		if(maxSequenceId==0 || newSequenceId == maxSequenceId+1){
+			maxSequenceId = newSequenceId;
+		}else{
+			unprocessedSequenceIds.add(newSequenceId);
+		}
+		while(unprocessedSequenceIds.contains(maxSequenceId+1)){
+			unprocessedSequenceIds.remove(maxSequenceId+1);
+			maxSequenceId++;
+		}
+		notifyAll();
+	}
+	
+	public void runUnblockedTransactions(){
+		List<Transaction> transactionsToCommit = new ArrayList<Transaction>();
+		//copy the list
+		for(Transaction t : transactions.values()){
+			transactionsToCommit.add(t);
+		}
+		//try to commit everything in sequence
+		for(Transaction t : transactionsToCommit){
+//			if(t.canCommit()) System.out.println("Committing unblocked transaction: "+ t.getLabel());
+			t.commitIfReady();
+		}
+	}
+	
+	public synchronized boolean isConsistentToSequenceId(Long sequenceId){
+		return maxSequenceId >= sequenceId;
+	}
+	
+	public synchronized boolean isConsistentToTransactionId(Long transactionId){
+		return transactionId == maxTransactionId+1;
+	}
+	
+	private synchronized void markTransactionProcessed(Long transactionId){
+		if(transactionId != maxTransactionId+1){
+			throw new RuntimeException("Trasaction processed out of order");
+		}
+		maxTransactionId = transactionId;
+	}
+	
+	
     public static ThreadLocal<IndividualRequest> threadClient = new ThreadLocal<IndividualRequest>();
     static {
     	// we use the private no transaction constructor or it will trigger an unfinished transaction during startup
@@ -510,10 +542,6 @@ public class Client extends EventStream {
 	}
 	public void setAuthorization(String authorization) {
 		this.authorization = authorization;
-	}
-
-	public Transaction getTransaction() {
-		return transaction;
 	}
 
 	public static List<DataSerializer> serializers = new ArrayList<DataSerializer>();

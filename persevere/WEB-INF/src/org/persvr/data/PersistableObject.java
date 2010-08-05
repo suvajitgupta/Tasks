@@ -23,6 +23,8 @@ import org.mozilla.javascript.NativeObject;
 import org.mozilla.javascript.ScriptRuntime;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
+import org.mozilla.javascript.Undefined;
+import org.mozilla.javascript.UniqueTag;
 import org.persvr.data.DataSourceManager.SourceInfo;
 import org.persvr.data.Transaction.ChangeUpdate;
 import org.persvr.datasource.ChangeableData;
@@ -35,8 +37,9 @@ import org.persvr.datasource.WritableDataSource;
 import org.persvr.javascript.PersevereContextFactory;
 import org.persvr.security.PermissionLevel;
 import org.persvr.security.UserSecurity;
+
 /**
- * This class adds the capability to persist data for Rhino Scriptables 
+ * This class adds the capability to persist data for Rhino Scriptables
  * @author Kris Zyp
  *
  */
@@ -45,7 +48,7 @@ public class PersistableObject extends NativeObject implements ObservablePersist
 	public Object noCheckGet(String key) {
 		Object value = super.get(key,this);
         try {
-			while (value instanceof TargetRetriever) 
+			while (value instanceof TargetRetriever)
 				value = ((TargetRetriever)value).getTarget();
 		} catch (ObjectNotFoundException e) {
 			value = null;
@@ -69,18 +72,18 @@ public class PersistableObject extends NativeObject implements ObservablePersist
 			super.put(key,this,value);
 	}
 	public PersistableObject() {
-		
+
 	}
 	protected ObjectId id;
 	Object parent;
 	Persistable schema;
-	
+
 	long lastUpdated;
 	private static final int CACHE_TIME = 200;
 	private void updateObject(){
-		//TODO: We may be able to optimize this better by using a HashMap of 
+		//TODO: We may be able to optimize this better by using a HashMap of
 		//	id to last updated so non-changeable data doesn't increase memory size.
-		//	Also we might have a timer that updates a static variable for faster 
+		//	Also we might have a timer that updates a static variable for faster
 		//	access to the current time in millis.
 		if(id.source instanceof ChangeableData){
 			long currentTime = System.currentTimeMillis();
@@ -131,13 +134,13 @@ public class PersistableObject extends NativeObject implements ObservablePersist
     		}
     		updateObject();
     	}
-		
+
         Object value = super.get(name,start);
 		if(securityCheck && value != Scriptable.NOT_FOUND && (getAttributes(name) & ScriptableObject.DONTENUM) == ScriptableObject.DONTENUM)
 			checkSecurity(this, PermissionLevel.WRITE_LEVEL.level);
 
         try {
-			while (value instanceof TargetRetriever) 
+			while (value instanceof TargetRetriever)
 				value = ((TargetRetriever)value).getTarget();
 		} catch (ObjectNotFoundException e) {
 			value = null;
@@ -179,7 +182,7 @@ public class PersistableObject extends NativeObject implements ObservablePersist
     	enforceObjectChange(obj,"items", value, true);
 
 	}
-	
+
 	public final static Object ADDITION = new Object();
 	static int getAttributes(Persistable object, String key){
 		try {
@@ -193,7 +196,7 @@ public class PersistableObject extends NativeObject implements ObservablePersist
 		// turn off security so no checks are made while we are persisting data
 		try{
 			PersistableObject.enableSecurity(false);
-			TransactionValue transValue = changeEntry.getKey(); 
+			TransactionValue transValue = changeEntry.getKey();
 			ChangeUpdate change = changeEntry.getValue();
 			Persistable target = change.target;
 			Object value = transValue.values.get(transaction);
@@ -219,16 +222,16 @@ public class PersistableObject extends NativeObject implements ObservablePersist
 					}
 					Transaction.addAffectedSource(source);
 					String key =change.key;
-					
+
 					if (hadProperty) {
 						if (value == Scriptable.NOT_FOUND)
 							source.recordPropertyRemoval(subObjectId, key);
 						else
 							source.recordPropertyChange(subObjectId, key, sourceValue, getAttributes(target, key));
-						
+
 					}
 					else {
-						
+
 						source.recordPropertyAddition(subObjectId, key, sourceValue, getAttributes(target, key));
 					}
 				}
@@ -243,7 +246,7 @@ public class PersistableObject extends NativeObject implements ObservablePersist
 					}
 					else
 						((ListDataSource)id.source).recordList(id.subObjectId, (List)sourceValue);
-					
+
 				}
 			}
 			if(target instanceof PersistableObject)
@@ -255,10 +258,10 @@ public class PersistableObject extends NativeObject implements ObservablePersist
 			PersistableObject.enableSecurity(wasSecurityEnabled);
 		}
 	}
-	
+
 	public Persistable getSchema() {
-		return schema == null ? 
-				(id != null && id.source != null ? 
+		return schema == null ?
+				(id != null && id.source != null ?
 						schema = ObjectId.idForObject(DataSourceManager.metaClassSource, id.source.getId()).getTarget() :
 						null) :
 					schema;
@@ -266,7 +269,7 @@ public class PersistableObject extends NativeObject implements ObservablePersist
 
 
 	/**
-	 * 
+	 *
 	 * @param name
 	 * @param obj
 	 * @param alwaysPersist
@@ -290,7 +293,7 @@ public class PersistableObject extends NativeObject implements ObservablePersist
 
     	return enforceObjectChange(this,name, obj, hadProperty);
     }
-    
+
 	@Override
 	public void put(String name, Scriptable start, Object obj) {
     	if(obj instanceof NativeFunction){
@@ -314,39 +317,52 @@ public class PersistableObject extends NativeObject implements ObservablePersist
 		else{
 			if("id".equals(name)){
 				if(getId().isPersisted()){
-					throw ScriptRuntime.constructError("TypeError", "Can not change the id of a persisted object");					
+					throw ScriptRuntime.constructError("TypeError", "Can not change the id of a persisted object");
 				}
 				getId().subObjectId = ScriptRuntime.toString(obj);
 			}
 		}
 
-    	super.put(name, start, obj);
-    	if(name.charAt(0)==':') // this is how we can signify a dont-enum 
+    	if(obj instanceof GetterSetterCombo){
+    		setGetterOrSetter(name, 0, ((GetterSetterCombo)obj).getter, false);
+    		setGetterOrSetter(name, 0, ((GetterSetterCombo)obj).setter, true);
+    	}
+    	else
+    		super.put(name, start, obj);
+    	if(name.charAt(0)==':') // this is how we can signify a dont-enum
     		setAttributes(name, ScriptableObject.DONTENUM);
 
 		commitIfImmediate();
     }
+
     public Object set(String name, Object value) {
-    	boolean persistent = false;
     	Object sourceValue = value;
     	if(value instanceof NativeFunction){
-    		value = new Method((BaseFunction)value,name);
+    		sourceValue = value = new Method((BaseFunction)value,name);
+    	}
+    	if(getPrototype() != null && ScriptableObject.hasProperty(getPrototype(), name) &&
+    			ScriptableObject.getProperty(getPrototype(), name) instanceof Method
+    			&& !(this instanceof SchemaObject)){
+    		throw ScriptRuntime.constructError("TypeError", "Can not set a value in an instance property that overrides a method");
     	}
 
     	if (id != null && id.source != null){
-    		if ((value== null ? get(name,this) != null : !value.equals(get(name,this)))) {
+    		Object oldValue = get(name,this);
+    		if(oldValue == UniqueTag.NOT_FOUND)
+    			oldValue = Undefined.instance;
+    		if ((value== null ? oldValue != null : !ScriptRuntime.shallowEq(oldValue, value))) {
 				value = checkPut(name,value,true);
 				if(id.isPersisted())
 					sourceValue = asTransactionValue(name,super.get(name,this),value);
-	    	}    	
+	    	}
     	}else{
 			if("id".equals(name)){
 				if(getId().isPersisted()){
-					throw ScriptRuntime.constructError("TypeError", "Can not change the id of a persisted object");					
+					throw ScriptRuntime.constructError("TypeError", "Can not change the id of a persisted object");
 				}
 				getId().subObjectId = ScriptRuntime.toString(value);
 			}
-    		
+
     	}
     	try {
     		char firstChar = name.charAt(0);
@@ -370,12 +386,12 @@ public class PersistableObject extends NativeObject implements ObservablePersist
 	}
     @Override
     public void delete(String name) {
-    	
+
     	if (id != null && id.source != null) {
     		if(securityEnabled.get() != null){
     			checkSecurity(this, PermissionLevel.WRITE_LEVEL.level);
     		}
-	
+
         	boolean hadProperty = false;
         	try {
         		hadProperty = has(name,this);
@@ -421,17 +437,22 @@ public class PersistableObject extends NativeObject implements ObservablePersist
     	if(value instanceof NativeFunction){
     		value = new Method((BaseFunction)value,name);
     	}
-    	
+
     	super.put(name, this, value);
     	if(name.charAt(0) == ':')
     		setAttributes(name, ScriptableObject.DONTENUM);
     }
 /*    private static Scriptable getObjectPrototype() {
     	return ScriptableObject.getClassPrototype(GlobalData.getGlobalScope(),"Object");
-	}
-    private static Scriptable getArrayPrototype() {
-    	return ScriptableObject.getClassPrototype(GlobalData.getGlobalScope(),"Array");
 	}*/
+    static private Scriptable arrayPrototype = null;
+    private static Scriptable getArrayPrototype() {
+    	return arrayPrototype == null ? arrayPrototype = ScriptableObject.getClassPrototype(GlobalData.getGlobalScope(),"Array") : arrayPrototype;
+	}
+    static private Scriptable queryPrototype = null;
+    private static Scriptable getQueryPrototype() {
+    	return queryPrototype == null ? queryPrototype = ScriptableObject.getClassPrototype(GlobalData.getGlobalScope(),"Query") : queryPrototype;
+	}
     public static Object convertToDateJavaDate(Object value){
 		if (value instanceof Scriptable && "Date".equals(((Scriptable)value).getClassName())) {
 			// it is a date
@@ -441,7 +462,7 @@ public class PersistableObject extends NativeObject implements ObservablePersist
 		return value;
 
     }
-    static void persistNewObject(final Persistable newObject,NewObjectPersister newObjectPersister) {    	
+    static void persistNewObject(final Persistable newObject,NewObjectPersister newObjectPersister) {
     	try {
 			if (newObject instanceof List)
 				newObjectPersister.initializeAsList((List) newObject);
@@ -450,10 +471,10 @@ public class PersistableObject extends NativeObject implements ObservablePersist
 //					&& prototype != getClassPrototype(GlobalData.getGlobalScope(), "Array")
 //					&& !(newObject instanceof Function))
 //				newObjectPersister.recordProperty(GlobalData.BASIS_FIELD, prototype);
-			if (!(newObject instanceof PersistableClass))  
+			if (!(newObject instanceof PersistableClass))
 				for (Map.Entry<String, Object> entry: newObject.entrySet(1))
 					newObjectPersister.recordProperty(entry.getKey(), convertToDateJavaDate(entry.getValue()));
-				
+
 			setParent(newObject,newObjectPersister.getParent());
 			newObjectPersister.finished();
 		} catch (Exception e) {
@@ -466,7 +487,7 @@ public class PersistableObject extends NativeObject implements ObservablePersist
     	}
     	else {
 	    	((PersistableArray)target).id = id;
-    		
+
     	}
     }
     private static void setParent(Persistable target, ObjectId parent) {
@@ -502,7 +523,7 @@ public class PersistableObject extends NativeObject implements ObservablePersist
     }
     public static PersistableArray initArray(DataSource source) {
     	SourceInfo info = null;
-    	//if (basis != null) 
+    	//if (basis != null)
     		//clazz = Templates.getClassForObject(basis);
     	PersistableArray result;
     	if (source != null && (info = DataSourceManager.getObjectsClass(source)).objectsClass !=null &&
@@ -515,10 +536,6 @@ public class PersistableObject extends NativeObject implements ObservablePersist
     	else
     		result = new PersistableArray(0);
         ScriptRuntime.setObjectProtoAndParent((ScriptableObject) result, GlobalData.getGlobalScope());
-        if (info != null) {
-	        Scriptable proto = info.schema.getPrototypeProperty();
-        	result.setPrototype(proto);
-        }
         return result;
     }
     private boolean clearSlotsIfClean(){
@@ -526,9 +543,9 @@ public class PersistableObject extends NativeObject implements ObservablePersist
 			if (super.get(key.toString(),this) instanceof TransactionValue)
 				return false;
 		}
-		for(Object key : getIds()){
+/*		for(Object key : getIds()){ // technically we should be deleting keys in case an updated representation from the server has keys removed, but removing them here causes concurrency issues
 			super.delete(key.toString());
-		}
+		}*/
 		return true;
     }
     public static void setVersion(Persistable object, Version version) {
@@ -552,7 +569,7 @@ public class PersistableObject extends NativeObject implements ObservablePersist
 		}
 		Persistable newObject;
     	ObjectId id;
-    	PersistentInitializer() {    		
+    	PersistentInitializer() {
     	}
     	PersistentInitializer(ObjectId id) {
     		this.id = id;
@@ -560,7 +577,7 @@ public class PersistableObject extends NativeObject implements ObservablePersist
     		if(id.targetRef != null)
     			newObject = id.targetRef.get();
     	}
-    	
+
 		public void initializeList(Collection sourceCollection) {
 			if(!(newObject instanceof PersistableList))
 				newObject = initArray("".equals(id.subObjectId) ? null : id.source);
@@ -570,7 +587,7 @@ public class PersistableObject extends NativeObject implements ObservablePersist
 		}
 /*		private Object handleChildObjectInitialize(Object value) {
 			if (value instanceof ObjectWithInitialization) {
-				ObjectId childId = ((ObjectWithInitialization)value).getId(); 
+				ObjectId childId = ((ObjectWithInitialization)value).getId();
 				try {
 					DataObjectInitializer childInitializer = new PersistentInitializer(childId);
 					((ObjectWithInitialization)value).mapObject(childInitializer);
@@ -612,7 +629,7 @@ public class PersistableObject extends NativeObject implements ObservablePersist
 			} catch (RuntimeException e) {
 				e.printStackTrace();
 			}
-		}		
+		}
 		public void setProperty(String name, Object value) {
 			setProperty(name, value, 0);
 		}
@@ -638,7 +655,7 @@ public class PersistableObject extends NativeObject implements ObservablePersist
 			return newObject;
 		}
 		public void finished() {
-			
+
 		}
     };
     /**
@@ -648,7 +665,7 @@ public class PersistableObject extends NativeObject implements ObservablePersist
      */
     static PersistableInitializer initializeObject() {
     	return new PersistentInitializer();
-    	
+
     }
     /**
      * @see DataSourceHelper.initializeObject(id)
@@ -680,6 +697,24 @@ public class PersistableObject extends NativeObject implements ObservablePersist
 		}
 		return false;
     }
+    static Map<Persistable, Scriptable> schemasInstancesPrototype = new HashMap();;
+    static Scriptable instancesPrototypeForSchema(Persistable schema) {
+    	Object instancesPrototype = schemasInstancesPrototype.get(schema);
+    	if (instancesPrototype == null) {
+			instancesPrototype = schema.noCheckGet("instancesPrototype");
+			Object superType = PersistableClass.getSuperType(schema);
+			Scriptable nextPrototype = superType instanceof Persistable ? instancesPrototypeForSchema((Persistable) superType) :
+				getQueryPrototype();
+			if (instancesPrototype instanceof Persistable) {
+				((Persistable) instancesPrototype).setPrototype(nextPrototype);
+				schemasInstancesPrototype.put(schema, (Scriptable) instancesPrototype);
+			}
+			else {
+				return nextPrototype;
+			}
+    	}
+    	return (Scriptable) instancesPrototype;
+    }
     static Persistable mapPersistent(final ObjectId id) {
     	PersistentInitializer initializer;
 
@@ -690,11 +725,18 @@ public class PersistableObject extends NativeObject implements ObservablePersist
     	try {
         	if (id instanceof Query){
         		Collection queryResults = id.source.query((Query)id);
-        		if(queryResults instanceof List)
+        		if(queryResults instanceof List){
         			initializer.newObject = new QueryArray(queryResults);
+        			initializer.newObject.setPrototype(instancesPrototypeForSchema(
+        					DataSourceManager.getObjectsClass(id.source).schema));
+        		}
         		else
         			initializer.initializeList(queryResults);
-        		initializer.setParent(ObjectId.idForObject(DataSourceManager.metaClassSource, id.source.getId()));
+/*        		Object superType = PersistableClass.getSuperType(ObjectId.idForObject(DataSourceManager.metaClassSource, id.source.getId()).getTarget());
+        		if(superType instanceof Persistable)
+        			initializer.setParent(ObjectId.idForString(((Persistable)superType).getId().subObjectId + "/"));
+        		else*/
+        			initializer.setParent(DataSourceManager.getRootObject().getId());
         	}
         	else {
     			id.source.mapObject(initializer,id.subObjectId);
@@ -718,8 +760,8 @@ public class PersistableObject extends NativeObject implements ObservablePersist
     		((PersistableObject)newObject).lastUpdated = System.currentTimeMillis();
     	} else if(newObject instanceof PersistableArray){
     		((PersistableArray)newObject).lastUpdated = System.currentTimeMillis();
-    	} 
-        return newObject; 
+    	}
+        return newObject;
     }
  /*   static class PropertyChangeContext {
     	User user;
@@ -757,20 +799,46 @@ public class PersistableObject extends NativeObject implements ObservablePersist
 	 * @return
 	 */
     public static void addListener(PropertyChangeSetListener listener) {
-    	Map<ObjectId, Set<String>> readSet = readSets.get();
-    	Map<ObjectId, Set<String>> watchSet = watchSets.get(listener); 
-    	if (watchSet == null){
-    		synchronized(watchSets){
-    			watchSets.put(listener,watchSet = new HashMap<ObjectId, Set<String>>());
-    		}
-    	}
+        Map<ObjectId, Set<String>> readSet = readSets.get();
+		Map<ObjectId, Set<String>> watchSet = watchSets.get(listener);
+		if (watchSet == null) {
+			synchronized (watchSets) {
+				watchSets.put(listener,
+						watchSet = new HashMap<ObjectId, Set<String>>());
+			}
+		}
 		for (Map.Entry<ObjectId, Set<String>> entry : readSet.entrySet()) {
 			ObjectId key = entry.getKey();
 			Set<String> value = entry.getValue();
 			if (watchSet.containsKey(key) && value != FullSet.instance)
-				watchSet.get(key).addAll(value);    			
-			else
-				watchSet.put(key,value);
+				watchSet.get(key).addAll(value);
+			else {
+				if (watchSet.containsKey(key) && key instanceof Query
+						&& ((Query) key).conditionFunction != null) {
+
+					ObjectId oldQuery = null;
+					// find the old query (and it's conditionFunction)
+					for (Map.Entry<ObjectId, Set<String>> watchEntry : watchSet
+							.entrySet()) {
+						oldQuery = watchEntry.getKey();
+						if (oldQuery.equals(key)) {
+							break;
+						}
+					}
+					final Function newFunction = ((Query) key).conditionFunction;
+					final Function oldFunction = ((Query) oldQuery).conditionFunction;
+					if (oldFunction != null) {
+						// create a new function that combines the other two
+						((Query) oldQuery).conditionFunction = new BaseFunction() {
+							public Object call(org.mozilla.javascript.Context cx, Scriptable scope, Scriptable thisObj, Object[] args) {
+								return ScriptRuntime.toBoolean(newFunction.call(cx,	scope, thisObj, args)) ||
+									ScriptRuntime.toBoolean(oldFunction.call(cx, scope, thisObj, args));
+							}
+						};
+					}
+				}
+				watchSet.put(key, value);
+			}
 		}
     }
     public static void removeListener(PropertyChangeListener listener) {
@@ -779,15 +847,15 @@ public class PersistableObject extends NativeObject implements ObservablePersist
 		}
     }
     /**
-     * Stops listening for the 
+     * Stops listening for the
      * @param listener
      */
     public static Map<ObjectId, Set<String>> getWatchSet(PropertyChangeSetListener listener) {
     	return watchSets.get(listener);
     }
-     
-    
-     
+
+
+
 
 
 	public static void resetComputedPermissions() {
@@ -801,7 +869,7 @@ public class PersistableObject extends NativeObject implements ObservablePersist
     }
 
 	public static Map<String,PermissionLevel> permissionNames = new HashMap<String,PermissionLevel>();
-    
+
     public int getAccessLevel() {
     	return checkSecurity(this,-1);
     }
@@ -818,7 +886,7 @@ public class PersistableObject extends NativeObject implements ObservablePersist
     public static int checkSecurity(Persistable data,int level) {
 /*    	if (level != -1 && data.getUniversalPermissionLevel() >= level)
     		return data.getUniversalPermissionLevel();
-/*    	Acl acl = data.getAcl();	
+/*    	Acl acl = data.getAcl();
         if (acl == null) // indicates it is transient
         	return 5;
     	// TODO: Pass in the permission level required and then do logic short-circuits if the permission level is found
@@ -829,7 +897,7 @@ public class PersistableObject extends NativeObject implements ObservablePersist
     	}*/
     	if(!data.getId().isPersisted())
     		return 5;
-    	
+
         int permissionLevel = UserSecurity.getPermissionLevel(data);
         if (permissionLevel < level) {
         	String message;
@@ -854,14 +922,14 @@ public class PersistableObject extends NativeObject implements ObservablePersist
     }
 
 
-	
-	
+
+
 	public Object get(int index) {
 		return get(index,this);
 	}
 	@Override
 	public Object get(int index, Scriptable start) {
-    	if (id != null && id.source != null) { 
+    	if (id != null && id.source != null) {
     		if(securityEnabled.get() != null){
     			checkSecurity(this, PermissionLevel.READ_LEVEL.level);
     		}
@@ -869,7 +937,7 @@ public class PersistableObject extends NativeObject implements ObservablePersist
     	}
     	Object value = super.get(index,this);
         try {
-			while (value instanceof TargetRetriever) 
+			while (value instanceof TargetRetriever)
 				value = ((TargetRetriever)value).getTarget();
 		} catch (ObjectNotFoundException e) {
 			value = null;
@@ -888,14 +956,32 @@ public class PersistableObject extends NativeObject implements ObservablePersist
     public static final int ENTRY_SET_INCLUDE_DONT_ENUM = 1;
     public static final int ENTRY_SET_INCLUDE_GETTER_SETTER_FUNCTIONS = 2;
     public static final int ENTRY_SET_USE_CORE_VALUES = 4;
+    class GetterSetterCombo {
+    	Function getter;
+    	Function setter;
+    }
+    Object getPreGetterSetterValue(String name, int index){
+    	Object getter = getGetterOrSetter(name, index, false);
+    	Object setter = getGetterOrSetter(name, index, false);
+    	if (getter instanceof Function || setter instanceof Function){
+    		GetterSetterCombo value = new GetterSetterCombo();
+    		value.getter = (Function) (getter instanceof Function ? getter : null);
+    		value.setter = (Function) (setter instanceof Function ? setter : null);
+    	}
+    	if(name == null)
+    		return get(index, this);
+    	return get(name, this);
+    }
     static private class EntrySet extends AbstractSet<Map.Entry<String,Object>>{
     	Object[] ids;
     	Scriptable object;
     	boolean useCoreValues;
-    	EntrySet(Object[] ids, Scriptable object, boolean useCoreValues){
+    	boolean includeGettersSetters;
+    	EntrySet(Object[] ids, Scriptable object, boolean useCoreValues, boolean includeGettersAndSetters){
     		this.ids = ids;
     		this.object = object;
     		this.useCoreValues = useCoreValues && object instanceof PersistableObject;
+    		this.includeGettersSetters = includeGettersAndSetters && object instanceof PersistableObject;
     	}
 		@Override
 		public Iterator iterator() {
@@ -908,7 +994,9 @@ public class PersistableObject extends NativeObject implements ObservablePersist
 			    }
 			    Object getNextValue(){
 		    		do{
-			    		nextValue = ids.length > i ? (useCoreValues ? ((PersistableObject)object).getCoreValue(ids[i].toString()) : object.get(ids[i].toString(), object)) : Scriptable.NOT_FOUND;
+			    		nextValue = ids.length > i ? (useCoreValues ? ((PersistableObject)object).getCoreValue(ids[i].toString()) :
+			    			includeGettersSetters ? ((PersistableObject)object).getPreGetterSetterValue(ids[i] instanceof String ? (String) ids[i] : null, ids[i] instanceof Number ? ((Number)ids[i]).intValue() : 0) :
+			    			object.get(ids[i].toString(), object)) : Scriptable.NOT_FOUND;
 			    		nextKey = ids.length > i ? ids[i].toString() : null;
 			    		i++;
 			    	}
@@ -929,13 +1017,13 @@ public class PersistableObject extends NativeObject implements ObservablePersist
 			    		public Object setValue(Object obj){
 			    			throw new UnsupportedOperationException();
 			    		}
-			    		                         
+
 			    	};
 			    }
 			    public void remove(){
 			    	throw new UnsupportedOperationException();
 			    }
-				
+
 			};
 		}
 
@@ -943,14 +1031,15 @@ public class PersistableObject extends NativeObject implements ObservablePersist
 		public int size() {
 			return ids.length;
 		}
-    	
+
     }
     static public Set<Map.Entry<String, Object>> entrySet(ScriptableObject target, int options){
     	PersevereContextFactory.getContext();
     	return new EntrySet(
-    			((ENTRY_SET_INCLUDE_DONT_ENUM & options) == ENTRY_SET_INCLUDE_DONT_ENUM) ? target.getAllIds() : target.getIds(), 
+    			((ENTRY_SET_INCLUDE_DONT_ENUM & options) == ENTRY_SET_INCLUDE_DONT_ENUM) ? target.getAllIds() : target.getIds(),
     			target,
-    			((ENTRY_SET_USE_CORE_VALUES & options) == ENTRY_SET_USE_CORE_VALUES));
+    			((ENTRY_SET_USE_CORE_VALUES & options) == ENTRY_SET_USE_CORE_VALUES),
+    			((ENTRY_SET_INCLUDE_GETTER_SETTER_FUNCTIONS & options) == ENTRY_SET_INCLUDE_GETTER_SETTER_FUNCTIONS));
     }
     public Set<Map.Entry<String, Object>> entrySet(int options){
     	if (id != null && id.source != null) {
@@ -959,14 +1048,15 @@ public class PersistableObject extends NativeObject implements ObservablePersist
     		}
     	}
     	return new EntrySet(
-    			((ENTRY_SET_INCLUDE_DONT_ENUM & options) == ENTRY_SET_INCLUDE_DONT_ENUM) ? getAllIds() : getIds(), 
+    			((ENTRY_SET_INCLUDE_DONT_ENUM & options) == ENTRY_SET_INCLUDE_DONT_ENUM) ? getAllIds() : getIds(),
     			this,
-    			((ENTRY_SET_USE_CORE_VALUES & options) == ENTRY_SET_USE_CORE_VALUES));
+    			((ENTRY_SET_USE_CORE_VALUES & options) == ENTRY_SET_USE_CORE_VALUES),
+    			((ENTRY_SET_INCLUDE_GETTER_SETTER_FUNCTIONS & options) == ENTRY_SET_INCLUDE_GETTER_SETTER_FUNCTIONS));
     }
 	public Set<String> keySet(boolean includeDontEnum) {
 		Object[] ids = includeDontEnum ? getAllIds() : getIds();
 		Set<String> keySet = new HashSet();
-		for (Object key : ids) 
+		for (Object key : ids)
 				keySet.add(key.toString());
 		return keySet;
 	}
@@ -996,7 +1086,7 @@ public class PersistableObject extends NativeObject implements ObservablePersist
         // These will both give numeric lengths within Uint32 range.
     	if (id != null && id.source != null && id.isPersisted())
     		recordObjectRead();*
-        if (this instanceof PersistentList) 
+        if (this instanceof PersistentList)
             return ((PersistentList)this).getLength();
         Object length = ScriptRuntime.getObjectProp(this, "length", PersevereContextFactory.getContext());
         if (length instanceof Number)
@@ -1010,9 +1100,9 @@ public class PersistableObject extends NativeObject implements ObservablePersist
 		// TODO: The reference cleanup is not transactionally isolated
 		if(id.source instanceof ReferenceAwareDataSource){
 			List<ObjectId> referrers = ((ReferenceAwareDataSource)id.source).getReferrers(id.subObjectId);
-			for (ObjectId objRef: referrers) { 
+			for (ObjectId objRef: referrers) {
 				Persistable obj = objRef.getTarget();
-				if (obj instanceof List) 
+				if (obj instanceof List)
 					((List)obj).remove(this);
 				else {
 					for (Map.Entry<String,Object> entry : obj.entrySet(1)) {
@@ -1026,10 +1116,13 @@ public class PersistableObject extends NativeObject implements ObservablePersist
 		asTransactionValue(null, this, Scriptable.NOT_FOUND);
 	}
 	public Persistable getParent() {
+		if(parent == this){
+			throw new RuntimeException("circular loop in parents");
+		}
 		return (Persistable) (parent instanceof Persistable ? parent :
 					parent instanceof Query ? parent = ((Query)parent).getCachedTarget() :
 					parent instanceof ObjectId ? parent = ((ObjectId) parent).getTarget() :
-					id != null && id.source != null ? 
+					id != null && id.source != null ?
 								parent = ((Query) ObjectId.idForObject(id.source, "")).getCachedTarget() :
 						null);
 
@@ -1087,7 +1180,7 @@ public class PersistableObject extends NativeObject implements ObservablePersist
 		public Object[] toArray(Object[] a) {
 			return null;
 		}
-    	
+
     }
 	public void onCreation() {
 		// do nothing

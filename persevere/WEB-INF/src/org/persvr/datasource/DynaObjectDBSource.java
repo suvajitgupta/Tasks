@@ -20,6 +20,7 @@ import java.util.Set;
 
 import javax.sql.rowset.serial.SerialClob;
 
+import org.apache.catalina.startup.SetContextPropertiesRule;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.mozilla.javascript.Node;
@@ -444,9 +445,7 @@ public class DynaObjectDBSource extends DatabaseDataSource implements WritableDa
 	}
 
 	ResultSet rs = null;
-
-	@Override
-	ThreadSpecificConnectionObject setupConnection(Connection connection) throws SQLException {
+	ConnectionStatements setupConnection(Connection connection) throws SQLException {
 		connection.setTransactionIsolation(Connection.TRANSACTION_READ_UNCOMMITTED);
 
 		ConnectionStatements statements = new ConnectionStatements();
@@ -477,12 +476,11 @@ public class DynaObjectDBSource extends DatabaseDataSource implements WritableDa
 		return statements;
 	}
 
-	@Override
-	protected ConnectionStatements getConnectionObject() {
-		return (ConnectionStatements) super.getConnectionObject();
+	protected ConnectionStatements getConnectionObject() throws SQLException {
+		return setupConnection(createConnection());
 	}
 
-	class ConnectionStatements extends ThreadSpecificConnectionObject {
+	class ConnectionStatements {
 		public PreparedStatement objectRetrieval;
 		public PreparedStatement referrerLookup;
 		public PreparedStatement allReferrerLookup;
@@ -622,22 +620,14 @@ public class DynaObjectDBSource extends DatabaseDataSource implements WritableDa
 	}
 
 	int executeUpdate(final String sql) throws SQLException {
-		return (Integer) tryExecution(new DatabaseAction() {
-			public Object execute() throws SQLException {
-				Statement statement = getConnectionObject().getConnection().createStatement();
-				return statement.executeUpdate(sql);
-			}
-		});
+		Statement statement = createConnection().createStatement();
+		return statement.executeUpdate(sql);
 
 	}
 
 	int executeUpdate(final String sql, final int autoGen) throws SQLException {
-		return (Integer) tryExecution(new DatabaseAction() {
-			public Object execute() throws SQLException {
-				Statement statement = getConnectionObject().getConnection().createStatement();
-				return statement.executeUpdate(sql, autoGen);
-			}
-		});
+			Statement statement = createConnection().createStatement();
+			return statement.executeUpdate(sql, autoGen);
 	}
 
 
@@ -1174,6 +1164,10 @@ public class DynaObjectDBSource extends DatabaseDataSource implements WritableDa
 	@Override
 	public String toString() {
 		return "DataSource: " + getId();
+	}
+	@Override
+	void setupStatements() {
+		throw new UnsupportedOperationException("Not implemented yet");
 	}
 
 

@@ -29,7 +29,9 @@ import org.persvr.security.UserSecurity;
 
 public class PersistableClass extends PersistableObject implements Function {
 	public boolean persist = true;
+	public static ThreadLocal<Boolean> persistClass = new ThreadLocal<Boolean>(); 
 	public PersistableClass(){
+		persist = persistClass.get() == null ? true : persistClass.get(); 
 		if(realObject != null) {
 			realObject.parent = this;
 /*			Scriptable collectionObject = new PersistableObject();
@@ -111,7 +113,7 @@ public class PersistableClass extends PersistableObject implements Function {
 		Object properties = get("properties", this);
 		// set the default values first, with the subclass taking precedence
 		if(properties instanceof Persistable){
-			for(Map.Entry<String,Object> entry : ((Persistable)properties).entrySet(0)){
+			for(Map.Entry<String,Object> entry : ((Persistable)properties).entrySet(2)){
 				if(entry.getValue() instanceof Persistable && newObject.get(entry.getKey(), newObject) == Scriptable.NOT_FOUND){
 					Object defaultValue = ((Persistable)entry.getValue()).get("default");
 					if(defaultValue != Scriptable.NOT_FOUND)
@@ -120,7 +122,7 @@ public class PersistableClass extends PersistableObject implements Function {
 				
 			}
 		}
-		Object superType = get("extends",this);
+		Object superType = getSuperType(this);
 		Scriptable prototype = getPrototypeProperty();
 		Object constructor = prototype.get("initialize", prototype);
 		if(constructor instanceof Function)
@@ -131,7 +133,7 @@ public class PersistableClass extends PersistableObject implements Function {
 		}else{
 			// we have traversed the extends chain, copy props from the first param
 			if(callDefaultInitializer && args.length > 0 && args[0] instanceof Persistable){
-				for(Map.Entry<String,Object> entry : ((Persistable)args[0]).entrySet(0)){
+				for(Map.Entry<String,Object> entry : ((Persistable)args[0]).entrySet(2)){
 					newObject.put(entry.getKey(), newObject, entry.getValue());
 				}
 			}
@@ -141,8 +143,32 @@ public class PersistableClass extends PersistableObject implements Function {
 			((Function)constructor).call(cx, scope, newObject, args);
 		return newObject;
 	}
+	final static Scriptable globalScope = GlobalData.getGlobalScope();
+	final static Scriptable objectPrototype = ScriptableObject.getObjectPrototype(GlobalData.getGlobalScope());
+	final static Scriptable arrayPrototype = ScriptableObject.getClassPrototype(GlobalData.getGlobalScope(),"Array");
+
+	public static PersistableClass Object;
+	public static PersistableClass Array;
 	// create a new object when the constructor is called
 	public Scriptable construct(Context cx, Scriptable scope, Object[] args) {
+		if(this == Object){
+			ScriptableObject newObject = new PersistableObject();
+			newObject.setParentScope(globalScope);
+			newObject.setPrototype(objectPrototype);
+			return newObject;
+		}
+		if(this == Array){
+			ScriptableObject newObject;
+			if(args.length == 0)
+				newObject = new PersistableArray(0);
+			else if(args.length == 1)
+				newObject = new PersistableArray(((Number)args[0]).longValue());
+			else
+				newObject = new PersistableArray(args);
+			newObject.setParentScope(globalScope);
+			newObject.setPrototype(arrayPrototype);
+			return newObject;
+		}
 		return instantiate(cx, scope, args, true);
 	}
 	@Override
@@ -164,7 +190,7 @@ public class PersistableClass extends PersistableObject implements Function {
 			noCheckSet("prototype", asTransactionValue("prototype", NOT_FOUND, prototypeProperty));
 			commitIfImmediate();
 		}
-		Object superType = noCheckGet("extends");
+		Object superType = getSuperType(this);
 		if (superType instanceof PersistableClass) { // setup the prototype chain correctly
 			prototypeProperty.setPrototype(((PersistableClass) superType).getPrototypeProperty());
 		}
@@ -189,7 +215,7 @@ public class PersistableClass extends PersistableObject implements Function {
 		if (methods instanceof Persistable) {
 			for(Map.Entry<String,Object> entry : ((Persistable)methods).entrySet(0)){
 				final String name = entry.getKey();
-				if (!prototypeProperty.has(name, prototypeProperty)){
+				if (!ScriptableObject.hasProperty(prototypeProperty, name)){
 					prototypeProperty.put(name, prototypeProperty, new Method(new PersevereNativeFunction(){
 						@Override
 						public Object call(Context cx, Scriptable scope, Scriptable thisObj, Object[] args) {
@@ -234,6 +260,9 @@ public class PersistableClass extends PersistableObject implements Function {
 				if(value instanceof ObjectId){
 					value = ((ObjectId)value).getTarget();
 				}
+				if(value instanceof Scriptable && !id.subObjectId.equals("Class"))
+					setPrototype((Scriptable) value);
+
 				if(value instanceof PersistableClass)
 					((PersistableClass)value).subTypes.add(this);
 			}
@@ -250,7 +279,7 @@ public class PersistableClass extends PersistableObject implements Function {
 	}
 	@Override
 	public Persistable getParent() {
-		return DataSourceManager.getRootObject() == this ? null : DataSourceManager.getRootObject();
+		return DataSourceManager.getRootObject() == this ? null : (Persistable) DataSourceManager.getRootObject().get("instances");
 	}
 	/**
 	 * Does the initial setup of a schema on startup
@@ -277,7 +306,7 @@ public class PersistableClass extends PersistableObject implements Function {
 				PersistableClass schema = (PersistableClass) thisObj;
 				if (schema != null) {
 					Object propertiesDefinitions = schema.get("properties");
-					if (propertiesDefinitions instanceof Persistable) {
+					if (propertiesDefinitions instanceof Persistable && schema.getPrototypeProperty() instanceof Persistable) {
 						Persistable prototype = (Persistable) schema.getPrototypeProperty();
 							for (Object key : prototype.getIds())
 								if (key instanceof String)
@@ -475,13 +504,17 @@ public class PersistableClass extends PersistableObject implements Function {
 					object.put((String) name,object,((List)schema.get("enum", schema)).get(0));
 			}
 		}
-		Object superType = schema.get("extends", schema);
+		Object superType = getSuperType(schema);
 		if (superType instanceof Persistable){
 			// first check to see if we are valid by the super type
 			value = coerceValueForSchema((Persistable) superType, object, name, value);
 		}
 		return value;
 	
+	}
+	static Object getSuperType(Scriptable schema){
+		return schema instanceof Persistable ? 
+			((Persistable)schema).noCheckGet("extends") : schema.get("extends", schema);
 	}
 	/**
 	 * Enforces the schema on a particular property
@@ -501,7 +534,7 @@ public class PersistableClass extends PersistableObject implements Function {
 				return value;
 			if(schema == null)
 				return value;
-			Object superType = schema.get("extends");
+			Object superType = getSuperType(schema);
 			if (superType instanceof Persistable){
 				// first check to see if we are valid by the super type
 				enforceSchemaForProperty((Persistable) superType, object, name, value, hadProperty, coerce, changing);
@@ -522,7 +555,7 @@ public class PersistableClass extends PersistableObject implements Function {
 							if (typeDefObject instanceof Scriptable) {
 								structFieldObj = ((Scriptable)typeDefObject).get((String) name, ((Scriptable)typeDefObject));
 							}
-							superType = ((Persistable)superType).get("extends");
+							superType = getSuperType(((Scriptable)superType));
 						}
 						if(structFieldObj instanceof Scriptable)
 							structFieldObj = null; // the superclass can do the validation, no sense in doing it twice
@@ -577,7 +610,7 @@ public class PersistableClass extends PersistableObject implements Function {
 	 * @param instance
 	 */
 	static void enforceObjectIsValidBySchema(Persistable schema, Persistable instance){
-		Object superType = schema.get("extends", schema);
+		Object superType = getSuperType(schema);
 		if (superType instanceof Persistable){
 			// first check to see if we are valid by the super type
 			enforceObjectIsValidBySchema((Persistable) superType, instance);
@@ -609,7 +642,7 @@ public class PersistableClass extends PersistableObject implements Function {
 								found = true;
 							}
 						}
-						superType = ((Persistable)superType).get("extends", (Persistable)superType);
+						superType = getSuperType((Scriptable)superType);
 					}
 					if(!found){
 						if (Boolean.FALSE.equals(additionalPropertiesDefinitions))
@@ -695,7 +728,7 @@ public class PersistableClass extends PersistableObject implements Function {
 					validationError("must be in the enum list of possible values");
 			}
 		}
-		Object superType = schema.get("extends", schema);
+		Object superType = getSuperType(schema);
 		if (superType instanceof Persistable){
 			// first check to see if we are valid by the super type
 			enforceSchemaForValue((Persistable) superType, obj);
@@ -743,6 +776,8 @@ public class PersistableClass extends PersistableObject implements Function {
 			Object superType = get("extends");
 			if(superType instanceof PersistableClass) 
 				((PersistableClass)superType).subTypes.remove(this);
+			setPrototype(ObjectId.idForString("Class/Object").getTarget());
+
 		}
 
 		realObject.delete(name);
@@ -759,17 +794,28 @@ public class PersistableClass extends PersistableObject implements Function {
 	public Object get(int index) {
 		return realObject.get(index);
 	}
+	public Object get(String name){
+		Object returnValue = get(name, this);
+		if(returnValue == Scriptable.NOT_FOUND){
+			returnValue = super.get(name);
+			if(returnValue instanceof Function){
+				return returnValue;
+			}
+			return Scriptable.NOT_FOUND;
+		}
+		return returnValue;
+	}
 	public Object get(String name, Scriptable start) {
+		if(name.equals("prototype")){
+			return getPrototypeProperty();
+		}
     	if (id != null && id.source != null) {
     		if("id".equals(name)){
     			return id.toString();
     		}
-    		if("parent".equals(name)){
-    			return getParent();
-    		}
     		if(securityEnabled.get() != null){
     			checkSecurity(this, PermissionLevel.READ_LEVEL.level);
-    		}    		
+    		}
     	}
 		if(name.equals("instances")){
 			return ObjectId.idForObject(DataSourceManager.getSource(id.subObjectId),"").getTarget();
@@ -830,11 +876,11 @@ public class PersistableClass extends PersistableObject implements Function {
 			if(prototype == null)
 				setPrototypeProperty((Scriptable) obj);
 			else{
-				for(Object id : prototype.getIds()){
-					prototype.delete(id.toString());
+				for(Map.Entry<String, Object> entry : PersistableObject.entrySet((ScriptableObject) obj, 2)){
+					prototype.delete(entry.getKey());
 				}
-				for(Object id : ((Scriptable) obj).getIds()){
-					prototype.put(id.toString(), prototype, ((Scriptable)obj).get(id.toString(), (Scriptable)obj));
+				for(Map.Entry<String, Object> entry : PersistableObject.entrySet((ScriptableObject) obj, 2)){
+					prototype.put(entry.getKey(), prototype, entry.getValue());
 				}
 				obj = prototype;
 				addAbstractMethods();
@@ -853,6 +899,8 @@ public class PersistableClass extends PersistableObject implements Function {
 				if(obj instanceof ObjectId){
 					obj = ((ObjectId)obj).getTarget();
 				}
+				if(obj instanceof Scriptable && !id.subObjectId.equals("Class"))
+					setPrototype((Scriptable) obj);
 				if(obj instanceof PersistableClass)
 					((PersistableClass)obj).subTypes.add(this);
 			}
@@ -895,8 +943,11 @@ public class PersistableClass extends PersistableObject implements Function {
 	}
 	public void setRealObject(PersistableObject realObject) {
 		if (!permanentRealObject){ // we are now in post init mode
+			for(Map.Entry<String, Object> entry : PersistableObject.entrySet(this.realObject, 2)){
+				realObject.noCheckSet(entry.getKey(),entry.getValue());
+			}
+
 			for (Object key : this.realObject.getIds()){ // transfer all the properties
-				realObject.noCheckSet((String)key,this.realObject.get((String)key));
 			}
 /*			Scriptable collectionObject = new PersistableObject();
 			realObject.noCheckSet("collection",collectionObject);
@@ -904,6 +955,25 @@ public class PersistableClass extends PersistableObject implements Function {
 			this.realObject = realObject;
 			this.realObject.parent = this;
 			((SchemaObject)realObject).setSchemaPart(SchemaObject.SchemaPart.Schema);
+		}
+	}
+
+	@Override
+	public void delete() {
+		// we do this because the objects can reappear later when new classes are created
+		deleteProperties(this, new HashSet());
+		super.delete();
+	}
+	private static void deleteProperties(Persistable target, Set<Persistable> deleted){
+		deleted.add(target);
+		for(Object key : target.getIds()){ // recursively delete everything
+			Object value = target.get(key.toString());
+			if(value instanceof SchemaObject){
+				if(!deleted.contains(value)){
+					deleteProperties((Persistable) value, deleted);
+				}
+			}
+			target.delete(key.toString());
 		}
 	}
 	

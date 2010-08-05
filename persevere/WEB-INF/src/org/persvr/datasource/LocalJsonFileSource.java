@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import org.mozilla.javascript.Scriptable;
 import org.persvr.data.DataSourceManager;
@@ -85,9 +86,12 @@ public class LocalJsonFileSource extends AbstractJsonSource implements LocalData
 	protected void setJson(String resourceName, String json) throws Exception {
 		String asString = localReadOnlyData.get(resourceName);
 		if(asString != null){
-			if("generated.js".equals(resourceName))
-				throw new RuntimeException("Can not modify configuration file when it is located in core server directory. You probably need to delete the generated.js file in persevere/WEB-INF/config");
-			throw new RuntimeException("Can not modify reaonly configuration file " + resourceName + " from core server directory WEB-INF/config.");
+			if("generated.js".equals(resourceName)) {
+				Logger.getLogger(LocalJsonFileSource.class.toString()).info("Can not modify configuration file when it is located in core server directory. You probably need to delete the generated.js file in persevere/WEB-INF/config");
+				return;
+			}
+//			Logger.getLogger(LocalJsonFileSource.class.toString()).info("Can not modify reaonly configuration file " + resourceName + " from core server directory WEB-INF/config.");
+			return;
 		}
 		if (resourceName.matches("((^|\\\\|/)\\w[\\w\\._\\- ]+)+")){
 			File resourceFile = new File(localPath + File.separatorChar + resourceName);

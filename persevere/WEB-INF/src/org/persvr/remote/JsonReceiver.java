@@ -97,7 +97,7 @@ public class JsonReceiver {
 		if (value instanceof List)
 			return listFromJSPONArray((List) value,null);
 		if (value instanceof Map)
-			return convertIdIfNeeded(idFromJSPONObject((Map) value,null));
+			return convertIdIfNeeded(idFromJSPONObject((Map) value, null, false));
 		if (value instanceof String && DATE_MATCHER.matcher((String)value).matches())
 			try {
 				value = DataSerializer.ISO_SDF.parse(((String) value));
@@ -121,7 +121,7 @@ public class JsonReceiver {
     		try {
 				Object value = array.get(i);
 				if (value instanceof Map) {
-					value = convertIdIfNeeded(idFromJSPONObject((Map) value,null));
+					value = convertIdIfNeeded(idFromJSPONObject((Map) value, null, false));
 				}
 				else if (value instanceof List) {
 					value = listFromJSPONArray((List)value, null);		        			
@@ -260,7 +260,7 @@ public class JsonReceiver {
 	static protected Object NOT_READY_FIELD = new Object();
 	protected Object idOrValueFromJSON(Object value, ObjectId defaultId) throws JSONException{
 		if (value instanceof Map) {
-			return idFromJSPONObject((Map) value, defaultId);
+			return idFromJSPONObject((Map) value, defaultId, false);
 		}
 		else if (value instanceof List) {
 			return listFromJSPONArray((List)value, defaultId);
@@ -305,7 +305,7 @@ public class JsonReceiver {
 		rpCall.executeLocally(); // responses will be added the current connection
 
 	}
-	public Identification<? extends Object> idFromJSPONObject(Map<String,Object> object, ObjectId targetId)  {
+	public Identification<? extends Object> idFromJSPONObject(Map<String,Object> object, ObjectId targetId, boolean mustMatchId)  {
 		//TODO: This needs be rearranged so that when you do a put (specifically an alteration), that we use the object 
 		// returned by the put instead of what the id indicates, because it is possible for a aliasId to indicate that we 
 		// should use a new object, when really we should use an existing object (from the childMods list)
@@ -328,10 +328,23 @@ public class JsonReceiver {
 				if (currentId.source instanceof ClientData) // TODO: Surely we can do this more consistently
 					target = Client.getCurrentObjectResponse().getConnection().clientSideObject(currentId.toString(),createInitialObject(object));
 				else {
-					if (currentId instanceof ObjectId)
-						targetId = (ObjectId) currentId;
-					else
+					if (currentId instanceof ObjectId){
+						if(mustMatchId){
+							if(targetId != currentId){
+								throw new RuntimeException("id does not match location");
+							}
+						}
+						else {
+							targetId = (ObjectId) currentId;
+						}
+						
+					}
+					else {
 						target = (Persistable) currentId.getTarget();
+						if(mustMatchId && target.getId() != targetId){
+							throw new RuntimeException("id does not match location");
+						}
+					}
 				}
 			}
 			if (targetId == null) {

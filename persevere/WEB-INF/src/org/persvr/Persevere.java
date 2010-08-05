@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import org.apache.commons.logging.LogFactory;
-
 import org.mozilla.javascript.ScriptRuntime;
 import org.mozilla.javascript.ScriptableObject;
 import org.persvr.data.DataSourceManager;
@@ -14,15 +13,14 @@ import org.persvr.data.Identification;
 import org.persvr.data.ObjectId;
 import org.persvr.data.Persistable;
 import org.persvr.data.PersistableArray;
-import org.persvr.data.PersistableObject;
 import org.persvr.data.PersistableClass;
+import org.persvr.data.PersistableObject;
 import org.persvr.data.Transaction;
 import org.persvr.datasource.DataSource;
 import org.persvr.javascript.PersevereContextFactory;
 import org.persvr.security.PermissionLevel;
 import org.persvr.security.SystemPermission;
 import org.persvr.security.UserSecurity;
-import org.persvr.util.JettyStart;
 /**
  * This is the main API for accessing Persevere's data (from Java).  
  * @author Kris

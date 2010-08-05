@@ -18,7 +18,7 @@ dojo._hasResource["dojox.json.query"] = true;
 dojo.provide("dojox.json.query");
 
 (function(){
-	function slice(obj,start,end,step){
+	function s(obj,start,end,step){
 		// handles slice operations: [3:6:2]
 		var len=obj.length,results = [];
 		end = end || len;
@@ -29,7 +29,7 @@ dojo.provide("dojox.json.query");
 	  	}
 		return results;
 	}
-	function expand(obj,name){
+	function e(obj,name){
 		// handles ..name, .*, [*], [val1,val2], [val]
 		// name can be a property to search for, undefined for full recursive, or an array for picking by index
 		var results = [];
@@ -227,7 +227,7 @@ dojo.provide("dojox.json.query");
 					var prefix = '';
 					if(t.match(/^\./)){
 						// recursive object search
-						call("expand");
+						call("e");
 						prefix = ",true)";
 					}
 					call(oper[1].match(/\=/) ? "dojo.map" : oper[1].match(/\^/) ? "distinctFilter" : "dojo.filter");
@@ -244,11 +244,11 @@ dojo.provide("dojox.json.query");
 				}
 				oper = t.match(/^\[(-?[0-9]*):(-?[0-9]*):?(-?[0-9]*)\]/); // slice [0:3]
 				if(oper){
-					call("slice");
+					call("s");
 					return "," + (oper[1] || 0) + "," + (oper[2] || 0) + "," + (oper[3] || 1) + ")"; 
 				}
 				if(t.match(/^\.\.|\.\*|\[\s*\*\s*\]|,/)){ // ..prop and [*]
-					call("expand");
+					call("e");
 					return (t.charAt(1) == '.' ? 
 							",'" + b + "'" : // ..prop 
 								t.match(/,/) ? 
@@ -310,7 +310,7 @@ dojo.data.util.filter.patternToRegExp = function(/*String*/pattern, /*boolean?*/
 	var c = null;
 	for(var i = 0; i < pattern.length; i++){
 		c = pattern.charAt(i);
-		switch (c) {
+		switch(c){
 			case '\\':
 				rxp += c;
 				i++;
@@ -435,7 +435,7 @@ dojo.provide("dojox.data.ClientFilter");
 						var remove = this._updates[i].remove;
 						if(remove){
 							for(var j = 0; j < resultSet.length;j++){
-								if(resultSet[j]==remove){
+								if(resultSet[j] == remove){
 									resultSet.splice(j--,1);
 									var updated = true;
 								}
@@ -452,10 +452,10 @@ dojo.provide("dojox.data.ClientFilter");
 						resultSet.sort(this.makeComparator(request.sort.concat()));
 					}
 					resultSet._fullLength = resultSet.length;
-					if(request.count && updated){
+					if(request.count && updated && request.count !== Infinity){
 						// do we really need to do this?
 						// make sure we still find within the defined paging set
-						resultSet.splice(request.count,resultSet.length);
+						resultSet.splice(request.count, resultSet.length);
 					}
 					request._version = this._updates.length;
 					return updated ? 2 : 1;
@@ -484,7 +484,7 @@ dojo.provide("dojox.data.ClientFilter");
 					}else if(!(typeof argsSuper.query[i] == 'string' && 
 							// if it is a pattern, we can test to see if it is a sub-pattern 
 							// FIXME: This is not technically correct, but it will work for the majority of cases
-							dojo.data.util.filter.patternToRegExp(argsSuper.query[i]).test(clientQuery[i]))){  
+							dojo.data.util.filter.patternToRegExp(argsSuper.query[i]).test(clientQuery[i]))){
 						return false;
 					}
 				}
@@ -547,7 +547,7 @@ dojo.provide("dojox.data.ClientFilter");
 						self.updateResultSet(results,args);
 						args.cacheResults = results;
 						if(!args.count || results.length < args.count){
-							defResult.fullLength = results.length;
+							defResult.fullLength = ((args.start)?args.start:0) + results.length;
 						}
 					}
 					return results;

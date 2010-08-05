@@ -41,14 +41,14 @@ public class DataSourceHelper {
 		Transaction transaction = Transaction.startDataSourceInitiatedTransaction();
 		for(Update update : updates){
 			if(update.getUpdateType() == Update.UpdateType.New) 
-				Transaction.addObservedCall(
+				Transaction.currentTransaction().addObservedCall(
 						ObjectId.idForObject(update.getTarget().getSource(), ""), "post", update.getTarget(), false, false);
 			else if (update.getUpdateType() == Update.UpdateType.Change){
-				Transaction.addObservedCall(
+				Transaction.currentTransaction().addObservedCall(
 						update.getTarget(), "put", update.getTarget().getTarget(), false, false);
 			}
 			else if (update.getUpdateType() == Update.UpdateType.Delete)
-				Transaction.addObservedCall(
+				Transaction.currentTransaction().addObservedCall(
 						update.getTarget(), "delete", Undefined.instance, false, false);
 			
 		}

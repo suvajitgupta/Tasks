@@ -8,10 +8,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
+import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import java.util.Collections;
 
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.ScriptRuntime;
@@ -52,11 +54,30 @@ public class Transaction {
 	}
 	private static long lastTransactionTime = 0;
 	long transactionTime;
+	
+	protected boolean useSequences = false;
+	protected HashSet<String> writerSet = new HashSet<String>();
+	protected Client client;
+	static ThreadLocal<Long> mySequenceId = new ThreadLocal<Long>();
+	static ThreadLocal<String> threadIdentifier = new ThreadLocal<String>(){
+		@Override protected String initialValue() {
+			return UUID.randomUUID().toString();
+		}
+	};
+	protected Long transactionId;
+	protected boolean readyToCommit = false;
+	protected boolean committed = false;
+	protected Long commitSequenceId = null;
+
+	public String getLabel(){
+		return (transactionId!=null)? transactionId.toString() : this.toString();
+	}
+	
 	/**
 	 * If the data source is notifying us of a change, than this should be false so it won't need to be re-written
 	 */
 	private boolean writeToDataSource = true;
-	public Map<Persistable,Boolean> getDirtyObjects(){
+	public synchronized Map<Persistable,Boolean> getDirtyObjects(){
 		Map<Persistable,Boolean> dirtyObjects = new HashMap<Persistable,Boolean>();
 		for(NewObject newObject : newObjects)
 			dirtyObjects.put(newObject.object, false);
@@ -88,7 +109,8 @@ public class Transaction {
 	public static Map<PropertyChangeSetListener, List<ObservedCall>> getObservedCallSet() {
 		return currentTransaction().observedCallSet;
 	}
-	public void addNewItem(Persistable newObject) {
+	public synchronized void addNewItem(Persistable newObject) {
+		//System.out.println("Adding new item to " + getLabel());
 		newObjects.add(new NewObject(newObject));
 		if (this == OUTSIDE) {
 			commit();
@@ -160,15 +182,71 @@ public class Transaction {
 			
 		}
 	}
-	static Map<Transaction,Set<String>> commitsInProcess = new HashMap<Transaction,Set<String>>();
+	static Map<Transaction,Set<String>> commitsInProcess = Collections.synchronizedMap(new HashMap<Transaction,Set<String>>());
 	static Method commitMethod = new Method("$commit");
 
 	/**
 	 * Commit the transaction
 	 */
-	public synchronized void commit() {
-		if(transactionTime != 0)
+	public void commit(){
+		if(client!=null){
+			synchronized(client){
+				syncCommit();
+			}
+		}else{
+			syncCommit();
+		}
+	}
+	
+	public synchronized void setCommitSequenceId(Long commitSeqId){
+		this.commitSequenceId = commitSeqId;
+	}
+	
+	private synchronized void syncCommit(){
+		readyToCommit = true;
+//		System.out.println("!!! Ready To Commit: " + getLabel());
+		//assumes that this thread is one of the readers
+		Long sid = mySequenceId.get();
+		if(sid!=null){
+			commitSequenceId = sid; //store this so we can check for consistency later
+		}
+		writerSet.remove(threadIdentifier.get());
+		commitIfReady();
+	}
+	
+	public synchronized boolean canCommit(){
+		//check if we can commit right now
+		boolean canCommit = client==null || !useSequences;
+		if(!canCommit){
+			Long sid = (commitSequenceId==null)? mySequenceId.get() : commitSequenceId;
+			canCommit = sid==null || (client.isConsistentToSequenceId(sid) && client.isConsistentToTransactionId(transactionId));
+		}
+		return canCommit && readyToCommit && writerSet.isEmpty();
+	}
+	
+	public synchronized void commitIfReady(){
+		if(canCommit()){
+//			System.out.println("committing transaction: " + getLabel());
+			try{
+				doCommit();
+			}finally{
+				if(this.client!=null && transactionId!=null){
+					client.clearOpenTransaction(transactionId);
+				}
+			}
+		}
+	}
+	
+	private synchronized void doCommit() {
+		Transaction oldTransaction = transactions.get();
+		if(oldTransaction!=this){
+			//make sure we are executing in this transactions's context
+			transactions.set(this);
+		}
+		if(transactionTime != 0){
+//			System.out.println("cannot recommit");
 			throw new RuntimeException("Can not recommit the same transaction");
+		}
 		long startTime = 0;
 		if(Method.profiling)
 			startTime = Method.startTiming();
@@ -301,13 +379,18 @@ public class Transaction {
 			}
 		}
 		finally{
-			// start a new transaction
+			// clear out the old transaction
 			if(this instanceof ImmediateTransaction){
 				newObjects.clear();
 				changes.clear();
 			}
-			else
-				startTransaction();
+			if(oldTransaction!=this){
+				transactions.set(oldTransaction);
+			}else{
+				transactions.remove();
+			}
+			committed = true;
+
 			if(Method.profiling)
 				Method.stopTiming(startTime, commitMethod);
 			
@@ -327,7 +410,7 @@ public class Transaction {
 	/**
 	 * Abort a transaction
 	 */
-	public void abort() {
+	public synchronized void abort() {
 		for (TransactionValue value : changes.keySet()) {
 			value.abort(this);
 		}
@@ -344,20 +427,112 @@ public class Transaction {
 		return transaction;
 	}
 	public static Transaction startTransaction() {
+		Transaction oldTransaction = transactions.get();
+		if(oldTransaction!=null && oldTransaction.client!=null){
+			synchronized(oldTransaction.client){
+				if(oldTransaction.transactionTime == 0){
+					oldTransaction.leaveTransaction();
+				}
+			}
+		}else{
+			if(oldTransaction!=null && oldTransaction.transactionTime == 0){
+				oldTransaction.leaveTransaction();
+			}
+		}
+		
 		Transaction transaction = new Transaction();
+		//System.out.println("starting transaction: " + transaction.toString());
+		if(Client.getCurrentObjectResponse()!=null){
+			transaction.client = Client.getCurrentObjectResponse().getConnection();
+		}
+		transaction.writerSet.add(threadIdentifier.get());
 		transactions.set(transaction);
 		return transaction;
 	}
+	
+	public static Transaction startTransaction(Long sequenceId, Long transactionId) {
+		Transaction oldTransaction = transactions.get();
+		if(oldTransaction!=null && oldTransaction.client!=null){
+			synchronized(oldTransaction.client){
+				if(oldTransaction.transactionTime == 0){
+					oldTransaction.leaveTransaction();
+				}
+			}
+		}else{
+			if(oldTransaction!=null && oldTransaction.transactionTime == 0){
+				oldTransaction.leaveTransaction();
+			}
+		}
+		
+		Transaction transaction = new Transaction();
+//		System.out.println("starting transaction " + transactionId.toString()+ " w/seq: " + sequenceId.toString());
+		transactions.set(transaction);
+		synchronized(transaction){
+			transaction.useSequences = true;
+			transaction.writerSet.add(threadIdentifier.get());
+			transaction.mySequenceId.set(sequenceId);
+			transaction.transactionId = transactionId;
+			transaction.client = Client.getCurrentObjectResponse().getConnection();
+		}
+		return transaction;
+	}
+	
 	/**
-	 * Re-enter an open transaction and register it as the transaction for this thread
+	 * Re-enter an open transaction, register it as the transaction for this thread, and register this thread as a writer for the transaction
 	 */
-	public void enterTransaction() {
+	public synchronized void enterTransaction() {
+		if(committed) throw new RuntimeException("Entering a previously committed transaction");
+		//System.out.println("entering transaction: " + this.toString());
+		writerSet.add(threadIdentifier.get());
 		transactions.set(this);
 	}
+	
+	public synchronized void enterTransaction(Long sequenceId) {
+		if(committed) {
+			throw new RuntimeException("Entering a previously committed transaction");
+		}
+		if(!useSequences){
+			throw new RuntimeException("Transaction not initialized properly for sequence use");
+		}
+		
+//		System.out.println("entering transaction " + getLabel() + " w/seq: " + sequenceId.toString());
+		writerSet.add(threadIdentifier.get());
+		mySequenceId.set(sequenceId);
+		transactions.set(this);
+
+	}
 	/**
-	 * Deregisters the transaction from the current thread but leaves it open
+	 * Signal that the thread is done with this transaction
 	 */
+	protected void leaveTransaction() {
+		synchronized(this){
+			writerSet.remove(threadIdentifier.get());
+		}
+		if(transactionTime==0){
+			//if this transaction has not yet been committed and it should be...
+			commitIfReady();
+		}
+	}
+	
+	/**
+	 * Deregisters the transaction from the current thread but leaves it open, returns the current transaction if any
+	 */
+	public static Transaction suspendTransaction() {
+		Transaction txn = transactions.get();
+		//System.out.println("suspending transaction: " + txn.toString());
+		transactions.set(new ImmediateTransaction());
+		return txn;
+	}
+	
 	public static void exitTransaction() {
+		Transaction txn = transactions.get();
+		if(txn.client!=null){
+			synchronized(txn.client){
+				txn.leaveTransaction();
+			}
+		}else{
+			txn.leaveTransaction();
+		}
 		transactions.set(new ImmediateTransaction());
 	}
 	/**
@@ -381,17 +556,13 @@ public class Transaction {
 	 * @param content
 	 * @param supersedes
 	 */
-    static void addObservedCall(ObjectId targetId, String methodName,Object content,boolean supersedes, boolean clientInitiatedCall) {// TODO: Probably should move this to Transaction
+    void addObservedCall(ObjectId targetId, String methodName,Object content,boolean supersedes, boolean clientInitiatedCall) {// TODO: Probably should move this to Transaction
     	Map<PropertyChangeSetListener,List<ObservedCall>> observedCallSet = getObservedCallSet();
     	IndividualRequest request = Client.getCurrentObjectResponse();
     	// create an observed call 
-    	ObservedCall evt = new ObservedCall(targetId,methodName,content,
+    	ObservedCall evt = new ObservedCall(targetId, methodName, methodName.equals("DELETE") ? org.mozilla.javascript.Undefined.instance : content,
     			// if it is a clientInitiatedCall, we record the connection so we can avoid sending the notification back to the client 
     			request != null && clientInitiatedCall && !request.performedClientInitiatedCall ? request.getConnection() : null);
-    	// record the first call as client initiated so that we can avoid get notified for this one, but 
-    	//	subsequent calls should notify the client
-    	if(request != null)
-    		request.performedClientInitiatedCall = true;
     	// iterate through all the listeners
     	synchronized(PersistableObject.watchSets){
     		Scriptable global = GlobalData.getGlobalScope();
@@ -412,6 +583,17 @@ public class Transaction {
 		    						reallyMatches = ScriptRuntime.toBoolean(((Query)watchedId).conditionFunction.call(PersevereContextFactory.getContext(), global, global, new Object[]{
 		    							content
 		    						}));
+		    						if(!reallyMatches){
+		    							transactions.set(OUTSIDE);
+		    							try{
+				    						reallyMatches = ScriptRuntime.toBoolean(((Query)watchedId).conditionFunction.call(PersevereContextFactory.getContext(), global, global, new Object[]{
+				    							content
+				    						}));
+		    							}
+		    							finally{
+		    								transactions.set(this);
+		    							}
+		    						}
 		    					}
 		    					else
 		    						reallyMatches = true;
@@ -450,8 +632,11 @@ public class Transaction {
     }
     public static class ImmediateTransaction extends Transaction {
         public void commitIfImmediate(){
-        	this.transactionTime = 0;
-        	commit();
+			synchronized(this){
+				this.transactionTime = 0;
+				this.writerSet.clear();
+				commit();
+			}
         }
     	
     }

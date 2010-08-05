@@ -56,7 +56,11 @@ public class GlobalData  {
 	public static String getWebInfLocation() {
 		if (webInfLocation == null){
 			String thisResource = "org/persvr/data/GlobalData.class";
-			String sourcesConfigurationFileLocation = GlobalData.class.getClassLoader().getResource(thisResource).toString();
+			ClassLoader classLoader = GlobalData.class.getClassLoader();
+			if(classLoader == null){
+				classLoader = ClassLoader.getSystemClassLoader();
+			}
+			String sourcesConfigurationFileLocation = classLoader.getResource(thisResource).toString();
 			sourcesConfigurationFileLocation = sourcesConfigurationFileLocation.substring(0,sourcesConfigurationFileLocation.length() - thisResource.length());
 			// remove the last two paths
 			if (sourcesConfigurationFileLocation.startsWith("jar:")) {
@@ -77,7 +81,7 @@ public class GlobalData  {
     public static final String FUNCTION_RUN_AT_BOTH = "both";  
     public static final String FUNCTION_RUN_AT_CLIENT = "client";  
     public static final String ALWAYS_DOWNLOAD_FUNCTION= "alwaysDownload";
-    static Scriptable globalScope;
+    static ScriptableObject globalScope;
     public static class PersistableConstructor extends BaseFunction {
     	PersistableConstructor(Scriptable prototype, String name) {
     		setInstanceIdValue(4, prototype); // 4 = Id-prototype
@@ -103,7 +107,7 @@ public class GlobalData  {
 			throw new RuntimeException(e);
 		}
     }
-	private static Log log = LogFactory.getLog(PersevereFilter.class);
+	private static Log log = LogFactory.getLog(GlobalData.class);
     public static Timer jsTimer;
     static {
     	try{
@@ -200,9 +204,8 @@ public class GlobalData  {
 			currentQueuedTasks.put(thisTaskId,timeoutTask = new TimerTask(){
 				@Override
 				public void run() {
-					Object seq = session == null ? null : session.getSequence();
 					// ensure that we don't access the same transient values with more than one thread
-					synchronized(seq == null ? new Object() : seq){
+					synchronized(session == null ? new Object() : session){
 						TimerTask activeTask = repeated ? currentQueuedTasks.get(thisTaskId) : currentQueuedTasks.remove(thisTaskId);
 						// make sure it is still queued and hasn't been cancelled
 						if(activeTask != null){
@@ -227,16 +230,16 @@ public class GlobalData  {
      * the entire system. 
      * @return
      */
-    public static Scriptable getGlobalScope() {
+    public static ScriptableObject getGlobalScope() {
     	if (globalScope == null) {
 			Context cx= PersevereContextFactory.getContext();
 			// create the global object
-			globalScope = cx.initStandardObjects(new ProtectedGlobal());
+			globalScope = (ScriptableObject) cx.initStandardObjects(new ProtectedGlobal());
 			final Scriptable objectPrototype = ScriptableObject.getObjectPrototype(globalScope);
 			final Scriptable arrayPrototype = ScriptableObject.getClassPrototype(globalScope,"Array");
 			final Scriptable functionPrototype = ScriptableObject.getClassPrototype(globalScope,"Function");
 			// create our own Object that creates persistable objects
-			Scriptable persistableObject = new PersistableConstructor(objectPrototype, "Object") {
+/*			Scriptable persistableObject = new PersistableConstructor(objectPrototype, "Object") {
 				@Override
 				public Scriptable construct(Context cx, Scriptable scope, Object[] args) {
 					ScriptableObject newObject = new PersistableObject();
@@ -265,7 +268,7 @@ public class GlobalData  {
 				
 			};
 			globalScope.put("Array", globalScope, persistableArray);
-			persistableArray.setPrototype(functionPrototype);
+			persistableArray.setPrototype(functionPrototype);*/
 			// setup the native libraries in the global environment
 			Scriptable pjsLibrary = new PjsLibrary();
 			pjsLibrary.setPrototype(objectPrototype);
@@ -290,9 +293,9 @@ public class GlobalData  {
 				}
 				
 			}, false);
-			RestMethod.setRestMethods(globalScope);
 			
 			globalScope.put("Thread", globalScope, new ThreadConstructor());
+			globalScope.put("global", globalScope, globalScope);
 			globalScope.put("setTimeout", globalScope, new TimerFunction(false));
 			globalScope.put("setInterval", globalScope, new TimerFunction(true));
 			Function clearTimer = new PersevereNativeFunction() {
@@ -405,6 +408,9 @@ public class GlobalData  {
 							throw ScriptRuntime.constructError("Error", e.getMessage());
 						} catch (IOException e) {
 							throw ScriptRuntime.constructError("Error", e.getMessage());
+						}
+						finally {
+							method.releaseConnection();
 						}
 					  	readyState = 4;
 					  	Object readyStateChangeHandler = XMLHttpRequest.this.get("onreadystatechange",XMLHttpRequest.this);

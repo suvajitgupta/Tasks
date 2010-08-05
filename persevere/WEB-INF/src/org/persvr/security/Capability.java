@@ -145,8 +145,7 @@ public class Capability extends PersistableObject{
 						UserSecurity.doPriviledgedAction(new PrivilegedAction() {
 
 							public Object run() {
-								Transaction currentTransaction = Transaction.currentTransaction();
-								currentTransaction.exitTransaction();
+								Transaction currentTransaction = Transaction.suspendTransaction();
 								// create the first real capability
 								Persistable capability = Persevere.newObject("Capability");
 								List members = Persevere.newArray();
@@ -165,7 +164,7 @@ public class Capability extends PersistableObject{
 								capability.put("execute", capability, executeAccess);
 								executeAccess.add(DataSourceManager.getRootObject());
 								
-								currentTransaction.enterTransaction();
+								if(currentTransaction!=null) currentTransaction.enterTransaction();
 								return null;
 							}
 						});
@@ -188,7 +187,15 @@ public class Capability extends PersistableObject{
 	        				level = newLevel;
 	        			break;
 		        	}
-	        		parent = parent.getParent();
+	        		boolean security = PersistableObject.isSecurityEnabled();
+	        		
+	        		PersistableObject.enableSecurity(false);
+	        		try{
+	        			parent = parent.getParent();
+	        		}
+	        		finally{
+	        			PersistableObject.enableSecurity(security);
+	        		}
 		        	if (parent instanceof Capability)
 		        		capabilityDescendant = true;
 		        	
@@ -442,10 +449,9 @@ public class Capability extends PersistableObject{
 				Capability capability = ((Capability)args[0]);
 				capability.allGranted = null;
 				capability.computedPermissions.clear();
-				Transaction currentTransaction = Transaction.currentTransaction();
-				currentTransaction.exitTransaction();
+				Transaction currentTransaction = Transaction.suspendTransaction();
 				List<Object> oldMembers = new ArrayList(capability.getAllMembers());
-				currentTransaction.enterTransaction();
+				if(currentTransaction!=null) currentTransaction.enterTransaction();
 				List<Object> newMembers = args.length == 1 ? 
 						new ArrayList(capability.getAllMembers()) : 
 							new ArrayList();
@@ -460,6 +466,24 @@ public class Capability extends PersistableObject{
 		    }
 			public String toString() {
 				return "function(content, target, property){/*native code*/}";
+			}
+		});
+		security.put("changePassword", security, new PersevereNativeFunction() {
+			@Override
+			public Object call(final Context cx, final Scriptable scope,
+					final Scriptable thisObj, Object[] args) {
+				final Object user = UserSecurity.currentUser();
+				if(user == null){
+					throw new SecurityException("Can not change the user's password, no user is logged in");
+				}
+				if(!(user instanceof CapabilityUser)){
+					throw new SecurityException("Can not change the user's password, the current user is not Persevere defined user");
+				}
+				((CapabilityUser)user).setPassword(args[0].toString());
+				return true;
+		    }
+			public String toString() {
+				return "function(newPassword){/*native code*/}";
 			}
 		});
 		security.setGetterOrSetter("currentUser", 0, new PersevereNativeFunction() {

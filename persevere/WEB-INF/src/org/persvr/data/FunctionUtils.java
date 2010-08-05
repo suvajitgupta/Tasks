@@ -67,7 +67,7 @@ public class FunctionUtils {
 					return (Persistable) methodDefinition;
 				}
 			}
-			Object superType = schema.get("extends");
+			Object superType = PersistableClass.getSuperType(schema);
 			schema = superType instanceof Persistable ? (Persistable) superType : schema == getObjectSchema() ? null : getObjectSchema();
     	}
 		return null;

@@ -20,6 +20,7 @@ import java.util.Set;
 import org.apache.commons.logging.LogFactory;
 import org.mozilla.javascript.BaseFunction;
 import org.mozilla.javascript.Context;
+import org.mozilla.javascript.EcmaError;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.IdFunctionObject;
 import org.mozilla.javascript.JavaScriptException;
@@ -43,6 +44,7 @@ public class PersistableArray extends NativeArray implements List,PersistableLis
 	public static class ElementsLoader {
 		int initializedLength = Integer.MAX_VALUE;
 		Iterator iterator;
+		boolean initialized;
 	}
 	ElementsLoader elementsLoader;
     public PersistableArray(long lengthArg)
@@ -62,10 +64,12 @@ public class PersistableArray extends NativeArray implements List,PersistableLis
     	}
     }
 	public void initSourceCollection(Collection sourceCollection){
-		elementsLoader = new ElementsLoader();
+		ElementsLoader elementsLoader = new ElementsLoader();
 		elementsLoader.iterator = sourceCollection.iterator();
 		elementsLoader.initializedLength = 0;
+		this.elementsLoader = elementsLoader;
 		superPutLength(sourceCollection.size());
+		elementsLoader.initialized = true;
 	}
 	protected void fullyFetch(){
 		if (elementsLoader != null && elementsLoader.iterator != null)
@@ -117,7 +121,7 @@ public class PersistableArray extends NativeArray implements List,PersistableLis
 										return;
 									i++;
 									if(i % 100 == 0){
-										if(i > maxIterations && !UserSecurity.hasPermission(SystemPermission.runLongQueries)){
+										if(i > maxIterations && PersistableObject.isSecurityEnabled() && !UserSecurity.hasPermission(SystemPermission.runLongQueries)){
 											throw ScriptRuntime.constructError("AccessError", "Query has taken too much computation, and the user is not allowed to execute resource-intense queries. Increase maxIterations in your config file to allow longer running non-indexed queries to be processed.");
 										}
 									}
@@ -197,8 +201,11 @@ public class PersistableArray extends NativeArray implements List,PersistableLis
 				try {
 					// first we try to do it at the data source level
 					ObjectId id = ((Persistable) thisObj).getId();
-					if(id instanceof Query)
-						return Query.parseQuery((Query) id, scope, ((Function)args[0]), false, ascending).getTarget();
+					if(args.length < 3) {
+						// TODO: once the data sources support multiple sort parameters, this should be removed 
+						if(id instanceof Query)
+							return Query.parseQuery((Query) id, scope, ((Function)args[0]), false, ascending).getTarget();
+					}
 				} catch (QueryCantBeHandled e) {
 					// pass through failed, we will go to the default handler
 					LogFactory.getLog(PersistableArray.class).debug("query can't be handled at the database level (will be filtered in JavaScript) " + e);
@@ -212,7 +219,7 @@ public class PersistableArray extends NativeArray implements List,PersistableLis
 						int sortIndex = 0;
 						i++;
 						if(i % 100 == 0){
-							if(i > maxIterations && !UserSecurity.hasPermission(SystemPermission.runLongQueries)){
+							if(i > maxIterations && PersistableObject.isSecurityEnabled() && !UserSecurity.hasPermission(SystemPermission.runLongQueries)){
 								throw ScriptRuntime.constructError("AccessError", "Query has taken too much computation, and the user is not allowed to execute resource-intense queries");
 							}
 						}
@@ -220,8 +227,18 @@ public class PersistableArray extends NativeArray implements List,PersistableLis
 							while(sortIndex < args.length){
 								Function func = ((Function)args[sortIndex]);
 								boolean ascending = (Boolean)args[sortIndex + 1];
-								Object v1 = func.call(cx, scope, (Scriptable) o1, new Object[]{o1});
-								Object v2 = func.call(cx, scope, (Scriptable) o2, new Object[]{o2});
+								Object v1;
+								try{
+									v1 = func.call(cx, scope, (Scriptable) o1, new Object[]{o1});
+								}catch(EcmaError e){
+									v1 = Undefined.instance;
+								}
+								Object v2;
+								try{
+									v2 = func.call(cx, scope, (Scriptable) o2, new Object[]{o2});
+								}catch(EcmaError e){
+									v2 = Undefined.instance;
+								}
 								int comparison = CompareValues.instance.compare(v1, v2);
 								if (comparison != 0)
 									return (ascending ? 1 : -1) * comparison;
@@ -253,7 +270,7 @@ public class PersistableArray extends NativeArray implements List,PersistableLis
 				// find all the distinct entries, easily done by adding it to a set
 				Set distinctItems = new LinkedHashSet();
 			 
-				if(((List)thisObj).size() > maxIterations && !UserSecurity.hasPermission(SystemPermission.runLongQueries)){
+				if(((List)thisObj).size() > maxIterations && PersistableObject.isSecurityEnabled() && !UserSecurity.hasPermission(SystemPermission.runLongQueries)){
 					throw ScriptRuntime.constructError("AccessError", "Query has taken too much computation, and the user is not allowed to execute resource-intense queries. Increase maxIterations in your config file to allow longer running non-indexed queries to be processed.");
 				}
 				distinctItems.addAll((List) thisObj);
@@ -275,7 +292,7 @@ public class PersistableArray extends NativeArray implements List,PersistableLis
 				for(Object value : args){
 					i++;
 					if(i % 100 == 0){
-						if(i > maxIterations && !UserSecurity.hasPermission(SystemPermission.runLongQueries)){
+						if(i > maxIterations && PersistableObject.isSecurityEnabled() && !UserSecurity.hasPermission(SystemPermission.runLongQueries)){
 							throw ScriptRuntime.constructError("AccessError", "Query has taken too much computation, and the user is not allowed to execute resource-intense queries. Increase maxIterations in your config file to allow longer running non-indexed queries to be processed.");
 						}
 					}
@@ -329,7 +346,7 @@ public class PersistableArray extends NativeArray implements List,PersistableLis
 				for(Object obj : (List) thisObj){
 					i++;
 					if(i % 100 == 0){
-						if(i > maxIterations && !UserSecurity.hasPermission(SystemPermission.runLongQueries)){
+						if(i > maxIterations && PersistableObject.isSecurityEnabled() && !UserSecurity.hasPermission(SystemPermission.runLongQueries)){
 							throw ScriptRuntime.constructError("AccessError", "Query has taken too much computation, and the user is not allowed to execute resource-intense queries. Increase maxIterations in your config file to allow longer running non-indexed queries to be processed.");
 						}
 					}
@@ -353,7 +370,7 @@ public class PersistableArray extends NativeArray implements List,PersistableLis
 				for(Object obj : (List) thisObj){
 					i++;
 					if(i % 100 == 0){
-						if(i > maxIterations && !UserSecurity.hasPermission(SystemPermission.runLongQueries)){
+						if(i > maxIterations && PersistableObject.isSecurityEnabled() && !UserSecurity.hasPermission(SystemPermission.runLongQueries)){
 							throw ScriptRuntime.constructError("AccessError", "Query has taken too much computation, and the user is not allowed to execute resource-intense queries. Increase maxIterations in your config file to allow longer running non-indexed queries to be processed.");
 						}
 					}
@@ -385,7 +402,7 @@ public class PersistableArray extends NativeArray implements List,PersistableLis
 				for(Object obj : (List) thisObj){
 					i++;
 					if(i % 100 == 0){
-						if(i > maxIterations && !UserSecurity.hasPermission(SystemPermission.runLongQueries)){
+						if(i > maxIterations && PersistableObject.isSecurityEnabled() && !UserSecurity.hasPermission(SystemPermission.runLongQueries)){
 							throw ScriptRuntime.constructError("AccessError", "Query has taken too much computation, and the user is not allowed to execute resource-intense queries. Increase maxIterations in your config file to allow longer running non-indexed queries to be processed.");
 						}
 					}
@@ -430,10 +447,11 @@ public class PersistableArray extends NativeArray implements List,PersistableLis
 	}
 	protected synchronized void fetchNextPage(int limit){
 		//TODO: may be better to synchronize on the iterator itself 
-		if (elementsLoader != null) {
+		if (elementsLoader != null && elementsLoader.iterator != null) {
 			Iterator iterator = elementsLoader.iterator;
 			while(iterator.hasNext()){
-				super.put(elementsLoader.initializedLength++, this, iterator.next());
+				super.put(elementsLoader.initializedLength, this, iterator.next());
+				elementsLoader.initializedLength++;
 				if (elementsLoader.initializedLength >= limit){
 					return;
 				}
@@ -529,10 +547,13 @@ public class PersistableArray extends NativeArray implements List,PersistableLis
 	
 	@Override
 	public long getLength() {
-		if (id != null && id.source != null && transactionalVersion != null) {
-    		PersistableArray currentVersion = (PersistableArray) transactionalVersion.getTarget();
-    		if(currentVersion != this && currentVersion != null)
-    			return currentVersion.getLength();
+		if (id != null && id.source != null){
+			updateObject();
+			if(transactionalVersion != null) {
+	    		PersistableArray currentVersion = (PersistableArray) transactionalVersion.getTarget();
+	    		if(currentVersion != this && currentVersion != null)
+	    			return currentVersion.getLength();
+			}
 		}
 
         return super.getLength();
@@ -748,8 +769,10 @@ public class PersistableArray extends NativeArray implements List,PersistableLis
     		if(PersistableObject.securityEnabled.get() != null){
     			PersistableObject.checkSecurity(this, PermissionLevel.WRITE_LEVEL.level);
     		}
-			getOrCreateModTarget().superDelete(index);
-			commitIfImmediate();
+    		if(elementsLoader == null || elementsLoader.initialized){
+    			getOrCreateModTarget().superDelete(index);
+    			commitIfImmediate();
+    		}
     	}
         super.delete(index);
     }

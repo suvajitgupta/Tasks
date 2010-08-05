@@ -18,7 +18,7 @@ import org.mortbay.xml.XmlConfiguration;
 public class JettyStart {
 
 	static private Log log = LogFactory.getLog(JettyStart.class);
-
+	static Timer timer;
 	// options
 	public static final String VERSION = "v";
 	public static final String HELP = "h";
@@ -118,7 +118,7 @@ public class JettyStart {
 			FileOutputStream fos = new FileOutputStream(processFile);
 			fos.write(processName.getBytes());
 			fos.close();
-			Timer timer = new Timer("Process file removal monitor", true);
+			timer = new Timer("Process file removal monitor", true);
 			timer.schedule(new TimerTask(){
 				@Override
 				public void run() {

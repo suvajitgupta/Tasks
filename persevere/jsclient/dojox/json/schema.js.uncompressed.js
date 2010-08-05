@@ -59,7 +59,7 @@ dojox.json.schema.mustBeValid = function(result){
 	//		This checks to ensure that the result is valid and will throw an appropriate error message if it is not
 	// result: the result returned from checkPropertyChange or validate
 	if(!result.valid){
-		throw new TypeError(dojo.map(result.errors,function(error){return error.property + ' ' + error.message;}).join(","));
+		throw new TypeError(dojo.map(result.errors,function(error){return "for property " + error.property + ': ' + error.message;}).join(", "));
 	}	
 }
 dojox.json.schema._validate = function(/*Any*/instance,/*Object*/schema,/*Boolean*/ _changing){

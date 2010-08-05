@@ -236,6 +236,7 @@ public class HttpJsonSource extends AbstractJsonSource implements WritableDataSo
 					Map config = new HashMap();
 					config.put("name", tableUrl);
 					config.put("sourceClass", getClass().getName());
+					config.put("hidden", true);
 					DataSourceManager.initSource(config,null, classForData, "");
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -286,7 +287,7 @@ public class HttpJsonSource extends AbstractJsonSource implements WritableDataSo
 	ThreadLocal<String> currentUrl;
 	String JSPON_URL_TOKEN = "/jspon/";
 	@Override
-	public ObjectId idFromJSPONObject(Map object, ObjectId defaultId)  {
+	public ObjectId idFromJSPONObject(Map object, ObjectId defaultId, boolean mustMatchId)  {
 		
     	try {
 			ObjectId targetId;

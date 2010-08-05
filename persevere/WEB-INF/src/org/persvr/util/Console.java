@@ -16,6 +16,7 @@ import org.mozilla.javascript.ScriptRuntime;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 import org.mozilla.javascript.Undefined;
+import org.persvr.data.DataSourceManager;
 import org.persvr.data.GlobalData;
 import org.persvr.data.PersistableObject;
 import org.persvr.data.Transaction;
@@ -37,7 +38,11 @@ public class Console extends Thread {
 	Context context;
 	Scriptable global;
 	Scriptable consoleScope;
-
+	public static void main(String[] args){
+		DataSourceManager.getDataSources(); // fire up the sources/DBs
+		new Console().run();
+	}
+	
 	@Override
 	public void run() {
 		try {

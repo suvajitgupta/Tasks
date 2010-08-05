@@ -63,4 +63,11 @@ public class SchemaObject extends PersistableObject {
 		
 	}
 	
+	public boolean setParentIfNeeded(Persistable parent){
+		if(this.parent==null){
+			this.parent = parent;
+			return true;
+		}
+		return false;
+	}
 }

@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.WeakHashMap;
 
+import org.mozilla.javascript.EcmaError;
 import org.mozilla.javascript.Node;
 import org.mozilla.javascript.Token;
 import org.persvr.data.DataSourceManager;
@@ -48,21 +49,21 @@ public class JavaScriptDBSource extends BaseDataSource implements WritableDataSo
 	static boolean thisVersion(){
 		return false;
 	}
-	static JavaScriptDB database;
+	private static JavaScriptDB database;
 	JavaScriptDBSource superSource;
 	private boolean writeIntegrity;
 	private boolean useUUIDs;
 	public void initParameters(Map<String, Object> parameters) throws Exception {
-		if(database == null)
+		if(getDatabase() == null)
 			database = new JavaScriptDB((String) parameters.get("location"));
 		if("Transaction".equals(getId())){
-			database.transactionSource = this;
+			getDatabase().transactionSource = this;
 		}
 		if("Object".equals(getId())){
-			database.objectSource = this;
+			getDatabase().objectSource = this;
 		}
 		if("Array".equals(getId())){
-			database.arraySource = this;
+			getDatabase().arraySource = this;
 		}		
 		if(Boolean.TRUE.equals(parameters.get("writeIntegrity")))
 			writeIntegrity = true;
@@ -79,12 +80,12 @@ public class JavaScriptDBSource extends BaseDataSource implements WritableDataSo
 				throw new RuntimeException("Can not extend non-existent class " + superType);
 			superSource.subTypes.add(getId());
 		}*/
-		database.getTableId(getId());
+		getDatabase().getTableId(getId());
 	}
 	public static void initialize(){
-		if(database != null)
+		if(getDatabase() != null)
 			try {
-				database.initialize();
+				getDatabase().initialize();
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}
@@ -96,7 +97,7 @@ public class JavaScriptDBSource extends BaseDataSource implements WritableDataSo
     	try {
 			return isUseUUIDs() ?
 					UUID.randomUUID().toString() :
-					Long.toString(database.getNextId(database.getTableId(getId()), true));
+					Long.toString(getDatabase().getNextId(getDatabase().getTableId(getId()), true));
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
@@ -105,25 +106,25 @@ public class JavaScriptDBSource extends BaseDataSource implements WritableDataSo
     * Called to close files that are used by the data source.      
     */
 	public void destroy() {	  
-	   database.release();		
+	   getDatabase().release();		
 	}
 	
 	
-	Map<Transaction, Long> commitedTransactions = Collections.synchronizedMap(new WeakHashMap<Transaction, Long>());
+	static Map<Transaction, Long> commitedTransactions = Collections.synchronizedMap(new WeakHashMap<Transaction, Long>());
 	public void commitTransaction() throws Exception {
 		Transaction currentTransaction = Transaction.currentTransaction();
 		Long transactionTime = new Long(currentTransaction.getTransactionTime().getTime());
 		// we just need to call database commitTransaction once for a given transaction
 		if(!transactionTime.equals(commitedTransactions.get(currentTransaction))){
 			commitedTransactions.put(currentTransaction, transactionTime);
-			database.commitTransaction();
+			getDatabase().commitTransaction();
 		}
 	}
 	
 	public void mapObject(PersistableInitializer initializer, String objectId) throws Exception{
 		boolean subObject = objectId.indexOf('-') > -1 && ("Array".equals(getId()) || "Object".equals(getId()));
-		IndexTraverser traverser = database.getTraverserForTable(
-				subObject ? database.internedStrings.get(database.convertIdToInternalObject(ObjectId.idForObject(this, objectId)).tableId) : 
+		IndexTraverser traverser = getDatabase().getTraverserForTable(
+				subObject ? getDatabase().internedStrings.get(getDatabase().convertIdToInternalObject(ObjectId.idForObject(this, objectId)).tableId) : 
 					getId(), "id");
 		if(subObject){
 			objectId = objectId.substring(objectId.indexOf('-') + 1);
@@ -154,7 +155,7 @@ public class JavaScriptDBSource extends BaseDataSource implements WritableDataSo
 		// if a version was specified, we need to make sure we load it
 		if(version > -1){
 			while(((ObjectVersion) object.getVersion()).versionNumber > version){
-				object = database.getVersionByReference(((ObjectVersion) object.getVersion()).previousVersionReference);
+				object = getDatabase().getVersionByReference(((ObjectVersion) object.getVersion()).previousVersionReference);
 			}
 			if(((ObjectVersion) object.getVersion()).versionNumber != version)
 				throw new ObjectNotFoundException(this, objectId);
@@ -162,11 +163,11 @@ public class JavaScriptDBSource extends BaseDataSource implements WritableDataSo
 	}
 
 	public void recordDelete(String objectId) throws Exception {
-		if(database.transactionSource == this)
+		if(getDatabase().transactionSource == this)
 			throw new RuntimeException("Can not delete transactions");
 	}
 	public NewObjectPersister recordNewObject(final Persistable object) throws Exception {
-		if(database.transactionSource == this)
+		if(getDatabase().transactionSource == this)
 			throw new RuntimeException("Can not directly create transactions");
 
 		return new StartAsEmptyPersister(){
@@ -177,7 +178,7 @@ public class JavaScriptDBSource extends BaseDataSource implements WritableDataSo
 						if(object.getId().subObjectId.startsWith("s$")) {
 							id = isUseUUIDs() ?
 								UUID.randomUUID().toString() :
-									Long.toString(database.getNextId(database.getTableId(getId()), true));
+									Long.toString(getDatabase().getNextId(getDatabase().getTableId(getId()), true));
 						}
 						else{
 							id = object.getId().subObjectId;
@@ -200,15 +201,15 @@ public class JavaScriptDBSource extends BaseDataSource implements WritableDataSo
 		};
 	}
 	public void recordPropertyAddition(String objectId, String name, Object value, int attributes) throws Exception {
-		if(database.transactionSource == this)
+		if(getDatabase().transactionSource == this)
 			throw new RuntimeException("Can not modify transactions");
 	}
 	public void recordPropertyChange(String objectId, String name, Object value, int attributes) throws Exception {
-		if(database.transactionSource == this)
+		if(getDatabase().transactionSource == this)
 			throw new RuntimeException("Can not modify transactions");
 	}
 	public void recordPropertyRemoval(String objectId, String name) throws Exception {
-		if(database.transactionSource == this)
+		if(getDatabase().transactionSource == this)
 			throw new RuntimeException("Can not modify transactions");
 	}
 	public void abortTransaction() throws Exception {
@@ -217,7 +218,7 @@ public class JavaScriptDBSource extends BaseDataSource implements WritableDataSo
 	}
 	public void setIdSequence(long nextId) {
 		try {
-			database.setIdSeq(database.getTableId(getId()), nextId);
+			getDatabase().setIdSeq(getDatabase().getTableId(getId()), nextId);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
@@ -227,7 +228,7 @@ public class JavaScriptDBSource extends BaseDataSource implements WritableDataSo
 			// all the numbered ids are allocated for auto-assignment
 			long longId = Long.parseLong(id);
 			try {
-				return database.getNextId(database.getTableId(getId()), false) > longId;
+				return getDatabase().getNextId(getDatabase().getTableId(getId()), false) > longId;
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			} 
@@ -247,7 +248,7 @@ public class JavaScriptDBSource extends BaseDataSource implements WritableDataSo
 			// check to make sure we can handle the query
 			try {
 				Traverser traverser = createTraverser(query.getCondition(), getId());
-				if(query.getSort() != null && traverser.estimatedSize(0) < Math.sqrt(database.getTraverserForTable(getId(), "id").estimatedSize(0)))
+				if(query.getSort() != null && traverser.estimatedSize(0) < Math.sqrt(getDatabase().getTraverserForTable(getId(), "id").estimatedSize(0)))
 					// TODO: We also need to check to see if the sourceTraverser is already in the correct order, or can be sorted by simply reversing it
 					throw new QueryCantBeHandled("Sort more efficient to be handled by an iterator");
 			} catch (IOException e) {
@@ -281,7 +282,7 @@ public class JavaScriptDBSource extends BaseDataSource implements WritableDataSo
 		}
 		private Traverser createTraverser(Node expression, String table) throws IOException {
 			if(expression == null)
-				return database.getTraverserForTable(table, "id");
+				return getDatabase().getTraverserForTable(table, "id");
 			try {
 				boolean not = false; 
 				switch(expression.getType()){
@@ -343,7 +344,7 @@ public class JavaScriptDBSource extends BaseDataSource implements WritableDataSo
 						} catch (RuntimeException e) {
 							throw new QueryCantBeHandled("not valid structure");
 						}
-						IndexTraverser traverser = database.getTraverserForTable(table, property);
+						IndexTraverser traverser = getDatabase().getTraverserForTable(table, property);
 						switch(expression.getType()){		
 							case Token.SHNE:
 							case Token.NE:
@@ -436,7 +437,7 @@ public class JavaScriptDBSource extends BaseDataSource implements WritableDataSo
 			DataSourceManager.deleteSource(subType);
 		}*/
 		//superSource.subTypes.remove(getId());
-		database.deleteTable(getId());
+		getDatabase().deleteTable(getId());
 	}
 
 	public List<ObjectId> getReferrers(String objectId) {
@@ -616,7 +617,7 @@ public class JavaScriptDBSource extends BaseDataSource implements WritableDataSo
 		Traverser operand;
 		String table;
 		NotTraverser(Traverser traverser, String table) throws IOException{
-			indexTraverser = database.getTraverserForTable(table, "id");
+			indexTraverser = getDatabase().getTraverserForTable(table, "id");
 			operand = traverser;
 			this.table = table;
 		}
@@ -722,7 +723,7 @@ public class JavaScriptDBSource extends BaseDataSource implements WritableDataSo
 		String property;
 		String tableName;
 		SortTraverser(String property, String tableName, boolean ascending, Traverser sourceTraverser) throws IOException{
-			sortedTraverser = database.getTraverserForTable(tableName, property);
+			sortedTraverser = getDatabase().getTraverserForTable(tableName, property);
 			this.tableName = tableName;
 			this.property = property;
 			this.operand = sourceTraverser;
@@ -735,9 +736,13 @@ public class JavaScriptDBSource extends BaseDataSource implements WritableDataSo
 				Persistable potential = sortedTraverser.nextObject();
 				if(potential == null)
 					return null;
-				if(operand.matches(potential)){
-					found++;
-					return potential;
+				try{
+					if(operand.matches(potential)){
+						found++;
+						return potential;
+					}
+				}catch(EcmaError e){
+					// squelch
 				}
 			}
 		}
@@ -774,6 +779,9 @@ public class JavaScriptDBSource extends BaseDataSource implements WritableDataSo
 			return true;
 		}
 		return writeIntegrity;
+	}
+	public static JavaScriptDB getDatabase() {
+		return database;
 	}
 	
 }

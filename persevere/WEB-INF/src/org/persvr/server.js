@@ -10,7 +10,11 @@
 	Date.format = "date-time";
 	
 	org; // initialize the package system
-	
+
+	// make this point correctly
+	Array.prototype.constructor = Array;
+	Object.prototype.constructor = Object;
+
 	//security:
 	var permissions = {
 		none: 0,
@@ -62,6 +66,11 @@
 		window: window,
 		print: console.log
 	};
+
+	system = {
+		os: ""
+	};
+
 	
 	Thread.sleep = java.lang.Thread.sleep;
 	
@@ -103,7 +112,63 @@
 		throw new TypeError("Can not directly instantiate a Query");
 	};
 	Query.prototype = [];
-
+	
+	QueryString = function(string, params){
+		this.string = string;
+		this.params = params;
+	};
+	QueryString.prototype = new String("");
+	// its easier to write (and read) these as regular expressions (since that is how they are used)
+	var $prop = /(?:@?\.?([a-zA-Z_$][\w_$]*))/.source;
+	var $value = /("(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\/[\w_$]+\/[\w]+|\-?[0-9]+(?:\.[0-9]+)?(?:[eE]\-?[0-9]+)|true(?![\w])|false(?![\w])|null(?![\w]))/.source;
+	var $comparator = /(===|!==|==|!=|>=|<=|=|<|>)/.source;
+	var $operator = /([\+\-\*\/\&\|\?\:])/.source;
+	var $logic = /([\&\|])/.source;
+	var $expression = /((?:"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\[(?:"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|[^\]])*\]|[^\]])*)/.source;
+	var $filter = "(?:\\[?\\?" + $expression + "\\]?)";
+	var $sort = "(?:\\[[\\\\\\/]" + $expression + "\\])";
+	function convertRegex(regexp){
+		return new RegExp((regexp.source || regexp).replace(/\$[a-z]+/g, function(t){
+			switch(t){
+				case "$prop" : return $prop; 
+				case "$value" : return $value; 
+				case "$comparator" : return $comparator; 
+				case "$operator" : return $operator; 
+				case "$logic" : return $logic;
+				case "$expression" : return $expression;
+				case "$filter" : return $filter;
+				case "$sort" : return $sort;
+			}
+			return t;
+		}), (regexp.global ? "g" : "") + (regexp.ignoreCase ? "m" : ""));
+	}
+	for each (let i in ["charAt", "toString", "valueOf"]){
+		QueryString.prototype[i] = function(){
+			return String.prototype[i].apply(this.string, arguments);
+		} 
+	}
+	QueryString.prototype.match = function(regexp){
+		var matches = String.prototype.match.call(this.string, convertRegex(regexp));
+		for each(let i in matches){
+			matches[i] = new QueryString(i);
+		}
+		return matches;
+	};
+	QueryString.prototype.replace = function(regexp, newStr){
+		if(typeof newStr == 'function'){
+			var func = newStr;
+			newStr = function(){
+				for(var i = 0; i < arguments.length; i++){
+					arguments[i] = new QueryString(arguments[i]);
+				}
+				return func.apply(this, arguments);
+			}
+		}
+		return new QueryString(String.prototype.replace.call(this.string, convertRegex(regexp), newStr));
+	};
+	QueryString.prototype.execute = function(target){
+		return jsonQuery(this, this.params)(target);
+	}
 	onRemoteRequest = function(xhr, method, url){
 		// console.log("onRemoteRequest ", url);
 	};
@@ -132,7 +197,7 @@
 	}
 	
 	// persevere edit
-	var tempQuery = function(/*String*/query,/*Object?*/obj, args){// persevere edit
+	var tempQuery = function(/*String*/query, args){// persevere edit
 		// summary:
 		// 		Performs a JSONQuery on the provided object and returns the results. 
 		// 		If no object is provided (just a query), it returns a function that evaluates objects
@@ -144,7 +209,7 @@
 		// 	description:
 		// 	|	dojox.json.query("foo",{foo:"bar"}) - > "bar"
 		// |	evaluator = dojox.json.query("?foo='bar'&rating>3");
-
+		query = query.toString();
 		var iterations = 0;
 		var maxIterations = org.persvr.data.PersistableArray.maxIterations;
 		// setup JSONQuery library
@@ -161,7 +226,11 @@
 						results.push(item);
 					}
 					i++;
+					if(i > maxIterations){
+						throwMaxIterations();
+					}
 				}
+				return results;
 			}
 			var len=obj.length;
 			end = end || len;
@@ -277,7 +346,7 @@
 				return t.charAt(0) == '.' ? t : // leave .prop alone 
 					t == '@' ? "$obj" :// the reference to the current object 
 					//Persevere edit
-					(t.match(/:|^(\$|Math|RegExp|args|true|false|null|instanceof|date|__ids__)$/) ? "" : "$obj.") + t; // plain names should be properties of root... unless they are a label in object initializer
+					(t.match(/:|^(\$|Math|args|true|false|null|instanceof|date|__ids__)$/) ? "" : "$obj.") + t; // plain names should be properties of root... unless they are a label in object initializer
 			}).
 			replace(/\.?\.?\[(`\]|[^\]])*\]|[\(\,]?\?.*|\.\.([\w\$_]+)|\.\*/g,function(t,a,b){
 				var oper = t.match(/^\.?\.?(\[\s*\?|\?|\[\s*==)(.*?)\]?$/); // [?expr] and ?expr and [=expr and =expr
@@ -332,12 +401,8 @@
 		});
 		// create a function within this scope (so it can use expand and slice)
 		
-		var executor = eval("1&&function($,$1,$2,$3,$4,$5,$6,$7,$8,$9){var $obj=$;return " + query + "}");
-		for(var i = 0;i<arguments.length-1;i++){
-			arguments[i] = arguments[i+1];
-		}
-		return obj ? executor.apply(this,arguments) : executor;
+		return eval("1&&function($,$1,$2,$3,$4,$5,$6,$7,$8,$9){var $obj=$;return " + query + "}");
 	};
 	tempQuery.privileged = false;
-	query = tempQuery;
+	jsonQuery = tempQuery;
 })();

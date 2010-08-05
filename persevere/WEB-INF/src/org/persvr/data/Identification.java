@@ -107,7 +107,7 @@ public abstract class Identification<T> implements TargetRetriever<T> {
 		// start with ?, or subObjectId is "" or null is true
 		if (path != null && ( ( subObjectId == null ) ||
 				( subObjectId.length() == 0 ) || path.charAt( 0 ) != '?' ) ) {
-			path = path.replaceAll("#\\.?",".");
+			path = path.replaceAll("^([^\\.]+)#\\.?","$1.");
 			if (JsonPath.isDefinite(value))
 				return ObjectPath.idForObject(source,subObjectId,path);
 			return JsonPath.idForObject(source,subObjectId,path);

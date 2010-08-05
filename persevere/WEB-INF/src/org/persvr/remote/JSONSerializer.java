@@ -17,7 +17,9 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.mozilla.javascript.BaseFunction;
+import org.mozilla.javascript.Context;
 import org.mozilla.javascript.EcmaError;
+import org.mozilla.javascript.Function;
 import org.mozilla.javascript.IdFunctionObject;
 import org.mozilla.javascript.NativeJavaObject;
 import org.mozilla.javascript.ScriptRuntime;
@@ -28,6 +30,7 @@ import org.persvr.data.BinaryData;
 import org.persvr.data.DataSourceManager;
 import org.persvr.data.DeferredField;
 import org.persvr.data.FunctionUtils;
+import org.persvr.data.GlobalData;
 import org.persvr.data.Identification;
 import org.persvr.data.ObjectId;
 import org.persvr.data.Persistable;
@@ -35,6 +38,7 @@ import org.persvr.data.PersistableObject;
 import org.persvr.data.Query;
 import org.persvr.data.QueryCollection;
 import org.persvr.datasource.ClassDataSource;
+import org.persvr.datasource.DataSource;
 import org.persvr.datasource.RemoteDataSource;
 import org.persvr.remote.Client.IndividualRequest;
 import org.persvr.remote.DataSerializer.Request.SerializerFeature;
@@ -84,8 +88,12 @@ public class JSONSerializer extends DataSerializer {
 				Persistable clazz = ((Persistable)value).getSchema();
 				if(clazz != null) {
 					ObjectId classId = clazz.getId();
-					if(classId.subObjectId != null)
-						response.setContentType(response.getContentType() + ";schema=" + request.idString(classId));
+					if(classId.subObjectId != null){
+						if("Class".equals(classId.subObjectId))
+							response.setContentType(response.getContentType() + ";schema=" + request.idString(classId) + ";schema=http://json-schema.org/hyper-schema");
+						else
+							response.setContentType(response.getContentType() + ";schema=" + request.idString(classId));
+					}
 				}
 			}
 		}
@@ -136,12 +144,12 @@ public class JSONSerializer extends DataSerializer {
 		}
 		
 		public void writeValue(Writer writer, Object value, Boolean lazy) throws IOException {
-			writeValue(writer, value, lazy,null);
+			writeValue(writer, value, lazy,null, false);
 		}
 		protected String undefined(){
 			return "null";
 		}
-		protected void writeValue(Writer writer, Object value, Boolean lazy, Persistable referrer) throws IOException {//TODO: make the second parameter unnecesssary
+		protected void writeValue(Writer writer, Object value, Boolean lazy, Persistable referrer, boolean hasParentId) throws IOException {//TODO: make the second parameter unnecesssary
 			String valueString;
 			/*if (value instanceof XMLElement)
 				value = ((XMLElement) value).getNewConversion();*/
@@ -155,7 +163,7 @@ public class JSONSerializer extends DataSerializer {
 		        	id = (Identification<? extends Object>) value;
 		        if (id == null || (id instanceof ObjectId && !Boolean.TRUE.equals(lazy))) {
 		        		//(!(id.source instanceof HttpJsonSource && !(request.requestedSource instanceof HttpJsonSource))))) {
-					 serializeObject(writer, value instanceof ObjectId ? ((ObjectId)value).getTarget() : (Persistable) value , lazy, referrer);
+					 serializeObject(writer, value instanceof ObjectId ? ((ObjectId)value).getTarget() : (Persistable) value , lazy, referrer, hasParentId);
 				}
 				else {
 					String idString = request.idString(id);
@@ -188,10 +196,10 @@ public class JSONSerializer extends DataSerializer {
 				throw new RuntimeException("can not directly handle objectId");
 			else if (value instanceof Scriptable){
 				if (value instanceof NativeJavaObject){
-					writeValue(writer, ((NativeJavaObject)value).unwrap(),lazy,referrer);
+					writeValue(writer, ((NativeJavaObject)value).unwrap(),lazy,referrer, hasParentId);
 				}
 				else if ("Date".equals(((Scriptable)value).getClassName())) {
-					writeValue(writer, PersistableObject.convertToDateJavaDate(value),lazy,referrer);
+					writeValue(writer, PersistableObject.convertToDateJavaDate(value),lazy,referrer, hasParentId);
 				}
 				else
 					writer.write("null"); // this should only happen when we hit a system prototype
@@ -214,7 +222,7 @@ public class JSONSerializer extends DataSerializer {
 					/* || 
 					(objId.source == null && referrer.getId().toString().equals("root"))*/
 		}
-		void serializeObject(Writer writer, Persistable obj, Boolean lazy, Persistable referrer) throws IOException {
+		void serializeObject(Writer writer, Persistable obj, Boolean lazy, Persistable referrer, boolean parentHasId) throws IOException {
 			StringBuffer buffer = new StringBuffer(); 
 			try { 
 				depth++;
@@ -227,7 +235,7 @@ public class JSONSerializer extends DataSerializer {
 				}
 				ObjectId refId;
 				if (objId != null && referrer != null && 
-							(!((refId = referrer.getId()) instanceof Query || refId.source == null || // want all the items in a query to be included
+							(!((refId = referrer.getId()) instanceof Query || !parentHasId || // want all the items in a query to be included
 									(referrer instanceof List && request instanceof IndividualRequest && ((IndividualRequest)request).requestRoot == referrer) || 
 								(refId.subObjectId == null && refId.source == DataSourceManager.getMetaClassSource())) && // and want children of the root to be included as well
 								!Boolean.FALSE.equals(lazy) &&
@@ -270,20 +278,20 @@ public class JSONSerializer extends DataSerializer {
 							for (Object item : ((List)obj).subList(indexes[0], indexes[1])) {
 								writeNewLine(writer, commaNeeded);
 								try {
-									writeValue(writer, item, lazy, obj);
+									writeValue(writer, item, lazy, obj, parentHasId);
 								} catch (EcmaError e) {
 									if(item instanceof Persistable){
 										item = ((Persistable)item).getId();
 									}
 									if(item instanceof Identification && "AccessError".equals(e.getName())){
 										String refString = request.idString((Identification)item);
-										writer.write((commaNeeded ? ',' : "") + "{\"$ref\":" + JSON.quote(refString) + "}");
+										writer.write("{\"$ref\":" + JSON.quote(refString) + "}");
 									}
 									else{
-										writer.write((commaNeeded ? ',' : "") + JSON.quote(e.getMessage()));
+										writer.write(JSON.quote(e.getMessage()));
 									}
 								} catch (Exception e) {
-									writer.write((commaNeeded ? ',' : "") + JSON.quote(e.getMessage()));
+									writer.write(JSON.quote(e.getMessage()));
 								}
 								commaNeeded = true;
 									
@@ -303,6 +311,9 @@ public class JSONSerializer extends DataSerializer {
 						}
 					}
 					else{
+						if(commaNeeded){
+							parentHasId = true;
+						}
 						Persistable schema = obj.getSchema();	
 						Set<Map.Entry<String,Object>> entries= obj.entrySet(4);
 						boolean security = PersistableObject.isSecurityEnabled();
@@ -328,6 +339,12 @@ public class JSONSerializer extends DataSerializer {
 										Object propDef = properties == null ? null : properties.get(key);
 										Object lazyObject = propDef instanceof Persistable ?  ((Persistable)propDef).get("lazy") : null;
 										lazy = lazyObject instanceof Boolean ? (Boolean) lazyObject : null;
+										Object conditional = propDef instanceof Persistable ?  ((Persistable)propDef).get("shouldSerialize") : null;
+										if(conditional instanceof Function){
+											if(!ScriptRuntime.toBoolean(((Function)conditional).call(Context.enter(), GlobalData.getGlobalScope(), obj, new Object[]{}))){
+												continue;
+											}
+										}
 										if (value instanceof BaseFunction && !(request.getFeature(SerializerFeature.IncludeServerMethods) && UserSecurity.hasPermission(SystemPermission.javaScriptCoding))) {
 											String runAt = FunctionUtils.getRunAtForMethod(obj, key);
 											if (!("client".equals(runAt) || "local".equals(runAt))){
@@ -363,7 +380,7 @@ public class JSONSerializer extends DataSerializer {
 											if(value instanceof Identification){
 												value = ((Identification)value).getTarget();
 											}
-											writeValue(writer, value, lazy, obj);
+											writeValue(writer, value, lazy, obj, parentHasId);
 										}
 										commaNeeded = true;
 										

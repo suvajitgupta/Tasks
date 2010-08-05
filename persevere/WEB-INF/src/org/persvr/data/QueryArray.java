@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.Map.Entry;
 
@@ -256,7 +257,11 @@ public class QueryArray extends PersistableObject implements List, QueryCollecti
     		if(PersistableObject.securityEnabled.get() != null){
     			PersistableObject.checkSecurity(QueryArray.this, PermissionLevel.READ_LEVEL.level);
     		}
-    		return convertSourceObject(sourceIterator.next());
+    		try{
+    			return convertSourceObject(sourceIterator.next());
+    		}catch(NoSuchElementException e){
+    			return null;
+    		}
 		}
 
 		public void remove() {

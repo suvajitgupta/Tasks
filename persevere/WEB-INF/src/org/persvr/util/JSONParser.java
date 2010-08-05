@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.mozilla.javascript.IdFunctionObject;
+import org.mozilla.javascript.ScriptRuntime;
 import org.mozilla.javascript.Undefined;
 import org.persvr.data.GlobalData;
 import org.persvr.data.PersistableClass;
@@ -347,10 +348,10 @@ public class JSONParser {
             case '(': 
             	Object result = read(); 
             	if(read()!=PARANTHESIS_END)
-            		throw new JSONException("Expected closing paranthesis");
+            		throw ScriptRuntime.constructError("SyntaxError", "Expected closing paranthesis");
             	return result;
             case CharacterIterator.DONE: 
-                	throw new JSONException("Unexpected end of JSON message");
+                	throw ScriptRuntime.constructError("SyntaxError", "Unexpected end of JSON message");
             default:
                 c = it.previous();
                 if (Character.isDigit(c) || c == '-') {
@@ -389,7 +390,7 @@ public class JSONParser {
 										throw new RuntimeException(e);
 									}
                 			}
-                			else throw new JSONException("Can only instantiate date objects");
+                			else throw ScriptRuntime.constructError("SyntaxError", "Can only instantiate date objects");
                 		}
                 	}
                 	else if (first == 'N' && "NaN".equals(token))
@@ -410,7 +411,7 @@ public class JSONParser {
                 		return token;
                 }
                 else
-                	throw new JSONException("Unexpected character " + ch);
+                	throw ScriptRuntime.constructError("SyntaxError", "Unexpected character " + ch);
         }
         // System.out.println("token: " + token); // enable this line to see the token stream
         return token;
@@ -423,7 +424,7 @@ public class JSONParser {
             buf.append(c);
             switch (c) {
 	            case 0:
-	                throw new JSONException("Invalid function syntax");
+	                throw ScriptRuntime.constructError("SyntaxError", "Invalid function syntax");
 	            case '"':
 	            case '\'':
             		char s = c;
@@ -447,7 +448,7 @@ public class JSONParser {
 	            	}
 	            	break;
 	            case CharacterIterator.DONE: 
-                	throw new JSONException("Unexpected end of JSON String");
+                	throw ScriptRuntime.constructError("SyntaxError", "Unexpected end of JSON String");
 	            case '/' :
 	                c = next();
 	                buf.append(c);
@@ -495,7 +496,7 @@ public class JSONParser {
                 	if (token == OBJECT_END)
                 		return ret;
             		else
-            			throw new JSONException("Expecting a , or }");
+            			throw ScriptRuntime.constructError("SyntaxError", "Expecting a , or }");
                 }
                 
             }
@@ -516,7 +517,7 @@ public class JSONParser {
             	if (token == ARRAY_END)
             		return ret;
         		else
-        			throw new JSONException("Expecting a , or ]");
+        			throw ScriptRuntime.constructError("SyntaxError", "Expecting a , or ]");
             }
 
         }
@@ -551,9 +552,14 @@ public class JSONParser {
             isFloatingPoint = true;
         }
         String s = buf.toString();
-        return isFloatingPoint 
-            ? (length < 17) ? (Object)Double.valueOf(s) : new BigDecimal(s)
-            : (length < 10) ? Integer.valueOf(s) : (length < 19) ? (Object)Long.valueOf(s) : new BigInteger(s);
+        try {
+        	return isFloatingPoint 
+	            ? (length < 17) ? (Object)Double.valueOf(s) : new BigDecimal(s)
+	            : (length < 10) ? Integer.valueOf(s) : (length < 19) ? (Object)Long.valueOf(s) : new BigInteger(s);
+        }
+        catch(NumberFormatException e) {
+        	throw ScriptRuntime.constructError("SyntaxError", "Error parsing number " + e.getMessage());
+        }
     }
  
     private int addDigits() {
@@ -568,7 +574,7 @@ public class JSONParser {
         buf.setLength(0);
         while (c != start) {
 	        if (c == CharacterIterator.DONE) 
-	        	throw new JSONException("Unexpected end of JSON string");
+	        	throw ScriptRuntime.constructError("SyntaxError", "Unexpected end of JSON string");
 
             if (c == '\\') {
                 next();

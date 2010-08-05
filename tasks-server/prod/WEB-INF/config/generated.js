@@ -173,7 +173,24 @@ function (username, password) {
 				}
 			},
 			"prototype":{
-			}
+			},
+			"instances":{"$ref":"../task/"}
+		}
+	},
+	{"id":"generated.js?sources?3",
+		"name":"all",
+		"schema":{
+			"prototype":{
+				"get":function () {
+    return serialize(load("user"));
+}
+			},
+			"instances":{"$ref":"../all/"},
+			"get":
+function () {
+    return {users:load("user"), projects:load("project"), tasks:load("task")};
+}
+
 		}
 	}
 ]

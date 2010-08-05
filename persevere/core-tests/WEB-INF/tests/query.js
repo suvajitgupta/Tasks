@@ -54,11 +54,6 @@ tests([
 	  assertEqual( result.length, 2);
     checkIds( result, [ a, c ], "Simple Start" );    	  
 	},
-	function simpleRegex(){
-    var result = load("TestClass/[?RegExp('some.*').test(str)]");
-		assertEqual( result.length, 2);
-    checkIds( result, [ a, c ], "Simple RegEx" );        		
-	},
 	function stringGreaterThan(){
     var result = load("TestClass/[?str>'some string']");
     assertEqual( result.length, 1);

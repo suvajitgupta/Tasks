@@ -481,7 +481,7 @@ public class JavaScriptDB {
 				}
 			} catch (EOFException e) {
 				//normal
-			} catch (Exception e) {
+			} catch (Throwable e) {
 				log.debug("recovering database",e);
 				// this should end in an exception
 			}
@@ -1019,7 +1019,7 @@ public class JavaScriptDB {
 			// submit for indexing
 			Object properties = object.getSchema().get("properties");			
 			if(newVersion.previousVersionReference != -1){
-				Transaction.exitTransaction();
+				Transaction.suspendTransaction();
 				for(Map.Entry<Integer, Long> propertyToIndex : propertyToIndexMap.entrySet()){
 					String propertyName = internedStrings.get(propertyToIndex.getKey());
 
@@ -1027,7 +1027,7 @@ public class JavaScriptDB {
 							Boolean.FALSE.equals(((Persistable)((Persistable)properties).get(propertyName)).get("index")))){
 						Object priorValue = propertyName.equals("id") ? id : object.get(internedStrings.get(propertyToIndex.getKey()));
 						final RootIndexNode index = getIndex(tableId, propertyName);
-
+						
 						if((index.lastUpdatedFromTable == -1 || index.lastUpdatedFromTable == newVersion.previousTableChange) &&
 								index.updatesSinceLastQuery < MAX_AUTO_INDEXED_UPDATES_BETWEEN_QUERIES && 
 								priorValue != Scriptable.NOT_FOUND){
@@ -2016,6 +2016,7 @@ public class JavaScriptDB {
 		final static int INDEX_DIVIDE_POINT = INDEX_NODE_SIZE / 2;
 		final static int INDEX_DIVIDE_POINT_WITHIN_ENTRY = INDEX_NODE_SIZE * 3 / 5;
 		final static int INDEX_SIZE_CUTOFF = INDEX_NODE_SIZE - 18;
+		final static int INDEX_STRING_MAX_LENGTH = 400;
 
 		synchronized void write() throws IOException {
 			long startTime = 0;
@@ -2032,9 +2033,17 @@ public class JavaScriptDB {
 			Object lastUpperBound = new Object();
 			for (int i = 0; i < entries.length; i++) {
 				IndexEntry entry = entries[i];
-				if (lastUpperBound == null ? entry.upperBound != null : !lastUpperBound.equals(entry.upperBound)) {
-					writeEntity(entry.upperBound, output, WriteState.REFERENCE_IF_EXISTS);
-					lastUpperBound = entry.upperBound;
+				Object upperBound = entry.upperBound;
+				if (lastUpperBound == null ? upperBound != null : !lastUpperBound.equals(upperBound)) {
+					if (upperBound instanceof String){
+						if (((String)upperBound).length() > INDEX_STRING_MAX_LENGTH)
+							upperBound = ((String) upperBound).substring(0, INDEX_STRING_MAX_LENGTH);
+					}
+					else if (upperBound instanceof BinaryData){
+						upperBound = "__binary__";
+					}
+					writeEntity(upperBound, output, WriteState.REFERENCE_IF_EXISTS);
+					lastUpperBound = upperBound;
 				}
 				entry.writeReference(output);
 				if (depth > 0) {
@@ -2140,11 +2149,11 @@ public class JavaScriptDB {
 						// must have parentEntries completely ready before transferring
 						parentEntries = parentIndex.addEntry(parentEntries, entryNum + 1, secondNodeEntry);
 						parentEntries[entryNum] = new BranchEntry(divideEntry.upperBound, divideEntry.objectReference, this);
-						secondNode.write();
 						secondNode.objectsNeedingIndexing = new LinkedList<IndexNodeUpdate>();
 						boolean secondNodeSubmitNeeded = false;
 						synchronized(secondNode.objectsNeedingIndexing){
 							parentIndex.entries = parentEntries;
+							secondNode.write();
 							this.entries = entries;
 							// now all the entries will be correctly routed, just need to fix the ones in the wrong queue now
 						
@@ -2392,8 +2401,12 @@ public class JavaScriptDB {
 					return false;
 				value = id.subObjectId;
 			}
-			else
+			else {
+				boolean wasSecurityEnabled = PersistableObject.isSecurityEnabled();
+				PersistableObject.enableSecurity(false);
 				value = obj.get(propertyName);
+				PersistableObject.enableSecurity(wasSecurityEnabled);
+			}
 			int comparison = CompareValues.instance.compare(value, minKey);
 			if (comparison < 0 || (minReference > MIN_MIN_REFERENCE && comparison == 0))
 				return false;
@@ -2683,6 +2696,53 @@ public class JavaScriptDB {
 	static Method commitMethod = new Method("$JavaScriptDBSource.commit");
 	static Method commitToDiskMethod = new Method("$JavaScriptDBSource.commitToDisk");
 	static Method commitAquireWriteLockMethod = new Method("$JavaScriptDBSource.commitAquireWriteLock");
+	Thread freezeThread;
+	/**
+	 * Freezes the database, so no writes are made
+	 */
+	public void freeze(){
+		if(freezeThread != null)
+			throw new RuntimeException("The database is already frozen");
+		freezeThread = new Thread(){
+			public void run(){
+				synchronized (transactionLogFile) {
+					synchronized(this){
+						notify();
+					}
+					synchronized(this){
+						try{
+							wait();
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+				
+			}
+		};
+		synchronized(freezeThread){
+			freezeThread.start();
+			try {
+				freezeThread.wait();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	/**
+	 * Unfreezes the database
+	 */
+	public void unfreeze(){
+		if(freezeThread == null)
+			throw new RuntimeException("The database is not frozen");
+		synchronized(freezeThread){
+			freezeThread.notify();
+		}
+		freezeThread = null;
+	}
+	long nextToOnCommit = 0; 
+	long nextCommit = 0;
+	Object onCommitLock = new Object();
 	public void commitTransaction() throws Exception {
 		long writeStartTime = 0, startTime = 0;
 		if(Method.profiling)
@@ -2690,6 +2750,7 @@ public class JavaScriptDB {
 		synchronized (writeCountLock) {
 			writesInProgress++;
 		}
+		long thisCommit;
 		boolean writeIntegrity = false;
 		List<Runnable> localOnCommitTasks = new ArrayList<Runnable>();
 		try {
@@ -2704,16 +2765,20 @@ public class JavaScriptDB {
 				// this relies
 				Map<Persistable, Boolean> changedObjects = Transaction.currentTransaction().getDirtyObjects();
 				List<Persistable> changes = Persevere.newArray();
+				Set<Persistable> changeSet = new HashSet();
 				for(Persistable changedObject : changedObjects.keySet()){
 					// we always rewrite the parent if it is a sub-object or sub-array
 					while(changedObject.getParent() != null && !(changedObject.getParent().getId() instanceof Query)){// changedObject.getId().hidden()
 						changedObject = changedObject.getParent();
 					}
-					DataSource source = changedObject.getId().source;
-					if(source instanceof JavaScriptDBSource){
-						if (((JavaScriptDBSource)source).isWriteIntegrity())
-							writeIntegrity = true;
-						changes.add(changedObject);
+					if(!changeSet.contains(changedObject)){
+						changeSet.add(changedObject);
+						DataSource source = changedObject.getId().source;
+						if(source instanceof JavaScriptDBSource){
+							if (((JavaScriptDBSource)source).isWriteIntegrity())
+								writeIntegrity = true;
+							changes.add(changedObject);
+						}
 					}
 				}
 				historyInitializer.setProperty("changes", changes);
@@ -2722,6 +2787,7 @@ public class JavaScriptDB {
 				if(Method.profiling)
 					transactionWriteLockTime = Method.startTiming();
 				synchronized (transactionLogFile) { // we must write one at a time
+					thisCommit = nextCommit++;
 					if(Method.profiling)
 						Method.stopTiming(transactionWriteLockTime, commitAquireWriteLockMethod);
 					if(Method.profiling)
@@ -2784,8 +2850,18 @@ public class JavaScriptDB {
 				currentForceLock.notifyAll();
 			}
 		}
-		for (Runnable task : localOnCommitTasks){
-			task.run();
+		while(true){
+			synchronized(onCommitLock){
+				if(nextToOnCommit == thisCommit){
+					for (Runnable task : localOnCommitTasks){
+						task.run();
+					}
+					nextToOnCommit++;
+					onCommitLock.notifyAll();
+					break;
+				}
+				onCommitLock.wait();
+			}
 		}
 		if(Method.profiling)
 			Method.stopTiming(startTime, commitMethod);

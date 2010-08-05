@@ -18,10 +18,11 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.NativeObject;
+import org.mozilla.javascript.ScriptRuntime;
 import org.mozilla.javascript.Scriptable;
+import org.mozilla.javascript.ScriptableObject;
 import org.persvr.datasource.DataSource;
 import org.persvr.javascript.PersevereContextFactory;
 
@@ -47,7 +48,7 @@ public class JsonPath extends Identification<Object> {
 		JsonPath objId = new JsonPath();
 		objId.source = source;
 		objId.subObjectId= subObjectId;
-		objId.jsonPath = "$" + jsonPath;
+		objId.jsonPath = jsonPath;
 		String[] parts = objId.jsonPath.split("#");
 		if (parts.length > 1) {
 			boolean first = true;
@@ -61,7 +62,7 @@ public class JsonPath extends Identification<Object> {
 
 		return objId;
 	}
-	static Function jsonPathFunction = (Function) GlobalData.getGlobalScope().get("query", GlobalData.getGlobalScope());
+//	static Function jsonPathFunction = (Function) GlobalData.getGlobalScope().get("query", GlobalData.getGlobalScope());
 
 	public static Object query(Persistable objectToQuery, String jsonPath, Object... parameters) {
 		JsonPath query = new JsonPath();
@@ -81,7 +82,7 @@ public class JsonPath extends Identification<Object> {
 		return isDefinite(jsonPath);
 	}
 	static boolean isDefinite(String jsonPath) {
-		return !jsonPath.replaceAll("\"[^\"\\\\\\n\r]*\"", "").matches(".*(\\.\\.|\\*|\\[[\\\\/]|\\?|,|:|>|\\(|<|=|\\+|-).*");
+		return !jsonPath.replaceAll("\"[^\"\\\\\\n\r]*\"", "").matches(".*(\\.\\.|\\*|\\[[\\\\/]|\\?|,|:|>|\\(|<|=|\\+).*");
 	}
 	private Object doJsonPath(String jsonPath) {
 		return doJsonPath(ObjectId.idForObject(source,subObjectId).getTarget(),jsonPath);
@@ -112,7 +113,19 @@ public class JsonPath extends Identification<Object> {
 		Object result;
 		try{
 			Method.safeMode.set(Boolean.TRUE);
-			result = jsonPathFunction.call(PersevereContextFactory.getContext(), GlobalData.getGlobalScope(), null,new Object[]{jsonPath,target,paramScope});
+			Persistable schema = target.getSchema();
+			if(schema == null){
+				schema = ObjectId.idForString("Class/Object").getTarget();
+			}
+			Scriptable global = GlobalData.getGlobalScope();
+			
+			Function queryFunction = (Function) ScriptableObject.getProperty(schema, "query");
+			Function QueryString = (Function) global.get("QueryString", global);
+			Scriptable queryString = QueryString.construct(PersevereContextFactory.getContext(), global, new Object[]{jsonPath, paramScope}); 
+			if(queryFunction instanceof Method){
+				queryFunction = ((Method)queryFunction).innerFunction;
+			}
+			result = queryFunction.call(PersevereContextFactory.getContext(), global, target, new Object[]{queryString, target});
 		}finally{
 			Method.safeMode.set(null);
 		}

@@ -3,6 +3,7 @@ package org.persvr.util;
 import java.util.Comparator;
 import java.util.Date;
 
+import org.mozilla.javascript.Undefined;
 import org.persvr.data.ObjectId;
 import org.persvr.data.Persistable;
 /**
@@ -34,6 +35,8 @@ public class CompareValues implements Comparator<Object>{
 			return 0;
 		if(obj == BIGGEST)
 			return 100;
+		if(obj == Undefined.instance)
+			return -1;
 		return 1;
 	}
 	public final static Object BIGGEST = new Object();

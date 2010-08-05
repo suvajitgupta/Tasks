@@ -25,34 +25,6 @@ import org.persvr.data.QueryCantBeHandled;
  * This is an SQL database table data source
  */
 public class DatabaseTableDataSource extends DatabaseDataSource implements WritableDataSource, ChangeableData {
-/*	static Timer timer = new Timer();
-	static List<QueryIterator> currentIterators = new ArrayList<QueryIterator>();
-	static final int CLEANUP_INTERVAL = 5000; // 5 seconds
-	static void scheduleDisconnect(){
-		// this does cleanup of the iterators to remove open result sets
-		timer.schedule(new TimerTask(){
-
-			@Override
-			public void run() {
-				for (Object item : Arrays.asList(currentIterators.toArray())){ // make a copy to iterate
-					QueryIterator openQuery = (QueryIterator) item;
-					if (openQuery.inUse)
-						openQuery.inUse = false;
-					else{ // has not been used for at least 5 seconds
-						try {
-							currentIterators.remove(openQuery);
-							openQuery.rs.close();
-						} catch (SQLException e) {
-							e.printStackTrace();
-						}
-					}
-				}
-				scheduleDisconnect();
-			}
-			
-		}, CLEANUP_INTERVAL);
-
-	}*/
 	protected Object getValueFromRs(ResultSet rs) throws Exception {
 		ObjectId rowId = ObjectId.idForObject(DatabaseTableDataSource.this, rs.getString(columnCount + 1));
 		// use the row to initialize this object
@@ -80,41 +52,23 @@ public class DatabaseTableDataSource extends DatabaseDataSource implements Writa
 		}
 		return new QueryIterator(fullSql + from, countSql + from);
 	}
+	
 	String table;
+
 	@Override
-	ThreadSpecificConnectionObject setupConnection(Connection connection) throws SQLException {
-		
-		ConnectionStatements statements = new ConnectionStatements();
-		try {
-			statements.loadTable = connection.prepareStatement("select " + columnsString + " from " + table);
-		}
-		catch (SQLException e) {
-			runStarterStatements();
-			statements.loadTable = connection.prepareStatement("select " + columnsString + " from " + table);
-		}
-		statements.loadRow = connection.prepareStatement("select " + columnsString + " from " + table + " where " + idColumn + "=?");
-		statements.deleteRow = connection.prepareStatement("DELETE FROM " + table + " WHERE " + idColumn + "=?");
+	void setupStatements() {
+		loadTableStatement = "select " + columnsString + " from " + table;
+		loadRowStatement = "select " + columnsString + " from " + table + " where " + idColumn + "=?";
+		deleteRowStatement = "DELETE FROM " + table + " WHERE " + idColumn + "=?";
 		String valuesPlacement = "";
-		for (int i = 0; i < columns.length;i++)
+		for (int i = 0; i < columns.length;i++) {
 			if (!(columns[i] instanceof RelationalColumn) || ((RelationalColumn)columns[i]).relationshipType != RelationshipType.ONE_TO_MANY)
-			valuesPlacement += i == 0 ? "?" : ",?";
-		statements.insertRow = connection.prepareStatement("INSERT INTO " + table + " (" + columnsString + ") values (" + valuesPlacement + ")");
-		return statements;
+				valuesPlacement += i == 0 ? "?" : ",?";
+		}
+		insertRowStatement = "INSERT INTO " + table + " (" + columnsString + ") values (" + valuesPlacement + ")";
 	}
-	/**
-	 * Just cast it to our specific connection object type
-	 */
-	@Override
-	protected ConnectionStatements getConnectionObject() {
-		return (ConnectionStatements) super.getConnectionObject();
-	}
-    class ConnectionStatements extends ThreadSpecificConnectionObject {
-    	public PreparedStatement loadTable;
-    	public PreparedStatement loadRow;
-    	public PreparedStatement deleteRow;
-    	public PreparedStatement insertRow;
-    }
-    int columnCount = 0;
+
+	int columnCount = 0;
     
 	@Override
 	public void initParameters(Map<String,Object> parameters) throws Exception {
@@ -167,17 +121,11 @@ public class DatabaseTableDataSource extends DatabaseDataSource implements Writa
     	}
     	columnsString = columnsString.substring(0,columnsString.length()-1); // remove the last comma
     	super.initParameters(parameters);
-    	/*timer.schedule(new TimerTask(){
-
-			@Override
-			public void run() {
-				List<Update> updates = new ArrayList();
-				updates.add(new Update(ObjectId.idForString("Project/3"),Update.UpdateType.Delete));
-				DataSourceHelper.sendUpdates(updates);
-			}
-    		
-    	}, 5000, 5000);*/
+    	
+    	setupStatements();
+    	// May want to now run the starter statements if the table does not yet exist?
 	}
+	
 	String idColumn;
 	public static class Column {
 		String databaseColumn;
@@ -226,56 +174,75 @@ public class DatabaseTableDataSource extends DatabaseDataSource implements Writa
 	}
 
 	public void mapObject(final PersistableInitializer initializer, final String objectId) throws Exception {
-		tryExecution(new DatabaseAction() {
-			public Object execute() throws SQLException {
-				if (objectId.indexOf('.') >= 0)
-				{
-					String field = objectId.substring(objectId.indexOf('.') + 1);
-					String thisObjectId = objectId.substring(0,objectId.indexOf('.'));
-					for (Column column : columns)
-						if (column.objectColumn.equals(field)) {
-							DataSource foreignSource = DataSourceManager.getSource(((RelationalColumn)column).foreignTable);
-							if (foreignSource instanceof DatabaseTableDataSource) {
-								PreparedStatement ps = ((DatabaseTableDataSource) foreignSource).getConnectionObject().connection.prepareStatement("select " + ((DatabaseTableDataSource)foreignSource).idColumn + " from " + ((DatabaseTableDataSource)foreignSource).table + " where " + ((RelationalColumn)column).foreignColumn + " = ?");
-								ps.setString(1, thisObjectId);
-								ResultSet rs = ps.executeQuery();
-								List resultList = new ArrayList();// may want to have this initialized from an id, but not sure how to do it yet
-								while (rs.next()) 
-									resultList.add(ObjectId.idForObject(foreignSource, rs.getString(1)));
-								initializer.initializeList(resultList);
-								return null;
-							}
-							else
-								throw new RuntimeException("Relationships must map to other database data sources");
-						}
-					throw new RuntimeException("Column was not found");
-					
-				}
-				else
-				{
-					// we are going off the id of a specific row
-					PreparedStatement loadStatement = getConnectionObject().loadRow;
-					try {
-						try{
-							loadStatement.setInt(1, Integer.parseInt(objectId));
-						}
-						catch(NumberFormatException e){
-							loadStatement.setString(1, objectId);
-						}
-						
-					}catch (SQLException e){
-						throw new ObjectNotFoundException(DatabaseTableDataSource.this,objectId);
+		if (objectId.indexOf('.') >= 0)
+		{
+			String field = objectId.substring(objectId.indexOf('.') + 1);
+			final String thisObjectId = objectId.substring(0,objectId.indexOf('.'));
+			for (final Column column : columns)
+				if (column.objectColumn.equals(field)) {
+					final DataSource foreignSource = DataSourceManager.getSource(((RelationalColumn)column).foreignTable);
+					if (foreignSource instanceof DatabaseTableDataSource) {
+						Connection conn = ((DatabaseTableDataSource) foreignSource).createConnection();
+						PreparedStatement ps = conn.prepareStatement("select " + ((DatabaseTableDataSource)foreignSource).idColumn + " from " + ((DatabaseTableDataSource)foreignSource).table + " where " + ((RelationalColumn)column).foreignColumn + " = ?");
+						ps.setString(1, thisObjectId);
+						ResultSet rs = ps.executeQuery();
+						List resultList = new ArrayList();// may want to have this initialized from an id, but not sure how to do it yet
+						while (rs.next()) 
+							resultList.add(ObjectId.idForObject(foreignSource, rs.getString(1)));
+						initializer.initializeList(resultList);
+						conn.close();
+						return;
 					}
-					ResultSet rs = loadStatement.executeQuery();
-					if (!rs.next())
-						throw new ObjectNotFoundException(DatabaseTableDataSource.this,objectId);
-					mapResult(initializer,rs,objectId);
-					rs.close();
+					else {
+						throw new RuntimeException("Relationships must map to other database data sources");
+					}
 				}
-				return null;
+			throw new RuntimeException("Column was not found");
+		}
+		else
+		{
+			// we are going off the id of a specific row
+			Connection conn = transactionConnection.get();//if we are in a transaction, use its connection since changes might not be committed yet
+			boolean inTransaction = true;
+			if(conn==null) {
+				conn = createConnection();
+				inTransaction = false;
 			}
-		});
+			PreparedStatement loadStatement = conn.prepareStatement(loadRowStatement);
+			try {
+				try{
+					loadStatement.setInt(1, Integer.parseInt(objectId));
+				}
+				catch(NumberFormatException e){
+					loadStatement.setString(1, objectId);
+				}
+			}
+			catch (SQLException e){
+				try {
+					conn.close();
+				}
+				catch (SQLException yikes) {
+				}
+				throw new ObjectNotFoundException(DatabaseTableDataSource.this,objectId);
+			}
+			
+			ResultSet rs = loadStatement.executeQuery();
+			if (!rs.next()) {
+				try {
+					conn.close();
+				}
+				catch (SQLException yikes) {
+				}
+				throw new ObjectNotFoundException(DatabaseTableDataSource.this,objectId);
+			}
+			mapResult(initializer,rs,objectId);
+			rs.close();
+			if(!inTransaction){
+				conn.close();
+			}
+		}
 	}
+
 	public void recordListAdd(String objectId, Object value) throws Exception {
 		if (objectId.indexOf('.') >= 0)
 		{
@@ -290,19 +257,19 @@ public class DatabaseTableDataSource extends DatabaseDataSource implements Writa
 						((ObjectId)value).getTarget().set(((RelationalColumn)column).foreignObjectColumn, ObjectId.idForObject(this, thisObjectId));
 						((DatabaseTableDataSource) foreignSource).recordListAdd("", value);
 						return;
-						
 					}
 					else
 						throw new RuntimeException("Relationships must map to other database data sources");
 				}
 			throw new RuntimeException("Column was not found");
-			
 		}
 		else if (value instanceof ObjectId) {
 			throw new RuntimeException("Can't add that object here");
 		}
 		throw new RuntimeException("Can not insert " + value + " into table " + table);
 	}
+	
+	// Executed in a transaction context?
 	public NewObjectPersister recordNewObject(Persistable object) throws Exception {
 		final Map<String,Object> props = new HashMap<String,Object>();
 		return new NewObjectPersister() {
@@ -334,7 +301,8 @@ public class DatabaseTableDataSource extends DatabaseDataSource implements Writa
 				
 					j++;
 				}
-				PreparedStatement insertRow = getConnectionObject().connection.prepareStatement("INSERT INTO " + table + " (" + columnsString + ") values (" + valuesPlacement + ")", PreparedStatement.RETURN_GENERATED_KEYS);
+				Connection conn = transactionConnection.get();
+				PreparedStatement insertRow = conn.prepareStatement("INSERT INTO " + table + " (" + columnsString + ") values (" + valuesPlacement + ")", PreparedStatement.RETURN_GENERATED_KEYS);
 				j = 0;
 				for (Map.Entry<String,Object> entry : props.entrySet()){
 					Object value = entry.getValue();
@@ -381,22 +349,33 @@ public class DatabaseTableDataSource extends DatabaseDataSource implements Writa
 
 	public void recordListRemoval(String objectId, Object value) throws Exception {
 		if (value instanceof ObjectId) {
-			PreparedStatement deleteRow = getConnectionObject().deleteRow;
-			if (((ObjectId)value).source != this)
+			Connection conn = createConnection();
+			PreparedStatement deleteRow = conn.prepareStatement(deleteRowStatement);
+			if (((ObjectId)value).source != this) {
+				System.err.println("close");
+
+				conn.close();
 				throw new RuntimeException("Can not delete an object that is not in this source");
+			}
 			deleteRow.setLong(1,Long.parseLong(((ObjectId)value).subObjectId));
 			deleteRow.execute();
+			System.err.println("close");
+
+			conn.close();
 			return;
 		}
 		throw new RuntimeException("Can not delete " + value + " from table " + table);
 	}
+	// Transactional?
 	public void recordPropertyAddition(String objectId, String name, Object value, int attributes) throws Exception {
 		recordPropertyChange(objectId, name, value, 0);
 	}
+	// Transactional?
 	public void recordPropertyChange(String objectId, String name, Object value, int attributes) throws Exception {
 		for (int i = 0; i < columns.length; i++)
 			if (columns[i].objectColumn.equals(name)) { // Do this to ensure it is valid name
-				PreparedStatement statement = getConnectionObject().getConnection().prepareStatement("UPDATE " + table + " SET " + columns[i].databaseColumn + "=? WHERE " + idColumn + "=?");
+				Connection conn = transactionConnection.get();
+				PreparedStatement statement = conn.prepareStatement("UPDATE " + table + " SET " + columns[i].databaseColumn + "=? WHERE " + idColumn + "=?");
 				statement.setObject(1, value);
 				statement.setString(2, objectId);
 				statement.execute();
@@ -404,17 +383,19 @@ public class DatabaseTableDataSource extends DatabaseDataSource implements Writa
 			}
 		throw new RuntimeException("The column " + name + " is not registered as a valid column in this table");
 	}
+	// Transactional?
 	public void recordPropertyRemoval(String objectId, String name) throws Exception {
 		recordPropertyChange(objectId, name, null, 0);
 	}
+	// Transactional?
 	public void recordDelete(String objectId) throws Exception {
-		PreparedStatement deleteRow = getConnectionObject().deleteRow;
+		Connection conn = transactionConnection.get();
+		PreparedStatement deleteRow = conn.prepareStatement(deleteRowStatement);
 		deleteRow.setLong(1,Long.parseLong(objectId));
-		deleteRow.execute();	
+		deleteRow.execute();
 	}
 
 	public boolean doesObjectNeedUpdating(String id) {
 		return true;
 	}
-	//Timer timer = new Timer();
 }

@@ -93,13 +93,14 @@ import org.persvr.util.JSONParser.JSONException;
  * to with data for the handling of the request. This filter handles the HTTP
  * interaction including HTTP methods including GET,PUT,POST, and DELETE and
  * status codes
- * 
+ *
  * @author Kris Zyp
- * 
+ *
  */
 @SuppressWarnings("serial")
 public class PersevereFilter extends PersevereServlet implements Filter {
 	private static Log log = LogFactory.getLog(PersevereFilter.class);
+	public static boolean startConsole = true;
 	Scriptable global = GlobalData.getGlobalScope();
 	/**
 	 * Initializes the Persevere server
@@ -117,11 +118,13 @@ public class PersevereFilter extends PersevereServlet implements Filter {
 		log.debug(GlobalData.webInfLocation.toString());
 		global.put("coreApp", global, new DefaultHandler());
 		LocalJsonFileSource.setLocalJsonPath(webappRoot);
-		
+
 		Job upgrade = new Upgrade();
 		upgrade.execute();
 		log.info("Persevere v" + Persevere.getPersevereVersion() + " Started");
-		new Console().start();
+		if(startConsole){
+			new Console().start();
+		}
 		config.getServletContext().setAttribute("testrunner", new TestRunner());
 		Runtime.getRuntime().addShutdownHook(new Thread() {
 			@Override
@@ -142,7 +145,7 @@ public class PersevereFilter extends PersevereServlet implements Filter {
 	 * Adds a header, allowing the header to be assigned in different ways
 	 * depending on the response (JSONP in parameters vs real headers in direct
 	 * requests)
-	 * 
+	 *
 	 * @param headerTarget
 	 */
 	private void addHeaders(Object headerTarget) {
@@ -192,9 +195,9 @@ public class PersevereFilter extends PersevereServlet implements Filter {
 	public static String getHeader(HttpServletRequest request, String name) {
 		if (request == null)
 			return null;
-		String value = request.getHeader(name);
+		String value = getParameterFromQueryString(request, "http-" + name);
 		if (value == null)
-			return getParameterFromQueryString(request, "http-" + name);
+			return request.getHeader(name);
 
 		return value;
 
@@ -233,9 +236,9 @@ public class PersevereFilter extends PersevereServlet implements Filter {
 	public void doFilter(final ServletRequest servletRequest, final ServletResponse servletResponse, final FilterChain filterChain)
 			throws IOException, ServletException {
 		final HttpServletRequest request = (HttpServletRequest) servletRequest;
-		
+
 		if (Identification.getAbsolutePathPrefix() == null) {
-			// if the absolute path prefix has not been initialized, do it now. This 
+			// if the absolute path prefix has not been initialized, do it now. This
 			// will allow the id resolver to understand absolute paths correctly
 			String pathPrefix = request.getContextPath();
 			Identification.setAbsolutePathPrefix(pathPrefix.length() == 1 ? "/" : (pathPrefix + "/"));
@@ -245,6 +248,7 @@ public class PersevereFilter extends PersevereServlet implements Filter {
 		//request.setCharacterEncoding("UTF-8");
 		//response.setCharacterEncoding("UTF-8");
 		final RequestHelper rh;
+				
 		try {
 			rh = new RequestHelper((HttpServletRequest) request, (HttpServletResponse) response);
 		} catch (RhinoException e) {
@@ -257,10 +261,31 @@ public class PersevereFilter extends PersevereServlet implements Filter {
 			response.getOutputStream().print(reason);
 			return;
 		}
+		Client client = rh.getClientConnection();
+		String seqIdString = getParameter(request, "Seq-Id");
+		String transIdString = getParameter(request, "Transaction-Id");
+		long seqId = -1;
+		long transId = -1; 
+		if (seqIdString != null){
+			seqId = Long.parseLong(seqIdString);
+		}
+		if (transIdString != null){
+			transId = Long.parseLong(transIdString);
+		}
 		try{
-			Transaction.startTransaction();
+			synchronized(client){
+				if(seqId>=0 && transId>=0 && getParameter(request, "Transaction")!=null){
+					//start or enter the specified transaction and track sequence numbers
+					client.startOrEnterTransaction(seqId, transId);
+				}else{
+					//just use a new tranaction for this request
+					Transaction.startTransaction();
+				}
+				if(seqId>=0){
+					client.addSequenceId(seqId);
+				}
+			}
 			NativeObject env = new PersistableObject() {
-				
 				public Object get(String key, Scriptable start) {
 					Object storedValue = super.get(key, start);
 					if(storedValue != ScriptableObject.NOT_FOUND)
@@ -285,7 +310,7 @@ public class PersevereFilter extends PersevereServlet implements Filter {
 					}
 					if ("PATH_INFO".equals(key)) {
 						String path = request.getRequestURI();
-						return path.substring(request.getContextPath().length() + 1);
+						return path.substring(request.getContextPath().length());
 					}
 					if ("CONTENT_TYPE".equals(key)) {
 						return request.getContentType();
@@ -340,14 +365,17 @@ public class PersevereFilter extends PersevereServlet implements Filter {
 				}
 				@Override
 				public Object[] getIds() {
-					List list = new ArrayList(); 					
+					List list = new ArrayList();
 					list.addAll(Arrays.asList(super.getIds()));
 					list.addAll(Arrays.asList(new String[]{"REQUEST_METHOD","SCRIPT_NAME","PATH_INFO","CONTENT_TYPE","CONTENT_LENGTH","QUERY_STRING","SERVER_NAME","SERVER_PORT","SERVER_PROTOCOL","jsgi.version","jsgi.url_scheme","jsgi.input","jsgi.error","jsgi.multithread","jsgi.multiprocess","jsgi.run_once"}));
 					return list.toArray();
 				}
 
 			};
-			ScriptRuntime.setObjectProtoAndParent(env, global);
+			try {
+				ScriptRuntime.setObjectProtoAndParent(env, global);
+			} catch (Exception e1) {
+			}
 			Enumeration headerNames = request.getHeaderNames();
 			while(headerNames.hasMoreElements()){
 				String headerName = (String) headerNames.nextElement();
@@ -356,34 +384,70 @@ public class PersevereFilter extends PersevereServlet implements Filter {
 			}
 			Object result = ((Function) global.get("coreApp", global)).call(PersevereContextFactory.getContext(), global, global,
 					new Object[] { env });
-			if (result instanceof List && ((List)result).size() > 2) {
-				Object status = ((List) result).get(0);
+			if (result instanceof Scriptable) {
+				Object status = ((Scriptable) result).get("status", (Scriptable) result);
 				if(status instanceof Number)
 					response.setStatus(((Number)status).intValue());
 				else if (status instanceof String){
-					String[] statusParts = ((String)status).split(" ", 2); 
+					String[] statusParts = ((String)status).split(" ", 2);
 					response.setStatus(Integer.parseInt(statusParts[0]), statusParts[1]);
 				}
-				Object headers = ((List) result).get(1);
+				Object headers = ((Scriptable) result).get("headers", (Scriptable) result);
 				if(headers instanceof Scriptable){
 					for (Object key : ((Scriptable)headers).getIds()) {
 						response.setHeader(key.toString(), ((Scriptable)headers).get(key.toString(), (Scriptable) headers).toString());
 					}
 				}
-				Object body = ((List) result).get(2);
+				Object body = ((Scriptable) result).get("body", (Scriptable) result);
 				if(body instanceof String)
 					response.getOutputStream().write(((String)body).getBytes("UTF-8"));
+				else if (body instanceof Scriptable){
+					Function forEach = (Function) ScriptableObject.getProperty((Scriptable) body, "forEach");
+					Scriptable global = GlobalData.getGlobalScope();
+					final ServletOutputStream outputStream = response.getOutputStream();
+					forEach.call(PersevereContextFactory.getContext(), global, (Scriptable) body, new Object[]{
+						new PersevereNativeFunction(){
+							@Override
+							public Object profilableCall(Context cx, Scriptable scope, Scriptable thisObj, Object[] args) {
+								try {
+									outputStream.write(args[0].toString().getBytes("UTF-8"));
+								} catch (UnsupportedEncodingException e) {
+									throw ScriptRuntime.constructError("Error", e.getMessage());
+								} catch (IOException e) {
+									throw ScriptRuntime.constructError("Error", e.getMessage());
+								}
+								return null;
+							}
+
+						}
+					});
+				}
 				else
-					throw new RuntimeException("The body must be a string");
+					throw new RuntimeException("The body must be a string or an object with a forEach");
 			}
 		}
 		finally{
-			if(!"open".equals(getParameter(request, "Transaction")))
-				Transaction.currentTransaction().commit();
-			Transaction.exitTransaction();
+			synchronized(client){
+				if(transId>=0 && getParameter(request, "Transaction")!=null){
+					if(!"open".equals(getParameter(request, "Transaction"))){
+						client.commitTransaction(transId);
+					}else{
+						Transaction.exitTransaction();
+					}
+					client.runUnblockedTransactions();
+				}else{
+					Transaction.currentTransaction().commit();
+				}
+			}
+			//TODO: Release the read set monitoring to free those memory references
+			//TODO: Release the IndividualRequest object to free those memory references
+			IndividualRequest individualRequest = Client.getCurrentObjectResponse();
+			if (individualRequest != null)
+				individualRequest.finish(); // indicate we are finished
+
 		}
 	}
-	
+
 	public static class DefaultHandler extends PersevereNativeFunction {
 		private boolean objectExistsForId(Identification targetId){
 			try {
@@ -405,6 +469,7 @@ public class PersevereFilter extends PersevereServlet implements Filter {
 			String contentType = request.getContentType();
 			String connectionId = getParameter(request, "Client-Id");
 			String reason;
+			String username;
 			try {
 				PersistableObject.startReadSet();
 				Writer writer = null;
@@ -416,24 +481,23 @@ public class PersevereFilter extends PersevereServlet implements Filter {
 				long seqId = -1;
 				if (seqIdString != null)
 					seqId = Long.parseLong(seqIdString);
-				Client.Sequence sequence = requestHelper.getClientConnection().getSequenceObject(seqId);
 				if (request.getHeader("Origin") != null) {
-					response.setHeader("Access-Control", "allow <" + request.getHeader("Origin") + ">"); // support cross-site XHR
+					response.setHeader("Access-Control-Allow-Origin", "*"); // support cross-site XHR
 					response.setHeader("Vary", "Origin"); // this is to make sure the cache is handled properly
 				}
 
-				String queryString = request.getQueryString();
+				String queryString = (String) env.get("QUERY_STRING", env);
 				if (queryString != null) {
 					// remove parameters with special meaning, the rest can be used for queries
 					queryString = queryString
 							.replaceAll(
 									"\\&?(jsonp|transaction|client_id|subscribe_since|server_methods|seq_id|subscribe|windowname|callback|http[-_][^=]*)=[^&]*",
-									"");
+									"");	
 					if (queryString.equals(""))
 						queryString = null;
 				}
-				String path = request.getRequestURI() + (queryString == null ? "" : ("?" + queryString));
-				path = URLDecoder.decode(path.substring(request.getContextPath().length() + 1), "UTF8");
+				String path = env.get("PATH_INFO", env) + (queryString == null ? "" : ("?" + queryString));
+				path = URLDecoder.decode(path.substring(1), "UTF8");
 				if (((callbackParameter = getParameterFromQueryString(request, "jsonp")) != null || (callbackParameter = getParameterFromQueryString(
 						request, "callback")) != null)) {
 					// handle JSONP
@@ -466,9 +530,6 @@ public class PersevereFilter extends PersevereServlet implements Filter {
 					suffixHeader.put("Date", formatter.format(new Date()));
 
 				}
-				String username = UserSecurity.getUserName();
-				// we set the username so the client side can access it
-				setHeader("Username", "public".equals(username) ? null : username, headerTarget);
 				Matcher matcher = slashPattern.matcher(path);
 				if (matcher.find()) {
 					String sourceName = matcher.group();
@@ -490,10 +551,19 @@ public class PersevereFilter extends PersevereServlet implements Filter {
 				}
 
 				reason = null;
+				if ("GET".equals(method) || "POST".equals(method)) {
+					// allow the HTTP method to be defined with a parameter
+					String explicitMethod = getHeader(request, "method");
+					if (explicitMethod != null)
+						method = explicitMethod;
+					else if ("GET".equals(method))
+						// if there is not explicit method, than we can assume cookie authorization is allowed
+						requestHelper.authorizeCookieAuthentication();
+				}
 				try {
-					if (targetId instanceof ObjectNotFoundId || 
+					if (targetId instanceof ObjectNotFoundId ||
 						(targetId.getSource() instanceof LocalDataSource && ((LocalDataSource) targetId.getSource()).passThrough()) ||
-						("GET".equals(method) && !objectExistsForId(targetId))) { 
+						("GET".equals(method) && !objectExistsForId(targetId))) {
 						if ("PUT".equals(method)) {
 							if (UserSecurity.hasPermission(SystemPermission.javaScriptCoding)) {
 								// if the user has permission they can also update files with PUT
@@ -514,8 +584,8 @@ public class PersevereFilter extends PersevereServlet implements Filter {
 							PersevereResponse redirectResponse = new PersevereResponse(response, writer);
 							String realPath = request.getRealPath(request.getRequestURI());
 							File targetFile;
-							boolean fileExists = realPath != null && (targetFile = new File(realPath)).exists() && targetFile.isFile(); 
-							
+							boolean fileExists = realPath != null && (targetFile = new File(realPath)).exists() && targetFile.isFile();
+
 							if(!fileExists){
 								Scriptable global = GlobalData.getGlobalScope();
 								Object app = global.get("app",global);
@@ -525,7 +595,7 @@ public class PersevereFilter extends PersevereServlet implements Filter {
 							}
 							filterChain.doFilter(new PersevereRequest(request, requestHelper, suffixString != null), redirectResponse);
 							redirectResponse.flushBuffer();
-							Client.getCurrentObjectResponse().getConnection().commitTransaction();
+							//Client.getCurrentObjectResponse().getConnection().commitTransaction();
 							return null;
 						}
 					}
@@ -533,45 +603,16 @@ public class PersevereFilter extends PersevereServlet implements Filter {
 					response.setHeader("Server", "Persevere");
 					if (writer == null)
 						writer = new OutputStreamWriter(response.getOutputStream(), "UTF-8");
-					path = URLDecoder.decode(path, "UTF8");
-					if ("GET".equals(method) || "POST".equals(method)) {
-						// allow the HTTP method to be defined with a parameter
-						String explicitMethod = getHeader(request, "method");
-						if (explicitMethod != null)
-							method = explicitMethod;
-						else if ("GET".equals(method))
-							// if there is not explicit method, than we can assume cookie authorization is allowed
-							requestHelper.authorizeCookieAuthentication();
-					}
 					if ("GET".equals(method) || "HEAD".equals(method)) {
 						setCacheHeader(response, 2000); // need to do this to make GETs to refresh in IE
-						response.setHeader("Vary", "Accept, Referer");
+//						response.setHeader("Vary", "Accept, Referer");
 					}
 					Object target;
-					// synchronize requests when sequence ids are provided
-					// this synchronized is done after the default static content
-					// handler so that channels isn't in here and blocking
-					//	progress while it is waiting
-					synchronized (sequence) {
 
-						int tries = 0;
-						while (seqId != -1 && sequence.seqId != seqId && tries++ < 5) {
-							sequence.notify();
-							if (sequence.isExecuting)
-								sequence.wait(1000);
-							else
-								sequence.wait(100);
-						}
-						sequence.isExecuting = true;
-						sequence.seqId = seqId == -1 ? -1 : seqId + 1;
 						boolean rollback = false;
 						boolean newContent = false;
 						boolean force204 = false;
-						boolean isOpenTransaction = false;
 						try {
-							Transaction openTransaction = requestHelper.connection.getTransaction();
-							if (openTransaction != null)
-								openTransaction.enterTransaction();
 
 							//postBody = IOUtils.inputStreamToString(request.getInputStream());
 
@@ -652,7 +693,7 @@ public class PersevereFilter extends PersevereServlet implements Filter {
 								if (embeddedContent != null)
 									request.setAttribute("cross-site", true);
 							} else if (!"GET".equals(method)) {
-								// if it was a GET (that specifies a method beside GET with http-method) from cross-domain, 
+								// if it was a GET (that specifies a method beside GET with http-method) from cross-domain,
 								//	it may specify it's content in the http-content parameter in the URL
 								embeddedContent = getParameterFromQueryString(request, "http-content");
 								if (embeddedContent == null)
@@ -689,7 +730,7 @@ public class PersevereFilter extends PersevereServlet implements Filter {
 												&& ((Map) postObject).get("params") instanceof List) {
 											// It looks like a JSON-RPC request, treat it as a method call
 											requestHelper.handleRPC(target, (Map) postObject);
-											// we set the username again because it may have changed during the RPC 
+											// we set the username again because it may have changed during the RPC
 											username = UserSecurity.getUserName(UserSecurity.currentUser());
 											// we set the username so the client side can access it
 											setHeader("Username", "public".equals(username) ? null : username, headerTarget);
@@ -729,6 +770,9 @@ public class PersevereFilter extends PersevereServlet implements Filter {
 								if (!isJson) {
 									// it wasn't JSON (couldn't be parsed) and so we treat it as a file
 									if (ServletFileUpload.isMultipartContent(request)) {
+										if(target instanceof List){
+											target = Persevere.newObject(((Persistable) target).getId());
+										}
 										// Create a factory for disk-based file items
 										FileItemFactory factory = new DiskFileItemFactory();
 
@@ -741,7 +785,7 @@ public class PersevereFilter extends PersevereServlet implements Filter {
 											if (item.isFormField()) {
 												((Persistable) target).set(item.getFieldName(), item.getString());
 											} else {
-												Persistable fileTarget = createFile(item.getContentType(), item.getInputStream());
+												Persistable fileTarget = createFile(item.getContentType(), null, item.getInputStream());
 												fileTarget.set("name", item.getName());
 												if (!(target instanceof List)) {
 													((Persistable) target).set(item.getFieldName(), fileTarget);
@@ -752,10 +796,11 @@ public class PersevereFilter extends PersevereServlet implements Filter {
 										if (safeContentType)
 											requestHelper.authorizeCookieAuthentication();
 										DataSource source = ((Persistable) target).getId().source;
+										String contentDisposition = request.getHeader("Content-Disposition");
 										if (postBytes == null)
 											postBytes = IOUtils.toByteArray(request.getInputStream());
 										// create a File using the provided file/binary data
-										Persistable fileTarget = createFile(contentType, postBytes);
+										Persistable fileTarget = createFile(contentType, contentDisposition, postBytes);
 										if (!(source instanceof DynaFileDBSource)) {
 											Persistable resourceTarget = Persevere.newObject(((Persistable) target).getId());
 											resourceTarget.put("representation:" + contentType, resourceTarget, fileTarget);
@@ -796,9 +841,10 @@ public class PersevereFilter extends PersevereServlet implements Filter {
 								if (!isJson) {
 									// create an alternate representation for the target object using the provided file/binary data
 									DataSource source = target instanceof Persistable ? ((Persistable) target).getId().source : null;
+									String contentDisposition = request.getHeader("Content-Disposition");
 									if (postBytes == null)
 										postBytes = IOUtils.toByteArray(request.getInputStream());
-									Persistable fileTarget = createFile(contentType, postBytes);
+									Persistable fileTarget = createFile(contentType, contentDisposition, postBytes);
 									if (!(source instanceof DynaFileDBSource) && !(id instanceof ObjectPath)) {
 										if (target instanceof Persistable) {
 											((Persistable) target).set("representation:" + contentType, fileTarget);
@@ -858,7 +904,7 @@ public class PersevereFilter extends PersevereServlet implements Filter {
 							if (target instanceof Persistable
 									&& !("PUT".equals(method) || "POST".equals(method) || "DELETE".equals(method) || "GET".equals(method))) {// PUT and POST are special and a result of the modifications and new objects which naturally result from other actions
 								Object httpMethod = ScriptableObject.getProperty((Persistable) target, method.toLowerCase()); // TODO: Need to camelcase the method
-								// we can handle alternate HTTP methods by defining methods on objects 
+								// we can handle alternate HTTP methods by defining methods on objects
 								if (httpMethod instanceof Function) {
 									// if there is a method, we should call it
 
@@ -888,7 +934,7 @@ public class PersevereFilter extends PersevereServlet implements Filter {
 								} else {
 									// indicate what methods are allowed
 									Set<Object> keys = new HashSet<Object>(Arrays.asList(((Persistable) target).getIds()));
-									//TODO: use PersistableObject.entrySet(target, 1); 
+									//TODO: use PersistableObject.entrySet(target, 1);
 									// these are the non-enumerable default methods
 									keys.add("get");
 									keys.add("post");
@@ -912,6 +958,9 @@ public class PersevereFilter extends PersevereServlet implements Filter {
 
 								}
 							}
+							username = UserSecurity.getUserName();
+							// we set the username so the client side can access it
+							setHeader("Username", "public".equals(username) ? null : username, headerTarget);
 							/*
 							 * if (target) response.setStatus(201);
 							 */
@@ -919,7 +968,7 @@ public class PersevereFilter extends PersevereServlet implements Filter {
 							 * String range = getParameter(request,"Range"); if
 							 * (range == null) { range =
 							 * getParameter(request,"Opera-Range"); }
-							 * 
+							 *
 							 * target = handleRange(range,target, new
 							 * Date(),response);
 							 */
@@ -932,16 +981,7 @@ public class PersevereFilter extends PersevereServlet implements Filter {
 								Transaction.currentTransaction().abort();
 							else {
 								// success
-								if ("open".equals(getParameter(request, "Transaction"))) {
-									// by default we commit, but if it indicates that it should stay open, we won't commit
-									Client.getCurrentObjectResponse().getConnection().setOpenTransaction(Transaction.currentTransaction());
-									//TODO: Reenable this, but make sure it only applies to the created object, not to objects that are created through CID: references
-									//Transaction.currentTransaction().restActions(); // exit for now
-								} else
-									// commit
-									Client.getCurrentObjectResponse().getConnection().commitTransaction();
 							}
-							sequence.isExecuting = false;
 						}
 						String output;
 						if (newContent && target instanceof Persistable && ((Persistable) target).getId().isAssignedId()) {
@@ -956,17 +996,21 @@ public class PersevereFilter extends PersevereServlet implements Filter {
 							else
 								response.setStatus(204); // undefined could be returned from a method call
 						} else {
-							DataSerializer.serialize(target, PersevereFilter.getHeader(request, "Accept"));
+							String acceptValue = getParameterFromQueryString(request, "http-Accept");
+							if(acceptValue == null){
+								acceptValue = ScriptableObject.getProperty(env, "HTTP_ACCEPT").toString();
+							}
+							DataSerializer.serialize(target, acceptValue);
 							// just in case any changes were made
 						}
-					}
+					
 				} catch (Throwable e) {
 					if ("org.mortbay.jetty.RetryRequest".equals(e.getClass().getName())) { // this should not be stopped
 						log.debug(e);
 						throw (RuntimeException) e;
 					}
 
-					log.debug(e);
+					log.warn(e);
 
 					while (e.getCause() != null)
 						e = e.getCause();
@@ -979,8 +1023,8 @@ public class PersevereFilter extends PersevereServlet implements Filter {
 					else if (e instanceof SecurityException) {
 						response.setHeader("WWW-Authenticate", "JSON-RPC, Basic");
 						response.setStatus(401);
-					} else if (e instanceof JSONParser.JSONException)
-						response.setStatus(406);
+					} else if (e instanceof JSONParser.JSONException || e instanceof BadRequestException)
+						response.setStatus(400);
 					else if (e instanceof ConditionFailedException)
 						response.setStatus(412);
 					else if (e instanceof RequestedRangeNotSatisfiable)
@@ -1000,6 +1044,7 @@ public class PersevereFilter extends PersevereServlet implements Filter {
 
 						response.setStatus(500);
 					}
+					response.setContentType("application/json");
 					if (reason == null) {
 						if (writer != null)
 							writer.write(JSON.quote("Failed"));
@@ -1014,11 +1059,6 @@ public class PersevereFilter extends PersevereServlet implements Filter {
 				}
 
 				finally {
-					//TODO: Release the read set monitoring to free those memory references
-					//TODO: Release the IndividualRequest object to free those memory references
-					IndividualRequest individualRequest = Client.getCurrentObjectResponse();
-					if (individualRequest != null)
-						individualRequest.finish(); // indicate we are finished
 					// handle the different types of response types (JSONP or window.name)
 					if (writer != null && !Boolean.TRUE.equals(request.getAttribute("org.persvr.suspended"))) {
 						//writer = new PrintWriter(response.getOutputStream());
@@ -1057,13 +1097,13 @@ public class PersevereFilter extends PersevereServlet implements Filter {
 	/**
 	 * Create a new instance of the File JS class in Persevere with the provided
 	 * binary data
-	 * 
+	 *
 	 * @param contentType
 	 * @param data
 	 * @return
 	 * @throws IOException
 	 */
-	private static Persistable createFile(String contentType, Object data) throws IOException {
+	private static Persistable createFile(String contentType, String contentDisposition, Object data) throws IOException {
 		Persistable fileTarget = Persevere.newObject("File");
 		String charSet = null;
 
@@ -1077,6 +1117,8 @@ public class PersevereFilter extends PersevereServlet implements Filter {
 			}
 		}
 		fileTarget.set("contentType", contentType);
+		if(contentDisposition != null)
+			fileTarget.set("contentDisposition", contentDisposition);
 		contentType = contentType == null ? null : contentType.split(";")[0];
 		if (contentType != null && (contentType.startsWith("text/") || charSet != null)) {
 			if (data instanceof InputStream)
@@ -1094,7 +1136,7 @@ public class PersevereFilter extends PersevereServlet implements Filter {
 
 	private static boolean couldBeJson(String contentType) {
 		return contentType == null || contentType.indexOf("json") > 0 || contentType.indexOf("javascript") > 0
-				|| contentType.indexOf("www-form-urlencoded") > 0 || contentType.indexOf("application/xml") > -1;
+				|| contentType.indexOf("www-form-urlencoded") > 0 || contentType.indexOf("application/xml") > -1 || contentType.indexOf("text/plain") > -1;
 	}
 
 	private static Object postObject(Persistable target, Object bodyData) {
@@ -1113,7 +1155,7 @@ public class PersevereFilter extends PersevereServlet implements Filter {
 				DataSource thisSource = ((Persistable) target).getId().source;
 				Class targetClass = DataSourceManager.getObjectsClass(thisSource).objectsClass;
 				if (bodyData instanceof List) {
-					// this means that an array was provided for a data source that takes objects; we 
+					// this means that an array was provided for a data source that takes objects; we
 					//	will assume this means that the user wants to create multiple objects
 					int i = 0;
 					for (Object obj : (List) bodyData) {
@@ -1145,12 +1187,14 @@ public class PersevereFilter extends PersevereServlet implements Filter {
 
 		if (target instanceof List)
 			((List) target).add(bodyData);
-		else { // TODO: may want this to be synchronized
-			Context cx = PersevereContextFactory.getContext();
-			int length = ScriptRuntime.toInt32(ScriptRuntime.getObjectProp(target, "length", cx));
-			ScriptRuntime.setObjectIndex(target, length, bodyData, cx);
-			ScriptRuntime.setObjectProp(target, "length", ScriptRuntime.wrapNumber(length + 1), cx);
+		else if (bodyData instanceof Persistable){ // TODO: may want this to be synchronized
+			for(Map.Entry entry : ((Persistable)bodyData).entrySet(0)){
+				target.set(entry.getKey().toString(), entry.getValue());
+			}
+			bodyData = target;
 		}
+		else
+			throw new BadRequestException("Can only POST an object");
 		return bodyData;
 	}
 
@@ -1172,7 +1216,7 @@ public class PersevereFilter extends PersevereServlet implements Filter {
 	 * taken out of service and should not be called directly. In this case, the
 	 * method calls the DataSourceManager to iterate through the data sources
 	 * that may require clean-up.
-	 * 
+	 *
 	 * @return
 	 */
 	public void destroy() {

@@ -1,1 +1,0 @@
-java -DSTOP.PORT=8079 -DSTOP.KEY=secret -jar start.jar 1>logs/out.log 2>logs/err.log

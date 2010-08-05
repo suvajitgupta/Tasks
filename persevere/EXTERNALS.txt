@@ -3,12 +3,10 @@
 # Apply/update externals definitions with this file by typing
 #   svn propset svn:externals -F EXTERNALS.txt .
 # 
-
 # dojo
-jsclient/dojox http://svn.dojotoolkit.org/src/dojox/trunk
-jsclient/dojo http://svn.dojotoolkit.org/src/dojo/trunk
-jsclient/dijit http://svn.dojotoolkit.org/src/dijit/trunk
-jsclient/util http://svn.dojotoolkit.org/src/util/trunk
-
+jsclient/dojox http://svn.dojotoolkit.org/src/branches/1.4/dojox
+jsclient/dojo http://svn.dojotoolkit.org/src/branches/1.4/dojo
+jsclient/dijit http://svn.dojotoolkit.org/src/branches/1.4/dijit
+jsclient/util http://svn.dojotoolkit.org/src/branches/1.4/util
 # serverjs tests
-core-tests/WEB-INF/jslib/interop-compliance http://interoperablejs.googlecode.com/svn/trunk/compliance
+# core-tests/WEB-INF/jslib/interop-compliance http://interoperablejs.googlecode.com/svn/trunk/compliance

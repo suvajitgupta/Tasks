@@ -64,7 +64,7 @@ tests([
 			new Capability;
 		});
 		authenticate("full","access");
-		partialAccessCapability = new Capability({members:[partialAccessUser], append:[TestClass.instances],write:[TestSchema],limited:[Capability]});
+		partialAccessCapability = new Capability({members:[partialAccessUser], append:[TestClass.instances],write:[TestSchema.instances],limited:[Capability]});
 		commit();
 		authenticate("partial","access");
 		var a = Class.instances[0].name;

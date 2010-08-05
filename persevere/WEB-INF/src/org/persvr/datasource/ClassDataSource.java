@@ -14,6 +14,7 @@ import org.persvr.data.Persistable;
 import org.persvr.data.PersistableClass;
 import org.persvr.data.Query;
 import org.persvr.data.QueryCantBeHandled;
+import org.persvr.data.SchemaObject;
 import org.persvr.data.Transaction;
 import org.persvr.security.SystemAcls;
 
@@ -39,7 +40,16 @@ public class ClassDataSource implements WritableDataSource, UserAssignableIdSour
 	public void setIdSequence(long nextId) {
 		throw new UnsupportedOperationException("Not implemented");
 	}
-
+	private void setParents(Persistable object){
+		for(Map.Entry<String, Object> entry : object.entrySet(0)){
+			Object value = entry.getValue();
+			if(value instanceof SchemaObject){
+				if (((SchemaObject)value).setParentIfNeeded(object)){
+					setParents((Persistable)value);
+				}
+			}
+		}
+	}
 	public NewObjectPersister recordNewObject(Persistable object) throws Exception {
 		ObjectId existingId = object.getId();
 		Object className = existingId.source instanceof ClassDataSource ? 
@@ -58,6 +68,7 @@ public class ClassDataSource implements WritableDataSource, UserAssignableIdSour
 			Map config = new HashMap();
 			config.put("name", className);
 			newSource = DataSourceManager.initSource(config,null, (PersistableClass)object, "");
+			setParents(object);
 		}
 		return new StartAsEmptyPersister() {
 
@@ -194,7 +205,7 @@ public class ClassDataSource implements WritableDataSource, UserAssignableIdSour
 	}
 
 	public Collection<Object> query(Query query) throws Exception {
-		if (query.getCondition() != null)
+		if (query.getCondition() != null || query.getSort() != null)
 			throw new QueryCantBeHandled();
 		List tables = new ArrayList();
 		for (String sourceName : DataSourceManager.getDataSourceNames()) {

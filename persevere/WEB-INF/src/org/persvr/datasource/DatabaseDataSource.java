@@ -2,27 +2,26 @@ package org.persvr.datasource;
 
 import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.AbstractCollection;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.WeakHashMap;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import org.apache.commons.dbcp.BasicDataSource;
 import org.mozilla.javascript.Node;
 import org.mozilla.javascript.Token;
 import org.persvr.data.DataSourceManager;
-import org.persvr.data.ObjectId;
 import org.persvr.data.QueryCantBeHandled;
 import org.persvr.remote.Client;
 import org.persvr.remote.Client.RequestFinishListener;
@@ -33,28 +32,23 @@ import org.persvr.util.StringEncoder;
  * This provides a default starting implementation for JDBC database sources
  */
 public abstract class DatabaseDataSource extends BaseDataSource {
-	public static interface DatabaseAction {
-		public Object execute() throws SQLException;
-	}
-	public static abstract class ThreadSpecificConnectionObject {
-		protected Connection connection;
-		public Connection getConnection() {
-			return connection;
-		}
-		public void setConnection(Connection connection) {
-			this.connection = connection;
-		}
-	}
+	javax.sql.DataSource pooledDataSource;
+	Map<String, javax.sql.DataSource> pooledDataSources = new HashMap<String, javax.sql.DataSource>(); 
+	protected ThreadLocal<Connection> transactionConnection = new ThreadLocal<Connection>();
+			
 	String username;
 	String password;
 	List<String> starterStatements;
 	protected void runStarterStatements() throws SQLException {
-		Statement statement = createConnection().createStatement();
+		Connection conn = createConnection();
+		Statement statement = conn.createStatement();
 		for (String starterStatement : starterStatements){
 			statement.execute(starterStatement);
 		}
 		statement.close();
+		conn.close();
 	}
+	
     public void initParameters(Map<String,Object> parameters) throws Exception {
     	if (parameters.containsKey("extends")) {
     		String sharedConnection = (String) parameters.get("extends");
@@ -64,145 +58,90 @@ public abstract class DatabaseDataSource extends BaseDataSource {
     		this.password = source.password;
 	    	this.needConversion = false;
 	    	this.characterSet = source.characterSet;
-	    	this.threadMap = source.threadMap;
 	    	return;
     	}
     	this.jndiName = (String) parameters.get("datasourceRef");
     	this.initialContextClass = (String) parameters.get("initialContext");
-    	if (parameters.containsKey("connection"))
-    		this.connectionString = (String) parameters.get("connection");
-    	if (parameters.containsKey("username"))
-    		this.username = (String) parameters.get("username");
-    	if (parameters.containsKey("password"))
-    		this.password = (String) parameters.get("password");
-    	if (parameters.containsKey("starterStatements")) {
-    		starterStatements = new ArrayList();
-    		List<String> array = (List<String>) parameters.get("starterStatements");
-    		for (int i = 0; i < array.size(); i++)
-    			starterStatements.add(array.get(i));
+    	if(jndiName != null){
+    		pooledDataSource = lookupDatasource();
     	}
-
-    	if (parameters.containsKey("driver"))
-    		Class.forName((String) parameters.get("driver"));
+    	else{
+	    	if (parameters.containsKey("starterStatements")) {
+	    		starterStatements = new ArrayList();
+	    		List<String> array = (List<String>) parameters.get("starterStatements");
+	    		for (int i = 0; i < array.size(); i++)
+	    			starterStatements.add(array.get(i));
+	    	}
+	    	if (parameters.containsKey("connection"))
+	    		this.connectionString = (String) parameters.get("connection");
+	    	if (parameters.containsKey("username"))
+	    		this.username = (String) parameters.get("username");
+	    	String poolKey = connectionString + '-' + username;
+    		if(pooledDataSources.containsKey(poolKey)){
+    			pooledDataSource = pooledDataSources.get(poolKey);
+    		}
+    		else {
+		    	if (parameters.containsKey("password"))
+		    		this.password = (String) parameters.get("password");
+		
+		    	if (parameters.containsKey("driver"))
+		    	pooledDataSource = new BasicDataSource();
+		    	pooledDataSources.put(poolKey, pooledDataSource);
+		    	if (parameters.containsKey("driver"))
+		    		((BasicDataSource)pooledDataSource).setDriverClassName(parameters.get("driver").toString());
+		    	((BasicDataSource)pooledDataSource).setUsername(username);
+		    	((BasicDataSource)pooledDataSource).setPassword(password);
+		    	((BasicDataSource)pooledDataSource).setUrl(connectionString);
+		    	((BasicDataSource)pooledDataSource).setMaxWait(1000);
+    		}
+    	}
     	
     	if (parameters.containsKey("characterSet")) {
 	    	this.needConversion = true;
 	    	this.characterSet = (String) parameters.get("characterSet");
     	}
 	}
+    
     protected String connectionString;
     protected String jndiName;
     protected String initialContextClass;
-    /** 
-     * This method will be called each time a new connection is needed, 
-     * implementators can store prepared statements along with the connection. 
-     * Each connection object is thread specific, it should not be shared across 
-     * sessions and accessing it through getConnectionObject will keep it thread specific.
-     * @param connection
-     * @return
-     */
-    abstract ThreadSpecificConnectionObject setupConnection(Connection connection) throws SQLException;
-    Map<Thread,ThreadSpecificConnectionObject> threadMap = new WeakHashMap();
     
-    /**
-     * This will return a thread specific connection object. It will create a new one if necessary
-     * @return
-     * @throws SQLException
-     */
-    protected ThreadSpecificConnectionObject getConnectionObject() {
-    	return getConnectionObject(false);
+	protected String loadTableStatement;
+	protected String loadRowStatement;
+	protected String deleteRowStatement;
+	protected String insertRowStatement;
+	
+	abstract void setupStatements();
+    
+    protected javax.sql.DataSource lookupDatasource() throws NamingException {
+		Hashtable params = null;
+		if (this.initialContextClass != null) {
+			params = new Hashtable();
+			params.put(Context.INITIAL_CONTEXT_FACTORY, this.initialContextClass);
+		}
+		InitialContext ctx = new InitialContext(params);
+		return (javax.sql.DataSource) ctx.lookup(jndiName);
     }
+    
     protected Connection createConnection() throws SQLException {
-    	if(jndiName != null){
-    		javax.sql.DataSource ds;
-			try {
-				Hashtable params = null;
-				if (this.initialContextClass != null) {
-					params = new Hashtable();
-					params.put(Context.INITIAL_CONTEXT_FACTORY, this.initialContextClass);
-				}
-				InitialContext ctx = new InitialContext(params);
-				ds = (javax.sql.DataSource) ctx.lookup(jndiName);
-	    		return ds.getConnection();
-			} catch (NamingException e) {
-				throw new RuntimeException(e);
-			}
-    	}
-    	while (true) {
-	    	try {
-	    		if (username == null) {
-	    			return DriverManager.getConnection(connectionString);
-	    		}
-	    		else
-	    			return DriverManager.getConnection(connectionString,username,password);
-	    		/* TODO: Do this if it is mysql: 
-	    		 *         ResultSet rs = executeQuery("show variables like \"character_set_database\"");
-        if (rs.next())
-        	characterSet = rs.getString(2);        
-        rs.close();
-        needConversion = !("UTF8".equals(characterSet.toUpperCase()));
-		return super.setupConnection(connection);
-
-	    		 */
-	    	}
-	    	catch (SQLException e) { // sometimes the process is still in use from last time it was run, so if wait a sec, it should become available
-	    		if (e.getMessage().indexOf("already in use") != -1) {
-	    			System.err.println(e.getMessage());
-	    			System.err.println("Will wait to see if it becomes available");
-	    			try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e1) {
-						e1.printStackTrace();
-					}
-	    		}
-	    		else
-	    			throw e;
-	    	}
-    	}
-    	
+    	return pooledDataSource.getConnection();
     }
-    ThreadSpecificConnectionObject getConnectionObject(boolean forceNew) {
-    	ThreadSpecificConnectionObject connectionObject = threadMap.get(Thread.currentThread());
-    	if (connectionObject == null || forceNew) {
-        	try {
-        		Connection connection = createConnection();
-        		connectionObject = setupConnection(connection);
-        		connectionObject.setConnection(connection);
-        	}
-        	catch (SQLException e) {
-        		throw new RuntimeException(e);
-        	}
-    		threadMap.put(Thread.currentThread(), connectionObject);
-    	}
-    	return connectionObject;
-    }
-	/**
-	 * This will attempt to perform the given action. If it fails, it will try to create a new connection and try again.
-	 * @param action
-	 * @throws SQLException
-	 */
-	public Object tryExecution(DatabaseAction action) throws SQLException {
-		try {
-			return action.execute();
-		}
-		catch (SQLException e) {
-			getConnectionObject(true);
-			return action.execute();
-		}
-	}
+    
 	Object executeAndGenerateLock = new Object();
+	// Executed in a transaction context?
 	public long executeAndGetGeneratedKey(PreparedStatement statement, String tableName) throws SQLException {
 		ResultSet rs;
-		synchronized(executeAndGenerateLock){
-			if (getConnectionObject().getConnection().getClass().getName().equals("org.hsqldb.jdbc.jdbcConnection")) {
+		synchronized(executeAndGenerateLock) {
+			Connection conn = transactionConnection.get();
+			if (conn.getClass().getName().equals("org.hsqldb.jdbc.jdbcConnection")) {
 				statement.execute();
-		    	statement = getConnectionObject().getConnection().prepareStatement("CALL IdENTITY()");
+		    	statement = conn.prepareStatement("CALL IdENTITY()");
 		    	// derby: IDENTITY_VAL_LOCAL
 		        rs = statement.executeQuery();
 			}
-			else if (getConnectionObject().getConnection().getClass().getName().equals("org.apache.derby.impl.jdbc.EmbedConnection40")) {
+			else if (conn.getClass().getName().equals("org.apache.derby.impl.jdbc.EmbedConnection40")) {
 				statement.execute();
-		    	statement = getConnectionObject().getConnection().prepareStatement("select IDENTITY_VAL_LOCAL() from " + tableName);
+		    	statement = conn.prepareStatement("select IDENTITY_VAL_LOCAL() from " + tableName);
 		        rs = statement.executeQuery();
 			}
 			else {
@@ -221,7 +160,8 @@ public abstract class DatabaseDataSource extends BaseDataSource {
 	        return key;
 		}
 	}
-    static StringEncoder stringEncoder = new StringEncoder();
+    
+	static StringEncoder stringEncoder = new StringEncoder();
     static {
         stringEncoder.setUnsafeStrings(new String[] {"'"},new String[] {"''"});
     }
@@ -240,6 +180,7 @@ public abstract class DatabaseDataSource extends BaseDataSource {
 			}
 		return value;
     }
+    
     String encodeString(String value) {
     	if (needConversion)
 			try {
@@ -250,45 +191,79 @@ public abstract class DatabaseDataSource extends BaseDataSource {
 		return value;
     }
 	ResultSet executeQuery(final String sql) throws SQLException {
-		return (ResultSet) tryExecution(new DatabaseAction() {
-			public Object execute() throws SQLException {
-				Statement statement = getConnectionObject().getConnection().createStatement();
-				Object value = statement.executeQuery(sql);
-				return value;
-			}
-		});
-	}
-
+		Connection conn = createConnection();
+		try{
+			return executeQuery(conn, sql);
+		}
+		finally{
+			conn.close();
+		}
+	}    
 	boolean execute(final String sql) throws SQLException {
-		return (Boolean) tryExecution(new DatabaseAction() {
-			public Object execute() throws SQLException {
-				Statement statement = getConnectionObject().getConnection().createStatement();
-				return statement.execute(sql);
-			}
-		});
-
+		Connection conn = createConnection();
+		try{
+			return execute(conn, sql);
+		}
+		finally{
+			conn.close();
+		}
 	}
+	ResultSet executeQuery(Connection conn, final String sql) throws SQLException {
+		Statement statement = conn.createStatement();
+		return statement.executeQuery(sql);
+	}
+
+	boolean execute(Connection conn, final String sql) throws SQLException {
+		Statement statement = conn.createStatement();
+		return statement.execute(sql);
+	}
+	
 	public void commitTransaction() throws SQLException {
-		getConnectionObject().getConnection().commit();
-		getConnectionObject().getConnection().setAutoCommit(true);
+		Connection conn = transactionConnection.get();
+		if (conn == null) {
+			throw new SQLException("transactionConnection is not valid in call to commitTransaction!");
+		}
+		try {
+			conn.commit();
+		}
+		finally {
+			conn.setAutoCommit(true);
+			try {
+				conn.close();
+			}
+			finally {
+				transactionConnection.remove();
+			}
+		}
 	}
 
 	public void startTransaction() throws SQLException {
-		tryExecution(new DatabaseAction() {
-			public Object execute() throws SQLException {
-				getConnectionObject().getConnection().setAutoCommit(false);
-				return null;
-			}
-		});
+		if (transactionConnection.get() != null) {
+			throw new SQLException("Only one transaction can be active for a DatabaseDataSource!");
+		}
+		Connection conn = createConnection();
+		conn.setAutoCommit(false);
+		transactionConnection.set(conn);
 	}
 
 	public void abortTransaction() throws SQLException {
+		Connection conn = transactionConnection.get();
+		if (conn == null) {
+			throw new SQLException("transactionConnection is not valid in call to abortTransaction!");
+		}
 		try{
-			getConnectionObject().getConnection().rollback();
+			conn.rollback();
 		} finally {
-			getConnectionObject().getConnection().setAutoCommit(true);
+			conn.setAutoCommit(true);
+			try {
+				conn.close();
+			}
+			finally {
+				transactionConnection.remove();
+			}
 		}
 	}
+	
 	protected String comparison(Node expression, Node valueNode, int conditionType) {
 		String operator = null;
 		StringBuffer sql = new StringBuffer();
@@ -394,12 +369,15 @@ public abstract class DatabaseDataSource extends BaseDataSource {
 				throw new QueryCantBeHandled();
 		}
 	}
+
 	boolean supportsPagedResults(){
 		return false;
 	}
-	ResultSet executePagedQuery(String query, long start, long length) throws SQLException {
+	
+	ResultSet executePagedQuery(Connection conn, String query, long start, long length) throws SQLException {
 		return null;
 	}
+	
 	/**
 	 * This is a lazy loading iterator that will load results from a result
 	 * set as needed. It is also capable of rerunning a query if the result
@@ -408,11 +386,11 @@ public abstract class DatabaseDataSource extends BaseDataSource {
 	 *
 	 */
 	public class QueryIterator extends AbstractCollection implements Iterator, RequestFinishListener {
-		int fetched = 0;
-		boolean inUse;
 		String fullQuery, countQuery;
 		long nextPageStart;
+		int pageIndex;
 		ResultSet rs;
+		List currentPage = new ArrayList();
 		long count = -1;
 		
 		QueryIterator(String fullQuery, String countQuery){
@@ -423,6 +401,7 @@ public abstract class DatabaseDataSource extends BaseDataSource {
 			this.fullQuery = fullQuery;
 			this.countQuery = countQuery;
 		}
+		
 		QueryIterator(String fullQuery, long count){
 			// close the connection after the request response is finished
 			Client.IndividualRequest request = Client.getCurrentObjectResponse();
@@ -431,16 +410,8 @@ public abstract class DatabaseDataSource extends BaseDataSource {
 			this.fullQuery = fullQuery;
 			this.count = count;
 		}
-		@Override
-		protected void finalize() throws Throwable {
-			try {
-				if (rs != null)
-					rs.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+
+		
 		public void onFinish(){
 			try {
 				finalize();
@@ -448,82 +419,55 @@ public abstract class DatabaseDataSource extends BaseDataSource {
 				e.printStackTrace();
 			}
 		}
+		
 		boolean needsRsNext = true;
+		
 		public boolean hasNext() {
 			try {
-				needsRsNext = false;
-				inUse = true;
-				if (rs == null){
-					if(supportsPagedResults()){
-						rs = executePagedQuery(fullQuery, nextPageStart, 50);
-						nextPageStart += 50;
-					}
-					else
-						rs =executeQuery(fullQuery);
-				}
-				boolean more = rs.next();
-				if (more){
-					fetched++;
-				}
-				else{
-					if(supportsPagedResults() && fetched == nextPageStart) {
-						rs = null;
-						return hasNext();
-					}
-					else
-						rs.close();
-				}
-				
-				return more;
-			}
-			catch(SQLException e){
-				try {
-					// connection must have closed, we will try to open it again
-					if(supportsPagedResults()){
-						rs = executePagedQuery(fullQuery, nextPageStart, 50);
-						nextPageStart += 50;
-					}
-					else
-						rs =executeQuery(fullQuery);
-					// get back to where we were
-					for (int i = 0; i < fetched; i++){
-						if (!rs.next())
-							return false;
-					}
-					boolean more = rs.next();
-					fetched++;
-					if (!more){
-						if(supportsPagedResults() && fetched == nextPageStart) {
-							rs = null;
-							return hasNext();
+				if(pageIndex == 0 || (pageIndex == 50 && supportsPagedResults())){ 
+					pageIndex = 0;
+					currentPage.clear();
+					Connection conn = createConnection();
+					try{
+						if(supportsPagedResults()){
+							rs = executePagedQuery(conn, fullQuery, nextPageStart, 50);
+							nextPageStart += 50;
 						}
 						else
-							rs.close();
+							rs = executeQuery(conn, fullQuery);
+						while(rs.next()){
+							currentPage.add(getValueFromRs(rs));
+						}
+						rs.close();
 					}
-					return more;
-				} catch (SQLException e1) {
-					throw new RuntimeException(e);
+					finally{
+						conn.close();
+					}
 				}
+				return pageIndex < currentPage.size();
 			}
-		}
-		public Object next() {
-			ObjectId rowId;
-			try {
-				if(needsRsNext)
-					hasNext();
-				needsRsNext = true;
-				return getValueFromRs(rs);
-			} catch (Exception e) {
+			catch(Exception e){
 				throw new RuntimeException(e);
 			}
 		}
+		
+		public Object next() {
+			return currentPage.get(pageIndex++);
+		}
+		
 		public int size() {
 			if (count == -1) {
 				try {
-					ResultSet rs = executeQuery(countQuery);
-					rs.next();
-					count = rs.getLong(1);
-					rs.close();	
+					Connection conn = createConnection();
+					try{
+						ResultSet rs = executeQuery(conn, countQuery);
+						rs.next();
+						count = rs.getLong(1);
+						rs.close();
+					}
+					finally{
+						conn.close();
+					}
 				} catch (SQLException e) {
 					throw new RuntimeException(e);
 				}
@@ -539,6 +483,7 @@ public abstract class DatabaseDataSource extends BaseDataSource {
 			return this;
 		}
 	}
+	
 	/**
 	 * This gets the value/object for the current result set row
 	 * @param rs
@@ -547,18 +492,3 @@ public abstract class DatabaseDataSource extends BaseDataSource {
 	 */
 	protected abstract Object getValueFromRs(ResultSet rs) throws Exception;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

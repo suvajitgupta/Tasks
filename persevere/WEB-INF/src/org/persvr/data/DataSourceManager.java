@@ -37,6 +37,7 @@ import org.persvr.javascript.ModuleLoader;
 import org.persvr.javascript.PersevereContextFactory;
 import org.persvr.remote.Client;
 import org.persvr.remote.DataSerializer;
+import org.persvr.remote.PersevereFilter;
 import org.persvr.security.Capability;
 import org.persvr.util.JSON;
 import org.persvr.util.JSONParser.JSONException;
@@ -125,7 +126,8 @@ public class DataSourceManager {
 			List<File> listConfigFiles = getConfigFiles(configDirectory);
 			File jslibDirectory = new File(webInfPath + File.separatorChar + "jslib");
 			ModuleLoader moduleLoader = new ModuleLoader();
-			moduleLoader.scanForFiles(jslibDirectory);
+			List jslibPaths = new ArrayList(); 
+			jslibPaths.add(jslibDirectory);
 			// if there is an Persevere instance, we want to load the config files from there as well
 			String instanceWebInfPath = System.getProperty("persevere.instance.WEB-INF");
 			//System.err.print("instanceConfigPath " + instanceConfigPath);
@@ -136,10 +138,10 @@ public class DataSourceManager {
 					configDirectory = newConfigDirectory;
 					listConfigFiles.addAll(getConfigFiles(configDirectory));
 					File instanceJsLibDirectory = new File(instanceWebInfPath + "/jslib");
-					moduleLoader.scanForFiles(instanceJsLibDirectory);
+					jslibPaths.add(instanceJsLibDirectory);
 				}
 			}
-			
+			moduleLoader.providePaths(jslibPaths.toArray());
 			
 			File[] configFiles = listConfigFiles.toArray(new File[listConfigFiles.size()]);
 			
@@ -191,7 +193,7 @@ public class DataSourceManager {
 					for (int i = 0; i < dataSourceConfigs.size(); i++) {
 						try {
 							Map dataSourceElement = (Map) dataSourceConfigs.get(i);
-							if(configFile.getCanonicalPath().startsWith(configDirectory.getCanonicalPath())){
+							if(configFile.getCanonicalPath().startsWith(configDirectory.getCanonicalPath()) && !"core.json".equals(configFile.getName())){
 								// this is from the current config directory
 								dataSourceElement.put("__location", configFile.getCanonicalPath().substring(configDirectory.getCanonicalPath().length() + 1)
 										+ LocalJsonFileSource.pathSeparator + "sources" + LocalJsonFileSource.pathSeparator + i);
@@ -221,6 +223,10 @@ public class DataSourceManager {
 				Integer maxIterations = (Integer) config.get("maxIterations");
 				if (maxIterations != null)
 					PersistableArray.setMaxIterations(maxIterations);
+				Object repl = config.get("repl");
+				if(repl instanceof Boolean){
+					PersevereFilter.startConsole = (Boolean) repl;
+				}
 				String localURI = (String) config.get("localURI");
 				if (localURI != null)
 					GlobalData.localURI = localURI;
@@ -248,11 +254,15 @@ public class DataSourceManager {
 					log.error("Error attempting to initialize the data source " + classConfig.get("name") + " in file " + filename, e);
 				}
 			}
+
 			JavaScriptDBSource.initialize();
 			AbstractJsonSource.suppressWrites = false;
 			final Scriptable global = GlobalData.getGlobalScope();
+			
+			PersistableClass classClass = (PersistableClass) ObjectId.idForObject(metaClassSource, "Class").getTarget();
+			
 			// create the schema helpers
-			PersistableClass.setupSchema((PersistableClass) ObjectId.idForObject(metaClassSource, "Class").getTarget());
+			PersistableClass.setupSchema(classClass);
 			// create the security helpers
 			Capability.setupSecurity();
 			// load the server scripts
@@ -278,7 +288,7 @@ public class DataSourceManager {
 			QueryArray.setupQuery();
 			Status.initialize();
 			// load all the files in the jslib dir by calling the require function
-			moduleLoader.loadFiles();
+			moduleLoader.scanForFiles();
 			Capability.grabSecurityHandlers();
 			// now freeze the exports
 			//moduleLoader.freezeExports();
@@ -297,6 +307,9 @@ public class DataSourceManager {
 	}
 	
 	public static DataSource getSourceByPrototype(Scriptable prototype) {
+		if(prototype instanceof PersistableClass)
+			return DataSourceManager.getMetaClassSource();
+
 		for (Entry<DataSource, SourceInfo> entry : sourceInfo.entrySet()) {
 			if (prototype == entry.getValue().schema.getPrototypeProperty())
 				return entry.getKey();
@@ -385,9 +398,16 @@ public class DataSourceManager {
 		if(dataSourceElement.get("name") != null && !(dataSourceElement.get("name") instanceof String))
 			throw new RuntimeException("The name property for a data source configuration must be a string");
 		String name = (String) dataSourceElement.get("name");
+		
 		if(dataSourceElement.get("sourceClass") != null && !(dataSourceElement.get("sourceClass") instanceof String))
 			throw new RuntimeException("The sourceClass property for a data source configuration must be a string or omitted");
 		String sourceClass = (String) dataSourceElement.get("sourceClass");
+		if(sourceClass == null && schema != null && schema.get("sourceClass") instanceof String){
+			sourceClass = (String) schema.get("sourceClass");
+		}
+		if(sourceClass == null && schema == null && dataSourceElement.get("schema") instanceof Map && ((Map)dataSourceElement.get("schema")).get("sourceClass") instanceof String){
+			sourceClass = (String) ((Map)dataSourceElement.get("schema")).get("sourceClass");
+		}
 		DataSource source;
 		if ("Class".equals(name))
 			source = metaClassSource;
@@ -402,6 +422,9 @@ public class DataSourceManager {
 		SourceInfo info = new SourceInfo();
 		boolean visible = true;
 		Scriptable global = GlobalData.getGlobalScope();
+		visible = !Boolean.TRUE.equals(dataSourceElement.get("hidden"));
+		if (visible)
+			dataSourcesVisible.add(name);
 
 		if(configId != null){
 			if(readOnlyData != null && configSource != null)
@@ -425,9 +448,6 @@ public class DataSourceManager {
 			metaClassSource.addSourceConfigObject((String) dataSourceElement.get("name"), ObjectId.idForObject(configSource, configId
 					+ LocalJsonFileSource.pathSeparator + "schema", true));
 	
-			visible = !Boolean.TRUE.equals(dataSourceElement.get("hidden"));
-			if (visible)
-				dataSourcesVisible.add(name);
 			if ("Object".equals(name)) {
 				baseObjectSource = (WritableDataSource) source;
 				info.schema = new PersistableClass();
@@ -450,8 +470,9 @@ public class DataSourceManager {
 			}
 			if ("Class".equals(name)) {
 				SourceInfo rootInfo = sourceInfo.get(metaClassSource);
-	
-				rootInfo.schema = (PersistableClass) ObjectId.idForObject(metaClassSource, "Class").getTarget(); //give the root schema the right schema
+				PersistableClass classClass = (PersistableClass) ObjectId.idForObject(metaClassSource, "Class").getTarget(); //give the root schema the right schema
+				rootInfo.schema = classClass;
+				classClass.schema = classClass;
 			}
 			info.objectsClassName = (String) dataSourceElement.get("objectsClass");
 			if ("".equals(info.objectsClassName))
@@ -464,6 +485,10 @@ public class DataSourceManager {
 			if ("Object".equals(name)) {
 				info.schema.setPrototypeProperty((Scriptable) // temporarily do this so we can have a prototype for the time being
 						ScriptableObject.getObjectPrototype(global));
+				// hook up Class/Class to have the right prototype
+				ObjectId.idForObject(metaClassSource, "Class").getTarget().setPrototype(info.schema);
+				global.put("Object", global, info.schema);
+				PersistableClass.Object = info.schema;
 			}
 		}
 		else {
@@ -475,6 +500,10 @@ public class DataSourceManager {
 		if ("Array".equals(name)) {
 			info.schema.setPrototypeProperty(// temporarily do this so we can have a prototype for the time being
 					ScriptableObject.getClassPrototype(global, "Array"));
+			global.put("Array", global, info.schema);
+			PersistableClass.Array = info.schema;
+			RestMethod.setRestMethods(global);
+
 		}
 		/*
 		 * if ("Function".equals(name)) { info.schema.setPrototypeProperty(//
@@ -487,6 +516,9 @@ public class DataSourceManager {
 		}
 		
 		info.schema.getPrototypeProperty(); // must force each one to have a prototype
+		if(baseObjectSource != null && !"Object".equals(name)){
+			info.schema.setPrototype(ObjectId.idForObject(metaClassSource, "Object").getTarget());
+		}
 		PersistableClass.nextRealObject = null; // don't want to confuse the next one
 		return source;
 	}

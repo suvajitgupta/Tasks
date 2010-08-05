@@ -33,7 +33,7 @@ public class UserSecurity {
 		return (String) ((Function)global.get("getUserName", global)).call(PersevereContextFactory.getContext(), global, global, new Object[0]);
 	}
 	public static int getPermissionLevel(Persistable object){
-		return (Integer) Capability.getAccessLevelHandler.call(PersevereContextFactory.getContext(), GlobalData.getGlobalScope(), GlobalData.getGlobalScope(), new Object[]{ object });
+		return ((Number) Capability.getAccessLevelHandler.call(PersevereContextFactory.getContext(), GlobalData.getGlobalScope(), GlobalData.getGlobalScope(), new Object[]{ object })).intValue();
 	}
 	public static boolean hasPermission(String permission){
 		return (Boolean) Capability.hasPermissionHandler.call(PersevereContextFactory.getContext(), GlobalData.getGlobalScope(), GlobalData.getGlobalScope(), new Object[]{permission});
