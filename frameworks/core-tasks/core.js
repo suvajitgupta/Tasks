@@ -13,6 +13,7 @@ CoreTasks = SC.Object.create({
   autoSave: true,
   
   needsSave: NO,
+  
   // The main data store and record sets.
   store: SC.Store.create({
     
@@ -215,7 +216,7 @@ CoreTasks = SC.Object.create({
    */
   canServerSendNotifications: function() {
     if(!CoreTasks.get('remoteDataSource')) return true; // to assist with testing via fixtures
-    return !SC.none(this.getPath('currentUser.authToken')); // non-null for GAE
+    return !SC.none(this.getPath('currentUser.authToken')); // FIXME: [SG] switch to using Tasks.serverType
   }.property('currentUser').cacheable(),
   
   

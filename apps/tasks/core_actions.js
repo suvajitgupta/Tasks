@@ -53,7 +53,7 @@ Tasks.mixin({
   /**
    * Called after successful authentication.
    */
-  authenticationSuccess: function() {
+  authenticationSuccess: function(response, request) {
     // console.log('DEBUG: authenticationSuccess()');
     switch (this.state.a) {
       case 1:
@@ -61,6 +61,11 @@ Tasks.mixin({
         Tasks.loginController.closePanel();
         Tasks.getPath('mainPage.mainPane').append();
         Tasks.mainPageHelper.set('clippyDetails', document.getElementById(Tasks.mainPageHelper.clippyDetailsId));
+        var headers = request.get('headers');
+        if(SC.typeOf(headers) === SC.T_HASH) {
+          var server = headers.Server;
+          if(server && server.indexOf('Persevere') !== -1) Tasks.set('serverType', Tasks.PERSEVERE_SERVER);
+        }
         this.goState('a', 3);
         break;
 
@@ -92,47 +97,59 @@ Tasks.mixin({
    */
   loadData: function() {
     // console.log('DEBUG: loadData()');
-    // Load all records via consolidated call for GAE
-    SC.Request.getUrl('tasks-server/records').json()
-      .notify(this, 'recordsLoadCallback')
-      .send();
-  },
-  
-  recordsLoadCallback: function(response) {
-    if(SC.ok(response)) {
-      
-      // Process/load records into store
-      var records = response.get('body');
-      if(!records) this.dataLoadFailure();
-      var typeMap = {
-        "user":     CoreTasks.User,
-        "task":     CoreTasks.Task,
-        "project":  CoreTasks.Project,
-        "watch":    CoreTasks.Watch
+    var params = {
+      successCallback: this._loadDataSuccess.bind(this),
+      failureCallback: this._loadDataFailure.bind(this)
+    };
+    if(Tasks.get('serverType') === Tasks.PERSEVERE_SERVER) {
+      var methodInvocation = {
+        method: 'get',
+        id: 'records',
+        params: []
       };
-      SC.RunLoop.begin();
-      for(var recordType in records) {
-        CoreTasks.store.loadRecords(typeMap[recordType], records[recordType]);
-      }
-      SC.RunLoop.end();
-      
-      // Start by loading all users.
-      var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
-      serverMessage.set('icon', 'progress-icon');
-      serverMessage.set('value', "_LoadingUsers".loc());
-      if (!CoreTasks.get('allUsers')) {
-        CoreTasks.set('allUsers', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.User, orderBy: 'name', initialServerFetch: NO })));
-        this.usersController.set('content', CoreTasks.get('allUsers'));
-        this.usersLoadSuccess(); // HACK
-      } else {
-        CoreTasks.get('allUsers').refresh();
-      }
-      
+      CoreTasks.executeTransientPost('Class/all', methodInvocation, params);
     }
     else {
-      this.dataLoadFailure();
+      CoreTasks.executeTransientGet('records', undefined, params);
     }
   },
+  
+  _loadDataSuccess: function(response) {
+    // console.log('_loadDataSuccess()');
+    
+    var typeMap = {
+      "users":     CoreTasks.User,
+      "tasks":     CoreTasks.Task,
+      "projects":  CoreTasks.Project,
+      "watches":    CoreTasks.Watch
+    };
+    // Process/load records into store
+    var recordSets = response.result;
+    SC.RunLoop.begin();
+    for(var recordSet in recordSets) {
+      var recordType = typeMap[recordSet];
+      if(SC.typeOf(recordType) === SC.T_CLASS) CoreTasks.store.loadRecords(recordType, recordSets[recordSet]);
+    }
+    SC.RunLoop.end();
+    
+    // Start by loading all users.
+    var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
+    serverMessage.set('icon', 'progress-icon');
+    serverMessage.set('value', "_LoadingUsers".loc());
+    if (!CoreTasks.get('allUsers')) {
+      CoreTasks.set('allUsers', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.User, orderBy: 'name', initialServerFetch: NO })));
+      this.usersController.set('content', CoreTasks.get('allUsers'));
+      this.usersLoadSuccess(); // HACK
+    } else {
+      CoreTasks.get('allUsers').refresh();
+    }
+  },
+  
+  _loadDataFailure: function(response) {
+    // console.log('_loadDataFailure()');
+    this.dataLoadFailure();
+  },
+  
   
   /**
    * Called after all users have been successfully loaded from the server.

@@ -30,6 +30,13 @@ Tasks = SC.Object.create(SC.Statechart,
   VERSION: '1.0',
   isLoaded: NO, // for Lebowski
   
+  /*
+   * Tasks server types
+   */
+  GAE_SERVER: 0x0001,
+  PERSEVERE_SERVER: 0x0002,
+  serverType: this.GAE_SERVER,
+  
   /**
    * Deselect all tasks.
    */
@@ -38,6 +45,7 @@ Tasks = SC.Object.create(SC.Statechart,
   }
   
 });
+
 
 /**
   Some view overrides to turn off escapeHTML for menu items in context menus and select buttons.
