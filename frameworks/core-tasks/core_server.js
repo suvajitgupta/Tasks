@@ -121,19 +121,14 @@ CoreTasks.mixin({
         // Invoke the success callback (may not be defined).
         CoreTasks.invokeCallback(params.successCallback, normalizedResponse, request);
       } else if (SC.typeOf(normalizedResponse) === SC.T_HASH) {
-        if (normalizedResponse.loginName) {
-          // The user object.
-          CoreTasks.invokeCallback(params.successCallback, normalizedResponse);
-        } else {
-          // The object containing arrays of all records in the database (iterate through each).
-          var result = normalizedResponse.result;
-          for (var type in result) {
-            if (result.hasOwnProperty(type)) {
-              this._normalizeResponseArray(result[type]);
-            }
+        // The object containing arrays of all records in the database (iterate through each).
+        var result = normalizedResponse.result;
+        for (var type in result) {
+          if (result.hasOwnProperty(type)) {
+            this._normalizeResponseArray(result[type]);
           }
-          CoreTasks.invokeCallback(params.successCallback, normalizedResponse, request);
         }
+        CoreTasks.invokeCallback(params.successCallback, normalizedResponse, request);
       } else {
         // Invoke the no-matching-records callback (or the success callback if it doesn't exist).
         if (params.noMatchingRecordsCallback) {
