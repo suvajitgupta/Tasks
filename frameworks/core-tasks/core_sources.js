@@ -25,7 +25,10 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
     }
 
     // Check to see if we should skip the initial fetch.
-    if (query.get('initialServerFetch') === NO) return NO;
+    if (query.get('initialServerFetch') === NO) {
+      store.dataSourceDidFetchQuery(query);
+      return NO;
+    }
 
     // Get the record type and resource path.
     var recordType = query.get('recordType');
