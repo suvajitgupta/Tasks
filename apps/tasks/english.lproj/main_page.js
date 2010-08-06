@@ -292,6 +292,9 @@ Tasks.mainPage = SC.Page.design({
            layout: { centerX: -55, centerY: 0, width: 250, height: 32 },
            classNames: ['welcome-message'],
            escapeHTML: NO,
+           touchStart: function() {
+             this.mouseDown();
+           },
            mouseDown: function() {
              Tasks.showCurrentUserTasks();
            },
