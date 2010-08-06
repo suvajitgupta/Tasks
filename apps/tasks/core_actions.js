@@ -98,6 +98,7 @@ Tasks.mixin({
   loadData: function() {
     
     // console.log('DEBUG: loadData()');
+    // Indicate data loading start on status bar
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('icon', 'progress-icon');
     serverMessage.set('value', "_LoadingData".loc());
@@ -125,13 +126,13 @@ Tasks.mixin({
   _loadDataSuccess: function(response) {
     // console.log('DEBUG: loadDataSuccess()');
     
+    // Process/load records into store
     var typeMap = {
       "users":     CoreTasks.User,
       "tasks":     CoreTasks.Task,
       "projects":  CoreTasks.Project,
-      "watches":    CoreTasks.Watch
+      "watches":   CoreTasks.Watch
     };
-    // Process/load records into store
     var recordSets = response.result;
     SC.RunLoop.begin();
     for(var recordSet in recordSets) {
@@ -140,10 +141,22 @@ Tasks.mixin({
     }
     SC.RunLoop.end();
     
+    // Setup data controllers
     if (!CoreTasks.get('allUsers')) {
       CoreTasks.set('allUsers', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.User, orderBy: 'name', initialServerFetch: NO })));
       this.usersController.set('content', CoreTasks.get('allUsers'));
     }
+    if (!CoreTasks.get('allTasks')) {
+      CoreTasks.set('allTasks', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Task, initialServerFetch: NO })));
+    }
+    if (!CoreTasks.get('allProjects')) {
+      CoreTasks.set('allProjects', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Project, initialServerFetch: NO })));
+      this.projectsController.set('content', CoreTasks.get('allProjects'));
+    }
+    if(CoreTasks.get('canServerSendNotifications') && !CoreTasks.get('allWatches')) {
+      CoreTasks.set('allWatches', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Watch, initialServerFetch: NO })));
+    }
+    
     // Set the current logged on user
     var currentUser = CoreTasks.getUser(this.loginName);
     if (currentUser) {
@@ -168,10 +181,7 @@ Tasks.mixin({
       SC.AlertPane.error ('System Error', 'Logged in user no longer exists!');
     }
     
-    if (!CoreTasks.get('allTasks')) {
-      CoreTasks.set('allTasks', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Task, initialServerFetch: NO })));
-    }
-    // Create all system projects
+    // Create system projects
     if(!CoreTasks.get('allTasksProject')) {
       var allTasksProject = CoreTasks.createRecord(CoreTasks.Project, {
         name: CoreTasks.ALL_TASKS_NAME.loc()
@@ -194,10 +204,7 @@ Tasks.mixin({
       CoreTasks.set('needsSave', NO);
     }
     
-    if (!CoreTasks.get('allProjects')) {
-      CoreTasks.set('allProjects', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Project, initialServerFetch: NO })));
-      this.projectsController.set('content', CoreTasks.get('allProjects'));
-    }
+    // Select default project if one is specified
     if(CoreTasks.loginTime) {
       var defaultProject = CoreTasks.get('allTasksProject');
       var defaultProjectName = this.get('defaultProjectName');
@@ -206,31 +213,17 @@ Tasks.mixin({
         if(project) defaultProject = project;
       }
       this.set('defaultProject', defaultProject);
+      this.projectsController.selectObject(defaultProject);
+      CoreTasks.loginTime = false;
     }
     
-    if(CoreTasks.get('canServerSendNotifications')) {
-      if (!CoreTasks.get('allWatches')) {
-        CoreTasks.set('allWatches', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Watch, initialServerFetch: NO })));
-      }
-    }
-    
+    // Indicate data loading completion on status bar
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('icon', '');
     serverMessage.set('value', "_DataLoaded".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
     Tasks.projectsController.refreshCountdowns();
+    this.goState('a', 4);
 
-    switch (this.state.a) {
-      case 3:
-        if(CoreTasks.loginTime) {
-          CoreTasks.loginTime = false;
-          this.projectsController.selectObject(this.get('defaultProject'));
-        }
-        this.goState('a', 4);
-        break;
-      default:
-        this._logActionNotHandled('dataLoadSuccess', 'a', this.state.a);  
-    }
-    
   },
   
   /**
