@@ -14,7 +14,7 @@
 
 */
 
-Tasks.usersController = SC.ArrayController.create(SCUI.StatusChanged,
+Tasks.usersController = SC.ArrayController.create(
   /** @scope Tasks.usersController.prototype */ {
   
   userNamePattern: null,
@@ -145,16 +145,6 @@ Tasks.usersController = SC.ArrayController.create(SCUI.StatusChanged,
   
   setRoleGuest: function() {
     this.role('role', CoreTasks.USER_ROLE_GUEST);
-  },
-  
-  contentStatusDidChange: function(status){
-    // console.log('DEBUG: usersController ' + status);
-    if (status & SC.Record.READY){
-      Tasks.usersLoadSuccess();
-    }
-    else if (status & SC.Record.ERROR){
-      Tasks.dataLoadFailure();
-    }
   }
-  
+    
 });

@@ -96,7 +96,12 @@ Tasks.mixin({
    * Load all Tasks data from the server.
    */
   loadData: function() {
+    
     // console.log('DEBUG: loadData()');
+    var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
+    serverMessage.set('icon', 'progress-icon');
+    serverMessage.set('value', "_LoadingData".loc());
+    
     var params = {
       successCallback: this._loadDataSuccess.bind(this),
       failureCallback: this._loadDataFailure.bind(this)
@@ -114,8 +119,11 @@ Tasks.mixin({
     }
   },
   
+  /**
+   * Called after data loaded successfully.
+   */
   _loadDataSuccess: function(response) {
-    // console.log('_loadDataSuccess()');
+    // console.log('DEBUG: loadDataSuccess()');
     
     var typeMap = {
       "users":     CoreTasks.User,
@@ -132,30 +140,10 @@ Tasks.mixin({
     }
     SC.RunLoop.end();
     
-    // Start by loading all users.
-    var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
-    serverMessage.set('icon', 'progress-icon');
-    serverMessage.set('value', "_LoadingUsers".loc());
     if (!CoreTasks.get('allUsers')) {
       CoreTasks.set('allUsers', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.User, orderBy: 'name', initialServerFetch: NO })));
       this.usersController.set('content', CoreTasks.get('allUsers'));
-      this.usersLoadSuccess(); // HACK
-    } else {
-      CoreTasks.get('allUsers').refresh();
     }
-  },
-  
-  _loadDataFailure: function(response) {
-    // console.log('_loadDataFailure()');
-    this.dataLoadFailure();
-  },
-  
-  
-  /**
-   * Called after all users have been successfully loaded from the server.
-   */
-  usersLoadSuccess: function() {
-    // console.log('DEBUG: usersLoadSuccess()');
     // Set the current logged on user
     var currentUser = CoreTasks.getUser(this.loginName);
     if (currentUser) {
@@ -179,26 +167,10 @@ Tasks.mixin({
     else {
       SC.AlertPane.error ('System Error', 'Logged in user no longer exists!');
     }
-      
-    // Now load all of the tasks.
-    var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
-    serverMessage.set('value', "_LoadingTasks".loc());
+    
     if (!CoreTasks.get('allTasks')) {
       CoreTasks.set('allTasks', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Task, initialServerFetch: NO })));
-      this.allTasksController.set('content', CoreTasks.get('allTasks'));
-      this.tasksLoadSuccess(); // HACK
-    } else {
-      CoreTasks.get('allTasks').refresh();
     }
-    
-  },
-
-  /**
-   * Called after all tasks have been loaded from the server.
-   */
-  tasksLoadSuccess: function() {
-    // console.log('DEBUG: tasksLoadSuccess()');
-
     // Create all system projects
     if(!CoreTasks.get('allTasksProject')) {
       var allTasksProject = CoreTasks.createRecord(CoreTasks.Project, {
@@ -222,24 +194,10 @@ Tasks.mixin({
       CoreTasks.set('needsSave', NO);
     }
     
-    // Now load all of the user-defined projects.
-    var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
-    serverMessage.set('value', "_LoadingProjects".loc());
     if (!CoreTasks.get('allProjects')) {
       CoreTasks.set('allProjects', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Project, initialServerFetch: NO })));
       this.projectsController.set('content', CoreTasks.get('allProjects'));
-      this.projectsLoadSuccess(); // HACK
-    } else {
-      CoreTasks.get('allProjects').refresh();
     }
-    
-  },
-
-  /**
-   * Called after all projects have been loaded from the server.
-   */
-  projectsLoadSuccess: function() {
-    // console.log('DEBUG: projectsLoadSuccess()');
     if(CoreTasks.loginTime) {
       var defaultProject = CoreTasks.get('allTasksProject');
       var defaultProjectName = this.get('defaultProjectName');
@@ -251,36 +209,11 @@ Tasks.mixin({
     }
     
     if(CoreTasks.get('canServerSendNotifications')) {
-      // Now load all of the watches.
-      var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
-      serverMessage.set('value', "_LoadingWatches".loc());
       if (!CoreTasks.get('allWatches')) {
         CoreTasks.set('allWatches', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Watch, initialServerFetch: NO })));
-        this.watchesController.set('content', CoreTasks.get('allWatches'));
-        this.watchesLoadSuccess(); // HACK
-      } else {
-        CoreTasks.get('allWatches').refresh();
       }
     }
-    else {
-      this.dataLoadSuccess();
-    }
     
-  },
-
-  /**
-   * Called after all watches have been loaded from the server.
-   */
-  watchesLoadSuccess: function() {
-    // console.log('DEBUG: watchesLoadSuccess()');
-    this.dataLoadSuccess();
-  },
-
-  /**
-   * Called after successful data load.
-   */
-  dataLoadSuccess: function() {
-    // console.log('DEBUG: dataLoadSuccess()');
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('icon', '');
     serverMessage.set('value', "_DataLoaded".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
@@ -297,13 +230,13 @@ Tasks.mixin({
       default:
         this._logActionNotHandled('dataLoadSuccess', 'a', this.state.a);  
     }
+    
   },
   
   /**
    * Called after failed data load.
    */
-  dataLoadFailure: function() {
-    // console.log('DEBUG: dataLoadFailure()');
+  _loadDataFailure: function(response) {
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('icon', '');
     serverMessage.set('value', "_DataLoadFailed".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
@@ -437,7 +370,6 @@ Tasks.mixin({
     
     this.get('assignmentsController').resetFilters();
     this.usersController.set('content', null);
-    this.allTasksController.set('content', null);
     this.projectsController.set('content', null);
     this.projectsController.set('selection', null);
     CoreTasks.clearData();

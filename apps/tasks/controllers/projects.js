@@ -9,7 +9,7 @@
   @author Suvajit Gupta
 */
 
-Tasks.projectsController = SC.ArrayController.create(SCUI.StatusChanged,
+Tasks.projectsController = SC.ArrayController.create(
 /** @scope Tasks.projectsController.prototype */ {
   
   sources: null,
@@ -127,16 +127,6 @@ Tasks.projectsController = SC.ArrayController.create(SCUI.StatusChanged,
     }, Tasks.projectsController);
   },
   
-  contentStatusDidChange: function(status){
-    // console.log('DEBUG: projectsController ' + status);
-    if (status & SC.Record.READY){
-      Tasks.projectsLoadSuccess();
-    }
-    else if (status & SC.Record.ERROR){
-      Tasks.dataLoadFailure();
-    }
-  },
-
   editNewProject: function(project){
     var listView = Tasks.getPath('mainPage.mainPane.projectsList');
     var idx = listView.get('content').indexOf(project);
