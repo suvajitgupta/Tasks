@@ -70,7 +70,7 @@ Tasks.AssigneeItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
         if((riskyTasksCount + failedTasksCount) > 0) {
           var riskyTooltip = "_Has".loc() + riskyTasksCount + ' ' + "_Risky".loc() +
                              ' & ' + failedTasksCount + ' ' + "_Failed".loc() + "_tasks".loc();
-          context.begin('div').addClass('sc-view').addClass('assignee-red-flag').begin('img').attr({
+          context.begin('div').addClass('assignee-red-flag').begin('img').attr({
             src: SC.BLANK_IMAGE_URL,
             title: riskyTooltip,
             alt: riskyTooltip
