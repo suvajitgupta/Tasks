@@ -171,6 +171,9 @@ Tasks.mainPage = SC.Page.design({
         layout: { centerX: 60, centerY: -4, width: 250, height: 32 },
         classNames: ['welcome-message'],
         escapeHTML: NO,
+        mouseDown: function() {
+          Tasks.showCurrentUserTasks();
+        },
         valueBinding: SC.Binding.oneWay('Tasks.mainPageHelper.welcomeMessage')
       }),
 

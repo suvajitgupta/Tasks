@@ -135,6 +135,7 @@ v Enable/disable "Delete User" button based on having a selected user [SG] @Done
 Application Manager GUI @Active
 - Add Tasks logo to top bar and display program version as a badge [SG] $Feature @Done %Passed
 - Add welcome message showing logged in user/role with hover over tooltip showing time of login [SG] @Done $Feature %Passed
+- Make welcome message clickable to show current user's tasks by setting search filter [SG] @Done $Feature %Passed
 - Add Server data loading message in bottom bar during startup [SG] $Feature @Done %Passed
 - Show number of selected Projects/Tasks and displayed Assignees/Tasks in the bottom bar [SG] <MB> @Done $Feature %Passed
 - Add "Save" button in bottom bar, note time of last save in bottom bar [SG] <BB> @Done $Feature %Passed

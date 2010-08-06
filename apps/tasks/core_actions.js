@@ -172,7 +172,7 @@ Tasks.mixin({
         // Based on user's role set up appropriate task filter
         var role = currentUser.get('role');
         if(role === CoreTasks.USER_ROLE_DEVELOPER) { // Set assignee selection filter to current user
-          Tasks.assignmentsController.set('searchFilter', '[' + this.loginName + ']');
+          Tasks.showCurrentUserTasks();
         }
         
       }
@@ -241,6 +241,14 @@ Tasks.mixin({
         this._logActionNotHandled('dataLoadFailure', 'a', this.state.a);  
     }
   },
+  
+  /**
+   * Set filter to show current user's tasks.
+   */
+  showCurrentUserTasks: function() {
+    Tasks.assignmentsController.set('searchFilter', '[' + this.loginName + ']');
+  },
+  
   
   /**
    * Save modified Tasks data to server.

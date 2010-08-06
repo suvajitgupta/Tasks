@@ -97,7 +97,7 @@ SC.stringsFor('English', {
   "_LoginServerAccessError": "Login failed - cannot access server",
   "_LoginAuthenticationError": "Login failed - please try again",
   "_LoginName:": "Login Name:",
-  "_LoginSince": "Logged in since ",
+  "_LoginSince": "Click to see your tasks; Logged in since ",
   "_Logout": "Logout",
   "_LogoutConfirmation": "Are you sure you want to log out from the application?",
   "_Low": "Low",
