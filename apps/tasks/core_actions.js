@@ -246,7 +246,7 @@ Tasks.mixin({
    * Set filter to show current user's tasks.
    */
   showCurrentUserTasks: function() {
-    Tasks.assignmentsController.set('searchFilter', '[' + this.loginName + ']');
+    Tasks.assignmentsController.setAssigneeFilter(this.loginName);
   },
   
   

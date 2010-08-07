@@ -71,20 +71,34 @@ Tasks.assignmentsController = SC.ArrayController.create(
   
   assignedTasks: null,
   
+  /**
+   * Set filter to show specified assignee's tasks or clear assignee if not specified.
+   */
+  setAssigneeFilter: function(assignee) {
+    var newAssigneeSelection = (SC.none(assignee)? '' : '[' + assignee + ']');
+    var searchFilter = this.get('searchFilter');
+    // console.log('DEBUG: setAssigneeFilter("' + (SC.none(assignee)? '' : assignee) + '") searchFilter is: "' + searchFilter + '"');
+    if(searchFilter !== null && searchFilter !== '') {
+      var assigneeSelection = searchFilter.match(/\[.*\]/);
+      if (assigneeSelection) { // if assignee selection is specified
+        assigneeSelection += ''; // convert to string
+        searchFilter = searchFilter.replace(assigneeSelection, newAssigneeSelection);
+      }
+      else {
+        searchFilter = newAssigneeSelection + ' ' + searchFilter.replace(/^\s+/, '');
+      }
+    }
+    else {
+      searchFilter = newAssigneeSelection;
+    }
+    // console.log('DEBUG: setting searchFilter to: "' + searchFilter + '"');
+    this.set('searchFilter', searchFilter);
+  },
+  
   _showTasks: true,
   displayMode: function(key, value) {
     if (value !== undefined) {
-      if(value === false) { // clear assignee selection before going to "TEAM" mode
-        var searchFilter = this.get('searchFilter');
-        if(searchFilter !== null && searchFilter !== '') {
-          var assigneeSelection = searchFilter.match(/\[.*\]/);
-          if (assigneeSelection) { // if assignee selection is specified
-            assigneeSelection += ''; // convert to string
-            searchFilter = searchFilter.replace(assigneeSelection, ''); // remove assignee selection from search filter
-            this.set('searchFilter', searchFilter);
-          }
-        }
-      }
+      if(value === false) this.setAssigneeFilter(); // clear assignee selection before going to "TEAM" mode
       this.set('_showTasks', value);
     } else {
       return this.get('_showTasks');

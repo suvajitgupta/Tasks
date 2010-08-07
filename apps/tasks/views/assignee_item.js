@@ -20,7 +20,7 @@ Tasks.AssigneeItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       var loginNameMatches = this.getPath('content.displayName').match(/\((.+)\)/);
       var assignee = loginNameMatches? loginNameMatches[1] : 'none';
       Tasks.assignmentsController.set('displayMode', Tasks.DISPLAY_MODE_TASKS);
-      Tasks.assignmentsController.set('searchFilter', '[' + assignee + ']');
+      Tasks.assignmentsController.setAssigneeFilter(assignee);
     }
     else sc_super();
   },
