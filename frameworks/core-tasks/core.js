@@ -45,6 +45,36 @@ CoreTasks = SC.Object.create({
       var ret = sc_super();
       CoreTasks.set('needsSave', YES);
       return ret;
+    },
+    
+    // Delete local records that are no longer on Server
+    purgeDeletedRecords: function(recordType, records) {
+      if(!CoreTasks.loginTime) { // the first time there is nothing to do!
+        // Identify/remove any records that have been deleted on server but exist in the store
+        var idsOnServer = [];
+        for(var i = 0, len = records.length; i < len; i++) {
+          idsOnServer[i] = '' + records[i].id;
+        }
+        var idsInStore = recordType.storeKeysById();
+        var deletedStoreKeys = [];
+        for(var id in idsInStore) {
+          // FIXME: [SE/SG] Revert once SC.Query is able to parse negative numbers.
+          if (id > 0 && id < 1000000 && idsOnServer.indexOf(id) < 0) {
+          //if (id > 0 && idsOnServer.indexOf(id) < 0) {
+            deletedStoreKeys.push(idsInStore[id]);
+          }
+        }
+        SC.RunLoop.begin();
+        for(var j = 0, n = deletedStoreKeys.length; j < n; j++) {
+          var storeKey = deletedStoreKeys[j];
+          var record = this.materializeRecord(storeKey);
+          // console.log('DEBUG: deleting after refresh() ' + record);
+          if(record.get('destroyWatches')) record.destroyWatches();
+          this.removeDataHash(storeKey, SC.Record.DESTROYED_CLEAN);
+          this.dataHashDidChange(storeKey);
+        }
+        SC.RunLoop.end();
+      }
     }
     
   }),

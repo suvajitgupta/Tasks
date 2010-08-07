@@ -134,12 +134,14 @@ Tasks.mixin({
       "watches":   CoreTasks.Watch
     };
     var recordSets = response.result;
-    SC.RunLoop.begin();
     for(var recordSet in recordSets) {
       var recordType = typeMap[recordSet];
-      if(SC.typeOf(recordType) === SC.T_CLASS) CoreTasks.store.loadRecords(recordType, recordSets[recordSet]);
+      if(SC.typeOf(recordType) === SC.T_CLASS) {
+        var records = recordSets[recordSet];
+        CoreTasks.store.loadRecords(recordType, records);
+        CoreTasks.store.purgeDeletedRecords(recordType, records);
+      }
     }
-    SC.RunLoop.end();
     
     // Setup data controllers
     if (!CoreTasks.get('allUsers')) {

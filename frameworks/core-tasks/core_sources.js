@@ -71,33 +71,7 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
           // Load the records into the store and invoke the callback.
           // console.log('Retrieved %@ matching %@ records.'.fmt(records.length, recordType));
           store.loadRecords(recordType, records);
-
-          if(!CoreTasks.loginTime) {
-            // Identify/remove any records that have been deleted on server but exist in the store
-            var idsOnServer = [];
-            for(var i = 0, len = records.length; i < len; i++) {
-              idsOnServer[i] = '' + records[i].id;
-            }
-            var idsInStore = recordType.storeKeysById();
-            var deletedStoreKeys = [];
-            for(var id in idsInStore) {
-              // FIXME: [SE/SG] Revert once SC.Query is able to parse negative numbers.
-              if (id > 0 && id < 1000000 && idsOnServer.indexOf(id) < 0) {
-              //if (id > 0 && idsOnServer.indexOf(id) < 0) {
-                deletedStoreKeys.push(idsInStore[id]);
-              }
-            }
-            SC.RunLoop.begin();
-            for(var j = 0, n = deletedStoreKeys.length; j < n; j++) {
-              var storeKey = deletedStoreKeys[j];
-              var record = store.materializeRecord(storeKey);
-              // console.log('DEBUG: deleting after refresh() ' + record);
-              if(record.get('destroyWatches')) record.destroyWatches();
-              store.removeDataHash(storeKey, SC.Record.DESTROYED_CLEAN);
-              store.dataHashDidChange(storeKey);
-            }
-            SC.RunLoop.end();
-          }
+          store.purgeDeletedRecords(recordType, records);
 
           store.dataSourceDidFetchQuery(query);
         } else {
