@@ -155,7 +155,7 @@ Tasks.mixin({
       CoreTasks.set('allProjects', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Project, initialServerFetch: NO })));
       this.projectsController.set('content', CoreTasks.get('allProjects'));
     }
-    if(CoreTasks.get('canServerSendNotifications') && !CoreTasks.get('allWatches')) {
+    if(!CoreTasks.get('allWatches')) {
       CoreTasks.set('allWatches', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Watch, initialServerFetch: NO })));
     }
     

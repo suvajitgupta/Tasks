@@ -632,7 +632,7 @@ Tasks.TaskItemView.mixin(/** @scope Tasks.TaskItemView */ {
       
     }
     
-    if(selectedTasksCount > 0 && CoreTasks.get('canServerSendNotifications')) {
+    if(selectedTasksCount > 0 && Tasks.get('canServerSendNotifications')) {
       if(needsSeparator) {
         ret.push({
           isSeparator: YES
