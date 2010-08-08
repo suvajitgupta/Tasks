@@ -240,15 +240,6 @@ CoreTasks = SC.Object.create({
     return this.getPath('currentUser.role') === CoreTasks.USER_ROLE_MANAGER;
   }.property('currentUser').cacheable(),
   
-  /**
-   * A computed property to indicate whether the server is capable of sending notifications.
-   * @returns {Boolean} true: if connected to a server that supports notifications, false otherwise
-   */
-  canServerSendNotifications: function() {
-    if(!CoreTasks.get('remoteDataSource')) return true; // to assist with testing via fixtures
-    return !SC.none(this.getPath('currentUser.authToken')); // TODO: [SG] switch to using Tasks.serverType
-  }.property('currentUser').cacheable(),
-  
   
   // Stores access control rights for current user.
   permissions: SC.Object.create({

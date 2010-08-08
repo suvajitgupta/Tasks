@@ -38,6 +38,15 @@ Tasks = SC.Object.create(SC.Statechart,
   serverType: 0x0002,
   
   /**
+   * A computed property to indicate whether the server is capable of sending notifications.
+   * @returns {Boolean} true: if connected to a server that supports notifications, false otherwise
+   */
+  canServerSendNotifications: function() {
+    if(!CoreTasks.get('remoteDataSource')) return true; // to assist with testing via fixtures
+    return this.get('serverType') === this.GAE_SERVER;
+  }.property('serverType').cacheable(),
+  
+  /**
    * Deselect all tasks.
    */
   deselectTasks: function() {
