@@ -19,6 +19,7 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
    * @returns {Boolean}
    */
   fetch: function(store, query) {
+    
     // Do some sanity checking first to make sure everything is in order.
     if (!query || !SC.instanceOf(query, SC.Query)) {
       throw 'Error retrieving records: Invalid query.';
@@ -43,9 +44,11 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
       throw 'Error retrieving records: Unable to retrieve resource path from record type.';
     }
 
+    // FIXME [SC]: fix unnecessary fetch of all tasks after a Project name is changed for the first time
+    // console.log('DEBUG: fetch(): query=' + query.toString());
+
     // Build the request and send it off to the server.
     // console.log('Retrieving %@ records from server...'.fmt(recordType));
-
     var path = CoreTasks.getFullResourcePath(resourcePath, null, query.get('queryParams'));
     CoreTasks.REQUEST_GET.set('address', path);
     CoreTasks.REQUEST_GET.notify(this, this._fetchCompleted, { query: query, store: store }).send();

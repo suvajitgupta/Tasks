@@ -196,7 +196,7 @@ body.sc-theme {
 }
 
 /*
-// FIXME: [SC] hacks to turn off blue ring highlight around select button with focus
+// FIXME: [SC] remove hacks to turn off blue ring highlight around select button with focus
 */
 .sc-theme .sc-button-view.popup.focus .focus-ring .focus-middle,
 .sc-theme .sc-button-view.popup.focus .focus-ring .focus-left,
@@ -255,7 +255,7 @@ body.sc-theme {
 }
 
 /*
-// FIXME: [SC] should be added to standard theme (Ace1) to resolve tearing on side on panels
+// FIXME: [SC] get styling added to standard theme (Ace1) to resolve tearing on side on panels
 */
 .sc-panel {
   -webkit-transform: translate3d(0px,0px,0px);

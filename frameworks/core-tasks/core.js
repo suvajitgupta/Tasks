@@ -58,9 +58,9 @@ CoreTasks = SC.Object.create({
         var idsInStore = recordType.storeKeysById();
         var deletedStoreKeys = [];
         for(var id in idsInStore) {
-          // FIXME: [SE/SG] Revert once SC.Query is able to parse negative numbers.
-          if (id > 0 && id < 1000000 && idsOnServer.indexOf(id) < 0) {
-          //if (id > 0 && idsOnServer.indexOf(id) < 0) {
+          // FIXME: [SE/SG] remove hack once SC.Query is able to parse negative numbers.
+          // if (id > 0 && idsOnServer.indexOf(id) < 0) {
+          if (id > 0 && id < CoreTasks.MAX_RECORD_ID && idsOnServer.indexOf(id) < 0) {
             deletedStoreKeys.push(idsInStore[id]);
           }
         }
@@ -246,7 +246,7 @@ CoreTasks = SC.Object.create({
    */
   canServerSendNotifications: function() {
     if(!CoreTasks.get('remoteDataSource')) return true; // to assist with testing via fixtures
-    return !SC.none(this.getPath('currentUser.authToken')); // FIXME: [SG] switch to using Tasks.serverType
+    return !SC.none(this.getPath('currentUser.authToken')); // TODO: [SG] switch to using Tasks.serverType
   }.property('currentUser').cacheable(),
   
   
@@ -338,7 +338,7 @@ CoreTasks = SC.Object.create({
     // server, but certain SC mechanisms require that all records have a primary key).
     if (dataHash.id === undefined) {
       dataHash.id = dataHash._id = this._currentRecordId;
-      // FIXME: [SE/SG] Revert to decrement once SC.Query parsing works with negative numbers.
+      // FIXME: [SE/SG] remove hack once SC.Query is able to parse negative numbers.
       // this._currentRecordId--;
       this._currentRecordId++;
     }
@@ -803,9 +803,10 @@ CoreTasks = SC.Object.create({
 
   // Used to assign all newly-created records with a negative ID.
   // Note: this counter may run out of integers if the client is left running for a long time.
-  // FIXME: [SE/SG] Revert to negative numbers once SC.Query parsing is fixed.
+  // FIXME: [SE/SG] remove hack once SC.Query is able to parse negative numbers.
+  MAX_RECORD_ID: 100000000,
+  _currentRecordId: 100000000
   //_currentRecordId: -1
-  _currentRecordId: 1000000
 
 });
 

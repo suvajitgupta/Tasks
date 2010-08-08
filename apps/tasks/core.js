@@ -13,8 +13,8 @@
 /*globals Tasks sc_require */
 sc_require('statechart');
 
+// FIXME: [SG] remove hacks when switching to SC ToT where logicalAnd() has been replaced with and()
 (function() {
-  // FIXME: [SG] remove when switching to SC TOT where logicalAnd() has been replaced with and()
   if (SC.Binding.logicalAnd) {
     SC.Binding.and = SC.Binding.logicalAnd;
   }
@@ -33,9 +33,9 @@ Tasks = SC.Object.create(SC.Statechart,
   /*
    * Tasks server types
    */
-  GAE_SERVER: 0x0001,
-  PERSEVERE_SERVER: 0x0002,
-  serverType: this.GAE_SERVER,
+  PERSEVERE_SERVER: 0x0001,
+  GAE_SERVER: 0x0002,
+  serverType: 0x0002,
   
   /**
    * Deselect all tasks.

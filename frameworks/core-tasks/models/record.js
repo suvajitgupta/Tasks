@@ -47,9 +47,10 @@ CoreTasks.Record = SC.Record.extend({
    */
   displayId: function() {
     var id = this.get('id');
-    // FIXME: [SE/SG] Revert once SC.Query is able to parse negative numbers.
+    // console.log(id + ' ' + this.get('name'));
+    // FIXME: [SE/SG] remove hack once SC.Query is able to parse negative numbers.
     // if (id < 0) id = '-----';
-    if (id >= 1000000) id = '-----';
+    if (id >= CoreTasks.MAX_RECORD_ID) id = '-----';
     return '#' + id;
   }.property('id'),
 

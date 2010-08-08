@@ -5,8 +5,8 @@ import java.util.*;
 /**
  * Converts a given CSV file (supplied on the command-line) to a Tasks-formatted text file.
  *
- * TODO: Pull logic out of main() and into class methods (in other words, make it reusable and OO).
- * TODO: Better validation of allowed strings (validation, status, type, priority).
+ * TODO: [SE] pull logic out of main() and into class methods (in other words, make it reusable and OO).
+ * TODO: [SE] improve validation of allowed strings (validation, status, type, priority).
  *
  * @author Sean Eidemiller (sean@halcyon.cc)
  */

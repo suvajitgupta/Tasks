@@ -211,8 +211,6 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
    }.property('countDown').cacheable(),
 
 
-  // FIXME [SC]: need to fix SC.Query to handle negative numbers - recently broken since commit e3bbb4a88ae2bc9fa217d0cf5a24868683f6ae91
-  // FIXME [SC]: fix all Tasks being fetched after a Project name is changed - should only update Project record
   /**
    * A read-only computed property that returns the list of tasks associated with this project.
    *
@@ -240,9 +238,8 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
         query = SC.Query.local(CoreTasks.Task, "projectId=%@".fmt(this.get('id')));
       }
     
-      query.set('initialServerFetch', NO);
-    
       // Execute the query and return the results.
+      query.set('initialServerFetch', NO);
       this._recArray = this.get('store').find(query) ;
     
       // observe the length property of the recAry for changes
