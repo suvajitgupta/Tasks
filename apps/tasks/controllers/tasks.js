@@ -244,6 +244,11 @@ Tasks.tasksController = SC.TreeController.create(
     this.validation('validation', CoreTasks.TASK_VALIDATION_FAILED);
   },
   
+  _watchCount: null,
+  _watchCountDidChange: function() {
+    this.set('_watchCount', CoreTasks.getPath('allWatches.length'));
+    // console.log('DEBUG: _watchCountDidChange to ' + this.get('_watchCount'));
+  }.observes('CoreTasks.allWatches.[]'),
   watch: function() {
     // console.log('DEBUG: tasksController.watch()');
     var sel = this.get('selection');
@@ -256,7 +261,7 @@ Tasks.tasksController = SC.TreeController.create(
       else if(taskWatch !== firstWatch) value = null;
     });
     return value;
-  }.property('selection').cacheable(),
+  }.property('selection', '_watchCount').cacheable(),
   
   _updateClippyDetails: function() {
     var clippyDetails = Tasks.mainPageHelper.get('clippyDetails');
