@@ -97,7 +97,7 @@ Tasks.mixin({
    */
   loadData: function() {
     
-    // console.log('DEBUG: loadData()');
+    console.log('DEBUG: loadData()');
     // Indicate data loading start on status bar
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('icon', 'progress-icon');
@@ -124,7 +124,8 @@ Tasks.mixin({
    * Called after data loaded successfully.
    */
   _loadDataSuccess: function(response) {
-    // console.log('DEBUG: loadDataSuccess()');
+    
+    console.log('DEBUG: loadDataSuccess()');
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', "_LoadingData".loc());
     
