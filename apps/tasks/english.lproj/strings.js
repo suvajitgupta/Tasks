@@ -71,7 +71,6 @@ SC.stringsFor('English', {
   "_Export": "Export",
   "_Failed": "Failed",
   "_Feature": "Feature",
-  "_FetchingData": "Fetching data...",
   "_FilterTooltip": "Filter tasks by type, priority, status, validation, effort specified, recently updated",
   "_FirstLast": "Firstname Lastname",
   "_FormatOnscreenHelpSoftwareMode": "Project Name {TimeLeft} &lt;ActivatedAt&gt; @Status<br>- Task Name {Effort} &lt;Submitter&gt; [Assignee] $Type @Status %Validation<br>| Description (1 or more lines following a Project or Task)",
