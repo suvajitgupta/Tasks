@@ -400,7 +400,9 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         break;          
     }
     var displayId = content.get('displayId');
-    context = context.begin('div').addClass('task-id').addClass(validationClass).
+    var taskIdClass = 'task-id';
+    if(CoreTasks.isCurrentUserWatchingTask(content) === CoreTasks.TASK_WATCH_ON) taskIdClass += ' watched-task';
+    context = context.begin('div').addClass(taskIdClass).addClass(validationClass).
                 text(displayId).attr('title', idTooltip).attr('alt', idTooltip).end();
       
     switch(content.get('developmentStatus')){
@@ -632,7 +634,7 @@ Tasks.TaskItemView.mixin(/** @scope Tasks.TaskItemView */ {
       
     }
     
-    if(selectedTasksCount > 0 && Tasks.get('canServerSendNotifications')) {
+    if(selectedTasksCount > 0) {
       if(needsSeparator) {
         ret.push({
           isSeparator: YES

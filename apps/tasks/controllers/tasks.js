@@ -247,6 +247,7 @@ Tasks.tasksController = SC.TreeController.create(
   _watchCount: null,
   _watchCountDidChange: function() {
     this.set('_watchCount', CoreTasks.getPath('allWatches.length'));
+    Tasks.assignmentsController.showAssignments();
     // console.log('DEBUG: _watchCountDidChange to ' + this.get('_watchCount'));
   }.observes('CoreTasks.allWatches.[]'),
   watch: function() {

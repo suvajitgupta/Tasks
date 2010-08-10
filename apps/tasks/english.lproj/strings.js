@@ -148,7 +148,7 @@ SC.stringsFor('English', {
   "_TargetDate:": "Target Date:",
   "_TaskDeletionConfirmation": "Are you sure you want to delete the selected tasks?",
   "_TaskEffortTooltip": "Task effort",
-  "_TaskIdTooltip": "Task #ID (dashes indicate unsaved)",
+  "_TaskIdTooltip": "Task #ID (dashes indicate unsaved, underline indicates watch)",
   "_TaskValidationTooltip": ", background color shows validation",
   "_Task": "Task ",
   "_Tasks": "Tasks",

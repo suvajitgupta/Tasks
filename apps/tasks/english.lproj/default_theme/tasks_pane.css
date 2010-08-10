@@ -181,6 +181,10 @@
 	width: 40px !important;
 }
 
+.watched-task {
+  text-decoration: underline !important;
+}
+
 .task-item .sc-outline img {
   margin-top: -9px !important;
   left: 53px !important;

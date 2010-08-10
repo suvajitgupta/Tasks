@@ -102,6 +102,7 @@ v Add hover over tooltip for assignees to show how many Tasks they have and to e
 - Support multi-task ID/Name copy to clipboard from top bar [SG] <JH2> $Feature @Done %Passed
 v Add Task context menu with options: Add, Duplicate, Delete; All Task Attributes; Copy ID/Name, Copy Link [SG] $Feature @Done %Passed
 ^ Add ability to "Watch" Tasks and get Email Notifications after Task changes [SG] <JH2> $Feature @Done %Passed
+- Indicate watched Tasks by underlining their IDs [SG] $Feature @Done %Passed
 - Add ability to view/add Comments on Tasks [SG] <JH2> $Feature @Active
 - Allow "Find & Replace" within Task names  (operating only on items in Tasks Detail view)[SG] $Feature
 - Allow Task names to embed metacharacters by enclosing in quotes [SG] $Feature
