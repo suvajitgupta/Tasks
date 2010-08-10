@@ -101,7 +101,7 @@ Tasks.mixin({
     // Indicate data loading start on status bar
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('icon', 'progress-icon');
-    serverMessage.set('value', "_LoadingData".loc());
+    serverMessage.set('value', "_FetchingData".loc());
     
     var params = {
       successCallback: this._loadDataSuccess.bind(this),
@@ -125,6 +125,8 @@ Tasks.mixin({
    */
   _loadDataSuccess: function(response) {
     // console.log('DEBUG: loadDataSuccess()');
+    var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
+    serverMessage.set('value', "_LoadingData".loc());
     
     // Process/load records into store
     var typeMap = {
