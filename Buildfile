@@ -1,5 +1,5 @@
 config :scui, :required => [:foundation, :calendar, :dashboard, :drawing, :linkit]
-config :'core-tasks', :required => [:sproutcore]
+config :'core-tasks', :required => [:sproutcore, :scuds, :'scuds/local']
 config :tasks, :required => [:'core-tasks', :sproutcore, :scui],:title=>"Tasks:Dev"
 # config :tasks, :required => [:'core-tasks', :sproutcore, :scui],:title=>"Tasks:Demo"
 # config :tasks, :required => [:'core-tasks', :sproutcore, :scui],:title=>"Tasks:SproutCore"

@@ -12,6 +12,7 @@ persevere/ra-cache
 tools/*.pyc
 tools/helpers/*.pyc
 frameworks/scui
+frameworks/scuds
 frameworks/sproutcore
 tools/csv_converter/build
 tools/csv_converter/dist
