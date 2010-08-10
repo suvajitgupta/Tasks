@@ -121,7 +121,7 @@ User Manager GUI @Active
 ^ Add assignee/submitter filtering (space or comma separators, "none" for unassigned) & corresponding delete button [SG] <JH2> @Done $Feature %Passed
 - Allow assignee filtering by matching any part of login or full name [SG] $Feature @Done %Passed
 - Set assignee selection filter to logged in user if they are a Developer [SG] @Done $Feature %Passed
-^ Add Settings button/popup embedding User Manager with buttons to add/delete users at bottom [SG] <JH2> @Done %Passed $Feature
+^ Add "Users/Settings" actions menu/popup embedding User Manager with buttons to add/delete users at bottom [SG] <JH2> @Done %Passed $Feature
 | Copy over Role attribute of first selected User to new User
 v Enable/disable "Delete User" button based on having a selected user [SG] @Done %Passed $Feature
 - Show number of displayed/selected users at the bottom of User Manager panel [SG] $Feature @Done %Passed

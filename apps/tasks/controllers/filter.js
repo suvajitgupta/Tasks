@@ -10,7 +10,7 @@ sc_require('core');
   @extends SC.ObjectController
   @author Suvajit Gupta
   
-  Controller for Application Settings.
+  Controller for Filter.
 */
 Tasks.filterController = SC.ObjectController.create(
 /** @scope Tasks.filterController.prototype */ {

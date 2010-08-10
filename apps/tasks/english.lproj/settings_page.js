@@ -19,7 +19,7 @@ Tasks.settingsPage = SC.Page.create({
   
   panel: SCUI.ModalPane.create({
     
-    title: "_Settings".loc(),
+    title: "_UsersSettings".loc(),
     titleIcon: 'settings-icon',
     titleBarHeight: 40,
     minHeight: 350,
