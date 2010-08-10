@@ -67,7 +67,7 @@ Tasks.mixin({
         else {
           var headers = request.get('headers');
           if(SC.typeOf(headers) === SC.T_HASH) {
-            var server = headers.Server;
+            var server = headers.Server || headers.server;
             if(server && server.indexOf('Persevere') !== -1) Tasks.set('serverType', Tasks.PERSEVERE_SERVER);
           }
         }
