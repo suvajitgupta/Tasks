@@ -187,11 +187,12 @@ CoreTasks = SC.Object.create({
   isCurrentUserWatchingTask: function(task) {
     if (this.allWatches) {
       var currentUserId = this.getPath('currentUser.id');
+      var taskId = task.get('id');
       var watchesCount = this.allWatches.get('length');
       for(var i = 0; i < watchesCount; i++) {
         var watch = this.allWatches.objectAt(i);
         if(watch.get('userId') !== currentUserId) continue;
-        if(watch.get('taskId') === task.get('id')) return CoreTasks.TASK_WATCH_ON;
+        if(watch.get('taskId') === taskId) return CoreTasks.TASK_WATCH_ON;
       }
     }
     return CoreTasks.TASK_WATCH_OFF;
