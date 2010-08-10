@@ -11,30 +11,5 @@ Class({
     password: { type: "any", optional: true },
     preferences: { type: "object", optional: true },
     authToken: { type: "any", optional: true }
-  },
-  authenticate: function(username, password){
-     if(username === null){
-        //signing out
-        return null;
-     }
-     var error = "null";
-     var successful = false; 
-     var user = load("user/[?loginName=$1]",username)[0];
-     
-     if (user) {
-       if (user.password === password || user.password === null) {
-         successful = true;
-       } else {
-         error = "("+user.password+")";
-       }
-     } else {
-       error = " User " + username + " Found";
-     } 
-     
-     if(!successful){
-        throw new AccessError("Authentication failed  " + error );
-     }
-     // return a user object
-     return load("user/[?loginName=$1]",username)[0];
   }
 });

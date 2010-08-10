@@ -77,6 +77,14 @@
 				"timeLeft":{
 					"type":"any",
 					"optional":true
+				},
+				"developmentStatus":{
+					"type":"any",
+					"optional":true
+				},
+				"activatedAt":{
+					"type":"any",
+					"optional":true
 				}
 			},
 			"prototype":{
@@ -142,7 +150,54 @@
 				}
 			},
 			"prototype":{
-			}
+			},
+			"instances":{"$ref":"../task/"}
+		}
+	},
+	{"id":"generated.js?sources?3",
+		"name":"watch",
+		"schema":{
+			"properties":{
+				"_id":{
+					"type":"any",
+					"optional":true
+				},
+				"createdAt":{
+					"type":"any",
+					"optional":true
+				},
+				"updatedAt":{
+					"type":"any",
+					"optional":true
+				},
+				"taskId":{
+					"type":"any",
+					"optional":true
+				},
+				"userId":{
+					"type":"any",
+					"optional":true
+				}
+			},
+			"prototype":{
+			},
+			"instances":{"$ref":"../watch/"}
+		}
+	},
+	{"id":"generated.js?sources?4",
+		"name":"all",
+		"schema":{
+			"prototype":{
+				"get":function () {
+    return serialize(load("user"));
+}
+			},
+			"instances":{"$ref":"../all/"},
+			"get":
+function () {
+    return {users:load("user"), projects:load("project"), tasks:load("task"), watches:load("watch")};
+}
+
 		}
 	}
 ]
