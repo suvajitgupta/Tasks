@@ -175,7 +175,7 @@ SC.stringsFor('English', {
   "_Updated:": "Updated: ",
   "_User": "User",
   "_UserDeletionConfirmation": "Are you sure you want to delete the selected users?",
-  "_UsersSettings": "Users &amp; Settings",
+  "_UsersSettings": "Users/Settings",
   "_LoginNameHint": "Login Name",
   "_UserSearchSelectionHint": "User name or email pattern",
   "_UserSearchSelectionTooltip": "Specify pattern to match all or part of users' full/login name or email",
