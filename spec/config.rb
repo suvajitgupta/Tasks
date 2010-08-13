@@ -27,7 +27,7 @@ App.define 'actions_button', 'main_pane.topBarView.actionsButton', ButtonView
 App['login_panel'].define 'user_name_field', 'contentView.loginNameField', TextFieldView
 App['login_panel'].define 'password_field', 'contentView.passwordField', TextFieldView
 App['login_panel'].define 'login_button', 'contentView.loginButton', ButtonView
-App['login_panel'].define 'login_err_msg', 'contentView.loginErrorMessage', LabelView 
+App['login_panel'].define 'login_err_msg', 'contentView.loginErrorMessageLabel', LabelView 
 App['login_panel'].define 'guest_signup_button', 'contentView.guestSignupButton', ButtonView
 
 App['signup_panel'].define 'signup_prompt', 'contentView.signupPrompt', LabelView

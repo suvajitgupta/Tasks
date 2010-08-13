@@ -6,19 +6,20 @@ describe "Login using bad user name should fail" do
 
 	it "will confirm that an error message is displayed on a failed login attempt" do
 	  App['login_panel'].should be_pane_attached
-	  App['login_panel.login_err_msg'].should_not be_visible   
-    App['login_panel.login_err_msg'].should have_value /Login failed, please try again/i
+	  App['login_panel.login_err_msg'].should have_value ''
     App['login_panel.user_name_field',TextFieldView].type "InvalidLoginName"
     App['login_panel.password_field'].type "InvalidPassword"
     App['login_panel.login_button'].click
 	end
 
 	it "will clear the login and password fields, error message disappears" do
-	  App['login_panel.login_err_msg'].wait_until { |it| it['isVisible'] }
+	  puts "... login error = #{App['login_panel.login_err_msg'].value}"
+	  App.wait_until(60) do |it| 
+	    match = it['login_panel.login_err_msg'].value =~ /Login failed/i 
+	    not match.nil?
+	  end
 	  App['login_panel.user_name_field'].clear
 	  App['login_panel.password_field'].clear
-	  App['login_panel.login_err_msg'].wait_until { |it| !it.isVisible }
-		App['login_panel.login_err_msg', LabelView].should_not be_visible
 	end
 
 end

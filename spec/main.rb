@@ -8,6 +8,7 @@ App = Application.new \
         
 App.start do |app|
   app['isLoaded'] == true
+  # app.driver.run_script "window.ononbeforeunload = null"
 end
 
 App.window.move_to 1, 1 # Have a slight offset for Firefox so that the window will actually be moved
