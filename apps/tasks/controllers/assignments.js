@@ -93,6 +93,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     }
     // console.log('DEBUG: setting searchFilter to: "' + searchFilter + '"');
     this.set('searchFilter', searchFilter);
+    Tasks.assignmentsController.set('displayMode', Tasks.DISPLAY_MODE_TASKS);
   },
   
   _showTasks: true,
