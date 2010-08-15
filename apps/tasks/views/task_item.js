@@ -123,7 +123,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       _preEditing: function() {
         var task = that.get('_task');
         var cv = this.get('contentView');
-        cv.setPath('idLabel.value', task.get('displayId'));
+        cv.setPath('idLabel.value', "_ID".loc() + task.get('displayId'));
         var name = task.get('name');
         cv.setPath('nameField.value', name);
         var copyPattern = new RegExp("_Copy".loc() + '$');
@@ -363,7 +363,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           textAlign: SC.ALIGN_LEFT
         }),
         previousButton: SC.ButtonView.design({
-          layout: { bottom: 10, centerX: -17, width: 32, height: 24 },
+          layout: { bottom: 10, centerX: -20, width: 32, height: 24 },
           classNames: ['dark'],
           titleMinWidth: 0,
           icon: 'previous-icon',
@@ -377,7 +377,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
                                                  }).from('Tasks.tasksController*selection')
         }),
         nextButton: SC.ButtonView.design({
-          layout: { bottom: 10, centerX: 17, width: 32, height: 24 },
+          layout: { bottom: 10, centerX: 20, width: 32, height: 24 },
           classNames: ['dark'],
           titleMinWidth: 0,
           icon: 'next-icon',

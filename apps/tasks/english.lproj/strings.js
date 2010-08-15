@@ -81,6 +81,7 @@ SC.stringsFor('English', {
   "_Has": "Has ",
   "_Hi": "Hi ",
   "_High": "High",
+  "_ID": "ID: ",
   "_Import": "Import",
   "_ImportInstructions:": "Paste or type in data to be imported:<br>(see format on right)",
   "_IncompleteEffortWarning": " (total effort incomplete)",
