@@ -335,7 +335,7 @@ Tasks.mainPage = SC.Page.design({
          }),
 
          tasksSearchField: SC.TextFieldView.design({
-           layout: { centerY: -4, height: 25, right: 10, width: 200 },
+           layout: { centerY: 0, height: 25, right: 10, width: 200 },
            classNames: ['search-bar'],
            hint: "_TasksSearchHint".loc(),
            renderMixin: function(context, firstTime) { // Used custom tooltip rendering to avoid escaping by SCUI.Toolip
