@@ -19,8 +19,6 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   
   content: null,
   
-  _editorPane: null,
-  
   _listTypes: function() {
      var ret = [];
      ret.push({ name: CoreTasks.TASK_TYPE_FEATURE, value: CoreTasks.TASK_TYPE_FEATURE, icon: 'task-icon-feature' });
@@ -104,7 +102,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       var singleSelect = (sel && sel.get('length') === 1);
     
       if ((!event.which || event.which === 1) && singleSelect && classes !== "") { // left click with one task selected and didn't click on the inline editable name
-        this.popupEditor();
+        this.popupEditor(this.get('content'));
       }
     }
     
@@ -116,43 +114,98 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     return sc_super();
   },
   
-  popupEditor: function() {
+  popupEditor: function(task) {
     var layer = this.get('layer');
     var that = this;
+    this._task = task;
     this._editorPane = SCUI.ModalPane.create({
       
       titleBarHeight: 40,
-      title: "_Task".loc() + that.getPath('content.displayId'),
+      title: "_TaskDetails".loc(),
       minWidth: 725,
       minHeight: 310,
       layout: { centerX:0, centerY: 0, width: 725, height: 370 },
       
-      // Avoid popup panel coming up on other items while it is up already
-      popup: function() {
-        that._editorPane.append();
-        Tasks.editorPoppedUp = Tasks.TASK_EDITOR;
-        var name = that.getPath('content.name');
+      _preEditing: function() {
+        var task = that.get('_task');
+        var cv = this.get('contentView');
+        cv.setPath('idLabel.value', task.get('displayId'));
+        var name = task.get('name');
+        cv.setPath('nameField.value', name);
         var copyPattern = new RegExp("_Copy".loc() + '$');
         if((name === CoreTasks.NEW_TASK_NAME.loc() || copyPattern.exec(name)) && Tasks.getPath('tasksController.isEditable')) {
           this.getPath('contentView.nameField').becomeFirstResponder();
         }
+        cv.setPath('typeField.value', task.get('type'));
+        cv.setPath('priorityField.value', task.get('priority'));
+        cv.setPath('statusField.value', task.get('developmentStatus'));
+        cv.setPath('validationField.value', task.get('validation'));
+        cv.setPath('effortField.value', task.get('effort'));
+        cv.setPath('projectField.value', task.get('projectValue'));
+        cv.setPath('submitterField.value', task.get('submitterValue'));
+        cv.setPath('assigneeField.value', task.get('assigneeValue'));
+        cv.setPath('descriptionField.value', task.get('description'));
+        cv.setPath('createdAtLabel.value', task.get('displayCreatedAt'));
+        cv.setPath('updatedAtLabel.value', task.get('displayUpdatedAt'));
+      },
+      _postEditing: function() {
+        var task = that.get('_task');
+        var cv = this.get('contentView');
+        task.setIfChanged('displayName', cv.getPath('nameField.value'));
+        task.setIfChanged('type', cv.getPath('typeField.value'));
+        task.setIfChanged('priority', cv.getPath('priorityField.value'));
+        task.setIfChanged('developmentStatus', cv.getPath('statusField.value'));
+        task.setIfChanged('validation', cv.getPath('validationField.value'));
+        task.setIfChanged('effortValue', cv.getPath('effortField.value'));
+        task.setIfChanged('projectValue', cv.getPath('projectField.value'));
+        task.setIfChanged('submitterValue', cv.getPath('submitterField.value'));
+        task.setIfChanged('assigneeValue', cv.getPath('assigneeField.value'));
+        task.setIfChanged('description',  cv.getPath('descriptionField.value'));
+      },
+      _statusDidChange: function() {
+        var cv = this.get('contentView');
+        var status = cv.getPath('statusField.value');
+        // console.log('_statusDidChange() to ' + status.loc());
+        var isDone = (status === CoreTasks.STATUS_DONE);
+        cv.setPath('validationField.isEnabled', isDone);
+        if(!isDone) cv.setPath('validationField.value', CoreTasks.TASK_VALIDATION_UNTESTED);
+      }.observes('.contentView.statusField*value'),
+      
+      // Avoid popup panel coming up on other items while it is up already
+      popup: function() {
+        this.append();
+        Tasks.editorPoppedUp = Tasks.TASK_EDITOR;
+        this._preEditing();
       },
       remove: function() {
         sc_super();
         Tasks.editorPoppedUp = null;
-        var content = that.get('content');
-        var cv = that._editorPane.get('contentView');
-        content.setIfChanged('displayName', cv.getPath('nameField.value'));
-        content.setIfChanged('effortValue', cv.getPath('effortField.value'));
-        content.setIfChanged('description',  cv.getPath('descriptionField.value'));
+        this._postEditing();
+        this.destroy();
         if(Tasks.assignmentsRedrawNeeded) Tasks.assignmentsController.showAssignments();
         if(CoreTasks.get('autoSave')) Tasks.saveData();
-        that._editorPane.destroy();
+     },
+      
+      previousTask: function() {
+        this._postEditing();
+        SC.RunLoop.begin();
+        Tasks.mainPage.getPath('mainPane.tasksList').selectPreviousItem();
+        SC.RunLoop.end();
+        that._task = Tasks.tasksController.getPath('selection.firstObject');
+        this._preEditing();
+      },
+      nextTask: function() {
+        this._postEditing();
+        SC.RunLoop.begin();
+        Tasks.mainPage.getPath('mainPane.tasksList').selectNextItem();
+        SC.RunLoop.end();
+        that._task = Tasks.tasksController.getPath('selection.firstObject');
+        this._preEditing();
       },
       
       contentView: SC.View.design({
         layout: { left: 0, right: 0, top: 0, bottom: 0},
-        childViews: 'nameLabel nameField typeLabel typeField priorityLabel priorityField statusLabel statusField validationLabel validationField effortLabel effortField effortHelpLabel projectLabel projectField submitterLabel submitterField assigneeLabel assigneeField descriptionLabel descriptionField createdAtLabel updatedAtLabel closeButton'.w(),
+        childViews: 'nameLabel nameField typeLabel typeField priorityLabel priorityField statusLabel statusField validationLabel validationField effortLabel effortField effortHelpLabel projectLabel projectField submitterLabel submitterField assigneeLabel assigneeField descriptionLabel descriptionField createdAtLabel updatedAtLabel idLabel previousButton nextButton closeButton'.w(),
       
         nameLabel: SC.LabelView.design({
           layout: { top: 6, left: 0, height: 24, width: 55 },
@@ -161,8 +214,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         }),
         nameField: SC.TextFieldView.design({
           layout: { top: 5, left: 60, right: 10, height: 24 },
-          isEnabledBinding: 'Tasks.tasksController.isEditable',
-          value: that.getPath('content.name')
+          isEnabledBinding: 'Tasks.tasksController.isEditable'
         }),
         
         typeLabel: SC.LabelView.design({
@@ -181,7 +233,6 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           nameKey: 'name',
           valueKey: 'value',
           iconKey: 'icon',
-          valueBinding: SC.binding('.content.type', this),
           toolTip: "_TypeTooltip".loc()
         }),
    
@@ -198,7 +249,6 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           objects: this._listPriorities(),
           nameKey: 'name',
           valueKey: 'value',
-          valueBinding: SC.binding('.content.priority', this),
           toolTip: "_PriorityTooltip".loc()
         }),
                   
@@ -215,8 +265,6 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           objects: this._listStatuses(),
           nameKey: 'name',
           valueKey: 'value',
-          // bind to tasksController instead of to content to trigger validation button enablement below
-          valueBinding: SC.binding('Tasks.tasksController.developmentStatusWithValidation'),
           toolTip: "_StatusTooltip".loc()
         }),
 
@@ -231,11 +279,9 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           classNames: ['square'],
           localize: YES,
           isVisibleBinding: 'Tasks.softwareMode',
-          isEnabledBinding: 'Tasks.tasksController.isValidatable',
           objects: this._listValidations(),
           nameKey: 'name',
           valueKey: 'value',
-          valueBinding: SC.binding('.content.validation', this),
           toolTip: "_ValidationTooltip".loc()
         }),
 
@@ -246,8 +292,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         }),
         effortField: SC.TextFieldView.design({
           layout: { top: 75, left: 60, width: 95, height: 24 },
-          isEnabledBinding: 'Tasks.tasksController.isEditable',
-          value: that.getPath('content.effortValue')
+          isEnabledBinding: 'Tasks.tasksController.isEditable'
         }),
         effortHelpLabel: SC.LabelView.design({
           layout: { top: 75, left: 160, height: 30, width: 225 },
@@ -261,14 +306,14 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           textAlign: SC.ALIGN_RIGHT,
           value: "_Project:".loc()
         }),
-        projectField: SCUI.ComboBoxView.design({
+        // projectField: SCUI.ComboBoxView.design({
+        projectField: SC.SelectFieldView.design({
           layout: { top: 112, left: 60, width: 270, height: 24 },
           objectsBinding: this._listProjects(),
           nameKey: 'displayName',
           valueKey: 'id',
           iconKey: 'icon',
-          isEnabledBinding: 'Tasks.tasksController.isReallocatable',
-          valueBinding: SC.binding('.content.projectValue', this)
+          isEnabledBinding: 'Tasks.tasksController.isReallocatable'
         }),
 
         submitterLabel: SC.LabelView.design({
@@ -276,14 +321,14 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           textAlign: SC.ALIGN_RIGHT,
           value: "_Submitter:".loc()
         }),
-        submitterField: SCUI.ComboBoxView.design({
+        // submitterField: SCUI.ComboBoxView.design({
+        submitterField: SC.SelectFieldView.design({
           layout: { top: 75, right: 10, width: 272, height: 24 },
           objectsBinding: this._listUsers(false),
           nameKey: 'displayName',
           valueKey: 'id',
           iconKey: 'icon',
-          isEnabledBinding: 'Tasks.tasksController.isEditable',
-          valueBinding: SC.binding('.content.submitterValue', this)
+          isEnabledBinding: 'Tasks.tasksController.isEditable'
         }),
 
         assigneeLabel: SC.LabelView.design({
@@ -291,14 +336,14 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           textAlign: SC.ALIGN_RIGHT,
           value: "_Assignee:".loc()
         }),
-        assigneeField: SCUI.ComboBoxView.design({
+        // assigneeField: SCUI.ComboBoxView.design({
+        assigneeField: SC.SelectFieldView.design({
           layout: { top: 112, right: 10, width: 272, height: 24 },
           objectsBinding: this._listUsers(true),
           nameKey: 'displayName',
           valueKey: 'id',
           iconKey: 'icon',
-          isEnabledBinding: 'Tasks.tasksController.isEditable',
-          valueBinding: SC.binding('.content.assigneeValue', this)
+          isEnabledBinding: 'Tasks.tasksController.isEditable'
         }),
 
         descriptionLabel: SC.LabelView.design({
@@ -310,21 +355,52 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           layout: { top: 168, left: 10, right: 10, bottom: 65 },
           hint: "_DescriptionHint".loc(),
           isTextArea: YES,
-          isEnabled: YES,
-          value: that.getPath('content.description')
+          isEnabled: YES
         }),
         
         createdAtLabel: SC.LabelView.design({
           layout: { left: 10, bottom: 45, height: 17, width: 250 },
           classNames: [ 'date-time'],
-          textAlign: SC.ALIGN_LEFT,
-          valueBinding: SC.binding('.content.displayCreatedAt', this)
+          textAlign: SC.ALIGN_LEFT
         }),
         updatedAtLabel: SC.LabelView.design({
           layout: { right: 10, bottom: 45, height: 17, width: 250 },
           classNames: [ 'date-time'],
-          textAlign: SC.ALIGN_RIGHT,
-          valueBinding: SC.binding('.content.displayUpdatedAt', this)
+          textAlign: SC.ALIGN_RIGHT
+        }),
+
+        idLabel: SC.LabelView.design({
+          layout: { left: 10, bottom: 15, height: 17, width: 100 },
+          textAlign: SC.ALIGN_LEFT
+        }),
+        previousButton: SC.ButtonView.design({
+          layout: { bottom: 10, centerX: -17, width: 32, height: 24 },
+          classNames: ['dark'],
+          titleMinWidth: 0,
+          icon: 'previous-icon',
+          toolTip: "_ShowPreviousTask".loc(),
+          action: 'previousTask',
+          isEnabledBinding: SC.Binding.transform(function(value, binding) {
+                                                   var task = value.getPath('firstObject');
+                                                   var idx = Tasks.tasksController.get('arrangedObjects').indexOf(task);
+                                                   if(idx === 1) return false;
+                                                   return true;
+                                                 }).from('Tasks.tasksController*selection')
+        }),
+        nextButton: SC.ButtonView.design({
+          layout: { bottom: 10, centerX: 17, width: 32, height: 24 },
+          classNames: ['dark'],
+          titleMinWidth: 0,
+          icon: 'next-icon',
+          toolTip: "_ShowNextTask".loc(),
+          action: 'nextTask',
+          isEnabledBinding: SC.Binding.transform(function(value, binding) {
+                                                   var task = value.getPath('firstObject');
+                                                   var idx = Tasks.tasksController.get('arrangedObjects').indexOf(task);
+                                                   var max = Tasks.tasksController.getPath('arrangedObjects.length') - 1;
+                                                   if(idx === max) return false;
+                                                   return true;
+                                                 }).from('Tasks.tasksController*selection')
         }),
 
         closeButton: SC.ButtonView.design({
@@ -336,7 +412,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           
       })
     });
-    this._editorPane.popup(layer);
+    if(this._editorPane) this._editorPane.popup(layer);
   },
   
   inlineEditorWillBeginEditing: function(inlineEditor) {

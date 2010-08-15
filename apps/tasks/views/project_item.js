@@ -61,7 +61,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     this._editorPane = SCUI.ModalPane.create({
       
       titleBarHeight: 40,
-      title: "_Project".loc() + that.getPath('content.displayId'),
+      title: "_ProjectDetails".loc(),
       minWidth: 700,
       minHeight: 240,
       layout: { centerX:0, centerY: 0, width: 700, height: 315 },
@@ -71,7 +71,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       // Avoid popup panel coming up for system projects
       popup: function() {
         if(that.get('isSystemProject')) return;
-        that._editorPane.append();
+        this.append();
         Tasks.editorPoppedUp = Tasks.PROJECT_EDITOR;
         this._timeLeft = that.getPath('content.timeLeft');
         this._activatedAt = that.getPath('content.activatedAt');
@@ -85,7 +85,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
         sc_super();
         Tasks.editorPoppedUp = null;
         var content = that.get('content');
-        var cv = that._editorPane.get('contentView');
+        var cv = this.get('contentView');
         content.setIfChanged('displayName', cv.getPath('nameField.value'));
         content.setIfChanged('timeLeftValue', cv.getPath('timeLeftField.value'));
         content.setIfChanged('activatedAtValue',  cv.getPath('activatedAtField.date'));
@@ -97,7 +97,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
           Tasks.assignmentsController.showAssignments();
         }
         if(CoreTasks.get('autoSave')) Tasks.saveData();
-        that._editorPane.destroy();
+        this.destroy();
       },
       
       contentView: SC.View.design({

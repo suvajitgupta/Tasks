@@ -218,6 +218,18 @@
   right: 0px !important;
 }
 
+.previous-icon {
+  width: 16px !important;
+  height: 16px !important;
+  background: static_url('images/item-previous.png') no-repeat;
+}
+
+.next-icon {
+  width: 16px !important;
+  height: 16px !important;
+  background: static_url('images/item-next.png') no-repeat;
+}
+
 
 /*-----------------------------------------------------------------
  * Task type styles

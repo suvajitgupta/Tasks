@@ -78,6 +78,7 @@ Task Manager GUI @Active
 - Show Task Priority (font style), Status (font color), Validation (background color) [SG] <MB> @Done $Feature %Passed
 - Add Task "Type/Priority/Status/Validation" select buttons in tasks popup editor [SG] @Done $Feature %Passed
 v Enable Task Validation editing only when in Done status [SG] <JH2> $Feature @Done %Passed
+- Add support for navigating to previous/next Tasks via popup editor [SG] $Feature @Active
 - Allow multi-task modification of Type/Status/Priority/Validation [SG] $Feature @Done %Passed
 ^ Add Task search filter (by #IDs or name) & corresponding delete button in top bar: support type-ahead searching <JH2> [SG] @Done %Passed $Feature
 ^ Allow Task attribute filtering by Type, Priority, Status, and Validation fields via a top bar button/sheet pane [SG] $Feature @Done %Passed
