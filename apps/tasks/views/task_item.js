@@ -53,37 +53,31 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   },
 
   _listUsers: function(excludeGuests) {
-    return SC.Binding.transform(function(value, binding) {
-       var users = value.toArray();
-       var ret = [];
-       for(var i=0, len = users.get('length'); i < len; i++) {
-         var user = users.objectAt(i);
-         if(!excludeGuests || user.get('role') !== CoreTasks.USER_ROLE_GUEST) ret.push(user);
-       }
-       ret.push({ id: '0', displayName: "_Unassigned".loc(), icon: sc_static('blank') });
-       return ret;
-    }).from('Tasks.usersController.content');
+     var users = Tasks.usersController.get('content').toArray();
+     var ret = [];
+     for(var i=0, len = users.get('length'); i < len; i++) {
+       var user = users.objectAt(i);
+       if(!excludeGuests || user.get('role') !== CoreTasks.USER_ROLE_GUEST) ret.push(user);
+     }
+     ret.push({ id: '0', displayName: "_Unassigned".loc(), icon: sc_static('blank') });
+     return ret;
   },
 
   _listProjects: function() {
-    return SC.Binding.transform(function(value, binding) {
-      
-       var ret = value.toArray();
-       
-       // Remove system projects from list since you cannot assign to them
-       var idx = ret.indexOf(CoreTasks.get('allTasksProject'));
-       if(idx !== -1) ret.splice(idx, 1);
-       idx = ret.indexOf(CoreTasks.get('unassignedTasksProject'));
-       if(idx !== -1) ret.splice(idx, 1);
-       idx = ret.indexOf(CoreTasks.get('unallocatedTasksProject'));
-       if(idx !== -1) {
-         ret.splice(idx, 1);
-         ret.push({ id: '0', icon: CoreTasks.getPath('unallocatedTasksProject.icon'), displayName: "_UnallocatedTasks".loc() });
-       }
-       
-       return ret;
-       
-    }).from('Tasks.projectsController.content');
+     var ret = Tasks.projectsController.get('content').toArray();
+     
+     // Remove system projects from list since you cannot assign to them
+     var idx = ret.indexOf(CoreTasks.get('allTasksProject'));
+     if(idx !== -1) ret.splice(idx, 1);
+     idx = ret.indexOf(CoreTasks.get('unassignedTasksProject'));
+     if(idx !== -1) ret.splice(idx, 1);
+     idx = ret.indexOf(CoreTasks.get('unallocatedTasksProject'));
+     if(idx !== -1) {
+       ret.splice(idx, 1);
+       ret.push({ id: '0', icon: CoreTasks.getPath('unallocatedTasksProject.icon'), displayName: "_UnallocatedTasks".loc() });
+     }
+     
+     return ret;
   },
   
   /** @private
@@ -165,13 +159,11 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       _statusDidChange: function() {
         var cv = this.get('contentView');
         var status = cv.getPath('statusField.value');
-        // console.log('_statusDidChange() to ' + status.loc());
         var isDone = (status === CoreTasks.STATUS_DONE);
         cv.setPath('validationField.isEnabled', isDone);
         if(!isDone) cv.setPath('validationField.value', CoreTasks.TASK_VALIDATION_UNTESTED);
       }.observes('.contentView.statusField*value'),
       
-      // Avoid popup panel coming up on other items while it is up already
       popup: function() {
         this.append();
         Tasks.editorPoppedUp = Tasks.TASK_EDITOR;
@@ -306,10 +298,9 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           textAlign: SC.ALIGN_RIGHT,
           value: "_Project:".loc()
         }),
-        // projectField: SCUI.ComboBoxView.design({
-        projectField: SC.SelectFieldView.design({
+        projectField: SCUI.ComboBoxView.design({
           layout: { top: 112, left: 60, width: 270, height: 24 },
-          objectsBinding: this._listProjects(),
+          objects: this._listProjects(),
           nameKey: 'displayName',
           valueKey: 'id',
           iconKey: 'icon',
@@ -321,10 +312,9 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           textAlign: SC.ALIGN_RIGHT,
           value: "_Submitter:".loc()
         }),
-        // submitterField: SCUI.ComboBoxView.design({
-        submitterField: SC.SelectFieldView.design({
+        submitterField: SCUI.ComboBoxView.design({
           layout: { top: 75, right: 10, width: 272, height: 24 },
-          objectsBinding: this._listUsers(false),
+          objects: this._listUsers(false),
           nameKey: 'displayName',
           valueKey: 'id',
           iconKey: 'icon',
@@ -336,10 +326,9 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           textAlign: SC.ALIGN_RIGHT,
           value: "_Assignee:".loc()
         }),
-        // assigneeField: SCUI.ComboBoxView.design({
-        assigneeField: SC.SelectFieldView.design({
+        assigneeField: SCUI.ComboBoxView.design({
           layout: { top: 112, right: 10, width: 272, height: 24 },
-          objectsBinding: this._listUsers(true),
+          objects: this._listUsers(true),
           nameKey: 'displayName',
           valueKey: 'id',
           iconKey: 'icon',
