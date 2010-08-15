@@ -207,11 +207,13 @@ Tasks.mainPage = SC.Page.design({
         isVisibleBinding: SC.Binding.oneWay('Tasks.assignmentsController.attributeFilterEnabled').bool()
       }),
     
-      tasksSearchField: SC.TextFieldView.design(SCUI.ToolTip, {
+      tasksSearchField: SC.TextFieldView.design({
         layout: { centerY: -4, height: 25, right: 10, width: 200 },
         classNames: ['search-bar'],
         hint: "_TasksSearchHint".loc(),
-        toolTip: "_TasksSearchTooltip".loc(),
+        renderMixin: function(context, firstTime) { // Used custom tooltip rendering to avoid escaping by SCUI.Toolip
+          context.attr('title', "_TasksSearchTooltip".loc()) ;
+        },
         valueBinding: 'Tasks.assignmentsController.searchFilter'
       }),
       tasksSearchCancelButton: SC.View.design({ // Tasks Search cancel button
