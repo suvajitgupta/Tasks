@@ -115,7 +115,6 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     this._editorPane = SCUI.ModalPane.create({
       
       titleBarHeight: 40,
-      title: "_TaskDetails".loc(),
       minWidth: 725,
       minHeight: 310,
       layout: { centerX:0, centerY: 0, width: 725, height: 370 },
@@ -123,7 +122,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       _preEditing: function() {
         var task = that.get('_task');
         var cv = this.get('contentView');
-        cv.setPath('idLabel.value', "_ID".loc() + task.get('displayId'));
+        this.childViews[0].get('title').set('value', "_TaskDetails".loc() + ' ' + task.get('displayId'));
         var name = task.get('name');
         cv.setPath('nameField.value', name);
         var copyPattern = new RegExp("_Copy".loc() + '$');
@@ -197,7 +196,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       
       contentView: SC.View.design({
         layout: { left: 0, right: 0, top: 0, bottom: 0},
-        childViews: 'nameLabel nameField typeLabel typeField priorityLabel priorityField statusLabel statusField validationLabel validationField effortLabel effortField effortHelpLabel projectLabel projectField submitterLabel submitterField assigneeLabel assigneeField descriptionLabel descriptionField createdAtLabel updatedAtLabel idLabel previousButton nextButton closeButton'.w(),
+        childViews: 'nameLabel nameField typeLabel typeField priorityLabel priorityField statusLabel statusField validationLabel validationField effortLabel effortField effortHelpLabel projectLabel projectField submitterLabel submitterField assigneeLabel assigneeField descriptionLabel descriptionField createdAtLabel updatedAtLabel previousButton nextButton closeButton'.w(),
       
         nameLabel: SC.LabelView.design({
           layout: { top: 6, left: 0, height: 24, width: 55 },
@@ -358,10 +357,6 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           textAlign: SC.ALIGN_RIGHT
         }),
 
-        idLabel: SC.LabelView.design({
-          layout: { left: 10, bottom: 15, height: 17, width: 100 },
-          textAlign: SC.ALIGN_LEFT
-        }),
         previousButton: SC.ButtonView.design({
           layout: { bottom: 10, centerX: -20, width: 32, height: 24 },
           classNames: ['dark'],
