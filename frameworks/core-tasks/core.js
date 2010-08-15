@@ -186,13 +186,15 @@ CoreTasks = SC.Object.create({
    */
   isCurrentUserWatchingTask: function(task) {
     if (this.allWatches) {
-      var currentUserId = this.getPath('currentUser.id');
-      var taskId = task.get('id');
+      var currentUserId = '' + this.getPath('currentUser.id');
+      var taskId = '' + task.get('id');
       var watchesCount = this.allWatches.get('length');
+      // console.log('DEBUG: isCurrentUserWatchingTask() taskId=' + taskId + ", userId=" + currentUserId + ", watchesCount=" + watchesCount);
       for(var i = 0; i < watchesCount; i++) {
         var watch = this.allWatches.objectAt(i);
-        if(watch.get('userId') !== currentUserId) continue;
-        if(watch.get('taskId') === taskId) return CoreTasks.TASK_WATCH_ON;
+        // console.log('DEBUG: isCurrentUserWatchingTask() watch.taskId=' + watch.get('taskId') + ", watch.userId=" + watch.get('userId') + ", watchId=" + watch.get('id'));
+        if(('' + watch.get('userId')) !== currentUserId) continue;
+        if(('' + watch.get('taskId')) === taskId) return CoreTasks.TASK_WATCH_ON;
       }
     }
     return CoreTasks.TASK_WATCH_OFF;
@@ -206,12 +208,13 @@ CoreTasks = SC.Object.create({
    */
   getCurrentUserTaskWatch: function(task) {
     if (this.allWatches)  {
-      var currentUserId = this.getPath('currentUser.id');
+      var currentUserId = '' + this.getPath('currentUser.id');
+      var taskId = '' + task.get('id');
       var watchesCount = this.allWatches.get('length');
       for(var i = 0; i < watchesCount; i++) {
         var watch = this.allWatches.objectAt(i);
-        if(watch.get('userId') !== currentUserId) continue;
-        if(watch.get('taskId') === task.get('id')) return watch;
+        if(('' + watch.get('userId')) !== currentUserId) continue;
+        if(('' + watch.get('taskId')) === taskId) return watch;
       }
     }
     return null;

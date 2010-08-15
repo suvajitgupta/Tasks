@@ -61,10 +61,15 @@ Tasks.mixin({
         Tasks.loginController.closePanel();
         Tasks.getPath('mainPage.mainPane').append();
         Tasks.mainPageHelper.set('clippyDetails', document.getElementById(Tasks.mainPageHelper.clippyDetailsId));
-        var headers = request.get('headers');
-        if(SC.typeOf(headers) === SC.T_HASH) {
-          var server = headers.Server;
-          if(server && server.indexOf('Persevere') !== -1) Tasks.set('serverType', Tasks.PERSEVERE_SERVER);
+        if(SC.none(request)) {
+          Tasks.set('serverType', Tasks.NO_SERVER); // Fixtures mode
+        }
+        else {
+          var headers = request.get('headers');
+          if(SC.typeOf(headers) === SC.T_HASH) {
+            var server = headers.Server;
+            if(server && server.indexOf('Persevere') !== -1) Tasks.set('serverType', Tasks.PERSEVERE_SERVER);
+          }
         }
         this.goState('a', 3);
         break;
@@ -107,7 +112,8 @@ Tasks.mixin({
       successCallback: this._loadDataSuccess.bind(this),
       failureCallback: this._loadDataFailure.bind(this)
     };
-    if(Tasks.get('serverType') === Tasks.PERSEVERE_SERVER) {
+    var serverType = Tasks.get('serverType');
+    if(serverType === Tasks.PERSEVERE_SERVER) {
       var methodInvocation = {
         method: 'get',
         id: 'records',
@@ -115,8 +121,11 @@ Tasks.mixin({
       };
       CoreTasks.executeTransientPost('Class/all', methodInvocation, params);
     }
-    else {
+    else if(serverType === Tasks.GAE_SERVER){
       CoreTasks.executeTransientGet('records', undefined, params);
+    }
+    else { // Fixtures mode
+      this._loadDataSuccess();
     }
   },
   
@@ -126,20 +135,22 @@ Tasks.mixin({
   _loadDataSuccess: function(response) {
     // console.log('DEBUG: loadDataSuccess()');
     
-    // Process/load records into store
-    var typeMap = {
-      "users":     CoreTasks.User,
-      "tasks":     CoreTasks.Task,
-      "projects":  CoreTasks.Project,
-      "watches":   CoreTasks.Watch
-    };
-    var recordSets = response.result;
-    for(var recordSet in recordSets) {
-      var recordType = typeMap[recordSet];
-      if(SC.typeOf(recordType) === SC.T_CLASS) {
-        var records = recordSets[recordSet];
-        CoreTasks.store.loadRecords(recordType, records);
-        CoreTasks.store.purgeDeletedRecords(recordType, records);
+    if(response) { // Has a Server, not Fixtures mode
+      // Process/load records into store
+      var typeMap = {
+        "users":     CoreTasks.User,
+        "tasks":     CoreTasks.Task,
+        "projects":  CoreTasks.Project,
+        "watches":   CoreTasks.Watch
+      };
+      var recordSets = response.result;
+      for(var recordSet in recordSets) {
+        var recordType = typeMap[recordSet];
+        if(SC.typeOf(recordType) === SC.T_CLASS) {
+          var records = recordSets[recordSet];
+          CoreTasks.store.loadRecords(recordType, records);
+          CoreTasks.store.purgeDeletedRecords(recordType, records);
+        }
       }
     }
     

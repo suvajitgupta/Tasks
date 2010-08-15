@@ -10,7 +10,7 @@
   @author Suvajit Gupta
   @version 0.1
 */
-/*globals Tasks sc_require */
+/*globals Tasks CoreTasks sc_require */
 sc_require('statechart');
 
 // FIXME: [SG] remove hacks when switching to SC ToT where logicalAnd() has been replaced with and()
@@ -33,6 +33,7 @@ Tasks = SC.Object.create(SC.Statechart,
   /*
    * Tasks server types
    */
+  NO_SERVER: 0x0000,
   PERSEVERE_SERVER: 0x0001,
   GAE_SERVER: 0x0002,
   serverType: 0x0002,
