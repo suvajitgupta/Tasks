@@ -42,8 +42,9 @@ v A low priority feature assigned to Suvajit that was completed in 2 days and it
 - A medium priority, planned, other, task that takes two-and-a-half hours and is unassigned {2.5d}
 v A low priority bug assigned to a non-existent user that is planned and failed (an unacceptable combination) $Bug
 
+Project Three @Planned # Has 0 tasks
 
-Project Three @Done # Has 1 tasks
+Project Four @Done # Has 1 tasks
 
 # Sean Eidemiller (SE) # Has 1 tasks
 - A medium priority, other, task assigned to Sean completed in one day {1d} [SE] @Done
