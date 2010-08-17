@@ -122,7 +122,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       _preEditing: function() {
         var task = that.get('_task');
         var cv = this.get('contentView');
-        this.childViews[0].get('title').set('value', "_Task".loc() + ' ' + task.get('displayId') + ' ' + "Details".loc());
+        this.childViews[0].get('title').set('value', "_Task".loc() + ' ' + task.get('displayId') + ' ' + "Info".loc());
         var name = task.get('name');
         cv.setPath('nameField.value', name);
         var copyPattern = new RegExp("_Copy".loc() + '$');

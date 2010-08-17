@@ -61,7 +61,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     this._editorPane = SCUI.ModalPane.create({
       
       titleBarHeight: 40,
-      title: "_Project".loc() + ' ' + "Details".loc(),
+      title: "_Project".loc() + ' ' + "Info".loc(),
       minWidth: 700,
       minHeight: 240,
       layout: { centerX:0, centerY: 0, width: 700, height: 315 },
