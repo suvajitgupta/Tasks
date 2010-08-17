@@ -208,7 +208,8 @@ Styling/Hardening @Active
 | Email Notifications, Task watching
 - Develop comprehensive Model/View unit tests [SG] <BB> @Active
 - Develop comprehensive automated test scripts using Lebowski/Selenium [SG] <MR> @Active
-- Refactor code to "root controller pattern" and new SproutCore statecharts [SG] <MC> @Active
+- Refactor code to comply with "root controller pattern" [SG] <EG> @Active
+- Refactor code to use new SproutCore statecharts [SG] <MC> @Active
 
 Installation/Deployment @Active
 - Support customizable (via Buildfile) "Installation" logo and title (shown in Browser/tab title) [SG] @Done $Feature %Passed
