@@ -123,6 +123,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         var task = that.get('_task');
         var cv = this.get('contentView');
         this.childViews[0].get('title').set('value', "_Task".loc() + ' ' + task.get('displayId') + ' ' + "Info".loc());
+        cv.setPath('watchCountLabel.value', CoreTasks.getTaskWatches(task).length);
         var name = task.get('name');
         cv.setPath('nameField.value', name);
         var copyPattern = new RegExp("_Copy".loc() + '$');
@@ -196,7 +197,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       
       contentView: SC.View.design({
         layout: { left: 0, right: 0, top: 0, bottom: 0},
-        childViews: 'nameLabel nameField typeLabel typeField priorityLabel priorityField statusLabel statusField validationLabel validationField effortLabel effortField effortHelpLabel projectLabel projectField submitterLabel submitterField assigneeLabel assigneeField descriptionLabel descriptionField createdAtLabel updatedAtLabel previousButton nextButton closeButton'.w(),
+        childViews: 'nameLabel nameField typeLabel typeField priorityLabel priorityField statusLabel statusField validationLabel validationField effortLabel effortField effortHelpLabel projectLabel projectField submitterLabel submitterField assigneeLabel assigneeField descriptionLabel descriptionField createdAtLabel updatedAtLabel watchCountLabel previousButton nextButton closeButton'.w(),
       
         nameLabel: SC.LabelView.design({
           layout: { top: 6, left: 0, height: 24, width: 55 },
@@ -357,6 +358,13 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           textAlign: SC.ALIGN_RIGHT
         }),
 
+        watchCountLabel: SC.LabelView.design(SCUI.ToolTip, SC.Border, {
+          layout: { left: 10, bottom: 10, height: 20, width: 60 },
+          icon: 'watches-icon',
+          borderStyle: SC.BORDER_BEZEL,
+          textAlign: SC.ALIGN_CENTER,
+          toolTip: "_TaskWatchCount".loc()
+        }),
         previousButton: SC.ButtonView.design({
           layout: { bottom: 10, centerX: -20, width: 32, height: 24 },
           classNames: ['dark'],
@@ -381,8 +389,8 @@ Tasks.TaskItemView = SC.ListItemView.extend(
           isEnabledBinding: SC.Binding.transform(function(value, binding) {
                                                    var task = value.getPath('firstObject');
                                                    var idx = Tasks.tasksController.get('arrangedObjects').indexOf(task);
-                                                   var max = Tasks.tasksController.getPath('arrangedObjects.length') - 1;
-                                                   if(idx === max) return false;
+                                                   var len = Tasks.tasksController.getPath('arrangedObjects.length') - 1;
+                                                   if(idx === len) return false;
                                                    return true;
                                                  }).from('Tasks.tasksController*selection')
         }),

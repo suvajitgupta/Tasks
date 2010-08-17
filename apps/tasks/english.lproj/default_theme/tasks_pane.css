@@ -253,6 +253,12 @@
   background: static_url('images/other.png') no-repeat;
 }
 
+.watches-icon {
+  width: 16px !important;
+  height: 18px !important;
+  background: static_url('images/watches.png') no-repeat;
+}
+
 .watch-icon {
   width: 16px !important;
   height: 16px !important;

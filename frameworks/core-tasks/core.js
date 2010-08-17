@@ -220,6 +220,25 @@ CoreTasks = SC.Object.create({
     return null;
   },
 
+  /**
+   * Get watches for a given task.
+   *
+   * @param {Object} task.
+   * @returns {Array} watches (may be empty).
+   */
+  getTaskWatches: function(task) {
+    var ret = [];
+    if (this.allWatches)  {
+      var taskId = '' + task.get('id');
+      var watchesCount = this.allWatches.get('length');
+      for(var i = 0; i < watchesCount; i++) {
+        var watch = this.allWatches.objectAt(i);
+        if(('' + watch.get('taskId')) === taskId) ret.push(watch);
+      }
+    }
+    return ret;
+  },
+
   // The resource path format for the remote server.
   _resourcePathFormat: 'tasks-server/%@%@%@',
 
