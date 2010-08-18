@@ -54,6 +54,10 @@ Tasks = SC.Object.create(SC.Statechart,
     Tasks.tasksController.set('selection', '');
   },
   
+  getBaseUrl: function() {
+    return window.location.protocol + '//' + window.location.host + window.location.pathname;
+  },
+  
   nameAlphaSort: function(a,b) {
     var aName = a.get('name');
     var bName = b.get('name');

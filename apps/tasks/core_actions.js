@@ -316,7 +316,7 @@ Tasks.mixin({
     * Launch task editor dialog.
     */
   help: function() {
-    var url = window.location.protocol + '//' + window.location.host + window.location.pathname + '#help';
+    var url = Tasks.getBaseUrl() + '#help';
     window.open(url, '', 'width=1000,height=750,menubar=no,location=no,toolbar=no,directories=no,status=no');
   },
   
@@ -377,22 +377,35 @@ Tasks.mixin({
    * Restart application - invoked at logout and for a route to a new project.
    */
   restart: function() {
-    
-    Tasks.setPath('mainPage.mainPane.welcomeMessage.value', null);
-    CoreTasks.set('currentUser', null);
-    CoreTasks.loginTime = true;
-    
-    this.get('assignmentsController').resetFilters();
-    this.usersController.set('content', null);
-    this.projectsController.set('content', null);
-    this.projectsController.set('selection', null);
-    CoreTasks.clearData();
-    
-    this.goState('a', 1);
-    Tasks.loginController.openPanel();
-    
+    if(Tasks.get('serverType') === Tasks.GAE_SERVER) {
+      var params = {
+        successCallback: this._logoutSuccess.bind(this),
+        failureCallback: this._logoutFailure.bind(this)
+      };
+      // notify Server so that authentication token can be destroyed for security reasons
+      CoreTasks.executeTransientPost('logout?id=' + CoreTasks.getPath('currentUser.id'), null, params);
+    }
   },
   
+  /**
+   * Called after successful logout.
+   */
+  _logoutSuccess: function(response) {
+    console.log('Logout succeeded on Server');
+    this._resetWindowLocation();
+  },
+  /**
+   * Called after failed logout.
+   */
+  _logoutFailure: function(response) {
+    console.error('Logout failed on Server');
+    this._resetWindowLocation();
+  },
+  
+  _resetWindowLocation: function() {
+    window.location = Tasks.getBaseUrl(); // restart application
+  },
+
   /**
    * Add a new project in projects master list.
    */
