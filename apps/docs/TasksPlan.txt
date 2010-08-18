@@ -80,7 +80,7 @@ v Enable Task Validation editing only when in Done status [SG] $Feature @Done %P
 ^ Add Task search filter (by Assignee/Submitter/#IDs/Name) & corresponding cancel button in top bar: support type-ahead searching <JH2> [SG] @Done %Passed $Feature
 ^ Allow Task attribute filtering by Type, Priority, Status, and Validation fields via a top bar button/sheet pane [SG] $Feature @Done %Passed
 - Add commonly-used "QuickFilters": Troubled, Unfinished, Unvalidated, Completed, Showstoppers, All [SG] $Feature @Done %Passed
-- Allow filtering of Tasks that were recently updated or have Effort specified [SG] $Feature @Done %Passed
+- Allow filtering of Tasks that were recently updated, have Effort specified, or are being watched [SG] $Feature @Done %Passed
 - Allow filtering of Tasks that were created or updated within a specified timeframe [SG] $Feature
 - Indicate whether there is a Task attribute filter via cancel icon [SG] $Feature @Done %Passed
 - Indicate whether there are any risky items under an Assignee using a red flag in Assignee grouping bar [SG] $Feature @Done %Passed
@@ -100,7 +100,7 @@ v Add hover over tooltip for Assignees to show how many Tasks they have and to e
 - Limit Assignees to non-Guest users in Task popup editor [SG] $Feature @Done %Passed
 - Support multi-Task ID/Name copy to clipboard from top bar [SG] <JH2> $Feature @Done %Passed
 v Add Task context menu with options: Add, Duplicate, Delete; All Task Attributes; Copy ID/Name, Copy Link [SG] $Feature @Done %Passed
-^ Add ability to "Watch" Tasks and get Email Notifications after Task changes [SG] <JH2> $Feature @Done %Passed
+^ Add ability to watch Tasks and get Email Notifications after Task changes [SG] <JH2> $Feature @Done %Passed
 - Indicate watched Tasks by underlining their IDs [SG] $Feature @Done %Passed
 - Add ability to view/add Comments on Tasks [SG] <JH2> $Feature @Active
 - Allow "Find & Replace" within Task names  (operating only on displayed Tasks) [SG] $Feature

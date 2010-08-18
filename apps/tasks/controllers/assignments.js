@@ -59,9 +59,11 @@ CoreTasks.TASK_TYPE_FEATURE, CoreTasks.TASK_TYPE_BUG, CoreTasks.TASK_TYPE_OTHER,
 Tasks.DISPLAY_MODE_TASKS = true;
 Tasks.DISPLAY_MODE_TEAM = false;
 
-Tasks.FILTER_DONTCARE = -1;
+Tasks.FILTER_DONT_CARE = -1;
 Tasks.FILTER_YES = 0;
 Tasks.FILTER_NO = 1;
+Tasks.FILTER_MY_WATCHES = 0;
+Tasks.FILTER_ANY_WATCHES = 1;
 
 Tasks.assignmentsController = SC.ArrayController.create(
 /** @scope Tasks.assignmentsController.prototype */ {
@@ -109,8 +111,9 @@ Tasks.assignmentsController = SC.ArrayController.create(
   userSelection: null,
   searchFilter: null,
   attributeFilterCriteria: Tasks.attributeFilterNone.slice(0),
-  effortSpecified: Tasks.FILTER_DONTCARE,
-  recentlyUpdated: Tasks.FILTER_DONTCARE,
+  effortSpecified: Tasks.FILTER_DONT_CARE,
+  recentlyUpdated: Tasks.FILTER_DONT_CARE,
+  watched: Tasks.FILTER_DONT_CARE,
   
   attributeFilter: function(name, value) {
     var newFilterCriteria;
@@ -192,23 +195,27 @@ Tasks.assignmentsController = SC.ArrayController.create(
   attributeFilterCriteriaCopy: null,
   effortSpecifiedCopy: null,
   recentlyUpdatedCopy: null,
+  watchedCopy: null,
   
   backupAttributeFilterCriteria: function() {
     this.attributeFilterCriteriaCopy = this.attributeFilterCriteria.slice(0);
     this.effortSpecifiedCopy = this.effortSpecified;
     this.recentlyUpdatedCopy = this.recentlyUpdated;
+    this.watchedCopy = this.watched;
   },
   
   restoreAttributeFilterCriteria: function() {
     this.set('attributeFilterCriteria', this.attributeFilterCriteriaCopy);
     this.set('effortSpecified', this.effortSpecifiedCopy);
     this.set('recentlyUpdated', this.recentlyUpdatedCopy);
+    this.set('watched', this.watchedCopy);
   },
   
   attributeFilterEnabled: function() {
-    return this.attributeFilterCriteria.length !== 13 || this.effortSpecified !== Tasks.FILTER_DONTCARE ||  this.recentlyUpdated !== Tasks.FILTER_DONTCARE?
+    return (this.attributeFilterCriteria.length !== 13 || this.effortSpecified !== Tasks.FILTER_DONT_CARE ||
+           this.recentlyUpdated !== Tasks.FILTER_DONT_CARE || this.watched !== Tasks.FILTER_DONT_CARE)?
     true : false;
-  }.property('attributeFilterCriteria', 'effortSpecified', 'recentlyUpdated').cacheable(),
+  }.property('attributeFilterCriteria', 'effortSpecified', 'recentlyUpdated', 'watched').cacheable(),
   
   hasFiltering: function() {
     return this.userSelection || this.searchFilter || this.attributeFilterCriteria.length !== 13;
@@ -236,8 +243,9 @@ Tasks.assignmentsController = SC.ArrayController.create(
 
   clearAttributeFilter: function() {
     this.set('attributeFilterCriteria', Tasks.attributeFilterNone.slice(0));
-    this.set('effortSpecified', Tasks.FILTER_DONTCARE);
-    this.set('recentlyUpdated', Tasks.FILTER_DONTCARE);
+    this.set('effortSpecified', Tasks.FILTER_DONT_CARE);
+    this.set('recentlyUpdated', Tasks.FILTER_DONT_CARE);
+    this.set('watched', Tasks.FILTER_DONT_CARE);
   },
 
   resetFilters: function() {
@@ -373,17 +381,23 @@ Tasks.assignmentsController = SC.ArrayController.create(
           }
           
           var effortSpecified = this.get('effortSpecified');
-          if(effortSpecified !== Tasks.FILTER_DONTCARE) {
+          if(effortSpecified !== Tasks.FILTER_DONT_CARE) {
             var taskEffortSpecified = !SC.none(task.get('effort'));
             if(effortSpecified === Tasks.FILTER_YES && !taskEffortSpecified) return;
             if(effortSpecified === Tasks.FILTER_NO && taskEffortSpecified) return;
           }
           
           var recentlyUpdated = this.get('recentlyUpdated');
-          if(recentlyUpdated !== Tasks.FILTER_DONTCARE) {
+          if(recentlyUpdated !== Tasks.FILTER_DONT_CARE) {
             var taskRecentlyUpdated = task.get('isRecentlyUpdated');
             if(recentlyUpdated === Tasks.FILTER_YES && !taskRecentlyUpdated) return;
             if(recentlyUpdated === Tasks.FILTER_NO && taskRecentlyUpdated) return;
+          }
+          
+          var watched = this.get('watched');
+          if(watched !== Tasks.FILTER_DONT_CARE) {
+            if(watched === Tasks.FILTER_MY_WATCHES && !CoreTasks.isCurrentUserWatchingTask(task)) return;
+            if(watched === Tasks.FILTER_ANY_WATCHES && !CoreTasks.isAnyUserWatchingTask(task)) return;
           }
           
           if(idMatches) { // one or more exact ID matches of task ID or IDs in name

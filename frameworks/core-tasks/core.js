@@ -189,11 +189,31 @@ CoreTasks = SC.Object.create({
       var currentUserId = '' + this.getPath('currentUser.id');
       var taskId = '' + task.get('id');
       var watchesCount = this.allWatches.get('length');
-      // console.log('DEBUG: isCurrentUserWatchingTask() taskId=' + taskId + ", userId=" + currentUserId + ", watchesCount=" + watchesCount);
+      // console.log('DEBUG: isCurrentUserWatchingTask() taskId=' + taskId + ', userId=' + currentUserId + ', watchesCount=' + watchesCount);
       for(var i = 0; i < watchesCount; i++) {
         var watch = this.allWatches.objectAt(i);
-        // console.log('DEBUG: isCurrentUserWatchingTask() watch.taskId=' + watch.get('taskId') + ", watch.userId=" + watch.get('userId') + ", watchId=" + watch.get('id'));
+        // console.log('DEBUG: isCurrentUserWatchingTask() watch.taskId=' + watch.get('taskId') + ', watch.userId=' + watch.get('userId') + ', watchId=' + watch.get('id'));
         if(('' + watch.get('userId')) !== currentUserId) continue;
+        if(('' + watch.get('taskId')) === taskId) return CoreTasks.TASK_WATCH_ON;
+      }
+    }
+    return CoreTasks.TASK_WATCH_OFF;
+  },
+
+  /**
+   * Check if any user is watching a given task.
+   *
+   * @param {Object} task.
+   * @returns {Boolean} CoreTasks.TASK_WATCH_ON if watching, CoreTasks.TASK_WATCH_OFF otherwise.
+   */
+  isAnyUserWatchingTask: function(task) {
+    if (this.allWatches) {
+      var taskId = '' + task.get('id');
+      var watchesCount = this.allWatches.get('length');
+      // console.log('DEBUG: isAnyUserWatchingTask() taskId=' + taskId + ', watchesCount=' + watchesCount);
+      for(var i = 0; i < watchesCount; i++) {
+        var watch = this.allWatches.objectAt(i);
+        // console.log('DEBUG: isAnyUserWatchingTask() watch.taskId=' + watch.get('taskId') + ", watchId=" + watch.get('id'));
         if(('' + watch.get('taskId')) === taskId) return CoreTasks.TASK_WATCH_ON;
       }
     }

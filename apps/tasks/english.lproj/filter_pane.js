@@ -15,13 +15,13 @@ sc_require('core');
 
 Tasks.filterPane = SC.SheetPane.create({  
   
-  layout: { centerX: 0, height: Tasks.softwareMode? 460 : 355, width: 310 },
+  layout: { centerX: 0, height: Tasks.softwareMode? 495 : 390, width: 310 },
   classNames: ['filter-pane'],
   
   contentView: SC.View.design({
     
     layout: { top: 0, left: 0, bottom: 0, right: 0 },
-    childViews: 'title quickfilterWellView quickfilterToolbar typeLabel typeCheckboxes priorityLabel priorityCheckboxes statusLabel statusCheckboxes validationLabel validationCheckboxes effortSpecifiedLabel effortSpecifiedRadiobuttons recentlyUpdatedLabel recentlyUpdatedRadiobuttons cancelButton applyButton'.w(),
+    childViews: 'title quickfilterWellView quickfilterToolbar typeLabel typeCheckboxes priorityLabel priorityCheckboxes statusLabel statusCheckboxes validationLabel validationCheckboxes effortSpecifiedLabel effortSpecifiedRadiobuttons recentlyUpdatedLabel recentlyUpdatedRadiobuttons beingWatchedLabel beingWatchedRadiobuttons cancelButton applyButton'.w(),
     
     title: SC.LabelView.design({
       layout: { top: 10, centerX: 0, width: 150, height: 24 },
@@ -265,17 +265,17 @@ Tasks.filterPane = SC.SheetPane.create({
     }),
 
     effortSpecifiedLabel: SC.LabelView.design({
-      layout: { bottom: 90, height: 22, left: 0, width: 112 },
+      layout: { bottom: 125, height: 22, left: 0, width: 112 },
       textAlign: SC.ALIGN_RIGHT,
       value: "_EffortSpecified:".loc()
     }),
 
     effortSpecifiedRadiobuttons: SC.RadioView.design(SCUI.ToolTip, {
-      layout: { bottom: 90, height: 24, left: 115, right: 10 },
+      layout: { bottom: 125, height: 24, left: 115, right: 10 },
       classNames: ['item-group'],
       layoutDirection: SC.LAYOUT_HORIZONTAL,
       items: [
-        { title: "_DontCare".loc(), value: Tasks.FILTER_DONTCARE },
+        { title: "_DontCare".loc(), value: Tasks.FILTER_DONT_CARE },
         { title: "_Yes".loc(), value: Tasks.FILTER_YES },
         { title: "_No".loc(), value: Tasks.FILTER_NO }
       ],
@@ -286,17 +286,17 @@ Tasks.filterPane = SC.SheetPane.create({
     }),
 
     recentlyUpdatedLabel: SC.LabelView.design({
-      layout: { bottom: 55, height: 22, left: 0, width: 112 },
+      layout: { bottom: 90, height: 22, left: 0, width: 112 },
       textAlign: SC.ALIGN_RIGHT,
       value: "_RecentlyUpdated:".loc()
     }),
 
     recentlyUpdatedRadiobuttons: SC.RadioView.design(SCUI.ToolTip, {
-      layout: { bottom: 55, height: 24, left: 115, right: 10 },
+      layout: { bottom: 90, height: 24, left: 115, right: 10 },
       classNames: ['item-group'],
       layoutDirection: SC.LAYOUT_HORIZONTAL,
       items: [
-        { title: "_DontCare".loc(), value: Tasks.FILTER_DONTCARE },
+        { title: "_DontCare".loc(), value: Tasks.FILTER_DONT_CARE },
         { title: "_Yes".loc(), value: Tasks.FILTER_YES },
         { title: "_No".loc(), value: Tasks.FILTER_NO }
       ],
@@ -304,6 +304,26 @@ Tasks.filterPane = SC.SheetPane.create({
       itemValueKey: 'value',
       toolTip: "_RecentlyUpdatedFilterTooltip".loc(),
       valueBinding: 'Tasks.assignmentsController.recentlyUpdated'
+    }),
+
+    beingWatchedLabel: SC.LabelView.design({
+      layout: { bottom: 55, height: 22, left: 0, width: 70 },
+      textAlign: SC.ALIGN_RIGHT,
+      value: "_Watched:".loc()
+    }),
+
+    beingWatchedRadiobuttons: SC.RadioView.design({
+      layout: { bottom: 55, height: 24, left: 75, right: 10 },
+      classNames: ['item-group'],
+      layoutDirection: SC.LAYOUT_HORIZONTAL,
+      items: [
+        { title: "_DontCare".loc(), value: Tasks.FILTER_DONT_CARE },
+        { title: "_ByMe".loc(), value: Tasks.FILTER_MY_WATCHES },
+        { title: "_ByAnyone".loc(), value: Tasks.FILTER_ANY_WATCHES }
+      ],
+      itemTitleKey: 'title',
+      itemValueKey: 'value',
+      valueBinding: 'Tasks.assignmentsController.watched'
     }),
 
     cancelButton: SC.ButtonView.design({
