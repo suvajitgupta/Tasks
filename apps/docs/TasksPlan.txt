@@ -96,7 +96,7 @@ v Enable/disable "Delete Task" button based on having a selected Task [SG] @Done
 v Add hover over tooltip for Assignees to show how many Tasks they have and to explain loading color codes [SG] @Done $Feature %Passed
 ^ Allow multi-Task drag-and-drop reassignment to other Assignees [BB] <SG>  @Done $Feature %Passed
 ^ Add popup viewer/editor for Task attributes [SG] <JH2> $Feature @Done %Passed
-- Display watch count in Task popup editor [SG] $Feature @Done %Passed
+- Display watch count in Task popup editor and list watchers by clicking on that button [SG] $Feature @Done %Passed
 - Limit Assignees to non-Guest users in Task popup editor [SG] $Feature @Done %Passed
 - Support multi-Task ID/Name copy to clipboard from top bar [SG] <JH2> $Feature @Done %Passed
 v Add Task context menu with options: Add, Duplicate, Delete; All Task Attributes; Copy ID/Name, Copy Link [SG] $Feature @Done %Passed

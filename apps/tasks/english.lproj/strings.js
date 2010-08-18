@@ -158,7 +158,7 @@ SC.stringsFor('English', {
   "_TaskValidationTooltip": ", background color shows validation",
   "_Tasks": "Tasks",
   "_Task": "Task",
-  "_TaskWatchCount": "Number of users watching this task",
+  "_TaskWatchersTooltip": "Number of users watching this task - click to see them",
   "_TasksSearchHint": "Task search pattern",
   "_TasksSearchTooltip": "Specify [Assignees] or <Submitters> (use all or part of full/login name separated via commas or spaces - use 'none' for unassigned), #IDs (separated by commas or spaces), or text (to match within task name or description - prefix with a caret to find items that don't match text)",
   "_TasksUnallocated": "Any tasks allocated to deleted projects will become unallocated.",

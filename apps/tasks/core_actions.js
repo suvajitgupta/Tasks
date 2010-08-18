@@ -163,7 +163,7 @@ Tasks.mixin({
       CoreTasks.set('allTasks', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Task, initialServerFetch: NO })));
     }
     if (!CoreTasks.get('allProjects')) {
-      CoreTasks.set('allProjects', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Project, initialServerFetch: NO })));
+      CoreTasks.set('allProjects', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Project, orderBy: 'name', initialServerFetch: NO })));
       this.projectsController.set('content', CoreTasks.get('allProjects'));
     }
     if(!CoreTasks.get('allWatches')) {

@@ -14,13 +14,6 @@ Tasks.projectsController = SC.ArrayController.create(
   
   sources: null,
   
-  _nameAlphaSort: function(a,b) {
-    var aName = a.get('name');
-    var bName = b.get('name');
-    if(aName === bName) return 0;
-    else return aName > bName? 1 : -1;
-  },
-
   showSources: function() {
     
     var projects = this.get('arrangedObjects');
@@ -54,11 +47,11 @@ Tasks.projectsController = SC.ArrayController.create(
       nodes.push(SC.Object.create({ displayName: systemProjects.length + ' ' + "_System".loc() + ' ' + "Projects".loc(), treeItemChildren: systemProjects,
                  treeItemIsExpanded: YES }));
       nodes.push(SC.Object.create({ displayName: activeProjects.length + ' ' + CoreTasks.STATUS_ACTIVE.loc() + ' ' + "Projects".loc(),
-                 developmentStatus: CoreTasks.STATUS_ACTIVE, treeItemChildren: activeProjects.sort(this._nameAlphaSort), treeItemIsExpanded: YES }));
+                 developmentStatus: CoreTasks.STATUS_ACTIVE, treeItemChildren: activeProjects.sort(Tasks.nameAlphaSort), treeItemIsExpanded: YES }));
       nodes.push(SC.Object.create({ displayName: plannedProjects.length + ' ' + CoreTasks.STATUS_PLANNED.loc() + ' ' + "Projects".loc(),
-                 developmentStatus: CoreTasks.STATUS_PLANNED, treeItemChildren: plannedProjects.sort(this._nameAlphaSort), treeItemIsExpanded: YES }));
+                 developmentStatus: CoreTasks.STATUS_PLANNED, treeItemChildren: plannedProjects.sort(Tasks.nameAlphaSort), treeItemIsExpanded: YES }));
       nodes.push(SC.Object.create({ displayName: doneProjects.length + ' ' + CoreTasks.STATUS_DONE.loc() + ' ' + "Projects".loc(),
-                 developmentStatus: CoreTasks.STATUS_DONE, treeItemChildren: doneProjects.sort(this._nameAlphaSort), treeItemIsExpanded: NO }));
+                 developmentStatus: CoreTasks.STATUS_DONE, treeItemChildren: doneProjects.sort(Tasks.nameAlphaSort), treeItemIsExpanded: NO }));
     }
 
     this.set('sources', SC.Object.create({ treeItemChildren: nodes, treeItemIsExpanded: YES }));

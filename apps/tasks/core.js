@@ -52,8 +52,15 @@ Tasks = SC.Object.create(SC.Statechart,
    */
   deselectTasks: function() {
     Tasks.tasksController.set('selection', '');
-  }
+  },
   
+  nameAlphaSort: function(a,b) {
+    var aName = a.get('name');
+    var bName = b.get('name');
+    if(aName === bName) return 0;
+    else return aName > bName? 1 : -1;
+  }
+    
 });
 
 
