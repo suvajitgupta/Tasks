@@ -335,7 +335,7 @@ Tasks.mainPage = SC.Page.design({
          }),
 
          tasksSearchField: SC.TextFieldView.design({
-           layout: { centerY: 0, height: 25, right: 10, width: 200 },
+           layout: { centerY: 1, height: 25, right: 10, width: 200 },
            classNames: ['search-bar'],
            hint: "_TasksSearchHint".loc(),
            renderMixin: function(context, firstTime) { // Used custom tooltip rendering to avoid escaping by SCUI.Toolip
@@ -344,7 +344,7 @@ Tasks.mainPage = SC.Page.design({
            valueBinding: 'Tasks.assignmentsController.searchFilter'
          }),
          tasksSearchCancelButton: SC.View.design({ // Tasks Search cancel button
-           layout: { centerY: 0, height: 12, right: 10, width: 12 },
+           layout: { centerY: 0, height: 12, right: 17, width: 12 },
            isVisible: NO,
            classNames: ['filter-cancel-icon'],
            touchStart: function() {
