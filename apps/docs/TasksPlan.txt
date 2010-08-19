@@ -35,7 +35,7 @@ General Infrastructure @Active
 - Display record created/updated time at the bottom of popup editors [SG] $Feature @Done %Passed
 v Analyze/optimize calls to assignments controller and custom view render methods <BB> [SG] @Active
 - Support direct access to Projects or Tasks using SproutCore routes [SG] $Feature @Done %Passed
-- Destroy authentication token when User logs out [SG] <JH2> $Feature @Active
+- Destroy authentication token when User logs out [SG] <JH2> $Feature @Done %Passed
 - Implement/benchmark JSONP-based data loading for performance speedup (XHRs are faster) [SG] <SE> @Done
 ^ Optimize data loading to use single Server call for all records <SE> [SG] @Done %Passed
 ^ Optimize startup data load using HTML5 cascading data source <SE> [SG] @Active
