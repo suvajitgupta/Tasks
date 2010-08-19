@@ -21,11 +21,11 @@
   background-color: none !important;
 }
 .title-bar .modal-close-icon {
-  left: 10px !important;
+  left: 15px !important;
   background: static_url('images/red-ball.png') no-repeat;
 }
 .title-bar .modal-fullscreen-icon {
-  left: 32px !important;
+  left: 45px !important;
   background: static_url('images/green-ball.png') no-repeat;
 }
 
