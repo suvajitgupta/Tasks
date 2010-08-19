@@ -385,6 +385,9 @@ Tasks.mixin({
       // notify Server so that authentication token can be destroyed for security reasons
       CoreTasks.executeTransientPost('logout?id=' + CoreTasks.getPath('currentUser.id'), null, params);
     }
+    else {
+      this._resetWindowLocation();
+    }
   },
   
   /**
