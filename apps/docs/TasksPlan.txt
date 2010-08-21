@@ -39,6 +39,12 @@ v Analyze/optimize calls to assignments controller and custom view render method
 - Implement/benchmark JSONP-based data loading for performance speedup (XHRs are faster) [SG] <SE> @Done
 ^ Optimize data loading to use single Server call for all records <SE> [SG] @Done %Passed
 ^ Optimize startup data load using HTML5 cascading data source <SE> [SG] @Active
+- Disallow Project names or User loginNames that are already in use or reserved [SG] $Feature @Active
+| Project name cannot be duplicated or a System Project name
+| User login name cannot be duplicated or reserved name "none"
+- Implement GUI-side data validation checks and corresponding user feedback [SG] <JH2> $Feature @Active
+| valid Email address in User Info
+| valid Task.effort & Project.timeLeft in popup editors
 - Out of Scope: Add support for attachments in record descriptions $Feature
 | Upload attachment somewhere and insert URL to it in record description
 
@@ -53,9 +59,6 @@ v Add hover over tooltip for Project icons to show how many Tasks they contain [
 | Check via Inline Editor Delegate
 ^ Add buttons to add/delete Projects [SG] @Done $Feature %Passed
 - Add warning Alert box about deleting Project with Tasks [SG] @Done $Feature %Passed
-- Disallow Project names or User loginNames that are already in use or reserved [SG] $Feature @Active
-| Project name cannot be duplicated or a System Project name
-| User login name cannot be duplicated or reserved name "none"
 v Add summary in bottom bar showing number of Projects/Assignees & Tasks displayed/selected [SG] <MB> @Done $Feature %Passed
 v Enable/disable "Delete Project" button based on having a selected project [SG] @Done %Passed $Feature
 v Disable "Add Task" button when no project is selected [SG] <BB> @Done %Passed $Feature
@@ -184,7 +187,7 @@ Server/Tools @Active
 | For Task updates, indicate old and new values of attributes
 - Add link to Task in email notification (should not require authentication if user is signed in) <JH2> [SG] $Feature
 - Handle network or Server unavailability gracefully and provide appropriate diagnostics to the user [SG] <SE> @Done %Passed
-- Implement GUI-side data validation checks and corresponding user feedback [SG] <JL>
+- Develop Tasks database cleanup tool (to remove orphaned/old soft-deleted items) <SE> [SG] @Active
 ^ Convert Tasks into a Jira plugin [JH2] <SG> $Feature
 - Implement bridge to "github issues" from Google App Engine [JH2] <SG> $Feature @Active
 
