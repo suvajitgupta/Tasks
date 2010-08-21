@@ -33,8 +33,8 @@ Project Two With a Long Name That Will Take One Week {3d} # Has 7 tasks
 | that span multiple
 | lines.
 ^ A high priority, planned, feature assigned to Suvajit that is expected to take 6-7 days {2d} [SG] $Feature
-- A medium priority bug assigned to Suvajit that was done in 1 day and failed {1d} [SG] $Bug @Done %Failed
-v A low priority feature assigned to Suvajit that was completed in 2 days and it still not tested {2d} [SG] $Feature @Done
+- A medium priority bug assigned to Suvajit that was done in 1.5 days and failed {1.5d} [SG] $Bug @Done %Failed
+v A low priority feature assigned to Suvajit that was completed in 2.25 days and it still not tested {2.25d} [SG] $Feature @Done
 ^ A high priority feature assigned to Suvajit that is completed in unspecified time and passed [SG] $Feature @Done %Passed
 | A single line comment.
 
