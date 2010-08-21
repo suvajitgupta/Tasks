@@ -48,7 +48,7 @@ Tasks.mixin( /** @scope Tasks */ {
     
   */
   routeToTask: function(params) {
-    // console.log('DEBUG: routeToTask: ' + params.IDs);
+    // console.log('DEBUG: routeToTask() taskId=' + params.IDs);
     Tasks._closeMainPage();
     if(SC.none(params.IDs)) {
       console.warn("Missing task IDs for URL routing");
@@ -82,13 +82,13 @@ Tasks.mixin( /** @scope Tasks */ {
     
   */
   routeToProject: function(params) {
-    // console.log('DEBUG: routeToProject: ' + params.name);
+    // console.log('DEBUG: routeToProject() loginTime=' + CoreTasks.loginTime + ', projectName=' + params.name);
     if(SC.none(params.name)) {
       console.warn("Missing project name for URL routing");
     }
     else if(CoreTasks.loginTime) {
       Tasks.set('defaultProjectName', params.name);
-      Tasks.restart();
+      Tasks.routeDefault();
     }
     else {
       var project = CoreTasks.getProject(params.name); // see if such a project exists

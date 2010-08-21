@@ -377,6 +377,7 @@ Tasks.mixin({
    * Restart application - invoked at logout and for a route to a new project.
    */
   restart: function() {
+    // console.log('DEBUG: reset()');
     if(Tasks.get('serverType') === Tasks.GAE_SERVER) {
       var params = {
         successCallback: this._logoutSuccess.bind(this),
@@ -394,7 +395,7 @@ Tasks.mixin({
    * Called after successful logout.
    */
   _logoutSuccess: function(response) {
-    console.log('Logout succeeded on Server');
+    // console.log('DEBUG: Logout succeeded on Server');
     this._resetWindowLocation();
   },
   /**
