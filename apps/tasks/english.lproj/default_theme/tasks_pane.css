@@ -208,14 +208,14 @@
 .task-item .count,
 .task-item.sel .sc-outline .count {
   top: 5px !important;
-	right: 12px !important;
+	right: 14px !important;
 	background-color: #888 !important;
 }
 
 .task-item .description-icon {
   position: absolute;
   top: 4px !important;
-  right: 0px !important;
+  right: -2px !important;
 }
 
 .previous-icon {
