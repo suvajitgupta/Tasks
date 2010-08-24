@@ -21,6 +21,7 @@ Tasks.settingsController = SC.ObjectController.create(
         // Scroll to/select logged in user and open User Manager
         var currentUser = CoreTasks.get('currentUser');
         Tasks.usersController.selectObject(currentUser);
+        if(!CoreTasks.isCurrentUserAManager()) panel.setSmallSize();
         panel.append();
       }
     }

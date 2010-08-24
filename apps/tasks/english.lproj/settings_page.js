@@ -25,11 +25,11 @@ Tasks.settingsPage = SC.Page.create({
     minHeight: 350,
     minWidth: 780,
     maxWidth: 780,
-    layout: { centerX: 0, centerY: 0, height: 350, width: 780 },
+    layout: { centerX: 0, centerY: 0, height: 350, width: 780 /* 425 */ },
     
     contentView: SC.View.design({
       layout: { left: 0, right: 0, top: 0, bottom: 0},
-      childViews: 'userNamePatternField userNamePatternCancelButton userManager addButton deleteButton usersCount closeButton'.w(),
+      childViews: 'userNamePatternField userNamePatternCancelButton usersMasterDetailView addButton deleteButton usersCount closeButton'.w(),
       
       userNamePatternField: SC.TextFieldView.design(SCUI.ToolTip, {
         layout: { top: 10, height: 24, left: 43, width: 200 },
@@ -49,14 +49,15 @@ Tasks.settingsPage = SC.Page.create({
         isVisibleBinding: SC.Binding.oneWay('Tasks.usersController.userNamePattern').bool()
       }),
 
-      userManager: SC.View.design({
-        layout: { left: 10, right: 10, top: 40, bottom: 40},
-        childViews: 'usersMasterView userWellView userDetailView createdAtLabel updatedAtLabel'.w(),
+      usersMasterDetailView: SC.View.design({
+        layout: { left: 10, right: 10, top: 40, bottom: 40 },
+        childViews: 'usersMasterView usersDetailView'.w(),
         
         usersMasterView: SC.ScrollView.design({
           layout: { top: 0, bottom: 0, left: 0, width: 290 },
           hasHorizontalScroller: NO,
           classNames: ['users-pane'],
+          isVisibleBinding: 'CoreTasks*isCurrentUserAManager',
 
           contentView: SC.ListView.design({
             layout: { top: 0, left:0, bottom: 0, right: 0 },
@@ -110,28 +111,34 @@ Tasks.settingsPage = SC.Page.create({
         
         }),
         
-        userWellView: SC.WellView.design({
+        usersDetailView: SC.View.design({
           layout: { top: 0, left: 300, height: 230, right: 0 },
-          contentView: SC.View.design({
-          })
-        }),
+          childViews: 'userWellView userInfoView createdAtLabel updatedAtLabel'.w(),
+          
+          userWellView: SC.WellView.design({
+            layout: { top: 0, left: 0, height: 210, right: 0 },
+            contentView: SC.View.design({
+            })
+          }),
 
-        userDetailView: Tasks.UserInformationView.design({
-          layout: { top: 10, left: 325, height: 200, right: 10 },
-          contentBinding: 'Tasks.userController'
-        }),
-        
-        createdAtLabel: SC.LabelView.design({
-          layout: { left:305, top: 210, height: 17, width: 250 },
-          classNames: [ 'date-time'],
-          textAlign: SC.ALIGN_LEFT,
-          valueBinding: SC.binding('Tasks.userController.displayCreatedAt', this)
-        }),
-        updatedAtLabel: SC.LabelView.design({
-          layout: { right:5, top: 210, height: 17, width: 250 },
-          classNames: [ 'date-time'],
-          textAlign: SC.ALIGN_RIGHT,
-          valueBinding: SC.binding('Tasks.userController.displayUpdatedAt', this)
+          userInfoView: Tasks.UserInformationView.design({
+            layout: { top: 10, left: 25, height: 200, right: 10 },
+            contentBinding: 'Tasks.userController'
+          }),
+
+          createdAtLabel: SC.LabelView.design({
+            layout: { left: 5, top: 210, height: 17, width: 250 },
+            classNames: [ 'date-time'],
+            textAlign: SC.ALIGN_LEFT,
+            valueBinding: SC.binding('Tasks.userController.displayCreatedAt', this)
+          }),
+          updatedAtLabel: SC.LabelView.design({
+            layout: { right: 5, top: 210, height: 17, width: 250 },
+            classNames: [ 'date-time'],
+            textAlign: SC.ALIGN_RIGHT,
+            valueBinding: SC.binding('Tasks.userController.displayUpdatedAt', this)
+          })
+          
         })
 
       }),
@@ -162,6 +169,7 @@ Tasks.settingsPage = SC.Page.create({
       usersCount: SC.LabelView.design({
         layout: { left: 105, width: 200, bottom: 12, height: 15 },
         controlSize: SC.SMALL_CONTROL_SIZE,
+        isVisibleBinding: 'CoreTasks*isCurrentUserAManager',
         valueBinding: 'Tasks.usersController.usersCount' 
       }),
 
@@ -174,6 +182,12 @@ Tasks.settingsPage = SC.Page.create({
       
     }),
     
+    setSmallSize: function() {
+      this.set('layout', { centerX: 0, centerY: 0, height: 320, width: 425 });
+      this.setPath('contentView.usersMasterDetailView.layout', { left: 10, right: 10, top: 10, bottom: 40 });
+      this.setPath('contentView.usersMasterDetailView.usersDetailView.layout', { top: 0, left: 0, height: 230, right: 0 });
+    },
+    
     remove: function() {
       sc_super();
       if(CoreTasks.get('autoSave')) Tasks.saveData();
@@ -181,6 +195,6 @@ Tasks.settingsPage = SC.Page.create({
       
   }),
   
-  userInformation: SC.outlet('panel.contentView.userManager.userDetailView')
+  userInformation: SC.outlet('panel.contentView.usersMasterDetailView.usersDetailView.userInfoView')
   
 });
