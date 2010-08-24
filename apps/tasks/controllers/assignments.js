@@ -269,7 +269,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     var idPattern = null, searchPattern = null, positiveMatch = true;
     var searchFilter = this.get('searchFilter');
     
-    // Extract selected users (assignees or <submitters>)
+    // Extract selected users ([Assignees] or <Submitters>)
     var i, j, assigneeSelectionDisplayNames = [], submitterSelectionDisplayNames = [];
     if (searchFilter && searchFilter !== '') { // if a search filter is specified
       var assigneeSelection = searchFilter.match(/\[.*\]/);
@@ -364,7 +364,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
           assignees[assigneeName] = assigneeObj;
         }
         
-        // Filter tasks that meet filter criteria
+        // Extract tasks that meet filter criteria
         if(!isNewTask) {
           
           if(submitterSelectionDisplayNames.length !== 0 && submitterSelectionDisplayNames.indexOf(submitterName) === -1) return;
