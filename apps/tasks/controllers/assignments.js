@@ -100,6 +100,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
   
   _showTasks: true,
   displayMode: function(key, value) {
+    // console.log('DEBUG: displayMode() value=' + value);
     if (value !== undefined) {
       if(value === false) this.setAssigneeFilter(); // clear assignee selection before going to "TEAM" mode
       this.set('_showTasks', value);
@@ -258,12 +259,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
   // count: 0, // used for tracking/tuning calls to redraw tasks pane below
   showAssignments: function() { // show tasks for selected user that matches search filter
     
-    // Force tasks list indexes to be recomputed so that different height group/regular items redraw correctly
-    var tasksList = Tasks.mainPage.getPath('mainPane.tasksList');
-    var indexes = SC.IndexSet.create(0, tasksList.get('length'));
-    tasksList.rowHeightDidChangeForIndexes(indexes);
-   
-    // console.log('DEBUG: showAssignments(' + this.count + ') entry at: ' + SC.DateTime.create().toFormattedString(CoreTasks.DATE_FORMAT));
+    // console.log('DEBUG: showAssignments(' + this.count + ') entry at: ' + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
     // Preserve selected tasks to be restored at the end of redrawing assignments
     var selection = Tasks.tasksController.get('selection');
     var idPattern = null, searchPattern = null, positiveMatch = true;
@@ -468,7 +464,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     }), treeItemIsExpanded: YES }));
     
     if(selection) Tasks.tasksController.selectObjects(selection);
-    // console.log('DEBUG: showAssignments(' + this.count++ + ') exit  at: ' + SC.DateTime.create().toFormattedString(CoreTasks.DATE_FORMAT));
+    // console.log('DEBUG: showAssignments(' + this.count++ + ') exit  at: ' + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
     Tasks.assignmentsRedrawNeeded = false;    
 
   },

@@ -329,6 +329,10 @@ Tasks.mainPage = SC.Page.design({
             var isHeader = (outlineLevel === 0) ? YES : NO;
             return idx && isHeader? this.get('headerRowHeight') : this.get('rowHeight');
           },
+          _contentDidChange: function() { // Force tasks list indexes to be recomputed when content changes
+            this.rowHeightDidChangeForIndexes(SC.IndexSet.create(0, this.get('length')));
+          }.observes('content'),
+          
           selectionEvent: null,
           mouseDown: function(event) {
             var ret = sc_super();
