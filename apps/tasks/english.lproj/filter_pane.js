@@ -15,7 +15,7 @@ sc_require('core');
 
 Tasks.filterPane = SC.SheetPane.create({  
   
-  layout: { centerX: 0, height: Tasks.softwareMode? 495 : 390, width: 310 },
+  layout: { centerX: 0, height: Tasks.softwareMode? 495 : 390, width: 320 },
   classNames: ['filter-pane'],
   
   contentView: SC.View.design({
@@ -119,7 +119,7 @@ Tasks.filterPane = SC.SheetPane.create({
 
     // FIXME [SC]: remove hacks for checkboxes when they work in SC master, like it does on quilmes
     typeCheckboxes: SC.View.design({
-      layout: { top: 127, height: 24, left: 10, right: 10 },
+      layout: { top: 128, height: 24, left: 10, right: 10 },
       classNames: ['item-group', 'checkbox-icon'],
       isVisible: Tasks.softwareMode,
       displayProperties: [ 'feature', 'bug', 'other' ],
@@ -153,7 +153,7 @@ Tasks.filterPane = SC.SheetPane.create({
     }),
 
     priorityCheckboxes: SC.View.design({
-      layout: { top: Tasks.softwareMode? 183 : 127, height: 24, left: 10, right: 10 },
+      layout: { top: Tasks.softwareMode? 184 : 128, height: 24, left: 10, right: 10 },
       classNames: ['item-group'],
       displayProperties: [ 'high', 'medium', 'low' ],
       childViews: 'high medium low'.w(),
@@ -182,14 +182,14 @@ Tasks.filterPane = SC.SheetPane.create({
     }),
 
     statusLabel: SC.LabelView.design({
-      layout: { top: Tasks.softwareMode? 220 : 170, height: 24, left: 10, right: 10 },
+      layout: { top: Tasks.softwareMode? 221 : 171, height: 24, left: 10, right: 10 },
       classNames: ['attribute-label'],
       value: "_Status".loc(),
       toolTip: "_StatusTooltip".loc()
     }),
 
     statusCheckboxes: SC.View.design({
-      layout: { top: Tasks.softwareMode? 237 : 187, height: 24, left: 10, right: 10 },
+      layout: { top: Tasks.softwareMode? 238 : 187, height: 24, left: 10, right: 10 },
       classNames: ['item-group'],
       displayProperties: [ 'planned', 'active', 'done', 'risky' ],
       childViews: 'planned active done risky'.w(),
@@ -202,14 +202,14 @@ Tasks.filterPane = SC.SheetPane.create({
       }),
       
       active: SC.CheckboxView.design({
-        layout: { centerX: -25, top: 4, width: 55 },
+        layout: { centerX: -30, top: 4, width: 55 },
         title: CoreTasks.STATUS_ACTIVE.loc(),
         valueBinding: 'Tasks.assignmentsController.attributeFilterStatusActive',
         classNames: [ 'status-active' ]
       }),
       
       done: SC.CheckboxView.design({
-        layout: { centerX: 45, top: 4, width: 50 },
+        layout: { centerX: 50, top: 4, width: 50 },
         title: CoreTasks.STATUS_DONE.loc(),
         valueBinding: 'Tasks.assignmentsController.attributeFilterStatusDone',
         classNames: [ 'status-done' ]
@@ -233,7 +233,7 @@ Tasks.filterPane = SC.SheetPane.create({
     }),
 
     validationCheckboxes: SC.View.design({
-      layout: { top: 292, height: 24, left: 10, right: 10 },
+      layout: { top: 293, height: 24, left: 10, right: 10 },
       classNames: ['item-group'],
       isVisible: Tasks.softwareMode,
       displayProperties: [ 'untested', 'passed', 'failed' ],
@@ -266,13 +266,13 @@ Tasks.filterPane = SC.SheetPane.create({
     }),
 
     effortSpecifiedLabel: SC.LabelView.design({
-      layout: { bottom: 125, height: 22, left: 0, width: 112 },
+      layout: { bottom: 125, height: 22, left: 0, width: 125 },
       textAlign: SC.ALIGN_RIGHT,
       value: "_EffortSpecified:".loc()
     }),
 
     effortSpecifiedRadiobuttons: SC.RadioView.design(SCUI.ToolTip, {
-      layout: { bottom: 125, height: 24, left: 115, right: 10 },
+      layout: { bottom: 125, height: 24, left: 130, right: 10 },
       classNames: ['item-group'],
       layoutDirection: SC.LAYOUT_HORIZONTAL,
       items: [
@@ -287,13 +287,13 @@ Tasks.filterPane = SC.SheetPane.create({
     }),
 
     recentlyUpdatedLabel: SC.LabelView.design({
-      layout: { bottom: 90, height: 22, left: 0, width: 112 },
+      layout: { bottom: 90, height: 22, left: 0, width: 125 },
       textAlign: SC.ALIGN_RIGHT,
       value: "_RecentlyUpdated:".loc()
     }),
 
     recentlyUpdatedRadiobuttons: SC.RadioView.design(SCUI.ToolTip, {
-      layout: { bottom: 90, height: 24, left: 115, right: 10 },
+      layout: { bottom: 90, height: 24, left: 130, right: 10 },
       classNames: ['item-group'],
       layoutDirection: SC.LAYOUT_HORIZONTAL,
       items: [
