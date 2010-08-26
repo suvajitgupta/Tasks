@@ -40,6 +40,10 @@
   font-weight: bold !important;
 }
 
+.attribute-label {
+  text-transform: uppercase !important;
+}
+
 .item-group {
   font-size: 10px !important;
   text-align: center !important;

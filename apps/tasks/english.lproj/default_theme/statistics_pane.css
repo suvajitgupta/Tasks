@@ -12,6 +12,12 @@
   margin: 0px !important;
 }
 
+.statistics-pane td.title {
+  text-align: right !important;
+  font-size: 12px !important;
+  text-transform: uppercase !important;
+}
+
 .statistics-pane td {
   font-size: 11px !important;
   line-height: 20px !important;

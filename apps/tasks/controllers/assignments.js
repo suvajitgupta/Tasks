@@ -741,13 +741,14 @@ Tasks.assignmentsController = SC.ArrayController.create(
         switch(task.get('developmentStatus')) {
           case CoreTasks.STATUS_PLANNED: plannedCount++; break;
           case CoreTasks.STATUS_ACTIVE: activeCount++; break;
-          case CoreTasks.STATUS_DONE: doneCount++; break;
+          case CoreTasks.STATUS_DONE: doneCount++;
+            switch(task.get('validation')) {
+              case CoreTasks.TASK_VALIDATION_UNTESTED: untestedCount++; break;
+              case CoreTasks.TASK_VALIDATION_PASSED: passedCount++; break;
+              case CoreTasks.TASK_VALIDATION_FAILED: failedCount++; break;
+            }
+            break;
           case CoreTasks.STATUS_RISKY: riskyCount++; break;
-        }
-        switch(task.get('validation')) {
-          case CoreTasks.TASK_VALIDATION_UNTESTED: untestedCount++; break;
-          case CoreTasks.TASK_VALIDATION_PASSED: passedCount++; break;
-          case CoreTasks.TASK_VALIDATION_FAILED: failedCount++; break;
         }
       }
     }
@@ -775,26 +776,26 @@ Tasks.assignmentsController = SC.ArrayController.create(
   displayStatistics: function() {
     var stats = this.computeStatistics();
     var ret = '';
+    var blank = sc_static('blank');
     if(stats.tasksCount > 0) {
       if(this.get('displayMode') === Tasks.DISPLAY_MODE_TASKS) {
-        var blank = sc_static('blank');
         ret += '<table width="100%">';
         if(Tasks.softwareMode) {
           ret += '<tr class="even">';
-          ret += ('<td><span>' + "_Type".loc() + '</td>');
+          ret += ('<td class="title"><span>' + "_Type".loc() + '</td>');
           ret += ('<td><img src="' + blank + '" class="task-icon-feature"/>&nbsp;' + "_Feature".loc() + ': ' + stats.featureCount + ' (' + Math.round(100*stats.featureCount/stats.tasksCount) + '%)' + '</td>');
           ret += ('<td><img src="' + blank + '" class="task-icon-bug"/>&nbsp;' + "_Bug".loc() + ': ' + stats.bugCount + ' (' + Math.round(100*stats.bugCount/stats.tasksCount) + '%)' + '</td>');
           ret += ('<td><img src="' + blank + '" class="task-icon-other"/>&nbsp;'  + "_Other".loc() + ': ' + stats.otherCount + ' (' + Math.round(100*stats.otherCount/stats.tasksCount) + '%)' + '</td>');
           ret += '<td></td></tr>';
         }
         ret += '<tr class="odd">';
-        ret += ('<td><span>' + "_Priority".loc() + '</td>');
+        ret += ('<td class="title"><span>' + "_Priority".loc() + '</td>');
         ret += ('<td><span class="task-priority-high">' + "_High".loc() + ':</span> ' + stats.highCount + ' (' + Math.round(100*stats.highCount/stats.tasksCount) + '%)' + '</td>');
         ret += ('<td><span class="task-priority-medium">' + "_Medium".loc() + ':</span> ' + stats.mediumCount + ' (' + Math.round(100*stats.mediumCount/stats.tasksCount) + '%)' + '</td>');
         ret += ('<td><span class="task-priority-low">' + "_Low".loc() + ':</span> ' + stats.lowCount + ' (' + Math.round(100*stats.lowCount/stats.tasksCount) + '%)' + '</td>');
         ret += '<td></td></tr>';
         ret += '<tr class="even">';
-        ret += ('<td><span>' + "_Status".loc() + '</td>');
+        ret += ('<td class="title"><span>' + "_Status".loc() + '</td>');
         ret += ('<td><span class="status-planned">' + "_Planned".loc() + ':</span> ' + stats.plannedCount + ' (' + Math.round(100*stats.plannedCount/stats.tasksCount) + '%)' + '</td>');
         ret += ('<td><span class="status-active">' + "_Active".loc() + ':</span> ' + stats.activeCount + ' (' + Math.round(100*stats.activeCount/stats.tasksCount) + '%)' + '</td>');
         ret += ('<td><span class="status-done">' + "_Done".loc() + ':</span> ' + stats.doneCount + ' (' + Math.round(100*stats.doneCount/stats.tasksCount) + '%)' + '</td>');
@@ -802,7 +803,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
         ret += '</tr>';
         if(Tasks.softwareMode) {
           ret += '<tr class="odd">';
-          ret += ('<td><span>' + "_Validation".loc() + '</td>');
+          ret += ('<td class="title"><span>' + "_Validation".loc() + '</td>');
           ret += ('<td><span class="task-validation-untested">' + "_Untested".loc() + ':</span> ' + stats.untestedCount + ' (' + Math.round(100*stats.untestedCount/stats.tasksCount) + '%)' + '</td>');
           ret += ('<td><span class="task-validation-passed">' + "_Passed".loc() + ':</span> ' + stats.passedCount + ' (' + Math.round(100*stats.passedCount/stats.tasksCount) + '%)' + '</td>');
           ret += ('<td><span class="task-validation-failed">' + "_Failed".loc() + ':</span> ' + stats.failedCount + ' (' + Math.round(100*stats.failedCount/stats.tasksCount) + '%)' + '</td>');
@@ -812,15 +813,21 @@ Tasks.assignmentsController = SC.ArrayController.create(
         ret += "_Submitters:".loc() + stats.submittersCount;
       }
       else { // displayMode === Tasks.DISPLAY_MODE_TEAM
-        ret += '<hr>' + "_Assignees:".loc() + stats.overloadedAssigneesCount + ' ' + "_AssigneeOverloaded".loc() + ', ' +
-                                              stats.properlyLoadedAssigneesCount + ' ' + "_AssigneeProperlyLoaded".loc() + ', ' +
-                                              stats.underloadedAssigneesCount + ' ' + "_AssigneeUnderLoaded".loc() + ', ' +
-                                              stats.notLoadedAssigneesCount + ' ' + "_AssigneeNotLoaded".loc();
-        ret += '<hr>' + "_RedFlags:".loc() + stats.riskyTasksCount + ' ' + "_Risky".loc() + ', ' +
-                                             stats.failedTasksCount + ' ' + "_Failed".loc();
-        ret += '<hr>' + "_Summary:".loc() + stats.finishedTasksCount + ' ' + "_finished".loc() + ', ' +
-                                            stats.leftTasksCount + ' ' + "_left".loc();
-        ret += '<hr>';
+        ret += '<table width="100%">';
+        ret += '<tr class="even">';
+        ret += ('<td class="title"><img src="' + blank + '" class="sc-icon-group-16"/>&nbsp;<span>' + "_Assignees:".loc() + '</td>');
+        ret += ('<td><span class="assignee-not-loaded">' + "_AssigneeNotLoaded".loc() + ':</span> ' + stats.notLoadedAssigneesCount + '</td>');
+        ret += ('<td><span class="assignee-under-loaded">' + "_AssigneeUnderLoaded".loc() + ':</span> ' + stats.underloadedAssigneesCount + '</td>');
+        ret += ('<td><span class="assignee-properly-loaded">' + "_AssigneeProperlyLoaded".loc() + ':</span> ' + stats.properlyLoadedAssigneesCount + '</td>');
+        ret += ('<td><span class="assignee-overloaded">' + "_AssigneeOverloaded".loc() + ':</span> ' + stats.overloadedAssigneesCount + '</td>');
+        ret += '</tr>';
+        ret += '<tr class="odd">';
+        ret += ('<td class="title"><img src="' + blank + '" class="red-flag-icon"/>&nbsp;<span>' + "_RedFlags:".loc() + '</td>');
+        ret += ('<td><span class="status-risky">' + "_Risky".loc() + ':</span> ' + stats.riskyTasksCount + '</td>');
+        ret += ('<td><span class="task-validation-failed">' + "_Failed".loc() + ':</span> ' + stats.failedTasksCount + '</td>');
+        ret += '<td></td><td></td></tr>';
+        ret += '</table><br>';
+        ret += "_Summary:".loc() + stats.finishedTasksCount + ' ' + "_finished".loc() + ', ' + stats.leftTasksCount + ' ' + "_left".loc();
       }
     }
     this.set('statistics', ret);

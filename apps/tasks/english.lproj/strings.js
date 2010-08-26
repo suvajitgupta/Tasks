@@ -126,7 +126,7 @@ SC.stringsFor('English', {
   "_ProjectCountdownTooltip": "Countdown of days left",
   "_Project": "Project ",
   "_Projects": "Projects",
-  "_QuickFilters": "QUICK FILTERS",
+  "_QuickFilters": "Quick Filters",
   "_QuickFiltersTooltip": "Commonly used filters",
   "_RecentlyUpdated:": "Recently Updated:",
   "_RecentlyUpdatedFilterTooltip": "Show/hide recently updated tasks",
