@@ -122,13 +122,13 @@ Tasks.settingsPage = SC.Page.create({
           }),
 
           createdAtLabel: SC.LabelView.design({
-            layout: { left: 5, top: 210, height: 17, width: 250 },
+            layout: { left: 5, top: 205, height: 17, width: 250 },
             classNames: [ 'date-time'],
             textAlign: SC.ALIGN_LEFT,
             valueBinding: SC.binding('Tasks.userController.displayCreatedAt', this)
           }),
           updatedAtLabel: SC.LabelView.design({
-            layout: { right: 5, top: 210, height: 17, width: 250 },
+            layout: { right: 5, top: 205, height: 17, width: 250 },
             classNames: [ 'date-time'],
             textAlign: SC.ALIGN_RIGHT,
             valueBinding: SC.binding('Tasks.userController.displayUpdatedAt', this)
@@ -180,7 +180,7 @@ Tasks.settingsPage = SC.Page.create({
     setSmallSize: function() {
       this.set('layout', { centerX: 0, centerY: 0, height: 320, width: 425 });
       this.setPath('contentView.usersMasterDetailView.layout', { left: 10, right: 10, top: 10, bottom: 40 });
-      this.setPath('contentView.usersMasterDetailView.usersDetailView.layout', { top: 0, left: 0, height: 230, right: 0 });
+      this.setPath('contentView.usersMasterDetailView.usersDetailView.layout', { top: 0, left: 0, height: 228, right: 0 });
     },
     
     remove: function() {
