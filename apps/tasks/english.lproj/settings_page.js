@@ -111,16 +111,11 @@ Tasks.settingsPage = SC.Page.create({
         
         }),
         
-        usersDetailView: SC.View.design({
-          layout: { top: 0, left: 300, height: 230, right: 0 },
-          childViews: 'userWellView userInfoView createdAtLabel updatedAtLabel'.w(),
+        usersDetailView: SC.View.design(SC.Border, {
+          layout: { top: 0, left: 300, height: 228, right: 0 },
+          borderStyle: SC.BORDER_BEZEL,
+          childViews: 'userInfoView createdAtLabel updatedAtLabel'.w(),
           
-          userWellView: SC.WellView.design({
-            layout: { top: 0, left: 0, height: 210, right: 0 },
-            contentView: SC.View.design({
-            })
-          }),
-
           userInfoView: Tasks.UserInformationView.design({
             layout: { top: 10, left: 25, height: 200, right: 10 },
             contentBinding: 'Tasks.userController'

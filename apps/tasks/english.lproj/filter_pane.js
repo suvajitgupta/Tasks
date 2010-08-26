@@ -21,7 +21,7 @@ Tasks.filterPane = SC.SheetPane.create({
   contentView: SC.View.design({
     
     layout: { top: 0, left: 0, bottom: 0, right: 0 },
-    childViews: 'title quickfilterWellView quickfilterToolbar typeLabel typeCheckboxes priorityLabel priorityCheckboxes statusLabel statusCheckboxes validationLabel validationCheckboxes effortSpecifiedLabel effortSpecifiedRadiobuttons recentlyUpdatedLabel recentlyUpdatedRadiobuttons beingWatchedLabel beingWatchedRadiobuttons cancelButton applyButton'.w(),
+    childViews: 'title quickfilterToolbar typeLabel typeCheckboxes priorityLabel priorityCheckboxes statusLabel statusCheckboxes validationLabel validationCheckboxes effortSpecifiedLabel effortSpecifiedRadiobuttons recentlyUpdatedLabel recentlyUpdatedRadiobuttons beingWatchedLabel beingWatchedRadiobuttons cancelButton applyButton'.w(),
     
     title: SC.LabelView.design({
       layout: { top: 10, centerX: 0, width: 150, height: 24 },
@@ -32,15 +32,10 @@ Tasks.filterPane = SC.SheetPane.create({
       toolTip: "_QuickFiltersTooltip".loc()
     }),
     
-    quickfilterWellView: SC.WellView.design({
-      layout: { top: 28, left: 5, height: 70, right: 5 },
-      contentView: SC.View.design({
-      })
-    }),
-
-    quickfilterToolbar: SC.View.design({
+    quickfilterToolbar: SC.View.design(SC.Border, {
 
       layout: { top: 28, left: 5, height: 70, right: 5 },
+      borderStyle: SC.BORDER_BEZEL,
       classNames: ['quickfilter-toolbar'],
       childViews: 'allButton troubledButton unfinishedButton unvalidatedButton completedButton showstoppersButton'.w(),
   
