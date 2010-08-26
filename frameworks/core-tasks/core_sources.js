@@ -1,5 +1,4 @@
 /*globals CoreTasks sc_require */
-sc_require('core');
 
 /**
  * An extension of the SC.DataSource class that acts as a proxy between the data store and the
@@ -19,7 +18,6 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
    * @returns {Boolean}
    */
   fetch: function(store, query) {
-    
     // Do some sanity checking first to make sure everything is in order.
     if (!query || !SC.instanceOf(query, SC.Query)) {
       throw 'Error retrieving records: Invalid query.';
@@ -44,12 +42,16 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
       throw 'Error retrieving records: Unable to retrieve resource path from record type.';
     }
 
-    // FIXME [SC]: fix unnecessary fetch of all tasks after a Project name is changed for the first time
+    // FIXME [SC]: Fix unnecessary fetch of all tasks after a project name is changed for the
+    // first time.
     // console.log('DEBUG: fetch(): query=' + query.toString());
 
     // Build the request and send it off to the server.
-    // console.log('Retrieving %@ records from server...'.fmt(recordType));
-    var path = CoreTasks.getFullResourcePath(resourcePath, null, query.get('queryParams'));
+    console.log('Retrieving %@ records from server...'.fmt(recordType));
+
+    var params = query.get('urlParams') || {};
+    var path = CoreTasks.getFullResourcePath(resourcePath, null, params);
+
     CoreTasks.REQUEST_GET.set('address', path);
     CoreTasks.REQUEST_GET.notify(this, this._fetchCompleted, { query: query, store: store }).send();
 
@@ -64,7 +66,12 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
     if (SC.ok(response) && SC.ok(results = response.get('body'))) {
       var recordType = query.get('recordType');
       var status = response.get('status');
-      var xhr;
+
+      // Make sure the record array is in the correct state.
+      var recArray = store._findQuery(query, YES, NO);
+      SC.RunLoop.begin();
+      recArray.storeWillFetchQuery();
+      SC.RunLoop.end();
 
       if (SC.typeOf(results) === SC.T_ARRAY) {
         if (results.length > 0) {
@@ -72,11 +79,12 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
           var records = this._normalizeResponseArray(results);
 
           // Load the records into the store and invoke the callback.
-          // console.log('Retrieved %@ matching %@ records.'.fmt(records.length, recordType));
-          store.loadRecords(recordType, records);
-          store.purgeDeletedRecords(recordType, records);
+          console.log('Found %@ matching %@ records on server.'.fmt(records.length, recordType));
 
+          store.loadRecords(recordType, records);
+          // store.purgeDeletedRecords(recordType, records);
           store.dataSourceDidFetchQuery(query);
+
         } else {
           // No matching records.
           console.log('No matching %@ records.'.fmt(recordType));
@@ -374,7 +382,74 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
 
 });
 
-// Create the main store with the appropriate data source
-CoreTasks.remoteDataSource = true; // Set to false to get Fixtures
-CoreTasks.get('store').from(CoreTasks.remoteDataSource? CoreTasks.RemoteDataSource.create() : SC.FixturesDataSource.create());
-// console.log('Initialized ' + (CoreTasks.remoteDataSource? 'remote' : 'fixtures') + ' data source.');
+/**
+ * An extension of the SCUDS.LocalDataSource class that provides functionality specific to Tasks
+ *
+ * @extends SCUDS.LocalDataSource
+ * @author Sean Eidemiller
+ */
+CoreTasks.LocalDataSource = SCUDS.LocalDataSource.extend({
+  _supportedRecordTypes: SC.Set.create(
+    ['CoreTasks.User', 'CoreTasks.Task', 'CoreTasks.Project', 'CoreTasks.Watch']),
+
+  supportedRecordTypes: function() {
+    return this._supportedRecordTypes;
+  }.property(),
+
+  fetch: function(store, query) {
+    // Do some sanity checking first to make sure everything is in order.
+    if (!SC.instanceOf(query, SC.Query)) {
+      console.error('Error retrieving from local cache records: Invalid query.');
+      return NO;
+    }
+
+    // Return NO if initial server fetch set to false.
+    if (query.get('initialServerFetch') === NO) {
+      store.dataSourceDidFetchQuery(query);
+      return NO;
+    }
+
+    if (query.get('localOnly') === YES) {
+      sc_super();
+      return YES;
+    } else {
+      return sc_super();
+    }
+  },
+
+  /**
+   * Returns the best available browser-implemented storage method.
+   *
+   * Order of preference: orion_webkit -> orion_dom (default)
+   *
+   * TODO: [SE] Rename from "orion_*" to something more generic.
+   */
+  storageMethod: function() {
+    var ret = 'orion_dom';
+
+    if (this._supportsSqlStorage()) {
+      // TODO: Revert to 'orion_webkit' when it's working.
+      ret = 'orion_dom';
+    } else if (this._supportsLocalStorage()) {
+      ret = 'orion_dom';
+    }
+
+    console.log('Local storage mechanism: %@'.fmt(ret));
+    return ret;
+
+  }.property().cacheable()
+
+});
+
+// Create the main store with the appropriate data source(s).
+var sources = [];
+
+if (CoreTasks.remoteDataSource === YES) {
+  sources.pushObjects([CoreTasks.LocalDataSource.create(), CoreTasks.RemoteDataSource.create()]);
+  console.log('Initialized main store with local + remote data source.');
+} else {
+  sources.pushObject(SC.FixturesDataSource.create());
+  console.log('Initialized main store with fixtures data source.');
+}
+
+CoreTasks.initializeStore(sources);

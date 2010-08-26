@@ -5,79 +5,31 @@
  *
  * @author Sean Eidemiller
  */
- 
 CoreTasks = SC.Object.create({
   
   // Installation-level settings
   shouldNotify: true,
   autoSave: true,
+  remoteDataSource: true, // Set to false to use fixtures
   
   needsSave: NO,
-  
-  // The main data store and record sets.
-  store: SC.Store.create({
-    
-    createRecord: function(recordType, dataHash, id) {
-      // console.log('DEBUG: createRecord(): recordType=' + recordType + ', dataHash=' + JSON.stringify(dataHash));
-      var ret = sc_super();
-      CoreTasks.set('needsSave', YES);
-      return ret;
-    },
-    
-    recordDidChange: function(recordType, id, storeKey, key) {
-      // console.log('DEBUG: recordDidChange(): storeKey=' + storeKey + ', key=' + key);
-      var ret = sc_super(); // MUST COME FIRST
-      
-      if (storeKey === undefined) storeKey = recordType.storeKeyFor(id);
-      var status = this.readStatus(storeKey), K = SC.Record;
-      
-      if (status & K.RECORD_DIRTY || status & K.READY_NEW || 
-          status & K.DESTROYED_DIRTY) {
-        // console.log('got a dirty record');
-        CoreTasks.set('needsSave', YES);
-      }
-      
-      return ret;
-    },
-    
-    destroyRecord: function(recordType, id, storeKey) {
-      // console.log('DEBUG: destroyRecord(): storeKey=' + storeKey);
-      var ret = sc_super();
-      CoreTasks.set('needsSave', YES);
-      return ret;
-    },
-    
-    // Delete local records that are no longer on Server
-    purgeDeletedRecords: function(recordType, records) {
-      if(!CoreTasks.loginTime) { // the first time there is nothing to do!
-        // Identify/remove any records that have been deleted on server but exist in the store
-        var idsOnServer = [];
-        for(var i = 0, len = records.length; i < len; i++) {
-          idsOnServer[i] = '' + records[i].id;
-        }
-        var idsInStore = recordType.storeKeysById();
-        var deletedStoreKeys = [];
-        for(var id in idsInStore) {
-          // FIXME: [SC] remove hack once SC.Query is able to parse negative numbers.
-          // if (id > 0 && idsOnServer.indexOf(id) < 0) {
-          if (id > 0 && id < CoreTasks.MAX_RECORD_ID && idsOnServer.indexOf(id) < 0) {
-            deletedStoreKeys.push(idsInStore[id]);
-          }
-        }
-        SC.RunLoop.begin();
-        for(var j = 0, n = deletedStoreKeys.length; j < n; j++) {
-          var storeKey = deletedStoreKeys[j];
-          var record = this.materializeRecord(storeKey);
-          // console.log('DEBUG: deleting after refresh() ' + record);
-          if(record.get('destroyWatches')) record.destroyWatches();
-          this.removeDataHash(storeKey, SC.Record.DESTROYED_CLEAN);
-          this.dataHashDidChange(storeKey);
-        }
-        SC.RunLoop.end();
-      }
-    }
-    
-  }),
+
+  /**
+   * Initializes the main store with the given data source.
+   *
+   * @param {SC.DataSource} dataSource The data source with which to initialize the store.
+   */
+  initializeStore: function(dataSources) {
+    var store = CoreTasks.Store.create();
+    var dataSource = SCUDS.NotifyingCascadeDataSource.create();
+
+    dataSources.forEach(function(source) {
+      dataSource.from(source);
+    });
+
+    store.set('dataSource', dataSource);
+    this.set('store', store);
+  },
   
   allUsers: null,
   allTasks: null,
@@ -111,9 +63,9 @@ CoreTasks = SC.Object.create({
       this.allWatches.destroy();
       this.allWatches = null;
     }
-    
+ 
     if(this.store) this.store.reset();
-    
+
     this.set('needsSave', NO);
     
   },
@@ -842,6 +794,69 @@ CoreTasks = SC.Object.create({
   _currentRecordId: 100000000
   //_currentRecordId: -1
 
+});
+
+CoreTasks.Store = SCUDS.NotifyingStore.extend({
+
+  createRecord: function(recordType, dataHash, id) {
+    // console.log('DEBUG: createRecord(): recordType=' + recordType + ', dataHash=' + JSON.stringify(dataHash));
+    var ret = sc_super();
+    CoreTasks.set('needsSave', YES);
+    return ret;
+  },
+    
+  recordDidChange: function(recordType, id, storeKey, key) {
+    // console.log('DEBUG: recordDidChange(): storeKey=' + storeKey + ', key=' + key);
+    var ret = sc_super(); // MUST COME FIRST
+      
+    if (storeKey === undefined) storeKey = recordType.storeKeyFor(id);
+    var status = this.readStatus(storeKey), K = SC.Record;
+      
+    if (status & K.RECORD_DIRTY || status & K.READY_NEW || 
+        status & K.DESTROYED_DIRTY) {
+      // console.log('got a dirty record');
+      CoreTasks.set('needsSave', YES);
+    }
+
+    return ret;
+  },
+    
+  destroyRecord: function(recordType, id, storeKey) {
+    // console.log('DEBUG: destroyRecord(): storeKey=' + storeKey);
+    var ret = sc_super();
+    CoreTasks.set('needsSave', YES);
+    return ret;
+  },
+
+  // Delete local records that are no longer on Server
+  purgeDeletedRecords: function(recordType, records) {
+    if(!CoreTasks.loginTime) { // the first time there is nothing to do!
+      // Identify/remove any records that have been deleted on server but exist in the store
+      var idsOnServer = [];
+      for(var i = 0, len = records.length; i < len; i++) {
+        idsOnServer[i] = '' + records[i].id;
+      }
+      var idsInStore = recordType.storeKeysById();
+      var deletedStoreKeys = [];
+      for(var id in idsInStore) {
+        // FIXME: [SC] remove hack once SC.Query is able to parse negative numbers.
+        // if (id > 0 && idsOnServer.indexOf(id) < 0) {
+        if (id > 0 && id < CoreTasks.MAX_RECORD_ID && idsOnServer.indexOf(id) < 0) {
+          deletedStoreKeys.push(idsInStore[id]);
+        }
+      }
+      SC.RunLoop.begin();
+      for(var j = 0, n = deletedStoreKeys.length; j < n; j++) {
+        var storeKey = deletedStoreKeys[j];
+        var record = this.materializeRecord(storeKey);
+        // console.log('DEBUG: deleting after refresh() ' + record);
+        if(record.get('destroyWatches')) record.destroyWatches();
+        this.removeDataHash(storeKey, SC.Record.DESTROYED_CLEAN);
+        this.dataHashDidChange(storeKey);
+      }
+      SC.RunLoop.end();
+    }
+  }
 });
 
 // Add the bind() function to the Function prototype.

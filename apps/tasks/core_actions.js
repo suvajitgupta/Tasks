@@ -7,7 +7,6 @@
  */
 /*globals CoreTasks Tasks sc_require */
 
-sc_require('core');
 sc_require('controllers/users');
 sc_require('controllers/tasks');
 sc_require('controllers/projects');
@@ -101,32 +100,72 @@ Tasks.mixin({
    * Load all Tasks data from the server.
    */
   loadData: function() {
-    
-    // console.log('DEBUG: loadData()');
     // Indicate data loading start on status bar
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('icon', 'progress-icon');
     serverMessage.set('value', "_LoadingData".loc());
-    
+
+    // Setup data controllers by preloading data from the local cache.
+    if (!CoreTasks.get('allUsers')) {
+      CoreTasks.set('allUsers', CoreTasks.store.find(
+        SC.Query.create({ recordType: CoreTasks.User, orderBy: 'name', localOnly: YES })));
+      this.usersController.set('content', CoreTasks.get('allUsers'));
+    }
+
+    if (!CoreTasks.get('allTasks')) {
+      CoreTasks.set('allTasks', CoreTasks.store.find( 
+        SC.Query.create({ recordType: CoreTasks.Task, localOnly: YES })));
+    }
+
+    if (!CoreTasks.get('allProjects')) {
+      CoreTasks.set('allProjects', CoreTasks.store.find(
+        SC.Query.create({ recordType: CoreTasks.Project, orderBy: 'name', localOnly: YES })));
+      this.projectsController.set('content', CoreTasks.get('allProjects'));
+    }
+
+    if (!CoreTasks.get('allWatches')) {
+      CoreTasks.set('allWatches', CoreTasks.store.find(
+        SC.Query.create({ recordType: CoreTasks.Watch, localOnly: YES })));
+    }
+ 
+    // Set the callbacks.
     var params = {
       successCallback: this._loadDataSuccess.bind(this),
       failureCallback: this._loadDataFailure.bind(this)
     };
+
+    // Get the last retrieved cookie.
+    var lastRetrievedCookie = SC.Cookie.find('lastRetrieved');
+    var lastRetrieved = null;
+
+    if (lastRetrievedCookie && lastRetrievedCookie.get) {
+      lastRetrieved = lastRetrievedCookie.get('value');
+    }
+
+    // Branch on the server type (Persevere, GAE, fixtures).
     var serverType = Tasks.get('serverType');
-    if(serverType === Tasks.PERSEVERE_SERVER) {
-      var methodInvocation = {
-        method: 'get',
-        id: 'records',
-        params: []
-      };
+
+    if (serverType === Tasks.PERSEVERE_SERVER) {
+      var methodInvocation;
+
+      // Determine which function to call based on presence of last retrieved cookie.
+      if (SC.typeOf(lastRetrieved) === SC.T_STRING && lastRetrieved.length > 0) {
+        methodInvocation = { method: 'getDelta', id: 'records', params: [lastRetrieved] };
+      } else {
+        methodInvocation = { method: 'get', id: 'records', params: [] };
+      }
+
       CoreTasks.executeTransientPost('Class/all', methodInvocation, params);
-    }
-    else if(serverType === Tasks.GAE_SERVER){
+
+    } else if(serverType === Tasks.GAE_SERVER){
       CoreTasks.executeTransientGet('records', undefined, params);
-    }
-    else { // Fixtures mode
+    } else {
       this._loadDataSuccess();
     }
+
+    // Set the last retrieved cookie.
+    lastRetrieved = SC.DateTime.create().get('milliseconds') + '';
+    SC.Cookie.create({ name: 'lastRetrieved', value: lastRetrieved }).write();
   },
   
   /**
@@ -134,7 +173,7 @@ Tasks.mixin({
    */
   _loadDataSuccess: function(response) {
     // console.log('DEBUG: loadDataSuccess()');
-    
+ 
     if(response) { // Has a Server, not Fixtures mode
       // Process/load records into store
       var typeMap = {
@@ -144,32 +183,18 @@ Tasks.mixin({
         "watches":   CoreTasks.Watch
       };
       var recordSets = response.result;
+      SC.RunLoop.begin();
       for(var recordSet in recordSets) {
         var recordType = typeMap[recordSet];
         if(SC.typeOf(recordType) === SC.T_CLASS) {
           var records = recordSets[recordSet];
           CoreTasks.store.loadRecords(recordType, records);
-          CoreTasks.store.purgeDeletedRecords(recordType, records);
+          // CoreTasks.store.purgeDeletedRecords(recordType, records);
         }
       }
+      SC.RunLoop.end();
     }
-    
-    // Setup data controllers
-    if (!CoreTasks.get('allUsers')) {
-      CoreTasks.set('allUsers', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.User, orderBy: 'name', initialServerFetch: NO })));
-      this.usersController.set('content', CoreTasks.get('allUsers'));
-    }
-    if (!CoreTasks.get('allTasks')) {
-      CoreTasks.set('allTasks', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Task, initialServerFetch: NO })));
-    }
-    if (!CoreTasks.get('allProjects')) {
-      CoreTasks.set('allProjects', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Project, orderBy: 'name', initialServerFetch: NO })));
-      this.projectsController.set('content', CoreTasks.get('allProjects'));
-    }
-    if(!CoreTasks.get('allWatches')) {
-      CoreTasks.set('allWatches', CoreTasks.store.find(SC.Query.create({ recordType: CoreTasks.Watch, initialServerFetch: NO })));
-    }
-    
+ 
     // Set the current logged on user
     var currentUser = CoreTasks.getUser(this.loginName);
     if (currentUser) {
