@@ -95,7 +95,7 @@ Tasks.UserInformationView = SC.View.extend(
     this.roleLabel = this.createChildView(SC.LabelView.extend({
       layout: { top: 162, left: 0, width: 85, height: 18 },
       textAlign: SC.ALIGN_RIGHT,
-      isVisibleBinding: 'CoreTasks.permissions.canUpdateUserRole',
+      // isVisibleBinding: 'CoreTasks.permissions.canUpdateUserRole',
       value: "_Role:".loc()
     }));
     childViews.push(this.roleLabel);
@@ -103,7 +103,8 @@ Tasks.UserInformationView = SC.View.extend(
       layout: { top: 159, left: 90, height: 24, width: 150 },
       classNames: ['square'],
       localize: YES,
-      isVisibleBinding: 'CoreTasks.permissions.canUpdateUserRole',
+      // isVisibleBinding: 'CoreTasks.permissions.canUpdateUserRole',
+      isEnabledBinding: 'CoreTasks.permissions.canUpdateUserRole',
       objects: this._listRoles(),
       nameKey: 'name',
       valueKey: 'value',

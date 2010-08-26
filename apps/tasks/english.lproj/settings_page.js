@@ -25,7 +25,7 @@ Tasks.settingsPage = SC.Page.create({
     minHeight: 350,
     minWidth: 780,
     maxWidth: 780,
-    layout: { centerX: 0, centerY: 0, height: 350, width: 780 /* 425 */ },
+    layout: { centerX: 0, centerY: 0, height: 350, width: 780 },
     
     contentView: SC.View.design({
       layout: { left: 0, right: 0, top: 0, bottom: 0},
@@ -178,6 +178,7 @@ Tasks.settingsPage = SC.Page.create({
     }),
     
     setSmallSize: function() {
+      this.set('isResizable', NO);
       this.set('layout', { centerX: 0, centerY: 0, height: 320, width: 425 });
       this.setPath('contentView.usersMasterDetailView.layout', { left: 10, right: 10, top: 10, bottom: 40 });
       this.setPath('contentView.usersMasterDetailView.usersDetailView.layout', { top: 0, left: 0, height: 228, right: 0 });
