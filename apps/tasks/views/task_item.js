@@ -122,7 +122,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       _preEditing: function() {
         var task = that.get('_task');
         var cv = this.get('contentView');
-        this.childViews[0].get('title').set('value', "_Task".loc() + ' ' + task.get('displayId') + ' ' + "Info".loc());
+        this.set('title', "_Task".loc() + ' ' + task.get('displayId') + ' ' + "Info".loc());
         that._watches = CoreTasks.getTaskWatches(task);
         var watchCount = that._watches.length;
         cv.setPath('watchersButton.isVisible', watchCount > 0);
@@ -148,7 +148,6 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       _postEditing: function() {
         var task = that.get('_task');
         var cv = this.get('contentView');
-        task.setIfChanged('displayName', cv.getPath('nameField.value'));
         task.setIfChanged('type', cv.getPath('typeField.value'));
         task.setIfChanged('priority', cv.getPath('priorityField.value'));
         task.setIfChanged('developmentStatus', cv.getPath('statusField.value'));
@@ -157,6 +156,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         task.setIfChanged('projectValue', cv.getPath('projectField.value'));
         task.setIfChanged('submitterValue', cv.getPath('submitterField.value'));
         task.setIfChanged('assigneeValue', cv.getPath('assigneeField.value'));
+        task.setIfChanged('displayName', cv.getPath('nameField.value'));
         task.setIfChanged('description',  cv.getPath('descriptionField.value'));
       },
       _statusDidChange: function() {
