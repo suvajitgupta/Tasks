@@ -70,9 +70,11 @@ if [ $? -ne 0 ]; then
 fi
 
 PASSWORD_HASH=`/bin/echo -n $PASSWORD | $SHA1_BIN | awk '{print $1}'`
+# Generate timestamp
+MILLISECONDS=`/bin/date +%s`000
 
 # Build the JSON and POST to the server using cURL.
-JSON="{name:'$FULL_NAME',loginName:'$LOGIN_NAME',role:'_$ROLE',password:'$PASSWORD_HASH'}"
+JSON="{name:'$FULL_NAME',loginName:'$LOGIN_NAME',role:'_$ROLE',password:'$PASSWORD_HASH',createdAt:$MILLISECONDS}"
 
 /bin/echo -n "Creating new user... "
 
