@@ -8,7 +8,7 @@
   
 */
 
-.title-bar {
+.title-bar, .header {
   background: static_url('images/title-bar-bg.png') repeat-x;
 }
 .title-bar .modal-title {
