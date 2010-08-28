@@ -70,7 +70,7 @@ Tasks.projectController = SC.ObjectController.create(
       Tasks.deselectTasks();
       if(cur) {
         this._project = cur;
-        SC.routes.set('location', CoreTasks.isSystemProject(cur)? '' : ('#project&ID=' + cur.get('displayId')));
+        SC.routes.set('location', CoreTasks.isSystemProject(cur)? '' : ('#select&projectId=' + cur.get('displayId')));
 
       }
     }
