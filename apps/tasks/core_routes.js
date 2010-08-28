@@ -18,7 +18,7 @@ sc_require('core');
 */
 Tasks.mixin( /** @scope Tasks */ {
   
-  defaultProjectName: null,
+  defaultProjectID: null,
   defaultProject: null,
 
   registerRoutes: function() {
@@ -50,12 +50,11 @@ Tasks.mixin( /** @scope Tasks */ {
   routeToTask: function(params) {
     // console.log('DEBUG: routeToTask() taskId=' + params.IDs);
     Tasks._closeMainPage();
-    if(SC.none(params.IDs)) {
+    if(SC.none(params.IDs) || params.IDs === '') {
       console.warn("Missing task IDs for URL routing");
     }
     else {
       // Enter the statechart.
-      Tasks.set('defaultProjectName', CoreTasks.ALL_TASKS_NAME.loc());
       Tasks.goState('a', 1);
       Tasks.authenticate('guest', '');
       Tasks.assignmentsController.set('searchFilter', params.IDs);
@@ -78,23 +77,31 @@ Tasks.mixin( /** @scope Tasks */ {
     At startup, select specified project on route
     
     Example:
-      'http://[host]/tasks#project&name=MyProject' would select MyProject upon startup (if it exists).
+      'http://[host]/tasks#project&ID=#555' would select project with ID #555 upon startup (if it exists).
     
   */
   routeToProject: function(params) {
-    // console.log('DEBUG: routeToProject() loginTime=' + CoreTasks.loginTime + ', projectName=' + params.name);
-    if(SC.none(params.name)) {
-      console.warn("Missing project name for URL routing");
-    }
-    else if(CoreTasks.loginTime) {
-      Tasks.set('defaultProjectName', params.name);
-      Tasks.routeDefault();
+    // console.log('DEBUG: routeToProject() loginTime=' + CoreTasks.loginTime + ', projectID=' + params.ID);
+    if(SC.none(params.ID) || params.ID === '') {
+      console.warn("Missing project ID for URL routing");
     }
     else {
-      var project = CoreTasks.getProject(params.name); // see if such a project exists
-      if(project && project !== this.get('defaultProject')) {
-        this.set('defaultProject', project);
-        this.projectsController.selectObject(project);
+      var defaultProjectId = params.ID.replace('#', '');
+      if(CoreTasks.loginTime) {
+        Tasks.set('defaultProjectId', defaultProjectId);
+        Tasks.routeDefault();
+      }
+      else {
+        var project = CoreTasks.store.find(CoreTasks.Project, defaultProjectId); // see if such a project exists
+        if(project) {
+          if(project !== this.get('defaultProject')) {
+            this.set('defaultProject', project);
+            this.projectsController.selectObject(project);
+          }
+        }
+        else {
+          console.warn("No project of ID #" + defaultProjectId);
+        }
       }
     }
   },

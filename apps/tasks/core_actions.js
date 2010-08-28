@@ -220,10 +220,15 @@ Tasks.mixin({
     // Select default project if one is specified
     if(CoreTasks.loginTime) {
       var defaultProject = CoreTasks.get('allTasksProject');
-      var defaultProjectName = this.get('defaultProjectName');
-      if(defaultProjectName) { // if specified via a Route
-        var project = CoreTasks.getProject(defaultProjectName); // see if such a project exists
-        if(project) defaultProject = project;
+      var defaultProjectId = this.get('defaultProjectId');
+      if(defaultProjectId) { // if specified via a Route
+        var project = CoreTasks.store.find(CoreTasks.Project, defaultProjectId); // see if such a project exists
+        if(project)  {
+          defaultProject = project;
+        }
+        else {
+          console.warn("No project of ID #" + defaultProjectId);
+        }
       }
       this.set('defaultProject', defaultProject);
       this.projectsController.selectObject(defaultProject);

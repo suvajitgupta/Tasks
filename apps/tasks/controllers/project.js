@@ -70,8 +70,8 @@ Tasks.projectController = SC.ObjectController.create(
       Tasks.deselectTasks();
       if(cur) {
         this._project = cur;
-        // TODO: [SG] switch to using project IDs for routes instead of names (which may embed percent chars)
-        SC.routes.set('location', '#project&name=' + escape(cur.get('name')));
+        SC.routes.set('location', CoreTasks.isSystemProject(cur)? '' : ('#project&ID=' + cur.get('displayId')));
+
       }
     }
   }.observes('content')
