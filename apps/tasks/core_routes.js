@@ -77,11 +77,14 @@ Tasks.mixin( /** @scope Tasks */ {
     At startup, select specified project on route
     
     Example:
-      'http://[host]/tasks#project&ID=#555' would select project with ID #555 upon startup (if it exists).
+      'http://[host]/tasks#project&ID=#354&search=[SG]' would select project with ID #354 upon startup (if it exists) and show tasks assigned to 'SG'.
     
   */
   routeToProject: function(params) {
-    // console.log('DEBUG: routeToProject() loginTime=' + CoreTasks.loginTime + ', projectID=' + params.ID);
+    // console.log('DEBUG: routeToProject() loginTime=' + CoreTasks.loginTime + ', projectID=' + params.ID + ', search=' + params.search);
+    if(!SC.none(params.search) && params.search !== '') {
+      Tasks.assignmentsController.set('searchFilter', params.search);
+    }
     var defaultProjectId = null;
     if(SC.none(params.ID) || params.ID === '') {
       console.warn("Missing project ID for URL routing");

@@ -100,11 +100,11 @@
 			<p>You can also "Watch" or "Unwatch" sets of tasks via the context menu.  Tasks you are watching have their <i>IDs</i> underlined.  You can see who is watching a task from the task popup editor by clicking on the button at the bottom left (which is visible if there are any watchers).</p>
 			<p><app>tasks</app> running with a Google App Engine server sends email notifications when Tasks are created/updated by someone other than the Submitter or Assignee.  To receive email notifications, you must specify a valid email address via the "Users/Settings" panel.  If you don't want notifications sent when you make changes, disable "Notications" via the actions menu.</p>
 		<h3>Default Project</h3>
-			<p><app>tasks</app> allows you to specify your default project, which is selected at startup, by specifying or bookmarking an URL like this (replace items in CAPS with your specifics):</p>
-			<pre style="margin-left: 50px">http://HOST:PORT/tasks#project&amp;ID=#ID</pre>
+			<p><app>tasks</app> allows you to specify your default project (which is selected at startup) and a search pattern, by specifying or bookmarking an URL like this (replace items in CAPS with your specifics):</p>
+			<pre style="margin-left: 50px">http://HOST:PORT/tasks#project&amp;ID=#ID&amp;search=SEARCH_PATTERN</pre>
 			<p>When you select any project, the URL is automatically set to a value in the format shown above so that you may bookmark that project and return to it easily.</p>
 		<h3>Task Links</h3>
-			<p>You can search for specific tasks using an URL like this (replace items in CAPS with your specifics) - this is useful for sending links to people via email:</p>
+			<p>You can search for specific tasks using an URL like this (replace items in CAPS with your specifics) - this is useful for sending links to people via email (user is logged in automatically as 'guest'):</p>
 			<pre style="margin-left: 50px">http://HOST:PORT/tasks#task&amp;search=#ID</pre>
 		<h3>Clipboard Copy</h3>
 			<p>You can copy the <i>ID</i> and <i>name</i> of selected tasks to the clipboard by clicking on the icon that appears in the top bar to the left of the filter button.  This is useful for code commit messages or to email people.</p>
