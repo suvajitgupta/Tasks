@@ -41,23 +41,23 @@ Tasks.mixin( /** @scope Tasks */ {
   },
   
   /**
-    Show details of specified task on route
+    Search for tasks via route
     
     Example:
-      'http://[host]/tasks#task&IDs=#321, #422' would log in as special 'guest' user and set search filter to '#321, #422'.
+      'http://[host]/tasks#task&search=#321' would log in as special 'guest' user and set search filter to '#321'.
     
   */
   routeToTask: function(params) {
-    // console.log('DEBUG: routeToTask() taskId=' + params.IDs);
+    console.log('DEBUG: routeToTask() search=' + params.search);
     Tasks._closeMainPage();
-    if(SC.none(params.IDs) || params.IDs === '') {
-      console.warn("Missing task IDs for URL routing");
+    if(SC.none(params.search) || params.search === '') {
+      console.warn("Missing task search for URL routing");
     }
     else {
       // Enter the statechart.
       Tasks.goState('a', 1);
       Tasks.authenticate('guest', '');
-      Tasks.assignmentsController.set('searchFilter', params.IDs);
+      Tasks.assignmentsController.set('searchFilter', params.search);
     }
   },
   
