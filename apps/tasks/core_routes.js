@@ -82,28 +82,30 @@ Tasks.mixin( /** @scope Tasks */ {
   */
   routeToProject: function(params) {
     // console.log('DEBUG: routeToProject() loginTime=' + CoreTasks.loginTime + ', projectID=' + params.ID);
+    var defaultProjectId = null;
     if(SC.none(params.ID) || params.ID === '') {
       console.warn("Missing project ID for URL routing");
     }
     else {
-      var defaultProjectId = params.ID.replace('#', '');
-      if(CoreTasks.loginTime) {
-        Tasks.set('defaultProjectId', defaultProjectId);
-        Tasks.routeDefault();
+      defaultProjectId = params.ID.replace('#', '');
+    }
+    
+    if(CoreTasks.loginTime) {
+      if(defaultProjectId) Tasks.set('defaultProjectId', defaultProjectId);
+      Tasks.routeDefault();
+    }
+    else if(defaultProjectId) {
+      var project = CoreTasks.store.find(CoreTasks.Project, defaultProjectId); // see if such a project exists
+      if(!project) {
+        console.warn("No project of ID #" + defaultProjectId);
+        project = CoreTasks.get('allTasksProject');
       }
-      else {
-        var project = CoreTasks.store.find(CoreTasks.Project, defaultProjectId); // see if such a project exists
-        if(project) {
-          if(project !== this.get('defaultProject')) {
-            this.set('defaultProject', project);
-            this.projectsController.selectObject(project);
-          }
-        }
-        else {
-          console.warn("No project of ID #" + defaultProjectId);
-        }
+      if(project !== this.get('defaultProject')) {
+        this.set('defaultProject', project);
+        this.projectsController.selectObject(project);
       }
     }
+
   },
   
   /**
