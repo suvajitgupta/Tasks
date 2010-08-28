@@ -86,13 +86,9 @@ Tasks.mixin( /** @scope Tasks */ {
       Tasks.assignmentsController.set('searchFilter', params.search);
     }
     var defaultProjectId = null;
-    if(SC.none(params.ID) || params.ID === '') {
-      console.warn("Missing project ID for URL routing");
-    }
-    else {
+    if(!SC.none(params.ID) && params.ID !== '') {
       defaultProjectId = params.ID.replace('#', '');
     }
-    
     if(CoreTasks.loginTime) {
       if(defaultProjectId) Tasks.set('defaultProjectId', defaultProjectId);
       Tasks.routeDefault();
@@ -108,7 +104,6 @@ Tasks.mixin( /** @scope Tasks */ {
         this.projectsController.selectObject(project);
       }
     }
-
   },
   
   /**
