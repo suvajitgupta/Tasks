@@ -48,7 +48,7 @@ Tasks.mixin( /** @scope Tasks */ {
     
   */
   viewRoute: function(params) {
-    console.log('DEBUG: viewRoute() search=' + params.search);
+    // console.log('DEBUG: viewRoute() search=' + params.search);
     Tasks._closeMainPage();
     if(SC.none(params.search) || params.search === '') {
       console.warn('Missing task search for URL routing');
@@ -83,7 +83,7 @@ Tasks.mixin( /** @scope Tasks */ {
     
   */
   selectRoute: function(params) {
-    console.log('DEBUG: selectRoute() loginTime=' + CoreTasks.loginTime + ', projectId=' + params.projectId + ', filter=' + params.filter + ', search=' + params.search);
+    // console.log('DEBUG: selectRoute() loginTime=' + CoreTasks.loginTime + ', projectId=' + params.projectId + ', filter=' + params.filter + ', search=' + params.search);
     if(!SC.none(params.filter) && params.filter !== '') {
       params.filter = params.filter.toLowerCase();
       switch(params.filter) {
