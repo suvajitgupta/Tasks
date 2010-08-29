@@ -12,8 +12,6 @@ sc_require('mixins/localized_label');
   @author Suvajit Gupta
 */
 
-Tasks.PROJECT_EDITOR = 1; // used to indicate which editor is popped up
-
 Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
 /** @scope Tasks.ProjectItemView.prototype */ {
   

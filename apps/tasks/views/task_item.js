@@ -12,8 +12,6 @@
   @author Joshua Holt
 */
 
-Tasks.TASK_EDITOR = 2; // used to indicate which editor is popped up
-
 Tasks.TaskItemView = SC.ListItemView.extend(
 /** @scope Tasks.TaskItemView.prototype */ {
   

@@ -13,8 +13,6 @@ sc_require('core');
   
 */
 
-Tasks.FILTER_EDITOR = 3; // used to indicate which editor is popped up
-
 Tasks.filterPane = SC.SheetPane.create({  
   
   layout: { centerX: 0, height: Tasks.softwareMode? 495 : 390, width: 320 },
