@@ -227,7 +227,7 @@ Tasks.mixin({
           defaultProject = project;
         }
         else {
-          console.warn("No project of ID #" + defaultProjectId);
+          console.warn('No project of ID #' + defaultProjectId);
         }
       }
       this.set('defaultProject', defaultProject);

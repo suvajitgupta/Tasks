@@ -99,11 +99,10 @@
 		<h3>Watches and Email Notifications</h3>
 			<p>You can also "Watch" or "Unwatch" sets of tasks via the context menu.  Tasks you are watching have their <i>IDs</i> underlined.  You can see who is watching a task from the task popup editor by clicking on the button at the bottom left (which is visible if there are any watchers).</p>
 			<p><app>tasks</app> running with a Google App Engine server sends email notifications when Tasks are created/updated by someone other than the Submitter or Assignee.  To receive email notifications, you must specify a valid email address via the "Users/Settings" panel.  If you don't want notifications sent when you make changes, disable "Notications" via the actions menu.</p>
-		<h3>Default Project</h3>
-			<p><app>tasks</app> allows you to select your default project (which is selected at startup) and a search pattern, by specifying or bookmarking an URL like this (replace items in CAPS with your specifics):</p>
-			<pre style="margin-left: 50px">http://HOST:PORT/tasks#select&amp;projectId=#ID&amp;search=SEARCH_PATTERN</pre>
-			<p>When you click on any project, the URL is automatically set to a value in the format shown above so that you may bookmark that project and return to it easily.</p>
-		<h3>Task Links</h3>
+		<h3>URL Parameters</h3>
+			<p><app>tasks</app> allows you to choose your default project (which is selected at startup) and filter/search criteria by specifying/bookmarking an URL with additional parameters (replace items in CAPS with your specifics):</p>
+			<pre style="margin-left: 50px">http://HOST:PORT/tasks#select&amp;projectId=#ID&amp;filter=FILTER&amp;search=SEARCH</pre>
+			<p>FILTER may be one of the following values: showstoppers, troubled, unfinished, unvalidated, and completed.  Also, when you click on any project, the URL is automatically set to a value in the format shown above so that you may bookmark that project and return to it easily.</p>
 			<p>You can also view specific tasks using an URL like this (replace items in CAPS with your specifics) - this is useful for sending links to people via email (user is logged in automatically as 'guest'):</p>
 			<pre style="margin-left: 50px">http://HOST:PORT/tasks#view&amp;search=#ID</pre>
 		<h3>Clipboard Copy</h3>

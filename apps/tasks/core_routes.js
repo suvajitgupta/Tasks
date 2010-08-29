@@ -51,7 +51,7 @@ Tasks.mixin( /** @scope Tasks */ {
     console.log('DEBUG: viewRoute() search=' + params.search);
     Tasks._closeMainPage();
     if(SC.none(params.search) || params.search === '') {
-      console.warn("Missing task search for URL routing");
+      console.warn('Missing task search for URL routing');
     }
     else {
       // Enter the statechart.
@@ -77,11 +77,24 @@ Tasks.mixin( /** @scope Tasks */ {
     At startup, select specified project and/or set search filter criteria
     
     Example:
-      'http://[host]/tasks#select&projectId=#354&search=[SG]' would select project with ID #354 (if it exists) upon startup and show tasks assigned to 'SG'.
+      'http://[host]/tasks#select&projectId=#354&filter=unfinished&search=[SG]' would select project with ID #354 (if it exists) upon startup and show unfinished tasks assigned to SG.
+    
+    Legal values of filter are: showstoppers, troubled, unfinished, unvalidated, and completed
     
   */
   selectRoute: function(params) {
-    console.log('DEBUG: selectRoute() loginTime=' + CoreTasks.loginTime + ', projectId=' + params.projectId + ', search=' + params.search);
+    console.log('DEBUG: selectRoute() loginTime=' + CoreTasks.loginTime + ', projectId=' + params.projectId + ', filter=' + params.filter + ', search=' + params.search);
+    if(!SC.none(params.filter) && params.filter !== '') {
+      params.filter = params.filter.toLowerCase();
+      switch(params.filter) {
+        case 'showstoppers': Tasks.assignmentsController.setAttributeFilterShowstoppers(); break;
+        case 'troubled': Tasks.assignmentsController.setAttributeFilterTroubled(); break;
+        case 'unfinished': Tasks.assignmentsController.setAttributeFilterUnfinished(); break;
+        case 'unvalidated': Tasks.assignmentsController.setAttributeFilterUnvalidated(); break;
+        case 'completed': Tasks.assignmentsController.setAttributeFilterCompleted(); break;
+        default: console.warn('Illegal URL route value for filter: ' + params.filter);
+      }
+    }
     if(!SC.none(params.search) && params.search !== '') {
       Tasks.assignmentsController.set('searchFilter', params.search);
     }
@@ -96,7 +109,7 @@ Tasks.mixin( /** @scope Tasks */ {
     else if(defaultProjectId) {
       var project = CoreTasks.store.find(CoreTasks.Project, defaultProjectId); // see if such a project exists
       if(!project) {
-        console.warn("No project of ID #" + defaultProjectId);
+        console.warn('No project of ID #' + defaultProjectId);
         project = CoreTasks.get('allTasksProject');
       }
       if(project !== this.get('defaultProject')) {
