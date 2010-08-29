@@ -77,13 +77,13 @@ Tasks.mixin( /** @scope Tasks */ {
     At startup, select specified project and/or set search filter criteria
     
     Example:
-      'http://[host]/tasks#select&projectId=#354&display=team&filter=unfinished&search=[SG]' would select project with ID #354 (if it exists) upon startup and show unfinished tasks assigned to SG.
+      'http://[host]/tasks#select&projectId=#354&display=tasks&filter=unfinished&search=[SG]' would select project with ID #354 (if it exists) upon startup and show unfinished tasks assigned to SG.
     
     Legal values of filter are: showstoppers, troubled, unfinished, unvalidated, and completed
     
   */
   selectRoute: function(params) {
-    console.log('DEBUG: selectRoute() loginTime=' + CoreTasks.loginTime + ', projectId=' + params.projectId + ', display=' + params.display + ', filter=' + params.filter + ', search=' + params.search);
+    // console.log('DEBUG: selectRoute() loginTime=' + CoreTasks.loginTime + ', projectId=' + params.projectId + ', display=' + params.display + ', filter=' + params.filter + ', search=' + params.search);
     if(!SC.none(params.display) && params.display !== '') {
       params.display = params.display.toLowerCase();
       switch(params.display) {
