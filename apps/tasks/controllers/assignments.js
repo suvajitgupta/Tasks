@@ -637,23 +637,23 @@ Tasks.assignmentsController = SC.ArrayController.create(
   
   _timer: null,
   
-  _contentHasChanged: function() {
+  _contentNeedsRedrawing: function() {
     var content = this.get('content');
-    // if (content) console.log('DEBUG: editorPoppedUp=' + Tasks.editorPoppedUp + ', tasks: ' + content.getEach('name'));
+    // if (content) console.log('DEBUG: _contentNeedsRedrawing() editorPoppedUp=' + Tasks.editorPoppedUp + ', tasks: ' + content.getEach('name'));
     Tasks.assignmentsRedrawNeeded = true;    
-    if(Tasks.editorPoppedUp === Tasks.TASK_EDITOR) return;
+    if(Tasks.editorPoppedUp === Tasks.TASK_EDITOR || Tasks.editorPoppedUp === Tasks.FILTER_EDITOR) return;
   	if (this._timer) { // called as a result of a timer set for assignee selection or search filter changes
       this._timer.invalidate();
       this._timer = null;
     }
   	this.invokeOnce(this.showAssignments);
-  }.observes('[]', '_showTasks'),
+  }.observes('[]', '_showTasks', 'attributeFilterCriteria'),
   
   _searchFilterHasChanged: function() {
     // console.log('DEBUG: Search filter changed to "' + this.searchFilter + '"');
     // Allow typing delay over a half second before redrawing tasks pane
     if (this._timer) this._timer.invalidate();
-    this._timer = this.invokeLater(this._contentHasChanged, 500);
+    this._timer = this.invokeLater(this._contentNeedsRedrawing, 500);
   }.observes('searchFilter'),
   
   assignmentsSummary: function() {
