@@ -71,18 +71,20 @@
 			<p class="softwareOnly">Plan your tasks, specifying the <i>type</i> and <i>priority</i> for each. Allocate tasks to projects and assign them to team members.  Then work on your tasks, noting your <i>status</i> as you go. Finally, if needed, indicate the <i>validation</i> of completed tasks.</p
 	 	<h3>Sorting</h3>
 			<p>Sorting in <app>tasks</app> is automatic. Projects and Users are sorted alphabetically. Tasks are sorted by their attributes as well as alphabetically or by index (if task name starts with a number).  This helps you focus on what you are working on now and what is next.</p>
-		<h3>Shortcuts</h3>
-			<p>Hot keys are available for a couple of common actions: New Task = Control-Equals and Duplicate Task = Control-Shift-Plus.  Right clicking on projects and tasks provides a context menu with common actions.</p>
-		<h3>Recently Updated Items</h3>
-			<p>Projects/Tasks/Users that were created or updated within the last day are prefixed with a dot.</p>
-	<h2>Intermediate Features</h2>
 		<p style="margin-left: 5px">Now you are ready to graduate to the next level of <app>tasks</app> features.</p>
-	<h3>Filtering</h3>
-			<p>You can control which tasks are displayed via filtering, using one or more of three approaches:</p>
+	<h2>Intermediate Features</h2>
+		<h3>Recently Updated Items</h3>
+			<p>Projects/Tasks/Users that were created or updated within the last day are prefixed with a dot.  This is useful when looking for recent activity.</p>
+		<h3>Watches and Email Notifications</h3>
+			<p>You can "Watch" or "Unwatch" sets of tasks via the context menu.  Tasks you are watching have their <i>IDs</i> underlined.  You can see who is watching a task from the task popup editor by clicking on the button at the bottom left (which is visible if there are any watchers).</p>
+			<p><app>tasks</app> running with a Google App Engine server sends email notifications when Tasks are created/updated by someone other than the <i>Submitter</i> or <i>Assignee</i>.  To receive email notifications, you must specify a valid email address via the "Users/Settings" panel.  If you don't want notifications sent when you make changes, disable "Notications" via the actions menu.</p>
+		<h3>Filtering and Searching</h3>
+			<p>You can control which tasks are displayed in the tasks details pane using one or more of these approaches:</p>
 			<ul>
-				<li>Specify one or more task [assignees] or &lt;submitters&gt; (comma or space separated).  You must type in the exact login name or a part of the full name (case sensitive).</li>
-				<li>Search for one or more task IDs (each prepended by '#' and comma or space separated) or a string matching any part of task <i>name</i> or <i>description</i> in the search bar (prefix with a caret to find items that don't match the search pattern).</li>
-				<li>Click on the "Filter" button and use the <i>QuickFilters</i> at the top of the filter panel.  You may get even more selective by manually controlling the checkboxes for the various attributes. You may also filter tasks that were recently updated, have effort specified, or are being watched.  Whether an attribute filter is on or off is indicated by a traffic lighted "Filter" icon.</li>
+				<li>Click on the "Filter" button and use the <i>QuickFilters</i> at the top of the filter panel.  You may get even more selective by manually controlling the checkboxes for the various attributes. You may also filter tasks that were recently updated, have effort specified, or are being watched.  When filtering is on a cancel button appears next to the "Filter" icon.</li>
+				<li>Specify one or more task [Assignees] or &lt;Submitters&gt; (comma or space separated).  You must type in the exact login name or a part of the full name (case sensitive).</li>
+				<li>Search for one or more task IDs (each prepended by '#' and comma or space separated).</li>
+				<li>Search using a string matching any part of task <i>name</i> or <i>description</i> in the search bar.  You can prefix the search string with a caret to find items that don't match the search pattern.</li>
 			</ul>
 			<p>Filtering results are displayed as soon as you stop typing in the assignee or search text boxes.</p>
 		<h3>Clustering</h3>
@@ -92,27 +94,26 @@
 		<h3>Load Balancing</h3>
 			<p>To use this feature, you must specify the <i>time left</i> in an active project and set the <i>effort</i> for tasks as integer or decimal numbers, optionally appended with an unit of 'd' (days) or 'h' (hours).  If no time unit is specified it is assumed to mean 'days.'  Task <i>effort</i> may also be expressed as a range like: '3-5d'.<app>tasks</app> will automatically total the efforts for each assignee (excluding <i>Low</i> priority tasks) and indicate their loading via color coding. A "?" is appended for range-based subtotals including tasks with unspecified efforts.</p>
 			<p class="softwareOnly">To manage the release till <i>Feature Freeze</i> set the project's <i>time left</i> accordingly.  While the project is active <app>tasks</app> will decrement and display the <i>countdown</i> next to the project name every day until no time is left. As the team moves towards <i>Code Freeze</i>, you may reset the <i>activated at</i> field and <i>time left</i> to the number of days you allocate to code stabilization.  This way, the team can run very tight cycles and converge on the milestones of <i>Code/Feature Freezes.</i>
-		<h3>Statistics</h3>
-			<p>Choose "Statistics..." in the actions menu to get a popup dialog summarizing statistics about the displayed tasks.  This is quite useful in seeing how tasks are broken up by their attributes.</p>
 	<h2>Advanced Features</h2>
 		<p style="margin-left: 5px">Let's close out with some <app>tasks</app> power user features.</p>
-		<h3>Watches and Email Notifications</h3>
-			<p>You can also "Watch" or "Unwatch" sets of tasks via the context menu.  Tasks you are watching have their <i>IDs</i> underlined.  You can see who is watching a task from the task popup editor by clicking on the button at the bottom left (which is visible if there are any watchers).</p>
-			<p><app>tasks</app> running with a Google App Engine server sends email notifications when Tasks are created/updated by someone other than the Submitter or Assignee.  To receive email notifications, you must specify a valid email address via the "Users/Settings" panel.  If you don't want notifications sent when you make changes, disable "Notications" via the actions menu.</p>
+		<h3>Statistics</h3>
+			<p>Choose "Statistics..." in the actions menu to get a popup dialog summarizing statistics about the displayed tasks.  This is quite useful in seeing how tasks are broken up by their attributes.</p>
 		<h3>URL Parameters</h3>
-			<p><app>tasks</app> allows you to choose your default project (which is selected at startup) and filter/search criteria by specifying/bookmarking an URL with additional parameters (replace items in CAPS with your specifics):</p>
-			<pre style="margin-left: 50px">http://HOST:PORT/tasks#select&amp;projectId=#ID&amp;filter=FILTER&amp;search=SEARCH</pre>
-			<p>FILTER may be one of the following values: showstoppers, troubled, unfinished, unvalidated, and completed.  Also, when you click on any project, the URL is automatically set to a value in the format shown above so that you may bookmark that project and return to it easily.</p>
+			<p><app>tasks</app> allows you to choose your default project (which is selected at startup), display mode, and filter/search criteria by specifying or bookmarking an URL with additional parameters (replace items in CAPS with your specifics):</p>
+			<pre style="margin-left: 50px">http://HOST:PORT/tasks#select&amp;projectId=#ID&amp;display=MODE&amp;filter=FILTER&amp;search=SEARCH</pre>
+			<p>MODE may be <i>team</i> or <i>tasks</i>.  FILTER may be one of the following values: <i>showstoppers</i>, <i>troubled</i>, <i>unfinished</i>, <i>unvalidated</i>, and <i>completed</i>.  Also, when you click on any project, the URL is automatically set to a value in the format shown above so that you may bookmark that project and return to it easily.</p>
 			<p>You can also view specific tasks using an URL like this (replace items in CAPS with your specifics) - this is useful for sending links to people via email (user is logged in automatically as 'guest'):</p>
 			<pre style="margin-left: 50px">http://HOST:PORT/tasks#view&amp;search=#ID</pre>
-		<h3>Clipboard Copy</h3>
-			<p>You can copy the <i>ID</i> and <i>name</i> of selected tasks to the clipboard by clicking on the icon that appears in the top bar to the left of the filter button.  This is useful for code commit messages or to email people.</p>
 		<h3>Data Exchange</h3>
 			<p><app>tasks</app> allows data to be exchanged via a simple import/export mechanism.  Choose "Import" in the actions menu to bring data into the application.  Check the box at the bottom left of the Import panel to automatically create new users for unknown assignees/submitters found during importing.  Choose one of two "Export" options from the actions menu: (1) "Text"  is used to output <app>tasks</app> data to another installation of the application or some other system and (2) "HTML" is used to view the data as a Web page and to print it (especially if you have multiple pages worth of tasks).</p>
 		<h3>Bulk Data Entry</h3>
 			<p>Use the Import panel to type in a bunch of tasks at once - basically use it as a simple text editor.  You may use the rich syntax shown at the top of the import panel while performing bulk data entry if you prefer to type.</p>
+		<h3>Shortcuts</h3>
+			<p>Hot keys are available for a couple of common actions: New Task = Control-Equals and Duplicate Task = Control-Shift-Plus.  Right clicking on projects and tasks provides a context menu with common actions.</p>
 		<h3>Inline Editing</h3>
 			<p>Double click on a project and specify its <i>time left</i> as a number enclosed by curly braces. Double click on a task and specify its properties/attributes inline using the same syntax for Import/Export. Reassign a task to another user by typing in their login name within square brackets inline at the end of a task.</p>
+		<h3>Clipboard Copy</h3>
+			<p>You can copy the <i>ID</i> and <i>name</i> of selected tasks to the clipboard by clicking on the icon that appears in the top bar to the left of the filter button.  This is useful for code commit messages or to email people.</p>
 		<h3>Configuration and Administration</h3>
 			<p>Choose "Users/Settings" in the actions menu to manage users and preferences.  Here Managers can add/modify/delete users and their roles (via drag-and-drop too).  When a user is deleted, all task submitter and assignee fields referencing this user are cleared. You can find users by searching for name/loginName in the search bar at the top right.</p>
 	<h2>Best Practices</h2>

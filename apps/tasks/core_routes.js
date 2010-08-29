@@ -77,13 +77,21 @@ Tasks.mixin( /** @scope Tasks */ {
     At startup, select specified project and/or set search filter criteria
     
     Example:
-      'http://[host]/tasks#select&projectId=#354&filter=unfinished&search=[SG]' would select project with ID #354 (if it exists) upon startup and show unfinished tasks assigned to SG.
+      'http://[host]/tasks#select&projectId=#354&display=team&filter=unfinished&search=[SG]' would select project with ID #354 (if it exists) upon startup and show unfinished tasks assigned to SG.
     
     Legal values of filter are: showstoppers, troubled, unfinished, unvalidated, and completed
     
   */
   selectRoute: function(params) {
-    // console.log('DEBUG: selectRoute() loginTime=' + CoreTasks.loginTime + ', projectId=' + params.projectId + ', filter=' + params.filter + ', search=' + params.search);
+    console.log('DEBUG: selectRoute() loginTime=' + CoreTasks.loginTime + ', projectId=' + params.projectId + ', display=' + params.display + ', filter=' + params.filter + ', search=' + params.search);
+    if(!SC.none(params.display) && params.display !== '') {
+      params.display = params.display.toLowerCase();
+      switch(params.display) {
+        case 'team': Tasks.assignmentsController.set('displayMode', Tasks.DISPLAY_MODE_TEAM); break;
+        case 'tasks': Tasks.assignmentsController.set('displayMode', Tasks.DISPLAY_MODE_TASKS); break;
+        default: console.warn('Illegal URL route value for display: ' + params.display);
+      }
+    }
     if(!SC.none(params.filter) && params.filter !== '') {
       params.filter = params.filter.toLowerCase();
       switch(params.filter) {
