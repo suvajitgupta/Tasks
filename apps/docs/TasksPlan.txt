@@ -34,7 +34,7 @@ General Infrastructure @Active
 - Add a dot before Projects/Tasks/Users that were created or updated recently (within the last day) <SE> [SG] $Feature @Done %Passed
 - Display record created/updated time at the bottom of popup editors [SG] $Feature @Done %Passed
 v Analyze/optimize calls to assignments controller and custom view render methods <BB> [SG] @Active
-- Support view mode of tasks and selection of project/search filter using SproutCore routes [SG] $Feature @Done %Passed
+- Support view mode of tasks and selection of project/filter/search using SproutCore routes [SG] $Feature @Done %Passed
 - Destroy authentication token when User logs out [SG] <JH2> $Feature @Done %Passed
 - Implement/benchmark JSONP-based data loading for performance speedup (XHRs are faster) [SG] <SE> @Done
 ^ Optimize data loading to use single Server call for all records <SE> [SG] @Done %Passed
@@ -194,7 +194,7 @@ Server/Tools @Active
 Styling/Hardening @Active
 ^ Style via CSS, embed catchy/sprited images [MG] <SG> $Feature @Done %Passed
 ^ Re-style to match "dark" Greenhouse look & feel [SG] $Feature <MG> @Done
-- Run Chance to optimize loading of final set of split-up icons [JH2] <SG> @Active
+- Run Chance to optimize loading of final set of split-up icons [JH2] <SG> @Risky
 - Perform I18N and L10N (test with reversed strings) [SG] <JH2> @Done %Passed
 - Collect/address feedback from Alpha/Beta users and targeted usability tests <MG> [SG] @Done %Passed
 ^ Perform smoke test of key functionality [SG] @Done
