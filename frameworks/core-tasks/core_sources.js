@@ -157,7 +157,7 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
       var recordHash = this._normalizeResponse(results);
 
       // Invoke the success callback on the store.
-      params.store.dataSourceDidComplete(params.storeKey, recordHash, recordHash.id);
+      params.store.dataSourceDidComplete(params.storeKey, recordHash, recordHash.id, YES);
 
     } else if(response.status === 401) {
       console.log("Attempted to update: [%@:%@]: %@".fmt(params.recordType, params.id, this._buildError(response)));
@@ -225,7 +225,7 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
       var recordHash = this._normalizeResponse(results);
 
       // Invoke the success callback on the store.
-      params.store.dataSourceDidComplete(params.storeKey, recordHash, recordHash.id);
+      params.store.dataSourceDidComplete(params.storeKey, recordHash, recordHash.id, YES);
 
     } else {
       if(response.status === 404) { // not found on server, record must have been deleted
