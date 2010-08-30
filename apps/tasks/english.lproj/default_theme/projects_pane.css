@@ -43,6 +43,7 @@
 .projects-pane-inner .sc-collection-item .sc-outline,
 .users-pane-inner .sc-collection-item,
 .users-pane-inner .sc-collection-item .sc-outline {
+  left: 12px !important;
   -moz-border-radius: 3px !important;
   -webkit-border-radius: 3px !important;
 }
@@ -127,7 +128,7 @@
 
 .project-item .sc-outline,
 .user-item .sc-outline {
-  left: 5px !important;
+  left: 14px !important;
 }
 
 .projects-pane .projects-pane-inner .sc-collection-item label,
@@ -142,7 +143,7 @@
 
 .projects-pane-inner .sc-view.sc-list-item-view.sc-collection-item .sc-outline label,
 .users-pane-inner .sc-view.sc-list-item-view.sc-collection-item .sc-outline label {
-  left: 30px !important;
+  left: 22px !important;
   right: 50px !important;
   opacity: 1 !important;
 }
