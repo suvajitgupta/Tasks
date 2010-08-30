@@ -130,7 +130,7 @@ SC.stringsFor('English', {
   "_QuickFiltersTooltip": "Commonly used filters",
   "_RecentlyUpdated:": "Recently Updated:",
   "_RecentlyUpdatedFilterTooltip": "Show/hide recently updated tasks",
-  "_RecentlyUpdatedTooltip": "Dot indicates a recently (within last day) created/updated item",
+  "_RecentlyUpdatedTooltip": "Dot indicates an item recently created/updated (within last day)",
   "_RedFlags:": "Red Flags: ",
   "_RefreshTooltip": "Reload latest Tasks data from the server",
   "_Risky": "Risky",
