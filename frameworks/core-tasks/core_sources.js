@@ -17,6 +17,7 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
    *
    * @returns {Boolean}
    */
+  /*
   fetch: function(store, query) {
     // Do some sanity checking first to make sure everything is in order.
     if (!query || !SC.instanceOf(query, SC.Query)) {
@@ -107,6 +108,7 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
       store.dataSourceDidErrorQuery(query, error);
     }
   },
+  */
 
   /**
    * Creates a single record.
@@ -255,14 +257,17 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
    * @returns {Boolean} YES
    */
   destroyRecord: function(store, storeKey) {
+    var dataHash = store.readDataHash(storeKey);
     var recordType = store.recordTypeFor(storeKey);
     var id = store.idFor(storeKey);
+
     var queryParams = {
       UUID: CoreTasks.getPath('currentUser.id'),
       ATO: CoreTasks.getPath('currentUser.authToken'),
       action: "delete%@".fmt(recordType.toString().split('.')[1]),
       notify: CoreTasks.get('shouldNotify')
     };
+
     // Make sure the ID is valid.
     if (!this._isValidIdType(id)) {
       console.log('Error deleting record [%@]: Invalid ID type.'.fmt(recordType));
@@ -270,18 +275,24 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
       return YES;
     }
 
+    // Set the status on the data hash to "deleted" (soft delete).
+    dataHash.status = 'deleted';
+
+    // Set the updated-at time on the data hash.
+    dataHash.updatedAt = SC.DateTime.create().get('milliseconds');
+
     // Build the request and send it off to the server.
     // console.log('Deleting %@:%@ on server...'.fmt(recordType, id));
 
-    CoreTasks.REQUEST_DELETE.set(
+    CoreTasks.REQUEST_PUT.set(
       'address', CoreTasks.getFullResourcePath(recordType.resourcePath, id, queryParams));
-    CoreTasks.REQUEST_DELETE.notify(this, this._destroyCompleted, {
+    CoreTasks.REQUEST_PUT.notify(this, this._destroyCompleted, {
         store: store,
         storeKey: storeKey,
         recordType: recordType,
         id: id
       }
-    ).send();
+    ).send(dataHash);
 
     return YES;
   },
