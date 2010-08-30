@@ -647,7 +647,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
       this._timer = null;
     }
   	this.invokeOnce(this.showAssignments);
-  }.observes('[]', '_showTasks', 'attributeFilterCriteria'),
+  }.observes('[]', '_showTasks', 'attributeFilterCriteria', 'effortSpecified', 'recentlyUpdated', 'watched'),
   
   _searchFilterHasChanged: function() {
     // console.log('DEBUG: Search filter changed to "' + this.searchFilter + '"');
