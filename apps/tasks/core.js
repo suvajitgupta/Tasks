@@ -83,6 +83,10 @@ SCUI.ContextMenuPane = SCUI.ContextMenuPane.extend({
   exampleView: SC.MenuItemView
 });
 
+SCUI.ComboBoxView.prototype.dropDownButtonView = SC.View.extend( SCUI.SimpleButton, {
+  classNames: 'scui-combobox-dropdown-button-view',
+  layout: { top: 0, right: 0, height: 24, width: 28 }
+});
 
 /**
   A Standard Binding transform to localize a string in a binding.
