@@ -158,6 +158,11 @@ Tasks.mixin({
       CoreTasks.executeTransientPost('Class/all', methodInvocation, params);
 
     } else if(serverType === Tasks.GAE_SERVER){
+      // Add the lastRetrievedAt timestamp as a GET parameter if applicable.
+      if (SC.typeOf(lastRetrieved) === SC.T_STRING && lastRetrieved.length > 0) {
+        params.queryParams = { lastRetrievedAt: lastRetrieved };
+      }
+
       CoreTasks.executeTransientGet('records', undefined, params);
     } else {
       this._loadDataSuccess();
