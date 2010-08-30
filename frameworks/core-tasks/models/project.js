@@ -274,6 +274,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
     if (!this._disassociatedAllocatedTasksQuery) {
       this._disassociatedAllocatedTasksQuery = SC.Query.local(CoreTasks.Task,
         "projectId=%@".fmt(this.get('_id')));
+      this._disassociatedAllocatedTasksQuery.set('initialServerFetch', NO);
     }
 
     // Execute the query and return the results.
@@ -370,7 +371,6 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
         task.set('projectId', null);
       });
       this.get('tasks').destroy();
-      this._tasksQuery = null;
     }
   }
 
