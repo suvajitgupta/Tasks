@@ -54,6 +54,8 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
   
   popupEditor: function() {
     var layer = this.get('layer');
+    this._project = this.get('content');
+    this._newProject = (this._project.get('name') === CoreTasks.NEW_PROJECT_NAME.loc())? this._project : null;
     var that = this;
     
     this._editorPane = SCUI.ModalPane.create({
@@ -94,6 +96,8 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
            this._activatedAt !== that.getPath('content.activatedAt')) {
           Tasks.assignmentsController.showAssignments();
         }
+        var newProject = that.get('_newProject');
+        if(newProject && newProject.get('name') === CoreTasks.NEW_PROJECT_NAME.loc()) newProject.destroy(); // blow away unmodified new project
         if(CoreTasks.get('autoSave')) Tasks.saveData();
         this.destroy();
       },

@@ -109,6 +109,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   popupEditor: function(task) {
     var layer = this.get('layer');
     this._task = this.get('content');
+    this._newTask = (this._task.get('name') === CoreTasks.NEW_TASK_NAME.loc())? this._task : null;
     var that = this;
     this._editorPane = SCUI.ModalPane.create({
       
@@ -177,6 +178,8 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         Tasks.editorPoppedUp = null;
         this._postEditing();
         this.destroy();
+        var newTask = that.get('_newTask');
+        if(newTask && newTask.get('name') === CoreTasks.NEW_TASK_NAME.loc()) newTask.destroy(); // blow away unmodified new task
         if(Tasks.assignmentsRedrawNeeded) Tasks.assignmentsController.showAssignments();
         if(CoreTasks.get('autoSave')) Tasks.saveData();
      },
