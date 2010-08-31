@@ -179,7 +179,10 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         this._postEditing();
         this.destroy();
         var newTask = that.get('_newTask');
-        if(newTask && newTask.get('name') === CoreTasks.NEW_TASK_NAME.loc()) newTask.destroy(); // blow away unmodified new task
+        if(newTask && newTask.get('name') === CoreTasks.NEW_TASK_NAME.loc()) {
+          newTask.destroy(); // blow away unmodified new task
+          Tasks.deselectTasks();
+        }
         if(Tasks.assignmentsRedrawNeeded) Tasks.assignmentsController.showAssignments();
         if(CoreTasks.get('autoSave')) Tasks.saveData();
      },

@@ -97,7 +97,10 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
           Tasks.assignmentsController.showAssignments();
         }
         var newProject = that.get('_newProject');
-        if(newProject && newProject.get('name') === CoreTasks.NEW_PROJECT_NAME.loc()) newProject.destroy(); // blow away unmodified new project
+        if(newProject && newProject.get('name') === CoreTasks.NEW_PROJECT_NAME.loc()) {
+          newProject.destroy(); // blow away unmodified new project
+          Tasks.projectsController.selectObject(CoreTasks.get('allTasksProject'));
+        }
         if(CoreTasks.get('autoSave')) Tasks.saveData();
         this.destroy();
       },
