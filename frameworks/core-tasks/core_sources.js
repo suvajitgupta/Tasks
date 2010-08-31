@@ -130,8 +130,8 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
         notify: CoreTasks.get('shouldNotify')
       };
     }
-    // Set the created-at time on the data hash.
-    dataHash.createdAt = SC.DateTime.create().get('milliseconds');
+    // Set the created-at & updated-at times on the data hash.
+    dataHash.createdAt = dataHash.updatedAt = SC.DateTime.create().get('milliseconds');
 
     // Remove the ID from the data hash (Persevere doesn't like it).
     delete dataHash.id;

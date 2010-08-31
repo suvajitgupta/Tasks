@@ -6,8 +6,7 @@ Class({
   },
 
   getDelta: function(timestamp) {
-    var query = 'updatedAt>$1 | createdAt>$1 | (createdAt=null & updatedAt=null) | (createdAt=undefined & updatedAt=undefined)';
-
+    var query = 'updatedAt!=null & updatedAt!=undefined & updatedAt>$1';
     return {
       users: load('user?' + query, timestamp),
       projects: load('project?' + query, timestamp),

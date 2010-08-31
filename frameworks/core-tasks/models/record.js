@@ -87,26 +87,16 @@ CoreTasks.Record = SC.Record.extend({
   }.property('updatedAt'),
 
   /**
-   * Check if record was created or updated recently.
+   * Check if record was updated recently.
    */
   isRecentlyUpdated: function() {
-    // First check if the record was created recently
     var ageInDays = null;
     var now = SC.DateTime.create().get('milliseconds'), then;
-    var createdAt = this.get('createdAt');
-    if(createdAt) {
-      then = createdAt.get('milliseconds');
+    var updatedAt = this.get('updatedAt');
+    if(updatedAt) {
+      then = updatedAt.get('milliseconds');
       ageInDays = (now - then)/CoreTasks.MILLISECONDS_IN_DAY;
     }
-    // Then check if the record was updated recently
-    if(ageInDays === null || ageInDays > 1) {
-      var updatedAt = this.get('updatedAt');
-      if(updatedAt) {
-        then = updatedAt.get('milliseconds');
-        ageInDays = (now - then)/CoreTasks.MILLISECONDS_IN_DAY;
-      }
-    }
-    // Decide if record was recently created/updated
     return (ageInDays === null || ageInDays > 1)? false : true;
   }.property('createdAt', 'updatedAt').cacheable(),
 
