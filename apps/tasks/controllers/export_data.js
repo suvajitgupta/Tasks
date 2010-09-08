@@ -123,7 +123,6 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' padding: 1px 0px;\n' +
 ' border: 1px solid #AAA;\n' +
 ' line-height: 10px;\n' +
-' margin-right: 2px;\n' +
 ' -moz-border-radius: 15px;\n' +
 ' -webkit-border-radius: 15px;\n' +
 '}\n' +
@@ -140,8 +139,8 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' background-color: #C7C7C7;\n' +
 '}\n' +
 '.name {\n' +
-' border-left: 2px solid #FCC;\n' +
-' padding-left: 7px;\n' +
+' border-left: 3px solid #FCC;\n' +
+' padding-left: 5px;\n' +
 '}\n' +
 '.name, .feature, .bug, .other, .untested, .passed, .failed {\n' +
 ' display: inline-block;\n' +
@@ -212,7 +211,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 '</head>\n';
 
 Tasks.EXPORT_LEGEND = '<br><span class="legend">\n' +
-(Tasks.softwareMode? '<strong>TYPE:</strong> <span class="feature">&nbsp;</span>Feature <span class="bug">&nbsp;</span>Bug <span class="other">&nbsp;</span>Other\n&nbsp;&nbsp;&nbsp;' : '') +
+(Tasks.softwareMode? '<strong>TYPE:</strong> <span class="feature">&nbsp;</span> Feature <span class="bug">&nbsp;</span> Bug <span class="other">&nbsp;</span> Other\n&nbsp;&nbsp;&nbsp;' : '') +
 '<strong>PRIORITY:</strong> <span class="high">High</span> <span class="medium">Medium</span> <span class="low">Low</span>\n' +
 '&nbsp;&nbsp;&nbsp;<strong>STATUS:</strong> <span class="planned">Planned</span> <span class="active">Active</span> <span class="done">Done</span> <span class="risky">Risky</span>\n' +
 '&nbsp;&nbsp;&nbsp;<strong>VALIDATION:</strong> <span class="untested">Untested</span> <span class="passed">Passed</span> <span class="failed">Failed</span></span>\n' +
