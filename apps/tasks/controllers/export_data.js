@@ -62,11 +62,11 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' margin-left: 15px;\n' +
 '}\n' +
 'p {\n' +
-' background-color: #FFC;\n' +
+' background-color: #EEE;\n' +
 ' line-height: 23px;\n' +
 ' margin-top: -5px;\n' +
 ' margin-bottom: 4px;\n' +
-' border: 1px solid #09F;\n' +
+' border: 1px solid #BBB;\n' +
 ' padding: 0px;\n' +
 '}\n' +
 'pre, .description {\n' +
@@ -140,7 +140,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' background-color: #C7C7C7;\n' +
 '}\n' +
 '.name {\n' +
-' border-left: 2px solid red;\n' +
+' border-left: 2px solid #FCC;\n' +
 ' padding-left: 7px;\n' +
 '}\n' +
 '.name, .feature, .bug, .other, .untested, .passed, .failed {\n' +

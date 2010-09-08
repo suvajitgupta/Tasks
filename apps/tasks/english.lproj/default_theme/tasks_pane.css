@@ -159,8 +159,8 @@
  */
 
 .task-item {
-  background: #FFC none repeat scroll 0 0 !important;
-	border: 1px solid #09F !important;
+  background: #EEE none repeat scroll 0 0 !important;
+	border: 1px solid #BBB !important;
 }
 
 .task-item .sc-outline {
@@ -191,7 +191,7 @@
 }
 
 .tasks-pane-inner .sc-view.sc-list-item-view.sc-collection-item.task-item .sc-outline label {
-  border-left: 2px solid #A00 !important;
+  border-left: 2px solid #FCC !important;
   top: 9px !important;
   left: 55px !important;
   right: 50px !important;
@@ -339,7 +339,7 @@
 }
 
 .task-item:hover {
-  background: #FF9 none repeat scroll 0 0 !important;
+  background: #DDD none repeat scroll 0 0 !important;
 }
 
 .sc-view.sc-ghost-view .task-item {
