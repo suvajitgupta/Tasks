@@ -94,9 +94,6 @@ Tasks.importDataController = SC.ObjectController.create(
               taskHash.submitterId = null;
             }
           }
-          else {
-            taskHash.submitterId = currentUserId;
-          }
 
           // Peek ahead to the next lines to see if there is a Description and bring those in
           description = null;

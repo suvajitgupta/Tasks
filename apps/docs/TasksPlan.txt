@@ -170,8 +170,8 @@ v Add hotkeys for common operations (Add/Duplicate Tasks) [EG] <SG> $Feature @Do
 | Email notifications
 | Percent or Threshold (in days) for Assignee loading determination
 - Support Application settings/state persistence from last login saved using HTML5 storage [SG] <MB> $Feature
-- Support offline mode with synchronization after network reconnection using Hub.js [SG] <EG> $Feature
-- Support undo/redo using Hub.js [SG] <EG> $Feature
+- Support offline mode with synchronization after network reconnection using Hub.js [SG] <SE> $Feature
+- Support undo/redo using Hub.js [SG] <SE> $Feature
 
 Server/Tools @Active
 ^ Build persistence Server using Persevere [SE] <SG> @Done %Passed
