@@ -121,9 +121,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       _preEditing: function() {
         var task = that.get('_task');
         var cv = this.get('contentView');
-        // TODO: [SG] uncomment following line & delete line after that once Rigel SCUI becomes public SCUI
-        // this.set('title', "_Task".loc() + ' ' + task.get('displayId') + ' ' + "Info".loc());
-        this.childViews[0].get('title').set('value', "_Task".loc() + ' ' + task.get('displayId') + ' ' + "Info".loc());
+        this.set('title', "_Task".loc() + ' ' + task.get('displayId') + ' ' + "Info".loc());
         that._watches = CoreTasks.getTaskWatches(task);
         var watchCount = that._watches.length;
         cv.setPath('watchersButton.isVisible', watchCount > 0);

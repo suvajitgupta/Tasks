@@ -11,26 +11,25 @@
 .title-bar, .header {
   background: static_url('images/title-bar-bg.png') repeat-x;
 }
-.title-bar .modal-title {
+.header .modal-title {
   top: 10px !important;
   font-size: 14px !important;
   color: #DDD !important;
   left: 75px !important;
   right: 75px !important;
 }
-.title-bar .modal-close-icon,
-.title-bar .modal-fullscreen-icon {
+.header .modal-close-icon,
+.header .modal-fullscreen-icon {
   background-color: none !important;
 }
-.title-bar .modal-close-icon {
+.header .modal-close-icon {
   left: 15px !important;
   background: static_url('images/red-ball.png') no-repeat;
 }
-.title-bar .modal-fullscreen-icon {
+.header .modal-fullscreen-icon {
   left: 45px !important;
   background: static_url('images/green-ball.png') no-repeat;
 }
-
 
 .window-title {
   font-size: 14px !important;
