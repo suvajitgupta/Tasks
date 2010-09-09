@@ -38,7 +38,7 @@ v Analyze/optimize calls to assignments controller and custom view render method
 - Destroy authentication token when User logs out [SG] <JH2> $Feature @Done %Passed
 - Implement/benchmark JSONP-based data loading for performance speedup (XHRs are faster) [SG] <SE> @Done
 ^ Optimize data loading to use single Server call for all records <SE> [SG] @Done %Passed
-^ Optimize startup data load using HTML5 cascading data source <SE> [SG] @Active
+^ Optimize startup data load using HTML5 local data store <SE> [SG] @Done %Passed
 - Disallow Project names or User loginNames that are already in use or reserved [SG] $Feature @Active
 | Project name cannot be duplicated or a System Project name
 | User login name cannot be duplicated or reserved name "none"
@@ -189,7 +189,7 @@ Server/Tools @Active
 | For Task updates, indicate old and new values of attributes
 - Add link to Task in email notification (should not require authentication if user is signed in) <JH2> [SG] $Feature
 - Handle network or Server unavailability gracefully and provide appropriate diagnostics to the user [SG] <SE> @Done %Passed
-- Develop Tasks database cleanup tool (to remove orphaned/old soft-deleted items) <SE> [SG] @Active
+- Develop Tasks database cleanup tool (to remove orphaned/old soft-deleted items) <JH2> [SG] @Active
 ^ Convert Tasks into a Jira plugin [JH2] <SG> $Feature
 - Implement bridge to "github issues" from Google App Engine [JH2] <SG> $Feature @Active
 
@@ -223,7 +223,7 @@ Installation/Deployment @Active
 - Support customizable default "AutoSave" and "Notifications" settings via actions menu [SG] $Feature @Done %Passed
 - Deploy publicly-accessible instances using Google App Engine/Python [JH2] <SG> @Done %Passed
 - Port GUI to Firefox, Safari/Chrome, and Internet Explorer [SG] @Done %Passed
-v Provide SproutCore doctool-style comments [SG] <SE>
+v Provide SproutCore doctool-style comments [SG]
 
 Touch Interfaces
 - Develop iPad client with swiveling Master/Detail view <JH2> [SG] $Feature @Done

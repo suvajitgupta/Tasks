@@ -15,6 +15,7 @@ git checkout touch
 cd frameworks
 
 git clone git://github.com/etgryphon/sproutcore-ui.git scui
+git clone git://github.com/etgryphon/sproutcore-uds.git scuds
 
 git clone git://github.com/sproutit/sproutcore.git sproutcore
 cd sproutcore
