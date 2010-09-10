@@ -118,11 +118,17 @@ Tasks.mixin({
             SC.Query.create({ recordType: CoreTasks.Watch, localOnly: YES })));
         }
 
-        // Set the current logged on user
-        SC.RunLoop.begin();
-        CoreTasks.store.loadRecords(CoreTasks.User, response);
-        SC.RunLoop.end();
-        var currentUser = CoreTasks.store.find(CoreTasks.User, response[0].id);
+        var currentUser = null;
+        if(SC.none(response)) {
+          currentUser = CoreTasks.getUser(Tasks.get('loginName'));
+        }
+        else {
+          // Set the current logged on user
+          SC.RunLoop.begin();
+          CoreTasks.store.loadRecords(CoreTasks.User, response);
+          SC.RunLoop.end();
+          currentUser = CoreTasks.store.find(CoreTasks.User, response[0].id);
+        }
 
         // Greet user and save login session information
         CoreTasks.set('currentUser', currentUser);
