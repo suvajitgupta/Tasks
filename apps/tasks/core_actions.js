@@ -57,6 +57,7 @@ Tasks.mixin({
     switch (this.state.a) {
       case 1:
       case 2:
+        // Start GUI and setup startup defaults
         Tasks.loginController.closePanel();
         Tasks.getPath('mainPage.mainPane').append();
         Tasks.mainPageHelper.set('clippyDetails', document.getElementById(Tasks.mainPageHelper.clippyDetailsId));
@@ -70,6 +71,71 @@ Tasks.mixin({
             if(server && server.indexOf('Persevere') !== -1) Tasks.set('serverType', Tasks.PERSEVERE_SERVER);
           }
         }
+        
+        // Create system projects
+        if(!CoreTasks.get('allTasksProject')) {
+          var allTasksProject = CoreTasks.createRecord(CoreTasks.Project, {
+            name: CoreTasks.ALL_TASKS_NAME.loc()
+          });
+          CoreTasks.set('allTasksProject', allTasksProject);
+          CoreTasks.set('needsSave', NO);
+        }
+        if(!CoreTasks.get('unallocatedTasksProject')) {
+          var unallocatedTasksProject = CoreTasks.createRecord(CoreTasks.Project, {
+            name: CoreTasks.UNALLOCATED_TASKS_NAME.loc()
+          });
+          CoreTasks.set('unallocatedTasksProject', unallocatedTasksProject);
+          CoreTasks.set('needsSave', NO);
+        }
+        if(!CoreTasks.get('unassignedTasksProject')) {
+          var unassignedTasksProject = CoreTasks.createRecord(CoreTasks.Project, {
+            name: CoreTasks.UNASSIGNED_TASKS_NAME.loc()
+          });
+          CoreTasks.set('unassignedTasksProject', unassignedTasksProject);
+          CoreTasks.set('needsSave', NO);
+        }
+        
+        // Setup data controllers by preloading data from the local cache.
+        if (!CoreTasks.get('allUsers')) {
+          CoreTasks.set('allUsers', CoreTasks.store.find(
+            SC.Query.create({ recordType: CoreTasks.User, orderBy: 'name', localOnly: YES })));
+          this.usersController.set('content', CoreTasks.get('allUsers'));
+        }
+
+        if (!CoreTasks.get('allTasks')) {
+          CoreTasks.set('allTasks', CoreTasks.store.find( 
+            SC.Query.create({ recordType: CoreTasks.Task, localOnly: YES })));
+        }
+
+        if (!CoreTasks.get('allProjects')) {
+          CoreTasks.set('allProjects', CoreTasks.store.find(
+            SC.Query.create({ recordType: CoreTasks.Project, orderBy: 'name', localOnly: YES })));
+          this.projectsController.set('content', CoreTasks.get('allProjects'));
+        }
+
+        if (!CoreTasks.get('allWatches')) {
+          CoreTasks.set('allWatches', CoreTasks.store.find(
+            SC.Query.create({ recordType: CoreTasks.Watch, localOnly: YES })));
+        }
+
+        // Set the current logged on user
+        SC.RunLoop.begin();
+        CoreTasks.store.loadRecords(CoreTasks.User, response);
+        SC.RunLoop.end();
+        var currentUser = CoreTasks.store.find(CoreTasks.User, response[0].id);
+
+        // Greet user and save login session information
+        CoreTasks.set('currentUser', currentUser);
+        CoreTasks.setPermissions();
+        var welcomeMessage = Tasks.getPath('mainPage.mainPane.welcomeMessage');
+        welcomeMessage.set('toolTip', "_LoginSince".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
+
+        // Based on user's role set up appropriate task filter
+        var role = currentUser.get('role');
+        if(role === CoreTasks.USER_ROLE_DEVELOPER) { // Set assignee selection filter to current user
+          Tasks.showCurrentUserTasks();
+        }
+
         this.goState('a', 3);
         break;
 
@@ -105,29 +171,6 @@ Tasks.mixin({
     serverMessage.set('icon', 'progress-icon');
     serverMessage.set('value', "_LoadingData".loc());
 
-    // Setup data controllers by preloading data from the local cache.
-    if (!CoreTasks.get('allUsers')) {
-      CoreTasks.set('allUsers', CoreTasks.store.find(
-        SC.Query.create({ recordType: CoreTasks.User, orderBy: 'name', localOnly: YES })));
-      this.usersController.set('content', CoreTasks.get('allUsers'));
-    }
-
-    if (!CoreTasks.get('allTasks')) {
-      CoreTasks.set('allTasks', CoreTasks.store.find( 
-        SC.Query.create({ recordType: CoreTasks.Task, localOnly: YES })));
-    }
-
-    if (!CoreTasks.get('allProjects')) {
-      CoreTasks.set('allProjects', CoreTasks.store.find(
-        SC.Query.create({ recordType: CoreTasks.Project, orderBy: 'name', localOnly: YES })));
-      this.projectsController.set('content', CoreTasks.get('allProjects'));
-    }
-
-    if (!CoreTasks.get('allWatches')) {
-      CoreTasks.set('allWatches', CoreTasks.store.find(
-        SC.Query.create({ recordType: CoreTasks.Watch, localOnly: YES })));
-    }
- 
     // Set the callbacks.
     var params = {
       successCallback: this._loadDataSuccess.bind(this),
@@ -136,7 +179,7 @@ Tasks.mixin({
 
     // Get the last retrieved cookie.
     var lastRetrievedCookie = SC.Cookie.find('lastRetrieved');
-    var lastRetrieved = null;
+    var lastRetrieved = '';
 
     if (lastRetrievedCookie && lastRetrievedCookie.get) {
       lastRetrieved = lastRetrievedCookie.get('value');
@@ -158,10 +201,12 @@ Tasks.mixin({
       CoreTasks.executeTransientPost('Class/all', methodInvocation, params);
 
     } else if(serverType === Tasks.GAE_SERVER){
-      // Add the lastRetrievedAt timestamp as a GET parameter if applicable.
-      if (SC.typeOf(lastRetrieved) === SC.T_STRING && lastRetrieved.length > 0) {
-        params.queryParams = { lastRetrievedAt: lastRetrieved };
-      }
+      params.queryParams = { 
+        UUID: CoreTasks.getPath('currentUser.id'),
+        ATO: CoreTasks.getPath('currentUser.authToken'),
+        action: 'getRecords',
+        lastRetrievedAt: lastRetrieved
+      };
 
       CoreTasks.executeTransientGet('records', undefined, params);
     } else {
@@ -200,53 +245,6 @@ Tasks.mixin({
       SC.RunLoop.end();
     }
  
-    // Set the current logged on user
-    var currentUser = CoreTasks.getUser(this.loginName);
-    if (currentUser) {
-      
-      if(CoreTasks.loginTime) {
-        
-        // Greet user and save login session information
-        CoreTasks.set('currentUser', currentUser);
-        CoreTasks.setPermissions();
-        var welcomeMessage = Tasks.getPath('mainPage.mainPane.welcomeMessage');
-        welcomeMessage.set('toolTip', "_LoginSince".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
-        
-        // Based on user's role set up appropriate task filter
-        var role = currentUser.get('role');
-        if(role === CoreTasks.USER_ROLE_DEVELOPER) { // Set assignee selection filter to current user
-          Tasks.showCurrentUserTasks();
-        }
-        
-      }
-    }
-    else {
-      SC.AlertPane.error ('System Error', 'Logged in user no longer exists!');
-    }
-    
-    // Create system projects
-    if(!CoreTasks.get('allTasksProject')) {
-      var allTasksProject = CoreTasks.createRecord(CoreTasks.Project, {
-        name: CoreTasks.ALL_TASKS_NAME.loc()
-      });
-      CoreTasks.set('allTasksProject', allTasksProject);
-      CoreTasks.set('needsSave', NO);
-    }
-    if(!CoreTasks.get('unallocatedTasksProject')) {
-      var unallocatedTasksProject = CoreTasks.createRecord(CoreTasks.Project, {
-        name: CoreTasks.UNALLOCATED_TASKS_NAME.loc()
-      });
-      CoreTasks.set('unallocatedTasksProject', unallocatedTasksProject);
-      CoreTasks.set('needsSave', NO);
-    }
-    if(!CoreTasks.get('unassignedTasksProject')) {
-      var unassignedTasksProject = CoreTasks.createRecord(CoreTasks.Project, {
-        name: CoreTasks.UNASSIGNED_TASKS_NAME.loc()
-      });
-      CoreTasks.set('unassignedTasksProject', unassignedTasksProject);
-      CoreTasks.set('needsSave', NO);
-    }
-    
     // Select default project if one is specified
     if(CoreTasks.loginTime) {
       var defaultProject = CoreTasks.get('allTasksProject');
