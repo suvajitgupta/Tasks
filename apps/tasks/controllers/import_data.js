@@ -144,7 +144,7 @@ Tasks.importDataController = SC.ObjectController.create(
             // console.log('Description:\t' + description);
           }
           
-          var projectRecord = CoreTasks.getProject(projectHash.name);
+          var projectRecord = CoreTasks.getProjectByName(projectHash.name);
           if(projectRecord) { // existing project - switch to it
             if(CoreTasks.getPath('currentUser.role') !== CoreTasks.USER_ROLE_GUEST) currentProject = projectRecord;
           }

@@ -1,4 +1,4 @@
-/*globals CoreTasks */
+/*globals CoreTasks SCUDS */
 
 /**
  * The core object of the Tasks framework.
@@ -111,12 +111,33 @@ CoreTasks = SC.Object.create({
   },
 
   /**
+   * Get project for a given id (if it exists).
+   *
+   * @param {String} project id.
+   * @returns {Object) return project of given id if it exists, null otherwise.
+   */
+  getProjectById: function(id) {
+    if (!this.allProjects) return null;
+    var projectId = '' + id;
+    var projectsCount = this.allProjects.get('length');
+    var matchingProject = null;
+    for(var i = 0; i < projectsCount; i++) {
+      var project = this.allProjects.objectAt(i);
+      if(('' + project.get('id')) === projectId) {
+        matchingProject = project;
+        break;
+      }
+    }
+    return matchingProject;
+  },
+
+  /**
    * Get project for a given name (if it exists).
    *
    * @param {String} project name.
    * @returns {Object) return project of given name if it exists, null otherwise.
    */
-  getProject: function(name) {
+  getProjectByName: function(name) {
     if (!this.allProjects) return null;
     var projectsCount = this.allProjects.get('length');
     var matchingProject = null;

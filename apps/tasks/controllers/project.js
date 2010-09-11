@@ -58,7 +58,7 @@ Tasks.projectController = SC.ObjectController.create(
      
   }.observes('content'),
   
-  _contentDidChange: function() { // set URL route when a single project is selected
+  _projectSelectionDidChange: function() { // set URL route when a single project is selected
     if(this.getPath('content.length') !== 1) return;
 
     var last = this._project,
@@ -66,13 +66,10 @@ Tasks.projectController = SC.ObjectController.create(
 
     if (cur && cur.firstObject) cur = cur.firstObject();
     if (last !== cur) {
-      // console.log('DEBUG: Switching to project: ' + cur.get('name'));
+      console.log('DEBUG: projectSelectionDidChange() project: ' + cur.get('name'));
       Tasks.deselectTasks();
-      if(cur) {
-        this._project = cur;
-        SC.routes.set('location', CoreTasks.isSystemProject(cur)? '' : ('#select&projectId=#' + cur.get('id')));
-
-      }
+      this._project = cur;
+      SC.routes.set('location', CoreTasks.isSystemProject(cur)? '' : ('#select&projectId=#' + cur.get('id')));
     }
   }.observes('content')
   

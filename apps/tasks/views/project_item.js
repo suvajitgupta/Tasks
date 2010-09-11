@@ -219,7 +219,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
   },
   
   inlineEditorDidEndEditing: function(inlineEditor, finalValue) {
-    if(finalValue !== this._name && CoreTasks.getProject(finalValue)) {
+    if(finalValue !== this._name && CoreTasks.getProjectByName(finalValue)) {
       console.error('There is already a project with this name');
       this.set('isEditing', NO) ;
       this.displayDidChange();

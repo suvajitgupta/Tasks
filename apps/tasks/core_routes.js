@@ -83,7 +83,7 @@ Tasks.mixin( /** @scope Tasks */ {
     
   */
   selectRoute: function(params) {
-    // console.log('DEBUG: selectRoute() loginTime=' + CoreTasks.loginTime + ', projectId=' + params.projectId + ', display=' + params.display + ', filter=' + params.filter + ', search=' + params.search);
+    console.log('DEBUG: selectRoute() loginTime=' + CoreTasks.loginTime + ', projectId=' + params.projectId + ', display=' + params.display + ', filter=' + params.filter + ', search=' + params.search);
     if(!SC.none(params.display) && params.display !== '') {
       params.display = params.display.toLowerCase();
       switch(params.display) {
@@ -115,14 +115,15 @@ Tasks.mixin( /** @scope Tasks */ {
       Tasks.defaultRoute();
     }
     else if(defaultProjectId) {
-      var project = CoreTasks.store.find(CoreTasks.Project, defaultProjectId); // see if such a project exists
+      var project = CoreTasks.getProjectById(defaultProjectId); // see if such a project exists
       if(!project) {
         console.warn('No project of ID #' + defaultProjectId);
         project = CoreTasks.get('allTasksProject');
       }
       if(project !== this.get('defaultProject')) {
         this.set('defaultProject', project);
-        this.projectsController.selectObject(project);
+        var selectedProject = Tasks.projectsController.getPath('selection.firstObject');
+        if(project !== selectedProject) this.projectsController.selectObject(project);
       }
     }
   },

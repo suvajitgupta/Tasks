@@ -215,7 +215,7 @@ Tasks.mixin({
       };
 
       CoreTasks.executeTransientGet('records', undefined, params);
-    } else {
+    } else { // Fixtures mode
       this._loadDataSuccess();
     }
 
@@ -255,14 +255,11 @@ Tasks.mixin({
     if(CoreTasks.loginTime) {
       var defaultProject = CoreTasks.get('allTasksProject');
       var defaultProjectId = this.get('defaultProjectId');
+      console.log('DEBUG: loadDataSuccess() defaultProjectId=' + defaultProjectId);
       if(defaultProjectId) { // if specified via a Route
-        var project = CoreTasks.store.find(CoreTasks.Project, defaultProjectId); // see if such a project exists
-        if(project)  {
-          defaultProject = project;
-        }
-        else {
-          console.warn('No project of ID #' + defaultProjectId);
-        }
+        var project = CoreTasks.getProjectById(defaultProjectId); // see if such a project exists
+        if(project) defaultProject = project;
+        else console.warn('No project of ID #' + defaultProjectId);
       }
       this.set('defaultProject', defaultProject);
       this.projectsController.selectObject(defaultProject);
