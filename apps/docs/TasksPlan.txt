@@ -121,7 +121,7 @@ v Add Task context menu with options: Add, Duplicate, Delete; All Task Attribute
 User Manager GUI @Active
 ^ Add login screen to identify user who logs in (and handle login failures properly) [SG] <SE> @Done %Passed $Feature
 - Add password to Login, Guest Signup, and User Manager screens (save in encrypted format) [SG] <JH2> $Feature @Done %Passed
-- Allow new guests to sign up from login screen and log them in immediately after [JH2] <SG> @Done %Passed $Feature
+- Allow new guests to sign up from login screen and return them to login screen immediately after [JH2] <SG> @Done %Passed $Feature
 - Set assignee selection filter to logged in user if they are a Developer [SG] @Done $Feature %Passed
 ^ Add "Users/Settings" actions menu/popup embedding User Manager with buttons to add/delete users at bottom [SG] <JH2> @Done %Passed $Feature
 | Copy over Role attribute of first selected User to new User
@@ -152,8 +152,9 @@ Application Manager GUI @Active
 - Turn off notifications during importing [SG] @Done $Feature %Passed
 - Add "Export" menu items in actions menu with associated pop up panels, allowing user to choose between Text/HTML formats [SG] @Done $Feature %Passed
 | When on "All Tasks" project with no filters on all Project data is exported, otherwise only displayed data is exported
-- Add "Exort to HTML" capability for printable & human-readable version [SG] $Feature @Done %Passed
+- Add "Export to HTML" capability for printable & human-readable version [SG] $Feature @Done %Passed
 | Useful for emailing and to store a baseline of Tasks
+- Support drag-and-drop file import <MB> [SG] $Feature
 - Add online "Help" menu item in actions menu and popup help window [SG] @Done %Passed $Feature
 v Add online training video using QuickTime [SG] $Feature @Done
 | http://www.youtube.com/watch?v=6egjJw_RS1g

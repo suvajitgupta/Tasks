@@ -40,11 +40,9 @@ Tasks.SIGNUP = SC.Responder.create({
     var unhashedPassword = Tasks.signupController.get('unhashedPassword');
     Tasks.signupController.set('password', Tasks.userController.hashPassword(unhashedPassword));
     Tasks.saveData();
-    
-    // Login new user
     Tasks.signupController.set('content', null);
     Tasks.getPath('signupPage.mainPane').remove();
-    Tasks.authenticationSuccess();
+    Tasks.resetWindowLocation();
   },
   
   // called when the Cancel button is pressed

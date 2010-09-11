@@ -383,39 +383,39 @@ Tasks.mixin({
         SC.Object.create({
           alertPaneDidDismiss: function(pane, status) {
             if(status === SC.BUTTON1_STATUS) {
-              Tasks.saveAndExit();
+              Tasks._saveAndExit();
             }
             else if(status === SC.BUTTON2_STATUS){
-              Tasks.exitNoSave();
+              Tasks._exitNoSave();
             }
           }
         })
       );
     }
     else {
-      this.exitNoSave();
+      this._exitNoSave();
     }
   },
   
   /**
    * Save all changes before exiting application.
    */
-  saveAndExit: function() {
+  _saveAndExit: function() {
     CoreTasks.saveChanges();
-    this.restart();
+    this._restart();
   },
   
   /**
    * Exit application without saving changes.
    */
-  exitNoSave: function() {
-    this.restart();
+  _exitNoSave: function() {
+    this._restart();
   },
   
   /**
    * Restart application - invoked at logout and for a route to a new project.
    */
-  restart: function() {
+  _restart: function() {
     // console.log('DEBUG: reset()');
     if(Tasks.get('serverType') === Tasks.GAE_SERVER) {
       var params = {
@@ -426,7 +426,7 @@ Tasks.mixin({
       CoreTasks.executeTransientPost('logout?id=' + CoreTasks.getPath('currentUser.id'), null, params);
     }
     else {
-      this._resetWindowLocation();
+      this.resetWindowLocation();
     }
   },
   
@@ -435,17 +435,17 @@ Tasks.mixin({
    */
   _logoutSuccess: function(response) {
     // console.log('DEBUG: Logout succeeded on Server');
-    this._resetWindowLocation();
+    this.resetWindowLocation();
   },
   /**
    * Called after failed logout.
    */
   _logoutFailure: function(response) {
     console.error('Logout failed on Server');
-    this._resetWindowLocation();
+    this.resetWindowLocation();
   },
   
-  _resetWindowLocation: function() {
+  resetWindowLocation: function() {
     window.location = Tasks.getBaseUrl(); // restart application
   },
 
