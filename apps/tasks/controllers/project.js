@@ -69,7 +69,9 @@ Tasks.projectController = SC.ObjectController.create(
       console.log('DEBUG: projectSelectionDidChange() project: ' + cur.get('name'));
       Tasks.deselectTasks();
       this._project = cur;
-      SC.routes.set('location', CoreTasks.isSystemProject(cur)? '' : ('#select&projectId=#' + cur.get('id')));
+      var oldRoute = '#' + SC.routes.get('location');
+      var newRoute = CoreTasks.isSystemProject(cur)? '' : ('#select&projectId=#' + cur.get('id'));
+      if(newRoute !== oldRoute) SC.routes.set('location', newRoute);
     }
   }.observes('content')
   
