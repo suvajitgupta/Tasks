@@ -29,7 +29,7 @@ Tasks.usersController = SC.ArrayController.create(
     if(users) {
       var editableUsers = []; // based on role, only current user or all users are available in User Manager
       var currentUser = CoreTasks.get('currentUser');
-      if(!currentUser) currentUser = CoreTasks.getUser(Tasks.get('loginName')); // at startup time
+      if(!currentUser) currentUser = CoreTasks.getUserByLoginName(Tasks.get('loginName')); // at startup time
       if(currentUser) {
         var isCurrentUserAManager = (currentUser.get('role') === CoreTasks.USER_ROLE_MANAGER);
         if(isCurrentUserAManager) {

@@ -120,7 +120,7 @@ Tasks.mixin({
 
         var currentUser = null;
         if(SC.none(response)) {
-          currentUser = CoreTasks.getUser(Tasks.get('loginName'));
+          currentUser = CoreTasks.getUserByLoginName(Tasks.get('loginName'));
         }
         else {
           // Set the current logged on user

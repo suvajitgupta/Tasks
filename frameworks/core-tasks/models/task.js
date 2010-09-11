@@ -109,7 +109,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
       
       if(taskHash.submitterId) {
         var submitterNone = (taskHash.submitterId.toLowerCase() === CoreTasks.USER_NONE);
-        var submitterUser = submitterNone? null : CoreTasks.getUser(taskHash.submitterId);
+        var submitterUser = submitterNone? null : CoreTasks.getUserByLoginName(taskHash.submitterId);
         if (!submitterNone && !submitterUser) {
           console.warn('Task Editing Error - no such submitter: ' + taskHash.submitterId);
         }
@@ -122,7 +122,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
       
       if(taskHash.assigneeId) {
         var assigneeNone = (taskHash.assigneeId.toLowerCase() === CoreTasks.USER_NONE);
-        var assigneeUser = assigneeNone? null : CoreTasks.getUser(taskHash.assigneeId);
+        var assigneeUser = assigneeNone? null : CoreTasks.getUserByLoginName(taskHash.assigneeId);
         if (!assigneeNone && !assigneeUser) {
           console.warn('Task Editing Error - no such assignee: ' + taskHash.assigneeId);
         }

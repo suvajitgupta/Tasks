@@ -46,7 +46,7 @@ CoreTasks.User = CoreTasks.Record.extend({
         console.warn('This login name is reserved');
         value = this.readAttribute('loginName');
       }
-      else if(CoreTasks.getUser(value)) { // see if this loginName is already taken
+      else if(CoreTasks.getUserByLoginName(value)) { // see if this loginName is already taken
         console.error('This user login name is already taken: ' + value);
         value = this.readAttribute('loginName');
       }

@@ -282,7 +282,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
               assigneeSelectionDisplayNames.push(CoreTasks.USER_UNASSIGNED);
             }
             else {
-              var selectedAssigneeUsers = CoreTasks.getUsers(assigneeSelectionName);
+              var selectedAssigneeUsers = CoreTasks.getUsersMatchingName(assigneeSelectionName);
               if (selectedAssigneeUsers.length > 0) {
                 for (j = 0; j < selectedAssigneeUsers.length; j++) {
                   assigneeSelectionDisplayNames.push(selectedAssigneeUsers[j].get('displayName'));
@@ -307,7 +307,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
               submitterSelectionDisplayNames.push(CoreTasks.USER_UNASSIGNED);
             }
             else {
-              var selectedSubmitterUsers = CoreTasks.getUsers(submitterSelectionName);
+              var selectedSubmitterUsers = CoreTasks.getUsersMatchingName(submitterSelectionName);
               if (selectedSubmitterUsers.length > 0) {
                 for (j = 0; j < selectedSubmitterUsers.length; j++) {
                   submitterSelectionDisplayNames.push(selectedSubmitterUsers[j].get('displayName'));

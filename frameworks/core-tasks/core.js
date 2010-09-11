@@ -76,7 +76,7 @@ CoreTasks = SC.Object.create({
    * @param {String} user's login name.
    * @returns {Object} user record, if matching one exists, or null.
    */
-  getUser: function(loginName) {
+  getUserByLoginName: function(loginName) {
     if (!this.allUsers) return null;
     var usersCount = this.allUsers.get('length');
     var matchingUser = null;
@@ -96,14 +96,14 @@ CoreTasks = SC.Object.create({
    * @param {String} string to match loginName exactly or name partially.
    * @returns {Array} array of user records, if matching ones exist, or empty array.
    */
-  getUsers: function(loginName) {
+  getUsersMatchingName: function(name) {
     if (!this.allUsers) return [];
     var usersCount = this.allUsers.get('length');
-    var namePattern = new RegExp(loginName);
+    var namePattern = new RegExp(name);
     var matchingUsers = [];
     for(var i = 0; i < usersCount; i++) {
       var user = this.allUsers.objectAt(i);
-      if(user.get('loginName') === loginName || user.get('name').match(namePattern)) {
+      if(user.get('loginName') === name || user.get('name').match(namePattern)) {
         matchingUsers.push(user);
       }
     }

@@ -66,7 +66,7 @@ Tasks.importDataController = SC.ObjectController.create(
           // console.log ('Task:\t\t' + JSON.stringify(taskHash));
 
           if(taskHash.assigneeId) {
-          var assigneeUser = CoreTasks.getUser(taskHash.assigneeId);
+          var assigneeUser = CoreTasks.getUserByLoginName(taskHash.assigneeId);
             if (assigneeUser) {
               taskHash.assigneeId = assigneeUser.get('id');
             }
@@ -81,7 +81,7 @@ Tasks.importDataController = SC.ObjectController.create(
           }
 
           if(taskHash.submitterId) {
-            var submitterUser = CoreTasks.getUser(taskHash.submitterId);
+            var submitterUser = CoreTasks.getUserByLoginName(taskHash.submitterId);
             if (submitterUser) {
               taskHash.submitterId = submitterUser.get('id');
             }
