@@ -377,6 +377,7 @@ Tasks.mainPage = SC.Page.design({
         	*/
           render: function(context, firstTime) {
           	
+            sc_super();
             // console.log('DEBUG: Tasks Detail render(), editorPoppedUp=' + Tasks.editorPoppedUp);
             if(CoreTasks.loginTime) return;
             var sel = Tasks.projectsController.getPath('selection');
@@ -417,7 +418,6 @@ Tasks.mainPage = SC.Page.design({
             context.removeClass('helper-add-tasks');
             context.removeClass('helper-display-mode');
             context.removeClass('helper-adjust-filter');
-            sc_super();
           }
                     
         }),

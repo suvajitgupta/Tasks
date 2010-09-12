@@ -101,29 +101,28 @@ Tasks.mixin({
             SC.Query.create({ recordType: CoreTasks.User, orderBy: 'name', localOnly: YES })));
           this.usersController.set('content', CoreTasks.get('allUsers'));
         }
-
         if (!CoreTasks.get('allTasks')) {
           CoreTasks.set('allTasks', CoreTasks.store.find( 
             SC.Query.create({ recordType: CoreTasks.Task, localOnly: YES })));
         }
-
         if (!CoreTasks.get('allProjects')) {
           CoreTasks.set('allProjects', CoreTasks.store.find(
             SC.Query.create({ recordType: CoreTasks.Project, orderBy: 'name', localOnly: YES })));
           this.projectsController.set('content', CoreTasks.get('allProjects'));
         }
-
         if (!CoreTasks.get('allWatches')) {
           CoreTasks.set('allWatches', CoreTasks.store.find(
             SC.Query.create({ recordType: CoreTasks.Watch, localOnly: YES })));
         }
+        this._selectDefaultProject(false);
 
+
+        // Setup current logged on user
         var currentUser = null;
         if(SC.none(response)) {
           currentUser = CoreTasks.getUserByLoginName(Tasks.get('loginName'));
         }
         else {
-          // Set the current logged on user
           SC.RunLoop.begin();
           CoreTasks.store.loadRecords(CoreTasks.User, response);
           SC.RunLoop.end();
@@ -250,22 +249,11 @@ Tasks.mixin({
       }
       SC.RunLoop.end();
     }
- 
-    // Select default project if one is specified
     if(CoreTasks.loginTime) {
-      var defaultProject = CoreTasks.get('allTasksProject');
-      var defaultProjectId = this.get('defaultProjectId');
-      console.log('DEBUG: loadDataSuccess() defaultProjectId=' + defaultProjectId);
-      if(defaultProjectId) { // if specified via a Route
-        var project = CoreTasks.getProjectById(defaultProjectId); // see if such a project exists
-        if(project) defaultProject = project;
-        else console.warn('No project of ID #' + defaultProjectId);
-      }
-      this.set('defaultProject', defaultProject);
-      this.projectsController.selectObject(defaultProject);
+      if(this.get('defaultProjectId')) this._selectDefaultProject(true);
       CoreTasks.loginTime = false;
     }
-    
+ 
     // Indicate data loading completion on status bar
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('icon', '');
@@ -289,6 +277,27 @@ Tasks.mixin({
       default:
         this._logActionNotHandled('dataLoadFailure', 'a', this.state.a);  
     }
+  },
+  
+  /**
+   * Select default project if one is specified via a Route
+   */
+  _selectDefaultProject: function(warnIfMissing) {
+    var defaultProject = CoreTasks.get('allTasksProject');
+    var defaultProjectId = this.get('defaultProjectId');
+    // console.log('DEBUG: selectDefaultProject() defaultProjectId=' + defaultProjectId);
+    if(defaultProjectId) { // if specified via a Route
+      var project = CoreTasks.getProjectById(defaultProjectId); // see if such a project exists
+      if(project) {
+        defaultProject = project;
+        this.set('defaultProjectId', null);
+      }
+      else if(warnIfMissing) {
+        console.warn('No project of ID #' + defaultProjectId);
+      }
+    }
+    this.set('defaultProject', defaultProject);
+    this.projectsController.selectObject(defaultProject);
   },
   
   /**

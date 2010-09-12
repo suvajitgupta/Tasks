@@ -83,7 +83,7 @@ Tasks.mixin( /** @scope Tasks */ {
     
   */
   selectRoute: function(params) {
-    console.log('DEBUG: selectRoute() loginTime=' + CoreTasks.loginTime + ', projectId=' + params.projectId + ', display=' + params.display + ', filter=' + params.filter + ', search=' + params.search);
+    // console.log('DEBUG: selectRoute() loginTime=' + CoreTasks.loginTime + ', projectId=' + params.projectId + ', display=' + params.display + ', filter=' + params.filter + ', search=' + params.search);
     if(!SC.none(params.display) && params.display !== '') {
       params.display = params.display.toLowerCase();
       switch(params.display) {
