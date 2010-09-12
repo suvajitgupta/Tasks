@@ -17,11 +17,10 @@ cd frameworks
 git clone git://github.com/etgryphon/sproutcore-ui.git scui
 git clone git://github.com/etgryphon/sproutcore-uds.git scuds
 
-git clone git://github.com/sproutit/sproutcore.git sproutcore
-cd sproutcore
-git reset --hard 725c490576519f26ab6f09195718750583920039
+git clone git://github.com/suvajitgupta/sproutcore.git
 
 # if you want to play with the 'touch' version
+cd sproutcore
 git branch --track touch remotes/origin/quilmes
 git checkout touch
 
