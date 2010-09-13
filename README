@@ -21,7 +21,9 @@ git clone git://github.com/suvajitgupta/sproutcore.git
 
 # if you want to play with the 'touch' version
 cd sproutcore
-git branch --track touch remotes/origin/quilmes
+git remote add upstream http://github.com/sproutit/sproutcore.git
+git fetch upstream
+git branch --track touch upstream/quilmes
 git checkout touch
 
 cd ../../
