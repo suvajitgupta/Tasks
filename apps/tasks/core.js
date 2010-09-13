@@ -89,14 +89,6 @@ SCUI.ComboBoxView.prototype.dropDownButtonView = SC.View.extend( SCUI.SimpleButt
   layout: { top: 0, right: 0, height: 24, width: 28 }
 });
 
-// FIXME: [SC] hack to workaround TreeController multi-selection bugs in SC ToT
-// FIXME: [SC] after multi-selected items are dragged and dropped in another group, selection is not preserved
-SC.TreeController = SC.TreeController.extend({
-  arrangedObjectsDidChange: function() {
-    this.get('arrangedObjects').set('allowsMultipleSelection', YES);
-  }.observes('arrangedObjects')
-});
-
 /**
   A Standard Binding transform to localize a string in a binding.
 */
