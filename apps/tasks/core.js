@@ -13,16 +13,6 @@
 /*globals Tasks CoreTasks sc_require */
 sc_require('statechart');
 
-// FIXME: [SG] remove hacks when switching to SC ToT where logicalAnd() has been replaced with and()
-(function() {
-  if (SC.Binding.logicalAnd) {
-    SC.Binding.and = SC.Binding.logicalAnd;
-  }
-  else if (SC.Binding.and) {
-    SC.Binding.logicalAnd = SC.Binding.and;
-  }
-})();
-
 Tasks = SC.Object.create(SC.Statechart,
   /** @scope Tasks.prototype */ {
 

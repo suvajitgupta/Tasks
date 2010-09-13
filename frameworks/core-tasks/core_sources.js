@@ -1,4 +1,4 @@
-/*globals CoreTasks sc_require */
+/*globals CoreTasks sc_require SCUDS */
 
 /**
  * An extension of the SC.DataSource class that acts as a proxy between the data store and the
@@ -43,7 +43,7 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
       throw 'Error retrieving records: Unable to retrieve resource path from record type.';
     }
 
-    // FIXME [SC]: Fix unnecessary fetch of all tasks after a project name is changed for the
+    // FIXME: [SC] fix unnecessary fetch of all tasks after a project name is changed for the
     // first time.
     // console.log('DEBUG: fetch(): query=' + query.toString());
 
@@ -433,13 +433,13 @@ CoreTasks.LocalDataSource = SCUDS.LocalDataSource.extend({
    *
    * Order of preference: orion_webkit -> orion_dom (default)
    *
-   * TODO: [SE] Rename from "orion_*" to something more generic.
+   * TODO: [SE] rename from "orion_*" to something more generic.
    */
   storageMethod: function() {
     var ret = 'orion_dom';
 
     if (this._supportsSqlStorage()) {
-      // TODO: Revert to 'orion_webkit' when it's working.
+      // TODO: [SE] revert to 'orion_webkit' when it's working.
       ret = 'orion_dom';
     } else if (this._supportsLocalStorage()) {
       ret = 'orion_dom';
