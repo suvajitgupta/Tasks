@@ -24,6 +24,9 @@ v A low priority, planned, feature not assigned to anyone is expected to take a 
 
 Project Two With a Long Name That Will Take One Week {3d} # Has 7 tasks
 
+# Josh Holt (JH2) # Has 1 tasks
+^ A high priority bug Josh is working on that will take 3 days to fix {3d} [JH2] @Active
+
 # Sean Eidemiller (SE) # Has 1 tasks
 - A medium priority, other, task assigned to Sean completed in a couple of hours {2h} [SE] @Done
 
