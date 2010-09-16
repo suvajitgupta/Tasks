@@ -6,7 +6,7 @@ sc_require('core');
 
 /** @static
     
-  @extends SC.PanelPane
+  @extends SC.SheetPane
   @author Suvajit Gupta
   
   Filter Panel
