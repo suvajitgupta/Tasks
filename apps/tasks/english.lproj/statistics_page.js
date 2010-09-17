@@ -1,13 +1,13 @@
 // ==========================================================================
 // Tasks.statisticsPane
 // ==========================================================================
-/*globals Tasks CoreTasks sc_require */
+/*globals Tasks CoreTasks sc_require Sai */
 sc_require('core');
 
 
 /** @static
     
-  @extends SC.PanelPane
+  @extends SC.ModalPane
   @author Suvajit Gupta
   
   Filter Panel
@@ -20,33 +20,32 @@ Tasks.statisticsPane = SCUI.ModalPane.extend({
   title: "_Statistics".loc(),
   titleIcon: 'statistics-icon',
   titleBarHeight: 40,
-  layout: { centerX: 0, centerY: 0, height: Tasks.softwareMode? 220 : 190, width: 650 },
+  layout: { centerX: 0, centerY: 0, height: Tasks.softwareMode? 300 : 270, width: 650 },
   classNames: ['statistics-pane'],
   
   contentView: SC.View.design({
     
-    childViews: 'statistics closeButton'.w(),
+    childViews: 'statisticsTabs closeButton'.w(),
     
-    statistics: SC.LabelView.design({
-      layout: { top: 10, left: 10, right: 10, bottom: 10 },
-      textAlign: SC.ALIGN_CENTER,
-      controlSize: SC.SMALL_CONTROL_SIZE,
-      escapeHTML: NO,
-      valueBinding: 'Tasks.assignmentsController.statistics'
+    statisticsTabs: SC.TabView.design({
+  		layout: { top: 10, left: 10, right: 10, bottom: 40 },
+      nowShowing: 'Tasks.graphicalStatisticsPage.mainView', 
+      items: [
+        { title: "_Graphical".loc(), value: 'Tasks.graphicalStatisticsPage.mainView' },
+        { title: "_Numerical".loc(), value: 'Tasks.numericalStatisticsPage.mainView' }
+      ],
+      itemTitleKey: 'title',
+      itemValueKey: 'value'
     }),
-      
+    
     closeButton: SC.ButtonView.design({
       layout: { bottom: 10, right: 10, width: 80, height: 24 },
       isDefault: YES,
       title: "_Close".loc(),
-      action: 'remove'
+      target: 'Tasks.statisticsController',
+      action: 'closePanel'
     })
         
-  }),
+  })
   
-  remove: function() {
-    sc_super();
-    Tasks.assignmentsController.closePanel();
-  }
-      
 });

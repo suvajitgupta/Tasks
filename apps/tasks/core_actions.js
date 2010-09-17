@@ -126,7 +126,7 @@ Tasks.mixin({
           SC.RunLoop.begin();
           CoreTasks.store.loadRecords(CoreTasks.User, response);
           SC.RunLoop.end();
-          currentUser = CoreTasks.store.find(CoreTasks.User, response[0].id);
+          currentUser = CoreTasks.getUserByLoginName(response[0].loginName);
         }
 
         // Greet user and save login session information
@@ -552,7 +552,7 @@ Tasks.mixin({
    * Popup Project Statistics panel.
    */
   viewStatistics: function() {
-    Tasks.assignmentsController.showStatistics();  
+    Tasks.statisticsController.showStatistics();  
   },
   
   /**

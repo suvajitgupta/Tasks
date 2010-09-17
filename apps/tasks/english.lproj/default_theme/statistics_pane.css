@@ -7,9 +7,7 @@
 */
 
 .statistics-pane table {
-  border: 1px solid gray !important;
-  border-collapse: separate !important;
-  margin: 0px !important;
+  margin-top: 5px !important;
 }
 
 .statistics-pane td.title {

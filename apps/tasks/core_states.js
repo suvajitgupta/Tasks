@@ -23,7 +23,7 @@ Tasks.mixin({
     Tasks.loadData();
   },
 
-  // Project/Task Management
+  // GUI Running
   goStateA4: function() {
   }
 

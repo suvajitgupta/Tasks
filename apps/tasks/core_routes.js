@@ -50,15 +50,12 @@ Tasks.mixin( /** @scope Tasks */ {
   viewRoute: function(params) {
     // console.log('DEBUG: viewRoute() search=' + params.search);
     Tasks._closeMainPage();
-    if(SC.none(params.search) || params.search === '') {
-      console.warn('Missing task search for URL routing');
-    }
-    else {
-      // Enter the statechart.
-      Tasks.goState('a', 1);
-      Tasks.authenticate('guest', '');
+    if(!SC.none(params.search) && params.search !== '') {
       Tasks.assignmentsController.set('searchFilter', params.search);
     }
+    // Enter the statechart.
+    Tasks.goState('a', 1);
+    Tasks.authenticate('guest', '');
   },
   
   /**
@@ -132,7 +129,7 @@ Tasks.mixin( /** @scope Tasks */ {
     The catch-all case when no routes are specified
   */
   defaultRoute: function(params) {
-    if(CoreTasks.loginTime) {
+    if(CoreTasks.loginTime && SC.none(Tasks.state.a)) {
       // Enter the statechart.
       Tasks.goState('a', 1);
       Tasks.loginController.openPanel();
