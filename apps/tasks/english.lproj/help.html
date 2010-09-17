@@ -100,10 +100,10 @@
 			<p>Choose "Statistics..." in the actions menu to get a popup dialog summarizing statistics about the displayed tasks.  This is quite useful in seeing how tasks are broken up by their attributes.</p>
 		<h3>URL Parameters</h3>
 			<p><app>tasks</app> allows you to choose your default project (which is selected at startup), display mode, and filter/search criteria by specifying or bookmarking an URL with additional parameters (replace items in CAPS with your specifics):</p>
-			<pre style="margin-left: 50px">http://HOST:PORT/tasks#select&amp;projectId=#ID&amp;display=MODE&amp;filter=FILTER&amp;search=SEARCH</pre>
-			<p>MODE may be <i>team</i> or <i>tasks</i>.  FILTER may be one of the following values: <i>showstoppers</i>, <i>troubled</i>, <i>unfinished</i>, <i>unvalidated</i>, and <i>completed</i>.  Also, when you click on any project, the URL is automatically set to a value in the format shown above so that you may bookmark that project and return to it easily.</p>
+			<pre style="margin-left: 50px">http://HOST:PORT/tasks#select&amp;projectId=#ID&amp;display=MODE&amp;filter=QUICKFILTER&amp;search=PATTERN</pre>
+			<p>MODE may be <i>team</i> or <i>tasks</i>.  QUICKFILTER may be one of the following values: <i>showstoppers</i>, <i>troubled</i>, <i>unfinished</i>, <i>unvalidated</i>, and <i>completed</i>.  PATTERN is any legal search pattern described above.  Also, when you click on any project, the URL is automatically set to a value in the format shown above so that you may bookmark that project and return to it easily.</p>
 			<p>You can also view specific tasks using an URL like this (replace items in CAPS with your specifics) - this is useful for sending links to people via email (user is logged in automatically as 'guest'):</p>
-			<pre style="margin-left: 50px">http://HOST:PORT/tasks#view&amp;search=#ID</pre>
+			<pre style="margin-left: 50px">http://HOST:PORT/tasks#view&amp;search=PATTERN</pre>
 		<h3>Data Exchange</h3>
 			<p><app>tasks</app> allows data to be exchanged via a simple import/export mechanism.  Choose "Import" in the actions menu to bring data into the application.  Check the box at the bottom left of the Import panel to automatically create new users for unknown assignees/submitters found during importing.  Choose one of two "Export" options from the actions menu: (1) "Text"  is used to output <app>tasks</app> data to another installation of the application or some other system and (2) "HTML" is used to view the data as a Web page and to print it (especially if you have multiple pages worth of tasks).</p>
 		<h3>Bulk Data Entry</h3>

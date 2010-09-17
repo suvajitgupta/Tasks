@@ -3,6 +3,8 @@
 // ==========================================================================
 /*globals Tasks Sai */
 
+Tasks.AXIS_COLOR = '#666';
+
 /** @static
     
   @extends SC.Page
@@ -29,7 +31,7 @@ Tasks.graphicalStatisticsPage = SC.Page.create({
       }),
       priorityStatisticsChart: Sai.BarChartView.design({
         layout: { top: 0, left: 200, width: 200, bottom: 0 },
-        dataAttrs: { horizontal: NO, barWidth: 25, color: 'grey' }
+        dataAttrs: { horizontal: NO, barWidth: 25, color: Tasks.AXIS_COLOR }
       }),
       statusStatisticsChart: Sai.BarChartView.design({
         layout: { top: 0, left: 400, width: 220, bottom: 0 },
@@ -52,20 +54,20 @@ Tasks.graphicalStatisticsPage = SC.Page.create({
           this.setPath('tasksStatistics.isVisible', YES);
           this.setPath('teamStatistics.isVisible', NO);
           this.setPath('tasksStatistics.typeStatisticsChart.data', [ stats.featureCount, stats.bugCount, stats.otherCount ]);
-          this.setPath('tasksStatistics.typeStatisticsChart.xaxis', { color: 'grey', labelAttrs: {offset: -5},
+          this.setPath('tasksStatistics.typeStatisticsChart.xaxis', { color: Tasks.AXIS_COLOR, labelAttrs: {offset: -5, fontSize: '9'},
                        labels: [ "_Feature".loc(), "_Bug".loc(), "_Other".loc() ] });
           // FIXME: [EG] make Sai support min/max settings for axes
-          this.setPath('tasksStatistics.typeStatisticsChart.yaxis', { color: 'grey', labelAttrs: {offset: -5}, buffer: 0.10, labels: YES,
+          this.setPath('tasksStatistics.typeStatisticsChart.yaxis', { color: Tasks.AXIS_COLOR, labelAttrs: {offset: -5, fontSize: '9'}, buffer: 0.1, labels: YES,
                        step: this._computeRange(this.getPath('tasksStatistics.typeStatisticsChart.data')) });
           this.setPath('tasksStatistics.priorityStatisticsChart.data', [ stats.highCount, stats.mediumCount, stats.lowCount ]);
-          this.setPath('tasksStatistics.priorityStatisticsChart.xaxis', { color: 'grey', labelAttrs: {offset: -5},
+          this.setPath('tasksStatistics.priorityStatisticsChart.xaxis', { color: Tasks.AXIS_COLOR, labelAttrs: {offset: -5, fontSize: '9'},
                         labels: [ "_High".loc(), "_Medium".loc(), "_Low".loc() ] });
-          this.setPath('tasksStatistics.priorityStatisticsChart.yaxis', { color: 'grey', labelAttrs: {offset: -5}, buffer: 0.10, labels: YES,
+          this.setPath('tasksStatistics.priorityStatisticsChart.yaxis', { color: Tasks.AXIS_COLOR, labelAttrs: {offset: -5, fontSize: '9'}, buffer: 0.1, labels: YES,
                        step: this._computeRange(this.getPath('tasksStatistics.priorityStatisticsChart.data')) });
           this.setPath('tasksStatistics.statusStatisticsChart.data', [ stats.plannedCount, stats.activeCount, stats.doneCount, stats.riskyCount ]);
-          this.setPath('tasksStatistics.statusStatisticsChart.xaxis', { color: 'grey', labelAttrs: {offset: -5},
+          this.setPath('tasksStatistics.statusStatisticsChart.xaxis', { color: Tasks.AXIS_COLOR, labelAttrs: {offset: -5, fontSize: '9'},
                         labels: [ "_Planned".loc(), "_Active".loc(), "_Done".loc(), "_Risky".loc() ] });
-          this.setPath('tasksStatistics.statusStatisticsChart.yaxis', { color: 'grey', labelAttrs: {offset: -5}, buffer: 0.10, labels: YES,
+          this.setPath('tasksStatistics.statusStatisticsChart.yaxis', { color: Tasks.AXIS_COLOR, labelAttrs: {offset: -5, fontSize: '9'}, buffer: 0.1, labels: YES,
                        step: this._computeRange(this.getPath('tasksStatistics.statusStatisticsChart.data')) });
         }
         else { // displayMode === Tasks.DISPLAY_MODE_TEAM
@@ -73,9 +75,9 @@ Tasks.graphicalStatisticsPage = SC.Page.create({
           this.setPath('teamStatistics.isVisible', YES);
           this.setPath('teamStatistics.loadingStatisticsChart.data',
                        [ stats.notLoadedAssigneesCount, stats.underloadedAssigneesCount, stats.properlyLoadedAssigneesCount, stats.overloadedAssigneesCount ]);
-          this.setPath('teamStatistics.loadingStatisticsChart.yaxis', { color: 'grey', labelAttrs: {offset: -5}, buffer: 0.16,
+          this.setPath('teamStatistics.loadingStatisticsChart.yaxis', { color: Tasks.AXIS_COLOR, labelAttrs: {offset: -5, fontSize: '11'}, buffer: 0.15,
                        labels: [ "_AssigneeNotLoaded".loc(), "_AssigneeUnderLoaded".loc(), "_AssigneeProperlyLoaded".loc(), "_AssigneeOverloaded".loc() ] });
-          this.setPath('teamStatistics.loadingStatisticsChart.xaxis', { color: 'grey', labelAttrs: {offset: -5}, buffer: 0.10, labels: YES,
+          this.setPath('teamStatistics.loadingStatisticsChart.xaxis', { color: Tasks.AXIS_COLOR, labelAttrs: {offset: -5, fontSize: '9'}, buffer: 0.1, labels: YES,
                        step: this._computeRange(this.getPath('teamStatistics.loadingStatisticsChart.data')) });
         }
       }
