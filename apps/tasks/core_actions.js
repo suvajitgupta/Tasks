@@ -5,7 +5,8 @@
  * @author Suvajit Gupta
  * License: Licened under MIT license (see license.js)
  */
-/*globals CoreTasks Tasks sc_require */
+/*globals CoreTasks Tasks sc_require sources
+ */
 
 sc_require('controllers/users');
 sc_require('controllers/tasks');
@@ -72,6 +73,26 @@ Tasks.mixin({
           }
         }
         
+        // Get the last retrieved information from cookie (if available).
+        var lastRetrievedCookie = SC.Cookie.find('lastRetrieved');
+        var lastRetrieved = '';
+        if (lastRetrievedCookie && lastRetrievedCookie.get) {
+          lastRetrieved = lastRetrievedCookie.get('value');
+          if(SC.typeOf(lastRetrieved) === SC.T_STRING && lastRetrieved.length > 0) {
+            var lastRetrievedAt = parseInt(lastRetrieved);
+            var monthAgo = SC.DateTime.create().get('milliseconds') - 30*CoreTasks.MILLISECONDS_IN_DAY;
+            if(isNaN(lastRetrievedAt) || lastRetrievedAt < monthAgo) {
+              console.info('Clearing local data store since its contents are old');
+              lastRetrieved = '';
+            }
+          }
+        }
+        if (lastRetrieved === '') {
+          // Clear out local data store before reloading everything from server
+          sources[0].nuke();
+        }
+        Tasks.set('lastRetrieved', lastRetrieved);
+
         // Create system projects
         if(!CoreTasks.get('allTasksProject')) {
           var allTasksProject = CoreTasks.createRecord(CoreTasks.Project, {
@@ -176,35 +197,22 @@ Tasks.mixin({
     serverMessage.set('icon', 'progress-icon');
     serverMessage.set('value', "_LoadingData".loc());
 
-    // Set the callbacks.
+    // Branch on the server type (Persevere, GAE, fixtures).
+    var lastRetrieved = Tasks.get('lastRetrieved');
     var params = {
       successCallback: this._loadDataSuccess.bind(this),
       failureCallback: this._loadDataFailure.bind(this)
     };
-
-    // Get the last retrieved cookie.
-    var lastRetrievedCookie = SC.Cookie.find('lastRetrieved');
-    var lastRetrieved = '';
-
-    if (lastRetrievedCookie && lastRetrievedCookie.get) {
-      lastRetrieved = lastRetrievedCookie.get('value');
-    }
-
-    // Branch on the server type (Persevere, GAE, fixtures).
     var serverType = Tasks.get('serverType');
-
     if (serverType === Tasks.PERSEVERE_SERVER) {
+      // Determine which function to call based on value of lastRetieved.
       var methodInvocation;
-
-      // Determine which function to call based on presence of last retrieved cookie.
-      if (SC.typeOf(lastRetrieved) === SC.T_STRING && lastRetrieved.length > 0) {
+      if (lastRetrieved !== '') {
         methodInvocation = { method: 'getDelta', id: 'records', params: [lastRetrieved] };
       } else {
         methodInvocation = { method: 'get', id: 'records', params: [] };
       }
-
       CoreTasks.executeTransientPost('Class/all', methodInvocation, params);
-
     } else if(serverType === Tasks.GAE_SERVER){
       params.queryParams = { 
         UUID: CoreTasks.getPath('currentUser.id'),
@@ -212,7 +220,6 @@ Tasks.mixin({
         action: 'getRecords',
         lastRetrievedAt: lastRetrieved
       };
-
       CoreTasks.executeTransientGet('records', undefined, params);
     } else { // Fixtures mode
       this._loadDataSuccess();
@@ -221,6 +228,7 @@ Tasks.mixin({
     // Set the last retrieved cookie.
     lastRetrieved = SC.DateTime.create().get('milliseconds') + '';
     SC.Cookie.create({ name: 'lastRetrieved', value: lastRetrieved }).write();
+    Tasks.set('lastRetrieved', lastRetrieved);
   },
   
   /**
@@ -257,7 +265,7 @@ Tasks.mixin({
     // Indicate data loading completion on status bar
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('icon', '');
-    serverMessage.set('value', "_DataLoaded".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
+    serverMessage.set('value', "_DataLoaded".loc() + SC.DateTime.create(parseInt(Tasks.get('lastRetrieved'))).toFormattedString(CoreTasks.TIME_DATE_FORMAT));
     Tasks.projectsController.refreshCountdowns();
     this.goState('a', 4);
 
