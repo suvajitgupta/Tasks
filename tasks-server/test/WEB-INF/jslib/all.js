@@ -17,23 +17,77 @@ Class({
   },
   
   cleanup: function(timestamp) {
-    var monthAgo = Date.now() - 30*24*60*60*1000;
+    
+    var now = Date.now();
+    
+    // Delete soft-deleted records older than timestamp (if specified) or older than a month
+    var cutoff = timestamp !== undefined? timestamp : now - 30*24*60*60*1000;
     var query = 'status="deleted" & updatedAt<$1';
     var len, i;
-    var users_to_delete = load('user?' + query, monthAgo);
-    for (i = 0, len = users_to_delete.length; i < len; i++) remove(users_to_delete[i]);
-    var projects_to_delete = load('project?' + query, monthAgo);
-    for (i = 0, len = projects_to_delete.length; i < len; i++) remove(projects_to_delete[i]);
-    var tasks_to_delete = load('task?' + query, monthAgo);
-    for (i = 0, len = tasks_to_delete.length; i < len; i++) remove(tasks_to_delete[i]);
-    var watches_to_delete = load('watch?' + query, monthAgo);
-    for (i = 0, len = watches_to_delete.length; i < len; i++) remove(watches_to_delete[i]);
+    var usersToDelete = load('user?' + query, cutoff);
+    for (i = 0, len = usersToDelete.length; i < len; i++) remove(usersToDelete[i]);
+    var projectsToDelete = load('project?' + query, cutoff);
+    for (i = 0, len = projectsToDelete.length; i < len; i++) remove(projectsToDelete[i]);
+    var tasksToDelete = load('task?' + query, cutoff);
+    for (i = 0, len = tasksToDelete.length; i < len; i++) remove(tasksToDelete[i]);
+    var watchesToDelete = load('watch?' + query, cutoff);
+    for (i = 0, len = watchesToDelete.length; i < len; i++) remove(watchesToDelete[i]);
+    
+    // Handle orphaned records:
+    // * non-existent task projectId/submitterId/assigneeId should be set to null
+    // * watches with non-existent taskId/watchId should be soft-deleted
+    // * set updatedAt for all records being modified
+    var updated = false;
+    var projects = load('project/'), projectIds = [];
+    for (i = 0, len = projects.length; i < len; i++) projectIds.push(projects[i].id.replace(/^.*\//, '') * 1);
+    var users = load('user/'), userIds = [];
+    for (i = 0, len = users.length; i < len; i++) userIds.push(users[i].id.replace(/^.*\//, '') * 1);
+    var task, tasks = load('task/'), taskIds = [], tasksUpdated = [];
+    for (i = 0, len = tasks.length; i < len; i++) {
+      updated = false;
+      task = tasks[i];
+      taskIds.push(task.id.replace(/^.*\//, '') * 1);
+      var projectId = task.projectId;
+      if(projectId && projectIds.indexOf(projectId) === -1) {
+        task.projectId = undefined;
+        updated = true;
+      }
+      var submitterId = task.submitterId;
+      if(submitterId && userIds.indexOf(submitterId) === -1) {
+        task.submitterId = undefined;
+        updated = true;
+      }
+      var assigneeId = task.assigneeId;
+      if(assigneeId && userIds.indexOf(assigneeId) === -1) {
+        task.assigneeId = undefined;
+        updated = true;
+      }
+      if(updated) {
+        task.updatedAt = now;
+        tasksUpdated.push(task);
+      }
+    }
+    var watch, watches = load('watch/'), watchesSoftDeleted = [];
+    for (i = 0, len = watches.length; i < len; i++) {
+      watch = watches[i];
+      if(watch.status === 'deleted') continue;
+      if(taskIds.indexOf(watch.taskId) === -1 || userIds.indexOf(watch.userId) === -1) {
+        watch.status = 'deleted';
+        watch.updatedAt = now;
+        watchesSoftDeleted.push(watch);
+      }
+    }
+    
+    // Return all affected records broken down by category
     return {
-      users: users_to_delete,
-      projects: projects_to_delete,
-      tasks: tasks_to_delete,
-      watches: watches_to_delete
+      usersDeleted: usersToDelete,
+      projectsDeleted: projectsToDelete,
+      tasksDeleted: tasksToDelete,
+      watchesDeleted: watchesToDelete,
+      tasksUpdated: tasksUpdated,
+      watchesSoftDeleted: watchesSoftDeleted
     };
+    
   }
   
 });

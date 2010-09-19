@@ -191,7 +191,7 @@ Server/Tools @Active
 | For Task updates, indicate old and new values of attributes
 - Add link to Task in email notification (should not require authentication if user is signed in) <JH2> [SG] $Feature
 - Handle network or Server unavailability gracefully and provide appropriate diagnostics to the user [SG] <SE> @Done %Passed
-- Develop Tasks database cleanup tool (to remove orphaned/old soft-deleted items) <JH2> [SG] @Active
+- Support Tasks database cleanup to remove soft-deleted records and handle pointers to non-existent records <JH2> [SG] @Active
 ^ Convert Tasks into a Jira plugin [JH2] <SG> $Feature
 - Implement bridge to "github issues" from Google App Engine [JH2] <SG> $Feature @Active
 
