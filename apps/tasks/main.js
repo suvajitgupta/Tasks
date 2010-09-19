@@ -31,7 +31,7 @@ Tasks.main = function main() {
     action: 'refreshCountdowns', 
     interval: 60*60*1000, // every hour
     repeats: YES
-  }) ;
+  });
   
 
 };
