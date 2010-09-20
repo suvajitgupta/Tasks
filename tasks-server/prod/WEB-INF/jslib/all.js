@@ -16,6 +16,9 @@ Class({
     };
   },
   
+  // Example command line invocations:
+  // curl -X POST http://localhost:8088/tasks-server/Class/all -d "{ method: 'cleanup', id: 'records', params: [] }"
+  // curl -X POST http://localhost:8088/tasks-server/Class/all -d "{ method: 'cleanup', id: 'records', params: [1282279058109] }"
   cleanup: function(timestamp) {
     
     var now = Date.now();
@@ -80,6 +83,7 @@ Class({
     
     // Return all affected records broken down by category
     return {
+      cutoff: cutoff,
       usersDeleted: usersToDelete,
       projectsDeleted: projectsToDelete,
       tasksDeleted: tasksToDelete,

@@ -16,6 +16,9 @@ Class({
     };
   },
   
+  // Example command line invocations:
+  // curl -X POST http://localhost:8088/tasks-server/Class/all -d "{ method: 'cleanup', id: 'records', params: [] }"
+  // curl -X POST http://localhost:8088/tasks-server/Class/all -d "{ method: 'cleanup', id: 'records', params: [1282279058109] }"
   cleanup: function(timestamp) {
     
     var now = Date.now();
@@ -33,7 +36,7 @@ Class({
     var watchesToDelete = load('watch?' + query, cutoff);
     for (i = 0, len = watchesToDelete.length; i < len; i++) remove(watchesToDelete[i]);
     
-    // Handle orphaned records:
+    // Handle IDs referencing non-existent records:
     // * non-existent task projectId/submitterId/assigneeId should be set to null
     // * watches with non-existent taskId/watchId should be soft-deleted
     // * set updatedAt for all records being modified
@@ -80,6 +83,7 @@ Class({
     
     // Return all affected records broken down by category
     return {
+      cutoff: cutoff,
       usersDeleted: usersToDelete,
       projectsDeleted: projectsToDelete,
       tasksDeleted: tasksToDelete,

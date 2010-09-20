@@ -272,7 +272,7 @@ function (timestamp) {
             watchesSoftDeleted.push(watch);
         }
     }
-    return {usersDeleted:usersToDelete, projectsDeleted:projectsToDelete, tasksDeleted:tasksToDelete, watchesDeleted:watchesToDelete, tasksUpdated:tasksUpdated, watchesSoftDeleted:watchesSoftDeleted};
+    return {cutoff:cutoff, usersDeleted:usersToDelete, projectsDeleted:projectsToDelete, tasksDeleted:tasksToDelete, watchesDeleted:watchesToDelete, tasksUpdated:tasksUpdated, watchesSoftDeleted:watchesSoftDeleted};
 }
 
 		}
