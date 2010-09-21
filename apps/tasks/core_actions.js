@@ -89,7 +89,8 @@ Tasks.mixin({
         }
         if (lastRetrieved === '') {
           // Clear out local data store before reloading everything from server
-          sources[0].nuke();
+//          sources[0].nuke();
+          CoreTasks.store._getDataSource().nukeLocal()
         }
         Tasks.set('lastRetrieved', lastRetrieved);
 
