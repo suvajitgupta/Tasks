@@ -226,20 +226,16 @@ function (timestamp) {
     for (i = 0, len = watchesToDelete.length; i < len; i++) {
         remove(watchesToDelete[i]);
     }
-    var updated = false;
-    var projects = load("project/"), projectIds = [];
-    for (i = 0, len = projects.length; i < len; i++) {
-        projectIds.push(projects[i].id.replace(/^.*\//, "") * 1);
-    }
-    var users = load("user/"), userIds = [];
-    for (i = 0, len = users.length; i < len; i++) {
-        userIds.push(users[i].id.replace(/^.*\//, "") * 1);
-    }
-    var task, tasks = load("task/"), taskIds = [], tasksUpdated = [];
+    var idExtractor = function (record) {
+        return record.id.replace(/^.*\//, "") * 1;
+    };
+    var users = load("user/"), userIds = users.map(idExtractor);
+    var projects = load("project/"), projectIds = projects.map(idExtractor);
+    var tasks = load("task/"), taskIds = tasks.map(idExtractor);
+    var task, tasksUpdated = [];
     for (i = 0, len = tasks.length; i < len; i++) {
-        updated = false;
+        var updated = false;
         task = tasks[i];
-        taskIds.push(task.id.replace(/^.*\//, "") * 1);
         var projectId = task.projectId;
         if (projectId && projectIds.indexOf(projectId) === -1) {
             task.projectId = undefined;
@@ -260,7 +256,7 @@ function (timestamp) {
             tasksUpdated.push(task);
         }
     }
-    var watch, watches = load("watch/"), watchesSoftDeleted = [];
+    var watches = load("watch/"), watch, watchesSoftDeleted = [];
     for (i = 0, len = watches.length; i < len; i++) {
         watch = watches[i];
         if (watch.status === "deleted") {
