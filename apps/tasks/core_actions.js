@@ -82,15 +82,9 @@ Tasks.mixin({
             var lastRetrievedAt = parseInt(lastRetrieved);
             var monthAgo = SC.DateTime.create().get('milliseconds') - 30*CoreTasks.MILLISECONDS_IN_DAY;
             if(isNaN(lastRetrievedAt) || lastRetrievedAt < monthAgo) {
-              console.info('Clearing local data store since its contents are old');
               lastRetrieved = '';
             }
           }
-        }
-        if (lastRetrieved === '') {
-          // Clear out local data store before reloading everything from server
-//          sources[0].nuke();
-          CoreTasks.store._getDataSource().nukeLocal()
         }
         Tasks.set('lastRetrieved', lastRetrieved);
 

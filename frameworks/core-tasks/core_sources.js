@@ -400,6 +400,11 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
  * @author Sean Eidemiller
  */
 CoreTasks.LocalDataSource = SCUDS.LocalDataSource.extend({
+
+  removeStaleCache: YES,
+  staleAge: 30*SCUDS.MILLISECONDS_IN_DAY, // remove if 30 days old
+  staleCookieName: 'lastRetrieved',
+
   _supportedRecordTypes: SC.Set.create(
     ['CoreTasks.User', 'CoreTasks.Task', 'CoreTasks.Project', 'CoreTasks.Watch']),
 
