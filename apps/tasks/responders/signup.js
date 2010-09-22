@@ -36,13 +36,14 @@ Tasks.SIGNUP = SC.Responder.create({
   // called when the OK button is pressed.
   submit: function() {
     // Save the new user
-    Tasks.set('loginName', Tasks.signupController.get('loginName'));
-    var unhashedPassword = Tasks.signupController.get('unhashedPassword');
-    Tasks.signupController.set('password', Tasks.userController.hashPassword(unhashedPassword));
+    var loginName = Tasks.signupController.get('loginName');
+    Tasks.set('loginName', loginName);
+    var password = Tasks.signupController.get('unhashedPassword');
+    Tasks.signupController.set('password', Tasks.userController.hashPassword(password));
     Tasks.saveData();
     Tasks.signupController.set('content', null);
     Tasks.getPath('signupPage.mainPane').remove();
-    Tasks.resetWindowLocation();
+    Tasks.authenticate(loginName, Tasks.userController.hashPassword(password));
   },
   
   // called when the Cancel button is pressed
