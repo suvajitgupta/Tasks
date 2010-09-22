@@ -73,26 +73,6 @@ Tasks.mixin({
           }
         }
         
-        // Get the last retrieved information from cookie (if available).
-        var lastRetrievedCookie = SC.Cookie.find('lastRetrieved');
-        var lastRetrieved = '';
-        if (lastRetrievedCookie && lastRetrievedCookie.get) {
-          lastRetrieved = lastRetrievedCookie.get('value');
-          if(SC.typeOf(lastRetrieved) === SC.T_STRING && lastRetrieved.length > 0) {
-            var lastRetrievedAt = parseInt(lastRetrieved);
-            var monthAgo = SC.DateTime.create().get('milliseconds') - 30*CoreTasks.MILLISECONDS_IN_DAY;
-            if(isNaN(lastRetrievedAt) || lastRetrievedAt < monthAgo) {
-              console.info('Clearing local data store since its contents are old');
-              lastRetrieved = '';
-            }
-          }
-        }
-        if (lastRetrieved === '') {
-          // Clear out local data store before reloading everything from server
-          CoreTasks.store._getDataSource().nukeLocal();
-        }
-        Tasks.set('lastRetrieved', lastRetrieved);
-
         // Create system projects
         if(!CoreTasks.get('allTasksProject')) {
           var allTasksProject = CoreTasks.createRecord(CoreTasks.Project, {
@@ -192,13 +172,27 @@ Tasks.mixin({
    * Load all Tasks data from the server.
    */
   loadData: function() {
+    
     // Indicate data loading start on status bar
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('icon', 'progress-icon');
     serverMessage.set('value', "_LoadingData".loc());
 
+    // Get the last retrieved information from cookie (if available).
+    var lastRetrievedCookie = SC.Cookie.find('lastRetrieved');
+    var lastRetrieved = '';
+    if (lastRetrievedCookie && lastRetrievedCookie.get) {
+      lastRetrieved = lastRetrievedCookie.get('value');
+      if(SC.typeOf(lastRetrieved) === SC.T_STRING && lastRetrieved.length > 0) {
+        var lastRetrievedAt = parseInt(lastRetrieved, 10);
+        var monthAgo = SC.DateTime.create().get('milliseconds') - 30*CoreTasks.MILLISECONDS_IN_DAY;
+        if(isNaN(lastRetrievedAt) || lastRetrievedAt < monthAgo) {
+          lastRetrieved = '';
+        }
+      }
+    }
+
     // Branch on the server type (Persevere, GAE, fixtures).
-    var lastRetrieved = Tasks.get('lastRetrieved');
     var params = {
       successCallback: this._loadDataSuccess.bind(this),
       failureCallback: this._loadDataFailure.bind(this)
@@ -207,10 +201,10 @@ Tasks.mixin({
     if (serverType === Tasks.PERSEVERE_SERVER) {
       // Determine which function to call based on value of lastRetieved.
       var methodInvocation;
-      if (lastRetrieved !== '') {
-        methodInvocation = { method: 'getDelta', id: 'records', params: [lastRetrieved] };
-      } else {
+      if (lastRetrieved === '') {
         methodInvocation = { method: 'get', id: 'records', params: [] };
+      } else {
+        methodInvocation = { method: 'getDelta', id: 'records', params: [lastRetrieved] };
       }
       CoreTasks.executeTransientPost('Class/all', methodInvocation, params);
     } else if(serverType === Tasks.GAE_SERVER){
@@ -229,6 +223,7 @@ Tasks.mixin({
     lastRetrieved = SC.DateTime.create().get('milliseconds') + '';
     SC.Cookie.create({ name: 'lastRetrieved', value: lastRetrieved }).write();
     Tasks.set('lastRetrieved', lastRetrieved);
+
   },
   
   /**
@@ -265,7 +260,7 @@ Tasks.mixin({
     // Indicate data loading completion on status bar
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('icon', '');
-    serverMessage.set('value', "_DataLoaded".loc() + SC.DateTime.create(parseInt(Tasks.get('lastRetrieved'))).toFormattedString(CoreTasks.TIME_DATE_FORMAT));
+    serverMessage.set('value', "_DataLoaded".loc() + SC.DateTime.create(parseInt(Tasks.get('lastRetrieved'), 10)).toFormattedString(CoreTasks.TIME_DATE_FORMAT));
     Tasks.projectsController.refreshCountdowns();
     this.goState('a', 4);
 

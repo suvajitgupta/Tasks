@@ -292,14 +292,34 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
  * @author Sean Eidemiller
  */
 CoreTasks.LocalDataSource = SCUDS.LocalDataSource.extend({
-  _supportedRecordTypes: SC.Set.create(
-    ['CoreTasks.User', 'CoreTasks.Task', 'CoreTasks.Project', 'CoreTasks.Watch']),
-
+  _supportedRecordTypes: SC.Set.create(['CoreTasks.User', 'CoreTasks.Task', 'CoreTasks.Project', 'CoreTasks.Watch']),
+  
   supportedRecordTypes: function() {
     return this._supportedRecordTypes;
   }.property(),
 
   fetch: function(store, query) {
+    
+    // Check to see if cache is stale and needs to be blown away
+    var lastRetrievedCookie = SC.Cookie.find('lastRetrieved');
+    var lastRetrieved = '';
+    if (lastRetrievedCookie && lastRetrievedCookie.get) {
+      lastRetrieved = lastRetrievedCookie.get('value');
+      if(SC.typeOf(lastRetrieved) === SC.T_STRING && lastRetrieved.length > 0) {
+        var lastRetrievedAt = parseInt(lastRetrieved, 10);
+        var monthAgo = SC.DateTime.create().get('milliseconds') - 30*CoreTasks.MILLISECONDS_IN_DAY;
+        if(isNaN(lastRetrievedAt) || lastRetrievedAt < monthAgo) {
+          // console.log('DEBUG: Clearing local data store since its contents are old');
+          lastRetrieved = '';
+        }
+      }
+    }
+    if (lastRetrieved === '') {
+      // Clear out local data store before reloading everything from server
+      CoreTasks.store._getDataSource().nukeLocal();
+      return NO;
+    }
+    
     // Do some sanity checking first to make sure everything is in order.
     if (!SC.instanceOf(query, SC.Query)) {
       console.error('Error retrieving from local cache records: Invalid query.');
