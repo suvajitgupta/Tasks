@@ -10,107 +10,6 @@
 CoreTasks.RemoteDataSource = SC.DataSource.extend({
 
   /**
-   * Fetches a list of records from the server and loads them into the given store.
-   *
-   * @param {SC.Store} store The store on behalf of which the fetch request is made.
-   * @param {SC.Query} query The query from which the request should be generated.
-   *
-   * @returns {Boolean}
-   */
-  /*
-  fetch: function(store, query) {
-    // Do some sanity checking first to make sure everything is in order.
-    if (!query || !SC.instanceOf(query, SC.Query)) {
-      throw 'Error retrieving records: Invalid query.';
-    }
-
-    // Check to see if we should skip the initial fetch.
-    if (query.get('initialServerFetch') === NO) {
-      store.dataSourceDidFetchQuery(query);
-      return NO;
-    }
-
-    // Get the record type and resource path.
-    var recordType = query.get('recordType');
-
-    if (!recordType || !SC.typeOf(recordType) === SC.T_FUNCTION) {
-      throw 'Error retrieving records: Invalid record type.';
-    }
-
-    var resourcePath = recordType.resourcePath;
-
-    if (!resourcePath) {
-      throw 'Error retrieving records: Unable to retrieve resource path from record type.';
-    }
-
-    // FIXME: [SC] fix unnecessary fetch of all tasks after a project name is changed for the
-    // first time.
-    // console.log('DEBUG: fetch(): query=' + query.toString());
-
-    // Build the request and send it off to the server.
-    console.log('Retrieving %@ records from server...'.fmt(recordType));
-
-    var params = query.get('urlParams') || {};
-    var path = CoreTasks.getFullResourcePath(resourcePath, null, params);
-
-    CoreTasks.REQUEST_GET.set('address', path);
-    CoreTasks.REQUEST_GET.notify(this, this._fetchCompleted, { query: query, store: store }).send();
-
-    return YES;
-  },
-
-  _fetchCompleted: function(response, params) {
-    var results;
-    var query = params.query;
-    var store = params.store;
-
-    if (SC.ok(response) && SC.ok(results = response.get('body'))) {
-      var recordType = query.get('recordType');
-      var status = response.get('status');
-
-      // Make sure the record array is in the correct state.
-      var recArray = store._findQuery(query, YES, NO);
-      SC.RunLoop.begin();
-      recArray.storeWillFetchQuery();
-      SC.RunLoop.end();
-
-      if (SC.typeOf(results) === SC.T_ARRAY) {
-        if (results.length > 0) {
-          // Got an array of records; normalize if necessary.
-          var records = this._normalizeResponseArray(results);
-
-          // Load the records into the store and invoke the callback.
-          console.log('Found %@ matching %@ records on server.'.fmt(records.length, recordType));
-
-          store.loadRecords(recordType, records);
-          // store.purgeDeletedRecords(recordType, records);
-          store.dataSourceDidFetchQuery(query);
-
-        } else {
-          // No matching records.
-          console.log('No matching %@ records.'.fmt(recordType));
-
-          // Load an empty array into the store and invoke the callback.
-          store.loadRecords(recordType, []);
-          store.dataSourceDidFetchQuery(query);
-        }
-
-      } else {
-        // Should never get here, but just in case...
-        console.log('Error retrieving records: Unexpected server response.');
-        store.dataSourceDidErrorQuery(query, CoreTasks.ERROR_UNEXPECTED_RESPONSE);
-      }
-
-    } else {
-      // Request failed; invoke the error callback.
-      var error = this._buildError(response);
-      console.log('Error retrieving records: %@'.fmt(error));
-      store.dataSourceDidErrorQuery(query, error);
-    }
-  },
-  */
-
-  /**
    * Creates a single record.
    *
    * @param {SC.Store} store The store on behalf of which the creation request is made.
@@ -333,21 +232,14 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
     return NO;
   },
 
-  /**
-   * TODO: [SE] document how server response is normalized
-   */
+  // Strip prefix before the id returned from the Persever server
   _normalizeResponse: function(hash) {
     if (hash && hash.id) {
       var id = hash.id;
       if (id && SC.typeOf(id) === SC.T_STRING) hash.id = id.replace(/^.*\//, '') * 1;
     }
-
     return hash;
   },
-
-  /**
-   * TODO: [SE] document how server response array is normalized
-   */
   _normalizeResponseArray: function(hashes) {
     var ret = hashes ? hashes : [];
     var len = hashes.length;

@@ -154,9 +154,7 @@ CoreTasks.mixin({
     return (obj && obj.send && obj.open && SC.typeOf(obj.send) == SC.T_FUNCTION);
   },
 
-  /**
-   * TODO: [SE] document how server response is normalized
-   */
+  // Strip leading parentheses returned from Persevere
   _normalizeResponse: function(hash) {
     // HACK: [SE] Browsers running in OS X get a string and not a hash, so we have to convert it.
     if (SC.typeOf(hash) === SC.T_STRING) {
@@ -174,10 +172,6 @@ CoreTasks.mixin({
     if (id && SC.typeOf(id) === SC.T_STRING) hash.id = id.replace(/^[^\d]*/, '') * 1;
     return hash;
   },
-
-  /**
-   * TODO: [SE] document how server response array is normalized
-   */
   _normalizeResponseArray: function(hashes) {
     // HACK: [SE] Browsers running in OS X get a string and not a hash, and they don't like the
     // format of the string that Persevere sends over the wire. We have to do some <sigh>
