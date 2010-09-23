@@ -9,8 +9,8 @@
  */
 
 sc_require('controllers/users');
-sc_require('controllers/tasks');
 sc_require('controllers/projects');
+sc_require('controllers/tasks');
 
 Tasks.mixin({
 
@@ -102,14 +102,14 @@ Tasks.mixin({
             SC.Query.create({ recordType: CoreTasks.User, orderBy: 'name', localOnly: YES })));
           this.usersController.set('content', CoreTasks.get('allUsers'));
         }
-        if (!CoreTasks.get('allTasks')) {
-          CoreTasks.set('allTasks', CoreTasks.store.find( 
-            SC.Query.create({ recordType: CoreTasks.Task, localOnly: YES })));
-        }
         if (!CoreTasks.get('allProjects')) {
           CoreTasks.set('allProjects', CoreTasks.store.find(
             SC.Query.create({ recordType: CoreTasks.Project, orderBy: 'name', localOnly: YES })));
           this.projectsController.set('content', CoreTasks.get('allProjects'));
+        }
+        if (!CoreTasks.get('allTasks')) {
+          CoreTasks.set('allTasks', CoreTasks.store.find( 
+            SC.Query.create({ recordType: CoreTasks.Task, localOnly: YES })));
         }
         if (!CoreTasks.get('allWatches')) {
           CoreTasks.set('allWatches', CoreTasks.store.find(
