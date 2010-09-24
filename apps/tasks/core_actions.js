@@ -746,7 +746,6 @@ Tasks.mixin({
     var user = CoreTasks.createRecord(CoreTasks.User, userHash);
     Tasks.usersController.selectObject(user);
     Tasks.settingsPage.get('userInformation').get('fullNameField').becomeFirstResponder();
-    if(CoreTasks.get('autoSave')) Tasks.saveData();
     return user;
     
   },
@@ -779,7 +778,6 @@ Tasks.mixin({
               }
               // Select the logged in user.
               Tasks.usersController.selectObject(CoreTasks.get('currentUser'));
-              if(CoreTasks.get('autoSave')) Tasks.saveData();
             }
           }
         })
