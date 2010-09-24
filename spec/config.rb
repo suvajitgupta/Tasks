@@ -1,7 +1,7 @@
 # Tasks/Lebowski login tests
 # Author: Mike Ramsey, Suvajit Gupta
 
-App.define 'mainPane', 'mainPage.mainPane', MainPane
+App.define_path 'mainPane', 'mainPage.mainPane', MainPane
 
 
 USER_NAME = "SA"
@@ -19,27 +19,32 @@ IMPORTNEWTASK = "Fred
 
 
 App.define_framework 'core_tasks', 'CoreTasks'
-App.define 'login_panel', 'loginPage.panel', PanelPane
-App.define 'signup_panel', 'signupPage.mainPane', PanelPane
-App.define 'main_pane', 'mainPage.mainPane', MainPane
-App.define 'actions_button', 'main_pane.topBarView.actionsButton', ButtonView
 
-App['login_panel'].define 'user_name_field', 'contentView.loginNameField', TextFieldView
-App['login_panel'].define 'password_field', 'contentView.passwordField', TextFieldView
-App['login_panel'].define 'login_button', 'contentView.loginButton', ButtonView
-App['login_panel'].define 'login_err_msg', 'contentView.loginErrorMessageLabel', LabelView 
-App['login_panel'].define 'guest_signup_button', 'contentView.guestSignupButton', ButtonView
+App.define_path 'main_pane', 'mainPage.mainPane', MainPane
+App.define_path 'actions_button', 'main_pane.topBarView.actionsButton', ButtonView
 
-App['signup_panel'].define 'signup_prompt', 'contentView.signupPrompt', LabelView
-App['signup_panel'].define 'signup_button', 'contentView.signupButton', ButtonView
-App['signup_panel'].define 'cancel_button', 'contentView.cancelButton', ButtonView
-App['signup_panel'].define 'fullNameLabel', 'contentView.userInformation.fullNameLabel', LabelView
-App['signup_panel'].define 'fullNameField', 'contentView.userInformation.fullNameField', TextFieldView
-App['signup_panel'].define 'loginNameLabel', 'contentView.userInformation.loginNameLabel', LabelView
-App['signup_panel'].define 'loginNameField', 'contentView.userInformation.loginNameField', TextFieldView
-App['signup_panel'].define 'roleLabel', 'contentView.userInformation.roleLabel', LabelView
-App['signup_panel'].define 'roleField', 'contentView.userInformation.roleField', 'SC.SelectButtonView' # was SelectFieldView 
-App['signup_panel'].define 'emailLabel', 'contentView.userInformation.emailLabel', LabelView
-App['signup_panel'].define 'emailField', 'contentView.userInformation.emailField', TextFieldView
-App['signup_panel'].define 'passwordLabel', 'contentView.userInformation.passwordLabel', LabelView
-App['signup_panel'].define 'passwordField', 'contentView.userInformation.passwordField', TextFieldView
+App.define_path 'login_panel', 'loginPage.panel', PanelPane
+App.define_paths_for 'login_panel' do |path|
+  path.define_path 'user_name_field', 'contentView.loginNameField', TextFieldView
+  path.define_path 'password_field', 'contentView.passwordField', TextFieldView
+  path.define_path 'login_button', 'contentView.loginButton', ButtonView
+  path.define_path 'login_err_msg', 'contentView.loginErrorMessageLabel', LabelView 
+  path.define_path 'guest_signup_button', 'contentView.guestSignupButton', ButtonView
+end
+
+App.define_path 'signup_panel', 'signupPage.mainPane', PanelPane
+App.define_paths_for 'signup_panel' do |path|
+  path.define_path 'signup_prompt', 'contentView.signupPrompt', LabelView
+  path.define_path 'signup_button', 'contentView.signupButton', ButtonView
+  path.define_path 'cancel_button', 'contentView.cancelButton', ButtonView
+  path.define_path 'fullNameLabel', 'contentView.userInformation.fullNameLabel', LabelView
+  path.define_path 'fullNameField', 'contentView.userInformation.fullNameField', TextFieldView
+  path.define_path 'loginNameLabel', 'contentView.userInformation.loginNameLabel', LabelView
+  path.define_path 'loginNameField', 'contentView.userInformation.loginNameField', TextFieldView
+  path.define_path 'roleLabel', 'contentView.userInformation.roleLabel', LabelView
+  path.define_path 'roleField', 'contentView.userInformation.roleField', 'SC.SelectButtonView' # was SelectFieldView 
+  path.define_path 'emailLabel', 'contentView.userInformation.emailLabel', LabelView
+  path.define_path 'emailField', 'contentView.userInformation.emailField', TextFieldView
+  path.define_path 'passwordLabel', 'contentView.userInformation.passwordLabel', LabelView
+  path.define_path 'passwordField', 'contentView.userInformation.passwordField', TextFieldView
+end

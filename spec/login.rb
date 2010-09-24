@@ -78,12 +78,13 @@ describe "Log the user out of the application" do
 
   it "will click on Logout from the Actions menu" do
     App['actions_button'].click
-    App.wait_until(60) { |it| it.responding_panes.one?(MenuPane) }
+    App.wait_until { |it| it.responding_panes.one?(MenuPane) }
     pane = App.responding_panes.find_first(MenuPane)
     puts "... pane class = #{pane.class}, sc_class = #{pane.sc_class}"
     puts "... pane menu items count = #{pane.menu_items.count}"
   
-    pane.menu_items.click /Logout/i
+    pane.menu_items.click /^L/i
+    
     # pane = App.key_pane(MenuPane)
     # menu_item = pane.menu_items.find_first({ :title => /Logout/i })
     #     menu_item.click
