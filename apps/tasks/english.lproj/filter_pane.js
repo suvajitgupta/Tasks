@@ -42,7 +42,6 @@ Tasks.filterPane = SC.SheetPane.create({
       allButton: SC.ButtonView.design({
         layout: { width: 90, height: 30, left: 5, top: 7 },
         titleMinWidth: 0,
-        theme: ['capsule'],
         classNames: ['all'],
         title: "_All".loc(),
         toolTip: "_AllTooltip".loc(),
@@ -53,7 +52,6 @@ Tasks.filterPane = SC.SheetPane.create({
       showstoppersButton: SC.ButtonView.design({
         layout: { width: 100, height: 30, centerX: 0, top: 7 },
         titleMinWidth: 0,
-        theme: ['capsule'],
         classNames: ['showstoppers'],
         isVisible: Tasks.softwareMode,
         title: "_Showstoppers".loc(),
@@ -65,7 +63,6 @@ Tasks.filterPane = SC.SheetPane.create({
       troubledButton: SC.ButtonView.design({
         layout: { width: 90, height: 30, right: 5, top: 7 },
         titleMinWidth: 0,
-        theme: ['capsule'],
         classNames: ['troubled'],
         title: "_Troubled".loc(),
         toolTip: "_TroubledTooltip".loc(),
@@ -76,7 +73,6 @@ Tasks.filterPane = SC.SheetPane.create({
       unfinishedButton: SC.ButtonView.design({
         layout: { width: 90, height: 30, left: 5, top: 39 },
         titleMinWidth: 0,
-        theme: ['capsule'],
         classNames: ['unfinished'],
         title: "_Unfinished".loc(),
         toolTip: "_UnfinishedTooltip".loc(),
@@ -87,7 +83,6 @@ Tasks.filterPane = SC.SheetPane.create({
       unvalidatedButton: SC.ButtonView.design({
         layout: { width: 100, height: 30, centerX: 0, top: 39 },
         titleMinWidth: 0,
-        theme: ['capsule'],
         classNames: ['unvalidated'],
         isVisible: Tasks.softwareMode,
         title: "_Unvalidated".loc(),
@@ -99,7 +94,6 @@ Tasks.filterPane = SC.SheetPane.create({
       completedButton: SC.ButtonView.design({
         layout: { width: 90, height: 30, right: 5, top: 39 },
         titleMinWidth: 0,
-        theme: ['capsule'],
         classNames: ['completed'],
         title: "_Completed".loc(),
         toolTip: "_CompletedTooltip".loc(),
