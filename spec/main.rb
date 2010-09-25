@@ -4,7 +4,8 @@
 App = MainApplication.new \
         :app_root_path => "/tasks",
         :app_name => "Tasks",
-        :app_server_port => 4400
+        :app_server_port => 4400,
+        :browser => :safari
         
 App.start do |app|
   app['isLoaded'] == true
