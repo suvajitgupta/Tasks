@@ -425,14 +425,18 @@ Tasks.mixin({
    * Restart application - invoked at logout and for a route to a new project.
    */
   _restart: function() {
-    // console.log('DEBUG: reset()');
+    // console.log('DEBUG: restart()');
     if(Tasks.get('serverType') === Tasks.GAE_SERVER) {
       var params = {
         successCallback: this._logoutSuccess.bind(this),
         failureCallback: this._logoutFailure.bind(this)
       };
+      params.queryParams = {
+        UUID: CoreTasks.getPath('currentUser.id'),
+        ATO: CoreTasks.getPath('currentUser.authToken')
+      };
       // notify Server so that authentication token can be destroyed for security reasons
-      CoreTasks.executeTransientPost('logout?id=' + CoreTasks.getPath('currentUser.id'), null, params);
+      CoreTasks.executeTransientPost('logout', null, params);
     }
     else {
       this.resetWindowLocation();
