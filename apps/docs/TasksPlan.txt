@@ -70,7 +70,7 @@ v Disable "Add Task" button when no project is selected [SG] <BB> @Done %Passed 
 ^ Allow multi-Task drag-and-drop reallocation to other projects [BB] <SG> @Done $Feature %Passed
 ^ Add popup viewer/editor for Project attributes [SG] $Feature @Done %Passed
 v Add Project context menu with options: Add, Duplicate, Delete; Status [SG] $Feature @Done %Passed
-- Support alternate graphical view (pie charts, bar graphs) for Statistics using Sai [SG] <EG> $Feature @Active
+- Provide graphical views (bar graphs, pie charts) for Statistics using Sai [SG] <EG> $Feature @Active
 
 Task Manager GUI @Active
 ^ Group Tasks by Assignee and display Task ID, Type, Name, and Effort as a badge (if specified) and an indicator for Description [SG] <JH2> @Done $Feature %Passed
@@ -107,7 +107,7 @@ v Add hover over tooltip for Assignees to show how many Tasks they have and to e
 v Add Task context menu with options: Add, Duplicate, Delete; All Task Attributes; Copy ID/Name, Copy Link [SG] $Feature @Done %Passed
 ^ Add ability to watch Tasks and get Email Notifications after Task changes [SG] <JH2> $Feature @Done %Passed
 - Indicate watched Tasks by underlining their IDs [SG] $Feature @Done %Passed
-- Add ability to view/add Comments on Tasks [SG] <JH2> $Feature @Active
+- Support ability to view/add Comments on Tasks [SG] <JH2> $Feature @Active
 - Allow "Find & Replace" within Task names  (operating only on displayed Tasks) [SG] $Feature
 - Allow Task names to embed metacharacters by enclosing in quotes [SG] $Feature
 - Support emails including Task details to other users via Server [SG] $Feature
@@ -122,7 +122,7 @@ User Manager GUI @Active
 ^ Add login screen to identify user who logs in (and handle login failures properly) [SG] <SE> @Done %Passed $Feature
 - Add password to Login, Guest Signup, and User Manager screens (save in encrypted format) [SG] <JH2> $Feature @Done %Passed
 - Allow new guests to sign up from login screen and sign them in immediately after [JH2] <SG> @Done %Passed $Feature
-- Add checkbox to login screen to remember login name/password across sessions <SG> $Feature
+- Remember login name/password across sessions via checkbox on login screen <SG> $Feature @Active
 - Set assignee selection filter to logged in user if they are a Developer [SG] @Done $Feature %Passed
 ^ Add "Users/Settings" actions menu/popup embedding User Manager with buttons to add/delete users at bottom [SG] <JH2> @Done %Passed $Feature
 | Copy over Role attribute of first selected User to new User
@@ -191,8 +191,8 @@ Server/Tools @Active
 | For Task updates, indicate old and new values of attributes
 - Add link to Task in email notification (should not require authentication if user is signed in) <JH2> [SG] $Feature
 - Handle network or Server unavailability gracefully and provide appropriate diagnostics to the user [SG] <SE> @Done %Passed
-- Support Tasks database cleanup to remove soft-deleted records and handle pointers to non-existent records <JH2> [SG] @Active
-^ Convert Tasks into a Jira plugin [UA] <SG> $Feature
+- Support Tasks database cleanup to remove soft-deleted records and handle pointers to non-existent records [SG] @Done %Passed
+- Integrate Tasks GUI with Jira Server [SG] <UA> $Feature @Active
 - Implement bridge to "github issues" from Google App Engine [JH2] <SG> $Feature @Active
 
 Styling/Hardening @Active
