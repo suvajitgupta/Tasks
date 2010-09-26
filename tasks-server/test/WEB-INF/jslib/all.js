@@ -48,6 +48,7 @@ Class({
     for (i = 0, len = tasks.length; i < len; i++) {
       var updated = false;
       task = tasks[i];
+      if(task.status === 'deleted') continue;
       var projectId = task.projectId;
       if(projectId && projectIds.indexOf(projectId) === -1) {
         task.projectId = undefined;
