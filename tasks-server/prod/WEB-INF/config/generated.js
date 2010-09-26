@@ -227,7 +227,8 @@ function (timestamp) {
         remove(watchesToDelete[i]);
     }
     var idExtractor = function (record) {
-        return record.id.replace(/^.*\//, "") * 1;
+        var id = (record.status == "deleted") ? "" : record.id;
+        return id.replace(/^.*\//, "") * 1;
     };
     var users = load("user/"), userIds = users.map(idExtractor);
     var projects = load("project/"), projectIds = projects.map(idExtractor);
