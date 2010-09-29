@@ -35,7 +35,22 @@ Tasks.SIGNUP = SC.Responder.create({
   
   // called when the OK button is pressed.
   submit: function() {
-    // Save the new user
+    console.log('DEBUG: Signup.submit() loginName=' + Tasks.signupController.get('loginName'));
+    var params = {
+      successCallback: this._loginNameUnavailable.bind(this),
+      failureCallback: this._loginNameAvailable.bind(this)
+    };
+    params.queryParams = { 
+      loginName: "'%@'".fmt(Tasks.signupController.get('loginName'))
+    };
+    CoreTasks.executeTransientGet('user', undefined, params);
+  },
+    
+  /**
+   * Called if loginName is avaliable for signup.
+   */
+  _loginNameAvailable: function(response) {
+    console.log('DEBUG: loginNameAvailable() response=' + response);
     var loginName = Tasks.signupController.get('loginName');
     Tasks.set('loginName', loginName);
     var password = Tasks.signupController.get('unhashedPassword');
@@ -44,6 +59,13 @@ Tasks.SIGNUP = SC.Responder.create({
     Tasks.signupController.set('content', null);
     Tasks.getPath('signupPage.mainPane').remove();
     Tasks.authenticate(loginName, Tasks.userController.hashPassword(password));
+  },
+  
+  /**
+   * Called if loginName is already taken.
+   */
+  _loginNameUnavailable: function(response) {
+    Tasks.signupController.displayLoginNameError();
   },
   
   // called when the Cancel button is pressed

@@ -23,9 +23,9 @@ Tasks.settingsPage = SC.Page.create({
     titleIcon: 'settings-icon',
     titleBarHeight: 40,
     minHeight: 352,
-    minWidth: 780,
-    maxWidth: 780,
-    layout: { centerX: 0, centerY: 0, height: 352, width: 780 },
+    minWidth: 770,
+    maxWidth: 770,
+    layout: { centerX: 0, centerY: 0, height: 352, width: 770 },
     
     contentView: SC.View.design({
       layout: { left: 0, right: 0, top: 0, bottom: 0},
@@ -117,7 +117,7 @@ Tasks.settingsPage = SC.Page.create({
           childViews: 'userInfoView createdAtLabel updatedAtLabel'.w(),
           
           userInfoView: Tasks.UserInformationView.design({
-            layout: { top: 10, left: 25, height: 200, right: 10 },
+            layout: { top: 10, left: 0, height: 200, right: 0 },
             contentBinding: 'Tasks.userController'
           }),
 

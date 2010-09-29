@@ -13,6 +13,7 @@
 Tasks.signupController = SC.ObjectController.create(
 /** @scope Tasks.signupController.prototype */ {
   
+  loginNameErrorMessage: '',
   unhashedPassword: '',
   
   isValidUserName: function() {
@@ -21,6 +22,15 @@ Tasks.signupController = SC.ObjectController.create(
     var loginName = this.get('loginName');
     if(loginName === '' || loginName === CoreTasks.NEW_USER_LOGIN_NAME || loginName === CoreTasks.NEW_USER_LOGIN_NAME.loc()) return false;
     return true;
-  }.property('name', 'loginName').cacheable()
+  }.property('name', 'loginName').cacheable(),
+  
+  displayLoginNameError: function(){
+    this.set('loginNameErrorMessage', "_LoginNameInUse".loc());
+  },
+  
+  _loginNameHasChanged: function() {
+    this.set('loginNameErrorMessage', '');
+  }.observes('.content.loginName')
+  
   
 });

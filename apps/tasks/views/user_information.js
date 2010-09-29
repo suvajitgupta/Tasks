@@ -52,6 +52,12 @@ Tasks.UserInformationView = SC.View.extend(
       valueBinding: SC.binding('*content.loginNameValue', this).toLocale()
     }));
     childViews.push(this.loginNameField);
+    this.loginNameErrorMessageLabel = this.createChildView(SC.LabelView.design({
+      layout: { top: 42, left: 395, height: 20, width: 40 },
+      classNames: ['error-message'],
+      valueBinding: SC.Binding.oneWay('Tasks.signupController.loginNameErrorMessage')
+    }));
+    childViews.push(this.loginNameErrorMessageLabel);
     
     this.passwordLabel = this.createChildView(SC.LabelView.extend({
       layout: { top: 74, left: 0, width: 85, height: 18 },
