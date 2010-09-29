@@ -33,18 +33,13 @@ General Infrastructure @Active
 - Implement GUI-based RBAC (role-based access control) [SG] $Feature @Done %Passed
 - Add a dot before Projects/Tasks/Users that were created or updated recently (within the last day) <SE> [SG] $Feature @Done %Passed
 - Display record created/updated time at the bottom of popup editors [SG] $Feature @Done %Passed
-v Analyze/optimize calls to assignments controller and custom view render methods <BB> [SG] @Active
 - Support view mode of tasks and selection of project/filter/search using SproutCore routes [SG] $Feature @Done %Passed
 - Destroy authentication token when User logs out [SG] <JH2> $Feature @Done %Passed
 - Implement/benchmark JSONP-based data loading for performance speedup (XHRs are faster) [SG] <SE> @Done
 ^ Optimize data loading to use single Server call for all records <SE> [SG] @Done %Passed
 ^ Optimize startup data load using HTML5 local data store <SE> [SG] @Done %Passed
-- Disallow Project names or User loginNames that are already in use or reserved [SG] $Feature @Active
-| Project name cannot be duplicated or a System Project name
-| User login name cannot be duplicated or reserved name "none"
-- Implement GUI-side data validation checks and corresponding user feedback [SG] <JH2> $Feature @Active
-| valid Email address in User Info
-| valid Task.effort & Project.timeLeft in popup editors
+- Implement GUI-side data validation checks and corresponding user feedback [SG] $Feature @Active
+| unique, non-"None" loginName and valid Email address in "Guest Signup" and "Users/Settings" panels
 - Out of Scope: Add support for attachments in record descriptions $Feature
 | Upload attachment somewhere and insert URL to it in record description
 
@@ -70,7 +65,8 @@ v Disable "Add Task" button when no project is selected [SG] <BB> @Done %Passed 
 ^ Allow multi-Task drag-and-drop reallocation to other projects [BB] <SG> @Done $Feature %Passed
 ^ Add popup viewer/editor for Project attributes [SG] $Feature @Done %Passed
 v Add Project context menu with options: Add, Duplicate, Delete; Status [SG] $Feature @Done %Passed
-- Provide graphical views (bar graphs, pie charts) for Statistics using Sai [SG] <EG> $Feature @Active
+- Disallow Project names that are already in use or reserved [SG] $Feature @Done %Passed
+| Project name cannot be duplicated or a System Project name
 
 Task Manager GUI @Active
 ^ Group Tasks by Assignee and display Task ID, Type, Name, and Effort as a badge (if specified) and an indicator for Description [SG] <JH2> @Done $Feature %Passed
@@ -166,7 +162,8 @@ v Add online training video using QuickTime [SG] $Feature @Done
 - Add Team/Tasks display modes to show everyone at a glance or details; clicking on Assignee in team mode shows their Tasks [SG] $Feature @Done %Passed
 v Add hotkeys for common operations (Add/Duplicate Tasks) [EG] <SG> $Feature @Done %Passed
 | Turned these off for now since these are conflicting with browser shortcuts
-- Add "Statistics..." button in actions menu/popup to show percent breakdown of displayed Tasks by attributes [SG] $Feature @Done %Passed
+- Add "Statistics..." menu item in actions menu/popup to show percent breakdown of displayed Tasks by attributes [SG] $Feature @Done %Passed
+- Provide graphical views (bar graphs, pie charts) for Statistics using Sai [SG] <EG> $Feature @Active
 - Provide tab in Settings popup panel to manage user preferences [SG] $Feature
 | Auto save
 | Email notifications
@@ -192,7 +189,7 @@ Server/Tools @Active
 - Add link to Task in email notification (should not require authentication if user is signed in) <JH2> [SG] $Feature
 - Handle network or Server unavailability gracefully and provide appropriate diagnostics to the user [SG] <SE> @Done %Passed
 - Support Tasks database cleanup to remove soft-deleted records and handle pointers to non-existent records [SG] @Done %Passed
-- Integrate Tasks GUI with Jira Server [SG] <UA> $Feature @Active
+- Integrate Tasks GUI with Jira Server [SG] <UA> $Feature @Risky
 - Implement bridge to "github issues" from Google App Engine [JH2] <SG> $Feature @Active
 
 Styling/Hardening @Active

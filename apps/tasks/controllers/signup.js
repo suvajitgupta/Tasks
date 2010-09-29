@@ -14,6 +14,7 @@ Tasks.signupController = SC.ObjectController.create(
 /** @scope Tasks.signupController.prototype */ {
   
   loginNameErrorMessage: '',
+  emailErrorMessage: '',
   unhashedPassword: '',
   
   isValidUserName: function() {
@@ -25,12 +26,19 @@ Tasks.signupController = SC.ObjectController.create(
   }.property('name', 'loginName').cacheable(),
   
   displayLoginNameError: function(){
-    this.set('loginNameErrorMessage', "_LoginNameInUse".loc());
+    this.set('loginNameErrorMessage', "_InUse".loc());
   },
+
+  displayEmailError: function(){
+    this.set('emailErrorMessage', "_Invalid".loc());
+  },
+
+  _emailHasChanged: function() {
+    this.set('emailErrorMessage', '');
+  }.observes('.content.email'),
   
   _loginNameHasChanged: function() {
     this.set('loginNameErrorMessage', '');
   }.observes('.content.loginName')
-  
   
 });

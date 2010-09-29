@@ -35,7 +35,11 @@ Tasks.SIGNUP = SC.Responder.create({
   
   // called when the OK button is pressed.
   submit: function() {
-    console.log('DEBUG: Signup.submit() loginName=' + Tasks.signupController.get('loginName'));
+    // console.log('DEBUG: Signup.submit() loginName=' + Tasks.signupController.get('loginName'));
+    
+    var email = Tasks.signupController.get('email');
+    if(email && !email.match(/.+@.+\...+/)) Tasks.signupController.displayEmailError();
+  
     var params = {
       successCallback: this._loginNameUnavailable.bind(this),
       failureCallback: this._loginNameAvailable.bind(this)
@@ -50,7 +54,7 @@ Tasks.SIGNUP = SC.Responder.create({
    * Called if loginName is avaliable for signup.
    */
   _loginNameAvailable: function(response) {
-    console.log('DEBUG: loginNameAvailable() response=' + response);
+    // console.log('DEBUG: loginNameAvailable() response=' + response);
     var loginName = Tasks.signupController.get('loginName');
     Tasks.set('loginName', loginName);
     var password = Tasks.signupController.get('unhashedPassword');
