@@ -38,19 +38,21 @@ Tasks.usersController = SC.ArrayController.create(
             editableUsers = users;
           }
           else {
-            editableUsers = [];
-            var searchPattern = new RegExp(pattern, 'i');
-            var emailSearch = (pattern.indexOf('@') != -1);
-            var numUsers = users.get('length');
-            for (var j=0; j<numUsers; j++) {
-              user = users.objectAt(j);
-              if(emailSearch) {
-                if(searchPattern.exec(user.get('email'))) editableUsers.push(user);
+            try {
+              editableUsers = [];
+              var searchPattern = new RegExp(pattern, 'i');
+              var emailSearch = (pattern.indexOf('@') != -1);
+              var numUsers = users.get('length');
+              for (var j=0; j<numUsers; j++) {
+                user = users.objectAt(j);
+                if(emailSearch) {
+                  if(searchPattern.exec(user.get('email'))) editableUsers.push(user);
+                }
+                else {
+                  if(searchPattern.exec(user.get('name')) || searchPattern.exec(user.get('loginName'))) editableUsers.push(user);
+                }
               }
-              else {
-                if(searchPattern.exec(user.get('name')) || searchPattern.exec(user.get('loginName'))) editableUsers.push(user);
-              }
-            }
+            } catch(e) {}
           }
         }
         else {

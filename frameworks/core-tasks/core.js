@@ -98,15 +98,17 @@ CoreTasks = SC.Object.create({
    */
   getUsersMatchingName: function(name) {
     if (!this.allUsers) return [];
-    var usersCount = this.allUsers.get('length');
-    var namePattern = new RegExp(name);
     var matchingUsers = [];
-    for(var i = 0; i < usersCount; i++) {
-      var user = this.allUsers.objectAt(i);
-      if(user.get('loginName') === name || user.get('name').match(namePattern)) {
-        matchingUsers.push(user);
+    try {
+      var namePattern = new RegExp(name);
+      var usersCount = this.allUsers.get('length');
+      for(var i = 0; i < usersCount; i++) {
+        var user = this.allUsers.objectAt(i);
+        if(user.get('loginName') === name || user.get('name').match(namePattern)) {
+          matchingUsers.push(user);
+        }
       }
-    }
+    } catch (e) {}
     return matchingUsers;
   },
 
