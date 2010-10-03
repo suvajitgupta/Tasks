@@ -117,7 +117,6 @@ Tasks.filterPane = SC.SheetPane.create({
       toolTip: "_TypeTooltip".loc()
     }),
 
-    // FIXME: [SC] remove hacks for checkboxes when they work in SC master, like it does on quilmes
     typeCheckboxes: SC.View.design({
       layout: { top: 128, height: 24, left: 10, right: 10 },
       classNames: ['item-group', 'checkbox-icon'],
@@ -127,19 +126,22 @@ Tasks.filterPane = SC.SheetPane.create({
       
       feature: SC.CheckboxView.design({
         layout: { left: 5, top: 4, width: 95 },
-        title: '<span class="checkbox-icon task-icon-feature">' + CoreTasks.TASK_TYPE_FEATURE.loc() + '</span>',
+        icon: 'task-icon-feature',
+        title: CoreTasks.TASK_TYPE_FEATURE.loc(),
         valueBinding: 'Tasks.assignmentsController.attributeFilterTypeFeature'
       }),
       
       bug: SC.CheckboxView.design({
         layout: { centerX: 0, top: 4, width: 65 },
-        title: '<span class="checkbox-icon task-icon-bug">' + CoreTasks.TASK_TYPE_BUG.loc() + '</span>',
+        icon: 'task-icon-bug',
+        title: CoreTasks.TASK_TYPE_BUG.loc(),
         valueBinding: 'Tasks.assignmentsController.attributeFilterTypeBug'
       }),
       
       other: SC.CheckboxView.design({
         layout: { right: 5, top: 4, width: 75 },
-        title: '<span class="checkbox-icon task-icon-other">' + CoreTasks.TASK_TYPE_OTHER.loc() + '</span>',
+        icon: 'task-icon-other',
+        title: CoreTasks.TASK_TYPE_OTHER.loc(),
         valueBinding: 'Tasks.assignmentsController.attributeFilterTypeOther'
       })
 
