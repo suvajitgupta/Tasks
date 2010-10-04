@@ -71,6 +71,28 @@ CoreTasks = SC.Object.create({
   },
   
   /**
+   * Check if a loginName is reserved or in use already.
+   *
+   * @param {Object} user whose loginName to be checked.
+   * @returns {Boolean} true if valid, false otherwise.
+   */
+  isLoginNameValid: function(specifiedUser) {
+    
+    var loginName = specifiedUser.get('loginName');
+    if(loginName.toLowerCase() === CoreTasks.USER_NONE) return false;
+    
+    if (!this.allUsers) return true;
+    var usersCount = this.allUsers.get('length');
+    for(var i = 0; i < usersCount; i++) {
+      var user = this.allUsers.objectAt(i);
+      if(user == specifiedUser) continue;
+      if(user.get('loginName') === loginName) return false;
+    }
+
+    return true;
+  },
+
+  /**
    * Get user for a given loginName (if it exists).
    *
    * @param {String} user's login name.

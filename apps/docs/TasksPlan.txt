@@ -38,7 +38,7 @@ General Infrastructure @Active
 - Implement/benchmark JSONP-based data loading for performance speedup (XHRs are faster) [SG] <SE> @Done
 ^ Optimize data loading to use single Server call for all records <SE> [SG] @Done %Passed
 ^ Optimize startup data load using HTML5 local data store <SE> [SG] @Done %Passed
-- Implement GUI-side data validation checks and corresponding user feedback [SG] $Feature @Active
+- Implement GUI-side data validation checks and corresponding user feedback [SG] $Feature @Done %Passed
 | unique, non-"None" loginName and valid Email address in "Guest Signup" and "Users/Settings" panels
 - Out of Scope: Add support for attachments in record descriptions $Feature
 | Upload attachment somewhere and insert URL to it in record description

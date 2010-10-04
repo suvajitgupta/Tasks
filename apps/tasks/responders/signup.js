@@ -26,7 +26,7 @@ Tasks.SIGNUP = SC.Responder.create({
     var newUserHash = SC.clone(CoreTasks.User.NEW_USER_HASH);
     newUserHash.role = CoreTasks.USER_ROLE_GUEST;
     this._newUser = CoreTasks.createRecord(CoreTasks.User, newUserHash);
-    Tasks.signupController.set('content', this._newUser);
+    Tasks.usersController.selectObject(this._newUser);
     
     var pane = Tasks.getPath('signupPage.mainPane');
     pane.append();
@@ -35,17 +35,14 @@ Tasks.SIGNUP = SC.Responder.create({
   
   // called when the OK button is pressed.
   submit: function() {
-    // console.log('DEBUG: Signup.submit() loginName=' + Tasks.signupController.get('loginName'));
+    // console.log('DEBUG: Signup.submit() loginName=' + Tasks.userController.get('loginName'));
     
-    var email = Tasks.signupController.get('email');
-    if(email && !email.match(/.+@.+\...+/)) Tasks.signupController.displayEmailError();
-  
     var params = {
       successCallback: this._loginNameUnavailable.bind(this),
       failureCallback: this._loginNameAvailable.bind(this)
     };
     params.queryParams = { 
-      loginName: "'%@'".fmt(Tasks.signupController.get('loginName'))
+      loginName: "'%@'".fmt(Tasks.userController.get('loginName'))
     };
     CoreTasks.executeTransientGet('user', undefined, params);
   },
@@ -55,12 +52,13 @@ Tasks.SIGNUP = SC.Responder.create({
    */
   _loginNameAvailable: function(response) {
     // console.log('DEBUG: loginNameAvailable() response=' + response);
-    var loginName = Tasks.signupController.get('loginName');
+    Tasks.userController.clearLoginNameError();
+    var loginName = Tasks.userController.get('loginName');
     Tasks.set('loginName', loginName);
-    var password = Tasks.signupController.get('unhashedPassword');
-    Tasks.signupController.set('password', Tasks.userController.hashPassword(password));
+    var password = Tasks.userController.get('unhashedPassword');
+    Tasks.userController.set('password', Tasks.userController.hashPassword(password));
     Tasks.saveData();
-    Tasks.signupController.set('content', null);
+    Tasks.usersController.set('selection', '');
     Tasks.getPath('signupPage.mainPane').remove();
     Tasks.authenticate(loginName, Tasks.userController.hashPassword(password));
   },
@@ -69,7 +67,7 @@ Tasks.SIGNUP = SC.Responder.create({
    * Called if loginName is already taken.
    */
   _loginNameUnavailable: function(response) {
-    Tasks.signupController.displayLoginNameError();
+    Tasks.userController.displayLoginNameError();
   },
   
   // called when the Cancel button is pressed
@@ -80,7 +78,7 @@ Tasks.SIGNUP = SC.Responder.create({
       this._newUser.destroy();
       this._newUser = null;
     }
-    Tasks.signupController.set('content', null);
+    Tasks.usersController.set('selection', '');
 
     // Go back to login screen
     Tasks.getPath('signupPage.mainPane').remove();

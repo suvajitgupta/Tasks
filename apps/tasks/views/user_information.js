@@ -49,13 +49,19 @@ Tasks.UserInformationView = SC.View.extend(
     this.loginNameField = this.createChildView(SC.TextFieldView.extend({
       layout: { top: 42, left: 90, height: 20, width: 300 },
       hint: "_Initials".loc(),
-      valueBinding: SC.binding('*content.loginNameValue', this).toLocale()
+      valueBinding: SC.binding('*content.loginNameValue', this).toLocale(),
+      keyUp: function(evt) {
+        var user = Tasks.usersController.getPath('selection.firstObject');
+        if(CoreTasks.isLoginNameValid(user)) Tasks.userController.clearLoginNameError();
+        else Tasks.userController.displayLoginNameError();
+        sc_super();
+      }
     }));
     childViews.push(this.loginNameField);
     this.loginNameErrorMessageLabel = this.createChildView(SC.LabelView.design({
       layout: { top: 42, left: 395, height: 20, width: 45 },
       classNames: ['error-message'],
-      valueBinding: SC.Binding.oneWay('Tasks.signupController.loginNameErrorMessage')
+      valueBinding: SC.Binding.oneWay('Tasks.userController.loginNameErrorMessage')
     }));
     childViews.push(this.loginNameErrorMessageLabel);
     
@@ -86,13 +92,19 @@ Tasks.UserInformationView = SC.View.extend(
       layout: { top: 106, left: 90, height: 20, width: 300 },
       errorLabel: "_InvalidEmailAddress".loc(),
       hint: "_EmailAddress".loc(),
-      valueBinding: SC.binding('*content.email', this).toLocale()
+      valueBinding: SC.binding('*content.email', this).toLocale(),
+      keyUp: function(evt) {
+        var email = Tasks.userController.get('email');
+        if(email && !email.match(/.+@.+\...+/)) Tasks.userController.displayEmailError();
+        else Tasks.userController.clearEmailError();
+        sc_super();
+      }
     }));
     childViews.push(this.emailField);
     this.emailErrorMessageLabel = this.createChildView(SC.LabelView.design({
       layout: { top: 106, left: 395, height: 20, width: 45 },
       classNames: ['error-message'],
-      valueBinding: SC.Binding.oneWay('Tasks.signupController.emailErrorMessage')
+      valueBinding: SC.Binding.oneWay('Tasks.userController.emailErrorMessage')
     }));
     childViews.push(this.emailErrorMessageLabel);
     this.emailHelpLabel =  this.createChildView(SC.LabelView.design({
