@@ -152,7 +152,7 @@ Tasks.mainPage = SC.Page.design({
         projectsList: SC.ScrollView.design({
           
           classNames: ['projects-pane'],
-          layout: { top: 10, bottom: 35, left: 10, right: 10 },
+          layout: { top: 10, bottom: 35, left: 10, right: 5 },
           
           contentView: SC.ListView.design({
             contentValueKey: 'displayName',
@@ -210,7 +210,7 @@ Tasks.mainPage = SC.Page.design({
            childViews: 'addProjectButton deleteProjectButton'.w(),
 
            addProjectButton: SC.ButtonView.design({
-             layout: { centerY: 0, left: 20, height: 24, width: 32 },
+             layout: { centerY: 0, left: 10, height: 24, width: 32 },
              classNames: ['dark'],
              titleMinWidth: 0,
              icon: 'add-icon',
@@ -220,7 +220,7 @@ Tasks.mainPage = SC.Page.design({
              action: 'addProject'
            }),
            deleteProjectButton: SC.ButtonView.design({
-             layout: { centerY: 0, left: 62, height: 24, width: 32 },
+             layout: { centerY: 0, left: 52, height: 24, width: 32 },
              classNames: ['dark'],
              titleMinWidth: 0,
              icon: 'delete-icon',
@@ -365,7 +365,7 @@ Tasks.mainPage = SC.Page.design({
          tasksList: SC.ScrollView.design({
            
            classNames: ['tasks-pane'],
-           layout: { top: 12, bottom: 35, left: 5, right: 5 },
+           layout: { top: 12, bottom: 35, left: 5, right: 10 },
 
              contentView: SC.ListView.design({
                contentValueKey: 'displayName',
@@ -518,7 +518,7 @@ Tasks.mainPage = SC.Page.design({
              childViews: 'addTaskButton deleteTaskButton summaryView serverMessageView saveButton refreshButton'.w(),
 
              addTaskButton: SC.ButtonView.design({
-               layout: { centerY: 0, left: 10, height: 24, width: 32 },
+               layout: { centerY: 0, left: 5, height: 24, width: 32 },
                classNames: ['dark'],
                titleMinWidth: 0,
                icon: 'add-icon',
@@ -529,7 +529,7 @@ Tasks.mainPage = SC.Page.design({
                action: 'addTask'
              }),
              deleteTaskButton: SC.ButtonView.design(SCUI.Permissible,{
-               layout: { centerY: 0, left: 52, height: 24, width: 32 },
+               layout: { centerY: 0, left: 47, height: 24, width: 32 },
                classNames: ['dark'],
                titleMinWidth: 0,
                icon: 'delete-icon',
@@ -542,7 +542,7 @@ Tasks.mainPage = SC.Page.design({
              }),
 
              summaryView: Tasks.SummaryView.design({
-               layout: { centerY: 0, height: 18, left: 95, width: 400 },
+               layout: { centerY: 0, height: 18, left: 90, width: 400 },
                classNames: ['bottom-bar-label'],
                escapeHTML: NO,
                assignmentsSummaryBinding: SC.Binding.oneWay('Tasks.assignmentsController.assignmentsSummary'),

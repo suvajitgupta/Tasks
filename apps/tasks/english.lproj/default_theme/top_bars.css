@@ -123,6 +123,9 @@
   -moz-box-shadow: inset 0 3px 6px rgba(150,150,150,.6), 0 1px 0 rgba(0,0,0,.4);
   -webkit-box-shadow: inset 0 3px 6px rgba(150,150,150,.6), 0 1px 0 rgba(0,0,0,.4);
 }
+.welcome-message small {
+  font-size: 11px !important;
+}
 
 .filter-icon {
   margin-left: -2px !important;

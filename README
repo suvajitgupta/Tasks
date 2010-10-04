@@ -3,31 +3,13 @@ GETTING TASKS & SPROUTCORE CODE
 
 Change to the directory where you would like to work on Tasks and type...
 
-git clone git://github.com/sproutit/sproutcore-abbot.git abbot
-
 git clone git://github.com/suvajitgupta/Tasks.git tasks
-cd tasks
-
-# if you want to play with the 'touch' version
-git branch --track touch remotes/origin/touch
-git checkout touch
-
-cd frameworks
-
+cd tasks/frameworks
 git clone git://github.com/etgryphon/sproutcore-ui.git scui
 git clone git://github.com/etgryphon/sproutcore-uds.git scuds
 git clone http://github.com/etgryphon/sai.git
-
 git clone git://github.com/suvajitgupta/sproutcore.git
-
-# if you want to play with the 'touch' version
-cd sproutcore
-git remote add upstream http://github.com/sproutit/sproutcore.git
-git fetch upstream
-git branch --track touch upstream/quilmes
-git checkout touch
-
-cd ../../
+cd ../
 
 If you don't have the latest Ruby gems, type...
 
@@ -70,7 +52,7 @@ RUNNING TASKS
 
 1) Start the SproutCore server...
 
-../abbot/bin/sc-server --port 4400
+sc-server --port 4400
 
 2) Navigate to the following URL...
 
