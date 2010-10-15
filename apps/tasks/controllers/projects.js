@@ -17,9 +17,9 @@ Tasks.projectsController = SC.ArrayController.create(
   showSources: function() {
     
     var projects = this.get('arrangedObjects');
-    // console.log('DEBUG: projectsController content changed, editorPoppedUp=' + Tasks.editorPoppedUp + ', projects: ' + projects.getEach('name'));
+    // console.log('DEBUG: projectsController content changed, projects: ' + projects.getEach('name'));
     Tasks.sourcesRedrawNeeded = true;
-    if(Tasks.editorPoppedUp) return;
+    if(Tasks.editorPoppedUp === Tasks.PROJECT_EDITOR) return;
     
     var nodes = [], systemProjects = [], doneProjects = [], activeProjects = [], plannedProjects = [];
     if(projects) {

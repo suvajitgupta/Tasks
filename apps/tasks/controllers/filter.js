@@ -18,7 +18,7 @@ Tasks.filterController = SC.ObjectController.create(
   openPane: function(){
     Tasks.assignmentsController.backupAttributeFilterCriteria();
     var pane = Tasks.get('filterPane');
-    Tasks.editorPoppedUp = Tasks.FILTER_EDITOR;
+    if(!Tasks.get('editorPoppedUp')) Tasks.set('editorPoppedUp', Tasks.FILTER_EDITOR);
     if(pane) pane.append();
   },
   
@@ -29,7 +29,7 @@ Tasks.filterController = SC.ObjectController.create(
   
   applyFilter: function(){
     this._close();
-    Tasks.editorPoppedUp = null;
+    if(Tasks.get('editorPoppedUp') === Tasks.FILTER_EDITOR) Tasks.set('editorPoppedUp', null);
     if(Tasks.assignmentsRedrawNeeded) Tasks.assignmentsController.showAssignments();
   },
   

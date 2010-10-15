@@ -68,6 +68,7 @@ Tasks.projectController = SC.ObjectController.create(
     if (last !== cur) {
       // console.log('DEBUG: projectSelectionDidChange() project: ' + cur.get('name'));
       Tasks.deselectTasks();
+      if(Tasks.mainPage.getPath('mainPane.tasksSceneView.nowShowing') == 'taskEditor') Tasks.getPath('mainPage.taskEditor').close();
       this._project = cur;
       var oldRoute = '#' + SC.routes.get('location');
       var newRoute = CoreTasks.isSystemProject(cur)? '' : ('#select&projectId=#' + cur.get('id'));

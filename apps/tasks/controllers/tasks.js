@@ -17,7 +17,7 @@ Tasks.tasksController = SC.TreeController.create(
   allowsEmptySelection: YES,
   treeItemIsGrouped: YES,
   
-  isGuestInSystemProject: function() {
+  isGuestInSystemProjectOrNonGuest: function() {
     if(CoreTasks.getPath('currentUser.role') === CoreTasks.USER_ROLE_GUEST) {
       if(Tasks.projectsController.getPath('selection.length') !== 1) return false;
       var selectedProject = Tasks.projectsController.getPath('selection.firstObject');
@@ -30,14 +30,14 @@ Tasks.tasksController = SC.TreeController.create(
     if(Tasks.projectsController.getPath('selection.length') !== 1) return false;
     if(Tasks.assignmentsController.get('displayMode') === Tasks.DISPLAY_MODE_TEAM) return false;
     if(!CoreTasks.getPath('permissions.canCreateTask')) return false;
-    if(!this.isGuestInSystemProject()) return false;
+    if(!this.isGuestInSystemProjectOrNonGuest()) return false;
     return true;
   }.property('content').cacheable(),
   
   isEditable: function() {
     
     if(!CoreTasks.getPath('permissions.canUpdateTask')) return false;
-    if(!this.isGuestInSystemProject()) return false;
+    if(!this.isGuestInSystemProjectOrNonGuest()) return false;
 
     var sel = this.get('selection');
     if(!sel || sel.get('length') === 0) return false;
@@ -57,7 +57,7 @@ Tasks.tasksController = SC.TreeController.create(
     
     if(Tasks.assignmentsController.get('displayMode') === Tasks.DISPLAY_MODE_TEAM) return false;
     if(!CoreTasks.getPath('permissions.canDeleteTask')) return false;
-    if(!this.isGuestInSystemProject()) return false;
+    if(!this.isGuestInSystemProjectOrNonGuest()) return false;
     
     var sel = this.get('selection');
     if(!sel || sel.get('length') === 0) return false;
@@ -183,8 +183,6 @@ Tasks.tasksController = SC.TreeController.create(
         var developmentStatusWithValidation = task.get('developmentStatusWithValidation');
         if(developmentStatusWithValidation !== value) task.set('developmentStatusWithValidation', value);
       });
-      // check for edior popped up in just this case since this method is called to trigger validation button enablement/disablement
-      if(!Tasks.editorPoppedUp && CoreTasks.get('autoSave')) Tasks.saveData();
     } else {
       var firstDevelopmentStatusWithValidation = null;
       sel.forEach(function(task) {
@@ -279,11 +277,11 @@ Tasks.tasksController = SC.TreeController.create(
   }.observes('selection'),
   
   editNewTask: function(task){
-    var listView = Tasks.getPath('mainPage.mainPane.tasksList');
+    var listView = Tasks.mainPage.getPath('tasksList.contentView');
     var idx = listView.get('content').indexOf(task);
     // console.log('DEBUG: tasksController.editNewTask at index: ' + idx);
     var listItem = listView.itemViewForContentIndex(idx);
-    if(listItem) listItem.popupEditor();
+    if(listItem) listItem.showEditor();
   }
 
 });

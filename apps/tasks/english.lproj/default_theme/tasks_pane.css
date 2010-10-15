@@ -9,7 +9,7 @@
 
 
 /*-----------------------------------------------------------------
- * Task pane styles
+ * Task pane/editor styles
  */
  
 .sc-collection-view.sc-list-view.sc-list-view.tasks-pane-inner {
@@ -24,6 +24,30 @@
   position: absolute !important;
   margin-left: -5px !important;
 }
+
+.sc-master-detail-view .sc-workspace-view .task-editor {
+  background: #DDD !important;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+}
+.sc-master-detail-view .sc-workspace-view .task-editor .title-bar {
+  font-size: 14px !important;
+  font-weight: bold !important;
+  padding-top: 2px !important;
+  text-align: center !important;
+}
+
+.sc-master-detail-view .sc-workspace-view .task-editor .sc-label-view {
+    background: none;
+}
+.sc-master-detail-view .sc-workspace-view .task-editor .scui-combobox-dropdown-button-view {
+  background-color: #DDD !important;
+}
+.sc-master-detail-view .sc-workspace-view .task-editor .sc-text-field-view {
+    background: white !important;
+}
+
+
 
 /*-----------------------------------------------------------------
  * Task pane helper images
@@ -94,6 +118,7 @@
   opacity: 1;
 }
 
+.sc-master-detail-view .sc-workspace-view .task-editor .title-bar,
 .assignee-not-loaded {
   background: #AAA none repeat scroll 0 0 !important;
   -moz-box-shadow: inset 0px 2px 2px #CCC;
@@ -218,18 +243,38 @@
   right: -2px !important;
 }
 
+.back-icon {
+  background: static_url('images/back.png') no-repeat !important;
+}
+
 .previous-icon {
-  width: 16px !important;
-  height: 16px !important;
-  background: static_url('images/item-previous.png') no-repeat;
+  background-image: static_url('images/item-previous.png') !important;
 }
 
 .next-icon {
-  width: 16px !important;
-  height: 16px !important;
-  background: static_url('images/item-next.png') no-repeat;
+  background: static_url('images/item-next.png') no-repeat !important;
 }
 
+.previous-icon, .next-icon, .back-icon {
+	background-color: #CCC !important;
+  border: 1px solid #555 !important;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-box-shadow: 0 1px 1px #111;
+  -webkit-box-shadow: 0 1px 1px #111;
+}
+.previous-icon:hover, .next-icon:hover, .back-icon:hover {
+  border: 1px solid #000 !important;
+}
+.previous-icon.active, .next-icon.active, .back-icon.active {
+	background-color: #999 !important;
+  border: 1px solid #000 !important;
+  -moz-box-shadow: 0 1px 1px #444 inset;
+  -webkit-box-shadow: 0 1px 1px #444 inset;
+}
+.previous-icon.disabled, .next-icon.disabled {
+  opacity: 0.5;
+}
 
 /*-----------------------------------------------------------------
  * Task type styles

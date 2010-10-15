@@ -61,7 +61,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     this._editorPane = SCUI.ModalPane.create({
       
       titleBarHeight: 40,
-      title: "_Project".loc() + ' ' + that.getPath('content.displayId') + ' ' + "Info".loc(),
+      title: "_Project".loc() + ' ' + that.getPath('content.displayId'),
       minWidth: 700,
       minHeight: 240,
       layout: { centerX:0, centerY: 0, width: 700, height: 315 },
@@ -72,7 +72,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       popup: function() {
         if(that.get('isSystemProject')) return;
         this.append();
-        Tasks.editorPoppedUp = Tasks.PROJECT_EDITOR;
+        if(!Tasks.get('editorPoppedUp')) Tasks.set('editorPoppedUp', Tasks.PROJECT_EDITOR);
         this._timeLeft = that.getPath('content.timeLeft');
         this._activatedAt = that.getPath('content.activatedAt');
         var name = that.getPath('content.name');
@@ -83,7 +83,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       },
       remove: function() {
         sc_super();
-        Tasks.editorPoppedUp = null;
+        if(Tasks.get('editorPoppedUp') === Tasks.PROJECT_EDITOR) Tasks.set('editorPoppedUp', null);
         var content = that.get('content');
         var cv = this.get('contentView');
         content.setIfChanged('displayName', cv.getPath('nameField.value'));
@@ -159,9 +159,11 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
           textAlign: SC.ALIGN_RIGHT,
           value: "_Activated:".loc()
         }),
+        // FIXME: [EG] allow SCUI.DatePickerView popup picker height to be adjustable, not hardcoded to 255
         activatedAtField: SCUI.DatePickerView.design({
           layout: { top: 37, right: 10, height: 24, width: 100 },
           dateFormat: CoreTasks.DATE_FORMAT,
+          hint: "_ChooseDate".loc(),
           isEnabledBinding: 'CoreTasks.permissions.canUpdateProject',
           date: that.getPath('content.activatedAtValue')
         }),

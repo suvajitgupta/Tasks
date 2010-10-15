@@ -32,7 +32,7 @@ General Infrastructure @Active
 - Handle persistence consistently (nothing should save unless user hits "Save" when Autosave is turned off) [SE] <SG> @Done %Passed
 - Implement GUI-based RBAC (role-based access control) [SG] $Feature @Done %Passed
 - Add a dot before Projects/Tasks/Users that were created or updated recently (within the last day) <SE> [SG] $Feature @Done %Passed
-- Display record created/updated time at the bottom of popup editors [SG] $Feature @Done %Passed
+- Display record created/updated time at the bottom of Project/Task/User editors [SG] $Feature @Done %Passed
 - Support view mode of tasks and selection of project/filter/search using SproutCore routes [SG] $Feature @Done %Passed
 - Destroy authentication token when User logs out [SG] <JH2> $Feature @Done %Passed
 - Implement/benchmark JSONP-based data loading for performance speedup (XHRs are faster) [SG] <SE> @Done
@@ -75,7 +75,7 @@ Task Manager GUI @Active
 - Show Task Priority (font style), Status (font color), Validation (background color) [SG] <MB> @Done $Feature %Passed
 v Add hover over tooltip for Task #IDs to show Submitter [SG] <JH2> $Feature @Done %Passed
 v Enable Task Validation editing only when in Done status [SG] $Feature @Done %Passed
-- Add support for navigating to previous/next Tasks via popup editor [SG] $Feature @Done %Passed
+- Add support for navigating to previous/next Tasks via slide-out editor [SG] $Feature @Done %Passed
 - Allow multi-Task modification of Type/Status/Priority/Validation via context menu [SG] $Feature @Done %Passed
 ^ Add Task search filter (by Assignee/Submitter/#IDs/Name) & corresponding cancel button in top bar: support type-ahead searching <JH2> [SG] @Done %Passed $Feature
 ^ Allow Task attribute filtering by Type, Priority, Status, and Validation fields via a top bar button/sheet pane [SG] $Feature @Done %Passed
@@ -89,16 +89,16 @@ v Enable/disable "Delete Task" button based on having a selected Task [SG] @Done
 ^ Add buttons to add/delete Tasks [SG] <SE> @Done %Passed $Feature
 | Logged in user is default Submitter, Assignee is either set to the same as selected Task (if one) or to logged in user
 | Copy over Project/Type/Priority attributes of first selected Task to new Task
-- Delete a new Task if its name hasn't been modified when the popup editor is closed (deselect all Tasks too) [SG] $Feature @Done %Passed
+- Delete a new Task if its name hasn't been modified when the slide-out editor is closed (deselect all Tasks too) [SG] $Feature @Done %Passed
 - Clear Task Validation if status is changed from Done, disallow entry of Passed/Failed when not Done [SG] <MB> $Feature @Done %Passed
 ^ Show finished/left Effort subtotals (exclude incomplete Low priority Tasks) on far right for load balancing [SG] @Done $Feature %Passed
 - Append "?" for range-based subtotals including Ttasks with unspecified Efforts [SG] @Done $Feature %Passed
 - Color code Assignee non loading in gray, under loading in green, proper loading in blue, and over loading in red [SG] @Done $Feature %Passed
 v Add hover over tooltip for Assignees to show how many Tasks they have and to explain loading color codes [SG] @Done $Feature %Passed
 ^ Allow multi-Task drag-and-drop reassignment to other Assignees [BB] <SG>  @Done $Feature %Passed
-^ Add popup viewer/editor for Task attributes [SG] <JH2> $Feature @Done %Passed
-- Display watch count in Task popup editor and list watchers by clicking on that button [SG] $Feature @Done %Passed
-- Limit Assignees to non-Guest users in Task popup editor [SG] $Feature @Done %Passed
+^ Add slide-out viewer/editor for Task attributes [SG] <JH2> $Feature @Done %Passed
+- Display watch count in Task slide-out editor and list watchers by clicking on that button [SG] $Feature @Done %Passed
+- Limit Assignees to non-Guest users in Task slide-out editor [SG] $Feature @Done %Passed
 - Support multi-Task ID/Name copy to clipboard from top bar [SG] <JH2> $Feature @Done %Passed
 v Add Task context menu with options: Add, Duplicate, Delete; All Task Attributes; Copy ID/Name, Copy Link [SG] $Feature @Done %Passed
 ^ Add ability to watch Tasks and get Email Notifications after Task changes [SG] <JH2> $Feature @Done %Passed
@@ -202,7 +202,7 @@ Styling/Hardening @Active
 | Login, Guest Signup, Logout
 | All/Unallocated/Unallocated Tasks System Projects, Tasks/Team display modes
 | Project/Task/User add/duplicate/delete via buttons/context menus
-| Project/Task modifications via inline and popup editors
+| Project/Task modifications via inline and popup/slide-out editors
 | Project status, Task reassignment/reallocation, and User role change via drag-and-drop
 | Task filtering via QuickFilters/attributes and assignees/submitters/IDs/name
 | User modifications via User Manager, searching for users

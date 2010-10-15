@@ -139,6 +139,9 @@
   z-index: 100 !important;
   cursor: pointer !important;
 }
+.filter-cancel-icon.disabled {
+  opacity: 0.5;
+}
 
 .sc-view .search-bar {
   background: static_url('images/search.png') no-repeat;
@@ -154,11 +157,19 @@
   color: #BBB !important;
   top: -2px !important;
 }
+.sc-view .sc-text-field-view.search-bar.disabled input {
+  color: #777 !important;
+}
 
 .sc-view .sc-text-field-view.search-bar.sc-hint .field,
 .sc-view .sc-text-field-view.search-bar .sc-hint {
-  color: #777 !important;
+  color: #888 !important;
 }
+.sc-view .sc-text-field-view.search-bar.sc-hint.disabled .field,
+.sc-view .sc-text-field-view.search-bar.disabled .sc-hint {
+  color: #555 !important;
+}
+
 
 .sc-view .sc-text-field-view.search-bar .sc-hint {
   top: 2px !important;

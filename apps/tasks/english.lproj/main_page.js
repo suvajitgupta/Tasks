@@ -20,6 +20,7 @@ sc_require('views/summary');
 Tasks._wideLogo = document.title.match(/Eloqua/)? true : false;
 Tasks.mainPageHelper = SC.Object.create({
 
+  editorPoppedUpBinding: SC.Binding.oneWay('Tasks*editorPoppedUp'),
   displayedTasksCountBinding: SC.Binding.oneWay('Tasks.tasksController*arrangedObjects.length'),
   autoSaveBinding: SC.Binding.oneWay('CoreTasks*autoSave'),
   shouldNotifyBinding: SC.Binding.oneWay('CoreTasks*shouldNotify'),
@@ -56,11 +57,8 @@ Tasks.mainPageHelper = SC.Object.create({
   },
   
   _listActions: function() {
+    // console.log('DEBUG: _listActions()');
     var ret = [];
-    if(this.getPath('displayedTasksCount') > 0) {
-      ret.push({ title: "_LaunchStatistics".loc(), icon: 'statistics-icon', target: 'Tasks', action: 'viewStatistics', isEnabled: YES });
-      ret.push({ isSeparator: YES });
-    }
     ret.push({ title: "_LaunchSettings".loc(), icon: 'settings-icon', target: 'Tasks', action: 'settings', isEnabled: YES });
     var autoSave = this.get('autoSave');
     ret.push({ title: "_Toggle".loc() + "_AutoSave".loc(), icon: 'save-icon', target: 'Tasks', action: 'toggleAutoSave', isEnabled: YES, checkbox: autoSave });
@@ -68,15 +66,21 @@ Tasks.mainPageHelper = SC.Object.create({
       var shouldNotify = this.get('shouldNotify');
       ret.push({ title: "_Toggle".loc() + "_SendNotifications".loc(), icon: 'email-icon', target: 'Tasks', action: 'toggleShouldNotify', isEnabled: YES, checkbox: shouldNotify });
     }
-    ret.push({ isSeparator: YES });
-    ret.push({ title: "_LaunchImport".loc(), icon: 'import-icon', target: 'Tasks', action: 'importData', isEnabled: YES });
-    ret.push({ title: "_LaunchExportText".loc(), icon: 'text-icon', target: 'Tasks.exportDataController', action: 'exportDataAsText', isEnabled: YES });
-    ret.push({ title: "_LaunchExportHTML".loc(), icon: 'html-icon', target: 'Tasks.exportDataController', action: 'exportDataAsHTML', isEnabled: YES });
+    if(!Tasks.editorPoppedUp) {
+      ret.push({ isSeparator: YES });
+      if(this.getPath('displayedTasksCount') > 0) {
+        ret.push({ title: "_LaunchStatistics".loc(), icon: 'statistics-icon', target: 'Tasks', action: 'viewStatistics', isEnabled: YES });
+      }
+      ret.push({ title: "_LaunchImport".loc(), icon: 'import-icon', target: 'Tasks', action: 'importData', isEnabled: YES });
+      ret.push({ title: "_LaunchExportText".loc(), icon: 'text-icon', target: 'Tasks.exportDataController', action: 'exportDataAsText', isEnabled: YES });
+      ret.push({ title: "_LaunchExportHTML".loc(), icon: 'html-icon', target: 'Tasks.exportDataController', action: 'exportDataAsHTML', isEnabled: YES });
+    }
     ret.push({ isSeparator: YES });
     ret.push({ title: "_LaunchHelp".loc(), icon: 'sc-icon-help-16', target: 'Tasks', action: 'help', isEnabled: YES });
     ret.push({ title: "_Logout".loc(), icon: 'logout-icon', target: 'Tasks', action: 'logout', isEnabled: YES });
-    return ret;
-  }.property('displayedTasksCount', 'autoSave', 'shouldNotify').cacheable(),
+    this.set('actions', ret);
+  }.observes('editorPoppedUp', 'displayedTasksCount', 'autoSave', 'shouldNotify'),
+  actions: null,
   
   currentUserNameBinding: SC.Binding.oneWay('CoreTasks*currentUser.name'),
   currentUserRoleBinding: SC.Binding.oneWay('CoreTasks*currentUser.role'),
@@ -96,7 +100,7 @@ Tasks.mainPage = SC.Page.design({
    
    welcomeMessage: SC.outlet('masterDetailView.detailView.topToolbar.welcomeMessageLabel'),
    projectsList:   SC.outlet('masterDetailView.masterView.contentView.projectsList.contentView'),
-   tasksList:      SC.outlet('masterDetailView.detailView.contentView.tasksList.contentView'),
+   tasksSceneView: SC.outlet('masterDetailView.detailView.contentView.tasksSceneView'),
    serverMessage:  SC.outlet('masterDetailView.detailView.contentView.tasksBottomBar.serverMessageView'),
 
    layout: { left: 0, right: 0, top: 0, bottom: 0 },
@@ -111,7 +115,7 @@ Tasks.mainPage = SC.Page.design({
        
       topToolbar: SC.ToolbarView.extend({
         
-        childViews: "installationLogo tasksLogo".w(),
+        childViews: 'installationLogo tasksLogo'.w(),
         classNames: ['title-bar'],
         
         installationLogo: SC.View.design({
@@ -147,7 +151,7 @@ Tasks.mainPage = SC.Page.design({
        
       contentView: SC.View.design({ // projectsList/BottomBar
         
-        childViews: "projectsList projectsBottomBar".w(),
+        childViews: 'projectsList projectsBottomBar'.w(),
          
         projectsList: SC.ScrollView.design({
           
@@ -241,7 +245,7 @@ Tasks.mainPage = SC.Page.design({
 
        topToolbar: SC.ToolbarView.extend({
          
-         childViews: "actionsButton displayModeSegments masterPickerButton welcomeMessageLabel clippyIcon filterPanelButton filterCancelButton tasksSearchField tasksSearchCancelButton".w(),
+         childViews: 'actionsButton displayModeSegments masterPickerButton welcomeMessageLabel clippyIcon filterPanelButton filterCancelButton tasksSearchField tasksSearchCancelButton'.w(),
          classNames: ['title-bar'],
          
          actionsButton: SC.ButtonView.design(SCUI.DropDown, {
@@ -261,7 +265,7 @@ Tasks.mainPage = SC.Page.design({
              itemSeparatorKey: 'isSeparator',
              itemIsEnabledKey: 'isEnabled',
              itemCheckboxKey: 'checkbox',
-             itemsBinding: SC.Binding.oneWay('Tasks.mainPageHelper._listActions')    
+             itemsBinding: SC.Binding.oneWay('Tasks.mainPageHelper*actions')    
            })
          }),
 
@@ -275,7 +279,8 @@ Tasks.mainPage = SC.Page.design({
            itemIconKey: 'icon', // disabling icons for now - appearing too cluttered
            itemValueKey: 'value',
            toolTip: "_DisplayModeTooltip".loc(),
-           valueBinding: 'Tasks.assignmentsController.displayMode'
+           valueBinding: 'Tasks.assignmentsController.displayMode',
+           isEnabledBinding: SC.Binding.not('Tasks.mainPageHelper*editorPoppedUp')
          }),
 
          masterPickerButton: SC.ButtonView.extend({
@@ -296,9 +301,11 @@ Tasks.mainPage = SC.Page.design({
              this.mouseDown();
            },
            mouseDown: function() {
+             if(Tasks.mainPageHelper.get('editorPoppedUp')) return;
              Tasks.showCurrentUserTasks();
            },
-           valueBinding: SC.Binding.oneWay('Tasks.mainPageHelper.welcomeMessage')
+           valueBinding: SC.Binding.oneWay('Tasks.mainPageHelper.welcomeMessage'),
+           isEnabledBinding: SC.Binding.not('Tasks.mainPageHelper*editorPoppedUp')
          }),
 
          clippyIcon: SC.View.design({
@@ -318,7 +325,8 @@ Tasks.mainPage = SC.Page.design({
            classNames: ['dark'],
            toolTip: "_FilterTooltip".loc(),
            target: 'Tasks',
-           action: 'filterTasks'
+           action: 'filterTasks',
+           isEnabledBinding: SC.Binding.not('Tasks.mainPageHelper*editorPoppedUp')
          }),
          filterCancelButton: SC.View.design({ // Filter cancel button
            layout: { centerY: 0, height: 12, right: 219, width: 12 },
@@ -328,6 +336,7 @@ Tasks.mainPage = SC.Page.design({
              this.mouseDown();
            },
            mouseDown: function() {
+             if(Tasks.mainPageHelper.get('editorPoppedUp')) return;
              Tasks.assignmentsController.clearAttributeFilter();
              Tasks.assignmentsController.showAssignments();
            },
@@ -341,7 +350,8 @@ Tasks.mainPage = SC.Page.design({
            renderMixin: function(context, firstTime) { // Used custom tooltip rendering to avoid escaping by SCUI.Toolip
              context.attr('title', "_TasksSearchTooltip".loc()) ;
            },
-           valueBinding: 'Tasks.assignmentsController.searchFilter'
+           valueBinding: 'Tasks.assignmentsController.searchFilter',
+           isEnabledBinding: SC.Binding.not('Tasks.mainPageHelper*editorPoppedUp')
          }),
          tasksSearchCancelButton: SC.View.design({ // Tasks Search cancel button
            layout: { centerY: 0, height: 12, right: 17, width: 12 },
@@ -351,6 +361,7 @@ Tasks.mainPage = SC.Page.design({
              this.mouseDown();
            },
            mouseDown: function() {
+             if(Tasks.mainPageHelper.get('editorPoppedUp')) return;
              Tasks.assignmentsController.set('searchFilter', '');
            },
            isVisibleBinding: SC.Binding.oneWay('Tasks.assignmentsController.searchFilter').bool()
@@ -360,158 +371,16 @@ Tasks.mainPage = SC.Page.design({
 
        contentView: SC.View.design({ // tasksList/BottomBar
          
-         childViews: "tasksList tasksBottomBar".w(),
+          childViews: 'tasksSceneView tasksBottomBar'.w(),
          
-         tasksList: SC.ScrollView.design({
+          tasksSceneView: SC.SceneView.design({
            
-           classNames: ['tasks-pane'],
-           layout: { top: 12, bottom: 35, left: 5, right: 10 },
-
-             contentView: SC.ListView.design({
-               contentValueKey: 'displayName',
-               contentUnreadCountKey: 'displayEffort',
-               contentBinding: 'Tasks.tasksController.arrangedObjects',
-               selectionBinding: 'Tasks.tasksController.selection',
-               localize: YES,
-               rowHeight: 24,
-               classNames: ['tasks-pane-inner'],
-               hasContentIcon: Tasks.softwareMode,
-               contentIconKey: 'icon',
-               exampleView: Tasks.TaskItemView,
-               groupExampleView: Tasks.AssigneeItemView,
-               isEditable: YES,
-               allowDeselectAll: YES,
-               canEditContent: YES,
-               canReorderContent: YES,
-               canDeleteContent: YES,
-               destroyOnRemoval: YES,
-               selectOnMouseDown: YES,
-               delegate: Tasks.tasksListDelegate,
-
-               headerRowHeight: 40,
-               rowDelegate: function() {
-                 return this;
-               }.property().cacheable(),
-               customRowHeightIndexes: function() {
-                 return SC.IndexSet.create(0, this.get('length'));
-               }.property('length').cacheable(),
-               contentIndexRowHeight: function(view, content, idx) {
-                 var outlineLevel = this.get('contentDelegate').contentIndexOutlineLevel(this, content, idx);
-                 var isHeader = (outlineLevel === 0) ? YES : NO;
-                 return idx && isHeader? this.get('headerRowHeight') : this.get('rowHeight');
-               },
-               _contentDidChange: function() { // Force tasks list indexes to be recomputed when content changes
-                 this.rowHeightDidChangeForIndexes(SC.IndexSet.create(0, this.get('length')));
-               }.observes('content'),
-
-               selectionEvent: null,
-               mouseDown: function(event) {
-                 var ret = sc_super();
-                 if(event.which === 3) { // right click
-                   this.set('selectionEvent', event);
-                   this.invokeLast('popupContextMenu');
-                 }
-                 return ret;
-               },
-               popupContextMenu: function() {
-                 var items = Tasks.TaskItemView.buildContextMenu();
-                 if(items.length > 0) {
-                   var pane = SCUI.ContextMenuPane.create({
-                     contentView: SC.View.design({}),
-                     layout: { width: 180, height: 0 },
-                     escapeHTML: NO,
-                     itemTitleKey: 'title',
-                     itemIconKey: 'icon',
-                     itemIsEnabledKey: 'isEnabled',
-                     itemTargetKey: 'target',
-                     itemActionKey: 'action',
-                     itemSeparatorKey: 'isSeparator',
-                     itemCheckboxKey: 'checkbox',
-                     items: items        
-                   });
-                   pane.popup(this, this.get('selectionEvent')); // pass in the mouse event so the pane can figure out where to put itself
-                 }
-               },
-
-               /* Helper image display logic:
-                   No projects selected - "select project" helper
-                 	Single project selected:
-                 	  if project has no tasks:
-                 		  addTask enabled - "add tasks tasks" helper
-                   		else - "display mode" helper
-                   	else project has tasks
-               		    if no tasks filtering through - "adjust filter" helper
-                 	Multiple projects selected
-                 		if projects have tasks:
-                 		  if no tasks filtering through - "adjust filter" helper
-             	*/
-               render: function(context, firstTime) {
-
-                 sc_super();
-                 // console.log('DEBUG: Tasks Detail render(), editorPoppedUp=' + Tasks.editorPoppedUp);
-                 if(CoreTasks.loginTime) return;
-                 var sel = Tasks.projectsController.getPath('selection');
-                 var selectedProjectsCount = sel? sel.get('length') : 0;
-                 if(selectedProjectsCount === 0) { // No projects selected
-                   context.addClass('helper-select-project');
-                   return;
-                 }
-                 else if(selectedProjectsCount === 1) { // Single project selected
-                   if(sel.getPath('firstObject.tasks.length') === 0) { // Project has no tasks
-                     if(Tasks.tasksController.isAddable()) context.addClass('helper-add-tasks');
-                     else context.addClass('helper-display-mode');
-                     return;
-                   }
-                   else { // Project has tasks
-                     if(this.getPath('content.length') === 0) { // No tasks filtering through
-                       context.addClass('helper-adjust-filter');
-                       return;
-                     }
-                   }
-                 }
-                 else { // Multiple projects selected
-                   var tasksCount = 0;
-                   var ctx = {};
-                   for (var i = 0; i < selectedProjectsCount; i++) {
-                     var project = sel.nextObject(i, null, ctx);
-                     tasksCount += project.getPath('tasks.length');
-                   }
-                   if(tasksCount > 0) { // Projects have tasks
-                     if(this.getPath('content.length') === 0) { // No tasks filtering through
-                       context.addClass('helper-adjust-filter');
-                       return;
-                     }
-                   }
-                 }
-
-                 // Remove helper images (if any) and render tasks
-                 context.removeClass('helper-add-tasks');
-                 context.removeClass('helper-display-mode');
-                 context.removeClass('helper-adjust-filter');
-               }
-
-             }),
-
-             // Hotkeys - be careful to avoid conflicts with browser shortcuts!
-             keyDown: function(event) {
-               var ret, commandCode = event.commandCodes();
-               // console.log('DEBUG: hotkey "' + commandCode[0] + '" pressed');
-               if (commandCode[0] === 'ctrl_='){  // control_equals
-                 Tasks.addTask();
-                 ret = YES;
-               }
-               else if (commandCode[0] === 'ctrl_shift_+'){  // control_shift_plus
-                 Tasks.duplicateTask();
-                 ret = YES;
-               }
-               else {
-                 ret = NO;
-               }
-               return ret;
-             }
-             
-          }), // tasksList
-
+            layout: { top: 12, bottom: 35, left: 5, right: 10 },
+            scenes: ['tasksList', 'taskEditor'],
+            nowShowing: 'tasksList'
+           
+          }),
+         
           tasksBottomBar: SC.View.design({
 
              layout: { bottom: 0, height: 35, left: 0, right: 0 },
@@ -524,6 +393,7 @@ Tasks.mainPage = SC.Page.design({
                icon: 'add-icon',
                toolTip: "_AddTaskTooltip".loc(),
                isVisibleBinding: 'CoreTasks.permissions.canCreateTask',
+               // FIXME: [SG] get add task button to be enabled properly at startup - it comes on if you click on another project
                isEnabledBinding: 'Tasks.tasksController.isAddable',
                target: 'Tasks',
                action: 'addTask'
@@ -545,6 +415,7 @@ Tasks.mainPage = SC.Page.design({
                layout: { centerY: 0, height: 18, left: 90, width: 400 },
                classNames: ['bottom-bar-label'],
                escapeHTML: NO,
+               editorPoppedUpBinding: SC.Binding.oneWay('Tasks*editorPoppedUp'),
                assignmentsSummaryBinding: SC.Binding.oneWay('Tasks.assignmentsController.assignmentsSummary'),
                projectsSelectionBinding: SC.Binding.oneWay('Tasks.projectsController.selection'),
                tasksSelectionBinding: SC.Binding.oneWay('Tasks.tasksController.selection')
@@ -558,9 +429,7 @@ Tasks.mainPage = SC.Page.design({
                textAlign: SC.ALIGN_RIGHT,
                value: '',
                isVisible: NO,
-               isVisibleBinding: SC.Binding.transform(function(value, binding) {
-                                                        return !value;
-                                                      }).from('Tasks.mainPage.mainPane.masterDetailView.masterIsHidden')
+               isVisibleBinding: SC.Binding.not('Tasks.mainPage.mainPane.masterDetailView.masterIsHidden')
              }),
 
              saveButton: SC.ButtonView.design({
@@ -570,9 +439,7 @@ Tasks.mainPage = SC.Page.design({
                icon: 'save-icon',
                toolTip: "_SaveTooltip".loc(),
                isEnabledBinding: 'CoreTasks.needsSave',
-               isVisibleBinding: SC.Binding.transform(function(value, binding) {
-                                                        return !value;
-                                                      }).from('CoreTasks.autoSave'),
+               isVisibleBinding: SC.Binding.not('CoreTasks.autoSave'),
                target: 'Tasks',
                action: 'saveData'
              }),
@@ -597,6 +464,156 @@ Tasks.mainPage = SC.Page.design({
 
       }) // masterDetailView
        
-   }) // mainPane
+   }), // mainPane
+   
+   tasksList: SC.ScrollView.design({
+
+     classNames: ['tasks-pane'],
+
+     contentView: SC.ListView.design({
+       contentValueKey: 'displayName',
+       contentUnreadCountKey: 'displayEffort',
+       contentBinding: 'Tasks.tasksController.arrangedObjects',
+       selectionBinding: 'Tasks.tasksController.selection',
+       localize: YES,
+       rowHeight: 24,
+       classNames: ['tasks-pane-inner'],
+       hasContentIcon: Tasks.softwareMode,
+       contentIconKey: 'icon',
+       exampleView: Tasks.TaskItemView,
+       groupExampleView: Tasks.AssigneeItemView,
+       isEditable: YES,
+       allowDeselectAll: YES,
+       canEditContent: YES,
+       canReorderContent: YES,
+       canDeleteContent: YES,
+       destroyOnRemoval: YES,
+       selectOnMouseDown: YES,
+       delegate: Tasks.tasksListDelegate,
+
+       headerRowHeight: 40,
+       rowDelegate: function() {
+         return this;
+       }.property().cacheable(),
+       customRowHeightIndexes: function() {
+         return SC.IndexSet.create(0, this.get('length'));
+       }.property('length').cacheable(),
+       contentIndexRowHeight: function(view, content, idx) {
+         var outlineLevel = this.get('contentDelegate').contentIndexOutlineLevel(this, content, idx);
+         var isHeader = (outlineLevel === 0) ? YES : NO;
+         return idx && isHeader? this.get('headerRowHeight') : this.get('rowHeight');
+       },
+       _contentDidChange: function() { // Force tasks list indexes to be recomputed when content changes
+         this.rowHeightDidChangeForIndexes(SC.IndexSet.create(0, this.get('length')));
+       }.observes('content'),
+
+       selectionEvent: null,
+       mouseDown: function(event) {
+         var ret = sc_super();
+         if(event.which === 3) { // right click
+           this.set('selectionEvent', event);
+           this.invokeLast('popupContextMenu');
+         }
+         return ret;
+       },
+       popupContextMenu: function() {
+         var items = Tasks.TaskItemView.buildContextMenu();
+         if(items.length > 0) {
+           var pane = SCUI.ContextMenuPane.create({
+             contentView: SC.View.design({}),
+             layout: { width: 180, height: 0 },
+             escapeHTML: NO,
+             itemTitleKey: 'title',
+             itemIconKey: 'icon',
+             itemIsEnabledKey: 'isEnabled',
+             itemTargetKey: 'target',
+             itemActionKey: 'action',
+             itemSeparatorKey: 'isSeparator',
+             itemCheckboxKey: 'checkbox',
+             items: items        
+           });
+           pane.popup(this, this.get('selectionEvent')); // pass in the mouse event so the pane can figure out where to put itself
+         }
+       },
+
+       /* Helper image display logic:
+           No projects selected - "select project" helper
+         	Single project selected:
+         	  if project has no tasks:
+         		  addTask enabled - "add tasks tasks" helper
+           		else - "display mode" helper
+           	else project has tasks
+       		    if no tasks filtering through - "adjust filter" helper
+         	Multiple projects selected
+         		if projects have tasks:
+         		  if no tasks filtering through - "adjust filter" helper
+     	*/
+       render: function(context, firstTime) {
+
+         sc_super();
+         if(CoreTasks.loginTime) return;
+         var sel = Tasks.projectsController.getPath('selection');
+         var selectedProjectsCount = sel? sel.get('length') : 0;
+         if(selectedProjectsCount === 0) { // No projects selected
+           context.addClass('helper-select-project');
+           return;
+         }
+         else if(selectedProjectsCount === 1) { // Single project selected
+           if(sel.getPath('firstObject.tasks.length') === 0) { // Project has no tasks
+             if(Tasks.tasksController.isAddable()) context.addClass('helper-add-tasks');
+             else context.addClass('helper-display-mode');
+             return;
+           }
+           else { // Project has tasks
+             if(this.getPath('content.length') === 0) { // No tasks filtering through
+               context.addClass('helper-adjust-filter');
+               return;
+             }
+           }
+         }
+         else { // Multiple projects selected
+           var tasksCount = 0;
+           var ctx = {};
+           for (var i = 0; i < selectedProjectsCount; i++) {
+             var project = sel.nextObject(i, null, ctx);
+             tasksCount += project.getPath('tasks.length');
+           }
+           if(tasksCount > 0) { // Projects have tasks
+             if(this.getPath('content.length') === 0) { // No tasks filtering through
+               context.addClass('helper-adjust-filter');
+               return;
+             }
+           }
+         }
+
+         // Remove helper images (if any) and render tasks
+         context.removeClass('helper-add-tasks');
+         context.removeClass('helper-display-mode');
+         context.removeClass('helper-adjust-filter');
+       }
+
+     }),
+
+     // Hotkeys - be careful to avoid conflicts with browser shortcuts!
+     keyDown: function(event) {
+       var ret, commandCode = event.commandCodes();
+       // console.log('DEBUG: hotkey "' + commandCode[0] + '" pressed');
+       if (commandCode[0] === 'ctrl_='){  // control_equals
+         Tasks.addTask();
+         ret = YES;
+       }
+       else if (commandCode[0] === 'ctrl_shift_+'){  // control_shift_plus
+         Tasks.duplicateTask();
+         ret = YES;
+       }
+       else {
+         ret = NO;
+       }
+       return ret;
+     }
+
+  }), // tasksList
+  
+  taskEditor: Tasks.TaskEditorView.design({})
 
 }); // mainPage
