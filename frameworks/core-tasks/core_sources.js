@@ -8,7 +8,7 @@
  * @author Sean Eidemiller
  */
 CoreTasks.RemoteDataSource = SC.DataSource.extend({
-  // FIXME: [SE] handle 401 failures property and clear isSaving flag
+  // FIXME: [SG/SE] handle 401 failures property and clear isSaving flag
 
   /**
    * Creates a single record.
