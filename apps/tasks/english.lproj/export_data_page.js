@@ -30,6 +30,7 @@ Tasks.exportDataPage = SC.Page.create({
       exportField: SC.TextFieldView.design({
         layout: { left: 10, right: 10, top: 10, bottom: 40 },
         valueBinding: SC.Binding.oneWay('Tasks.exportDataController.data'),
+        maxLength: 1000000,
         isTextArea: YES
       }),
       

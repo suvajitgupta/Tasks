@@ -43,6 +43,7 @@ Tasks.importDataPage = SC.Page.create({
 
       dataEntryField: SC.TextFieldView.design({
         layout: { top: 55, left: 10, right: 10, bottom: 40 },
+        maxLength: 1000000,
         isTextArea: YES,
         valueBinding: 'Tasks.importDataController.importData'
       }),

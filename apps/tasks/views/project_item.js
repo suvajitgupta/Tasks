@@ -159,7 +159,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
           textAlign: SC.ALIGN_RIGHT,
           value: "_Activated:".loc()
         }),
-        // FIXME: [EG] allow SCUI.DatePickerView popup picker height to be adjustable, not hardcoded to 255
+        // FIXME: [SG/JL] allow SCUI.DatePickerView popup picker height to be adjustable, not hardcoded to 255
         activatedAtField: SCUI.DatePickerView.design({
           layout: { top: 37, right: 10, height: 24, width: 100 },
           dateFormat: CoreTasks.DATE_FORMAT,
@@ -176,6 +176,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
         descriptionField: SC.TextFieldView.design({
           layout: { top: 95, left: 10, right: 10, bottom: 65 },
           hint: "_DescriptionHint".loc(),
+          maxLength: 500000,
           isTextArea: YES,
           isEnabledBinding: 'CoreTasks.permissions.canUpdateProject',
           value: that.getPath('content.description')

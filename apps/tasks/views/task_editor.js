@@ -422,6 +422,7 @@ Tasks.TaskEditorView = SC.View.extend(
    descriptionField: SC.TextFieldView.design({
      layout: { top: 202, left: 10, right: 10, bottom: 40 },
      hint: "_DescriptionHint".loc(),
+     maxLength: 500000,
      isTextArea: YES,
      isEnabled: YES
    }),
