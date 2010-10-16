@@ -74,7 +74,7 @@ PASSWORD_HASH=`/bin/echo -n $PASSWORD | $SHA1_BIN | awk '{print $1}'`
 MILLISECONDS=`/bin/date +%s`000
 
 # Build the JSON and POST to the server using cURL.
-JSON="{name:'$FULL_NAME',loginName:'$LOGIN_NAME',role:'_$ROLE',password:'$PASSWORD_HASH',createdAt:$MILLISECONDS}"
+JSON="{name:'$FULL_NAME',loginName:'$LOGIN_NAME',role:'_$ROLE',password:'$PASSWORD_HASH',createdAt:$MILLISECONDS,updatedAt:$MILLISECONDS}"
 
 /bin/echo -n "Creating new user... "
 
