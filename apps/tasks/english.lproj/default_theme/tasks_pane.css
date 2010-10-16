@@ -354,11 +354,12 @@
 }
 
 .task-validation-passed {
-  background: #6F6 none repeat scroll 0 0;
+  background: #0C0 none repeat scroll 0 0;
 }
 
 .task-validation-failed {
-  background: #F9C none repeat scroll 0 0;
+  background: #F66 none repeat scroll 0 0;
+  text-shadow: none !important;
 }
 
 

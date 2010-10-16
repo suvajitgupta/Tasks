@@ -170,10 +170,10 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' -webkit-border-radius: 3px;\n' +
 '}\n' +
 '.passed {\n' +
-' background-color: #6F6;\n' +
+' background-color: #0C0;\n' +
 '}\n' +
 '.failed {\n' +
-' background-color: #F9C;\n' +
+' background-color: #F66;\n' +
 '}\n' +
 '.effort, .time, .total {\n' +
 ' position: absolute;\n' +
