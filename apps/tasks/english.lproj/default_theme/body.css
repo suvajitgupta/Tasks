@@ -60,9 +60,8 @@ body.sc-theme,
  */
 
 .onscreen-help {
-  color: #444 !important;
+  color: #666 !important;
   font-size: 10px !important;
-  font-style: italic !important;
 	line-height: 12px !important;
 }
 
