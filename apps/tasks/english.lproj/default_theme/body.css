@@ -241,8 +241,8 @@ body.sc-theme,
   margin-top: 4px;
 }
 
-.sc-segment label {
-  line-height: 32px !important;
+.title-bar .sc-segment label {
+  line-height: 30px !important;
 }
 
 .picker-resizable-handle {
