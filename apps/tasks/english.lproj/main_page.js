@@ -328,7 +328,7 @@ Tasks.mainPage = SC.Page.design({
            action: 'filterTasks',
            isEnabledBinding: SC.Binding.not('Tasks.mainPageHelper*editorPoppedUp')
          }),
-         filterCancelButton: SC.View.design({ // Filter cancel button
+         filterCancelButton: SC.View.design(SC.Control, { // Filter cancel button
            layout: { centerY: 0, height: 12, right: 219, width: 12 },
            isVisible: NO,
            classNames: ['filter-cancel-icon'],
@@ -340,7 +340,8 @@ Tasks.mainPage = SC.Page.design({
              Tasks.assignmentsController.clearAttributeFilter();
              Tasks.assignmentsController.showAssignments();
            },
-           isVisibleBinding: SC.Binding.oneWay('Tasks.assignmentsController.attributeFilterEnabled').bool()
+           isVisibleBinding: SC.Binding.oneWay('Tasks.assignmentsController.attributeFilterEnabled').bool(),
+            isEnabledBinding: SC.Binding.not('Tasks.mainPageHelper*editorPoppedUp')
          }),
 
          tasksSearchField: SC.TextFieldView.design({
@@ -353,7 +354,7 @@ Tasks.mainPage = SC.Page.design({
            valueBinding: 'Tasks.assignmentsController.searchFilter',
            isEnabledBinding: SC.Binding.not('Tasks.mainPageHelper*editorPoppedUp')
          }),
-         tasksSearchCancelButton: SC.View.design({ // Tasks Search cancel button
+         tasksSearchCancelButton: SC.View.design(SC.Control, { // Tasks Search cancel button
            layout: { centerY: 0, height: 12, right: 17, width: 12 },
            isVisible: NO,
            classNames: ['filter-cancel-icon'],
@@ -364,7 +365,8 @@ Tasks.mainPage = SC.Page.design({
              if(Tasks.mainPageHelper.get('editorPoppedUp')) return;
              Tasks.assignmentsController.set('searchFilter', '');
            },
-           isVisibleBinding: SC.Binding.oneWay('Tasks.assignmentsController.searchFilter').bool()
+           isVisibleBinding: SC.Binding.oneWay('Tasks.assignmentsController.searchFilter').bool(),
+           isEnabledBinding: SC.Binding.not('Tasks.mainPageHelper*editorPoppedUp')
          })
 
        }), // topToolbar

@@ -37,6 +37,39 @@
   text-align: center !important;
 }
 
+.back-icon {
+  background: static_url('images/back.png') no-repeat !important;
+}
+
+.previous-icon {
+  background-image: static_url('images/item-previous.png') !important;
+}
+
+.next-icon {
+  background: static_url('images/item-next.png') no-repeat !important;
+}
+
+.previous-icon, .next-icon, .back-icon {
+	background-color: #CCC !important;
+  border: 1px solid #777 !important;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-box-shadow: 0 1px 1px #222;
+  -webkit-box-shadow: 0 1px 1px #222;
+}
+.previous-icon:hover, .next-icon:hover, .back-icon:hover {
+  border: 1px solid #222 !important;
+}
+.previous-icon.active, .next-icon.active, .back-icon.active {
+	background-color: #888 !important;
+  border: 1px solid #222 !important;
+  -moz-box-shadow: 0 1px 1px #444 inset;
+  -webkit-box-shadow: 0 1px 1px #444 inset;
+}
+.previous-icon.disabled, .next-icon.disabled {
+  opacity: 0.5;
+}
+
 .sc-master-detail-view .sc-workspace-view .task-editor .sc-label-view {
     background: none;
 }
@@ -241,39 +274,6 @@
   position: absolute;
   top: 4px !important;
   right: -2px !important;
-}
-
-.back-icon {
-  background: static_url('images/back.png') no-repeat !important;
-}
-
-.previous-icon {
-  background-image: static_url('images/item-previous.png') !important;
-}
-
-.next-icon {
-  background: static_url('images/item-next.png') no-repeat !important;
-}
-
-.previous-icon, .next-icon, .back-icon {
-	background-color: #CCC !important;
-  border: 1px solid #555 !important;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -moz-box-shadow: 0 1px 1px #111;
-  -webkit-box-shadow: 0 1px 1px #111;
-}
-.previous-icon:hover, .next-icon:hover, .back-icon:hover {
-  border: 1px solid #000 !important;
-}
-.previous-icon.active, .next-icon.active, .back-icon.active {
-	background-color: #999 !important;
-  border: 1px solid #000 !important;
-  -moz-box-shadow: 0 1px 1px #444 inset;
-  -webkit-box-shadow: 0 1px 1px #444 inset;
-}
-.previous-icon.disabled, .next-icon.disabled {
-  opacity: 0.5;
 }
 
 /*-----------------------------------------------------------------
