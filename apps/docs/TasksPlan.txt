@@ -32,6 +32,7 @@ General Infrastructure @Active
 - Handle persistence consistently (nothing should save unless user hits "Save" when Autosave is turned off) [SE] <SG> @Done %Passed
 - Implement GUI-based RBAC (role-based access control) [SG] $Feature @Done %Passed
 - Add a dot before Projects/Tasks/Users that were created or updated recently (within the last day) <SE> [SG] $Feature @Done %Passed
+- Confirm before deleting a Project/Task/User [SG] @Done $Feature %Passed
 - Display record created/updated time at the bottom of Project/Task/User editors [SG] $Feature @Done %Passed
 - Support view mode of tasks and selection of project/filter/search using SproutCore routes [SG] $Feature @Done %Passed
 - Destroy authentication token when User logs out [SG] <JH2> $Feature @Done %Passed
@@ -54,7 +55,6 @@ v Add hover over tooltip for Project icons to show how many Tasks they contain [
 | Check via Inline Editor Delegate
 ^ Add buttons to add/delete Projects [SG] @Done $Feature %Passed
 - Delete a new Project if its name hasn't been modified when the popup editor is closed (select "All Tasks" too) [SG] $Feature @Done %Passed
-- Add warning Alert box about deleting Project with Tasks [SG] @Done $Feature %Passed
 v Add summary in bottom bar showing number of Projects/Assignees & Tasks displayed/selected [SG] <MB> @Done $Feature %Passed
 v Enable/disable "Delete Project" button based on having a selected project [SG] @Done %Passed $Feature
 v Disable "Add Task" button when no project is selected [SG] <BB> @Done %Passed $Feature

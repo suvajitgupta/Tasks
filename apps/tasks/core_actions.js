@@ -513,7 +513,7 @@ Tasks.mixin({
   },
   
   /**
-  * Delete selected tasks, asking for confirmation first.
+  * Delete selected projects, asking for confirmation first.
    */
   deleteProject: function() {
     
