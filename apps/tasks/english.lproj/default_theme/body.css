@@ -102,16 +102,6 @@ body.sc-theme,
   text-align: left !important;
 }
 
-.checkbox-icon .icon {
-  position: absolute;
-  top: 0;
-  left: 20px;
-}
-
-.checkbox-icon .label {
-  left: 22px !important;
-}
-
 .sc-button-view.dark img {
   left: 1px;
 }
