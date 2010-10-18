@@ -112,7 +112,7 @@ Tasks.TaskEditorView = SC.View.extend(
     var copyPattern = new RegExp("_Copy".loc() + '$');
     // Put focus in name field of new or copied tasks in task editor
     if((name === CoreTasks.NEW_TASK_NAME.loc() || copyPattern.exec(name)) && Tasks.getPath('tasksController.isEditable')) {
-      // FIXME: [SG] put focus in text field without using invokeLater()
+      // FIXME: [SG/JL] put focus in text field without using invokeLater()
       this.invokeLater(function() { Tasks.getPath('mainPage.taskEditor.editor.nameField').becomeFirstResponder(); }, 400);
     }
     editor.setPath('typeField.value', task.get('type'));
@@ -181,6 +181,7 @@ Tasks.TaskEditorView = SC.View.extend(
      // console.log('Watcher: ' + watcher.get('name'));
      if(watcher) this._watchers.push(watcher);
    }
+   // FIXME: [SC] fix Picker Pane popping up with mangled pointer on SC ToT
    var pane = SC.PickerPane.create({
      layout: { width: 272, height: 100 },
      contentView: SC.View.extend({

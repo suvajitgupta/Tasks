@@ -17,6 +17,9 @@ sc_require('views/summary');
   @author Joshua Holt
 */
 
+// FIXME: [SC] fix SC.TextFieldViews to show borders like they did before (broken on ToT)
+// FIXME: [SG/JL] SCUI.ToolTip not working with SC.CheckboxView, SC.LabelView, SC.SegmentedView
+
 Tasks._wideLogo = document.title.match(/Eloqua/)? true : false;
 Tasks.mainPageHelper = SC.Object.create({
 
@@ -395,7 +398,7 @@ Tasks.mainPage = SC.Page.design({
                icon: 'add-icon',
                toolTip: "_AddTaskTooltip".loc(),
                isVisibleBinding: 'CoreTasks.permissions.canCreateTask',
-               // FIXME: [SG] get add task button to be enabled properly at startup - it comes on if you click on another project
+               // FIXME: [SG/JL] get add task button to be enabled properly at startup - it comes on if you click on another project
                isEnabledBinding: 'Tasks.tasksController.isAddable',
                target: 'Tasks',
                action: 'addTask'
