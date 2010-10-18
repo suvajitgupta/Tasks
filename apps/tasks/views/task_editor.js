@@ -91,7 +91,6 @@ Tasks.editorHelper = SC.Object.create({
   
 });
 
-// FIXME: [SG] make hitting return close slide-out editor when not in fields
 Tasks.TaskEditorView = SC.View.extend(
 /** @scope Tasks.SummaryView.prototype */ {
   
@@ -454,6 +453,15 @@ Tasks.TaskEditorView = SC.View.extend(
      toolTip: "_TaskWatchersTooltip".loc()
    })
    
-  })
+  }),
+  
+  keyDown: function(event) {
+    if (event.commandCodes()[0] === 'return') {
+      this.close();
+      return YES;
+    }
+    return NO;
+  }
+  
   
 });

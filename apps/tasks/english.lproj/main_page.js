@@ -601,7 +601,7 @@ Tasks.mainPage = SC.Page.design({
 
      // Hotkeys - be careful to avoid conflicts with browser shortcuts!
      keyDown: function(event) {
-       var ret, commandCode = event.commandCodes();
+       var ret = NO, commandCode = event.commandCodes();
        // console.log('DEBUG: hotkey "' + commandCode[0] + '" pressed');
        if (commandCode[0] === 'ctrl_='){  // control_equals
          Tasks.addTask();
@@ -610,9 +610,6 @@ Tasks.mainPage = SC.Page.design({
        else if (commandCode[0] === 'ctrl_shift_+'){  // control_shift_plus
          Tasks.duplicateTask();
          ret = YES;
-       }
-       else {
-         ret = NO;
        }
        return ret;
      }
