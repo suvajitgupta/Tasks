@@ -30,22 +30,6 @@
   outline: 0 !important;
 }
 
-.login-body .sc-text-field-view .sc-hint {
-  font-size: 16px;
-  color: #858585;
-  line-height: 28px;
-  padding: 0 6px;
-}
-
-.login-body .sc-text-field-view.focus .sc-hint {
-  color: #BBB;
-  display: inline;
-}
-
-.login-body .sc-text-field-view.focus.not-empty .sc-hint {
-  display: none;
-}
-
 .mozilla .login-body .sc-text-field-view .border {
   -moz-appearance: none;
 }
