@@ -17,6 +17,8 @@
   width: 16px;
   height: 16px;
   background: static_url('images/progress.gif') no-repeat 0 0;
+	margin-right: 4px;
+	vertical-align: middle;
 }
 
 .save-icon {
