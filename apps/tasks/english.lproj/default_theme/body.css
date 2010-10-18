@@ -240,6 +240,10 @@ body.sc-theme,
   margin-top: 4px;
 }
 
+.sc-segment img.icon {
+  margin-top: -5px !important;
+}
+
 .title-bar .sc-segment label {
   line-height: 30px !important;
 }
