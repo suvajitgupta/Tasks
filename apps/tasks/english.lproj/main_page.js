@@ -122,7 +122,7 @@ Tasks.mainPage = SC.Page.design({
         classNames: ['title-bar'],
         
         installationLogo: SC.View.design({
-          layout: { left: Tasks._wideLogo? 4: 25, centerY: 0, width: Tasks._wideLogo? 80: 35, height: Tasks._wideLogo? 20 : 35 },
+          layout: { left: Tasks._wideLogo? 15: 25, centerY: 0, width: Tasks._wideLogo? 80: 35, height: Tasks._wideLogo? 20 : 35 },
           tagName: 'img',
           render: function(context, firstTime) {
             if(document.title.match(/Dev/)) {
@@ -147,7 +147,7 @@ Tasks.mainPage = SC.Page.design({
         }), // installationLogo
         
         tasksLogo: Tasks.LogoView.design({
-          layout: { left: Tasks._wideLogo? 103 : 78, width: 145, centerY: 0, height: 27 }
+          layout: { left: Tasks._wideLogo? 115 : 78, width: 145, centerY: 0, height: 27 }
         })
         
       }), // topToolBar
