@@ -398,7 +398,7 @@ Tasks.mainPage = SC.Page.design({
                icon: 'add-icon',
                toolTip: "_AddTaskTooltip".loc(),
                isVisibleBinding: 'CoreTasks.permissions.canCreateTask',
-               // FIXME: [SG/JL] get add task button to be enabled properly at startup - it comes on if you click on another project
+               // FIXME: [SG] get add task button to be enabled properly at startup - it comes on if you click on another project
                isEnabledBinding: 'Tasks.tasksController.isAddable',
                target: 'Tasks',
                action: 'addTask'

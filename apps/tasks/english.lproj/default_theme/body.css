@@ -204,14 +204,14 @@ body.sc-theme,
 }
 
 /*
-// FIXME: [SC] remove hack to get rid of focus ring inside text fields with ToT code, fix text field border
+// TODO: [SC] remove hack to get rid of focus ring inside text fields with ToT code, fix text field border
 */
 .mozilla .sc-view .sc-text-field-view.focus {
 	outline-offset: 0px !important
 }
 
 /*
-// FIXME: [SC] remove hacks to workaround bug in radiobutton styling on non-OSX platforms, can't do this for Linux
+// TODO: [SC] remove hacks to workaround bug in radiobutton styling on non-OSX platforms, can't do this for Linux
 */
 .mozilla.windows .sc-radio-view.sc-layout-horizontal .sc-radio-button {
   margin-top: -12px;
@@ -245,7 +245,7 @@ body.sc-theme,
 }
 
 /*
-// FIXME: [SC] get styling added to standard theme (Ace1) to resolve tearing on side on panels
+// TODO: [SC] add styling to standard theme (Ace1) to resolve tearing on side on panels
 */
 .sc-panel {
   -webkit-transform: translate3d(0px,0px,0px);

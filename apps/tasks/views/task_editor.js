@@ -91,7 +91,7 @@ Tasks.editorHelper = SC.Object.create({
   
 });
 
-// TODO: [SG] make hitting return close slide-out editor when not in fields
+// FIXME: [SG] make hitting return close slide-out editor when not in fields
 Tasks.TaskEditorView = SC.View.extend(
 /** @scope Tasks.SummaryView.prototype */ {
   
