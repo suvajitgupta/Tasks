@@ -33,7 +33,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       var singleSelect = (sel && sel.get('length') === 1);
     
       if ((!event.which || event.which === 1) && singleSelect && classes !== "") { // left click with one task selected and didn't click on the inline editable name
-        this.showEditor();
+        Tasks.getPath('mainPage.taskEditor').popup(this.get('content'));
       }
     }
     
@@ -43,11 +43,6 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   
   mouseUp: function(event){
     return sc_super();
-  },
-  
-  showEditor: function() {
-    var task = this.get('content');
-    Tasks.getPath('mainPage.taskEditor').popup(task);
   },
   
   inlineEditorWillBeginEditing: function(inlineEditor) {
