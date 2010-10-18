@@ -131,16 +131,21 @@ Tasks.TaskEditorView = SC.View.extend(
   _postEditing: function() {
     var task = this.get('task');
     var editor = this.get('editor');
-    task.setIfChanged('type', editor.getPath('typeField.value'));
-    task.setIfChanged('priority', editor.getPath('priorityField.value'));
-    task.setIfChanged('developmentStatus', editor.getPath('statusField.value'));
-    task.setIfChanged('validation', editor.getPath('validationField.value'));
-    task.setIfChanged('effortValue', editor.getPath('effortField.value'));
-    task.setIfChanged('projectValue', editor.getPath('projectField.value'));
-    task.setIfChanged('submitterValue', editor.getPath('submitterField.value'));
-    task.setIfChanged('assigneeValue', editor.getPath('assigneeField.value'));
-    task.setIfChanged('displayName', editor.getPath('nameField.value'));
-    task.setIfChanged('description',  editor.getPath('descriptionField.value'));
+    if(editor.getPath('nameField.value') === CoreTasks.NEW_TASK_NAME.loc()) {
+      task.destroy(); // blow away unmodified new task
+    }
+    else {
+      task.setIfChanged('type', editor.getPath('typeField.value'));
+      task.setIfChanged('priority', editor.getPath('priorityField.value'));
+      task.setIfChanged('developmentStatus', editor.getPath('statusField.value'));
+      task.setIfChanged('validation', editor.getPath('validationField.value'));
+      task.setIfChanged('effortValue', editor.getPath('effortField.value'));
+      task.setIfChanged('projectValue', editor.getPath('projectField.value'));
+      task.setIfChanged('submitterValue', editor.getPath('submitterField.value'));
+      task.setIfChanged('assigneeValue', editor.getPath('assigneeField.value'));
+      task.setIfChanged('displayName', editor.getPath('nameField.value'));
+      task.setIfChanged('description',  editor.getPath('descriptionField.value'));
+    }
   },
   _statusDidChange: function() {
     var editor = this.get('editor');
@@ -163,10 +168,6 @@ Tasks.TaskEditorView = SC.View.extend(
     var task = this.get('task');
     if(!task) return;
     this._postEditing();
-    if(task.get('name') === CoreTasks.NEW_TASK_NAME.loc()) {
-      task.destroy(); // blow away unmodified new task
-      Tasks.deselectTasks();
-    }
     if(Tasks.assignmentsRedrawNeeded) Tasks.assignmentsController.showAssignments();
     if(CoreTasks.get('autoSave') && !CoreTasks.get('isSaving')) Tasks.saveData();
     Tasks.setPath('mainPage.mainPane.tasksSceneView.nowShowing', 'tasksList');
