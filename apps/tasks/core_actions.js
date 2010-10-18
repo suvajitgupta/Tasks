@@ -487,7 +487,7 @@ Tasks.mixin({
     
     if(!CoreTasks.getPath('permissions.canCreateProject')) {
       console.warn('You do not have permission to add or duplicate a project');
-      return null;
+      return;
     }
     
     var projectHash = SC.clone(CoreTasks.Project.NEW_PROJECT_HASH);
@@ -496,7 +496,7 @@ Tasks.mixin({
       var selectedProject = Tasks.projectsController.getPath('selection.firstObject');
       if (!selectedProject) {
         console.warn('You must have a project selected to duplicate it');
-        return null;
+        return;
       }
       projectHash.name = selectedProject.get('name') + "_Copy".loc();
       projectHash.description = selectedProject.get('description');
@@ -509,7 +509,7 @@ Tasks.mixin({
     var pc = this.projectsController;
     pc.selectObject(project);
     CoreTasks.invokeLater(pc.editNewProject, 200, project);
-    return project;
+
   },
   
   /**
@@ -592,7 +592,7 @@ Tasks.mixin({
     
     if(!Tasks.tasksController.isAddable()) {
       console.warn('This is the wrong display mode or you do not have permission to add or duplicate a task');
-      return null;
+      return;
     }
     
     // Create a new task with the logged in user as the default submitter/assignee within selected project, if one.
@@ -632,7 +632,7 @@ Tasks.mixin({
     else { // No selected task, add task to currently selected, non-system, project (if one).
       if(duplicate) {
         console.warn('You must have a task selected to duplicate it');
-        return null;
+        return;
       }
       var selectedProject = Tasks.projectsController.getPath('selection.firstObject');
       if (!CoreTasks.isSystemProject(selectedProject)) {
@@ -643,8 +643,7 @@ Tasks.mixin({
     // Create, select, and begin editing new task.
     var task = CoreTasks.createRecord(CoreTasks.Task, taskHash);
     tc.selectObject(task);
-    CoreTasks.invokeLater(tc.editNewTask, 200, task);
-    return task;
+    tc.editNewTask(task);
         
   },
 
@@ -669,6 +668,7 @@ Tasks.mixin({
       SC.Object.create({
         alertPaneDidDismiss: function(pane, status) {
           if(status === SC.BUTTON1_STATUS) {
+            if(Tasks.mainPage.getPath('mainPane.tasksSceneView.nowShowing') == 'taskEditor') Tasks.getPath('mainPage.taskEditor').close();
             var context = {};
             for (var i = 0; i < len; i++) {
               // Get and delete each selected task.

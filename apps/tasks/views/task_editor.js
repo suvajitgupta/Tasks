@@ -156,9 +156,14 @@ Tasks.TaskEditorView = SC.View.extend(
   }.observes('.editor.statusField*value'),
   
   popup: function(task) {
+    if(Tasks.mainPage.getPath('mainPane.tasksSceneView.nowShowing') == 'taskEditor') {
+      this._postEditing();
+    }
+    else {
+      Tasks.setPath('mainPage.mainPane.tasksSceneView.nowShowing', 'taskEditor');
+      Tasks.set('editorPoppedUp', Tasks.TASK_EDITOR);
+    }
     this.set('task', task);
-    Tasks.setPath('mainPage.mainPane.tasksSceneView.nowShowing', 'taskEditor');
-    Tasks.set('editorPoppedUp', Tasks.TASK_EDITOR);
     this._preEditing();
     // reselect task since selection is lost when tasksList slides out of view
     this.invokeLast(function() { Tasks.tasksController.selectObject(task); });
