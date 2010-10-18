@@ -276,12 +276,8 @@ Tasks.tasksController = SC.TreeController.create(
     }
   }.observes('selection'),
   
-  editNewTask: function(task){
-    var listView = Tasks.mainPage.getPath('tasksList.contentView');
-    var idx = listView.get('content').indexOf(task);
-    // console.log('DEBUG: tasksController.editNewTask at index: ' + idx);
-    var listItem = listView.itemViewForContentIndex(idx);
-    if(listItem) listItem.showEditor();
+  editNewTask: function(task) {
+    Tasks.getPath('mainPage.taskEditor').popup(task);
   }
 
 });
