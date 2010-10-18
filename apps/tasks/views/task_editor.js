@@ -112,7 +112,7 @@ Tasks.TaskEditorView = SC.View.extend(
     var copyPattern = new RegExp("_Copy".loc() + '$');
     // Put focus in name field of new or copied tasks in task editor
     if((name === CoreTasks.NEW_TASK_NAME.loc() || copyPattern.exec(name)) && Tasks.getPath('tasksController.isEditable')) {
-      // FIXME: [SG/JL] put focus in text field without using invokeLater()
+      // TODO: [SG/JL] put focus in text field without using invokeLater()
       this.invokeLater(function() { Tasks.getPath('mainPage.taskEditor.editor.nameField').becomeFirstResponder(); }, 400);
     }
     editor.setPath('typeField.value', task.get('type'));
