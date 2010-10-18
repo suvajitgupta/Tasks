@@ -96,12 +96,38 @@ Tasks.mixin({
           CoreTasks.set('needsSave', NO);
         }
         
-        // Setup data controllers by preloading data from the local cache.
+        // Setup user controller and then current logged on user
+        // Note: sequence is important below - logged in user must be loaded after data is preloaded from LDS to get new authToken
+        var currentUser = null;
         if (!CoreTasks.get('allUsers')) {
           CoreTasks.set('allUsers', CoreTasks.store.find(
             SC.Query.create({ recordType: CoreTasks.User, orderBy: 'name', localOnly: YES })));
           this.usersController.set('content', CoreTasks.get('allUsers'));
         }
+        if(SC.none(response)) {
+          currentUser = CoreTasks.getUserByLoginName(Tasks.get('loginName'));
+        }
+        else {
+          SC.RunLoop.begin();
+          CoreTasks.store.loadRecords(CoreTasks.User, response);
+          SC.RunLoop.end();
+          currentUser = CoreTasks.getUserByLoginName(response[0].loginName);
+        }
+
+        // Greet user and save login session information
+        CoreTasks.set('currentUser', currentUser);
+        console.log('DEBUG: Setting current user permissions');
+        CoreTasks.setPermissions();
+        var welcomeMessage = Tasks.getPath('mainPage.mainPane.welcomeMessage');
+        welcomeMessage.set('toolTip', "_LoginSince".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
+
+        // Based on user's role set up appropriate task filter
+        var role = currentUser.get('role');
+        if(role === CoreTasks.USER_ROLE_DEVELOPER) { // Set assignee selection filter to current user
+          Tasks.showCurrentUserTasks();
+        }
+
+        // Setup projects/tasks/watches controllers
         if (!CoreTasks.get('allProjects')) {
           CoreTasks.set('allProjects', CoreTasks.store.find(
             SC.Query.create({ recordType: CoreTasks.Project, orderBy: 'name', localOnly: YES })));
@@ -116,31 +142,6 @@ Tasks.mixin({
             SC.Query.create({ recordType: CoreTasks.Watch, localOnly: YES })));
         }
         this._selectDefaultProject(false);
-
-
-        // Setup current logged on user
-        var currentUser = null;
-        if(SC.none(response)) {
-          currentUser = CoreTasks.getUserByLoginName(Tasks.get('loginName'));
-        }
-        else {
-          SC.RunLoop.begin();
-          CoreTasks.store.loadRecords(CoreTasks.User, response);
-          SC.RunLoop.end();
-          currentUser = CoreTasks.getUserByLoginName(response[0].loginName);
-        }
-
-        // Greet user and save login session information
-        CoreTasks.set('currentUser', currentUser);
-        CoreTasks.setPermissions();
-        var welcomeMessage = Tasks.getPath('mainPage.mainPane.welcomeMessage');
-        welcomeMessage.set('toolTip', "_LoginSince".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
-
-        // Based on user's role set up appropriate task filter
-        var role = currentUser.get('role');
-        if(role === CoreTasks.USER_ROLE_DEVELOPER) { // Set assignee selection filter to current user
-          Tasks.showCurrentUserTasks();
-        }
 
         this.goState('a', 3);
         break;
