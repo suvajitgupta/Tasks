@@ -189,8 +189,8 @@ Server/Tools @Active
 - Add link to Task in email notification (should not require authentication if user is signed in) <JH2> [SG] $Feature
 - Handle network or Server unavailability gracefully and provide appropriate diagnostics to the user [SG] <SE> @Done %Passed
 - Support Tasks database cleanup to remove soft-deleted records and handle pointers to non-existent records [SG] @Done %Passed
-- Integrate Tasks GUI with Jira Server [SG] <UA> $Feature @Risky
-- Implement bridge to "github issues" from Google App Engine [JH2] <SG> $Feature @Active
+^ Support github "issues" as a persistence Server (store additional data from Tasks as github issues tags) [JH2] <SG> $Feature @Active
+- Integrate Tasks GUI with Jira Server [SG] <UA> $Feature
 
 Styling/Hardening @Active
 ^ Style via CSS, embed catchy/sprited images [MG] <SG> $Feature @Done %Passed
