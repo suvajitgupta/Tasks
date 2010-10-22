@@ -8,7 +8,6 @@
  * @author Sean Eidemiller
  */
 CoreTasks.RemoteDataSource = SC.DataSource.extend({
-  // FIXME: [SG/SE] handle 401 failures property and clear isSaving flag
 
   /**
    * Creates a single record.
@@ -133,11 +132,6 @@ CoreTasks.RemoteDataSource = SC.DataSource.extend({
       if(response.status === 404) { // not found on server, record must have been deleted
         // delete record in the store
         store.removeDataHash(params.storeKey, SC.Record.DESTROYED_CLEAN);
-        store.dataHashDidChange(params.storeKey);
-      } else if(response.status === 401) {
-        console.log("Attempted to update: [%@:%@]: %@".fmt(params.recordType, params.id, this._buildError(response)));
-        store.writeStatus(params.storeKey, SC.Record.READY_CLEAN);
-        store.refreshRecord(params.recordType, params.id, params.storeKey);
         store.dataHashDidChange(params.storeKey);
       }
       else { // Request failed; invoke the error callback.
