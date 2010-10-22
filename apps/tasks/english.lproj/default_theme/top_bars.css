@@ -185,18 +185,6 @@
   outline: 0;
 }
 
-.safari .sc-view .search-bar .border {
-  -webkit-appearance: none;
-}
-
-.mozilla .sc-view .search-bar .border {
-  -moz-appearance: none;
-}
-
-.msie .sc-view .search-bar .border {
-  border: 0;
-}
-
 .mozilla .sc-view .search-bar input {
   top: 4px;
 }

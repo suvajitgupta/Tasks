@@ -30,10 +30,6 @@
   outline: 0 !important;
 }
 
-.mozilla .login-body .sc-text-field-view .border {
-  -moz-appearance: none;
-}
-
 .login-body .sc-text-field-view input {
   font-size: 16px;
   font-weight: bold;
