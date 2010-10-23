@@ -17,7 +17,6 @@ sc_require('views/summary');
   @author Joshua Holt
 */
 
-// FIXME: [SC] fix SC.TextFieldViews to show borders like they did before (broken on ToT)
 // FIXME: [SG/JL] SCUI.ToolTip not working with SC.CheckboxView, SC.LabelView, SC.SegmentedView
 
 Tasks._wideLogo = document.title.match(/Eloqua/)? true : false;
