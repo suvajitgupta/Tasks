@@ -76,7 +76,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 'pre {\n' +
 ' margin-top: -3px;\n' +
 ' margin-bottom: 10px;\n' +
-' margin-left: ' + (Tasks.softwareMode? '90' : '75') + 'px;\n' +
+' margin-left: 75px;\n' +
 ' margin-right: 1px;\n' +
 ' white-space: pre-wrap;\n' +
 ' word-wrap: break-word;\n' +
@@ -105,6 +105,10 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' -moz-box-shadow: inset 0px 2px 2px #FAA;\n' +
 ' -webkit-box-shadow: inset 0px 2px 2px #FAA;\n' +
 '}\n' +
+'.margin {\n' +
+' border-right: 3px solid #FCC;\n' +
+' padding: 0px 3px 0px 0px;\n' +
+'}\n' +
 '.id {\n' +
 ' margin-left: 5px;\n' +
 ' line-height: 1.5;\n' +
@@ -114,13 +118,10 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' font-size: 9px;\n' +
 '}\n' +
 '.feature, .bug, .other {\n' +
-' left: 80px;\n' +
 ' width: 12px;\n' +
-' text-align: center;\n' +
-' font-size: 9px;\n' +
-' font-weight: bold;\n' +
 (Tasks.softwareMode? '' : ' display: none !important;\n') +
 ' padding: 1px 0px;\n' +
+' margin: 0px 1px;\n' +
 ' border: 1px solid #AAA;\n' +
 ' line-height: 10px;\n' +
 ' -moz-border-radius: 15px;\n' +
@@ -138,11 +139,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' color: black;\n' +
 ' background-color: #C7C7C7;\n' +
 '}\n' +
-'.name {\n' +
-' border-left: 3px solid #FCC;\n' +
-' padding-left: 5px;\n' +
-'}\n' +
-'.name, .feature, .bug, .other, .untested, .passed, .failed {\n' +
+'.margin, .name, .feature, .bug, .other, .untested, .passed, .failed {\n' +
 ' display: inline-block;\n' +
 '}\n' +
 '.high {\n' +

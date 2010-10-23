@@ -27,8 +27,8 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     // See what user clicked on an popup editor accordingly
     var classes = event.target.className;
     // console.log('DEBUG: classes = "' + classes + '"');
-    if(classes.indexOf("task-id ") !== -1 || classes.indexOf("task-icon") !== -1 || classes.indexOf("inner") !== -1 ||
-       classes.indexOf("count") !== -1 || classes.indexOf("description-icon") !== -1) {
+    if(classes.indexOf("task-margin") !== -1 || classes.indexOf("task-id") !== -1 || classes.indexOf("task-icon") !== -1 ||
+        classes.indexOf("inner") !== -1 ||classes.indexOf("count") !== -1 || classes.indexOf("description-icon") !== -1) {
       var sel = Tasks.getPath('tasksController.selection');
       var singleSelect = (sel && sel.get('length') === 1);
     
@@ -111,8 +111,8 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     var displayId = content.get('displayId');
     var taskIdClass = 'task-id';
     if(CoreTasks.isCurrentUserWatchingTask(content) === CoreTasks.TASK_WATCH_ON) taskIdClass += ' watched-task';
-    context = context.begin('div').addClass(taskIdClass).addClass(validationClass).
-                text(displayId).attr('title', idTooltip).attr('alt', idTooltip).end();
+    context = context.begin('div').addClass('task-margin').begin('div').addClass(taskIdClass).addClass(validationClass).
+                text(displayId).attr('title', idTooltip).attr('alt', idTooltip).end().end();
       
     switch(content.get('developmentStatus')){
       case CoreTasks.STATUS_PLANNED:
