@@ -107,11 +107,8 @@ Tasks.TaskEditorView = SC.View.extend(
     var watchCount = this._watches.length;
     editor.setPath('watchersButton.isVisible', watchCount > 0);
     editor.setPath('watchersButton.title', watchCount);
-    var name = task.get('name');
-    editor.setPath('nameField.value', name);
-    var copyPattern = new RegExp("_Copy".loc() + '$');
-    // Put focus in name field of new or copied tasks in task editor
-    if((name === CoreTasks.NEW_TASK_NAME.loc() || copyPattern.exec(name)) && Tasks.getPath('tasksController.isEditable')) {
+    editor.setPath('nameField.value', task.get('name'));
+    if(Tasks.getPath('tasksController.isEditable')) {
       // TODO: [SG/JL] put focus in text field without using invokeLater()
       this.invokeLater(function() { Tasks.getPath('mainPage.taskEditor.editor.nameField').becomeFirstResponder(); }, 400);
     }
@@ -430,6 +427,7 @@ Tasks.TaskEditorView = SC.View.extend(
      hint: "_DescriptionHint".loc(),
      maxLength: 500000,
      isTextArea: YES,
+     // TODO: [SG] disable Task.description editing for Guests after Comments are added
      isEnabled: YES
    }),
 
