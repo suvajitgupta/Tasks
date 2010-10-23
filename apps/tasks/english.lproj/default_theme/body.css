@@ -103,6 +103,13 @@ body.sc-theme,
   border-bottom: 1px solid #CCC;
 }
 
+/*
+// TODO: [SC] remove hack for Picker Pane popping up with mangled pointer on SC ToT
+*/
+.sc-pane.sc-panel.sc-picker .perfectRight {
+  top: 3px !important;
+}
+
 .sc-view.sc-text-field-view .sc-hint {
   z-index: 0;
   letter-spacing: -1px;

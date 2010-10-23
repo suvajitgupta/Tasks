@@ -186,10 +186,12 @@
 
 .safari .sc-view .search-bar .border {
   -webkit-appearance: none;
+  border: none;
 }
 
 .mozilla .sc-view .search-bar .border {
   -moz-appearance: none;
+  border: none;
 }
 
 .msie .sc-view .search-bar .border {

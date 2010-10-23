@@ -187,7 +187,6 @@ Tasks.TaskEditorView = SC.View.extend(
      // console.log('Watcher: ' + watcher.get('name'));
      if(watcher) this._watchers.push(watcher);
    }
-   // FIXME: [SC] fix Picker Pane popping up with mangled pointer on SC ToT
    var pane = SC.PickerPane.create({
      layout: { width: 272, height: 100 },
      contentView: SC.View.extend({
