@@ -230,7 +230,15 @@ body.sc-theme,
 // TODO: [SC] remove hack to get rid of focus ring inside text fields with ToT code, fix text field border
 */
 .mozilla .sc-view .sc-text-field-view.focus {
-	outline-offset: 0px !important
+	outline-offset: 0px !important;
+	outline: 1px solid -moz-mac-focusring;
+}
+/*
+// FIXME: [SG/JL] have focus class added to scui-datepicker-view when clicked
+*/
+.mozilla .sc-view .scui-combobox-view.focus,
+.mozilla .sc-view .scui-datepicker-view.focus {
+	outline: 1px solid -moz-mac-focusring;
 }
 
 /*
@@ -245,6 +253,9 @@ body.sc-theme,
   margin-top: 4px;
 }
 
+/*
+// TODO: [SC] remove hacks to workaround bug in Safari text field focus (appears distorted if left on)
+*/
 .safari .sc-view .sc-text-field-view.focus {
   outline: none;
 }
