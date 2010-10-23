@@ -25,7 +25,7 @@ Tasks.graphicalStatisticsPage = SC.Page.create({
       isVisible: NO,
       typeStatisticsChart: Sai.BarChartView.design({
         layout: { top: 0, left: 0, width: 200, bottom: 0 },
-        // FIXME: [SG/EG] make Sai work with different colors for different bars
+        // TODO: [SG/EG] make Sai work with different colors for different bars
         // dataAttrs: { horizontal: YES, barWidth: 25, colors: ['red', 'blue', 'green'] }
         dataAttrs: { horizontal: NO, barWidth: 25, color: 'green' }
       }),
@@ -56,7 +56,7 @@ Tasks.graphicalStatisticsPage = SC.Page.create({
           this.setPath('tasksStatistics.typeStatisticsChart.data', [ stats.featureCount, stats.bugCount, stats.otherCount ]);
           this.setPath('tasksStatistics.typeStatisticsChart.xaxis', { color: Tasks.AXIS_COLOR, labelAttrs: {offset: -5, fontSize: '9'},
                        labels: [ "_Feature".loc(), "_Bug".loc(), "_Other".loc() ] });
-          // FIXME: [SG/EG] make Sai support min/max settings for axes
+          // TODO: [SG/EG] make Sai support min/max settings for axes
           this.setPath('tasksStatistics.typeStatisticsChart.yaxis', { color: Tasks.AXIS_COLOR, labelAttrs: {offset: -5, fontSize: '9'}, buffer: 0.1, labels: YES,
                        step: this._computeRange(this.getPath('tasksStatistics.typeStatisticsChart.data')) });
           this.setPath('tasksStatistics.priorityStatisticsChart.data', [ stats.highCount, stats.mediumCount, stats.lowCount ]);
@@ -84,7 +84,7 @@ Tasks.graphicalStatisticsPage = SC.Page.create({
       sc_super();
     },
     
-    // FIXME: [SG/EG] incorporate axis autoscaling capability in Sai
+    // TODO: [SG/EG] incorporate axis autoscaling capability in Sai
     _computeRange: function(values) {
       var max = Math.max.apply(null, values);
       var range = Math.floor(max/5);
