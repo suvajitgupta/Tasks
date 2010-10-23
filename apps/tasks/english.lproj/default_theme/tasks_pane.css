@@ -154,26 +154,26 @@
 .sc-master-detail-view .sc-workspace-view .task-editor .title-bar,
 .assignee-not-loaded {
   background: #AAA none repeat scroll 0 0 !important;
-  -moz-box-shadow: inset 0px 2px 2px #CCC;
-  -webkit-box-shadow: inset 0px 2px 2px #CCC;
+  -moz-box-shadow: inset 0px 2px 2px #DDD;
+  -webkit-box-shadow: inset 0px 2px 2px #DDD;
 }
 
 .assignee-under-loaded {
-  background: #3C6 none repeat scroll 0 0 !important;
-  -moz-box-shadow: inset 0px 2px 2px #3F6;
-  -webkit-box-shadow: inset 0px 2px 2px #3F6;
+  background: #0C0 none repeat scroll 0 0 !important;
+  -moz-box-shadow: inset 0px 2px 2px #9F9;
+  -webkit-box-shadow: inset 0px 2px 2px #9F9;
 }
 
 .assignee-properly-loaded {
   background: #69F none repeat scroll 0 0 !important;
-  -moz-box-shadow: inset 0px 2px 2px #6CF;
-  -webkit-box-shadow: inset 0px 2px 2px #6CF;
+  -moz-box-shadow: inset 0px 2px 2px #9FF;
+  -webkit-box-shadow: inset 0px 2px 2px #9FF;
 }
 
 .assignee-overloaded {
-  background: #F99 none repeat scroll 0 0 !important;
-  -moz-box-shadow: inset 0px 2px 2px #FBF;
-  -webkit-box-shadow: inset 0px 2px 2px #FBF;
+  background: #F66 none repeat scroll 0 0 !important;
+  -moz-box-shadow: inset 0px 2px 2px #FAA;
+  -webkit-box-shadow: inset 0px 2px 2px #FAA;
 }
 
 .tasks-pane-inner .sc-view.sc-list-item-view.sc-collection-item.sc-group-item.assignee-item label {
@@ -218,7 +218,7 @@
 
 .task-item {
   background: #EEE none repeat scroll 0 0 !important;
-	border: 1px solid #BBB !important;
+	border: 1px solid #CCC !important;
 }
 
 .task-item .sc-outline {

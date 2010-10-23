@@ -66,7 +66,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' line-height: 23px;\n' +
 ' margin-top: -5px;\n' +
 ' margin-bottom: 4px;\n' +
-' border: 1px solid #BBB;\n' +
+' border: 1px solid #CCC;\n' +
 ' padding: 0px;\n' +
 '}\n' +
 'pre, .description {\n' +
@@ -87,23 +87,23 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 '}\n' +
 '.assignee-not-loaded {\n' +
 ' background-color: #AAA;\n' +
-' -moz-box-shadow: inset 0px 2px 2px #CCC;\n' +
-' -webkit-box-shadow: inset 0px 2px 2px #CCC;\n' +
+' -moz-box-shadow: inset 0px 2px 2px #DDD;\n' +
+' -webkit-box-shadow: inset 0px 2px 2px #DDD;\n' +
 '}\n' +
 '.assignee-under-loaded {\n' +
-' background-color: #3C6;\n' +
-' -moz-box-shadow: inset 0px 2px 2px #3F6;\n' +
-' -webkit-box-shadow: inset 0px 2px 2px #3F6;\n' +
+' background-color: #0C0;\n' +
+' -moz-box-shadow: inset 0px 2px 2px #9F9;\n' +
+' -webkit-box-shadow: inset 0px 2px 2px #9F9;\n' +
 '}\n' +
 '.assignee-properly-loaded {\n' +
 ' background-color: #69F;\n' +
-' -moz-box-shadow: inset 0px 2px 2px #6CF;\n' +
-' -webkit-box-shadow: inset 0px 2px 2px #6CF;\n' +
+' -moz-box-shadow: inset 0px 2px 2px #9FF;\n' +
+' -webkit-box-shadow: inset 0px 2px 2px #9FF;\n' +
 '}\n' +
 '.assignee-overloaded {\n' +
-' background-color: #F99;\n' +
-' -moz-box-shadow: inset 0px 2px 2px #FBF;\n' +
-' -webkit-box-shadow: inset 0px 2px 2px #FBF;\n' +
+' background-color: #F66;\n' +
+' -moz-box-shadow: inset 0px 2px 2px #FAA;\n' +
+' -webkit-box-shadow: inset 0px 2px 2px #FAA;\n' +
 '}\n' +
 '.id {\n' +
 ' margin-left: 5px;\n' +
