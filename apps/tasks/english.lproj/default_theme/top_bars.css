@@ -58,8 +58,8 @@
 
 .actions-icon {
   background: static_url('images/actions.png') no-repeat;
-  width: 28px;
-  height: 17px;
+  width: 28px !important;
+  height: 17px !important;
 }
 
 .statistics-icon {
