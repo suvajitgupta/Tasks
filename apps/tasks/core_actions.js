@@ -116,7 +116,6 @@ Tasks.mixin({
 
         // Greet user and save login session information
         CoreTasks.set('currentUser', currentUser);
-        console.log('DEBUG: Setting current user permissions');
         CoreTasks.setPermissions();
         var welcomeMessage = Tasks.getPath('mainPage.mainPane.welcomeMessage');
         welcomeMessage.set('toolTip', "_LoginSince".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
