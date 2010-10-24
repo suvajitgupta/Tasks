@@ -156,7 +156,7 @@ Application Manager GUI @Active
 v Add online training video using QuickTime [SG] $Feature @Done
 | http://www.youtube.com/watch?v=6egjJw_RS1g
 - Add onscreen help (on panel fields that are complex and on blank workspace to assist new users) <MG> [SG] $Feature @Done %Passed
-- Add "Logout" menu item in actions menu (confirm before exiting, forward to login page) [SG] <JH2> @Done $Feature %Passed
+- Add "Logout" menu item in actions menu (confirm before exiting, clear cookies/cache, forward to login page) [SG] <JH2> @Done $Feature %Passed
 - Prompt user to save changes (if any) before logging out [SG] <SE> $Feature @Done %Passed
 | See demo.sproutcore.com/user_defaults and lookup SproutCore blog for Charles' posting on this topic
 - Add Team/Tasks display modes to show everyone at a glance or details; clicking on Assignee in team mode shows their Tasks [SG] $Feature @Done %Passed

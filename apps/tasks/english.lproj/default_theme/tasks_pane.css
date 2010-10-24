@@ -356,6 +356,7 @@
 .sc-view .task-validation-untested, .sc-view .task-validation-passed, .sc-view .task-validation-failed {
   color: black;
   padding: 1px 3px;
+  text-shadow: none !important;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
 }
