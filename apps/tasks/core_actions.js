@@ -365,8 +365,13 @@ Tasks.mixin({
     * Launch task editor dialog.
     */
   help: function() {
-    var url = Tasks.getBaseUrl() + '#help';
-    window.open(url, '', 'width=1000,height=750,menubar=no,location=no,toolbar=no,directories=no,status=no');
+    if(SC.platform.touch) {
+      window.location = Tasks.getHelpUrl();
+    }
+    else {
+      var url = Tasks.getBaseUrl() + '#help';
+      window.open(url, '', 'width=1000,height=750,menubar=no,location=no,toolbar=no,directories=no,status=no');
+    }
   },
   
   /**
@@ -834,7 +839,7 @@ Tasks.mixin({
     if(message) {
       prefix = message;
     }
-    SC.AlertPane.warn ('Unimplemented Functionality', prefix + ' coming soon!');
+    SC.AlertPane.warn ("_UnimplementedFunctionality".loc() + prefix);
   }
     
 });

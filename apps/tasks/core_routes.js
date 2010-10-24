@@ -36,8 +36,9 @@ Tasks.mixin( /** @scope Tasks */ {
     
   */
   helpRoute: function(params) {
-    Tasks._closeMainPage();
-    Tasks.getPath('helpPage.mainPane').append();
+    if(Tasks._checkLoginStatus()) {
+      Tasks.getPath('helpPage.mainPane').append();
+    }
   },
   
   /**
@@ -49,25 +50,25 @@ Tasks.mixin( /** @scope Tasks */ {
   */
   viewRoute: function(params) {
     // console.log('DEBUG: viewRoute() search=' + params.search);
-    Tasks._closeMainPage();
-    if(!SC.none(params.search) && params.search !== '') {
-      Tasks.assignmentsController.set('searchFilter', params.search);
+    if(Tasks._checkLoginStatus()) {
+      if(!SC.none(params.search) && params.search !== '') {
+        Tasks.assignmentsController.set('searchFilter', params.search);
+      }
+      // Enter the statechart.
+      Tasks.goState('a', 1);
+      Tasks.authenticate('guest', '');
     }
-    // Enter the statechart.
-    Tasks.goState('a', 1);
-    Tasks.authenticate('guest', '');
   },
   
   /**
-    Close main page if already logged in
+    See if already logged in and put up an alert
   */
-  _closeMainPage: function() {
-    if(CoreTasks.get('currentUser')) { // logged in, so close
-      var mainPage = Tasks.getPath('mainPage.mainPane');
-      if(mainPage) {
-        mainPage.remove();
-      }
+  _checkLoginStatus: function() {
+    if(CoreTasks.get('currentUser')) { // logged in
+      SC.AlertPane.warn ("_UnavailableRoute".loc());
+      return false;
     }
+    return true;
   },
   
   /**

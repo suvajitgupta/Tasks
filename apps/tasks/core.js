@@ -48,6 +48,10 @@ Tasks = SC.Object.create(SC.Statechart,
     return window.location.protocol + '//' + window.location.host + window.location.pathname;
   },
   
+  getHelpUrl: function() {
+    return static_url('help.html') + '?softwareMode=' + Tasks.softwareMode;
+  },
+  
   nameAlphaSort: function(a,b) {
     var aName = a.get('name');
     var bName = b.get('name');
