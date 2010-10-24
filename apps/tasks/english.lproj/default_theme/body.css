@@ -245,7 +245,7 @@ body.sc-theme,
 // TODO: [SC] remove hacks to workaround bug in radiobutton styling on non-OSX platforms, can't do this for Linux
 */
 .mozilla.windows .sc-radio-view.sc-layout-horizontal .sc-radio-button {
-  margin-top: -12px;
+  margin-top: 2px;
 }
 .chrome.windows .sc-radio-view.sc-layout-horizontal .sc-radio-button,
 .safari.windows .sc-radio-view.sc-layout-horizontal .sc-radio-button,

@@ -369,7 +369,7 @@ Tasks.TaskEditorView = SC.View.extend(
      isEnabledBinding: 'Tasks.tasksController.isEditable'
    }),
    effortHelpLabel: SC.LabelView.design({
-     layout: { top: 109, left: 160, height: 30, width: 225 },
+     layout: { top: 109, left: 160, height: 30, width: 235 },
      escapeHTML: NO,
      classNames: [ 'onscreen-help'],
      value: "_EffortOnscreenHelp".loc()
