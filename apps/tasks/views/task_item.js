@@ -25,16 +25,14 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     // console.log('DEBUG: mouse down on task item: ' + this.getPath('content.name'));
     
     // See what user clicked on an popup editor accordingly
-    var classes = event.target.className;
+    var target = event.target;
+    if (target.nodeType === 3) target = target.parentNode; // for text nodes on iPad
+    var classes = target.className;
     // console.log('DEBUG: classes = "' + classes + '"');
-    if(classes.indexOf("task-margin") !== -1 || classes.indexOf("task-id") !== -1 || classes.indexOf("task-icon") !== -1 ||
-        classes.indexOf("inner") !== -1 ||classes.indexOf("count") !== -1 || classes.indexOf("description-icon") !== -1) {
-      var sel = Tasks.getPath('tasksController.selection');
-      var singleSelect = (sel && sel.get('length') === 1);
-    
-      if ((!event.which || event.which === 1) && singleSelect && classes !== "") { // left click with one task selected and didn't click on the inline editable name
-        Tasks.getPath('mainPage.taskEditor').popup(this.get('content'));
-      }
+    var sel = Tasks.getPath('tasksController.selection');
+    var singleSelect = (sel && sel.get('length') === 1);
+    if ((!event.which || event.which === 1) && singleSelect && classes !== "") { // left click with one task selected and didn't click on the inline editable name
+      Tasks.getPath('mainPage.taskEditor').popup(this.get('content'));
     }
     
     return NO; // so that drag-n-drop can work!
