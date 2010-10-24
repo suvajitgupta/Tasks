@@ -222,8 +222,29 @@
 }
 
 .calendar .body {
-  padding-top: 10px;
-  padding-left: 10px;
+  padding-top: 14px;
+  padding-left: 12px;
+}
+
+.calendar .body .day {
+  width: 25px;
+  height: 25px;
+  float: left;
+  border-bottom: 1px solid #c6c2be;
+  border-right: 1px solid #c6c2be;
+  line-height: 25px;
+  text-align: center;
+}
+
+.calendar .body .day.header {
+  height: 12px;
+  border-color: transparent;
+  font-size: 10px;
+  line-height: 12px;
+}
+
+.calendar .body .grid {
+  margin-top: 18px;
 }
 
 .calendar .month {
