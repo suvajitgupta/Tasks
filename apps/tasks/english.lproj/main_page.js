@@ -18,7 +18,12 @@ sc_require('views/summary');
 */
 
 // FIXME: [SG/JL] SCUI.ToolTip not working with SC.CheckboxView, SC.LabelView, SC.SegmentedView
+// TODO: [SG] make iPad CollectionView scrolling faster by setting hasInterceptPane: YES on your MainPane though may affect text fields
 // FIXME: [SC] fix Text Areas and Web Views to get scrollbars when needed on iPad
+// FIXME: [BB] make SCUI Modal Pane movable/strechable on iPad
+// TODO: [SG] make LDS use configurable per instance of Tasks, also disable LDS for touch devices which have less storage
+// TODO: [SG] add ability to watch/unwatch Tasks from editor, especially useful on iPad where there are no context menus
+// TODO: [SG] add buttons to duplicate Projects/Tasks in bottom bars, especially useful on iPad where there are no context menus
 
 Tasks._wideLogo = document.title.match(/Eloqua/)? true : false;
 Tasks.mainPageHelper = SC.Object.create({
