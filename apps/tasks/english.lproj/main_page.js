@@ -17,7 +17,6 @@ sc_require('views/summary');
   @author Joshua Holt
 */
 
-// FIXME: [SG/JL] SCUI.ToolTip not working with SC.CheckboxView, SC.LabelView, SC.SegmentedView
 // TODO: [SG] make iPad CollectionView scrolling faster by setting hasInterceptPane: YES on your MainPane though may affect text fields
 // FIXME: [SC] fix Text Areas and Web Views to get scrollbars when needed on iPad
 // FIXME: [BB] make SCUI Modal Pane movable/strechable on iPad

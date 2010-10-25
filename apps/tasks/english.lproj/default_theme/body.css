@@ -233,9 +233,7 @@ body.sc-theme,
 	outline-offset: 0px !important;
 	outline: 1px solid -moz-mac-focusring;
 }
-/*
-// FIXME: [SG/JL] have focus class added to scui-datepicker-view when clicked
-*/
+
 .mozilla .sc-view .scui-combobox-view.focus,
 .mozilla .sc-view .scui-datepicker-view.focus {
 	outline: 1px solid -moz-mac-focusring;
