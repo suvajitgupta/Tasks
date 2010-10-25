@@ -18,6 +18,7 @@ sc_require('views/summary');
 */
 
 // FIXME: [SG/JL] SCUI.ToolTip not working with SC.CheckboxView, SC.LabelView, SC.SegmentedView
+// FIXME: [SC] fix Text Areas and Web Views to get scrollbars when needed on iPad
 
 Tasks._wideLogo = document.title.match(/Eloqua/)? true : false;
 Tasks.mainPageHelper = SC.Object.create({
