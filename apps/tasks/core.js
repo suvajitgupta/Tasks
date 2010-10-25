@@ -77,13 +77,13 @@ SCUI.ContextMenuPane = SCUI.ContextMenuPane.extend({
   exampleView: SC.MenuItemView
 });
 
-// TODO: [SG/JL] remove hack for SCUI ComboBoxView using an SC.ButtonView since it doesn't fit unless all SC styles are overridden
+// TODO: [SG/EG] remove hack for SCUI ComboBoxView using an SC.ButtonView since it doesn't fit unless all SC styles are overridden
 SCUI.ComboBoxView.prototype.dropDownButtonView = SC.View.extend( SCUI.SimpleButton, {
   classNames: 'scui-combobox-dropdown-button-view',
   layout: { top: 0, right: 0, height: 24, width: 28 }
 });
 
-// TODO: [EG] SCUI.ToolTip should be rewritten to work with SC master (new rendering subsystem), CheckboxView still not working
+// TODO: [SG/EG] SCUI.ToolTip should be rewritten to work with SC master (new rendering subsystem), CheckboxView still not working
 SC.SegmentedView = SC.SegmentedView.extend({
   render: function() {
     sc_super();

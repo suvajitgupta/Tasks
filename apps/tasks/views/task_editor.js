@@ -109,7 +109,6 @@ Tasks.TaskEditorView = SC.View.extend(
     editor.setPath('watchersButton.title', watchCount);
     editor.setPath('nameField.value', task.get('name'));
     if(Tasks.getPath('tasksController.isEditable')) {
-      // TODO: [SG/JL] put focus in text field without using invokeLater()
       this.invokeLater(function() { Tasks.getPath('mainPage.taskEditor.editor.nameField').becomeFirstResponder(); }, 400);
     }
     editor.setPath('typeField.value', task.get('type'));

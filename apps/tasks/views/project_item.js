@@ -156,7 +156,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
           textAlign: SC.ALIGN_RIGHT,
           value: "_Activated:".loc()
         }),
-        // FIXME: [SG/JL] allow SCUI.DatePickerView popup picker height to be adjustable, not hardcoded to 255
+        // TODO: [SG/EG] allow SCUI.DatePickerView popup picker height to be adjustable, not hardcoded to 255
         activatedAtField: SCUI.DatePickerView.design({
           layout: { top: 37, right: 10, height: 24, width: 100 },
           dateFormat: CoreTasks.DATE_FORMAT,
