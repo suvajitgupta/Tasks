@@ -29,11 +29,11 @@ Tasks.filterController = SC.ObjectController.create(
   
   applyFilter: function(){
     this._close();
-    if(Tasks.get('editorPoppedUp') === Tasks.FILTER_EDITOR) Tasks.set('editorPoppedUp', null);
     if(Tasks.assignmentsRedrawNeeded) Tasks.assignmentsController.showAssignments();
   },
   
   _close: function(){
+    if(Tasks.get('editorPoppedUp') === Tasks.FILTER_EDITOR) Tasks.set('editorPoppedUp', null);
     var pane = Tasks.get('filterPane');
     if(pane) {
       pane.remove();
