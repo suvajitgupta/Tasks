@@ -49,7 +49,10 @@ Tasks.mixin( /** @scope Tasks */ {
     
   */
   viewRoute: function(params) {
+    
+    if(params.search) params.search = Tasks._unescape(params.search);
     // console.log('DEBUG: viewRoute() search=' + params.search);
+    
     if(Tasks._checkLoginStatus()) {
       if(!SC.none(params.search) && params.search !== '') {
         Tasks.assignmentsController.set('searchFilter', params.search);
@@ -72,6 +75,13 @@ Tasks.mixin( /** @scope Tasks */ {
   },
   
   /**
+    Fix Safari escaping '#' char in routes in a strange way
+  */
+  _unescape: function(value) {
+    return value.replace(/%23/g, '#');
+  },
+  
+  /**
     At startup, select specified project and/or set search filter criteria
     
     Example:
@@ -81,7 +91,11 @@ Tasks.mixin( /** @scope Tasks */ {
     
   */
   selectRoute: function(params) {
+    
+    if(params.projectId) params.projectId = Tasks._unescape(params.projectId);
+    if(params.search) params.search = Tasks._unescape(params.search);
     // console.log('DEBUG: selectRoute() loginTime=' + CoreTasks.loginTime + ', projectId=' + params.projectId + ', display=' + params.display + ', filter=' + params.filter + ', search=' + params.search);
+    
     if(!SC.none(params.display) && params.display !== '') {
       params.display = params.display.toLowerCase();
       switch(params.display) {
