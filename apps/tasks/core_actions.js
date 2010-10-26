@@ -444,7 +444,7 @@ Tasks.mixin({
     // console.log('DEBUG: restart()');
     // Clear cookie and cached records if using local storage
     if(CoreTasks.useLocalStorage) {
-      console.log('DEBUG: clearing cookie and local storage: ' + lastRetrieved);
+      console.log('DEBUG: clearing cookie and local storage');
       var cookie = SC.Cookie.find('lastRetrieved');
       if(cookie) cookie.destroy();
       localStorage.clear();
