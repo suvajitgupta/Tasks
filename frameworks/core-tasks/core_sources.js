@@ -295,24 +295,26 @@ CoreTasks.LocalDataSource = SCUDS.LocalDataSource.extend({
 
   fetch: function(store, query) {
     
-    // Check to see if cache is stale and needs to be blown away
-    var lastRetrievedCookie = SC.Cookie.find('lastRetrieved');
-    var lastRetrieved = '';
-    if (lastRetrievedCookie && lastRetrievedCookie.get) {
-      lastRetrieved = lastRetrievedCookie.get('value');
-      if(SC.typeOf(lastRetrieved) === SC.T_STRING && lastRetrieved.length > 0) {
-        var lastRetrievedAt = parseInt(lastRetrieved, 10);
-        var monthAgo = SC.DateTime.create().get('milliseconds') - 30*CoreTasks.MILLISECONDS_IN_DAY;
-        if(isNaN(lastRetrievedAt) || lastRetrievedAt < monthAgo) {
-          // console.log('DEBUG: Clearing local data store since its contents are old');
-          lastRetrieved = '';
+    if(CoreTasks.useLocalStorage) {
+      // Check to see if cache is stale and needs to be blown away
+      var lastRetrieved = '';
+      var lastRetrievedCookie = SC.Cookie.find('lastRetrieved');
+      if (lastRetrievedCookie && lastRetrievedCookie.get) {
+        lastRetrieved = lastRetrievedCookie.get('value');
+        if(SC.typeOf(lastRetrieved) === SC.T_STRING && lastRetrieved.length > 0) {
+          var lastRetrievedAt = parseInt(lastRetrieved, 10);
+          var monthAgo = SC.DateTime.create().get('milliseconds') - 30*CoreTasks.MILLISECONDS_IN_DAY;
+          if(isNaN(lastRetrievedAt) || lastRetrievedAt < monthAgo) {
+            // console.log('DEBUG: Clearing local data store since its contents are old');
+            lastRetrieved = '';
+          }
         }
       }
-    }
-    if (lastRetrieved === '') {
-      // Clear out local data store before reloading everything from server
-      CoreTasks.store._getDataSource().nukeLocal();
-      return NO;
+      if (lastRetrieved === '') {
+        // Clear out local data store before reloading everything from server
+        CoreTasks.store._getDataSource().nukeLocal();
+        return NO;
+      }
     }
     
     // Do some sanity checking first to make sure everything is in order.
@@ -363,11 +365,15 @@ CoreTasks.LocalDataSource = SCUDS.LocalDataSource.extend({
 var sources = [];
 
 if (CoreTasks.remoteDataSource === YES) {
-  sources.pushObjects([CoreTasks.LocalDataSource.create(), CoreTasks.RemoteDataSource.create()]);
-  console.log('Initialized main store with local + remote data source.');
+  if(CoreTasks.useLocalStorage) {
+    sources.pushObject(CoreTasks.LocalDataSource.create());
+    console.log('Using local storage.');
+  }
+  sources.pushObject(CoreTasks.RemoteDataSource.create());
+  console.log('Using remote data source.');
 } else {
   sources.pushObject(SC.FixturesDataSource.create());
-  console.log('Initialized main store with fixtures data source.');
+  console.log('Using fixtures data source.');
 }
 
 CoreTasks.initializeStore(sources);

@@ -11,6 +11,7 @@ CoreTasks = SC.Object.create({
   shouldNotify: true,
   autoSave: true,
   remoteDataSource: true, // Set to false to use fixtures
+  useLocalStorage: SC.platform.touch? NO : YES,
   
   needsSave: NO,
 

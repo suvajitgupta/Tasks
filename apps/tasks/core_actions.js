@@ -5,8 +5,7 @@
  * @author Suvajit Gupta
  * License: Licened under MIT license (see license.js)
  */
-/*globals CoreTasks Tasks sc_require sources
- */
+/*globals CoreTasks Tasks sc_require sources localStorage */
 
 sc_require('controllers/users');
 sc_require('controllers/projects');
@@ -180,15 +179,22 @@ Tasks.mixin({
     serverMessage.set('value', "_LoadingData".loc());
 
     // Get the last retrieved information from cookie (if available).
-    var lastRetrievedCookie = SC.Cookie.find('lastRetrieved');
-    var lastRetrieved = '';
-    if (lastRetrievedCookie && lastRetrievedCookie.get) {
-      lastRetrieved = lastRetrievedCookie.get('value');
-      if(SC.typeOf(lastRetrieved) === SC.T_STRING && lastRetrieved.length > 0) {
-        var lastRetrievedAt = parseInt(lastRetrieved, 10);
-        var monthAgo = SC.DateTime.create().get('milliseconds') - 30*CoreTasks.MILLISECONDS_IN_DAY;
-        if(isNaN(lastRetrievedAt) || lastRetrievedAt < monthAgo) {
-          lastRetrieved = '';
+    var lastRetrieved = Tasks.get('lastRetrieved');
+    if(lastRetrieved === undefined) lastRetrieved = '';
+    else console.log('DEBUG: setting lastRetrieved value from Tasks application: ' + lastRetrieved);
+    
+    if(lastRetrieved === '' && CoreTasks.useLocalStorage) {
+      var lastRetrievedCookie = SC.Cookie.find('lastRetrieved');
+      if (lastRetrievedCookie && lastRetrievedCookie.get) {
+        lastRetrieved = lastRetrievedCookie.get('value');
+        console.log('DEBUG: setting lastRetrieved value from cookie: ' + lastRetrieved);
+        if(SC.typeOf(lastRetrieved) === SC.T_STRING && lastRetrieved.length > 0) {
+          var lastRetrievedAt = parseInt(lastRetrieved, 10);
+          var monthAgo = SC.DateTime.create().get('milliseconds') - 30*CoreTasks.MILLISECONDS_IN_DAY;
+          if(isNaN(lastRetrievedAt) || lastRetrievedAt < monthAgo) {
+            console.log('DEBUG: resetting lastRetrieved for aged local storage data');
+            lastRetrieved = '';
+          }
         }
       }
     }
@@ -222,7 +228,10 @@ Tasks.mixin({
 
     // Set the last retrieved cookie.
     lastRetrieved = SC.DateTime.create().get('milliseconds') + '';
-    SC.Cookie.create({ name: 'lastRetrieved', value: lastRetrieved }).write();
+    if(CoreTasks.useLocalStorage) {
+      console.log('DEBUG: setting lastRetrieved value in cookie: ' + lastRetrieved);
+      SC.Cookie.create({ name: 'lastRetrieved', value: lastRetrieved }).write();
+    }
     Tasks.set('lastRetrieved', lastRetrieved);
 
   },
@@ -432,12 +441,15 @@ Tasks.mixin({
    */
   _restart: function() {
     
-    // Clear cookies and cached records
-    var cookie = SC.Cookie.find('lastRetrieved');
-    if(cookie) cookie.destroy();
-    localStorage.clear();
-
     // console.log('DEBUG: restart()');
+    // Clear cookie and cached records if using local storage
+    if(CoreTasks.useLocalStorage) {
+      console.log('DEBUG: clearing cookie and local storage: ' + lastRetrieved);
+      var cookie = SC.Cookie.find('lastRetrieved');
+      if(cookie) cookie.destroy();
+      localStorage.clear();
+    }
+
     if(Tasks.get('serverType') === Tasks.GAE_SERVER) {
       var params = {
         successCallback: this._logoutSuccess.bind(this),

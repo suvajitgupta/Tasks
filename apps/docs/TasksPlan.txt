@@ -216,13 +216,14 @@ Styling/Hardening @Active
 - Refactor code to use new SproutCore statecharts [SG] <MC> @Active
 
 Installation/Deployment @Active
+- Port GUI to Firefox, Safari/Chrome, and Internet Explorer [SG] @Done %Passed
+- Deploy publicly-accessible instances using Google App Engine/Python [JH2] <SG> @Done %Passed
 - Support customizable (via Buildfile) "Installation" logo and title (shown in Browser/tab title) [SG] @Done $Feature %Passed
 - Support customizable "Guest Signup" capability via "Login" screen (useful for open-source projects) [SG] @Done $Feature %Passed
 - Support customizable "Software" vs. "Todo" mode (in latter case, Task Type & Validation are not available via GUI) [SG] $Feature @Done %Passed
 - Support customizable default "AutoSave" and "Notifications" settings via actions menu [SG] $Feature @Done %Passed
-- Deploy publicly-accessible instances using Google App Engine/Python [JH2] <SG> @Done %Passed
-- Port GUI to Firefox, Safari/Chrome, and Internet Explorer [SG] @Done %Passed
-v Provide SproutCore doctool-style comments [SG]
+- Support customizable setting for use of local data store, turned off by default for touch devices [SG] @Done $Feature %Passed
+ Provide SproutCore doctool-style comments [SG]
 
 Touch Interfaces
 - Develop iPad client with swiveling Master/Detail view <JH2> [SG] $Feature @Done
