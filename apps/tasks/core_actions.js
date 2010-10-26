@@ -181,18 +181,18 @@ Tasks.mixin({
     // Get the last retrieved information from cookie (if available).
     var lastRetrieved = Tasks.get('lastRetrieved');
     if(lastRetrieved === undefined) lastRetrieved = '';
-    else console.log('DEBUG: setting lastRetrieved value from Tasks application: ' + lastRetrieved);
+    // else console.log('DEBUG: setting lastRetrieved value from Tasks application: ' + lastRetrieved);
     
     if(lastRetrieved === '' && CoreTasks.useLocalStorage) {
       var lastRetrievedCookie = SC.Cookie.find('lastRetrieved');
       if (lastRetrievedCookie && lastRetrievedCookie.get) {
         lastRetrieved = lastRetrievedCookie.get('value');
-        console.log('DEBUG: setting lastRetrieved value from cookie: ' + lastRetrieved);
+        // console.log('DEBUG: setting lastRetrieved value from cookie: ' + lastRetrieved);
         if(SC.typeOf(lastRetrieved) === SC.T_STRING && lastRetrieved.length > 0) {
           var lastRetrievedAt = parseInt(lastRetrieved, 10);
           var monthAgo = SC.DateTime.create().get('milliseconds') - 30*CoreTasks.MILLISECONDS_IN_DAY;
           if(isNaN(lastRetrievedAt) || lastRetrievedAt < monthAgo) {
-            console.log('DEBUG: resetting lastRetrieved for aged local storage data');
+            // console.log('DEBUG: resetting lastRetrieved for aged local storage data');
             lastRetrieved = '';
           }
         }
@@ -229,7 +229,7 @@ Tasks.mixin({
     // Set the last retrieved cookie.
     lastRetrieved = SC.DateTime.create().get('milliseconds') + '';
     if(CoreTasks.useLocalStorage) {
-      console.log('DEBUG: setting lastRetrieved value in cookie: ' + lastRetrieved);
+      // console.log('DEBUG: setting lastRetrieved value in cookie: ' + lastRetrieved);
       SC.Cookie.create({ name: 'lastRetrieved', value: lastRetrieved }).write();
     }
     Tasks.set('lastRetrieved', lastRetrieved);
@@ -444,7 +444,7 @@ Tasks.mixin({
     // console.log('DEBUG: restart()');
     // Clear cookie and cached records if using local storage
     if(CoreTasks.useLocalStorage) {
-      console.log('DEBUG: clearing cookie and local storage');
+      // console.log('DEBUG: clearing cookie and local storage');
       var cookie = SC.Cookie.find('lastRetrieved');
       if(cookie) cookie.destroy();
       localStorage.clear();

@@ -84,16 +84,6 @@ SCUI.ComboBoxView.prototype.dropDownButtonView = SC.View.extend( SCUI.SimpleButt
 });
 
 // TODO: [SG/EG] SCUI.ToolTip should be rewritten to work with SC master (new rendering subsystem), CheckboxView still not working
-SC.SegmentedView = SC.SegmentedView.extend({
-  render: function() {
-    sc_super();
-  }
-});
-SC.LabelView = SC.LabelView.extend({
-  render: function() {
-    sc_super();
-  }
-});
 
 /**
   A Standard Binding transform to localize a string in a binding.

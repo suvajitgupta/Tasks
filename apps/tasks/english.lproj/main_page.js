@@ -20,9 +20,7 @@ sc_require('views/summary');
 // FIXME: [SC] scrollbars next to CollectionViews look strange on iPad
 // TODO: [SG/AI] make iPad CollectionView scrolling faster by setting hasInterceptPane: YES on your MainPane though may affect text fields
 // TODO: [SG/BB] make SCUI Modal Pane movable/strechable on iPad
-// TODO: [SG] make LDS use configurable per instance of Tasks, also disable LDS for touch devices which have less storage
-// TODO: [SG] add ability to watch/unwatch Tasks from editor, especially useful on iPad where there are no context menus
-// TODO: [SG] add buttons to duplicate Projects/Tasks in bottom bars, especially useful on iPad where there are no context menus
+// TODO: [SG] provide access to contents of context menus in actions menu (useful on iPad)
 
 Tasks._wideLogo = document.title.match(/Eloqua/)? true : false;
 Tasks.mainPageHelper = SC.Object.create({
@@ -33,6 +31,7 @@ Tasks.mainPageHelper = SC.Object.create({
   shouldNotifyBinding: SC.Binding.oneWay('CoreTasks*shouldNotify'),
   clippyDetailsId: 'clippy-details',
   clippyDetails: null,
+  masterIsHidden: null,
 
   _embedClippy: function(context) {
     var clippyTooltip = "_ClippyTooltip".loc();
@@ -119,6 +118,7 @@ Tasks.mainPage = SC.Page.design({
      
      layout: { top: 0, left: 0, right: 0, bottom: 0, minWidth: SC.platform.touch? 768 : 1024, minHeight: 360 },
      masterWidth: 250,
+     masterIsHiddenBinding: 'Tasks.mainPageHelper.masterIsHidden',
      
      masterView: SC.WorkspaceView.extend({
        
@@ -289,7 +289,11 @@ Tasks.mainPage = SC.Page.design({
            itemValueKey: 'value',
            toolTip: "_DisplayModeTooltip".loc(),
            valueBinding: 'Tasks.assignmentsController.displayMode',
-           isEnabledBinding: SC.Binding.not('Tasks.mainPageHelper*editorPoppedUp')
+           isEnabledBinding: SC.Binding.not('Tasks.mainPageHelper*editorPoppedUp'),
+           // TODO: [SG] remove when SCUI.ToolTip works with SC master (new rendering subsystem)
+           render: function() {
+             sc_super();
+           }
          }),
 
          masterPickerButton: SC.ButtonView.extend({
@@ -298,8 +302,7 @@ Tasks.mainPage = SC.Page.design({
            icon: 'empty-project-icon',
            classNames: ['dark'],
            action: 'toggleMasterPicker',
-           isVisible: NO,
-           isVisibleBinding: 'Tasks.mainPage.mainPane.masterDetailView.masterIsHidden'
+           isVisibleBinding: SC.Binding.oneWay('Tasks.mainPageHelper.masterIsHidden')
          }),
          
          welcomeMessageLabel: SC.LabelView.design(SCUI.ToolTip, {
@@ -314,7 +317,10 @@ Tasks.mainPage = SC.Page.design({
              Tasks.showCurrentUserTasks();
            },
            valueBinding: SC.Binding.oneWay('Tasks.mainPageHelper.welcomeMessage'),
-           isEnabledBinding: SC.Binding.not('Tasks.mainPageHelper*editorPoppedUp')
+           isEnabledBinding: SC.Binding.not('Tasks.mainPageHelper*editorPoppedUp'),
+           render: function() {
+             sc_super();
+           }
          }),
 
          clippyIcon: SC.View.design({
@@ -438,8 +444,7 @@ Tasks.mainPage = SC.Page.design({
                icon: '',
                textAlign: SC.ALIGN_RIGHT,
                value: '',
-               isVisible: NO,
-               isVisibleBinding: SC.Binding.not('Tasks.mainPage.mainPane.masterDetailView.masterIsHidden')
+               isVisibleBinding: SC.Binding.not('Tasks.mainPageHelper.masterIsHidden').oneWay()
              }),
 
              saveButton: SC.ButtonView.design({

@@ -14,12 +14,16 @@
 Tasks.LogoView = SC.View.extend(
 /** @scope Tasks.LogoView.prototype */ {
   
-  childViews: 'logoIcon versionLabel'.w(),
+  childViews: 'tasksLabel versionLabel'.w(),
   
-  logoIcon: SC.LabelView.design(SCUI.ToolTip, {
+  tasksLabel: SC.LabelView.design(SCUI.ToolTip, {
     layout: { centerY: 0, height: 27, left: 0, width: 71 },
     toolTip: "_Credits".loc(),
-    classNames: ['tasks-logo']
+    classNames: ['tasks-logo'],
+    // TODO: [SG] remove when SCUI.ToolTip works with SC master (new rendering subsystem)
+    render: function() {
+      sc_super();
+    }
   }),
 
   versionLabel: SC.LabelView.design({
