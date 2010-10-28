@@ -38,7 +38,7 @@
 }
 
 .back-icon {
-  background: static_url('images/back.png') no-repeat !important;
+  background-image: static_url('images/back.png') !important;
 }
 
 .previous-icon {
@@ -46,7 +46,7 @@
 }
 
 .next-icon {
-  background: static_url('images/item-next.png') no-repeat !important;
+  background-image: static_url('images/item-next.png') !important;
 }
 
 .previous-icon, .next-icon, .back-icon {
