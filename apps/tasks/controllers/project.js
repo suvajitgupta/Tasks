@@ -73,7 +73,7 @@ Tasks.projectController = SC.ObjectController.create(
       var oldRoute = '#' + SC.routes.get('location');
       var newRoute = CoreTasks.isSystemProject(cur)? '' : ('#select&projectId=#' + cur.get('id'));
       if(newRoute !== oldRoute) SC.routes.set('location', newRoute);
-      // TODO: [SG] fix route of newly created project after id is assigned by server - otherwise shows _id value
+      // FIXME: [SG] fix route of newly created project after id is assigned by server - otherwise shows _id value
     }
   }.observes('content')
   

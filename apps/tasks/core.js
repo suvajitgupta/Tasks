@@ -83,7 +83,7 @@ SCUI.ComboBoxView.prototype.dropDownButtonView = SC.View.extend( SCUI.SimpleButt
   layout: { top: 0, right: 0, height: 24, width: 28 }
 });
 
-// TODO: [SG/EG] SCUI.ToolTip should be rewritten to work with SC master (new rendering subsystem), CheckboxView still not working
+// TODO: [SG/EG] update SCUI.ToolTip to work with SC master (new rendering subsystem), CheckboxView still not working
 
 /**
   A Standard Binding transform to localize a string in a binding.

@@ -17,9 +17,13 @@ sc_require('views/summary');
   @author Joshua Holt
 */
 
+// FIXME: [SG/JL] changes via SCUI.ComboBox not working on iPad
+// FIXME: [SG/RMG] change icons for back/previous/next to be grayscale
+// FIXME: [SG/RMG] lighten open/close group images to be more visible
+// FIXME: [SG/RMG] get a larger filter cancel icon to be easier to click on iPad
+
 // FIXME: [SC] scrollbars next to CollectionViews look strange on iPad
-// TODO: [SG/AI] make iPad CollectionView scrolling faster by setting hasInterceptPane: YES on your MainPane though may affect text fields
-// TODO: [SG/BB] make SCUI Modal Pane movable/strechable on iPad
+// TODO: [SC] fix CollectionView sluggish scrolling on iPad (works better in Ace2?)
 // TODO: [SG] provide access to contents of context menus in actions menu (useful on iPad)
 
 Tasks._wideLogo = document.title.match(/Eloqua/)? true : false;

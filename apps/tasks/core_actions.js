@@ -97,7 +97,7 @@ Tasks.mixin({
         
         // Setup user controller and then current logged on user
         // Note: sequence is important below - logged in user must be loaded after data is preloaded from LDS to get new authToken
-        // TODO: [SG] don't send private information (like email address) for users from GAE Server - these can be seen in localStorage later
+        // FIXME: [SG] don't send private information (like email address) for users from GAE Server - these can be seen in localStorage later
         var currentUser = null;
         if (!CoreTasks.get('allUsers')) {
           CoreTasks.set('allUsers', CoreTasks.store.find(

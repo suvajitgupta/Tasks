@@ -3,6 +3,8 @@
 // ==========================================================================
 /*globals sc_static Tasks CoreTasks */
 
+// FIXME: [SG] make welcome message hover look more clickable
+
 /** 
 
   Task details editor.
@@ -426,7 +428,7 @@ Tasks.TaskEditorView = SC.View.extend(
      hint: "_DescriptionHint".loc(),
      maxLength: 500000,
      isTextArea: YES,
-     // TODO: [SG] disable Task.description editing for Guests after Comments are added
+     // FIXME: [SG] disable Task.description editing for Guests after Comments are added
      isEnabled: YES
    }),
 
