@@ -18,8 +18,6 @@ sc_require('views/summary');
 */
 
 // FIXME: [SG/JL] changes via SCUI.ComboBox not working on iPad
-// FIXME: [SG/RMG] change icons for back/previous/next to be grayscale
-// FIXME: [SG/RMG] lighten open/close group images to be more visible
 // FIXME: [SG/RMG] get a larger filter cancel icon to be easier to click on iPad
 
 // FIXME: [SC] scrollbars next to CollectionViews look strange on iPad

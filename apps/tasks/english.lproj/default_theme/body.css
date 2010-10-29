@@ -282,3 +282,15 @@ body.sc-theme,
 .sc-panel {
   -webkit-transform: translate3d(0px,0px,0px);
 }
+
+.sc-list-item-view img.disclosure {
+  background-image: static_url('images/group-closed.png') !important;
+  background-position: 0px 0px !important;
+  left: 2px !important;
+  top: 4px !important;
+  margin-top: 0px !important;
+}
+.sc-list-item-view img.disclosure.open {
+  background-image: static_url('images/group-open.png') !important;
+}
+
