@@ -40,7 +40,7 @@ Tasks.settingsPage = SC.Page.create({
         valueBinding: 'Tasks.usersController.userNamePattern'
       }),
       userNamePatternCancelButton: SC.View.design({ // User selection cancel button
-        layout: { top: 17, height: 12, left: 225, width: 12 },
+        layout: { top: 14, height: 16, left: 221, width: 16 },
         isVisible: NO,
         classNames: ['filter-cancel-icon'],
         touchStart: function() {

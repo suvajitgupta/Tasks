@@ -18,7 +18,6 @@ sc_require('views/summary');
 */
 
 // FIXME: [SG/JL] changes via SCUI.ComboBox not working on iPad
-// FIXME: [SG/RMG] get a larger filter cancel icon to be easier to click on iPad
 
 // FIXME: [SC] scrollbars next to CollectionViews look strange on iPad
 // TODO: [SC] fix CollectionView sluggish scrolling on iPad (works better in Ace2?)
@@ -281,7 +280,7 @@ Tasks.mainPage = SC.Page.design({
          }),
 
          displayModeSegments: SC.SegmentedView.design(SCUI.ToolTip, {
-           layout: { left: 70, centerY: 0, height: 24, width: 90 },
+           layout: { left: 73, centerY: 0, height: 24, width: 90 },
            items: [
              { title: '', icon: 'sc-icon-group-16', value: Tasks.DISPLAY_MODE_TEAM },
              { title: '', icon: 'tasks-icon', value: Tasks.DISPLAY_MODE_TASKS }
@@ -336,7 +335,7 @@ Tasks.mainPage = SC.Page.design({
          }),
 
          filterPanelButton: SC.ButtonView.design({
-           layout: { centerY: 0, height: 24, right: 216, width: 50 },
+           layout: { centerY: 0, height: 24, right: 223, width: 50 },
            titleMinWidth: 0,
            icon: 'filter-icon',
            classNames: ['dark'],
@@ -346,7 +345,7 @@ Tasks.mainPage = SC.Page.design({
            isEnabledBinding: SC.Binding.not('Tasks.mainPageHelper*editorPoppedUp')
          }),
          filterCancelButton: SC.View.design(SC.Control, { // Filter cancel button
-           layout: { centerY: 0, height: 12, right: 219, width: 12 },
+           layout: { centerY: 0, height: 16, right: 218, width: 16 },
            isVisible: NO,
            classNames: ['filter-cancel-icon'],
            touchStart: function() {
@@ -372,7 +371,7 @@ Tasks.mainPage = SC.Page.design({
            isEnabledBinding: SC.Binding.not('Tasks.mainPageHelper*editorPoppedUp')
          }),
          tasksSearchCancelButton: SC.View.design(SC.Control, { // Tasks Search cancel button
-           layout: { centerY: 0, height: 12, right: 17, width: 12 },
+           layout: { centerY: 0, height: 16, right: 16, width: 16 },
            isVisible: NO,
            classNames: ['filter-cancel-icon'],
            touchStart: function() {
