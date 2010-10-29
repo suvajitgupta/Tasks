@@ -17,8 +17,8 @@ sc_require('views/summary');
   @author Joshua Holt
 */
 
+// FIXME: [SG] try adding hotkey to Refresh data
 // FIXME: [SG/JL] changes via SCUI.ComboBox not working on iPad
-
 // FIXME: [SC] scrollbars next to CollectionViews look strange on iPad
 // TODO: [SC] fix CollectionView sluggish scrolling on iPad (works better in Ace2?)
 // TODO: [SG] provide access to contents of context menus in actions menu (useful on iPad)

@@ -3,8 +3,6 @@
 // ==========================================================================
 /*globals sc_static Tasks CoreTasks */
 
-// FIXME: [SG] make welcome message hover look more clickable
-
 /** 
 
   Task details editor.
@@ -173,6 +171,7 @@ Tasks.TaskEditorView = SC.View.extend(
     if(Tasks.assignmentsRedrawNeeded) Tasks.assignmentsController.showAssignments();
     if(CoreTasks.get('autoSave') && !CoreTasks.get('isSaving')) Tasks.saveData();
     Tasks.setPath('mainPage.mainPane.tasksSceneView.nowShowing', 'tasksList');
+    // FIXME: [SG] after slide back set responder to tasks list
   },
   
  showWatchers: function() {
@@ -206,6 +205,7 @@ Tasks.TaskEditorView = SC.View.extend(
    pane.popup(this.getPath('editor.watchersButton'), SC.PICKER_POINTER);
  },
  
+ // FIXME: [SG] try adding hotkeys for previous/next buttons
  previousTask: function() {
    this._postEditing();
    SC.RunLoop.begin();
@@ -443,6 +443,7 @@ Tasks.TaskEditorView = SC.View.extend(
      textAlign: SC.ALIGN_RIGHT
    }),
 
+   // FIXME: [SG] add ability to watch/unwatch from task editor
    watchersButton: SC.ButtonView.design({
      layout: { centerX: 0, bottom: 8, height: 24, width: 80 },
      icon: 'watches-icon',
