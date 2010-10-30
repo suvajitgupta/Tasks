@@ -23,8 +23,9 @@ Tasks.mixin({
     Tasks.loadData();
   },
 
-  // GUI Running
+  // Ready for User Interaction
   goStateA4: function() {
+    Tasks.getPath('mainPage.mainPane.projectsList').becomeFirstResponder();
   }
 
 });

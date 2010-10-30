@@ -213,8 +213,21 @@ Tasks.mainPage = SC.Page.design({
                 pane.popup(this, this.get('selectionEvent')); // pass in the mouse event so the pane can figure out where to put itself
               }
             }
-          }) // projectsSourceList
-        }), // projectsList
+            
+          }), // projectsListView
+          
+          // Hotkeys - be careful to avoid conflicts with browser shortcuts!
+          keyDown: function(event) {
+            var ret = NO, commandCode = event.commandCodes();
+            // console.log('DEBUG: hotkey "' + commandCode[0] + '" pressed');
+            if (Tasks.getPath('assignmentsController.displayMode') === Tasks.DISPLAY_MODE_TASKS && commandCode[0] === 'ctrl_right'){  // control right arrow
+              Tasks.mainPage.tasksList.contentView.becomeFirstResponder();
+              ret = YES;
+            }
+            return ret;
+          }
+          
+        }), // projectsListScrollView
          
          projectsBottomBar: SC.View.design({
            
@@ -606,7 +619,7 @@ Tasks.mainPage = SC.Page.design({
          context.removeClass('helper-adjust-filter');
        }
 
-     }),
+     }), // tasksListView
 
      // Hotkeys - be careful to avoid conflicts with browser shortcuts!
      keyDown: function(event) {
@@ -616,11 +629,15 @@ Tasks.mainPage = SC.Page.design({
          Tasks.addTask();
          ret = YES;
        }
-       else if (commandCode[0] === 'ctrl_shift_+'){  // control_shift_plus
+       else if (commandCode[0] === 'ctrl_shift_+'){  // control shift plus
          Tasks.duplicateTask();
          ret = YES;
        }
-       else if (commandCode[0] === 'ctrl_right'){  // control_right arrow
+       else if (commandCode[0] === 'ctrl_left'){  // control left arrow
+         Tasks.getPath('mainPage.mainPane.projectsList').becomeFirstResponder();
+         ret = YES;
+       }
+       else if (commandCode[0] === 'ctrl_right'){  // control right arrow
          var sel = Tasks.getPath('tasksController.selection');
          var singleSelect = (sel && sel.get('length') === 1);
          if(singleSelect) {
@@ -632,7 +649,7 @@ Tasks.mainPage = SC.Page.design({
        return ret;
      }
 
-  }), // tasksList
+  }), // tasksListScrollView
   
   taskEditor: Tasks.TaskEditorView.design({})
 
