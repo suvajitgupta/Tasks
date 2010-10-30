@@ -220,10 +220,7 @@ body.sc-theme,
 }
 
 .scui-combobox-view .scui-combobox-dropdown-button-view {
-  width: 30px !important;
-  height: 24px !important;
   background: static_url('images/dropdown-arrow.png') no-repeat 0 0;
-  z-index: 100 !important;
 }
 
 /*
