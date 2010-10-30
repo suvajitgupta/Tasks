@@ -17,7 +17,6 @@ sc_require('views/summary');
   @author Joshua Holt
 */
 
-// FIXME: [SG] try adding hotkey to Refresh data
 // TODO: [SC] fix strange-looking scrollbars next to CollectionViews on iPad
 // TODO: [SC] fix CollectionView sluggish scrolling on iPad (works better in Ace2?)
 // TODO: [SG] provide access to contents of context menus in actions menu (useful on iPad)
@@ -619,6 +618,15 @@ Tasks.mainPage = SC.Page.design({
        }
        else if (commandCode[0] === 'ctrl_shift_+'){  // control_shift_plus
          Tasks.duplicateTask();
+         ret = YES;
+       }
+       else if (commandCode[0] === 'ctrl_right'){  // control_right arrow
+         var sel = Tasks.getPath('tasksController.selection');
+         var singleSelect = (sel && sel.get('length') === 1);
+         if(singleSelect) {
+           var task = sel.get('firstObject');
+           if(task) Tasks.getPath('mainPage.taskEditor').popup(task);
+         }
          ret = YES;
        }
        return ret;

@@ -171,7 +171,7 @@ Tasks.TaskEditorView = SC.View.extend(
     if(Tasks.assignmentsRedrawNeeded) Tasks.assignmentsController.showAssignments();
     if(CoreTasks.get('autoSave') && !CoreTasks.get('isSaving')) Tasks.saveData();
     Tasks.setPath('mainPage.mainPane.tasksSceneView.nowShowing', 'tasksList');
-    // FIXME: [SG] after slide back set responder to tasks list
+    this.invokeLater(function() { Tasks.mainPage.tasksList.contentView.becomeFirstResponder(); }, 400);
   },
   
  showWatchers: function() {
@@ -205,7 +205,6 @@ Tasks.TaskEditorView = SC.View.extend(
    pane.popup(this.getPath('editor.watchersButton'), SC.PICKER_POINTER);
  },
  
- // FIXME: [SG] try adding hotkeys for previous/next buttons
  previousTask: function() {
    this._postEditing();
    SC.RunLoop.begin();
@@ -455,7 +454,9 @@ Tasks.TaskEditorView = SC.View.extend(
   }),
   
   keyDown: function(event) {
-    if (event.commandCodes()[0] === 'return') {
+    var ret = NO, commandCode = event.commandCodes();
+    // console.log('DEBUG: hotkey "' + commandCode[0] + '" pressed');
+    if (commandCode[0] === 'return' || commandCode[0] === 'escape') {
       this.close();
       return YES;
     }
