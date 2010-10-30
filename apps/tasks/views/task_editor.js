@@ -101,11 +101,13 @@ Tasks.TaskEditorView = SC.View.extend(
   
   _preEditing: function() {
     var task = this.get('task');
+    // console.log('DEBUG: preEditing task: ' + task.get('name'));
     var editor = this.get('editor');
     editor.setPath('idLabel.value', "_Task".loc() + ' ' + task.get('displayId'));
     this._watches = CoreTasks.getTaskWatches(task);
-    var watchCount = this._watches.length;
-    editor.setPath('watchersButton.title', '' + watchCount);
+    this._watching = CoreTasks.isCurrentUserWatchingTask(task);
+    editor.setPath('watchingCheckbox.value', this._watching? true : false);
+    editor.setPath('watchersButton.title', '' + this._watches.length);
     editor.setPath('nameField.value', task.get('name'));
     if(Tasks.getPath('tasksController.isEditable')) {
       this.invokeLater(function() { Tasks.getPath('mainPage.taskEditor.editor.nameField').becomeFirstResponder(); }, 400);
@@ -124,11 +126,24 @@ Tasks.TaskEditorView = SC.View.extend(
   },
   _postEditing: function() {
     var task = this.get('task');
+    // console.log('DEBUG: postEditing task: ' + task.get('name'));
     var editor = this.get('editor');
     if(editor.getPath('nameField.value') === CoreTasks.NEW_TASK_NAME.loc()) {
       task.destroy(); // blow away unmodified new task
     }
     else {
+      var shouldWatch = editor.getPath('watchingCheckbox.value');
+      if(this._watching && !shouldWatch) {
+        var watch = CoreTasks.getCurrentUserTaskWatch(task);
+        SC.RunLoop.begin();
+        if(watch) watch.destroy();
+        SC.RunLoop.end();
+      }
+      else if(!this._watching && shouldWatch) {
+        SC.RunLoop.begin();
+        CoreTasks.createRecord(CoreTasks.Watch, { taskId: task.get('id'), userId: CoreTasks.getPath('currentUser.id') });
+        SC.RunLoop.end();
+      }
       task.setIfChanged('type', editor.getPath('typeField.value'));
       task.setIfChanged('priority', editor.getPath('priorityField.value'));
       task.setIfChanged('developmentStatus', editor.getPath('statusField.value'));
@@ -226,7 +241,7 @@ Tasks.TaskEditorView = SC.View.extend(
  editor: SC.View.design({
    
    layout: { left: 0, right: 0, top: 0, bottom: 0},
-   childViews: 'idLabel backButton previousButton nextButton nameLabel nameField typeLabel typeField priorityLabel priorityField statusLabel statusField validationLabel validationField effortLabel effortField effortHelpLabel projectLabel projectField submitterLabel submitterField assigneeLabel assigneeField descriptionLabel descriptionField createdAtLabel updatedAtLabel watchersButton'.w(),
+   childViews: 'idLabel backButton previousButton nextButton nameLabel nameField typeLabel typeField priorityLabel priorityField statusLabel statusField validationLabel validationField effortLabel effortField effortHelpLabel projectLabel projectField submitterLabel submitterField assigneeLabel assigneeField descriptionLabel descriptionField createdAtLabel updatedAtLabel watchingCheckbox watchersButton'.w(),
    classNames: ['task-editor'],
 
    idLabel: SC.LabelView.design({
@@ -441,9 +456,12 @@ Tasks.TaskEditorView = SC.View.extend(
      textAlign: SC.ALIGN_RIGHT
    }),
 
-   // FIXME: [SG] add ability to watch/unwatch from task editor
+   watchingCheckbox: SC.CheckboxView.design({
+     layout: { centerX: -35, bottom: 12, height: 16, width: 70 },
+     title: "_Watch".loc()
+   }),
    watchersButton: SC.ButtonView.design({
-     layout: { centerX: 0, bottom: 8, height: 24, width: 80 },
+     layout: { centerX: 35, bottom: 8, height: 24, width: 80 },
      icon: 'watches-icon',
      fontWeight: SC.BOLD_WEIGHT,
      action: 'showWatchers',

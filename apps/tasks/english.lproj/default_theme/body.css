@@ -207,7 +207,8 @@ body.sc-theme,
   font-size: 11px !important;
 }
 
-.sc-view .scui-combobox-view {
+.sc-view .scui-combobox-view,
+.sc-view .sc-checkbox-view {
   background: none !important;
 }
 
