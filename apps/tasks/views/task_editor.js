@@ -477,6 +477,14 @@ Tasks.TaskEditorView = SC.View.extend(
       this.close();
       return YES;
     }
+    else if (commandCode[0] === 'ctrl_='){  // control_equals
+      Tasks.addTask();
+      ret = YES;
+    }
+    else if (commandCode[0] === 'ctrl_shift_+'){  // control shift plus
+      Tasks.duplicateTask();
+      ret = YES;
+    }
     return NO;
   }
   

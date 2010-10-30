@@ -222,6 +222,8 @@ Tasks.mainPage = SC.Page.design({
             // console.log('DEBUG: hotkey "' + commandCode[0] + '" pressed');
             if (Tasks.getPath('assignmentsController.displayMode') === Tasks.DISPLAY_MODE_TASKS && commandCode[0] === 'ctrl_right'){  // control right arrow
               Tasks.mainPage.tasksList.contentView.becomeFirstResponder();
+              var firstTask = Tasks.getPath('tasksController.arrangedObjects').objectAt(1);
+              Tasks.tasksController.selectObject(firstTask);
               ret = YES;
             }
             return ret;
@@ -625,15 +627,7 @@ Tasks.mainPage = SC.Page.design({
      keyDown: function(event) {
        var ret = NO, commandCode = event.commandCodes();
        // console.log('DEBUG: hotkey "' + commandCode[0] + '" pressed');
-       if (commandCode[0] === 'ctrl_='){  // control_equals
-         Tasks.addTask();
-         ret = YES;
-       }
-       else if (commandCode[0] === 'ctrl_shift_+'){  // control shift plus
-         Tasks.duplicateTask();
-         ret = YES;
-       }
-       else if (commandCode[0] === 'ctrl_left'){  // control left arrow
+       if (commandCode[0] === 'ctrl_left'){  // control left arrow
          Tasks.getPath('mainPage.mainPane.projectsList').becomeFirstResponder();
          ret = YES;
        }
@@ -644,6 +638,14 @@ Tasks.mainPage = SC.Page.design({
            var task = sel.get('firstObject');
            if(task) Tasks.getPath('mainPage.taskEditor').popup(task);
          }
+         ret = YES;
+       }
+       else if (commandCode[0] === 'ctrl_shift_=' || commandCode[0] === 'ctrl_shift_+'){  // control shift equals (Safari) or plus (Firefox)
+         Tasks.duplicateTask();
+         ret = YES;
+       }
+       else if (commandCode[0] === 'ctrl_='){  // control equals
+         Tasks.addTask();
          ret = YES;
        }
        return ret;
