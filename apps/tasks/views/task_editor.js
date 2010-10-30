@@ -105,8 +105,7 @@ Tasks.TaskEditorView = SC.View.extend(
     editor.setPath('idLabel.value', "_Task".loc() + ' ' + task.get('displayId'));
     this._watches = CoreTasks.getTaskWatches(task);
     var watchCount = this._watches.length;
-    editor.setPath('watchersButton.isVisible', watchCount > 0);
-    editor.setPath('watchersButton.title', watchCount);
+    editor.setPath('watchersButton.title', '' + watchCount);
     editor.setPath('nameField.value', task.get('name'));
     if(Tasks.getPath('tasksController.isEditable')) {
       this.invokeLater(function() { Tasks.getPath('mainPage.taskEditor.editor.nameField').becomeFirstResponder(); }, 400);
