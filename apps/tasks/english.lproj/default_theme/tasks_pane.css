@@ -232,7 +232,7 @@
   top: 0px !important;
   bottom: 0px !important;
   left: 12px !important;
-	width: 55px !important;
+	width: 60px !important;
   border-right: 3px solid #FCC !important;
 }
 
@@ -256,7 +256,7 @@
 }
 
 .task-item .sc-outline {
-  left: 20px !important;
+  left: 26px !important;
 }
 
 .task-item .sc-outline img {
@@ -394,19 +394,19 @@
  * Task selection/dragging styles
  */
 
-.task-item:hover {
+.task-item.hover {
   background: #DDD none repeat scroll 0 0 !important;
 }
 .tasks-pane-inner .task-item.sel,
-.tasks-pane-inner .task-item.sel:hover {
+.tasks-pane-inner .task-item.sel.hover {
   background: #9CF none repeat scroll 0 0 !important;
 }
 
-.task-item:hover .task-id {
+.task-item.hover .task-id {
   border: 1px solid #DDD;
 }
 .task-item.sel .task-id,
-.task-item.sel:hover .task-id {
+.task-item.sel.hover .task-id {
   border: 1px solid #9CF;
 }
 .task-id:hover {
@@ -427,10 +427,10 @@
   background: -webkit-gradient(linear, center top, center bottom, from(#F00), to(#700));
   background: -moz-linear-gradient(center top , #F00, #700);
 }
-.task-item:hover .task-margin {
-  background-image: static_url('images/next-month.png') !important;
+.task-item.hover .task-margin {
+  background-image: static_url('images/pencil.png') !important;
   background-repeat: no-repeat !important;
-  background-position: 48px 8px !important;
+  background-position: 46px 4px !important;
 }
 
 .sc-view.sc-ghost-view .task-item {

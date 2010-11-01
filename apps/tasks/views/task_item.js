@@ -16,7 +16,24 @@ Tasks.TaskItemView = SC.ListItemView.extend(
 /** @scope Tasks.TaskItemView.prototype */ {
   
   content: null,
+  displayProperties: 'showHover'.w(),
   
+  /** @private
+    Add explicit hover class - using this to avoid problems on iPad.
+  */  
+  mouseEntered: function(evt) {
+    this.set('showHover', YES);
+    return YES;
+  },
+
+  /** @private
+    Remove explicit hover class - using this to avoid problems on iPad.
+  */  
+  mouseExited: function(evt) {
+    this.set('showHover', NO);
+    return YES;
+  },
+
   /** @private
     When mouse clicked on non-name parts of a task show the editor.
   */  
@@ -87,6 +104,11 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       case CoreTasks.TASK_PRIORITY_LOW:
         context.addClass('task-priority-low');
         break;          
+    }
+    if (this.get('showHover')) {
+      context.addClass('hover'); 
+    } else {
+      context.removeClass('hover');
     }
     
     var marginTooltip = "_TaskMarginTooltip".loc();
