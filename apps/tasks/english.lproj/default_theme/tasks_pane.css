@@ -248,6 +248,7 @@
   bottom: 4px !important;
   left: 0px !important;
 	width: 40px !important;
+  border: 1px solid #EEE;
 }
 
 .watched-task {
@@ -393,13 +394,38 @@
  * Task selection/dragging styles
  */
 
+.task-item:hover {
+  background: #DDD none repeat scroll 0 0 !important;
+}
 .tasks-pane-inner .task-item.sel,
 .tasks-pane-inner .task-item.sel:hover {
   background: #9CF none repeat scroll 0 0 !important;
 }
 
-.task-item:hover {
-  background: #DDD none repeat scroll 0 0 !important;
+.task-item:hover .task-id {
+  border: 1px solid #DDD;
+}
+.task-item.sel .task-id,
+.task-item.sel:hover .task-id {
+  border: 1px solid #9CF;
+}
+.task-id:hover {
+  color: #000 !important;
+  border: 1px solid #888 !important;
+  background: -webkit-gradient(linear, center top, center bottom, from(#CCC), to(#777));
+  background: -moz-linear-gradient(center top , #CCC, #777);
+}
+.task-id.task-validation-passed:hover {
+  color: #000 !important;
+  border: 1px solid #0B0 !important;
+  background: -webkit-gradient(linear, center top, center bottom, from(#0F0), to(#070));
+  background: -moz-linear-gradient(center top , #0F0, #070);
+}
+.task-id.task-validation-failed:hover {
+  color: #EEE !important;
+  border: 1px solid #B00 !important;
+  background: -webkit-gradient(linear, center top, center bottom, from(#F00), to(#700));
+  background: -moz-linear-gradient(center top , #F00, #700);
 }
 
 .sc-view.sc-ghost-view .task-item {
