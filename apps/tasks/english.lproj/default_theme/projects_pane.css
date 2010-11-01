@@ -181,6 +181,8 @@
 .empty-system-project-icon {
   width: 16px !important;
   height: 16px !important;
+  margin-left: -2px !important;
+  margin-top: 1px !important;
   background: static_url('images/empty-system-project.png') no-repeat 0 0;
 }
 
