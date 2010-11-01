@@ -232,7 +232,7 @@
   top: 0px !important;
   bottom: 0px !important;
   left: 12px !important;
-	width: 53px !important;
+	width: 55px !important;
   border-right: 3px solid #FCC !important;
 }
 
@@ -426,6 +426,11 @@
   border: 1px solid #B00 !important;
   background: -webkit-gradient(linear, center top, center bottom, from(#F00), to(#700));
   background: -moz-linear-gradient(center top , #F00, #700);
+}
+.task-item:hover .task-margin {
+  background-image: static_url('images/next-month.png') !important;
+  background-repeat: no-repeat !important;
+  background-position: 48px 8px !important;
 }
 
 .sc-view.sc-ghost-view .task-item {

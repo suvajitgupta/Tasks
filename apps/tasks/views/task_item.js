@@ -89,6 +89,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         break;          
     }
     
+    var marginTooltip = "_TaskMarginTooltip".loc();
     var idTooltip = "_TaskIdTooltip".loc();
     if(Tasks.softwareMode) idTooltip += "_TaskValidationTooltip".loc();
     var submitterUser = content.get('submitter');
@@ -109,7 +110,8 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     var displayId = content.get('displayId');
     var taskIdClass = 'task-id';
     if(CoreTasks.isCurrentUserWatchingTask(content) === CoreTasks.TASK_WATCH_ON) taskIdClass += ' watched-task';
-    context = context.begin('div').addClass('task-margin').begin('div').addClass(taskIdClass).addClass(validationClass).
+    context = context.begin('div').addClass('task-margin').attr('title', marginTooltip).attr('alt', marginTooltip).
+                begin('div').addClass(taskIdClass).addClass(validationClass).
                 text(displayId).attr('title', idTooltip).attr('alt', idTooltip).end().end();
       
     switch(content.get('developmentStatus')){
