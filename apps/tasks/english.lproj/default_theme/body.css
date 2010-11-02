@@ -186,10 +186,6 @@ body.sc-theme,
 	font-weight: bold;
 }
 
-.sc-list-item-view img.disclosure {
-  left: -5px !important;
-}
-
 .sc-group-item .sc-outline img {
   left: 5px !important;
 }
@@ -200,7 +196,7 @@ body.sc-theme,
 
 .projects-pane-inner .sc-list-item-view img.icon,
 .users-pane-inner .sc-list-item-view img.icon {
-  left: 2px !important;
+  left: 0px !important;
 }
 
 .sc-text-field-view, .select-button span label {
@@ -284,7 +280,7 @@ body.sc-theme,
 .sc-list-item-view img.disclosure {
   background-image: static_url('images/group-closed.png') !important;
   background-position: 0px 0px !important;
-  left: 2px !important;
+  left: 5px !important;
   top: 4px !important;
   margin-top: 0px !important;
 }

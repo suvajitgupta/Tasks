@@ -15,7 +15,7 @@ sc_require('mixins/localized_label');
 Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
 /** @scope Tasks.ProjectItemView.prototype */ {
   
-  displayProperties: ['displayName', 'displayCountDown', 'description'],
+  displayProperties: ['displayName', 'displayCountDown', 'description', 'showHover'],
   
   _listStatuses: function() {
      var ret = [];
@@ -23,6 +23,22 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
      ret.push({ name: '<span class=status-active>' + CoreTasks.STATUS_ACTIVE.loc() + '</span>', value: CoreTasks.STATUS_ACTIVE });
      ret.push({ name: '<span class=status-done>' + CoreTasks.STATUS_DONE.loc() + '</span>', value: CoreTasks.STATUS_DONE });
      return ret;
+  },
+
+  /** @private
+    Add explicit hover class - using this to avoid problems on iPad.
+  */  
+  mouseEntered: function(evt) {
+    this.set('showHover', YES);
+    return YES;
+  },
+
+  /** @private
+    Remove explicit hover class - using this to avoid problems on iPad.
+  */  
+  mouseExited: function(evt) {
+    this.set('showHover', NO);
+    return YES;
   },
 
   /** @private
@@ -243,7 +259,8 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     
     
     // Put a dot before non-system projects that were created or updated recently
-    if(!CoreTasks.isSystemProject(content) && content.get('isRecentlyUpdated')) {
+    var isSystemProject = CoreTasks.isSystemProject(content);
+    if(!isSystemProject && content.get('isRecentlyUpdated')) {
       context = context.begin('div').addClass('recently-updated').attr({
         title: "_RecentlyUpdatedTooltip".loc(),
         alt: "_RecentlyUpdatedTooltip".loc()
@@ -252,6 +269,15 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
 
     var projectTooltip = '';
     if(content.get('id')) context.addClass('project-item');
+    if(!isSystemProject) {
+      var editingTooltip = "_ClickToEditTooltip".loc();
+      context = context.begin('div').addClass('project-margin').attr('title', editingTooltip).attr('alt', editingTooltip).end();
+    }
+    if (this.get('showHover')) {
+      context.addClass('hover'); 
+    } else {
+      context.removeClass('hover');
+    }
 
     // Indicate which items have a description
     var description = SC.RenderContext.escapeHTML(content.get('description'));

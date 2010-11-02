@@ -116,7 +116,7 @@ Tasks.mainPage = SC.Page.design({
    masterDetailView: SC.MasterDetailView.design({
      
      layout: { top: 0, left: 0, right: 0, bottom: 0, minWidth: SC.platform.touch? 768 : 1024, minHeight: 360 },
-     masterWidth: 250,
+     masterWidth: 260,
      masterIsHiddenBinding: 'Tasks.mainPageHelper.masterIsHidden',
      
      masterView: SC.WorkspaceView.extend({

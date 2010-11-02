@@ -44,13 +44,13 @@
 .projects-pane-inner .sc-collection-item .sc-outline,
 .users-pane-inner .sc-collection-item,
 .users-pane-inner .sc-collection-item .sc-outline {
-  left: 12px !important;
+  left: 24px !important;
   -moz-border-radius: 3px !important;
   -webkit-border-radius: 3px !important;
 }
 
-.projects-pane-inner .sc-collection-item.sc-group-item:hover,
-.users-pane-inner .sc-collection-item.sc-group-item:hover {
+.projects-pane-inner .sc-collection-item.sc-group-item.hover,
+.users-pane-inner .sc-collection-item.sc-group-item.hover {
   background: none !important;
 }
 
@@ -79,7 +79,7 @@
 
 .projects-pane-inner .sc-view.sc-list-item-view.sc-collection-item.sc-group-item .sc-outline label,
 .users-pane-inner .sc-view.sc-list-item-view.sc-collection-item.sc-group-item .sc-outline label {
-  left: 20px !important;
+  left: 24px !important;
   color: #EEE !important;
 }
 
@@ -96,19 +96,25 @@
   background-color: #353535 !important;
 }
 
-.projects-pane-inner .sc-view.sc-list-item-view.sc-collection-item.project-item:hover,
-.users-pane-inner .sc-view.sc-list-item-view.sc-collection-item.user-item:hover {
-  background-color: #2A2A2A !important;
+.projects-pane-inner .sc-view.sc-list-item-view.sc-collection-item.project-item.hover,
+.users-pane-inner .sc-view.sc-list-item-view.sc-collection-item.user-item.hover {
+  background-color: #252525 !important;
 }
+.project-item.hover .project-margin {
+  background-image: static_url('images/pencil.png') !important;
+  background-repeat: no-repeat !important;
+  background-position: 0px 4px !important;
+}
+
 
 .projects-pane-inner .sc-group-item.sel .sc-outline,
 .projects-pane-inner .sc-view.sc-list-item-view.sc-collection-item.sc-group-item.sel .sc-outline label,
 .sc-list-view.sc-list-view.projects-pane-inner .sc-collection-item.sel,
-.sc-list-view.sc-list-view.projects-pane-inner .sc-collection-item.sel:hover,
+.sc-list-view.sc-list-view.projects-pane-inner .sc-collection-item.sel.hover,
 .users-pane-inner .sc-group-item.sel .sc-outline,
 .users-pane-inner .sc-view.sc-list-item-view.sc-collection-item.sc-group-item.sel .sc-outline label,
 .sc-list-view.sc-list-view.users-pane-inner .sc-collection-item.sel,
-.sc-list-view.sc-list-view.users-pane-inner .sc-collection-item.sel:hover {
+.sc-list-view.sc-list-view.users-pane-inner .sc-collection-item.sel.hover {
   height: 22px !important;
   color: #000 !important;
   background: #9CF !important;
@@ -116,8 +122,8 @@
 }
 
 .sc-list-view.sc-list-view.projects-pane-inner .sc-collection-item.project-item.sel,
-.sc-list-view.sc-list-view.projects-pane-inner .sc-collection-item.project-item.sel:hover,
-.sc-list-view.sc-list-view.users-pane-inner .sc-collection-item.user-item.sel:hover,
+.sc-list-view.sc-list-view.projects-pane-inner .sc-collection-item.project-item.sel.hover,
+.sc-list-view.sc-list-view.users-pane-inner .sc-collection-item.user-item.sel.hover,
 .sc-list-view.sc-list-view.users-pane-inner .sc-collection-item.user-item.sel {
   font-weight: normal !important;
 }
@@ -130,6 +136,14 @@
 .project-item .sc-outline,
 .user-item .sc-outline {
   left: 14px !important;
+}
+
+.project-margin {
+  position: absolute !important;
+  top: 0px !important;
+  bottom: 0px !important;
+  left: 11px !important;
+	width: 16px !important;
 }
 
 .projects-pane .projects-pane-inner .sc-collection-item label,
@@ -182,7 +196,7 @@
   width: 16px !important;
   height: 16px !important;
   margin-left: -2px !important;
-  margin-top: 1px !important;
+  margin-top: -9px !important;
   background: static_url('images/empty-system-project.png') no-repeat 0 0;
 }
 

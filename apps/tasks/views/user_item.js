@@ -15,6 +15,24 @@ sc_require('mixins/localized_label');
 Tasks.UserItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
 /** @scope Tasks.UserItemView.prototype */ {
   
+  displayProperties: 'showHover'.w(),
+  
+  /** @private
+    Add explicit hover class - using this to avoid problems on iPad.
+  */  
+  mouseEntered: function(evt) {
+    this.set('showHover', YES);
+    return YES;
+  },
+
+  /** @private
+    Remove explicit hover class - using this to avoid problems on iPad.
+  */  
+  mouseExited: function(evt) {
+    this.set('showHover', NO);
+    return YES;
+  },
+
   render: function(context, firstTime) {
     
     var content = this.get('content');
@@ -31,6 +49,11 @@ Tasks.UserItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     }
     
     if(content.get('id')) context.addClass('user-item');
+    if (this.get('showHover')) {
+      context.addClass('hover'); 
+    } else {
+      context.removeClass('hover');
+    }
     
     // Indicate which users have a password
     var password = content.get('password');
