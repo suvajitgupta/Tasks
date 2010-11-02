@@ -394,7 +394,7 @@
  */
 
 .task-item.hover {
-  background: #DDD none repeat scroll 0 0 !important;
+  background: #CCC none repeat scroll 0 0 !important;
 }
 .tasks-pane-inner .task-item.sel,
 .tasks-pane-inner .task-item.sel.hover {
