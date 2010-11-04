@@ -281,7 +281,7 @@ body.sc-theme,
 .sc-list-item-view img.disclosure {
   background-image: static_url('images/group-closed.png') !important;
   background-position: 0px 0px !important;
-  left: 5px !important;
+  left: 4px !important;
   top: 4px !important;
   margin-top: 0px !important;
 }
