@@ -98,9 +98,9 @@ body.sc-theme,
 */
 .mozilla .sc-view .sc-text-field-view .border {
   border-top: 2px solid #888;
-  border-left: 1px solid #BBB;
-  border-right: 1px solid #BBB;
-  border-bottom: 1px solid #CCC;
+  border-left: 1px solid #AAA;
+  border-right: 1px solid #AAA;
+  border-bottom: 1px solid #BBB;
 }
 
 /*
@@ -213,7 +213,7 @@ body.sc-theme,
 }
 
 .scui-combobox-view label {
-  height: 23px !important;
+  height: 24px !important;
 }
 
 .scui-combobox-view .scui-combobox-dropdown-button-view {
