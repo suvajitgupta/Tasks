@@ -241,7 +241,7 @@ Tasks.TaskEditorView = SC.View.extend(
  editor: SC.View.design({
    
    layout: { left: 0, right: 0, top: 0, bottom: 0},
-   childViews: 'idLabel backButton previousButton nextButton nameLabel nameField typeLabel typeField priorityLabel priorityField statusLabel statusField validationLabel validationField effortLabel effortField effortHelpLabel projectLabel projectField submitterLabel submitterField assigneeLabel assigneeField descriptionLabel descriptionField createdAtLabel updatedAtLabel watchingCheckbox watchersButton'.w(),
+   childViews: 'idLabel backButton previousButton nextButton nameLabel nameField typeLabel typeField priorityLabel priorityField statusLabel statusField validationLabel validationField effortLabel effortField effortHelpLabel submitterLabel submitterField projectLabel projectField assigneeLabel assigneeField descriptionLabel descriptionField createdAtLabel updatedAtLabel watchingCheckbox watchersButton'.w(),
    classNames: ['task-editor'],
 
    idLabel: SC.LabelView.design({
