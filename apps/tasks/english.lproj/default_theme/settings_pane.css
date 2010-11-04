@@ -13,31 +13,31 @@
 .user-role-manager {
   width: 16px !important;
   height: 16px !important;
-  background: static_url('images/user-role-manager.png') no-repeat 0 0;
+  background: static_url('images/user-role-manager.png') no-repeat 0 0 !important;
 }
 
 .user-role-developer {
   width: 16px !important;
   height: 16px !important;
-  background: static_url('images/user-role-developer.png') no-repeat 0 0;
+  background: static_url('images/user-role-developer.png') no-repeat 0 0 !important;
 }
 
 .user-role-tester {
   width: 16px !important;
   height: 16px !important;
-  background: static_url('images/user-role-tester.png') no-repeat 0 0;
+  background: static_url('images/user-role-tester.png') no-repeat 0 0 !important;
 }
 
 .user-role-guest {
   width: 16px !important;
   height: 16px !important;
-  background: static_url('images/user-role-guest.png') no-repeat 0 0;
+  background: static_url('images/user-role-guest.png') no-repeat 0 0 !important;
 }
 
 .password-icon {
   width: 16px !important;
   height: 16px !important;
-  background: static_url('images/password.png') no-repeat 0 0;
+  background: static_url('images/password.png') no-repeat 0 0 !important;
 }
 
 .users-pane .password-icon {

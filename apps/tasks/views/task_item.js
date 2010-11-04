@@ -272,7 +272,7 @@ Tasks.TaskItemView.mixin(/** @scope Tasks.TaskItemView */ {
       var priority = Tasks.tasksController.get('priority');
       ret.push({
         title: '<span class=task-priority-high>' + CoreTasks.TASK_PRIORITY_HIGH.loc() + '</span>',
-        icon: sc_static('blank'),
+        icon: 'no-icon',
         isEnabled: YES,
         checkbox: priority === CoreTasks.TASK_PRIORITY_HIGH,
         target: 'Tasks.tasksController',
@@ -280,7 +280,7 @@ Tasks.TaskItemView.mixin(/** @scope Tasks.TaskItemView */ {
       });
       ret.push({
         title: '<span class=task-priority-medium>' + CoreTasks.TASK_PRIORITY_MEDIUM.loc() + '</span>',
-        icon: sc_static('blank'),
+        icon: 'no-icon',
         isEnabled: YES,
         checkbox: priority === CoreTasks.TASK_PRIORITY_MEDIUM,
         target: 'Tasks.tasksController',
@@ -288,7 +288,7 @@ Tasks.TaskItemView.mixin(/** @scope Tasks.TaskItemView */ {
       });
       ret.push({
         title: '<span class=task-priority-low>' + CoreTasks.TASK_PRIORITY_LOW.loc() + '</span>',
-        icon: sc_static('blank'),
+        icon: 'no-icon',
         isEnabled: YES,
         checkbox: priority === CoreTasks.TASK_PRIORITY_LOW,
         target: 'Tasks.tasksController',
@@ -301,7 +301,7 @@ Tasks.TaskItemView.mixin(/** @scope Tasks.TaskItemView */ {
       var developmentStatus = Tasks.tasksController.get('developmentStatusWithValidation');
       ret.push({
         title: '<span class=status-planned>' + CoreTasks.STATUS_PLANNED.loc() + '</span>',
-        icon: sc_static('blank'),
+        icon: 'no-icon',
         isEnabled: YES,
         checkbox: developmentStatus === CoreTasks.STATUS_PLANNED,
         target: 'Tasks.tasksController',
@@ -309,7 +309,7 @@ Tasks.TaskItemView.mixin(/** @scope Tasks.TaskItemView */ {
       });
       ret.push({
         title: '<span class=status-active>' + CoreTasks.STATUS_ACTIVE.loc() + '</span>',
-        icon: sc_static('blank'),
+        icon: 'no-icon',
         isEnabled: YES,
         checkbox: developmentStatus === CoreTasks.STATUS_ACTIVE,
         target: 'Tasks.tasksController',
@@ -317,7 +317,7 @@ Tasks.TaskItemView.mixin(/** @scope Tasks.TaskItemView */ {
       });
       ret.push({
         title: '<span class=status-done>' + CoreTasks.STATUS_DONE.loc() + '</span>',
-        icon: sc_static('blank'),
+        icon: 'no-icon',
         isEnabled: YES,
         checkbox: developmentStatus === CoreTasks.STATUS_DONE,
         target: 'Tasks.tasksController',
@@ -325,7 +325,7 @@ Tasks.TaskItemView.mixin(/** @scope Tasks.TaskItemView */ {
       });
       ret.push({
         title: '<span class=status-risky>' + CoreTasks.STATUS_RISKY.loc() + '</span>',
-        icon: sc_static('blank'),
+        icon: 'no-icon',
         isEnabled: YES,
         checkbox: developmentStatus === CoreTasks.STATUS_RISKY,
         target: 'Tasks.tasksController',
@@ -339,7 +339,7 @@ Tasks.TaskItemView.mixin(/** @scope Tasks.TaskItemView */ {
         var validation = Tasks.tasksController.get('validation');
         ret.push({
           title: '<span class=task-validation-untested>' + CoreTasks.TASK_VALIDATION_UNTESTED.loc() + '</span>',
-          icon: sc_static('blank'),
+          icon: 'no-icon',
           isEnabled: YES,
           checkbox: validation === CoreTasks.TASK_VALIDATION_UNTESTED,
           target: 'Tasks.tasksController',
@@ -347,7 +347,7 @@ Tasks.TaskItemView.mixin(/** @scope Tasks.TaskItemView */ {
         });
         ret.push({
           title: '<span class=task-validation-passed>' + CoreTasks.TASK_VALIDATION_PASSED.loc() + '</span>',
-          icon: sc_static('blank'),
+          icon: 'no-icon',
           isEnabled: YES,
           checkbox: validation === CoreTasks.TASK_VALIDATION_PASSED,
           target: 'Tasks.tasksController',
@@ -355,7 +355,7 @@ Tasks.TaskItemView.mixin(/** @scope Tasks.TaskItemView */ {
         });
         ret.push({
           title: '<span class=task-validation-failed>' + CoreTasks.TASK_VALIDATION_FAILED.loc() + '</span>',
-          icon: sc_static('blank'),
+          icon: 'no-icon',
           isEnabled: YES,
           checkbox: validation === CoreTasks.TASK_VALIDATION_FAILED,
           target: 'Tasks.tasksController',

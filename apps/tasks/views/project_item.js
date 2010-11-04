@@ -364,7 +364,7 @@ Tasks.ProjectItemView.mixin(/** @scope Tasks.ProjectItemView */ {
       var developmentStatus = Tasks.projectsController.get('developmentStatus');
       ret.push({
         title: '<span class=status-planned>' + CoreTasks.STATUS_PLANNED.loc() + '</span>',
-        icon: sc_static('blank'),
+        icon: 'no-icon',
         isEnabled: YES,
         checkbox: developmentStatus === CoreTasks.STATUS_PLANNED,
         target: 'Tasks.projectsController',
@@ -372,7 +372,7 @@ Tasks.ProjectItemView.mixin(/** @scope Tasks.ProjectItemView */ {
       });
       ret.push({
         title: '<span class=status-active>' + CoreTasks.STATUS_ACTIVE.loc() + '</span>',
-        icon: sc_static('blank'),
+        icon: 'no-icon',
         isEnabled: YES,
         checkbox: developmentStatus === CoreTasks.STATUS_ACTIVE,
         target: 'Tasks.projectsController',
@@ -380,7 +380,7 @@ Tasks.ProjectItemView.mixin(/** @scope Tasks.ProjectItemView */ {
       });
       ret.push({
         title: '<span class=status-done>' + CoreTasks.STATUS_DONE.loc() + '</span>',
-        icon: sc_static('blank'),
+        icon: 'no-icon',
         isEnabled: YES,
         checkbox: developmentStatus === CoreTasks.STATUS_DONE,
         target: 'Tasks.projectsController',

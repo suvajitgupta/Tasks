@@ -57,7 +57,7 @@ Tasks.editorHelper = SC.Object.create({
         ret1.push(user);
         if(user.get('role') !== CoreTasks.USER_ROLE_GUEST) ret2.push(user);
       }
-      var unassigned = { id: '0', displayName: "_Unassigned".loc(), icon: sc_static('blank') };
+      var unassigned = { id: '0', displayName: "_Unassigned".loc(), icon: 'no-icon' };
       ret1.push(unassigned);
       ret2.push(unassigned);
     }

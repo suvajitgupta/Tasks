@@ -370,7 +370,7 @@ Tasks.mainPage = SC.Page.design({
              Tasks.assignmentsController.showAssignments();
            },
            isVisibleBinding: SC.Binding.oneWay('Tasks.assignmentsController.attributeFilterEnabled').bool(),
-            isEnabledBinding: SC.Binding.not('Tasks.mainPageHelper*editorPoppedUp')
+           isEnabledBinding: SC.Binding.not('Tasks.mainPageHelper*editorPoppedUp')
          }),
 
          tasksSearchField: SC.TextFieldView.design({

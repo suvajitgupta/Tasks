@@ -264,6 +264,11 @@ body.sc-theme,
   line-height: 30px !important;
 }
 
+.no-icon {
+  width: 16px;
+  height: 16px;
+  background: sc_static('blank') no-repeat !important;
+}
 .picker-resizable-handle {
   width: 16px;
   height: 16px;
