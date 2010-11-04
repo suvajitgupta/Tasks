@@ -48,16 +48,17 @@ Tasks.importDataPage = SC.Page.create({
         valueBinding: 'Tasks.importDataController.importData'
       }),
       
-      createMissingUsersCheckbox: SC.CheckboxView.design(SCUI.ToolTip, {
+      createMissingUsersCheckbox: SC.CheckboxView.design({
         layout: { width: 175, height: 22, left: 10, bottom: 8 },
-        isEnabledBinding: 'CoreTasks.permissions.canCreateUser',
+        isVisibleBinding: 'CoreTasks.permissions.canCreateUser',
         title: "_CreateMissingUsers".loc(),
         valueBinding: 'Tasks.importDataController.createMissingUsers'
       }),
       
       createMissingUsersHelpLabel: SC.LabelView.design({
         escapeHTML: NO,
-        layout: { width: 250, height: 22, left: 100, bottom: 8 },
+        layout: { width: 250, height: 30, left: 150, bottom: 3 },
+        isVisibleBinding: 'CoreTasks.permissions.canCreateUser',
         classNames: [ 'onscreen-help'],
         value: "_CreateMissingUsersOnscreenHelp".loc()
       }),
