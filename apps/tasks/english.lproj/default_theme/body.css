@@ -190,10 +190,6 @@ body.sc-theme,
   left: 5px !important;
 }
 
-.sc-theme .sc-label-view img.icon {
-	top: 0px !important;
-}
-
 .projects-pane-inner .sc-list-item-view img.icon,
 .users-pane-inner .sc-list-item-view img.icon {
   left: 0px !important;
