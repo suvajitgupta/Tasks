@@ -106,7 +106,7 @@ Tasks.statisticsController = SC.ObjectController.create(
   
   showStatistics: function() {
     this.computeStatistics();
-    // HACK: [SG] Creating/destroying panel so that text label refreshes, which wasn't on quilmes
+    // FIXME: [SG/JL] Creating/destroying panel so that text label refreshes with SC ToT
     this._panel = Tasks.statisticsPane.create();
     if(this._panel) this._panel.append();
   },
