@@ -26,7 +26,7 @@ Tasks.importDataPage = SC.Page.create({
     
     contentView: SC.View.design({
       layout: { left: 0, right: 0, top: 0, bottom: 0},
-      childViews: 'instructions sampleFormat dataEntryField createMissingUsersCheckbox cancelButton importButton'.w(),
+      childViews: 'instructions sampleFormat dataEntryField createMissingUsersCheckbox createMissingUsersHelpLabel cancelButton importButton'.w(),
       
       instructions: SC.LabelView.design({
         escapeHTML: NO,
@@ -52,8 +52,14 @@ Tasks.importDataPage = SC.Page.create({
         layout: { width: 175, height: 22, left: 10, bottom: 8 },
         isEnabledBinding: 'CoreTasks.permissions.canCreateUser',
         title: "_CreateMissingUsers".loc(),
-        toolTip: "_CreateMissingUsersTooltip".loc(),
         valueBinding: 'Tasks.importDataController.createMissingUsers'
+      }),
+      
+      createMissingUsersHelpLabel: SC.LabelView.design({
+        escapeHTML: NO,
+        layout: { width: 250, height: 22, left: 100, bottom: 8 },
+        classNames: [ 'onscreen-help'],
+        value: "_CreateMissingUsersOnscreenHelp".loc()
       }),
       
       cancelButton: SC.ButtonView.design({

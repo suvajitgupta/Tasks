@@ -45,7 +45,7 @@ SC.stringsFor('English', {
   "_CopyID/Name": "Copy ID/Name",
   "_CopyLinkLocation": "Copy Link Location",
   "_CreateMissingUsers": "Create Missing Users",
-  "_CreateMissingUsersTooltip": "Automatically create new users for unknown assignees/submitters during import",
+  "_CreateMissingUsersOnscreenHelp": "Automatically create new users for unknown assignees/submitters during import",
   "_Created:": "Created: ",
   "_Credits": "Credits: Suvajit Gupta, Sean Eidemiller, Josh Holt, and Matt Grantham",
   "_DataLoadFailed": "Data load failed ",
