@@ -111,7 +111,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       context.removeClass('hover');
     }
     
-    var editingTooltip = "_ClickToEditTooltip".loc();
+    var editingTooltip = "_ClickToViewEditDetailsTooltip".loc();
     var idTooltip = "_TaskIdTooltip".loc();
     if(Tasks.softwareMode) idTooltip += "_TaskValidationTooltip".loc();
     var submitterUser = content.get('submitter');

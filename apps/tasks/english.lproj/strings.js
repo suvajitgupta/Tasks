@@ -35,7 +35,7 @@ SC.stringsFor('English', {
   "_ByMe": "By Me",
   "_Cancel": "Cancel",
   "_ChooseDate": "Choose Date",
-  "_ClickToEditTooltip": "Click to edit",
+  "_ClickToViewEditDetailsTooltip": "Click to view/edit details",
   "_ClippyTooltip": "Copy ID/Name of selected tasks to clipboard",
   "_Close": "Close",
   "_Completed": "Completed",

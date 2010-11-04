@@ -270,7 +270,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     var projectTooltip = '';
     if(content.get('id')) context.addClass('project-item');
     if(!isSystemProject) {
-      var editingTooltip = "_ClickToEditTooltip".loc();
+      var editingTooltip = "_ClickToViewEditDetailsTooltip".loc();
       context = context.begin('div').addClass('project-margin').attr('title', editingTooltip).attr('alt', editingTooltip).end();
     }
     if (this.get('showHover')) {
