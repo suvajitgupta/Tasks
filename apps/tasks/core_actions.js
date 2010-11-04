@@ -343,6 +343,7 @@ Tasks.mixin({
     serverMessage.set('value', "_DataSaveError".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
   },
 
+  // FIXME: [SG/JH2] investigate/fix iPad refresh not working correctly (like it does on desktop)
   /**
    * Reload latest Tasks data from server.
    */
