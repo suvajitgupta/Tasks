@@ -21,7 +21,7 @@ Tasks.statisticsPane = SCUI.ModalPane.extend({
   // FIXME: [SG/JL] remove forced addition of 'icon' class in titleIcon to fix positioning problem, make statisticsPane a page like importDataPage
   titleIcon: 'icon statistics-icon',
   titleBarHeight: 40,
-  layout: { centerX: 0, centerY: 0, height: Tasks.softwareMode? 300 : 270, width: 650 },
+  layout: { centerX: 0, centerY: 0, height: 300, width: 650 },
   classNames: ['statistics-pane'],
   
   contentView: SC.View.design({
