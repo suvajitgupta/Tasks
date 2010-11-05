@@ -15,6 +15,7 @@ sc_require('mixins/localized_label');
 Tasks.AssigneeItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
 /** @scope Tasks.AssigneeItemView.prototype */ {
   
+  // FIXME: [SG/JL] see why closing an assignee item causes refresh problem on tasks list
   mouseDown: function(event) {
     if(Tasks.assignmentsController.get('displayMode') === Tasks.DISPLAY_MODE_TEAM) {
       var loginNameMatches = this.getPath('content.displayName').match(/\((.+)\)/);
