@@ -499,7 +499,7 @@ Tasks.mainPage = SC.Page.design({
 
      classNames: ['tasks-pane'],
 
-     contentView: SC.ListView.design({
+     contentView: Tasks.ListView.design({
        contentValueKey: 'displayName',
        contentUnreadCountKey: 'displayEffort',
        contentBinding: 'Tasks.tasksController.arrangedObjects',

@@ -3,6 +3,7 @@
 // ==========================================================================
 /*globals CoreTasks Tasks sc_require */
 sc_require('mixins/localized_label');
+sc_require('views/group_item');
 
 /** 
 
@@ -12,7 +13,7 @@ sc_require('mixins/localized_label');
   @author Suvajit Gupta
 */
 
-Tasks.AssigneeItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
+Tasks.AssigneeItemView = Tasks.GroupItemView.extend(Tasks.LocalizedLabel,
 /** @scope Tasks.AssigneeItemView.prototype */ {
   
   // FIXME: [SG/JL] see why closing an assignee item causes refresh problem on tasks list
@@ -22,7 +23,11 @@ Tasks.AssigneeItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       var assignee = loginNameMatches? loginNameMatches[1] : 'none';
       Tasks.assignmentsController.setAssigneeFilter(assignee);
     }
-    else sc_super();
+    else {
+      var target = event.target;
+      if (target.nodeType === 3) target = target.parentNode; // for text nodes on iPad
+      if (target.className === '') sc_super();
+    }
   },
   
   render: function(context, firstTime) {
