@@ -62,7 +62,7 @@ Tasks.settingsPage = SC.Page.create({
           classNames: ['users-pane'],
           isVisibleBinding: 'CoreTasks*isCurrentUserAManager',
 
-          contentView: SC.ListView.design({
+          contentView: Tasks.ListView.design({
             layout: { top: 0, left:0, bottom: 0, right: 0 },
             contentValueKey: 'displayName',
             contentBinding: 'Tasks.rolesController.arrangedObjects',

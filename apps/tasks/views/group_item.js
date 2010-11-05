@@ -12,10 +12,16 @@
 */
 
 Tasks.GroupItemView = SC.ListItemView.extend(
-/** @scope Tasks.AssigneeItemView.prototype */ {
+/** @scope Tasks.GroupItemView.prototype */ {
+  
+  touchStart: function(event) {
+    this.mouseDown(event);
+  },
   
   mouseDown: function(event) {
     sc_super();
+    var pv = this.get('parentView');
+    if (pv && pv.toggle) pv.toggle(this.get('contentIndex'));
   }
     
 });

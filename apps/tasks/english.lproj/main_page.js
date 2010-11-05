@@ -166,7 +166,7 @@ Tasks.mainPage = SC.Page.design({
           classNames: ['projects-pane'],
           layout: { top: 0, bottom: 35, left: 10, right: 5 },
           
-          contentView: SC.ListView.design({
+          contentView: Tasks.ListView.design({
             contentValueKey: 'displayName',
             contentUnreadCountKey: 'displayCountDown',
             contentBinding: 'Tasks.sourcesController.arrangedObjects',
