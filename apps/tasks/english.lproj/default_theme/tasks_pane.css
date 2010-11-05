@@ -130,10 +130,10 @@
   z-index: 10 !important;
 }
 .assignee-item.sc-list-item-view img.disclosure {
-  background-image: static_url('images/assignee-closed.png') !important;
+  background-image: static_url('images/black-arrow-right.png') !important;
 }
 .assignee-item.sc-list-item-view img.disclosure.open {
-  background-image: static_url('images/assignee-open.png') !important;
+  background-image: static_url('images/black-arrow-down.png') !important;
 }
 
 .sc-view.sc-list-item-view.sc-collection-item.sc-group-item.assignee-item {
