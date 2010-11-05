@@ -42,11 +42,11 @@
 }
 
 .previous-icon {
-  background-image: static_url('images/item-previous.png') !important;
+  background-image: static_url('images/black-arrow-left.png') !important;
 }
 
 .next-icon {
-  background-image: static_url('images/item-next.png') !important;
+  background-image: static_url('images/black-arrow-right.png') !important;
 }
 
 .previous-icon, .next-icon, .back-icon {
