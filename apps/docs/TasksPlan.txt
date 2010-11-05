@@ -32,6 +32,7 @@ General Infrastructure @Active
 - Handle persistence consistently (nothing should save unless user hits "Save" when Autosave is turned off) [SE] <SG> @Done %Passed
 - Implement GUI-based RBAC (role-based access control) [SG] $Feature @Done %Passed
 - Add a dot before Projects/Tasks/Users that were created or updated recently (within the last day) <SE> [SG] $Feature @Done %Passed
+- Cause Project/Task/User list group items to toggle open/close upon clicking on them <JH2> [SG] $Feature @Done %Passed
 - Show a pencil icon when mouse is on a Project/Task with a tooltip stating "click to edit" [SG] $Feature @Done %Passed
 - Confirm before deleting a Project/Task/User [SG] @Done $Feature %Passed
 - Display record created/updated time at the bottom of Project/Task/User editors [SG] $Feature @Done %Passed
