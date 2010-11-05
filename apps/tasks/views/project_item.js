@@ -60,9 +60,12 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     // console.log('DEBUG: classes = "' + classes + '"');
     var sel = Tasks.getPath('projectsController.selection');
     var singleSelect = (sel && sel.get('length') === 1);
-    if ((!event.which || event.which === 1) && singleSelect && classes !== "") { // left click with one project selected and didn't click on the inline editable name
+    // See if left clicked on hover pencil or project icon with one project selected 
+    if ((!event.which || event.which === 1) && singleSelect &&
+        (classes.match(/project-margin/) || classes.match(/project-icon/))) {
       this.popupEditor();
     }
+    
 
     return NO;
   },

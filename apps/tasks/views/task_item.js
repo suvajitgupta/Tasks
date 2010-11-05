@@ -48,7 +48,9 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     // console.log('DEBUG: classes = "' + classes + '"');
     var sel = Tasks.getPath('tasksController.selection');
     var singleSelect = (sel && sel.get('length') === 1);
-    if ((!event.which || event.which === 1) && singleSelect && classes !== "") { // left click with one task selected and didn't click on the inline editable name
+    // See if left clicked on task id, hover pencil, or task icon with one task selected 
+    if ((!event.which || event.which === 1) && singleSelect &&
+        (classes.match(/task-id/) || classes.match(/task-margin/) || classes.match(/task-icon/))) {
       Tasks.getPath('mainPage.taskEditor').popup(this.get('content'));
     }
     

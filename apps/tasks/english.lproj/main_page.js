@@ -532,7 +532,8 @@ Tasks.mainPage = SC.Page.design({
          var isHeader = (outlineLevel === 0) ? YES : NO;
          return idx && isHeader? this.get('headerRowHeight') : this.get('rowHeight');
        },
-       _contentDidChange: function() { // Force tasks list indexes to be recomputed when content changes
+       _contentDidChange: function() { // Force TasksList indexes to be recomputed when content changes
+         // console.log('DEBUG: recomputing TasksList row heights');
          this.rowHeightDidChangeForIndexes(SC.IndexSet.create(0, this.get('length')));
        }.observes('content'),
 
@@ -578,6 +579,8 @@ Tasks.mainPage = SC.Page.design({
          		  if no tasks filtering through - "adjust filter" helper
      	*/
        render: function(context, firstTime) {
+         
+         // console.log('DEBUG: TasksList render()');
 
          sc_super();
          if(CoreTasks.loginTime) return;
