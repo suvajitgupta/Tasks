@@ -24,9 +24,7 @@ Tasks.AssigneeItemView = Tasks.GroupItemView.extend(Tasks.LocalizedLabel,
       Tasks.assignmentsController.setAssigneeFilter(assignee);
     }
     else {
-      var target = event.target;
-      if (target.nodeType === 3) target = target.parentNode; // for text nodes on iPad
-      if (target.className === '') sc_super();
+      sc_super();
     }
   },
   
