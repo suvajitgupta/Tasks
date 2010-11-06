@@ -108,6 +108,7 @@ Tasks.TaskEditorView = SC.View.extend(
     this._watching = CoreTasks.isCurrentUserWatchingTask(task);
     editor.setPath('watchingCheckbox.value', this._watching? true : false);
     editor.setPath('watchersButton.title', '' + this._watches.length);
+    editor.setPath('watchersButton.isEnabled', this._watches.length > 0);
     editor.setPath('nameField.value', task.get('name'));
     if(Tasks.getPath('tasksController.isEditable')) {
       this.invokeLater(function() { Tasks.getPath('mainPage.taskEditor.editor.nameField').becomeFirstResponder(); }, 400);
