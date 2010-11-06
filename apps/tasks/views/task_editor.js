@@ -266,7 +266,7 @@ Tasks.TaskEditorView = SC.View.extend(
     }),
 
    previousButton: SC.View.design(SCUI.SimpleButton, {
-     layout: { top: 3, centerX: -80, width: 17, height: 16 },
+     layout: { top: 3, centerX: -80, width: 17, height: 17 },
      classNames: ['previous-icon'],
      toolTip: "_ShowPreviousTask".loc(),
      target: 'Tasks.mainPage.taskEditor',
@@ -281,7 +281,7 @@ Tasks.TaskEditorView = SC.View.extend(
                                             }).from('Tasks*tasksController.selection')
    }),
    nextButton: SC.View.design(SCUI.SimpleButton, {
-     layout: { top: 3, centerX: 80, width: 17, height: 16 },
+     layout: { top: 3, centerX: 80, width: 17, height: 17 },
      classNames: ['next-icon'],
      toolTip: "_ShowNextTask".loc(),
      target: 'Tasks.mainPage.taskEditor',

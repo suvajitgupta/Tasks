@@ -284,6 +284,8 @@ body.sc-theme,
   left: 4px !important;
   top: 4px !important;
   margin-top: 0px !important;
+  height: 16px !important;
+  width: 16px !important;
 }
 .sc-list-item-view img.disclosure.open {
   background-image: static_url('images/white-arrow-down.png') !important;
