@@ -42,32 +42,55 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
   },
 
   /** @private
-    If mouse was down over Description Icon open the editor.
+    If user holds touch for a bit on iPad, start the task editor.
+  */  
+  _timer: null,
+  _startEditing: function() {
+    if(this._timer) {
+      this._timer.invalidate();
+      this._timer = null;
+    }
+    this.popupEditor();
+  },
+  touchStart: function(event) {
+    // console.log('DEBUG: touch start on project item: ' + this.getPath('content.name'));
+    Tasks.projectsController.selectObject(this.get('content'));
+    if (this._timer) this._timer.invalidate();
+    this._timer = this.invokeLater(this._startEditing, 500);
+    this.mouseDown(event);
+    return YES;
+  },
+  touchEnd: function(event) {
+    // console.log('DEBUG: touch end on project item: ' + this.getPath('content.name'));
+    this._timer.invalidate();
+    this._timer = null;
+    return YES;
+  },
+  
+  /** @private
+    When mouse clicked on appropirate parts launch editor.
   */  
   mouseDown: function(event) {
     
     // console.log('DEBUG: mouse down on project item: ' + this.getPath('content.name'));
 
     var content = this.get('content');
-    if(!content.get('id')) return sc_super();
-
-    this.set('isSystemProject', CoreTasks.isSystemProject(content));
+    if(!content.get('id')) return sc_super(); // skip group items (they don't have 'id's)
+    this.set('isSystemProject', CoreTasks.isSystemProject(content)); // cache for use later
     
     // See what user clicked on an popup editor accordingly
     var target = event.target;
     if (target.nodeType === 3) target = target.parentNode; // for text nodes on iPad
     var classes = target.className;
-    // console.log('DEBUG: classes = "' + classes + '"');
-    var sel = Tasks.getPath('projectsController.selection');
-    var singleSelect = (sel && sel.get('length') === 1);
     // See if left clicked on hover pencil or project icon with one project selected 
-    if ((!event.which || event.which === 1) && singleSelect &&
+    // console.log('DEBUG: classes = "' + classes + '"');
+    if ((!event.which || event.which === 1) &&
         (classes.match(/project-margin/) || classes.match(/project-icon/))) {
-      this.popupEditor();
+      this._startEditing();
     }
-    
 
-    return NO;
+    return NO; // so that drag-n-drop can work!
+    
   },
   
   popupEditor: function() {

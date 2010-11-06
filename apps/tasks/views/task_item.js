@@ -19,30 +19,6 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   displayProperties: 'showHover'.w(),
   
   /** @private
-    If user holds touch for a bit on iPad, start the task editor.
-  */  
-  _timer: null,
-  _startEditing: function() {
-    this._timer.invalidate();
-    this._timer = null;
-    Tasks.getPath('mainPage.taskEditor').popup(this.get('content'));
-  },
-  touchStart: function(event) {
-    console.log('DEBUG: touch start on task item: ' + this.getPath('content.name'));
-    Tasks.tasksController.selectObject(this.get('content'));
-    if (this._timer) this._timer.invalidate();
-    this._timer = this.invokeLater(this._startEditing, 500);
-    this.mouseDown(event);
-    return YES;
-  },
-  touchEnd: function(event) {
-    console.log('DEBUG: touch end on task item: ' + this.getPath('content.name'));
-    this._timer.invalidate();
-    this._timer = null;
-    return YES;
-  },
-  
-  /** @private
     Add explicit hover class - using this to avoid problems on iPad.
   */  
   mouseEntered: function(event) {
@@ -59,7 +35,33 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   },
 
   /** @private
-    When mouse clicked on non-name parts of a task show the editor.
+    If user holds touch for a bit on iPad, start the task editor.
+  */  
+  _timer: null,
+  _startEditing: function() {
+    if(this._timer) {
+      this._timer.invalidate();
+      this._timer = null;
+    }
+    Tasks.getPath('mainPage.taskEditor').popup(this.get('content'));
+  },
+  touchStart: function(event) {
+    // console.log('DEBUG: touch start on task item: ' + this.getPath('content.name'));
+    Tasks.tasksController.selectObject(this.get('content'));
+    if (this._timer) this._timer.invalidate();
+    this._timer = this.invokeLater(this._startEditing, 500);
+    this.mouseDown(event);
+    return YES;
+  },
+  touchEnd: function(event) {
+    // console.log('DEBUG: touch end on task item: ' + this.getPath('content.name'));
+    this._timer.invalidate();
+    this._timer = null;
+    return YES;
+  },
+  
+  /** @private
+    When mouse clicked on appropirate parts launch editor.
   */  
   mouseDown: function(event) {
     
@@ -69,13 +71,11 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     var target = event.target;
     if (target.nodeType === 3) target = target.parentNode; // for text nodes on iPad
     var classes = target.className;
+    // See if left clicked on task id, hover pencil, or task icon
     // console.log('DEBUG: classes = "' + classes + '"');
-    var sel = Tasks.getPath('tasksController.selection');
-    var singleSelect = (sel && sel.get('length') === 1);
-    // See if left clicked on task id, hover pencil, or task icon with one task selected 
-    if ((!event.which || event.which === 1) && singleSelect &&
+    if ((!event.which || event.which === 1) &&
         (classes.match(/task-id/) || classes.match(/task-margin/) || classes.match(/task-icon/))) {
-      Tasks.getPath('mainPage.taskEditor').popup(this.get('content'));
+      this._startEditing();
     }
     
     return NO; // so that drag-n-drop can work!
