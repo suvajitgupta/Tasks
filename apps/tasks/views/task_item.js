@@ -19,9 +19,33 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   displayProperties: 'showHover'.w(),
   
   /** @private
+    If user holds touch for a bit on iPad, start the task editor.
+  */  
+  _timer: null,
+  _startEditing: function() {
+    this._timer.invalidate();
+    this._timer = null;
+    Tasks.getPath('mainPage.taskEditor').popup(this.get('content'));
+  },
+  touchStart: function(event) {
+    console.log('DEBUG: touch start on task item: ' + this.getPath('content.name'));
+    Tasks.tasksController.selectObject(this.get('content'));
+    if (this._timer) this._timer.invalidate();
+    this._timer = this.invokeLater(this._startEditing, 500);
+    this.mouseDown(event);
+    return YES;
+  },
+  touchEnd: function(event) {
+    console.log('DEBUG: touch end on task item: ' + this.getPath('content.name'));
+    this._timer.invalidate();
+    this._timer = null;
+    return YES;
+  },
+  
+  /** @private
     Add explicit hover class - using this to avoid problems on iPad.
   */  
-  mouseEntered: function(evt) {
+  mouseEntered: function(event) {
     this.set('showHover', YES);
     return YES;
   },
@@ -29,7 +53,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   /** @private
     Remove explicit hover class - using this to avoid problems on iPad.
   */  
-  mouseExited: function(evt) {
+  mouseExited: function(event) {
     this.set('showHover', NO);
     return YES;
   },
@@ -56,10 +80,6 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     
     return NO; // so that drag-n-drop can work!
     
-  },
-  
-  mouseUp: function(event){
-    return sc_super();
   },
   
   inlineEditorWillBeginEditing: function(inlineEditor) {
