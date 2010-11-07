@@ -270,19 +270,19 @@
 .calendar .previous,
 .calendar .next {
   position: absolute;
-  top: 5px !important;
-  width: 8px !important;
-  height: 8px !important;
+  top: 2px !important;
+  width: 16px !important;
+  height: 16px !important;
 }
 
 .calendar .previous {
   left: 10px !important;
-  background: static_url('images/previous-month.png') no-repeat 0 0;
+  background: static_url('images/black-arrow-left.png') no-repeat 0 0;
 }
 
 .calendar .next {
   right: 10px !important;
-  background: static_url('images/next-month.png') no-repeat 0 0;
+  background: static_url('images/black-arrow-right.png') no-repeat 0 0;
 }
 
 .calendar .grid .day {
@@ -306,13 +306,13 @@
 
 .calendar .grid .day.today,
 .scui-datepicker-today {
-  color: #fff !important;
-  background: #97A8C7 !important;
+  color: #000 !important;
+  background: #0C0 !important;
 }
 
 .calendar .grid .day.sel {
-  color: white;
-  background: blue;
+  color: #222 !important;
+  background: #99CCFF !important;
 }
 
 .scui-datepicker-today,
@@ -326,5 +326,5 @@
 
 .scui-datepicker-none {
   color: white !important;
-  background-color: #999;
+  background-color: #666;
 }
