@@ -222,8 +222,7 @@ Tasks.mainPage = SC.Page.design({
             // console.log('DEBUG: hotkey "' + commandCode[0] + '" pressed');
             if (Tasks.getPath('assignmentsController.displayMode') === Tasks.DISPLAY_MODE_TASKS && commandCode[0] === 'ctrl_right'){  // control right arrow
               Tasks.mainPage.tasksList.contentView.becomeFirstResponder();
-              var firstTask = Tasks.getPath('tasksController.arrangedObjects').objectAt(1);
-              Tasks.tasksController.selectObject(firstTask);
+              Tasks.tasksController.selectFirstTask();
               ret = YES;
             }
             return ret;

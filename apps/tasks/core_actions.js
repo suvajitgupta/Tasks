@@ -700,7 +700,7 @@ Tasks.mixin({
               var task = sel.nextObject(i, null, context);
               task.destroy();
             }
-            Tasks.deselectTasks();
+            Tasks.tasksController.selectFirstTask();
             if(CoreTasks.get('autoSave')) Tasks.saveData();
           }
         }

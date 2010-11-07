@@ -37,13 +37,6 @@ Tasks = SC.Object.create(SC.Statechart,
     return this.get('serverType') === this.GAE_SERVER;
   }.property('serverType').cacheable(),
   
-  /**
-   * Deselect all tasks.
-   */
-  deselectTasks: function() {
-    Tasks.tasksController.set('selection', '');
-  },
-  
   getBaseUrl: function() {
     return window.location.protocol + '//' + window.location.host + window.location.pathname;
   },

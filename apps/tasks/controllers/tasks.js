@@ -17,6 +17,21 @@ Tasks.tasksController = SC.TreeController.create(
   allowsEmptySelection: YES,
   treeItemIsGrouped: YES,
   
+  /**
+   * Deselect all tasks.
+   */
+  deselectTasks: function() {
+    Tasks.tasksController.set('selection', '');
+  },
+  
+  /**
+   * Select first task, if one.
+   */
+  selectFirstTask: function() {
+    var firstTask = Tasks.getPath('tasksController.arrangedObjects').objectAt(1);
+    if(firstTask) Tasks.tasksController.selectObject(firstTask);
+  },
+  
   isGuestInSystemProjectOrNonGuest: function() {
     if(CoreTasks.getPath('currentUser.role') === CoreTasks.USER_ROLE_GUEST) {
       if(Tasks.projectsController.getPath('selection.length') !== 1) return false;
