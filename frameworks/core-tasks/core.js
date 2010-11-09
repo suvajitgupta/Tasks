@@ -48,6 +48,7 @@ CoreTasks = SC.Object.create({
   allTasks: null,
   allProjects: null,
   allWatches: null,
+  allComments: null,
 
   /**
    * Clear all data from store.
@@ -75,6 +76,11 @@ CoreTasks = SC.Object.create({
     if(this.allWatches) {
       this.allWatches.destroy();
       this.allWatches = null;
+    }
+ 
+    if(this.allComments) {
+      this.allComments.destroy();
+      this.allComments = null;
     }
  
     if(this.store) this.store.reset();
@@ -264,6 +270,25 @@ CoreTasks = SC.Object.create({
       for(var i = 0; i < watchesCount; i++) {
         var watch = this.allWatches.objectAt(i);
         if(('' + watch.get('taskId')) === taskId) ret.push(watch);
+      }
+    }
+    return ret;
+  },
+
+  /**
+   * Get comments for a given task.
+   *
+   * @param {Object} task.
+   * @returns {Array} comments (may be empty).
+   */
+  getTaskComments: function(task) {
+    var ret = [];
+    if (this.allComments)  {
+      var taskId = '' + task.get('id');
+      var commentsCount = this.allComments.get('length');
+      for(var i = 0; i < commentsCount; i++) {
+        var comment = this.allComments.objectAt(i);
+        if(('' + comment.get('taskId')) === taskId) ret.push(comment);
       }
     }
     return ret;

@@ -121,9 +121,10 @@ Tasks.TaskEditorView = SC.View.extend(
     editor.setPath('projectField.value', task.get('projectValue'));
     editor.setPath('submitterField.value', task.get('submitterValue'));
     editor.setPath('assigneeField.value', task.get('assigneeValue'));
-    editor.setPath('descriptionField.value', task.get('description'));
+    editor.setPath('splitView.topLeftView.contentView.descriptionField.value', task.get('description'));
     editor.setPath('createdAtLabel.value', task.get('displayCreatedAt'));
     editor.setPath('updatedAtLabel.value', task.get('displayUpdatedAt'));
+    Tasks.commentsController.set('content', CoreTasks.getTaskComments(task));
   },
   _postEditing: function() {
     var task = this.get('task');
@@ -154,7 +155,8 @@ Tasks.TaskEditorView = SC.View.extend(
       task.setIfChanged('submitterValue', editor.getPath('submitterField.value'));
       task.setIfChanged('assigneeValue', editor.getPath('assigneeField.value'));
       task.setIfChanged('displayName', editor.getPath('nameField.value'));
-      task.setIfChanged('description',  editor.getPath('descriptionField.value'));
+      task.setIfChanged('description',  editor.getPath('splitView.topLeftView.contentView.descriptionField.value'));
+      Tasks.commentsController.set('content', null);
     }
   },
   _statusDidChange: function() {
@@ -243,7 +245,7 @@ Tasks.TaskEditorView = SC.View.extend(
  editor: SC.View.design({
    
    layout: { left: 0, right: 0, top: 0, bottom: 0},
-   childViews: 'idLabel backButton previousButton nextButton nameLabel nameField typeLabel typeField priorityLabel priorityField statusLabel statusField validationLabel validationField effortLabel effortField effortHelpLabel submitterLabel submitterField projectLabel projectField assigneeLabel assigneeField descriptionLabel descriptionField createdAtLabel updatedAtLabel watchingCheckbox watchersButton'.w(),
+   childViews: 'idLabel backButton previousButton nextButton nameLabel nameField typeLabel typeField priorityLabel priorityField statusLabel statusField validationLabel validationField effortLabel effortField effortHelpLabel submitterLabel submitterField projectLabel projectField assigneeLabel assigneeField splitView createdAtLabel updatedAtLabel watchingCheckbox watchersButton'.w(),
    classNames: ['task-editor'],
 
    idLabel: SC.LabelView.design({
@@ -433,18 +435,37 @@ Tasks.TaskEditorView = SC.View.extend(
      isEnabledBinding: 'Tasks.tasksController.isEditable'
    }),
 
-   descriptionLabel: SC.LabelView.design({
-     layout: { top: 179, left: 10, height: 17, width: 100 },
-     icon: 'description-icon',
-     value: "_Description:".loc()
-   }),
-   descriptionField: SC.TextFieldView.design({
-     layout: { top: 202, left: 10, right: 10, bottom: 40 },
-     hint: "_DescriptionHint".loc(),
-     maxLength: 500000,
-     isTextArea: YES,
-     // FIXME: [SG] disable Task.description editing for Guests after Comments are added
-     isEnabled: YES
+   splitView: SC.SplitView.design({
+     layout: { top: 179, left: 10, bottom: 40, right: 10 },
+     layoutDirection: SC.LAYOUT_VERTICAL,
+     defaultThickness: 200,
+     
+     topLeftView: SC.ScrollView.design({
+       hasHorizontalScroller: NO, // disable horizontal scrolling
+       contentView: SC.View.design({
+         childViews: 'descriptionLabel descriptionField'.w(),
+         descriptionLabel: SC.LabelView.design({
+           layout: { top: 0, left: 0, height: 17, width: 100 },
+           icon: 'description-icon',
+           value: "_Description:".loc()
+         }),
+         descriptionField: SC.TextFieldView.design({
+           layout: { top: 23, left: 0, right: 0, bottom: 5 },
+           hint: "_DescriptionHint".loc(),
+           maxLength: 500000,
+           isTextArea: YES,
+           // FIXME: [SG] disable Task.description editing for Guests after Comments are added
+           isEnabled: YES
+         })
+       })
+     }),
+     
+     bottomRightView: SC.ListView.design({
+       contentValueKey: 'description',
+       contentBinding: 'Tasks.commentsController.arrangedObjects',
+       rowHeight: 24,
+       classNames: ['comment']
+     })
    }),
 
    createdAtLabel: SC.LabelView.design({

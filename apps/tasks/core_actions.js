@@ -140,6 +140,10 @@ Tasks.mixin({
           CoreTasks.set('allWatches', CoreTasks.store.find(
             SC.Query.create({ recordType: CoreTasks.Watch, localOnly: YES })));
         }
+        if (!CoreTasks.get('allComments')) {
+          CoreTasks.set('allComments', CoreTasks.store.find(
+            SC.Query.create({ recordType: CoreTasks.Comment, localOnly: YES })));
+        }
         this._selectDefaultProject(false);
 
         this.goState('a', 3);

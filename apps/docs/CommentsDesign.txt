@@ -1,0 +1,27 @@
+Models/Fixtures
+* add Comment model with taskId/userId
+* add Comments fixtures
+- modify Task model to delete any attached Comments
+
+CoreTasks
+* add allComments
+
+Controllers
+* add a CommentsController to track Comments for task being viewed/edited
+
+Views
+- modify task editor to display comments (model on github): show user name, last updated time, and description
+- take away permission of Guests to modify all task descriptions
+
+Servers
+- update Persevere code to support Comments in full/incremental fetches and create/update/delete operations
+- update Persevere code to cleanup old/orphaned Comments
+- update GAE code to support Comments in full/incremental fetches and create/update/delete operations
+- update GAE code to cleanup old/orphaned Comments
+
+Documentation
+- update Tasks JSON with details of Comments implementation
+- update/delete Tasks API?
+- update Tasks Plan with details of Comments implementation
+- update Help HTML with details of Comments implementation
+- update Tasks Demo Script with details of Comments implementation

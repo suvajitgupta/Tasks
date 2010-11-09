@@ -70,14 +70,20 @@
   opacity: 0.5;
 }
 
-.sc-master-detail-view .sc-workspace-view .task-editor .sc-label-view {
-    background: none;
+.sc-master-detail-view .sc-workspace-view .task-editor .sc-label-view,
+.sc-master-detail-view .sc-workspace-view .task-editor .sc-split-view,
+.sc-master-detail-view .sc-workspace-view .task-editor .sc-split-view .sc-list-view,
+.sc-master-detail-view .sc-workspace-view .task-editor .sc-split-view .sc-scroll-view,
+.sc-master-detail-view .sc-workspace-view .task-editor .sc-split-view .sc-scroll-view .sc-container-view,
+.sc-master-detail-view .sc-workspace-view .task-editor .sc-split-view .sc-scroll-view .sc-container-view .sc-view {
+  background: none;
 }
 .sc-master-detail-view .sc-workspace-view .task-editor .scui-combobox-dropdown-button-view {
   background-color: #DDD !important;
 }
-.sc-master-detail-view .sc-workspace-view .task-editor .sc-text-field-view {
-    background: #EEE !important;
+.sc-master-detail-view .sc-workspace-view .task-editor .sc-text-field-view,
+.sc-master-detail-view .sc-workspace-view .task-editor .comment label {
+  background: #EEE !important;
 }
 
 
