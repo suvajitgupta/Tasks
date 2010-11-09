@@ -4,6 +4,7 @@
  * The core object of the Tasks framework.
  *
  * @author Sean Eidemiller
+ * @author Suvajit Gupta
  */
 CoreTasks = SC.Object.create({
   
@@ -11,24 +12,35 @@ CoreTasks = SC.Object.create({
   shouldNotify: true,
   autoSave: true,
   remoteDataSource: true, // Set to false to use fixtures
-  useLocalStorage: SC.platform.touch? NO : YES,
-  
   needsSave: NO,
 
+  /**
+   * Boolean indication of whether or not to use the browser's local storage mechanism for record
+   * caching.
+   */
+  useLocalStorage: SC.platform.touch? NO : YES,
+
+  /**
+   * If YES, and if useLocalStorage is also YES, preload all of the cached records during
+   * initialization.
+   */
+  preloadCachedRecords: YES,
+  
   /**
    * Initializes the main store with the given data source.
    *
    * @param {SC.DataSource} dataSource The data source with which to initialize the store.
    */
-  initializeStore: function(dataSources) {
+  initializeStore: function(dataSource) {
+    // Create the store itself.
     var store = CoreTasks.Store.create();
-    var dataSource = SCUDS.NotifyingCascadeDataSource.create();
-
-    dataSources.forEach(function(source) {
-      dataSource.from(source);
-    });
-
     store.set('dataSource', dataSource);
+
+    // Preload cached records if requested and supported.
+    if (this.preloadCachedRecords === YES && dataSource.loadCachedRecords) {
+      dataSource.loadCachedRecords();
+    }
+
     this.set('store', store);
   },
   
