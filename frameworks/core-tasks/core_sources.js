@@ -52,7 +52,7 @@ CoreTasks.CachingRemoteDataSource = SC.DataSource.extend({
   },
 
   _createCompleted: function(response, params) {
-    var results, store = params.get('store');
+    var results, store = params.store;
 
     if (SC.ok(response) && SC.ok(results = response.get('body'))) {
       var recordType = params.recordType;
@@ -222,7 +222,7 @@ CoreTasks.CachingRemoteDataSource = SC.DataSource.extend({
         store.dataSourceDidDestroy(params.storeKey);
 
         // Remove record from local storage if enabled.
-        if (CoreOrion.get('useLocalStorage')) {
+        if (CoreTasks.get('useLocalStorage')) {
           recordTypeStr = SC.browser.msie ? recordType._object_className : recordType.toString();
           adapter = SCUDS.LocalStorageAdapterFactory.getAdapter(recordTypeStr);
           adapter.remove(params.id);
@@ -242,7 +242,7 @@ CoreTasks.CachingRemoteDataSource = SC.DataSource.extend({
         store.dataHashDidChange(params.storeKey);
 
         // Remove record from local storage if enabled.
-        if (CoreOrion.get('useLocalStorage')) {
+        if (CoreTasks.get('useLocalStorage')) {
           recordTypeStr = SC.browser.msie ? recordType._object_className : recordType.toString();
           adapter = SCUDS.LocalStorageAdapterFactory.getAdapter(recordTypeStr);
           adapter.remove(params.id);
@@ -406,7 +406,8 @@ CoreTasks.CachingRemoteDataSource = SC.DataSource.extend({
    * @returns {SC.Error}
    */
   _buildError: function(response) {
-    var error = response.get('errorObject');
+    // TODO: [SE] investigate changes to SC ToT request/response API since response.get('errorObject') is sometimes null
+    var error = response.get('errorObject') || SC.Object.create();
     var xhr = response.get('rawRequest');
     error.set('description', xhr.statusText);
     error.set('label', 'Request Error');

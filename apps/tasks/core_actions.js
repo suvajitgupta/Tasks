@@ -5,7 +5,7 @@
  * @author Suvajit Gupta
  * License: Licened under MIT license (see license.js)
  */
-/*globals CoreTasks Tasks sc_require sources localStorage */
+/*globals CoreTasks Tasks sc_require sources localStorage SCUDS */
 
 sc_require('controllers/users');
 sc_require('controllers/projects');
@@ -178,6 +178,7 @@ Tasks.mixin({
     serverMessage.set('icon', 'progress-icon');
     serverMessage.set('value', "_LoadingData".loc());
 
+    // TODO: [SG/SE] replace use of cookie with local storage for last retrieved time
     // Get the last retrieved information from cookie (if available).
     var lastRetrieved = Tasks.get('lastRetrieved');
     if(lastRetrieved === undefined) lastRetrieved = '';
@@ -258,7 +259,11 @@ Tasks.mixin({
           var records = recordSets[recordSet];
           // console.log('DEBUG: loading ' + records.length + ' ' + recordSet);
           CoreTasks.store.loadRecords(recordType, records);
-          // CoreTasks.store.purgeDeletedRecords(recordType, records);
+          if(CoreTasks.useLocalStorage) {
+            var recordTypeStr = SC.browser.msie ? recordType._object_className : recordType.toString();
+            var adapter = SCUDS.LocalStorageAdapterFactory.getAdapter(recordTypeStr);
+            adapter.save(records);
+          }
         }
       }
       SC.RunLoop.end();
@@ -449,6 +454,7 @@ Tasks.mixin({
       // console.log('DEBUG: clearing cookie and local storage');
       var cookie = SC.Cookie.find('lastRetrieved');
       if(cookie) cookie.destroy();
+      // TODO: [SG/SE] add/use iterator to nuke all local storage adapters
       localStorage.clear();
     }
 

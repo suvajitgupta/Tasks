@@ -19,6 +19,7 @@ CoreTasks = SC.Object.create({
    * caching.
    */
   useLocalStorage: SC.platform.touch? NO : YES,
+  // TODO: [SG/SE] write optimized local storage adapter that operates on single records
 
   /**
    * If YES, and if useLocalStorage is also YES, preload all of the cached records during
@@ -854,8 +855,29 @@ CoreTasks = SC.Object.create({
 
 });
 
-CoreTasks.Store = SCUDS.NotifyingStore.extend({
+CoreTasks.Store = SC.Store.extend({
 
+  /**
+   * Overrides loadRecord() to purge soft-deleted records.
+   */
+  loadRecord: function(recordType, dataHash, id) {
+    if (!dataHash) return null;
+
+    if (dataHash.status === "deleted") {
+      var sk = this.storeKeyExists(recordType, id);
+      if (!SC.none(sk)) {
+        SC.RunLoop.begin();
+        this.pushDestroy(recordType, id, sk);
+        SC.RunLoop.end();
+      }
+
+      return null;
+    }
+
+    return sc_super();
+    
+  },
+  
   createRecord: function(recordType, dataHash, id) {
     // console.log('DEBUG: createRecord(): recordType=' + recordType + ', dataHash=' + JSON.stringify(dataHash));
     var ret = sc_super();
@@ -884,37 +906,8 @@ CoreTasks.Store = SCUDS.NotifyingStore.extend({
     var ret = sc_super();
     CoreTasks.set('needsSave', YES);
     return ret;
-  },
-
-  // Delete local records that are no longer on Server
-  purgeDeletedRecords: function(recordType, records) {
-    if(!CoreTasks.loginTime) { // the first time there is nothing to do!
-      // Identify/remove any records that have been deleted on server but exist in the store
-      var idsOnServer = [];
-      for(var i = 0, len = records.length; i < len; i++) {
-        idsOnServer[i] = '' + records[i].id;
-      }
-      var idsInStore = recordType.storeKeysById();
-      var deletedStoreKeys = [];
-      for(var id in idsInStore) {
-        // TODO: [SC] remove hack once SC.Query is able to parse negative numbers
-        // if (id > 0 && idsOnServer.indexOf(id) < 0) {
-        if (id > 0 && id < CoreTasks.MAX_RECORD_ID && idsOnServer.indexOf(id) < 0) {
-          deletedStoreKeys.push(idsInStore[id]);
-        }
-      }
-      SC.RunLoop.begin();
-      for(var j = 0, n = deletedStoreKeys.length; j < n; j++) {
-        var storeKey = deletedStoreKeys[j];
-        var record = this.materializeRecord(storeKey);
-        // console.log('DEBUG: deleting after refresh() ' + record);
-        if(record.get('destroyWatches')) record.destroyWatches();
-        this.removeDataHash(storeKey, SC.Record.DESTROYED_CLEAN);
-        this.dataHashDidChange(storeKey);
-      }
-      SC.RunLoop.end();
-    }
   }
+  
 });
 
 // Add the bind() function to the Function prototype.
