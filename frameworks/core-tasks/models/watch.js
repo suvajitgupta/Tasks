@@ -26,7 +26,6 @@ CoreTasks.Watch = CoreTasks.Record.extend({
 
 CoreTasks.Watch.mixin(/** @scope CoreTasks.Watch */ {
   
-  callbacks: SC.Object.create(),
   resourcePath: 'watch'
   
 });

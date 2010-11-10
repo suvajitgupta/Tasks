@@ -256,6 +256,7 @@ Tasks.mixin({
         var recordType = typeMap[recordSet];
         if(SC.typeOf(recordType) === SC.T_CLASS) {
           var records = recordSets[recordSet];
+          // console.log('DEBUG: loading ' + records.length + ' ' + recordSet);
           CoreTasks.store.loadRecords(recordType, records);
           // CoreTasks.store.purgeDeletedRecords(recordType, records);
         }

@@ -379,7 +379,6 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
 
 CoreTasks.Project.mixin(/** @scope CoreTasks.Project */ {
   
-  callbacks: SC.Object.create(),
   resourcePath: 'project',
 
   /**

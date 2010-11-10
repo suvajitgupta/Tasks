@@ -214,7 +214,7 @@ CoreTasks.User = CoreTasks.Record.extend({
 });
 
 CoreTasks.User.mixin(/** @scope CoreTasks.User */ {
-  callbacks: SC.Object.create(),
+
   resourcePath: 'user',
 
   /**

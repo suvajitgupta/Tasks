@@ -497,7 +497,6 @@ CoreTasks.Task = CoreTasks.Record.extend({
 
 CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
   
-  callbacks: SC.Object.create(),
   resourcePath: 'task',
   
   /**
