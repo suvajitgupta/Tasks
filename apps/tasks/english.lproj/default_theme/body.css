@@ -66,8 +66,9 @@ body.sc-theme,
 }
 
 .date-time {
-  color: #333 !important;
+  color: #444 !important;
   font-size: 11px !important;
+  font-style: italic !important;
 }
 
 .recently-updated {
