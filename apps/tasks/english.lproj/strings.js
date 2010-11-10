@@ -124,6 +124,7 @@ SC.stringsFor('English', {
   "_PasswordHint": "Password",
   "_PasswordTooltip": "Has a password",
   "_Planned": "Planned",
+  "_Posted:": "Posted: ",
   "_Priority": "Priority:",
   "_PriorityTooltip": "Importance of task: must do, plan to do, do if you can",
   "_Project": "Project",

@@ -94,6 +94,20 @@
   background-image: static_url('images/comment.png') !important;
 }
 
+.comments .sc-list-item-view {
+  outline: 1px solid #777 !important;
+	outline-offset: -2px !important;
+	background: #EEE !important;
+}
+
+.comments .submitter-user {
+  font-size: 11px !important;
+  font-weight: bold !important;
+}
+
+.comments .description {
+  font-size: 10px !important;
+}
 
 /*-----------------------------------------------------------------
  * Task pane helper images

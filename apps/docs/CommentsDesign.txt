@@ -6,11 +6,15 @@ Models/Fixtures
 CoreTasks
 * add allComments
 
+CoreActions
+- load comments from Server
+
 Controllers
 * add a CommentsController to track Comments for task being viewed/edited
 
 Views
-- modify task editor to display comments (model on github): show user name, last updated time, and description
+* modify task editor to display comments (model on github): show user name, posting time, and description
+- add ability to add/update/delete comments from task editor
 - take away permission of Guests to modify all task descriptions
 
 Servers

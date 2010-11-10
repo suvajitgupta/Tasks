@@ -461,6 +461,10 @@ Tasks.TaskEditorView = SC.View.extend(
        })
      }),
      
+     // TODO: [SG/JH2] see why fixture data not working with ComboBox dropdowns
+     // TODO: [SG/JH2] figure out how to render long/multi-line comments and dynamically make height appropriate
+     // TODO: [SG/JH2] see why scrollbar not appearing for comments list
+     // TODO: [SG/JH2] swtich to using a stacked view for comments
      bottomRightView: SC.ScrollView.design({
         hasHorizontalScroller: NO, // disable horizontal scrolling
         contentView: SC.View.design({
@@ -472,10 +476,10 @@ Tasks.TaskEditorView = SC.View.extend(
           }),
           commentsList: SC.ListView.design({
             layout: { top: 23, left: 0, right: 0, bottom: 5 },
-            contentValueKey: 'description',
+            classNames: ['comments'],
             contentBinding: 'Tasks.commentsController.arrangedObjects',
-            rowHeight: 24,
-            classNames: ['comment']
+            rowHeight: 72,
+            exampleView: Tasks.CommentItemView
           })
         })
       })
