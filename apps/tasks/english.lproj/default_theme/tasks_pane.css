@@ -86,6 +86,13 @@
   background: #EEE !important;
 }
 
+.sc-split-divider-view {
+  cursor: move !important;
+}
+
+.comment-icon {
+  background-image: static_url('images/comment.png') !important;
+}
 
 
 /*-----------------------------------------------------------------

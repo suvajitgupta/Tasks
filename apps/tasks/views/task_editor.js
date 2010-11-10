@@ -438,7 +438,8 @@ Tasks.TaskEditorView = SC.View.extend(
    splitView: SC.SplitView.design({
      layout: { top: 179, left: 10, bottom: 40, right: 10 },
      layoutDirection: SC.LAYOUT_VERTICAL,
-     defaultThickness: 200,
+     defaultThickness: 0.5,
+     topLeftMinThickness: 75,
      
      topLeftView: SC.ScrollView.design({
        hasHorizontalScroller: NO, // disable horizontal scrolling
@@ -460,12 +461,24 @@ Tasks.TaskEditorView = SC.View.extend(
        })
      }),
      
-     bottomRightView: SC.ListView.design({
-       contentValueKey: 'description',
-       contentBinding: 'Tasks.commentsController.arrangedObjects',
-       rowHeight: 24,
-       classNames: ['comment']
-     })
+     bottomRightView: SC.ScrollView.design({
+        hasHorizontalScroller: NO, // disable horizontal scrolling
+        contentView: SC.View.design({
+          childViews: 'commentsLabel commentsList'.w(),
+          commentsLabel: SC.LabelView.design({
+            layout: { top: 5, left: 0, height: 17, width: 100 },
+            icon: 'comment-icon',
+            value: "_Comments:".loc()
+          }),
+          commentsList: SC.ListView.design({
+            layout: { top: 23, left: 0, right: 0, bottom: 5 },
+            contentValueKey: 'description',
+            contentBinding: 'Tasks.commentsController.arrangedObjects',
+            rowHeight: 24,
+            classNames: ['comment']
+          })
+        })
+      })
    }),
 
    createdAtLabel: SC.LabelView.design({
@@ -510,6 +523,5 @@ Tasks.TaskEditorView = SC.View.extend(
     }
     return NO;
   }
-  
   
 });

@@ -38,6 +38,7 @@ SC.stringsFor('English', {
   "_ClickToViewEditDetailsTooltip": "Click to view/edit details",
   "_ClippyTooltip": "Copy ID/Name of selected tasks to clipboard",
   "_Close": "Close",
+  "_Comments:": "Comments:",
   "_Completed": "Completed",
   "_CompletedTooltip": "Ready for Primetime: what's done & passed",
   "_Confirmation": "Confirmation",
