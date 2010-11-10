@@ -38,8 +38,8 @@ function() {
   doneTask.set('projectId', null);
   equals(doneTask.get('projectValue'), 0, "set projectId to null, projectValue is");
   
-  doneTask.set('projectValue', '0');
-  equals(doneTask.get('projectId'), null, "set projectValue to '0', projectId is");
+  doneTask.set('projectValue', 0);
+  equals(doneTask.get('projectId'), null, "set projectValue to 0, projectId is");
   
   doneTask.set('projectId', 100);
   equals(doneTask.get('projectValue'), 100, "set projectId to 100, projectValue is");

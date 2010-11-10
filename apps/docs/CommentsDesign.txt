@@ -1,7 +1,7 @@
 Models/Fixtures
 * add Comment model with taskId/userId
 * add Comments fixtures
-- modify Task model to delete any attached Comments
+- modify Task/User model to delete/unassign any attached Comments
 
 CoreTasks
 * add allComments
@@ -14,7 +14,8 @@ Controllers
 
 Views
 * modify task editor to display comments (model on github): show user name, posting time, and description
-- add ability to add/update/delete comments from task editor
+- add ability to add comments (anyone): plus button next to "Comments", create new textbox at the top of list(insert at position 0 in controller)/start editing
+- add ablity to update/delete comments (your own): pencil/minus buttons on each comment (hover only on desktop)
 - take away permission of Guests to modify all task descriptions
 
 Servers

@@ -34,7 +34,7 @@ CoreTasks.Record = SC.Record.extend({
 
   // make id() cacheable on storeKey
   id: function() {
-    return SC.Store.idFor(this.storeKey);
+    return parseInt(SC.Store.idFor(this.storeKey), 10);
   }.property('storeKey'),
 
   // make status() cacheable on storeKey

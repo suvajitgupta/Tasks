@@ -159,14 +159,13 @@ CoreTasks = SC.Object.create({
    * @param {String} project id.
    * @returns {Object) return project of given id if it exists, null otherwise.
    */
-  getProjectById: function(id) {
+  getProjectById: function(projectId) {
     if (!this.allProjects) return null;
-    var projectId = '' + id;
     var projectsCount = this.allProjects.get('length');
     var matchingProject = null;
     for(var i = 0; i < projectsCount; i++) {
       var project = this.allProjects.objectAt(i);
-      if(('' + project.get('id')) === projectId) {
+      if((project.get('id')) === projectId) {
         matchingProject = project;
         break;
       }
@@ -202,15 +201,15 @@ CoreTasks = SC.Object.create({
    */
   isCurrentUserWatchingTask: function(task) {
     if (this.allWatches) {
-      var currentUserId = '' + this.getPath('currentUser.id');
-      var taskId = '' + task.get('id');
+      var currentUserId = this.getPath('currentUser.id');
+      var taskId = task.get('id');
       var watchesCount = this.allWatches.get('length');
       // console.log('DEBUG: isCurrentUserWatchingTask() taskId=' + taskId + ', userId=' + currentUserId + ', watchesCount=' + watchesCount);
       for(var i = 0; i < watchesCount; i++) {
         var watch = this.allWatches.objectAt(i);
         // console.log('DEBUG: isCurrentUserWatchingTask() watch.taskId=' + watch.get('taskId') + ', watch.userId=' + watch.get('userId') + ', watchId=' + watch.get('id'));
-        if(('' + watch.get('userId')) !== currentUserId) continue;
-        if(('' + watch.get('taskId')) === taskId) return CoreTasks.TASK_WATCH_ON;
+        if((watch.get('userId')) !== currentUserId) continue;
+        if((watch.get('taskId')) === taskId) return CoreTasks.TASK_WATCH_ON;
       }
     }
     return CoreTasks.TASK_WATCH_OFF;
@@ -224,13 +223,13 @@ CoreTasks = SC.Object.create({
    */
   isAnyUserWatchingTask: function(task) {
     if (this.allWatches) {
-      var taskId = '' + task.get('id');
+      var taskId = task.get('id');
       var watchesCount = this.allWatches.get('length');
       // console.log('DEBUG: isAnyUserWatchingTask() taskId=' + taskId + ', watchesCount=' + watchesCount);
       for(var i = 0; i < watchesCount; i++) {
         var watch = this.allWatches.objectAt(i);
         // console.log('DEBUG: isAnyUserWatchingTask() watch.taskId=' + watch.get('taskId') + ", watchId=" + watch.get('id'));
-        if(('' + watch.get('taskId')) === taskId) return CoreTasks.TASK_WATCH_ON;
+        if((watch.get('taskId')) === taskId) return CoreTasks.TASK_WATCH_ON;
       }
     }
     return CoreTasks.TASK_WATCH_OFF;
@@ -244,13 +243,13 @@ CoreTasks = SC.Object.create({
    */
   getCurrentUserTaskWatch: function(task) {
     if (this.allWatches)  {
-      var currentUserId = '' + this.getPath('currentUser.id');
-      var taskId = '' + task.get('id');
+      var currentUserId = this.getPath('currentUser.id');
+      var taskId = task.get('id');
       var watchesCount = this.allWatches.get('length');
       for(var i = 0; i < watchesCount; i++) {
         var watch = this.allWatches.objectAt(i);
-        if(('' + watch.get('userId')) !== currentUserId) continue;
-        if(('' + watch.get('taskId')) === taskId) return watch;
+        if((watch.get('userId')) !== currentUserId) continue;
+        if((watch.get('taskId')) === taskId) return watch;
       }
     }
     return null;
@@ -265,11 +264,11 @@ CoreTasks = SC.Object.create({
   getTaskWatches: function(task) {
     var ret = [];
     if (this.allWatches)  {
-      var taskId = '' + task.get('id');
+      var taskId = task.get('id');
       var watchesCount = this.allWatches.get('length');
       for(var i = 0; i < watchesCount; i++) {
         var watch = this.allWatches.objectAt(i);
-        if(('' + watch.get('taskId')) === taskId) ret.push(watch);
+        if((watch.get('taskId')) === taskId) ret.push(watch);
       }
     }
     return ret;
@@ -284,11 +283,11 @@ CoreTasks = SC.Object.create({
   getTaskComments: function(task) {
     var ret = [];
     if (this.allComments)  {
-      var taskId = '' + task.get('id');
+      var taskId = task.get('id');
       var commentsCount = this.allComments.get('length');
       for(var i = 0; i < commentsCount; i++) {
         var comment = this.allComments.objectAt(i);
-        if(('' + comment.get('taskId')) === taskId) ret.push(comment);
+        if((comment.get('taskId')) === taskId) ret.push(comment);
       }
     }
     return ret;

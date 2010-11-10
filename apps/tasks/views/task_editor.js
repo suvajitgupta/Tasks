@@ -461,7 +461,6 @@ Tasks.TaskEditorView = SC.View.extend(
        })
      }),
      
-     // TODO: [SG/JH2] see why fixture data not working with ComboBox dropdowns
      // TODO: [SG/JH2] figure out how to render long/multi-line comments and dynamically make height appropriate
      // TODO: [SG/JH2] see why scrollbar not appearing for comments list
      // TODO: [SG/JH2] swtich to using a stacked view for comments

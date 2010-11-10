@@ -175,13 +175,13 @@ CoreTasks.Task = CoreTasks.Record.extend({
   projectValue: function(key, value) {
     
     if (value !== undefined) {
-      var id = (value === '0')? null : value;
+      var id = (value === 0)? null : value;
       this.propertyWillChange('projectId');
       this.writeAttribute('projectId', id);
       this.propertyDidChange('projectId');
     } else {
       value = this.get('projectId');
-      if (value === null) value = '0';
+      if (value === null) value = 0;
     }
     
     return value;
@@ -262,13 +262,13 @@ CoreTasks.Task = CoreTasks.Record.extend({
   submitterValue: function(key, value) {
     
     if (value !== undefined) {
-      var id = (value === '0')? null : value;
+      var id = (value === 0)? null : value;
       this.propertyWillChange('submitterId');
       this.writeAttribute('submitterId', id);
       this.propertyDidChange('submitterId');
     } else {
       value = this.get('submitterId');
-      if (value === null) value = '0';
+      if (value === null) value = 0;
     }
     
     return value;
@@ -302,13 +302,13 @@ CoreTasks.Task = CoreTasks.Record.extend({
   assigneeValue: function(key, value) {
     
     if (value !== undefined) {
-      var id = (value === '0')? null : value;
+      var id = (value === 0)? null : value;
       this.propertyWillChange('assigneeId');
       this.writeAttribute('assigneeId', id);
       this.propertyDidChange('assigneeId');
     } else {
       value = this.get('assigneeId');
-      if (value === null) value = '0';
+      if (value === null) value = 0;
     }
     
     return value;
