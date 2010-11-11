@@ -14,7 +14,7 @@
 Tasks.projectController = SC.ObjectController.create(
 /** @scope Tasks.projectController.prototype */ {
   
-  contentBinding: 'Tasks.projectsController.selection',
+  contentBinding: SC.Binding.oneWay('Tasks.projectsController.selection'),
   
   displayTasks: function() {
     // console.log('DEBUG: displayTasks()');

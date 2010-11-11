@@ -13,7 +13,7 @@
 Tasks.tasksController = SC.TreeController.create(
 /** @scope Tasks.tasksController.prototype */ {
 
-  contentBinding: 'Tasks.assignmentsController.assignedTasks',
+  contentBinding: SC.Binding.oneWay('Tasks.assignmentsController.assignedTasks'),
   allowsEmptySelection: YES,
   treeItemIsGrouped: YES,
   

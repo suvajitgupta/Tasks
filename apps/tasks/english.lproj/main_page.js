@@ -501,7 +501,7 @@ Tasks.mainPage = SC.Page.design({
      contentView: Tasks.ListView.design({
        contentValueKey: 'displayName',
        contentUnreadCountKey: 'displayEffort',
-       contentBinding: 'Tasks.tasksController.arrangedObjects',
+       contentBinding: SC.Binding.oneWay('Tasks.tasksController.arrangedObjects'),
        selectionBinding: 'Tasks.tasksController.selection',
        localize: YES,
        rowHeight: 24,
@@ -532,8 +532,9 @@ Tasks.mainPage = SC.Page.design({
          return idx && isHeader? this.get('headerRowHeight') : this.get('rowHeight');
        },
        _contentDidChange: function() { // Force TasksList indexes to be recomputed when content changes
-         // console.log('DEBUG: recomputing TasksList row heights');
-         this.rowHeightDidChangeForIndexes(SC.IndexSet.create(0, this.get('length')));
+         var len = this.getPath('content.length');
+         // console.log('DEBUG: recomputing TasksList row heights with length=' + len);
+         this.rowHeightDidChangeForIndexes(SC.IndexSet.create(0, len));
        }.observes('content'),
 
        selectionEvent: null,
