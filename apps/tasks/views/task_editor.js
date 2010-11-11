@@ -57,7 +57,7 @@ Tasks.editorHelper = SC.Object.create({
         ret1.push(user);
         if(user.get('role') !== CoreTasks.USER_ROLE_GUEST) ret2.push(user);
       }
-      var unassigned = { id: '0', displayName: "_Unassigned".loc(), icon: 'no-icon' };
+      var unassigned = { id: 0, displayName: "_Unassigned".loc(), icon: 'no-icon' };
       ret1.push(unassigned);
       ret2.push(unassigned);
     }
@@ -82,7 +82,7 @@ Tasks.editorHelper = SC.Object.create({
       idx = ret.indexOf(CoreTasks.get('unallocatedTasksProject'));
       if(idx !== -1) {
         ret.splice(idx, 1);
-        ret.push({ id: '0', icon: CoreTasks.getPath('unallocatedTasksProject.icon'), displayName: "_UnallocatedTasks".loc() });
+        ret.push({ id: 0, icon: CoreTasks.getPath('unallocatedTasksProject.icon'), displayName: "_UnallocatedTasks".loc() });
       }
     }
     this.set('projectsList', ret);
@@ -440,6 +440,7 @@ Tasks.TaskEditorView = SC.View.extend(
      layoutDirection: SC.LAYOUT_VERTICAL,
      defaultThickness: 0.5,
      topLeftMinThickness: 75,
+     bottomRightMinThickness: 75,
      
      topLeftView: SC.ScrollView.design({
        hasHorizontalScroller: NO, // disable horizontal scrolling
@@ -461,27 +462,26 @@ Tasks.TaskEditorView = SC.View.extend(
        })
      }),
      
-     // TODO: [SG/JH2] figure out how to render long/multi-line comments and dynamically make height appropriate
-     // TODO: [SG/JH2] see why scrollbar not appearing for comments list
-     // TODO: [SG/JH2] swtich to using a stacked view for comments
-     bottomRightView: SC.ScrollView.design({
-        hasHorizontalScroller: NO, // disable horizontal scrolling
-        contentView: SC.View.design({
-          childViews: 'commentsLabel commentsList'.w(),
-          commentsLabel: SC.LabelView.design({
-            layout: { top: 5, left: 0, height: 17, width: 100 },
-            icon: 'comment-icon',
-            value: "_Comments:".loc()
-          }),
-          commentsList: SC.ListView.design({
-            layout: { top: 23, left: 0, right: 0, bottom: 5 },
-            classNames: ['comments'],
+     // TODO: [SG] swtich to using a stacked view for comments to handle variable heights of descriptions
+     bottomRightView: SC.View.design({
+       classNames: ['comments-view'],
+       childViews: 'commentsLabel commentsList'.w(),
+       commentsLabel: SC.LabelView.design({
+         layout: { top: 5, left: 0, height: 17, width: 100 },
+         icon: 'comment-icon',
+         value: "_Comments:".loc()
+       }),
+       commentsList: SC.ScrollView.design({
+         layout: { top: 23, left: 0, right: 0, bottom: 0 },
+           hasHorizontalScroller: NO, // disable horizontal scrolling
+           contentView: SC.ListView.design({
+            classNames: ['comments-list'],
             contentBinding: 'Tasks.commentsController.arrangedObjects',
             rowHeight: 72,
             exampleView: Tasks.CommentItemView
           })
         })
-      })
+     })
    }),
 
    createdAtLabel: SC.LabelView.design({

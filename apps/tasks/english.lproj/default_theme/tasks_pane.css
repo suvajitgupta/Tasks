@@ -75,7 +75,8 @@
 .sc-master-detail-view .sc-workspace-view .task-editor .sc-split-view .sc-list-view,
 .sc-master-detail-view .sc-workspace-view .task-editor .sc-split-view .sc-scroll-view,
 .sc-master-detail-view .sc-workspace-view .task-editor .sc-split-view .sc-scroll-view .sc-container-view,
-.sc-master-detail-view .sc-workspace-view .task-editor .sc-split-view .sc-scroll-view .sc-container-view .sc-view {
+.sc-master-detail-view .sc-workspace-view .task-editor .sc-split-view .sc-scroll-view .sc-container-view .sc-view,
+.sc-master-detail-view .sc-workspace-view .task-editor .sc-split-view .comments-view {
   background: none;
 }
 .sc-master-detail-view .sc-workspace-view .task-editor .scui-combobox-dropdown-button-view {
@@ -94,18 +95,19 @@
   background-image: static_url('images/comment.png') !important;
 }
 
-.comments .sc-list-item-view {
-  outline: 1px solid #777 !important;
-	outline-offset: -2px !important;
+.comments-list .sc-list-item-view {
+  outline: 1px solid #999 !important;
+	outline-offset: -1px !important;
 	background: #EEE !important;
 }
 
-.comments .submitter-user {
+.comments-list .submitter-user {
   font-size: 11px !important;
   font-weight: bold !important;
 }
 
-.comments .description {
+.comments-list .description {
+  border-top: 1px solid #DDD !important;
   font-size: 10px !important;
 }
 
