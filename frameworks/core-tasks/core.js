@@ -11,14 +11,20 @@ CoreTasks = SC.Object.create({
   // Installation-level settings
   shouldNotify: true,
   autoSave: true,
-  remoteDataSource: true, // Set to false to use fixtures
-  needsSave: NO,
+  remoteDataSource: true, // turn off for fixtures data
+  needsSave: false,
 
   /**
    * Boolean indication of whether or not to use the browser's local storage mechanism for record
    * caching.
    */
-  useLocalStorage: SC.platform.touch? NO : YES,
+  useLocalStorage: true,
+  // TODO: [SG/SE] write optimized local storage adapter that operates on single records
+  
+  init: function() {
+    // Don't use localStorage for fixtures or iPad
+    if(!this.remoteDataSource || SC.platform.touch) this.useLocalStorage = false;
+  },
 
   /**
    * If YES, and if useLocalStorage is also YES, preload all of the cached records during
@@ -165,7 +171,7 @@ CoreTasks = SC.Object.create({
     var matchingProject = null;
     for(var i = 0; i < projectsCount; i++) {
       var project = this.allProjects.objectAt(i);
-      if((project.get('id')) === projectId) {
+      if(project.get('id') === projectId) {
         matchingProject = project;
         break;
       }
@@ -208,8 +214,8 @@ CoreTasks = SC.Object.create({
       for(var i = 0; i < watchesCount; i++) {
         var watch = this.allWatches.objectAt(i);
         // console.log('DEBUG: isCurrentUserWatchingTask() watch.taskId=' + watch.get('taskId') + ', watch.userId=' + watch.get('userId') + ', watchId=' + watch.get('id'));
-        if((watch.get('userId')) !== currentUserId) continue;
-        if((watch.get('taskId')) === taskId) return CoreTasks.TASK_WATCH_ON;
+        if(watch.get('userId') !== currentUserId) continue;
+        if(watch.get('taskId') === taskId) return CoreTasks.TASK_WATCH_ON;
       }
     }
     return CoreTasks.TASK_WATCH_OFF;
@@ -229,7 +235,7 @@ CoreTasks = SC.Object.create({
       for(var i = 0; i < watchesCount; i++) {
         var watch = this.allWatches.objectAt(i);
         // console.log('DEBUG: isAnyUserWatchingTask() watch.taskId=' + watch.get('taskId') + ", watchId=" + watch.get('id'));
-        if((watch.get('taskId')) === taskId) return CoreTasks.TASK_WATCH_ON;
+        if(watch.get('taskId') === taskId) return CoreTasks.TASK_WATCH_ON;
       }
     }
     return CoreTasks.TASK_WATCH_OFF;
@@ -248,8 +254,8 @@ CoreTasks = SC.Object.create({
       var watchesCount = this.allWatches.get('length');
       for(var i = 0; i < watchesCount; i++) {
         var watch = this.allWatches.objectAt(i);
-        if((watch.get('userId')) !== currentUserId) continue;
-        if((watch.get('taskId')) === taskId) return watch;
+        if(watch.get('userId') !== currentUserId) continue;
+        if(watch.get('taskId') === taskId) return watch;
       }
     }
     return null;
@@ -268,7 +274,7 @@ CoreTasks = SC.Object.create({
       var watchesCount = this.allWatches.get('length');
       for(var i = 0; i < watchesCount; i++) {
         var watch = this.allWatches.objectAt(i);
-        if((watch.get('taskId')) === taskId) ret.push(watch);
+        if(watch.get('taskId') === taskId) ret.push(watch);
       }
     }
     return ret;
@@ -287,7 +293,7 @@ CoreTasks = SC.Object.create({
       var commentsCount = this.allComments.get('length');
       for(var i = 0; i < commentsCount; i++) {
         var comment = this.allComments.objectAt(i);
-        if((comment.get('taskId')) === taskId) ret.push(comment);
+        if(comment.get('taskId') === taskId) ret.push(comment);
       }
     }
     return ret;
