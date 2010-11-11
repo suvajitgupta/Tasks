@@ -8,8 +8,8 @@ Controllers
 
 Views
 * modify task editor to display comments (model on github): show user name, posting time, and description
-- add ability to add comments (anyone): plus button next to "Comments", create new textbox at the top of list(insert at position 0 in controller)/start editing
-- add ablity to update/delete comments (your own): pencil/minus buttons on each comment (hover only on desktop)
+- add ability to add comments (anyone): plus button next to "Comments", create new textbox at the top of list/start editing
+- add ablity to update/delete comments (your own): pencil/minus buttons on each comment (show as hovers only on desktop)
 - take away permission of Guests to modify all task descriptions
 
 CoreTasks

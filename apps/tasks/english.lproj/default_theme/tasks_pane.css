@@ -95,22 +95,18 @@
   background-image: static_url('images/comment.png') !important;
 }
 
-.comments-list .sc-list-item-view {
-  outline: 1px solid #999 !important;
-	outline-offset: -1px !important;
-	background: #EEE !important;
-}
-
 .comments-list .submitter-user {
   font-size: 11px !important;
   font-weight: bold !important;
 }
 
 .comments-list .description {
-  border-top: 1px solid #DDD !important;
+  background: #EEE !important;
   font-size: 10px !important;
-  padding-left: 20px !important;
-  padding-right: 5px !important;
+  padding: 0px 5px !important;
+  border: 1px solid #AAA !important;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
 }
 
 /*-----------------------------------------------------------------

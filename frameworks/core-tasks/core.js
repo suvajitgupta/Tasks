@@ -11,7 +11,7 @@ CoreTasks = SC.Object.create({
   // Installation-level settings
   shouldNotify: true,
   autoSave: true,
-  remoteDataSource: false, // turn off for fixtures data
+  remoteDataSource: true, // set to false to use fixtures data
   needsSave: false,
 
   /**
