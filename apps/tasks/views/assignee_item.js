@@ -16,7 +16,6 @@ sc_require('views/group_item');
 Tasks.AssigneeItemView = Tasks.GroupItemView.extend(Tasks.LocalizedLabel,
 /** @scope Tasks.AssigneeItemView.prototype */ {
   
-  // FIXME: [SG/JL] see why closing an assignee item causes refresh problem on tasks list
   mouseDown: function(event) {
     if(Tasks.assignmentsController.get('displayMode') === Tasks.DISPLAY_MODE_TEAM) {
       var loginNameMatches = this.getPath('content.displayName').match(/\((.+)\)/);
@@ -25,6 +24,8 @@ Tasks.AssigneeItemView = Tasks.GroupItemView.extend(Tasks.LocalizedLabel,
     }
     else {
       sc_super();
+      // HACK: added following line to fix refresh glitch after closing an assignee item for the first time after the app starts in Firefox
+      Tasks.tasksController.notifyPropertyChange('arrangedObjects');
     }
   },
   
