@@ -253,12 +253,6 @@ Tasks.TaskEditorView = SC.View.extend(
      classNames: ['title-bar']
    }),
    
-   // backButton: SC.ButtonView.design({
-   //   layout: { top: 0, left: 10, width: 80, height: 24 },
-   //   title: "_Back".loc(),
-   //   target: 'Tasks.mainPage.taskEditor',
-   //   action: 'close'
-   // }),
    backButton: SC.View.design(SCUI.SimpleButton, {
      layout: { top: 2, left: 10, width: 32, height: 19 },
      classNames: ['back-icon'],
@@ -465,14 +459,22 @@ Tasks.TaskEditorView = SC.View.extend(
      // TODO: [SG] swtich to using a stacked view for comments to handle variable heights of descriptions
      bottomRightView: SC.View.design({
        classNames: ['comments-view'],
-       childViews: 'commentsLabel commentsList'.w(),
+       childViews: 'commentsLabel postButton commentsList'.w(),
        commentsLabel: SC.LabelView.design({
-         layout: { top: 5, left: 0, height: 17, width: 100 },
+         layout: { top: 7, left: 0, height: 17, width: 100 },
          icon: 'comment-icon',
          value: "_Comments:".loc()
        }),
+       postButton: SC.ButtonView.design({
+         layout: { top: 3, right: 0, height: 24, width: 50 },
+         titleMinWidth: 0,
+         title: "_Post".loc(),
+         target: 'Tasks',
+         action: 'addComment',
+         toolTip: "_PostTooltip".loc()
+       }),
        commentsList: SC.ScrollView.design({
-         layout: { top: 23, left: 0, right: 0, bottom: 0 },
+         layout: { top: 30, left: 0, right: 0, bottom: 0 },
            hasHorizontalScroller: NO, // disable horizontal scrolling
            contentView: SC.ListView.design({
             classNames: ['comments-list'],

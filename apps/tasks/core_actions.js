@@ -723,6 +723,24 @@ Tasks.mixin({
   },
   
   /**
+   * Add comment to currently selected task.
+   */
+  addComment: function() {
+    var tc = this.get('tasksController');
+    var sel = tc.get('selection');
+    var len = sel? sel.length() : 0;
+    if (len === 1) {
+      var currentUserId = CoreTasks.getPath('currentUser.id');
+      var task = tc.getPath('selection.firstObject');
+      var now = SC.DateTime.create().get('milliseconds');
+      var comment = CoreTasks.createRecord(CoreTasks.Comment, { taskId: task.get('id'), userId: currentUserId,
+                                           createdAt: now, updatedAt: now, description: 'Comment' });
+      // TODO: [SG] remove hardcoded comment and start inline editing
+      // TODO: [SG] figure out how to show new comment immediately
+    }
+  },
+  
+  /**
    * Watch selected tasks (if they are not already being watched).
    */
   watchTask: function() {
@@ -738,7 +756,6 @@ Tasks.mixin({
         if(!CoreTasks.isCurrentUserWatchingTask(task)) {
           var watch = CoreTasks.createRecord(CoreTasks.Watch, { taskId: task.get('id'), userId: currentUserId });
         }
-        
       }
       if(CoreTasks.get('autoSave')) Tasks.saveData();
     }

@@ -3,12 +3,6 @@ Models/Fixtures
 * add Comments fixtures
 - modify Task/User model to delete/unassign any attached Comments
 
-CoreTasks
-* add allComments
-
-CoreActions
-- load comments from Server
-
 Controllers
 * add a CommentsController to track Comments for task being viewed/edited
 
@@ -17,6 +11,13 @@ Views
 - add ability to add comments (anyone): plus button next to "Comments", create new textbox at the top of list(insert at position 0 in controller)/start editing
 - add ablity to update/delete comments (your own): pencil/minus buttons on each comment (hover only on desktop)
 - take away permission of Guests to modify all task descriptions
+
+CoreTasks
+* add allComments
+* return Comments for a Task sorted most recent first
+
+CoreActions
+- load comments from Server
 
 Servers
 - update Persevere code to support Comments in full/incremental fetches and create/update/delete operations

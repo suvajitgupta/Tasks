@@ -19,21 +19,19 @@ Tasks.CommentItemView = SC.ListItemView.extend(
   
   userLabel: SC.LabelView.design({
     layout: { left: 5, top: 0, height: 17, width: 250 },
-    classNames: [ 'submitter-user'],
-    textAlign: SC.ALIGN_LEFT
+    classNames: [ 'submitter-user']
   }),
   
   createdAtLabel: SC.LabelView.design({
-    layout: { right: 5, top: 0, height: 17, width: 250 },
+    layout: { centerX: 0, top: 0, height: 17, width: 250 },
     classNames: [ 'date-time'],
-    textAlign: SC.ALIGN_RIGHT
+    textAlign: SC.ALIGN_CENTER
   }),
   
   descriptionLabel: SC.LabelView.design({
-    layout: { left: 5, top: 20, bottom: 5, right: 5 },
+    layout: { left: 0, right: 0, top: 20, bottom: 5 },
     classNames: [ 'description'],
-    escapeHTML: NO,
-    textAlign: SC.ALIGN_LEFT
+    escapeHTML: NO
   }),
   
   render: function(context, firstTime) {

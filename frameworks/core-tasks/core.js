@@ -11,7 +11,7 @@ CoreTasks = SC.Object.create({
   // Installation-level settings
   shouldNotify: true,
   autoSave: true,
-  remoteDataSource: true, // turn off for fixtures data
+  remoteDataSource: false, // turn off for fixtures data
   needsSave: false,
 
   /**
@@ -284,7 +284,7 @@ CoreTasks = SC.Object.create({
    * Get comments for a given task.
    *
    * @param {Object} task.
-   * @returns {Array} comments (may be empty).
+   * @returns {Array} comments (may be empty) sorted most recent first.
    */
   getTaskComments: function(task) {
     var ret = [];
@@ -296,7 +296,14 @@ CoreTasks = SC.Object.create({
         if(comment.get('taskId') === taskId) ret.push(comment);
       }
     }
-    return ret;
+    return ret.sort(function(a,b) {
+      var aDate = a.get('createdAt').get('milliseconds');
+      var bDate = b.get('createdAt').get('milliseconds');
+      // console.log('Comparing: ' + aDate + ', ' + bDate);
+      if(aDate === bDate) return 0;
+      else return aDate > bDate? -1 : 1;
+    }
+    );
   },
 
   // The resource path format for the remote server.
