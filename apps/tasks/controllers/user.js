@@ -14,7 +14,7 @@ sc_require('lib/sha1');
 Tasks.userController = SC.ObjectController.create(Tasks.Sha1,
 /** @scope Tasks.userController.prototype */ {
   
-  contentBinding: 'Tasks.usersController.selection',
+  contentBinding: SC.Binding.oneWay('Tasks.usersController.selection'),
   
   loginNameErrorMessage: '',
   emailErrorMessage: '',

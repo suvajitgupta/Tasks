@@ -14,7 +14,7 @@
 Tasks.rolesController = SC.TreeController.create(SC.CollectionViewDelegate,
 /** @scope Tasks.rolesController.prototype */ {
   
-  contentBinding: 'Tasks.usersController.roles',
+  contentBinding: SC.Binding.oneWay('Tasks.usersController.roles'),
   allowsEmptySelection: YES,
   treeItemIsGrouped: YES,
   

@@ -68,8 +68,8 @@ Tasks.FILTER_ANY_WATCHES = 1;
 Tasks.assignmentsController = SC.ArrayController.create(
 /** @scope Tasks.assignmentsController.prototype */ {
   
-  // contentBinding: 'Tasks.projectController.tasks', // single-project selection mode
-  contentBinding: 'Tasks.projectController.displayTasks', // multi-project selection mode
+  // contentBinding: SC.Binding.oneWay('Tasks.projectController.tasks'), // single-project selection mode
+  contentBinding: SC.Binding.oneWay('Tasks.projectController.displayTasks'), // multi-project selection mode
   
   assignedTasks: null,
   

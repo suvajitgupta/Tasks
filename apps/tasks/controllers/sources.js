@@ -11,7 +11,7 @@
 
 Tasks.sourcesController = SC.TreeController.create(
 /** @scope Tasks.sourcesController.prototype */ {
-  contentBinding: 'Tasks.projectsController.sources',
+  contentBinding: SC.Binding.oneWay('Tasks.projectsController.sources'),
   allowsEmptySelection: YES,
   treeItemIsGrouped: YES
 });
