@@ -82,8 +82,7 @@
 .sc-master-detail-view .sc-workspace-view .task-editor .scui-combobox-dropdown-button-view {
   background-color: #DDD !important;
 }
-.sc-master-detail-view .sc-workspace-view .task-editor .sc-text-field-view,
-.sc-master-detail-view .sc-workspace-view .task-editor .comment label {
+.sc-master-detail-view .sc-workspace-view .task-editor .sc-text-field-view {
   background: #EEE !important;
 }
 
@@ -101,12 +100,14 @@
 }
 
 .comments-list .description {
-  background: #EEE !important;
+  background: #FFD !important;
   font-size: 10px !important;
   padding: 0px 5px !important;
   border: 1px solid #AAA !important;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
+  -moz-box-shadow: 0 1px 3px #777;
+  -webkit-box-shadow: 0 1px 3px #777;
 }
 
 /*-----------------------------------------------------------------

@@ -15,6 +15,7 @@ Views
 CoreTasks
 * add allComments
 * return Comments for a Task sorted most recent first
+- add code to save Comments
 
 CoreActions
 - load comments from Server

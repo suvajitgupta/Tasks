@@ -450,7 +450,6 @@ Tasks.TaskEditorView = SC.View.extend(
            hint: "_DescriptionHint".loc(),
            maxLength: 500000,
            isTextArea: YES,
-           // FIXME: [SG] disable Task.description editing for Guests after Comments are added
            isEnabled: YES
          })
        })

@@ -29,7 +29,7 @@ Tasks.CommentItemView = SC.ListItemView.extend(
   }),
   
   descriptionLabel: SC.LabelView.design({
-    layout: { left: 0, right: 0, top: 20, bottom: 5 },
+    layout: { left: 0, right: 0, top: 20, bottom: 10 },
     classNames: [ 'description'],
     escapeHTML: NO
   }),
