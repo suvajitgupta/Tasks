@@ -254,7 +254,7 @@ Tasks.TaskEditorView = SC.View.extend(
  editor: SC.View.design({
    
    layout: { left: 0, right: 0, top: 0, bottom: 0},
-   childViews: 'idLabel backButton previousButton nextButton nameLabel nameField typeLabel typeField priorityLabel priorityField statusLabel statusField validationLabel validationField effortLabel effortField effortHelpLabel submitterLabel submitterField projectLabel projectField assigneeLabel assigneeField splitView createdAtLabel updatedAtLabel watchingCheckbox watchersButton'.w(),
+   childViews: 'idLabel backButton previousButton nextButton nameLabel nameField typeLabel typeField priorityLabel priorityField statusLabel statusField validationLabel validationField effortLabel effortField effortHelpLabel submitterLabel submitterField projectLabel projectField assigneeLabel assigneeField splitView separatorView createdAtLabel updatedAtLabel watchingCheckbox watchersButton'.w(),
    classNames: ['task-editor'],
 
    idLabel: SC.LabelView.design({
@@ -486,24 +486,29 @@ Tasks.TaskEditorView = SC.View.extend(
         })
      })
    }),
+   
+   separatorView: SC.View.design({
+     layout: { left: 5, right: 5, height: 2, bottom: 33 },
+     classNames: [ 'separator']
+   }),
 
    createdAtLabel: SC.LabelView.design({
-     layout: { left: 10, bottom: 13, height: 17, width: 250 },
+     layout: { left: 10, bottom: 10, height: 17, width: 250 },
      classNames: [ 'date-time'],
      textAlign: SC.ALIGN_LEFT
    }),
    updatedAtLabel: SC.LabelView.design({
-     layout: { right: 10, bottom: 13, height: 17, width: 250 },
+     layout: { right: 10, bottom: 10, height: 17, width: 250 },
      classNames: [ 'date-time'],
      textAlign: SC.ALIGN_RIGHT
    }),
 
    watchingCheckbox: SC.CheckboxView.design({
-     layout: { centerX: -35, bottom: 12, height: 16, width: 70 },
+     layout: { centerX: -35, bottom: 10, height: 16, width: 70 },
      title: "_Watch".loc()
    }),
    watchersButton: SC.ButtonView.design({
-     layout: { centerX: 35, bottom: 8, height: 24, width: 80 },
+     layout: { centerX: 35, bottom: 6, height: 24, width: 80 },
      icon: 'watches-icon',
      fontWeight: SC.BOLD_WEIGHT,
      action: 'showWatchers',
