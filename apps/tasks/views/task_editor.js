@@ -238,6 +238,17 @@ Tasks.TaskEditorView = SC.View.extend(
    this._preEditing();
  },
   
+ postComment: function() {
+   SC.run(function() { Tasks.addComment(); });
+   var comment = Tasks.commentsController.get('content')[0];
+   // console.log('DEBUG: will start editing comment: ' + comment.get('description'));
+   var commmentsList = Tasks.mainPage.getPath('taskEditor.editor.splitView.bottomRightView.commentsList.contentView');
+   var descriptionLabel = commmentsList.itemViewForContentIndex(0).descriptionLabel;
+   descriptionLabel.set('isEditable', YES);
+   descriptionLabel.beginEditing();
+   descriptionLabel.set('isEditable', NO);
+ },
+  
  childViews: 'editor'.w(),
  
  editor: SC.View.design({
@@ -466,8 +477,8 @@ Tasks.TaskEditorView = SC.View.extend(
          layout: { top: 3, right: 0, height: 24, width: 50 },
          titleMinWidth: 0,
          title: "_Post".loc(),
-         target: 'Tasks',
-         action: 'addComment',
+         target: 'Tasks.mainPage.taskEditor',
+         action: 'postComment',
          toolTip: "_PostTooltip".loc()
        }),
        commentsList: SC.ScrollView.design({

@@ -735,7 +735,6 @@ Tasks.mixin({
       var now = SC.DateTime.create().get('milliseconds');
       CoreTasks.createRecord(CoreTasks.Comment, { taskId: task.get('id'), userId: currentUserId,
                                            createdAt: now, updatedAt: now, description: task.get('displayId') + ': Comment' });
-      // TODO: [SG] remove hardcoded comment and kickoff inline editing
     }
   },
   

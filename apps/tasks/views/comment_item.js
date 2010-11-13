@@ -31,7 +31,13 @@ Tasks.CommentItemView = SC.ListItemView.extend(
   descriptionLabel: SC.LabelView.design({
     layout: { left: 0, right: 0, top: 20, bottom: 10 },
     classNames: [ 'description'],
-    escapeHTML: NO
+    isInlineEditorMultiline: YES,
+    escapeHTML: NO,
+    inlineEditorDidEndEditing: function(inlineEditor, finalValue) {
+      sc_super();
+      var comment = this.getPath('parentView.content');
+      comment.setIfChanged('description', finalValue);
+    }    
   }),
   
   render: function(context, firstTime) {
