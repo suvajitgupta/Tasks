@@ -238,7 +238,7 @@ Tasks.TaskEditorView = SC.View.extend(
    this._preEditing();
  },
   
- postComment: function() {
+ comment: function() {
    SC.run(function() { Tasks.addComment(); });
    var comment = Tasks.commentsController.get('content')[0];
    // console.log('DEBUG: will start editing comment: ' + comment.get('description'));
@@ -464,25 +464,18 @@ Tasks.TaskEditorView = SC.View.extend(
        })
      }),
      
-     // TODO: [SG] swtich to using a stacked view for comments to handle variable heights of descriptions
      bottomRightView: SC.View.design({
        classNames: ['comments-view'],
-       childViews: 'commentsLabel postButton commentsList'.w(),
-       commentsLabel: SC.LabelView.design({
-         layout: { top: 7, left: 0, height: 17, width: 100 },
-         icon: 'comment-icon',
-         value: "_Comments:".loc()
-       }),
-       postButton: SC.ButtonView.design({
-         layout: { top: 3, right: 0, height: 24, width: 50 },
-         titleMinWidth: 0,
-         title: "_Post".loc(),
+       childViews: 'commentButton commentsList'.w(),
+       commentButton: SC.ButtonView.design({
+         layout: { top: 5, centerX: 0, height: 24, width: 80 },
+         title: "_Comment".loc(),
          target: 'Tasks.mainPage.taskEditor',
-         action: 'postComment',
-         toolTip: "_PostTooltip".loc()
+         action: 'comment',
+         toolTip: "_CommentTooltip".loc()
        }),
        commentsList: SC.ScrollView.design({
-         layout: { top: 30, left: 0, right: 0, bottom: 0 },
+         layout: { top: 35, left: 0, right: 0, bottom: 0 },
            hasHorizontalScroller: NO, // disable horizontal scrolling
            contentView: SC.ListView.design({
             classNames: ['comments-list'],

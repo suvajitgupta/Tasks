@@ -69,6 +69,7 @@ body.sc-theme,
   color: #444 !important;
   font-size: 11px !important;
   font-style: italic !important;
+  font-weight: normal !important;
 }
 
 .recently-updated {

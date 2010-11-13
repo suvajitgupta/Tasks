@@ -734,7 +734,7 @@ Tasks.mixin({
       var task = tc.getPath('selection.firstObject');
       var now = SC.DateTime.create().get('milliseconds');
       CoreTasks.createRecord(CoreTasks.Comment, { taskId: task.get('id'), userId: currentUserId,
-                                           createdAt: now, updatedAt: now, description: task.get('displayId') + ': Comment' });
+                                           createdAt: now, updatedAt: now, description: '' });
     }
   },
   

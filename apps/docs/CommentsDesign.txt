@@ -8,9 +8,10 @@ Controllers
 
 Views
 * modify task editor to display comments (model on github): show user name, posting time, and description
-* add ability to add comments (anyone): plus button next to "Comments", create new textbox at the top of list/start editing
-- add ablity to update/delete comments (your own): pencil/minus buttons on each comment (show as hovers only on desktop)
+* add ability to add comments (anyone): create new textbox at the top of list/start editing
+- add ablity to update/delete comments using pencil/minus buttons on your own comments
 - switch to StackedView to handle multi-line/variable length comments properly
+- figure out what to do on iPad since inlineEditor doesn't work properly
 - take away permission of Guests to modify all task descriptions
 
 CoreTasks
@@ -20,11 +21,13 @@ CoreTasks
 
 CoreActions
 - load comments from Server
+- test multi-user changes to Comments and see if they appear after a Refresh
 
 Servers
 - update Persevere code to support Comments in full/incremental fetches and create/update/delete operations
 - update Persevere code to cleanup old/orphaned Comments
 - update GAE code to support Comments in full/incremental fetches and create/update/delete operations
+- take away permission of Guests to modify all task descriptions on GAE
 - update GAE code to cleanup old/orphaned Comments
 
 Documentation
