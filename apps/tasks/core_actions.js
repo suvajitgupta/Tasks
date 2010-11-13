@@ -317,7 +317,7 @@ Tasks.mixin({
         this.set('defaultProjectId', null);
       }
       else if(warnIfMissing) {
-        console.warn('No project of ID #' + defaultProjectId);
+        console.warn('selectDefaultProject(): No project of ID #' + defaultProjectId);
       }
     }
     this.set('defaultProject', defaultProject);
@@ -733,10 +733,9 @@ Tasks.mixin({
       var currentUserId = CoreTasks.getPath('currentUser.id');
       var task = tc.getPath('selection.firstObject');
       var now = SC.DateTime.create().get('milliseconds');
-      var comment = CoreTasks.createRecord(CoreTasks.Comment, { taskId: task.get('id'), userId: currentUserId,
-                                           createdAt: now, updatedAt: now, description: 'Comment' });
-      // TODO: [SG] remove hardcoded comment and start inline editing
-      // TODO: [SG] figure out how to show new comment immediately
+      CoreTasks.createRecord(CoreTasks.Comment, { taskId: task.get('id'), userId: currentUserId,
+                                           createdAt: now, updatedAt: now, description: task.get('displayId') + ': Comment' });
+      // TODO: [SG] remove hardcoded comment and kickoff inline editing
     }
   },
   
@@ -754,7 +753,7 @@ Tasks.mixin({
         // Get and watch each selected task.
         var task = sel.nextObject(i, null, context);
         if(!CoreTasks.isCurrentUserWatchingTask(task)) {
-          var watch = CoreTasks.createRecord(CoreTasks.Watch, { taskId: task.get('id'), userId: currentUserId });
+          CoreTasks.createRecord(CoreTasks.Watch, { taskId: task.get('id'), userId: currentUserId });
         }
       }
       if(CoreTasks.get('autoSave')) Tasks.saveData();
@@ -804,7 +803,6 @@ Tasks.mixin({
     var user = CoreTasks.createRecord(CoreTasks.User, userHash);
     Tasks.usersController.selectObject(user);
     Tasks.settingsPage.get('userInformation').get('fullNameField').becomeFirstResponder();
-    return user;
     
   },
 

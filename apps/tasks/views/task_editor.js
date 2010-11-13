@@ -124,7 +124,6 @@ Tasks.TaskEditorView = SC.View.extend(
     editor.setPath('splitView.topLeftView.contentView.descriptionField.value', task.get('description'));
     editor.setPath('createdAtLabel.value', task.get('displayCreatedAt'));
     editor.setPath('updatedAtLabel.value', task.get('displayUpdatedAt'));
-    Tasks.commentsController.set('content', CoreTasks.getTaskComments(task));
   },
   _postEditing: function() {
     var task = this.get('task');
@@ -156,7 +155,6 @@ Tasks.TaskEditorView = SC.View.extend(
       task.setIfChanged('assigneeValue', editor.getPath('assigneeField.value'));
       task.setIfChanged('displayName', editor.getPath('nameField.value'));
       task.setIfChanged('description',  editor.getPath('splitView.topLeftView.contentView.descriptionField.value'));
-      Tasks.commentsController.set('content', null);
     }
   },
   _statusDidChange: function() {

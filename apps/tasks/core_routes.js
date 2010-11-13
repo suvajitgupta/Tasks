@@ -129,7 +129,7 @@ Tasks.mixin( /** @scope Tasks */ {
     else if(defaultProjectId) {
       var project = CoreTasks.getProjectById(defaultProjectId); // see if such a project exists
       if(!project) {
-        console.warn('No project of ID #' + defaultProjectId);
+        console.warn('selectRoute(): No project of ID #' + defaultProjectId);
         project = CoreTasks.get('allTasksProject');
       }
       if(project !== this.get('defaultProject')) {
