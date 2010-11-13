@@ -169,6 +169,7 @@ CoreTasks = SC.Object.create({
     if (!this.allProjects) return null;
     var projectsCount = this.allProjects.get('length');
     var matchingProject = null;
+    projectId = parseInt(projectId, 10);
     for(var i = 0; i < projectsCount; i++) {
       var project = this.allProjects.objectAt(i);
       if(project.get('id') === projectId) {
