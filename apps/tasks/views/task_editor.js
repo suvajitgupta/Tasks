@@ -244,9 +244,7 @@ Tasks.TaskEditorView = SC.View.extend(
    // console.log('DEBUG: will start editing comment: ' + comment.get('description'));
    var commmentsList = Tasks.mainPage.getPath('taskEditor.editor.splitView.bottomRightView.commentsList.contentView');
    var descriptionLabel = commmentsList.itemViewForContentIndex(0).descriptionLabel;
-   descriptionLabel.set('isEditable', YES);
    descriptionLabel.beginEditing();
-   descriptionLabel.set('isEditable', NO);
  },
   
  childViews: 'editor'.w(),

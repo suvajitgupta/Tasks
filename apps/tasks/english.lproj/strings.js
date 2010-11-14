@@ -55,6 +55,7 @@ SC.stringsFor('English', {
   "_DataSaved": "Data saved ",
   "_DataSaveError": "Data save failed ",
   "_Delete": "Delete",
+  "_DeleteComment": "Delete the comment below",
   "_DeleteProjectTooltip": "Delete selected projects",
   "_DeleteTaskTooltip": "Delete selected tasks",
   "_DeleteUserTooltip": "Delete selected users",

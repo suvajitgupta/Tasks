@@ -15,7 +15,7 @@ sc_require('mixins/localized_label');
 Tasks.CommentItemView = SC.ListItemView.extend(
 /** @scope Tasks.CommentItemView.prototype */ {
   
-  childViews: 'commentHeaderLabel descriptionLabel'.w(),
+  childViews: 'commentHeaderLabel deleteButton descriptionLabel'.w(),
   
   commentHeaderLabel: SC.LabelView.design({
     layout: { left: 0, right: 0, top: 0, height: 17 },
@@ -24,11 +24,20 @@ Tasks.CommentItemView = SC.ListItemView.extend(
     escapeHTML: NO
   }),
   
+  deleteButton: SC.View.design(SCUI.SimpleButton, {
+    layout: { right: 0, width: 16, top: 2, height: 16 },
+    classNames: ['delete-comment-icon'],
+    toolTip: "_DeleteComment".loc(),
+    mouseDown: function() {
+      var comment = this.getPath('parentView.content');
+      comment.destroy();
+    }
+  }),
+  
   descriptionLabel: SC.LabelView.design({
     layout: { left: 0, right: 0, top: 20, bottom: 10 },
     classNames: [ 'comment-description'],
     isInlineEditorMultiline: YES,
-    isEditable: YES,
     escapeHTML: NO,
     inlineEditorDidEndEditing: function(inlineEditor, finalValue) {
       sc_super();
@@ -40,8 +49,12 @@ Tasks.CommentItemView = SC.ListItemView.extend(
   render: function(context, firstTime) {
     
     var content = this.get('content');
-    if(!content) return;
     // console.log('DEBUG: Comment render(' + firstTime + '): ' + content.get('description'));
+    if(!content) return;
+    
+    var isCurrentUserComment = content.get('userId') === CoreTasks.getPath('currentUser.id');
+    this.setPath('deleteButton.isVisible', isCurrentUserComment);
+    this.setPath('descriptionLabel.isEditable', isCurrentUserComment);
     
     var user = CoreTasks.store.find(CoreTasks.User, content.get('userId'));
     var commentHeader = '';

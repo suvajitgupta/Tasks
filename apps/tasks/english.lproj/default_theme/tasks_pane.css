@@ -115,6 +115,13 @@
   -webkit-box-shadow: 0 1px 3px #777;
 }
 
+.delete-comment-icon {
+  background: static_url('images/delete-comment.png') no-repeat !important;
+  z-index: 100 !important;
+  cursor: pointer !important;
+}
+
+
 /*-----------------------------------------------------------------
  * Task pane helper images
  */

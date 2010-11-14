@@ -9,8 +9,9 @@ Controllers
 Views
 * modify task editor to display comments (model on github): show user name, posting time, and description
 * add ability to add comments (anyone): create new textbox at the top of list/start editing
-- add ablity to update/delete comments using pencil/minus buttons on your own comments
+* add ablity to update/delete user's own comments using double click/minus buttons
 - switch to StackedView to handle multi-line/variable length comments properly
+- fix bug with inline editor popping up at top left of screen instead of on top of comment being edited
 - figure out what to do on iPad since inlineEditor doesn't work properly
 - take away permission of Guests to modify all task descriptions
 
