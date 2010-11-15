@@ -272,7 +272,7 @@ CoreTasks.CachingRemoteDataSource = SC.DataSource.extend({
   loadCachedRecords: function(invokeLater) {
     // Hard-coded for now...
     var cacheableRecordTypes = [
-      'CoreTasks.Project', 'CoreTasks.Task', 'CoreTasks.User', 'CoreTasks.Watch'
+      'CoreTasks.Project', 'CoreTasks.Task', 'CoreTasks.User', 'CoreTasks.Watch', 'CoreTasks.Comment'
     ];
 
     for (var i = 0, len = cacheableRecordTypes.length; i < len; i++) {
