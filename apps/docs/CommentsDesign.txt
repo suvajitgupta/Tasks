@@ -23,7 +23,6 @@ CoreTasks
 CoreActions
 * load comments from Server
 * test multi-user changes to Comments and see if they appear after a Refresh
-- fix bug with Comments not being loaded from local storage [SG/SE]
 
 Servers
 * add comment model definition to Persevere
