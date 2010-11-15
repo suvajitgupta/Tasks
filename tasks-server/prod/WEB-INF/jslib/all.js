@@ -3,12 +3,13 @@ Class({
   id: "all",
 
   get: function() {
+    var query = 'status!="deleted"';
     return {
-      users: load('user'),
-      projects: load('project'),
-      tasks: load('task'),
-      watches: load('watch'),
-      comments: load('comment')
+      users: load('user?' + query),
+      projects: load('project?' + query),
+      tasks: load('task?' + query),
+      watches: load('watch?' + query),
+      comments: load('comment?' + query)
     };
   },
 
