@@ -453,24 +453,23 @@ CoreTasks.Task = CoreTasks.Record.extend({
   destroy: function() {
     // console.log('DEBUG: destroying Task: ' + this.get('name'));
     sc_super();
-
-    this.destroyWatches();
-    
+    this._destroyWatches();
+    this._destroyComments();
   },
   
-  destroyWatches: function() {
-    var id = this.get('id');
-    var store = this.get('store');
-    var watchesQuery = SC.Query.local(CoreTasks.Watch, "taskId=%@".fmt(id));
-    watchesQuery.set('initialServerFetch', NO);
-    var watches = store.find(watchesQuery);
-    if (watches) {
-      watches.forEach(function(watch) {
-        // console.log('DEBUG: deleting watch ' + watch);
-        watch.destroy();
-      });
-      watches.destroy();
-      watchesQuery = null;
+  _destroyWatches: function() {
+    var watches = CoreTasks.getTaskWatches(this);
+    for(var i = 0; i < watches.length; i++) {
+      // console.log('DEBUG: deleting watch ' +  watches[i]);
+      watches[i].destroy();
+    }
+  },
+  
+  _destroyComments: function() {
+    var comments = CoreTasks.getTaskComments(this);
+    for(var i = 0; i < comments.length; i++) {
+      // console.log('DEBUG: deleting comment ' +  comments[i]);
+      comments[i].destroy();
     }
   },
   

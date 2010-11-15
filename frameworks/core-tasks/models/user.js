@@ -152,11 +152,12 @@ CoreTasks.User = CoreTasks.Record.extend({
       assignedTasksQuery = null;
     }
 
-    this.destroyWatches();
+    this._destroyWatches();
+    this._destroyComments();
     
   },
     
-  destroyWatches: function() {
+  _destroyWatches: function() {
     var id = this.get('id');
     var store = this.get('store');
     
@@ -170,6 +171,23 @@ CoreTasks.User = CoreTasks.Record.extend({
       });
       watches.destroy();
       watchesQuery = null;
+    }
+  },
+  
+  _destroyComments: function() {
+    var id = this.get('id');
+    var store = this.get('store');
+    
+    var commentsQuery = SC.Query.local(CoreTasks.Comment, "userId=%@".fmt(id));
+    commentsQuery.set('initialServerFetch', NO);
+    var comments = store.find(commentsQuery);
+    if (comments) {
+      comments.forEach(function(comment) {
+        // console.log('DEBUG: deleting comment ' + comment);
+        comment.destroy();
+      });
+      comments.destroy();
+      commentsQuery = null;
     }
   },
   
