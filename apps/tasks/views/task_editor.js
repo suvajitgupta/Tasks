@@ -457,7 +457,8 @@ Tasks.TaskEditorView = SC.View.extend(
            hint: "_DescriptionHint".loc(),
            maxLength: 500000,
            isTextArea: YES,
-           isEnabled: YES
+           isEnabled: YES,
+           isEnabledBinding: 'Tasks.tasksController.isEditable'
          })
        })
      }),

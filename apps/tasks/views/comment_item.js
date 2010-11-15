@@ -43,7 +43,7 @@ Tasks.CommentItemView = SC.ListItemView.extend(
       sc_super();
       var comment = this.getPath('parentView.content');
       comment.setIfChanged('description', finalValue);
-    }    
+    }
   }),
   
   render: function(context, firstTime) {
