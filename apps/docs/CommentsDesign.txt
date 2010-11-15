@@ -28,8 +28,8 @@ CoreActions
 Servers
 * add comment model definition to Persevere
 * update Persevere code to support Comments in full/incremental fetches
-* update generated.js in prod/test folders
-- update Persevere code to cleanup old/orphaned Comments
+* update Persevere code to cleanup old/orphaned Comments
+* update all/watch/generated.js in test folder
 - update GAE code to support Comments in full/incremental fetches and create/update/delete operations
 - update GAE code to cleanup old/orphaned Comments
 - take away permission of Guests to modify all task descriptions on GAE

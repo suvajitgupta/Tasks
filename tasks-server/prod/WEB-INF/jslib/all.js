@@ -42,10 +42,12 @@ Class({
     for (i = 0, len = tasksToDelete.length; i < len; i++) remove(tasksToDelete[i]);
     var watchesToDelete = load('watch?' + query, cutoff);
     for (i = 0, len = watchesToDelete.length; i < len; i++) remove(watchesToDelete[i]);
+    var commentsToDelete = load('comment?' + query, cutoff);
+    for (i = 0, len = commentsToDelete.length; i < len; i++) remove(commentsToDelete[i]);
     
     // Handle IDs referencing non-existent records:
     // * non-existent task projectId/submitterId/assigneeId should be set to null
-    // * watches with non-existent taskId/watchId should be soft-deleted
+    // * watches/comments with non-existent taskId/userId should be soft-deleted
     // * set updatedAt for all records being modified
     var idExtractor = function(record) { var id = (record.status == 'deleted')? '' : record.id; return id.replace(/^.*\//, "") * 1; };
     var users = load("user/"), userIds = users.map(idExtractor);
@@ -86,6 +88,16 @@ Class({
         watchesSoftDeleted.push(watch);
       }
     }
+    var comments = load('comment/'), comment, commentsSoftDeleted = [];
+    for (i = 0, len = comments.length; i < len; i++) {
+      comment = comments[i];
+      if(comment.status === 'deleted') continue;
+      if(taskIds.indexOf(comment.taskId) === -1 || userIds.indexOf(comment.userId) === -1) {
+        comment.status = 'deleted';
+        comment.updatedAt = now;
+        commentsSoftDeleted.push(comment);
+      }
+    }
     
     // Return all affected records broken down by category
     return {
@@ -94,8 +106,10 @@ Class({
       projectsDeleted: projectsToDelete,
       tasksDeleted: tasksToDelete,
       watchesDeleted: watchesToDelete,
+      commentsDeleted: commentsToDelete,
       tasksUpdated: tasksUpdated,
-      watchesSoftDeleted: watchesSoftDeleted
+      watchesSoftDeleted: watchesSoftDeleted,
+      commentsSoftDeleted: commentsSoftDeleted
     };
     
   }

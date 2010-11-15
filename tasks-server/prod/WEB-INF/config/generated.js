@@ -226,6 +226,10 @@ function (timestamp) {
     for (i = 0, len = watchesToDelete.length; i < len; i++) {
         remove(watchesToDelete[i]);
     }
+    var commentsToDelete = load("comment?" + query, cutoff);
+    for (i = 0, len = commentsToDelete.length; i < len; i++) {
+        remove(commentsToDelete[i]);
+    }
     var idExtractor = function (record) {
         var id = (record.status == "deleted") ? "" : record.id;
         return id.replace(/^.*\//, "") * 1;
@@ -272,7 +276,19 @@ function (timestamp) {
             watchesSoftDeleted.push(watch);
         }
     }
-    return {cutoff:cutoff, usersDeleted:usersToDelete, projectsDeleted:projectsToDelete, tasksDeleted:tasksToDelete, watchesDeleted:watchesToDelete, tasksUpdated:tasksUpdated, watchesSoftDeleted:watchesSoftDeleted};
+    var comments = load("comment/"), comment, commentsSoftDeleted = [];
+    for (i = 0, len = comments.length; i < len; i++) {
+        comment = comments[i];
+        if (comment.status === "deleted") {
+            continue;
+        }
+        if (taskIds.indexOf(comment.taskId) === -1 || userIds.indexOf(comment.userId) === -1) {
+            comment.status = "deleted";
+            comment.updatedAt = now;
+            commentsSoftDeleted.push(comment);
+        }
+    }
+    return {cutoff:cutoff, usersDeleted:usersToDelete, projectsDeleted:projectsToDelete, tasksDeleted:tasksToDelete, watchesDeleted:watchesToDelete, commentsDeleted:commentsToDelete, tasksUpdated:tasksUpdated, watchesSoftDeleted:watchesSoftDeleted, commentsSoftDeleted:commentsSoftDeleted};
 }
 
 		}
