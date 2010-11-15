@@ -194,6 +194,7 @@ Tasks.mixin({
           var monthAgo = SC.DateTime.create().get('milliseconds') - 30*CoreTasks.MILLISECONDS_IN_DAY;
           if(isNaN(lastRetrievedAt) || lastRetrievedAt < monthAgo) {
             // console.log('DEBUG: resetting lastRetrieved for aged local storage data');
+            SCUDS.LocalStorageAdapterFactory.nukeAllAdapters();
             lastRetrieved = '';
           }
         }
@@ -451,11 +452,11 @@ Tasks.mixin({
     // console.log('DEBUG: restart()');
     // Clear cookie and cached records if using local storage
     if(CoreTasks.useLocalStorage) {
+      // TODO: [SG] add checkbox on logout screen to optionally clear localStorage
       // console.log('DEBUG: clearing cookie and local storage');
       var cookie = SC.Cookie.find('lastRetrieved');
       if(cookie) cookie.destroy();
-      // TODO: [SG/SE] add/use iterator to nuke all local storage adapters
-      localStorage.clear();
+      SCUDS.LocalStorageAdapterFactory.nukeAllAdapters();
     }
 
     if(Tasks.get('serverType') === Tasks.GAE_SERVER) {

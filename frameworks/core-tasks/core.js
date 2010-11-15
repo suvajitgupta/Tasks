@@ -19,7 +19,6 @@ CoreTasks = SC.Object.create({
    * caching.
    */
   useLocalStorage: SC.platform.touch? NO : YES,
-  // TODO: [SG/SE] write optimized local storage adapter that operates on single records
 
   /**
    * If YES, and if useLocalStorage is also YES, preload all of the cached records during
