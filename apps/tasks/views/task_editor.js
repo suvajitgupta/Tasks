@@ -242,8 +242,8 @@ Tasks.TaskEditorView = SC.View.extend(
    SC.run(function() { Tasks.addComment(); });
    var comment = Tasks.commentsController.get('content')[0];
    // console.log('DEBUG: will start editing comment: ' + comment.get('description'));
-   var commmentsList = Tasks.mainPage.getPath('taskEditor.editor.splitView.bottomRightView.commentsList.contentView');
-   var descriptionLabel = commmentsList.itemViewForContentIndex(0).descriptionLabel;
+   var commentsList = Tasks.mainPage.getPath('taskEditor.editor.splitView.bottomRightView.commentsList.contentView');
+   var descriptionLabel = commentsList.itemViewForContentIndex(0).descriptionLabel;
    descriptionLabel.beginEditing();
  },
   

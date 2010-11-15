@@ -254,7 +254,8 @@ Tasks.mixin({
         "users":     CoreTasks.User,
         "tasks":     CoreTasks.Task,
         "projects":  CoreTasks.Project,
-        "watches":   CoreTasks.Watch
+        "watches":   CoreTasks.Watch,
+        "comments":   CoreTasks.Comment
       };
       var recordSets = response.result;
       SC.RunLoop.begin();

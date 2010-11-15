@@ -1,5 +1,5 @@
 Models/Fixtures
-* add Comment model with taskId/userId
+* add Comment model with taskId/userId inheriting createdAt/updatedAt/description from Record model
 * add Comments fixtures
 * while deleting Task/User model delete any associated Comments
 
@@ -11,25 +11,28 @@ Views
 * add ability to add comments (anyone): create new textbox at the top of list/start editing
 * add ablity to update/delete user's own comments using double click/minus buttons
 - switch to StackedView to handle multi-line/variable length comments properly
-- fix bug with inline editor popping up at top left of screen instead of on top of comment being edited
+- fix bug with inline editor popping up at top left of screen instead of on top of comment being edited [SG/JL]
 - figure out what to do on iPad since inlineEditor doesn't work properly
 - take away permission of Guests to modify all task descriptions
 
 CoreTasks
 * add allComments
 * return Comments for a Task sorted most recent first
-- add code to save Comments
+* add code to save Comments
 
 CoreActions
-- load comments from Server
-- test multi-user changes to Comments and see if they appear after a Refresh
+* load comments from Server
+* test multi-user changes to Comments and see if they appear after a Refresh
+- fix bug with Comments not being loaded from local storage [SG/SE]
 
 Servers
-- update Persevere code to support Comments in full/incremental fetches and create/update/delete operations
+* add comment model definition to Persevere
+* update Persevere code to support Comments in full/incremental fetches
+* update generated.js in prod/test folders
 - update Persevere code to cleanup old/orphaned Comments
 - update GAE code to support Comments in full/incremental fetches and create/update/delete operations
-- take away permission of Guests to modify all task descriptions on GAE
 - update GAE code to cleanup old/orphaned Comments
+- take away permission of Guests to modify all task descriptions on GAE
 
 Documentation
 - update Tasks JSON with details of Comments implementation

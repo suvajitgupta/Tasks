@@ -454,6 +454,7 @@ CoreTasks = SC.Object.create({
   _dirtyProjects: [],
   _dirtyTasks: [],
   _dirtyWatches: [],
+  _dirtyComments: [],
 
   /**
    * Persists all new and modified records to the store.
@@ -480,6 +481,7 @@ CoreTasks = SC.Object.create({
     this._dirtyProjects = [];
     this._dirtyTasks = [];
     this._dirtyWatches = [];
+    this._dirtyComments = [];
 
     // Get the store keys of the system projects that we don't want to persist.
     var allTasksProjectKey = this.getPath('allTasksProject.storeKey');
@@ -513,6 +515,9 @@ CoreTasks = SC.Object.create({
         case CoreTasks.Watch:
           this._dirtyWatches.pushObject(key);
           break;
+        case CoreTasks.Comment:
+          this._dirtyComments.pushObject(key);
+          break;
       }
     }
 
@@ -545,6 +550,14 @@ CoreTasks = SC.Object.create({
 
     if (len > 0) {
       this._saveWatches();
+      return; 
+    }
+
+    // If there were no dirty users or projects or tasks or watches, persist the dirty comments.
+    len = this._dirtyComments.length;
+
+    if (len > 0) {
+      this._saveComments();
       return; 
     }
 
@@ -601,8 +614,21 @@ CoreTasks = SC.Object.create({
       this.addObserver('recordBeingSaved.status', this, this._watchSaveRecordDidChange);
       if (watch) watch.commit(); 
     } else {
+      // Start saving dirty comments.
+      this._saveComments();
+    }
+  },
+
+  _saveComments: function() {
+    if (this._dirtyComments && this._dirtyComments.length > 0) {
+      var commentKey = this._dirtyComments.objectAt(0);
+      var comment = this.get('store').materializeRecord(commentKey);
+      this.set('recordBeingSaved', comment);
+      this.addObserver('recordBeingSaved.status', this, this._commentSaveRecordDidChange);
+      if (comment) comment.commit(); 
+    } else {
       // We're done.
-      this.removeObserver('recordBeingSaved.status', this, this._watchSaveRecordDidChange);
+      this.removeObserver('recordBeingSaved.status', this, this._commentSaveRecordDidChange);
       this._postSaveCleanup();
     }
   },
@@ -785,6 +811,40 @@ CoreTasks = SC.Object.create({
     }
   },
   
+  _commentSaveRecordDidChange: function() {
+    var comment = this.get('recordBeingSaved');
+
+    if (comment && this.get('isSaving')) {
+      var status = comment.get('status');
+
+      if (status & SC.Record.READY || status === SC.Record.DESTROYED_CLEAN) {
+        // Save was successful; remove the current observer.
+        this.removeObserver('recordBeingSaved.status', this, this._commentSaveRecordDidChange);
+
+        // Continue saving dirty comments, if there are any left.
+        this._dirtyComments.removeObject(comment.get('storeKey'));
+        var nextCommentKey = this._dirtyComments.objectAt(0);
+
+        if (nextCommentKey) {
+          // Add a new observer and commit.
+          var nextComment = this.get('store').materializeRecord(nextCommentKey);
+          this.set('recordBeingSaved', nextComment);
+          this.addObserver('recordBeingSaved.status', this, this._commentSaveRecordDidChange);
+          nextComment.commit();
+        } else {
+          // We're done.
+          this.removeObserver('recordBeingSaved.status', this, this._commentSaveRecordDidChange);
+          this._postSaveCleanup();
+        }
+
+      } else if (status & SC.Record.ERROR) {
+        // Save failed.
+        this.removeObserver('recordBeingSaved.status', this, this._commentSaveRecordDidChange);
+        this._postSaveCleanup('comment');
+      }
+    }
+  },
+  
   dataSaveErrorCallback: null,
   /**
    * Cleanup as save operation ends.
@@ -804,6 +864,7 @@ CoreTasks = SC.Object.create({
     this._dirtyProjects = [];
     this._dirtyTasks = [];
     this._dirtyWatches = [];
+    this._dirtyComments = [];
     
     if (errorRecordType !== undefined) {
       if(this.dataSaveErrorCallback) this.dataSaveErrorCallback(errorRecordType);

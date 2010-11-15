@@ -3,7 +3,13 @@ Class({
   id: "all",
 
   get: function() {
-    return { users: load('user'), projects: load('project'), tasks: load('task'), watches: load('watch') };
+    return {
+      users: load('user'),
+      projects: load('project'),
+      tasks: load('task'),
+      watches: load('watch'),
+      comments: load('comment')
+    };
   },
 
   getDelta: function(timestamp) {
@@ -12,7 +18,8 @@ Class({
       users: load('user?' + query, timestamp),
       projects: load('project?' + query, timestamp),
       tasks: load('task?' + query, timestamp),
-      watches: load('watch?' + query, timestamp)
+      watches: load('watch?' + query, timestamp),
+      comments: load('comment?' + query, timestamp)
     };
   },
   

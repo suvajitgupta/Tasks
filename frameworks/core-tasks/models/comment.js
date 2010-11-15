@@ -25,6 +25,6 @@ CoreTasks.Comment = CoreTasks.Record.extend({
 CoreTasks.Comment.mixin(/** @scope CoreTasks.Comment */ {
   
   callbacks: SC.Object.create(),
-  resourcePath: 'commment'
+  resourcePath: 'comment'
   
 });
