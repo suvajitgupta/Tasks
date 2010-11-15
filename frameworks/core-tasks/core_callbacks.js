@@ -1,3 +1,5 @@
+/*globals CoreTasks */
+
 sc_require('core');
 
 CoreTasks.mixin({
@@ -13,8 +15,6 @@ CoreTasks.mixin({
     if (SC.typeOf(callback) !== SC.T_FUNCTION) {
       throw 'Error invoking callback: Callback is not a function.';
     }
-
-    // TODO: [SE] find some way to indicate which function is being invoked w/o displaying the source code in its entirety
 
     // There may be additional arguments that need to be passed along.
     if (arguments.length > 1) {
