@@ -182,25 +182,20 @@ Tasks.mixin({
     serverMessage.set('icon', 'progress-icon');
     serverMessage.set('value', "_LoadingData".loc());
 
-    // TODO: [SG/SE] replace use of cookie with local storage for last retrieved time
-    // Get the last retrieved information from cookie (if available).
+    // Get the last retrieved information from localStorage (if available).
     var lastRetrieved = Tasks.get('lastRetrieved');
-    if(lastRetrieved === undefined) lastRetrieved = '';
-    // else console.log('DEBUG: setting lastRetrieved value from Tasks application: ' + lastRetrieved);
-    
-    if(lastRetrieved === '' && CoreTasks.useLocalStorage) {
-      var lastRetrievedCookie = SC.Cookie.find('lastRetrieved');
-      if (lastRetrievedCookie && lastRetrievedCookie.get) {
-        lastRetrieved = lastRetrievedCookie.get('value');
-        // console.log('DEBUG: setting lastRetrieved value from cookie: ' + lastRetrieved);
-        if(SC.typeOf(lastRetrieved) === SC.T_STRING && lastRetrieved.length > 0) {
-          var lastRetrievedAt = parseInt(lastRetrieved, 10);
-          var monthAgo = SC.DateTime.create().get('milliseconds') - 30*CoreTasks.MILLISECONDS_IN_DAY;
-          if(isNaN(lastRetrievedAt) || lastRetrievedAt < monthAgo) {
-            // console.log('DEBUG: resetting lastRetrieved for aged local storage data');
-            SCUDS.LocalStorageAdapterFactory.nukeAllAdapters();
-            lastRetrieved = '';
-          }
+    if(SC.empty(lastRetrieved) && CoreTasks.useLocalStorage) {
+      var adapter;
+      adapter = this._adapter = SCUDS.LocalStorageAdapterFactory.getAdapter('Tasks');
+      lastRetrieved = adapter.get('lastRetrieved');
+      console.log('DEBUG: setting lastRetrieved value from localStorage: ' + lastRetrieved);
+      if (!SC.empty(lastRetrieved)) {
+        var lastRetrievedAt = parseInt(lastRetrieved, 10);
+        var monthAgo = SC.DateTime.create().get('milliseconds') - 30*CoreTasks.MILLISECONDS_IN_DAY;
+        if(isNaN(lastRetrievedAt) || lastRetrievedAt < monthAgo) {
+          console.log('DEBUG: resetting lastRetrieved for aged local storage data');
+          SCUDS.LocalStorageAdapterFactory.nukeAllAdapters();
+          lastRetrieved = null;
         }
       }
     }
@@ -214,7 +209,7 @@ Tasks.mixin({
     if (serverType === Tasks.PERSEVERE_SERVER) {
       // Determine which function to call based on value of lastRetieved.
       var methodInvocation;
-      if (lastRetrieved === '') {
+      if (SC.empty(lastRetrieved)) {
         methodInvocation = { method: 'get', id: 'records', params: [] };
       } else {
         methodInvocation = { method: 'getDelta', id: 'records', params: [lastRetrieved] };
@@ -225,18 +220,18 @@ Tasks.mixin({
         UUID: CoreTasks.getPath('currentUser.id'),
         ATO: CoreTasks.getPath('currentUser.authToken'),
         action: 'getRecords',
-        lastRetrievedAt: lastRetrieved
+        lastRetrievedAt: lastRetrieved || ''
       };
       CoreTasks.executeTransientGet('records', undefined, params);
     } else { // Fixtures mode
       this._loadDataSuccess();
     }
 
-    // Set the last retrieved cookie.
-    lastRetrieved = SC.DateTime.create().get('milliseconds') + '';
+    // Set the last retrieved value in localStorage.
+    lastRetrieved = SC.DateTime.create().get('milliseconds') + ''; // now
     if(CoreTasks.useLocalStorage) {
-      // console.log('DEBUG: setting lastRetrieved value in cookie: ' + lastRetrieved);
-      SC.Cookie.create({ name: 'lastRetrieved', value: lastRetrieved }).write();
+      console.log('DEBUG: setting lastRetrieved value in localStorage: ' + lastRetrieved);
+      this._adapter.save(lastRetrieved, 'lastRetrieved');
     }
     Tasks.set('lastRetrieved', lastRetrieved);
 
@@ -263,7 +258,7 @@ Tasks.mixin({
         var recordType = typeMap[recordSet];
         if(SC.typeOf(recordType) === SC.T_CLASS) {
           var records = recordSets[recordSet];
-          // console.log('DEBUG: loading ' + records.length + ' ' + recordSet);
+          console.log('DEBUG: loading ' + records.length + ' ' + recordSet);
           CoreTasks.store.loadRecords(recordType, records);
           if(CoreTasks.useLocalStorage) {
             var recordTypeStr = SC.browser.msie ? recordType._object_className : recordType.toString();
@@ -455,12 +450,10 @@ Tasks.mixin({
   _restart: function() {
     
     // console.log('DEBUG: restart()');
-    // Clear cookie and cached records if using local storage
+    // Clear cached localStorage data
     if(CoreTasks.useLocalStorage) {
       // TODO: [SG] add checkbox on logout screen to optionally clear localStorage
-      // console.log('DEBUG: clearing cookie and local storage');
-      var cookie = SC.Cookie.find('lastRetrieved');
-      if(cookie) cookie.destroy();
+      // console.log('DEBUG: clearing cached localStorage data');
       SCUDS.LocalStorageAdapterFactory.nukeAllAdapters();
     }
 
