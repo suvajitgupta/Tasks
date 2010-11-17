@@ -2,6 +2,7 @@ Tasks - sample SproutCore application, agile project management tool, SproutCore
 
 Projects - adding/deleting/editing (inline/popup), All/Unallocated Tasks
 Tasks - adding/deleting/editing (inline/popup), attributes/workflow (type/priority/status/validation)
+Comments - adding/deleting/editing
 
 Grouping - by assignee
 Sorting - by attributes

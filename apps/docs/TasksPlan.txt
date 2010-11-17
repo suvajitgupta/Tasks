@@ -106,7 +106,7 @@ v Add hover over tooltip for Assignees to show how many Tasks they have and to e
 v Add Task context menu with options: Add, Duplicate, Delete; All Task Attributes; Copy ID/Name, Copy Link [SG] $Feature @Done %Passed
 ^ Add ability to watch Tasks and get Email Notifications after Task changes [SG] <JH2> $Feature @Done %Passed
 - Indicate watched Tasks by underlining their IDs [SG] $Feature @Done %Passed
-^ Support ability to view/add Comments on Tasks [SG] <JH2> $Feature @Active
+^ Support ability to view/add Comments on Tasks [SG] <JH2> $Feature @Done %Passed
 - Allow "Find & Replace" within Task names  (operating only on displayed Tasks) [SG] $Feature
 - Allow Task names to embed metacharacters by enclosing in quotes [SG] $Feature
 - Support emails including Task details to other users via Server [SG] $Feature

@@ -57,3 +57,14 @@ Watch:
 	taskId: <Number> # refers to task being watched
 	userId: <Number> # refers to user who is watching
 }
+
+##################################################
+Comment:
+{
+	id*: <Number>, # primary key
+	createdAt: time when record was created (in milliseconds since the Unix Epoch)
+	updatedAt: time when record was last updated (in milliseconds since the Unix Epoch)
+	description: <String>, # multi-line comment
+	taskId: <Number> # refers to task being commented on
+	userId: <Number> # refers to user who is commenting
+}

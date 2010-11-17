@@ -32,11 +32,9 @@ Servers
 * add comment model definition to GAE
 * update GAE code to support Comments in full/incremental fetches and create/update/delete operations
 * update GAE code to cleanup old/orphaned Comments
-- take away permission of Guests to modify all task descriptions on GAE
 
 Documentation
-- update Tasks JSON with details of Comments implementation
-- update/delete Tasks API?
-- update Tasks Plan with details of Comments implementation
-- update Help HTML with details of Comments implementation
-- update Tasks Demo Script with details of Comments implementation
+* update Tasks JSON with details of Comments implementation
+* update Tasks Plan to mark Comments implementation complete
+* update Tasks Demo Script with details of Comments implementation
+* update Help HTML with details of Comments implementation
