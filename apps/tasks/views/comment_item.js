@@ -37,6 +37,7 @@ Tasks.CommentItemView = SC.ListItemView.extend(
   descriptionLabel: SC.LabelView.design({
     layout: { left: 0, right: 0, top: 20, bottom: 10 },
     classNames: [ 'comment-description'],
+    tagName: 'pre',
     isInlineEditorMultiline: YES,
     escapeHTML: NO,
     inlineEditorDidEndEditing: function(inlineEditor, finalValue) {
