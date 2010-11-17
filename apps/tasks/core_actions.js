@@ -188,12 +188,12 @@ Tasks.mixin({
       var adapter;
       adapter = this._adapter = SCUDS.LocalStorageAdapterFactory.getAdapter('Tasks');
       lastRetrieved = adapter.get('lastRetrieved');
-      console.log('DEBUG: setting lastRetrieved value from localStorage: ' + lastRetrieved);
+      // console.log('DEBUG: setting lastRetrieved value from localStorage: ' + lastRetrieved);
       if (!SC.empty(lastRetrieved)) {
         var lastRetrievedAt = parseInt(lastRetrieved, 10);
         var monthAgo = SC.DateTime.create().get('milliseconds') - 30*CoreTasks.MILLISECONDS_IN_DAY;
         if(isNaN(lastRetrievedAt) || lastRetrievedAt < monthAgo) {
-          console.log('DEBUG: resetting lastRetrieved for aged local storage data');
+          // console.log('DEBUG: resetting lastRetrieved for aged local storage data');
           SCUDS.LocalStorageAdapterFactory.nukeAllAdapters();
           lastRetrieved = null;
         }
@@ -230,7 +230,7 @@ Tasks.mixin({
     // Set the last retrieved value in localStorage.
     lastRetrieved = SC.DateTime.create().get('milliseconds') + ''; // now
     if(CoreTasks.useLocalStorage) {
-      console.log('DEBUG: setting lastRetrieved value in localStorage: ' + lastRetrieved);
+      // console.log('DEBUG: setting lastRetrieved value in localStorage: ' + lastRetrieved);
       this._adapter.save(lastRetrieved, 'lastRetrieved');
     }
     Tasks.set('lastRetrieved', lastRetrieved);
@@ -258,7 +258,7 @@ Tasks.mixin({
         var recordType = typeMap[recordSet];
         if(SC.typeOf(recordType) === SC.T_CLASS) {
           var records = recordSets[recordSet];
-          console.log('DEBUG: loading ' + records.length + ' ' + recordSet);
+          // console.log('DEBUG: loading ' + records.length + ' ' + recordSet);
           CoreTasks.store.loadRecords(recordType, records);
           if(CoreTasks.useLocalStorage) {
             var recordTypeStr = SC.browser.msie ? recordType._object_className : recordType.toString();
