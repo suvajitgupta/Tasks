@@ -476,10 +476,9 @@ Tasks.TaskEditorView = SC.View.extend(
        commentsList: SC.ScrollView.design({
          layout: { top: 35, left: 0, right: 0, bottom: 0 },
            hasHorizontalScroller: NO, // disable horizontal scrolling
-           contentView: SC.ListView.design({
-            classNames: ['comments-list'],
+           contentView: SC.StackedView.design({
             contentBinding: 'Tasks.commentsController.arrangedObjects',
-            rowHeight: 72,
+            classNames: ['comments-list'],
             exampleView: Tasks.CommentItemView
           })
         })

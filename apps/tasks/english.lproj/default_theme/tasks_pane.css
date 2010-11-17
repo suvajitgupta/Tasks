@@ -92,23 +92,20 @@
 
 .comment-icon {
   background-image: static_url('images/comment.png') !important;
-  left: 0px !important;
-  margin-left: 0px !important;
-  margin-top: 0px !important;
 }
 
 .comments-list .comment-header {
   color: #444 !important;
   font-size: 12px !important;
   font-weight: bold !important;
-  padding-left: 18px !important;
 }
 
 .comments-list .comment-description {
   line-height: 1 !important;
   background: #FFC !important;
   font-size: 10px !important;
-  padding: 0px 5px !important;
+  margin: 20px 0px 10px 0px !important;
+  padding: 5px 5px !important;
   border: 1px solid #AAA !important;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;

@@ -12,9 +12,10 @@ sc_require('mixins/localized_label');
   @author Suvajit Gupta
 */
 
-Tasks.CommentItemView = SC.ListItemView.extend(
+Tasks.CommentItemView = SC.View.extend(SC.StaticLayout, SC.Control,
 /** @scope Tasks.CommentItemView.prototype */ {
   
+  useStaticLayout: YES,
   childViews: 'commentHeaderLabel deleteButton descriptionLabel'.w(),
   
   commentHeaderLabel: SC.LabelView.design({
@@ -34,8 +35,8 @@ Tasks.CommentItemView = SC.ListItemView.extend(
     }
   }),
   
-  descriptionLabel: SC.LabelView.design({
-    layout: { left: 0, right: 0, top: 20, bottom: 10 },
+  descriptionLabel: SC.LabelView.design(SC.StaticLayout, {
+    useStaticLayout: YES,
     classNames: [ 'comment-description'],
     tagName: 'pre',
     isInlineEditorMultiline: YES,
@@ -49,6 +50,7 @@ Tasks.CommentItemView = SC.ListItemView.extend(
   
   render: function(context, firstTime) {
     
+    if (this.owner && this.owner.updateHeight) this.owner.updateHeight();
     var content = this.get('content');
     // console.log('DEBUG: Comment render(' + firstTime + '): ' + content.get('description'));
     if(!content) return;
