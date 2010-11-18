@@ -15,5 +15,6 @@ frameworks/scui
 frameworks/ki
 frameworks/scuds
 frameworks/sproutcore
+frameworks/sai
 tools/csv_converter/build
 tools/csv_converter/dist
