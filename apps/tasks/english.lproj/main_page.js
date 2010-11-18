@@ -407,6 +407,7 @@ Tasks.mainPage = SC.Page.design({
            
             layout: { top: 2, bottom: 35, left: 5, right: 10 },
             scenes: ['tasksList', 'taskEditor'],
+            transitionDuration: 500,
             nowShowing: 'tasksList'
            
           }),
