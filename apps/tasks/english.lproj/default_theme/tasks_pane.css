@@ -101,6 +101,7 @@
 }
 
 .comments-list .comment-description {
+  min-height: 30px !important;
   line-height: 1 !important;
   background: #FFC !important;
   font-size: 10px !important;
