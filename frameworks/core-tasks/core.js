@@ -8,10 +8,12 @@
  */
 CoreTasks = SC.Object.create({
   
-  // Installation-level settings
+  /*
+   * Various installation-level settings.
+   */
   shouldNotify: true,
   autoSave: true,
-  remoteDataSource: true, // set to false to use fixtures data
+  remoteDataSource: true, // Set to false to use fixtures data.
   needsSave: false,
 
   /**
@@ -19,18 +21,73 @@ CoreTasks = SC.Object.create({
    * caching.
    */
   useLocalStorage: true,
-  
-  init: function() {
-    // Don't use localStorage for fixtures or iPad
-    if(!this.remoteDataSource || SC.platform.touch) this.useLocalStorage = false;
-  },
 
   /**
    * If YES, and if useLocalStorage is also YES, preload all of the cached records during
    * initialization.
    */
   preloadCachedRecords: YES,
-  
+
+  /*
+   * Arrays of all records in the store.
+   */
+  allUsers: null,
+  allTasks: null,
+  allProjects: null,
+  allWatches: null,
+  allComments: null,
+
+  /*
+   * System projects ("virtual" projects created at runtime and not persisted).
+   */
+  allTasksProject: null,
+  unallocatedTasksProject: null,
+  unassignedTasksProject: null,
+
+  /*
+   * The resource path format for the remote server.
+   */
+  _resourcePathFormat: 'tasks-server/%@%@%@',
+
+  /*
+   * Used to assign all newly-created records with a negative ID.
+   *
+   * Note: This counter may run out of integers if the client is left running for a long time.
+   *
+   * TODO: [SG] Revert to negative numbers once SC.Query is able to parse them correctly.
+   */
+  MAX_RECORD_ID: 100000000,
+  _currentRecordId: 100000000,
+  //_currentRecordId: -1,
+
+  /*
+   * The currently-logged-in user.
+   */
+  currentUser: null,
+
+  /*
+   * Permissions for the currently-logged-in user.
+   */
+  permissions: SC.Object.create({
+    canCreateProject: NO,
+    canUpdateProject: NO,
+    canDeleteProject: NO,
+    canCreateTask: NO,
+    canUpdateTask: NO,
+    canDeleteTask: NO,
+    canCreateUser: NO,
+    canUpdateUserRole: NO,
+    canDeleteUser: NO
+  }),
+
+  /**
+   * Initializes the CoreTasks object.
+   */
+  init: function() {
+    // Don't use localStorage for fixtures or iPad.
+    if (!this.remoteDataSource || SC.platform.touch) this.useLocalStorage = false;
+  },
+
   /**
    * Initializes the main store with the given data source.
    *
@@ -48,52 +105,43 @@ CoreTasks = SC.Object.create({
 
     this.set('store', store);
   },
-  
-  allUsers: null,
-  allTasks: null,
-  allProjects: null,
-  allWatches: null,
-  allComments: null,
 
   /**
    * Clear all data from store.
-   *
    */
   clearData: function() {
-    
     this.allTasksProject = this.unallocatedTasksProject = this.unassignedTasksProject = null;
-    
-    if(this.allUsers) {
+
+    if (this.allUsers) {
       this.allUsers.destroy();
       this.allUsers = null;
     }
-    
-    if(this.allTasks) {
+
+    if (this.allTasks) {
       this.allTasks.destroy();
       this.allTasks = null;
     }
-    
-    if(this.allProjects) {
+
+    if (this.allProjects) {
       this.allProjects.destroy();
       this.allProjects = null;
     }
-    
-    if(this.allWatches) {
+
+    if (this.allWatches) {
       this.allWatches.destroy();
       this.allWatches = null;
     }
  
-    if(this.allComments) {
+    if (this.allComments) {
       this.allComments.destroy();
       this.allComments = null;
     }
  
-    if(this.store) this.store.reset();
+    if (this.store) this.store.reset();
 
     this.set('needsSave', NO);
-    
   },
-  
+
   /**
    * Check if a loginName is reserved or in use already.
    *
@@ -101,16 +149,15 @@ CoreTasks = SC.Object.create({
    * @returns {Boolean} true if valid, false otherwise.
    */
   isLoginNameValid: function(specifiedUser) {
-    
     var loginName = specifiedUser.get('loginName');
-    if(loginName.toLowerCase() === CoreTasks.USER_NONE) return false;
+    if (loginName.toLowerCase() === CoreTasks.USER_NONE) return false;
     
     if (!this.allUsers) return true;
     var usersCount = this.allUsers.get('length');
-    for(var i = 0; i < usersCount; i++) {
+    for (var i = 0; i < usersCount; i++) {
       var user = this.allUsers.objectAt(i);
-      if(user == specifiedUser) continue;
-      if(user.get('loginName') === loginName) return false;
+      if (user == specifiedUser) continue;
+      if (user.get('loginName') === loginName) return false;
     }
 
     return true;
@@ -126,9 +173,9 @@ CoreTasks = SC.Object.create({
     if (!this.allUsers) return null;
     var usersCount = this.allUsers.get('length');
     var matchingUser = null;
-    for(var i = 0; i < usersCount; i++) {
+    for (var i = 0; i < usersCount; i++) {
       var user = this.allUsers.objectAt(i);
-      if(user.get('loginName') === loginName) {
+      if (user.get('loginName') === loginName) {
         matchingUser = user;
         break;
       }
@@ -148,9 +195,9 @@ CoreTasks = SC.Object.create({
     try {
       var namePattern = new RegExp(name);
       var usersCount = this.allUsers.get('length');
-      for(var i = 0; i < usersCount; i++) {
+      for (var i = 0; i < usersCount; i++) {
         var user = this.allUsers.objectAt(i);
-        if(user.get('loginName') === name || user.get('name').match(namePattern)) {
+        if (user.get('loginName') === name || user.get('name').match(namePattern)) {
           matchingUsers.push(user);
         }
       }
@@ -169,9 +216,9 @@ CoreTasks = SC.Object.create({
     var projectsCount = this.allProjects.get('length');
     var matchingProject = null;
     projectId = parseInt(projectId, 10);
-    for(var i = 0; i < projectsCount; i++) {
+    for (var i = 0; i < projectsCount; i++) {
       var project = this.allProjects.objectAt(i);
-      if(project.get('id') === projectId) {
+      if (project.get('id') === projectId) {
         matchingProject = project;
         break;
       }
@@ -189,9 +236,9 @@ CoreTasks = SC.Object.create({
     if (!this.allProjects) return null;
     var projectsCount = this.allProjects.get('length');
     var matchingProject = null;
-    for(var i = 0; i < projectsCount; i++) {
+    for (var i = 0; i < projectsCount; i++) {
       var project = this.allProjects.objectAt(i);
-      if(project.get('name') === name) {
+      if (project.get('name') === name) {
         matchingProject = project;
         break;
       }
@@ -210,16 +257,18 @@ CoreTasks = SC.Object.create({
       var currentUserId = this.getPath('currentUser.id');
       var taskId = task.get('id');
       var watchesCount = this.allWatches.get('length');
-      // console.log('DEBUG: isCurrentUserWatchingTask() taskId=' + taskId + ', userId=' + currentUserId + ', watchesCount=' + watchesCount);
-      for(var i = 0; i < watchesCount; i++) {
+      for (var i = 0; i < watchesCount; i++) {
         var watch = this.allWatches.objectAt(i);
-        // console.log('DEBUG: isCurrentUserWatchingTask() watch.taskId=' + watch.get('taskId') + ', watch.userId=' + watch.get('userId') + ', watchId=' + watch.get('id'));
-        if(watch.get('userId') !== currentUserId) continue;
-        if(watch.get('taskId') === taskId) return CoreTasks.TASK_WATCH_ON;
+        if (watch.get('userId') !== currentUserId) continue;
+        if (watch.get('taskId') === taskId) return CoreTasks.TASK_WATCH_ON;
       }
     }
     return CoreTasks.TASK_WATCH_OFF;
   },
+
+  isCurrentUserAManager: function() {
+    return this.getPath('currentUser.role') === CoreTasks.USER_ROLE_MANAGER;
+  }.property('currentUser').cacheable(),
 
   /**
    * Check if any user is watching a given task.
@@ -231,11 +280,9 @@ CoreTasks = SC.Object.create({
     if (this.allWatches) {
       var taskId = task.get('id');
       var watchesCount = this.allWatches.get('length');
-      // console.log('DEBUG: isAnyUserWatchingTask() taskId=' + taskId + ', watchesCount=' + watchesCount);
-      for(var i = 0; i < watchesCount; i++) {
+      for (var i = 0; i < watchesCount; i++) {
         var watch = this.allWatches.objectAt(i);
-        // console.log('DEBUG: isAnyUserWatchingTask() watch.taskId=' + watch.get('taskId') + ", watchId=" + watch.get('id'));
-        if(watch.get('taskId') === taskId) return CoreTasks.TASK_WATCH_ON;
+        if (watch.get('taskId') === taskId) return CoreTasks.TASK_WATCH_ON;
       }
     }
     return CoreTasks.TASK_WATCH_OFF;
@@ -252,10 +299,10 @@ CoreTasks = SC.Object.create({
       var currentUserId = this.getPath('currentUser.id');
       var taskId = task.get('id');
       var watchesCount = this.allWatches.get('length');
-      for(var i = 0; i < watchesCount; i++) {
+      for (var i = 0; i < watchesCount; i++) {
         var watch = this.allWatches.objectAt(i);
-        if(watch.get('userId') !== currentUserId) continue;
-        if(watch.get('taskId') === taskId) return watch;
+        if (watch.get('userId') !== currentUserId) continue;
+        if (watch.get('taskId') === taskId) return watch;
       }
     }
     return null;
@@ -272,9 +319,9 @@ CoreTasks = SC.Object.create({
     if (this.allWatches)  {
       var taskId = task.get('id');
       var watchesCount = this.allWatches.get('length');
-      for(var i = 0; i < watchesCount; i++) {
+      for (var i = 0; i < watchesCount; i++) {
         var watch = this.allWatches.objectAt(i);
-        if(watch.get('taskId') === taskId) ret.push(watch);
+        if (watch.get('taskId') === taskId) ret.push(watch);
       }
     }
     return ret;
@@ -291,63 +338,27 @@ CoreTasks = SC.Object.create({
     if (this.allComments)  {
       var taskId = task.get('id');
       var commentsCount = this.allComments.get('length');
-      for(var i = 0; i < commentsCount; i++) {
+      for (var i = 0; i < commentsCount; i++) {
         var comment = this.allComments.objectAt(i);
-        if(comment.get('taskId') === taskId) ret.push(comment);
+        if (comment.get('taskId') === taskId) ret.push(comment);
       }
     }
     return ret.sort(function(a,b) {
       var aDate = a.get('createdAt').get('milliseconds');
       var bDate = b.get('createdAt').get('milliseconds');
-      // console.log('Comparing: ' + aDate + ', ' + bDate);
-      if(aDate === bDate) return 0;
+      if (aDate === bDate) return 0;
       else return aDate > bDate? -1 : 1;
     }
     );
   },
 
-  // The resource path format for the remote server.
-  _resourcePathFormat: 'tasks-server/%@%@%@',
-
-  /*
-   * The various modes related to the save mechanism.
+  /**
+   * Sets appropriate permissions based on the current user's role.
    */
-  MODE_NOT_SAVING: 0x0001,
-  MODE_SAVING: 0x0002,
-  MODE_SAVING_USERS: 0x0102,
-  MODE_SAVING_PROJECTS: 0x0202,
-  MODE_SAVING_TASKS: 0x0302,
-
-  // The current save mode.
-  saveMode: 0x0001,
-
-  // The record currently being saved (only used by the save mechanism).
-  recordBeingSaved: null,
-
-  // The logged in user.
-  currentUser: null,
-  isCurrentUserAManager: function() {
-    return this.getPath('currentUser.role') === CoreTasks.USER_ROLE_MANAGER;
-  }.property('currentUser').cacheable(),
-  
-  
-  // Stores access control rights for current user.
-  permissions: SC.Object.create({
-    canCreateProject: NO,
-    canUpdateProject: NO,
-    canDeleteProject: NO,
-    canCreateTask: NO,
-    canUpdateTask: NO,
-    canDeleteTask: NO,
-    canCreateUser: NO,
-    canUpdateUserRole: NO,
-    canDeleteUser: NO
-  }),
-  
-  // Sets appropriate permissions based on current user's role
   setPermissions: function() {
-    if(!this.currentUser) return;
-    switch(this.currentUser.get('role')) {
+    if (!this.currentUser) return;
+
+    switch (this.currentUser.get('role')) {
       case CoreTasks.USER_ROLE_MANAGER:
         this.permissions.set('canCreateProject', YES);
         this.permissions.set('canUpdateProject', YES);
@@ -386,13 +397,6 @@ CoreTasks = SC.Object.create({
   },
 
   /**
-   * System projects (these are "virtual" - created at runtime and not persisted).
-   */
-  allTasksProject: null,
-  unallocatedTasksProject: null,
-  unassignedTasksProject: null,
-
-  /**
    * See if project is a system project.
    *
    * @param {Object} project to check.
@@ -404,7 +408,6 @@ CoreTasks = SC.Object.create({
            project === CoreTasks.get('unassignedTasksProject');
   },
 
-  
   /**
    * Creates a new record in the store.
    *
@@ -440,20 +443,8 @@ CoreTasks = SC.Object.create({
    * @returns {Boolean}
    */
   isSaving: function() {
-    return this.get('saveMode') & CoreTasks.MODE_SAVING;
-  }.property('saveMode').cacheable(),
-
-  /*
-   * Store key arrays of all dirty records, used by the save mechanism to ensure that records are
-   * persisted in the correct order.
-   *
-   * This is less than ideal, but it works.
-   */
-  _dirtyUsers: [],
-  _dirtyProjects: [],
-  _dirtyTasks: [],
-  _dirtyWatches: [],
-  _dirtyComments: [],
+    return (this._saveDelegate && this._saveDelegate.saveInProgress);
+  }.property(),
 
   /**
    * Persists all new and modified records to the store.
@@ -461,35 +452,47 @@ CoreTasks = SC.Object.create({
    * Persistence must occur in a precise order to maintain entity associations.
    */
   saveChanges: function() {
-    if(!this.get('remoteDataSource')) { // nothing to do in fixtures mode
+    if (!this.get('remoteDataSource')) {
+      // Nothing to do in fixtures mode.
       this.set('needsSave', NO);
       return;
     }
-    
-    if (this.get('saveMode') & CoreTasks.MODE_SAVING) {
-      throw 'Error saving data: Save already in progress.';
+
+    // Initialize the save delegate if necessary.
+    if (!this._saveDelegate) {
+      this._saveDelegate = CoreTasks.RemoteSaveDelegate.create({
+        saveSuccessCallback: this._saveSuccessCallback.bind(this),
+        saveFailureCallback: this._saveFailureCallback.bind(this)
+      });
+    }
+
+    if (this._saveDelegate.saveInProgress === YES) {
+      SC.Logger.error('Error saving data: Save already in progress.');
+      return;
     }
 
     var store = this.get('store'), key, recType, recStatus, records, len, i;
 
-    // Make our intentions known.
-    this.set('saveMode', CoreTasks.MODE_SAVING);
-
-    // Clear the arrays just in case.
-    this._dirtyUsers = [];
-    this._dirtyProjects = [];
-    this._dirtyTasks = [];
-    this._dirtyWatches = [];
-    this._dirtyComments = [];
-
     // Get the store keys of the system projects that we don't want to persist.
-    var allTasksProjectKey = this.getPath('allTasksProject.storeKey');
-    var unallocatedTasksProjectKey = this.getPath('unallocatedTasksProject.storeKey');
-    var unassignedTasksProjectKey = this.getPath('unassignedTasksProject.storeKey');
+    var allKey = this.getPath('allTasksProject.storeKey');
+    var unallocatedKey = this.getPath('unallocatedTasksProject.storeKey');
+    var unassignedKey = this.getPath('unassignedTasksProject.storeKey');
 
-    // Build separate arrays for all dirty records.
+    // Get all the dirty records from the store.
     var dirtyRecordKeys = store.changelog;
     len = dirtyRecordKeys ? dirtyRecordKeys.length : 0;
+
+    if (len === 0) {
+      // Apparently there was nothing to persist.
+      SC.Logger.debug('Nothing new to save.');
+      this.set('needsSave', NO);
+    }
+
+    var dirtyUsers = [];
+    var dirtyProjects = [];
+    var dirtyTasks = [];
+    var dirtyWatches = [];
+    var dirtyComments = [];
 
     for (i = 0; i < len; i++) {
       key = dirtyRecordKeys[i];
@@ -501,374 +504,120 @@ CoreTasks = SC.Object.create({
 
       switch (recType) {
         case CoreTasks.User:
-          this._dirtyUsers.pushObject(key);
+          dirtyUsers.push(key);
           break;
         case CoreTasks.Project:
-          if (key !== allTasksProjectKey && key !== unallocatedTasksProjectKey && key !== unassignedTasksProjectKey) {
-            this._dirtyProjects.pushObject(key);
+          if (key !== allKey && key !== unallocatedKey && key !== unassignedKey) {
+            dirtyProjects.push(key);
           }
+
           break;
         case CoreTasks.Task:
-          this._dirtyTasks.pushObject(key);
+          dirtyTasks.push(key);
           break;
         case CoreTasks.Watch:
-          this._dirtyWatches.pushObject(key);
+          dirtyWatches.push(key);
           break;
         case CoreTasks.Comment:
-          this._dirtyComments.pushObject(key);
+          // HA! Dirty comments...
+          dirtyComments.push(key);
           break;
       }
     }
 
-    // Now start by persisting all of the dirty users, but only if there are any.
-    len = this._dirtyUsers.length;
+    // Build the array of type objects used by the save delegate.
+    var types = [
+      {
+        type: CoreTasks.User,
+        order: 1,
+        storeKeys: dirtyUsers,
+        postSaveFunction: this._userSaved.bind(this),
+        abortOnError: YES
+      },
+      {
+        type: CoreTasks.Project,
+        order: 2,
+        storeKeys: dirtyProjects,
+        postSaveFunction: this._projectSaved.bind(this),
+        abortOnError: YES
+      },
+      {
+        type: CoreTasks.Task,
+        storeKeys: dirtyTasks,
+        postSaveFunction: this._taskSaved.bind(this)
+      },
+      { type: CoreTasks.Watch, storeKeys: dirtyWatches },
+      { type: CoreTasks.Comment, storeKeys: dirtyComments }
+    ];
 
-    if (len > 0) {
-      this._saveUsers();
-      return;
+    // Pass control to the save delegate.
+    this._saveDelegate.save(types);
+  },
+
+  _userSaved: function(user) {
+    if (!user) return;
+
+    SC.RunLoop.begin();
+
+    // Update the now-disassociated assigned tasks.
+    var tasks = user.get('disassociatedAssignedTasks');
+    if (tasks && SC.instanceOf(tasks, SC.RecordArray)) {
+      tasks.forEach(function(task) {
+        task.writeAttribute('assigneeId', user.readAttribute('id'));
+      });
     }
 
-    // If there were no dirty users, persist the dirty projects.
-    len = this._dirtyProjects.length;
-
-    if (len > 0) {
-      this._saveProjects();
-      return;
+    // Update the now-disassociated submitted tasks.
+    tasks = user.get('disassociatedSubmittedTasks');
+    if (tasks && SC.instanceOf(tasks, SC.RecordArray)) {
+      tasks.forEach(function(task) {
+        task.writeAttribute('submitterId', user.readAttribute('id'));
+      });
     }
 
-    // If there were no dirty users or projects, persist the dirty tasks.
-    len = this._dirtyTasks.length;
+    SC.RunLoop.end();
+  },
 
-    if (len > 0) {
-      this._saveTasks();
-      return; 
+  _projectSaved: function(project) {
+    if (!project) return;
+
+    // Update the now-disassociated tasks.
+    SC.RunLoop.begin();
+    var tasks = project.get('disassociatedTasks');
+
+    if (tasks && SC.instanceOf(tasks, SC.RecordArray)) {
+      tasks.forEach(function(task) {
+        task.writeAttribute('projectId', project.readAttribute('id'));
+      });
     }
 
-    // If there were no dirty users or projects or tasks, persist the dirty watches.
-    len = this._dirtyWatches.length;
+    SC.RunLoop.end();
+  },
 
-    if (len > 0) {
-      this._saveWatches();
-      return; 
+  _taskSaved: function(task) {
+    if (!task) return;
+
+    // Update the now-disassociated watches.
+    SC.RunLoop.begin();
+    var watches = task.get('disassociatedWatches');
+
+    if (watches && SC.instanceOf(watches, SC.RecordArray)) {
+      watches.forEach(function(watch) {
+        watch.writeAttribute('taskId', task.readAttribute('id'));
+      });
     }
 
-    // If there were no dirty users or projects or tasks or watches, persist the dirty comments.
-    len = this._dirtyComments.length;
+    SC.RunLoop.end();
+  },
 
-    if (len > 0) {
-      this._saveComments();
-      return; 
-    }
-
-    // Apparently there was nothing to persist, which shouldn't ever happen.
-    console.log('Nothing new to save.');
-    this.set('saveMode', CoreTasks.MODE_NOT_SAVING);
+  _saveSuccessCallback: function() {
     this.set('needsSave', NO);
   },
 
-  _saveUsers: function() {
-    if (this._dirtyUsers && this._dirtyUsers.length > 0) {
-      var userKey = this._dirtyUsers.objectAt(0);
-      var user = this.get('store').materializeRecord(userKey);
-      this.set('recordBeingSaved', user);
-      this.addObserver('recordBeingSaved.status', this, this._userSaveRecordDidChange);
-      if (user) user.commit(); 
-    } else {
-      // Start saving dirty projects.
-      this._saveProjects();
-    }
-  },
-
-  _saveProjects: function() {
-    if (this._dirtyProjects && this._dirtyProjects.length > 0) {
-      var projectKey = this._dirtyProjects.objectAt(0);
-      var project = this.get('store').materializeRecord(projectKey);
-      this.set('recordBeingSaved', project);
-      this.addObserver('recordBeingSaved.status', this, this._projectSaveRecordDidChange);
-      if (project) project.commit(); 
-    } else {
-      // Start saving dirty tasks.
-      this._saveTasks();
-    }
-  },
-
-  _saveTasks: function() {
-    if (this._dirtyTasks && this._dirtyTasks.length > 0) {
-      var taskKey = this._dirtyTasks.objectAt(0);
-      var task = this.get('store').materializeRecord(taskKey);
-      this.set('recordBeingSaved', task);
-      this.addObserver('recordBeingSaved.status', this, this._taskSaveRecordDidChange);
-      if (task) task.commit(); 
-    } else {
-      // Start saving dirty watches.
-      this._saveWatches();
-    }
-  },
-
-  _saveWatches: function() {
-    if (this._dirtyWatches && this._dirtyWatches.length > 0) {
-      var watchKey = this._dirtyWatches.objectAt(0);
-      var watch = this.get('store').materializeRecord(watchKey);
-      this.set('recordBeingSaved', watch);
-      this.addObserver('recordBeingSaved.status', this, this._watchSaveRecordDidChange);
-      if (watch) watch.commit(); 
-    } else {
-      // Start saving dirty comments.
-      this._saveComments();
-    }
-  },
-
-  _saveComments: function() {
-    if (this._dirtyComments && this._dirtyComments.length > 0) {
-      var commentKey = this._dirtyComments.objectAt(0);
-      var comment = this.get('store').materializeRecord(commentKey);
-      this.set('recordBeingSaved', comment);
-      this.addObserver('recordBeingSaved.status', this, this._commentSaveRecordDidChange);
-      if (comment) comment.commit(); 
-    } else {
-      // We're done.
-      this.removeObserver('recordBeingSaved.status', this, this._commentSaveRecordDidChange);
-      this._postSaveCleanup();
-    }
-  },
-
-  _userSaveRecordDidChange: function() {
-    var user = this.get('recordBeingSaved');
-
-    if (user && this.get('isSaving')) {
-      var status = user.get('status');
-
-      if (status & SC.Record.READY || status === SC.Record.DESTROYED_CLEAN) {
-        // Save was successful; remove the current observer.
-        this.removeObserver('recordBeingSaved.status', this, this._userSaveRecordDidChange);
-
-        SC.RunLoop.begin();
-
-        // Update the now-disassociated assigned tasks.
-        var tasks = user.get('disassociatedAssignedTasks');
-        if (tasks && SC.instanceOf(tasks, SC.RecordArray)) {
-          tasks.forEach(function(task) {
-            task.writeAttribute('assigneeId', user.readAttribute('id'));
-          });
-        }
-
-        // Update the now-disassociated submitted tasks.
-        tasks = user.get('disassociatedSubmittedTasks');
-        if (tasks && SC.instanceOf(tasks, SC.RecordArray)) {
-          tasks.forEach(function(task) {
-            task.writeAttribute('submitterId', user.readAttribute('id'));
-          });
-        }
-        
-        SC.RunLoop.end();
-
-        // Continue saving dirty users, if there are any left.
-        this._dirtyUsers.removeObject(user.get('storeKey'));
-        var nextUserKey = this._dirtyUsers.objectAt(0);
-
-        if (nextUserKey) {
-          // Add a new observer and commit.
-          var nextUser = this.get('store').materializeRecord(nextUserKey);
-          this.set('recordBeingSaved', nextUser);
-          this.addObserver('recordBeingSaved.status', this, this._userSaveRecordDidChange);
-          nextUser.commit();
-        } else {
-          // Safe to start committing projects.
-          this._saveProjects();
-        }
-
-      } else if (status & SC.Record.ERROR) {
-        // Save failed.
-        this.removeObserver('recordBeingSaved.status', this, this._userSaveRecordDidChange);
-        this._postSaveCleanup('user');
-      }
-    }
-  },
-
-  _projectSaveRecordDidChange: function() {
-    var project = this.get('recordBeingSaved');
-
-    if (project && this.get('isSaving')) {
-      var status = project.get('status');
-
-      if (status & SC.Record.READY || status === SC.Record.DESTROYED_CLEAN) {
-        // Save was successful; remove the current observer.
-        this.removeObserver('recordBeingSaved.status', this, this._projectSaveRecordDidChange);
-
-        // Update the now-disassociated tasks.
-        SC.RunLoop.begin();
-        var tasks = project.get('disassociatedTasks');
-
-        if (tasks && SC.instanceOf(tasks, SC.RecordArray)) {
-          tasks.forEach(function(task) {
-            task.writeAttribute('projectId', project.readAttribute('id'));
-          });
-        }
-
-        SC.RunLoop.end();
-
-        // Continue saving dirty projects, if there are any left.
-        this._dirtyProjects.removeObject(project.get('storeKey'));
-        var nextProjectKey = this._dirtyProjects.objectAt(0);
-
-        if (nextProjectKey) {
-          // Add a new observer and commit.
-          var nextProject = this.get('store').materializeRecord(nextProjectKey);
-          this.set('recordBeingSaved', nextProject);
-          this.addObserver('recordBeingSaved.status', this, this._projectSaveRecordDidChange);
-          nextProject.commit();
-        } else {
-          // Safe to start committing tasks.
-          this._saveTasks();
-        }
-
-      } else if (status & SC.Record.ERROR) {
-        // Save failed.
-        this.removeObserver('recordBeingSaved.status', this, this._projectSaveRecordDidChange);
-        this._postSaveCleanup('project');
-      }
-    }
-  },
-
-  _taskSaveRecordDidChange: function() {
-    var task = this.get('recordBeingSaved');
-
-    if (task && this.get('isSaving')) {
-      var status = task.get('status');
-
-      if (status & SC.Record.READY || status === SC.Record.DESTROYED_CLEAN) {
-        // Save was successful; remove the current observer.
-        this.removeObserver('recordBeingSaved.status', this, this._taskSaveRecordDidChange);
-
-        SC.RunLoop.begin();
-
-        // Update the now-disassociated watches.
-        var watches = task.get('disassociatedWatches');
-        // console.log('DEBUG: disassociated watches: ' + (watches? watches.getEach('id') : 'none'));
-        if (watches && SC.instanceOf(watches, SC.RecordArray)) {
-          watches.forEach(function(watch) {
-            watch.writeAttribute('taskId', task.readAttribute('id'));
-          });
-        }
-        
-        SC.RunLoop.end();
-
-        // Continue saving dirty tasks, if there are any left.
-        this._dirtyTasks.removeObject(task.get('storeKey'));
-        var nextTaskKey = this._dirtyTasks.objectAt(0);
-
-        if (nextTaskKey) {
-          // Add a new observer and commit.
-          var nextTask = this.get('store').materializeRecord(nextTaskKey);
-          this.set('recordBeingSaved', nextTask);
-          this.addObserver('recordBeingSaved.status', this, this._taskSaveRecordDidChange);
-          nextTask.commit();
-        } else {
-          // Safe to start committing wacthes.
-          this._saveWatches();
-        }
-
-      } else if (status & SC.Record.ERROR) {
-        // Save failed.
-        this.removeObserver('recordBeingSaved.status', this, this._taskSaveRecordDidChange);
-        this._postSaveCleanup('task');
-      }
-    }
-  },
-
-  _watchSaveRecordDidChange: function() {
-    var watch = this.get('recordBeingSaved');
-
-    if (watch && this.get('isSaving')) {
-      var status = watch.get('status');
-
-      if (status & SC.Record.READY || status === SC.Record.DESTROYED_CLEAN) {
-        // Save was successful; remove the current observer.
-        this.removeObserver('recordBeingSaved.status', this, this._watchSaveRecordDidChange);
-
-        // Continue saving dirty watches, if there are any left.
-        this._dirtyWatches.removeObject(watch.get('storeKey'));
-        var nextWatchKey = this._dirtyWatches.objectAt(0);
-
-        if (nextWatchKey) {
-          // Add a new observer and commit.
-          var nextWatch = this.get('store').materializeRecord(nextWatchKey);
-          this.set('recordBeingSaved', nextWatch);
-          this.addObserver('recordBeingSaved.status', this, this._watchSaveRecordDidChange);
-          nextWatch.commit();
-        } else {
-          // We're done.
-          this.removeObserver('recordBeingSaved.status', this, this._watchSaveRecordDidChange);
-          this._postSaveCleanup();
-        }
-
-      } else if (status & SC.Record.ERROR) {
-        // Save failed.
-        this.removeObserver('recordBeingSaved.status', this, this._watchSaveRecordDidChange);
-        this._postSaveCleanup('watch');
-      }
-    }
-  },
-  
-  _commentSaveRecordDidChange: function() {
-    var comment = this.get('recordBeingSaved');
-
-    if (comment && this.get('isSaving')) {
-      var status = comment.get('status');
-
-      if (status & SC.Record.READY || status === SC.Record.DESTROYED_CLEAN) {
-        // Save was successful; remove the current observer.
-        this.removeObserver('recordBeingSaved.status', this, this._commentSaveRecordDidChange);
-
-        // Continue saving dirty comments, if there are any left.
-        this._dirtyComments.removeObject(comment.get('storeKey'));
-        var nextCommentKey = this._dirtyComments.objectAt(0);
-
-        if (nextCommentKey) {
-          // Add a new observer and commit.
-          var nextComment = this.get('store').materializeRecord(nextCommentKey);
-          this.set('recordBeingSaved', nextComment);
-          this.addObserver('recordBeingSaved.status', this, this._commentSaveRecordDidChange);
-          nextComment.commit();
-        } else {
-          // We're done.
-          this.removeObserver('recordBeingSaved.status', this, this._commentSaveRecordDidChange);
-          this._postSaveCleanup();
-        }
-
-      } else if (status & SC.Record.ERROR) {
-        // Save failed.
-        this.removeObserver('recordBeingSaved.status', this, this._commentSaveRecordDidChange);
-        this._postSaveCleanup('comment');
-      }
-    }
-  },
-  
-  dataSaveErrorCallback: null,
-  /**
-   * Cleanup as save operation ends.
-   *
-   * @param {String} if provided, will throw an exception indicating error.
-   */
-  _postSaveCleanup: function(errorRecordType) {
-    
-    // Revert the record (if defined) to its pre-commit state.
-    var record = this.get('recordBeingSaved');
-    if (record && !record.revertState()) this.set('needsSave', NO);
-
-    this.set('recordBeingSaved', null);
-    this.set('saveMode', CoreTasks.MODE_NOT_SAVING);
-
-    this._dirtyUsers = [];
-    this._dirtyProjects = [];
-    this._dirtyTasks = [];
-    this._dirtyWatches = [];
-    this._dirtyComments = [];
-    
+  _saveFailureCallback: function(errorRecordType) {
     if (errorRecordType !== undefined) {
-      if(this.dataSaveErrorCallback) this.dataSaveErrorCallback(errorRecordType);
+      if (this.dataSaveErrorCallback) this.dataSaveErrorCallback(errorRecordType);
     }
-    
   },
 
   /**
@@ -905,11 +654,11 @@ CoreTasks = SC.Object.create({
    * @returns {String) return time with unit appended.
    */
   displayTime: function(timeString) {
-    if(SC.none(timeString)) return null;
+    if (SC.none(timeString)) return null;
     var lastChar = timeString[timeString.length-1];
     var displayTime = parseFloat(parseFloat(timeString, 10).toFixed(3));
     var idx = timeString.indexOf('-'); // see if time is a range
-    if(idx !== -1) { // a range
+    if (idx !== -1) { // a range
       var max = parseFloat(parseFloat(timeString.slice(idx+1), 10).toFixed(3));
       displayTime += ('-' + max);
     }
@@ -923,9 +672,9 @@ CoreTasks = SC.Object.create({
    * @returns {String) return time unit (if specified) or the empty string ''.
    */
   getTimeUnit: function(time) {
-    if(SC.none(time)) return '';
+    if (SC.none(time)) return '';
     var lastChar = time[time.length-1];
-    return (lastChar === 'd' || lastChar === 'h')? lastChar : '';
+    return (lastChar === 'd' || lastChar === 'h') ? lastChar : '';
   },
   
   /**
@@ -934,22 +683,204 @@ CoreTasks = SC.Object.create({
    * @param (String) time in days or hours
    */
   convertTimeToDays: function(time) {
-    if(SC.none(time)) return 0;
+    if (SC.none(time)) return 0;
     var lastChar = time[time.length-1];
     var ret;
-    if(lastChar === 'd') ret = time.slice(0, time.length-1); // already in days, remove time unit
-    else if(lastChar === 'h') ret = time.slice(0, time.length-1)/8; // asssumes 8h days, convert, remove time unit
+    if (lastChar === 'd') ret = time.slice(0, time.length-1); // already in days, remove time unit
+    else if (lastChar === 'h') ret = time.slice(0, time.length-1)/8; // asssumes 8h days, convert, remove time unit
     else ret = time; // already number of days
     return parseFloat(parseFloat(ret, 10).toFixed(3));
+  }
+
+});
+
+/**
+ * A delegate that handles the rather complicated business of saving dirty records to the remote
+ * server.
+ *
+ * Complicated because the order in which persistence occurs is important...
+ */
+CoreTasks.RemoteSaveDelegate = SC.Object.extend({
+
+  /**
+   * YES if save currently in progress.
+   */
+  saveInProgress: NO,
+
+  /**
+   * The record currently being saved.
+   */
+  recordBeingSaved: null,
+
+  /**
+   * The function to invoke if the entire save operation fails.
+   */
+  saveFailureCallback: null,
+
+  /**
+   * The function to invoke if the entire save operation succeeds.
+   */
+  saveSuccessCallback: null,
+
+  /*
+   * Internal machineary.
+   */
+  _store: null,
+
+  /**
+   * Initializes the save delegate.
+   */
+  init: function() {
+    this.reset();
   },
 
-  // Used to assign all newly-created records with a negative ID.
-  // Note: this counter may run out of integers if the client is left running for a long time.
-  // TODO: [SC] remove hack once SC.Query is able to parse negative numbers
-  MAX_RECORD_ID: 100000000,
-  _currentRecordId: 100000000
-  //_currentRecordId: -1
+  /**
+   * Saves a bunch of records to the server.
+   *
+   * Takes one argument (types); an array of objects that should look like the following...
+   *
+   * { order: <int>, storeKeys: [<int>], postSaveFunction: <function>, abortOnError: <bool> }
+   *
+   * order: The order in which the type should be saved (optional).
+   * storeKeys: An array of store keys of dirty records for the corresponding type.
+   * postSaveFunction: A function to invoke on successful save of each record (optional).
+   * abortOnError: Boolean indicating error strategy; YES means abort entire save operation
+   *   (optional).
+   */
+  save: function(types) {
+    SC.Logger.debug('Initiating save operation...');
 
+    if (SC.typeOf(types) !== SC.T_ARRAY) {
+      SC.Logger.warn('Error saving records: Invalid types array.');
+      return;
+    }
+
+    // Reset everything, just in case.
+    this.reset();
+
+    // This would be retarded, but you never know.
+    if (types.length === 0) return;
+
+    // Make our intentions known.
+    this.saveInProgress = YES;
+
+    // Sort the types array by order.
+    types.sort(function(a, b) {
+      var aHasOrder = (SC.typeOf(a.order) === SC.T_NUMBER);
+      var bHasOrder = (SC.typeOf(b.order) === SC.T_NUMBER);
+
+      if (!aHasOrder && !bHasOrder) {
+        return 0;
+      } else if (!aHasOrder && bHasOrder) {
+        return 1;
+      } else if (aHasOrder && !bHasOrder) {
+        return -1;
+      } else {
+        return (a.order - b.order);
+      }
+    });
+
+    // Kick shit off.
+    this._typesBeingSaved = types;
+    this._currentTypeBeingSaved = this._typesBeingSaved.shift();
+    this._getNextDirtyKeyAndCommit();
+  },
+
+  /**
+   * Resets the save delegate.
+   */
+  reset: function() {
+    this.recordBeingSaved;
+    this.saveInProgress = NO;
+    this.saveFailureCallback = null;
+    this._typesBeingSaved = null;
+    this._currentTypeBeingSaved = null;
+
+    if (!this._store) this._store = CoreTasks.get('store');
+  },
+
+  _recordBeingSavedDidChange: function() {
+    var rec = this.get('recordBeingSaved');
+
+    if (rec && this.saveInProgress === YES) {
+      var status = rec.get('status');
+
+      if (status & SC.Record.READY || status === SC.Record.DESTROYED_CLEAN) {
+        this.removeObserver('recordBeingSaved.status', this, this._recordBeingSavedDidChange);
+
+        // Execute post-save function.
+        var func = this._currentTypeBeingSaved.postSaveFunction;
+        if (SC.typeOf(func) === SC.T_FUNCTION) func(rec);
+
+        // Continue saving dirty records, if there are any left.
+        this._getNextDirtyKeyAndCommit();
+
+      } else if (status & SC.Record.ERROR) {
+        this.removeObserver('recordBeingSaved.status', this, this._recordBeingSavedDidChange);
+
+        // Save failed; revert record to pre-commit state.
+        SC.Logger.error('Error saving record: %@'.fmt(rec));
+        if (rec.revertState) rec.revertState();
+
+        // Abort if requested.
+        if (this._currentTypeBeingSaved.abortOnError === YES) {
+          SC.Logger.error('Aborting save operation.');
+          this.reset();
+
+          if (SC.typeOf(this.saveFailureCallback) === SC.T_FUNCTION) {
+            this.saveFailureCallback(this._currentTypeBeingSaved.type);
+          }
+
+        } else {
+          this._getNextDirtyKeyAndCommit();
+        }
+      }
+    }
+  },
+
+  _getNextDirtyKeyAndCommit: function() {
+    var nextDirtyKey = this._currentTypeBeingSaved.storeKeys.shift();
+
+    if (nextDirtyKey) {
+      // Add a new observer and commit.
+      var nextDirtyRec = this._store.materializeRecord(nextDirtyKey);
+
+      if (nextDirtyRec && nextDirtyRec.commit) {
+        this.set('recordBeingSaved', nextDirtyRec);
+        this.addObserver('recordBeingSaved.status', this, this._recordBeingSavedDidChange);
+        nextDirtyRec.commit();
+      } else {
+        // Something weird happened.
+        SC.Logger.error('Error saving record: Failed to materialize from store key.');
+
+        if (this._currentTypeBeingSaved.abortOnError === YES) {
+          SC.Logger.error('Aborting save operation.');
+          this.reset();
+
+          if (SC.typeOf(this.saveFailureCallback) === SC.T_FUNCTION) {
+            this.saveFailureCallback(this._currentTypeBeingSaved.type);
+          }
+
+        } else {
+          this._getNextDirtyKeyAndCommit();
+        }
+      }
+
+    } else {
+      // Done with the current record type; move on to the next one (if there is a next one).
+      this._currentTypeBeingSaved = this._typesBeingSaved.shift();
+
+      if (!this._currentTypeBeingSaved) {
+        // We're done; everyhting saved.
+        SC.Logger.debug('Save completed successfully.');
+         this.reset();
+        if (SC.typeOf(this.saveSuccessCallback) === SC.T_FUNCTION) this.saveSuccessCallback();
+      } else {
+        // Not done yet.
+        this._getNextDirtyKeyAndCommit();
+      }
+    }
+  }
 });
 
 CoreTasks.Store = SC.Store.extend({
@@ -976,14 +907,12 @@ CoreTasks.Store = SC.Store.extend({
   },
   
   createRecord: function(recordType, dataHash, id) {
-    // console.log('DEBUG: createRecord(): recordType=' + recordType + ', dataHash=' + JSON.stringify(dataHash));
     var ret = sc_super();
     CoreTasks.set('needsSave', YES);
     return ret;
   },
     
   recordDidChange: function(recordType, id, storeKey, key) {
-    // console.log('DEBUG: recordDidChange(): storeKey=' + storeKey + ', key=' + key);
     var ret = sc_super(); // MUST COME FIRST
       
     if (storeKey === undefined) storeKey = recordType.storeKeyFor(id);
@@ -991,7 +920,6 @@ CoreTasks.Store = SC.Store.extend({
       
     if (status & K.RECORD_DIRTY || status & K.READY_NEW || 
         status & K.DESTROYED_DIRTY) {
-      // console.log('got a dirty record');
       CoreTasks.set('needsSave', YES);
     }
 
@@ -999,7 +927,6 @@ CoreTasks.Store = SC.Store.extend({
   },
     
   destroyRecord: function(recordType, id, storeKey) {
-    // console.log('DEBUG: destroyRecord(): storeKey=' + storeKey);
     var ret = sc_super();
     CoreTasks.set('needsSave', YES);
     return ret;
