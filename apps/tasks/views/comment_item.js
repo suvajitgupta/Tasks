@@ -48,9 +48,12 @@ Tasks.CommentItemView = SC.View.extend(SC.StaticLayout, SC.Control,
     }
   }),
   
+  contentPropertyDidChange: function(target, key) {
+    if (this.owner && this.owner.updateHeight) this.owner.updateHeight();
+  },
+  
   render: function(context, firstTime) {
     
-    if (this.owner && this.owner.updateHeight) this.owner.updateHeight();
     var content = this.get('content');
     // console.log('DEBUG: Comment render(' + firstTime + '): ' + content.get('description'));
     if(!content) return;
