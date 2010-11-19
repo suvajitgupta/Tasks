@@ -60,6 +60,10 @@ Tasks.importDataController = SC.ObjectController.create(
           var commentLine = line.slice(1);
           // console.log('Commment:\t' + commentLine);
         }
+        else if (line.match(/^\[/)) { // a User
+          var userHash = CoreTasks.User.parse(line);
+          this._createUserFromHash(userHash);
+        }
         else if (line.match(/^[\^\-v][ ]/)) { // a Task
 
           var taskHash = CoreTasks.Task.parse(line);
@@ -71,7 +75,7 @@ Tasks.importDataController = SC.ObjectController.create(
               taskHash.assigneeId = assigneeUser.get('id');
             }
             else if (createMissingUsers) {
-              assigneeUser = this._createUser(taskHash.assigneeId);
+              assigneeUser = this._createUserFromLoginName(taskHash.assigneeId);
               if(assigneeUser) taskHash.assigneeId = assigneeUser.get('id');
             }
             else {
@@ -86,7 +90,7 @@ Tasks.importDataController = SC.ObjectController.create(
               taskHash.submitterId = submitterUser.get('id');
             }
             else if (createMissingUsers) {
-              submitterUser = this._createUser(taskHash.submitterId);
+              submitterUser = this._createUserFromLoginName(taskHash.submitterId);
               if(submitterUser) taskHash.submitterId = submitterUser.get('id');
             }
             else {
@@ -171,12 +175,22 @@ Tasks.importDataController = SC.ObjectController.create(
       
     },
     
-    _createUser: function(name) {
-      // console.log('DEBUG: Creating new user: ' + name);
-      SC.RunLoop.begin();
-      var userHash = SC.merge(SC.clone(CoreTasks.User.NEW_USER_HASH), { 'name': name, 'loginName': name });
-      var user = CoreTasks.createRecord(CoreTasks.User, userHash);
-      SC.RunLoop.end();
+    _createUserFromLoginName: function(loginName) {
+      var userHash = SC.merge(SC.clone(CoreTasks.User.NEW_USER_HASH), { 'name': loginName, 'loginName': loginName });
+      return this._createUserFromHash(userHash);
+    },
+    
+    _createUserFromHash: function(userHash) {
+      // console.log('DEBUG: Creating new user: ' + userHash);
+      var user = CoreTasks.getUserByLoginName(userHash.loginName);
+      if(user) { // existing user
+        console.info('Existent user: ' + userHash.loginName);
+      }
+      else { // create user
+        SC.RunLoop.begin();
+        user = CoreTasks.createRecord(CoreTasks.User, userHash);
+        SC.RunLoop.end();
+      }
       return user;
     }
     

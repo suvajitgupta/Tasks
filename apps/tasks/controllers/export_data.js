@@ -280,6 +280,20 @@ Tasks.exportDataController = SC.ObjectController.create(
     var ret = '';
     var that = this;
     
+    // First export users
+    if(format === 'Text') {
+      ret += '#================================================================================\n';
+      ret += '# ' + "_Has".loc() + Tasks.usersController.getPath('content.length') + "_users".loc() + '\n';
+      ret += '#================================================================================\n\n';
+    }
+    else {
+      ret += '<h1>' + "_Has".loc() + Tasks.usersController.getPath('content.length') + "_users".loc() + '</h1>\n';
+    }
+    Tasks.usersController.forEach(function(user){
+      ret += user.exportData(format);
+    }, Tasks.usersController);
+    ret += '\n\n';
+    
     // First export unallocated tasks
     Tasks.projectsController.forEach(function(project){
       if(project === CoreTasks.get('unallocatedTasksProject')) {

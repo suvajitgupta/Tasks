@@ -114,10 +114,15 @@ CoreTasks.User = CoreTasks.Record.extend({
   /**
    * Export a user's attributes.
    *
+   * @param {String} format in which data is to be exported.
    * @returns {String) A string with the user's data exported in it.
    */
-  exportData: function() {
-    return "{ name: '" + this.get('name') + "', loginName: '" + this.get('loginName') + "', role: '" + this.get('role') + "', password: '' }\n";
+  exportData: function(format) {
+    var ret = '';
+    var email = this.get('email');
+    if(format === 'Text') ret += ('[' + this.get('loginName') + '] (' + this.get('name') + ') {' + this.get('role').replace('_', '') + '}' + (email? ' <' + email  + '>': '') + '\n');
+    else ret += ('<p>&nbsp;<b>' + this.displayName() + '</b>&nbsp;<i>' + this.get('role').replace('_', '') + '</i>' + (email? '&nbsp;<u>' + email  + '</u>': '') + '</p>');
+    return ret + '\n';
   },
   
   /**
@@ -248,6 +253,45 @@ CoreTasks.User.mixin(/** @scope CoreTasks.User */ {
 
     // Send the request off to the server.
     CoreTasks.executeTransientGet(CoreTasks.User.resourcePath, undefined, params);
+  },
+  
+  /**
+   * Parse a line of text and extract parameters from it.
+   *
+   * @param {String} string to extract parameters from.
+   * @returns {Object} Hash of parsed parameters.
+   */
+  parse: function(line) {
+    
+    // extract user login name
+    var userLoginName = null;
+    var userLoginNameMatches = /\[(.*)\]/.exec(line);
+    if(userLoginNameMatches) userLoginName = userLoginNameMatches[1];
+
+    // extract user name
+    var userName = null;
+    var userNameMatches = /\((.*)\)/.exec(line);
+    if(userNameMatches) userName = userNameMatches[1];
+
+    // extract user role
+    var userRole = null;
+    var userRoleMatches = /{(.*)}/.exec(line);
+    if(userRoleMatches) userRole = userRoleMatches[1];
+
+    // extract user email, if it exists
+    var userEmail = null;
+    var userEmailMatches = /<(.*)>/.exec(line);
+    if(userEmailMatches) userEmail = userEmailMatches[1];
+
+    var ret = {
+      loginName: userLoginName,
+      name: userName,
+      role: '_' + userRole,
+      email: userEmail
+    };
+    // console.log('DEBUG: User hash = ' + JSON.stringify(ret));
+    return ret;
+    
   }
 
 });

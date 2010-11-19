@@ -30,19 +30,19 @@ Tasks.importDataPage = SC.Page.create({
       
       instructions: SC.LabelView.design({
         escapeHTML: NO,
-        layout: { top: 10, left: 10, height: 40, width: 250 },
+        layout: { top: 12, left: 10, height: 40, width: 250 },
         value: "_ImportInstructions:".loc()
       }),
       
       sampleFormat: SC.LabelView.design({
         escapeHTML: NO,
-        layout: { top: 10, left: 260, height: 45, width: 425 },
+        layout: { top: 7, left: 260, height: 55, width: 425 },
         classNames: [ 'onscreen-help'],
         value: Tasks.softwareMode? "_FormatOnscreenHelpSoftwareMode".loc() : "_FormatOnscreenHelpTodoMode".loc()
       }),
 
       dataEntryField: SC.TextFieldView.design({
-        layout: { top: 55, left: 10, right: 10, bottom: 40 },
+        layout: { top: 60, left: 10, right: 10, bottom: 40 },
         maxLength: 1000000,
         isTextArea: YES,
         valueBinding: 'Tasks.importDataController.importData'
