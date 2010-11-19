@@ -126,6 +126,7 @@ Tasks.TaskEditorView = SC.View.extend(
     editor.setPath('updatedAtLabel.value', task.get('displayUpdatedAt'));
   },
   _postEditing: function() {
+    Tasks.commentsController.set('selection', '');
     var task = this.get('task');
     // console.log('DEBUG: postEditing task: ' + task.get('name'));
     var editor = this.get('editor');
@@ -479,6 +480,7 @@ Tasks.TaskEditorView = SC.View.extend(
            contentView: SC.StackedView.design({
             contentBinding: 'Tasks.commentsController.arrangedObjects',
             classNames: ['comments-list'],
+            selectionBinding: 'Tasks.commentsController.selection',
             exampleView: Tasks.CommentItemView
           })
         })

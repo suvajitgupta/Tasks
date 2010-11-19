@@ -114,6 +114,10 @@
   -webkit-box-shadow: 0 1px 3px #777;
 }
 
+.comments-list .sel .comment-description {
+  background: #9CF !important;
+}
+
 .delete-comment-icon {
   background: static_url('images/delete-comment.png') no-repeat !important;
   z-index: 100 !important;

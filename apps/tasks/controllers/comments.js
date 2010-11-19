@@ -14,6 +14,8 @@
 Tasks.commentsController = SC.ArrayController.create(
   /** @scope Tasks.commentsController.prototype */ {
     
+    allowsMultipleSelection: NO,
+
     tasksSelectionBinding: SC.Binding.oneWay('Tasks.tasksController.selection'),
     _tasksSelectionDidChange: function() {
       var len = this.getPath('tasksSelection.length');
