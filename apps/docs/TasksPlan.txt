@@ -171,7 +171,7 @@ v Add hotkeys for common operations (Add/Duplicate Tasks) [EG] <SG> $Feature @Do
 | Auto save
 | Email notifications
 | Percent or Threshold (in days) for Assignee loading determination
-†- Support Application settings/state persistence from last login saved using HTML5 storage [SG] <MB> $Feature
+- Support Application settings/state persistence from last login saved using HTML5 storage [SG] <MB> $Feature
 - Support offline mode with synchronization after network reconnection using Hub.js [SG] <SE> $Feature
 - Support undo/redo using Hub.js [SG] <SE> $Feature
 
@@ -193,8 +193,7 @@ Server/Tools @Active
 - Handle network or Server unavailability gracefully and provide appropriate diagnostics to the user [SG] <SE> @Done %Passed
 - Support Tasks database cleanup to remove soft-deleted records and handle pointers to non-existent records [SG] @Done %Passed
 ^ Support github "issues" as a persistence Server (store additional data from Tasks as github issues tags) [JH2] <SG> $Feature @Active
-- Integrate Tasks GUI with Jira Server [SG] <UA> $Feature
-
+ool
 Styling/Hardening @Active
 ^ Style via CSS, embed catchy/sprited images [MG] <SG> $Feature @Done %Passed
 ^ Re-style to match "dark" Greenhouse look & feel [SG] $Feature <MG> @Done
@@ -226,7 +225,7 @@ Installation/Deployment @Active
 - Support customizable "Software" vs. "Todo" mode (in latter case, Task Type & Validation are not available via GUI) [SG] $Feature @Done %Passed
 - Support customizable default "AutoSave" and "Notifications" settings via actions menu [SG] $Feature @Done %Passed
 - Support customizable setting for use of local data store, turned off by default for touch devices [SG] @Done $Feature %Passed
- Provide SproutCore doctool-style comments [SG]
+- Provide SproutCore doctool-style comments [SG]
 
 Touch Interfaces
 - Develop iPad client with swiveling Master/Detail view <JH2> [SG] $Feature @Done
