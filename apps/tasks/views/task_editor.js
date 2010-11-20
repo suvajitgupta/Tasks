@@ -471,7 +471,7 @@ Tasks.TaskEditorView = SC.View.extend(
        classNames: ['comments-view'],
        childViews: 'commentButton commentsList'.w(),
        commentButton: SC.ButtonView.design({
-         layout: { top: 5, centerX: 0, height: 24, width: 80 },
+         layout: { top: 5, centerX: 0, height: 24, width: 90 },
          title: "_Comment".loc(),
          target: 'Tasks.mainPage.taskEditor',
          action: 'comment',
