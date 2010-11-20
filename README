@@ -8,6 +8,9 @@ cd tasks/frameworks
 git clone git://github.com/suvajitgupta/sproutcore.git
 git clone git://github.com/suvajitgupta/SCUI.git scui
 git clone git://github.com/etgryphon/sai.git
+cd sai
+git checkout -b tasks origin/gd/AutoScale
+cd ../
 git clone git://github.com/etgryphon/sproutcore-uds.git scuds
 cd scuds
 git checkout -b tasks origin/se/tasks

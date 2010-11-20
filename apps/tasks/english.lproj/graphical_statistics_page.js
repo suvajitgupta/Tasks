@@ -25,17 +25,15 @@ Tasks.graphicalStatisticsPage = SC.Page.create({
       isVisible: NO,
       typeStatisticsChart: Sai.BarChartView.design({
         layout: { top: 0, left: 0, width: 200, bottom: 0 },
-        // FIXME: [SG/GD] make Sai work with different colors for different bars
-        // dataAttrs: { horizontal: YES, barWidth: 25, colors: ['red', 'blue', 'green'] }
-        dataAttrs: { horizontal: NO, barWidth: 25, color: 'green' }
+        dataAttrs: { horizontal: NO, barWidth: 25, colors: ['yellow', 'red', 'gray'] }
       }),
       priorityStatisticsChart: Sai.BarChartView.design({
         layout: { top: 0, left: 200, width: 200, bottom: 0 },
-        dataAttrs: { horizontal: NO, barWidth: 25, color: Tasks.AXIS_COLOR }
+        dataAttrs: { horizontal: NO, barWidth: 25, colors: ['black', 'gray', 'darkGray'] }
       }),
       statusStatisticsChart: Sai.BarChartView.design({
         layout: { top: 0, left: 400, width: 220, bottom: 0 },
-        dataAttrs: { horizontal: NO, barWidth: 25, color: 'blue' }
+        dataAttrs: { horizontal: NO, barWidth: 25, colors: ['black', 'blue', 'green', 'red'] }
       })
     }),
     
@@ -43,7 +41,7 @@ Tasks.graphicalStatisticsPage = SC.Page.create({
       childViews: 'loadingStatisticsChart'.w(),
       isVisible: NO,
       loadingStatisticsChart: Sai.BarChartView.design({
-        dataAttrs: { horizontal: YES, barWidth: 20, color: 'red' } 
+        dataAttrs: { horizontal: YES, barWidth: 20, colors: ['gray', 'green', 'blue', 'red'] } 
       })
     }),
     
