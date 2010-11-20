@@ -198,6 +198,7 @@ Tasks.tasksController = SC.TreeController.create(
         var developmentStatusWithValidation = task.get('developmentStatusWithValidation');
         if(developmentStatusWithValidation !== value) task.set('developmentStatusWithValidation', value);
       });
+      if(CoreTasks.get('autoSave')) Tasks.saveData();
     } else {
       var firstDevelopmentStatusWithValidation = null;
       sel.forEach(function(task) {
