@@ -25,7 +25,7 @@ Tasks.graphicalStatisticsPage = SC.Page.create({
       isVisible: NO,
       typeStatisticsChart: Sai.BarChartView.design({
         layout: { top: 0, left: 0, width: 200, bottom: 0 },
-        dataAttrs: { horizontal: NO, barWidth: 25, colors: ['yellow', 'red', 'gray'] }
+        dataAttrs: { horizontal: NO, barWidth: 25, colors: ['gold', 'red', 'gray'] }
       }),
       priorityStatisticsChart: Sai.BarChartView.design({
         layout: { top: 0, left: 200, width: 200, bottom: 0 },
