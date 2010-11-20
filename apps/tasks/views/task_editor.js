@@ -280,8 +280,11 @@ Tasks.TaskEditorView = SC.View.extend(
                                               var tasksList = Tasks.getPath('tasksController.arrangedObjects');
                                               if(!tasksList) return false;
                                               var idx = tasksList.indexOf(task);
-                                              if(idx === 1) return false;
-                                              return true;
+                                              var indexes = tasksList.contentGroupIndexes(null, tasksList);
+                                              for (--idx; idx >= 0; idx--) {
+                                                if (!indexes.contains(idx)) return true;
+                                              }
+                                              return false;
                                             }).from('Tasks*tasksController.selection')
    }),
    nextButton: SC.View.design(SCUI.SimpleButton, {
