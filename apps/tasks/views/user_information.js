@@ -95,7 +95,7 @@ Tasks.UserInformationView = SC.View.extend(
       valueBinding: SC.binding('*content.email', this).toLocale(),
       keyUp: function(evt) {
         var email = Tasks.userController.get('email');
-        if(email && !email.match(/.+@.+\...+/)) Tasks.userController.displayEmailError();
+        if(email && !CoreTasks.User.isValidEmail(email)) Tasks.userController.displayEmailError();
         else Tasks.userController.clearEmailError();
         sc_super();
       }

@@ -12,6 +12,13 @@ CoreTasks.USER_ROLE_DEVELOPER = '_Developer'; // default
 CoreTasks.USER_ROLE_TESTER = '_Tester';
 CoreTasks.USER_ROLE_GUEST = '_Guest';
 
+CoreTasks.userRolesAllowed = [
+  CoreTasks.USER_ROLE_MANAGER,
+  CoreTasks.USER_ROLE_DEVELOPER,
+  CoreTasks.USER_ROLE_TESTER,
+  CoreTasks.USER_ROLE_GUEST
+];
+
 // Loading:
 CoreTasks.USER_NOT_LOADED = 1;
 CoreTasks.USER_UNDER_LOADED = 2;
@@ -58,12 +65,7 @@ CoreTasks.User = CoreTasks.Record.extend({
   role: SC.Record.attr(String, {
     isRequired: YES,
     defaultValue: CoreTasks.USER_ROLE_DEVELOPER,
-    allowed: [
-      CoreTasks.USER_ROLE_MANAGER, 
-      CoreTasks.USER_ROLE_DEVELOPER,
-      CoreTasks.USER_ROLE_TESTER,
-      CoreTasks.USER_ROLE_GUEST
-    ]
+    allowed: CoreTasks.userRolesAllowed
   }),
   
   /**
@@ -239,6 +241,10 @@ CoreTasks.User = CoreTasks.Record.extend({
 CoreTasks.User.mixin(/** @scope CoreTasks.User */ {
 
   resourcePath: 'user',
+  
+  isValidEmail: function(email) {
+    return email.match(/.+@.+\...+/);
+  },
 
   /**
    * Authenticates a user given a password hash.
@@ -266,27 +272,53 @@ CoreTasks.User.mixin(/** @scope CoreTasks.User */ {
     // extract user login name
     var userLoginName = null;
     var userLoginNameMatches = /\[(.*)\]/.exec(line);
-    if(userLoginNameMatches) userLoginName = userLoginNameMatches[1];
+    if(userLoginNameMatches) {
+      userLoginName = userLoginNameMatches[1];
+    }
+    else {
+      console.warn('User Parsing Error - login name required');
+    }
 
     // extract user name
     var userName = null;
     var userNameMatches = /\((.*)\)/.exec(line);
-    if(userNameMatches) userName = userNameMatches[1];
+    if(userNameMatches) {
+      userName = userNameMatches[1];
+    }
+    else {
+      console.warn('User Parsing Error - login name required');
+    }
 
     // extract user role
-    var userRole = null;
+    var userRole = CoreTasks.USER_ROLE_DEVELOPER;
     var userRoleMatches = /{(.*)}/.exec(line);
-    if(userRoleMatches) userRole = userRoleMatches[1];
+    if(userRoleMatches) {
+      var role = userRoleMatches[1];
+      if(CoreTasks.userRolesAllowed.indexOf('_' + role) === -1) {
+        console.warn('User Parsing Error - illegal role: ' + role);
+      }
+      else {
+        userRole = '_' + role;
+      }
+    }
 
     // extract user email, if it exists
     var userEmail = null;
     var userEmailMatches = /<(.*)>/.exec(line);
-    if(userEmailMatches) userEmail = userEmailMatches[1];
+    if(userEmailMatches) {
+      var email = userEmailMatches[1];
+      if(CoreTasks.User.isValidEmail(email)) {
+        userEmail = email;
+      }
+      else {
+        console.warn('User Parsing Error - invalid email: ' + email);
+      }
+    }
 
     var ret = {
       loginName: userLoginName,
       name: userName,
-      role: '_' + userRole,
+      role: userRole,
       email: userEmail
     };
     // console.log('DEBUG: User hash = ' + JSON.stringify(ret));
