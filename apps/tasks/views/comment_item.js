@@ -97,7 +97,7 @@ Tasks.CommentItemView = SC.View.extend(SC.StaticLayout, SC.Control,
     var commentHeader = '';
     if(user) commentHeader += (user.get('displayName') + '&nbsp;');
     var createdAt = content.get('createdAt');
-    if(createdAt) commentHeader += ('<span class="date-time">' + createdAt.toFormattedString(CoreTasks.TIME_DATE_FORMAT) + '</span>');
+    if(createdAt) commentHeader += ('<span class="date-time">' + "_commented".loc() + Tasks.getTimeAgo(createdAt) + '</span>');
     this.setPath('commentHeaderLabel.value', commentHeader);
     this.setPath('descriptionLabel.value', content.get('description'));//.replace(/\n/g, '<br>'));
     this.renderChildViews(context, firstTime);

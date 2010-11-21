@@ -50,6 +50,24 @@ Tasks = SC.Object.create(SC.Statechart,
     var bName = b.get('name');
     if(aName === bName) return 0;
     else return aName > bName? 1 : -1;
+  },
+  
+  getTimeAgo: function(then) {
+    var time, now = SC.DateTime.create();
+    var minutes = (now.get('milliseconds') - then.get('milliseconds')) / 60000;
+    if(minutes < 1) time = "_justNow".loc();
+    else if(minutes < 60) time = (Math.round(minutes) + "_minutesAgo".loc());
+    else {
+      var hours = minutes / 60;
+      if(hours < 2) time = "_oneHourAgo".loc();
+      else if(hours < 24) time = (Math.round(hours) + "_hoursAgo".loc());
+      else {
+        var days = hours / 24;
+        if(days < 2) time = "_yesterday".loc();
+        else time = (Math.round(days) + "_daysAgo".loc());
+      }
+    }
+    return time;
   }
     
 });

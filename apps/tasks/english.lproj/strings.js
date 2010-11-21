@@ -205,16 +205,23 @@ SC.stringsFor('English', {
   "_Watched:": "Watched:",
   "_Yes": "Yes",
   "_assignees": " assignees & ",
+  "_commented": "commented ",
+  "_daysAgo": " days ago",
   "_description": "description",
   "_displayed": " displayed",
   "_finished": " tasks finished",
+  "_hoursAgo": " hours ago",
+  "_justNow": "just now",
   "_left": " tasks left",
+  "_minutesAgo": " minutes ago",
+  "_oneHourAgo": " 1 hour ago",
   "_projects": " projects & ",
   "_redFlags": " red flags",
   "_selected": " selected",
   "_tasks": " tasks",
   "_total": ", total ",
   "_users": " users",
-  "_with": " with "
-
+  "_with": " with ",
+  "_yesterday": "yesterday"
+  
 });
