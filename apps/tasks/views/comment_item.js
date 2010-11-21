@@ -15,8 +15,27 @@ sc_require('mixins/localized_label');
 Tasks.CommentItemView = SC.View.extend(SC.StaticLayout, SC.Control,
 /** @scope Tasks.CommentItemView.prototype */ {
   
+  displayProperties: 'showHover'.w(),
+  showHover: SC.platform.touch,
+  
+  /** @private
+    Add explicit hover class - using this to avoid problems on iPad.
+  */  
+  mouseEntered: function(event) {
+    this.set('showHover', YES);
+    return YES;
+  },
+
+  /** @private
+    Remove explicit hover class - using this to avoid problems on iPad.
+  */  
+  mouseExited: function(event) {
+    this.set('showHover', NO);
+    return YES;
+  },
+
   useStaticLayout: YES,
-  childViews: 'commentHeaderLabel deleteButton descriptionLabel'.w(),
+  childViews: 'commentHeaderLabel editButton deleteButton descriptionLabel'.w(),
   
   commentHeaderLabel: SC.LabelView.design({
     layout: { left: 0, right: 0, top: 0, height: 17 },
@@ -25,8 +44,18 @@ Tasks.CommentItemView = SC.View.extend(SC.StaticLayout, SC.Control,
     escapeHTML: NO
   }),
   
+  editButton: SC.View.design(SCUI.SimpleButton, {
+    layout: { right: 35, width: 16, top: 2, height: 16 },
+    classNames: ['edit-comment-icon'],
+    toolTip: "_EditComment".loc(),
+    mouseDown: function() {
+      var description = this.getPath('parentView.descriptionLabel');
+      description.beginEditing();
+    }
+  }),
+  
   deleteButton: SC.View.design(SCUI.SimpleButton, {
-    layout: { right: 0, width: 16, top: 2, height: 16 },
+    layout: { right: 5, width: 16, top: 2, height: 16 },
     classNames: ['delete-comment-icon'],
     toolTip: "_DeleteComment".loc(),
     mouseDown: function() {
@@ -59,7 +88,9 @@ Tasks.CommentItemView = SC.View.extend(SC.StaticLayout, SC.Control,
     if(!content) return;
     
     var isCurrentUserComment = content.get('userId') === CoreTasks.getPath('currentUser.id');
-    this.setPath('deleteButton.isVisible', isCurrentUserComment);
+    var showHover = this.get('showHover');
+    this.setPath('editButton.isVisible', showHover && isCurrentUserComment);
+    this.setPath('deleteButton.isVisible', showHover && isCurrentUserComment);
     this.setPath('descriptionLabel.isEditable', isCurrentUserComment);
     
     var user = CoreTasks.store.find(CoreTasks.User, content.get('userId'));

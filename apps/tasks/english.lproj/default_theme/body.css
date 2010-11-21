@@ -66,9 +66,8 @@ body.sc-theme,
 }
 
 .date-time {
-  color: #444 !important;
-  font-size: 11px !important;
-  font-style: italic !important;
+  color: #555 !important;
+  font-size: 10px !important;
   font-weight: normal !important;
 }
 

@@ -68,6 +68,7 @@ SC.stringsFor('English', {
   "_DoneEffortRangeWarning": " (completed task shouldn't have an effort range)",
   "_DontCare": "Don't Care",
   "_Duplicate": "Duplicate",
+  "_EditComment": "Edit the comment below",
   "_Effort:": "Effort:",
   "_EffortOnscreenHelp": "May be unspecified, a decimal like '0.25',<br> or a range like '2-3'; in units 'd' or 'h'",
   "_EffortSpecified:": "Effort Specified:",
