@@ -101,6 +101,7 @@
 }
 
 .comments-list .comment-description {
+  font-family: "Lucida Sans","Lucida Grande",Verdana,Arial,sans-serif !important;
   min-height: 30px !important;
   line-height: 1 !important;
   background: #FFC !important;
