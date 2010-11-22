@@ -202,19 +202,16 @@ Tasks.TaskEditorView = SC.View.extend(
    }
    var pane = SC.PickerPane.create({
      layout: { width: 272, height: 100 },
-     contentView: SC.View.extend({
-       childViews: 'scrollView'.w(),
-       scrollView: SC.ScrollView.design({
-         contentView: SC.ListView.design({
-           contentValueKey: 'displayName',
-           content: this._watchers.sort(Tasks.nameAlphaSort),
-           localize: YES,
-           rowHeight: 24,
-           hasContentIcon: YES,
-           contentIconKey: 'icon',
-           isSelectable: NO,
-           isEditable: NO
-         })
+     contentView: SC.ScrollView.extend({
+       contentView: SC.ListView.design({
+         contentValueKey: 'displayName',
+         content: this._watchers.sort(Tasks.nameAlphaSort),
+         localize: YES,
+         rowHeight: 24,
+         hasContentIcon: YES,
+         contentIconKey: 'icon',
+         isSelectable: NO,
+         isEditable: NO
        })
      })
    });
