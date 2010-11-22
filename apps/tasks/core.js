@@ -64,7 +64,8 @@ Tasks = SC.Object.create(SC.Statechart,
       else {
         var days = hours / 24;
         if(days < 2) time = "_yesterday".loc();
-        else time = (Math.round(days) + "_daysAgo".loc());
+        else if (days < 30) time = (Math.round(days) + "_daysAgo".loc());
+        else time = then.toFormattedString(CoreTasks.DATE_FORMAT);
       }
     }
     return time;
