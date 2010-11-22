@@ -221,7 +221,6 @@ Tasks.TaskEditorView = SC.View.extend(
    pane.popup(this.getPath('editor.watchersButton'), SC.PICKER_POINTER);
  },
  
- // FIXME: [SG/JL] show "M of N" tasks in top bar to provide sense of position
  previousTask: function() {
    this._postEditing();
    SC.RunLoop.begin();

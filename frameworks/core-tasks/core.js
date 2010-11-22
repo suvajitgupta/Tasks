@@ -19,7 +19,6 @@ CoreTasks = SC.Object.create({
    * caching.
    */
   useLocalStorage: true,
-  // TODO: [SG/SE] write optimized local storage adapter that operates on single records
   
   init: function() {
     // Don't use localStorage for fixtures or iPad
