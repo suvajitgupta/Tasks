@@ -12,9 +12,10 @@ sc_require('mixins/localized_label');
   @author Suvajit Gupta
 */
 
-Tasks.CommentItemView = SC.View.extend(SC.StaticLayout, SC.Control,
+Tasks.CommentItemView = SC.View.extend(SC.Control,
 /** @scope Tasks.CommentItemView.prototype */ {
   
+  useStaticLayout: YES,
   displayProperties: 'showHover description'.w(),
   showHover: SC.platform.touch,
   description: null,
@@ -68,7 +69,7 @@ Tasks.CommentItemView = SC.View.extend(SC.StaticLayout, SC.Control,
     }
   }),
   
-  descriptionLabel: SC.LabelView.design(SC.StaticLayout, {
+  descriptionLabel: SC.LabelView.design({
     useStaticLayout: YES,
     classNames: [ 'comment-description'],
     tagName: 'pre',
