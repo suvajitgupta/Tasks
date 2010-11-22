@@ -1,6 +1,7 @@
 /*globals CoreTasks sc_require */
 sc_require('models/record');
 
+CoreTasks.NEW_COMMENT_DESCRIPTION = '_NewComment';
 
 /**
  * The comment model.

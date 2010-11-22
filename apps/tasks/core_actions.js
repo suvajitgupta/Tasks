@@ -727,8 +727,9 @@ Tasks.mixin({
       var currentUserId = CoreTasks.getPath('currentUser.id');
       var task = tc.getPath('selection.firstObject');
       var now = SC.DateTime.create().get('milliseconds');
-      CoreTasks.createRecord(CoreTasks.Comment, { taskId: task.get('id'), userId: currentUserId,
-                                           createdAt: now, updatedAt: now, description: ' ' });
+      var comment = CoreTasks.createRecord(CoreTasks.Comment, { taskId: task.get('id'), userId: currentUserId,
+                                           createdAt: now, updatedAt: now, description: CoreTasks.NEW_COMMENT_DESCRIPTION.loc() });
+      Tasks.commentsController.selectObject(comment);
     }
   },
   

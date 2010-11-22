@@ -12,10 +12,6 @@ Views
 * add ablity to update/delete user's own comments using double click/minus buttons
 * remove permission of Guests to modify any task descriptions, not just on tasks they submitted
 * switch to StackedView to handle multi-line/variable length comments properly
-- investigate why the last letter is being lost while inline editing
-- investigate why Comments inline editor is not working on Safari
-- fix bug with inline editor not coming up the second time you edit a comment
-- figure out what to do on iPad since inlineEditor doesn't work properly
 
 CoreTasks
 * add allComments

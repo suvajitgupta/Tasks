@@ -100,14 +100,17 @@
   font-weight: bold !important;
 }
 
-.comments-list .comment-description {
-  font-family: "Lucida Sans","Lucida Grande",Verdana,Arial,sans-serif !important;
-  min-height: 30px !important;
-  line-height: 1 !important;
+.sc-view .comment-description {
   background: #FFC !important;
+  font-family: "Lucida Sans","Lucida Grande",Verdana,Arial,sans-serif !important;
   font-size: 10px !important;
+  line-height: 1 !important;
+}
+
+.comments-list .comment-description {
+  min-height: 30px !important;
   margin: 20px 0px 10px 0px !important;
-  padding: 5px 5px !important;
+  padding: 2px 5px !important;
   border: 1px solid #AAA !important;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;

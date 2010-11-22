@@ -116,6 +116,7 @@ SC.stringsFor('English', {
   "_Manager": "Manager",
   "_Medium": "Medium",
   "_Name": "Name:",
+  "_NewComment": "New Comment",
   "_NewProject": "New Project",
   "_NewTask": "New Task",
   "_No": "No",

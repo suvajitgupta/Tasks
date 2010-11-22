@@ -15,8 +15,9 @@ sc_require('mixins/localized_label');
 Tasks.CommentItemView = SC.View.extend(SC.StaticLayout, SC.Control,
 /** @scope Tasks.CommentItemView.prototype */ {
   
-  displayProperties: 'showHover'.w(),
+  displayProperties: 'showHover description'.w(),
   showHover: SC.platform.touch,
+  description: null,
   
   /** @private
     Add explicit hover class - using this to avoid problems on iPad.
@@ -49,8 +50,10 @@ Tasks.CommentItemView = SC.View.extend(SC.StaticLayout, SC.Control,
     classNames: ['edit-comment-icon'],
     toolTip: "_EditComment".loc(),
     mouseDown: function() {
-      var description = this.getPath('parentView.descriptionLabel');
-      description.beginEditing();
+      sc_super();
+      Tasks.commentsController.selectObject(this.getPath('parentView.content'));
+      this.get('parentView').editDescription();
+      return YES;
     }
   }),
   
@@ -59,8 +62,9 @@ Tasks.CommentItemView = SC.View.extend(SC.StaticLayout, SC.Control,
     classNames: ['delete-comment-icon'],
     toolTip: "_DeleteComment".loc(),
     mouseDown: function() {
-      var comment = this.getPath('parentView.content');
-      comment.destroy();
+      sc_super();
+      this.getPath('parentView.content').destroy();
+      return YES;
     }
   }),
   
@@ -68,17 +72,35 @@ Tasks.CommentItemView = SC.View.extend(SC.StaticLayout, SC.Control,
     useStaticLayout: YES,
     classNames: [ 'comment-description'],
     tagName: 'pre',
-    isInlineEditorMultiline: YES,
-    escapeHTML: NO,
-    inlineEditorDidEndEditing: function(inlineEditor, finalValue) {
-      sc_super();
-      var comment = this.getPath('parentView.content');
-      comment.setIfChanged('description', finalValue);
+    doubleClick: function() {
+      if(this.get('isEditable')) this.get('parentView').editDescription();
     }
   }),
   
   contentPropertyDidChange: function(target, key) {
     if (this.owner && this.owner.updateHeight) this.owner.updateHeight();
+  },
+  
+  editDescription: function() {
+    var that = this;
+    var pane = SC.PickerPane.create({
+      layout: { width: 700, height: 100 },
+      contentView: SC.TextFieldView.design({
+        classNames: [ 'comment-description'],
+        isTextArea: YES,
+        valueBinding: 'Tasks.commentsController.selection.firstObject.description'
+      }),
+      remove: function() {
+        sc_super();
+        var comment = that.get('content');
+        var description = comment.get('description');
+        console.log("'" + description + "'");
+        if(description === CoreTasks.NEW_COMMENT_DESCRIPTION.loc()) comment.destroy();
+        else that.set('description', description);
+      }
+    });
+    pane.popup(this, SC.PICKER_POINTER);
+    pane.contentView.becomeFirstResponder();
   },
   
   render: function(context, firstTime) {
