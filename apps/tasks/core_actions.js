@@ -558,7 +558,7 @@ Tasks.mixin({
     if (len > 0) {
 
       // Confirm deletion operation
-      SC.AlertPane.warn("_Confirmation".loc(), "_ProjectDeletionConfirmation".loc(), "_TasksUnallocated".loc(), "_Yes".loc(), "_No".loc(), null,
+      SC.AlertPane.warn("_Confirmation".loc(), "_ProjectDeletionConfirmation".loc(), "_ProjectDeletionConsequences".loc(), "_Yes".loc(), "_No".loc(), null,
       SC.Object.create({
         alertPaneDidDismiss: function(pane, status) {
           if(status === SC.BUTTON1_STATUS) {
@@ -695,7 +695,7 @@ Tasks.mixin({
     if (len > 0) {
 
       // Confirm deletion operation
-      SC.AlertPane.warn("_Confirmation".loc(), "_TaskDeletionConfirmation".loc(), null, "_Yes".loc(), "_No".loc(), null,
+      SC.AlertPane.warn("_Confirmation".loc(), "_TaskDeletionConfirmation".loc(), "_TaskDeletionConsequences".loc(), "_Yes".loc(), "_No".loc(), null,
       SC.Object.create({
         alertPaneDidDismiss: function(pane, status) {
           if(status === SC.BUTTON1_STATUS) {
@@ -816,7 +816,7 @@ Tasks.mixin({
     if (len > 0) {
       
       // Confirm deletion operation
-      SC.AlertPane.warn("_Confirmation".loc(), "_UserDeletionConfirmation".loc(), "_TasksUnassigned".loc(), "_Yes".loc(), "_No".loc(), null,
+      SC.AlertPane.warn("_Confirmation".loc(), "_UserDeletionConfirmation".loc(), "_UserDeletionConsequences".loc(), "_Yes".loc(), "_No".loc(), null,
         SC.Object.create({
           alertPaneDidDismiss: function(pane, status) {
             if(status === SC.BUTTON1_STATUS) {

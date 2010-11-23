@@ -52,7 +52,8 @@ Tasks.CommentItemView = SC.View.extend(SC.Control,
     toolTip: "_EditComment".loc(),
     mouseDown: function() {
       sc_super();
-      Tasks.commentsController.selectObject(this.getPath('parentView.content'));
+      var comment = this.getPath('parentView.content');
+      Tasks.commentsController.selectObject(comment);
       this.get('parentView').editDescription();
       return YES;
     }
@@ -64,7 +65,16 @@ Tasks.CommentItemView = SC.View.extend(SC.Control,
     toolTip: "_DeleteComment".loc(),
     mouseDown: function() {
       sc_super();
-      this.getPath('parentView.content').destroy();
+      var comment = this.getPath('parentView.content');
+      Tasks.commentsController.selectObject(comment);
+      // Confirm deletion operation
+      SC.AlertPane.warn("_Confirmation".loc(), "_CommentDeletionConfirmation".loc(), null, "_Yes".loc(), "_No".loc(), null,
+        SC.Object.create({
+          alertPaneDidDismiss: function(pane, status) {
+            if(status === SC.BUTTON1_STATUS) comment.destroy();
+          }
+        })
+      );
       return YES;
     }
   }),
