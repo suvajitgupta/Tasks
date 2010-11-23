@@ -14,12 +14,11 @@ sc_require('core');
   
 */
 
-Tasks.statisticsPane = SCUI.ModalPane.extend({
+Tasks.statisticsPane = SCUI.ModalPane.create({
   
   isResizable: NO,
   title: "_Statistics".loc(),
-  // FIXME: [SG/JL] remove forced addition of 'icon' class in titleIcon to fix positioning problem, make statisticsPane a page like importDataPage
-  titleIcon: 'icon statistics-icon',
+  titleIcon: 'statistics-icon',
   titleBarHeight: 40,
   layout: { centerX: 0, centerY: 0, height: 300, width: 650 },
   classNames: ['statistics-pane'],

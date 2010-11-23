@@ -18,6 +18,9 @@ Tasks.numericalStatisticsPage = SC.Page.create({
     layout: { top: 20, left: 0, right: 0, bottom: 0 },
     childViews: 'numericalStatistics'.w(),
     
+    statisticsBinding: SC.Binding.oneWay('Tasks.statisticsController.statistics'),
+    displayProperties: ['statistics'],
+    
     numericalStatistics: SC.LabelView.design({
       textAlign: SC.ALIGN_CENTER,
       controlSize: SC.SMALL_CONTROL_SIZE,
@@ -25,12 +28,12 @@ Tasks.numericalStatisticsPage = SC.Page.create({
     }),
     
     render: function(context, firstTime) {
-      var stats = Tasks.statisticsController.get('statistics');
+      var stats = this.get('statistics');
       var ret = '';
-      var blank = sc_static('blank');
-      if(stats.tasksCount > 0) {
+      if(stats && stats.tasksCount > 0) {
         if(Tasks.assignmentsController.get('displayMode') === Tasks.DISPLAY_MODE_TASKS) {
 
+          var blank = sc_static('blank');
           this.set('statisticsData', [ stats.otherCount, stats.bugCount, stats.featureCount ]);
           this.set('statisticsLabels', [ "_Other".loc(), "_Bug".loc(), "_Feature".loc() ]);
 

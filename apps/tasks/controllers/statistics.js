@@ -106,18 +106,12 @@ Tasks.statisticsController = SC.ObjectController.create(
   
   showStatistics: function() {
     this.computeStatistics();
-    // FIXME: [SG/JL] rebuild creating/destroying panel so that Statistics HTML text label refreshes with SC ToT
-    this._panel = Tasks.statisticsPane.create();
-    if(this._panel) this._panel.append();
+    Tasks.statisticsPane.append();
   },
   
   closePanel: function() {
     this.set('statistics', '');
-    if(this._panel) {
-      this._panel.remove();
-      this._panel.destroyLayer();
-      this._panel = null;
-    }
+    Tasks.statisticsPane.remove();
   }  
     
 });

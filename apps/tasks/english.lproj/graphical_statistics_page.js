@@ -20,6 +20,9 @@ Tasks.graphicalStatisticsPage = SC.Page.create({
     layout: { top: 15, left: 10, right: 10, bottom: 5 },
     childViews: 'tasksStatistics teamStatistics'.w(),
     
+    statisticsBinding: SC.Binding.oneWay('Tasks.statisticsController.statistics'),
+    displayProperties: ['statistics'],
+    
     tasksStatistics: SC.View.design({
       childViews: 'typeStatisticsChart priorityStatisticsChart statusStatisticsChart'.w(),
       isVisible: NO,
@@ -46,8 +49,8 @@ Tasks.graphicalStatisticsPage = SC.Page.create({
     }),
     
     render: function(context, firstTime) {
-      var stats = Tasks.statisticsController.get('statistics');
-      if(stats.tasksCount > 0) {
+      var stats = this.get('statistics');
+      if(stats && stats.tasksCount > 0) {
         if(Tasks.assignmentsController.get('displayMode') === Tasks.DISPLAY_MODE_TASKS) {
           this.setPath('tasksStatistics.isVisible', YES);
           this.setPath('teamStatistics.isVisible', NO);
