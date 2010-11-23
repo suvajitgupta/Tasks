@@ -101,6 +101,10 @@
   font-weight: bold !important;
 }
 
+.sc-view .comment-editor {
+  background: #EEE !important;
+}
+
 .sc-view .comment-description {
   background: #FFC !important;
   font-family: "Lucida Sans","Lucida Grande",Verdana,Arial,sans-serif !important;

@@ -85,11 +85,16 @@ Tasks.CommentItemView = SC.View.extend(SC.Control,
   editDescription: function() {
     var that = this;
     var pane = SC.PickerPane.create({
-      layout: { width: 700, height: 100 },
-      contentView: SC.TextFieldView.design({
-        classNames: [ 'comment-description'],
-        isTextArea: YES,
-        valueBinding: 'Tasks.commentsController.selection.firstObject.description'
+      layout: { width: 700, height: 120 },
+      contentView: SC.View.design({
+        childViews: 'descriptionField'.w(),
+        classNames: [ 'comment-editor'],
+        descriptionField: SC.TextFieldView.design({
+          layout: { left: 5, right: 5, top: 5, bottom: 5 },
+          classNames: [ 'comment-description'],
+          isTextArea: YES,
+          valueBinding: 'Tasks.commentsController.selection.firstObject.description'
+        })
       }),
       remove: function() {
         sc_super();
