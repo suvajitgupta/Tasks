@@ -55,7 +55,7 @@ Tasks = SC.Object.create(SC.Statechart,
   getTimeAgo: function(then) {
     var time, now = SC.DateTime.create();
     var minutes = (now.get('milliseconds') - then.get('milliseconds')) / 60000;
-    if(minutes < 1) time = "_justNow".loc();
+    if(Math.round(minutes) <= 1) time = "_justNow".loc();
     else if(minutes < 60) time = (Math.round(minutes) + "_minutesAgo".loc());
     else {
       var hours = minutes / 60;
