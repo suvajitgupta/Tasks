@@ -106,7 +106,7 @@ Tasks.CommentItemView = SC.View.extend(SC.Control,
       }
     });
     pane.popup(this, SC.PICKER_POINTER);
-    pane.contentView.becomeFirstResponder();
+    pane.getPath('contentView.descriptionField').becomeFirstResponder();
   },
   
   render: function(context, firstTime) {
