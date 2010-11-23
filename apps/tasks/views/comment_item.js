@@ -47,7 +47,7 @@ Tasks.CommentItemView = SC.View.extend(SC.Control,
   }),
   
   editButton: SC.View.design(SCUI.SimpleButton, {
-    layout: { right: 35, width: 16, top: 2, height: 16 },
+    layout: { right: 45, width: 16, top: 2, height: 16 },
     classNames: ['edit-comment-icon'],
     toolTip: "_EditComment".loc(),
     mouseDown: function() {
@@ -59,7 +59,7 @@ Tasks.CommentItemView = SC.View.extend(SC.Control,
   }),
   
   deleteButton: SC.View.design(SCUI.SimpleButton, {
-    layout: { right: 5, width: 16, top: 2, height: 16 },
+    layout: { right: 15, width: 16, top: 2, height: 16 },
     classNames: ['delete-comment-icon'],
     toolTip: "_DeleteComment".loc(),
     mouseDown: function() {
