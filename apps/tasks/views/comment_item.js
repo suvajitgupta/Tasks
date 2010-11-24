@@ -110,7 +110,6 @@ Tasks.CommentItemView = SC.View.extend(SC.Control,
         sc_super();
         var comment = that.get('content');
         var description = comment.get('description');
-        console.log("'" + description + "'");
         if(description === CoreTasks.NEW_COMMENT_DESCRIPTION.loc()) comment.destroy();
         else that.set('description', description);
       }
