@@ -69,17 +69,16 @@ if [ $? -ne 0 ]; then
   fi
 fi
 
-PASSWORD_HASH=`/bin/echo -n $PASSWORD | $SHA1_BIN | awk '{print $1}'`
+PASSWORD_HASH=`/bin/echo -n $PASSWORD | $SHA1_BIN | sed 's/(stdin)= //'`
 # Generate timestamp
 MILLISECONDS=`/bin/date +%s`000
 
 # Build the JSON and POST to the server using cURL.
-JSON="{name:'$FULL_NAME',loginName:'$LOGIN_NAME',role:'_$ROLE',password:'$PASSWORD_HASH',createdAt:$MILLISECONDS,updatedAt:$MILLISECONDS}"
+JSON='{ "name": "'$FULL_NAME'", "loginName": "'$LOGIN_NAME'", "role": "'_$ROLE'", "password": "'$PASSWORD_HASH'", "createdAt": '$MILLISECONDS', "updatedAt": '$MILLISECONDS' }'
 
-/bin/echo -n "Creating new user... "
+/bin/echo "Creating new user..."
 
-curl -k -X POST -H "Content-Type: application/json" -d "$JSON" \
-  "http://$HOST_PORT/tasks-server/user" >/dev/null 2>&1
+curl -k -X POST -H "Content-Type: application/json" -d "$JSON" "http://$HOST_PORT/tasks-server/user"
 
 if [ $? -eq 0 ]; then
   echo "OK"; echo
