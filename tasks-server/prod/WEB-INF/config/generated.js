@@ -208,8 +208,16 @@ function (timestamp) {
 			"cleanup":
 function (timestamp) {
     var now = Date.now();
-    var cutoff = timestamp !== undefined ? timestamp : now - 30 * 24 * 60 * 60 * 1000;
-    var query = "status=\"deleted\" & updatedAt<$1";
+    var cutoff;
+    if (timestamp === undefined) {
+        cutoff = now - 30 * 24 * 60 * 60 * 1000;
+    } else {
+        cutoff = timestamp;
+    }
+    var query = "status=\"deleted\"";
+    if (cutoff > 0) {
+        query += " & updatedAt<$1";
+    }
     var len, i;
     var usersToDelete = load("user?" + query, cutoff);
     for (i = 0, len = usersToDelete.length; i < len; i++) {

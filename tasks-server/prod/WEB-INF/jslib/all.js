@@ -24,16 +24,23 @@ Class({
     };
   },
   
-  // Example command line invocations:
-  // curl -X POST http://localhost:8088/tasks-server/Class/all -d "{ method: 'cleanup', id: 'records', params: [] }"
-  // curl -X POST http://localhost:8088/tasks-server/Class/all -d "{ method: 'cleanup', id: 'records', params: [1282279058109] }"
+  // Delete soft-deleted items and handle IDs referencing non-existent records
+  // Example command line invocation that cleans up more than month-old soft-deleted data (default):
+  //   curl -X POST http://localhost:4400/tasks-server/Class/all -d "{ method: 'cleanup', id: 'records', params: [] }"
+  // To cleanup soft-deleted data older than a certain 'cutoff', specify: params: [<timestamp>]
+  // If <timestamp> is set to 0, all soft-deleted records will be deleted
   cleanup: function(timestamp) {
     
     var now = Date.now();
     
     // Delete soft-deleted records older than timestamp (if specified) or older than a month
-    var cutoff = timestamp !== undefined? timestamp : now - 30*24*60*60*1000;
-    var query = 'status="deleted" & updatedAt<$1';
+    var cutoff;
+    if(timestamp === undefined) cutoff = now - 30*24*60*60*1000;
+    else cutoff = timestamp;
+    
+    var query = 'status="deleted"';
+    if(cutoff > 0) query += ' & updatedAt<$1';
+    
     var len, i;
     var usersToDelete = load('user?' + query, cutoff);
     for (i = 0, len = usersToDelete.length; i < len; i++) remove(usersToDelete[i]);
