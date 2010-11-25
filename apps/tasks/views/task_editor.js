@@ -239,6 +239,8 @@ Tasks.TaskEditorView = SC.View.extend(
    SC.run(function() { Tasks.addComment(); });
    var commentsList = Tasks.mainPage.getPath('taskEditor.editor.splitView.bottomRightView.commentsList.contentView');
    var commentView = commentsList.itemViewForContentIndex(0);
+   // FIXME: [SC] scrolling to top of comments list doesn't always work in SC
+   SC.run(function() { commentsList.scrollToContentIndex(0); });
    commentView.editDescription();
  },
   
@@ -514,6 +516,8 @@ Tasks.TaskEditorView = SC.View.extend(
    
   }),
   
+  commentButton: SC.outlet('editor.splitView.bottomRightView.commentButton'),
+
   keyDown: function(event) {
     var ret = NO, commandCode = event.commandCodes();
     // console.log('DEBUG: hotkey "' + commandCode[0] + '" pressed');
