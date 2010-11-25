@@ -510,7 +510,6 @@ CoreTasks = SC.Object.create({
           if (key !== allKey && key !== unallocatedKey && key !== unassignedKey) {
             dirtyProjects.push(key);
           }
-
           break;
         case CoreTasks.Task:
           dirtyTasks.push(key);
@@ -546,8 +545,14 @@ CoreTasks = SC.Object.create({
         storeKeys: dirtyTasks,
         postSaveFunction: this._taskSaved.bind(this)
       },
-      { type: CoreTasks.Watch, storeKeys: dirtyWatches },
-      { type: CoreTasks.Comment, storeKeys: dirtyComments }
+      {
+        type: CoreTasks.Watch,
+        storeKeys: dirtyWatches
+      },
+      {
+        type: CoreTasks.Comment,
+        storeKeys: dirtyComments
+      }
     ];
 
     // Pass control to the save delegate.
@@ -558,12 +563,13 @@ CoreTasks = SC.Object.create({
     if (!user) return;
 
     SC.RunLoop.begin();
+    var userId = user.readAttribute('id');
 
     // Update the now-disassociated assigned tasks.
     var tasks = user.get('disassociatedAssignedTasks');
     if (tasks && SC.instanceOf(tasks, SC.RecordArray)) {
       tasks.forEach(function(task) {
-        task.writeAttribute('assigneeId', user.readAttribute('id'));
+        task.writeAttribute('assigneeId', userId);
       });
     }
 
@@ -571,7 +577,7 @@ CoreTasks = SC.Object.create({
     tasks = user.get('disassociatedSubmittedTasks');
     if (tasks && SC.instanceOf(tasks, SC.RecordArray)) {
       tasks.forEach(function(task) {
-        task.writeAttribute('submitterId', user.readAttribute('id'));
+        task.writeAttribute('submitterId', userId);
       });
     }
 
@@ -581,13 +587,14 @@ CoreTasks = SC.Object.create({
   _projectSaved: function(project) {
     if (!project) return;
 
-    // Update the now-disassociated tasks.
     SC.RunLoop.begin();
+    var projectId = project.readAttribute('id');
+    
+    // Update the now-disassociated tasks.
     var tasks = project.get('disassociatedTasks');
-
     if (tasks && SC.instanceOf(tasks, SC.RecordArray)) {
       tasks.forEach(function(task) {
-        task.writeAttribute('projectId', project.readAttribute('id'));
+        task.writeAttribute('projectId', projectId);
       });
     }
 
@@ -597,13 +604,22 @@ CoreTasks = SC.Object.create({
   _taskSaved: function(task) {
     if (!task) return;
 
-    // Update the now-disassociated watches.
     SC.RunLoop.begin();
+    var taskId = task.readAttribute('id');
+    
+    // Update the now-disassociated watches.
     var watches = task.get('disassociatedWatches');
-
     if (watches && SC.instanceOf(watches, SC.RecordArray)) {
       watches.forEach(function(watch) {
-        watch.writeAttribute('taskId', task.readAttribute('id'));
+        watch.writeAttribute('taskId', taskId);
+      });
+    }
+
+    // Update the now-disassociated comments.
+    var comments = task.get('disassociatedComments');
+    if (comments && SC.instanceOf(comments, SC.RecordArray)) {
+      comments.forEach(function(comment) {
+        comment.writeAttribute('taskId', taskId);
       });
     }
 
@@ -790,7 +806,7 @@ CoreTasks.RemoteSaveDelegate = SC.Object.extend({
    * Resets the save delegate.
    */
   reset: function() {
-    this.recordBeingSaved;
+    this.recordBeingSaved = null;
     this.saveInProgress = NO;
     this.saveFailureCallback = null;
     this._typesBeingSaved = null;

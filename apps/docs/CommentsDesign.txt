@@ -2,6 +2,7 @@ Models/Fixtures
 * add Comment model with taskId/userId inheriting createdAt/updatedAt/description from Record model
 * add Comments fixtures
 * while deleting Task/User model delete any associated Comments
+* when saving a new Task swizzle taskId of any Comments associated with it
 
 Controllers
 * add a CommentsController to track Comments for task being viewed/edited

@@ -490,6 +490,25 @@ CoreTasks.Task = CoreTasks.Record.extend({
 
     // Execute the query and return the results.
     return this.get('store').find(this._disassociatedWatchesQuery);
+  }.property('_id').cacheable(),
+  
+  /**
+   * A read-only computed property that returns the list of comments for this task
+   * before it was first persisted.
+   *
+   * @returns {SC.RecordArray} An array of comments.
+   */
+  disassociatedComments: function() {
+    if(SC.none(this.get('_id'))) return null;
+    
+    // Create the query if necessary.
+    if (!this._disassociatedCommentsQuery) {
+      this._disassociatedCommentsQuery = SC.Query.local(CoreTasks.Comment, "taskId=%@".fmt(this.get('_id')));
+      this._disassociatedCommentsQuery.set('initialServerFetch', NO);
+    }
+
+    // Execute the query and return the results.
+    return this.get('store').find(this._disassociatedCommentsQuery);
   }.property('_id').cacheable()
     
 });
