@@ -60,6 +60,7 @@ Tasks.mixin( /** @scope Tasks */ {
       // Enter the statechart.
       Tasks.goState('a', 1);
       Tasks.authenticate('guest', '');
+      // TODO: [SG] add error message if 'guest' user is non-existent
     }
   },
   

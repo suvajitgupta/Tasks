@@ -352,6 +352,7 @@ CoreTasks = SC.Object.create({
     );
   },
 
+  // FIXME: [SG] enforce all permissions on GAE Server as well (e.g., Guests shouldn't be able to update/delete others' tasks)
   /**
    * Sets appropriate permissions based on the current user's role.
    */
