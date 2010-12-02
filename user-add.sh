@@ -69,7 +69,11 @@ if [ $? -ne 0 ]; then
   fi
 fi
 
-PASSWORD_HASH=`/bin/echo -n $PASSWORD | $SHA1_BIN | sed 's/(stdin)= //'`
+if [ "$PASSWORD" != "" ]; then
+  PASSWORD_HASH=`/bin/echo -n $PASSWORD | $SHA1_BIN | sed 's/(stdin)= //'`
+else
+  PASSWORD_HASH=''
+fi
 # Generate timestamp
 MILLISECONDS=`/bin/date +%s`000
 
