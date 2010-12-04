@@ -38,21 +38,21 @@ Tasks.numericalStatisticsPage = SC.Page.create({
           this.set('statisticsLabels', [ "_Other".loc(), "_Bug".loc(), "_Feature".loc() ]);
 
           ret += '<table width="100%">';
-          if(Tasks.softwareMode) {
-            ret += '<tr class="even">';
-            ret += ('<td class="title"><span>' + "_Type".loc() + '</td>');
-            ret += ('<td><img src="' + blank + '" class="task-icon-feature"/>&nbsp;' + "_Feature".loc() + ': ' + stats.featureCount + ' (' + Math.round(100*stats.featureCount/stats.tasksCount) + '%)' + '</td>');
-            ret += ('<td><img src="' + blank + '" class="task-icon-bug"/>&nbsp;' + "_Bug".loc() + ': ' + stats.bugCount + ' (' + Math.round(100*stats.bugCount/stats.tasksCount) + '%)' + '</td>');
-            ret += ('<td><img src="' + blank + '" class="task-icon-other"/>&nbsp;'  + "_Other".loc() + ': ' + stats.otherCount + ' (' + Math.round(100*stats.otherCount/stats.tasksCount) + '%)' + '</td>');
-            ret += '<td></td></tr>';
-          }
-          ret += '<tr class="odd">';
+          ret += '<tr class="even">';
           ret += ('<td class="title"><span>' + "_Priority".loc() + '</td>');
           ret += ('<td><span class="task-priority-high">' + "_High".loc() + ':</span> ' + stats.highCount + ' (' + Math.round(100*stats.highCount/stats.tasksCount) + '%)' + '</td>');
           ret += ('<td><span class="task-priority-medium">' + "_Medium".loc() + ':</span> ' + stats.mediumCount + ' (' + Math.round(100*stats.mediumCount/stats.tasksCount) + '%)' + '</td>');
           ret += ('<td><span class="task-priority-low">' + "_Low".loc() + ':</span> ' + stats.lowCount + ' (' + Math.round(100*stats.lowCount/stats.tasksCount) + '%)' + '</td>');
           ret += '<td></td></tr>';
-          ret += '<tr class="even">';
+          ret += '<tr class="odd">';
+          if(Tasks.softwareMode) {
+            ret += ('<td class="title"><span>' + "_Type".loc() + '</td>');
+            ret += ('<td><img src="' + blank + '" class="task-icon-feature"/>&nbsp;' + "_Feature".loc() + ': ' + stats.featureCount + ' (' + Math.round(100*stats.featureCount/stats.tasksCount) + '%)' + '</td>');
+            ret += ('<td><img src="' + blank + '" class="task-icon-bug"/>&nbsp;' + "_Bug".loc() + ': ' + stats.bugCount + ' (' + Math.round(100*stats.bugCount/stats.tasksCount) + '%)' + '</td>');
+            ret += ('<td><img src="' + blank + '" class="task-icon-other"/>&nbsp;'  + "_Other".loc() + ': ' + stats.otherCount + ' (' + Math.round(100*stats.otherCount/stats.tasksCount) + '%)' + '</td>');
+            ret += '<td></td></tr>';
+            ret += '<tr class="even">';
+          }
           ret += ('<td class="title"><span>' + "_Status".loc() + '</td>');
           ret += ('<td><span class="status-planned">' + "_Planned".loc() + ':</span> ' + stats.plannedCount + ' (' + Math.round(100*stats.plannedCount/stats.tasksCount) + '%)' + '</td>');
           ret += ('<td><span class="status-active">' + "_Active".loc() + ':</span> ' + stats.activeCount + ' (' + Math.round(100*stats.activeCount/stats.tasksCount) + '%)' + '</td>');
