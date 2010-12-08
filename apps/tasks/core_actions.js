@@ -121,8 +121,7 @@ Tasks.mixin({
         welcomeMessage.set('toolTip', "_LoginSince".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
 
         // Based on user's role set up appropriate task filter
-        var role = currentUser.get('role');
-        if(role === CoreTasks.USER_ROLE_DEVELOPER) { // Set assignee selection filter to current user
+        if(CoreTasks.getPath('currentUser.role') === CoreTasks.USER_ROLE_DEVELOPER) { // Set assignee selection filter to current user
           Tasks.showCurrentUserTasks();
         }
 
@@ -206,11 +205,12 @@ Tasks.mixin({
       failureCallback: this._loadDataFailure.bind(this)
     };
     var serverType = Tasks.get('serverType');
+    var skipDoneProjectData = CoreTasks.getPath('currentUser.role') !== CoreTasks.USER_ROLE_MANAGER;
     if (serverType === Tasks.PERSEVERE_SERVER) {
       // Determine which function to call based on value of lastRetieved.
       var methodInvocation;
       if (SC.empty(lastRetrieved)) {
-        methodInvocation = { method: 'get', id: 'records', params: [] };
+        methodInvocation = { method: 'get', id: 'records', params: [skipDoneProjectData] };
       } else {
         methodInvocation = { method: 'getDelta', id: 'records', params: [lastRetrieved] };
       }

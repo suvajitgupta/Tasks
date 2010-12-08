@@ -1,15 +1,47 @@
 /*globals Class load */
 Class({
   id: "all",
+  
+  extractId: function(idString) { return idString.replace(/^.*\//, "") * 1; },
 
-  get: function() {
+  get: function(skipDoneProjectData) {
+    
     var query = 'status!="deleted"';
+    var projects = load('project?' + query);
+    var tasks = load('task?' + query);
+    var watches = load('watch?' + query);
+    var comments = load('comment?' + query);
+    
+    var notDoneProjects = [], doneProjectIds = [], tasksInNotDoneProjects = [], tasksInDoneProjectIds = [],
+        watchesOnTasksInNotDoneProjects = [], commentsOnTasksInNotDoneProjects = [];
+    if(skipDoneProjectData) {
+      var len, i, project, task, watch, comment;
+      for (i = 0, len = projects.length; i < len; i++) {
+        project = projects[i];
+        if(project.developmentStatus === "_Done") doneProjectIds.push(this.extractId(project.id));
+        else notDoneProjects.push(project);
+      }
+      for (i = 0, len = tasks.length; i < len; i++) {
+        task = tasks[i];
+        if(doneProjectIds.indexOf(task.projectId) === -1) tasksInNotDoneProjects.push(task);
+        else tasksInDoneProjectIds.push(this.extractId(task.id));
+      }
+      for (i = 0, len = watches.length; i < len; i++) {
+        watch = watches[i];
+        if(tasksInDoneProjectIds.indexOf(watch.taskId) === -1) watchesOnTasksInNotDoneProjects.push(watch);
+      }
+      for (i = 0, len = comments.length; i < len; i++) {
+        comment = comments[i];
+        if(tasksInDoneProjectIds.indexOf(comment.taskId) === -1) commentsOnTasksInNotDoneProjects.push(comment);
+      }
+    }
+    
     return {
       users: load('user?' + query),
-      projects: load('project?' + query),
-      tasks: load('task?' + query),
-      watches: load('watch?' + query),
-      comments: load('comment?' + query)
+      projects: skipDoneProjectData? notDoneProjects : projects,
+      tasks: skipDoneProjectData? tasksInNotDoneProjects : tasks,
+      watches: skipDoneProjectData? watchesOnTasksInNotDoneProjects : watches,
+      comments: skipDoneProjectData? commentsOnTasksInNotDoneProjects : comments
     };
   },
 
@@ -57,7 +89,7 @@ Class({
     // * non-existent task projectId/submitterId/assigneeId should be set to null
     // * watches/comments with non-existent taskId/userId should be soft-deleted
     // * set updatedAt for all records being modified
-    var idExtractor = function(record) { var id = (record.status == 'deleted')? '' : record.id; return id.replace(/^.*\//, "") * 1; };
+    var idExtractor = function(record) { var id = (record.status == 'deleted')? '' : record.id; return this.extractId(id); };
     var users = load("user/"), userIds = users.map(idExtractor);
     var projects = load("project/"), projectIds = projects.map(idExtractor);
     var tasks = load("task/"), taskIds = tasks.map(idExtractor);
