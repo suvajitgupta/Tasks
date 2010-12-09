@@ -47,8 +47,14 @@
   color: #444 !important;
 }
 
+.login-page label {
+  color: #DDD !important;
+  font-size: 10px;
+}
+
 .error-message {
 	color: #F66 !important;
+  font-size: 10px;
 }
 
 /* Default Panel Styling Overrides */

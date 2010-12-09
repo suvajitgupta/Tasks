@@ -194,14 +194,14 @@
 			},
 			"instances":{"$ref":"../all/"},
 			"get":
-function (skipDoneProjectData) {
+function (loadDoneProjectData) {
     var query = "status!=\"deleted\"";
     var projects = load("project?" + query);
     var tasks = load("task?" + query);
     var watches = load("watch?" + query);
     var comments = load("comment?" + query);
     var notDoneProjects = [], doneProjectIds = [], tasksInNotDoneProjects = [], tasksInDoneProjectIds = [], watchesOnTasksInNotDoneProjects = [], commentsOnTasksInNotDoneProjects = [];
-    if (skipDoneProjectData) {
+    if (!loadDoneProjectData) {
         var len, i, project, task, watch, comment;
         for (i = 0, len = projects.length; i < len; i++) {
             project = projects[i];
@@ -232,7 +232,7 @@ function (skipDoneProjectData) {
             }
         }
     }
-    return {users:load("user?" + query), projects:skipDoneProjectData ? notDoneProjects : projects, tasks:skipDoneProjectData ? tasksInNotDoneProjects : tasks, watches:skipDoneProjectData ? watchesOnTasksInNotDoneProjects : watches, comments:skipDoneProjectData ? commentsOnTasksInNotDoneProjects : comments};
+    return {users:load("user?" + query), projects:loadDoneProjectData ? projects : notDoneProjects, tasks:loadDoneProjectData ? tasks : tasksInNotDoneProjects, watches:loadDoneProjectData ? watches : watchesOnTasksInNotDoneProjects, comments:loadDoneProjectData ? comments : commentsOnTasksInNotDoneProjects};
 }
 ,
 			"getDelta":

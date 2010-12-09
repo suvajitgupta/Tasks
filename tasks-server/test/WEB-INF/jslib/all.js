@@ -4,7 +4,7 @@ Class({
   
   extractId: function(idString) { return idString.replace(/^.*\//, "") * 1; },
 
-  get: function(skipDoneProjectData) {
+  get: function(loadDoneProjectData) {
     
     var query = 'status!="deleted"';
     var projects = load('project?' + query);
@@ -14,7 +14,7 @@ Class({
     
     var notDoneProjects = [], doneProjectIds = [], tasksInNotDoneProjects = [], tasksInDoneProjectIds = [],
         watchesOnTasksInNotDoneProjects = [], commentsOnTasksInNotDoneProjects = [];
-    if(skipDoneProjectData) {
+    if(!loadDoneProjectData) {
       var len, i, project, task, watch, comment;
       for (i = 0, len = projects.length; i < len; i++) {
         project = projects[i];
@@ -38,10 +38,10 @@ Class({
     
     return {
       users: load('user?' + query),
-      projects: skipDoneProjectData? notDoneProjects : projects,
-      tasks: skipDoneProjectData? tasksInNotDoneProjects : tasks,
-      watches: skipDoneProjectData? watchesOnTasksInNotDoneProjects : watches,
-      comments: skipDoneProjectData? commentsOnTasksInNotDoneProjects : comments
+      projects: loadDoneProjectData? projects : notDoneProjects,
+      tasks: loadDoneProjectData? tasks : tasksInNotDoneProjects,
+      watches: loadDoneProjectData? watches : watchesOnTasksInNotDoneProjects,
+      comments: loadDoneProjectData? comments : commentsOnTasksInNotDoneProjects
     };
   },
 

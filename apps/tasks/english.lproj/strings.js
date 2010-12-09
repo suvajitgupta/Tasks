@@ -106,6 +106,7 @@ SC.stringsFor('English', {
   "_LaunchSettings": "Users/Settings...",
   "_LaunchStatistics": "Statistics...",
   "_LoadingData": "Loading data...",
+  "_LoadDoneProjectData": "Load data for completed projects",
   "_Login": "Login",
   "_LoginServerAccessError": "Login failed - cannot access server",
   "_LoginAuthenticationError": "Login failed - please try again",

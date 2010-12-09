@@ -136,6 +136,7 @@ v Enable/disable "Delete User" button based on having a selected user [SG] @Done
 | Create separate projects for different teams to keep their tasks/deadlines separate instead
 
 Application Manager GUI @Active
+- Add option to load data for completed projects on login screen (off by default) [SG] $Feature @Done %Passed
 - Add Tasks logo to top bar and display program version as a badge [SG] $Feature @Done %Passed
 | Show credits as a tooltip on Tasks logo
 - Add welcome message showing logged in user/role with hover over tooltip showing time of login [SG] @Done $Feature %Passed

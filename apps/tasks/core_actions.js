@@ -14,6 +14,7 @@ sc_require('controllers/tasks');
 Tasks.mixin({
 
   loginName: null,
+  loadDoneProjectData: false,
 
   /**
    * Authenticate user trying to log in to Tasks application.
@@ -205,12 +206,11 @@ Tasks.mixin({
       failureCallback: this._loadDataFailure.bind(this)
     };
     var serverType = Tasks.get('serverType');
-    var skipDoneProjectData = CoreTasks.getPath('currentUser.role') !== CoreTasks.USER_ROLE_MANAGER;
     if (serverType === Tasks.PERSEVERE_SERVER) {
       // Determine which function to call based on value of lastRetieved.
       var methodInvocation;
       if (SC.empty(lastRetrieved)) {
-        methodInvocation = { method: 'get', id: 'records', params: [skipDoneProjectData] };
+        methodInvocation = { method: 'get', id: 'records', params: [Tasks.loadDoneProjectData] };
       } else {
         methodInvocation = { method: 'getDelta', id: 'records', params: [lastRetrieved] };
       }

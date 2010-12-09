@@ -21,17 +21,17 @@ Tasks.loginPage = SC.Page.create({
     
     contentView: SC.View.design({
       
-      layout: { centerX: 0, centerY: 0, width: 390, height: 196 },
+      layout: { centerX: 0, centerY: 0, width: 390, height: 225 },
       classNames: ['login-body'],
-      childViews: 'logo loginNameField passwordField loginErrorMessageLabel loginButton guestSignupButton'.w(),
+      childViews: 'logo guestSignupButton loginNameField passwordField loginErrorMessageLabel loadDoneProjectDataCheckbox loginButton'.w(),
       
       logo: SC.View.design({
-        layout: { top: 0, left: 10, width: 153, height: 56 },
+        layout: { top: 0, left: 50, width: 153, height: 56 },
         classNames: ['tasks-logo-large']
       }),
       
       guestSignupButton: document.title.match(/Dev|Demo|SproutCore|Greenhouse/)? SC.ButtonView.design({
-        layout: { top: 20, right: 0, height: 23, width: 160 },
+        layout: { top: 20, right: 0, height: 23, width: 155 },
         classNames: ['dark'],
         icon: 'user-role-guest',
         title: "_GuestSignup".loc() + '...',
@@ -53,9 +53,16 @@ Tasks.loginPage = SC.Page.create({
       }),
       
       loginErrorMessageLabel: SC.LabelView.design({
-        layout: { top: 175, left: 60, width: 240, height: 20 },
+        layout: { top: 170, left: 60, right: 0, height: 20 },
         classNames: ['error-message'],
+        textAlign: SC.ALIGN_CENTER,
         valueBinding: SC.Binding.oneWay('Tasks.loginController.loginErrorMessage')
+      }),
+      
+      loadDoneProjectDataCheckbox: SC.CheckboxView.design({
+        layout: { bottom: 0, left: 60, width: 250, height: 20 },
+        valueBinding: 'Tasks.loadDoneProjectData',
+        title: "_LoadDoneProjectData".loc()
       }),
       
       loginButton: SC.ButtonView.design({
