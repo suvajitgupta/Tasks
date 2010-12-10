@@ -194,7 +194,7 @@ Server/Tools @Active
 - Handle network or Server unavailability gracefully and provide appropriate diagnostics to the user [SG] <SE> @Done %Passed
 - Support Tasks database cleanup to remove soft-deleted records and handle pointers to non-existent records [SG] @Done %Passed
 ^ Support github "issues" as a persistence Server (store additional data from Tasks as github issues tags) [JH2] <SG> $Feature @Active
-ool
+
 Styling/Hardening @Active
 ^ Style via CSS, embed catchy/sprited images [MG] <SG> $Feature @Done %Passed
 ^ Re-style to match "dark" Greenhouse look & feel [SG] $Feature <MG> @Done
