@@ -40,11 +40,12 @@ General Infrastructure @Active
 - Destroy authentication token when User logs out [SG] <JH2> $Feature @Done %Passed
 - Implement/benchmark JSONP-based data loading for performance speedup (XHRs are faster) [SG] <SE> @Done
 ^ Optimize data loading to use single Server call for all records <SE> [SG] @Done %Passed
-^ Optimize startup data load using HTML5 local data store <SE> [SG] @Done %Passed
+^ Optimize startup data load using HTML5 local storage <SE> [SG] @Done %Passed
 - Implement GUI-side data validation checks and corresponding user feedback [SG] $Feature @Done %Passed
 | unique, non-"None" loginName and valid Email address in "Guest Signup" and "Users/Settings" panels
 - Out of Scope: Add support for attachments in record descriptions $Feature
 | Upload attachment somewhere and insert URL to it in record description
+^ Switch to a pluggable Data Source-based architecture with Persevere/Google App Engine as samples [SG] <JH2> @Active
 
 Project Manager GUI @Active
 ^ Add Master/Detail Explorer view with click selection of Projects showing corresponding Tasks [JH2] <SG> @Done $Feature %Passed
@@ -172,7 +173,7 @@ v Add hotkeys for common operations (Add/Duplicate Tasks) [EG] <SG> $Feature @Do
 | Auto save
 | Email notifications
 | Percent or Threshold (in days) for Assignee loading determination
-- Support Application settings/state persistence from last login saved using HTML5 storage [SG] <MB> $Feature
+- Support Application settings/state persistence from last login saved using HTML5 local storage [SG] <MB> $Feature
 - Support offline mode with synchronization after network reconnection using Hub.js [SG] <SE> $Feature
 - Support undo/redo using Hub.js [SG] <SE> $Feature
 
@@ -193,7 +194,7 @@ Server/Tools @Active
 - Add link to Task in email notification (should not require authentication if user is signed in) <JH2> [SG] $Feature
 - Handle network or Server unavailability gracefully and provide appropriate diagnostics to the user [SG] <SE> @Done %Passed
 - Support Tasks database cleanup to remove soft-deleted records and handle pointers to non-existent records [SG] @Done %Passed
-^ Support github "issues" as a persistence Server (store additional data from Tasks as github issues tags) [JH2] <SG> $Feature @Active
+^ Add github "issues" Data Source (store additional data from Tasks as github issues tags) [JH2] <SG> $Feature @Active
 
 Styling/Hardening @Active
 ^ Style via CSS, embed catchy/sprited images [MG] <SG> $Feature @Done %Passed
@@ -216,7 +217,7 @@ Styling/Hardening @Active
 - Develop comprehensive Model/View unit tests [SG] <BB> @Active
 - Develop comprehensive automated test scripts using Lebowski/Selenium [SG] <MR> @Active
 - Refactor code to comply with "root controller pattern" [SG] <EG> @Active
-- Refactor code to use new SproutCore statecharts [SG] <MC> @Active
+- Refactor code to use Ki-based statecharts [SG] <MC> @Active
 
 Installation/Deployment @Active
 - Port GUI to Firefox, Safari/Chrome, and Internet Explorer [SG] @Done %Passed
