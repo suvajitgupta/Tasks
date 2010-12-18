@@ -1,0 +1,34 @@
+Github:
+        "gravatar_id": nothing to map to
+        "position": id (auto-generated)
+        "number": same as above?
+        "votes": map to priority (0 votes => Medium, any votes => High)
+        "created_at": createdAt
+        "comments": map to Comments once implemented?
+        "body": description
+        "title": name
+        "updated_at": updatedAt
+        "closed_at": nothing to map to
+        "user": submitterId
+        "labels": prepend each with colon to name
+        "state": developmentStatus (open => Planned, closed => Done)
+ 
+Tasks:
+        id*: auto-generated
+        projectId: github projectId (0?)
+        effort: unspecified
+        assigneeId: unassigned
+        type: allow certain tags to map to type
+        validation: unspecified
+ 
+Location:
+        Add as a System Project
+        Allow configuration of properties (github repository URL & user to login as)
+ 
+Actions:
+        Retrieve: pull from github – how to do incremental refreshes?
+        Create: add as an issue on github
+        Delete: delete issue on github
+        Update: update issue on github
+        Drag out of github project or change via popup task editor: close issue on github
+        Drag to github project or change via popup task editor: add or update issue on github (how to do latter?)
