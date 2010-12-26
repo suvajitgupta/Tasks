@@ -17,14 +17,6 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
   
   displayProperties: ['displayName', 'displayCountDown', 'description', 'showHover'],
   
-  _listStatuses: function() {
-     var ret = [];
-     ret.push({ name: '<span class=status-planned>' + CoreTasks.STATUS_PLANNED.loc() + '</span>', value: CoreTasks.STATUS_PLANNED });
-     ret.push({ name: '<span class=status-active>' + CoreTasks.STATUS_ACTIVE.loc() + '</span>', value: CoreTasks.STATUS_ACTIVE });
-     ret.push({ name: '<span class=status-done>' + CoreTasks.STATUS_DONE.loc() + '</span>', value: CoreTasks.STATUS_DONE });
-     return ret;
-  },
-
   /** @private
     Add explicit hover class - using this to avoid problems on iPad.
   */  
@@ -50,7 +42,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       this._timer.invalidate();
       this._timer = null;
     }
-    this.popupEditor();
+    Tasks.getPath('projectEditorPage.panel').popup(this.get('content'));
   },
   touchStart: function(event) {
     // console.log('DEBUG: touch start on project item: ' + this.getPath('content.name'));
@@ -84,166 +76,13 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     var classes = target.className;
     // See if left clicked on hover pencil or project icon with one project selected 
     // console.log('DEBUG: classes = "' + classes + '"');
-    if ((!event.which || event.which === 1) &&
+    if (!this.get('isSystemProject') && (!event.which || event.which === 1) &&
         (classes.match(/project-margin/) || classes.match(/project-icon/))) {
       this._startEditing();
     }
 
     return NO; // so that drag-n-drop can work!
     
-  },
-  
-  popupEditor: function() {
-    var layer = this.get('layer');
-    this._project = this.get('content');
-    this._newProject = (this._project.get('name') === CoreTasks.NEW_PROJECT_NAME.loc())? this._project : null;
-    var that = this;
-    
-    this._editorPane = SCUI.ModalPane.create({
-      
-      titleBarHeight: 40,
-      title: "_Project".loc() + ' ' + that.getPath('content.displayId'),
-      minWidth: 700,
-      minHeight: 250,
-      layout: { centerX:0, centerY: 0, width: 700, height: 315 },
-      _timeLeft: null,
-      _activatedAt: null,
-      
-      // Avoid popup panel coming up for system projects
-      popup: function() {
-        if(that.get('isSystemProject')) return;
-        this.append();
-        if(!Tasks.get('editorPoppedUp')) Tasks.set('editorPoppedUp', Tasks.PROJECT_EDITOR);
-        this._timeLeft = that.getPath('content.timeLeft');
-        this._activatedAt = that.getPath('content.activatedAt');
-        if(CoreTasks.getPath('permissions.canUpdateProject')) {
-          this.getPath('contentView.nameField').becomeFirstResponder();
-        }
-      },
-      remove: function() {
-        sc_super();
-        if(Tasks.get('editorPoppedUp') === Tasks.PROJECT_EDITOR) Tasks.set('editorPoppedUp', null);
-        var content = that.get('content');
-        var cv = this.get('contentView');
-        content.setIfChanged('displayName', cv.getPath('nameField.value'));
-        content.setIfChanged('timeLeftValue', cv.getPath('timeLeftField.value'));
-        content.setIfChanged('activatedAtValue',  cv.getPath('activatedAtField.date'));
-        content.setIfChanged('description',  cv.getPath('descriptionField.value'));
-        if(Tasks.sourcesRedrawNeeded) Tasks.projectsController.showSources();
-        // If timeLeft or activatedAt has changed, recalculate load balancing
-        if(this._timeLeft !== that.getPath('content.timeLeft') ||
-           this._activatedAt !== that.getPath('content.activatedAt')) {
-          Tasks.assignmentsController.showAssignments();
-        }
-        var newProject = that.get('_newProject');
-        if(newProject && newProject.get('name') === CoreTasks.NEW_PROJECT_NAME.loc()) {
-          newProject.destroy(); // blow away unmodified new project
-          Tasks.projectsController.selectObject(CoreTasks.get('allTasksProject'));
-        }
-        if(CoreTasks.get('autoSave')) Tasks.saveData();
-        this.destroy();
-      },
-      
-      contentView: SC.View.design({
-        layout: { left: 0, right: 0, top: 0, bottom: 0},
-        childViews: 'nameLabel nameField  statusLabel statusField timeLeftLabel timeLeftField timeLeftHelpLabel activatedAtLabel activatedAtField descriptionLabel descriptionField createdAtLabel updatedAtLabel closeButton'.w(),
-      
-        nameLabel: SC.LabelView.design({
-          layout: { top: 6, left: 10, height: 24, width: 60 },
-          textAlign: SC.ALIGN_RIGHT,
-          value: "_Name".loc()
-        }),
-        nameField: SC.TextFieldView.design({
-          layout: { top: 5, left: 75, right: 200, height: 24 },
-          isEnabledBinding: 'CoreTasks.permissions.canUpdateProject',
-          value: that.getPath('content.name')
-        }),
-        
-        statusLabel: SC.LabelView.design({
-          layout: { top: 7, right: 113, height: 24, width: 50 },
-          textAlign: SC.ALIGN_RIGHT,
-          value: "_Status".loc()
-        }),
-        statusField: SC.SelectButtonView.design({
-          layout: { top: 5, right: 10, height: 24, width: 125 },
-          classNames: ['square'],
-          localize: YES,
-          isEnabledBinding: 'CoreTasks.permissions.canUpdateProject',
-          objects: this._listStatuses(),
-          nameKey: 'name',
-          valueKey: 'value',
-          valueBinding: SC.binding('.content.developmentStatusValue', this),
-          toolTip: "_StatusTooltip".loc()
-        }),
-
-        timeLeftLabel: SC.LabelView.design({
-          layout: { top: 40, left: 10, height: 24, width: 60 },
-          textAlign: SC.ALIGN_RIGHT,
-          value: "_TimeLeft:".loc()
-        }),
-        timeLeftField: SC.TextFieldView.design({
-          layout: { top: 37, left: 75, width: 80, height: 24 },
-          isEnabledBinding: 'CoreTasks.permissions.canUpdateProject',
-          value: that.getPath('content.timeLeft')
-        }),
-        timeLeftHelpLabel: SC.LabelView.design({
-          layout: { top: 45, left: 165, height: 20, width: 330 },
-          escapeHTML: NO,
-          classNames: [ 'onscreen-help'],
-          value: "_TimeLeftOnscreenHelp".loc()
-        }),
-
-        activatedAtLabel: SC.LabelView.design({
-          layout: { top: 40, right: 113, height: 24, width: 100 },
-          textAlign: SC.ALIGN_RIGHT,
-          value: "_Activated:".loc()
-        }),
-        // TODO: [SG/EG] allow SCUI.DatePickerView popup picker height to be adjustable, not hardcoded to 255
-        activatedAtField: SCUI.DatePickerView.design({
-          layout: { top: 37, right: 10, height: 24, width: 100 },
-          dateFormat: CoreTasks.DATE_FORMAT,
-          hint: "_ChooseDate".loc(),
-          isEnabledBinding: 'CoreTasks.permissions.canUpdateProject',
-          date: that.getPath('content.activatedAtValue')
-        }),
-
-        descriptionLabel: SC.LabelView.design({
-          layout: { top: 70, left: 10, height: 17, width: 100 },
-          icon: 'description-icon',
-          value: "_Description:".loc()
-        }),
-        descriptionField: SC.TextFieldView.design({
-          layout: { top: 95, left: 10, right: 10, bottom: 65 },
-          hint: "_DescriptionHint".loc(),
-          maxLength: 500000,
-          isTextArea: YES,
-          isEnabledBinding: 'CoreTasks.permissions.canUpdateProject',
-          value: that.getPath('content.description')
-        }),
-        
-        createdAtLabel: SC.LabelView.design({
-          layout: { left: 10, bottom: 45, height: 17, width: 250 },
-          classNames: [ 'date-time'],
-          textAlign: SC.ALIGN_LEFT,
-          valueBinding: SC.binding('.content.displayCreatedAt', this)
-        }),
-        updatedAtLabel: SC.LabelView.design({
-          layout: { right: 10, bottom: 45, height: 17, width: 250 },
-          classNames: [ 'date-time'],
-          textAlign: SC.ALIGN_RIGHT,
-          valueBinding: SC.binding('.content.displayUpdatedAt', this)
-        }),
-
-        closeButton: SC.ButtonView.design({
-          layout: { bottom: 10, right: 20, width: 80, height: 24 },
-          isDefault: YES,
-          title: "_Close".loc(),
-          action: 'remove'
-        })
-          
-      })
-    });
-    if(this._editorPane) this._editorPane.popup(layer);
   },
   
   inlineEditorWillBeginEditing: function(inlineEditor) {

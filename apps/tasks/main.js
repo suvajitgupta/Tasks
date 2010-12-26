@@ -9,13 +9,11 @@ sc_require('core_routes');
 function main() { Tasks.main(); }
 
 // The following are used to indicate which editor is popped up
-Tasks.PROJECT_EDITOR = 1;
-Tasks.TASK_EDITOR = 2;
-Tasks.FILTER_EDITOR = 3;
+Tasks.TASK_EDITOR = 1;
+Tasks.FILTER_EDITOR = 2;
 Tasks.editorPoppedUp = null;
 
 Tasks.assignmentsRedrawNeeded = false;
-Tasks.sourcesRedrawNeeded = false;
 
 Tasks.main = function main() {
   

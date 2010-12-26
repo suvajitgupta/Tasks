@@ -18,8 +18,6 @@ Tasks.projectsController = SC.ArrayController.create(
     
     var projects = this.get('arrangedObjects');
     // console.log('DEBUG: projectsController content changed, projects: ' + projects.getEach('name'));
-    Tasks.sourcesRedrawNeeded = true;
-    if(Tasks.editorPoppedUp === Tasks.PROJECT_EDITOR) return;
     
     var nodes = [], systemProjects = [], doneProjects = [], activeProjects = [], plannedProjects = [];
     if(projects) {
@@ -55,7 +53,6 @@ Tasks.projectsController = SC.ArrayController.create(
     }
 
     this.set('sources', SC.Object.create({ treeItemChildren: nodes, treeItemIsExpanded: YES }));
-    Tasks.sourcesRedrawNeeded = false;
     
   }.observes('[]'),
   
@@ -120,11 +117,8 @@ Tasks.projectsController = SC.ArrayController.create(
     }, Tasks.projectsController);
   },
   
-  editNewProject: function(project){
-    var listView = Tasks.getPath('mainPage.mainPane.projectsList');
-    var idx = listView.get('content').indexOf(project);
-    var listItem = listView.itemViewForContentIndex(idx);
-    if(listItem) listItem.popupEditor();
+  editNewProject: function(project) {
+    Tasks.getPath('projectEditorPage.panel').popup(project);
   }
 
 });

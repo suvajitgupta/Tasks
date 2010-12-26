@@ -539,7 +539,7 @@ Tasks.mixin({
     var project = CoreTasks.createRecord(CoreTasks.Project, projectHash);
     var pc = this.projectsController;
     pc.selectObject(project);
-    CoreTasks.invokeLater(pc.editNewProject, 200, project);
+    pc.editNewProject(project);
 
   },
   

@@ -10,9 +10,9 @@
   @extends SC.View
   @author Suvajit Gupta
 */
-Tasks.editorHelper = SC.Object.create({
+Tasks.taskEditorHelper = SC.Object.create({
   
-  _listTypes: function() {
+  listTypes: function() {
      var ret = [];
      ret.push({ name: CoreTasks.TASK_TYPE_FEATURE, value: CoreTasks.TASK_TYPE_FEATURE, icon: 'task-icon-feature' });
      ret.push({ name: CoreTasks.TASK_TYPE_BUG, value: CoreTasks.TASK_TYPE_BUG, icon: 'task-icon-bug' });
@@ -20,7 +20,7 @@ Tasks.editorHelper = SC.Object.create({
      return ret;
   },
 
-  _listPriorities: function() {
+  listPriorities: function() {
      var ret = [];
      ret.push({ name: '<span class=task-priority-high>' + CoreTasks.TASK_PRIORITY_HIGH.loc() + '</span>', value: CoreTasks.TASK_PRIORITY_HIGH });
      ret.push({ name: '<span class=task-priority-medium>' + CoreTasks.TASK_PRIORITY_MEDIUM.loc() + '</span>', value: CoreTasks.TASK_PRIORITY_MEDIUM });
@@ -28,7 +28,7 @@ Tasks.editorHelper = SC.Object.create({
      return ret;
   },
 
-  _listStatuses: function() {
+  listStatuses: function() {
      var ret = [];
      ret.push({ name: '<span class=status-planned>' + CoreTasks.STATUS_PLANNED.loc() + '</span>', value: CoreTasks.STATUS_PLANNED });
      ret.push({ name: '<span class=status-active>' + CoreTasks.STATUS_ACTIVE.loc() + '</span>', value: CoreTasks.STATUS_ACTIVE });
@@ -37,7 +37,7 @@ Tasks.editorHelper = SC.Object.create({
      return ret;
   },
 
-  _listValidations: function() {
+  listValidations: function() {
      var ret = [];
      ret.push({ name: '<span class=task-validation-untested>' + CoreTasks.TASK_VALIDATION_UNTESTED.loc() + '</span>', value: CoreTasks.TASK_VALIDATION_UNTESTED });
      ret.push({ name: '<span class=task-validation-passed>' + CoreTasks.TASK_VALIDATION_PASSED.loc() + '</span>', value: CoreTasks.TASK_VALIDATION_PASSED });
@@ -92,7 +92,7 @@ Tasks.editorHelper = SC.Object.create({
 });
 
 Tasks.TaskEditorView = SC.View.extend(
-/** @scope Tasks.SummaryView.prototype */ {
+/** @scope Tasks.TaskEditorView.prototype */ {
   
   task: null,
   titleBarHeight: 40,
@@ -181,8 +181,6 @@ Tasks.TaskEditorView = SC.View.extend(
   },
   close: function() {
     Tasks.set('editorPoppedUp', null);
-    var task = this.get('task');
-    if(!task) return;
     this._postEditing();
     if(Tasks.assignmentsRedrawNeeded) Tasks.assignmentsController.showAssignments();
     if(CoreTasks.get('autoSave') && !CoreTasks.get('isSaving')) Tasks.saveData();
@@ -248,7 +246,6 @@ Tasks.TaskEditorView = SC.View.extend(
  
  editor: SC.View.design({
    
-   layout: { left: 0, right: 0, top: 0, bottom: 0},
    childViews: 'idLabel backButton previousButton nextButton nameLabel nameField typeLabel typeField priorityLabel priorityField statusLabel statusField validationLabel validationField effortLabel effortField effortHelpLabel submitterLabel submitterField projectLabel projectField assigneeLabel assigneeField splitView separatorView createdAtLabel updatedAtLabel watchingCheckbox watchersButton'.w(),
    classNames: ['task-editor'],
 
@@ -322,7 +319,7 @@ Tasks.TaskEditorView = SC.View.extend(
      localize: YES,
      isVisibleBinding: 'Tasks.softwareMode',
      isEnabledBinding: 'Tasks.tasksController.isEditable',
-     objects: Tasks.editorHelper._listTypes(),
+     objects: Tasks.taskEditorHelper.listTypes(),
      nameKey: 'name',
      valueKey: 'value',
      iconKey: 'icon',
@@ -339,7 +336,7 @@ Tasks.TaskEditorView = SC.View.extend(
      classNames: ['square'],
      localize: YES,
      isEnabledBinding: 'Tasks.tasksController.isEditable',
-     objects: Tasks.editorHelper._listPriorities(),
+     objects: Tasks.taskEditorHelper.listPriorities(),
      nameKey: 'name',
      valueKey: 'value',
      toolTip: "_PriorityTooltip".loc()
@@ -355,7 +352,7 @@ Tasks.TaskEditorView = SC.View.extend(
      classNames: ['square'],
      localize: YES,
      isEnabledBinding: 'Tasks.tasksController.isEditable',
-     objects: Tasks.editorHelper._listStatuses(),
+     objects: Tasks.taskEditorHelper.listStatuses(),
      nameKey: 'name',
      valueKey: 'value',
      toolTip: "_StatusTooltip".loc()
@@ -372,7 +369,7 @@ Tasks.TaskEditorView = SC.View.extend(
      classNames: ['square'],
      localize: YES,
      isVisibleBinding: 'Tasks.softwareMode',
-     objects: Tasks.editorHelper._listValidations(),
+     objects: Tasks.taskEditorHelper.listValidations(),
      nameKey: 'name',
      valueKey: 'value',
      toolTip: "_ValidationTooltip".loc()
@@ -401,7 +398,7 @@ Tasks.TaskEditorView = SC.View.extend(
    }),
    projectField: SCUI.ComboBoxView.design({
      layout: { top: 146, left: 60, width: 270, height: 24 },
-     objectsBinding: SC.Binding.oneWay('Tasks.editorHelper*projectsList'),
+     objectsBinding: SC.Binding.oneWay('Tasks.taskEditorHelper*projectsList'),
      nameKey: 'displayName',
      valueKey: 'id',
      iconKey: 'icon',
@@ -415,7 +412,7 @@ Tasks.TaskEditorView = SC.View.extend(
    }),
    submitterField: SCUI.ComboBoxView.design({
      layout: { top: 109, right: 10, width: 272, height: 24 },
-     objectsBinding: SC.Binding.oneWay('Tasks.editorHelper*usersList'),
+     objectsBinding: SC.Binding.oneWay('Tasks.taskEditorHelper*usersList'),
      nameKey: 'displayName',
      valueKey: 'id',
      iconKey: 'icon',
@@ -429,7 +426,7 @@ Tasks.TaskEditorView = SC.View.extend(
    }),
    assigneeField: SCUI.ComboBoxView.design({
      layout: { top: 146, right: 10, width: 272, height: 24 },
-     objectsBinding: SC.Binding.oneWay('Tasks.editorHelper*nonGuestsList'),
+     objectsBinding: SC.Binding.oneWay('Tasks.taskEditorHelper*nonGuestsList'),
      nameKey: 'displayName',
      valueKey: 'id',
      iconKey: 'icon',
