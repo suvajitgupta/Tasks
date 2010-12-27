@@ -18,12 +18,12 @@ Tasks.usersController = SC.ArrayController.create(
   /** @scope Tasks.usersController.prototype */ {
   
   userNamePattern: null,
-  roles: null,
   editableUsersCount: 0,
 
-  showRoles: function() {
+  roles: null,
+  _computeRoles: function() {
 
-    // console.log('DEBUG: showRoles()');
+    // console.log('DEBUG: _computeRoles()');
     var nodes = [], managerRoles = [], developerRoles = [], testerRoles = [], guestRoles = [];
     var user, users = this.get('arrangedObjects');
     if(users) {
@@ -58,7 +58,7 @@ Tasks.usersController = SC.ArrayController.create(
         else {
           editableUsers.push(currentUser);
         }
-        // console.log('DEBUG: showRoles() currentUser=' + currentUser.get('name') + ', #editableUsers=' + editableUsers.get('length'));
+        // console.log('DEBUG: _computeRoles() currentUser=' + currentUser.get('name') + ', #editableUsers=' + editableUsers.get('length'));
       }
 
       var len = editableUsers.get('length');

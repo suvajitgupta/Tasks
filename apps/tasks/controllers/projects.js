@@ -13,11 +13,10 @@ Tasks.projectsController = SC.ArrayController.create(
 /** @scope Tasks.projectsController.prototype */ {
   
   sources: null,
-  
-  showSources: function() {
+  _computeSources: function() {
     
     var projects = this.get('arrangedObjects');
-    // console.log('DEBUG: projectsController content changed, projects: ' + projects.getEach('name'));
+    // console.log('DEBUG: _computeSources() projects: ' + projects.getEach('name'));
     
     var nodes = [], systemProjects = [], doneProjects = [], activeProjects = [], plannedProjects = [];
     if(projects) {

@@ -28,7 +28,7 @@ Tasks.settingsPage = SC.Page.create({
     layout: { centerX: 0, centerY: 0, height: 352, width: 770 },
     
     contentView: SC.View.design({
-      childViews: 'userNamePatternField userNamePatternCancelButton usersMasterDetailView addButton deleteButton usersCount closeButton'.w(),
+      childViews: 'userNamePatternField userNamePatternCancelButton userManager addButton deleteButton usersCount closeButton'.w(),
       
       userNamePatternField: SC.TextFieldView.design(SCUI.ToolTip, {
         layout: { top: 10, height: 24, left: 43, width: 200 },
@@ -51,11 +51,11 @@ Tasks.settingsPage = SC.Page.create({
         isVisibleBinding: SC.Binding.oneWay('Tasks.usersController.userNamePattern').bool()
       }),
 
-      usersMasterDetailView: SC.View.design({
+      userManager: SC.View.design({
         layout: { left: 10, right: 10, top: 40, bottom: 40 },
-        childViews: 'usersMasterView usersDetailView'.w(),
+        childViews: 'usersListView userEditorView'.w(),
         
-        usersMasterView: SC.ScrollView.design({
+        usersListView: SC.ScrollView.design({
           layout: { top: 0, bottom: 0, left: 0, width: 290 },
           hasHorizontalScroller: NO,
           classNames: ['users-pane'],
@@ -113,7 +113,7 @@ Tasks.settingsPage = SC.Page.create({
         
         }),
         
-        usersDetailView: SC.View.design(SC.Border, {
+        userEditorView: SC.View.design(SC.Border, {
           layout: { top: 0, left: 300, height: 228, right: 0 },
           borderStyle: SC.BORDER_BEZEL,
           childViews: 'userInfoView createdAtLabel updatedAtLabel'.w(),
@@ -182,8 +182,8 @@ Tasks.settingsPage = SC.Page.create({
     setSmallSize: function() {
       this.set('isResizable', NO);
       this.set('layout', { centerX: 0, centerY: 0, height: 322, width: 465 });
-      this.setPath('contentView.usersMasterDetailView.layout', { left: 10, right: 10, top: 10, bottom: 40 });
-      this.setPath('contentView.usersMasterDetailView.usersDetailView.layout', { top: 0, left: 0, height: 228, right: 0 });
+      this.setPath('contentView.userManager.layout', { left: 10, right: 10, top: 10, bottom: 40 });
+      this.setPath('contentView.userManager.userEditorView.layout', { top: 0, left: 0, height: 228, right: 0 });
     },
     
     remove: function() {
@@ -193,6 +193,6 @@ Tasks.settingsPage = SC.Page.create({
       
   }),
   
-  userInformation: SC.outlet('panel.contentView.usersMasterDetailView.usersDetailView.userInfoView')
+  userInformation: SC.outlet('panel.contentView.userManager.userEditorView.userInfoView')
   
 });

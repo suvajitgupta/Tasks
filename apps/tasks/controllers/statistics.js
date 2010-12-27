@@ -13,10 +13,10 @@ sc_require('core');
   Controller for computing statistics.
 */
 Tasks.statisticsController = SC.ObjectController.create(
-/** @scope Tasks.loginController.prototype */ {
+/** @scope Tasks.statisticsController.prototype */ {
 
   statistics: '', // Stores statistics computed by function below
-  computeStatistics: function() {
+  _computeStatistics: function() {
 
     var submitters = {};
     var notLoadedAssigneesCount = 0, underloadedAssigneesCount = 0,
@@ -99,13 +99,13 @@ Tasks.statisticsController = SC.ObjectController.create(
       plannedCount: plannedCount, activeCount: activeCount, doneCount: doneCount, riskyCount: riskyCount,
       untestedCount: untestedCount, passedCount: passedCount, failedCount: failedCount
     };
-    // console.log('DEBUG: computeStatistics() ' + JSON.stringify(stats));
+    // console.log('DEBUG: _computeStatistics() ' + JSON.stringify(stats));
     this.set('statistics', stats);
   
   },
   
   showStatistics: function() {
-    this.computeStatistics();
+    this._computeStatistics();
     Tasks.statisticsPane.append();
   },
   
