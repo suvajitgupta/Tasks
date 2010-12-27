@@ -42,7 +42,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       this._timer.invalidate();
       this._timer = null;
     }
-    Tasks.getPath('projectEditorPage.panel').popup(this.get('content'));
+    Tasks.projectEditorPage.popup(this.get('content'));
   },
   touchStart: function(event) {
     // console.log('DEBUG: touch start on project item: ' + this.getPath('content.name'));

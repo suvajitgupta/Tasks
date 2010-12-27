@@ -22,7 +22,14 @@ Tasks.projectEditorHelper = SC.Object.create({
   
 Tasks.projectEditorPage = SC.Page.create({
   
-  panel: SCUI.ModalPane.create({
+  // TODO: [SC] remove hack below to create/destroy project editor panel to make text field views get updated properly after remove() is called
+  popup: function(project) {
+    this.panel = this.panelView.create();
+    this.panel.popup(project);
+  },
+  
+  panel: null,
+  panelView: SCUI.ModalPane.extend({
 
     project: null,
     titleBarHeight: 40,
@@ -61,13 +68,12 @@ Tasks.projectEditorPage = SC.Page.create({
         var oldTimeLeft = project.get('timeLeftValue');
         project.setIfChanged('timeLeftValue', editor.getPath('timeLeftField.value'));
         var oldActivatedAt = project.get('activatedAtValue');
-        project.setIfChanged('activatedAtValue', editor.getPath('activatedAField.date'));
+        project.setIfChanged('activatedAtValue', editor.getPath('activatedAtField.date'));
         project.setIfChanged('displayName', editor.getPath('nameField.value'));
-        console.log('DEBUG: postEditing editor.description = ' + Tasks.projectEditorPage.getPath('panel.contentView.descriptionField.value'));
         project.setIfChanged('description',  editor.getPath('descriptionField.value'));
         // If timeLeft or activatedAt has changed, recalculate load balancing
         if(oldTimeLeft !== project.get('timeLeftValue') || oldActivatedAt !== project.get('activatedAtValue')) {
-          console.log('DEBUG: need to redraw assignments since project timeLeft or activatedAt changed');
+          // console.log('DEBUG: need to redraw assignments since project timeLeft or activatedAt changed');
           Tasks.assignmentsController.showAssignments();
         }
       }
@@ -84,6 +90,7 @@ Tasks.projectEditorPage = SC.Page.create({
       if(CoreTasks.get('autoSave') && !CoreTasks.get('isSaving')) Tasks.saveData();
       this.invokeLater(function() { Tasks.mainPage.getPath('mainPane.projectsList').becomeFirstResponder(); }, 400);
       sc_super();
+      this.destroy();
     },
 
     contentView: SC.View.design({

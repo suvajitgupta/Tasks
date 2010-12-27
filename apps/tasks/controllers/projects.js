@@ -118,7 +118,7 @@ Tasks.projectsController = SC.ArrayController.create(
   },
   
   editNewProject: function(project) {
-    Tasks.getPath('projectEditorPage.panel').popup(project);
+    Tasks.projectEditorPage.popup(project);
   }
 
 });
