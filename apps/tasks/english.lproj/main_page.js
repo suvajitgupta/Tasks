@@ -378,7 +378,7 @@ Tasks.mainPage = SC.Page.design({
            renderMixin: function(context, firstTime) { // Used custom tooltip rendering to avoid escaping by SCUI.Toolip
              context.attr('title', "_TasksSearchTooltip".loc()) ;
            },
-           valueBinding: 'Tasks.assignmentsController.searchFilter',
+           valueBinding: 'Tasks.assignmentsController.taskSearch',
            isEnabledBinding: SC.Binding.not('Tasks.mainPageHelper*editorPoppedUp')
          }),
          tasksSearchCancelButton: SC.View.design(SC.Control, { // Tasks Search cancel button
@@ -390,9 +390,9 @@ Tasks.mainPage = SC.Page.design({
            },
            mouseDown: function() {
              if(Tasks.mainPageHelper.get('editorPoppedUp')) return;
-             Tasks.assignmentsController.set('searchFilter', '');
+             Tasks.assignmentsController.set('taskSearch', '');
            },
-           isVisibleBinding: SC.Binding.oneWay('Tasks.assignmentsController.searchFilter').bool(),
+           isVisibleBinding: SC.Binding.oneWay('Tasks.assignmentsController.taskSearch').bool(),
            isEnabledBinding: SC.Binding.not('Tasks.mainPageHelper*editorPoppedUp')
          })
 

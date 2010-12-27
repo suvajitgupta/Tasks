@@ -76,23 +76,23 @@ Tasks.assignmentsController = SC.ArrayController.create(
    */
   setAssigneeFilter: function(assignee) {
     var newAssigneeSelection = (SC.none(assignee)? '' : '[' + assignee + ']');
-    var searchFilter = this.get('searchFilter');
-    // console.log('DEBUG: setAssigneeFilter("' + (SC.none(assignee)? '' : assignee) + '") searchFilter is: "' + searchFilter + '"');
-    if(searchFilter !== null && searchFilter !== '') {
-      var assigneeSelection = searchFilter.match(/\[.*\]/);
+    var taskSearch = this.get('taskSearch');
+    // console.log('DEBUG: setAssigneeFilter("' + (SC.none(assignee)? '' : assignee) + '") taskSearch is: "' + taskSearch + '"');
+    if(taskSearch !== null && taskSearch !== '') {
+      var assigneeSelection = taskSearch.match(/\[.*\]/);
       if (assigneeSelection) { // if assignee selection is specified
         assigneeSelection += ''; // convert to string
-        searchFilter = searchFilter.replace(assigneeSelection, newAssigneeSelection);
+        taskSearch = taskSearch.replace(assigneeSelection, newAssigneeSelection);
       }
       else {
-        searchFilter = newAssigneeSelection + ' ' + searchFilter.replace(/^\s+/, '');
+        taskSearch = newAssigneeSelection + ' ' + taskSearch.replace(/^\s+/, '');
       }
     }
     else {
-      searchFilter = newAssigneeSelection;
+      taskSearch = newAssigneeSelection;
     }
-    // console.log('DEBUG: setting searchFilter to: "' + searchFilter + '"');
-    this.set('searchFilter', searchFilter);
+    // console.log('DEBUG: setting taskSearch to: "' + taskSearch + '"');
+    this.set('taskSearch', taskSearch);
     Tasks.assignmentsController.set('displayMode', Tasks.DISPLAY_MODE_TASKS);
   },
   
@@ -107,8 +107,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     }
   }.property('_showTasks').cacheable(),
   
-  userSelection: null,
-  searchFilter: null,
+  taskSearch: null,
   attributeFilterCriteria: Tasks.attributeFilterNone.slice(0),
   effortSpecified: Tasks.FILTER_DONT_CARE,
   recentlyUpdated: Tasks.FILTER_DONT_CARE,
@@ -217,7 +216,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
   }.property('attributeFilterCriteria', 'effortSpecified', 'recentlyUpdated', 'watched').cacheable(),
   
   hasFiltering: function() {
-    return this.userSelection || this.searchFilter || this.attributeFilterCriteria.length !== 13;
+    return this.taskSearch || this.attributeFilterCriteria.length !== 13;
   },
   
   setAttributeFilterShowstoppers: function() {
@@ -248,8 +247,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
   },
 
   resetFilters: function() {
-    this.set('userSelection', null);
-    this.set('searchFilter', null);
+    this.set('taskSearch', null);
     this.clearAttributeFilter();
   },
   
@@ -262,15 +260,15 @@ Tasks.assignmentsController = SC.ArrayController.create(
     // Preserve selected tasks to be restored at the end of rendering
     var selection = Tasks.tasksController.get('selection');
     var idPattern = null, searchPattern = null, positiveMatch = true;
-    var searchFilter = this.get('searchFilter');
+    var taskSearch = this.get('taskSearch');
     
     // Extract selected users ([Assignees] or <Submitters>)
     var i, j, assigneeSelectionDisplayNames = [], submitterSelectionDisplayNames = [];
-    if (searchFilter && searchFilter !== '') { // if a search filter is specified
-      var assigneeSelection = searchFilter.match(/\[.*\]/);
+    if (taskSearch && taskSearch !== '') { // if a search filter is specified
+      var assigneeSelection = taskSearch.match(/\[.*\]/);
       if (assigneeSelection) { // if assignee selection is specified
         assigneeSelection += ''; // convert to string
-        searchFilter = searchFilter.replace(assigneeSelection, ''); // remove assignee selection from search filter
+        taskSearch = taskSearch.replace(assigneeSelection, ''); // remove assignee selection from search filter
         assigneeSelection = assigneeSelection.substr(1,assigneeSelection.length-2);
         var assigneeSelectionNames = assigneeSelection.replace(/,/g, ' ').replace(/\s+/g, ' ').replace(/^\s+/, '').replace(/\s+$/, '');
         if (assigneeSelection !== '') {
@@ -292,10 +290,10 @@ Tasks.assignmentsController = SC.ArrayController.create(
           }
         }
       }
-      var submitterSelection = searchFilter.match(/\<.*\>/);
+      var submitterSelection = taskSearch.match(/\<.*\>/);
       if (submitterSelection) { // if submitter selection is specified
         submitterSelection += ''; // convert to string
-        searchFilter = searchFilter.replace(submitterSelection, ''); // remove submitter selection from search filter
+        taskSearch = taskSearch.replace(submitterSelection, ''); // remove submitter selection from search filter
         submitterSelection = submitterSelection.substr(1,submitterSelection.length-2);
         var submitterSelectionNames = submitterSelection.replace(/,/g, ' ').replace(/\s+/g, ' ').replace(/^\s+/, '').replace(/\s+$/, '');
         if (submitterSelection !== '') {
@@ -319,16 +317,16 @@ Tasks.assignmentsController = SC.ArrayController.create(
       }
     
       // Extract task name search filter
-      searchFilter = this._escapeMetacharacters(searchFilter).replace(/^\s+/, '').replace(/\s+$/, '');
-      // console.log('DEBUG: searchFilter: ' + searchFilter);
-      var idMatches = searchFilter.match(/#([\-\d]+)/g);
+      taskSearch = this._escapeMetacharacters(taskSearch).replace(/^\s+/, '').replace(/\s+$/, '');
+      // console.log('DEBUG: taskSearch: ' + taskSearch);
+      var idMatches = taskSearch.match(/#([\-\d]+)/g);
       // console.log('DEBUG: idMatches = ' + idMatches);
       if(!idMatches) {
-        if (searchFilter.indexOf('^') === 0) { // inverse search specified
+        if (taskSearch.indexOf('^') === 0) { // inverse search specified
           positiveMatch = false;
-          searchFilter = searchFilter.slice(1);
+          taskSearch = taskSearch.slice(1);
         }
-        searchPattern = new RegExp(searchFilter, 'i');
+        searchPattern = new RegExp(taskSearch, 'i');
       }
     }
     
@@ -647,12 +645,12 @@ Tasks.assignmentsController = SC.ArrayController.create(
   	this.invokeOnce(this.computeTasks);
   }.observes('[]', '_showTasks', 'attributeFilterCriteria', 'effortSpecified', 'recentlyUpdated', 'watched'),
   
-  _searchFilterHasChanged: function() {
-    // console.log('DEBUG: Search filter changed to "' + this.searchFilter + '"');
+  _taskSearchHasChanged: function() {
+    // console.log('DEBUG: Search filter changed to "' + this.taskSearch + '"');
     // Allow typing delay over a half second before redrawing tasks pane
     if (this._timer) this._timer.invalidate();
     this._timer = this.invokeLater(this._contentNeedsRedrawing, 500);
-  }.observes('searchFilter'),
+  }.observes('taskSearch'),
   
   assignmentsSummary: function() {
     
@@ -679,8 +677,9 @@ Tasks.assignmentsController = SC.ArrayController.create(
       ret += redFlags + "_redFlags".loc();
     }
     
+    // console.log('DEBUG: assignmentsSummary = ' + ret);
     return ret;
 
-  }.property('assignments')
+  }.property('tasks').cacheable()
   
 });

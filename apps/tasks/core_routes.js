@@ -55,7 +55,7 @@ Tasks.mixin( /** @scope Tasks */ {
     
     if(Tasks._checkLoginStatus()) {
       if(!SC.none(params.search) && params.search !== '') {
-        Tasks.assignmentsController.set('searchFilter', params.search);
+        Tasks.assignmentsController.set('taskSearch', params.search);
       }
       // Enter the statechart.
       Tasks.goState('a', 1);
@@ -117,7 +117,7 @@ Tasks.mixin( /** @scope Tasks */ {
       }
     }
     if(!SC.none(params.search) && params.search !== '') {
-      Tasks.assignmentsController.set('searchFilter', params.search);
+      Tasks.assignmentsController.set('taskSearch', params.search);
     }
     var defaultProjectId = null;
     if(!SC.none(params.projectId) && params.projectId !== '') {

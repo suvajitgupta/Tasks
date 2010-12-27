@@ -17,7 +17,7 @@
 Tasks.usersController = SC.ArrayController.create(
   /** @scope Tasks.usersController.prototype */ {
   
-  userNamePattern: null,
+  userSearch: null,
   editableUsersCount: 0,
 
   roles: null,
@@ -33,23 +33,23 @@ Tasks.usersController = SC.ArrayController.create(
       if(currentUser) {
         var isCurrentUserAManager = (currentUser.get('role') === CoreTasks.USER_ROLE_MANAGER);
         if(isCurrentUserAManager) {
-          var pattern = this.get('userNamePattern');
-          if(pattern === null || pattern === '') {
+          var userSearch = this.get('userSearch');
+          if(userSearch === null || userSearch === '') {
             editableUsers = users;
           }
           else {
             try {
               editableUsers = [];
-              var searchPattern = new RegExp(pattern, 'i');
-              var emailSearch = (pattern.indexOf('@') != -1);
+              var userSearchPattern = new RegExp(userSearch, 'i');
+              var emailSearch = (userSearch.indexOf('@') != -1);
               var numUsers = users.get('length');
               for (var j=0; j<numUsers; j++) {
                 user = users.objectAt(j);
                 if(emailSearch) {
-                  if(searchPattern.exec(user.get('email'))) editableUsers.push(user);
+                  if(userSearchPattern.exec(user.get('email'))) editableUsers.push(user);
                 }
                 else {
-                  if(searchPattern.exec(user.get('name')) || searchPattern.exec(user.get('loginName'))) editableUsers.push(user);
+                  if(userSearchPattern.exec(user.get('name')) || userSearchPattern.exec(user.get('loginName'))) editableUsers.push(user);
                 }
               }
             } catch(e) {}
@@ -93,7 +93,7 @@ Tasks.usersController = SC.ArrayController.create(
 
     this.set('roles', SC.Object.create({ treeItemChildren: nodes, treeItemIsExpanded: YES }));
 
-  }.observes('[]', 'userNamePattern'),
+  }.observes('[]', 'userSearch'),
 
   usersCount: function() {
     return this.getPath('editableUsersCount') + "_DisplayedUsers".loc() + this.getPath('selection.length') + "_selected".loc();

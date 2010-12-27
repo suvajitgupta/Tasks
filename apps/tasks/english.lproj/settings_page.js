@@ -28,17 +28,17 @@ Tasks.settingsPage = SC.Page.create({
     layout: { centerX: 0, centerY: 0, height: 352, width: 770 },
     
     contentView: SC.View.design({
-      childViews: 'userNamePatternField userNamePatternCancelButton userManager addButton deleteButton usersCount closeButton'.w(),
+      childViews: 'userSearchField userSearchCancelButton userManager addButton deleteButton usersCount closeButton'.w(),
       
-      userNamePatternField: SC.TextFieldView.design(SCUI.ToolTip, {
+      userSearchField: SC.TextFieldView.design(SCUI.ToolTip, {
         layout: { top: 10, height: 24, left: 43, width: 200 },
         classNames: ['search-bar'],
         hint: "_UserSearchSelectionHint".loc(),
         toolTip: "_UserSearchSelectionTooltip".loc(),
         isVisibleBinding: 'CoreTasks*isCurrentUserAManager',
-        valueBinding: 'Tasks.usersController.userNamePattern'
+        valueBinding: 'Tasks.usersController.userSearch'
       }),
-      userNamePatternCancelButton: SC.View.design({ // User selection cancel button
+      userSearchCancelButton: SC.View.design({ // User selection cancel button
         layout: { top: 14, height: 16, left: 221, width: 16 },
         isVisible: NO,
         classNames: ['filter-cancel-icon'],
@@ -46,9 +46,9 @@ Tasks.settingsPage = SC.Page.create({
           this.mouseDown();
         },
         mouseDown: function() {
-          Tasks.usersController.set('userNamePattern', '');
+          Tasks.usersController.set('userSearch', '');
         },
-        isVisibleBinding: SC.Binding.oneWay('Tasks.usersController.userNamePattern').bool()
+        isVisibleBinding: SC.Binding.oneWay('Tasks.usersController.userSearch').bool()
       }),
 
       userManager: SC.View.design({
