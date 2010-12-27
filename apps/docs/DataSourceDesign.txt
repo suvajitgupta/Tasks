@@ -1,0 +1,7 @@
+If one DataSource is identified as primary it is used for authentication/authorization/notifications and proxying to other data sources (for single origin policy)
+Otherwise localStorage DataSource is used
+
+Each DataSource must return a record set as specified in TasksJSON.txt
+
+Each Project can aggregate records from one or more DataSources
+Each DataSource has an URL and Query specified

@@ -3,6 +3,18 @@
 # parentheses enclose valid values, _Value_ indicates default
 
 ##################################################
+Record Set:
+{
+  result: {
+    users: <Users JSON>,
+    projects: <Projects JSON>,
+    tasks: <Tasks JSON>,
+    watches: <Watches JSON>,
+    comments: <Comments JSON>
+  }
+}
+
+##################################################
 Project:
 {
 	id*: <Number>, # primary key
