@@ -16,8 +16,8 @@ Tasks.projectController = SC.ObjectController.create(
   
   contentBinding: SC.Binding.oneWay('Tasks.projectsController.selection'),
   
-  displayTasks: function() {
-    // console.log('DEBUG: displayTasks()');
+  assignments: function() {
+    // console.log('DEBUG: assignments()');
     var ret = [];
     var sel = this.get('content');
     var len = sel? sel.length() : 0;
@@ -34,7 +34,7 @@ Tasks.projectController = SC.ObjectController.create(
   }.property('content').cacheable(),
 
   _contentTasksDidChange: function() {
-    this.propertyDidChange('displayTasks');
+    this.propertyDidChange('assignments');
   },
   
   _updateDisplayTaskObserving: function() {

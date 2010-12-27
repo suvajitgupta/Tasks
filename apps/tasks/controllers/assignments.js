@@ -69,9 +69,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
 /** @scope Tasks.assignmentsController.prototype */ {
   
   // contentBinding: SC.Binding.oneWay('Tasks.projectController.tasks'), // single-project selection mode
-  contentBinding: SC.Binding.oneWay('Tasks.projectController.displayTasks'), // multi-project selection mode
-  
-  assignedTasks: null,
+  contentBinding: SC.Binding.oneWay('Tasks.projectController.assignments'), // multi-project selection mode
   
   /**
    * Set filter to show specified assignee's tasks or clear assignee if not specified.
@@ -256,11 +254,12 @@ Tasks.assignmentsController = SC.ArrayController.create(
   },
   
   
+  tasks: null,
   // count: 0, // used for tracking/tuning calls to redraw tasks pane below
-  showAssignments: function() { // show tasks for selected user that matches search filter
+  computeTasks: function() { // show tasks for selected user that matches search filter
     
-    // console.log('DEBUG: showAssignments(' + this.count + ') entry at: ' + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
-    // Preserve selected tasks to be restored at the end of redrawing assignments
+    // console.log('DEBUG: computeTasks(' + this.count + ') entry at: ' + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
+    // Preserve selected tasks to be restored at the end of rendering
     var selection = Tasks.tasksController.get('selection');
     var idPattern = null, searchPattern = null, positiveMatch = true;
     var searchFilter = this.get('searchFilter');
@@ -440,7 +439,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     }
       
     // Sort grouped tasks by assignee
-    this.set('assignedTasks', SC.Object.create({ treeItemChildren: assignmentNodes.sort(function(a, b) {
+    this.set('tasks', SC.Object.create({ treeItemChildren: assignmentNodes.sort(function(a, b) {
       if(!Tasks.assignmentsController._showTasks) { // TEAM display mode, first try to sort in descending order of loading/red flags
         if(a.loading !== CoreTasks.USER_NOT_LOADED && b.loading !== CoreTasks.USER_NOT_LOADED) {
           var loadingDelta = b.effortGapPercent - a.effortGapPercent;
@@ -464,7 +463,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     }), treeItemIsExpanded: YES }));
     
     if(selection) Tasks.tasksController.selectObjects(selection);
-    // console.log('DEBUG: showAssignments(' + this.count++ + ') exit  at: ' + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
+    // console.log('DEBUG: computeTasks(' + this.count++ + ') exit  at: ' + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
     Tasks.assignmentsRedrawNeeded = false;    
 
   },
@@ -645,7 +644,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
       this._timer.invalidate();
       this._timer = null;
     }
-  	this.invokeOnce(this.showAssignments);
+  	this.invokeOnce(this.computeTasks);
   }.observes('[]', '_showTasks', 'attributeFilterCriteria', 'effortSpecified', 'recentlyUpdated', 'watched'),
   
   _searchFilterHasChanged: function() {
@@ -660,7 +659,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     var ret = '';
     
     var assigneesCount = 0;
-    var assignmentNodes = this.getPath('assignedTasks.treeItemChildren');
+    var assignmentNodes = this.getPath('tasks.treeItemChildren');
     if(assignmentNodes) assigneesCount = assignmentNodes.get('length');
     ret += (assigneesCount + "_assignees".loc());
 
@@ -682,6 +681,6 @@ Tasks.assignmentsController = SC.ArrayController.create(
     
     return ret;
 
-  }.property('assignedTasks')
+  }.property('assignments')
   
 });

@@ -29,7 +29,7 @@ Tasks.filterController = SC.ObjectController.create(
   
   applyFilter: function(){
     this._close();
-    if(Tasks.assignmentsRedrawNeeded) Tasks.assignmentsController.showAssignments();
+    if(Tasks.assignmentsRedrawNeeded) Tasks.assignmentsController.computeTasks();
   },
   
   _close: function(){

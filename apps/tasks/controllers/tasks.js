@@ -13,7 +13,7 @@
 Tasks.tasksController = SC.TreeController.create(
 /** @scope Tasks.tasksController.prototype */ {
 
-  contentBinding: SC.Binding.oneWay('Tasks.assignmentsController.assignedTasks'),
+  contentBinding: SC.Binding.oneWay('Tasks.assignmentsController.tasks'),
   allowsEmptySelection: YES,
   treeItemIsGrouped: YES,
   
@@ -261,7 +261,7 @@ Tasks.tasksController = SC.TreeController.create(
   _watchCount: null,
   _watchCountDidChange: function() {
     this.set('_watchCount', CoreTasks.getPath('allWatches.length'));
-    Tasks.assignmentsController.showAssignments();
+    Tasks.assignmentsController.computeTasks();
     // console.log('DEBUG: _watchCountDidChange to ' + this.get('_watchCount'));
   }.observes('CoreTasks.allWatches.[]'),
   watch: function() {

@@ -109,7 +109,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       sc_super();
       // if timeLeft or activatedAt was specified inline, redraw got load balancing recalculation
       if(finalValue.indexOf('{') >= 0 || finalValue.indexOf('<')  >= 0) {
-        Tasks.assignmentsController.showAssignments();
+        Tasks.assignmentsController.computeTasks();
       }
       if(CoreTasks.get('autoSave')) Tasks.saveData();
     }

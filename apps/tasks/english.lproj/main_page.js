@@ -365,7 +365,7 @@ Tasks.mainPage = SC.Page.design({
            mouseDown: function() {
              if(Tasks.mainPageHelper.get('editorPoppedUp')) return;
              Tasks.assignmentsController.clearAttributeFilter();
-             Tasks.assignmentsController.showAssignments();
+             Tasks.assignmentsController.computeTasks();
            },
            isVisibleBinding: SC.Binding.oneWay('Tasks.assignmentsController.attributeFilterEnabled').bool(),
            isEnabledBinding: SC.Binding.not('Tasks.mainPageHelper*editorPoppedUp')

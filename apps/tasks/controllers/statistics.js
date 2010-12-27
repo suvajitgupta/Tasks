@@ -29,7 +29,7 @@ Tasks.statisticsController = SC.ObjectController.create(
     var untestedCount = 0, passedCount = 0, failedCount = 0;
     
     var assigneesCount = 0;
-    var assignmentNodes = Tasks.assignmentsController.getPath('assignedTasks.treeItemChildren');
+    var assignmentNodes = Tasks.assignmentsController.getPath('tasks.treeItemChildren');
     if(assignmentNodes) assigneesCount = assignmentNodes.get('length');
     var tasksCount, totalTasksCount = 0;
     for(var i=0; i < assigneesCount; i++) {

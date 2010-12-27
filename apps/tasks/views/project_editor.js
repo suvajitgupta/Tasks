@@ -74,7 +74,7 @@ Tasks.projectEditorPage = SC.Page.create({
         // If timeLeft or activatedAt has changed, recalculate load balancing
         if(oldTimeLeft !== project.get('timeLeftValue') || oldActivatedAt !== project.get('activatedAtValue')) {
           // console.log('DEBUG: need to redraw assignments since project timeLeft or activatedAt changed');
-          Tasks.assignmentsController.showAssignments();
+          Tasks.assignmentsController.computeTasks();
         }
       }
     },
