@@ -354,10 +354,10 @@ Tasks.assignmentsController = SC.ArrayController.create(
       submitterName = submitter? submitter.get('displayName') : CoreTasks.USER_UNASSIGNED;
       if(isNewTask || assigneeSelectionDisplayNames.length === 0 || assigneeSelectionDisplayNames.indexOf(assigneeName) !== -1) {
         
-        var assigneeObj = assignees[assigneeName];
-        if(!assigneeObj) {
-          assigneeObj = { assignee: assignee, tasks: [] };
-          assignees[assigneeName] = assigneeObj;
+        var assigneeTasks = assignees[assigneeName];
+        if(!assigneeTasks) {
+          assigneeTasks = { assignee: assignee, tasks: [] };
+          assignees[assigneeName] = assigneeTasks;
         }
         
         // Extract tasks that meet filter criteria
@@ -429,18 +429,18 @@ Tasks.assignmentsController = SC.ArrayController.create(
             }
           }
         }
-        assigneeObj.tasks.push(task);
+        assigneeTasks.tasks.push(task);
       }
     }, this);
   
     for(assigneeName in assignees){
       if(assignees.hasOwnProperty(assigneeName)) {
-          this._createAssignmentNode(assignmentNodes, assigneeName, assignees[assigneeName], projectTimeLeft);
+          this._createAssignmentNode(assignmentNodes, assignees[assigneeName], projectTimeLeft);
       }
     }
       
     // Sort grouped tasks by assignee
-    this.set('assignedTasks', SC.Object.create({ treeItemChildren: assignmentNodes.sort(function(a,b) {
+    this.set('assignedTasks', SC.Object.create({ treeItemChildren: assignmentNodes.sort(function(a, b) {
       if(!Tasks.assignmentsController._showTasks) { // TEAM display mode, first try to sort in descending order of loading/red flags
         if(a.loading !== CoreTasks.USER_NOT_LOADED && b.loading !== CoreTasks.USER_NOT_LOADED) {
           var loadingDelta = b.effortGapPercent - a.effortGapPercent;
@@ -479,18 +479,17 @@ Tasks.assignmentsController = SC.ArrayController.create(
    * Create a node in the tree showing a user's tasks.
    *
    * @param {Array} set of assignment nodes.
-   * @param {String} assignee name.
-   * @param {Object} a hash of assignee ID and tasks array.
+   * @param {Object} a hash of assignee and tasks array.
    * @param {Number} amount of time left in project.
    * @returns {Object) return a node to be inserted into the tree view.
    */
-  _createAssignmentNode: function(assignmentNodes, assigneeName, assigneeObj, projectTimeLeft) {
+  _createAssignmentNode: function(assignmentNodes, assigneeTasks, projectTimeLeft) {
     
+    var displayName = assigneeTasks.assignee? assigneeTasks.assignee.get('displayName') : CoreTasks.USER_UNASSIGNED;
     var taskWithUnspecifiedEffort = false, doneTaskWithUnspecifiedEffort = false;
-    var displayName = assigneeName;
     var effortString, totalFinishedEffortMin = 0, totalFinishedEffortMax = 0, totalEffortMin = 0, totalEffortMax = 0, effortMin, effortMax;
     var totalFinishedCount = 0, totalLeftCount = 0;
-    var task, tasks = assigneeObj.tasks;
+    var task, tasks = assigneeTasks.tasks;
     var tasksCount = tasks.get('length');
     var riskyTasksCount = 0;
     var failedTasksCount = 0;
@@ -586,7 +585,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
       riskyTasksCount:  riskyTasksCount,
       failedTasksCount:  failedTasksCount,
       loading: loading,
-      assignee: assigneeObj.assignee,
+      assignee: assigneeTasks.assignee,
       treeItemChildren: Tasks.assignmentsController._showTasks? tasks.sort(function(a,b) {
         // sort by status, then by validation (if "Done"), then by priority, then by type
         
