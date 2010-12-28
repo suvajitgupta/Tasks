@@ -16,6 +16,9 @@ Tasks.projectController = SC.ObjectController.create(
   
   contentBinding: SC.Binding.oneWay('Tasks.projectsController.selection'),
   
+  /*
+   * Extract all tasks in selected projects - to be grouped by assignmentsController for display in tasks list
+   */
   assignments: function() {
     // console.log('DEBUG: assignments()');
     var ret = [];
@@ -33,32 +36,45 @@ Tasks.projectController = SC.ObjectController.create(
     return ret;
   }.property('content').cacheable(),
 
-  _contentTasksDidChange: function() {
+  /*
+   * Tasks associated with selected projects chnaged.
+   * As a result, force refresh of anything bound to 'assignments' above.
+   */
+  _tasksDidChange: function() {
     this.propertyDidChange('assignments');
   },
   
-  _updateDisplayTaskObserving: function() {
+  /*
+   * Update observers on tasks for selected projects.
+   * If any of these tasks change ensure '_tasksDidChange()' is called.
+   */
+  _updateTasksSetObservers: function() {
     var content = this.get('content'),
-        observing = this._displayTaskObserving;
-     
-    // Tear down old observers
-    if (observing) {
-      observing.forEach(function(tasks) {
-        tasks.removeObserver('[]', this, this._contentTasksDidChange);
+        tasksSet = this._tasksSet;
+    // console.log('DEBUG: _updateTasksSetObservers() old tasks set length = ' + (tasksSet? tasksSet.length : 'none'));
+        
+    // Remove old observers
+    if (tasksSet) {
+      tasksSet.forEach(function(tasks) {
+        tasks.removeObserver('[]', this, this._tasksDidChange);
       }, this);
     }
   
     // Set up new observers
-    observing = this._displayTaskObserving = [];
+    tasksSet = this._tasksSet = [];
     content.forEach(function(project) {
       var tasks = project.get('tasks');
-      observing.push(tasks);
-      tasks.addObserver('[]', this, this._contentTasksDidChange);
+      // console.log('DEBUG: _updateTasksSetObservers() adding observers for project = ' + project.get('name'));
+      tasksSet.push(tasks);
+      tasks.addObserver('[]', this, this._tasksDidChange);
     }, this);
      
   }.observes('content'),
   
-  _projectSelectionDidChange: function() { // set URL route when a single project is selected
+  /*
+   * Set URL route when a single project is selected
+   */
+  _projectSelectionDidChange: function() {
     if(this.getPath('content.length') !== 1) return;
 
     var last = this._project,
