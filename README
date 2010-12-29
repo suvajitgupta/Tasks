@@ -5,6 +5,7 @@ Change to the directory where you would like to work on Tasks and type...
 
 git clone git://github.com/suvajitgupta/Tasks.git tasks
 cd tasks/frameworks
+git clone git://github.com/FrozenCanuck/Ki.git ki
 git clone git://github.com/suvajitgupta/sproutcore.git
 git clone git://github.com/suvajitgupta/SCUI.git scui
 git clone git://github.com/etgryphon/sai.git
@@ -14,7 +15,7 @@ cd ../
 git clone git://github.com/etgryphon/sproutcore-uds.git scuds
 cd scuds
 git checkout -b tasks origin/se/tasks
-cd ../
+cd ../../
 
 If you don't have the latest Ruby gems, type...
 
