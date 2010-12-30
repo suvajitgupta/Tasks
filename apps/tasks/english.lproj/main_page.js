@@ -84,7 +84,7 @@ Tasks.mainPageHelper = SC.Object.create({
     }
     ret.push({ isSeparator: YES });
     ret.push({ title: "_LaunchHelp".loc(), icon: 'sc-icon-help-16', target: 'Tasks', action: 'help', isEnabled: YES });
-    ret.push({ title: "_Logout".loc(), icon: 'logout-icon', target: 'Tasks', action: 'logout', isEnabled: YES });
+    ret.push({ title: "_Logout".loc(), icon: 'logout-icon', action: 'logout', isEnabled: YES });
     this.set('actions', ret);
   }.observes('editorPoppedUp', 'displayedTasksCount', 'autoSave', 'shouldNotify'),
   actions: null,
@@ -104,7 +104,8 @@ Tasks.mainPageHelper = SC.Object.create({
 Tasks.mainPage = SC.Page.design({
   
  mainPane: SC.MainPane.design({
-   
+
+   defaultResponder: 'Tasks.statechart',
    welcomeMessage: SC.outlet('masterDetailView.detailView.topToolbar.welcomeMessageLabel'),
    projectsList:   SC.outlet('masterDetailView.masterView.contentView.projectsList.contentView'),
    tasksSceneView: SC.outlet('masterDetailView.detailView.contentView.tasksSceneView'),

@@ -55,11 +55,11 @@ Tasks.mixin({
    */
   authenticationSuccess: function(response, request) {
     // console.log('DEBUG: authenticationSuccess()');
+    Tasks.statechart.gotoState('loggedIn');
     switch (this.state.a) {
       case 1:
       case 2:
         // Start GUI and setup startup defaults
-        Tasks.loginController.closePanel();
         Tasks.getPath('mainPage.mainPane').append();
         Tasks.mainPageHelper.set('clippyDetails', document.getElementById(Tasks.mainPageHelper.clippyDetailsId));
         if(SC.none(request)) {
@@ -449,6 +449,8 @@ Tasks.mixin({
    */
   _restart: function() {
     
+    Tasks.statechart.gotoState('loggedOut');
+    
     // console.log('DEBUG: restart()');
     // Clear cached localStorage data
     if(CoreTasks.useLocalStorage) {
@@ -836,14 +838,6 @@ Tasks.mixin({
     }
   },
   
-  /**
-    If the user indicated that they needed to sign up for a new account
-    then launch the signup pane.
-  */
-  launchSignupPane: function(){
-    Tasks.SIGNUP.didBecomeFirstResponder();
-  },
-
   /**
     Manipulate auto save option.
   */

@@ -148,7 +148,7 @@ Tasks.mixin( /** @scope Tasks */ {
     if(CoreTasks.loginTime && SC.none(Tasks.state.a)) {
       // Enter the statechart.
       Tasks.goState('a', 1);
-      Tasks.loginController.openPanel();
+      Tasks.statechart.initStatechart();
     }
   }
   

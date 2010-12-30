@@ -37,6 +37,7 @@ Tasks.loginController = SC.ObjectController.create(
       if(panel) {
         panel.remove();
       }
+      this._panelOpened = false;
     },
     
     login: function() {

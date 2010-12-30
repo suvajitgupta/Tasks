@@ -1,27 +1,24 @@
 //============================================================================
-// Tasks.SIGNUP
-//============================================================================
+// ==========================================================================
+// Tasks.signupController
+// ==========================================================================
 /*globals CoreTasks Tasks sc_require*/
 sc_require('core');
 sc_require('views/user_information');
 
-/**
-
-  This will serve as the responder to all signup actions
+/** @static
   
-  @extends SC.Responder
-  @author Joshua Holt [JH2]
-  @version preBeta
-  @since preBeta
-
+  @extends SC.ObjectController
+  @author Suvajit Gupta
+  
+  Controller for signing up a guest user.
 */
-
-Tasks.SIGNUP = SC.Responder.create({
+Tasks.signupController = SC.ObjectController.create(
+/** @scope Tasks.signupController.prototype */ {
   
   _newUser: null,
   
-  // when we become first responder, always show the signup panel
-  didBecomeFirstResponder: function() {
+  openPanel: function() {
     // Create a new user and start editing its properties.
     var newUserHash = SC.clone(CoreTasks.User.NEW_USER_HASH);
     newUserHash.role = CoreTasks.USER_ROLE_GUEST;
@@ -33,8 +30,7 @@ Tasks.SIGNUP = SC.Responder.create({
     pane.makeFirstResponder(pane.contentView.userInformation.fullNameField);
   },
   
-  // called when the OK button is pressed.
-  submit: function() {
+  signup: function() {
     // console.log('DEBUG: Signup.submit() loginName=' + Tasks.userController.get('loginName'));
     
     var params = {
@@ -70,24 +66,22 @@ Tasks.SIGNUP = SC.Responder.create({
     Tasks.userController.displayLoginNameError();
   },
   
-  // called when the Cancel button is pressed
+  // called to abort signup
   cancel: function() {
-    
     // Discard new user since signup was abandoned
     if(this._newUser) {
       this._newUser.destroy();
       this._newUser = null;
     }
     Tasks.usersController.set('selection', '');
-
-    // Go back to login screen
-    Tasks.getPath('signupPage.mainPane').remove();
-    this._refocusLoginPanel();
+    Tasks.statechart.gotoState('logIn');
   },
-  
-  _refocusLoginPanel: function() {
+
+  closePanel: function() {
+    // Close signup panel and refocus on login panel
+    Tasks.getPath('signupPage.mainPane').remove();
     var panel = Tasks.getPath('loginPage.panel');
     if(panel) panel.focus();
-  }  
-  
+  }
+    
 });

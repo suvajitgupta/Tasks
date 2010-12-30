@@ -15,12 +15,13 @@ sc_require('core');
 */
 
 Tasks.signupPage = SC.Page.design({
-  // The main signup pane.  used to show info
+
   mainPane: SC.PanelPane.design({
+
+    defaultResponder: 'Tasks.statechart',
+
     layout: { centerX: 0, width: 450, centerY: 0, height: 215 },
     
-    defaultResponder: Tasks.SIGNUP,
-
     contentView: SC.View.design({
       
       childViews: "signupPrompt userInformation signupButton cancelButton".w(),
@@ -46,7 +47,7 @@ Tasks.signupPage = SC.Page.design({
         isEnabledBinding: 'Tasks.userController.isValidUserName',
         keyEquivalent: 'return',
         isDefault: YES,
-        action: "submit"
+        action: 'signup'
       }),
       
       cancelButton: SC.ButtonView.design({
@@ -54,9 +55,11 @@ Tasks.signupPage = SC.Page.design({
         title: "_Cancel".loc(),
         keyEquivalent: 'escape',
         isCancel: YES,
-        action: "cancel"
+        action: 'cancel'
       })
       
     })
+    
   })
+  
 });

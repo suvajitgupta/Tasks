@@ -16,6 +16,9 @@ sc_require('core');
 Tasks.loginPage = SC.Page.create({
   
   panel: SC.PanelPane.create({
+    
+    defaultResponder: 'Tasks.statechart',
+
     layout: { top: 0, bottom: 0, left: 0, right: 0 },
     classNames: ['login-page'],
     
@@ -35,8 +38,7 @@ Tasks.loginPage = SC.Page.create({
         classNames: ['dark'],
         icon: 'user-role-guest',
         title: "_GuestSignup".loc() + '...',
-        target: 'Tasks',
-        action: 'launchSignupPane'
+        action: 'signup'
       }) : SC.View.design({ layout: { top: 70, left: 520, height: 1, width: 1 } }),
       
       loginNameField: SC.TextFieldView.design({
@@ -71,7 +73,6 @@ Tasks.loginPage = SC.Page.create({
         isEnabledBinding: SC.Binding.oneWay('Tasks.loginController.loginName').bool(),
         isDefault: YES,
         title: "_Login".loc(),
-        target: 'Tasks.loginController',
         action: 'login'
       })
             
