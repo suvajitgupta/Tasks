@@ -57,8 +57,6 @@ Tasks.mixin( /** @scope Tasks */ {
       if(!SC.none(params.search) && params.search !== '') {
         Tasks.assignmentsController.set('taskSearch', params.search);
       }
-      // Enter the statechart.
-      Tasks.goState('a', 1);
       Tasks.authenticate('guest', '');
       // TODO: [SG] add error message if 'guest' user is non-existent
     }
@@ -145,11 +143,6 @@ Tasks.mixin( /** @scope Tasks */ {
     The catch-all case when no routes are specified
   */
   defaultRoute: function(params) {
-    if(CoreTasks.loginTime && SC.none(Tasks.state.a)) {
-      // Enter the statechart.
-      Tasks.goState('a', 1);
-      Tasks.statechart.initStatechart();
-    }
   }
   
 });

@@ -20,8 +20,7 @@ Tasks.main = function main() {
   // console.log('DEBUG: "Tasks" started at: %@'.fmt(new Date()));
   CoreTasks.dataSaveErrorCallback = Tasks.dataSaveErrorCallback;
   Tasks.registerRoutes();
-  
-  Tasks.isLoaded = YES; // for Lebowski
+  Tasks.statechart.initStatechart();
   
   // Setup timer to refresh project countDowns
   SC.Timer.schedule({
@@ -31,5 +30,7 @@ Tasks.main = function main() {
     repeats: YES
   });
   
+  // Let Lebowski know application is ready
+  Tasks.isLoaded = YES;
 
 };

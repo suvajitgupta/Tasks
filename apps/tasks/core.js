@@ -13,7 +13,7 @@
 /*globals Tasks CoreTasks sc_require */
 sc_require('statechart');
 
-Tasks = SC.Object.create(SC.Statechart,
+Tasks = SC.Object.create(
   /** @scope Tasks.prototype */ {
 
   NAMESPACE: 'Tasks',

@@ -24,29 +24,21 @@ Tasks.mixin({
    */
   authenticate: function(loginName, password) {
     // console.log('DEBUG: authenticate()');
-    switch (this.state.a) {
-      case 1:
-        this.goState('a', 2);
-        Tasks.set('loginName', loginName);
-        if(CoreTasks.remoteDataSource) { // remote authentication
-          var params = {
-            successCallback: this.authenticationSuccess.bind(this),
-            failureCallback: this.authenticationFailure.bind(this)
-          };
-          return CoreTasks.User.authenticate(loginName, password, params);
+    Tasks.set('loginName', loginName);
+    if(CoreTasks.remoteDataSource) { // remote authentication
+      var params = {
+        successCallback: this.authenticationSuccess.bind(this),
+        failureCallback: this.authenticationFailure.bind(this)
+      };
+      return CoreTasks.User.authenticate(loginName, password, params);
+    }
+    else { // running off fixtures
+      for(var i = 0, len = CoreTasks.User.FIXTURES.length; i < len; i++) {
+        if(loginName === CoreTasks.User.FIXTURES[i].loginName) {
+          return this.authenticationSuccess();
         }
-        else { // running off fixtures
-          for(var i = 0, len = CoreTasks.User.FIXTURES.length; i < len; i++) {
-            if(loginName === CoreTasks.User.FIXTURES[i].loginName) {
-              return this.authenticationSuccess();
-            }
-          }
-          return this.authenticationFailure();
-        }
-        break;
-
-      default:
-        this._logActionNotHandled('authenticate', 'a', this.state.a);  
+      }
+      return this.authenticationFailure();
     }
   },
   
@@ -55,103 +47,94 @@ Tasks.mixin({
    */
   authenticationSuccess: function(response, request) {
     // console.log('DEBUG: authenticationSuccess()');
-    Tasks.statechart.gotoState('loggedIn');
-    switch (this.state.a) {
-      case 1:
-      case 2:
-        // Start GUI and setup startup defaults
-        Tasks.getPath('mainPage.mainPane').append();
-        Tasks.mainPageHelper.set('clippyDetails', document.getElementById(Tasks.mainPageHelper.clippyDetailsId));
-        if(SC.none(request)) {
-          Tasks.set('serverType', Tasks.NO_SERVER); // Fixtures mode
-        }
-        else {
-          var headers = request.get('headers');
-          if(SC.typeOf(headers) === SC.T_HASH) {
-            var server = headers.Server || headers.server;
-            if(server && server.indexOf('Persevere') !== -1) Tasks.set('serverType', Tasks.PERSEVERE_SERVER);
-          }
-        }
-        
-        // Create system projects
-        if(!CoreTasks.get('allTasksProject')) {
-          var allTasksProject = CoreTasks.createRecord(CoreTasks.Project, {
-            name: CoreTasks.ALL_TASKS_NAME.loc()
-          });
-          CoreTasks.set('allTasksProject', allTasksProject);
-          CoreTasks.set('needsSave', NO);
-        }
-        if(!CoreTasks.get('unallocatedTasksProject')) {
-          var unallocatedTasksProject = CoreTasks.createRecord(CoreTasks.Project, {
-            name: CoreTasks.UNALLOCATED_TASKS_NAME.loc()
-          });
-          CoreTasks.set('unallocatedTasksProject', unallocatedTasksProject);
-          CoreTasks.set('needsSave', NO);
-        }
-        if(!CoreTasks.get('unassignedTasksProject')) {
-          var unassignedTasksProject = CoreTasks.createRecord(CoreTasks.Project, {
-            name: CoreTasks.UNASSIGNED_TASKS_NAME.loc()
-          });
-          CoreTasks.set('unassignedTasksProject', unassignedTasksProject);
-          CoreTasks.set('needsSave', NO);
-        }
-        
-        // Setup user controller and then current logged on user
-        // Note: sequence is important below - logged in user must be loaded after data is preloaded from LDS to get new authToken
-        // FIXME: [SG] don't send private information (like email address) for users from GAE Server - these can be seen in localStorage later
-        var currentUser = null;
-        if (!CoreTasks.get('allUsers')) {
-          CoreTasks.set('allUsers', CoreTasks.store.find(
-            SC.Query.create({ recordType: CoreTasks.User, orderBy: 'name', localOnly: YES })));
-          this.usersController.set('content', CoreTasks.get('allUsers'));
-        }
-        if(SC.none(response)) {
-          currentUser = CoreTasks.getUserByLoginName(Tasks.get('loginName'));
-        }
-        else {
-          SC.RunLoop.begin();
-          CoreTasks.store.loadRecords(CoreTasks.User, response);
-          SC.RunLoop.end();
-          currentUser = CoreTasks.getUserByLoginName(response[0].loginName);
-        }
-
-        // Greet user and save login session information
-        CoreTasks.set('currentUser', currentUser);
-        CoreTasks.setPermissions();
-        var welcomeMessage = Tasks.getPath('mainPage.mainPane.welcomeMessage');
-        welcomeMessage.set('toolTip', "_LoginSince".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
-
-        // Based on user's role set up appropriate task filter
-        if(CoreTasks.getPath('currentUser.role') === CoreTasks.USER_ROLE_DEVELOPER) { // Set assignee selection filter to current user
-          Tasks.showCurrentUserTasks();
-        }
-
-        // Setup projects/tasks/watches controllers
-        if (!CoreTasks.get('allProjects')) {
-          CoreTasks.set('allProjects', CoreTasks.store.find(
-            SC.Query.create({ recordType: CoreTasks.Project, orderBy: 'name', localOnly: YES })));
-          this.projectsController.set('content', CoreTasks.get('allProjects'));
-        }
-        if (!CoreTasks.get('allTasks')) {
-          CoreTasks.set('allTasks', CoreTasks.store.find( 
-            SC.Query.create({ recordType: CoreTasks.Task, localOnly: YES })));
-        }
-        if (!CoreTasks.get('allWatches')) {
-          CoreTasks.set('allWatches', CoreTasks.store.find(
-            SC.Query.create({ recordType: CoreTasks.Watch, localOnly: YES })));
-        }
-        if (!CoreTasks.get('allComments')) {
-          CoreTasks.set('allComments', CoreTasks.store.find(
-            SC.Query.create({ recordType: CoreTasks.Comment, localOnly: YES })));
-        }
-        this._selectDefaultProject(false);
-
-        this.goState('a', 3);
-        break;
-
-      default:
-        this._logActionNotHandled('authenticationSuccess', 'a', this.state.a);  
+    // Start GUI and setup startup defaults
+    Tasks.getPath('mainPage.mainPane').append();
+    Tasks.mainPageHelper.set('clippyDetails', document.getElementById(Tasks.mainPageHelper.clippyDetailsId));
+    if(SC.none(request)) {
+      Tasks.set('serverType', Tasks.NO_SERVER); // Fixtures mode
     }
+    else {
+      var headers = request.get('headers');
+      if(SC.typeOf(headers) === SC.T_HASH) {
+        var server = headers.Server || headers.server;
+        if(server && server.indexOf('Persevere') !== -1) Tasks.set('serverType', Tasks.PERSEVERE_SERVER);
+      }
+    }
+    
+    // Create system projects
+    if(!CoreTasks.get('allTasksProject')) {
+      var allTasksProject = CoreTasks.createRecord(CoreTasks.Project, {
+        name: CoreTasks.ALL_TASKS_NAME.loc()
+      });
+      CoreTasks.set('allTasksProject', allTasksProject);
+      CoreTasks.set('needsSave', NO);
+    }
+    if(!CoreTasks.get('unallocatedTasksProject')) {
+      var unallocatedTasksProject = CoreTasks.createRecord(CoreTasks.Project, {
+        name: CoreTasks.UNALLOCATED_TASKS_NAME.loc()
+      });
+      CoreTasks.set('unallocatedTasksProject', unallocatedTasksProject);
+      CoreTasks.set('needsSave', NO);
+    }
+    if(!CoreTasks.get('unassignedTasksProject')) {
+      var unassignedTasksProject = CoreTasks.createRecord(CoreTasks.Project, {
+        name: CoreTasks.UNASSIGNED_TASKS_NAME.loc()
+      });
+      CoreTasks.set('unassignedTasksProject', unassignedTasksProject);
+      CoreTasks.set('needsSave', NO);
+    }
+    
+    // Setup user controller and then current logged on user
+    // Note: sequence is important below - logged in user must be loaded after data is preloaded from LDS to get new authToken
+    // FIXME: [SG] don't send private information (like email address) for users from GAE Server - these can be seen in localStorage later
+    var currentUser = null;
+    if (!CoreTasks.get('allUsers')) {
+      CoreTasks.set('allUsers', CoreTasks.store.find(
+        SC.Query.create({ recordType: CoreTasks.User, orderBy: 'name', localOnly: YES })));
+      this.usersController.set('content', CoreTasks.get('allUsers'));
+    }
+    if(SC.none(response)) {
+      currentUser = CoreTasks.getUserByLoginName(Tasks.get('loginName'));
+    }
+    else {
+      SC.RunLoop.begin();
+      CoreTasks.store.loadRecords(CoreTasks.User, response);
+      SC.RunLoop.end();
+      currentUser = CoreTasks.getUserByLoginName(response[0].loginName);
+    }
+
+    // Greet user and save login session information
+    CoreTasks.set('currentUser', currentUser);
+    CoreTasks.setPermissions();
+    var welcomeMessage = Tasks.getPath('mainPage.mainPane.welcomeMessage');
+    welcomeMessage.set('toolTip', "_LoginSince".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
+
+    // Based on user's role set up appropriate task filter
+    if(CoreTasks.getPath('currentUser.role') === CoreTasks.USER_ROLE_DEVELOPER) { // Set assignee selection filter to current user
+      Tasks.showCurrentUserTasks();
+    }
+
+    // Setup projects/tasks/watches controllers
+    if (!CoreTasks.get('allProjects')) {
+      CoreTasks.set('allProjects', CoreTasks.store.find(
+        SC.Query.create({ recordType: CoreTasks.Project, orderBy: 'name', localOnly: YES })));
+      this.projectsController.set('content', CoreTasks.get('allProjects'));
+    }
+    if (!CoreTasks.get('allTasks')) {
+      CoreTasks.set('allTasks', CoreTasks.store.find( 
+        SC.Query.create({ recordType: CoreTasks.Task, localOnly: YES })));
+    }
+    if (!CoreTasks.get('allWatches')) {
+      CoreTasks.set('allWatches', CoreTasks.store.find(
+        SC.Query.create({ recordType: CoreTasks.Watch, localOnly: YES })));
+    }
+    if (!CoreTasks.get('allComments')) {
+      CoreTasks.set('allComments', CoreTasks.store.find(
+        SC.Query.create({ recordType: CoreTasks.Comment, localOnly: YES })));
+    }
+    this._selectDefaultProject(false);
+
+    Tasks.statechart.gotoState('loggedIn');
   },
 
   /**
@@ -161,15 +144,8 @@ Tasks.mixin({
    */
   authenticationFailure: function(response) {
     // console.log('DEBUG: authenticationFailure()');
-    switch (this.state.a) {
-      case 2:
-        var errorString = SC.instanceOf(response, SC.Error)? "_LoginServerAccessError".loc() : "_LoginAuthenticationError".loc();
-        Tasks.loginController.displayLoginError(errorString);
-        this.goState('a', 1);
-        break;
-      default:
-        this._logActionNotHandled('authenticationFailure', 'a', this.state.a);  
-    }
+    var errorString = SC.instanceOf(response, SC.Error)? "_LoginServerAccessError".loc() : "_LoginAuthenticationError".loc();
+    Tasks.loginController.displayLoginError(errorString);
   },
   
   /**
@@ -280,7 +256,6 @@ Tasks.mixin({
     serverMessage.set('icon', '');
     serverMessage.set('value', "_DataLoaded".loc() + SC.DateTime.create(parseInt(Tasks.get('lastRetrieved'), 10)).toFormattedString(CoreTasks.TIME_DATE_FORMAT));
     Tasks.projectsController.refreshCountdowns();
-    this.goState('a', 4);
 
   },
   
@@ -291,13 +266,6 @@ Tasks.mixin({
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('icon', '');
     serverMessage.set('value', "_DataLoadFailed".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
-    switch (this.state.a) {
-      case 3:
-        if(!CoreTasks.loginTime) this.goState('a', 4);
-        break;
-      default:
-        this._logActionNotHandled('dataLoadFailure', 'a', this.state.a);  
-    }
   },
   
   /**
@@ -351,13 +319,6 @@ Tasks.mixin({
     serverMessage.set('value', "_DataSaveError".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
   },
 
-  /**
-   * Reload latest Tasks data from server.
-   */
-  refreshData: function() {
-    this.goState('a', 3);
-  },
-  
   /**
    * Import data from external text file.
    */
@@ -852,17 +813,6 @@ Tasks.mixin({
     CoreTasks.set('shouldNotify', !CoreTasks.get('shouldNotify'));
   },
 
-  /**
-   * Logs a message indicating that the given state isn't handled in the given action.
-   *
-   * @param {String} action The name of the action (ex. "logout").
-   * @param {String} stateName The name of the state (ex. "a").
-   * @param {Integer} stateNum The number of the sate (ex. "4").
-   */
-  _logActionNotHandled: function(action, stateName, stateNum) {
-    console.error('Action not handled in state %@[%@]: %@'.fmt(stateName, stateNum, action));
-  },
-  
   /**
    * Temporary callback to handle missing functionality.
    *

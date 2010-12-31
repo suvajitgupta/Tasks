@@ -479,7 +479,7 @@ Tasks.mainPage = SC.Page.design({
                icon: 'refresh-icon',
                toolTip: "_RefreshTooltip".loc(),
                target: 'Tasks',
-               action: 'refreshData',
+               action: 'loadData',
                isEnabledBinding: SC.Binding.transform(function(value, binding) {
                                                         return value === ''; // when not saving, shown via progress icon
                                                       }).from('Tasks.mainPage.mainPane.serverMessage.icon')

@@ -32,7 +32,6 @@ Tasks.signupController = SC.ObjectController.create(
   
   signup: function() {
     // console.log('DEBUG: Signup.submit() loginName=' + Tasks.userController.get('loginName'));
-    
     var params = {
       successCallback: this._loginNameUnavailable.bind(this),
       failureCallback: this._loginNameAvailable.bind(this)
