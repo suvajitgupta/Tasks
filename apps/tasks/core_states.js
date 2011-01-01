@@ -59,16 +59,8 @@ Tasks.mixin({
             Tasks.signupController.closePanel();
           }
 
-        }),
-
-        enterState: function() {
-          Tasks.loginController.openPanel();
-        },
-
-        exitState: function() {
-          Tasks.loginController.closePanel();
-        }
-
+        })
+        
       }),
 
       loggedIn: Ki.State.design({
