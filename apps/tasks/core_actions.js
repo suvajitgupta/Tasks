@@ -395,24 +395,27 @@ Tasks.mixin({
    */
   _saveAndExit: function() {
     CoreTasks.saveChanges();
-    this._restart();
+    this._terminate();
   },
   
   /**
    * Exit application without saving changes.
    */
   _exitNoSave: function() {
-    this._restart();
+    this._terminate();
   },
   
   /**
-   * Restart application - invoked at logout and for a route to a new project.
+   * Terminate application - invoked after logout.
    */
-  _restart: function() {
+  _terminate: function() {
     
-    Tasks.statechart.gotoState('loggedOut');
+    // console.log('DEBUG: _terminate()');
     
-    // console.log('DEBUG: restart()');
+    // Close down statechart
+    Tasks.statechart.gotoState('terminated');
+    Tasks.statechart.destroy();
+    
     // Clear cached localStorage data
     if(CoreTasks.useLocalStorage) {
       // TODO: [SG] add checkbox on logout screen to optionally clear localStorage
@@ -420,6 +423,7 @@ Tasks.mixin({
       SCUDS.LocalStorageAdapterFactory.nukeAllAdapters();
     }
 
+    // Logout user on Server and restart application
     if(Tasks.get('serverType') === Tasks.GAE_SERVER) {
       var params = {
         successCallback: this._logoutSuccess.bind(this),
@@ -433,7 +437,7 @@ Tasks.mixin({
       CoreTasks.executeTransientPost('logout', null, params);
     }
     else {
-      this.resetWindowLocation();
+      this._restart();
     }
   },
   
@@ -442,17 +446,19 @@ Tasks.mixin({
    */
   _logoutSuccess: function(response) {
     // console.log('DEBUG: Logout succeeded on Server');
-    this.resetWindowLocation();
+    this._restart();
   },
   /**
    * Called after failed logout.
    */
   _logoutFailure: function(response) {
     console.error('Logout failed on Server');
-    this.resetWindowLocation();
+    this._restart();
   },
-  
-  resetWindowLocation: function() {
+  /**
+   * Called to restart application.
+   */
+  _restart: function() {
     window.location = Tasks.getBaseUrl(); // restart application
   },
 

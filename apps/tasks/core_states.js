@@ -9,18 +9,23 @@ sc_require('core');
 
 Tasks.mixin({
   
+  // TODO: [SG/MC] make default responder work instead of having to specify in each panel
+  
   statechart: Ki.Statechart.create({
 
-    trace: YES,
+    // Set tracing on to debug statecharts
+    trace: NO,
     
     rootState: Ki.State.design({
 
       initialSubstate: 'loggedOut',
 
+      // State when user hasn't logged in yet
       loggedOut: Ki.State.design({
 
         initialSubstate: 'logIn',
         
+        // State prompting an existing user to log in
         logIn: Ki.State.design({
           
           enterState: function() {
@@ -41,6 +46,7 @@ Tasks.mixin({
 
         }),
 
+        // State prompting a new guest user to sign up
         signUp: Ki.State.design({
           
           enterState: function() {
@@ -63,6 +69,7 @@ Tasks.mixin({
         
       }),
 
+      // State after user logs in and the application is ready to use
       loggedIn: Ki.State.design({
 
         enterState: function() {
@@ -72,9 +79,15 @@ Tasks.mixin({
 
         logout: function() {
           Tasks.logout();
-        },
+        }
+        
+      }),
 
-        exitState: function() {
+      // State after application is shut down
+      terminated: Ki.State.design({
+        
+        enterState: function() {
+          Tasks.getPath('mainPage.mainPane').remove();
         }
         
       })
