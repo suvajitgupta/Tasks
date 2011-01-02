@@ -220,7 +220,7 @@ Styling/Hardening @Active
 - Refactor code to use Ki-based statecharts [SG] <MC> @Done
 
 Installation/Deployment @Active
-- Port GUI to Firefox, Safari/Chrome, and Internet Explorer [SG] @Done %Passed
+- Port GUI to Firefox, Safari/Chrome, and Internet Explorer [SG] @Done %Failed
 - Deploy publicly-accessible instances using Google App Engine/Python [JH2] <SG> @Done %Passed
 - Support customizable (via Buildfile) "Installation" logo and title (shown in Browser/tab title) [SG] @Done $Feature %Passed
 - Support customizable "Guest Signup" capability via "Login" screen (useful for open-source projects) [SG] @Done $Feature %Passed
