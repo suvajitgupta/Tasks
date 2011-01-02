@@ -216,8 +216,8 @@ Styling/Hardening @Active
 | Email Notifications, Task watching
 - Develop comprehensive Model/View unit tests [SG] <BB> @Active
 - Develop comprehensive automated test scripts using Lebowski/Selenium [SG] <MR> @Active
-- Refactor code to comply with "root controller pattern" [SG] <EG> @Active
-- Refactor code to use Ki-based statecharts [SG] <MC> @Active
+- Refactor code to align with "root controller pattern" [SG] <EG> @Done
+- Refactor code to use Ki-based statecharts [SG] <MC> @Done
 
 Installation/Deployment @Active
 - Port GUI to Firefox, Safari/Chrome, and Internet Explorer [SG] @Done %Passed
