@@ -5,7 +5,7 @@
  * @author Suvajit Gupta
  * License: Licened under MIT license (see license.js)
  */
-/*globals CoreTasks Tasks sc_require sources localStorage SCUDS */
+/*globals CoreTasks Tasks SCUDS sc_require */
 
 sc_require('controllers/users');
 sc_require('controllers/projects');
@@ -27,26 +27,26 @@ Tasks.mixin( /** @scope Tasks */ {
     Tasks.set('loginName', loginName);
     if(CoreTasks.remoteDataSource) { // remote authentication
       var params = {
-        successCallback: this.authenticationSuccess.bind(this),
-        failureCallback: this.authenticationFailure.bind(this)
+        successCallback: this._authenticationSuccess.bind(this),
+        failureCallback: this._authenticationFailure.bind(this)
       };
       return CoreTasks.User.authenticate(loginName, password, params);
     }
     else { // running off fixtures
       for(var i = 0, len = CoreTasks.User.FIXTURES.length; i < len; i++) {
         if(loginName === CoreTasks.User.FIXTURES[i].loginName) {
-          return this.authenticationSuccess();
+          return this._authenticationSuccess();
         }
       }
-      return this.authenticationFailure();
+      return this._authenticationFailure();
     }
   },
   
   /**
    * Called after successful authentication.
    */
-  authenticationSuccess: function(response, request) {
-    // console.log('DEBUG: authenticationSuccess()');
+  _authenticationSuccess: function(response, request) {
+    // console.log('DEBUG: _authenticationSuccess()');
     // Start GUI and setup startup defaults
     Tasks.getPath('mainPage.mainPane').append();
     Tasks.mainPageHelper.set('clippyDetails', document.getElementById(Tasks.mainPageHelper.clippyDetailsId));
@@ -142,8 +142,8 @@ Tasks.mixin( /** @scope Tasks */ {
    *
    * @param {SC.Response} response object from failed call
    */
-  authenticationFailure: function(response) {
-    // console.log('DEBUG: authenticationFailure()');
+  _authenticationFailure: function(response) {
+    // console.log('DEBUG: _authenticationFailure()');
     var errorString = SC.instanceOf(response, SC.Error)? "_LoginServerAccessError".loc() : "_LoginAuthenticationError".loc();
     Tasks.loginController.displayLoginError(errorString);
   },
@@ -320,10 +320,10 @@ Tasks.mixin( /** @scope Tasks */ {
   },
 
   /**
-   * Import data from external text file.
+   * Filter tasks via attributes.
    */
-  importData: function() {
-    Tasks.importDataController.openPanel();  
+  filterTasks: function() {
+    Tasks.filterController.openPane();
   },
 
   /**
@@ -336,6 +336,40 @@ Tasks.mixin( /** @scope Tasks */ {
    Tasks.settingsController.openPanel();
   },
 
+  /**
+    Manipulate auto save option.
+  */
+  toggleAutoSave: function(){
+    CoreTasks.set('autoSave', !CoreTasks.get('autoSave'));
+  },
+
+  /**
+    Manipulate email notifications option.
+  */
+  toggleShouldNotify: function(){
+    CoreTasks.set('shouldNotify', !CoreTasks.get('shouldNotify'));
+  },
+
+  /**
+   * Popup Project Statistics panel.
+   */
+  viewStatistics: function() {
+    Tasks.statisticsController.showStatistics();  
+  },
+  
+  /**
+   * Import data from external text file.
+   */
+  importData: function() {
+    Tasks.importDataController.openPanel();  
+  },
+
+  /**
+   * Export data to specified format.
+   */
+  exportDataAsText: function() { Tasks.exportDataController.exportData('Text'); },
+  exportDataAsHTML: function() { Tasks.exportDataController.exportData('HTML'); },
+  
   /**
    * Display online help.
    */
@@ -463,6 +497,62 @@ Tasks.mixin( /** @scope Tasks */ {
   },
 
   /**
+   * Add a new user.
+   */
+  addUser: function() {
+
+    if(!CoreTasks.getPath('permissions.canCreateUser')) {
+      console.warn('You do not have permission to add a user');
+      return null;
+    }
+    
+    // Create and select new user (copy role of selected user if one).
+    var userHash = SC.clone(CoreTasks.User.NEW_USER_HASH);
+    var selectedUser = Tasks.usersController.getPath('selection.firstObject');
+    if (selectedUser) userHash.role = selectedUser.get('role');
+    var user = CoreTasks.createRecord(CoreTasks.User, userHash);
+    Tasks.usersController.selectObject(user);
+    Tasks.settingsPage.get('userInformation').get('fullNameField').becomeFirstResponder();
+    
+  },
+
+  /**
+   * Delete selected user.
+   */
+  deleteUser: function() {
+  
+    if(!CoreTasks.getPath('permissions.canDeleteUser')) {
+      console.warn('You do not have permission to delete a user');
+      return;
+    }
+    
+    var uc = this.get('usersController');      
+    var sel = uc.get('selection');
+    var len = sel? sel.length() : 0;
+    if (len > 0) {
+      
+      // Confirm deletion operation
+      SC.AlertPane.warn("_Confirmation".loc(), "_UserDeletionConfirmation".loc(), "_UserDeletionConsequences".loc(), "_Yes".loc(), "_No".loc(), null,
+        SC.Object.create({
+          alertPaneDidDismiss: function(pane, status) {
+            if(status === SC.BUTTON1_STATUS) {
+              var context = {};
+              for (var i = 0; i < len; i++) {
+                // Get and delete each selected user.
+                var user = sel.nextObject(i, null, context);
+                user.destroy();
+              }
+              // Select the logged in user.
+              Tasks.usersController.selectObject(CoreTasks.get('currentUser'));
+            }
+          }
+        })
+      );
+
+    }
+  },
+  
+  /**
    * Add a new project in projects master list.
    */
   addProject: function() {
@@ -555,13 +645,6 @@ Tasks.mixin( /** @scope Tasks */ {
     }
   },
 
-  /**
-   * Popup Project Statistics panel.
-   */
-  viewStatistics: function() {
-    Tasks.statisticsController.showStatistics();  
-  },
-  
   /**
    * Add a new task in tasks detail list.
    *
@@ -686,23 +769,6 @@ Tasks.mixin( /** @scope Tasks */ {
   },
   
   /**
-   * Add comment to currently selected task.
-   */
-  addComment: function() {
-    var tc = this.get('tasksController');
-    var sel = tc.get('selection');
-    var len = sel? sel.length() : 0;
-    if (len === 1) {
-      var currentUserId = CoreTasks.getPath('currentUser.id');
-      var task = tc.getPath('selection.firstObject');
-      var now = SC.DateTime.create().get('milliseconds');
-      var comment = CoreTasks.createRecord(CoreTasks.Comment, { taskId: task.get('id'), userId: currentUserId,
-                                           createdAt: now, updatedAt: now, description: CoreTasks.NEW_COMMENT_DESCRIPTION.loc() });
-      Tasks.commentsController.selectObject(comment);
-    }
-  },
-  
-  /**
    * Watch selected tasks (if they are not already being watched).
    */
   watchTask: function() {
@@ -743,84 +809,24 @@ Tasks.mixin( /** @scope Tasks */ {
   },
   
   /**
-   * Filter tasks via attributes.
+   * Add comment to currently selected task.
    */
-  filterTasks: function() {
-    Tasks.filterController.openPane();
-  },
-
-  /**
-   * Add a new user.
-   */
-  addUser: function() {
-
-    if(!CoreTasks.getPath('permissions.canCreateUser')) {
-      console.warn('You do not have permission to add a user');
-      return null;
-    }
-    
-    // Create and select new user (copy role of selected user if one).
-    var userHash = SC.clone(CoreTasks.User.NEW_USER_HASH);
-    var selectedUser = Tasks.usersController.getPath('selection.firstObject');
-    if (selectedUser) userHash.role = selectedUser.get('role');
-    var user = CoreTasks.createRecord(CoreTasks.User, userHash);
-    Tasks.usersController.selectObject(user);
-    Tasks.settingsPage.get('userInformation').get('fullNameField').becomeFirstResponder();
-    
-  },
-
-  /**
-   * Delete selected user.
-   */
-  deleteUser: function() {
-  
-    if(!CoreTasks.getPath('permissions.canDeleteUser')) {
-      console.warn('You do not have permission to delete a user');
-      return;
-    }
-    
-    var uc = this.get('usersController');      
-    var sel = uc.get('selection');
+  addComment: function() {
+    var tc = this.get('tasksController');
+    var sel = tc.get('selection');
     var len = sel? sel.length() : 0;
-    if (len > 0) {
-      
-      // Confirm deletion operation
-      SC.AlertPane.warn("_Confirmation".loc(), "_UserDeletionConfirmation".loc(), "_UserDeletionConsequences".loc(), "_Yes".loc(), "_No".loc(), null,
-        SC.Object.create({
-          alertPaneDidDismiss: function(pane, status) {
-            if(status === SC.BUTTON1_STATUS) {
-              var context = {};
-              for (var i = 0; i < len; i++) {
-                // Get and delete each selected user.
-                var user = sel.nextObject(i, null, context);
-                user.destroy();
-              }
-              // Select the logged in user.
-              Tasks.usersController.selectObject(CoreTasks.get('currentUser'));
-            }
-          }
-        })
-      );
-
+    if (len === 1) {
+      var currentUserId = CoreTasks.getPath('currentUser.id');
+      var task = tc.getPath('selection.firstObject');
+      var now = SC.DateTime.create().get('milliseconds');
+      var comment = CoreTasks.createRecord(CoreTasks.Comment, { taskId: task.get('id'), userId: currentUserId,
+                                           createdAt: now, updatedAt: now, description: CoreTasks.NEW_COMMENT_DESCRIPTION.loc() });
+      Tasks.commentsController.selectObject(comment);
     }
   },
   
   /**
-    Manipulate auto save option.
-  */
-  toggleAutoSave: function(){
-    CoreTasks.set('autoSave', !CoreTasks.get('autoSave'));
-  },
-
-  /**
-    Manipulate email notifications option.
-  */
-  toggleShouldNotify: function(){
-    CoreTasks.set('shouldNotify', !CoreTasks.get('shouldNotify'));
-  },
-
-  /**
-   * Temporary callback to handle missing functionality.
+   * Helper method to handle missing functionality while application is under development.
    *
    * @param (String) message to show user
    */

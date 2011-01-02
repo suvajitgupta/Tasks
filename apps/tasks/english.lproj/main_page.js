@@ -77,9 +77,9 @@ Tasks.mainPageHelper = SC.Object.create({
         ret.push({ title: "_LaunchStatistics".loc(), icon: 'statistics-icon', target: 'Tasks', action: 'viewStatistics', isEnabled: YES });
       }
       ret.push({ title: "_LaunchImport".loc(), icon: 'import-icon', target: 'Tasks', action: 'importData', isEnabled: YES });
-      ret.push({ title: "_LaunchExportText".loc(), icon: 'text-icon', target: 'Tasks.exportDataController', action: 'exportDataAsText', isEnabled: YES });
+      ret.push({ title: "_LaunchExportText".loc(), icon: 'text-icon', target: 'Tasks', action: 'exportDataAsText', isEnabled: YES });
       if(!SC.platform.touch) {
-        ret.push({ title: "_LaunchExportHTML".loc(), icon: 'html-icon', target: 'Tasks.exportDataController', action: 'exportDataAsHTML', isEnabled: YES });
+        ret.push({ title: "_LaunchExportHTML".loc(), icon: 'html-icon', target: 'Tasks', action: 'exportDataAsHTML', isEnabled: YES });
       }
     }
     ret.push({ isSeparator: YES });

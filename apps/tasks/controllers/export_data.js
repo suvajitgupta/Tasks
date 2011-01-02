@@ -370,7 +370,7 @@ Tasks.exportDataController = SC.ObjectController.create(
    *
    * @param {String} format in which data is to be exported.
    */
-  _exportData: function(format) {
+  exportData: function(format) {
     
     var projectsToExport = [];
     var sel = Tasks.projectsController.get('selection');
@@ -428,9 +428,6 @@ Tasks.exportDataController = SC.ObjectController.create(
     
     Tasks.exportDataController.showExportedData(format);
     
-  },
-  
-  exportDataAsText: function() { this._exportData('Text'); },
-  exportDataAsHTML: function() { this._exportData('HTML'); }
+  }
   
 });
