@@ -11,7 +11,7 @@ sc_require('controllers/users');
 sc_require('controllers/projects');
 sc_require('controllers/tasks');
 
-Tasks.mixin({
+Tasks.mixin( /** @scope Tasks */ {
 
   loginName: null,
   loadDoneProjectData: false,

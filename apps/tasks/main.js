@@ -3,8 +3,6 @@
 /**
  * The main program - start off in first state.
  */
- /*globals sc_require */
-sc_require('core_routes');
 
 function main() { Tasks.main(); }
 
