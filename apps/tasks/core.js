@@ -10,8 +10,7 @@
   @author Suvajit Gupta
   @version 0.1
 */
-/*globals Tasks CoreTasks sc_require */
-sc_require('statechart');
+/*globals Tasks CoreTasks */
 
 Tasks = SC.Object.create(
   /** @scope Tasks.prototype */ {

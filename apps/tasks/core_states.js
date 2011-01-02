@@ -10,56 +10,6 @@ sc_require('states/logged_out');
 
 // TODO: [SG/MC] make default responder work instead of having to specify in each panel
 
-// TODO: [SG/MC] move the state classes below to separate files and figure out load them as plugins
-// A state to manage user login & signup.
-Tasks.LoggedOutState = Ki.State.extend({
-
-  initialSubstate: 'logIn',
-  
-  // State prompting an existing user to log in
-  logIn: Ki.State.design({
-    
-    enterState: function() {
-      Tasks.loginController.openPanel();
-    },
-
-    login: function() {
-      Tasks.loginController.login();
-    },
-
-    signup: function() {
-      Tasks.statechart.gotoState('signUp');
-    },
-
-    exitState: function() {
-      Tasks.loginController.closePanel();
-    }
-
-  }),
-
-  // State prompting a new guest user to sign up
-  signUp: Ki.State.design({
-    
-    enterState: function() {
-      Tasks.signupController.openPanel();
-    },
-
-    signup: function() {
-      Tasks.signupController.signup();
-    },
-
-    cancel: function() {
-      Tasks.signupController.cancel();
-    },
-
-    exitState: function() {
-      Tasks.signupController.closePanel();
-    }
-
-  })
-  
-});
-
 // Overall statechart for the application
 Tasks.mixin( /** @scope Tasks */ {
   
