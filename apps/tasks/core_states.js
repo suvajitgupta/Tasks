@@ -16,9 +16,8 @@ Tasks.mixin( /** @scope Tasks */ {
   
   statechart: Ki.Statechart.create({
 
-    // Set tracing or monitoring on to debug statecharts
+    // Set tracing on to debug statecharts
     trace: NO,
-    monitorIsActive: NO,
   
     rootState: Ki.State.design({
 

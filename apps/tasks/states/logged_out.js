@@ -8,7 +8,10 @@
 
 Tasks.LoggedOutState = Ki.State.extend({
 
-  initialSubstate: 'logIn',
+  initialSubstate: 'startUp',
+  
+  // Initial state from which it moves to logIn if authentication is needed
+  startUp: Ki.State.design(),
   
   // State prompting an existing user to log in
   logIn: Ki.State.design({

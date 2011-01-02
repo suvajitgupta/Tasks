@@ -20,6 +20,7 @@ Tasks.mixin( /** @scope Tasks */ {
   
   defaultProjectID: null,
   defaultProject: null,
+  authenticationNeeded: true,
 
   registerRoutes: function() {
     SC.routes.add('help', Tasks, 'helpRoute');
@@ -36,7 +37,9 @@ Tasks.mixin( /** @scope Tasks */ {
     
   */
   helpRoute: function(params) {
+    // console.log('DEBUG: helpRoute()');
     if(Tasks._checkLoginStatus()) {
+      Tasks.authenticationNeeded = false;
       Tasks.getPath('helpPage.mainPane').append();
     }
   },
@@ -49,9 +52,10 @@ Tasks.mixin( /** @scope Tasks */ {
     
   */
   viewRoute: function(params) {
-    
+
     if(params.search) params.search = Tasks._unescape(params.search);
-    // console.log('DEBUG: viewRoute() search=' + params.search);
+    // console.log('EBUG: viewRoute() search=' + params.search);
+    Tasks.authenticationNeeded = false;
     
     if(Tasks._checkLoginStatus()) {
       if(!SC.none(params.search) && params.search !== '') {
@@ -143,6 +147,8 @@ Tasks.mixin( /** @scope Tasks */ {
     The catch-all case when no routes are specified
   */
   defaultRoute: function(params) {
+    // console.log('DEBUG: defaultRoute()');
+    if(Tasks.get('authenticationNeeded')) Tasks.statechart.gotoState('logIn');
   }
   
 });

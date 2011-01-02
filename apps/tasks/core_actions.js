@@ -377,13 +377,8 @@ Tasks.mixin( /** @scope Tasks */ {
     * Launch task editor dialog.
     */
   help: function() {
-    if(SC.platform.touch) {
-      window.location = Tasks.getHelpUrl();
-    }
-    else {
-      var url = Tasks.getBaseUrl() + '#help';
-      window.open(url, '', 'width=1000,height=750,menubar=no,location=no,toolbar=no,directories=no,status=no');
-    }
+    if(SC.platform.touch) window.location = Tasks.getHelpUrl();
+    else window.open(Tasks.getBaseUrl() + '#help', '', 'width=1000,height=750,menubar=no,location=no,toolbar=no,directories=no,status=no');
   },
   
   /**
