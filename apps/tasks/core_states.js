@@ -7,6 +7,7 @@
 /*globals Tasks Ki sc_require */
 sc_require('core');
 sc_require('states/logged_out');
+sc_require('states/logged_in');
 
 // TODO: [SG/MC] make default responder work instead of having to specify in each panel
 
@@ -27,18 +28,7 @@ Tasks.mixin( /** @scope Tasks */ {
       loggedOut: Ki.State.plugin('Tasks.LoggedOutState'),
     
       // State after user logs in and the application is ready to use
-      loggedIn: Ki.State.design({
-
-        enterState: function() {
-          Tasks.loadData();
-          Tasks.getPath('mainPage.mainPane.projectsList').becomeFirstResponder();
-        },
-
-        logout: function() {
-          Tasks.logout();
-        }
-
-      }),
+      loggedIn: Ki.State.plugin('Tasks.LoggedInState'),
 
       // State after application is shut down
       terminated: Ki.State.design({
