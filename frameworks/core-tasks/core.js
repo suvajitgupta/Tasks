@@ -13,9 +13,16 @@ CoreTasks = SC.Object.create({
    */
   shouldNotify: true,
   autoSave: true,
-  remoteDataSource: true, // Set to false to use fixtures data.
   needsSave: false,
 
+  /*
+   * Tasks data source types
+   */
+  NO_DATA_SOURCE: 0x0000,
+  FIXTURES_DATA_SOURCE: 0x0001,
+  REMOTE_DATA_SOURCE: 0x0002,
+  dataSource: 0x0001,
+  
   /**
    * Boolean indication of whether or not to use the browser's local storage mechanism for record
    * caching.
@@ -85,7 +92,7 @@ CoreTasks = SC.Object.create({
    */
   init: function() {
     // Don't use localStorage for fixtures or iPad.
-    if (!this.remoteDataSource || SC.platform.touch) this.useLocalStorage = false;
+    if (this.get('dataSource') !== this.REMOTE_DATA_SOURCE || SC.platform.touch) this.useLocalStorage = false;
   },
 
   /**
@@ -453,8 +460,7 @@ CoreTasks = SC.Object.create({
    * Persistence must occur in a precise order to maintain entity associations.
    */
   saveChanges: function() {
-    if (!this.get('remoteDataSource')) {
-      // Nothing to do in fixtures mode.
+    if (CoreTasks.get('dataSource') === CoreTasks.REMOTE_DATA_SOURCE) { // nothing to do in fixtures mode.
       this.set('needsSave', NO);
       return;
     }

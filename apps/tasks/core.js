@@ -32,7 +32,7 @@ Tasks = SC.Object.create(
    * @returns {Boolean} true: if connected to a server that supports notifications, false otherwise
    */
   canServerSendNotifications: function() {
-    if(!CoreTasks.get('remoteDataSource')) return true; // to assist with testing via fixtures
+    if(CoreTasks.get('dataSource') === CoreTasks.FIXTURES_DATA_SOURCE) return true; // to assist with testing via fixtures
     return this.get('serverType') === this.GAE_SERVER;
   }.property('serverType').cacheable(),
   

@@ -25,14 +25,14 @@ Tasks.mixin( /** @scope Tasks */ {
   authenticate: function(loginName, password) {
     // console.log('DEBUG: authenticate()');
     Tasks.set('loginName', loginName);
-    if(CoreTasks.remoteDataSource) { // remote authentication
+    if(CoreTasks.get('dataSource') === CoreTasks.REMOTE_DATA_SOURCE) { // remote authentication
       var params = {
         successCallback: this._authenticationSuccess.bind(this),
         failureCallback: this._authenticationFailure.bind(this)
       };
       return CoreTasks.User.authenticate(loginName, password, params);
     }
-    else { // running off fixtures
+    else if(CoreTasks.get('dataSource') === CoreTasks.FIXTURES_DATA_SOURCE) { // running off fixtures
       for(var i = 0, len = CoreTasks.User.FIXTURES.length; i < len; i++) {
         if(loginName === CoreTasks.User.FIXTURES[i].loginName) {
           return this._authenticationSuccess();
