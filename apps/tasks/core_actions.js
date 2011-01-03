@@ -25,14 +25,14 @@ Tasks.mixin( /** @scope Tasks */ {
   authenticate: function(loginName, password) {
     // console.log('DEBUG: authenticate()');
     Tasks.set('loginName', loginName);
-    if(CoreTasks.get('dataSource') === CoreTasks.REMOTE_DATA_SOURCE) { // remote authentication
+    if(CoreTasks.get('dataSource') === CoreTasks.REMOTE_DATA_SOURCE) { // perform remote authentication
       var params = {
         successCallback: this._authenticationSuccess.bind(this),
         failureCallback: this._authenticationFailure.bind(this)
       };
       return CoreTasks.User.authenticate(loginName, password, params);
     }
-    else if(CoreTasks.get('dataSource') === CoreTasks.FIXTURES_DATA_SOURCE) { // running off fixtures
+    else { // perform authentication with fixtures data
       for(var i = 0, len = CoreTasks.User.FIXTURES.length; i < len; i++) {
         if(loginName === CoreTasks.User.FIXTURES[i].loginName) {
           return this._authenticationSuccess();
@@ -46,6 +46,7 @@ Tasks.mixin( /** @scope Tasks */ {
    * Called after successful authentication.
    */
   _authenticationSuccess: function(response, request) {
+    
     // console.log('DEBUG: _authenticationSuccess()');
     // Start GUI and setup startup defaults
     Tasks.getPath('mainPage.mainPane').append();
@@ -59,6 +60,16 @@ Tasks.mixin( /** @scope Tasks */ {
         var server = headers.Server || headers.server;
         if(server && server.indexOf('Persevere') !== -1) Tasks.set('serverType', Tasks.PERSEVERE_SERVER);
       }
+    }
+    
+    // Initialize the appropriate data source
+    if (CoreTasks.get('dataSource') === CoreTasks.REMOTE_DATA_SOURCE) {
+      CoreTasks.initializeStore(CoreTasks.CachingRemoteDataSource.create());
+      SC.Logger.log('Using caching remote data source.');
+    }
+    else { // FIXTURES_DATA_SOURCE
+      CoreTasks.initializeStore(SC.FixturesDataSource.create());
+      SC.Logger.log('Using fixtures data source.');
     }
     
     // Create system projects

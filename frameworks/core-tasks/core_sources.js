@@ -415,16 +415,3 @@ CoreTasks.CachingRemoteDataSource = SC.DataSource.extend({
   }
 
 });
-
-// Create the main store with the appropriate data source.
-if (CoreTasks.get('dataSource') === CoreTasks.REMOTE_DATA_SOURCE) {
-  CoreTasks.initializeStore(CoreTasks.CachingRemoteDataSource.create());
-  SC.Logger.log('Using caching remote data source.');
-} else if(CoreTasks.get('dataSource') === CoreTasks.FIXTURES_DATA_SOURCE) {
-  CoreTasks.initializeStore(SC.FixturesDataSource.create());
-  SC.Logger.log('Using fixtures data source.');
-}
-else {
-  // FIXME: [SG/SE] how to use this when showing Help - no data required!
-  SC.Logger.log('No data source.');
-}

@@ -18,9 +18,8 @@ CoreTasks = SC.Object.create({
   /*
    * Tasks data source types
    */
-  NO_DATA_SOURCE: 0x0000,
-  FIXTURES_DATA_SOURCE: 0x0001,
-  REMOTE_DATA_SOURCE: 0x0002,
+  REMOTE_DATA_SOURCE: 0x0001,
+  FIXTURES_DATA_SOURCE: 0x0002,
   dataSource: 0x0001,
   
   /**
@@ -92,7 +91,7 @@ CoreTasks = SC.Object.create({
    */
   init: function() {
     // Don't use localStorage for fixtures or iPad.
-    if (this.get('dataSource') !== this.REMOTE_DATA_SOURCE || SC.platform.touch) this.useLocalStorage = false;
+    if (this.get('dataSource') === this.FIXTURES_DATA_SOURCE || SC.platform.touch) this.useLocalStorage = false;
   },
 
   /**
@@ -460,7 +459,7 @@ CoreTasks = SC.Object.create({
    * Persistence must occur in a precise order to maintain entity associations.
    */
   saveChanges: function() {
-    if (CoreTasks.get('dataSource') === CoreTasks.REMOTE_DATA_SOURCE) { // nothing to do in fixtures mode.
+    if (CoreTasks.get('dataSource') === CoreTasks.FIXTURES_DATA_SOURCE) { // nothing to do in fixtures mode.
       this.set('needsSave', NO);
       return;
     }
