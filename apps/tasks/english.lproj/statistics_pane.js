@@ -3,6 +3,8 @@
 // ==========================================================================
 /*globals Tasks CoreTasks sc_require Sai */
 sc_require('core');
+sc_require('views/graphical_statistics');
+sc_require('views/numerical_statistics');
 
 
 /** @static
@@ -31,10 +33,10 @@ Tasks.statisticsPane = SCUI.ModalPane.create({
     
     statisticsTabs: SC.TabView.design({
   		layout: { top: 10, left: 10, right: 10, bottom: 40 },
-      nowShowing: 'Tasks.graphicalStatisticsPage.mainView', 
+      nowShowing: 'Tasks.graphicalStatisticsView', 
       items: [
-        { title: "_Graphical".loc(), value: 'Tasks.graphicalStatisticsPage.mainView' },
-        { title: "_Numerical".loc(), value: 'Tasks.numericalStatisticsPage.mainView' }
+        { title: "_Graphical".loc(), value: 'Tasks.graphicalStatisticsView' },
+        { title: "_Numerical".loc(), value: 'Tasks.numericalStatisticsView' }
       ],
       itemTitleKey: 'title',
       itemValueKey: 'value'
