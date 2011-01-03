@@ -241,8 +241,7 @@ Tasks.exportDataController = SC.ObjectController.create(
       }
     }
     else {
-      var panel = Tasks.getPath('exportDataPage.panel');
-      if(panel) panel.append();
+      Tasks.get('exportDataPane').append();
     }
   },
 

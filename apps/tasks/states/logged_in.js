@@ -56,7 +56,7 @@ Tasks.LoggedInState = Ki.State.extend({
       },
 
       exitState: function() {
-        Tasks.getPath('importDataPage.panel').remove();
+        Tasks.get('importDataPane').remove();
       }
       
     }),
@@ -77,7 +77,7 @@ Tasks.LoggedInState = Ki.State.extend({
       },
       
       exitState: function() {
-        Tasks.getPath('exportDataPage.panel').remove();
+        Tasks.get('exportDataPane').remove();
       }
       
     }),

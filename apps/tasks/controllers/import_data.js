@@ -20,10 +20,10 @@ Tasks.importDataController = SC.ObjectController.create(
   importData: '',
   
   openPanel: function(){
-    var panel = Tasks.getPath('importDataPage.panel');
-    if(panel) {
-      panel.append();
-      panel.focus();
+    var pane = Tasks.getPath('importDataPane');
+    if(pane) {
+      pane.append();
+      pane.focus();
     }
   },
   
