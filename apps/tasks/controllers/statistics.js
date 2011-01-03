@@ -107,11 +107,6 @@ Tasks.statisticsController = SC.ObjectController.create(
   showStatistics: function() {
     this._computeStatistics();
     Tasks.statisticsPane.append();
-  },
-  
-  closePanel: function() {
-    this.set('statistics', '');
-    Tasks.statisticsPane.remove();
-  }  
-    
+  }
+      
 });

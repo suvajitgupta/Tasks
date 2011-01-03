@@ -16,6 +16,8 @@ Tasks.exportDataPage = SC.Page.create({
   
   panel: SCUI.ModalPane.create({
     
+    defaultResponder: 'Tasks.statechart',
+
     title: "_Export".loc(),
     titleIcon: 'text-icon',
     titleBarHeight: 40,
@@ -39,7 +41,7 @@ Tasks.exportDataPage = SC.Page.create({
         keyEquivalent: 'return',
         isDefault: YES,
         title: "_Close".loc(),
-        action: 'remove'
+        action: 'close'
       })
               
     })

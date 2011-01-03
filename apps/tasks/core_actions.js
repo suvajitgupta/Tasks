@@ -362,37 +362,6 @@ Tasks.mixin( /** @scope Tasks */ {
   },
 
   /**
-   * Popup Project Statistics panel.
-   */
-  viewStatistics: function() {
-    Tasks.statisticsController.showStatistics();  
-  },
-  
-  /**
-   * Import data from external text file.
-   */
-  importData: function() {
-    Tasks.importDataController.openPanel();  
-  },
-
-  /**
-   * Export data to specified format.
-   */
-  exportDataAsText: function() { Tasks.exportDataController.exportData('Text'); },
-  exportDataAsHTML: function() { Tasks.exportDataController.exportData('HTML'); },
-  
-  /**
-   * Display online help.
-   */
-   /**
-    * Launch task editor dialog.
-    */
-  help: function() {
-    if(SC.platform.touch) window.location = Tasks.getHelpUrl();
-    else window.open(Tasks.getBaseUrl() + '#help', '', 'width=1000,height=750,menubar=no,location=no,toolbar=no,directories=no,status=no');
-  },
-  
-  /**
    * Handle application exiting request.
    */
   logout: function() {

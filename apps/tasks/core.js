@@ -96,6 +96,15 @@ SCUI.ComboBoxView.prototype.dropDownButtonView = SC.View.extend( SCUI.SimpleButt
 
 // TODO: [SG/EG] update SCUI.ToolTip to work with SC master (new rendering subsystem), CheckboxView still not working
 
+// TODO: [SG/BB] make SCUI.ModalPane close button target/action overridable without snippet below
+SCUI.ModalPane = SCUI.ModalPane.extend({
+  initMixin: function() {
+    var headerCloseButton = this.childViews[0].closeButton;
+    headerCloseButton.set('target', null);
+    headerCloseButton.set('action', 'close');
+  }
+});
+
 /**
   A Standard Binding transform to localize a string in a binding.
 */

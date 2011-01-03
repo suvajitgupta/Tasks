@@ -7,14 +7,94 @@
 /*globals Tasks Ki sc_require */
 
 Tasks.LoggedInState = Ki.State.extend({
-
+  
+  substatesAreConcurrent: YES,
+  
   enterState: function() {
     Tasks.loadData();
     Tasks.getPath('mainPage.mainPane.projectsList').becomeFirstResponder();
   },
+  
+  // State to handle globally available actions
+  globals: Ki.State.design({
+    
+    initialSubstate: 'ready',
+    
+    close: function() {
+      Tasks.statechart.gotoState('loggedIn.globals.ready');
+    },
 
-  logout: function() {
-    Tasks.logout();
-  }
+    // State indicating global action readiness
+    ready: Ki.State.design(),
+    
+    // State to show statistics
+    statistics: Ki.State.design({
+
+      enterState: function() {
+        Tasks.statisticsController.showStatistics();  
+      },
       
+      exitState: function() {
+        Tasks.get('statisticsPane').remove();
+      }
+      
+    }),
+
+    displayStatistics: function() {
+      Tasks.statechart.gotoState('statistics');
+    },
+
+    // State to manage text import
+    textImport: Ki.State.design({
+
+      enterState: function() {
+        Tasks.importDataController.openPanel();  
+      },
+      
+      parseAndLoadData: function() {
+        Tasks.importDataController.parseAndLoadData();
+      },
+
+      exitState: function() {
+        Tasks.getPath('importDataPage.panel').remove();
+      }
+      
+    }),
+
+    importDataAsText: function() {
+      Tasks.statechart.gotoState('textImport');
+    },
+    
+    // State to manage text export
+    exportDataAsText: function() {
+      Tasks.statechart.gotoState('textExport');
+    },
+
+    textExport: Ki.State.design({
+
+      enterState: function() {
+        Tasks.exportDataController.exportData('Text');
+      },
+      
+      exitState: function() {
+        Tasks.getPath('exportDataPage.panel').remove();
+      }
+      
+    }),
+
+    exportDataAsHTML: function() {
+      Tasks.exportDataController.exportData('HTML');
+    },
+
+    displayHelp: function() {
+      if(SC.platform.touch) window.location = Tasks.getHelpUrl();
+      else window.open(Tasks.getBaseUrl() + '#help', '', 'width=1000,height=750,menubar=no,location=no,toolbar=no,directories=no,status=no');
+    },
+
+    logout: function() {
+      Tasks.logout();
+    }
+
+  })
+
 });

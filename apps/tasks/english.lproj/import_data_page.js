@@ -17,6 +17,8 @@ Tasks.importDataPage = SC.Page.create({
   
   panel: SCUI.ModalPane.create({
     
+    defaultResponder: 'Tasks.statechart',
+
     title: "_Import".loc(),
     titleIcon: 'import-icon',
     titleBarHeight: 40,
@@ -66,7 +68,7 @@ Tasks.importDataPage = SC.Page.create({
         layout: { width: 80, height: 30, right: 110, bottom: 8 },
         titleMinWidth: 0,
         title: "_Cancel".loc(),
-        action: 'remove'
+        action: 'close'
       }),
 
       importButton: SC.ButtonView.design({
@@ -75,7 +77,6 @@ Tasks.importDataPage = SC.Page.create({
         keyEquivalent: 'return',
         isDefault: YES,
         title: "_Import".loc(),
-        target: 'Tasks.importDataController',
         action: 'parseAndLoadData'
       })
             

@@ -16,6 +16,8 @@ sc_require('core');
 
 Tasks.statisticsPane = SCUI.ModalPane.create({
   
+  defaultResponder: 'Tasks.statechart',
+
   isResizable: NO,
   title: "_Statistics".loc(),
   titleIcon: 'statistics-icon',
@@ -42,8 +44,7 @@ Tasks.statisticsPane = SCUI.ModalPane.create({
       layout: { bottom: 10, right: 10, width: 80, height: 24 },
       isDefault: YES,
       title: "_Close".loc(),
-      target: 'Tasks.statisticsController',
-      action: 'closePanel'
+      action: 'close'
     })
         
   })

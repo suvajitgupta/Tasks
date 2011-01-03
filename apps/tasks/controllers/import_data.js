@@ -27,14 +27,6 @@ Tasks.importDataController = SC.ObjectController.create(
     }
   },
   
-  closePanel: function(){
-    this.set('importData','');
-    var panel = Tasks.getPath('importDataPage.panel');
-    if(panel) {
-      panel.remove();
-    }
-  },
-  
   /**
    * Parse data and create/load objects.
    */
@@ -168,10 +160,11 @@ Tasks.importDataController = SC.ObjectController.create(
       }
     }
     
-    this.closePanel();
     if(CoreTasks.get('autoSave')) Tasks.saveData();
-    
     CoreTasks.set('shouldNotify', shouldNotify); // restore cached value
+    this.set('importData','');
+    
+    Tasks.statechart.gotoState('loggedIn.globals.ready');
     
   },
   

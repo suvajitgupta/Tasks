@@ -74,16 +74,16 @@ Tasks.mainPageHelper = SC.Object.create({
     if(!Tasks.editorPoppedUp) {
       ret.push({ isSeparator: YES });
       if(this.getPath('displayedTasksCount') > 0) {
-        ret.push({ title: "_LaunchStatistics".loc(), icon: 'statistics-icon', target: 'Tasks', action: 'viewStatistics', isEnabled: YES });
+        ret.push({ title: "_LaunchStatistics".loc(), icon: 'statistics-icon', action: 'displayStatistics', isEnabled: YES });
       }
-      ret.push({ title: "_LaunchImport".loc(), icon: 'import-icon', target: 'Tasks', action: 'importData', isEnabled: YES });
-      ret.push({ title: "_LaunchExportText".loc(), icon: 'text-icon', target: 'Tasks', action: 'exportDataAsText', isEnabled: YES });
+      ret.push({ title: "_LaunchImport".loc(), icon: 'import-icon', action: 'importDataAsText', isEnabled: YES });
+      ret.push({ title: "_LaunchExportText".loc(), icon: 'text-icon', action: 'exportDataAsText', isEnabled: YES });
       if(!SC.platform.touch) {
-        ret.push({ title: "_LaunchExportHTML".loc(), icon: 'html-icon', target: 'Tasks', action: 'exportDataAsHTML', isEnabled: YES });
+        ret.push({ title: "_LaunchExportHTML".loc(), icon: 'html-icon', action: 'exportDataAsHTML', isEnabled: YES });
       }
     }
     ret.push({ isSeparator: YES });
-    ret.push({ title: "_LaunchHelp".loc(), icon: 'sc-icon-help-16', target: 'Tasks', action: 'help', isEnabled: YES });
+    ret.push({ title: "_LaunchHelp".loc(), icon: 'sc-icon-help-16', action: 'displayHelp', isEnabled: YES });
     ret.push({ title: "_Logout".loc(), icon: 'logout-icon', action: 'logout', isEnabled: YES });
     this.set('actions', ret);
   }.observes('editorPoppedUp', 'displayedTasksCount', 'autoSave', 'shouldNotify'),

@@ -148,7 +148,7 @@ Tasks.mixin( /** @scope Tasks */ {
   */
   defaultRoute: function(params) {
     // console.log('DEBUG: defaultRoute()');
-    if(Tasks.get('authenticationNeeded')) Tasks.statechart.gotoState('logIn');
+    if(!CoreTasks.get('currentUser') && Tasks.get('authenticationNeeded')) Tasks.statechart.gotoState('logIn');
   }
   
 });
