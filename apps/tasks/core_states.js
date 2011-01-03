@@ -9,7 +9,7 @@ sc_require('core');
 sc_require('states/logged_out');
 sc_require('states/logged_in');
 
-// TODO: [SG/MC] make default responder work instead of having to specify in each panel
+// TODO: [MC/SG] make root responder work with Ki and then remove default responder in each panel
 
 // Overall statechart for the application
 Tasks.mixin( /** @scope Tasks */ {
