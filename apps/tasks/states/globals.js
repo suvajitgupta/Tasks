@@ -14,7 +14,7 @@ Tasks.GlobalsState = Ki.State.extend({
   ready: Ki.State.design(),
   
   close: function() {
-    Tasks.statechart.gotoState('loggedIn.globals.ready');
+    this.gotoState('loggedIn.globals.ready');
   },
   
   // State to handle user info/settings
@@ -82,7 +82,7 @@ Tasks.GlobalsState = Ki.State.extend({
   }),
 
   displaySettings: function() {
-    Tasks.statechart.gotoState('settings');
+    this.gotoState('settings');
   },
 
   // Actions to toggle autosave & notifications
@@ -108,7 +108,7 @@ Tasks.GlobalsState = Ki.State.extend({
   }),
 
   displayStatistics: function() {
-    Tasks.statechart.gotoState('statistics');
+    this.gotoState('statistics');
   },
 
   // State to manage text import
@@ -129,12 +129,12 @@ Tasks.GlobalsState = Ki.State.extend({
   }),
 
   importDataAsText: function() {
-    Tasks.statechart.gotoState('textImport');
+    this.gotoState('textImport');
   },
   
   // State to manage text export
   exportDataAsText: function() {
-    Tasks.statechart.gotoState('textExport');
+    this.gotoState('textExport');
   },
 
   textExport: Ki.State.design({
