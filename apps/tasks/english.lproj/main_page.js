@@ -66,10 +66,10 @@ Tasks.mainPageHelper = SC.Object.create({
     var ret = [];
     ret.push({ title: "_LaunchSettings".loc(), icon: 'settings-icon', target: 'Tasks', action: 'settings', isEnabled: YES });
     var autoSave = this.get('autoSave');
-    ret.push({ title: "_Toggle".loc() + "_AutoSave".loc(), icon: 'save-icon', target: 'Tasks', action: 'toggleAutoSave', isEnabled: YES, checkbox: autoSave });
+    ret.push({ title: "_Toggle".loc() + "_AutoSave".loc(), icon: 'save-icon', action: 'toggleAutoSave', isEnabled: YES, checkbox: autoSave });
     if(Tasks.get('canServerSendNotifications')) {
       var shouldNotify = this.get('shouldNotify');
-      ret.push({ title: "_Toggle".loc() + "_SendNotifications".loc(), icon: 'email-icon', target: 'Tasks', action: 'toggleShouldNotify', isEnabled: YES, checkbox: shouldNotify });
+      ret.push({ title: "_Toggle".loc() + "_SendNotifications".loc(), icon: 'email-icon', action: 'toggleShouldNotify', isEnabled: YES, checkbox: shouldNotify });
     }
     if(!Tasks.editorPoppedUp) {
       ret.push({ isSeparator: YES });
