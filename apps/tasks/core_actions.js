@@ -291,14 +291,6 @@ Tasks.mixin( /** @scope Tasks */ {
   },
   
   /**
-   * Set filter to show current user's tasks.
-   */
-  showCurrentUserTasks: function() {
-    Tasks.assignmentsController.setAssigneeFilter(this.loginName);
-  },
-  
-  
-  /**
    * Save modified Tasks data to server.
    */
   saveData: function() {
@@ -318,13 +310,6 @@ Tasks.mixin( /** @scope Tasks */ {
     // console.log('DEBUG: dataSaveErrorCallback(' + errorRecordType + ')');
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', "_DataSaveError".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
-  },
-
-  /**
-   * Filter tasks via attributes.
-   */
-  filterTasks: function() {
-    Tasks.filterController.openPane();
   },
 
   /**
@@ -420,6 +405,21 @@ Tasks.mixin( /** @scope Tasks */ {
     }
   },
 
+  /**
+   * Filter tasks via attributes.
+   */
+  filterTasks: function() {
+    Tasks.filterController.openPane();
+  },
+
+  /**
+   * Set filter to show current user's tasks.
+   */
+  showCurrentUserTasks: function() {
+    Tasks.assignmentsController.setAssigneeFilter(this.loginName);
+  },
+  
+  
   /**
    * Add a new task in tasks detail list.
    *
@@ -598,20 +598,7 @@ Tasks.mixin( /** @scope Tasks */ {
                                            createdAt: now, updatedAt: now, description: CoreTasks.NEW_COMMENT_DESCRIPTION.loc() });
       Tasks.commentsController.selectObject(comment);
     }
-  },
-  
-  /**
-   * Helper method to handle missing functionality while application is under development.
-   *
-   * @param (String) message to show user
-   */
-  _notImplemented: function(message) {
-    var prefix = '';
-    if(message) {
-      prefix = message;
-    }
-    SC.AlertPane.warn ("_UnimplementedFunctionality".loc() + prefix);
   }
-    
+      
 });
 

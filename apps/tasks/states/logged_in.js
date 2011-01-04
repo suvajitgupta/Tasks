@@ -95,7 +95,6 @@ Tasks.LoggedInState = Ki.State.extend({
       Tasks.statechart.gotoState('settings');
     },
 
-
     // Actions to toggle autosave & notifications
     toggleAutoSave: function(){
       CoreTasks.set('autoSave', !CoreTasks.get('autoSave'));
@@ -179,6 +178,14 @@ Tasks.LoggedInState = Ki.State.extend({
           }
         })
       );
+    },
+
+    save: function() {
+      Tasks.saveData();
+    },
+  
+    refresh: function() {
+      Tasks.loadData();
     }
 
   })
