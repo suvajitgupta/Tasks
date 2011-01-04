@@ -147,15 +147,15 @@ Tasks.tasksController = SC.TreeController.create(
   }.property('selection').cacheable(),
   
   setTypeFeature: function() {
-    this.type('type', CoreTasks.TASK_TYPE_FEATURE);
+    Tasks.tasksController.set('type', CoreTasks.TASK_TYPE_FEATURE);
   },
   
   setTypeBug: function() {
-    this.type('type', CoreTasks.TASK_TYPE_BUG);
+    Tasks.tasksController.set('type', CoreTasks.TASK_TYPE_BUG);
   },
   
   setTypeOther: function() {
-    this.type('type', CoreTasks.TASK_TYPE_OTHER);
+    Tasks.tasksController.set('type', CoreTasks.TASK_TYPE_OTHER);
   },
   
   priority: function(key, value) {
@@ -179,15 +179,15 @@ Tasks.tasksController = SC.TreeController.create(
   }.property('selection').cacheable(),
   
   setPriorityHigh: function() {
-    this.priority('priority', CoreTasks.TASK_PRIORITY_HIGH);
+    Tasks.tasksController.set('priority', CoreTasks.TASK_PRIORITY_HIGH);
   },
   
   setPriorityMedium: function() {
-    this.priority('priority', CoreTasks.TASK_PRIORITY_MEDIUM);
+    Tasks.tasksController.set('priority', CoreTasks.TASK_PRIORITY_MEDIUM);
   },
   
   setPriorityLow: function() {
-    this.priority('priority', CoreTasks.TASK_PRIORITY_LOW);
+    Tasks.tasksController.set('priority', CoreTasks.TASK_PRIORITY_LOW);
   },
   
   developmentStatusWithValidation: function(key, value) {
@@ -211,19 +211,19 @@ Tasks.tasksController = SC.TreeController.create(
   }.property('selection').cacheable(),
   
   setDevelopmentStatusPlanned: function() {
-    this.developmentStatusWithValidation('developmentStatusWithValidation', CoreTasks.STATUS_PLANNED);
+    Tasks.tasksController.set('developmentStatusWithValidation', CoreTasks.STATUS_PLANNED);
   },
   
   setDevelopmentStatusActive: function() {
-    this.developmentStatusWithValidation('developmentStatusWithValidation', CoreTasks.STATUS_ACTIVE);
+    Tasks.tasksController.set('developmentStatusWithValidation', CoreTasks.STATUS_ACTIVE);
   },
   
   setDevelopmentStatusDone: function() {
-    this.developmentStatusWithValidation('developmentStatusWithValidation', CoreTasks.STATUS_DONE);
+    Tasks.tasksController.set('developmentStatusWithValidation', CoreTasks.STATUS_DONE);
   },
   
   setDevelopmentStatusRisky: function() {
-    this.developmentStatusWithValidation('developmentStatusWithValidation', CoreTasks.STATUS_RISKY);
+    Tasks.tasksController.set('developmentStatusWithValidation', CoreTasks.STATUS_RISKY);
   },
   
   validation: function(key, value) {
@@ -247,15 +247,15 @@ Tasks.tasksController = SC.TreeController.create(
   }.property('selection').cacheable(),
   
   setValidationUntested: function() {
-    this.validation('validation', CoreTasks.TASK_VALIDATION_UNTESTED);
+    Tasks.tasksController.set('validation', CoreTasks.TASK_VALIDATION_UNTESTED);
   },
   
   setValidationPassed: function() {
-    this.validation('validation', CoreTasks.TASK_VALIDATION_PASSED);
+    Tasks.tasksController.set('validation', CoreTasks.TASK_VALIDATION_PASSED);
   },
   
   setValidationFailed: function() {
-    this.validation('validation', CoreTasks.TASK_VALIDATION_FAILED);
+    Tasks.tasksController.set('validation', CoreTasks.TASK_VALIDATION_FAILED);
   },
   
   _watchCount: null,
@@ -290,10 +290,6 @@ Tasks.tasksController = SC.TreeController.create(
       }
       clippyDetails.innerHTML = ret;
     }
-  }.observes('selection'),
+  }.observes('selection')
   
-  editNewTask: function(task) {
-    Tasks.getPath('mainPage.taskEditor').popup(task);
-  }
-
 });

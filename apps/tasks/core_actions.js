@@ -358,7 +358,7 @@ Tasks.mixin( /** @scope Tasks */ {
     var project = CoreTasks.createRecord(CoreTasks.Project, projectHash);
     var pc = this.projectsController;
     pc.selectObject(project);
-    pc.editNewProject(project);
+    Tasks.projectEditorPage.popup(project);
 
   },
   
@@ -501,7 +501,7 @@ Tasks.mixin( /** @scope Tasks */ {
     // Create, select, and begin editing new task.
     var task = CoreTasks.createRecord(CoreTasks.Task, taskHash);
     tc.selectObject(task);
-    tc.editNewTask(task);
+    Tasks.getPath('mainPage.taskEditor').popup(task);
         
   },
 

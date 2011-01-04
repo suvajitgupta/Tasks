@@ -92,15 +92,15 @@ Tasks.projectsController = SC.ArrayController.create(
   }.property('selection').cacheable(),
   
   setDevelopmentStatusPlanned: function() {
-    this.developmentStatus('developmentStatus', CoreTasks.STATUS_PLANNED);
+    Tasks.projectsController.set('developmentStatus', CoreTasks.STATUS_PLANNED);
   },
   
   setDevelopmentStatusActive: function() {
-    this.developmentStatus('developmentStatus', CoreTasks.STATUS_ACTIVE);
+    Tasks.projectsController.set('developmentStatus', CoreTasks.STATUS_ACTIVE);
   },
   
   setDevelopmentStatusDone: function() {
-    this.developmentStatus('developmentStatus', CoreTasks.STATUS_DONE);
+    Tasks.projectsController.set('developmentStatus', CoreTasks.STATUS_DONE);
   },
   
   /**
@@ -114,12 +114,8 @@ Tasks.projectsController = SC.ArrayController.create(
         project.notifyPropertyChange('countDown');
       }
     }, Tasks.projectsController);
-  },
-  
-  editNewProject: function(project) {
-    Tasks.projectEditorPage.popup(project);
   }
-
+  
 });
 
 // Tasks.projectsController.addProbe('sources');
