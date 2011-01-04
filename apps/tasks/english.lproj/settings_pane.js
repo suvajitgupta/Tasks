@@ -148,7 +148,6 @@ Tasks.settingsPane = SCUI.ModalPane.create({
       icon: 'add-icon',
       toolTip: "_AddUserTooltip".loc(),
       isVisibleBinding: 'CoreTasks.permissions.canCreateUser',
-      target: 'Tasks',
       action: 'addUser'
     }),
 
@@ -160,7 +159,6 @@ Tasks.settingsPane = SCUI.ModalPane.create({
       toolTip: "_DeleteUserTooltip".loc(),
       isVisibleBinding: 'CoreTasks.permissions.canDeleteUser',
       isEnabledBinding: 'Tasks.usersController.isDeletable',
-      target: 'Tasks',
       action: 'deleteUser'
     }),
     

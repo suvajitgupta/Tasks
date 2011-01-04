@@ -328,62 +328,6 @@ Tasks.mixin( /** @scope Tasks */ {
   },
 
   /**
-   * Add a new user.
-   */
-  addUser: function() {
-
-    if(!CoreTasks.getPath('permissions.canCreateUser')) {
-      console.warn('You do not have permission to add a user');
-      return null;
-    }
-    
-    // Create and select new user (copy role of selected user if one).
-    var userHash = SC.clone(CoreTasks.User.NEW_USER_HASH);
-    var selectedUser = Tasks.usersController.getPath('selection.firstObject');
-    if (selectedUser) userHash.role = selectedUser.get('role');
-    var user = CoreTasks.createRecord(CoreTasks.User, userHash);
-    Tasks.usersController.selectObject(user);
-    Tasks.settingsPane.get('userInformation').get('fullNameField').becomeFirstResponder();
-    
-  },
-
-  /**
-   * Delete selected user.
-   */
-  deleteUser: function() {
-  
-    if(!CoreTasks.getPath('permissions.canDeleteUser')) {
-      console.warn('You do not have permission to delete a user');
-      return;
-    }
-    
-    var uc = this.get('usersController');      
-    var sel = uc.get('selection');
-    var len = sel? sel.length() : 0;
-    if (len > 0) {
-      
-      // Confirm deletion operation
-      SC.AlertPane.warn("_Confirmation".loc(), "_UserDeletionConfirmation".loc(), "_UserDeletionConsequences".loc(), "_Yes".loc(), "_No".loc(), null,
-        SC.Object.create({
-          alertPaneDidDismiss: function(pane, status) {
-            if(status === SC.BUTTON1_STATUS) {
-              var context = {};
-              for (var i = 0; i < len; i++) {
-                // Get and delete each selected user.
-                var user = sel.nextObject(i, null, context);
-                user.destroy();
-              }
-              // Select the logged in user.
-              Tasks.usersController.selectObject(CoreTasks.get('currentUser'));
-            }
-          }
-        })
-      );
-
-    }
-  },
-  
-  /**
    * Add a new project in projects master list.
    */
   addProject: function() {
