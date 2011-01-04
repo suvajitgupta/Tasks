@@ -328,16 +328,6 @@ Tasks.mixin( /** @scope Tasks */ {
   },
 
   /**
-   * Launch Settings panel for user/preference management.
-   */
-   /**
-    * Launch task editor dialog.
-    */
-  settings: function() {
-   Tasks.settingsController.openPanel();
-  },
-
-  /**
    * Add a new user.
    */
   addUser: function() {
@@ -353,7 +343,7 @@ Tasks.mixin( /** @scope Tasks */ {
     if (selectedUser) userHash.role = selectedUser.get('role');
     var user = CoreTasks.createRecord(CoreTasks.User, userHash);
     Tasks.usersController.selectObject(user);
-    Tasks.settingsPage.get('userInformation').get('fullNameField').becomeFirstResponder();
+    Tasks.settingsPane.get('userInformation').get('fullNameField').becomeFirstResponder();
     
   },
 

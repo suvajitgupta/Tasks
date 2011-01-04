@@ -16,13 +16,13 @@ Tasks.settingsController = SC.ObjectController.create(
 /** @scope Tasks.settingsController.prototype */ {
   
   openPanel: function(){
-    var panel = Tasks.getPath('settingsPage.panel');
-    if(panel) {
+    var pane = Tasks.get('settingsPane');
+    if(pane) {
       // Scroll to/select logged in user and open User Manager
       var currentUser = CoreTasks.get('currentUser');
       Tasks.usersController.selectObject(currentUser);
-      if(!CoreTasks.isCurrentUserAManager()) panel.setSmallSize();
-      panel.append();
+      if(!CoreTasks.isCurrentUserAManager()) pane.setSmallSize();
+      pane.append();
     }
   }
         

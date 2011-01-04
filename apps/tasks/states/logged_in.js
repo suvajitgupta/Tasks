@@ -20,10 +20,33 @@ Tasks.LoggedInState = Ki.State.extend({
     
     initialSubstate: 'ready',
     
+    // State indicating global action readiness
+    ready: Ki.State.design(),
+    
     close: function() {
       Tasks.statechart.gotoState('loggedIn.globals.ready');
     },
+    
+    // State to handle user settings & management
+    settings: Ki.State.design({
 
+      enterState: function() {
+        Tasks.settingsController.openPanel();
+      },
+      
+      exitState: function() {
+        Tasks.get('settingsPane').remove();
+        if(CoreTasks.get('autoSave')) Tasks.saveData();
+      }
+      
+    }),
+
+    displaySettings: function() {
+      Tasks.statechart.gotoState('settings');
+    },
+
+
+    // Actions to toggle autosave & notifications
     toggleAutoSave: function(){
       CoreTasks.set('autoSave', !CoreTasks.get('autoSave'));
     },
@@ -32,9 +55,6 @@ Tasks.LoggedInState = Ki.State.extend({
       CoreTasks.set('shouldNotify', !CoreTasks.get('shouldNotify'));
     },
 
-    // State indicating global action readiness
-    ready: Ki.State.design(),
-    
     // State to show statistics
     statistics: Ki.State.design({
 
