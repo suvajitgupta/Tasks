@@ -4,7 +4,7 @@
  * @author Suvajit Gupta
  * License: Licened under MIT license (see license.js)
  */
-/*globals Tasks Ki sc_require */
+/*globals CoreTasks Tasks Ki sc_require */
 
 Tasks.LoggedOutState = Ki.State.extend({
 
@@ -17,6 +17,7 @@ Tasks.LoggedOutState = Ki.State.extend({
   logIn: Ki.State.design({
     
     enterState: function() {
+      CoreTasks.initializeStore();
       Tasks.loginController.openPanel();
     },
 

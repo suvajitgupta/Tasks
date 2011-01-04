@@ -25,7 +25,7 @@ Tasks.mixin( /** @scope Tasks */ {
   authenticate: function(loginName, password) {
     // console.log('DEBUG: authenticate()');
     Tasks.set('loginName', loginName);
-    if(CoreTasks.get('dataSource') === CoreTasks.REMOTE_DATA_SOURCE) { // perform remote authentication
+    if(CoreTasks.get('dataSourceType') === CoreTasks.REMOTE_DATA_SOURCE) { // perform remote authentication
       var params = {
         successCallback: this._authenticationSuccess.bind(this),
         failureCallback: this._authenticationFailure.bind(this)
@@ -60,16 +60,6 @@ Tasks.mixin( /** @scope Tasks */ {
         var server = headers.Server || headers.server;
         if(server && server.indexOf('Persevere') !== -1) Tasks.set('serverType', Tasks.PERSEVERE_SERVER);
       }
-    }
-    
-    // Initialize the appropriate data source
-    if (CoreTasks.get('dataSource') === CoreTasks.REMOTE_DATA_SOURCE) {
-      CoreTasks.initializeStore(CoreTasks.CachingRemoteDataSource.create());
-      SC.Logger.log('Using caching remote data source.');
-    }
-    else { // FIXTURES_DATA_SOURCE
-      CoreTasks.initializeStore(SC.FixturesDataSource.create());
-      SC.Logger.log('Using fixtures data source.');
     }
     
     // Create system projects

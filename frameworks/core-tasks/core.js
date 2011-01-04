@@ -20,7 +20,7 @@ CoreTasks = SC.Object.create({
    */
   REMOTE_DATA_SOURCE: 0x0001,
   FIXTURES_DATA_SOURCE: 0x0002,
-  dataSource: 0x0001,
+  dataSourceType: 0x0001,
   
   /**
    * Boolean indication of whether or not to use the browser's local storage mechanism for record
@@ -91,15 +91,26 @@ CoreTasks = SC.Object.create({
    */
   init: function() {
     // Don't use localStorage for fixtures or iPad.
-    if (this.get('dataSource') === this.FIXTURES_DATA_SOURCE || SC.platform.touch) this.useLocalStorage = false;
+    // console.log('DEBUG: CoreTasks init()');
+    if (this.get('dataSourceType') === this.FIXTURES_DATA_SOURCE || SC.platform.touch) this.useLocalStorage = false;
   },
 
   /**
    * Initializes the main store with the given data source.
-   *
-   * @param {SC.DataSource} dataSource The data source with which to initialize the store.
    */
-  initializeStore: function(dataSource) {
+  initializeStore: function() {
+
+    // Create the appropriate data source.
+    var dataSource;
+    if (CoreTasks.get('dataSourceType') === CoreTasks.REMOTE_DATA_SOURCE) {
+      dataSource = CoreTasks.CachingRemoteDataSource.create();
+      SC.Logger.log('Using caching remote data source.');
+    }
+    else { // FIXTURES_DATA_SOURCE
+      dataSource = SC.FixturesDataSource.create();
+      SC.Logger.log('Using fixtures data source.');
+    }
+
     // Create the store itself.
     var store = CoreTasks.Store.create();
     store.set('dataSource', dataSource);
@@ -459,7 +470,7 @@ CoreTasks = SC.Object.create({
    * Persistence must occur in a precise order to maintain entity associations.
    */
   saveChanges: function() {
-    if (CoreTasks.get('dataSource') === CoreTasks.FIXTURES_DATA_SOURCE) { // nothing to do in fixtures mode.
+    if (CoreTasks.get('dataSourceType') === CoreTasks.FIXTURES_DATA_SOURCE) { // nothing to do in fixtures mode.
       this.set('needsSave', NO);
       return;
     }

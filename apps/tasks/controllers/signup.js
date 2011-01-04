@@ -22,10 +22,12 @@ Tasks.signupController = SC.ObjectController.create(
     // Create a new user and start editing its properties.
     var newUserHash = SC.clone(CoreTasks.User.NEW_USER_HASH);
     newUserHash.role = CoreTasks.USER_ROLE_GUEST;
+    
+    // FIXME: [SG] crashing on next line now since Store hasn't been created
     this._newUser = CoreTasks.createRecord(CoreTasks.User, newUserHash);
     Tasks.usersController.selectObject(this._newUser);
     
-    var pane = Tasks.getPath('signupPage.mainPane');
+    var pane = Tasks.get('signupPane');
     pane.append();
     pane.makeFirstResponder(pane.contentView.userInformation.fullNameField);
   },
@@ -54,7 +56,7 @@ Tasks.signupController = SC.ObjectController.create(
     Tasks.userController.set('password', Tasks.userController.hashPassword(password));
     Tasks.saveData();
     Tasks.usersController.set('selection', '');
-    Tasks.getPath('signupPage.mainPane').remove();
+    Tasks.get('signupPane').remove();
     Tasks.authenticate(loginName, Tasks.userController.hashPassword(password));
   },
   
@@ -78,7 +80,7 @@ Tasks.signupController = SC.ObjectController.create(
 
   closePanel: function() {
     // Close signup panel and refocus on login panel
-    Tasks.getPath('signupPage.mainPane').remove();
+    Tasks.get('signupPane').remove();
     var panel = Tasks.getPath('loginPage.panel');
     if(panel) panel.focus();
   }

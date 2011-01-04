@@ -32,7 +32,7 @@ App.define_paths_for 'login_panel' do |path|
   path.define_path 'guest_signup_button', 'contentView.guestSignupButton', ButtonView
 end
 
-App.define_path 'signup_panel', 'signupPage.mainPane', PanelPane
+App.define_path 'signup_panel', 'signupPane', PanelPane
 App.define_paths_for 'signup_panel' do |path|
   path.define_path 'signup_prompt', 'contentView.signupPrompt', LabelView
   path.define_path 'signup_button', 'contentView.signupButton', ButtonView
