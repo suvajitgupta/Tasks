@@ -30,13 +30,7 @@ Tasks.mixin( /** @scope Tasks */ {
       loggedIn: Ki.State.plugin('Tasks.LoggedInState'),
 
       // State after application is shut down
-      terminated: Ki.State.design({
-
-        enterState: function() {
-          Tasks.getPath('mainPage.mainPane').remove();
-        }
-
-      })
+      shutDown: Ki.State.design()
 
     })
   

@@ -22,6 +22,10 @@ Tasks.LoggedInState = Ki.State.extend({
   projectManager: Ki.State.plugin('Tasks.ProjectManagerState'),
   
   // State to handle task manager actions
-  taskManager: Ki.State.plugin('Tasks.TaskManagerState')
+  taskManager: Ki.State.plugin('Tasks.TaskManagerState'),
+  
+  exitState: function() {
+    Tasks.getPath('mainPage.mainPane').remove();
+  }
   
 });

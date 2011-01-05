@@ -206,7 +206,7 @@ Tasks.GlobalsState = Ki.State.extend({
     // console.log('DEBUG: _terminate()');
 
     // Close down statechart
-    Tasks.statechart.gotoState('terminated');
+    Tasks.statechart.gotoState('shutDown');
     Tasks.statechart.destroy();
 
     // Clear cached localStorage data
