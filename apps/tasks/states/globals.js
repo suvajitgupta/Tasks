@@ -159,56 +159,46 @@ Tasks.GlobalsState = Ki.State.extend({
   },
 
   logout: function() {
+    var that = this;
     SC.AlertPane.warn("_Confirmation".loc(), "_LogoutConfirmation".loc(), null, "_Yes".loc(), "_No".loc(), null,
       SC.Object.create({
         alertPaneDidDismiss: function(pane, status) {
           if(status === SC.BUTTON1_STATUS) {
-            Tasks.GlobalsState._checkForChangesAndExit();
+            that._checkForChangesAndExit();
           }
         }
       })
     );
   },
 
-  save: function() {
-    Tasks.saveData();
-  },
-
-  refresh: function() {
-    Tasks.loadData();
-  }
-  
-});
-
-Tasks.GlobalsState.mixin(/** @scope Tasks.GlobalsState */ {
-
   _checkForChangesAndExit: function() {
+    var that = this;
     if(CoreTasks.get('needsSave')) {
       SC.AlertPane.warn("_Confirmation".loc(), "_SaveConfirmation".loc(), null, "_Yes".loc(), "_No".loc(), null,
         SC.Object.create({
           alertPaneDidDismiss: function(pane, status) {
             if(status === SC.BUTTON1_STATUS) {
-              Tasks.GlobalsState._saveChangesAndExit();
+              that._saveChangesAndExit();
             }
             else if(status === SC.BUTTON2_STATUS){
-              Tasks.GlobalsState._exitWithoutSavingChanges();
+              that._exitWithoutSavingChanges();
             }
           }
         })
       );
     }
     else {
-      Tasks.GlobalsState._exitWithoutSavingChanges();
+      this._exitWithoutSavingChanges();
     }
   },
 
   _saveChangesAndExit: function() {
     CoreTasks.saveChanges();
-    Tasks.GlobalsState._terminate();
+    this._terminate();
   },
 
   _exitWithoutSavingChanges: function() {
-    Tasks.GlobalsState._terminate();
+    this._terminate();
   },
 
   _terminate: function() {
@@ -229,8 +219,8 @@ Tasks.GlobalsState.mixin(/** @scope Tasks.GlobalsState */ {
     // Logout user on Server and restart application
     if(Tasks.get('serverType') === Tasks.GAE_SERVER) {
       var params = {
-        successCallback: Tasks.GlobalsState._logoutSuccess.bind(Tasks.GlobalsState),
-        failureCallback: Tasks.GlobalsState._logoutFailure.bind(Tasks.GlobalsState)
+        successCallback: this._logoutSuccess.bind(this),
+        failureCallback: this._logoutFailure.bind(this)
       };
       params.queryParams = {
         UUID: CoreTasks.getPath('currentUser.id'),
@@ -240,22 +230,30 @@ Tasks.GlobalsState.mixin(/** @scope Tasks.GlobalsState */ {
       CoreTasks.executeTransientPost('logout', null, params);
     }
     else {
-      Tasks.GlobalsState._restart();
+      this._restart();
     }
   },
 
   _logoutSuccess: function(response) {
     // console.log('DEBUG: Logout succeeded on Server');
-    Tasks.GlobalsState._restart();
+    this._restart();
   },
 
   _logoutFailure: function(response) {
     console.error('Logout failed on Server');
-    Tasks.GlobalsState._restart();
+    this._restart();
   },
 
   _restart: function() {
     window.location = Tasks.getBaseUrl();
-  }
+  },
 
+  save: function() {
+    Tasks.saveData();
+  },
+
+  refresh: function() {
+    Tasks.loadData();
+  }
+  
 });

@@ -14,13 +14,46 @@ Tasks.ProjectManagerState = Ki.State.extend({
   ready: Ki.State.design(),
   
   addProject: function() {
-    Tasks.ProjectManagerState._createProject(false);
+    this._createProject(false);
   },
   
   duplicateProject: function() {
-    Tasks.ProjectManagerState._createProject(true);
+    this._createProject(true);
   },
     
+  /**
+   * Create a new project in projects master list and start editing it .
+   *
+   * @param {Boolean} flag to indicate whether to make a duplicate of selected task.
+   */
+  _createProject: function(duplicate) {
+    
+    if(!CoreTasks.getPath('permissions.canCreateProject')) {
+      console.warn('You do not have permission to add or duplicate a project');
+      return;
+    }
+    
+    var projectHash = SC.clone(CoreTasks.Project.NEW_PROJECT_HASH);
+    projectHash.name = projectHash.name.loc();
+    if(duplicate) {
+      var selectedProject = Tasks.projectsController.getPath('selection.firstObject');
+      if (!selectedProject) {
+        console.warn('You must have a project selected to duplicate it');
+        return;
+      }
+      projectHash.name = selectedProject.get('name') + "_Copy".loc();
+      projectHash.description = selectedProject.get('description');
+      projectHash.timeLeft = selectedProject.get('timeLeft');
+      projectHash.developmentStatus = selectedProject.get('developmentStatus');
+    }
+    
+    // Create, select, and begin editing new project.
+    var project = CoreTasks.createRecord(CoreTasks.Project, projectHash);
+    Tasks.projectsController.selectObject(project);
+    Tasks.projectEditorPage.popup(project);
+
+  },
+  
   deleteProject: function() {
     
     if(!CoreTasks.getPath('permissions.canDeleteProject')) {
@@ -73,41 +106,4 @@ Tasks.ProjectManagerState = Ki.State.extend({
     Tasks.projectsController.set('developmentStatus', CoreTasks.STATUS_DONE);
   }
     
-});
-
-Tasks.ProjectManagerState.mixin(/** @scope Tasks.ProjectManagerState */ {
-  
-  /**
-   * Create a new project in projects master list and start editing it .
-   *
-   * @param {Boolean} flag to indicate whether to make a duplicate of selected task.
-   */
-  _createProject: function(duplicate) {
-    
-    if(!CoreTasks.getPath('permissions.canCreateProject')) {
-      console.warn('You do not have permission to add or duplicate a project');
-      return;
-    }
-    
-    var projectHash = SC.clone(CoreTasks.Project.NEW_PROJECT_HASH);
-    projectHash.name = projectHash.name.loc();
-    if(duplicate) {
-      var selectedProject = Tasks.projectsController.getPath('selection.firstObject');
-      if (!selectedProject) {
-        console.warn('You must have a project selected to duplicate it');
-        return;
-      }
-      projectHash.name = selectedProject.get('name') + "_Copy".loc();
-      projectHash.description = selectedProject.get('description');
-      projectHash.timeLeft = selectedProject.get('timeLeft');
-      projectHash.developmentStatus = selectedProject.get('developmentStatus');
-    }
-    
-    // Create, select, and begin editing new project.
-    var project = CoreTasks.createRecord(CoreTasks.Project, projectHash);
-    Tasks.projectsController.selectObject(project);
-    Tasks.projectEditorPage.popup(project);
-
-  }
-
 });
