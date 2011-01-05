@@ -164,7 +164,7 @@ Tasks.importDataController = SC.ObjectController.create(
     CoreTasks.set('shouldNotify', shouldNotify); // restore cached value
     this.set('importData','');
     
-    Tasks.statechart.gotoState('loggedIn.globals.ready');
+    Tasks.statechart.sendEvent('close');
     
   },
   
