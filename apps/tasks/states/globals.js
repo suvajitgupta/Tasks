@@ -10,12 +10,69 @@ Tasks.GlobalsState = Ki.State.extend({
       
   initialSubstate: 'ready',
   
-  // State indicating global action readiness
-  ready: Ki.State.design(),
-  
   close: function() {
     this.gotoState('loggedIn.globals.ready');
   },
+  
+  // State indicating global action readiness
+  ready: Ki.State.design({
+    
+    displaySettings: function() {
+      this.gotoState('settings');
+    },
+        
+    // Actions to toggle autosave & notifications
+    toggleAutoSave: function(){
+      CoreTasks.set('autoSave', !CoreTasks.get('autoSave'));
+    },
+
+    toggleShouldNotify: function(){
+      CoreTasks.set('shouldNotify', !CoreTasks.get('shouldNotify'));
+    },
+
+    displayStatistics: function() {
+      this.gotoState('statistics');
+    },
+
+    importDataAsText: function() {
+      this.gotoState('textImport');
+    },
+
+    exportDataAsText: function() {
+      this.gotoState('textExport');
+    },
+
+    exportDataAsHTML: function() {
+      Tasks.exportDataController.exportData('HTML');
+    },
+
+    displayHelp: function() {
+      if(SC.platform.touch) window.location = Tasks.getHelpUrl();
+      else window.open(Tasks.getBaseUrl() + '#help', '', 'width=1000,height=750,menubar=no,location=no,toolbar=no,directories=no,status=no');
+    },
+
+    logout: function() {
+      var that = this;
+      SC.AlertPane.warn("_Confirmation".loc(), "_LogoutConfirmation".loc(), null, "_Yes".loc(), "_No".loc(), null,
+        SC.Object.create({
+          alertPaneDidDismiss: function(pane, status) {
+            if(status === SC.BUTTON1_STATUS) {
+              that._checkForChangesAndExit();
+            }
+          }
+        })
+      );
+    },
+
+    save: function() {
+      Tasks.saveData();
+    },
+
+    refresh: function() {
+      Tasks.loadData();
+    }
+
+  }),
   
   // State to handle user info/settings
   settings: Ki.State.design({
@@ -81,19 +138,6 @@ Tasks.GlobalsState = Ki.State.extend({
     
   }),
 
-  displaySettings: function() {
-    this.gotoState('settings');
-  },
-
-  // Actions to toggle autosave & notifications
-  toggleAutoSave: function(){
-    CoreTasks.set('autoSave', !CoreTasks.get('autoSave'));
-  },
-
-  toggleShouldNotify: function(){
-    CoreTasks.set('shouldNotify', !CoreTasks.get('shouldNotify'));
-  },
-
   // State to show statistics
   statistics: Ki.State.design({
 
@@ -106,10 +150,6 @@ Tasks.GlobalsState = Ki.State.extend({
     }
     
   }),
-
-  displayStatistics: function() {
-    this.gotoState('statistics');
-  },
 
   // State to manage text import
   textImport: Ki.State.design({
@@ -128,15 +168,7 @@ Tasks.GlobalsState = Ki.State.extend({
     
   }),
 
-  importDataAsText: function() {
-    this.gotoState('textImport');
-  },
-  
   // State to manage text export
-  exportDataAsText: function() {
-    this.gotoState('textExport');
-  },
-
   textExport: Ki.State.design({
 
     enterState: function() {
@@ -148,28 +180,6 @@ Tasks.GlobalsState = Ki.State.extend({
     }
     
   }),
-
-  exportDataAsHTML: function() {
-    Tasks.exportDataController.exportData('HTML');
-  },
-
-  displayHelp: function() {
-    if(SC.platform.touch) window.location = Tasks.getHelpUrl();
-    else window.open(Tasks.getBaseUrl() + '#help', '', 'width=1000,height=750,menubar=no,location=no,toolbar=no,directories=no,status=no');
-  },
-
-  logout: function() {
-    var that = this;
-    SC.AlertPane.warn("_Confirmation".loc(), "_LogoutConfirmation".loc(), null, "_Yes".loc(), "_No".loc(), null,
-      SC.Object.create({
-        alertPaneDidDismiss: function(pane, status) {
-          if(status === SC.BUTTON1_STATUS) {
-            that._checkForChangesAndExit();
-          }
-        }
-      })
-    );
-  },
 
   _checkForChangesAndExit: function() {
     var that = this;
@@ -246,14 +256,6 @@ Tasks.GlobalsState = Ki.State.extend({
 
   _restart: function() {
     window.location = Tasks.getBaseUrl();
-  },
-
-  save: function() {
-    Tasks.saveData();
-  },
-
-  refresh: function() {
-    Tasks.loadData();
   }
-  
+    
 });
