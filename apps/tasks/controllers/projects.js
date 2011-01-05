@@ -91,18 +91,6 @@ Tasks.projectsController = SC.ArrayController.create(
     return value;
   }.property('selection').cacheable(),
   
-  setDevelopmentStatusPlanned: function() {
-    Tasks.projectsController.set('developmentStatus', CoreTasks.STATUS_PLANNED);
-  },
-  
-  setDevelopmentStatusActive: function() {
-    Tasks.projectsController.set('developmentStatus', CoreTasks.STATUS_ACTIVE);
-  },
-  
-  setDevelopmentStatusDone: function() {
-    Tasks.projectsController.set('developmentStatus', CoreTasks.STATUS_DONE);
-  },
-  
   /**
    * Force recomputation of project countDowns where needed
    */

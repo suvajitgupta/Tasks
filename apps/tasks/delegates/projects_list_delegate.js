@@ -142,7 +142,7 @@ Tasks.projectsListDelegate = SC.Object.create(SC.CollectionViewDelegate,
   */
   collectionViewDeleteContent: function(view, content, indexes) {
     if (content && (SC.typeOf(content.destroyAt) === SC.T_FUNCTION || SC.typeOf(content.removeAt) === SC.T_FUNCTION)) {
-      Tasks.deleteProject();
+      Tasks.statechart.sendEvent('deleteProject');
     }
     return NO;
   }

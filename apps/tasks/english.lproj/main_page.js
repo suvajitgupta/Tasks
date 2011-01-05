@@ -242,7 +242,6 @@ Tasks.mainPage = SC.Page.design({
              icon: 'add-icon',
              toolTip: "_AddProjectTooltip".loc(),
              isVisibleBinding: 'CoreTasks.permissions.canCreateProject',
-             target: 'Tasks',
              action: 'addProject'
            }),
            deleteProjectButton: SC.ButtonView.design({
@@ -253,7 +252,6 @@ Tasks.mainPage = SC.Page.design({
              toolTip: "_DeleteProjectTooltip".loc(),
              isVisibleBinding: 'CoreTasks.permissions.canDeleteProject',
              isEnabledBinding: 'Tasks.projectsController.isDeletable',
-             target: 'Tasks',
              action: 'deleteProject'
            })
            

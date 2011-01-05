@@ -194,7 +194,6 @@ Tasks.ProjectItemView.mixin(/** @scope Tasks.ProjectItemView */ {
         title: "_Add".loc(),
         icon: 'add-icon',
         isEnabled: YES,
-        target: 'Tasks',
         action: 'addProject'
       });
     }
@@ -205,7 +204,6 @@ Tasks.ProjectItemView.mixin(/** @scope Tasks.ProjectItemView */ {
         title: "_Duplicate".loc(),
         icon: 'duplicate-icon',
         isEnabled: YES,
-        target: 'Tasks',
         action: 'duplicateProject'
       });
     }
@@ -215,7 +213,6 @@ Tasks.ProjectItemView.mixin(/** @scope Tasks.ProjectItemView */ {
         title: "_Delete".loc(),
         icon: 'delete-icon',
         isEnabled: YES,
-        target: 'Tasks',
         action: 'deleteProject'
       });
     }
@@ -232,7 +229,6 @@ Tasks.ProjectItemView.mixin(/** @scope Tasks.ProjectItemView */ {
         icon: 'no-icon',
         isEnabled: YES,
         checkbox: developmentStatus === CoreTasks.STATUS_PLANNED,
-        target: 'Tasks.projectsController',
         action: 'setDevelopmentStatusPlanned'
       });
       ret.push({
@@ -240,7 +236,6 @@ Tasks.ProjectItemView.mixin(/** @scope Tasks.ProjectItemView */ {
         icon: 'no-icon',
         isEnabled: YES,
         checkbox: developmentStatus === CoreTasks.STATUS_ACTIVE,
-        target: 'Tasks.projectsController',
         action: 'setDevelopmentStatusActive'
       });
       ret.push({
@@ -248,7 +243,6 @@ Tasks.ProjectItemView.mixin(/** @scope Tasks.ProjectItemView */ {
         icon: 'no-icon',
         isEnabled: YES,
         checkbox: developmentStatus === CoreTasks.STATUS_DONE,
-        target: 'Tasks.projectsController',
         action: 'setDevelopmentStatusDone'
       });
 
