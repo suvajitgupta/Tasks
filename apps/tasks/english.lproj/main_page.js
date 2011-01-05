@@ -106,6 +106,7 @@ Tasks.mainPage = SC.Page.design({
  mainPane: SC.MainPane.design({
 
    defaultResponder: 'Tasks.statechart',
+   
    welcomeMessage: SC.outlet('masterDetailView.detailView.topToolbar.welcomeMessageLabel'),
    projectsList:   SC.outlet('masterDetailView.masterView.contentView.projectsList.contentView'),
    tasksSceneView: SC.outlet('masterDetailView.detailView.contentView.tasksSceneView'),
