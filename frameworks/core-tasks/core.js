@@ -28,12 +28,6 @@ CoreTasks = SC.Object.create({
    */
   useLocalStorage: true,
 
-  /**
-   * If YES, and if useLocalStorage is also YES, preload all of the cached records during
-   * initialization.
-   */
-  preloadCachedRecords: YES,
-
   /*
    * Arrays of all records in the store.
    */
@@ -115,8 +109,8 @@ CoreTasks = SC.Object.create({
     var store = CoreTasks.Store.create();
     store.set('dataSource', dataSource);
 
-    // Preload cached records if requested and supported.
-    if (this.preloadCachedRecords === YES && dataSource.loadCachedRecords) {
+    // Load data from local storage.
+    if (dataSource.loadCachedRecords) {
       dataSource.loadCachedRecords();
     }
 
