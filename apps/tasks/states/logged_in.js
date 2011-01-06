@@ -16,7 +16,7 @@ Tasks.LoggedInState = Ki.State.extend({
   },
   
   // State to handle globally available actions
-  globals: Ki.State.plugin('Tasks.GlobalsState'),
+  applicationManager: Ki.State.plugin('Tasks.ApplicationManagerState'),
   
   // State to handle project manager actions
   projectManager: Ki.State.plugin('Tasks.ProjectManagerState'),

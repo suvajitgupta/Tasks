@@ -6,22 +6,17 @@
  */
 /*globals CoreTasks Tasks Ki SCUDS */
 
-Tasks.GlobalsState = Ki.State.extend({
+Tasks.ApplicationManagerState = Ki.State.extend({
       
   initialSubstate: 'ready',
-  
-  close: function() {
-    this.gotoState('loggedIn.globals.ready');
-  },
   
   // State indicating global action readiness
   ready: Ki.State.design({
     
-    displaySettings: function() {
-      this.gotoState('settings');
+    displayUsersSettings: function() {
+      this.gotoState('usersSettings');
     },
         
-    // Actions to toggle autosave & notifications
     toggleAutoSave: function(){
       CoreTasks.set('autoSave', !CoreTasks.get('autoSave'));
     },
@@ -63,7 +58,82 @@ Tasks.GlobalsState = Ki.State.extend({
         })
       );
     },
+    
+    _checkForChangesAndExit: function() {
+      var that = this;
+      if(CoreTasks.get('needsSave')) {
+        SC.AlertPane.warn("_Confirmation".loc(), "_SaveConfirmation".loc(), null, "_Yes".loc(), "_No".loc(), null,
+          SC.Object.create({
+            alertPaneDidDismiss: function(pane, status) {
+              if(status === SC.BUTTON1_STATUS) {
+                that._saveChangesAndExit();
+              }
+              else if(status === SC.BUTTON2_STATUS){
+                that._exitWithoutSavingChanges();
+              }
+            }
+          })
+        );
+      }
+      else {
+        this._exitWithoutSavingChanges();
+      }
+    },
 
+    _saveChangesAndExit: function() {
+      CoreTasks.saveChanges();
+      this._terminate();
+    },
+
+    _exitWithoutSavingChanges: function() {
+      this._terminate();
+    },
+
+    _terminate: function() {
+
+      // Shut down and destroy statechart
+      Tasks.statechart.gotoState('shutDown');
+      Tasks.statechart.destroy();
+
+      // Clear cached localStorage data (if any)
+      if(CoreTasks.useLocalStorage) {
+        // TODO: [SG] add checkbox on logout screen to optionally clear localStorage
+        // console.log('DEBUG: clearing cached localStorage data');
+        SCUDS.LocalStorageAdapterFactory.nukeAllAdapters();
+      }
+
+      // Logout user on Server (if needed) and restart application
+      if(Tasks.get('serverType') === Tasks.GAE_SERVER) {
+        var params = {
+          successCallback: this._logoutSuccess.bind(this),
+          failureCallback: this._logoutFailure.bind(this)
+        };
+        params.queryParams = {
+          UUID: CoreTasks.getPath('currentUser.id'),
+          ATO: CoreTasks.getPath('currentUser.authToken')
+        };
+        // notify Server so that authentication token can be destroyed for security reasons
+        CoreTasks.executeTransientPost('logout', null, params);
+      }
+      else {
+        this._restart();
+      }
+    },
+
+    _logoutSuccess: function(response) {
+      // console.log('DEBUG: Logout succeeded on Server');
+      this._restart();
+    },
+
+    _logoutFailure: function(response) {
+      console.error('Logout failed on Server');
+      this._restart();
+    },
+
+    _restart: function() {
+      window.location = Tasks.getBaseUrl();
+    },
+    
     save: function() {
       Tasks.saveData();
     },
@@ -75,7 +145,7 @@ Tasks.GlobalsState = Ki.State.extend({
   }),
   
   // State to handle user info/settings
-  settings: Ki.State.design({
+  usersSettings: Ki.State.design({
 
     enterState: function() {
       Tasks.settingsController.openPanel();
@@ -131,6 +201,10 @@ Tasks.GlobalsState = Ki.State.extend({
       }
     },
 
+    close: function() {
+      this.gotoState('loggedIn.applicationManager.ready');
+    },
+
     exitState: function() {
       Tasks.get('settingsPane').remove();
       if(CoreTasks.get('autoSave')) Tasks.saveData();
@@ -145,6 +219,10 @@ Tasks.GlobalsState = Ki.State.extend({
       Tasks.statisticsController.showStatistics();  
     },
     
+    close: function() {
+      this.gotoState('loggedIn.applicationManager.ready');
+    },
+
     exitState: function() {
       Tasks.get('statisticsPane').remove();
     }
@@ -162,6 +240,10 @@ Tasks.GlobalsState = Ki.State.extend({
       Tasks.importDataController.parseAndLoadData();
     },
 
+    close: function() {
+      this.gotoState('loggedIn.applicationManager.ready');
+    },
+
     exitState: function() {
       Tasks.get('importDataPane').remove();
     }
@@ -175,87 +257,14 @@ Tasks.GlobalsState = Ki.State.extend({
       Tasks.exportDataController.exportData('Text');
     },
     
+    close: function() {
+      this.gotoState('loggedIn.applicationManager.ready');
+    },
+
     exitState: function() {
       Tasks.get('exportDataPane').remove();
     }
     
-  }),
-
-  _checkForChangesAndExit: function() {
-    var that = this;
-    if(CoreTasks.get('needsSave')) {
-      SC.AlertPane.warn("_Confirmation".loc(), "_SaveConfirmation".loc(), null, "_Yes".loc(), "_No".loc(), null,
-        SC.Object.create({
-          alertPaneDidDismiss: function(pane, status) {
-            if(status === SC.BUTTON1_STATUS) {
-              that._saveChangesAndExit();
-            }
-            else if(status === SC.BUTTON2_STATUS){
-              that._exitWithoutSavingChanges();
-            }
-          }
-        })
-      );
-    }
-    else {
-      this._exitWithoutSavingChanges();
-    }
-  },
-
-  _saveChangesAndExit: function() {
-    CoreTasks.saveChanges();
-    this._terminate();
-  },
-
-  _exitWithoutSavingChanges: function() {
-    this._terminate();
-  },
-
-  _terminate: function() {
-
-    // console.log('DEBUG: _terminate()');
-
-    // Close down statechart
-    Tasks.statechart.gotoState('shutDown');
-    Tasks.statechart.destroy();
-
-    // Clear cached localStorage data
-    if(CoreTasks.useLocalStorage) {
-      // TODO: [SG] add checkbox on logout screen to optionally clear localStorage
-      // console.log('DEBUG: clearing cached localStorage data');
-      SCUDS.LocalStorageAdapterFactory.nukeAllAdapters();
-    }
-
-    // Logout user on Server and restart application
-    if(Tasks.get('serverType') === Tasks.GAE_SERVER) {
-      var params = {
-        successCallback: this._logoutSuccess.bind(this),
-        failureCallback: this._logoutFailure.bind(this)
-      };
-      params.queryParams = {
-        UUID: CoreTasks.getPath('currentUser.id'),
-        ATO: CoreTasks.getPath('currentUser.authToken')
-      };
-      // notify Server so that authentication token can be destroyed for security reasons
-      CoreTasks.executeTransientPost('logout', null, params);
-    }
-    else {
-      this._restart();
-    }
-  },
-
-  _logoutSuccess: function(response) {
-    // console.log('DEBUG: Logout succeeded on Server');
-    this._restart();
-  },
-
-  _logoutFailure: function(response) {
-    console.error('Logout failed on Server');
-    this._restart();
-  },
-
-  _restart: function() {
-    window.location = Tasks.getBaseUrl();
-  }
+  })
     
 });

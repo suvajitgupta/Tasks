@@ -64,7 +64,7 @@ Tasks.mainPageHelper = SC.Object.create({
   _listActions: function() {
     // console.log('DEBUG: _listActions()');
     var ret = [];
-    ret.push({ title: "_LaunchSettings".loc(), icon: 'settings-icon', action: 'displaySettings', isEnabled: YES });
+    ret.push({ title: "_LaunchSettings".loc(), icon: 'settings-icon', action: 'displayUsersSettings', isEnabled: YES });
     var autoSave = this.get('autoSave');
     ret.push({ title: "_Toggle".loc() + "_AutoSave".loc(), icon: 'save-icon', action: 'toggleAutoSave', isEnabled: YES, checkbox: autoSave });
     if(Tasks.get('canServerSendNotifications')) {

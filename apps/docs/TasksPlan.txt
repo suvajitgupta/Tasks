@@ -47,6 +47,63 @@ General Infrastructure @Active
 | Upload attachment somewhere and insert URL to it in record description
 ^ Switch to a pluggable Data Source-based architecture with Persevere/Google App Engine as samples [SG] <JH2> @Active
 
+Application Manager GUI @Active
+^ Add login screen to identify user who logs in (and handle login failures properly) [SG] <SE> @Done %Passed $Feature
+- Allow new guests to sign up from login screen and sign them in immediately after [JH2] <SG> @Done %Passed $Feature
+- Add password to Login, Guest Signup, and User Manager screens (save in encrypted format) [SG] <JH2> $Feature @Done %Passed
+- Remember login name/password across sessions via checkbox on login screen [SG] $Feature @Active
+- Add option to load data for completed projects on login screen (off by default) [SG] $Feature @Done %Passed
+- Set assignee selection filter to logged in user if they are a Developer [SG] @Done $Feature %Passed
+^ Add "Users/Settings" actions menu/popup embedding User Manager with buttons to add/delete users at bottom [SG] <JH2> @Done %Passed $Feature
+| Copy over Role attribute of first selected User to new User
+v Enable/disable "Delete User" button based on having a selected user [SG] @Done %Passed $Feature
+- Show number of displayed/selected Users at the bottom of User Manager panel [SG] $Feature @Done %Passed
+- Reset Task Assignee/Submitter after user deletion <SE> [SG] $Feature @Done %Passed
+^ Allow multi-User drag-and-drop role change in User Manager [SG] @Done $Feature %Passed
+^ Add User type-ahead search filter (case insensitive Name/Login Name/Email match) & corresponding cancel button [SG] @Done %Passed $Feature
+- Provide ability to mark Users as inactive <SG> [SG] $Feature
+| Inactive Users cannot be made Assignees/Submitters
+- Out of Scope: Add support for "Teams" (a user can belong to a team, a team can have a lead) $Feature
+| Create separate projects for different teams to keep their tasks/deadlines separate instead
+- Add Tasks logo to top bar and display program version as a badge [SG] $Feature @Done %Passed
+| Show credits as a tooltip on Tasks logo
+- Add welcome message showing logged in user/role with hover over tooltip showing time of login [SG] @Done $Feature %Passed
+- Make welcome message clickable to show current user's tasks by setting search filter [SG] @Done $Feature %Passed
+- Add Server data loading message in bottom bar during startup/refreshing [SG] $Feature @Done %Passed
+- Show number of selected Projects/Tasks and displayed Assignees/Tasks in the bottom bar [SG] <MB> @Done $Feature %Passed
+- Add "Save" button in bottom bar, note time of last save in bottom bar [SG] <BB> @Done $Feature %Passed
+- Add "AutoSave" enable/disable capability via actions menu [SG] <BB> @Done $Feature %Passed
+- Enable/disable "Save" button based on data modification [EO] <SG> $Feature @Done %Passed
+- Add "Refresh" button to synchronize GUI with latest data from Server [SG] <SE> $Feature @Done %Passed
+- Add "Import" menu item in actions menu with associated pop up panel [SG] <BB> @Done $Feature %Passed
+- Don't create a Project if it already exists during Import [SG] @Done $Feature %Passed
+- Allow option to automatically create new users for unknown assignees/submitters found during importing [SG] @Done $Feature %Passed
+- Turn off notifications during importing [SG] @Done $Feature %Passed
+- Add "Export" menu items in actions menu with associated pop up panels, allowing user to choose between Text/HTML formats [SG] @Done $Feature %Passed
+| When on "All Tasks" project with no filters on all Project data is exported, otherwise only displayed data is exported
+- Add "Export to HTML" capability for printable & human-readable version [SG] $Feature @Done %Passed
+| Useful for emailing and to store a baseline of Tasks
+- Support drag-and-drop file import <MB> [SG] $Feature
+- Add online "Help" menu item in actions menu and popup help window [SG] @Done %Passed $Feature
+v Add online training video using QuickTime [SG] $Feature @Done
+| http://www.youtube.com/watch?v=6egjJw_RS1g
+- Add onscreen help (on panel fields that are complex and on blank workspace to assist new users) <MG> [SG] $Feature @Done %Passed
+- Add "Logout" menu item in actions menu (confirm before exiting, clear local storage, forward to login page) [SG] <JH2> @Done $Feature %Passed
+- Prompt user to save changes (if any) before logging out [SG] <SE> $Feature @Done %Passed
+| See demo.sproutcore.com/user_defaults and lookup SproutCore blog for Charles' posting on this topic
+- Add Team/Tasks display modes to show everyone at a glance or details; clicking on Assignee in team mode shows their Tasks [SG] $Feature @Done %Passed
+v Add hotkeys for common operations (Add/Duplicate Tasks) [EG] <SG> $Feature @Done %Passed
+| Turned these off for now since these are conflicting with browser shortcuts
+- Add "Statistics..." menu item in actions menu/popup to show percent breakdown of displayed Tasks by attributes [SG] $Feature @Done %Passed
+- Provide graphical views (bar graphs, pie charts) for Statistics using Sai [SG] <EG> $Feature @Active
+- Provide tab in Settings popup panel to manage user preferences [SG] $Feature
+| Auto save
+| Email notifications
+| Percent or Threshold (in days) for Assignee loading determination
+- Support Application settings/state persistence from last login saved using HTML5 local storage [SG] <MB> $Feature
+- Support offline mode with synchronization after network reconnection using Hub.js [SG] <SE> $Feature
+- Support undo/redo using Hub.js [SG] <SE> $Feature
+
 Project Manager GUI @Active
 ^ Add Master/Detail Explorer view with click selection of Projects showing corresponding Tasks [JH2] <SG> @Done $Feature %Passed
 ^ Add Project countDown support to autmatically decrement days based on timeLeft and current time <JH2> [SG] $Feature @Done %Passed
@@ -117,65 +174,6 @@ v Add Task context menu with options: Add, Duplicate, Delete; All Task Attribute
 | You can reference #IDs of upstream Tasks in the Description field instead
 - Out of Scope: Add support for preserving original Task estimates/partial time logging $Feature
 | Use "Chunk Up Work" best practice described in Help instead
-
-User Manager GUI @Active
-^ Add login screen to identify user who logs in (and handle login failures properly) [SG] <SE> @Done %Passed $Feature
-- Add password to Login, Guest Signup, and User Manager screens (save in encrypted format) [SG] <JH2> $Feature @Done %Passed
-- Allow new guests to sign up from login screen and sign them in immediately after [JH2] <SG> @Done %Passed $Feature
-- Remember login name/password across sessions via checkbox on login screen [SG] $Feature @Active
-- Set assignee selection filter to logged in user if they are a Developer [SG] @Done $Feature %Passed
-^ Add "Users/Settings" actions menu/popup embedding User Manager with buttons to add/delete users at bottom [SG] <JH2> @Done %Passed $Feature
-| Copy over Role attribute of first selected User to new User
-v Enable/disable "Delete User" button based on having a selected user [SG] @Done %Passed $Feature
-- Show number of displayed/selected Users at the bottom of User Manager panel [SG] $Feature @Done %Passed
-- Reset Task Assignee/Submitter after user deletion <SE> [SG] $Feature @Done %Passed
-^ Allow multi-User drag-and-drop role change in User Manager [SG] @Done $Feature %Passed
-^ Add User type-ahead search filter (case insensitive Name/Login Name/Email match) & corresponding cancel button [SG] @Done %Passed $Feature
-- Provide ability to mark Users as inactive <SG> [SG] $Feature
-| Inactive Users cannot be made Assignees/Submitters
-- Out of Scope: Add support for "Teams" (a user can belong to a team, a team can have a lead) $Feature
-| Create separate projects for different teams to keep their tasks/deadlines separate instead
-
-Application Manager GUI @Active
-- Add option to load data for completed projects on login screen (off by default) [SG] $Feature @Done %Passed
-- Add Tasks logo to top bar and display program version as a badge [SG] $Feature @Done %Passed
-| Show credits as a tooltip on Tasks logo
-- Add welcome message showing logged in user/role with hover over tooltip showing time of login [SG] @Done $Feature %Passed
-- Make welcome message clickable to show current user's tasks by setting search filter [SG] @Done $Feature %Passed
-- Add Server data loading message in bottom bar during startup/refreshing [SG] $Feature @Done %Passed
-- Show number of selected Projects/Tasks and displayed Assignees/Tasks in the bottom bar [SG] <MB> @Done $Feature %Passed
-- Add "Save" button in bottom bar, note time of last save in bottom bar [SG] <BB> @Done $Feature %Passed
-- Add "AutoSave" enable/disable capability via actions menu [SG] <BB> @Done $Feature %Passed
-- Enable/disable "Save" button based on data modification [EO] <SG> $Feature @Done %Passed
-- Add "Refresh" button to synchronize GUI with latest data from Server [SG] <SE> $Feature @Done %Passed
-- Add "Import" menu item in actions menu with associated pop up panel [SG] <BB> @Done $Feature %Passed
-- Don't create a Project if it already exists during Import [SG] @Done $Feature %Passed
-- Allow option to automatically create new users for unknown assignees/submitters found during importing [SG] @Done $Feature %Passed
-- Turn off notifications during importing [SG] @Done $Feature %Passed
-- Add "Export" menu items in actions menu with associated pop up panels, allowing user to choose between Text/HTML formats [SG] @Done $Feature %Passed
-| When on "All Tasks" project with no filters on all Project data is exported, otherwise only displayed data is exported
-- Add "Export to HTML" capability for printable & human-readable version [SG] $Feature @Done %Passed
-| Useful for emailing and to store a baseline of Tasks
-- Support drag-and-drop file import <MB> [SG] $Feature
-- Add online "Help" menu item in actions menu and popup help window [SG] @Done %Passed $Feature
-v Add online training video using QuickTime [SG] $Feature @Done
-| http://www.youtube.com/watch?v=6egjJw_RS1g
-- Add onscreen help (on panel fields that are complex and on blank workspace to assist new users) <MG> [SG] $Feature @Done %Passed
-- Add "Logout" menu item in actions menu (confirm before exiting, clear local storage, forward to login page) [SG] <JH2> @Done $Feature %Passed
-- Prompt user to save changes (if any) before logging out [SG] <SE> $Feature @Done %Passed
-| See demo.sproutcore.com/user_defaults and lookup SproutCore blog for Charles' posting on this topic
-- Add Team/Tasks display modes to show everyone at a glance or details; clicking on Assignee in team mode shows their Tasks [SG] $Feature @Done %Passed
-v Add hotkeys for common operations (Add/Duplicate Tasks) [EG] <SG> $Feature @Done %Passed
-| Turned these off for now since these are conflicting with browser shortcuts
-- Add "Statistics..." menu item in actions menu/popup to show percent breakdown of displayed Tasks by attributes [SG] $Feature @Done %Passed
-- Provide graphical views (bar graphs, pie charts) for Statistics using Sai [SG] <EG> $Feature @Active
-- Provide tab in Settings popup panel to manage user preferences [SG] $Feature
-| Auto save
-| Email notifications
-| Percent or Threshold (in days) for Assignee loading determination
-- Support Application settings/state persistence from last login saved using HTML5 local storage [SG] <MB> $Feature
-- Support offline mode with synchronization after network reconnection using Hub.js [SG] <SE> $Feature
-- Support undo/redo using Hub.js [SG] <SE> $Feature
 
 Server/Tools @Active
 ^ Build persistence Server using Persevere [SE] <SG> @Done %Passed
