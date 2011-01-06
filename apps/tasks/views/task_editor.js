@@ -234,7 +234,7 @@ Tasks.TaskEditorView = SC.View.extend(
  },
   
  comment: function() {
-   SC.run(function() { Tasks.addComment(); });
+   SC.run(function() { Tasks.statechart.sendEvent('addComment'); });
    var commentsList = Tasks.mainPage.getPath('taskEditor.editor.splitView.bottomRightView.commentsList.contentView');
    var commentView = commentsList.itemViewForContentIndex(0);
    // FIXME: [SC] scrolling to top of comments list doesn't always work in SC

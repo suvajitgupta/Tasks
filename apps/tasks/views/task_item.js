@@ -226,7 +226,6 @@ Tasks.TaskItemView.mixin(/** @scope Tasks.TaskItemView */ {
         title: "_Add".loc(),
         icon: 'add-icon',
         isEnabled: YES,
-        target: 'Tasks',
         action: 'addTask'
       });
     }
@@ -237,7 +236,6 @@ Tasks.TaskItemView.mixin(/** @scope Tasks.TaskItemView */ {
         title: "_Duplicate".loc(),
         icon: 'duplicate-icon',
         isEnabled: YES,
-        target: 'Tasks',
         action: 'duplicateTask'
       });
     }
@@ -248,7 +246,6 @@ Tasks.TaskItemView.mixin(/** @scope Tasks.TaskItemView */ {
         title: "_Delete".loc(),
         icon: 'delete-icon',
         isEnabled: YES,
-        target: 'Tasks',
         action: 'deleteTask'
       });
     }
@@ -267,7 +264,6 @@ Tasks.TaskItemView.mixin(/** @scope Tasks.TaskItemView */ {
           icon: 'task-icon-feature',
           isEnabled: YES,
           checkbox: type === CoreTasks.TASK_TYPE_FEATURE,
-          target: 'Tasks.tasksController',
           action: 'setTypeFeature'
         });
         ret.push({
@@ -275,7 +271,6 @@ Tasks.TaskItemView.mixin(/** @scope Tasks.TaskItemView */ {
           icon: 'task-icon-bug',
           isEnabled: YES,
           checkbox: type === CoreTasks.TASK_TYPE_BUG,
-          target: 'Tasks.tasksController',
           action: 'setTypeBug'
         });
         ret.push({
@@ -283,7 +278,6 @@ Tasks.TaskItemView.mixin(/** @scope Tasks.TaskItemView */ {
           icon: 'task-icon-other',
           isEnabled: YES,
           checkbox: type === CoreTasks.TASK_TYPE_OTHER,
-          target: 'Tasks.tasksController',
           action: 'setTypeOther'
         });
         ret.push({
@@ -297,7 +291,6 @@ Tasks.TaskItemView.mixin(/** @scope Tasks.TaskItemView */ {
         icon: 'no-icon',
         isEnabled: YES,
         checkbox: priority === CoreTasks.TASK_PRIORITY_HIGH,
-        target: 'Tasks.tasksController',
         action: 'setPriorityHigh'
       });
       ret.push({
@@ -305,7 +298,6 @@ Tasks.TaskItemView.mixin(/** @scope Tasks.TaskItemView */ {
         icon: 'no-icon',
         isEnabled: YES,
         checkbox: priority === CoreTasks.TASK_PRIORITY_MEDIUM,
-        target: 'Tasks.tasksController',
         action: 'setPriorityMedium'
       });
       ret.push({
@@ -313,7 +305,6 @@ Tasks.TaskItemView.mixin(/** @scope Tasks.TaskItemView */ {
         icon: 'no-icon',
         isEnabled: YES,
         checkbox: priority === CoreTasks.TASK_PRIORITY_LOW,
-        target: 'Tasks.tasksController',
         action: 'setPriorityLow'
       });
       ret.push({
@@ -326,7 +317,6 @@ Tasks.TaskItemView.mixin(/** @scope Tasks.TaskItemView */ {
         icon: 'no-icon',
         isEnabled: YES,
         checkbox: developmentStatus === CoreTasks.STATUS_PLANNED,
-        target: 'Tasks.tasksController',
         action: 'setDevelopmentStatusPlanned'
       });
       ret.push({
@@ -334,7 +324,6 @@ Tasks.TaskItemView.mixin(/** @scope Tasks.TaskItemView */ {
         icon: 'no-icon',
         isEnabled: YES,
         checkbox: developmentStatus === CoreTasks.STATUS_ACTIVE,
-        target: 'Tasks.tasksController',
         action: 'setDevelopmentStatusActive'
       });
       ret.push({
@@ -342,7 +331,6 @@ Tasks.TaskItemView.mixin(/** @scope Tasks.TaskItemView */ {
         icon: 'no-icon',
         isEnabled: YES,
         checkbox: developmentStatus === CoreTasks.STATUS_DONE,
-        target: 'Tasks.tasksController',
         action: 'setDevelopmentStatusDone'
       });
       ret.push({
@@ -350,7 +338,6 @@ Tasks.TaskItemView.mixin(/** @scope Tasks.TaskItemView */ {
         icon: 'no-icon',
         isEnabled: YES,
         checkbox: developmentStatus === CoreTasks.STATUS_RISKY,
-        target: 'Tasks.tasksController',
         action: 'setDevelopmentStatusRisky'
       });
 
@@ -364,7 +351,6 @@ Tasks.TaskItemView.mixin(/** @scope Tasks.TaskItemView */ {
           icon: 'no-icon',
           isEnabled: YES,
           checkbox: validation === CoreTasks.TASK_VALIDATION_UNTESTED,
-          target: 'Tasks.tasksController',
           action: 'setValidationUntested'
         });
         ret.push({
@@ -372,7 +358,6 @@ Tasks.TaskItemView.mixin(/** @scope Tasks.TaskItemView */ {
           icon: 'no-icon',
           isEnabled: YES,
           checkbox: validation === CoreTasks.TASK_VALIDATION_PASSED,
-          target: 'Tasks.tasksController',
           action: 'setValidationPassed'
         });
         ret.push({
@@ -380,7 +365,6 @@ Tasks.TaskItemView.mixin(/** @scope Tasks.TaskItemView */ {
           icon: 'no-icon',
           isEnabled: YES,
           checkbox: validation === CoreTasks.TASK_VALIDATION_FAILED,
-          target: 'Tasks.tasksController',
           action: 'setValidationFailed'
         });
       }
@@ -401,7 +385,6 @@ Tasks.TaskItemView.mixin(/** @scope Tasks.TaskItemView */ {
           title: "_Watch".loc(),
           icon: 'watch-icon',
           isEnabled: YES,
-          target: 'Tasks',
           action: 'watchTask'
         });
       }
@@ -410,7 +393,6 @@ Tasks.TaskItemView.mixin(/** @scope Tasks.TaskItemView */ {
           title: "_Unwatch".loc(),
           icon: 'unwatch-icon',
           isEnabled: YES,
-          target: 'Tasks',
           action: 'unwatchTask'
         });
       }

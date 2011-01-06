@@ -424,7 +424,6 @@ Tasks.mainPage = SC.Page.design({
                toolTip: "_AddTaskTooltip".loc(),
                isVisibleBinding: 'CoreTasks.permissions.canCreateTask',
                isEnabledBinding: 'Tasks.tasksController.isAddable',
-               target: 'Tasks',
                action: 'addTask'
              }),
              deleteTaskButton: SC.ButtonView.design(SCUI.Permissible,{
@@ -436,7 +435,6 @@ Tasks.mainPage = SC.Page.design({
                isVisibleBinding: 'CoreTasks.permissions.canDeleteTask',
                isEnabledBinding: SC.Binding.and('Tasks.tasksController.isDeletable', 'Tasks.tasksController.notGuestOrGuestSubmittedTasks'),
                isPermittedBinding: 'Tasks.tasksController.notGuestOrGuestSubmittedTasks',
-               target: 'Tasks',
                action: 'deleteTask'
              }),
 

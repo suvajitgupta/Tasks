@@ -146,18 +146,6 @@ Tasks.tasksController = SC.TreeController.create(
     return value;
   }.property('selection').cacheable(),
   
-  setTypeFeature: function() {
-    Tasks.tasksController.set('type', CoreTasks.TASK_TYPE_FEATURE);
-  },
-  
-  setTypeBug: function() {
-    Tasks.tasksController.set('type', CoreTasks.TASK_TYPE_BUG);
-  },
-  
-  setTypeOther: function() {
-    Tasks.tasksController.set('type', CoreTasks.TASK_TYPE_OTHER);
-  },
-  
   priority: function(key, value) {
     var sel = this.get('selection');
     if(!sel || sel.get('length') === 0) return false;
@@ -177,18 +165,6 @@ Tasks.tasksController = SC.TreeController.create(
     }
     return value;
   }.property('selection').cacheable(),
-  
-  setPriorityHigh: function() {
-    Tasks.tasksController.set('priority', CoreTasks.TASK_PRIORITY_HIGH);
-  },
-  
-  setPriorityMedium: function() {
-    Tasks.tasksController.set('priority', CoreTasks.TASK_PRIORITY_MEDIUM);
-  },
-  
-  setPriorityLow: function() {
-    Tasks.tasksController.set('priority', CoreTasks.TASK_PRIORITY_LOW);
-  },
   
   developmentStatusWithValidation: function(key, value) {
     var sel = this.get('selection');
@@ -210,22 +186,6 @@ Tasks.tasksController = SC.TreeController.create(
     return value;
   }.property('selection').cacheable(),
   
-  setDevelopmentStatusPlanned: function() {
-    Tasks.tasksController.set('developmentStatusWithValidation', CoreTasks.STATUS_PLANNED);
-  },
-  
-  setDevelopmentStatusActive: function() {
-    Tasks.tasksController.set('developmentStatusWithValidation', CoreTasks.STATUS_ACTIVE);
-  },
-  
-  setDevelopmentStatusDone: function() {
-    Tasks.tasksController.set('developmentStatusWithValidation', CoreTasks.STATUS_DONE);
-  },
-  
-  setDevelopmentStatusRisky: function() {
-    Tasks.tasksController.set('developmentStatusWithValidation', CoreTasks.STATUS_RISKY);
-  },
-  
   validation: function(key, value) {
     var sel = this.get('selection');
     if(!sel || sel.get('length') === 0) return false;
@@ -245,18 +205,6 @@ Tasks.tasksController = SC.TreeController.create(
     }
     return value;
   }.property('selection').cacheable(),
-  
-  setValidationUntested: function() {
-    Tasks.tasksController.set('validation', CoreTasks.TASK_VALIDATION_UNTESTED);
-  },
-  
-  setValidationPassed: function() {
-    Tasks.tasksController.set('validation', CoreTasks.TASK_VALIDATION_PASSED);
-  },
-  
-  setValidationFailed: function() {
-    Tasks.tasksController.set('validation', CoreTasks.TASK_VALIDATION_FAILED);
-  },
   
   _watchCount: null,
   _watchCountDidChange: function() {

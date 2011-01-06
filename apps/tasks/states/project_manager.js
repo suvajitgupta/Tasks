@@ -22,7 +22,7 @@ Tasks.ProjectManagerState = Ki.State.extend({
     },
 
     /**
-     * Create a new project in projects master list and start editing it .
+     * Create a new project in projects master list and start editing it.
      *
      * @param {Boolean} flag to indicate whether to make a duplicate of selected task.
      */
