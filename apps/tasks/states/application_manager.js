@@ -201,6 +201,22 @@ Tasks.ApplicationManagerState = Ki.State.extend({
       }
     },
 
+    setRoleManager: function() {
+      Tasks.usersController.set('role', CoreTasks.USER_ROLE_MANAGER);
+    },
+
+    setRoleDeveloper: function() {
+      Tasks.usersController.set('role', CoreTasks.USER_ROLE_DEVELOPER);
+    },
+
+    setRoleTester: function() {
+      Tasks.usersController.set('role', CoreTasks.USER_ROLE_TESTER);
+    },
+
+    setRoleGuest: function() {
+      Tasks.usersController.set('role', CoreTasks.USER_ROLE_GUEST);
+    },
+
     close: function() {
       this.gotoState('loggedIn.applicationManager.ready');
     },

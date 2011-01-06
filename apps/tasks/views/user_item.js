@@ -78,7 +78,6 @@ Tasks.UserItemView.mixin(/** @scope Tasks.UserItemView */ {
         title: "_Add".loc(),
         icon: 'add-icon',
         isEnabled: YES,
-        target: 'Tasks',
         action: 'addUser'
       });
     }
@@ -88,7 +87,6 @@ Tasks.UserItemView.mixin(/** @scope Tasks.UserItemView */ {
         title: "_Delete".loc(),
         icon: 'delete-icon',
         isEnabled: YES,
-        target: 'Tasks',
         action: 'deleteUser'
       });
     }
@@ -103,7 +101,6 @@ Tasks.UserItemView.mixin(/** @scope Tasks.UserItemView */ {
       icon: 'user-role-manager',
       isEnabled: YES,
       checkbox: role === CoreTasks.USER_ROLE_MANAGER,
-      target: 'Tasks.usersController',
       action: 'setRoleManager'
     });
     ret.push({
@@ -111,7 +108,6 @@ Tasks.UserItemView.mixin(/** @scope Tasks.UserItemView */ {
       icon: 'user-role-developer',
       isEnabled: YES,
       checkbox: role === CoreTasks.USER_ROLE_DEVELOPER,
-      target: 'Tasks.usersController',
       action: 'setRoleDeveloper'
     });
     if(Tasks.softwareMode) {
@@ -120,7 +116,6 @@ Tasks.UserItemView.mixin(/** @scope Tasks.UserItemView */ {
         icon: 'user-role-tester',
         isEnabled: YES,
         checkbox: role === CoreTasks.USER_ROLE_TESTER,
-        target: 'Tasks.usersController',
         action: 'setRoleTester'
       });
     }
@@ -129,7 +124,6 @@ Tasks.UserItemView.mixin(/** @scope Tasks.UserItemView */ {
       icon: 'user-role-guest',
       isEnabled: YES,
       checkbox: role === CoreTasks.USER_ROLE_GUEST,
-      target: 'Tasks.usersController',
       action: 'setRoleGuest'
     });
 

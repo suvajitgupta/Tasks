@@ -131,22 +131,6 @@ Tasks.usersController = SC.ArrayController.create(
       });
     }
     return value;
-  }.property('selection').cacheable(),
+  }.property('selection').cacheable()
   
-  setRoleManager: function() {
-    this.role('role', CoreTasks.USER_ROLE_MANAGER);
-  },
-  
-  setRoleDeveloper: function() {
-    this.role('role', CoreTasks.USER_ROLE_DEVELOPER);
-  },
-  
-  setRoleTester: function() {
-    this.role('role', CoreTasks.USER_ROLE_TESTER);
-  },
-  
-  setRoleGuest: function() {
-    this.role('role', CoreTasks.USER_ROLE_GUEST);
-  }
-    
 });
