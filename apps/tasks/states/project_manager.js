@@ -112,7 +112,7 @@ Tasks.ProjectManagerState = Ki.State.extend({
 
   }),
   
-  // State to edit project information
+  // State to edit project details
   projectEditor: Ki.State.design({
 
     close: function() {

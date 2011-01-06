@@ -125,6 +125,7 @@ Tasks.TaskEditorView = SC.View.extend(
     editor.setPath('createdAtLabel.value', task.get('displayCreatedAt'));
     editor.setPath('updatedAtLabel.value', task.get('displayUpdatedAt'));
   },
+  
   _postEditing: function() {
     Tasks.commentsController.set('selection', '');
     var task = this.get('task');
@@ -158,6 +159,7 @@ Tasks.TaskEditorView = SC.View.extend(
       task.setIfChanged('description',  editor.getPath('splitView.topLeftView.contentView.descriptionField.value'));
     }
   },
+  
   _statusDidChange: function() {
     var editor = this.get('editor');
     var status = editor.getPath('statusField.value');
@@ -171,6 +173,7 @@ Tasks.TaskEditorView = SC.View.extend(
       this._postEditing();
     }
     else {
+      Tasks.statechart.sendEvent('editTask');
       Tasks.setPath('mainPage.mainPane.tasksSceneView.nowShowing', 'taskEditor');
       Tasks.set('editorPoppedUp', Tasks.TASK_EDITOR);
     }
@@ -179,6 +182,7 @@ Tasks.TaskEditorView = SC.View.extend(
     // reselect task since selection is lost when tasksList slides out of view
     this.invokeLast(function() { Tasks.tasksController.selectObject(task); });
   },
+  
   close: function() {
     Tasks.set('editorPoppedUp', null);
     this._postEditing();
@@ -216,7 +220,7 @@ Tasks.TaskEditorView = SC.View.extend(
    pane.popup(this.getPath('editor.watchersButton'), SC.PICKER_POINTER);
  },
  
- previousTask: function() {
+ gotoPreviousTask: function() {
    this._postEditing();
    SC.RunLoop.begin();
    Tasks.mainPage.getPath('tasksList.contentView').selectPreviousItem();
@@ -224,7 +228,8 @@ Tasks.TaskEditorView = SC.View.extend(
    this.set('task', Tasks.tasksController.getPath('selection.firstObject'));
    this._preEditing();
  },
- nextTask: function() {
+ 
+ gotoNextTask: function() {
    this._postEditing();
    SC.RunLoop.begin();
    Tasks.mainPage.getPath('tasksList.contentView').selectNextItem();
@@ -233,8 +238,7 @@ Tasks.TaskEditorView = SC.View.extend(
    this._preEditing();
  },
   
- comment: function() {
-   SC.run(function() { Tasks.statechart.sendEvent('addComment'); });
+ editComment: function() {
    var commentsList = Tasks.mainPage.getPath('taskEditor.editor.splitView.bottomRightView.commentsList.contentView');
    var commentView = commentsList.itemViewForContentIndex(0);
    // FIXME: [SC] scrolling to top of comments list doesn't always work in SC
@@ -258,16 +262,14 @@ Tasks.TaskEditorView = SC.View.extend(
      layout: { top: 2, left: 10, width: 32, height: 19 },
      classNames: ['back-icon'],
      toolTip: "_GoBackToTasksList".loc(),
-     target: 'Tasks.mainPage.taskEditor',
-     action: 'close'
+     action: 'gotoTasksList'
     }),
 
    previousButton: SC.View.design(SCUI.SimpleButton, {
      layout: { top: 3, centerX: -80, width: 17, height: 17 },
      classNames: ['previous-icon'],
      toolTip: "_ShowPreviousTask".loc(),
-     target: 'Tasks.mainPage.taskEditor',
-     action: 'previousTask',
+     action: 'gotoPreviousTask',
      isEnabledBinding: SC.Binding.transform(function(value, binding) {
                                               var task = value.getPath('firstObject');
                                               var tasksList = Tasks.getPath('tasksController.arrangedObjects');
@@ -284,8 +286,7 @@ Tasks.TaskEditorView = SC.View.extend(
      layout: { top: 3, centerX: 80, width: 17, height: 17 },
      classNames: ['next-icon'],
      toolTip: "_ShowNextTask".loc(),
-     target: 'Tasks.mainPage.taskEditor',
-     action: 'nextTask',
+     action: 'gotoNextTask',
      isEnabledBinding: SC.Binding.transform(function(value, binding) {
                                               var task = value.getPath('firstObject');
                                               var tasksList = Tasks.getPath('tasksController.arrangedObjects');
@@ -466,8 +467,7 @@ Tasks.TaskEditorView = SC.View.extend(
        commentButton: SC.ButtonView.design({
          layout: { top: 5, centerX: 0, height: 24, width: 90 },
          title: "_Comment".loc(),
-         target: 'Tasks.mainPage.taskEditor',
-         action: 'comment',
+         action: 'addComment',
          toolTip: "_CommentTooltip".loc()
        }),
        commentsList: SC.ScrollView.design({
