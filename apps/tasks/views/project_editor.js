@@ -31,6 +31,8 @@ Tasks.projectEditorPage = SC.Page.create({
   panel: null,
   panelView: SCUI.ModalPane.extend({
 
+    defaultResponder: 'Tasks.statechart',
+
     project: null,
     titleBarHeight: 40,
     minWidth: 700,
@@ -80,6 +82,7 @@ Tasks.projectEditorPage = SC.Page.create({
     },
 
     popup: function(project) {
+      Tasks.statechart.sendEvent('editProject');
       this.set('project', project);
       this._preEditing();
       this.append();
@@ -179,7 +182,7 @@ Tasks.projectEditorPage = SC.Page.create({
         layout: { bottom: 10, right: 20, width: 80, height: 24 },
         isDefault: YES,
         title: "_Close".loc(),
-        action: 'remove'
+        action: 'close'
       })
 
     })
