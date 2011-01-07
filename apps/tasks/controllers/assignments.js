@@ -219,38 +219,12 @@ Tasks.assignmentsController = SC.ArrayController.create(
     return this.taskSearch || this.attributeFilterCriteria.length !== 13;
   },
   
-  setAttributeFilterShowstoppers: function() {
-    this.set('attributeFilterCriteria', Tasks.attributeFilterShowstoppers.slice(0));
-  },
-
-  setAttributeFilterTroubled: function() {
-    this.set('attributeFilterCriteria', Tasks.attributeFilterTroubled.slice(0));
-  },
-
-  setAttributeFilterUnfinished: function() {
-    this.set('attributeFilterCriteria', Tasks.attributeFilterUnfinished.slice(0));
-  },
-
-  setAttributeFilterUnvalidated: function() {
-    this.set('attributeFilterCriteria', Tasks.attributeFilterUnvalidated.slice(0));
-  },
-
-  setAttributeFilterCompleted: function() {
-    this.set('attributeFilterCriteria', Tasks.attributeFilterCompleted.slice(0));
-  },
-
   clearAttributeFilter: function() {
     this.set('attributeFilterCriteria', Tasks.attributeFilterNone.slice(0));
     this.set('effortSpecified', Tasks.FILTER_DONT_CARE);
     this.set('recentlyUpdated', Tasks.FILTER_DONT_CARE);
     this.set('watched', Tasks.FILTER_DONT_CARE);
   },
-
-  resetFilters: function() {
-    this.set('taskSearch', null);
-    this.clearAttributeFilter();
-  },
-  
   
   tasks: null,
   // count: 0, // used for tracking/tuning calls to redraw tasks pane below

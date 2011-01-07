@@ -48,8 +48,7 @@ Tasks.filterPane = SC.SheetPane.create({
         classNames: ['all'],
         title: "_All".loc(),
         toolTip: "_AllTooltip".loc(),
-        target: 'Tasks.assignmentsController',
-        action: 'clearAttributeFilter'
+        action: 'setAttributeFilterAll'
       }),
 
       showstoppersButton: SC.ButtonView.design({
@@ -60,7 +59,6 @@ Tasks.filterPane = SC.SheetPane.create({
         isVisible: Tasks.softwareMode,
         title: "_Showstoppers".loc(),
         toolTip: "_ShowstoppersTooltip".loc(),
-        target: 'Tasks.assignmentsController',
         action: 'setAttributeFilterShowstoppers'
       }),      
 
@@ -71,7 +69,6 @@ Tasks.filterPane = SC.SheetPane.create({
         classNames: ['troubled'],
         title: "_Troubled".loc(),
         toolTip: "_TroubledTooltip".loc(),
-        target: 'Tasks.assignmentsController',
         action: 'setAttributeFilterTroubled'
       }),
   
@@ -82,7 +79,6 @@ Tasks.filterPane = SC.SheetPane.create({
         classNames: ['unfinished'],
         title: "_Unfinished".loc(),
         toolTip: "_UnfinishedTooltip".loc(),
-        target: 'Tasks.assignmentsController',
         action: 'setAttributeFilterUnfinished'
       }),
   
@@ -94,7 +90,6 @@ Tasks.filterPane = SC.SheetPane.create({
         isVisible: Tasks.softwareMode,
         title: "_Unvalidated".loc(),
         toolTip: "_UnvalidatedTooltip".loc(),
-        target: 'Tasks.assignmentsController',
         action: 'setAttributeFilterUnvalidated'
       }),
   
@@ -105,7 +100,6 @@ Tasks.filterPane = SC.SheetPane.create({
         classNames: ['completed'],
         title: "_Completed".loc(),
         toolTip: "_CompletedTooltip".loc(),
-        target: 'Tasks.assignmentsController',
         action: 'setAttributeFilterCompleted'
       })
                      
