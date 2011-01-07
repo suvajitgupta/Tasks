@@ -15,24 +15,14 @@ sc_require('core');
 Tasks.filterController = SC.ObjectController.create(
 /** @scope Tasks.filterController.prototype */ {
   
-  openPane: function(){
+  openPanel: function(){
     Tasks.assignmentsController.backupAttributeFilterCriteria();
     var pane = Tasks.get('filterPane');
     if(!Tasks.get('editorPoppedUp')) Tasks.set('editorPoppedUp', Tasks.FILTER_EDITOR);
     if(pane) pane.append();
   },
   
-  closePane: function(){
-    Tasks.assignmentsController.restoreAttributeFilterCriteria();
-    this._close();
-  },
-  
-  applyFilter: function(){
-    this._close();
-    if(Tasks.assignmentsRedrawNeeded) Tasks.assignmentsController.computeTasks();
-  },
-  
-  _close: function(){
+  closePanel: function(){
     if(Tasks.get('editorPoppedUp') === Tasks.FILTER_EDITOR) Tasks.set('editorPoppedUp', null);
     var pane = Tasks.get('filterPane');
     if(pane) {

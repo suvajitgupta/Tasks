@@ -209,6 +209,10 @@ Tasks.TaskManagerState = Ki.State.extend({
       }
     },
 
+    displayTasksFilter: function() {
+      this.gotoState('taskFilter');
+    },
+
     editTask: function() {
       this.gotoState('taskEditor');
     }
@@ -251,7 +255,29 @@ Tasks.TaskManagerState = Ki.State.extend({
       Tasks.mainPage.taskEditor.close();
     }
     
-  })
+  }),
   
+  // State to manipulate task filter
+  taskFilter: Ki.State.design({
+
+    enterState: function() {
+      Tasks.filterController.openPanel();
+    },
+
+    cancel: function() {
+      Tasks.assignmentsController.restoreAttributeFilterCriteria();
+      this.gotoState('loggedIn.taskManager.ready');
+    },
+
+    apply: function() {
+      if(Tasks.assignmentsRedrawNeeded) Tasks.assignmentsController.computeTasks();
+      this.gotoState('loggedIn.taskManager.ready');
+    },
+
+    exitState: function() {
+      Tasks.filterController.closePanel();
+    }
+    
+  })  
   
 });

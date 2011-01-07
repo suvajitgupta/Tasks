@@ -313,13 +313,6 @@ Tasks.mixin( /** @scope Tasks */ {
   },
 
   /**
-   * Filter tasks via attributes.
-   */
-  filterTasks: function() {
-    Tasks.filterController.openPane();
-  },
-
-  /**
    * Set filter to show current user's tasks.
    */
   showCurrentUserTasks: function() {

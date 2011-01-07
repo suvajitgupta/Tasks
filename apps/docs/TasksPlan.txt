@@ -34,10 +34,9 @@ General Infrastructure @Active
 - Add a dot before Projects/Tasks/Users that were created or updated recently (within the last day) <SE> [SG] $Feature @Done %Passed
 - Cause Project/Task/User list group items to toggle open/close upon clicking on them <JH2> [SG] $Feature @Done %Passed
 - Show a pencil icon when mouse is on a Project/Task with a tooltip stating "click to edit" [SG] $Feature @Done %Passed
-- Confirm before deleting a Project/Task/User [SG] @Done $Feature %Passed
+- Confirm before deleting a Project/Task/User/Comment [SG] @Done $Feature %Passed
 - Display record created/updated time at the bottom of Project/Task/User editors [SG] $Feature @Done %Passed
 - Support view mode of tasks and selection of project/filter/search using SproutCore routes [SG] $Feature @Done %Passed
-- Destroy authentication token when User logs out [SG] <JH2> $Feature @Done %Passed
 - Implement/benchmark JSONP-based data loading for performance speedup (XHRs are faster) [SG] <SE> @Done
 ^ Optimize data loading to use single Server call for all records <SE> [SG] @Done %Passed
 ^ Optimize startup data load using HTML5 local storage <SE> [SG] @Done %Passed
@@ -45,7 +44,7 @@ General Infrastructure @Active
 | unique, non-"None" loginName and valid Email address in "Guest Signup" and "Users/Settings" panels
 - Out of Scope: Add support for attachments in record descriptions $Feature
 | Upload attachment somewhere and insert URL to it in record description
-^ Switch to a pluggable Data Source-based architecture with Persevere/Google App Engine as samples [SG] <JH2> @Active
+^ Implement pluggable Data Store-based architecture with Persevere/Google App Engine/Github adapters [SG] <JH2> @Active
 
 Application Manager GUI @Active
 ^ Add login screen to identify user who logs in (and handle login failures properly) [SG] <SE> @Done %Passed $Feature
@@ -90,7 +89,7 @@ v Add online training video using QuickTime [SG] $Feature @Done
 - Add onscreen help (on panel fields that are complex and on blank workspace to assist new users) <MG> [SG] $Feature @Done %Passed
 - Add "Logout" menu item in actions menu (confirm before exiting, clear local storage, forward to login page) [SG] <JH2> @Done $Feature %Passed
 - Prompt user to save changes (if any) before logging out [SG] <SE> $Feature @Done %Passed
-| See demo.sproutcore.com/user_defaults and lookup SproutCore blog for Charles' posting on this topic
+- Destroy authentication token when User logs out [SG] <JH2> $Feature @Done %Passed
 - Add Team/Tasks display modes to show everyone at a glance or details; clicking on Assignee in team mode shows their Tasks [SG] $Feature @Done %Passed
 v Add hotkeys for common operations (Add/Duplicate Tasks) [EG] <SG> $Feature @Done %Passed
 | Turned these off for now since these are conflicting with browser shortcuts

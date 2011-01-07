@@ -15,6 +15,8 @@ sc_require('core');
 
 Tasks.filterPane = SC.SheetPane.create({  
   
+  defaultResponder: 'Tasks.statechart',
+
   layout: { centerX: 0, height: Tasks.softwareMode? 495 : 390, width: 320 },
   classNames: ['filter-pane'],
   
@@ -333,8 +335,7 @@ Tasks.filterPane = SC.SheetPane.create({
       layout: { width: 80, height: 30, right: 96, bottom: 8 },
       titleMinWidth: 0,
       title: "_Cancel".loc(),
-      target: 'Tasks.filterController',
-      action: 'closePane'
+      action: 'cancel'
     }),
     
     applyButton: SC.ButtonView.design({
@@ -343,8 +344,7 @@ Tasks.filterPane = SC.SheetPane.create({
       keyEquivalent: 'return',
       isDefault: YES,
       title: "_Apply".loc(),
-      target: 'Tasks.filterController',
-      action: 'applyFilter'
+      action: 'apply'
     })
         
   })

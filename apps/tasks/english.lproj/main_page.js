@@ -351,8 +351,7 @@ Tasks.mainPage = SC.Page.design({
            icon: 'filter-icon',
            classNames: ['dark'],
            toolTip: "_FilterTooltip".loc(),
-           target: 'Tasks',
-           action: 'filterTasks',
+           action: 'displayTasksFilter',
            isEnabledBinding: SC.Binding.not('Tasks.mainPageHelper*editorPoppedUp')
          }),
          filterCancelButton: SC.View.design(SC.Control, { // Filter cancel button
