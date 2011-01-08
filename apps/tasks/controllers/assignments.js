@@ -17,6 +17,8 @@
 Tasks.DISPLAY_MODE_TASKS = true;
 Tasks.DISPLAY_MODE_TEAM = false;
 
+Tasks.recomputeTasksNeeded = false;
+
 Tasks.assignmentsController = SC.ArrayController.create(
 /** @scope Tasks.assignmentsController.prototype */ {
   
@@ -35,7 +37,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
   displayMode: function(key, value) {
     if (value !== undefined) {
       // console.log('DEBUG: setting displayMode to ' + (value? 'TASKS' : 'TEAM'));
-      Tasks.filterSearchController.setAssigneeTasksSearch();
+      if(!value) Tasks.filterSearchController.setAssigneeTasksSearch();
       this.set('_showTasks', value);
     } else {
       return this.get('_showTasks');
@@ -254,7 +256,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     }), treeItemIsExpanded: YES }));
     
     if(selection) Tasks.tasksController.selectObjects(selection);
-    Tasks.assignmentsRedrawNeeded = false;    
+    Tasks.recomputeTasksNeeded = false;    
 
   },
   
@@ -424,15 +426,16 @@ Tasks.assignmentsController = SC.ArrayController.create(
   },
   
   _timer: null,
+  
   _contentNeedsRedrawing: function() {
-    // console.log('DEBUG: _contentNeedsRedrawing() panelOpen=' + Tasks.panelOpen);
-    Tasks.assignmentsRedrawNeeded = true;    
+    // console.log('DEBUG: _contentNeedsRedrawing() recomputeTasksNeeded=' + Tasks.recomputeTasksNeeded);
+    Tasks.recomputeTasksNeeded = true;    
     if(Tasks.panelOpen === Tasks.TASK_EDITOR || Tasks.panelOpen === Tasks.FILTER_EDITOR) return;
   	if (this._timer) { // called as a result of a timer set for assignee selection or search filter changes
       this._timer.invalidate();
       this._timer = null;
     }
-  	this.invokeOnce(this.computeTasks);
+  	this.invokeLast(this.computeTasks);
   }.observes('[]', '_showTasks', '_attributeFilterCriteria', '_effortSpecified', '_recentlyUpdated', '_watched'),
   
   _tasksSearchHasChanged: function() {

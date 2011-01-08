@@ -12,8 +12,6 @@ Tasks.TASK_EDITOR = 1;
 Tasks.FILTER_EDITOR = 2;
 Tasks.panelOpen = null;
 
-Tasks.assignmentsRedrawNeeded = false;
-
 Tasks.main = function main() {
   
   // console.log('DEBUG: "Tasks" started at: %@'.fmt(new Date()));

@@ -294,7 +294,7 @@ Tasks.TaskManagerState = Ki.State.extend({
     },
 
     apply: function() {
-      if(Tasks.assignmentsRedrawNeeded) Tasks.assignmentsController.computeTasks();
+      if(Tasks.recomputeTasksNeeded) Tasks.assignmentsController.computeTasks();
       this.gotoState('loggedIn.taskManager.ready');
     },
 
