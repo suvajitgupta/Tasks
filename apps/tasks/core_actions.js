@@ -112,7 +112,7 @@ Tasks.mixin( /** @scope Tasks */ {
 
     // Based on user's role set up appropriate task filter
     if(CoreTasks.getPath('currentUser.role') === CoreTasks.USER_ROLE_DEVELOPER) { // Set assignee selection filter to current user
-      Tasks.showCurrentUserTasks();
+      Tasks.filterSearchController.setCurrentUserTasksSearch();
     }
 
     // Setup projects/tasks/watches controllers
@@ -310,14 +310,7 @@ Tasks.mixin( /** @scope Tasks */ {
     // console.log('DEBUG: dataSaveErrorCallback(' + errorRecordType + ')');
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
     serverMessage.set('value', "_DataSaveError".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
-  },
-
-  /**
-   * Set filter to show current user's tasks.
-   */
-  showCurrentUserTasks: function() {
-    Tasks.assignmentsController.setAssigneeFilter(this.loginName);
   }
-      
+
 });
 

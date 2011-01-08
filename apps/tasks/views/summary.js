@@ -14,17 +14,17 @@
 Tasks.SummaryView = SC.LabelView.extend(
 /** @scope Tasks.SummaryView.prototype */ {
   
-  editorPoppedUp: null,
+  panelOpen: null,
   assignmentsSummary: null,
   projectsSelection: null,
   tasksSelection: null,
-  displayProperties: ['editorPoppedUp', 'assignmentsSummary', 'projectsSelection', 'tasksSelection'],
+  displayProperties: ['panelOpen', 'assignmentsSummary', 'projectsSelection', 'tasksSelection'],
   
   render: function(context, firstTime) {
 
     var message = '';
     
-    if(this.get('editorPoppedUp') !== Tasks.TASK_EDITOR) {
+    if(this.get('panelOpen') !== Tasks.TASK_EDITOR) {
       var assignmentsSummary = this.get('assignmentsSummary');
       if(assignmentsSummary) message += (assignmentsSummary + "_displayed".loc());
     }

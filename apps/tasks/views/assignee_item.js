@@ -18,9 +18,10 @@ Tasks.AssigneeItemView = Tasks.GroupItemView.extend(Tasks.LocalizedLabel,
   
   mouseDown: function(event) {
     if(Tasks.assignmentsController.get('displayMode') === Tasks.DISPLAY_MODE_TEAM) {
+      Tasks.assignmentsController.set('displayMode', Tasks.DISPLAY_MODE_TASKS);
       var loginNameMatches = this.getPath('content.displayName').match(/\((.+)\)/);
       var assignee = loginNameMatches? loginNameMatches[1] : 'none';
-      Tasks.assignmentsController.setAssigneeFilter(assignee);
+      Tasks.filterSearchController.setAssigneeTasksSearch(assignee);
     }
     else {
       sc_super();

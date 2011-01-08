@@ -1,69 +1,21 @@
 // ==========================================================================
 // Tasks.assignmentsController
 // ==========================================================================
-/*globals CoreTasks Tasks sc_static sc_require*/
+/*globals CoreTasks Tasks */
 
 /** 
 
-  This controller manages what is displayed in the Tasks detail screen.
-  This is affected by the selected Project/User and the search criteria.
+  This controller groups assignments to be displayed in Tasks detail screen.
+  Its output is affected by the filter and search criteria.
   
   @extends SC.ArrayController
   @author Joshua Holt
   @author Suvajit Gupta
 */
-sc_require('core');
 
-Tasks.attributeFilterNone = [
-  CoreTasks.TASK_TYPE_FEATURE, CoreTasks.TASK_TYPE_BUG, CoreTasks.TASK_TYPE_OTHER,
-  CoreTasks.TASK_PRIORITY_HIGH, CoreTasks.TASK_PRIORITY_MEDIUM, CoreTasks.TASK_PRIORITY_LOW,
-  CoreTasks.STATUS_PLANNED, CoreTasks.STATUS_ACTIVE, CoreTasks.STATUS_DONE, CoreTasks.STATUS_RISKY,
-  CoreTasks.TASK_VALIDATION_UNTESTED, CoreTasks.TASK_VALIDATION_PASSED, CoreTasks.TASK_VALIDATION_FAILED
-];
-
-Tasks.attributeFilterShowstoppers = [
-  CoreTasks.TASK_TYPE_BUG,
-  CoreTasks.TASK_PRIORITY_HIGH,
-  CoreTasks.STATUS_PLANNED, CoreTasks.STATUS_ACTIVE, CoreTasks.STATUS_DONE, CoreTasks.STATUS_RISKY,
-  CoreTasks.TASK_VALIDATION_FAILED
-];
-
-Tasks.attributeFilterTroubled = [
-  CoreTasks.TASK_TYPE_FEATURE, CoreTasks.TASK_TYPE_BUG, CoreTasks.TASK_TYPE_OTHER,
-  CoreTasks.TASK_PRIORITY_HIGH, CoreTasks.TASK_PRIORITY_MEDIUM, CoreTasks.TASK_PRIORITY_LOW,
-  CoreTasks.STATUS_RISKY
-];
-if(Tasks.softwareMode) Tasks.attributeFilterTroubled.pushObjects([CoreTasks.STATUS_DONE, CoreTasks.TASK_VALIDATION_FAILED]);
-
-Tasks.attributeFilterUnfinished = [
-  CoreTasks.TASK_TYPE_FEATURE, CoreTasks.TASK_TYPE_BUG, CoreTasks.TASK_TYPE_OTHER,
-  CoreTasks.TASK_PRIORITY_HIGH, CoreTasks.TASK_PRIORITY_MEDIUM, CoreTasks.TASK_PRIORITY_LOW,
-  CoreTasks.STATUS_PLANNED, CoreTasks.STATUS_ACTIVE, CoreTasks.STATUS_RISKY
-];
-if(Tasks.softwareMode) Tasks.attributeFilterUnfinished.pushObjects([CoreTasks.STATUS_DONE, CoreTasks.TASK_VALIDATION_FAILED]);
-
-Tasks.attributeFilterUnvalidated = [
-  CoreTasks.TASK_TYPE_FEATURE, CoreTasks.TASK_TYPE_BUG,
-  CoreTasks.TASK_PRIORITY_HIGH, CoreTasks.TASK_PRIORITY_MEDIUM, CoreTasks.TASK_PRIORITY_LOW,
-  CoreTasks.STATUS_DONE,
-  CoreTasks.TASK_VALIDATION_UNTESTED
-];
-
-Tasks.attributeFilterCompleted = [
-CoreTasks.TASK_TYPE_FEATURE, CoreTasks.TASK_TYPE_BUG, CoreTasks.TASK_TYPE_OTHER,
-  CoreTasks.TASK_PRIORITY_HIGH, CoreTasks.TASK_PRIORITY_MEDIUM, CoreTasks.TASK_PRIORITY_LOW,
-  CoreTasks.STATUS_DONE,
-  (Tasks.softwareMode? CoreTasks.TASK_VALIDATION_PASSED : CoreTasks.TASK_VALIDATION_UNTESTED)
-];
-
+// The display mode affects how the assignments are shown ("team" or "tasks" focus)
 Tasks.DISPLAY_MODE_TASKS = true;
 Tasks.DISPLAY_MODE_TEAM = false;
-
-Tasks.FILTER_DONT_CARE = -1;
-Tasks.FILTER_YES = 0;
-Tasks.FILTER_NO = 1;
-Tasks.FILTER_MY_WATCHES = 0;
-Tasks.FILTER_ANY_WATCHES = 1;
 
 Tasks.assignmentsController = SC.ArrayController.create(
 /** @scope Tasks.assignmentsController.prototype */ {
@@ -71,178 +23,44 @@ Tasks.assignmentsController = SC.ArrayController.create(
   // contentBinding: SC.Binding.oneWay('Tasks.projectController.tasks'), // single-project selection mode
   contentBinding: SC.Binding.oneWay('Tasks.projectController.assignments'), // multi-project selection mode
   
-  /**
-   * Set filter to show specified assignee's tasks or clear assignee if not specified.
-   */
-  setAssigneeFilter: function(assignee) {
-    var newAssigneeSelection = (SC.none(assignee)? '' : '[' + assignee + ']');
-    var taskSearch = this.get('taskSearch');
-    // console.log('DEBUG: setAssigneeFilter("' + (SC.none(assignee)? '' : assignee) + '") taskSearch is: "' + taskSearch + '"');
-    if(taskSearch !== null && taskSearch !== '') {
-      var assigneeSelection = taskSearch.match(/\[.*\]/);
-      if (assigneeSelection) { // if assignee selection is specified
-        assigneeSelection += ''; // convert to string
-        taskSearch = taskSearch.replace(assigneeSelection, newAssigneeSelection);
-      }
-      else {
-        taskSearch = newAssigneeSelection + ' ' + taskSearch.replace(/^\s+/, '');
-      }
-    }
-    else {
-      taskSearch = newAssigneeSelection;
-    }
-    // console.log('DEBUG: setting taskSearch to: "' + taskSearch + '"');
-    this.set('taskSearch', taskSearch);
-    Tasks.assignmentsController.set('displayMode', Tasks.DISPLAY_MODE_TASKS);
-  },
+  _attributeFilterCriteriaBinding: 'Tasks.filterSearchController.attributeFilterCriteria',
+  _effortSpecifiedBinding: 'Tasks.filterSearchController.effortSpecified',
+  _recentlyUpdatedBinding: 'Tasks.filterSearchController.recentlyUpdated',
+  _watchedBinding: 'Tasks.filterSearchController.watched',
+  _tasksSearchBinding: 'Tasks.filterSearchController.tasksSearch',
+  
   
   _showTasks: true,
+  
   displayMode: function(key, value) {
-    // console.log('DEBUG: displayMode() value=' + value);
     if (value !== undefined) {
-      if(value === false) this.setAssigneeFilter(); // clear assignee selection before going to "TEAM" mode
+      // console.log('DEBUG: setting displayMode to ' + (value? 'TASKS' : 'TEAM'));
+      Tasks.filterSearchController.setAssigneeTasksSearch();
       this.set('_showTasks', value);
     } else {
       return this.get('_showTasks');
     }
   }.property('_showTasks').cacheable(),
   
-  taskSearch: null,
-  attributeFilterCriteria: Tasks.attributeFilterNone.slice(0),
-  effortSpecified: Tasks.FILTER_DONT_CARE,
-  recentlyUpdated: Tasks.FILTER_DONT_CARE,
-  watched: Tasks.FILTER_DONT_CARE,
-  
-  attributeFilter: function(name, value) {
-    var newFilterCriteria;
-    if (value !== undefined) {
-      if(value) { // if not included, add attribute to filter
-        if(this.attributeFilterCriteria.indexOf(name) === -1) {
-          newFilterCriteria = this.attributeFilterCriteria.splice(0);
-          newFilterCriteria.push(name);
-          this.set('attributeFilterCriteria', newFilterCriteria);
-        }
-      }
-      else { // if included, remove attribute from filter
-        var idx = this.attributeFilterCriteria.indexOf(name);
-        if (idx !== -1) {
-          newFilterCriteria = this.attributeFilterCriteria.splice(0);
-          newFilterCriteria.splice(idx, 1);
-          this.set('attributeFilterCriteria', newFilterCriteria);
-        }
-      }
-      return this;
-    }
-    else { // see if attribute is in filter
-      return (this.attributeFilterCriteria.indexOf(name) !== -1);
-    }
-  },
-  
-  attributeFilterTypeFeature: function(key, value) {
-    return this.attributeFilter(CoreTasks.TASK_TYPE_FEATURE, value);
-  }.property('attributeFilterCriteria'),
-  
-  attributeFilterTypeBug: function(key, value) {
-    return this.attributeFilter(CoreTasks.TASK_TYPE_BUG, value);
-  }.property('attributeFilterCriteria'),
-  
-  attributeFilterTypeOther: function(key, value) {
-    return this.attributeFilter(CoreTasks.TASK_TYPE_OTHER, value);
-  }.property('attributeFilterCriteria'),
-  
-  attributeFilterPriorityHigh: function(key, value) {
-    return this.attributeFilter(CoreTasks.TASK_PRIORITY_HIGH, value);
-  }.property('attributeFilterCriteria'),
-  
-  attributeFilterPriorityMedium: function(key, value) {
-    return this.attributeFilter(CoreTasks.TASK_PRIORITY_MEDIUM, value);
-  }.property('attributeFilterCriteria'),
-  
-  attributeFilterPriorityLow: function(key, value) {
-    return this.attributeFilter(CoreTasks.TASK_PRIORITY_LOW, value);
-  }.property('attributeFilterCriteria'),
-  
-  attributeFilterStatusPlanned: function(key, value) {
-    return this.attributeFilter(CoreTasks.STATUS_PLANNED, value);
-  }.property('attributeFilterCriteria'),
-  
-  attributeFilterStatusActive: function(key, value) {
-    return this.attributeFilter(CoreTasks.STATUS_ACTIVE, value);
-  }.property('attributeFilterCriteria'),
-  
-  attributeFilterStatusDone: function(key, value) {
-    return this.attributeFilter(CoreTasks.STATUS_DONE, value);
-  }.property('attributeFilterCriteria'),
-  
-  attributeFilterStatusRisky: function(key, value) {
-    return this.attributeFilter(CoreTasks.STATUS_RISKY, value);
-  }.property('attributeFilterCriteria'),
-  
-  attributeFilterValidationUntested: function(key, value) {
-    return this.attributeFilter(CoreTasks.TASK_VALIDATION_UNTESTED, value);
-  }.property('attributeFilterCriteria'),
-  
-  attributeFilterValidationPassed: function(key, value) {
-    return this.attributeFilter(CoreTasks.TASK_VALIDATION_PASSED, value);
-  }.property('attributeFilterCriteria'),
-  
-  attributeFilterValidationFailed: function(key, value) {
-    return this.attributeFilter(CoreTasks.TASK_VALIDATION_FAILED, value);
-  }.property('attributeFilterCriteria'),
-  
-  attributeFilterCriteriaCopy: null,
-  effortSpecifiedCopy: null,
-  recentlyUpdatedCopy: null,
-  watchedCopy: null,
-  
-  backupAttributeFilterCriteria: function() {
-    this.attributeFilterCriteriaCopy = this.attributeFilterCriteria.slice(0);
-    this.effortSpecifiedCopy = this.effortSpecified;
-    this.recentlyUpdatedCopy = this.recentlyUpdated;
-    this.watchedCopy = this.watched;
-  },
-  
-  restoreAttributeFilterCriteria: function() {
-    this.set('attributeFilterCriteria', this.attributeFilterCriteriaCopy);
-    this.set('effortSpecified', this.effortSpecifiedCopy);
-    this.set('recentlyUpdated', this.recentlyUpdatedCopy);
-    this.set('watched', this.watchedCopy);
-  },
-  
-  attributeFilterEnabled: function() {
-    return (this.attributeFilterCriteria.length !== 13 || this.effortSpecified !== Tasks.FILTER_DONT_CARE ||
-           this.recentlyUpdated !== Tasks.FILTER_DONT_CARE || this.watched !== Tasks.FILTER_DONT_CARE)?
-    true : false;
-  }.property('attributeFilterCriteria', 'effortSpecified', 'recentlyUpdated', 'watched').cacheable(),
-  
-  hasFiltering: function() {
-    return this.taskSearch || this.attributeFilterCriteria.length !== 13;
-  },
-  
-  clearAttributeFilter: function() {
-    this.set('attributeFilterCriteria', Tasks.attributeFilterNone.slice(0));
-    this.set('effortSpecified', Tasks.FILTER_DONT_CARE);
-    this.set('recentlyUpdated', Tasks.FILTER_DONT_CARE);
-    this.set('watched', Tasks.FILTER_DONT_CARE);
-  },
   
   tasks: null,
-  // count: 0, // used for tracking/tuning calls to redraw tasks pane below
+  
+  callCounter: 1, // used for tracking/tuning calls to computeTasks()
   computeTasks: function() { // show tasks for selected user that matches search filter
     
-    // console.log('DEBUG: computeTasks(' + this.count + ') entry at: ' + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
+    // console.log('DEBUG: computeTasks() call #' + this.callCounter++ + ' with ' + this.getPath('content.length') + ' items');
     // Preserve selected tasks to be restored at the end of rendering
     var selection = Tasks.tasksController.get('selection');
     var idPattern = null, searchPattern = null, positiveMatch = true;
-    var taskSearch = this.get('taskSearch');
+    var tasksSearch = this.get('_tasksSearch');
     
     // Extract selected users ([Assignees] or <Submitters>)
     var i, j, assigneeSelectionDisplayNames = [], submitterSelectionDisplayNames = [];
-    if (taskSearch && taskSearch !== '') { // if a search filter is specified
-      var assigneeSelection = taskSearch.match(/\[.*\]/);
+    if (tasksSearch && tasksSearch !== '') { // if a search filter is specified
+      var assigneeSelection = tasksSearch.match(/\[.*\]/);
       if (assigneeSelection) { // if assignee selection is specified
         assigneeSelection += ''; // convert to string
-        taskSearch = taskSearch.replace(assigneeSelection, ''); // remove assignee selection from search filter
+        tasksSearch = tasksSearch.replace(assigneeSelection, ''); // remove assignee selection from search filter
         assigneeSelection = assigneeSelection.substr(1,assigneeSelection.length-2);
         var assigneeSelectionNames = assigneeSelection.replace(/,/g, ' ').replace(/\s+/g, ' ').replace(/^\s+/, '').replace(/\s+$/, '');
         if (assigneeSelection !== '') {
@@ -264,10 +82,10 @@ Tasks.assignmentsController = SC.ArrayController.create(
           }
         }
       }
-      var submitterSelection = taskSearch.match(/\<.*\>/);
+      var submitterSelection = tasksSearch.match(/\<.*\>/);
       if (submitterSelection) { // if submitter selection is specified
         submitterSelection += ''; // convert to string
-        taskSearch = taskSearch.replace(submitterSelection, ''); // remove submitter selection from search filter
+        tasksSearch = tasksSearch.replace(submitterSelection, ''); // remove submitter selection from search filter
         submitterSelection = submitterSelection.substr(1,submitterSelection.length-2);
         var submitterSelectionNames = submitterSelection.replace(/,/g, ' ').replace(/\s+/g, ' ').replace(/^\s+/, '').replace(/\s+$/, '');
         if (submitterSelection !== '') {
@@ -291,16 +109,16 @@ Tasks.assignmentsController = SC.ArrayController.create(
       }
     
       // Extract task name search filter
-      taskSearch = this._escapeMetacharacters(taskSearch).replace(/^\s+/, '').replace(/\s+$/, '');
-      // console.log('DEBUG: taskSearch: ' + taskSearch);
-      var idMatches = taskSearch.match(/#([\-\d]+)/g);
+      tasksSearch = this._escapeMetacharacters(tasksSearch).replace(/^\s+/, '').replace(/\s+$/, '');
+      // console.log('DEBUG: tasksSearch: ' + tasksSearch);
+      var idMatches = tasksSearch.match(/#([\-\d]+)/g);
       // console.log('DEBUG: idMatches = ' + idMatches);
       if(!idMatches) {
-        if (taskSearch.indexOf('^') === 0) { // inverse search specified
+        if (tasksSearch.indexOf('^') === 0) { // inverse search specified
           positiveMatch = false;
-          taskSearch = taskSearch.slice(1);
+          tasksSearch = tasksSearch.slice(1);
         }
-        searchPattern = new RegExp(taskSearch, 'i');
+        searchPattern = new RegExp(tasksSearch, 'i');
       }
     }
     
@@ -336,32 +154,33 @@ Tasks.assignmentsController = SC.ArrayController.create(
           
           if(submitterSelectionDisplayNames.length !== 0 && submitterSelectionDisplayNames.indexOf(submitterName) === -1) return;
         
+          var attributeFilterCriteria = this.get('_attributeFilterCriteria');
           var type = task.get('type');
-          if(this.attributeFilterCriteria.indexOf(type) === -1) return;
+          if(attributeFilterCriteria.indexOf(type) === -1) return;
           var priority = task.get('priority');
-          if(this.attributeFilterCriteria.indexOf(priority) === -1) return;
+          if(attributeFilterCriteria.indexOf(priority) === -1) return;
           var developmentStatus = task.get('developmentStatus');
-          if(this.attributeFilterCriteria.indexOf(developmentStatus) === -1) return;
+          if(attributeFilterCriteria.indexOf(developmentStatus) === -1) return;
           if(developmentStatus === CoreTasks.STATUS_DONE) {
             var validation = task.get('validation');
-            if(this.attributeFilterCriteria.indexOf(validation) === -1) return;
+            if(attributeFilterCriteria.indexOf(validation) === -1) return;
           }
           
-          var effortSpecified = this.get('effortSpecified');
+          var effortSpecified = this.get('_effortSpecified');
           if(effortSpecified !== Tasks.FILTER_DONT_CARE) {
             var taskEffortSpecified = !SC.none(task.get('effort'));
             if(effortSpecified === Tasks.FILTER_YES && !taskEffortSpecified) return;
             if(effortSpecified === Tasks.FILTER_NO && taskEffortSpecified) return;
           }
           
-          var recentlyUpdated = this.get('recentlyUpdated');
+          var recentlyUpdated = this.get('_recentlyUpdated');
           if(recentlyUpdated !== Tasks.FILTER_DONT_CARE) {
             var taskRecentlyUpdated = task.get('isRecentlyUpdated');
             if(recentlyUpdated === Tasks.FILTER_YES && !taskRecentlyUpdated) return;
             if(recentlyUpdated === Tasks.FILTER_NO && taskRecentlyUpdated) return;
           }
           
-          var watched = this.get('watched');
+          var watched = this.get('_watched');
           if(watched !== Tasks.FILTER_DONT_CARE) {
             if(watched === Tasks.FILTER_MY_WATCHES && !CoreTasks.isCurrentUserWatchingTask(task)) return;
             if(watched === Tasks.FILTER_ANY_WATCHES && !CoreTasks.isAnyUserWatchingTask(task)) return;
@@ -435,7 +254,6 @@ Tasks.assignmentsController = SC.ArrayController.create(
     }), treeItemIsExpanded: YES }));
     
     if(selection) Tasks.tasksController.selectObjects(selection);
-    // console.log('DEBUG: computeTasks(' + this.count++ + ') exit  at: ' + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
     Tasks.assignmentsRedrawNeeded = false;    
 
   },
@@ -606,25 +424,24 @@ Tasks.assignmentsController = SC.ArrayController.create(
   },
   
   _timer: null,
-  
   _contentNeedsRedrawing: function() {
-    var content = this.get('content');
-    // if (content) console.log('DEBUG: _contentNeedsRedrawing() editorPoppedUp=' + Tasks.editorPoppedUp + ', tasks: ' + content.getEach('name'));
+    // console.log('DEBUG: _contentNeedsRedrawing() panelOpen=' + Tasks.panelOpen);
     Tasks.assignmentsRedrawNeeded = true;    
-    if(Tasks.editorPoppedUp === Tasks.TASK_EDITOR || Tasks.editorPoppedUp === Tasks.FILTER_EDITOR) return;
+    if(Tasks.panelOpen === Tasks.TASK_EDITOR || Tasks.panelOpen === Tasks.FILTER_EDITOR) return;
   	if (this._timer) { // called as a result of a timer set for assignee selection or search filter changes
       this._timer.invalidate();
       this._timer = null;
     }
   	this.invokeOnce(this.computeTasks);
-  }.observes('[]', '_showTasks', 'attributeFilterCriteria', 'effortSpecified', 'recentlyUpdated', 'watched'),
+  }.observes('[]', '_showTasks', '_attributeFilterCriteria', '_effortSpecified', '_recentlyUpdated', '_watched'),
   
-  _taskSearchHasChanged: function() {
-    // console.log('DEBUG: Search filter changed to "' + this.taskSearch + '"');
+  _tasksSearchHasChanged: function() {
+    // console.log('DEBUG: Tasks search changed to "' + this.get('_tasksSearch') + '"');
     // Allow typing delay over a half second before redrawing tasks pane
     if (this._timer) this._timer.invalidate();
     this._timer = this.invokeLater(this._contentNeedsRedrawing, 500);
-  }.observes('taskSearch'),
+  }.observes('_tasksSearch'),
+  
   
   assignmentsSummary: function() {
     

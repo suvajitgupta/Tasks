@@ -175,7 +175,7 @@ Tasks.TaskEditorView = SC.View.extend(
     else {
       Tasks.statechart.sendEvent('editTask');
       Tasks.setPath('mainPage.mainPane.tasksSceneView.nowShowing', 'taskEditor');
-      Tasks.set('editorPoppedUp', Tasks.TASK_EDITOR);
+      Tasks.set('panelOpen', Tasks.TASK_EDITOR);
     }
     this.set('task', task);
     this._preEditing();
@@ -184,7 +184,7 @@ Tasks.TaskEditorView = SC.View.extend(
   },
   
   close: function() {
-    Tasks.set('editorPoppedUp', null);
+    Tasks.set('panelOpen', null);
     this._postEditing();
     if(Tasks.assignmentsRedrawNeeded) Tasks.assignmentsController.computeTasks();
     if(CoreTasks.get('autoSave') && !CoreTasks.get('isSaving')) Tasks.saveData();

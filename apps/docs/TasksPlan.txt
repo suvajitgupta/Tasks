@@ -136,7 +136,7 @@ v Add hover over tooltip for Task #IDs to show Submitter [SG] <JH2> $Feature @Do
 v Enable Task Validation editing only when in Done status [SG] $Feature @Done %Passed
 - Add support for navigating to previous/next Tasks via slide-out editor [SG] $Feature @Done %Passed
 - Allow multi-Task modification of Type/Status/Priority/Validation via context menu [SG] $Feature @Done %Passed
-^ Add Task search filter (by Assignee/Submitter/#IDs/Name) & corresponding cancel button in top bar: support type-ahead searching <JH2> [SG] @Done %Passed $Feature
+^ Allow Task searching (by Assignee/Submitter/#IDs/Name) & corresponding cancel button in top bar: support type-ahead searching <JH2> [SG] @Done %Passed $Feature
 ^ Allow Task attribute filtering by Type, Priority, Status, and Validation fields via a top bar button/sheet pane [SG] $Feature @Done %Passed
 - Add commonly-used "QuickFilters": Troubled, Unfinished, Unvalidated, Completed, Showstoppers, All [SG] $Feature @Done %Passed
 - Allow filtering of Tasks that were recently updated, have Effort specified, or are being watched [SG] $Feature @Done %Passed

@@ -59,7 +59,7 @@ Tasks.mixin( /** @scope Tasks */ {
     
     if(Tasks._checkLoginStatus()) {
       if(!SC.none(params.search) && params.search !== '') {
-        Tasks.assignmentsController.set('taskSearch', params.search);
+        Tasks.filterSearchController.set('tasksSearch', params.search);
       }
       Tasks.authenticate('guest', '');
       // TODO: [SG] add error message if 'guest' user is non-existent
@@ -110,16 +110,16 @@ Tasks.mixin( /** @scope Tasks */ {
     if(!SC.none(params.filter) && params.filter !== '') {
       params.filter = params.filter.toLowerCase();
       switch(params.filter) {
-        case 'showstoppers': Tasks.assignmentsController.setAttributeFilterShowstoppers(); break;
-        case 'troubled': Tasks.assignmentsController.setAttributeFilterTroubled(); break;
-        case 'unfinished': Tasks.assignmentsController.setAttributeFilterUnfinished(); break;
-        case 'unvalidated': Tasks.assignmentsController.setAttributeFilterUnvalidated(); break;
-        case 'completed': Tasks.assignmentsController.setAttributeFilterCompleted(); break;
+        case 'showstoppers': Tasks.filterSearchControllersetAttributeFilterShowstoppers(); break;
+        case 'troubled': Tasks.filterSearchController.setAttributeFilterTroubled(); break;
+        case 'unfinished': Tasks.filterSearchController.setAttributeFilterUnfinished(); break;
+        case 'unvalidated': Tasks.filterSearchController.setAttributeFilterUnvalidated(); break;
+        case 'completed': Tasks.filterSearchController.setAttributeFilterCompleted(); break;
         default: console.warn('Illegal URL route value for filter: ' + params.filter);
       }
     }
     if(!SC.none(params.search) && params.search !== '') {
-      Tasks.assignmentsController.set('taskSearch', params.search);
+      Tasks.filterSearchController.set('tasksSearch', params.search);
     }
     var defaultProjectId = null;
     if(!SC.none(params.projectId) && params.projectId !== '') {

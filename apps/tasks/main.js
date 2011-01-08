@@ -7,9 +7,10 @@
 function main() { Tasks.main(); }
 
 // The following are used to indicate which editor is popped up
+Tasks.LOGIN_PANEL = 0;
 Tasks.TASK_EDITOR = 1;
 Tasks.FILTER_EDITOR = 2;
-Tasks.editorPoppedUp = null;
+Tasks.panelOpen = null;
 
 Tasks.assignmentsRedrawNeeded = false;
 

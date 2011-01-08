@@ -31,7 +31,7 @@ Tasks.commentsController = SC.ArrayController.create(
     
     _updateContent: function() {
       // console.log('DEBUG: updating comments controller content');
-      if(Tasks.get('editorPoppedUp') === Tasks.TASK_EDITOR) {
+      if(Tasks.get('panelOpen') === Tasks.TASK_EDITOR) {
         var task = this.getPath('tasksSelection.firstObject');
         if(task) this.set('content', CoreTasks.getTaskComments(task));
       }

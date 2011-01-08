@@ -24,7 +24,7 @@ sc_require('views/summary');
 Tasks._wideLogo = document.title.match(/Eloqua/)? true : false;
 Tasks.mainPageHelper = SC.Object.create({
 
-  editorPoppedUpBinding: SC.Binding.oneWay('Tasks*editorPoppedUp'),
+  panelOpenBinding: SC.Binding.oneWay('Tasks*panelOpen'),
   displayedTasksCountBinding: SC.Binding.oneWay('Tasks.tasksController*arrangedObjects.length'),
   autoSaveBinding: SC.Binding.oneWay('CoreTasks*autoSave'),
   shouldNotifyBinding: SC.Binding.oneWay('CoreTasks*shouldNotify'),
@@ -71,7 +71,7 @@ Tasks.mainPageHelper = SC.Object.create({
       var shouldNotify = this.get('shouldNotify');
       ret.push({ title: "_Toggle".loc() + "_SendNotifications".loc(), icon: 'email-icon', action: 'toggleShouldNotify', isEnabled: YES, checkbox: shouldNotify });
     }
-    if(!Tasks.editorPoppedUp) {
+    if(!Tasks.panelOpen) {
       ret.push({ isSeparator: YES });
       if(this.getPath('displayedTasksCount') > 0) {
         ret.push({ title: "_LaunchStatistics".loc(), icon: 'statistics-icon', action: 'displayStatistics', isEnabled: YES });
@@ -86,7 +86,7 @@ Tasks.mainPageHelper = SC.Object.create({
     ret.push({ title: "_LaunchHelp".loc(), icon: 'sc-icon-help-16', action: 'displayHelp', isEnabled: YES });
     ret.push({ title: "_Logout".loc(), icon: 'logout-icon', action: 'logout', isEnabled: YES });
     this.set('actions', ret);
-  }.observes('editorPoppedUp', 'displayedTasksCount', 'autoSave', 'shouldNotify'),
+  }.observes('panelOpen', 'displayedTasksCount', 'autoSave', 'shouldNotify'),
   actions: null,
   
   currentUserNameBinding: SC.Binding.oneWay('CoreTasks*currentUser.name'),
@@ -301,7 +301,7 @@ Tasks.mainPage = SC.Page.design({
            itemValueKey: 'value',
            toolTip: "_DisplayModeTooltip".loc(),
            valueBinding: 'Tasks.assignmentsController.displayMode',
-           isEnabledBinding: SC.Binding.not('Tasks.mainPageHelper*editorPoppedUp'),
+           isEnabledBinding: SC.Binding.not('Tasks.mainPageHelper*panelOpen'),
            // TODO: [SG] remove when SCUI.ToolTip works with SC master (new rendering subsystem)
            render: function() {
              sc_super();
@@ -325,11 +325,11 @@ Tasks.mainPage = SC.Page.design({
              this.mouseDown();
            },
            mouseDown: function() {
-             if(Tasks.mainPageHelper.get('editorPoppedUp')) return;
-             Tasks.showCurrentUserTasks();
+             if(Tasks.mainPageHelper.get('panelOpen')) return;
+             Tasks.filterSearchController.setCurrentUserTasksSearch();
            },
            valueBinding: SC.Binding.oneWay('Tasks.mainPageHelper.welcomeMessage'),
-           isEnabledBinding: SC.Binding.not('Tasks.mainPageHelper*editorPoppedUp'),
+           isEnabledBinding: SC.Binding.not('Tasks.mainPageHelper*panelOpen'),
            render: function() {
              sc_super();
            }
@@ -352,7 +352,7 @@ Tasks.mainPage = SC.Page.design({
            classNames: ['dark'],
            toolTip: "_FilterTooltip".loc(),
            action: 'displayTasksFilter',
-           isEnabledBinding: SC.Binding.not('Tasks.mainPageHelper*editorPoppedUp')
+           isEnabledBinding: SC.Binding.not('Tasks.mainPageHelper*panelOpen')
          }),
          filterCancelButton: SC.View.design(SC.Control, { // Filter cancel button
            layout: { centerY: 0, height: 16, right: 218, width: 16 },
@@ -362,12 +362,12 @@ Tasks.mainPage = SC.Page.design({
              this.mouseDown();
            },
            mouseDown: function() {
-             if(Tasks.mainPageHelper.get('editorPoppedUp')) return;
-             Tasks.assignmentsController.clearAttributeFilter();
+             if(Tasks.mainPageHelper.get('panelOpen')) return;
+             Tasks.filterSearchController.clearAttributeFilterCriteria();
              Tasks.assignmentsController.computeTasks();
            },
-           isVisibleBinding: SC.Binding.oneWay('Tasks.assignmentsController.attributeFilterEnabled').bool(),
-           isEnabledBinding: SC.Binding.not('Tasks.mainPageHelper*editorPoppedUp')
+           isVisibleBinding: SC.Binding.oneWay('Tasks.filterSearchController.isAttributeFilterEnabled').bool(),
+           isEnabledBinding: SC.Binding.not('Tasks.mainPageHelper*panelOpen')
          }),
 
          tasksSearchField: SC.TextFieldView.design({
@@ -377,8 +377,8 @@ Tasks.mainPage = SC.Page.design({
            renderMixin: function(context, firstTime) { // Used custom tooltip rendering to avoid escaping by SCUI.Toolip
              context.attr('title', "_TasksSearchTooltip".loc()) ;
            },
-           valueBinding: 'Tasks.assignmentsController.taskSearch',
-           isEnabledBinding: SC.Binding.not('Tasks.mainPageHelper*editorPoppedUp')
+           valueBinding: 'Tasks.filterSearchController.tasksSearch',
+           isEnabledBinding: SC.Binding.not('Tasks.mainPageHelper*panelOpen')
          }),
          tasksSearchCancelButton: SC.View.design(SC.Control, { // Tasks Search cancel button
            layout: { centerY: 0, height: 16, right: 16, width: 16 },
@@ -388,11 +388,11 @@ Tasks.mainPage = SC.Page.design({
              this.mouseDown();
            },
            mouseDown: function() {
-             if(Tasks.mainPageHelper.get('editorPoppedUp')) return;
-             Tasks.assignmentsController.set('taskSearch', '');
+             if(Tasks.mainPageHelper.get('panelOpen')) return;
+             Tasks.filterSearchController.set('tasksSearch', '');
            },
-           isVisibleBinding: SC.Binding.oneWay('Tasks.assignmentsController.taskSearch').bool(),
-           isEnabledBinding: SC.Binding.not('Tasks.mainPageHelper*editorPoppedUp')
+           isVisibleBinding: SC.Binding.oneWay('Tasks.filterSearchController.tasksSearch').bool(),
+           isEnabledBinding: SC.Binding.not('Tasks.mainPageHelper*panelOpen')
          })
 
        }), // topToolbar
@@ -441,7 +441,7 @@ Tasks.mainPage = SC.Page.design({
                layout: { centerY: 0, height: 18, left: 90, width: 400 },
                classNames: ['bottom-bar-label'],
                escapeHTML: NO,
-               editorPoppedUpBinding: SC.Binding.oneWay('Tasks*editorPoppedUp'),
+               panelOpenBinding: SC.Binding.oneWay('Tasks*panelOpen'),
                assignmentsSummaryBinding: SC.Binding.oneWay('Tasks.assignmentsController.assignmentsSummary'),
                projectsSelectionBinding: SC.Binding.oneWay('Tasks.projectsController.selection'),
                tasksSelectionBinding: SC.Binding.oneWay('Tasks.tasksController.selection')

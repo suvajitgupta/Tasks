@@ -83,7 +83,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   },
   
   inlineEditorWillBeginEditing: function(inlineEditor) {
-    if(Tasks.editorPoppedUp === Tasks.TASK_EDITOR) {
+    if(Tasks.panelOpen === Tasks.TASK_EDITOR) {
       inlineEditor.discardEditing();
     }
     else if(!Tasks.tasksController.isEditable()) {
@@ -205,7 +205,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   },
   
   contentPropertyDidChange: function() {
-    if(Tasks.editorPoppedUp === Tasks.TASK_EDITOR) return;
+    if(Tasks.panelOpen === Tasks.TASK_EDITOR) return;
     sc_super();
   }  
   

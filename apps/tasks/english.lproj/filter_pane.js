@@ -124,21 +124,21 @@ Tasks.filterPane = SC.SheetPane.create({
         layout: { left: 5, top: 4, width: 95 },
         icon: 'task-icon-feature',
         title: CoreTasks.TASK_TYPE_FEATURE.loc(),
-        valueBinding: 'Tasks.assignmentsController.attributeFilterTypeFeature'
+        valueBinding: 'Tasks.filterSearchController.attributeFilterTypeFeature'
       }),
       
       bug: SC.CheckboxView.design({
         layout: { centerX: 0, top: 4, width: 65 },
         icon: 'task-icon-bug',
         title: CoreTasks.TASK_TYPE_BUG.loc(),
-        valueBinding: 'Tasks.assignmentsController.attributeFilterTypeBug'
+        valueBinding: 'Tasks.filterSearchController.attributeFilterTypeBug'
       }),
       
       other: SC.CheckboxView.design({
         layout: { right: 5, top: 4, width: 75 },
         icon: 'task-icon-other',
         title: CoreTasks.TASK_TYPE_OTHER.loc(),
-        valueBinding: 'Tasks.assignmentsController.attributeFilterTypeOther'
+        valueBinding: 'Tasks.filterSearchController.attributeFilterTypeOther'
       })
 
     }),
@@ -159,21 +159,21 @@ Tasks.filterPane = SC.SheetPane.create({
       high: SC.CheckboxView.design({
         layout: { left: 5, top: 4, width: 50 },
         title: CoreTasks.TASK_PRIORITY_HIGH.loc(),
-        valueBinding: 'Tasks.assignmentsController.attributeFilterPriorityHigh',
+        valueBinding: 'Tasks.filterSearchController.attributeFilterPriorityHigh',
         classNames: [ 'task-priority-high' ]
       }),
               
       medium: SC.CheckboxView.design({
         layout: { centerX: 0, top: 4, width: 65 },
         title: CoreTasks.TASK_PRIORITY_MEDIUM.loc(),
-        valueBinding: 'Tasks.assignmentsController.attributeFilterPriorityMedium',
+        valueBinding: 'Tasks.filterSearchController.attributeFilterPriorityMedium',
         classNames: [ 'task-priority-medium' ]
       }),
       
       low: SC.CheckboxView.design({
         layout: { right: 5, top: 4, width: 45 },
         title: CoreTasks.TASK_PRIORITY_LOW.loc(),
-        valueBinding: 'Tasks.assignmentsController.attributeFilterPriorityLow',
+        valueBinding: 'Tasks.filterSearchController.attributeFilterPriorityLow',
         classNames: [ 'task-priority-low' ]
       })
       
@@ -195,28 +195,28 @@ Tasks.filterPane = SC.SheetPane.create({
       planned: SC.CheckboxView.design({
         layout: { left: 5, top: 4, width: 65 },
         title: CoreTasks.STATUS_PLANNED.loc(),
-        valueBinding: 'Tasks.assignmentsController.attributeFilterStatusPlanned',
+        valueBinding: 'Tasks.filterSearchController.attributeFilterStatusPlanned',
         classNames: [ 'status-planned' ]
       }),
       
       active: SC.CheckboxView.design({
         layout: { centerX: -30, top: 4, width: 55 },
         title: CoreTasks.STATUS_ACTIVE.loc(),
-        valueBinding: 'Tasks.assignmentsController.attributeFilterStatusActive',
+        valueBinding: 'Tasks.filterSearchController.attributeFilterStatusActive',
         classNames: [ 'status-active' ]
       }),
       
       done: SC.CheckboxView.design({
         layout: { centerX: 50, top: 4, width: 50 },
         title: CoreTasks.STATUS_DONE.loc(),
-        valueBinding: 'Tasks.assignmentsController.attributeFilterStatusDone',
+        valueBinding: 'Tasks.filterSearchController.attributeFilterStatusDone',
         classNames: [ 'status-done' ]
       }),
       
       risky: SC.CheckboxView.design({
         layout: { right: 5, top: 4, width: 50 },
         title: CoreTasks.STATUS_RISKY.loc(),
-        valueBinding: 'Tasks.assignmentsController.attributeFilterStatusRisky',
+        valueBinding: 'Tasks.filterSearchController.attributeFilterStatusRisky',
         classNames: [ 'status-risky' ]
       })
 
@@ -241,24 +241,24 @@ Tasks.filterPane = SC.SheetPane.create({
         layout: { left: 5, top: 3, width: 75 },
         escapeHTML: NO,
         title: '<span class=task-validation-untested>' + CoreTasks.TASK_VALIDATION_UNTESTED.loc() + '</span>',
-        isEnabledBinding: SC.Binding.oneWay('Tasks.assignmentsController.attributeFilterStatusDone'),
-        valueBinding: 'Tasks.assignmentsController.attributeFilterValidationUntested'
+        isEnabledBinding: SC.Binding.oneWay('Tasks.filterSearchController.attributeFilterStatusDone'),
+        valueBinding: 'Tasks.filterSearchController.attributeFilterValidationUntested'
       }),
       
       passed: SC.CheckboxView.design({
         layout: { centerX: 0, top: 3, width: 65 },
         escapeHTML: NO,
         title: '<span class=task-validation-passed>' + CoreTasks.TASK_VALIDATION_PASSED.loc() + '</span>',
-        isEnabledBinding: SC.Binding.oneWay('Tasks.assignmentsController.attributeFilterStatusDone'),
-        valueBinding: 'Tasks.assignmentsController.attributeFilterValidationPassed'
+        isEnabledBinding: SC.Binding.oneWay('Tasks.filterSearchController.attributeFilterStatusDone'),
+        valueBinding: 'Tasks.filterSearchController.attributeFilterValidationPassed'
       }),
       
       failed: SC.CheckboxView.design({
         layout: { right: 5, top: 3, width: 60 },
         escapeHTML: NO,
         title: '<span class=task-validation-failed>' + CoreTasks.TASK_VALIDATION_FAILED.loc() + '</span>',
-        isEnabledBinding: SC.Binding.oneWay('Tasks.assignmentsController.attributeFilterStatusDone'),
-        valueBinding: 'Tasks.assignmentsController.attributeFilterValidationFailed'
+        isEnabledBinding: SC.Binding.oneWay('Tasks.filterSearchController.attributeFilterStatusDone'),
+        valueBinding: 'Tasks.filterSearchController.attributeFilterValidationFailed'
       })
 
     }),
@@ -281,7 +281,7 @@ Tasks.filterPane = SC.SheetPane.create({
       itemTitleKey: 'title',
       itemValueKey: 'value',
       toolTip: "_EffortSpecifiedTooltip".loc(),
-      valueBinding: 'Tasks.assignmentsController.effortSpecified'
+      valueBinding: 'Tasks.filterSearchController.effortSpecified'
     }),
 
     recentlyUpdatedLabel: SC.LabelView.design({
@@ -302,7 +302,7 @@ Tasks.filterPane = SC.SheetPane.create({
       itemTitleKey: 'title',
       itemValueKey: 'value',
       toolTip: "_RecentlyUpdatedFilterTooltip".loc(),
-      valueBinding: 'Tasks.assignmentsController.recentlyUpdated'
+      valueBinding: 'Tasks.filterSearchController.recentlyUpdated'
     }),
 
     beingWatchedLabel: SC.LabelView.design({
@@ -322,7 +322,7 @@ Tasks.filterPane = SC.SheetPane.create({
       ],
       itemTitleKey: 'title',
       itemValueKey: 'value',
-      valueBinding: 'Tasks.assignmentsController.watched'
+      valueBinding: 'Tasks.filterSearchController.watched'
     }),
 
     cancelButton: SC.ButtonView.design({

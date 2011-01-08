@@ -15,15 +15,14 @@ sc_require('core');
 Tasks.loginController = SC.ObjectController.create(
 /** @scope Tasks.loginController.prototype */ {
   
-    _panelOpened: false,
     loginErrorMessage: '',
     loginName: '',
     password: '',
     
     openPanel: function() {
-      // console.log('DEBUG: loginController.openPanel()');
-      if(this._panelOpened) return;
-      this._panelOpened = true;
+      // console.log('DEBUG: loginController.openPanel() panelOpen=' + Tasks.panelOpen);
+      if(Tasks.panelOpen === Tasks.LOGIN_PANEL) return;
+      Tasks.set('panelOpen', Tasks.LOGIN_PANEL);
       var panel = Tasks.getPath('loginPage.panel');
       if(panel) {
         panel.append();
@@ -37,7 +36,7 @@ Tasks.loginController = SC.ObjectController.create(
       if(panel) {
         panel.remove();
       }
-      this._panelOpened = false;
+      Tasks.set('panelOpen', null);
     },
     
     login: function() {
