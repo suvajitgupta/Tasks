@@ -27,7 +27,7 @@ Tasks.mainPageHelper = SC.Object.create({
   panelOpenBinding: SC.Binding.oneWay('Tasks*panelOpen'),
   displayedTasksCountBinding: SC.Binding.oneWay('Tasks.tasksController*arrangedObjects.length'),
   autoSaveBinding: SC.Binding.oneWay('CoreTasks*autoSave'),
-  shouldNotifyBinding: SC.Binding.oneWay('CoreTasks*shouldNotify'),
+  sendNotificationsBinding: SC.Binding.oneWay('CoreTasks*sendNotifications'),
   clippyDetailsId: 'clippy-details',
   clippyDetails: null,
   masterIsHidden: null,
@@ -66,10 +66,10 @@ Tasks.mainPageHelper = SC.Object.create({
     var ret = [];
     ret.push({ title: "_LaunchSettings".loc(), icon: 'settings-icon', action: 'displayUsersSettings', isEnabled: YES });
     var autoSave = this.get('autoSave');
-    ret.push({ title: "_Toggle".loc() + "_AutoSave".loc(), icon: 'save-icon', action: 'toggleAutoSave', isEnabled: YES, checkbox: autoSave });
+    ret.push({ title: "_AutoSave".loc(), icon: 'save-icon', action: 'toggleAutoSave', isEnabled: YES, checkbox: autoSave });
     if(Tasks.get('canServerSendNotifications')) {
-      var shouldNotify = this.get('shouldNotify');
-      ret.push({ title: "_Toggle".loc() + "_SendNotifications".loc(), icon: 'email-icon', action: 'toggleShouldNotify', isEnabled: YES, checkbox: shouldNotify });
+      var sendNotifications = this.get('sendNotifications');
+      ret.push({ title: "_SendNotifications".loc(), icon: 'email-icon', action: 'toggleSendNotifications', isEnabled: YES, checkbox: sendNotifications });
     }
     if(!Tasks.panelOpen) {
       ret.push({ isSeparator: YES });
@@ -86,7 +86,7 @@ Tasks.mainPageHelper = SC.Object.create({
     ret.push({ title: "_LaunchHelp".loc(), icon: 'sc-icon-help-16', action: 'displayHelp', isEnabled: YES });
     ret.push({ title: "_Logout".loc(), icon: 'logout-icon', action: 'logout', isEnabled: YES });
     this.set('actions', ret);
-  }.observes('panelOpen', 'displayedTasksCount', 'autoSave', 'shouldNotify'),
+  }.observes('panelOpen', 'displayedTasksCount', 'autoSave', 'sendNotifications'),
   actions: null,
   
   currentUserNameBinding: SC.Binding.oneWay('CoreTasks*currentUser.name'),
@@ -570,7 +570,8 @@ Tasks.mainPage = SC.Page.design({
            	else project has tasks
        		    if no tasks filtering through - "adjust filter" helper
          	Multiple projects selected
-         		if projects have tasks:
+         		if projec
+         		ts have tasks:
          		  if no tasks filtering through - "adjust filter" helper
      	*/
        render: function(context, firstTime) {

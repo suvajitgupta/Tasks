@@ -32,9 +32,9 @@ Tasks.importDataController = SC.ObjectController.create(
    */
   parseAndLoadData: function() {
     
-    // Cache shouldNotify and turn off during importing
-    var shouldNotify = CoreTasks.get('shouldNotify');
-    CoreTasks.set('shouldNotify', false);
+    // Cache sendNotifications and turn off during importing
+    var sendNotifications = CoreTasks.get('sendNotifications');
+    CoreTasks.set('sendNotifications', false);
     
     var store = CoreTasks.get('store');
     var currentUserId = CoreTasks.getPath('currentUser.id');
@@ -161,7 +161,7 @@ Tasks.importDataController = SC.ObjectController.create(
     }
     
     if(CoreTasks.get('autoSave')) Tasks.saveData();
-    CoreTasks.set('shouldNotify', shouldNotify); // restore cached value
+    CoreTasks.set('sendNotifications', sendNotifications); // restore cached value
     this.set('importData','');
     
     Tasks.statechart.sendEvent('close');

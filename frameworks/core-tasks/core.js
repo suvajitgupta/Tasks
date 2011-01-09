@@ -9,12 +9,11 @@
 CoreTasks = SC.Object.create({
   
   /*
-   * Various installation-level settings.
+   * Startup default settings - override if needed.
    */
-  shouldNotify: true,
   autoSave: true,
-  needsSave: false,
-
+  sendNotifications: true,
+  
   /*
    * Tasks data source types
    */
@@ -117,6 +116,8 @@ CoreTasks = SC.Object.create({
     this.set('store', store);
   },
 
+  needsSave: false, // dirty bit to track if a save is needed
+  
   /**
    * Clear all data from store.
    */

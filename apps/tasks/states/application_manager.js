@@ -21,8 +21,8 @@ Tasks.ApplicationManagerState = Ki.State.extend({
       CoreTasks.set('autoSave', !CoreTasks.get('autoSave'));
     },
 
-    toggleShouldNotify: function(){
-      CoreTasks.set('shouldNotify', !CoreTasks.get('shouldNotify'));
+    toggleSendNotifications: function(){
+      CoreTasks.set('sendNotifications', !CoreTasks.get('sendNotifications'));
     },
 
     displayStatistics: function() {
