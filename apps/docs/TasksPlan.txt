@@ -128,7 +128,7 @@ v Show number of displayed/selected Users at the bottom of Users/Settings panel 
 
 
 #========================================================================================================================
-Project Manager GUI @Active
+Project Manager GUI @Done
 #========================================================================================================================
 
 ^ Add Projects master view supporting multi-selection [SG] <JH2> $Feature @Done %Passed
@@ -311,7 +311,7 @@ Customization @Done
 
 
 #========================================================================================================================
-Tools @Active
+Tools @Done
 #========================================================================================================================
 
 - Create command-line scripts to start/stop Persevere Server and to create users [SE] <SG> $Feature @Done %Passed
@@ -320,7 +320,7 @@ v Support syntax highlighted editing for Tasks import/export format using TextMa
 
 
 #========================================================================================================================
-Deployment @Active
+Deployment @Done
 #========================================================================================================================
 
 - Deploy publicly-accessible instances using Google App Engine/Python [JH2] <SG> @Done %Passed
