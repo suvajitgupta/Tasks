@@ -117,9 +117,9 @@ Tasks.settingsPane = SCUI.ModalPane.create({
       userEditorView: SC.View.design(SC.Border, {
         layout: { top: 0, left: 300, height: 228, right: 0 },
         borderStyle: SC.BORDER_BEZEL,
-        childViews: 'userInfoView createdAtLabel updatedAtLabel'.w(),
+        childViews: 'userInformationView createdAtLabel updatedAtLabel'.w(),
         
-        userInfoView: Tasks.UserInformationView.design({
+        userInformationView: Tasks.UserInformationView.design({
           layout: { top: 10, left: 0, height: 200, right: 0 },
           contentBinding: 'Tasks.userController'
         }),
@@ -185,6 +185,6 @@ Tasks.settingsPane = SCUI.ModalPane.create({
     this.setPath('contentView.userManager.userEditorView.layout', { top: 0, left: 0, height: 228, right: 0 });
   },
   
-  userInformation: SC.outlet('contentView.userManager.userEditorView.userInfoView')
+  userInformation: SC.outlet('contentView.userManager.userEditorView.userInformationView')
   
 });
