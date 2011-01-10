@@ -208,6 +208,7 @@ SC.stringsFor('English', {
   "_Watched:": "Watched:",
   "_Yes": "Yes",
   "_assignees": " assignees & ",
+  "_at": " at ",
   "_commented": "commented ",
   "_daysAgo": " days ago",
   "_description": "description",

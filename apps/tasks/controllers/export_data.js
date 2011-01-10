@@ -392,7 +392,7 @@ Tasks.exportDataController = SC.ObjectController.create(
     var ret = '';
     if(format === 'HTML') ret += '<html>\n' + Tasks.EXPORT_HEADER + '\n<body>\n<center class="title-bar">';
     else ret += '# ';
-    ret += "_Tasks".loc() + ' ' + "_Export".loc() + ' (' + SC.DateTime.create().toFormattedString(CoreTasks.DATE_FORMAT) + '): ' +
+    ret += "_Tasks".loc() + ' ' + "_Export".loc() + "_at".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT) + ' # ' + "_Has".loc() +
            Tasks.getPath('assignmentsController.assignmentsSummary');
     if(format === 'HTML') ret += '</center>\n' + Tasks.EXPORT_LEGEND;
     ret += '\n\n';
