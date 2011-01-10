@@ -275,9 +275,10 @@ function (timestamp) {
     for (i = 0, len = commentsToDelete.length; i < len; i++) {
         remove(commentsToDelete[i]);
     }
+    var that = this;
     var idExtractor = function (record) {
         var id = (record.status == "deleted") ? "" : record.id;
-        return this.extractId(id);
+        return that.extractId(id);
     };
     var users = load("user/"), userIds = users.map(idExtractor);
     var projects = load("project/"), projectIds = projects.map(idExtractor);

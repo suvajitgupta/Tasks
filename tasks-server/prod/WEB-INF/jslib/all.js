@@ -89,7 +89,8 @@ Class({
     // * non-existent task projectId/submitterId/assigneeId should be set to null
     // * watches/comments with non-existent taskId/userId should be soft-deleted
     // * set updatedAt for all records being modified
-    var idExtractor = function(record) { var id = (record.status == 'deleted')? '' : record.id; return this.extractId(id); };
+    var that = this;
+    var idExtractor = function(record) { var id = (record.status == 'deleted')? '' : record.id; return that.extractId(id); };
     var users = load("user/"), userIds = users.map(idExtractor);
     var projects = load("project/"), projectIds = projects.map(idExtractor);
     var tasks = load("task/"), taskIds = tasks.map(idExtractor);
