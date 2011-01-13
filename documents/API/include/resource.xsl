@@ -37,9 +37,6 @@
                         </xsl:if>
                     </div>
                 </td>
-                <td class="logo">
-                    <img src="include/logo.jpg"/>
-                </td>
             </tr>   
         </table> 
         <p>&#160;[
