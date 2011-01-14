@@ -252,7 +252,7 @@ Tasks.ApplicationManagerState = Ki.State.extend({
       Tasks.importDataController.openPanel();  
     },
     
-    parseAndLoadData: function() {
+    importData: function() {
       Tasks.importDataController.parseAndLoadData();
     },
 

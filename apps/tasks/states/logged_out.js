@@ -19,7 +19,7 @@ Tasks.LoggedOutState = Ki.State.extend({
         
   }),
   
-  // State prompting an existing user to sign in
+  // State prompting an existing user to sign up or sign in
   logIn: Ki.State.design({
     
     enterState: function() {
@@ -27,12 +27,12 @@ Tasks.LoggedOutState = Ki.State.extend({
       Tasks.loginController.openPanel();
     },
 
-    signin: function() {
-      Tasks.loginController.signin();
-    },
-
     signup: function() {
       Tasks.statechart.gotoState('signUp');
+    },
+
+    signin: function() {
+      Tasks.loginController.signin();
     },
 
     exitState: function() {
@@ -41,7 +41,7 @@ Tasks.LoggedOutState = Ki.State.extend({
 
   }),
 
-  // State prompting a new guest user to sign up
+  // State prompting a new guest user to register
   signUp: Ki.State.design({
     
     enterState: function() {
@@ -49,7 +49,7 @@ Tasks.LoggedOutState = Ki.State.extend({
     },
 
     signup: function() {
-      Tasks.signupController.signup();
+      Tasks.signupController.register();
     },
 
     cancel: function() {
@@ -63,6 +63,8 @@ Tasks.LoggedOutState = Ki.State.extend({
 
   }),
   
+  // TODO: [SG] create Registration substate with entry via signIn.register() and exit to Authentication via registered() and exit to signUp via nameInUse()
+  // TODO: [SG] create Authentication substate with entry via ready.signinAsGuest(), logIn.signin(), signUp.registered()) and exit to loggedIn via authenticated()
   authenticated: function() {
     Tasks.statechart.gotoState('loggedIn');
   }

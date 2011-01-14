@@ -31,8 +31,8 @@ Tasks.signupController = SC.ObjectController.create(
     pane.makeFirstResponder(pane.contentView.userInformation.fullNameField);
   },
   
-  signup: function() {
-    // console.log('DEBUG: signup() loginName=' + Tasks.userController.get('loginName'));
+  register: function() {
+    // console.log('DEBUG: register() loginName=' + Tasks.userController.get('loginName'));
     var params = {
       successCallback: this._userFound.bind(this),
       failureCallback: this._userNotFound.bind(this)
@@ -47,7 +47,7 @@ Tasks.signupController = SC.ObjectController.create(
    * A user with matching loginName found - see if it is soft-deleted.
    */
   _userFound: function(response) {
-    console.log('DEBUG: _userFound() count=' + response.length + ', statuses=[' + response.getEach('status') + ']');
+    // console.log('DEBUG: _userFound() count=' + response.length + ', statuses=[' + response.getEach('status') + ']');
     for(var i = 0; i < response.length; i++) {
       if(response[i].status !== 'deleted') {
         Tasks.userController.displayLoginNameError();

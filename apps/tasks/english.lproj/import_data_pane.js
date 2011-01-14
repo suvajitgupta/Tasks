@@ -75,7 +75,7 @@ Tasks.importDataPane = SCUI.ModalPane.create({
       keyEquivalent: 'return',
       isDefault: YES,
       title: "_Import".loc(),
-      action: 'parseAndLoadData'
+      action: 'importData'
     })
           
   }),

@@ -30,15 +30,6 @@ Tasks.loginController = SC.ObjectController.create(
       }
     },
     
-    closePanel: function() {
-      // console.log('DEBUG: loginController.closePanel()');
-      var panel = Tasks.getPath('loginPage.panel');
-      if(panel) {
-        panel.remove();
-      }
-      Tasks.set('panelOpen', null);
-    },
-    
     signin: function() {
       var loginName = this.get('loginName');
       var password = this.get('password');
@@ -53,6 +44,15 @@ Tasks.loginController = SC.ObjectController.create(
     
     _loginInformationHasChanged: function() {
       this.set('loginErrorMessage', '');
-    }.observes('loginName', 'password')
+    }.observes('loginName', 'password'),
+    
+    closePanel: function() {
+      // console.log('DEBUG: loginController.closePanel()');
+      var panel = Tasks.getPath('loginPage.panel');
+      if(panel) {
+        panel.remove();
+      }
+      Tasks.set('panelOpen', null);
+    }
     
 });
