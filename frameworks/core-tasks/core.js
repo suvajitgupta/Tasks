@@ -92,28 +92,33 @@ CoreTasks = SC.Object.create({
    * Initializes the main store with the given data source.
    */
   initializeStore: function() {
+    
+    // console.log('DEBUG: initializeStore() store=', this.get('store'));
+    if(SC.none(this.get('store'))) { // not already initialized
 
-    // Create the appropriate data source.
-    var dataSource;
-    if (CoreTasks.get('dataSourceType') === CoreTasks.REMOTE_DATA_SOURCE) {
-      dataSource = CoreTasks.CachingRemoteDataSource.create();
-      SC.Logger.log('Using caching remote data source.');
+      // Create the appropriate data source.
+      var dataSource;
+      if (CoreTasks.get('dataSourceType') === CoreTasks.REMOTE_DATA_SOURCE) {
+        dataSource = CoreTasks.CachingRemoteDataSource.create();
+        SC.Logger.log('Using caching remote data source.');
+      }
+      else { // FIXTURES_DATA_SOURCE
+        dataSource = SC.FixturesDataSource.create();
+        SC.Logger.log('Using fixtures data source.');
+      }
+
+      // Create the store itself.
+      var store = CoreTasks.Store.create();
+      store.set('dataSource', dataSource);
+
+      // Load data from local storage.
+      if (dataSource.loadCachedRecords) {
+        dataSource.loadCachedRecords();
+      }
+
+      this.set('store', store);
+      
     }
-    else { // FIXTURES_DATA_SOURCE
-      dataSource = SC.FixturesDataSource.create();
-      SC.Logger.log('Using fixtures data source.');
-    }
-
-    // Create the store itself.
-    var store = CoreTasks.Store.create();
-    store.set('dataSource', dataSource);
-
-    // Load data from local storage.
-    if (dataSource.loadCachedRecords) {
-      dataSource.loadCachedRecords();
-    }
-
-    this.set('store', store);
   },
 
   needsSave: false, // dirty bit to track if a save is needed

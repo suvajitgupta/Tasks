@@ -11,9 +11,15 @@ Tasks.LoggedOutState = Ki.State.extend({
   initialSubstate: 'ready',
   
   // Initial state from which it moves to logIn if authentication is needed
-  ready: Ki.State.design(),
+  ready: Ki.State.design({
+    
+    login: function() {
+      Tasks.statechart.gotoState('logIn');
+    }
+        
+  }),
   
-  // State prompting an existing user to log in
+  // State prompting an existing user to sign in
   logIn: Ki.State.design({
     
     enterState: function() {
@@ -21,8 +27,8 @@ Tasks.LoggedOutState = Ki.State.extend({
       Tasks.loginController.openPanel();
     },
 
-    login: function() {
-      Tasks.loginController.login();
+    signin: function() {
+      Tasks.loginController.signin();
     },
 
     signup: function() {
@@ -48,12 +54,17 @@ Tasks.LoggedOutState = Ki.State.extend({
 
     cancel: function() {
       Tasks.signupController.cancel();
+      Tasks.statechart.gotoState('logIn');
     },
 
     exitState: function() {
       Tasks.signupController.closePanel();
     }
 
-  })
+  }),
+  
+  authenticated: function() {
+    Tasks.statechart.gotoState('loggedIn');
+  }
     
 });

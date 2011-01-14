@@ -30,7 +30,7 @@ Tasks.signupPane = SC.PanelPane.create({
       fontWeight: SC.BOLD_WEIGHT,
       textAlign: SC.ALIGN_CENTER,
       icon: 'user-role-guest',
-      value: "_GuestSignup".loc()
+      value: "_GuestSignUp".loc()
     }),
     
     userInformation: Tasks.UserInformationView.design({
@@ -41,7 +41,7 @@ Tasks.signupPane = SC.PanelPane.create({
     
     signupButton: SC.ButtonView.design({
       layout: { bottom: 10, right: 10, width: 90, height: 24 },
-      title: "_Signup".loc(),
+      title: "_SignUp".loc(),
       isEnabledBinding: 'Tasks.userController.isValidUserName',
       keyEquivalent: 'return',
       isDefault: YES,

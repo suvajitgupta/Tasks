@@ -23,7 +23,6 @@ Tasks.signupController = SC.ObjectController.create(
     var newUserHash = SC.clone(CoreTasks.User.NEW_USER_HASH);
     newUserHash.role = CoreTasks.USER_ROLE_GUEST;
     
-    // FIXME: [SG] crashing on next line now since Store hasn't been created
     this._newUser = CoreTasks.createRecord(CoreTasks.User, newUserHash);
     Tasks.usersController.selectObject(this._newUser);
     
@@ -33,10 +32,10 @@ Tasks.signupController = SC.ObjectController.create(
   },
   
   signup: function() {
-    // console.log('DEBUG: Signup.submit() loginName=' + Tasks.userController.get('loginName'));
+    // console.log('DEBUG: signup() loginName=' + Tasks.userController.get('loginName'));
     var params = {
-      successCallback: this._loginNameUnavailable.bind(this),
-      failureCallback: this._loginNameAvailable.bind(this)
+      successCallback: this._userFound.bind(this),
+      failureCallback: this._userNotFound.bind(this)
     };
     params.queryParams = { 
       loginName: "'%@'".fmt(Tasks.userController.get('loginName'))
@@ -45,10 +44,31 @@ Tasks.signupController = SC.ObjectController.create(
   },
     
   /**
-   * Called if loginName is avaliable for signup.
+   * A user with matching loginName found - see if it is soft-deleted.
    */
-  _loginNameAvailable: function(response) {
-    // console.log('DEBUG: loginNameAvailable() response=' + response);
+  _userFound: function(response) {
+    console.log('DEBUG: _userFound() count=' + response.length + ', statuses=[' + response.getEach('status') + ']');
+    for(var i = 0; i < response.length; i++) {
+      if(response[i].status !== 'deleted') {
+        Tasks.userController.displayLoginNameError();
+        return;
+      }
+    }
+    this._registrationSuccess();
+  },
+  
+  /**
+   * No user with matching loginName found.
+   */
+  _userNotFound: function() {
+    // console.log('DEBUG: _userNotFound()');
+    this._registrationSuccess();
+  },
+  
+  /**
+   * New guest user successfully registered, login that user.
+   */
+  _registrationSuccess: function() {
     Tasks.userController.clearLoginNameError();
     var loginName = Tasks.userController.get('loginName');
     Tasks.set('loginName', loginName);
@@ -60,13 +80,6 @@ Tasks.signupController = SC.ObjectController.create(
     Tasks.authenticate(loginName, Tasks.userController.hashPassword(password));
   },
   
-  /**
-   * Called if loginName is already taken.
-   */
-  _loginNameUnavailable: function(response) {
-    Tasks.userController.displayLoginNameError();
-  },
-  
   // called to abort signup
   cancel: function() {
     // Discard new user since signup was abandoned
@@ -75,7 +88,6 @@ Tasks.signupController = SC.ObjectController.create(
       this._newUser = null;
     }
     Tasks.usersController.set('selection', '');
-    Tasks.statechart.gotoState('logIn');
   },
 
   closePanel: function() {

@@ -39,7 +39,7 @@ Tasks.loginController = SC.ObjectController.create(
       Tasks.set('panelOpen', null);
     },
     
-    login: function() {
+    signin: function() {
       var loginName = this.get('loginName');
       var password = this.get('password');
       if (loginName !== null && loginName !== '') {
