@@ -1,5 +1,15 @@
 # Tasks Import test data
 
+#================================================================================
+# Has 12 users
+#================================================================================
+
+[SG] (Suvajit  Gupta1) {Manager} <sgupta@yahoo.com>
+
+[JH2] (Josh Holt) {Developer}
+
+[SE] (Sean Eidemiller) {Developer}
+
 
 # Unallocated # Has 1 tasks
 
