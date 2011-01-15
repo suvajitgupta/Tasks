@@ -438,7 +438,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
   	this.invokeLast(this.computeTasks);
   }.observes('[]', '_showTasks', '_attributeFilterCriteria', '_effortSpecified', '_recentlyUpdated', '_watched'),
   
-  _tasksSearchHasChanged: function() {
+  _tasksSearchDidChange: function() {
     // console.log('DEBUG: Tasks search changed to "' + this.get('_tasksSearch') + '"');
     // Allow typing delay over a half second before redrawing tasks pane
     if (this._timer) this._timer.invalidate();

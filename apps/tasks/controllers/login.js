@@ -42,7 +42,7 @@ Tasks.loginController = SC.ObjectController.create(
       this.set('loginErrorMessage', errorMessage);
     },
     
-    _loginInformationHasChanged: function() {
+    _loginInformationDidChange: function() {
       this.set('loginErrorMessage', '');
     }.observes('loginName', 'password'),
     

@@ -42,11 +42,11 @@ Tasks.userController = SC.ObjectController.create(Tasks.Sha1,
     this.set('emailErrorMessage', '');
   },
 
-  _emailHasChanged: function() {
+  _emailDidChange: function() {
     this.set('emailErrorMessage', '');
   }.observes('.content.email'),
   
-  _loginNameHasChanged: function() {
+  _loginNameDidChange: function() {
     this.set('loginNameErrorMessage', '');
   }.observes('.content.loginName'),
   
@@ -64,7 +64,7 @@ Tasks.userController = SC.ObjectController.create(Tasks.Sha1,
     return password? this.sha1Hash(password) : '';
   },
   
-  _contentHasChanged: function() {
+  _contentDidChange: function() {
     var user = this.getPath('content.firstObject');
     if(user) {
       var password = user.get('password');
