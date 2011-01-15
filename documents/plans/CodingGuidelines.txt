@@ -1,0 +1,30 @@
+Ramp Up:
+- Learn about Buildfiles
+- Learn about RunLoops
+- Learn about views/mixins/ContentDisplay mixin
+- Read view.js/tab.js/collection.js & learn about Responders
+- Read runtime/mixins/observable.js, system/bindings.js, event.js
+- Learn how to use mixins/enumerable.js reducers
+
+
+Guidelines:
+- Kill all sc_require('core'); statements - they are gratuitous
+- Access controllers directly, not via get() calls - they are just namespaces, not properties
+- Ensure @scope & @extend for all files (understand what these are for)
+- Named hashes are strange in SC - find other ways instead
+- Don't call out literals outside of the create() method
+- Stick to SC coding conventions, use SC doc tags
+- Don't put view properties or actions in controllers
+- Ensure bindings are of the form 'Namespace.Object.Property'
+- Always return YES from mouseDown()
+- Implement hotkeys as ctrl_shift_a() { ... }
+- Use setClass() instead of addClass() - former more efficient (won't change if not needed)
+- Ensure layouts always have 4 properties
+- Use firstTime attribute of render() to be more efficient
+- Don't get('content') from controllers (e.g., as in exportData)
+- Minimize use of .observes()
+
+
+Tips:
+- Set SC.LOG_BINDINGS to YES to troubleshoot
+- Use SC.Benchmark.start(key) & end(key) to profile/tune code
