@@ -60,13 +60,13 @@ body.sc-theme,
  */
 
 .onscreen-help {
-  color: #555 !important;
+  color: #333 !important;
   font-size: 10px !important;
 	line-height: 12px !important;
 }
 
 .date-time {
-  color: #555 !important;
+  color: #444 !important;
   font-size: 10px !important;
   font-weight: normal !important;
 }
