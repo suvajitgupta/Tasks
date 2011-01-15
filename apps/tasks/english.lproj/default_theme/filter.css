@@ -54,6 +54,11 @@
   -webkit-border-radius: 5px;
 }
 
+.filter-pane .sc-view.sc-checkbox-view span {
+  font-size: 10px !important;
+  text-align: left !important;
+}
+
 .checkbox-icon {
   padding-top: 3px;
   padding-left: 18px;

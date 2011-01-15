@@ -41,15 +41,15 @@
   padding: 0 6px;
 }
 
+.login-body .sc-checkbox-view .label {
+	color: #BBB !important;
+  font-size: 10px !important;
+}
+
 .sc-view .login-prompt {
   font-size: 16pt;
   font-weight: bold;
   color: #444 !important;
-}
-
-.login-page label {
-  color: #DDD !important;
-  font-size: 10px;
 }
 
 .error-message {

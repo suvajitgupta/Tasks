@@ -499,7 +499,7 @@ Tasks.TaskEditorView = SC.View.extend(
    }),
 
    watchingCheckbox: SC.CheckboxView.design({
-     layout: { centerX: -35, bottom: 10, height: 16, width: 70 },
+     layout: { centerX: -35, bottom: 10, height: 16, width: 80 },
      title: "_Watch".loc()
    }),
    watchersButton: SC.ButtonView.design({

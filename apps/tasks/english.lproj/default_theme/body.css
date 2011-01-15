@@ -116,11 +116,6 @@ body.sc-theme,
   letter-spacing: -1px;
 }
 
-.sc-view.sc-checkbox-view span {
-  font-size: 10px !important;
-  text-align: left !important;
-}
-
 .sc-button-view.dark img {
   left: 1px;
 }

@@ -56,7 +56,7 @@ Tasks.importDataPane = SCUI.ModalPane.create({
     
     createMissingUsersHelpLabel: SC.LabelView.design({
       escapeHTML: NO,
-      layout: { width: 250, height: 30, left: 150, bottom: 3 },
+      layout: { width: 250, height: 30, left: 175, bottom: 3 },
       isVisibleBinding: 'CoreTasks.permissions.canCreateUser',
       classNames: [ 'onscreen-help'],
       value: "_CreateMissingUsersOnscreenHelp".loc()
