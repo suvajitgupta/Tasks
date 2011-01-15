@@ -10,6 +10,11 @@ Tasks.ApplicationManagerState = Ki.State.extend({
       
   initialSubstate: 'ready',
   
+  enterState: function() {
+    Tasks.loadData();  
+    Tasks.getPath('mainPage.mainPane.projectsList').becomeFirstResponder();
+  },
+  
   // State indicating global action readiness
   ready: Ki.State.design({
     
@@ -61,6 +66,7 @@ Tasks.ApplicationManagerState = Ki.State.extend({
                         Tasks.statechart.gotoState('shutDown');
                       }
                       else if(status === SC.BUTTON2_STATUS){
+                        CoreTasks.set('needsSave', false);
                         Tasks.statechart.gotoState('shutDown');
                       }
                     }

@@ -47,13 +47,13 @@ Tasks.ShutDownState = Ki.State.extend({
     console.error('Logout failed on Server');
     this.set('_terminated', true);
   },
-
+  
   _needsSaveBinding: SC.Binding.oneWay('CoreTasks.needsSave'),
   _needsSaveDidChange: function() {
-    // console.log('_restart() _terminated=' + this._terminated + ', needsSave=' + this._needsSave);
+    // console.log('_restart() terminated=' + this._terminated + ', needsSave=' + this._needsSave);
     if(this._terminated && !this._needsSave) { // restart Tasks only if terminated and changes are saved
       window.location = Tasks.getBaseUrl();
     }
-  }.observes('_needsSave')
+  }.observes('_terminated', '_needsSave')
     
 });
