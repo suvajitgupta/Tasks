@@ -186,7 +186,7 @@ Tasks.mainPage = SC.Page.design({
             canDeleteContent: YES,
             destroyOnRemoval: YES,
             selectOnMouseDown: YES,
-            delegate: Tasks.projectsListDelegate,
+            delegate: Tasks.sourcesController,
 
             selectionEvent: null,
             mouseDown: function(event) {
@@ -512,7 +512,7 @@ Tasks.mainPage = SC.Page.design({
        canDeleteContent: YES,
        destroyOnRemoval: YES,
        selectOnMouseDown: YES,
-       delegate: Tasks.tasksListDelegate,
+       delegate: Tasks.tasksController,
 
        headerRowHeight: 40,
        rowDelegate: function() {
