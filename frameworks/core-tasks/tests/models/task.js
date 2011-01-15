@@ -15,6 +15,7 @@ module("CoreTasks.Task", {
 
   setup: function() {
     
+    CoreTasks.initializeStore();
     var doneTaskHash = {
       name: CoreTasks.NEW_TASK_NAME,
       developmentStatus: CoreTasks.STATUS_DONE,
