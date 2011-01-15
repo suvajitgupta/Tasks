@@ -1,5 +1,21 @@
 # TASKS PLAN (using Tasks file format)
 
+#================================================================================
+# Committers and collaborators
+#================================================================================
+
+[SG] (Suvajit  Gupta1) {Manager} <suvajit_gupta@yahoo.com>
+[JH2] (Josh Holt) {Developer}
+[SE] (Sean Eidemiller) {Developer}
+[MG] (Matt Grantham) {Developer}
+[BB] (Brandon Blatnick) {Developer}
+[MB] (Mike Ball) {Developer}
+[EG] (Evin Grano) {Developer}
+[MC] (Michael Cohen) {Developer}
+[MR] (Josh Holt) {Tester}
+[EO] (Erich Ocean) {Guest}
+[AI] (Alex Iskander) {Guest}
+
 
 #========================================================================================================================
 Analysis & Design @Done
@@ -78,7 +94,7 @@ Login/Signup GUIs @Active
 - Add summary in bottom bar showing number of Projects/Assignees & Tasks displayed/selected [SG] <MB> $Feature @Done %Passed
 - Add Server data loading message in bottom bar during startup/refreshing [SG] $Feature @Done %Passed
 - Add "Save" button in bottom bar, note time of last save in bottom bar [SG] <BB> $Feature @Done %Passed
-- Enable/disable "Save" button based on data modification [EO] <SG> $Feature @Done %Passed
+- Enable/disable "Save" button based on data modification [SG] <EO> $Feature @Done %Passed
 - Add "Refresh" button to synchronize GUI with latest data from Server [SG] <SE> $Feature @Done %Passed
 
 
@@ -244,7 +260,7 @@ Servers @Active
 
 - Support Tasks database cleanup to remove soft-deleted records and handle pointers to non-existent records [SG] @Done %Passed
 ^ Add github "issues" DataStore (store additional data from Tasks as github issues tags) [JH2] <SG> $Feature @Active
-
+^ Add Jira DataStore [SE] <SG> $Feature
 
 #========================================================================================================================
 Styling @Active
