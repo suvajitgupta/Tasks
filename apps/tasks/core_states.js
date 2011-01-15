@@ -29,8 +29,8 @@ Tasks.mixin( /** @scope Tasks */ {
       // State after user logs in and the application is ready to use
       loggedIn: Ki.State.plugin('Tasks.LoggedInState'),
 
-      // State after application is shut down
-      shutDown: Ki.State.design()
+      // State to manage application termination
+      shutDown: Ki.State.plugin('Tasks.ShutDownState')
 
     })
   

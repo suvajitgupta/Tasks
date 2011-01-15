@@ -4,7 +4,7 @@
  * @author Suvajit Gupta
  * License: Licened under MIT license (see license.js)
  */
-/*globals CoreTasks Tasks Ki SCUDS */
+/*globals CoreTasks Tasks Ki  */
 
 Tasks.ApplicationManagerState = Ki.State.extend({
       
@@ -52,78 +52,28 @@ Tasks.ApplicationManagerState = Ki.State.extend({
         SC.Object.create({
           alertPaneDidDismiss: function(pane, status) {
             if(status === SC.BUTTON1_STATUS) {
-              that._checkForChangesAndExit();
+              if(CoreTasks.get('needsSave')) {
+                SC.AlertPane.warn("_Confirmation".loc(), "_SaveConfirmation".loc(), null, "_Yes".loc(), "_No".loc(), null,
+                  SC.Object.create({
+                    alertPaneDidDismiss: function(pane, status) {
+                      if(status === SC.BUTTON1_STATUS) {
+                        CoreTasks.saveChanges();
+                        Tasks.statechart.gotoState('shutDown');
+                      }
+                      else if(status === SC.BUTTON2_STATUS){
+                        Tasks.statechart.gotoState('shutDown');
+                      }
+                    }
+                  })
+                );
+              }
+              else {
+                Tasks.statechart.gotoState('shutDown');
+              }
             }
           }
         })
       );
-    },
-    
-    _checkForChangesAndExit: function() {
-      var that = this;
-      if(CoreTasks.get('needsSave')) {
-        SC.AlertPane.warn("_Confirmation".loc(), "_SaveConfirmation".loc(), null, "_Yes".loc(), "_No".loc(), null,
-          SC.Object.create({
-            alertPaneDidDismiss: function(pane, status) {
-              if(status === SC.BUTTON1_STATUS) {
-                CoreTasks.saveChanges();
-                that._terminate();
-              }
-              else if(status === SC.BUTTON2_STATUS){
-                that._terminate();
-              }
-            }
-          })
-        );
-      }
-      else {
-        this._exitWithoutSavingChanges();
-      }
-    },
-
-    _terminate: function() {
-
-      // Shut down and destroy statechart
-      Tasks.statechart.gotoState('shutDown');
-      Tasks.statechart.destroy();
-
-      // Clear cached localStorage data (if any)
-      if(CoreTasks.useLocalStorage) {
-        // TODO: [SG] add checkbox on logout screen to optionally clear localStorage
-        // console.log('DEBUG: clearing cached localStorage data');
-        SCUDS.LocalStorageAdapterFactory.nukeAllAdapters();
-      }
-
-      // Logout user on Server (if needed) and restart application
-      if(Tasks.get('serverType') === Tasks.GAE_SERVER) {
-        var params = {
-          successCallback: this._logoutSuccess.bind(this),
-          failureCallback: this._logoutFailure.bind(this)
-        };
-        params.queryParams = {
-          UUID: CoreTasks.getPath('currentUser.id'),
-          ATO: CoreTasks.getPath('currentUser.authToken')
-        };
-        // notify Server so that authentication token can be destroyed for security reasons
-        CoreTasks.executeTransientPost('logout', null, params);
-      }
-      else {
-        this._restart();
-      }
-    },
-
-    _logoutSuccess: function(response) {
-      // console.log('DEBUG: Logout succeeded on Server');
-      this._restart();
-    },
-
-    _logoutFailure: function(response) {
-      console.error('Logout failed on Server');
-      this._restart();
-    },
-
-    _restart: function() {
-      window.location = Tasks.getBaseUrl();
     },
     
     save: function() {
