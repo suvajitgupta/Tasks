@@ -67,14 +67,7 @@ Tasks.CommentItemView = SC.View.extend(SC.Control,
       sc_super();
       var comment = this.getPath('parentView.content');
       Tasks.commentsController.selectObject(comment);
-      // Confirm deletion operation
-      SC.AlertPane.warn("_Confirmation".loc(), "_CommentDeletionConfirmation".loc(), null, "_Yes".loc(), "_No".loc(), null,
-        SC.Object.create({
-          alertPaneDidDismiss: function(pane, status) {
-            if(status === SC.BUTTON1_STATUS) comment.destroy();
-          }
-        })
-      );
+      Tasks.statechart.sendEvent('deleteComment');
       return YES;
     }
   }),

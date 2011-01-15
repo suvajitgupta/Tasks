@@ -297,6 +297,20 @@ Tasks.TaskManagerState = Ki.State.extend({
         Tasks.mainPage.taskEditor.editComment();
       }
     },
+    
+    deleteComment: function() {
+      var comment = Tasks.commentsController.getPath('selection.firstObject');
+      if(comment) {
+        // Confirm deletion operation
+        SC.AlertPane.warn("_Confirmation".loc(), "_CommentDeletionConfirmation".loc(), null, "_Yes".loc(), "_No".loc(), null,
+          SC.Object.create({
+            alertPaneDidDismiss: function(pane, status) {
+              if(status === SC.BUTTON1_STATUS) comment.destroy();
+            }
+          })
+        );
+      }
+    },
 
     exitState: function() {
       Tasks.mainPage.taskEditor.close();
