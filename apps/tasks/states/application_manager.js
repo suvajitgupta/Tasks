@@ -66,10 +66,11 @@ Tasks.ApplicationManagerState = Ki.State.extend({
           SC.Object.create({
             alertPaneDidDismiss: function(pane, status) {
               if(status === SC.BUTTON1_STATUS) {
-                that._saveChangesAndExit();
+                CoreTasks.saveChanges();
+                that._terminate();
               }
               else if(status === SC.BUTTON2_STATUS){
-                that._exitWithoutSavingChanges();
+                that._terminate();
               }
             }
           })
@@ -78,15 +79,6 @@ Tasks.ApplicationManagerState = Ki.State.extend({
       else {
         this._exitWithoutSavingChanges();
       }
-    },
-
-    _saveChangesAndExit: function() {
-      CoreTasks.saveChanges();
-      this._terminate();
-    },
-
-    _exitWithoutSavingChanges: function() {
-      this._terminate();
     },
 
     _terminate: function() {
