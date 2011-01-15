@@ -299,18 +299,7 @@ Tasks.mixin( /** @scope Tasks */ {
       CoreTasks.saveChanges();
       serverMessage.set('value', "_DataSaved".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
     }
-  },
-  
-  /**
-   * Called by CoreTasks when data saves fail.
-   *
-   * @param (String) type of record for which save failed
-   */
-  dataSaveErrorCallback: function(errorRecordType) {
-    // console.log('DEBUG: dataSaveErrorCallback(' + errorRecordType + ')');
-    var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
-    serverMessage.set('value', "_DataSaveError".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
   }
-
+  
 });
 

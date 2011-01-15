@@ -36,14 +36,23 @@ Tasks = SC.Object.create(
     return this.get('serverType') === this.GAE_SERVER;
   }.property('serverType').cacheable(),
   
+  /**
+   * Returns link to Tasks application
+   */
   getBaseUrl: function() {
     return window.location.protocol + '//' + window.location.host + window.location.pathname;
   },
   
+  /**
+   * Returns link to Tasks help
+   */
   getHelpUrl: function() {
     return static_url('help.html') + '?softwareMode=' + Tasks.softwareMode;
   },
   
+  /**
+   * Sorting function based on 'name' key.
+   */
   nameAlphaSort: function(a,b) {
     var aName = a.get('name');
     var bName = b.get('name');
@@ -51,23 +60,15 @@ Tasks = SC.Object.create(
     else return aName > bName? 1 : -1;
   },
   
-  getTimeAgo: function(then) {
-    var time, now = SC.DateTime.create();
-    var minutes = (now.get('milliseconds') - then.get('milliseconds')) / 60000;
-    if(Math.round(minutes) <= 1) time = "_justNow".loc();
-    else if(minutes < 60) time = (Math.round(minutes) + "_minutesAgo".loc());
-    else {
-      var hours = minutes / 60;
-      if(hours < 2) time = "_oneHourAgo".loc();
-      else if(hours < 24) time = (Math.round(hours) + "_hoursAgo".loc());
-      else {
-        var days = hours / 24;
-        if(days < 2) time = "_yesterday".loc();
-        else if (days < 30) time = (Math.round(days) + "_daysAgo".loc());
-        else time = then.toFormattedString(CoreTasks.DATE_FORMAT);
-      }
-    }
-    return time;
+  /**
+   * Called by CoreTasks when data saves fail.
+   *
+   * @param (String) type of record for which save failed
+   */
+  dataSaveErrorCallback: function(errorRecordType) {
+    // console.log('DEBUG: dataSaveErrorCallback(' + errorRecordType + ')');
+    var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
+    serverMessage.set('value', "_DataSaveError".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
   }
     
 });

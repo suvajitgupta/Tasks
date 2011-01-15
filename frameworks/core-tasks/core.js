@@ -723,6 +723,31 @@ CoreTasks = SC.Object.create({
     else if (lastChar === 'h') ret = time.slice(0, time.length-1)/8; // asssumes 8h days, convert, remove time unit
     else ret = time; // already number of days
     return parseFloat(parseFloat(ret, 10).toFixed(3));
+  },
+  
+  /**
+   * Returns a nicely formatted "how long ago" for a given time.
+   *
+   * @param (SC.DateTime) time which to format
+   * @returns {String) formatted version.
+   */
+  getTimeAgo: function(then) {
+    var time, now = SC.DateTime.create();
+    var minutes = (now.get('milliseconds') - then.get('milliseconds')) / 60000;
+    if(Math.round(minutes) <= 1) time = "_justNow".loc();
+    else if(minutes < 60) time = (Math.round(minutes) + "_minutesAgo".loc());
+    else {
+      var hours = minutes / 60;
+      if(hours < 2) time = "_oneHourAgo".loc();
+      else if(hours < 24) time = (Math.round(hours) + "_hoursAgo".loc());
+      else {
+        var days = hours / 24;
+        if(days < 2) time = "_yesterday".loc();
+        else if (days < 30) time = (Math.round(days) + "_daysAgo".loc());
+        else time = then.toFormattedString(CoreTasks.DATE_FORMAT);
+      }
+    }
+    return time;
   }
 
 });

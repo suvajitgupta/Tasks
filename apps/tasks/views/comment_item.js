@@ -128,7 +128,7 @@ Tasks.CommentItemView = SC.View.extend(SC.Control,
     var commentHeader = '';
     if(user) commentHeader += (user.get('displayName') + '&nbsp;');
     var createdAt = content.get('createdAt');
-    if(createdAt) commentHeader += ('<span class="date-time">' + "_commented".loc() + Tasks.getTimeAgo(createdAt) + '</span>');
+    if(createdAt) commentHeader += ('<span class="date-time">' + "_commented".loc() + CoreTasks.getTimeAgo(createdAt) + '</span>');
     this.setPath('commentHeaderLabel.value', commentHeader);
     this.setPath('descriptionLabel.value', content.get('description'));
     this.renderChildViews(context, firstTime);
