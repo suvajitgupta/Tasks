@@ -219,44 +219,6 @@ Tasks.TaskManagerState = Ki.State.extend({
 
   }),
   
-  // State to edit task details
-  taskEditor: Ki.State.design({
-
-    gotoTasksList: function() {
-      this.gotoState('loggedIn.taskManager.ready');
-    },
-
-    gotoPreviousTask: function() {
-      Tasks.mainPage.taskEditor.gotoPreviousTask();
-    },
-
-    gotoNextTask: function() {
-      Tasks.mainPage.taskEditor.gotoNextTask();
-    },
-
-    addComment: function() {
-      var tc = Tasks.get('tasksController');
-      var sel = tc.get('selection');
-      var len = sel? sel.length() : 0;
-      if (len === 1) {
-        var currentUserId = CoreTasks.getPath('currentUser.id');
-        var task = tc.getPath('selection.firstObject');
-        var now = SC.DateTime.create().get('milliseconds');
-        SC.RunLoop.begin();
-        var comment = CoreTasks.createRecord(CoreTasks.Comment, { taskId: task.get('id'), userId: currentUserId,
-                                             createdAt: now, updatedAt: now, description: CoreTasks.NEW_COMMENT_DESCRIPTION.loc() });
-        SC.RunLoop.end();
-        Tasks.commentsController.selectObject(comment);
-        Tasks.mainPage.taskEditor.editComment();
-      }
-    },
-
-    exitState: function() {
-      Tasks.mainPage.taskEditor.close();
-    }
-    
-  }),
-  
   // State to manipulate task filter
   taskFilter: Ki.State.design({
 
@@ -302,6 +264,44 @@ Tasks.TaskManagerState = Ki.State.extend({
       Tasks.filterSearchController.closePanel();
     }
     
-  })  
+  }),
+  
+  // State to edit task details
+  taskEditor: Ki.State.design({
+
+    close: function() {
+      this.gotoState('loggedIn.taskManager.ready');
+    },
+
+    gotoPreviousTask: function() {
+      Tasks.mainPage.taskEditor.gotoPreviousTask();
+    },
+
+    gotoNextTask: function() {
+      Tasks.mainPage.taskEditor.gotoNextTask();
+    },
+
+    addComment: function() {
+      var tc = Tasks.get('tasksController');
+      var sel = tc.get('selection');
+      var len = sel? sel.length() : 0;
+      if (len === 1) {
+        var currentUserId = CoreTasks.getPath('currentUser.id');
+        var task = tc.getPath('selection.firstObject');
+        var now = SC.DateTime.create().get('milliseconds');
+        SC.RunLoop.begin();
+        var comment = CoreTasks.createRecord(CoreTasks.Comment, { taskId: task.get('id'), userId: currentUserId,
+                                             createdAt: now, updatedAt: now, description: CoreTasks.NEW_COMMENT_DESCRIPTION.loc() });
+        SC.RunLoop.end();
+        Tasks.commentsController.selectObject(comment);
+        Tasks.mainPage.taskEditor.editComment();
+      }
+    },
+
+    exitState: function() {
+      Tasks.mainPage.taskEditor.close();
+    }
+    
+  })
   
 });

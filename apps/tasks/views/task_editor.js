@@ -261,7 +261,7 @@ Tasks.TaskEditorView = SC.View.extend(
      layout: { top: 2, left: 10, width: 32, height: 19 },
      classNames: ['back-icon'],
      toolTip: "_GoBackToTasksList".loc(),
-     action: 'gotoTasksList'
+     action: 'close'
     }),
 
    previousButton: SC.View.design(SCUI.SimpleButton, {
