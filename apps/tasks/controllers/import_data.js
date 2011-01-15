@@ -62,12 +62,13 @@ Tasks.importDataController = SC.ObjectController.create(
         // console.log ('Task:\t\t' + JSON.stringify(taskHash));
 
         if(taskHash.assigneeId) {
-        var assigneeUser = CoreTasks.getUserByLoginName(taskHash.assigneeId);
+          var assigneeUser = CoreTasks.getUserByLoginName(taskHash.assigneeId);
           if (assigneeUser) {
             taskHash.assigneeId = assigneeUser.get('id');
           }
           else if (createMissingUsers) {
             assigneeUser = this._createUserFromLoginName(taskHash.assigneeId);
+            // console.log('DEBUG: creating new assignee user: ' + taskHash.assigneeId);
             if(assigneeUser) taskHash.assigneeId = assigneeUser.get('id');
           }
           else {
@@ -83,6 +84,7 @@ Tasks.importDataController = SC.ObjectController.create(
           }
           else if (createMissingUsers) {
             submitterUser = this._createUserFromLoginName(taskHash.submitterId);
+            // console.log('DEBUG: creating new submitter user: ' + taskHash.submitterId);
             if(submitterUser) taskHash.submitterId = submitterUser.get('id');
           }
           else {
