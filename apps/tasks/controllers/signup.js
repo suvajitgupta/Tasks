@@ -74,7 +74,7 @@ Tasks.signupController = SC.ObjectController.create(
     Tasks.set('loginName', loginName);
     var password = Tasks.userController.get('unhashedPassword');
     Tasks.userController.set('password', Tasks.userController.hashPassword(password));
-    Tasks.saveData();
+    Tasks.saveChanges();
     Tasks.usersController.set('selection', '');
     Tasks.get('signupPane').remove();
     Tasks.authenticate(loginName, Tasks.userController.hashPassword(password));

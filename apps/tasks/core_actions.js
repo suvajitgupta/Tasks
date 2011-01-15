@@ -293,7 +293,7 @@ Tasks.mixin( /** @scope Tasks */ {
   /**
    * Save modified Tasks data to server.
    */
-  saveData: function() {
+  saveChanges: function() {
     if(CoreTasks.get('needsSave')) {
       var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
       CoreTasks.saveChanges();

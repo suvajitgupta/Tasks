@@ -186,7 +186,7 @@ Tasks.TaskEditorView = SC.View.extend(
   close: function() {
     Tasks.set('panelOpen', null);
     this._postEditing();
-    if(CoreTasks.get('autoSave') && !CoreTasks.get('isSaving')) Tasks.saveData();
+    if(CoreTasks.get('autoSave') && !CoreTasks.get('isSaving')) Tasks.saveChanges();
     Tasks.setPath('mainPage.mainPane.tasksSceneView.nowShowing', 'tasksList');
     this.invokeLater(function() { Tasks.mainPage.tasksList.contentView.becomeFirstResponder(); }, 400);
   },

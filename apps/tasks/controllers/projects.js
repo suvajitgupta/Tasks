@@ -79,7 +79,7 @@ Tasks.projectsController = SC.ArrayController.create(
         var developmentStatus = task.get('developmentStatus');
         if(developmentStatus !== value) task.set('developmentStatus', value);
       });
-      if(CoreTasks.get('autoSave')) Tasks.saveData();
+      if(CoreTasks.get('autoSave')) Tasks.saveChanges();
     } else {
       var firstDevelopmentStatus = null;
       sel.forEach(function(task) {

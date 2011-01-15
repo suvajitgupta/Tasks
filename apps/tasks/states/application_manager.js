@@ -83,7 +83,7 @@ Tasks.ApplicationManagerState = Ki.State.extend({
     },
     
     save: function() {
-      Tasks.saveData();
+      Tasks.saveChanges();
     },
 
     refresh: function() {
@@ -171,7 +171,7 @@ Tasks.ApplicationManagerState = Ki.State.extend({
 
     exitState: function() {
       Tasks.get('settingsPane').remove();
-      if(CoreTasks.get('autoSave')) Tasks.saveData();
+      if(CoreTasks.get('autoSave')) Tasks.saveChanges();
     }
     
   }),

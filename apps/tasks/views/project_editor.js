@@ -90,7 +90,7 @@ Tasks.projectEditorPage = SC.Page.create({
 
     remove: function() {
       this._postEditing();
-      if(CoreTasks.get('autoSave') && !CoreTasks.get('isSaving')) Tasks.saveData();
+      if(CoreTasks.get('autoSave') && !CoreTasks.get('isSaving')) Tasks.saveChanges();
       this.invokeLater(function() { Tasks.mainPage.getPath('mainPane.projectsList').becomeFirstResponder(); }, 400);
       sc_super();
       this.destroy();

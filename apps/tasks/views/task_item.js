@@ -94,7 +94,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   
   inlineEditorDidEndEditing: function(inlineEditor, finalValue) {
     sc_super();
-    if(CoreTasks.get('autoSave')) Tasks.saveData();
+    if(CoreTasks.get('autoSave')) Tasks.saveChanges();
   },
   
   render: function(context, firstTime) {
