@@ -226,6 +226,14 @@ Tasks.tasksController = SC.TreeController.create(SC.CollectionViewDelegate,
     return value;
   }.property('selection', '_watchCount').cacheable(),
   
+  // TODO: [SG] see why clippy icon flashes when task editor select field view menus popup
+  _panelOpen: null,
+  _panelOpenBinding: SC.Binding.oneWay('Tasks*panelOpen'),
+  displayClippy: function() {
+    if(this.get('hasSelection') && !this.get('_panelOpen')) return true;
+    return false;
+  }.property('hasSelection', '_panelOpen'),
+  
   _updateClippyDetails: function() {
     var clippyDetails = Tasks.mainPageHelper.get('clippyDetails');
     if(clippyDetails) {
@@ -237,6 +245,7 @@ Tasks.tasksController = SC.TreeController.create(SC.CollectionViewDelegate,
         });
       }
       clippyDetails.innerHTML = ret;
+      // console.log('DEBUG: _updateClippyDetails() to: ' + ret);
     }
   }.observes('selection'),
   

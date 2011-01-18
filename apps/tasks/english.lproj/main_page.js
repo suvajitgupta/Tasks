@@ -337,8 +337,10 @@ Tasks.mainPage = SC.Page.design({
 
          clippyIcon: SC.View.design({
            layout: { centerY: 0, right: 289, height: 14, width: 14 },
-           isVisibleBinding: SC.Binding.oneWay('Tasks.tasksController.hasSelection'),
+           isVisibleBinding: SC.Binding.oneWay('Tasks.tasksController.displayClippy'),
+           // isVisibleBinding: SC.Binding.oneWay('Tasks.tasksController.hasSelection'),
            render: function(context, firstTime) {
+             // console.log('clippyIcon.render()');
              if(firstTime) {
                Tasks.mainPageHelper._embedClippy(context);
              }
