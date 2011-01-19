@@ -34,7 +34,8 @@ Tasks.loginController = SC.ObjectController.create(
       var loginName = this.get('loginName');
       var password = this.get('password');
       if (loginName !== null && loginName !== '') {
-        Tasks.authenticate(loginName, Tasks.userController.hashPassword(password));
+        var hashedPassword = (password === ''? '' : Tasks.userController.hashPassword(password));
+        Tasks.authenticate(loginName, hashedPassword);
       }
     },
     

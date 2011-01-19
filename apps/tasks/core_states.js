@@ -4,7 +4,7 @@
  * @author Suvajit Gupta
  * License: Licened under MIT license (see license.js)
  */
-/*globals Tasks Ki sc_require */
+/*globals CoreTasks Tasks Ki sc_require */
 sc_require('core');
 sc_require('states/logged_out');
 sc_require('states/logged_in');
@@ -22,6 +22,10 @@ Tasks.mixin( /** @scope Tasks */ {
     rootState: Ki.State.design({
 
       initialSubstate: 'loggedOut',
+
+      enterState: function() {
+        CoreTasks.initializeStore();
+      },
 
       // State when user hasn't logged in yet
       loggedOut: Ki.State.plugin('Tasks.LoggedOutState'),

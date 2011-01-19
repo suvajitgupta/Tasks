@@ -13,28 +13,58 @@ Tasks.LoggedOutState = Ki.State.extend({
   // Initial state from which it moves to logIn if authentication is needed
   ready: Ki.State.design({
     
-    login: function() {
+    loginGuest: function() {
+      Tasks.loginController.set('loginName', 'guest');
+      Tasks.statechart.gotoState('logIn');
+      Tasks.statechart.sendEvent('signin');
+    },
+    
+    loginUser: function() {
       Tasks.statechart.gotoState('logIn');
     }
-        
+    
   }),
   
   // State prompting an existing user to sign up or sign in
   logIn: Ki.State.design({
     
+    initialSubstate: 'ready',
+    
     enterState: function() {
-      CoreTasks.initializeStore();
       Tasks.loginController.openPanel();
     },
 
-    signup: function() {
-      Tasks.statechart.gotoState('signUp');
-    },
+    // State to manage sign up or sign in
+    ready: Ki.State.design({
+      
+      signup: function() {
+        Tasks.statechart.gotoState('signUp');
+      },
 
-    signin: function() {
-      Tasks.loginController.signin();
-    },
+      signin: function() {
+        Tasks.statechart.gotoState('authentication');
+      }
+      
+    }),
 
+    // System state to manage user authentication
+    // TODO: [SG] add Authentication substate entry via ready.signinAsGuest() for view route
+    authentication: Ki.State.design({
+      
+      enterState: function() {
+        Tasks.loginController.signin();
+      },
+
+      authenticationSucceeded: function() {
+        Tasks.statechart.gotoState('loggedIn');
+      },
+      
+      authenticationFailed: function() {
+        Tasks.statechart.gotoState('loggedOut.logIn.ready');
+      }
+      
+    }),
+      
     exitState: function() {
       Tasks.loginController.closePanel();
     }
@@ -44,29 +74,47 @@ Tasks.LoggedOutState = Ki.State.extend({
   // State prompting a new guest user to register
   signUp: Ki.State.design({
     
+    initialSubstate: 'ready',
+    
     enterState: function() {
       Tasks.signupController.openPanel();
     },
 
-    signup: function() {
-      Tasks.signupController.register();
-    },
+    // State to manage guest sign up
+    ready: Ki.State.design({
+      
+      signup: function() {
+        Tasks.statechart.gotoState('registration');
+      },
 
-    cancel: function() {
-      Tasks.signupController.cancel();
-      Tasks.statechart.gotoState('logIn');
-    },
+      cancel: function() {
+        Tasks.signupController.cancel();
+        Tasks.statechart.gotoState('logIn');
+      }
 
+    }),
+    
+    // System state to manage guest registration
+    registration: Ki.State.design({
+      
+      enterState: function() {
+        Tasks.signupController.register();
+      },
+
+      registrationSucceeded: function() {
+        Tasks.statechart.gotoState('authentication');
+      },
+      
+      registrationFailed: function() {
+        Tasks.statechart.gotoState('loggedOut.signUp.ready');
+      }
+            
+    }),
+      
     exitState: function() {
       Tasks.signupController.closePanel();
     }
 
-  }),
-  
-  // TODO: [SG] create Registration substate with entry via signIn.register() and exit to Authentication via registered() and exit to signUp via nameInUse()
-  // TODO: [SG] create Authentication substate with entry via ready.signinAsGuest(), logIn.signin(), signUp.registered()) and exit to loggedIn via authenticated()
-  authenticated: function() {
-    Tasks.statechart.gotoState('loggedIn');
-  }
+  })
     
 });

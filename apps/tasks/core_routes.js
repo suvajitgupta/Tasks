@@ -61,8 +61,7 @@ Tasks.mixin( /** @scope Tasks */ {
       if(!SC.none(params.search) && params.search !== '') {
         Tasks.filterSearchController.set('tasksSearch', params.search);
       }
-      Tasks.authenticate('guest', '');
-      // TODO: [SG] add error message if 'guest' user is non-existent
+      Tasks.statechart.sendEvent('loginGuest');
     }
   },
   
@@ -148,7 +147,7 @@ Tasks.mixin( /** @scope Tasks */ {
   */
   defaultRoute: function(params) {
     // console.log('DEBUG: defaultRoute()');
-    if(!CoreTasks.get('currentUser') && Tasks.get('authenticationNeeded')) Tasks.statechart.sendEvent('login');
+    if(!CoreTasks.get('currentUser') && Tasks.get('authenticationNeeded')) Tasks.statechart.sendEvent('loginUser');
   }
   
 });

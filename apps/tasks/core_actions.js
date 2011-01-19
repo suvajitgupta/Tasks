@@ -46,6 +46,21 @@ Tasks.mixin( /** @scope Tasks */ {
    * Called after successful authentication.
    */
   _authenticationSuccess: function(response, request) {
+
+    // See if a non-soft-deleted user was found for Server-based login
+    var userHash = null;
+    if(!SC.none(response)) {
+      for(var i = 0; i < response.length; i++) {
+        if(response[i].status !== 'deleted') {
+          userHash = response[i];
+          break;
+        }
+      }
+      if(!userHash) {
+        this._authenticationFailure(SC.Error.create());
+        return;
+      }
+    }
     
     // console.log('DEBUG: _authenticationSuccess()');
     // Start GUI and setup startup defaults
@@ -94,14 +109,16 @@ Tasks.mixin( /** @scope Tasks */ {
         SC.Query.create({ recordType: CoreTasks.User, orderBy: 'name', localOnly: YES })));
       this.usersController.set('content', CoreTasks.get('allUsers'));
     }
-    if(SC.none(response)) {
+    if(!userHash) {
+      // FIXTURE-based login
       currentUser = CoreTasks.getUserByLoginName(Tasks.get('loginName'));
     }
     else {
+      // Server-based login
       SC.RunLoop.begin();
-      CoreTasks.store.loadRecords(CoreTasks.User, response);
+      CoreTasks.store.loadRecords(CoreTasks.User, [ userHash ]);
       SC.RunLoop.end();
-      currentUser = CoreTasks.getUserByLoginName(response[0].loginName);
+      currentUser = CoreTasks.getUserByLoginName(userHash.loginName);
     }
 
     // Greet user and save login session information
@@ -135,7 +152,8 @@ Tasks.mixin( /** @scope Tasks */ {
     }
     this._selectDefaultProject(false);
 
-    Tasks.statechart.sendEvent('authenticated');
+    Tasks.statechart.sendEvent('authenticationSucceeded');
+    
   },
 
   /**
@@ -147,6 +165,7 @@ Tasks.mixin( /** @scope Tasks */ {
     // console.log('DEBUG: _authenticationFailure()');
     var errorString = SC.instanceOf(response, SC.Error)? "_LoginServerAccessError".loc() : "_LoginAuthenticationError".loc();
     Tasks.loginController.displayLoginError(errorString);
+    Tasks.statechart.sendEvent('authenticationFailed');
   },
   
   /**

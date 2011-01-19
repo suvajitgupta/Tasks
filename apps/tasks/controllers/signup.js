@@ -51,6 +51,7 @@ Tasks.signupController = SC.ObjectController.create(
     for(var i = 0; i < response.length; i++) {
       if(response[i].status !== 'deleted') {
         Tasks.userController.displayLoginNameError();
+        Tasks.statechart.sendEvent('registrationFailed');
         return;
       }
     }
@@ -69,15 +70,10 @@ Tasks.signupController = SC.ObjectController.create(
    * New guest user successfully registered, login that user.
    */
   _registrationSuccess: function() {
-    Tasks.userController.clearLoginNameError();
-    var loginName = Tasks.userController.get('loginName');
-    Tasks.set('loginName', loginName);
-    var password = Tasks.userController.get('unhashedPassword');
-    Tasks.userController.set('password', Tasks.userController.hashPassword(password));
+    Tasks.loginController.set('loginName', Tasks.userController.get('loginName'));
+    Tasks.loginController.set('password', Tasks.userController.get('unhashedPassword'));
     Tasks.saveChanges();
-    Tasks.usersController.set('selection', '');
-    Tasks.get('signupPane').remove();
-    Tasks.authenticate(loginName, Tasks.userController.hashPassword(password));
+    Tasks.statechart.sendEvent('registrationSucceeded');
   },
   
   // called to abort signup
@@ -87,14 +83,11 @@ Tasks.signupController = SC.ObjectController.create(
       this._newUser.destroy();
       this._newUser = null;
     }
-    Tasks.usersController.set('selection', '');
   },
 
   closePanel: function() {
-    // Close signup panel and refocus on login panel
+    Tasks.userController.clearLoginNameError();
     Tasks.get('signupPane').remove();
-    var panel = Tasks.getPath('loginPage.panel');
-    if(panel) panel.focus();
   }
     
 });
