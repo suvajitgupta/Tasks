@@ -26,7 +26,7 @@ Tasks.loginPage = SC.Page.create({
       
       layout: { centerX: 0, centerY: 0, width: 390, height: 225 },
       classNames: ['login-body'],
-      childViews: 'logo guestSignupButton loginNameField passwordField loginErrorMessageLabel loadDoneProjectDataCheckbox signinButton'.w(),
+      childViews: 'logo guestSignupButton loginNameField passwordField authenticatingMessageLabel loginErrorMessageLabel loadDoneProjectDataCheckbox signinButton'.w(),
       
       logo: SC.View.design({
         layout: { top: 0, left: 50, width: 153, height: 56 },
@@ -52,6 +52,14 @@ Tasks.loginPage = SC.Page.create({
         isPassword: YES,
         hint: '_PasswordHint'.loc(),
         valueBinding: 'Tasks.loginController.password'
+      }),
+      
+      authenticatingMessageLabel: SC.LabelView.design({
+        layout: { top: 170, left: 60, right: 0, height: 20 },
+        textAlign: SC.ALIGN_CENTER,
+        isVisible: NO,
+        value: "_Authenticating".loc(),
+        icon: 'progress-icon'
       }),
       
       loginErrorMessageLabel: SC.LabelView.design({
@@ -80,6 +88,10 @@ Tasks.loginPage = SC.Page.create({
     
     focus: function() {
       this.contentView.loginNameField.becomeFirstResponder();        
+    },
+    
+    setAuthenticatingMessageVisibility: function(isVisible) {
+      this.contentView.authenticatingMessageLabel.set('isVisible', isVisible)
     }
     
   })

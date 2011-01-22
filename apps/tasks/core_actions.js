@@ -23,7 +23,11 @@ Tasks.mixin( /** @scope Tasks */ {
    * @param {String} user's password.
    */
   authenticate: function(loginName, password) {
+    
     // console.log('DEBUG: authenticate()');
+    
+    Tasks.getPath('loginPage.panel').setAuthenticatingMessageVisibility(true);
+    
     Tasks.set('loginName', loginName);
     if(CoreTasks.get('dataSourceType') === CoreTasks.REMOTE_DATA_SOURCE) { // perform remote authentication
       var params = {
@@ -40,12 +44,15 @@ Tasks.mixin( /** @scope Tasks */ {
       }
       return this._authenticationFailure();
     }
+    
   },
   
   /**
    * Called after successful authentication.
    */
   _authenticationSuccess: function(response, request) {
+
+    Tasks.getPath('loginPage.panel').setAuthenticatingMessageVisibility(false);
 
     // See if a non-soft-deleted user was found for Server-based login
     var userHash = null;
@@ -163,10 +170,15 @@ Tasks.mixin( /** @scope Tasks */ {
    * @param {SC.Response} response object from failed call
    */
   _authenticationFailure: function(response) {
+    
     // console.log('DEBUG: _authenticationFailure()');
+    
+    Tasks.getPath('loginPage.panel').setAuthenticatingMessageVisibility(false);
+    
     var errorString = SC.instanceOf(response, SC.Error)? "_LoginServerAccessError".loc() : "_LoginAuthenticationError".loc();
     Tasks.loginController.displayLoginError(errorString);
     Tasks.statechart.sendEvent('authenticationFailed');
+    
   },
   
   /**

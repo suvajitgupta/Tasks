@@ -35,6 +35,11 @@ body.sc-theme,
   border-top: 1px solid #999 !important;
 }
 
+.error-message {
+	color: #F66 !important;
+  font-size: 10px;
+}
+
 /*-----------------------------------------------------------------
  * Status styles
  */

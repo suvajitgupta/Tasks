@@ -29,6 +29,7 @@ SC.stringsFor('English', {
   "_AssigneeProperlyLoaded": "Properly loaded",
   "_AssigneeUnderLoaded": "Under loaded",
   "_Assignees:": "Assignees: ",
+  "_Authenticating": "Authenticating...",
   "_AutoSave": "Auto Save",
   "_Bug": "Bug",
   "_ByAnyone": "By Anyone",

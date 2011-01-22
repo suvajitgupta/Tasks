@@ -46,15 +46,8 @@
   font-size: 10px !important;
 }
 
-.sc-view .login-prompt {
-  font-size: 16pt;
-  font-weight: bold;
-  color: #444 !important;
-}
-
-.error-message {
-	color: #F66 !important;
-  font-size: 10px;
+.login-body .sc-label-view {
+	color: #AAA;
 }
 
 /* Default Panel Styling Overrides */
