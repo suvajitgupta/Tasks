@@ -20,7 +20,7 @@ Tasks = SC.Object.create(
   isLoaded: NO, // for Lebowski
   
   /*
-   * Tasks server types
+   * Tasks server types.  Defaulted to GAE - detected/set at runtime
    */
   NO_SERVER: 0x0000,
   PERSEVERE_SERVER: 0x0001,
