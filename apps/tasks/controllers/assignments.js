@@ -260,10 +260,10 @@ Tasks.assignmentsController = SC.ArrayController.create(
 
   },
   
-  _escapeMetacharacters: function(str){
+  _escapeMetacharacters: function(string){
     var metaCharacters = [ '/', '.', '*', '+', '?', '|', '(', ')', '[', ']', '{', '}', '\\' ];
-    var s = new RegExp('(\\' + metaCharacters.join('|\\') + ')', 'g');
-    return str? str.replace(s, '\\$1') : '';
+    var pattern = new RegExp('(\\' + metaCharacters.join('|\\') + ')', 'g');
+    return string? string.replace(pattern, '\\$1') : '';
   },
   
   /**
