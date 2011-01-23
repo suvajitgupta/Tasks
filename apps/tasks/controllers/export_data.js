@@ -232,7 +232,7 @@ Tasks.exportDataController = SC.ObjectController.create(
    *
    * @param {String} format in which data was exported.
    */
-  showExportedData: function(format) {
+  _showExportedData: function(format) {
     if(format === 'HTML') {
       var win = window.open();
       if(win) {
@@ -425,7 +425,7 @@ Tasks.exportDataController = SC.ObjectController.create(
     if(format === 'HTML') ret += '</body>\n</html>\n';
     this.set('data', ret);
     
-    Tasks.exportDataController.showExportedData(format);
+    Tasks.exportDataController._showExportedData(format);
     
   }
   
