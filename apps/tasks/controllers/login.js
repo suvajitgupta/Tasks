@@ -15,18 +15,18 @@ sc_require('core');
 Tasks.loginController = SC.ObjectController.create(
 /** @scope Tasks.loginController.prototype */ {
   
-    loginErrorMessage: '',
     loginName: '',
     password: '',
     
     openPanel: function() {
       // console.log('DEBUG: loginController.openPanel() panelOpen=' + Tasks.panelOpen);
-      if(Tasks.panelOpen === Tasks.LOGIN_PANEL) return;
-      Tasks.set('panelOpen', Tasks.LOGIN_PANEL);
-      var panel = Tasks.getPath('loginPage.panel');
-      if(panel) {
-        panel.append();
-        panel.focus();
+      if(!Tasks.panelOpen) {
+        Tasks.set('panelOpen', Tasks.LOGIN_PANEL);
+        var panel = Tasks.getPath('loginPage.panel');
+        if(panel) {
+          panel.append();
+          panel.focus();
+        }
       }
     },
     
@@ -39,20 +39,17 @@ Tasks.loginController = SC.ObjectController.create(
       }
     },
     
+    loginErrorMessage: '',
     displayLoginError: function(errorMessage){
       this.set('loginErrorMessage', errorMessage);
     },
-    
     _loginInformationDidChange: function() {
       this.set('loginErrorMessage', '');
     }.observes('loginName', 'password'),
     
     closePanel: function() {
       // console.log('DEBUG: loginController.closePanel()');
-      var panel = Tasks.getPath('loginPage.panel');
-      if(panel) {
-        panel.remove();
-      }
+      Tasks.getPath('loginPage.panel').remove();
       Tasks.set('panelOpen', null);
     }
     

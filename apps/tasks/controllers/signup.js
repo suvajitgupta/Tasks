@@ -16,15 +16,16 @@ sc_require('views/user_information');
 Tasks.signupController = SC.ObjectController.create(
 /** @scope Tasks.signupController.prototype */ {
   
-  _newUser: null,
+  _registeringUser: null,
   
   openPanel: function() {
+    // console.log('DEBUG: signupController.openPanel()');
     // Create a new user and start editing its properties.
     var newUserHash = SC.clone(CoreTasks.User.NEW_USER_HASH);
     newUserHash.role = CoreTasks.USER_ROLE_GUEST;
     
-    this._newUser = CoreTasks.createRecord(CoreTasks.User, newUserHash);
-    Tasks.usersController.selectObject(this._newUser);
+    this._registeringUser = CoreTasks.createRecord(CoreTasks.User, newUserHash);
+    Tasks.usersController.selectObject(this._registeringUser);
     
     var pane = Tasks.get('signupPane');
     pane.append();
@@ -79,13 +80,14 @@ Tasks.signupController = SC.ObjectController.create(
   // called to abort signup
   cancel: function() {
     // Discard new user since signup was abandoned
-    if(this._newUser) {
-      this._newUser.destroy();
-      this._newUser = null;
+    if(this._registeringUser) {
+      this._registeringUser.destroy();
+      this._registeringUser = null;
     }
   },
 
   closePanel: function() {
+    // console.log('DEBUG: signupController.closePanel()');
     Tasks.userController.clearLoginNameError();
     Tasks.get('signupPane').remove();
   }
