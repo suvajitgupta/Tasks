@@ -201,7 +201,9 @@ Tasks.ApplicationManagerState = Ki.State.extend({
   textImport: Ki.State.design({
 
     enterState: function() {
-      Tasks.importDataController.openPanel();  
+      var pane = Tasks.getPath('importDataPane');
+      pane.append();
+      pane.focus();
     },
     
     importData: function() {

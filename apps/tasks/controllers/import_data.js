@@ -19,14 +19,6 @@ Tasks.importDataController = SC.ObjectController.create(
   createMissingUsers: false,
   importData: '',
   
-  openPanel: function(){
-    var pane = Tasks.getPath('importDataPane');
-    if(pane) {
-      pane.append();
-      pane.focus();
-    }
-  },
-  
   /**
    * Parse data and create/load objects.
    */
