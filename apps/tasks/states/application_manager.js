@@ -183,7 +183,8 @@ Tasks.ApplicationManagerState = Ki.State.extend({
   statistics: Ki.State.design({
 
     enterState: function() {
-      Tasks.statisticsController.showStatistics();  
+      Tasks.statisticsController.computeStatistics();
+      Tasks.statisticsPane.append();
     },
     
     close: function() {
