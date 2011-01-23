@@ -223,7 +223,9 @@ Tasks.TaskManagerState = Ki.State.extend({
   taskFilter: Ki.State.design({
 
     enterState: function() {
-      Tasks.filterSearchController.openPanel();
+      Tasks.filterSearchController.backupAttributeFilterCriteria();
+      if(!Tasks.get('panelOpen')) Tasks.set('panelOpen', Tasks.FILTER_EDITOR);
+      Tasks.get('filterPane').append();
     },
 
     setAttributeFilterAll: function() {
@@ -261,7 +263,8 @@ Tasks.TaskManagerState = Ki.State.extend({
     },
 
     exitState: function() {
-      Tasks.filterSearchController.closePanel();
+      if(Tasks.get('panelOpen') === Tasks.FILTER_EDITOR) Tasks.set('panelOpen', null);
+      Tasks.get('filterPane').remove();
     }
     
   }),

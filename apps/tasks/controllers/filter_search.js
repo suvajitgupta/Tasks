@@ -212,22 +212,6 @@ Tasks.filterSearchController = SC.ObjectController.create(
   
   isFilterOrSearchEnabled: function() {
     return this.tasksSearch || this.attributeFilterCriteria.length !== 13;
-  },
-  
-
-  openPanel: function(){
-    this.backupAttributeFilterCriteria();
-    var pane = Tasks.get('filterPane');
-    if(!Tasks.get('panelOpen')) Tasks.set('panelOpen', Tasks.FILTER_EDITOR);
-    if(pane) pane.append();
-  },
-  
-  closePanel: function(){
-    if(Tasks.get('panelOpen') === Tasks.FILTER_EDITOR) Tasks.set('panelOpen', null);
-    var pane = Tasks.get('filterPane');
-    if(pane) {
-      pane.remove();
-    }
   }
-  
+    
 });
