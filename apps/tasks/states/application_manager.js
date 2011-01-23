@@ -96,7 +96,10 @@ Tasks.ApplicationManagerState = Ki.State.extend({
   usersSettings: Ki.State.design({
 
     enterState: function() {
-      Tasks.settingsController.openPanel();
+      var pane = Tasks.get('settingsPane');
+      Tasks.usersController.selectObject(CoreTasks.get('currentUser'));
+      if(!CoreTasks.isCurrentUserAManager()) pane.setSmallSize();
+      pane.append();
     },
     
     addUser: function() {
