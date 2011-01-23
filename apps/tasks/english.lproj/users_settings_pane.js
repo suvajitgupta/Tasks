@@ -1,5 +1,5 @@
 // ==========================================================================
-// Tasks.settingsPane
+// Tasks.usersSettingsPane
 // ==========================================================================
 /*globals CoreTasks Tasks sc_require SCUI */
 sc_require('core');
@@ -16,7 +16,7 @@ sc_require('views/user_information');
   Settings Panel
   
 */
-Tasks.settingsPane = SCUI.ModalPane.create({
+Tasks.usersSettingsPane = SCUI.ModalPane.create({
     
   defaultResponder: 'Tasks.statechart',
 

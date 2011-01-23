@@ -96,7 +96,7 @@ Tasks.ApplicationManagerState = Ki.State.extend({
   usersSettings: Ki.State.design({
 
     enterState: function() {
-      var pane = Tasks.get('settingsPane');
+      var pane = Tasks.get('usersSettingsPane');
       Tasks.usersController.selectObject(CoreTasks.get('currentUser'));
       if(!CoreTasks.isCurrentUserAManager()) pane.setSmallSize();
       pane.append();
@@ -115,7 +115,7 @@ Tasks.ApplicationManagerState = Ki.State.extend({
       if (selectedUser) userHash.role = selectedUser.get('role');
       var user = CoreTasks.createRecord(CoreTasks.User, userHash);
       Tasks.usersController.selectObject(user);
-      Tasks.settingsPane.get('userInformation').get('fullNameField').becomeFirstResponder();
+      Tasks.usersSettingsPane.get('userInformation').get('fullNameField').becomeFirstResponder();
 
     },
 
@@ -173,7 +173,7 @@ Tasks.ApplicationManagerState = Ki.State.extend({
     },
 
     exitState: function() {
-      Tasks.get('settingsPane').remove();
+      Tasks.get('usersSettingsPane').remove();
       if(CoreTasks.get('autoSave')) Tasks.saveChanges();
     }
     
