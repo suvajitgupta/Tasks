@@ -207,7 +207,7 @@ Tasks.ApplicationManagerState = Ki.State.extend({
     },
     
     importData: function() {
-      Tasks.importDataController.parseAndLoadData();
+      Tasks.importDataController.importData();
     },
 
     close: function() {

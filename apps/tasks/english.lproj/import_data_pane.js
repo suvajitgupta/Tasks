@@ -44,7 +44,7 @@ Tasks.importDataPane = SCUI.ModalPane.create({
       layout: { top: 60, left: 10, right: 10, bottom: 40 },
       maxLength: 1000000,
       isTextArea: YES,
-      valueBinding: 'Tasks.importDataController.importData'
+      valueBinding: 'Tasks.importDataController.data'
     }),
     
     createMissingUsersCheckbox: SC.CheckboxView.design({
@@ -71,7 +71,7 @@ Tasks.importDataPane = SCUI.ModalPane.create({
 
     importButton: SC.ButtonView.design({
       layout: { width: 80, height: 30, right: 20, bottom: 8 },
-      isEnabledBinding: SC.Binding.oneWay('Tasks.importDataController.importData').bool(),
+      isEnabledBinding: SC.Binding.oneWay('Tasks.importDataController.data').bool(),
       keyEquivalent: 'return',
       isDefault: YES,
       title: "_Import".loc(),

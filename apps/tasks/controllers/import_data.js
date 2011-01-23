@@ -17,12 +17,12 @@ Tasks.importDataController = SC.ObjectController.create(
 /** @scope Tasks.importDataController.prototype */ {
   
   createMissingUsers: false,
-  importData: '',
+  data: '',
   
   /**
    * Parse data and create/load objects.
    */
-  parseAndLoadData: function() {
+  importData: function() {
     
     // Cache sendNotifications and turn off during importing
     var sendNotifications = CoreTasks.get('sendNotifications');
@@ -32,8 +32,8 @@ Tasks.importDataController = SC.ObjectController.create(
     var currentUserId = CoreTasks.getPath('currentUser.id');
     var currentProject = null;
     var createMissingUsers = this.get('createMissingUsers');
-    var importData = this.get('importData');
-    var lines = importData.split('\n');
+    var data = this.get('data');
+    var lines = data.split('\n');
     var description, nextLine, descriptionLine;
 
     for (var i = 0; i < lines.length; i++) {
@@ -156,7 +156,7 @@ Tasks.importDataController = SC.ObjectController.create(
     
     if(CoreTasks.get('autoSave')) Tasks.saveChanges();
     CoreTasks.set('sendNotifications', sendNotifications); // restore cached value
-    this.set('importData','');
+    this.set('data','');
     
     Tasks.statechart.sendEvent('close');
     
