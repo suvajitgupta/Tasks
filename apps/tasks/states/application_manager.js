@@ -100,6 +100,7 @@ Tasks.ApplicationManagerState = Ki.State.extend({
       Tasks.usersController.selectObject(CoreTasks.get('currentUser'));
       if(!CoreTasks.isCurrentUserAManager()) pane.setSmallSize();
       pane.append();
+      pane.focus();
     },
     
     addUser: function() {
@@ -115,7 +116,7 @@ Tasks.ApplicationManagerState = Ki.State.extend({
       if (selectedUser) userHash.role = selectedUser.get('role');
       var user = CoreTasks.createRecord(CoreTasks.User, userHash);
       Tasks.usersController.selectObject(user);
-      Tasks.usersSettingsPane.get('userInformation').get('fullNameField').becomeFirstResponder();
+      Tasks.usersSettingsPane.focus();
 
     },
 

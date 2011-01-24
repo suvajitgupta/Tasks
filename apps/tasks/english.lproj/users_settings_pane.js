@@ -185,6 +185,8 @@ Tasks.usersSettingsPane = SCUI.ModalPane.create({
     this.setPath('contentView.userManager.userEditorView.layout', { top: 0, left: 0, height: 228, right: 0 });
   },
   
-  userInformation: SC.outlet('contentView.userManager.userEditorView.userInformationView')
-  
+  focus: function() {
+    this.getPath('contentView.userManager.userEditorView.userInformationView.fullNameField').becomeFirstResponder();   
+  }
+    
 });
