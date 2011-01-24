@@ -18,21 +18,20 @@ Tasks.signupController = SC.ObjectController.create(
   
   _registeringUser: null,
   
-  openPanel: function() {
-    // console.log('DEBUG: signupController.openPanel()');
-    // Create a new user and start editing its properties.
+  /**
+   * Create a new guest user and select it for editing.
+   */
+  createUser: function() {
     var newUserHash = SC.clone(CoreTasks.User.NEW_USER_HASH);
     newUserHash.role = CoreTasks.USER_ROLE_GUEST;
-    
     this._registeringUser = CoreTasks.createRecord(CoreTasks.User, newUserHash);
     Tasks.usersController.selectObject(this._registeringUser);
-    
-    var pane = Tasks.get('signupPane');
-    pane.append();
-    pane.makeFirstResponder(pane.contentView.userInformation.fullNameField);
   },
   
-  register: function() {
+  /**
+   * Register new guest user with Server.
+   */
+  registerUser: function() {
     // console.log('DEBUG: register() loginName=' + Tasks.userController.get('loginName'));
     var params = {
       successCallback: this._userFound.bind(this),
@@ -77,19 +76,16 @@ Tasks.signupController = SC.ObjectController.create(
     Tasks.statechart.sendEvent('registrationSucceeded');
   },
   
-  // called to abort signup
-  cancel: function() {
+  /**
+   * Delete guest user when canceling signup.
+   */
+  deleteUser: function() {
     // Discard new user since signup was abandoned
     if(this._registeringUser) {
       this._registeringUser.destroy();
       this._registeringUser = null;
+      Tasks.usersController.set('selection', '');
     }
-  },
-
-  closePanel: function() {
-    // console.log('DEBUG: signupController.closePanel()');
-    Tasks.userController.clearLoginNameError();
-    Tasks.get('signupPane').remove();
   }
     
 });

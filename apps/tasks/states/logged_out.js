@@ -88,7 +88,10 @@ Tasks.LoggedOutState = Ki.State.extend({
     initialSubstate: 'ready',
     
     enterState: function() {
-      Tasks.signupController.openPanel();
+      Tasks.signupController.createUser();
+      var pane = Tasks.get('signupPane');
+      pane.append();
+      pane.makeFirstResponder(pane.contentView.userInformation.fullNameField);
     },
 
     // State to manage guest sign up
@@ -99,7 +102,7 @@ Tasks.LoggedOutState = Ki.State.extend({
       },
 
       cancel: function() {
-        Tasks.signupController.cancel();
+        Tasks.signupController.deleteUser();
         Tasks.statechart.gotoState('logIn');
       }
 
@@ -109,7 +112,7 @@ Tasks.LoggedOutState = Ki.State.extend({
     registration: Ki.State.design({
       
       enterState: function() {
-        Tasks.signupController.register();
+        Tasks.signupController.registerUser();
       },
 
       registrationSucceeded: function() {
@@ -123,7 +126,8 @@ Tasks.LoggedOutState = Ki.State.extend({
     }),
       
     exitState: function() {
-      Tasks.signupController.closePanel();
+      Tasks.userController.clearLoginNameError();
+      Tasks.get('signupPane').remove();
     }
 
   })
