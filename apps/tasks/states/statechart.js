@@ -5,9 +5,6 @@
  * License: Licened under MIT license (see license.js)
  */
 /*globals CoreTasks Tasks Ki sc_require */
-sc_require('core');
-sc_require('states/logged_out');
-sc_require('states/logged_in');
 
 // TODO: [MC/SG] make root responder work with Ki and then remove default responder in each panel
 
