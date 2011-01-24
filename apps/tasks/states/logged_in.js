@@ -10,6 +10,11 @@ Tasks.LoggedInState = Ki.State.extend({
   
   substatesAreConcurrent: YES,
   
+  enterState: function() {
+    Tasks.loadData();  
+    Tasks.getPath('mainPage.mainPane.projectsList').becomeFirstResponder();
+  },
+  
   // State to handle globally available actions
   applicationManager: Ki.State.plugin('Tasks.ApplicationManagerState'),
   

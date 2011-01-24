@@ -10,11 +10,6 @@ Tasks.ApplicationManagerState = Ki.State.extend({
       
   initialSubstate: 'ready',
   
-  enterState: function() {
-    Tasks.loadData();  
-    Tasks.getPath('mainPage.mainPane.projectsList').becomeFirstResponder();
-  },
-  
   // State indicating global action readiness
   ready: Ki.State.design({
     
