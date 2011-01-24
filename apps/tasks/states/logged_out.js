@@ -31,7 +31,12 @@ Tasks.LoggedOutState = Ki.State.extend({
     initialSubstate: 'ready',
     
     enterState: function() {
-      Tasks.loginController.openPanel();
+      if(!Tasks.panelOpen) {
+        Tasks.set('panelOpen', Tasks.LOGIN_PANEL);
+        var panel = Tasks.getPath('loginPage.panel');
+        panel.append();
+        panel.focus();
+      }
     },
 
     // State to manage sign up or sign in
@@ -66,7 +71,8 @@ Tasks.LoggedOutState = Ki.State.extend({
     }),
       
     exitState: function() {
-      Tasks.loginController.closePanel();
+      Tasks.getPath('loginPage.panel').remove();
+      Tasks.set('panelOpen', null);
     }
 
   }),
