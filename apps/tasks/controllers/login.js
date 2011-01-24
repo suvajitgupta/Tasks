@@ -18,15 +18,6 @@ Tasks.loginController = SC.ObjectController.create(
     loginName: '',
     password: '',
     
-    signin: function() {
-      var loginName = this.get('loginName');
-      var password = this.get('password');
-      if (loginName !== null && loginName !== '') {
-        var hashedPassword = (password === ''? '' : Tasks.userController.hashPassword(password));
-        Tasks.authenticate(loginName, hashedPassword);
-      }
-    },
-    
     loginErrorMessage: '',
     displayLoginError: function(errorMessage){
       this.set('loginErrorMessage', errorMessage);

@@ -57,7 +57,12 @@ Tasks.LoggedOutState = Ki.State.extend({
     authentication: Ki.State.design({
       
       enterState: function() {
-        Tasks.loginController.signin();
+        var loginName = Tasks.loginController.get('loginName');
+        var password = Tasks.loginController.get('password');
+        if (loginName !== null && loginName !== '') {
+          var hashedPassword = (password === ''? '' : Tasks.userController.hashPassword(password));
+          Tasks.authenticate(loginName, hashedPassword);
+        }
       },
 
       authenticationSucceeded: function() {
