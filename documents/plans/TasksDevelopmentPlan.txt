@@ -260,7 +260,7 @@ Servers @Active
 
 - Support Tasks database cleanup to remove soft-deleted records and handle pointers to non-existent records [SG] @Done %Passed
 ^ Add github "issues" DataStore (store additional data from Tasks as github issues tags) [JH2] <SG> $Feature @Active
-^ Add Jira DataStore [SE] <SG> $Feature
+^ Add Jira DataStore [JH2] <SG> $Feature
 
 #========================================================================================================================
 Styling @Active
