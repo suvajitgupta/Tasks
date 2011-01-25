@@ -1,8 +1,4 @@
-/*globals Tasks CoreTasks */
-
-/**
- * The main program - start off in first state.
- */
+/*globals Tasks CoreTasks sc_require */
 
 function main() { Tasks.main(); }
 
