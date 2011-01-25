@@ -64,7 +64,7 @@ Tasks.mainPageHelper = SC.Object.create({
   _listActions: function() {
     // console.log('DEBUG: _listActions()');
     var ret = [];
-    ret.push({ title: "_LaunchSettings".loc(), icon: 'settings-icon', action: 'displayUsersSettings', isEnabled: YES });
+    ret.push({ title: "_LaunchSettings".loc(), icon: 'settings-icon', action: 'showUsersSettingsPanel', isEnabled: YES });
     var autoSave = this.get('autoSave');
     ret.push({ title: "_AutoSave".loc(), icon: 'save-icon', action: 'toggleAutoSave', isEnabled: YES, checkbox: autoSave });
     if(Tasks.get('canServerSendNotifications')) {
@@ -74,16 +74,16 @@ Tasks.mainPageHelper = SC.Object.create({
     if(!Tasks.panelOpen) {
       ret.push({ isSeparator: YES });
       if(this.getPath('displayedTasksCount') > 0) {
-        ret.push({ title: "_LaunchStatistics".loc(), icon: 'statistics-icon', action: 'displayStatistics', isEnabled: YES });
+        ret.push({ title: "_LaunchStatistics".loc(), icon: 'statistics-icon', action: 'showStatisticsPanel', isEnabled: YES });
       }
-      ret.push({ title: "_LaunchImport".loc(), icon: 'import-icon', action: 'importDataAsText', isEnabled: YES });
-      ret.push({ title: "_LaunchExportText".loc(), icon: 'text-icon', action: 'exportDataAsText', isEnabled: YES });
+      ret.push({ title: "_LaunchImport".loc(), icon: 'import-icon', action: 'showTextImportPanel', isEnabled: YES });
+      ret.push({ title: "_LaunchExportText".loc(), icon: 'text-icon', action: 'showTextExportPanel', isEnabled: YES });
       if(!SC.platform.touch) {
-        ret.push({ title: "_LaunchExportHTML".loc(), icon: 'html-icon', action: 'exportDataAsHTML', isEnabled: YES });
+        ret.push({ title: "_LaunchExportHTML".loc(), icon: 'html-icon', action: 'showHTMLExportWindow', isEnabled: YES });
       }
     }
     ret.push({ isSeparator: YES });
-    ret.push({ title: "_LaunchHelp".loc(), icon: 'sc-icon-help-16', action: 'displayHelp', isEnabled: YES });
+    ret.push({ title: "_LaunchHelp".loc(), icon: 'sc-icon-help-16', action: 'showHelpWindow', isEnabled: YES });
     ret.push({ title: "_Logout".loc(), icon: 'logout-icon', action: 'logout', isEnabled: YES });
     this.set('actions', ret);
   }.observes('panelOpen', 'displayedTasksCount', 'autoSave', 'sendNotifications'),
@@ -353,7 +353,7 @@ Tasks.mainPage = SC.Page.design({
            icon: 'filter-icon',
            classNames: ['dark'],
            toolTip: "_FilterTooltip".loc(),
-           action: 'displayTasksFilter',
+           action: 'showTasksFilter',
            isEnabledBinding: SC.Binding.not('Tasks.mainPageHelper*panelOpen')
          }),
          filterCancelButton: SC.View.design(SC.Control, { // Filter cancel button

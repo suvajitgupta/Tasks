@@ -8,25 +8,25 @@
 
 Tasks.LoggedOutState = Ki.State.extend({
 
-  initialSubstate: 'ready',
+  initialSubstate: 'routing',
   
-  // Initial state from which it moves to logIn if authentication is needed
-  ready: Ki.State.design({
+  // Initial state from which application is 'routed' to appropriate place
+  routing: Ki.State.design({
     
     loginGuest: function() {
       Tasks.loginController.set('loginName', 'guest');
-      Tasks.statechart.gotoState('logIn');
+      Tasks.statechart.gotoState('showingLoginPanel');
       Tasks.statechart.sendEvent('signin');
     },
     
     loginUser: function() {
-      Tasks.statechart.gotoState('logIn');
+      Tasks.statechart.gotoState('showingLoginPanel');
     }
     
   }),
   
   // State prompting an existing user to sign up or sign in
-  logIn: Ki.State.design({
+  showingLoginPanel: Ki.State.design({
     
     initialSubstate: 'ready',
     
@@ -43,7 +43,7 @@ Tasks.LoggedOutState = Ki.State.extend({
     ready: Ki.State.design({
       
       signup: function() {
-        Tasks.statechart.gotoState('signUp');
+        Tasks.statechart.gotoState('showingSignupPanel');
       },
 
       signin: function() {
@@ -70,7 +70,7 @@ Tasks.LoggedOutState = Ki.State.extend({
       },
       
       authenticationFailed: function() {
-        Tasks.statechart.gotoState('loggedOut.logIn.ready');
+        Tasks.statechart.gotoState('loggedOut.showingLoginPanel.ready');
       }
       
     }),
@@ -83,7 +83,7 @@ Tasks.LoggedOutState = Ki.State.extend({
   }),
 
   // State prompting a new guest user to register
-  signUp: Ki.State.design({
+  showingSignupPanel: Ki.State.design({
     
     initialSubstate: 'ready',
     
@@ -103,7 +103,7 @@ Tasks.LoggedOutState = Ki.State.extend({
 
       cancel: function() {
         Tasks.signupController.deleteUser();
-        Tasks.statechart.gotoState('logIn');
+        Tasks.statechart.gotoState('showingLoginPanel');
       }
 
     }),
@@ -120,7 +120,7 @@ Tasks.LoggedOutState = Ki.State.extend({
       },
       
       registrationFailed: function() {
-        Tasks.statechart.gotoState('loggedOut.signUp.ready');
+        Tasks.statechart.gotoState('loggedOut.showingSignupPanel.ready');
       }
             
     }),

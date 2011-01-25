@@ -8,10 +8,10 @@
 
 Tasks.TaskManagerState = Ki.State.extend({
   
-  initialSubstate: 'ready',
+  initialSubstate: 'showingTasksList',
   
   // Initial state from which task management actions are handled
-  ready: Ki.State.design({
+  showingTasksList: Ki.State.design({
     
     addTask: function() {
       this._createTask(false);
@@ -209,18 +209,18 @@ Tasks.TaskManagerState = Ki.State.extend({
       }
     },
 
-    displayTasksFilter: function() {
-      this.gotoState('taskFilter');
+    showTasksFilter: function() {
+      this.gotoState('showingTasksFilter');
     },
 
-    editTask: function() {
-      this.gotoState('taskEditor');
+    showTaskEditor: function() {
+      this.gotoState('showingTaskEditor');
     }
 
   }),
   
   // State to manipulate task filter
-  taskFilter: Ki.State.design({
+  showingTasksFilter: Ki.State.design({
 
     enterState: function() {
       Tasks.filterSearchController.backupAttributeFilterCriteria();
@@ -254,12 +254,12 @@ Tasks.TaskManagerState = Ki.State.extend({
 
     cancel: function() {
       Tasks.filterSearchController.restoreAttributeFilterCriteria();
-      this.gotoState('loggedIn.taskManager.ready');
+      this.gotoState('loggedIn.taskManager.showingTasksList');
     },
 
     apply: function() {
       if(Tasks.recomputeTasksNeeded) Tasks.assignmentsController.computeTasks();
-      this.gotoState('loggedIn.taskManager.ready');
+      this.gotoState('loggedIn.taskManager.showingTasksList');
     },
 
     exitState: function() {
@@ -270,10 +270,10 @@ Tasks.TaskManagerState = Ki.State.extend({
   }),
   
   // State to edit task details
-  taskEditor: Ki.State.design({
+  showingTaskEditor: Ki.State.design({
 
     close: function() {
-      this.gotoState('loggedIn.taskManager.ready');
+      this.gotoState('loggedIn.taskManager.showingTasksList');
     },
 
     gotoPreviousTask: function() {

@@ -82,7 +82,7 @@ Tasks.projectEditorPage = SC.Page.create({
     },
 
     popup: function(project) {
-      Tasks.statechart.sendEvent('editProject');
+      Tasks.statechart.sendEvent('showProjectEditor');
       this.set('project', project);
       this._preEditing();
       this.append();

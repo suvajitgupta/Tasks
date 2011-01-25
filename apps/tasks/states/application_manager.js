@@ -8,13 +8,13 @@
 
 Tasks.ApplicationManagerState = Ki.State.extend({
       
-  initialSubstate: 'ready',
+  initialSubstate: 'readyForGlobalActions',
   
   // State indicating global action readiness
-  ready: Ki.State.design({
+  readyForGlobalActions: Ki.State.design({
     
-    displayUsersSettings: function() {
-      this.gotoState('usersSettings');
+    showUsersSettingsPanel: function() {
+      this.gotoState('showingUsersSettingsPanel');
     },
         
     toggleAutoSave: function(){
@@ -25,23 +25,23 @@ Tasks.ApplicationManagerState = Ki.State.extend({
       CoreTasks.set('sendNotifications', !CoreTasks.get('sendNotifications'));
     },
 
-    displayStatistics: function() {
-      this.gotoState('statistics');
+    showStatisticsPanel: function() {
+      this.gotoState('showingStatisticsPanel');
     },
 
-    importDataAsText: function() {
-      this.gotoState('textImport');
+    showTextImportPanel: function() {
+      this.gotoState('showingTextImportPanel');
     },
 
-    exportDataAsText: function() {
-      this.gotoState('textExport');
+    showTextExportPanel: function() {
+      this.gotoState('showingTextExportPanel');
     },
 
-    exportDataAsHTML: function() {
+    showHTMLExportWindow: function() {
       Tasks.exportDataController.exportData('HTML');
     },
 
-    displayHelp: function() {
+    showHelpWindow: function() {
       if(SC.platform.touch) window.location = Tasks.getHelpUrl();
       else window.open(Tasks.getBaseUrl() + '#help', '', 'width=1000,height=750,menubar=no,location=no,toolbar=no,directories=no,status=no');
     },
@@ -88,7 +88,7 @@ Tasks.ApplicationManagerState = Ki.State.extend({
   }),
   
   // State to handle user info/settings
-  usersSettings: Ki.State.design({
+  showingUsersSettingsPanel: Ki.State.design({
 
     enterState: function() {
       var pane = Tasks.get('usersSettingsPane');
@@ -165,7 +165,7 @@ Tasks.ApplicationManagerState = Ki.State.extend({
     },
 
     close: function() {
-      this.gotoState('loggedIn.applicationManager.ready');
+      this.gotoState('loggedIn.applicationManager.readyForGlobalActions');
     },
 
     exitState: function() {
@@ -176,7 +176,7 @@ Tasks.ApplicationManagerState = Ki.State.extend({
   }),
 
   // State to show statistics
-  statistics: Ki.State.design({
+  showingStatisticsPanel: Ki.State.design({
 
     enterState: function() {
       Tasks.statisticsController.computeStatistics();
@@ -184,7 +184,7 @@ Tasks.ApplicationManagerState = Ki.State.extend({
     },
     
     close: function() {
-      this.gotoState('loggedIn.applicationManager.ready');
+      this.gotoState('loggedIn.applicationManager.readyForGlobalActions');
     },
 
     exitState: function() {
@@ -194,7 +194,7 @@ Tasks.ApplicationManagerState = Ki.State.extend({
   }),
 
   // State to manage text import
-  textImport: Ki.State.design({
+  showingTextImportPanel: Ki.State.design({
 
     enterState: function() {
       var pane = Tasks.getPath('importDataPane');
@@ -207,7 +207,7 @@ Tasks.ApplicationManagerState = Ki.State.extend({
     },
 
     close: function() {
-      this.gotoState('loggedIn.applicationManager.ready');
+      this.gotoState('loggedIn.applicationManager.readyForGlobalActions');
     },
 
     exitState: function() {
@@ -217,14 +217,14 @@ Tasks.ApplicationManagerState = Ki.State.extend({
   }),
 
   // State to manage text export
-  textExport: Ki.State.design({
+  showingTextExportPanel: Ki.State.design({
 
     enterState: function() {
       Tasks.exportDataController.exportData('Text');
     },
     
     close: function() {
-      this.gotoState('loggedIn.applicationManager.ready');
+      this.gotoState('loggedIn.applicationManager.readyForGlobalActions');
     },
 
     exitState: function() {

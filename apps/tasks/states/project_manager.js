@@ -8,10 +8,10 @@
 
 Tasks.ProjectManagerState = Ki.State.extend({
   
-  initialSubstate: 'ready',
+  initialSubstate: 'showingProjectsList',
   
   // Initial state from which project management actions are handled
-  ready: Ki.State.design({
+  showingProjectsList: Ki.State.design({
     
     addProject: function() {
       this._createProject(false);
@@ -106,17 +106,17 @@ Tasks.ProjectManagerState = Ki.State.extend({
       Tasks.projectsController.set('developmentStatus', CoreTasks.STATUS_DONE);
     },
     
-    editProject: function() {
-      this.gotoState('projectEditor');
+    showProjectEditor: function() {
+      this.gotoState('showingProjectEditor');
     }
 
   }),
   
   // State to edit project details
-  projectEditor: Ki.State.design({
+  showingProjectEditor: Ki.State.design({
 
     close: function() {
-      this.gotoState('loggedIn.projectManager.ready');
+      this.gotoState('loggedIn.projectManager.showingProjectsList');
     },
 
     exitState: function() {

@@ -173,7 +173,7 @@ Tasks.TaskEditorView = SC.View.extend(
       this._postEditing();
     }
     else {
-      Tasks.statechart.sendEvent('editTask');
+      Tasks.statechart.sendEvent('showTaskEditor');
       Tasks.setPath('mainPage.mainPane.tasksSceneView.nowShowing', 'taskEditor');
       Tasks.set('panelOpen', Tasks.TASK_EDITOR);
     }

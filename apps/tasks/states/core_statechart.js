@@ -1,14 +1,12 @@
 /**
- * A mixin that defines all of the state transitions.
+ * A mixin that defines the application statechart.
  *
  * @author Suvajit Gupta
  * License: Licened under MIT license (see license.js)
  */
-/*globals CoreTasks Tasks Ki sc_require */
+/*globals CoreTasks Tasks Ki */
 
 // TODO: [MC/SG] make root responder work with Ki and then remove default responder in each panel
-
-// Overall statechart for the application
 Tasks.mixin( /** @scope Tasks */ {
   
   statechart: Ki.Statechart.create({
