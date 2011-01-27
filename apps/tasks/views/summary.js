@@ -22,6 +22,8 @@ Tasks.SummaryView = SC.LabelView.extend(
   
   render: function(context, firstTime) {
 
+    // console.log('DEBUG: SummaryView.render()');
+    
     var message = '';
     
     if(this.get('panelOpen') !== Tasks.TASK_EDITOR) {
