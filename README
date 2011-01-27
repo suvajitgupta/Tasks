@@ -13,9 +13,7 @@ cd sai
 git checkout -b tasks origin/gd/AutoScale
 cd ../
 git clone git://github.com/etgryphon/sproutcore-uds.git scuds
-cd scuds
-git checkout -b tasks origin/se/tasks
-cd ../../
+cd ../
 
 If you don't have the latest Ruby gems, type...
 
