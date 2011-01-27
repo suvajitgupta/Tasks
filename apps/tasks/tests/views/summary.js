@@ -15,24 +15,24 @@ var noSelection = SC.Object.create({ length: 0 });
 var singleSelection = SC.Object.create({ length: 1 });
 
 var pane = SC.ControlTestPane.design()
-  .add('null', Tasks.SummaryView, {
+  .add('startup', Tasks.SummaryView, {
     layout: { top: 0, height: 16, width: 250, left: 0 }
   })
   .add('empty', Tasks.SummaryView, {
     layout: { top: 0, height: 16, width: 250, left: 0 },
-    assignmentsSummary: "0 assignees & 0 tasks",
+    assignmentsSummary: '0 assignees & 0 tasks',
     projectsSelection: noSelection,
     tasksSelection: noSelection
   })
   .add('tasks', Tasks.SummaryView, {
     layout: { top: 0, height: 16, width: 250, left: 0 },
-    assignmentsSummary: "3 assignees & 12 tasks",
+    assignmentsSummary: '3 assignees & 12 tasks',
     projectsSelection: singleSelection,
     tasksSelection: singleSelection
   })
   .add('team', Tasks.SummaryView, {
     layout: { top: 0, height: 16, width: 250, left: 0 },
-    assignmentsSummary: "3 assignees & 2 red flags",
+    assignmentsSummary: '3 assignees & 2 red flags',
     projectsSelection: singleSelection,
     tasksSelection: singleSelection
   });
@@ -43,26 +43,26 @@ window.pane = pane;
 // ..........................................................
 // Summary View Tests
 // 
-module("Tasks.SummaryView tests", pane.standardSetup());
+module('Tasks.SummaryView tests', pane.standardSetup());
 
-test("startup", function(){
-  var view = pane.view('null');
+test('startup', function(){
+  var view = pane.view('startup');
   ok(view, 'view should render');
   equals(view.$().get(0).innerHTML, '', 'Null summary');
 });
 
-test("empty", function(){
+test('empty', function(){
   var view = pane.view('empty');
   equals(view.$().get(0).innerHTML, '0 assignees &amp; 0 tasks displayed, 0 projects &amp; 0 tasks selected', 'Empty summary');
 });
 
 
-test("TASKS display mode", function(){
+test('TASKS display mode', function(){
   var view = pane.view('tasks');
   equals(view.$().get(0).innerHTML, '3 assignees &amp; 12 tasks displayed, 1 projects &amp; 1 tasks selected', 'Sample TASKS display mode summary');
 });
 
-test("TEAM display mode", function(){
+test('TEAM display mode', function(){
   var view = pane.view('team');
   equals(view.$().get(0).innerHTML, '3 assignees &amp; 2 red flags displayed, 1 projects &amp; 1 tasks selected', 'Sample TEAM display mode summary');
 });
