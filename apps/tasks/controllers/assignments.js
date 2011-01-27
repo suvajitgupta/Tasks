@@ -276,15 +276,15 @@ Tasks.assignmentsController = SC.ArrayController.create(
    */
   _createAssignmentNode: function(assignmentNodes, assigneeTasks, projectTimeLeft) {
     
+    var task, tasks = assigneeTasks.tasks;
+    var tasksCount = tasks.get('length');
+    if (tasksCount === 0) return; // nothing to do
+    
     var displayName = assigneeTasks.assignee? assigneeTasks.assignee.get('displayName') : CoreTasks.USER_UNASSIGNED;
     var taskWithUnspecifiedEffort = false, doneTaskWithUnspecifiedEffort = false;
     var effortString, totalFinishedEffortMin = 0, totalFinishedEffortMax = 0, totalEffortMin = 0, totalEffortMax = 0, effortMin, effortMax;
     var totalFinishedCount = 0, totalLeftCount = 0;
-    var task, tasks = assigneeTasks.tasks;
-    var tasksCount = tasks.get('length');
-    var riskyTasksCount = 0;
-    var failedTasksCount = 0;
-    if (tasksCount === 0) return; // nothing to do
+    var riskyTasksCount = 0, failedTasksCount = 0;
     
     for (var i = 0; i < tasksCount; i++) {
       
