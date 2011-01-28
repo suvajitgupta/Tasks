@@ -37,21 +37,24 @@
   color: #DDD !important;
 }
 
-.tasks-logo {
+.tasks-logo-small {
   margin-top: -15px !important;
   background: static_url('images/tasks-logo-small.png') no-repeat 0 0 !important;
 }
 
 .tasks-version {
+  border: 1px solid #111 !important;
+  position: absolute !important;
+  top: 5% !important;
+  right: 0px !important;
+  line-height: 1 !important;
   font-size: 10px !important;
   font-weight: bold !important;
   font-style: italic !important;
   text-align: center !important;
-  line-height: 11px !important;
-  margin-top: -11px !important;
-  color: #333 !important;
-  background: #2BB9FF none repeat scroll 0 0 !important;
-	padding: 0px !important;
+  color: #111 !important;
+  background: #DDD none repeat scroll 0 0 !important;
+	padding: 1px 6px !important;
   -moz-border-radius: 15px;
   -webkit-border-radius: 15px;
 }

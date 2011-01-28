@@ -1,7 +1,7 @@
 // ==========================================================================
 // Project: Tasks 
 // ==========================================================================
-/*globals CoreTasks Tasks sc_require SCUI sc_static */
+/*globals CoreTasks Tasks sc_require SCUI */
 sc_require('mixins/localized_label');
 
 /** 

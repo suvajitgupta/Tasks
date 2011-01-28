@@ -1,7 +1,7 @@
 // ==========================================================================
 // Project: Tasks
 // ==========================================================================
-/*globals Tasks SCUI */
+/*globals Tasks sc_static */
 
 /** 
 
@@ -14,22 +14,18 @@
 Tasks.LogoView = SC.View.extend(
 /** @scope Tasks.LogoView.prototype */ {
   
-  childViews: 'tasksLabel versionLabel'.w(),
+  logo: '',
+  toolTip: '',
+  version: '',
+  displayProperties: ['logo', 'toolTip', 'version'],
   
-  tasksLabel: SC.LabelView.design(SCUI.ToolTip, {
-    layout: { centerY: 0, height: 27, left: 0, width: 71 },
-    toolTip: "_Credits".loc(),
-    classNames: ['tasks-logo'],
-    // TODO: [SG] remove when SCUI.ToolTip works with SC master (new rendering subsystem)
-    render: function() {
-      sc_super();
-    }
-  }),
-
-  versionLabel: SC.LabelView.design({
-    layout: { centerY: -3, height: 11, left: 72, width: 30 },
-    classNames: ['tasks-version'],
-    value: Tasks.VERSION  
-  })
+  render: function(context, firstTime) {
+    // console.log('DEBUG: LogoView.render()');
+    sc_super();
+    context = context.addClass(this.get('logo'));
+    var toolTip = this.get('toolTip');
+    if(toolTip !== '') context = context.attr({'title': toolTip,'alt': toolTip});
+    context = context.push('<span class="tasks-version">' + this.get('version') + '</span>');
+  }
 
 });

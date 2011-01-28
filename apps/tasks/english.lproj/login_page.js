@@ -26,11 +26,12 @@ Tasks.loginPage = SC.Page.create({
       
       layout: { centerX: 0, centerY: 0, width: 390, height: 225 },
       classNames: ['login-body'],
-      childViews: 'logo guestSignupButton loginNameField passwordField authenticatingMessageLabel loginErrorMessageLabel loadDoneProjectDataCheckbox signinButton'.w(),
+      childViews: 'tasksLogo guestSignupButton loginNameField passwordField authenticatingMessageLabel loginErrorMessageLabel loadDoneProjectDataCheckbox signinButton'.w(),
       
-      logo: SC.View.design({
-        layout: { top: 0, left: 50, width: 153, height: 56 },
-        classNames: ['tasks-logo-large']
+      tasksLogo: Tasks.LogoView.design({
+        layout: { left: 20, width: 185, top: 0, height: 56 },
+        logo: 'tasks-logo-large',
+        version: Tasks.VERSION
       }),
       
       guestSignupButton: document.title.match(/Dev|Demo|SproutCore|Greenhouse/)? SC.ButtonView.design({
@@ -91,7 +92,7 @@ Tasks.loginPage = SC.Page.create({
     },
     
     setAuthenticatingMessageVisibility: function(isVisible) {
-      this.contentView.authenticatingMessageLabel.set('isVisible', isVisible)
+      this.contentView.authenticatingMessageLabel.set('isVisible', isVisible);
     }
     
   })

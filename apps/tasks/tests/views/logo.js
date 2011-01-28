@@ -5,13 +5,22 @@
  *
  * @author Suvajit Gupta
  */
+/*globals htmlbody */
+// http://localhost:4400/tasks/en/current/tests/views/logo.html
+
+htmlbody('<style> .wrapper { background-color: #3D3D3D; } </style>');
 
 var pane = SC.ControlTestPane.design()
-  .add('null', Tasks.LogoView, {
-    layout: { left: 115, width: 145, centerY: 0, height: 27 }
+  .add('Tasks small/tooltip', Tasks.LogoView, {
+    layout: { left: 0, width: 104, centerY: 0, height: 27 },
+    logo: "tasks-logo-small",
+    toolTip: "Show Tasks credits",
+    version: "1.5"
   })
-  .add('null', Tasks.LogoView, {
-    layout: { left: 78, width: 145, centerY: 0, height: 27 }
+  .add('Tasks large/no tooltip', Tasks.LogoView, {
+    layout: { left: 0, width: 185, centerY: 0, height: 56 },
+    logo: "tasks-logo-large",
+    version: "Beta"
   });
 pane.show(); // add a test to show the test pane
 window.pane = pane ;

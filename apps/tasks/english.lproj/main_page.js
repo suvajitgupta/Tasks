@@ -153,7 +153,10 @@ Tasks.mainPage = SC.Page.design({
         }), // installationLogo
         
         tasksLogo: Tasks.LogoView.design({
-          layout: { left: Tasks._wideLogo? 115 : 78, width: 145, centerY: 0, height: 27 }
+          layout: { left: Tasks._wideLogo? 115 : 78, width: 104, centerY: 0, height: 27 },
+          logo: 'tasks-logo-small',
+          toolTip: "_Credits".loc(),
+          version: Tasks.VERSION
         })
         
       }), // topToolBar
