@@ -226,7 +226,6 @@ Tasks.tasksController = SC.TreeController.create(SC.CollectionViewDelegate,
     return value;
   }.property('selection', '_watchCount').cacheable(),
   
-  // TODO: [SG] see why clippy icon flashes when task editor select field view menus popup
   _panelOpen: null,
   _panelOpenBinding: SC.Binding.oneWay('Tasks*panelOpen'),
   displayClippy: function() {
