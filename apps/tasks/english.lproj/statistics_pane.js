@@ -18,8 +18,6 @@ sc_require('views/numerical_statistics');
 
 Tasks.statisticsPane = SCUI.ModalPane.create({
   
-  defaultResponder: 'Tasks.statechart',
-
   isResizable: NO,
   title: "_Statistics".loc(),
   titleIcon: 'statistics-icon',

@@ -6,7 +6,6 @@
  */
 /*globals CoreTasks Tasks Ki */
 
-// TODO: [MC/SG] make root responder work with Ki and then remove default responder in each panel
 Tasks.mixin( /** @scope Tasks */ {
   
   statechart: Ki.Statechart.create({

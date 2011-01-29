@@ -13,8 +13,6 @@ sc_require('core');
   
 */
 Tasks.exportDataPane = SCUI.ModalPane.create({
-    
-  defaultResponder: 'Tasks.statechart',
 
   title: "_Export".loc(),
   titleIcon: 'text-icon',

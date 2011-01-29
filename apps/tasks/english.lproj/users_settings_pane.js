@@ -18,8 +18,6 @@ sc_require('views/user_information');
 */
 Tasks.usersSettingsPane = SCUI.ModalPane.create({
     
-  defaultResponder: 'Tasks.statechart',
-
   title: "_UsersSettings".loc(),
   titleIcon: 'settings-icon',
   titleBarHeight: 40,

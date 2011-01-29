@@ -14,8 +14,6 @@ sc_require('core');
   
 */
 Tasks.importDataPane = SCUI.ModalPane.create({
-    
-  defaultResponder: 'Tasks.statechart',
 
   title: "_Import".loc(),
   titleIcon: 'import-icon',

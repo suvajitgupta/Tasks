@@ -17,8 +17,6 @@ Tasks.loginPage = SC.Page.create({
   
   panel: SC.PanelPane.create({
     
-    defaultResponder: 'Tasks.statechart',
-
     layout: { top: 0, bottom: 0, left: 0, right: 0 },
     classNames: ['login-page'],
     

@@ -16,8 +16,6 @@ sc_require('core');
 
 Tasks.signupPane = SC.PanelPane.create({
 
-  defaultResponder: 'Tasks.statechart',
-
   layout: { centerX: 0, width: 450, centerY: 0, height: 215 },
   
   contentView: SC.View.design({

@@ -31,8 +31,6 @@ Tasks.projectEditorPage = SC.Page.create({
   panel: null,
   panelView: SCUI.ModalPane.extend({
 
-    defaultResponder: 'Tasks.statechart',
-
     project: null,
     titleBarHeight: 40,
     minWidth: 700,

@@ -13,6 +13,7 @@ Tasks.main = function main() {
   // console.log('DEBUG: "Tasks" started at: %@'.fmt(new Date()));
   CoreTasks.dataSaveErrorCallback = Tasks.dataSaveErrorCallback;
   Tasks.registerRoutes();
+  SC.RootResponder.responder.set('defaultResponder', Tasks.statechart);
   Tasks.statechart.initStatechart();
   
   // Setup timer to refresh project countDowns

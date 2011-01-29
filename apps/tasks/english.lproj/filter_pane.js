@@ -15,8 +15,6 @@ sc_require('core');
 
 Tasks.filterPane = SC.SheetPane.create({  
   
-  defaultResponder: 'Tasks.statechart',
-
   layout: { centerX: 0, height: Tasks.softwareMode? 495 : 390, width: 320 },
   classNames: ['filter-pane'],
   
