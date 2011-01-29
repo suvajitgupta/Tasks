@@ -105,8 +105,6 @@ Tasks.mainPage = SC.Page.design({
   
  mainPane: SC.MainPane.design({
 
-   defaultResponder: 'Tasks.statechart',
-   
    welcomeMessage: SC.outlet('masterDetailView.detailView.topToolbar.welcomeMessageLabel'),
    projectsList:   SC.outlet('masterDetailView.masterView.contentView.projectsList.contentView'),
    tasksSceneView: SC.outlet('masterDetailView.detailView.contentView.tasksSceneView'),
@@ -495,8 +493,6 @@ Tasks.mainPage = SC.Page.design({
    }), // mainPane
    
    tasksList: SC.ScrollView.design({
-
-     classNames: ['tasks-pane'],
 
      contentView: Tasks.ListView.design({
        contentValueKey: 'displayName',
