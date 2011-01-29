@@ -12,11 +12,11 @@
  * Task pane/editor styles
  */
  
-.sc-collection-view.sc-list-view.sc-list-view.tasks-pane-inner {
+.sc-collection-view.sc-list-view.sc-list-view.tasks-pane {
   background: none;
 }
 
-.sc-view.sc-ghost-view .sc-collection-view.sc-list-view.sc-list-view.tasks-pane-inner {
+.sc-view.sc-ghost-view .sc-collection-view.sc-list-view.sc-list-view.tasks-pane {
   background: none !important;
 }
 
@@ -238,12 +238,12 @@
   -webkit-box-shadow: inset 0px 2px 2px #FAA;
 }
 
-.tasks-pane-inner .sc-view.sc-list-item-view.sc-collection-item.sc-group-item.assignee-item label {
+.tasks-pane .sc-view.sc-list-item-view.sc-collection-item.sc-group-item.assignee-item label {
   left: 6px !important;
   margin-top: -14px !important;
 }
 
-.tasks-pane-inner .assignee-item .sc-outline .count,
+.tasks-pane .assignee-item .sc-outline .count,
 .assignee-item.incompleteEffortWarning .sc-outline .count.finished {
   top: -2px !important;
   color: #555 !important;
@@ -319,7 +319,7 @@
   left: 53px !important;
 }
 
-.tasks-pane-inner .sc-view.sc-list-item-view.sc-collection-item.task-item .sc-outline label {
+.tasks-pane .sc-view.sc-list-item-view.sc-collection-item.task-item .sc-outline label {
   top: 9px !important;
   left: 55px !important;
   right: 50px !important;
@@ -328,7 +328,7 @@
   opacity: 1 !important;
 }
 
-.tasks-pane-inner .sc-view.sc-list-item-view.sc-collection-item.task-item.task-type-displayed label {
+.tasks-pane .sc-view.sc-list-item-view.sc-collection-item.task-item.task-type-displayed label {
   left: 73px !important;
 }
 
@@ -452,8 +452,8 @@
 .task-item.hover {
   background: #CCC none repeat scroll 0 0 !important;
 }
-.tasks-pane-inner .task-item.sel,
-.tasks-pane-inner .task-item.sel.hover {
+.tasks-pane .task-item.sel,
+.tasks-pane .task-item.sel.hover {
   background: #9CF none repeat scroll 0 0 !important;
 }
 

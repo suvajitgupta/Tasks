@@ -175,7 +175,7 @@ Tasks.mainPage = SC.Page.design({
             selectionBinding: 'Tasks.projectsController.selection',
             localize: YES,
             rowHeight: 24,
-            classNames: ['projects-pane-inner'],
+            classNames: ['projects-pane'],
             hasContentIcon: YES,
             contentIconKey: 'icon',
             exampleView: Tasks.ProjectItemView,
@@ -494,6 +494,7 @@ Tasks.mainPage = SC.Page.design({
    
    tasksList: SC.ScrollView.design({
 
+     classNames: ['tasks-pane'],
      contentView: Tasks.ListView.design({
        contentValueKey: 'displayName',
        contentUnreadCountKey: 'displayEffort',
@@ -501,7 +502,6 @@ Tasks.mainPage = SC.Page.design({
        selectionBinding: 'Tasks.tasksController.selection',
        localize: YES,
        rowHeight: 24,
-       classNames: ['tasks-pane-inner'],
        hasContentIcon: Tasks.softwareMode,
        contentIconKey: 'icon',
        exampleView: Tasks.TaskItemView,

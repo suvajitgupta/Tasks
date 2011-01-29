@@ -12,7 +12,7 @@ var properlyloadedUser = SC.Object.create({ displayName: "Josh Holt (JH2)", disp
 var underloadedUser = SC.Object.create({ displayName: "Sean Eidemiller (SE)", displayEffort: "2 tasks left", finishedEffort: "3 tasks finished", tasksCount: 3, loading: CoreTasks.USER_UNDER_LOADED });
 var notLoadedUser = SC.Object.create({ displayName: "Unassigned", tasksCount: 0, loading: CoreTasks.USER_NOT_LOADED });
 
-var pane = SC.ControlTestPane.design({ classNames: [ 'tasks-pane-inner' ] })
+var pane = SC.ControlTestPane.design({ classNames: [ 'tasks-pane' ] })
   .add('OverloadedUser', Tasks.AssigneeItemView, {
     disclosureState: SC.BRANCH_CLOSED,
     contentValueKey: 'displayName',

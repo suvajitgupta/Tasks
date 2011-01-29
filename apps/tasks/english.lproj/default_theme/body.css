@@ -83,14 +83,14 @@ body.sc-theme,
   width: 11px !important;
 }
 
-.projects-pane-inner .recently-updated,
-.users-pane-inner .recently-updated {
+.projects-pane .recently-updated,
+.users-pane .recently-updated {
   background: static_url('images/white-dot.png') no-repeat 0 0;
 }
 
-.tasks-pane-inner .recently-updated,
-.projects-pane-inner .sel .recently-updated,
-.users-pane-inner .sel .recently-updated {
+.tasks-pane .recently-updated,
+.projects-pane .sel .recently-updated,
+.users-pane .sel .recently-updated {
   background: static_url('images/black-dot.png') no-repeat 0 0;
 }
 
@@ -191,8 +191,8 @@ body.sc-theme,
   left: 5px !important;
 }
 
-.projects-pane-inner .sc-list-item-view img.icon,
-.users-pane-inner .sc-list-item-view img.icon {
+.projects-pane .sc-list-item-view img.icon,
+.users-pane .sc-list-item-view img.icon {
   left: 0px !important;
 }
 

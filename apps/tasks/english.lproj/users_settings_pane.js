@@ -67,7 +67,7 @@ Tasks.usersSettingsPane = SCUI.ModalPane.create({
           selectionBinding: 'Tasks.usersController.selection',
           localize: YES,
           rowHeight: 24,
-          classNames: ['users-pane-inner'],
+          classNames: ['users-pane'],
           hasContentIcon: YES,
           contentIconKey: 'icon',
           exampleView: Tasks.UserItemView,

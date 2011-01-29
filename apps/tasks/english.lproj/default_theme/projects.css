@@ -24,10 +24,10 @@
 }
 
 .projects-pane .sc-view.sc-container-view,
-.sc-view.sc-collection-view.sc-list-view.sc-list-view.projects-pane-inner,
-.sc-theme.focus .sc-view.sc-collection-view.sc-list-view.sc-list-view.projects-pane-inner,
-.sc-view.sc-collection-view.sc-list-view.sc-list-view.users-pane-inner,
-.sc-theme.focus .sc-view.sc-collection-view.sc-list-view.sc-list-view.users-pane-inner {
+.sc-view.sc-collection-view.sc-list-view.sc-list-view.projects-pane,
+.sc-theme.focus .sc-view.sc-collection-view.sc-list-view.sc-list-view.projects-pane,
+.sc-view.sc-collection-view.sc-list-view.sc-list-view.users-pane,
+.sc-theme.focus .sc-view.sc-collection-view.sc-list-view.sc-list-view.users-pane {
   background: none;
 }
 
@@ -35,22 +35,22 @@
   background: none !important;
 }
 
-.projects-pane-inner .sc-collection-item,
-.users-pane-inner .sc-collection-item {
+.projects-pane .sc-collection-item,
+.users-pane .sc-collection-item {
 	border: 1px solid #252525 !important;
 }
 
-.projects-pane-inner .sc-collection-item,
-.projects-pane-inner .sc-collection-item .sc-outline,
-.users-pane-inner .sc-collection-item,
-.users-pane-inner .sc-collection-item .sc-outline {
+.projects-pane .sc-collection-item,
+.projects-pane .sc-collection-item .sc-outline,
+.users-pane .sc-collection-item,
+.users-pane .sc-collection-item .sc-outline {
   left: 24px !important;
   -moz-border-radius: 3px !important;
   -webkit-border-radius: 3px !important;
 }
 
-.projects-pane-inner .sc-collection-item.sc-group-item.hover,
-.users-pane-inner .sc-collection-item.sc-group-item.hover {
+.projects-pane .sc-collection-item.sc-group-item.hover,
+.users-pane .sc-collection-item.sc-group-item.hover {
   background: none !important;
 }
 
@@ -59,14 +59,14 @@
  * Project group item styles
  */
  
-.projects-pane-inner .sc-view.sc-list-item-view.sc-collection-item.sc-group-item,
-.users-pane-inner .sc-view.sc-list-item-view.sc-collection-item.sc-group-item {
+.projects-pane .sc-view.sc-list-item-view.sc-collection-item.sc-group-item,
+.users-pane .sc-view.sc-list-item-view.sc-collection-item.sc-group-item {
   left: 6px !important;
   color: #777 !important;
 }
 
-.projects-pane-inner .sc-group-item .sc-outline,
-.users-pane-inner .sc-group-item .sc-outline {
+.projects-pane .sc-group-item .sc-outline,
+.users-pane .sc-group-item .sc-outline {
   top: 1px !important;
   bottom: 0px !important;
   left: 0px !important;
@@ -77,8 +77,8 @@
   -webkit-box-shadow: inset 0 3px 8px rgba(150,150,150,.6), 0 1px 0 rgba(0,0,0,.4);
 }
 
-.projects-pane-inner .sc-view.sc-list-item-view.sc-collection-item.sc-group-item .sc-outline label,
-.users-pane-inner .sc-view.sc-list-item-view.sc-collection-item.sc-group-item .sc-outline label {
+.projects-pane .sc-view.sc-list-item-view.sc-collection-item.sc-group-item .sc-outline label,
+.users-pane .sc-view.sc-list-item-view.sc-collection-item.sc-group-item .sc-outline label {
   left: 24px !important;
   color: #EEE !important;
 }
@@ -88,16 +88,16 @@
  * Project list item styles
  */
  
-.projects-pane-inner .sc-collection-item.project-item,
-.users-pane-inner .sc-collection-item.user-item {
+.projects-pane .sc-collection-item.project-item,
+.users-pane .sc-collection-item.user-item {
   margin-top: 1px !important;
   left: 1px !important;
   right: 1px !important;
   background-color: #353535 !important;
 }
 
-.projects-pane-inner .sc-view.sc-list-item-view.sc-collection-item.project-item.hover,
-.users-pane-inner .sc-view.sc-list-item-view.sc-collection-item.user-item.hover {
+.projects-pane .sc-view.sc-list-item-view.sc-collection-item.project-item.hover,
+.users-pane .sc-view.sc-list-item-view.sc-collection-item.user-item.hover {
   background-color: #252525 !important;
 }
 .project-item.hover .project-margin {
@@ -107,24 +107,24 @@
 }
 
 
-.projects-pane-inner .sc-group-item.sel .sc-outline,
-.projects-pane-inner .sc-view.sc-list-item-view.sc-collection-item.sc-group-item.sel .sc-outline label,
-.sc-list-view.sc-list-view.projects-pane-inner .sc-collection-item.sel,
-.sc-list-view.sc-list-view.projects-pane-inner .sc-collection-item.sel.hover,
-.users-pane-inner .sc-group-item.sel .sc-outline,
-.users-pane-inner .sc-view.sc-list-item-view.sc-collection-item.sc-group-item.sel .sc-outline label,
-.sc-list-view.sc-list-view.users-pane-inner .sc-collection-item.sel,
-.sc-list-view.sc-list-view.users-pane-inner .sc-collection-item.sel.hover {
+.projects-pane .sc-group-item.sel .sc-outline,
+.projects-pane .sc-view.sc-list-item-view.sc-collection-item.sc-group-item.sel .sc-outline label,
+.sc-list-view.sc-list-view.projects-pane .sc-collection-item.sel,
+.sc-list-view.sc-list-view.projects-pane .sc-collection-item.sel.hover,
+.users-pane .sc-group-item.sel .sc-outline,
+.users-pane .sc-view.sc-list-item-view.sc-collection-item.sc-group-item.sel .sc-outline label,
+.sc-list-view.sc-list-view.users-pane .sc-collection-item.sel,
+.sc-list-view.sc-list-view.users-pane .sc-collection-item.sel.hover {
   height: 22px !important;
   color: #000 !important;
   background: #9CF !important;
   border-color: #000 !important;
 }
 
-.sc-list-view.sc-list-view.projects-pane-inner .sc-collection-item.project-item.sel,
-.sc-list-view.sc-list-view.projects-pane-inner .sc-collection-item.project-item.sel.hover,
-.sc-list-view.sc-list-view.users-pane-inner .sc-collection-item.user-item.sel.hover,
-.sc-list-view.sc-list-view.users-pane-inner .sc-collection-item.user-item.sel {
+.sc-list-view.sc-list-view.projects-pane .sc-collection-item.project-item.sel,
+.sc-list-view.sc-list-view.projects-pane .sc-collection-item.project-item.sel.hover,
+.sc-list-view.sc-list-view.users-pane .sc-collection-item.user-item.sel.hover,
+.sc-list-view.sc-list-view.users-pane .sc-collection-item.user-item.sel {
   font-weight: normal !important;
 }
 
@@ -146,25 +146,25 @@
 	width: 16px !important;
 }
 
-.projects-pane-inner .sc-collection-item label,
-.users-pane-inner .sc-collection-item label {
+.projects-pane .sc-collection-item label,
+.users-pane .sc-collection-item label {
   color: #CCC;
 }
 
-.projects-pane-inner .sc-collection-item.sel label,
-.users-pane-inner .sc-collection-item.sel label {
+.projects-pane .sc-collection-item.sel label,
+.users-pane .sc-collection-item.sel label {
   color: #222;
 }
 
-.projects-pane-inner .sc-view.sc-list-item-view.sc-collection-item .sc-outline label,
-.users-pane-inner .sc-view.sc-list-item-view.sc-collection-item .sc-outline label {
+.projects-pane .sc-view.sc-list-item-view.sc-collection-item .sc-outline label,
+.users-pane .sc-view.sc-list-item-view.sc-collection-item .sc-outline label {
   left: 22px !important;
   right: 50px !important;
   opacity: 1 !important;
 }
 
-.projects-pane-inner .sel .sc-outline img,
-.users-pane-inner .sel .sc-outline img {
+.projects-pane .sel .sc-outline img,
+.users-pane .sel .sc-outline img {
   top: 12px !important;
   margin-top: -9px !important;
 }
