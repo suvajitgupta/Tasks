@@ -40,7 +40,7 @@
   background: static_url('images/password.png') no-repeat 0 0 !important;
 }
 
-.users-pane .password-icon {
+.users-pane-inner .password-icon {
   position: absolute !important;
   top: 4px !important;
   right: 5px !important;
