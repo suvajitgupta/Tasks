@@ -1,7 +1,7 @@
 /*globals Tasks sc_require module test ok equals */
 
 /**
- * Tasks Summary View unit tests.
+ * Tasks SummaryView unit tests.
  *
  * @author Suvajit Gupta
  */
