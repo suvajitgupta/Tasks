@@ -154,7 +154,8 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     
   },
 
-  renderIcon: function(context, icon){
+  renderIcon: function(context, icon) {
+    // console.log('DEBUG: ProjectItem.render() icon=' + icon);
     if(!SC.none(icon)) {
       var content = this.get('content');
       var projectTooltip = "_Has".loc() + content.getPath('tasks.length') + "_tasks".loc();
