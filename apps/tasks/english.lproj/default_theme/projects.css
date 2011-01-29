@@ -96,8 +96,8 @@
   background-color: #353535 !important;
 }
 
-.projects-pane .sc-view.sc-list-item-view.sc-collection-item.project-item.hover,
-.users-pane .sc-view.sc-list-item-view.sc-collection-item.user-item.hover {
+.projects-pane .sc-collection-item.project-item.hover,
+.users-pane .sc-collection-item.user-item.hover {
   background-color: #252525 !important;
 }
 .project-item.hover .project-margin {
