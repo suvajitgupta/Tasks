@@ -11,7 +11,7 @@ Tasks.mixin( /** @scope Tasks */ {
   statechart: Ki.Statechart.create({
 
     // Set tracing on to debug statecharts
-    trace: YES,
+    trace: NO,
   
     rootState: Ki.State.design({
 
