@@ -13,5 +13,5 @@ proxy '/tasks-server', :to => 'localhost:8088', :protocol => 'http'
 # Local Persevere back end - test instance
 # proxy '/tasks-server', :to => 'localhost:8089', :protocol => 'http'
 
-# Local GAE back end - prod instance
+# Local GAE back end (comment 'Persevere back end' line above, uncomment next line & replace 8091 with port of GAE application)
 # proxy '/tasks-server', :to => 'localhost:8091', :protocol => 'http'
