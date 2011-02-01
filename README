@@ -1,3 +1,34 @@
+TASKS OVERVIEW
+==============================================================================
+
+Welcome to "Tasks!" - it was created for a few reasons:
+
+1. To become a comprehensive sample application that goes beyond  "hello world"
+   examples (like "clock") and snippets showing off facets of SproutCore
+   (like "drag").  SproutCore is very elegant and powerful framework and my
+   goal is to use Tasks to ramp up as well as showcase its capabilities on the
+	 desktop and iPad with a single application.
+
+2. To illustrate how to engineer a non-trivial application using things like
+   a task plan (scope/assignments), wireframes/mockups (vision/GUI design),
+   statecharts/MVC structure (technical design), and integration with a remote
+   server via REST/JSON.
+
+3. We all build software and "Tasks" can become your agile software management
+   tool - you won't need the cumbersome task tracking & bean counting tools
+   overhead staff like to justify their existence with :-)
+
+4. Last year, SproutCore has undergone an explosive launch and maturation.
+	 During this metamorphosis, Tasks has become the SproutCore issue tracking tool
+	 What better that an application built with SproutCore itself!
+
+Tasks is "in progress" - I plan tom ature it into a tool to manage the development
+of very complex applications.  I hope you will find Tasks useful as you start your
+journey with SproutCore.  Please send me your feedback or code contributions!
+
+-Suvajit Gupta (suvajit.gupta@eloqua.com)
+
+
 GETTING TASKS & SPROUTCORE CODE
 ==============================================================================
 
@@ -133,64 +164,33 @@ lebowski-spec -f n main.rb
 3) Before reruning step (2), stop Lebowski server (Control-C) and restart it (Step 1)
 
 
-TASKS OVERVIEW
-==============================================================================
-
-Welcome to "Tasks!" - it was created for a few reasons:
-
-1. To become a comprehensive sample application that goes beyond  "hello world"
-   examples (like "clock") and snippets showing off facets of SproutCore
-   (like "drag").  SproutCore is very elegant and powerful framework and my
-   goal is to use Tasks to ramp up as well as showcase its capabilities on the
-	 desktop and iPad with a single application.
-
-2. To illustrate how to engineer a non-trivial application using things like
-   a task plan (scope/assignments), wireframes/mockups (vision/GUI design),
-   statecharts/MVC structure (technical design), and integration with a remote
-   server via REST/JSON.
-
-3. We all build software and "Tasks" can become your agile software management
-   tool - you won't need the cumbersome task tracking & bean counting tools
-   overhead staff like to justify their existence with :-)
-
-4. Last year, SproutCore has undergone an explosive launch and maturation.
-	 During this metamorphosis, Tasks has become the SproutCore issue tracking tool
-	 What better that an application built with SproutCore itself!
-
-Tasks is "in progress" - I plan tom ature it into a tool to manage the development
-of very complex applications.  I hope you will find Tasks useful as you start your
-journey with SproutCore.  Please send me your feedback or code contributions!
-
--Suvajit Gupta (suvajit.gupta@eloqua.com)
-
-
 TASKS ARTIFACTS
 ==============================================================================
 
 To start getting oriented with Tasks, scan the following artifacts in the
-docs/ folder:
+documents/ folder:
 
-1. TasksPlan.txt: shows the work breakdown and assignments - feel free to pick
-   up an item that is not "Done" and hack away at it!
+1. plans/TasksDevelopmentPlan.txt: shows the work breakdown and assignments
+	 (this can be imported into Tasks if you want some sample data!).
 
-2. TasksWireframe.png: shows the initial GUI design with callouts explaining
+2. GUI/TasksWireframe.png: shows the initial GUI design with callouts explaining
    the key functionality.
 
-3. TasksMockup*.png: shows the visual design concepts we used to style Tasks.
+3. GUI/TasksMockup*.png: shows the visual design concepts we used to style Tasks.
 
-4. TasksStatecharts.pdf: shows the states/transitions within the GUI.
+4. design/TasksStatecharts.pdf: shows the states/transitions within the GUI.
 
-5. TasksControllers.pdf: shows how the various controllers are wired together
+5. design/TasksControllers.pdf: shows how the various controllers are wired together
    and how the views relate to them (implementing thge root controller pattern).
 
-6. TasksAPI.xml: drag this file into your browser - the files in the "include"
+6. API/TasksAPI.xml: drag this file into your browser - the files in the "include"
    folder render this specification in a nice format for you to understand the
    REST API endpoints.
 
-7. TasksJSON.xml: documents the model object structure for what is sent to the
+7. API/TasksJSON.xml: documents the model object structure for what is sent to the
    server via REST calls.
 
-8. TasksFileFormat.txt: Shows the simple/intuitive syntax for importing data
+8. API/TasksFileFormat.txt: Shows the simple/intuitive syntax for importing data
    into and exporting data from Tasks.  In fact, the TasksPlan.txt is itself
    written in this format and can be imported into Tasks!
 
