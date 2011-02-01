@@ -8,6 +8,9 @@ cd tasks/frameworks
 git clone git://github.com/suvajitgupta/sproutcore.git
 git clone git://github.com/FrozenCanuck/Ki.git ki
 git clone git://github.com/suvajitgupta/SCUI.git scui
+cd scui
+git checkout -b tasks origin/sg/master
+cd ../
 git clone git://github.com/etgryphon/sai.git
 git clone git://github.com/etgryphon/sproutcore-uds.git scuds
 cd ../
