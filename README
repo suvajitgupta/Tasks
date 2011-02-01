@@ -7,10 +7,7 @@ git clone git://github.com/suvajitgupta/Tasks.git tasks
 cd tasks/frameworks
 git clone git://github.com/suvajitgupta/sproutcore.git
 git clone git://github.com/FrozenCanuck/Ki.git ki
-git clone git://github.com/suvajitgupta/SCUI.git scui
-cd scui
-git checkout -b tasks origin/sg/master
-cd ../
+git clone git://github.com/etgryphon/sproutcore-ui.git scui
 git clone git://github.com/etgryphon/sai.git
 git clone git://github.com/etgryphon/sproutcore-uds.git scuds
 cd ../
@@ -31,7 +28,7 @@ To stop the Persevere server...
 
 ./scripts/server-stop.sh
 
-INITIAL PERSEVERE SETUP
+PERSEVERE USER CREATION
 ==============================================================================
 
 After starting the Persevere server (see above), run a script to create the
@@ -72,17 +69,6 @@ http://localhost:4400/tasks
 apps/tasks/tests/data/import_data.txt
 
 
-GOOGLE APP ENGINE (GAE) DEPLOYMENT (Fast Path)
-==============================================================================
-
-1.) Run the following command from inside Tasks' root directory
-	> python tasks.py setup <app identifier> <build indetifier>
-	
-	-- where <app identifier> is your GAE application identifier (i.e. tasks-demo)
-	-- and <build identifier> is you build name or number (i.e. beta1)
-	
-2.) Then follow steps 8 & 9 above in the GOOGLE APP ENGINE DEPLOYMENT
-
 GOOGLE APP ENGINE (GAE) DEPLOYMENT
 ==============================================================================
 If you want to deploy Tasks on the cloud, you can get a GAE account and deploy it:
@@ -96,34 +82,42 @@ http://googleappengine.googlecode.com/files/GoogleAppEngineLauncher-1.2.8.dmg
 3) Install sproutcore as a gem if you haven't done that already:
 sudo gem install sproutcore
 
-4) Build Tasks for deployment & get a cup of coffee...
-sc-build -rc --build=<build id>
+4) Build Tasks for deploymente...
+sc-build -rc --build=<build-name>
 
-5) While enjoying your Java, get the Tasks-GAE server code:
+5) Get the Tasks-GAE server code:
 cd ../
-git clone git://github.com/joshholt/SproutCoreTasks-AppEngineBackend.git tasks-gae
+git clone git://github.com/joshholt/SproutCoreTasks-AppEngineBackend.git <app-name>
 cd tasks
 
-6) After sc-build finishes, copy tasks production build to tasks-gae:
-cp -r tmp/build/static ../tasks-gae
+6) After sc-build finishes, copy tasks production build for deployment on GAE:
+cp -r tmp/build/static ../<app-name>
 
 7) Inform GAE about production build:
-<your-favorite-editor> app.yaml and fill in your <build id> and your
-	GAE <application identifier> (first line)
+cd ../<app-name>
+<your-favorite-editor> app.yaml
+	- replace <app-name> on first line
+	- replace <build-name> globally
 
 8) On a Mac, run GoogleAppEngineLauncher (downloaded with GAE SDK earlier):
 From 'File' menu, choose 'Add Existing Application...'
-Browse to tasks-gae and press 'Choose', then press 'Add' button
-Press 'Run' button at top left to test production build locally by pressing the 'Browse' button
-Signup as a new user from login screen and ensure Tasks comes up and works
+Browse to <app-name> and press 'Choose', then press 'Add' button
 
 9) Now deploy to the cloud by pressing 'Deploy'
 Sign up on Tasks running on GAE deployment at http://<application identifier>.appspot.com
-Make newly created user a Manager using GAE 'Dashboard' button at top right:
+You can use the GAE 'Dashboard' button at top right and modify User roles.  Example below:
 	Click on 'Data Viewer' under Datastore section on left
 	Select 'User' table from select field view
 	Click id of user and change 'role' to '_Manager'
 Login to Tasks now and start adding projects/tasks/users...
+
+GOOGLE APP ENGINE (GAE) DEPLOYMENT (Fast Path)
+==============================================================================
+
+1.) Run the following command from inside Tasks' root directory
+	> python tasks.py setup <app-name> <build-name>
+	
+2.) Then follow steps 8 & 9 below in the GOOGLE APP ENGINE DEPLOYMENT
 
 
 RUNNING LEBOWSKI
