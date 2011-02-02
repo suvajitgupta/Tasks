@@ -249,7 +249,7 @@ Tasks.TaskEditorView = SC.View.extend(
  
  editor: SC.View.design({
    
-   childViews: 'idLabel backButton previousButton nextButton nameLabel nameField typeLabel typeField priorityLabel priorityField statusLabel statusField validationLabel validationField effortLabel effortField effortHelpLabel submitterLabel submitterField projectLabel projectField assigneeLabel assigneeField splitView separatorView createdAtLabel updatedAtLabel watchingCheckbox watchersButton'.w(),
+   childViews: 'idLabel showTasksListButton gotoPreviousTaskButton gotoNextTaskButton nameLabel nameField typeLabel typeField priorityLabel priorityField statusLabel statusField validationLabel validationField effortLabel effortField effortHelpLabel submitterLabel submitterField projectLabel projectField assigneeLabel assigneeField splitView separatorView createdAtLabel updatedAtLabel watchingCheckbox watchersButton'.w(),
    classNames: ['task-editor'],
 
    idLabel: SC.LabelView.design({
@@ -257,17 +257,17 @@ Tasks.TaskEditorView = SC.View.extend(
      classNames: ['title-bar']
    }),
    
-   backButton: SC.View.design(SCUI.SimpleButton, {
+   showTasksListButton: SC.View.design(SCUI.SimpleButton, {
      layout: { top: 2, left: 10, width: 32, height: 19 },
      classNames: ['back-icon'],
-     toolTip: "_GoBackToTasksList".loc(),
-     action: 'close'
+     toolTip: "_ShowTasksList".loc(),
+     action: 'showTasksList'
     }),
 
-   previousButton: SC.View.design(SCUI.SimpleButton, {
+   gotoPreviousTaskButton: SC.View.design(SCUI.SimpleButton, {
      layout: { top: 3, centerX: -80, width: 17, height: 17 },
      classNames: ['previous-icon'],
-     toolTip: "_ShowPreviousTask".loc(),
+     toolTip: "_GotoPreviousTask".loc(),
      action: 'gotoPreviousTask',
      isEnabledBinding: SC.Binding.transform(function(value, binding) {
                                               var task = value.getPath('firstObject');
@@ -281,10 +281,10 @@ Tasks.TaskEditorView = SC.View.extend(
                                               return false;
                                             }).from('Tasks*tasksController.selection')
    }),
-   nextButton: SC.View.design(SCUI.SimpleButton, {
+   gotoNextTaskButton: SC.View.design(SCUI.SimpleButton, {
      layout: { top: 3, centerX: 80, width: 17, height: 17 },
      classNames: ['next-icon'],
-     toolTip: "_ShowNextTask".loc(),
+     toolTip: "_GotoNextTask".loc(),
      action: 'gotoNextTask',
      isEnabledBinding: SC.Binding.transform(function(value, binding) {
                                               var task = value.getPath('firstObject');
@@ -518,7 +518,7 @@ Tasks.TaskEditorView = SC.View.extend(
     var ret = NO, commandCode = event.commandCodes();
     // console.log('DEBUG: hotkey "' + commandCode[0] + '" pressed');
     if (commandCode[0] === 'return' || commandCode[0] === 'escape') {
-      this.close();
+      Tasks.statechart.sendEvent('showTasksList');
       return YES;
     }
     else if (commandCode[0] === 'ctrl_='){  // control_equals
