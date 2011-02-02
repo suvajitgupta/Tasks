@@ -138,12 +138,6 @@ Tasks.mainPage = SC.Page.design({
             else if(document.title.match(/SproutCore/)) {
               context.attr('src', sc_static('images/sproutcore-logo.png'));
             }
-            else if(document.title.match(/Greenhouse/)) {
-              context.attr('src', sc_static('images/greenhouse-logo.png'));
-            }
-            else if(document.title.match(/TPG/)) {
-              context.attr('src', sc_static('images/tpg-logo.png'));
-            }
             else if(document.title.match(/Eloqua/)) {
               context.attr('src', sc_static('images/eloqua-logo.gif'));
             }
