@@ -193,7 +193,7 @@ Tasks.mixin( /** @scope Tasks */ {
 
     // Get the last retrieved information from localStorage (if available).
     var lastRetrieved = Tasks.get('lastRetrieved');
-    if(SC.empty(lastRetrieved) && CoreTasks.useLocalStorage) {
+    if(SC.empty(lastRetrieved) && CoreTasks.get('useLocalStorage')) {
       var adapter;
       adapter = this._adapter = SCUDS.LocalStorageAdapterFactory.getAdapter('Tasks');
       lastRetrieved = adapter.get('lastRetrieved');
@@ -239,7 +239,7 @@ Tasks.mixin( /** @scope Tasks */ {
 
     // Set the last retrieved value in localStorage.
     lastRetrieved = SC.DateTime.create().get('milliseconds') + ''; // now
-    if(CoreTasks.useLocalStorage) {
+    if(CoreTasks.get('useLocalStorage')) {
       // console.log('DEBUG: setting lastRetrieved value in localStorage: ' + lastRetrieved);
       this._adapter.save(lastRetrieved, 'lastRetrieved');
     }
@@ -270,7 +270,7 @@ Tasks.mixin( /** @scope Tasks */ {
           var records = recordSets[recordSet];
           // console.log('DEBUG: loading ' + records.length + ' ' + recordSet);
           CoreTasks.store.loadRecords(recordType, records);
-          if(CoreTasks.useLocalStorage) {
+          if(CoreTasks.get('useLocalStorage')) {
             var recordTypeStr = SC.browser.msie ? recordType._object_className : recordType.toString();
             var adapter = SCUDS.LocalStorageAdapterFactory.getAdapter(recordTypeStr);
             adapter.save(records);

@@ -13,7 +13,7 @@ Tasks.ShutDownState = Ki.State.extend({
   enterState: function() {
 
     // Clear cached localStorage data (if any)
-    if(CoreTasks.useLocalStorage) {
+    if(CoreTasks.get('useLocalStorage')) {
       // TODO: [SG] add checkbox on logout screen to optionally clear localStorage
       // console.log('DEBUG: clearing cached localStorage data');
       SCUDS.LocalStorageAdapterFactory.nukeAllAdapters();
