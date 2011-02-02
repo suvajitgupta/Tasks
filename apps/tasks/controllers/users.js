@@ -121,7 +121,7 @@ Tasks.usersController = SC.ArrayController.create(
         var role = user.get('role');
         if(role !== value) user.set('role', value);
       });
-      if(CoreTasks.get('autoSave')) Tasks.saveChanges();
+      if(Tasks.get('autoSave')) Tasks.saveChanges();
     } else {
       var firstRole = null;
       sel.forEach(function(user) {

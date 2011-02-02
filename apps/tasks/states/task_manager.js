@@ -103,7 +103,7 @@ Tasks.TaskManagerState = Ki.State.extend({
               task.destroy();
             }
             Tasks.tasksController.selectFirstTask();
-            if(CoreTasks.get('autoSave')) Tasks.saveChanges();
+            if(Tasks.get('autoSave')) Tasks.saveChanges();
           }
         }
         })
@@ -193,7 +193,7 @@ Tasks.TaskManagerState = Ki.State.extend({
             CoreTasks.createRecord(CoreTasks.Watch, { taskId: task.get('id'), userId: currentUserId });
           }
         }
-        if(CoreTasks.get('autoSave')) Tasks.saveChanges();
+        if(Tasks.get('autoSave')) Tasks.saveChanges();
       }
     },
 
@@ -209,7 +209,7 @@ Tasks.TaskManagerState = Ki.State.extend({
           var watch = CoreTasks.getCurrentUserTaskWatch(task);
           if(watch) watch.destroy();
         }
-        if(CoreTasks.get('autoSave')) Tasks.saveChanges();
+        if(Tasks.get('autoSave')) Tasks.saveChanges();
       }
     },
 

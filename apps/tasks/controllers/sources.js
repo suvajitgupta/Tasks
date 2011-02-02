@@ -130,7 +130,7 @@ Tasks.sourcesController = SC.TreeController.create(SC.CollectionViewDelegate,
     
 
     if(ret === SC.DRAG_MOVE) {
-      if(CoreTasks.get('autoSave')) Tasks.saveChanges();
+      if(Tasks.get('autoSave')) Tasks.saveChanges();
     }
   
     return ret;

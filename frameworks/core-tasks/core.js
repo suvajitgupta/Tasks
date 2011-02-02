@@ -9,9 +9,8 @@
 CoreTasks = SC.Object.create({
   
   /*
-   * Customizable autoSave, sendNotifications, and useLocalStorage settings
+   * Customizable sendNotifications and useLocalStorage settings
    */
-  autoSave: true,
   sendNotifications: true,
   useLocalStorage: true,
   

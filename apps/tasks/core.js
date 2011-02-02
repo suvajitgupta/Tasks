@@ -25,6 +25,9 @@ Tasks = SC.Object.create(
   // Customizable supportSignup: if set to false, works as a simple To Do list (Task Type/Validation are not available through GUI)
   supportSignup: document.title.match(/Dev|Demo|SproutCore/)? true : false,
   
+  // Customizable autoSave: if set to true will save data after each operation, otherwise user will manually have to save periodically
+  autoSave: true,
+  
   /*
    * Tasks server types.  Defaulted to GAE - detected/set at runtime
    */

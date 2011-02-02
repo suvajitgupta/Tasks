@@ -154,7 +154,7 @@ Tasks.importDataController = SC.ObjectController.create(
       }
     }
     
-    if(CoreTasks.get('autoSave')) Tasks.saveChanges();
+    if(Tasks.get('autoSave')) Tasks.saveChanges();
     CoreTasks.set('sendNotifications', sendNotifications); // restore cached value
     this.set('data','');
     

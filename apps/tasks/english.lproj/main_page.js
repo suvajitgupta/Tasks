@@ -26,7 +26,6 @@ Tasks.mainPageHelper = SC.Object.create({
 
   panelOpenBinding: SC.Binding.oneWay('Tasks*panelOpen'),
   displayedTasksCountBinding: SC.Binding.oneWay('Tasks.tasksController*arrangedObjects.length'),
-  autoSaveBinding: SC.Binding.oneWay('CoreTasks*autoSave'),
   sendNotificationsBinding: SC.Binding.oneWay('CoreTasks*sendNotifications'),
   clippyDetailsId: 'clippy-details',
   clippyDetails: null,
@@ -461,7 +460,7 @@ Tasks.mainPage = SC.Page.design({
                icon: 'save-icon',
                toolTip: "_SaveTooltip".loc(),
                isEnabledBinding: 'CoreTasks.needsSave',
-               isVisibleBinding: SC.Binding.not('CoreTasks.autoSave'),
+               isVisibleBinding: SC.Binding.not('Tasks.autoSave'),
                action: 'save'
              }),
              refreshButton: SC.ButtonView.design({

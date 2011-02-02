@@ -134,7 +134,7 @@ Tasks.tasksController = SC.TreeController.create(SC.CollectionViewDelegate,
         var type = task.get('type');
         if(type !== value) task.set('type', value);
       });
-      if(CoreTasks.get('autoSave')) Tasks.saveChanges();
+      if(Tasks.get('autoSave')) Tasks.saveChanges();
     } else {
       var firstType = null;
       sel.forEach(function(task) {
@@ -154,7 +154,7 @@ Tasks.tasksController = SC.TreeController.create(SC.CollectionViewDelegate,
         var priority = task.get('priority');
         if(priority !== value) task.set('priority', value);
       });
-      if(CoreTasks.get('autoSave')) Tasks.saveChanges();
+      if(Tasks.get('autoSave')) Tasks.saveChanges();
     } else {
       var firstPriority = null;
       sel.forEach(function(task) {
@@ -174,7 +174,7 @@ Tasks.tasksController = SC.TreeController.create(SC.CollectionViewDelegate,
         var developmentStatusWithValidation = task.get('developmentStatusWithValidation');
         if(developmentStatusWithValidation !== value) task.set('developmentStatusWithValidation', value);
       });
-      if(CoreTasks.get('autoSave')) Tasks.saveChanges();
+      if(Tasks.get('autoSave')) Tasks.saveChanges();
     } else {
       var firstDevelopmentStatusWithValidation = null;
       sel.forEach(function(task) {
@@ -194,7 +194,7 @@ Tasks.tasksController = SC.TreeController.create(SC.CollectionViewDelegate,
         var validation = task.get('validation');
         if(validation !== value) task.set('validation', value);
       });
-      if(CoreTasks.get('autoSave')) Tasks.saveChanges();
+      if(Tasks.get('autoSave')) Tasks.saveChanges();
     } else {
       var firstValidation = null;
       sel.forEach(function(task) {
@@ -322,7 +322,7 @@ Tasks.tasksController = SC.TreeController.create(SC.CollectionViewDelegate,
     }, this);
     
     if(ret === SC.DRAG_NONE) {
-      if(CoreTasks.get('autoSave')) Tasks.saveChanges();
+      if(Tasks.get('autoSave')) Tasks.saveChanges();
     }
     
     return ret;

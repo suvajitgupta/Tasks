@@ -18,7 +18,7 @@ Tasks.ApplicationManagerState = Ki.State.extend({
     },
         
     toggleAutoSave: function(){
-      CoreTasks.set('autoSave', !CoreTasks.get('autoSave'));
+      Tasks.set('autoSave', !Tasks.get('autoSave'));
     },
 
     toggleSendNotifications: function(){
@@ -170,7 +170,7 @@ Tasks.ApplicationManagerState = Ki.State.extend({
 
     exitState: function() {
       Tasks.get('usersSettingsPane').remove();
-      if(CoreTasks.get('autoSave')) Tasks.saveChanges();
+      if(Tasks.get('autoSave')) Tasks.saveChanges();
     }
     
   }),

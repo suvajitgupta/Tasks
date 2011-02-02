@@ -85,7 +85,7 @@ Tasks.ProjectManagerState = Ki.State.extend({
                 }
                 // Select the default project
                 Tasks.projectsController.selectObject(Tasks.get('defaultProject'));
-                if(CoreTasks.get('autoSave')) Tasks.saveChanges();
+                if(Tasks.get('autoSave')) Tasks.saveChanges();
               }
             }
           })

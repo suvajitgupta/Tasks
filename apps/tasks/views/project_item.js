@@ -111,7 +111,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
       if(finalValue.indexOf('{') >= 0 || finalValue.indexOf('<')  >= 0) {
         Tasks.assignmentsController.computeTasks();
       }
-      if(CoreTasks.get('autoSave')) Tasks.saveChanges();
+      if(Tasks.get('autoSave')) Tasks.saveChanges();
     }
   },
   
