@@ -21,7 +21,6 @@ sc_require('views/summary');
 // TODO: [SC] fix CollectionView sluggish scrolling on iPad (works better in Ace2?)
 // TODO: [SG] provide access to contents of context menus in actions menu (useful on iPad)
 
-Tasks._wideLogo = document.title.match(/Eloqua/)? true : false;
 Tasks.mainPageHelper = SC.Object.create({
 
   panelOpenBinding: SC.Binding.oneWay('Tasks*panelOpen'),
@@ -125,7 +124,7 @@ Tasks.mainPage = SC.Page.design({
         classNames: ['title-bar'],
         
         installationLogo: SC.View.design({
-          layout: { left: Tasks._wideLogo? 15: 25, centerY: 0, width: Tasks._wideLogo? 80: 35, height: Tasks._wideLogo? 20 : 35 },
+          layout: { left: Tasks.get('squareInstallationLogo')? 25: 15, centerY: 0, width: Tasks.get('squareInstallationLogo')? 35: 80, height: Tasks.get('squareInstallationLogo')? 35 : 20 },
           tagName: 'img',
           render: function(context, firstTime) {
             if(document.title.match(/Dev/)) {
@@ -140,11 +139,16 @@ Tasks.mainPage = SC.Page.design({
             else if(document.title.match(/Eloqua/)) {
               context.attr('src', sc_static('images/eloqua-logo.gif'));
             }
+            // Customizable "Installation Logo" that is driven by "Installation Title" from Buildfile
+            // Uncomment next 3 lines and specify <InstallationTitle> (matching what you set in Buildfile) and <installation-logo-filename>
+            // else if(document.title.match(/<InstallationTitle>/)) {
+            //   context.attr('src', sc_static('images/<installation-logo-filename>'));
+            // }
           }
         }), // installationLogo
         
         tasksLogo: Tasks.LogoView.design({
-          layout: { left: Tasks._wideLogo? 115 : 78, width: 104, centerY: 0, height: 27 },
+          layout: { left: Tasks.get('squareInstallationLogo')? 78: 115, width: 104, centerY: 0, height: 27 },
           logo: 'tasks-logo-small',
           toolTip: "_Credits".loc(),
           version: Tasks.VERSION

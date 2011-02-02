@@ -19,13 +19,16 @@ Tasks = SC.Object.create(
   VERSION: '1.6',
   isLoaded: NO, // for Lebowski
 
-  // Customizable softwareMode: if set to false, works as a simple To Do list (Task Type/Validation are not available through GUI)
+  // Customizable "Square Installation Logo": set to true for square installation logo, false for rectangular installation logo
+  squareInstallationLogo: document.title.match(/Eloqua/)? false : true,
+
+  // Customizable "Guest Signup": if set to true, allows guests to sign up via login panel (useful for open source project Tasks installations)
+  guestSignup: document.title.match(/Dev|Demo|SproutCore/)? true : false,
+  
+  // Customizable "Software Mode": if set to false, works as a simple To Do list (Task Type/Validation are not available through GUI)
   softwareMode: document.title.match(/todo/i)? false: true,
 
-  // Customizable supportSignup: if set to false, works as a simple To Do list (Task Type/Validation are not available through GUI)
-  supportSignup: document.title.match(/Dev|Demo|SproutCore/)? true : false,
-  
-  // Customizable autoSave: if set to true will save data after each operation, otherwise user will manually have to save periodically
+  // Customizable "Auto Save": if set to true will save data after each operation, otherwise user will manually have to save periodically
   autoSave: true,
   
   /*

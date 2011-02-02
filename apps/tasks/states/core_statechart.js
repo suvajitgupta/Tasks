@@ -18,7 +18,7 @@ Tasks.mixin( /** @scope Tasks */ {
       initialSubstate: 'loggedOut',
 
       enterState: function() {
-        CoreTasks.initializeStore();
+        CoreTasks.initStore();
       },
 
       // State when user hasn't logged in yet

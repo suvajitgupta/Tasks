@@ -8,11 +8,11 @@
  */
 CoreTasks = SC.Object.create({
   
-  /*
-   * Customizable sendNotifications and useLocalStorage settings
-   */
-  sendNotifications: true,
+  // Customizable "Use Local Storage": if set to true records will be cached in browser's local storage database
   useLocalStorage: true,
+  
+  // Customizable "Send Notifications": if set to true email notifications will be send from Server for 'notable' events
+  sendNotifications: true,
   
   /*
    * Tasks data source types
@@ -85,9 +85,9 @@ CoreTasks = SC.Object.create({
   /**
    * Initializes the main store with the given data source.
    */
-  initializeStore: function() {
+  initStore: function() {
     
-    // console.log('DEBUG: initializeStore() store=', this.get('store'));
+    // console.log('DEBUG: initStore() store=', this.get('store'));
     if(SC.none(this.get('store'))) { // not already initialized
 
       // Create the appropriate data source.

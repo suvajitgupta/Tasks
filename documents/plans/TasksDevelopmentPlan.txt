@@ -319,11 +319,12 @@ Documentation @Active
 Customization @Done
 #========================================================================================================================
 
-- Support customizable (via Buildfile) application title and logo (shown in Browser tab title and Tasks top bar) [SG] $Feature @Done %Passed
+- Support customizable "Installation Title" shown in Browser tab title (set via Buildfile) [SG] $Feature @Done %Passed
+- Support customizable "Installation Logo" and "Square Installation Logo" shown in Tasks top bar [SG] $Feature @Done %Passed
 - Support customizable "Guest Signup" capability via "Login" screen (useful for open-source projects) [SG] $Feature @Done %Passed
-- Support customizable "Software" vs. "Todo" mode (in latter case, Task Type & Validation are not available via GUI) [SG] $Feature @Done %Passed
-- Support customizable default "Auto Save" and "Send Notifications" settings via actions menu [SG] $Feature @Done %Passed
-- Support customizable setting for use of local data store, turned off by default for touch devices [SG] $Feature @Done %Passed
+- Support customizable "Software Mode" to also work as a simple To Do list (Task Type/Validation are not available through GUI) [SG] $Feature @Done %Passed
+- Support customizable "Use Local Storage" which is turned off by default for touch devices [SG] $Feature @Done %Passed
+- Support customizable default "Auto Save" and "Send Notifications" settings that are toggled via actions menu [SG] $Feature @Done %Passed
 
 
 #========================================================================================================================
