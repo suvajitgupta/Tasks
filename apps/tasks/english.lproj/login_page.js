@@ -32,7 +32,7 @@ Tasks.loginPage = SC.Page.create({
         version: Tasks.VERSION
       }),
       
-      guestSignupButton: document.title.match(/Dev|Demo|SproutCore/)? SC.ButtonView.design({
+      guestSignupButton: Tasks.supportSignup? SC.ButtonView.design({
         layout: { top: 20, right: 0, height: 23, width: 155 },
         classNames: ['dark'],
         icon: 'user-role-guest',

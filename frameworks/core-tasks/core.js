@@ -9,10 +9,11 @@
 CoreTasks = SC.Object.create({
   
   /*
-   * Startup default settings - override if needed.
+   * Customizable autoSave, sendNotifications, and useLocalStorage settings
    */
   autoSave: true,
   sendNotifications: true,
+  useLocalStorage: true,
   
   /*
    * Tasks data source types
@@ -21,12 +22,6 @@ CoreTasks = SC.Object.create({
   FIXTURES_DATA_SOURCE: 0x0002,
   dataSourceType: 0x0001,
   
-  /**
-   * Boolean indication of whether or not to use the browser's local storage mechanism for record
-   * caching.
-   */
-  useLocalStorage: true,
-
   /*
    * Arrays of all records in the store.
    */

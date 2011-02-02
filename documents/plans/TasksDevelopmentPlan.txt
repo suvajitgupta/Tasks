@@ -319,7 +319,7 @@ Documentation @Active
 Customization @Done
 #========================================================================================================================
 
-- Support customizable (via Buildfile) "Installation" logo and title (shown in Browser/tab title) [SG] $Feature @Done %Passed
+- Support customizable (via Buildfile) application title and logo (shown in Browser tab title and Tasks top bar) [SG] $Feature @Done %Passed
 - Support customizable "Guest Signup" capability via "Login" screen (useful for open-source projects) [SG] $Feature @Done %Passed
 - Support customizable "Software" vs. "Todo" mode (in latter case, Task Type & Validation are not available via GUI) [SG] $Feature @Done %Passed
 - Support customizable default "Auto Save" and "Send Notifications" settings via actions menu [SG] $Feature @Done %Passed

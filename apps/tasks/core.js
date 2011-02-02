@@ -16,8 +16,14 @@ Tasks = SC.Object.create(
   /** @scope Tasks.prototype */ {
 
   NAMESPACE: 'Tasks',
-  VERSION: '1.5',
+  VERSION: '1.6',
   isLoaded: NO, // for Lebowski
+
+  // Customizable softwareMode: if set to false, works as a simple To Do list (Task Type/Validation are not available through GUI)
+  softwareMode: document.title.match(/todo/i)? false: true,
+
+  // Customizable supportSignup: if set to false, works as a simple To Do list (Task Type/Validation are not available through GUI)
+  supportSignup: document.title.match(/Dev|Demo|SproutCore/)? true : false,
   
   /*
    * Tasks server types.  Defaulted to GAE - detected/set at runtime
@@ -106,9 +112,7 @@ SCUI.ModalPane = SCUI.ModalPane.extend({
   }
 });
 
-/**
-  A Standard Binding transform to localize a string in a binding.
-*/
+// standard Binding transform to localize a string in a binding.
 SC.Binding.toLocale = function() {
   return this.transform(function(value, binding) {
     var returnValue = '';
@@ -118,6 +122,3 @@ SC.Binding.toLocale = function() {
     return returnValue;
   });
 };
-
-// if software mode set to false, works as a simple To Do list (Task Type/Validation are not available through GUI)
-Tasks.softwareMode = document.title.match(/todo/i)? false: true;
