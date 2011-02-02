@@ -73,7 +73,7 @@ module SC
           headers['Authorization'] = 'Basic ' + ["#{proxy[:username]}:#{proxy[:password]}"].pack('m').strip
         end
         if proxy[:https]
-          #Eloqua specific
+          # custom
           headers['COOKIE'] = $cookies[http_host] if $cookies
           SC.logger << "The Cookie is: #{headers['COOKIE']} for #{http_host}\n"
           headers.delete("HOST")
