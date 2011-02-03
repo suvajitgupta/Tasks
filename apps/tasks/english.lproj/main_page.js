@@ -638,11 +638,11 @@ Tasks.mainPage = SC.Page.design({
          ret = YES;
        }
        else if (commandCode[0] === 'ctrl_shift_=' || commandCode[0] === 'ctrl_shift_+') {  // control shift equals (Safari) or plus (Firefox)
-         Tasks.duplicateTask();
+         Tasks.statechart.sendEvent('duplicateTask');
          ret = YES;
        }
        else if (commandCode[0] === 'ctrl_='){  // control equals
-         Tasks.addTask();
+         Tasks.statechart.sendEvent('addTask');
          ret = YES;
        }
        return ret;

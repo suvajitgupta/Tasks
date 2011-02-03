@@ -522,7 +522,7 @@ Tasks.TaskEditorView = SC.View.extend(
       return YES;
     }
     else if (commandCode[0] === 'ctrl_='){  // control_equals
-      Tasks.addTask();
+      Tasks.statechart.sendEvent('addTask');
       ret = YES;
     }
     else if (commandCode[0] === 'ctrl_shift_+'){  // control shift plus
