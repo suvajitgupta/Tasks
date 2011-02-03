@@ -25,6 +25,7 @@ Tasks.mainPageHelper = SC.Object.create({
 
   panelOpenBinding: SC.Binding.oneWay('Tasks*panelOpen'),
   displayedTasksCountBinding: SC.Binding.oneWay('Tasks.tasksController*arrangedObjects.length'),
+  autoSaveBinding: SC.Binding.oneWay('Tasks*autoSave'),
   sendNotificationsBinding: SC.Binding.oneWay('CoreTasks*sendNotifications'),
   clippyDetailsId: 'clippy-details',
   clippyDetails: null,
