@@ -53,26 +53,6 @@ CoreTasks = SC.Object.create({
   _currentRecordId: 100000000,
   //_currentRecordId: -1,
 
-  /*
-   * The currently-logged-in user.
-   */
-  currentUser: null,
-
-  /*
-   * Permissions for the currently-logged-in user.
-   */
-  permissions: SC.Object.create({
-    canCreateProject: NO,
-    canUpdateProject: NO,
-    canDeleteProject: NO,
-    canCreateTask: NO,
-    canUpdateTask: NO,
-    canDeleteTask: NO,
-    canCreateUser: NO,
-    canUpdateUserRole: NO,
-    canDeleteUser: NO
-  }),
-
   /**
    * Initializes the CoreTasks object.
    */
@@ -117,42 +97,6 @@ CoreTasks = SC.Object.create({
 
   needsSave: false, // dirty bit to track if a save is needed
   
-  /**
-   * Clear all data from store.
-   */
-  clearData: function() {
-    this.allTasksProject = this.unallocatedTasksProject = this.unassignedTasksProject = null;
-
-    if (this.allUsers) {
-      this.allUsers.destroy();
-      this.allUsers = null;
-    }
-
-    if (this.allTasks) {
-      this.allTasks.destroy();
-      this.allTasks = null;
-    }
-
-    if (this.allProjects) {
-      this.allProjects.destroy();
-      this.allProjects = null;
-    }
-
-    if (this.allWatches) {
-      this.allWatches.destroy();
-      this.allWatches = null;
-    }
- 
-    if (this.allComments) {
-      this.allComments.destroy();
-      this.allComments = null;
-    }
- 
-    if (this.store) this.store.reset();
-
-    this.set('needsSave', NO);
-  },
-
   /**
    * Check if a loginName is reserved or in use already.
    *
@@ -363,10 +307,31 @@ CoreTasks = SC.Object.create({
     );
   },
 
+  /*
+   * The currently-logged-in user.
+   */
+  currentUser: null,
+
+  /*
+   * Permissions for the currently-logged-in user.
+   */
+  permissions: SC.Object.create({
+    canCreateProject: NO,
+    canUpdateProject: NO,
+    canDeleteProject: NO,
+    canCreateTask: NO,
+    canUpdateTask: NO,
+    canDeleteTask: NO,
+    canCreateUser: NO,
+    canUpdateUserRole: NO,
+    canDeleteUser: NO
+  }),
+
   // FIXME: [SG] enforce all permissions on GAE Server as well (e.g., Guests shouldn't be able to update/delete others' tasks)
   /**
    * Sets appropriate permissions based on the current user's role.
    */
+  // TODO: [SG] make currentUser permission setting happen automatically in CoreTasks, instead of Tasks having to call setPermissions()
   setPermissions: function() {
     if (!this.currentUser) return;
 
@@ -933,6 +898,7 @@ CoreTasks.RemoteSaveDelegate = SC.Object.extend({
       }
     }
   }
+  
 });
 
 CoreTasks.Store = SC.Store.extend({
