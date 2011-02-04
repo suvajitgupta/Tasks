@@ -63,7 +63,7 @@ git clone git://github.com/etgryphon/sproutcore-ui.git scui
 git clone git://github.com/etgryphon/sai.git
 git clone git://github.com/etgryphon/sproutcore-uds.git scuds
 cd ../
-gem install lebowski
+sudo gem install lebowski
 
 
 D. CUSTOMIZING 'TASKS' CODE
@@ -171,6 +171,7 @@ git clone git://github.com/joshholt/SproutCoreTasks-AppEngineBackend.git <applic
 6) After sc-build finishes, copy tasks production build for deployment on GAE:
 
 cd tasks
+(for the next line make sure there is no slash after 'static' which you may get if you tab for filename completion)
 cp -r tmp/build/static ../<application-identifier>
 
 7) Configure GAE application before deployment:
@@ -178,7 +179,7 @@ cp -r tmp/build/static ../<application-identifier>
 cd ../<application-identifier>
 <your-favorite-editor> app.yaml
 	- replace <application-identifier> on first line
-	- replace <build-number> globally
+	- replace <build-number> globally (there are 4 instances to change)
 
 8) Return to GoogleAppEngineLauncher application:
 
@@ -186,8 +187,10 @@ From 'File' menu, choose 'Add Existing Application...'
 Click on 'Browse' and find/select <application-identifier> folder and press 'Choose', then press 'Add'
 
 9) Now deploy to the cloud by pressing 'Deploy'
+(this can take a few minutes...wait until you get a "finished with exit code 0" message)
 
-Sign up on 'Tasks' running on GAE deployment at http://<application-identifier>.appspot.com
+Browse to http://<application-identifier>.appspot.com to launch 'Tasks' from GAE
+Press the "Guest Sign Up" button on the login screen and you are ready to go!
 (the first user to sign up will automatically have role of 'Manager' so they can administer other users)
 
 
