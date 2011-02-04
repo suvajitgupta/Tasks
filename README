@@ -41,9 +41,10 @@ section C below for all of them!):
 
 2) Deploy/use it as a tool.  If you need to customize 'Tasks' read section D.
    If you deploy locally or to your intranet, read sections E, F, and G.
-   If you deploy to the cloud, read sections I or J.
+   If you deploy to the cloud, read sections I or J.  
+   Read section K for rebuilding/redeploying 'Tasks'.
 
-3) Contribute to 'Tasks' development and testing.  Read sections K and L.
+3) Contribute to 'Tasks' development and testing.  Read sections L and M.
 
 
 C. DOWNLOADING 'TASKS' CODE
@@ -63,6 +64,7 @@ git clone git://github.com/etgryphon/sproutcore-ui.git scui
 git clone git://github.com/etgryphon/sai.git
 git clone git://github.com/etgryphon/sproutcore-uds.git scuds
 cd ../
+sudo gem install sproutcore
 sudo gem install lebowski
 
 
@@ -74,10 +76,11 @@ This is particularly useful if you deploy 'Tasks' on your intranet or the cloud 
 Search for "Customizable" within 'Tasks' code and you will see what you can modify.
 
 1) One common scenario is to customize your "Installation Title/Logo":
-  - Modify the Buildfile to customize the <InstallationTitle>
   - Add your custom logo to the "apps/tasks/english.lproj/default_theme/images" folder
-  - Modify "apps/tasks/english.lproj/main_page.js" to customize <installation-logo-filename>
-    and specify if it is a "Square Installation Logo" or not
+  - Modify "apps/tasks/core.js" to specify if it is a "Square Installation Logo" or not
+  - Modify the Buildfile to customize the <InstallationTitle>
+  - Modify "apps/tasks/english.lproj/main_page.js" to customize <InstallationTitle>
+    and <installation-logo-filename>
 
 2) Another common scenario is to build 'Tasks' in "To Do" mode.
   - Set "Software Mode" to false in "apps/tasks/core.js"
@@ -155,42 +158,39 @@ Run GoogleAppEngineLauncher and click on 'Dashboard' icon on top right.
 Login to you Google account and click 'Create Application' and enter a unique <application-identifier>
 You should also specify an <application-title>.
 
-3) Install sproutcore as a gem if you haven't done that already:
-
-sudo gem install sproutcore
-
-4) Build 'Tasks' for deployment...
-
-sc-build -rc --build=<build-number>
-
-5) Get the Tasks-GAE server code:
+3) Get the Tasks-GAE server code:
 
 cd ../
 git clone git://github.com/joshholt/SproutCoreTasks-AppEngineBackend.git <application-identifier>
 
-6) After sc-build finishes, copy tasks production build for deployment on GAE:
+4) Build 'Tasks' for deployment (this may take a few minutes...)
 
 cd tasks
+sc-build -rc --build=<build-number>
+
+5) After sc-build finishes, copy tasks production build for deployment on GAE:
+
 (for the next line make sure there is no slash after 'static' which you may get if you tab for filename completion)
 cp -r tmp/build/static ../<application-identifier>
 
-7) Configure GAE application before deployment:
+6) Configure GAE application before deployment:
 
 cd ../<application-identifier>
 <your-favorite-editor> app.yaml
 	- replace <application-identifier> on first line
 	- replace <build-number> globally (there are 4 instances to change)
 
-8) Return to GoogleAppEngineLauncher application:
+7) Return to GoogleAppEngineLauncher application:
 
 From 'File' menu, choose 'Add Existing Application...'
 Click on 'Browse' and find/select <application-identifier> folder and press 'Choose', then press 'Add'
 
-9) Now deploy to the cloud by pressing 'Deploy'
+8) Now deploy to the cloud by pressing 'Deploy'
 (this can take a few minutes...wait until you get a "finished with exit code 0" message)
 
-Browse to http://<application-identifier>.appspot.com to launch 'Tasks' from GAE
-Press the "Guest Sign Up" button on the login screen and you are ready to go!
+9) Browse to http://<application-identifier>.appspot.com to launch 'Tasks' from GAE
+
+10) Press the "Guest Sign Up" button on the login screen and you are ready to go!
 (the first user to sign up will automatically have role of 'Manager' so they can administer other users)
 
 
@@ -203,7 +203,19 @@ J. DEPLOYING 'TASKS' ON GAE USING SCRIPT
 2) Then follow steps 8 & 9 below in the GOOGLE APP ENGINE DEPLOYMENT
 
 
-K. 'TASKS' ARTIFACTS
+K. REBUILDING/REDEPLOYING 'TASKS' ON GAE
+==============================================================================
+
+If you made any mistakes while building or deploying or need to make additional
+changes to Tasks later, follow these steps:
+
+In the 'tasks' folder enter...
+rm -rf tmp
+
+From section I, repeat steps 4-5 followed by steps 8-9
+
+
+L. 'TASKS' ARTIFACTS
 ==============================================================================
 
 'Tasks' ships with several artifacts in the "documents" folder to help you
@@ -234,7 +246,7 @@ understand its design/plans:
    written in this format and can be imported into 'Tasks'!
 
 
-L. AUTOMATED TESTING OF 'TASKS' WITH LEBOWSKI
+M. AUTOMATED TESTING OF 'TASKS' WITH LEBOWSKI
 ==============================================================================
 
 Lebowski is used to test 'Tasks' end-to-end (GUI<=>API/Server/DB)...
