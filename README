@@ -1,6 +1,5 @@
 A. 'TASKS' INTRODUCTION/GOALS
-==============================================================================
-
+================================================================================
 'Tasks' is is an Agile project management tool with a SproutCore-based GUI
 and REST-based Servers. Persevere and Google App Engine (GAE) Servers are
 supported out-of-the-box.  'Tasks' runs on the desktop and on iPads.
@@ -13,7 +12,7 @@ I started the 'Tasks' project in June 2009 with the following goals:
    capabilities on the desktop and iPad via a single application.
 
 2) To illustrate how to engineer a non-trivial application using artifacts like
-   a task development plan (features/assignments), wireframes/mockups (GUI design),
+   a task development plan (features/tasks), wireframes/mockups (GUI design),
    statecharts/controller structure (design diagrams), and integration with
    REST-based Servers (API/JSON specifications).
 
@@ -24,7 +23,7 @@ I started the 'Tasks' project in June 2009 with the following goals:
    explosive launch and maturation as a premier HTML5 framework.
 	 What better that an application built in SproutCore to manage its issues?
 
-'Tasks' is still under development - maturing into a tool to manage the development
+'Tasks' is under development - maturing into a tool to manage the development
 of complex software.  I hope you will find 'Tasks' useful as you start your
 journey with SproutCore.  Please send me your feedback or code contributions!
 
@@ -32,7 +31,7 @@ journey with SproutCore.  Please send me your feedback or code contributions!
 
 
 B. GETTING STARTED WITH 'TASKS'
-==============================================================================
+================================================================================
 
 There are several things you can do with 'Tasks' (but you will have to read
 section C below for all of them!):
@@ -49,13 +48,11 @@ section C below for all of them!):
 
 
 C. DOWNLOADING 'TASKS' CODE
-==============================================================================
+================================================================================
 
 If you don't have the latest Ruby gems, type...
 
 sudo gem install thor
-sudo gem install sproutcore
-sudo gem install lebowski
 
 Change to the directory where you would like to work on 'Tasks' and type...
 
@@ -70,29 +67,32 @@ cd ../
 
 
 D. CUSTOMIZING 'TASKS' CODE
-==============================================================================
+================================================================================
 
 'Tasks' has some customizable settings to suit your specific needs.
-This is particularly useful if you deploy 'Tasks' on your intranet or the cloud (see below).
-Search for "Customizable" within 'Tasks' code and you will see what you can modify.
+This is useful if you deploy 'Tasks' on your intranet or the cloud (see below).
+Search for "Customizable" within 'Tasks' code to see what you can modify.
 
 1) One common scenario is to customize your "Installation Title/Logo":
-  - Add your custom logo to the "apps/tasks/english.lproj/default_theme/images" folder
-  - Modify "apps/tasks/core.js" to specify if it is a "Square Installation Logo" or not
-  - Modify the Buildfile to customize the <InstallationTitle>
-  - Modify "apps/tasks/english.lproj/main_page.js" to customize <InstallationTitle>
-    and <installation-logo-filename>
 
-2) Another common scenario is to build 'Tasks' in "To Do" mode (this is useful if you
-   simply want to use 'Tasks' to manage a list of things to do, personal or for a team).
+  - Add your logo to the "apps/tasks/english.lproj/default_theme/images" folder
+  - Modify "apps/tasks/core.js" to specify if it is a "Square Installation Logo"
+  - Modify the Buildfile to customize the <InstallationTitle>
+  - Modify "apps/tasks/english.lproj/main_page.js" to customize
+    <InstallationTitle> and <installation-logo-filename>
+
+2) Another common scenario is to build 'Tasks' in "To Do" mode (this is useful
+   when using 'Tasks' to manage a list of things to do, personal or for a team):
+
   - Set "Software Mode" to false in "apps/tasks/core.js"
 
-Commit your changes so that you can later get code updates from git:
+Commit your changes so that you can later get code updates from git...
+
 git commit -m "customization" .
 
 
 E. RUNNING PERSEVERE SERVER
-==============================================================================
+================================================================================
 
 Persevere is a bundled server you can use to run 'Tasks' locally on your machine
 or deploy on your intranet if your whole team needs to access it.
@@ -107,7 +107,7 @@ or deploy on your intranet if your whole team needs to access it.
 
 
 F. CREATING USERS IN PERSEVERE
-==============================================================================
+================================================================================
 
 After starting the Persevere server (see above), run a script to create the
 first user (after which you can log into 'Tasks' and use the User Manager GUI):
@@ -120,7 +120,7 @@ first user (after which you can log into 'Tasks' and use the User Manager GUI):
 
 
 G. ADMINISTERING PERSEVERE
-==============================================================================
+================================================================================
 
 Navigate to the following URL to directly manipulate Persevere data:
 
@@ -128,7 +128,7 @@ http://localhost:8088/tasks-server/explorer.html
 
 
 H. LAUNCHING 'TASKS' GUI
-==============================================================================
+================================================================================
 
 1) Start the SproutCore server...
 
@@ -143,15 +143,17 @@ http://localhost:4400/tasks
 
 4) Add your projects and tasks and have fun with 'Tasks'!
    To get some sample data to play with, you can click
-   on the Import button and paste in the contents of the file:
-
-apps/tasks/tests/data/import_data.txt
+   on the Import button and paste in the contents of the file
+   "apps/tasks/tests/data/import_data.txt"
 
 
 I. DEPLOYING 'TASKS' ON GOOGLE APP ENGINE (GAE) MANUALLY
-==============================================================================
+================================================================================
 
-If you want to deploy 'Tasks' to the cloud, you can use Google App Engine (GAE)...
+You can deploy 'Tasks' to the cloud using GAE.  To build 'Tasks'
+for deployment you will need to get the sproutcore buildtools:
+
+sudo gem install sproutcore
 
 1) If you don't have a GAE account, sign up here:
 http://code.google.com/appengine/
@@ -191,7 +193,8 @@ cd ../<application-identifier>
 	- replace <application-identifier> on first line
 	- replace <build-number> globally (there are 4 instances to change)
 	
-Commit your changes so that you can later get code updates from git:
+Commit your changes so that you can later get code updates from git...
+
 git commit -m "customized configuration" .
 
 7) Return to GoogleAppEngineLauncher application:
@@ -209,7 +212,7 @@ Click on "Browse" and find/select <application-identifier> folder and press "Cho
 
 
 J. DEPLOYING 'TASKS' ON GAE USING SCRIPT
-==============================================================================
+================================================================================
 
 1) Run the following command from inside 'Tasks' root directory
 	> python tasks.py setup <application-identifier> <build-number>
@@ -218,12 +221,13 @@ J. DEPLOYING 'TASKS' ON GAE USING SCRIPT
 
 
 K. REBUILDING/REDEPLOYING 'TASKS' ON GAE
-==============================================================================
+================================================================================
 
 If you made any mistakes while building or deploying or need to make additional
 changes to Tasks later, follow these steps:
 
 In the "tasks" directory enter...
+
 rm -rf tmp
 
 From section I, repeat steps 4-5 followed by steps 8-9
@@ -240,7 +244,7 @@ Server directory "<application-identifier>".
 
 
 L. ADMINISTERING GAE
-==============================================================================
+================================================================================
 
 If you need to add/update/delete GAE applications run GoogleAppEngineLauncher
 and press the "Dashboard" button.  Login to your Google account and click on
@@ -252,7 +256,7 @@ button under the "Data" group.  Choose the type of 'Tasks' records to view/edit.
 
 
 M. 'TASKS' ARTIFACTS
-==============================================================================
+================================================================================
 
 'Tasks' ships with several artifacts in the "documents" folder to help you
 understand its design/plans:
@@ -283,9 +287,13 @@ understand its design/plans:
 
 
 N. AUTOMATED TESTING OF 'TASKS' WITH LEBOWSKI
-==============================================================================
+================================================================================
 
-Lebowski is used to test 'Tasks' end-to-end (GUI<=>API/Server/DB)...
+Lebowski is used to test 'Tasks' end-to-end (GUI<=>API/Server/DB).
+First get the latest Lebowski...
+
+sudo gem install lebowski
+
 
 1) From another terminal window, run the Lebowski server:
 
@@ -300,7 +308,7 @@ lebowski-spec -f n main.rb
 
 
 APPENDIX. 'TASKS' ATTRIBUTIONS
-==============================================================================
+================================================================================
 
 The filter on/off icons:
 Diagona Icons
