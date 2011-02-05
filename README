@@ -179,7 +179,7 @@ git clone git://github.com/joshholt/SproutCoreTasks-AppEngineBackend.git <applic
 4) Build 'Tasks' for deployment (this may take a few minutes...)
 
 cd tasks
-sc-build -rc --build=<build-number>
+sc-build -rc --build=build
 
 5) After sc-build finishes, copy tasks production build for deployment on GAE:
 
@@ -189,9 +189,7 @@ cp -r tmp/build/static ../<application-identifier>
 6) Configure GAE application before deployment:
 
 cd ../<application-identifier>
-<your-favorite-editor> app.yaml
-	- replace <application-identifier> on first line
-	- replace <build-number> globally (there are 4 instances to change)
+Open "app.yaml" and replace <application-identifier> on first line
 	
 Commit your changes so that you can later get code updates from git...
 
@@ -215,7 +213,7 @@ J. DEPLOYING 'TASKS' ON GAE USING SCRIPT
 ================================================================================
 
 1) Run the following command from inside 'Tasks' root directory
-	> python tasks.py setup <application-identifier> <build-number>
+	> python tasks.py setup <application-identifier> build
 	
 2) Then follow steps 8 & 9 below in the GOOGLE APP ENGINE DEPLOYMENT
 
