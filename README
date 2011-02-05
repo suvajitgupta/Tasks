@@ -165,7 +165,7 @@ Login to your Google account and click "Create Application".
 Enter a unique <application-identifier> and application title and press
 "Create Application" button at the bottom.
 
-You will be prompted to enter your mobile phone number to receive a registration code.
+You will be prompted to enter your mobile number to receive a registration code.
 When you get the text message, copy the registation code into the prompt.
 
 3) Get the Tasks-GAE server code:
@@ -179,8 +179,9 @@ cd tasks
 sc-build -rc --build=build
 
 5) After sc-build finishes, copy tasks production build for deployment on GAE:
+(for this "cp" command make sure there is no slash after "static" which you may
+get if you tab for filename completion)
 
-(for the next line make sure there is no slash after "static" which you may get if you tab for filename completion)
 cp -r tmp/build/static ../<application-identifier>
 
 6) Configure GAE application before deployment:
@@ -195,15 +196,17 @@ git commit -m "customized configuration" .
 7) Return to GoogleAppEngineLauncher application:
 
 From "File" menu, choose "Add Existing Application..."
-Click on "Browse" and find/select <application-identifier> folder and press "Choose", then press "Add"
+Click on "Browse" and find/select <application-identifier> folder and press "Choose",
+and finally press "Add"
 
 8) Now deploy to the cloud by pressing "Deploy"
-   (this can take a few minutes...wait until you get a "finished with exit code 0" message)
+   (this can take a few minutes...wait until it says "finished with exit code 0")
 
 9) Browse to http://<application-identifier>.appspot.com to launch 'Tasks' from GAE
 
 10) Press the "Guest Sign Up" button on the login screen and you are ready to go!
-(the first user to sign up will automatically have role of "Manager" so they can administer other users)
+(the first user to sign up will automatically have role of "Manager" so they can
+ administer other users)
 
 
 J. DEPLOYING 'TASKS' ON GAE USING SCRIPT
@@ -227,7 +230,7 @@ rm -rf tmp
 
 From section I, repeat steps 4-5 followed by steps 8-9
 
-Periodically, you can fetch code updates from git to get new features and bug fixes.
+Periodically, you can fetch code updates from git to get new features and fixes.
 Make sure any changes you made are committed (see section D).
 To get code updates while you are in the "tasks" directory:
 
@@ -266,15 +269,15 @@ understand its design/plans:
 
 4) "design/TasksStatecharts.pdf" shows the states/transitions within the GUI.
 
-5) "design/TasksControllers.pdf" shows how the various controllers are wired together
+5) "design/TasksControllers.pdf" shows how the various controllers are wired
    and how the views relate to them (implementing the root controller pattern).
 
-6) "API/TasksAPI.xml" drag this file into your browser - the files in the "include"
-   folder render this specification in a nice format for you to understand the
-   REST API endpoints.
+6) "API/TasksAPI.xml" drag this file into your browser - the files in the
+   "include" folder render this specification in a nice format for you to
+   understand the REST API endpoints.
 
-7) "API/TasksJSON.xml" documents the model object structure for what is sent to the
-   server via REST calls.
+7) "API/TasksJSON.xml" documents the model object structure for what is sent to
+   the server via REST calls.
 
 8) "API/TasksFileFormat.txt" Shows the simple/intuitive syntax for importing data
    into and exporting data from 'Tasks'.  In fact, the TasksPlan.txt is itself
@@ -289,17 +292,17 @@ First get the latest Lebowski...
 
 sudo gem install lebowski
 
-
 1) From another terminal window, run the Lebowski server:
 
 lebowski-start-server
 
-2) From another terminal window, run Lebowski scripts:
+2) In another terminal window, from the "tasks/spec" folder, run Lebowski scripts:
 
-cd spec
 lebowski-spec -f n main.rb
 
-3) Before rerunning step (2), stop Lebowski server (Control-C) and restart it (Step 1)
+To re-run the scripts:
+  - stop Lebowski server by pressing "Control-C"
+  - repeat steps 1) and 2)
 
 
 APPENDIX. 'TASKS' ATTRIBUTIONS
