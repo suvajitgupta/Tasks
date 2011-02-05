@@ -155,8 +155,14 @@ http://code.google.com/appengine/
 http://googleappengine.googlecode.com/files/GoogleAppEngineLauncher-1.2.8.dmg
 
 Run GoogleAppEngineLauncher and click on 'Dashboard' icon on top right.
-Login to you Google account and click 'Create Application' and enter a unique <application-identifier>
-You should also specify an <application-title>.
+
+Login to you Google account and click 'Create Application'.
+
+Enter a unique <application-identifier> and application title and press
+"Create Application" button at the bottom.
+
+You will be prompted to enter your mobile phone number to receive a registration code.
+When you get the text message, copy the registation code into the prompt.
 
 3) Get the Tasks-GAE server code:
 
