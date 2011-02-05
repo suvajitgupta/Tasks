@@ -12,10 +12,10 @@ config :tasks, :required => [:'core-tasks', :ki, :sproutcore, :scui, :sai, :'sai
 
 # Local GAE server (uncomment next line & replace 8091 with port of GAE application, comment 3rd line after next)
 # Run 'rm -rf tmp' and restart 'sc-server --port 4400' after swtiching to GAE server
-proxy '/tasks-server', :to => 'localhost:8091', :protocol => 'http'
+# proxy '/tasks-server', :to => 'localhost:8091', :protocol => 'http'
 
 # Local Persevere server (prod instance)
-# proxy '/tasks-server', :to => 'localhost:8088', :protocol => 'http'
+proxy '/tasks-server', :to => 'localhost:8088', :protocol => 'http'
 
 # Local Persevere server (test instance)
 # proxy '/tasks-server', :to => 'localhost:8089', :protocol => 'http'
