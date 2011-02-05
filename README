@@ -3,7 +3,7 @@ A. 'TASKS' INTRODUCTION/GOALS
 
 'Tasks' is is an Agile project management tool with a SproutCore-based GUI
 and REST-based Servers. Persevere and Google App Engine (GAE) Servers are
-supported out-of-the-box.
+supported out-of-the-box.  'Tasks' runs on the desktop and on iPads.
 
 I started the 'Tasks' project in June 2009 with the following goals:
 
@@ -39,7 +39,8 @@ section C below for all of them!):
 
 1) Use it to learn SproutCore.  Read sections E, F, and H.
 
-2) Deploy/use it as a tool.  If you need to customize 'Tasks' read section D.
+2) Deploy/use it as a tool (this will take about 20 minutes the first time).
+   If you need to customize 'Tasks' (e.g., put in a custom logo), read section D.
    If you deploy locally or to your intranet, read sections E, F, and G.
    If you deploy to the cloud, read sections I or J.  
    Read section K for rebuilding/redeploying 'Tasks'.
@@ -82,8 +83,12 @@ Search for "Customizable" within 'Tasks' code and you will see what you can modi
   - Modify "apps/tasks/english.lproj/main_page.js" to customize <InstallationTitle>
     and <installation-logo-filename>
 
-2) Another common scenario is to build 'Tasks' in "To Do" mode.
+2) Another common scenario is to build 'Tasks' in "To Do" mode (this is useful if you
+   simply want to use 'Tasks' to manage a list of things to do, personal or for a team).
   - Set "Software Mode" to false in "apps/tasks/core.js"
+
+Commit your changes so that you can later get code updates from git:
+git commit -m "customization" .
 
 
 E. RUNNING PERSEVERE SERVER
@@ -185,6 +190,9 @@ cd ../<application-identifier>
 <your-favorite-editor> app.yaml
 	- replace <application-identifier> on first line
 	- replace <build-number> globally (there are 4 instances to change)
+	
+Commit your changes so that you can later get code updates from git:
+git commit -m "customized configuration" .
 
 7) Return to GoogleAppEngineLauncher application:
 
@@ -215,10 +223,20 @@ K. REBUILDING/REDEPLOYING 'TASKS' ON GAE
 If you made any mistakes while building or deploying or need to make additional
 changes to Tasks later, follow these steps:
 
-In the 'tasks' folder enter...
+In the 'tasks' directory enter...
 rm -rf tmp
 
 From section I, repeat steps 4-5 followed by steps 8-9
+
+Periodically, you can fetch code updates from git to get new features and bug fixes.
+Make sure any changes you made are committed (see section D).
+To get code updates while you are in the "tasks" directory:
+
+git fetch origin
+git rebase origin/master
+
+You can also get GAE code updates with the same commands while in your GAE
+Server directory "<application-identifier>".
 
 
 L. 'TASKS' ARTIFACTS
