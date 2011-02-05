@@ -50,9 +50,9 @@ section C below for all of them!):
 C. DOWNLOADING 'TASKS' CODE
 ================================================================================
 
-If you don't have the latest Ruby gems, type...
+If you don't have SproutCore installed type...
 
-sudo gem install thor
+sudo gem install sproutcore
 
 Change to the directory where you would like to work on 'Tasks' and type...
 
@@ -150,10 +150,7 @@ http://localhost:4400/tasks
 I. DEPLOYING 'TASKS' ON GOOGLE APP ENGINE (GAE) MANUALLY
 ================================================================================
 
-You can deploy 'Tasks' to the cloud using GAE.  To build 'Tasks'
-for deployment you will need to get the sproutcore buildtools:
-
-sudo gem install sproutcore
+You can deploy 'Tasks' to the cloud using GAE.
 
 1) If you don't have a GAE account, sign up here:
 http://code.google.com/appengine/
