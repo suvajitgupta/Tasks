@@ -53,6 +53,8 @@ C. DOWNLOADING 'TASKS' CODE
 If you don't have the latest Ruby gems, type...
 
 sudo gem install thor
+sudo gem install sproutcore
+sudo gem install lebowski
 
 Change to the directory where you would like to work on 'Tasks' and type...
 
@@ -64,8 +66,6 @@ git clone git://github.com/etgryphon/sproutcore-ui.git scui
 git clone git://github.com/etgryphon/sai.git
 git clone git://github.com/etgryphon/sproutcore-uds.git scuds
 cd ../
-sudo gem install sproutcore
-sudo gem install lebowski
 
 
 D. CUSTOMIZING 'TASKS' CODE
