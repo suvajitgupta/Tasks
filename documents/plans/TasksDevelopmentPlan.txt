@@ -12,7 +12,7 @@
 [MB] (Mike Ball) {Developer}
 [EG] (Evin Grano) {Developer}
 [MC] (Michael Cohen) {Developer}
-[MR] (Josh Holt) {Tester}
+[MR] (Mike Ramsey) {Tester}
 [EO] (Erich Ocean) {Guest}
 [AI] (Alex Iskander) {Guest}
 
