@@ -91,6 +91,30 @@ Tasks.filterSearchController = SC.ObjectController.create(
     }
   },
   
+  setAttributeFilterAll: function() {
+    this.clearAttributeFilterCriteria();
+  },
+
+  setAttributeFilterShowstoppers: function() {
+    this.set('attributeFilterCriteria', Tasks.attributeFilterShowstoppers.slice(0));
+  },
+
+  setAttributeFilterTroubled: function() {
+    this.set('attributeFilterCriteria', Tasks.attributeFilterTroubled.slice(0));
+  },
+
+  setAttributeFilterUnfinished: function() {
+    this.set('attributeFilterCriteria', Tasks.attributeFilterUnfinished.slice(0));
+  },
+
+  setAttributeFilterUnvalidated: function() {
+    this.set('attributeFilterCriteria', Tasks.attributeFilterUnvalidated.slice(0));
+  },
+
+  setAttributeFilterCompleted: function() {
+    this.set('attributeFilterCriteria', Tasks.attributeFilterCompleted.slice(0));
+  },
+
   attributeFilterTypeFeature: function(key, value) {
     return this.attributeFilter(CoreTasks.TASK_TYPE_FEATURE, value);
   }.property('attributeFilterCriteria'),

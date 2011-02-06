@@ -233,27 +233,27 @@ Tasks.TaskManagerState = Ki.State.extend({
     },
 
     setAttributeFilterAll: function() {
-      Tasks.filterSearchController.clearAttributeFilterCriteria();
+      Tasks.filterSearchController.setAttributeFilterAll();
     },
 
     setAttributeFilterShowstoppers: function() {
-      Tasks.filterSearchController.set('attributeFilterCriteria', Tasks.attributeFilterShowstoppers.slice(0));
+      Tasks.filterSearchController.setAttributeFilterShowstoppers();
     },
 
     setAttributeFilterTroubled: function() {
-      Tasks.filterSearchController.set('attributeFilterCriteria', Tasks.attributeFilterTroubled.slice(0));
+      Tasks.filterSearchController.setAttributeFilterTroubled();
     },
 
     setAttributeFilterUnfinished: function() {
-      Tasks.filterSearchController.set('attributeFilterCriteria', Tasks.attributeFilterUnfinished.slice(0));
+      Tasks.filterSearchController.setAttributeFilterUnfinished();
     },
 
     setAttributeFilterUnvalidated: function() {
-      Tasks.filterSearchController.set('attributeFilterCriteria', Tasks.attributeFilterUnvalidated.slice(0));
+      Tasks.filterSearchController.setAttributeFilterUnvalidated();
     },
 
     setAttributeFilterCompleted: function() {
-      Tasks.filterSearchController.set('attributeFilterCriteria', Tasks.attributeFilterCompleted.slice(0));
+      Tasks.filterSearchController.setAttributeFilterCompleted();
     },
 
     cancel: function() {
