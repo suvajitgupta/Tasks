@@ -575,10 +575,10 @@ Tasks.mainPage = SC.Page.design({
      	*/
        render: function(context, firstTime) {
          
-         // console.log('DEBUG: TasksList render()');
+         // console.log('DEBUG: TasksList render() loginTime=' + Tasks.get('loginTime'));
 
          sc_super();
-         if(CoreTasks.loginTime) return;
+         if(Tasks.get('loginTime')) return;
          var sel = Tasks.projectsController.getPath('selection');
          var selectedProjectsCount = sel? sel.get('length') : 0;
          if(selectedProjectsCount === 0) { // No projects selected
@@ -588,7 +588,7 @@ Tasks.mainPage = SC.Page.design({
          else if(selectedProjectsCount === 1) { // Single project selected
            if(sel.getPath('firstObject.tasks.length') === 0) { // Project has no tasks
              if(Tasks.tasksController.isAddable()) context.addClass('helper-add-tasks');
-             else context.addClass('helper-display-mode');
+             else if(Tasks.assignmentsController.get('displayMode') === Tasks.DISPLAY_MODE_TEAM) context.addClass('helper-display-mode');
              return;
            }
            else { // Project has tasks

@@ -39,6 +39,8 @@ Tasks = SC.Object.create(
   GAE_SERVER: 0x0002,
   serverType: 0x0002,
   
+  loginTime: true, // to indicate when there is a login sequence in progress
+  
   /**
    * A computed property to indicate whether the server is capable of sending notifications.
    * @returns {Boolean} true: if connected to a server that supports notifications, false otherwise

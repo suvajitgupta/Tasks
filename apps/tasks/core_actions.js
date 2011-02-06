@@ -279,9 +279,10 @@ Tasks.mixin( /** @scope Tasks */ {
       }
       SC.RunLoop.end();
     }
-    if(CoreTasks.loginTime) {
+    if(Tasks.get('loginTime')) {
+      Tasks.set('loginTime', false);
       if(this.get('defaultProjectId')) this._selectDefaultProject(true);
-      CoreTasks.loginTime = false;
+      this.set('defaultProjectId', null);
     }
  
     // Indicate data loading completion on status bar
@@ -307,12 +308,11 @@ Tasks.mixin( /** @scope Tasks */ {
   _selectDefaultProject: function(warnIfMissing) {
     var defaultProject = CoreTasks.get('allTasksProject');
     var defaultProjectId = this.get('defaultProjectId');
-    // console.log('DEBUG: selectDefaultProject() defaultProjectId=' + defaultProjectId);
+    // console.log('DEBUG: selectDefaultProject() warnIfMissing=' + warnIfMissing + ', defaultProjectId=' + defaultProjectId);
     if(defaultProjectId) { // if specified via a Route
       var project = CoreTasks.getProjectById(defaultProjectId); // see if such a project exists
       if(project) {
         defaultProject = project;
-        this.set('defaultProjectId', null);
       }
       else if(warnIfMissing) {
         console.warn('selectDefaultProject(): No project of ID #' + defaultProjectId);

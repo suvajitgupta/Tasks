@@ -10,8 +10,6 @@ sc_require('core_callbacks');
  */
 CoreTasks.mixin({
 
-  loginTime: true, // to indicate when there is a login sequence in progress
-  
   /**
    * Issues a transient POST request to the server, meaning that the JSON in the response is not
    * loaded into the store (at least not directly).

@@ -96,7 +96,7 @@ Tasks.mixin( /** @scope Tasks */ {
     
     if(params.projectId) params.projectId = Tasks._unescape(params.projectId);
     if(params.search) params.search = Tasks._unescape(params.search);
-    // console.log('DEBUG: selectRoute() loginTime=' + CoreTasks.loginTime + ', projectId=' + params.projectId + ', display=' + params.display + ', filter=' + params.filter + ', search=' + params.search);
+    // console.log('DEBUG: selectRoute() loginTime=' + Tasks.get('loginTime') + ', projectId=' + params.projectId + ', display=' + params.display + ', filter=' + params.filter + ', search=' + params.search);
     
     if(!SC.none(params.display) && params.display !== '') {
       params.display = params.display.toLowerCase();
@@ -124,7 +124,7 @@ Tasks.mixin( /** @scope Tasks */ {
     if(!SC.none(params.projectId) && params.projectId !== '') {
       defaultProjectId = params.projectId.replace('#', '');
     }
-    if(CoreTasks.loginTime) {
+    if(Tasks.get('loginTime')) {
       if(defaultProjectId) Tasks.set('defaultProjectId', defaultProjectId);
       Tasks.defaultRoute();
     }

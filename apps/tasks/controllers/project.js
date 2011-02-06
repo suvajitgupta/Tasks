@@ -76,15 +76,12 @@ Tasks.projectController = SC.ObjectController.create(
    */
   _projectSelectionDidChange: function() {
     if(this.getPath('content.length') !== 1) return;
-
-    var last = this._project,
-        cur = this.get('content');
-
+    var last = this._project, cur = this.get('content');
     if (cur && cur.firstObject) cur = cur.firstObject();
     if (last !== cur) {
       // console.log('DEBUG: projectSelectionDidChange() project: ' + cur.get('name'));
       Tasks.tasksController.deselectTasks();
-      if(Tasks.mainPage.getPath('mainPane.tasksSceneView.nowShowing') == 'taskEditor') Tasks.statechart.sendEvent('showTasksList');
+      if(Tasks.get('panelOpen') === Tasks.TASK_EDITOR) Tasks.statechart.sendEvent('showTasksList');
       this._project = cur;
       var oldRoute = '#' + SC.routes.get('location');
       var newRoute = CoreTasks.isSystemProject(cur)? '' : ('#select&projectId=#' + cur.get('id'));
