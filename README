@@ -50,6 +50,16 @@ section C below for all of them!):
 C. DOWNLOADING 'TASKS' CODE
 ================================================================================
 
+If you don't have Ruby 1.9, install and use rvm to get it...
+
+bash < <( curl http://rvm.beginrescueend.com/releases/rvm-install-head )
+
+Add the following line at the end of your ~/.bash_profile or ~/.profile
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+
+rvm install 1.9.2
+rvm use 1.9.2 --default
+
 If you don't have SproutCore installed type...
 
 sudo gem install sproutcore
