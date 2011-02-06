@@ -261,6 +261,8 @@ and press the "Dashboard" button.  Login to your Google account and click on
 To modify any data directly in the database click on "Datastore Viewer"
 button under the "Data" group.  Choose the type of 'Tasks' records to view/edit.
 
+Since 'Tasks' soft-deletes data you should periodically cleanup these records
+on the GAE Server.  This is an advanced topic that is detailed in the code.
 
 
 M. 'TASKS' ARTIFACTS
