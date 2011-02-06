@@ -214,9 +214,10 @@ and finally press "Add"
 
 9) Browse to http://<application-identifier>.appspot.com to launch 'Tasks' from GAE
 
-10) Press the "Guest Sign Up" button on the login screen and you are ready to go!
-(the first user to sign up will automatically have role of "Manager" so they can
- administer other users)
+10) Add yourself as a user via the same approach as what is outlined in section F:
+
+./scripts/user-add.sh "<Full Name>" "<Login Name>" "Manager" <application-identifier>.appspot.com
+(enter/reenter password and remember it!)
 
 
 J. DEPLOYING 'TASKS' ON GAE USING SCRIPT
