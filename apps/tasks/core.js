@@ -19,6 +19,9 @@ Tasks = SC.Object.create(
   VERSION: '1.6',
   isLoaded: NO, // for Lebowski
 
+  // Customizable "Load Done Project Data": set to false for installations where the data can grow to large volumes
+  loadDoneProjectData: true,
+  
   // Customizable "Square Installation Logo": set to true for square installation logo, false for rectangular installation logo
   squareInstallationLogo: document.title.match(/Eloqua/)? false : true,
 

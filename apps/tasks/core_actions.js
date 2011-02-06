@@ -14,7 +14,6 @@ sc_require('controllers/tasks');
 Tasks.mixin( /** @scope Tasks */ {
 
   loginName: null,
-  loadDoneProjectData: false,
 
   /**
    * Authenticate user trying to log in to Tasks application.
