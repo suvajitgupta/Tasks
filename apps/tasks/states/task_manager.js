@@ -277,7 +277,6 @@ Tasks.TaskManagerState = Ki.State.extend({
   showingTaskEditor: Ki.State.design({
 
     showTasksList: function() {
-      Tasks.mainPage.taskEditor.close();
       this.gotoState('loggedIn.taskManager.showingTasksList');
     },
 
