@@ -98,6 +98,7 @@ Search for "Customizable" within 'Tasks' code to see what you can modify.
 
 Commit your changes so that you can later get code updates from git...
 
+git add .
 git commit -m "customization" .
 
 
@@ -201,7 +202,8 @@ Open "app.yaml" and replace <application-identifier> on first line
 	
 Commit your changes so that you can later get code updates from git...
 
-git commit -m "customized configuration" .
+git add .
+git commit -m "customization" .
 
 7) Return to GoogleAppEngineLauncher application:
 
