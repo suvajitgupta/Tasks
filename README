@@ -163,39 +163,49 @@ I. DEPLOYING 'TASKS' ON GOOGLE APP ENGINE (GAE) MANUALLY
 
 You can deploy 'Tasks' to the cloud using GAE.
 
-1) If you don't have a GAE account, sign up here:
+3) Get the Tasks-GAE server code and think of a unique name for your application
+   (we will call this name <application-identifer> - replace it below with yours):
+
+cd ../
+git clone git://github.com/joshholt/SproutCoreTasks-AppEngineBackend.git <application-identifier>
+
+2) Get the Google App Engine SDK/client application:
+
+If you don't have a GAE account, sign up here:
+
 http://code.google.com/appengine/
 
-2) Download and install the GAE SDK if you don't have it (link for Mac below):
-http://googleappengine.googlecode.com/files/GoogleAppEngineLauncher-1.2.8.dmg
+Click on the "Download" link for the App Engine SDK and then click on
+"Google App Engine SDK for Python" and install it on your computer.
 
-Run GoogleAppEngineLauncher and click on "Dashboard" icon on top right.
+3) Run GoogleAppEngineLauncher to add your new application:
+
+From "File" menu, choose "Add Existing Application..."
+Click on "Browse" and find/select <application-identifier> folder,
+press "Choose" and then "Add"
+
+Click on "Dashboard" icon on top right.
 
 Login to your Google account and click "Create Application".
 
-Enter a unique <application-identifier> and application title and press
+Enter <application-identifier> and application title and press
 "Create Application" button at the bottom.
 
 You will be prompted to enter your mobile number to receive a registration code.
 When you get the text message, copy the registation code into the prompt.
 
-3) Get the Tasks-GAE server code:
-
-cd ../
-git clone git://github.com/joshholt/SproutCoreTasks-AppEngineBackend.git <application-identifier>
-
-4) Build 'Tasks' for deployment (this may take a few minutes...)
+4) Build 'Tasks' GUI for deployment (this may take a few minutes...)
 
 cd tasks
 sc-build -rc --build=build
 
-5) After sc-build finishes, copy tasks production build for deployment on GAE:
+After sc-build finishes, copy tasks production build for deployment on GAE:
 (for this "cp" command make sure there is no slash after "static" which you may
 get if you tab for filename completion)
 
 cp -r tmp/build/static ../<application-identifier>
 
-6) Configure GAE application before deployment:
+5) Configure GAE application before deployment:
 
 cd ../<application-identifier>
 Open "app.yaml" and replace <application-identifier> on first line
@@ -205,18 +215,12 @@ Commit your changes so that you can later get code updates from git...
 git add .
 git commit -m "customization" .
 
-7) Return to GoogleAppEngineLauncher application:
-
-From "File" menu, choose "Add Existing Application..."
-Click on "Browse" and find/select <application-identifier> folder and press "Choose",
-and finally press "Add"
-
-8) Now deploy to the cloud by pressing "Deploy"
+6) Deploy 'Tasks' to the cloud by pressing "Deploy" from GoogleAppEngineLauncher:
    (this can take a few minutes...wait until it says "finished with exit code 0")
 
-9) Browse to http://<application-identifier>.appspot.com to launch 'Tasks' from GAE
+Browse to http://<application-identifier>.appspot.com to launch your custom 'Tasks'
 
-10) Add yourself as a user via the same approach as what is outlined in section F:
+7) Add yourself as a user via the same approach as what is outlined in section F:
 
 ./scripts/user-add.sh "<Full Name>" "<Login Name>" "Manager" <application-identifier>.appspot.com
 (enter/reenter password and remember it!)
@@ -241,17 +245,17 @@ In the "tasks" directory enter...
 
 rm -rf tmp
 
-From section I, repeat steps 4-5 followed by steps 8-9
+From section I, repeat step 4 and then 6
 
 Periodically, you can fetch code updates from git to get new features and fixes.
-Make sure any changes you made are committed (see section D).
+Make sure any changes you made are first committed (see section D).
 To get code updates while you are in the "tasks" directory:
 
 git fetch origin
 git rebase origin/master
 
-You can also get GAE code updates with the same commands while in your GAE
-Server directory "<application-identifier>".
+You can also get GAE Server updates with the same commands from your
+"<application-identifier>" folder.
 
 
 L. ADMINISTERING GAE
