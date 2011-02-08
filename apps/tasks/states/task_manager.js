@@ -151,19 +151,19 @@ Tasks.TaskManagerState = Ki.State.extend({
       Tasks.tasksController.set('priority', CoreTasks.TASK_PRIORITY_LOW);
     },
 
-    setDevelopmentStatusPlanned: function() {
+    setDevelopmentStatusWithValidationPlanned: function() {
       Tasks.tasksController.set('developmentStatusWithValidation', CoreTasks.STATUS_PLANNED);
     },
 
-    setDevelopmentStatusActive: function() {
+    setDevelopmentStatusWithValidationActive: function() {
       Tasks.tasksController.set('developmentStatusWithValidation', CoreTasks.STATUS_ACTIVE);
     },
 
-    setDevelopmentStatusDone: function() {
+    setDevelopmentStatusWithValidationDone: function() {
       Tasks.tasksController.set('developmentStatusWithValidation', CoreTasks.STATUS_DONE);
     },
 
-    setDevelopmentStatusRisky: function() {
+    setDevelopmentStatusWithValidationRisky: function() {
       Tasks.tasksController.set('developmentStatusWithValidation', CoreTasks.STATUS_RISKY);
     },
 

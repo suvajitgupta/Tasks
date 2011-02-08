@@ -317,28 +317,28 @@ Tasks.TaskItemView.mixin(/** @scope Tasks.TaskItemView */ {
         icon: 'no-icon',
         isEnabled: YES,
         checkbox: developmentStatus === CoreTasks.STATUS_PLANNED,
-        action: 'setDevelopmentStatusPlanned'
+        action: 'setDevelopmentStatusWithValidationPlanned'
       });
       ret.push({
         title: '<span class=status-active>' + CoreTasks.STATUS_ACTIVE.loc() + '</span>',
         icon: 'no-icon',
         isEnabled: YES,
         checkbox: developmentStatus === CoreTasks.STATUS_ACTIVE,
-        action: 'setDevelopmentStatusActive'
+        action: 'setDevelopmentStatusWithValidationActive'
       });
       ret.push({
         title: '<span class=status-done>' + CoreTasks.STATUS_DONE.loc() + '</span>',
         icon: 'no-icon',
         isEnabled: YES,
         checkbox: developmentStatus === CoreTasks.STATUS_DONE,
-        action: 'setDevelopmentStatusDone'
+        action: 'setDevelopmentStatusWithValidationDone'
       });
       ret.push({
         title: '<span class=status-risky>' + CoreTasks.STATUS_RISKY.loc() + '</span>',
         icon: 'no-icon',
         isEnabled: YES,
         checkbox: developmentStatus === CoreTasks.STATUS_RISKY,
-        action: 'setDevelopmentStatusRisky'
+        action: 'setDevelopmentStatusWithValidationRisky'
       });
 
       if(Tasks.softwareMode && developmentStatus === CoreTasks.STATUS_DONE) {
