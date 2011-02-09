@@ -10,7 +10,7 @@ config :'core-tasks', :required => [:sproutcore, :scuds, :'scuds/local']
 config :tasks, :required => [:'core-tasks', :ki, :sproutcore, :scui, :sai, :'sai/graphs'],:title=>"Todos:Eloqua"
 
 
-# Local GAE server (uncomment next line & replace 8091 with port of GAE application, comment 3rd line after next)
+# Local GAE server (uncomment line after next & replace 8091 with port of GAE application; then comment 4th line after next)
 # Run 'rm -rf tmp' and restart 'sc-server --port 4400' after swtiching to GAE server
 # proxy '/tasks-server', :to => 'localhost:8091', :protocol => 'http'
 # Local Persevere server (prod instance)
