@@ -209,6 +209,9 @@ cp -r tmp/build/static ../<application-identifier>
 
 cd ../<application-identifier>
 Open "app.yaml" and replace <application-identifier> on first line
+
+You can optionally customize "Only Allow Manager Login" in "main.py" so that only
+"Manager" users can log in - this is useful in securing your personal data.
 	
 Commit your changes so that you can later get code updates from git...
 
