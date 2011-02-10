@@ -163,40 +163,33 @@ I. DEPLOYING 'TASKS' ON GOOGLE APP ENGINE (GAE) MANUALLY
 
 You can deploy 'Tasks' to the cloud using GAE.
 
-3) Get the Tasks-GAE server code and think of a unique name for your application
-   (we will call this name <application-identifer> - replace it below with yours):
-
-cd ../
-git clone git://github.com/joshholt/SproutCoreTasks-AppEngineBackend.git <application-identifier>
-
-2) Get the Google App Engine SDK/client application:
-
-If you don't have a GAE account, sign up here:
+1) If you don't have a GAE account, sign up here:
 
 http://code.google.com/appengine/
 
 Click on the "Download" link for the App Engine SDK and then click on
 "Google App Engine SDK for Python" and install it on your computer.
 
-3) Run GoogleAppEngineLauncher to add your new application:
+2) Sign in to GAE and create an application by browsing to:
 
-From "File" menu, choose "Add Existing Application..."
-Click on "Browse" and find/select <application-identifier> folder,
-press "Choose" and then "Add"
-
-Click on "Dashboard" icon on top right.
+http://appengine.google.com/
 
 Login to your Google account and click "Create Application".
 
-Enter <application-identifier> and application title and press
+Enter a unique <application-identifier> and application title and press
 "Create Application" button at the bottom.
 
-You will be prompted to enter your mobile number to receive a registration code.
-When you get the text message, copy the registation code into the prompt.
+The first time, you will be prompted to enter your mobile number to receive a
+registration code. From the text message, copy the registation code into the prompt.
+
+3) Get the Tasks-GAE server code:
+
+cd ../
+git clone git://github.com/joshholt/SproutCoreTasks-AppEngineBackend.git <application-identifier>
+cd tasks
 
 4) Build 'Tasks' GUI for deployment (this may take a few minutes...)
 
-cd tasks
 sc-build -rc --build=build
 
 After sc-build finishes, copy tasks production build for deployment on GAE:
@@ -205,7 +198,13 @@ get if you tab for filename completion)
 
 cp -r tmp/build/static ../<application-identifier>
 
-5) Configure GAE application before deployment:
+5) Run GoogleAppEngineLauncher to add your new application:
+
+From "File" menu, choose "Add Existing Application..."
+Click on "Browse" and find/select the <application-identifier> folder,
+press "Choose" and then "Add"
+
+6) Configure GAE application before deployment:
 
 cd ../<application-identifier>
 Open "app.yaml" and replace <application-identifier> on first line
@@ -218,12 +217,12 @@ Commit your changes so that you can later get code updates from git...
 git add .
 git commit -m "customization" .
 
-6) Deploy 'Tasks' to the cloud by pressing "Deploy" from GoogleAppEngineLauncher:
+7) Deploy 'Tasks' to the cloud by pressing "Deploy" from GoogleAppEngineLauncher:
    (this can take a few minutes...wait until it says "finished with exit code 0")
 
-Browse to http://<application-identifier>.appspot.com to launch your custom 'Tasks'
+Browse to http://<application-identifier>.appspot.com to launch your new 'Tasks'
 
-7) Add yourself as a user via the same approach as what is outlined in section F:
+8) Add yourself as a user via the same approach as what is outlined in section F:
 
 ./scripts/user-add.sh "<Full Name>" "<Login Name>" "Manager" <application-identifier>.appspot.com
 (enter/reenter password and remember it!)
@@ -241,16 +240,15 @@ J. DEPLOYING 'TASKS' ON GAE USING SCRIPT
 K. REBUILDING/REDEPLOYING 'TASKS' ON GAE
 ================================================================================
 
-If you made any mistakes while building or deploying or need to make additional
+1) If you made any mistakes while building or deploying or need to make additional
 changes to Tasks later, follow these steps:
 
-In the "tasks" directory enter...
-
+cd ../tasks
 rm -rf tmp
 
-From section I, repeat step 4 and then 6
+From section I, repeat step 4 and then 7
 
-Periodically, you can fetch code updates from git to get new features and fixes.
+2) Periodically, you can fetch code updates from git to get new features and fixes.
 Make sure any changes you made are first committed (see section D).
 To get code updates while you are in the "tasks" directory:
 
@@ -259,6 +257,8 @@ git rebase origin/master
 
 You can also get GAE Server updates with the same commands from your
 "<application-identifier>" folder.
+
+Repeat step 1.
 
 
 L. ADMINISTERING GAE
