@@ -302,7 +302,7 @@ Hardening/Testing @Active
 | Popup online Help, Statistics
 | Email Notifications, Task watching
 ^ Develop comprehensive Model/View unit tests [SG] <BB> @Active
-^ Develop comprehensive automated test scripts using Lebowski/Selenium [SG] <MR> @Active
+^ Develop comprehensive automated path-based test scripts using Lebowski/Selenium [SG] <MR> @Active
 
 
 #========================================================================================================================

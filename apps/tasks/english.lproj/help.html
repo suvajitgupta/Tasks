@@ -56,10 +56,11 @@
 	<h2>Basic Features</h2>
 		<p style="margin-left: 5px">As soon as you understand a few basic concepts you can start using <app>tasks</app>. More powerful features use <i>progressive disclosure</i> so that you can gradually expand your sphere of comfort. <app>tasks</app> enforces role-based access control: only Managers can add/edit/delete projects while Guests can only add unallocated tasks and edit/delete tasks they submitted).</p>
 		<h3>Projects</h3>
-			<p>To begin, click on the plus button beneath the projects list to create a project and type in its name. To view a project's tasks, simply click on the project name.  To rename a project double click on its name and change it (if the project is already selected, you just have to click on it again to start editing it).  To delete a project select it and then click on the minus button beneath the projects list.  There are "SYSTEM PROJECTS" at the top of the projects list to show all, unallocated, and unassigned tasks respectively. As you work on your projects, you can mark them as "Active" via the editors or context menu.  When all tasks for a project are completed, you can mark it as "Done" and it won't clutter the projects list.</p>
+			<p>There are "SYSTEM PROJECTS" group at the top of the projects list to show "All Tasks," "Unallocated Tasks", and "Unassigned Tasks."  To view a project's tasks, simply click on it in the projects list.  You can multi-select projects to see tasks in all of them.</p>
+			<p>"Manager" users can create/update/delete projects. They can add a project by clicking on the plus button beneath the projects list and then enter the project name and other attributes in the popup editor.  They can rename a project by double clicking on its name and changing it (if the project is already selected, they just have to click on it again to start editing it).  They can bring up the popup editor by clicking on the pencil icon that shows up as a hover. They can delete a project by first selecting it and then clicking on the minus button beneath the projects list.  They can mark projects as "Active" via the context menu or popup editor.  When all tasks for a project are completed, they can mark it as "Done" which tucks it away in the closed "DONE PROJECTS" group.</p>
 			<p class="softwareOnly">Your iterative releases naturally map to <app>tasks</app> projects. For example, if you use Rational Unified Process (RUP) or eXtreme Unified Process (XUP), your timeboxed <i>SmallReleases</i> become projects like "Architectural Baseline" and "FeatureReleaseOne."  Those using Scrum should use projects to map out their <i>Sprints</i> and <i>Backlog</i>.</p>
 		<h3>Tasks</h3>
-			<p>To create a task, click on the plus button beneath the tasks list button and enter the name and other attributes of the task via the editor.  If you have a project selected, the new task is automatically allocated to that project.  If you have a task selected, the new task is automatically assigned to the same user and copies over some of the selected task's attributes.  Update a task's name by double clicking on it and using the inline editor.  To add more comprehensive task description use the editor.  Set the task's attributes via context menus or the slide-out/inline editors.  Delete selected tasks using the minus button beneath the tasks list.  To reassign a task to another user, simply drag-and-drop it to the target user if they are visible or use the task editor to change the assignee.  To reallocate a task to another project drag-and-drop it on the target project in the master list or via the task editor.  You can navigate to previous/next tasks via the editor using the arrow buttons at the top right.  Note: you can select multiple tasks at once and perform attribute change and delete/reassign/reallocate operations.  Tasks are grouped by assignee and task attributes are displayed as follows:</p>
+			<p>To create a task, click on the plus button beneath the tasks list and enter the name and other attributes of the task via the slide-out editor.  If you have a project selected, the new task is automatically allocated to that project.  If you have a task selected, the new task is automatically assigned to the same user and copies over some of the selected task's attributes.  Update a task's name by double clicking on it and using the inline editor.  To add more comprehensive task description click on the pencil icon that shows up on the hover to launch the editor.  Set the task's attributes via context menus or the slide-out/inline editors.  Delete selected tasks using the minus button beneath the tasks list.  To reassign a task to another user, simply drag-and-drop it to the target user if they are visible or use the task editor to change the assignee.  To reallocate a task to another project drag-and-drop it on the target project in the master list or via the task editor.  You can navigate to previous/next task while inside the editor using the arrow buttons adjacent to the task ID at the top.  Note: you can select multiple tasks at once and perform attribute change and delete/reassign/reallocate operations.  Tasks are grouped by assignee and task attributes are displayed as follows:</p>
 			<ul>
 				<span class="softwareOnly"><li>icons indicate <i>type</i></li></span>
 				<li>fonts indicate <i>priority</i></li>
@@ -78,9 +79,9 @@
 		<h3>Filtering and Searching</h3>
 			<p>You can control which tasks are displayed in the tasks details pane using one or more of these approaches:</p>
 			<ul>
-				<li>Click on the "Filter" button and use the <i>QuickFilters</i> at the top of the filter panel.  You may get even more selective by manually controlling the checkboxes for the various attributes. You may also filter tasks that were recently updated, have effort specified, or are being watched.  When filtering is on a cancel button appears next to the "Filter" icon.</li>
+				<li>Click on the "Filter" button and use the <i>QuickFilters</i> at the top of the filter panel.  You may get even more selective by manually controlling the checkboxes for the various attributes. You may also filter tasks that were recently updated, have effort specified, or are being watched.  When filtering is enabled a cancel button appears next to the filter icon.</li>
 				<li>Specify one or more task [Assignees] or &lt;Submitters&gt; (comma or space separated).  You must type in the exact login name or a part of the full name (case sensitive).</li>
-				<li>Search for one or more task IDs (each prepended by '#' and comma or space separated).</li>
+				<li>Search for one or more task IDs (each prepended by '#' and comma or space separated).  Remove the search by clicking on the cancel button to the far right.</li>
 				<li>Search using a string matching any part of task <i>name</i> or <i>description</i> in the search bar.  You can prefix the search string with a caret to find items that don't match the search pattern.</li>
 			</ul>
 			<p>Filtering results are displayed as soon as you stop typing in the assignee or search text boxes.</p>
@@ -96,14 +97,15 @@
 		<h3>Load Balancing</h3>
 			<p>To use this feature, you must specify the <i>time left</i> in an active project and set the <i>effort</i> for tasks as integer or decimal numbers, optionally appended with an unit of 'd' (days) or 'h' (hours).  If no time unit is specified it is assumed to mean 'days.'  Task <i>effort</i> may also be expressed as a range like: '3-5d'.<app>tasks</app> will automatically total the efforts for each assignee (excluding <i>Low</i> priority tasks) and indicate their loading via color coding. A "?" is appended for range-based subtotals including tasks with unspecified efforts.</p>
 			<p class="softwareOnly">To manage the release till <i>Feature Freeze</i> set the project's <i>time left</i> accordingly.  While the project is active <app>tasks</app> will decrement and display the <i>countdown</i> next to the project name every day until no time is left. As the team moves towards <i>Code Freeze</i>, you may reset the <i>activated at</i> field and <i>time left</i> to the number of days you allocate to code stabilization.  This way, the team can run very tight cycles and converge on the milestones of <i>Code/Feature Freezes.</i>
-	<h2>Advanced Features</h2>
-		<p style="margin-left: 5px">Let's close out with some <app>tasks</app> power user features.</p>
 		<h3>Statistics</h3>
 			<p>Choose "Statistics..." in the actions menu to get a popup dialog summarizing statistics about the displayed tasks.  This is quite useful in seeing how tasks are broken up by their attributes.</p>
+	<h2>Advanced Features</h2>
+		<p style="margin-left: 5px">Let's close out with some <app>tasks</app> power user features.</p>
 		<h3>URL Parameters</h3>
 			<p><app>tasks</app> allows you to choose your default project (which is selected at startup), display mode, and filter/search criteria by specifying or bookmarking an URL with additional parameters (replace items in CAPS with your specifics):</p>
 			<pre style="margin-left: 50px">http://HOST:PORT/tasks#select&amp;projectId=#ID&amp;display=MODE&amp;filter=QUICKFILTER&amp;search=PATTERN</pre>
-			<p>MODE may be <i>team</i> or <i>tasks</i>.  QUICKFILTER may be one of the following values: <i>showstoppers</i>, <i>troubled</i>, <i>unfinished</i>, <i>unvalidated</i>, and <i>completed</i>.  PATTERN is any legal search pattern described above.  Also, when you click on any project, the URL is automatically set to a value in the format shown above so that you may bookmark that project and return to it easily.</p>
+			<p>MODE may be <i>team</i> or <i>tasks</i>.  QUICKFILTER may be one of the following values: <i>showstoppers</i>, <i>troubled</i>, <i>unfinished</i>, <i>unvalidated</i>, and <i>completed</i>.  PATTERN is any legal search pattern described above.  Also, when you click on any project, the URL is automatically set to a value in the format shown above so that you may bookmark that project and return to it easily.  A concrete example is shown below:</p>
+			<pre style="margin-left: 50px">http://tasks-demo.appspot.com/tasks#select&amp;display=team&amp;filter=unfinished&amp;search=^Out of Scope</pre>
 			<p>You can also view specific tasks using an URL like this (replace items in CAPS with your specifics) - this is useful for sending links to people via email (user is logged in automatically as 'guest'):</p>
 			<pre style="margin-left: 50px">http://HOST:PORT/tasks#view&amp;search=PATTERN</pre>
 		<h3>Data Exchange</h3>
@@ -127,7 +129,7 @@
 		<h3>Clipboard Copy</h3>
 			<p>You can copy the <i>ID</i> and <i>name</i> of selected tasks to the clipboard by clicking on the icon that appears in the top bar to the left of the filter button.  This is useful for code commit messages or to email people.</p>
 		<h3>Configuration and Administration</h3>
-			<p>Choose "Users/Settings" in the actions menu to manage users and preferences.  Here Managers can add/modify/delete users and their roles (via drag-and-drop too).  When a user is deleted, all task submitter and assignee fields referencing this user are cleared. You can find users by searching for name/loginName in the search bar at the top right.</p>
+			<p>"Manager" users can click on "Users/Settings" in the actions menu to manage users and preferences.  They can add/update/delete users and their roles (via drag-and-drop too).  When a user is deleted, all task submitter and assignee fields referencing this user are cleared. They can find users by searching for name/loginName in the search bar at the top right.</p>
 	<h2>Best Practices</h2>
 		<p style="margin-left: 5px">To get the maximum value from using <app>tasks</app>, consider the following recommendations.</p>
 		<h3>Clarify Tasks</h3>
@@ -154,7 +156,7 @@
 		<h3 class="softwareOnly">Plan End Game</h3>
 			<p class="softwareOnly">As you <i>CountDownToRelease</i> use <i>QuickFilters</i> to view and resolve showstoppers.  This is a particularly good time to take advantage of the load balancing capabilities of <app>tasks</app> and <i>Productionize</i> your code as quickly as possible.</p>
 		<h3>Use Templates</h3>
-			<p>You can create project/task <i>templates</i> by exporting data and bringing them back in via import.  This is particularly useful when you have a boilerplate set of items you reuse as you start initiatives. You can create the template data outside of <app>tasks</app> as well.  Templated data gives you a jump start after which you can add/modify/delete items at will.</p>
+			<p>You can create project/task <i>templates</i> by exporting data and bringing them back in via import.  This is particularly useful when you have a boilerplate set of items you reuse as you start initiatives. You can create the template data outside of <app>tasks</app> as well.  Templated data gives you a jump start after which you can add/update/delete items at will.</p>
 	<h2>Reference</h2>
 		<p style="margin-left: 5px">This section provides details about the various entities used in <app>tasks</app>.</p>
 		<h3>Task</h3>
@@ -177,5 +179,7 @@
 				<p>A team member with a <i>login name</i> and <i>full name</i> as well as a <i>role</i> (like Manager or Guest).  A user logs into the <app>tasks</app> application using an optional <i>password</i> and can be a task <i>submitter</i> and/or <i>assignee</i>.</p>
 			<h3>Watch</h3>
 				<p>Indicates a <i>task</i> being watched by a <i>user</i>.</p>
+			<h3>Comment</h3>
+				<p>A comment about a <i>task</i> created by a <i>user</i>.</p>
 </body>
 </html>
