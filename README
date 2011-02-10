@@ -50,7 +50,10 @@ section C below for all of them!):
 C. DOWNLOADING 'TASKS' CODE
 ================================================================================
 
-If you don't have Ruby 1.9, install and use rvm to get it...
+On a Mac, you need to have Xcode and git installed before using the steps below.
+
+If you don't have Ruby 1.9 (check with "ruby -v"), install and use
+"rvm" to get it...
 
 bash < <( curl http://rvm.beginrescueend.com/releases/rvm-install-head )
 
@@ -83,18 +86,18 @@ D. CUSTOMIZING 'TASKS' CODE
 This is useful if you deploy 'Tasks' on your intranet or the cloud (see below).
 Search for "Customizable" within 'Tasks' code to see what you can modify.
 
-1) One common scenario is to customize your "Installation Title/Logo":
+1) One common scenario is to build 'Tasks' in "To Do" mode (this is useful
+   when using 'Tasks' to manage a list of things to do, personal or for a team):
+
+  - Set "softwareMode" to false in "apps/tasks/core.js"
+
+2) Another popular scenario is to customize your "Installation Title/Logo":
 
   - Add your logo to the "apps/tasks/english.lproj/default_theme/images" folder
-  - Modify "apps/tasks/core.js" to specify if it is a "Square Installation Logo"
+  - Modify "apps/tasks/core.js" to specify if it is a "squareInstallationLogo"
   - Modify the Buildfile to customize the <InstallationTitle>
   - Modify "apps/tasks/english.lproj/main_page.js" to customize
     <InstallationTitle> and <installation-logo-filename>
-
-2) Another common scenario is to build 'Tasks' in "To Do" mode (this is useful
-   when using 'Tasks' to manage a list of things to do, personal or for a team):
-
-  - Set "Software Mode" to false in "apps/tasks/core.js"
 
 Commit your changes so that you can later get code updates from git...
 
@@ -176,11 +179,11 @@ http://appengine.google.com/
 
 Login to your Google account and click "Create Application".
 
-Enter a unique <application-identifier> and application title and press
-"Create Application" button at the bottom.
-
 The first time, you will be prompted to enter your mobile number to receive a
 registration code. From the text message, copy the registation code into the prompt.
+
+Enter a unique <application-identifier> and application title and press
+"Create Application" button at the bottom.
 
 3) Get the Tasks-GAE server code:
 
@@ -209,7 +212,7 @@ press "Choose" and then "Add"
 cd ../<application-identifier>
 Open "app.yaml" and replace <application-identifier> on first line
 
-You can optionally customize "Only Allow Manager Login" in "main.py" so that only
+You can optionally customize "only_allow_manager_login" in "main.py" so that only
 "Manager" users can log in - this is useful in securing your personal data.
 	
 Commit your changes so that you can later get code updates from git...
@@ -224,6 +227,7 @@ Browse to http://<application-identifier>.appspot.com to launch your new 'Tasks'
 
 8) Add yourself as a user via the same approach as what is outlined in section F:
 
+cd ../tasks
 ./scripts/user-add.sh "<Full Name>" "<Login Name>" "Manager" <application-identifier>.appspot.com
 (enter/reenter password and remember it!)
 
