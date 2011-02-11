@@ -83,8 +83,12 @@
 .sc-master-detail-view .sc-workspace-view .task-editor .scui-combobox-dropdown-button-view {
   background-color: #DDD !important;
 }
+.project-editor .sc-text-field-view.text-area,
+.sc-master-detail-view .sc-workspace-view .task-editor .sc-text-field-view.text-area {
+  background: beige !important;
+}
 .sc-master-detail-view .sc-workspace-view .task-editor .sc-text-field-view {
-  background: #EEE !important;
+  background: #FFF !important;
 }
 
 .sc-split-divider-view {
@@ -106,7 +110,7 @@
 }
 
 .sc-view .comment-description {
-  background: #FFC !important;
+  background: #F3F3F3 !important;
   font-family: "Lucida Sans","Lucida Grande",Verdana,Arial,sans-serif !important;
   font-size: 10px !important;
   line-height: 1 !important;
@@ -119,8 +123,8 @@
   border: 1px solid #AAA !important;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
-  -moz-box-shadow: 0 1px 3px #777;
-  -webkit-box-shadow: 0 1px 3px #777;
+  -moz-box-shadow: 0 1px 3px #222;
+  -webkit-box-shadow: 0 1px 3px #222;
 }
 
 .comments-list .sel .comment-description {
