@@ -1,8 +1,12 @@
 A. 'TASKS' INTRODUCTION/GOALS
 ================================================================================
-'Tasks' is is an Agile project management tool with a SproutCore-based GUI
-and REST-based Servers. Persevere and Google App Engine (GAE) Servers are
-supported out-of-the-box.  'Tasks' runs on the desktop and on iPads.
+
+'Tasks' is a rich-internet application for tracking personal or team tasks.
+The 'Tasks' GUI runs on desktop and iPad browsers and is particularly useful
+for managing Agile software development.
+
+'Tasks' consists of a SproutCore-based GUI and REST-based Servers.
+Persevere and Google App Engine (GAE) Servers are supported out-of-the-box.
 
 I started the 'Tasks' project in June 2009 with the following goals:
 
@@ -36,13 +40,13 @@ B. GETTING STARTED WITH 'TASKS'
 There are several things you can do with 'Tasks' (but you will have to read
 section C below for all of them!):
 
-1) Use it to learn SproutCore.  Read sections E, F, and H.
-
-2) Deploy/use it as a tool (this will take about 20 minutes the first time).
+1) Deploy/use it as a tool (this will take about 20 minutes the first time).
    If you need to customize 'Tasks' (e.g., put in a custom logo), read section D.
    If you deploy locally or to your intranet, read sections E, F, and G.
    If you deploy to the cloud, read sections I or J.  
    Read section K for rebuilding/redeploying 'Tasks' on the cloud.
+
+2) Use it to learn SproutCore.  Read sections E, F, and H.
 
 3) Contribute to 'Tasks' development and testing.  Read sections M and N.
 
@@ -50,9 +54,9 @@ section C below for all of them!):
 C. DOWNLOADING 'TASKS' CODE
 ================================================================================
 
-On a Mac, you need to have Xcode and git installed before using the steps below.
+On a Mac, you must have "Xcode" and "git" installed before using the steps below.
 
-If you don't have Ruby 1.9 (check with "ruby -v"), install and use
+If you don't have Ruby 1.9 (check by typing "ruby -v"), install and use
 "rvm" to get it...
 
 bash < <( curl http://rvm.beginrescueend.com/releases/rvm-install-head )
@@ -82,8 +86,8 @@ cd ../
 D. CUSTOMIZING 'TASKS' CODE
 ================================================================================
 
-'Tasks' has some customizable settings to suit your specific needs.
-This is useful if you deploy 'Tasks' on your intranet or the cloud (see below).
+'Tasks' has several customizable settings to suit your specific needs.
+This is useful if you deploy 'Tasks' on your intranet or the cloud.
 Search for "Customizable" within 'Tasks' code to see what you can modify.
 
 1) One common scenario is to build 'Tasks' in "To Do" mode (this is useful
@@ -161,7 +165,7 @@ http://localhost:4400/tasks
    "apps/tasks/tests/data/import_data.txt"
 
 
-I. DEPLOYING 'TASKS' ON GOOGLE APP ENGINE (GAE) MANUALLY
+I. DEPLOYING 'TASKS' ON GAE MANUALLY
 ================================================================================
 
 You can deploy 'Tasks' to the cloud using GAE.
