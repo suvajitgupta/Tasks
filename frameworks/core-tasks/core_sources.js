@@ -25,7 +25,7 @@ CoreTasks.CachingRemoteDataSource = SC.DataSource.extend({
     if (CoreTasks.get('currentUser')) {
       queryParams = {
         UUID: CoreTasks.getPath('currentUser.id'),
-        ATO: CoreTasks.getPath('currentUser.authToken'),
+        authToken: CoreTasks.getPath('currentUser.authToken'),
         action: "create%@".fmt(recordType.toString().split('.')[1]),
         notify: CoreTasks.get('sendNotifications')
       };
@@ -99,7 +99,7 @@ CoreTasks.CachingRemoteDataSource = SC.DataSource.extend({
 
     var queryParams = {
       UUID: CoreTasks.getPath('currentUser.id'),
-      ATO: CoreTasks.getPath('currentUser.authToken'),
+      authToken: CoreTasks.getPath('currentUser.authToken'),
       action: "update%@".fmt(recordType.toString().split('.')[1]),
       notify: CoreTasks.get('sendNotifications')
     };
@@ -181,7 +181,7 @@ CoreTasks.CachingRemoteDataSource = SC.DataSource.extend({
 
     var queryParams = {
       UUID: CoreTasks.getPath('currentUser.id'),
-      ATO: CoreTasks.getPath('currentUser.authToken'),
+      authToken: CoreTasks.getPath('currentUser.authToken'),
       action: "delete%@".fmt(recordType.toString().split('.')[1]),
       notify: CoreTasks.get('sendNotifications')
     };

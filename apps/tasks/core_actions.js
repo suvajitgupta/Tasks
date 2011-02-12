@@ -226,7 +226,7 @@ Tasks.mixin( /** @scope Tasks */ {
     } else if(serverType === Tasks.GAE_SERVER){
       params.queryParams = { 
         UUID: CoreTasks.getPath('currentUser.id'),
-        ATO: CoreTasks.getPath('currentUser.authToken'),
+        authToken: CoreTasks.getPath('currentUser.authToken'),
         action: 'getRecords',
         loadDoneProjectData: Tasks.loadDoneProjectData,
         lastRetrievedAt: lastRetrieved || ''

@@ -27,7 +27,7 @@ Tasks.ShutDownState = Ki.State.extend({
       };
       params.queryParams = {
         UUID: CoreTasks.getPath('currentUser.id'),
-        ATO: CoreTasks.getPath('currentUser.authToken')
+        authToken: CoreTasks.getPath('currentUser.authToken')
       };
       // notify Server so that authentication token can be destroyed for security reasons
       CoreTasks.executeTransientPost('logout', null, params);
