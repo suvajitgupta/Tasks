@@ -113,7 +113,9 @@ E. RUNNING PERSEVERE SERVER
 ================================================================================
 
 Persevere is a bundled server you can use to run 'Tasks' locally on your machine
-or deploy on your intranet if your whole team needs to access it.
+or deploy on your intranet if your whole team needs to access it.  The Persevere
+server doesn't enforce authorization - access control is only done in the GUI.
+The Persevere server also doesn't email notifications at this time.
 
 1) To start the Persevere server...
 
@@ -168,7 +170,10 @@ http://localhost:4400/tasks
 I. DEPLOYING 'TASKS' ON GAE MANUALLY
 ================================================================================
 
-You can deploy 'Tasks' to the cloud using GAE.
+You can deploy 'Tasks' to the cloud using GAE.  The GAE server enforces the same
+authorization as the GUI access control, making it a secure deployment to protect
+the integrity and privacy of your data.  The GAE server also supports email
+notifcations.
 
 1) If you don't have a GAE account, sign up here:
 
