@@ -57,7 +57,6 @@ GUI Infrastructure @Active
 - Optimize data loading to use single Server call for all records [SG] <SE> @Done %Passed
 - Optimize startup data loading time using HTML5 local storage [SG] <SE> @Done %Passed
 v Implement/benchmark JSONP-based data loading for performance speedup (stick with the faster XHRs) [SG] <SE> @Done
-- Implement pluggable Data Store-based architecture with Persevere/Google App Engine/Github adapters [SG] <JH2> @Active
 - Support offline mode with synchronization after network reconnection using Hub.js [SG] <SE> $Feature
 - Support undo/redo using Hub.js [SG] <SE> $Feature
 
