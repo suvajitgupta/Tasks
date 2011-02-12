@@ -90,6 +90,13 @@ Tasks = SC.Object.create(
     
 });
 
+/**
+  Override to avoid default alert box popup.
+*/
+SC.ExceptionHandler.enabled = true;
+SC.ExceptionHandler.handleException = function(e) {
+  console.log('ERROR: '+ e);
+};
 
 /**
   Some view overrides to turn off escapeHTML for menu items in context menus and select buttons.
