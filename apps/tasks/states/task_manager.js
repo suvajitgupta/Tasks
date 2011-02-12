@@ -30,14 +30,9 @@ Tasks.TaskManagerState = Ki.State.extend({
        CoreTasks.getPath('currentUser.role') !== CoreTasks.USER_ROLE_GUEST) {
          taskHash.assigneeId = userId;
     }
-    var sel = Tasks.projectsController.getPath('selection');
-    var project = (sel && sel.get('length' === 1))? sel.get('firstObject') : null;
-    if (project && CoreTasks.isSystemProject(project)) {
-      taskHash.projectId = project.get('id');
-    }
 
     // Get selected task (if one) and copy its project/assignee/type/priority to the new task.
-    sel = Tasks.tasksController.get('selection');
+    var sel = Tasks.tasksController.get('selection');
     if (sel && sel.length() > 0) {
       var selectedTask = sel.firstObject();
       if (SC.instanceOf(selectedTask, CoreTasks.Task)) {
