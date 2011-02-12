@@ -122,8 +122,7 @@ Tasks.ApplicationManagerState = Ki.State.extend({
         return;
       }
 
-      var uc = Tasks.get('usersController');      
-      var sel = uc.get('selection');
+      var sel = Tasks.usersController.get('selection');
       var len = sel? sel.length() : 0;
       if (len > 0) {
 

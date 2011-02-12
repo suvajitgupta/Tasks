@@ -37,8 +37,7 @@ Tasks.TaskManagerState = Ki.State.extend({
     }
 
     // Get selected task (if one) and copy its project/assignee/type/priority to the new task.
-    var tc = Tasks.get('tasksController');
-    sel = tc.get('selection');
+    sel = Tasks.tasksController.get('selection');
     if (sel && sel.length() > 0) {
       var selectedTask = sel.firstObject();
       if (SC.instanceOf(selectedTask, CoreTasks.Task)) {
@@ -69,7 +68,7 @@ Tasks.TaskManagerState = Ki.State.extend({
 
     // Create, select, and begin editing new task.
     var task = CoreTasks.createRecord(CoreTasks.Task, taskHash);
-    tc.selectObject(task);
+    Tasks.tasksController.selectObject(task);
     Tasks.getPath('mainPage.taskEditor').popup(task);
 
   },
@@ -84,9 +83,7 @@ Tasks.TaskManagerState = Ki.State.extend({
       return;
     }
 
-    var ac = Tasks.get('assignmentsController');      
-    var tc = Tasks.get('tasksController');
-    var sel = tc.get('selection');
+    var sel = Tasks.tasksController.get('selection');
     var len = sel? sel.length() : 0;
     if (len > 0) {
 
@@ -180,8 +177,7 @@ Tasks.TaskManagerState = Ki.State.extend({
     },
     
     watchTask: function() {
-      var tc = Tasks.get('tasksController');
-      var sel = tc.get('selection');
+      var sel = Tasks.tasksController.get('selection');
       var len = sel? sel.length() : 0;
       if (len > 0) {
         var currentUserId = CoreTasks.getPath('currentUser.id');
@@ -198,8 +194,7 @@ Tasks.TaskManagerState = Ki.State.extend({
     },
 
     unwatchTask: function() {
-      var tc = Tasks.get('tasksController');
-      var sel = tc.get('selection');
+      var sel = Tasks.tasksController.get('selection');
       var len = sel? sel.length() : 0;
       if (len > 0) {
         var context = {};
@@ -289,12 +284,11 @@ Tasks.TaskManagerState = Ki.State.extend({
     },
 
     addComment: function() {
-      var tc = Tasks.get('tasksController');
-      var sel = tc.get('selection');
+      var sel = Tasks.tasksController.get('selection');
       var len = sel? sel.length() : 0;
       if (len === 1) {
         var currentUserId = CoreTasks.getPath('currentUser.id');
-        var task = tc.getPath('selection.firstObject');
+        var task = Tasks.tasksController.getPath('selection.firstObject');
         var now = SC.DateTime.create().get('milliseconds');
         SC.RunLoop.begin();
         var comment = CoreTasks.createRecord(CoreTasks.Comment, { taskId: task.get('id'), userId: currentUserId,
