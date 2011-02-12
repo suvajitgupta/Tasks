@@ -2,7 +2,6 @@
 // Tasks.filterPane
 // ==========================================================================
 /*globals Tasks CoreTasks SCUI sc_require */
-sc_require('core');
 
 /** @static
     

@@ -2,7 +2,7 @@
 // Tasks.signupPane
 //============================================================================
 /*globals CoreTasks Tasks sc_require*/
-sc_require('core');
+
 /**
 
   This is the signup page for Tasks

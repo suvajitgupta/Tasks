@@ -3,8 +3,6 @@
 // ==========================================================================
 /*globals CoreTasks Tasks sc_require */
 
-sc_require('core');
-
 /** @static
   
   @extends SC.ObjectController

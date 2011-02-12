@@ -3,8 +3,6 @@
 // ==========================================================================
 /*globals CoreTasks Tasks sc_require */
 
-sc_require('core');
-
 Tasks.EXPORT_HEADER = '<head>\n' +
 '<title>' + "_Tasks".loc() + ' ' + "_Export".loc() + '</title>\n' +
 '<script type="text/javascript">\n' +

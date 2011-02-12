@@ -1,5 +1,4 @@
 /*globals CoreTasks sc_require */
-sc_require('core');
 
 /**
  * An extension of the SC.RecordAttribute class that provides validation against a defined list of

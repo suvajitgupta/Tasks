@@ -2,7 +2,6 @@
 // Tasks.loginPage
 // ==========================================================================
 /*globals Tasks sc_require SCUI */
-sc_require('core');
 
 /** @static
     

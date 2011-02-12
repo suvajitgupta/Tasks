@@ -1,5 +1,4 @@
 /*globals CoreTasks sc_require */
-sc_require('core');
 sc_require('models/record_attribute');
 
 CoreTasks.MILLISECONDS_IN_DAY = 24*60*60*1000;

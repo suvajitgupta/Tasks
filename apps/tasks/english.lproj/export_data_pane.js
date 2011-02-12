@@ -2,7 +2,6 @@
 // Tasks.exportDataPane
 // ==========================================================================
 /*globals Tasks sc_require */
-sc_require('core');
 
 /** @static
     

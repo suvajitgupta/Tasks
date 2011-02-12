@@ -2,7 +2,6 @@
 // Tasks.usersSettingsPane
 // ==========================================================================
 /*globals CoreTasks Tasks sc_require SCUI */
-sc_require('core');
 sc_require('views/list');
 sc_require('views/user_item');
 sc_require('views/group_item');

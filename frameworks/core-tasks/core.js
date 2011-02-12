@@ -1,11 +1,11 @@
-/*globals CoreTasks SCUDS */
-
 /**
  * The core object of the Tasks framework.
  *
  * @author Sean Eidemiller
  * @author Suvajit Gupta
  */
+/*globals CoreTasks SCUDS */
+
 CoreTasks = SC.Object.create({
   
   // Customizable "Use Local Storage": if set to true records will be cached in browser's local storage database

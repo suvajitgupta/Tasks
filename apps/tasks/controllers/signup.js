@@ -3,7 +3,6 @@
 // Tasks.signupController
 // ==========================================================================
 /*globals CoreTasks Tasks sc_require*/
-sc_require('core');
 sc_require('views/user_information');
 
 /** @static

@@ -7,7 +7,6 @@
  */
 // http://localhost:4400/tasks/en/current/tests/views/summary.html
 
-sc_require('core');
 sc_require('views/summary'); 
 
 

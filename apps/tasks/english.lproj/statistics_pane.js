@@ -2,7 +2,6 @@
 // Tasks.statisticsPane
 // ==========================================================================
 /*globals Tasks CoreTasks sc_require Sai */
-sc_require('core');
 sc_require('views/graphical_statistics');
 sc_require('views/numerical_statistics');
 

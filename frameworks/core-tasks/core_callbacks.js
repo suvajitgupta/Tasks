@@ -1,6 +1,9 @@
+/**
+ * Some callback helpers.
+ *
+ * @author Sean Eidemiller
+ */
 /*globals CoreTasks */
-
-sc_require('core');
 
 CoreTasks.mixin({
 

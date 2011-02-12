@@ -4,8 +4,6 @@
 // ==========================================================================
 /*globals Tasks CoreTasks sc_require */
 
-sc_require('core');
-
 /** @mixin
     @extends Tasks
     @author Jonathan Lewis

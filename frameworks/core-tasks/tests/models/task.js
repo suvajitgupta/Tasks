@@ -6,7 +6,6 @@
  */
 /*globals CoreTasks sc_require module CoreTasks equals test*/
 // http://localhost:4400/core-tasks/en/current/tests/models/task.html
-sc_require('core');
 sc_require('models/task');
 
 var doneTask; 

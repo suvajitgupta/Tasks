@@ -7,6 +7,7 @@ sc_require('core_callbacks');
  * store are routed through the data source instead.
  *
  * @author Sean Eidemiller
+ * @author Suvajit Gupta
  */
 CoreTasks.mixin({
 
