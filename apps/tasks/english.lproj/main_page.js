@@ -578,7 +578,7 @@ Tasks.mainPage = SC.Page.design({
 
          sc_super();
          if(Tasks.get('loginTime')) return;
-         var sel = Tasks.projectsController.getPath('selection');
+         var sel = Tasks.projectsController.get('selection');
          var selectedProjectsCount = sel? sel.get('length') : 0;
          if(selectedProjectsCount === 0) { // No projects selected
            context.addClass('helper-select-project');
