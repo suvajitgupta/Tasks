@@ -8,14 +8,15 @@ Ramp Up:
 
 
 Guidelines:
-* Kill all sc_require('core'); statements - they are gratuitous
-- Access controllers directly, not via get() calls - they are just namespaces, not properties
-- Don't get('content') from controllers (e.g., as in exportData)
+- Conform to SC Style guide and naming convention [http://wiki.sproutcore.com/w/page/12412942/JavaScript-Style-Guide]
 - Ensure @scope & @extend for all files (understand what these are for)
-- Named hashes are strange in SC - find other ways instead
-- Don't call out literals outside of the create() method
-- Stick to SC coding conventions, use SC doc tags
+- Use SC doc tags
+* Kill all sc_require('core'); statements - they are gratuitous
+* Access controllers directly, not via get() calls - they are just namespaces, not properties
 - Don't put view properties or actions in controllers
+? Don't get('content') from controllers (e.g., as in exportData)
+? Named hashes are strange in SC - find other ways instead
+? Don't call out literals outside of the create() method
 - Ensure bindings are of the form 'Namespace.Object.Property'
 - Always return YES from mouseDown()
 - Implement hotkeys as ctrl_shift_a() { ... }
@@ -24,14 +25,10 @@ Guidelines:
 - Use firstTime attribute of render() to be more efficient
 - Minimize use of .observes()
 - Ensure .cacheable() on computed properties
-
-- Conform to SC Style guide and naming convention [http://wiki.sproutcore.com/w/page/12412942/JavaScript-Style-Guide]
-- JS Lint all code with custom configuration (make one)
-- Ensure all Unit Tests pass
-- Measure/tune performance with SC.Benchmark
-  Keep in mind code size in kb, number of statements(IE!), doing things on init
   
 
 Tips:
 - Set SC.LOG_BINDINGS to YES to troubleshoot
+- JS Lint all code with custom configuration (make one)
+- Ensure all Unit Tests pass
 - Use SC.Benchmark.start(key) & end(key) to profile/tune code
