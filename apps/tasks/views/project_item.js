@@ -54,8 +54,10 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
   },
   touchEnd: function(event) {
     // console.log('DEBUG: touch end on project item: ' + this.getPath('content.name'));
-    this._timer.invalidate();
-    this._timer = null;
+    if (this._timer) {
+      this._timer.invalidate();
+      this._timer = null;
+    }
     return YES;
   },
   

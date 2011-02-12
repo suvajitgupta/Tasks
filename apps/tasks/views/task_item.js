@@ -55,8 +55,10 @@ Tasks.TaskItemView = SC.ListItemView.extend(
   },
   touchEnd: function(event) {
     // console.log('DEBUG: touch end on task item: ' + this.getPath('content.name'));
-    this._timer.invalidate();
-    this._timer = null;
+    if (this._timer) {
+      this._timer.invalidate();
+      this._timer = null;
+    }
     return YES;
   },
   
