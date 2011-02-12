@@ -1,15 +1,16 @@
 Ramp Up:
 - Learn about Buildfiles
 - Learn about RunLoops
-- Learn about views/mixins/ContentDisplay mixin
-- Read view.js/tab.js/collection.js & learn about Responders
 - Read runtime/mixins/observable.js, system/bindings.js, event.js
+- Read view.js/tab.js/collection.js
+- Learn about ContentDisplay mixin
 - Learn how to use mixins/enumerable.js reducers
 
 
 Guidelines:
-- Kill all sc_require('core'); statements - they are gratuitous
+* Kill all sc_require('core'); statements - they are gratuitous
 - Access controllers directly, not via get() calls - they are just namespaces, not properties
+- Don't get('content') from controllers (e.g., as in exportData)
 - Ensure @scope & @extend for all files (understand what these are for)
 - Named hashes are strange in SC - find other ways instead
 - Don't call out literals outside of the create() method
@@ -21,9 +22,15 @@ Guidelines:
 - Use setClass() instead of addClass() - former more efficient (won't change if not needed)
 - Ensure layouts always have 4 properties
 - Use firstTime attribute of render() to be more efficient
-- Don't get('content') from controllers (e.g., as in exportData)
 - Minimize use of .observes()
+- Ensure .cacheable() on computed properties
 
+- Conform to SC Style guide and naming convention [http://wiki.sproutcore.com/w/page/12412942/JavaScript-Style-Guide]
+- JS Lint all code with custom configuration (make one)
+- Ensure all Unit Tests pass
+- Measure/tune performance with SC.Benchmark
+  Keep in mind code size in kb, number of statements(IE!), doing things on init
+  
 
 Tips:
 - Set SC.LOG_BINDINGS to YES to troubleshoot
