@@ -53,7 +53,6 @@ Tasks.LoggedOutState = Ki.State.extend({
     }),
 
     // System state to manage user authentication
-    // TODO: [SG] add Authentication substate entry via ready.signinAsGuest() for view route
     authentication: Ki.State.design({
       
       enterState: function() {
