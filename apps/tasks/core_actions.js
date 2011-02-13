@@ -215,7 +215,7 @@ Tasks.mixin( /** @scope Tasks */ {
     };
     var serverType = Tasks.get('serverType');
     if (serverType === Tasks.PERSEVERE_SERVER) {
-      // Determine which function to call based on value of lastRetieved.
+      // Determine which function to call based on value of lastRetrieved.
       var methodInvocation;
       if (SC.empty(lastRetrieved)) {
         methodInvocation = { method: 'getAll', id: 'records', params: [Tasks.loadDoneProjectData] };
