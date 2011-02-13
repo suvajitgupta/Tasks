@@ -1,3 +1,5 @@
+Test github APIs with 'curl' and pipe to 'python -mjson.tool' to pretty print JSON returned
+
 Github API: http://develop.github.com/p/general.html
 Github Pages: http://pages.github.com/
   Before deploying add this line to the top of Buildfile:
