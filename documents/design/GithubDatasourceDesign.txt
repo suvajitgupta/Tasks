@@ -1,3 +1,19 @@
+Github API: http://develop.github.com/p/general.html
+Github Pages: http://pages.github.com/
+  Before deploying add this line to the top of Buildfile:
+		config :all, :url_prefix => "/Tasks/static"
+	To build and deploy:
+	  A) Create a directory at the same level as "tasks" named "tasks-builds"
+    B) Change into "tasks" directory and type "sc-build -rc tasks --build=build"
+    C) When the build finishes run the following commands the directory above "tasks":
+         1. cp -r tasks/tmp/build/Tasks/static tasks-builds/.
+         2. cd tasks && git checkout gh-pages
+         3. cp -r ../tasks-builds/static .
+         4. cp static/tasks/en/build/index.html .
+         5. git add . && git commit -avm "new build"
+         6. git push origin gh-pages
+   
+
 Github:
         "gravatar_id": nothing to map to
         "position": id (auto-generated)
