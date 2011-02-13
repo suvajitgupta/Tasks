@@ -1,10 +1,10 @@
 /*globals Class load */
 Class({
-  id: "all",
+  id: "records",
   
   extractId: function(idString) { return idString.replace(/^.*\//, "") * 1; },
 
-  get: function(loadDoneProjectData) {
+  getAll: function(loadDoneProjectData) {
     
     var query = 'status!="deleted"';
     var projects = load('project?' + query);
@@ -45,7 +45,7 @@ Class({
     };
   },
 
-  getDelta: function(timestamp) {
+  getModified: function(timestamp) {
     var query = 'updatedAt!=null & updatedAt!=undefined & updatedAt>$1';
     return {
       users: load('user?' + query, timestamp),

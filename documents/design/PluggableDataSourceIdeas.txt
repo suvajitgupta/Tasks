@@ -26,14 +26,15 @@ Authentication
   match if any (empty array will indicate that loginName is available)
 - guestSignup: POST /user with loginName & password, returns user record on success
 - logout: POST /logout with UUID & authToken, returns 401 if unauthorized
+  (this call is supported only on GAE server since it enforces authorization)
 
 Bulk Fetches
 ------------
 * getAll: GET /records with optional loadDoneProjectData & lastRetrievedAt on GAE
-  and POST /Class/all with same options on Persevere
+  and POST /Class/records with same options on Persevere
   (return a record set as specified in TasksJSON.txt)
-- getDelta: same as previous call, if lastRetrievedAt is provided fetch all records
-  with updatedAt after lastRetrievedAt
+- getModified: same as previous call, if lastRetrievedAt is provided fetch all
+  records created/updatedAt after lastRetrievedAt
 
 Record Manipulation
 -------------------
@@ -48,9 +49,9 @@ email notification is requested from the server. GAE server supports email notif
 
 Administration
 --------------
-- cleanup: a user with 'Manager' role can POST /cleanup with UUID/ATO and to delete
+- cleanup: a user with 'Manager' role can call /cleanup with UUID/ATO and to delete
   soft-deleted data older than a certain 'cutoff' timestamp which if set to 0,
-  all soft-deleted records will be deleted
+  all soft-deleted records will be deleted (POST on Persevere and GET on GAE)
 
 
 DESIGN:

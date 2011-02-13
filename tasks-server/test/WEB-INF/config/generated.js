@@ -185,57 +185,15 @@
 		}
 	},
 	{"id":"generated.js?sources?4",
-		"name":"all",
+		"name":"records",
 		"schema":{
 			"prototype":{
 				"get":function () {
     return serialize(load("user"));
 }
 			},
-			"instances":{"$ref":"../all/"},
-			"get":
-function (loadDoneProjectData) {
-    var query = "status!=\"deleted\"";
-    var projects = load("project?" + query);
-    var tasks = load("task?" + query);
-    var watches = load("watch?" + query);
-    var comments = load("comment?" + query);
-    var notDoneProjects = [], doneProjectIds = [], tasksInNotDoneProjects = [], tasksInDoneProjectIds = [], watchesOnTasksInNotDoneProjects = [], commentsOnTasksInNotDoneProjects = [];
-    if (!loadDoneProjectData) {
-        var len, i, project, task, watch, comment;
-        for (i = 0, len = projects.length; i < len; i++) {
-            project = projects[i];
-            if (project.developmentStatus === "_Done") {
-                doneProjectIds.push(this.extractId(project.id));
-            } else {
-                notDoneProjects.push(project);
-            }
-        }
-        for (i = 0, len = tasks.length; i < len; i++) {
-            task = tasks[i];
-            if (doneProjectIds.indexOf(task.projectId) === -1) {
-                tasksInNotDoneProjects.push(task);
-            } else {
-                tasksInDoneProjectIds.push(this.extractId(task.id));
-            }
-        }
-        for (i = 0, len = watches.length; i < len; i++) {
-            watch = watches[i];
-            if (tasksInDoneProjectIds.indexOf(watch.taskId) === -1) {
-                watchesOnTasksInNotDoneProjects.push(watch);
-            }
-        }
-        for (i = 0, len = comments.length; i < len; i++) {
-            comment = comments[i];
-            if (tasksInDoneProjectIds.indexOf(comment.taskId) === -1) {
-                commentsOnTasksInNotDoneProjects.push(comment);
-            }
-        }
-    }
-    return {users:load("user?" + query), projects:loadDoneProjectData ? projects : notDoneProjects, tasks:loadDoneProjectData ? tasks : tasksInNotDoneProjects, watches:loadDoneProjectData ? watches : watchesOnTasksInNotDoneProjects, comments:loadDoneProjectData ? comments : commentsOnTasksInNotDoneProjects};
-}
-,
-			"getDelta":
+			"instances":{"$ref":"../records/"},
+			"getModified":
 function (timestamp) {
     var query = "updatedAt!=null & updatedAt!=undefined & updatedAt>$1";
     return {users:load("user?" + query, timestamp), projects:load("project?" + query, timestamp), tasks:load("task?" + query, timestamp), watches:load("watch?" + query, timestamp), comments:load("comment?" + query, timestamp)};
@@ -340,6 +298,48 @@ function (timestamp) {
 			"extractId":
 function (idString) {
     return idString.replace(/^.*\//, "") * 1;
+}
+,
+			"getAll":
+function (loadDoneProjectData) {
+    var query = "status!=\"deleted\"";
+    var projects = load("project?" + query);
+    var tasks = load("task?" + query);
+    var watches = load("watch?" + query);
+    var comments = load("comment?" + query);
+    var notDoneProjects = [], doneProjectIds = [], tasksInNotDoneProjects = [], tasksInDoneProjectIds = [], watchesOnTasksInNotDoneProjects = [], commentsOnTasksInNotDoneProjects = [];
+    if (!loadDoneProjectData) {
+        var len, i, project, task, watch, comment;
+        for (i = 0, len = projects.length; i < len; i++) {
+            project = projects[i];
+            if (project.developmentStatus === "_Done") {
+                doneProjectIds.push(this.extractId(project.id));
+            } else {
+                notDoneProjects.push(project);
+            }
+        }
+        for (i = 0, len = tasks.length; i < len; i++) {
+            task = tasks[i];
+            if (doneProjectIds.indexOf(task.projectId) === -1) {
+                tasksInNotDoneProjects.push(task);
+            } else {
+                tasksInDoneProjectIds.push(this.extractId(task.id));
+            }
+        }
+        for (i = 0, len = watches.length; i < len; i++) {
+            watch = watches[i];
+            if (tasksInDoneProjectIds.indexOf(watch.taskId) === -1) {
+                watchesOnTasksInNotDoneProjects.push(watch);
+            }
+        }
+        for (i = 0, len = comments.length; i < len; i++) {
+            comment = comments[i];
+            if (tasksInDoneProjectIds.indexOf(comment.taskId) === -1) {
+                commentsOnTasksInNotDoneProjects.push(comment);
+            }
+        }
+    }
+    return {users:load("user?" + query), projects:loadDoneProjectData ? projects : notDoneProjects, tasks:loadDoneProjectData ? tasks : tasksInNotDoneProjects, watches:loadDoneProjectData ? watches : watchesOnTasksInNotDoneProjects, comments:loadDoneProjectData ? comments : commentsOnTasksInNotDoneProjects};
 }
 
 		}

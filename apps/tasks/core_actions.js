@@ -218,11 +218,11 @@ Tasks.mixin( /** @scope Tasks */ {
       // Determine which function to call based on value of lastRetieved.
       var methodInvocation;
       if (SC.empty(lastRetrieved)) {
-        methodInvocation = { method: 'get', id: 'records', params: [Tasks.loadDoneProjectData] };
+        methodInvocation = { method: 'getAll', id: 'records', params: [Tasks.loadDoneProjectData] };
       } else {
-        methodInvocation = { method: 'getDelta', id: 'records', params: [lastRetrieved] };
+        methodInvocation = { method: 'getModified', id: 'records', params: [lastRetrieved] };
       }
-      CoreTasks.executeTransientPost('Class/all', methodInvocation, params);
+      CoreTasks.executeTransientPost('Class/records', methodInvocation, params);
     } else if(serverType === Tasks.GAE_SERVER){
       params.queryParams = { 
         UUID: CoreTasks.getPath('currentUser.id'),
