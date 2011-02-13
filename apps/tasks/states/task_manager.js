@@ -57,7 +57,7 @@ Tasks.TaskManagerState = Ki.State.extend({
       }
       var selectedProject = Tasks.projectsController.getPath('selection.firstObject');
       if (!CoreTasks.isSystemProject(selectedProject)) {
-        taskHash.projectId = Tasks.getPath('projectController.id');
+        taskHash.projectId = selectedProject.get('id');
       }
     }
 
