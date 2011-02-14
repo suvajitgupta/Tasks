@@ -120,10 +120,7 @@ Tasks.TaskEditorView = SC.View.extend(
     editor.setPath('effortField.value', task.get('effort'));
     editor.setPath('projectField.value', task.get('projectValue'));
     editor.setPath('submitterField.value', task.get('submitterValue'));
-    // FIXME: [SG] fix SCUI.ComboBoxView value not taking the first time you enter Tasks and add a task (doesn't happen with SC.SelectFieldView)
-    console.log('DEBUG: setting to value: ' + task.get('assigneeValue'));
     editor.setPath('assigneeField.value', task.get('assigneeValue'));
-    console.log('DEBUG: getting value: ' + editor.getPath('assigneeField.value'));
     editor.setPath('splitView.topLeftView.contentView.descriptionField.value', task.get('description'));
     editor.setPath('createdAtLabel.value', task.get('displayCreatedAt'));
     editor.setPath('updatedAtLabel.value', task.get('displayUpdatedAt'));
