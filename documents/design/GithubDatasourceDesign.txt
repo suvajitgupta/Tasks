@@ -1,3 +1,6 @@
+REFERENCES:
+================================================================================
+
 Test github APIs with 'curl' and pipe to 'python -mjson.tool' to pretty print JSON returned
 
 Github API: http://develop.github.com/p/general.html
@@ -16,37 +19,59 @@ Github Pages: http://pages.github.com/
          6. git push origin gh-pages
    
 
+REPOSITORY:
+================================================================================
+
 Github:
-        "gravatar_id": nothing to map to
-        "position": id (auto-generated)
-        "number": same as above?
-        "votes": map to priority (0 votes => Medium, any votes => High)
-        "created_at": createdAt
-        "comments": map to Comments once implemented?
-        "body": description
-        "title": name
-        "updated_at": updatedAt
-        "closed_at": nothing to map to
-        "user": submitterId
-        "labels": prepend each with colon to name
-        "state": developmentStatus (open => Planned, closed => Done)
+	"name": name
+	"description": description
+	"created_at": createdAt
+	"pushed_at": updatedAt
+	"open_issues": use to decide about pulling issues
+	"has_issues": use to decide about pulling issues
+	"fork": ignore
+	"type": ignore
+	"language": ignore
+	"has_downloads": ignore
+	"homepage": ignore
+	"has_wiki": ignore
+	"size": ignore
+	"forks": ignore
+	"score": ignore
+	"private": ignore
+	"watchers": ignore
+	"url": ignore
+	"owner": ignore
+
+Tasks:
+	id*: auto-generated
+	developmentStatus: custom label	
+	timeLeft: custom label?
+	activatedAt: custom label?
+
+
+ISSUE:
+================================================================================
+
+Github:
+	"title": name
+	"body": description
+	"created_at": createdAt
+	"updated_at": updatedAt
+	"gravatar_id": nothing to map to
+	"position": id (auto-generated)
+	"number": same as above?
+	"votes": map to priority (0 votes => Medium, any votes => High)
+	"comments": map to Comments
+	"closed_at": nothing to map to
+	"user": submitterId
+	"labels": use custom labels for unavailable attributes
+	"state": developmentStatus (open => Planned, closed => Done)
  
 Tasks:
-        id*: auto-generated
-        projectId: github projectId (0?)
-        effort: unspecified
-        assigneeId: unassigned
-        type: allow certain tags to map to type
-        validation: unspecified
- 
-Location:
-        Add as a System Project
-        Allow configuration of properties (github repository URL & user to login as)
- 
-Actions:
-        Retrieve: pull from github – how to do incremental refreshes?
-        Create: add as an issue on github
-        Delete: delete issue on github
-        Update: update issue on github
-        Drag out of github project or change via popup task editor: close issue on github
-        Drag to github project or change via popup task editor: add or update issue on github (how to do latter?)
+	id*: auto-generated
+	projectId: Github repository id
+	effort: custom label
+	assigneeId: custom label
+	type: custom label
+	validation: custom label
