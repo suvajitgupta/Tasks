@@ -458,7 +458,11 @@
 }
 .tasks-pane .task-item.sel,
 .tasks-pane .task-item.sel.hover {
-  background: #9CF none repeat scroll 0 0 !important;
+  background: #CFF none repeat scroll 0 0 !important;
+}
+.tasks-pane .focus .task-item.sel,
+.tasks-pane .focus .task-item.sel.hover {
+  background: #6CF none repeat scroll 0 0 !important;
 }
 
 .task-item.hover .task-margin {

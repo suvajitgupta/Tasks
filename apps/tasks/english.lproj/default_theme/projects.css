@@ -110,15 +110,21 @@
 .projects-pane .sc-group-item.sel .sc-outline,
 .projects-pane .sc-view.sc-list-item-view.sc-collection-item.sc-group-item.sel .sc-outline label,
 .sc-list-view.sc-list-view.projects-pane .sc-collection-item.sel,
-.sc-list-view.sc-list-view.projects-pane .sc-collection-item.sel.hover,
-.users-pane .sc-group-item.sel .sc-outline,
+.sc-list-view.sc-list-view.projects-pane .sc-collection-item.sel.hover {
+  height: 22px !important;
+  color: #000 !important;
+  background: #CFF !important;
+  border-color: #000 !important;
+}
+
+.projects-pane.focus .sc-group-item.sel .sc-outline,
+.projects-pane.focus .sc-view.sc-list-item-view.sc-collection-item.sc-group-item.sel .sc-outline label,
+.sc-list-view.sc-list-view.projects-pane.focus .sc-collection-item.sel,
+.sc-list-view.sc-list-view.projects-pane.focus .sc-collection-item.sel.hover,.users-pane .sc-group-item.sel .sc-outline,
 .users-pane .sc-view.sc-list-item-view.sc-collection-item.sc-group-item.sel .sc-outline label,
 .sc-list-view.sc-list-view.users-pane .sc-collection-item.sel,
 .sc-list-view.sc-list-view.users-pane .sc-collection-item.sel.hover {
-  height: 22px !important;
-  color: #000 !important;
-  background: #9CF !important;
-  border-color: #000 !important;
+  background: #6CF !important;
 }
 
 .sc-list-view.sc-list-view.projects-pane .sc-collection-item.project-item.sel,
