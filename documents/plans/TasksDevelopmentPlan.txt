@@ -186,6 +186,7 @@ v Add hover over tooltip for Assignees to show how many Tasks they have and to e
 - Append "?" for range-based subtotals including Ttasks with unspecified Efforts [SG] $Feature @Done %Passed
 ^ Support automatic sorting of Tasks by status, validation, priority, type, and name or "index" (if name starts with a number) [SG] <SG> $Feature @Done %Passed
 v Add hover over tooltip for Task IDs to show Submitter [SG] <JH2> $Feature @Done %Passed
+- Support dueDate for Tasks (display in task list/editor, indicate overdue/upcoming tasks, add to import/export) [SG] $Feature
 
 ^ Add buttons to add/delete Tasks below Tasks list [SG] <SE> $Feature @Done %Passed
 | Logged in user is default Submitter, Assignee is either set to the same as selected Task (if one) or to logged in user
@@ -222,6 +223,8 @@ v Allow Task Validation editing only when in Done status [SG] $Feature @Done %Pa
 - Indicate whether Task attribute filtering is enabled via cancel icon on Filter button [SG] $Feature @Done %Passed
 ^ Allow Task searching (by Assignee/Submitter/#IDs/name) & corresponding cancel button in top bar: support type-ahead searching [SG] <JH2> $Feature @Done %Passed
 
+- Out of Scope: Allow reordering of Tasks $Feature
+| Tasks has auto-ordering built in - you can use Status/Priority to control order or prefix Task names with numbers
 - Out of Scope: Add support for nested Tasks and Task tagging $Feature
 | Use "Clustering" approach described in Help instead
 - Out of Scope: Add support for managing inter-Task dependencies/linking $Feature
