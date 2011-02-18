@@ -991,7 +991,7 @@ SC.mixin(Function.prototype, {
 });
 
 // Date/Time formats.
-CoreTasks.DATE_FORMAT = '%m/%d/%Y';
+CoreTasks.DATE_FORMAT = '%b %d, %Y';
 CoreTasks.TIME_DATE_FORMAT = '%I:%M %p ' + CoreTasks.DATE_FORMAT;
 
 // Request headers.
