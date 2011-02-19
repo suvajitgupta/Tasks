@@ -3,7 +3,10 @@ A. 'TASKS' INTRODUCTION/GOALS
 
 'Tasks' is a rich-internet application for tracking personal or team tasks.
 The 'Tasks' GUI runs on desktop and iPad browsers and is particularly useful
-for managing Agile software development.
+for managing Agile software development.  Check out the demo instance at:
+
+http://tasks-demo.appspot.com
+Login as 'SG' no password
 
 'Tasks' consists of a SproutCore-based GUI and REST-based Servers.
 Persevere and Google App Engine (GAE) Servers are supported out-of-the-box.
