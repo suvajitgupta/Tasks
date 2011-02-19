@@ -16,7 +16,7 @@ Tasks = SC.Object.create(
   /** @scope Tasks.prototype */ {
 
   NAMESPACE: 'Tasks',
-  VERSION: '1.6',
+  VERSION: '1.7',
   isLoaded: NO, // for Lebowski
 
   // Customizable "Load Done Project Data": set to false for installations where the data can grow to large volumes
