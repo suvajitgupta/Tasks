@@ -155,6 +155,7 @@ SC.stringsFor('English', {
   "_SendNotifications": "Send Notifications",
   "_Showstoppers": "Showstoppers",
   "_ShowstoppersTooltip": "Are We There Yet: open high priority defects",
+  "_ShowProjectsList": "Show Projects List",
   "_ShowTasksList": "Show tasks list",
   "_SignIn": "Sign In",
   "_SignUp": "Sign Up",

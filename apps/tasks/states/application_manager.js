@@ -13,6 +13,10 @@ Tasks.ApplicationManagerState = Ki.State.extend({
   // State indicating global action readiness
   readyForGlobalActions: Ki.State.design({
     
+    toggleShowProjectsList: function(){
+      Tasks.mainPageHelper.set('showProjectsList', !Tasks.mainPageHelper.get('showProjectsList'));
+    },
+
     showUsersSettingsPanel: function() {
       this.gotoState('showingUsersSettingsPanel');
     },

@@ -28,7 +28,7 @@ Tasks.mainPageHelper = SC.Object.create({
   sendNotificationsBinding: SC.Binding.oneWay('CoreTasks*sendNotifications'),
   clippyDetailsId: 'clippy-details',
   clippyDetails: null,
-  masterIsHidden: null,
+  showProjectsList: true,
 
   _embedClippy: function(context) {
     var clippyTooltip = "_ClippyTooltip".loc();
@@ -63,6 +63,10 @@ Tasks.mainPageHelper = SC.Object.create({
     // console.log('DEBUG: _listActions()');
     var ret = [];
     ret.push({ title: "_LaunchSettings".loc(), icon: 'settings-icon', action: 'showUsersSettingsPanel', isEnabled: YES });
+    if(!SC.platform.touch) {
+      var showProjectsList = this.get('showProjectsList');
+      ret.push({ title: "_ShowProjectsList".loc(), icon: 'empty-project-icon', action: 'toggleShowProjectsList', isEnabled: YES, checkbox: showProjectsList });
+    }
     var autoSave = this.get('autoSave');
     ret.push({ title: "_AutoSave".loc(), icon: 'save-icon', action: 'toggleAutoSave', isEnabled: YES, checkbox: autoSave });
     if(Tasks.get('canServerSendNotifications')) {
@@ -84,7 +88,7 @@ Tasks.mainPageHelper = SC.Object.create({
     ret.push({ title: "_LaunchHelp".loc(), icon: 'sc-icon-help-16', action: 'showHelpWindow', isEnabled: YES });
     ret.push({ title: "_Logout".loc(), icon: 'logout-icon', action: 'logout', isEnabled: YES });
     this.set('actions', ret);
-  }.observes('panelOpen', 'displayedTasksCount', 'autoSave', 'sendNotifications'),
+  }.observes('showProjectsList', 'panelOpen', 'displayedTasksCount', 'autoSave', 'sendNotifications'),
   actions: null,
   
   currentUserNameBinding: SC.Binding.oneWay('CoreTasks*currentUser.name'),
@@ -114,7 +118,16 @@ Tasks.mainPage = SC.Page.design({
      
      layout: { top: 0, left: 0, right: 0, bottom: 0, minWidth: SC.platform.touch? 768 : 1024, minHeight: 500 },
      masterWidth: 260,
-     masterIsHiddenBinding: 'Tasks.mainPageHelper.masterIsHidden',
+     
+     autoHideMaster: function() {
+       return YES;
+     }.property().cacheable(),
+     
+     showProjectsListBinding: SC.Binding.oneWay('Tasks.mainPageHelper*showProjectsList'),
+     orientation: function() {
+       if(SC.platform.touch) return sc_super();
+       else return this.get('showProjectsList')? SC.HORIZONTAL_ORIENTATION : SC.VERTICAL_ORIENTATION;
+     }.property('frame', 'showProjectsList').cacheable(),
      
      masterView: SC.WorkspaceView.extend({
        
@@ -313,7 +326,7 @@ Tasks.mainPage = SC.Page.design({
            classNames: ['dark'],
            target: 'Tasks.mainPage.mainPane.masterDetailView',
            action: 'toggleMasterPicker',
-           isVisibleBinding: SC.Binding.oneWay('Tasks.mainPageHelper.masterIsHidden')
+           isVisibleBinding: SC.Binding.oneWay('Tasks.mainPage.mainPane.masterDetailView.masterIsHidden')
          }),
          
          welcomeMessageLabel: SC.LabelView.design(SCUI.ToolTip, {
@@ -455,7 +468,7 @@ Tasks.mainPage = SC.Page.design({
                icon: '',
                textAlign: SC.ALIGN_RIGHT,
                value: '',
-               isVisibleBinding: SC.Binding.not('Tasks.mainPageHelper.masterIsHidden').oneWay()
+               isVisibleBinding: SC.Binding.not('Tasks.mainPage.mainPane.masterDetailView.masterIsHidden').oneWay()
              }),
 
              saveButton: SC.ButtonView.design({

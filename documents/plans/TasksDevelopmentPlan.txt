@@ -119,8 +119,9 @@ v Show number of displayed/selected Users at the bottom of Users/Settings panel 
 - Out of Scope: Add support for "Teams" (a user can belong to a team, a team can have a lead) $Feature
 | Create separate projects for different teams to keep their tasks/deadlines separate instead
 
-- Add "Auto Save" enable/disable capability via actions menu [SG] <BB> $Feature @Done %Passed
-- Add "Send Notifications" enable/disable capability via actions menu [SG] <JH2> $Feature @Done %Passed
+- Support "Show Projects List" toggling via actions menu [SG] <BB> $Feature @Done %Passed
+- Support "Auto Save" toggling via actions menu [SG] $Feature @Done %Passed
+- Support "Send Notifications" toggling via actions menu [SG] <JH2> $Feature @Done %Passed
 
 - Add "Statistics..." menu item in actions menu/popup to show percent breakdown of displayed Tasks by attributes [SG] $Feature @Done %Passed
 - Provide graphical views (bar graphs, pie charts) for Statistics using Sai [SG] <EG> $Feature @Active
