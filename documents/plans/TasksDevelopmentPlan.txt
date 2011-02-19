@@ -186,7 +186,7 @@ v Add hover over tooltip for Assignees to show how many Tasks they have and to e
 - Append "?" for range-based subtotals including Ttasks with unspecified Efforts [SG] $Feature @Done %Passed
 ^ Support automatic sorting of Tasks by status, validation, priority, type, and name or "index" (if name starts with a number) [SG] <SG> $Feature @Done %Passed
 v Add hover over tooltip for Task IDs to show Submitter [SG] <JH2> $Feature @Done %Passed
-- Support dueDate for Tasks (display in task list/editor, indicate overdue/upcoming tasks, add to import/export) [SG] $Feature
+^ Support Task dueDates (show in task list/editor, indicate overdue/upcoming tasks, add to import/export) [SG] $Feature
 
 ^ Add buttons to add/delete Tasks below Tasks list [SG] <SE> $Feature @Done %Passed
 | Logged in user is default Submitter, Assignee is either set to the same as selected Task (if one) or to logged in user
@@ -261,7 +261,7 @@ Servers @Active
 - Add link to Task in email notification (should not require authentication if user is signed in) [SG] <JH2> $Feature
 
 - Support Tasks database cleanup to remove soft-deleted records and handle pointers to non-existent records [SG] @Done %Passed
-^ Add github "issues" DataStore (store additional data from Tasks as github issues tags) [SG] <JH2> $Feature @Active
+- Add github "issues" DataStore (store additional data from Tasks as github issues tags) [SG] <JH2> $Feature @Active
 
 #========================================================================================================================
 Styling @Active
@@ -269,7 +269,8 @@ Styling @Active
 
 ^ Style via CSS, embed catchy/sprited images [MG] <SG> $Feature @Done %Passed
 - Re-style to match "dark" Greenhouse look & feel [SG] <MG> $Feature @Done
-- Run Chance to optimize loading of final set of split-up icons [JH2] <SG> @Risky
+- Run Chance to optimize loading of final set of split-up icons [SG] <JH2> @Risky
+| Wait to do this after switching to SC 1.5 where Chance is integrated
 
 
 #========================================================================================================================
@@ -280,7 +281,7 @@ I18N/Porting @Active
 v Test GUI Localization (L10N) using reversed strings [SG] <JH2> @Done %Passed
 - Port GUI to Firefox & Webkit (Safari/Chrome) [SG] @Done %Passed
 - Port GUI to Internet Explorer [SG] @Risky
-
+| Wait to do this after switching to SC 1.5
 
 #========================================================================================================================
 Hardening/Testing @Active
