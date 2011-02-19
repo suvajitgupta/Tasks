@@ -311,6 +311,7 @@ Tasks.mainPage = SC.Page.design({
            titleMinWidth: 0,
            icon: 'empty-project-icon',
            classNames: ['dark'],
+           target: 'Tasks.mainPage.mainPane.masterDetailView',
            action: 'toggleMasterPicker',
            isVisibleBinding: SC.Binding.oneWay('Tasks.mainPageHelper.masterIsHidden')
          }),
