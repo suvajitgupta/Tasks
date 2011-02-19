@@ -230,7 +230,11 @@ Tasks.mainPage = SC.Page.design({
             keyDown: function(event) {
               var ret = NO, commandCode = event.commandCodes();
               // console.log('DEBUG: hotkey "' + commandCode[0] + '" pressed');
-              if (Tasks.getPath('assignmentsController.displayMode') === Tasks.DISPLAY_MODE_TASKS && commandCode[0] === 'right') {
+              if(commandCode[0] === 'ctrl_left' && Tasks.mainPageHelper.get('showProjectsList')) {
+                Tasks.mainPageHelper.set('showProjectsList', NO);
+                ret = YES;
+              }
+              if (ret || Tasks.getPath('assignmentsController.displayMode') === Tasks.DISPLAY_MODE_TASKS && commandCode[0] === 'right') {
                 Tasks.mainPage.tasksList.contentView.becomeFirstResponder();
                 if(Tasks.tasksController.getPath('selection.length') === 0) Tasks.tasksController.selectFirstTask();
                 ret = YES;
@@ -639,7 +643,15 @@ Tasks.mainPage = SC.Page.design({
        keyDown: function(event) {
          var ret = NO, commandCode = event.commandCodes();
          // console.log('DEBUG: hotkey "' + commandCode[0] + '" pressed');
-         if(commandCode[0] === 'left') {
+         if(commandCode[0] === 'ctrl_left' && Tasks.mainPageHelper.get('showProjectsList')) {
+           Tasks.mainPageHelper.set('showProjectsList', NO);
+           ret = YES;
+         }
+         else if(commandCode[0] === 'ctrl_right' && !Tasks.mainPageHelper.get('showProjectsList')) {
+           Tasks.mainPageHelper.set('showProjectsList', YES);
+           ret = YES;
+         }
+         else if(commandCode[0] === 'left') {
            Tasks.getPath('mainPage.mainPane.projectsList').becomeFirstResponder();
            ret = YES;
          }

@@ -519,15 +519,12 @@ Tasks.TaskEditorView = SC.View.extend(
     // console.log('DEBUG: hotkey "' + commandCode[0] + '" pressed');
     if (commandCode[0] === 'return' || commandCode[0] === 'escape') {
       Tasks.statechart.sendEvent('showTasksList');
-      return YES;
     }
     else if (commandCode[0] === 'ctrl_='){  // control_equals
       Tasks.statechart.sendEvent('addTask');
-      ret = YES;
     }
     else if (commandCode[0] === 'ctrl_shift_+'){  // control shift plus
       Tasks.duplicateTask();
-      ret = YES;
     }
     return NO;
   }
