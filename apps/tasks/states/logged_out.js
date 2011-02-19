@@ -47,6 +47,7 @@ Tasks.LoggedOutState = Ki.State.extend({
       },
 
       signin: function() {
+        Tasks.loginController.clearLoginErrorMessage();
         Tasks.statechart.gotoState('authentication');
       }
       

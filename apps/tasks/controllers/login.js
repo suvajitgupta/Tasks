@@ -17,11 +17,15 @@ Tasks.loginController = SC.ObjectController.create(
     password: '',
     
     loginErrorMessage: '',
-    displayLoginError: function(errorMessage){
+    displayLoginErrorMessage: function(errorMessage){
       this.set('loginErrorMessage', errorMessage);
     },
-    _loginInformationDidChange: function() {
+    clearLoginErrorMessage: function(){
       this.set('loginErrorMessage', '');
+    },
+    
+    _loginInformationDidChange: function() {
+      this.clearLoginErrorMessage();
     }.observes('loginName', 'password')
     
 });

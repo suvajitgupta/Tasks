@@ -175,7 +175,7 @@ Tasks.mixin( /** @scope Tasks */ {
     Tasks.getPath('loginPage.panel').setAuthenticatingMessageVisibility(false);
     
     var errorString = SC.instanceOf(response, SC.Error)? "_LoginServerAccessError".loc() : "_LoginAuthenticationError".loc();
-    Tasks.loginController.displayLoginError(errorString);
+    Tasks.loginController.displayLoginErrorMessage(errorString);
     Tasks.statechart.sendEvent('authenticationFailed');
     
   },
