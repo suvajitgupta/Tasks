@@ -3,10 +3,15 @@ A. 'TASKS' INTRODUCTION/GOALS
 
 'Tasks' is a rich-internet application for tracking personal or team tasks.
 The 'Tasks' GUI runs on desktop and iPad browsers and is particularly useful
-for managing Agile software development.  Check out the demo instance at:
+for managing Agile software development.  Check out a full demo instance at:
 
 http://tasks-demo.appspot.com
 Login as 'SG' no password
+
+Tasks also runs in 'ToDo' mode (this is useful to manage a list of things to do,
+personal or for a team).  An instance built in this mode is available at:
+
+http://tasks.sproutcore.com
 
 'Tasks' consists of a SproutCore-based GUI and REST-based Servers.
 Persevere and Google App Engine (GAE) Servers are supported out-of-the-box.
@@ -96,8 +101,7 @@ D. CUSTOMIZING 'TASKS' CODE
 This is useful if you deploy 'Tasks' on your intranet or the cloud.
 Search for "Customizable" within 'Tasks' code to see what you can modify.
 
-1) One common scenario is to build 'Tasks' in "To Do" mode (this is useful
-   when using 'Tasks' to manage a list of things to do, personal or for a team):
+1) One common scenario is to build 'Tasks' in "To Do" mode:
 
   - Set "softwareMode" to false in "apps/tasks/core.js"
 

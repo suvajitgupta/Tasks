@@ -6,8 +6,8 @@ config :'core-tasks', :required => [:sproutcore, :scuds, :'scuds/local']
 # config :tasks, :required => [:'core-tasks', :ki, :sproutcore, :scui, :sai, :'sai/graphs'],:title=>"<InstallationTitle>"
 config :tasks, :required => [:'core-tasks', :ki, :sproutcore, :scui, :sai, :'sai/graphs'],:title=>"Tasks:Dev"
 # config :tasks, :required => [:'core-tasks', :ki, :sproutcore, :scui, :sai, :'sai/graphs'],:title=>"Tasks:Demo"
-# config :tasks, :required => [:'core-tasks', :ki, :sproutcore, :scui, :sai, :'sai/graphs'],:title=>"Tasks:SproutCore"
-# config :tasks, :required => [:'core-tasks', :ki, :sproutcore, :scui, :sai, :'sai/graphs'],:title=>"Todos:Eloqua"
+# config :tasks, :required => [:'core-tasks', :ki, :sproutcore, :scui, :sai, :'sai/graphs'],:title=>"ToDos:SproutCore"
+# config :tasks, :required => [:'core-tasks', :ki, :sproutcore, :scui, :sai, :'sai/graphs'],:title=>"ToDos:Eloqua"
 
 
 # Local GAE server: uncomment line after next & replace 8091 with port of GAE application; then comment 4th line after next
