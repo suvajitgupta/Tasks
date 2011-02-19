@@ -224,21 +224,24 @@ Tasks.mainPage = SC.Page.design({
                 });
                 pane.popup(this, this.get('selectionEvent')); // pass in the mouse event so the pane can figure out where to put itself
               }
-            }
+            },
             
-          }), // projectsListView
-          
-          // Hotkeys - be careful to avoid conflicts with browser shortcuts!
-          keyDown: function(event) {
-            var ret = NO, commandCode = event.commandCodes();
-            // console.log('DEBUG: hotkey "' + commandCode[0] + '" pressed');
-            if (Tasks.getPath('assignmentsController.displayMode') === Tasks.DISPLAY_MODE_TASKS && commandCode[0] === 'ctrl_right'){  // control right arrow
-              Tasks.mainPage.tasksList.contentView.becomeFirstResponder();
-              Tasks.tasksController.selectFirstTask();
-              ret = YES;
+            // Hotkeys - be careful to avoid conflicts with browser shortcuts!
+            keyDown: function(event) {
+              var ret = NO, commandCode = event.commandCodes();
+              // console.log('DEBUG: hotkey "' + commandCode[0] + '" pressed');
+              if (Tasks.getPath('assignmentsController.displayMode') === Tasks.DISPLAY_MODE_TASKS && commandCode[0] === 'right') {
+                Tasks.mainPage.tasksList.contentView.becomeFirstResponder();
+                if(Tasks.tasksController.getPath('selection.length') === 0) Tasks.tasksController.selectFirstTask();
+                ret = YES;
+              }
+              else {
+                ret = sc_super();
+              }
+              return ret;
             }
-            return ret;
-          }
+
+          }) // projectsListView
           
         }), // projectsListScrollView
          
@@ -630,37 +633,40 @@ Tasks.mainPage = SC.Page.design({
          context.removeClass('helper-add-tasks');
          context.removeClass('helper-display-mode');
          context.removeClass('helper-adjust-filter');
-       }
-
-     }), // tasksListView
-
-     // Hotkeys - be careful to avoid conflicts with browser shortcuts!
-     keyDown: function(event) {
-       var ret = NO, commandCode = event.commandCodes();
-       // console.log('DEBUG: hotkey "' + commandCode[0] + '" pressed');
-       if (commandCode[0] === 'ctrl_left'){  // control left arrow
-         Tasks.getPath('mainPage.mainPane.projectsList').becomeFirstResponder();
-         ret = YES;
-       }
-       else if (commandCode[0] === 'ctrl_right'){  // control right arrow
-         var sel = Tasks.getPath('tasksController.selection');
-         var singleSelect = (sel && sel.get('length') === 1);
-         if(singleSelect) {
-           var task = sel.get('firstObject');
-           if(task) Tasks.getPath('mainPage.taskEditor').popup(task);
+       },
+       
+       // Hotkeys - be careful to avoid conflicts with browser shortcuts!
+       keyDown: function(event) {
+         var ret = NO, commandCode = event.commandCodes();
+         // console.log('DEBUG: hotkey "' + commandCode[0] + '" pressed');
+         if(commandCode[0] === 'left') {
+           Tasks.getPath('mainPage.mainPane.projectsList').becomeFirstResponder();
+           ret = YES;
          }
-         ret = YES;
+         else if(commandCode[0] === 'right') {
+           var sel = Tasks.getPath('tasksController.selection');
+           var singleSelect = (sel && sel.get('length') === 1);
+           if(singleSelect) {
+             var task = sel.get('firstObject');
+             if(task) Tasks.getPath('mainPage.taskEditor').popup(task);
+           }
+           ret = YES;
+         }
+         else if(commandCode[0] === 'ctrl_='){  // control equals
+           Tasks.statechart.sendEvent('addTask');
+           ret = YES;
+         }
+         else if(commandCode[0] === 'ctrl_shift_=' || commandCode[0] === 'ctrl_shift_+') {  // control shift equals (Safari) or plus (Firefox)
+           Tasks.statechart.sendEvent('duplicateTask');
+           ret = YES;
+         }
+         else {
+           ret = sc_super();
+         }
+         return ret;
        }
-       else if (commandCode[0] === 'ctrl_shift_=' || commandCode[0] === 'ctrl_shift_+') {  // control shift equals (Safari) or plus (Firefox)
-         Tasks.statechart.sendEvent('duplicateTask');
-         ret = YES;
-       }
-       else if (commandCode[0] === 'ctrl_='){  // control equals
-         Tasks.statechart.sendEvent('addTask');
-         ret = YES;
-       }
-       return ret;
-     }
+
+     }) // tasksListView
 
   }), // tasksListScrollView
   
