@@ -463,6 +463,9 @@ Tasks.TaskEditorView = SC.View.extend(
      bottomRightView: SC.View.design({
        classNames: ['comments-view'],
        childViews: 'commentButton commentsList'.w(),
+       mouseDown: function() {
+         Tasks.commentsController.set('selection', '');
+       },
        commentButton: SC.ButtonView.design({
          layout: { top: 5, centerX: 0, height: 24, width: 90 },
          title: "_Comment".loc(),
