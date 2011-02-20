@@ -318,6 +318,7 @@ CoreTasks.User.mixin(/** @scope CoreTasks.User */ {
     var ret = {
       loginName: userLoginName,
       name: userName,
+      password: '',
       role: userRole,
       email: userEmail
     };
