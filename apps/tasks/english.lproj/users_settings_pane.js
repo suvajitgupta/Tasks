@@ -72,7 +72,7 @@ Tasks.usersSettingsPane = SCUI.ModalPane.create({
           exampleView: Tasks.UserItemView,
           groupExampleView: Tasks.GroupItemView, // added to avoid context menu
           isEditable: NO,
-          allowDeselectAll: YES,
+          allowDeselectAll: NO,
           canEditContent: YES,
           canReorderContent: YES,
           canDeleteContent: YES,
