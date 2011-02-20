@@ -476,6 +476,7 @@ Tasks.TaskEditorView = SC.View.extend(
             contentBinding: 'Tasks.commentsController.arrangedObjects',
             classNames: ['comments-list'],
             selectionBinding: 'Tasks.commentsController.selection',
+            allowDeselectAll: YES,
             exampleView: Tasks.CommentItemView
           })
         })
