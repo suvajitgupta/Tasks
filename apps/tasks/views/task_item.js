@@ -140,18 +140,17 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     if(Tasks.softwareMode) idTooltip += "_TaskValidationTooltip".loc();
     var submitterUser = content.get('submitter');
     if (submitterUser) idTooltip += ("_SubmitterTooltip".loc() + '%@ (%@)'.fmt(submitterUser.get('name'), submitterUser.get('loginName')));
-    var validationClass = null;
-    var validation = content.get('validation');
-    switch(validation){
-      case CoreTasks.TASK_VALIDATION_UNTESTED:
-        validationClass = 'task-validation-untested';
-        break;
-      case CoreTasks.TASK_VALIDATION_PASSED:
-        validationClass = 'task-validation-passed';
-        break;
-      case CoreTasks.TASK_VALIDATION_FAILED:
-        validationClass = 'task-validation-failed';
-        break;          
+    var validationClass = 'task-validation-untested';
+    if(Tasks.softwareMode) {
+      var validation = content.get('validation');
+      switch(validation){
+        case CoreTasks.TASK_VALIDATION_PASSED:
+          validationClass = 'task-validation-passed';
+          break;
+        case CoreTasks.TASK_VALIDATION_FAILED:
+          validationClass = 'task-validation-failed';
+          break;          
+      }
     }
     var displayId = content.get('displayId');
     var taskIdClass = 'task-id';
