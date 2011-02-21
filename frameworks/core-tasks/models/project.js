@@ -468,12 +468,12 @@ CoreTasks.Project.mixin(/** @scope CoreTasks.Project */ {
     var projectStatusMatches = line.match(/@(\w+)/g);
     if(projectStatusMatches) {
       if(projectStatusMatches.length === 1) {
-        var status = projectStatusMatches[0].slice(1);
-        if(CoreTasks.projectStatusesAllowed.indexOf('_' + status) === -1) {
+        var status = CoreTasks.normalizeLocalizedString('_' + projectStatusMatches[0].slice(1));
+        if(CoreTasks.projectStatusesAllowed.indexOf(status) === -1) {
           console.warn('Project Parsing Error - illegal status: ' + status);
         }
         else {
-          projectStatus = '_' + status;
+          projectStatus = status;
         }
       }
       else {

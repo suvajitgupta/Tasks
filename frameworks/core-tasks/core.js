@@ -8,6 +8,14 @@
 
 CoreTasks = SC.Object.create({
   
+  /**
+   * Make localized string start with uppercase letter and be lowercase afterwards
+   */
+  normalizeLocalizedString: function(str) {
+    if(SC.empty(str) || str.length < 3 || str[0] !== '_') return str; // nothing to do
+    return '_' + str[1].toUpperCase() + str.slice(2).toLowerCase();
+  },
+  
   // Customizable "Use Local Storage": if set to true records will be cached in browser's local storage database
   useLocalStorage: true,
   

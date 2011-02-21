@@ -604,12 +604,12 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
     var taskTypeMatches = line.match(/\$(\w+)/g);
     if(taskTypeMatches) {
       if(taskTypeMatches.length === 1) {
-        var type = taskTypeMatches[0].slice(1);
-        if(CoreTasks.taskTypesAllowed.indexOf('_' + type) === -1) {
+        var type = CoreTasks.normalizeLocalizedString('_' + taskTypeMatches[0].slice(1));
+        if(CoreTasks.taskTypesAllowed.indexOf(type) === -1) {
           console.warn('Task Parsing Error - illegal type: ' + type);
         }
         else {
-          taskType = '_' + type;
+          taskType = type;
         }
       }
       else {
@@ -622,12 +622,12 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
     var taskStatusMatches = line.match(/@(\w+)/g);
     if(taskStatusMatches) {
       if(taskStatusMatches.length === 1) {
-        var status = taskStatusMatches[0].slice(1);
-        if(CoreTasks.taskStatusesAllowed.indexOf('_' + status) === -1) {
+        var status = CoreTasks.normalizeLocalizedString('_' + taskStatusMatches[0].slice(1));
+        if(CoreTasks.taskStatusesAllowed.indexOf(status) === -1) {
           console.warn('Task Parsing Error - illegal status: ' + status);
         }
         else {
-          taskStatus = '_' + status;
+          taskStatus = status;
         }
       }
       else {
@@ -640,12 +640,12 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
     var taskValidationMatches = line.match(/%(\w+)/g);
     if(taskValidationMatches) {
       if(taskValidationMatches.length === 1) {
-        var validation = taskValidationMatches[0].slice(1);
-        if(CoreTasks.taskValidationsAllowed.indexOf('_' + validation) === -1) {
+        var validation = CoreTasks.normalizeLocalizedString('_' + taskValidationMatches[0].slice(1));
+        if(CoreTasks.taskValidationsAllowed.indexOf(validation) === -1) {
           console.warn('Task Parsing Error - illegal validation: ' + validation);
         }
         else {
-          taskValidation = '_' + validation;
+          taskValidation = validation;
           if((taskStatus !== null && taskStatus !== CoreTasks.STATUS_DONE) && taskValidation !== CoreTasks.TASK_VALIDATION_UNTESTED) {
             taskValidation = null;
             console.warn('Task Parsing Error - validation of Passed/Failed only possible for status Done: ' + taskName);
