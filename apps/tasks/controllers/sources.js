@@ -1,7 +1,7 @@
 // ==========================================================================
 // Tasks.sourcesController
 // ==========================================================================
-/*globals Tasks */
+/*globals CoreTasks Tasks */
 /** 
   This is the controller for the Projects source list view
   
@@ -23,7 +23,7 @@ Tasks.sourcesController = SC.TreeController.create(SC.CollectionViewDelegate,
   // 
   
   /**
-    When dragging, add Task data type to the drag.
+    When dragging, add Project data type to the drag.
   */
   collectionViewDragDataTypes: function(view) {
     return [CoreTasks.Project];
