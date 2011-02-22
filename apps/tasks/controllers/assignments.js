@@ -140,10 +140,9 @@ Tasks.assignmentsController = SC.ArrayController.create(
       submitter = task.get('submitter');
       var taskName = task.get('name');
       var taskDescription = task.get('description');
-      var isNewTask = (taskName === CoreTasks.NEW_TASK_NAME.loc()); // Always display "new task"s
       assigneeName = assignee? assignee.get('displayName') : CoreTasks.USER_UNASSIGNED;
       submitterName = submitter? submitter.get('displayName') : CoreTasks.USER_UNASSIGNED;
-      if(isNewTask || assigneeSelectionDisplayNames.length === 0 || assigneeSelectionDisplayNames.indexOf(assigneeName) !== -1) {
+      if(assigneeSelectionDisplayNames.length === 0 || assigneeSelectionDisplayNames.indexOf(assigneeName) !== -1) {
         
         var assigneeTasks = assignees[assigneeName];
         if(!assigneeTasks) {
@@ -152,73 +151,70 @@ Tasks.assignmentsController = SC.ArrayController.create(
         }
         
         // Extract tasks that meet filter criteria
-        if(!isNewTask) {
-          
-          if(submitterSelectionDisplayNames.length !== 0 && submitterSelectionDisplayNames.indexOf(submitterName) === -1) return;
+        if(submitterSelectionDisplayNames.length !== 0 && submitterSelectionDisplayNames.indexOf(submitterName) === -1) return;
+      
+        var attributeFilterCriteria = this.get('_attributeFilterCriteria');
+        var type = task.get('type');
+        if(attributeFilterCriteria.indexOf(type) === -1) return;
+        var priority = task.get('priority');
+        if(attributeFilterCriteria.indexOf(priority) === -1) return;
+        var developmentStatus = task.get('developmentStatus');
+        if(attributeFilterCriteria.indexOf(developmentStatus) === -1) return;
+        if(developmentStatus === CoreTasks.STATUS_DONE) {
+          var validation = task.get('validation');
+          if(attributeFilterCriteria.indexOf(validation) === -1) return;
+        }
         
-          var attributeFilterCriteria = this.get('_attributeFilterCriteria');
-          var type = task.get('type');
-          if(attributeFilterCriteria.indexOf(type) === -1) return;
-          var priority = task.get('priority');
-          if(attributeFilterCriteria.indexOf(priority) === -1) return;
-          var developmentStatus = task.get('developmentStatus');
-          if(attributeFilterCriteria.indexOf(developmentStatus) === -1) return;
-          if(developmentStatus === CoreTasks.STATUS_DONE) {
-            var validation = task.get('validation');
-            if(attributeFilterCriteria.indexOf(validation) === -1) return;
-          }
-          
-          var effortSpecified = this.get('_effortSpecified');
-          if(effortSpecified !== Tasks.FILTER_DONT_CARE) {
-            var taskEffortSpecified = !SC.none(task.get('effort'));
-            if(effortSpecified === Tasks.FILTER_YES && !taskEffortSpecified) return;
-            if(effortSpecified === Tasks.FILTER_NO && taskEffortSpecified) return;
-          }
-          
-          var recentlyUpdated = this.get('_recentlyUpdated');
-          if(recentlyUpdated !== Tasks.FILTER_DONT_CARE) {
-            var taskRecentlyUpdated = task.get('isRecentlyUpdated');
-            if(recentlyUpdated === Tasks.FILTER_YES && !taskRecentlyUpdated) return;
-            if(recentlyUpdated === Tasks.FILTER_NO && taskRecentlyUpdated) return;
-          }
-          
-          var watched = this.get('_watched');
-          if(watched !== Tasks.FILTER_DONT_CARE) {
-            if(watched === Tasks.FILTER_MY_WATCHES && !CoreTasks.isCurrentUserWatchingTask(task)) return;
-            if(watched === Tasks.FILTER_ANY_WATCHES && !CoreTasks.isAnyUserWatchingTask(task)) return;
-          }
-          
-          if(idMatches) { // one or more exact ID matches of task ID or IDs in name
-            var taskId = task.get('displayId');
-            if(idMatches.indexOf(taskId) === -1) { // doesn't match task ID exactly
-              // see if any task ID entered in the search is a part of the task name
-              var taskHasID = false;
-              for (var i = 0; !taskHasID && i < idMatches.length; i++) {
-                var searchText = taskName + (taskDescription? taskDescription : '');
-                var taskIdMatches = searchText.match(/#([\-\d]+)/g);
-                if(taskIdMatches) { // task name has IDs in it
-                  for (var j=0; j < taskIdMatches.length; j++) {
-                    if(taskIdMatches[j] === idMatches[i]) { // found match!
-                      taskHasID = true;
-                      break;
-                    }
+        var effortSpecified = this.get('_effortSpecified');
+        if(effortSpecified !== Tasks.FILTER_DONT_CARE) {
+          var taskEffortSpecified = !SC.none(task.get('effort'));
+          if(effortSpecified === Tasks.FILTER_YES && !taskEffortSpecified) return;
+          if(effortSpecified === Tasks.FILTER_NO && taskEffortSpecified) return;
+        }
+        
+        var recentlyUpdated = this.get('_recentlyUpdated');
+        if(recentlyUpdated !== Tasks.FILTER_DONT_CARE) {
+          var taskRecentlyUpdated = task.get('isRecentlyUpdated');
+          if(recentlyUpdated === Tasks.FILTER_YES && !taskRecentlyUpdated) return;
+          if(recentlyUpdated === Tasks.FILTER_NO && taskRecentlyUpdated) return;
+        }
+        
+        var watched = this.get('_watched');
+        if(watched !== Tasks.FILTER_DONT_CARE) {
+          if(watched === Tasks.FILTER_MY_WATCHES && !CoreTasks.isCurrentUserWatchingTask(task)) return;
+          if(watched === Tasks.FILTER_ANY_WATCHES && !CoreTasks.isAnyUserWatchingTask(task)) return;
+        }
+        
+        if(idMatches) { // one or more exact ID matches of task ID or IDs in name
+          var taskId = task.get('displayId');
+          if(idMatches.indexOf(taskId) === -1) { // doesn't match task ID exactly
+            // see if any task ID entered in the search is a part of the task name
+            var taskHasID = false;
+            for (var i = 0; !taskHasID && i < idMatches.length; i++) {
+              var searchText = taskName + (taskDescription? taskDescription : '');
+              var taskIdMatches = searchText.match(/#([\-\d]+)/g);
+              if(taskIdMatches) { // task name has IDs in it
+                for (var j=0; j < taskIdMatches.length; j++) {
+                  if(taskIdMatches[j] === idMatches[i]) { // found match!
+                    taskHasID = true;
+                    break;
                   }
                 }
               }
-              if(!taskHasID) return;
+            }
+            if(!taskHasID) return;
+          }
+        }
+        else if(searchPattern) { // case insensitive search of task name and/or description
+          var nameMatches = taskName.match(searchPattern);
+          if(positiveMatch) { // find what matches search pattern
+            if(!nameMatches) { // try matching description
+              if(!taskDescription || !taskDescription.match(searchPattern)) return;
             }
           }
-          else if(searchPattern) { // case insensitive search of task name and/or description
-            var nameMatches = taskName.match(searchPattern);
-            if(positiveMatch) { // find what matches search pattern
-              if(!nameMatches) { // try matching description
-                if(!taskDescription || !taskDescription.match(searchPattern)) return;
-              }
-            }
-            else { // inverse search - what doesn't match search pattern
-              if(nameMatches) return;
-              if(taskDescription && taskDescription.match(searchPattern)) return;
-            }
+          else { // inverse search - what doesn't match search pattern
+            if(nameMatches) return;
+            if(taskDescription && taskDescription.match(searchPattern)) return;
           }
         }
         assigneeTasks.tasks.push(task);
