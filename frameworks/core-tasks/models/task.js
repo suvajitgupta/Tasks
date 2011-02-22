@@ -577,7 +577,7 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
     }
     
     // extract task name
-    var taskNameMatches = /^\s*(^[^\{<\[\$@%]+)/.exec(line);
+    var taskNameMatches = /^\s*(^[^\{<\[\$@%#]+)/.exec(line);
     var taskName = taskNameMatches? taskNameMatches[1].replace(/\s*$/, '') : line;
     
     // extract task effort
