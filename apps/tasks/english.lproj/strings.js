@@ -177,7 +177,7 @@ SC.stringsFor('English', {
   "_Task": "Task",
   "_TaskWatchersTooltip": "Number of users watching this task - click to see them",
   "_TasksSearchHint": "Tasks search pattern",
-  "_TasksSearchTooltip": "Specify [Assignees] or <Submitters> (use all or part of full/login name separated via commas or spaces - use 'none' for unassigned), #IDs (separated by commas or spaces), or text (to match within task name or description - prefix with a caret to find items that don't match text)",
+  "_TasksSearchTooltip": "Specify [Assignees] or <Submitters> (use all or part of full/login name separated via commas or spaces - use 'none' for unassigned), #IDs (separated by commas or spaces), or text (to match within task name or description - prefix with a caret to find items that don't match text); @Users will find tasks assigned to or submitted by matching users.",
   "_Tester": "Tester",
   "_TimeLeft:": "Time Left:",
   "_TimeLeftOnscreenHelp": "May be unspecified, a decimal like '0.25'; in units 'd' or 'h'",

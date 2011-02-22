@@ -57,13 +57,26 @@ Tasks.assignmentsController = SC.ArrayController.create(
     var tasksSearch = this.get('_tasksSearch');
     
     // Extract selected users ([Assignees] or <Submitters>)
+    // Look for special tag @User to show everything assigned to or submitted by someone
     var i, j, assigneeSelectionDisplayNames = [], submitterSelectionDisplayNames = [];
     if (tasksSearch && tasksSearch !== '') { // if a search filter is specified
+      
+      var userMatches = tasksSearch.match(/@(\w+)/g);
+      var userSelection = null;
+      if(userMatches) {
+        userSelection = userMatches[0].slice(1);
+        tasksSearch = tasksSearch.replace('@' + userSelection, ''); // remove user selection from search filter
+        // console.log('DEBUG: userSelection="' + userSelection + '"');
+      }
+      
       var assigneeSelection = tasksSearch.match(/\[.*\]/);
-      if (assigneeSelection) { // if assignee selection is specified
-        assigneeSelection += ''; // convert to string
-        tasksSearch = tasksSearch.replace(assigneeSelection, ''); // remove assignee selection from search filter
-        assigneeSelection = assigneeSelection.substr(1,assigneeSelection.length-2);
+      if (userSelection || assigneeSelection) { // if user or assignee selection is specified
+        if(assigneeSelection) {
+          assigneeSelection += ''; // convert to string
+          tasksSearch = tasksSearch.replace(assigneeSelection, ''); // remove assignee selection from search filter
+        }
+        assigneeSelection = userSelection? userSelection : assigneeSelection.substr(1, assigneeSelection.length-2);
+        
         var assigneeSelectionNames = assigneeSelection.replace(/,/g, ' ').replace(/\s+/g, ' ').replace(/^\s+/, '').replace(/\s+$/, '');
         if (assigneeSelection !== '') {
           assigneeSelectionNames = assigneeSelectionNames.split(' ');
@@ -84,11 +97,12 @@ Tasks.assignmentsController = SC.ArrayController.create(
           }
         }
       }
+      
       var submitterSelection = tasksSearch.match(/\<.*\>/);
       if (submitterSelection) { // if submitter selection is specified
         submitterSelection += ''; // convert to string
         tasksSearch = tasksSearch.replace(submitterSelection, ''); // remove submitter selection from search filter
-        submitterSelection = submitterSelection.substr(1,submitterSelection.length-2);
+        submitterSelection = submitterSelection.substr(1, submitterSelection.length-2);
         var submitterSelectionNames = submitterSelection.replace(/,/g, ' ').replace(/\s+/g, ' ').replace(/^\s+/, '').replace(/\s+$/, '');
         if (submitterSelection !== '') {
           submitterSelectionNames = submitterSelectionNames.split(' ');
@@ -108,11 +122,12 @@ Tasks.assignmentsController = SC.ArrayController.create(
           }
           // console.log('DEBUG: submitters: ' + submitterSelectionDisplayNames);
         }
+        
       }
     
       // Extract task name search filter
       tasksSearch = this._escapeMetacharacters(tasksSearch).replace(/^\s+/, '').replace(/\s+$/, '');
-      // console.log('DEBUG: tasksSearch: ' + tasksSearch);
+      // console.log('DEBUG: tasksSearch="' + tasksSearch + '"');
       var idMatches = tasksSearch.match(/#([\-\d]+)/g);
       // console.log('DEBUG: idMatches = ' + idMatches);
       if(!idMatches) {
@@ -134,7 +149,8 @@ Tasks.assignmentsController = SC.ArrayController.create(
       
     // Group tasks by user & separate unassigned tasks
     var assignees = {}, submitter, submitterName, assigneeName, assignee, assignmentNodes = [];
-    this.forEach(function(task){
+    this.forEach(function(task) {
+      
       // console.log("Task Name: " + task.get('name') + "; Id: " + task.get('id'));
       assignee = task.get('assignee');
       submitter = task.get('submitter');
@@ -142,7 +158,9 @@ Tasks.assignmentsController = SC.ArrayController.create(
       var taskDescription = task.get('description');
       assigneeName = assignee? assignee.get('displayName') : CoreTasks.USER_UNASSIGNED;
       submitterName = submitter? submitter.get('displayName') : CoreTasks.USER_UNASSIGNED;
-      if(assigneeSelectionDisplayNames.length === 0 || assigneeSelectionDisplayNames.indexOf(assigneeName) !== -1) {
+      
+      if(assigneeSelectionDisplayNames.length === 0 || assigneeSelectionDisplayNames.indexOf(assigneeName) !== -1 ||
+         (userSelection && assigneeSelectionDisplayNames.indexOf(submitterName) !== -1)) {
         
         var assigneeTasks = assignees[assigneeName];
         if(!assigneeTasks) {
