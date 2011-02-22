@@ -9,8 +9,6 @@
   @author Suvajit Gupta
 */
 
-// FIXME: [SG/BB] during dragging onto projects list, the selected project loses 'sel' class
-
 Tasks.sourcesController = SC.TreeController.create(SC.CollectionViewDelegate,
 /** @scope Tasks.sourcesController.prototype */ {
   
