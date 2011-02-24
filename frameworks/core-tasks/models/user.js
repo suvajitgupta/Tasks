@@ -2,7 +2,7 @@
 sc_require('models/record');
 
 CoreTasks.USER_UNASSIGNED = '_Unassigned';
-CoreTasks.NEW_USER_NAME = '_FirstLast';
+CoreTasks.NEW_USER_NAME = '_FirstnameLastname';
 CoreTasks.NEW_USER_LOGIN_NAME = '_Initials';
 CoreTasks.USER_NONE = "none"; // used to specify unassigned user via task inline editing
 

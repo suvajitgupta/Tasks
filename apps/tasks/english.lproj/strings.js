@@ -82,7 +82,7 @@ SC.stringsFor('English', {
   "_Failed": "Failed",
   "_Feature": "Feature",
   "_FilterTooltip": "Filter tasks by type, priority, status, validation, effort specified, recently updated",
-  "_FirstLast": "Firstname Lastname",
+  "_FirstnameLastname": "Firstname Lastname",
   "_FormatOnscreenHelpSoftwareMode": "[User LoginName] (Name) {Role} &lt;Email&gt;<br>Project Name {TimeLeft} &lt;ActivatedAt&gt; @Status<br>- Task Name {Effort} &lt;Submitter&gt; [Assignee] $Type @Status %Validation<br>| Description (1 or more lines following a Project or Task)",
   "_FormatOnscreenHelpTodoMode": "Project Name {TimeLeft} &lt;ActivatedAt&gt;<br>- Task Name {Effort} &lt;Submitter&gt; [Assignee] @Status<br>| Description (1 or more lines following a Project or Task)",
   "_FullName:": "Full Name:",

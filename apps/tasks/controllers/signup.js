@@ -21,9 +21,11 @@ Tasks.signupController = SC.ObjectController.create(
    * Create a new guest user and select it for editing.
    */
   createUser: function() {
-    var newUserHash = SC.clone(CoreTasks.User.NEW_USER_HASH);
-    newUserHash.role = CoreTasks.USER_ROLE_GUEST;
-    this._registeringUser = CoreTasks.createRecord(CoreTasks.User, newUserHash);
+    var userHash = SC.clone(CoreTasks.User.NEW_USER_HASH);
+    userHash.name = userHash.name.loc();
+    userHash.loginName = userHash.loginName.loc();
+    userHash.role = CoreTasks.USER_ROLE_GUEST;
+    this._registeringUser = CoreTasks.createRecord(CoreTasks.User, userHash);
     Tasks.usersController.selectObject(this._registeringUser);
   },
   

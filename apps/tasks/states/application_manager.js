@@ -111,6 +111,8 @@ Tasks.ApplicationManagerState = Ki.State.extend({
 
       // Create and select new user (copy role of selected user if one).
       var userHash = SC.clone(CoreTasks.User.NEW_USER_HASH);
+      userHash.name = userHash.name.loc();
+      userHash.loginName = userHash.loginName.loc();
       var selectedUser = Tasks.usersController.getPath('selection.firstObject');
       if (selectedUser) userHash.role = selectedUser.get('role');
       var user = CoreTasks.createRecord(CoreTasks.User, userHash);
@@ -172,6 +174,10 @@ Tasks.ApplicationManagerState = Ki.State.extend({
     },
 
     exitState: function() {
+      // Next 3 lines are to ensure any unmodified user is deleted before panel closes
+      SC.RunLoop.begin();
+      Tasks.usersController.selectObject(CoreTasks.get('currentUser'));
+      SC.RunLoop.end();
       Tasks.get('usersSettingsPane').remove();
       if(Tasks.get('autoSave')) Tasks.saveChanges();
     }

@@ -35,7 +35,7 @@ Tasks.UserInformationView = SC.View.extend(
     childViews.push(this.fullNameLabel);
     this.fullNameField = this.createChildView(SC.TextFieldView.extend({
       layout: { top: 10, left: 90, height: 20, width: 300 },
-      hint: "_FirstLast".loc(),
+      hint: "_FirstnameLastname".loc(),
       valueBinding: SC.binding('*content.name', this).toLocale()
     }));
     childViews.push(this.fullNameField);

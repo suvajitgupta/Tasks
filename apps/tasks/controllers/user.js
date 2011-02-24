@@ -22,9 +22,9 @@ Tasks.userController = SC.ObjectController.create(Tasks.Sha1,
   
   isValidUserName: function() {
     var name = this.get('name');
-    if(name === '' || name === CoreTasks.NEW_USER_NAME || name === CoreTasks.NEW_USER_NAME.loc()) return false;
+    if(name === '' || name === CoreTasks.NEW_USER_NAME.loc()) return false;
     var loginName = this.get('loginName');
-    if(loginName === '' || loginName === CoreTasks.NEW_USER_LOGIN_NAME || loginName === CoreTasks.NEW_USER_LOGIN_NAME.loc()) return false;
+    if(loginName === '' || loginName === CoreTasks.NEW_USER_LOGIN_NAME.loc()) return false;
     return true;
   }.property('name', 'loginName').cacheable(),
   
@@ -64,11 +64,18 @@ Tasks.userController = SC.ObjectController.create(Tasks.Sha1,
     return password? this.sha1Hash(password) : '';
   },
   
-  _contentDidChange: function() {
-    var user = this.getPath('content.firstObject');
-    if(user) {
-      var password = user.get('password');
-      this._unhashedPassword = password? 'password' : '';
+  _userSelectionDidChange: function() {
+    // console.log('DEBUG: userSelectionDidChange() was: ' + (this._selected? this._selected.get('name') : '(none)'));
+    if(this.getPath('content.length') !== 1) return;
+    var lastSelected = this._selected, currentSelected = this.get('content');
+    if (currentSelected && currentSelected.firstObject) currentSelected = currentSelected.firstObject();
+    if (lastSelected !== currentSelected) {
+      // console.log('DEBUG: userSelectionDidChange() to: ' + currentSelected.get('name'));
+      if(lastSelected && (lastSelected.getPath('name') === CoreTasks.NEW_USER_NAME.loc() ||
+         lastSelected.getPath('loginName') === CoreTasks.NEW_USER_LOGIN_NAME.loc())) {
+        lastSelected.destroy(); // blow away unmodified new user
+      }
+      this._selected = currentSelected;
     }
   }.observes('content')
   

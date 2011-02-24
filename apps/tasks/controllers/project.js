@@ -75,16 +75,17 @@ Tasks.projectController = SC.ObjectController.create(
    * Set URL route when a single project is selected
    */
   _projectSelectionDidChange: function() {
+    // console.log('DEBUG: userSelectionDidChange() was: ' + (this._selected? this._selected.get('name') : '(none)'));
     if(this.getPath('content.length') !== 1) return;
-    var last = this._project, cur = this.get('content');
-    if (cur && cur.firstObject) cur = cur.firstObject();
-    if (last !== cur) {
-      // console.log('DEBUG: projectSelectionDidChange() project: ' + cur.get('name'));
+    var lastSelecteed = this._selected, currentSelected = this.get('content');
+    if (currentSelected && currentSelected.firstObject) currentSelected = currentSelected.firstObject();
+    if (lastSelecteed !== currentSelected) {
+      // console.log('DEBUG: projectSelectionDidChange() to: ' + currentSelected.get('name'));
       Tasks.tasksController.deselectTasks();
       if(Tasks.get('panelOpen') === Tasks.TASK_EDITOR) Tasks.statechart.sendEvent('showTasksList');
-      this._project = cur;
+      this._selected = currentSelected;
       var oldRoute = '#' + SC.routes.get('location');
-      var newRoute = CoreTasks.isSystemProject(cur)? '' : ('#select&projectId=#' + cur.get('id'));
+      var newRoute = CoreTasks.isSystemProject(currentSelected)? '' : ('#select&projectId=#' + currentSelected.get('id'));
       if(newRoute !== oldRoute) SC.routes.set('location', newRoute);
     }
   }.observes('content')
