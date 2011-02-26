@@ -53,7 +53,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     // console.log('DEBUG: computeTasks() call #' + this.callCounter++ + ' with ' + this.getPath('content.length') + ' items');
     // Preserve selected tasks to be restored at the end of rendering
     var selection = Tasks.tasksController.get('selection');
-    var idPattern = null, searchPattern = null, positiveMatch = true;
+    var searchPattern = null, positiveMatch = true;
     var tasksSearch = this.get('_tasksSearch');
     
     // Extract selected users ([Assignees] or <Submitters>)
