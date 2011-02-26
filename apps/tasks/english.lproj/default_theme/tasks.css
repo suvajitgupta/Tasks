@@ -438,8 +438,21 @@
 
 
 /*-----------------------------------------------------------------
- * Task description styles
+ * Task search highlight and description styles
  */
+
+.task-item highlight {
+  background-color: yellow !important;
+  border: 1px solid #CCCCCC !important;
+  -moz-border-radius: 3px !important;
+  -webkit-border-radius: 3px !important;
+  padding: 3px 0px !important;
+}
+
+.task-item highlight.description-icon {
+  padding: 0px 0px !important;
+  top: 3px !important;
+}
 
 .task-description {
   position: absolute !important;
