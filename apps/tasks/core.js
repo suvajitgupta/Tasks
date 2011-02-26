@@ -91,6 +91,13 @@ Tasks = SC.Object.create(
 });
 
 /**
+  Override to silence render warning.
+*/
+SC.ListItemView = SC.ListItemView.extend({
+  deprecatedRenderWarning: function() {}
+});
+
+/**
   Override to avoid default alert box popup.
 */
 SC.ExceptionHandler.enabled = true;
