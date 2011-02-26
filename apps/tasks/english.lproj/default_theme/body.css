@@ -40,18 +40,6 @@ body.sc-theme,
   font-size: 10px;
 }
 
-highlight {
-  background-color: yellow !important;
-  border: 1px solid #CCCCCC !important;
-  -moz-border-radius: 3px !important;
-  -webkit-border-radius: 3px !important;
-  padding: 3px 0px !important;
-}
-
-highlight .description-icon {
-  padding: 3px 0px !important;
-}
-
 /*-----------------------------------------------------------------
  * Status styles
  */

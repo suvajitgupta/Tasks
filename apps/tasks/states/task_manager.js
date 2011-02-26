@@ -316,6 +316,10 @@ Tasks.TaskManagerState = Ki.State.extend({
       this.get('parentState')._deleteTask();
     },
 
+    showWatchers: function() {
+      Tasks.mainPage.taskEditor.showWatchers();
+    },
+
     exitState: function() {
       Tasks.mainPage.taskEditor.close();
     }

@@ -30,7 +30,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
   _recentlyUpdatedBinding: 'Tasks.filterSearchController.recentlyUpdated',
   _watchedBinding: 'Tasks.filterSearchController.watched',
   _tasksSearchBinding: 'Tasks.filterSearchController.tasksSearch',
-  
+  textSearch: null, // stores only text search portion of tasksSearch (if any)
   
   _showTasks: true,
   
@@ -50,6 +50,8 @@ Tasks.assignmentsController = SC.ArrayController.create(
   callCounter: 1, // used for tracking/tuning calls to computeTasks()
   computeTasks: function() { // show tasks for selected user that matches search filter
     
+    this.textSearch = null;
+
     // console.log('DEBUG: computeTasks() call #' + this.callCounter++ + ' with ' + this.getPath('content.length') + ' items');
     // Preserve selected tasks to be restored at the end of rendering
     var selection = Tasks.tasksController.get('selection');
@@ -131,9 +133,12 @@ Tasks.assignmentsController = SC.ArrayController.create(
       var idMatches = tasksSearch.match(/#([\-\d]+)/g);
       // console.log('DEBUG: idMatches = ' + idMatches);
       if(!idMatches) {
-        if (tasksSearch.indexOf('^') === 0) { // inverse search specified
+        if (tasksSearch.slice(0, 1) === '^') { // inverse search specified
           positiveMatch = false;
           tasksSearch = tasksSearch.slice(1);
+        }
+        else {
+          this.textSearch = tasksSearch;
         }
         searchPattern = new RegExp(tasksSearch, 'i');
       }
