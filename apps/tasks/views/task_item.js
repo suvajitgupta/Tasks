@@ -178,6 +178,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     var description = SC.RenderContext.escapeHTML(content.get('description'));
     if(description) {
       description = description.replace(/\"/g, '\'');
+      // TODO: use 'highlight' instead of 'div' below to indicate description has a tasksSearch match
       context = context.begin('div').addClass('description-icon')
                   .attr({'title': description,'alt': description}).end();
     }
@@ -198,13 +199,33 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     if(content && count) {
       var status = content.get('developmentStatus'), doneEffortRange = false;
       if(status === CoreTasks.STATUS_DONE && count.match(/\-/)) doneEffortRange = true;
-  
       var effortTooltip = "_TaskEffortTooltip".loc() + (doneEffortRange? "_DoneEffortRangeWarning".loc() : '');
       context.push('<span class="count' + (doneEffortRange? ' doneEffortRangeWarning' : '') + '" title="' + effortTooltip + '">');
       context.push('<span class="inner">').push(count).push('</span></span>');
     }
   },
   
+  renderLabel: function(context, label) {
+    // TODO: [SG] get stripped tasksSearch from assignmentsController which only contains text pattern
+    // TODO: [SG] cache tasksSearch in 'this' so it doesn't have to be pulled/lowercased more than once per render call
+    var tasksSearch = Tasks.assignmentsController.get('_tasksSearch');
+    if(label && !SC.empty(tasksSearch)) {
+      tasksSearch = tasksSearch.toLowerCase();
+      var tasksSearchLength = tasksSearch.length;
+      var startIndex = 0;
+      do {
+        var matchIndex = label.toLowerCase().indexOf(tasksSearch, startIndex);
+        if(matchIndex === -1) break;
+        label = label.slice(0, matchIndex) + '<highlight>' +
+                label.slice(matchIndex, matchIndex+tasksSearchLength) + '</highlight>' +
+                label.slice(matchIndex+tasksSearchLength);
+        startIndex = matchIndex + tasksSearchLength + 23;
+        // console.log('DEBUG: renderLabel() ' + startIndex + ': ' + label);
+      } while(startIndex+tasksSearchLength < label.length);
+    }
+    context.push('<label>', label || '', '</label>') ;
+  },
+
   contentPropertyDidChange: function() {
     if(Tasks.panelOpen === Tasks.TASK_EDITOR) return;
     sc_super();

@@ -224,6 +224,7 @@ v Allow Task Validation editing only when in Done status [SG] $Feature @Done %Pa
 - Support filtering of Tasks that were created or updated within a specified timeframe [SG] $Feature
 - Indicate whether Task attribute filtering is enabled via cancel icon on Filter button [SG] $Feature @Done %Passed
 ^ Allow Task searching (by Assignee/Submitter/#IDs/name) & corresponding cancel button in top bar: support type-ahead searching [SG] <JH2> $Feature @Done %Passed
+- Highlight search pattern within matching Task names & highlight description icon for matching descriptions [SG] $Feature @Active
 
 - Out of Scope: Allow reordering of Tasks $Feature
 | Tasks has auto-ordering built in - you can use Status/Priority to control order or prefix Task names with numbers
