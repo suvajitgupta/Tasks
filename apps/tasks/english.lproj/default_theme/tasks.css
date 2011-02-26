@@ -442,16 +442,16 @@
  */
 
 .task-item highlight {
-  background-color: yellow !important;
-  border: 1px solid #CCCCCC !important;
-  -moz-border-radius: 3px !important;
-  -webkit-border-radius: 3px !important;
+  background-color: #FF3 !important;
   padding: 3px 0px !important;
+  -moz-border-radius: 3px !important;
+  -webkit-border-radius: 10px !important;
+  -moz-box-shadow: inset 0px 0px 8px #F9A;
+  -webkit-box-shadow: inset 0px 0px 8px #F9A;
 }
 
 .task-item highlight.description-icon {
-  padding: 0px 0px !important;
-  top: 3px !important;
+  padding: 0px 1px !important;
 }
 
 .task-description {
