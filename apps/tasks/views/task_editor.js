@@ -516,6 +516,7 @@ Tasks.TaskEditorView = SC.View.extend(
    
   }),
   
+  commentsList: SC.outlet('editor.splitView.bottomRightView.commentsList.contentView'),
   commentButton: SC.outlet('editor.splitView.bottomRightView.commentButton'),
 
   keyDown: function(event) {

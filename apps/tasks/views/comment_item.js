@@ -105,6 +105,7 @@ Tasks.CommentItemView = SC.View.extend(SC.Control,
         var description = comment.get('description');
         if(description === CoreTasks.NEW_COMMENT_DESCRIPTION.loc()) comment.destroy();
         else that.set('description', description);
+        Tasks.getPath('mainPage.taskEditor.commentsList').updateHeight();
       }
     });
     pane.popup(comment.get('description') === CoreTasks.NEW_COMMENT_DESCRIPTION.loc()? Tasks.getPath('mainPage.taskEditor.commentButton') : this,
