@@ -65,9 +65,9 @@ CoreTasks = SC.Object.create({
    * Initializes the CoreTasks object.
    */
   init: function() {
-    // Don't use localStorage for fixtures or iPad.
+    // Don't use localStorage for fixtures or iPad or IE.
     // console.log('DEBUG: CoreTasks init()');
-    if (this.get('dataSourceType') === this.FIXTURES_DATA_SOURCE || SC.platform.touch) this.useLocalStorage = false;
+    if (this.get('dataSourceType') === this.FIXTURES_DATA_SOURCE || SC.platform.touch || SC.browser.msie) this.useLocalStorage = false;
   },
 
   /**

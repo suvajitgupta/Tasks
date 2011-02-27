@@ -283,7 +283,7 @@ I18N/Porting @Active
 - Perform Internationalization (I18N) of GUI by externalizing all strings [SG] @Done %Passed
 v Test GUI Localization (L10N) using reversed strings [SG] <JH2> @Done %Passed
 - Port GUI to Firefox & Webkit (Safari/Chrome) [SG] @Done %Passed
-- Port GUI to Internet Explorer [SG] @Risky
+- Port GUI to Internet Explorer [SG] @Done
 | Wait to do this after switching to SC 1.5
 
 #========================================================================================================================
