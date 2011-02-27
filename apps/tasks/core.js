@@ -91,6 +91,14 @@ Tasks = SC.Object.create(
 });
 
 /**
+  // TODO: [SC] fix crash on IE in SC.View.baseTheme() during this.get('parentView')
+  Override to prevent crash on IE.
+*/
+SC.View.prototype.baseTheme = function() {
+  return SC.Theme.find(SC.defaultTheme);
+}.property('baseThemeName', 'parentView').cacheable();
+
+/**
   Override to silence render warning.
 */
 SC.ListItemView = SC.ListItemView.extend({
