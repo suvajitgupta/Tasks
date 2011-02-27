@@ -153,7 +153,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
    /**
     * The number of days left in the project counting down from current time.
     */
-   // TODO: [SG] swtich to start/endDate instead of activatedAt/timeLeft
+   // TODO: [SG] switch to start/endDate instead of activatedAt/timeLeft
    countDown: function() {
      
      var timeLeft = this.get('timeLeft');

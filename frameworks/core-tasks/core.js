@@ -55,7 +55,7 @@ CoreTasks = SC.Object.create({
    *
    * Note: This counter may run out of integers if the client is left running for a long time.
    *
-   * TODO: [SG] Revert to negative numbers once SC.Query is able to parse them correctly.
+   * TODO: [SG] revert to negative numbers once SC.Query is able to parse them correctly.
    */
   MAX_RECORD_ID: 100000000,
   _currentRecordId: 100000000,

@@ -296,7 +296,7 @@ CoreTasks.CachingRemoteDataSource = SC.DataSource.extend({
    * after a short period of time (ex. 200ms).
    *
    */
-  // TODO: [SE] Give up after a certain number of attempts and note that there was an error during cached record load?
+  // TODO: [SE] give up after a certain number of attempts and note that there was an error during cached record load?
   _tryLoadRecordsFromCache: function(recordTypeStr, invokeLater) {
     // Get the actual record type prototype.
     var recordType = SC.objectForPropertyPath(recordTypeStr);
