@@ -79,8 +79,15 @@ Tasks.mixin( /** @scope Tasks */ {
       // FIXME: [SG] see how to detect server type on IE
       var headers = request.get('headers');
       if(SC.typeOf(headers) === SC.T_HASH) {
-        var server = headers.Server || headers.server;
-        if(server && server.indexOf('Persevere') !== -1) Tasks.set('serverType', Tasks.PERSEVERE_SERVER);
+        var server = headers.server || headers.Server;
+        // console.log('DEBUG: server=' + headers.server + ', Server=' + headers.Server);
+        if(server && server.indexOf('Persevere') !== -1) {
+          console.log('Communicating with Persevere Server');
+          Tasks.set('serverType', Tasks.PERSEVERE_SERVER);
+        }
+        else {
+          console.log('Communicating with GAE Server');
+        }
       }
     }
     
