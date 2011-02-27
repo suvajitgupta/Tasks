@@ -76,7 +76,6 @@ Tasks.mixin( /** @scope Tasks */ {
       Tasks.set('serverType', Tasks.NO_SERVER); // Fixtures mode
     }
     else {
-      // FIXME: [SG] see how to detect server type on IE
       var headers = request.get('headers');
       if(SC.typeOf(headers) === SC.T_HASH) {
         var server = headers.server || headers.Server;
