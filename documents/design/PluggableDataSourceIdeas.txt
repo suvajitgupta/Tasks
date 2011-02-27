@@ -3,7 +3,7 @@ CONCEPT:
 
 One idea is to extend 'Tasks' to an aggregator of data from multiple sources.
 This will allow someone to have one integrated view of everything they are
-responsible for.  For exampple, someone may be working on a project where the bugs
+responsible for.  For example, someone may be working on a project where the bugs
 are stored in BugZilla, issues from open source components are stored on github,
 and personal work items are stored on GAE. When 'Tasks' becomes an aggregator,
 all of the above data can be pulled into one unified view to give an user the total
