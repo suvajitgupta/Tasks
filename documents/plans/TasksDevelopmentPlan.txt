@@ -196,7 +196,7 @@ v Add hover over tooltip for Task IDs to show Submitter [SG] <JH2> $Feature @Don
 - Delete a new Task if its name hasn't been modified when the slide-out editor is closed (deselect all Tasks too) [SG] $Feature @Done %Passed
 v Disable "Add Task" button when no project is selected [SG] <BB> $Feature @Done %Passed
 v Enable/disable "Delete Task" button based on having a selected Task [SG] $Feature @Done %Passed
-v Add keyboard shortcuts (hot keys) for commonly used actions [EG] <SG> $Feature @Done %Passed
+v Add keyboard shortcuts (hot keys) for commonly used actions [SG] <EG> $Feature @Done %Passed
 
 - Add Task context menu with options: Add, Duplicate, Delete; All Task Attributes; Watch/Unwatch [SG] $Feature @Done %Passed
 - Allow "Find & Replace" within Task names (operating only on displayed Tasks) [SG] $Feature
@@ -283,8 +283,10 @@ I18N/Porting @Active
 - Perform Internationalization (I18N) of GUI by externalizing all strings [SG] @Done %Passed
 v Test GUI Localization (L10N) using reversed strings [SG] <JH2> @Done %Passed
 - Port GUI to Firefox & Webkit (Safari/Chrome) [SG] @Done %Passed
-- Port GUI to Internet Explorer [SG] @Done
-| Wait to do this after switching to SC 1.5
+- Port GUI to Internet Explorer [SG] @Done %Failed
+| ComboBoxes shift upwards and get cropped when you click on them (in Editors)
+| Clippy icon looks strange and is not clickable
+| Statistics panel and Sai graphs have different colored background and text labels are messed up or missing
 
 #========================================================================================================================
 Hardening/Testing @Active
