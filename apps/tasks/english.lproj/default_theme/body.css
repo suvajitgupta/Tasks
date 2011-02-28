@@ -98,6 +98,13 @@ body.sc-theme,
   border-top: 0 !important;
 }
 
+.msie .sc-text-field-view input {
+  top: 6px !important;
+}
+
+.mozilla .sc-text-field-view input {
+  top: 0px !important;
+}
 
 /*
 // TODO: [SC] remove hack on SC.TextFieldView style to show borders on Firefox (broken on ToT)

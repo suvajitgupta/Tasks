@@ -41,6 +41,10 @@
   padding: 0 6px;
 }
 
+.msie .login-body .sc-text-field-view input {
+  top: 2px !important;
+}
+
 .login-body .sc-checkbox-view .label {
 	color: #BBB !important;
   font-size: 10px !important;

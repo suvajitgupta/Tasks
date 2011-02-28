@@ -40,7 +40,3 @@
   -moz-border-radius: 15px !important;
   -webkit-border-radius: 15px !important;
 }
-
-.mozilla .sc-text-field-view input {
-  top: 0px !important;
-}
