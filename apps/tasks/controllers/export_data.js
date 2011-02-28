@@ -74,7 +74,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 'pre {\n' +
 ' margin-top: -3px;\n' +
 ' margin-bottom: 10px;\n' +
-' margin-left: 75px;\n' +
+' margin-left: ' + (SC.browser.msie? '67px' : '75px') + ';\n' +
 ' margin-right: 1px;\n' +
 ' white-space: pre-wrap;\n' +
 ' word-wrap: break-word;\n' +

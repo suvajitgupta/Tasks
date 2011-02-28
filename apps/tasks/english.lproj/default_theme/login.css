@@ -42,7 +42,7 @@
 }
 
 .msie .login-body .sc-text-field-view input {
-  top: 2px !important;
+  top: 0px !important;
 }
 
 .login-body .sc-checkbox-view .label {
