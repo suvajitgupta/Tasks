@@ -715,6 +715,24 @@ CoreTasks = SC.Object.create({
       }
     }
     return time;
+  },
+  
+  /**
+   * Strip '| ' prefixes to descriptions
+   * (helps if description is pasted in from exported data).
+   *
+   * @param (String) description with possible prefixes
+   * @returns {String) description stripped of prefixes (if any)
+   */
+  stripDescriptionPrefixes: function(description) {
+    if(description.indexOf('| ') === -1) return description; // nothing to do
+    var lines = description.split('\n');
+    var ret = '';
+    for (var i = 0; i < lines.length; i++) {
+      var line = lines[i];
+      ret += ((line.slice(0,2) === '| '? line.slice(2) : line) + '\n');
+    }
+    return ret;
   }
 
 });

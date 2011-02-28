@@ -60,6 +60,8 @@ v Implement/benchmark JSONP-based data loading for performance speedup (stick wi
 - Support offline mode with synchronization after network reconnection using Hub.js [SG] <SE> $Feature
 - Support undo/redo using Hub.js [SG] <SE> $Feature
 
+- Strip '| ' prefix (if any) from Project/Task descriptions entered via editors [SG] $Feature @Done %Passed
+| This helps if description is pasted in from exported data
 - Cause Project/Task/User list group items to toggle open/close upon clicking on them [SG] <JH2> $Feature @Done %Passed
 - Display a dot before Projects/Tasks/Users that were created or updated recently (within the last day) [SG] <SE> $Feature @Done %Passed
 - Show a pencil icon when mouse is on a Project/Task with a tooltip stating "click to edit" [SG] $Feature @Done %Passed

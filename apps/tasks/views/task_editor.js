@@ -156,7 +156,8 @@ Tasks.TaskEditorView = SC.View.extend(
       task.setIfChanged('submitterValue', editor.getPath('submitterField.value'));
       task.setIfChanged('assigneeValue', editor.getPath('assigneeField.value'));
       task.setIfChanged('displayName', editor.getPath('nameField.value'));
-      task.setIfChanged('description',  editor.getPath('splitView.topLeftView.contentView.descriptionField.value'));
+      var description = CoreTasks.stripDescriptionPrefixes(editor.getPath('splitView.topLeftView.contentView.descriptionField.value'));
+      task.setIfChanged('description', description);
     }
   },
   

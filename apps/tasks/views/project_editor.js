@@ -72,7 +72,8 @@ Tasks.projectEditorPage = SC.Page.create({
         var oldActivatedAt = project.get('activatedAtValue');
         project.setIfChanged('activatedAtValue', editor.getPath('activatedAtField.date'));
         project.setIfChanged('displayName', editor.getPath('nameField.value'));
-        project.setIfChanged('description',  editor.getPath('descriptionField.value'));
+        var description = CoreTasks.stripDescriptionPrefixes(editor.getPath('descriptionField.value'));
+        project.setIfChanged('description',  description);
         // If timeLeft or activatedAt has changed, recalculate load balancing
         if(oldTimeLeft !== project.get('timeLeftValue') || oldActivatedAt !== project.get('activatedAtValue')) {
           // console.log('DEBUG: need to redraw assignments since project timeLeft or activatedAt changed');
