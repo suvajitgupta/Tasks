@@ -266,7 +266,7 @@ Servers @Active
 - Add link to Task in email notification (should not require authentication if user is signed in) [SG] <JH2> $Feature
 
 - Support Tasks database cleanup to remove soft-deleted records and handle pointers to non-existent records [SG] @Done %Passed
-- Add github "issues" DataStore (store additional data from Tasks as github issues tags) [SG] <JH2> $Feature @Active
+- Add github "issues" DataStore (store additional data from Tasks as github issues tags) [SG] <JH2> $Feature
 
 #========================================================================================================================
 Styling @Active
@@ -311,7 +311,7 @@ Hardening/Testing @Active
 | Import/Export (Text & HTML)
 | Popup online Help, Statistics
 | Email Notifications, Task watching
-^ Develop comprehensive Model/View unit tests [SG] <BB> @Active
+^ Develop comprehensive model/view unit tests [SG] <BB> @Active
 ^ Develop comprehensive automated path-based test scripts using Lebowski/Selenium [SG] <MR> @Active
 
 
