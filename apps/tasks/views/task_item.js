@@ -76,7 +76,8 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     // See if left clicked on task id, hover pencil, or task icon
     // console.log('DEBUG: classes = "' + classes + '"');
     if ((!event.which || event.which === 1) &&
-        (classes.match(/task-id/) || classes.match(/task-margin/) || classes.match(/task-icon/))) {
+        (classes.match(/task-id/) || classes.match(/task-margin/) || classes.match(/task-icon/) ||
+         classes.match(/count/) || classes.match(/inner/)  || classes.match(/description-icon/))) {
       this._startEditing();
     }
     

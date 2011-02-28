@@ -79,7 +79,8 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     // See if left clicked on hover pencil or project icon with one project selected 
     // console.log('DEBUG: classes = "' + classes + '"');
     if (!this.get('isSystemProject') && (!event.which || event.which === 1) &&
-        (classes.match(/project-margin/) || classes.match(/project-icon/))) {
+        (classes.match(/project-margin/) || classes.match(/project-icon/) ||
+         classes.match(/count/) || classes.match(/inner/)  || classes.match(/description-icon/))) {
       this._startEditing();
     }
 
