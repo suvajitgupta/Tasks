@@ -157,9 +157,6 @@
   right: 22px;
 }
 
-.chrome .sc-view .sc-text-field-view.search-bar input {
-  top: 2px !important;
-}
 .sc-view .sc-text-field-view.search-bar input {
   color: #BBB !important;
   top: -2px !important;
