@@ -181,7 +181,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       description = description.replace(/\"/g, '\'');
       // Ue 'highlight' instead of 'div' below if description has a textSearch match
       var matchIndex = this._textSearch? description.toLowerCase().indexOf(this._textSearch) : -1;
-      context = context.begin(matchIndex === -1? 'div' : 'highlight').addClass('description-icon')
+      context = context.begin('div').addClass('description-icon' + (matchIndex !== -1? ' highlight' : ''))
                   .attr({'title': description,'alt': description}).end();
     }
     
@@ -216,8 +216,8 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       do {
         var matchIndex = label.toLowerCase().indexOf(textSearch, startIndex);
         if(matchIndex === -1) break;
-        label = label.slice(0, matchIndex) + '<highlight>' +
-                label.slice(matchIndex, matchIndex+textSearchLength) + '</highlight>' +
+        label = label.slice(0, matchIndex) + '<span class="highlight">' +
+                label.slice(matchIndex, matchIndex+textSearchLength) + '</span>' +
                 label.slice(matchIndex+textSearchLength);
         startIndex = matchIndex + textSearchLength + 23;
         // console.log('DEBUG: renderLabel() ' + startIndex + ': ' + label);
