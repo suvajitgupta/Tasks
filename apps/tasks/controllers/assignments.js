@@ -128,7 +128,6 @@ Tasks.assignmentsController = SC.ArrayController.create(
       }
     
       // Extract task name search filter
-      tasksSearch = this._escapeMetacharacters(tasksSearch).replace(/^\s+/, '').replace(/\s+$/, '');
       // console.log('DEBUG: tasksSearch="' + tasksSearch + '"');
       var idMatches = tasksSearch.match(/#([\-\d]+)/g);
       // console.log('DEBUG: idMatches = ' + idMatches);
@@ -140,6 +139,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
         else {
           this.textSearch = tasksSearch;
         }
+        tasksSearch = this._escapeMetacharacters(tasksSearch).replace(/^\s+/, '').replace(/\s+$/, '');
         searchPattern = new RegExp(tasksSearch, 'i');
       }
     }
