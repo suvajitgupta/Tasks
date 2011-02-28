@@ -725,7 +725,7 @@ CoreTasks = SC.Object.create({
    * @returns {String) description stripped of prefixes (if any)
    */
   stripDescriptionPrefixes: function(description) {
-    if(description.indexOf('| ') === -1) return description; // nothing to do
+    if(SC.none(description) || description.indexOf('| ') === -1) return description; // nothing to do
     var lines = description.split('\n');
     var ret = '';
     for (var i = 0; i < lines.length; i++) {
