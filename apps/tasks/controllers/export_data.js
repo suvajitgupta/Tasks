@@ -72,13 +72,13 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' outline: 1px solid silver;\n' +
 '}\n' +
 'pre {\n' +
-' margin-top: -3px;\n' +
-' margin-bottom: 10px;\n' +
-' margin-left: ' + (SC.browser.msie? '67px' : '75px') + ';\n' +
+' margin-top: -4px;\n' +
+' margin-bottom: 5px;\n' +
+' margin-left: 16px;\n' +
 ' margin-right: 1px;\n' +
 ' white-space: pre-wrap;\n' +
 ' word-wrap: break-word;\n' +
-' padding: 5px;\n' +
+' padding: 5px ' + (SC.browser.msie? '60' : '68') + 'px;\n' +
 '}\n' +
 '.assignee {\n' +
 ' border-bottom: 2px solid #555;\n' +
