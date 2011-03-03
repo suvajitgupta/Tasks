@@ -27,19 +27,16 @@ Tasks.graphicalStatisticsView = SC.View.create({
     isVisible: NO,
     priorityStatisticsChart: Sai.BarChartView.design({
       layout: { top: 0, left: 0, width: 200, bottom: 0 },
-      dataAttrs: { horizontal: NO, barWidth: 25, color: 'gray' }
-      // dataAttrs: { horizontal: NO, barWidth: 25, colors: ['black', 'gray', 'darkGray'] }
+      dataAttrs: { horizontal: NO, barWidth: 25, colors: ['black', 'gray', 'darkGray'] }
     }),
     typeStatisticsChart: Sai.BarChartView.design({
       layout: { top: 0, left: 200, width: 200, bottom: 0 },
-      dataAttrs: { horizontal: NO, barWidth: 25, color: 'gray' },
-      // dataAttrs: { horizontal: NO, barWidth: 25, colors: ['gold', 'red', 'gray'] },
+      dataAttrs: { horizontal: NO, barWidth: 25, colors: ['gold', 'red', 'gray'] },
       isVisibleBinding: SC.Binding.oneWay('Tasks.softwareMode')
     }),
     statusStatisticsChart: Sai.BarChartView.design({
       layout: { top: 0, left: 400, width: 220, bottom: 0 },
-      dataAttrs: { horizontal: NO, barWidth: 25, color: 'gray' }
-      // dataAttrs: { horizontal: NO, barWidth: 25, colors: ['black', 'blue', 'green', 'red'] }
+      dataAttrs: { horizontal: NO, barWidth: 25, colors: ['black', 'blue', 'green', 'red'] }
     })
   }),
   
@@ -48,8 +45,7 @@ Tasks.graphicalStatisticsView = SC.View.create({
     isVisible: NO,
     // TODO: [SG] use pie chart to show assignee loading distribution
     loadingStatisticsChart: Sai.BarChartView.design({
-      dataAttrs: { horizontal: YES, barWidth: 20, color: 'gray' } 
-      // dataAttrs: { horizontal: YES, barWidth: 20, colors: ['gray', 'green', 'blue', 'red'] } 
+      dataAttrs: { horizontal: YES, barWidth: 20, colors: ['gray', 'green', 'blue', 'red'] } 
     })
   }),
   
