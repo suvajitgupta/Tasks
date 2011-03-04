@@ -21,7 +21,6 @@ Tasks.graphicalStatisticsView = SC.View.create({
   statisticsBinding: SC.Binding.oneWay('Tasks.statisticsController.statistics'),
   displayProperties: ['statistics'],
   
-  // FIXME: [SG/EG] Fix Sai to handle colors array
   tasksStatistics: SC.View.design({
     childViews: 'priorityStatisticsChart typeStatisticsChart statusStatisticsChart'.w(),
     isVisible: NO,
