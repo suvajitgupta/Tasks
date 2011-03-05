@@ -337,7 +337,7 @@ Tasks.mainPage = SC.Page.design({
          }),
          
          welcomeMessageLabel: SC.LabelView.design(SCUI.ToolTip, {
-           layout: { centerX: -80, centerY: -2, width: 250, height: 32 },
+           layout: { centerX: -60, centerY: -2, width: 250, height: 32 },
            classNames: ['welcome-message'],
            escapeHTML: NO,
            touchStart: function() {
