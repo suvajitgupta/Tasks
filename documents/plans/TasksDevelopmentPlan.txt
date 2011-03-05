@@ -104,6 +104,7 @@ Application Manager GUI @Active
 #========================================================================================================================
 
 ^ Add "Users/Settings" actions menu/popup to manage users and preferences [SG] $Feature @Done %Passed
+| Don't allow a user to modify their own role
 - Add buttons to add/delete Users below Users list  [SG] <JH2> $Feature @Done %Passed
 | Copy over Role attribute of first selected User to new User
 - Delete a new User if its name/loginName hasn't been modified when the selection changes or panel is closed [SG] $Feature @Done %Passed

@@ -28,6 +28,12 @@ Tasks.userController = SC.ObjectController.create(Tasks.Sha1,
     return true;
   }.property('name', 'loginName').cacheable(),
   
+  canUpdateUserRole: function() {
+    var content = this.get('content');
+    if(SC.none(content) || content.get('length') !== 1 || content.get('firstObject') === CoreTasks.get('currentUser')) return false;
+    return CoreTasks.getPath('permissions.canUpdateUserRole');
+  }.property('content').cacheable(),
+  
   displayLoginNameError: function() {
     this.set('loginNameErrorMessage', "_InUse".loc());
   },
