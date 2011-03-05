@@ -230,6 +230,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
         }
         else if(searchPattern) { // case insensitive search of task name and/or description
           var nameMatches = taskName.match(searchPattern);
+          // console.log('DEBUG: nameMatches = ' + nameMatches);
           if(positiveMatch) { // find what matches search pattern
             if(!nameMatches) { // try matching description
               if(!taskDescription || !taskDescription.match(searchPattern)) return;
@@ -244,9 +245,10 @@ Tasks.assignmentsController = SC.ArrayController.create(
       }
     }, this);
   
-    for(assigneeName in assignees){
+    for(assigneeName in assignees) {
       if(assignees.hasOwnProperty(assigneeName)) {
-          this._createAssignmentNode(assignmentNodes, assignees[assigneeName], projectTimeLeft);
+        // console.log('DEBUG: creating node for assignee: ' + assigneeName.loc());
+        this._createAssignmentNode(assignmentNodes, assignees[assigneeName], projectTimeLeft);
       }
     }
       
@@ -298,8 +300,9 @@ Tasks.assignmentsController = SC.ArrayController.create(
     var task, tasks = assigneeTasks.tasks;
     var tasksCount = tasks.get('length');
     if (tasksCount === 0) return; // nothing to do
-    
     var displayName = assigneeTasks.assignee? assigneeTasks.assignee.get('displayName') : CoreTasks.USER_UNASSIGNED;
+    // console.log('DEBUG: node for assignee: ' + displayName.loc() + ', tasksCount: ' + tasksCount);
+    
     var taskWithUnspecifiedEffort = false, doneTaskWithUnspecifiedEffort = false;
     var effortString, totalFinishedEffortMin = 0, totalFinishedEffortMax = 0, totalEffortMin = 0, totalEffortMax = 0, effortMin, effortMax;
     var totalFinishedCount = 0, totalLeftCount = 0;

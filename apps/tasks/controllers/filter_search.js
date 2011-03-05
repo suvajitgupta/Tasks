@@ -216,7 +216,7 @@ Tasks.filterSearchController = SC.ObjectController.create(
         tasksSearch = tasksSearch.replace(assigneeSelection, newAssigneeSelection);
       }
       else {
-        tasksSearch = newAssigneeSelection + ' ' + tasksSearch.replace(/^\s+/, '');
+        tasksSearch = (newAssigneeSelection !== ''? newAssigneeSelection + ' ' : '') + tasksSearch.replace(/^\s+/, '');
       }
     }
     else {
