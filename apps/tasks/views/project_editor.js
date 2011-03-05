@@ -22,7 +22,7 @@ Tasks.projectEditorHelper = SC.Object.create({
   
 Tasks.projectEditorPage = SC.Page.create({
   
-  // TODO: [SC] remove hack below to create/destroy project editor panel to make text field views get updated properly after remove() is called
+  // CHANGED: [SC] remove hack below to create/destroy project editor panel to make text field views get updated properly after remove() is called
   popup: function(project) {
     this.panel = this.panelView.create();
     this.panel.popup(project);
@@ -147,7 +147,7 @@ Tasks.projectEditorPage = SC.Page.create({
         textAlign: SC.ALIGN_RIGHT,
         value: "_Activated:".loc()
       }),
-      // TODO: [SG/EG] allow SCUI.DatePickerView popup picker height to be adjustable, not hardcoded to 255
+      // TODO: [EG] allow SCUI.DatePickerView popup picker height to be adjustable, not hardcoded to 255
       activatedAtField: SCUI.DatePickerView.design({
         layout: { top: 37, right: 10, height: 24, width: 100 },
         dateFormat: CoreTasks.DATE_FORMAT,

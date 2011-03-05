@@ -91,7 +91,7 @@ Tasks = SC.Object.create(
 });
 
 /**
-  // TODO: [SC] fix crash on IE in SC.View.baseTheme() during this.get('parentView')
+  // CHANGED: [SC] fix crash on IE in SC.View.baseTheme() during this.get('parentView')
   Override to prevent crash on IE.
 */
 SC.View.prototype.baseTheme = function() {
@@ -128,15 +128,15 @@ SCUI.ContextMenuPane = SCUI.ContextMenuPane.extend({
   exampleView: SC.MenuItemView
 });
 
-// TODO: [SG] remove hack for SCUI ComboBoxView using an SC.ButtonView since it doesn't fit unless all SC styles are overridden
+// CHANGED: [EG] remove hack for SCUI ComboBoxView using an SC.ButtonView since it doesn't fit unless all SC styles are overridden
 SCUI.ComboBoxView.prototype.dropDownButtonView = SC.View.extend( SCUI.SimpleButton, {
   classNames: 'scui-combobox-dropdown-button-view',
   layout: { top: 0, right: 0, height: 24, width: 28 }
 });
 
-// TODO: [SG/EG] update SCUI.ToolTip to work with SC master (new rendering subsystem), CheckboxView still not working
+// CHANGED: [EG] update SCUI.ToolTip to work with SC master (new rendering subsystem), CheckboxView still not working
 
-// TODO: [SG/BB] make SCUI.ModalPane close button target/action overridable without snippet below
+// CHANGED: [BB] make SCUI.ModalPane close button target/action overridable without snippet below
 SCUI.ModalPane = SCUI.ModalPane.extend({
   initMixin: function() {
     var headerCloseButton = this.childViews[0].closeButton;

@@ -241,7 +241,6 @@ Tasks.TaskEditorView = SC.View.extend(
  editComment: function() {
    var commentsList = Tasks.mainPage.getPath('taskEditor.editor.splitView.bottomRightView.commentsList.contentView');
    var commentView = commentsList.itemViewForContentIndex(0);
-   // FIXME: [SC] scrolling to top of comments list doesn't always work in SC
    SC.run(function() { commentsList.scrollToContentIndex(0); });
    commentView.editDescription();
  },
@@ -451,7 +450,7 @@ Tasks.TaskEditorView = SC.View.extend(
            value: "_Description:".loc()
          }),
          descriptionField: SC.TextFieldView.design({
-           layout: { top: 23, left: 0, right: 0, bottom: 5 },
+           layout: { top: 23, left: 2, right: 2, bottom: 5 },
            hint: "_DescriptionHint".loc(),
            maxLength: 500000,
            isTextArea: YES,

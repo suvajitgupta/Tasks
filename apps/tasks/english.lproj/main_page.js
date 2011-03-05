@@ -16,9 +16,9 @@ sc_require('views/summary');
   @author Joshua Holt
 */
 
-// TODO: [SC] fix strange-looking scrollbars next to CollectionViews on iPad
-// TODO: [SC] fix CollectionView sluggish scrolling on iPad (works better in Ace2?)
-// TODO: [SG] provide access to contents of context menus in actions menu (useful on iPad)
+// FIXME: [SC] fix strange-looking scrollbars next to CollectionViews on iPad
+// FIXME: [SC] fix CollectionView sluggish scrolling on iPad (works better in Ace2?)
+// TODO: [SG] provide project/task "duplicate" capability on iPad since it is only available on context menus that aren't available on touch devices
 
 Tasks.mainPageHelper = SC.Object.create({
 

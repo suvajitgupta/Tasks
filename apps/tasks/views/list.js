@@ -14,7 +14,7 @@
 Tasks.ListView = SC.ListView.extend(
 /** @scope Tasks.ListView.prototype */ {
   
-  // TODO: [SC] fix ListView to not use isSelected to indicate drop target - this causes selected items to appear unselected (delete next 2 functions when fixed)
+  // CHANGED: [SC] fix ListView to not use isSelected to indicate drop target - this causes selected items to appear unselected (delete next 2 functions when fixed)
   showInsertionPoint: function(itemView, dropOperation) {
     
     var view = this._insertionPointView;

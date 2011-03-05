@@ -107,17 +107,7 @@ body.sc-theme,
 }
 
 /*
-// TODO: [SC] remove hack on SC.TextFieldView style to show borders on Firefox (broken on ToT)
-*/
-.mozilla .sc-view .sc-text-field-view .border {
-  border-top: 2px solid #888;
-  border-left: 1px solid #AAA;
-  border-right: 1px solid #AAA;
-  border-bottom: 1px solid #BBB;
-}
-
-/*
-// TODO: [SC] remove hack for Picker Pane popping up with mangled pointer on SC ToT
+// CHANGED: [SC] remove hack for Picker Pane popping up with mangled pointer on SC ToT
 */
 .sc-pane.sc-panel.sc-picker .perfectRight {
   top: 3px !important;
@@ -224,21 +214,13 @@ body.sc-theme,
   background: static_url('images/dropdown-arrow.png') no-repeat 0 0;
 }
 
-/*
-// TODO: [SC] remove hack to get rid of focus ring inside text fields with ToT code, fix text field border
-*/
-.mozilla .sc-view .sc-text-field-view.focus {
-	outline-offset: 0px !important;
-	outline: 1px solid -moz-mac-focusring;
-}
-
 .mozilla .sc-view .scui-combobox-view.focus,
 .mozilla .sc-view .scui-datepicker-view.focus {
 	outline: 1px solid -moz-mac-focusring;
 }
 
 /*
-// TODO: [SC] remove hacks to workaround bug in radiobutton styling on non-OSX platforms, can't do this for Linux
+// CHANGED: [SC] remove hacks to workaround bug in radiobutton styling on non-OSX platforms, can't do this for Linux
 */
 .mozilla.windows .sc-radio-view.sc-layout-horizontal .sc-radio-button {
   margin-top: 2px;
@@ -250,7 +232,7 @@ body.sc-theme,
 }
 
 /*
-// TODO: [SC] remove hacks to workaround bug in Safari text field focus (appears distorted if left on)
+// CHANGED: [SC] remove hacks to workaround bug in Safari text field focus (appears distorted if left on)
 */
 .safari .sc-view .sc-text-field-view.focus {
   outline: none;
@@ -280,7 +262,7 @@ body.sc-theme,
 }
 
 /*
-// TODO: [SC] add styling to standard theme (Ace1) to resolve tearing on side on panels
+// CHANGED: [SC] add styling to standard theme (Ace1) to resolve tearing on side on panels
 */
 .sc-panel {
   -webkit-transform: translate3d(0px,0px,0px);

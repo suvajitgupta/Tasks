@@ -55,7 +55,7 @@ CoreTasks = SC.Object.create({
    *
    * Note: This counter may run out of integers if the client is left running for a long time.
    *
-   * TODO: [SG] revert to negative numbers once SC.Query is able to parse them correctly.
+   * CHANGED: [SC] revert to negative numbers once SC.Query is able to parse them correctly.
    */
   MAX_RECORD_ID: 100000000,
   _currentRecordId: 100000000,
@@ -335,7 +335,7 @@ CoreTasks = SC.Object.create({
     canDeleteUser: NO
   }),
 
-  // FIXME: [SG] enforce all permissions on GAE Server as well (e.g., Guests shouldn't be able to update/delete others' tasks)
+  // TODO: [SG] enforce all permissions on GAE Server as well (e.g., Guests shouldn't be able to update/delete others' tasks)
   /**
    * Sets appropriate permissions based on the current user's role.
    */
@@ -407,7 +407,7 @@ CoreTasks = SC.Object.create({
     // server, but certain SC mechanisms require that all records have a primary key).
     if (dataHash.id === undefined) {
       dataHash.id = dataHash._id = this._currentRecordId;
-      // TODO: [SC] remove hack once SC.Query is able to parse negative numbers
+      // CHANGED: [SC] remove hack once SC.Query is able to parse negative numbers
       // this._currentRecordId--;
       this._currentRecordId++;
     }
