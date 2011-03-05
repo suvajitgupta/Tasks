@@ -250,7 +250,6 @@
 .tasks-pane .assignee-item .sc-outline .count,
 .assignee-item.incompleteEffortWarning .sc-outline .count.finished {
   top: -2px !important;
-  color: #333 !important;
   font-size: 11px !important;
   background: #FFF none repeat scroll 0 0 !important;
 }
@@ -271,6 +270,7 @@
 .task-item .sc-outline .count.doneEffortRangeWarning,
 .assignee-item.incompleteEffortWarning .sc-outline .count {
   background: orange none repeat scroll 0 0 !important;
+  color: #333 !important;
 }
 
 
