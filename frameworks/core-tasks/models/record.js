@@ -47,7 +47,7 @@ CoreTasks.Record = SC.Record.extend({
   displayId: function() {
     var id = this.get('id');
     // console.log(id + ' ' + this.get('name'));
-    // CHANGED: [SC] remove hack once SC.Query is able to parse negative numbers
+    // CHANGED: [SC] remove hack to work around SC.Query bug in parsing negative numbers
     // if (id < 0) id = '-----';
     if (id >= CoreTasks.MAX_RECORD_ID) id = '-----';
     return '#' + id;

@@ -405,7 +405,7 @@ CoreTasks.CachingRemoteDataSource = SC.DataSource.extend({
    * @returns {SC.Error}
    */
   _buildError: function(response) {
-    // TODO: [SE] investigate changes to SC ToT request/response API since response.get('errorObject') is sometimes null
+    // FIXME: [SE] investigate changes to SC ToT request/response API since response.get('errorObject') is sometimes null
     var error = response.get('errorObject') || SC.Object.create();
     var xhr = response.get('rawRequest');
     error.set('description', xhr.statusText);

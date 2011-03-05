@@ -262,7 +262,7 @@ body.sc-theme,
 }
 
 /*
-// CHANGED: [SC] add styling to standard theme (Ace1) to resolve tearing on side on panels
+// CHANGED: [SC] remove hack to resolve tearing on side on panels by adding styling to standard theme (Ace1)
 */
 .sc-panel {
   -webkit-transform: translate3d(0px,0px,0px);

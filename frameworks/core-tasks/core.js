@@ -55,8 +55,8 @@ CoreTasks = SC.Object.create({
    *
    * Note: This counter may run out of integers if the client is left running for a long time.
    *
-   * CHANGED: [SC] revert to negative numbers once SC.Query is able to parse them correctly.
    */
+  // CHANGED: [SC] remove hack to work around SC.Query bug in parsing negative numbers
   MAX_RECORD_ID: 100000000,
   _currentRecordId: 100000000,
   //_currentRecordId: -1,
@@ -407,7 +407,7 @@ CoreTasks = SC.Object.create({
     // server, but certain SC mechanisms require that all records have a primary key).
     if (dataHash.id === undefined) {
       dataHash.id = dataHash._id = this._currentRecordId;
-      // CHANGED: [SC] remove hack once SC.Query is able to parse negative numbers
+      // CHANGED: [SC] remove hack to work around SC.Query bug in parsing negative numbers
       // this._currentRecordId--;
       this._currentRecordId++;
     }

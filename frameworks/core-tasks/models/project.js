@@ -212,7 +212,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
    }.property('countDown').cacheable(),
 
 
-  // CHANGED: [SC] fix SC.Query firing unnecessarily when you update a Project name, all Tasks are fetched
+  // FIXME: [SC] fix SC.Query firing unnecessarily when you update a Project name, all Tasks are fetched
   /**
    * A read-only computed property that returns the list of tasks associated with this project.
    *
