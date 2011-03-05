@@ -126,7 +126,6 @@ Tasks.UserInformationView = SC.View.extend(
       layout: { top: 159, left: 90, height: 24, width: 150 },
       classNames: ['square'],
       localize: YES,
-      // isEnabledBinding: 'CoreTasks.permissions.canUpdateUserRole',
       isEnabledBinding: 'Tasks.userController.canUpdateUserRole',
       objects: this._listRoles(),
       nameKey: 'name',
