@@ -541,9 +541,8 @@ Tasks.mainPage = SC.Page.design({
          return SC.IndexSet.create(0, this.get('length'));
        }.property('length').cacheable(),
        contentIndexRowHeight: function(view, content, idx) {
-         var outlineLevel = this.get('contentDelegate').contentIndexOutlineLevel(this, content, idx);
-         var isHeader = (outlineLevel === 0) ? YES : NO;
-         return idx && isHeader? this.get('headerRowHeight') : this.get('rowHeight');
+         // All header rows (except first one) should use headerRowHeight
+         return idx && this.get('contentDelegate').contentIndexIsGroup(this, content, idx)? this.get('headerRowHeight'): this.get('rowHeight');
        },
        _contentDidChange: function() { // Force TasksList indexes to be recomputed when content changes
          var len = this.getPath('content.length');
