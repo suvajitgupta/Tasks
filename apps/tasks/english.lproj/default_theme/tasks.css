@@ -12,11 +12,11 @@
  * Task pane/editor styles
  */
  
-.sc-collection-view.sc-list-view.sc-list-view.tasks-pane {
+.sc-collection-view.sc-list-view.tasks-pane {
   background: none;
 }
 
-.sc-view.sc-ghost-view .sc-collection-view.sc-list-view.sc-list-view.tasks-pane {
+.sc-view.sc-ghost-view .sc-collection-view.sc-list-view.tasks-pane {
   background: none !important;
 }
 

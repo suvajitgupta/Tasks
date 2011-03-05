@@ -2,8 +2,8 @@
 
   Projects Pane Styling
 
-  @author Matt Grantham
   @author Suvajit Guupta
+  @author Matt Grantham
   
 */
 
@@ -24,10 +24,10 @@
 }
 
 .projects-pane .sc-view.sc-container-view,
-.sc-view.sc-collection-view.sc-list-view.sc-list-view.projects-pane,
-.sc-theme.focus .sc-view.sc-collection-view.sc-list-view.sc-list-view.projects-pane,
-.sc-view.sc-collection-view.sc-list-view.sc-list-view.users-pane,
-.sc-theme.focus .sc-view.sc-collection-view.sc-list-view.sc-list-view.users-pane {
+.sc-view.sc-collection-view.sc-list-view.projects-pane,
+.sc-theme.focus .sc-view.sc-collection-view.sc-list-view.projects-pane,
+.sc-view.sc-collection-view.sc-list-view.users-pane,
+.sc-theme.focus .sc-view.sc-collection-view.sc-list-view.users-pane {
   background: none;
 }
 
@@ -106,38 +106,35 @@
   background-position: 0px 3px !important;
 }
 
-.sc-list-view.sc-list-view.projects-pane .sc-collection-item.sel.drop-target,
-.sc-list-view.sc-list-view.projects-pane .sc-collection-item.drop-target {
+.sc-list-view.projects-pane .sc-collection-item.sel.drop-target,
+.sc-list-view.projects-pane .sc-collection-item.drop-target {
   background: #888 !important;
 }
 
 
 .projects-pane .sc-group-item.sel .sc-outline,
 .projects-pane .sc-view.sc-list-item-view.sc-collection-item.sc-group-item.sel .sc-outline label,
-.sc-list-view.sc-list-view.projects-pane .sc-collection-item.sel,
-.sc-list-view.sc-list-view.projects-pane .sc-collection-item.sel.hover {
+.sc-list-view.projects-pane .sc-collection-item.sel,
+.sc-list-view.projects-pane .sc-collection-item.sel.hover {
   height: 22px !important;
-  color: #000 !important;
   background: #9FF !important;
   border-color: #000 !important;
 }
 
-.projects-pane.focus .sc-group-item.sel .sc-outline,
-.projects-pane.focus .sc-view.sc-list-item-view.sc-collection-item.sc-group-item.sel .sc-outline label,
-.sc-list-view.sc-list-view.projects-pane.focus .sc-collection-item.sel,
-.sc-list-view.sc-list-view.projects-pane.focus .sc-collection-item.sel.hover,.users-pane .sc-group-item.sel .sc-outline,
-.users-pane .sc-view.sc-list-item-view.sc-collection-item.sc-group-item.sel .sc-outline label,
-.sc-list-view.sc-list-view.users-pane .sc-collection-item.sel,
-.sc-list-view.sc-list-view.users-pane .sc-collection-item.sel.hover {
+.sc-list-view.projects-pane.focus .sc-collection-item.sel,
+.sc-list-view.projects-pane.focus .sc-collection-item.sel.hover,
+.sc-list-view.users-pane .sc-collection-item.sel,
+.sc-list-view.users-pane .sc-collection-item.sel.hover {
   background: #6CF !important;
 }
 
-.sc-list-view.sc-list-view.projects-pane .sc-collection-item.project-item.sel,
-.sc-list-view.sc-list-view.projects-pane .sc-collection-item.project-item.sel.hover,
-.sc-list-view.sc-list-view.users-pane .sc-collection-item.user-item.sel.hover,
-.sc-list-view.sc-list-view.users-pane .sc-collection-item.user-item.sel {
+.sc-list-view.projects-pane .sc-collection-item.project-item.sel,
+.sc-list-view.projects-pane .sc-collection-item.project-item.sel.hover,
+.sc-list-view.users-pane .sc-collection-item.user-item.sel,
+.sc-list-view.users-pane .sc-collection-item.user-item.sel.hover {
   font-weight: normal !important;
 }
+
 
 .project-item .recently-updated,
 .user-item .recently-updated {
