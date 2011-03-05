@@ -133,7 +133,7 @@ SCUI.ComboBoxView.prototype.dropDownButtonView = SC.View.extend( SCUI.SimpleButt
   layout: { top: 0, right: 0, height: 24, width: 28 }
 });
 
-// FIXME: [EG] update SCUI.ToolTip to work with SC master (new rendering subsystem), CheckboxView still not working
+// CHANGED: [EG] update SCUI.ToolTip to work with SC master (new rendering subsystem), CheckboxView still not working
 
 // CHANGED: [BB] remove hack to make SCUI.ModalPane close button target/action overridable
 SCUI.ModalPane = SCUI.ModalPane.extend({
