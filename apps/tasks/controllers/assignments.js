@@ -380,7 +380,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
       if (totalEffortMax !== totalEffortMin) {
         totalEffort += '-' + parseFloat(totalEffortMax.toFixed(1));
       }
-      displayEffort += ("_total".loc() + CoreTasks.displayTime(totalEffort) + (taskWithUnspecifiedEffort? '?' : ''));
+      displayEffort += ("_total".loc() + CoreTasks.displayTime(totalEffort) + (projectTimeLeft && taskWithUnspecifiedEffort? '?' : ''));
     }
     else if(taskWithUnspecifiedEffort && totalLeftCount && projectTimeLeft) { // have tasks but don't have any estimates
       displayEffort += "_total".loc() + '?';

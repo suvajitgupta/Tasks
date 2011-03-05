@@ -250,9 +250,8 @@
 .tasks-pane .assignee-item .sc-outline .count,
 .assignee-item.incompleteEffortWarning .sc-outline .count.finished {
   top: -2px !important;
-  color: #555 !important;
+  color: #333 !important;
   font-size: 11px !important;
-  font-weight: bold !important;
   background: #FFF none repeat scroll 0 0 !important;
 }
 
@@ -269,12 +268,9 @@
   margin-top: 0px !important;
 }
 
-.task-item .sc-outline .count.doneEffortRangeWarning {
-  background: #F93 none repeat scroll 0 0 !important;
-}
-
+.task-item .sc-outline .count.doneEffortRangeWarning,
 .assignee-item.incompleteEffortWarning .sc-outline .count {
-  background: #FF8 none repeat scroll 0 0 !important;
+  background: orange none repeat scroll 0 0 !important;
 }
 
 
@@ -340,7 +336,7 @@
 .task-item.sel .sc-outline .count {
   top: 5px !important;
 	right: 14px !important;
-	background-color: #888 !important;
+	background-color: #888;
 }
 
 .task-item .description-icon {

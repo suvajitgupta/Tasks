@@ -173,9 +173,10 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 '.effort, .time, .total {\n' +
 ' position: absolute;\n' +
 ' height: 12px;\n' +
-' line-height: 11px;\n' +
+' line-height: 12px;\n' +
 ' margin-top: 3px;\n' +
 ' font-size: 11px;\n' +
+' font-weight: normal;\n' +
 ' padding: 1px 5px;\n' +
 ' letter-spacing: -1px !important;\n' +
 ' -moz-border-radius: 7px;\n' +
@@ -186,7 +187,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' background-color: #888;\n' +
 '}\n' +
 '.time, .total {\n' +
-' color: #555;\n' +
+' color: #333;\n' +
 ' margin-top: 2px;\n' +
 ' background-color: #EEE;\n' +
 '}\n' +
@@ -196,11 +197,8 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 '.total {\n' +
 ' right: 225px;\n' +
 '}\n' +
-'.doneEffortRangeWarning {\n' +
-' background-color: #F93 !important;\n' +
-'}\n' +
-'.incompleteEffortWarning {\n' +
-' background-color: #FF6 !important;\n' +
+'.doneEffortRangeWarning, .incompleteEffortWarning {\n' +
+' background-color: orange !important;\n' +
 '}\n' +
 '</style>\n' +
 '</head>\n';
