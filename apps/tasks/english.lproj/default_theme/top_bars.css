@@ -11,6 +11,11 @@
 .title-bar, .sc-view.header {
   background: static_url('images/title-bar-bg.png') repeat-x;
 }
+.title-bar .sc-button-view {
+  font-size: 10px !important;
+  font-weight: bold !important;
+}
+
 .header .modal-title {
   top: 10px !important;
   font-size: 14px !important;
@@ -105,12 +110,6 @@
   width: 16px;
   height: 16px;
   background: static_url('images/logout.png') no-repeat;
-}
-
-.tasks-icon {
-  width: 16px !important;
-  height: 16px !important;
-  background: static_url('images/tasks.png') no-repeat;
 }
 
 .welcome-message {

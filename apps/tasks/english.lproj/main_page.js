@@ -284,7 +284,7 @@ Tasks.mainPage = SC.Page.design({
 
        topToolbar: SC.ToolbarView.extend({
          
-         childViews: 'actionsButton displayModeSegments masterPickerButton welcomeMessageLabel clippyIcon filterPanelButton filterCancelButton tasksSearchField tasksSearchCancelButton'.w(),
+         childViews: 'actionsButton displayModeButton masterPickerButton welcomeMessageLabel clippyIcon filterPanelButton filterCancelButton tasksSearchField tasksSearchCancelButton'.w(),
          classNames: ['title-bar'],
          
          actionsButton: SC.ButtonView.design(SCUI.DropDown, {
@@ -308,26 +308,26 @@ Tasks.mainPage = SC.Page.design({
            })
          }),
 
-         displayModeSegments: SC.SegmentedView.design(SCUI.ToolTip, {
-           layout: { left: 73, centerY: 0, height: 24, width: 90 },
-           items: [
-             { title: '', icon: 'sc-icon-group-16', value: Tasks.DISPLAY_MODE_TEAM },
-             { title: '', icon: 'tasks-icon', value: Tasks.DISPLAY_MODE_TASKS }
-           ],
-           itemTitleKey: 'title',
-           itemIconKey: 'icon', // disabling icons for now - appearing too cluttered
-           itemValueKey: 'value',
-           toolTip: "_DisplayModeTooltip".loc(),
-           valueBinding: 'Tasks.assignmentsController.displayMode',
-           isEnabledBinding: SC.Binding.not('Tasks.mainPageHelper*panelOpen'),
-           // TODO: [SG] remove when SCUI.ToolTip works with SC master (new rendering subsystem)
-           render: function() {
-             sc_super();
-           }
-         }),
+         displayModeButton: SC.ButtonView.extend({
+           layout: { left: 73, centerY: 0, height: 24, width: 50 },
+            classNames: ['dark'],
+            titleMinWidth: 0,
+            title: "_TASKS".loc(),
+            toolTip: "_DisplayModeTooltip".loc(),
+            action: function() {
+              if(this.get('title') === "_TASKS".loc()) {
+                this.set('title', "_TEAM".loc());
+                Tasks.assignmentsController.set('displayMode', Tasks.DISPLAY_MODE_TEAM);
+              }
+              else { // display mode is TEAM
+                this.set('title', "_TASKS".loc());
+                Tasks.assignmentsController.set('displayMode', Tasks.DISPLAY_MODE_TASKS);
+              }
+            }
+          }),
 
          masterPickerButton: SC.ButtonView.extend({
-           layout: { left: 170, centerY: 0, height: 24, width: 32 },
+           layout: { left: 135, centerY: 0, height: 24, width: 32 },
            titleMinWidth: 0,
            icon: 'empty-project-icon',
            classNames: ['dark'],
@@ -337,7 +337,7 @@ Tasks.mainPage = SC.Page.design({
          }),
          
          welcomeMessageLabel: SC.LabelView.design(SCUI.ToolTip, {
-           layout: { centerX: -55, centerY: -2, width: 250, height: 32 },
+           layout: { centerX: -80, centerY: -2, width: 250, height: 32 },
            classNames: ['welcome-message'],
            escapeHTML: NO,
            touchStart: function() {

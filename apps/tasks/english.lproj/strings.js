@@ -12,6 +12,8 @@
 */
 SC.stringsFor('English', {
 
+  "_TASKS": "TASKS",
+  "_TEAM": "TEAM",
   "_ActionsButtonTooltip": "Globally available actions",
   "_Activated:": "Activated: ",
   "_Active": "Active",
@@ -64,7 +66,7 @@ SC.stringsFor('English', {
   "_Description:": "Description:",
   "_DescriptionHint": "Enter detailed notes...",
   "_Developer": "Developer",
-  "_DisplayModeTooltip": "Display Mode: click on left for team summary; click on right to see tasks",
+  "_DisplayModeTooltip": "Toggle Display Mode between TEAM and TASKS",
   "_DisplayedUsers": " users displayed, ",
   "_Done": "Done",
   "_DoneEffortRangeWarning": " (completed task shouldn't have an effort range)",
