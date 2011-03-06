@@ -63,6 +63,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     var i, j, assigneeSelectionDisplayNames = [], submitterSelectionDisplayNames = [];
     if (tasksSearch && tasksSearch !== '') { // if a search filter is specified
       
+      tasksSearch = tasksSearch.replace(/^\s+/, '').replace(/\s+$/, '');
       var userMatches = tasksSearch.match(/@(\w+)/g);
       var userSelection = null;
       if(userMatches) {
@@ -139,7 +140,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
         else {
           this.textSearch = tasksSearch;
         }
-        tasksSearch = this._escapeMetacharacters(tasksSearch).replace(/^\s+/, '').replace(/\s+$/, '');
+        tasksSearch = this._escapeMetacharacters(tasksSearch);
         searchPattern = new RegExp(tasksSearch, 'i');
       }
     }
