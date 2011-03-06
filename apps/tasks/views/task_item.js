@@ -220,8 +220,8 @@ Tasks.TaskItemView = SC.ListItemView.extend(
         label = label.slice(0, matchIndex) + '<span class="highlight">' +
                 label.slice(matchIndex, matchIndex+textSearchLength) + '</span>' +
                 label.slice(matchIndex+textSearchLength);
-        startIndex = matchIndex + textSearchLength + 23;
-        // console.log('DEBUG: renderLabel() ' + startIndex + ': ' + label);
+        startIndex = matchIndex + textSearchLength + 31; // 31 characters inserted to accommodate <span class=...> to </span>
+        console.log('DEBUG: renderLabel() ' + startIndex + ': ' + label);
       } while(startIndex+textSearchLength < label.length);
     }
     context.push('<label>', label || '', '</label>') ;
