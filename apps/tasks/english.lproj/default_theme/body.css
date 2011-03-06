@@ -106,6 +106,7 @@ body.sc-theme,
   top: 0px !important;
 }
 
+
 /*
 // CHANGED: [SC] remove hack on SC.TextFieldView style to show borders on Firefox (broken on ToT)
 */
@@ -115,6 +116,14 @@ body.sc-theme,
   border-right: 1px solid #AAA;
   border-bottom: 1px solid #CCC;
 }
+/*
+// CHANGED: [SC] remove hack to get rid of focus ring inside text fields with ToT code, fix text field border
+*/
+.mozilla .sc-view .sc-text-field-view.focus {
+    outline-offset: 0px !important;
+    outline: 1px solid -moz-mac-focusring;
+}
+
 
 /*
 // CHANGED: [SC] remove hack for Picker Pane popping up with mangled pointer on SC ToT
