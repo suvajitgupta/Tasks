@@ -198,7 +198,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' right: 225px;\n' +
 '}\n' +
 '.doneEffortRangeWarning, .incompleteEffortWarning {\n' +
-' background-color: orange !important;\n' +
+' background-color: #FC0 !important;\n' +
 ' color: #333 !important;\n' +
 '}\n' +
 '</style>\n' +

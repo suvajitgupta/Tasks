@@ -269,7 +269,7 @@
 
 .task-item .sc-outline .count.doneEffortRangeWarning,
 .assignee-item.incompleteEffortWarning .sc-outline .count {
-  background: orange none repeat scroll 0 0 !important;
+  background: #FC0 none repeat scroll 0 0 !important;
   color: #333 !important;
 }
 
@@ -438,7 +438,7 @@
  */
 
 .task-item .highlight {
-  background-color: #FF3 !important;
+  background-color: #FF6 !important;
   padding: 1px 0px !important;
   border: 1px solid #BBB !important;
   -moz-border-radius: 3px !important;
