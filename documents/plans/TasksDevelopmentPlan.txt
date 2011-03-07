@@ -81,7 +81,7 @@ Login/Signup GUIs @Active
 ^ Add login screen to identify user who logs in (and handle login failures properly) [SG] <SE> $Feature @Done %Passed
 - Allow new guests to sign up from login screen and sign them in immediately after [JH2] <SG> $Feature @Done %Passed
 - Add password to Login, Guest Signup, and User Manager screens (save in encrypted format) [SG] <JH2> $Feature @Done %Passed
-- Remember login name/password across sessions via checkbox on login screen [SG] $Feature @Active
+v Remember login name/password across sessions via checkbox on login screen [SG] $Feature @Active
 - Add option to load data for completed projects on login screen (off by default) [SG] $Feature @Done %Passed
 - Support view mode of tasks and selection of project/filter/search using SproutCore routes [SG] $Feature @Done %Passed
 
@@ -128,7 +128,8 @@ v Show number of displayed/selected Users at the bottom of Users/Settings panel 
 - Support "Send Notifications" toggling via actions menu [SG] <JH2> $Feature @Done %Passed
 
 - Add "Statistics..." menu item in actions menu/popup to show percent breakdown of displayed Tasks by attributes [SG] $Feature @Done %Passed
-- Provide graphical views (bar graphs, pie charts) for Statistics using Sai [SG] <EG> $Feature @Active
+- Provide graphical views (bar graphs, pie charts) for Statistics using Sai [SG] <EG> $Feature @Risky
+| Wait for auto scaling and pie chart code to be merged
 
 - Add "Import" menu item in actions menu with associated pop up panel [SG] <BB> $Feature @Done %Passed
 - Don't create a Project if it already exists during Import [SG] $Feature @Done %Passed
@@ -244,7 +245,7 @@ Touch Device GUIs @Active
 #========================================================================================================================
 
 - Implement swiveling Master/Detail view on iPad [JH2] <SG> $Feature @Done %Passed
-- Port Tasks desktop GUI to iPad [SG] <AI> $Feature @Done
+- Port Tasks desktop GUI to iPad [SG] <AI> $Feature @Done %Passed
 
 v Develop Tasks iPhone GUI [SG] <MB> $Feature
 
@@ -274,7 +275,7 @@ Styling @Active
 #========================================================================================================================
 
 ^ Style via CSS, embed catchy/sprited images [MG] <SG> $Feature @Done %Passed
-- Re-style to match "dark" Greenhouse look & feel [SG] <MG> $Feature @Done
+- Re-style to match "dark" Greenhouse look & feel [SG] <MG> $Feature @Done %Passed
 - Run Chance to optimize loading of final set of split-up icons [SG] <JH2> @Risky
 | Wait to do this after switching to SC 1.5 where Chance is integrated
 
@@ -320,7 +321,7 @@ Hardening/Testing @Active
 Documentation @Active
 #========================================================================================================================
 
-- Create online training video using QuickTime [SG] $Feature @Done
+- Create training video using QuickTime & post to YouTube [SG] $Feature @Done
 | http://www.youtube.com/watch?v=6egjJw_RS1g
 v Provide SproutCore doctool-style comments [SG] <SE>
 
