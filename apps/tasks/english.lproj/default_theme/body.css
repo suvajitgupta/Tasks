@@ -67,12 +67,13 @@ body.sc-theme,
 .onscreen-help {
   color: #333 !important;
   font-size: 10px !important;
+	font-style: italic !important;
 	line-height: 12px !important;
 }
 
 .date-time {
   color: #444 !important;
-  font-size: 10px !important;
+  font-size: 11px !important;
   font-weight: normal !important;
 }
 
