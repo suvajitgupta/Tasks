@@ -138,7 +138,7 @@ v Show number of displayed/selected Users at the bottom of Users/Settings panel 
 | When on "All Tasks" project with no filters on all Project data is exported, otherwise only displayed data is exported
 - Add "Export to HTML" capability for printable & human-readable version [SG] $Feature @Done %Passed
 | Useful for emailing and to store a baseline of Tasks
-- Support drag-and-drop file import [SG] <MB> $Feature
+v Support drag-and-drop file import [SG] <MB> $Feature
 
 - Add online "Help" menu item in actions menu and popup help window [SG] $Feature @Done %Passed
 
@@ -246,7 +246,7 @@ Touch Device GUIs @Active
 - Implement swiveling Master/Detail view on iPad [JH2] <SG> $Feature @Done %Passed
 - Port Tasks desktop GUI to iPad [SG] <AI> $Feature @Done
 
-- Develop Tasks iPhone GUI [SG] <MB> $Feature
+v Develop Tasks iPhone GUI [SG] <MB> $Feature
 
 
 #========================================================================================================================
@@ -312,8 +312,8 @@ Hardening/Testing @Active
 | Import/Export (Text & HTML)
 | Popup online Help, Statistics
 | Email Notifications, Task watching
-^ Develop comprehensive model/view unit tests [SG] <BB> @Active
-^ Develop comprehensive automated path-based test scripts using Lebowski/Selenium [SG] <MR> @Active
+- Develop comprehensive model/view unit tests [SG] <BB> @Active
+- Develop comprehensive automated path-based test scripts using Lebowski/Selenium [SG] <MR> @Active
 
 
 #========================================================================================================================
@@ -322,7 +322,7 @@ Documentation @Active
 
 - Create online training video using QuickTime [SG] $Feature @Done
 | http://www.youtube.com/watch?v=6egjJw_RS1g
-- Provide SproutCore doctool-style comments [SG] <SE>
+v Provide SproutCore doctool-style comments [SG] <SE>
 
 
 #========================================================================================================================
