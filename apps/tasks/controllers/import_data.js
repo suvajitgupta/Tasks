@@ -11,11 +11,15 @@
   
   Controller for the import data pane.
 */
+
+
+Tasks.DEFAULT_IMPORT_DATA = Tasks.softwareMode? "_ImportDataSoftwareMode".loc() : "_ImportDataTodoMode".loc();
+
 Tasks.importDataController = SC.ObjectController.create(
 /** @scope Tasks.importDataController.prototype */ {
   
   createMissingUsers: false,
-  data: '',
+  data: Tasks.DEFAULT_IMPORT_DATA,
   
   /**
    * Parse data and create/load objects.
@@ -154,7 +158,7 @@ Tasks.importDataController = SC.ObjectController.create(
     
     if(Tasks.get('autoSave')) Tasks.saveChanges();
     CoreTasks.set('sendNotifications', sendNotifications); // restore cached value
-    this.set('data','');
+    this.set('data', Tasks.DEFAULT_IMPORT_DATA);
     
     Tasks.statechart.sendEvent('close');
     

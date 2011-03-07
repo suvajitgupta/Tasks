@@ -22,23 +22,15 @@ Tasks.importDataPane = SCUI.ModalPane.create({
   layout: { centerX: 0, centerY: 0, height: 500, width: 700 },
   
   contentView: SC.View.design({
-    childViews: 'instructions sampleFormat dataEntryField createMissingUsersCheckbox createMissingUsersHelpLabel cancelButton importButton'.w(),
+    childViews: 'instructions dataEntryField createMissingUsersCheckbox createMissingUsersHelpLabel cancelButton importButton'.w(),
     
     instructions: SC.LabelView.design({
-      escapeHTML: NO,
-      layout: { top: 12, left: 10, height: 40, width: 250 },
+      layout: { top: 10, left: 10, height: 24, width: 250 },
       value: "_ImportInstructions:".loc()
     }),
     
-    sampleFormat: SC.LabelView.design({
-      escapeHTML: NO,
-      layout: { top: 7, left: 260, height: 55, width: 425 },
-      classNames: [ 'onscreen-help'],
-      value: Tasks.softwareMode? "_FormatOnscreenHelpSoftwareMode".loc() : "_FormatOnscreenHelpTodoMode".loc()
-    }),
-
     dataEntryField: SC.TextFieldView.design({
-      layout: { top: 60, left: 10, right: 10, bottom: 40 },
+      layout: { top: 35, left: 10, right: 10, bottom: 40 },
       maxLength: 1000000,
       isTextArea: YES,
       valueBinding: 'Tasks.importDataController.data'
