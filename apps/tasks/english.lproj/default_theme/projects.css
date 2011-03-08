@@ -178,6 +178,7 @@
 }
 
 .project-item .count {
+  margin-top: -9px !important;
   right: 14px !important;
   background: #888 !important;
   color: white !important;

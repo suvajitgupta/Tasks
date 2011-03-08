@@ -70,6 +70,18 @@
   opacity: 0.5;
 }
 
+.sc-progress-view {
+  border: 1px solid #333 !important;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  background: -webkit-gradient(linear, center top, center bottom, from(#FFF), to(#888)) !important;
+  background: -moz-linear-gradient(center top , #FFF, #888) !important;
+}
+.sc-progress-view .sc-inner {
+  background: -webkit-gradient(linear, center top, center bottom, from(#888), to(#000)) !important;
+  background: -moz-linear-gradient(center top , #888, #000) !important;
+}
+
 .sc-master-detail-view .sc-workspace-view .task-editor .sc-label-view,
 .sc-master-detail-view .sc-workspace-view .task-editor .sc-split-view,
 .sc-master-detail-view .sc-workspace-view .task-editor .sc-split-view .sc-list-view,
@@ -253,7 +265,7 @@
   top: -2px !important;
   font-size: 11px !important;
   background: #FFF none repeat scroll 0 0 !important;
-  color: #333 !important;
+  color: #555 !important;
 }
 
 .assignee-item .sc-outline .count {
@@ -266,13 +278,13 @@
 
 .assignee-item .sc-outline .count,
 .task-item .count {
-  margin-top: 0px !important;
+  margin-top: -1px !important;
 }
 
 .task-item .sc-outline .count.doneEffortRangeWarning,
 .assignee-item.incompleteEffortWarning .sc-outline .count {
   background: #FC0 none repeat scroll 0 0 !important;
-  color: #333 !important;
+  color: #555 !important;
 }
 
 
