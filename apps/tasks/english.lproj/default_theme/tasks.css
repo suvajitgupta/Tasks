@@ -70,18 +70,6 @@
   opacity: 0.5;
 }
 
-.sc-progress-view {
-  border: 1px solid #333 !important;
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
-  background: -webkit-gradient(linear, center top, center bottom, from(#FFF), to(#888)) !important;
-  background: -moz-linear-gradient(center top , #FFF, #888) !important;
-}
-.sc-progress-view .sc-inner {
-  background: -webkit-gradient(linear, center top, center bottom, from(#888), to(#000)) !important;
-  background: -moz-linear-gradient(center top , #888, #000) !important;
-}
-
 .sc-master-detail-view .sc-workspace-view .task-editor .sc-label-view,
 .sc-master-detail-view .sc-workspace-view .task-editor .sc-split-view,
 .sc-master-detail-view .sc-workspace-view .task-editor .sc-split-view .sc-list-view,
