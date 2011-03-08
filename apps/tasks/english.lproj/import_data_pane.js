@@ -37,7 +37,7 @@ Tasks.importDataPane = SCUI.ModalPane.create({
     }),
     
     createMissingUsersCheckbox: SC.CheckboxView.design({
-      layout: { width: 175, height: 22, left: 10, bottom: 8 },
+      layout: { width: 175, height: 22, right: 235, top: 10 },
       isVisibleBinding: 'CoreTasks.permissions.canCreateUser',
       title: "_CreateMissingUsers".loc(),
       valueBinding: 'Tasks.importDataController.createMissingUsers'
@@ -45,7 +45,7 @@ Tasks.importDataPane = SCUI.ModalPane.create({
     
     createMissingUsersHelpLabel: SC.LabelView.design({
       escapeHTML: NO,
-      layout: { width: 250, height: 30, left: 175, bottom: 3 },
+      layout: { width: 240, height: 30, right: 10, top: 5 },
       isVisibleBinding: 'CoreTasks.permissions.canCreateUser',
       classNames: [ 'onscreen-help'],
       value: "_CreateMissingUsersOnscreenHelp".loc()
