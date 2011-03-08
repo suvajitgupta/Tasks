@@ -99,10 +99,31 @@ Tasks.TaskEditorView = SC.View.extend(
   minWidth: 725,
   minHeight: 310,
   
+  _computeTaskPosition: function(task) {
+    var tasksList = Tasks.getPath('tasksController.arrangedObjects');
+    var idx = tasksList.indexOf(task);
+    var len = tasksList.get('length');
+    var groupIndexes = tasksList.contentGroupIndexes(null, tasksList);
+    var tasksCount = 0, groupsBeforeTaskCount = 0;
+    for (var i = 0; i < len; i++) {
+      if (groupIndexes.contains(i)) {
+        if(i < idx) groupsBeforeTaskCount++;
+      }
+      else {
+        tasksCount++;
+      }
+    }
+    var current = idx-groupsBeforeTaskCount+1;
+    // console.log('len=' + len + ', idx=' + idx + '; current=' + current + ', total=' + tasksCount);
+    return { current: current, total: tasksCount };
+  },
+  
   _preEditing: function() {
     var task = this.get('task');
     // console.log('DEBUG: preEditing task: ' + task.get('name'));
     var editor = this.get('editor');
+    var position = this._computeTaskPosition(task);
+    editor.setPath('positionLabel.value', position.current + "_of".loc() + position.total);
     editor.setPath('idLabel.value', "_Task".loc() + ' ' + task.get('displayId'));
     this._watches = CoreTasks.getTaskWatches(task);
     this._watching = CoreTasks.isCurrentUserWatchingTask(task);
@@ -249,7 +270,7 @@ Tasks.TaskEditorView = SC.View.extend(
  
  editor: SC.View.design({
    
-   childViews: 'idLabel showTasksListButton gotoPreviousTaskButton gotoNextTaskButton nameLabel nameField typeLabel typeField priorityLabel priorityField statusLabel statusField validationLabel validationField effortLabel effortField effortHelpLabel submitterLabel submitterField projectLabel projectField assigneeLabel assigneeField splitView separatorView createdAtLabel updatedAtLabel watchingCheckbox watchersButton'.w(),
+   childViews: 'idLabel showTasksListButton gotoPreviousTaskButton gotoNextTaskButton positionLabel nameLabel nameField typeLabel typeField priorityLabel priorityField statusLabel statusField validationLabel validationField effortLabel effortField effortHelpLabel submitterLabel submitterField projectLabel projectField assigneeLabel assigneeField splitView separatorView createdAtLabel updatedAtLabel watchingCheckbox watchersButton'.w(),
    classNames: ['task-editor'],
 
    idLabel: SC.LabelView.design({
@@ -265,7 +286,7 @@ Tasks.TaskEditorView = SC.View.extend(
     }),
 
    gotoPreviousTaskButton: SC.View.design(SCUI.SimpleButton, {
-     layout: { top: 3, centerX: -80, width: 17, height: 17 },
+     layout: { top: 3, right: 43, width: 17, height: 17 },
      classNames: ['previous-icon'],
      toolTip: "_GotoPreviousTask".loc(),
      action: 'gotoPreviousTask',
@@ -274,15 +295,15 @@ Tasks.TaskEditorView = SC.View.extend(
                                               var tasksList = Tasks.getPath('tasksController.arrangedObjects');
                                               if(!tasksList) return false;
                                               var idx = tasksList.indexOf(task);
-                                              var indexes = tasksList.contentGroupIndexes(null, tasksList);
+                                              var groupIndexes = tasksList.contentGroupIndexes(null, tasksList);
                                               for (--idx; idx >= 0; idx--) {
-                                                if (!indexes.contains(idx)) return true;
+                                                if (!groupIndexes.contains(idx)) return true;
                                               }
                                               return false;
                                             }).from('Tasks*tasksController.selection')
    }),
    gotoNextTaskButton: SC.View.design(SCUI.SimpleButton, {
-     layout: { top: 3, centerX: 80, width: 17, height: 17 },
+     layout: { top: 3, right: 10, width: 17, height: 17 },
      classNames: ['next-icon'],
      toolTip: "_GotoNextTask".loc(),
      action: 'gotoNextTask',
@@ -295,6 +316,17 @@ Tasks.TaskEditorView = SC.View.extend(
                                               if(idx === len) return false;
                                               return true;
                                             }).from('Tasks*tasksController.selection')
+   }),
+
+   positionLabel: SC.LabelView.design({
+     layout: { width: 100, right: 75, top: 6, height: 12 },
+     controlSize: SC.SMALL_CONTROL_SIZE,
+     textAlign: SC.ALIGN_RIGHT
+   }),
+   
+   nameField: SC.TextFieldView.design({
+     layout: { top: 39, left: 60, right: 10, height: 24 },
+     isEnabledBinding: 'Tasks.tasksController.isEditable'
    }),
 
    nameLabel: SC.LabelView.design({

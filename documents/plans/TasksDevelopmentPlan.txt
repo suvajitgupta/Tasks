@@ -217,6 +217,7 @@ v Add keyboard shortcuts (hot keys) for commonly used actions [SG] <EG> $Feature
 v Allow Task Validation editing only when in Done status [SG] $Feature @Done %Passed
 - Clear Task Validation if status is changed from Done, disallow entry of Passed/Failed when not Done [SG] <MB> $Feature @Done %Passed
 - Support navigation to previous/next Tasks via slide-out editor [SG] $Feature @Done %Passed
+v Show relative position of Task being edited alongside previous/next navigation buttons [SG] $Feature @Done %Passed
 - Display watch count in Task slide-out editor and list watchers by clicking on that button [SG] $Feature @Done %Passed
 - Support ability to watch/unwatch Tasks via slide-out editor [SG] $Feature @Done %Passed
 - Support ability to view/add Comments on Tasks [SG] <JH2> $Feature @Done %Passed

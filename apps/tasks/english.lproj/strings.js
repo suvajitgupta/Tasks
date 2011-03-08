@@ -222,6 +222,7 @@ SC.stringsFor('English', {
   "_justNow": "just now",
   "_left": " tasks left",
   "_minutesAgo": " minutes ago",
+  "_of": " of ",
   "_oneHourAgo": " 1 hour ago",
   "_projects": " projects & ",
   "_redFlags": " red flags",
