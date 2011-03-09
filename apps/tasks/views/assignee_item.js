@@ -99,11 +99,10 @@ Tasks.AssigneeItemView = Tasks.GroupItemView.extend(Tasks.LocalizedLabel,
       var tasksCount = content.get('tasksCount');
       var percentComplete = Math.round(100*finishedTasksCount/tasksCount);
       var percentCompleteTooltip = percentComplete + '%' + "_finished".loc();
-      context.begin('div').addClass('total').begin('div').addClass('finished')
-             .addStyle({'width': percentComplete + 'px'}).end().attr({
-               title: percentCompleteTooltip,
-               alt: percentCompleteTooltip
-             }).end();
+      context.begin('div').addClass('progress-bar')
+             .begin('div').addClass('progress-bar-inner')
+             .addStyle({'width': percentComplete + 'px'}).end()
+             .attr({ title: percentCompleteTooltip, alt: percentCompleteTooltip }).end();
     }
     
     var finishedEffort = content.get('finishedEffort');

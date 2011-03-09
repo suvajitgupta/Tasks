@@ -248,23 +248,22 @@
   margin-top: -14px !important;
 }
 
-.assignee-item.sc-list-item-view .sc-outline .total {
-  top: 0px !important;
+.assignee-item.sc-list-item-view .sc-outline .progress-bar {
+  position: absolute !important;
   height: 8px !important;
   right: 52% !important;
   width: 100px !important;
   border: 1px solid #555 !important;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  position: absolute !important;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
   background: #DDD;
   background: -webkit-gradient(linear, center top, center bottom, from(#FFF), to(#AAA)) !important;
   background: -moz-linear-gradient(center top , #FFF, #AAA) !important;
 }
-.assignee-item.sc-list-item-view .sc-outline .total .finished {
+.assignee-item.sc-list-item-view .sc-outline .progress-bar .progress-bar-inner {
+  position: absolute !important;
   top: 0px !important;
   bottom: 0px !important;
-  position: absolute !important;
   background: #777;
   background: -webkit-gradient(linear, center top, center bottom, from(#AAA), to(#333)) !important;
   background: -moz-linear-gradient(center top , #AAA, #333) !important;
