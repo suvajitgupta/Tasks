@@ -192,6 +192,8 @@ v Add hover over tooltip for Assignees to show how many Tasks they have and to e
 - Append "?" for range-based subtotals including Ttasks with unspecified Efforts [SG] $Feature @Done %Passed
 ^ Support automatic sorting of Tasks by status, validation, priority, type, and name or "index" (if name starts with a number) [SG] <SG> $Feature @Done %Passed
 v Add hover over tooltip for Task IDs to show Submitter [SG] <JH2> $Feature @Done %Passed
+- Display Task progress bar to show percent finished [SG] $Feature @Done %Passed
+v Add hover over tooltip for Task progress bar to show percent finished [SG] $Feature @Done %Passed
 ^ Support Task dueDates (show in task list/editor, indicate overdue/upcoming tasks, add to import/export) [SG] $Feature
 
 ^ Add buttons to add/delete Tasks below Tasks list [SG] <SE> $Feature @Done %Passed

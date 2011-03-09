@@ -91,13 +91,29 @@ Tasks.AssigneeItemView = Tasks.GroupItemView.extend(Tasks.LocalizedLabel,
   },
   
   renderCount: function(context, count) {
+    
     var content = this.get('content');
+    
+    var finishedTasksCount = content.get('finishedTasksCount');
+    if(finishedTasksCount > 0) {
+      var tasksCount = content.get('tasksCount');
+      var percentComplete = Math.round(100*finishedTasksCount/tasksCount);
+      var percentCompleteTooltip = percentComplete + '%' + "_finished".loc();
+      context.begin('div').addClass('total').begin('div').addClass('finished')
+             .addStyle({'width': percentComplete + 'px'}).end().attr({
+               title: percentCompleteTooltip,
+               alt: percentCompleteTooltip
+             }).end();
+    }
+    
     var finishedEffort = content.get('finishedEffort');
     if(finishedEffort) {
       context.push('<span class="count finished"><span class="inner">')
         .push(finishedEffort.toString()).push('</span></span>') ;
     }
+    
     if(count !== '') sc_super();
+    
   }
   
 });

@@ -248,6 +248,24 @@
   margin-top: -14px !important;
 }
 
+.assignee-item.sc-list-item-view .sc-outline .total {
+  top: 0px !important;
+  height: 8px !important;
+  right: 52% !important;
+  width: 100px !important;
+  border: 1px solid #333 !important;
+  position: absolute !important;
+  background: -webkit-gradient(linear, center top, center bottom, from(#FFF), to(#888)) !important;
+  background: -moz-linear-gradient(center top , #FFF, #888) !important;
+}
+.assignee-item.sc-list-item-view .sc-outline .total .finished {
+  top: 0px !important;
+  bottom: 0px !important;
+  position: absolute !important;
+  background: -webkit-gradient(linear, center top, center bottom, from(#888), to(#000)) !important;
+  background: -moz-linear-gradient(center top , #888, #000) !important;
+}
+
 .tasks-pane .assignee-item .sc-outline .count,
 .assignee-item.incompleteEffortWarning .sc-outline .count.finished {
   top: -2px !important;
