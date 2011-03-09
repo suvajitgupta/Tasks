@@ -22,7 +22,6 @@ CoreTasks.RecordAttribute = SC.RecordAttribute.extend({
   /**
    * Overrides call() in SC.RecordAttribute to provide validation using the allowedValues array.
    */
-  // FIXME: [SE] generate erros when disallowed values are loaded from JSON
   call: function(record, key, value) {
     var attrKey = this.get('key') || key;
     
