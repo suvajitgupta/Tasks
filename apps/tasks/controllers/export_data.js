@@ -103,6 +103,27 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' -moz-box-shadow: inset 0px 2px 2px #FAA;\n' +
 ' -webkit-box-shadow: inset 0px 2px 2px #FAA;\n' +
 '}\n' +
+'.progress-bar {\n' +
+' margin-top: 4px !important;\n' +
+' position: absolute !important;\n' +
+' height: 8px !important;\n' +
+' right: 52% !important;\n' +
+' width: 100px !important;\n' +
+' border: 1px solid #555 !important;\n' +
+' -moz-border-radius: 2px;\n' +
+' -webkit-border-radius: 2px;\n' +
+' background: #DDD;\n' +
+' background: -webkit-gradient(linear, center top, center bottom, from(#FFF), to(#AAA)) !important;\n' +
+' background: -moz-linear-gradient(center top , #FFF, #AAA) !important;\n' +
+'}\n' +
+'.progress-bar .progress-bar-inner {\n' +
+' position: absolute !important;\n' +
+' top: 0px !important;\n' +
+' bottom: 0px !important;\n' +
+' background: #777;\n' +
+' background: -webkit-gradient(linear, center top, center bottom, from(#AAA), to(#333)) !important;\n' +
+' background: -moz-linear-gradient(center top , #AAA, #333) !important;\n' +
+'}\n' +
 '.margin {\n' +
 ' border-right: 3px solid #FCC;\n' +
 ' padding: 0px 3px 0px 0px;\n' +
@@ -340,6 +361,11 @@ Tasks.exportDataController = SC.ObjectController.create(
       else ret += '\n# ';
       ret += assignmentNode.get('displayName').loc();
       if(format === 'HTML') {
+        var finishedTasksCount = assignmentNode.get('finishedTasksCount');
+        if(finishedTasksCount > 0) {
+          var percentComplete = Math.round(100*finishedTasksCount/tasksCount);
+          ret += '&nbsp;<span class="progress-bar"><span class="progress-bar-inner" style="width:' + percentComplete + 'px"></span></span>';
+        }
         var finishedEffort = assignmentNode.get('finishedEffort');
         if(finishedEffort) ret += '&nbsp;<span class="total">' + finishedEffort + '</span>';
         var leftEffort = assignmentNode.get('displayEffort');
