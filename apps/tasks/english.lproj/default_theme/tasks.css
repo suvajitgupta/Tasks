@@ -255,15 +255,15 @@
   width: 100px !important;
   border: 1px solid #333 !important;
   position: absolute !important;
-  background: -webkit-gradient(linear, center top, center bottom, from(#FFF), to(#888)) !important;
-  background: -moz-linear-gradient(center top , #FFF, #888) !important;
+  background: -webkit-gradient(linear, center top, center bottom, from(#FFF), to(#AAA)) !important;
+  background: -moz-linear-gradient(center top , #FFF, #AAA) !important;
 }
 .assignee-item.sc-list-item-view .sc-outline .total .finished {
   top: 0px !important;
   bottom: 0px !important;
   position: absolute !important;
-  background: -webkit-gradient(linear, center top, center bottom, from(#888), to(#000)) !important;
-  background: -moz-linear-gradient(center top , #888, #000) !important;
+  background: -webkit-gradient(linear, center top, center bottom, from(#AAA), to(#333)) !important;
+  background: -moz-linear-gradient(center top , #AAA, #333) !important;
 }
 
 .tasks-pane .assignee-item .sc-outline .count,
