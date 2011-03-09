@@ -395,7 +395,8 @@ Tasks.exportDataController = SC.ObjectController.create(
     if(format === 'HTML') ret += '</center>\n' + Tasks.EXPORT_LEGEND;
     ret += '\n\n';
     
-    if (projectsToExport[0] === CoreTasks.get('allTasksProject') && !Tasks.filterSearchController.isFilterOrSearchEnabled()) {
+    if (projectsToExport[0] === CoreTasks.get('allTasksProject') && Tasks.assignmentsController.get('displayMode') === Tasks.DISPLAY_MODE_TASKS &&
+       !Tasks.filterSearchController.isFilterOrSearchEnabled()) {
       ret += this._exportAllData(format);
     }
     else {
