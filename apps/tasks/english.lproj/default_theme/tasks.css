@@ -251,8 +251,7 @@
 .assignee-item.sc-list-item-view .sc-outline .progress-percent {
   position: absolute !important;
   font-size: 10px !important;
-  font-weight: normal !important;
-  top: -12px !important;
+  top: -11px !important;
   text-align: center !important;
   right: 50% !important;
   width: 100px !important;
