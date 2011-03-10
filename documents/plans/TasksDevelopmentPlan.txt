@@ -291,6 +291,7 @@ I18N/Porting @Active
 v Test GUI Localization (L10N) using reversed strings [SG] <JH2> @Done %Passed
 - Port GUI to Firefox & Webkit (Safari/Chrome) [SG] @Done %Passed
 - Port GUI to Internet Explorer [SG] @Done %Failed
+| A new task is added to the list but the TaskId remains empty and it is not saving
 | ComboBoxes shift upwards and get cropped when you click on them (in Editors)
 | Clippy icon looks strange and is not clickable
 | Statistics panel and Sai graphs have different colored background and text labels are messed up or missing
