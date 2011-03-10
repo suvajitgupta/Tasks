@@ -62,7 +62,9 @@ Tasks.TaskManagerState = Ki.State.extend({
     }
 
     // Create, select, and begin editing new task.
+    SC.RunLoop.begin();
     var task = CoreTasks.createRecord(CoreTasks.Task, taskHash);
+    SC.RunLoop.end();
     Tasks.tasksController.selectObject(task);
     Tasks.getPath('mainPage.taskEditor').popup(task);
 
@@ -230,6 +232,10 @@ Tasks.TaskManagerState = Ki.State.extend({
       Tasks.filterSearchController.setAttributeFilterShowstoppers();
     },
 
+    setAttributeFilterUrgent: function() {
+      Tasks.filterSearchController.setAttributeFilterUrgent();
+    },
+
     setAttributeFilterTroubled: function() {
       Tasks.filterSearchController.setAttributeFilterTroubled();
     },
@@ -240,6 +246,10 @@ Tasks.TaskManagerState = Ki.State.extend({
 
     setAttributeFilterUnvalidated: function() {
       Tasks.filterSearchController.setAttributeFilterUnvalidated();
+    },
+
+    setAttributeFilterUpcoming: function() {
+      Tasks.filterSearchController.setAttributeFilterUpcoming();
     },
 
     setAttributeFilterCompleted: function() {

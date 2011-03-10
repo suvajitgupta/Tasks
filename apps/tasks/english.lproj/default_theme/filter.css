@@ -23,16 +23,24 @@
   color: purple !important;
 }
 
+.urgent {
+  text-decoration: underline !important;
+}
+
 .troubled {
   color: red !important;
 }
 
-.unfinished {
+.unfinished, .urgent, .upcoming {
   color: blue !important;
 }
 
 .unvalidated {
   color: #0C0 !important;
+}
+
+.upcoming {
+  font-style: italic !important;
 }
 
 .completed {

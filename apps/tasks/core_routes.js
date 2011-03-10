@@ -87,7 +87,7 @@ Tasks.mixin( /** @scope Tasks */ {
     Example:
       'http://[host]/tasks#select&projectId=#354&display=tasks&filter=unfinished&search=[SG]' would select project with ID #354 (if it exists) upon startup and show unfinished tasks assigned to SG.
     
-    Legal values of filter are: showstoppers, troubled, unfinished, unvalidated, and completed
+    Legal values of filter are: showstoppers, urgent, troubled, unfinished, unvalidated, upcoming, and completed
     
   */
   selectRoute: function(params) {
@@ -108,9 +108,11 @@ Tasks.mixin( /** @scope Tasks */ {
       params.filter = params.filter.toLowerCase();
       switch(params.filter) {
         case 'showstoppers': Tasks.filterSearchControllersetAttributeFilterShowstoppers(); break;
+        case 'urgent': Tasks.filterSearchController.setAttributeFilterUrgent(); break;
         case 'troubled': Tasks.filterSearchController.setAttributeFilterTroubled(); break;
         case 'unfinished': Tasks.filterSearchController.setAttributeFilterUnfinished(); break;
         case 'unvalidated': Tasks.filterSearchController.setAttributeFilterUnvalidated(); break;
+        case 'upcoming': Tasks.filterSearchController.setAttributeFilterUpcoming(); break;
         case 'completed': Tasks.filterSearchController.setAttributeFilterCompleted(); break;
         default: console.warn('Illegal URL route value for filter: ' + params.filter);
       }

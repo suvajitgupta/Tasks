@@ -36,7 +36,7 @@ Tasks.filterPane = SC.SheetPane.create({
       layout: { top: 28, left: 5, height: 70, right: 5 },
       borderStyle: SC.BORDER_BEZEL,
       classNames: ['quickfilter-toolbar'],
-      childViews: 'allButton troubledButton unfinishedButton unvalidatedButton completedButton showstoppersButton'.w(),
+      childViews: 'allButton showstoppersButton urgentButton troubledButton unfinishedButton unvalidatedButton upcomingButton completedButton '.w(),
   
       allButton: SC.ButtonView.design({
         layout: { width: 90, height: 30, left: 5, top: 7 },
@@ -57,6 +57,17 @@ Tasks.filterPane = SC.SheetPane.create({
         title: "_Showstoppers".loc(),
         toolTip: "_ShowstoppersTooltip".loc(),
         action: 'setAttributeFilterShowstoppers'
+      }),      
+
+      urgentButton: SC.ButtonView.design({
+        layout: { width: 100, height: 30, centerX: 0, top: 7 },
+        titleMinWidth: 0,
+        theme: 'capsule',
+        classNames: ['urgent'],
+        isVisible: !Tasks.softwareMode,
+        title: "_Urgent".loc(),
+        toolTip: "_UrgentTooltip".loc(),
+        action: 'setAttributeFilterUrgent'
       }),      
 
       troubledButton: SC.ButtonView.design({
@@ -88,6 +99,17 @@ Tasks.filterPane = SC.SheetPane.create({
         title: "_Unvalidated".loc(),
         toolTip: "_UnvalidatedTooltip".loc(),
         action: 'setAttributeFilterUnvalidated'
+      }),
+  
+      upcomingButton: SC.ButtonView.design({
+        layout: { width: 100, height: 30, centerX: 0, top: 39 },
+        titleMinWidth: 0,
+        theme: 'capsule',
+        classNames: ['upcoming'],
+        isVisible: !Tasks.softwareMode,
+        title: "_Upcoming".loc(),
+        toolTip: "_UpcomingTooltip".loc(),
+        action: 'setAttributeFilterUpcoming'
       }),
   
       completedButton: SC.ButtonView.design({

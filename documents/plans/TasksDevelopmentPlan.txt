@@ -226,7 +226,7 @@ v Show relative position of Task being edited alongside previous/next navigation
 
 - Support multi-Task ID/Name copy to clipboard from top bar [SG] <JH2> $Feature @Done %Passed
 ^ Allow Task attribute filtering by type, priority, status, and validation fields via a top bar button/sheet pane [SG] $Feature @Done %Passed
-- Support commonly-used "QuickFilters" in Filter panel: Troubled, Unfinished, Unvalidated, Completed, Showstoppers, All [SG] $Feature @Done %Passed
+- Support commonly-used "QuickFilters" in Filter panel [SG] $Feature @Done %Passed
 - Support filtering of Tasks that were recently updated, have effort specified, or are being watched [SG] $Feature @Done %Passed
 - Support filtering of Tasks that were created or updated within a specified timeframe [SG] $Feature
 - Indicate whether Task attribute filtering is enabled via cancel icon on Filter button [SG] $Feature @Done %Passed

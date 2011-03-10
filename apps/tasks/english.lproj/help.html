@@ -104,7 +104,12 @@
 		<h3>URL Parameters</h3>
 			<p><app>tasks</app> allows you to choose your default project (which is selected at startup), display mode, and filter/search criteria by specifying or bookmarking an URL with additional parameters (replace items in CAPS with your specifics):</p>
 			<pre style="margin-left: 50px">http://HOST:PORT/tasks#select&amp;projectId=#ID&amp;display=MODE&amp;filter=QUICKFILTER&amp;search=PATTERN</pre>
-			<p>MODE may be <i>team</i> or <i>tasks</i>.  QUICKFILTER may be one of the following values: <i>showstoppers</i>, <i>troubled</i>, <i>unfinished</i>, <i>unvalidated</i>, and <i>completed</i>.  PATTERN is any legal search pattern described above.  Also, when you click on any project, the URL is automatically set to a value in the format shown above so that you may bookmark that project and return to it easily.  A concrete example is shown below:</p>
+			<p>MODE may be <i>team</i> or <i>tasks</i>.  QUICKFILTER may be one of the following values:</p>
+			<ul>
+				<li>urgent</li><li>troubled</li><li>unfinished</li><li>upcoming</li><li>completed</li>
+				<span class="softwareOnly"><li>showstoppers</li><li>unvalidated</li></span>
+			</ul>
+			<p>PATTERN is any legal search pattern described above.  Also, when you click on any project, the URL is automatically set to a value in the format shown above so that you may bookmark that project and return to it easily.  A concrete example is shown below:</p>
 			<pre style="margin-left: 50px">http://tasks-demo.appspot.com/tasks#select&amp;display=team&amp;filter=unfinished&amp;search=^Out of Scope</pre>
 			<p>You can also view specific tasks using an URL like this (replace items in CAPS with your specifics) - this is useful for sending links to people via email (user is logged in automatically as 'guest'):</p>
 			<pre style="margin-left: 50px">http://HOST:PORT/tasks#view&amp;search=PATTERN</pre>
