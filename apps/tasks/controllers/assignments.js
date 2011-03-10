@@ -353,7 +353,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     }
   
     var finishedEffort = '';
-    if(totalFinishedCount) finishedEffort += (totalFinishedCount + "_finished".loc());
+    finishedEffort += (totalFinishedCount + "_finished".loc());
     var totalFinishedEffortAve = 0;
     if(totalFinishedEffortMin !== 0) {
       totalFinishedEffortAve = (totalFinishedEffortMin + totalFinishedEffortMax)/2;
@@ -366,7 +366,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     
     var loading = CoreTasks.USER_NOT_LOADED;
     var displayEffort = '';
-    if(totalLeftCount) displayEffort += (totalLeftCount + "_left".loc());
+    displayEffort += (totalLeftCount + "_left".loc());
     var effortGap = 0, effortGapPercent = 0;
     if(totalEffortMin !== 0) {
       if(projectTimeLeft) { // flag user loading

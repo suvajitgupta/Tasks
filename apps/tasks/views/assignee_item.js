@@ -95,23 +95,18 @@ Tasks.AssigneeItemView = Tasks.GroupItemView.extend(Tasks.LocalizedLabel,
     var content = this.get('content');
     
     var finishedTasksCount = content.get('finishedTasksCount');
-    if(finishedTasksCount > 0) {
-      var tasksCount = content.get('tasksCount');
-      var percentComplete = Math.round(100*finishedTasksCount/tasksCount);
-      var percentCompleteTooltip = percentComplete + '%' + "_finished".loc();
-      context.begin('div').addClass('progress-bar')
-             .begin('div').addClass('progress-bar-inner')
-             .addStyle({'width': percentComplete + 'px'}).end()
-             .attr({ title: percentCompleteTooltip, alt: percentCompleteTooltip }).end();
+    var leftTasksCount = content.get('leftTasksCount');
+    if(finishedTasksCount > 0 || leftTasksCount > 0) {
+      var percentComplete = Math.round(100*finishedTasksCount/(finishedTasksCount+leftTasksCount));
+      context.begin('div').addClass('progress-percent').text(percentComplete + '%').end()
+             .begin('div').addClass('progress-bar').begin('div').addClass('progress-bar-inner')
+             .addStyle({'width': percentComplete + 'px'}).end().end();
     }
     
     var finishedEffort = content.get('finishedEffort');
-    if(finishedEffort) {
-      context.push('<span class="count finished"><span class="inner">')
-        .push(finishedEffort.toString()).push('</span></span>') ;
-    }
-    
-    if(count !== '') sc_super();
+    context.push('<span class="count finished"><span class="inner">')
+      .push(finishedEffort.toString()).push('</span></span>') ;
+    sc_super();
     
   }
   

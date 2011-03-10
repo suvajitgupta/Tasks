@@ -248,41 +248,63 @@
   margin-top: -14px !important;
 }
 
-.assignee-item.sc-list-item-view .sc-outline .progress-bar {
+.assignee-item.sc-list-item-view .sc-outline .progress-percent {
   position: absolute !important;
-  height: 8px !important;
-  right: 52% !important;
+  font-size: 10px !important;
+  font-weight: normal !important;
+  top: -12px !important;
+  text-align: center !important;
+  right: 50% !important;
   width: 100px !important;
-  border: 1px solid #555 !important;
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
-  background: #DDD;
-  background: -webkit-gradient(linear, center top, center bottom, from(#FFF), to(#AAA)) !important;
-  background: -moz-linear-gradient(center top , #FFF, #AAA) !important;
 }
+
 .assignee-item.sc-list-item-view .sc-outline .progress-bar .progress-bar-inner {
   position: absolute !important;
   top: 0px !important;
   bottom: 0px !important;
+}
+
+.assignee-item.sc-list-item-view .sc-outline .progress-bar {
+  position: absolute !important;
+  top: 5px !important;
+  height: 6px !important;
+  right: 50% !important;
+  width: 100px !important;
+  border: 1px solid #555 !important;
+}
+
+.assignee-item.sc-list-item-view .sc-outline .progress-bar .progress-bar-inner,
+.assignee-item .sc-outline .count.finished {
   background: #777;
-  background: -webkit-gradient(linear, center top, center bottom, from(#AAA), to(#333)) !important;
-  background: -moz-linear-gradient(center top , #AAA, #333) !important;
+  background: -webkit-gradient(linear, center top, center bottom, from(#AAA), to(#111)) !important;
+  background: -moz-linear-gradient(center top , #AAA, #111) !important;
+}
+
+.assignee-item.sc-list-item-view .sc-outline .progress-bar,
+.assignee-item .sc-outline .count {
+  background: #DDD;
+  background: -webkit-gradient(linear, center top, center bottom, from(#FFF), to(#AAA)) !important;
+  background: -moz-linear-gradient(center top , #FFF, #AAA) !important;
 }
 
 .tasks-pane .assignee-item .sc-outline .count,
 .assignee-item.incompleteEffortWarning .sc-outline .count.finished {
   top: -2px !important;
   font-size: 11px !important;
-  background: #FFF none repeat scroll 0 0 !important;
-  color: #555 !important;
+  width: 120px !important;
+  border: 1px solid #555 !important;
+  -moz-border-radius: 2px !important;
+  -webkit-border-radius: 2px !important;
 }
 
 .assignee-item .sc-outline .count {
-  right: 12px !important;
+  right: 4px !important;
+  color: #333 !important;
 }
 
-.assignee-item .sc-outline .count.finished {
-  right: 25% !important;
+.tasks-pane .assignee-item .sc-outline .count.finished {
+  right: 135px !important;
+  color: #FFF !important;
 }
 
 .assignee-item .sc-outline .count,
@@ -292,8 +314,7 @@
 
 .task-item .sc-outline .count.doneEffortRangeWarning,
 .assignee-item.incompleteEffortWarning .sc-outline .count {
-  background: #FC0 none repeat scroll 0 0 !important;
-  color: #555 !important;
+  color: red !important;
 }
 
 

@@ -110,8 +110,6 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' right: 52% !important;\n' +
 ' width: 100px !important;\n' +
 ' border: 1px solid #555 !important;\n' +
-' -moz-border-radius: 2px;\n' +
-' -webkit-border-radius: 2px;\n' +
 ' background: #DDD;\n' +
 ' background: -webkit-gradient(linear, center top, center bottom, from(#FFF), to(#AAA)) !important;\n' +
 ' background: -moz-linear-gradient(center top , #FFF, #AAA) !important;\n' +

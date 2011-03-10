@@ -87,7 +87,7 @@ Tasks.numericalStatisticsView = SC.View.create({
         ret += ('<td><span class="task-validation-failed">' + "_Failed".loc() + ':</span> ' + stats.failedTasksCount + '</td>');
         ret += '<td></td><td></td></tr>';
         ret += '</table>';
-        ret += "_Summary:".loc() + stats.finishedTasksCount + ' ' + "_finished".loc() + ', ' + stats.leftTasksCount + ' ' + "_left".loc();
+        ret += "_TasksSummary:".loc() + stats.finishedTasksCount + ' ' + "_finished".loc() + ', ' + stats.leftTasksCount + ' ' + "_left".loc();
       }
     }
     this.setPath('numericalStatistics.value', ret);
