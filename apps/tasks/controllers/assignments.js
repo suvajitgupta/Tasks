@@ -353,7 +353,7 @@ Tasks.assignmentsController = SC.ArrayController.create(
     }
   
     var finishedEffort = '';
-    finishedEffort += (totalFinishedCount + "_finished".loc());
+    if(totalFinishedCount > 0) finishedEffort += (totalFinishedCount + "_finished".loc());
     var totalFinishedEffortAve = 0;
     if(totalFinishedEffortMin !== 0) {
       totalFinishedEffortAve = (totalFinishedEffortMin + totalFinishedEffortMax)/2;
