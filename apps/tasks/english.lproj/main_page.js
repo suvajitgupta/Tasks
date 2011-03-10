@@ -312,17 +312,12 @@ Tasks.mainPage = SC.Page.design({
            layout: { left: 73, centerY: 0, height: 24, width: 50 },
             classNames: ['dark'],
             titleMinWidth: 0,
-            title: "_TASKS".loc(),
             toolTip: "_DisplayModeTooltip".loc(),
-            action: function() {
-              if(this.get('title') === "_TASKS".loc()) {
-                this.set('title', "_TEAM".loc());
-                Tasks.assignmentsController.set('displayMode', Tasks.DISPLAY_MODE_TEAM);
-              }
-              else { // display mode is TEAM
-                this.set('title', "_TASKS".loc());
-                Tasks.assignmentsController.set('displayMode', Tasks.DISPLAY_MODE_TASKS);
-              }
+            titleBinding: SC.Binding.transform(function(value, binding) {
+                                                 return value? "_TASKS".loc() : "_TEAM".loc();
+                                               }).from('Tasks.assignmentsController*displayMode'),
+            action: function() { // toggle display mode
+              Tasks.assignmentsController.set('displayMode', !Tasks.assignmentsController.get('displayMode'));
             }
           }),
 
