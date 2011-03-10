@@ -311,9 +311,11 @@
   margin-top: -1px !important;
 }
 
-.task-item .sc-outline .count.doneEffortRangeWarning,
 .assignee-item.incompleteEffortWarning .sc-outline .count {
-  color: red !important;
+  color: #C00 !important;
+}
+.task-item .sc-outline .count.doneEffortRangeWarning {
+  color: #F99 !important;
 }
 
 
