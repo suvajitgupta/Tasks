@@ -1,63 +1,90 @@
-# Tasks Import test data
+# Tasks Export at 07:26 AM Mar 11, 2011 # Has 4 assignees & 20 tasks
 
 #================================================================================
-# Has 12 users
+# Has 3 users
 #================================================================================
-
-[SG] (Suvajit  Gupta1) {Manager} <sgupta@yahoo.com>
 
 [JH2] (Josh Holt) {Developer}
 
 [SE] (Sean Eidemiller) {Developer}
 
-
-# Unallocated # Has 1 tasks
-
-# Suvajit Gupta (SG); Has 1 tasks
-- An unallocated, other, task done by Suvajit in no time, but with a very verbose name that will be cropped at the edge of the screen and can be seen by double clicking on the task to get the inline editor {0d} [SG] @Done
+[SG] (Suvajit Gupta) {Manager}
 
 
+
+#================================================================================
+# Unallocated Tasks # Has 1 tasks
+#================================================================================
+
+- An unallocated, other, task done by Suvajit in no time, but with a very verbose name that will be cropped at the edge of the screen and can be seen by double clicking on the task to get the inline editor {0d} [SG] @Done 
+
+
+#================================================================================
+Project Four @Done # Has 1 tasks
+#================================================================================
+
+- A medium priority, other, task assigned to Sean completed in one day {1d} [SE] @Done 
+
+
+#================================================================================
 Project One @Active # Has 4 tasks
 | project description line1
 | project description line2
+#================================================================================
 
-# Suvajit Gupta (SG) # Has 3 tasks
-^ A high-priority, risky, other, task that will take 2 hours submitted by and assigned to Suvajit {2h} <SG> [SG] @Risky
+^ A high-priority, risky, other, task that will take 2 hours submitted by and assigned to Suvajit {2h} <SG> [SG] @Risky 
 | task description line1
 | task description line2
-- A medium priority, active, bug submitted by an unknown user and assigned to Suvajit with unspecified effort [SG] $Bug @Active
-- A medium priority bug assigned to Suvajit, which was done in 3 days but failed validation {3d} [SG] $Bug @Done %Failed
 
-# Unassigned # Has 1 tasks
-v A low priority, planned, feature not assigned to anyone is expected to take a few days {3-5d} $Feature
+- A medium priority, active, bug submitted by an unknown user and assigned to Suvajit with unspecified effort [SG] $Bug @Active 
+
+- A medium priority bug assigned to Suvajit, which was done in 3 days but failed validation {3d} [SG] $Bug @Done %Failed 
+
+v A low priority, planned, feature not assigned to anyone is expected to take a few days {3-5d} $Feature 
 
 
-Project Two With a Long Name That Will Take One Week {3d} # Has 7 tasks
+#================================================================================
+Project Three # Has 0 tasks
+#================================================================================
 
-# Josh Holt (JH2) # Has 1 tasks
-^ A high priority bug Josh is working on that will take 3 days to fix {3d} [JH2] @Active
 
-# Sean Eidemiller (SE) # Has 1 tasks
-- A medium priority, other, task assigned to Sean completed in a couple of hours {2h} [SE] @Done
+#================================================================================
+Project Two With a Long Name That Will Take One Week {3d} # Has 9 tasks
+#================================================================================
 
-# Suvajit Gupta (SG) # Has 5 tasks
-^ A high priority, active, showstopper bug in Suvajit's code that is expected to take 1 day to fix {1-2d} [SG] $Bug @Active
+^ A high priority bug Josh is working on that will take 3 days to fix {3d} [JH2] @Active 
+
+- A medium priority, other, task assigned to Sean completed in a couple of hours {2h} [SE] @Done 
+
+^ A high priority, active, showstopper bug in Suvajit's code that is expected to take 1 day to fix {1-2d} [SG] $Bug @Active 
 | Some comments
 | that span multiple
 | lines.
-^ A high priority, planned, feature assigned to Suvajit that is expected to take 6-7 days {2d} [SG] $Feature
-- A medium priority bug assigned to Suvajit that was done in 1.5 days and failed {1.5d} [SG] $Bug @Done %Failed
-v A low priority feature assigned to Suvajit that was completed in 2.25 days and it still not tested {2.25d} [SG] $Feature @Done
-^ A high priority feature assigned to Suvajit that is completed in unspecified time and passed [SG] $Feature @Done %Passed
+
+^ A high priority, planned, feature assigned to Suvajit that is expected to take 6-7 days {2d} [SG] $Feature 
+
+- A medium priority bug assigned to Suvajit that was done in 1.5 days and failed {1.5d} [SG] $Bug @Done %Failed 
+
+v A low priority feature assigned to Suvajit that was completed in 2.25 days and it still not tested {2.25d} [SG] $Feature @Done 
+
+^ A high priority feature assigned to Suvajit that is completed in unspecified time and passed [SG] $Feature @Done %Passed 
 | A single line comment.
 
-# Unassigned # Has 2 tasks
-- A medium priority, planned, other, task that takes two-and-a-half hours and is unassigned {2.5d}
-v A low priority bug assigned to a non-existent user that is planned and failed (an unacceptable combination) $Bug
+- A medium priority, planned, other, task that takes two-and-a-half hours and is unassigned {2.5d} 
 
-Project Three @Planned # Has 0 tasks
+v A low priority bug assigned to a non-existent user that is planned and failed (an unacceptable combination) $Bug 
 
-Project Four @Done # Has 1 tasks
 
-# Sean Eidemiller (SE) # Has 1 tasks
-- A medium priority, other, task assigned to Sean completed in one day {1d} [SE] @Done
+#================================================================================
+Use Cases <03/11/2011> @Active # Has 5 tasks
+#================================================================================
+
+- 1. First step [JH2] 
+
+- 2. Second step [JH2] 
+
+- 3. Third step [JH2] 
+
+- 4. Fourth step [JH2] 
+
+- 5. Fifth step [JH2] 
