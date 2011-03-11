@@ -58,7 +58,7 @@ Class({
   
   // Delete soft-deleted items and handle IDs referencing non-existent records
   // Example command line invocation that cleans up more than month-old soft-deleted data (default):
-  //   curl -X POST http://localhost:4400/tasks-server/Class/all -d "{ method: 'cleanup', id: 'records', params: [] }"
+  //   curl -X POST http://localhost:4400/tasks-server/Class/records -d "{ method: 'cleanup', id: 'records', params: [] }"
   // To cleanup soft-deleted data older than a certain 'cutoff', specify: params: [<timestamp>]
   // If <timestamp> is set to 0, all soft-deleted records will be deleted
   cleanup: function(timestamp) {
