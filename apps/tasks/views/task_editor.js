@@ -102,6 +102,7 @@ Tasks.TaskEditorView = SC.View.extend(
   _computeTaskPosition: function(task) {
     var tasksList = Tasks.getPath('tasksController.arrangedObjects');
     var idx = tasksList.indexOf(task);
+    if(idx === -1) return null;
     var len = tasksList.get('length');
     var groupIndexes = tasksList.contentGroupIndexes(null, tasksList);
     var tasksCount = 0, groupsBeforeTaskCount = 0;
@@ -123,7 +124,8 @@ Tasks.TaskEditorView = SC.View.extend(
     // console.log('DEBUG: preEditing task: ' + task.get('name'));
     var editor = this.get('editor');
     var position = this._computeTaskPosition(task);
-    editor.setPath('positionLabel.value', position.current + "_of".loc() + position.total);
+    var positionLabel = position? (position.current + "_of".loc() + position.total) : '';
+    editor.setPath('positionLabel.value', positionLabel);
     editor.setPath('idLabel.value', "_Task".loc() + ' ' + task.get('displayId'));
     this._watches = CoreTasks.getTaskWatches(task);
     this._watching = CoreTasks.isCurrentUserWatchingTask(task);
@@ -180,6 +182,7 @@ Tasks.TaskEditorView = SC.View.extend(
       var description = CoreTasks.stripDescriptionPrefixes(editor.getPath('splitView.topLeftView.contentView.descriptionField.value'));
       task.setIfChanged('description', description);
     }
+    if(CoreTasks.get('needsSave')) Tasks.assignmentsController.computeTasks();
   },
   
   _statusDidChange: function() {

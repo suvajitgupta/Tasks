@@ -62,9 +62,7 @@ Tasks.TaskManagerState = Ki.State.extend({
     }
 
     // Create, select, and begin editing new task.
-    SC.RunLoop.begin();
     var task = CoreTasks.createRecord(CoreTasks.Task, taskHash);
-    SC.RunLoop.end();
     Tasks.tasksController.selectObject(task);
     Tasks.getPath('mainPage.taskEditor').popup(task);
 
