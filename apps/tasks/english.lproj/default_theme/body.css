@@ -178,12 +178,12 @@ body.sc-theme,
   background: static_url('images/project-description.png') no-repeat;
 }
 
-.sc-outline .count {
+.sc-view .sc-outline .count {
+  border: none !important;
 	font-style: normal !important;
 	font-weight: normal !important;
   height: 12px !important;
   line-height: 11px !important;
-  border: 1px solid #888 !important;
   padding: 1px 5px;
 }
 

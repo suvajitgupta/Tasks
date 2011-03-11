@@ -125,6 +125,7 @@
 .sc-list-view.projects-pane.focus .sc-collection-item.sel.hover,
 .sc-list-view.users-pane .sc-collection-item.sel,
 .sc-list-view.users-pane .sc-collection-item.sel.hover {
+  height: 22px !important;
   background: #6CF !important;
 }
 
@@ -162,6 +163,7 @@
 .projects-pane .sc-collection-item.sel label,
 .users-pane .sc-collection-item.sel label {
   color: #222;
+  margin-top: -8px !important;
 }
 
 .projects-pane .sc-view.sc-list-item-view.sc-collection-item .sc-outline label,
@@ -177,8 +179,12 @@
   margin-top: -9px !important;
 }
 
-.project-item .count {
-  margin-top: -9px !important;
+.projects-pane .sc-view .project-item .count,
+.projects-pane .sc-view .project-item.sel .count {
+  top: 11px !important;
+}
+
+.projects-pane .sc-view .project-item .count {
   right: 14px !important;
   background: #888 !important;
   color: white !important;

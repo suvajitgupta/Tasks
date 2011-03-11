@@ -315,7 +315,7 @@
   color: #C00 !important;
 }
 .task-item .sc-outline .count.doneEffortRangeWarning {
-  color: #F99 !important;
+  background-color: #F90 !important;
 }
 
 
@@ -379,7 +379,7 @@
 
 .task-item .count,
 .task-item.sel .sc-outline .count {
-  top: 5px !important;
+  top: 6px !important;
 	right: 14px !important;
 	background-color: #888;
 }
