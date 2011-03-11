@@ -27,7 +27,7 @@ Project Four @Done # Has 1 tasks
 
 
 #================================================================================
-Project One @Active # Has 4 tasks
+Project One {3d} @Active # Has 4 tasks
 | project description line1
 | project description line2
 #================================================================================
@@ -37,6 +37,8 @@ Project One @Active # Has 4 tasks
 | task description line2
 
 - A medium priority, active, bug submitted by an unknown user and assigned to Suvajit with unspecified effort [SG] $Bug @Active 
+
+- A completed task with a range effort which is highlighted on the badge {1-2d} <SG> [SG] $Bug @Done
 
 - A medium priority bug assigned to Suvajit, which was done in 3 days but failed validation {3d} [SG] $Bug @Done %Failed 
 
