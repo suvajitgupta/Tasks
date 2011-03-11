@@ -140,6 +140,7 @@ body.sc-theme,
 
 .sc-button-view.dark img {
   left: 1px;
+  top: -1px !important;
 }
 .sc-button-view.dark.active img,
 .sc-button-view.dark.disabled img {
