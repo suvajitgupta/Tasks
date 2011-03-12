@@ -98,15 +98,15 @@ Tasks.projectEditorPage = SC.Page.create({
     },
 
     contentView: SC.View.design({
-      childViews: 'nameLabel nameField statusLabel statusField timeLeftLabel timeLeftField timeLeftHelpLabel activatedAtLabel activatedAtField descriptionLabel descriptionField createdAtLabel updatedAtLabel closeButton'.w(),
+      childViews: 'nameLabel nameField statusLabel statusField activatedAtLabel activatedAtField timeLeftLabel timeLeftField timeLeftHelpLabel descriptionLabel descriptionField createdAtLabel updatedAtLabel closeButton'.w(),
 
       nameLabel: SC.LabelView.design({
-        layout: { top: 6, left: 10, height: 24, width: 60 },
+        layout: { top: 6, left: 10, height: 24, width: 65 },
         textAlign: SC.ALIGN_RIGHT,
         value: "_Name".loc()
       }),
       nameField: SC.TextFieldView.design({
-        layout: { top: 5, left: 75, right: 200, height: 24 },
+        layout: { top: 5, left: 80, right: 180, height: 24 },
         isEnabledBinding: 'CoreTasks.permissions.canUpdateProject'
       }),
 
@@ -126,33 +126,33 @@ Tasks.projectEditorPage = SC.Page.create({
         toolTip: "_StatusTooltip".loc()
       }),
 
-      timeLeftLabel: SC.LabelView.design({
-        layout: { top: 40, left: 10, height: 24, width: 60 },
-        textAlign: SC.ALIGN_RIGHT,
-        value: "_TimeLeft:".loc()
-      }),
-      timeLeftField: SC.TextFieldView.design({
-        layout: { top: 37, left: 75, width: 80, height: 24 },
-        isEnabledBinding: 'CoreTasks.permissions.canUpdateProject'
-      }),
-      timeLeftHelpLabel: SC.LabelView.design({
-        layout: { top: 45, left: 165, height: 20, width: 330 },
-        escapeHTML: NO,
-        classNames: [ 'onscreen-help'],
-        value: "_TimeLeftOnscreenHelp".loc()
-      }),
-
       activatedAtLabel: SC.LabelView.design({
-        layout: { top: 40, right: 113, height: 24, width: 100 },
+        layout: { top: 40, left: 10, height: 24, width: 65 },
         textAlign: SC.ALIGN_RIGHT,
         value: "_Activated:".loc()
       }),
       // TODO: [EG] allow SCUI.DatePickerView popup picker height to be adjustable, not hardcoded to 255
       activatedAtField: SCUI.DatePickerView.design({
-        layout: { top: 37, right: 10, height: 24, width: 100 },
+        layout: { top: 37, left: 80, height: 24, width: 100 },
         dateFormat: CoreTasks.DATE_FORMAT,
         hint: "_ChooseDate".loc(),
         isEnabledBinding: 'CoreTasks.permissions.canUpdateProject'
+      }),
+
+      timeLeftLabel: SC.LabelView.design({
+        layout: { top: 40, right: 246, height: 24, width: 60 },
+        textAlign: SC.ALIGN_RIGHT,
+        value: "_TimeLeft:".loc()
+      }),
+      timeLeftField: SC.TextFieldView.design({
+        layout: { top: 37, right: 180, width: 60, height: 24 },
+        isEnabledBinding: 'CoreTasks.permissions.canUpdateProject'
+      }),
+      timeLeftHelpLabel: SC.LabelView.design({
+        layout: { top: 39, right: 10, height: 30, width: 160 },
+        escapeHTML: NO,
+        classNames: [ 'onscreen-help'],
+        value: "_TimeLeftOnscreenHelp".loc()
       }),
 
       descriptionLabel: SC.LabelView.design({
