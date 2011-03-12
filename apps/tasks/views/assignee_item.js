@@ -66,7 +66,7 @@ Tasks.AssigneeItemView = Tasks.GroupItemView.extend(Tasks.LocalizedLabel,
       var leftEffort = content.get('displayEffort');
       if(leftEffort && leftEffort.match(/\?$/)) {
         assigneeTooltip += "_IncompleteEffortWarning".loc();
-        context.addClass('incompleteEffortWarning');
+        context.addClass('incomplete-total-effort-warning');
       }
       
       if (Tasks.assignmentsController.get('displayMode') === Tasks.DISPLAY_MODE_TEAM) {

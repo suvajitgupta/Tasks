@@ -327,7 +327,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
       }
       else {
         var countDown = this.get('displayCountDown');
-        if(countDown) ret += ('&nbsp;<span class="time">' + countDown + '</span>');
+        if(countDown) ret += ('&nbsp;<span class="count-down">' + countDown + '</span>');
       }
       
     }
@@ -336,7 +336,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
       if(developmentStatus !== CoreTasks.STATUS_PLANNED) ret += ' @' + developmentStatus.loc();
     }
     
-    if(format === 'HTML') ret += '&nbsp;<span class="total">';
+    if(format === 'HTML') ret += '&nbsp;<span class="tasks-count">';
     else ret += ' # ';
     ret += "_Has".loc() + tasksCount + "_tasks".loc();
     if(format === 'HTML') ret += '</span></h1>';

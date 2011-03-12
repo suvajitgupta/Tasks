@@ -287,7 +287,7 @@
 }
 
 .tasks-pane .assignee-item .sc-outline .count,
-.assignee-item.incompleteEffortWarning .sc-outline .count.finished {
+.assignee-item.incomplete-total-effort-warning .sc-outline .count.finished {
   top: -2px !important;
   font-size: 11px !important;
   width: 120px !important;
@@ -299,10 +299,11 @@
 .assignee-item .sc-outline .count {
   right: 4px !important;
   color: #333 !important;
+  padding: 1px 0px !important;
 }
 
 .tasks-pane .assignee-item .sc-outline .count.finished {
-  right: 135px !important;
+  right: 125px !important;
   color: #FFF !important;
 }
 
@@ -311,10 +312,10 @@
   margin-top: -1px !important;
 }
 
-.assignee-item.incompleteEffortWarning .sc-outline .count {
+.assignee-item.incomplete-total-effort-warning .sc-outline .count {
   color: #C00 !important;
 }
-.task-item .sc-outline .count.doneEffortRangeWarning {
+.task-item .sc-outline .count.done-effort-range-warning {
   background-color: #F90 !important;
 }
 

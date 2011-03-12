@@ -48,6 +48,8 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 'h1 {\n' +
 ' font-size: 20px;\n' +
 ' background-color: #CCC;\n' +
+' -moz-box-shadow: inset 0px 2px 2px #FFF;\n' +
+' -webkit-box-shadow: inset 0px 2px 2px #FFF;\n' +
 ' border: 1px solid #AAA;\n' +
 '}\n' +
 'h2 {\n' +
@@ -81,7 +83,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' padding: 5px ' + (SC.browser.msie? '60' : '68') + 'px;\n' +
 '}\n' +
 '.assignee {\n' +
-' border-bottom: 2px solid #555;\n' +
+' border-bottom: 1px solid #555;\n' +
 '}\n' +
 '.assignee-not-loaded {\n' +
 ' background-color: #AAA;\n' +
@@ -103,24 +105,35 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' -moz-box-shadow: inset 0px 2px 2px #FAA;\n' +
 ' -webkit-box-shadow: inset 0px 2px 2px #FAA;\n' +
 '}\n' +
-'.progress-bar {\n' +
-' margin-top: 4px !important;\n' +
-' position: absolute !important;\n' +
-' height: 8px !important;\n' +
-' right: 52% !important;\n' +
-' width: 100px !important;\n' +
-' border: 1px solid #555 !important;\n' +
-' background: #DDD;\n' +
-' background: -webkit-gradient(linear, center top, center bottom, from(#FFF), to(#AAA)) !important;\n' +
-' background: -moz-linear-gradient(center top , #FFF, #AAA) !important;\n' +
+'.progress-percent {\n' +
+' margin-top: -3px;\n' +
+' font-size: 10px;\n' +
+' text-align: center;\n' +
+'}\n' +
+'.progress-percent, .progress-bar {\n' +
+' position: absolute;\n' +
+' right: 50%;\n' +
+' width: 100px;\n' +
 '}\n' +
 '.progress-bar .progress-bar-inner {\n' +
-' position: absolute !important;\n' +
-' top: 0px !important;\n' +
-' bottom: 0px !important;\n' +
+' position: absolute;\n' +
+' top: 0px;\n' +
+' bottom: 0px;\n' +
+'}\n' +
+'.progress-bar {\n' +
+' margin-top: 10px;\n' +
+' height: 6px;\n' +
+' border: 1px solid #555;\n' +
+'}\n' +
+'.progress-bar-inner, .finished {\n' +
 ' background: #777;\n' +
-' background: -webkit-gradient(linear, center top, center bottom, from(#AAA), to(#333)) !important;\n' +
-' background: -moz-linear-gradient(center top , #AAA, #333) !important;\n' +
+' background: -webkit-gradient(linear, center top, center bottom, from(#AAA), to(#111));\n' +
+' background: -moz-linear-gradient(center top , #AAA, #111);\n' +
+'}\n' +
+'.progress-bar, .left {\n' +
+' background: #DDD;\n' +
+' background: -webkit-gradient(linear, center top, center bottom, from(#FFF), to(#AAA));\n' +
+' background: -moz-linear-gradient(center top , #FFF, #AAA);\n' +
 '}\n' +
 '.margin {\n' +
 ' border-right: 3px solid #FCC;\n' +
@@ -189,37 +202,53 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 '.failed {\n' +
 ' background-color: #F66;\n' +
 '}\n' +
-'.effort, .time, .total {\n' +
+'.tasks-count, .count-down, .finished, .left, .effort {\n' +
 ' position: absolute;\n' +
-' height: 12px;\n' +
 ' line-height: 12px;\n' +
-' margin-top: 3px;\n' +
+' letter-spacing: -1px;\n' +
 ' font-size: 11px;\n' +
 ' font-weight: normal;\n' +
+'}\n' +
+'.tasks-count, .count-down {\n' +
+' margin-top: 2px\n' +
+'}\n' +
+'.count-down, .effort {\n' +
+' color: white;\n' +
+' background-color: #888;\n' +
 ' padding: 1px 5px;\n' +
-' letter-spacing: -1px !important;\n' +
-' border: 1px solid #888 !important;\n' +
 ' -moz-border-radius: 7px;\n' +
 ' -webkit-border-radius: 7px;\n' +
 '}\n' +
-'.effort {\n' +
-' color: white;\n' +
-' background-color: #888;\n' +
+'.tasks-count {\n' +
+' right: 120px;\n' +
+' width: 100px;\n' +
+' text-align: center;\n' +
 '}\n' +
-'.time, .total {\n' +
-' color: #555;\n' +
-' margin-top: 1px;\n' +
-' background-color: #EEE;\n' +
-'}\n' +
-'.effort, .time {\n' +
+'.count-down, .left, .effort {\n' +
 ' right: 15px;\n' +
 '}\n' +
-'.total {\n' +
-' right: 225px;\n' +
+'.finished, .left {\n' +
+' margin-top: 1px;\n' +
+' width: 120px;\n' +
+' padding: 1px 0px;\n' +
+' text-align: center;\n' +
+' border: 1px solid #555;\n' +
 '}\n' +
-'.doneEffortRangeWarning, .incompleteEffortWarning {\n' +
-' background-color: #FC0 !important;\n' +
-' color: #555 !important;\n' +
+'.finished {\n' +
+' right: 136px;\n' +
+' color: #FFF;\n' +
+'}\n' +
+'.left {\n' +
+' color: #333;\n' +
+'}\n' +
+'.incomplete-total-effort-warning {\n' +
+' color: #C00 !important;\n' +
+'}\n' +
+'.done-effort-range-warning {\n' +
+' background-color: #F90 !important;\n' +
+'}\n' +
+'.effort {\n' +
+' margin-top: 5px;\n' +
 '}\n' +
 '</style>\n' +
 '</head>\n';
@@ -338,7 +367,7 @@ Tasks.exportDataController = SC.ObjectController.create(
    */
   _exportDisplayedData: function(format) {
     
-    var ret = '', incompleteEffortWarning;
+    var ret = '', incompleteTotalEffort;
     var tasksTree = Tasks.tasksController.get('content');
     var assignmentNodes = tasksTree.get('treeItemChildren');
     var assigneesCount = assignmentNodes.get('length');
@@ -360,15 +389,17 @@ Tasks.exportDataController = SC.ObjectController.create(
       ret += assignmentNode.get('displayName').loc();
       if(format === 'HTML') {
         var finishedTasksCount = assignmentNode.get('finishedTasksCount');
+        var leftTasksCount = assignmentNode.get('leftTasksCount');
         if(finishedTasksCount > 0) {
-          var percentComplete = Math.round(100*finishedTasksCount/tasksCount);
+          var percentComplete = Math.round(100*finishedTasksCount/(finishedTasksCount+leftTasksCount));
+          ret += '&nbsp;<span class="progress-percent">' + percentComplete + '%</span>';
           ret += '&nbsp;<span class="progress-bar"><span class="progress-bar-inner" style="width:' + percentComplete + 'px"></span></span>';
+          var finishedEffort = assignmentNode.get('finishedEffort');
+          ret += '&nbsp;<span class="finished">' + finishedEffort + '</span>';
         }
-        var finishedEffort = assignmentNode.get('finishedEffort');
-        if(finishedEffort) ret += '&nbsp;<span class="total">' + finishedEffort + '</span>';
         var leftEffort = assignmentNode.get('displayEffort');
-        incompleteEffortWarning = (leftEffort.match(/\?$/) !== null);
-        if(leftEffort) ret += '&nbsp;<span class="time' + (incompleteEffortWarning? ' incompleteEffortWarning' : '') + '">' + leftEffort + '</span>';
+        incompleteTotalEffort = (leftEffort.match(/\?$/) !== null);
+        if(leftEffort) ret += '&nbsp;<span class="left' + (incompleteTotalEffort? ' incomplete-total-effort-warning' : '') + '">' + leftEffort + '</span>';
         ret += '</h2>';
       }
       else ret += ' # ' + "_Has".loc() + tasksCount + "_tasks".loc();
