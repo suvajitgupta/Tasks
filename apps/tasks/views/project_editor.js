@@ -131,7 +131,6 @@ Tasks.projectEditorPage = SC.Page.create({
         textAlign: SC.ALIGN_RIGHT,
         value: "_Activated:".loc()
       }),
-      // TODO: [EG] allow SCUI.DatePickerView popup picker height to be adjustable, not hardcoded to 255
       activatedAtField: SCUI.DatePickerView.design({
         layout: { top: 37, left: 80, height: 24, width: 100 },
         dateFormat: CoreTasks.DATE_FORMAT,

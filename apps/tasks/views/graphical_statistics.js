@@ -42,7 +42,6 @@ Tasks.graphicalStatisticsView = SC.View.create({
   teamStatistics: SC.View.design({
     childViews: 'loadingStatisticsChart'.w(),
     isVisible: NO,
-    // TODO: [SG] use pie chart to show assignee loading distribution
     loadingStatisticsChart: Sai.BarChartView.design({
       dataAttrs: { horizontal: YES, barWidth: 20, colors: ['gray', 'green', 'blue', 'red'] } 
     })

@@ -128,7 +128,7 @@ SCUI.ContextMenuPane = SCUI.ContextMenuPane.extend({
 });
 
 // CHANGED: [EG] remove hack for SCUI ComboBoxView using an SC.ButtonView since it doesn't fit unless all SC styles are overridden
-SCUI.ComboBoxView.prototype.dropDownButtonView = SC.View.extend( SCUI.SimpleButton, {
+SCUI.ComboBoxView.prototype.dropDownButtonView = SC.View.extend(SCUI.SimpleButton, {
   classNames: 'scui-combobox-dropdown-button-view',
   layout: { top: 0, right: 0, height: 24, width: 28 }
 });
