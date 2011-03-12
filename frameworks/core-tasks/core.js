@@ -717,6 +717,116 @@ CoreTasks = SC.Object.create({
     return time;
   },
   
+  isLeapYear: function(year) {
+    return (year%4 === 0 && year%100 !== 0) || year%400 === 0;
+  },
+  
+  /**
+   * Compute weekdays between two dates (inverse of function below).
+   *
+   * @param {SC.DateTime} start date.
+   * @param {SC.DateTime} end date.
+   * @returns {Integer} days between the two dates.
+   */
+  computeWeekdaysDelta: function(startDate, endDate) {
+    
+    // console.log('>>>>>> DEBUG: startDate: ' + startDate.toFormattedString(CoreTasks.DATE_FORMAT) + ', endDate: ' + endDate.toFormattedString(CoreTasks.DATE_FORMAT));
+    var startDateYear = startDate.get('year');
+    var endDateYear = endDate.get('year');
+    if(startDateYear > endDateYear) return 0;
+    
+    var startDateDayOfYear = startDate.get('dayOfYear');
+    var startDateDayOfWeek = startDate.get('dayOfWeek');
+    // console.log('DEBUG: startDateDayOfYear: ' + startDateDayOfYear + ', startDateDayOfWeek: ' + startDateDayOfWeek);
+    if(startDateDayOfWeek === 0 || startDateDayOfWeek === 6) { // if weekend day go to next Monday
+      var startDateAdjustment = startDateDayOfWeek === 0? 1 : 2;
+      startDateDayOfYear += startDateAdjustment;
+      var startDateDaysInYear = startDate.get('isLeapYear')? 366 : 365;
+      if(startDateDayOfYear > startDateDaysInYear) {
+        // as you go to next Monday for Saturday/Sunday startDate handle spilling into new year
+        startDate = startDate.advance({ day: startDateAdjustment });
+        // console.log('DEBUG: adjusted startDate: ' + startDate.toFormattedString(CoreTasks.DATE_FORMAT));
+        startDateDayOfYear = startDate.get('dayOfYear');
+        startDateYear++;
+      }
+      startDateDayOfWeek = 1;
+      // console.log('DEBUG: revised startDateDayOfYear: ' + startDateDayOfYear + ', startDateDayOfWeek: ' + startDateDayOfWeek);
+    }
+    var endDateDayOfYear = endDate.get('dayOfYear');
+    var endDateDayOfWeek = endDate.get('dayOfWeek');
+    // console.log('DEBUG: endDateDayOfYear: ' + endDateDayOfYear + ', endDateDayOfWeek: ' + endDateDayOfWeek);
+    if(endDateDayOfWeek < 2) { // if Sunday or Monday go back to last Saturday
+      var endDateAdjustment = endDateDayOfWeek === 0? 1 : 2;
+      endDateDayOfYear -= endDateAdjustment;
+      if(endDateDayOfYear < 1) {
+        // as you go to last Saturday for Sunday/Monday startDate handle spilling into last year
+        endDate = endDate.advance({ day: -startDateAdjustment });
+        // console.log('DEBUG: adjusted endDate: ' + endDate.toFormattedString(CoreTasks.DATE_FORMAT));
+        endDateDayOfYear = endDate.get('dayOfYear');
+        endDateYear--;
+      }
+      endDateDayOfWeek = 6;
+      // console.log('DEBUG: revised endDateDayOfYear: ' + endDateDayOfYear + ', endDateDayOfWeek: ' + endDateDayOfWeek);
+    }
+    
+    if(startDateYear > endDateYear) return 0;
+    else if(startDateYear === endDateYear) {
+      var daysDelta = endDateDayOfYear - startDateDayOfYear;
+      if(daysDelta < 0) daysDelta = 0;
+      var weeksDelta = Math.floor(daysDelta/7);
+      var weekendDays = weeksDelta*2;
+      if(startDateDayOfWeek > endDateDayOfWeek) weekendDays += 2; // another weekend is in the mix
+      // console.log('DEBUG: daysDelta: ' + daysDelta + ', weeksDelta: ' + weeksDelta + ', weekendDays: ' + weekendDays);
+      if(daysDelta > 2 && weekendDays > 0) {
+        daysDelta -= weekendDays;
+        // console.log('DEBUG: revised daysDelta: ' + daysDelta);
+      }
+    }
+    else { // start and end dates are on different years
+      var lastDayOfStartDateYear = SC.DateTime.parse("12/31/" + startDateYear, CoreTasks.DATE_FORMAT);
+      var daysInStartDateYear = CoreTasks.computeWeekdaysDelta(startDate, lastDayOfStartDateYear);
+      var lastDayOfStartDateYearDayOfWeek = lastDayOfStartDateYear.get('dayOfWeek');
+      if(lastDayOfStartDateYearDayOfWeek > 0 && lastDayOfStartDateYearDayOfWeek < 6) daysInStartDateYear++; // add in last day since it is weekday
+      var daysInEndDateYear = CoreTasks.computeWeekdaysDelta(SC.DateTime.parse("1/1/" + endDateYear, CoreTasks.DATE_FORMAT), endDate);
+      // console.log('DEBUG: daysInStartDateYear: ' + daysInStartDateYear + ', daysInEndDateYear: ' + daysInEndDateYear);
+      daysDelta = daysInStartDateYear + daysInEndDateYear;
+      // console.log('DEBUG: daysDelta: ' + daysDelta);
+      if(endDateYear - startDateYear > 1) { // more than 1 full year in the middle
+        for(var year = startDateYear + 1; year < endDateYear; year++) {
+          daysDelta += (CoreTasks.isLeapYear(year)? 366 : 365);
+        }
+        // console.log('DEBUG: revised daysDelta: ' + daysDelta);
+      }
+    }
+    
+    // console.log('<<<<<< DEBUG: returning daysDelta: ' + daysDelta);
+    return daysDelta;
+    
+  },
+
+  /**
+   * Compute end date given a start date and number of weekdays after (inverse of function above).
+   *
+   * @param {SC.DateTime} start date.
+   * @param {Integer} weekdays available.
+   * @returns {SC.DateTime} end date.
+   */
+  computeEndDate: function(startDate, weekdays) {
+    
+    // console.log('DEBUG: startDate: ' + startDate.toFormattedString(CoreTasks.DATE_FORMAT) + ', weekdays: ' + weekdays);
+    var endDate = startDate;
+    for(var i = 0; i < weekdays; i++) {
+      endDate = endDate.advance({ day: 1 });
+      var endDateDayOfWeek = endDate.get('dayOfWeek');
+      if(endDateDayOfWeek === 0) endDate = endDate.advance({ day: 1 });
+      else if(endDateDayOfWeek === 6) endDate = endDate.advance({ day: 2 });
+    }
+
+    // console.log('DEBUG: endDate: ' + endDate.toFormattedString(CoreTasks.DATE_FORMAT));
+    return endDate;
+    
+  },
+
   /**
    * Strip '| ' prefixes to descriptions
    * (helps if description is pasted in from exported data).

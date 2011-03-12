@@ -172,6 +172,7 @@ v Enable/disable "Delete Project" button based on having a selected project [SG]
 
 - Add double-click in-cell Project editing and parse/extract attributes if specified [SG] $Feature @Done %Passed
 ^ Add popup viewer/editor for Project attributes [SG] $Feature @Done %Passed
+^ Support Project "Time Left" or "Stopped At" entry via editor - these are mutually dependent [SG] $Feature @Done %Passed
 - Disallow Project names that are already in use or reserved (System Project name) [SG] $Feature @Done %Passed
 
 

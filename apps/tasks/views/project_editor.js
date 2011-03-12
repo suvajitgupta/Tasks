@@ -41,6 +41,7 @@ Tasks.projectEditorPage = SC.Page.create({
     layout: { centerX:0, centerY: 0, width: 700, height: 315 },
 
     _preEditing: function() {
+      this.set('_modifying', true); // to prevent timeLeftDidChange and stoppedAtDidChange below from doing anything
       var project = this.get('project');
       // console.log('DEBUG: preEditing project: ' + project.get('name'));
       this.set('title', "_Project".loc() + ' ' + project.get('displayId'));
@@ -50,11 +51,13 @@ Tasks.projectEditorPage = SC.Page.create({
         this.invokeLater(function() { Tasks.getPath('projectEditorPage.panel.contentView.nameField').becomeFirstResponder(); }, 400);
       }
       editor.setPath('statusField.value', project.get('developmentStatusValue'));
-      editor.setPath('timeLeftField.value', project.get('timeLeftValue'));
       editor.setPath('activatedAtField.date', project.get('activatedAtValue'));
+      editor.setPath('timeLeftField.value', project.get('timeLeftValue'));
       editor.setPath('descriptionField.value', project.get('description'));
       editor.setPath('createdAtLabel.value', project.get('displayCreatedAt'));
       editor.setPath('updatedAtLabel.value', project.get('displayUpdatedAt'));
+      this.set('_modifying', false); // timeLeftDidChange and stoppedAtDidChange are active
+      this._timeLeftDidChange(); // to set stoppedAt field
     },
 
     _postEditing: function() {
@@ -67,10 +70,10 @@ Tasks.projectEditorPage = SC.Page.create({
       }
       else {
         project.setIfChanged('developmentStatusValue', editor.getPath('statusField.value'));
+        project.setIfChanged('activatedAtValue', editor.getPath('activatedAtField.date'));
         var oldTimeLeft = project.get('timeLeftValue');
         project.setIfChanged('timeLeftValue', editor.getPath('timeLeftField.value'));
         var oldActivatedAt = project.get('activatedAtValue');
-        project.setIfChanged('activatedAtValue', editor.getPath('activatedAtField.date'));
         project.setIfChanged('displayName', editor.getPath('nameField.value'));
         var description = CoreTasks.stripDescriptionPrefixes(editor.getPath('descriptionField.value'));
         project.setIfChanged('description',  description);
@@ -81,6 +84,42 @@ Tasks.projectEditorPage = SC.Page.create({
         }
       }
     },
+    
+    _timeLeftDidChange: function() {
+      if(this.get('_modifying')) return;
+      var timeLeft = this.getPath('contentView.timeLeftField.value');
+      // console.log('DEBUG: _timeLeftDidChange to ' + (timeLeft? timeLeft : 'None'));
+      var endDate = null;
+      if(!SC.empty(timeLeft) && timeLeft.match(/\d/)) {
+        timeLeft = Math.ceil(CoreTasks.convertTimeToDays(timeLeft));
+        var activatedAt = this.getPath('contentView.activatedAtField.date');
+        // console.log('DEBUG: _timeLeftDidChange activatedAt ' + (activatedAt? activatedAt.toFormattedString(CoreTasks.DATE_FORMAT) : 'None'));
+        if(activatedAt) {
+          var endDate = CoreTasks.computeEndDate(activatedAt, timeLeft);
+          // console.log('DEBUG: _timeLeftDidChange endDate ' + endDate.toFormattedString(CoreTasks.DATE_FORMAT));
+        }
+      }
+      this.set('_modifying', true); // prevent _stoppedAtDidChange from doing anything
+      this.setPath('contentView.stoppedAtField.date', endDate);
+      this.set('_modifying', false); // _stoppedAtDidChange is active
+    }.observes('.contentView.timeLeftField*value', '.contentView.activatedAtField*date'),
+
+    _stoppedAtDidChange: function() {
+      if(this.get('_modifying')) return;
+      var stoppedAt = this.getPath('contentView.stoppedAtField.date');
+      // console.log('DEBUG: _stoppedAtDidChange to ' + (stoppedAt? stoppedAt.toFormattedString(CoreTasks.DATE_FORMAT) : 'None'));
+      if(stoppedAt) {
+        var activatedAt = this.getPath('contentView.activatedAtField.date');
+        // console.log('DEBUG: _stoppedAtDidChange activatedAt ' + (activatedAt? activatedAt.toFormattedString(CoreTasks.DATE_FORMAT) : 'None'));
+        if(activatedAt) {
+          var timeLeft = '' + CoreTasks.computeWeekdaysDelta(activatedAt, stoppedAt);
+          // console.log('DEBUG: _stoppedAtDidChange timeLeft=' + timeLeft);
+          this.set('_modifying', true); // prevent timeLeftDidChange from doing anything
+          this.setPath('contentView.timeLeftField.value', timeLeft);
+          this.set('_modifying', false); // timeLeftDidChange is active
+        }
+      }
+    }.observes('.contentView.stoppedAtField*date'),
 
     popup: function(project) {
       Tasks.statechart.sendEvent('showProjectEditor');
@@ -98,7 +137,7 @@ Tasks.projectEditorPage = SC.Page.create({
     },
 
     contentView: SC.View.design({
-      childViews: 'nameLabel nameField statusLabel statusField activatedAtLabel activatedAtField timeLeftLabel timeLeftField timeLeftHelpLabel descriptionLabel descriptionField createdAtLabel updatedAtLabel closeButton'.w(),
+      childViews: 'nameLabel nameField statusLabel statusField activatedAtLabel activatedAtField timeLeftLabel timeLeftField timeLeftHelpLabel stoppedAtLabel stoppedAtField descriptionLabel descriptionField createdAtLabel updatedAtLabel closeButton'.w(),
 
       nameLabel: SC.LabelView.design({
         layout: { top: 6, left: 10, height: 24, width: 65 },
@@ -131,10 +170,11 @@ Tasks.projectEditorPage = SC.Page.create({
         textAlign: SC.ALIGN_RIGHT,
         value: "_Activated:".loc()
       }),
-      activatedAtField: SCUI.DatePickerView.design({
+      activatedAtField: SCUI.DatePickerView.design(SCUI.ToolTip, {
         layout: { top: 37, left: 80, height: 24, width: 100 },
         dateFormat: CoreTasks.DATE_FORMAT,
         hint: "_ChooseDate".loc(),
+        toolTip: "_ActivatedAtTooltip".loc(),
         isEnabledBinding: 'CoreTasks.permissions.canUpdateProject'
       }),
 
@@ -148,10 +188,23 @@ Tasks.projectEditorPage = SC.Page.create({
         isEnabledBinding: 'CoreTasks.permissions.canUpdateProject'
       }),
       timeLeftHelpLabel: SC.LabelView.design({
-        layout: { top: 39, right: 180, height: 30, width: 160 },
+        layout: { top: 37, right: 180, height: 30, width: 160 },
         escapeHTML: NO,
         classNames: [ 'onscreen-help'],
         value: "_TimeLeftOnscreenHelp".loc()
+      }),
+
+      stoppedAtLabel: SC.LabelView.design({
+        layout: { top: 40, right: 113, height: 24, width: 75 },
+        textAlign: SC.ALIGN_RIGHT,
+        value: "_Stopped:".loc()
+      }),
+      stoppedAtField: SCUI.DatePickerView.design(SCUI.ToolTip, {
+        layout: { top: 37, right: 10, height: 24, width: 100 },
+        dateFormat: CoreTasks.DATE_FORMAT,
+        hint: "_ChooseDate".loc(),
+        toolTip: "_StoppedTooltip".loc(),
+        isEnabledBinding: 'CoreTasks.permissions.canUpdateProject'
       }),
 
       descriptionLabel: SC.LabelView.design({
