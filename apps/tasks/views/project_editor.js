@@ -139,16 +139,16 @@ Tasks.projectEditorPage = SC.Page.create({
       }),
 
       timeLeftLabel: SC.LabelView.design({
-        layout: { top: 40, right: 246, height: 24, width: 60 },
+        layout: { top: 40, right: 416, height: 24, width: 60 },
         textAlign: SC.ALIGN_RIGHT,
         value: "_TimeLeft:".loc()
       }),
       timeLeftField: SC.TextFieldView.design({
-        layout: { top: 37, right: 180, width: 60, height: 24 },
+        layout: { top: 37, right: 350, width: 60, height: 24 },
         isEnabledBinding: 'CoreTasks.permissions.canUpdateProject'
       }),
       timeLeftHelpLabel: SC.LabelView.design({
-        layout: { top: 39, right: 10, height: 30, width: 160 },
+        layout: { top: 39, right: 180, height: 30, width: 160 },
         escapeHTML: NO,
         classNames: [ 'onscreen-help'],
         value: "_TimeLeftOnscreenHelp".loc()
