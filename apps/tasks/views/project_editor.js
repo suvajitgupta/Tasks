@@ -57,7 +57,7 @@ Tasks.projectEditorPage = SC.Page.create({
       editor.setPath('createdAtLabel.value', project.get('displayCreatedAt'));
       editor.setPath('updatedAtLabel.value', project.get('displayUpdatedAt'));
       this.set('_modifying', false); // timeLeftDidChange and stoppedAtDidChange are active
-      this._timeLeftDidChange(); // to set stoppedAt field
+      this._timeLeftOrActivatedAtDidChange(); // to set stoppedAt field
     },
 
     _postEditing: function() {
@@ -85,18 +85,18 @@ Tasks.projectEditorPage = SC.Page.create({
       }
     },
     
-    _timeLeftDidChange: function() {
+    _timeLeftOrActivatedAtDidChange: function() {
       if(this.get('_modifying')) return;
       var timeLeft = this.getPath('contentView.timeLeftField.value');
-      // console.log('DEBUG: _timeLeftDidChange to ' + (timeLeft? timeLeft : 'None'));
+      // console.log('DEBUG: _timeLeftOrActivatedAtDidChange to ' + (timeLeft? timeLeft : 'None'));
       var endDate = null;
       if(!SC.empty(timeLeft) && timeLeft.match(/\d/)) {
         timeLeft = Math.ceil(CoreTasks.convertTimeToDays(timeLeft));
         var activatedAt = this.getPath('contentView.activatedAtField.date');
-        // console.log('DEBUG: _timeLeftDidChange activatedAt ' + (activatedAt? activatedAt.toFormattedString(CoreTasks.DATE_FORMAT) : 'None'));
+        // console.log('DEBUG: _timeLeftOrActivatedAtDidChange activatedAt ' + (activatedAt? activatedAt.toFormattedString(CoreTasks.DATE_FORMAT) : 'None'));
         if(activatedAt) {
           var endDate = CoreTasks.computeEndDate(activatedAt, timeLeft);
-          // console.log('DEBUG: _timeLeftDidChange endDate ' + endDate.toFormattedString(CoreTasks.DATE_FORMAT));
+          // console.log('DEBUG: _timeLeftOrActivatedAtDidChange endDate ' + endDate.toFormattedString(CoreTasks.DATE_FORMAT));
         }
       }
       this.set('_modifying', true); // prevent _stoppedAtDidChange from doing anything
