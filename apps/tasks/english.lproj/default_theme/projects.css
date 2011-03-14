@@ -18,9 +18,9 @@
   -webkit-border-radius: 4px !important;
   border: 1px solid #000 !important;
   background: #2E2E2E !important;
-  box-shadow: inset 0 3px 8px rgba(0,0,0,.6), 0 1px 0 rgba(255,255,255,.4) !important;
-  -moz-box-shadow: inset 0 3px 8px rgba(0,0,0,.6), 0 1px 0 rgba(255,255,255,.4) !important;
-  -webkit-box-shadow: inset 0 3px 8px rgba(0,0,0,.6), 0 1px 0 rgba(255,255,255,.4) !important;
+  box-shadow: inset 0 3px 8px rgba(0,0,0,.6), 0 0 2px rgba(255,255,255,.4) !important;
+  -moz-box-shadow: inset 0 3px 8px rgba(0,0,0,.6), 0 0 2px  rgba(255,255,255,.4) !important;
+  -webkit-box-shadow: inset 0 3px 8px rgba(0,0,0,.6), 0 0 2px  rgba(255,255,255,.4) !important;
 }
 
 .projects-pane .sc-view.sc-container-view,
@@ -45,6 +45,7 @@
 .users-pane .sc-collection-item,
 .users-pane .sc-collection-item .sc-outline {
   left: 24px !important;
+  border-radius: 3px !important;
   -moz-border-radius: 3px !important;
   -webkit-border-radius: 3px !important;
 }
@@ -72,9 +73,9 @@
   left: 0px !important;
   right: 1px !important;
   background-color: #393939;
-  box-shadow: inset 0 3px 8px rgba(150,150,150,.6), 0 1px 0 rgba(0,0,0,.4);
-  -moz-box-shadow: inset 0 3px 8px rgba(150,150,150,.6), 0 1px 0 rgba(0,0,0,.4);
-  -webkit-box-shadow: inset 0 3px 8px rgba(150,150,150,.6), 0 1px 0 rgba(0,0,0,.4);
+  box-shadow: inset 2px 2px 4px rgba(150,150,150,.6);
+  -moz-box-shadow: inset 2px 2px 4px rgba(150,150,150,.6);
+  -webkit-box-shadow: inset 2px 2px 4px rgba(150,150,150,.6);
 }
 
 .projects-pane .sc-view.sc-list-item-view.sc-collection-item.sc-group-item .sc-outline label,
@@ -333,6 +334,7 @@
 .scui-datepicker-today,
 .scui-datepicker-none {
   border: 1px solid #ccc;
+  border-radius: 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   font-size: 11px;

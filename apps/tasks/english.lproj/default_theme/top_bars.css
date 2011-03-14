@@ -60,6 +60,7 @@
   color: #111 !important;
   background: #1EAFFB none repeat scroll 0 0 !important;
 	padding: 1px 6px !important;
+  border-radius: 15px;
   -moz-border-radius: 15px;
   -webkit-border-radius: 15px;
 }
@@ -124,6 +125,7 @@
 }
 .welcome-message:hover {
   border: 1px solid #222;
+  border-radius: 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   background: #555;

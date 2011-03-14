@@ -27,6 +27,7 @@
 
 .sc-master-detail-view .sc-workspace-view .task-editor {
   background: #DDD !important;
+  border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
 }
@@ -52,8 +53,10 @@
 .previous-icon, .next-icon, .back-icon {
 	background-color: #CCC !important;
   border: 1px solid #777 !important;
+  border-radius: 6px;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
+  box-shadow: 0 1px 1px #222;
   -moz-box-shadow: 0 1px 1px #222;
   -webkit-box-shadow: 0 1px 1px #222;
 }
@@ -63,6 +66,7 @@
 .previous-icon.active, .next-icon.active, .back-icon.active {
 	background-color: #999 !important;
   border: 1px solid #333 !important;
+  box-shadow: 0 1px 1px #444 inset;
   -moz-box-shadow: 0 1px 1px #444 inset;
   -webkit-box-shadow: 0 1px 1px #444 inset;
 }
@@ -121,8 +125,10 @@
   margin: 20px 0px 10px 0px !important;
   padding: 2px 5px !important;
   border: 1px solid #AAA !important;
+  border-radius: 6px;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
+  box-shadow: 0 1px 3px #222;
   -moz-box-shadow: 0 1px 3px #222;
   -webkit-box-shadow: 0 1px 3px #222;
   white-space: pre-wrap;
@@ -221,24 +227,28 @@
 .sc-master-detail-view .sc-workspace-view .task-editor .title-bar,
 .assignee-not-loaded {
   background: #AAA none repeat scroll 0 0 !important;
+  box-shadow: inset 0px 2px 2px #DDD;
   -moz-box-shadow: inset 0px 2px 2px #DDD;
   -webkit-box-shadow: inset 0px 2px 2px #DDD;
 }
 
 .assignee-under-loaded {
   background: #0C0 none repeat scroll 0 0 !important;
+  box-shadow: inset 0px 2px 2px #9F9;
   -moz-box-shadow: inset 0px 2px 2px #9F9;
   -webkit-box-shadow: inset 0px 2px 2px #9F9;
 }
 
 .assignee-properly-loaded {
   background: #69F none repeat scroll 0 0 !important;
+  box-shadow: inset 0px 2px 2px #9FF;
   -moz-box-shadow: inset 0px 2px 2px #9FF;
   -webkit-box-shadow: inset 0px 2px 2px #9FF;
 }
 
 .assignee-overloaded {
   background: #F66 none repeat scroll 0 0 !important;
+  box-shadow: inset 0px 2px 2px #FAA;
   -moz-box-shadow: inset 0px 2px 2px #FAA;
   -webkit-box-shadow: inset 0px 2px 2px #FAA;
 }
@@ -292,6 +302,7 @@
   font-size: 11px !important;
   width: 120px !important;
   border: 1px solid #555 !important;
+  border-radius: 2px !important;
   -moz-border-radius: 2px !important;
   -webkit-border-radius: 2px !important;
 }
@@ -465,6 +476,7 @@
   color: black;
   padding: 1px 3px;
   text-shadow: none !important;
+  border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
 }
@@ -487,6 +499,7 @@
   background-color: #FF6 !important;
   padding: 1px 0px !important;
   border: 1px solid #BBB !important;
+  border-radius: 3px !important;
   -moz-border-radius: 3px !important;
   -webkit-border-radius: 3px !important;
 }

@@ -37,6 +37,7 @@
 .sc-view.sc-label-view.active {
   border: 1px solid #555 !important;
   background-color: #AAA;
+  border-radius: 15px !important;
   -moz-border-radius: 15px !important;
   -webkit-border-radius: 15px !important;
 }

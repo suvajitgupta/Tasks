@@ -48,6 +48,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 'h1 {\n' +
 ' font-size: 20px;\n' +
 ' background-color: #CCC;\n' +
+' box-shadow: inset 0px 2px 2px #FFF;\n' +
 ' -moz-box-shadow: inset 0px 2px 2px #FFF;\n' +
 ' -webkit-box-shadow: inset 0px 2px 2px #FFF;\n' +
 ' border: 1px solid #AAA;\n' +
@@ -87,21 +88,25 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 '}\n' +
 '.assignee-not-loaded {\n' +
 ' background-color: #AAA;\n' +
+' box-shadow: inset 0px 2px 2px #DDD;\n' +
 ' -moz-box-shadow: inset 0px 2px 2px #DDD;\n' +
 ' -webkit-box-shadow: inset 0px 2px 2px #DDD;\n' +
 '}\n' +
 '.assignee-under-loaded {\n' +
 ' background-color: #0C0;\n' +
+' box-shadow: inset 0px 2px 2px #9F9;\n' +
 ' -moz-box-shadow: inset 0px 2px 2px #9F9;\n' +
 ' -webkit-box-shadow: inset 0px 2px 2px #9F9;\n' +
 '}\n' +
 '.assignee-properly-loaded {\n' +
 ' background-color: #69F;\n' +
+' box-shadow: inset 0px 2px 2px #9FF;\n' +
 ' -moz-box-shadow: inset 0px 2px 2px #9FF;\n' +
 ' -webkit-box-shadow: inset 0px 2px 2px #9FF;\n' +
 '}\n' +
 '.assignee-overloaded {\n' +
 ' background-color: #F66;\n' +
+' box-shadow: inset 0px 2px 2px #FAA;\n' +
 ' -moz-box-shadow: inset 0px 2px 2px #FAA;\n' +
 ' -webkit-box-shadow: inset 0px 2px 2px #FAA;\n' +
 '}\n' +
@@ -154,6 +159,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' margin: 0px 1px;\n' +
 ' border: 1px solid #AAA;\n' +
 ' line-height: 10px;\n' +
+' border-radius: 15px;\n' +
 ' -moz-border-radius: 15px;\n' +
 ' -webkit-border-radius: 15px;\n' +
 '}\n' +
@@ -193,6 +199,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 '.untested, .passed, .failed {\n' +
 ' color: black;\n' +
 ' padding: 1px 3px;\n' +
+' border-radius: 3px;\n' +
 ' -moz-border-radius: 3px;\n' +
 ' -webkit-border-radius: 3px;\n' +
 '}\n' +
@@ -216,6 +223,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' color: white;\n' +
 ' background-color: #888;\n' +
 ' padding: 1px 5px;\n' +
+' border-radius: 7px;\n' +
 ' -moz-border-radius: 7px;\n' +
 ' -webkit-border-radius: 7px;\n' +
 '}\n' +
