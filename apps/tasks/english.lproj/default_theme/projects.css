@@ -245,10 +245,9 @@
   opacity: 0.5;
 }
 
-.calendar > div,
-.scui-datepicker-today,
-.scui-datepicker-none {
+.calendar > div, .scui-datepicker-today, .scui-datepicker-none {
   text-align: center;
+  bottom: 10px !important;
 }
 
 .calendar .body {
@@ -320,28 +319,11 @@
   background: #fff;
 }
 
-.calendar .grid .day.today,
-.scui-datepicker-today {
-  color: #000 !important;
-  background: #0C0 !important;
+.calendar .grid .day.today, .scui-datepicker-today {
+  color: blue !important;
+  font-weight: bold !important;
 }
 
 .calendar .grid .day.sel {
-  color: #222 !important;
   background: #99CCFF !important;
-}
-
-.scui-datepicker-today,
-.scui-datepicker-none {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  font-size: 11px;
-  line-height: 18px;
-}
-
-.scui-datepicker-none {
-  color: white !important;
-  background-color: #666;
 }

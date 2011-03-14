@@ -50,7 +50,7 @@
   background-image: static_url('images/black-arrow-right.png') !important;
 }
 
-.previous-icon, .next-icon, .back-icon {
+.previous-icon, .next-icon, .back-icon, .scui-datepicker-today, .scui-datepicker-none {
 	background-color: #CCC !important;
   border: 1px solid #777 !important;
   border-radius: 6px;
@@ -60,10 +60,10 @@
   -moz-box-shadow: 0 1px 1px #222;
   -webkit-box-shadow: 0 1px 1px #222;
 }
-.previous-icon:hover, .next-icon:hover, .back-icon:hover {
+.previous-icon:hover, .next-icon:hover, .back-icon:hover, .scui-datepicker-today:hover, .scui-datepicker-none:hover {
   border: 1px solid #222 !important;
 }
-.previous-icon.active, .next-icon.active, .back-icon.active {
+.previous-icon.active, .next-icon.active, .back-icon.active, .scui-datepicker-today.active, .scui-datepicker-none.active {
 	background-color: #999 !important;
   border: 1px solid #333 !important;
   box-shadow: 0 1px 1px #444 inset;
