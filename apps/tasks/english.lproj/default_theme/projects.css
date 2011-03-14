@@ -278,8 +278,11 @@
 
 .calendar .month {
   font-weight: bold;
-  line-height: 20px;
-  background: #aaa;
+  line-height: 24px;
+  background: #888;
+  text-align: left !important;
+  padding-left: 10px;
+  text-transform: uppercase;
 }
 
 .calendar .previous,
@@ -291,7 +294,7 @@
 }
 
 .calendar .previous {
-  left: 10px !important;
+  right: 43px !important;
   background: static_url('images/black-arrow-left.png') no-repeat 0 0;
 }
 
