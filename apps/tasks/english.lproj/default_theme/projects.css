@@ -250,6 +250,10 @@
   bottom: 10px !important;
 }
 
+.calendar .grid .day:hover {
+  border: 1px solid #000 !important;
+}
+
 .calendar .body {
   padding-top: 14px;
   padding-left: 12px;
