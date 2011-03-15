@@ -508,6 +508,7 @@
 }
 
 .task-item .highlight.description-icon {
+  padding: 1px 0px !important;
 }
 
 .task-description {
