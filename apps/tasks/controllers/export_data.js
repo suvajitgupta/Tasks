@@ -348,7 +348,7 @@ Tasks.exportDataController = SC.ObjectController.create(
       ret += '<h1>' + "_Has".loc() + Tasks.usersController.getPath('content.length') + "_users".loc() + '</h1>\n<table>';
     }
     Tasks.usersController.forEach(function(user){
-      ret += user.exportData(format);
+      ret += user.exportData(format, !Tasks.softwareMode);
     }, Tasks.usersController);
     ret += '</table>\n\n';
     

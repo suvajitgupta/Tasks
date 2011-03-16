@@ -10,6 +10,7 @@ CoreTasks.USER_NONE = "none"; // used to specify unassigned user via task inline
 CoreTasks.USER_ROLE_MANAGER = '_Manager';
 CoreTasks.USER_ROLE_DEVELOPER = '_Developer'; // default
 CoreTasks.USER_ROLE_TESTER = '_Tester';
+CoreTasks.USER_ROLE_USER = '_User';
 CoreTasks.USER_ROLE_GUEST = '_Guest';
 
 CoreTasks.userRolesAllowed = [
@@ -117,13 +118,20 @@ CoreTasks.User = CoreTasks.Record.extend({
    * Export a user's attributes.
    *
    * @param {String} format in which data is to be exported.
+   * @param {Boolean} map Developer/Tester role to User.
    * @returns {String) A string with the user's data exported in it.
    */
-  exportData: function(format) {
+  exportData: function(format, mapRole) {
     var ret = '';
     var email = this.get('email');
-    if(format === 'Text') ret += ('[' + this.get('loginName') + '] (' + this.get('name') + ') {' + this.get('role').replace('_', '') + '}' + (email? ' <' + email  + '>': '') + '\n');
-    else ret += ('<tr><td>&nbsp;<b>' + this.displayName() + '</b></td><td>' + this.get('role').replace('_', '') + '</td><td>' + (email? '&nbsp;<u>' + email  + '</u>': '') + '</td></tr>');
+    var role = this.get('role');
+    if(mapRole && (role === CoreTasks.USER_ROLE_DEVELOPER || role === CoreTasks.USER_ROLE_TESTER)) role = CoreTasks.USER_ROLE_USER;
+    if(format === 'Text') {
+      ret += ('[' + this.get('loginName') + '] (' + this.get('name') + ') {' + role.loc() + '}' + (email? ' <' + email  + '>': '') + '\n');
+    }
+    else {
+      ret += ('<tr><td>&nbsp;<b>' + this.displayName() + '</b></td><td>' + role.loc() + '</td><td>' + (email? '&nbsp;<u>' + email  + '</u>': '') + '</td></tr>');
+    }
     return ret + '\n';
   },
   

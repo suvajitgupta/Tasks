@@ -104,14 +104,14 @@ Tasks.UserItemView.mixin(/** @scope Tasks.UserItemView */ {
       action: 'setRoleManager'
     });
     ret.push({
-      title: (Tasks.softwareMode? CoreTasks.USER_ROLE_DEVELOPER.loc() : "_User".loc()),
+      title: (Tasks.softwareMode? CoreTasks.USER_ROLE_DEVELOPER.loc() : CoreTasks.USER_ROLE_USER.loc()),
       icon: 'user-role-developer',
       isEnabled: YES,
       checkbox: role === CoreTasks.USER_ROLE_DEVELOPER,
       action: 'setRoleDeveloper'
     });
     if(Tasks.softwareMode) {
-    ret.push({
+      ret.push({
         title: CoreTasks.USER_ROLE_TESTER.loc(),
         icon: 'user-role-tester',
         isEnabled: YES,

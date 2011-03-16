@@ -77,7 +77,7 @@ Tasks.usersController = SC.ArrayController.create(
                    role: CoreTasks.USER_ROLE_MANAGER, treeItemChildren: managerRoles, treeItemIsExpanded: YES }));
       }
       if(isCurrentUserAManager || developerRoles.get('length') > 0) {
-        var groupTitle = Tasks.softwareMode? CoreTasks.USER_ROLE_DEVELOPER.loc() : "_User".loc();
+        var groupTitle = Tasks.softwareMode? CoreTasks.USER_ROLE_DEVELOPER.loc() : CoreTasks.USER_ROLE_USER.loc();
         nodes.push(SC.Object.create({ displayName: developerRoles.length + ' ' +  groupTitle + 's',
                    role: CoreTasks.USER_ROLE_DEVELOPER, treeItemChildren: developerRoles, treeItemIsExpanded: YES }));
       }
