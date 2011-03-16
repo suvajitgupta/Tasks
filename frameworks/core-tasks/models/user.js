@@ -123,7 +123,7 @@ CoreTasks.User = CoreTasks.Record.extend({
     var ret = '';
     var email = this.get('email');
     if(format === 'Text') ret += ('[' + this.get('loginName') + '] (' + this.get('name') + ') {' + this.get('role').replace('_', '') + '}' + (email? ' <' + email  + '>': '') + '\n');
-    else ret += ('<p>&nbsp;<b>' + this.displayName() + '</b>&nbsp;<i>' + this.get('role').replace('_', '') + '</i>' + (email? '&nbsp;<u>' + email  + '</u>': '') + '</p>');
+    else ret += ('<tr><td>&nbsp;<b>' + this.displayName() + '</b></td><td>' + this.get('role').replace('_', '') + '</td><td>' + (email? '&nbsp;<u>' + email  + '</u>': '') + '</td></tr>');
     return ret + '\n';
   },
   

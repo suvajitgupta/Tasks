@@ -59,8 +59,13 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' padding-left: 10px;\n' +
 ' border: 1px solid #777;\n' +
 '}\n' +
-'h2, p {\n' +
+'h2, table, p {\n' +
 ' margin-left: 15px;\n' +
+'}\n' +
+'td {\n' +
+' font-size: 11px;\n' +
+' padding: 3px 10px;\n' +
+' background: #EEE;\n' +
 '}\n' +
 'p {\n' +
 ' background-color: #EEE;\n' +
@@ -340,12 +345,12 @@ Tasks.exportDataController = SC.ObjectController.create(
       ret += '#================================================================================\n\n';
     }
     else {
-      ret += '<h1>' + "_Has".loc() + Tasks.usersController.getPath('content.length') + "_users".loc() + '</h1>\n';
+      ret += '<h1>' + "_Has".loc() + Tasks.usersController.getPath('content.length') + "_users".loc() + '</h1>\n<table>';
     }
     Tasks.usersController.forEach(function(user){
       ret += user.exportData(format);
     }, Tasks.usersController);
-    ret += '\n\n';
+    ret += '</table>\n\n';
     
     // First export unallocated tasks
     Tasks.projectsController.forEach(function(project){
