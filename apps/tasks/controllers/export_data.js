@@ -30,13 +30,12 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' line-height: 44px;\n' +
 '}\n' +
 '.legend {\n' +
-' position: absolute;\n' +
 ' margin-top: -5px;\n' +
 ' line-height: 1.5;\n' +
 '}\n' +
 '.description {\n' +
 ' position: absolute;\n' +
-' margin-top: -5px;\n' +
+' margin-top: -10px;\n' +
 ' right: 10px;\n' +
 '}\n' +
 'h1, h2 {\n' +
@@ -62,7 +61,11 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 'h2, table, p {\n' +
 ' margin-left: 15px;\n' +
 '}\n' +
-'td {\n' +
+'th {\n' +
+' background: #AAA !important;\n' +
+' text-align: left;\n' +
+'}\n' +
+'th, td {\n' +
 ' font-size: 11px;\n' +
 ' padding: 3px 10px;\n' +
 ' background: #EEE;\n' +
@@ -266,12 +269,13 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 '</style>\n' +
 '</head>\n';
 
-Tasks.EXPORT_LEGEND = '<br><span class="legend">\n' +
+Tasks.EXPORT_LEGEND = '<br><span><span class="legend">\n' +
 (Tasks.softwareMode? '<strong>TYPE:</strong> <span class="feature">&nbsp;</span> Feature <span class="bug">&nbsp;</span> Bug <span class="other">&nbsp;</span> Other\n&nbsp;&nbsp;&nbsp;' : '') +
-'<strong>PRIORITY:</strong> <span class="high">High</span> <span class="medium">Medium</span> <span class="low">Low</span>\n' +
-'&nbsp;&nbsp;&nbsp;<strong>STATUS:</strong> <span class="planned">Planned</span> <span class="active">Active</span> <span class="done">Done</span> <span class="risky">Risky</span>\n' +
-'&nbsp;&nbsp;&nbsp;<strong>VALIDATION:</strong> <span class="untested">Untested</span> <span class="passed">Passed</span> <span class="failed">Failed</span></span>\n' +
-'<span class="description"><input type=checkbox onclick="toggleDescriptions()"/>&nbsp;Description&nbsp;</span>\n<br><hr>\n';
+'<strong>PRIORITY:</strong> <span class="high">High</span> <span class="medium">Medium</span> <span class="low">Low</span><br>\n' +
+'<strong>STATUS:</strong> <span class="planned">Planned</span> <span class="active">Active</span> <span class="done">Done</span> <span class="risky">Risky</span>\n' +
+'&nbsp;&nbsp;&nbsp;' +
+(Tasks.softwareMode? '<strong>VALIDATION:</strong> <span class="untested">Untested</span> <span class="passed">Passed</span> <span class="failed">Failed</span></span>\n' : '') +
+'<span class="description"><input type=checkbox onclick="toggleDescriptions()"/>&nbsp;Description&nbsp;</span>\n<br></span><hr>\n';
 
 
 /** @static
@@ -345,7 +349,8 @@ Tasks.exportDataController = SC.ObjectController.create(
       ret += '#================================================================================\n\n';
     }
     else {
-      ret += '<h1>' + "_Has".loc() + Tasks.usersController.getPath('content.length') + "_users".loc() + '</h1>\n<table>';
+      ret += '<h1>' + "_Has".loc() + Tasks.usersController.getPath('content.length') + "_users".loc() + '</h1>\n<table>\n';
+      ret += '<th>Name (Login Name)</th><th>Role</th><th>Email</th>\n';
     }
     Tasks.usersController.forEach(function(user){
       ret += user.exportData(format, !Tasks.softwareMode);
