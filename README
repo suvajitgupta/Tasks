@@ -208,10 +208,10 @@ Enter a unique <application-identifier> and application title and press
 
 cd ../
 git clone git://github.com/joshholt/SproutCoreTasks-AppEngineBackend.git <application-identifier>
-cd tasks
 
 4) Build 'Tasks' GUI for deployment (this may take a few minutes...)
 
+cd ../tasks
 ./bin/sc-build -rc --build=build
 
 After sc-build finishes, copy tasks production build for deployment on GAE:
@@ -226,10 +226,12 @@ From "File" menu, choose "Add Existing Application..."
 Click on "Browse" and find/select the <application-identifier> folder,
 press "Choose" and then "Add"
 
-6) Configure GAE application before deployment:
+6) Configure/custimize GAE application before deployment:
 
 cd ../<application-identifier>
 Open "app.yaml" and replace <application-identifier> on first line
+
+Open "notification.py" and replace "suvajit.gupta@eloqua.com" with the email you use to login to GAE
 
 You can optionally customize "only_allow_manager_login" in "main.py" so that only
 "Manager" users can log in - this is useful in securing your personal data.
