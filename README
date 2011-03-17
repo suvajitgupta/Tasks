@@ -226,7 +226,7 @@ From "File" menu, choose "Add Existing Application..."
 Click on "Browse" and find/select the <application-identifier> folder,
 press "Choose" and then "Add"
 
-6) Configure/custimize GAE application before deployment:
+6) Configure/customize GAE application before deployment:
 
 cd ../<application-identifier>
 Open "app.yaml" and replace <application-identifier> on first line
