@@ -85,23 +85,17 @@ v Remember login name/password across sessions via checkbox on login screen [SG]
 - Add option to load data for completed projects on login screen (off by default) [SG] $Feature @Done %Passed
 - Support view mode of tasks and selection of project/filter/search using SproutCore routes [SG] $Feature @Done %Passed
 
-- Add Tasks logo to top bar and display program version as a badge [SG] $Feature @Done %Passed
-| Show credits as a tooltip on Tasks logo
-- Support Team/Tasks display modes to show everyone at a glance or details; clicking on Assignee in team mode shows their Tasks [SG] $Feature @Done %Passed
-- Add welcome message showing logged in user/role with hover over tooltip showing time of login [SG] $Feature @Done %Passed
-- Make welcome message clickable to show current user's tasks by setting search filter [SG] $Feature @Done %Passed
-- At startup, set assignee selection filter to logged in user if they are a Developer [SG] $Feature @Done %Passed
-
-- Add summary in bottom bar showing number of Projects/Assignees & Tasks displayed/selected [SG] <MB> $Feature @Done %Passed
-- Add Server data loading message in bottom bar during startup/refreshing [SG] $Feature @Done %Passed
-- Add "Save" button in bottom bar, note time of last save in bottom bar [SG] <BB> $Feature @Done %Passed
-- Enable/disable "Save" button based on data modification [SG] <EO> $Feature @Done %Passed
-- Add "Refresh" button to synchronize GUI with latest data from Server [SG] <SE> $Feature @Done %Passed
-
 
 #========================================================================================================================
 Application Manager GUI @Active
 #========================================================================================================================
+
+- Add Tasks logo to top bar and display program version as a badge [SG] $Feature @Done %Passed
+| Show credits as a tooltip on Tasks logo
+- Support TEAM/TASKS display modes to show everyone at a glance or details; clicking on Assignee in team mode shows their Tasks [SG] $Feature @Done %Passed
+- Add welcome message showing logged in user/role with hover over tooltip showing time of login [SG] $Feature @Done %Passed
+- Make welcome message clickable to show current user's tasks by setting search filter [SG] $Feature @Done %Passed
+- At startup, set assignee selection filter to logged in user if they are a Developer [SG] $Feature @Done %Passed
 
 ^ Add "Users/Settings" actions menu/popup to manage users and preferences [SG] $Feature @Done %Passed
 | Don't allow a user to modify their own role
@@ -146,6 +140,12 @@ v Support drag-and-drop file import [SG] <MB> $Feature
 - Add "Logout" menu item in actions menu (confirm before exiting, clear local storage, forward to login page) [SG] <JH2> $Feature @Done %Passed
 - Prompt user to save changes (if any) before logging out [SG] <SE> $Feature @Done %Passed
 - Destroy authentication token when User logs out [SG] <JH2> $Feature @Done %Passed
+
+- Add summary in bottom bar showing number of Projects/Assignees & Tasks displayed/selected [SG] <MB> $Feature @Done %Passed
+- Add Server data loading message in bottom bar during startup/refreshing [SG] $Feature @Done %Passed
+- Add "Save" button in bottom bar, note time of last save in bottom bar [SG] <BB> $Feature @Done %Passed
+- Enable/disable "Save" button based on data modification [SG] <EO> $Feature @Done %Passed
+- Add "Refresh" button to synchronize GUI with latest data from Server [SG] <SE> $Feature @Done %Passed
 
 
 #========================================================================================================================
@@ -226,12 +226,12 @@ v Show relative position of Task being edited alongside previous/next navigation
 - Support ability to view/add Comments on Tasks [SG] <JH2> $Feature @Done %Passed
 
 - Support multi-Task ID/Name copy to clipboard from top bar [SG] <JH2> $Feature @Done %Passed
-^ Allow Task attribute filtering by type, priority, status, and validation fields via a top bar button/sheet pane [SG] $Feature @Done %Passed
+^ Allow Task attribute filtering by type, priority, status, and validation fields via a top bar button [SG] $Feature @Done %Passed
 - Support commonly-used "QuickFilters" in Filter panel [SG] $Feature @Done %Passed
 - Support filtering of Tasks that were recently updated, have effort specified, or are being watched [SG] $Feature @Done %Passed
 - Support filtering of Tasks that were created or updated within a specified timeframe [SG] $Feature
 - Indicate whether Task attribute filtering is enabled via cancel icon on Filter button [SG] $Feature @Done %Passed
-^ Allow Task searching (by Assignee/Submitter/#IDs/name) & corresponding cancel button in top bar: support type-ahead searching [SG] <JH2> $Feature @Done %Passed
+^ Allow Task searching (by Assignee/Submitter/IDs/name) & corresponding cancel button in top bar: support type-ahead searching [SG] <JH2> $Feature @Done %Passed
 - Highlight search pattern within matching Task names & highlight description icon for matching descriptions [SG] $Feature @Done %Passed
 
 - Out of Scope: Allow reordering of Tasks $Feature
@@ -306,7 +306,7 @@ Hardening/Testing @Active
 - Handle network or Server unavailability gracefully and provide appropriate diagnostics to the user [SG] <SE> @Done %Passed
 - Refactor code to align with "root controller pattern" [SG] <EG> @Done
 - Refactor code to use Ki-based statecharts [SG] <MC> @Done
-^ Perform smoke test of key functionality [SG] @Done
+- Perform smoke test of key functionality [SG] @Done
 | Login, Guest Signup, Logout
 | All/Unallocated/Unallocated Tasks System Projects, Tasks/Team display modes
 | Project/Task/User add/duplicate/delete via buttons/context menus
