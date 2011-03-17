@@ -4,13 +4,15 @@
 # Has 3 users
 #================================================================================
 
+[SG] (Suvajit Gupta) {Manager} <suvajit_gupta@yahoo.com>
+
 [JH2] (Josh Holt) {Developer}
 
 [SE] (Sean Eidemiller) {Developer}
 
-[SG] (Suvajit Gupta) {Manager}
+[MR] (Mike Ramsey) {Tester}
 
-
+[guest] (Guest User) {Guest}
 
 #================================================================================
 # Unallocated Tasks # Has 1 tasks
@@ -38,7 +40,7 @@ Project One {3d} @Active # Has 4 tasks
 
 - A medium priority, active, bug submitted by an unknown user and assigned to Suvajit with unspecified effort [SG] $Bug @Active 
 
-- A completed task with a range effort which is highlighted on the badge {1-2d} <SG> [SG] $Bug @Done
+- A completed bug submitter by a Tester with a range effort highlighted on the effort badge {1-2d} <MR> [SG] $Bug @Done
 
 - A medium priority bug assigned to Suvajit, which was done in 3 days but failed validation {3d} [SG] $Bug @Done %Failed 
 
