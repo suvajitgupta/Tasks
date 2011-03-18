@@ -92,7 +92,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' padding: 5px ' + (SC.browser.msie? '60' : '68') + 'px;\n' +
 '}\n' +
 '.assignee {\n' +
-' border-bottom: 1px solid #555;\n' +
+' border-bottom: 1px solid #000;\n' +
 '}\n' +
 '.assignee-not-loaded {\n' +
 ' background-color: #AAA;\n' +
