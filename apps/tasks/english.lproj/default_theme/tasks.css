@@ -193,6 +193,7 @@
 }
 
 .red-flag-icon {
+  margin-top: 4px !important;
   width: 16px !important;
   height: 16px !important;
   background: static_url('images/red-flag.png') no-repeat;
