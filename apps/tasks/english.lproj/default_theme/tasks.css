@@ -292,8 +292,8 @@
 .assignee-item.sc-list-item-view .sc-outline .progress-bar .progress-bar-inner,
 .assignee-item .sc-outline .count.finished {
   background: #777;
-  background: -webkit-gradient(linear, center top, center bottom, from(#AAA), to(#111)) !important;
-  background: -moz-linear-gradient(center top , #AAA, #111) !important;
+  background: -webkit-gradient(linear, center top, center bottom, from(#777), to(#222)) !important;
+  background: -moz-linear-gradient(center top , #777, #222) !important;
 }
 
 .assignee-item.sc-list-item-view .sc-outline .progress-bar,
