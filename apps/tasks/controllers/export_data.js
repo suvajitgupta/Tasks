@@ -145,8 +145,8 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 '}\n' +
 '.progress-bar, .left {\n' +
 ' background: #DDD;\n' +
-' background: -webkit-gradient(linear, center top, center bottom, from(#FFF), to(#AAA));\n' +
-' background: -moz-linear-gradient(center top , #FFF, #AAA);\n' +
+' background: -webkit-gradient(linear, center top, center bottom, from(#FFF), to(#BBB));\n' +
+' background: -moz-linear-gradient(center top , #FFF, #BBB);\n' +
 '}\n' +
 '.margin {\n' +
 ' border-right: 3px solid #FCC;\n' +

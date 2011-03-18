@@ -300,8 +300,8 @@
 .assignee-item.sc-list-item-view .sc-outline .progress-bar,
 .assignee-item .sc-outline .count {
   background: #DDD;
-  background: -webkit-gradient(linear, center top, center bottom, from(#FFF), to(#AAA)) !important;
-  background: -moz-linear-gradient(center top , #FFF, #AAA) !important;
+  background: -webkit-gradient(linear, center top, center bottom, from(#FFF), to(#BBB)) !important;
+  background: -moz-linear-gradient(center top , #FFF, #BBB) !important;
 }
 
 .tasks-pane .assignee-item .sc-outline .count,
