@@ -528,6 +528,7 @@ Tasks.mainPage = SC.Page.design({
        selectOnMouseDown: YES,
        delegate: Tasks.tasksController,
 
+       firstHeaderRowHeight: 32,
        headerRowHeight: 40,
        rowDelegate: function() {
          return this;
@@ -537,7 +538,10 @@ Tasks.mainPage = SC.Page.design({
        }.property('length').cacheable(),
        contentIndexRowHeight: function(view, content, idx) {
          // All header rows (except first one) should use headerRowHeight
-         return idx && this.get('contentDelegate').contentIndexIsGroup(this, content, idx)? this.get('headerRowHeight'): this.get('rowHeight');
+         var isGroup = this.get('contentDelegate').contentIndexIsGroup(this, content, idx);
+         console.log('DEBUG: ' + content.get('displayName') + ', idx=' + idx + ', isGroup=' + isGroup);
+         if(isGroup) return idx === 0? this.get('firstHeaderRowHeight') : this.get('headerRowHeight');
+         else return this.get('rowHeight');
        },
        _contentDidChange: function() { // Force TasksList indexes to be recomputed when content changes
          var len = this.getPath('content.length');

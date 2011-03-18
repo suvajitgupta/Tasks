@@ -199,7 +199,7 @@
 }
 
 .assignee-item .sc-outline img {
-  top: -4px !important;
+  top: 0px !important;
   left: -12px !important;
   z-index: 10 !important;
 }
@@ -215,10 +215,10 @@
 	font-weight: bold !important;
 	font-size: 14px !important;
   color: #222 !important;
-  margin-top: 15px !important;
   left: 5px !important;
   right: 0px !important;
-  height: 24px !important;
+  margin-top: 7px !important;
+  height: 32px !important;
   padding-left: 20px !important;
   opacity: 0.85;
   border-bottom: 1px solid #555 !important;
@@ -268,7 +268,7 @@
 .assignee-item.sc-list-item-view .sc-outline .progress-percent {
   position: absolute !important;
   font-size: 10px !important;
-  top: -11px !important;
+  top: -8px !important;
   text-align: center !important;
   right: 50% !important;
   width: 100px !important;
@@ -282,7 +282,7 @@
 
 .assignee-item.sc-list-item-view .sc-outline .progress-bar {
   position: absolute !important;
-  top: 5px !important;
+  top: 10px !important;
   height: 6px !important;
   right: 50% !important;
   width: 100px !important;
@@ -305,7 +305,7 @@
 
 .tasks-pane .assignee-item .sc-outline .count,
 .assignee-item.incomplete-total-effort-warning .sc-outline .count.finished {
-  top: -2px !important;
+  top: 2px !important;
   font-size: 11px !important;
   width: 120px !important;
   border: 1px solid #555 !important;
