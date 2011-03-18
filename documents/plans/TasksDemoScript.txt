@@ -1,15 +1,39 @@
-Tasks - sample SproutCore application, agile project management tool, SproutCore issue tracker (Lighthouse replacement)
+Tasks goals/highlights:
+- "kiosk-app" usability - people should be able to just start using it
+- runs on desktop browsers (Firefox, Safari, Chrome, Internet Explorer) and on iPads
+- two modes of operation - (1) "Software" mode for development projects and (2) "ToDos" mode for task tracking
 
-Projects - adding/deleting/editing (inline/popup), All/Unallocated Tasks
-Tasks - adding/deleting/editing (inline/popup), attributes/workflow (type/priority/status/validation)
-Comments - adding/deleting/editing
+Projects:
+- adding/deleting/editing (inline/popup)
+- All/Unassigned/Unallocated Tasks
+- Active/Planned/Done grouping
 
-Grouping - by assignee
-Sorting - by attributes
-Filtering - by assignee, attributes, or searching (text/IDs)
+Tasks:
+- adding/deleting/editing (inline/popup)
+- attributes/workflow (type/priority/status/validation)
+- automatic grouping by assignee
+- automatic sorting by attributes
+- filtering by assignee, attributes
+- searching (text/IDs)
+- finished/left counts/effort totaling
 
-Display Modes - TASKS/TEAM, red flags
-Load Balancing - assignee color coding
+Comments:
+- adding/deleting/editing
 
-Import/Export - Text/HTML
-Help - best practices
+Watches:
+- adding/viewing/filtering/deleting
+
+Display Modes
+- TEAM, red flags
+- TASKS
+
+Load Balancing:
+- project count down
+- assignee color coding
+
+Import/Export
+- Text
+- HTML
+
+Help
+- best practices
