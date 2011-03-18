@@ -539,7 +539,6 @@ Tasks.mainPage = SC.Page.design({
        contentIndexRowHeight: function(view, content, idx) {
          // All header rows (except first one) should use headerRowHeight
          var isGroup = this.get('contentDelegate').contentIndexIsGroup(this, content, idx);
-         console.log('DEBUG: ' + content.get('displayName') + ', idx=' + idx + ', isGroup=' + isGroup);
          if(isGroup) return idx === 0? this.get('firstHeaderRowHeight') : this.get('headerRowHeight');
          else return this.get('rowHeight');
        },
