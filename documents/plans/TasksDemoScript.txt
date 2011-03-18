@@ -1,7 +1,12 @@
 Tasks goals/highlights:
 - "kiosk-app" usability - people should be able to just start using it
 - runs on desktop browsers (Firefox, Safari, Chrome, Internet Explorer) and on iPads
-- two modes of operation - (1) "Software" mode for development projects and (2) "ToDos" mode for task tracking
+- two modes of operation - (1) "Software" mode for agile development projects and (2) "ToDos" mode for task organization/tracking
+
+Overall
+- role-based access control
+- online help, best practices
+- keyboard navigation, shortcuts
 
 Projects:
 - adding/deleting/editing (inline/popup)
@@ -31,9 +36,10 @@ Load Balancing:
 - project count down
 - assignee color coding
 
+Statistics:
+- graphical
+- numerical
+
 Import/Export
 - Text
 - HTML
-
-Help
-- best practices
