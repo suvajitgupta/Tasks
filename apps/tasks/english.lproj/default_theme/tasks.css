@@ -222,7 +222,7 @@
   height: 32px !important;
   padding-left: 20px !important;
   opacity: 0.85;
-  border-bottom: 1px solid #000 !important;
+  border-bottom: 1px solid #777 !important;
 }
 .sc-view.sc-list-item-view.sc-collection-item.sc-group-item.assignee-item.first-assignee-item {
   margin-top: -1px !important;

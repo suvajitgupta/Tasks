@@ -39,7 +39,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' right: 10px;\n' +
 '}\n' +
 'h1, h2 {\n' +
-' line-height: 24px;\n' +
+' line-height: 25px;\n' +
 ' margin-top: 7px;\n' +
 ' margin-bottom: 5px;\n' +
 ' padding: 3px 6px;\n' +
@@ -56,7 +56,6 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' font-size: 14px;\n' +
 ' color: #222;\n' +
 ' padding-left: 10px;\n' +
-' border: 1px solid #777;\n' +
 '}\n' +
 'h2, table, p {\n' +
 ' margin-left: 15px;\n' +
@@ -92,7 +91,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' padding: 5px ' + (SC.browser.msie? '60' : '68') + 'px;\n' +
 '}\n' +
 '.assignee {\n' +
-' border-bottom: 1px solid #000;\n' +
+' border-bottom: 1px solid #777;\n' +
 '}\n' +
 '.assignee-not-loaded {\n' +
 ' background-color: #AAA;\n' +
