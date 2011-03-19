@@ -129,19 +129,20 @@ Tasks.assignmentsController = SC.ArrayController.create(
       }
     
       // Extract task name search filter
+      tasksSearch = tasksSearch.replace(/^\s+/, '');
       // console.log('DEBUG: tasksSearch="' + tasksSearch + '"');
       var idMatches = tasksSearch.match(/#([\-\d]+)/g);
       // console.log('DEBUG: idMatches = ' + idMatches);
       if(!idMatches) {
-        if (tasksSearch.slice(0, 1) === '^') { // inverse search specified
+        if (tasksSearch.indexOf('^') !== -1) { // inverse search specified
           positiveMatch = false;
-          tasksSearch = tasksSearch.slice(1);
+          tasksSearch = tasksSearch.replace('^', '');
         }
         else {
           this.textSearch = tasksSearch;
         }
         tasksSearch = this._escapeMetacharacters(tasksSearch);
-        searchPattern = new RegExp(tasksSearch, 'i');
+        if(!SC.empty(tasksSearch)) searchPattern = new RegExp(tasksSearch, 'i');
       }
     }
     
