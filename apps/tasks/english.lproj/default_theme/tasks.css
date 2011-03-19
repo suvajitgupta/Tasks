@@ -43,11 +43,11 @@
 }
 
 .previous-icon {
-  background-image: static_url('images/black-arrow-left.png') !important;
+  background-image: static_url('images/black-arrow-up.png') !important;
 }
 
 .next-icon {
-  background-image: static_url('images/black-arrow-right.png') !important;
+  background-image: static_url('images/black-arrow-down.png') !important;
 }
 
 .previous-icon, .next-icon, .back-icon,
@@ -234,6 +234,7 @@
 
 .sc-master-detail-view .sc-workspace-view .task-editor .title-bar,
 .calendar .month {
+  line-height: 24px;
   border-bottom: 1px solid #888;
 }
 

@@ -323,7 +323,6 @@ Tasks.TaskEditorView = SC.View.extend(
 
    positionLabel: SC.LabelView.design({
      layout: { width: 100, right: 75, top: 6, height: 12 },
-     controlSize: SC.SMALL_CONTROL_SIZE,
      textAlign: SC.ALIGN_RIGHT
    }),
    
