@@ -246,34 +246,35 @@
 }
 
 .calendar > div, .scui-datepicker-today, .scui-datepicker-none {
-  text-align: center;
   bottom: 10px !important;
-}
-
-.calendar .grid .day:hover {
-  border: 1px solid #000 !important;
+  text-align: center;
 }
 
 .calendar .body {
-  padding-top: 14px;
+  padding-top: 10px;
   padding-left: 12px;
 }
 
 .calendar .body .day {
   width: 25px;
-  height: 25px;
+  height: 23px;
+  line-height: 23px;
   float: left;
-  border-bottom: 1px solid #c6c2be;
-  border-right: 1px solid #c6c2be;
-  line-height: 25px;
-  text-align: center;
+  border-bottom: 1px solid #999;
+  border-right: 1px solid #999;
 }
 
 .calendar .body .day.header {
   height: 12px;
-  border-color: transparent;
+  color: #555;
   font-size: 10px;
+  font-weight: bold;
   line-height: 12px;
+  border-color: transparent;
+}
+
+.calendar .body .day:hover {
+  background: #BBB !important;
 }
 
 .calendar .body .grid {
@@ -281,24 +282,20 @@
 }
 
 .calendar .month {
-  font-weight: bold;
   line-height: 24px;
-  background: #888;
-  text-align: left !important;
-  padding-left: 10px;
-  text-transform: uppercase;
+  font-weight: bold;
 }
 
 .calendar .previous,
 .calendar .next {
   position: absolute;
-  top: 2px !important;
+  top: 3px !important;
   width: 16px !important;
   height: 16px !important;
 }
 
 .calendar .previous {
-  right: 43px !important;
+  left: 10px !important;
   background: static_url('images/black-arrow-left.png') no-repeat 0 0;
 }
 
@@ -308,22 +305,21 @@
 }
 
 .calendar .grid .day {
-  color: #010101;
-  font-size: 11px;
-  border-left: 1px solid #eee;
-  border-top: 1px solid #eee;
   width: 24px;
+  color: #010101;
+  background: #DDD;
+  font-size: 11px;
+  border-left: 1px solid #FFF;
+  border-top: 1px solid #FFF;
 }
 
 .calendar .grid .day.past,
 .calendar .grid .day.future {
-  color: #777;
-  background: #ddd;
+  color: #999;
 }
 
-.calendar .grid .day.present{
-  color: #666;
-  background: #fff;
+.calendar .grid .day.present {
+  color: #333;
 }
 
 .calendar .grid .day.today, .scui-datepicker-today {

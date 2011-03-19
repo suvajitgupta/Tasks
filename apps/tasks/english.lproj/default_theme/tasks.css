@@ -233,6 +233,12 @@
 }
 
 .sc-master-detail-view .sc-workspace-view .task-editor .title-bar,
+.calendar .month {
+  border-bottom: 1px solid #888;
+}
+
+.sc-master-detail-view .sc-workspace-view .task-editor .title-bar,
+.calendar .month,
 .assignee-not-loaded {
   background: #AAA none repeat scroll 0 0 !important;
   box-shadow: inset 0px 2px 2px #DDD;
