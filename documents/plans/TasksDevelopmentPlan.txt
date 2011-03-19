@@ -251,7 +251,7 @@ Touch Device GUIs @Active
 - Implement swiveling Master/Detail view on iPad [JH2] <SG> $Feature @Done %Passed
 - Port Tasks desktop GUI to iPad [SG] <AI> $Feature @Done %Passed
 
-v Develop Tasks iPhone GUI [SG] <MB> $Feature
+- Develop Tasks iPhone/iPod GUI [SG] $Feature @Active
 
 
 #========================================================================================================================

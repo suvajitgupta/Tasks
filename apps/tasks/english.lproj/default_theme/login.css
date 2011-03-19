@@ -48,6 +48,7 @@
 .login-body .sc-checkbox-view .label {
 	color: #BBB !important;
   font-size: 10px !important;
+  text-align: center !important;
 }
 
 .login-body .sc-label-view {

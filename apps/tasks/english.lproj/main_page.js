@@ -105,16 +105,22 @@ Tasks.mainPageHelper = SC.Object.create({
 
 Tasks.mainPage = SC.Page.design({
   
- mainPane: SC.MainPane.design({
+  showTasksList: function() {
+    this.setPath('mainPane.mainView', Tasks.mainPage.get('tasksList'));
+  },
 
-   welcomeMessage: SC.outlet('masterDetailView.detailView.topToolbar.welcomeMessageLabel'),
-   projectsList:   SC.outlet('masterDetailView.masterView.contentView.projectsList.contentView'),
-   tasksSceneView: SC.outlet('masterDetailView.detailView.contentView.tasksSceneView'),
-   serverMessage:  SC.outlet('masterDetailView.detailView.contentView.tasksBottomBar.serverMessageView'),
+  mainPane: SC.MainPane.design({
 
-   childViews: 'masterDetailView'.w(),
+   welcomeMessage: SC.outlet('mainView.detailView.topToolbar.welcomeMessageLabel'),
+   projectsList:   SC.outlet('mainView.masterView.contentView.projectsList.contentView'),
+   tasksSceneView: SC.outlet('mainView.detailView.contentView.tasksSceneView'),
+   serverMessage:  SC.outlet('mainView.detailView.contentView.tasksBottomBar.serverMessageView'),
 
-   masterDetailView: SC.MasterDetailView.design({
+   childViews: 'mainView'.w(),
+   
+   mainView: Tasks.isMobile?
+    Tasks.ProjectsListView.design() :
+    SC.MasterDetailView.design({
      
      layout: { top: 0, left: 0, right: 0, bottom: 0, minWidth: SC.platform.touch? 768 : 1024, minHeight: 500 },
      masterWidth: 260,
@@ -173,108 +179,36 @@ Tasks.mainPage = SC.Page.design({
         
         childViews: 'projectsList projectsBottomBar'.w(),
          
-        projectsList: SC.ScrollView.design({
-          
-          classNames: ['projects-pane'],
-          layout: { top: 0, bottom: 35, left: 10, right: 5 },
-          
-          contentView: Tasks.ListView.design({
-            contentValueKey: 'displayName',
-            contentUnreadCountKey: 'displayCountDown',
-            contentBinding: 'Tasks.sourcesController.arrangedObjects',
-            selectionBinding: 'Tasks.projectsController.selection',
-            localize: YES,
-            rowHeight: 24,
-            classNames: ['projects-pane'],
-            hasContentIcon: YES,
-            contentIconKey: 'icon',
-            exampleView: Tasks.ProjectItemView,
-            groupExampleView: Tasks.GroupItemView,
-            isEditable: YES,
-            allowDeselectAll: YES,
-            canEditContent: YES,
-            canReorderContent: YES,
-            canDeleteContent: YES,
-            destroyOnRemoval: YES,
-            selectOnMouseDown: YES,
-            delegate: Tasks.sourcesController,
-
-            selectionEvent: null,
-            mouseDown: function(event) {
-              var ret = sc_super();
-              if(event.which === 3) { // right click
-                this.set('selectionEvent', event);
-                this.invokeLast('popupContextMenu');
-              }
-              return ret;
-            },
-            popupContextMenu: function() {
-              var items = Tasks.ProjectItemView.buildContextMenu();
-              if(items.length > 0) {
-                var pane = SCUI.ContextMenuPane.create({
-                  contentView: SC.View.design({}),
-                  layout: { width: 125, height: 0 },
-                  itemTitleKey: 'title',
-                  itemIconKey: 'icon',
-                  itemIsEnabledKey: 'isEnabled',
-                  itemTargetKey: 'target',
-                  itemActionKey: 'action',
-                  itemSeparatorKey: 'isSeparator',
-                  items: items
-                });
-                pane.popup(this, this.get('selectionEvent')); // pass in the mouse event so the pane can figure out where to put itself
-              }
-            },
-            
-            // Hotkeys - be careful to avoid conflicts with browser shortcuts!
-            keyDown: function(event) {
-              var ret = NO, commandCode = event.commandCodes();
-              // console.log('DEBUG: hotkey "' + commandCode[0] + '" pressed');
-              if(commandCode[0] === 'ctrl_left' && Tasks.mainPageHelper.get('showProjectsList')) {
-                Tasks.mainPageHelper.set('showProjectsList', NO);
-                ret = YES;
-              }
-              if (ret || Tasks.getPath('assignmentsController.displayMode') === Tasks.DISPLAY_MODE_TASKS && commandCode[0] === 'right') {
-                Tasks.mainPage.tasksList.contentView.becomeFirstResponder();
-                if(Tasks.tasksController.getPath('selection.length') === 0) Tasks.tasksController.selectFirstTask();
-                ret = YES;
-              }
-              else {
-                ret = sc_super();
-              }
-              return ret;
-            }
-
-          }) // projectsListView
-          
-        }), // projectsListScrollView
+        projectsList: Tasks.ProjectsListView.design({
+          layout: { top: 0, bottom: 35, left: 10, right: 5 }
+        }),
          
-         projectsBottomBar: SC.View.design({
-           
-           layout: { bottom: 0, height: 35, left: 0, right: 0 },
-           childViews: 'addProjectButton deleteProjectButton'.w(),
+        projectsBottomBar: SC.View.design({
 
-           addProjectButton: SC.ButtonView.design({
-             layout: { centerY: 0, left: 10, height: 24, width: 32 },
-             classNames: ['dark'],
-             titleMinWidth: 0,
-             icon: 'add-icon',
-             toolTip: "_AddProjectTooltip".loc(),
-             isVisibleBinding: 'CoreTasks.permissions.canCreateProject',
-             action: 'addProject'
-           }),
-           deleteProjectButton: SC.ButtonView.design({
-             layout: { centerY: 0, left: 52, height: 24, width: 32 },
-             classNames: ['dark'],
-             titleMinWidth: 0,
-             icon: 'delete-icon',
-             toolTip: "_DeleteProjectTooltip".loc(),
-             isVisibleBinding: 'CoreTasks.permissions.canDeleteProject',
-             isEnabledBinding: 'Tasks.projectsController.isDeletable',
-             action: 'deleteProject'
-           })
+          layout: { bottom: 0, height: 35, left: 0, right: 0 },
+          childViews: 'addProjectButton deleteProjectButton'.w(),
+
+          addProjectButton: SC.ButtonView.design({
+            layout: { centerY: 0, left: 10, height: 24, width: 32 },
+            classNames: ['dark'],
+            titleMinWidth: 0,
+            icon: 'add-icon',
+            toolTip: "_AddProjectTooltip".loc(),
+            isVisibleBinding: 'CoreTasks.permissions.canCreateProject',
+            action: 'addProject'
+          }),
+          deleteProjectButton: SC.ButtonView.design({
+            layout: { centerY: 0, left: 52, height: 24, width: 32 },
+            classNames: ['dark'],
+            titleMinWidth: 0,
+            icon: 'delete-icon',
+            toolTip: "_DeleteProjectTooltip".loc(),
+            isVisibleBinding: 'CoreTasks.permissions.canDeleteProject',
+            isEnabledBinding: 'Tasks.projectsController.isDeletable',
+            action: 'deleteProject'
+          })
            
-         }) // projectsBottomBar
+        }) // projectsBottomBar
          
        }) // projectsList/BottomBar
        
@@ -295,7 +229,7 @@ Tasks.mainPage = SC.Page.design({
            icon: 'actions-icon',
            toolTip: "_ActionsButtonTooltip".loc(),
            dropDown: SC.MenuPane.design({
-             contentView: SC.View.design({}),
+             contentView: SC.View.design(),
              layout: { width: 175, height: 0 },
              itemTitleKey: 'title',
              itemIconKey: 'icon',
@@ -326,9 +260,9 @@ Tasks.mainPage = SC.Page.design({
            titleMinWidth: 0,
            icon: 'empty-project-icon',
            classNames: ['dark'],
-           target: 'Tasks.mainPage.mainPane.masterDetailView',
+           target: 'Tasks.mainPage.mainPane.mainView',
            action: 'toggleMasterPicker',
-           isVisibleBinding: SC.Binding.oneWay('Tasks.mainPage.mainPane.masterDetailView.masterIsHidden')
+           isVisibleBinding: SC.Binding.oneWay('Tasks.mainPage.mainPane.mainView.masterIsHidden')
          }),
          
          welcomeMessageLabel: SC.LabelView.design(SCUI.ToolTip, {
@@ -470,7 +404,7 @@ Tasks.mainPage = SC.Page.design({
                icon: '',
                textAlign: SC.ALIGN_RIGHT,
                value: '',
-               isVisibleBinding: SC.Binding.not('Tasks.mainPage.mainPane.masterDetailView.masterIsHidden').oneWay()
+               isVisibleBinding: SC.Binding.not('Tasks.mainPage.mainPane.mainView.masterIsHidden').oneWay()
              }),
 
              saveButton: SC.ButtonView.design({
@@ -501,184 +435,12 @@ Tasks.mainPage = SC.Page.design({
 
         }) // detailView
 
-      }) // masterDetailView
+      }) // mainView
        
    }), // mainPane
    
-   tasksList: SC.ScrollView.design({
-
-     classNames: ['tasks-pane'],
-     contentView: Tasks.ListView.design({
-       contentValueKey: 'displayName',
-       contentUnreadCountKey: 'displayEffort',
-       contentBinding: SC.Binding.oneWay('Tasks.tasksController.arrangedObjects'),
-       selectionBinding: 'Tasks.tasksController.selection',
-       localize: YES,
-       rowHeight: 24,
-       hasContentIcon: Tasks.softwareMode,
-       contentIconKey: 'icon',
-       exampleView: Tasks.TaskItemView,
-       groupExampleView: Tasks.AssigneeItemView,
-       isEditable: YES,
-       allowDeselectAll: YES,
-       canEditContent: YES,
-       canReorderContent: YES,
-       canDeleteContent: YES,
-       destroyOnRemoval: YES,
-       selectOnMouseDown: YES,
-       delegate: Tasks.tasksController,
-
-       firstHeaderRowHeight: 32,
-       headerRowHeight: 40,
-       rowDelegate: function() {
-         return this;
-       }.property().cacheable(),
-       customRowHeightIndexes: function() {
-         return SC.IndexSet.create(0, this.get('length'));
-       }.property('length').cacheable(),
-       contentIndexRowHeight: function(view, content, idx) {
-         // All header rows (except first one) should use headerRowHeight
-         var isGroup = this.get('contentDelegate').contentIndexIsGroup(this, content, idx);
-         if(isGroup) return idx === 0? this.get('firstHeaderRowHeight') : this.get('headerRowHeight');
-         else return this.get('rowHeight');
-       },
-       _contentDidChange: function() { // Force TasksList indexes to be recomputed when content changes
-         var len = this.getPath('content.length');
-         // console.log('DEBUG: recomputing TasksList row heights with length=' + len);
-         this.rowHeightDidChangeForIndexes(SC.IndexSet.create(0, len));
-       }.observes('content'),
-
-       selectionEvent: null,
-       mouseDown: function(event) {
-         var ret = sc_super();
-         if(event.which === 3) { // right click
-           this.set('selectionEvent', event);
-           this.invokeLast('popupContextMenu');
-         }
-         return ret;
-       },
-       popupContextMenu: function() {
-         var items = Tasks.TaskItemView.buildContextMenu();
-         if(items.length > 0) {
-           var pane = SCUI.ContextMenuPane.create({
-             contentView: SC.View.design({}),
-             layout: { width: 180, height: 0 },
-             escapeHTML: NO,
-             itemTitleKey: 'title',
-             itemIconKey: 'icon',
-             itemIsEnabledKey: 'isEnabled',
-             itemTargetKey: 'target',
-             itemActionKey: 'action',
-             itemSeparatorKey: 'isSeparator',
-             itemCheckboxKey: 'checkbox',
-             items: items        
-           });
-           pane.popup(this, this.get('selectionEvent')); // pass in the mouse event so the pane can figure out where to put itself
-         }
-       },
-
-       /* Helper image display logic:
-           No projects selected - "select project" helper
-         	Single project selected:
-         	  if project has no tasks:
-         		  addTask enabled - "add tasks tasks" helper
-           		else - "display mode" helper
-           	else project has tasks
-       		    if no tasks filtering through - "adjust filter" helper
-         	Multiple projects selected
-         		if projec
-         		ts have tasks:
-         		  if no tasks filtering through - "adjust filter" helper
-     	*/
-       render: function(context, firstTime) {
-         
-         // console.log('DEBUG: TasksList render() loginTime=' + Tasks.get('loginTime'));
-
-         sc_super();
-         if(Tasks.get('loginTime')) return;
-         var sel = Tasks.projectsController.get('selection');
-         var selectedProjectsCount = sel? sel.get('length') : 0;
-         if(selectedProjectsCount === 0) { // No projects selected
-           context.addClass('helper-select-project');
-           return;
-         }
-         else if(selectedProjectsCount === 1) { // Single project selected
-           if(sel.getPath('firstObject.tasks.length') === 0) { // Project has no tasks
-             if(Tasks.tasksController.isAddable()) context.addClass('helper-add-tasks');
-             else if(Tasks.assignmentsController.get('displayMode') === Tasks.DISPLAY_MODE_TEAM) context.addClass('helper-display-mode');
-             return;
-           }
-           else { // Project has tasks
-             if(this.getPath('content.length') === 0) { // No tasks filtering through
-               context.addClass('helper-adjust-filter');
-               return;
-             }
-           }
-         }
-         else { // Multiple projects selected
-           var tasksCount = 0;
-           var ctx = {};
-           for (var i = 0; i < selectedProjectsCount; i++) {
-             var project = sel.nextObject(i, null, ctx);
-             tasksCount += project.getPath('tasks.length');
-           }
-           if(tasksCount > 0) { // Projects have tasks
-             if(this.getPath('content.length') === 0) { // No tasks filtering through
-               context.addClass('helper-adjust-filter');
-               return;
-             }
-           }
-         }
-
-         // Remove helper images (if any) and render tasks
-         context.removeClass('helper-add-tasks');
-         context.removeClass('helper-display-mode');
-         context.removeClass('helper-adjust-filter');
-       },
-       
-       // Hotkeys - be careful to avoid conflicts with browser shortcuts!
-       keyDown: function(event) {
-         var ret = NO, commandCode = event.commandCodes();
-         // console.log('DEBUG: hotkey "' + commandCode[0] + '" pressed');
-         if(commandCode[0] === 'ctrl_left' && Tasks.mainPageHelper.get('showProjectsList')) {
-           Tasks.mainPageHelper.set('showProjectsList', NO);
-           ret = YES;
-         }
-         else if(commandCode[0] === 'ctrl_right' && !Tasks.mainPageHelper.get('showProjectsList')) {
-           Tasks.mainPageHelper.set('showProjectsList', YES);
-           ret = YES;
-         }
-         else if(commandCode[0] === 'left') {
-           Tasks.getPath('mainPage.mainPane.projectsList').becomeFirstResponder();
-           ret = YES;
-         }
-         else if(commandCode[0] === 'right') {
-           var sel = Tasks.getPath('tasksController.selection');
-           var singleSelect = (sel && sel.get('length') === 1);
-           if(singleSelect) {
-             var task = sel.get('firstObject');
-             if(task) Tasks.getPath('mainPage.taskEditor').popup(task);
-           }
-           ret = YES;
-         }
-         else if(commandCode[0] === 'ctrl_='){  // control equals
-           Tasks.statechart.sendEvent('addTask');
-           ret = YES;
-         }
-         else if(commandCode[0] === 'ctrl_shift_=' || commandCode[0] === 'ctrl_shift_+') {  // control shift equals (Safari) or plus (Firefox)
-           Tasks.statechart.sendEvent('duplicateTask');
-           ret = YES;
-         }
-         else {
-           ret = sc_super();
-         }
-         return ret;
-       }
-
-     }) // tasksListView
-
-  }), // tasksListScrollView
+   tasksList: Tasks.TasksListView.design(),
   
-  taskEditor: Tasks.TaskEditorView.design({})
+   taskEditor: Tasks.TaskEditorView.design()
 
 }); // mainPage

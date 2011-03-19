@@ -138,7 +138,9 @@ Tasks.mixin( /** @scope Tasks */ {
     CoreTasks.set('currentUser', currentUser);
     CoreTasks.setPermissions();
     var welcomeMessage = Tasks.getPath('mainPage.mainPane.welcomeMessage');
-    welcomeMessage.set('toolTip', "_LoginSince".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
+    if(welcomeMessage) {
+      welcomeMessage.set('toolTip', "_LoginSince".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
+    }
 
     // Based on user's role set up appropriate task filter
     if(CoreTasks.getPath('currentUser.role') === CoreTasks.USER_ROLE_DEVELOPER) { // Set assignee selection filter to current user
@@ -193,8 +195,10 @@ Tasks.mixin( /** @scope Tasks */ {
     
     // Indicate data loading start on status bar
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
-    serverMessage.set('icon', 'progress-icon');
-    serverMessage.set('value', "_LoadingData".loc());
+    if(serverMessage) {
+      serverMessage.set('icon', 'progress-icon');
+      serverMessage.set('value', "_LoadingData".loc());
+    }
 
     // Get the last retrieved information from localStorage (if available).
     var lastRetrieved = Tasks.get('lastRetrieved');
@@ -292,8 +296,10 @@ Tasks.mixin( /** @scope Tasks */ {
  
     // Indicate data loading completion on status bar
     var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
-    serverMessage.set('icon', '');
-    serverMessage.set('value', "_DataLoaded".loc() + SC.DateTime.create(parseInt(Tasks.get('lastRetrieved'), 10)).toFormattedString(CoreTasks.TIME_DATE_FORMAT));
+    if(serverMessage) {
+      serverMessage.set('icon', '');
+      serverMessage.set('value', "_DataLoaded".loc() + SC.DateTime.create(parseInt(Tasks.get('lastRetrieved'), 10)).toFormattedString(CoreTasks.TIME_DATE_FORMAT));
+    }
     Tasks.projectsController.refreshCountdowns();
 
   },

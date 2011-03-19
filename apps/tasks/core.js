@@ -17,6 +17,9 @@ Tasks = SC.Object.create(
 
   NAMESPACE: 'Tasks',
   VERSION: '1.7',
+  
+  isMobile: (/iPhone|iPod/).test(navigator.platform),
+  
   isLoaded: NO, // for Lebowski
 
   // Customizable "Load Done Project Data": set to false for installations where the data can grow to large volumes
