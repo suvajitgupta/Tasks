@@ -20,7 +20,7 @@ Tasks.loginPage = SC.Page.create({
     
     contentView: SC.View.design({
       
-      layout: { centerX: 0, centerY: 0, width: 300, height: 300 },
+      layout: { centerX: 0, centerY: 0, width: 260, height: 300 },
       classNames: ['login-body'],
       childViews: 'tasksLogo loginNameField passwordField authenticatingMessageLabel loginErrorMessageLabel loadDoneProjectDataCheckbox guestSignupButton signinButton'.w(),
       
@@ -31,13 +31,13 @@ Tasks.loginPage = SC.Page.create({
       }),
       
       loginNameField: SC.TextFieldView.design({
-        layout: { top: 90, centerX: 0, width: 200, height: 32 },
+        layout: { top: 90, centerX: 0, width: 250, height: 32 },
         hint: '_LoginNameHint'.loc(),
         valueBinding: 'Tasks.loginController.loginName'
       }),
       
       passwordField: SC.TextFieldView.design({
-        layout: { top: 136, centerX: 0, width: 200, height: 32 },
+        layout: { top: 136, centerX: 0, width: 250, height: 32 },
         isPassword: YES,
         hint: '_PasswordHint'.loc(),
         valueBinding: 'Tasks.loginController.password'

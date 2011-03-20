@@ -137,9 +137,9 @@ Tasks.mixin( /** @scope Tasks */ {
     // Greet user and save login session information
     CoreTasks.set('currentUser', currentUser);
     CoreTasks.setPermissions();
-    var welcomeMessage = Tasks.getPath('mainPage.mainPane.welcomeMessage');
-    if(welcomeMessage) {
-      welcomeMessage.set('toolTip', "_LoginSince".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
+    var welcomeMessageView = Tasks.getPath('mainPage.welcomeMessageView');
+    if(welcomeMessageView) {
+      welcomeMessageView.set('toolTip', "_LoginSince".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
     }
 
     // Based on user's role set up appropriate task filter
@@ -194,10 +194,10 @@ Tasks.mixin( /** @scope Tasks */ {
   loadData: function() {
     
     // Indicate data loading start on status bar
-    var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
-    if(serverMessage) {
-      serverMessage.set('icon', 'progress-icon');
-      serverMessage.set('value', "_LoadingData".loc());
+    var serverMessageView = Tasks.getPath('mainPage.serverMessageView');
+    if(serverMessageView) {
+      serverMessageView.set('icon', 'progress-icon');
+      serverMessageView.set('value', "_LoadingData".loc());
     }
 
     // Get the last retrieved information from localStorage (if available).
@@ -295,10 +295,10 @@ Tasks.mixin( /** @scope Tasks */ {
     }
  
     // Indicate data loading completion on status bar
-    var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
-    if(serverMessage) {
-      serverMessage.set('icon', '');
-      serverMessage.set('value', "_DataLoaded".loc() + SC.DateTime.create(parseInt(Tasks.get('lastRetrieved'), 10)).toFormattedString(CoreTasks.TIME_DATE_FORMAT));
+    var serverMessageView = Tasks.getPath('mainPage.serverMessageView');
+    if(serverMessageView) {
+      serverMessageView.set('icon', '');
+      serverMessageView.set('value', "_DataLoaded".loc() + SC.DateTime.create(parseInt(Tasks.get('lastRetrieved'), 10)).toFormattedString(CoreTasks.TIME_DATE_FORMAT));
     }
     Tasks.projectsController.refreshCountdowns();
 
@@ -308,9 +308,9 @@ Tasks.mixin( /** @scope Tasks */ {
    * Called after failed data load.
    */
   _loadDataFailure: function(response) {
-    var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
-    serverMessage.set('icon', '');
-    serverMessage.set('value', "_DataLoadFailed".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
+    var serverMessageView = Tasks.getPath('mainPage.serverMessageView');
+    serverMessageView.set('icon', '');
+    serverMessageView.set('value', "_DataLoadFailed".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
   },
   
   /**
@@ -338,9 +338,9 @@ Tasks.mixin( /** @scope Tasks */ {
    */
   saveChanges: function() {
     if(CoreTasks.get('needsSave')) {
-      var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
+      var serverMessageView = Tasks.getPath('mainPage.serverMessageView');
       CoreTasks.saveChanges();
-      serverMessage.set('value', "_DataSaved".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
+      serverMessageView.set('value', "_DataSaved".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
     }
   }
   

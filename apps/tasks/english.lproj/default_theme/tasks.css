@@ -25,13 +25,13 @@
   margin-left: -5px !important;
 }
 
-.sc-master-detail-view .sc-workspace-view .task-editor {
+.sc-pane .sc-container-view .task-editor {
   background: #DDD !important;
   border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
 }
-.sc-master-detail-view .sc-workspace-view .task-editor .title-bar {
+.sc-pane .sc-container-view .task-editor .title-bar {
   font-size: 14px !important;
   font-weight: bold !important;
   padding-top: 2px !important;
@@ -81,24 +81,24 @@
   opacity: 0.5;
 }
 
-.sc-master-detail-view .sc-workspace-view .task-editor .sc-label-view,
-.sc-master-detail-view .sc-workspace-view .task-editor .sc-split-view,
-.sc-master-detail-view .sc-workspace-view .task-editor .sc-split-view .sc-list-view,
-.sc-master-detail-view .sc-workspace-view .task-editor .sc-split-view .sc-scroll-view,
-.sc-master-detail-view .sc-workspace-view .task-editor .sc-split-view .sc-scroll-view .sc-container-view,
-.sc-master-detail-view .sc-workspace-view .task-editor .sc-split-view .sc-scroll-view .sc-container-view .sc-view,
-.sc-master-detail-view .sc-workspace-view .task-editor .sc-split-view .comments-view,
-.sc-master-detail-view .sc-workspace-view .task-editor .sc-scroller-view {
+.sc-pane .sc-container-view .task-editor .sc-label-view,
+.sc-pane .sc-container-view .task-editor .sc-split-view,
+.sc-pane .sc-container-view .task-editor .sc-split-view .sc-list-view,
+.sc-pane .sc-container-view .task-editor .sc-split-view .sc-scroll-view,
+.sc-pane .sc-container-view .task-editor .sc-split-view .sc-scroll-view .sc-container-view,
+.sc-pane .sc-container-view .task-editor .sc-split-view .sc-scroll-view .sc-container-view .sc-view,
+.sc-pane .sc-container-view .task-editor .sc-split-view .comments-view,
+.sc-pane .sc-container-view .task-editor .sc-scroller-view {
   background: none;
 }
-.sc-master-detail-view .sc-workspace-view .task-editor .scui-combobox-dropdown-button-view {
+.sc-pane .sc-container-view .task-editor .scui-combobox-dropdown-button-view {
   background-color: #DDD !important;
 }
 .project-editor .sc-text-field-view.text-area,
-.sc-master-detail-view .sc-workspace-view .task-editor .sc-text-field-view.text-area {
+.sc-pane .sc-container-view .task-editor .sc-text-field-view.text-area {
   background: beige !important;
 }
-.sc-master-detail-view .sc-workspace-view .task-editor .sc-text-field-view {
+.sc-pane .sc-container-view .task-editor .sc-text-field-view {
   background: #FFF !important;
 }
 
@@ -232,13 +232,13 @@
   opacity: 1;
 }
 
-.sc-master-detail-view .sc-workspace-view .task-editor .title-bar,
+.sc-pane .sc-container-view .task-editor .title-bar,
 .calendar .month {
   line-height: 24px;
   border-bottom: 1px solid #888;
 }
 
-.sc-master-detail-view .sc-workspace-view .task-editor .title-bar,
+.sc-pane .sc-container-view .task-editor .title-bar,
 .calendar .month,
 .assignee-not-loaded {
   background: #AAA none repeat scroll 0 0 !important;
@@ -385,10 +385,18 @@
 .task-item .sc-outline {
   left: 24px !important;
 }
+.task-item.mobile .sc-outline {
+  left: 0px !important;
+}
+
 
 .task-item .sc-outline img {
   margin-top: -9px !important;
   left: 53px !important;
+}
+
+.task-item.mobile .sc-outline img {
+  left: 5px !important;
 }
 
 .tasks-pane .sc-view.sc-list-item-view.sc-collection-item.task-item .sc-outline label {
@@ -398,6 +406,9 @@
   height: 24px !important;
   line-height: 24px !important;
   opacity: 1 !important;
+}
+.tasks-pane .sc-view.sc-list-item-view.sc-collection-item.task-item.mobile .sc-outline label {
+  left: 24px !important;
 }
 
 .tasks-pane .sc-view.sc-list-item-view.sc-collection-item.task-item.task-type-displayed label {
@@ -409,6 +420,10 @@
   top: 6px !important;
 	right: 14px !important;
 	background-color: #888;
+}
+.task-item.mobile .count,
+.task-item.mobile.sel .sc-outline .count {
+	right: 3px !important;
 }
 
 .task-item .description-icon {
@@ -538,8 +553,8 @@
 .tasks-pane .task-item.sel.hover {
   background: #9FF none repeat scroll 0 0 !important;
 }
-.tasks-pane .focus .task-item.sel,
-.tasks-pane .focus .task-item.sel.hover {
+.tasks-pane.focus .task-item.sel,
+.tasks-pane.focus .task-item.sel.hover {
   background: #6CF none repeat scroll 0 0 !important;
 }
 

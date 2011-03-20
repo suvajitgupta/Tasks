@@ -4,6 +4,9 @@
 /*globals CoreTasks Tasks sc_require SCUI sc_static*/
 
 sc_require('mixins/localized_label');
+sc_require('views/projects_list');
+sc_require('views/tasks_list');
+sc_require('views/task_editor');
 sc_require('views/logo');
 sc_require('views/summary');
 
@@ -105,21 +108,21 @@ Tasks.mainPageHelper = SC.Object.create({
 
 Tasks.mainPage = SC.Page.design({
   
-  showTasksList: function() {
-    this.setPath('mainPane.mainView', Tasks.mainPage.get('tasksList'));
-  },
-
   mainPane: SC.MainPane.design({
-
-   welcomeMessage: SC.outlet('mainView.detailView.topToolbar.welcomeMessageLabel'),
-   projectsList:   SC.outlet('mainView.masterView.contentView.projectsList.contentView'),
-   tasksSceneView: SC.outlet('mainView.detailView.contentView.tasksSceneView'),
-   serverMessage:  SC.outlet('mainView.detailView.contentView.tasksBottomBar.serverMessageView'),
 
    childViews: 'mainView'.w(),
    
    mainView: Tasks.isMobile?
-    Tasks.ProjectsListView.design() :
+    
+    SC.SceneView.design({
+      scenes: ['projectsList', 'tasksList', 'taskEditor'],
+      projectsList: Tasks.ProjectsListView.create(),
+      tasksList: Tasks.TasksListView.create(),
+      taskEditor: Tasks.taskEditorView,
+      transitionDuration: 0,
+      nowShowing: 'projectsList'
+    }) :
+    
     SC.MasterDetailView.design({
      
      layout: { top: 0, left: 0, right: 0, bottom: 0, minWidth: SC.platform.touch? 768 : 1024, minHeight: 500 },
@@ -135,9 +138,9 @@ Tasks.mainPage = SC.Page.design({
        else return this.get('showProjectsList')? SC.HORIZONTAL_ORIENTATION : SC.VERTICAL_ORIENTATION;
      }.property('frame', 'showProjectsList').cacheable(),
      
-     masterView: SC.WorkspaceView.extend({
+     masterView: SC.WorkspaceView.design({
        
-      topToolbar: SC.ToolbarView.extend({
+      topToolbar: SC.ToolbarView.design({
         
         childViews: 'installationLogo tasksLogo'.w(),
         classNames: ['title-bar'],
@@ -178,11 +181,11 @@ Tasks.mainPage = SC.Page.design({
       contentView: SC.View.design({ // projectsList/BottomBar
         
         childViews: 'projectsList projectsBottomBar'.w(),
-         
+        
         projectsList: Tasks.ProjectsListView.design({
           layout: { top: 0, bottom: 35, left: 10, right: 5 }
         }),
-         
+        
         projectsBottomBar: SC.View.design({
 
           layout: { bottom: 0, height: 35, left: 0, right: 0 },
@@ -214,9 +217,9 @@ Tasks.mainPage = SC.Page.design({
        
      }), // masterView
 
-     detailView: SC.WorkspaceView.extend({
+     detailView: SC.WorkspaceView.design({
 
-       topToolbar: SC.ToolbarView.extend({
+       topToolbar: SC.ToolbarView.design({
          
          childViews: 'actionsButton displayModeButton masterPickerButton welcomeMessageLabel clippyIcon filterPanelButton filterCancelButton tasksSearchField tasksSearchCancelButton'.w(),
          classNames: ['title-bar'],
@@ -242,7 +245,7 @@ Tasks.mainPage = SC.Page.design({
            })
          }),
 
-         displayModeButton: SC.ButtonView.extend({
+         displayModeButton: SC.ButtonView.design({
            layout: { left: 73, centerY: 0, height: 24, width: 50 },
             classNames: ['dark'],
             titleMinWidth: 0,
@@ -255,7 +258,7 @@ Tasks.mainPage = SC.Page.design({
             }
           }),
 
-         masterPickerButton: SC.ButtonView.extend({
+         masterPickerButton: SC.ButtonView.design({
            layout: { left: 135, centerY: 0, height: 24, width: 32 },
            titleMinWidth: 0,
            icon: 'empty-project-icon',
@@ -350,14 +353,14 @@ Tasks.mainPage = SC.Page.design({
        contentView: SC.View.design({ // tasksList/BottomBar
          
           childViews: 'tasksSceneView tasksBottomBar'.w(),
-         
+          
           tasksSceneView: SC.SceneView.design({
-           
             layout: { top: 2, bottom: 35, left: 5, right: 10 },
             scenes: ['tasksList', 'taskEditor'],
+            tasksList: Tasks.TasksListView.create(),
+            taskEditor: Tasks.taskEditorView,
             transitionDuration: 0,
             nowShowing: 'tasksList'
-           
           }),
          
           tasksBottomBar: SC.View.design({
@@ -426,7 +429,7 @@ Tasks.mainPage = SC.Page.design({
                action: 'refresh',
                isEnabledBinding: SC.Binding.transform(function(value, binding) {
                                                         return value === ''; // when not saving, shown via progress icon
-                                                      }).from('Tasks.mainPage.mainPane.serverMessage.icon')
+                                                      }).from('Tasks.mainPage.serverMessageView.icon')
              })
 
            }) // tasksBottomBar
@@ -438,9 +441,11 @@ Tasks.mainPage = SC.Page.design({
       }) // mainView
        
    }), // mainPane
-   
-   tasksList: Tasks.TasksListView.design(),
-  
-   taskEditor: Tasks.TaskEditorView.design()
 
+   projectsListView: SC.outlet(Tasks.isMobile? 'mainPane.mainView.projectsList.contentView' : 'mainPane.mainView.masterView.contentView.projectsList.contentView'),
+   tasksListView: SC.outlet(Tasks.isMobile? 'mainPane.mainView.tasksList.contentView' : 'mainPane.mainView.detailView.contentView.tasksSceneView.tasksList.contentView'),
+   tasksSceneView: SC.outlet('mainPane.mainView.detailView.contentView.tasksSceneView'),
+   welcomeMessageView: SC.outlet('mainPane.mainView.detailView.topToolbar.welcomeMessageLabel'),
+   serverMessageView: SC.outlet('mainPane.mainView.detailView.contentView.tasksBottomBar.serverMessageView')
+   
 }); // mainPage

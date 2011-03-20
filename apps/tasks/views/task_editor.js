@@ -91,8 +91,8 @@ Tasks.taskEditorHelper = SC.Object.create({
   
 });
 
-Tasks.TaskEditorView = SC.View.extend(
-/** @scope Tasks.TaskEditorView.prototype */ {
+Tasks.taskEditorView = SC.View.create(
+/** @scope Tasks.taskEditorView.prototype */ {
   
   task: null,
   titleBarHeight: 40,
@@ -100,11 +100,11 @@ Tasks.TaskEditorView = SC.View.extend(
   minHeight: 310,
   
   _computeTaskPosition: function(task) {
-    var tasksList = Tasks.getPath('tasksController.arrangedObjects');
-    var idx = tasksList.indexOf(task);
+    var tasks = Tasks.getPath('tasksController.arrangedObjects');
+    var idx = tasks.indexOf(task);
     if(idx === -1) return null;
-    var len = tasksList.get('length');
-    var groupIndexes = tasksList.contentGroupIndexes(null, tasksList);
+    var len = tasks.get('length');
+    var groupIndexes = tasks.contentGroupIndexes(null, tasks);
     var tasksCount = 0, groupsBeforeTaskCount = 0;
     for (var i = 0; i < len; i++) {
       if (groupIndexes.contains(i)) {
@@ -134,7 +134,7 @@ Tasks.TaskEditorView = SC.View.extend(
     editor.setPath('watchersButton.isEnabled', this._watches.length > 0);
     editor.setPath('nameField.value', task.get('name'));
     if(Tasks.getPath('tasksController.isEditable')) {
-      this.invokeLater(function() { Tasks.getPath('mainPage.taskEditor.editor.nameField').becomeFirstResponder(); }, 400);
+      this.invokeLater(function() { Tasks.taskEditorView.editor.nameField.becomeFirstResponder(); }, 400);
     }
     editor.setPath('typeField.value', task.get('type'));
     editor.setPath('priorityField.value', task.get('priority'));
@@ -194,17 +194,18 @@ Tasks.TaskEditorView = SC.View.extend(
   }.observes('.editor.statusField*value'),
   
   popup: function(task) {
-    if(Tasks.mainPage.getPath('mainPane.tasksSceneView.nowShowing') == 'taskEditor') {
+    if(Tasks.get('panelOpen') === Tasks.TASK_EDITOR) {
       this._postEditing();
     }
     else {
       Tasks.statechart.sendEvent('showTaskEditor');
-      Tasks.setPath('mainPage.mainPane.tasksSceneView.nowShowing', 'taskEditor');
+      if(Tasks.isMobile) Tasks.setPath('mainPage.mainPane.mainView.nowShowing', 'taskEditor');
+      else Tasks.setPath('mainPage.tasksSceneView.nowShowing', 'taskEditor');
       Tasks.set('panelOpen', Tasks.TASK_EDITOR);
     }
     this.set('task', task);
     this._preEditing();
-    // reselect task since selection is lost when tasksList slides out of view
+    // reselect task since selection is lost when tasks list slides out of view
     this.invokeLast(function() { Tasks.tasksController.selectObject(task); });
   },
   
@@ -212,8 +213,8 @@ Tasks.TaskEditorView = SC.View.extend(
     Tasks.set('panelOpen', null);
     this._postEditing();
     if(Tasks.get('autoSave') && !CoreTasks.get('isSaving')) Tasks.saveChanges();
-    Tasks.setPath('mainPage.mainPane.tasksSceneView.nowShowing', 'tasksList');
-    this.invokeLater(function() { Tasks.mainPage.tasksList.contentView.becomeFirstResponder(); }, 400);
+    Tasks.setPath('mainPage.tasksSceneView.nowShowing', 'tasksList');
+    this.invokeLater(function() { Tasks.getPath('mainPage.tasksListView').becomeFirstResponder(); }, 400);
   },
   
  showWatchers: function() {
@@ -247,7 +248,7 @@ Tasks.TaskEditorView = SC.View.extend(
  gotoPreviousTask: function() {
    this._postEditing();
    SC.RunLoop.begin();
-   Tasks.mainPage.getPath('tasksList.contentView').selectPreviousItem();
+   Tasks.getPath('mainPage.tasksListView').selectPreviousItem();
    SC.RunLoop.end();
    this.set('task', Tasks.tasksController.getPath('selection.firstObject'));
    this._preEditing();
@@ -256,16 +257,16 @@ Tasks.TaskEditorView = SC.View.extend(
  gotoNextTask: function() {
    this._postEditing();
    SC.RunLoop.begin();
-   Tasks.mainPage.getPath('tasksList.contentView').selectNextItem();
+   Tasks.getPath('mainPage.tasksListView').selectNextItem();
    SC.RunLoop.end();
    this.set('task', Tasks.tasksController.getPath('selection.firstObject'));
    this._preEditing();
  },
   
  editComment: function() {
-   var commentsList = Tasks.mainPage.getPath('taskEditor.editor.splitView.bottomRightView.commentsList.contentView');
-   var commentView = commentsList.itemViewForContentIndex(0);
-   SC.run(function() { commentsList.scrollToContentIndex(0); });
+   var commentsListView = Tasks.taskEditorView.editor.splitView.bottomRightView.commentsList.contentView;
+   var commentView = commentsListView.itemViewForContentIndex(0);
+   SC.run(function() { commentsListView.scrollToContentIndex(0); });
    commentView.editDescription();
  },
   
@@ -295,10 +296,10 @@ Tasks.TaskEditorView = SC.View.extend(
      action: 'gotoPreviousTask',
      isEnabledBinding: SC.Binding.transform(function(value, binding) {
                                               var task = value.getPath('firstObject');
-                                              var tasksList = Tasks.getPath('tasksController.arrangedObjects');
-                                              if(!tasksList) return false;
-                                              var idx = tasksList.indexOf(task);
-                                              var groupIndexes = tasksList.contentGroupIndexes(null, tasksList);
+                                              var tasks = Tasks.getPath('tasksController.arrangedObjects');
+                                              if(!tasks) return false;
+                                              var idx = tasks.indexOf(task);
+                                              var groupIndexes = tasks.contentGroupIndexes(null, tasks);
                                               for (--idx; idx >= 0; idx--) {
                                                 if (!groupIndexes.contains(idx)) return true;
                                               }
@@ -312,10 +313,10 @@ Tasks.TaskEditorView = SC.View.extend(
      action: 'gotoNextTask',
      isEnabledBinding: SC.Binding.transform(function(value, binding) {
                                               var task = value.getPath('firstObject');
-                                              var tasksList = Tasks.getPath('tasksController.arrangedObjects');
-                                              if(!tasksList) return false;
-                                              var idx = tasksList.indexOf(task);
-                                              var len = tasksList.get('length') - 1;
+                                              var tasks = Tasks.getPath('tasksController.arrangedObjects');
+                                              if(!tasks) return false;
+                                              var idx = tasks.indexOf(task);
+                                              var len = tasks.get('length') - 1;
                                               if(idx === len) return false;
                                               return true;
                                             }).from('Tasks*tasksController.selection')
@@ -323,6 +324,7 @@ Tasks.TaskEditorView = SC.View.extend(
 
    positionLabel: SC.LabelView.design({
      layout: { width: 100, right: 75, top: 5, height: 16 },
+     isVisible: !Tasks.isMobile,
      textAlign: SC.ALIGN_RIGHT
    }),
    

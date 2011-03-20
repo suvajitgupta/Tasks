@@ -1,7 +1,7 @@
 // ==========================================================================
 // Project: Tasks 
 // ==========================================================================
-/*globals CoreTasks Tasks sc_require */
+/*globals Tasks sc_require*/
 /** 
 
   Scrollable Projects List view.
@@ -9,25 +9,27 @@
   @extends SC.ScrollView
   @author Suvajit Gupta
 */
+sc_require('views/list');
+sc_require('views/group_item');
+sc_require('views/project_item');
 
 Tasks.ProjectsListView = SC.ScrollView.extend({
   
-  classNames: ['projects-pane'],
-  
   contentView: Tasks.ListView.design({
+    
+    classNames: ['projects-pane'],
+    contentBinding: 'Tasks.sourcesController*arrangedObjects',
+    selectionBinding: 'Tasks.projectsController.selection',
     contentValueKey: 'displayName',
     contentUnreadCountKey: 'displayCountDown',
-    contentBinding: 'Tasks.sourcesController.arrangedObjects',
-    selectionBinding: 'Tasks.projectsController.selection',
+    contentIconKey: 'icon',
+    hasContentIcon: YES,
     localize: YES,
     rowHeight: 24,
-    classNames: ['projects-pane'],
-    hasContentIcon: YES,
-    contentIconKey: 'icon',
     exampleView: Tasks.ProjectItemView,
     groupExampleView: Tasks.GroupItemView,
-    isEditable: YES,
     allowDeselectAll: YES,
+    isEditable: YES,
     canEditContent: YES,
     canReorderContent: YES,
     canDeleteContent: YES,
@@ -38,8 +40,7 @@ Tasks.ProjectsListView = SC.ScrollView.extend({
     selectionEvent: null,
     mouseDown: function(event) {
       var ret = sc_super();
-      if(Tasks.isMobile) Tasks.mainPage.showTasksList();
-      else if(event.which === 3) { // right click
+      if(event.which === 3) { // right click
         this.set('selectionEvent', event);
         this.invokeLast('popupContextMenu');
       }
@@ -72,7 +73,7 @@ Tasks.ProjectsListView = SC.ScrollView.extend({
         ret = YES;
       }
       if (ret || Tasks.getPath('assignmentsController.displayMode') === Tasks.DISPLAY_MODE_TASKS && commandCode[0] === 'right') {
-        Tasks.mainPage.tasksList.contentView.becomeFirstResponder();
+        Tasks.getPath('mainPage.tasksListView').becomeFirstResponder();
         if(Tasks.tasksController.getPath('selection.length') === 0) Tasks.tasksController.selectFirstTask();
         ret = YES;
       }

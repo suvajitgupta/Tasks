@@ -43,7 +43,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       this._timer.invalidate();
       this._timer = null;
     }
-    Tasks.getPath('mainPage.taskEditor').popup(this.get('content'));
+    Tasks.taskEditorView.popup(this.get('content'));
   },
   touchStart: function(event) {
     // console.log('DEBUG: touch start on task item: ' + this.getPath('content.name'));
@@ -109,16 +109,8 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     this._textSearch = Tasks.assignmentsController.get('textSearch');
     sc_super();
     
-    // Put a dot before tasks that were created or updated recently
-    if(content.get('isRecentlyUpdated')) {
-      context = context.begin('div').addClass('recently-updated').attr({
-        title: "_RecentlyUpdatedTooltip".loc(),
-        alt: "_RecentlyUpdatedTooltip".loc()
-      }).end();
-    }
-
     var priority = content.get('priority');
-    context.addClass('task-item');
+    context.addClass('task-item' + (Tasks.isMobile? ' mobile' : ''));
     if(Tasks.softwareMode) context.addClass('task-type-displayed');
     switch(priority){
       case CoreTasks.TASK_PRIORITY_HIGH:
@@ -137,53 +129,66 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       context.removeClass('hover');
     }
     
-    var editingTooltip = "_ClickToViewEditDetailsTooltip".loc();
-    var idTooltip = "_TaskIdTooltip".loc();
-    if(Tasks.softwareMode) idTooltip += "_TaskValidationTooltip".loc();
-    var submitterUser = content.get('submitter');
-    if (submitterUser) idTooltip += ("_SubmitterTooltip".loc() + '%@ (%@)'.fmt(submitterUser.get('name'), submitterUser.get('loginName')));
-    var validationClass = 'task-validation-untested';
-    if(Tasks.softwareMode) {
-      var validation = content.get('validation');
-      switch(validation){
-        case CoreTasks.TASK_VALIDATION_PASSED:
-          validationClass = 'task-validation-passed';
+    if(!Tasks.isMobile) {
+      
+      // Put a dot before tasks that were created or updated recently
+      if(content.get('isRecentlyUpdated')) {
+        context = context.begin('div').addClass('recently-updated').attr({
+          title: "_RecentlyUpdatedTooltip".loc(),
+          alt: "_RecentlyUpdatedTooltip".loc()
+        }).end();
+      }
+
+      // Show ID with validation if needed
+      var editingTooltip = "_ClickToViewEditDetailsTooltip".loc();
+      var idTooltip = "_TaskIdTooltip".loc();
+      if(Tasks.softwareMode) idTooltip += "_TaskValidationTooltip".loc();
+      var submitterUser = content.get('submitter');
+      if (submitterUser) idTooltip += ("_SubmitterTooltip".loc() + '%@ (%@)'.fmt(submitterUser.get('name'), submitterUser.get('loginName')));
+      var validationClass = 'task-validation-untested';
+      if(Tasks.softwareMode) {
+        var validation = content.get('validation');
+        switch(validation){
+          case CoreTasks.TASK_VALIDATION_PASSED:
+            validationClass = 'task-validation-passed';
+            break;
+          case CoreTasks.TASK_VALIDATION_FAILED:
+            validationClass = 'task-validation-failed';
+            break;          
+        }
+      }
+      var displayId = content.get('displayId');
+      var taskIdClass = 'task-id';
+      if(CoreTasks.isCurrentUserWatchingTask(content) === CoreTasks.TASK_WATCH_ON) taskIdClass += ' watched-task';
+      context = context.begin('div').addClass('task-margin').attr('title', editingTooltip).attr('alt', editingTooltip).
+                  begin('div').addClass(taskIdClass).addClass(validationClass).
+                  text(displayId).attr('title', idTooltip).attr('alt', idTooltip).end().end();
+
+      switch(content.get('developmentStatus')){
+        case CoreTasks.STATUS_PLANNED:
+          context.addClass('status-planned');
           break;
-        case CoreTasks.TASK_VALIDATION_FAILED:
-          validationClass = 'task-validation-failed';
+        case CoreTasks.STATUS_ACTIVE:
+          context.addClass('status-active');
+          break;
+        case CoreTasks.STATUS_DONE:
+          context.addClass('status-done');
+          break;          
+        case CoreTasks.STATUS_RISKY:
+          context.addClass('status-risky');
           break;          
       }
-    }
-    var displayId = content.get('displayId');
-    var taskIdClass = 'task-id';
-    if(CoreTasks.isCurrentUserWatchingTask(content) === CoreTasks.TASK_WATCH_ON) taskIdClass += ' watched-task';
-    context = context.begin('div').addClass('task-margin').attr('title', editingTooltip).attr('alt', editingTooltip).
-                begin('div').addClass(taskIdClass).addClass(validationClass).
-                text(displayId).attr('title', idTooltip).attr('alt', idTooltip).end().end();
       
-    switch(content.get('developmentStatus')){
-      case CoreTasks.STATUS_PLANNED:
-        context.addClass('status-planned');
-        break;
-      case CoreTasks.STATUS_ACTIVE:
-        context.addClass('status-active');
-        break;
-      case CoreTasks.STATUS_DONE:
-        context.addClass('status-done');
-        break;          
-      case CoreTasks.STATUS_RISKY:
-        context.addClass('status-risky');
-        break;          
-    }
-    
-    // Indicate which items have a description
-    var description = SC.RenderContext.escapeHTML(content.get('description'));
-    if(description) {
-      description = description.replace(/\"/g, '\'');
-      // Ue 'highlight' instead of 'div' below if description has a textSearch match
-      var matchIndex = this._textSearch? description.toLowerCase().indexOf(this._textSearch) : -1;
-      context = context.begin('div').addClass('description-icon' + (matchIndex !== -1? ' highlight' : ''))
-                  .attr({'title': description,'alt': description}).end();
+      // Indicate which items have a description
+      var description = SC.RenderContext.escapeHTML(content.get('description'));
+      if(description) {
+        description = description.replace(/\"/g, '\'');
+        // Ue 'highlight' instead of 'div' below if description has a textSearch match
+        var matchIndex = this._textSearch? description.toLowerCase().indexOf(this._textSearch) : -1;
+        context = context.begin('div').addClass('description-icon' + (matchIndex !== -1? ' highlight' : ''))
+                    .attr({'title': description,'alt': description}).end();
+      }
+
     }
     
   },

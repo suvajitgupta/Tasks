@@ -12,8 +12,7 @@ Tasks.LoggedInState = Ki.State.extend({
   
   enterState: function() {
     Tasks.loadData();  
-    var projectsList = Tasks.getPath('mainPage.mainPane.projectsList');
-    if(projectsList) projectsList.becomeFirstResponder();
+    Tasks.getPath('mainPage.projectsListView').becomeFirstResponder();
   },
   
   // State to handle globally available actions

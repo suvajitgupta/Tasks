@@ -1,6 +1,6 @@
 // Project: Tasks 
 // ==========================================================================
-/*globals CoreTasks Tasks sc_require */
+/*globals Tasks sc_require*/
 /** 
 
   Scrollable Projects List view.
@@ -8,12 +8,15 @@
   @extends SC.ScrollView
   @author Suvajit Gupta
 */
+sc_require('views/list');
+sc_require('views/assignee_item');
+sc_require('views/project_item');
 
 Tasks.TasksListView = SC.ScrollView.extend({
-  
-  classNames: ['tasks-pane'],
-  
+    
   contentView: Tasks.ListView.design({
+    
+    classNames: ['tasks-pane'],
     contentValueKey: 'displayName',
     contentUnreadCountKey: 'displayEffort',
     contentBinding: SC.Binding.oneWay('Tasks.tasksController.arrangedObjects'),
@@ -154,7 +157,7 @@ Tasks.TasksListView = SC.ScrollView.extend({
         ret = YES;
       }
       else if(commandCode[0] === 'left') {
-        Tasks.getPath('mainPage.mainPane.projectsList').becomeFirstResponder();
+        Tasks.getPath('mainPage.projectsListView').becomeFirstResponder();
         ret = YES;
       }
       else if(commandCode[0] === 'right') {
@@ -162,7 +165,7 @@ Tasks.TasksListView = SC.ScrollView.extend({
         var singleSelect = (sel && sel.get('length') === 1);
         if(singleSelect) {
           var task = sel.get('firstObject');
-          if(task) Tasks.getPath('mainPage.taskEditor').popup(task);
+          if(task) Tasks.taskEditorView.popup(task);
         }
         ret = YES;
       }

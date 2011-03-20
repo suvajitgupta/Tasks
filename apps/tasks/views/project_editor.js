@@ -95,7 +95,7 @@ Tasks.projectEditorPage = SC.Page.create({
         var activatedAt = this.getPath('contentView.activatedAtField.date');
         // console.log('DEBUG: _timeLeftOrActivatedAtDidChange activatedAt ' + (activatedAt? activatedAt.toFormattedString(CoreTasks.DATE_FORMAT) : 'None'));
         if(activatedAt) {
-          var endDate = CoreTasks.computeEndDate(activatedAt, timeLeft);
+          endDate = CoreTasks.computeEndDate(activatedAt, timeLeft);
           // console.log('DEBUG: _timeLeftOrActivatedAtDidChange endDate ' + endDate.toFormattedString(CoreTasks.DATE_FORMAT));
         }
       }
@@ -131,7 +131,7 @@ Tasks.projectEditorPage = SC.Page.create({
     remove: function() {
       this._postEditing();
       if(Tasks.get('autoSave') && !CoreTasks.get('isSaving')) Tasks.saveChanges();
-      this.invokeLater(function() { Tasks.mainPage.getPath('mainPane.projectsList').becomeFirstResponder(); }, 400);
+      this.invokeLater(function() { Tasks.getPath('mainPage.projectsListView').becomeFirstResponder(); }, 400);
       sc_super();
       this.destroy();
     },

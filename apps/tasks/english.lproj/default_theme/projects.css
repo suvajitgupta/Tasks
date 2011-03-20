@@ -180,17 +180,19 @@
   margin-top: -9px !important;
 }
 
-.projects-pane .sc-view .project-item .count,
-.projects-pane .sc-view .project-item.sel .count {
+.sc-view .projects-pane .project-item .count,
+.sc-view .projects-pane .project-item.sel .count {
   top: 11px !important;
 }
 
-.projects-pane .sc-view .project-item .count {
+.sc-view .projects-pane .project-item .count {
   right: 14px !important;
   background: #888 !important;
   color: white !important;
 }
-
+.sc-view .projects-pane .project-item.mobile .count {
+  right: 3px !important;
+}
 .project-item .description-icon {
   position: absolute;
   top: 4px !important;

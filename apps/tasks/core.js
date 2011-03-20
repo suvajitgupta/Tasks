@@ -87,8 +87,8 @@ Tasks = SC.Object.create(
    */
   dataSaveErrorCallback: function(errorRecordType) {
     // console.log('DEBUG: dataSaveErrorCallback(' + errorRecordType + ')');
-    var serverMessage = Tasks.getPath('mainPage.mainPane.serverMessage');
-    serverMessage.set('value', "_DataSaveError".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
+    var serverMessageView = Tasks.getPath('mainPage.serverMessageView');
+    serverMessageView.set('value', "_DataSaveError".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
   }
     
 });

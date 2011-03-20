@@ -83,6 +83,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
          classes.match(/count/) || classes.match(/inner/)  || classes.match(/description-icon/))) {
       this._startEditing();
     }
+    else if(Tasks.isMobile) Tasks.statechart.sendEvent('showTasksList');
 
     return NO; // so that drag-n-drop can work!
     
@@ -125,18 +126,9 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     // console.log('DEBUG: Project render(' + firstTime + '): ' + content.get('displayName'));
     sc_super();
     
-    
-    // Put a dot before non-system projects that were created or updated recently
-    var isSystemProject = CoreTasks.isSystemProject(content);
-    if(!isSystemProject && content.get('isRecentlyUpdated')) {
-      context = context.begin('div').addClass('recently-updated').attr({
-        title: "_RecentlyUpdatedTooltip".loc(),
-        alt: "_RecentlyUpdatedTooltip".loc()
-      }).end();
-    }
-
     var projectTooltip = '';
-    if(content.get('id')) context.addClass('project-item');
+    if(content.get('id')) context.addClass('project-item' + (Tasks.isMobile? ' mobile' : ''));
+    var isSystemProject = CoreTasks.isSystemProject(content);
     if(!isSystemProject) {
       var editingTooltip = "_ClickToViewEditDetailsTooltip".loc();
       context = context.begin('div').addClass('project-margin').attr('title', editingTooltip).attr('alt', editingTooltip).end();
@@ -146,15 +138,27 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     } else {
       context.removeClass('hover');
     }
-
-    // Indicate which items have a description
-    var description = SC.RenderContext.escapeHTML(content.get('description'));
-    if(description) {
-      description = description.replace(/\"/g, '\'');
-      context = context.begin('div').addClass('description-icon')
-                  .attr({'title': description,'alt': description}).end();
-    }
     
+    if(!Tasks.isMobile) {
+      
+      // Put a dot before non-system projects that were created or updated recently
+      if(!isSystemProject && content.get('isRecentlyUpdated')) {
+        context = context.begin('div').addClass('recently-updated').attr({
+          title: "_RecentlyUpdatedTooltip".loc(),
+          alt: "_RecentlyUpdatedTooltip".loc()
+        }).end();
+      }
+
+      // Indicate which items have a description
+      var description = SC.RenderContext.escapeHTML(content.get('description'));
+      if(description) {
+        description = description.replace(/\"/g, '\'');
+        context = context.begin('div').addClass('description-icon')
+                    .attr({'title': description,'alt': description}).end();
+      }
+
+    }
+
   },
 
   renderIcon: function(context, icon) {
