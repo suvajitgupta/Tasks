@@ -11,7 +11,7 @@
   @author Suvajit Gupta
 */
 Tasks.projectEditorHelper = SC.Object.create({
-  listStatuses: function() {
+  statuses: function() {
      var ret = [];
      ret.push({ name: '<span class=status-planned>' + CoreTasks.STATUS_PLANNED.loc() + '</span>', value: CoreTasks.STATUS_PLANNED });
      ret.push({ name: '<span class=status-active>' + CoreTasks.STATUS_ACTIVE.loc() + '</span>', value: CoreTasks.STATUS_ACTIVE });
@@ -159,7 +159,7 @@ Tasks.projectEditorPage = SC.Page.create({
         classNames: ['square'],
         localize: YES,
         isEnabledBinding: 'CoreTasks.permissions.canUpdateProject',
-        objects: Tasks.projectEditorHelper.listStatuses(),
+        objects: Tasks.projectEditorHelper.statuses(),
         nameKey: 'name',
         valueKey: 'value',
         toolTip: "_StatusTooltip".loc()

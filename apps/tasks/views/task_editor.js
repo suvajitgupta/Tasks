@@ -12,7 +12,7 @@
 */
 Tasks.taskEditorHelper = SC.Object.create({
   
-  listTypes: function() {
+  types: function() {
      var ret = [];
      ret.push({ name: CoreTasks.TASK_TYPE_FEATURE, value: CoreTasks.TASK_TYPE_FEATURE, icon: 'task-icon-feature' });
      ret.push({ name: CoreTasks.TASK_TYPE_BUG, value: CoreTasks.TASK_TYPE_BUG, icon: 'task-icon-bug' });
@@ -20,7 +20,7 @@ Tasks.taskEditorHelper = SC.Object.create({
      return ret;
   },
 
-  listPriorities: function() {
+  priorities: function() {
      var ret = [];
      ret.push({ name: '<span class=task-priority-high>' + CoreTasks.TASK_PRIORITY_HIGH.loc() + '</span>', value: CoreTasks.TASK_PRIORITY_HIGH });
      ret.push({ name: '<span class=task-priority-medium>' + CoreTasks.TASK_PRIORITY_MEDIUM.loc() + '</span>', value: CoreTasks.TASK_PRIORITY_MEDIUM });
@@ -28,7 +28,7 @@ Tasks.taskEditorHelper = SC.Object.create({
      return ret;
   },
 
-  listStatuses: function() {
+  statuses: function() {
      var ret = [];
      ret.push({ name: '<span class=status-planned>' + CoreTasks.STATUS_PLANNED.loc() + '</span>', value: CoreTasks.STATUS_PLANNED });
      ret.push({ name: '<span class=status-active>' + CoreTasks.STATUS_ACTIVE.loc() + '</span>', value: CoreTasks.STATUS_ACTIVE });
@@ -37,7 +37,7 @@ Tasks.taskEditorHelper = SC.Object.create({
      return ret;
   },
 
-  listValidations: function() {
+  validations: function() {
      var ret = [];
      ret.push({ name: '<span class=task-validation-untested>' + CoreTasks.TASK_VALIDATION_UNTESTED.loc() + '</span>', value: CoreTasks.TASK_VALIDATION_UNTESTED });
      ret.push({ name: '<span class=task-validation-passed>' + CoreTasks.TASK_VALIDATION_PASSED.loc() + '</span>', value: CoreTasks.TASK_VALIDATION_PASSED });
@@ -48,10 +48,10 @@ Tasks.taskEditorHelper = SC.Object.create({
   _usersCountBinding: SC.Binding.oneWay('Tasks.usersController*arrangedObjects.length'),
   _listUsers: function() {
     // console.log('DEBUG: _listUsers');
-    var usersList = Tasks.usersController.get('content');
+    var users = Tasks.usersController.get('content');
     var ret1 = [], ret2 = [];
-    if(usersList) {
-      var users = usersList.toArray();
+    if(users) {
+      users = users.toArray();
       for(var i=0, len = users.get('length'); i < len; i++) {
         var user = users.objectAt(i);
         ret1.push(user);
@@ -61,19 +61,19 @@ Tasks.taskEditorHelper = SC.Object.create({
       ret1.push(unassigned);
       ret2.push(unassigned);
     }
-    this.set('usersList', ret1);
+    this.set('users', ret1);
     this.set('nonGuestsList', ret2);
   }.observes('_usersCount'),
-  usersList: null,
+  users: null,
   nonGuestsList: null,
 
   _projectsCountBinding: SC.Binding.oneWay('Tasks.projectsController*arrangedObjects.length'),
   _listProjects: function() {
     // console.log('DEBUG: _listProjects');
-    var projectsList = Tasks.projectsController.get('content');
+    var projects = Tasks.projectsController.get('content');
     var ret = [];
-    if(projectsList) {
-      ret = projectsList.toArray();
+    if(projects) {
+      ret = projects.toArray();
       // Remove system projects from list since you cannot assign to them
       var idx = ret.indexOf(CoreTasks.get('allTasksProject'));
       if(idx !== -1) ret.splice(idx, 1);
@@ -85,9 +85,9 @@ Tasks.taskEditorHelper = SC.Object.create({
         ret.push({ id: 0, icon: CoreTasks.getPath('unallocatedTasksProject.icon'), displayName: "_UnallocatedTasks".loc() });
       }
     }
-    this.set('projectsList', ret);
+    this.set('projects', ret);
   }.observes('_projectsCount'),
-  projectsList: null
+  projects: null
   
 });
 
@@ -353,7 +353,7 @@ Tasks.TaskEditorView = SC.View.extend(
      localize: YES,
      isVisibleBinding: 'Tasks.softwareMode',
      isEnabledBinding: 'Tasks.tasksController.isEditable',
-     objects: Tasks.taskEditorHelper.listTypes(),
+     objects: Tasks.taskEditorHelper.types(),
      nameKey: 'name',
      valueKey: 'value',
      iconKey: 'icon',
@@ -370,7 +370,7 @@ Tasks.TaskEditorView = SC.View.extend(
      classNames: ['square'],
      localize: YES,
      isEnabledBinding: 'Tasks.tasksController.isEditable',
-     objects: Tasks.taskEditorHelper.listPriorities(),
+     objects: Tasks.taskEditorHelper.priorities(),
      nameKey: 'name',
      valueKey: 'value',
      toolTip: "_PriorityTooltip".loc()
@@ -386,7 +386,7 @@ Tasks.TaskEditorView = SC.View.extend(
      classNames: ['square'],
      localize: YES,
      isEnabledBinding: 'Tasks.tasksController.isEditable',
-     objects: Tasks.taskEditorHelper.listStatuses(),
+     objects: Tasks.taskEditorHelper.statuses(),
      nameKey: 'name',
      valueKey: 'value',
      toolTip: "_StatusTooltip".loc()
@@ -403,7 +403,7 @@ Tasks.TaskEditorView = SC.View.extend(
      classNames: ['square'],
      localize: YES,
      isVisibleBinding: 'Tasks.softwareMode',
-     objects: Tasks.taskEditorHelper.listValidations(),
+     objects: Tasks.taskEditorHelper.validations(),
      nameKey: 'name',
      valueKey: 'value',
      toolTip: "_ValidationTooltip".loc()
@@ -432,7 +432,7 @@ Tasks.TaskEditorView = SC.View.extend(
    }),
    projectField: SCUI.ComboBoxView.design({
      layout: { top: 146, left: 60, width: 270, height: 24 },
-     objectsBinding: SC.Binding.oneWay('Tasks.taskEditorHelper*projectsList'),
+     objectsBinding: SC.Binding.oneWay('Tasks.taskEditorHelper*projects'),
      nameKey: 'displayName',
      valueKey: 'id',
      iconKey: 'icon',
@@ -446,7 +446,7 @@ Tasks.TaskEditorView = SC.View.extend(
    }),
    submitterField: SCUI.ComboBoxView.design({
      layout: { top: 109, right: 10, width: 272, height: 24 },
-     objectsBinding: SC.Binding.oneWay('Tasks.taskEditorHelper*usersList'),
+     objectsBinding: SC.Binding.oneWay('Tasks.taskEditorHelper*users'),
      nameKey: 'displayName',
      valueKey: 'id',
      iconKey: 'icon',

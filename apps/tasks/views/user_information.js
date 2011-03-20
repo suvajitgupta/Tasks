@@ -14,7 +14,7 @@
 Tasks.UserInformationView = SC.View.extend(
 /** @scope Tasks.UserInformationView.prototype */ {
   
-  _listRoles: function() {
+  roles: function() {
      var ret = [];
      ret.push({ name: CoreTasks.USER_ROLE_MANAGER, value: CoreTasks.USER_ROLE_MANAGER, icon: 'user-role-manager' });
      ret.push({ name: Tasks.softwareMode? CoreTasks.USER_ROLE_DEVELOPER : "_User", value: CoreTasks.USER_ROLE_DEVELOPER, icon: 'user-role-developer' });
@@ -127,7 +127,7 @@ Tasks.UserInformationView = SC.View.extend(
       classNames: ['square'],
       localize: YES,
       isEnabledBinding: 'Tasks.userController.canUpdateUserRole',
-      objects: this._listRoles(),
+      objects: this.roles(),
       nameKey: 'name',
       valueKey: 'value',
       iconKey: 'icon',
