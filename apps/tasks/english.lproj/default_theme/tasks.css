@@ -315,7 +315,7 @@
 .assignee-item.incomplete-total-effort-warning .sc-outline .count.finished {
   top: 2px !important;
   font-size: 11px !important;
-  width: 120px !important;
+  width: 150px !important;
   border: 1px solid #555 !important;
   border-radius: 2px !important;
   -moz-border-radius: 2px !important;
@@ -329,7 +329,7 @@
 }
 
 .tasks-pane .assignee-item .sc-outline .count.finished {
-  right: 125px !important;
+  right: 155px !important;
   color: #FFF !important;
 }
 
