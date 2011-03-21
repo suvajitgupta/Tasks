@@ -290,7 +290,7 @@ Tasks.taskEditorView = SC.View.create(
     }),
 
    gotoPreviousTaskButton: SC.View.design(SCUI.SimpleButton, {
-     layout: { top: 3, right: 43, width: 17, height: 17 },
+     layout: { top: 3, right: 43, width: 16, height: 17 },
      classNames: ['previous-icon'],
      toolTip: "_GotoPreviousTask".loc(),
      action: 'gotoPreviousTask',
@@ -307,7 +307,7 @@ Tasks.taskEditorView = SC.View.create(
                                             }).from('Tasks*tasksController.selection')
    }),
    gotoNextTaskButton: SC.View.design(SCUI.SimpleButton, {
-     layout: { top: 3, right: 10, width: 17, height: 17 },
+     layout: { top: 3, right: 10, width: 16, height: 17 },
      classNames: ['next-icon'],
      toolTip: "_GotoNextTask".loc(),
      action: 'gotoNextTask',
