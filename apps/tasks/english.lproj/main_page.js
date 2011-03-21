@@ -251,6 +251,7 @@ Tasks.mainPage = SC.Page.design({
             classNames: ['dark'],
             titleMinWidth: 0,
             toolTip: "_DisplayModeTooltip".loc(),
+            isEnabledBinding: SC.Binding.not('Tasks.mainPageHelper*panelOpen'),
             titleBinding: SC.Binding.transform(function(value, binding) {
                                                  return value? "_TEAM".loc() : "_TASKS".loc();
                                                }).from('Tasks.assignmentsController*displayMode'),
