@@ -21,7 +21,7 @@ Tasks.ProjectsListView = SC.ScrollView.extend({
     contentBinding: 'Tasks.sourcesController*arrangedObjects',
     selectionBinding: 'Tasks.projectsController.selection',
     contentValueKey: 'displayName',
-    contentUnreadCountKey: 'displayCountDown',
+    contentUnreadCountKey: Tasks.isMobile? null : 'displayCountDown',
     contentIconKey: 'icon',
     hasContentIcon: YES,
     localize: YES,

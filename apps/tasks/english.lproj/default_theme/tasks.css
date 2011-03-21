@@ -409,6 +409,7 @@
 }
 .mobile .tasks-pane .sc-view.sc-list-item-view.sc-collection-item.task-item .sc-outline label {
   left: 24px !important;
+  right: 3px !important;
 }
 
 .tasks-pane .sc-view.sc-list-item-view.sc-collection-item.task-item.task-type-displayed label {

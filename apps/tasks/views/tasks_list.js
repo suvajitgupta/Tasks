@@ -18,7 +18,7 @@ Tasks.TasksListView = SC.ScrollView.extend({
     
     classNames: ['tasks-pane'],
     contentValueKey: 'displayName',
-    contentUnreadCountKey: 'displayEffort',
+    contentUnreadCountKey: Tasks.isMobile? null : 'displayEffort',
     contentBinding: SC.Binding.oneWay('Tasks.tasksController.arrangedObjects'),
     selectionBinding: 'Tasks.tasksController.selection',
     localize: YES,

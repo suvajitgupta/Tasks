@@ -173,6 +173,9 @@
   right: 50px !important;
   opacity: 1 !important;
 }
+.mobile .projects-pane .sc-view.sc-list-item-view.sc-collection-item .sc-outline label {
+  right: 3px !important;
+}
 
 .projects-pane .sel .sc-outline img,
 .users-pane .sel .sc-outline img {
