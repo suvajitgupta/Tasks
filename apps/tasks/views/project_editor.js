@@ -35,10 +35,10 @@ Tasks.projectEditorPage = SC.Page.create({
     
     project: null,
     titleBarHeight: 40,
-    minWidth: 700,
+    minWidth: Tasks.isMobile? 0: 700,
     minHeight: 250,
 
-    layout: { centerX:0, centerY: 0, width: 700, height: 315 },
+    layout: { centerX:0, centerY: 0, width: Tasks.isMobile? 300 : 700, height: 315 },
 
     _preEditing: function() {
       this.set('_modifying', true); // to prevent timeLeftDidChange and stoppedAtDidChange below from doing anything
@@ -145,17 +145,17 @@ Tasks.projectEditorPage = SC.Page.create({
         value: "_Name".loc()
       }),
       nameField: SC.TextFieldView.design({
-        layout: { top: 5, left: 80, right: 180, height: 24 },
+        layout: { top: 5, left: 80, right: Tasks.isMobile? 10: 180, height: 24 },
         isEnabledBinding: 'CoreTasks.permissions.canUpdateProject'
       }),
 
       statusLabel: SC.LabelView.design({
-        layout: { top: 7, right: 113, height: 24, width: 50 },
+        layout: Tasks.isMobile? { top: 40, left: 10, height: 24, width: 50 } : { top: 7, right: 113, height: 24, width: 50 },
         textAlign: SC.ALIGN_RIGHT,
         value: "_Status".loc()
       }),
       statusField: SC.SelectButtonView.design({
-        layout: { top: 5, right: 10, height: 24, width: 125 },
+        layout: Tasks.isMobile? { top: 38, left: 80, height: 24, width: 125 } : { top: 5, right: 10, height: 24, width: 125 },
         classNames: ['square'],
         localize: YES,
         isEnabledBinding: 'CoreTasks.permissions.canUpdateProject',
@@ -168,6 +168,7 @@ Tasks.projectEditorPage = SC.Page.create({
       activatedAtLabel: SC.LabelView.design({
         layout: { top: 40, left: 10, height: 24, width: 65 },
         textAlign: SC.ALIGN_RIGHT,
+        isVisible: !Tasks.isMobile,
         value: "_Activated:".loc()
       }),
       activatedAtField: SCUI.DatePickerView.design(SCUI.ToolTip, {
@@ -175,28 +176,33 @@ Tasks.projectEditorPage = SC.Page.create({
         dateFormat: CoreTasks.DATE_FORMAT,
         hint: "_ChooseDate".loc(),
         toolTip: "_ActivatedAtTooltip".loc(),
+        isVisible: !Tasks.isMobile,
         isEnabledBinding: 'CoreTasks.permissions.canUpdateProject'
       }),
 
       timeLeftLabel: SC.LabelView.design({
         layout: { top: 40, right: 416, height: 24, width: 60 },
         textAlign: SC.ALIGN_RIGHT,
+        isVisible: !Tasks.isMobile,
         value: "_TimeLeft:".loc()
       }),
       timeLeftField: SC.TextFieldView.design({
         layout: { top: 37, right: 350, width: 60, height: 24 },
+        isVisible: !Tasks.isMobile,
         isEnabledBinding: 'CoreTasks.permissions.canUpdateProject'
       }),
       timeLeftHelpLabel: SC.LabelView.design({
         layout: { top: 37, right: 180, height: 30, width: 160 },
         escapeHTML: NO,
         classNames: [ 'onscreen-help'],
+        isVisible: !Tasks.isMobile,
         value: "_TimeLeftOnscreenHelp".loc()
       }),
 
       stoppedAtLabel: SC.LabelView.design({
         layout: { top: 40, right: 113, height: 24, width: 75 },
         textAlign: SC.ALIGN_RIGHT,
+        isVisible: !Tasks.isMobile,
         value: "_Stopped:".loc()
       }),
       stoppedAtField: SCUI.DatePickerView.design(SCUI.ToolTip, {
@@ -204,6 +210,7 @@ Tasks.projectEditorPage = SC.Page.create({
         dateFormat: CoreTasks.DATE_FORMAT,
         hint: "_ChooseDate".loc(),
         toolTip: "_StoppedTooltip".loc(),
+        isVisible: !Tasks.isMobile,
         isEnabledBinding: 'CoreTasks.permissions.canUpdateProject'
       }),
 
@@ -213,7 +220,7 @@ Tasks.projectEditorPage = SC.Page.create({
         value: "_Description:".loc()
       }),
       descriptionField: SC.TextFieldView.design({
-        layout: { top: 95, left: 10, right: 10, bottom: 65 },
+        layout: { top: 95, left: 10, right: 10, bottom: Tasks.isMobile? 45: 65 },
         hint: "_DescriptionHint".loc(),
         maxLength: 500000,
         isTextArea: YES,
@@ -223,11 +230,13 @@ Tasks.projectEditorPage = SC.Page.create({
       createdAtLabel: SC.LabelView.design({
         layout: { left: 10, bottom: 45, height: 17, width: 250 },
         classNames: [ 'date-time'],
+        isVisible: !Tasks.isMobile,
         textAlign: SC.ALIGN_LEFT
       }),
       updatedAtLabel: SC.LabelView.design({
         layout: { right: 10, bottom: 45, height: 17, width: 250 },
         classNames: [ 'date-time'],
+        isVisible: !Tasks.isMobile,
         textAlign: SC.ALIGN_RIGHT
       }),
 
