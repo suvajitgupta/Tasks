@@ -415,6 +415,10 @@
 .tasks-pane .sc-view.sc-list-item-view.sc-collection-item.task-item.task-type-displayed label {
   left: 73px !important;
 }
+.tasks-pane .sc-view.sc-list-item-view.sc-collection-item.task-item.sel label:hover {
+  cursor: move !important;
+}
+
 
 .task-item .count,
 .task-item.sel .sc-outline .count {
