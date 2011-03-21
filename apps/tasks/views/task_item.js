@@ -110,7 +110,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     sc_super();
     
     var priority = content.get('priority');
-    context.addClass('task-item' + (Tasks.isMobile? ' mobile' : ''));
+    context.addClass('task-item');
     if(Tasks.softwareMode) context.addClass('task-type-displayed');
     switch(priority){
       case CoreTasks.TASK_PRIORITY_HIGH:

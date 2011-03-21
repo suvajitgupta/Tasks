@@ -190,7 +190,7 @@
   background: #888 !important;
   color: white !important;
 }
-.sc-view .projects-pane .project-item.mobile .count {
+.mobile .sc-view .projects-pane .project-item .count {
   right: 3px !important;
 }
 .project-item .description-icon {

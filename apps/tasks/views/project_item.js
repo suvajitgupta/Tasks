@@ -127,7 +127,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     sc_super();
     
     var projectTooltip = '';
-    if(content.get('id')) context.addClass('project-item' + (Tasks.isMobile? ' mobile' : ''));
+    if(content.get('id')) context.addClass('project-item');
     var isSystemProject = CoreTasks.isSystemProject(content);
     if(!isSystemProject) {
       var editingTooltip = "_ClickToViewEditDetailsTooltip".loc();
