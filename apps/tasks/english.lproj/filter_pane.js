@@ -14,7 +14,7 @@
 
 Tasks.filterPane = SC.SheetPane.create({  
   
-  layout: { centerX: 0, height: Tasks.softwareMode? 495 : 390, width: 305 },
+  layout: { centerX: 0, height: Tasks.softwareMode? 495 : 390, width: 310 },
   classNames: ['filter-pane'],
   
   contentView: SC.View.design({
@@ -327,7 +327,7 @@ Tasks.filterPane = SC.SheetPane.create({
     }),
 
     beingWatchedSegments: SC.SegmentedView.design({
-      layout: { bottom: 55, height: 24, left: 70, right: 10 },
+      layout: { bottom: 55, height: 24, left: 65, right: 10 },
       layoutDirection: SC.LAYOUT_HORIZONTAL,
       items: [
         { title: "_DontCare".loc(), value: Tasks.FILTER_DONT_CARE },
