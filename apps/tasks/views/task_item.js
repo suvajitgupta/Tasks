@@ -129,6 +129,21 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       context.removeClass('hover');
     }
     
+    switch(content.get('developmentStatus')) {
+      case CoreTasks.STATUS_PLANNED:
+        context.addClass('status-planned');
+        break;
+      case CoreTasks.STATUS_ACTIVE:
+        context.addClass('status-active');
+        break;
+      case CoreTasks.STATUS_DONE:
+        context.addClass('status-done');
+        break;          
+      case CoreTasks.STATUS_RISKY:
+        context.addClass('status-risky');
+        break;          
+    }
+    
     if(!Tasks.isMobile) {
       
       // Put a dot before tasks that were created or updated recently
@@ -164,21 +179,6 @@ Tasks.TaskItemView = SC.ListItemView.extend(
                   begin('div').addClass(taskIdClass).addClass(validationClass).
                   text(displayId).attr('title', idTooltip).attr('alt', idTooltip).end().end();
 
-      switch(content.get('developmentStatus')){
-        case CoreTasks.STATUS_PLANNED:
-          context.addClass('status-planned');
-          break;
-        case CoreTasks.STATUS_ACTIVE:
-          context.addClass('status-active');
-          break;
-        case CoreTasks.STATUS_DONE:
-          context.addClass('status-done');
-          break;          
-        case CoreTasks.STATUS_RISKY:
-          context.addClass('status-risky');
-          break;          
-      }
-      
       // Indicate which items have a description
       var description = SC.RenderContext.escapeHTML(content.get('description'));
       if(description) {
