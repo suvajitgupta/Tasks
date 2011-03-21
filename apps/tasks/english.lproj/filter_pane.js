@@ -14,7 +14,7 @@
 
 Tasks.filterPane = SC.SheetPane.create({  
   
-  layout: { centerX: 0, height: Tasks.softwareMode? 495 : 390, width: 320 },
+  layout: { centerX: 0, height: Tasks.softwareMode? 495 : 390, width: 305 },
   classNames: ['filter-pane'],
   
   contentView: SC.View.design({
@@ -283,7 +283,7 @@ Tasks.filterPane = SC.SheetPane.create({
     }),
 
     effortSpecifiedLabel: SC.LabelView.design({
-      layout: { bottom: 125, height: 22, left: 0, width: 125 },
+      layout: { bottom: 125, height: 22, left: 0, width: 120 },
       textAlign: SC.ALIGN_RIGHT,
       value: "_EffortSpecified:".loc()
     }),
@@ -302,7 +302,7 @@ Tasks.filterPane = SC.SheetPane.create({
     }),
 
     recentlyUpdatedLabel: SC.LabelView.design({
-      layout: { bottom: 90, height: 22, left: 0, width: 125 },
+      layout: { bottom: 90, height: 22, left: 0, width: 120 },
       textAlign: SC.ALIGN_RIGHT,
       value: "_RecentlyUpdated:".loc()
     }),
@@ -321,7 +321,7 @@ Tasks.filterPane = SC.SheetPane.create({
     }),
 
     beingWatchedLabel: SC.LabelView.design({
-      layout: { bottom: 55, height: 22, left: 0, width: 70 },
+      layout: { bottom: 55, height: 22, left: 0, width: 65 },
       textAlign: SC.ALIGN_RIGHT,
       value: "_Watched:".loc()
     }),
