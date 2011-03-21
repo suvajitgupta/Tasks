@@ -110,6 +110,7 @@ Tasks.mainPage = SC.Page.design({
   
   mainPane: SC.MainPane.design({
 
+   classNames: Tasks.isMobile? ['mobile'] : [],
    childViews: 'mainView'.w(),
    
    mainView: Tasks.isMobile?

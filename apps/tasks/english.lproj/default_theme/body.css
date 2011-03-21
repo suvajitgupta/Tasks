@@ -200,6 +200,10 @@ body.sc-theme,
   height: 4px !important;
 }
 
+.mobile .sc-list-item-view.sc-regular-size {
+  font-size: 12px;
+}
+
 .sc-theme .sc-list-view .sc-list-item-view.sc-group-item {
 	text-transform: uppercase;
 	font-weight: bold;
