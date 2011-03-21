@@ -23,7 +23,7 @@ Tasks.TasksListView = SC.ScrollView.extend({
     selectionBinding: 'Tasks.tasksController.selection',
     localize: YES,
     rowHeight: 24,
-    hasContentIcon: Tasks.softwareMode,
+    hasContentIcon: Tasks.softwareMode || Tasks.isMobile,
     contentIconKey: 'icon',
     exampleView: Tasks.TaskItemView,
     groupExampleView: Tasks.AssigneeItemView,
