@@ -16,7 +16,7 @@ Tasks = SC.Object.create(
   /** @scope Tasks.prototype */ {
 
   NAMESPACE: 'Tasks',
-  VERSION: '1.7',
+  VERSION: '1.8', // latest addition: mobile support (iPhone/iPod)
   
   isMobile: (/iPhone|iPod/).test(navigator.platform),
   
