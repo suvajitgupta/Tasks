@@ -338,9 +338,9 @@ Tasks.mixin( /** @scope Tasks */ {
    */
   saveChanges: function() {
     if(CoreTasks.get('needsSave')) {
-      var serverMessageView = Tasks.getPath('mainPage.serverMessageView');
       CoreTasks.saveChanges();
-      serverMessageView.set('value', "_DataSaved".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
+      var serverMessageView = Tasks.getPath('mainPage.serverMessageView');
+      if(serverMessageView) serverMessageView.set('value', "_DataSaved".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
     }
   }
   
