@@ -229,7 +229,7 @@ Tasks.taskEditorView = SC.View.create(
    }
    var pane = SC.PickerPane.create({
      layout: { width: 272, height: 100 },
-     contentView: SC.ScrollView.extend({
+     contentView: SC.ScrollView.design({
        contentView: SC.ListView.design({
          contentValueKey: 'displayName',
          content: this._watchers.sort(Tasks.nameAlphaSort),
