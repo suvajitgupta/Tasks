@@ -40,9 +40,7 @@
 	border: 1px solid #252525 !important;
 }
 
-.projects-pane .sc-collection-item,
 .projects-pane .sc-collection-item .sc-outline,
-.users-pane .sc-collection-item,
 .users-pane .sc-collection-item .sc-outline {
   left: 24px !important;
   border-radius: 3px !important;
@@ -137,6 +135,10 @@
   font-weight: normal !important;
 }
 
+.sc-list-view.projects-pane .sc-view.sc-list-item-view.sc-collection-item.project-item.sel label:hover,
+.sc-list-view.users-pane .sc-view.sc-list-item-view.sc-collection-item.user-item.sel label:hover {
+  cursor: move !important;
+}
 
 .project-item .recently-updated,
 .user-item .recently-updated {
@@ -173,7 +175,8 @@
   right: 50px !important;
   opacity: 1 !important;
 }
-.mobile .projects-pane .sc-view.sc-list-item-view.sc-collection-item .sc-outline label {
+.mobile .projects-pane .sc-view.sc-list-item-view.project-item .sc-outline label {
+  left: 20px !important;
   right: 3px !important;
 }
 
