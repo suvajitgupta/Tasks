@@ -31,14 +31,14 @@ Tasks.projectEditorPage = SC.Page.create({
   panel: null,
   panelView: SCUI.ModalPane.extend({
 
-    classNames: ['project-editor'],
+    classNames: ['project-editor' + (Tasks.isMobile? ' mobile' : '')],
     
     project: null,
     titleBarHeight: 40,
     minWidth: Tasks.isMobile? 0: 700,
     minHeight: 250,
 
-    layout: { centerX:0, centerY: 0, width: Tasks.isMobile? 300 : 700, height: 315 },
+    layout: Tasks.isMobile? { top: 0, left: 0, right: 0, bottom: 0 } : { centerX:0, centerY: 0, width: 700, height: 315 },
 
     _preEditing: function() {
       this.set('_modifying', true); // to prevent timeLeftDidChange and stoppedAtDidChange below from doing anything
@@ -140,12 +140,12 @@ Tasks.projectEditorPage = SC.Page.create({
       childViews: 'nameLabel nameField statusLabel statusField activatedAtLabel activatedAtField timeLeftLabel timeLeftField timeLeftHelpLabel stoppedAtLabel stoppedAtField descriptionLabel descriptionField createdAtLabel updatedAtLabel closeButton'.w(),
 
       nameLabel: SC.LabelView.design({
-        layout: { top: 6, left: 10, height: 24, width: 65 },
+        layout: { top: 6, left: 10, height: 24, width: Tasks.isMobile? 50 : 65 },
         textAlign: SC.ALIGN_RIGHT,
         value: "_Name".loc()
       }),
       nameField: SC.TextFieldView.design({
-        layout: { top: 5, left: 80, right: Tasks.isMobile? 10: 180, height: 24 },
+        layout: { top: 5, left: Tasks.isMobile? 65 : 80, right: Tasks.isMobile? 10: 180, height: 24 },
         isEnabledBinding: 'CoreTasks.permissions.canUpdateProject'
       }),
 
@@ -155,7 +155,7 @@ Tasks.projectEditorPage = SC.Page.create({
         value: "_Status".loc()
       }),
       statusField: SC.SelectButtonView.design({
-        layout: Tasks.isMobile? { top: 38, left: 80, height: 24, width: 125 } : { top: 5, right: 10, height: 24, width: 125 },
+        layout: Tasks.isMobile? { top: 38, left: Tasks.isMobile? 65 : 80, height: 24, width: 125 } : { top: 5, right: 10, height: 24, width: 125 },
         classNames: ['square'],
         localize: YES,
         isEnabledBinding: 'CoreTasks.permissions.canUpdateProject',

@@ -280,10 +280,8 @@ body.sc-theme,
   height: 16px;
   background: sc_static('blank') no-repeat !important;
 }
-.picker-resizable-handle {
-  width: 16px;
-  height: 16px;
-  background: static_url('images/lower-right-drag.png') no-repeat;
+.mobile .picker-resizable-handle {
+  display: none !important;
 }
 
 /*

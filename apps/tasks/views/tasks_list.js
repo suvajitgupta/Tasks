@@ -103,7 +103,7 @@ Tasks.TasksListView = SC.ScrollView.extend({
       // console.log('DEBUG: TasksList render() loginTime=' + Tasks.get('loginTime'));
 
       sc_super();
-      if(Tasks.get('loginTime')) return;
+      if(Tasks.get('loginTime') || Tasks.isMobile) return;
       var sel = Tasks.projectsController.get('selection');
       var selectedProjectsCount = sel? sel.get('length') : 0;
       if(selectedProjectsCount === 0) { // No projects selected

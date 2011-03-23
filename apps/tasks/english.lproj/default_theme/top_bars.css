@@ -27,13 +27,16 @@
 .header .modal-fullscreen-icon {
   background-color: none !important;
 }
+.mobile .header .modal-close-icon,
+.mobile .header .modal-fullscreen-icon {
+  display: none !important;
+}
+
 .header .modal-close-icon {
   left: 15px !important;
-  background: static_url('images/red-ball.png') no-repeat;
 }
 .header .modal-fullscreen-icon {
   left: 45px !important;
-  background: static_url('images/green-ball.png') no-repeat;
 }
 
 .window-title {
