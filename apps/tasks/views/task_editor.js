@@ -283,14 +283,14 @@ Tasks.taskEditorView = SC.View.create(
    }),
    
    showTasksListButton: SC.View.design(SCUI.SimpleButton, {
-     layout: { top: 2, left: 10, width: 32, height: 19 },
+     layout: { top: 0, left: 10, width: 32, height: 24 },
      classNames: ['back-icon'],
      toolTip: "_ShowTasksList".loc(),
      action: 'showTasksList'
     }),
 
    gotoPreviousTaskButton: SC.View.design(SCUI.SimpleButton, {
-     layout: { top: 3, right: 43, width: 16, height: 17 },
+     layout: { top: 0, right: 48, width: 24, height: 24 },
      classNames: ['previous-icon'],
      toolTip: "_GotoPreviousTask".loc(),
      action: 'gotoPreviousTask',
@@ -307,7 +307,7 @@ Tasks.taskEditorView = SC.View.create(
                                             }).from('Tasks*tasksController.selection')
    }),
    gotoNextTaskButton: SC.View.design(SCUI.SimpleButton, {
-     layout: { top: 3, right: 10, width: 16, height: 17 },
+     layout: { top: 0, right: 10, width: 24, height: 24 },
      classNames: ['next-icon'],
      toolTip: "_GotoNextTask".loc(),
      action: 'gotoNextTask',
@@ -323,7 +323,7 @@ Tasks.taskEditorView = SC.View.create(
    }),
 
    positionLabel: SC.LabelView.design({
-     layout: { width: 100, right: 75, top: 5, height: 16 },
+     layout: { width: 100, right: 85, top: 5, height: 16 },
      isVisible: !Tasks.isMobile,
      textAlign: SC.ALIGN_RIGHT
    }),
@@ -472,9 +472,9 @@ Tasks.taskEditorView = SC.View.create(
    splitView: SC.SplitView.design({
      layout: { top: 179, left: 10, bottom: 40, right: 10 },
      layoutDirection: SC.LAYOUT_VERTICAL,
-     defaultThickness: 0.5,
+     defaultThickness: Tasks.isMobile? 0.99 : 0.5,
      topLeftMinThickness: 75,
-     bottomRightMinThickness: 75,
+     bottomRightMinThickness: Tasks.isMobile? 0 : 75,
      
      topLeftView: SC.ScrollView.design({
        hasHorizontalScroller: NO, // disable horizontal scrolling
@@ -496,7 +496,7 @@ Tasks.taskEditorView = SC.View.create(
        })
      }),
      
-     bottomRightView: SC.View.design({
+     bottomRightView: Tasks.isMobile? SC.View.design() : SC.View.design({
        classNames: ['comments-view'],
        childViews: 'commentButton commentsList'.w(),
        mouseDown: function() {
@@ -524,22 +524,26 @@ Tasks.taskEditorView = SC.View.create(
    
    separatorView: SC.View.design({
      layout: { left: 5, right: 5, height: 2, bottom: 33 },
+     isVisible: !Tasks.isMobile,
      classNames: [ 'separator']
    }),
 
    createdAtLabel: SC.LabelView.design({
      layout: { left: 10, bottom: 10, height: 17, width: 250 },
      classNames: [ 'date-time'],
+     isVisible: !Tasks.isMobile,
      textAlign: SC.ALIGN_LEFT
    }),
    updatedAtLabel: SC.LabelView.design({
      layout: { right: 10, bottom: 10, height: 17, width: 250 },
      classNames: [ 'date-time'],
+     isVisible: !Tasks.isMobile,
      textAlign: SC.ALIGN_RIGHT
    }),
 
    watchingCheckbox: SC.CheckboxView.design({
      layout: { centerX: -35, bottom: 10, height: 16, width: 80 },
+     isVisible: !Tasks.isMobile,
      title: "_Watch".loc()
    }),
    watchersButton: SC.ButtonView.design({
@@ -547,6 +551,7 @@ Tasks.taskEditorView = SC.View.create(
      icon: 'watches-icon',
      fontWeight: SC.BOLD_WEIGHT,
      action: 'showWatchers',
+     isVisible: !Tasks.isMobile,
      toolTip: "_TaskWatchersTooltip".loc()
    })
    
