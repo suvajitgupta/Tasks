@@ -47,6 +47,9 @@
   -moz-border-radius: 3px !important;
   -webkit-border-radius: 3px !important;
 }
+.mobile .projects-pane .project-item .sc-outline {
+  left: 6px !important;
+}
 
 .projects-pane .sc-collection-item.sc-group-item.hover,
 .users-pane .sc-collection-item.sc-group-item.hover {
