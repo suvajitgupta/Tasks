@@ -43,7 +43,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
       this._timer.invalidate();
       this._timer = null;
     }
-    Tasks.taskEditorView.popup(this.get('content'));
+    Tasks.getPath('mainPage.taskEditor').popup(this.get('content'));
   },
   touchStart: function(event) {
     // console.log('DEBUG: touch start on task item: ' + this.getPath('content.name'));

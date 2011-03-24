@@ -229,6 +229,7 @@ Tasks.tasksController = SC.TreeController.create(SC.CollectionViewDelegate,
   _panelOpen: null,
   _panelOpenBinding: SC.Binding.oneWay('Tasks*panelOpen'),
   displayClippy: function() {
+    if(SC.platform.touch) return false;
     if(this.get('hasSelection') && !this.get('_panelOpen')) return true;
     return false;
   }.property('hasSelection', '_panelOpen'),

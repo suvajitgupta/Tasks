@@ -8,7 +8,7 @@
 
 Tasks.TaskManagerState = Ki.State.extend({
   
-  initialSubstate: Tasks.isMobile? 'ready' : 'showingTasksList',
+  initialSubstate: Tasks.isMobile? 'showingNothing' : 'showingTasksList',
   
   /**
    * Create a new task in tasks detail list and start editing it.
@@ -64,7 +64,7 @@ Tasks.TaskManagerState = Ki.State.extend({
     // Create, select, and begin editing new task.
     var task = CoreTasks.createRecord(CoreTasks.Task, taskHash);
     Tasks.tasksController.selectObject(task);
-    Tasks.taskEditorView.popup(task);
+    Tasks.getPath('mainPage.taskEditor').popup(task);
 
   },
 
@@ -104,7 +104,7 @@ Tasks.TaskManagerState = Ki.State.extend({
     }
   },
   
-  ready: Ki.State.design({
+  showingNothing: Ki.State.design({
     showTasksList: function() {
       this.gotoState('loggedIn.taskManager.showingTasksList');
       if(Tasks.isMobile) Tasks.setPath('mainPage.mainPane.mainView.nowShowing', 'tasksList');
@@ -210,6 +210,11 @@ Tasks.TaskManagerState = Ki.State.extend({
       }
     },
 
+    showProjectsList: function() {
+      this.gotoState('showingNothing');
+      Tasks.setPath('mainPage.mainPane.mainView.nowShowing', 'projectsList');
+    },
+
     showTasksFilter: function() {
       this.gotoState('showingTasksFilter');
     },
@@ -282,16 +287,15 @@ Tasks.TaskManagerState = Ki.State.extend({
   showingTaskEditor: Ki.State.design({
 
     showTasksList: function() {
-      if(Tasks.isMobile) Tasks.setPath('mainPage.mainPane.mainView.nowShowing', 'tasksList');
       this.gotoState('loggedIn.taskManager.showingTasksList');
     },
 
     gotoPreviousTask: function() {
-      Tasks.taskEditorView.gotoPreviousTask();
+      Tasks.getPath('mainPage.taskEditor').gotoPreviousTask();
     },
 
     gotoNextTask: function() {
-      Tasks.taskEditorView.gotoNextTask();
+      Tasks.getPath('mainPage.taskEditor').gotoNextTask();
     },
 
     addComment: function() {
@@ -306,7 +310,7 @@ Tasks.TaskManagerState = Ki.State.extend({
                                              createdAt: now, updatedAt: now, description: CoreTasks.NEW_COMMENT_DESCRIPTION.loc() });
         SC.RunLoop.end();
         Tasks.commentsController.selectObject(comment);
-        Tasks.taskEditorView.editComment();
+        Tasks.getPath('mainPage.taskEditor').editComment();
       }
     },
     
@@ -333,11 +337,11 @@ Tasks.TaskManagerState = Ki.State.extend({
     },
 
     showWatchers: function() {
-      Tasks.taskEditorView.showWatchers();
+      Tasks.getPath('mainPage.taskEditor').showWatchers();
     },
 
     exitState: function() {
-      Tasks.taskEditorView.close();
+      Tasks.getPath('mainPage.taskEditor').close();
     }
     
   })

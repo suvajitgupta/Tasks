@@ -91,8 +91,8 @@ Tasks.taskEditorHelper = SC.Object.create({
   
 });
 
-Tasks.taskEditorView = SC.View.create(
-/** @scope Tasks.taskEditorView.prototype */ {
+Tasks.TaskEditorView = SC.View.extend(
+/** @scope Tasks.TaskEditorView.prototype */ {
   
   task: null,
   titleBarHeight: 40,
@@ -134,7 +134,7 @@ Tasks.taskEditorView = SC.View.create(
     editor.setPath('watchersButton.isEnabled', this._watches.length > 0);
     editor.setPath('nameField.value', task.get('name'));
     if(Tasks.getPath('tasksController.isEditable')) {
-      this.invokeLater(function() { Tasks.taskEditorView.editor.nameField.becomeFirstResponder(); }, 400);
+      this.invokeLater(function() { this.editor.nameField.becomeFirstResponder(); }, 400);
     }
     editor.setPath('typeField.value', task.get('type'));
     editor.setPath('priorityField.value', task.get('priority'));
@@ -199,8 +199,7 @@ Tasks.taskEditorView = SC.View.create(
     }
     else {
       Tasks.statechart.sendEvent('showTaskEditor');
-      if(Tasks.isMobile) Tasks.setPath('mainPage.mainPane.mainView.nowShowing', 'taskEditor');
-      else Tasks.setPath('mainPage.tasksSceneView.nowShowing', 'taskEditor');
+      Tasks.setPath('mainPage.tasksSceneView.nowShowing', 'taskEditor');
       Tasks.set('panelOpen', Tasks.TASK_EDITOR);
     }
     this.set('task', task);
@@ -264,7 +263,7 @@ Tasks.taskEditorView = SC.View.create(
  },
   
  editComment: function() {
-   var commentsListView = Tasks.taskEditorView.editor.splitView.bottomRightView.commentsList.contentView;
+   var commentsListView = this.editor.splitView.bottomRightView.commentsList.contentView;
    var commentView = commentsListView.itemViewForContentIndex(0);
    SC.run(function() { commentsListView.scrollToContentIndex(0); });
    commentView.editDescription();

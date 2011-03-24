@@ -136,6 +136,11 @@
   background: -moz-linear-gradient(center top , #555, #292929);
 }
 
+.back-arrow-icon {
+  background: static_url('images/white-arrow-left.png') no-repeat 0 0 !important;
+  margin-top: -2px !important;
+}
+
 .filter-icon {
   margin-left: -2px !important;
   width: 16px !important;

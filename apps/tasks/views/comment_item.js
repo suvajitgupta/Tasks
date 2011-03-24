@@ -105,10 +105,10 @@ Tasks.CommentItemView = SC.View.extend(SC.Control,
         var description = comment.get('description');
         if(description === CoreTasks.NEW_COMMENT_DESCRIPTION.loc()) comment.destroy();
         else that.set('description', description);
-        Tasks.taskEditorView.commentsList.updateHeight();
+        Tasks.getPath('mainPage.taskEditor.commentsList').updateHeight();
       }
     });
-    pane.popup(comment.get('description') === CoreTasks.NEW_COMMENT_DESCRIPTION.loc()? Tasks.taskEditorView.get('commentButton') : this,
+    pane.popup(comment.get('description') === CoreTasks.NEW_COMMENT_DESCRIPTION.loc()? Tasks.getPath('mainPage.taskEditor.commentButton') : this,
                SC.PICKER_POINTER);
     pane.getPath('contentView.descriptionField').becomeFirstResponder();
   },
