@@ -20,7 +20,7 @@ Tasks.loginPage = SC.Page.create({
     
     contentView: SC.View.design({
       
-      layout: { centerX: 0, centerY: 0, width: 260, height: 300 },
+      layout: { centerX: 0, centerY: 0, width: 260, height: 240 },
       classNames: ['login-body'],
       childViews: 'tasksLogo loginNameField passwordField authenticatingMessageLabel loginErrorMessageLabel loadDoneProjectDataCheckbox guestSignupButton signinButton'.w(),
       
@@ -31,20 +31,20 @@ Tasks.loginPage = SC.Page.create({
       }),
       
       loginNameField: SC.TextFieldView.design({
-        layout: { top: 90, centerX: 0, width: 250, height: 32 },
+        layout: { top: 80, centerX: 0, width: 250, height: 32 },
         hint: '_LoginNameHint'.loc(),
         valueBinding: 'Tasks.loginController.loginName'
       }),
       
       passwordField: SC.TextFieldView.design({
-        layout: { top: 136, centerX: 0, width: 250, height: 32 },
+        layout: { top: 120, centerX: 0, width: 250, height: 32 },
         isPassword: YES,
         hint: '_PasswordHint'.loc(),
         valueBinding: 'Tasks.loginController.password'
       }),
       
       authenticatingMessageLabel: SC.LabelView.design({
-        layout: { top: 180, centerX: 0, right: 0, height: 20 },
+        layout: { top: 160, centerX: 0, right: 0, height: 20 },
         textAlign: SC.ALIGN_CENTER,
         isVisible: NO,
         value: "_Authenticating".loc(),
@@ -52,20 +52,20 @@ Tasks.loginPage = SC.Page.create({
       }),
       
       loginErrorMessageLabel: SC.LabelView.design({
-        layout: { top: 180, centerX: 0, right: 0, height: 20 },
+        layout: { top: 160, centerX: 0, right: 0, height: 20 },
         classNames: ['error-message'],
         textAlign: SC.ALIGN_CENTER,
         valueBinding: SC.Binding.oneWay('Tasks.loginController.loginErrorMessage')
       }),
       
       loadDoneProjectDataCheckbox: SC.CheckboxView.design({
-        layout: { bottom: 50, centerX: 0, width: 200, height: 20 },
+        layout: { bottom: 35, centerX: 0, width: 200, height: 20 },
         valueBinding: 'Tasks.loadDoneProjectData',
         title: "_LoadDoneProjectData".loc()
       }),
       
       guestSignupButton: Tasks.guestSignup? SC.ButtonView.design({
-        layout: { bottom: 10, left: 0, height: 23, width: 155 },
+        layout: { bottom: 0, left: 0, height: 23, width: 155 },
         classNames: ['dark'],
         icon: 'user-role-guest',
         title: "_GuestSignUp".loc() + '...',
@@ -73,7 +73,7 @@ Tasks.loginPage = SC.Page.create({
       }) : SC.View.design({ layout: { top: 70, left: 520, height: 1, width: 1 } }),
       
       signinButton: SC.ButtonView.design({
-        layout: { bottom: 10, right: 0, width: 80, height: 24 },
+        layout: { bottom: 0, right: 0, width: 80, height: 24 },
         titleMinWidth: 0,
         isEnabledBinding: SC.Binding.oneWay('Tasks.loginController.loginName').bool(),
         isDefault: YES,
