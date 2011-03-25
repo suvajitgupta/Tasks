@@ -87,8 +87,10 @@ Tasks = SC.Object.create(
    */
   dataSaveErrorCallback: function(errorRecordType) {
     // console.log('DEBUG: dataSaveErrorCallback(' + errorRecordType + ')');
-    var serverMessageView = Tasks.getPath('mainPage.serverMessageView');
-    serverMessageView.set('value', "_DataSaveError".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
+    var serverMessageLabel = Tasks.getPath('mainPage.serverMessageLabel');
+    if(serverMessageLabel) {
+      serverMessageLabel.set('value', "_SaveError".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
+    }
   }
     
 });
