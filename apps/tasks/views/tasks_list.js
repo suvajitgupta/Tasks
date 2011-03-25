@@ -10,10 +10,11 @@
 */
 sc_require('views/filter_search');
 sc_require('views/list');
+sc_require('views/tasks_bottom_bar');
 
 Tasks.TasksListView = SC.View.extend({
   
-  childViews: ((Tasks.isMobile? 'topToolbar ' : '') + 'tasksList').w(),
+  childViews: ((Tasks.isMobile? 'topToolbar tasksBottomBar ' : '') + 'tasksList').w(),
   
   topToolbar: Tasks.isMobile? SC.View.design({
     
@@ -34,9 +35,13 @@ Tasks.TasksListView = SC.View.extend({
     
   }) : null,
   
+  tasksBottomBar: Tasks.TasksBottomBarView.design({
+    layout: { bottom: 0, height: 30, left: 0, right: 0 }
+  }),
+  
   tasksList: SC.ScrollView.design({
     
-    layout: { top: Tasks.isMobile? 30 : 0 },
+    layout: { top: Tasks.isMobile? 30 : 0, bottom: Tasks.isMobile? 30 : 0 },
     
     contentView: Tasks.ListView.design({
     

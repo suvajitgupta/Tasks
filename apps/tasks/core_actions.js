@@ -194,10 +194,10 @@ Tasks.mixin( /** @scope Tasks */ {
   loadData: function() {
     
     // Indicate data loading start on status bar
-    var serverMessageView = Tasks.getPath('mainPage.serverMessageView');
-    if(serverMessageView) {
-      serverMessageView.set('icon', 'progress-icon');
-      serverMessageView.set('value', "_LoadingData".loc());
+    var serverMessageLabel = Tasks.getPath('mainPage.serverMessageLabel');
+    if(serverMessageLabel) {
+      serverMessageLabel.set('icon', 'progress-icon');
+      serverMessageLabel.set('value', "_Loading".loc());
     }
 
     // Get the last retrieved information from localStorage (if available).
@@ -295,10 +295,10 @@ Tasks.mixin( /** @scope Tasks */ {
     }
  
     // Indicate data loading completion on status bar
-    var serverMessageView = Tasks.getPath('mainPage.serverMessageView');
-    if(serverMessageView) {
-      serverMessageView.set('icon', '');
-      serverMessageView.set('value', "_DataLoaded".loc() + SC.DateTime.create(parseInt(Tasks.get('lastRetrieved'), 10)).toFormattedString(CoreTasks.TIME_DATE_FORMAT));
+    var serverMessageLabel = Tasks.getPath('mainPage.serverMessageLabel');
+    if(serverMessageLabel) {
+      serverMessageLabel.set('icon', '');
+      serverMessageLabel.set('value', "_Loaded".loc() + SC.DateTime.create(parseInt(Tasks.get('lastRetrieved'), 10)).toFormattedString(CoreTasks.TIME_DATE_FORMAT));
     }
     Tasks.projectsController.refreshCountdowns();
 
@@ -308,9 +308,9 @@ Tasks.mixin( /** @scope Tasks */ {
    * Called after failed data load.
    */
   _loadDataFailure: function(response) {
-    var serverMessageView = Tasks.getPath('mainPage.serverMessageView');
-    serverMessageView.set('icon', '');
-    serverMessageView.set('value', "_DataLoadFailed".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
+    var serverMessageLabel = Tasks.getPath('mainPage.serverMessageLabel');
+    serverMessageLabel.set('icon', '');
+    serverMessageLabel.set('value', "_LoadFailed".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
   },
   
   /**
@@ -339,8 +339,8 @@ Tasks.mixin( /** @scope Tasks */ {
   saveChanges: function() {
     if(CoreTasks.get('needsSave')) {
       CoreTasks.saveChanges();
-      var serverMessageView = Tasks.getPath('mainPage.serverMessageView');
-      if(serverMessageView) serverMessageView.set('value', "_DataSaved".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
+      var serverMessageLabel = Tasks.getPath('mainPage.serverMessageLabel');
+      if(serverMessageLabel) serverMessageLabel.set('value', "_Saved".loc() + SC.DateTime.create().toFormattedString(CoreTasks.TIME_DATE_FORMAT));
     }
   }
   

@@ -4,13 +4,12 @@
 /*globals CoreTasks Tasks sc_require SCUI sc_static*/
 
 sc_require('mixins/localized_label');
+sc_require('views/logo');
 sc_require('views/projects_list');
 sc_require('views/filter_search');
 sc_require('views/tasks_list');
 sc_require('views/task_editor');
-sc_require('views/logo');
-sc_require('views/summary');
-
+sc_require('views/tasks_bottom_bar');
 /** @namespace
 
   This page lays out the Tasks application user interface.
@@ -318,78 +317,10 @@ Tasks.mainPage = SC.Page.design({
               // nowShowing: 'tasksList'
             }),
 
-            tasksBottomBar: SC.View.design({
-
-              layout: { bottom: 0, height: 35, left: 0, right: 0 },
-              childViews: 'addTaskButton deleteTaskButton summaryView serverMessageView saveButton refreshButton'.w(),
-
-              addTaskButton: SC.ButtonView.design({
-                layout: { centerY: 0, left: 5, height: 24, width: 32 },
-                classNames: ['dark'],
-                titleMinWidth: 0,
-                icon: 'add-icon',
-                toolTip: "_AddTaskTooltip".loc(),
-                isVisibleBinding: 'CoreTasks.permissions.canCreateTask',
-                isEnabledBinding: 'Tasks.tasksController.isAddable',
-                action: 'addTask'
-              }),
-              deleteTaskButton: SC.ButtonView.design(SCUI.Permissible,{
-                layout: { centerY: 0, left: 47, height: 24, width: 32 },
-                classNames: ['dark'],
-                titleMinWidth: 0,
-                icon: 'delete-icon',
-                toolTip: "_DeleteTaskTooltip".loc(),
-                isVisibleBinding: 'CoreTasks.permissions.canDeleteTask',
-                isEnabledBinding: SC.Binding.and('Tasks.tasksController.isDeletable', 'Tasks.tasksController.notGuestOrGuestSubmittedTasks'),
-                isPermittedBinding: 'Tasks.tasksController.notGuestOrGuestSubmittedTasks',
-                action: 'deleteTask'
-              }),
-
-              summaryView: Tasks.SummaryView.design({
-                layout: { centerY: 0, height: 18, left: 90, width: 400 },
-                classNames: ['bottom-bar-label'],
-                escapeHTML: NO,
-                isVisible: !Tasks.isMobile,
-                panelOpenBinding: SC.Binding.oneWay('Tasks*panelOpen'),
-                assignmentsSummaryBinding: SC.Binding.oneWay('Tasks.assignmentsController.assignmentsSummary'),
-                projectsSelectionBinding: SC.Binding.oneWay('Tasks.projectsController.selection'),
-                tasksSelectionBinding: SC.Binding.oneWay('Tasks.tasksController.selection')
-              }),
-
-              serverMessageView: SC.LabelView.design({
-                layout: { centerY: 0, height: 18, right: 95, width: 250 },
-                classNames: ['bottom-bar-label'],
-                escapeHTML: NO,
-                icon: '',
-                textAlign: SC.ALIGN_RIGHT,
-                value: '',
-                isVisibleBinding: SC.Binding.not('Tasks.mainPage.mainPane.mainView.masterIsHidden').oneWay()
-              }),
-
-              saveButton: SC.ButtonView.design({
-                layout: { centerY: 0, right: 53, height: 24, width: 32 },
-                classNames: ['dark'],
-                titleMinWidth: 0,
-                icon: 'save-icon',
-                toolTip: "_SaveTooltip".loc(),
-                isEnabledBinding: 'CoreTasks.needsSave',
-                isVisibleBinding: SC.Binding.not('Tasks.autoSave'),
-                action: 'save'
-              }),
-              refreshButton: SC.ButtonView.design({
-                layout: { centerY: 0, right: 10, height: 24, width: 32 },
-                classNames: ['dark'],
-                titleMinWidth: 0,
-                icon: 'refresh-icon',
-                toolTip: "_RefreshTooltip".loc(),
-                action: 'refresh',
-                isEnabledBinding: SC.Binding.transform(function(value, binding) {
-                                                         return value === ''; // when not saving, shown via progress icon
-                                                       }).from('Tasks.mainPage.serverMessageView.icon')
-              })
-
-            }) // tasksBottomBar
-
+            tasksBottomBar: Tasks.TasksBottomBarView.design({
+              layout: { bottom: 0, height: 35, left: 0, right: 0 }
+            })
+            
           }) // tasksList/BottomBar
 
         }) // tasksDetailView
@@ -398,11 +329,11 @@ Tasks.mainPage = SC.Page.design({
        
   }), // mainPane
 
+  welcomeMessageView: SC.outlet('mainPane.mainView.detailView.topToolbar.welcomeMessageLabel'),
   projectsListView: SC.outlet(Tasks.isMobile? 'mainPane.mainView.projectsList.contentView' : 'mainPane.mainView.masterView.contentView.projectsList.contentView'),
   tasksListView: SC.outlet(Tasks.isMobile? 'mainPane.mainView.tasksList.tasksList.contentView' : 'mainPane.mainView.detailView.contentView.tasksSceneView.tasksList.tasksList.contentView'),
   taskEditor: SC.outlet(Tasks.isMobile? 'mainPane.mainView.taskEditor' : 'mainPane.mainView.detailView.contentView.tasksSceneView.taskEditor'),
   tasksSceneView: SC.outlet(Tasks.isMobile? 'mainPane.mainView' : 'mainPane.mainView.detailView.contentView.tasksSceneView'),
-  welcomeMessageView: SC.outlet('mainPane.mainView.detailView.topToolbar.welcomeMessageLabel'),
-  serverMessageView:  SC.outlet('mainPane.mainView.detailView.contentView.tasksBottomBar.serverMessageView')
+  serverMessageLabel:SC.outlet(Tasks.isMobile? 'mainPane.mainView.tasksList.tasksBottomBar.serverMessageLabel' : 'mainPane.mainView.detailView.contentView.tasksBottomBar.serverMessageLabel')
    
 }); // mainPage
