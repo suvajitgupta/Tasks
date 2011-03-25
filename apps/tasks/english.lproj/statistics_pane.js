@@ -15,7 +15,7 @@ sc_require('views/numerical_statistics');
   
 */
 
-Tasks.statisticsPane = SCUI.ModalPane.create({
+Tasks.statisticsPane = Tasks.isMobile? null : SCUI.ModalPane.create({
   
   isResizable: NO,
   title: "_Statistics".loc(),

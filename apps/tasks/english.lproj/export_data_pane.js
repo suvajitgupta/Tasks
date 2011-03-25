@@ -11,7 +11,7 @@
   Export Data Panel
   
 */
-Tasks.exportDataPane = SCUI.ModalPane.create({
+Tasks.exportDataPane = Tasks.isMobile? null : SCUI.ModalPane.create({
 
   title: "_Export".loc(),
   titleIcon: 'text-icon',

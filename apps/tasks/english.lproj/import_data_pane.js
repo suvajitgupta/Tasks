@@ -12,7 +12,7 @@
   Import Data Panel
   
 */
-Tasks.importDataPane = SCUI.ModalPane.create({
+Tasks.importDataPane = Tasks.isMobile? null : SCUI.ModalPane.create({
 
   title: "_Import".loc(),
   titleIcon: 'import-icon',

@@ -13,7 +13,7 @@ Tasks.AXIS_COLOR = '#666';
   Shows statistics graphically
   
 */
-Tasks.graphicalStatisticsView = SC.View.create({
+Tasks.graphicalStatisticsView = Tasks.isMobile? null : SC.View.create({
   
   layout: { top: 15, left: 10, right: 10, bottom: 5 },
   childViews: 'tasksStatistics teamStatistics'.w(),
