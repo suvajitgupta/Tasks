@@ -234,8 +234,8 @@ Tasks.TaskManagerState = Ki.State.extend({
       Tasks.get('filterPane').append();
     },
 
-    setAttributeFilterAll: function() {
-      Tasks.filterSearchController.setAttributeFilterAll();
+    setAttributeFilterNone: function() {
+      Tasks.filterSearchController.setAttributeFilterNone();
     },
 
     setAttributeFilterShowstoppers: function() {

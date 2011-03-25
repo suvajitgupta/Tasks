@@ -105,7 +105,7 @@ Tasks.filterSearchController = SC.ObjectController.create(
     }
   },
   
-  setAttributeFilterAll: function() {
+  setAttributeFilterNone: function() {
     this.clearAttributeFilterCriteria();
   },
 

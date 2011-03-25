@@ -14,26 +14,17 @@
 
 Tasks.filterPane = SC.SheetPane.create({  
   
-  layout: { centerX: 0, height: Tasks.softwareMode? 495 : 390, width: 310 },
+  layout: Tasks.isMobile? { top: 0, bottom: 0, left: 0, right: 0 } : { centerX: 0, height: Tasks.softwareMode? 465 : 360, width: 310 },
   classNames: ['filter-pane'],
   
   contentView: SC.View.design({
     
     layout: { top: 0, left: 0, bottom: 0, right: 0 },
-    childViews: 'title quickfilterToolbar typeLabel typeCheckboxes priorityLabel priorityCheckboxes statusLabel statusCheckboxes validationLabel validationCheckboxes effortSpecifiedLabel effortSpecifiedSegments recentlyUpdatedLabel recentlyUpdatedSegments beingWatchedLabel beingWatchedSegments cancelButton applyButton'.w(),
-    
-    title: SC.LabelView.design({
-      layout: { top: 10, centerX: 0, width: 150, height: 24 },
-      classNames: ['attribute-label'],
-      fontWeight: SC.BOLD_WEIGHT,
-      textAlign: SC.ALIGN_CENTER,
-      value: "_QuickFilters".loc(),
-      toolTip: "_QuickFiltersTooltip".loc()
-    }),
+    childViews: 'quickfilterToolbar typeLabel typeCheckboxes priorityLabel priorityCheckboxes statusLabel statusCheckboxes validationLabel validationCheckboxes effortSpecifiedLabel effortSpecifiedSegments recentlyUpdatedLabel recentlyUpdatedSegments beingWatchedLabel beingWatchedSegments cancelButton applyButton'.w(),
     
     quickfilterToolbar: SC.View.design(SC.Border, {
 
-      layout: { top: 28, left: 5, height: 70, right: 5 },
+      layout: { top: 4, left: 5, height: 70, right: 5 },
       borderStyle: SC.BORDER_BEZEL,
       classNames: ['quickfilter-toolbar'],
       childViews: 'allButton showstoppersButton urgentButton troubledButton unfinishedButton unvalidatedButton upcomingButton completedButton '.w(),
@@ -43,9 +34,9 @@ Tasks.filterPane = SC.SheetPane.create({
         titleMinWidth: 0,
         theme: 'capsule',
         classNames: ['all'],
-        title: "_All".loc(),
-        toolTip: "_AllTooltip".loc(),
-        action: 'setAttributeFilterAll'
+        title: "_NoFilter".loc(),
+        toolTip: "_NoFilterTooltip".loc(),
+        action: 'setAttributeFilterNone'
       }),
 
       showstoppersButton: SC.ButtonView.design({
@@ -125,7 +116,7 @@ Tasks.filterPane = SC.SheetPane.create({
     }),
     
     typeLabel: SC.LabelView.design({
-      layout: { top: 110, height: 24, left: 10, right: 10 },
+      layout: { top: 86, height: 24, left: 10, right: 10 },
       isVisible: Tasks.softwareMode,
       classNames: ['attribute-label'],
       value: "_Type".loc(),
@@ -133,7 +124,7 @@ Tasks.filterPane = SC.SheetPane.create({
     }),
 
     typeCheckboxes: SC.View.design({
-      layout: { top: 128, height: 24, left: 10, right: 10 },
+      layout: { top: 104, height: 24, left: 10, right: 10 },
       classNames: ['item-group', 'checkbox-icon'],
       isVisible: Tasks.softwareMode,
       displayProperties: [ 'feature', 'bug', 'other' ],
@@ -163,14 +154,14 @@ Tasks.filterPane = SC.SheetPane.create({
     }),
 
     priorityLabel: SC.LabelView.design({
-      layout: { top: Tasks.softwareMode? 165 : 110, height: 24, left: 10, right: 10 },
+      layout: { top: Tasks.softwareMode? 141 : 86, height: 24, left: 10, right: 10 },
       classNames: ['attribute-label'],
       value: "_Priority".loc(),
       toolTip: "_PriorityTooltip".loc()
     }),
 
     priorityCheckboxes: SC.View.design({
-      layout: { top: Tasks.softwareMode? 184 : 128, height: 24, left: 10, right: 10 },
+      layout: { top: Tasks.softwareMode? 160 : 104, height: 24, left: 10, right: 10 },
       classNames: ['item-group'],
       displayProperties: [ 'high', 'medium', 'low' ],
       childViews: 'high medium low'.w(),
@@ -199,14 +190,14 @@ Tasks.filterPane = SC.SheetPane.create({
     }),
 
     statusLabel: SC.LabelView.design({
-      layout: { top: Tasks.softwareMode? 221 : 171, height: 24, left: 10, right: 10 },
+      layout: { top: Tasks.softwareMode? 197 : 147, height: 24, left: 10, right: 10 },
       classNames: ['attribute-label'],
       value: "_Status".loc(),
       toolTip: "_StatusTooltip".loc()
     }),
 
     statusCheckboxes: SC.View.design({
-      layout: { top: Tasks.softwareMode? 238 : 187, height: 24, left: 10, right: 10 },
+      layout: { top: Tasks.softwareMode? 214 : 163, height: 24, left: 10, right: 10 },
       classNames: ['item-group'],
       displayProperties: [ 'planned', 'active', 'done', 'risky' ],
       childViews: 'planned active done risky'.w(),
@@ -242,7 +233,7 @@ Tasks.filterPane = SC.SheetPane.create({
     }),
 
     validationLabel: SC.LabelView.design({
-      layout: { top: 275, height: 24, left: 10, right: 10 },
+      layout: { top: 251, height: 24, left: 10, right: 10 },
       classNames: ['attribute-label'],
       isVisible: Tasks.softwareMode,
       value: "_Validation".loc(),
@@ -250,7 +241,7 @@ Tasks.filterPane = SC.SheetPane.create({
     }),
 
     validationCheckboxes: SC.View.design({
-      layout: { top: 293, height: 24, left: 10, right: 10 },
+      layout: { top: 269, height: 24, left: 10, right: 10 },
       classNames: ['item-group'],
       isVisible: Tasks.softwareMode,
       displayProperties: [ 'untested', 'passed', 'failed' ],
@@ -283,13 +274,13 @@ Tasks.filterPane = SC.SheetPane.create({
     }),
 
     effortSpecifiedLabel: SC.LabelView.design({
-      layout: { bottom: 125, height: 22, left: 0, width: 120 },
+      layout: { bottom: 120, height: 22, left: 0, width: 120 },
       textAlign: SC.ALIGN_RIGHT,
       value: "_EffortSpecified:".loc()
     }),
 
     effortSpecifiedSegments: SC.SegmentedView.design({
-      layout: { bottom: 125, height: 24, left: 125, right: 10 },
+      layout: { bottom: 120, height: 24, left: 125, right: 10 },
       layoutDirection: SC.LAYOUT_HORIZONTAL,
       items: [
         { title: "_DontCare".loc(), value: Tasks.FILTER_DONT_CARE },
@@ -302,13 +293,13 @@ Tasks.filterPane = SC.SheetPane.create({
     }),
 
     recentlyUpdatedLabel: SC.LabelView.design({
-      layout: { bottom: 90, height: 22, left: 0, width: 120 },
+      layout: { bottom: 85, height: 22, left: 0, width: 120 },
       textAlign: SC.ALIGN_RIGHT,
       value: "_RecentlyUpdated:".loc()
     }),
 
     recentlyUpdatedSegments: SC.SegmentedView.design(SCUI.ToolTip, {
-      layout: { bottom: 90, height: 24, left: 125, right: 10 },
+      layout: { bottom: 85, height: 24, left: 125, right: 10 },
       layoutDirection: SC.LAYOUT_HORIZONTAL,
       items: [
         { title: "_DontCare".loc(), value: Tasks.FILTER_DONT_CARE },
@@ -321,13 +312,13 @@ Tasks.filterPane = SC.SheetPane.create({
     }),
 
     beingWatchedLabel: SC.LabelView.design({
-      layout: { bottom: 55, height: 22, left: 0, width: 65 },
+      layout: { bottom: 50, height: 22, left: 0, width: 65 },
       textAlign: SC.ALIGN_RIGHT,
       value: "_Watched:".loc()
     }),
 
     beingWatchedSegments: SC.SegmentedView.design({
-      layout: { bottom: 55, height: 24, left: 65, right: 10 },
+      layout: { bottom: 50, height: 24, left: 65, right: 10 },
       layoutDirection: SC.LAYOUT_HORIZONTAL,
       items: [
         { title: "_DontCare".loc(), value: Tasks.FILTER_DONT_CARE },
