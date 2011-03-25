@@ -25,7 +25,7 @@ Tasks.ProjectsListView = SC.ScrollView.extend({
     contentIconKey: 'icon',
     hasContentIcon: YES,
     localize: YES,
-    rowHeight: 24,
+    rowHeight: Tasks.isMobile? 32 : 24,
     exampleView: Tasks.ProjectItemView,
     groupExampleView: Tasks.GroupItemView,
     allowDeselectAll: YES,

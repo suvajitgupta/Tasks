@@ -395,6 +395,10 @@
   left: 53px !important;
 }
 
+.mobile .task-item img.disclosure {
+  top: 0px !important;
+}
+
 .mobile .task-item .sc-outline img {
   left: 5px !important;
 }
@@ -408,6 +412,7 @@
   opacity: 1 !important;
 }
 .mobile .tasks-pane .sc-view.sc-list-item-view.sc-collection-item.task-item .sc-outline label {
+  top: 12px !important;
   left: 24px !important;
   right: 3px !important;
 }

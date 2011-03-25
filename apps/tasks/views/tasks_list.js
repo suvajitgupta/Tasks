@@ -51,7 +51,7 @@ Tasks.TasksListView = SC.View.extend({
       contentBinding: SC.Binding.oneWay('Tasks.tasksController.arrangedObjects'),
       selectionBinding: 'Tasks.tasksController.selection',
       localize: YES,
-      rowHeight: 24,
+      rowHeight: Tasks.isMobile? 32 : 24,
       hasContentIcon: Tasks.softwareMode || Tasks.isMobile,
       contentIconKey: 'icon',
       exampleView: Tasks.TaskItemView,

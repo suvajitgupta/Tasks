@@ -189,6 +189,10 @@
   margin-top: -9px !important;
 }
 
+.mobile .projects-pane img.disclosure {
+  top: 7px !important;
+}
+
 .sc-view .projects-pane .project-item .count,
 .sc-view .projects-pane .project-item.sel .count {
   top: 11px !important;
