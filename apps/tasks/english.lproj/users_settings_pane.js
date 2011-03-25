@@ -15,7 +15,7 @@ sc_require('views/user_information');
   Settings Panel
   
 */
-Tasks.usersSettingsPane = SCUI.ModalPane.create({
+Tasks.usersSettingsPane = Tasks.isMobile? null : SCUI.ModalPane.create({
     
   title: "_UsersSettings".loc(),
   titleIcon: 'settings-icon',
@@ -31,8 +31,8 @@ Tasks.usersSettingsPane = SCUI.ModalPane.create({
     userSearchField: SC.TextFieldView.design(SCUI.ToolTip, {
       layout: { top: 10, height: 24, left: 43, width: 200 },
       classNames: ['search-bar'],
-      hint: "_UserSearchSelectionHint".loc(),
-      toolTip: "_UserSearchSelectionTooltip".loc(),
+      hint: "_UserSearchHint".loc(),
+      toolTip: "_UserSearchTooltip".loc(),
       isVisibleBinding: 'CoreTasks*isCurrentUserAManager',
       valueBinding: 'Tasks.usersController.userSearch'
     }),
