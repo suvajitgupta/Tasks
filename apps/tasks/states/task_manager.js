@@ -83,7 +83,8 @@ Tasks.TaskManagerState = Ki.State.extend({
     if (len > 0) {
 
       // Confirm deletion operation
-      SC.AlertPane.warn("_Confirmation".loc(), "_TaskDeletionConfirmation".loc(), "_TaskDeletionConsequences".loc(), "_Yes".loc(), "_No".loc(), null,
+      SC.AlertPane.warn("_Confirmation".loc(), Tasks.isMobile? "_AreYouSure".loc() : "_TaskDeletionConfirmation".loc(),
+                        Tasks.isMobile? null : "_TaskDeletionConsequences".loc(), "_Yes".loc(), "_No".loc(), null,
       SC.Object.create({
         alertPaneDidDismiss: function(pane, status) {
           if(status === SC.BUTTON1_STATUS) {

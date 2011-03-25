@@ -24,6 +24,7 @@ SC.stringsFor('English', {
   "_AddUserTooltip": "Add a new user",
   "_AllTasks": "All Tasks",
   "_Apply": "Apply",
+  "_AreYouSure": "Are you sure?",
   "_Assignee:": "Assignee: ",
   "_AssigneeNotLoaded": "Not loaded",
   "_AssigneeOverloaded": "Overloaded",

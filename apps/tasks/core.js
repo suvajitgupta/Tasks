@@ -95,6 +95,10 @@ Tasks = SC.Object.create(
     
 });
 
+SC.AlertPane = SC.AlertPane.extend({
+  layout: { top : 0.3, centerX: 0, width: Tasks.isMobile? 300 : 500 }
+});
+
 /**
   // CHANGED: [SC] remove hack to avoid crash on IE in SC.View.baseTheme() during this.get('parentView')
 */
