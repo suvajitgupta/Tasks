@@ -51,7 +51,7 @@ Tasks.TasksBottomBarView = SC.View.extend({
   }),
 
   serverMessageLabel: SC.LabelView.design({
-    layout: { centerY: 0, height: 18, right: Tasks.isMobile? 55 : 95, width: 250 },
+    layout: { centerY: 0, height: 18, right: Tasks.isMobile? 55 : 95, width: 200 },
     classNames: ['bottom-bar-label'],
     escapeHTML: NO,
     icon: '',
