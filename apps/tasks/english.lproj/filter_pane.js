@@ -19,7 +19,6 @@ Tasks.filterPane = SC.SheetPane.create({
   
   contentView: SC.View.design({
     
-    layout: { top: 0, left: 0, bottom: 0, right: 0 },
     childViews: 'quickfilterToolbar typeLabel typeCheckboxes priorityLabel priorityCheckboxes statusLabel statusCheckboxes validationLabel validationCheckboxes effortSpecifiedLabel effortSpecifiedSegments recentlyUpdatedLabel recentlyUpdatedSegments beingWatchedLabel beingWatchedSegments cancelButton applyButton'.w(),
     
     quickfilterToolbar: SC.View.design(SC.Border, {
