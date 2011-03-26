@@ -8,7 +8,7 @@
 
 Tasks.TaskManagerState = Ki.State.extend({
   
-  initialSubstate: Tasks.isMobile? 'showingNothing' : 'showingTasksList',
+  initialSubstate: 'showingTasksList',
   
   /**
    * Create a new task in tasks detail list and start editing it.

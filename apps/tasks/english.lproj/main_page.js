@@ -120,7 +120,7 @@ Tasks.mainPage = SC.Page.design({
         projectsList: Tasks.ProjectsListView.create(),
         tasksList: Tasks.TasksListView.create(),
         taskEditor: Tasks.TaskEditorView.create(),
-        nowShowing: 'projectsList'
+        nowShowing: 'tasksList'
       }) :
 
       SC.MasterDetailView.design({
