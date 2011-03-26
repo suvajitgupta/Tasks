@@ -143,39 +143,39 @@ Tasks.mainPage = SC.Page.design({
 
           topToolbar: SC.ToolbarView.design({
 
-          childViews: 'installationLogo tasksLogo'.w(),
-          classNames: ['title-bar'],
+            childViews: 'installationLogo tasksLogo'.w(),
+            classNames: ['title-bar'],
 
-          installationLogo: SC.View.design({
-            layout: { left: Tasks.get('squareInstallationLogo')? 25: 15, centerY: 0, width: Tasks.get('squareInstallationLogo')? 35: 80, height: Tasks.get('squareInstallationLogo')? 35 : 20 },
-            tagName: 'img',
-            render: function(context, firstTime) {
-              if(document.title.match(/Dev/)) {
-                context.attr('src', sc_static('images/dev-logo.jpg'));
+            installationLogo: SC.View.design({
+              layout: { left: Tasks.get('squareInstallationLogo')? 25: 15, centerY: 0, width: Tasks.get('squareInstallationLogo')? 35: 80, height: Tasks.get('squareInstallationLogo')? 35 : 20 },
+              tagName: 'img',
+              render: function(context, firstTime) {
+                if(document.title.match(/Dev/)) {
+                  context.attr('src', sc_static('images/dev-logo.jpg'));
+                }
+                else if(document.title.match(/Demo/)) {
+                  context.attr('src', sc_static('images/demo-logo.jpg'));
+                }
+                else if(document.title.match(/SproutCore/)) {
+                  context.attr('src', sc_static('images/sproutcore-logo.png'));
+                }
+                else if(document.title.match(/Eloqua/)) {
+                  context.attr('src', sc_static('images/eloqua-logo.gif'));
+                }
+                // Customizable "Installation Logo" that is driven by "Installation Title" from Buildfile
+                // Uncomment next 3 lines and specify <InstallationTitle> (matching what you set in Buildfile) and <installation-logo-filename>
+                // else if(document.title.match(/<InstallationTitle>/)) {
+                //   context.attr('src', sc_static('images/<installation-logo-filename>'));
+                // }
               }
-              else if(document.title.match(/Demo/)) {
-                context.attr('src', sc_static('images/demo-logo.jpg'));
-              }
-              else if(document.title.match(/SproutCore/)) {
-                context.attr('src', sc_static('images/sproutcore-logo.png'));
-              }
-              else if(document.title.match(/Eloqua/)) {
-                context.attr('src', sc_static('images/eloqua-logo.gif'));
-              }
-              // Customizable "Installation Logo" that is driven by "Installation Title" from Buildfile
-              // Uncomment next 3 lines and specify <InstallationTitle> (matching what you set in Buildfile) and <installation-logo-filename>
-              // else if(document.title.match(/<InstallationTitle>/)) {
-              //   context.attr('src', sc_static('images/<installation-logo-filename>'));
-              // }
-            }
-          }), // installationLogo
+            }), // installationLogo
 
-          tasksLogo: Tasks.LogoView.design({
-            layout: { left: Tasks.get('squareInstallationLogo')? 78: 115, width: 104, centerY: 0, height: 27 },
-            logo: 'tasks-logo-small',
-            toolTip: "_Credits".loc(),
-            version: Tasks.VERSION
-          })
+            tasksLogo: Tasks.LogoView.design({
+              layout: { left: Tasks.get('squareInstallationLogo')? 78: 115, width: 104, centerY: 0, height: 27 },
+              logo: 'tasks-logo-small',
+              toolTip: "_Credits".loc(),
+              version: Tasks.VERSION
+            })
 
           }), // topToolBar
 
@@ -189,30 +189,30 @@ Tasks.mainPage = SC.Page.design({
 
             projectsBottomBar: SC.View.design({
 
-            layout: { bottom: 0, height: 35, left: 0, right: 0 },
-            childViews: 'addProjectButton deleteProjectButton'.w(),
+              layout: { bottom: 0, height: 35, left: 0, right: 0 },
+              childViews: 'addProjectButton deleteProjectButton'.w(),
 
-            addProjectButton: SC.ButtonView.design({
-              layout: { centerY: 0, left: 10, height: 24, width: 32 },
-              classNames: ['dark'],
-              titleMinWidth: 0,
-              icon: 'add-icon',
-              toolTip: "_AddProjectTooltip".loc(),
-              isVisibleBinding: 'CoreTasks.permissions.canCreateProject',
-              action: 'addProject'
-            }),
-            deleteProjectButton: SC.ButtonView.design({
-              layout: { centerY: 0, left: 52, height: 24, width: 32 },
-              classNames: ['dark'],
-              titleMinWidth: 0,
-              icon: 'delete-icon',
-              toolTip: "_DeleteProjectTooltip".loc(),
-              isVisibleBinding: 'CoreTasks.permissions.canDeleteProject',
-              isEnabledBinding: 'Tasks.projectsController.isDeletable',
-              action: 'deleteProject'
-            })
+              addProjectButton: SC.ButtonView.design({
+                layout: { centerY: 0, left: 10, height: 24, width: 32 },
+                classNames: ['dark'],
+                titleMinWidth: 0,
+                icon: 'add-icon',
+                toolTip: "_AddProjectTooltip".loc(),
+                isVisibleBinding: 'CoreTasks.permissions.canCreateProject',
+                action: 'addProject'
+              }),
+              deleteProjectButton: SC.ButtonView.design({
+                layout: { centerY: 0, left: 52, height: 24, width: 32 },
+                classNames: ['dark'],
+                titleMinWidth: 0,
+                icon: 'delete-icon',
+                toolTip: "_DeleteProjectTooltip".loc(),
+                isVisibleBinding: 'CoreTasks.permissions.canDeleteProject',
+                isEnabledBinding: 'Tasks.projectsController.isDeletable',
+                action: 'deleteProject'
+              })
 
-          }) // projectsBottomBar
+            }) // projectsBottomBar
 
           }) // projectsList/BottomBar
 
@@ -256,7 +256,7 @@ Tasks.mainPage = SC.Page.design({
                                                    return value? "_TEAM".loc() : "_TASKS".loc();
                                                  }).from('Tasks.assignmentsController*displayMode'),
               action: function() { // toggle display mode
-              Tasks.assignmentsController.set('displayMode', !Tasks.assignmentsController.get('displayMode'));
+                Tasks.assignmentsController.set('displayMode', !Tasks.assignmentsController.get('displayMode'));
               }
             }),
 
@@ -292,10 +292,7 @@ Tasks.mainPage = SC.Page.design({
               layout: { centerY: 0, right: 289, height: 14, width: 14 },
               isVisibleBinding: SC.Binding.oneWay('Tasks.tasksController.displayClippy'),
               render: function(context, firstTime) {
-                // console.log('clippyIcon.render()');
-                if(firstTime) {
-                  Tasks.mainPageHelper._embedClippy(context);
-                }
+                if(firstTime) Tasks.mainPageHelper._embedClippy(context);
               }
             }),
             
@@ -314,14 +311,13 @@ Tasks.mainPage = SC.Page.design({
               tasksList:  Tasks.TasksListView.create(),
               taskEditor: Tasks.TaskEditorView.create(),
               nowShowing: 'tasksList'
-              // nowShowing: 'tasksList'
             }),
 
             tasksBottomBar: Tasks.TasksBottomBarView.design()
             
           }) // tasksList/BottomBar
 
-        }) // tasksDetailView
+      }) // tasksDetailView
 
     }) // mainView
        
