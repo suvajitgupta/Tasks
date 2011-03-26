@@ -13,12 +13,12 @@
 
 Tasks.FilterSearchView = SC.View.extend({
   
-  layout: { centerY: 0, height: 30, right: 0, width: 280 },
+  layout: { centerY: 0, height: 30, right: Tasks.isMobile? 5 : 10, width: 280 },
   
   childViews: 'filterPanelButton filterCancelButton tasksSearchField tasksSearchCancelButton'.w(),
 
   filterPanelButton: SC.ButtonView.design({
-    layout: { centerY: 0, height: 24, right: 223, width: 50 },
+    layout: { centerY: 0, height: 24, right: 213, width: 50 },
     titleMinWidth: 0,
     icon: 'filter-icon',
     classNames: ['dark'],
@@ -27,7 +27,7 @@ Tasks.FilterSearchView = SC.View.extend({
     isEnabledBinding: SC.Binding.not('Tasks.mainPageHelper*panelOpen')
   }),
   filterCancelButton: SC.View.design(SC.Control, { // Filter cancel button
-    layout: { centerY: 0, height: 16, right: 218, width: 16 },
+    layout: { centerY: 0, height: 16, right: 208, width: 16 },
     isVisible: NO,
     classNames: ['filter-cancel-icon'],
     touchStart: function() {
@@ -43,7 +43,7 @@ Tasks.FilterSearchView = SC.View.extend({
   }),
 
   tasksSearchField: SC.TextFieldView.design({
-    layout: { centerY: 1, height: 25, right: 10, width: 200 },
+    layout: { centerY: 1, height: 25, right: 0, width: 200 },
     classNames: ['search-bar'],
     hint: "_TasksSearchHint".loc(),
     renderMixin: function(context, firstTime) { // Used custom tooltip rendering to avoid escaping by SCUI.Toolip
@@ -53,7 +53,7 @@ Tasks.FilterSearchView = SC.View.extend({
     isEnabledBinding: SC.Binding.not('Tasks.mainPageHelper*panelOpen')
   }),
   tasksSearchCancelButton: SC.View.design(SC.Control, { // Tasks Search cancel button
-    layout: { centerY: 0, height: 16, right: 16, width: 16 },
+    layout: { centerY: 0, height: 16, right: 6, width: 16 },
     isVisible: NO,
     classNames: ['filter-cancel-icon'],
     touchStart: function() {

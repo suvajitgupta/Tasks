@@ -116,6 +116,7 @@ Tasks.mainPage = SC.Page.design({
     mainView: Tasks.isMobile?
 
       SC.SceneView.design({
+        transitionDuration: 0, // CHANGED: [SC] disabled SceneView transitions on desktop which are very sluggish and sometimes get stuck
         scenes: ['projectsList', 'tasksList', 'taskEditor'],
         projectsList: Tasks.ProjectsListView.create(),
         tasksList: Tasks.TasksListView.create(),
@@ -316,9 +317,7 @@ Tasks.mainPage = SC.Page.design({
               // nowShowing: 'tasksList'
             }),
 
-            tasksBottomBar: Tasks.TasksBottomBarView.design({
-              layout: { bottom: 0, height: 35, left: 0, right: 0 }
-            })
+            tasksBottomBar: Tasks.TasksBottomBarView.design()
             
           }) // tasksList/BottomBar
 

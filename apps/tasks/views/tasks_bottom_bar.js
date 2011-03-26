@@ -15,6 +15,8 @@ sc_require('views/summary');
 
 Tasks.TasksBottomBarView = SC.View.extend({
 
+  layout: { bottom: 0, height: 35, left: 0, right: 0 },
+  
   childViews: 'addTaskButton deleteTaskButton summaryView serverMessageLabel saveButton refreshButton'.w(),
 
   addTaskButton: SC.ButtonView.design({

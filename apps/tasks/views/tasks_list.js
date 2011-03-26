@@ -18,12 +18,12 @@ Tasks.TasksListView = SC.View.extend({
   
   topToolbar: Tasks.isMobile? SC.View.design({
     
-    layout: { height: 30 },
+    layout: { height: 35 },
     
     childViews: 'showProjectsListButton filterSearchView'.w(),
     
     showProjectsListButton: SC.ButtonView.design({
-      layout: { left: 3, width: 32, centerY: 0, height: 24 },
+      layout: { left: 5, width: 32, centerY: 0, height: 24 },
       titleMinWidth: 0,
       icon: 'icon back-arrow-icon', // CHANGED: [SC] remove hack to add 'icon' class forcibly to button icon
       classNames: ['dark'],
@@ -35,13 +35,11 @@ Tasks.TasksListView = SC.View.extend({
     
   }) : null,
   
-  tasksBottomBar: Tasks.TasksBottomBarView.design({
-    layout: { bottom: 0, height: 30, left: 0, right: 0 }
-  }),
+  tasksBottomBar: Tasks.TasksBottomBarView.design(),
   
   tasksList: SC.ScrollView.design({
     
-    layout: { top: Tasks.isMobile? 30 : 0, bottom: Tasks.isMobile? 30 : 0 },
+    layout: { top: Tasks.isMobile? 35 : 0, bottom: Tasks.isMobile? 35 : 0 },
     
     contentView: Tasks.ListView.design({
     
