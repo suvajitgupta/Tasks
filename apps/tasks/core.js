@@ -10,7 +10,9 @@
   @author Suvajit Gupta
   @version 0.1
 */
-/*globals Tasks CoreTasks */
+/*globals Tasks CoreTasks _mobileDevice */
+
+_mobileDevice = (/iPhone|iPod/).test(navigator.platform);
 
 Tasks = SC.Object.create(
   /** @scope Tasks.prototype */ {
@@ -18,12 +20,12 @@ Tasks = SC.Object.create(
   NAMESPACE: 'Tasks',
   VERSION: '1.8', // latest addition: mobile support (iPhone/iPod)
   
-  isMobile: (/iPhone|iPod/).test(navigator.platform),
-  
   isLoaded: NO, // for Lebowski
 
+  isMobile: _mobileDevice,
+  
   // Customizable "Load Done Project Data": set to false for installations where the data can grow to large volumes
-  loadDoneProjectData: true,
+  loadDoneProjectData: !_mobileDevice,
   
   // Customizable "Square Installation Logo": set to true for square installation logo, false for rectangular installation logo
   squareInstallationLogo: document.title.match(/Eloqua/)? false : true,
