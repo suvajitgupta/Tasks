@@ -13,7 +13,7 @@ sc_require('views/logo');
   
 */
 
-Tasks.helpPage = SC.Page.design({  
+Tasks.helpPage = SC.Page.create({  
   
   layerId: 'mainPane',
   mainPane: SC.MainPane.design({
