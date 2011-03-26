@@ -10,7 +10,7 @@
   @extends SC.View
   @author Suvajit Gupta
 */
-sc_require('views/display_mod_button');
+sc_require('views/display_mode_button');
 sc_require('views/summary');
 
 Tasks.TasksBottomBarView = SC.View.extend({

@@ -5,7 +5,7 @@
 
 sc_require('mixins/localized_label');
 sc_require('views/logo');
-sc_require('views/display_mod_button');
+sc_require('views/display_mode_button');
 sc_require('views/projects_list');
 sc_require('views/filter_search');
 sc_require('views/tasks_list');

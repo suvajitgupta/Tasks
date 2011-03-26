@@ -83,7 +83,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
          classes.match(/count/) || classes.match(/inner/)  || classes.match(/description-icon/))) {
       this._startEditing();
     }
-    else if(Tasks.isMobile) Tasks.statechart.sendEvent('showTasksList');
+    else if(Tasks.isMobile) this.invokeLater(function() { Tasks.statechart.sendEvent('showTasksList'); }, 500);
 
     return NO; // so that drag-n-drop can work!
     
