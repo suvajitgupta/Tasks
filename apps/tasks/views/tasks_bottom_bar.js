@@ -10,14 +10,14 @@
   @extends SC.View
   @author Suvajit Gupta
 */
-
+sc_require('views/display_mod_button');
 sc_require('views/summary');
 
 Tasks.TasksBottomBarView = SC.View.extend({
 
   layout: { bottom: 0, height: 35, left: 0, right: 0 },
   
-  childViews: 'addTaskButton deleteTaskButton summaryView serverMessageLabel saveButton refreshButton'.w(),
+  childViews: ((Tasks.isMobile? 'displayModeButton ' : '') + 'addTaskButton deleteTaskButton summaryView serverMessageLabel saveButton refreshButton').w(),
 
   addTaskButton: SC.ButtonView.design({
     layout: { centerY: 0, left: 5, height: 24, width: 32 },
@@ -41,6 +41,10 @@ Tasks.TasksBottomBarView = SC.View.extend({
     action: 'deleteTask'
   }),
 
+  displayModeButton: Tasks.isMobile? Tasks.DisplayModeButtonView.design({
+    layout: { centerX: 10, centerY: 0, height: 24, width: 55 }
+  }) : null,
+
   summaryView: Tasks.SummaryView.design({
     layout: { centerY: 0, height: 18, left: 90, width: 400 },
     classNames: ['bottom-bar-label'],
@@ -56,6 +60,7 @@ Tasks.TasksBottomBarView = SC.View.extend({
     layout: { centerY: 0, height: 18, right: Tasks.isMobile? 55 : 95, width: 200 },
     classNames: ['bottom-bar-label'],
     escapeHTML: NO,
+    isVisible: !Tasks.isMobile,
     icon: '',
     textAlign: SC.ALIGN_RIGHT,
     value: ''

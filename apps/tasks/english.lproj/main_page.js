@@ -5,6 +5,7 @@
 
 sc_require('mixins/localized_label');
 sc_require('views/logo');
+sc_require('views/display_mod_button');
 sc_require('views/projects_list');
 sc_require('views/filter_search');
 sc_require('views/tasks_list');
@@ -246,18 +247,8 @@ Tasks.mainPage = SC.Page.design({
               })
             }),
 
-            displayModeButton: SC.ButtonView.design({
-              layout: { left: 73, centerY: 0, height: 24, width: 50 },
-              classNames: ['dark'],
-              titleMinWidth: 0,
-              toolTip: "_DisplayModeTooltip".loc(),
-              isEnabledBinding: SC.Binding.not('Tasks.mainPageHelper*panelOpen'),
-              titleBinding: SC.Binding.transform(function(value, binding) {
-                                                   return value? "_TEAM".loc() : "_TASKS".loc();
-                                                 }).from('Tasks.assignmentsController*displayMode'),
-              action: function() { // toggle display mode
-                Tasks.assignmentsController.set('displayMode', !Tasks.assignmentsController.get('displayMode'));
-              }
+            displayModeButton: Tasks.DisplayModeButtonView.design({
+              layout: { left: 73, centerY: 0, height: 24, width: 55 }
             }),
 
             masterPickerButton: SC.ButtonView.design({

@@ -39,7 +39,7 @@ Tasks.TasksListView = SC.View.extend({
   
   tasksList: SC.ScrollView.design({
     
-    layout: { top: Tasks.isMobile? 35 : 0, bottom: Tasks.isMobile? 35 : 0 },
+    layout: Tasks.isMobile? { top: 35, bottom: 35, left: 5, right: 5 } : { top: 0, bottom: 0, left: 0, right: 0 },
     
     contentView: Tasks.ListView.design({
     
