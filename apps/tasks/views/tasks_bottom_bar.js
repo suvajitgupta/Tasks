@@ -58,8 +58,7 @@ Tasks.TasksBottomBarView = SC.View.extend({
     escapeHTML: NO,
     icon: '',
     textAlign: SC.ALIGN_RIGHT,
-    value: '',
-    isVisibleBinding: SC.Binding.not('Tasks.mainPage.mainPane.mainView.masterIsHidden').oneWay()
+    value: ''
   }),
 
   saveButton: SC.ButtonView.design({
