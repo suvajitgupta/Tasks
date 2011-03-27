@@ -113,22 +113,24 @@
   background: #888 !important;
 }
 
-
-.projects-pane .sc-group-item.sel .sc-outline,
-.projects-pane .sc-view.sc-list-item-view.sc-collection-item.sc-group-item.sel .sc-outline label,
-.sc-list-view.projects-pane .sc-collection-item.sel,
-.sc-list-view.projects-pane .sc-collection-item.sel.hover {
+.sc-list-view.projects-pane .project-item.sel,
+.sc-list-view.projects-pane .project-item.sel.hover {
   height: 22px !important;
   background: #9FF !important;
   border-color: #000 !important;
 }
 
-.sc-list-view.projects-pane.focus .sc-collection-item.sel,
-.sc-list-view.projects-pane.focus .sc-collection-item.sel.hover,
-.sc-list-view.users-pane .sc-collection-item.sel,
-.sc-list-view.users-pane .sc-collection-item.sel.hover {
+.sc-list-view.projects-pane.focus .project-item.sel,
+.sc-list-view.projects-pane.focus .project-item.sel.hover,
+.sc-list-view.users-pane .user-item.sel,
+.sc-list-view.users-pane .user-item.sel.hover {
   height: 22px !important;
   background: #6CF !important;
+}
+
+.mobile .sc-list-view.projects-pane .project-item.sel,
+.mobile .sc-list-view.projects-pane.focus .project-item.sel {
+  height: 30px !important;
 }
 
 .sc-list-view.projects-pane .sc-collection-item.project-item.sel,
@@ -187,6 +189,9 @@
 .users-pane .sel .sc-outline img {
   top: 12px !important;
   margin-top: -9px !important;
+}
+.mobile .projects-pane .sel .sc-outline img {
+  top: 16px !important;
 }
 
 .mobile .projects-pane img.disclosure {
