@@ -81,7 +81,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     if (!this.get('isSystemProject') && (!event.which || event.which === 1) &&
         (classes.match(/project-margin/) || classes.match(/project-icon/) ||
          classes.match(/count/) || classes.match(/inner/)  || classes.match(/description-icon/))) {
-      this._startEditing();
+      this.invokeLater(this._startEditing, 500);
     }
     else if(Tasks.isMobile) this.invokeLater(function() { Tasks.statechart.sendEvent('showTasksList'); }, 500);
 

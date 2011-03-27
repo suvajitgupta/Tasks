@@ -78,7 +78,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     if ((!event.which || event.which === 1) &&
         (classes.match(/task-id/) || classes.match(/task-margin/) || classes.match(/task-icon/) ||
          classes.match(/count/) || classes.match(/inner/)  || classes.match(/description-icon/))) {
-      this._startEditing();
+      this.invokeLater(this._startEditing, 500);
     }
     
     return NO; // so that drag-n-drop can work!
