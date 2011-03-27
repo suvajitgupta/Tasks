@@ -47,8 +47,6 @@ Tasks.TasksBottomBarView = SC.View.extend({
 
   summaryView: Tasks.SummaryView.design({
     layout: { centerY: 0, height: 18, left: 90, width: 400 },
-    classNames: ['bottom-bar-label'],
-    escapeHTML: NO,
     isVisible: !Tasks.isMobile,
     panelOpenBinding: SC.Binding.oneWay('Tasks*panelOpen'),
     assignmentsSummaryBinding: SC.Binding.oneWay('Tasks.assignmentsController.assignmentsSummary'),
