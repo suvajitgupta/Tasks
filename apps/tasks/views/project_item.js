@@ -48,7 +48,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     // console.log('DEBUG: touch start on project item: ' + this.getPath('content.name'));
     Tasks.projectsController.selectObject(this.get('content'));
     if (this._timer) this._timer.invalidate();
-    this._timer = this.invokeLater(this._startEditing, 500);
+    if (!CoreTasks.isSystemProject(this.get('content'))) this._timer = this.invokeLater(this._startEditing, 500);
     this.mouseDown(event);
     return YES;
   },
@@ -77,7 +77,7 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     if (target.nodeType === 3) target = target.parentNode; // for text nodes on iPad
     var classes = target.className;
     // See if left clicked on hover pencil or project icon with one project selected 
-    // console.log('DEBUG: classes = "' + classes + '"');
+    // console.log('DEBUG: isSystemProject: ' + this.get('isSystemProject') + ', classes = "' + classes + '"');
     if (!this.get('isSystemProject') && (!event.which || event.which === 1) &&
         (classes.match(/project-margin/) || classes.match(/project-icon/) ||
          classes.match(/count/) || classes.match(/inner/)  || classes.match(/description-icon/))) {
