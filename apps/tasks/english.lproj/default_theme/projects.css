@@ -120,7 +120,7 @@
   border-color: #000 !important;
 }
 
-.mobile .sc-list-view.projects-pane .project-item.sel,
+.touch .sc-list-view.projects-pane .project-item.sel,
 .sc-list-view.projects-pane.focus .project-item.sel,
 .sc-list-view.projects-pane.focus .project-item.sel.hover,
 .sc-list-view.users-pane .user-item.sel,

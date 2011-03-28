@@ -111,7 +111,7 @@ Tasks.mainPage = SC.Page.design({
   
   mainPane: SC.MainPane.design({
 
-    classNames: Tasks.isMobile? ['mobile'] : [],
+    classNames: ((SC.platform.touch? 'touch' : '') + (Tasks.isMobile? ' mobile' : '')).w(),
     childViews: 'mainView'.w(),
 
     mainView: Tasks.isMobile?
@@ -252,7 +252,7 @@ Tasks.mainPage = SC.Page.design({
             }),
 
             masterPickerButton: SC.ButtonView.design({
-              layout: { left: 135, centerY: 0, height: 24, width: 32 },
+              layout: { left: 140, centerY: 0, height: 24, width: 32 },
               titleMinWidth: 0,
               icon: 'empty-project-icon',
               classNames: ['dark'],
