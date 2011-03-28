@@ -99,7 +99,6 @@ Tasks.ApplicationManagerState = Ki.State.extend({
       Tasks.usersController.selectObject(CoreTasks.get('currentUser'));
       if(!CoreTasks.isCurrentUserAManager()) pane.setSmallSize();
       pane.append();
-      pane.focus();
     },
     
     addUser: function() {
