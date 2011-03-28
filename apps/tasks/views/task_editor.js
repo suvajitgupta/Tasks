@@ -327,29 +327,24 @@ Tasks.TaskEditorView = SC.View.extend(
      textAlign: SC.ALIGN_RIGHT
    }),
    
-   nameField: SC.TextFieldView.design({
-     layout: { top: 39, left: 60, right: 10, height: 24 },
-     isEnabledBinding: 'Tasks.tasksController.isEditable'
-   }),
-
    nameLabel: SC.LabelView.design({
-     layout: { top: 40, left: 0, height: 24, width: 55 },
+     layout: { top: 35, left: 0, height: 24, width: 55 },
      textAlign: SC.ALIGN_RIGHT,
      value: "_Name".loc()
    }),
    nameField: SC.TextFieldView.design({
-     layout: { top: 39, left: 60, right: 10, height: 24 },
+     layout: { top: 33, left: 60, right: 10, height: 24 },
      isEnabledBinding: 'Tasks.tasksController.isEditable'
    }),
 
    typeLabel: SC.LabelView.design({
-     layout: { top: 74, left: 0, height: 24, width: 55 },
+     layout: { top: 69, left: 0, height: 24, width: 55 },
      isVisibleBinding: 'Tasks.softwareMode',
      textAlign: SC.ALIGN_RIGHT,
      value: "_Type".loc()
    }),
    typeField: SC.SelectButtonView.design({
-     layout: { top: 72, left: 60, height: 24, width: 120 },
+     layout: { top: 67, left: 60, height: 24, width: 120 },
      classNames: ['square'],
      localize: YES,
      isVisibleBinding: 'Tasks.softwareMode',
@@ -362,12 +357,12 @@ Tasks.TaskEditorView = SC.View.extend(
    }),
 
    priorityLabel: SC.LabelView.design({
-     layout: { top: 74, left: 170, height: 24, width: 55 },
+     layout: { top: 69, left: 148, height: 24, width: 70 },
      textAlign: SC.ALIGN_RIGHT,
      value: "_Priority".loc()
    }),
    priorityField: SC.SelectButtonView.design({
-     layout: { top: 72, left: 230, height: 24, width: 120 },
+     layout: { top: 67, left: 220, height: 24, width: 120 },
      classNames: ['square'],
      localize: YES,
      isEnabledBinding: 'Tasks.tasksController.isEditable',
@@ -378,12 +373,12 @@ Tasks.TaskEditorView = SC.View.extend(
    }),
 
    statusLabel: SC.LabelView.design({
-     layout: { top: 74, right: 285, height: 24, width: 50 },
+     layout: Tasks.isMobile? { top: 104, left: 0, height: 24, width: 55 } : { top: 69, right: 285, height: 24, width: 55 },
      textAlign: SC.ALIGN_RIGHT,
      value: "_Status".loc()
    }),
    statusField: SC.SelectButtonView.design({
-     layout: { top: 72, right: 190, height: 24, width: 120 },
+     layout: Tasks.isMobile? { top: 102, left: 60, height: 24, width: 120 } : { top: 67, right: 190, height: 24, width: 120 },
      classNames: ['square'],
      localize: YES,
      isEnabledBinding: 'Tasks.tasksController.isEditable',
@@ -394,13 +389,13 @@ Tasks.TaskEditorView = SC.View.extend(
    }),
 
    validationLabel: SC.LabelView.design({
-     layout: { top: 74, right: 105, height: 24, width: 70 },
+     layout: Tasks.isMobile? { top: 104, left: 148, height: 24, width: 70 } : { top: 69, right: 105, height: 24, width: 70 },
      textAlign: SC.ALIGN_RIGHT,
      isVisibleBinding: 'Tasks.softwareMode',
      value: "_Validation".loc()
    }),
    validationField: SC.SelectButtonView.design({
-     layout: { top: 72, right: 10, height: 24, width: 120 },
+     layout: Tasks.isMobile? { top: 102, left: 220, height: 24, width: 120 } : { top: 67, right: 10, height: 24, width: 120 },
      classNames: ['square'],
      localize: YES,
      isVisibleBinding: 'Tasks.softwareMode',
@@ -411,28 +406,29 @@ Tasks.TaskEditorView = SC.View.extend(
    }),
 
    effortLabel: SC.LabelView.design({
-     layout: { top: 111, left: 0, height: 24, width: 55 },
+     layout: { top: Tasks.isMobile? 137 : 102, left: 0, height: 24, width: 55 },
      textAlign: SC.ALIGN_RIGHT,
      value: "_Effort:".loc()
    }),
    effortField: SC.TextFieldView.design({
-     layout: { top: 109, left: 60, width: 95, height: 24 },
+     layout: { top: Tasks.isMobile? 135 : 100, left: 60, width: 95, height: 24 },
      isEnabledBinding: 'Tasks.tasksController.isEditable'
    }),
    effortHelpLabel: SC.LabelView.design({
-     layout: { top: 109, left: 160, height: 30, width: 235 },
+     layout: { top: 100, left: 160, height: 30, width: 235 },
      escapeHTML: NO,
+     isVisible: !Tasks.isMobile,
      classNames: [ 'onscreen-help'],
      value: "_EffortOnscreenHelp".loc()
    }),
 
    projectLabel: SC.LabelView.design({
-     layout: { top: 148, left: 0, height: 24, width: 55 },
+     layout: { top: Tasks.isMobile? 172 : 134, left: 0, height: 24, width: 55 },
      textAlign: SC.ALIGN_RIGHT,
      value: "_Project:".loc()
    }),
    projectField: SCUI.ComboBoxView.design({
-     layout: { top: 146, left: 60, width: 270, height: 24 },
+     layout: { top: Tasks.isMobile? 170 : 132, left: 60, width: 252, height: 24 },
      objectsBinding: SC.Binding.oneWay('Tasks.taskEditorHelper*projects'),
      nameKey: 'displayName',
      valueKey: 'id',
@@ -441,12 +437,12 @@ Tasks.TaskEditorView = SC.View.extend(
    }),
 
    submitterLabel: SC.LabelView.design({
-     layout: { top: 111, right: 285, height: 24, width: 75 },
+     layout: Tasks.isMobile? { top: 207, left: 0, height: 24, width: 55 } : { top: 102, right: 285, height: 24, width: 75 },
      textAlign: SC.ALIGN_RIGHT,
      value: "_Submitter:".loc()
    }),
    submitterField: SCUI.ComboBoxView.design({
-     layout: { top: 109, right: 10, width: 272, height: 24 },
+     layout: Tasks.isMobile? { top: 205, left: 60, width: 252, height: 24 } : { top: 100, right: 10, width: 252, height: 24 },
      objectsBinding: SC.Binding.oneWay('Tasks.taskEditorHelper*users'),
      nameKey: 'displayName',
      valueKey: 'id',
@@ -455,12 +451,12 @@ Tasks.TaskEditorView = SC.View.extend(
    }),
 
    assigneeLabel: SC.LabelView.design({
-     layout: { top: 148, right: 285, height: 24, width: 75 },
+     layout: Tasks.isMobile? { top: 242, left: 0, height: 24, width: 55 } : { top: 134, right: 285, height: 24, width: 75 },
      textAlign: SC.ALIGN_RIGHT,
      value: "_Assignee:".loc()
    }),
    assigneeField: SCUI.ComboBoxView.design({
-     layout: { top: 146, right: 10, width: 272, height: 24 },
+     layout: Tasks.isMobile? { top: 240, left: 60, width: 252, height: 24 } : { top: 132, right: 10, width: 252, height: 24 },
      objectsBinding: SC.Binding.oneWay('Tasks.taskEditorHelper*nonGuestsList'),
      nameKey: 'displayName',
      valueKey: 'id',
@@ -469,11 +465,12 @@ Tasks.TaskEditorView = SC.View.extend(
    }),
 
    splitView: SC.SplitView.design({
-     layout: { top: 179, left: 10, bottom: 40, right: 10 },
+     layout: { top: 165, left: 10, bottom: 40, right: 10 },
      layoutDirection: SC.LAYOUT_VERTICAL,
      defaultThickness: Tasks.isMobile? 0.99 : 0.5,
+     isVisible: !Tasks.isMobile,
      topLeftMinThickness: 75,
-     bottomRightMinThickness: Tasks.isMobile? 0 : 75,
+     bottomRightMinThickness: 75,
      
      topLeftView: SC.ScrollView.design({
        hasHorizontalScroller: NO, // disable horizontal scrolling
@@ -485,7 +482,7 @@ Tasks.TaskEditorView = SC.View.extend(
            value: "_Description:".loc()
          }),
          descriptionField: SC.TextFieldView.design({
-           layout: { top: 23, left: 2, right: 2, bottom: 5 },
+           layout: { top: 20, left: 2, right: 2, bottom: 5 },
            hint: "_DescriptionHint".loc(),
            maxLength: 500000,
            isTextArea: YES,

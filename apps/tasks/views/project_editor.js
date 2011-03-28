@@ -140,7 +140,7 @@ Tasks.projectEditorPage = SC.Page.create({
       childViews: 'nameLabel nameField statusLabel statusField activatedAtLabel activatedAtField timeLeftLabel timeLeftField timeLeftHelpLabel stoppedAtLabel stoppedAtField descriptionLabel descriptionField createdAtLabel updatedAtLabel closeButton'.w(),
 
       nameLabel: SC.LabelView.design({
-        layout: { top: 6, left: 10, height: 24, width: Tasks.isMobile? 50 : 65 },
+        layout: { top: 7, left: 10, height: 24, width: Tasks.isMobile? 50 : 65 },
         textAlign: SC.ALIGN_RIGHT,
         value: "_Name".loc()
       }),
@@ -166,7 +166,7 @@ Tasks.projectEditorPage = SC.Page.create({
       }),
 
       activatedAtLabel: SC.LabelView.design({
-        layout: Tasks.isMobile? { top: 70, left: 0, height: 24, width: 65 } : { top: 40, left: 10, height: 24, width: 65 },
+        layout: Tasks.isMobile? { top: 70, left: 10, height: 24, width: 50 } : { top: 40, left: 10, height: 24, width: 65 },
         textAlign: SC.ALIGN_RIGHT,
         value: "_Activated:".loc()
       }),
@@ -189,7 +189,7 @@ Tasks.projectEditorPage = SC.Page.create({
         isEnabledBinding: 'CoreTasks.permissions.canUpdateProject'
       }),
       timeLeftHelpLabel: SC.LabelView.design({
-        layout: { top: 37, right: 180, height: 30, width: 160 },
+        layout: { top: 38, right: 183, height: 30, width: 160 },
         escapeHTML: NO,
         classNames: [ 'onscreen-help'],
         isVisible: !Tasks.isMobile,
@@ -210,12 +210,12 @@ Tasks.projectEditorPage = SC.Page.create({
       }),
 
       descriptionLabel: SC.LabelView.design({
-        layout: { top: Tasks.isMobile? 120 : 70, left: 10, height: 17, width: 100 },
+        layout: { top: Tasks.isMobile? 115 : 65, left: 10, height: 17, width: 100 },
         icon: 'description-icon',
         value: "_Description:".loc()
       }),
       descriptionField: SC.TextFieldView.design({
-        layout: Tasks.isMobile? { top: 145, left: 10, right: 10, bottom: 45 } : { top: 95, left: 10, right: 10, bottom: 65 },
+        layout: Tasks.isMobile? { top: 135, left: 10, right: 10, bottom: 45 } : { top: 85, left: 10, right: 10, bottom: 65 },
         hint: "_DescriptionHint".loc(),
         maxLength: 500000,
         isTextArea: YES,

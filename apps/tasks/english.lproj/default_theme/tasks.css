@@ -95,6 +95,12 @@
 .sc-pane .sc-container-view .task-editor .sc-scroller-view {
   background: none;
 }
+.mobile .task-editor .sc-label-view.sc-regular-size,
+.mobile.project-editor .sc-label-view.sc-regular-size {
+  font-size: 11px;
+  letter-spacing: -1px;
+}
+
 .sc-pane .sc-container-view .task-editor .scui-combobox-dropdown-button-view {
   background-color: #DDD !important;
 }
