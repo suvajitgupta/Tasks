@@ -35,7 +35,7 @@ Tasks.projectEditorPage = SC.Page.create({
     
     project: null,
     titleBarHeight: 40,
-    minWidth: Tasks.isMobile? 0: 700,
+    minWidth: Tasks.isMobile? 0 : 700,
     minHeight: 250,
 
     layout: Tasks.isMobile? { top: 0, left: 0, right: 0, bottom: 0 } : { centerX:0, centerY: 0, width: 700, height: 315 },
@@ -145,7 +145,7 @@ Tasks.projectEditorPage = SC.Page.create({
         value: "_Name".loc()
       }),
       nameField: SC.TextFieldView.design({
-        layout: { top: 5, left: Tasks.isMobile? 65 : 80, right: Tasks.isMobile? 10: 180, height: 24 },
+        layout: Tasks.isMobile? { top: 5, left: 65, right: 10, height: 24 } : { top: 5, left: 80, right: 180, height: 24 },
         isEnabledBinding: 'CoreTasks.permissions.canUpdateProject'
       }),
 
@@ -155,7 +155,7 @@ Tasks.projectEditorPage = SC.Page.create({
         value: "_Status".loc()
       }),
       statusField: SC.SelectButtonView.design({
-        layout: Tasks.isMobile? { top: 38, left: Tasks.isMobile? 65 : 80, height: 24, width: 125 } : { top: 5, right: 10, height: 24, width: 125 },
+        layout: Tasks.isMobile? { top: 38, left: 65, height: 24, width: 125 } : { top: 5, right: 10, height: 24, width: 125 },
         classNames: ['square'],
         localize: YES,
         isEnabledBinding: 'CoreTasks.permissions.canUpdateProject',
@@ -166,29 +166,26 @@ Tasks.projectEditorPage = SC.Page.create({
       }),
 
       activatedAtLabel: SC.LabelView.design({
-        layout: { top: 40, left: 10, height: 24, width: 65 },
+        layout: Tasks.isMobile? { top: 70, left: 0, height: 24, width: 65 } : { top: 40, left: 10, height: 24, width: 65 },
         textAlign: SC.ALIGN_RIGHT,
-        isVisible: !Tasks.isMobile,
         value: "_Activated:".loc()
       }),
+      // FIXME: [EG] add touch events to SCUI.CalendarView days and switch to previous/next SimpleButtons to make this control work on iPad/iPhone/iPod
       activatedAtField: SCUI.DatePickerView.design(SCUI.ToolTip, {
-        layout: { top: 37, left: 80, height: 24, width: 100 },
+        layout: Tasks.isMobile? { top: 67, left: 65, height: 24, width: 100 } : { top: 37, left: 80, height: 24, width: 100 },
         dateFormat: CoreTasks.DATE_FORMAT,
         hint: "_ChooseDate".loc(),
         toolTip: "_ActivatedAtTooltip".loc(),
-        isVisible: !Tasks.isMobile,
         isEnabledBinding: 'CoreTasks.permissions.canUpdateProject'
       }),
 
       timeLeftLabel: SC.LabelView.design({
-        layout: { top: 40, right: 416, height: 24, width: 60 },
+        layout: Tasks.isMobile? { top: 70, right: 75, height: 24, width: 65 } : { top: 40, right: 416, height: 24, width: 65 },
         textAlign: SC.ALIGN_RIGHT,
-        isVisible: !Tasks.isMobile,
         value: "_TimeLeft:".loc()
       }),
       timeLeftField: SC.TextFieldView.design({
-        layout: { top: 37, right: 350, width: 60, height: 24 },
-        isVisible: !Tasks.isMobile,
+        layout: Tasks.isMobile? { top: 67, right: 10, width: 60, height: 24 } : { top: 37, right: 350, width: 60, height: 24 },
         isEnabledBinding: 'CoreTasks.permissions.canUpdateProject'
       }),
       timeLeftHelpLabel: SC.LabelView.design({
@@ -200,27 +197,25 @@ Tasks.projectEditorPage = SC.Page.create({
       }),
 
       stoppedAtLabel: SC.LabelView.design({
-        layout: { top: 40, right: 113, height: 24, width: 75 },
+        layout: { top: Tasks.isMobile? 100 : 40, right: 113, height: 24, width: 80 },
         textAlign: SC.ALIGN_RIGHT,
-        isVisible: !Tasks.isMobile,
         value: "_Stopped:".loc()
       }),
       stoppedAtField: SCUI.DatePickerView.design(SCUI.ToolTip, {
-        layout: { top: 37, right: 10, height: 24, width: 100 },
+        layout: { top: Tasks.isMobile? 97 : 37, right: 10, height: 24, width: 100 },
         dateFormat: CoreTasks.DATE_FORMAT,
         hint: "_ChooseDate".loc(),
         toolTip: "_StoppedTooltip".loc(),
-        isVisible: !Tasks.isMobile,
         isEnabledBinding: 'CoreTasks.permissions.canUpdateProject'
       }),
 
       descriptionLabel: SC.LabelView.design({
-        layout: { top: 70, left: 10, height: 17, width: 100 },
+        layout: { top: Tasks.isMobile? 120 : 70, left: 10, height: 17, width: 100 },
         icon: 'description-icon',
         value: "_Description:".loc()
       }),
       descriptionField: SC.TextFieldView.design({
-        layout: { top: 95, left: 10, right: 10, bottom: Tasks.isMobile? 45: 65 },
+        layout: Tasks.isMobile? { top: 145, left: 10, right: 10, bottom: 45 } : { top: 95, left: 10, right: 10, bottom: 65 },
         hint: "_DescriptionHint".loc(),
         maxLength: 500000,
         isTextArea: YES,
