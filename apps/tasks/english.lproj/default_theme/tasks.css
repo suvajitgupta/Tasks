@@ -562,6 +562,7 @@
 .tasks-pane .task-item.sel.hover {
   background: #9FF none repeat scroll 0 0 !important;
 }
+.mobile .tasks-pane .task-item.sel,
 .tasks-pane.focus .task-item.sel,
 .tasks-pane.focus .task-item.sel.hover {
   background: #6CF none repeat scroll 0 0 !important;
