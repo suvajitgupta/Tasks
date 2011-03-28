@@ -42,6 +42,10 @@
   background: static_url('images/back.png') no-repeat 1px 3px !important;
 }
 
+.title-bar.task-title {
+  padding-right: 25px !important;
+}
+
 .previous-icon {
   background: static_url('images/black-arrow-up.png') no-repeat 4px 4px !important;
 }
