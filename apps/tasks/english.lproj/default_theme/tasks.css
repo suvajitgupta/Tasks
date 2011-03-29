@@ -39,7 +39,7 @@
 }
 
 .back-icon {
-  background: static_url('images/back.png') no-repeat 1px 3px !important;
+  background: static_url('images/back.png') no-repeat 1px 1px !important;
 }
 
 .title-bar.task-title {
@@ -47,11 +47,11 @@
 }
 
 .previous-icon {
-  background: static_url('images/black-arrow-up.png') no-repeat 4px 4px !important;
+  background: static_url('images/black-arrow-up.png') no-repeat 4px 2px !important;
 }
 
 .next-icon {
-  background: static_url('images/black-arrow-down.png') no-repeat 4px 4px !important;
+  background: static_url('images/black-arrow-down.png') no-repeat 4px 2px !important;
 }
 
 .previous-icon, .next-icon, .back-icon,
