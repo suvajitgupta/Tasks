@@ -25,7 +25,8 @@
   margin-left: -5px !important;
 }
 
-.sc-pane .sc-container-view .task-editor {
+.sc-pane .sc-container-view .task-editor,
+.sc-pane .sc-container-view .task-editor .task-editor-overview {
   background: #DDD !important;
   border-radius: 3px;
   -moz-border-radius: 3px;

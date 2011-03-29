@@ -1,7 +1,7 @@
 // ==========================================================================
 // Project: Tasks
 // ==========================================================================
-/*globals Tasks CoreTasks */
+/*globals Tasks CoreTasks sc_require*/
 
 /** 
 
@@ -10,86 +10,8 @@
   @extends SC.View
   @author Suvajit Gupta
 */
-Tasks.taskEditorHelper = SC.Object.create({
-  
-  types: function() {
-     var ret = [];
-     ret.push({ name: CoreTasks.TASK_TYPE_FEATURE, value: CoreTasks.TASK_TYPE_FEATURE, icon: 'task-icon-feature' });
-     ret.push({ name: CoreTasks.TASK_TYPE_BUG, value: CoreTasks.TASK_TYPE_BUG, icon: 'task-icon-bug' });
-     ret.push({ name: CoreTasks.TASK_TYPE_OTHER, value: CoreTasks.TASK_TYPE_OTHER, icon: 'task-icon-other' });
-     return ret;
-  },
-
-  priorities: function() {
-     var ret = [];
-     ret.push({ name: '<span class=task-priority-high>' + CoreTasks.TASK_PRIORITY_HIGH.loc() + '</span>', value: CoreTasks.TASK_PRIORITY_HIGH });
-     ret.push({ name: '<span class=task-priority-medium>' + CoreTasks.TASK_PRIORITY_MEDIUM.loc() + '</span>', value: CoreTasks.TASK_PRIORITY_MEDIUM });
-     ret.push({ name: '<span class=task-priority-low>' + CoreTasks.TASK_PRIORITY_LOW.loc() + '</span>', value: CoreTasks.TASK_PRIORITY_LOW });
-     return ret;
-  },
-
-  statuses: function() {
-     var ret = [];
-     ret.push({ name: '<span class=status-planned>' + CoreTasks.STATUS_PLANNED.loc() + '</span>', value: CoreTasks.STATUS_PLANNED });
-     ret.push({ name: '<span class=status-active>' + CoreTasks.STATUS_ACTIVE.loc() + '</span>', value: CoreTasks.STATUS_ACTIVE });
-     ret.push({ name: '<span class=status-done>' + CoreTasks.STATUS_DONE.loc() + '</span>', value: CoreTasks.STATUS_DONE });
-     ret.push({ name: '<span class=status-risky>' + CoreTasks.STATUS_RISKY.loc() + '</span>', value: CoreTasks.STATUS_RISKY });
-     return ret;
-  },
-
-  validations: function() {
-     var ret = [];
-     ret.push({ name: '<span class=task-validation-untested>' + CoreTasks.TASK_VALIDATION_UNTESTED.loc() + '</span>', value: CoreTasks.TASK_VALIDATION_UNTESTED });
-     ret.push({ name: '<span class=task-validation-passed>' + CoreTasks.TASK_VALIDATION_PASSED.loc() + '</span>', value: CoreTasks.TASK_VALIDATION_PASSED });
-     ret.push({ name: '<span class=task-validation-failed>' + CoreTasks.TASK_VALIDATION_FAILED.loc() + '</span>', value: CoreTasks.TASK_VALIDATION_FAILED });
-     return ret;
-  },
-
-  _usersCountBinding: SC.Binding.oneWay('Tasks.usersController*arrangedObjects.length'),
-  _listUsers: function() {
-    // console.log('DEBUG: _listUsers');
-    var users = Tasks.usersController.get('content');
-    var ret1 = [], ret2 = [];
-    if(users) {
-      users = users.toArray();
-      for(var i=0, len = users.get('length'); i < len; i++) {
-        var user = users.objectAt(i);
-        ret1.push(user);
-        if(user.get('role') !== CoreTasks.USER_ROLE_GUEST) ret2.push(user);
-      }
-      var unassigned = { id: 0, displayName: "_Unassigned".loc(), icon: 'no-icon' };
-      ret1.push(unassigned);
-      ret2.push(unassigned);
-    }
-    this.set('users', ret1);
-    this.set('nonGuestsList', ret2);
-  }.observes('_usersCount'),
-  users: null,
-  nonGuestsList: null,
-
-  _projectsCountBinding: SC.Binding.oneWay('Tasks.projectsController*arrangedObjects.length'),
-  _listProjects: function() {
-    // console.log('DEBUG: _listProjects');
-    var projects = Tasks.projectsController.get('content');
-    var ret = [];
-    if(projects) {
-      ret = projects.toArray();
-      // Remove system projects from list since you cannot assign to them
-      var idx = ret.indexOf(CoreTasks.get('allTasksProject'));
-      if(idx !== -1) ret.splice(idx, 1);
-      idx = ret.indexOf(CoreTasks.get('unassignedTasksProject'));
-      if(idx !== -1) ret.splice(idx, 1);
-      idx = ret.indexOf(CoreTasks.get('unallocatedTasksProject'));
-      if(idx !== -1) {
-        ret.splice(idx, 1);
-        ret.push({ id: 0, icon: CoreTasks.getPath('unallocatedTasksProject.icon'), displayName: "_UnallocatedTasks".loc() });
-      }
-    }
-    this.set('projects', ret);
-  }.observes('_projectsCount'),
-  projects: null
-  
-});
+sc_require('views/task_editor_helper');
+sc_require('views/task_editor_overview');
 
 Tasks.TaskEditorView = SC.View.extend(
 /** @scope Tasks.TaskEditorView.prototype */ {
@@ -132,18 +54,19 @@ Tasks.TaskEditorView = SC.View.extend(
     editor.setPath('watchingCheckbox.value', this._watching? true : false);
     editor.setPath('watchersButton.title', '' + this._watches.length);
     editor.setPath('watchersButton.isEnabled', this._watches.length > 0);
-    editor.setPath('nameField.value', task.get('name'));
+    this.setPath('overviewView.nameField.value', task.get('name'));
+    var that = this;
     if(Tasks.getPath('tasksController.isEditable')) {
-      this.invokeLater(function() { this.editor.nameField.becomeFirstResponder(); }, 400);
+      this.invokeLater(function() { that.getPath('overviewView.nameField').becomeFirstResponder(); }, 400);
     }
-    editor.setPath('typeField.value', task.get('type'));
-    editor.setPath('priorityField.value', task.get('priority'));
-    editor.setPath('statusField.value', task.get('developmentStatus'));
-    editor.setPath('validationField.value', task.get('validation'));
-    editor.setPath('effortField.value', task.get('effort'));
-    editor.setPath('projectField.value', task.get('projectValue'));
-    editor.setPath('submitterField.value', task.get('submitterValue'));
-    editor.setPath('assigneeField.value', task.get('assigneeValue'));
+    this.setPath('overviewView.typeField.value', task.get('type'));
+    this.setPath('overviewView.priorityField.value', task.get('priority'));
+    this.setPath('overviewView.statusField.value', task.get('developmentStatus'));
+    this.setPath('overviewView.validationField.value', task.get('validation'));
+    this.setPath('overviewView.effortField.value', task.get('effort'));
+    this.setPath('overviewView.projectField.value', task.get('projectValue'));
+    this.setPath('overviewView.submitterField.value', task.get('submitterValue'));
+    this.setPath('overviewView.assigneeField.value', task.get('assigneeValue'));
     editor.setPath('splitView.topLeftView.contentView.descriptionField.value', task.get('description'));
     editor.setPath('createdAtLabel.value', task.get('displayCreatedAt'));
     editor.setPath('updatedAtLabel.value', task.get('displayUpdatedAt'));
@@ -154,7 +77,8 @@ Tasks.TaskEditorView = SC.View.extend(
     var task = this.get('task');
     // console.log('DEBUG: postEditing task: ' + task.get('name'));
     var editor = this.get('editor');
-    if(editor.getPath('nameField.value') === CoreTasks.NEW_TASK_NAME.loc()) {
+    var name = this.getPath('overviewView.nameField.value');
+    if(name === CoreTasks.NEW_TASK_NAME.loc()) {
       task.destroy(); // blow away unmodified new task
     }
     else {
@@ -170,28 +94,20 @@ Tasks.TaskEditorView = SC.View.extend(
         CoreTasks.createRecord(CoreTasks.Watch, { taskId: task.get('id'), userId: CoreTasks.getPath('currentUser.id') });
         SC.RunLoop.end();
       }
-      task.setIfChanged('type', editor.getPath('typeField.value'));
-      task.setIfChanged('priority', editor.getPath('priorityField.value'));
-      task.setIfChanged('developmentStatus', editor.getPath('statusField.value'));
-      task.setIfChanged('validation', editor.getPath('validationField.value'));
-      task.setIfChanged('effortValue', editor.getPath('effortField.value'));
-      task.setIfChanged('projectValue', editor.getPath('projectField.value'));
-      task.setIfChanged('submitterValue', editor.getPath('submitterField.value'));
-      task.setIfChanged('assigneeValue', editor.getPath('assigneeField.value'));
-      task.setIfChanged('displayName', editor.getPath('nameField.value'));
+      task.setIfChanged('type', this.getPath('overviewView.typeField.value'));
+      task.setIfChanged('priority', this.getPath('overviewView.priorityField.value'));
+      task.setIfChanged('developmentStatus', this.getPath('overviewView.statusField.value'));
+      task.setIfChanged('validation', this.getPath('overviewView.validationField.value'));
+      task.setIfChanged('effortValue', this.getPath('overviewView.effortField.value'));
+      task.setIfChanged('projectValue', this.getPath('overviewView.projectField.value'));
+      task.setIfChanged('submitterValue', this.getPath('overviewView.submitterField.value'));
+      task.setIfChanged('assigneeValue', this.getPath('overviewView.assigneeField.value'));
+      task.setIfChanged('displayName', name);
       var description = CoreTasks.stripDescriptionPrefixes(editor.getPath('splitView.topLeftView.contentView.descriptionField.value'));
       task.setIfChanged('description', description);
     }
     if(CoreTasks.get('needsSave')) Tasks.assignmentsController.computeTasks();
   },
-  
-  _statusDidChange: function() {
-    var editor = this.get('editor');
-    var status = editor.getPath('statusField.value');
-    var isDone = (status === CoreTasks.STATUS_DONE);
-    editor.setPath('validationField.isEnabled', isDone);
-    if(!isDone) editor.setPath('validationField.value', CoreTasks.TASK_VALIDATION_UNTESTED);
-  }.observes('.editor.statusField*value'),
   
   popup: function(task) {
     if(Tasks.get('panelOpen') === Tasks.TASK_EDITOR) {
@@ -273,7 +189,7 @@ Tasks.TaskEditorView = SC.View.extend(
  
  editor: SC.View.design({
    
-   childViews: 'idLabel showTasksListButton gotoPreviousTaskButton gotoNextTaskButton positionLabel nameLabel nameField typeLabel typeField priorityLabel priorityField statusLabel statusField validationLabel validationField effortLabel effortField effortHelpLabel submitterLabel submitterField projectLabel projectField assigneeLabel assigneeField splitView separatorView createdAtLabel updatedAtLabel watchingCheckbox watchersButton'.w(),
+   childViews: ((Tasks.isMobile? 'tabView ' : 'overviewView ') + 'idLabel showTasksListButton gotoPreviousTaskButton gotoNextTaskButton positionLabel splitView separatorView createdAtLabel updatedAtLabel watchingCheckbox watchersButton').w(),
    classNames: ['task-editor'],
 
    idLabel: SC.LabelView.design({
@@ -282,14 +198,14 @@ Tasks.TaskEditorView = SC.View.extend(
    }),
    
    showTasksListButton: SC.View.design(SCUI.SimpleButton, {
-     layout: { top: 0, left: 10, width: 32, height: 24 },
+     layout: { top: 2, left: 10, width: 32, height: 20 },
      classNames: ['back-icon'],
      toolTip: "_ShowTasksList".loc(),
      action: 'showTasksList'
     }),
 
    gotoPreviousTaskButton: SC.View.design(SCUI.SimpleButton, {
-     layout: { top: 0, right: 48, width: 24, height: 24 },
+     layout: { top: 2, right: 48, width: 24, height: 20 },
      classNames: ['previous-icon'],
      toolTip: "_GotoPreviousTask".loc(),
      action: 'gotoPreviousTask',
@@ -306,7 +222,7 @@ Tasks.TaskEditorView = SC.View.extend(
                                             }).from('Tasks*tasksController.selection')
    }),
    gotoNextTaskButton: SC.View.design(SCUI.SimpleButton, {
-     layout: { top: 0, right: 10, width: 24, height: 24 },
+     layout: { top: 2, right: 10, width: 24, height: 20 },
      classNames: ['next-icon'],
      toolTip: "_GotoNextTask".loc(),
      action: 'gotoNextTask',
@@ -327,143 +243,19 @@ Tasks.TaskEditorView = SC.View.extend(
      textAlign: SC.ALIGN_RIGHT
    }),
    
-   nameLabel: SC.LabelView.design({
-     layout: { top: 35, left: 0, height: 24, width: 55 },
-     textAlign: SC.ALIGN_RIGHT,
-     value: "_Name".loc()
-   }),
-   nameField: SC.TextFieldView.design({
-     layout: { top: 33, left: 60, right: 10, height: 24 },
-     isEnabledBinding: 'Tasks.tasksController.isEditable'
-   }),
-
-   typeLabel: SC.LabelView.design({
-     layout: { top: 69, left: 0, height: 24, width: 55 },
-     isVisibleBinding: 'Tasks.softwareMode',
-     textAlign: SC.ALIGN_RIGHT,
-     value: "_Type".loc()
-   }),
-   typeField: SC.SelectButtonView.design({
-     layout: { top: 67, left: 60, height: 24, width: 120 },
-     classNames: ['square'],
-     localize: YES,
-     isVisibleBinding: 'Tasks.softwareMode',
-     isEnabledBinding: 'Tasks.tasksController.isEditable',
-     objects: Tasks.taskEditorHelper.types(),
-     nameKey: 'name',
-     valueKey: 'value',
-     iconKey: 'icon',
-     toolTip: "_TypeTooltip".loc()
-   }),
-
-   priorityLabel: SC.LabelView.design({
-     layout: { top: 69, left: 148, height: 24, width: 70 },
-     textAlign: SC.ALIGN_RIGHT,
-     value: "_Priority".loc()
-   }),
-   priorityField: SC.SelectButtonView.design({
-     layout: { top: 67, left: 220, height: 24, width: 120 },
-     classNames: ['square'],
-     localize: YES,
-     isEnabledBinding: 'Tasks.tasksController.isEditable',
-     objects: Tasks.taskEditorHelper.priorities(),
-     nameKey: 'name',
-     valueKey: 'value',
-     toolTip: "_PriorityTooltip".loc()
-   }),
-
-   statusLabel: SC.LabelView.design({
-     layout: Tasks.isMobile? { top: 104, left: 0, height: 24, width: 55 } : { top: 69, right: 285, height: 24, width: 55 },
-     textAlign: SC.ALIGN_RIGHT,
-     value: "_Status".loc()
-   }),
-   statusField: SC.SelectButtonView.design({
-     layout: Tasks.isMobile? { top: 102, left: 60, height: 24, width: 120 } : { top: 67, right: 190, height: 24, width: 120 },
-     classNames: ['square'],
-     localize: YES,
-     isEnabledBinding: 'Tasks.tasksController.isEditable',
-     objects: Tasks.taskEditorHelper.statuses(),
-     nameKey: 'name',
-     valueKey: 'value',
-     toolTip: "_StatusTooltip".loc()
-   }),
-
-   validationLabel: SC.LabelView.design({
-     layout: Tasks.isMobile? { top: 104, left: 148, height: 24, width: 70 } : { top: 69, right: 105, height: 24, width: 70 },
-     textAlign: SC.ALIGN_RIGHT,
-     isVisibleBinding: 'Tasks.softwareMode',
-     value: "_Validation".loc()
-   }),
-   validationField: SC.SelectButtonView.design({
-     layout: Tasks.isMobile? { top: 102, left: 220, height: 24, width: 120 } : { top: 67, right: 10, height: 24, width: 120 },
-     classNames: ['square'],
-     localize: YES,
-     isVisibleBinding: 'Tasks.softwareMode',
-     objects: Tasks.taskEditorHelper.validations(),
-     nameKey: 'name',
-     valueKey: 'value',
-     toolTip: "_ValidationTooltip".loc()
-   }),
-
-   effortLabel: SC.LabelView.design({
-     layout: { top: Tasks.isMobile? 137 : 102, left: 0, height: 24, width: 55 },
-     textAlign: SC.ALIGN_RIGHT,
-     value: "_Effort:".loc()
-   }),
-   effortField: SC.TextFieldView.design({
-     layout: { top: Tasks.isMobile? 135 : 100, left: 60, width: 95, height: 24 },
-     isEnabledBinding: 'Tasks.tasksController.isEditable'
-   }),
-   effortHelpLabel: SC.LabelView.design({
-     layout: { top: 100, left: 160, height: 30, width: 235 },
-     escapeHTML: NO,
-     isVisible: !Tasks.isMobile,
-     classNames: [ 'onscreen-help'],
-     value: "_EffortOnscreenHelp".loc()
-   }),
-
-   projectLabel: SC.LabelView.design({
-     layout: { top: Tasks.isMobile? 172 : 134, left: 0, height: 24, width: 55 },
-     textAlign: SC.ALIGN_RIGHT,
-     value: "_Project:".loc()
-   }),
-   projectField: SCUI.ComboBoxView.design({
-     layout: { top: Tasks.isMobile? 170 : 132, left: 60, width: 252, height: 24 },
-     objectsBinding: SC.Binding.oneWay('Tasks.taskEditorHelper*projects'),
-     nameKey: 'displayName',
-     valueKey: 'id',
-     iconKey: 'icon',
-     isEnabledBinding: 'Tasks.tasksController.isReallocatable'
-   }),
-
-   submitterLabel: SC.LabelView.design({
-     layout: Tasks.isMobile? { top: 207, left: 0, height: 24, width: 55 } : { top: 102, right: 285, height: 24, width: 75 },
-     textAlign: SC.ALIGN_RIGHT,
-     value: "_Submitter:".loc()
-   }),
-   submitterField: SCUI.ComboBoxView.design({
-     layout: Tasks.isMobile? { top: 205, left: 60, width: 252, height: 24 } : { top: 100, right: 10, width: 252, height: 24 },
-     objectsBinding: SC.Binding.oneWay('Tasks.taskEditorHelper*users'),
-     nameKey: 'displayName',
-     valueKey: 'id',
-     iconKey: 'icon',
-     isEnabledBinding: 'Tasks.tasksController.isEditable'
-   }),
-
-   assigneeLabel: SC.LabelView.design({
-     layout: Tasks.isMobile? { top: 242, left: 0, height: 24, width: 55 } : { top: 134, right: 285, height: 24, width: 75 },
-     textAlign: SC.ALIGN_RIGHT,
-     value: "_Assignee:".loc()
-   }),
-   assigneeField: SCUI.ComboBoxView.design({
-     layout: Tasks.isMobile? { top: 240, left: 60, width: 252, height: 24 } : { top: 132, right: 10, width: 252, height: 24 },
-     objectsBinding: SC.Binding.oneWay('Tasks.taskEditorHelper*nonGuestsList'),
-     nameKey: 'displayName',
-     valueKey: 'id',
-     iconKey: 'icon',
-     isEnabledBinding: 'Tasks.tasksController.isEditable'
-   }),
-
+   tabView: Tasks.isMobile? SC.TabView.design({
+ 		layout: { top: 35, left: 0, right: 0, bottom: 5 },
+     itemTitleKey: 'title',
+     itemValueKey: 'value',
+     items: [
+       { title: "_Overview".loc(), value: 'Tasks.taskEditorOverviewView' },
+       { title: "_Details".loc(),  value: 'Tasks.taskEditorDetailsView' }
+     ],
+     nowShowing: 'Tasks.taskEditorOverviewView'
+   }) : null,
+   
+   overviewView: Tasks.TaskEditorOverviewView.design(),
+   
    splitView: SC.SplitView.design({
      layout: { top: 165, left: 10, bottom: 40, right: 10 },
      layoutDirection: SC.LAYOUT_VERTICAL,
@@ -553,6 +345,7 @@ Tasks.TaskEditorView = SC.View.extend(
    
   }),
   
+  overviewView: SC.outlet(Tasks.isMobile? 'editor.tabView.contentView' : 'editor.overviewView'),
   commentsList: SC.outlet('editor.splitView.bottomRightView.commentsList.contentView'),
   commentButton: SC.outlet('editor.splitView.bottomRightView.commentButton'),
 
