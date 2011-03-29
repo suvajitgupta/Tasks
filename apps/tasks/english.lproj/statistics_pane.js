@@ -5,7 +5,6 @@
 sc_require('views/graphical_statistics');
 sc_require('views/numerical_statistics');
 
-
 /** @static
     
   @extends SC.ModalPane
@@ -30,13 +29,13 @@ Tasks.statisticsPane = Tasks.isMobile? null : SCUI.ModalPane.create({
     
     statisticsTabs: SC.TabView.design({
   		layout: { top: 10, left: 10, right: 10, bottom: 40 },
-      nowShowing: 'Tasks.graphicalStatisticsView', 
+      itemTitleKey: 'title',
+      itemValueKey: 'value',
       items: [
         { title: "_Graphical".loc(), value: 'Tasks.graphicalStatisticsView' },
         { title: "_Numerical".loc(), value: 'Tasks.numericalStatisticsView' }
       ],
-      itemTitleKey: 'title',
-      itemValueKey: 'value'
+      nowShowing: 'Tasks.graphicalStatisticsView'
     }),
     
     closeButton: SC.ButtonView.design({
