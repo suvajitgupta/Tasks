@@ -17,7 +17,7 @@ Tasks.TasksBottomBarView = SC.View.extend({
 
   layout: { bottom: 0, height: 35, left: 0, right: 0 },
   
-  childViews: ((Tasks.isMobile? 'displayModeButton ' : '') + 'addTaskButton deleteTaskButton summaryView serverMessageLabel saveButton refreshButton').w(),
+  childViews: ((Tasks.isMobile? 'displayModeButton ' : 'summaryView serverMessageLabel saveButton ') + 'addTaskButton deleteTaskButton refreshButton').w(),
 
   addTaskButton: SC.ButtonView.design({
     layout: { centerY: 0, left: 5, height: 24, width: 32 },
@@ -45,26 +45,24 @@ Tasks.TasksBottomBarView = SC.View.extend({
     layout: { centerX: 10, centerY: 0, height: 24, width: 55 }
   }) : null,
 
-  summaryView: Tasks.SummaryView.design({
+  summaryView: Tasks.isMobile? null : Tasks.SummaryView.design({
     layout: { centerY: 0, height: 18, left: 90, width: 400 },
-    isVisible: !Tasks.isMobile,
     panelOpenBinding: SC.Binding.oneWay('Tasks*panelOpen'),
     assignmentsSummaryBinding: SC.Binding.oneWay('Tasks.assignmentsController.assignmentsSummary'),
     projectsSelectionBinding: SC.Binding.oneWay('Tasks.projectsController.selection'),
     tasksSelectionBinding: SC.Binding.oneWay('Tasks.tasksController.selection')
   }),
 
-  serverMessageLabel: SC.LabelView.design({
+  serverMessageLabel: Tasks.isMobile? null : SC.LabelView.design({
     layout: { centerY: 0, height: 18, right: Tasks.isMobile? 55 : 95, width: 200 },
     classNames: ['bottom-bar-label'],
     escapeHTML: NO,
-    isVisible: !Tasks.isMobile,
     icon: '',
     textAlign: SC.ALIGN_RIGHT,
     value: ''
   }),
 
-  saveButton: SC.ButtonView.design({
+  saveButton: Tasks.isMobile? null : SC.ButtonView.design({
     layout: { centerY: 0, right: 53, height: 24, width: 32 },
     classNames: ['dark'],
     titleMinWidth: 0,

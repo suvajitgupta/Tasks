@@ -16,7 +16,7 @@ Tasks.TaskEditorOverviewView = SC.View.extend(
   layout: Tasks.isMobile? { top: 0, bottom: 0, left: 0, right: 0 } : { height: 165 },
   classNames: 'task-editor-overview'.w(),
 
-  childViews: 'nameLabel nameField typeLabel typeField priorityLabel priorityField statusLabel statusField validationLabel validationField effortLabel effortField effortHelpLabel submitterLabel submitterField projectLabel projectField assigneeLabel assigneeField'.w(),
+  childViews: ((Tasks.isMobile? '' : 'effortHelpLabel ') + 'nameLabel nameField typeLabel typeField priorityLabel priorityField statusLabel statusField validationLabel validationField effortLabel effortField submitterLabel submitterField projectLabel projectField assigneeLabel assigneeField').w(),
   
   nameLabel: SC.LabelView.design({
     layout: { top: 35, left: 0, height: 24, width: 55 },
@@ -108,10 +108,9 @@ Tasks.TaskEditorOverviewView = SC.View.extend(
     layout: { top: Tasks.isMobile? 135 : 100, left: 60, width: 95, height: 24 },
     isEnabledBinding: 'Tasks.tasksController.isEditable'
   }),
-  effortHelpLabel: SC.LabelView.design({
+  effortHelpLabel: Tasks.isMobile? null : SC.LabelView.design({
     layout: { top: 100, left: 160, height: 30, width: 235 },
     escapeHTML: NO,
-    isVisible: !Tasks.isMobile,
     classNames: [ 'onscreen-help'],
     value: "_EffortOnscreenHelp".loc()
   }),

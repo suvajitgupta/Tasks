@@ -54,8 +54,10 @@ Tasks.projectEditorPage = SC.Page.create({
       editor.setPath('activatedAtField.date', project.get('activatedAtValue'));
       editor.setPath('timeLeftField.value', project.get('timeLeftValue'));
       editor.setPath('descriptionField.value', project.get('description'));
-      editor.setPath('createdAtLabel.value', project.get('displayCreatedAt'));
-      editor.setPath('updatedAtLabel.value', project.get('displayUpdatedAt'));
+      if(!Tasks.isMobile) {
+        editor.setPath('createdAtLabel.value', project.get('displayCreatedAt'));
+        editor.setPath('updatedAtLabel.value', project.get('displayUpdatedAt'));
+      }
       this.set('_modifying', false); // timeLeftDidChange and stoppedAtDidChange are active
       this._timeLeftOrActivatedAtDidChange(); // to set stoppedAt field
     },
@@ -137,7 +139,7 @@ Tasks.projectEditorPage = SC.Page.create({
     },
 
     contentView: SC.View.design({
-      childViews: 'nameLabel nameField statusLabel statusField activatedAtLabel activatedAtField timeLeftLabel timeLeftField timeLeftHelpLabel stoppedAtLabel stoppedAtField descriptionLabel descriptionField createdAtLabel updatedAtLabel closeButton'.w(),
+      childViews: ((Tasks.isMobile? '' : 'timeLeftHelpLabel createdAtLabel updatedAtLabel ') + 'nameLabel nameField statusLabel statusField activatedAtLabel activatedAtField timeLeftLabel timeLeftField stoppedAtLabel stoppedAtField descriptionLabel descriptionField closeButton').w(),
 
       nameLabel: SC.LabelView.design({
         layout: { top: 7, left: 10, height: 24, width: Tasks.isMobile? 50 : 65 },
@@ -189,11 +191,10 @@ Tasks.projectEditorPage = SC.Page.create({
         layout: Tasks.isMobile? { top: 67, right: 10, width: 60, height: 24 } : { top: 37, right: 350, width: 60, height: 24 },
         isEnabledBinding: 'CoreTasks.permissions.canUpdateProject'
       }),
-      timeLeftHelpLabel: SC.LabelView.design({
+      timeLeftHelpLabel: Tasks.isMobile? null : SC.LabelView.design({
         layout: { top: 38, right: 183, height: 30, width: 160 },
         escapeHTML: NO,
         classNames: [ 'onscreen-help'],
-        isVisible: !Tasks.isMobile,
         value: "_TimeLeftOnscreenHelp".loc()
       }),
 
@@ -223,16 +224,14 @@ Tasks.projectEditorPage = SC.Page.create({
         isEnabledBinding: 'CoreTasks.permissions.canUpdateProject'
       }),
       
-      createdAtLabel: SC.LabelView.design({
+      createdAtLabel: Tasks.isMobile? null : SC.LabelView.design({
         layout: { left: 10, bottom: 45, height: 17, width: 250 },
         classNames: [ 'date-time'],
-        isVisible: !Tasks.isMobile,
         textAlign: SC.ALIGN_LEFT
       }),
-      updatedAtLabel: SC.LabelView.design({
+      updatedAtLabel: Tasks.isMobile? null : SC.LabelView.design({
         layout: { right: 10, bottom: 45, height: 17, width: 250 },
         classNames: [ 'date-time'],
-        isVisible: !Tasks.isMobile,
         textAlign: SC.ALIGN_RIGHT
       }),
 

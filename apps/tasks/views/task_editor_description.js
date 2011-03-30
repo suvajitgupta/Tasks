@@ -20,6 +20,7 @@ Tasks.TaskEditorDescriptionView = SC.View.extend(
     icon: 'description-icon',
     value: "_Description:".loc()
   }),
+  // FIXME: [SC] fix TextFieldView to have a scrollbar when needed on touch devices
   descriptionField: SC.TextFieldView.design({
     layout: { top: 20, left: 2, right: 2, bottom: 5 },
     hint: "_DescriptionHint".loc(),

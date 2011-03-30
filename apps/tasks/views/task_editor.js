@@ -69,8 +69,10 @@ Tasks.TaskEditorView = SC.View.extend(
     this.setPath('overviewView.submitterField.value', task.get('submitterValue'));
     this.setPath('overviewView.assigneeField.value', task.get('assigneeValue'));
     this.setPath('descriptionView.descriptionField.value', task.get('description'));
-    editor.setPath('createdAtLabel.value', task.get('displayCreatedAt'));
-    editor.setPath('updatedAtLabel.value', task.get('displayUpdatedAt'));
+    if(!Tasks.isMobile) {
+      editor.setPath('createdAtLabel.value', task.get('displayCreatedAt'));
+      editor.setPath('updatedAtLabel.value', task.get('displayUpdatedAt'));
+    }
   },
   
   _postEditing: function() {
@@ -190,7 +192,7 @@ Tasks.TaskEditorView = SC.View.extend(
  
  editor: SC.View.design({
    
-   childViews: ((Tasks.isMobile? 'tabView ' : 'overviewView ') + 'idLabel showTasksListButton gotoPreviousTaskButton gotoNextTaskButton positionLabel splitView separatorView createdAtLabel updatedAtLabel watchingCheckbox watchersButton').w(),
+   childViews: ((Tasks.isMobile? 'tabView ' : 'positionLabel overviewView splitView separatorView createdAtLabel updatedAtLabel watchingCheckbox watchersButton ') + 'idLabel showTasksListButton gotoPreviousTaskButton gotoNextTaskButton').w(),
    classNames: ['task-editor'],
 
    idLabel: SC.LabelView.design({
@@ -238,9 +240,8 @@ Tasks.TaskEditorView = SC.View.extend(
                                             }).from('Tasks*tasksController.selection')
    }),
 
-   positionLabel: SC.LabelView.design({
+   positionLabel: Tasks.isMobile? null : SC.LabelView.design({
      layout: { width: 100, right: 85, top: 5, height: 16 },
-     isVisible: !Tasks.isMobile,
      textAlign: SC.ALIGN_RIGHT
    }),
    
@@ -257,11 +258,10 @@ Tasks.TaskEditorView = SC.View.extend(
    
    overviewView: Tasks.isMobile? null : Tasks.TaskEditorOverviewView.design(),
    
-   splitView: SC.SplitView.design({
+   splitView: Tasks.isMobile? null : SC.SplitView.design({
      layout: { top: 165, left: 10, bottom: 40, right: 10 },
      layoutDirection: SC.LAYOUT_VERTICAL,
      defaultThickness: Tasks.isMobile? 0.99 : 0.5,
-     isVisible: !Tasks.isMobile,
      topLeftMinThickness: 75,
      bottomRightMinThickness: 75,
      
@@ -293,36 +293,31 @@ Tasks.TaskEditorView = SC.View.extend(
      })
    }),
    
-   separatorView: SC.View.design({
+   separatorView: Tasks.isMobile? null : SC.View.design({
      layout: { left: 5, right: 5, height: 2, bottom: 33 },
-     isVisible: !Tasks.isMobile,
      classNames: [ 'separator']
    }),
 
-   createdAtLabel: SC.LabelView.design({
+   createdAtLabel: Tasks.isMobile? null : SC.LabelView.design({
      layout: { left: 10, bottom: 10, height: 17, width: 250 },
      classNames: [ 'date-time'],
-     isVisible: !Tasks.isMobile,
      textAlign: SC.ALIGN_LEFT
    }),
-   updatedAtLabel: SC.LabelView.design({
+   updatedAtLabel: Tasks.isMobile? null : SC.LabelView.design({
      layout: { right: 10, bottom: 10, height: 17, width: 250 },
      classNames: [ 'date-time'],
-     isVisible: !Tasks.isMobile,
      textAlign: SC.ALIGN_RIGHT
    }),
 
-   watchingCheckbox: SC.CheckboxView.design({
+   watchingCheckbox: Tasks.isMobile? null : SC.CheckboxView.design({
      layout: { centerX: -35, bottom: 10, height: 16, width: 80 },
-     isVisible: !Tasks.isMobile,
      title: "_Watch".loc()
    }),
-   watchersButton: SC.ButtonView.design({
+   watchersButton: Tasks.isMobile? null : SC.ButtonView.design({
      layout: { centerX: 35, bottom: 6, height: 24, width: 80 },
      icon: 'watches-icon',
      fontWeight: SC.BOLD_WEIGHT,
      action: 'showWatchers',
-     isVisible: !Tasks.isMobile,
      toolTip: "_TaskWatchersTooltip".loc()
    })
    
