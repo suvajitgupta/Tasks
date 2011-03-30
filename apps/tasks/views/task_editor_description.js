@@ -13,8 +13,9 @@ Tasks.TaskEditorDescriptionView = SC.View.extend(
   
   layout: Tasks.isMobile? { top: 20, bottom: 10, left: 10, right: 10 } : { top: 0, bottom: 0, left: 0, right: 0 },
   childViews: 'descriptionLabel descriptionField'.w(),
+  classNames: 'task-editor-description'.w(),
   
-    descriptionLabel: SC.LabelView.design({
+  descriptionLabel: SC.LabelView.design({
     layout: { top: 0, left: 0, height: 17, width: 100 },
     icon: 'description-icon',
     value: "_Description:".loc()

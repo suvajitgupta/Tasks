@@ -265,10 +265,7 @@ Tasks.TaskEditorView = SC.View.extend(
      topLeftMinThickness: 75,
      bottomRightMinThickness: 75,
      
-     topLeftView: SC.ScrollView.design({
-       hasHorizontalScroller: NO, // disable horizontal scrolling
-       contentView: Tasks.TaskEditorDescriptionView.design()
-     }),
+     topLeftView: Tasks.TaskEditorDescriptionView.design(),
      
      bottomRightView: Tasks.isMobile? SC.View.design() : SC.View.design({
        classNames: ['comments-view'],
@@ -332,7 +329,7 @@ Tasks.TaskEditorView = SC.View.extend(
   }),
   
   overviewView: Tasks.isMobile? Tasks.taskEditorOverviewView : SC.outlet('editor.overviewView'),
-  descriptionView: Tasks.isMobile? Tasks.taskEditorDescriptionView : SC.outlet('editor.splitView.topLeftView.contentView'),
+  descriptionView: Tasks.isMobile? Tasks.taskEditorDescriptionView : SC.outlet('editor.splitView.topLeftView'),
   commentsList: SC.outlet('editor.splitView.bottomRightView.commentsList.contentView'),
   commentButton: SC.outlet('editor.splitView.bottomRightView.commentButton'),
 
