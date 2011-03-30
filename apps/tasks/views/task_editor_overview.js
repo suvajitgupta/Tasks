@@ -64,12 +64,12 @@ Tasks.TaskEditorOverviewView = SC.View.extend(
   }),
 
   statusLabel: SC.LabelView.design({
-    layout: Tasks.isMobile? { top: 104, left: 0, height: 24, width: 55 } : { top: 69, right: 285, height: 24, width: 55 },
+    layout: Tasks.isMobile? { top: 104, left: 0, height: 24, width: 55 } : { top: 69, right: 275, height: 24, width: 55 },
     textAlign: SC.ALIGN_RIGHT,
     value: "_Status".loc()
   }),
   statusField: SC.SelectButtonView.design({
-    layout: Tasks.isMobile? { top: 102, left: 60, height: 24, width: 120 } : { top: 67, right: 190, height: 24, width: 120 },
+    layout: Tasks.isMobile? { top: 102, left: 60, height: 24, width: 120 } : { top: 67, right: 180, height: 24, width: 120 },
     classNames: ['square'],
     localize: YES,
     isEnabledBinding: 'Tasks.tasksController.isEditable',
@@ -131,12 +131,12 @@ Tasks.TaskEditorOverviewView = SC.View.extend(
   }),
 
   submitterLabel: SC.LabelView.design({
-    layout: Tasks.isMobile? { top: 207, left: 0, height: 24, width: 55 } : { top: 102, right: 285, height: 24, width: 75 },
+    layout: Tasks.isMobile? { top: 207, left: 0, height: 24, width: 55 } : { top: 102, right: 275, height: 24, width: 75 },
     textAlign: SC.ALIGN_RIGHT,
     value: "_Submitter:".loc()
   }),
   submitterField: SCUI.ComboBoxView.design({
-    layout: Tasks.isMobile? { top: 205, left: 60, width: 252, height: 24 } : { top: 100, right: 10, width: 252, height: 24 },
+    layout: Tasks.isMobile? { top: 205, left: 60, width: 252, height: 24 } : { top: 100, right: 10, width: 262, height: 24 },
     objectsBinding: SC.Binding.oneWay('Tasks.taskEditorHelper*users'),
     nameKey: 'displayName',
     valueKey: 'id',
@@ -145,12 +145,12 @@ Tasks.TaskEditorOverviewView = SC.View.extend(
   }),
 
   assigneeLabel: SC.LabelView.design({
-    layout: Tasks.isMobile? { top: 242, left: 0, height: 24, width: 55 } : { top: 134, right: 285, height: 24, width: 75 },
+    layout: Tasks.isMobile? { top: 242, left: 0, height: 24, width: 55 } : { top: 134, right: 275, height: 24, width: 75 },
     textAlign: SC.ALIGN_RIGHT,
     value: "_Assignee:".loc()
   }),
   assigneeField: SCUI.ComboBoxView.design({
-    layout: Tasks.isMobile? { top: 240, left: 60, width: 252, height: 24 } : { top: 132, right: 10, width: 252, height: 24 },
+    layout: Tasks.isMobile? { top: 240, left: 60, width: 252, height: 24 } : { top: 132, right: 10, width: 262, height: 24 },
     objectsBinding: SC.Binding.oneWay('Tasks.taskEditorHelper*nonGuestsList'),
     nameKey: 'displayName',
     valueKey: 'id',

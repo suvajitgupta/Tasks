@@ -12,6 +12,7 @@
 */
 sc_require('views/task_editor_helper');
 sc_require('views/task_editor_overview');
+sc_require('views/task_editor_description');
 
 Tasks.TaskEditorView = SC.View.extend(
 /** @scope Tasks.TaskEditorView.prototype */ {
@@ -67,7 +68,7 @@ Tasks.TaskEditorView = SC.View.extend(
     this.setPath('overviewView.projectField.value', task.get('projectValue'));
     this.setPath('overviewView.submitterField.value', task.get('submitterValue'));
     this.setPath('overviewView.assigneeField.value', task.get('assigneeValue'));
-    editor.setPath('splitView.topLeftView.contentView.descriptionField.value', task.get('description'));
+    this.setPath('descriptionView.descriptionField.value', task.get('description'));
     editor.setPath('createdAtLabel.value', task.get('displayCreatedAt'));
     editor.setPath('updatedAtLabel.value', task.get('displayUpdatedAt'));
   },
@@ -103,7 +104,7 @@ Tasks.TaskEditorView = SC.View.extend(
       task.setIfChanged('submitterValue', this.getPath('overviewView.submitterField.value'));
       task.setIfChanged('assigneeValue', this.getPath('overviewView.assigneeField.value'));
       task.setIfChanged('displayName', name);
-      var description = CoreTasks.stripDescriptionPrefixes(editor.getPath('splitView.topLeftView.contentView.descriptionField.value'));
+      var description = CoreTasks.stripDescriptionPrefixes(this.getPath('descriptionView.descriptionField.value'));
       task.setIfChanged('description', description);
     }
     if(CoreTasks.get('needsSave')) Tasks.assignmentsController.computeTasks();
@@ -249,7 +250,7 @@ Tasks.TaskEditorView = SC.View.extend(
      itemValueKey: 'value',
      items: [
        { title: "_Overview".loc(), value: 'Tasks.taskEditorOverviewView' },
-       { title: "_Details".loc(),  value: 'Tasks.taskEditorDetailsView' }
+       { title: "_Description".loc(),  value: 'Tasks.taskEditorDescriptionView' }
      ],
      nowShowing: 'Tasks.taskEditorOverviewView'
    }) : null,
@@ -266,22 +267,7 @@ Tasks.TaskEditorView = SC.View.extend(
      
      topLeftView: SC.ScrollView.design({
        hasHorizontalScroller: NO, // disable horizontal scrolling
-       contentView: SC.View.design({
-         childViews: 'descriptionLabel descriptionField'.w(),
-         descriptionLabel: SC.LabelView.design({
-           layout: { top: 0, left: 0, height: 17, width: 100 },
-           icon: 'description-icon',
-           value: "_Description:".loc()
-         }),
-         descriptionField: SC.TextFieldView.design({
-           layout: { top: 20, left: 2, right: 2, bottom: 5 },
-           hint: "_DescriptionHint".loc(),
-           maxLength: 500000,
-           isTextArea: YES,
-           isEnabled: YES,
-           isEnabledBinding: 'Tasks.tasksController.isEditable'
-         })
-       })
+       contentView: Tasks.TaskEditorDescriptionView.design()
      }),
      
      bottomRightView: Tasks.isMobile? SC.View.design() : SC.View.design({
@@ -346,6 +332,7 @@ Tasks.TaskEditorView = SC.View.extend(
   }),
   
   overviewView: Tasks.isMobile? Tasks.taskEditorOverviewView : SC.outlet('editor.overviewView'),
+  descriptionView: Tasks.isMobile? Tasks.taskEditorDescriptionView : SC.outlet('editor.splitView.topLeftView.contentView'),
   commentsList: SC.outlet('editor.splitView.bottomRightView.commentsList.contentView'),
   commentButton: SC.outlet('editor.splitView.bottomRightView.commentButton'),
 

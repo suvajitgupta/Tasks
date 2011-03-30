@@ -61,7 +61,7 @@ SC.stringsFor('English', {
   "_DeleteUserTooltip": "Delete selected users",
   "_Description:": "Description:",
   "_DescriptionHint": "Enter detailed notes...",
-  "_Details": "Details",
+  "_Description": "Description",
   "_Developer": "Developer",
   "_DisplayModeTooltip": "Toggle Display Mode between TEAM and TASKS",
   "_DisplayedUsers": " users displayed, ",
