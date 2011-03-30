@@ -244,7 +244,7 @@ Tasks.TaskEditorView = SC.View.extend(
    }),
    
    tabView: Tasks.isMobile? SC.TabView.design({
- 		layout: { top: 35, left: 0, right: 0, bottom: 5 },
+     layout: { left: 1, right: 1, bottom: 2, top: 30 },
      itemTitleKey: 'title',
      itemValueKey: 'value',
      items: [
@@ -254,7 +254,7 @@ Tasks.TaskEditorView = SC.View.extend(
      nowShowing: 'Tasks.taskEditorOverviewView'
    }) : null,
    
-   overviewView: Tasks.TaskEditorOverviewView.design(),
+   overviewView: Tasks.isMobile? null : Tasks.TaskEditorOverviewView.design(),
    
    splitView: SC.SplitView.design({
      layout: { top: 165, left: 10, bottom: 40, right: 10 },
@@ -345,7 +345,7 @@ Tasks.TaskEditorView = SC.View.extend(
    
   }),
   
-  overviewView: SC.outlet(Tasks.isMobile? 'editor.tabView.contentView' : 'editor.overviewView'),
+  overviewView: Tasks.isMobile? Tasks.taskEditorOverviewView : SC.outlet('editor.overviewView'),
   commentsList: SC.outlet('editor.splitView.bottomRightView.commentsList.contentView'),
   commentButton: SC.outlet('editor.splitView.bottomRightView.commentButton'),
 

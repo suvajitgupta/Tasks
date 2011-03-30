@@ -24,7 +24,7 @@ Tasks.TaskEditorOverviewView = SC.View.extend(
     value: "_Name".loc()
   }),
   nameField: SC.TextFieldView.design({
-    layout: { top: 33, left: 60, right: 10, height: 24 },
+    layout: { top: 33, left: 60, right: Tasks.isMobile? 5 : 10, height: 24 },
     isEnabledBinding: 'Tasks.tasksController.isEditable'
   }),
 
@@ -48,12 +48,12 @@ Tasks.TaskEditorOverviewView = SC.View.extend(
   }),
 
   priorityLabel: SC.LabelView.design({
-    layout: { top: 69, left: 148, height: 24, width: 70 },
+    layout: Tasks.isMobile && !Tasks.softwareMode? { top: 69, left: 0, height: 24, width: 55 } : { top: 69, left: 148, height: 24, width: 70 },
     textAlign: SC.ALIGN_RIGHT,
     value: "_Priority".loc()
   }),
   priorityField: SC.SelectButtonView.design({
-    layout: { top: 67, left: 220, height: 24, width: 120 },
+    layout: Tasks.isMobile && !Tasks.softwareMode? { top: 67, left: 60, height: 24, width: 120 } : { top: 67, left: 220, height: 24, width: 120 },
     classNames: ['square'],
     localize: YES,
     isEnabledBinding: 'Tasks.tasksController.isEditable',
@@ -166,3 +166,5 @@ Tasks.TaskEditorOverviewView = SC.View.extend(
   }
   
 });
+
+if(Tasks.isMobile) Tasks.taskEditorOverviewView = Tasks.TaskEditorOverviewView.create();
