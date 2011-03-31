@@ -172,7 +172,7 @@ Tasks.projectEditorPage = SC.Page.create({
         textAlign: SC.ALIGN_RIGHT,
         value: "_Activated:".loc()
       }),
-      // FIXME: [EG] fix SCUI.DatePickerView to allow updates typed in via the text box
+      // FIXME: [EG] disable SCUI.DatePickerView text box to prevent data entry
       // FIXME: [EG] add touch events to SCUI.CalendarView days and switch to previous/next SimpleButtons to make this control work on iPad/iPhone/iPod
       activatedAtField: SCUI.DatePickerView.design(SCUI.ToolTip, {
         layout: Tasks.isMobile? { top: 67, left: 65, height: 24, width: 100 } : { top: 37, left: 80, height: 24, width: 100 },
