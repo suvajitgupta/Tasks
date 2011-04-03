@@ -14,7 +14,8 @@
 Tasks.SummaryView = SC.LabelView.extend(
 /** @scope Tasks.SummaryView.prototype */ {
   
-  classNames: ['bottom-bar-label'],
+  classNames: 'bottom-bar-label transparent'.w(),
+  
   escapeHTML: NO,
   panelOpen: null,
   assignmentsSummary: null,

@@ -14,6 +14,8 @@ sc_require('views/tasks_bottom_bar');
 
 Tasks.TasksListView = SC.View.extend({
   
+  classNames: ['transparent'],
+  
   childViews: ((Tasks.isMobile? 'topToolbar tasksBottomBar ' : '') + 'tasksList').w(),
   
   topToolbar: Tasks.isMobile? SC.View.design({
@@ -39,11 +41,14 @@ Tasks.TasksListView = SC.View.extend({
   
   tasksList: SC.ScrollView.design({
     
+    classNames: ['transparent'],
+    
     layout: Tasks.isMobile? { top: 35, bottom: 35, left: 5, right: 5 } : { top: 0, bottom: 0, left: 0, right: 0 },
     
     contentView: Tasks.ListView.design({
     
-      classNames: ['tasks-pane'],
+      classNames: 'tasks-pane transparent'.w(),
+      
       contentValueKey: 'displayName',
       contentUnreadCountKey: Tasks.isMobile? null : 'displayEffort',
       contentBinding: SC.Binding.oneWay('Tasks.tasksController.arrangedObjects'),

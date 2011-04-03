@@ -13,6 +13,8 @@
 
 Tasks.FilterSearchView = SC.View.extend({
   
+  classNames: 'transparent'.w(),
+  
   layout: { centerY: 0, height: 30, right: Tasks.isMobile? 5 : 10, width: 280 },
   
   childViews: 'filterPanelButton filterCancelButton tasksSearchField tasksSearchCancelButton'.w(),

@@ -15,6 +15,8 @@ sc_require('views/summary');
 
 Tasks.TasksBottomBarView = SC.View.extend({
 
+  classNames: ['transparent'],
+  
   layout: { bottom: 0, height: 35, left: 0, right: 0 },
   
   childViews: ((Tasks.isMobile? 'displayModeButton ' : 'summaryView serverMessageLabel saveButton ') + 'addTaskButton deleteTaskButton refreshButton').w(),
@@ -55,7 +57,7 @@ Tasks.TasksBottomBarView = SC.View.extend({
 
   serverMessageLabel: Tasks.isMobile? null : SC.LabelView.design({
     layout: { centerY: 0, height: 18, right: Tasks.isMobile? 55 : 95, width: 200 },
-    classNames: ['bottom-bar-label'],
+    classNames: 'bottom-bar-label transparent'.w(),
     escapeHTML: NO,
     icon: '',
     textAlign: SC.ALIGN_RIGHT,

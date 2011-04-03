@@ -11,10 +11,10 @@
 
 body.sc-theme,
 .sc-workspace-view .sc-view {
-  background: #3D3D3D;
+  background: static_url('images/background.jpg') repeat 0 0;
 }
 
-.sc-theme .sc-pane.sc-main {
+.sc-theme .sc-pane.sc-main, .transparent {
   background: none !important;
 }
 

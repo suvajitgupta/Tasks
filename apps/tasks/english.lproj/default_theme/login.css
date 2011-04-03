@@ -56,9 +56,6 @@
 }
 
 /* Default Panel Styling Overrides */
-.login-page .login-body {
-  background: none !important;
-}
 .login-page .top-left-edge {
   display: none;
 }

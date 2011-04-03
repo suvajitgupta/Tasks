@@ -12,8 +12,8 @@
  * Task pane/editor styles
  */
  
-.sc-collection-view.sc-list-view.tasks-pane {
-  background: none;
+.sc-view.sc-workspace-view .sc-view.sc-scroll-view .sc-view.sc-container-view {
+  background: none !important;
 }
 
 .sc-view.sc-ghost-view .sc-collection-view.sc-list-view.tasks-pane {

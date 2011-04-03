@@ -182,6 +182,8 @@ Tasks.mainPage = SC.Page.design({
 
           contentView: SC.View.design({ // projectsList/BottomBar
 
+            classNames: ['transparent'],
+            
             childViews: 'projectsList projectsBottomBar'.w(),
 
             projectsList: Tasks.ProjectsListView.design({
@@ -190,6 +192,8 @@ Tasks.mainPage = SC.Page.design({
 
             projectsBottomBar: SC.View.design({
 
+              classNames: ['transparent'],
+              
               layout: { bottom: 0, height: 35, left: 0, right: 0 },
               childViews: 'addProjectButton deleteProjectButton'.w(),
 
@@ -221,10 +225,13 @@ Tasks.mainPage = SC.Page.design({
 
         detailView: SC.WorkspaceView.extend({
 
+          classNames: 'transparent'.w(),
+          
           topToolbar: SC.ToolbarView.design({
 
+            classNames: 'title-bar transparent'.w(),
+            
             childViews: 'actionsButton displayModeButton masterPickerButton welcomeMessageLabel clippyIcon filterSearchView'.w(),
-            classNames: ['title-bar'],
 
             actionsButton: SC.ButtonView.design(SCUI.DropDown, {
               layout: { centerY: 0, left: 10, height: 24, width: 50 },
@@ -262,8 +269,8 @@ Tasks.mainPage = SC.Page.design({
             }),
 
             welcomeMessageLabel: SC.LabelView.design(SCUI.ToolTip, {
-              layout: { centerX: -75, centerY: -2, width: 250, height: 32 },
-              classNames: ['welcome-message'],
+              layout: { centerX: -75, centerY: 0, width: 250, height: 32 },
+              classNames: ['welcome-message transparent'],
               escapeHTML: NO,
               touchStart: function() {
                 this.mouseDown();
@@ -293,9 +300,12 @@ Tasks.mainPage = SC.Page.design({
 
           contentView: SC.View.design({ // tasksList/BottomBar
 
+            classNames: ['transparent'],
+            
             childViews: 'tasksSceneView tasksBottomBar'.w(),
 
             tasksSceneView: SC.SceneView.design({
+              classNames: ['transparent'],
               layout: { top: 2, bottom: 35, left: 5, right: 10 },
               transitionDuration: 0, // CHANGED: [SC] disabled SceneView transitions which are very sluggish and sometimes get stuck
               scenes: ['tasksList', 'taskEditor'],

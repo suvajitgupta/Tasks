@@ -13,14 +13,14 @@
 
 .projects-pane,
 .users-pane {
+  background: #2D2D2D !important;
   border-radius: 4px !important;
   -moz-border-radius: 4px !important;
   -webkit-border-radius: 4px !important;
-  border: 1px solid #000 !important;
-  background: #2E2E2E !important;
-  box-shadow: inset 0 3px 8px rgba(0,0,0,.6), 0 0 2px rgba(255,255,255,.4) !important;
-  -moz-box-shadow: inset 0 3px 8px rgba(0,0,0,.6), 0 0 2px  rgba(255,255,255,.4) !important;
-  -webkit-box-shadow: inset 0 3px 8px rgba(0,0,0,.6), 0 0 2px  rgba(255,255,255,.4) !important;
+  border: 2px solid #000 !important;
+  box-shadow: inset 0 0px 8px black !important;
+  -moz-box-shadow: inset 0 0px 8px black !important;
+  -webkit-box-shadow: inset 0 0px 8px black !important;
 }
 
 .projects-pane .sc-view.sc-container-view,
@@ -28,7 +28,7 @@
 .sc-theme.focus .sc-view.sc-collection-view.sc-list-view.projects-pane,
 .sc-view.sc-collection-view.sc-list-view.users-pane,
 .sc-theme.focus .sc-view.sc-collection-view.sc-list-view.users-pane {
-  background: none;
+  background: none !important;
 }
 
 .sc-view.sc-ghost-view .sc-scroll-view {
@@ -73,7 +73,7 @@
   bottom: 0px !important;
   left: 0px !important;
   right: 1px !important;
-  background-color: #393939;
+  background: #2B2B2B !important;
   box-shadow: inset 2px 2px 4px rgba(150,150,150,.6);
   -moz-box-shadow: inset 2px 2px 4px rgba(150,150,150,.6);
   -webkit-box-shadow: inset 2px 2px 4px rgba(150,150,150,.6);
@@ -95,12 +95,12 @@
   margin-top: 1px !important;
   left: 1px !important;
   right: 1px !important;
-  background-color: #353535 !important;
+  opacity: 0.65 !important;
 }
 
 .projects-pane .sc-collection-item.project-item.hover,
 .users-pane .sc-collection-item.user-item.hover {
-  background-color: #252525 !important;
+  opacity: 1 !important;
 }
 .project-item.hover .project-margin {
   background-image: static_url('images/pencil.png') !important;
@@ -179,7 +179,6 @@
 .users-pane .sc-view.sc-list-item-view.sc-collection-item .sc-outline label {
   left: 22px !important;
   right: 50px !important;
-  opacity: 1 !important;
 }
 .mobile .projects-pane .sc-view.sc-list-item-view.project-item .sc-outline label {
   left: 20px !important;

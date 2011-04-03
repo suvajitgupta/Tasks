@@ -21,7 +21,7 @@ Tasks.loginPage = SC.Page.create({
     contentView: SC.View.design({
       
       layout: { centerX: 0, centerY: 0, width: 260, height: 240 },
-      classNames: ['login-body'],
+      classNames: 'login-body transparent'.w(),
       childViews: 'tasksLogo loginNameField passwordField authenticatingMessageLabel loginErrorMessageLabel loadDoneProjectDataCheckbox guestSignupButton signinButton'.w(),
       
       tasksLogo: Tasks.LogoView.design({
