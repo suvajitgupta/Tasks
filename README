@@ -218,7 +218,7 @@ git clone git://github.com/joshholt/SproutCoreTasks-AppEngineBackend.git <applic
 4) Build 'Tasks' GUI for deployment (this may take a few minutes...)
 
 cd ../tasks
-./bin/sc-build -rc --build=build
+./bin/sc-build -rc --build=build --languages=en
 
 After sc-build finishes, copy tasks production build for deployment on GAE:
 (for this "cp" command make sure there is no slash after "static" which you may
