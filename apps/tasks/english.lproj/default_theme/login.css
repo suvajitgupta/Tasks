@@ -11,23 +11,8 @@
 }
 
 /* Custom Text Fields */
-.login-body .sc-text-field-view {
-  border: 1px solid #000;
-  border-radius: 4px;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-  background: #f8f8f8;
-  box-shadow: inset 0 3px 5px rgba(0,0,0,.4);
-  -moz-box-shadow: inset 0 3px 5px rgba(0,0,0,.4);
-  -webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,.4);
-  outline: 0 !important;
-}
-
-.login-body .sc-text-field-view.focus {
-  border: 2px solid #00a8ff;
-  margin-top: -1px;
-  margin-left: -1px;
-  outline: 0 !important;
+.login-body .sc-text-field-view .border {
+  border: none !important;
 }
 
 .mozilla .login-body .sc-text-field-view .border {
@@ -35,6 +20,7 @@
 }
 
 .login-body .sc-text-field-view input {
+  color: #BBB;
   font-size: 16px;
   font-weight: bold;
   line-height: 32px;

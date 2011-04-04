@@ -145,7 +145,7 @@ Tasks.mainPage = SC.Page.design({
           topToolbar: SC.ToolbarView.design({
 
             childViews: 'installationLogo tasksLogo'.w(),
-            classNames: ['title-bar'],
+            classNames: 'title-bar transparent'.w(),
 
             installationLogo: SC.View.design({
               layout: { left: Tasks.get('squareInstallationLogo')? 25: 15, centerY: 0, width: Tasks.get('squareInstallationLogo')? 35: 80, height: Tasks.get('squareInstallationLogo')? 35 : 20 },

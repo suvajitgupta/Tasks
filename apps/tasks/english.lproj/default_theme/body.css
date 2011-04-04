@@ -10,7 +10,8 @@
 /* Application styles */
 
 body.sc-theme,
-.sc-workspace-view .sc-view {
+.sc-workspace-view .sc-view,
+.sc-view.sc-pane.sc-panel.sc-palette.sc-picker .sc-view.sc-workspace-view {
   background: static_url('images/background.jpg') repeat 0 0;
 }
 
