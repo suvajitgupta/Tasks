@@ -10,17 +10,29 @@
   background: static_url('images/tasks-logo-large.png') no-repeat;
 }
 
-/* Custom Text Fields */
-.login-body .sc-text-field-view .border {
-  border: none !important;
-  -webkit-appearance: none !important;
-}
-
 /*
 // TODO: [SG] remove hack below to force download of task item background image once images are run through Chance
 */
 .login-body .dummy {
   background: static_url('images/paper.jpg');
+}
+
+.login-body .sc-text-field-view {
+  background: #1D1D1D !important;
+  border-radius: 4px !important;
+  -moz-border-radius: 4px !important;
+  -webkit-border-radius: 4px !important;
+  border: 1px solid #000 !important;
+  box-shadow: inset -2px -2px 3px black !important;
+  -moz-box-shadow: inset -2px -2px 3px black !important;
+  -webkit-box-shadow: inset -2px -2px 3px black !important;
+  outline: 0 !important;
+}
+
+/* Custom Text Fields */
+.login-body .sc-text-field-view .border {
+  border: none !important;
+  -webkit-appearance: none !important;
 }
 
 .mozilla .login-body .sc-text-field-view .border {
