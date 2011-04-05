@@ -362,8 +362,8 @@
  * Task list item styles
  */
 
-.task-item {
-  background: #EEE none repeat scroll 0 0 !important;
+.sc-scroll-view .sc-collection-view .task-item {
+  background: static_url('images/paper.jpg') repeat 0 0 !important;
 	border: 1px solid #CCC !important;
 }
 

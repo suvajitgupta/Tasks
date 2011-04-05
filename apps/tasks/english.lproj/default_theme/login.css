@@ -16,6 +16,13 @@
   -webkit-appearance: none !important;
 }
 
+/*
+// TODO: [SG] remove hack below to force download of task item background image once images are run through Chance
+*/
+.login-body .dummy {
+  background: static_url('images/paper.jpg');
+}
+
 .mozilla .login-body .sc-text-field-view .border {
   -moz-appearance: none;
 }
