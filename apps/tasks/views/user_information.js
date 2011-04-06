@@ -14,6 +14,8 @@
 Tasks.UserInformationView = SC.View.extend(
 /** @scope Tasks.UserInformationView.prototype */ {
   
+  contentBinding: 'Tasks.userController',
+  
   roles: function() {
      var ret = [];
      ret.push({ name: CoreTasks.USER_ROLE_MANAGER, value: CoreTasks.USER_ROLE_MANAGER, icon: 'user-role-manager' });

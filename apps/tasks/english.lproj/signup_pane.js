@@ -32,9 +32,7 @@ Tasks.signupPane = SC.PanelPane.create({
     }),
     
     userInformation: Tasks.UserInformationView.design({
-      layout: { top: 26, left: 0, bottom: 35, right: 10 },
-      isRoleChangeable: NO,
-      contentBinding: 'Tasks.userController'
+      layout: { top: 26, left: 0, bottom: 35, right: 10 }
     }),
     
     signupButton: SC.ButtonView.design({

@@ -18,7 +18,6 @@ Tasks.userController = SC.ObjectController.create(Tasks.Sha1,
   
   loginNameErrorMessage: '',
   emailErrorMessage: '',
-  unhashedPassword: '',
   
   isValidUserName: function() {
     var name = this.get('name');
@@ -60,11 +59,12 @@ Tasks.userController = SC.ObjectController.create(Tasks.Sha1,
   unhashedPassword: function(key, value) {
     if (value !== undefined) {
       this._unhashedPassword = value;
-      this.set('password', Tasks.userController.hashPassword(value));
+      this.set('password', this.hashPassword(value));
     } else {
-      return this._unhashedPassword;
+      if(!SC.empty(this._unhashedPassword)) return this._unhashedPassword;
+      return this.get('password')? 'password' : '';
     }
-  }.property('_unhashedPassword').cacheable(),
+  }.property(),
   
   hashPassword: function(password) {
     return password? this.sha1Hash(password) : '';
