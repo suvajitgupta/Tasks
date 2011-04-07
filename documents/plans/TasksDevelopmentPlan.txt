@@ -269,6 +269,9 @@ Servers @Active
 | Don’t send Submitter or Assignee notification if their Email address is unspecified
 | Indicate Task ID, create/update action, and user who triggered notifications in Subject: line
 | For Task updates, indicate old and new values of attributes
+- Support mailing in tasks to Google App Engine Server [SG] <JH2> $Feature
+| Mail to address like: server@<application-identifier>.appspotmail.com
+| Subject is name with optional parseable attributes and Body is description
 - Add link to Task in email notification (should not require authentication if user is signed in) [SG] <JH2> $Feature
 
 - Support Tasks database cleanup to remove soft-deleted records and handle pointers to non-existent records [SG] @Done %Passed

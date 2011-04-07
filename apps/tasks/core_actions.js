@@ -301,6 +301,14 @@ Tasks.mixin( /** @scope Tasks */ {
       serverMessageLabel.set('value', "_Loaded".loc() + SC.DateTime.create(parseInt(Tasks.get('lastRetrieved'), 10)).toFormattedString(CoreTasks.TIME_DATE_FORMAT));
     }
     Tasks.projectsController.refreshCountdowns();
+    
+    // See if any Unallocated Tasks mailed into GAE Server need to be parsed
+    var tasks = CoreTasks.getPath('unallocatedTasksProject.tasks');
+    var len = tasks.get('length');
+    for (var i = 0; i < len; i++) {
+      var task = tasks.objectAt(i);
+      task.set('displayName', task.get('name'));
+    }
 
   },
   
