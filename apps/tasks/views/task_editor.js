@@ -246,7 +246,7 @@ Tasks.TaskEditorView = SC.View.extend(
    }),
    
    tabView: Tasks.isMobile? SC.TabView.design({
-     layout: { left: 1, right: 1, bottom: 2, top: 30 },
+     layout: { left: 1, right: 1, bottom: 2, top: 35 },
      itemTitleKey: 'title',
      itemValueKey: 'value',
      items: [
