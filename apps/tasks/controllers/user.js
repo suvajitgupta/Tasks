@@ -21,9 +21,9 @@ Tasks.userController = SC.ObjectController.create(Tasks.Sha1,
   
   isValidUserName: function() {
     var name = this.get('name');
-    if(name === '' || name === CoreTasks.NEW_USER_NAME.loc()) return false;
+    if(/^\s*$/.test(name) || name === CoreTasks.NEW_USER_NAME.loc()) return false;
     var loginName = this.get('loginName');
-    if(loginName === '' || loginName === CoreTasks.NEW_USER_LOGIN_NAME.loc()) return false;
+    if(/^\s*$/.test(loginName) || loginName === CoreTasks.NEW_USER_LOGIN_NAME.loc()) return false;
     return true;
   }.property('name', 'loginName').cacheable(),
   

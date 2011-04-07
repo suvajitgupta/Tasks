@@ -81,7 +81,7 @@ Tasks.TaskEditorView = SC.View.extend(
     // console.log('DEBUG: postEditing task: ' + task.get('name'));
     var editor = this.get('editor');
     var name = this.getPath('overviewView.nameField.value');
-    if(name === CoreTasks.NEW_TASK_NAME.loc()) {
+    if(/^\s*$/.test(name) || name === CoreTasks.NEW_TASK_NAME.loc()) {
       task.destroy(); // blow away unmodified new task
     }
     else {

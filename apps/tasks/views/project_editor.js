@@ -66,7 +66,8 @@ Tasks.projectEditorPage = SC.Page.create({
       var project = this.get('project');
       // console.log('DEBUG: postEditing project: ' + project.get('name'));
       var editor = this.get('contentView');
-      if(editor.getPath('nameField.value') === CoreTasks.NEW_PROJECT_NAME.loc()) {
+      var name = editor.getPath('nameField.value');
+      if(/^\s*$/.test(name) || name === CoreTasks.NEW_PROJECT_NAME.loc()) {
         project.destroy(); // blow away unmodified new project
         Tasks.projectsController.selectObject(CoreTasks.get('allTasksProject'));
       }
@@ -76,7 +77,7 @@ Tasks.projectEditorPage = SC.Page.create({
         var oldTimeLeft = project.get('timeLeftValue');
         project.setIfChanged('timeLeftValue', editor.getPath('timeLeftField.value'));
         var oldActivatedAt = project.get('activatedAtValue');
-        project.setIfChanged('displayName', editor.getPath('nameField.value'));
+        project.setIfChanged('displayName', name);
         var description = CoreTasks.stripDescriptionPrefixes(editor.getPath('descriptionField.value'));
         project.setIfChanged('description',  description);
         // If timeLeft or activatedAt has changed, recalculate load balancing
