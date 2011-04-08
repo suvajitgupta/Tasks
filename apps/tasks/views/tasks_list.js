@@ -25,7 +25,7 @@ Tasks.TasksListView = SC.View.extend({
     childViews: 'showProjectsListButton filterSearchView'.w(),
     
     showProjectsListButton: SC.ButtonView.design({
-      layout: { left: 5, width: 32, centerY: 0, height: 24 },
+      layout: { left: 2, width: 45, centerY: 0, height: 24 },
       titleMinWidth: 0,
       icon: 'icon back-arrow-icon', // CHANGED: [SC] remove hack to add 'icon' class forcibly to button icon
       classNames: ['dark'],
