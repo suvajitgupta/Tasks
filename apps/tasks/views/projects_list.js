@@ -13,17 +13,15 @@ sc_require('views/list');
 sc_require('views/group_item');
 sc_require('views/project_item');
 
-Tasks.ProjectsListView = SC.View.design({
-
-  layout: { top: Tasks.isMobile? 5 : 0, left: Tasks.isMobile? 5 : 10, right: 5 },
+Tasks.ProjectsListView = SC.View.extend({
   
   classNames: ['transparent'],
   
   childViews: 'projectsList projectsBottomBar'.w(),
 
-  projectsList: SC.ScrollView.extend({
+  projectsList: SC.ScrollView.design({
     
-    layout: { bottom: 35 },
+    layout: { left: Tasks.isMobile? 0 : 10, top: Tasks.isMobile? 5 : 0, bottom: 35 },
     
     contentView: Tasks.ListView.design({
 
@@ -97,11 +95,12 @@ Tasks.ProjectsListView = SC.View.design({
 
   }),
 
-  projectsBottomBar: SC.View.extend({
+  projectsBottomBar: SC.View.design({
+
+    layout: { left: Tasks.isMobile? 0 : 10, bottom: 0, height: 35 },
 
     classNames: ['transparent'],
 
-    layout: { bottom: 0, height: 35, left: 0, right: 0 },
     childViews: 'addProjectButton deleteProjectButton'.w(),
 
     addProjectButton: SC.ButtonView.design({
