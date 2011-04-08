@@ -48,6 +48,7 @@
 }
 .mobile .projects-pane .project-item .sc-outline {
   left: 6px !important;
+  right: 32px !important;
 }
 
 .projects-pane .sc-collection-item.sc-group-item.hover,
@@ -181,7 +182,7 @@
 }
 .mobile .projects-pane .sc-view.sc-list-item-view.project-item .sc-outline label {
   left: 20px !important;
-  right: 3px !important;
+  right: 1px !important;
 }
 
 .projects-pane .sel .sc-outline img,
@@ -214,6 +215,15 @@
   position: absolute;
   top: 4px !important;
   right: -1px !important;
+}
+
+.show-tasks {
+  position: absolute;
+  background: static_url('images/white-arrow-right.png') no-repeat 7px 7px !important;
+  right: 1px !important;
+  top: 1px !important;
+  height: 30px !important;
+  width: 30px !important;
 }
 
 

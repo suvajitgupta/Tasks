@@ -80,10 +80,10 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     // console.log('DEBUG: isSystemProject: ' + this.get('isSystemProject') + ', classes = "' + classes + '"');
     if (!this.get('isSystemProject') && (!event.which || event.which === 1) &&
         (classes.match(/project-margin/) || classes.match(/project-icon/) ||
-         classes.match(/count/) || classes.match(/inner/)  || classes.match(/description-icon/))) {
+         classes.match(/count/) || classes.match(/inner/) || classes.match(/description-icon/))) {
       this.invokeLater(this._startEditing, 500);
     }
-    else if(Tasks.isMobile) this.invokeLater(function() { Tasks.statechart.sendEvent('showTasksList'); }, 500);
+    else if(Tasks.isMobile && classes.match(/show-tasks/)) this.invokeLater(function() { Tasks.statechart.sendEvent('showTasksList'); }, 500);
 
     return NO; // so that drag-n-drop can work!
     
@@ -128,18 +128,23 @@ Tasks.ProjectItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
     
     var projectTooltip = '';
     if(content.get('id')) context.addClass('project-item transparent');
-    var isSystemProject = CoreTasks.isSystemProject(content);
-    if(!isSystemProject) {
-      var editingTooltip = "_ClickToViewEditDetailsTooltip".loc();
-      context = context.begin('div').addClass('project-margin').attr('title', editingTooltip).attr('alt', editingTooltip).end();
-    }
-    if (this.get('showHover')) {
-      context.addClass('hover'); 
-    } else {
-      context.removeClass('hover');
-    }
     
-    if(!Tasks.isMobile) {
+    if(Tasks.isMobile) {
+      context = context.begin('div').addClass('show-tasks').end();
+    }
+    else {
+      
+      // Show editing icon and tooltip
+      var isSystemProject = CoreTasks.isSystemProject(content);
+      if(!isSystemProject) {
+        var editingTooltip = "_ClickToViewEditDetailsTooltip".loc();
+        context = context.begin('div').addClass('project-margin').attr('title', editingTooltip).attr('alt', editingTooltip).end();
+      }
+      if (this.get('showHover')) {
+        context.addClass('hover'); 
+      } else {
+        context.removeClass('hover');
+      }
       
       // Put a dot before non-system projects that were created or updated recently
       if(!isSystemProject && content.get('isRecentlyUpdated')) {
