@@ -37,8 +37,6 @@ Tasks.TasksListView = SC.View.extend({
     
   }) : null,
   
-  tasksBottomBar: Tasks.TasksBottomBarView.design(),
-  
   tasksList: SC.ScrollView.design({
     
     classNames: ['transparent'],
@@ -174,7 +172,8 @@ Tasks.TasksListView = SC.View.extend({
         context.removeClass('helper-add-tasks');
         context.removeClass('helper-display-mode');
         context.removeClass('helper-adjust-filter');
-      },
+        
+      }, // render
     
       // Hotkeys - be careful to avoid conflicts with browser shortcuts!
       keyDown: function(event) {
@@ -213,10 +212,12 @@ Tasks.TasksListView = SC.View.extend({
           ret = sc_super();
         }
         return ret;
-      }
+      } // keyDown
 
-    })
+    }) // tasksListView
     
-  })
+  }), // scrollView
+  
+  tasksBottomBar: Tasks.TasksBottomBarView.design()
   
 });

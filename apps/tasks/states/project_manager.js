@@ -66,7 +66,8 @@ Tasks.ProjectManagerState = Ki.State.extend({
       if (len > 0) {
 
         // Confirm deletion operation
-        SC.AlertPane.warn("_Confirmation".loc(), "_ProjectDeletionConfirmation".loc(), "_ProjectDeletionConsequences".loc(), "_Yes".loc(), "_No".loc(), null,
+        SC.AlertPane.warn("_Confirmation".loc(), Tasks.isMobile? "_AreYouSure".loc() : "_ProjectDeletionConfirmation".loc(),
+                          Tasks.isMobile? null : "_ProjectDeletionConsequences".loc(), "_Yes".loc(), "_No".loc(), null,
           SC.Object.create({
             alertPaneDidDismiss: function(pane, status) {
               if(status === SC.BUTTON1_STATUS) {

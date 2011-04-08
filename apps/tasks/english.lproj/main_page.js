@@ -180,46 +180,7 @@ Tasks.mainPage = SC.Page.design({
 
           }), // topToolBar
 
-          contentView: SC.View.design({ // projectsList/BottomBar
-
-            classNames: ['transparent'],
-            
-            childViews: 'projectsList projectsBottomBar'.w(),
-
-            projectsList: Tasks.ProjectsListView.design({
-              layout: { top: 0, bottom: 35, left: 10, right: 5 }
-            }),
-
-            projectsBottomBar: SC.View.design({
-
-              classNames: ['transparent'],
-              
-              layout: { bottom: 0, height: 35, left: 0, right: 0 },
-              childViews: 'addProjectButton deleteProjectButton'.w(),
-
-              addProjectButton: SC.ButtonView.design({
-                layout: { centerY: 0, left: 10, height: 24, width: 32 },
-                classNames: ['dark'],
-                titleMinWidth: 0,
-                icon: 'add-icon',
-                toolTip: "_AddProjectTooltip".loc(),
-                isVisibleBinding: 'CoreTasks.permissions.canCreateProject',
-                action: 'addProject'
-              }),
-              deleteProjectButton: SC.ButtonView.design({
-                layout: { centerY: 0, left: 52, height: 24, width: 32 },
-                classNames: ['dark'],
-                titleMinWidth: 0,
-                icon: 'delete-icon',
-                toolTip: "_DeleteProjectTooltip".loc(),
-                isVisibleBinding: 'CoreTasks.permissions.canDeleteProject',
-                isEnabledBinding: 'Tasks.projectsController.isDeletable',
-                action: 'deleteProject'
-              })
-
-            }) // projectsBottomBar
-
-          }) // projectsList/BottomBar
+          contentView: Tasks.ProjectsListView.design()
 
         }), // masterView
 
@@ -325,7 +286,7 @@ Tasks.mainPage = SC.Page.design({
   }), // mainPane
 
   welcomeMessageView: SC.outlet('mainPane.mainView.detailView.topToolbar.welcomeMessageLabel'),
-  projectsListView: SC.outlet(Tasks.isMobile? 'mainPane.mainView.projectsList.contentView' : 'mainPane.mainView.masterView.contentView.projectsList.contentView'),
+  projectsListView: SC.outlet(Tasks.isMobile? 'mainPane.mainView.projectsList.projectsList.contentView' : 'mainPane.mainView.masterView.contentView.projectsList.contentView'),
   tasksListView: SC.outlet(Tasks.isMobile? 'mainPane.mainView.tasksList.tasksList.contentView' : 'mainPane.mainView.detailView.contentView.tasksSceneView.tasksList.tasksList.contentView'),
   taskEditor: SC.outlet(Tasks.isMobile? 'mainPane.mainView.taskEditor' : 'mainPane.mainView.detailView.contentView.tasksSceneView.taskEditor'),
   tasksSceneView: SC.outlet(Tasks.isMobile? 'mainPane.mainView' : 'mainPane.mainView.detailView.contentView.tasksSceneView'),

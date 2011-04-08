@@ -85,20 +85,20 @@ Tasks.TaskManagerState = Ki.State.extend({
       // Confirm deletion operation
       SC.AlertPane.warn("_Confirmation".loc(), Tasks.isMobile? "_AreYouSure".loc() : "_TaskDeletionConfirmation".loc(),
                         Tasks.isMobile? null : "_TaskDeletionConsequences".loc(), "_Yes".loc(), "_No".loc(), null,
-      SC.Object.create({
-        alertPaneDidDismiss: function(pane, status) {
-          if(status === SC.BUTTON1_STATUS) {
-            if(Tasks.get('panelOpen') === Tasks.TASK_EDITOR) Tasks.statechart.sendEvent('showTasksList');
-            var context = {};
-            for (var i = 0; i < len; i++) {
-              // Get and delete each selected task.
-              var task = sel.nextObject(i, null, context);
-              task.destroy();
+        SC.Object.create({
+          alertPaneDidDismiss: function(pane, status) {
+            if(status === SC.BUTTON1_STATUS) {
+              if(Tasks.get('panelOpen') === Tasks.TASK_EDITOR) Tasks.statechart.sendEvent('showTasksList');
+              var context = {};
+              for (var i = 0; i < len; i++) {
+                // Get and delete each selected task.
+                var task = sel.nextObject(i, null, context);
+                task.destroy();
+              }
+              Tasks.tasksController.selectFirstTask();
+              if(Tasks.get('autoSave')) Tasks.saveChanges();
             }
-            Tasks.tasksController.selectFirstTask();
-            if(Tasks.get('autoSave')) Tasks.saveChanges();
           }
-        }
         })
       );
 
