@@ -32,7 +32,7 @@ body.sc-theme,
 }
 
 .separator {
-  background-color: #EEE !important;
+  background: #EEE !important;
   border-top: 1px solid #999 !important;
 }
 
