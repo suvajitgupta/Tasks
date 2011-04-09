@@ -9,7 +9,8 @@
 */
 
 .title-bar, .sc-view.header {
-  background: static_url('images/title-bar-bg.png') repeat-x;
+  background: static_url('images/title-bar-bg.png') repeat-x !important;
+  border-bottom: 1px solid #000;
 }
 .title-bar .sc-button-view {
   font-size: 10px !important;
