@@ -1,8 +1,8 @@
 // ==========================================================================
 // Tasks.userController
 // ==========================================================================
-/*globals CoreTasks Tasks sc_require */
-sc_require('lib/sha1');
+/*globals CoreTasks Tasks SCUDS sc_require */
+sc_require('scuds/frameworks/utils/core');
 
 /** 
 
@@ -11,7 +11,7 @@ sc_require('lib/sha1');
   @extends SC.ObjectController
 	@author Suvajit Gupta
 */
-Tasks.userController = SC.ObjectController.create(Tasks.Sha1,
+Tasks.userController = SC.ObjectController.create(SCUDS.Sha1,
 /** @scope Tasks.userController.prototype */ {
   
   contentBinding: SC.Binding.oneWay('Tasks.usersController.selection'),

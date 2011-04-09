@@ -1,4 +1,4 @@
-config :'core-tasks', :required => [:sproutcore, :scuds, :'scuds/local']
+config :'core-tasks', :required => [:sproutcore, :'scuds/utils', :'scuds/local']
 
 # Customizable "Installation Title" appearing in the browser tab (if it contains the phrase "ToDo" it will automatically make Tasks run in "ToDos" mode)
 # To customize, uncomment the next line and comment the line after that
