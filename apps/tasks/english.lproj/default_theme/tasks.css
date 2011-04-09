@@ -32,7 +32,7 @@
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
 }
-.sc-pane .sc-container-view .task-editor .title-bar {
+.sc-pane .sc-container-view .task-editor .task-title {
   font-size: 14px !important;
   font-weight: bold !important;
   padding-top: 2px !important;
@@ -43,7 +43,7 @@
   background: static_url('images/back.png') no-repeat 1px 1px !important;
 }
 
-.title-bar.task-title {
+.task-title {
   padding-right: 25px !important;
 }
 
@@ -244,13 +244,13 @@
   opacity: 1;
 }
 
-.sc-pane .sc-container-view .task-editor .title-bar,
+.sc-pane .sc-container-view .task-editor .task-title,
 .calendar .month {
   line-height: 24px;
   border-bottom: 1px solid #888;
 }
 
-.sc-pane .sc-container-view .task-editor .title-bar,
+.sc-pane .sc-container-view .task-editor .task-title,
 .calendar .month,
 .assignee-not-loaded {
   background: #AAA none repeat scroll 0 0 !important;

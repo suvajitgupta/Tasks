@@ -197,7 +197,7 @@ Tasks.TaskEditorView = SC.View.extend(
 
    idLabel: SC.LabelView.design({
      layout: { left: 0, right: 0, top: 0, height: 24 },
-     classNames: 'title-bar task-title'.w()
+     classNames: 'task-title'.w()
    }),
    
    showTasksListButton: SC.View.design(SCUI.SimpleButton, {
