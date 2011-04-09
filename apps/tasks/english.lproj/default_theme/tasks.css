@@ -191,7 +191,17 @@
 /*-----------------------------------------------------------------
  * Assignee loading styles
  */
- 
+
+.gravatar {
+  margin-top: 1px;
+  margin-left: 1px;
+  height: 30px;
+  width: 30px;
+  border-radius: 6px !important;
+  -moz-border-radius: 6px !important;
+  -webkit-border-radius: 6px !important;
+}
+
 .assignee-item.sc-list-item-view .sc-outline {
   top: 8px;
 }
@@ -213,7 +223,7 @@
 
 .assignee-item .sc-outline img {
   top: 0px !important;
-  left: -12px !important;
+  left: -14px !important;
   z-index: 10 !important;
 }
 .assignee-item.sc-list-item-view img.disclosure {
@@ -237,7 +247,7 @@
   border-bottom: 1px solid #777 !important;
 }
 .sc-view.sc-list-item-view.sc-collection-item.sc-group-item.assignee-item.first-assignee-item {
-  margin-top: -1px !important;
+  margin-top: 0px !important;
 }
 
 .sc-view.sc-list-item-view.sc-collection-item.sc-group-item.assignee-item:hover {
@@ -281,7 +291,7 @@
 }
 
 .tasks-pane .sc-view.sc-list-item-view.sc-collection-item.sc-group-item.assignee-item label {
-  left: 6px !important;
+  left: 40px !important;
   margin-top: -14px !important;
 }
 

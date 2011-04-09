@@ -39,6 +39,14 @@ Tasks.AssigneeItemView = Tasks.GroupItemView.extend(Tasks.LocalizedLabel,
       if(!this.get('contentIndex')) context.addClass('first-assignee-item');
       context.addClass('assignee-item');
       
+      var assignee = content.getPath('assignee');
+      if(assignee) {
+        var gravatarUrl = assignee.get('gravatarUrl');
+        if(gravatarUrl) {
+          context = context.begin('img').addClass('gravatar').attr('src', gravatarUrl).end();
+        }
+      }
+      
       var tasksCount = content.get('tasksCount');
       var assigneeTooltip;
       
@@ -82,7 +90,7 @@ Tasks.AssigneeItemView = Tasks.GroupItemView.extend(Tasks.LocalizedLabel,
           }).addClass('red-flag-icon').end().end();
         }
       }
-      
+            
       context.attr('title', assigneeTooltip);
       context.attr('alt', assigneeTooltip);
       

@@ -1,4 +1,4 @@
-/*globals CoreTasks sc_require */
+/*globals CoreTasks sc_require hex_md5*/
 sc_require('models/record');
 
 CoreTasks.USER_UNASSIGNED = '_Unassigned';
@@ -104,6 +104,15 @@ CoreTasks.User = CoreTasks.Record.extend({
         return 'user-role-guest';
     }
   }.property('role').cacheable(),
+
+  /**
+   * The path to the icon associated with a user.
+   */
+  gravatarUrl: function() {
+    var email = this.get('email');
+    if(SC.none(email)) return null;
+    return 'http://www.gravatar.com/avatar/' + hex_md5(email.toLowerCase());
+  }.property('email').cacheable(),
 
   /**
    * A string summarizing key facets of the Task for display.
