@@ -8,7 +8,7 @@
   
 */
 
-.title-bar, .sc-view.header {
+.title-bar, .sc-view.header, .bottom-bar {
   background: static_url('images/title-bar-bg.png') repeat-x !important;
   border-bottom: 1px solid #000;
 }

@@ -20,7 +20,9 @@ Tasks.TasksListView = SC.View.extend({
   
   topToolbar: Tasks.isMobile? SC.View.design({
     
-    layout: { height: 35 },
+    classNames: 'title-bar'.w(),
+    
+    layout: { height: 38 },
     
     childViews: 'showProjectsListButton filterSearchView'.w(),
     
@@ -41,7 +43,7 @@ Tasks.TasksListView = SC.View.extend({
     
     classNames: ['transparent'],
     
-    layout: Tasks.isMobile? { top: 35, bottom: 35, left: 5, right: 5 } : { top: 0, bottom: 0, left: 0, right: 0 },
+    layout: Tasks.isMobile? { top: 45, bottom: 38, left: 5, right: 5 } : { top: 0, bottom: 0, left: 0, right: 0 },
     
     contentView: Tasks.ListView.design({
     

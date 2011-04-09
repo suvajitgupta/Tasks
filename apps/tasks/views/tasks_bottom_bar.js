@@ -15,9 +15,9 @@ sc_require('views/summary');
 
 Tasks.TasksBottomBarView = SC.View.extend({
 
-  classNames: ['transparent'],
+  classNames: ['bottom-bar transparent'],
   
-  layout: { bottom: 0, height: 35, left: 0, right: 0 },
+  layout: { bottom: 0, height: 30, left: 0, right: 0 },
   
   childViews: ((Tasks.isMobile? 'displayModeButton ' : 'summaryView serverMessageLabel saveButton ') + 'addTaskButton deleteTaskButton refreshButton').w(),
 

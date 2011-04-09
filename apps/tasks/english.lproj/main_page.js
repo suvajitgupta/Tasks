@@ -127,7 +127,7 @@ Tasks.mainPage = SC.Page.design({
 
       SC.MasterDetailView.design({
 
-        layout: { top: 0, left: 0, right: 0, bottom: 0, minWidth: SC.platform.touch? 768 : 1024, minHeight: 500 },
+        layout: { minWidth: SC.platform.touch? 768 : 1024, minHeight: 500 },
         masterWidth: 260,
 
         autoHideMaster: function() {
@@ -144,9 +144,10 @@ Tasks.mainPage = SC.Page.design({
 
           topToolbar: SC.ToolbarView.design({
 
-            childViews: 'installationLogo tasksLogo'.w(),
-            classNames: 'title-bar transparent'.w(),
+            classNames: 'title-bar'.w(),
 
+            childViews: 'installationLogo tasksLogo'.w(),
+            
             installationLogo: SC.View.design({
               layout: { left: Tasks.get('squareInstallationLogo')? 25: 15, centerY: 0, width: Tasks.get('squareInstallationLogo')? 35: 80, height: Tasks.get('squareInstallationLogo')? 35 : 20 },
               tagName: 'img',
@@ -190,7 +191,7 @@ Tasks.mainPage = SC.Page.design({
           
           topToolbar: SC.ToolbarView.design({
 
-            classNames: 'title-bar transparent'.w(),
+            classNames: 'title-bar'.w(),
             
             childViews: 'actionsButton displayModeButton masterPickerButton welcomeMessageLabel clippyIcon filterSearchView'.w(),
 
@@ -267,7 +268,7 @@ Tasks.mainPage = SC.Page.design({
 
             tasksSceneView: SC.SceneView.design({
               classNames: ['transparent'],
-              layout: { top: 2, bottom: 35, left: 5, right: 10 },
+              layout: { top: 10, bottom: 40, left: 5, right: 10 },
               transitionDuration: 0, // CHANGED: [SC] disabled SceneView transitions which are very sluggish and sometimes get stuck
               scenes: ['tasksList', 'taskEditor'],
               tasksList:  Tasks.TasksListView.create(),

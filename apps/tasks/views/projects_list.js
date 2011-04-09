@@ -21,7 +21,7 @@ Tasks.ProjectsListView = SC.View.extend({
 
   projectsList: SC.ScrollView.design({
     
-    layout: { left: Tasks.isMobile? 0 : 10, top: Tasks.isMobile? 5 : 0, bottom: 35 },
+    layout: Tasks.isMobile? { left: 0, top: 8, bottom: 40 } : { left: 10, top: 8, bottom: 40, right: 5 },
     
     contentView: Tasks.ListView.design({
 
@@ -97,14 +97,14 @@ Tasks.ProjectsListView = SC.View.extend({
 
   projectsBottomBar: SC.View.design({
 
-    layout: { left: Tasks.isMobile? 0 : 10, bottom: 0, height: 35 },
+    layout: { bottom: 0, height: 30 },
 
-    classNames: ['transparent'],
+    classNames: ['bottom-bar transparent'],
 
     childViews: 'addProjectButton deleteProjectButton'.w(),
 
     addProjectButton: SC.ButtonView.design({
-      layout: { centerY: 0, left: 5, height: 24, width: 32 },
+      layout: { centerY: 0, left: Tasks.isMobile? 5 : 15, height: 24, width: 32 },
       classNames: ['dark'],
       titleMinWidth: 0,
       icon: 'add-icon',
@@ -113,7 +113,7 @@ Tasks.ProjectsListView = SC.View.extend({
       action: 'addProject'
     }),
     deleteProjectButton: SC.ButtonView.design({
-      layout: { centerY: 0, left: 47, height: 24, width: 32 },
+      layout: { centerY: 0, left: Tasks.isMobile? 47 : 57, height: 24, width: 32 },
       classNames: ['dark'],
       titleMinWidth: 0,
       icon: 'delete-icon',

@@ -7,9 +7,13 @@
   
 */
 
+.bottom-bar {
+  border-top: 1px solid #000;
+}
+
 .bottom-bar-label {
   font-size: 10px !important;
-  color: #999 !important;
+  color: #BBB !important;
 }
 
 .progress-icon {
