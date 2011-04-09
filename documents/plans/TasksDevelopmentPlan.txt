@@ -21,7 +21,12 @@
 Analysis & Design @Done
 #========================================================================================================================
 
-- Review comparable applications for ideas: Mac Things/TaskPaper, Jira [SG] <MB> @Done
+- Review comparable desktop and Web applications for ideas [SG] <MB> @Done
+| Mac Things/TaskPaper, Jira
+| http://githubissues.heroku.com/
+| http://www.6wunderkinder.com/wunderlist/
+| http://www.gqueues.com/
+| http://www.getflow.com/
 - Define Personas (Roles) & User Stories/Use Cases [SG] <SE> @Done
 | Manager - add/edit/delete Users/Projects/Tasks, allocate Tasks to Projects, assign to/load balance Tasks across Developers, view/update Project/Task status
 | Developer - add/edit/delete Tasks, view Tasks & update effort (estimates=>actual)/status, reassign Tasks to other Developers or reallocate to other Projects, add Task Release Notes in description field
