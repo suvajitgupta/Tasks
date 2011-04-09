@@ -11,6 +11,7 @@ Tasks.panelOpen = null;
 Tasks.main = function main() {
   
   // console.log('DEBUG: "Tasks" started at: %@'.fmt(new Date()));
+  SC.BaseTheme.renderers.MasterDetail.BORDER = 0;
   CoreTasks.dataSaveErrorCallback = Tasks.dataSaveErrorCallback;
   Tasks.registerRoutes();
   SC.RootResponder.responder.set('defaultResponder', Tasks.statechart);
