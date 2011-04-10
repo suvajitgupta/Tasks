@@ -5,16 +5,15 @@
 #================================================================================
 
 [SG] (Suvajit  Gupta1) {Manager} <suvajit_gupta@yahoo.com>
-[JH2] (Josh Holt) {Developer}
-[SE] (Sean Eidemiller) {Developer}
-[MG] (Matt Grantham) {Developer}
+[JH2] (Josh Holt) {Developer} <holt.josh@gmail.com>
+[SE] (Sean Eidemiller) {Developer} <sean@halcyon.cc>
+[MG] (Matt Grantham) {Developer} <matthew.grantham@eloqua.com>
 [BB] (Brandon Blatnick) {Developer}
-[MB] (Mike Ball) {Developer}
-[EG] (Evin Grano) {Developer}
-[MC] (Michael Cohen) {Developer}
+[MB] (Mike Ball) {Developer} <mike.ball3@gmail.com>
+[EG] (Evin Grano) {Developer} <etgryphon@sproutcore.com>
+[MC] (Michael Cohen) {Developer} <michael.lee.cohen@gmail.com>
 [MR] (Mike Ramsey) {Tester}
 [EO] (Erich Ocean) {Guest}
-[AI] (Alex Iskander) {Guest}
 
 
 #========================================================================================================================
@@ -255,7 +254,7 @@ Touch Device GUIs @Active
 #========================================================================================================================
 
 - Implement swiveling Master/Detail view on iPad [JH2] <SG> $Feature @Done %Passed
-- Port Tasks desktop GUI to iPad [SG] <AI> $Feature @Done %Passed
+- Port Tasks desktop GUI to iPad [SG] $Feature @Done %Passed
 
 - Develop Tasks iPhone/iPod GUI [SG] $Feature @Active
 
