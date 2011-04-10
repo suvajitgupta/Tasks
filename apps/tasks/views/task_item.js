@@ -193,7 +193,7 @@ Tasks.TaskItemView = SC.ListItemView.extend(
     
   },
 
-  renderIcon: function(context, icon){
+  renderIcon: function(context, icon) {
     if(!SC.none(icon)) {
       var content = this.get('content');
       var taskTooltip = "_Type".loc() + ' ' + content.get('type').loc();

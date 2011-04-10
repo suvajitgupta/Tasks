@@ -61,6 +61,12 @@ Tasks.UserItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
                   .attr('title', "_PasswordTooltip".loc()).attr('alt', "_PasswordTooltip".loc()).end();
     }
 
+  },
+  
+  renderIcon: function(context, icon) {
+    if(!SC.none(icon)) {
+      context.begin('img').addClass('small-gravatar icon').attr('src', icon).end();
+    }
   }
   
 });

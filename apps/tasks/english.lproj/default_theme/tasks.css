@@ -192,16 +192,6 @@
  * Assignee loading styles
  */
 
-.gravatar {
-  margin-top: 1px;
-  margin-left: 1px;
-  height: 30px;
-  width: 30px;
-  border-radius: 6px !important;
-  -moz-border-radius: 6px !important;
-  -webkit-border-radius: 6px !important;
-}
-
 .assignee-item.sc-list-item-view .sc-outline {
   top: 8px;
 }

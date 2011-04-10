@@ -39,13 +39,6 @@
 	border-bottom: 1px solid #2B2B2B !important;
 }
 
-.projects-pane .sc-collection-item .sc-outline,
-.users-pane .sc-collection-item .sc-outline {
-  left: 24px !important;
-  border-radius: 3px !important;
-  -moz-border-radius: 3px !important;
-  -webkit-border-radius: 3px !important;
-}
 .mobile .projects-pane .project-item .sc-outline {
   left: 6px !important;
   right: 32px !important;
@@ -151,9 +144,11 @@
   margin-left: 0px !important;
 }
 
-.project-item .sc-outline,
+.project-item .sc-outline {
+  left: 24px !important;
+}
 .user-item .sc-outline {
-  left: 14px !important;
+  left: 18px !important;
 }
 
 .project-margin {

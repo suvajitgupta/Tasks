@@ -41,6 +41,30 @@ body.sc-theme,
   font-size: 10px;
 }
 
+
+/*-----------------------------------------------------------------
+ * Gravatar styles
+ */
+
+.gravatar {
+  margin-top: 1px;
+  margin-left: 1px;
+  height: 30px;
+  width: 30px;
+  border-radius: 6px !important;
+  -moz-border-radius: 6px !important;
+  -webkit-border-radius: 6px !important;
+}
+
+.small-gravatar {
+  height: 16px;
+  width: 16px;
+  border-radius: 3px !important;
+  -moz-border-radius: 3px !important;
+  -webkit-border-radius: 3px !important;
+}
+
+
 /*-----------------------------------------------------------------
  * Status styles
  */
