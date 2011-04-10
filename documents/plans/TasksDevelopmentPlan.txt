@@ -65,6 +65,7 @@ v Implement/benchmark JSONP-based data loading for performance speedup (stick wi
 - Support offline mode with synchronization after network reconnection using Hub.js [SG] <SE> $Feature
 - Support undo/redo using Hub.js [SG] <SE> $Feature
 
+- Show gravatars corresponding to assignee email on assignee bar, User Manager, and assignee/submitter selection dropdowns [SG] $Feature @Done %Passed
 - Strip '| ' prefix (if any) from Project/Task descriptions entered via editors [SG] $Feature @Done %Passed
 | This helps if description is pasted in from exported data
 - Cause Project/Task/User list group items to toggle open/close upon clicking on them [SG] <JH2> $Feature @Done %Passed
@@ -200,7 +201,6 @@ v Add hover over tooltip for Assignees to show how many Tasks they have and to e
 v Add hover over tooltip for Task IDs to show Submitter [SG] <JH2> $Feature @Done %Passed
 - Display Task progress bar to show percent finished [SG] $Feature @Done %Passed
 v Add hover over tooltip for Task progress bar to show percent finished [SG] $Feature @Done %Passed
-- Show gravatars corresponding to assignee email (if specified) [SG] $Feature @Done %Passed
 ^ Support Task dueDates (show in task list/editor, indicate overdue/upcoming tasks, add to import/export) [SG] $Feature
 
 ^ Add buttons to add/delete Tasks below Tasks list [SG] <SE> $Feature @Done %Passed

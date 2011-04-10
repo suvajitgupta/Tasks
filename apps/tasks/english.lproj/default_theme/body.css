@@ -64,6 +64,9 @@ body.sc-theme,
   -webkit-border-radius: 3px !important;
 }
 
+.scui-combobox-text-field-view .sc-text-field-accessory-view {
+  left: 5px !important;
+}
 
 /*-----------------------------------------------------------------
  * Status styles
