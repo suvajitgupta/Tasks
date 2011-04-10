@@ -36,9 +36,9 @@ Tasks.CommentItemView = SC.View.extend(SC.Control,
   },
 
   useStaticLayout: YES,
-  childViews: 'commentGravatarImage commentHeaderLabel editButton deleteButton descriptionLabel'.w(),
+  childViews: 'gravatarImage commentHeaderLabel editButton deleteButton descriptionLabel'.w(),
   
-  commentGravatarImage: SC.ImageView.design({
+  gravatarImage: SC.ImageView.design({
     layout: { top: 5 },
     classNames: ['gravatar']
   }),
@@ -130,7 +130,7 @@ Tasks.CommentItemView = SC.View.extend(SC.Control,
     this.setPath('descriptionLabel.isEditable', isCurrentUserComment);
     
     var user = CoreTasks.store.find(CoreTasks.User, content.get('userId'));
-    this.setPath('commentGravatarImage.value', user.get('gravatarUrl'));
+    this.setPath('gravatarImage.value', user.get('gravatarUrl'));
     var commentHeader = '';
     if(user) commentHeader += (user.get('displayName') + '&nbsp;');
     var createdAt = content.get('createdAt');

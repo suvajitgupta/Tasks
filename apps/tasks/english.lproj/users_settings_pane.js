@@ -23,7 +23,7 @@ Tasks.usersSettingsPane = Tasks.isMobile? null : SCUI.ModalPane.create({
   minHeight: 352,
   minWidth: 770,
   maxWidth: 770,
-  layout: { centerX: 0, centerY: 0, height: 352, width: 770 },
+  layout: { centerX: 0, centerY: 0, height: 352, width: 725 },
   
   contentView: SC.View.design({
     childViews: 'userSearchField userSearchCancelButton userManager addButton deleteButton usersCount closeButton'.w(),

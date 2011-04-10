@@ -117,15 +117,29 @@ Tasks.UserInformationView = SC.View.extend(
     }));
     childViews.push(this.emailHelpLabel);
     
-    this.roleLabel = this.createChildView(SC.LabelView.design({
+    this.gravatarLabel = this.createChildView(SC.LabelView.design({
       layout: { top: 162, left: 0, width: 85, height: 18 },
+      textAlign: SC.ALIGN_RIGHT,
+      value: "_Gravatar:".loc()
+    }));
+    childViews.push(this.gravatarLabel);
+    this.gravatarImage = this.createChildView(SC.ImageView.design({
+      layout: { top: 154, left: 90 },
+      classNames: ['gravatar'],
+      textAlign: SC.ALIGN_RIGHT,
+      valueBinding: SC.binding('*content.gravatarUrl', this)
+    }));
+    childViews.push(this.gravatarImage);
+
+    this.roleLabel = this.createChildView(SC.LabelView.design({
+      layout: { top: 162, left: 108, width: 85, height: 18 },
       textAlign: SC.ALIGN_RIGHT,
       // isVisibleBinding: 'CoreTasks.permissions.canUpdateUserRole',
       value: "_Role:".loc()
     }));
     childViews.push(this.roleLabel);
     this.roleField = this.createChildView(SC.SelectButtonView.design({
-      layout: { top: 159, left: 90, height: 24, width: 150 },
+      layout: { top: 159, left: 198, height: 24, width: 130 },
       classNames: ['square'],
       localize: YES,
       isEnabledBinding: 'Tasks.userController.canUpdateUserRole',

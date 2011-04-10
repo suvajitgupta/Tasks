@@ -16,7 +16,7 @@
 
 Tasks.signupPane = SC.PanelPane.create({
 
-  layout: { centerX: 0, width: 300, centerY: 0, height: 215 },
+  layout: { centerX: 0, width: 310, centerY: 0, height: 260 },
   
   contentView: SC.View.design({
     
