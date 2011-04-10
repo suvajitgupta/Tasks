@@ -68,7 +68,7 @@ Tasks.TasksListView = SC.View.extend({
       selectOnMouseDown: YES,
       delegate: Tasks.tasksController,
 
-      firstHeaderRowHeight: 32,
+      firstHeaderRowHeight: 33,
       headerRowHeight: 40,
       rowDelegate: function() {
         return this;

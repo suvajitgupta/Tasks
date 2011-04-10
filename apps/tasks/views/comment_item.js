@@ -15,7 +15,6 @@ sc_require('mixins/localized_label');
 Tasks.CommentItemView = SC.View.extend(SC.Control,
 /** @scope Tasks.CommentItemView.prototype */ {
   
-  useStaticLayout: YES,
   displayProperties: 'showHover description'.w(),
   showHover: SC.platform.touch,
   description: null,
@@ -37,17 +36,22 @@ Tasks.CommentItemView = SC.View.extend(SC.Control,
   },
 
   useStaticLayout: YES,
-  childViews: 'commentHeaderLabel editButton deleteButton descriptionLabel'.w(),
+  childViews: 'commentGravatarImage commentHeaderLabel editButton deleteButton descriptionLabel'.w(),
+  
+  commentGravatarImage: SC.ImageView.design({
+    layout: { top: 5 },
+    classNames: ['gravatar']
+  }),
   
   commentHeaderLabel: SC.LabelView.design({
-    layout: { left: 0, right: 0, top: 0, height: 17 },
-    classNames: [ 'comment-header'],
-    icon: 'comment-icon',
+    useStaticLayout: YES,
+    layout: { left: 36, right: 0, top: 15, height: 17 },
+    classNames: ['comment-header'],
     escapeHTML: NO
   }),
   
   editButton: SC.View.design(SCUI.SimpleButton, {
-    layout: { right: 45, width: 16, top: 2, height: 16 },
+    layout: { right: 45, width: 16, top: 15, height: 16 },
     classNames: ['edit-comment-icon'],
     toolTip: "_EditComment".loc(),
     mouseDown: function() {
@@ -60,7 +64,7 @@ Tasks.CommentItemView = SC.View.extend(SC.Control,
   }),
   
   deleteButton: SC.View.design(SCUI.SimpleButton, {
-    layout: { right: 15, width: 16, top: 2, height: 16 },
+    layout: { right: 15, width: 16, top: 15, height: 16 },
     classNames: ['delete-comment-icon'],
     toolTip: "_DeleteComment".loc(),
     mouseDown: function() {
@@ -126,6 +130,7 @@ Tasks.CommentItemView = SC.View.extend(SC.Control,
     this.setPath('descriptionLabel.isEditable', isCurrentUserComment);
     
     var user = CoreTasks.store.find(CoreTasks.User, content.get('userId'));
+    this.setPath('commentGravatarImage.value', user.get('gravatarUrl'));
     var commentHeader = '';
     if(user) commentHeader += (user.get('displayName') + '&nbsp;');
     var createdAt = content.get('createdAt');

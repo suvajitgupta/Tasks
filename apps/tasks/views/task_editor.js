@@ -269,15 +269,19 @@ Tasks.TaskEditorView = SC.View.extend(
      
      bottomRightView: Tasks.isMobile? SC.View.design() : SC.View.design({
        classNames: ['comments-view'],
-       childViews: 'commentButton commentsList'.w(),
+       childViews: 'commentButton commentImage commentsList'.w(),
        mouseDown: function() {
          Tasks.commentsController.set('selection', '');
        },
        commentButton: SC.ButtonView.design({
-         layout: { top: 5, centerX: 0, height: 24, width: 90 },
+         layout: { top: 8, centerX: 0, height: 24, width: 90 },
          title: "_Comment".loc(),
          action: 'addComment',
          toolTip: "_CommentTooltip".loc()
+       }),
+       commentImage: SC.ImageView.design({
+         layout: { top: -1, centerX: 50, height: 16, width: 16 },
+         value: 'comment-icon'
        }),
        commentsList: SC.ScrollView.design({
          layout: { top: 35, left: 0, right: 0, bottom: 0 },

@@ -119,7 +119,7 @@
 }
 
 .comment-icon {
-  background-image: static_url('images/comment.png') !important;
+  background: static_url('images/comment.png') !important;
 }
 
 .comments-list .comment-header {
