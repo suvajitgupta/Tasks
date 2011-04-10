@@ -90,9 +90,18 @@ CoreTasks.User = CoreTasks.Record.extend({
   authToken: SC.Record.attr(String),
   
   /**
-   * The path to the icon associated with a user.
+   * The gravatar icon associated with a user.
    */
   icon: function() {
+    var email = this.get('email');
+    if(SC.none(email)) return null;
+    return 'http://www.gravatar.com/avatar/' + hex_md5(email.toLowerCase());
+  }.property('email').cacheable(),
+
+  /**
+   * The role icon for the user.
+   */
+  roleIcon: function() {
     switch (this.get('role')){
       case CoreTasks.USER_ROLE_MANAGER:
         return 'user-role-manager';
@@ -104,15 +113,6 @@ CoreTasks.User = CoreTasks.Record.extend({
         return 'user-role-guest';
     }
   }.property('role').cacheable(),
-
-  /**
-   * The path to the icon associated with a user.
-   */
-  gravatarUrl: function() {
-    var email = this.get('email');
-    if(SC.none(email)) return null;
-    return 'http://www.gravatar.com/avatar/' + hex_md5(email.toLowerCase());
-  }.property('email').cacheable(),
 
   /**
    * A string summarizing key facets of the Task for display.

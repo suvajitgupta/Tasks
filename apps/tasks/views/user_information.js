@@ -127,7 +127,7 @@ Tasks.UserInformationView = SC.View.extend(
       layout: { top: 154, left: 90 },
       classNames: ['gravatar'],
       textAlign: SC.ALIGN_RIGHT,
-      valueBinding: SC.binding('*content.gravatarUrl', this)
+      valueBinding: SC.binding('*content.icon', this)
     }));
     childViews.push(this.gravatarImage);
 

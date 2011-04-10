@@ -41,9 +41,9 @@ Tasks.AssigneeItemView = Tasks.GroupItemView.extend(Tasks.LocalizedLabel,
       
       var assignee = content.getPath('assignee');
       if(assignee) {
-        var gravatarUrl = assignee.get('gravatarUrl');
-        if(gravatarUrl) {
-          context = context.begin('img').addClass('gravatar').attr('src', gravatarUrl).end();
+        var icon = assignee.get('icon');
+        if(icon) {
+          context = context.begin('img').addClass('gravatar').attr('src', icon).end();
         }
       }
       

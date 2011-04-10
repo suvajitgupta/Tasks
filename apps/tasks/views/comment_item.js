@@ -130,7 +130,7 @@ Tasks.CommentItemView = SC.View.extend(SC.Control,
     this.setPath('descriptionLabel.isEditable', isCurrentUserComment);
     
     var user = CoreTasks.store.find(CoreTasks.User, content.get('userId'));
-    this.setPath('gravatarImage.value', user.get('gravatarUrl'));
+    this.setPath('gravatarImage.value', user.get('icon'));
     var commentHeader = '';
     if(user) commentHeader += (user.get('displayName') + '&nbsp;');
     var createdAt = content.get('createdAt');

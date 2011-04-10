@@ -68,7 +68,7 @@ Tasks.usersSettingsPane = Tasks.isMobile? null : SCUI.ModalPane.create({
           rowHeight: 24,
           classNames: ['users-pane'],
           hasContentIcon: YES,
-          contentIconKey: 'gravatarUrl',
+          contentIconKey: 'icon',
           exampleView: Tasks.UserItemView,
           groupExampleView: Tasks.GroupItemView, // added to avoid context menu
           isEditable: NO,

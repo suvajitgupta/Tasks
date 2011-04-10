@@ -56,7 +56,7 @@ body.sc-theme,
   -webkit-border-radius: 6px !important;
 }
 
-.small-gravatar {
+.small-gravatar, .scui-combobox-list-pane img {
   height: 16px;
   width: 16px;
   border-radius: 3px !important;
