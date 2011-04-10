@@ -181,7 +181,9 @@ Tasks.mainPage = SC.Page.design({
 
           }), // topToolBar
 
-          contentView: Tasks.ProjectsListView.design()
+          contentView: Tasks.ProjectsListView.design({
+            classNames: ['master-detail-content-view transparent']
+          })
 
         }), // masterView
 
@@ -190,7 +192,7 @@ Tasks.mainPage = SC.Page.design({
           classNames: 'transparent'.w(),
           
           topToolbar: SC.ToolbarView.design({
-
+            
             classNames: 'title-bar'.w(),
             
             childViews: 'actionsButton displayModeButton masterPickerButton welcomeMessageLabel clippyIcon filterSearchView'.w(),
@@ -262,7 +264,7 @@ Tasks.mainPage = SC.Page.design({
 
           contentView: SC.View.design({ // tasksList/BottomBar
 
-            classNames: ['transparent'],
+            classNames: ['master-detail-content-view transparent'],
             
             childViews: 'tasksSceneView tasksBottomBar'.w(),
 

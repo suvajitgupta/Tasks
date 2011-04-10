@@ -15,6 +15,11 @@ body.sc-theme,
   background: static_url('images/background.jpg') repeat 0 0;
 }
 
+.master-detail-content-view {
+  margin-top: 2px !important;
+  border-top: 1px solid #555 !important;
+}
+
 .sc-theme .sc-pane.sc-main, .transparent {
   background: none !important;
 }
