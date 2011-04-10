@@ -117,7 +117,7 @@ Tasks.usersSettingsPane = Tasks.isMobile? null : SCUI.ModalPane.create({
         childViews: 'userInformationView createdAtLabel updatedAtLabel'.w(),
         
         userInformationView: Tasks.UserInformationView.design({
-          layout: { top: 10, left: 0, height: 200, right: 0 }
+          layout: { top: 5, left: 0, height: 200, right: 0 }
         }),
 
         createdAtLabel: SC.LabelView.design({
