@@ -21,7 +21,7 @@ Tasks.ProjectsListView = SC.View.extend({
 
   projectsList: SC.ScrollView.design({
     
-    layout: Tasks.isMobile? { left: 0, top: 8, bottom: 40 } : { left: 10, top: 8, bottom: 40, right: 5 },
+    layout: Tasks.isMobile? { left: 5, top: 8, bottom: 40, right: 5 } : { left: 10, top: 8, bottom: 40, right: 5 },
     
     contentView: Tasks.ListView.design({
 
@@ -35,7 +35,12 @@ Tasks.ProjectsListView = SC.View.extend({
       localize: YES,
       rowHeight: Tasks.isMobile? 32 : 24,
       exampleView: Tasks.ProjectItemView,
-      groupExampleView: Tasks.GroupItemView,
+      groupExampleView: Tasks.GroupItemView.design({
+        render: function(context, firstTime) {
+          context.addClass('transparent');
+          sc_super();
+        }
+      }),
       allowDeselectAll: YES,
       isEditable: YES,
       canEditContent: YES,

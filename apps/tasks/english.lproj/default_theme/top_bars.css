@@ -117,22 +117,30 @@
   background: static_url('images/logout.png') no-repeat;
 }
 
-.welcome-message {
+.title-bar .welcome-message {
+  padding: 1px !important;
   font-size: 13px !important;
   text-align: center !important;
   color: #CCC !important;
   line-height: 15px !important;
+  border: 1px solid #333 !important;
+  border-radius: 5px !important;
+  -moz-border-radius: 5px !important;
+  -webkit-border-radius: 5px !important;
 }
-.welcome-message small {
+.title-bar .welcome-message small {
   font-size: 11px !important;
 }
-.welcome-message:hover {
-  border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  background: #555;
-  background: -webkit-gradient(linear, center top, center bottom, from(#555), to(#292929));
-  background: -moz-linear-gradient(center top , #555, #292929);
+.title-bar .welcome-message:hover {
+  border: 1px solid #111 !important;
+  background: #555 !important;
+  background: -webkit-gradient(linear, center top, center bottom, from(#777), to(#111)) !important;
+  background: -moz-linear-gradient(center top , #777, #111) !important;
+}
+.title-bar .welcome-message.active:hover {
+  background: #222 !important;
+  background: -webkit-gradient(linear, center top, center bottom, from(#222), to(#555)) !important;
+  background: -moz-linear-gradient(center top , #222, #555) !important;
 }
 
 .back-arrow-icon {

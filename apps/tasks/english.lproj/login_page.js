@@ -38,12 +38,14 @@ Tasks.loginPage = SC.Page.create({
       
       loginNameField: SC.TextFieldView.design({
         layout: { top: 80, centerX: 0, width: 250, height: 32 },
+        classNames: 'transparent'.w(),
         hint: '_LoginNameHint'.loc(),
         valueBinding: 'Tasks.loginController.loginName'
       }),
       
       passwordField: SC.TextFieldView.design({
         layout: { top: 120, centerX: 0, width: 250, height: 32 },
+        classNames: 'transparent'.w(),
         isPassword: YES,
         hint: '_PasswordHint'.loc(),
         valueBinding: 'Tasks.loginController.password'

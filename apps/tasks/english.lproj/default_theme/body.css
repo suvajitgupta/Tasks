@@ -12,7 +12,7 @@
 body.sc-theme,
 .sc-workspace-view .sc-view,
 .sc-view.sc-pane.sc-panel.sc-palette.sc-picker .sc-view.sc-workspace-view {
-  background: static_url('images/background.jpg') repeat 0 0;
+  background: static_url('images/wood-panel-brown.jpg') repeat 0 0;
 }
 
 .master-detail-content-view {
@@ -328,7 +328,7 @@ body.sc-theme,
   background-image: static_url('images/white-arrow-right.png') !important;
   background-position: 0px 0px !important;
   left: 4px !important;
-  top: 4px !important;
+  top: 2px !important;
   margin-top: 0px !important;
   height: 16px !important;
   width: 16px !important;

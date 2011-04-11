@@ -232,21 +232,23 @@ Tasks.mainPage = SC.Page.design({
               isVisibleBinding: SC.Binding.oneWay('Tasks.mainPage.mainPane.mainView.masterIsHidden')
             }),
 
-            welcomeMessageLabel: SC.LabelView.design(SCUI.ToolTip, {
-              layout: { centerX: -75, centerY: 0, width: 250, height: 32 },
+            welcomeMessageLabel: SC.View.design(SCUI.SimpleButton, SCUI.ToolTip, {
+              layout: { centerX: -75, centerY: -1, width: 250, height: 32 },
               classNames: ['welcome-message transparent'],
+              displayProperties: ['value'],
               escapeHTML: NO,
               touchStart: function() {
                 this.mouseDown();
               },
               mouseDown: function() {
+                sc_super();
                 if(Tasks.mainPageHelper.get('panelOpen')) return;
                 Tasks.filterSearchController.setCurrentUserTasksSearch();
               },
               valueBinding: SC.Binding.oneWay('Tasks.mainPageHelper.welcomeMessage'),
               isEnabledBinding: SC.Binding.not('Tasks.mainPageHelper*panelOpen'),
-              render: function() {
-                sc_super();
+              render: function(context, firstTime) {
+                context.push(this.get('value'));
               }
             }),
 
