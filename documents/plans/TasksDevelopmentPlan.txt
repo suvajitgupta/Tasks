@@ -62,7 +62,7 @@ GUI Infrastructure @Active
 - Optimize startup data loading time using HTML5 local storage [SG] <SE> @Done %Passed
 v Implement/benchmark JSONP-based data loading for performance speedup (stick with the faster XHRs) [SG] <SE> @Done
 - Support offline mode with synchronization after network reconnection using Hub.js [SG] <SE> $Feature
-- Support undo/redo using Hub.js [SG] <SE> $Feature
+- Support undo/redo using Undo Manager [SG] <BB> $Feature
 
 - Show gravatars corresponding to assignee email on assignee bar, User Manager, and assignee/submitter selection dropdowns [SG] $Feature @Done %Passed
 - Strip '| ' prefix (if any) from Project/Task descriptions entered via editors [SG] $Feature @Done %Passed
@@ -86,7 +86,7 @@ Login/Signup GUIs @Active
 ^ Add login screen to identify user who logs in (and handle login failures properly) [SG] <SE> $Feature @Done %Passed
 - Allow new guests to sign up from login screen and sign them in immediately after [JH2] <SG> $Feature @Done %Passed
 - Add password to Login, Guest Signup, and User Manager screens (save in encrypted format) [SG] <JH2> $Feature @Done %Passed
-v Remember login name/password across sessions via checkbox on login screen [SG] $Feature @Active
+- Remember login name/password across sessions via checkbox on login screen [SG] $Feature @Active
 - Add option to load data for completed projects on login screen (off by default) [SG] $Feature @Done %Passed
 - Support view mode of tasks and selection of project/filter/search using SproutCore routes [SG] $Feature @Done %Passed
 
@@ -114,11 +114,10 @@ v Show number of displayed/selected Users at the bottom of Users/Settings panel 
 - Add User type-ahead search filter (case insensitive Name/Login Name/Email match) & corresponding cancel button [SG] $Feature @Done %Passed
 - Provide ability to mark Users as inactive [SG] $Feature
 | Inactive Users cannot be made Assignees/Submitters
-- Provide tab in Settings popup panel to manage user preferences [SG] $Feature
+- Provide tab in Settings popup panel to manage user preferences (saved using HTML5 local storage) [SG] $Feature
 | Auto Save
 | Send Notifications
 | Percent or Threshold (in days) for Assignee loading determination
-- Support Application settings/state persistence from last login saved using HTML5 local storage [SG] <MB> $Feature
 - Out of Scope: Add support for "Teams" (a user can belong to a team, a team can have a lead) $Feature
 | Create separate projects for different teams to keep their tasks/deadlines separate instead
 
@@ -256,7 +255,7 @@ Touch Device GUIs @Active
 - Implement swiveling Master/Detail view on iPad [JH2] <SG> $Feature @Done %Passed
 - Port Tasks desktop GUI to iPad [SG] $Feature @Done %Passed
 
-- Develop Tasks iPhone/iPod GUI [SG] $Feature @Active
+- Develop Tasks iPhone/iPod GUI [SG] $Feature @Done %Passed
 
 
 #========================================================================================================================

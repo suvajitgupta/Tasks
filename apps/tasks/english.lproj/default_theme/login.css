@@ -18,14 +18,16 @@
 }
 
 .login-body .sc-text-field-view {
+  background: #444 !important;
   border-radius: 4px !important;
   -moz-border-radius: 4px !important;
   -webkit-border-radius: 4px !important;
   border: 2px solid #000 !important;
-  box-shadow: inset -2px -2px 3px black !important;
-  -moz-box-shadow: inset -2px -2px 3px black !important;
-  -webkit-box-shadow: inset -2px -2px 3px black !important;
+  box-shadow: inset -2px -2px 4px black !important;
+  -moz-box-shadow: inset -2px -2px 4px black !important;
+  -webkit-box-shadow: inset -2px -2px 4px black !important;
   outline: 0 !important;
+  opacity: 0.5 !important;
 }
 
 /* Custom Text Fields */
@@ -39,7 +41,7 @@
 }
 
 .login-body .sc-text-field-view input {
-  color: #DDD;
+  color: #FFF;
   font-size: 16px;
   font-weight: bold;
   line-height: 32px;
