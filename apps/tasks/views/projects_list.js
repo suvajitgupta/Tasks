@@ -21,6 +21,8 @@ Tasks.ProjectsListView = SC.View.extend({
 
   projectsList: SC.ScrollView.design({
     
+    classNames: ['transparent'],
+    
     layout: Tasks.isMobile? { left: 5, top: 8, bottom: 40, right: 5 } : { left: 10, top: 8, bottom: 40, right: 5 },
     
     contentView: Tasks.ListView.design({

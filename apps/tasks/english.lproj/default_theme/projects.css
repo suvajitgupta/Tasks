@@ -36,7 +36,7 @@
 
 .projects-pane .project-item,
 .users-pane .user-item {
-	border-bottom: 1px solid #2B2B2B !important;
+	border-bottom: 1px solid #222 !important;
 }
 
 .mobile .projects-pane .project-item .sc-outline {
