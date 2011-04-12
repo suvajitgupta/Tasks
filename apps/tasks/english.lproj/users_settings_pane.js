@@ -17,13 +17,16 @@ sc_require('views/user_information');
 */
 Tasks.usersSettingsPane = Tasks.isMobile? null : SCUI.ModalPane.create({
     
-  title: "_UsersSettings".loc(),
-  titleIcon: 'settings-icon',
-  titleBarHeight: 40,
+  classNames: ['users-settings-pane'],
+  
+  layout: { centerX: 0, centerY: 0, height: 352, width: 725 },
   minHeight: 352,
   minWidth: 770,
   maxWidth: 770,
-  layout: { centerX: 0, centerY: 0, height: 352, width: 725 },
+  
+  title: "_UsersSettings".loc(),
+  titleIcon: 'settings-icon',
+  titleBarHeight: 40,
   
   contentView: SC.View.design({
     childViews: 'userSearchField userSearchCancelButton userManager addButton deleteButton usersCount closeButton'.w(),
@@ -56,17 +59,16 @@ Tasks.usersSettingsPane = Tasks.isMobile? null : SCUI.ModalPane.create({
       usersListView: SC.ScrollView.design({
         layout: { top: 0, bottom: 0, left: 0, width: 290 },
         hasHorizontalScroller: NO,
-        classNames: ['users-pane'],
         isVisibleBinding: 'CoreTasks*isCurrentUserAManager',
 
         contentView: Tasks.ListView.design({
+          classNames: ['users-pane'],
           layout: { top: 0, left:0, bottom: 0, right: 0 },
           contentValueKey: 'displayName',
           contentBinding: 'Tasks.rolesController.arrangedObjects',
           selectionBinding: 'Tasks.usersController.selection',
           localize: YES,
           rowHeight: 24,
-          classNames: ['users-pane'],
           hasContentIcon: YES,
           contentIconKey: 'icon',
           exampleView: Tasks.UserItemView,

@@ -6,6 +6,10 @@
   
 */
 
+.users-settings-pane .sc-view.sc-scroll-view {
+  border-radius: 6px !important;
+}
+
 /*-----------------------------------------------------------------
  * User-related icons
  */

@@ -69,7 +69,7 @@ Tasks.TasksListView = SC.View.extend({
       delegate: Tasks.tasksController,
 
       firstHeaderRowHeight: 33,
-      headerRowHeight: 40,
+      headerRowHeight: 44,
       rowDelegate: function() {
         return this;
       }.property().cacheable(),

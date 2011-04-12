@@ -10,8 +10,8 @@
 /* Application styles */
 
 body.sc-theme,
-.sc-workspace-view .sc-view,
-.sc-view.sc-pane.sc-panel.sc-palette.sc-picker .sc-view.sc-workspace-view {
+.sc-view.sc-pane.sc-panel.sc-palette.sc-picker .sc-view.sc-workspace-view,
+.users-settings-pane .sc-view.sc-scroll-view {
   background: static_url('images/wood-panel-brown.jpg') repeat 0 0;
 }
 
@@ -329,7 +329,7 @@ body.sc-theme,
   background-position: 0px 0px !important;
   left: 4px !important;
   top: 1px !important;
-  margin-top: 0px !important;
+  margin-top: 1px !important;
   height: 16px !important;
   width: 16px !important;
 }

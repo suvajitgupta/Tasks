@@ -12,22 +12,14 @@
  */
 
 .projects-pane, .users-pane {
-  background: #222 !important;
-  border: 3px solid #000 !important;
-  border-radius: 9px !important;
-  -moz-border-radius: 9px !important;
-  -webkit-border-radius: 9px !important;
-  box-shadow: inset -2px -2px 8px black !important;
-  -moz-box-shadow: inset -2px -2px 8px black !important;
-  -webkit-box-shadow: inset -2px -2px 8px black !important;
-}
-
-.projects-pane .sc-view.sc-container-view,
-.sc-view.sc-collection-view.sc-list-view.projects-pane,
-.sc-theme.focus .sc-view.sc-collection-view.sc-list-view.projects-pane,
-.sc-view.sc-collection-view.sc-list-view.users-pane,
-.sc-theme.focus .sc-view.sc-collection-view.sc-list-view.users-pane {
-  background: none !important;
+  background: rgba(7, 7, 7, 0.5) !important;
+  border: 2px solid #000 !important;
+  border-radius: 6px !important;
+  -moz-border-radius: 6px !important;
+  -webkit-border-radius: 6px !important;
+  box-shadow: inset -2px -2px 6px black !important;
+  -moz-box-shadow: inset -2px -2px 6px black !important;
+  -webkit-box-shadow: inset -2px -2px 6px black !important;
 }
 
 .sc-view.sc-ghost-view .sc-scroll-view {
@@ -36,19 +28,13 @@
 
 .projects-pane .project-item,
 .users-pane .user-item {
-	border-bottom: 1px solid #222 !important;
+	border-bottom: 1px solid #111 !important;
 }
 
 .mobile .projects-pane .project-item .sc-outline {
   left: 6px !important;
   right: 32px !important;
 }
-
-.projects-pane .sc-collection-item.sc-group-item.hover,
-.users-pane .sc-collection-item.sc-group-item.hover {
-  background: none !important;
-}
-
 
 /*-----------------------------------------------------------------
  * Project group item styles
@@ -57,31 +43,33 @@
 .projects-pane .sc-view.sc-list-item-view.sc-collection-item.sc-group-item,
 .users-pane .sc-view.sc-list-item-view.sc-collection-item.sc-group-item {
   left: 6px !important;
-  color: #777 !important;
+}
+
+.projects-pane .sc-collection-item.sc-group-item.hover,
+.users-pane .sc-collection-item.sc-group-item.hover {
+  background: none !important;
 }
 
 .projects-pane .sc-group-item .sc-outline,
 .users-pane .sc-group-item .sc-outline {
-  top: 1px !important;
   bottom: 0px !important;
-  left: 0px !important;
-  right: 1px !important;
+  left: -1px !important;
   box-shadow: inset 2px 2px 4px rgba(150,150,150,.6);
   -moz-box-shadow: inset 2px 2px 4px rgba(150,150,150,.6);
   -webkit-box-shadow: inset 2px 2px 4px rgba(150,150,150,.6);
-  border-radius: 6px !important;
-  -moz-border-radius: 6px !important;
-  -webkit-border-radius: 6px !important;
 	border-top: 1px solid #222 !important;
 	border-left: 1px solid #222 !important;
-	border-bottom: 2px solid #111 !important;
+	border-bottom: 1px solid #000 !important;
 	border-right: 1px solid #111 !important;
+  border-radius: 4px !important;
+  -moz-border-radius: 4px !important;
+  -webkit-border-radius: 4px !important;
 }
 
 .projects-pane .sc-view.sc-list-item-view.sc-collection-item.sc-group-item .sc-outline label,
 .users-pane .sc-view.sc-list-item-view.sc-collection-item.sc-group-item .sc-outline label {
   left: 24px !important;
-  color: #EEE !important;
+  color: #DDD !important;
 }
 
 
@@ -138,9 +126,9 @@
 .sc-list-view.users-pane .sc-collection-item.user-item.sel,
 .sc-list-view.users-pane .sc-collection-item.user-item.sel.hover {
   font-weight: normal !important;
-  border-radius: 6px !important;
-  -moz-border-radius: 6px !important;
-  -webkit-border-radius: 6px !important;
+  border-radius: 4px !important;
+  -moz-border-radius: 4px !important;
+  -webkit-border-radius: 4px !important;
 }
 
 .sc-list-view.projects-pane .sc-view.sc-list-item-view.sc-collection-item.project-item.sel label:hover,
@@ -170,7 +158,7 @@
 
 .projects-pane .sc-collection-item label,
 .users-pane .sc-collection-item label {
-  color: #CCC;
+  color: #DDD;
 }
 
 .projects-pane .sc-collection-item.sel label,
