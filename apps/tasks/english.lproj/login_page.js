@@ -73,7 +73,7 @@ Tasks.loginPage = SC.Page.create({
       }),
       
       guestSignupButton: Tasks.guestSignup? SC.ButtonView.design({
-        layout: { bottom: 0, left: 0, height: 23, width: 155 },
+        layout: { bottom: 0, left: 0, height: 24, width: 155 },
         classNames: ['dark'],
         icon: 'user-role-guest',
         title: "_GuestSignUp".loc() + '...',
@@ -82,6 +82,7 @@ Tasks.loginPage = SC.Page.create({
       
       signinButton: SC.ButtonView.design({
         layout: { bottom: 0, right: 0, width: 80, height: 24 },
+        classNames: ['dark'],
         titleMinWidth: 0,
         isEnabledBinding: SC.Binding.oneWay('Tasks.loginController.loginName').bool(),
         isDefault: YES,
