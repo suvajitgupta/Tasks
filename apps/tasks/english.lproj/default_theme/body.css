@@ -42,7 +42,7 @@ body.sc-theme,
 }
 
 .error-message {
-	color: #F66 !important;
+	color: red !important;
   font-size: 10px;
 }
 
