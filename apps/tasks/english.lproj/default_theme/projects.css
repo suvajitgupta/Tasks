@@ -13,13 +13,6 @@
 
 .projects-pane, .users-pane {
   background: rgba(7, 7, 7, 0.5) !important;
-  border: 2px solid #000 !important;
-  border-radius: 6px !important;
-  -moz-border-radius: 6px !important;
-  -webkit-border-radius: 6px !important;
-  box-shadow: inset -2px -2px 6px black !important;
-  -moz-box-shadow: inset -2px -2px 6px black !important;
-  -webkit-box-shadow: inset -2px -2px 6px black !important;
 }
 
 .sc-view.sc-ghost-view .sc-scroll-view {

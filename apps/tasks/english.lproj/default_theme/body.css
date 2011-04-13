@@ -97,6 +97,21 @@ body.sc-theme,
  * Shared styles
  */
 
+.projects-pane, .users-pane, .help-view {
+  border: 2px solid #000 !important;
+  border-radius: 6px !important;
+  -moz-border-radius: 6px !important;
+  -webkit-border-radius: 6px !important;
+  box-shadow: inset -2px -2px 6px black !important;
+  -moz-box-shadow: inset -2px -2px 6px black !important;
+  -webkit-box-shadow: inset -2px -2px 6px black !important;
+}
+
+.help-view {
+  background-color: #EEE;
+  background-image: static_url('images/paper.jpg');
+}
+
 .onscreen-help {
   color: #333 !important;
   font-size: 10px !important;

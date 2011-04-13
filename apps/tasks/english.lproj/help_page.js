@@ -32,16 +32,17 @@ Tasks.helpPage = SC.Page.create({
       }),
       
       title: SC.LabelView.design({
+        classNames: ['window-title'],
         layout: { centerY: 0, height: 20, centerX: -30, width: 120 },
         value: "_OnlineHelp".loc(),
-        icon: 'sc-icon-help-16',
-        classNames: ['window-title']
+        icon: 'sc-icon-help-16'
       })
       
     }),
     
     contentView: SC.WebView.design({
-      layout: { top: 43, left: 0, right: 0, bottom: 0 },
+      classNames: ['help-view'],
+      layout: { top: 53, left: 10, right: 10, bottom: 10 },
       value: Tasks.getHelpUrl()
     })
             

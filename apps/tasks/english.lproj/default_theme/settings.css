@@ -7,7 +7,10 @@
 */
 
 .users-settings-pane .sc-view.sc-scroll-view {
+  border: 1px solid #444 !important;
   border-radius: 6px !important;
+  -moz-border-radius: 6px !important;
+  -webkit-border-radius: 6px !important;
 }
 
 /*-----------------------------------------------------------------
