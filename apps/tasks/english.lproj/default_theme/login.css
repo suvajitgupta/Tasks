@@ -10,13 +10,6 @@
   background: static_url('images/tasks-logo-large.png') no-repeat;
 }
 
-/*
-// TODO: [SG] remove hack below to force download of task item background image once images are run through Chance
-*/
-.login-body .dummy {
-  background: static_url('images/paper.jpg');
-}
-
 .login-body .sc-text-field-view {
   background: rgba(7, 7, 7, 0.4) !important;
   border-radius: 4px !important;

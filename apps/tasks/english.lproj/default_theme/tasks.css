@@ -363,7 +363,8 @@
  */
 
 .sc-scroll-view .sc-collection-view .task-item {
-  background: static_url('images/paper.jpg') repeat 0 0 !important;
+  background-color: #EEE;
+  background-image: static_url('images/paper.jpg');
 	border-top: 1px solid #CCC !important;
 }
 

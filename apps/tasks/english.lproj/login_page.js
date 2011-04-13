@@ -22,13 +22,7 @@ Tasks.loginPage = SC.Page.create({
       
       layout: { centerX: 0, centerY: 0, width: 260, height: 240 },
       classNames: 'login-body transparent'.w(),
-      childViews: 'dummy tasksLogo loginNameField passwordField authenticatingMessageLabel loginErrorMessageLabel loadDoneProjectDataCheckbox guestSignupButton signinButton'.w(),
-      
-      // TODO: [SG] remove hack below to force download of task item background image once images are run through Chance
-      dummy: SC.View.design({
-        layout: { width: 0, height: 0 },
-        classNames: ['dummy']
-      }),
+      childViews: 'tasksLogo loginNameField passwordField authenticatingMessageLabel loginErrorMessageLabel loadDoneProjectDataCheckbox guestSignupButton signinButton'.w(),
       
       tasksLogo: Tasks.LogoView.design({
         layout: { centerX: 0, width: 185, top: 10, height: 56 },
