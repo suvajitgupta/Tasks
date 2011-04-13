@@ -2,7 +2,6 @@
 // Tasks.userController
 // ==========================================================================
 /*globals CoreTasks Tasks SCUDS sc_require */
-sc_require('scuds/frameworks/utils/core');
 
 /** 
 
