@@ -76,6 +76,9 @@ CoreTasks.taskValidationWeights[CoreTasks.TASK_VALIDATION_PASSED] = 1;
  * @author Sean Eidemiller
  */
 CoreTasks.Task = CoreTasks.Record.extend({
+  
+  recordType: SC.Record.attr(String), // CHANGED: [SG] since record type isn't polymorphic on IE
+  init: function() { this.writeAttribute('recordType', 'Task', true); sc_super(); },
 
   /**
    * A one-line summary of the task.

@@ -35,6 +35,9 @@ CoreTasks.USER_OVER_LOADED = 4;
  */
 CoreTasks.User = CoreTasks.Record.extend({
 
+  recordType: SC.Record.attr(String), // CHANGED: [SG] since record type isn't polymorphic on IE
+  init: function() { this.writeAttribute('recordType', 'User', true); sc_super(); },
+
   /**
    * The full name of the user.
    */

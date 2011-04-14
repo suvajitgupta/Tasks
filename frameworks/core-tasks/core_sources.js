@@ -19,7 +19,7 @@ CoreTasks.CachingRemoteDataSource = SC.DataSource.extend({
    */
   createRecord: function(store, storeKey) {
     var dataHash = store.readDataHash(storeKey);
-    var recordType = store.recordTypeFor(storeKey);
+    var recordType = CoreTasks[dataHash.recordType];
     var queryParams = {};
 
     if (CoreTasks.get('currentUser')) {
@@ -94,7 +94,7 @@ CoreTasks.CachingRemoteDataSource = SC.DataSource.extend({
    */
   updateRecord: function(store, storeKey) {
     var dataHash = store.readDataHash(storeKey);
-    var recordType = store.recordTypeFor(storeKey);
+    var recordType = CoreTasks[dataHash.recordType];
     var id = store.idFor(storeKey);
 
     var queryParams = {
@@ -176,7 +176,7 @@ CoreTasks.CachingRemoteDataSource = SC.DataSource.extend({
    */
   destroyRecord: function(store, storeKey) {
     var dataHash = store.readDataHash(storeKey);
-    var recordType = store.recordTypeFor(storeKey);
+    var recordType = CoreTasks[dataHash.recordType];
     var id = store.idFor(storeKey);
 
     var queryParams = {

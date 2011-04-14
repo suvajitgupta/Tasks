@@ -26,6 +26,9 @@ CoreTasks.projectStatusesAllowed = [
  */
 CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototype */ {
 
+  recordType: SC.Record.attr(String), // CHANGED: [SG] since record type isn't polymorphic on IE
+  init: function() { this.writeAttribute('recordType', 'Project', true); sc_super(); },
+
   /**
    * The name of the project (ex. "FR1").
    */
