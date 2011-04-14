@@ -64,9 +64,7 @@ Tasks.UserItemView = SC.ListItemView.extend(Tasks.LocalizedLabel,
   },
   
   renderIcon: function(context, icon) {
-    if(!SC.none(icon)) {
-      context.begin('img').addClass('small-gravatar icon').attr('src', icon).end();
-    }
+    context = context.begin('img').addClass('small-gravatar').attr('src', icon).end();
   }
   
 });

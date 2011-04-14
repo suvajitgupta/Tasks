@@ -1,6 +1,6 @@
 // Project: Tasks 
 // ==========================================================================
-/*globals Tasks CoreTasks*/
+/*globals Tasks CoreTasks sc_static */
 /** 
 
   Tasks editor helper.
@@ -56,7 +56,7 @@ Tasks.taskEditorHelper = SC.Object.create({
         ret1.push(user);
         if(user.get('role') !== CoreTasks.USER_ROLE_GUEST) ret2.push(user);
       }
-      var unassigned = { id: 0, displayName: "_Unassigned".loc(), icon: 'no-icon' };
+      var unassigned = { id: 0, displayName: "_Unassigned".loc(), icon: sc_static('images/unassigned.jpg') };
       ret1.push(unassigned);
       ret2.push(unassigned);
     }

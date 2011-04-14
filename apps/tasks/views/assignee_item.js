@@ -1,7 +1,7 @@
 // ==========================================================================
 // Project: Tasks 
 // ==========================================================================
-/*globals CoreTasks Tasks sc_require */
+/*globals CoreTasks Tasks sc_require sc_static */
 sc_require('mixins/localized_label');
 sc_require('views/group_item');
 
@@ -40,12 +40,8 @@ Tasks.AssigneeItemView = Tasks.GroupItemView.extend(Tasks.LocalizedLabel,
       context.addClass('assignee-item');
       
       var assignee = content.getPath('assignee');
-      if(assignee) {
-        var icon = assignee.get('icon');
-        if(icon) {
-          context = context.begin('img').addClass('gravatar').attr('src', icon).end();
-        }
-      }
+      var icon = assignee? assignee.get('icon') : sc_static('images/unassigned.jpg');
+      context = context.begin('img').addClass('gravatar').attr('src', icon).end();
       
       var tasksCount = content.get('tasksCount');
       var assigneeTooltip;

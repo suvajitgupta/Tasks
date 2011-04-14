@@ -69,6 +69,10 @@ body.sc-theme,
   -webkit-border-radius: 3px !important;
 }
 
+.small-gravatar {
+  margin-top: 4px;
+}
+
 .scui-combobox-text-field-view .sc-text-field-accessory-view {
   left: 5px !important;
 }
