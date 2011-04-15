@@ -52,9 +52,10 @@ body.sc-theme,
  */
 
 .gravatar {
-  margin-top: 3px;
+  margin-top: 2px;
   height: 32px;
   width: 32px;
+  border: 1px solid #555 !important;
   border-radius: 4px !important;
   -moz-border-radius: 4px !important;
   -webkit-border-radius: 4px !important;
