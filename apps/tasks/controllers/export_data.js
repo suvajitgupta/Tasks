@@ -39,8 +39,8 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' right: 10px;\n' +
 '}\n' +
 'h1, h2 {\n' +
-' line-height: 25px;\n' +
-' margin-top: 7px;\n' +
+' line-height: 30px;\n' +
+' margin-top: 9px;\n' +
 ' margin-bottom: 5px;\n' +
 ' padding: 3px 6px;\n' +
 '}\n' +
@@ -118,7 +118,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' -webkit-box-shadow: inset 0px 2px 2px #FAA;\n' +
 '}\n' +
 '.progress-percent {\n' +
-' margin-top: -4px;\n' +
+' margin-top: -2px;\n' +
 ' font-size: 10px;\n' +
 ' text-align: center;\n' +
 '}\n' +
@@ -133,7 +133,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' bottom: 0px;\n' +
 '}\n' +
 '.progress-bar {\n' +
-' margin-top: 14px;\n' +
+' margin-top: 17px;\n' +
 ' height: 6px;\n' +
 ' border: 1px solid #555;\n' +
 '}\n' +
@@ -243,7 +243,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' right: 15px;\n' +
 '}\n' +
 '.finished, .left {\n' +
-' margin-top: 5px;\n' +
+' margin-top: 8px;\n' +
 ' width: 120px;\n' +
 ' padding: 1px 0px;\n' +
 ' text-align: center;\n' +

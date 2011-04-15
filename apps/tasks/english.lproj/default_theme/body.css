@@ -52,21 +52,21 @@ body.sc-theme,
  */
 
 .gravatar {
-  margin-top: 1px;
+  margin-top: 3px;
   margin-left: 1px;
-  height: 30px;
-  width: 30px;
-  border-radius: 6px !important;
-  -moz-border-radius: 6px !important;
-  -webkit-border-radius: 6px !important;
+  height: 32px;
+  width: 32px;
+  border-radius: 4px !important;
+  -moz-border-radius: 4px !important;
+  -webkit-border-radius: 4px !important;
 }
 
 .small-gravatar, .scui-combobox-list-pane img {
   height: 16px;
   width: 16px;
-  border-radius: 3px !important;
-  -moz-border-radius: 3px !important;
-  -webkit-border-radius: 3px !important;
+  border-radius: 2px !important;
+  -moz-border-radius: 2px !important;
+  -webkit-border-radius: 2px !important;
 }
 
 .small-gravatar {

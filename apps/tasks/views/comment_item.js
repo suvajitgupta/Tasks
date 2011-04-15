@@ -39,7 +39,6 @@ Tasks.CommentItemView = SC.View.extend(SC.Control,
   childViews: 'gravatarImage commentHeaderLabel editButton deleteButton descriptionLabel'.w(),
   
   gravatarImage: SC.ImageView.design({
-    layout: { top: 5 },
     classNames: ['gravatar']
   }),
   
