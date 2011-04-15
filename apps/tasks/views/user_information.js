@@ -117,14 +117,16 @@ Tasks.UserInformationView = SC.View.extend(
     }));
     childViews.push(this.emailHelpLabel);
     
-    this.gravatarLabel = this.createChildView(SC.LabelView.design({
+    this.gravatarLabel = this.createChildView(SC.LabelView.design(SCUI.SimpleButton, {
       layout: { top: 162, left: 0, width: 85, height: 18 },
       textAlign: SC.ALIGN_RIGHT,
-      value: "_Gravatar:".loc()
+      escapeHTML: NO,
+      value: '<u style="color: blue">' + "_Gravatar:".loc() + '</u>',
+      action: 'window.open("http://www.gravatar.com");'
     }));
     childViews.push(this.gravatarLabel);
     this.gravatarImage = this.createChildView(SC.ImageView.design({
-      layout: { top: 151, left: 90 },
+      layout: { top: 151, left: 91 },
       classNames: ['gravatar'],
       textAlign: SC.ALIGN_RIGHT,
       valueBinding: SC.binding('*content.icon', this)

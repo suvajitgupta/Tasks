@@ -53,6 +53,7 @@ body.sc-theme,
 
 .gravatar {
   margin-top: 2px;
+  margin-left: -1px;
   height: 32px;
   width: 32px;
   border: 1px solid #555 !important;
