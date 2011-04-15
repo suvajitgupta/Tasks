@@ -173,6 +173,8 @@
 .projects-pane .sel .sc-outline img,
 .users-pane .sel .sc-outline img {
   top: 12px !important;
+}
+.projects-pane .sel .sc-outline img {
   margin-top: -9px !important;
 }
 .mobile .projects-pane .sel .sc-outline img {
