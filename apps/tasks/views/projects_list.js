@@ -21,13 +21,14 @@ Tasks.ProjectsListView = SC.View.extend({
 
   projectsList: SC.ScrollView.design({
     
-    classNames: ['transparent'],
+    classNames: ['projects-pane'],
     
     layout: Tasks.isMobile? { left: 5, top: 8, bottom: 40, right: 5 } : { left: 10, top: 8, bottom: 40, right: 5 },
     
     contentView: Tasks.ListView.design({
 
-      classNames: ['projects-pane'],
+      classNames: ['transparent'],
+      
       contentBinding: 'Tasks.sourcesController*arrangedObjects',
       selectionBinding: 'Tasks.projectsController.selection',
       contentValueKey: 'displayName',

@@ -11,22 +11,12 @@
  * Project pane styles
  */
 
-.projects-pane, .users-pane {
-  background: rgba(7, 7, 7, 0.5) !important;
-}
-
 .sc-view.sc-ghost-view .sc-scroll-view {
   background: none !important;
 }
 
-.projects-pane .project-item,
-.users-pane .user-item {
-	border-bottom: 1px solid #111 !important;
-}
-
-.mobile .projects-pane .project-item .sc-outline {
-  left: 6px !important;
-  right: 32px !important;
+.projects-pane, .users-pane {
+  background: rgba(7, 7, 7, 0.5) !important;
 }
 
 /*-----------------------------------------------------------------
@@ -36,11 +26,6 @@
 .projects-pane .sc-view.sc-list-item-view.sc-collection-item.sc-group-item,
 .users-pane .sc-view.sc-list-item-view.sc-collection-item.sc-group-item {
   left: 6px !important;
-}
-
-.projects-pane .sc-collection-item.sc-group-item.hover,
-.users-pane .sc-collection-item.sc-group-item.hover {
-  background: none !important;
 }
 
 .projects-pane .sc-group-item .sc-outline,
@@ -88,34 +73,37 @@
   background-position: 0px 3px !important;
 }
 
-.sc-list-view.projects-pane .sc-collection-item.sel.drop-target,
-.sc-list-view.projects-pane .sc-collection-item.drop-target {
+/*
+// FIXME: [SG] fix task drag-n-drop to project highlighting
+*/
+.projects-pane .sc-list-view .sc-collection-item.sel.drop-target,
+.projects-pane .sc-list-view .sc-collection-item.drop-target {
   background: #888 !important;
 }
 
-.sc-list-view.projects-pane .project-item.sel,
-.sc-list-view.projects-pane .project-item.sel.hover {
+.projects-pane .sc-list-view .project-item.sel,
+.projects-pane .sc-list-view .project-item.sel.hover {
   height: 22px !important;
   background: #9FF !important;
   border-color: #000 !important;
 }
 
-.touch .sc-list-view.projects-pane .project-item.sel,
-.sc-list-view.projects-pane.focus .project-item.sel,
-.sc-list-view.projects-pane.focus .project-item.sel.hover,
+.touch .projects-pane .sc-list-view .project-item.sel,
+.projects-pane .sc-list-view.focus .project-item.sel,
+.projects-pane .sc-list-view.focus .project-item.sel.hover,
 .sc-list-view.users-pane .user-item.sel,
 .sc-list-view.users-pane .user-item.sel.hover {
   height: 22px !important;
   background: #6CF !important;
 }
 
-.mobile .sc-list-view.projects-pane .project-item.sel,
-.mobile .sc-list-view.projects-pane.focus .project-item.sel {
+.mobile .projects-pane .sc-list-view .project-item.sel,
+.mobile .projects-pane .sc-list-view.focus .project-item.sel {
   height: 30px !important;
 }
 
-.sc-list-view.projects-pane .sc-collection-item.project-item.sel,
-.sc-list-view.projects-pane .sc-collection-item.project-item.sel.hover,
+.projects-pane .sc-list-view .sc-collection-item.project-item.sel,
+.projects-pane .sc-list-view .sc-collection-item.project-item.sel.hover,
 .sc-list-view.users-pane .sc-collection-item.user-item.sel,
 .sc-list-view.users-pane .sc-collection-item.user-item.sel.hover {
   font-weight: normal !important;
@@ -124,14 +112,29 @@
   -webkit-border-radius: 4px !important;
 }
 
-.sc-list-view.projects-pane .sc-view.sc-list-item-view.sc-collection-item.project-item.sel label:hover,
+.projects-pane .sc-list-view .sc-view.sc-list-item-view.sc-collection-item.project-item.sel label:hover,
 .sc-list-view.users-pane .sc-view.sc-list-item-view.sc-collection-item.user-item.sel label:hover {
   cursor: move !important;
+}
+
+.projects-pane .sc-list-item-view img.icon,
+.users-pane .sc-list-item-view img.icon {
+  left: 0px !important;
 }
 
 .project-item .recently-updated,
 .user-item .recently-updated {
   margin-left: 0px !important;
+}
+
+.projects-pane .project-item,
+.users-pane .user-item {
+	border-bottom: 1px solid #111 !important;
+}
+
+.mobile .projects-pane .project-item .sc-outline {
+  left: 6px !important;
+  right: 32px !important;
 }
 
 .project-item .sc-outline {
@@ -202,6 +205,9 @@
   position: absolute;
   top: 4px !important;
   right: -1px !important;
+}
+.project-item.sel .description-icon {
+  top: 2px !important;
 }
 
 .show-tasks {

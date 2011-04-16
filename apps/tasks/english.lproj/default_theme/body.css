@@ -120,7 +120,7 @@ body.sc-theme.gray,
  * Shared styles
  */
 
-.projects-pane, .users-pane, .help-view {
+.sc-main .sc-view .projects-pane, .users-pane, .help-view {
   border: 2px solid #000 !important;
   border-radius: 6px !important;
   -moz-border-radius: 6px !important;
@@ -282,11 +282,6 @@ body.sc-theme.gray,
 
 .sc-group-item .sc-outline img {
   left: 5px !important;
-}
-
-.projects-pane .sc-list-item-view img.icon,
-.users-pane .sc-list-item-view img.icon {
-  left: 0px !important;
 }
 
 .sc-text-field-view, .select-button span label {
