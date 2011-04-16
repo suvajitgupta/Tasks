@@ -15,7 +15,7 @@
   background: none !important;
 }
 
-.projects-pane, .users-pane {
+.projects-pane, .users-pane .sc-container-view {
   background: rgba(7, 7, 7, 0.5) !important;
 }
 
@@ -91,8 +91,8 @@
 .touch .projects-pane .sc-list-view .project-item.sel,
 .projects-pane .sc-list-view.focus .project-item.sel,
 .projects-pane .sc-list-view.focus .project-item.sel.hover,
-.sc-list-view.users-pane .user-item.sel,
-.sc-list-view.users-pane .user-item.sel.hover {
+.users-pane .sc-list-view .user-item.sel,
+.users-pane .sc-list-view .user-item.sel.hover {
   height: 22px !important;
   background: #6CF !important;
 }
@@ -104,8 +104,8 @@
 
 .projects-pane .sc-list-view .sc-collection-item.project-item.sel,
 .projects-pane .sc-list-view .sc-collection-item.project-item.sel.hover,
-.sc-list-view.users-pane .sc-collection-item.user-item.sel,
-.sc-list-view.users-pane .sc-collection-item.user-item.sel.hover {
+.users-pane .sc-list-view .sc-collection-item.user-item.sel,
+.users-pane .sc-list-view .sc-collection-item.user-item.sel.hover {
   font-weight: normal !important;
   border-radius: 4px !important;
   -moz-border-radius: 4px !important;
@@ -113,7 +113,7 @@
 }
 
 .projects-pane .sc-list-view .sc-view.sc-list-item-view.sc-collection-item.project-item.sel label:hover,
-.sc-list-view.users-pane .sc-view.sc-list-item-view.sc-collection-item.user-item.sel label:hover {
+.users-pane .sc-list-view .sc-view.sc-list-item-view.sc-collection-item.user-item.sel label:hover {
   cursor: move !important;
 }
 

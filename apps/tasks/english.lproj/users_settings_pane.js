@@ -53,17 +53,25 @@ Tasks.usersSettingsPane = Tasks.isMobile? null : SCUI.ModalPane.create({
     }),
 
     userManager: SC.View.design({
+      
       layout: { left: 10, right: 10, top: 40, bottom: 40 },
       childViews: 'usersListView userEditorView'.w(),
       
       usersListView: SC.ScrollView.design({
+        
+        classNames: ['users-pane'],
+        
         layout: { top: 0, bottom: 0, left: 0, width: 290 },
+        
         hasHorizontalScroller: NO,
         isVisibleBinding: 'CoreTasks*isCurrentUserAManager',
 
         contentView: Tasks.ListView.design({
-          classNames: ['users-pane'],
+          
+          classNames: ['transparent'],
+
           layout: { top: 0, left:0, bottom: 0, right: 0 },
+          
           contentValueKey: 'displayName',
           contentBinding: 'Tasks.rolesController.arrangedObjects',
           selectionBinding: 'Tasks.usersController.selection',
