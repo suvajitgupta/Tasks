@@ -50,10 +50,10 @@
   box-shadow: inset 2px 2px 4px rgba(150,150,150,.6);
   -moz-box-shadow: inset 2px 2px 4px rgba(150,150,150,.6);
   -webkit-box-shadow: inset 2px 2px 4px rgba(150,150,150,.6);
-	border-top: 1px solid #222 !important;
-	border-left: 1px solid #222 !important;
+	border-top: 1px solid #000 !important;
+	border-left: 1px solid #000 !important;
 	border-bottom: 1px solid #000 !important;
-	border-right: 1px solid #111 !important;
+	border-right: 1px solid #000 !important;
   border-radius: 4px !important;
   -moz-border-radius: 4px !important;
   -webkit-border-radius: 4px !important;
