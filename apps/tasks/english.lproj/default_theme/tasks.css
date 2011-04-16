@@ -58,7 +58,6 @@
 .previous-icon, .next-icon, .back-icon,
 .scui-calendar .previous, .scui-calendar .next,
 .date-today, .date-none {
-	line-height: 18px !important;
 	background-color: #CCC !important;
   border: 1px solid #777 !important;
   border-radius: 6px;

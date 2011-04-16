@@ -241,13 +241,7 @@ body.sc-theme.gray,
 .task-item .description-icon {
   width: 16px !important;
   height: 16px !important;
-  background: static_url('images/task-description.png') no-repeat 0px 2px;
-}
-
-.project-item .description-icon {
-  width: 16px !important;
-  height: 16px !important;
-  background: static_url('images/project-description.png') no-repeat;
+  background: static_url('images/description.png') no-repeat 0px 2px;
 }
 
 .sc-view .sc-outline .count {
