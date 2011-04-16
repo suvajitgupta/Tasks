@@ -57,17 +57,11 @@ body.sc-theme,
   height: 32px;
   width: 32px;
   border: 1px solid #555 !important;
-  border-radius: 4px !important;
-  -moz-border-radius: 4px !important;
-  -webkit-border-radius: 4px !important;
 }
 
 .small-gravatar, .scui-combobox-list-pane img {
   height: 16px;
   width: 16px;
-  border-radius: 2px !important;
-  -moz-border-radius: 2px !important;
-  -webkit-border-radius: 2px !important;
 }
 
 .small-gravatar {
