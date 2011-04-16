@@ -129,11 +129,9 @@ Tasks.assignmentsController = SC.ArrayController.create(
       }
     
       // Extract task name search filter
-      tasksSearch = tasksSearch.replace(/^\s+/, '').replace(/[\@\[\]\<\>]/g, '');
-      // console.log('DEBUG: tasksSearch="' + tasksSearch + '"');
       var idMatches = tasksSearch.match(/#([\-\d]+)/g);
       // console.log('DEBUG: idMatches = ' + idMatches);
-      if(!idMatches) {
+      if(!idMatches && !tasksSearch.match(/[\@|\[|\]|\<|\>|\#]/)) {
         if (tasksSearch.indexOf('^') !== -1) { // inverse search specified
           positiveMatch = false;
           tasksSearch = tasksSearch.replace('^', '');
