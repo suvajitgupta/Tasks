@@ -56,8 +56,8 @@
 }
 
 .previous-icon, .next-icon, .back-icon,
-.calendar .previous, .calendar .next,
-.scui-datepicker-today, .scui-datepicker-none {
+.scui-calendar .previous, .scui-calendar .next,
+.date-today, .date-none {
 	line-height: 18px !important;
 	background-color: #CCC !important;
   border: 1px solid #777 !important;
@@ -69,13 +69,13 @@
   -webkit-box-shadow: 0 1px 1px #222;
 }
 .previous-icon:hover, .next-icon:hover, .back-icon:hover, 
-.calendar .previous:hover, .calendar .next:hover, 
-.scui-datepicker-today:hover, .scui-datepicker-none:hover {
+.scui-calendar .previous:hover, .scui-calendar .next:hover, 
+.date-today:hover, .date-none:hover {
   border: 1px solid #222 !important;
 }
 .previous-icon.active, .next-icon.active, .back-icon.active,
-.calendar .previous.active, .calendar .next.active,
-.scui-datepicker-today.active, .scui-datepicker-none.active {
+.scui-calendar .previous.active, .scui-calendar .next.active,
+.date-today.active, .date-none.active {
 	background-color: #999 !important;
   border: 1px solid #333 !important;
   box-shadow: 0 1px 1px #444 inset;
@@ -245,13 +245,13 @@
 }
 
 .sc-pane .sc-container-view .task-editor .task-title,
-.calendar .month {
+.scui-calendar .month {
   line-height: 24px;
   border-bottom: 1px solid #888;
 }
 
 .sc-pane .sc-container-view .task-editor .task-title,
-.calendar .month,
+.scui-calendar .month,
 .assignee-not-loaded {
   background: #AAA none repeat scroll 0 0 !important;
   box-shadow: inset 0px 2px 2px #DDD;
