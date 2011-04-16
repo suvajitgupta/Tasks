@@ -16,7 +16,7 @@ Tasks.main = function main() {
   Tasks.registerRoutes();
   SC.RootResponder.responder.set('defaultResponder', Tasks.statechart);
   Tasks.statechart.initStatechart();
-  // Customizable default background: set to one of 'brown' 'black' 'green' 'gray' below
+  // Customizable default background: set to one of 'brown' 'black' 'green' 'blue' below
   $('body').addClass('brown');
   
   // Setup timer to refresh project countDowns

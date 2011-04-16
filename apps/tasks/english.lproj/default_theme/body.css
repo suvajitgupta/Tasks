@@ -27,14 +27,14 @@ body.sc-theme.green,
 .green .users-settings-pane .sc-view.sc-scroll-view {
   background: static_url('images/background-green.jpg') repeat 0 0;
 }
-.gray,
-body.sc-theme.gray,
-.gray .sc-view.sc-pane.sc-panel.sc-palette.sc-picker .sc-view.sc-workspace-view,
-.gray .users-settings-pane .sc-view.sc-scroll-view {
-  background: #444;
+.blue,
+body.sc-theme.blue,
+.blue .sc-view.sc-pane.sc-panel.sc-palette.sc-picker .sc-view.sc-workspace-view,
+.blue .users-settings-pane .sc-view.sc-scroll-view {
+  background: static_url('images/background-blue.jpg') repeat 0 0;
 }
 
-.menu-item .brown, .menu-item .black, .menu-item .green, .menu-item .gray {
+.menu-item .brown, .menu-item .black, .menu-item .green, .menu-item .blue {
   width: 16px !important;
   height: 16px !important;
 }

@@ -18,7 +18,7 @@ Tasks = SC.Object.create(
   /** @scope Tasks.prototype */ {
 
   NAMESPACE: 'Tasks',
-  VERSION: '1.8', // latest addition: mobile support (iPhone/iPod)
+  VERSION: '1.9', // latest addition: wallpapers and gravatars
   
   isLoaded: NO, // for Lebowski
 

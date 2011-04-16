@@ -22,7 +22,7 @@ Tasks.ApplicationManagerState = Ki.State.extend({
       var body = $('body');
       body.removeClass('black');
       body.removeClass('green');
-      body.removeClass('gray');
+      body.removeClass('blue');
       body.addClass('brown');
     },
 
@@ -31,7 +31,7 @@ Tasks.ApplicationManagerState = Ki.State.extend({
       var body = $('body');
       body.removeClass('brown');
       body.removeClass('green');
-      body.removeClass('gray');
+      body.removeClass('blue');
       body.addClass('black');
     },
 
@@ -40,17 +40,17 @@ Tasks.ApplicationManagerState = Ki.State.extend({
       var body = $('body');
       body.removeClass('brown');
       body.removeClass('black');
-      body.removeClass('gray');
+      body.removeClass('blue');
       body.addClass('green');
     },
 
-    setBackgroundGray: function() {
-      Tasks.mainPageHelper.set('background', 'gray');
+    setBackgroundBlue: function() {
+      Tasks.mainPageHelper.set('background', 'blue');
       var body = $('body');
       body.removeClass('brown');
       body.removeClass('black');
       body.removeClass('green');
-      body.addClass('gray');
+      body.addClass('blue');
     },
 
     toggleShowProjectsList: function() {
