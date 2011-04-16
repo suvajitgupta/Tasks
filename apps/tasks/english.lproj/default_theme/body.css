@@ -9,10 +9,34 @@
 
 /* Application styles */
 
-body.sc-theme,
-.sc-view.sc-pane.sc-panel.sc-palette.sc-picker .sc-view.sc-workspace-view,
-.users-settings-pane .sc-view.sc-scroll-view {
-  background: static_url('images/wood-panel-brown.jpg') repeat 0 0;
+.brown,
+body.sc-theme.brown,
+.brown .sc-view.sc-pane.sc-panel.sc-palette.sc-picker .sc-view.sc-workspace-view,
+.brown .users-settings-pane .sc-view.sc-scroll-view {
+  background: static_url('images/background-brown.jpg') repeat 0 0;
+}
+.black,
+body.sc-theme.black,
+.black .sc-view.sc-pane.sc-panel.sc-palette.sc-picker .sc-view.sc-workspace-view,
+.black .users-settings-pane .sc-view.sc-scroll-view {
+  background: static_url('images/background-black.jpg') repeat 0 0;
+}
+.green,
+body.sc-theme.green,
+.green .sc-view.sc-pane.sc-panel.sc-palette.sc-picker .sc-view.sc-workspace-view,
+.green .users-settings-pane .sc-view.sc-scroll-view {
+  background: static_url('images/background-green.jpg') repeat 0 0;
+}
+.gray,
+body.sc-theme.gray,
+.gray .sc-view.sc-pane.sc-panel.sc-palette.sc-picker .sc-view.sc-workspace-view,
+.gray .users-settings-pane .sc-view.sc-scroll-view {
+  background: #444;
+}
+
+.menu-item .brown, .menu-item .black, .menu-item .green, .menu-item .gray {
+  width: 16px !important;
+  height: 16px !important;
 }
 
 .master-detail-content-view {

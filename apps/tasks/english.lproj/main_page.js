@@ -26,6 +26,7 @@ sc_require('views/tasks_bottom_bar');
 
 Tasks.mainPageHelper = SC.Object.create({
 
+  background: 'brown',
   panelOpenBinding: SC.Binding.oneWay('Tasks*panelOpen'),
   displayedTasksCountBinding: SC.Binding.oneWay('Tasks.tasksController*arrangedObjects.length'),
   autoSaveBinding: SC.Binding.oneWay('Tasks*autoSave'),
@@ -67,6 +68,12 @@ Tasks.mainPageHelper = SC.Object.create({
     // console.log('DEBUG: _listActions()');
     var ret = [];
     ret.push({ title: "_LaunchSettings".loc(), icon: 'settings-icon', action: 'showUsersSettingsPanel', isEnabled: YES });
+    ret.push({ title: "_Background".loc(), icon: 'palette-icon', subMenu: [
+      { title: 'Brown', icon: 'brown', action: 'setBackgroundBrown', isEnabled: YES, checkbox: this.background === 'brown' },
+      { title: 'Black', icon: 'black', action: 'setBackgroundBlack', isEnabled: YES, checkbox: this.background === 'black' },
+      { title: 'Green', icon: 'green', action: 'setBackgroundGreen', isEnabled: YES, checkbox: this.background === 'green' },
+      { title: 'Gray',  icon: 'gray',  action: 'setBackgroundGray',  isEnabled: YES, checkbox: this.background === 'gray' }
+    ], isEnabled: YES });
     if(!SC.platform.touch) {
       var showProjectsList = this.get('showProjectsList');
       ret.push({ title: "_ShowProjectsList".loc(), icon: 'empty-project-icon', action: 'toggleShowProjectsList', isEnabled: YES, checkbox: showProjectsList });
@@ -92,7 +99,7 @@ Tasks.mainPageHelper = SC.Object.create({
     ret.push({ title: "_LaunchHelp".loc(), icon: 'sc-icon-help-16', action: 'showHelpWindow', isEnabled: YES });
     ret.push({ title: "_Logout".loc(), icon: 'logout-icon', action: 'logout', isEnabled: YES });
     this.set('actions', ret);
-  }.observes('showProjectsList', 'panelOpen', 'displayedTasksCount', 'autoSave', 'sendNotifications'),
+  }.observes('background', 'showProjectsList', 'panelOpen', 'displayedTasksCount', 'autoSave', 'sendNotifications'),
   actions: null,
   
   currentUserNameBinding: SC.Binding.oneWay('CoreTasks*currentUser.name'),

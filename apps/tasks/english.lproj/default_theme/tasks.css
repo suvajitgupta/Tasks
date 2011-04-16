@@ -227,21 +227,22 @@
   text-transform: none !important;
 	font-weight: bold !important;
 	font-size: 14px !important;
-  color: #222 !important;
   left: 5px !important;
   right: 0px !important;
   margin-top: 10px !important;
   height: 37px !important;
   padding-left: 20px !important;
-  opacity: 0.85;
   border-bottom: 1px solid #777 !important;
 }
 .sc-view.sc-list-item-view.sc-collection-item.sc-group-item.assignee-item.first-assignee-item {
   margin-top: 0px !important;
 }
 
-.sc-view.sc-list-item-view.sc-collection-item.sc-group-item.assignee-item:hover {
-  opacity: 1;
+.sc-view.sc-list-item-view.sc-collection-item.sc-group-item.assignee-item label {
+  color: #454545 !important;
+}
+.sc-view.sc-list-item-view.sc-collection-item.sc-group-item.assignee-item:hover label {
+  color: #000 !important;
 }
 
 .sc-pane .sc-container-view .task-editor .task-title,
@@ -282,11 +283,12 @@
 
 .tasks-pane .sc-view.sc-list-item-view.sc-collection-item.sc-group-item.assignee-item label {
   left: 40px !important;
-  margin-top: -14px !important;
+  margin-top: -13px !important;
 }
 
 .assignee-item.sc-list-item-view .sc-outline .progress-percent {
   position: absolute !important;
+  color: #333 !important;
   font-size: 10px !important;
   top: -6px !important;
   text-align: center !important;
@@ -422,7 +424,6 @@
   right: 50px !important;
   height: 24px !important;
   line-height: 24px !important;
-  opacity: 1 !important;
 }
 .mobile .tasks-pane .sc-view.sc-list-item-view.sc-collection-item.task-item .sc-outline label {
   top: 12px !important;

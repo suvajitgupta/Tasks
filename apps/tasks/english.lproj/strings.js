@@ -33,6 +33,7 @@ SC.stringsFor('English', {
   "_Assignees:": "Assignees: ",
   "_Authenticating": "Authenticating...",
   "_AutoSave": "Auto Save",
+  "_Background": "Background",
   "_Bug": "Bug",
   "_ByAnyone": "By Anyone",
   "_ByMe": "By Me",

@@ -4,7 +4,7 @@
  * @author Suvajit Gupta
  * License: Licened under MIT license (see license.js)
  */
-/*globals CoreTasks Tasks Ki  */
+/*globals CoreTasks Tasks Ki $ */
 
 Tasks.ApplicationManagerState = Ki.State.extend({
       
@@ -12,20 +12,56 @@ Tasks.ApplicationManagerState = Ki.State.extend({
   
   // State indicating global action readiness
   readyForGlobalActions: Ki.State.design({
-    
-    toggleShowProjectsList: function(){
-      Tasks.mainPageHelper.set('showProjectsList', !Tasks.mainPageHelper.get('showProjectsList'));
-    },
 
     showUsersSettingsPanel: function() {
       this.gotoState('showingUsersSettingsPanel');
     },
         
+    setBackgroundBrown: function() {
+      Tasks.mainPageHelper.set('background', 'brown');
+      var body = $('body');
+      body.removeClass('black');
+      body.removeClass('green');
+      body.removeClass('gray');
+      body.addClass('brown');
+    },
+
+    setBackgroundBlack: function() {
+      Tasks.mainPageHelper.set('background', 'black');
+      var body = $('body');
+      body.removeClass('brown');
+      body.removeClass('green');
+      body.removeClass('gray');
+      body.addClass('black');
+    },
+
+    setBackgroundGreen: function() {
+      Tasks.mainPageHelper.set('background', 'green');
+      var body = $('body');
+      body.removeClass('brown');
+      body.removeClass('black');
+      body.removeClass('gray');
+      body.addClass('green');
+    },
+
+    setBackgroundGray: function() {
+      Tasks.mainPageHelper.set('background', 'gray');
+      var body = $('body');
+      body.removeClass('brown');
+      body.removeClass('black');
+      body.removeClass('green');
+      body.addClass('gray');
+    },
+
+    toggleShowProjectsList: function() {
+      Tasks.mainPageHelper.set('showProjectsList', !Tasks.mainPageHelper.get('showProjectsList'));
+    },
+
     toggleAutoSave: function(){
       Tasks.set('autoSave', !Tasks.get('autoSave'));
     },
 
-    toggleSendNotifications: function(){
+    toggleSendNotifications: function() {
       CoreTasks.set('sendNotifications', !CoreTasks.get('sendNotifications'));
     },
 

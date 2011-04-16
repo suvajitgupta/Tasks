@@ -121,6 +121,7 @@ v Show number of displayed/selected Users at the bottom of Users/Settings panel 
 - Out of Scope: Add support for "Teams" (a user can belong to a team, a team can have a lead) $Feature
 | Create separate projects for different teams to keep their tasks/deadlines separate instead
 
+- Support configurable backgrounds via actions menu [SG] $Feature @Done %Passed
 - Support "Show Projects List" toggling via actions menu [SG] <BB> $Feature @Done %Passed
 - Support "Auto Save" toggling via actions menu [SG] $Feature @Done %Passed
 - Support "Send Notifications" toggling via actions menu [SG] <JH2> $Feature @Done %Passed
@@ -343,6 +344,7 @@ Customization @Done
 #========================================================================================================================
 
 - Support customizable "Installation Title" shown in Browser tab title (set via Buildfile) [SG] $Feature @Done %Passed
+- Support customizable default background [SG] $Feature @Done %Passed
 - Support customizable "Installation Logo" and "Square Installation Logo" shown in Tasks top bar [SG] $Feature @Done %Passed
 - Support customizable "Guest Signup" capability via "Login" screen (useful for open-source projects) [SG] $Feature @Done %Passed
 - Support customizable "Software Mode" to also work as a simple To Do list (Task Type/Validation are not available through GUI) [SG] $Feature @Done %Passed

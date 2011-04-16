@@ -1,4 +1,4 @@
-/*globals Tasks CoreTasks sc_require */
+/*globals Tasks CoreTasks sc_require $ */
 
 function main() { Tasks.main(); }
 
@@ -16,6 +16,8 @@ Tasks.main = function main() {
   Tasks.registerRoutes();
   SC.RootResponder.responder.set('defaultResponder', Tasks.statechart);
   Tasks.statechart.initStatechart();
+  // Customizable default background: set to one of 'brown' 'black' 'green' 'gray' below
+  $('body').addClass('brown');
   
   // Setup timer to refresh project countDowns
   SC.Timer.schedule({

@@ -253,7 +253,7 @@ Tasks.EXPORT_HEADER = '<head>\n' +
 ' right: 136px;\n' +
 ' color: #FFF;\n' +
 '}\n' +
-'.left {\n' +
+'.progress-percent, .left {\n' +
 ' color: #333;\n' +
 '}\n' +
 '.incomplete-total-effort-warning {\n' +

@@ -6,6 +6,16 @@
   
 */
 
+.palette-icon {
+  width: 16px !important;
+  height: 16px !important;
+  background: static_url('images/palette.png') no-repeat 0 0 !important;
+}
+
+.has-branch {
+  background-position: 0px -160px !important;
+}
+
 .users-settings-pane .sc-view.sc-scroll-view {
   border: 1px solid #444 !important;
   border-radius: 6px !important;
