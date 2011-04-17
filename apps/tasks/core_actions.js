@@ -303,6 +303,7 @@ Tasks.mixin( /** @scope Tasks */ {
     Tasks.projectsController.refreshCountdowns();
     
     // See if any Unallocated Tasks mailed into GAE Server need to be parsed
+    // TODO: [SG] find a more efficient way to identify modified unallocated tasks that were mailed in to GAE server
     var tasks = CoreTasks.getPath('unallocatedTasksProject.tasks');
     var len = tasks.get('length');
     for (var i = 0; i < len; i++) {
