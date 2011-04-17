@@ -547,12 +547,12 @@
  * Task search highlight and description styles
  */
 
-.task-item .highlight {
+.task-item .search-highlight {
   background-color: #FE0 !important;
   padding: 2px 0px !important;
 }
 
-.task-item .highlight.description-icon {
+.task-item .search-highlight.description-icon {
   padding: 1px 0px !important;
 }
 
