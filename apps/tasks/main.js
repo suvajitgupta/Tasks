@@ -17,7 +17,7 @@ Tasks.main = function main() {
   SC.RootResponder.responder.set('defaultResponder', Tasks.statechart);
   Tasks.statechart.initStatechart();
   // Customizable default background: set to one of 'brown' 'black' 'green' 'blue' below
-  $('body').addClass('brown');
+  $('body').addClass('background-brown');
   
   // Setup timer to refresh project countDowns
   SC.Timer.schedule({

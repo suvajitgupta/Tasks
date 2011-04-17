@@ -18,39 +18,39 @@ Tasks.ApplicationManagerState = Ki.State.extend({
     },
         
     setBackgroundBrown: function() {
-      Tasks.mainPageHelper.set('background', 'brown');
+      Tasks.mainPageHelper.set('background', 'background-brown');
       var body = $('body');
-      body.removeClass('black');
-      body.removeClass('green');
-      body.removeClass('blue');
-      body.addClass('brown');
+      body.removeClass('background-black');
+      body.removeClass('background-green');
+      body.removeClass('background-blue');
+      body.addClass('background-brown');
     },
 
     setBackgroundBlack: function() {
-      Tasks.mainPageHelper.set('background', 'black');
+      Tasks.mainPageHelper.set('background', 'background-black');
       var body = $('body');
-      body.removeClass('brown');
-      body.removeClass('green');
-      body.removeClass('blue');
-      body.addClass('black');
+      body.removeClass('background-brown');
+      body.removeClass('background-green');
+      body.removeClass('background-blue');
+      body.addClass('background-black');
     },
 
     setBackgroundGreen: function() {
-      Tasks.mainPageHelper.set('background', 'green');
+      Tasks.mainPageHelper.set('background', 'background-green');
       var body = $('body');
-      body.removeClass('brown');
-      body.removeClass('black');
-      body.removeClass('blue');
-      body.addClass('green');
+      body.removeClass('background-brown');
+      body.removeClass('background-black');
+      body.removeClass('background-blue');
+      body.addClass('background-green');
     },
 
     setBackgroundBlue: function() {
-      Tasks.mainPageHelper.set('background', 'blue');
+      Tasks.mainPageHelper.set('background', 'background-blue');
       var body = $('body');
-      body.removeClass('brown');
-      body.removeClass('black');
-      body.removeClass('green');
-      body.addClass('blue');
+      body.removeClass('background-brown');
+      body.removeClass('background-black');
+      body.removeClass('background-green');
+      body.addClass('background-blue');
     },
 
     toggleShowProjectsList: function() {

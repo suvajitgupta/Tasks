@@ -69,10 +69,10 @@ Tasks.mainPageHelper = SC.Object.create({
     var ret = [];
     ret.push({ title: "_LaunchSettings".loc(), icon: 'settings-icon', action: 'showUsersSettingsPanel', isEnabled: YES });
     ret.push({ title: "_Background".loc(), icon: 'palette-icon', subMenu: [
-      { title: "_Brown".loc(), icon: 'brown', action: 'setBackgroundBrown', isEnabled: YES, checkbox: this.background === 'brown' },
-      { title: "_Black".loc(), icon: 'black', action: 'setBackgroundBlack', isEnabled: YES, checkbox: this.background === 'black' },
-      { title: "_Green".loc(), icon: 'green', action: 'setBackgroundGreen', isEnabled: YES, checkbox: this.background === 'green' },
-      { title: "_Blue".loc(),  icon: 'blue',  action: 'setBackgroundBlue',  isEnabled: YES, checkbox: this.background === 'blue' }
+      { title: "_Brown".loc(), icon: 'background-brown', action: 'setBackgroundBrown', isEnabled: YES, checkbox: this.background === 'background-brown' },
+      { title: "_Black".loc(), icon: 'background-black', action: 'setBackgroundBlack', isEnabled: YES, checkbox: this.background === 'background-black' },
+      { title: "_Green".loc(), icon: 'background-green', action: 'setBackgroundGreen', isEnabled: YES, checkbox: this.background === 'background-green' },
+      { title: "_Blue".loc(),  icon: 'background-blue',  action: 'setBackgroundBlue',  isEnabled: YES, checkbox: this.background === 'background-blue' }
     ], isEnabled: YES });
     if(!SC.platform.touch) {
       var showProjectsList = this.get('showProjectsList');
