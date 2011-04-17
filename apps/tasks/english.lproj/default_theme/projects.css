@@ -73,9 +73,6 @@
   background-position: 0px 3px !important;
 }
 
-/*
-// FIXME: [SG] fix task drag-n-drop to project highlighting
-*/
 .projects-pane .sc-list-view .sc-collection-item.sel.drop-target,
 .projects-pane .sc-list-view .sc-collection-item.drop-target {
   background: #888 !important;
@@ -102,6 +99,7 @@
   height: 30px !important;
 }
 
+.projects-pane .sc-list-view .sc-collection-item.drop-target,
 .projects-pane .sc-list-view .sc-collection-item.project-item.sel,
 .projects-pane .sc-list-view .sc-collection-item.project-item.sel.hover,
 .users-pane .sc-list-view .sc-collection-item.user-item.sel,
