@@ -71,6 +71,7 @@ Tasks.TaskManagerState = Ki.State.extend({
   /**
    * Delete selected tasks, asking for confirmation first.
    */
+   // FIXME: [SG] fix bug: after deleting a task with GAE server it remains in localStorage
   _deleteTask: function() {
     
     if(!Tasks.tasksController.isDeletable()) {
