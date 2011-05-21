@@ -26,7 +26,7 @@ sc_require('views/tasks_bottom_bar');
 
 Tasks.mainPageHelper = SC.Object.create({
 
-  background: 'brown',
+  background: 'background-brown',
   panelOpenBinding: SC.Binding.oneWay('Tasks*panelOpen'),
   displayedTasksCountBinding: SC.Binding.oneWay('Tasks.tasksController*arrangedObjects.length'),
   autoSaveBinding: SC.Binding.oneWay('Tasks*autoSave'),
