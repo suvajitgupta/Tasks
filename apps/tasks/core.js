@@ -20,6 +20,29 @@ Tasks = SC.Object.create(
   NAMESPACE: 'Tasks',
   VERSION: '1.9', // latest addition: wallpapers and gravatars
   
+  userDefaults: SC.UserDefaults.create({
+    userDomain: 'anonymous',
+    appDomain:  document.title
+  }),
+  
+  setUserDefaults: function() {
+    var background = Tasks.userDefaults.get('background');
+    switch(background) {
+      case 'background-black':
+        Tasks.mainPageHelper.setBackgroundBlack();
+        break;
+      case 'background-green':
+        Tasks.mainPageHelper.setBackgroundGreen();
+        break;
+      case 'background-blue':
+        Tasks.mainPageHelper.setBackgroundBlue();
+        break;
+      default:
+        Tasks.mainPageHelper.setBackgroundBrown();
+        break;
+    }
+  },
+
   isLoaded: NO, // for Lebowski
 
   isMobile: _mobileDevice,

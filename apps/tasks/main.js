@@ -1,6 +1,9 @@
 /*globals Tasks CoreTasks sc_require $ */
 
-function main() { Tasks.main(); }
+function main() {
+  Tasks.setUserDefaults();
+  Tasks.main();
+}
 
 // The following are used to indicate which editor is popped up
 Tasks.LOGIN_PANEL = 0;
@@ -16,8 +19,6 @@ Tasks.main = function main() {
   Tasks.registerRoutes();
   SC.RootResponder.responder.set('defaultResponder', Tasks.statechart);
   Tasks.statechart.initStatechart();
-  // Customizable default background: set to one of 'brown' 'black' 'green' 'blue' below
-  $('body').addClass('background-brown');
   
   // Setup timer to refresh project countDowns
   SC.Timer.schedule({

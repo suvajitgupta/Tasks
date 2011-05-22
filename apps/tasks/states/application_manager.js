@@ -4,7 +4,7 @@
  * @author Suvajit Gupta
  * License: Licened under MIT license (see license.js)
  */
-/*globals CoreTasks Tasks Ki $ */
+/*globals CoreTasks Tasks Ki */
 
 Tasks.ApplicationManagerState = Ki.State.extend({
       
@@ -18,39 +18,19 @@ Tasks.ApplicationManagerState = Ki.State.extend({
     },
         
     setBackgroundBrown: function() {
-      Tasks.mainPageHelper.set('background', 'background-brown');
-      var body = $('body');
-      body.removeClass('background-black');
-      body.removeClass('background-green');
-      body.removeClass('background-blue');
-      body.addClass('background-brown');
+      Tasks.mainPageHelper.setBackgroundBrown();
     },
 
     setBackgroundBlack: function() {
-      Tasks.mainPageHelper.set('background', 'background-black');
-      var body = $('body');
-      body.removeClass('background-brown');
-      body.removeClass('background-green');
-      body.removeClass('background-blue');
-      body.addClass('background-black');
+      Tasks.mainPageHelper.setBackgroundBlack();
     },
 
     setBackgroundGreen: function() {
-      Tasks.mainPageHelper.set('background', 'background-green');
-      var body = $('body');
-      body.removeClass('background-brown');
-      body.removeClass('background-black');
-      body.removeClass('background-blue');
-      body.addClass('background-green');
+      Tasks.mainPageHelper.setBackgroundGreen();
     },
 
     setBackgroundBlue: function() {
-      Tasks.mainPageHelper.set('background', 'background-blue');
-      var body = $('body');
-      body.removeClass('background-brown');
-      body.removeClass('background-black');
-      body.removeClass('background-green');
-      body.addClass('background-blue');
+      Tasks.mainPageHelper.setBackgroundBlue();
     },
 
     toggleShowProjectsList: function() {

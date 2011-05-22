@@ -1,7 +1,7 @@
 // ==========================================================================
 // Project: Tasks
 // ==========================================================================
-/*globals CoreTasks Tasks sc_require SCUI sc_static*/
+/*globals CoreTasks Tasks sc_require SCUI sc_static $ */
 
 sc_require('mixins/localized_label');
 sc_require('views/logo');
@@ -26,7 +26,47 @@ sc_require('views/tasks_bottom_bar');
 
 Tasks.mainPageHelper = SC.Object.create({
 
-  background: 'background-brown',
+  background: null,
+  setBackgroundBrown: function() {
+    Tasks.setPath('userDefaults.background', 'background-brown');
+    Tasks.mainPageHelper.set('background', 'background-brown');
+    var body = $('body');
+    body.removeClass('background-black');
+    body.removeClass('background-green');
+    body.removeClass('background-blue');
+    body.addClass('background-brown');
+  },
+
+  setBackgroundBlack: function() {
+    Tasks.setPath('userDefaults.background', 'background-black');
+    Tasks.mainPageHelper.set('background', 'background-black');
+    var body = $('body');
+    body.removeClass('background-brown');
+    body.removeClass('background-green');
+    body.removeClass('background-blue');
+    body.addClass('background-black');
+  },
+
+  setBackgroundGreen: function() {
+    Tasks.setPath('userDefaults.background', 'background-green');
+    Tasks.mainPageHelper.set('background', 'background-green');
+    var body = $('body');
+    body.removeClass('background-brown');
+    body.removeClass('background-black');
+    body.removeClass('background-blue');
+    body.addClass('background-green');
+  },
+
+  setBackgroundBlue: function() {
+    Tasks.setPath('userDefaults.background', 'background-blue');
+    Tasks.mainPageHelper.set('background', 'background-blue');
+    var body = $('body');
+    body.removeClass('background-brown');
+    body.removeClass('background-black');
+    body.removeClass('background-green');
+    body.addClass('background-blue');
+  },
+    
   panelOpenBinding: SC.Binding.oneWay('Tasks*panelOpen'),
   displayedTasksCountBinding: SC.Binding.oneWay('Tasks.tasksController*arrangedObjects.length'),
   autoSaveBinding: SC.Binding.oneWay('Tasks*autoSave'),
