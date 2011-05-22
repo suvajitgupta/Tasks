@@ -36,7 +36,7 @@ Tasks.UserInformationView = SC.View.extend(
     }));
     childViews.push(this.fullNameLabel);
     this.fullNameField = this.createChildView(SC.TextFieldView.design({
-      layout: { top: 10, left: 90, height: 20, width: 300 },
+      layout: { top: 10, left: 90, height: 20, right: 60 },
       hint: "_FirstnameLastname".loc(),
       valueBinding: SC.binding('*content.name', this).toLocale()
     }));
@@ -49,7 +49,7 @@ Tasks.UserInformationView = SC.View.extend(
     }));
     childViews.push(this.loginNameLabel);
     this.loginNameField = this.createChildView(SC.TextFieldView.design({
-      layout: { top: 42, left: 90, height: 20, width: 300 },
+      layout: { top: 42, left: 90, height: 20, right: 60 },
       hint: "_Initials".loc(),
       valueBinding: SC.binding('*content.loginNameValue', this).toLocale(),
       keyUp: function(evt) {
@@ -61,7 +61,7 @@ Tasks.UserInformationView = SC.View.extend(
     }));
     childViews.push(this.loginNameField);
     this.loginNameErrorMessageLabel = this.createChildView(SC.LabelView.design({
-      layout: { top: 42, left: 395, height: 20, width: 45 },
+      layout: { top: 42, right: 10, height: 20, width: 45 },
       classNames: ['error-message'],
       valueBinding: SC.Binding.oneWay('Tasks.userController.loginNameErrorMessage')
     }));
@@ -75,7 +75,7 @@ Tasks.UserInformationView = SC.View.extend(
     }));
     childViews.push(this.passwordLabel);
     this.passwordField = this.createChildView(SC.TextFieldView.design({
-      layout: { top: 74, left: 90, height: 20, width: 300 },
+      layout: { top: 74, left: 90, height: 20, right: 60 },
       isPassword: YES,
       hint: "_PasswordHint".loc(),
       isPassword: YES,
@@ -91,7 +91,7 @@ Tasks.UserInformationView = SC.View.extend(
     }));
     childViews.push(this.emailLabel);
     this.emailField = this.createChildView(SC.TextFieldView.design(SC.Validatable,{
-      layout: { top: 106, left: 90, height: 20, width: 300 },
+      layout: { top: 106, left: 90, height: 20, right: 60 },
       errorLabel: "_InvalidEmailAddress".loc(),
       hint: "_EmailAddress".loc(),
       valueBinding: SC.binding('*content.email', this).toLocale(),
@@ -104,7 +104,7 @@ Tasks.UserInformationView = SC.View.extend(
     }));
     childViews.push(this.emailField);
     this.emailErrorMessageLabel = this.createChildView(SC.LabelView.design({
-      layout: { top: 106, left: 395, height: 20, width: 45 },
+      layout: { top: 106, right: 10, height: 20, width: 45 },
       classNames: ['error-message'],
       valueBinding: SC.Binding.oneWay('Tasks.userController.emailErrorMessage')
     }));
@@ -134,17 +134,17 @@ Tasks.UserInformationView = SC.View.extend(
     childViews.push(this.gravatarImage);
 
     this.roleLabel = this.createChildView(SC.LabelView.design({
-      layout: { top: 162, left: 108, width: 85, height: 18 },
+      layout: { top: 162, right: 165, width: 85, height: 18 },
       textAlign: SC.ALIGN_RIGHT,
-      // isVisibleBinding: 'CoreTasks.permissions.canUpdateUserRole',
+      isVisibleBinding: 'CoreTasks.permissions.canUpdateUserRole',
       value: "_Role:".loc()
     }));
     childViews.push(this.roleLabel);
     this.roleField = this.createChildView(SC.SelectButtonView.design({
-      layout: { top: 159, left: 198, height: 24, width: 130 },
+      layout: { top: 159, right: 60, height: 24, width: 130 },
       classNames: ['square'],
       localize: YES,
-      isEnabledBinding: 'Tasks.userController.canUpdateUserRole',
+      isVisibleBinding: 'Tasks.userController.canUpdateUserRole',
       objects: this.roles(),
       nameKey: 'name',
       valueKey: 'value',
