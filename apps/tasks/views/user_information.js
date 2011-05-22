@@ -136,7 +136,7 @@ Tasks.UserInformationView = SC.View.extend(
     this.roleLabel = this.createChildView(SC.LabelView.design({
       layout: { top: 162, right: 165, width: 85, height: 18 },
       textAlign: SC.ALIGN_RIGHT,
-      isVisibleBinding: 'CoreTasks.permissions.canUpdateUserRole',
+      isVisibleBinding: 'Tasks.userController.canUpdateUserRole',
       value: "_Role:".loc()
     }));
     childViews.push(this.roleLabel);
