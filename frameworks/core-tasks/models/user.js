@@ -97,7 +97,7 @@ CoreTasks.User = CoreTasks.Record.extend({
    */
   icon: function() {
     var email = this.get('email');
-    return 'http://www.gravatar.com/avatar/' + (SC.none(email)? '' : hex_md5(email.toLowerCase()));
+    return 'http://www.gravatar.com/avatar/' + (SC.none(email) || !CoreTasks.User.isValidEmail(email)? '' : hex_md5(email.toLowerCase()));
   }.property('email').cacheable(),
 
   /**
