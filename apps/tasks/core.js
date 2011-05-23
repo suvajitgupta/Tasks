@@ -26,6 +26,7 @@ Tasks = SC.Object.create(
   }),
   
   setUserDefaults: function() {
+    Tasks.userDefaults.set('userDomain', CoreTasks.getPath('currentUser.loginName'));
     var background = Tasks.userDefaults.get('background');
     switch(background) {
       case 'background-black':

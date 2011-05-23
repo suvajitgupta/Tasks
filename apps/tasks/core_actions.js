@@ -136,6 +136,7 @@ Tasks.mixin( /** @scope Tasks */ {
 
     // Greet user and save login session information
     CoreTasks.set('currentUser', currentUser);
+    Tasks.setUserDefaults();
     CoreTasks.setPermissions();
     var welcomeMessageView = Tasks.getPath('mainPage.welcomeMessageView');
     if(welcomeMessageView) {

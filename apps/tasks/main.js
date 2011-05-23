@@ -1,7 +1,6 @@
 /*globals Tasks CoreTasks sc_require $ */
 
 function main() {
-  Tasks.setUserDefaults();
   Tasks.main();
 }
 
