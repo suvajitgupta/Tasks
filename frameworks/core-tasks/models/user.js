@@ -35,8 +35,7 @@ CoreTasks.USER_OVER_LOADED = 4;
  */
 CoreTasks.User = CoreTasks.Record.extend({
 
-  recordType: SC.Record.attr(String), // CHANGED: [SG] since record type isn't polymorphic on IE
-  init: function() { this.writeAttribute('recordType', 'User', true); sc_super(); },
+  recordType: 'User',
 
   /**
    * The full name of the user.
@@ -71,12 +70,12 @@ CoreTasks.User = CoreTasks.Record.extend({
     defaultValue: CoreTasks.USER_ROLE_DEVELOPER,
     allowed: CoreTasks.userRolesAllowed
   }),
-  
+
   /**
     The email address of the user.
   */
   email: SC.Record.attr(String),
-  
+
   /**
     The password for the user. {SHA1-ified}
   */
@@ -86,12 +85,12 @@ CoreTasks.User = CoreTasks.Record.extend({
    * key:value pairs storing the user's preferences.
    */
   preferences: SC.Record.attr(Object),
- 
+
   /**
    * A string token to store the authentication token after successful login.
    */
   authToken: SC.Record.attr(String),
-  
+
   /**
    * The gravatar icon associated with a user.
    */
@@ -124,7 +123,7 @@ CoreTasks.User = CoreTasks.Record.extend({
     var loginName = this.get('loginName').loc();
     return '%@ (%@)'.fmt(name, loginName);
   }.property('name', 'loginName').cacheable(),
-  
+
   /**
    * Export a user's attributes.
    *
@@ -145,7 +144,7 @@ CoreTasks.User = CoreTasks.Record.extend({
     }
     return ret + '\n';
   },
-  
+
   /**
    * Custom destroy to clear out task submitter/assignee and delete any watches for this user.
    */
@@ -155,7 +154,7 @@ CoreTasks.User = CoreTasks.Record.extend({
 
     var id = this.get('id');
     var store = this.get('store');
-    
+
     var submittedTasksQuery = SC.Query.local(CoreTasks.Task, "submitterId=%@".fmt(id));
     submittedTasksQuery.set('initialServerFetch', NO);
     var submittedTasks = store.find(submittedTasksQuery);
@@ -166,7 +165,7 @@ CoreTasks.User = CoreTasks.Record.extend({
       submittedTasks.destroy();
       submittedTasksQuery = null;
     }
-    
+
     var assignedTasksQuery = SC.Query.local(CoreTasks.Task, "assigneeId=%@".fmt(id));
     assignedTasksQuery.set('initialServerFetch', NO);
     var assignedTasks = store.find(assignedTasksQuery);
@@ -180,13 +179,13 @@ CoreTasks.User = CoreTasks.Record.extend({
 
     this._destroyWatches();
     this._destroyComments();
-    
+
   },
-    
+
   _destroyWatches: function() {
     var id = this.get('id');
     var store = this.get('store');
-    
+
     var watchesQuery = SC.Query.local(CoreTasks.Watch, "userId=%@".fmt(id));
     watchesQuery.set('initialServerFetch', NO);
     var watches = store.find(watchesQuery);
@@ -199,11 +198,11 @@ CoreTasks.User = CoreTasks.Record.extend({
       watchesQuery = null;
     }
   },
-  
+
   _destroyComments: function() {
     var id = this.get('id');
     var store = this.get('store');
-    
+
     var commentsQuery = SC.Query.local(CoreTasks.Comment, "userId=%@".fmt(id));
     commentsQuery.set('initialServerFetch', NO);
     var comments = store.find(commentsQuery);
@@ -216,7 +215,7 @@ CoreTasks.User = CoreTasks.Record.extend({
       commentsQuery = null;
     }
   },
-  
+
   /**
    * A read-only computed property that returns the list of tasks assigned to this user
    * before it was first persisted.
@@ -225,7 +224,7 @@ CoreTasks.User = CoreTasks.Record.extend({
    */
   disassociatedAssignedTasks: function() {
     if(SC.none(this.get('_id'))) return null;
-    
+
     // Create the query if necessary.
     if (!this._disassociatedAssignedTasksQuery) {
       this._disassociatedAssignedTasksQuery = SC.Query.local(CoreTasks.Task, "assigneeId=%@".fmt(this.get('_id')));
@@ -244,7 +243,7 @@ CoreTasks.User = CoreTasks.Record.extend({
    */
   disassociatedSubmittedTasks: function() {
     if(SC.none(this.get('_id'))) return null;
-    
+
     // Create the query if necessary.
     if (!this._disassociatedSubmittedTasksQuery) {
       this._disassociatedSubmittedTasksQuery = SC.Query.local(CoreTasks.Task, "submitterId=%@".fmt(this.get('_id')));
@@ -260,7 +259,7 @@ CoreTasks.User = CoreTasks.Record.extend({
 CoreTasks.User.mixin(/** @scope CoreTasks.User */ {
 
   resourcePath: 'user',
-  
+
   isValidEmail: function(email) {
     return email.match(/.+@.+\...+/);
   },
@@ -279,7 +278,7 @@ CoreTasks.User.mixin(/** @scope CoreTasks.User */ {
     // Send the request off to the server.
     CoreTasks.executeTransientGet(CoreTasks.User.resourcePath, undefined, params);
   },
-  
+
   /**
    * Parse a line of text and extract parameters from it.
    *
@@ -287,7 +286,7 @@ CoreTasks.User.mixin(/** @scope CoreTasks.User */ {
    * @returns {Object} Hash of parsed parameters.
    */
   parse: function(line) {
-    
+
     // extract user login name
     var userLoginName = null;
     var userLoginNameMatches = /\[(.*)\]/.exec(line);
@@ -343,7 +342,7 @@ CoreTasks.User.mixin(/** @scope CoreTasks.User */ {
     };
     // console.log('DEBUG: User hash = ' + JSON.stringify(ret));
     return ret;
-    
+
   }
 
 });

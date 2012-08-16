@@ -12,8 +12,7 @@ CoreTasks.TASK_WATCH_OFF = 0;
  */
 CoreTasks.Watch = CoreTasks.Record.extend({
 
-  recordType: SC.Record.attr(String), // CHANGED: [SG] since record type isn't polymorphic on IE
-  init: function() { this.writeAttribute('recordType', 'Watch', true); sc_super(); },
+  recordType: 'Watch',
 
   /**
    * Refers to task being watched.
@@ -28,7 +27,7 @@ CoreTasks.Watch = CoreTasks.Record.extend({
 });
 
 CoreTasks.Watch.mixin(/** @scope CoreTasks.Watch */ {
-  
+
   resourcePath: 'watch'
-  
+
 });

@@ -26,8 +26,7 @@ CoreTasks.projectStatusesAllowed = [
  */
 CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototype */ {
 
-  recordType: SC.Record.attr(String), // CHANGED: [SG] since record type isn't polymorphic on IE
-  init: function() { this.writeAttribute('recordType', 'Project', true); sc_super(); },
+  recordType: 'Project',
 
   /**
    * The name of the project (ex. "FR1").
@@ -38,38 +37,38 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
    * A string summarizing key facets of the Project for display.
    */
   displayName: function(key, value) {
-    
+
     if (value !== undefined) {
-      
+
       var currentName = this.get('name');
       if (currentName === CoreTasks.ALL_TASKS_NAME.loc() || currentName === CoreTasks.UNALLOCATED_TASKS_NAME.loc()) return;
-      
+
       var projectHash = CoreTasks.Project.parse(value, false);
-      
+
       this.propertyWillChange('name');
       this.writeAttribute('name', projectHash.name);
       this.propertyDidChange('name');
-      
+
       if(projectHash.timeLeft) {
         this.propertyWillChange('timeLeft');
         this.writeAttribute('timeLeft', projectHash.timeLeft);
         this.propertyDidChange('timeLeft');
       }
-      
+
       if(projectHash.developmentStatus) {
         this.propertyWillChange('developmentStatus');
         this.writeAttribute('developmentStatus', projectHash.developmentStatus);
         this.propertyDidChange('developmentStatus');
       }
-      
+
       if(projectHash.activatedAt) {
         this.set('activatedAt', SC.DateTime.parse(projectHash.activatedAt, CoreTasks.DATE_FORMAT));
       }
-      
+
     } else {
       return this.get('name');
     }
-    
+
   }.property('name').cacheable(),
 
   /**
@@ -141,7 +140,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
     *  This computed property buffers changes to the activatedAt field.
     */
    activatedAtValue: function(key, value) {
-     
+
      if (value !== undefined) {
        this.set('activatedAt', value);
      } else {
@@ -150,28 +149,28 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
      }
 
      return value;
-     
+
    }.property('activatedAt').cacheable(),
 
    /**
     * The number of days left in the project counting down from current time.
     */
    countDown: function() {
-     
+
      var timeLeft = this.get('timeLeft');
      if (SC.none(timeLeft)) return null;
      timeLeft = CoreTasks.convertTimeToDays(timeLeft);
      var activatedAt = this.get('activatedAtValue');
      // console.log('DEBUG: name: "' + this.get('name')  + '", timeLeft: ' + timeLeft + 'd, activatedAt: ' + (activatedAt? activatedAt.toFormattedString(CoreTasks.DATE_FORMAT) : 'null'));
      if (SC.none(activatedAt)) return timeLeft;
-     
+
      var today = SC.DateTime.create();
      var daysElapsed = CoreTasks.computeWeekdaysDelta(activatedAt, today);
      var countDown = timeLeft - daysElapsed;
      // console.log('DEBUG: daysElapsed: ' + daysElapsed + ', countDown: ' + countDown);
      if (countDown < 0) countDown = 0;
      return countDown;
-     
+
    }.property('timeLeft', 'activatedAt').cacheable(),
 
    /**
@@ -190,14 +189,14 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
    * @returns {SC.RecordArray} An array of tasks.
    */
   tasks: function() {
-    
+
     var id = this.get('id');
     if(SC.none(this._oldId) || (this._oldId !== id)) {
       this._oldId = id;
-    
+
       // console.log('DEBUG: computing tasks() for project: ' + this.get('displayName'));
       var query, recArray ;
-    
+
       if (this === CoreTasks.get('allTasksProject')) {
         query = SC.Query.local(CoreTasks.Task);
       }
@@ -210,20 +209,20 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
       else {
         query = SC.Query.local(CoreTasks.Task, "projectId=%@".fmt(this.get('id')));
       }
-    
+
       // Execute the query and return the results.
       query.set('initialServerFetch', NO);
       this._recArray = this.get('store').find(query) ;
-    
+
       // observe the length property of the recAry for changes
       this._recArray.addObserver('length', this, this._tasksLengthDidChange);
-      
+
     }
-    
+
     return this._recArray;
-    
+
   }.property('id').cacheable(),
-  
+
   _tasksLengthDidChange: function() {
     // console.log('DEBUG: tasks length changed for project: ' + this.get('name'));
     var len = this.getPath('tasks.length');
@@ -233,7 +232,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
       this.propertyDidChange('*') ; // refresh ourself
     }
   },
-  
+
   /**
    * A read-only computed property that returns the list of tasks allocated to this project
    * before it was first persisted.
@@ -271,25 +270,25 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
    * @returns {String) A string with the project's data exported in it.
    */
   exportData: function(format) {
-    
+
     var projectName = this.get('name');
     var developmentStatus = this.get('developmentStatus');
     var tasksCount = this.get('tasks').get('length');
-    
+
     var ret = '';
     if(format === 'Text') ret += '#================================================================================\n';
     else ret += '<h1>';
-    
+
     if(projectName === CoreTasks.UNALLOCATED_TASKS_NAME.loc() || projectName === CoreTasks.UNASSIGNED_TASKS_NAME.loc()) {
       if(format === 'Text') ret += '# ';
       ret += projectName.loc();
     }
     else {
-      
+
       if(format === 'HTML') ret += '&nbsp;<span class="' + developmentStatus.loc().toLowerCase() + '">';
       ret += projectName;
       if(format === 'HTML') ret += '</span>';
-      
+
       if(format === 'Text') {
         var timeLeft = this.get('timeLeft');
         if(timeLeft) ret += (' {' + CoreTasks.displayTime(timeLeft) + '}');
@@ -300,18 +299,18 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
         var countDown = this.get('displayCountDown');
         if(countDown) ret += ('&nbsp;<span class="count-down">' + countDown + '</span>');
       }
-      
+
     }
-    
+
     if(format === 'Text') {
       if(developmentStatus !== CoreTasks.STATUS_PLANNED) ret += ' @' + developmentStatus.loc();
     }
-    
+
     if(format === 'HTML') ret += '&nbsp;<span class="tasks-count">';
     else ret += ' # ';
     ret += "_Has".loc() + tasksCount + "_tasks".loc();
     if(format === 'HTML') ret += '</span></h1>';
-    
+
     var val = this.get('description');
     if(val) {
       if(format === 'HTML') ret += '\n<pre>';
@@ -323,14 +322,14 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
       }
       if(format === 'HTML') ret += '\n</pre>';
     }
-    
+
     ret += '\n';
     if(format === 'Text') ret += '#================================================================================\n';
     ret += '\n';
     return ret;
-    
+
   },
-  
+
   /**
    * Destroys the project and orphans any tasks that are in it.
    */
@@ -350,7 +349,7 @@ CoreTasks.Project = CoreTasks.Record.extend(/** @scope CoreTasks.Project.prototy
 });
 
 CoreTasks.Project.mixin(/** @scope CoreTasks.Project */ {
-  
+
   resourcePath: 'project',
 
   /**
@@ -360,9 +359,9 @@ CoreTasks.Project.mixin(/** @scope CoreTasks.Project */ {
    * @returns {String} project timeLeft.
    */
   parseTimeLeft: function(line) {
-    
+
     var projectTimeLeft = null;
-    
+
     var matches = line.match(/\{/g);
     if(matches !== null) {
       if(matches.length === 1) {
@@ -379,9 +378,9 @@ CoreTasks.Project.mixin(/** @scope CoreTasks.Project */ {
         console.warn('Project Parsing Error - multiple timeLefts illegal');
       }
     }
-    
+
     return projectTimeLeft;
-    
+
   },
 
   /**
@@ -391,9 +390,9 @@ CoreTasks.Project.mixin(/** @scope CoreTasks.Project */ {
    * @returns {String} project activatedAt.
    */
   parseActivatedAt: function(line) {
-    
+
     var projectActivatedAt = null;
-    
+
     var matches = line.match(/</g);
     if(matches !== null) {
       if(matches.length === 1) {
@@ -409,9 +408,9 @@ CoreTasks.Project.mixin(/** @scope CoreTasks.Project */ {
         console.warn('Project Parsing Error - multiple activatedAts illegal');
       }
     }
-    
+
     return projectActivatedAt;
-    
+
   },
 
   /**
@@ -422,7 +421,7 @@ CoreTasks.Project.mixin(/** @scope CoreTasks.Project */ {
    * @returns {Object} Hash of parsed parameters.
    */
   parse: function(line, fillDefaults) {
-    
+
     // extract project name
     var projectName = line;
     var projectNameMatches = line.match(/^([^\{<\@#]+)/);
@@ -433,7 +432,7 @@ CoreTasks.Project.mixin(/** @scope CoreTasks.Project */ {
     // extract project timeLeft & activatedAt if provided
     var projectTimeLeft = CoreTasks.Project.parseTimeLeft(line);
     var projectActivatedAt = CoreTasks.Project.parseActivatedAt(line);
-    
+
     // extract project development status
     var projectStatus = fillDefaults? CoreTasks.STATUS_PLANNED : null;
     var projectStatusMatches = line.match(/@(\w+)/g);
@@ -461,9 +460,9 @@ CoreTasks.Project.mixin(/** @scope CoreTasks.Project */ {
     };
     // console.log('DEBUG: Project hash = ' + JSON.stringify(ret));
     return ret;
-    
+
   }
-  
+
 });
 
 CoreTasks.Project.NEW_PROJECT_HASH = {

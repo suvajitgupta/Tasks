@@ -11,8 +11,7 @@ CoreTasks.NEW_COMMENT_DESCRIPTION = '_NewComment';
  */
 CoreTasks.Comment = CoreTasks.Record.extend({
 
-  recordType: SC.Record.attr(String), // CHANGED: [SG] since record type isn't polymorphic on IE
-  init: function() { this.writeAttribute('recordType', 'Comment', true); sc_super(); },
+  recordType: 'Comment',
 
   /**
    * Refers to task commented upon.
@@ -27,8 +26,8 @@ CoreTasks.Comment = CoreTasks.Record.extend({
 });
 
 CoreTasks.Comment.mixin(/** @scope CoreTasks.Comment */ {
-  
+
   callbacks: SC.Object.create(),
   resourcePath: 'comment'
-  
+
 });

@@ -18,8 +18,9 @@ CoreTasks.CachingRemoteDataSource = SC.DataSource.extend({
    * @returns {Boolean} YES
    */
   createRecord: function(store, storeKey) {
+    var record =   store.materializeRecord(storeKey);
     var dataHash = store.readDataHash(storeKey);
-    var recordType = CoreTasks[dataHash.recordType];
+    var recordType = CoreTasks[record.recordType];
     var queryParams = {};
 
     if (CoreTasks.get('currentUser')) {
@@ -93,8 +94,9 @@ CoreTasks.CachingRemoteDataSource = SC.DataSource.extend({
    * @returns {Boolean} YES
    */
   updateRecord: function(store, storeKey) {
+    var record =   store.materializeRecord(storeKey);
     var dataHash = store.readDataHash(storeKey);
-    var recordType = CoreTasks[dataHash.recordType];
+    var recordType = CoreTasks[record.recordType];
     var id = store.idFor(storeKey);
 
     var queryParams = {
@@ -175,8 +177,9 @@ CoreTasks.CachingRemoteDataSource = SC.DataSource.extend({
    * @returns {Boolean} YES
    */
   destroyRecord: function(store, storeKey) {
+    var record = store.materializeRecord(storeKey);
     var dataHash = store.readDataHash(storeKey);
-    var recordType = CoreTasks[dataHash.recordType];
+    var recordType = CoreTasks[record.recordType];
     var id = store.idFor(storeKey);
 
     var queryParams = {
@@ -254,7 +257,7 @@ CoreTasks.CachingRemoteDataSource = SC.DataSource.extend({
         store.writeStatus(params.storeKey, SC.Record.READY_CLEAN);
         store.refreshRecord(recordType, params.id, params.storeKey);
         store.dataHashDidChange(params.storeKey);
-      } else { 
+      } else {
         // Request failed; invoke the error callback.
         var error = this._buildError(response);
         SC.Logger.error('Error deleting record [%@:%@]: %@'.fmt(recordType, params.id, error));
@@ -331,7 +334,7 @@ CoreTasks.CachingRemoteDataSource = SC.DataSource.extend({
    * Gets the hashes for a given record type from the local storage cache.
    */
   _getHashesFromCache: function(recordTypeStr) {
-    // Short-circuit if we've already retrieved the records for the given record type. 
+    // Short-circuit if we've already retrieved the records for the given record type.
     if (!this._retrievedFromCache) {
       this._retrievedFromCache = [recordTypeStr];
     } else if (this._retrievedFromCache.indexOf(recordTypeStr) < 0) {

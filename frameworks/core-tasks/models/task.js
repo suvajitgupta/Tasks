@@ -76,9 +76,8 @@ CoreTasks.taskValidationWeights[CoreTasks.TASK_VALIDATION_PASSED] = 1;
  * @author Sean Eidemiller
  */
 CoreTasks.Task = CoreTasks.Record.extend({
-  
-  recordType: SC.Record.attr(String), // CHANGED: [SG] since record type isn't polymorphic on IE
-  init: function() { this.writeAttribute('recordType', 'Task', true); sc_super(); },
+
+  recordType: 'Task',
 
   /**
    * A one-line summary of the task.
@@ -89,27 +88,27 @@ CoreTasks.Task = CoreTasks.Record.extend({
    * A string summarizing key facets of the Task for display.
    */
   displayName: function(key, value) {
-    
+
     if (value !== undefined) {
-      
+
       var taskHash = CoreTasks.Task.parse(value, false);
-      
+
       if(taskHash.priority) {
         this.propertyWillChange('priority');
         this.writeAttribute('priority', taskHash.priority);
         this.propertyDidChange('priority');
       }
-      
+
       this.propertyWillChange('name');
       this.writeAttribute('name', taskHash.name);
       this.propertyDidChange('name');
-      
+
       if(taskHash.effort) {
         this.propertyWillChange('effort');
         this.writeAttribute('effort', taskHash.effort);
         this.propertyDidChange('effort');
       }
-      
+
       if(taskHash.submitterId) {
         var submitterNone = (taskHash.submitterId.toLowerCase() === CoreTasks.USER_NONE);
         var submitterUser = submitterNone? null : CoreTasks.getUserByLoginName(taskHash.submitterId);
@@ -122,7 +121,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
           this.propertyDidChange('submitterId');
         }
       }
-      
+
       if(taskHash.assigneeId) {
         var assigneeNone = (taskHash.assigneeId.toLowerCase() === CoreTasks.USER_NONE);
         var assigneeUser = assigneeNone? null : CoreTasks.getUserByLoginName(taskHash.assigneeId);
@@ -135,13 +134,13 @@ CoreTasks.Task = CoreTasks.Record.extend({
           this.propertyDidChange('assigneeId');
         }
       }
-      
+
       if(taskHash.type) {
         this.propertyWillChange('type');
         this.writeAttribute('type', taskHash.type);
         this.propertyDidChange('type');
       }
-      
+
       if(taskHash.developmentStatus) {
         this.propertyWillChange('developmentStatus');
         if(this.get('developmentStatus') !== taskHash.developmentStatus &&
@@ -149,7 +148,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
         this.writeAttribute('developmentStatus', taskHash.developmentStatus);
         this.propertyDidChange('developmentStatus');
       }
-      
+
       if(taskHash.validation) {
         if(this.get('developmentStatus') !== CoreTasks.STATUS_DONE && taskHash.validation !== CoreTasks.TASK_VALIDATION_UNTESTED) {
           console.warn('Task Editing Error - validation of Passed/Failed only possible for status Done: ' + taskHash.name);
@@ -164,7 +163,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
     } else {
       return this.get('name');
     }
-    
+
   }.property('name').cacheable(),
 
   /**
@@ -176,7 +175,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
    *  This computed property buffers changes to the projectId field.
    */
   projectValue: function(key, value) {
-    
+
     if (value !== undefined) {
       var id = (value === 0)? null : value;
       this.propertyWillChange('projectId');
@@ -186,7 +185,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
       value = this.get('projectId');
       if (value === null) value = 0;
     }
-    
+
     return value;
 
   }.property('projectId').cacheable(),
@@ -204,14 +203,14 @@ CoreTasks.Task = CoreTasks.Record.extend({
    * The effort of the task (can start with an estimate and end with the actual).
    */
   effort: SC.Record.attr(String),
-  
+
   /**
    * Append unit of time after effort.
    */
   displayEffort: function() {
     return CoreTasks.displayTime(this.get('effort'));
   }.property('effort').cacheable(),
-  
+
   /**
    *  This computed property buffers changes to the effort field.
    */
@@ -263,7 +262,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
    *  This computed property buffers changes to the submitterId field.
    */
   submitterValue: function(key, value) {
-    
+
     if (value !== undefined) {
       var id = (value === 0)? null : value;
       this.propertyWillChange('submitterId');
@@ -273,7 +272,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
       value = this.get('submitterId');
       if (value === null) value = 0;
     }
-    
+
     return value;
 
   }.property('submitterId').cacheable(),
@@ -282,7 +281,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
   * The user who is assigned to complete the task.
    */
   assigneeId: SC.Record.attr(Number),
-  
+
   assignee: function(key, value){
     if (value !== undefined) {
       if (value && value.get) this.writeAttribute('assigneeId', value.get('id'));
@@ -303,7 +302,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
    *  This computed property buffers changes to the assigneeId field.
    */
   assigneeValue: function(key, value) {
-    
+
     if (value !== undefined) {
       var id = (value === 0)? null : value;
       this.propertyWillChange('assigneeId');
@@ -313,7 +312,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
       value = this.get('assigneeId');
       if (value === null) value = 0;
     }
-    
+
     return value;
 
   }.property('assigneeId').cacheable(),
@@ -372,7 +371,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
         return 'task-icon-other';
     }
   }.property('type').cacheable(),
-  
+
   /**
   * Export a task's attributes.
   *
@@ -380,12 +379,12 @@ CoreTasks.Task = CoreTasks.Record.extend({
   * @returns {String) return a string with the tasks' data exported in it.
   */
   exportData: function(format) {
-    
+
     var priority = this.get('priority');
     var developmentStatus = this.get('developmentStatus');
     var validation = this.get('validation');
     var type = this.get('type');
-    
+
     var ret = '';
     if(format === 'HTML') {
       ret += '<p><span class="id ' + validation.loc().toLowerCase() + '">' + this.get('displayId') + '</span><span class="margin">&nbsp;</span>';
@@ -401,11 +400,11 @@ CoreTasks.Task = CoreTasks.Record.extend({
       }
       ret += val + ' ';
     }
-    
+
     if(format === 'HTML') ret += '<span class="name">';
     ret += this.get('name');
     if(format === 'HTML') ret += '</span></span>';
-    
+
     var effort = this.get('effort');
     if(effort) {
       var doneEffortRange = false;
@@ -416,23 +415,23 @@ CoreTasks.Task = CoreTasks.Record.extend({
       if(format === 'HTML') ret += '</span>';
       else ret += '}';
     }
-    
+
     if(format === 'HTML')  ret += '</p>';
     else {
       var submitter = this.get('submitter');
       if (submitter) ret += ' <' + submitter.get('loginName') + '>';
-    
+
       var assignee = this.get('assignee');
       if (assignee) ret += ' [' + assignee.get('loginName') + ']';
-    
+
       if(type !== CoreTasks.TASK_TYPE_OTHER) ret += ' $' + type.loc();
-    
+
       if(developmentStatus !== CoreTasks.STATUS_PLANNED) ret += ' @' + developmentStatus.loc();
       if(validation !== CoreTasks.TASK_VALIDATION_UNTESTED) ret += ' %' + validation.loc();
-      
+
       if(this.get('id') > 0) ret += ' ' + this.get('displayId');
     }
-    
+
     val = this.get('description');
     if(val) {
       if(format === 'HTML') ret += '\n<pre>';
@@ -444,12 +443,12 @@ CoreTasks.Task = CoreTasks.Record.extend({
       }
       if(format === 'HTML') ret += '\n</pre>';
     }
-    
+
     ret += '\n\n';
     return ret;
-    
+
   },
-  
+
   /**
    * Custom destroy to delete any watches for this task.
    */
@@ -459,7 +458,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
     this._destroyWatches();
     this._destroyComments();
   },
-  
+
   _destroyWatches: function() {
     var watches = CoreTasks.getTaskWatches(this);
     for(var i = 0; i < watches.length; i++) {
@@ -467,7 +466,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
       watches[i].destroy();
     }
   },
-  
+
   _destroyComments: function() {
     var comments = CoreTasks.getTaskComments(this);
     for(var i = 0; i < comments.length; i++) {
@@ -475,7 +474,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
       comments[i].destroy();
     }
   },
-  
+
   /**
    * A read-only computed property that returns the list of watches for this task
    * before it was first persisted.
@@ -484,7 +483,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
    */
   disassociatedWatches: function() {
     if(SC.none(this.get('_id'))) return null;
-    
+
     // Create the query if necessary.
     if (!this._disassociatedWatchesQuery) {
       this._disassociatedWatchesQuery = SC.Query.local(CoreTasks.Watch, "taskId=%@".fmt(this.get('_id')));
@@ -494,7 +493,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
     // Execute the query and return the results.
     return this.get('store').find(this._disassociatedWatchesQuery);
   }.property('_id').cacheable(),
-  
+
   /**
    * A read-only computed property that returns the list of comments for this task
    * before it was first persisted.
@@ -503,7 +502,7 @@ CoreTasks.Task = CoreTasks.Record.extend({
    */
   disassociatedComments: function() {
     if(SC.none(this.get('_id'))) return null;
-    
+
     // Create the query if necessary.
     if (!this._disassociatedCommentsQuery) {
       this._disassociatedCommentsQuery = SC.Query.local(CoreTasks.Comment, "taskId=%@".fmt(this.get('_id')));
@@ -513,13 +512,13 @@ CoreTasks.Task = CoreTasks.Record.extend({
     // Execute the query and return the results.
     return this.get('store').find(this._disassociatedCommentsQuery);
   }.property('_id').cacheable()
-    
+
 });
 
 CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
-  
+
   resourcePath: 'task',
-  
+
   /**
    * Parse a string and extract effort from it.
    *
@@ -527,9 +526,9 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
    * @returns {String} Task effort (number or range).
    */
   parseEffort: function(line) {
-    
+
     var taskEffort = null;
-    
+
     var matches = line.match(/\{/g);
     if(matches !== null) {
       if(matches.length === 1) {
@@ -546,7 +545,7 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
         console.warn('Task Parsing Error - multiple efforts illegal');
       }
     }
-    
+
     return taskEffort;
   },
 
@@ -560,7 +559,7 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
   parse: function(line, fillDefaults) {
 
     if (fillDefaults === undefined) fillDefaults = true;
-    
+
     // extract priority based on bullet, if one is provided
     var taskPriority = fillDefaults? CoreTasks.TASK_PRIORITY_MEDIUM : null;
     var taskBulletMatches = line.match(/^\s*([\^\-v])\s+/);
@@ -578,11 +577,11 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
           break;
       }
     }
-    
+
     // extract task name
     var taskNameMatches = /^\s*(^[^\{<\[\$@%#]+)/.exec(line);
     var taskName = taskNameMatches? taskNameMatches[1].replace(/\s*$/, '') : line;
-    
+
     // extract task effort
     var taskEffort = CoreTasks.Task.parseEffort(line);
 
@@ -593,7 +592,7 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
       if(taskAssigneeMatches.length === 1) taskAssignee = taskAssigneeMatches[0].slice(1, taskAssigneeMatches[0].length-1);
       else console.warn('Task Parsing Error - multiple assignees illegal: ' + taskAssigneeMatches);
     }
-    
+
     // extract task submitter
     var taskSubmitter = null;
     var taskSubmitterMatches = line.match(/\<[\w\s]+\>/g);
@@ -601,7 +600,7 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
       if(taskSubmitterMatches.length === 1) taskSubmitter = taskSubmitterMatches[0].slice(1, taskSubmitterMatches[0].length-1);
       else console.warn('Task Parsing Error - multiple submitters illegal: ' + taskSubmitterMatches);
     }
-    
+
     // extract task type
     var taskType = fillDefaults? CoreTasks.TASK_TYPE_OTHER : null;
     var taskTypeMatches = line.match(/\$(\w+)/g);
@@ -619,7 +618,7 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
         console.warn('Task Parsing Error - multiple types illegal: ' + taskTypeMatches);
       }
     }
-    
+
     // extract task development status
     var taskStatus = fillDefaults? CoreTasks.STATUS_PLANNED : null;
     var taskStatusMatches = line.match(/@(\w+)/g);
@@ -637,7 +636,7 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
         console.warn('Task Parsing Error - multiple statuses illegal: ' + taskStatusMatches);
       }
     }
-    
+
     // extract task validation
     var taskValidation = fillDefaults? CoreTasks.TASK_VALIDATION_UNTESTED : null;
     var taskValidationMatches = line.match(/%(\w+)/g);
@@ -659,7 +658,7 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
         console.warn('Task Parsing Error - multiple validations illegal: ' + taskValidationMatches);
       }
     }
-    
+
     var ret = {
       name: taskName,
       priority: taskPriority,
@@ -672,9 +671,9 @@ CoreTasks.Task.mixin(/** @scope CoreTasks.Task */ {
     };
     // console.log('DEBUG: Task hash = ' + JSON.stringify(ret));
     return ret;
-    
+
   }
-  
+
 });
 
 CoreTasks.Task.NEW_TASK_HASH = {
