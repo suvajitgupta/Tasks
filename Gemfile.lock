@@ -8,7 +8,7 @@ GEM
     eventmachine (0.12.10)
     extlib (0.9.15)
     json_pure (1.4.6)
-    rack (1.2.1)
+    rack (1.2.8)
     sproutcore (1.4.5)
       erubis (~> 2.6.6)
       eventmachine (>= 0.12.10)
